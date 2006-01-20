@@ -150,6 +150,15 @@ a img { border: 0px; }
 .cmd-title { font-weight: bold }
 .toc { margin-left: 2em; padding-left: 0em }
 
+/* emphasis inline tags */
+
+em { font-style: italic }
+em.bold, em.strong { font-style: normal; font-weight: bold }
+em.italic { font-weight: bold }
+em.underline { font-style: normal; text-decoration: underline }
+em.strikethrough { font-style: normal; text-decoration: line-through }
+em em { font-style: normal; font-weight: normal; text-decoration: none }
+
 /*------------------------------------------------------------------------------
     webfx-tree
 ------------------------------------------------------------------------------*/
