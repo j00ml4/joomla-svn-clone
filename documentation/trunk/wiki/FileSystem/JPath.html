@@ -1,0 +1,101 @@
+====== JPath [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath]] |
+
+A Path handling class
+===== Methods =====
+^ Method ^ Description ^
+| [[JPath-canChmod|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-canChmod|canChmod]] | Checks if a path's permissions can be changed |
+| [[JPath-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-check|check]] | Checks for snooping outside of the file system root |
+| [[JPath-clean|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-clean|clean]] | Function to strip additional / or \ in a path name |
+| [[JPath-getPermissions|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-getPermissions|getPermissions]] | Get the permissions of the file/folder at a give path |
+| [[JPath-isOwner|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-isOwner|isOwner]] | Method to determine if script owns the path |
+| [[JPath-setPermissions|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-setPermissions|setPermissions]] | Chmods files and directories recursivly to given permissions |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== canChmod ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->canChmod]] |
+
+Checks if a path's permissions can be changed
+===== Syntax =====
+boolean canChmod	( **$path** )
+| **$path** | string | Path to check |
+
+===== Examples =====
+
+
+
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->check]] |
+
+Checks for snooping outside of the file system root
+===== Syntax =====
+void check	( **$path** )
+| **$path** | string | A file system path to check |
+
+===== Examples =====
+
+
+
+====== clean ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->clean]] |
+
+Function to strip additional / or \ in a path name
+===== Syntax =====
+string clean	( **$p_path**, **$p_addtrailingslash** )
+| **$p_path** | string | The path to clean |
+| **$p_addtrailingslash** | boolean | True if the function shoul add a trailing slash |
+
+===== Examples =====
+
+
+
+====== getPermissions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->getPermissions]] |
+
+Get the permissions of the file/folder at a give path
+===== Syntax =====
+string getPermissions	( **$path** )
+| **$path** | string | The path of a file/folder |
+
+===== Examples =====
+
+
+
+====== isOwner ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->isOwner]] |
+
+Method to determine if script owns the path
+===== Syntax =====
+boolean isOwner	( **$path** )
+| **$path** | string | Path to check ownership |
+
+===== Examples =====
+
+
+
+====== setPermissions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JPath|JPath]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JPath.html|JPath->setPermissions]] |
+
+Chmods files and directories recursivly to given permissions
+===== Syntax =====
+boolean setPermissions	( **$path**, **$filemode**, **$foldermode** )
+| **$path** | string | Root path to begin changing mode [without trailing slash] |
+| **$filemode** | string | Octal representation of the value to change file mode to [null = no change] |
+| **$foldermode** | string | Octal representation of the value to change folder mode to [null = no change] |
+
+===== Examples =====
+
+
+

@@ -1,0 +1,56 @@
+====== JRegistryFormat [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormat.html|JRegistryFormat]] |
+
+Abstract Format for JRegistry
+===== Methods =====
+^ Method ^ Description ^
+| [[JRegistryFormat-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-getInstance|getInstance]] | Returns a reference to a Format object, only creating it  if it doesn't already exist. |
+| [[JRegistryFormat-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-objectToString|objectToString]] | Converts an object into an formatted string |
+| [[JRegistryFormat-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-stringToObject|stringToObject]] | Converts an XML formatted string into an object |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormat.html|JRegistryFormat->getInstance]] |
+
+Returns a reference to a Format object, only creating it  if it doesn't already exist.
+===== Syntax =====
+object Registry &getInstance	( **$format** )
+| **$format** | string | The format to load |
+
+===== Examples =====
+
+
+
+====== objectToString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormat.html|JRegistryFormat->objectToString]] |
+
+Converts an object into an formatted string
+===== Syntax =====
+string objectToString	( **&$object** )
+| **$object** | object | Data Source Object |
+
+===== Examples =====
+
+
+
+====== stringToObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormat.html|JRegistryFormat->stringToObject]] |
+
+Converts an XML formatted string into an object
+===== Syntax =====
+object Data stringToObject	( **$data**, **$namespace** )
+| **$data** | string | XML Formatted String |
+
+===== Examples =====
+
+
+

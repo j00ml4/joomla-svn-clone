@@ -1,0 +1,139 @@
+====== JTableUser [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser]] |
+
+Users table
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableUser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-__construct|__construct]] |  |
+| [[JTableUser-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-bind|bind]] | Overloaded bind function |
+| [[JTableUser-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-check|check]] | Validation and filtering |
+| [[JTableUser-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-delete|delete]] |  |
+| [[JTableUser-getUserId|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserId|getUserId]] | Returns userid if a user exists |
+| [[JTableUser-getUserList|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserList|getUserList]] | Returns a complete user list |
+| [[JTableUser-getUserListFromGroup|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | Gets the users from a group |
+| [[JTableUser-setLastVisit|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-setLastVisit|setLastVisit]] | Updates last visit time of user |
+| [[JTableUser-store|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-store|store]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->__construct]] |
+
+
+===== Syntax =====
+JTableUser __construct	( **&$database** )
+| **&$database** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
+
+===== Examples =====
+
+
+
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->bind]] |
+
+Overloaded bind function
+===== Syntax =====
+null|string bind	( **$array**, **$ignore**, **$hash** )
+| **$hash** | array | named array |
+
+===== Examples =====
+
+
+
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->check]] |
+
+Validation and filtering
+===== Syntax =====
+boolean check ()
+
+===== Examples =====
+
+
+
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->delete]] |
+
+
+===== Syntax =====
+void delete	( **$oid** )
+
+===== Examples =====
+
+
+
+====== getUserId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->getUserId]] |
+
+Returns userid if a user exists
+===== Syntax =====
+int getUserId	( **$username** )
+| **$username** | string | The username to search on |
+
+===== Examples =====
+
+
+
+====== getUserList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->getUserList]] |
+
+Returns a complete user list
+===== Syntax =====
+array getUserList ()
+
+===== Examples =====
+
+
+
+====== getUserListFromGroup ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->getUserListFromGroup]] |
+
+Gets the users from a group
+===== Syntax =====
+array getUserListFromGroup	( **$value**, **$name**, **$recurse**, **$order** )
+| **$value** | string | The value for the group (not used 1.0) |
+| **$name** | string | The name for the group |
+| **$recurse** | string | If RECURSE, will drill into child groups |
+| **$order** | string | Ordering for the list |
+
+===== Examples =====
+
+
+
+====== setLastVisit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->setLastVisit]] |
+
+Updates last visit time of user
+===== Syntax =====
+boolean setLastVisit	( **$timeStamp**, **$id** )
+| **$timeStamp** | int | The timestamp, defaults to 'now' |
+
+===== Examples =====
+
+
+
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableUser.html|JTableUser->store]] |
+
+
+===== Syntax =====
+void store	( **$updateNulls** )
+
+===== Examples =====
+
+
+

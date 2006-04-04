@@ -1,0 +1,207 @@
+====== JRegistry [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry]] |
+
+JRegistry class
+===== Methods =====
+^ Method ^ Description ^
+| [[JRegistry-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-__construct|__construct]] | Constructor |
+| [[JRegistry-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-getInstance|getInstance]] | Returns a reference to a global JRegistry object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $registry = &JRegistry::getInstance($id[, $namespace]);</pre></p> |
+| [[JRegistry-getValue|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-getValue|getValue]] | Get a registry value |
+| [[JRegistry-loadArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadArray|loadArray]] | Load a associative array of values into the default namespace |
+| [[JRegistry-loadFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadFile|loadFile]] | Load the contents of a file into the registry |
+| [[JRegistry-loadINI|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadINI|loadINI]] | Load an INI string into the registry into the given namespace [or default if a namespace is not given] |
+| [[JRegistry-loadObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadObject|loadObject]] | Load the public variables of the object into the default namespace. |
+| [[JRegistry-loadXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadXML|loadXML]] | Load an XML string into the registry into the given namespace [or default if a namespace is not given] |
+| [[JRegistry-makeNameSpace|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-makeNameSpace|makeNameSpace]] | Create a namespace |
+| [[JRegistry-setValue|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-setValue|setValue]] | Set a registry value |
+| [[JRegistry-toArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toArray|toArray]] | Transforms a namespace to an array |
+| [[JRegistry-toObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toObject|toObject]] | Transforms a namespace to an object |
+| [[JRegistry-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toString|toString]] | Get a namespace in a given string format |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->__construct]] |
+
+Constructor
+===== Syntax =====
+JRegistry __construct	( **$namespace** )
+| **$namespace** | $defaultNamespace | string     Default registry namespace |
+
+===== Examples =====
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->getInstance]] |
+
+Returns a reference to a global JRegistry object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $registry = &JRegistry::getInstance($id[, $namespace]);</pre></p>
+===== Syntax =====
+object The &getInstance	( **$id**, **$namespace** )
+| **$id** | $id | string     An ID for the registry instance |
+| **$namespace** | $namespace | string     The default namespace for the registry object [optional] |
+
+===== Examples =====
+
+
+
+====== getValue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->getValue]] |
+
+Get a registry value
+===== Syntax =====
+mixed getValue	( **$regpath**, **1** )
+| **1** | int | User Id |
+| **$regpath** | $regpath | string     Registry path (e.g. joomla.content.showauthor) |
+
+===== Examples =====
+
+
+
+====== loadArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->loadArray]] |
+
+Load a associative array of values into the default namespace
+===== Syntax =====
+boolean loadArray	( **$array**, **$namespace** )
+| **$array** | &array | Array     Associative array of value to load |
+| **$namespace** | &namepsace | String    The name of the namespace |
+
+===== Examples =====
+
+
+
+====== loadFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->loadFile]] |
+
+Load the contents of a file into the registry
+===== Syntax =====
+boolean loadFile	( **$file**, **$format**, **$namespace** )
+| **$file** | $file | string         Path to file to load |
+| **$format** | $format | string         Format of the file [optional: defaults to INI] |
+| **$namespace** | $namespace | string         Namespace to load the INI string into [optional] |
+
+===== Examples =====
+
+
+
+====== loadINI ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->loadINI]] |
+
+Load an INI string into the registry into the given namespace [or default if a namespace is not given]
+===== Syntax =====
+boolean loadINI	( **$data**, **$namespace** )
+| **$data** | $data | string         INI formatted string to load into the registry |
+| **$namespace** | $namespace | string         Namespace to load the INI string into [optional] |
+
+===== Examples =====
+
+
+
+====== loadObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->loadObject]] |
+
+Load the public variables of the object into the default namespace.
+===== Syntax =====
+boolean loadObject	( **&$object**, **$namespace** )
+| **&$object** | &object | stdClass     The object holding the public vars to load |
+| **$namespace** | &namespace | string         Namespace to load the INI string into [optional] |
+
+===== Examples =====
+
+
+
+====== loadXML ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->loadXML]] |
+
+Load an XML string into the registry into the given namespace [or default if a namespace is not given]
+===== Syntax =====
+boolean loadXML	( **$data**, **$namespace** )
+| **$data** | $data | string         XML formatted string to load into the registry |
+| **$namespace** | $namespace | string         Namespace to load the INI string into [optional] |
+
+===== Examples =====
+
+
+
+====== makeNameSpace ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->makeNameSpace]] |
+
+Create a namespace
+===== Syntax =====
+boolean makeNameSpace	( **$namespace** )
+| **$namespace** | $namespace | string         Name of the namespace to create |
+
+===== Examples =====
+
+
+
+====== setValue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->setValue]] |
+
+Set a registry value
+===== Syntax =====
+mixed setValue	( **$regpath**, **$value** )
+| **$regpath** | $regpath | string     Registry Path (e.g. joomla.content.showauthor) |
+| **$value** | mixed | Value of entry |
+
+===== Examples =====
+
+
+
+====== toArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->toArray]] |
+
+Transforms a namespace to an array
+===== Syntax =====
+array toArray	( **$namespace** )
+| **$namespace** | $namespace | string    Namespace to return [optional: null returns the default namespace] |
+
+===== Examples =====
+
+
+
+====== toObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->toObject]] |
+
+Transforms a namespace to an object
+===== Syntax =====
+object An toObject	( **$namespace** )
+| **$namespace** | $namespace | string    Namespace to return [optional: null returns the default namespace] |
+
+===== Examples =====
+
+
+
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistry.html|JRegistry->toString]] |
+
+Get a namespace in a given string format
+===== Syntax =====
+string toString	( **$format**, **$namespace**, **$params** )
+| **$format** | $format | string     Format to return the string in |
+| **$namespace** | $namespace | string    Namespace to return [optional: null returns the default namespace] |
+| **$params** | $params | mixed    Parameters used by the formatter, see formatters for more info |
+
+===== Examples =====
+
+
+

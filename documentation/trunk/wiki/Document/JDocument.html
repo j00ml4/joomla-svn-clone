@@ -1,0 +1,330 @@
+====== JDocument [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument]] |
+
+Document class, provides an easy interface to parse and display a document
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocument-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-__construct|__construct]] | Class constructor |
+| [[JDocument-addScript|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addScript|addScript]] | Adds a linked script to the page |
+| [[JDocument-addScriptDeclaration|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page |
+| [[JDocument-addStyleDeclaration|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page |
+| [[JDocument-addStyleSheet|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addStyleSheet|addStyleSheet]] | Adds a linked stylesheet to the page |
+| [[JDocument-display|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-display|display]] | Outputs the template to the browser. |
+| [[JDocument-execRenderer|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-execRenderer|execRenderer]] | Execute a renderer |
+| [[JDocument-fetchBody|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-fetchBody|fetchBody]] | Return the document body |
+| [[JDocument-fetchHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-fetchHead|fetchHead]] | Return the document head |
+| [[JDocument-getCharset|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getCharset|getCharset]] | Returns the document charset encoding. |
+| [[JDocument-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getInstance|getInstance]] | Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $document = &JDocument::getInstance();</pre></p> |
+| [[JDocument-getLang|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getLang|getLang]] | Returns the document language. |
+| [[JDocument-getTitle|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getTitle|getTitle]] | Return the title of the page. |
+| [[JDocument-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-parse|parse]] | Parse a file and create an internal patTemplate object |
+| [[JDocument-setCharset|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setCharset|setCharset]] | Sets the document charset |
+| [[JDocument-setLang|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setLang|setLang]] | Sets the global document language declaration. Default is English. |
+| [[JDocument-setLineEnd|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setLineEnd|setLineEnd]] | Sets the line end style to Windows, Mac, Unix or a custom string. |
+| [[JDocument-setMimeEncoding|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser.<p>This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml  and to a lesser extent application/xml and text/xml. See the W3C note  (<a href="http://www.w3.org/TR/xhtml-media-types/">http://www.w3.org/TR/xhtml-media-types/</a>) for more details.</p><p></p> |
+| [[JDocument-setTab|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setTab|setTab]] | Sets the string used to indent HTML |
+| [[JDocument-setTitle|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setTitle|setTitle]] | Sets the title of the page |
+| [[JDocument-_addRenderer|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-_addRenderer|_addRenderer]] | Adds a renderer to be called |
+| [[JDocument-_load|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-_load|_load]] | Load a template file |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->__construct]] |
+
+Class constructor
+===== Syntax =====
+JDocument __construct	( **$type**, **$attributes** )
+| **$type** | string | (either html or tex) |
+| **$attributes** | array | Associative array of attributes |
+
+===== Examples =====
+
+
+
+====== addScript ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->addScript]] |
+
+Adds a linked script to the page
+===== Syntax =====
+void addScript	( **$url**, **$type** )
+| **$url** | string | URL to the linked script |
+| **$type** | string | Type of script. Defaults to 'text/javascript' |
+
+===== Examples =====
+
+
+
+====== addScriptDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->addScriptDeclaration]] |
+
+Adds a script to the page
+===== Syntax =====
+void addScriptDeclaration	( **$content**, **$type** )
+| **$content** | string | Script |
+| **$type** | string | Scripting mime (defaults to 'text/javascript') |
+
+===== Examples =====
+
+
+
+====== addStyleDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->addStyleDeclaration]] |
+
+Adds a stylesheet declaration to the page
+===== Syntax =====
+void addStyleDeclaration	( **$content**, **$type** )
+| **$content** | string | Style declarations |
+| **$type** | string | Type of stylesheet (defaults to 'text/css') |
+
+===== Examples =====
+
+
+
+====== addStyleSheet ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->addStyleSheet]] |
+
+Adds a linked stylesheet to the page
+===== Syntax =====
+void addStyleSheet	( **$url**, **$type**, **$media**, **$attribs** )
+| **$url** | string | URL to the linked style sheet |
+| **$type** | string | Mime encoding type |
+| **$media** | string | Media type that this stylesheet applies to |
+
+===== Examples =====
+
+
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->display]] |
+
+Outputs the template to the browser.
+===== Syntax =====
+void display	( **$template**, **$compress**, **$outline** )
+| **$template** | string | The name of the template |
+| **$compress** | boolean | If true, will display information about the placeholders |
+
+===== Examples =====
+
+
+
+====== execRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->execRenderer]] |
+
+Execute a renderer
+===== Syntax =====
+The execRenderer	( **$type**, **$name**, **$params** )
+| **$type** | string | The type of renderer |
+| **$name** | string | The name of the element to render |
+| **$params** | array | Associative array of values |
+
+===== Examples =====
+
+
+
+====== fetchBody ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->fetchBody]] |
+
+Return the document body
+===== Syntax =====
+string fetchBody ()
+
+===== Examples =====
+
+
+
+====== fetchHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->fetchHead]] |
+
+Return the document head
+===== Syntax =====
+string fetchHead ()
+
+===== Examples =====
+
+
+
+====== getCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->getCharset]] |
+
+Returns the document charset encoding.
+===== Syntax =====
+string getCharset ()
+
+===== Examples =====
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->getInstance]] |
+
+Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $document = &JDocument::getInstance();</pre></p>
+===== Syntax =====
+jdocument &getInstance	( **$type**, **$attributes** )
+| **$type** | type | The document type to instantiate |
+
+===== Examples =====
+
+
+
+====== getLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->getLang]] |
+
+Returns the document language.
+===== Syntax =====
+string getLang ()
+
+===== Examples =====
+
+
+
+====== getTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->getTitle]] |
+
+Return the title of the page.
+===== Syntax =====
+string getTitle ()
+
+===== Examples =====
+
+
+
+====== parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->parse]] |
+
+Parse a file and create an internal patTemplate object
+===== Syntax =====
+void parse	( **$template**, **$filename**, **$directory** )
+| **$template** | string | The template to look for the file |
+| **$filename** | string | The actual filename |
+| **$directory** | string | The directory to look for the template |
+
+===== Examples =====
+
+
+
+====== setCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setCharset]] |
+
+Sets the document charset
+===== Syntax =====
+void setCharset	( **$type** )
+| **$type** | string | Charset encoding string |
+
+===== Examples =====
+
+
+
+====== setLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setLang]] |
+
+Sets the global document language declaration. Default is English.
+===== Syntax =====
+void setLang	( **$lang** )
+| **$lang** | string |  |
+
+===== Examples =====
+
+
+
+====== setLineEnd ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setLineEnd]] |
+
+Sets the line end style to Windows, Mac, Unix or a custom string.
+===== Syntax =====
+void setLineEnd	( **$style** )
+| **$style** | string | &quot;win&quot;, &quot;mac&quot;, &quot;unix&quot; or custom string. |
+
+===== Examples =====
+
+
+
+====== setMimeEncoding ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setMimeEncoding]] |
+
+Sets the document MIME encoding that is sent to the browser.<p>This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml  and to a lesser extent application/xml and text/xml. See the W3C note  (<a href="http://www.w3.org/TR/xhtml-media-types/">http://www.w3.org/TR/xhtml-media-types/</a>) for more details.</p><p></p>
+===== Syntax =====
+void setMimeEncoding	( **$type** )
+| **$type** | string |  |
+
+===== Examples =====
+
+
+
+====== setTab ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setTab]] |
+
+Sets the string used to indent HTML
+===== Syntax =====
+void setTab	( **$string** )
+| **$string** | string | String used to indent (&quot;\11&quot;, &quot;\t&quot;, '  ', etc.). |
+
+===== Examples =====
+
+
+
+====== setTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->setTitle]] |
+
+Sets the title of the page
+===== Syntax =====
+void setTitle	( **$title** )
+| **$title** | string |  |
+
+===== Examples =====
+
+
+
+====== _addRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->_addRenderer]] |
+
+Adds a renderer to be called
+===== Syntax =====
+string _addRenderer	( **$type**, **$name** )
+| **$type** | string | The renderer type |
+| **$name** | string | The renderer name |
+
+===== Examples =====
+
+
+
+====== _load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocument.html|JDocument->_load]] |
+
+Load a template file
+===== Syntax =====
+string _load	( **$directory**, **$filename**, **$template** )
+| **$template** | string | The name of the template |
+| **$filename** | string | The actual filename |
+
+===== Examples =====
+
+
+

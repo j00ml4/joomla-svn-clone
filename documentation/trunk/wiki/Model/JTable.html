@@ -1,0 +1,279 @@
+====== JTable [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable]] |
+
+Abstract Model class<p>Parent classes to all tables.  Customisation will generally not involve tampering with this object.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JTable-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-__construct|__construct]] | Object constructor to set table and key field<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-bind|bind]] | Binds a named array/hash to this object<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-canDelete|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-canDelete|canDelete]] | Generic check for whether dependancies exist for this object in the db schema<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-check|check]] | Generic check method<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-checkin|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-checkin|checkin]] | Description |
+| [[JTable-checkout|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-checkout|checkout]] | Description |
+| [[JTable-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-delete|delete]] | Default delete method<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-filter|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-filter|filter]] | Filters public properties |
+| [[JTable-getError|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-getError|getError]] | Returns the error message |
+| [[JTable-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-getInstance|getInstance]] | Returns a reference to the a Model object, always creating it |
+| [[JTable-hit|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-hit|hit]] | Description |
+| [[JTable-isCheckedOut|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-isCheckedOut|isCheckedOut]] | Tests if item is checked out |
+| [[JTable-load|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-load|load]] | Binds an array/hash to this object |
+| [[JTable-move|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-move|move]] | Description |
+| [[JTable-publish|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-publish|publish]] | Generic Publish/Unpublish function |
+| [[JTable-reorder|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-reorder|reorder]] | Compacts the ordering sequence of the selected records |
+| [[JTable-save|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-save|save]] | Generic save function |
+| [[JTable-store|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-store|store]] | Inserts a new row if id is zero or updates an existing row in the database table<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-toXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JTable-toXML|toXML]] | Export item list to xml |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->__construct]] |
+
+Object constructor to set table and key field<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+JTable __construct	( **$table**, **$key**, **&$db** )
+| **$table** | string | name of the table in the db schema relating to child class |
+| **$key** | string | name of the primary key field in the table |
+
+===== Examples =====
+
+
+
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->bind]] |
+
+Binds a named array/hash to this object<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+null|string bind	( **$array**, **$ignore**, **$hash** )
+| **$hash** | array | named array |
+
+===== Examples =====
+
+
+
+====== canDelete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->canDelete]] |
+
+Generic check for whether dependancies exist for this object in the db schema<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+true|false canDelete	( **$oid**, **$joins**, **$msg**, **2** )
+| **$msg** | string | Error message returned |
+| **2** | array | Optional array to compiles standard joins: format [label=&gt;'Label',name=&gt;'table name',idfield=&gt;'field',joinfield=&gt;'field'] |
+| **$joins** | int | Optional key index |
+
+===== Examples =====
+
+
+
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->check]] |
+
+Generic check method<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+boolean check ()
+
+===== Examples =====
+
+
+
+====== checkin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->checkin]] |
+
+Description
+===== Syntax =====
+void checkin	( **$oid** )
+
+===== Examples =====
+
+
+
+====== checkout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->checkout]] |
+
+Description
+===== Syntax =====
+void checkout	( **$who**, **$oid** )
+
+===== Examples =====
+
+
+
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->delete]] |
+
+Default delete method<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+true delete	( **$oid** )
+
+===== Examples =====
+
+
+
+====== filter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->filter]] |
+
+Filters public properties
+===== Syntax =====
+void filter	( **$ignoreList** )
+| **$ignoreList** | array | List of fields to ignore |
+
+===== Examples =====
+
+
+
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->getError]] |
+
+Returns the error message
+===== Syntax =====
+string getError ()
+
+===== Examples =====
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->getInstance]] |
+
+Returns a reference to the a Model object, always creating it
+===== Syntax =====
+<a href="../../Joomla.Legacy/1.5/database.html">database</a> &getInstance	( **$type**, **&$db** )
+| **$type** | type | The table type to instantiate |
+
+===== Examples =====
+
+
+
+====== hit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->hit]] |
+
+Description
+===== Syntax =====
+void hit	( **$oid** )
+
+===== Examples =====
+
+
+
+====== isCheckedOut ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->isCheckedOut]] |
+
+Tests if item is checked out
+===== Syntax =====
+boolean isCheckedOut	( **$user_id** )
+| **$user_id** | int | A user id |
+
+===== Examples =====
+
+
+
+====== load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->load]] |
+
+Binds an array/hash to this object
+===== Syntax =====
+any load	( **$oid** )
+| **$oid** | int | optional argument, if not specifed then the value of current key is used |
+
+===== Examples =====
+
+
+
+====== move ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->move]] |
+
+Description
+===== Syntax =====
+void move	( **$dirn**, **$where** )
+
+===== Examples =====
+
+
+
+====== publish ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->publish]] |
+
+Generic Publish/Unpublish function
+===== Syntax =====
+void publish	( **$cid**, **$publish**, **$user_id** )
+| **$cid** | array | An array of id numbers |
+| **$publish** | integer | 0 if unpublishing, 1 if publishing |
+| **$user_id** | integer | The id of the user performnig the operation |
+
+===== Examples =====
+
+
+
+====== reorder ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->reorder]] |
+
+Compacts the ordering sequence of the selected records
+===== Syntax =====
+void reorder	( **$where** )
+| **$where** | string | Additional where query to limit ordering to a particular subset of records |
+
+===== Examples =====
+
+
+
+====== save ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->save]] |
+
+Generic save function
+===== Syntax =====
+TRUE save	( **$source**, **$order_filter** )
+| **$source** | array | Source array for binding to class vars |
+| **$order_filter** | string | Filter for the order updating |
+
+===== Examples =====
+
+
+
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->store]] |
+
+Inserts a new row if id is zero or updates an existing row in the database table<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+null|string store	( **$updateNulls** )
+| **$updateNulls** | boolean | If false, null object variables are not updated |
+
+===== Examples =====
+
+
+
+====== toXML ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTable|JTable]] | [[http://api.joomla.org/Joomla.Framework/Model/JTable.html|JTable->toXML]] |
+
+Export item list to xml
+===== Syntax =====
+void toXML	( **$mapKeysToText** )
+| **$mapKeysToText** | boolean | Map foreign keys to text values |
+
+===== Examples =====
+
+
+

@@ -1,0 +1,96 @@
+====== JObject [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject]] |
+
+Object class, allowing __construct in PHP4.
+===== Methods =====
+^ Method ^ Description ^
+| [[JObject-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| [[JObject-JObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p> |
+| [[JObject-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-get|get]] |  |
+| [[JObject-getPublicProperties|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties |
+| [[JObject-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-set|set]] |  |
+| [[JObject-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-toString|toString]] | Object-to-string conversion.<p>Each class can override it as necessary.</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->__construct]] |
+
+Class constructor, overridden in descendant classes.
+===== Syntax =====
+JObject __construct ()
+
+===== Examples =====
+
+
+
+====== JObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->JObject]] |
+
+A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p>
+===== Syntax =====
+Object JObject ()
+
+===== Examples =====
+
+
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->get]] |
+
+
+===== Syntax =====
+mixed get	( **$property**, **$default** )
+| **$property** | string | The name of the property |
+| **$default** | mixed | The default value |
+
+===== Examples =====
+
+
+
+====== getPublicProperties ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->getPublicProperties]] |
+
+Returns an array of public properties
+===== Syntax =====
+array getPublicProperties ()
+
+===== Examples =====
+
+
+
+====== set ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->set]] |
+
+
+===== Syntax =====
+void set	( **$property**, **$value** )
+| **$property** | string | The name of the property |
+| **$value** | mixed | The value of the property to set |
+
+===== Examples =====
+
+
+
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->toString]] |
+
+Object-to-string conversion.<p>Each class can override it as necessary.</p>
+===== Syntax =====
+string toString ()
+
+===== Examples =====
+
+
+

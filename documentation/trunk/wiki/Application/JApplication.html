@@ -1,0 +1,526 @@
+====== JApplication [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication]] |
+
+Base class for a Joomla! application<p>Acts as a Factory class for application specific objects and  provides many supporting API functions.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JApplication-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-__construct|__construct]] | Class constructor |
+| [[JApplication-addCustomHeadTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-addCustomHeadTag|addCustomHeadTag]] | Depreacted, use JDocument-&gt;addCustomTag instead |
+| [[JApplication-addMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-addMetaTag|addMetaTag]] | Depreacted, use JDocument-&gt;setMetadata instead |
+| [[JApplication-appendMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-appendMetaTag|appendMetaTag]] | Depreacted, use JDocument-&gt;setMetadata instead |
+| [[JApplication-appendPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-appendPathWay|appendPathWay]] | Depreceated, use JPathWay-&gt;addItem() method instead |
+| [[JApplication-getBaseURL|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBaseURL|getBaseURL]] | Return the application url |
+| [[JApplication-getBlogCategoryCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBlogCategoryCount|getBlogCategoryCount]] | Depreacted, use JApplicationHelper::getItemCount instead |
+| [[JApplication-getBlogSectionCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBlogSectionCount|getBlogSectionCount]] | Depreacted, use JApplicationHelper::getItemCount instead |
+| [[JApplication-getBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBrowser|getBrowser]] | Return a reference to the JBrowser object |
+| [[JApplication-getCfg|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getCfg|getCfg]] | Gets a configuration value |
+| [[JApplication-getClientId|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getClientId|getClientId]] | Gets the client id of the current running application |
+| [[JApplication-getContentItemLinkCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getContentItemLinkCount|getContentItemLinkCount]] | Depreacted, use JApplicationHelper::getItemCount instead |
+| [[JApplication-getCustomPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getCustomPathWay|getCustomPathWay]] | Depreceated, use JPathWay-&gt;getNamePathWay() method instead |
+| [[JApplication-getDBO|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getDBO|getDBO]] | Return a reference to a JDatabase instance |
+| [[JApplication-getDocument|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getDocument|getDocument]] | Return a reference to the JDocument object |
+| [[JApplication-getGlobalBlogSectionCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getGlobalBlogSectionCount|getGlobalBlogSectionCount]] | Depreacted, use JApplicationHelper::getItemCount instead |
+| [[JApplication-getHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getHead|getHead]] | Depreacted, use JDocument-&gt;renderHead instead |
+| [[JApplication-getItemid|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getItemid|getItemid]] | Depreacted, use JApplicationHelper::getItemid instead |
+| [[JApplication-getLanguage|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getLanguage|getLanguage]] | Return a reference to the JLanguage object |
+| [[JApplication-getOption|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getOption|getOption]] | Return the application option string [main component] |
+| [[JApplication-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getPath|getPath]] | Depreacted, use JApplicationHelper::getPath instead |
+| [[JApplication-getPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getPathWay|getPathWay]] | Return a reference to the JPathWay object |
+| [[JApplication-getStaticContentCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getStaticContentCount|getStaticContentCount]] | Depreacted, use JApplicationHelper::getItemCount instead |
+| [[JApplication-getTemplate|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getTemplate|getTemplate]] | Gets the name of the current template |
+| [[JApplication-getURI|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getURI|getURI]] | Return a reference to the JURI object |
+| [[JApplication-getUser|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getUser|getUser]] | Returns a reference to the JUser object |
+| [[JApplication-getUserState|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getUserState|getUserState]] | Gets a user state |
+| [[JApplication-getUserStateFromRequest|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getUserStateFromRequest|getUserStateFromRequest]] | Gets the value of a user state variable |
+| [[JApplication-isAdmin|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-isAdmin|isAdmin]] | Is admin interface? |
+| [[JApplication-isSite|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-isSite|isSite]] | Is site interface? |
+| [[JApplication-login|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-login|login]] | Login authentication function<p>Username and encoded password are passed the the onLoginUser event who  is responsible for the user validation.  A successful validation updates the current session record with the  users details.</p><p>Username and Password are sent as credentials (along with other possibilities)  to each observer (JAuthenticatePlugin) for user validation.  Successful validation will  update the current session with the user details</p> |
+| [[JApplication-logout|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-logout|logout]] | Logout authentication function<p>Passed the current user information to the onLogoutUser event and reverts the current  session record back to 'anonymous' parameters</p> |
+| [[JApplication-prependMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-prependMetaTag|prependMetaTag]] | Depreacted, use JDocument-&gt;setMetadata instead |
+| [[JApplication-registerEvent|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-registerEvent|registerEvent]] | Registers a handler to a particular event group |
+| [[JApplication-setConfiguration|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setConfiguration|setConfiguration]] | Set the configuration |
+| [[JApplication-setSession|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setSession|setSession]] | Set the user session |
+| [[JApplication-setUserState|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setUserState|setUserState]] | Sets the value of a user state variable |
+| [[JApplication-triggerEvent|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-triggerEvent|triggerEvent]] | Calls all handlers associated with an event group |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->__construct]] |
+
+Class constructor
+===== Syntax =====
+JApplication __construct	( **$clientId**, **1** )
+| **1** | integer | A client identifier |
+| **$clientId** | string | The URL option passed in |
+
+===== Examples =====
+
+
+
+====== addCustomHeadTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->addCustomHeadTag]] |
+
+Depreacted, use JDocument-&gt;addCustomTag instead
+===== Syntax =====
+void addCustomHeadTag	( **$html** )
+
+===== Examples =====
+
+
+
+====== addMetaTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->addMetaTag]] |
+
+Depreacted, use JDocument-&gt;setMetadata instead
+===== Syntax =====
+void addMetaTag	( **$name**, **$content**, **$prepend**, **$append** )
+
+===== Examples =====
+
+
+
+====== appendMetaTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->appendMetaTag]] |
+
+Depreacted, use JDocument-&gt;setMetadata instead
+===== Syntax =====
+void appendMetaTag	( **$name**, **$content** )
+
+===== Examples =====
+
+
+
+====== appendPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->appendPathWay]] |
+
+Depreceated, use JPathWay-&gt;addItem() method instead
+===== Syntax =====
+void appendPathWay	( **$name**, **$link** )
+
+===== Examples =====
+
+
+
+====== getBaseURL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getBaseURL]] |
+
+Return the application url
+===== Syntax =====
+string getBaseURL ()
+
+===== Examples =====
+
+
+
+====== getBlogCategoryCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getBlogCategoryCount]] |
+
+Depreacted, use JApplicationHelper::getItemCount instead
+===== Syntax =====
+void getBlogCategoryCount ()
+
+===== Examples =====
+
+
+
+====== getBlogSectionCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getBlogSectionCount]] |
+
+Depreacted, use JApplicationHelper::getItemCount instead
+===== Syntax =====
+void getBlogSectionCount ()
+
+===== Examples =====
+
+
+
+====== getBrowser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getBrowser]] |
+
+Return a reference to the JBrowser object
+===== Syntax =====
+jbrowser &getBrowser ()
+
+===== Examples =====
+
+
+
+====== getCfg ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getCfg]] |
+
+Gets a configuration value
+===== Syntax =====
+The getCfg	( **$varname** )
+| **$varname** | string | The name of the value to get |
+
+===== Examples =====
+
+
+
+====== getClientId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getClientId]] |
+
+Gets the client id of the current running application
+===== Syntax =====
+int getClientId ()
+
+===== Examples =====
+
+
+
+====== getContentItemLinkCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getContentItemLinkCount]] |
+
+Depreacted, use JApplicationHelper::getItemCount instead
+===== Syntax =====
+void getContentItemLinkCount ()
+
+===== Examples =====
+
+
+
+====== getCustomPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getCustomPathWay]] |
+
+Depreceated, use JPathWay-&gt;getNamePathWay() method instead
+===== Syntax =====
+void getCustomPathWay ()
+
+===== Examples =====
+
+
+
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getDBO]] |
+
+Return a reference to a JDatabase instance
+===== Syntax =====
+jdatabase &getDBO ()
+
+===== Examples =====
+
+
+
+====== getDocument ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getDocument]] |
+
+Return a reference to the JDocument object
+===== Syntax =====
+void &getDocument ()
+
+===== Examples =====
+
+
+
+====== getGlobalBlogSectionCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getGlobalBlogSectionCount]] |
+
+Depreacted, use JApplicationHelper::getItemCount instead
+===== Syntax =====
+void getGlobalBlogSectionCount ()
+
+===== Examples =====
+
+
+
+====== getHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getHead]] |
+
+Depreacted, use JDocument-&gt;renderHead instead
+===== Syntax =====
+void getHead ()
+
+===== Examples =====
+
+
+
+====== getItemid ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getItemid]] |
+
+Depreacted, use JApplicationHelper::getItemid instead
+===== Syntax =====
+void getItemid	( **$id**, **$typed**, **$link**, **$bs**, **$bc**, **$gbs** )
+
+===== Examples =====
+
+
+
+====== getLanguage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getLanguage]] |
+
+Return a reference to the JLanguage object
+===== Syntax =====
+jlanguage &getLanguage ()
+
+===== Examples =====
+
+
+
+====== getOption ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getOption]] |
+
+Return the application option string [main component]
+===== Syntax =====
+string getOption ()
+
+===== Examples =====
+
+
+
+====== getPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getPath]] |
+
+Depreacted, use JApplicationHelper::getPath instead
+===== Syntax =====
+void getPath	( **$varname**, **$user_option** )
+
+===== Examples =====
+
+
+
+====== getPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getPathWay]] |
+
+Return a reference to the JPathWay object
+===== Syntax =====
+jpathway &getPathWay ()
+
+===== Examples =====
+
+
+
+====== getStaticContentCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getStaticContentCount]] |
+
+Depreacted, use JApplicationHelper::getItemCount instead
+===== Syntax =====
+void getStaticContentCount ()
+
+===== Examples =====
+
+
+
+====== getTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getTemplate]] |
+
+Gets the name of the current template
+===== Syntax =====
+string getTemplate ()
+
+===== Examples =====
+
+
+
+====== getURI ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getURI]] |
+
+Return a reference to the JURI object
+===== Syntax =====
+juri &getURI ()
+
+===== Examples =====
+
+
+
+====== getUser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getUser]] |
+
+Returns a reference to the JUser object
+===== Syntax =====
+<a href="../../Joomla.Framework/Model/JTableUser.html">JTableUser</a> &getUser ()
+
+===== Examples =====
+
+
+
+====== getUserState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getUserState]] |
+
+Gets a user state
+===== Syntax =====
+The getUserState	( **$key** )
+| **$key** | string | The path of the state |
+
+===== Examples =====
+
+
+
+====== getUserStateFromRequest ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->getUserStateFromRequest]] |
+
+Gets the value of a user state variable
+===== Syntax =====
+The getUserStateFromRequest	( **$key**, **$request**, **$default** )
+| **$key** | string | The key of the user state variable |
+| **$request** | string | The name of the variable passed in a request |
+| **$default** | string | The default value for the variable if not found |
+
+===== Examples =====
+
+
+
+====== isAdmin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->isAdmin]] |
+
+Is admin interface?
+===== Syntax =====
+boolean isAdmin ()
+
+===== Examples =====
+
+
+
+====== isSite ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->isSite]] |
+
+Is site interface?
+===== Syntax =====
+boolean isSite ()
+
+===== Examples =====
+
+
+
+====== login ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->login]] |
+
+Login authentication function<p>Username and encoded password are passed the the onLoginUser event who  is responsible for the user validation.  A successful validation updates the current session record with the  users details.</p><p>Username and Password are sent as credentials (along with other possibilities)  to each observer (JAuthenticatePlugin) for user validation.  Successful validation will  update the current session with the user details</p>
+===== Syntax =====
+boolean login	( **$username**, **$password** )
+| **$username** | string | The username |
+| **$password** | string | The password |
+
+===== Examples =====
+
+
+
+====== logout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->logout]] |
+
+Logout authentication function<p>Passed the current user information to the onLogoutUser event and reverts the current  session record back to 'anonymous' parameters</p>
+===== Syntax =====
+void logout ()
+
+===== Examples =====
+
+
+
+====== prependMetaTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->prependMetaTag]] |
+
+Depreacted, use JDocument-&gt;setMetadata instead
+===== Syntax =====
+void prependMetaTag	( **$name**, **$content** )
+
+===== Examples =====
+
+
+
+====== registerEvent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->registerEvent]] |
+
+Registers a handler to a particular event group
+===== Syntax =====
+void registerEvent	( **$event**, **$handler** )
+| **$event** | string | The event name |
+| **$handler** | mixed | The handler, a function or an instance of a event object |
+
+===== Examples =====
+
+
+
+====== setConfiguration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->setConfiguration]] |
+
+Set the configuration
+===== Syntax =====
+void setConfiguration	( **$file**, **$type** )
+| **$file** | string | The path to the configuration file |
+| **$type** | string | The type of the configuration file |
+
+===== Examples =====
+
+
+
+====== setSession ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->setSession]] |
+
+Set the user session
+===== Syntax =====
+void setSession	( **$name** )
+| **$name** | string | The sessions name |
+
+===== Examples =====
+
+
+
+====== setUserState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->setUserState]] |
+
+Sets the value of a user state variable
+===== Syntax =====
+mixed setUserState	( **$key**, **$value** )
+| **$key** | string | The path of the state |
+| **$value** | string | The value of the variable |
+
+===== Examples =====
+
+
+
+====== triggerEvent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplication|JApplication]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplication.html|JApplication->triggerEvent]] |
+
+Calls all handlers associated with an event group
+===== Syntax =====
+array triggerEvent	( **$event**, **$args** )
+| **$event** | string | The event name |
+| **$args** | array | An array of arguments |
+
+===== Examples =====
+
+
+

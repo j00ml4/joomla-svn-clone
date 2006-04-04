@@ -1,0 +1,231 @@
+====== JPagination [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination]] |
+
+Pagination Class.  Provides a common interface for content pagination for the  Joomla! Framework
+===== Methods =====
+^ Method ^ Description ^
+| [[JPagination-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-__construct|__construct]] | Constructor |
+| [[JPagination-getLimitBox|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-getLimitBox|getLimitBox]] | Creates a dropdown box for selecting how many records to show per page |
+| [[JPagination-getListFooter|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-getListFooter|getListFooter]] | Return the pagination footer |
+| [[JPagination-getPagesCounter|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-getPagesCounter|getPagesCounter]] | Create and return the pagination counter string, ie. Results 1-10 of 42 |
+| [[JPagination-getPagesLinks|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-getPagesLinks|getPagesLinks]] | Create and return the pagination page list string, ie. Previous, Next, 1 2 3 ... x |
+| [[JPagination-orderDownIcon|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-orderDownIcon|orderDownIcon]] | Return the icon to move an item DOWN |
+| [[JPagination-orderDownIcon2|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-orderDownIcon2|orderDownIcon2]] | Return the icon to move an item DOWN |
+| [[JPagination-orderUpIcon|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-orderUpIcon|orderUpIcon]] | Return the icon to move an item UP |
+| [[JPagination-orderUpIcon2|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-orderUpIcon2|orderUpIcon2]] | Return the icon to move an item UP |
+| [[JPagination-rowNumber|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-rowNumber|rowNumber]] | Return the row number |
+| [[JPagination-setTemplateVars|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-setTemplateVars|setTemplateVars]] | Sets the vars for the page navigation template |
+| [[JPagination-writeLeafsCounter|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-writeLeafsCounter|writeLeafsCounter]] | Writes the html for the leafs counter, eg, Page 1 of x |
+| [[JPagination-writeLimitBox|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-writeLimitBox|writeLimitBox]] | Writes the dropdown select list for number of rows to show per page  Use: print $pagination-&gt;getLimitBox(); |
+| [[JPagination-writePagesCounter|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-writePagesCounter|writePagesCounter]] | Writes the counter string  Use: print $pagination-&gt;getLimitBox(); |
+| [[JPagination-writePagesLinks|{{http://api.joomla.org/media/images/Method.png }}]] [[JPagination-writePagesLinks|writePagesLinks]] | Writes the page list string  Use: print $pagination-&gt;getPagesLinks(); |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->__construct]] |
+
+Constructor
+===== Syntax =====
+JPagination __construct	( **$total**, **$limitstart**, **$limit** )
+
+===== Examples =====
+
+
+
+====== getLimitBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->getLimitBox]] |
+
+Creates a dropdown box for selecting how many records to show per page
+===== Syntax =====
+string getLimitBox	( **$link** )
+
+===== Examples =====
+
+
+
+====== getListFooter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->getListFooter]] |
+
+Return the pagination footer
+===== Syntax =====
+string getListFooter ()
+
+===== Examples =====
+
+
+
+====== getPagesCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->getPagesCounter]] |
+
+Create and return the pagination counter string, ie. Results 1-10 of 42
+===== Syntax =====
+string getPagesCounter ()
+
+===== Examples =====
+
+
+
+====== getPagesLinks ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->getPagesLinks]] |
+
+Create and return the pagination page list string, ie. Previous, Next, 1 2 3 ... x
+===== Syntax =====
+string getPagesLinks	( **$link** )
+
+===== Examples =====
+
+
+
+====== orderDownIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->orderDownIcon]] |
+
+Return the icon to move an item DOWN
+===== Syntax =====
+string orderDownIcon	( **$i**, **$n**, **$condition**, **$task**, **$alt** )
+| **$i** | int | The row index |
+| **$n** | int | The number of items in the list |
+| **$condition** | boolean | True to show the icon |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+
+
+
+====== orderDownIcon2 ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->orderDownIcon2]] |
+
+Return the icon to move an item DOWN
+===== Syntax =====
+string orderDownIcon2	( **$id**, **$order**, **$condition**, **$task**, **$alt** )
+| **$id** | int | The row index |
+| **$order** | int | The ordering value for the item |
+| **$condition** | boolean | [Does Not Appear To Be Used] |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+
+
+
+====== orderUpIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->orderUpIcon]] |
+
+Return the icon to move an item UP
+===== Syntax =====
+string orderUpIcon	( **$i**, **$condition**, **$task**, **$alt** )
+| **$i** | int | The row index |
+| **$condition** | boolean | True to show the icon |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+
+
+
+====== orderUpIcon2 ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->orderUpIcon2]] |
+
+Return the icon to move an item UP
+===== Syntax =====
+string orderUpIcon2	( **$id**, **$order**, **$condition**, **$task**, **$alt** )
+| **$id** | int | The row index |
+| **$order** | int | The ordering value for the item |
+| **$condition** | boolean | [Does Not Appear To Be Used] |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+
+
+
+====== rowNumber ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->rowNumber]] |
+
+Return the row number
+===== Syntax =====
+int rowNumber	( **$index** )
+| **$index** | int | The row index |
+
+===== Examples =====
+
+
+
+====== setTemplateVars ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->setTemplateVars]] |
+
+Sets the vars for the page navigation template
+===== Syntax =====
+boolean setTemplateVars	( **&$tmpl**, **$name** )
+| **$tmpl** | object | PatTemplate Object to add the pagination footer template to |
+| **$name** | string | Name of the pagination footer template to add |
+
+===== Examples =====
+
+
+
+====== writeLeafsCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->writeLeafsCounter]] |
+
+Writes the html for the leafs counter, eg, Page 1 of x
+===== Syntax =====
+void writeLeafsCounter ()
+
+===== Examples =====
+
+
+
+====== writeLimitBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->writeLimitBox]] |
+
+Writes the dropdown select list for number of rows to show per page  Use: print $pagination-&gt;getLimitBox();
+===== Syntax =====
+void writeLimitBox	( **$link** )
+
+===== Examples =====
+
+
+
+====== writePagesCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->writePagesCounter]] |
+
+Writes the counter string  Use: print $pagination-&gt;getLimitBox();
+===== Syntax =====
+void writePagesCounter ()
+
+===== Examples =====
+
+
+
+====== writePagesLinks ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JPagination|JPagination]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JPagination.html|JPagination->writePagesLinks]] |
+
+Writes the page list string  Use: print $pagination-&gt;getPagesLinks();
+===== Syntax =====
+void writePagesLinks	( **$link** )
+
+===== Examples =====
+
+
+

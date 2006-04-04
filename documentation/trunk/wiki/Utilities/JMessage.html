@@ -1,0 +1,45 @@
+====== JMessage [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage]] |
+
+Message Class<p>Provides a common interface to send an internal message to  a JUser via the Joomla! Framework</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JMessage-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JMessage-__construct|__construct]] | JMessage constructor |
+| [[JMessage-send|{{http://api.joomla.org/media/images/Method.png }}]] [[JMessage-send|send]] | Method to send a private message |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->__construct]] |
+
+JMessage constructor
+===== Syntax =====
+JMessage __construct	( **&$db** )
+| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
+
+===== Examples =====
+
+
+
+====== send ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->send]] |
+
+Method to send a private message
+===== Syntax =====
+boolean send	( **$fromId**, **$toId**, **$subject**, **$message** )
+| **$fromId** | int | Sender's userid |
+| **$toId** | int | Recipient's userid |
+| **$subject** | string | The message subject |
+| **$message** | string | The message body |
+
+===== Examples =====
+
+
+

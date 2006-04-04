@@ -1,0 +1,44 @@
+====== JInstallerComponent [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerComponent.html|JInstallerComponent]] |
+
+Component installer
+===== Methods =====
+^ Method ^ Description ^
+| [[JInstallerComponent-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerComponent-install|install]] | Custom install method for components |
+| [[JInstallerComponent-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerComponent-uninstall|uninstall]] | Custom uninstall method for components |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== install ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerComponent|JInstallerComponent]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerComponent.html|JInstallerComponent->install]] |
+
+Custom install method for components
+===== Syntax =====
+boolean install	( **$p_fromdir** )
+| **$p_fromdir** | string | Directory from which to install the  component |
+
+===== Examples =====
+
+
+
+====== uninstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerComponent|JInstallerComponent]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerComponent.html|JInstallerComponent->uninstall]] |
+
+Custom uninstall method for components
+===== Syntax =====
+mixed uninstall	( **$id**, **$client**, **$cid**, **$option** )
+| **$cid** | int | The id of the component to uninstall |
+| **$option** | string | The URL option |
+| **$client** | int | The client id |
+
+===== Examples =====
+
+
+
