@@ -1,0 +1,348 @@
+====== JSession [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession]] |
+
+Class for managing HTTP sessions<p>Provides access to session-state values as well as session-level  settings and lifetime management methods.  Based on the standart PHP session handling mechanism  it provides for you more advanced features such as  database container, idle and expire timeouts, etc.</p><p>This class has many influences from the PEAR HTTP_Session module</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JSession-clear|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-clear|clear]] | Free all session variables |
+| [[JSession-destroy|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-destroy|destroy]] | Frees all session variables and destroys all data  registered to a session<p>This method resets the $_SESSION variable and  destroys all of the data associated  with the current session in its storage (file or DB).  It forces new session to be started after this method  is called. It does not unset the session cookie.</p> |
+| [[JSession-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-get|get]] | Returns session variable |
+| [[JSession-getLocal|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-getLocal|getLocal]] | Returns local variable of a script<p>Two scripts can have local variables with the same names</p> |
+| [[JSession-id|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-id|id]] | Sets new ID of a session |
+| [[JSession-isExpired|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-isExpired|isExpired]] | Check if session is expired |
+| [[JSession-isIdle|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-isIdle|isIdle]] | Check if session is idle |
+| [[JSession-isNew|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-isNew|isNew]] | Gets a value indicating whether the session  was created with the current request<p>You MUST call this method only after you have started  the session with the JSession::start() method.</p> |
+| [[JSession-localName|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-localName|localName]] | Sets new local name |
+| [[JSession-name|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-name|name]] | Sets new name of a session |
+| [[JSession-pause|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-pause|pause]] | Writes session data and ends session<p>Session data is usually stored after your script  terminated without the need to call JSession::stop(),  but as session data is locked to prevent concurrent  writes only one script may operate on a session at any time.  When using framesets together with sessions you will  experience the frames loading one by one due to this  locking. You can reduce the time needed to load all the  frames by ending the session as soon as all changes  to session variables are done.</p> |
+| [[JSession-register|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-register|register]] | Register variable with the current session |
+| [[JSession-sessionValidThru|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-sessionValidThru|sessionValidThru]] | Returns the time up to the session is valid |
+| [[JSession-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-set|set]] | Sets session variable |
+| [[JSession-setExpire|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-setExpire|setExpire]] | Sets the maximum expire time |
+| [[JSession-setGcMaxLifetime|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-setGcMaxLifetime|setGcMaxLifetime]] | If optional parameter is specified it determines the number of seconds  after which session data will be seen as 'garbage' and cleaned up<p>It returns the previous value of this property</p> |
+| [[JSession-setGcProbability|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-setGcProbability|setGcProbability]] | If optional parameter is specified it determines the  probability that the gc (garbage collection) routine is started  and session data is cleaned up<p>It returns the previous value of this property</p> |
+| [[JSession-setIdle|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-setIdle|setIdle]] | Sets the maximum idle time<p>Sets the time-out period allowed  between requests before the session-state  provider terminates the session.</p> |
+| [[JSession-setLocal|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-setLocal|setLocal]] | Sets local variable of a script.<p>Two scripts can have local variables with the same names.</p> |
+| [[JSession-start|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-start|start]] | Initializes session data<p>Creates a session (or resumes the current one  based on the session id being passed  via a GET variable or a cookie).  You can provide your own name and/or id for a session.</p> |
+| [[JSession-unregister|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-unregister|unregister]] | Unregister a variable from the current session |
+| [[JSession-updateIdle|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-updateIdle|updateIdle]] | Updates the idletime |
+| [[JSession-useCookies|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-useCookies|useCookies]] | If optional parameter is specified it indicates  whether the module will use cookies to store  the session id on the client side<p>It returns the previous value of this property</p> |
+| [[JSession-useTransSID|{{http://api.joomla.org/media/images/Method.png }}]] [[JSession-useTransSID|useTransSID]] | If optional parameter is specified it indicates  whether the session id will automatically be appended to  all links<p>It returns the previous value of this property</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== clear ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->clear]] |
+
+Free all session variables
+===== Syntax =====
+void clear ()
+
+===== Examples =====
+
+
+
+====== destroy ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->destroy]] |
+
+Frees all session variables and destroys all data  registered to a session<p>This method resets the $_SESSION variable and  destroys all of the data associated  with the current session in its storage (file or DB).  It forces new session to be started after this method  is called. It does not unset the session cookie.</p>
+===== Syntax =====
+void destroy ()
+
+===== Examples =====
+
+
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->get]] |
+
+Returns session variable
+===== Syntax =====
+mixed &get	( **$name**, **$default** )
+| **$name** | string | Name of a variable |
+| **$default** | mixed | Default value of a variable if not set |
+
+===== Examples =====
+
+
+
+====== getLocal ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->getLocal]] |
+
+Returns local variable of a script<p>Two scripts can have local variables with the same names</p>
+===== Syntax =====
+mixed &getLocal	( **$name**, **$default** )
+| **$name** | string | Name of a variable |
+| **$default** | mixed | Default value of a variable if not set |
+
+===== Examples =====
+
+
+
+====== id ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->id]] |
+
+Sets new ID of a session
+===== Syntax =====
+string id	( **$id** )
+| **$id** | string | New ID of a sesion |
+
+===== Examples =====
+
+
+
+====== isExpired ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->isExpired]] |
+
+Check if session is expired
+===== Syntax =====
+boolean isExpired ()
+
+===== Examples =====
+
+
+
+====== isIdle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->isIdle]] |
+
+Check if session is idle
+===== Syntax =====
+boolean isIdle ()
+
+===== Examples =====
+
+
+
+====== isNew ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->isNew]] |
+
+Gets a value indicating whether the session  was created with the current request<p>You MUST call this method only after you have started  the session with the JSession::start() method.</p>
+===== Syntax =====
+boolean isNew ()
+
+===== Examples =====
+
+
+
+====== localName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->localName]] |
+
+Sets new local name
+===== Syntax =====
+string localName	( **$name** )
+| **$name** | string | New local name |
+
+===== Examples =====
+
+
+
+====== name ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->name]] |
+
+Sets new name of a session
+===== Syntax =====
+string name	( **$name** )
+| **$name** | string | New name of a sesion |
+
+===== Examples =====
+
+
+
+====== pause ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->pause]] |
+
+Writes session data and ends session<p>Session data is usually stored after your script  terminated without the need to call JSession::stop(),  but as session data is locked to prevent concurrent  writes only one script may operate on a session at any time.  When using framesets together with sessions you will  experience the frames loading one by one due to this  locking. You can reduce the time needed to load all the  frames by ending the session as soon as all changes  to session variables are done.</p>
+===== Syntax =====
+void pause ()
+
+===== Examples =====
+
+
+
+====== register ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->register]] |
+
+Register variable with the current session
+===== Syntax =====
+void register	( **$name** )
+| **$name** | string | Name of a global variable |
+
+===== Examples =====
+
+
+
+====== sessionValidThru ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->sessionValidThru]] |
+
+Returns the time up to the session is valid
+===== Syntax =====
+integer sessionValidThru ()
+
+===== Examples =====
+
+
+
+====== set ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->set]] |
+
+Sets session variable
+===== Syntax =====
+mixed set	( **$name**, **$value** )
+| **$name** | string | Name of a variable |
+| **$value** | mixed | Value of a variable |
+
+===== Examples =====
+
+
+
+====== setExpire ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->setExpire]] |
+
+Sets the maximum expire time
+===== Syntax =====
+void setExpire	( **$time**, **$add** )
+| **$time** | integer | Time in seconds |
+| **$add** | bool | Add time to current expire time or not |
+
+===== Examples =====
+
+
+
+====== setGcMaxLifetime ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->setGcMaxLifetime]] |
+
+If optional parameter is specified it determines the number of seconds  after which session data will be seen as 'garbage' and cleaned up<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean setGcMaxLifetime	( **$gcMaxLifetime** )
+| **$gcMaxLifetime** | boolean | If specified it will replace the previous value                                 of this property |
+
+===== Examples =====
+
+
+
+====== setGcProbability ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->setGcProbability]] |
+
+If optional parameter is specified it determines the  probability that the gc (garbage collection) routine is started  and session data is cleaned up<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean setGcProbability	( **$gcProbability** )
+| **$gcProbability** | boolean | If specified it will replace the previous value                                 of this property |
+
+===== Examples =====
+
+
+
+====== setIdle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->setIdle]] |
+
+Sets the maximum idle time<p>Sets the time-out period allowed  between requests before the session-state  provider terminates the session.</p>
+===== Syntax =====
+void setIdle	( **$time** )
+| **$time** | integer | Time in seconds |
+
+===== Examples =====
+
+
+
+====== setLocal ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->setLocal]] |
+
+Sets local variable of a script.<p>Two scripts can have local variables with the same names.</p>
+===== Syntax =====
+mixed setLocal	( **$name**, **$value** )
+| **$name** | string | Name of a local variable |
+| **$value** | mixed | Value of a local variable |
+
+===== Examples =====
+
+
+
+====== start ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->start]] |
+
+Initializes session data<p>Creates a session (or resumes the current one  based on the session id being passed  via a GET variable or a cookie).  You can provide your own name and/or id for a session.</p>
+===== Syntax =====
+void start	( **$name**, **$id** )
+| **$name** | $name | string Name of a session, default is 'SessionID' |
+| **$id** | $id | string Id of a session which will be used                        only when the session is new |
+
+===== Examples =====
+
+
+
+====== unregister ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->unregister]] |
+
+Unregister a variable from the current session
+===== Syntax =====
+void unregister	( **$name** )
+| **$name** | string | Name of a global variable |
+
+===== Examples =====
+
+
+
+====== updateIdle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->updateIdle]] |
+
+Updates the idletime
+===== Syntax =====
+void updateIdle ()
+
+===== Examples =====
+
+
+
+====== useCookies ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->useCookies]] |
+
+If optional parameter is specified it indicates  whether the module will use cookies to store  the session id on the client side<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean useCookies	( **$useCookies** )
+| **$useCookies** | boolean | If specified it will replace the previous value                              of this property |
+
+===== Examples =====
+
+
+
+====== useTransSID ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Application/JSession.html|JSession->useTransSID]] |
+
+If optional parameter is specified it indicates  whether the session id will automatically be appended to  all links<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean useTransSID	( **$useTransSID** )
+| **$useTransSID** | boolean | If specified it will replace the previous value                               of this property |
+
+===== Examples =====
+
+
+

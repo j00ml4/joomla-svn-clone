@@ -1,0 +1,161 @@
+====== JFile [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile]] |
+
+A File handling class
+===== Methods =====
+^ Method ^ Description ^
+| [[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-copy|copy]] | Copies a file |
+| [[JFile-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-delete|delete]] | Delete a file or array of files |
+| [[JFile-exists|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-exists|exists]] | Wrapper for the standard file_exists function |
+| [[JFile-getExt|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-getExt|getExt]] | Gets the extension of a file name |
+| [[JFile-makeSafe|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-makeSafe|makeSafe]] | Makes file name safe to use |
+| [[JFile-move|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-move|move]] | Moves a file |
+| [[JFile-read|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-read|read]] | Read the contents of a file |
+| [[JFile-stripExt|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-stripExt|stripExt]] | Strips the last extension off a file name |
+| [[JFile-upload|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-upload|upload]] | Moves and uploaded file to a destination folder |
+| [[JFile-write|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-write|write]] | Write contents to a file |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== copy ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->copy]] |
+
+Copies a file
+===== Syntax =====
+boolean copy	( **$src**, **$dest**, **$path** )
+| **$src** | string | The path to the source file |
+| **$dest** | string | The path to the destination file |
+| **$path** | string | An optional base path to prefix to the file names |
+
+===== Examples =====
+
+
+
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->delete]] |
+
+Delete a file or array of files
+===== Syntax =====
+boolean delete	( **$file** )
+| **$file** | mixed | The file name or an array of file names |
+
+===== Examples =====
+
+
+
+====== exists ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->exists]] |
+
+Wrapper for the standard file_exists function
+===== Syntax =====
+boolean exists	( **$file** )
+| **$file** | string | File path |
+
+===== Examples =====
+
+
+
+====== getExt ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->getExt]] |
+
+Gets the extension of a file name
+===== Syntax =====
+string getExt	( **$file** )
+| **$file** | string | The file name |
+
+===== Examples =====
+
+
+
+====== makeSafe ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->makeSafe]] |
+
+Makes file name safe to use
+===== Syntax =====
+string makeSafe	( **$file** )
+| **$file** | string | The name of the file [not full path] |
+
+===== Examples =====
+
+
+
+====== move ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->move]] |
+
+Moves a file
+===== Syntax =====
+boolean move	( **$src**, **$dest**, **$path** )
+| **$src** | string | The path to the source file |
+| **$dest** | string | The path to the destination file |
+| **$path** | string | An optional base path to prefix to the file names |
+
+===== Examples =====
+
+
+
+====== read ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->read]] |
+
+Read the contents of a file
+===== Syntax =====
+mixed read	( **$filename**, **$incpath** )
+| **$filename** | string | The full file path |
+| **$incpath** | boolean | Use include path |
+
+===== Examples =====
+
+
+
+====== stripExt ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->stripExt]] |
+
+Strips the last extension off a file name
+===== Syntax =====
+string stripExt	( **$file** )
+| **$file** | string | The file name |
+
+===== Examples =====
+
+
+
+====== upload ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->upload]] |
+
+Moves and uploaded file to a destination folder
+===== Syntax =====
+boolean upload	( **$src**, **$dest** )
+| **$src** | string | The name of the php (temporary) uploaded file |
+| **$dest** | string | The path (including filename) to move the uploaded file to |
+
+===== Examples =====
+
+
+
+====== write ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|FileSystem]] | [[JFile|JFile]] | [[http://api.joomla.org/Joomla.Framework/FileSystem/JFile.html|JFile->write]] |
+
+Write contents to a file
+===== Syntax =====
+boolean write	( **$file**, **$buffer** )
+| **$file** | string | The full file path |
+| **$buffer** | string | The buffer to write |
+
+===== Examples =====
+
+
+

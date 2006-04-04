@@ -1,0 +1,158 @@
+====== JParameter [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter]] |
+
+Parameter handler
+===== Methods =====
+^ Method ^ Description ^
+| [[JParameter-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-__construct|__construct]] | Constructor |
+| [[JParameter-addParameterDir|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-addParameterDir|addParameterDir]] | Add a directory where JParameter should search for element types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same  order you added them. If the parameter type cannot be found in  the custom folders, it will look in  JParameter/types.</p> |
+| [[JParameter-def|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-def|def]] | Sets a default value if not alreay assigned |
+| [[JParameter-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-get|get]] | Get a value |
+| [[JParameter-getIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-getIncludePath|getIncludePath]] | Get the include path |
+| [[JParameter-loadElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-loadElement|loadElement]] | Loads a element type |
+| [[JParameter-loadSetupFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-loadSetupFile|loadSetupFile]] | Loads an xml setup file and parses it |
+| [[JParameter-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-render|render]] | Render |
+| [[JParameter-renderParam|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-renderParam|renderParam]] | render a parameter type |
+| [[JParameter-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-set|set]] | Set a value |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->__construct]] |
+
+Constructor
+===== Syntax =====
+JParameter __construct	( **$data**, **$path** )
+| **$data** | string | The raw parms text |
+| **$path** | string | Path to the xml setup file |
+
+===== Examples =====
+
+
+
+====== addParameterDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->addParameterDir]] |
+
+Add a directory where JParameter should search for element types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same  order you added them. If the parameter type cannot be found in  the custom folders, it will look in  JParameter/types.</p>
+===== Syntax =====
+void addParameterDir	( **$dir** )
+| **$dir** | string|array | directory or directories to search. |
+
+===== Examples =====
+
+
+
+====== def ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->def]] |
+
+Sets a default value if not alreay assigned
+===== Syntax =====
+string def	( **$key**, **$value** )
+| **$key** | string | The name of the param |
+| **$value** | string | The value of the parameter |
+
+===== Examples =====
+
+
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->get]] |
+
+Get a value
+===== Syntax =====
+string get	( **$key**, **$default** )
+| **$key** | string | The name of the param |
+| **$default** | mixed | The default value if not found |
+
+===== Examples =====
+
+
+
+====== getIncludePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->getIncludePath]] |
+
+Get the include path
+===== Syntax =====
+string getIncludePath ()
+
+===== Examples =====
+
+
+
+====== loadElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->loadElement]] |
+
+Loads a element type
+===== Syntax =====
+object &loadElement	( **$type**, **$new** )
+| **$type** | string | elementType |
+
+===== Examples =====
+
+
+
+====== loadSetupFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->loadSetupFile]] |
+
+Loads an xml setup file and parses it
+===== Syntax =====
+object loadSetupFile	( **$path** )
+| **$path** | string | path to xml setup file |
+
+===== Examples =====
+
+
+
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->render]] |
+
+Render
+===== Syntax =====
+string render	( **$name** )
+| **$name** | string | The name of the control, or the default text area if a setup file is not found |
+
+===== Examples =====
+
+
+
+====== renderParam ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->renderParam]] |
+
+render a parameter type
+===== Syntax =====
+array renderParam	( **&$node**, **$control_name** )
+| **&$node** | object A | param tag node |
+| **$control_name** | string | The control name |
+
+===== Examples =====
+
+
+
+====== set ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JParameter|JParameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JParameter.html|JParameter->set]] |
+
+Set a value
+===== Syntax =====
+string set	( **$key**, **$value** )
+| **$key** | string | The name of the param |
+| **$value** | string | The value of the parameter |
+
+===== Examples =====
+
+
+

@@ -1,0 +1,317 @@
+====== JBrowser [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser]] |
+
+Browser class, provides capability information about the current web client.<p>Browser identification is performed by examining the HTTP_USER_AGENT  environment variable provided by the web server.</p><p>This module has many influences from the lib/Browser.php code in  version 3 of Horde.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JBrowser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
+| [[JBrowser-getAgentString|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getAgentString|getAgentString]] | Return the full browser agent string. |
+| [[JBrowser-getBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getBrowser|getBrowser]] | Retrieve the current browser. |
+| [[JBrowser-getFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getFeature|getFeature]] | Retrieve the current browser capability. |
+| [[JBrowser-getHTTPProtocol|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getHTTPProtocol|getHTTPProtocol]] | Returns the server protocol in use on the current server. |
+| [[JBrowser-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getInstance|getInstance]] | Returns a reference to the global Browser object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JBrowser::getInstance([$userAgent[, $accept]]);</pre></p> |
+| [[JBrowser-getMajor|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getMajor|getMajor]] | Retrieve the current browser's major version. |
+| [[JBrowser-getMinor|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getMinor|getMinor]] | Retrieve the current browser's minor version. |
+| [[JBrowser-getPlatform|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getPlatform|getPlatform]] | Return the currently matched platform. |
+| [[JBrowser-getQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getQuirk|getQuirk]] | Retrieve unique behavior for the current browser. |
+| [[JBrowser-getVersion|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getVersion|getVersion]] | Retrieve the current browser's version. |
+| [[JBrowser-hasFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-hasFeature|hasFeature]] | Check the current browser capabilities. |
+| [[JBrowser-hasQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-hasQuirk|hasQuirk]] | Check unique behavior for the current browser. |
+| [[JBrowser-isBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isBrowser|isBrowser]] | Determine if the given browser is the same as the current. |
+| [[JBrowser-isRobot|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isRobot|isRobot]] | Determines if the browser is a robot or not. |
+| [[JBrowser-isSSLConnection|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isSSLConnection|isSSLConnection]] | Determine if we are using a secure (SSL) connection. |
+| [[JBrowser-isViewable|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isViewable|isViewable]] | Determines if a browser can display a given MIME type. |
+| [[JBrowser-match|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-match|match]] | Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser. |
+| [[JBrowser-setBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setBrowser|setBrowser]] | Sets the current browser. |
+| [[JBrowser-setFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setFeature|setFeature]] | Set capabilities for the current browser. |
+| [[JBrowser-setQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setQuirk|setQuirk]] | Set unique behavior for the current browser. |
+| [[JBrowser-_setPlatform|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-_setPlatform|_setPlatform]] | Match the platform of the browser.<p>This is a pretty simplistic implementation, but it's intended  to let us tell what line breaks to send, so it's good enough  for its purpose.</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->__construct]] |
+
+Create a browser instance (Constructor).
+===== Syntax =====
+JBrowser __construct	( **$userAgent**, **$accept** )
+| **$userAgent** | string | The browser string to parse. |
+| **$accept** | string | The HTTP_ACCEPT settings to use. |
+
+===== Examples =====
+
+
+
+====== getAgentString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getAgentString]] |
+
+Return the full browser agent string.
+===== Syntax =====
+string getAgentString ()
+
+===== Examples =====
+
+
+
+====== getBrowser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getBrowser]] |
+
+Retrieve the current browser.
+===== Syntax =====
+string getBrowser ()
+
+===== Examples =====
+
+
+
+====== getFeature ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getFeature]] |
+
+Retrieve the current browser capability.
+===== Syntax =====
+string getFeature	( **$feature** )
+| **$feature** | string | The capability to retrieve. |
+
+===== Examples =====
+
+
+
+====== getHTTPProtocol ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getHTTPProtocol]] |
+
+Returns the server protocol in use on the current server.
+===== Syntax =====
+string getHTTPProtocol ()
+
+===== Examples =====
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getInstance]] |
+
+Returns a reference to the global Browser object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JBrowser::getInstance([$userAgent[, $accept]]);</pre></p>
+===== Syntax =====
+<a href="../../Joomla.Framework/Application/JBrowser.html">JBrowser</a> &getInstance	( **$userAgent**, **$accept** )
+| **$userAgent** | string | The browser string to parse. |
+| **$accept** | string | The HTTP_ACCEPT settings to use. |
+
+===== Examples =====
+
+
+
+====== getMajor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getMajor]] |
+
+Retrieve the current browser's major version.
+===== Syntax =====
+integer getMajor ()
+
+===== Examples =====
+
+
+
+====== getMinor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getMinor]] |
+
+Retrieve the current browser's minor version.
+===== Syntax =====
+integer getMinor ()
+
+===== Examples =====
+
+
+
+====== getPlatform ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getPlatform]] |
+
+Return the currently matched platform.
+===== Syntax =====
+string getPlatform ()
+
+===== Examples =====
+
+
+
+====== getQuirk ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getQuirk]] |
+
+Retrieve unique behavior for the current browser.
+===== Syntax =====
+string getQuirk	( **$quirk** )
+| **$quirk** | string | The behavior to retrieve. |
+
+===== Examples =====
+
+
+
+====== getVersion ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->getVersion]] |
+
+Retrieve the current browser's version.
+===== Syntax =====
+string getVersion ()
+
+===== Examples =====
+
+
+
+====== hasFeature ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->hasFeature]] |
+
+Check the current browser capabilities.
+===== Syntax =====
+boolean hasFeature	( **$feature** )
+| **$feature** | string | The capability to check. |
+
+===== Examples =====
+
+
+
+====== hasQuirk ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->hasQuirk]] |
+
+Check unique behavior for the current browser.
+===== Syntax =====
+boolean hasQuirk	( **$quirk** )
+| **$quirk** | string | The behavior to check. |
+
+===== Examples =====
+
+
+
+====== isBrowser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->isBrowser]] |
+
+Determine if the given browser is the same as the current.
+===== Syntax =====
+boolean isBrowser	( **$browser** )
+| **$browser** | string | The browser to check. |
+
+===== Examples =====
+
+
+
+====== isRobot ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->isRobot]] |
+
+Determines if the browser is a robot or not.
+===== Syntax =====
+boolean isRobot ()
+
+===== Examples =====
+
+
+
+====== isSSLConnection ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->isSSLConnection]] |
+
+Determine if we are using a secure (SSL) connection.
+===== Syntax =====
+boolean isSSLConnection ()
+
+===== Examples =====
+
+
+
+====== isViewable ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->isViewable]] |
+
+Determines if a browser can display a given MIME type.
+===== Syntax =====
+boolean isViewable	( **$mimetype** )
+| **$mimetype** | string | The MIME type to check. |
+
+===== Examples =====
+
+
+
+====== match ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->match]] |
+
+Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser.
+===== Syntax =====
+void match	( **$userAgent**, **$accept** )
+| **$userAgent** | string | The browser string to parse. |
+| **$accept** | string | The HTTP_ACCEPT settings to use. |
+
+===== Examples =====
+
+
+
+====== setBrowser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->setBrowser]] |
+
+Sets the current browser.
+===== Syntax =====
+void setBrowser	( **$browser** )
+| **$browser** | string | The browser to set as current. |
+
+===== Examples =====
+
+
+
+====== setFeature ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->setFeature]] |
+
+Set capabilities for the current browser.
+===== Syntax =====
+void setFeature	( **$feature**, **$value** )
+| **$feature** | string | The capability to set. |
+| **$value** | string | Special capability parameter. |
+
+===== Examples =====
+
+
+
+====== setQuirk ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->setQuirk]] |
+
+Set unique behavior for the current browser.
+===== Syntax =====
+void setQuirk	( **$quirk**, **$value** )
+| **$quirk** | string | The behavior to set. |
+| **$value** | string | Special behavior parameter. |
+
+===== Examples =====
+
+
+
+====== _setPlatform ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Application/JBrowser.html|JBrowser->_setPlatform]] |
+
+Match the platform of the browser.<p>This is a pretty simplistic implementation, but it's intended  to let us tell what line breaks to send, so it's good enough  for its purpose.</p>
+===== Syntax =====
+void _setPlatform ()
+
+===== Examples =====
+
+
+

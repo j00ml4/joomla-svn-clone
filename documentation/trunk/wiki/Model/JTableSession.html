@@ -1,0 +1,96 @@
+====== JTableSession [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession]] |
+
+Session table
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableSession-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-__construct|__construct]] | Constructor |
+| [[JTableSession-destroy|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-destroy|destroy]] | Destroys the pesisting session |
+| [[JTableSession-insert|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-insert|insert]] |  |
+| [[JTableSession-purge|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-purge|purge]] | Purge old sessions |
+| [[JTableSession-remember|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-remember|remember]] | Allows site to remember login |
+| [[JTableSession-update|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-update|update]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->__construct]] |
+
+Constructor
+===== Syntax =====
+JTableSession __construct	( **&$db** )
+| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
+
+===== Examples =====
+
+
+
+====== destroy ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->destroy]] |
+
+Destroys the pesisting session
+===== Syntax =====
+void destroy ()
+
+===== Examples =====
+
+
+
+====== insert ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->insert]] |
+
+
+===== Syntax =====
+void insert	( **$sessionId**, **$clientId** )
+
+===== Examples =====
+
+
+
+====== purge ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->purge]] |
+
+Purge old sessions
+===== Syntax =====
+mixed purge	( **$age** )
+| **$age** | int | Session age in seconds |
+
+===== Examples =====
+
+
+
+====== remember ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->remember]] |
+
+Allows site to remember login
+===== Syntax =====
+void remember	( **$username**, **$password** )
+| **$username** | string | The username |
+| **$password** | string | The user password |
+
+===== Examples =====
+
+
+
+====== update ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableSession.html|JTableSession->update]] |
+
+
+===== Syntax =====
+void update	( **$updateNulls** )
+
+===== Examples =====
+
+
+

@@ -1,0 +1,43 @@
+====== JRegistryFormatXML [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML]] |
+
+XML Format for JRegistry
+===== Methods =====
+^ Method ^ Description ^
+| [[JRegistryFormatXML-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatXML-objectToString|objectToString]] | Converts an object into an XML formatted string  	-	If more than two levels of nested groups are necessary, since INI is not  		useful, XML or another format should be used. |
+| [[JRegistryFormatXML-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatXML-stringToObject|stringToObject]] | Converts an XML formatted string into an object |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== objectToString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatXML|JRegistryFormatXML]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML->objectToString]] |
+
+Converts an object into an XML formatted string  	-	If more than two levels of nested groups are necessary, since INI is not  		useful, XML or another format should be used.
+===== Syntax =====
+string objectToString	( **&$object**, **$params**, **$param** )
+| **$object** | object | Data Source Object |
+| **$param** | array | Parameters used by the formatter |
+
+===== Examples =====
+
+
+
+====== stringToObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatXML|JRegistryFormatXML]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML->stringToObject]] |
+
+Converts an XML formatted string into an object
+===== Syntax =====
+object Data stringToObject	( **$data**, **$namespace** )
+| **$data** | string | XML Formatted String |
+
+===== Examples =====
+
+
+

@@ -1,0 +1,100 @@
+====== JInstallerHelper [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper]] |
+
+Installer helper class
+===== Methods =====
+^ Method ^ Description ^
+| [[JInstallerHelper-cleanupInstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-cleanupInstall|cleanupInstall]] | Clean up temporary uploaded package and unpacked extension |
+| [[JInstallerHelper-detectType|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-detectType|detectType]] | Method to detect the extension type from a package directory |
+| [[JInstallerHelper-downloadPackage|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-downloadPackage|downloadPackage]] | Downloads a package |
+| [[JInstallerHelper-getFilenameFromURL|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-getFilenameFromURL|getFilenameFromURL]] | Gets a file name out of a url |
+| [[JInstallerHelper-splitSql|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-splitSql|splitSql]] | Splits contents of a sql file into array of discreet queries<p>queries need to be delimited with end of statement marker ';'</p> |
+| [[JInstallerHelper-unpack|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-unpack|unpack]] | Unpacks a file and verifies it as a Joomla element package |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== cleanupInstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->cleanupInstall]] |
+
+Clean up temporary uploaded package and unpacked extension
+===== Syntax =====
+boolean cleanupInstall	( **$p_file**, **$resultdir** )
+| **$p_file** | string | Path to the uploaded package file |
+| **$resultdir** | string | Path to the unpacked extension |
+
+===== Examples =====
+
+
+
+====== detectType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->detectType]] |
+
+Method to detect the extension type from a package directory
+===== Syntax =====
+mixed detectType	( **$p_dir** )
+| **$p_dir** | string | Path to package directory |
+
+===== Examples =====
+
+
+
+====== downloadPackage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->downloadPackage]] |
+
+Downloads a package
+===== Syntax =====
+mixed downloadPackage	( **$url**, **$target** )
+| **$url** | string | URL of file to download |
+| **$target** | string | Download target filename [optional] |
+
+===== Examples =====
+
+
+
+====== getFilenameFromURL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->getFilenameFromURL]] |
+
+Gets a file name out of a url
+===== Syntax =====
+mixed getFilenameFromURL	( **$url** )
+| **$url** | string | URL to get name from |
+
+===== Examples =====
+
+
+
+====== splitSql ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->splitSql]] |
+
+Splits contents of a sql file into array of discreet queries<p>queries need to be delimited with end of statement marker ';'</p>
+===== Syntax =====
+array splitSql	( **$sql** )
+| **$sql** | string |  |
+
+===== Examples =====
+
+
+
+====== unpack ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->unpack]] |
+
+Unpacks a file and verifies it as a Joomla element package
+===== Syntax =====
+boolean unpack	( **$p_filename** )
+| **$p_filename** | string | The uploaded package filename or install directory |
+
+===== Examples =====
+
+
+

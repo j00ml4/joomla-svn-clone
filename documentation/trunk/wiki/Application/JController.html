@@ -1,0 +1,314 @@
+====== JController [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController]] |
+
+Base class for a Joomla Controller<p>Acts as a Factory class for application specific objects and  provides many supporting API functions.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JController-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-__construct|__construct]] | Constructor |
+| [[JController-accessCheck|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-accessCheck|accessCheck]] | Access control check |
+| [[JController-display|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-display|display]] | Typical view method for MVC based architecture |
+| [[JController-getApp|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-getApp|getApp]] |  |
+| [[JController-getDBO|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-getDBO|getDBO]] | Get the system database object |
+| [[JController-getTask|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-getTask|getTask]] | Get the last task that was to be performed |
+| [[JController-getView|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-getView|getView]] |  |
+| [[JController-getViewPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-getViewPath|getViewPath]] |  |
+| [[JController-methodNotFound|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-methodNotFound|methodNotFound]] | Basic method if the registered method is not found |
+| [[JController-notAllowed|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-notAllowed|notAllowed]] | Basic method if access is not permitted to the task |
+| [[JController-performTask|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-performTask|performTask]] | Perform a task by triggering a method in the derived class |
+| [[JController-redirect|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-redirect|redirect]] | Redirects the browser |
+| [[JController-registerDefaultTask|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-registerDefaultTask|registerDefaultTask]] | Register the default task to perfrom if a mapping is not found |
+| [[JController-registerTask|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-registerTask|registerTask]] | Register (map) a task to a method in the class |
+| [[JController-setAccessControl|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setAccessControl|setAccessControl]] | Sets the access control levels |
+| [[JController-setApp|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setApp|setApp]] |  |
+| [[JController-setRedirect|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setRedirect|setRedirect]] | Set a URL to redirect the browser to |
+| [[JController-setView|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setView|setView]] |  |
+| [[JController-setViewName|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setViewName|setViewName]] |  |
+| [[JController-setViewPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-setViewPath|setViewPath]] |  |
+| [[JController-taskNotFound|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-taskNotFound|taskNotFound]] | Basic method if the task is not found |
+| [[JController-_loadView|{{http://api.joomla.org/media/images/Method.png }}]] [[JController-_loadView|_loadView]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->__construct]] |
+
+Constructor
+===== Syntax =====
+JController __construct	( **$default** )
+| **$default** | string | Set the default task |
+
+===== Examples =====
+
+
+
+====== accessCheck ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->accessCheck]] |
+
+Access control check
+===== Syntax =====
+void accessCheck	( **$task** )
+
+===== Examples =====
+
+
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->display]] |
+
+Typical view method for MVC based architecture
+===== Syntax =====
+void display ()
+
+===== Examples =====
+
+
+
+====== getApp ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->getApp]] |
+
+
+===== Syntax =====
+void &getApp ()
+
+===== Examples =====
+
+
+
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->getDBO]] |
+
+Get the system database object
+===== Syntax =====
+object &getDBO ()
+
+===== Examples =====
+
+
+
+====== getTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->getTask]] |
+
+Get the last task that was to be performed
+===== Syntax =====
+string getTask ()
+
+===== Examples =====
+
+
+
+====== getView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->getView]] |
+
+
+===== Syntax =====
+void &getView ()
+
+===== Examples =====
+
+
+
+====== getViewPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->getViewPath]] |
+
+
+===== Syntax =====
+void getViewPath ()
+
+===== Examples =====
+
+
+
+====== methodNotFound ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->methodNotFound]] |
+
+Basic method if the registered method is not found
+===== Syntax =====
+null methodNotFound	( **$name** )
+| **$name** | string | The name of the method in the derived class |
+
+===== Examples =====
+
+
+
+====== notAllowed ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->notAllowed]] |
+
+Basic method if access is not permitted to the task
+===== Syntax =====
+null notAllowed	( **$name** )
+| **$name** | string | The name of the method in the derived class |
+
+===== Examples =====
+
+
+
+====== performTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->performTask]] |
+
+Perform a task by triggering a method in the derived class
+===== Syntax =====
+mixed performTask	( **$task** )
+| **$task** | string | The task to perform |
+
+===== Examples =====
+
+
+
+====== redirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->redirect]] |
+
+Redirects the browser
+===== Syntax =====
+void redirect ()
+
+===== Examples =====
+
+
+
+====== registerDefaultTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->registerDefaultTask]] |
+
+Register the default task to perfrom if a mapping is not found
+===== Syntax =====
+void registerDefaultTask	( **$method** )
+| **$method** | string | The name of the method in the derived class to perform if the task is not found |
+
+===== Examples =====
+
+
+
+====== registerTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->registerTask]] |
+
+Register (map) a task to a method in the class
+===== Syntax =====
+void registerTask	( **$task**, **$method** )
+| **$task** | string | The task |
+| **$method** | string | The name of the method in the derived class to perform for this task |
+
+===== Examples =====
+
+
+
+====== setAccessControl ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setAccessControl]] |
+
+Sets the access control levels
+===== Syntax =====
+void setAccessControl	( **$section**, **$value** )
+| **$section** | string | The ACO section (eg, the component) |
+| **$value** | string | The ACO section value (if using a constant value) |
+
+===== Examples =====
+
+
+
+====== setApp ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setApp]] |
+
+
+===== Syntax =====
+void &setApp	( **$app** )
+
+===== Examples =====
+
+
+
+====== setRedirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setRedirect]] |
+
+Set a URL to redirect the browser to
+===== Syntax =====
+void setRedirect	( **$url**, **$msg** )
+| **$url** | string | A URL |
+
+===== Examples =====
+
+
+
+====== setView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setView]] |
+
+
+===== Syntax =====
+void &setView	( **&$view** )
+
+===== Examples =====
+
+
+
+====== setViewName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setViewName]] |
+
+
+===== Syntax =====
+void setViewName	( **$viewName**, **$option**, **$prefix** )
+| **$viewName** | string | The name of the view |
+| **$option** | string | The name of the component used in the request (option) |
+| **$prefix** | string | A prefix used for the view name, eg, JViewPrefixName |
+
+===== Examples =====
+
+
+
+====== setViewPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->setViewPath]] |
+
+
+===== Syntax =====
+void setViewPath	( **$path** )
+
+===== Examples =====
+
+
+
+====== taskNotFound ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->taskNotFound]] |
+
+Basic method if the task is not found
+===== Syntax =====
+null taskNotFound	( **$task** )
+| **$task** | string | The task |
+
+===== Examples =====
+
+
+
+====== _loadView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JController|JController]] | [[http://api.joomla.org/Joomla.Framework/Application/JController.html|JController->_loadView]] |
+
+
+===== Syntax =====
+void &_loadView	( **$viewName**, **$option**, **$prefix** )
+
+===== Examples =====
+
+
+

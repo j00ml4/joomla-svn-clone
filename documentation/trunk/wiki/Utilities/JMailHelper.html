@@ -1,0 +1,69 @@
+====== JMailHelper [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMailHelper.html|JMailHelper]] |
+
+E-Mail helper class, provides static methods to perform various tasks relevant  to the Joomla e-mail routines.<p>TODO: Test these methods as the regex work is first run and not tested thoroughly</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JMailHelper-cleanAddress|{{http://api.joomla.org/media/images/Method.png }}]] [[JMailHelper-cleanAddress|cleanAddress]] | This method verifies that an e-mail address does not have any extra headers  injected into it.  Tests one e-mail address. |
+| [[JMailHelper-cleanBody|{{http://api.joomla.org/media/images/Method.png }}]] [[JMailHelper-cleanBody|cleanBody]] | This method cleans any injected headers from the E-Mail body |
+| [[JMailHelper-cleanSubject|{{http://api.joomla.org/media/images/Method.png }}]] [[JMailHelper-cleanSubject|cleanSubject]] | This method cleans any injected headers from the subject string. |
+| [[JMailHelper-isEmailAddress|{{http://api.joomla.org/media/images/Method.png }}]] [[JMailHelper-isEmailAddress|isEmailAddress]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== cleanAddress ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMailHelper|JMailHelper]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMailHelper.html|JMailHelper->cleanAddress]] |
+
+This method verifies that an e-mail address does not have any extra headers  injected into it.  Tests one e-mail address.
+===== Syntax =====
+mixed cleanAddress	( **$address** )
+| **$address** | string | E-Mail address |
+
+===== Examples =====
+
+
+
+====== cleanBody ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMailHelper|JMailHelper]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMailHelper.html|JMailHelper->cleanBody]] |
+
+This method cleans any injected headers from the E-Mail body
+===== Syntax =====
+string cleanBody	( **$body** )
+| **$body** | string | E-Mail body string |
+
+===== Examples =====
+
+
+
+====== cleanSubject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMailHelper|JMailHelper]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMailHelper.html|JMailHelper->cleanSubject]] |
+
+This method cleans any injected headers from the subject string.
+===== Syntax =====
+string cleanSubject	( **$subject** )
+| **$subject** | string | E-Mail subject string |
+
+===== Examples =====
+
+
+
+====== isEmailAddress ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMailHelper|JMailHelper]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMailHelper.html|JMailHelper->isEmailAddress]] |
+
+
+===== Syntax =====
+void isEmailAddress	( **$email** )
+
+===== Examples =====
+
+
+

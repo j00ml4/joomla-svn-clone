@@ -1,0 +1,341 @@
+====== JURI [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI]] |
+
+JURI Class<p>This class serves two purposes.  First to parse a URI and provide a common interface  for the Joomla Framework to access and manipulate a URI.  Second to attain the URI of  the current executing script from the server regardless of server.</p><p>The concept and implementation of this class is drawn heavily from the binary cloud  environment package.  &lt;http://www.binarycloud.com/&gt;</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JURI-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-__construct|__construct]] | Constructor.<p>You can pass a URI string to the constructor to initialize a specific URI.</p> |
+| [[JURI-delVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists |
+| [[JURI-getAnchor|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getAnchor|getAnchor]] | Get the URI archor string  		everything after the &quot;#&quot; |
+| [[JURI-getHost|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getHost|getHost]] | Get URI host  		returns the hostname/ip, or null if no hostname/ip was specified |
+| [[JURI-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getInstance|getInstance]] | Returns a reference to a global JURI object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $uri =& JURI::getInstance([$uri]);</pre></p> |
+| [[JURI-getPassword|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPassword|getPassword]] | Get URI password  		returns the password, or null if no password was specified |
+| [[JURI-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPath|getPath]] | Gets the URI path string |
+| [[JURI-getPort|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPort|getPort]] | Get URI port  		returns the port number, or null if no port was specified |
+| [[JURI-getQueryString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getQueryString|getQueryString]] | Returns flat query string from (array) $_vars hash |
+| [[JURI-getScheme|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getScheme|getScheme]] | Get URI scheme (protocol)  		ie. http, https, ftp, etc... |
+| [[JURI-getUsername|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getUsername|getUsername]] | Get URI username  		returns the username, or null if no username was specified |
+| [[JURI-getVars|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getVars|getVars]] | Returns an array with all of the query variables |
+| [[JURI-isSSL|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-isSSL|isSSL]] | Checks whether the current URI is using HTTPS |
+| [[JURI-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-parse|parse]] | Parse a given URI and populate the class fields |
+| [[JURI-setAnchor|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setAnchor|setAnchor]] | Set the URI anchor string  		everything after the &quot;#&quot; |
+| [[JURI-setHost|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setHost|setHost]] | Set URI host |
+| [[JURI-setPassword|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPassword|setPassword]] | Set URI password |
+| [[JURI-setPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPath|setPath]] | Set the URI path string |
+| [[JURI-setPort|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPort|setPort]] | Set URI port |
+| [[JURI-setQueryString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setQueryString|setQueryString]] | Sets the query to a supplied string in format:  		foo=bar&amp;x=y |
+| [[JURI-setScheme|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setScheme|setScheme]] | Set URI scheme (protocol)  		ie. http, https, ftp, etc... |
+| [[JURI-setUsername|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setUsername|setUsername]] | Set URI username |
+| [[JURI-setVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setVar|setVar]] | Adds a query variable and value, replacing the value if it  already exists and returning the old value. |
+| [[JURI-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-toString|toString]] | Returns full uri string |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->__construct]] |
+
+Constructor.<p>You can pass a URI string to the constructor to initialize a specific URI.</p>
+===== Syntax =====
+JURI __construct	( **$uri** )
+| **$uri** | string | The optional URI string |
+
+===== Examples =====
+
+
+
+====== delVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->delVar]] |
+
+Removes an item from the query string variables if it exists
+===== Syntax =====
+void delVar	( **$name** )
+| **$name** | string | Name of variable to remove |
+
+===== Examples =====
+
+
+
+====== getAnchor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getAnchor]] |
+
+Get the URI archor string  		everything after the &quot;#&quot;
+===== Syntax =====
+string getAnchor ()
+
+===== Examples =====
+
+
+
+====== getHost ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getHost]] |
+
+Get URI host  		returns the hostname/ip, or null if no hostname/ip was specified
+===== Syntax =====
+string getHost ()
+
+===== Examples =====
+
+
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getInstance]] |
+
+Returns a reference to a global JURI object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $uri =& JURI::getInstance([$uri]);</pre></p>
+===== Syntax =====
+<a href="../../Joomla.Framework/Application/JURI.html">JURI</a> &getInstance	( **$uri** )
+| **$uri** | string | The URI to parse.  [optional: if null uses script URI] |
+
+===== Examples =====
+
+
+
+====== getPassword ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getPassword]] |
+
+Get URI password  		returns the password, or null if no password was specified
+===== Syntax =====
+string getPassword ()
+
+===== Examples =====
+
+
+
+====== getPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getPath]] |
+
+Gets the URI path string
+===== Syntax =====
+string getPath ()
+
+===== Examples =====
+
+
+
+====== getPort ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getPort]] |
+
+Get URI port  		returns the port number, or null if no port was specified
+===== Syntax =====
+int getPort ()
+
+===== Examples =====
+
+
+
+====== getQueryString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getQueryString]] |
+
+Returns flat query string from (array) $_vars hash
+===== Syntax =====
+string getQueryString ()
+
+===== Examples =====
+
+
+
+====== getScheme ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getScheme]] |
+
+Get URI scheme (protocol)  		ie. http, https, ftp, etc...
+===== Syntax =====
+string getScheme ()
+
+===== Examples =====
+
+
+
+====== getUsername ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getUsername]] |
+
+Get URI username  		returns the username, or null if no username was specified
+===== Syntax =====
+string getUsername ()
+
+===== Examples =====
+
+
+
+====== getVars ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->getVars]] |
+
+Returns an array with all of the query variables
+===== Syntax =====
+array getVars ()
+
+===== Examples =====
+
+
+
+====== isSSL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->isSSL]] |
+
+Checks whether the current URI is using HTTPS
+===== Syntax =====
+boolean isSSL ()
+
+===== Examples =====
+
+
+
+====== parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->parse]] |
+
+Parse a given URI and populate the class fields
+===== Syntax =====
+boolean parse	( **$uri** )
+| **$uri** | string | The URI string to parse |
+
+===== Examples =====
+
+
+
+====== setAnchor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setAnchor]] |
+
+Set the URI anchor string  		everything after the &quot;#&quot;
+===== Syntax =====
+void setAnchor	( **$anchor** )
+| **$anchor** | string | The URI anchor string |
+
+===== Examples =====
+
+
+
+====== setHost ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setHost]] |
+
+Set URI host
+===== Syntax =====
+void setHost	( **$host** )
+| **$host** | string | The URI host |
+
+===== Examples =====
+
+
+
+====== setPassword ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setPassword]] |
+
+Set URI password
+===== Syntax =====
+void setPassword	( **$pass** )
+| **$pass** | string | The URI password |
+
+===== Examples =====
+
+
+
+====== setPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setPath]] |
+
+Set the URI path string
+===== Syntax =====
+void setPath	( **$path** )
+| **$path** | string | The URI path string |
+
+===== Examples =====
+
+
+
+====== setPort ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setPort]] |
+
+Set URI port
+===== Syntax =====
+void setPort	( **$port** )
+| **$port** | int | The URI port number |
+
+===== Examples =====
+
+
+
+====== setQueryString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setQueryString]] |
+
+Sets the query to a supplied string in format:  		foo=bar&amp;x=y
+===== Syntax =====
+void setQueryString	( **$query** )
+| **$query** | string | The query string |
+
+===== Examples =====
+
+
+
+====== setScheme ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setScheme]] |
+
+Set URI scheme (protocol)  		ie. http, https, ftp, etc...
+===== Syntax =====
+void setScheme	( **$scheme** )
+| **$scheme** | string | The URI scheme |
+
+===== Examples =====
+
+
+
+====== setUsername ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setUsername]] |
+
+Set URI username
+===== Syntax =====
+void setUsername	( **$user** )
+| **$user** | string | The URI username |
+
+===== Examples =====
+
+
+
+====== setVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->setVar]] |
+
+Adds a query variable and value, replacing the value if it  already exists and returning the old value.
+===== Syntax =====
+string setVar	( **$name**, **$value** )
+| **$name** | string | Name of the query variable to set |
+| **$value** | string | Value of the query variable |
+
+===== Examples =====
+
+
+
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Application/JURI.html|JURI->toString]] |
+
+Returns full uri string
+===== Syntax =====
+string toString	( **$parts** )
+| **$parts** | array | An array specifying the parts to render |
+
+===== Examples =====
+
+
+
