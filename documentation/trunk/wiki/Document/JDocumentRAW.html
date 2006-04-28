@@ -1,12 +1,13 @@
 ====== JDocumentRAW ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW]] | never | Work in progress |
 
 DocumentRAW class, provides an easy interface to parse and display raw output
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRAW-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentRAW-__construct|__construct]] | Class constructore |
-| [[JDocumentRAW-display|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentRAW-display|display]] | Outputs the document to the browser. |
+| [[JDocumentRAW-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRAW-__construct|__construct]] | Class constructore |
+| [[JDocumentRAW-display|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRAW-display|display]] | Outputs the document to the browser. |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@ DocumentRAW class, provides an easy interface to parse and display raw output
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW->__construct]] | never | Work in progress |
 Class constructore
 ===== Syntax =====
-JDocumentRAW __construct	( **$attributes**, **$type** )| **$type** | string | (either html or tex) |
+JDocumentRAW __construct	( **$attributes**, **$type** )
+
+| **$type** | string | (either html or tex) |
 | **$attributes** | array | Associative array of attributes |
 
 ===== Examples =====
@@ -32,10 +35,12 @@ JDocumentRAW __construct	( **$attributes**, **$type** )| **$type** | string | (e
 ~~DISCUSSION~~
 ====== display ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRAW.html|JDocumentRAW->display]] | never | Work in progress |
 Outputs the document to the browser.
 ===== Syntax =====
-void display	( **$template**, **$file**, **$compress**, **$params** )| **$template** | string | The name of the template |
+void display	( **$template**, **$file**, **$compress**, **$params** )
+
+| **$template** | string | The name of the template |
 | **$file** | boolean | If true, compress the output using Zlib compression |
 | **$compress** | boolean | If true, will display information about the placeholders |
 | **$params** | array | Associative array of attributes |
@@ -49,3 +54,4 @@ void display	( **$template**, **$file**, **$compress**, **$params** )| **$templa
 ----
 
 ~~DISCUSSION~~
+

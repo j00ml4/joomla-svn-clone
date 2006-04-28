@@ -1,12 +1,13 @@
 ====== JInstallerLanguage ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage]] | never | Work in progress |
 
 Language installer
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstallerLanguage-install|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerLanguage-install|install]] | Custom install method |
-| [[JInstallerLanguage-uninstall|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method |
+| [[JInstallerLanguage-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerLanguage-install|install]] | Custom install method |
+| [[JInstallerLanguage-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@ Language installer
 
 ====== install ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->install]] | never | Work in progress |
 Custom install method
 ===== Syntax =====
-boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from which to install the language |
+boolean install	( **$p_fromdir** )
+
+| **$p_fromdir** | string | Directory from which to install the language |
 
 ===== Examples =====
 <code php|Example>
@@ -31,10 +34,12 @@ boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from whi
 ~~DISCUSSION~~
 ====== uninstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->uninstall]] | never | Work in progress |
 Custom uninstall method
 ===== Syntax =====
-boolean uninstall	( **$id**, **$client** )| **$id** | int | The id of the language to uninstall [ISO Tag] |
+boolean uninstall	( **$id**, **$client** )
+
+| **$id** | int | The id of the language to uninstall [ISO Tag] |
 | **$client** | int | The client id |
 
 ===== Examples =====
@@ -46,3 +51,4 @@ boolean uninstall	( **$id**, **$client** )| **$id** | int | The id of the langua
 ----
 
 ~~DISCUSSION~~
+

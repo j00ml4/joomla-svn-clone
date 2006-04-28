@@ -1,30 +1,31 @@
 ====== JString ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString]] | never | Work in progress |
 
 String handling class for utf-8 data  Wraps the phputf8 library  All functions assume the validity of utf-8 strings. If in doubt use TODO
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JString-ltrim|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-ltrim|ltrim]] | UTF-8 aware replacement for ltrim()<p>Strip whitespace (or other characters) from the beginning of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise ltrim will  work normally on a UTF-8 string</p> |
-| [[JString-rtrim|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-rtrim|rtrim]] | UTF-8 aware replacement for rtrim()<p>Strip whitespace (or other characters) from the end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise rtrim will  work normally on a UTF-8 string</p> |
-| [[JString-strcasecmp|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strcasecmp|strcasecmp]] | UTF-8 aware alternative to strcasecmp  A case insensivite string comparison |
-| [[JString-strcspn|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strcspn|strcspn]] | UTF-8 aware alternative to strcspn  Find length of initial segment not matching mask |
-| [[JString-stristr|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-stristr|stristr]] | UTF-8 aware alternative to stristr  Returns all of haystack from the first occurrence of needle to the end.<p>needle and haystack are examined in a case-insensitive manner  Find first occurrence of a string using case insensitive comparison</p> |
-| [[JString-strlen|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strlen|strlen]] | UTF-8 aware alternative to strlen  Returns the number of characters in the string (NOT THE NUMBER OF BYTES), |
-| [[JString-strpos|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strpos|strpos]] | UTF-8 aware alternative to strpos  Find position of first occurrence of a string |
-| [[JString-strrev|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strrev|strrev]] | UTF-8 aware alternative to strrev  Reverse a string |
-| [[JString-strrpos|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strrpos|strrpos]] | UTF-8 aware alternative to strrpos  Finds position of last occurrence of a string |
-| [[JString-strspn|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strspn|strspn]] | UTF-8 aware alternative to strspn  Find length of initial segment matching mask |
-| [[JString-strtolower|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strtolower|strtolower]] | UTF-8 aware alternative to strtlower<p>Make a string lowercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p> |
-| [[JString-strtoupper|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-strtoupper|strtoupper]] | UTF-8 aware alternative to strtoupper<p>Make a string uppercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p> |
-| [[JString-str_ireplace|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-str_ireplace|str_ireplace]] | UTF-8 aware alternative to str_ireplace  Case-insensitive version of str_replace |
-| [[JString-str_split|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-str_split|str_split]] | UTF-8 aware alternative to str_split  Convert a string to an array |
-| [[JString-substr|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-substr|substr]] | UTF-8 aware alternative to substr  Return part of a string given character offset (and optionally length) |
-| [[JString-substr_replace|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-substr_replace|substr_replace]] | UTF-8 aware substr_replace  Replace text within a portion of a string |
-| [[JString-transcode|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-transcode|transcode]] | Transcode a string. |
-| [[JString-trim|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-trim|trim]] | UTF-8 aware replacement for trim()<p>Strip whitespace (or other characters) from the beginning and end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise trim will  work normally on a UTF-8 string</p> |
-| [[JString-ucfirst|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-ucfirst|ucfirst]] | UTF-8 aware alternative to ucfirst  Make a string's first character uppercase |
-| [[JString-ucwords|{{http://api.joomla.org/media/images/Method.png }}}]] [[JString-ucwords|ucwords]] | UTF-8 aware alternative to ucwords  Uppercase the first character of each word in a string |
+| [[JString-ltrim|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-ltrim|ltrim]] | UTF-8 aware replacement for ltrim()<p>Strip whitespace (or other characters) from the beginning of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise ltrim will  work normally on a UTF-8 string</p> |
+| [[JString-rtrim|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-rtrim|rtrim]] | UTF-8 aware replacement for rtrim()<p>Strip whitespace (or other characters) from the end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise rtrim will  work normally on a UTF-8 string</p> |
+| [[JString-strcasecmp|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strcasecmp|strcasecmp]] | UTF-8 aware alternative to strcasecmp  A case insensivite string comparison |
+| [[JString-strcspn|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strcspn|strcspn]] | UTF-8 aware alternative to strcspn  Find length of initial segment not matching mask |
+| [[JString-stristr|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-stristr|stristr]] | UTF-8 aware alternative to stristr  Returns all of haystack from the first occurrence of needle to the end.<p>needle and haystack are examined in a case-insensitive manner  Find first occurrence of a string using case insensitive comparison</p> |
+| [[JString-strlen|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strlen|strlen]] | UTF-8 aware alternative to strlen  Returns the number of characters in the string (NOT THE NUMBER OF BYTES), |
+| [[JString-strpos|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strpos|strpos]] | UTF-8 aware alternative to strpos  Find position of first occurrence of a string |
+| [[JString-strrev|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strrev|strrev]] | UTF-8 aware alternative to strrev  Reverse a string |
+| [[JString-strrpos|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strrpos|strrpos]] | UTF-8 aware alternative to strrpos  Finds position of last occurrence of a string |
+| [[JString-strspn|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strspn|strspn]] | UTF-8 aware alternative to strspn  Find length of initial segment matching mask |
+| [[JString-strtolower|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strtolower|strtolower]] | UTF-8 aware alternative to strtlower<p>Make a string lowercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p> |
+| [[JString-strtoupper|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-strtoupper|strtoupper]] | UTF-8 aware alternative to strtoupper<p>Make a string uppercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p> |
+| [[JString-str_ireplace|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-str_ireplace|str_ireplace]] | UTF-8 aware alternative to str_ireplace  Case-insensitive version of str_replace |
+| [[JString-str_split|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-str_split|str_split]] | UTF-8 aware alternative to str_split  Convert a string to an array |
+| [[JString-substr|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-substr|substr]] | UTF-8 aware alternative to substr  Return part of a string given character offset (and optionally length) |
+| [[JString-substr_replace|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-substr_replace|substr_replace]] | UTF-8 aware substr_replace  Replace text within a portion of a string |
+| [[JString-transcode|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-transcode|transcode]] | Transcode a string. |
+| [[JString-trim|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-trim|trim]] | UTF-8 aware replacement for trim()<p>Strip whitespace (or other characters) from the beginning and end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise trim will  work normally on a UTF-8 string</p> |
+| [[JString-ucfirst|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-ucfirst|ucfirst]] | UTF-8 aware alternative to ucfirst  Make a string's first character uppercase |
+| [[JString-ucwords|{{http://api.joomla.org/media/images/Method.png }}]] [[JString-ucwords|ucwords]] | UTF-8 aware alternative to ucwords  Uppercase the first character of each word in a string |
+
 ----
 
 ~~DISCUSSION~~
@@ -33,10 +34,12 @@ String handling class for utf-8 data  Wraps the phputf8 library  All functions a
 
 ====== ltrim ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->ltrim]] | never | Work in progress |
 UTF-8 aware replacement for ltrim()<p>Strip whitespace (or other characters) from the beginning of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise ltrim will  work normally on a UTF-8 string</p>
 ===== Syntax =====
-string ltrim	( **$str**, **$charlist** )| **$str** | string | the string to be trimmed |
+string ltrim	( **$str**, **$charlist** )
+
+| **$str** | string | the string to be trimmed |
 | **$charlist** | string | the optional charlist of additional characters to trim |
 
 ===== Examples =====
@@ -50,10 +53,12 @@ string ltrim	( **$str**, **$charlist** )| **$str** | string | the string to be t
 ~~DISCUSSION~~
 ====== rtrim ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->rtrim]] | never | Work in progress |
 UTF-8 aware replacement for rtrim()<p>Strip whitespace (or other characters) from the end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise rtrim will  work normally on a UTF-8 string</p>
 ===== Syntax =====
-string rtrim	( **$str**, **$charlist** )| **$str** | string | the string to be trimmed |
+string rtrim	( **$str**, **$charlist** )
+
+| **$str** | string | the string to be trimmed |
 | **$charlist** | string | the optional charlist of additional characters to trim |
 
 ===== Examples =====
@@ -67,10 +72,12 @@ string rtrim	( **$str**, **$charlist** )| **$str** | string | the string to be t
 ~~DISCUSSION~~
 ====== strcasecmp ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strcasecmp]] | never | Work in progress |
 UTF-8 aware alternative to strcasecmp  A case insensivite string comparison
 ===== Syntax =====
-int strcasecmp	( **$str1**, **$str2** )| **$str1** | string | string 1 to compare |
+int strcasecmp	( **$str1**, **$str2** )
+
+| **$str1** | string | string 1 to compare |
 | **$str2** | string | string 2 to compare |
 
 ===== Examples =====
@@ -84,10 +91,12 @@ int strcasecmp	( **$str1**, **$str2** )| **$str1** | string | string 1 to compar
 ~~DISCUSSION~~
 ====== strcspn ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strcspn]] | never | Work in progress |
 UTF-8 aware alternative to strcspn  Find length of initial segment not matching mask
 ===== Syntax =====
-int strcspn	( **$str**, **$mask**, **$start**, **$length** )| **$str** | string |  |
+int strcspn	( **$str**, **$mask**, **$start**, **$length** )
+
+| **$str** | string |  |
 | **$mask** | string | the mask |
 | **$start** | int | Optional starting character position (in characters) |
 | **$length** | int | Optional length |
@@ -103,10 +112,12 @@ int strcspn	( **$str**, **$mask**, **$start**, **$length** )| **$str** | string 
 ~~DISCUSSION~~
 ====== stristr ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->stristr]] | never | Work in progress |
 UTF-8 aware alternative to stristr  Returns all of haystack from the first occurrence of needle to the end.<p>needle and haystack are examined in a case-insensitive manner  Find first occurrence of a string using case insensitive comparison</p>
 ===== Syntax =====
-string stristr	( **$str**, **$search** )| **$str** | string | the haystack |
+string stristr	( **$str**, **$search** )
+
+| **$str** | string | the haystack |
 | **$search** | string | the needle |
 
 ===== Examples =====
@@ -120,10 +131,12 @@ string stristr	( **$str**, **$search** )| **$str** | string | the haystack |
 ~~DISCUSSION~~
 ====== strlen ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strlen]] | never | Work in progress |
 UTF-8 aware alternative to strlen  Returns the number of characters in the string (NOT THE NUMBER OF BYTES),
 ===== Syntax =====
-int strlen	( **$str** )| **$str** | string | UTF-8 string |
+int strlen	( **$str** )
+
+| **$str** | string | UTF-8 string |
 
 ===== Examples =====
 <code php|Example>
@@ -136,10 +149,12 @@ int strlen	( **$str** )| **$str** | string | UTF-8 string |
 ~~DISCUSSION~~
 ====== strpos ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strpos]] | never | Work in progress |
 UTF-8 aware alternative to strpos  Find position of first occurrence of a string
 ===== Syntax =====
-mixed strpos	( **$str**, **$search**, **$offset** )| **$str** | $str | - string String being examined |
+mixed strpos	( **$str**, **$search**, **$offset** )
+
+| **$str** | $str | - string String being examined |
 | **$search** | $search | - string String being searced for |
 | **$offset** | $offset | - int Optional, specifies the position from which the search should be performed |
 
@@ -154,10 +169,12 @@ mixed strpos	( **$str**, **$search**, **$offset** )| **$str** | $str | - string 
 ~~DISCUSSION~~
 ====== strrev ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strrev]] | never | Work in progress |
 UTF-8 aware alternative to strrev  Reverse a string
 ===== Syntax =====
-string strrev	( **$str** )| **$str** | string | String to be reversed |
+string strrev	( **$str** )
+
+| **$str** | string | String to be reversed |
 
 ===== Examples =====
 <code php|Example>
@@ -170,10 +187,12 @@ string strrev	( **$str** )| **$str** | string | String to be reversed |
 ~~DISCUSSION~~
 ====== strrpos ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strrpos]] | never | Work in progress |
 UTF-8 aware alternative to strrpos  Finds position of last occurrence of a string
 ===== Syntax =====
-mixed strrpos	( **$str**, **$search** )| **$str** | $str | - string String being examined |
+mixed strrpos	( **$str**, **$search** )
+
+| **$str** | $str | - string String being examined |
 | **$search** | $search | - string String being searced for |
 
 ===== Examples =====
@@ -187,10 +206,12 @@ mixed strrpos	( **$str**, **$search** )| **$str** | $str | - string String being
 ~~DISCUSSION~~
 ====== strspn ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strspn]] | never | Work in progress |
 UTF-8 aware alternative to strspn  Find length of initial segment matching mask
 ===== Syntax =====
-void strspn	( **$str**, **$mask**, **$start**, **$length** )| **$str** | string | the haystack |
+void strspn	( **$str**, **$mask**, **$start**, **$length** )
+
+| **$str** | string | the haystack |
 | **$mask** | string | the mask |
 | **$start** | int | start optional |
 | **$length** | int | length optional |
@@ -206,10 +227,12 @@ void strspn	( **$str**, **$mask**, **$start**, **$length** )| **$str** | string 
 ~~DISCUSSION~~
 ====== strtolower ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strtolower]] | never | Work in progress |
 UTF-8 aware alternative to strtlower<p>Make a string lowercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p>
 ===== Syntax =====
-mixed strtolower	( **$str** )| **$str** | string |  |
+mixed strtolower	( **$str** )
+
+| **$str** | string |  |
 
 ===== Examples =====
 <code php|Example>
@@ -222,10 +245,12 @@ mixed strtolower	( **$str** )| **$str** | string |  |
 ~~DISCUSSION~~
 ====== strtoupper ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->strtoupper]] | never | Work in progress |
 UTF-8 aware alternative to strtoupper<p>Make a string uppercase  Note: The concept of a characters &quot;case&quot; only exists is some alphabets  such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See Unicode Standard  Annex #21: Case Mappings</p>
 ===== Syntax =====
-mixed strtoupper	( **$str** )| **$str** | string |  |
+mixed strtoupper	( **$str** )
+
+| **$str** | string |  |
 
 ===== Examples =====
 <code php|Example>
@@ -238,10 +263,12 @@ mixed strtoupper	( **$str** )| **$str** | string |  |
 ~~DISCUSSION~~
 ====== str_ireplace ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->str_ireplace]] | never | Work in progress |
 UTF-8 aware alternative to str_ireplace  Case-insensitive version of str_replace
 ===== Syntax =====
-void str_ireplace	( **$search**, **$replace**, **$str**, **$count** )| **$search** | string | string to search |
+void str_ireplace	( **$search**, **$replace**, **$str**, **$count** )
+
+| **$search** | string | string to search |
 | **$replace** | string | existing string to replace |
 | **$str** | string | new string to replace with |
 | **$count** | int | optional count value to be passed by referene |
@@ -257,10 +284,12 @@ void str_ireplace	( **$search**, **$replace**, **$str**, **$count** )| **$search
 ~~DISCUSSION~~
 ====== str_split ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->str_split]] | never | Work in progress |
 UTF-8 aware alternative to str_split  Convert a string to an array
 ===== Syntax =====
-array str_split	( **$str**, **$split_len** )| **$str** | string | UTF-8 encoded |
+array str_split	( **$str**, **$split_len** )
+
+| **$str** | string | UTF-8 encoded |
 | **$split_len** | int | number to characters to split string by |
 
 ===== Examples =====
@@ -274,10 +303,12 @@ array str_split	( **$str**, **$split_len** )| **$str** | string | UTF-8 encoded 
 ~~DISCUSSION~~
 ====== substr ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->substr]] | never | Work in progress |
 UTF-8 aware alternative to substr  Return part of a string given character offset (and optionally length)
 ===== Syntax =====
-mixed substr	( **$str**, **$offset**, **$length** )| **$str** | string |  |
+mixed substr	( **$str**, **$offset**, **$length** )
+
+| **$str** | string |  |
 | **$offset** | integer | number of UTF-8 characters offset (from left) |
 | **$length** | integer | (optional) length in UTF-8 characters from offset |
 
@@ -292,10 +323,12 @@ mixed substr	( **$str**, **$offset**, **$length** )| **$str** | string |  |
 ~~DISCUSSION~~
 ====== substr_replace ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->substr_replace]] | never | Work in progress |
 UTF-8 aware substr_replace  Replace text within a portion of a string
 ===== Syntax =====
-void substr_replace	( **$str**, **$repl**, **$start**, **$length** )| **$str** | string | the haystack |
+void substr_replace	( **$str**, **$repl**, **$start**, **$length** )
+
+| **$str** | string | the haystack |
 | **$repl** | string | the replacement string |
 | **$start** | int | start |
 | **$length** | int | length (optional) |
@@ -311,10 +344,12 @@ void substr_replace	( **$str**, **$repl**, **$start**, **$length** )| **$str** |
 ~~DISCUSSION~~
 ====== transcode ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->transcode]] | never | Work in progress |
 Transcode a string.
 ===== Syntax =====
-string transcode	( **$source**, **$from_encoding**, **$to_encoding** )| **$source** | string | The string to transcode. |
+string transcode	( **$source**, **$from_encoding**, **$to_encoding** )
+
+| **$source** | string | The string to transcode. |
 | **$from_encoding** | string | The source encoding. |
 | **$to_encoding** | string | The target encoding. |
 
@@ -329,10 +364,12 @@ string transcode	( **$source**, **$from_encoding**, **$to_encoding** )| **$sourc
 ~~DISCUSSION~~
 ====== trim ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->trim]] | never | Work in progress |
 UTF-8 aware replacement for trim()<p>Strip whitespace (or other characters) from the beginning and end of a string  Note: you only need to use this if you are supplying the charlist  optional arg and it contains UTF-8 characters. Otherwise trim will  work normally on a UTF-8 string</p>
 ===== Syntax =====
-string trim	( **$str**, **$charlist** )| **$str** | string | the string to be trimmed |
+string trim	( **$str**, **$charlist** )
+
+| **$str** | string | the string to be trimmed |
 | **$charlist** | string | the optional charlist of additional characters to trim |
 
 ===== Examples =====
@@ -346,10 +383,12 @@ string trim	( **$str**, **$charlist** )| **$str** | string | the string to be tr
 ~~DISCUSSION~~
 ====== ucfirst ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->ucfirst]] | never | Work in progress |
 UTF-8 aware alternative to ucfirst  Make a string's first character uppercase
 ===== Syntax =====
-string ucfirst	( **$str** )| **$str** | string |  |
+string ucfirst	( **$str** )
+
+| **$str** | string |  |
 
 ===== Examples =====
 <code php|Example>
@@ -362,10 +401,12 @@ string ucfirst	( **$str** )| **$str** | string |  |
 ~~DISCUSSION~~
 ====== ucwords ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla.Framework/I18N/JString.html|JString->ucwords]] | never | Work in progress |
 UTF-8 aware alternative to ucwords  Uppercase the first character of each word in a string
 ===== Syntax =====
-string ucwords	( **$str** )| **$str** | string |  |
+string ucwords	( **$str** )
+
+| **$str** | string |  |
 
 ===== Examples =====
 <code php|Example>
@@ -376,3 +417,4 @@ string ucwords	( **$str** )| **$str** | string |  |
 ----
 
 ~~DISCUSSION~~
+

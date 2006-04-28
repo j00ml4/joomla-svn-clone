@@ -1,12 +1,13 @@
 ====== patTemplate_Renderer ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer]] | never | Work in progress |
 
 Base class for JDocument Renderers
 ===== Methods =====
 ^ Method ^ Description ^
-| [[patTemplate_Renderer-render|{{http://api.joomla.org/media/images/Method.png }}}]] [[patTemplate_Renderer-render|render]] | Renders a script and returns the results as a string |
-| [[patTemplate_Renderer-setTemplateReference|{{http://api.joomla.org/media/images/Method.png }}}]] [[patTemplate_Renderer-setTemplateReference|setTemplateReference]] | set a reference to the JDocument object that instantiated the function |
+| [[patTemplate_Renderer-render|{{http://api.joomla.org/media/images/Method.png }}]] [[patTemplate_Renderer-render|render]] | Renders a script and returns the results as a string |
+| [[patTemplate_Renderer-setTemplateReference|{{http://api.joomla.org/media/images/Method.png }}]] [[patTemplate_Renderer-setTemplateReference|setTemplateReference]] | set a reference to the JDocument object that instantiated the function |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@ Base class for JDocument Renderers
 
 ====== render ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer|patTemplate_Renderer]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer|patTemplate_Renderer]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer->render]] | never | Work in progress |
 Renders a script and returns the results as a string
 ===== Syntax =====
-string render	( **$name**, **$params**, **$array** )| **$name** | string | The name of the element to render |
+string render	( **$name**, **$params**, **$array** )
+
+| **$name** | string | The name of the element to render |
 | **$array** | array | Array of values |
 
 ===== Examples =====
@@ -32,10 +35,12 @@ string render	( **$name**, **$params**, **$array** )| **$name** | string | The n
 ~~DISCUSSION~~
 ====== setTemplateReference ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer|patTemplate_Renderer]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer|patTemplate_Renderer]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer.html|patTemplate_Renderer->setTemplateReference]] | never | Work in progress |
 set a reference to the JDocument object that instantiated the function
 ===== Syntax =====
-void setTemplateReference	( **&$tmpl** )| **&$tmpl** | <a href="../../Joomla.Framework/Document/JDocument.html">object JDocument</a> | object |
+void setTemplateReference	( **&$tmpl** )
+
+| **&$tmpl** | <a href="../../Joomla.Framework/Document/JDocument.html">object JDocument</a> | object |
 
 ===== Examples =====
 <code php|Example>
@@ -46,3 +51,4 @@ void setTemplateReference	( **&$tmpl** )| **&$tmpl** | <a href="../../Joomla.Fra
 ----
 
 ~~DISCUSSION~~
+

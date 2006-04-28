@@ -1,16 +1,17 @@
 ====== JProfiler ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler]] | never | Work in progress |
 
 Page generation time
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JProfiler-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-__construct|__construct]] | Constructor |
-| [[JProfiler-getInstance|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-getInstance|getInstance]] | Returns a reference to the global Profiler object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JProfiler::getInstance([$prefix]);</pre></p> |
-| [[JProfiler-getmemory|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-getmemory|getmemory]] |  |
-| [[JProfiler-getmicrotime|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-getmicrotime|getmicrotime]] |  |
-| [[JProfiler-mark|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-mark|mark]] | Output a time mark |
-| [[JProfiler-report|{{http://api.joomla.org/media/images/Method.png }}}]] [[JProfiler-report|report]] | Reports on the buffered marks |
+| [[JProfiler-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-__construct|__construct]] | Constructor |
+| [[JProfiler-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getInstance|getInstance]] | Returns a reference to the global Profiler object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JProfiler::getInstance([$prefix]);</pre></p> |
+| [[JProfiler-getmemory|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getmemory|getmemory]] |  |
+| [[JProfiler-getmicrotime|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getmicrotime|getmicrotime]] |  |
+| [[JProfiler-mark|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-mark|mark]] | Output a time mark |
+| [[JProfiler-report|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-report|report]] | Reports on the buffered marks |
+
 ----
 
 ~~DISCUSSION~~
@@ -19,10 +20,12 @@ Page generation time
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->__construct]] | never | Work in progress |
 Constructor
 ===== Syntax =====
-JProfiler __construct	( **$prefix** )| **$prefix** | string | Prefix for mark messages |
+JProfiler __construct	( **$prefix** )
+
+| **$prefix** | string | Prefix for mark messages |
 
 ===== Examples =====
 <code php|Example>
@@ -35,10 +38,12 @@ JProfiler __construct	( **$prefix** )| **$prefix** | string | Prefix for mark me
 ~~DISCUSSION~~
 ====== getInstance ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->getInstance]] | never | Work in progress |
 Returns a reference to the global Profiler object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JProfiler::getInstance([$prefix]);</pre></p>
 ===== Syntax =====
 <a href="../../Joomla.Framework/Utilities/JProfiler.html">JProfiler</a> &getInstance	( **$prefix** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -50,10 +55,12 @@ Returns a reference to the global Profiler object, only creating it  if it doesn
 ~~DISCUSSION~~
 ====== getmemory ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->getmemory]] | never | Work in progress |
 
 ===== Syntax =====
 int getmemory ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -65,10 +72,12 @@ int getmemory ()
 ~~DISCUSSION~~
 ====== getmicrotime ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->getmicrotime]] | never | Work in progress |
 
 ===== Syntax =====
 float getmicrotime ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -80,10 +89,12 @@ float getmicrotime ()
 ~~DISCUSSION~~
 ====== mark ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->mark]] | never | Work in progress |
 Output a time mark
 ===== Syntax =====
 void mark	( **$label** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -95,10 +106,12 @@ void mark	( **$label** )
 ~~DISCUSSION~~
 ====== report ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JProfiler|{{http://api.joomla.org/media/images/Class.png }}]][[JProfiler|JProfiler]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JProfiler.html|JProfiler->report]] | never | Work in progress |
 Reports on the buffered marks
 ===== Syntax =====
-void report	( **$memory**, **$database**, **$glue** )| **$memory** | string | Glue string |
+void report	( **$memory**, **$database**, **$glue** )
+
+| **$memory** | string | Glue string |
 
 ===== Examples =====
 <code php|Example>
@@ -109,3 +122,4 @@ void report	( **$memory**, **$database**, **$glue** )| **$memory** | string | Gl
 ----
 
 ~~DISCUSSION~~
+

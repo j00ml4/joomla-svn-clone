@@ -1,12 +1,13 @@
 ====== JRegistryFormatPHP ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP]] | never | Work in progress |
 
 PHP class format handler for JRegistry
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRegistryFormatPHP-objectToString|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a php class string.<p><ul><li>NOTE: Only one depth level is supported.</li></ul></p> |
-| [[JRegistryFormatPHP-stringToObject|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method |
+| [[JRegistryFormatPHP-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a php class string.<p><ul><li>NOTE: Only one depth level is supported.</li></ul></p> |
+| [[JRegistryFormatPHP-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@ PHP class format handler for JRegistry
 
 ====== objectToString ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatPHP|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatPHP|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->objectToString]] | never | Work in progress |
 Converts an object into a php class string.<p><ul><li>NOTE: Only one depth level is supported.</li></ul></p>
 ===== Syntax =====
-string objectToString	( **&$object**, **$params**, **$param** )| **$object** | object | Data Source Object |
+string objectToString	( **&$object**, **$params**, **$param** )
+
+| **$object** | object | Data Source Object |
 | **$param** | array | Parameters used by the formatter |
 
 ===== Examples =====
@@ -32,10 +35,12 @@ string objectToString	( **&$object**, **$params**, **$param** )| **$object** | o
 ~~DISCUSSION~~
 ====== stringToObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatPHP|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatPHP|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->stringToObject]] | never | Work in progress |
 Placeholder method
 ===== Syntax =====
 boolean stringToObject ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -45,3 +50,4 @@ boolean stringToObject ()
 ----
 
 ~~DISCUSSION~~
+

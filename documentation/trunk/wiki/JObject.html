@@ -1,16 +1,17 @@
 ====== JObject ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject]] | never | Work in progress |
 
 Object class, allowing __construct in PHP4.
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JObject-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
-| [[JObject-JObject|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p> |
-| [[JObject-get|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-get|get]] |  |
-| [[JObject-getPublicProperties|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties |
-| [[JObject-set|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-set|set]] |  |
-| [[JObject-toString|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObject-toString|toString]] | Object-to-string conversion.<p>Each class can override it as necessary.</p> |
+| [[JObject-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| [[JObject-JObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p> |
+| [[JObject-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-get|get]] |  |
+| [[JObject-getPublicProperties|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties |
+| [[JObject-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-set|set]] |  |
+| [[JObject-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JObject-toString|toString]] | Object-to-string conversion.<p>Each class can override it as necessary.</p> |
+
 ----
 
 ~~DISCUSSION~~
@@ -19,10 +20,12 @@ Object class, allowing __construct in PHP4.
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->__construct]] | never | Work in progress |
 Class constructor, overridden in descendant classes.
 ===== Syntax =====
 JObject __construct ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -34,10 +37,12 @@ JObject __construct ()
 ~~DISCUSSION~~
 ====== JObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->JObject]] | never | Work in progress |
 A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p>
 ===== Syntax =====
 Object JObject ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -49,10 +54,12 @@ Object JObject ()
 ~~DISCUSSION~~
 ====== get ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->get]] | never | Work in progress |
 
 ===== Syntax =====
-mixed get	( **$property**, **$default** )| **$property** | string | The name of the property |
+mixed get	( **$property**, **$default** )
+
+| **$property** | string | The name of the property |
 | **$default** | mixed | The default value |
 
 ===== Examples =====
@@ -66,10 +73,12 @@ mixed get	( **$property**, **$default** )| **$property** | string | The name of 
 ~~DISCUSSION~~
 ====== getPublicProperties ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->getPublicProperties]] | never | Work in progress |
 Returns an array of public properties
 ===== Syntax =====
 array getPublicProperties ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -81,10 +90,12 @@ array getPublicProperties ()
 ~~DISCUSSION~~
 ====== set ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->set]] | never | Work in progress |
 
 ===== Syntax =====
-void set	( **$property**, **$value** )| **$property** | string | The name of the property |
+void set	( **$property**, **$value** )
+
+| **$property** | string | The name of the property |
 | **$value** | mixed | The value of the property to set |
 
 ===== Examples =====
@@ -98,10 +109,12 @@ void set	( **$property**, **$value** )| **$property** | string | The name of the
 ~~DISCUSSION~~
 ====== toString ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla.Framework//JObject.html|JObject->toString]] | never | Work in progress |
 Object-to-string conversion.<p>Each class can override it as necessary.</p>
 ===== Syntax =====
 string toString ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -111,3 +124,4 @@ string toString ()
 ----
 
 ~~DISCUSSION~~
+
