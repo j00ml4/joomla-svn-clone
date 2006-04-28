@@ -1,16 +1,17 @@
 ====== JApplicationHelper ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper]] | never | Work in progress |
 
 Application helper functions
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JApplicationHelper-getClientInfo|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-getClientInfo|getClientInfo]] | Gets information on a specific client id.  This method will be useful in  future versions when we start mapping applications in the database. |
-| [[JApplicationHelper-getItemCount|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-getItemCount|getItemCount]] | Count the items in the menu for a certain type |
-| [[JApplicationHelper-getItemid|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-getItemid|getItemid]] | Get the ItemId for a content item |
-| [[JApplicationHelper-getPath|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-getPath|getPath]] | Get a path |
-| [[JApplicationHelper-parseXMLInstallFile|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-parseXMLInstallFile|parseXMLInstallFile]] |  |
-| [[JApplicationHelper-parseXMLLangMetaFile|{{http://api.joomla.org/media/images/Method.png }}}]] [[JApplicationHelper-parseXMLLangMetaFile|parseXMLLangMetaFile]] |  |
+| [[JApplicationHelper-getClientInfo|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getClientInfo|getClientInfo]] | Gets information on a specific client id.  This method will be useful in  future versions when we start mapping applications in the database. |
+| [[JApplicationHelper-getItemCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getItemCount|getItemCount]] | Count the items in the menu for a certain type |
+| [[JApplicationHelper-getItemid|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getItemid|getItemid]] | Get the ItemId for a content item |
+| [[JApplicationHelper-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getPath|getPath]] | Get a path |
+| [[JApplicationHelper-parseXMLInstallFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-parseXMLInstallFile|parseXMLInstallFile]] |  |
+| [[JApplicationHelper-parseXMLLangMetaFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-parseXMLLangMetaFile|parseXMLLangMetaFile]] |  |
+
 ----
 
 ~~DISCUSSION~~
@@ -19,10 +20,12 @@ Application helper functions
 
 ====== getClientInfo ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->getClientInfo]] | never | Work in progress |
 Gets information on a specific client id.  This method will be useful in  future versions when we start mapping applications in the database.
 ===== Syntax =====
-mixed getClientInfo	( **$id**, **$byName** )| **$id** | int | A client identifier |
+mixed getClientInfo	( **$id**, **$byName** )
+
+| **$id** | int | A client identifier |
 
 ===== Examples =====
 <code php|Example>
@@ -35,10 +38,12 @@ mixed getClientInfo	( **$id**, **$byName** )| **$id** | int | A client identifie
 ~~DISCUSSION~~
 ====== getItemCount ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->getItemCount]] | never | Work in progress |
 Count the items in the menu for a certain type
 ===== Syntax =====
 integer getItemCount	( **$type** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -50,10 +55,12 @@ integer getItemCount	( **$type** )
 ~~DISCUSSION~~
 ====== getItemid ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->getItemid]] | never | Work in progress |
 Get the ItemId for a content item
 ===== Syntax =====
 integer getItemid	( **$id** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -65,10 +72,12 @@ integer getItemid	( **$id** )
 ~~DISCUSSION~~
 ====== getPath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->getPath]] | never | Work in progress |
 Get a path
 ===== Syntax =====
-string getPath	( **$varname**, **$user_option** )| **$varname** | string |  |
+string getPath	( **$varname**, **$user_option** )
+
+| **$varname** | string |  |
 | **$user_option** | string |  |
 
 ===== Examples =====
@@ -82,10 +91,12 @@ string getPath	( **$varname**, **$user_option** )| **$varname** | string |  |
 ~~DISCUSSION~~
 ====== parseXMLInstallFile ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->parseXMLInstallFile]] | never | Work in progress |
 
 ===== Syntax =====
 void parseXMLInstallFile	( **$path** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -97,10 +108,12 @@ void parseXMLInstallFile	( **$path** )
 ~~DISCUSSION~~
 ====== parseXMLLangMetaFile ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JApplicationHelper.html|JApplicationHelper->parseXMLLangMetaFile]] | never | Work in progress |
 
 ===== Syntax =====
 void parseXMLLangMetaFile	( **$path** )
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -110,3 +123,4 @@ void parseXMLLangMetaFile	( **$path** )
 ----
 
 ~~DISCUSSION~~
+

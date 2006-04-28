@@ -1,12 +1,13 @@
 ====== JMessage ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage]] | never | Work in progress |
 
 Message Class<p>Provides a common interface to send an internal message to  a JUser via the Joomla! Framework</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JMessage-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JMessage-__construct|__construct]] | JMessage constructor |
-| [[JMessage-send|{{http://api.joomla.org/media/images/Method.png }}}]] [[JMessage-send|send]] | Method to send a private message |
+| [[JMessage-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JMessage-__construct|__construct]] | JMessage constructor |
+| [[JMessage-send|{{http://api.joomla.org/media/images/Method.png }}]] [[JMessage-send|send]] | Method to send a private message |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@ Message Class<p>Provides a common interface to send an internal message to  a JU
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->__construct]] | never | Work in progress |
 JMessage constructor
 ===== Syntax =====
-JMessage __construct	( **&$db** )| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
+JMessage __construct	( **&$db** )
+
+| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
 
 ===== Examples =====
 <code php|Example>
@@ -31,10 +34,12 @@ JMessage __construct	( **&$db** )| **&$db** | <a href="../../Joomla.Legacy/1.5/d
 ~~DISCUSSION~~
 ====== send ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Utilities]] | [[JMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JMessage|JMessage]] | [[http://api.joomla.org/Joomla.Framework/Utilities/JMessage.html|JMessage->send]] | never | Work in progress |
 Method to send a private message
 ===== Syntax =====
-boolean send	( **$fromId**, **$toId**, **$subject**, **$message** )| **$fromId** | int | Sender's userid |
+boolean send	( **$fromId**, **$toId**, **$subject**, **$message** )
+
+| **$fromId** | int | Sender's userid |
 | **$toId** | int | Recipient's userid |
 | **$subject** | string | The message subject |
 | **$message** | string | The message body |
@@ -48,3 +53,4 @@ boolean send	( **$fromId**, **$toId**, **$subject**, **$message** )| **$fromId**
 ----
 
 ~~DISCUSSION~~
+

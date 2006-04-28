@@ -1,14 +1,15 @@
 ====== JFactory ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory]] | never | Work in progress |
 
 Joomla Framework Factory class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JFactory-getACL|{{http://api.joomla.org/media/images/Method.png }}}]] [[JFactory-getACL|getACL]] | Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist. |
-| [[JFactory-getCache|{{http://api.joomla.org/media/images/Method.png }}}]] [[JFactory-getCache|getCache]] | Creates a cache object |
-| [[JFactory-getMailer|{{http://api.joomla.org/media/images/Method.png }}}]] [[JFactory-getMailer|getMailer]] | Returns a reference to the global Mailer object, only creating it  if it doesn't already exist |
-| [[JFactory-getXMLParser|{{http://api.joomla.org/media/images/Method.png }}}]] [[JFactory-getXMLParser|getXMLParser]] | Creates a XML document |
+| [[JFactory-getACL|{{http://api.joomla.org/media/images/Method.png }}]] [[JFactory-getACL|getACL]] | Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist. |
+| [[JFactory-getCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JFactory-getCache|getCache]] | Creates a cache object |
+| [[JFactory-getMailer|{{http://api.joomla.org/media/images/Method.png }}]] [[JFactory-getMailer|getMailer]] | Returns a reference to the global Mailer object, only creating it  if it doesn't already exist |
+| [[JFactory-getXMLParser|{{http://api.joomla.org/media/images/Method.png }}]] [[JFactory-getXMLParser|getXMLParser]] | Creates a XML document |
+
 ----
 
 ~~DISCUSSION~~
@@ -17,10 +18,12 @@ Joomla Framework Factory class
 
 ====== getACL ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->getACL]] | never | Work in progress |
 Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist.
 ===== Syntax =====
 object &getACL ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -32,10 +35,12 @@ object &getACL ()
 ~~DISCUSSION~~
 ====== getCache ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->getCache]] | never | Work in progress |
 Creates a cache object
 ===== Syntax =====
-object &getCache	( **$group**, **$handler** )| **$group** | string | The cache group name |
+object &getCache	( **$group**, **$handler** )
+
+| **$group** | string | The cache group name |
 | **$handler** | string | The cache class name |
 
 ===== Examples =====
@@ -49,10 +54,12 @@ object &getCache	( **$group**, **$handler** )| **$group** | string | The cache g
 ~~DISCUSSION~~
 ====== getMailer ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->getMailer]] | never | Work in progress |
 Returns a reference to the global Mailer object, only creating it  if it doesn't already exist
 ===== Syntax =====
 object &getMailer ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -64,10 +71,12 @@ object &getMailer ()
 ~~DISCUSSION~~
 ====== getXMLParser ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JFactory|{{http://api.joomla.org/media/images/Class.png }}]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla.Framework//JFactory.html|JFactory->getXMLParser]] | never | Work in progress |
 Creates a XML document
 ===== Syntax =====
-object &getXMLParser	( **$type**, **$options** )| **$type** | array: | boolean ['lite'] When using 'DOM' if true or not defined then domit_lite is used          string  ['rssUrl'] the rss url to parse when using &quot;RSS&quot;          string    ['cache_time'] with 'RSS' - feed cache time. If not defined defaults to 3600 sec |
+object &getXMLParser	( **$type**, **$options** )
+
+| **$type** | array: | boolean ['lite'] When using 'DOM' if true or not defined then domit_lite is used          string  ['rssUrl'] the rss url to parse when using &quot;RSS&quot;          string    ['cache_time'] with 'RSS' - feed cache time. If not defined defaults to 3600 sec |
 
 ===== Examples =====
 <code php|Example>
@@ -78,3 +87,4 @@ object &getXMLParser	( **$type**, **$options** )| **$type** | array: | boolean [
 ----
 
 ~~DISCUSSION~~
+

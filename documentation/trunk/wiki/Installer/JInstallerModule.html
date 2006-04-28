@@ -1,13 +1,14 @@
 ====== JInstallerModule ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule]] | never | Work in progress |
 
 Module installer
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstallerModule-install|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerModule-install|install]] | Custom install method |
-| [[JInstallerModule-uninstall|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerModule-uninstall|uninstall]] | Custom uninstall method |
-| [[JInstallerModule-_createTemplatePosition|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerModule-_createTemplatePosition|_createTemplatePosition]] | Creates a new template position if it doesn't exist already |
+| [[JInstallerModule-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerModule-install|install]] | Custom install method |
+| [[JInstallerModule-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerModule-uninstall|uninstall]] | Custom uninstall method |
+| [[JInstallerModule-_createTemplatePosition|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerModule-_createTemplatePosition|_createTemplatePosition]] | Creates a new template position if it doesn't exist already |
+
 ----
 
 ~~DISCUSSION~~
@@ -16,10 +17,12 @@ Module installer
 
 ====== install ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->install]] | never | Work in progress |
 Custom install method
 ===== Syntax =====
-boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from which to install the module |
+boolean install	( **$p_fromdir** )
+
+| **$p_fromdir** | string | Directory from which to install the module |
 
 ===== Examples =====
 <code php|Example>
@@ -32,10 +35,12 @@ boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from whi
 ~~DISCUSSION~~
 ====== uninstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->uninstall]] | never | Work in progress |
 Custom uninstall method
 ===== Syntax =====
-boolean uninstall	( **$id**, **$client**, **$cid** )| **$cid** | int | The id of the module to uninstall |
+boolean uninstall	( **$id**, **$client**, **$cid** )
+
+| **$cid** | int | The id of the module to uninstall |
 | **$client** | int | The client id |
 
 ===== Examples =====
@@ -49,10 +54,12 @@ boolean uninstall	( **$id**, **$client**, **$cid** )| **$cid** | int | The id of
 ~~DISCUSSION~~
 ====== _createTemplatePosition ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerModule.html|JInstallerModule->_createTemplatePosition]] | never | Work in progress |
 Creates a new template position if it doesn't exist already
 ===== Syntax =====
-mixed _createTemplatePosition	( **$position** )| **$position** | string | Template position to create |
+mixed _createTemplatePosition	( **$position** )
+
+| **$position** | string | Template position to create |
 
 ===== Examples =====
 <code php|Example>
@@ -63,3 +70,4 @@ mixed _createTemplatePosition	( **$position** )| **$position** | string | Templa
 ----
 
 ~~DISCUSSION~~
+

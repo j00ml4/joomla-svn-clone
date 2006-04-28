@@ -1,13 +1,14 @@
 ====== JText ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText]] | never | Work in progress |
 
 Text  handling class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JText-printf|{{http://api.joomla.org/media/images/Method.png }}}]] [[JText-printf|printf]] | Passes a string thru an printf |
-| [[JText-sprintf|{{http://api.joomla.org/media/images/Method.png }}}]] [[JText-sprintf|sprintf]] | Passes a string thru an sprintf |
-| [[JText-_|{{http://api.joomla.org/media/images/Method.png }}}]] [[JText-_|_]] | Translates a string into the current language |
+| [[JText-printf|{{http://api.joomla.org/media/images/Method.png }}]] [[JText-printf|printf]] | Passes a string thru an printf |
+| [[JText-sprintf|{{http://api.joomla.org/media/images/Method.png }}]] [[JText-sprintf|sprintf]] | Passes a string thru an sprintf |
+| [[JText-_|{{http://api.joomla.org/media/images/Method.png }}]] [[JText-_|_]] | Translates a string into the current language |
+
 ----
 
 ~~DISCUSSION~~
@@ -16,10 +17,12 @@ Text  handling class
 
 ====== printf ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->printf]] | never | Work in progress |
 Passes a string thru an printf
 ===== Syntax =====
-void printf	( **$string**, **1** )| **1** | mixed | Mixed number of arguments for the sprintf function |
+void printf	( **$string**, **1** )
+
+| **1** | mixed | Mixed number of arguments for the sprintf function |
 | **$string** | format | The format string |
 
 ===== Examples =====
@@ -33,10 +36,12 @@ void printf	( **$string**, **1** )| **1** | mixed | Mixed number of arguments fo
 ~~DISCUSSION~~
 ====== sprintf ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->sprintf]] | never | Work in progress |
 Passes a string thru an sprintf
 ===== Syntax =====
-void sprintf	( **$string**, **1** )| **1** | mixed | Mixed number of arguments for the sprintf function |
+void sprintf	( **$string**, **1** )
+
+| **1** | mixed | Mixed number of arguments for the sprintf function |
 | **$string** | format | The format string |
 
 ===== Examples =====
@@ -50,10 +55,12 @@ void sprintf	( **$string**, **1** )| **1** | mixed | Mixed number of arguments f
 ~~DISCUSSION~~
 ====== _ ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla.Framework/I18N/JText.html|JText->_]] | never | Work in progress |
 Translates a string into the current language
 ===== Syntax =====
-void _	( **$string**, **$jsSafe** )| **$string** | string | The string to translate |
+void _	( **$string**, **$jsSafe** )
+
+| **$string** | string | The string to translate |
 | **$jsSafe** | boolean | Make the result javascript safe |
 
 ===== Examples =====
@@ -65,3 +72,4 @@ void _	( **$string**, **$jsSafe** )| **$string** | string | The string to transl
 ----
 
 ~~DISCUSSION~~
+

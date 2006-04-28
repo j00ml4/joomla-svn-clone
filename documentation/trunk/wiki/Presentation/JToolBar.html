@@ -1,19 +1,20 @@
 ====== JToolBar ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar]] | never | Work in progress |
 
 ToolBar handler
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JToolBar-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-__construct|__construct]] | Constructor |
-| [[JToolBar-addButtonDir|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-addButtonDir|addButtonDir]] | Add a directory where JToolBar should search for button types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same order you  added them. If the parameter type cannot be found in the custom folders,  it will look in JParameter/types.</p> |
-| [[JToolBar-appendButton|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-appendButton|appendButton]] | Set a value |
-| [[JToolBar-getIncludePath|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-getIncludePath|getIncludePath]] | Get the include path |
-| [[JToolBar-getInstance|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-getInstance|getInstance]] | Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $toolbar = &JToolBar::getInstance([$name);</pre></p> |
-| [[JToolBar-loadButtonType|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-loadButtonType|loadButtonType]] | Loads a button type |
-| [[JToolBar-prependButton|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-prependButton|prependButton]] | Get a value |
-| [[JToolBar-render|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-render|render]] | Render |
-| [[JToolBar-renderButton|{{http://api.joomla.org/media/images/Method.png }}}]] [[JToolBar-renderButton|renderButton]] | render a parameter type |
+| [[JToolBar-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-__construct|__construct]] | Constructor |
+| [[JToolBar-addButtonDir|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-addButtonDir|addButtonDir]] | Add a directory where JToolBar should search for button types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same order you  added them. If the parameter type cannot be found in the custom folders,  it will look in JParameter/types.</p> |
+| [[JToolBar-appendButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-appendButton|appendButton]] | Set a value |
+| [[JToolBar-getIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-getIncludePath|getIncludePath]] | Get the include path |
+| [[JToolBar-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-getInstance|getInstance]] | Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $toolbar = &JToolBar::getInstance([$name);</pre></p> |
+| [[JToolBar-loadButtonType|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-loadButtonType|loadButtonType]] | Loads a button type |
+| [[JToolBar-prependButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-prependButton|prependButton]] | Get a value |
+| [[JToolBar-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-render|render]] | Render |
+| [[JToolBar-renderButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-renderButton|renderButton]] | render a parameter type |
+
 ----
 
 ~~DISCUSSION~~
@@ -22,10 +23,12 @@ ToolBar handler
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->__construct]] | never | Work in progress |
 Constructor
 ===== Syntax =====
-JToolBar __construct	( **$name** )| **$name** | string | The toolbar name |
+JToolBar __construct	( **$name** )
+
+| **$name** | string | The toolbar name |
 
 ===== Examples =====
 <code php|Example>
@@ -38,10 +41,12 @@ JToolBar __construct	( **$name** )| **$name** | string | The toolbar name |
 ~~DISCUSSION~~
 ====== addButtonDir ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->addButtonDir]] | never | Work in progress |
 Add a directory where JToolBar should search for button types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same order you  added them. If the parameter type cannot be found in the custom folders,  it will look in JParameter/types.</p>
 ===== Syntax =====
-void addButtonDir	( **$dir** )| **$dir** | string|array | directory or directories to search. |
+void addButtonDir	( **$dir** )
+
+| **$dir** | string|array | directory or directories to search. |
 
 ===== Examples =====
 <code php|Example>
@@ -54,10 +59,12 @@ void addButtonDir	( **$dir** )| **$dir** | string|array | directory or directori
 ~~DISCUSSION~~
 ====== appendButton ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->appendButton]] | never | Work in progress |
 Set a value
 ===== Syntax =====
-string appendButton	( **0**, **1** )| **0** | string | The name of the param |
+string appendButton	( **0**, **1** )
+
+| **0** | string | The name of the param |
 | **1** | string | The value of the parameter |
 
 ===== Examples =====
@@ -71,10 +78,12 @@ string appendButton	( **0**, **1** )| **0** | string | The name of the param |
 ~~DISCUSSION~~
 ====== getIncludePath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->getIncludePath]] | never | Work in progress |
 Get the include path
 ===== Syntax =====
 string getIncludePath ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -86,10 +95,12 @@ string getIncludePath ()
 ~~DISCUSSION~~
 ====== getInstance ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->getInstance]] | never | Work in progress |
 Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $toolbar = &JToolBar::getInstance([$name);</pre></p>
 ===== Syntax =====
-<a href="../../Joomla.Framework/Presentation/JToolBar.html">JToolBar</a> &getInstance	( **$name** )| **$name** | string | The name of the toolbar. |
+<a href="../../Joomla.Framework/Presentation/JToolBar.html">JToolBar</a> &getInstance	( **$name** )
+
+| **$name** | string | The name of the toolbar. |
 
 ===== Examples =====
 <code php|Example>
@@ -102,10 +113,12 @@ Returns a reference to a global JToolBar object, only creating it if it  doesn't
 ~~DISCUSSION~~
 ====== loadButtonType ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->loadButtonType]] | never | Work in progress |
 Loads a button type
 ===== Syntax =====
-object &loadButtonType	( **$type**, **$new** )| **$type** | string | buttonType |
+object &loadButtonType	( **$type**, **$new** )
+
+| **$type** | string | buttonType |
 
 ===== Examples =====
 <code php|Example>
@@ -118,10 +131,12 @@ object &loadButtonType	( **$type**, **$new** )| **$type** | string | buttonType 
 ~~DISCUSSION~~
 ====== prependButton ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->prependButton]] | never | Work in progress |
 Get a value
 ===== Syntax =====
-string prependButton	( **0**, **1** )| **0** | string | The name of the param |
+string prependButton	( **0**, **1** )
+
+| **0** | string | The name of the param |
 | **1** | mixed | The default value if not found |
 
 ===== Examples =====
@@ -135,10 +150,12 @@ string prependButton	( **0**, **1** )| **0** | string | The name of the param |
 ~~DISCUSSION~~
 ====== render ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->render]] | never | Work in progress |
 Render
 ===== Syntax =====
-string render	( **0** )| **0** | string | The name of the control, or the default text area if a setup file is not found |
+string render	( **0** )
+
+| **0** | string | The name of the control, or the default text area if a setup file is not found |
 
 ===== Examples =====
 <code php|Example>
@@ -151,10 +168,12 @@ string render	( **0** )| **0** | string | The name of the control, or the defaul
 ~~DISCUSSION~~
 ====== renderButton ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JToolBar.html|JToolBar->renderButton]] | never | Work in progress |
 render a parameter type
 ===== Syntax =====
-array renderButton	( **&$node**, **1** )| **1** | string | The control name |
+array renderButton	( **&$node**, **1** )
+
+| **1** | string | The control name |
 | **&$node** | object A | param tag node |
 
 ===== Examples =====
@@ -166,3 +185,4 @@ array renderButton	( **&$node**, **1** )| **1** | string | The control name |
 ----
 
 ~~DISCUSSION~~
+

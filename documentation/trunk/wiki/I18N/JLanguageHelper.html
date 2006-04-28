@@ -1,12 +1,13 @@
 ====== JLanguageHelper ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper]] | never | Work in progress |
 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JLanguageHelper-createLanguageList|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLanguageHelper-createLanguageList|createLanguageList]] | Builds a list of the system languages which can be used in a select option |
-| [[JLanguageHelper-detectLanguage|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLanguageHelper-detectLanguage|detectLanguage]] | Tries to detect the language |
+| [[JLanguageHelper-createLanguageList|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguageHelper-createLanguageList|createLanguageList]] | Builds a list of the system languages which can be used in a select option |
+| [[JLanguageHelper-detectLanguage|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguageHelper-detectLanguage|detectLanguage]] | Tries to detect the language |
+
 ----
 
 ~~DISCUSSION~~
@@ -15,10 +16,12 @@
 
 ====== createLanguageList ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JLanguageHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguageHelper|JLanguageHelper]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JLanguageHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguageHelper|JLanguageHelper]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper->createLanguageList]] | never | Work in progress |
 Builds a list of the system languages which can be used in a select option
 ===== Syntax =====
-void createLanguageList	( **$actualLanguage**, **$basePath**, **2** )| **2** | array | An array of arrays ( text, value, selected ) |
+void createLanguageList	( **$actualLanguage**, **$basePath**, **2** )
+
+| **2** | array | An array of arrays ( text, value, selected ) |
 | **$actualLanguage** | string | Client key for the area |
 | **$basePath** | string | Base path to use |
 
@@ -33,10 +36,12 @@ void createLanguageList	( **$actualLanguage**, **$basePath**, **2** )| **2** | a
 ~~DISCUSSION~~
 ====== detectLanguage ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JLanguageHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguageHelper|JLanguageHelper]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|I18N]] | [[JLanguageHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguageHelper|JLanguageHelper]] | [[http://api.joomla.org/Joomla.Framework/I18N/JLanguageHelper.html|JLanguageHelper->detectLanguage]] | never | Work in progress |
 Tries to detect the language
 ===== Syntax =====
 void detectLanguage ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -46,3 +51,4 @@ void detectLanguage ()
 ----
 
 ~~DISCUSSION~~
+

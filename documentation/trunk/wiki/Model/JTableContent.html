@@ -1,13 +1,14 @@
 ====== JTableContent ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Model]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent]] | 28 Apr 2006 | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent]] | never | Work in progress |
 
 Content table
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableContent-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JTableContent-__construct|__construct]] |  |
-| [[JTableContent-check|{{http://api.joomla.org/media/images/Method.png }}}]] [[JTableContent-check|check]] | Validation and filtering |
-| [[JTableContent-toXML|{{http://api.joomla.org/media/images/Method.png }}}]] [[JTableContent-toXML|toXML]] | Converts record to XML |
+| [[JTableContent-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-__construct|__construct]] |  |
+| [[JTableContent-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-check|check]] | Validation and filtering |
+| [[JTableContent-toXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-toXML|toXML]] | Converts record to XML |
+
 ----
 
 ~~DISCUSSION~~
@@ -16,10 +17,12 @@ Content table
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->__construct]] | never | Work in progress |
 
 ===== Syntax =====
-JTableContent __construct	( **&$db** )| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
+JTableContent __construct	( **&$db** )
+
+| **&$db** | <a href="../../Joomla.Legacy/1.5/database.html">database</a> | A database connector object |
 
 ===== Examples =====
 <code php|Example>
@@ -32,10 +35,12 @@ JTableContent __construct	( **&$db** )| **&$db** | <a href="../../Joomla.Legacy/
 ~~DISCUSSION~~
 ====== check ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->check]] | never | Work in progress |
 Validation and filtering
 ===== Syntax =====
 void check ()
+
+
 ===== Examples =====
 <code php|Example>
 
@@ -47,10 +52,12 @@ void check ()
 ~~DISCUSSION~~
 ====== toXML ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->]] | 28 Apr 2006 | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Model]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla.Framework/Model/JTableContent.html|JTableContent->toXML]] | never | Work in progress |
 Converts record to XML
 ===== Syntax =====
-void toXML	( **$mapKeysToText** )| **$mapKeysToText** | boolean | Map foreign keys to text values |
+void toXML	( **$mapKeysToText** )
+
+| **$mapKeysToText** | boolean | Map foreign keys to text values |
 
 ===== Examples =====
 <code php|Example>
@@ -61,3 +68,4 @@ void toXML	( **$mapKeysToText** )| **$mapKeysToText** | boolean | Map foreign ke
 ----
 
 ~~DISCUSSION~~
+
