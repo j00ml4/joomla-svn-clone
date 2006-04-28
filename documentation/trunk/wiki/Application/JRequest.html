@@ -1,13 +1,13 @@
-====== JRequest [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest]] |
+====== JRequest ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Application]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest]] | 28 Apr 2006 | Work in progress |
 
 JRequest Class<p>This class serves to provide the Joomla Framework with a common interface to access  request variables.  This includes $_POST, $_GET, and naturally $_REQUEST.  Variables  can be passed through an input filter to avoid injection or returned raw.</p><p>The concept and implementation of this class is inspired by the binary cloud  environment package.  &lt;http://www.binarycloud.com/&gt;</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRequest-cleanVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JRequest-cleanVar|cleanVar]] | Utility method to clean a string variable using input filters<p>Available Options masks:  		_J_NOTRIM 		: Prevents the trimming of the variable  		_J_ALLOWHTML	: Allows safe HTML in the variable  		_J_ALLOWRAW		: Allows raw input</p> |
-| [[JRequest-getVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JRequest-getVar|getVar]] | Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p> |
-
+| [[JRequest-cleanVar|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRequest-cleanVar|cleanVar]] | Utility method to clean a string variable using input filters<p>Available Options masks:  		_J_NOTRIM 		: Prevents the trimming of the variable  		_J_ALLOWHTML	: Allows safe HTML in the variable  		_J_ALLOWRAW		: Allows raw input</p> |
+| [[JRequest-getVar|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRequest-getVar|getVar]] | Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p> |
+| [[JRequest-setVar|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRequest-setVar|setVar]] |  |
 ----
 
 ~~DISCUSSION~~
@@ -15,33 +15,54 @@ JRequest Class<p>This class serves to provide the Joomla Framework with a common
 
 
 ====== cleanVar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest->cleanVar]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest->]] | 28 Apr 2006 | Work in progress |
 Utility method to clean a string variable using input filters<p>Available Options masks:  		_J_NOTRIM 		: Prevents the trimming of the variable  		_J_ALLOWHTML	: Allows safe HTML in the variable  		_J_ALLOWRAW		: Allows raw input</p>
 ===== Syntax =====
-mixed cleanVar	( **&$var**, **$mask** )
-| **$var** | mixed | The variable to clean |
+mixed cleanVar	( **&$var**, **$mask** )| **$var** | mixed | The variable to clean |
 | **$mask** | int | An options mask |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getVar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest->getVar]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest->]] | 28 Apr 2006 | Work in progress |
 Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p>
 ===== Syntax =====
-mixed getVar	( **$name**, **$default**, **$hash**, **$type**, **$mask** )
-| **$name** | string | Variable name |
+mixed getVar	( **$name**, **$default**, **$hash**, **$type**, **$mask** )| **$name** | string | Variable name |
 | **$default** | string | Default value if the variable does not exist |
 | **$hash** | string | Where the var should come from (POST, GET, FILES, METHOD) |
 | **$type** | string | Return type for the variable (INT, FLOAT, STRING, BOOLEAN, ARRAY) |
 | **$mask** | int | Filter mask for the variable |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
+====== setVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Application/JRequest.html|JRequest->]] | 28 Apr 2006 | Work in progress |
+
+===== Syntax =====
+void setVar	( **$name**, **$value**, **$hash**, **$type**, **$mask** )
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,29 +1,47 @@
-====== patTemplate_Renderer_Head [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer_Head.html|patTemplate_Renderer_Head]] |
+====== patTemplate_Renderer_Head ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer_Head.html|patTemplate_Renderer_Head]] | 28 Apr 2006 | Work in progress |
 
 JDocument head renderer
 ===== Methods =====
 ^ Method ^ Description ^
-| [[patTemplate_Renderer_Head-render|{{http://api.joomla.org/media/images/Method.png }}]] [[patTemplate_Renderer_Head-render|render]] | Renders the document head and returns the results as a string |
-
+| [[patTemplate_Renderer_Head-fetchHead|{{http://api.joomla.org/media/images/Method.png }}}]] [[patTemplate_Renderer_Head-fetchHead|fetchHead]] | Generates the head html and return the results as a string |
+| [[patTemplate_Renderer_Head-render|{{http://api.joomla.org/media/images/Method.png }}}]] [[patTemplate_Renderer_Head-render|render]] | Renders the document head and returns the results as a string |
 ----
 
 ~~DISCUSSION~~
 
 
 
-====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer_Head|patTemplate_Renderer_Head]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer_Head.html|patTemplate_Renderer_Head->render]] |
+====== fetchHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer_Head|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer_Head|patTemplate_Renderer_Head]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer_Head.html|patTemplate_Renderer_Head->]] | 28 Apr 2006 | Work in progress |
+Generates the head html and return the results as a string
+===== Syntax =====
+string fetchHead	( **&$document** )
+===== Examples =====
+<code php|Example>
 
+</code>
+
+
+----
+
+~~DISCUSSION~~
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[patTemplate_Renderer_Head|{{http://api.joomla.org/media/images/Class.png }}]][[patTemplate_Renderer_Head|patTemplate_Renderer_Head]] | [[http://api.joomla.org/Joomla.Framework/Document/patTemplate_Renderer_Head.html|patTemplate_Renderer_Head->]] | 28 Apr 2006 | Work in progress |
 Renders the document head and returns the results as a string
 ===== Syntax =====
-string render	( **$head**, **$params**, **$name** )
-| **$name** | string | (unused) |
+string render	( **$head**, **$params**, **$name** )| **$name** | string | (unused) |
 | **$params** | array | Associative array of values |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

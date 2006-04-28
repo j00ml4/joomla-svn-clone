@@ -1,41 +1,40 @@
-====== mosAdminMenus [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus]] |
+====== mosAdminMenus ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus]] | 28 Apr 2006 | Work in progress |
 
 Utility class for drawing admin menu HTML elements
 ===== Methods =====
 ^ Method ^ Description ^
-| [[mosAdminMenus-Access|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Access|Access]] | build the select list for access level |
-| [[mosAdminMenus-Category|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Category|Category]] | build the select list to choose a category |
-| [[mosAdminMenus-Component|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Component|Component]] | build the select list to choose a component |
-| [[mosAdminMenus-ComponentCategory|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-ComponentCategory|ComponentCategory]] | Select list of active categories for components |
-| [[mosAdminMenus-ComponentName|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-ComponentName|ComponentName]] | build the select list to choose a component |
-| [[mosAdminMenus-GetImageFolders|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-GetImageFolders|GetImageFolders]] |  |
-| [[mosAdminMenus-GetImages|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-GetImages|GetImages]] |  |
-| [[mosAdminMenus-GetSavedImages|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-GetSavedImages|GetSavedImages]] |  |
-| [[mosAdminMenus-ImageCheck|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-ImageCheck|ImageCheck]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
-| [[mosAdminMenus-ImageCheckAdmin|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-ImageCheckAdmin|ImageCheckAdmin]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
-| [[mosAdminMenus-Images|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Images|Images]] | build the select list to choose an image |
-| [[mosAdminMenus-Link|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Link|Link]] | build the link/url of a menu item |
-| [[mosAdminMenus-Links2Menu|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Links2Menu|Links2Menu]] | Select list of menu items for a specific menu |
-| [[mosAdminMenus-menuItem|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-menuItem|menuItem]] |  |
-| [[mosAdminMenus-MenuLinks|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-MenuLinks|MenuLinks]] | build the multiple select list for Menu Links/Pages |
-| [[mosAdminMenus-MenuOutputBottom|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-MenuOutputBottom|MenuOutputBottom]] |  |
-| [[mosAdminMenus-MenuOutputParams|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-MenuOutputParams|MenuOutputParams]] |  |
-| [[mosAdminMenus-MenuOutputTop|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-MenuOutputTop|MenuOutputTop]] |  |
-| [[mosAdminMenus-MenuSelect|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-MenuSelect|MenuSelect]] | Select list of menus |
-| [[mosAdminMenus-menutypes|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-menutypes|menutypes]] |  |
-| [[mosAdminMenus-Ordering|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Ordering|Ordering]] | build the select list for Menu Ordering |
-| [[mosAdminMenus-Parent|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Parent|Parent]] | build the select list for parent item |
-| [[mosAdminMenus-Positions|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Positions|Positions]] | Select list of positions - generally used for location of images |
-| [[mosAdminMenus-Published|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Published|Published]] | build a radio button option for published state |
-| [[mosAdminMenus-ReadImages|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-ReadImages|ReadImages]] | Internal function to recursive scan the media manager directories |
-| [[mosAdminMenus-Section|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Section|Section]] | build the select list to choose a section |
-| [[mosAdminMenus-SelectSection|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-SelectSection|SelectSection]] | Select list of active sections |
-| [[mosAdminMenus-SpecificOrdering|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-SpecificOrdering|SpecificOrdering]] | build the select list for Ordering of a specified Table |
-| [[mosAdminMenus-Target|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-Target|Target]] | build the select list for target window |
-| [[mosAdminMenus-UserSelect|{{http://api.joomla.org/media/images/Method.png }}]] [[mosAdminMenus-UserSelect|UserSelect]] | Select list of active users |
-
+| [[mosAdminMenus-Access|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Access|Access]] | build the select list for access level |
+| [[mosAdminMenus-Category|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Category|Category]] | build the select list to choose a category |
+| [[mosAdminMenus-Component|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Component|Component]] | build the select list to choose a component |
+| [[mosAdminMenus-ComponentCategory|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-ComponentCategory|ComponentCategory]] | Select list of active categories for components |
+| [[mosAdminMenus-ComponentName|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-ComponentName|ComponentName]] | build the select list to choose a component |
+| [[mosAdminMenus-GetImageFolders|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-GetImageFolders|GetImageFolders]] |  |
+| [[mosAdminMenus-GetImages|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-GetImages|GetImages]] |  |
+| [[mosAdminMenus-GetSavedImages|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-GetSavedImages|GetSavedImages]] |  |
+| [[mosAdminMenus-ImageCheck|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-ImageCheck|ImageCheck]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
+| [[mosAdminMenus-ImageCheckAdmin|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-ImageCheckAdmin|ImageCheckAdmin]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
+| [[mosAdminMenus-Images|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Images|Images]] | build the select list to choose an image |
+| [[mosAdminMenus-Link|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Link|Link]] | build the link/url of a menu item |
+| [[mosAdminMenus-Links2Menu|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Links2Menu|Links2Menu]] | Select list of menu items for a specific menu |
+| [[mosAdminMenus-menuItem|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-menuItem|menuItem]] |  |
+| [[mosAdminMenus-MenuLinks|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-MenuLinks|MenuLinks]] | build the multiple select list for Menu Links/Pages |
+| [[mosAdminMenus-MenuOutputBottom|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-MenuOutputBottom|MenuOutputBottom]] |  |
+| [[mosAdminMenus-MenuOutputParams|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-MenuOutputParams|MenuOutputParams]] |  |
+| [[mosAdminMenus-MenuOutputTop|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-MenuOutputTop|MenuOutputTop]] |  |
+| [[mosAdminMenus-MenuSelect|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-MenuSelect|MenuSelect]] | Select list of menus |
+| [[mosAdminMenus-menutypes|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-menutypes|menutypes]] |  |
+| [[mosAdminMenus-Ordering|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Ordering|Ordering]] | build the select list for Menu Ordering |
+| [[mosAdminMenus-Parent|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Parent|Parent]] | build the select list for parent item |
+| [[mosAdminMenus-Positions|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Positions|Positions]] | Select list of positions - generally used for location of images |
+| [[mosAdminMenus-Published|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Published|Published]] | build a radio button option for published state |
+| [[mosAdminMenus-ReadImages|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-ReadImages|ReadImages]] | Internal function to recursive scan the media manager directories |
+| [[mosAdminMenus-Section|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Section|Section]] | build the select list to choose a section |
+| [[mosAdminMenus-SelectSection|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-SelectSection|SelectSection]] | Select list of active sections |
+| [[mosAdminMenus-SpecificOrdering|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-SpecificOrdering|SpecificOrdering]] | build the select list for Ordering of a specified Table |
+| [[mosAdminMenus-Target|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-Target|Target]] | build the select list for target window |
+| [[mosAdminMenus-UserSelect|{{http://api.joomla.org/media/images/Method.png }}}]] [[mosAdminMenus-UserSelect|UserSelect]] | Select list of active users |
 ----
 
 ~~DISCUSSION~~
@@ -43,366 +42,456 @@ Utility class for drawing admin menu HTML elements
 
 
 ====== Access ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Access]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list for access level
 ===== Syntax =====
 void Access	( **&$row** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Category ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Category]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list to choose a category
 ===== Syntax =====
 void Category	( **&$menu**, **$id**, **$javascript** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Component ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Component]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list to choose a component
 ===== Syntax =====
 void Component	( **&$menu**, **$id** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ComponentCategory ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->ComponentCategory]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of active categories for components
 ===== Syntax =====
 void ComponentCategory	( **$name**, **$section**, **$active**, **$javascript**, **$order**, **$size**, **$sel_cat** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ComponentName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->ComponentName]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list to choose a component
 ===== Syntax =====
 void ComponentName	( **&$menu**, **$id** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== GetImageFolders ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->GetImageFolders]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void GetImageFolders	( **&$folders**, **$path** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== GetImages ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->GetImages]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void GetImages	( **&$images**, **$path** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== GetSavedImages ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->GetSavedImages]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void GetSavedImages	( **&$row**, **$path** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ImageCheck ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->ImageCheck]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p>
 ===== Syntax =====
 void ImageCheck	( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ImageCheckAdmin ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->ImageCheckAdmin]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p>
 ===== Syntax =====
 void ImageCheckAdmin	( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Images ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Images]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list to choose an image
 ===== Syntax =====
 void Images	( **$name**, **&$active**, **$javascript**, **$directory** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Link ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Link]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the link/url of a menu item
 ===== Syntax =====
 void Link	( **&$row**, **$id**, **$link** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Links2Menu ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Links2Menu]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of menu items for a specific menu
 ===== Syntax =====
 void Links2Menu	( **$type**, **$and** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== menuItem ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->menuItem]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void menuItem	( **$item** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== MenuLinks ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->MenuLinks]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the multiple select list for Menu Links/Pages
 ===== Syntax =====
 void MenuLinks	( **&$lookup**, **$all**, **$none**, **$unassigned** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== MenuOutputBottom ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->MenuOutputBottom]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void MenuOutputBottom	( **&$lists**, **&$menu** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== MenuOutputParams ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->MenuOutputParams]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void MenuOutputParams	( **&$params**, **$menu**, **$tip** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== MenuOutputTop ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->MenuOutputTop]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void MenuOutputTop	( **&$lists**, **&$menu**, **$text**, **$tip** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== MenuSelect ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->MenuSelect]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of menus
 ===== Syntax =====
 void MenuSelect	( **$name**, **$javascript** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== menutypes ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->menutypes]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void menutypes ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Ordering ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Ordering]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list for Menu Ordering
 ===== Syntax =====
 void Ordering	( **&$row**, **$id** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Parent ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Parent]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list for parent item
 ===== Syntax =====
 void Parent	( **&$row** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Positions ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Positions]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of positions - generally used for location of images
 ===== Syntax =====
 void Positions	( **$name**, **$active**, **$javascript**, **$none**, **$center**, **$left**, **$right**, **$id** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Published ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Published]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build a radio button option for published state
 ===== Syntax =====
 void Published	( **&$row** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ReadImages ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->ReadImages]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Internal function to recursive scan the media manager directories
 ===== Syntax =====
-void ReadImages	( **$imagePath**, **$folderPath**, **&$folders**, **&$images** )
-| **$imagePath** | string | Path to scan |
+void ReadImages	( **$imagePath**, **$folderPath**, **&$folders**, **&$images** )| **$imagePath** | string | Path to scan |
 | **$folderPath** | string | root path of this folder |
 | **&$folders** | array | Value array of all existing folders |
 | **&$images** | array | Value array of all existing images |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Section ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Section]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list to choose a section
 ===== Syntax =====
 void Section	( **&$menu**, **$id**, **$all** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== SelectSection ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->SelectSection]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of active sections
 ===== Syntax =====
 void SelectSection	( **$name**, **$active**, **$javascript**, **$order** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== SpecificOrdering ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->SpecificOrdering]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list for Ordering of a specified Table
 ===== Syntax =====
 void SpecificOrdering	( **&$row**, **$id**, **$query**, **$neworder** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== Target ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->Target]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 build the select list for target window
 ===== Syntax =====
 void Target	( **&$row** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== UserSelect ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->UserSelect]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[mosAdminMenus|{{http://api.joomla.org/media/images/Class.png }}]][[mosAdminMenus|mosAdminMenus]] | [[http://api.joomla.org/Joomla.Framework/Presentation/mosAdminMenus.html|mosAdminMenus->]] | 28 Apr 2006 | Work in progress |
 Select list of active users
 ===== Syntax =====
 void UserSelect	( **$name**, **$active**, **$nouser**, **$javascript**, **$order**, **$reg** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

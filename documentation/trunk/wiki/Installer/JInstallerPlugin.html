@@ -1,13 +1,12 @@
-====== JInstallerPlugin [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin]] |
+====== JInstallerPlugin ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin]] | 28 Apr 2006 | Work in progress |
 
 Plugin installer
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstallerPlugin-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerPlugin-install|install]] | Custom install method |
-| [[JInstallerPlugin-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerPlugin-uninstall|uninstall]] | Custom uninstall method |
-
+| [[JInstallerPlugin-install|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerPlugin-install|install]] | Custom install method |
+| [[JInstallerPlugin-uninstall|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerPlugin-uninstall|uninstall]] | Custom uninstall method |
 ----
 
 ~~DISCUSSION~~
@@ -15,29 +14,35 @@ Plugin installer
 
 
 ====== install ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->install]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerPlugin|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->]] | 28 Apr 2006 | Work in progress |
 Custom install method
 ===== Syntax =====
-boolean install	( **$p_fromdir** )
-| **$p_fromdir** | string | Directory from which to install the plugin |
+boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from which to install the plugin |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->uninstall]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerPlugin|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->]] | 28 Apr 2006 | Work in progress |
 Custom uninstall method
 ===== Syntax =====
-boolean uninstall	( **$id**, **$client**, **$cid** )
-| **$cid** | int | The id of the plugin to uninstall |
+boolean uninstall	( **$id**, **$client**, **$cid** )| **$cid** | int | The id of the plugin to uninstall |
 | **$client** | int | The client id |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

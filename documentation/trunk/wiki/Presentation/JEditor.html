@@ -1,16 +1,18 @@
-====== JEditor [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor]] |
+====== JEditor ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Presentation]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor]] | 28 Apr 2006 | Work in progress |
 
 JEditor class to handle WYSIWYG editors
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JEditor-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JEditor-__construct|__construct]] |  |
-| [[JEditor-getEditor|{{http://api.joomla.org/media/images/Method.png }}]] [[JEditor-getEditor|getEditor]] | Present a text area |
-| [[JEditor-getEditorContents|{{http://api.joomla.org/media/images/Method.png }}]] [[JEditor-getEditorContents|getEditorContents]] | Get the editor contents |
-| [[JEditor-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JEditor-getInstance|getInstance]] | Returns a reference to a global Editor object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $editor = &JEditor::getInstance([$editor);</pre></p> |
-| [[JEditor-init|{{http://api.joomla.org/media/images/Method.png }}]] [[JEditor-init|init]] | Initialize the editor |
-
+| [[JEditor-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-__construct|__construct]] |  |
+| [[JEditor-display|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-display|display]] | Present a text area |
+| [[JEditor-getButtons|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-getButtons|getButtons]] | Get the editor extended buttons |
+| [[JEditor-getContent|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-getContent|getContent]] | Get the editor contents |
+| [[JEditor-getInstance|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-getInstance|getInstance]] | Returns a reference to a global Editor object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $editor = &JEditor::getInstance([$editor);</pre></p> |
+| [[JEditor-init|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-init|init]] | Initialize the editor |
+| [[JEditor-save|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-save|save]] | Save the editor content |
+| [[JEditor-setContent|{{http://api.joomla.org/media/images/Method.png }}}]] [[JEditor-setContent|setContent]] | Set the editor contents |
 ----
 
 ~~DISCUSSION~~
@@ -18,63 +20,123 @@ JEditor class to handle WYSIWYG editors
 
 
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->__construct]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 JEditor __construct ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== getEditor ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->getEditor]] |
-
+~~DISCUSSION~~
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
 Present a text area
 ===== Syntax =====
-void getEditor	( **$name**, **$content**, **$hiddenField**, **$width**, **$height**, **$col**, **$row** )
-
+void display	( **$name**, **$html**, **$width**, **$height**, **$col**, **$row** )
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== getEditorContents ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->getEditorContents]] |
+~~DISCUSSION~~
+====== getButtons ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
+Get the editor extended buttons
+===== Syntax =====
+void getButtons	( **$editor** )
+===== Examples =====
+<code php|Example>
 
+</code>
+
+
+----
+
+~~DISCUSSION~~
+====== getContent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
 Get the editor contents
 ===== Syntax =====
-void getEditorContents	( **$editorArea**, **$hiddenField** )
-
+void getContent	( **$editor** )
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->getInstance]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
 Returns a reference to a global Editor object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $editor = &JEditor::getInstance([$editor);</pre></p>
 ===== Syntax =====
-<a href="../../Joomla.Framework/Presentation/JEditor.html">JEditor</a> &getInstance	( **$editor** )
-| **$editor** | string | The editor to use. |
+<a href="../../Joomla.Framework/Presentation/JEditor.html">JEditor</a> &getInstance	( **$editor** )| **$editor** | string | The editor to use. |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== init ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->init]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
 Initialize the editor
 ===== Syntax =====
 void init ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
+====== save ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
+Save the editor content
+===== Syntax =====
+void save	( **$editor** )
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+====== setContent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Presentation]] | [[JEditor|{{http://api.joomla.org/media/images/Class.png }}]][[JEditor|JEditor]] | [[http://api.joomla.org/Joomla.Framework/Presentation/JEditor.html|JEditor->]] | 28 Apr 2006 | Work in progress |
+Set the editor contents
+===== Syntax =====
+void setContent	( **$editor**, **$html** )
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,19 +1,18 @@
-====== JLDAP [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP]] |
+====== JLDAP ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Connector]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP]] | 28 Apr 2006 | Work in progress |
 
 LDAP client class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JLDAP-JLDAP|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-JLDAP|JLDAP]] | Constructor |
-| [[JLDAP-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-bind|bind]] | Binds to the LDAP directory |
-| [[JLDAP-close|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-close|close]] | Close the connection |
-| [[JLDAP-connect|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-connect|connect]] | Connect to server |
-| [[JLDAP-getDN|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-getDN|getDN]] |  |
-| [[JLDAP-ipToNetAddress|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-ipToNetAddress|ipToNetAddress]] | Converts a dot notation IP address to net address (e.g. for Netware, etc) |
-| [[JLDAP-search|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-search|search]] | Perform an LDAP search |
-| [[JLDAP-setDN|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-setDN|setDN]] | Sets the DN with some template replacements |
-
+| [[JLDAP-JLDAP|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-JLDAP|JLDAP]] | Constructor |
+| [[JLDAP-bind|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-bind|bind]] | Binds to the LDAP directory |
+| [[JLDAP-close|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-close|close]] | Close the connection |
+| [[JLDAP-connect|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-connect|connect]] | Connect to server |
+| [[JLDAP-getDN|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-getDN|getDN]] |  |
+| [[JLDAP-ipToNetAddress|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-ipToNetAddress|ipToNetAddress]] | Converts a dot notation IP address to net address (e.g. for Netware, etc) |
+| [[JLDAP-search|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-search|search]] | Perform an LDAP search |
+| [[JLDAP-setDN|{{http://api.joomla.org/media/images/Method.png }}}]] [[JLDAP-setDN|setDN]] | Sets the DN with some template replacements |
 ----
 
 ~~DISCUSSION~~
@@ -21,105 +20,129 @@ LDAP client class
 
 
 ====== JLDAP ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->JLDAP]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Constructor
 ===== Syntax =====
-JLDAP JLDAP	( **$configObj** )
-| **$configObj** | object An | object of configuration variables |
+JLDAP JLDAP	( **$configObj** )| **$configObj** | object An | object of configuration variables |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== bind ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->bind]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Binds to the LDAP directory
 ===== Syntax =====
-boolean bind	( **$username**, **$password** )
-| **$username** | string | The username |
+boolean bind	( **$username**, **$password** )| **$username** | string | The username |
 | **$password** | string | The password |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== close ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->close]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Close the connection
 ===== Syntax =====
 void close ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== connect ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->connect]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Connect to server
 ===== Syntax =====
 boolean connect ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getDN ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->getDN]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 string getDN ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== ipToNetAddress ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->ipToNetAddress]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Converts a dot notation IP address to net address (e.g. for Netware, etc)
 ===== Syntax =====
-string ipToNetAddress	( **$ip** )
-| **$ip** | string | IP Address (e.g. xxx.xxx.xxx.xxx) |
+string ipToNetAddress	( **$ip** )| **$ip** | string | IP Address (e.g. xxx.xxx.xxx.xxx) |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== search ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->search]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Perform an LDAP search
 ===== Syntax =====
-array search	( **$filters**, **$dnoverride** )
-| **$filters** | array | Search Filters (array of strings) |
+array search	( **$filters**, **$dnoverride** )| **$filters** | array | Search Filters (array of strings) |
 | **$dnoverride** | string | DN Override |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== setDN ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->setDN]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla.Framework/Connector/JLDAP.html|JLDAP->]] | 28 Apr 2006 | Work in progress |
 Sets the DN with some template replacements
 ===== Syntax =====
-void setDN	( **$username** )
-| **$username** | string | The username |
+void setDN	( **$username** )| **$username** | string | The username |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

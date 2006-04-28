@@ -1,13 +1,12 @@
-====== JInstallerLanguage [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage]] |
+====== JInstallerLanguage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage]] | 28 Apr 2006 | Work in progress |
 
 Language installer
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstallerLanguage-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerLanguage-install|install]] | Custom install method |
-| [[JInstallerLanguage-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method |
-
+| [[JInstallerLanguage-install|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerLanguage-install|install]] | Custom install method |
+| [[JInstallerLanguage-uninstall|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method |
 ----
 
 ~~DISCUSSION~~
@@ -15,29 +14,35 @@ Language installer
 
 
 ====== install ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->install]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->]] | 28 Apr 2006 | Work in progress |
 Custom install method
 ===== Syntax =====
-boolean install	( **$p_fromdir** )
-| **$p_fromdir** | string | Directory from which to install the language |
+boolean install	( **$p_fromdir** )| **$p_fromdir** | string | Directory from which to install the language |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->uninstall]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->]] | 28 Apr 2006 | Work in progress |
 Custom uninstall method
 ===== Syntax =====
-boolean uninstall	( **$id**, **$client** )
-| **$id** | int | The id of the language to uninstall [ISO Tag] |
+boolean uninstall	( **$id**, **$client** )| **$id** | int | The id of the language to uninstall [ISO Tag] |
 | **$client** | int | The client id |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

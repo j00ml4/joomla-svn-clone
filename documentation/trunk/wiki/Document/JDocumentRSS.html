@@ -1,0 +1,68 @@
+====== JDocumentRSS ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRSS.html|JDocumentRSS]] | 28 Apr 2006 | Work in progress |
+
+DocumentRSS class, provides an easy interface to parse and display an rss document
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRSS-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentRSS-__construct|__construct]] | Class constructore |
+| [[JDocumentRSS-addItem|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentRSS-addItem|addItem]] | Adds an FeedItem to the feed. |
+| [[JDocumentRSS-display|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentRSS-display|display]] | Outputs the document to the browser. |
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRSS|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRSS|JDocumentRSS]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRSS.html|JDocumentRSS->]] | 28 Apr 2006 | Work in progress |
+Class constructore
+===== Syntax =====
+JDocumentRSS __construct	( **$attributes**, **$type** )| **$type** | string | (either html or tex) |
+| **$attributes** | array | Associative array of attributes |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+====== addItem ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRSS|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRSS|JDocumentRSS]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRSS.html|JDocumentRSS->]] | 28 Apr 2006 | Work in progress |
+Adds an FeedItem to the feed.
+===== Syntax =====
+void addItem	( **&$item** )| **$item** | object FeedItem | The FeedItem to add to the feed. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentRSS|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRSS|JDocumentRSS]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentRSS.html|JDocumentRSS->]] | 28 Apr 2006 | Work in progress |
+Outputs the document to the browser.
+===== Syntax =====
+void display	( **$template**, **$file**, **$compress**, **$params** )| **$template** | string | The name of the template |
+| **$file** | boolean | If true, compress the output using Zlib compression |
+| **$compress** | boolean | If true, will display information about the placeholders |
+| **$params** | array | Associative array of attributes |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

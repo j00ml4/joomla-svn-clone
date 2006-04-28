@@ -1,16 +1,15 @@
-====== JObservable [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable]] |
+====== JObservable ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable]] | 28 Apr 2006 | Work in progress |
 
 Abstract observable class to implement the observer design pattern
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JObservable-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JObservable-__construct|__construct]] | Constructor |
-| [[JObservable-attach|{{http://api.joomla.org/media/images/Method.png }}]] [[JObservable-attach|attach]] | Attach an observer object |
-| [[JObservable-detach|{{http://api.joomla.org/media/images/Method.png }}]] [[JObservable-detach|detach]] | Detach an observer object |
-| [[JObservable-getState|{{http://api.joomla.org/media/images/Method.png }}]] [[JObservable-getState|getState]] | Get the state of the JObservable object |
-| [[JObservable-notify|{{http://api.joomla.org/media/images/Method.png }}]] [[JObservable-notify|notify]] | Update each attached observer object and return an array of their return values |
-
+| [[JObservable-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObservable-__construct|__construct]] | Constructor |
+| [[JObservable-attach|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObservable-attach|attach]] | Attach an observer object |
+| [[JObservable-detach|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObservable-detach|detach]] | Detach an observer object |
+| [[JObservable-getState|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObservable-getState|getState]] | Get the state of the JObservable object |
+| [[JObservable-notify|{{http://api.joomla.org/media/images/Method.png }}}]] [[JObservable-notify|notify]] | Update each attached observer object and return an array of their return values |
 ----
 
 ~~DISCUSSION~~
@@ -18,64 +17,79 @@ Abstract observable class to implement the observer design pattern
 
 
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->__construct]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->]] | 28 Apr 2006 | Work in progress |
 Constructor
 ===== Syntax =====
 JObservable __construct ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== attach ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->attach]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->]] | 28 Apr 2006 | Work in progress |
 Attach an observer object
 ===== Syntax =====
-void attach	( **$observer** )
-| **$observer** | object | An observer object to attach |
+void attach	( **$observer** )| **$observer** | object | An observer object to attach |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== detach ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->detach]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->]] | 28 Apr 2006 | Work in progress |
 Detach an observer object
 ===== Syntax =====
-boolean detach	( **$observer** )
-| **$observer** | object | An observer object to detach |
+boolean detach	( **$observer** )| **$observer** | object | An observer object to detach |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getState ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->getState]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->]] | 28 Apr 2006 | Work in progress |
 Get the state of the JObservable object
 ===== Syntax =====
 mixed getState ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== notify ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->notify]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla.Framework//JObservable.html|JObservable->]] | 28 Apr 2006 | Work in progress |
 Update each attached observer object and return an array of their return values
 ===== Syntax =====
 array notify ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
