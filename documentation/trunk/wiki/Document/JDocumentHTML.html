@@ -1,22 +1,22 @@
-====== JDocumentHTML [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML]] |
+====== JDocumentHTML ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Document]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML]] | 28 Apr 2006 | Work in progress |
 
 DocumentHTML class, provides an easy interface to parse and display an html document
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentHTML-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-__construct|__construct]] | Class constructore |
-| [[JDocumentHTML-addCustomTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block |
-| [[JDocumentHTML-addFavicon|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon)<p>This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display  it on the tab, as well.</p><p></p> |
-| [[JDocumentHTML-addHeadLink|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds &lt;link&gt; tags to the head of the document<p>$relType defaults to 'rel' as it is the most common relation type used.  ('rev' refers to reverse relation, 'rel' indicates normal, forward relation.)  Typical tag: &lt;link href=&quot;index.php&quot; rel=&quot;Start&quot;&gt;</p><p></p> |
-| [[JDocumentHTML-fetchHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-fetchHead|fetchHead]] | Generates the head html and return the results as a string |
-| [[JDocumentHTML-getBase|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-getBase|getBase]] | Returns the document base url |
-| [[JDocumentHTML-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-parse|parse]] | Parse a document template |
-| [[JDocumentHTML-setBase|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setBase|setBase]] | Sets the document base tag |
-| [[JDocumentHTML-setMetaContentType|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setMetaContentType|setMetaContentType]] | Sets an http-equiv Content-Type meta tag |
-| [[JDocumentHTML-setMetaData|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setMetaData|setMetaData]] | Sets or alters a meta tag. |
-| [[JDocumentHTML-unsetMetaData|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-unsetMetaData|unsetMetaData]] | Unsets a meta tag. |
-
+| [[JDocumentHTML-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-__construct|__construct]] | Class constructore |
+| [[JDocumentHTML-addCustomTag|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block |
+| [[JDocumentHTML-addFavicon|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon)<p>This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display  it on the tab, as well.</p><p></p> |
+| [[JDocumentHTML-addHeadLink|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds &lt;link&gt; tags to the head of the document<p>$relType defaults to 'rel' as it is the most common relation type used.  ('rev' refers to reverse relation, 'rel' indicates normal, forward relation.)  Typical tag: &lt;link href=&quot;index.php&quot; rel=&quot;Start&quot;&gt;</p><p></p> |
+| [[JDocumentHTML-display|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-display|display]] | Outputs the template to the browser. |
+| [[JDocumentHTML-getBase|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-getBase|getBase]] | Returns the document base url |
+| [[JDocumentHTML-getRenderer|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-getRenderer|getRenderer]] | Get a renderer, executed the renderer and returns the result |
+| [[JDocumentHTML-setBase|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-setBase|setBase]] | Sets the document base tag |
+| [[JDocumentHTML-setRenderer|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-setRenderer|setRenderer]] | Set a renderer |
+| [[JDocumentHTML-_addRenderer|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-_addRenderer|_addRenderer]] | Adds a renderer to be called |
+| [[JDocumentHTML-_load|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-_load|_load]] | Load a template file |
+| [[JDocumentHTML-_parse|{{http://api.joomla.org/media/images/Method.png }}}]] [[JDocumentHTML-_parse|_parse]] | Parse a document template |
 ----
 
 ~~DISCUSSION~~
@@ -24,153 +24,207 @@ DocumentHTML class, provides an easy interface to parse and display an html docu
 
 
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->__construct]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Class constructore
 ===== Syntax =====
-JDocumentHTML __construct	( **$attributes**, **$type** )
-| **$type** | string | (either html or tex) |
+JDocumentHTML __construct	( **$attributes**, **$type** )| **$type** | string | (either html or tex) |
 | **$attributes** | array | Associative array of attributes |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== addCustomTag ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->addCustomTag]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Adds a custom html string to the head block
 ===== Syntax =====
-void addCustomTag	( **$html** )
-| **$html** | string | The html to add to the head |
+void addCustomTag	( **$html** )| **$html** | string | The html to add to the head |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== addFavicon ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->addFavicon]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Adds a shortcut icon (favicon)<p>This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display  it on the tab, as well.</p><p></p>
 ===== Syntax =====
-void addFavicon	( **$href**, **$type**, **$relation** )
-| **$href** | string | The link that is being related. |
+void addFavicon	( **$href**, **$type**, **$relation** )| **$href** | string | The link that is being related. |
 | **$type** | string | File type |
 | **$relation** | string | Relation of link |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== addHeadLink ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->addHeadLink]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Adds &lt;link&gt; tags to the head of the document<p>$relType defaults to 'rel' as it is the most common relation type used.  ('rev' refers to reverse relation, 'rel' indicates normal, forward relation.)  Typical tag: &lt;link href=&quot;index.php&quot; rel=&quot;Start&quot;&gt;</p><p></p>
 ===== Syntax =====
-void addHeadLink	( **$href**, **$relation**, **$relType**, **$attribs**, **$attributes** )
-| **$href** | string | The link that is being related. |
+void addHeadLink	( **$href**, **$relation**, **$relType**, **$attribs**, **$attributes** )| **$href** | string | The link that is being related. |
 | **$relation** | string | Relation of link. |
 | **$relType** | string | Relation type attribute.  Either rel or rev (default: 'rel'). |
 | **$attributes** | array | Associative array of remaining attributes. |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== fetchHead ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->fetchHead]] |
-
-Generates the head html and return the results as a string
+~~DISCUSSION~~
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Outputs the template to the browser.
 ===== Syntax =====
-string fetchHead ()
+void display	( **$template**, **$file**, **$compress**, **$params** )| **$template** | string | The name of the template |
+| **$compress** | boolean | If true, will display information about the placeholders |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getBase ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->getBase]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Returns the document base url
 ===== Syntax =====
 string getBase ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== parse ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->parse]] |
-
-Parse a document template
+~~DISCUSSION~~
+====== getRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Get a renderer, executed the renderer and returns the result
 ===== Syntax =====
-void parse	( **$template**, **$filename**, **$directory** )
-| **$template** | string | The template to look for the file |
-| **$filename** | string | The actual filename |
-| **$directory** | string | The directory to look for the template |
+The getRenderer	( **$type**, **$name**, **$params** )| **$type** | string | The type of renderer |
+| **$name** | string | The name of the element to render |
+| **$params** | array | Associative array of values |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== setBase ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->setBase]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
 Sets the document base tag
 ===== Syntax =====
-void setBase	( **$url** )
-| **$url** | string | The url used in the base tag |
+void setBase	( **$url** )| **$url** | string | The url used in the base tag |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== setMetaContentType ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->setMetaContentType]] |
-
-Sets an http-equiv Content-Type meta tag
+~~DISCUSSION~~
+====== setRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Set a renderer
 ===== Syntax =====
-void setMetaContentType ()
+The setRenderer	( **$type**, **$name**, **$contents**, **$params** )| **$type** | string | The type of renderer |
+| **$name** | string | The name of the element to render |
+| **$params** | array | Associative array of values |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== setMetaData ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->setMetaData]] |
-
-Sets or alters a meta tag.
+~~DISCUSSION~~
+====== _addRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Adds a renderer to be called
 ===== Syntax =====
-void setMetaData	( **$name**, **$content**, **$http_equiv** )
-| **$name** | string | Value of name or http-equiv tag |
-| **$content** | string | Value of the content tag |
-| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+string _addRenderer	( **$type**, **$name** )| **$type** | string | The renderer type |
+| **$name** | string | The renderer name |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
-====== unsetMetaData ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->unsetMetaData]] |
-
-Unsets a meta tag.
+~~DISCUSSION~~
+====== _load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Load a template file
 ===== Syntax =====
-void unsetMetaData	( **$name**, **$http_equiv** )
-| **$name** | string | Value of name or http-equiv tag |
-| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+string _load	( **$directory**, **$filename**, **$template** )| **$template** | string | The name of the template |
+| **$filename** | string | The actual filename |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
+====== _parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Document]] | [[JDocumentHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla.Framework/Document/JDocumentHTML.html|JDocumentHTML->]] | 28 Apr 2006 | Work in progress |
+Parse a document template
+===== Syntax =====
+void _parse	( **$directory**, **$file** )| **$directory** | string | The template directory |
+| **$file** | string | The actual template file |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

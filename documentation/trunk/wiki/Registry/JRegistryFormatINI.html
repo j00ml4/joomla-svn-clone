@@ -1,13 +1,12 @@
-====== JRegistryFormatINI [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI]] |
+====== JRegistryFormatINI ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Registry]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI]] | 28 Apr 2006 | Work in progress |
 
 INI format handler for JRegistry
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRegistryFormatINI-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string  	-	Unfortunately, there is no way to have ini values nested further than two  		levels deep.  Therefore we will only go through the first two levels of  		the object. |
-| [[JRegistryFormatINI-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatINI-stringToObject|stringToObject]] | Parse an .ini string, based on phpDocumentor phpDocumentor_parse_ini_file function |
-
+| [[JRegistryFormatINI-objectToString|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string  	-	Unfortunately, there is no way to have ini values nested further than two  		levels deep.  Therefore we will only go through the first two levels of  		the object. |
+| [[JRegistryFormatINI-stringToObject|{{http://api.joomla.org/media/images/Method.png }}}]] [[JRegistryFormatINI-stringToObject|stringToObject]] | Parse an .ini string, based on phpDocumentor phpDocumentor_parse_ini_file function |
 ----
 
 ~~DISCUSSION~~
@@ -15,30 +14,36 @@ INI format handler for JRegistry
 
 
 ====== objectToString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->objectToString]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatINI|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->]] | 28 Apr 2006 | Work in progress |
 Converts an object into an INI formatted string  	-	Unfortunately, there is no way to have ini values nested further than two  		levels deep.  Therefore we will only go through the first two levels of  		the object.
 ===== Syntax =====
-string objectToString	( **&$object**, **$params**, **$param** )
-| **$object** | object | Data Source Object |
+string objectToString	( **&$object**, **$params**, **$param** )| **$object** | object | Data Source Object |
 | **$param** | array | Parameters used by the formatter |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== stringToObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->stringToObject]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Registry]] | [[JRegistryFormatINI|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla.Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->]] | 28 Apr 2006 | Work in progress |
 Parse an .ini string, based on phpDocumentor phpDocumentor_parse_ini_file function
 ===== Syntax =====
-object Data stringToObject	( **$data**, **$process_sections**, **$asArray** )
-| **$data** | mixed | The INI string or array of lines |
+object Data stringToObject	( **$data**, **$process_sections**, **$asArray** )| **$data** | mixed | The INI string or array of lines |
 | **$process_sections** | boolean | add an associative index for each section [in brackets] |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

@@ -1,16 +1,15 @@
-====== JElement [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement]] |
+====== JElement ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Parameter]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement]] | 28 Apr 2006 | Work in progress |
 
 Parameter base class<p>The JElement is the base class for all JElement types</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JElement-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement-__construct|__construct]] | Constructor |
-| [[JElement-fetchElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement-fetchElement|fetchElement]] |  |
-| [[JElement-fetchTooltip|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement-fetchTooltip|fetchTooltip]] |  |
-| [[JElement-getName|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement-getName|getName]] | get the element name |
-| [[JElement-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement-render|render]] |  |
-
+| [[JElement-__construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JElement-__construct|__construct]] | Constructor |
+| [[JElement-fetchElement|{{http://api.joomla.org/media/images/Method.png }}}]] [[JElement-fetchElement|fetchElement]] |  |
+| [[JElement-fetchTooltip|{{http://api.joomla.org/media/images/Method.png }}}]] [[JElement-fetchTooltip|fetchTooltip]] |  |
+| [[JElement-getName|{{http://api.joomla.org/media/images/Method.png }}}]] [[JElement-getName|getName]] | get the element name |
+| [[JElement-render|{{http://api.joomla.org/media/images/Method.png }}}]] [[JElement-render|render]] |  |
 ----
 
 ~~DISCUSSION~~
@@ -18,62 +17,77 @@ Parameter base class<p>The JElement is the base class for all JElement types</p>
 
 
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->__construct]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|{{http://api.joomla.org/media/images/Class.png }}]][[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->]] | 28 Apr 2006 | Work in progress |
 Constructor
 ===== Syntax =====
 JElement __construct	( **$parent** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->fetchElement]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|{{http://api.joomla.org/media/images/Class.png }}]][[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void fetchElement	( **$name**, **$value**, **&$xmlElement**, **$control_name** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== fetchTooltip ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->fetchTooltip]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|{{http://api.joomla.org/media/images/Class.png }}]][[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void fetchTooltip	( **$label**, **$description**, **&$xmlElement**, **$control_name**, **$name** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->getName]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|{{http://api.joomla.org/media/images/Class.png }}]][[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->]] | 28 Apr 2006 | Work in progress |
 get the element name
 ===== Syntax =====
 string getName ()
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->render]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Parameter]] | [[JElement|{{http://api.joomla.org/media/images/Class.png }}]][[JElement|JElement]] | [[http://api.joomla.org/Joomla.Framework/Parameter/JElement.html|JElement->]] | 28 Apr 2006 | Work in progress |
 
 ===== Syntax =====
 void render	( **&$xmlElement**, **$control_name** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

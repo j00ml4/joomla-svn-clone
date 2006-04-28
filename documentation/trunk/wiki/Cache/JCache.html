@@ -1,19 +1,19 @@
-====== JCache [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache]] |
+====== JCache ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Cache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache]] | 28 Apr 2006 | Work in progress |
 
 Abstract class for caching handlers
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCache-JCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-JCache|JCache]] | Constructor<p>$options is an assoc. To have a look at availables options,  see the constructor of the Cache_Lite class in 'Cache_Lite.php'</p><p>Comparing to Cache_Lite constructor, there is another option :  $options = array( 	 (...) see Cache_Lite constructor 	 'defaultGroup' =&gt; default cache group for function caching (string)  );</p> |
-| [[JCache-cleanCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-cleanCache|cleanCache]] | Cleans the cache |
-| [[JCache-generateId|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-generateId|generateId]] | Make a control key with the string containing datas |
-| [[JCache-getCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-getCache|getCache]] | Deprecated, use JFactory createCache instead |
-| [[JCache-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-getInstance|getInstance]] | Returns a reference to the global Cache object, only creating it  if it doesn't already exist. |
-| [[JCache-setCacheValidation|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-setCacheValidation|setCacheValidation]] | Enable/disbale cache validation |
-| [[JCache-setCaching|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-setCaching|setCaching]] | Enable/disbale caching, if caching is enabled |
-| [[JCache-_construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-_construct|_construct]] | Constructor |
-
+| [[JCache-JCache|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-JCache|JCache]] | Constructor<p>$options is an assoc. To have a look at availables options,  see the constructor of the Cache_Lite class in 'Cache_Lite.php'</p><p>Comparing to Cache_Lite constructor, there is another option :  $options = array( 	 (...) see Cache_Lite constructor 	 'defaultGroup' =&gt; default cache group for function caching (string)  );</p> |
+| [[JCache-cleanCache|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-cleanCache|cleanCache]] | Cleans the cache |
+| [[JCache-generateId|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-generateId|generateId]] | Make a control key with the string containing datas |
+| [[JCache-getCache|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-getCache|getCache]] | Deprecated, use JFactory createCache instead |
+| [[JCache-getInstance|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-getInstance|getInstance]] | Returns a reference to the global Cache object, only creating it  if it doesn't already exist. |
+| [[JCache-remove|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-remove|remove]] | Remove a cache file |
+| [[JCache-setCacheValidation|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-setCacheValidation|setCacheValidation]] | Enable/disbale cache validation |
+| [[JCache-setCaching|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-setCaching|setCaching]] | Enable/disbale caching, if caching is enabled |
+| [[JCache-_construct|{{http://api.joomla.org/media/images/Method.png }}}]] [[JCache-_construct|_construct]] | Constructor |
 ----
 
 ~~DISCUSSION~~
@@ -21,106 +21,147 @@ Abstract class for caching handlers
 
 
 ====== JCache ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->JCache]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Constructor<p>$options is an assoc. To have a look at availables options,  see the constructor of the Cache_Lite class in 'Cache_Lite.php'</p><p>Comparing to Cache_Lite constructor, there is another option :  $options = array( 	 (...) see Cache_Lite constructor 	 'defaultGroup' =&gt; default cache group for function caching (string)  );</p>
 ===== Syntax =====
-JCache JCache	( **$options** )
-| **$options** | array | options |
+JCache JCache	( **$options** )| **$options** | array | options |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== cleanCache ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->cleanCache]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Cleans the cache
 ===== Syntax =====
 void cleanCache	( **$group**, **$mode** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== generateId ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->generateId]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Make a control key with the string containing datas
 ===== Syntax =====
-string generateId	( **$data**, **$controlType** )
-| **$data** | string | data |
+string generateId	( **$data**, **$controlType** )| **$data** | string | data |
 | **$controlType** | string | type of control 'md5', 'crc32' or 'strlen' |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getCache ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->getCache]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Deprecated, use JFactory createCache instead
 ===== Syntax =====
 void &getCache	( **$group** )
-
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->getInstance]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Returns a reference to the global Cache object, only creating it  if it doesn't already exist.
 ===== Syntax =====
-<a href="../../Joomla.Legacy/1.5/database.html">database</a> &getInstance	( **$handler**, **$options** )
-| **$handler** | handler | The cache handler to instantiate |
+<a href="../../Joomla.Legacy/1.5/database.html">database</a> &getInstance	( **$handler**, **$options** )| **$handler** | handler | The cache handler to instantiate |
 | **$options** | array | options |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
+====== remove ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
+Remove a cache file
+===== Syntax =====
+boolean remove	( **$id**, **$group** )| **$id** | string | cache id |
+| **$group** | string | name of the cache group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
 ====== setCacheValidation ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->setCacheValidation]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Enable/disbale cache validation
 ===== Syntax =====
-void setCacheValidation	( **$validateCache** )
-| **$validateCache** | boolean | If true enable cache validation. |
+void setCacheValidation	( **$validateCache** )| **$validateCache** | boolean | If true enable cache validation. |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== setCaching ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->setCaching]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Enable/disbale caching, if caching is enabled
 ===== Syntax =====
-void setCaching	( **$enable** )
-| **$enable** | boolean | If true enable caching. |
+void setCaching	( **$enable** )| **$enable** | boolean | If true enable caching. |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== _construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->_construct]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla.Framework/Cache/JCache.html|JCache->]] | 28 Apr 2006 | Work in progress |
 Constructor
 ===== Syntax =====
-void _construct	( **$options** )
-| **$options** | array | options |
+void _construct	( **$options** )| **$options** | array | options |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~

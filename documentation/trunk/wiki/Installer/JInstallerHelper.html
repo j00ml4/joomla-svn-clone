@@ -1,17 +1,16 @@
-====== JInstallerHelper [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper]] |
+====== JInstallerHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}}]] [[|Installer]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper]] | 28 Apr 2006 | Work in progress |
 
 Installer helper class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstallerHelper-cleanupInstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-cleanupInstall|cleanupInstall]] | Clean up temporary uploaded package and unpacked extension |
-| [[JInstallerHelper-detectType|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-detectType|detectType]] | Method to detect the extension type from a package directory |
-| [[JInstallerHelper-downloadPackage|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-downloadPackage|downloadPackage]] | Downloads a package |
-| [[JInstallerHelper-getFilenameFromURL|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-getFilenameFromURL|getFilenameFromURL]] | Gets a file name out of a url |
-| [[JInstallerHelper-splitSql|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-splitSql|splitSql]] | Splits contents of a sql file into array of discreet queries<p>queries need to be delimited with end of statement marker ';'</p> |
-| [[JInstallerHelper-unpack|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerHelper-unpack|unpack]] | Unpacks a file and verifies it as a Joomla element package |
-
+| [[JInstallerHelper-cleanupInstall|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-cleanupInstall|cleanupInstall]] | Clean up temporary uploaded package and unpacked extension |
+| [[JInstallerHelper-detectType|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-detectType|detectType]] | Method to detect the extension type from a package directory |
+| [[JInstallerHelper-downloadPackage|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-downloadPackage|downloadPackage]] | Downloads a package |
+| [[JInstallerHelper-getFilenameFromURL|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-getFilenameFromURL|getFilenameFromURL]] | Gets a file name out of a url |
+| [[JInstallerHelper-splitSql|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-splitSql|splitSql]] | Splits contents of a sql file into array of discreet queries<p>queries need to be delimited with end of statement marker ';'</p> |
+| [[JInstallerHelper-unpack|{{http://api.joomla.org/media/images/Method.png }}}]] [[JInstallerHelper-unpack|unpack]] | Unpacks a file and verifies it as a Joomla element package |
 ----
 
 ~~DISCUSSION~~
@@ -19,82 +18,100 @@ Installer helper class
 
 
 ====== cleanupInstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->cleanupInstall]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Clean up temporary uploaded package and unpacked extension
 ===== Syntax =====
-boolean cleanupInstall	( **$p_file**, **$resultdir** )
-| **$p_file** | string | Path to the uploaded package file |
+boolean cleanupInstall	( **$p_file**, **$resultdir** )| **$p_file** | string | Path to the uploaded package file |
 | **$resultdir** | string | Path to the unpacked extension |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== detectType ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->detectType]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Method to detect the extension type from a package directory
 ===== Syntax =====
-mixed detectType	( **$p_dir** )
-| **$p_dir** | string | Path to package directory |
+mixed detectType	( **$p_dir** )| **$p_dir** | string | Path to package directory |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== downloadPackage ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->downloadPackage]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Downloads a package
 ===== Syntax =====
-mixed downloadPackage	( **$url**, **$target** )
-| **$url** | string | URL of file to download |
+mixed downloadPackage	( **$url**, **$target** )| **$url** | string | URL of file to download |
 | **$target** | string | Download target filename [optional] |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== getFilenameFromURL ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->getFilenameFromURL]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Gets a file name out of a url
 ===== Syntax =====
-mixed getFilenameFromURL	( **$url** )
-| **$url** | string | URL to get name from |
+mixed getFilenameFromURL	( **$url** )| **$url** | string | URL to get name from |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== splitSql ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->splitSql]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Splits contents of a sql file into array of discreet queries<p>queries need to be delimited with end of statement marker ';'</p>
 ===== Syntax =====
-array splitSql	( **$sql** )
-| **$sql** | string |  |
+array splitSql	( **$sql** )| **$sql** | string |  |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
 ====== unpack ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->unpack]] |
-
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla.Framework/Installer/JInstallerHelper.html|JInstallerHelper->]] | 28 Apr 2006 | Work in progress |
 Unpacks a file and verifies it as a Joomla element package
 ===== Syntax =====
-boolean unpack	( **$p_filename** )
-| **$p_filename** | string | The uploaded package filename or install directory |
+boolean unpack	( **$p_filename** )| **$p_filename** | string | The uploaded package filename or install directory |
 
 ===== Examples =====
+<code php|Example>
+
+</code>
 
 
+----
 
+~~DISCUSSION~~
