@@ -1,20 +1,20 @@
 ====== JView ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView]] | never | Work in progress |
 
 Base class for a Joomla View<p>Class holding methods for displaying presentation data.</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JView-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JView-__construct|__construct]] | Constructor |
-| [[JView-addEscape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-addEscape|addEscape]] | Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
+| [[JView-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-__construct|__construct]] | Constructor |
+| [[JView-addEscape|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-addEscape|addEscape]] | Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </pre></code></ol></div></p> |
-| [[JView-addTemplatePath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-addTemplatePath|addTemplatePath]] | Adds to the stack of view script paths in LIFO order. |
-| [[JView-assign|##http://api.joomla.org/media/images/Method.png qq]] [[JView-assign|assign]] | Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+| [[JView-addTemplatePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-addTemplatePath|addTemplatePath]] | Adds to the stack of view script paths in LIFO order. |
+| [[JView-assign|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-assign|assign]] | Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
@@ -34,7 +34,7 @@ Base class for a Joomla View<p>Class holding methods for displaying presentation
 <li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </pre></code></ol></div></p> |
-| [[JView-assignRef|##http://api.joomla.org/media/images/Method.png qq]] [[JView-assignRef|assignRef]] | Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+| [[JView-assignRef|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-assignRef|assignRef]] | Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassignRef">assignRef</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$ref</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
@@ -42,8 +42,8 @@ Base class for a Joomla View<p>Class holding methods for displaying presentation
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">ref&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-var">$var1</span><span class="src-sym">;</span></div></li>
 </pre></code></ol></div></p> |
-| [[JView-display|##http://api.joomla.org/media/images/Method.png qq]] [[JView-display|display]] | Execute and display a template script. |
-| [[JView-escape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-escape|escape]] | Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
+| [[JView-display|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-display|display]] | Execute and display a template script. |
+| [[JView-escape|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-escape|escape]] | Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;replacement&nbsp;callbacks</span></div></li>
@@ -55,23 +55,23 @@ Base class for a Joomla View<p>Class holding methods for displaying presentation
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </pre></code></ol></div></p> |
-| [[JView-get|##http://api.joomla.org/media/images/Method.png qq]] [[JView-get|get]] | Method to get data from a registered model |
-| [[JView-getLayout|##http://api.joomla.org/media/images/Method.png qq]] [[JView-getLayout|getLayout]] | Get the layout. |
-| [[JView-getModel|##http://api.joomla.org/media/images/Method.png qq]] [[JView-getModel|getModel]] | Method to get the model object |
-| [[JView-loadTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JView-loadTemplate|loadTemplate]] | Load a template file -- first look in the templates folder for an override |
-| [[JView-setEscape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setEscape|setEscape]] | Clears then sets the callbacks to use when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodsetEscape">setEscape</a><span class="src-sym">(</span></div></li>
+| [[JView-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-get|get]] | Method to get data from a registered model |
+| [[JView-getLayout|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-getLayout|getLayout]] | Get the layout. |
+| [[JView-getModel|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-getModel|getModel]] | Method to get the model object |
+| [[JView-loadTemplate|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-loadTemplate|loadTemplate]] | Load a template file -- first look in the templates folder for an override |
+| [[JView-setEscape|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-setEscape|setEscape]] | Clears then sets the callbacks to use when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodsetEscape">setEscape</a><span class="src-sym">(</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </pre></code></ol></div></p> |
-| [[JView-setLayout|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setLayout|setLayout]] | Sets the layout name to use |
-| [[JView-setModel|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setModel|setModel]] | Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p> |
-| [[JView-setTemplatePath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setTemplatePath|setTemplatePath]] | Resets the stack of view template paths.<p>To clear all paths, use JView::setTemplatePath(null).</p> |
-| [[JView-_addPath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_addPath|_addPath]] | Adds to the search path for templates and resources. |
-| [[JView-_findFile|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_findFile|_findFile]] | Searches the directory paths for a given file. |
-| [[JView-_setPath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_setPath|_setPath]] | Sets an entire array of search paths for templates or resources. |
+| [[JView-setLayout|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-setLayout|setLayout]] | Sets the layout name to use |
+| [[JView-setModel|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-setModel|setModel]] | Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p> |
+| [[JView-setTemplatePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-setTemplatePath|setTemplatePath]] | Resets the stack of view template paths.<p>To clear all paths, use JView::setTemplatePath(null).</p> |
+| [[JView-_addPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-_addPath|_addPath]] | Adds to the search path for templates and resources. |
+| [[JView-_findFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-_findFile|_findFile]] | Searches the directory paths for a given file. |
+| [[JView-_setPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JView-_setPath|_setPath]] | Sets an entire array of search paths for templates or resources. |
 
 ----
 
@@ -81,7 +81,7 @@ Base class for a Joomla View<p>Class holding methods for displaying presentation
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->__construct]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->__construct]] | never | Work in progress |
 Constructor
 ===== Syntax =====
 JView __construct	( **$config** )
@@ -100,7 +100,7 @@ JView __construct	( **$config** )
 
 ====== addEscape ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addEscape]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addEscape]] | never | Work in progress |
 Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
@@ -124,7 +124,7 @@ void addEscape ()
 
 ====== addTemplatePath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addTemplatePath]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addTemplatePath]] | never | Work in progress |
 Adds to the stack of view script paths in LIFO order.
 ===== Syntax =====
 void addTemplatePath	( **$path** )
@@ -143,7 +143,7 @@ void addTemplatePath	( **$path** )
 
 ====== assign ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assign]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assign]] | never | Work in progress |
 Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
@@ -180,7 +180,7 @@ bool assign ()
 
 ====== assignRef ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assignRef]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assignRef]] | never | Work in progress |
 Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
 <li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
@@ -207,7 +207,7 @@ bool assignRef	( **$key**, **&$val** )
 
 ====== display ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->display]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->display]] | never | Work in progress |
 Execute and display a template script.
 ===== Syntax =====
 void display	( **$tpl** )
@@ -226,7 +226,7 @@ void display	( **$tpl** )
 
 ====== escape ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->escape]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->escape]] | never | Work in progress |
 Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;</div></li>
@@ -256,7 +256,7 @@ mixed escape	( **$value** )
 
 ====== get ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->get]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->get]] | never | Work in progress |
 Method to get data from a registered model
 ===== Syntax =====
 mixed &get	( **$method**, **$model** )
@@ -276,7 +276,7 @@ mixed &get	( **$method**, **$model** )
 
 ====== getLayout ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getLayout]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getLayout]] | never | Work in progress |
 Get the layout.
 ===== Syntax =====
 string getLayout ()
@@ -294,7 +294,7 @@ string getLayout ()
 
 ====== getModel ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getModel]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getModel]] | never | Work in progress |
 Method to get the model object
 ===== Syntax =====
 mixed &getModel	( **$name** )
@@ -313,7 +313,7 @@ mixed &getModel	( **$name** )
 
 ====== loadTemplate ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->loadTemplate]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->loadTemplate]] | never | Work in progress |
 Load a template file -- first look in the templates folder for an override
 ===== Syntax =====
 string loadTemplate	( **$tpl**, **$_tpl** )
@@ -333,7 +333,7 @@ string loadTemplate	( **$tpl**, **$_tpl** )
 
 ====== setEscape ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setEscape]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setEscape]] | never | Work in progress |
 Clears then sets the callbacks to use when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodsetEscape">setEscape</a><span class="src-sym">(</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
@@ -357,7 +357,7 @@ void setEscape ()
 
 ====== setLayout ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setLayout]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setLayout]] | never | Work in progress |
 Sets the layout name to use
 ===== Syntax =====
 void setLayout	( **$layout**, **$template** )
@@ -377,7 +377,7 @@ void setLayout	( **$layout**, **$template** )
 
 ====== setModel ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setModel]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setModel]] | never | Work in progress |
 Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p>
 ===== Syntax =====
 object The &setModel	( **&$model**, **$default**, **$model** )
@@ -398,7 +398,7 @@ object The &setModel	( **&$model**, **$default**, **$model** )
 
 ====== setTemplatePath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setTemplatePath]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setTemplatePath]] | never | Work in progress |
 Resets the stack of view template paths.<p>To clear all paths, use JView::setTemplatePath(null).</p>
 ===== Syntax =====
 void setTemplatePath	( **$path** )
@@ -417,7 +417,7 @@ void setTemplatePath	( **$path** )
 
 ====== _addPath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_addPath]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_addPath]] | never | Work in progress |
 Adds to the search path for templates and resources.
 ===== Syntax =====
 void _addPath	( **$type**, **$path** )
@@ -437,7 +437,7 @@ void _addPath	( **$type**, **$path** )
 
 ====== _findFile ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_findFile]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_findFile]] | never | Work in progress |
 Searches the directory paths for a given file.
 ===== Syntax =====
 string|bool _findFile	( **$type**, **$file** )
@@ -457,7 +457,7 @@ string|bool _findFile	( **$type**, **$file** )
 
 ====== _setPath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_setPath]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JView|{{http://api.joomla.org/media/images/Class.png }}]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_setPath]] | never | Work in progress |
 Sets an entire array of search paths for templates or resources.
 ===== Syntax =====
 void _setPath	( **$type**, **$path** )
