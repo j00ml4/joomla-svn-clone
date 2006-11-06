@@ -1,6 +1,6 @@
 ====== JOutputFilter ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter]] | never | Work in progress |
 
 JOutputFilter
 ===== Methods =====
@@ -19,7 +19,7 @@ JOutputFilter
 
 ====== ampReplace ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->ampReplace]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->ampReplace]] | never | Work in progress |
 Replaces &amp;amp; with &amp; for xhtml compliance
 ===== Syntax =====
 void ampReplace	( **$text** )
@@ -38,7 +38,7 @@ void ampReplace	( **$text** )
 
 ====== cleanText ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->cleanText]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->cleanText]] | never | Work in progress |
 Cleans text of all formating and scripting code
 ===== Syntax =====
 void cleanText	( **&$text** )
@@ -57,7 +57,7 @@ void cleanText	( **&$text** )
 
 ====== linkXHTMLSafe ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->linkXHTMLSafe]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->linkXHTMLSafe]] | never | Work in progress |
 This method processes a string and replaces all instances of &amp; with &amp;amp; in links only
 ===== Syntax =====
 string linkXHTMLSafe	( **$input** )
@@ -76,7 +76,7 @@ string linkXHTMLSafe	( **$input** )
 
 ====== objectHtmlSafe ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->objectHtmlSafe]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->objectHtmlSafe]] | never | Work in progress |
 Makes an object safe to display in forms<p>Object parameters that are non-string, array, object or start with underscore  will be converted</p>
 ===== Syntax =====
 void objectHtmlSafe	( **&$mixed**, **$quote_style**, **$exclude_keys** )
@@ -97,7 +97,7 @@ void objectHtmlSafe	( **&$mixed**, **$quote_style**, **$exclude_keys** )
 
 ====== _ampReplaceCallback ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->_ampReplaceCallback]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Filter|Filter]] | [[JOutputFilter|{{http://api.joomla.org/media/images/Class.png }}]][[JOutputFilter|JOutputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JOutputFilter.html|JOutputFilter->_ampReplaceCallback]] | never | Work in progress |
 Callback method for replacing &amp; with &amp;amp; in a string
 ===== Syntax =====
 string _ampReplaceCallback	( **$m** )

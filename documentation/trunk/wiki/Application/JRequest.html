@@ -1,6 +1,6 @@
 ====== JRequest ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest]] | never | Work in progress |
 
 JRequest Class<p>This class serves to provide the Joomla Framework with a common interface to access  request variables.  This includes $_POST, $_GET, and naturally $_REQUEST.  Variables  can be passed through an input filter to avoid injection or returned raw.</p><p>The concept and implementation of this class is inspired by the binary cloud  environment package.  &lt;http://www.binarycloud.com/&gt;</p>
 ===== Methods =====
@@ -22,7 +22,7 @@ JRequest Class<p>This class serves to provide the Joomla Framework with a common
 
 ====== clean ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->clean]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->clean]] | never | Work in progress |
 Cleans the request from script injection.
 ===== Syntax =====
 void clean ()
@@ -40,7 +40,7 @@ void clean ()
 
 ====== get ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->get]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->get]] | never | Work in progress |
 Fetches and returns a request array.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  $_GET, POST and PUT will result in returning $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p>
 ===== Syntax =====
 mixed get	( **$hash**, **$mask** )
@@ -60,7 +60,7 @@ mixed get	( **$hash**, **$mask** )
 
 ====== getURI ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getURI]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getURI]] | never | Work in progress |
 Gets the full request path
 ===== Syntax =====
 string getURI ()
@@ -78,7 +78,7 @@ string getURI ()
 
 ====== getVar ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getVar]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getVar]] | never | Work in progress |
 Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p>
 ===== Syntax =====
 mixed getVar	( **$name**, **$default**, **$hash**, **$type**, **$mask** )
@@ -101,7 +101,7 @@ mixed getVar	( **$name**, **$default**, **$hash**, **$type**, **$mask** )
 
 ====== setVar ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->setVar]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->setVar]] | never | Work in progress |
 
 ===== Syntax =====
 void setVar	( **$name**, **$value**, **$hash** )
@@ -122,7 +122,7 @@ void setVar	( **$name**, **$value**, **$hash** )
 
 ====== _cleanArray ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanArray]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanArray]] | never | Work in progress |
 Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked
 ===== Syntax =====
 void _cleanArray	( **&$array**, **$globalise**, **$array** )
@@ -143,7 +143,7 @@ void _cleanArray	( **&$array**, **$globalise**, **$array** )
 
 ====== _cleanVar ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanVar]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanVar]] | never | Work in progress |
 
 ===== Syntax =====
 void _cleanVar	( **$var**, **$mask**, **$type** )
@@ -164,7 +164,7 @@ void _cleanVar	( **$var**, **$mask**, **$type** )
 
 ====== _stripSlashesRecursive ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_stripSlashesRecursive]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JRequest|{{http://api.joomla.org/media/images/Class.png }}]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_stripSlashesRecursive]] | never | Work in progress |
 Strips slashes recursively on an array
 ===== Syntax =====
 array _stripSlashesRecursive	( **$value**, **$array** )
