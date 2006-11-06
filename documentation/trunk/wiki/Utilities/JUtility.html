@@ -1,0 +1,149 @@
+====== JUtility ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility]] | never | Work in progress |
+
+JUtility is a utility functions class
+===== Methods =====
+^ Method ^ Description ^
+| [[JUtility-getHash|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-getHash|getHash]] | Provides a secure hash based on a seed |
+| [[JUtility-getToken|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-getToken|getToken]] | Method to determine a hash for anti-spoofing variable names |
+| [[JUtility-isWinOS|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-isWinOS|isWinOS]] | Method to determine if the host OS is  Windows |
+| [[JUtility-parseAttributes|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-parseAttributes|parseAttributes]] | Method to extract key/value pairs out of a string with xml style attributes |
+| [[JUtility-sendAdminMail|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-sendAdminMail|sendAdminMail]] | Sends mail to administrator for approval of a user submission |
+| [[JUtility-sendMail|##http://api.joomla.org/media/images/Method.png qq]] [[JUtility-sendMail|sendMail]] | Mail function (uses phpMailer) |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== getHash ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->getHash]] | never | Work in progress |
+Provides a secure hash based on a seed
+===== Syntax =====
+string getHash	( **$seed** )
+
+| **$seed** | string | Seed string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getToken ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->getToken]] | never | Work in progress |
+Method to determine a hash for anti-spoofing variable names
+===== Syntax =====
+string getToken ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isWinOS ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->isWinOS]] | never | Work in progress |
+Method to determine if the host OS is  Windows
+===== Syntax =====
+true isWinOS ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== parseAttributes ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->parseAttributes]] | never | Work in progress |
+Method to extract key/value pairs out of a string with xml style attributes
+===== Syntax =====
+array parseAttributes	( **$string** )
+
+| **$string** | string | String containing xml style attributes |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== sendAdminMail ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->sendAdminMail]] | never | Work in progress |
+Sends mail to administrator for approval of a user submission
+===== Syntax =====
+boolean sendAdminMail	( **$adminName**, **$adminEmail**, **$email**, **$type**, **$title**, **$author**, **$url** )
+
+| **$adminName** | string | Name of administrator |
+| **$adminEmail** | string | Email address of administrator |
+| **$email** | string | [NOT USED TODO: Deprecate?] |
+| **$type** | string | Type of item to approve |
+| **$title** | string | Title of item to approve |
+| **$author** | string | Author of item to approve |
+| **$url** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== sendMail ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JUtility|##http://api.joomla.org/media/images/Class.png qq]][[JUtility|JUtility]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JUtility.html|JUtility->sendMail]] | never | Work in progress |
+Mail function (uses phpMailer)
+===== Syntax =====
+boolean sendMail	( **$from**, **$fromname**, **$recipient**, **$subject**, **$body**, **$mode**, **$cc**, **$bcc**, **$attachment**, **$replyto**, **$replytoname** )
+
+| **$from** | string | From e-mail address |
+| **$fromname** | string | From name |
+| **$recipient** | mixed | Recipient e-mail address(es) |
+| **$subject** | string | E-mail subject |
+| **$body** | string | Message body |
+| **$mode** | boolean | false = plain text, true = HTML |
+| **$cc** | mixed | CC e-mail address(es) |
+| **$bcc** | mixed | BCC e-mail address(es) |
+| **$attachment** | mixed | Attachment file name(s) |
+| **$replyto** | mixed | Reply to email address(es) |
+| **$replytoname** | mixed | Reply to name(s) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

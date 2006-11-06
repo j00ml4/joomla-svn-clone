@@ -1,0 +1,97 @@
+====== JCacheHash ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCacheHash.html|JCacheHash]] | never | Work in progress |
+
+Class to cache a hash (used for ACL caching)<p>Class Based Heavily on Hashed_Cache_Lite by: Mike Benoit &lt;ipso@snappymail.ca&gt;  phpGACL - Generic Access Control List - Hashed Directory Caching.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JCacheHash-clean|##http://api.joomla.org/media/images/Method.png qq]] [[JCacheHash-clean|clean]] | Clean the cache  if no group is specified all cache files will be destroyed else only  cache files of the specified group will be destroyed |
+| [[JCacheHash-setCaching|##http://api.joomla.org/media/images/Method.png qq]] [[JCacheHash-setCaching|setCaching]] | Enable/disbale caching |
+| [[JCacheHash-_construct|##http://api.joomla.org/media/images/Method.png qq]] [[JCacheHash-_construct|_construct]] | Constructor |
+| [[JCacheHash-_remove_dir_structure|##http://api.joomla.org/media/images/Method.png qq]] [[JCacheHash-_remove_dir_structure|_remove_dir_structure]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== clean ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCacheHash|##http://api.joomla.org/media/images/Class.png qq]][[JCacheHash|JCacheHash]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCacheHash.html|JCacheHash->clean]] | never | Work in progress |
+Clean the cache  if no group is specified all cache files will be destroyed else only  cache files of the specified group will be destroyed
+===== Syntax =====
+boolean clean	( **$group** )
+
+| **$group** | string | name of the cache group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setCaching ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCacheHash|##http://api.joomla.org/media/images/Class.png qq]][[JCacheHash|JCacheHash]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCacheHash.html|JCacheHash->setCaching]] | never | Work in progress |
+Enable/disbale caching
+===== Syntax =====
+void setCaching	( **$enable** )
+
+| **$enable** | boolean | If true enable caching. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCacheHash|##http://api.joomla.org/media/images/Class.png qq]][[JCacheHash|JCacheHash]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCacheHash.html|JCacheHash->_construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+void _construct	( **&$options**, **$options** )
+
+| **$options** | array | options |
+| **&$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _remove_dir_structure ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCacheHash|##http://api.joomla.org/media/images/Class.png qq]][[JCacheHash|JCacheHash]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCacheHash.html|JCacheHash->_remove_dir_structure]] | never | Work in progress |
+
+===== Syntax =====
+void _remove_dir_structure	( **$dir**, **$remove_dir** )
+
+| **$dir** |  |  |
+| **$remove_dir** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,205 @@
+====== JError ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError]] | never | Work in progress |
+
+Error Handling Class<p>This class is an proxy of the patError class</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JError-customErrorPage|##http://api.joomla.org/media/images/Method.png qq]] [[JError-customErrorPage|customErrorPage]] | Display a custom error page and exit gracefully |
+| [[JError-getError|##http://api.joomla.org/media/images/Method.png qq]] [[JError-getError|getError]] | method for retrieving the last error stored |
+| [[JError-getErrors|##http://api.joomla.org/media/images/Method.png qq]] [[JError-getErrors|getErrors]] | method for for retrieving the errors that are stored |
+| [[JError-isError|##http://api.joomla.org/media/images/Method.png qq]] [[JError-isError|isError]] | method for checking whether the return value of a pat application method is a pat  error object. |
+| [[JError-raise|##http://api.joomla.org/media/images/Method.png qq]] [[JError-raise|raise]] | creates a new patError object given the specified information. |
+| [[JError-raiseError|##http://api.joomla.org/media/images/Method.png qq]] [[JError-raiseError|raiseError]] | wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_ERROR will be returned. |
+| [[JError-raiseNotice|##http://api.joomla.org/media/images/Method.png qq]] [[JError-raiseNotice|raiseNotice]] | wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_NOTICE will be returned. |
+| [[JError-raiseWarning|##http://api.joomla.org/media/images/Method.png qq]] [[JError-raiseWarning|raiseWarning]] | wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_WARNING will be returned. |
+| [[JError-setErrorHandling|##http://api.joomla.org/media/images/Method.png qq]] [[JError-setErrorHandling|setErrorHandling]] | sets the way the patErrorManager will handle teh different error levels. Use this  if you want to override the default settings.<p>Error handling modes: <ul><li>ignore</li><li>trigger</li><li>verbose</li><li>echo</li><li>callback</li><li>die</li><li>store</li></ul>  You may also set the error handling for several modes at once using PHP's bit operations.  Examples: <ul><li>E_ALL = Set the handling for all levels</li><li>E_ERROR | E_WARNING = Set the handling for errors and warnings</li><li>E_ALL ^ E_ERROR = Set the handling for all levels except errors</li></ul></p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== customErrorPage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->customErrorPage]] | never | Work in progress |
+Display a custom error page and exit gracefully
+===== Syntax =====
+void customErrorPage	( **&$error**, **$error** )
+
+| **$error** | object | patError-Object |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->getError]] | never | Work in progress |
+method for retrieving the last error stored
+===== Syntax =====
+array &getError ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getErrors ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->getErrors]] | never | Work in progress |
+method for for retrieving the errors that are stored
+===== Syntax =====
+array &getErrors ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->isError]] | never | Work in progress |
+method for checking whether the return value of a pat application method is a pat  error object.
+===== Syntax =====
+boolean isError	( **&$object** )
+
+| **&$object** | mixed |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== raise ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raise]] | never | Work in progress |
+creates a new patError object given the specified information.
+===== Syntax =====
+mixed &raise	( **$level**, **$code**, **$msg**, **$info** )
+
+| **$level** | int | The error level - use any of PHP's own error levels for this: E_ERROR, E_WARNING, E_NOTICE, E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE. |
+| **$code** | string | The application-internal error code for this error |
+| **$msg** | string | The error message, which may also be shown the user if need be. |
+| **$info** | mixed | Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== raiseError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseError]] | never | Work in progress |
+wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_ERROR will be returned.
+===== Syntax =====
+object &raiseError	( **$code**, **$msg**, **$info** )
+
+| **$code** | string | The application-internal error code for this error |
+| **$msg** | string | The error message, which may also be shown the user if need be. |
+| **$info** | mixed | Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== raiseNotice ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseNotice]] | never | Work in progress |
+wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_NOTICE will be returned.
+===== Syntax =====
+object &raiseNotice	( **$code**, **$msg**, **$info** )
+
+| **$code** | string | The application-internal error code for this error |
+| **$msg** | string | The error message, which may also be shown the user if need be. |
+| **$info** | mixed | Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== raiseWarning ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseWarning]] | never | Work in progress |
+wrapper for the raise() method where you do not have to specify the  error level - a patError object with error level E_WARNING will be returned.
+===== Syntax =====
+object &raiseWarning	( **$code**, **$msg**, **$info** )
+
+| **$code** | string | The application-internal error code for this error |
+| **$msg** | string | The error message, which may also be shown the user if need be. |
+| **$info** | mixed | Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setErrorHandling ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JError|##http://api.joomla.org/media/images/Class.png qq]][[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->setErrorHandling]] | never | Work in progress |
+sets the way the patErrorManager will handle teh different error levels. Use this  if you want to override the default settings.<p>Error handling modes: <ul><li>ignore</li><li>trigger</li><li>verbose</li><li>echo</li><li>callback</li><li>die</li><li>store</li></ul>  You may also set the error handling for several modes at once using PHP's bit operations.  Examples: <ul><li>E_ALL = Set the handling for all levels</li><li>E_ERROR | E_WARNING = Set the handling for errors and warnings</li><li>E_ALL ^ E_ERROR = Set the handling for all levels except errors</li></ul></p>
+===== Syntax =====
+mixed setErrorHandling	( **$level**, **$mode**, **$options** )
+
+| **$level** | int | The error level for which to set the error handling |
+| **$mode** | string | The mode to use for the error handling. |
+| **$options** | mixed | Optional: Any options needed for the given mode. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

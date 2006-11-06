@@ -1,0 +1,270 @@
+====== JFactory ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory]] | never | Work in progress |
+
+Joomla Framework Factory class
+===== Methods =====
+^ Method ^ Description ^
+| [[JFactory-getACL|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getACL|getACL]] | Get an authorization object<p>Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getCache|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getCache|getCache]] | Get a cache object<p>Returns a reference to the global JCache object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getConfig|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getConfig|getConfig]] | Get a configuration object<p>Returns a reference to the global JRegistry object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getDBO|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getDBO|getDBO]] | Get th database object<p>Returns a reference to the global JDatabase object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getDocument|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getDocument|getDocument]] | Get a document object<p>Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getEditor|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getEditor|getEditor]] | Get an JEditor object |
+| [[JFactory-getLanguage|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getLanguage|getLanguage]] | Get a language object<p>Returns a reference to the global JLanguage object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getMailer|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getMailer|getMailer]] | Get mailer object<p>Returns a reference to the global Mailer object, only creating it  if it doesn't already exist</p> |
+| [[JFactory-getSession|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getSession|getSession]] | Get a session object<p>Returns a reference to the global JSession object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getTemplate|getTemplate]] | Get an template object<p>Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getURI|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getURI|getURI]] | Return a reference to the JURI object |
+| [[JFactory-getUser|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getUser|getUser]] | Get an user object<p>Returns a reference to the global JUser object, only creating it  if it doesn't already exist.</p> |
+| [[JFactory-getXMLParser|##http://api.joomla.org/media/images/Method.png qq]] [[JFactory-getXMLParser|getXMLParser]] | Get a XML document |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== getACL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getACL]] | never | Work in progress |
+Get an authorization object<p>Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+object &getACL ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getCache ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getCache]] | never | Work in progress |
+Get a cache object<p>Returns a reference to the global JCache object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+object &getCache	( **$group**, **$handler** )
+
+| **$group** | string | The cache group name |
+| **$handler** | string | The cache class name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getConfig ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getConfig]] | never | Work in progress |
+Get a configuration object<p>Returns a reference to the global JRegistry object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/Registry/JRegistry.html">object JRegistry</a> &getConfig	( **$file**, **$type** )
+
+| **$file** | string | The path to the configuration file |
+| **$type** | string | The type of the configuration file |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getDBO]] | never | Work in progress |
+Get th database object<p>Returns a reference to the global JDatabase object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/Database/JDatabase.html">object JDatabase</a> &getDBO ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDocument ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getDocument]] | never | Work in progress |
+Get a document object<p>Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/I18N/JLanguage.html">object JLanguage</a> &getDocument ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getEditor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getEditor]] | never | Work in progress |
+Get an JEditor object
+===== Syntax =====
+object A &getEditor ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLanguage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getLanguage]] | never | Work in progress |
+Get a language object<p>Returns a reference to the global JLanguage object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/I18N/JLanguage.html">object JLanguage</a> &getLanguage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getMailer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getMailer]] | never | Work in progress |
+Get mailer object<p>Returns a reference to the global Mailer object, only creating it  if it doesn't already exist</p>
+===== Syntax =====
+object &getMailer ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getSession ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getSession]] | never | Work in progress |
+Get a session object<p>Returns a reference to the global JSession object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/Environment/JSession.html">object JSession</a> &getSession	( **$options** )
+
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getTemplate]] | never | Work in progress |
+Get an template object<p>Returns a reference to the global JAuthorization object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+object &getTemplate ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getURI ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getURI]] | never | Work in progress |
+Return a reference to the JURI object
+===== Syntax =====
+juri &getURI	( **$uri** )
+
+| **$uri** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getUser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getUser]] | never | Work in progress |
+Get an user object<p>Returns a reference to the global JUser object, only creating it  if it doesn't already exist.</p>
+===== Syntax =====
+<a href="../Joomla-Framework/User/JUser.html">object JUser</a> &getUser ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getXMLParser ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#|]] | [[JFactory|##http://api.joomla.org/media/images/Class.png qq]][[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getXMLParser]] | never | Work in progress |
+Get a XML document
+===== Syntax =====
+object &getXMLParser	( **$type**, **$options** )
+
+| **$type** | array: | boolean ['lite'] When using 'DOM' if true or not defined then domit_lite is used          string  ['rssUrl'] the rss url to parse when using &quot;RSS&quot;          string    ['cache_time'] with 'RSS' - feed cache time. If not defined defaults to 3600 sec |
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

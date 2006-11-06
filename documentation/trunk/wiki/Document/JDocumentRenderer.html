@@ -1,0 +1,77 @@
+====== JDocumentRenderer ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer]] | never | Work in progress |
+
+Abstract class for a renderer
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRenderer-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentRenderer-__construct|__construct]] | Class constructor |
+| [[JDocumentRenderer-getContentType|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentRenderer-getContentType|getContentType]] | Return the content type of the renderer |
+| [[JDocumentRenderer-render|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentRenderer-render|render]] | Renders a script and returns the results as a string |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentRenderer|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->__construct]] | never | Work in progress |
+Class constructor
+===== Syntax =====
+JDocumentRenderer __construct	( **&$doc** )
+
+| **&$doc** | object A | reference to the JDocument object that instantiated the renderer |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getContentType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentRenderer|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->getContentType]] | never | Work in progress |
+Return the content type of the renderer
+===== Syntax =====
+string getContentType ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentRenderer|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->render]] | never | Work in progress |
+Renders a script and returns the results as a string
+===== Syntax =====
+string render	( **$name**, **$params**, **$content**, **$array** )
+
+| **$name** | string | The name of the element to render |
+| **$array** | array | Array of values |
+| **$content** | string | Override the output of the renderer |
+| **$params** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

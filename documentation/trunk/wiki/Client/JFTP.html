@@ -1,0 +1,465 @@
+====== JFTP ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP]] | never | Work in progress |
+
+FTP client class
+===== Methods =====
+^ Method ^ Description ^
+| [[JFTP-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-__construct|__construct]] |  |
+| [[JFTP-chdir|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-chdir|chdir]] | Method to change the current working directory on the FTP server |
+| [[JFTP-chmod|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-chmod|chmod]] | Method to change mode for a path on the FTP server |
+| [[JFTP-connect|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-connect|connect]] | Method to connect to a FTP server |
+| [[JFTP-create|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-create|create]] | Method to create an empty file on the FTP server |
+| [[JFTP-delete|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-delete|delete]] | Method to delete a path [file/folder] on the FTP server |
+| [[JFTP-get|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-get|get]] | Method to get a file from the FTP server and save it to a local file |
+| [[JFTP-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-getInstance|getInstance]] | Returns a reference to the global FTP connector object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $ftp = &JFTP::getInstance($host);</pre></p> |
+| [[JFTP-listDir|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-listDir|listDir]] | Method to list the contents of a directory on the FTP server |
+| [[JFTP-login|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-login|login]] | Method to login to a server once connected |
+| [[JFTP-mkdir|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-mkdir|mkdir]] | Method to create a directory on the FTP server |
+| [[JFTP-nameList|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-nameList|nameList]] | Method to list the file/folder names of the contents of a directory on the FTP server |
+| [[JFTP-pwd|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-pwd|pwd]] | Method to retrieve the current working directory on the FTP server |
+| [[JFTP-quit|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-quit|quit]] | Method to quit and close the connection |
+| [[JFTP-read|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-read|read]] | Method to read a file from the FTP server's contents into a buffer |
+| [[JFTP-reinit|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-reinit|reinit]] | Method to reinitialize the server, ie. need to login again<p>NOTE: This command not available on all servers</p> |
+| [[JFTP-rename|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-rename|rename]] | Method to rename a file/folder on the FTP server |
+| [[JFTP-restart|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-restart|restart]] | Method to restart data transfer at a given byte |
+| [[JFTP-setOptions|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-setOptions|setOptions]] | Set client options |
+| [[JFTP-store|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-store|store]] | Method to store a file to the FTP server |
+| [[JFTP-syst|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-syst|syst]] | Method to system string from the FTP server |
+| [[JFTP-write|##http://api.joomla.org/media/images/Method.png qq]] [[JFTP-write|write]] | Method to write a string to the FTP server |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->__construct]] | never | Work in progress |
+
+===== Syntax =====
+JFTP __construct	( **$options** )
+
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== chdir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->chdir]] | never | Work in progress |
+Method to change the current working directory on the FTP server
+===== Syntax =====
+boolean chdir	( **$path** )
+
+| **$path** | string | Path to change into on the server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== chmod ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->chmod]] | never | Work in progress |
+Method to change mode for a path on the FTP server
+===== Syntax =====
+boolean chmod	( **$path**, **$mode** )
+
+| **$path** | string | Path to change mode on |
+| **$mode** | string | Octal value to change mode to |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== connect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->connect]] | never | Work in progress |
+Method to connect to a FTP server
+===== Syntax =====
+boolean connect	( **$host**, **$port** )
+
+| **$host** | string | Host to connect to [Default: 127.0.0.1] |
+| **$port** | string | Port to connect on [Default: port 21] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== create ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->create]] | never | Work in progress |
+Method to create an empty file on the FTP server
+===== Syntax =====
+boolean create	( **$path** )
+
+| **$path** | string | Path local file to store on the FTP server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->delete]] | never | Work in progress |
+Method to delete a path [file/folder] on the FTP server
+===== Syntax =====
+boolean delete	( **$path** )
+
+| **$path** | string | Path to delete |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->get]] | never | Work in progress |
+Method to get a file from the FTP server and save it to a local file
+===== Syntax =====
+boolean get	( **$local**, **$remote** )
+
+| **$local** | string | Path to local file to save remote file as |
+| **$remote** | string | Path to remote file to get on the FTP server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->getInstance]] | never | Work in progress |
+Returns a reference to the global FTP connector object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $ftp = &JFTP::getInstance($host);</pre></p>
+===== Syntax =====
+<a href="../../Joomla-Framework/Client/JFTP.html">JFTP</a> &getInstance	( **$host**, **$port**, **$options** )
+
+| **$host** | string | Host to connect to |
+| **$port** |  |  |
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== listDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->listDir]] | never | Work in progress |
+Method to list the contents of a directory on the FTP server
+===== Syntax =====
+mixed listDir	( **$path**, **$type**, **$search** )
+
+| **$path** | string | Path local file to store on the FTP server |
+| **$type** | string | Return type [raw|all|folders|files] |
+| **$search** | boolean | Recursively search subdirectories |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== login ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->login]] | never | Work in progress |
+Method to login to a server once connected
+===== Syntax =====
+boolean login	( **$user**, **$pass** )
+
+| **$user** | string | Username to login to the server |
+| **$pass** | string | Password to login to the server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== mkdir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->mkdir]] | never | Work in progress |
+Method to create a directory on the FTP server
+===== Syntax =====
+boolean mkdir	( **$path** )
+
+| **$path** | string | Directory to create |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== nameList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->nameList]] | never | Work in progress |
+Method to list the file/folder names of the contents of a directory on the FTP server
+===== Syntax =====
+string nameList	( **$path** )
+
+| **$path** | string | Path local file to store on the FTP server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== pwd ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->pwd]] | never | Work in progress |
+Method to retrieve the current working directory on the FTP server
+===== Syntax =====
+string pwd ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== quit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->quit]] | never | Work in progress |
+Method to quit and close the connection
+===== Syntax =====
+boolean quit ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== read ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->read]] | never | Work in progress |
+Method to read a file from the FTP server's contents into a buffer
+===== Syntax =====
+boolean read	( **$remote**, **&$buffer**, **$buffer** )
+
+| **$remote** | string | Path to remote file to read on the FTP server |
+| **$buffer** | string | Buffer variable to read file contents into |
+| **&$buffer** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== reinit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->reinit]] | never | Work in progress |
+Method to reinitialize the server, ie. need to login again<p>NOTE: This command not available on all servers</p>
+===== Syntax =====
+boolean reinit ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== rename ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->rename]] | never | Work in progress |
+Method to rename a file/folder on the FTP server
+===== Syntax =====
+boolean rename	( **$from**, **$to** )
+
+| **$from** | string | Path to change file/folder from |
+| **$to** | string | Path to change file/folder to |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== restart ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->restart]] | never | Work in progress |
+Method to restart data transfer at a given byte
+===== Syntax =====
+boolean restart	( **$point** )
+
+| **$point** | int | Byte to restart transfer at |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setOptions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->setOptions]] | never | Work in progress |
+Set client options
+===== Syntax =====
+boolean setOptions	( **$options** )
+
+| **$options** | array | Associative array of options to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->store]] | never | Work in progress |
+Method to store a file to the FTP server
+===== Syntax =====
+boolean store	( **$local**, **$remote** )
+
+| **$local** | string | Path to local file to store on the FTP server |
+| **$remote** | string | FTP path to file to create |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== syst ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->syst]] | never | Work in progress |
+Method to system string from the FTP server
+===== Syntax =====
+string syst ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== write ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Client|Client]] | [[JFTP|##http://api.joomla.org/media/images/Class.png qq]][[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Client/JFTP.html|JFTP->write]] | never | Work in progress |
+Method to write a string to the FTP server
+===== Syntax =====
+boolean write	( **$remote**, **$buffer**, **$mode** )
+
+| **$remote** | string | FTP path to file to write to |
+| **$buffer** | string | Contents to write to the FTP server |
+| **$mode** | int | Transfer mode [1:Binary|0:Ascii] or use constants FTP_BINARY or FTP_ASCII [Defaults to Ascii] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

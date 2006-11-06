@@ -1,0 +1,57 @@
+====== JPluginHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JPluginHelper.html|JPluginHelper]] | never | Work in progress |
+
+Plugin helper class
+===== Methods =====
+^ Method ^ Description ^
+| [[JPluginHelper-getPlugin|##http://api.joomla.org/media/images/Method.png qq]] [[JPluginHelper-getPlugin|getPlugin]] | Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned |
+| [[JPluginHelper-importPlugin|##http://api.joomla.org/media/images/Method.png qq]] [[JPluginHelper-importPlugin|importPlugin]] | Loads all the plugin files for a particular group if no specific plugin is specified  otherwise only the specific pugin is loaded. |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== getPlugin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPluginHelper|##http://api.joomla.org/media/images/Class.png qq]][[JPluginHelper|JPluginHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JPluginHelper.html|JPluginHelper->getPlugin]] | never | Work in progress |
+Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned
+===== Syntax =====
+mixed &getPlugin	( **$group**, **$plugin** )
+
+| **$group** | string | The group name, relates to the sub-directory in the plugins directory |
+| **$plugin** | string | The plugin name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== importPlugin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPluginHelper|##http://api.joomla.org/media/images/Class.png qq]][[JPluginHelper|JPluginHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JPluginHelper.html|JPluginHelper->importPlugin]] | never | Work in progress |
+Loads all the plugin files for a particular group if no specific plugin is specified  otherwise only the specific pugin is loaded.
+===== Syntax =====
+boolean importPlugin	( **$group**, **$plugin** )
+
+| **$group** | string | The group name, relates to the sub-directory in the plugins directory |
+| **$plugin** | string | The plugin name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

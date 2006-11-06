@@ -1,0 +1,172 @@
+====== JArrayHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper]] | never | Work in progress |
+
+JArrayHelper is an array utility class for doing all sorts of odds and ends with arrays.
+===== Methods =====
+^ Method ^ Description ^
+| [[JArrayHelper-fromObject|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-fromObject|fromObject]] | Utility function to map an object to an array |
+| [[JArrayHelper-getColumn|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-getColumn|getColumn]] | Extracts a column from an array of arrays or objects |
+| [[JArrayHelper-getValue|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-getValue|getValue]] | Utility function to return a value from a named array or a specified default |
+| [[JArrayHelper-sortObjects|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-sortObjects|sortObjects]] | Utility function to sort an array of objects on a given field |
+| [[JArrayHelper-toInteger|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-toInteger|toInteger]] | Function to convert array to integer values |
+| [[JArrayHelper-toObject|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-toObject|toObject]] | Utility function to map an array to a stdClass object. |
+| [[JArrayHelper-_sortObjects|##http://api.joomla.org/media/images/Method.png qq]] [[JArrayHelper-_sortObjects|_sortObjects]] | Private callback function for sorting an array of objects on a key |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== fromObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->fromObject]] | never | Work in progress |
+Utility function to map an object to an array
+===== Syntax =====
+array fromObject	( **$p_obj**, **$recurse**, **$regex** )
+
+| **$p_obj** | object The | source object |
+| **$recurse** | boolean | True to recurve through multi-level objects |
+| **$regex** | string | An optional regular expression to match on field names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getColumn ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->getColumn]] | never | Work in progress |
+Extracts a column from an array of arrays or objects
+===== Syntax =====
+array getColumn	( **&$array**, **$index**, **$array** )
+
+| **$array** | array | The source array |
+| **$index** | string | The index of the column or name of object property |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getValue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->getValue]] | never | Work in progress |
+Utility function to return a value from a named array or a specified default
+===== Syntax =====
+mixed getValue	( **&$array**, **$name**, **$default**, **$type**, **$array** )
+
+| **$array** | array | A named array |
+| **$name** | string | The key to search for |
+| **$default** | mixed | The default value to give if no key found |
+| **$type** | string | Return type for the variable (INT, FLOAT, STRING, WORD, BOOLEAN, ARRAY) |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== sortObjects ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->sortObjects]] | never | Work in progress |
+Utility function to sort an array of objects on a given field
+===== Syntax =====
+array sortObjects	( **&$a**, **$k**, **$direction**, **$arr** )
+
+| **$arr** | array | An array of objects |
+| **$k** | string | The key to sort on |
+| **$direction** | int | Direction to sort in [1 = Ascending] [-1 = Descending] |
+| **&$a** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== toInteger ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->toInteger]] | never | Work in progress |
+Function to convert array to integer values
+===== Syntax =====
+array toInteger	( **&$array**, **$default**, **$array** )
+
+| **$array** | array | The source array to convert |
+| **$default** | int | A default value to assign if $array is not an array |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== toObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->toObject]] | never | Work in progress |
+Utility function to map an array to a stdClass object.
+===== Syntax =====
+object The toObject	( **&$array**, **$array** )
+
+| **$array** | array | The array to map. |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _sortObjects ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JArrayHelper|##http://api.joomla.org/media/images/Class.png qq]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper->_sortObjects]] | never | Work in progress |
+Private callback function for sorting an array of objects on a key
+===== Syntax =====
+int _sortObjects	( **&$a**, **&$b**, **$a**, **$b** )
+
+| **$a** | array | An array of objects |
+| **$b** | array | An array of objects |
+| **&$a** |  |  |
+| **&$b** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

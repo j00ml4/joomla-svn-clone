@@ -1,0 +1,118 @@
+====== JPathWay ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay]] | never | Work in progress |
+
+Class to maintain a pathway.<p>Main example of use so far is the mod_breadcrumbs module that keeps track of  the user's navigated path within the Joomla application.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JPathWay-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JPathWay-__construct|__construct]] | Class constructor |
+| [[JPathWay-addItem|##http://api.joomla.org/media/images/Method.png qq]] [[JPathWay-addItem|addItem]] | Create and add an item to the pathway. |
+| [[JPathWay-getPathWay|##http://api.joomla.org/media/images/Method.png qq]] [[JPathWay-getPathWay|getPathWay]] | Return the JPathWay items array |
+| [[JPathWay-getPathWayNames|##http://api.joomla.org/media/images/Method.png qq]] [[JPathWay-getPathWayNames|getPathWayNames]] | Create and return an array of the pathway names.  Useful for things like SEF URLs |
+| [[JPathWay-setItemName|##http://api.joomla.org/media/images/Method.png qq]] [[JPathWay-setItemName|setItemName]] | Set item name. |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPathWay|##http://api.joomla.org/media/images/Class.png qq]][[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->__construct]] | never | Work in progress |
+Class constructor
+===== Syntax =====
+JPathWay __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addItem ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPathWay|##http://api.joomla.org/media/images/Class.png qq]][[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->addItem]] | never | Work in progress |
+Create and add an item to the pathway.
+===== Syntax =====
+boolean addItem	( **$name**, **$link** )
+
+| **$name** | string |  |
+| **$link** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPathWay|##http://api.joomla.org/media/images/Class.png qq]][[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->getPathWay]] | never | Work in progress |
+Return the JPathWay items array
+===== Syntax =====
+array getPathWay	( **$showHome**, **$showComponent** )
+
+| **$showHome** | boolean | True to show the home element of the JPathWay array |
+| **$showComponent** | boolean | True to show the component element of the JPathWay array |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPathWayNames ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPathWay|##http://api.joomla.org/media/images/Class.png qq]][[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->getPathWayNames]] | never | Work in progress |
+Create and return an array of the pathway names.  Useful for things like SEF URLs
+===== Syntax =====
+array getPathWayNames	( **$showHome**, **$showComponent** )
+
+| **$showHome** | boolean | True to show the home element of the JPathWay array |
+| **$showComponent** | boolean | True to show the component element of the JPathWay array |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setItemName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JPathWay|##http://api.joomla.org/media/images/Class.png qq]][[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->setItemName]] | never | Work in progress |
+Set item name.
+===== Syntax =====
+boolean setItemName	( **$id**, **$name** )
+
+| **$id** | integer |  |
+| **$name** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

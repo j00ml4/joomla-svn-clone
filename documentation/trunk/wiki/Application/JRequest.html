@@ -1,0 +1,185 @@
+====== JRequest ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest]] | never | Work in progress |
+
+JRequest Class<p>This class serves to provide the Joomla Framework with a common interface to access  request variables.  This includes $_POST, $_GET, and naturally $_REQUEST.  Variables  can be passed through an input filter to avoid injection or returned raw.</p><p>The concept and implementation of this class is inspired by the binary cloud  environment package.  &lt;http://www.binarycloud.com/&gt;</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JRequest-clean|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-clean|clean]] | Cleans the request from script injection. |
+| [[JRequest-get|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-get|get]] | Fetches and returns a request array.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  $_GET, POST and PUT will result in returning $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p> |
+| [[JRequest-getURI|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-getURI|getURI]] | Gets the full request path |
+| [[JRequest-getVar|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-getVar|getVar]] | Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p> |
+| [[JRequest-setVar|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-setVar|setVar]] |  |
+| [[JRequest-_cleanArray|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-_cleanArray|_cleanArray]] | Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked |
+| [[JRequest-_cleanVar|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-_cleanVar|_cleanVar]] |  |
+| [[JRequest-_stripSlashesRecursive|##http://api.joomla.org/media/images/Method.png qq]] [[JRequest-_stripSlashesRecursive|_stripSlashesRecursive]] | Strips slashes recursively on an array |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== clean ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->clean]] | never | Work in progress |
+Cleans the request from script injection.
+===== Syntax =====
+void clean ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->get]] | never | Work in progress |
+Fetches and returns a request array.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  $_GET, POST and PUT will result in returning $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p>
+===== Syntax =====
+mixed get	( **$hash**, **$mask** )
+
+| **$hash** | string | to get (POST, GET, FILES, METHOD) |
+| **$mask** | int | Filter mask for the variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getURI ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getURI]] | never | Work in progress |
+Gets the full request path
+===== Syntax =====
+string getURI ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getVar]] | never | Work in progress |
+Fetches and returns a given variable.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post       $_POST    get        $_GET    files      $_FILES    cookie     $_COOKIE    method     via current $_SERVER['REQUEST_METHOD']    default    $_REQUEST</p>
+===== Syntax =====
+mixed getVar	( **$name**, **$default**, **$hash**, **$type**, **$mask** )
+
+| **$name** | string | Variable name |
+| **$default** | string | Default value if the variable does not exist |
+| **$hash** | string | Where the var should come from (POST, GET, FILES, COOKIE, METHOD) |
+| **$type** | string | Return type for the variable (INT, FLOAT, STRING, BOOLEAN, ARRAY) |
+| **$mask** | int | Filter mask for the variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->setVar]] | never | Work in progress |
+
+===== Syntax =====
+void setVar	( **$name**, **$value**, **$hash** )
+
+| **$name** |  |  |
+| **$value** |  |  |
+| **$hash** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _cleanArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanArray]] | never | Work in progress |
+Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked
+===== Syntax =====
+void _cleanArray	( **&$array**, **$globalise**, **$array** )
+
+| **$array** | array | Array to clean |
+| **$globalise** | boolean | True if the array is to be added to the GLOBALS |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _cleanVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_cleanVar]] | never | Work in progress |
+
+===== Syntax =====
+void _cleanVar	( **$var**, **$mask**, **$type** )
+
+| **$var** |  |  |
+| **$mask** |  |  |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _stripSlashesRecursive ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JRequest|##http://api.joomla.org/media/images/Class.png qq]][[JRequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->_stripSlashesRecursive]] | never | Work in progress |
+Strips slashes recursively on an array
+===== Syntax =====
+array _stripSlashesRecursive	( **$value**, **$array** )
+
+| **$array** | array | Array of (nested arrays of) strings |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

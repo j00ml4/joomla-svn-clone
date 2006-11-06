@@ -1,0 +1,453 @@
+====== JLanguage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage]] | never | Work in progress |
+
+Languages/translation handler class
+===== Methods =====
+^ Method ^ Description ^
+| [[JLanguage-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-__construct|__construct]] | Constructor activating the default information of the language |
+| [[JLanguage-get|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-get|get]] | Get a matadata language property |
+| [[JLanguage-getBackwardLang|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getBackwardLang|getBackwardLang]] | Getter for backward compatible language name |
+| [[JLanguage-getDebug|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getDebug|getDebug]] | Get the Debug property |
+| [[JLanguage-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getInstance|getInstance]] | Returns a reference to a language object<p>This method must be invoked as:  		<pre>  $browser = &JLanguage::getInstance([$lang);</pre></p> |
+| [[JLanguage-getKnownLanguages|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getKnownLanguages|getKnownLanguages]] | Returns a list of known languages for an area |
+| [[JLanguage-getLanguagePath|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getLanguagePath|getLanguagePath]] | Get the path to a language |
+| [[JLanguage-getLocale|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getLocale|getLocale]] | Get locale property |
+| [[JLanguage-getMetadata|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getMetadata|getMetadata]] | Returns a associative array holding the metadata |
+| [[JLanguage-getName|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getName|getName]] | Getter for Name |
+| [[JLanguage-getPdfFontName|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getPdfFontName|getPdfFontName]] | Getter for PDF Font Name |
+| [[JLanguage-getTag|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getTag|getTag]] | Get for the langauge tag (as defined in RFC 3066) |
+| [[JLanguage-getWinCP|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-getWinCP|getWinCP]] | Getter for Windows locale code page |
+| [[JLanguage-hasKey|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-hasKey|hasKey]] | Determines is a key exists |
+| [[JLanguage-isRTL|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-isRTL|isRTL]] | Get the RTL property |
+| [[JLanguage-load|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-load|load]] | Loads a single language file and appends the results to the existing strings |
+| [[JLanguage-setDebug|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-setDebug|setDebug]] | Set the Debug property |
+| [[JLanguage-_|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-_|_]] | Translator function, mimics the php gettext (alias _) function |
+| [[JLanguage-_parseINILanguageFiles|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-_parseINILanguageFiles|_parseINILanguageFiles]] | Parses INI type of files for language information |
+| [[JLanguage-_parseLanguageFiles|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-_parseLanguageFiles|_parseLanguageFiles]] | Searches for language directories within a certain base dir |
+| [[JLanguage-_parseXMLLanguageFile|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-_parseXMLLanguageFile|_parseXMLLanguageFile]] | Parse XML file for language information |
+| [[JLanguage-_parseXMLLanguageFiles|##http://api.joomla.org/media/images/Method.png qq]] [[JLanguage-_parseXMLLanguageFiles|_parseXMLLanguageFiles]] | Parses XML files for language information |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->__construct]] | never | Work in progress |
+Constructor activating the default information of the language
+===== Syntax =====
+JLanguage __construct	( **$lang** )
+
+| **$lang** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->get]] | never | Work in progress |
+Get a matadata language property
+===== Syntax =====
+mixed get	( **$property**, **$default** )
+
+| **$property** | string | The name of the property |
+| **$default** | mixed | The default value |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getBackwardLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getBackwardLang]] | never | Work in progress |
+Getter for backward compatible language name
+===== Syntax =====
+string getBackwardLang ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDebug ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getDebug]] | never | Work in progress |
+Get the Debug property
+===== Syntax =====
+boolean getDebug ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getInstance]] | never | Work in progress |
+Returns a reference to a language object<p>This method must be invoked as:  		<pre>  $browser = &JLanguage::getInstance([$lang);</pre></p>
+===== Syntax =====
+<a href="../../Joomla-Framework/I18N/JLanguage.html">JLanguage</a> &getInstance	( **$lang** )
+
+| **$lang** | string | The language to use. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getKnownLanguages ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getKnownLanguages]] | never | Work in progress |
+Returns a list of known languages for an area
+===== Syntax =====
+array getKnownLanguages	( **$basePath** )
+
+| **$basePath** | string | The basepath to use |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLanguagePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getLanguagePath]] | never | Work in progress |
+Get the path to a language
+===== Syntax =====
+string getLanguagePath	( **$basePath**, **$language** )
+
+| **$basePath** | string | The basepath to use |
+| **$language** | string | The language tag |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLocale ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getLocale]] | never | Work in progress |
+Get locale property
+===== Syntax =====
+string getLocale ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getMetadata ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getMetadata]] | never | Work in progress |
+Returns a associative array holding the metadata
+===== Syntax =====
+mixed getMetadata	( **$lang** )
+
+| **$lang** | string | The name of the language |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getName]] | never | Work in progress |
+Getter for Name
+===== Syntax =====
+string getName	( **$value** )
+
+| **$value** | string | An optional value |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPdfFontName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getPdfFontName]] | never | Work in progress |
+Getter for PDF Font Name
+===== Syntax =====
+string getPdfFontName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getTag]] | never | Work in progress |
+Get for the langauge tag (as defined in RFC 3066)
+===== Syntax =====
+string getTag ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getWinCP ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getWinCP]] | never | Work in progress |
+Getter for Windows locale code page
+===== Syntax =====
+string getWinCP ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== hasKey ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->hasKey]] | never | Work in progress |
+Determines is a key exists
+===== Syntax =====
+boolean hasKey	( **$key** )
+
+| **$key** | key | The key to check |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isRTL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->isRTL]] | never | Work in progress |
+Get the RTL property
+===== Syntax =====
+boolean isRTL	( **$value** )
+
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->load]] | never | Work in progress |
+Loads a single language file and appends the results to the existing strings
+===== Syntax =====
+void load	( **$prefix**, **$basePath** )
+
+| **$prefix** | string | The prefix |
+| **$basePath** | string | The basepath to use  $return boolean    True, if the file has successfully loaded. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setDebug ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->setDebug]] | never | Work in progress |
+Set the Debug property
+===== Syntax =====
+void setDebug	( **$debug** )
+
+| **$debug** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _ ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_]] | never | Work in progress |
+Translator function, mimics the php gettext (alias _) function
+===== Syntax =====
+string _	( **$string**, **$jsSafe** )
+
+| **$string** | string | The string to translate |
+| **$jsSafe** | boolean | Make the result javascript safe |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _parseINILanguageFiles ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_parseINILanguageFiles]] | never | Work in progress |
+Parses INI type of files for language information
+===== Syntax =====
+array _parseINILanguageFiles	( **$dir** )
+
+| **$dir** | string | Directory of files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _parseLanguageFiles ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_parseLanguageFiles]] | never | Work in progress |
+Searches for language directories within a certain base dir
+===== Syntax =====
+array _parseLanguageFiles	( **$dir** )
+
+| **$dir** | string | directory of files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _parseXMLLanguageFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_parseXMLLanguageFile]] | never | Work in progress |
+Parse XML file for language information
+===== Syntax =====
+array _parseXMLLanguageFile	( **$path** )
+
+| **$path** | string | Path to the xml files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _parseXMLLanguageFiles ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#I18N|I18N]] | [[JLanguage|##http://api.joomla.org/media/images/Class.png qq]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_parseXMLLanguageFiles]] | never | Work in progress |
+Parses XML files for language information
+===== Syntax =====
+array _parseXMLLanguageFiles	( **$dir** )
+
+| **$dir** | string | Directory of files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

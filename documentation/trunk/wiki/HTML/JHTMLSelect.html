@@ -1,0 +1,142 @@
+====== JHTMLSelect ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect]] | never | Work in progress |
+
+Utility class for creating HTML select lists
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTMLSelect-genericList|##http://api.joomla.org/media/images/Method.png qq]] [[JHTMLSelect-genericList|genericList]] | Generates an HTML select list |
+| [[JHTMLSelect-integerList|##http://api.joomla.org/media/images/Method.png qq]] [[JHTMLSelect-integerList|integerList]] | Generates a select list of integers |
+| [[JHTMLSelect-option|##http://api.joomla.org/media/images/Method.png qq]] [[JHTMLSelect-option|option]] |  |
+| [[JHTMLSelect-radioList|##http://api.joomla.org/media/images/Method.png qq]] [[JHTMLSelect-radioList|radioList]] | Generates an HTML radio list |
+| [[JHTMLSelect-yesnoList|##http://api.joomla.org/media/images/Method.png qq]] [[JHTMLSelect-yesnoList|yesnoList]] | Generates a yes/no radio list |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== genericList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->genericList]] | never | Work in progress |
+Generates an HTML select list
+===== Syntax =====
+string genericList	( **&$arr**, **$tag_name**, **$tag_attribs**, **$key**, **$text**, **$selected**, **$idtag**, **$flag** )
+
+| **&$arr** | array | An array of objects |
+| **$tag_name** | string | The value of the HTML name attribute |
+| **$tag_attribs** | string | Additional HTML attributes for the &lt;select&gt; tag |
+| **$key** | string | The name of the object variable for the option value |
+| **$text** | string | The name of the object variable for the option text |
+| **$selected** | mixed | The key that is selected |
+| **$idtag** |  |  |
+| **$flag** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== integerList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->integerList]] | never | Work in progress |
+Generates a select list of integers
+===== Syntax =====
+string integerList	( **$start**, **$end**, **$inc**, **$tag_name**, **$tag_attribs**, **$selected**, **$format** )
+
+| **$start** | int | The start integer |
+| **$end** | int | The end integer |
+| **$inc** | int | The increment |
+| **$tag_name** | string | The value of the HTML name attribute |
+| **$tag_attribs** | string | Additional HTML attributes for the &lt;select&gt; tag |
+| **$selected** | mixed | The key that is selected |
+| **$format** | string | The printf format to be applied to the number |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== option ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->option]] | never | Work in progress |
+
+===== Syntax =====
+void option	( **$value**, **$text**, **$value_name**, **$text_name** )
+
+| **$value** |  |  |
+| **$text** |  |  |
+| **$value_name** |  |  |
+| **$text_name** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== radioList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->radioList]] | never | Work in progress |
+Generates an HTML radio list
+===== Syntax =====
+string radioList	( **&$arr**, **$tag_name**, **$tag_attribs**, **$selected**, **$key**, **$text**, **$idtag** )
+
+| **&$arr** | array | An array of objects |
+| **$tag_name** | string | The value of the HTML name attribute |
+| **$tag_attribs** | string | Additional HTML attributes for the &lt;select&gt; tag |
+| **$selected** | mixed | The key that is selected |
+| **$key** | string | The name of the object variable for the option value |
+| **$text** | string | The name of the object variable for the option text |
+| **$idtag** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== yesnoList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->yesnoList]] | never | Work in progress |
+Generates a yes/no radio list
+===== Syntax =====
+string yesnoList	( **$tag_name**, **$tag_attribs**, **$selected**, **$yes**, **$no**, **$id** )
+
+| **$tag_name** | string | The value of the HTML name attribute |
+| **$tag_attribs** | string | Additional HTML attributes for the &lt;select&gt; tag |
+| **$selected** | mixed | The key that is selected |
+| **$yes** |  |  |
+| **$no** |  |  |
+| **$id** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

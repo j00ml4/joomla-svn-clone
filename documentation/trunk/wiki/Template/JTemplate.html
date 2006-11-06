@@ -1,0 +1,174 @@
+====== JTemplate ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate]] | never | Work in progress |
+
+Template class, provides an easy interface to parse and display a template file
+===== Methods =====
+^ Method ^ Description ^
+| [[JTemplate-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-__construct|__construct]] | Class constructor<p>The type influences the tags you are using in your templates.</p> |
+| [[JTemplate-JTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-JTemplate|JTemplate]] | A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p> |
+| [[JTemplate-display|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-display|display]] | Execute and display a the template |
+| [[JTemplate-enableTemplateCache|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-enableTemplateCache|enableTemplateCache]] | enable a template cache<p>A template cache will improve performace, as the templates  do not have to be read on each request.</p> |
+| [[JTemplate-fetch|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-fetch|fetch]] | Returns a parsed template |
+| [[JTemplate-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-getInstance|getInstance]] | Returns a reference to a global Template object, only creating it  if it doesn't already exist. |
+| [[JTemplate-parse|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-parse|parse]] | Parse a file |
+| [[JTemplate-setTemplateCachePrefix|##http://api.joomla.org/media/images/Method.png qq]] [[JTemplate-setTemplateCachePrefix|setTemplateCachePrefix]] | Set the prefix of the template cache |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->__construct]] | never | Work in progress |
+Class constructor<p>The type influences the tags you are using in your templates.</p>
+===== Syntax =====
+JTemplate __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== JTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->JTemplate]] | never | Work in progress |
+A hack to support __construct() on PHP 4<p>Hint: descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer __construct()  which (if present) should call parent::__construct()</p>
+===== Syntax =====
+Object JTemplate ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->display]] | never | Work in progress |
+Execute and display a the template
+===== Syntax =====
+void display	( **$name** )
+
+| **$name** | string | The name of the template |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== enableTemplateCache ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->enableTemplateCache]] | never | Work in progress |
+enable a template cache<p>A template cache will improve performace, as the templates  do not have to be read on each request.</p>
+===== Syntax =====
+boolean enableTemplateCache	( **$handler**, **$folder** )
+
+| **$handler** | string | name of the template cache |
+| **$folder** | string | folder to store the cached files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== fetch ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->fetch]] | never | Work in progress |
+Returns a parsed template
+===== Syntax =====
+void fetch	( **$name** )
+
+| **$name** | string | The name of the template |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->getInstance]] | never | Work in progress |
+Returns a reference to a global Template object, only creating it  if it doesn't already exist.
+===== Syntax =====
+jtemplate &getInstance	( **$type** )
+
+| **$type** | string | (either html or tex) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->parse]] | never | Work in progress |
+Parse a file
+===== Syntax =====
+void parse	( **$file** )
+
+| **$file** | string | The filename |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setTemplateCachePrefix ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Template|Template]] | [[JTemplate|##http://api.joomla.org/media/images/Class.png qq]][[JTemplate|JTemplate]] | [[http://api.joomla.org/Joomla-Framework/Template/JTemplate.html|JTemplate->setTemplateCachePrefix]] | never | Work in progress |
+Set the prefix of the template cache
+===== Syntax =====
+boolean setTemplateCachePrefix	( **$prefix** )
+
+| **$prefix** | string | the prefix of the template cache |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

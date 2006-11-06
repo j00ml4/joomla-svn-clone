@@ -1,0 +1,543 @@
+====== JTable ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable]] | never | Work in progress |
+
+Abstract Table class<p>Parent classes to all tables.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JTable-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-__construct|__construct]] | Object constructor to set table and key field<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-addTableDir|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-addTableDir|addTableDir]] | Add a directory where JTable should search for table types. You may  either pass a string or an array of directories. |
+| [[JTable-bind|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-bind|bind]] | Binds a named array/hash to this object<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-canDelete|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-canDelete|canDelete]] | Generic check for whether dependancies exist for this object in the db schema<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-check|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-check|check]] | Generic check method<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-checkin|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-checkin|checkin]] | Description |
+| [[JTable-checkout|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-checkout|checkout]] | Description |
+| [[JTable-delete|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-delete|delete]] | Default delete method<p>can be overloaded/supplemented by the child class</p> |
+| [[JTable-getDBO|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getDBO|getDBO]] | Get the internal database object |
+| [[JTable-getError|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getError|getError]] | Returns the error message |
+| [[JTable-getErrorNum|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getErrorNum|getErrorNum]] | Returns the error number |
+| [[JTable-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getInstance|getInstance]] | Returns a reference to the a Model object, always creating it |
+| [[JTable-getKeyName|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getKeyName|getKeyName]] | Gets the internal primary key name |
+| [[JTable-getNextOrder|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getNextOrder|getNextOrder]] | Returns the ordering value to place a new item last in its group |
+| [[JTable-getTableName|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-getTableName|getTableName]] | Gets the internal table name for the object |
+| [[JTable-hit|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-hit|hit]] | Description |
+| [[JTable-isCheckedOut|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-isCheckedOut|isCheckedOut]] | Tests if item is checked out |
+| [[JTable-load|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-load|load]] | Binds an array/hash to this object |
+| [[JTable-move|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-move|move]] | Description |
+| [[JTable-publish|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-publish|publish]] | Generic Publish/Unpublish function |
+| [[JTable-reorder|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-reorder|reorder]] | Compacts the ordering sequence of the selected records |
+| [[JTable-save|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-save|save]] | Generic save function |
+| [[JTable-setError|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-setError|setError]] | Sets the internal error message |
+| [[JTable-setErrorNum|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-setErrorNum|setErrorNum]] | Sets the internal error number |
+| [[JTable-store|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-store|store]] | Inserts a new row if id is zero or updates an existing row in the database table<p>Can be overloaded/supplemented by the child class</p> |
+| [[JTable-toXML|##http://api.joomla.org/media/images/Method.png qq]] [[JTable-toXML|toXML]] | Export item list to xml |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->__construct]] | never | Work in progress |
+Object constructor to set table and key field<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+JTable __construct	( **$table**, **$key**, **&$db** )
+
+| **$table** | string | name of the table in the db schema relating to child class |
+| **$key** | string | name of the primary key field in the table |
+| **&$db** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addTableDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->addTableDir]] | never | Work in progress |
+Add a directory where JTable should search for table types. You may  either pass a string or an array of directories.
+===== Syntax =====
+array addTableDir	( **$dir** )
+
+| **$dir** | string|array | directory or directories to search. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->bind]] | never | Work in progress |
+Binds a named array/hash to this object<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+boolean bind	( **$from**, **$ignore** )
+
+| **$from** | $array | mixed Either and associative array or another object |
+| **$ignore** | $ignore | string    Space separated list of fields not to bind |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== canDelete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->canDelete]] | never | Work in progress |
+Generic check for whether dependancies exist for this object in the db schema<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+true|false canDelete	( **$oid**, **$joins**, **$msg**, **2** )
+
+| **$msg** | string | Error message returned |
+| **2** | array | Optional array to compiles standard joins: format [label=&gt;'Label',name=&gt;'table name',idfield=&gt;'field',joinfield=&gt;'field'] |
+| **$joins** | int | Optional key index |
+| **$oid** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->check]] | never | Work in progress |
+Generic check method<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+boolean check ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== checkin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->checkin]] | never | Work in progress |
+Description
+===== Syntax =====
+void checkin	( **$oid** )
+
+| **$oid** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== checkout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->checkout]] | never | Work in progress |
+Description
+===== Syntax =====
+void checkout	( **$who**, **$oid** )
+
+| **$who** |  |  |
+| **$oid** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->delete]] | never | Work in progress |
+Default delete method<p>can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+true delete	( **$oid** )
+
+| **$oid** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getDBO]] | never | Work in progress |
+Get the internal database object
+===== Syntax =====
+object A &getDBO ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getError]] | never | Work in progress |
+Returns the error message
+===== Syntax =====
+string getError ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getErrorNum]] | never | Work in progress |
+Returns the error number
+===== Syntax =====
+int getErrorNum ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getInstance]] | never | Work in progress |
+Returns a reference to the a Model object, always creating it
+===== Syntax =====
+<a href="../../Joomla-Legacy/1-5/database.html">database</a> &getInstance	( **$type**, **&$db**, **$prefix** )
+
+| **$type** | type | The table type to instantiate |
+| **&$db** | object A | JDatabase object |
+| **$prefix** | string | A prefix for the table class name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getKeyName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getKeyName]] | never | Work in progress |
+Gets the internal primary key name
+===== Syntax =====
+string getKeyName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getNextOrder ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getNextOrder]] | never | Work in progress |
+Returns the ordering value to place a new item last in its group
+===== Syntax =====
+void getNextOrder	( **$where** )
+
+| **$where** | string | query WHERE clause for selecting MAX(`ordering`). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTableName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->getTableName]] | never | Work in progress |
+Gets the internal table name for the object
+===== Syntax =====
+string getTableName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== hit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->hit]] | never | Work in progress |
+Description
+===== Syntax =====
+void hit	( **$oid**, **$log** )
+
+| **$oid** |  |  |
+| **$log** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isCheckedOut ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->isCheckedOut]] | never | Work in progress |
+Tests if item is checked out
+===== Syntax =====
+boolean isCheckedOut	( **$user_id** )
+
+| **$user_id** | int | A user id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->load]] | never | Work in progress |
+Binds an array/hash to this object
+===== Syntax =====
+boolean load	( **$oid** )
+
+| **$oid** | int | optional argument, if not specifed then the value of current key is used |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== move ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->move]] | never | Work in progress |
+Description
+===== Syntax =====
+void move	( **$dirn**, **$where** )
+
+| **$dirn** |  |  |
+| **$where** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== publish ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->publish]] | never | Work in progress |
+Generic Publish/Unpublish function
+===== Syntax =====
+void publish	( **$cid**, **$publish**, **$user_id** )
+
+| **$cid** | array | An array of id numbers |
+| **$publish** | integer | 0 if unpublishing, 1 if publishing |
+| **$user_id** | integer | The id of the user performnig the operation |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== reorder ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->reorder]] | never | Work in progress |
+Compacts the ordering sequence of the selected records
+===== Syntax =====
+void reorder	( **$where** )
+
+| **$where** | string | Additional where query to limit ordering to a particular subset of records |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== save ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->save]] | never | Work in progress |
+Generic save function
+===== Syntax =====
+TRUE save	( **$source**, **$order_filter** )
+
+| **$source** | array | Source array for binding to class vars |
+| **$order_filter** | string | Filter for the order updating |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->setError]] | never | Work in progress |
+Sets the internal error message
+===== Syntax =====
+void setError	( **$value** )
+
+| **$value** | string | The error message |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->setErrorNum]] | never | Work in progress |
+Sets the internal error number
+===== Syntax =====
+void setErrorNum	( **$value** )
+
+| **$value** | int | Set the error number with this value |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->store]] | never | Work in progress |
+Inserts a new row if id is zero or updates an existing row in the database table<p>Can be overloaded/supplemented by the child class</p>
+===== Syntax =====
+null|string store	( **$updateNulls** )
+
+| **$updateNulls** | boolean | If false, null object variables are not updated |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== toXML ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Table|Table]] | [[JTable|##http://api.joomla.org/media/images/Class.png qq]][[JTable|JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html|JTable->toXML]] | never | Work in progress |
+Export item list to xml
+===== Syntax =====
+void toXML	( **$mapKeysToText** )
+
+| **$mapKeysToText** | boolean | Map foreign keys to text values |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

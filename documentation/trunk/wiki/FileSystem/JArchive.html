@@ -1,0 +1,57 @@
+====== JArchive ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive]] | never | Work in progress |
+
+An Archive handling class
+===== Methods =====
+^ Method ^ Description ^
+| [[JArchive-create|##http://api.joomla.org/media/images/Method.png qq]] [[JArchive-create|create]] |  |
+| [[JArchive-extract|##http://api.joomla.org/media/images/Method.png qq]] [[JArchive-extract|extract]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== create ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#FileSystem|FileSystem]] | [[JArchive|##http://api.joomla.org/media/images/Class.png qq]][[JArchive|JArchive]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive->create]] | never | Work in progress |
+
+===== Syntax =====
+void create	( **$archive**, **$files** )
+
+| **$archive** | string | The name of the archive including path and one of the following                extenstions: .gz, .tar., .zip |
+| **$files** | array | of path to the files that must be added to the archive  $return boolean for success |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== extract ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#FileSystem|FileSystem]] | [[JArchive|##http://api.joomla.org/media/images/Class.png qq]][[JArchive|JArchive]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive->extract]] | never | Work in progress |
+
+===== Syntax =====
+void extract	( **$archivename**, **$extractdir** )
+
+| **$archivename** | string | The name of the archive file |
+| **$extractdir** | string | Directory to unpack into  $return boolean for success |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

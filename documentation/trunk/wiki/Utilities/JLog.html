@@ -1,0 +1,136 @@
+====== JLog ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog]] | never | Work in progress |
+
+Joomla! Logging class<p>This class is designed to build log files based on the  W3C specification at: http://www.w3.org/TR/WD-logfile.html</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JLog-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-__construct|__construct]] | Constructor |
+| [[JLog-addEntry|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-addEntry|addEntry]] |  |
+| [[JLog-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-getInstance|getInstance]] | Returns a reference to the global log object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $log = & JLog::getInstance();</pre></p> |
+| [[JLog-setOptions|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-setOptions|setOptions]] | Set log file options |
+| [[JLog-_closeLog|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-_closeLog|_closeLog]] | Close the log file pointer |
+| [[JLog-_openLog|##http://api.joomla.org/media/images/Method.png qq]] [[JLog-_openLog|_openLog]] | Open the log file pointer and create the file if it doesn't exist |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JLog __construct	( **$path**, **$options** )
+
+| **$path** | string | Log file path |
+| **$options** | array | Log file options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addEntry ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->addEntry]] | never | Work in progress |
+
+===== Syntax =====
+void addEntry	( **$entry** )
+
+| **$entry** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->getInstance]] | never | Work in progress |
+Returns a reference to the global log object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $log = & JLog::getInstance();</pre></p>
+===== Syntax =====
+object The &getInstance	( **$file**, **$options**, **$path** )
+
+| **$file** |  |  |
+| **$options** |  |  |
+| **$path** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setOptions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->setOptions]] | never | Work in progress |
+Set log file options
+===== Syntax =====
+boolean setOptions	( **$options** )
+
+| **$options** | array | Associative array of options to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _closeLog ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->_closeLog]] | never | Work in progress |
+Close the log file pointer
+===== Syntax =====
+boolean _closeLog ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _openLog ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JLog|##http://api.joomla.org/media/images/Class.png qq]][[JLog|JLog]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JLog.html|JLog->_openLog]] | never | Work in progress |
+Open the log file pointer and create the file if it doesn't exist
+===== Syntax =====
+boolean _openLog ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

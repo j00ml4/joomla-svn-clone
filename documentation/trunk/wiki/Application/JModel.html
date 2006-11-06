@@ -1,0 +1,214 @@
+====== JModel ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel]] | never | Work in progress |
+
+Base class for a Joomla Model<p>Acts as a Factory class for application specific objects and  provides many supporting API functions.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JModel-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-__construct|__construct]] | Constructor |
+| [[JModel-getDBO|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-getDBO|getDBO]] | Method to get the database connector object |
+| [[JModel-getError|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-getError|getError]] | Get the error message |
+| [[JModel-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-getInstance|getInstance]] | Get instance |
+| [[JModel-getModelName|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-getModelName|getModelName]] | Method to get the model name |
+| [[JModel-getState|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-getState|getState]] | Method to get model state variables |
+| [[JModel-setError|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-setError|setError]] | Sets the error message |
+| [[JModel-setState|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-setState|setState]] | Method to set model state variables |
+| [[JModel-_getList|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-_getList|_getList]] | Returns an object list |
+| [[JModel-_getListCount|##http://api.joomla.org/media/images/Method.png qq]] [[JModel-_getListCount|_getListCount]] | Returns a record count for the query |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JModel __construct	( **$options** )
+
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->getDBO]] | never | Work in progress |
+Method to get the database connector object
+===== Syntax =====
+<a href="../../Joomla-Framework/Database/JDatabase.html">object JDatabase</a> &getDBO ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->getError]] | never | Work in progress |
+Get the error message
+===== Syntax =====
+string getError ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->getInstance]] | never | Work in progress |
+Get instance
+===== Syntax =====
+JModelMenu &getInstance	( **$modelName** )
+
+| **$modelName** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getModelName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->getModelName]] | never | Work in progress |
+Method to get the model name
+===== Syntax =====
+string getModelName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->getState]] | never | Work in progress |
+Method to get model state variables
+===== Syntax =====
+object The getState ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->setError]] | never | Work in progress |
+Sets the error message
+===== Syntax =====
+string setError	( **$value** )
+
+| **$value** | string | The error message |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->setState]] | never | Work in progress |
+Method to set model state variables
+===== Syntax =====
+mixed setState	( **$property**, **$value** )
+
+| **$property** | string | The name of the property |
+| **$value** | mixed | The value of the property to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _getList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->_getList]] | never | Work in progress |
+Returns an object list
+===== Syntax =====
+array &_getList	( **$query**, **$limitstart**, **$limit** )
+
+| **$query** | string | The query |
+| **$limitstart** | int | Offset |
+| **$limit** | int | The number of records |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _getListCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JModel|##http://api.joomla.org/media/images/Class.png qq]][[JModel|JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel->_getListCount]] | never | Work in progress |
+Returns a record count for the query
+===== Syntax =====
+int _getListCount	( **$query** )
+
+| **$query** | string | The query |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

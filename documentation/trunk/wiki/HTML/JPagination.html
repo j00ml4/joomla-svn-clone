@@ -1,0 +1,394 @@
+====== JPagination ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination]] | never | Work in progress |
+
+Pagination Class.  Provides a common interface for content pagination for the  Joomla! Framework
+===== Methods =====
+^ Method ^ Description ^
+| [[JPagination-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-__construct|__construct]] | Constructor |
+| [[JPagination-getData|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getData|getData]] | Return the pagination data object, only creating it if it doesn't already exist |
+| [[JPagination-getLimitBox|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getLimitBox|getLimitBox]] | Creates a dropdown box for selecting how many records to show per page |
+| [[JPagination-getListFooter|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getListFooter|getListFooter]] | Return the pagination footer |
+| [[JPagination-getPagesCounter|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getPagesCounter|getPagesCounter]] | Create and return the pagination pages counter string, ie. Page 2 of 4 |
+| [[JPagination-getPagesLinks|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getPagesLinks|getPagesLinks]] | Create and return the pagination page list string, ie. Previous, Next, 1 2 3 ... x |
+| [[JPagination-getResultsCounter|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getResultsCounter|getResultsCounter]] | Create and return the pagination result set counter string, ie. Results 1-10 of 42 |
+| [[JPagination-getRowOffset|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-getRowOffset|getRowOffset]] | Return the rationalised offset for a row with a given index. |
+| [[JPagination-orderDownIcon|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-orderDownIcon|orderDownIcon]] | Return the icon to move an item DOWN |
+| [[JPagination-orderDownIcon2|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-orderDownIcon2|orderDownIcon2]] | Return the icon to move an item DOWN |
+| [[JPagination-orderUpIcon|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-orderUpIcon|orderUpIcon]] | Return the icon to move an item UP |
+| [[JPagination-orderUpIcon2|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-orderUpIcon2|orderUpIcon2]] | Return the icon to move an item UP |
+| [[JPagination-setTemplateVars|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-setTemplateVars|setTemplateVars]] | Sets the vars for the page navigation template |
+| [[JPagination-_buildDataObject|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-_buildDataObject|_buildDataObject]] | Create and return the pagination data object |
+| [[JPagination-_item_active|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-_item_active|_item_active]] |  |
+| [[JPagination-_item_inactive|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-_item_inactive|_item_inactive]] |  |
+| [[JPagination-_list_footer|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-_list_footer|_list_footer]] |  |
+| [[JPagination-_list_render|##http://api.joomla.org/media/images/Method.png qq]] [[JPagination-_list_render|_list_render]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JPagination __construct	( **$total**, **$limitstart**, **$limit**, **$link** )
+
+| **$total** |  |  |
+| **$limitstart** |  |  |
+| **$limit** |  |  |
+| **$link** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getData ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getData]] | never | Work in progress |
+Return the pagination data object, only creating it if it doesn't already exist
+===== Syntax =====
+object Pagination getData ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLimitBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getLimitBox]] | never | Work in progress |
+Creates a dropdown box for selecting how many records to show per page
+===== Syntax =====
+string getLimitBox	( **$link** )
+
+| **$link** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getListFooter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getListFooter]] | never | Work in progress |
+Return the pagination footer
+===== Syntax =====
+string getListFooter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPagesCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getPagesCounter]] | never | Work in progress |
+Create and return the pagination pages counter string, ie. Page 2 of 4
+===== Syntax =====
+string getPagesCounter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPagesLinks ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getPagesLinks]] | never | Work in progress |
+Create and return the pagination page list string, ie. Previous, Next, 1 2 3 ... x
+===== Syntax =====
+string getPagesLinks	( **$link** )
+
+| **$link** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getResultsCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getResultsCounter]] | never | Work in progress |
+Create and return the pagination result set counter string, ie. Results 1-10 of 42
+===== Syntax =====
+string getResultsCounter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getRowOffset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getRowOffset]] | never | Work in progress |
+Return the rationalised offset for a row with a given index.
+===== Syntax =====
+int getRowOffset	( **$index** )
+
+| **$index** | int | The row index |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== orderDownIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderDownIcon]] | never | Work in progress |
+Return the icon to move an item DOWN
+===== Syntax =====
+string orderDownIcon	( **$i**, **$n**, **$condition**, **$task**, **$alt**, **$enabled** )
+
+| **$i** | int | The row index |
+| **$n** | int | The number of items in the list |
+| **$condition** | boolean | True to show the icon |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+| **$enabled** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== orderDownIcon2 ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderDownIcon2]] | never | Work in progress |
+Return the icon to move an item DOWN
+===== Syntax =====
+string orderDownIcon2	( **$id**, **$order**, **$condition**, **$task**, **$alt** )
+
+| **$id** | int | The row index |
+| **$order** | int | The ordering value for the item |
+| **$condition** | boolean | [Does Not Appear To Be Used] |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== orderUpIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderUpIcon]] | never | Work in progress |
+Return the icon to move an item UP
+===== Syntax =====
+string orderUpIcon	( **$i**, **$condition**, **$task**, **$alt**, **$enabled** )
+
+| **$i** | int | The row index |
+| **$condition** | boolean | True to show the icon |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+| **$enabled** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== orderUpIcon2 ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderUpIcon2]] | never | Work in progress |
+Return the icon to move an item UP
+===== Syntax =====
+string orderUpIcon2	( **$id**, **$order**, **$condition**, **$task**, **$alt** )
+
+| **$id** | int | The row index |
+| **$order** | int | The ordering value for the item |
+| **$condition** | boolean | [Does Not Appear To Be Used] |
+| **$task** | string | The task to fire |
+| **$alt** | string | The image alternate text string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setTemplateVars ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->setTemplateVars]] | never | Work in progress |
+Sets the vars for the page navigation template
+===== Syntax =====
+boolean setTemplateVars	( **&$tmpl**, **$name**, **$link**, **$tmpl** )
+
+| **$tmpl** | object | PatTemplate Object to add the pagination footer template to |
+| **$name** | string | Name of the pagination footer template to add |
+| **&$tmpl** |  |  |
+| **$link** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _buildDataObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->_buildDataObject]] | never | Work in progress |
+Create and return the pagination data object
+===== Syntax =====
+object Pagination _buildDataObject	( **$base** )
+
+| **$base** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _item_active ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->_item_active]] | never | Work in progress |
+
+===== Syntax =====
+void _item_active	( **&$item** )
+
+| **&$item** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _item_inactive ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->_item_inactive]] | never | Work in progress |
+
+===== Syntax =====
+void _item_inactive	( **&$item** )
+
+| **&$item** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _list_footer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->_list_footer]] | never | Work in progress |
+
+===== Syntax =====
+void _list_footer	( **$list** )
+
+| **$list** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _list_render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JPagination|##http://api.joomla.org/media/images/Class.png qq]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->_list_render]] | never | Work in progress |
+
+===== Syntax =====
+void _list_render	( **$list** )
+
+| **$list** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

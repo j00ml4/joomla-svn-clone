@@ -1,0 +1,234 @@
+====== JDocumentHTML ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML]] | never | Work in progress |
+
+DocumentHTML class, provides an easy interface to parse and display an html document
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentHTML-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-__construct|__construct]] | Class constructor |
+| [[JDocumentHTML-addCustomTag|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block |
+| [[JDocumentHTML-addFavicon|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon)<p>This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display  it on the tab, as well.</p><p></p> |
+| [[JDocumentHTML-addHeadLink|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds &lt;link&gt; tags to the head of the document<p>$relType defaults to 'rel' as it is the most common relation type used.  ('rev' refers to reverse relation, 'rel' indicates normal, forward relation.)  Typical tag: &lt;link href=&quot;index.php&quot; rel=&quot;Start&quot;&gt;</p><p></p> |
+| [[JDocumentHTML-countModules|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-countModules|countModules]] | Count the modules based on the given condition |
+| [[JDocumentHTML-display|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-display|display]] | Outputs the template to the browser. |
+| [[JDocumentHTML-getInclude|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-getInclude|getInclude]] | Get the contents of a document include |
+| [[JDocumentHTML-setInclude|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-setInclude|setInclude]] | Set the contents a document include |
+| [[JDocumentHTML-_loadTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-_loadTemplate|_loadTemplate]] | Load a template file |
+| [[JDocumentHTML-_parseTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JDocumentHTML-_parseTemplate|_parseTemplate]] | Parse a document template |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->__construct]] | never | Work in progress |
+Class constructor
+===== Syntax =====
+JDocumentHTML __construct	( **$options** )
+
+| **$options** | array | Associative array of options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addCustomTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addCustomTag]] | never | Work in progress |
+Adds a custom html string to the head block
+===== Syntax =====
+void addCustomTag	( **$html** )
+
+| **$html** | string | The html to add to the head |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addFavicon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addFavicon]] | never | Work in progress |
+Adds a shortcut icon (favicon)<p>This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display  it on the tab, as well.</p><p></p>
+===== Syntax =====
+void addFavicon	( **$href**, **$type**, **$relation** )
+
+| **$href** | string | The link that is being related. |
+| **$type** | string | File type |
+| **$relation** | string | Relation of link |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addHeadLink ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addHeadLink]] | never | Work in progress |
+Adds &lt;link&gt; tags to the head of the document<p>$relType defaults to 'rel' as it is the most common relation type used.  ('rev' refers to reverse relation, 'rel' indicates normal, forward relation.)  Typical tag: &lt;link href=&quot;index.php&quot; rel=&quot;Start&quot;&gt;</p><p></p>
+===== Syntax =====
+void addHeadLink	( **$href**, **$relation**, **$relType**, **$attribs**, **$attributes** )
+
+| **$href** | string | The link that is being related. |
+| **$relation** | string | Relation of link. |
+| **$relType** | string | Relation type attribute.  Either rel or rev (default: 'rel'). |
+| **$attributes** | array | Associative array of remaining attributes. |
+| **$attribs** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== countModules ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->countModules]] | never | Work in progress |
+Count the modules based on the given condition
+===== Syntax =====
+integer countModules	( **$condition** )
+
+| **$condition** | string | The condition to use |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->display]] | never | Work in progress |
+Outputs the template to the browser.
+===== Syntax =====
+void display	( **$caching**, **$compress**, **$params**, **$cache** )
+
+| **$cache** | boolean | If true, cache the output |
+| **$compress** | boolean | If true, compress the output |
+| **$params** | array | Associative array of attributes |
+| **$caching** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInclude ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->getInclude]] | never | Work in progress |
+Get the contents of a document include
+===== Syntax =====
+The getInclude	( **$type**, **$name**, **$attribs** )
+
+| **$type** | string | The type of renderer |
+| **$name** | string | The name of the element to render |
+| **$attribs** | array | Associative array of remaining attributes. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setInclude ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->setInclude]] | never | Work in progress |
+Set the contents a document include
+===== Syntax =====
+void setInclude	( **$type**, **$name**, **$contents**, **$content** )
+
+| **$type** | string | The type of renderer |
+| **$name** | string | oke The name of the element to render |
+| **$content** | string | The content to be set in the buffer |
+| **$contents** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _loadTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->_loadTemplate]] | never | Work in progress |
+Load a template file
+===== Syntax =====
+string _loadTemplate	( **$directory**, **$filename**, **$template** )
+
+| **$template** | string | The name of the template |
+| **$filename** | string | The actual filename |
+| **$directory** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _parseTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocumentHTML|##http://api.joomla.org/media/images/Class.png qq]][[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->_parseTemplate]] | never | Work in progress |
+Parse a document template
+===== Syntax =====
+void _parseTemplate	( **$data**, **$params**, **$directory**, **$file** )
+
+| **$directory** | string | The template directory |
+| **$file** | string | The actual template file |
+| **$data** |  |  |
+| **$params** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+
