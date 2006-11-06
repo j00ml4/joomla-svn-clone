@@ -1,0 +1,235 @@
+====== JHTML ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML]] | never | Work in progress |
+
+Utility class for all HTML drawing classes
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTML-Date|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-Date|Date]] | Returns formated date according to current local and adds time offset |
+| [[JHTML-emailCloaking|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-emailCloaking|emailCloaking]] | simple Javascript Cloaking<p>email cloacking  by default replaces an email with a mailto link with email cloacked</p> |
+| [[JHTML-idBox|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-idBox|idBox]] |  |
+| [[JHTML-Iframe|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-Iframe|Iframe]] | Write a &lt;iframe&gt;&lt;/iframe&gt; element |
+| [[JHTML-Image|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-Image|Image]] | Write a &lt;img&gt;&lt;/amg&gt; element |
+| [[JHTML-keepAlive|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-keepAlive|keepAlive]] |  |
+| [[JHTML-Link|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-Link|Link]] | Write a &lt;a&gt;&lt;/a&gt; element |
+| [[JHTML-Script|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-Script|Script]] | Write a &lt;script&gt;&lt;/script&gt; element |
+| [[JHTML-_encoding_converter|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-_encoding_converter|_encoding_converter]] |  |
+| [[JHTML-_implode_assoc|##http://api.joomla.org/media/images/Method.png qq]] [[JHTML-_implode_assoc|_implode_assoc]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== Date ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->Date]] | never | Work in progress |
+Returns formated date according to current local and adds time offset
+===== Syntax =====
+formated Date	( **$date**, **$format**, **$offset** )
+
+| **$date** | string | date in an US English date format |
+| **$format** | string | format optional format for strftime |
+| **$offset** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== emailCloaking ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->emailCloaking]] | never | Work in progress |
+simple Javascript Cloaking<p>email cloacking  by default replaces an email with a mailto link with email cloacked</p>
+===== Syntax =====
+void emailCloaking	( **$mail**, **$mailto**, **$text**, **$email** )
+
+| **$mail** |  |  |
+| **$mailto** |  |  |
+| **$text** |  |  |
+| **$email** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== idBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->idBox]] | never | Work in progress |
+
+===== Syntax =====
+string idBox	( **$rowNum**, **$recId**, **$checkedOut**, **$name** )
+
+| **$rowNum** | int | The row index |
+| **$recId** | int | The record id |
+| **$checkedOut** | boolean |  |
+| **$name** | string | The name of the form element |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Iframe ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->Iframe]] | never | Work in progress |
+Write a &lt;iframe&gt;&lt;/iframe&gt; element
+===== Syntax =====
+void Iframe	( **$url**, **$name**, **$attribs**, **$ssl** )
+
+| **$url** | string | The relative URL to use for the src attribute |
+| **$name** | string | The target attribute to use |
+| **$attribs** | array | An associative array of attributes to add |
+| **$ssl** | integer | Set the SSL functionality |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Image ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->Image]] | never | Work in progress |
+Write a &lt;img&gt;&lt;/amg&gt; element
+===== Syntax =====
+void Image	( **$url**, **$alt**, **$attribs** )
+
+| **$url** | string | The relative URL to use for the src attribute |
+| **$alt** | string | The target attribute to use |
+| **$attribs** | array | An associative array of attributes to add |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== keepAlive ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->keepAlive]] | never | Work in progress |
+
+===== Syntax =====
+void keepAlive ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Link ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->Link]] | never | Work in progress |
+Write a &lt;a&gt;&lt;/a&gt; element
+===== Syntax =====
+void Link	( **$url**, **$text**, **$attribs**, **$ssl** )
+
+| **$url** | string | The relative URL to use for the href attribute |
+| **$text** | string | The target attribute to use |
+| **$attribs** | array | An associative array of attributes to add |
+| **$ssl** | integer | Set the SSL functionality |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Script ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->Script]] | never | Work in progress |
+Write a &lt;script&gt;&lt;/script&gt; element
+===== Syntax =====
+void Script	( **$url**, **$attribs**, **2** )
+
+| **2** | array | An associative array of attributes to add |
+| **$url** | string | The relative URL to use for the src attribute |
+| **$attribs** | string | The target attribute to use |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _encoding_converter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->_encoding_converter]] | never | Work in progress |
+
+===== Syntax =====
+void _encoding_converter	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _implode_assoc ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|##http://api.joomla.org/media/images/Class.png qq]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->_implode_assoc]] | never | Work in progress |
+
+===== Syntax =====
+void _implode_assoc	( **$inner_glue**, **$outer_glue**, **$array**, **$keepOuterKey** )
+
+| **$inner_glue** |  |  |
+| **$outer_glue** |  |  |
+| **$array** |  |  |
+| **$keepOuterKey** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

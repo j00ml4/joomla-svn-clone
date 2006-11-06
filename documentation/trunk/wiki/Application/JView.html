@@ -1,0 +1,478 @@
+====== JView ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView]] | never | Work in progress |
+
+Base class for a Joomla View<p>Class holding methods for displaying presentation data.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JView-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JView-__construct|__construct]] | Constructor |
+| [[JView-addEscape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-addEscape|addEscape]] | Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p> |
+| [[JView-addTemplatePath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-addTemplatePath|addTemplatePath]] | Adds to the stack of view script paths in LIFO order. |
+| [[JView-assign|##http://api.joomla.org/media/images/Method.png qq]] [[JView-assign|assign]] | Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'something'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var2'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;assoc-array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$ary&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'var1'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'something'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'var2'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;object</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$obj&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">stdClass</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p> |
+| [[JView-assignRef|##http://api.joomla.org/media/images/Method.png qq]] [[JView-assignRef|assignRef]] | Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassignRef">assignRef</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$ref</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">ref&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-var">$var1</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p> |
+| [[JView-display|##http://api.joomla.org/media/images/Method.png qq]] [[JView-display|display]] | Execute and display a template script. |
+| [[JView-escape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-escape|escape]] | Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;replacement&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p> |
+| [[JView-get|##http://api.joomla.org/media/images/Method.png qq]] [[JView-get|get]] | Method to get data from a registered model |
+| [[JView-getLayout|##http://api.joomla.org/media/images/Method.png qq]] [[JView-getLayout|getLayout]] | Get the layout. |
+| [[JView-getModel|##http://api.joomla.org/media/images/Method.png qq]] [[JView-getModel|getModel]] | Method to get the model object |
+| [[JView-loadTemplate|##http://api.joomla.org/media/images/Method.png qq]] [[JView-loadTemplate|loadTemplate]] | Load a template file -- first look in the templates folder for an override |
+| [[JView-setEscape|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setEscape|setEscape]] | Clears then sets the callbacks to use when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodsetEscape">setEscape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p> |
+| [[JView-setLayout|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setLayout|setLayout]] | Sets the layout name to use |
+| [[JView-setModel|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setModel|setModel]] | Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p> |
+| [[JView-setTemplatePath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-setTemplatePath|setTemplatePath]] | Resets the stack of view template paths.<p>To clear all paths, use JView::setTemplatePath(null).</p> |
+| [[JView-_addPath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_addPath|_addPath]] | Adds to the search path for templates and resources. |
+| [[JView-_findFile|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_findFile|_findFile]] | Searches the directory paths for a given file. |
+| [[JView-_setPath|##http://api.joomla.org/media/images/Method.png qq]] [[JView-_setPath|_setPath]] | Sets an entire array of search paths for templates or resources. |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JView __construct	( **$config** )
+
+| **$config** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addEscape ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addEscape]] | never | Work in progress |
+Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+===== Syntax =====
+void addEscape ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addTemplatePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->addTemplatePath]] | never | Work in progress |
+Adds to the stack of view script paths in LIFO order.
+===== Syntax =====
+void addTemplatePath	( **$path** )
+
+| **$path** | string|array | The directory (-ies) to add. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== assign ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assign]] | never | Work in progress |
+Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'something'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var2'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;assoc-array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$ary&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'var1'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'something'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'var2'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;object</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$obj&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">stdClass</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+===== Syntax =====
+bool assign ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== assignRef ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->assignRef]] | never | Work in progress |
+Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassignRef">assignRef</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$ref</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">ref&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-var">$var1</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+===== Syntax =====
+bool assignRef	( **$key**, **&$val** )
+
+| **$key** | string | The name for the reference in the view. |
+| **&$val** | mixed | The referenced variable. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->display]] | never | Work in progress |
+Execute and display a template script.
+===== Syntax =====
+void display	( **$tpl** )
+
+| **$tpl** | string | The name of the template file to parse;  automatically searches through the template paths. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== escape ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->escape]] | never | Work in progress |
+Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;replacement&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+===== Syntax =====
+mixed escape	( **$value** )
+
+| **$value** | mixed | The value to be escaped. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->get]] | never | Work in progress |
+Method to get data from a registered model
+===== Syntax =====
+mixed &get	( **$method**, **$model** )
+
+| **$method** | string | The name of the method to call on the model |
+| **$model** | string | The name of the model to reference [optional] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLayout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getLayout]] | never | Work in progress |
+Get the layout.
+===== Syntax =====
+string getLayout ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getModel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->getModel]] | never | Work in progress |
+Method to get the model object
+===== Syntax =====
+mixed &getModel	( **$name** )
+
+| **$name** | string | The name of the model (optional) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->loadTemplate]] | never | Work in progress |
+Load a template file -- first look in the templates folder for an override
+===== Syntax =====
+string loadTemplate	( **$tpl**, **$_tpl** )
+
+| **$_tpl** | string | The name of the template source file ...  automatically searches the template paths and compiles as needed. |
+| **$tpl** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setEscape ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setEscape]] | never | Work in progress |
+Clears then sets the callbacks to use when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodsetEscape">setEscape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+===== Syntax =====
+void setEscape ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLayout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setLayout]] | never | Work in progress |
+Sets the layout name to use
+===== Syntax =====
+void setLayout	( **$layout**, **$template** )
+
+| **$template** | string | The template name. |
+| **$layout** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setModel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setModel]] | never | Work in progress |
+Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p>
+===== Syntax =====
+object The &setModel	( **&$model**, **$default**, **$model** )
+
+| **$model** | object | The model to add to the view. |
+| **$default** | boolean | Is this the default model? |
+| **&$model** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setTemplatePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->setTemplatePath]] | never | Work in progress |
+Resets the stack of view template paths.<p>To clear all paths, use JView::setTemplatePath(null).</p>
+===== Syntax =====
+void setTemplatePath	( **$path** )
+
+| **$path** | string|array | The directory (-ies) to set as the path. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _addPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_addPath]] | never | Work in progress |
+Adds to the search path for templates and resources.
+===== Syntax =====
+void _addPath	( **$type**, **$path** )
+
+| **$path** | string|array | The directory or stream to search. |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _findFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_findFile]] | never | Work in progress |
+Searches the directory paths for a given file.
+===== Syntax =====
+string|bool _findFile	( **$type**, **$file** )
+
+| **$type** | array | The type of path to search (template or resource). |
+| **$file** | string | The file name to look for. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _setPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JView|##http://api.joomla.org/media/images/Class.png qq]][[JView|JView]] | [[http://api.joomla.org/Joomla-Framework/Application/JView.html|JView->_setPath]] | never | Work in progress |
+Sets an entire array of search paths for templates or resources.
+===== Syntax =====
+void _setPath	( **$type**, **$path** )
+
+| **$type** | string | The type of path to set, typically 'template'. |
+| **$path** | string|array | The new set of search paths.  If null or  false, resets to the current directory only. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

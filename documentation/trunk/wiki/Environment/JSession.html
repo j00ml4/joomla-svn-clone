@@ -1,0 +1,369 @@
+====== JSession ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession]] | never | Work in progress |
+
+Class for managing HTTP sessions<p>Provides access to session-state values as well as session-level  settings and lifetime management methods.  Based on the standart PHP session handling mechanism it provides  for you more advanced features such as expire timeouts.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JSession-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-__construct|__construct]] | Constructor |
+| [[JSession-clear|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-clear|clear]] | Unset data from session |
+| [[JSession-destroy|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-destroy|destroy]] | Frees all session variables and destroys all data registered to a session<p>This method resets the $_SESSION variable and destroys all of the data associated  with the current session in its storage (file or DB). It forces new session to be  started after this method is called. It does not unset the session cookie.</p> |
+| [[JSession-fork|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-fork|fork]] | Create a new session and copy variables from the old one |
+| [[JSession-get|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-get|get]] | Get date from session |
+| [[JSession-getId|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-getId|getId]] | Get session id |
+| [[JSession-getName|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-getName|getName]] | Get session name |
+| [[JSession-getState|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-getState|getState]] | Get current state of session |
+| [[JSession-has|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-has|has]] | Check wheter a session value exists |
+| [[JSession-isNew|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-isNew|isNew]] | Check whether this session is currently created |
+| [[JSession-pause|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-pause|pause]] | Writes session data and ends session<p>Session data is usually stored after your script terminated without the need  to call JSession::pauze(),but as session data is locked to prevent concurrent  writes only one script may operate on a session at any time. When using  framesets together with sessions you will experience the frames loading one  by one due to this locking. You can reduce the time needed to load all the  frames by ending the session as soon as all changes to session variables are  done.</p> |
+| [[JSession-restart|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-restart|restart]] | restart a destroyed or locked session |
+| [[JSession-set|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-set|set]] | Save date into session |
+| [[JSession-_createToken|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-_createToken|_createToken]] | Create a token-string |
+| [[JSession-_setCounter|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-_setCounter|_setCounter]] | Set counter of session usage |
+| [[JSession-_setOptions|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-_setOptions|_setOptions]] | set additional session options |
+| [[JSession-_setTimers|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-_setTimers|_setTimers]] | Set the session timers |
+| [[JSession-_validate|##http://api.joomla.org/media/images/Method.png qq]] [[JSession-_validate|_validate]] | Do some checks for security reason<p><ul><li>timeout check (expire)</li><li>ip-fixiation</li><li>browser-fixiation</li></ul>  If one check failed, session data has to be cleaned.</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JSession __construct	( **$options**, **$id** )
+
+| **$id** | string | name-prefix used for internal storage of session-data |
+| **$options** | array | optional parameters |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== clear ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->clear]] | never | Work in progress |
+Unset data from session
+===== Syntax =====
+mixed clear	( **$name** )
+
+| **$name** | string | name of variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== destroy ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->destroy]] | never | Work in progress |
+Frees all session variables and destroys all data registered to a session<p>This method resets the $_SESSION variable and destroys all of the data associated  with the current session in its storage (file or DB). It forces new session to be  started after this method is called. It does not unset the session cookie.</p>
+===== Syntax =====
+void destroy ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== fork ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->fork]] | never | Work in progress |
+Create a new session and copy variables from the old one
+===== Syntax =====
+boolean fork ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->get]] | never | Work in progress |
+Get date from session
+===== Syntax =====
+mixed &get	( **$name**, **$default** )
+
+| **$name** | string | Name of a variable |
+| **$default** | mixed | Default value of a variable if not set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->getId]] | never | Work in progress |
+Get session id
+===== Syntax =====
+string getId ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->getName]] | never | Work in progress |
+Get session name
+===== Syntax =====
+string getName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->getState]] | never | Work in progress |
+Get current state of session
+===== Syntax =====
+string getState ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== has ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->has]] | never | Work in progress |
+Check wheter a session value exists
+===== Syntax =====
+boolean has	( **$name** )
+
+| **$name** | string | name of variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isNew ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->isNew]] | never | Work in progress |
+Check whether this session is currently created
+===== Syntax =====
+boolean isNew ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== pause ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->pause]] | never | Work in progress |
+Writes session data and ends session<p>Session data is usually stored after your script terminated without the need  to call JSession::pauze(),but as session data is locked to prevent concurrent  writes only one script may operate on a session at any time. When using  framesets together with sessions you will experience the frames loading one  by one due to this locking. You can reduce the time needed to load all the  frames by ending the session as soon as all changes to session variables are  done.</p>
+===== Syntax =====
+void pause ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== restart ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->restart]] | never | Work in progress |
+restart a destroyed or locked session
+===== Syntax =====
+boolean restart ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== set ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->set]] | never | Work in progress |
+Save date into session
+===== Syntax =====
+mixed set	( **$name**, **$value** )
+
+| **$name** | string | Name of a variable |
+| **$value** | mixed | Value of a variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _createToken ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->_createToken]] | never | Work in progress |
+Create a token-string
+===== Syntax =====
+string _createToken	( **$length** )
+
+| **$length** | int | lenght of string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _setCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->_setCounter]] | never | Work in progress |
+Set counter of session usage
+===== Syntax =====
+boolean _setCounter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _setOptions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->_setOptions]] | never | Work in progress |
+set additional session options
+===== Syntax =====
+boolean _setOptions	( **&$options**, **$options** )
+
+| **$options** | array | list of parameter |
+| **&$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _setTimers ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->_setTimers]] | never | Work in progress |
+Set the session timers
+===== Syntax =====
+boolean _setTimers ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _validate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JSession|##http://api.joomla.org/media/images/Class.png qq]][[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Environment/JSession.html|JSession->_validate]] | never | Work in progress |
+Do some checks for security reason<p><ul><li>timeout check (expire)</li><li>ip-fixiation</li><li>browser-fixiation</li></ul>  If one check failed, session data has to be cleaned.</p>
+===== Syntax =====
+boolean _validate	( **$restart** )
+
+| **$restart** | boolean | reactivate session |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

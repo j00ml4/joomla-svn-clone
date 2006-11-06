@@ -1,0 +1,80 @@
+====== JAuthenticateHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticateHelper.html|JAuthenticateHelper]] | never | Work in progress |
+
+Authorization helper class, provides static methods to perform various tasks relevant  to the Joomla authorization routines<p>This class has influences and some method logic from the Horde Auth package</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JAuthenticateHelper-genRandomPassword|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthenticateHelper-genRandomPassword|genRandomPassword]] | Generate a random password |
+| [[JAuthenticateHelper-getCryptedPassword|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthenticateHelper-getCryptedPassword|getCryptedPassword]] | Formats a password using the current encryption. |
+| [[JAuthenticateHelper-getSalt|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthenticateHelper-getSalt|getSalt]] | Returns a salt for the appropriate kind of password encryption.<p>Optionally takes a seed and a plaintext password, to extract the seed  of an existing password, or for encryption types that use the plaintext  in the generation of the salt.</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== genRandomPassword ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthenticateHelper|##http://api.joomla.org/media/images/Class.png qq]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticateHelper.html|JAuthenticateHelper->genRandomPassword]] | never | Work in progress |
+Generate a random password
+===== Syntax =====
+string genRandomPassword	( **$length** )
+
+| **$length** | int | Length of the password to generate |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getCryptedPassword ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthenticateHelper|##http://api.joomla.org/media/images/Class.png qq]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticateHelper.html|JAuthenticateHelper->getCryptedPassword]] | never | Work in progress |
+Formats a password using the current encryption.
+===== Syntax =====
+string getCryptedPassword	( **$plaintext**, **$salt**, **$encryption**, **$show_encrypt** )
+
+| **$plaintext** | string | The plaintext password to encrypt. |
+| **$salt** | string | The salt to use to encrypt the password. []                                If not present, a new salt will be                                generated. |
+| **$encryption** | string | The kind of pasword encryption to use.                                Defaults to md5-hex. |
+| **$show_encrypt** | boolean | Some password systems prepend the kind of                                encryption to the crypted password ({SHA},                                etc). Defaults to false. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getSalt ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthenticateHelper|##http://api.joomla.org/media/images/Class.png qq]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticateHelper.html|JAuthenticateHelper->getSalt]] | never | Work in progress |
+Returns a salt for the appropriate kind of password encryption.<p>Optionally takes a seed and a plaintext password, to extract the seed  of an existing password, or for encryption types that use the plaintext  in the generation of the salt.</p>
+===== Syntax =====
+string getSalt	( **$encryption**, **$seed**, **$plaintext** )
+
+| **$encryption** | string | The kind of pasword encryption to use.                             Defaults to md5-hex. |
+| **$seed** | string | The seed to get the salt from (probably a                             previously generated password). Defaults to                             generating a new seed. |
+| **$plaintext** | string | The plaintext password that we're generating                             a salt for. Defaults to none. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

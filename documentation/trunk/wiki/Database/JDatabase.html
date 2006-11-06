@@ -1,0 +1,1059 @@
+====== JDatabase ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase]] | never | Work in progress |
+
+Database connector class
+===== Methods =====
+^ Method ^ Description ^
+| [[JDatabase-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-__construct|__construct]] | Database object constructor |
+| [[JDatabase-addQuoted|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-addQuoted|addQuoted]] | Adds a field or array of field names to the list that are to be quoted |
+| [[JDatabase-BeginTrans|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-BeginTrans|BeginTrans]] | ADODB compatability function |
+| [[JDatabase-CommitTrans|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-CommitTrans|CommitTrans]] | ADODB compatability function |
+| [[JDatabase-debug|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-debug|debug]] | Sets the debug level on or off |
+| [[JDatabase-ErrorMsg|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-ErrorMsg|ErrorMsg]] | ADODB compatability function |
+| [[JDatabase-ErrorNo|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-ErrorNo|ErrorNo]] | ADODB compatability function |
+| [[JDatabase-Execute|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-Execute|Execute]] | ADODB compatability function |
+| [[JDatabase-explain|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-explain|explain]] | Diagnostic function |
+| [[JDatabase-GenID|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-GenID|GenID]] | ADODB compatability function |
+| [[JDatabase-getAffectedRows|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getAffectedRows|getAffectedRows]] | Get the affected rows by the most recent query |
+| [[JDatabase-GetCol|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-GetCol|GetCol]] | ADODB compatability function |
+| [[JDatabase-getCollation|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getCollation|getCollation]] | Get the database collation |
+| [[JDatabase-getErrorMsg|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getErrorMsg|getErrorMsg]] | Get the error message |
+| [[JDatabase-getErrorNum|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getErrorNum|getErrorNum]] | Get the error number |
+| [[JDatabase-getEscaped|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getEscaped|getEscaped]] | Get a database escaped string |
+| [[JDatabase-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getInstance|getInstance]] | Returns a reference to the global Database object, only creating it  if it doesn't already exist. |
+| [[JDatabase-getNullDate|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getNullDate|getNullDate]] | Get the database null date |
+| [[JDatabase-getNumRows|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getNumRows|getNumRows]] | Get the number of rows returned by the most recent query |
+| [[JDatabase-GetOne|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-GetOne|GetOne]] | ADODB compatability function |
+| [[JDatabase-getPrefix|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getPrefix|getPrefix]] | Get the database table prefix |
+| [[JDatabase-getQuery|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getQuery|getQuery]] | Get the active query |
+| [[JDatabase-GetRow|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-GetRow|GetRow]] | ADODB compatability function |
+| [[JDatabase-getTableCreate|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getTableCreate|getTableCreate]] |  |
+| [[JDatabase-getTableFields|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getTableFields|getTableFields]] | List database table fields |
+| [[JDatabase-getTableList|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getTableList|getTableList]] | List tables in a database |
+| [[JDatabase-getUTFSupport|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getUTFSupport|getUTFSupport]] | Get the database UTF-8 support |
+| [[JDatabase-getVersion|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-getVersion|getVersion]] | Get the version of the database connector |
+| [[JDatabase-hasUTF|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-hasUTF|hasUTF]] | Determines UTF support |
+| [[JDatabase-insertid|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-insertid|insertid]] | Get the ID generated from the previous INSERT operation |
+| [[JDatabase-insertObject|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-insertObject|insertObject]] | Insert an object in the database |
+| [[JDatabase-isQuoted|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-isQuoted|isQuoted]] | Checks if field name needs to be quoted |
+| [[JDatabase-loadAssoc|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadAssoc|loadAssoc]] | Fetch a result row as an associative array |
+| [[JDatabase-loadAssocList|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadAssocList|loadAssocList]] | Load a associactive list of database rows |
+| [[JDatabase-loadObject|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadObject|loadObject]] | This global function loads the first row of a query into an object |
+| [[JDatabase-loadObjectList|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadObjectList|loadObjectList]] | Load a list of database objects |
+| [[JDatabase-loadResult|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadResult|loadResult]] | This method loads the first field of the first row returned by the query. |
+| [[JDatabase-loadResultArray|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadResultArray|loadResultArray]] | Load an array of single field results into an array |
+| [[JDatabase-loadRow|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadRow|loadRow]] | Load the first row returned by the query |
+| [[JDatabase-loadRowList|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-loadRowList|loadRowList]] | Load a list of database rows (numeric column indexing)<p>If <var>key</var> is not empty then the returned array is indexed by the value  the database key.  Returns <var>null</var> if the query fails.</p> |
+| [[JDatabase-nameQuote|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-nameQuote|nameQuote]] | Quote an identifier name (field, table, etc) |
+| [[JDatabase-PageExecute|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-PageExecute|PageExecute]] | ADODB compatability function |
+| [[JDatabase-query|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-query|query]] | Execute the query |
+| [[JDatabase-queryBatch|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-queryBatch|queryBatch]] | Execute a batch query |
+| [[JDatabase-Quote|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-Quote|Quote]] | Get a quoted database escaped string |
+| [[JDatabase-replacePrefix|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-replacePrefix|replacePrefix]] | This function replaces a string identifier <var>$prefix</var> with the  string held is the <var>_table_prefix</var> class variable. |
+| [[JDatabase-RollbackTrans|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-RollbackTrans|RollbackTrans]] | ADODB compatability function |
+| [[JDatabase-SelectLimit|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-SelectLimit|SelectLimit]] | ADODB compatability function |
+| [[JDatabase-setQuery|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-setQuery|setQuery]] | Sets the SQL query string for later execution.<p>This function replaces a string identifier <var>$prefix</var> with the  string held is the <var>_table_prefix</var> class variable.</p> |
+| [[JDatabase-setUTF|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-setUTF|setUTF]] | Custom settings for UTF support |
+| [[JDatabase-stderr|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-stderr|stderr]] | Print out an error statement |
+| [[JDatabase-updateObject|##http://api.joomla.org/media/images/Method.png qq]] [[JDatabase-updateObject|updateObject]] | Update ab object in the database |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->__construct]] | never | Work in progress |
+Database object constructor
+===== Syntax =====
+JDatabase __construct	( **$host**, **$user**, **$pass**, **$db**, **$table_prefix** )
+
+| **$host** | string | Database host |
+| **$user** | string | Database user name |
+| **$pass** | string | Database user password |
+| **$db** | string | Database name |
+| **$table_prefix** | string | Common prefix for all tables |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addQuoted ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->addQuoted]] | never | Work in progress |
+Adds a field or array of field names to the list that are to be quoted
+===== Syntax =====
+void addQuoted	( **$quoted** )
+
+| **$quoted** | mixed | Field name or array of names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== BeginTrans ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->BeginTrans]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void BeginTrans ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== CommitTrans ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->CommitTrans]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void CommitTrans ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== debug ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->debug]] | never | Work in progress |
+Sets the debug level on or off
+===== Syntax =====
+void debug	( **$level** )
+
+| **$level** | int | 0 = off, 1 = on |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== ErrorMsg ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->ErrorMsg]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void ErrorMsg ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== ErrorNo ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->ErrorNo]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void ErrorNo ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Execute ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->Execute]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+object Execute	( **$query** )
+
+| **$query** | string | SQL |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== explain ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->explain]] | never | Work in progress |
+Diagnostic function
+===== Syntax =====
+void explain ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== GenID ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->GenID]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void GenID	( **$foo1**, **$foo2** )
+
+| **$foo1** |  |  |
+| **$foo2** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getAffectedRows ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getAffectedRows]] | never | Work in progress |
+Get the affected rows by the most recent query
+===== Syntax =====
+int getAffectedRows ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== GetCol ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->GetCol]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void GetCol	( **$query** )
+
+| **$query** | string | SQL |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getCollation ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getCollation]] | never | Work in progress |
+Get the database collation
+===== Syntax =====
+string getCollation ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getErrorMsg ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getErrorMsg]] | never | Work in progress |
+Get the error message
+===== Syntax =====
+string getErrorMsg ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getErrorNum]] | never | Work in progress |
+Get the error number
+===== Syntax =====
+int getErrorNum ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getEscaped ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getEscaped]] | never | Work in progress |
+Get a database escaped string
+===== Syntax =====
+string getEscaped	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getInstance]] | never | Work in progress |
+Returns a reference to the global Database object, only creating it  if it doesn't already exist.
+===== Syntax =====
+<a href="../../Joomla-Legacy/1-5/database.html">database</a> &getInstance	( **$driver**, **$host**, **$user**, **$pass**, **$db**, **$table_prefix** )
+
+| **$driver** | string | Database driver |
+| **$host** | string | Database host |
+| **$user** | string | Database user name |
+| **$pass** | string | Database user password |
+| **$db** | string | Database name |
+| **$table_prefix** | string | Common prefix for all tables |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getNullDate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getNullDate]] | never | Work in progress |
+Get the database null date
+===== Syntax =====
+string getNullDate ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getNumRows ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getNumRows]] | never | Work in progress |
+Get the number of rows returned by the most recent query
+===== Syntax =====
+int getNumRows	( **$cur** )
+
+| **$cur** | object Database | resource |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== GetOne ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->GetOne]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+mixed GetOne	( **$query** )
+
+| **$query** | string | SQL |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getPrefix ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getPrefix]] | never | Work in progress |
+Get the database table prefix
+===== Syntax =====
+string getPrefix ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getQuery ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getQuery]] | never | Work in progress |
+Get the active query
+===== Syntax =====
+string getQuery ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== GetRow ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->GetRow]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+array GetRow	( **$query** )
+
+| **$query** | string | SQL |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTableCreate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableCreate]] | never | Work in progress |
+
+===== Syntax =====
+array getTableCreate	( **$tables** )
+
+| **$tables** | array | A list of table names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTableFields ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableFields]] | never | Work in progress |
+List database table fields
+===== Syntax =====
+array getTableFields	( **$tables** )
+
+| **$tables** | array | A list of table names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTableList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableList]] | never | Work in progress |
+List tables in a database
+===== Syntax =====
+array getTableList ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getUTFSupport ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getUTFSupport]] | never | Work in progress |
+Get the database UTF-8 support
+===== Syntax =====
+boolean getUTFSupport ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getVersion ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getVersion]] | never | Work in progress |
+Get the version of the database connector
+===== Syntax =====
+void getVersion ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== hasUTF ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->hasUTF]] | never | Work in progress |
+Determines UTF support
+===== Syntax =====
+boolean hasUTF ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== insertid ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->insertid]] | never | Work in progress |
+Get the ID generated from the previous INSERT operation
+===== Syntax =====
+mixed insertid ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== insertObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->insertObject]] | never | Work in progress |
+Insert an object in the database
+===== Syntax =====
+void insertObject	( **$table**, **&$object**, **$keyName**, **$verbose** )
+
+| **$table** | string | The table name |
+| **&$object** | object |  |
+| **$keyName** | string |  |
+| **$verbose** | boolean |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== isQuoted ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->isQuoted]] | never | Work in progress |
+Checks if field name needs to be quoted
+===== Syntax =====
+bool isQuoted	( **$fieldName** )
+
+| **$fieldName** | string | The field name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadAssoc ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadAssoc]] | never | Work in progress |
+Fetch a result row as an associative array
+===== Syntax =====
+void loadAssoc ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadAssocList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadAssocList]] | never | Work in progress |
+Load a associactive list of database rows
+===== Syntax =====
+array loadAssocList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObject]] | never | Work in progress |
+This global function loads the first row of a query into an object
+===== Syntax =====
+void loadObject	( **0** )
+
+| **0** | object |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadObjectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObjectList]] | never | Work in progress |
+Load a list of database objects
+===== Syntax =====
+array loadObjectList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadResult ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadResult]] | never | Work in progress |
+This method loads the first field of the first row returned by the query.
+===== Syntax =====
+The loadResult ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadResultArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadResultArray]] | never | Work in progress |
+Load an array of single field results into an array
+===== Syntax =====
+void loadResultArray	( **$numinarray** )
+
+| **$numinarray** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadRow ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadRow]] | never | Work in progress |
+Load the first row returned by the query
+===== Syntax =====
+The loadRow ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadRowList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadRowList]] | never | Work in progress |
+Load a list of database rows (numeric column indexing)<p>If <var>key</var> is not empty then the returned array is indexed by the value  the database key.  Returns <var>null</var> if the query fails.</p>
+===== Syntax =====
+array loadRowList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== nameQuote ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->nameQuote]] | never | Work in progress |
+Quote an identifier name (field, table, etc)
+===== Syntax =====
+string nameQuote	( **$s** )
+
+| **$s** | string | The name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== PageExecute ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->PageExecute]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void PageExecute	( **$sql**, **$nrows**, **$page**, **$inputarr**, **$secs2cache** )
+
+| **$sql** |  |  |
+| **$nrows** |  |  |
+| **$page** |  |  |
+| **$inputarr** |  |  |
+| **$secs2cache** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== query ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->query]] | never | Work in progress |
+Execute the query
+===== Syntax =====
+mixed query ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== queryBatch ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->queryBatch]] | never | Work in progress |
+Execute a batch query
+===== Syntax =====
+mixed queryBatch	( **$abort_on_error**, **$p_transaction_safe** )
+
+| **$abort_on_error** |  |  |
+| **$p_transaction_safe** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Quote ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->Quote]] | never | Work in progress |
+Get a quoted database escaped string
+===== Syntax =====
+string Quote	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== replacePrefix ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->replacePrefix]] | never | Work in progress |
+This function replaces a string identifier <var>$prefix</var> with the  string held is the <var>_table_prefix</var> class variable.
+===== Syntax =====
+void replacePrefix	( **$sql**, **$prefix** )
+
+| **$sql** | string | The SQL query |
+| **$prefix** | string | The common table prefix |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== RollbackTrans ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->RollbackTrans]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void RollbackTrans ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== SelectLimit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->SelectLimit]] | never | Work in progress |
+ADODB compatability function
+===== Syntax =====
+void SelectLimit	( **$query**, **$count**, **$offset** )
+
+| **$query** |  |  |
+| **$count** |  |  |
+| **$offset** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setQuery ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setQuery]] | never | Work in progress |
+Sets the SQL query string for later execution.<p>This function replaces a string identifier <var>$prefix</var> with the  string held is the <var>_table_prefix</var> class variable.</p>
+===== Syntax =====
+void setQuery	( **$sql**, **$offset**, **$limit**, **$prefix** )
+
+| **$sql** | string | The SQL query |
+| **$offset** | string | The offset to start selection |
+| **$limit** | string | The number of results to return |
+| **$prefix** | string | The common table prefix |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setUTF ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setUTF]] | never | Work in progress |
+Custom settings for UTF support
+===== Syntax =====
+void setUTF ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== stderr ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->stderr]] | never | Work in progress |
+Print out an error statement
+===== Syntax =====
+string stderr	( **$showSQL** )
+
+| **$showSQL** | boolean | If TRUE, displays the last SQL statement sent to the database |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== updateObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Database|Database]] | [[JDatabase|##http://api.joomla.org/media/images/Class.png qq]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->updateObject]] | never | Work in progress |
+Update ab object in the database
+===== Syntax =====
+void updateObject	( **$table**, **&$object**, **$keyName**, **$updateNulls** )
+
+| **$table** | string |  |
+| **&$object** | object |  |
+| **$keyName** | string |  |
+| **$updateNulls** | boolean |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

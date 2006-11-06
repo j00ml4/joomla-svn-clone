@@ -1,0 +1,601 @@
+====== JDocument ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument]] | never | Work in progress |
+
+Document class, provides an easy interface to parse and display a document
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocument-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-__construct|__construct]] | Class constructor |
+| [[JDocument-addScript|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-addScript|addScript]] | Adds a linked script to the page |
+| [[JDocument-addScriptDeclaration|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page |
+| [[JDocument-addStyleDeclaration|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page |
+| [[JDocument-addStyleSheet|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-addStyleSheet|addStyleSheet]] | Adds a linked stylesheet to the page |
+| [[JDocument-compress|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-compress|compress]] | Compress the data<p>Checks the accept encoding of the browser and compresses the data before  sending it to the client.</p> |
+| [[JDocument-display|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-display|display]] | Outputs the document to the client |
+| [[JDocument-getCharset|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getCharset|getCharset]] | Returns the document charset encoding. |
+| [[JDocument-getDescription|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getDescription|getDescription]] | Return the title of the page. |
+| [[JDocument-getDirection|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getDirection|getDirection]] | Returns the document language. |
+| [[JDocument-getGenerator|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getGenerator|getGenerator]] | Returns the document generator |
+| [[JDocument-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getInstance|getInstance]] | Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $document = &JDocument::getInstance();</pre></p> |
+| [[JDocument-getLanguage|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getLanguage|getLanguage]] | Returns the document language. |
+| [[JDocument-getLink|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getLink|getLink]] | Returns the document base url |
+| [[JDocument-getMetaData|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getMetaData|getMetaData]] | Gets a meta tag. |
+| [[JDocument-getTitle|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getTitle|getTitle]] | Return the title of the document. |
+| [[JDocument-getType|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-getType|getType]] | Returns the document type |
+| [[JDocument-loadRenderer|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-loadRenderer|loadRenderer]] | Load a renderer |
+| [[JDocument-setCharset|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setCharset|setCharset]] | Sets the document charset |
+| [[JDocument-setDescription|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setDescription|setDescription]] | Sets the description of the document |
+| [[JDocument-setDirection|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setDirection|setDirection]] | Sets the global document direction declaration. Default is left-to-right (ltr). |
+| [[JDocument-setGenerator|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setGenerator|setGenerator]] | Sets the document generator |
+| [[JDocument-setLanguage|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setLanguage|setLanguage]] | Sets the global document language declaration. Default is English (en). |
+| [[JDocument-setLineEnd|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setLineEnd|setLineEnd]] | Sets the line end style to Windows, Mac, Unix or a custom string. |
+| [[JDocument-setLink|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setLink|setLink]] | Sets the document link |
+| [[JDocument-setMetaData|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setMetaData|setMetaData]] | Sets or alters a meta tag. |
+| [[JDocument-setMimeEncoding|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser.<p>This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml  and to a lesser extent application/xml and text/xml. See the W3C note  (<a href="http://www.w3.org/TR/xhtml-media-types/">http://www.w3.org/TR/xhtml-media-types/</a>) for more details.</p><p></p> |
+| [[JDocument-setTab|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setTab|setTab]] | Sets the string used to indent HTML |
+| [[JDocument-setTitle|##http://api.joomla.org/media/images/Method.png qq]] [[JDocument-setTitle|setTitle]] | Sets the title of the document |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->__construct]] | never | Work in progress |
+Class constructor
+===== Syntax =====
+JDocument __construct	( **$options** )
+
+| **$options** | array | Associative array of options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addScript ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScript]] | never | Work in progress |
+Adds a linked script to the page
+===== Syntax =====
+void addScript	( **$url**, **$type** )
+
+| **$url** | string | URL to the linked script |
+| **$type** | string | Type of script. Defaults to 'text/javascript' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addScriptDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScriptDeclaration]] | never | Work in progress |
+Adds a script to the page
+===== Syntax =====
+void addScriptDeclaration	( **$content**, **$type** )
+
+| **$content** | string | Script |
+| **$type** | string | Scripting mime (defaults to 'text/javascript') |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addStyleDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addStyleDeclaration]] | never | Work in progress |
+Adds a stylesheet declaration to the page
+===== Syntax =====
+void addStyleDeclaration	( **$content**, **$type** )
+
+| **$content** | string | Style declarations |
+| **$type** | string | Type of stylesheet (defaults to 'text/css') |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addStyleSheet ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addStyleSheet]] | never | Work in progress |
+Adds a linked stylesheet to the page
+===== Syntax =====
+void addStyleSheet	( **$url**, **$type**, **$media**, **$attribs** )
+
+| **$url** | string | URL to the linked style sheet |
+| **$type** | string | Mime encoding type |
+| **$media** | string | Media type that this stylesheet applies to |
+| **$attribs** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== compress ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->compress]] | never | Work in progress |
+Compress the data<p>Checks the accept encoding of the browser and compresses the data before  sending it to the client.</p>
+===== Syntax =====
+string compress	( **$data** )
+
+| **$data** | string | data |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->display]] | never | Work in progress |
+Outputs the document to the client
+===== Syntax =====
+void display	( **$cache**, **$compress**, **$params** )
+
+| **$cache** | boolean | If true, cache the output |
+| **$compress** | boolean | If true, compress the output |
+| **$params** | array | Associative array of attributes |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getCharset]] | never | Work in progress |
+Returns the document charset encoding.
+===== Syntax =====
+string getCharset ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDescription ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getDescription]] | never | Work in progress |
+Return the title of the page.
+===== Syntax =====
+string getDescription ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDirection ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getDirection]] | never | Work in progress |
+Returns the document language.
+===== Syntax =====
+string getDirection ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getGenerator ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getGenerator]] | never | Work in progress |
+Returns the document generator
+===== Syntax =====
+string getGenerator ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getInstance]] | never | Work in progress |
+Returns a reference to the global JDocument object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $document = &JDocument::getInstance();</pre></p>
+===== Syntax =====
+object The &getInstance	( **$type**, **$attributes** )
+
+| **$type** | type | The document type to instantiate |
+| **$attributes** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLanguage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getLanguage]] | never | Work in progress |
+Returns the document language.
+===== Syntax =====
+string getLanguage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getLink ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getLink]] | never | Work in progress |
+Returns the document base url
+===== Syntax =====
+string getLink ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getMetaData ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getMetaData]] | never | Work in progress |
+Gets a meta tag.
+===== Syntax =====
+string getMetaData	( **$name**, **$http_equiv** )
+
+| **$name** | string | Value of name or http-equiv tag |
+| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getTitle]] | never | Work in progress |
+Return the title of the document.
+===== Syntax =====
+string getTitle ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getType]] | never | Work in progress |
+Returns the document type
+===== Syntax =====
+string getType ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->loadRenderer]] | never | Work in progress |
+Load a renderer
+===== Syntax =====
+object loadRenderer	( **$type** )
+
+| **$type** | string | The renderer type |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setCharset]] | never | Work in progress |
+Sets the document charset
+===== Syntax =====
+void setCharset	( **$type** )
+
+| **$type** | string | Charset encoding string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setDescription ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setDescription]] | never | Work in progress |
+Sets the description of the document
+===== Syntax =====
+void setDescription	( **$description**, **$title** )
+
+| **$title** | string |  |
+| **$description** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setDirection ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setDirection]] | never | Work in progress |
+Sets the global document direction declaration. Default is left-to-right (ltr).
+===== Syntax =====
+void setDirection	( **$dir**, **$lang** )
+
+| **$lang** | string |  |
+| **$dir** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setGenerator ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setGenerator]] | never | Work in progress |
+Sets the document generator
+===== Syntax =====
+void setGenerator	( **$generator** )
+
+| **$generator** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLanguage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setLanguage]] | never | Work in progress |
+Sets the global document language declaration. Default is English (en).
+===== Syntax =====
+void setLanguage	( **$lang** )
+
+| **$lang** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLineEnd ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setLineEnd]] | never | Work in progress |
+Sets the line end style to Windows, Mac, Unix or a custom string.
+===== Syntax =====
+void setLineEnd	( **$style** )
+
+| **$style** | string | &quot;win&quot;, &quot;mac&quot;, &quot;unix&quot; or custom string. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLink ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setLink]] | never | Work in progress |
+Sets the document link
+===== Syntax =====
+void setLink	( **$url** )
+
+| **$url** | string | A url |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setMetaData ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setMetaData]] | never | Work in progress |
+Sets or alters a meta tag.
+===== Syntax =====
+void setMetaData	( **$name**, **$content**, **$http_equiv** )
+
+| **$name** | string | Value of name or http-equiv tag |
+| **$content** | string | Value of the content tag |
+| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setMimeEncoding ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setMimeEncoding]] | never | Work in progress |
+Sets the document MIME encoding that is sent to the browser.<p>This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml  and to a lesser extent application/xml and text/xml. See the W3C note  (<a href="http://www.w3.org/TR/xhtml-media-types/">http://www.w3.org/TR/xhtml-media-types/</a>) for more details.</p><p></p>
+===== Syntax =====
+void setMimeEncoding	( **$type** )
+
+| **$type** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setTab ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setTab]] | never | Work in progress |
+Sets the string used to indent HTML
+===== Syntax =====
+void setTab	( **$string** )
+
+| **$string** | string | String used to indent (&quot;\11&quot;, &quot;\t&quot;, '  ', etc.). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Document|Document]] | [[JDocument|##http://api.joomla.org/media/images/Class.png qq]][[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setTitle]] | never | Work in progress |
+Sets the title of the document
+===== Syntax =====
+void setTitle	( **$title** )
+
+| **$title** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

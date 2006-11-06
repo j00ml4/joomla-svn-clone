@@ -1,0 +1,135 @@
+====== JCachePage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage]] | never | Work in progress |
+
+Class to support page caching
+===== Methods =====
+^ Method ^ Description ^
+| [[JCachePage-generateId|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-generateId|generateId]] |  |
+| [[JCachePage-loadPage|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-loadPage|loadPage]] | Get the cached data |
+| [[JCachePage-savePage|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-savePage|savePage]] | Set the data to cache |
+| [[JCachePage-sendEtagHttpHeader|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-sendEtagHttpHeader|sendEtagHttpHeader]] |  |
+| [[JCachePage-sendNoChangeHttpHeader|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-sendNoChangeHttpHeader|sendNoChangeHttpHeader]] |  |
+| [[JCachePage-_construct|##http://api.joomla.org/media/images/Method.png qq]] [[JCachePage-_construct|_construct]] | Constructor |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== generateId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->generateId]] | never | Work in progress |
+
+===== Syntax =====
+void generateId	( **$data** )
+
+| **$data** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== loadPage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->loadPage]] | never | Work in progress |
+Get the cached data
+===== Syntax =====
+boolean loadPage	( **$id**, **$group** )
+
+| **$id** | string | cache id |
+| **$group** | string | name of the cache group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== savePage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->savePage]] | never | Work in progress |
+Set the data to cache
+===== Syntax =====
+void savePage	( **$data** )
+
+| **$data** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== sendEtagHttpHeader ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->sendEtagHttpHeader]] | never | Work in progress |
+
+===== Syntax =====
+void sendEtagHttpHeader	( **$md5** )
+
+| **$md5** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== sendNoChangeHttpHeader ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->sendNoChangeHttpHeader]] | never | Work in progress |
+
+===== Syntax =====
+void sendNoChangeHttpHeader ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Cache|Cache]] | [[JCachePage|##http://api.joomla.org/media/images/Class.png qq]][[JCachePage|JCachePage]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCachePage.html|JCachePage->_construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+void _construct	( **$options** )
+
+| **$options** | array | options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

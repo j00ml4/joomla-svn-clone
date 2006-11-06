@@ -1,0 +1,272 @@
+====== JSearch ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch]] | never | Work in progress |
+
+Base search class
+===== Methods =====
+^ Method ^ Description ^
+| [[JSearch-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-__construct|__construct]] | Constructor |
+| [[JSearch-addResultCount|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-addResultCount|addResultCount]] | Adds the total number of returns of the current search plugin to the<p>running total and determines the limit and limitstart for the query</p> |
+| [[JSearch-addResults|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-addResults|addResults]] |  |
+| [[JSearch-getAreas|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getAreas|getAreas]] |  |
+| [[JSearch-getMatchType|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getMatchType|getMatchType]] |  |
+| [[JSearch-getNeedle|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getNeedle|getNeedle]] |  |
+| [[JSearch-getOrdering|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getOrdering|getOrdering]] |  |
+| [[JSearch-getQueryLimit|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getQueryLimit|getQueryLimit]] | Returns the limit for the next search query |
+| [[JSearch-getQueryLimitStart|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getQueryLimitStart|getQueryLimitStart]] | Returns the limit start for the next search query |
+| [[JSearch-getResultCount|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getResultCount|getResultCount]] |  |
+| [[JSearch-getResults|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-getResults|getResults]] |  |
+| [[JSearch-setLimit|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-setLimit|setLimit]] |  |
+| [[JSearch-setLimitStart|##http://api.joomla.org/media/images/Method.png qq]] [[JSearch-setLimitStart|setLimitStart]] |  |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JSearch __construct	( **$needle**, **$matchType**, **$ordering**, **$areas**, **$limitstart**, **$limit** )
+
+| **$needle** |  |  |
+| **$matchType** |  |  |
+| **$ordering** |  |  |
+| **$areas** |  |  |
+| **$limitstart** |  |  |
+| **$limit** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addResultCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->addResultCount]] | never | Work in progress |
+Adds the total number of returns of the current search plugin to the<p>running total and determines the limit and limitstart for the query</p>
+===== Syntax =====
+void addResultCount	( **$n** )
+
+| **$n** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== addResults ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->addResults]] | never | Work in progress |
+
+===== Syntax =====
+void addResults	( **$array** )
+
+| **$array** | array | An array of object results |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getAreas ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getAreas]] | never | Work in progress |
+
+===== Syntax =====
+array getAreas ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getMatchType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getMatchType]] | never | Work in progress |
+
+===== Syntax =====
+string getMatchType ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getNeedle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getNeedle]] | never | Work in progress |
+
+===== Syntax =====
+string getNeedle ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getOrdering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getOrdering]] | never | Work in progress |
+
+===== Syntax =====
+string getOrdering ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getQueryLimit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getQueryLimit]] | never | Work in progress |
+Returns the limit for the next search query
+===== Syntax =====
+int getQueryLimit ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getQueryLimitStart ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getQueryLimitStart]] | never | Work in progress |
+Returns the limit start for the next search query
+===== Syntax =====
+int getQueryLimitStart ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getResultCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getResultCount]] | never | Work in progress |
+
+===== Syntax =====
+int getResultCount ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getResults ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->getResults]] | never | Work in progress |
+
+===== Syntax =====
+array getResults ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLimit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->setLimit]] | never | Work in progress |
+
+===== Syntax =====
+void setLimit	( **$value** )
+
+| **$value** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setLimitStart ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JSearch|##http://api.joomla.org/media/images/Class.png qq]][[JSearch|JSearch]] | [[http://api.joomla.org/Joomla-Framework/Application/JSearch.html|JSearch->setLimitStart]] | never | Work in progress |
+
+===== Syntax =====
+void setLimitStart	( **$value** )
+
+| **$value** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

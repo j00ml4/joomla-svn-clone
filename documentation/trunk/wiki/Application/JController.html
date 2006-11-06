@@ -1,0 +1,444 @@
+====== JController ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController]] | never | Work in progress |
+
+Base class for a Joomla Controller<p>Controller (controllers are where you put all the actual code) Provides basic  functionality, such as rendering views (aka displaying templates).</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JController-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JController-__construct|__construct]] | Constructor |
+| [[JController-authorize|##http://api.joomla.org/media/images/Method.png qq]] [[JController-authorize|authorize]] | Authorization check |
+| [[JController-display|##http://api.joomla.org/media/images/Method.png qq]] [[JController-display|display]] | Typical view method for MVC based architecture |
+| [[JController-execute|##http://api.joomla.org/media/images/Method.png qq]] [[JController-execute|execute]] | Execute a task by triggering a method in the derived class |
+| [[JController-getError|##http://api.joomla.org/media/images/Method.png qq]] [[JController-getError|getError]] | Get the error message |
+| [[JController-getModel|##http://api.joomla.org/media/images/Method.png qq]] [[JController-getModel|getModel]] | Method to get a model object, load it if necessary.. |
+| [[JController-getTask|##http://api.joomla.org/media/images/Method.png qq]] [[JController-getTask|getTask]] | Get the last task that was to be performed |
+| [[JController-getView|##http://api.joomla.org/media/images/Method.png qq]] [[JController-getView|getView]] | Method to get the current view and load it if necessary.. |
+| [[JController-redirect|##http://api.joomla.org/media/images/Method.png qq]] [[JController-redirect|redirect]] | Redirects the browser or returns false if no redirect is set. |
+| [[JController-registerDefaultTask|##http://api.joomla.org/media/images/Method.png qq]] [[JController-registerDefaultTask|registerDefaultTask]] | Register the default task to perfrom if a mapping is not found |
+| [[JController-registerTask|##http://api.joomla.org/media/images/Method.png qq]] [[JController-registerTask|registerTask]] | Register (map) a task to a method in the class |
+| [[JController-setAccessControl|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setAccessControl|setAccessControl]] | Sets the access control levels |
+| [[JController-setError|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setError|setError]] | Sets the error message |
+| [[JController-setModelPath|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setModelPath|setModelPath]] | Resets the stack of controller model paths.<p>To clear all paths, use JController::setModelPath(null).</p> |
+| [[JController-setRedirect|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setRedirect|setRedirect]] | Set a URL to redirect the browser to |
+| [[JController-setView|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setView|setView]] | Method to set the current view.  Normally this would be done automatically, but this method is provided  for maximum flexibility |
+| [[JController-setViewName|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setViewName|setViewName]] | Method to set the view name and options for loading the view class. |
+| [[JController-setViewPath|##http://api.joomla.org/media/images/Method.png qq]] [[JController-setViewPath|setViewPath]] | Method to get the current view path |
+| [[JController-_addPath|##http://api.joomla.org/media/images/Method.png qq]] [[JController-_addPath|_addPath]] | Adds to the search path for templates and resources. |
+| [[JController-_findFile|##http://api.joomla.org/media/images/Method.png qq]] [[JController-_findFile|_findFile]] | Searches the directory paths for a given file. |
+| [[JController-_setPath|##http://api.joomla.org/media/images/Method.png qq]] [[JController-_setPath|_setPath]] | Sets an entire array of search paths for resources. |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->__construct]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JController __construct	( **$config**, **$default** )
+
+| **$default** | string | The default task [optional] |
+| **$config** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== authorize ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->authorize]] | never | Work in progress |
+Authorization check
+===== Syntax =====
+boolean authorize	( **$task** )
+
+| **$task** | string | The ACO Section Value to check access on |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->display]] | never | Work in progress |
+Typical view method for MVC based architecture
+===== Syntax =====
+void display ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== execute ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->execute]] | never | Work in progress |
+Execute a task by triggering a method in the derived class
+===== Syntax =====
+mixed execute	( **$task** )
+
+| **$task** | string | The task to perform |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->getError]] | never | Work in progress |
+Get the error message
+===== Syntax =====
+string getError ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getModel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->getModel]] | never | Work in progress |
+Method to get a model object, load it if necessary..
+===== Syntax =====
+object The &getModel	( **$name**, **$prefix** )
+
+| **$name** | string | The model name |
+| **$prefix** | string | The class prefix |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->getTask]] | never | Work in progress |
+Get the last task that was to be performed
+===== Syntax =====
+string getTask ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->getView]] | never | Work in progress |
+Method to get the current view and load it if necessary..
+===== Syntax =====
+object The &getView	( **$name**, **$prefix**, **$type** )
+
+| **$name** |  |  |
+| **$prefix** |  |  |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== redirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->redirect]] | never | Work in progress |
+Redirects the browser or returns false if no redirect is set.
+===== Syntax =====
+boolean redirect ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== registerDefaultTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->registerDefaultTask]] | never | Work in progress |
+Register the default task to perfrom if a mapping is not found
+===== Syntax =====
+void registerDefaultTask	( **$method** )
+
+| **$method** | string | The name of the method in the derived class to perform if the task is not found |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== registerTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->registerTask]] | never | Work in progress |
+Register (map) a task to a method in the class
+===== Syntax =====
+void registerTask	( **$task**, **$method** )
+
+| **$task** | string | The task |
+| **$method** | string | The name of the method in the derived class to perform for this task |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setAccessControl ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setAccessControl]] | never | Work in progress |
+Sets the access control levels
+===== Syntax =====
+void setAccessControl	( **$section**, **$value** )
+
+| **$section** | string | The ACO section (eg, the component) |
+| **$value** | string | The ACO section value (if using a constant value) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setError]] | never | Work in progress |
+Sets the error message
+===== Syntax =====
+string setError	( **$value** )
+
+| **$value** | string | The error message |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setModelPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setModelPath]] | never | Work in progress |
+Resets the stack of controller model paths.<p>To clear all paths, use JController::setModelPath(null).</p>
+===== Syntax =====
+void setModelPath	( **$path** )
+
+| **$path** | string|array | The directory (-ies) to set as the path. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setRedirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setRedirect]] | never | Work in progress |
+Set a URL to redirect the browser to
+===== Syntax =====
+void setRedirect	( **$url**, **$msg**, **$type** )
+
+| **$url** | string | URL to redirect to |
+| **$msg** | string | Message to display on redirect |
+| **$type** | string | Message type |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setView]] | never | Work in progress |
+Method to set the current view.  Normally this would be done automatically, but this method is provided  for maximum flexibility
+===== Syntax =====
+object The &setView	( **&$view** )
+
+| **&$view** | object The | view object to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setViewName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setViewName]] | never | Work in progress |
+Method to set the view name and options for loading the view class.
+===== Syntax =====
+void setViewName	( **$viewName**, **$prefix**, **$type** )
+
+| **$viewName** | string | The name of the view |
+| **$prefix** | string | Optional prefix for the view class name |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== setViewPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->setViewPath]] | never | Work in progress |
+Method to get the current view path
+===== Syntax =====
+string setViewPath	( **$path** )
+
+| **$path** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _addPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->_addPath]] | never | Work in progress |
+Adds to the search path for templates and resources.
+===== Syntax =====
+void _addPath	( **$type**, **$path** )
+
+| **$path** | string|array | The directory or stream to search. |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _findFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->_findFile]] | never | Work in progress |
+Searches the directory paths for a given file.
+===== Syntax =====
+string|bool _findFile	( **$type**, **$file** )
+
+| **$type** | array | The type of path to search (template or resource). |
+| **$file** | string | The file name to look for. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _setPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Application|Application]] | [[JController|##http://api.joomla.org/media/images/Class.png qq]][[JController|JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html|JController->_setPath]] | never | Work in progress |
+Sets an entire array of search paths for resources.
+===== Syntax =====
+void _setPath	( **$type**, **$path** )
+
+| **$type** | string | The type of path to set, typically 'view' or 'model. |
+| **$path** | string|array | The new set of search paths.  If null or  false, resets to the current directory only. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

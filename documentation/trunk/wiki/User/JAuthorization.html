@@ -1,0 +1,241 @@
+====== JAuthorization ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization]] | never | Work in progress |
+
+Class that handles all access authorization
+===== Methods =====
+^ Method ^ Description ^
+| [[JAuthorization-JAuthorization|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-JAuthorization|JAuthorization]] | Constructor |
+| [[JAuthorization-acl_check|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-acl_check|acl_check]] | Wraps the actual acl_query() function.<p>It is simply here to return TRUE/FALSE accordingly.</p> |
+| [[JAuthorization-getAroGroup|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-getAroGroup|getAroGroup]] |  |
+| [[JAuthorization-get_group_children_tree|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-get_group_children_tree|get_group_children_tree]] |  |
+| [[JAuthorization-get_group_name|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-get_group_name|get_group_name]] | Gets the 'name' of a group |
+| [[JAuthorization-get_group_parents|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-get_group_parents|get_group_parents]] |  |
+| [[JAuthorization-is_group_child_of|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-is_group_child_of|is_group_child_of]] |  |
+| [[JAuthorization-_getBelow|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-_getBelow|_getBelow]] |  |
+| [[JAuthorization-_getGroup|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-_getGroup|_getGroup]] |  |
+| [[JAuthorization-_mos_add_acl|##http://api.joomla.org/media/images/Method.png qq]] [[JAuthorization-_mos_add_acl|_mos_add_acl]] | This is a temporary function to allow 3PD's to add basic ACL checks for their<p>modules and components.  NOTE: this information will be compiled in the db  in future versions</p> |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== JAuthorization ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->JAuthorization]] | never | Work in progress |
+Constructor
+===== Syntax =====
+JAuthorization JAuthorization	( **$options** )
+
+| **$options** | array | An arry of options to oeverride the class defaults |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== acl_check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->acl_check]] | never | Work in progress |
+Wraps the actual acl_query() function.<p>It is simply here to return TRUE/FALSE accordingly.</p>
+===== Syntax =====
+mixed acl_check	( **$aco_section_value**, **$aco_value**, **$aro_section_value**, **$aro_value**, **$axo_section_value**, **$axo_value**, **6**, **7** )
+
+| **6** | integer | The group id of the ARO ??Mike?? (optional) |
+| **7** | integer | The group id of the AXO ??Mike?? (optional) |
+| **$aco_section_value** | string | The ACO section value |
+| **$aco_value** | string | The ACO value |
+| **$aro_section_value** | string | The ARO section value |
+| **$aro_value** | string | The ARO section |
+| **$axo_section_value** | string | The AXO section value (optional) |
+| **$axo_value** | string | The AXO section value (optional) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getAroGroup ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->getAroGroup]] | never | Work in progress |
+
+===== Syntax =====
+object The getAroGroup	( **$value** )
+
+| **$value** | string | The value for the group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get_group_children_tree ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->get_group_children_tree]] | never | Work in progress |
+
+===== Syntax =====
+string|array get_group_children_tree	( **$root_id**, **$root_name**, **$inclusive**, **$html** )
+
+| **$root_id** | int |  |
+| **$root_name** | string |  |
+| **$inclusive** | boolean |  |
+| **$html** | boolean | Returns the complete html if true |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get_group_name ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->get_group_name]] | never | Work in progress |
+Gets the 'name' of a group
+===== Syntax =====
+string get_group_name	( **$group_id**, **$group_type** )
+
+| **$group_id** | int | The group id |
+| **$group_type** | string | The type: [ARO]|AXO |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== get_group_parents ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->get_group_parents]] | never | Work in progress |
+
+===== Syntax =====
+void get_group_parents	( **$group_id**, **$group_type**, **$recurse** )
+
+| **$group_id** |  |  |
+| **$group_type** |  |  |
+| **$recurse** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== is_group_child_of ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->is_group_child_of]] | never | Work in progress |
+
+===== Syntax =====
+void is_group_child_of	( **$grp_src**, **$grp_tgt**, **$group_type** )
+
+| **$grp_src** |  |  |
+| **$grp_tgt** |  |  |
+| **$group_type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _getBelow ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->_getBelow]] | never | Work in progress |
+
+===== Syntax =====
+void _getBelow	( **$table**, **$fields**, **$groupby**, **$root_id**, **$root_name**, **$inclusive** )
+
+| **$table** |  |  |
+| **$fields** |  |  |
+| **$groupby** |  |  |
+| **$root_id** |  |  |
+| **$root_name** |  |  |
+| **$inclusive** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _getGroup ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->_getGroup]] | never | Work in progress |
+
+===== Syntax =====
+void _getGroup	( **$type**, **$value** )
+
+| **$type** |  |  |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _mos_add_acl ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#User|User]] | [[JAuthorization|##http://api.joomla.org/media/images/Class.png qq]][[JAuthorization|JAuthorization]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthorization.html|JAuthorization->_mos_add_acl]] | never | Work in progress |
+This is a temporary function to allow 3PD's to add basic ACL checks for their<p>modules and components.  NOTE: this information will be compiled in the db  in future versions</p>
+===== Syntax =====
+void _mos_add_acl	( **$aco_section_value**, **$aco_value**, **$aro_section_value**, **$aro_value**, **$axo_section_value**, **$axo_value** )
+
+| **$aco_section_value** |  |  |
+| **$aco_value** |  |  |
+| **$aro_section_value** |  |  |
+| **$aro_value** |  |  |
+| **$axo_section_value** |  |  |
+| **$axo_value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,280 @@
+====== JAdminMenus ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus]] | never | Work in progress |
+
+Utility class for drawing admin menu HTML elements
+===== Methods =====
+^ Method ^ Description ^
+| [[JAdminMenus-Access|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-Access|Access]] | build the select list for access level |
+| [[JAdminMenus-ComponentCategory|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-ComponentCategory|ComponentCategory]] | Select list of active categories for components |
+| [[JAdminMenus-ImageCheck|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-ImageCheck|ImageCheck]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
+| [[JAdminMenus-ImageCheckAdmin|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-ImageCheckAdmin|ImageCheckAdmin]] | Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p> |
+| [[JAdminMenus-Images|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-Images|Images]] | build the select list to choose an image |
+| [[JAdminMenus-MenuLinks|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-MenuLinks|MenuLinks]] | build the multiple select list for Menu Links/Pages |
+| [[JAdminMenus-Ordering|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-Ordering|Ordering]] | build the select list for Menu Ordering |
+| [[JAdminMenus-Positions|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-Positions|Positions]] | Select list of positions - generally used for location of images |
+| [[JAdminMenus-SelectSection|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-SelectSection|SelectSection]] | Select list of active sections |
+| [[JAdminMenus-SpecificOrdering|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-SpecificOrdering|SpecificOrdering]] | build the select list for Ordering of a specified Table |
+| [[JAdminMenus-UserSelect|##http://api.joomla.org/media/images/Method.png qq]] [[JAdminMenus-UserSelect|UserSelect]] | Select list of active users |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== Access ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->Access]] | never | Work in progress |
+build the select list for access level
+===== Syntax =====
+void Access	( **&$row** )
+
+| **&$row** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== ComponentCategory ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->ComponentCategory]] | never | Work in progress |
+Select list of active categories for components
+===== Syntax =====
+void ComponentCategory	( **$name**, **$section**, **$active**, **$javascript**, **$order**, **$size**, **$sel_cat** )
+
+| **$name** |  |  |
+| **$section** |  |  |
+| **$active** |  |  |
+| **$javascript** |  |  |
+| **$order** |  |  |
+| **$size** |  |  |
+| **$sel_cat** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== ImageCheck ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->ImageCheck]] | never | Work in progress |
+Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p>
+===== Syntax =====
+void ImageCheck	( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
+
+| **$file** |  |  |
+| **$directory** |  |  |
+| **$param** |  |  |
+| **$param_directory** |  |  |
+| **$alt** |  |  |
+| **$name** |  |  |
+| **$type** |  |  |
+| **$align** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== ImageCheckAdmin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->ImageCheckAdmin]] | never | Work in progress |
+Checks to see if an image exists in the current templates image directory  if it does it loads this image.  Otherwise the default image is loaded.<p>Also can be used in conjunction with the menulist param to create the chosen image  load the default or use no image</p>
+===== Syntax =====
+void ImageCheckAdmin	( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
+
+| **$file** |  |  |
+| **$directory** |  |  |
+| **$param** |  |  |
+| **$param_directory** |  |  |
+| **$alt** |  |  |
+| **$name** |  |  |
+| **$type** |  |  |
+| **$align** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Images ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->Images]] | never | Work in progress |
+build the select list to choose an image
+===== Syntax =====
+void Images	( **$name**, **&$active**, **$javascript**, **$directory** )
+
+| **$name** |  |  |
+| **&$active** |  |  |
+| **$javascript** |  |  |
+| **$directory** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== MenuLinks ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->MenuLinks]] | never | Work in progress |
+build the multiple select list for Menu Links/Pages
+===== Syntax =====
+void MenuLinks	( **&$lookup**, **$all**, **$none**, **$unassigned** )
+
+| **&$lookup** |  |  |
+| **$all** |  |  |
+| **$none** |  |  |
+| **$unassigned** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Ordering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->Ordering]] | never | Work in progress |
+build the select list for Menu Ordering
+===== Syntax =====
+void Ordering	( **&$row**, **$id** )
+
+| **&$row** |  |  |
+| **$id** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== Positions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->Positions]] | never | Work in progress |
+Select list of positions - generally used for location of images
+===== Syntax =====
+void Positions	( **$name**, **$active**, **$javascript**, **$none**, **$center**, **$left**, **$right**, **$id** )
+
+| **$name** |  |  |
+| **$active** |  |  |
+| **$javascript** |  |  |
+| **$none** |  |  |
+| **$center** |  |  |
+| **$left** |  |  |
+| **$right** |  |  |
+| **$id** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== SelectSection ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->SelectSection]] | never | Work in progress |
+Select list of active sections
+===== Syntax =====
+void SelectSection	( **$name**, **$active**, **$javascript**, **$order** )
+
+| **$name** |  |  |
+| **$active** |  |  |
+| **$javascript** |  |  |
+| **$order** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== SpecificOrdering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->SpecificOrdering]] | never | Work in progress |
+build the select list for Ordering of a specified Table
+===== Syntax =====
+void SpecificOrdering	( **&$row**, **$id**, **$query**, **$neworder** )
+
+| **&$row** |  |  |
+| **$id** |  |  |
+| **$query** |  |  |
+| **$neworder** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== UserSelect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JAdminMenus|##http://api.joomla.org/media/images/Class.png qq]][[JAdminMenus|JAdminMenus]] | [[http://api.joomla.org/Joomla-Framework/HTML/JAdminMenus.html|JAdminMenus->UserSelect]] | never | Work in progress |
+Select list of active users
+===== Syntax =====
+void UserSelect	( **$name**, **$active**, **$nouser**, **$javascript**, **$order**, **$reg** )
+
+| **$name** |  |  |
+| **$active** |  |  |
+| **$nouser** |  |  |
+| **$javascript** |  |  |
+| **$order** |  |  |
+| **$reg** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

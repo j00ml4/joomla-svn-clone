@@ -1,0 +1,195 @@
+====== JMenu ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu]] | never | Work in progress |
+
+JMenu class
+===== Methods =====
+^ Method ^ Description ^
+| [[JMenu-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-__construct|__construct]] | Class constructor |
+| [[JMenu-authorize|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-authorize|authorize]] | Method to check JMenu object authorization against an access control  object and optionally an access extension object |
+| [[JMenu-getDefault|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getDefault|getDefault]] | Get menu item by id |
+| [[JMenu-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getInstance|getInstance]] | Returns a reference to the global JMenu object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $menu = &JMenu::getInstance();</pre></p> |
+| [[JMenu-getItem|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getItem|getItem]] | Get menu item by id |
+| [[JMenu-getItems|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getItems|getItems]] | Gets menu items by attribute |
+| [[JMenu-getMenu|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getMenu|getMenu]] | Getter for the menu array |
+| [[JMenu-getParams|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-getParams|getParams]] | Gets the parameter object for a certain menu item |
+| [[JMenu-_load|##http://api.joomla.org/media/images/Method.png qq]] [[JMenu-_load|_load]] | Loads the entire menu table into memory |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->__construct]] | never | Work in progress |
+Class constructor
+===== Syntax =====
+boolean __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== authorize ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->authorize]] | never | Work in progress |
+Method to check JMenu object authorization against an access control  object and optionally an access extension object
+===== Syntax =====
+boolean authorize	( **$id**, **&$user**, **$user** )
+
+| **$id** | integer | The menu id |
+| **$user** | object | The user object |
+| **&$user** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getDefault ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getDefault]] | never | Work in progress |
+Get menu item by id
+===== Syntax =====
+object The &getDefault	( **0** )
+
+| **0** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getInstance]] | never | Work in progress |
+Returns a reference to the global JMenu object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $menu = &JMenu::getInstance();</pre></p>
+===== Syntax =====
+<a href="../../Joomla-Framework/Environment/JMenu.html">JMenu</a> &getInstance ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getItem ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getItem]] | never | Work in progress |
+Get menu item by id
+===== Syntax =====
+mixed &getItem	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getItems ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getItems]] | never | Work in progress |
+Gets menu items by attribute
+===== Syntax =====
+array getItems	( **$attribute**, **$value** )
+
+| **$attribute** | string | The field name |
+| **$value** | string | The value of the field |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getMenu ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getMenu]] | never | Work in progress |
+Getter for the menu array
+===== Syntax =====
+array getMenu	( **$name** )
+
+| **$name** | string | The menu name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getParams ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->getParams]] | never | Work in progress |
+Gets the parameter object for a certain menu item
+===== Syntax =====
+object A &getParams	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Environment|Environment]] | [[JMenu|##http://api.joomla.org/media/images/Class.png qq]][[JMenu|JMenu]] | [[http://api.joomla.org/Joomla-Framework/Environment/JMenu.html|JMenu->_load]] | never | Work in progress |
+Loads the entire menu table into memory
+===== Syntax =====
+array _load ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

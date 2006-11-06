@@ -1,0 +1,184 @@
+====== JInputFilter ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter]] | never | Work in progress |
+
+JInputFilter is a class for filtering input from any data source<p>Forked from the php input filter library by: Daniel Morris &lt;dan@rootcube.com&gt;  Original Contributors: Gianpaolo Racca, Ghislain Picard, Marco Wandschneider, Chris Tobin and Andrew Eddie.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JInputFilter-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-__construct|__construct]] | Constructor for inputFilter class. Only first parameter is required. |
+| [[JInputFilter-checkAttribute|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-checkAttribute|checkAttribute]] | Function to determine if contents of an attribute is safe |
+| [[JInputFilter-clean|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-clean|clean]] | Method to be called by another php script. Processes for XSS and  specified bad code. |
+| [[JInputFilter-getInstance|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-getInstance|getInstance]] | Returns a reference to an input filter object, only creating it if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $filter = & JInputFilter::getInstance();</pre></p> |
+| [[JInputFilter-_cleanAttributes|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-_cleanAttributes|_cleanAttributes]] | Internal method to strip a tag of certain attributes |
+| [[JInputFilter-_cleanTags|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-_cleanTags|_cleanTags]] | Internal method to strip a string of certain tags |
+| [[JInputFilter-_decode|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-_decode|_decode]] | Try to convert to plaintext |
+| [[JInputFilter-_remove|##http://api.joomla.org/media/images/Method.png qq]] [[JInputFilter-_remove|_remove]] | Internal method to iteratively remove all unwanted tags and attributes |
+
+----
+
+~~DISCUSSION~~
+
+
+
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->__construct]] | never | Work in progress |
+Constructor for inputFilter class. Only first parameter is required.
+===== Syntax =====
+JInputFilter __construct	( **$tagsArray**, **$attrArray**, **$tagsMethod**, **$attrMethod**, **$xssAuto** )
+
+| **$tagsArray** | array | list of user-defined tags |
+| **$attrArray** | array | list of user-defined attributes |
+| **$tagsMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$attrMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$xssAuto** | int | Only auto clean essentials = 0, Allow clean blacklisted tags/attr = 1 |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== checkAttribute ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->checkAttribute]] | never | Work in progress |
+Function to determine if contents of an attribute is safe
+===== Syntax =====
+boolean checkAttribute	( **$attrSubSet** )
+
+| **$attrSubSet** | array | A 2 element array for attributes name,value |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== clean ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->clean]] | never | Work in progress |
+Method to be called by another php script. Processes for XSS and  specified bad code.
+===== Syntax =====
+mixed clean	( **$source**, **$type** )
+
+| **$source** | mixed | Input string/array-of-string to be 'cleaned' |
+| **$type** | string | Return type for the variable (INT, FLOAT, WORD, BOOLEAN, STRING) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->getInstance]] | never | Work in progress |
+Returns a reference to an input filter object, only creating it if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $filter = & JInputFilter::getInstance();</pre></p>
+===== Syntax =====
+object The &getInstance	( **$tagsArray**, **$attrArray**, **$tagsMethod**, **$attrMethod**, **$xssAuto** )
+
+| **$tagsArray** | array | list of user-defined tags |
+| **$attrArray** | array | list of user-defined attributes |
+| **$tagsMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$attrMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$xssAuto** | int | Only auto clean essentials = 0, Allow clean blacklisted tags/attr = 1 |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _cleanAttributes ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->_cleanAttributes]] | never | Work in progress |
+Internal method to strip a tag of certain attributes
+===== Syntax =====
+array _cleanAttributes	( **$attrSet** )
+
+| **$attrSet** | array | Array of attribute pairs to filter |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _cleanTags ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->_cleanTags]] | never | Work in progress |
+Internal method to strip a string of certain tags
+===== Syntax =====
+string _cleanTags	( **$source** )
+
+| **$source** | string | Input string to be 'cleaned' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _decode ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->_decode]] | never | Work in progress |
+Try to convert to plaintext
+===== Syntax =====
+string _decode	( **$source** )
+
+| **$source** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+====== _remove ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Filter|Filter]] | [[JInputFilter|##http://api.joomla.org/media/images/Class.png qq]][[JInputFilter|JInputFilter]] | [[http://api.joomla.org/Joomla-Framework/Filter/JInputFilter.html|JInputFilter->_remove]] | never | Work in progress |
+Internal method to iteratively remove all unwanted tags and attributes
+===== Syntax =====
+string _remove	( **$source** )
+
+| **$source** | string | Input string to be 'cleaned' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+
