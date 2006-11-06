@@ -1,6 +1,6 @@
 ====== JSimpleXML ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML]] | never | Work in progress |
 
 SimpleXML implementation.<p>The XML Parser extension (expat) is required to use JSimpleXML.</p><p>The class provides a pure PHP4 implementation of the PHP5  interface SimpleXML. As with PHP5's SimpleXML it is what it says:  simple. Nevertheless, it is an easy way to deal with XML data,  especially for read only access.</p><p>Because it's not possible to use the PHP5 ArrayIterator interface  with PHP4 there are some differences between this implementation  and that of PHP5:</p><p><ul><li>The access to the root node has to be explicit in
  JSimpleXML, not implicit as with PHP5. Write
@@ -35,18 +35,18 @@ SimpleXML implementation.<p>The XML Parser extension (expat) is required to use 
 </pre></code></ol></div></p><p>Note: JSimpleXML cannot be used to access sophisticated XML doctypes  using datatype ANY (e.g. XHTML). With a DOM implementation you can  handle this.</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JSimpleXML-__construct|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-__construct|__construct]] | Constructor. |
-| [[JSimpleXML-getParser|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-getParser|getParser]] | Get the parser |
-| [[JSimpleXML-importDom|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-importDom|importDom]] | Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of a DOM  document and makes it into a JSimpleXML node.  This new object can then be used as a native JSimpleXML element. If any errors occur,  it returns FALSE.</p> |
-| [[JSimpleXML-loadFile|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-loadFile|loadFile]] | Interprets an XML file into an object<p>This function will convert the well-formed XML document in the file specified by filename  to an object  of class JSimpleXMLElement. If any errors occur during file access or  interpretation, the function returns FALSE.</p> |
-| [[JSimpleXML-loadString|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-loadString|loadString]] | Interprets a string of XML into an object<p>This function will take the well-formed xml string data and return an object of class  JSimpleXMLElement with properties containing the data held within the xml document.  If any errors occur, it returns FALSE.</p> |
-| [[JSimpleXML-setParser|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-setParser|setParser]] | Set the parser |
-| [[JSimpleXML-_characterData|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_characterData|_characterData]] | Handler function for the character data within a tag |
-| [[JSimpleXML-_endElement|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_endElement|_endElement]] | Handler function for the end of a tag |
-| [[JSimpleXML-_getStackLocation|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_getStackLocation|_getStackLocation]] | Gets the reference to the current direct parent |
-| [[JSimpleXML-_handleError|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_handleError|_handleError]] | Handles an XML parsing error |
-| [[JSimpleXML-_parse|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_parse|_parse]] | Start parsing an XML document<p>Parses an XML document. The handlers for the configured events are called as many times as necessary.</p> |
-| [[JSimpleXML-_startElement|##http://api.joomla.org/media/images/Method.png qq]] [[JSimpleXML-_startElement|_startElement]] | Handler function for the start of a tag |
+| [[JSimpleXML-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-__construct|__construct]] | Constructor. |
+| [[JSimpleXML-getParser|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-getParser|getParser]] | Get the parser |
+| [[JSimpleXML-importDom|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-importDom|importDom]] | Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of a DOM  document and makes it into a JSimpleXML node.  This new object can then be used as a native JSimpleXML element. If any errors occur,  it returns FALSE.</p> |
+| [[JSimpleXML-loadFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-loadFile|loadFile]] | Interprets an XML file into an object<p>This function will convert the well-formed XML document in the file specified by filename  to an object  of class JSimpleXMLElement. If any errors occur during file access or  interpretation, the function returns FALSE.</p> |
+| [[JSimpleXML-loadString|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-loadString|loadString]] | Interprets a string of XML into an object<p>This function will take the well-formed xml string data and return an object of class  JSimpleXMLElement with properties containing the data held within the xml document.  If any errors occur, it returns FALSE.</p> |
+| [[JSimpleXML-setParser|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-setParser|setParser]] | Set the parser |
+| [[JSimpleXML-_characterData|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_characterData|_characterData]] | Handler function for the character data within a tag |
+| [[JSimpleXML-_endElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_endElement|_endElement]] | Handler function for the end of a tag |
+| [[JSimpleXML-_getStackLocation|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_getStackLocation|_getStackLocation]] | Gets the reference to the current direct parent |
+| [[JSimpleXML-_handleError|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_handleError|_handleError]] | Handles an XML parsing error |
+| [[JSimpleXML-_parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_parse|_parse]] | Start parsing an XML document<p>Parses an XML document. The handlers for the configured events are called as many times as necessary.</p> |
+| [[JSimpleXML-_startElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_startElement|_startElement]] | Handler function for the start of a tag |
 
 ----
 
@@ -56,7 +56,7 @@ SimpleXML implementation.<p>The XML Parser extension (expat) is required to use 
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->__construct]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->__construct]] | never | Work in progress |
 Constructor.
 ===== Syntax =====
 JSimpleXML __construct	( **$options** )
@@ -75,7 +75,7 @@ JSimpleXML __construct	( **$options** )
 
 ====== getParser ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->getParser]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->getParser]] | never | Work in progress |
 Get the parser
 ===== Syntax =====
 resource getParser ()
@@ -93,7 +93,7 @@ resource getParser ()
 
 ====== importDom ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->importDom]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->importDom]] | never | Work in progress |
 Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of a DOM  document and makes it into a JSimpleXML node.  This new object can then be used as a native JSimpleXML element. If any errors occur,  it returns FALSE.</p>
 ===== Syntax =====
 <a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> importDom	( **$node**, **$classname** )
@@ -113,7 +113,7 @@ Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of 
 
 ====== loadFile ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->loadFile]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->loadFile]] | never | Work in progress |
 Interprets an XML file into an object<p>This function will convert the well-formed XML document in the file specified by filename  to an object  of class JSimpleXMLElement. If any errors occur during file access or  interpretation, the function returns FALSE.</p>
 ===== Syntax =====
 boolean loadFile	( **$path**, **$classname** )
@@ -133,7 +133,7 @@ boolean loadFile	( **$path**, **$classname** )
 
 ====== loadString ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->loadString]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->loadString]] | never | Work in progress |
 Interprets a string of XML into an object<p>This function will take the well-formed xml string data and return an object of class  JSimpleXMLElement with properties containing the data held within the xml document.  If any errors occur, it returns FALSE.</p>
 ===== Syntax =====
 <a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> loadString	( **$string**, **$classname** )
@@ -153,7 +153,7 @@ Interprets a string of XML into an object<p>This function will take the well-for
 
 ====== setParser ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->setParser]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->setParser]] | never | Work in progress |
 Set the parser
 ===== Syntax =====
 void setParser	( **$parser** )
@@ -172,7 +172,7 @@ void setParser	( **$parser** )
 
 ====== _characterData ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_characterData]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_characterData]] | never | Work in progress |
 Handler function for the character data within a tag
 ===== Syntax =====
 void _characterData	( **$parser**, **$data** )
@@ -192,7 +192,7 @@ void _characterData	( **$parser**, **$data** )
 
 ====== _endElement ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_endElement]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_endElement]] | never | Work in progress |
 Handler function for the end of a tag
 ===== Syntax =====
 void _endElement	( **$parser**, **$name** )
@@ -212,7 +212,7 @@ void _endElement	( **$parser**, **$name** )
 
 ====== _getStackLocation ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_getStackLocation]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_getStackLocation]] | never | Work in progress |
 Gets the reference to the current direct parent
 ===== Syntax =====
 object _getStackLocation ()
@@ -230,7 +230,7 @@ object _getStackLocation ()
 
 ====== _handleError ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_handleError]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_handleError]] | never | Work in progress |
 Handles an XML parsing error
 ===== Syntax =====
 void _handleError	( **$code**, **$line**, **$col** )
@@ -251,7 +251,7 @@ void _handleError	( **$code**, **$line**, **$col** )
 
 ====== _parse ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_parse]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_parse]] | never | Work in progress |
 Start parsing an XML document<p>Parses an XML document. The handlers for the configured events are called as many times as necessary.</p>
 ===== Syntax =====
 void _parse	( **$data** )
@@ -270,7 +270,7 @@ void _parse	( **$data** )
 
 ====== _startElement ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|##http://api.joomla.org/media/images/Class.png qq]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_startElement]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXML|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXML|JSimpleXML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXML.html|JSimpleXML->_startElement]] | never | Work in progress |
 Handler function for the start of a tag
 ===== Syntax =====
 void _startElement	( **$parser**, **$name**, **$attrs** )
