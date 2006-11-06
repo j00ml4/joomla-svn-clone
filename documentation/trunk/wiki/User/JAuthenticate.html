@@ -1,6 +1,6 @@
 ====== JAuthenticate ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#User|User]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#User|User]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate]] | never | Work in progress |
 
 Authorization class, provides an interface for the Joomla authentication system
 ===== Methods =====
@@ -18,7 +18,7 @@ Authorization class, provides an interface for the Joomla authentication system
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->__construct]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->__construct]] | never | Work in progress |
 Constructor
 ===== Syntax =====
 JAuthenticate __construct ()
@@ -36,7 +36,7 @@ JAuthenticate __construct ()
 
 ====== authenticate ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->authenticate]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->authenticate]] | never | Work in progress |
 Finds out if a set of login credentials are valid by asking all obvserving  objects to run their respective authentication routines.
 ===== Syntax =====
 mixed authenticate	( **$credentials** )
@@ -55,7 +55,7 @@ mixed authenticate	( **$credentials** )
 
 ====== getInstance ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->getInstance]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->getInstance]] | never | Work in progress |
 Returns a reference to a global authentication object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $auth = &JAuthenticate::getInstance();</pre></p>
 ===== Syntax =====
 object The &getInstance ()
@@ -73,7 +73,7 @@ object The &getInstance ()
 
 ====== loadPlugin ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->loadPlugin]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#User|User]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/User/JAuthenticate.html|JAuthenticate->loadPlugin]] | never | Work in progress |
 Static method to load an auth plugin and attach it to the JEventDispatcher  object.<p>This method should be invoked as:  		<pre>  $isLoaded = JAuthenticate::loadPlugin($plugin, $subject);</pre></p>
 ===== Syntax =====
 boolean loadPlugin	( **$plugin**, **&$subject**, **$subject** )

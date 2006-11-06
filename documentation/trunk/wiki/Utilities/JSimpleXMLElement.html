@@ -1,6 +1,6 @@
 ====== JSimpleXMLElement ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement]] | never | Work in progress |
 
 SimpleXML Element<p>This object stores all of the direct children of itself in the $children array.  They are also stored by type as arrays. So, if, for example, this tag had 2 &lt;font&gt;  tags as children, there would be a class member called $font created as an array.  $font[0] would be the first font tag, and $font[1] would be the second.</p><p>To loop through all of the direct children of this object, the $children member   should be used.</p><p>To loop through all of the direct children of a specific tag for this object, it  is probably easier to use the arrays of the specific tag names, as explained above.</p>
 ===== Methods =====
@@ -24,10 +24,10 @@ SimpleXML Element<p>This object stores all of the direct children of itself in t
 
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->__construct]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->__construct]] | never | Work in progress |
 Constructor, sets up all the default values
 ===== Syntax =====
-<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">JSimpleXMLElement</a> __construct	( **$name**, **$attrs**, **$level**, **$parents** )
+<a href="../../Joomla.Framework/Utilities/JSimpleXMLElement.html">JSimpleXMLElement</a> __construct	( **$name**, **$attrs**, **$level**, **$parents** )
 
 | **$name** | string |  |
 | **$attrs** | array |  |
@@ -46,7 +46,7 @@ Constructor, sets up all the default values
 
 ====== addAttribute ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->addAttribute]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->addAttribute]] | never | Work in progress |
 AAdds an attribute to the element
 ===== Syntax =====
 void addAttribute	( **$name**, **$value**, **$attrs** )
@@ -67,7 +67,7 @@ void addAttribute	( **$name**, **$value**, **$attrs** )
 
 ====== addChild ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->addChild]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->addChild]] | never | Work in progress |
 Adds a direct child to the element
 ===== Syntax =====
 void addChild	( **$name**, **$attrs**, **$level** )
@@ -88,7 +88,7 @@ void addChild	( **$name**, **$attrs**, **$level** )
 
 ====== asXML ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->asXML]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->asXML]] | never | Work in progress |
 Return a well-formed XML string based on SimpleXML element
 ===== Syntax =====
 string asXML ()
@@ -106,7 +106,7 @@ string asXML ()
 
 ====== attributes ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->attributes]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->attributes]] | never | Work in progress |
 Get the an attribute of the element
 ===== Syntax =====
 string attributes	( **$attribute** )
@@ -125,7 +125,7 @@ string attributes	( **$attribute** )
 
 ====== children ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->children]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->children]] | never | Work in progress |
 Get the children of the element
 ===== Syntax =====
 array children ()
@@ -143,7 +143,7 @@ array children ()
 
 ====== data ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->data]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->data]] | never | Work in progress |
 Get the data of the element
 ===== Syntax =====
 string data ()
@@ -161,10 +161,10 @@ string data ()
 
 ====== getElementByPath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->getElementByPath]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->getElementByPath]] | never | Work in progress |
 Get an element in the document by / separated path
 ===== Syntax =====
-<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> &getElementByPath	( **$path** )
+<a href="../../Joomla.Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> &getElementByPath	( **$path** )
 
 | **$path** | string | The / separated path to the element |
 
@@ -180,7 +180,7 @@ Get an element in the document by / separated path
 
 ====== level ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->level]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->level]] | never | Work in progress |
 Get the level of the element
 ===== Syntax =====
 int level ()
@@ -198,7 +198,7 @@ int level ()
 
 ====== name ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->name]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Utilities|Utilities]] | [[JSimpleXMLElement|{{http://api.joomla.org/media/images/Class.png }}]][[JSimpleXMLElement|JSimpleXMLElement]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JSimpleXMLElement.html|JSimpleXMLElement->name]] | never | Work in progress |
 Get the name of the element
 ===== Syntax =====
 string name ()
