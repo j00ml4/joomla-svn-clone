@@ -1,0 +1,137 @@
+====== getColumn ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#getcolumn|JArrayHelper->getColumn]] | never | Internal review |
+
+Extracts a column from an array of arrays or objects.
+
+===== Syntax =====
+array getColumn	( **&$array**, **$index** )
+
+| **$array** | array | is the source array containing objects or arrays. |
+| **$index** | string | is a string containing the index of the column or the name of object property. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = "SELECT `id`, `title`, `title_alias`"
+. "\n   FROM #__content"
+;
+$db->setQuery( $query );
+if (!$results = $db->loadObjectList( 'id' )) {
+    echo $db->getErrorMsg();
+}
+echo "Content: ";
+print_r( $results );
+
+echo "Title field: ";
+print_r( JArrayHelper::getColumn( $results, 'title' ) );
+</code>
+might produce:
+<code php|Result>
+Content: Array
+(
+    [1] => stdClass Object
+        (
+            [id] => 1
+            [title] => Welcome to Joomla!
+            [title_alias] => Welcome
+        )
+
+    [2] => stdClass Object
+        (
+            [id] => 2
+            [title] => Newsflash 1
+            [title_alias] => 
+        )
+
+    [3] => stdClass Object
+        (
+            [id] => 3
+            [title] => Newsflash 2
+            [title_alias] => 
+        )
+
+    [4] => stdClass Object
+        (
+            [id] => 4
+            [title] => Newsflash 3
+            [title_alias] => 
+        )
+
+    [5] => stdClass Object
+        (
+            [id] => 5
+            [title] => Joomla! License Guidelines
+            [title_alias] => 
+        )
+
+    [6] => stdClass Object
+        (
+            [id] => 6
+            [title] => Example News Item 1
+            [title_alias] => News1
+        )
+
+    [7] => stdClass Object
+        (
+            [id] => 7
+            [title] => Example News Item 2
+            [title_alias] => News2
+        )
+
+    [8] => stdClass Object
+        (
+            [id] => 8
+            [title] => Example News Item 3
+            [title_alias] => News3
+        )
+
+    [9] => stdClass Object
+        (
+            [id] => 9
+            [title] => Example News Item 4
+            [title_alias] => News4
+        )
+
+    [10] => stdClass Object
+        (
+            [id] => 10
+            [title] => Example FAQ Item 1
+            [title_alias] => FAQ1
+        )
+
+    [11] => stdClass Object
+        (
+            [id] => 11
+            [title] => Example FAQ Item 2
+            [title_alias] => FAQ2
+        )
+
+    [12] => stdClass Object
+        (
+            [id] => 12
+            [title] => 1.5 Development Cycle
+            [title_alias] => 
+        )
+
+)
+Title field: Array
+(
+    [0] => Welcome to Joomla!
+    [1] => Newsflash 1
+    [2] => Newsflash 2
+    [3] => Newsflash 3
+    [4] => Joomla! License Guidelines
+    [5] => Example News Item 1
+    [6] => Example News Item 2
+    [7] => Example News Item 3
+    [8] => Example News Item 4
+    [9] => Example FAQ Item 1
+    [10] => Example FAQ Item 2
+)
+</code>
+
+----
+
+~~DISCUSSION~~

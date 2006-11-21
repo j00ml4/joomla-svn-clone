@@ -1,0 +1,49 @@
+====== createSiteList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JHelp|JHelp]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp->createSiteList]] |
+
+This method builds a list of the help sites which can be used in a select option. The method returns an array of arrays that can be used to build the select options.
+===== Syntax =====
+array createSiteList ( **$pathToXml**, **$selected** )
+| **$pathToXml** | string | is a string containing the path to an XML file. |
+| **$selected** | string | is a string containing the language tag to select (if it exists). This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.i18n.help' );
+
+$helpsites	= array ();
+$helpsites 	= JHelp::createSiteList('http://help.joomla.org/helpsites-11.xml', $row->helpurl);
+
+print_r( $helpsites );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => Array
+        (
+            [text] => Arabic - www.joomlatna.com/help
+            [value] => http://www.joomlatna.com/help
+        )
+
+    [1] => Array
+        (
+            [text] => Joomla! Bangsamoro - joomla.morofocus.com/
+            [value] => http://joomla.morofocus.com
+        )
+
+    [2] => Array
+        (
+            [text] => Bengali - www.joomlabengali.org
+            [value] => http://www.joomlabengali.org
+        )
+
+    [3] => Array
+        (
+            [text] => Bosnian - www.joomla.ba
+            [value] => http://www.joomla.ba
+        )
+
+)
+</code>

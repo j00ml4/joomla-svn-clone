@@ -1,0 +1,27 @@
+====== select ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQuery|JQuery]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery->select]] |
+
+Adds columns to the list of columns to select from.
+
+===== Syntax =====
+void select	( **$columns** )
+| **$columns** | mixed | is a string containing the name of a column to select from or an array of strings containing the names of one or more columns to select from. |
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.database.query');
+
+$query = new JQuery();
+
+$query->select( array( 'a.*' ) );
+$query->from( '#__content as a' );
+$query->order( 'a.title' );
+
+echo $query->toString();
+</code>
+might produce:
+<code sql|Result>
+SELECT a.* FROM #__content as a ORDER BY a.title
+</code>
+

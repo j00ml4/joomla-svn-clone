@@ -1,0 +1,20 @@
+====== JCache ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Cache|Cache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html|JCache]] | Never | Public review |
+
+This abstract class for caching handlers is an implementation of the [[http://pear.php.net/package/Cache_Lite/|Cache_Lite]] cache system.
+===== Methods =====
+^ Method ^ Description ^
+| [[JCache-JCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-JCache|JCache]] | This class constructor calls the [[JCache-__construct|_construct]] method. |
+| [[JCache-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-__construct|_construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
+| [[JCache-cleanCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-cleanCache|cleanCache]] | Cleans the cache. |
+| [[JCache-generateId|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-generateId|generateId]] | Make a control key with the string containing data. |
+| [[JCache-getCache|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-getCache|getCache]] | This method is deprecated, use [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] instead. This method calls the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method. |
+| [[JCache-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-getInstance|getInstance]] | Returns a reference to the global cache object, only creating it  if it doesn't already exist. |
+| [[JCache-setCacheValidation|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-setCacheValidation|setCacheValidation]] | Enable/disable cache validation. |
+| [[JCache-setCaching|{{http://api.joomla.org/media/images/Method.png }}]] [[JCache-setCaching|setCaching]] | Enables and disables caching. |
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,20 @@
+====== JApplicationHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper]] | never | Work in progress |
+
+JApplicationHelper is a static class that provides utility functions for working with the application.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JApplicationHelper-getClientInfo|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getClientInfo|getClientInfo]] | Gets information on a specific client id.  This method will be useful in  future versions when applications are mapped in the database. |
+| [[JApplicationHelper-getItemCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getItemCount|getItemCount]] | Count the items in the menu for a certain type of menu item. |
+| [[JApplicationHelper-getItemid|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getItemid|getItemid]] | Get the menu Itemid for a content item. |
+| [[JApplicationHelper-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-getPath|getPath]] | Get a path for a specified file related to an extension. |
+| [[JApplicationHelper-parseXMLInstallFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-parseXMLInstallFile|parseXMLInstallFile]] | Parse an XML install file. |
+| [[JApplicationHelper-parseXMLLangMetaFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplicationHelper-parseXMLLangMetaFile|parseXMLLangMetaFile]] | Parse an XML language meta file. |
+
+----
+
+~~DISCUSSION~~
+
+

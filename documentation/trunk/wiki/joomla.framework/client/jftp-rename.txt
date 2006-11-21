@@ -1,0 +1,28 @@
+====== rename ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->rename]] |
+
+This method renames a file or folder on the FTP server.
+===== Syntax =====
+boolean rename	( **$from**, **$to** )
+| **$from** | string | is a string containing the path to change file/folder from. |
+| **$to** | string | is a string containing the path to change file/folder to. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+if ($ftp->rename( 'test', 'renametest' ) ) {
+    echo "Rename successful!";
+} else {
+    echo "Rename failed!";
+}
+</code>
+might produce:
+<code php|Result>
+Rename successful!
+</code>

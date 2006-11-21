@@ -1,0 +1,20 @@
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getDBO]] | never | Work in progress |
+
+Return a reference to a JDatabase object instance. This method is the means by which extensions should obtain access to the Joomla! database object.
+
+===== Syntax =====
+JDatabase &getDBO ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$database = $mainframe->getDBO();    
+</code>
+will result in a reference to the application database object being stored in the $database variable.
+
+----
+
+~~DISCUSSION~~

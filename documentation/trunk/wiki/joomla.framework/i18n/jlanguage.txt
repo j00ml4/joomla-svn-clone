@@ -1,0 +1,30 @@
+====== JLanguage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage]] | never | Work in progress |
+
+Languages/translation handler class. This class provides an interface to installed Joomla! languages. The Joomla! core will instantiate this class with the default system language. It is possible to create a second instance of the class with the same language, but it should be noted that any given language file will only be loaded once. Therefore, if the default system language is English, and the JLanguage class is instantiated again for the English language, the extension instantiated object will not be able to load any files that have already been loaded by the core.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JLanguage-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-__construct|__construct]] | Activites the default information for the language (metadata and locale). |
+| [[JLanguage-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-get|get]] | Gets a metadata language property. |
+| [[JLanguage-getBackwardLang|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getBackwardLang|getBackwardLang]] | Gets backward compatible language name. |
+| [[JLanguage-getDebug|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getDebug|getDebug]] | Gets the Debug property. |
+| [[JLanguage-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getInstance|getInstance]] | Returns a reference to a language object. |
+| [[JLanguage-getKnownLanguages|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getKnownLanguages|getKnownLanguages]] | Returns a list of known languages for an area. |
+| [[JLanguage-getLanguagePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getLanguagePath|getLanguagePath]] | Gets the path to a language. |
+| [[JLanguage-getLocale|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getLocale|getLocale]] | Gets locale property. |
+| [[JLanguage-getMetadata|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getMetadata|getMetadata]] | Returns an associative array holding the metadata. |
+| [[JLanguage-getName|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getName|getName]] | Gets the official name of the language. |
+| [[JLanguage-getPdfFontName|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getPdfFontName|getPdfFontName]] | Gets the PDF font name. |
+| [[JLanguage-getTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getTag|getTag]] | Gets the language tag (as defined in RFC 3066). |
+| [[JLanguage-getWinCP|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-getWinCP|getWinCP]] | Gets the Windows locale code page. |
+| [[JLanguage-hasKey|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-hasKey|hasKey]] | Determines if a key exists. |
+| [[JLanguage-isRTL|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-isRTL|isRTL]] | Gets the RTL property. |
+| [[JLanguage-load|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-load|load]] | Loads a single language file and appends the results to the existing strings. |
+| [[JLanguage-setDebug|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-setDebug|setDebug]] | Sets the Debug property. |
+| [[JLanguage-_|{{http://api.joomla.org/media/images/Method.png }}]] [[JLanguage-_getText|_getText]] | Translates a string. |
+
+----
+
+~~DISCUSSION~~

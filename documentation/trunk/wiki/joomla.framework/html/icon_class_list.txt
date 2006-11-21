@@ -1,0 +1,27 @@
+The [[JButton|JButton]] classes are designed specifically for use with the style sheets and images that are defined by templates in the administrative backend. Some of these button classes allow you to specify a name that is used to specify a particular class. The standard format of these CSS class names are icon-32-name. The following table lists these classes and the icons that they generate.
+
+^ Name ^ Class Name ^ Icon ^
+| send | icon-32-send | {{:references:joomla.framework:html:icon-32-send.png|:references:joomla.framework:html:icon-32-send.png}} |
+| delete | icon-32-delete | {{:references:joomla.framework:html:icon-32-trash.png|:references:joomla.framework:html:icon-32-trash.png}} |
+| help | icon-32-help | {{:references:joomla.framework:html:icon-32-help.png|:references:joomla.framework:html:icon-32-help.png}} |
+| cancel | icon-32-cancel | {{:references:joomla.framework:html:icon-32-cancel.png|:references:joomla.framework:html:icon-32-cancel.png}} |
+| config | icon-32-config | {{:references:joomla.framework:html:icon-32-config.png|:references:joomla.framework:html:icon-32-config.png}} |
+| apply | icon-32-apply | {{:references:joomla.framework:html:icon-32-apply.png|:references:joomla.framework:html:icon-32-apply.png}} |
+| back | icon-32-back | {{:references:joomla.framework:html:icon-32-back.png|:references:joomla.framework:html:icon-32-back.png}} |
+| save | icon-32-save | {{:references:joomla.framework:html:icon-32-save.png|:references:joomla.framework:html:icon-32-save.png}} |
+| edit | icon-32-edit | {{:references:joomla.framework:html:icon-32-edit.png|:references:joomla.framework:html:icon-32-edit.png}} |
+| copy | icon-32-copy | {{:references:joomla.framework:html:icon-32-copy.png|:references:joomla.framework:html:icon-32-copy.png}} |
+| move | icon-32-move | {{:references:joomla.framework:html:icon-32-move.png|:references:joomla.framework:html:icon-32-move.png}} |
+| new | icon-32-new | {{:references:joomla.framework:html:icon-32-new.png|:references:joomla.framework:html:icon-32-new.png}} |
+| upload | icon-32-upload | {{:references:joomla.framework:html:icon-32-upload.png|:references:joomla.framework:html:icon-32-upload.png}} |
+| assign | icon-32-assign | {{:references:joomla.framework:html:icon-32-publish.png|:references:joomla.framework:html:icon-32-publish.png}} |
+| html | icon-32-html | {{:references:joomla.framework:html:icon-32-html.png|:references:joomla.framework:html:icon-32-html.png}} |
+| css | icon-32-css | {{:references:joomla.framework:html:icon-32-css.png|:references:joomla.framework:html:icon-32-css.png}} |
+| publish | icon-32-publish | {{:references:joomla.framework:html:icon-32-publish.png|:references:joomla.framework:html:icon-32-publish.png}} |
+| unpublish | icon-32-unpublish | {{:references:joomla.framework:html:icon-32-unpublish.png|:references:joomla.framework:html:icon-32-unpublish.png}} |
+| restore | icon-32-restore | {{:references:joomla.framework:html:icon-32-revert.png|:references:joomla.framework:html:icon-32-revert.png}} |
+| trash | icon-32-trash | {{:references:joomla.framework:html:icon-32-trash.png|:references:joomla.framework:html:icon-32-trash.png}} |
+| archive | icon-32-archive | {{:references:joomla.framework:html:icon-32-archive.png|:references:joomla.framework:html:icon-32-archive.png}} |
+| unarchive | icon-32-unarchive | {{:references:joomla.framework:html:icon-32-unarchive.png|:references:joomla.framework:html:icon-32-unarchive.png}} |
+| preview | icon-32-preview | {{:references:joomla.framework:html:icon-32-preview.png|:references:joomla.framework:html:icon-32-preview.png}} |
+| default | icon-32-default | {{:references:joomla.framework:html:icon-32-default.png|:references:joomla.framework:html:icon-32-default.png}} |

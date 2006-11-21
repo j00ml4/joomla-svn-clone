@@ -1,0 +1,23 @@
+====== getUTFSupport ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getUTFSupport]] | never | Work in progress |
+
+Determines whether or not the database has UTF support. Returns true if the database does support UTF, or false otherwise.
+
+===== Syntax =====
+boolean getUTFSupport ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+echo $database->getUTFSupport();
+</code>
+might produce:
+<code php|Result>
+1
+</code>
+
+----
+
+~~DISCUSSION~~
+

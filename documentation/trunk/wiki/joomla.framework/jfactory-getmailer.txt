@@ -1,0 +1,18 @@
+====== getMailer ======
+^ API ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getMailer]] |
+
+This method returns a reference to the global Mailer object, only creating it if it doesn't already exist.
+
+===== Syntax =====
+PHPMailer &getMailer ()
+
+===== Examples =====
+<code php|Example>
+$mail =& JFactory::getMailer();
+echo "The current from name is: ". $mail->FromName;
+</code>
+might produce:
+<code php|Result>
+The current from name is: Joomla 1.1 Test Site
+</code>

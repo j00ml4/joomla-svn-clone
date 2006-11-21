@@ -1,0 +1,18 @@
+====== getAnchor ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getAnchor]] |
+
+Gets the URI anchor string. The anchor string is everything that occurs after the '#'.
+
+===== Syntax =====
+string getAnchor ()
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org/index.php/topic,41464.msg227819.html#msg227819' );
+echo "Anchor: " . $uri->getAnchor();
+</code>
+might produce:
+<code php|Result>
+Anchor: msg227819
+</code>

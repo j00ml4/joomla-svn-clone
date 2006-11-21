@@ -1,0 +1,34 @@
+====== JDocument [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument]] |
+
+This is the Document class. It provides an easy interface to parse and display a document. This class is instantiated through the getInstance method. The getInstance method returns an object of the appropriate child class depending on the document type. This is a child class of the JTemplate class.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocument-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-__construct|__construct]] | Class constructor. |
+| [[JDocument-addScript|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addScript|addScript]] | Adds a linked script to the page. |
+| [[JDocument-addScriptDeclaration|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page. |
+| [[JDocument-addStyleDeclaration|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page. |
+| [[JDocument-addStyleSheet|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-addStyleSheet|addStyleSheet]] | Adds a linked stylesheet to the page. |
+| [[JDocument-display|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-display|display]] | Outputs the template to the browser. |
+| [[JDocument-execRenderer|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-execRenderer|execRenderer]] | Execute a renderer. |
+| [[JDocument-fetchBody|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-fetchBody|fetchBody]] | Return the document body. |
+| [[JDocument-fetchHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-fetchHead|fetchHead]] | Return the document head. |
+| [[JDocument-getCharset|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getCharset|getCharset]] | Returns the document charset encoding. |
+| [[JDocument-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getInstance|getInstance]] | Returns a reference to the global JDocument object, only creating it if it doesn't already exist. |
+| [[JDocument-getLang|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getLang|getLang]] | Returns the document language. |
+| [[JDocument-getTitle|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-getTitle|getTitle]] | Return the title of the page. |
+| [[JDocument-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-parse|parse]] | Parse a file and create an internal patTemplate object. |
+| [[JDocument-setCharset|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setCharset|setCharset]] | Sets the document charset. |
+| [[JDocument-setLang|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setLang|setLang]] | Sets the global document language declaration. Default is English. |
+| [[JDocument-setLineEnd|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setLineEnd|setLineEnd]] | Sets the line end style to Windows, Mac, Unix or a custom string. |
+| [[JDocument-setMimeEncoding|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser. |
+| [[JDocument-setTab|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setTab|setTab]] | Sets the string used to indent HTML. |
+| [[JDocument-setTitle|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-setTitle|setTitle]] | Sets the title of the page. |
+| [[JDocument-_addRenderer|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocument-_addRenderer|_addRenderer]] | Adds a renderer to be called. |
+
+----
+
+~~DISCUSSION~~
+

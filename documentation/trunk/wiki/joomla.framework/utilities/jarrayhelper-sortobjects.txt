@@ -1,0 +1,95 @@
+====== sortObjects ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#sortobjects|JArrayHelper->sortObjects]] | never | Internal review |
+
+Sorts an array of objects on a given field. This method works directly on the passed array.
+
+===== Syntax =====
+array sortObjects ( **&$a**, **$k**, **$direction** )
+
+| **$arr** | array | is an array containing the objects to be sorted. |
+| **$k** | string | is a string containing the name of the key on which to sort. |
+| **$direction** | integer | is an integer containing the direction in which to sort (1 = Ascending, -1 = Descending). This parameter is optional and if omitted defaults to 1 (ascending). |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+ 
+$query = "SELECT `id`, `title`, `title_alias`"
+. "\n   FROM #__content"
+;
+$db->setQuery( $query );
+if (!$results = $db->loadObjectList( 'id' )) {
+    echo $db->getErrorMsg();
+}
+
+echo "<p>Normal Order:<br />";
+foreach($results as $result) {
+    echo $result->id . " " . $result->title . " " . $result->title_alias . "<br />";
+}
+echo "</p>";
+
+JArrayHelper::sortObjects( $results, 'title' );
+
+echo "<p>Ascending Order:<br />";
+foreach($results as $result) {
+    echo $result->id . " " . $result->title . " " . $result->title_alias . "<br />";
+}
+echo "</p>";
+
+JArrayHelper::sortObjects( $results, 'title', -1 );
+
+echo "<p>Descending Order:<br />";
+foreach($results as $result) {
+    echo $result->id . " " . $result->title . " " . $result->title_alias . "<br />";
+}
+echo "</p>";
+</code>
+might produce:
+<code php|Result>
+Normal Order:
+1 Welcome to Joomla! Welcome
+2 Newsflash 1
+3 Newsflash 2
+4 Newsflash 3
+5 Joomla! License Guidelines
+6 Example News Item 1 News1
+7 Example News Item 2 News2
+8 Example News Item 3 News3
+9 Example News Item 4 News4
+10 Example FAQ Item 1 FAQ1
+11 Example FAQ Item 2 FAQ2
+12 1.5 Development Cycle
+
+Ascending Order:
+12 1.5 Development Cycle
+10 Example FAQ Item 1 FAQ1
+11 Example FAQ Item 2 FAQ2
+6 Example News Item 1 News1
+7 Example News Item 2 News2
+8 Example News Item 3 News3
+9 Example News Item 4 News4
+5 Joomla! License Guidelines
+2 Newsflash 1
+3 Newsflash 2
+4 Newsflash 3
+1 Welcome to Joomla! Welcome
+
+Descending Order:
+1 Welcome to Joomla! Welcome
+4 Newsflash 3
+3 Newsflash 2
+2 Newsflash 1
+5 Joomla! License Guidelines
+9 Example News Item 4 News4
+8 Example News Item 3 News3
+7 Example News Item 2 News2
+6 Example News Item 1 News1
+11 Example FAQ Item 2 FAQ2
+10 Example FAQ Item 1 FAQ1
+12 1.5 Development Cycle 
+</code>
+
+----
+
+~~DISCUSSION~~

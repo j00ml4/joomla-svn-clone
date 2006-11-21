@@ -1,0 +1,27 @@
+====== isSite ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->isSite]] | never | Work in progress |
+
+Returns a boolean value specifying whether or not the current page is being loaded from the site interface.
+
+===== Syntax =====
+boolean isSite ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+if ($mainframe->isSite()) {
+    echo "We are in the site interface!";
+} else {
+    echo "We are not in the site interface!";
+}
+</code>
+might produce
+<code php|Result>
+We are in the site interface!
+</code>
+
+----
+
+~~DISCUSSION~~

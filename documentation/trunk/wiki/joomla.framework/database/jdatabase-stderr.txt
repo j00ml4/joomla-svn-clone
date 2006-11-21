@@ -1,0 +1,32 @@
+====== stderr ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->stderr]] | never | Work in progress |
+
+Returns the last database error message in a standard format.  The error number and error message are included.  The SQL statement that caused the error may optionally be included.
+
+===== Syntax =====
+string stderr ( **$showSQL** )
+
+| **$showSQL** | boolean | is a boolean value which if TRUE, displays the last SQL statement sent to the database. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+$query = "SELECT * FROM 'bad_table'";
+$database->setQuery( $query );
+$rows = $database->loadObjectList();
+if ($database->getErrorNum()) {
+  echo $database->stderr();
+}
+</code>
+would produce:
+<code php|Result>
+DB function failed with error number 1064
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''bad_table'' at line 1 SQL=SELECT * FROM 'bad_table'
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

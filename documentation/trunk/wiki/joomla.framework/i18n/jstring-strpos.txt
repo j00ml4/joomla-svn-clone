@@ -1,0 +1,28 @@
+====== strpos ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strpos]] | never | Work in progress |
+
+Finds the position of the first occurrence of a string. See [[http://www.php.net/manual/en/function.strpos.php|strpos]] for more information.
+
+===== Syntax =====
+mixed strpos	( **$haystack**, **$needle**, **$offset** )
+
+| **$haystack** | string | is a string containing the string being examined. |
+| **$needle** | string | is a string containing the string being searched for. |
+| **$offset** | integer | is an integer that specifies the position from which the search should be performed. This parameter is optional and if omitted defaults to 0. |
+
+===== Examples =====
+<code php|Example>
+$haystack = "και εισηλθεν παλιν εις";
+$needle = "πα";
+echo "The position of the first occurence of $needle in $haystack is " . JString::strpos( $haystack, $needle ) . ".";
+</code>
+might produce:
+<code php|Result>
+The position of the first occurence of πα in και εισηλθεν παλιν εις is 13.
+</code>
+
+
+----
+
+~~DISCUSSION~~

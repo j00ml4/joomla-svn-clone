@@ -1,0 +1,29 @@
+====== loadResultArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadResultArray]] | never | Work in progress |
+
+Returns an array containing a single field from all the rows returned by the database query.
+
+===== Syntax =====
+void loadResultArray ( **$numinarray** )
+
+| **$numinarray** | integer | is an integer containing the numeric offset of the field in the database row.  This field is optional and if omitted will return the first field in each row (that is, field 0). |
+
+===== Examples =====
+<code php|Example>
+$dbo =& JFactory::getDBO();
+
+$query = "SELECT name, bid, clickurl FROM #__banner ORDER BY clickurl";
+$dbo->setQuery( $query );
+$row =& $dbo->loadResultArray(1);
+print_r( $row );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => 5 [1] => 4 [2] => 3 [3] => 1 [4] => 2 )
+</code>
+
+----
+
+~~DISCUSSION~~
+

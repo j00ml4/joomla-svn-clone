@@ -1,0 +1,32 @@
+====== getIncludePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->getIncludePath]] | never | Work in progress |
+
+Gets the include path.
+
+===== Syntax =====
+string getIncludePath ()
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+
+echo $params->getIncludePath();
+</code>
+might produce:
+<code php|Result>
+C:\webroot\htdocs\joomla15\libraries\joomla\presentation\parameter\element
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+
+----
+
+~~DISCUSSION~~
+

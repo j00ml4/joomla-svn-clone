@@ -1,0 +1,24 @@
+====== insert ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableSession|{{http://api.joomla.org/media/images/Class.png }}]][[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->insert]] | never | Work in progress |
+
+Inserts a session record into the table. The session ID can be retrieved from the [[references:Joomla.Framework:environment:JSession-id|JSession::id()]] method. The client ID can be retrieved using [[references:Joomla.Framework:application:JApplication-getClientId|JApplication::getClientId()]].
+
+===== Syntax =====
+void insert	( **$sessionId**, **$clientId** )
+
+| **$sessionId** | string | is a string containing a unique identifier for the session. |
+| **$clientId** | integer | is an integer containing the ID of the client. |
+
+===== Examples =====
+The [[references:Joomla.Framework:application:JApplication|JApplication]] class calls this method in the following manner:
+<code php|Example>
+if (!$session->insert( JSession::id(), $this->getClientId())) {
+    die( $session->getError() );
+}
+</code>
+
+----
+
+~~DISCUSSION~~
+

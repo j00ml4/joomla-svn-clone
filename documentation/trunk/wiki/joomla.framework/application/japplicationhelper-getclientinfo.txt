@@ -1,0 +1,30 @@
+====== getClientInfo ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getClientInfo]] | never | Work in progress |
+
+Gets information on a specific client id. A client is either the site, the adminstrator, or installation. Currently these are generally in static locations in reference to each other. There are plans for future versions such that these can be moved independently of each other. These locations will be stored in a database. This method will be of greater use in these future versions.
+
+The client can be referenced either by an id, such as the id returned by the JApplication->getClientId method, or by name, such as 'site', 'administrator', or 'installation'.
+
+This method returns an object which describes the client, or false if the client is unknown.
+
+===== Syntax =====
+mixed getClientInfo	( **$id**, **$byName** )
+
+| **$id** | integer | is an integer containing the client identifier (this can be either 0, 1, or 2). |
+| **$byName** | string | is a string containing the name of the client. This parameter is optional and if omitted defaults to false, and the client will be referenced by the id specified in the $id parameter. |
+
+===== Examples =====
+Invoking the getClientInfo method as follows:
+<code php|Example>
+$client = JApplicationHelper::getClientInfo( 1 );
+print_r( $client );
+</code>
+might output
+<code php|Result>
+stdClass Object ( [id] => 1 [name] => administrator [path] => C:/Program Files/xampp/htdocs/joomla11/administrator )
+</code>
+
+----
+
+~~DISCUSSION~~

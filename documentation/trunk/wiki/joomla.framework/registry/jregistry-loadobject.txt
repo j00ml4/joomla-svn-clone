@@ -1,0 +1,36 @@
+====== loadObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadObject]] | never | Work in progress |
+
+Loads the public variables of the object into the registry. If no namespace is specified, the variables are loaded into the default namespace.
+
+===== Syntax =====
+boolean loadObject ( **&$object**, **$namespace** )
+
+| **&$object** | &object | is an object containing public variables to load into the registry. |
+| **$namespace** | string | is a string specifying the namespace into which to load the data. This parameter is optional and if omitted defaults to the default namespace. |
+
+===== Examples =====
+<code php|Example>
+$object = new stdClass();
+$object->name = 'John Doe';
+$object->address = '123 Washington St.';
+$object->city = 'New York';
+$object->_phone = '555-555-1234';
+
+$registry = new JRegistry( 'com_document' );
+$registry->loadObject( $object );
+echo "The name is: " . $registry->getValue( 'com_document.name' ). '<br />';
+echo "The phone is: " . $registry->getValue( 'com_document._phone' );
+</code>
+might produce:
+<code php|Result>
+The name is: John Doe
+The phone is:
+</code>
+The phone property is not a public variable and is therefore not loaded into the namespace.
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,72 @@
+====== JDatabase ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase]] | never | Work in progress |
+
+Generic database connector class.
+
+An instance of this class is created using the current Joomla configuration variables when each page is loaded. Therefore you do not generally need to create new instance of this object. A reference to the JDatabase instance can be obtained using the [[references:joomla.framework:jfactory-getDBO|JFactory::getDBO()]] method.
+
+Joomla! 1.5 works primarily with the MySQL and MySQLi database. If it possible to write adapter classes for other databases that may provide some functionality.
+
+This class is an abstract class and its methods are implemented in the adapter classes.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDatabase-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-__construct|__construct]] | Constructor for the database class. |
+| [[JDatabase-addQuoted|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-addQuoted|addQuoted]] | Adds a field or array of field names to the list that are to be quoted. |
+| [[JDatabase-BeginTrans|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-BeginTrans|BeginTrans]] | ADODB compatability function. |
+| [[JDatabase-CommitTrans|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-CommitTrans|CommitTrans]] | ADODB compatability function. |
+| [[JDatabase-debug|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-debug|debug]] | Sets the debug level on or off. |
+| [[JDatabase-ErrorMsg|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-ErrorMsg|ErrorMsg]] | ADODB compatability function. |
+| [[JDatabase-ErrorNo|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-ErrorNo|ErrorNo]] | ADODB compatability function. |
+| [[JDatabase-Execute|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-Execute|Execute]] | ADODB compatability function. |
+| [[JDatabase-explain|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-explain|explain]] | Performs an SQL EXPLAIN on the current SQL query string. |
+| [[JDatabase-GenID|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-GenID|GenID]] | ADODB compatability function. |
+| [[JDatabase-getAffectedRows|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getAffectedRows|getAffectedRows]] | Returns the number of rows affected by the most recent query. |
+| [[JDatabase-GetCol|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-GetCol|GetCol]] | ADODB compatability function. |
+| [[JDatabase-getCollation|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getCollation|getCollation]] | Returnss the database collation. |
+| [[JDatabase-getErrorMsg|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getErrorMsg|getErrorMsg]] | Returns the most recent database error message. |
+| [[JDatabase-getErrorNum|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getErrorNum|getErrorNum]] | Returns the most recent database error code. |
+| [[JDatabase-getEscaped|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getEscaped|getEscaped]] | Returns the string in database escaped form. |
+| [[JDatabase-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getInstance|getInstance]] | Returns a reference to the global Database object, only creating it if it doesn't already exist. |
+| [[JDatabase-getNullDate|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getNullDate|getNullDate]] | Returns the string to be used to represent a null date. |
+| [[JDatabase-getNumRows|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getNumRows|getNumRows]] | Returns the number of rows returned by a database query. |
+| [[JDatabase-GetOne|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-GetOne|GetOne]] | ADODB compatability function. |
+| [[JDatabase-getPrefix|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getPrefix|getPrefix]] | Returns the current database table prefix code. |
+| [[JDatabase-getQuery|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getQuery|getQuery]] | Returns the current value of the internal SQL query string. |
+| [[JDatabase-GetRow|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-GetRow|GetRow]] | ADODB compatability function. |
+| [[JDatabase-getTableCreate|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getTableCreate|getTableCreate]] | Creates one or more tables in the database. |
+| [[JDatabase-getTableFields|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getTableFields|getTableFields]] | Returns a list of fields given a list of tables. |
+| [[JDatabase-getTableList|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getTableList|getTableList]] | Returns a list of all the tables in the database. |
+| [[JDatabase-getUTFSupport|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getUTFSupport|getUTFSupport]] | Determines if the database supports UTF. |
+| [[JDatabase-getVersion|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-getVersion|getVersion]] | Returns the version of the database connector. |
+| [[JDatabase-hasUTF|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-hasUTF|hasUTF]] | Determines if the database supports UTF. |
+| [[JDatabase-insertid|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-insertid|insertid]] | Returns the unique record number of the last record to be inserted into a database table. |
+| [[JDatabase-insertObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-insertObject|insertObject]] | Inserts an object into a database table. |
+| [[JDatabase-isQuoted|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-isQuoted|isQuoted]] | Checks if the field name needs to be quoted. |
+| [[JDatabase-loadAssoc|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadAssoc|loadAssoc]] | Fetches a result row as an associative array. |
+| [[JDatabase-loadAssocList|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadAssocList|loadAssocList]] | Loads an associative list of database rows. |
+| [[JDatabase-loadObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadObject|loadObject]] | Loads an object with fields from the first row returned by the current SQL query. |
+| [[JDatabase-loadObjectList|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadObjectList|loadObjectList]] | Returns an array of database objects using the current SQL query. |
+| [[JDatabase-loadResult|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadResult|loadResult]] | Returns the first field of the first row returned by the database query. |
+| [[JDatabase-loadResultArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadResultArray|loadResultArray]] | Returns an array containing a single field from all the rows returned by the database query. |
+| [[JDatabase-loadRow|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadRow|loadRow]] | Returns the first row of the current query as an array. |
+| [[JDatabase-loadRowList|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-loadRowList|loadRowList]] | Returns an array of database rows with numeric column indexing. |
+| [[JDatabase-nameQuote|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-nameQuote|nameQuote]] | Quotes an identifier such as a database table name, field name, etc., using database-specific quote marks. |
+| [[JDatabase-PageExecute|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-PageExecute|PageExecute]] | ADODB compatability function. |
+| [[JDatabase-query|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-query|query]] | Executes the current SQL query string. |
+| [[JDatabase-queryBatch|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-queryBatch|queryBatch]] | Executes the current SQL query string as a single transaction. |
+| [[JDatabase-Quote|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-Quote|Quote]] | Returns a quoted string with characters escaped. |
+| [[JDatabase-replacePrefix|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-replacePrefix|replacePrefix]] | This function replaces a string identifier $prefix with the string held in the _table_prefix class variable. |
+| [[JDatabase-RollbackTrans|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-RollbackTrans|RollbackTrans]] | ADODB compatability function. |
+| [[JDatabase-SelectLimit|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-SelectLimit|SelectLimit]] | ADODB compatability function. |
+| [[JDatabase-setQuery|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-setQuery|setQuery]] | Sets the SQL query string for later execution. |
+| [[JDatabase-setUTF|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-setUTF|setUTF]] | Sets resource as having UTF support. This method is database dependent. |
+| [[JDatabase-stderr|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-stderr|stderr]] | Returns the last database error message in a standard format. |
+| [[JDatabase-updateObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JDatabase-updateObject|updateObject]] | Updates a database table row using data contained in an object. |
+
+----
+
+~~DISCUSSION~~
+
+

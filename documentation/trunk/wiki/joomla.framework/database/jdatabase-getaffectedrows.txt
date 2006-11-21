@@ -1,0 +1,27 @@
+====== getAffectedRows ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getAffectedRows]] | never | Work in progress |
+
+Returns the number of rows affected by the most recent query. Affected rows are rows that were modified by the query.
+
+===== Syntax =====
+int getAffectedRows ()
+
+===== Examples =====
+
+<code php|Example>
+$database =& JFactory::getDBO();
+$query = "UPDATE #__content SET state = 0";
+$database->setQuery( $query );
+$database->query();
+echo $database->getAffectedRows();
+</code>
+might produce:
+<code php|Result>
+43
+</code>
+
+----
+
+~~DISCUSSION~~
+

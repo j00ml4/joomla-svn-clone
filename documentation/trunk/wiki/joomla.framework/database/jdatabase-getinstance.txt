@@ -1,0 +1,27 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getInstance]] | never | Work in progress |
+
+Returns a reference to the global Database object, only creating it if it doesn't already exist.
+
+===== Syntax =====
+[[JDatabase|JDatabase]] &getInstance ( **$driver**, **$host**, **$user**, **$pass**, **$db**, **$table_prefix** )
+
+| **$driver** | string | is a string containing the name of the database driver. This parameter is optional and if omitted defaults to 'mysql'. |
+| **$host** | string | is a string containing the name of the database host. This parameter is optional and if omitted defaults to 'localhost'. |
+| **$user** | string | is a string containing the user name to use to access the database. |
+| **$pass** | string | is a string containing the password that corresponds to the specified user. |
+| **$db** | string | is a string containing the name of the database to open. This parameter is optional and if omitted defaults to ''. |
+| **$table_prefix** | string | is a string containing the table prefix. This parameter is optional and if omitted default to ''. |
+
+===== Examples =====
+The [[references:joomla.framework:jfactory|JFactory]] class invokes this method in the following manner:
+<code php|Example>
+$db =& JDatabase::getInstance( $dbtype, $host, $user, $password, $db, $dbprefix );
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

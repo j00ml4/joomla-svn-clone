@@ -1,0 +1,35 @@
+====== JTableComponent ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent]] | never | Work in progress |
+
+The JTableComponent class is an implementation of the JTable class to provide access to the components table. This implementation provides data verification functionality via the check() method, the ability to load a row by its option field via the loadByOption() method and defines the class variables to provide an interface to the database table. It also implements a specialized bind() method to facilitate component configuration parameters.
+
+The components table is used to manage the components that are installed in the local Joomla! system. There is one entry in this table per administrator menu entry.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableComponent-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableComponent-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-bind|bind]] | overloaded bind method that provides parameter handling. |
+| [[JTableComponent-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-check|check]] | verifies that the current data is structurally sound. |
+| [[JTableComponent-loadByOption|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-loadByOption|loadByOption]] | loads a data row using the specified option. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$name** | is a string containing the name of the component. |
+| **$link** | is a string containing the link that is used for site menu items. |
+| **$menuid** | is an integer containing the menu ID. This is not currently used. |
+| **$parent** | is an integer containing the ID of the entries parent. This is 0 for a component's main menu item in the administrator menu. For sub menu items, this value is equal to the ID of the main menu item. |
+| **$admin_menu_link** | is a string containing the link to use from the administrator menu for entry. |
+| **$admin_menu_alt** | is a string containing the ALT text to use in the administrator menu. |
+| **$option** | is a string containing the option field for the component if the link in the adminstrator menu links to the component's own code (this is not the case, for example, if the link is to the Categories component to manage the component's categories). |
+| **$ordering** | is an integer containing the order of the entry in the administrator menu. This is used to order the entries for the sub menu. |
+| **$admin_menu_img** | is a string containing the name of the administrator menu image to use with the menu entry. |
+| **$iscore** | is a boolean value that specifies whether or not the component is a 'core' component. Core components are a subset of the components that are packaged with the Joomla! system that are integral to the operation of the system. |
+| **$params** | is a string containing the configuration parameters for the component. |
+| **$enabled** | is a boolean value that specifies whether or not the component is enabled. |
+
+----
+
+~~DISCUSSION~~
+

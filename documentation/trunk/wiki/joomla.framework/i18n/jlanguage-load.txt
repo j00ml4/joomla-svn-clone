@@ -1,0 +1,25 @@
+====== load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->load]] | never | Work in progress |
+
+Loads a single language file and appends the results to the existing strings. This method will not load the same language file a second time. This will cause problems if you instantiate two objects using the same language pack. This method returns true on success, false otherwise.
+
+===== Syntax =====
+void load ( **$suffix**, **$basePath** )
+
+| **$suffix** | string | is a string containing the suffix to be added the language file. |
+| **$basePath** | string | is a string containing the base path in which to search for the language file. This parameter is optional and if omitted defaults to JPATH_BASE. |
+
+===== Examples =====
+<code php|Example>
+$english = JLanguage::getInstance( 'en-GB' );
+echo "The language file for com_poll was " . ($english->load( 'com_poll' ) ? "" : "not") . " successfully loaded.";
+</code>
+might produce:
+<code php|Result>
+The language file for com_poll was successfully loaded.
+</code>
+
+----
+
+~~DISCUSSION~~

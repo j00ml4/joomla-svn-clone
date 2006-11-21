@@ -1,0 +1,26 @@
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->delete]] | never | Work in progress |
+
+Deletes the record from the users table, deleting also any necessary ACL entries and message entries.
+
+===== Syntax =====
+void delete	( **$oid** )
+
+| **$oid** | integer | is an integer containing the ID of the user to delete. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+
+$user->load( 63 );
+
+$user->delete();
+</code>
+will delete the user with an ID of 63.
+
+----
+
+~~DISCUSSION~~
+

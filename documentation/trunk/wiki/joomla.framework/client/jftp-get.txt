@@ -1,0 +1,29 @@
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->get]] |
+
+This method gets a file from the FTP server and saves it to a local file.
+
+===== Syntax =====
+boolean get	( **$local**, **$remote** )
+| **$local** | string | is a string containing the path to the local file to save the remote file as. |
+| **$remote** | string | is a string containing the path to the remote file to get on the FTP server. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+if ($ftp->get( JPATH_ROOT . '/john3.mp3', 'john3.mp3' ) ) {
+    echo "Get successful!";
+} else {
+    echo "Get failed!";
+}
+</code>
+might produce:
+<code php|Result>
+Get successful!
+</code>

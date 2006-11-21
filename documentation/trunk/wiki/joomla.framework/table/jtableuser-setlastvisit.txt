@@ -1,0 +1,25 @@
+====== setLastVisit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->setLastVisit]] | never | Work in progress |
+
+Updates the last visit time of user.
+
+===== Syntax =====
+boolean setLastVisit	( **$timeStamp**, **$id** )
+
+| **$timeStamp** | integer | is an integer containing the timestamp to assign to the last visit field. This parameter is optional and if omitted defaults to the current timestamp. |
+| **$id** | integer | is an integer containing the ID of the user to update. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+
+$user->setLastVisit( mktime() - 900, 62 );
+</code>
+sets user 62's last vist date to fifteen minutes ago.
+
+----
+
+~~DISCUSSION~~
+

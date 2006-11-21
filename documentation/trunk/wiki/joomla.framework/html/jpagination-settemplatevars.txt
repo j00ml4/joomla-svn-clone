@@ -1,0 +1,56 @@
+====== setTemplateVars ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->setTemplateVars]] | never | Work in progress |
+
+Sets the variables for the page navigation template. This method will add three variables to the specified template: 'PAGE_LINKS', 'PAGE_LIST_OPTIONS' and 'PAGE_COUNTER'. 'PAGE_LINKS' will be assigned the result of $this->getPagesLinks( $link ). 'PAGE_LIST_OPTIONS' will be assigned the result of $this->getLimitBox( $link ). 'PAGE_COUNTER' will be assigned the result of $this->getPagesCounter().
+
+===== Syntax =====
+boolean setTemplateVars	( **&$tmpl**, **$name**, **$link** )
+
+| **&$tmpl** | JTemplate | is a JTemplate object to which to add the pagination footer template. |
+| **$name** | string | is a string containing the name of the template to which to add the pagination footer variables. This parameter is optional and if omitted defaults to 'admin-list-footer'. |
+| **$link** | string | is a string containing the link parameter to pass to the [[JPagination-getPagesLinks|getPagesLinks]] and [[JPagination-getLimitBox|getLimitBox]] methods. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+$query = "SELECT count(*) "
+. "\n FROM #__weblinks"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT id, title, url, ordering "
+. "\n FROM #__weblinks "
+. "\n ORDER BY ordering "
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+
+jimport( 'joomla.template.template' );
+$template = new JTemplate();
+$pageNav->setTemplateVars( $template );
+echo $template->getVar( 'admin-list-footer', 'page_links' );
+</code>
+might produce:
+<code php|Result>
+<div class="button2-right off"><div class="start"><span>Start</span></div></div>
+<div class="button2-right off"><div class="prev"><span>Prev</span></div></div>
+<div class="button2-left"><div class="page">
+<span>1</span>
+</div></div>
+<div class="button2-left off"><div class="next"><span>Next</span></div></div>
+<div class="button2-left off"><div class="end"><span>End</span></div></div>
+</code>
+
+----
+
+~~DISCUSSION~~
+

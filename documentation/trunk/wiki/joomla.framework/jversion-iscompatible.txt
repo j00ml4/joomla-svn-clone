@@ -1,0 +1,34 @@
+====== isCompatible ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#|]] | [[JVersion|{{http://api.joomla.org/media/images/Class.png }}]][[JVersion|JVersion]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion::isCompatible]] | never | Work in progress |
+Compares a "PHP standardized" version number against the current Joomla! version. This is useful if you would like to write extensions working only on some specific version of Joomla! 
+
+This method can be called statically.
+
+===== Syntax =====
+boolean isCompatible( string **$minimum** )
+
+| **$minimum** | string | A version string compliant with PHP's [[http://php.net/manual/function.version-compare.php|version_compare()]] |
+
+===== Examples =====
+Find if the present Joomla! installation matches version "1.5.0".
+Provided the constant [[JVersion/#constants|JVERSION]] has a value of "1.5.0".
+<code php|Example>
+$version_required = '1.5.0';
+if ( JVersion::isCompatible($version_required) !== true ) {
+  echo "Please install Joomla! ". $version_required ." to use this code.";
+} else {
+  echo "Version requirements are set.";
+}
+</code>
+might produce on success:
+<code php|Result>
+Please install to Joomla! 1.5.0 to use this code.
+</code>
+
+===== Known limitations =====
+The method is using PHP's [[http://php.net/manual/language.operators.comparison.php|Equal operator]] "**eq**" to compare the provided $minimum with [[JVersion/#constants|JVERSION]]. If your code requires a specific version of Joomla! to be available, i.e. "1.5.0", this method will perform as expected. If your code will perform as well with a (hypothetical) release "1.5.1" or "1.6.5", the method will return **false** however. Use the native [[http://php.net/manual/function.version-compare.php|version_compare()]] function if you need a more sophisticated version comparision.
+
+----
+
+~~DISCUSSION~~

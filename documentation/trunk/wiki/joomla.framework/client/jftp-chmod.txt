@@ -1,0 +1,28 @@
+====== chmod ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->chmod]] |
+
+This method changes the mode for a path on the FTP server.
+===== Syntax =====
+boolean chmod ( **$path**, **$mode** )
+| **$path** | string | is a string containing the path to change mode on. |
+| **$mode** | string | is a string containing the octal value to change mode to. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+if ($ftp->chmod( 'john3.mp3', '777' ) ) {
+    echo "CHMOD successful!";
+} else {
+    echo "CHMOD failed!";
+}
+</code>
+might produce:
+<code php|Result>
+CHMOD successful!
+</code>

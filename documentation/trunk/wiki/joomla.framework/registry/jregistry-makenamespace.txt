@@ -1,0 +1,30 @@
+====== makeNameSpace ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->makeNameSpace]] | never | Work in progress |
+
+Creates a namespace with the specified name. Care should be taken when using this method because there is no check to see if the namespace already exists, and therefore data in an existing namespace could be lost.
+
+===== Syntax =====
+boolean makeNameSpace ( **$namespace** )
+
+| **$namespace** | string | is a string containing the name of the namespace to create. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+$registry->makeNameSpace( 'joomla' );
+
+$data = array( 'name' => 'Bob', 'address' => '123 Yonge St.' );
+$registry->loadArray( $data, 'joomla' );
+print_r( $registry->_registry );
+echo "The value is: " . $registry->getValue( 'joomla.name' );
+</code>
+might produce:
+<code php|Result>
+The registry value is: Bob
+</code>
+
+----
+
+~~DISCUSSION~~
+

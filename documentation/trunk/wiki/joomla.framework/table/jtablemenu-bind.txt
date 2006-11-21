@@ -1,0 +1,33 @@
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableMenu|{{http://api.joomla.org/media/images/Class.png }}]][[JTableMenu|JTableMenu]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenu.html|JTableMenu->bind]] | never | Work in progress |
+
+This is a customized bind method that handles the retrieval of parameters from the form data and merges these with any additional parameters specified in the $array parameter. Parameters from the control element are stored in the control field and parameters from the params element are stored in the params field.
+
+===== Syntax =====
+string bind	( **$array**, **$ignore** )
+
+| **$array** | array | is an associative array containing name-value pairs that are to be stored in the menu item's params and control fields. |
+| **$ignore** | array | is a string containing a space separated list of fields that should be ignored. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$row =& JTable::getInstance( 'menu', $db );
+$row->load( 4 );
+$parameters = JArrayHelper::fromObject( $row );
+$parameters['params'] = array( 'param1' => 'value1', 'param2' => 'value2', 'param3' => 'value3' );
+$parameters['control'] = array( 'view_name' => 'section', 'template_name' => 'blog' );
+$row->bind( $parameters );
+echo $row->params . '<br />';
+echo $row->control . '<br />';
+</code>
+might produce:
+<code php|Result>
+param1=value1 param2=value2 param3=value3
+view_name=section template_name=blog
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,21 @@
+====== setSession ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->setSession]] | never | Work in progress |
+
+Creates the user session. Old sessions are flushed based on the configuration value for the cookie lifetime. If there is an existing session, then the last access time is updated. If it is a new session, then the session id is generated and a record is created in the #__sessions table. This method is called by the Joomla! core and should not need to be invoked by extensions.
+
+===== Syntax =====
+void setSession	( **$name** )
+
+| **$name** | string | is a string containing the name of the session. |
+
+===== Examples =====
+This method is called in the following way by the Joomla! core (index.php):
+<code php|Example>
+$mainframe->setSession( $mainframe->getCfg('live_site').$mainframe->getClientId() );
+</code>
+Note that unique sessions are created for the various clients.
+
+----
+
+~~DISCUSSION~~

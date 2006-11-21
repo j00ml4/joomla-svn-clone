@@ -1,0 +1,23 @@
+====== getPermissions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#getPermissions|JPath->getPermissions]] | 27 Apr 2006 | Published |
+
+Get the permissions of the file or folder on a given path.
+===== Syntax =====
+string getPermissions	( **$path** )
+| **$path** | string | is a string containing the path of a file or folder. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.path' );
+
+echo "File permissions: " . JPath::getPermissions( JPATH_ROOT . '/robots.txt' );
+</code>
+might produce:
+<code php|Result>
+File permissions: rw-rw-rw-
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,27 @@
+====== loadArray ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadArray]] | never | Work in progress |
+
+Loads an associative array of values into the registry. If no namespace is specified, the values will be loaded into the default namespace.
+
+===== Syntax =====
+boolean loadArray ( **$array**, **$namespace** )
+
+| **$array** | &array | Array     Associative array of value to load |
+| **$namespace** | &namepsace | String    The name of the namespace |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+$settings = array( 'showauthor' => true, 'showemail' => false, 'listitems' => 30 );
+$registry->loadArray( $settings );
+echo "The number of items to display in a list is: " . $registry->getValue( 'com_document.listitems' );
+</code>
+might produce:
+<code php|Result>
+The number of items to display in a list is: 30
+</code>
+
+----
+
+~~DISCUSSION~~

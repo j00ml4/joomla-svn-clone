@@ -1,0 +1,24 @@
+====== clean ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#clean|JPath->clean]] | 27 Apr 2006 | Published |
+
+This method strips additional / or \ in a path name. It can also add a trailing slash if desired. It will also change the slashes to the system appropriate folder separator (eg. \ on Microsoft Windows systems, but / on Unix systems).
+===== Syntax =====
+string clean ( **$p_path**, **$p_addtrailingslash** )
+| **$p_path** | string | is a string containing the path to clean. |
+| **$p_addtrailingslash** | boolean | is a flag which specifies whether the method should add a trailing slash. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.path' );
+
+echo "Cleaned path: " . JPath::clean( '//..//..//..\\test.html' );
+</code>
+might produce:
+<code php|Result>
+Cleaned path: \..\..\..\test.html\
+</code>
+
+----
+
+~~DISCUSSION~~

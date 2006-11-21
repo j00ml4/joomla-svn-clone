@@ -1,0 +1,28 @@
+====== nameList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->nameList]] |
+
+Method to list the file/folder names of the contents of a directory on the FTP server. This method returns an array of strings containing the listing of files in the specified directory.
+===== Syntax =====
+array nameList	( **$path** )
+| **$path** | string | Path local file to store on the FTP server |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+print_r( $ftp->nameList( './' ) );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => ./file1.htm
+    [1] => ./file2.htm
+    [2] => ./file3.htm
+)
+</code>

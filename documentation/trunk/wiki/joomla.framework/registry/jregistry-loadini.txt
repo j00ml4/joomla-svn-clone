@@ -1,0 +1,29 @@
+====== loadINI ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadINI]] | never | Work in progress |
+
+Loads an INI formatted string into the registry. If the namespace is not specified, the data will be loaded into the default namespace.
+
+===== Syntax =====
+boolean loadINI	( **$data**, **$namespace** )
+
+| **$data** | string | is a string containing the INI data to load. |
+| **$namespace** | string | is a string specifying the namespace into which to load the data. This parameter is optional and if omitted defaults to the default namespace. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+jimport('joomla.filesystem.file');
+$data = JFile::read( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.ini' );
+$registry->loadINI( $data );
+echo "The registry value is: " . $registry->getValue( 'com_document.ADMINISTRATOR' );
+</code>
+might produce:
+<code php|Result>
+The registry value is: administrator
+</code>
+
+
+----
+
+~~DISCUSSION~~

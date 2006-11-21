@@ -1,0 +1,66 @@
+====== loadAssocList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadAssocList]] | never | Work in progress |
+
+Loads an associative list of database rows. If the $key parameter is set, the specified field will be used as the index for the array. Otherwise, sequential numbering will be used for the array.
+
+===== Syntax =====
+array loadAssocList	( **$key** )
+
+| **$key** | string | is a string containing the name of a field in the query to be used as the array index (key). This paramter is optional and if omitted the entries will be numbered sequentially. |
+
+===== Examples =====
+<code php|Example>
+$dbo =& JFactory::getDBO();
+
+$query = "SELECT bid, name, clickurl FROM #__banner";
+$dbo->setQuery( $query );
+$row =& $dbo->loadAssocList( 'bid' );
+print_r( $row );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [1] => Array
+        (
+            [bid] => 1
+            [name] => OSM 1
+            [clickurl] => http://www.opensourcematters.org
+        )
+
+    [2] => Array
+        (
+            [bid] => 2
+            [name] => OSM 2
+            [clickurl] => http://www.opensourcematters.org
+        )
+
+    [3] => Array
+        (
+            [bid] => 3
+            [name] => Joomla!
+            [clickurl] => http://www.joomla.org
+        )
+
+    [4] => Array
+        (
+            [bid] => 4
+            [name] => Joomla! Forge
+            [clickurl] => http://forge.joomla.org
+        )
+
+    [5] => Array
+        (
+            [bid] => 5
+            [name] => Joomla! Extensions
+            [clickurl] => http://extensions.joomla.org
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

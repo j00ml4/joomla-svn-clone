@@ -1,0 +1,33 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JButton|{{http://api.joomla.org/media/images/Class.png }}]][[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#render|JButton->render]] | never | Internal review |
+
+Renders the button. Retrieves the results from the [[JButton-fetchButton|fetchButton()]] method and encloses it in a <td> tag with an 'id' attribute that is retrieved from the [[JButton-fetchId|fetchId()]] method.
+
+===== Syntax =====
+void render	( **&$definition** )
+
+| **&$definition** | array | is an array that contains parameters used to call the [[JButton-fetchButton|fetchButton()]] and [[JButton-fetchId|fetchId()]] methods. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Standard' );
+$params = array( 'Standard', 'send', 'Activate', 'activate', false );
+echo $button->render( $params );
+</code>
+might produce:
+<code php|Result>
+<td class="button" id="My ToolBar-send">
+
+<a onclick="javascript:submitbutton('activate')" class="toolbar">
+<div class="icon-32-send" title="Activate" type="Standard">
+</div>
+Activate
+</a>
+</td>
+</code>
+
+----
+
+~~DISCUSSION~~

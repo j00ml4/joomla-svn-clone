@@ -1,0 +1,25 @@
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->get]] | never | Work in progress |
+
+Gets a metadata language property.
+
+===== Syntax =====
+mixed get ( **$property**, **$default** )
+
+| **$property** | string | is a string containing the name of the property to retrieve. |
+| **$default** | mixed | is a variable containing the default value to return if the property is not set. |
+
+===== Examples =====
+<code php|Example>
+$german = JLanguage::getInstance( 'de-DE' );
+echo $german->get( 'name' );
+</code>
+might produce:
+<code php|Result>
+German (Deutschland)
+</code>
+
+----
+
+~~DISCUSSION~~

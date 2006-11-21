@@ -1,0 +1,34 @@
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#delete|JFile->delete]] | 11 Apr 2006 | Published |
+
+Delete a file or array of files. If FTP is enabled and safe mode is on or the file(s) are unwritable by the web server user, then the function will use FTP to delete the file(s). Otherwise, the function will use the PHP [[http://www.php.net/unlink|unlink]] function. The function returns true if all files were deleted. Otherwise, it returns false.
+
+===== Syntax =====
+boolean delete	( **$file** )
+| **$file** | mixed | is a string or an array of strings that contains the file name or an array of file names. |
+
+===== Examples =====
+Example 1: This example deletes a file.
+<code php|Example 1>
+if (JFile::delete( 'images/stories/clock_copy.jpg' )) {
+    echo "<h3>File(s) Successfully Deleted</h3>";
+} else {
+    echo "<h3>Could not delete one or more files</h3>";
+}
+</code>
+
+Example 2: This example deletes two files.
+<code php|Example 2>
+$files = array( 'images/stories/clock_copy1.jpg', 'images/stories/clock_copy2.jpg' );
+
+if (JFile::delete( $files )) {
+    echo "<h3>File(s) Successfully Deleted</h3>";
+} else {
+    echo "<h3>Could not delete one or more files</h3>";
+}
+</code>
+
+----
+
+~~DISCUSSION~~

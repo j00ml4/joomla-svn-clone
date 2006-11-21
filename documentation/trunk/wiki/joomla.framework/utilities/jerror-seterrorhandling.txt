@@ -1,0 +1,35 @@
+====== setErrorHandling ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->setErrorHandling]] |
+
+This sets the way that patErrorManager will handle the different error levels. Use this method if you wish to override the default settings.
+Error handling modes:
+  * ignore
+  * trigger
+  * verbose
+  * echo
+  * callback
+  * die
+  * store
+You may also set the error handling for several modes at once using PHP's bit operations.
+
+This function returns true on success, a patError object otherwise.
+
+===== Syntax =====
+mixed setErrorHandling	( **$level**, **$mode**, **$options** )
+| **$level** | int | is an integer containing the error level for which to set the error handling (see constants above). |
+| **$mode** | string | is a string containing the mode to use for the error handling. |
+| **$options** | mixed | is a variable containing any options that might be needed for the given mode. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+JError::setErrorHandling( E_ERROR, 'echo' );
+JError::setErrorHandling( E_NOTICE | E_WARNING, 'verbose' );
+JError::setErrorHandling( E_ALL ^ E_ERROR );
+JError::raise( E_ERROR, '6000', 'File access error!' );
+</code>
+might produce:
+<code php|Result>
+jos-Error: File access error!
+</code>
+where without the call to JError::setErrorHandling, raising this error would have killed the application.

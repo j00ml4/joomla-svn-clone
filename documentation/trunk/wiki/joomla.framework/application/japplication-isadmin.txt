@@ -1,0 +1,28 @@
+====== isAdmin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->isAdmin]] | never | Work in progress |
+
+Returns a boolean value specifying whether or not the current page is being loaded from the administrator interface.
+
+===== Syntax =====
+boolean isAdmin ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+if ($mainframe->isAdmin()) {
+    echo "We are in the administrator interface!";
+} else {
+    echo "We are not in the administrator interface!";
+}
+</code>
+might produce
+<code php|Result>
+We are not in the administrator interface!
+</code>
+
+----
+
+~~DISCUSSION~~
+

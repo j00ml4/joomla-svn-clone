@@ -1,0 +1,26 @@
+====== nameQuote ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->nameQuote]] | never | Work in progress |
+
+Quotes an identifier such as a database table name, field name, etc., using database-specific quote marks.
+
+===== Syntax =====
+string nameQuote ( **$s** )
+
+| **$s** | string | is a string to be quoted using the database-specific quotes. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+echo $database->NameQuote( 'myTable' );
+</code>
+might produce:
+<code php|Result>
+`myTable`
+</code>
+
+----
+
+~~DISCUSSION~~
+

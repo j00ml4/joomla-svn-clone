@@ -1,0 +1,30 @@
+====== setValue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->setValue]] | never | Work in progress |
+
+Sets a registry value. The registry values are stored in a tree based structure. Levels of the tree are separated by a '.'. 
+
+===== Syntax =====
+mixed setValue	( **$regpath**, **$value** )
+
+| **$regpath** | string | is a string containing the path of the value to be set. |
+| **$value** | mixed | is the value to assign to the registry setting. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'joomla' );
+$registry->setValue( 'joomla.content.showauthor', true );
+$registry->setValue( 'joomla.debug', false );
+$registry->setValue( 'joomla.limit', 25 );
+echo "The value is: " . $registry->getValue( 'joomla.content.showauthor' );
+</code>
+might produce:
+<code php|Result>
+The value is: 1
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

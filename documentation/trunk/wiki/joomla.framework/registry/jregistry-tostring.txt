@@ -1,0 +1,35 @@
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->toString]] | never | Work in progress |
+
+Transforms a namespace to a specified string format. If the namespace is not specified, the default namespace is used.
+
+===== Syntax =====
+string toString	( **$format**, **$namespace**, **$params** )
+
+| **$format** | string | is a string specifying the format in which to return the string. This can be 'INI', 'XML' or 'PHP'. |
+| **$namespace** | string | is a string specifying the namespace to return. This parameter is optional and if omitted defaults to the default namespace. |
+| **$params** | array | is an associative array of parameters that are used by the formatter. See the [[JRegistryFormat|JRegistryFormat]] classes for more information. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+$registry->setValue( 'joomla.content.showauthor', true );
+$registry->setValue( 'joomla.debug', 'yes' );
+print_r( $registry->toString( 'XML', 'joomla' ) );
+</code>
+might produce:
+<code php|Result>
+<?xml version="1.0" ?>
+
+<config>
+	<group name="content">
+		<entry name="showauthor">1</entry>
+	</group>
+	<entry name="debug">yes</entry>
+</config>
+</code>
+
+----
+
+~~DISCUSSION~~

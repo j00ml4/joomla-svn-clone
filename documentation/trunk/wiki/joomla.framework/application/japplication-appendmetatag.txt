@@ -1,0 +1,28 @@
+====== appendMetaTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->appendMetaTag]] | never | Work in progress |
+
+Adds a meta tag to the head block of the current document. This method is deprecated in Joomla! 1.5 (JDocument->setMetaData should be used instead).
+
+===== Syntax =====
+void appendMetaTag	( **$name**, **$content** )
+
+| **$name** | string | is a string containing the name of the meta tag to add to the document. |
+| **$content** | string | is a string containing the content to add to the meta tag. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$mainframe->appendMetaTag( "metatagname", "metatagcontent" );
+</code>
+will insert the following meta tag into the head block of the current document:
+<code php|Result>
+<meta name="metatagname" content="metatagcontent" />
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

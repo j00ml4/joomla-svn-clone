@@ -1,0 +1,21 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#check|JPath->check]] | 27 Apr 2006 | Published |
+
+Checks for snooping outside of the file system root. This prevents paths being used which either use .. to move up the folder tree or paths which do not start at JPATH_ROOT. This method does not return a value but will raise an error using the [[references:Joomla.Framework:utilities:JError|JError]] class if there is a problem with the path.
+
+===== Syntax =====
+void check	( **$path** )
+| **$path** | string | is a string containing a file system path to check. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.path' );
+
+JPath::check( '/../../../test.html' );
+</code>
+will produce an error.
+
+----
+
+~~DISCUSSION~~

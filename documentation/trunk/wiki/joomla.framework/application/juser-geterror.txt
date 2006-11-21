@@ -1,0 +1,11 @@
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla-Framework/Application/JUser.html|JUser->getError]] |
+
+Method to get JUser error message
+===== Syntax =====
+string getError ()
+
+===== Examples =====
+
+

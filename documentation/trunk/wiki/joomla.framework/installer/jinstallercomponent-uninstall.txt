@@ -1,0 +1,24 @@
+====== uninstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerComponent|JInstallerComponent]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerComponent.html|JInstallerComponent->uninstall]] | never | Work in progress |
+
+Custom uninstall method for components. The uninstall method performs the following actions:
+  * finds and loads the XML install file for the component
+  * executes the uninstall file if it exists
+  * executes queries specified in SQL uninstall file
+  * removes files
+  * removes installation directory
+  * removes menu items
+
+This method returns true on success, false otherwise.
+
+===== Syntax =====
+mixed uninstall	( **$id**, **$client** )
+
+| **$id** | integer | is an integer containing the id of the component to uninstall. |
+| **$client** | integer | is an integer containing the client id. This parameter is optional and if omitted, defaults to null. This parameter is not used. |
+
+
+----
+
+~~DISCUSSION~~

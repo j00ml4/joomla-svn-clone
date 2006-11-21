@@ -1,0 +1,16 @@
+====== execRenderer ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->execRenderer]] |
+
+This function executes a renderer. It is called by the [[jdocument#display|display]] function to render the document and display it. It returns the output of the renderer.
+===== Syntax =====
+string execRenderer ( **$type**, **$name**, **$params** )
+| **$type** | string | is a string containing the type of renderer to execute. |
+| **$name** | string | is a string containing the name of the element to render |
+| **$params** | array | is an associative array of parameters to pass to the renderer. This parameter is optional and if omitted defaults to an empty array. |
+
+===== Examples =====
+The [[jdocument#display|display]] function calls the execRenderer function as follows:
+<code php|Example>
+$html = $this->execRenderer($type, $name, array('outline' => $outline));
+</code>

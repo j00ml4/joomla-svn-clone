@@ -1,0 +1,27 @@
+====== str_split ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->str_split]] | never | Work in progress |
+
+Convert a string to an array. See See [[http://www.php.net/manual/en/function.str_split.php|str_split]] for more information.
+
+===== Syntax =====
+array str_split	( **$str**, **$split_len** )
+
+| **$str** | string | is the string to split. |
+| **$split_len** | integer | is an integer specifying the number of characters to split the string by. |
+
+===== Examples =====
+<code php|Example>
+$string = "Και Εισηλθεν Παλιν Εις";
+echo "$string split into groups of 3 produces: <br />";
+print_r( JString::str_split( $string, 3 ) );
+</code>
+might produce:
+<code php|Result>
+Και Εισηλθεν Παλιν Εις split into groups of 3 produces:
+Array ( [0] => Και [1] => Ει [2] => σηλ [3] => θεν [4] => Πα [5] => λιν [6] => Ει [7] => ς )
+</code>
+
+----
+
+~~DISCUSSION~~

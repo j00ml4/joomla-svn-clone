@@ -1,0 +1,31 @@
+====== create ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFolder|{{http://api.joomla.org/media/images/Class.png }}]][[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#create|JFolder->create]] | 26 Apr 2006 | Published |
+
+Creates a folder and all necessary parent folders. Thus, if invoked to create a folder called 'level1/level2/level3/newfolder' it will create the 'level1', 'level2' and 'level3' folders if they do not exist and will then create the 'newfolder' folder.
+If safe mode is enabled, FTP will be used to create the folder (if it is enabled).
+This method will not create a folder if the 'open_basedir' parameter is set and the specified folder is not in the allowed base folder.
+This function returns true on success, false otherwise.
+
+===== Syntax =====
+boolean create	( **$path**, **$mode** )
+| **$path** | string | is a string containing the path to create, relative to the base path. |
+| **$mode** | int | is an integer containing the folder permissions to set for created folders. These permissions follow UNIX [[http://en.wikipedia.org/wiki/File_system_permissions|file permission]] standards. This parameter is optional and if omitted defaults to 0755. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.folder' );
+if (JFolder::create( 'test2/test' )) {
+    echo "Folder successfully created!";
+} else {
+    echo "Folder creation failed!";
+}
+</code>
+might produce:
+<code php|Result>
+Folder successfully created!
+</code>
+
+----
+
+~~DISCUSSION~~

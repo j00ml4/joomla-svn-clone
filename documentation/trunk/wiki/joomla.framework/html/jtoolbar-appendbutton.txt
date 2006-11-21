@@ -1,0 +1,39 @@
+====== appendButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->appendButton]] | never | Work in progress |
+
+Appends a button to the end of the toolbar. The first parameter to this method is the button type.  The rest of the parameters are contingent on the parameters of the particular button's render method (the parameters passed to the appendButton method are passed to the button's render method, which in turn passes them to the fetchId and fetchButton methods).
+
+===== Syntax =====
+string appendButton	( **$type** )
+
+| **type** | string | is a string containing the type of button to append. |
+See the [[JButton|JButton]] class and its descendants for more information about the parameters for this method.
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My Toolbar' );
+$bar->appendButton( 'Standard', 'send', 'Activate', 'activate', false );
+echo $bar->render();
+</code>
+might produce:
+<code php|Result>
+<div class="toolbar" id="My Toolbar">
+
+<table class="toolbar"><tr>
+<td class="button" id="My Toolbar-send">
+<a onclick="javascript:submitbutton('activate')" class="toolbar">
+<div class="icon-32-send" title="Activate" type="Standard">
+</div>
+Activate
+</a>
+</td>
+
+</tr></table>
+</div>
+</code>
+
+----
+
+~~DISCUSSION~~
+

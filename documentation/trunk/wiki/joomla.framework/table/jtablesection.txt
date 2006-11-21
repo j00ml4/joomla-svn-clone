@@ -1,0 +1,34 @@
+====== JTableSection ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection]] | never | Work in progress |
+
+The JTableSection class is an implementation of the JTable interface which provides access to the sections table. This implementation provides a data verification method to check the integrity of the data.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableSection-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSection-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableSection-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSection-check|check]] | verifies that the current data is structurally sound. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$title** | is a string that contains the title of the section (a short name). |
+| **$name** | is a string that contains the full name of the section (longer). |
+| **$image** | is a string that contains the name of the image that is associated with the section. |
+| **$scope** | is a string that contains the scope of the section. For articles, this is 'content'. |
+| **$image_position** | is a string that specifies the position in which the image should be displayed. |
+| **$description** | is a string that contains the description of the section. |
+| **$published** | is a boolean value indicating whether or not the section is published. |
+| **$checked_out** | is a boolean value indicating whether or not the section is checked out. |
+| **$checked_out_time** | is a date/time variable indicating the time that the section was checked out. |
+| **$ordering** | is an integer that contains the order number of the section. |
+| **$access** | is an integer that indicates who has access to the section. |
+| **$count** | is an integer containing the number of categories in the section. |
+| **$params** | is a string that contains the parameters for the section. |
+
+
+
+----
+
+~~DISCUSSION~~
+

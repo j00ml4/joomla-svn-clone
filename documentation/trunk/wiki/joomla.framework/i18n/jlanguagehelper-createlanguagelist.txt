@@ -1,0 +1,89 @@
+====== createLanguageList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguageHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguageHelper|JLanguageHelper]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguageHelper.html|JLanguageHelper->createLanguageList]] | never | Work in progress |
+
+Builds a list of the system languages which can be used in a select option. The results are returned in an array of associate arrays with three fields: text, value, and selected.
+
+===== Syntax =====
+void createLanguageList	( **$actualLanguage**, **$basePath** )
+
+| **$actualLanguage** | string | is a string containing the language that should be selected. |
+| **$basePath** | string | is a string containing the base path to use. This parameter is optional and if omitted defaults to JPATH_BASE. |
+
+===== Examples =====
+<code php|Example>
+$language =& JFactory::getLanguage();
+$languages = JLanguageHelper::createLanguageList( $language->getTag(), JPATH_BASE . DS . 'installation' );
+print_r( $languages );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => Array
+        (
+            [text] => Danish (Denmark)
+            [value] => da-DK
+        )
+
+    [1] => Array
+        (
+            [text] => German (Deutschland)
+            [value] => de-DE
+        )
+
+    [2] => Array
+        (
+            [text] => English (United Kingdom)
+            [value] => en-GB
+            [selected] => selected="true"
+        )
+
+    [3] => Array
+        (
+            [text] => Finnish (Suomi)
+            [value] => fi-FI
+        )
+
+    [4] => Array
+        (
+            [text] => French (Fr)
+            [value] => fr-FR
+        )
+
+    [5] => Array
+        (
+            [text] => Hebrew (Israel)
+            [value] => he-IL
+        )
+
+    [6] => Array
+        (
+            [text] => Croatian (Croatia)
+            [value] => hr-HR
+        )
+
+    [7] => Array
+        (
+            [text] => Italian (Italy)
+            [value] => it-IT
+        )
+
+    [8] => Array
+        (
+            [text] => Norwegian bokmal (Norway)
+            [value] => nb-NO
+        )
+
+    [9] => Array
+        (
+            [text] => Português (Portugal)
+            [value] => pt-PT
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~

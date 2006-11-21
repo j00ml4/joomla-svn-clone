@@ -1,0 +1,22 @@
+====== hasErrors ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->hasErrors]] |
+
+Checks to see if any errors have been stored.
+===== Syntax =====
+array hasErrors ()
+
+===== Examples =====
+<code php|Example>
+JError::setErrorHandling( E_ALL, 'store' );
+JError::raiseNotice( '253', 'THIS IS A TEST!' );
+if (JERROR::hasErrors()) {
+    echo "An error has occurred!";
+} else {
+    echo "The coast is clear!";
+}
+</code>
+might produce:
+<code php|Result>
+An error has occurred!
+</code>

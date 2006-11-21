@@ -1,0 +1,24 @@
+====== update ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableSession|{{http://api.joomla.org/media/images/Class.png }}]][[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->update]] | never | Work in progress |
+
+Updates the time of the current session. This will set the time field of the session to the current time. The $updateNulls parameter currently has no effect.
+
+===== Syntax =====
+void update	( **$updateNulls** )
+
+| **$updateNulls** | boolean | is a boolean that specifies whether or not null values should be updated. This parameter currently has no effect. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$session =& JTable::getInstance('session', $db );
+
+$session->load( 'd799af5e42df6fba1aa3068406b6aa82' );
+$session->update();
+</code>
+will update the time of the session with ID 'd799af5e42df6fba1aa3068406b6aa82'.
+
+----
+
+~~DISCUSSION~~

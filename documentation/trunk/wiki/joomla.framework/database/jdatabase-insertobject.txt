@@ -1,0 +1,39 @@
+====== insertObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->insertObject]] | never | Work in progress |
+
+Inserts a new database table row using data from an object.  Returns true if the insertion was successful; false otherwise.
+
+===== Syntax =====
+void insertObject	( **$table**, **&$object**, **$keyName**, **$verbose** )
+
+| **$table** | string | is a string containing the name of the database table. |
+| **&$object** | object | is an object containing the database fields to be inserted. Attributes that are arrays or objects, have a null value or have a name beginning with an underscore, are ignored when setting the database fields. |
+| **$keyName** | string | is a string containing the name of the primary key of the database table. If this is not null then the $keyname attribute of $object will be updated with the unique id number returned by the database insertion. This parameter is optional and if omitted defaults to null. |
+| **$verbose** | boolean | is a flag. If true then the SQL query and the unique id returned by the query are output. If false then no output is produced. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+This example inserts a new row in the Joomla users table.  Notice that the 'id' field is set to null before calling insertObject and will be updated with the unique id number allocated by the database.
+
+<code php|Example>
+$database =& JFactory::getDBO();
+$user = new stdClass;
+$user->id = NULL;
+$user->name = 'Linus Torvalds';
+$user->username = 'linus';
+ 
+if (!$database->insertObject( '#__users', $user, 'id' )) {
+  echo $database->stderr();
+}
+
+echo $user->id;
+</code>
+might produce:
+<code php|Result>
+65
+</code>
+
+----
+
+~~DISCUSSION~~
+

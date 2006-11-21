@@ -1,0 +1,35 @@
+====== parseXMLLangMetaFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->parseXMLLangMetaFile]] | never | Work in progress |
+
+Parses the XML file specified by the **$path** parameter and returns it in an object.
+
+===== Syntax =====
+void parseXMLLangMetaFile ( **$path** )
+| **$path** | string | is a string containing the path to the XML install file to parse. |
+
+===== Examples =====
+The following code parses the English (GB) language file:
+<code php|Example>
+print_r( JApplicationHelper::parseXMLLangMetaFile( JPATH_SITE . '/language/en-GB/en-GB.xml' ) );
+</code>
+which might output
+<code php|Result>
+Array
+(
+    [name] => English(United Kingdom)
+    [type] => 
+    [creationdate] => 2005-10-30
+    [author] => Joomla! Project
+    [copyright] => (C) 2005 Open Source Matters. All rights reserved.
+    [authorEmail] => admin@joomla.org
+    [authorUrl] => www.joomla.org
+    [version] => 1.5.0
+    [description] => 
+    [group] => 
+)
+</code>
+
+----
+
+~~DISCUSSION~~

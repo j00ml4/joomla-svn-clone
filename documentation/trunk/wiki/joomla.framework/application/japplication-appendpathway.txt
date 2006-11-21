@@ -1,0 +1,33 @@
+====== appendPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->appendPathWay]] | never | Work in progress |
+
+Appends an item to the pathway of the current document. A link can be associated with this item which will be displayed unless the item is the last item in the pathway. This method is deprecated in Joomla! 1.5 (JDocument->setMetaData should be used instead).
+
+===== Syntax =====
+void appendPathWay	( **$name**, **$link** )
+
+| **$name** | string | is a string containing the item to add to the pathway. |
+| **$link** | string | is a string containing a URL which the item should reference. This parameter is optional, and if omitted the item will not be linked. |
+
+===== Examples =====
+<code php|Example 1>
+global $mainframe;
+
+$mainframe->appendPathWay( "CustomPathItem1", "http://www.test1.ca" );
+</code>
+will add an item 'CustomPathItem1' to the page's pathway. This item will not be linked.
+
+<code php|Example 2>
+global $mainframe;
+
+$mainframe->appendPathWay( "CustomPathItem1", "http://www.test1.ca" );
+$mainframe->appendPathWay( "CustomPathItem2", "http://www.test2.ca" );
+</code>
+will add these two items to the page's pathway. A link will be displayed on the first item, but not on the second item.
+
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,17 @@
+====== downloadPackage ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->downloadPackage]] | never | Work in progress |
+
+Utility function to download a package from a remote location. This method returns a string containing the path to the download package if successful, false otherwise.
+
+===== Syntax =====
+str9ng downloadPackage	( **$url**, **$target** )
+
+| **$url** | string | is a string containing the URL of file to download. |
+| **$target** | string | is a string containing the download target filename. This parameter is optional and if omitted defaults to false, in which case the filename will be maintained from the source file. |
+
+
+----
+
+~~DISCUSSION~~
+

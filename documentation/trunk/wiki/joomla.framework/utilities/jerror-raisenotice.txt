@@ -1,0 +1,19 @@
+====== raiseNotice ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseNotice]] |
+
+This is a wrapper for the [[#raise|raise]] method that passes E_NOTICE as the error level. A patError object will be returned.
+===== Syntax =====
+object &raiseNotice	( **$code**, **$msg**, **$info** )
+| **$code** | string | is a string containing the application-internal error code for this error. |
+| **$msg** | string | is a string containing the error message, which may also be shown the user if need be. |
+| **$info** | mixed | is a variable containing additional error information. This should usually only be developer-relevant information that the user should not see (i.e. a database DSN). This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+JError::raiseNotice( '6000', 'File access error!' );
+</code>
+might produce:
+<code php|Result>
+jos-Notice: File access error!
+</code>

@@ -1,0 +1,16 @@
+====== JQueryElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQueryElement|JQueryElement]] | [[http://api.joomla.org/Joomla-Framework/Database/JQueryElement.html|JQueryElement->JQueryElement]] |
+
+This is the constructor for the JQueryElement class. It sets its name property, initializes an array to story each part of its element, sets its glue property, which is the string that is inserted between multiple element parts and adds the element parts that are passed to it to its element parts array.
+
+===== Syntax =====
+JQueryElement JQueryElement	( **$name**, **$elements**, **$glue** )
+| **$name** | string | is a string containing the name of the element. |
+| **$elements** | mixed | is a string containing the element part to add to the array, or an array of strings containing one or more element parts to add. |
+| **$glue** | string | is a string containing the characters to add between multiple parts (the 'glue'). This parameter is optional and if omitted defaults to ','. |
+
+===== Examples =====
+<code php|Example>
+$whereclause = new JQueryElement( 'where', array( 'a.id = 5', 'a.state = 1' ), 'AND' );
+</code>

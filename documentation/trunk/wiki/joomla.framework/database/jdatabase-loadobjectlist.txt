@@ -1,0 +1,66 @@
+====== loadObjectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObjectList]] | never | Work in progress |
+
+Returns an array of database objects using the current SQL query.  Returns false if the query fails. If the $key parameter is set, the array is indexed using the values of the field specified by key. Otherwise, the array is indexed sequentially.
+
+===== Syntax =====
+array loadObjectList ( **$key** )
+
+| **$key** | string | is a string containing the field name of a primary key. This parameter is optional and if omitted the returned array will be ordered sequentially. |
+
+===== Examples =====
+<code php|Example>
+$dbo =& JFactory::getDBO();
+
+$query = "SELECT bid, name, clickurl FROM #__banner";
+$dbo->setQuery( $query );
+$row =& $dbo->loadObjectList();
+print_r( $row );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => stdClass Object
+        (
+            [bid] => 1
+            [name] => OSM 1
+            [clickurl] => http://www.opensourcematters.org
+        )
+
+    [1] => stdClass Object
+        (
+            [bid] => 2
+            [name] => OSM 2
+            [clickurl] => http://www.opensourcematters.org
+        )
+
+    [2] => stdClass Object
+        (
+            [bid] => 3
+            [name] => Joomla!
+            [clickurl] => http://www.joomla.org
+        )
+
+    [3] => stdClass Object
+        (
+            [bid] => 4
+            [name] => Joomla! Forge
+            [clickurl] => http://forge.joomla.org
+        )
+
+    [4] => stdClass Object
+        (
+            [bid] => 5
+            [name] => Joomla! Extensions
+            [clickurl] => http://extensions.joomla.org
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

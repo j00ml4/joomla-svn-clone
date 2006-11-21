@@ -1,0 +1,37 @@
+====== toInteger ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#tointeger|JArrayHelper->toInteger]] | never | Internal review |
+
+Converts an array to integer values. This method only works on numbered arrays. Any named values will be untouched.
+
+===== Syntax =====
+array toInteger	( **&$array**, **$default** )
+
+| **$array** | array | is the source array to convert. |
+| **$default** | integer | is an integer containing the default value to assign if $array is not an array. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+$example = array (
+    '23.6', 29, '-21E5', 'test', 'key' => '205.3'
+);
+JArrayHelper::toInteger( $example );
+print_r( $example );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => 23
+    [1] => 29
+    [2] => -21
+    [3] => 0
+    [key] => 205.3
+    [4] => 0
+)
+</code>
+Numbered array indexes will be created for values that have named keys.
+
+----
+
+~~DISCUSSION~~

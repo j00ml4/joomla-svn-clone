@@ -1,0 +1,14 @@
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework//JObservable.html|JObservable->__construct]] |
+
+This is the class contructor. It initiates the list of observers to an empty array.
+
+===== Syntax =====
+JObservable <nowiki>__construct</nowiki> ()
+
+===== Examples =====
+The [[references:joomla.framework:application:jeventdispatcher#getInstance|JEventDispatcher::getInstance]] member instantiates its class. The following code is used:
+<code php|Example>
+$instances[0] = new JEventDispatcher();
+</code>

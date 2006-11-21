@@ -1,0 +1,23 @@
+====== registerEvent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->registerEvent]] | never | Work in progress |
+
+Registers a handler to a particular event group. This method is used to attach an event handler object or function to a particular event.
+
+===== Syntax =====
+void registerEvent	( **$event**, **$handler** )
+
+| **$event** | string | is a string containing the name of the event to which to register the handler. |
+| **$handler** | string | is a string containing the name of the function that contains the handler, or the name of an object that extends the JObserver class (i.e. a JPlugin object). |
+
+===== Examples =====
+The 'vote' plugin calls this method as follows (this code is not called from within a function so the $mainframe object is in scope:
+<code php|Example>
+$mainframe->registerEvent( 'onBeforeDisplayContent', 'pluginVote' );
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,19 @@
+====== search ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP->search]] | never | Work in progress |
+Perform an LDAP search
+===== Syntax =====
+array search	( **$filters**, **$dnoverride** )
+
+| **$filters** | array | Search Filters (array of strings) |
+| **$dnoverride** | string | DN Override |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

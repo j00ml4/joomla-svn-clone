@@ -1,0 +1,41 @@
+====== objectToString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormatPHP|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->objectToString]] | never | Work in progress |
+
+Converts an object into a php class string. It should be noted that only one depth in the object is supported. If two levels are required, INI format or XML format should be used. If more than two levels are required, XML format should be used.
+
+There is one parameter that is specified in the $params array. This is 'class'. This specifies the name of the PHP class to use.
+
+===== Syntax =====
+string objectToString	( **&$object**, **$params** )
+
+| **$object** | object | is the object to be converted. |
+| **$param** | array | is an associative array containing the parameters for the conversion. This method uses only one parameter, which is 'class'. This parameter specifies the name of the PHP class to use. |
+
+===== Examples =====
+<code php|Example>
+$phpFormat =& JRegistryFormat::getInstance( 'PHP' );
+
+$object = new stdClass();
+$object->name = 'Joe Smith';
+$object->title = 'President';
+$object->city = 'Toronto';
+
+$params = array( 'class' => 'Employee' );
+
+echo $phpFormat->objectToString( $object, $params ); 
+</code>
+might produce:
+<code php|Result>
+<?php
+class Employee {
+	var $name = 'Joe Smith';
+	var $title = 'President';
+	var $city = 'Toronto';
+}
+?>
+</code>
+
+----
+
+~~DISCUSSION~~

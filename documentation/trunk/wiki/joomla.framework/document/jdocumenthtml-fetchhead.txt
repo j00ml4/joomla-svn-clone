@@ -1,0 +1,26 @@
+====== fetchHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->fetchHead]] |
+
+Generates the head HTML and return the results as a string.
+===== Syntax =====
+string fetchHead ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+echo $document->fetchHead();
+</code>
+might produce:
+<code php|Result>
+<title></title>
+<base href="http://127.0.0.1/joomla11/" />
+<meta name="Generator" content="Joomla! - Copyright (C) 2005 Open Source Matters. All rights reserved." />
+<meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+<meta name="keywords" content="joomla, Joomla" />
+<meta name="robots" content="index, follow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</code>

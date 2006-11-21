@@ -1,0 +1,40 @@
+====== objectToString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormatXML|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatXML|JRegistryFormatXML]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML->objectToString]] | never | Work in progress |
+
+Converts an object into an XML formatted string. The $params array is not used in this implementation.
+
+===== Syntax =====
+string objectToString ( **&$object**, **$params** )
+
+| **$object** | object | is the object to be converted. |
+| **$param** | array | is an associative array of parameters used by the formatter. This formatter class does not use any parameters. |
+
+===== Examples =====
+<code php|Example>
+$xmlFormat =& JRegistryFormat::getInstance( 'XML' );
+
+$object = new stdClass();
+$object->name = 'Joe Smith';
+$object->title = 'President';
+$object->city = 'Toronto';
+
+$params = array();
+
+echo $xmlFormat->objectToString( $object, $params );
+</code>
+might produce:
+<code php|Result>
+<?xml version="1.0" ?>
+
+<config>
+	<entry name="name">Joe Smith</entry>
+	<entry name="title">President</entry>
+	<entry name="city">Toronto</entry>
+</config>
+</code>
+
+
+----
+
+~~DISCUSSION~~

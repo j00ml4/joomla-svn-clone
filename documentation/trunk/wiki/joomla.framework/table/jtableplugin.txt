@@ -1,0 +1,31 @@
+====== JTablePlugin ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTablePlugin.html|JTablePlugin]] | never | Work in progress |
+
+The JTableMenu class is an implementation of the JTable interface which provides access to the modules table. This implementation provides a customized bind method to handle parameters for the params field.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTablePlugin-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTablePlugin-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTablePlugin-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTablePlugin-bind|bind]] | overloaded bind method that provides parameter handling. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$name** | is a string containing the name of the plugin. |
+| **$element** | is a string containing the name of the element used in the article content (e.g. image for {IMAGE}). |
+| **$folder** | is a string containing the name of the folder in which the plugin is stored. |
+| **$access** | is an integer containing the access parameters for the plugin. |
+| **$ordering** | is an integer containing the order of the entry in the plugin. |
+| **$published** | is a boolean value indicating whether or not the plugin is published. |
+| **$iscore** | is a boolean value that specifies whether or not the plugin is a 'core' plugin. Core plugins are a subset of the plugins that are packaged with the Joomla! system that are integral to the operation of the system. |
+| **$client_id** | is an integer containing the client ID for the plugin. |
+| **$checked_out** | is a boolean value indicating whether or not the plugin is checked out. |
+| **$checked_out_time** | is a date/time variable indicating the time that the plugin was checked out. |
+| **$params** | is a string containing the configuration parameters for the plugin. |
+
+
+----
+
+~~DISCUSSION~~
+

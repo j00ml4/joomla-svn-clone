@@ -1,0 +1,15 @@
+====== ErrorNo ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->ErrorNo]] | never | Work in progress |
+
+ADODB compatability function. See [[http://phplens.com/adodb/reference.functions.errorno.html#errno]] for more information.
+
+===== Syntax =====
+void ErrorNo ()
+
+
+----
+
+~~DISCUSSION~~
+
+

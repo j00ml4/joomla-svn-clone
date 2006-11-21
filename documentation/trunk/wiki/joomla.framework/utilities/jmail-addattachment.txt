@@ -1,0 +1,13 @@
+====== addAttachment ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Mail|Mail]] | [[JArchive|{{http://api.joomla.org/media/images/Class.png }}]][[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#addAttachment|JMail->addAttachment]] | Never | Work in progress | 
+
+Use this class if you want to attach one or more files to an e-mail. Look up ([[http://en.wikipedia.org/wiki/E-mail_attachment|E-mail Attachment]])
+===== Syntax =====
+void addAttachment(**$attachment**) 
+| **$attachment** | mixed | Either a string or array of strings [filenames] |.|
+
+===== Examples =====
+TODO
+
+~~DISCUSSION~~

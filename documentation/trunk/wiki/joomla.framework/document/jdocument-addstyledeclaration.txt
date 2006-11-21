@@ -1,0 +1,36 @@
+====== addStyleDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addStyleDeclaration]] |
+
+Adds a stylesheet declaration to the page.
+===== Syntax =====
+void addStyleDeclaration	( **$content**, **$type** )
+| **$content** | string | is a string containing the style declarations. |
+| **$type** | string | is a string containing the type of style. This parameter is optional and if omitted defaults to 'text/css'. |
+
+===== Examples =====
+This example adds a style declaration to the page.
+<code php|Example>
+global $mainframe;
+
+$style = "body {"
+        . "\n margin: 0px 0px 0px 0px;"
+        . "\n height: 100%;"
+        . "\n font-size: 76%;"
+        . "\n}";
+
+$document = &$mainframe->getDocument();
+$document->addStyleDeclaration( $style );
+</code>
+Might add the following code to the head block of the current page:
+<code php|Result>
+<style type="text/css">
+<!--
+    body {
+        margin: 0px 0px 0px 0px;
+        height: 100%;
+        font-size: 76%;
+    }
+-->
+</style>
+</code>

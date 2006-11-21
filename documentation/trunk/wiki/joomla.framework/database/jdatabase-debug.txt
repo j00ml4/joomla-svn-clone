@@ -1,0 +1,23 @@
+====== debug ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->debug]] | never | Work in progress |
+
+Sets the debug level on or off. If debug mode is set, then each query will be logged and error messages will be displayed.
+
+===== Syntax =====
+void debug	( **$level** )
+
+| **$level** | integer | is an integer that specifies whether or not debugging should be turned. A value of 1 will turn debugging on, a value of 0 will turn it off. |
+
+===== Examples =====
+The following example will turn debugging on.
+<code php|Example>
+$dbo = JFactory::getDBO();
+$dbo->debug( 1 );
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

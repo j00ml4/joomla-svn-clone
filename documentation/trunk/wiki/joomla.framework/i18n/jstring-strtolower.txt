@@ -1,0 +1,24 @@
+====== strtolower ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strtolower]] | never | Work in progress |
+
+Makes a string lowercase. Note: The concept of a characters "case" only exists in some alphabets such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See [[http://www.unicode.org/reports/tr21/tr21-5.html|Unicode Standard Annex #21: Case Mappings]]. See [[http://www.php.net/manual/en/function.strtolower.php|strtolower]] for more information.
+
+===== Syntax =====
+string strtolower ( **$str** )
+
+| **$str** | string | is the string to convert to lower case. |
+
+===== Examples =====
+<code php|Example>
+$string = "Και Εισηλθεν Παλιν Εις";
+echo "The string $string converted to lower case is " . JString::strtolower( $string ) . ".";
+</code>
+might produce:
+<code php|Result>
+The string Και Εισηλθεν Παλιν Εις converted to lower case is και εισηλθεν παλιν εις.
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,16 @@
+====== JAuthenticate ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JAuthenticate.html|JAuthenticate]] | 19 September 2006 | Published |
+
+An authorisation class which provides an interface to the Joomla! authentication system.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JAuthenticate-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JAuthenticate-__construct|__construct]] | Constructor. |
+| [[JAuthenticate-authenticate|{{http://api.joomla.org/media/images/Method.png }}]] [[JAuthenticate-authenticate|authenticate]] | Finds out if a set of login credentials are valid by asking all observing objects to run their respective authentication routines. |
+| [[JAuthenticate-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JAuthenticate-getInstance|getInstance]] | Returns a reference to a global authentication object, only creating it  if it doesn't already exist. |
+| [[JAuthenticate-loadPlugin|{{http://api.joomla.org/media/images/Method.png }}]] [[JAuthenticate-loadPlugin|loadPlugin]] | Static method to load an auth plugin and attach it to the [[JEventDispatcher|JEventDispatcher]] object. |
+
+----
+
+~~DISCUSSION~~

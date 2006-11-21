@@ -1,0 +1,14 @@
+====== JModelAroGroup [WIP] ======
+
+
+
+===== Methods =====
+
+==== __construct ====
+
+=== Syntax ===
+JModelAroGroup __construct	( mixed &$db )
+
+
+=== Examples ===
+

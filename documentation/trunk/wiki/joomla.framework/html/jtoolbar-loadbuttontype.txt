@@ -1,0 +1,44 @@
+====== loadButtonType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->loadButtonType]] | never | Work in progress |
+
+Loads the class for the specified button type. If the class is not defined, the method will search the include directories that have been added and attempt to load the file that contains the class definition. This method is called by the [[JToolBar-renderButton|renderButton()]] method, so should not normally need to be called.
+
+The method will look for a file with the name $type.php (i.e. if $type is Standard, the file should be standard.php).
+
+If $new is true, then the method will not try and load the class, but instead will simply return a reference to an instance of the class.
+
+The method returns a reference an instance of the class if the class exists, false otherwise.
+
+===== Syntax =====
+object &loadButtonType	( **$type**, **$new** )
+
+| **$type** | string | is a string containing button type. |
+| **$new** | boolean | is a boolean value specifying whether the type is new. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Standard' );
+    
+if ($button != false) {
+    $params = array( 'Standard', 'send', 'Activate', 'activate', false );
+    echo $button->render( $params );
+}
+</code>
+might produce:
+<code php|Result>
+<td class="button" id="My ToolBar-send">
+
+<a onclick="javascript:submitbutton('activate')" class="toolbar">
+<div class="icon-32-send" title="Activate" type="Standard">
+</div>
+Activate
+</a>
+</td>
+</code>
+
+----
+
+~~DISCUSSION~~
+

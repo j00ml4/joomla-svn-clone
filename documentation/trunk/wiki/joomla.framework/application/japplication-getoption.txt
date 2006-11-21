@@ -1,0 +1,25 @@
+====== getOption ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getOption]] | never | Work in progress |
+
+Return the application option string. The option string contains the name of the main page component.
+
+===== Syntax =====
+string getOption ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getOption();
+</code>
+might produce:
+<code php|Result>
+com_contact
+</code>
+if the contact component was currently being executed.
+
+----
+
+~~DISCUSSION~~
+

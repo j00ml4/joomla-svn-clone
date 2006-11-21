@@ -1,0 +1,21 @@
+====== addScript ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScript]] |
+
+Adds a linked script to the page
+===== Syntax =====
+void addScript	( **$url**, **$type** )
+| **$url** | string | is a string containing the URL to the linked script. |
+| **$type** | string | is a string containg the type of script. This parameter is optional and if omitted defaults to 'text/javascript'. |
+
+===== Examples =====
+The following example adds a linked script to the header of the current document.
+<code php|Example>
+global $mainframe;
+$document = &$mainframe->getDocument();
+$document->addScript( $mainframe->getBaseURL() . 'includes/js/overlib_mini.js' );
+</code>
+Might add the following to the head tag:
+<code php|Result>
+<script type="text/javascript" src="http://127.0.0.1/joomla11/includes/js/overlib_mini.js"></script>
+</code>

@@ -1,0 +1,30 @@
+====== JTableSession ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession]] | never | Work in progress |
+
+The JTableSession class is an implementation of the JTable interface which provides access to the session table. This implement provides methods ti insert sessions, purge old sessions and to update sessions.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableSession-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key and initializes session variables. |
+| [[JTableSession-destroy|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-destroy|destroy]] | destroys the persisting session by removing the record from the table. |
+| [[JTableSession-insert|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-insert|insert]] | inserts a new session into the table. |
+| [[JTableSession-purge|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-purge|purge]] | purges old sessions from the table. |
+| [[JTableSession-update|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-update|update]] | updates the session time field. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$session_id** | is a string containing a unique identifier for the session. |
+| **$time** | is a string containing the time that the session was last accessed. |
+| **$userid** | is an integer containing a reference to a user ID from the users table. |
+| **$usertype** | is a string containing the usertype that belongs to the session. |
+| **$username** | is a string containing the username of the session user. |
+| **$gid** | is an integer containing the group ID of the session user. |
+| **$guest** | is a boolean specifying whether or not the session user is a guest. |
+| **$client_id** | is an integer specifying which client the user is accessing. |
+
+
+----
+
+~~DISCUSSION~~
+

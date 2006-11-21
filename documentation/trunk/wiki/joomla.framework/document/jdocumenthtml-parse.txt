@@ -1,0 +1,20 @@
+====== parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->parse]] |
+
+Parse a document template. This method will read and parse the specified document template file. By default, it will parse the index.php file located in the $template subdirectory in 'templates'.
+===== Syntax =====
+void parse	( **$template**, **$filename**, **$directory** )
+| **$template** | string | is a string containing the name of the template to look for the file. |
+| **$filename** | string | is a string containing the actual filename of the template. This parameter is optional and if omitted defaults to 'index.php'. |
+| **$directory** | string | is a string containing the directory in which to look for the template. This parameter is optional and if omitted defaults to 'templates'. |
+
+===== Examples =====
+The 'rhuk_milkyway' document template in the core installation would be loaded in the following way:
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->parse( 'rhuk_milkyway' );
+</code>
+Templates are stored in the /templates directory using a subdirectory that is the name of the template. Therefore, this function will, by default, parse the file /templates/$template/index.php. In this case, $template is 'rhuk_milkyway', so the parsed file will be /templates/rhuk_milkyway/index.php. If this function is called from the Backend, this directory will be relative to the 'administrator' and will therefore load the specified admin template.

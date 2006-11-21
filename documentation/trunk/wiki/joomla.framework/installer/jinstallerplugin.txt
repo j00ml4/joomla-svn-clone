@@ -1,0 +1,16 @@
+====== JInstallerPlugin ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerPlugin.html|JInstallerPlugin]] | never | Work in progress |
+
+The JInstallerComponent class is an extension of the abstract JInstaller class which implements the necessary methods for the installation of a component. This class is not intended for use by third party developers but is used within the core installer.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JInstallerPlugin-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerPlugin-install|install]] | Custom install method |
+| [[JInstallerPlugin-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstallerPlugin-uninstall|uninstall]] | Custom uninstall method |
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,16 @@
+====== group ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQuery|JQuery]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery->group]] |
+
+Inserts a 'GROUP BY' clause into the query.
+===== Syntax =====
+void group	( **$columns** )
+| **$columns** | mixed | is a string containing the name of a column to group by, or an array of strings containing multiple names of columns to group by. |
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.database.query');
+
+$query = new JQuery();
+$query->group( 'a.parent' );
+</code>

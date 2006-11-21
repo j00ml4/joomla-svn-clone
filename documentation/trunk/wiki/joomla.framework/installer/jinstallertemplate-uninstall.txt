@@ -1,0 +1,20 @@
+====== uninstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerTemplate|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerTemplate|JInstallerTemplate]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerTemplate.html|JInstallerTemplate->uninstall]] | never | Work in progress |
+
+Custom uninstall method for templates. The uninstall method performs the following actions:
+  * remove any files added to the Joomla! images folder
+  * deletes template directory
+
+This method returns true on success, false otherwise. 
+
+===== Syntax =====
+boolean uninstall	( **$path**, **$client** )
+
+| **$path** | string | is a string containing the path of the template to uninstall. |
+| **$client** | integer | is an integer containing the client id. This parameter is unused. |
+
+
+----
+
+~~DISCUSSION~~

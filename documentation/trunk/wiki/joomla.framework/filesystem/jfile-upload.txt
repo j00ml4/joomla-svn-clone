@@ -1,0 +1,27 @@
+====== upload ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#upload|JFile->upload]] | 11 Apr 2006 | Published |
+
+Moves an uploaded file to a destination folder.
+
+===== Syntax =====
+boolean upload	( **$src**, **$dest** )
+| **$src** | string | is a string containing the name of the PHP (temporary) uploaded file. |
+| **$dest** | string | is a string containing the path (including filename) to move the uploaded  file to. |
+
+===== Examples =====
+Example: This example copies the temporary file sent in the upload variable.
+<code php|Example>
+$file = JRequest::getVar( 'upload', '', 'file', 'array' );
+
+if (!JFile::upload($file['tmp_name'], $destDir.strtolower($file['name']))) {
+    echo "Upload failed!";
+} else {
+    echo "Upload complete!";
+}
+</code>
+NOTE: This example is taken from the admin.media.php file in the /administrator/components/com_media directory. This example did not work on the machine on which it was tested.
+
+----
+
+~~DISCUSSION~~

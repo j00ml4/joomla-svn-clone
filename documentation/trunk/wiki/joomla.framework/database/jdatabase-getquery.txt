@@ -1,0 +1,24 @@
+====== getQuery ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getQuery]] | never | Work in progress |
+
+Returns the current value of the internal SQL query string (as set-up by [[JDatabase-setQuery|JDatabase->setQuery]].The string has HTML special characters escaped and will be surrounded by HTML <pre> tags so that it is suitable for output to web browsers in an error message, for example.
+
+===== Syntax =====
+string getQuery ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+$database->setQuery( $sql );
+echo 'The query is: ' . $database->getQuery();
+</code>
+would produce:
+<code php|Result>
+The query is: <pre>SELECT * FROM jos_users</pre>
+</code>
+
+----
+
+~~DISCUSSION~~
+

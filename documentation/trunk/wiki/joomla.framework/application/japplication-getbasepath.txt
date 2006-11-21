@@ -1,0 +1,28 @@
+====== getBasePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getBasePath]] | never | Work in progress |
+
+Returns the base path of the current application. This method has been deprecated in Joomla! 1.5. Use the [[references:Joomla.Framework:environment:JURI-base|JURI::base()]] method instead.
+
+===== Syntax =====
+string getBasePath ( **$client**, **$addTrailingSlash** )
+
+| **$client** | integer | is an integer specifying which client to return the path for (0 - site, 1 - administrator, 2 - installation). This parameter is optional and if omitted defaults to 0 (site). |
+| **$addTrailingSlash** | boolean | is a boolean value specifiying whether or not a trailing slash should be added to the end of the path. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getBasePath( 1, true )
+</code>
+might display the following:
+<code php|Result>
+http://127.0.0.1/joomla15/
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

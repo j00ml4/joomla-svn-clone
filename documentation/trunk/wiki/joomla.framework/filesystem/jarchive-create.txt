@@ -1,0 +1,24 @@
+====== create ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JArchive|{{http://api.joomla.org/media/images/Class.png }}]][[JArchive|JArchive]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive->create]] | 11 Apr 2006 | Published |
+Creates an archive.
+
+===== Syntax =====
+void create ( **$archive**, **$files**, **$compress**, **$addPath**, **$removePath**, **$autoExt**, **$cleanUp** )
+| **$archive** | string | is a string containing the name of the archive to create. |
+| **$files** | mixed | is a string containing the name of the file to add or an array of strings containing names of files to add. |
+| **$compress** | string | Is the compression algorithm to be used for the archive. This can be either null or 'tar' (which will result in no compression), 'gz' (which will result in gzip compression) or 'bz2' (which will result in bz2 compression, best compression). This parameter is optional, and if omitted, defaults to 'tar', which will result in no compression being used. This string is the extension that will be added to the end of the archive name if $autoExt is true. |
+| **$addPath** | string | is a string containing the path to add within the archive. This path will be added to the beginning of the path of each file or directory. This parameter is optional and if omitted will default to an empty string, resulting in nothing being added. |
+| **$removePath** | string | is a string containing the path to remove within the archive. If this path exists in any of the files, it will be removed. This parameter is optional and if omitted will default to an empty string, resulting in nothing being removed. |
+| **$autoExt** | boolean | is a flag which specifies whether or not the extension for the archive should be automatically appended. This parameter is optional and if omitted defaults to false. |
+| **$cleanUp** | boolean | is a flag which specifies whether source files should be removed (that is, whether the files that are added to the archive should be deleted from the directory). This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$archive = JArchive::create ('test', array( 'globals.php', 'configuration.php', 'index.php', 'index2.php'), 'tar', 'joomla/', '', true, false );
+</code>
+might produce an archive called 'test.tar' in the current base path listing the files 'joomla/globals.php', 'joomla/configuration.php', 'joomla/index.php' and 'joomla/index2.php'. The files would be added from the current base path.
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,23 @@
+====== setPort ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->setPort]] |
+
+Sets URI port.
+===== Syntax =====
+void setPort	( **$port** )
+| **$port** | integer | is an integer containing the new URI port number. |
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org/index.php/topic,41464.msg227819.html#msg227819' );
+echo "Before: " . $uri->toString();
+$uri->setPort( 8080 );
+echo "After: " . $uri->toString();
+</code>
+might produce:
+<code php|Result>
+Before: http://forum.joomla.org/index.php/topic,41464.msg227819.html#msg227819
+After: http://forum.joomla.org:8080/index.php/topic,41464.msg227819.html#msg227819
+</code>
+
+

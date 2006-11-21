@@ -1,0 +1,24 @@
+====== JMail ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Mail|Mail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html|JMail]] | Never | Work in progress |
+
+This is a mail handling class that extends the PHPMailer library that is included in the Joomla! distribution.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JFile-copy|{{http://api.joomla.org/media/images/Constructor.png }}]] [[JMail-JMail|JMail]] | Constructor. |
+| [[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-addAttachment|addAttachment]] | Add file attachments to the email. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-addBCC|addBCC]] | Add blind carbon copy recipients to the email. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-addCC|addCC]] | Add carbon copy recipients to the email. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-addRecipient|addRecipient]] |Add recipients to the email. | 
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-addReplyTo|addReplyTo]] |Add Reply to e-mail address(es) to the e-mail. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-getInstance|getInstance]] |Returns a reference to a global e-mail object. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-setBody|setBody]] |Set the E-Mail body. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-setSender|setSender]] |Set the E-Mail sender. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-setSubject|setSubject]] |Set the E-Mail subject. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-useSendmail|useSendmail]] |Use sendmail for sending the e-mail. |
+|[[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JMail-useSMTP|useSMTP]] |Use SMTP for sending the e-mail. |
+
+----
+
+~~DISCUSSION~~

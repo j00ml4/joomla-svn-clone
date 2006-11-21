@@ -1,0 +1,34 @@
+====== login ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->login]] | never | Work in progress |
+
+Checks a users login credentials and logs in if possible. The Username and encoded password are passed to the onLoginUser event which is responsible for the user validation. A successful validation updates the current session record with the  users details. The Username and Password are sent as credentials (along with other possibilities) to each observer (JAuthenticatePlugin) for user validation. 
+
+Successful validation will  update the current session with the user details. This method rarely gets called directly since the $mainframe object is actually of type JSite, which extends JApplication. This child class overrides the login method. If either $username or $password evaluate to false, then these values are retrieved from the username and password variables as specified in the POST array. The child class then calls this parent method.
+
+This method returns true of authentication was successful, false otherwise.
+
+===== Syntax =====
+boolean login ( **$username**, **$password** )
+
+| **$username** | string | is a string containing the username of the user to be authenticated. |
+| **$password** | string | is a string containing the password of the user to be authenticated. |
+
+===== Examples =====
+This method might be called as follows:
+<code php|Example>
+global $mainframe;
+if ($mainframe->login( 'userbob', 'randompassword' )) {
+    echo "Authentication successful! User logged in.";
+} else {
+    echo "User could not be logged in.";
+}
+</code>
+might produce
+<code php|Result>
+Authentication successful! User logged in.
+</code>
+
+----
+
+~~DISCUSSION~~

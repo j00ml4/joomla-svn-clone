@@ -1,0 +1,29 @@
+====== setDebug ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->setDebug]] | never | Work in progress |
+
+Sets the debug property. If the debug property is set, the _ method will add markers before and after each string to indicate whether or not the key exists in the language file.
+
+===== Syntax =====
+void setDebug	( **$debug** )
+
+| **$debug** | boolean | is a boolean value to apply to the debug property. |
+
+===== Examples =====
+<code php|Example>
+$german = JLanguage::getInstance( 'de-DE' );
+echo "Debugging is " . ($german->getDebug() ? "on" : "off") . "<br />";
+$german->setDebug( true );
+echo "Turning debugging on...<br />";
+echo "Debugging is " . ($german->getDebug() ? "on" : "off");
+</code>
+might produce:
+<code php|Result>
+Debugging is off
+Turning debugging on...
+Debugging is on
+</code>
+
+----
+
+~~DISCUSSION~~

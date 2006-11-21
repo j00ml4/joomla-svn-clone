@@ -1,0 +1,21 @@
+====== setBase ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->setBase]] |
+
+Sets the document base URL tag.
+===== Syntax =====
+void setBase ( **$url** )
+| **$url** | string | is a string containing the url to be used in the base tag. |
+
+===== Examples =====
+Set the document base URL tag.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setBase( $mainframe->getBaseURL() );
+</code>
+might result in the following base tag in the head block:
+<code php|Result>
+<base href="http://127.0.0.1/joomla11/" />
+</code>

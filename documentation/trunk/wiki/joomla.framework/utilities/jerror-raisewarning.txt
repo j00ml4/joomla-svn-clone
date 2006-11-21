@@ -1,0 +1,20 @@
+====== raiseWarning ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseWarning]] |
+
+This is a wrapper for the [[#raise|raise]] method that passes E_WARNING as the error level. A patError object will be returned.
+
+===== Syntax =====
+object &raiseWarning	( **$code**, **$msg**, **$info** )
+| **$code** | string | The application-internal error code for this error |
+| **$msg** | string | The error message, which may also be shown the user if need be. |
+| **$info** | mixed | Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN). |
+
+===== Examples =====
+<code php|Example>
+JError::raiseWarning( '6000', 'File access error!' );
+</code>
+might produce:
+<code php|Result>
+jos-Warning: File access error!
+</code>

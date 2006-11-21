@@ -1,0 +1,44 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->getInstance]] | never | Work in progress |
+
+Returns a reference to a global JToolBar object, only creating it if it doesn't already exist. This method must be invoked as:
+<code php>$toolbar = &JToolBar::getInstance([$name]);</code>
+
+To access the component toolbar, $name should be JComponent. Additional tool bars can be created by using a different name parameter.
+
+This method returns a reference to the JToolBar object.
+
+===== Syntax =====
+[[JToolBar|JToolBar]] &getInstance ( **$name** )
+
+| **$name** | string | is a string containing the name of the tool bar. |
+
+===== Examples =====
+<code php|Example>
+$bar =& JToolBar::getInstance( 'JComponent' );
+$bar->appendButton( 'Standard', 'send', 'Activate', 'activate' );
+</code>
+might result in the following component toolbar:
+<code php|Result>
+<div class="toolbar" id="toolbar">
+<table class="toolbar"><tr>
+
+<td class="button" id="toolbar-send">
+<a onclick="javascript:submitbutton('activate')" class="toolbar">
+<div class="icon-32-send" title="Activate" type="Standard">
+</div>
+Activate
+</a>
+</td>
+
+</tr></table>
+</div>
+</code>
+The render method does not have to be called in this instance because the code is operating on the JComponent tool bar and is displayed by the core (provided this is called in the administrator backend.
+
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,13 @@
+====== register ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JEventDispatcher|JEventDispatcher]] | [[http://api.joomla.org/Joomla-Framework/Application/JEventDispatcher.html|JEventDispatcher->register]] |
+
+Registers an event handler to the event dispatcher
+===== Syntax =====
+void register	( **$event**, **$handler** )
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

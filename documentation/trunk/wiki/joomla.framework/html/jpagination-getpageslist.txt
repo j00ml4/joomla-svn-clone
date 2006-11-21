@@ -1,0 +1,116 @@
+====== getPagesList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getPagesList]] | never | Work in progress |
+
+Creates the pagination page list array. $link should be the URL to the extension (i.e. the Joomla! Base URL with the option value appended to the query string, along with any other variables to get to the appropriate function such as a task if necessary). $link is optional and if omitted defaults to null. It is required for proper function if this is called from outside the admin panel. If called from the admin panel, it is not used.
+
+===== Syntax =====
+array getPagesList	( **$link** )
+
+| **$link** | string | is a string containing the link to the appropriate function which displays the page. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+
+// get the total number of records
+$query = "SELECT COUNT(*)"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT name, value"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+if ($db->getErrorNum()) {
+   	echo $db->stderr();
+   	return;
+}
+
+echo "<table>";
+foreach ($rows as $row) {
+    echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
+}
+echo "</table>";
+$pagesLinks = $pageNav->getPagesList( $mainframe->getBaseURL() . "index.php?option=$option" );
+print_r( $pagesLinks );
+</code>
+will display the following array at the end of the list (this array wouldn't normally be displayed in this raw form):
+<code php|Result>
+Array
+(
+    [first] => Array
+        (
+            [start] => 0
+            [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=0
+            [txt] => Start
+        )
+
+    [prev] => Array
+        (
+            [start] => 20
+            [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=20
+            [txt] => Prev
+        )
+
+    [next] => Array
+        (
+            [start] => 60
+            [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60
+            [txt] => Next
+        )
+
+    [end] => Array
+        (
+            [start] => 60
+            [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60
+            [txt] => End
+        )
+
+    [pages] => Array
+        (
+            [1] => Array
+                (
+                    [start] => 0
+                    [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=0
+                    [txt] => 1
+                )
+
+            [2] => Array
+                (
+                    [start] => 20
+                    [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=20
+                    [txt] => 2
+                )
+
+            [3] => Array
+                (
+                    [start] => 
+                    [url] => 
+                    [txt] => 3
+                )
+
+            [4] => Array
+                (
+                    [start] => 60
+                    [url] => http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60
+                    [txt] => 4
+                )
+
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,28 @@
+====== JButton ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html|JButton]] | never | Internal review |
+
+This is an abstract button class. It is the base class for all other JButton classes.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JButton-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-__construct|__construct]] | Button constructor. Stores a reference to the instantiating object (parent). |
+| [[JButton-fetchButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-fetchButton|fetchButton]] | Returns the HTML for the button. This method is defined in the final button class. |
+| [[JButton-fetchIconClass|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-fetchIconClass|fetchIconClass]] | Gets the CSS class name for an icon identifier. This can be redefined in the final button class. |
+| [[JButton-fetchId|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-fetchId|fetchId]] | Gets the button id. This can be redefined in the final button class. |
+| [[JButton-getName|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-getName|getName]] | Gets the button name. |
+| [[JButton-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JButton-render|render]] | Renders the button. |
+
+===== Child Classes =====
+| [[JButton_Custom|Custom]] |
+| [[JButton_Help|Help]] |
+| [[JButton_Link|Link]] |
+| [[JButton_Popup|Popup]] |
+| [[JButton_Separator|Separator]] |
+| [[JButton_Standard|Standard]] |
+
+
+----
+
+~~DISCUSSION~~
+

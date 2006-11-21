@@ -1,0 +1,22 @@
+====== generateId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Cache|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#generateId|JCache->generateId]] | Never | Public review |
+
+Make a control key with the string containing data.
+===== Syntax =====
+string generateId	( **$data**, **$controlType** )
+| **$data** | string | is a string from which to create the control key. |
+| **$controlType** | string | is a string containing the type of control. This can be 'md5', 'crc32' or 'strlen'. This parameter is optional and if omitted defaults to 'md5'. |
+
+===== Examples =====
+<code php|Example>
+$cache =& JFactory::getCache();
+
+echo "Control key of JClass: " . $cache->generateId( 'JClass', 'crc32' );
+</code>
+might produce:
+<code php|Result>
+Control key of JClass:  -173455057
+</code>
+
+~~DISCUSSION~~

@@ -1,0 +1,27 @@
+====== getNamePathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->getNamePathWay]] |
+
+Create and return an array of the pathway names. This is useful for things like SEF URLs.
+
+===== Syntax =====
+array getNamePathWay	( **$showHome**, **$showComponent** )
+| **$showHome** | boolean | is a flag that specifies whether or not the home element of the pathway array should be returned. This parameter is optional and if omitted defaults to true. |
+| **$showComponent** | boolean | is a flag that specifies whether or not the component element of the pathway array should be returned. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$pathway =& $mainframe->getPathWay();
+print_r( $pathway->getNamePathWay() );
+</code>
+might result in:
+<code php|Result>
+Array
+(
+    [0] => 
+    [1] => Home
+    [2] => News Feeds
+)
+</code>

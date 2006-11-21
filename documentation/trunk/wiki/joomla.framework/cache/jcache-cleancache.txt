@@ -1,0 +1,20 @@
+====== cleanCache ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Cache|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#cleanCache|JCache->cleanCache]] | Never | Public review |
+
+Cleans the cache.
+
+===== Syntax =====
+void cleanCache	( **$group**, **$mode** )
+| **$group** | mixed | is a string containing the cache group. This parameter is optional and if omitted defaults to false. |
+| **$mode** | mixed | is a string containing the mode to use. This paramter is optional and if omitted defaults to 'ingroup'. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$cache =& JFactory::getCache();
+$cache->cleanCache();
+</code>
+
+~~DISCUSSION~~

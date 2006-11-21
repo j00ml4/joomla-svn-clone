@@ -1,0 +1,31 @@
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTablePlugin|{{http://api.joomla.org/media/images/Class.png }}]][[JTablePlugin|JTablePlugin]] | [[http://api.joomla.org/Joomla-Framework/Model/JTablePlugin.html|JTablePlugin->bind]] | never | Work in progress |
+
+This is a customized bind method that handles the retrieval of parameters from the form data and merges these with any additional parameters specified in the $array parameter. These parameters are stored in the params field.
+
+===== Syntax =====
+string bind	( **$array**, **$ignore** )
+
+| **$array** | array | is an associative array containing name-value pairs for the plugin's fields. This bind method will convert the params entry from an array into a string and store it in the params field. The rest are passed to the parent constructor. |
+| **$ignore** | array | is a string containing a space separated list of fields that should be ignored. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$row =& JTable::getInstance( 'plugin', $db );
+$row->load( 4 );
+$parameters = JArrayHelper::fromObject( $row );
+$parameters['params'] = array( 'param1' => 'value1', 'param2' => 'value2', 'param3' => 'value3' );
+$row->bind( $parameters );
+echo $row->params . '<br />';
+</code>
+might produce:
+<code php|Result>
+param1=value1 param2=value2 param3=value3
+</code>
+
+
+----
+
+~~DISCUSSION~~

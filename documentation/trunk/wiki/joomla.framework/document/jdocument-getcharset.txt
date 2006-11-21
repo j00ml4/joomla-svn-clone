@@ -1,0 +1,19 @@
+====== getCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getCharset]] |
+
+Returns the document charset encoding.
+===== Syntax =====
+string getCharset ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$document = &$mainframe->getDocument();
+echo "Character Set: " . $document->getCharset();
+</code>
+Might produce:
+<code php|Example>
+Character Set: utf-8
+</code>

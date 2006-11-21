@@ -1,0 +1,21 @@
+====== JPaneTabs ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneTabs.html|JPaneTabs]] | never | Work in progress |
+
+JPaneTabs is a class used to draw parameter panes. This child class implements the JPane interface and produces a set of pages that can be changed using tabsthat appear at the top of the pane. JPaneTabs look like:{{:references:joomla.framework:html:jpanetabs.png|:references:joomla.framework:html:jpanetabs.png}}
+
+
+JPaneTabs are based on the mooFX library which Joomla! provides built-in support for. Since this library uses JavaScript, it is necessary to have JavaScript installed in the browser in order for this to work.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JPaneTabs-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JPaneTabs-__construct|__construct]] | Constructs the JPaneTabs class, adding the necessary CSS and JS to the current document. |
+| [[JPaneTabs-endPane|{{http://api.joomla.org/media/images/Method.png }}]] [[JPaneTabs-endPane|endPane]] | Outputs the necessary HTML code to end a tab pane. |
+| [[JPaneTabs-endPanel|{{http://api.joomla.org/media/images/Method.png }}]] [[JPaneTabs-endPanel|endPanel]] | Outputs the necessary HTML code to end a tab panel. |
+| [[JPaneTabs-startPane|{{http://api.joomla.org/media/images/Method.png }}]] [[JPaneTabs-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start a tab pane. |
+| [[JPaneTabs-startPanel|{{http://api.joomla.org/media/images/Method.png }}]] [[JPaneTabs-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a tab panel with the title text and start the panel. |
+
+----
+
+~~DISCUSSION~~
+

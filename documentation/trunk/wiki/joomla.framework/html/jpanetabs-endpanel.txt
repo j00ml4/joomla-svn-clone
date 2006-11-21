@@ -1,0 +1,49 @@
+====== endPanel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPaneTabs|{{http://api.joomla.org/media/images/Class.png }}]][[JPaneTabs|JPaneTabs]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneTabs.html|JPaneTabs->endPanel]] | never | Work in progress |
+
+Outputs the necessary HTML code to end a tab panel.
+
+===== Syntax =====
+void endPanel ()
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.presentation.pane');
+$pane =& JPane::getInstance('tabs');
+$pane->startPane( 'pane' );
+$pane->startPanel( 'Example Panel 1', 'panel1' );
+echo "This is panel1";
+$pane->endPanel();
+$pane->startPanel( 'Example Panel 2', 'panel2' );
+echo "This is panel2";
+$pane->endPanel();
+$pane->endPane();
+</code>
+might produce:
+<code php|Result>
+<div class="tab-page" id="pane">
+    <script type="text/javascript">
+    	var tabPane1 = new WebFXTabPane( document.getElementById( "pane" ), 0 )
+    </script>
+    <div class="tab-page" id="panel1">
+        <h2 class="tab"><span>Example Panel 1</span></h2>
+        <script type="text/javascript">tabPane1.addTabPage( document.getElementById( "panel1" ) );</script>
+        This is panel1
+    </div>
+    <div class="tab-page" id="panel2">
+        <h2 class="tab"><span>Example Panel 2</span></h2>
+        <script type="text/javascript">tabPane1.addTabPage( document.getElementById( "panel2" ) );</script>
+        This is panel2
+    </div>
+</div>
+</code>
+The specific code output from this method is:
+<code php|JPanelTabs::endPanel output>
+</div>
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,23 @@
+====== setLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setLang]] |
+
+Sets the global document language declaration. The default is English.
+===== Syntax =====
+void setLang	( **$lang** )
+| **$lang** | string | is a string containing the new language of the document. This parameter is optional and if omitted defaults to 'en-GB'. |
+
+===== Examples =====
+Set the language of the current document.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setLang( 'en-US' );
+
+echo "Language: " . $document->getLang();
+</code>
+Might produce:
+<code php|Result>
+Language: en-US
+</code>

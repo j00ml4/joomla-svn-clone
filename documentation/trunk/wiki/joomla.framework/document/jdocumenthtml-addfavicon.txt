@@ -1,0 +1,23 @@
+====== addFavicon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addFavicon]] |
+
+Adds a shortcut icon (favicon). This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display it on the tab, as well.
+===== Syntax =====
+void addFavicon	( **$href**, **$type**, **$relation** )
+| **$href** | string | is a string containing the link that is being related. |
+| **$type** | string | this is a link containing the file type of the icon. This parameter is optional and if omitted defaults to 'image/x-icon'. |
+| **$relation** | string | this is a string containing the relation of link. This parameter is optional and if omitted defaults to 'shortcut icon'. |
+
+===== Examples =====
+Set the favourite icon to use for the document.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->addFavicon( "http://dev.joomla.org/images/favicon.ico" );
+</code>
+adds the following code to the head block:
+<code php|Result>
+<link href="http://dev.joomla.org/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</code>

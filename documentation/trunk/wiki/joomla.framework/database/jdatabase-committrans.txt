@@ -1,0 +1,14 @@
+====== CommitTrans ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->CommitTrans]] | never | Work in progress |
+
+ADODB compatability function. See [[http://phplens.com/adodb/reference.functions.committrans.html]] for more information.
+
+===== Syntax =====
+void CommitTrans ()
+
+
+----
+
+~~DISCUSSION~~
+

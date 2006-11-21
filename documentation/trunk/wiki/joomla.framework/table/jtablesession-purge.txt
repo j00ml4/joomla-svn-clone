@@ -1,0 +1,24 @@
+====== purge ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableSession|{{http://api.joomla.org/media/images/Class.png }}]][[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->purge]] | never | Work in progress |
+
+This method is used to purge old sessions. All records are deleted that have a time value that is less than the current time minus age. To clear all sessions, a value of 0 can be used for age. The results of the query are returned.
+
+===== Syntax =====
+mixed purge	( **$age** )
+
+| **$age** | integer | is the maximum session age in seconds. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$session =& JTable::getInstance('session', $db );
+
+$session->purge( 900 );
+</code>
+will result in the purging of all sessions that are older than 15 minutes.
+
+----
+
+~~DISCUSSION~~
+

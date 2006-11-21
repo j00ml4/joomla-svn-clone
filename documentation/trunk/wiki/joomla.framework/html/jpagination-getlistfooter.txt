@@ -1,0 +1,78 @@
+====== getListFooter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getListFooter]] | never | Work in progress |
+
+Creates the pagination footer. This will call getLimitBox, getPagesLinks and getPagesCounter and return the results. $link should be the URL to your component (i.e. the Joomla! Base URL with the option value appended to the query string, along with any other variables to get to the appropriate function such as a task if necessary). $link is optional and if omitted defaults to null. It is required for proper function if this is called from outside the admin panel. If called from the admin panel, it is not used.
+
+===== Syntax =====
+string getListFooter ( **$link** )
+
+| **$link** | string | is a string containing the link to the appropriate function which displays the page. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+
+// get the total number of records
+$query = "SELECT COUNT(*)"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT name, value"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+if ($db->getErrorNum()) {
+   	echo $db->stderr();
+   	return;
+}
+
+echo "<table>";
+foreach ($rows as $row) {
+    echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
+}
+echo "</table>";
+echo $pageNav->getListFooter( $mainframe->getBaseURL() . "index.php?option=$option" );
+</code>
+might produce the following footer at the bottom of the list:
+<code php|Result>
+<del class="container">
+    <div class="pagination">
+        <div class="limit">Display Num
+            <select name="limit" id="limit" class="inputbox" size="1" onchange="document.location.href='http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=' + this.options[selectedIndex].value + '&amp;limitstart=40';">
+                <option value="5" >5</option>
+                <option value="10" >10</option>
+                <option value="15" >15</option>
+                <option value="20"  selected="selected">20</option>
+                <option value="25" >25</option>
+                <option value="30" >30</option>
+                <option value="50" >50</option>
+                <option value="100" >100</option>
+        </select>
+    </div>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=0" class="pagenav" title="first page">Start</a>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=20" class="pagenav" title="previous page">Prev</a>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=0" class="pagenav"><strong>1</strong></a>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=20" class="pagenav"><strong>2</strong></a>
+    <span class="pagenav">3</span>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60" class="pagenav"><strong>4</strong></a>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60 " class="pagenav" title="next page">Next</a>
+    <a href="http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=20&amp;limitstart=60 " class="pagenav" title="end page">End</a>
+
+    <div class="limit">Results 41 - 60 of 78</div>
+    <input type="hidden" name="limitstart" value="40" />
+    </div>
+</del>
+</code>
+
+----
+
+~~DISCUSSION~~

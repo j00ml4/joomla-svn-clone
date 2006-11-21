@@ -1,0 +1,50 @@
+====== getPagesCounter ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getPagesCounter]] | never | Work in progress |
+
+Create and return the pagination counter string, ie. Results 1-10 of 42.
+
+===== Syntax =====
+string getPagesCounter ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+
+// get the total number of records
+$query = "SELECT COUNT(*)"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT name, value"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+if ($db->getErrorNum()) {
+   	echo $db->stderr();
+   	return;
+}
+
+echo "<table>";
+foreach ($rows as $row) {
+    echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
+}
+echo "</table>";
+echo $pageNav->getPagesCounter();
+</code>
+might produce the following counter at the bottom of the list:
+<code php|Result>
+Results 41 - 60 of 78
+</code>
+
+----
+
+~~DISCUSSION~~

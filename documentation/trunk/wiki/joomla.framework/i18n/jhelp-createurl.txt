@@ -1,0 +1,61 @@
+====== createURL ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JHelp|JHelp]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp->createURL]] |
+
+Creates a URL for a given help file reference. The URL returned from this method is dependent on a number of variables. The help URL can be set as a global configuration variable. In addition, a user specific help url can also be specified in the user manager. This allows a user's help site to be managed based on their specific language or locale.
+
+The URL is determined based on the following priorities:
+  - If the $com parameter is true, the help URL is returned based on the path to the component's help directory.
+  - If the user's **helpsite** parameter is set, the URL is returned based on the user's specific help site. In addition, the JVersion->getHelpVersion() method is called and this value is appended to the end of the URL. The JVersion::getHelpVersion() method returns the current release with the '.' removed (so for Joomla! 1.5, it returns .15).
+  - If the global helpsite parameter is set, the URL is returned based on this parameter. In addition, the JVersion->getHelpVersion() method is called and this value is appended to the end of the URL. The JVersion::getHelpVersion() method returns the current release with the '.' removed (so for Joomla! 1.5, it returns .15).
+  - Otherwise, the URL is constructed based on the global live site parameter with '/administrator/help/en-GB/'. $ref .'.html' appended to it.
+
+See the examples below to see the various scenarios.
+
+===== Syntax =====
+void createURL	( **$ref**, **$com** )
+| **$ref** | string | is a string containing the name of the popup file (excluding the file extension for an xml file). |
+| **$com** | boolean | is a flag which specifies whether or not to use the help file in the component directory. |
+
+===== Examples =====
+Use the help file which is located in the component directory:
+<code php|Example 1>
+jimport( 'joomla.i18n.help' );
+echo JHelp::createURL( 'screen.config', true );
+</code>
+might produce:
+<code php|Result 1>
+http://127.0.0.1/joomla11/administrator/components/com_testing/help/screen.config.html
+</code>
+
+When it is defined, the method will use the user help URL (found in $user->getParam( 'helpsite' ) ):
+<code php|Example 2>
+jimport( 'joomla.i18n.help' );
+echo JHelp::createURL( 'screen.config' );
+</code>
+might produce:
+<code php|Result 2>
+http://www.joomla-bg.com/help/index2.php?option=com_content&task=findkey&pop=1&keyref=screen.config.15
+</code>
+if the user is set to use the Bulgarian help site.
+
+If the user does not have a help site URL defined, it will check for a global help url (using $mainframe->getCfg( 'helpurl' )):
+<code php|Example 3>
+jimport( 'joomla.i18n.help' );
+echo JHelp::createURL( 'screen.config' );
+</code>
+might produce:
+<code php|Result 3>
+http://help.joomla.org/index2.php?option=com_content&task=findkey&pop=1&keyref=screen.config.15
+</code>
+if the user does not have a selected help site (or the user is not logged in).
+
+If none of the above conditions are met:
+<code php|Example 4>
+jimport( 'joomla.i18n.help' );
+echo JHelp::createURL( 'screen.config' );
+</code>
+might produce:
+<code php|Result 4>
+http://127.0.0.1/joomla11/administrator/help/en-GB/screen.config.html
+</code>

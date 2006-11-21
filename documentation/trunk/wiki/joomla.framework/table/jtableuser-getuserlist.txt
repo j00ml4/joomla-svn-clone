@@ -1,0 +1,26 @@
+====== getUserList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->getUserList]] | never | Work in progress |
+
+Returns a complete user list.
+
+===== Syntax =====
+array getUserList ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+
+print_r( $user->getUserList() );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => Array ( [username] => admin ) )
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

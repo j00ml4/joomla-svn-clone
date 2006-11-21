@@ -1,0 +1,25 @@
+====== install ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->install]] | never | Work in progress |
+
+Custom install method for modules. The install method performs the following actions:
+  * finds and checks the installation file and verifies that it is the proper installation type
+  * determines the client application target (site or administrator)
+  * checks for the existence of the directory to ensure that it is not already being used
+  * copies necessary files
+  * adds module to the database
+  * creates a menu entry for the module
+  * creates necessary module positions
+  * copies module setup file
+
+This method returns true on success, false otherwise. 
+
+===== Syntax =====
+boolean install	( **$p_fromdir** )
+
+| **$p_fromdir** | string | is a string containing the directory from which to install the module. |
+
+----
+
+~~DISCUSSION~~
+

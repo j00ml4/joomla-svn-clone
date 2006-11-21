@@ -1,0 +1,52 @@
+====== getPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getPath]] | never | Work in progress |
+
+Gets a path to the specified extension file. This is a utility method that can be used to locate various files belonging to an extension.
+
+The return values are as follows (USER_OPTION refers to the **$user_option** parameter and NAME refers to this same value with the front four characters removed. Where there are two entries listed for a particular value of **$varname**, each path is checked until a file is located.):
+^ $varname ^ Returned Path ^
+| front | /components/USER_OPTION/NAME.php |
+| html | /templates/TEMPLATE_NAME/components/NAME.html.php |
+| html | /components/USER_OPTION/NAME.html.php |
+| front_html | /templates/TEMPLATE_NAME/components/NAME.html.php |
+| front_html | /components/USER_OPTION/NAME.html.php |
+| toolbar | /components/USER_OPTION/toolbar.NAME.php |
+| toolbar_html | /components/USER_OPTION/toolbar.NAME.html.php |
+| toolbar_default | /includes/HTML_toolbar.php |
+| toolbar_front | /includes/HTML_toolbar.php |
+| admin | /components/USER_OPTION/admin.NAME.php |
+| admin_html | /components/USER_OPTION/admin.NAME.html.php |
+| admin_functions | /components/USER_OPTION/NAME.functions.php |
+| class | /components/USER_OPTION/NAME.class.php |
+| class | /includes/NAME.php |
+| helper | /components/USER_OPTION/NAME.helper.php |
+| com_xml | /components/USER_OPTION/NAME.xml |
+| mod0_xml | /modules/custom_legacy.xml (if USER_OPTION is empty) |
+| mod0_xml | /modules/custom.xml (if USER_OPTION is 'custom') |
+| mod0_xml | /modules/USER_OPTION/USER_OPTION.xml (otherwise) |
+| mod1_xml | /modules/custom_legacy.xml (if USER_OPTION is empty) |
+| mod1_xml | /modules/custom.xml (if USER_OPTION is 'custom') |
+| mod1_xml | /modules/USER_OPTION/USER_OPTION.xml (otherwise) |
+| bot_xml | /plugins/USER_OPTION.xml |
+| menu_xml | /components/com_menus/USER_OPTION/USER_OPTION.xml |
+
+
+===== Syntax =====
+string getPath ( **$varname**, **$user_option** )
+
+| **$varname** | string | is a string containing the name of the variable to retrieve. |
+| **$user_option** | string | is a string containing the user option. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+echo JApplicationHelper::getPath( 'class', 'com_newsfeeds' );
+</code>
+might produce
+<code php|Result>
+C:\\Program Files\\xampp\\htdocs\\joomla11\\administrator\\components\\com_newsfeeds\\newsfeeds.class.php
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,22 @@
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->toString]] |
+
+Returns the URI as a string.
+===== Syntax =====
+string toString	( **$parts** )
+| **$parts** | array | is an array specifying the parts to render. This parameter is optional and if omitted the function will return the entire query. |
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org/index.php/topic,41464.msg227819.html?action=new' );
+echo $uri->toString();    
+echo $uri->toString( array( 'scheme', 'host', 'path' ) );
+echo $uri->toString( array( 'host', 'path' ) );
+</code>
+might produce:
+<code php|Result>
+http://forum.joomla.org/index.php/topic,41464.msg227819.html?action=new
+http://forum.joomla.org/index.php/topic,41464.msg227819.html
+forum.joomla.org/index.php/topic,41464.msg227819.html
+</code>

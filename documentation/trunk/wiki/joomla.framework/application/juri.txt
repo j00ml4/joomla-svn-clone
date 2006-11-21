@@ -1,0 +1,39 @@
+====== JURI [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI]] |
+
+This class serves two purposes.  The first is to parse a URI and provide a common interface for the Joomla Framework to access and manipulate a URI.  The second is to attain the URI of the current executing script from the server regardless of the server.
+The concept and implementation of this class is drawn heavily from the binary cloud  environment package (http://www.binarycloud.com).
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JURI-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-__construct|__construct]] | Class constructor. |
+| [[JURI-delVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists. |
+| [[JURI-getAnchor|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getAnchor|getAnchor]] | Get the URI archor string everything after the '#'. |
+| [[JURI-getHost|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getHost|getHost]] | Get URI host returns the hostname/ip, or null if no hostname/ip was specified. |
+| [[JURI-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getInstance|getInstance]] | Returns a reference to a global JURI object, only creating it if it doesn't already exist. |
+| [[JURI-getPassword|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPassword|getPassword]] | Get URI password. Returns the password, or null if no password was specified. |
+| [[JURI-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPath|getPath]] | Gets the URI path string. |
+| [[JURI-getPort|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getPort|getPort]] | Get URI port. Returns the port number, or null if no port was specified. |
+| [[JURI-getQueryString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getQueryString|getQueryString]] | Returns flat query string from (array) $_vars hash. |
+| [[JURI-getScheme|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getScheme|getScheme]] | Get URI scheme (protocol) ie. http, https, ftp, etc... |
+| [[JURI-getUsername|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getUsername|getUsername]] | Get URI username. Returns the username, or null if no username was specified. |
+| [[JURI-getVars|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-getVars|getVars]] | Returns an array with all of the query variables. |
+| [[JURI-isSSL|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-isSSL|isSSL]] | Checks whether the current URI is using HTTPS. |
+| [[JURI-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-parse|parse]] | Parse a given URI and populate the class fields. |
+| [[JURI-setAnchor|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setAnchor|setAnchor]] | Set the URI anchor string everything after the '#'. |
+| [[JURI-setHost|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setHost|setHost]] | Set URI host. |
+| [[JURI-setPassword|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPassword|setPassword]] | Set URI password. |
+| [[JURI-setPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPath|setPath]] | Set the URI path string. |
+| [[JURI-setPort|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setPort|setPort]] | Set URI port. |
+| [[JURI-setQueryString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setQueryString|setQueryString]] | Sets the query to a supplied string in format: foo=bar&x=y. |
+| [[JURI-setScheme|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setScheme|setScheme]] | Set URI scheme (protocol) ie. http, https, ftp, etc... |
+| [[JURI-setUsername|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setUsername|setUsername]] | Set URI username. |
+| [[JURI-setVar|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-setVar|setVar]] | Adds a query variable and value, replacing the value if it already exists and returning the old value. |
+| [[JURI-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JURI-toString|toString]] | Returns full URI string. |
+
+----
+
+~~DISCUSSION~~
+
+

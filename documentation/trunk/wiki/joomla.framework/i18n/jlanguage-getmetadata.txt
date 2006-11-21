@@ -1,0 +1,31 @@
+====== getMetadata ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getMetadata]] | never | Work in progress |
+
+Returns an associative array containing the metadata.
+
+===== Syntax =====
+array getMetadata ( **$lang** )
+
+| **$lang** | string | is a string containing the name of the language for which to retrieve the metadata. |
+
+===== Examples =====
+<code php|Example>
+print_r( JLanguage::getMetadata( 'de-DE' ) );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [name] => German (Deutschland)
+    [tag] => de-DE
+    [rtl] => 0
+    [locale] => ger, de, ger_DE, de_DE, german, german-de, germany
+    [wincodepage] => iso-8859-1
+    [backwardlang] => german
+)
+</code>
+
+----
+
+~~DISCUSSION~~

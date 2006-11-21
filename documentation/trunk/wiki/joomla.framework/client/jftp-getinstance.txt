@@ -1,0 +1,18 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->getInstance]] |
+
+Returns a reference to the global FTP connector object, only creating it if it doesn't already exist.
+This method must be invoked as:
+    $ftp = &JFTP::getInstance($host);
+
+===== Syntax =====
+JFTP &getInstance ( **$host**, **$port**, **$options** )
+| **$host** | string | is a string containing the host to connect to. This parameter is optional and if omitted defaults to '127.0.0.1'. |
+| **$port** | string | is a string containing the post to connect to. This parameter is optional and if omitted defaults to '21'. |
+| **$options** | array | is an associative array to use to create the object. See [[jftp-__construct|__construct]] for more information. |
+
+===== Examples =====
+<code php|Example>
+$ftp = &JFTP::getInstance( '127.0.0.1' );
+</code>

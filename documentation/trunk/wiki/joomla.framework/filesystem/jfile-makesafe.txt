@@ -1,0 +1,23 @@
+====== makeSafe ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#makeSafe|JFile->makeSafe]] | 11 Apr 2006 | Published |
+
+Makes file name safe to use. This function filters out unsafe character sequences from the given file name. The [[http://www.php.net/manual/en/reference.pcre.pattern.syntax.php|regular expression]] used is: #\.\.[^A-Za-z0-9\.\_\- ]#. This will take out the combination of two dots (..) followed by anything that is not a letter, a number, a dot (.), an underscore (_), a hyphen (-) or a space ( ).
+
+===== Syntax =====
+string makeSafe	( **$file** )
+| **$file** | string | is a string containing the name of the file [not full path]. |
+
+===== Examples =====
+Example: This example gets the extension of a file.
+<code php|Example>
+echo JFile::makeSafe( '..%clock.jpg' );
+</code>
+which will produce:
+<code php|Result>
+clock.jpg
+</code>
+
+----
+
+~~DISCUSSION~~

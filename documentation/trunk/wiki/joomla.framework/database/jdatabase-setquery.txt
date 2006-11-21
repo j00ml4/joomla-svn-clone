@@ -1,0 +1,57 @@
+====== setQuery ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setQuery]] | never | Work in progress |
+
+Sets the SQL query string for later execution.  This function also replaces all occurrences within the query string of a given string identifier with the current database table prefix code.  Note that this function does not cause the SQL query to be executed.
+
+===== Syntax =====
+void setQuery	( **$sql**, **$offset**, **$limit**, **$prefix** )
+
+| **$sql** | string | is a string containing the SQL query. |
+| **$offset** | integer | is an integer containing the table row offset for use with page navigation code.  This parameter is optional and if omitted will default to null. |
+| **$limit** | integer | is an integer containing the maximum number of rows to be returned by the SQL query.  This parameter is optional and if omitted will default to null. |
+| **$prefix** | string | is a string containing the identifier to be replaced by the current database table prefix code.  This parameter is optional and if omitted will default to <nowiki>'#__'</nowiki>. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = 'SELECT * FROM #__categories';
+$database->setQuery( $sql );
+$rows = $database->loadObjectList();
+foreach ( $rows as $row ) {
+  echo "$row->title: $row->description\n";
+}
+</code>
+might produce:
+<code php|Result>
+Latest: The latest news from the Joomla! Team
+Joomla! Specific Links: A selection of links that are all related to the Joomla! Project.
+Newsflash: 
+Joomla!: 
+Business: general: 
+Existing Users: Here you will find an example set of FAQs.
+Linux: 
+Internet: 
+Contacts: Contact Details for this website
+Joomla: 
+Text Ads: 
+Features: 
+Benefits: 
+Platforms: 
+Other Resources: 
+test555: 
+The CMS: Information about the software behind Joomla!<br />
+Current Users: Questions that users migrating to Joomla! 1.5 are likely to raise<br />
+The Project: General facts about Joomla!<br />
+New to Joomla: Questions for new users of Joomla!<br />
+
+The Community: About the millions of Joomla! users and websites<br />
+General: General questions about the Joomla! CMS
+Languages: Questions related to localisation and languages
+</code>
+
+----
+
+~~DISCUSSION~~
+

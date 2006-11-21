@@ -1,0 +1,24 @@
+====== getNullDate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getNullDate]] | never | Work in progress |
+
+Returns the string to be used to represent a null date.
+
+===== Syntax =====
+string getNullDate ()
+
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+echo $database->getNullDate();
+</code>
+might produce:
+<code php|Result>
+0000-00-00 00:00:00
+</code>
+
+----
+
+~~DISCUSSION~~
+

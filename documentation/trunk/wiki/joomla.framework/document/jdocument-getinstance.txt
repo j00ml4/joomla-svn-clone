@@ -1,0 +1,26 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getInstance]] |
+
+This function returns an object that is of a type that is dependent on the document type. The default document type is html. Currently this is the only type that has been implemented.
+
+This method must be invoked as:
+    $document = &JDocument::getInstance();
+===== Syntax =====
+jdocument &getInstance	( **$type**, **$attributes** )
+| **$type** | type | is a string containing the type of document to instantiate. |
+| **$attributes** | mixed | is an associative array containing the attributes to pass to the [[jdocument#__construct|class constructor]]. See [[jdocument#__construct|__construct]] for more information. |
+
+===== Examples =====
+This function is called from the [[references:joomla.framework:application:japplication#getDocument|JApplication::getDocument]] function and should not need to be called otherwise. This function is called in the following way:
+<code php|Example>
+$attributes = array (
+                     'charset'  => 'utf-8',
+           	     'lineend'  => 'unix',
+                     'tab'  => '  ',
+          	     'language' => 'en-GB'
+		    );
+jimport('joomla.document.document');
+$instance =& JDocument::getInstance('html', $attributes);
+</code>
+This results in an object of type JDocumentHTML being assigned to the $instance variable.

@@ -1,0 +1,16 @@
+====== fetchBody ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->fetchBody]] |
+
+This function is used to return the document body. It is an abstract function and can be overriden by a subclass to provide this functionality.
+===== Syntax =====
+string fetchBody ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$document = &$mainframe->getDocument();
+$body = $document->fetchBody();
+</code>
+This function in the JDocument class returns an empty string.

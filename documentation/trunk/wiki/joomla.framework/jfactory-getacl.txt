@@ -1,0 +1,18 @@
+====== getACL ======
+^ API ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getACL]] |
+
+This method returns a reference to the global [[references:joomla.framework:application:jauthorization|JAuthorization]] object, only creating it if it doesn't already exist.
+===== Syntax =====
+JAuthorization &getACL ()
+
+===== Examples =====
+Retrieve the number of objects that are in the current acl.
+<code php|Example>
+$acl =& JFactory::getACL();
+echo "There are ". $acl->acl_count ." objects in the acl.";
+</code>
+might produce:
+<code php|Result>
+There are 92 objects in the acl.
+</code>

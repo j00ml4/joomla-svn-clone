@@ -1,0 +1,64 @@
+====== getTableList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableList]] | never | Work in progress |
+
+Returns a list of all the tables in the database.  This method returns a list of all the tables in the current database and so will include the names of tables that are not part of Joomla or its components if other packages are sharing the database.
+
+===== Syntax =====
+array getTableList ()
+
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$result = $database->getTableList();
+print_r( $result );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => jos_banner
+    [1] => jos_bannerclient
+    [2] => jos_bannerfinish
+    [3] => jos_categories
+    [4] => jos_components
+    [5] => jos_contact_details
+    [6] => jos_content
+    [7] => jos_content_frontpage
+    [8] => jos_content_rating
+    [9] => jos_core_acl_aro
+    [10] => jos_core_acl_aro_groups
+    [11] => jos_core_acl_aro_sections
+    [12] => jos_core_acl_groups_aro_map
+    [13] => jos_core_log_items
+    [14] => jos_core_log_searches
+    [15] => jos_groups
+    [16] => jos_mambots
+    [17] => jos_menu
+    [18] => jos_messages
+    [19] => jos_messages_cfg
+    [20] => jos_modules
+    [21] => jos_modules_menu
+    [22] => jos_newsfeeds
+    [23] => jos_poll_data
+    [24] => jos_poll_date
+    [25] => jos_poll_menu
+    [26] => jos_polls
+    [27] => jos_sections
+    [28] => jos_session
+    [29] => jos_simplefaq
+    [30] => jos_stats_agents
+    [31] => jos_template_positions
+    [32] => jos_templates_menu
+    [33] => jos_users
+    [34] => jos_usertypes
+    [35] => jos_weblinks
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

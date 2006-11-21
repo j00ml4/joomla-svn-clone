@@ -1,0 +1,29 @@
+====== loadXML ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadXML]] | never | Work in progress |
+
+Loads an XML string into the registry. If the namespace is not specified, the data will be loaded into the default namespace.
+
+===== Syntax =====
+boolean loadXML	( **$data**, **$namespace** )
+
+| **$data** | string | is an XML formatted string to load into the registry. |
+| **$namespace** | string | is a string specifying the namespace into which to load the data. This parameter is optional and if omitted defaults to the default namespace. |
+
+===== Examples =====
+This method should work something like (this is unconfirmed as this method was non-operational at time of writing): 
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+jimport('joomla.filesystem.file');
+$data = JFile::read( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.xml' );
+$registry->loadXML( $data );
+echo "The registry value is: " . $registry->getValue( 'com_document.tag' );
+</code>
+might produce:
+<code php|Result>
+The registry value is: en-GB
+</code>
+
+----
+
+~~DISCUSSION~~

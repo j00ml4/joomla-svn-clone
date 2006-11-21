@@ -1,0 +1,27 @@
+====== loadFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadFile]] | never | Work in progress |
+
+Loads the contents of a file into the registry. If no namespace is specified, the values will be loaded into the default namespace. Format can be either 'INI', 'PHP' or 'XML', but is by default 'INI'.
+
+===== Syntax =====
+boolean loadFile	( **$file**, **$format**, **$namespace** )
+
+| **$file** | string | is a string containing the path to the file that is to be loaded. |
+| **$format** | string | is a string specifying the format of the file. This can be 'INI', 'PHP' or 'XML'. This parameter is optional and if omitted defaults to 'INI'. |
+| **$namespace** | string | is a string specifying the namespace into which the values should be loaded. This parameter is optional and if omitted defaults to the default namespace. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+$registry->loadFile( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.ini', 'INI' );
+echo "The registry value is: " . $registry->getValue( 'com_document.ADMINISTRATOR' );
+</code>
+might produce:
+<code php|Result>
+The registry value is: administrator
+</code>
+
+----
+
+~~DISCUSSION~~

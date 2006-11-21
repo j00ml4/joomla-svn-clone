@@ -1,0 +1,29 @@
+====== getUserListFromGroup ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->getUserListFromGroup]] | never | Work in progress |
+
+Returns a list of users from a specific group.
+
+===== Syntax =====
+array getUserListFromGroup	( **$value**, **$name**, **$recurse**, **$order** )
+
+| **$value** | string | is an integer containing the value for the group. This parameter is not used (it is for 1.0 compatibility purposes). |
+| **$name** | string | is a string containing the name of the group (e.g. 'Publisher'). |
+| **$recurse** | string | is a string specifying whether or not the method should drill into child groups. If RECURSE, the method will drill into child groups. This parameter is optional and if omitted defaults to 'NO_RECURSE'. |
+| **$order** | string | is a string specifying the field by which the list should be ordered. This parameter is optional and if omitted defaults to 'name'. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+
+print_r( $user->getUserListFromGroup( 2, 'Manager', 'RECURSE' ) );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => stdClass Object ( [value] => 62 [text] => Administrator ) )
+</code>
+
+----
+
+~~DISCUSSION~~

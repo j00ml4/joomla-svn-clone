@@ -1,0 +1,30 @@
+====== loadSetupFile ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->loadSetupFile]] | never | Work in progress |
+
+Loads an XML setup file and parses it. This method is used by the constructor to initialize the setup data. It can be used instantiation to reset the setup data. It returns true on success, false otherwise.
+
+===== Syntax =====
+boolean loadSetupFile ( **$path** )
+
+| **$path** | string | is a string containing the path to XML setup file. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString );
+$params->loadSetupFile( $file );
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+----
+
+~~DISCUSSION~~
+

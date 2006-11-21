@@ -1,0 +1,61 @@
+====== getLimitBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getLimitBox]] | never | Work in progress |
+
+Creates a dropdown box for selecting how many records to show per page. $link should be the URL to your component (i.e. the Joomla! Base URL with the option value appended to the query string, along with any other variables to get to the appropriate function such as a task if necessary). $link is optional and if omitted defaults to null. It is required for proper function if this is called from outside the admin panel. If called from the admin panel, it is not used.
+
+===== Syntax =====
+string getLimitBox	( **$link** )
+
+| **$link** | string | is a string containing the link to the appropriate function which displays the page. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+
+// get the total number of records
+$query = "SELECT COUNT(*)"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT name, value"
+. "\n FROM #__extcal_config"
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+if ($db->getErrorNum()) {
+   	echo $db->stderr();
+   	return;
+}
+
+echo "<table>";
+foreach ($rows as $row) {
+    echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
+}
+echo "</table>";
+echo $pageNav->getLimitBox( $mainframe->getBaseURL() . "index.php?option=$option" );
+</code>
+might display the following Limit Box after the list of results:
+<code php|Result>
+<select name="limit" id="limit" class="inputbox" size="1" onchange="document.location.href='http://127.0.0.1/joomla15/index.php?option=com_document&amp;limit=' + this.options[selectedIndex].value + '&amp;limitstart=0';">
+    <option value="5" >5</option>
+    <option value="10" >10</option>
+    <option value="15" >15</option>
+    <option value="20"  selected="selected">20</option>
+    <option value="25" >25</option>
+    <option value="30" >30</option>
+    <option value="50" >50</option>
+    <option value="100" >100</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~

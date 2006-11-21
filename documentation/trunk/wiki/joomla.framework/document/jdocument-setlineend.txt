@@ -1,0 +1,24 @@
+====== setLineEnd ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setLineEnd]] |
+
+Sets the line end style to Windows, Mac, Unix or a custom string.
+
+===== Syntax =====
+void setLineEnd	( **$style** )
+| **$style** | string | is a string containing the style of the document. It can be 'win', 'mac', 'unix' or a custom string. |
+
+===== Examples =====
+Set the line end style of the current document.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setLineEnd( 'mac' );
+
+echo "Style: " . $document->getLang();
+</code>
+Might produce:
+<code php|Result>
+Language: mac
+</code>
