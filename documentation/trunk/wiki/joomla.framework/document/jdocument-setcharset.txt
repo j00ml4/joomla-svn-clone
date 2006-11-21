@@ -1,0 +1,23 @@
+====== setCharset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setCharset]] |
+
+Sets the character set of the current document.
+===== Syntax =====
+void setCharset	( **$type** )
+| **$type** | string | is a string containing the new character set identifier. This parameter is optional and if omitted defaults to 'utf-8'. |
+
+===== Examples =====
+Set the character set of the current document.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setCharset( 'utf-8' );
+
+echo "Character Set: " . $document->getCharset();
+</code>
+Might produce:
+<code php|Result>
+Character Set: utf-8
+</code>

@@ -1,0 +1,50 @@
+====== JApplication ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication]] | never | Work in progress |
+
+JApplication is the base class for a Joomla! application. It provides many basic API functions relating to the application itself.
+
+An instance of this class, called $mainframe, is created using the existing database object and the option parameter that was passed in the request. Therefore you do not generally need to create a new instance of this object.  If access to $mainframe is required within a function then it must be declared in a global statement at the top of the function so that the global variable is accessed.
+
+In actual fact, $mainframe is an instance of either the JSite class or the JAdministrator class, both of which extend the JApplication class, depending on whether the Joomla! front-end or administrator is being executed, respectively. The class definition for JSite can be found in the includes/application.php file and the class definition for JAdministrator can be found in administrator/includes/application.php.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JApplication-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-__construct|__construct]] | Constructor for the JApplication class. |
+| [[JApplication-addCustomHeadTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-addCustomHeadTag|addCustomHeadTag]] | Adds a custom HTML string to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:Joomla.Framework:document:JDocumentHTML-addCustomTag|JDocumentHTML->addCustomTag]] should be used instead). |
+| [[JApplication-addMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-addMetaTag|addMetaTag]] | Adds a meta tag to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:Joomla.Framework:document:JDocument-setMetaData|JDocument->setMetaData]] should be used instead). |
+| [[JApplication-appendMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-appendMetaTag|appendMetaTag]] | Appends a value to an existing meta tag of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:Joomla.Framework:document:JDocument-setMetaData|JDocument->setMetaData]] should be used instead). |
+| [[JApplication-appendPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-appendPathWay|appendPathWay]] | Appends a value on to the end of the custom pathway array. This method is deprecated in Joomla! 1.5 ([[JPathway-addItem|JPathWay->addItem]] should be used instead). |
+| [[JApplication-enqueueMessage|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-enqueueMessage|enqueueMessage]] | Adds a message to the system message queue. |
+| [[JApplication-execute|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-execute|execute]] | Executes the application. |
+| [[JApplication-getBasePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBasePath|getBasePath]] | Returns the base path of the application. This method is deprecated in Joomla! 1.5 (Use the [[references:Joomla.Framework:environment:JURI-base|JURI::base()]] method instead). |
+| [[JApplication-getBlogCategoryCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBlogCategoryCount|getBlogCategoryCount]] | Returns the number of published blog categories. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getItemCount|JApplicationHelper::getItemCount]] instead). |
+| [[JApplication-getBlogSectionCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getBlogSectionCount|getBlogSectionCount]] | Returns the number of published blog sections. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getItemCount|JApplicationHelper::getItemCount]] instead). |
+| [[JApplication-getCfg|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getCfg|getCfg]] | Returns the value of a configuration variable from configuration.php. |
+| [[JApplication-getClientId|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getClientId|getClientId]] | Returns the client ID of the current running application. |
+| [[JApplication-getContentItemLinkCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getContentItemLinkCount|getContentItemLinkCount]] | Returns the number of content item links. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getItemCount|JApplicationHelper::getItemCount]] instead). |
+| [[JApplication-getCustomPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getCustomPathWay|getCustomPathWay]] | Returns the custom pathway array. This method is deprecated in Joomla! 1.5 (Use [[JPathWay-getNamePathWay|JPathWay->getNamePathWay]] instead). |
+| [[JApplication-getGlobalBlogSectionCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getGlobalBlogSectionCount|getGlobalBlogSectionCount]] | Returns the number of published global blog sections. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getItemCount|JApplicationHelper::getItemCount]] instead). |
+| [[JApplication-getHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getHead|getHead]] | Returns current head block data for the current page being processed. This method is deprecated in Joomla! 1.5 (use JDocument->renderHead instead). |
+| [[JApplication-getMessageQueue|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getMessageQueue]] | Retrieves the contents of the system message queue. |
+| [[JApplication-getPath|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getPath|getPath]] | Returns a stored path variable. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getPath|JApplicationHelper::getPath]] instead). |
+| [[JApplication-getPathWay|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getPathWay|getPathWay]] | Returns a reference to the [[JPathWay|JPathWay]] object. |
+| [[JApplication-getStaticContentCount|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getStaticContentCount|getStaticContentCount]] | Returns the number of published static content items. This method is deprecated in Joomla! 1.5 (Use [[JApplicationHelper-getItemCount|JApplicationHelper::getItemCount]] instead). |
+| [[JApplication-getTemplate|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getTemplate|getTemplate]] | Returns the name of the current template. |
+| [[JApplication-getUserState|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getUserState|getUserState]] | Gets a user state. User state variables are stored with the session and can be used to maintain state between requests. |
+| [[JApplication-getUserStateFromRequest|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-getUserStateFromRequest|getUserStateFromRequest]] | Gets the value of a user state variable from the request, using the existing state variable if it does not exist. |
+| [[JApplication-isAdmin|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-isAdmin|isAdmin]] | Determines whether or not the application has been loaded from the admin interface. |
+| [[JApplication-isSite|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-isSite|isSite]] | Determines whether or not the application has been loaded from the site interface. |
+| [[JApplication-login|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-login|login]] | Login authentication function. |
+| [[JApplication-logout|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-logout|logout]] | Logout authentication function. |
+| [[JApplication-prependMetaTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-prependMetaTag|prependMetaTag]] | Prepends text to an existing meta tag of the current page being processed. This method is deprecated in Joomla! 1.5 (use [[references:Joomla.Framework:document:JDocument-setMetaData|JDocument->setMetadata]] instead). |
+| [[JApplication-redirect|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-redirect|redirect]] | Enqueues a system message and redirects the browser to an alternative URL. |
+| [[JApplication-registerEvent|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-registerEvent|registerEvent]] | Registers a handler to a particular event group. |
+| [[JApplication-setConfiguration|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setConfiguration|setConfiguration]] | Set a configuration value to the specified configuration file. |
+| [[JApplication-setSession|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setSession|setSession]] | Sets the user session, performing the necessary updates.  |
+| [[JApplication-setUserState|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-setUserState|setUserState]] | Sets the value of a user state variable. |
+| [[JApplication-triggerEvent|{{http://api.joomla.org/media/images/Method.png }}]] [[JApplication-triggerEvent|triggerEvent]] | Calls all handlers associated with an event group. |
+
+----
+
+~~DISCUSSION~~

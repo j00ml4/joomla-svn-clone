@@ -1,0 +1,32 @@
+====== write ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->write]] |
+
+This method writes the contents of a buffer to a file on the FTP server. This method returns true if successful, false otherwise.
+
+===== Syntax =====
+boolean write	( **$remote**, **$buffer**, **$mode** )
+| **$remote** | string | is a string containing the remote path of the file to write to. |
+| **$buffer** | string | is a string containing the contents to write to the specified file. |
+| **$mode** | integer | is an integer specifying the file transfer mode. This can be one of three constants: FTP_AUTOASCII, FTP_BINARY or FTP_ASCII. These constants are defined in this class. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+$buffer = "Joomla! and away!  The best selling CMS in its class!";
+
+if ($ftp->write( 'testing/joomla.txt', $buffer ) ) {
+    echo "File written successfully!";
+} else {
+    echo "File could not be written!";
+}
+</code>
+might produce:
+<code php|Result>
+File written successfully!
+</code>

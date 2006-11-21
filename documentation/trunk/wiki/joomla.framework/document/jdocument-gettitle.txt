@@ -1,0 +1,20 @@
+====== getTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getTitle]] |
+
+Gets the title of the current document.
+===== Syntax =====
+string getTitle ()
+
+===== Examples =====
+This example displays the title of the current document.
+<code php|Example>
+global $mainframe;
+
+$document = &$mainframe->getDocument();
+echo "Title: " . $document->getTitle();
+</code>
+Might produce:
+<code php|Result>
+Title: Joomla! 1.1 Documentation Test Bed
+</code>

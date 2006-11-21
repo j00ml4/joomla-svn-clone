@@ -1,0 +1,46 @@
+====== writeLimitBox ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->writeLimitBox]] | never | Work in progress |
+
+Writes (echoes) the output of [[JPagination-getLimitBox|getLimitBox]]. This method has been deprecated as of Joomla! 1.5. Use [[JPagination-getLimitBox|getLimitBox]] instead.
+
+===== Syntax =====
+void writeLimitBox	( **$link** )
+
+| **$link** | string | is a string containing the $link parameter to pass to [[JPagination-getLimitBox|getLimitBox]]. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+$query = "SELECT count(*) "
+. "\n FROM #__weblinks"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+$pageNav->writeLimitBox();
+</code>
+might produce:
+<code php|Result>
+<select name="limit" id="limit" class="inputbox" size="1" onchange="document.adminForm.submit();">
+    <option value="5" >5</option>
+    <option value="10" >10</option>
+    <option value="15" >15</option>
+    <option value="20"  selected="selected">20</option>
+    <option value="25" >25</option>
+    <option value="30" >30</option>
+    <option value="50" >50</option>
+    <option value="100" >100</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+

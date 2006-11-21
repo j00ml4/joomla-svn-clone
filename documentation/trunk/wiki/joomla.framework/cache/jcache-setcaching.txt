@@ -1,0 +1,18 @@
+====== setCaching ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Cache|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#setCaching|JCache->setCaching]] | Never | Public review |
+
+Enables and disables caching.
+===== Syntax =====
+void setCaching	( **$enable** )
+| **$enable** | boolean | is a flag which specifies whether or not caching should be enabled. |
+
+===== Examples =====
+Enable caching:
+<code php|Example>
+$cache = JFactory::getCache();
+
+$cache->setCaching( true );
+</code>
+
+~~DISCUSSION~~

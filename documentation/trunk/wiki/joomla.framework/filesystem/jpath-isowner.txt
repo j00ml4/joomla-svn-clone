@@ -1,0 +1,24 @@
+====== isOwner ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#isOwner|JPath->isOwner]] | 27 Apr 2006 | Published |
+
+This method determines if the current script owns the path.
+===== Syntax =====
+boolean isOwner	( **$path** )
+| **$path** | string | is a string containing the path to check the ownership of. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.path' );
+
+echo "Ownership: ";
+echo JPath::isOwner( JPATH_ROOT . '/robots.txt' ) ? 'true' : 'false';
+</code>
+might produce:
+<code|Result>
+Ownership: true
+</code>
+
+----
+
+~~DISCUSSION~~

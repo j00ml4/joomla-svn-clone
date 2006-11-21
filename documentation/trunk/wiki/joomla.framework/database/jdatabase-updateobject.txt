@@ -1,0 +1,58 @@
+====== updateObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->updateObject]] | never | Work in progress |
+
+Updates a database table row using data contained in an object.  Returns false if the update failed; otherwise it returns the updated table row.
+
+===== Syntax =====
+void updateObject	( **$table**, **&$object**, **$keyName**, **$updateNulls** )
+
+| **$table** | string | is a string containing the name of the database table. |
+| **&$object** | object | is an object containing the database fields to be updated. |
+| **$keyName** | string | is a string containing the name of the primary key for the database table. |
+| **$updateNulls** | boolean | is a flag.  If true then object attributes that are null will overwrite the corresponding database fields.  If false then null object attributes are ignored. |
+
+===== Examples =====
+In this example the function newUser is called to create a record in the Joomla users table, then the function updateUser is called to update one of its fields.
+<code php|Example>
+// Create new row in users table and return the unique id allocated
+// if successful or false otherwise.
+function newUser( $name ) {
+  $database =& JFactory::getDBO();
+ 
+  $user = new stdClass;
+  $user->id = NULL;
+  $user->name = $name;
+ 
+  if (!$database->insertObject( '#__users', $user, 'id' )) {
+    echo $database->stderr();
+    return false;
+  }
+ 
+  return $user->id;
+}
+ 
+// Update an existing user record.
+function updateUser( $id, $username ) {
+  $database =& JFactory::getDBO();
+ 
+  $user = new stdClass;
+  $user->id = $id;
+  $user->username = $username;
+ 
+  if (!$database->updateObject( '#__users', $user, 'id' )) {
+    echo $database->stderr();
+    return false;
+  }
+ 
+}
+
+$id = newUser( 'Linus Torvalds');
+updateUser( $id, 'linus' );
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

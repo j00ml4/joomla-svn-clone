@@ -1,0 +1,11 @@
+====== getPlatform ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla-Framework/Application/JBrowser.html|JBrowser->getPlatform]] |
+
+Return the currently matched platform.
+===== Syntax =====
+string getPlatform ()
+
+===== Examples =====
+
+

@@ -1,0 +1,32 @@
+====== query ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->query]] | never | Work in progress |
+
+Executes the current SQL query string. This method returns a database resource if successful, false otherwise.
+
+The syntax and semantics of SQL statements are beyond the scope of this manual.  Prior to Joomla 1.5 the only database software supported was MySQL and the reference manual may be found at http://dev.mysql.com/doc/.
+
+===== Syntax =====
+mixed query()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = "SELECT * FROM #__categories";
+$database->setQuery( $sql );
+if (!$result = $database->query()) {
+  echo $database->stderr();
+}
+
+echo $database->getNumRows( $result );
+</code>
+might produce:
+<code php|Result>
+23
+</code>
+
+----
+
+~~DISCUSSION~~
+

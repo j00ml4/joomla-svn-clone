@@ -1,0 +1,170 @@
+====== Joomla BreadCrumbs Specification ======
+
+===== 1. Overview and Description: =====
+New in Joomla 1.1 is a JBreadCrumbs class.  This class provides an interface for 3rd party developers to more effectively manipulate the standard breadcrumbs[pathway] string.  The JApplication class uses it to keep up with an internal breadcrumbs object and provides public methods for manipulation of this object.  Also, it could be used by third party developers to create a separate breadcrumbs trail within a component.  Another feature of the new class is that it is no longer tightly coupled with any particular component.  Previously, Joomla handled the breadcrumbs[pathway] in a way that was truly only meant for the core content component and was hacked to allow for some extra functionality.  The new system should provide much more flexibility and improve logic encapsulation in the core code.
+
+===== 2. Implementation =====
+
+==== 2.1 JBreadCrumbs Class Public Methods ====
+=== 2.1.1 setSeparator($custom = null) ===
+
+<code php|Source Code>
+/**
+ * Set the breadcrumbs separator for the JBreadCrumbs object.
+ * 
+ * @access public
+ * @param string $custom Custom String to separate the items of the breadcrumbs
+ * @return boolean True on success
+ * @since 1.1
+ */
+function setSeparator( $custom = null )
+</code>
+
+=== 2.1.1.1 Description ===
+This method sets the breadcrumbs separator for display purposes.  If $custom not set, the pathway separator is chosen from the template separator:
+	JOSROOT/templates/$templateName/images/arrow.png
+ then the default joomla one:
+	JOSROOT/images/M_images/arrow.png
+and if that is not found it is set to the string:
+	"&gt;"
+If $custom is set, the string passed to $custom is used as a separator just as it was passed
+
+=== 2.1.2 toXHTML($showHome = true, $showComponent = true) ===
+
+<code php|Source Code>
+/**
+ * Get the breadcrumbs string in XHTML format for output to the page
+ * 
+ * @access public
+ * @param boolean $showHome True if the home item should be shown
+ * @param boolean $showComponent True if the component item should be shown
+ * @return string XHTML Compliant pathway string
+ * @since 1.1
+ */
+function toXHTML( $showHome = true, $showComponent = true )
+</code>
+
+=== 2.1.2.1 Description ===
+This method returns a string representation of the breadcrumbs.  It takes two parameters, $showHome and $showComponent.  Both default to TRUE.  If $showHome is set to false, the Home [First] element of the breadcrumbs will not be displayed.  If $showComponent is set to false, the Component [Second] element of the breadcrumbs will not be displayed.
+
+
+=== 2.1.3 getNameBreadCrumbs() ===
+
+<code php|Source Code>
+/**
+ * Create and return an array of breadcrumb names.  Useful for things like SEF URLs
+ * 
+ * @access public
+ * @return array Array of names of pathway items
+ * @since 1.1
+ */
+function getNameBreadCrumbs()
+</code>
+
+=== 2.1.3.1 Description ===
+This method returns an array of names.  These names represent the name field of each item in the breadcrumbs.
+
+=== 2.1.4 addItem($name, $link) ===
+
+<code php|Source Code>
+/**
+ * Create and add an item to the breadcrumbs.
+ * 
+ * @access public
+ * @param string $name
+ * @param string $link
+ * @return boolean True on success
+ * @since 1.1
+ */
+function addItem( $name, $link )
+</code>
+
+=== 2.1.4.1 Description ===
+This method adds an item to the end of the breadcrumbs array.  It takes two parameters, $name and $link.  $name represents the display name for the item in the pathway and $link is a relative link to the item. eg. addItem( 'Contact', 'index.php?option=com_contact' );
+
+=== 2.1.5 setItemName($id, $name) ===
+
+<code php|Source Code>
+/**
+ * Set item name.
+ * 
+ * @access public
+ * @param integer $id
+ * @param string $name
+ * @return boolean True on success
+ * @since 1.1
+ */
+function setItemName( $id, $name )
+</code>
+
+=== 2.1.5.1 Description ===
+This method sets the name field of a particular item in the breadcrumbs array at the offset given.  It takes two parameters, $id and $name.  $id represents the offset in the breadcrumbs array to set the name for and $name represents the new name to set at _beadcrumbs[$id].
+
+==== 2.2 JApplication Class Public Methods ====
+=== 2.2.1 getBreadCrumbs() ===
+
+<code php|Source Code>
+/**
+ * Return a reference to the application JBreadCrumbs object
+ * 
+ * @access public
+ * @return object Application JBreadCrumbs object
+ * @since 1.1
+ */
+function & getBreadCrumbs()
+</code>
+
+=== 2.2.1.1 Description ===
+This method returns a reference to the application's $_breadcrumbs variable.
+
+=== 2.2.2 appendPathWay($name, $link = null) [DEPRECATED]===
+
+<code php|Source Code>
+/**
+ * Create and add an item to the application pathway.
+ * 
+ * @access public
+ * @param string $name
+ * @param string $link
+ * @return boolean True on success
+ * @since 1.1
+ */
+function appendPathWay( $name, $link = null )
+</code>
+
+=== 2.2.2.1 Description ===
+This method adds an item to the end of the application pathway object.  It takes two parameters, $name and $link.  $name represents the display name for the item in the pathway and $link is a relative link to the item. 
+
+eg. $mainframe->appendPathWay( 'Contact', 'index.php?option=com_contact' );
+
+NOTE: For backwards compatability the second paramter can be left out and just the information passed to $name will be appended to the pathway and displayed.  This functionality should be deprecated quickly as it can cause problems if the getPathWayNames() method is called expecting only text names and an html string was passed to the appendPathWay() method as the $name parameter.
+
+===== 3. Third Party Developer Usage =====
+
+==== 3.1 Core JBreadCrumbs object in Components ====
+To utilize the core JBreadCrumbs object in 3rd party components there are only a couple methods you need to know.
+
+=== 3.1.1 Getting the JBreadCrumb object from the JApplication class ===
+Somewhere near the beginning of your main component file:\\ \\
+[ components/com_comname/comname.php]\\ \\
+Add the line:
+	$breadcumbs =& $mainframe->getPathWay();
+
+=== 3.1.2 Setting the component name in the core JBreadCrumbs object ===
+Somewhere near the beginning of your main component file, but after you have gotten the JBreadCrumbs object from the JApplication:\\ \\
+[ components/com_comname/comname.php]\\ \\
+Add the line:
+	$breadcumbs->setItemName( 1, 'NAME YOU WANT DISPLAYED' );
+
+=== 3.1.3 Adding an items to the core JBreadCrumbs object ===
+This would most likely be done per task in a component.  The idea is to separate sections of the component.  Generally best practice would be to add an item to the pathway if necessary just before presentation layer code is called for the component.  As a side note, this is also a good time to set the page title via the JApplication class as well.  At the point in your logic that you want to append an item to the core pathway object add the following line:
+	$breadcrumbs->addItem( 'NAME', 'RELATIVE JOOMLA LINK' );\\ \\
+Where the name you want displayed is the first string passed, such as:\\ \\
+ 'Item 1'\\ \\
+And the relative joomla link is the second string passed, such as:\\ \\
+'index.php?option=com_comname&task=view&id=1'
+
+===== 4. Special Considerations =====
+Something very similar could be used to provide SEF URLs in the near future, or use this class
+
+[[:start|Back to the Startpage]]

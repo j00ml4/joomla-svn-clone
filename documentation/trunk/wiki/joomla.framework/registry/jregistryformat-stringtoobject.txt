@@ -1,0 +1,44 @@
+====== stringToObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormat|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->stringToObject]] | never | Work in progress |
+
+Converts a formatted string into an object. The format of the string must correspond to current JRegistryFormat class.
+
+===== Syntax =====
+object Data stringToObject ( **$data** )
+
+| **$data** | string | is the string to be converted. |
+
+===== Examples =====
+<code php|Example>
+$iniFormat =& JRegistryFormat::getInstance( 'INI' );
+
+jimport('joomla.filesystem.file');
+$data = JFile::read( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.ini' );
+
+$object = $iniFormat->stringToObject( $data );
+
+print_r( $object );
+</code>
+might produce:
+<code php|Result>
+stdClass Object
+(
+    [&LT] => &lt;
+
+    [&GT] => &gt;
+    [A USER SUBMITTED] => A user submitted
+    [ADMINISTRATOR] => administrator
+    [ALERTNOTAUTH] => You are not authorized to view this resource.
+    [APPLY] => Apply
+    [ARCHIVE] => archive
+    [ARCHIVED] => Archived
+    ...
+    [YOU NEED TO LOGIN.] => You need to login.
+    [YOUR] => Your
+)
+</code>
+
+----
+
+~~DISCUSSION~~

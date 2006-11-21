@@ -1,0 +1,14 @@
+====== splitSql ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->splitSql]] | never | Work in progress |
+
+Splits contents of an SQL file into array of discreet queries. Queries need to be delimited with an end of statement marker ';'. This method returns an array of strings containing the individual queries.
+
+===== Syntax =====
+array splitSql ( **$sql** )
+
+| **$sql** | string | is a string containing the SQL queries. |
+
+----
+
+~~DISCUSSION~~

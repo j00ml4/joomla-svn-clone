@@ -1,0 +1,24 @@
+====== setMetaData ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->setMetaData]] |
+
+Sets or alters a meta tag. This function is called by the setMetaContentType method to set the http-equiv tag.
+
+===== Syntax =====
+void setMetaData	( **$name**, **$content**, **$http_equiv** )
+| **$name** | string | is a string containing the name of the meta tag or http-equiv tag to set. |
+| **$content** | string | is a string containing the content of the meta tag or http-equiv tag. |
+| **$http_equiv** | boolean | is a flag that specifies whether or not this meta tag should be an http-equiv tag. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+Set a meta tag.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setMetaData( 'Publisher', 'Joomla! Documentation Team' );
+</code>
+might add the following tag to the head block:
+<code php|Result>
+<meta name="Publisher" content="Joomla! Documentation Team" />
+</code>

@@ -1,0 +1,50 @@
+====== startPanel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPaneSliders|{{http://api.joomla.org/media/images/Class.png }}]][[JPaneSliders|JPaneSliders]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneSliders.html|JPaneSliders->startPanel]] | never | Work in progress |
+
+Outputs the necessary HTML code and JavaScript to create a slider panel with the title text and start the panel.
+
+===== Syntax =====
+void startPanel	( **$text**, **$id** )
+
+| **$text** | text | is a string containing the title text to be displayed on the slider. |
+| **$id** | id | is a string containing the ID attribute to be used in the panel's <div> tag. |
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.presentation.pane');
+$pane =& JPane::getInstance('sliders');
+$pane->startPane( 'pane' );
+$pane->startPanel( 'Example Panel 1', 'panel1' );
+echo "This is panel1";
+$pane->endPanel();
+$pane->startPanel( 'Example Panel 2', 'panel2' );
+echo "This is panel2";
+$pane->endPanel();
+$pane->endPane();
+</code>
+might produce:
+<code php|Result>
+<div id="pane" class="pane-sliders">
+    <div class="panel">
+        <h3 class="moofx-toggler title" id="panel1"><span>Example Panel 1</span></h3>
+        <div class="moofx-slider content">This is panel1</div>
+    </div>
+    <div class="panel">
+        <h3 class="moofx-toggler title" id="panel2"><span>Example Panel 2</span></h3>
+        <div class="moofx-slider content">This is panel2</div>
+    </div>
+</div>
+<script type="text/javascript">	init_moofx();</script>
+</code>
+The specific code output from this method is:
+<code php|JPaneSliders::startPanel output>
+<div class="panel">
+    <h3 class="moofx-toggler title" id="panel1"><span>Example Panel 1</span></h3>
+    <div class="moofx-slider content">
+</code>
+
+
+----
+
+~~DISCUSSION~~

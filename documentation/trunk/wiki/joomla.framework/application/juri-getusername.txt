@@ -1,0 +1,18 @@
+====== getUsername ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getUsername]] |
+
+Gets the URI username. This function returns the username, or null if no username was specified.
+===== Syntax =====
+string getUsername ()
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://user:secret@www.joomla.org?action=help#create' );
+echo "Username: " . $uri->getUsername();
+</code>
+might produce:
+<code php|Result>
+Username: user
+</code>
+

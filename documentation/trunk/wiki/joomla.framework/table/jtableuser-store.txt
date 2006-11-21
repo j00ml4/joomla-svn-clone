@@ -1,0 +1,26 @@
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->store]] | never | Work in progress |
+
+Stores the record making the appropriate updates to the ACL list.
+
+===== Syntax =====
+void store	( **$updateNulls** )
+
+| **$updateNulls** | boolean | is a boolean value specifying whether or not null values should updated. This parameter is not currently used. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+The store method should be called in the following manner:
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+$user->load( 62 );
+$user->email = 'john.smith@email.com';
+$user->sendEmail = '1';
+$user->store();
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,29 @@
+====== stringToObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormatXML|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatXML|JRegistryFormatXML]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML->stringToObject]] | never | Work in progress |
+
+Converts an XML formatted string into an object. This method has not yet been implemented and currently will always returns true.
+
+===== Syntax =====
+object stringToObject ( **$data**, **$namespace** )
+
+| **$data** | string | is a string containing the XML code to convert to an object. |
+| **$namespace** | string | is a string containing the XML namespace to use. |
+
+===== Examples =====
+<code php|Example>
+$xmlFormat =& JRegistryFormat::getInstance( 'XML' );
+
+jimport( 'joomla.filesystem.file' );
+$data = JFile::read( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.xml' );
+
+print_r( $xmlFormat->stringToObject( $data ) );
+</code>
+might produce:
+<code php|Result>
+1
+</code>
+
+----
+
+~~DISCUSSION~~

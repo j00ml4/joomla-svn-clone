@@ -1,0 +1,8 @@
+====== __destruct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework//JObject.html|JObject->__destruct]] |
+
+This is the Class destructor, overridden in descendant classes. It is empty.
+===== Syntax =====
+JObject <nowiki>__destruct</nowiki> ()
+

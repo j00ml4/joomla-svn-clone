@@ -1,0 +1,43 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPane|{{http://api.joomla.org/media/images/Class.png }}]][[JPane|JPane]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPane.html|JPane->getInstance]] | never | Work in progress |
+
+Returns a reference to a JPane object. Based on the **$behavior** parameter, creates an instance of the appropriate JPane child class (passing **$params** to the constructor) and returns a reference to the object.
+
+===== Syntax =====
+void &getInstance	( **$behavior**, **$params** )
+
+| **$behavior** | string | is a string specifying the behavior to use. Current options are 'Tabs' or 'Sliders'. This parameter is optional and if omitted defaults to 'Tabs'. |
+| **$params** | array | is an associative array of values containing settings for the pane. This array is passed to the class constructor. This parameter is optional and if omitted defaults to an empty array. |
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.presentation.pane');
+$pane =& JPane::getInstance('sliders');
+$pane->startPane( 'pane' );
+$pane->startPanel( 'Example Panel 1', 'panel1' );
+echo "This is panel1";
+$pane->endPanel();
+$pane->startPanel( 'Example Panel 2', 'panel2' );
+echo "This is panel2";
+$pane->endPanel();
+$pane->endPane();
+</code>
+might produce:
+<code php|Result>
+<div id="pane" class="pane-sliders">
+    <div class="panel">
+        <h3 class="moofx-toggler title" id="panel1"><span>Example Panel 1</span></h3>
+        <div class="moofx-slider content">This is panel1</div>
+    </div>
+    <div class="panel"><h3 class="moofx-toggler title" id="panel2"><span>Example Panel 2</span></h3>
+        <div class="moofx-slider content">This is panel2</div>
+    </div>
+</div>
+<script type="text/javascript">	init_moofx();</script>
+</code>
+
+----
+
+~~DISCUSSION~~
+

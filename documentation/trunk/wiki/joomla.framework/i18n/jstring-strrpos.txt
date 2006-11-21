@@ -1,0 +1,26 @@
+====== strrpos ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strrpos]] | never | Work in progress |
+
+Finds the position of the last occurrence of a string. See [[http://www.php.net/manual/en/function.strrpos.php|strrpos]] for more information.
+
+===== Syntax =====
+mixed strrpos	( **$haystack**, **$needle** )
+
+| **$haystack** | string | is the string being examined. |
+| **$needle** | string | is the string being searced for. |
+
+===== Examples =====
+<code php|Example>
+$haystack = "και εισηλθεν παλιν εις";
+$needle = "α";
+echo "The position of the last occurence of $needle in $haystack is " . JString::strrpos( $haystack, $needle ) . ".";
+</code>
+might produce:
+<code php|Result>
+The position of the last occurence of α in και εισηλθεν παλιν εις is 14.
+</code>
+
+----
+
+~~DISCUSSION~~

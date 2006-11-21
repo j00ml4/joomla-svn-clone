@@ -1,0 +1,64 @@
+====== explain ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->explain]] | never | Work in progress |
+
+This is a diagnostic function that performs an SQL EXPLAIN on the current SQL query string.  The result is returned in an HTML table.
+
+===== Syntax =====
+void explain ()
+
+
+===== Examples =====
+<code php|Example>
+$database = JFactory::getDBO();
+$query = "SELECT id"
+       . "\n FROM #__menu"
+       . "\n WHERE menutype='mainmenu'"
+       . "\n AND published='1'"
+       . "\n ORDER BY parent, ordering";
+ 
+$database->setQuery( $query );
+echo $database->explain ();
+</code>
+might produce:
+<code php|Result (spaces added for legibility)>
+<div style="background-color:#FFFFCC" align="left">
+    <table cellspacing="1" cellpadding="2" border="0" bgcolor="#000000" align="center">
+<pre>EXPLAIN SELECT id
+ FROM jos_menu
+ WHERE menutype='mainmenu'
+ AND published='1'
+ ORDER BY parent, ordering</pre>
+    <tr>
+        <th bgcolor="#ffffff">id</th>
+        <th bgcolor="#ffffff">select_type</th>
+        <th bgcolor="#ffffff">table</th>
+        <th bgcolor="#ffffff">type</th>
+        <th bgcolor="#ffffff">possible_keys</th>
+        <th bgcolor="#ffffff">key</th>
+        <th bgcolor="#ffffff">key_len</th>
+        <th bgcolor="#ffffff">ref</th>
+        <th bgcolor="#ffffff">rows</th>
+        <th bgcolor="#ffffff">Extra</th>
+    </tr>
+    <tr>
+        <td bgcolor="#ffffff">1</td>
+        <td bgcolor="#ffffff">SIMPLE</td>
+        <td bgcolor="#ffffff">jos_menu</td>
+        <td bgcolor="#ffffff">ref</td>
+        <td bgcolor="#ffffff">menutype</td>
+        <td bgcolor="#ffffff">menutype</td>
+        <td bgcolor="#ffffff">228</td>
+        <td bgcolor="#ffffff">const</td>
+        <td bgcolor="#ffffff">9</td>
+        <td bgcolor="#ffffff">Using where; Using filesort</td>
+    </tr>
+</table>
+<br />&nbsp;
+</div>
+</code>
+
+----
+
+~~DISCUSSION~~
+

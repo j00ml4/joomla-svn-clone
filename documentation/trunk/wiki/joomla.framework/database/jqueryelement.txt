@@ -1,0 +1,15 @@
+====== JQueryElement [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[http://api.joomla.org/Joomla-Framework/Database/JQueryElement.html|JQueryElement]] |
+
+The JQueryElement class is utilized by the [[jquery|JQuery]] class to store individual query elements.
+===== Methods =====
+^ Method ^ Description ^
+| [[JQueryElement-JQueryElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JQueryElement-JQueryElement|JQueryElement]] | Class constructor. |
+| [[JQueryElement-append|{{http://api.joomla.org/media/images/Method.png }}]] [[JQueryElement-append|append]] | Appends element parts to the internal list. |
+| [[JQueryElement-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JQueryElement-toString|toString]] | Render the query element. |
+
+----
+
+~~DISCUSSION~~
+

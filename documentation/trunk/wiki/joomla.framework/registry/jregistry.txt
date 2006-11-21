@@ -1,0 +1,26 @@
+====== JRegistry ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry]] | never | Work in progress |
+
+The JRegistry class provides methods that assist in storing and retrieving name-value pairs. It provides built-in handling for a number of methods of storing these pairs, including arrays, files, INI strings, objects and XML.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JRegistry-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-__construct|__construct]] | Constructs the object by creating and setting the default namespace. |
+| [[JRegistry-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-getInstance|getInstance]] | Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. |
+| [[JRegistry-getValue|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-getValue|getValue]] | Gets a registry value. |
+| [[JRegistry-loadArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadArray|loadArray]] | Loads an associative array of values into the registry. |
+| [[JRegistry-loadFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadFile|loadFile]] | Loads the contents of a file into the registry. |
+| [[JRegistry-loadINI|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadINI|loadINI]] | Loads an INI string into the registry. |
+| [[JRegistry-loadObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadObject|loadObject]] | Loads the public variables of the object into registry. |
+| [[JRegistry-loadXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-loadXML|loadXML]] | Loads an XML string into the registry. |
+| [[JRegistry-makeNameSpace|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-makeNameSpace|makeNameSpace]] | Creates a namespace. |
+| [[JRegistry-setValue|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-setValue|setValue]] | Sets a registry value. |
+| [[JRegistry-toArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toArray|toArray]] | Transforms a namespace to an array. |
+| [[JRegistry-toObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toObject|toObject]] | Transforms a namespace to an object. |
+| [[JRegistry-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistry-toString|toString]] | Transforms a namespace to the given string format. |
+
+----
+
+~~DISCUSSION~~
+

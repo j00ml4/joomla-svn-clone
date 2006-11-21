@@ -1,0 +1,22 @@
+====== setConfiguration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->setConfiguration]] | never | Work in progress |
+
+Sets up the configuration registry. This method will include the specified file, which should specify a class definition for the JConfig class with the appropriate default values for the system configuration parameters. A registry will then be created and the configuration values will be loaded into the registry.
+
+===== Syntax =====
+void setConfiguration	( **$file**, **$type** )
+
+| **$file** | string | is a string containing the path to the configuration file |
+| **$type** | string | is a string containing the type of the configuration file. This parameter is optional and if omitted, defaults to 'config'. |
+
+===== Examples =====
+The Joomla! core calls this method as follows:
+<code php|Example>
+$mainframe->setConfiguration(JPATH_CONFIGURATION . DS . 'configuration.php');
+</code>
+JPATH_CONFIGURATION contains the path to the directory that contains the configuration file. Once the configuration registry has been created, the configuration values can then be retrieved using the [[japplication-getcfg|JApplication::getCfg]] method.
+
+----
+
+~~DISCUSSION~~

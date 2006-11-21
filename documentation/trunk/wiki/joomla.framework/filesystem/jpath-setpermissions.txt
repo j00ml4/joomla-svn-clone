@@ -1,0 +1,30 @@
+====== setPermissions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#setPermissions|JPath->setPermissions]] | 27 Apr 2006 | Published |
+
+Changes permissions (using the PHP [[http://www.php.net/chmod|chmod]] function) on files and folders recursively to the specified permissions.
+
+===== Syntax =====
+boolean setPermissions	( **$path**, **$filemode**, **$foldermode** )
+| **$path** | string | is a string containing the root path to begin changing permissions [without trailing slash]. |
+| **$filemode** | string | is a string containing an octal representation of the value to change file permissions to.  Null indicates that no change will be made to file permissions.  This parameter is optional and if omitted will default to '0644'. |
+| **$foldermode** | string | is a string containing an octal representation of the value to change folder permissions to.  Null indicates that no change will be made to folder permissions.  This parameter is optional and if omitted will default to '0755'. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.path' );
+
+if (JPath::setPermissions( JPATH_ROOT . '/libraries', '222' ) ) {
+    echo "Permissions changed!";
+} else {
+    echo "Could not set permissions!";
+}
+</code>
+might produce:
+<code php|Result>
+Permissions changed!
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,102 @@
+====== toXML ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableContent.html|JTableContent->toXML]] | never | Work in progress |
+
+Converts a record to XML.
+
+The optional $mapKeysToText parameter specifies whether or not foreign keys in the table should be matched to text values (i.e. if the username should appear instead of the userid in certain fields).
+
+===== Syntax =====
+void toXML ( **$mapKeysToText** )
+
+| **$mapKeysToText** | boolean | is a boolean value specifying whether or not foreign keys should be mapped to text values. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+$mapKeysToText is false:
+<code php|Example 1>
+$db =& JFactory::getDBO();
+$content =& JTable::getInstance('content', $db );
+$content->load( 2 );
+print_r( $content->toXML( false ) );
+</code>
+might produce:
+<code php|Result 1>
+<record table="#__content">
+    <id><![CDATA[2]]></id>
+    <title><![CDATA[Newsflash 1]]></title>
+    <title_alias><![CDATA[]]></title_alias>
+    <introtext><![CDATA[Joomla! 1.0 - 'Experience the Freedom'!. It has never been easier to create
+your own dynamic site. Manage all your content from the best CMS admin
+interface.]]></introtext>
+    <fulltext><![CDATA[]]></fulltext>
+    <state><![CDATA[1]]></state>
+    <sectionid><![CDATA[2]]></sectionid>
+    <mask><![CDATA[1]]></mask>
+    <catid><![CDATA[3]]></catid>
+    <created><![CDATA[2004-08-09 08:30:34]]></created>
+    <created_by><![CDATA[62]]></created_by>
+    <created_by_alias><![CDATA[]]></created_by_alias>
+    <modified><![CDATA[0000-00-00 00:00:00]]></modified>
+    <modified_by><![CDATA[0]]></modified_by>
+    <checked_out><![CDATA[0]]></checked_out>
+    <checked_out_time><![CDATA[0000-00-00 00:00:00]]></checked_out_time>
+    <publish_up><![CDATA[2004-08-09 00:00:00]]></publish_up>
+    <publish_down><![CDATA[0000-00-00 00:00:00]]></publish_down>
+    <images><![CDATA[]]></images>
+    <urls><![CDATA[]]></urls>
+    <attribs><![CDATA[]]></attribs>
+    <version><![CDATA[1]]></version>
+    <parentid><![CDATA[0]]></parentid>
+    <ordering><![CDATA[1]]></ordering>
+    <metakey><![CDATA[]]></metakey>
+    <metadesc><![CDATA[]]></metadesc>
+    <access><![CDATA[0]]></access>
+    <hits><![CDATA[0]]></hits>
+</record>
+</code>
+
+$mapKeysToText is true (notice that the sectionid and created_by fields below containing the names of the entities rather than the IDs):
+<code php|Example 2>
+$db =& JFactory::getDBO();
+$content =& JTable::getInstance('content', $db );
+$content->load( 2 );
+print_r( $content->toXML( true ) );
+</code>
+might produce:
+<code php|Result 2>
+<record table="#__content" mapkeystotext="true">
+    <id><![CDATA[2]]></id>
+    <title><![CDATA[Newsflash 1]]></title>
+    <title_alias><![CDATA[]]></title_alias>
+    <introtext><![CDATA[Joomla! 1.0 - 'Experience the Freedom'!. It has never been easier to create
+your own dynamic site. Manage all your content from the best CMS admin
+interface.]]></introtext>
+    <fulltext><![CDATA[]]></fulltext>
+    <state><![CDATA[1]]></state>
+    <sectionid><![CDATA[Newsflashes]]></sectionid>
+    <mask><![CDATA[1]]></mask>
+    <created><![CDATA[2004-08-09 08:30:34]]></created>
+    <created_by><![CDATA[Administrator]]></created_by>
+    <created_by_alias><![CDATA[]]></created_by_alias>
+    <modified><![CDATA[0000-00-00 00:00:00]]></modified>
+    <modified_by><![CDATA[0]]></modified_by>
+    <checked_out><![CDATA[0]]></checked_out>
+    <checked_out_time><![CDATA[0000-00-00 00:00:00]]></checked_out_time>
+    <publish_up><![CDATA[2004-08-09 00:00:00]]></publish_up>
+    <publish_down><![CDATA[0000-00-00 00:00:00]]></publish_down>
+    <images><![CDATA[]]></images>
+    <urls><![CDATA[]]></urls>
+    <attribs><![CDATA[]]></attribs>
+    <version><![CDATA[1]]></version>
+    <parentid><![CDATA[0]]></parentid>
+    <ordering><![CDATA[1]]></ordering>
+    <metakey><![CDATA[]]></metakey>
+    <metadesc><![CDATA[]]></metadesc>
+    <access><![CDATA[0]]></access>
+    <hits><![CDATA[0]]></hits>
+</record>
+</code>
+
+----
+
+~~DISCUSSION~~

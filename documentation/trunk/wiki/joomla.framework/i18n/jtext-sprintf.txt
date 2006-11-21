@@ -1,0 +1,29 @@
+====== sprintf ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla-Framework/I18N/JText.html|JText->sprintf]] | never | Work in progress |
+
+Wrapper for the [[http://ca.php.net/manual/en/function.sprintf.php|sprintf]] method. Similar to [[http://ca.php.net/manual/en/function.sprintf.php|sprintf]], this method takes multiple parameters. See the [[http://ca.php.net/manual/en/function.sprintf.php|PHP documentation] for information on parameters for this method. The first parameter given is the format string. This string is passed through the [[JText-_|JText::_]] method for translation before being passed on to [[http://ca.php.net/manual/en/function.sprintf.php|sprintf]].
+
+[[http://ca.php.net/manual/en/function.printf.php|printf]] processes the string and returns the output as a string.
+
+
+===== Syntax =====
+string sprintf ( **$format**, **$args** )
+
+| **$format** | string | is a string containing the format string to be processed. |
+| **$args** | mixed | is a mixed array of parameters to pass to [[http://ca.php.net/manual/en/function.sprintf.php|sprintf]]. See [[http://ca.php.net/manual/en/function.sprintf.php|sprintf]] for more information. |
+
+===== Examples =====
+<code php|Example>
+$output = JText::sprintf ('Characters: %c %c', 76, 65);
+echo $output;
+</code>
+might produce
+<code php|Result>
+Characters: L A
+</code>
+
+----
+
+~~DISCUSSION~~
+

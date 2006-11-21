@@ -1,0 +1,52 @@
+====== JTableContent ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableContent.html|JTableContent]] | never | Work in progress |
+
+The JTableContent class is an implementation of the JTable class to provide access to the content table. This implementation provides data verification functionality via the check() method. It also includes a method to convert an article to XML (i.e. the toXML method).
+
+The content table is used to store all the articles in the system.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableContent-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableContent-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-check|check]] | verifies that the current data is structurally sound. |
+| [[JTableContent-toXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableContent-toXML|toXML]] | converts a record to XML. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$title** | is a string containing the title of the article. |
+| **$title_alias** | is a string containing the title alias for the article. |
+| **$introtext** | is a string containing the intro text for the article. |
+| **$fulltext** | is a string containing the full text of the article. |
+| **$state** | is an integer containing the state of the article. |
+| **$sectionid** | is an integer containing the section of the article. |
+| **$mask** | is an integer containing the mask for the article. This field is deprecated. |
+| **$catid** | is an integer containing the category of the article. |
+| **$created** | is a datetime variable containing the date the article was created. |
+| **$created_by** | is an integer containing the user ID of the author. |
+| **$created_by_alias** | is a string containing an alias for the author. |
+| **$modified** | is a datetime variable containing the date the article was last modified. |
+| **$modified_by** | is an integer containing the user ID of the last user to modify the article. |
+| **$checked_out** | is a boolean specifying whether or not the article is checked out. |
+| **$checked_out_time** | is a datetime containing the date the article was checked out. |
+| **$frontpage_up** | is a datetime containing the date the article was last published to the frontpage. |
+| **$frontpage_down** | is a datetime containing the date the article was last unpublished from the frontpage. |
+| **$publish_up** | is a datetime containing the date the article was last published. |
+| **$publish_down** | is a datetime containing the date the article was last unpublished. |
+| **$images** | is a string containing the images that are used in the article. |
+| **$urls** | is a string containing the URLs for links contained in the article. |
+| **$attribs** | is a string containing article attributes. |
+| **$version** | is an integer containing the version of the article. |
+| **$parentid** | is an integer containing the ID of the article's parent. |
+| **$ordering** | is an integer containing the ordering of the article. |
+| **$metakey** | is a string containing the meta keys for the article. |
+| **$metadesc** | is a string containing the meta description for the article. |
+| **$access** | is an integer containing the access settings for the article. |
+| **$hits** | is an integer containing the number of hits the article has received. |
+
+
+----
+
+~~DISCUSSION~~
+

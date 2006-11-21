@@ -1,0 +1,40 @@
+====== queryBatch ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->queryBatch]] | never | Work in progress |
+
+Executes the current SQL query string as a single transaction.  This function can accept a semi-colon (';') separated list of SQL query strings and execute them in a single call.  If the $transaction_safe parameter is true then all of the individual query strings must complete successfully or else they will all be rolled back.
+
+===== Syntax =====
+mixed queryBatch ( **$abort_on_error**, **$p_transaction_safe** )
+
+| **$abort_on_error** | boolean | is a boolean value which if true then an error on any of the query strings will cause the function to abort.  If aborted the function will return the database resource for the query that failed.  The error code can be examined by calling database->getErrorNum and the error message can be obtained by calling database->getErrorMsg. |
+| **$p_transaction_safe** | boolean | is a boolean value which if true then the queries will be executed as a single unit of work.  Either they all complete successfully, in which case the function returns true; or they will all be rolled back as soon as any one query fails, in which case the function will return false. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = "INSERT INTO #__users (name) VALUES ('bob'); "
+    .  "INSERT INTO #__users (name) VALUES ('frank'); "
+    .  "INSERT INTO #__users (name) VALUES ('allen'); "
+    .  "INSERT INTO #__users (name) VALUES ('joseph'); ";
+    
+
+$database->setQuery( $sql );
+if (!$result = $database->queryBatch()) {
+  echo $database->stderr();
+}
+if ($result) {
+    echo "Queries executed successfully! ";
+}
+echo $database->getAffectedRows( );
+</code>
+might produce:
+<code php|Result>
+Queries executed successfully! 1
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,29 @@
+====== mkdir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->mkdir]] |
+
+This method creates a folder on the FTP server. If the operation is successful, it returns true. Otherwise, it returns false.
+
+===== Syntax =====
+boolean mkdir ( **$path** )
+| **$path** | string | is a string containing the path of the folder to create. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+
+if ($ftp->mkdir( 'testing' ) ) {
+    echo "Directory successfully created!";
+} else {
+    echo "Could not create directory!";
+}
+</code>
+might produce:
+<code php|Result>
+Directory successfully created!
+</code>

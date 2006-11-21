@@ -1,0 +1,28 @@
+====== addScriptDeclaration ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScriptDeclaration]] |
+
+Adds a script into the head block of the current page.
+===== Syntax =====
+void addScriptDeclaration	( **$content**, **$type** )
+| **$content** | string | is a string containing the script that is to be added to the page. |
+| **$type** | string | is a string containing the mime-type of the script. This parameter is optional and if omitted defaults to 'text/javascript'. |
+
+===== Examples =====
+This example adds a short script to the page.
+<code php|Example>
+global $mainframe;
+
+$script = "alert( 'A script has been added to the page!' );";
+
+$document = &$mainframe->getDocument();
+$document->addScriptDeclaration( $script );
+</code>
+Might add the following to the head of the document:
+<code php|Result>
+<script type="text/javascript">
+// <!--
+    alert( 'A script has been added to the page!' );
+// -->
+</script>
+</code>

@@ -1,0 +1,123 @@
+====== orderDownIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderDownIcon]] | never | Work in progress |
+
+Returns the icon to move an item down. The icon will be shown if it is not the last item in the list (i.e. $i < $n - 1 or $i + $limitstart < $total - 1) and if $condition is true. If the icon is shown and $enabled is true, the method will return code for an icon that will call the Javascript function 'listItemTask' with the first parameter being 'cb' concatenated with $i and the second parameter being $task. If the icon is shown and $enabled is false, then a disabled button will be displayed.
+
+===== Syntax =====
+string orderDownIcon	( **$i**, **$n**, **$condition**, **$task**, **$alt**, **$enabled** )
+
+| **$i** | integer | is an integer containing the index of the row. The index of the first row should be 0 and the index of the last row should be $n -1. |
+| **$n** | integer | is an integer containing the number of items in the list. |
+| **$condition** | boolean | is a boolean specifying whether or not the icon should be displayed. This parameter is optional and if omitted defaults to true. |
+| **$task** | string | is a string containing the value of the task parameter to pass to the Javascript 'listItemTask' function. This parameter is optional and if omitted defaults to 'orderdown'. |
+| **$alt** | string | is a string containing the image alternate text string. This parameter is optional and if omitted defaults to 'Move Down'. |
+| **$enabled** | boolean | is a boolean specifying whether or not the icon should be enabled. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+$query = "SELECT count(*) "
+. "\n FROM #__weblinks"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+
+$query = "SELECT id, title, url, ordering "
+. "\n FROM #__weblinks "
+. "\n ORDER BY ordering "
+;
+$db->setQuery( $query, $pageNav->limitstart, $pageNav->limit );
+$rows = $db->loadObjectList();
+
+echo "<table>";
+
+$k = 0;
+for ($i=0, $n=count( $rows ); $i < $n; $i++) {
+    $row = &$rows[$i];
+?>
+    <tr>
+        <td><?php echo $pageNav->rowNumber( $i ); ?></td>
+        <td><?php echo $row->title; ?></td>
+        <td><?php echo $row->url; ?></td>
+        <td>
+            <span><?php echo $pageNav->orderUpIcon($i, true, 'orderup', 'Move Up', isset($rows[$i-1]) ); ?></span>
+            <span><?php echo $pageNav->orderDownIcon($i, $n, true, 'orderdown', 'Move Down', isset($rows[$i+1]) ); ?></span>
+            <input type="text" name="order[]" size="5" value="<?php echo $row->ordering;?>" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+<?php
+
+echo "</table>";
+}
+</code>
+might produce the following list:
+<code php|Result>
+<table>
+    <tr>
+        <td>1</td>
+        <td>Joomla!</td>
+        <td>http://www.joomla.org</td>
+        <td>
+            <span>&nbsp;</span>
+            <span><a href="#reorder" onclick="return listItemTask('cb0','orderdown')" title="Move Down">  <img src="images/downarrow.png" width="16" height="16" border="0" alt="Move Down" /></a></span>
+            <input type="text" name="order[]" size="5" value="1" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Joomla! - Forums</td>
+        <td>http://forum.joomla.org</td>
+        <td>
+            <span><a href="#reorder" onclick="return listItemTask('cb1','orderup')" title="Move Up">   <img src="images/uparrow.png" width="16" height="16" border="0" alt="Move Up" /></a></span>
+            <span><a href="#reorder" onclick="return listItemTask('cb1','orderdown')" title="Move Down">  <img src="images/downarrow.png" width="16" height="16" border="0" alt="Move Down" /></a></span>
+            <input type="text" name="order[]" size="5" value="2" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>php.net</td>
+        <td>http://www.php.net</td>
+        <td>
+            <span><a href="#reorder" onclick="return listItemTask('cb2','orderup')" title="Move Up">   <img src="images/uparrow.png" width="16" height="16" border="0" alt="Move Up" /></a></span>
+            <span><a href="#reorder" onclick="return listItemTask('cb2','orderdown')" title="Move Down">  <img src="images/downarrow.png" width="16" height="16" border="0" alt="Move Down" /></a></span>
+            <input type="text" name="order[]" size="5" value="3" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>OpenSourceMatters</td>
+        <td>http://www.opensourcematters.org</td>
+        <td>
+            <span><a href="#reorder" onclick="return listItemTask('cb3','orderup')" title="Move Up">   <img src="images/uparrow.png" width="16" height="16" border="0" alt="Move Up" /></a></span>
+
+            <span><a href="#reorder" onclick="return listItemTask('cb3','orderdown')" title="Move Down">  <img src="images/downarrow.png" width="16" height="16" border="0" alt="Move Down" /></a></span>
+            <input type="text" name="order[]" size="5" value="4" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>MySQL</td>
+        <td>http://www.mysql.com</td>
+        <td>
+            <span><a href="#reorder" onclick="return listItemTask('cb4','orderup')" title="Move Up">   <img src="images/uparrow.png" width="16" height="16" border="0" alt="Move Up" /></a></span>
+            <span>&nbsp;</span>
+            <input type="text" name="order[]" size="5" value="5" class="text_area" style="text-align: center" />
+        </td>
+    </tr>
+</table>
+</code>
+which renders as: {{:references:joomla.framework:html:ordericon.png|:references:joomla.framework:html:ordericon.png}}
+
+
+
+----
+
+~~DISCUSSION~~

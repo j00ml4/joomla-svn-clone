@@ -1,0 +1,118 @@
+====== XML Parameters ======
+
+===== Common Usage =====
+
+Parameters are used in many places in Joomla!:
+
+  * Item parameters
+  * Menu paramters
+  * Module parameters
+  * Configuration parameters (new in 1.5)
+
+All parameters have the following attributes:
+
+  * **name** - This is the field name of the parameter
+  * **type** - This is the element type for the parameter, text, a list box, etc
+  * **label** - The text label to be displayed in the parameter form
+  * **description** - The text that will display when you hover over the label
+  * **default** - The default value to use
+
+===== General Use =====
+
+Parameters definitions are made up of one ''params'' tag and one or more ''param'' tags, for example:
+
+<php><params>
+  <param ... />
+  <param ... />
+</params></php>
+
+The ''params'' tag can take the optional ''addparameterdir'' attribute which is equivalent to calling ''$params->addParameterDir()'' in the code.  It should hold a full path relative to the site installation folder, for example:
+
+<php><params addparameterdir="/components/com_contact/elements">
+  <param ... /></php>
+
+This allows any developer to define custom controls.
+
+==== Category List ====
+
+Selecting an Article category:
+
+<php><param name="catid" type="category" default="0" label="Category" description="An article category" /></php>
+
+Using the ''section'' (previously ''scope'' which is also still supported) attribute, you can select categories for other components: 
+
+<php><param name="catid" type="category" section="com_weblinks" default="0" label="Category" description="A weblinks category" /></php>
+
+==== Editors ====
+
+Selecting one of the installed wysiwyg editors:
+
+<php><param name="editor" type="editors" default="" label="User Editor" description="WYSYWYG Editor for this User" /></php>
+
+==== Filelist ====
+
+<php><param name="file_name" type="imagelist" directory="/images/stories" filter="" hide_default="1" default="" label="Menu Image" description="PARAMMENUIMAGE" /></php>
+
+  * **directory** - the directory in which to list the files
+  * **filter** - a regular expression to filter on, eg: filter="\.html$" lists all files ending with .html
+  * **exclude** - a regular expression to exclude files from the list, eg: exclude="index\.html" will exclude the index.html file from the list, exclude="^_" will emulate private files if you name them with an underscore prefix (eg: _my_private_template.html)
+  * **stripext** - set to 1 to strip the file extension in the list
+  * **hide_none** - set to 1 to hide the 'Do not use' list option
+  * **hide_default** - set to 1 to hide the 'Use Default' list option
+
+
+==== Helpsites ====
+
+<php><param name="helpsite" type="helpsites" default="" label="Help Site" description="Help site for this User" /></php>
+
+==== Imagelist ====
+
+<php><param name="menu_image" type="imagelist" directory="/images/stories" hide_default="1" default="" label="Menu Image" description="PARAMMENUIMAGE" /></php>
+
+  * hide_default - set to 1 to hide an automatic Use Default entry in the list
+
+==== Languages ====
+
+<php><param name="language" type="languages" client="site" default="" label="Front-end Language" description="paramLanguage" /></php>
+
+==== List ====
+
+<php><param name="link_titles" type="list" default="" label="Linked Titles" description="Make the Item titles linkable">
+	<option value="">Use Global</option>
+	<option value="0">No</option>
+	<option value="1">Yes</option>
+</param></php>
+
+==== Menu ====
+
+==== Menu Item ====
+
+<code xml><param name="menu_item" type="menuitem" label="Menu Item" /></code>
+
+==== Radio ====
+
+<php><param name="cache" type="radio" default="0" label="Enable Cache" description="PARAMENABLECACHE">
+	<option value="0">No</option>
+	<option value="1">Yes</option>
+</param></php>
+
+==== Section ====
+
+<php><param name="sectionid" type="section" default="0" label="Edit posts" description="Set the section to retrieve posts from" /></php>
+
+==== Spacer ====
+
+<php><param name="@spacer" type="spacer" default="" label="" description="" /></php>
+
+==== Text ====
+
+<php><param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" /></php>
+
+==== Textarea ====
+
+<php><param name="description_text" type="textarea" default="" label="Description Text" rows="5" cols="30" description="PARAMDESCTEXT"/></php>
+
+  * rows - the number of rows for the textarea
+  * cols - the number of columns for the textarea
+
+===== Special =====

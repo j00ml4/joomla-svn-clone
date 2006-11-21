@@ -1,0 +1,28 @@
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->store]] |
+
+This method stores a file on the FTP server. It returns true if successful, false otherwise.
+===== Syntax =====
+boolean store ( **$local**, **$remote** )
+| **$local** | string | Path to local file to store on the FTP server |
+| **$remote** | string | FTP path to file to create |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+if ($ftp->store( 'robots.txt', 'testing/robots.txt' ) ) {
+    echo "File stored successfully!";
+} else {
+    echo "File could not be stored!";
+}
+</code>
+might produce:
+<code php|Result>
+File stored successfully!
+</code>

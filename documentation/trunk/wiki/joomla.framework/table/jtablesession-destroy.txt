@@ -1,0 +1,22 @@
+====== destroy ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableSession|{{http://api.joomla.org/media/images/Class.png }}]][[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->destroy]] | never | Work in progress |
+
+Destroys the pesisting session. Removes the record for the session from the table.
+
+===== Syntax =====
+void destroy ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$session =& JTable::getInstance('session', $db );
+$session->load( 'd799af5e42df6fba1aa3068406b6aa82' );
+
+$session->destroy();
+</code>
+will result in the session with ID d799af5e42df6fba1aa3068406b6aa82 being destroyed.
+
+----
+
+~~DISCUSSION~~

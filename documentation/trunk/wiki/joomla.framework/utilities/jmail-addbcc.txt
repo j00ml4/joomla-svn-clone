@@ -1,0 +1,15 @@
+====== addBCC ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Mail|Mail]] | [[JArchive|{{http://api.joomla.org/media/images/Class.png }}]][[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#addBCC|JMail->addBCC]] | Never | Work in progress | 
+
+Use this class if you want to add one or more BCC ([[http://en.wikipedia.org/wiki/Blind_Carbon_Copy|Blind Carbon Copy]]) recepients to the e-mail.
+
+===== Syntax =====
+void addBCC( **$bcc** ) 
+
+| **$bcc** | mixed | Either a string or array of strings [recipients].|
+
+===== Examples =====
+TODO
+
+~~DISCUSSION~~

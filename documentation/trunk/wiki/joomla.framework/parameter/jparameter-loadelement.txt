@@ -1,0 +1,37 @@
+====== loadElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->loadElement]] | never | Work in progress |
+
+Loads an element type. Returns a reference to an object of the specified element class. If $new is true or the class has already been loaded, the reference to the existing object is returned. Otherwise, an object of the appropriate type is created and a reference is returned. If the class is not defined, the directories that have been added with [[JParameter-addParameterDir|addParameterDir]] method will be searched in order to try and locate the class (which needs to be in a file with the same name as the element type (i.e. radio.php for the 'radio' element). The include path will be searched last. If the class is found, it will be instantiated and a reference will be returned.
+
+===== Syntax =====
+object &loadElement	( **$type**, **$new** )
+
+| **$type** | string | is a string containing the name of the element type. |
+| **$new** | boolean | is a boolean value specifying whether or not the element type is new. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+
+$category = $params->loadElement( 'category' );
+print_r( $category );
+</code>
+might produce:
+<code php|Result>
+JElement_Category Object ( ... )
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+----
+
+~~DISCUSSION~~
+

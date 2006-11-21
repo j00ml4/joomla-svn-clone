@@ -1,0 +1,31 @@
+====== addCustomHeadTag ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html#addCustomHeadTag|JApplication->addCustomHeadTag]] | never | Work in progress |
+
+Adds a custom HTML string to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:jdocumenthtml-addcustomtag|JDocumentHTML->addCustomTag]] should be used instead).
+
+===== Syntax =====
+void addCustomHeadTag	( **$html** )
+
+| **$html** | string | is a string containing the custom head tag to add to the document. |
+
+===== Examples =====
+The following code will insert a header into the page that will include the file samplejavascript.js in the document.
+<code php|Example>
+function insertCustomHeader() {
+    global $mainframe;
+ 
+    $customHead = '<script language="JavaScript" '
+    . 'src="samplejavascript.js" '
+    . 'type="text/javascript"></script>'
+    ;
+ 
+    $mainframe->addCustomHeadTag( $customHead );
+}
+
+insertCustomHeader();
+</code>
+
+----
+
+~~DISCUSSION~~

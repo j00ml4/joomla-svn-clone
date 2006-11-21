@@ -1,0 +1,26 @@
+====== substr ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->substr]] | never | Work in progress |
+
+Return part of a string given character offset (and optionally length). See [[http://www.php.net/manual/en/function.substr.php|substr]] for more information.
+
+===== Syntax =====
+mixed substr	( **$str**, **$offset**, **$length** )
+
+| **$str** | string | is the string to operate on. |
+| **$offset** | integer | is an integer specifying the character position to start from to retrieve the string. |
+| **$length** | integer | is an integer specifying the number of characters to retrieve. This parameter is optional and if omitted the rest of the string will be returned. |
+
+===== Examples =====
+<code php|Example>
+$string = "Και Εισηλθεν Παλιν Εις";
+echo "The five characters starting at position four are: " . JString::substr( $string, 4, 5 ) . ".";
+</code>
+might produce:
+<code php|Result>
+The five characters starting at position four are: Εισηλ.
+</code>
+
+----
+
+~~DISCUSSION~~

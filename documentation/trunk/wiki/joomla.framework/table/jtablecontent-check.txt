@@ -1,0 +1,30 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableContent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableContent|JTableContent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableContent.html|JTableContent->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. It will set fulltext to an empty string if it contains only &nbsp; or whitespace characters.
+
+===== Syntax =====
+void check ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$content =& JTable::getInstance('content', $db );
+$content->load( 6 );
+$content->fulltext = "       &nbsp;&nbsp;  &nbsp;    \n\r";
+echo "The value of fulltext is: '$content->fulltext' <br />";
+echo "Data Integrity Check " . ($content->check() ? "Passed" : "Failed") . "<br />";
+echo "The value of fulltext is: '$content->fulltext' <br />";
+</code>
+might produce:
+<code php|Result>
+The value of fulltext is: '      '
+Data Integrity Check Passed
+The value of fulltext is: '' 
+</code>
+
+----
+
+~~DISCUSSION~~
+

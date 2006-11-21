@@ -1,0 +1,30 @@
+====== insertid ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->insertid]] | never | Work in progress |
+
+Gets the ID generated from the previous INSERT operation. This method is a wrapper for the database specific method.
+
+===== Syntax =====
+integer insertid ()
+
+===== Examples =====
+This example creates a new, default record in the users table and returns the unique id allocated to that user.
+<code php|Example>
+$database =& JFactory::getDBO();
+$sql = 'INSERT INTO #__contact_details (name) VALUES("PEDRO")';
+$database->setQuery( $sql );
+if (!$database->query()) {
+  echo $database->stderr();
+} else {
+  echo $database->insertid();
+}
+</code>
+might produce:
+<code php|Result>
+2
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,25 @@
+====== getNumRows ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getNumRows]] | never | Work in progress |
+
+Returns the number of rows returned by the most recent database query.
+
+===== Syntax =====
+integer getNumRows ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+$database->setQuery( "SELECT id FROM #__users" );
+$database->query();
+echo $database->getNumRows();
+</code>
+might produce:
+<code php|Result>
+1
+</code>
+
+----
+
+~~DISCUSSION~~
+

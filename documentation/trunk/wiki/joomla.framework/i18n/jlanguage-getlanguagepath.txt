@@ -1,0 +1,24 @@
+====== getLanguagePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getLanguagePath]] | never | Work in progress |
+
+Calculates the path to the specified language.
+
+===== Syntax =====
+string getLanguagePath	( **$basePath**, **$language** )
+
+| **$basePath** | string | is a string containing the basepath to use. |
+| **$language** | string | is a string containing the language tag. |
+
+===== Examples =====
+<code php|Example>
+echo JLanguage::getLanguagePath( JPATH_BASE . DS . installation, 'it-IT' );
+</code>
+might produce:
+<code php|Result>
+C:\\webroot\\htdocs\\joomla15\\installation\\language\\it-IT\\
+</code>
+
+----
+
+~~DISCUSSION~~

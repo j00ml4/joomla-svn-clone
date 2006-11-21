@@ -1,0 +1,24 @@
+====== getClientId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getClientId]] | never | Work in progress |
+
+Gets the client id of the current running application. This can be either 0, for the site or frontend application, 1 for the administrator or backend application, or 2 for installation.
+
+===== Syntax =====
+int getClientId ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getClientId();
+</code>
+might produce
+<code php|Result>
+0
+</code>
+if called from the site frontend.
+
+----
+
+~~DISCUSSION~~

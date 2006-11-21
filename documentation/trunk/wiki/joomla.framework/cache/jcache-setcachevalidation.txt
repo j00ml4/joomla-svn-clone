@@ -1,0 +1,17 @@
+====== setCacheValidation ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Cache|Cache]] | [[JCache|{{http://api.joomla.org/media/images/Class.png }}]][[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#setCacheValidation|JCache->setCacheValidation]] | Never | Public review |
+
+Enable/disable cache validation.
+===== Syntax =====
+void setCacheValidation	( **$validateCache** )
+| **$validateCache** | boolean | is a flag which if true enables cache validation. |
+
+===== Examples =====
+Enable cache validation:
+<code php|Example>
+$cache = JFactory::getCache();
+$cache->setCacheValidation( true );
+</code>
+
+~~DISCUSSION~~

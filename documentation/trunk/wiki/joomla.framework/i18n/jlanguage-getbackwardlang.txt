@@ -1,0 +1,22 @@
+====== getBackwardLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getBackwardLang]] | never | Work in progress |
+
+Gets the backward compatible language name.
+
+===== Syntax =====
+string getBackwardLang ()
+
+===== Examples =====
+<code php|Example>
+$german = JLanguage::getInstance( 'de-DE' );
+echo $german->getBackwardLang();
+</code>
+might produce:
+<code php|Result>
+german
+</code>
+
+----
+
+~~DISCUSSION~~

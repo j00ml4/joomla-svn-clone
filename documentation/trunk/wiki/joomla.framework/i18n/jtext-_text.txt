@@ -1,0 +1,42 @@
+====== _ ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JText|{{http://api.joomla.org/media/images/Class.png }}]][[JText|JText]] | [[http://api.joomla.org/Joomla-Framework/I18N/JText.html|JText->_]] | never | Work in progress |
+
+Translates a string into the current language. This method passes the specified string to the current [[references:Joomla.Framework:i18n:jlanguage|JLanguage]] object which will use the string as a key to look for a corresponding value in the current language. If no string exists in the current language, then the string that is passed to the method is returned.
+
+If the **$jsSafe** parameter is true, then the resulting string will be processed with the [[http://ca3.php.net/manual/en/function.addslashes.php|addslashes]] function before being returned.
+
+Language files are stored in subdirectories of the either the /language or the /administrator/language directory with names corresponding to the language tags specified in [[http://www.ietf.org/rfc/rfc3066.txt|RFC 3066]] with file names that start with this language tag, are followed by a period, followed by the extension name (i.e. the value of **$option** followed by the extension '.ini'. An example of a language filename is 'en-GB.com_search.ini'.  Full paths might look like:
+<code php>
+/home/username/public_html/joomla/language/en-GB/en-GB.com_search.ini
+/home/username/public_html/joomla/administrator/language/en-GB/en-GB.com_contact.ini
+</code>
+
+===== Syntax =====
+string _ ( **$string**, **$jsSafe** )
+
+| **$string** | string | is a string containing the string to translate |
+| **$jsSafe** | boolean | is a boolean value specifying whether or not the returned value should be JavaScript safe. |
+
+===== Examples =====
+<code php|Example 1>
+echo JText::_("The sky is blue.");
+</code>
+might produce
+<code php|Result 1>
+The sky is blue.
+</code>
+if there is no corresponding string in the current language.
+
+<code php|Example 2>
+echo JText::_("The sky is blue.");
+</code>
+might produce
+<code php|Result 2>
+Le ciel est bleu.
+</code>
+if there is an entry with the key 'THE SKY IS BLUE.' and value 'Le ciel est bleu.'.
+
+----
+
+~~DISCUSSION~~

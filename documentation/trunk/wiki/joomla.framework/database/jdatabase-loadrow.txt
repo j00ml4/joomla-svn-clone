@@ -1,0 +1,30 @@
+====== loadRow ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadRow]] | never | Work in progress |
+
+Returns the first row of the current query as an array.  If the query fails then returns null.
+
+===== Syntax =====
+array loadRow ()
+
+
+===== Examples =====
+This example prints an array containing all the fields from a given Joomla category record.
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$title = $database->Quote( 'Latest' );
+$sql = "SELECT * FROM #__categories WHERE title=$title";
+$database->setQuery( $sql );
+$category = $database->loadRow();
+print_r( $category );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => 1 [1] => 0 [2] => Latest [3] => Latest News [4] => taking_notes.jpg [5] => 1 [6] => left [7] => The latest news from the Joomla! Team [8] => 1 [9] => 0 [10] => 0000-00-00 00:00:00 [11] => [12] => 1 [13] => 0 [14] => 1 [15] => )
+</code>
+
+----
+
+~~DISCUSSION~~
+

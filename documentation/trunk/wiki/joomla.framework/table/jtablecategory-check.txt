@@ -1,0 +1,31 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableCategory|{{http://api.joomla.org/media/images/Class.png }}]][[JTableCategory|JTableCategory]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableCategory.html|JTableCategory->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. Namely, it ensures that the category has both a title and a name, and that a category with the given name does not already exist in the section.
+
+===== Syntax =====
+void check ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$category =& JTable::getInstance('category', $db );
+$category->load( 4 );
+$category->name = '';   // an empty category name
+echo "Data Integrity Check " . ($category->check() ? "Passed" : "Failed") . "<br />";
+$category->name = 'Linux';   // a category name that already exists
+echo "Data Integrity Check " . ($category->check() ? "Passed" : "Failed") . "<br />";
+$category->name = 'Completely New';   // a category name that should be okay
+echo "Data Integrity Check " . ($category->check() ? "Passed" : "Failed") . "<br />";
+</code>
+might produce:
+<code php|Result>
+Data Integrity Check Failed
+Data Integrity Check Failed
+Data Integrity Check Passed
+</code>
+
+----
+
+~~DISCUSSION~~

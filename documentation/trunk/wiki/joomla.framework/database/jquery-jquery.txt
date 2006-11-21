@@ -1,0 +1,14 @@
+====== JQuery ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQuery|JQuery]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery->JQuery]] |
+
+This is the class constructor. It is empty and performs no operations.
+===== Syntax =====
+JQuery JQuery ()
+
+===== Examples =====
+This class can be instantiated in the following way:
+<code php|Example>
+$query = new JQuery();
+</code>
+

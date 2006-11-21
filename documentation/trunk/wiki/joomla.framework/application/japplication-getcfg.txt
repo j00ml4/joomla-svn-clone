@@ -1,0 +1,26 @@
+====== getCfg ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getCfg]] | never | Work in progress |
+
+Gets a configuration value. These values come from the configuration.php file which is generally stored in the base directory.
+
+===== Syntax =====
+string getCfg ( **$varname** )
+
+| **$varname** | string | is a string containing the name of the configuration value to retrieve. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getCfg( 'ftp_host' );
+</code>
+might produce
+<code php|Result>
+ftp.ftphost.com
+</code>
+which is the ftp host value that is stored in the configuration.php file.
+----
+
+~~DISCUSSION~~
+

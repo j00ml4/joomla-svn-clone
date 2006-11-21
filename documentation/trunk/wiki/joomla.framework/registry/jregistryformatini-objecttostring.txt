@@ -1,0 +1,36 @@
+====== objectToString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormatINI|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->objectToString]] | never | Work in progress |
+
+Converts an object into an INI formatted string. Unfortunately, there is no way to have INI values nested further than two levels deep. Therefore only go through the first two levels of the object will be converted.
+===== Syntax =====
+string objectToString ( **&$object**, **$params**  )
+
+| **$object** | object | is the object to convert. |
+| **$param** | array | is an associative array of parameters used by the formatter. This implementation does not use any parameters. |
+
+===== Examples =====
+<code php|Example>
+$iniFormat =& JRegistryFormat::getInstance( 'INI' );
+
+$object = new stdClass();
+$object->name = 'Joe Smith';
+$object->title = 'President';
+$object->city = 'Toronto';
+
+$params = array();
+
+echo $iniFormat->objectToString( $object, $params );
+</code>
+might produce:
+<code php|Result>
+name=Joe Smith
+title=President
+city=Toronto
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

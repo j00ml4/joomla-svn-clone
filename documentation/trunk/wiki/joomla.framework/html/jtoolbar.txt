@@ -1,0 +1,59 @@
+====== JToolBar ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar]] | never | Work in progress |
+
+The JToolBar class is used to create and render toolbars.  The administrator backend components use this class to render their toolbars.  This class is tightly coupled to the [[JButton|JButton]] class and its descendants.  This class is designed specifically to work in the administrator backend.  The HTML that this class produces depends on style sheet and button images that are included in an administrator template.  They can still be used in the front end, but the styles and images have to be included with the extension.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JToolBar-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-__construct|__construct]] | Constructs the toolbar, and defines the JBUTTON_INCLUDE_PATH constant. |
+| [[JToolBar-addButtonDir|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-addButtonDir|addButtonDir]] | Adds a directory where JToolBar should search for button types. |
+| [[JToolBar-appendButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-appendButton|appendButton]] | Adds a button to the end of the toolbar. |
+| [[JToolBar-getIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-getIncludePath|getIncludePath]] | Returns the value of the include path. |
+| [[JToolBar-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-getInstance|getInstance]] | Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist. |
+| [[JToolBar-loadButtonType|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-loadButtonType|loadButtonType]] | Loads the class for the specified button type. |
+| [[JToolBar-prependButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-prependButton|prependButton]] | Adds a button to the beginning of the toolbar. |
+| [[JToolBar-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-render|render]] | Renders the toolbar. |
+| [[JToolBar-renderButton|{{http://api.joomla.org/media/images/Method.png }}]] [[JToolBar-renderButton|renderButton]] | Renders a toolbar button. |
+
+===== Examples =====
+A brief example showing the operation of the class:
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$bar->appendButton( 'Separator' );
+$bar->appendButton( 'Standard', 'send', 'Activate', 'activate', false );
+$bar->prependButton( 'Popup', 'new', 'Popup Test', 'http://www.joomla.org', 300, 300, 150, 150 );
+echo $bar->render();
+</code>
+might produce:
+<code php|Result>
+<div class="toolbar" id="My ToolBar">
+<table class="toolbar"><tr>
+<td class="button" id="My ToolBar-popup-Popup">
+<a onclick="document.popup.show('http://www.joomla.org', 300, 300, null)">
+<div class="icon-32-new" title="Popup Test" type="Popup">
+</div>
+Popup Test
+</a>
+</td>
+
+<td class="spacer">
+</td>
+
+<td class="button" id="My ToolBar-send">
+<a onclick="javascript:submitbutton('activate')" class="toolbar">
+<div class="icon-32-send" title="Activate" type="Standard">
+</div>
+Activate
+</a>
+</td>
+
+</tr></table>
+</div>
+</code>
+which renders as:
+{{:references:joomla.framework:html:toolbar_full.png|:references:joomla.framework:html:toolbar_full.png}}
+----
+
+~~DISCUSSION~~
+

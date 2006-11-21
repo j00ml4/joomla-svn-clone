@@ -1,0 +1,22 @@
+====== getWinCP ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getWinCP]] | never | Work in progress |
+
+Gets the local windows code page.
+
+===== Syntax =====
+string getWinCP ()
+
+===== Examples =====
+<code php|Example>
+$english = JLanguage::getInstance( 'en-GB' );
+echo $english->getWinCP();
+</code>
+might produce:
+<code php|Result>
+iso-8859-1
+</code>
+
+----
+
+~~DISCUSSION~~

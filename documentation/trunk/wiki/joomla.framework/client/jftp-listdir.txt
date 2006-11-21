@@ -1,0 +1,64 @@
+====== listDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->listDir]] |
+
+This method lists the contents of a folder on the FTP server. It returns either an array containing the listing of files that are in the specified folder, or if **$type** is 'raw' it returns a string containing the folder listing. See the example below for more information on the returned array format.
+
+===== Syntax =====
+mixed listDir	( **$path**, **$type**, **$search** )
+| **$path** | string | is a string containing the path of the folder to list the files from. |
+| **$type** | string | is a string containing the types of files to return. Valid options are: 'raw', 'all', 'folders' or 'files'. 'raw' will return a unix style directory listing. 'all' will return an array in the format in the example below with both files and folders returned. 'folders' will return an array in the format in the example below with only folders listed. 'files' will return an array in the format in the example below with only files listed. This parameter is optional and if omitted defaults to 'all'. |
+| **$search** | boolean | is a flag which specifies whether or not the folder should be searched recursively. This feature is not yet implemented. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+print_r( $ftp->listDir( '/', 'all' ) );
+</code>
+might produce:
+<code php|Result>
+												Array
+(
+    [0] => Array
+        (
+            [type] => 0
+            [rights] => -rw-r--r--
+            [user] => ftp
+            [group] => ftp
+            [size] => 17049835
+            [date] => 02-28
+            [time] => 18:19
+            [name] => file1.htm
+        )
+
+    [1] => Array
+        (
+            [type] => 0
+            [rights] => -rw-r--r--
+            [user] => ftp
+            [group] => ftp
+            [size] => 8525139
+            [date] => 03-07
+            [time] => 17:47
+            [name] => file2.htm
+        )
+
+    [2] => Array
+        (
+            [type] => 0
+            [rights] => -rw-r--r--
+            [user] => ftp
+            [group] => ftp
+            [size] => 12787696
+            [date] => 03-01
+            [time] => 18:18
+            [name] => file3.htm
+        )
+
+)
+</code>

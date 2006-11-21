@@ -1,0 +1,23 @@
+====== getErrors ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->getErrors]] |
+
+Retrieves the errors that are stored. This function returns a chronological array of errors that have been stored during script execution. Storing errors is one of multiple methods. See the [[#seterrorhandling|setErrorHandling]] method for more information.
+
+===== Syntax =====
+array getErrors ()
+
+===== Examples =====
+<code php|Example>
+JError::setErrorHandling( E_ALL, 'store' );
+JError::raiseNotice( '253', 'THIS IS ONLY A TEST!' );
+$errors = JError::getErrors();
+foreach ($errors as $error) {
+    echo $error->message;
+}
+</code>
+might produce:
+<code php|Result>
+THIS IS ONLY A TEST!
+</code>
+

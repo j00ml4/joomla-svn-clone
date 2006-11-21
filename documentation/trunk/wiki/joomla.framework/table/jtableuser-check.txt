@@ -1,0 +1,36 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableUser|{{http://api.joomla.org/media/images/Class.png }}]][[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. It ensures that:
+  * the user has a name and username set
+  * the username only contains valid characters
+  * the email address is properly formed
+  * the username does not already exist
+  * the email address does not already exist
+
+===== Syntax =====
+boolean check ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$user =& JTable::getInstance('user', $db );
+
+$user->name = 'John Smith';
+$user->username = 'John > Smith';
+$user->email = 'john.smith@email.com';
+
+echo "Data Integrity Check " . ($user->check() ? "Passed" : "Failed -". $user->getError() . "<br />");
+$user->username = 'john smith';
+echo "Data Integrity Check " . ($user->check() ? "Passed" : "Failed -". $user->getError() . "<br />");
+</code>
+might produce:
+<code php|Result>
+Data Integrity Check Failed -Please enter a valid Username. No spaces, more than 2 characters and contain 0-9,a-z,A-Z
+Data Integrity Check Passed
+</code>
+
+----
+
+~~DISCUSSION~~

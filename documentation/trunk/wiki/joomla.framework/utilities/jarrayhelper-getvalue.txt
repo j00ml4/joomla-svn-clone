@@ -1,0 +1,36 @@
+====== getValue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#getvalue|JArrayHelper->getValue]] | never | Internal review |
+
+Returns a value from an associative (named) array or a specified default value if the key is not set. This method also provides for type restrictions, so that values can be forced to be a certain type. Supported types are: INT, INTEGER, FLOAT, DOUBLE, BOOL, BOOLEAN, ARRAY, STRING, WORD, NONE.
+
+===== Syntax =====
+mixed getValue	( **&$array**, **$name**, **$default**, **$type** )
+
+| **$array** | array | is the associative (named) array from which to retrieve the value. |
+| **$name** | string | is a string containing the name of the key for which to search. |
+| **$default** | mixed | is a variable containing the default value to give if the specified key is not found. This parameter is optional and if omitted defaults to false. |
+| **$type** | string | is a string containing the return type for the variable (INT, INTEGER, FLOAT, DOUBLE, BOOL, BOOLEAN, ARRAY, STRING, WORD). This parameter is optional and if omitted defaults to none. |
+
+===== Examples =====
+<code php|Example>
+$example = array(
+    'name' => 'Joey Jeremiah',
+    'address' => '123 Front St',
+    'city' => 'Toronto, Ontario',
+    'age' => '43'
+);
+echo "Name: " . JArrayHelper::getValue( $example, 'name' ) . "<br />";
+echo "Country: " . JArrayHelper::getValue( $example, 'country', 'Canada' ) . "<br />";    
+echo "Data type of age: " . (is_integer(JArrayHelper::getValue( $example, 'age', 33, 'INT' )) ? "Integer" : "Not Integer");
+</code>
+might produce:
+<code php|Result>
+Name: Joey Jeremiah
+Country: Canada
+Data type of age: Integer
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,35 @@
+====== toObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->toObject]] | never | Work in progress |
+
+Transforms a namespace to an object. If the namespace is not specified, the default namespace is used.
+
+===== Syntax =====
+object toObject	( **$namespace** )
+
+| **$namespace** | string | is a string specifying the namespace to return. This parameter is optional and if omitted defaults to the default namespace. |
+
+===== Examples =====
+<code php|Example>
+$registry = new JRegistry( 'com_document' );
+$registry->setValue( 'joomla.content.showauthor', true );
+$registry->setValue( 'joomla.debug', 'yes' );
+print_r( $registry->toObject( 'joomla' ) );
+</code>
+might produce:
+<code php|Result>
+stdClass Object
+(
+    [content] => stdClass Object
+        (
+            [showauthor] => 1
+        )
+
+    [debug] => yes
+)
+</code>
+
+    
+----
+
+~~DISCUSSION~~

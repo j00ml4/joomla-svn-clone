@@ -1,0 +1,23 @@
+====== parse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->parse]] |
+
+This function parses a file and create an internal patTemplate object.
+
+===== Syntax =====
+void parse	( **$template**, **$filename**, **$directory** )
+| **$template** | string | is a string containing the name of the template. |
+| **$filename** | string | is a string containinig the filename to parse. This parameter is optional and if omitted defaults to 'index.php'. |
+| **$directory** | string | is a string containing the template directory. This parameter is optional and if omitted defaults to 'templates'. |
+
+===== Examples =====
+This function is called in the index.php file in the following way:
+<code php|Example>
+global $mainframe;
+
+$cur_template = JRequest::getVar( 'template', $mainframe->getTemplate(), 'default', 'string' );
+$file     = 'index.php';
+
+$document =& $mainframe->getDocument();
+$document->parse($cur_template, $file);
+</code>

@@ -1,0 +1,13 @@
+====== get ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->get]] |
+
+Returns session variable
+===== Syntax =====
+mixed &get	( **$name**, **$default** )
+| **** | string |  |
+| **** | mixed |  |
+
+===== Examples =====
+
+

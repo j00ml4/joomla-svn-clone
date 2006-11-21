@@ -1,0 +1,21 @@
+====== getStaticContentCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getStaticContentCount]] | never | Work in progress |
+
+Returns the number of items in the menu that are of type 'static content'. This method is deprecated in Joomla! 1.5 (JApplicationHelper->getItemCount should be used instead).
+
+===== Syntax =====
+void getStaticContentCount ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getStaticContentCount();
+</code>
+will display the number of menu items that are of type 'static content'.
+
+
+----
+
+~~DISCUSSION~~

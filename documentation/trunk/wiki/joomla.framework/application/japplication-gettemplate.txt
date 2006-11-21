@@ -1,0 +1,24 @@
+====== getTemplate ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getTemplate]] | never | Work in progress |
+
+Gets the name of the current template. The value returned by the JApplication class itself is '_system'. The $mainframe object is actually an instance of the JSite class, which extends JApplication and overrides this method to return a string containing the name of the current template.
+
+===== Syntax =====
+string getTemplate ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getTemplate();
+</code>
+might produce
+<code php|Result>
+rhuk_milkyway
+</code>
+
+----
+
+~~DISCUSSION~~
+

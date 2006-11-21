@@ -1,0 +1,22 @@
+====== pwd ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->pwd]] |
+
+Method to retrieve the current working directory on the FTP server. This function returns a string containing the current working directory.
+===== Syntax =====
+string pwd ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+$ftp->chdir( 'testing' );
+echo "Current Working Directory: " . $ftp->pwd();
+</code>
+might produce:
+<code php|Result>
+Current Working Directory: /testing
+</code>

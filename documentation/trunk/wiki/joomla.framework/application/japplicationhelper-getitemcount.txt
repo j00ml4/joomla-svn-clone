@@ -1,0 +1,23 @@
+====== getItemCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getItemCount]] | never | Work in progress |
+
+Count the items in the menu for a certain type.
+
+===== Syntax =====
+integer getItemCount ( **$type** )
+
+| **$type** | string | is a string containing the type of menu item to count. |
+
+===== Examples =====
+<code php|Example>
+echo JApplicationHelper::getItemCount( 'content_blog_section' );
+</code>
+might produce
+<code php|Result>
+2
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,29 @@
+====== getPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->getPathWay]] |
+
+Return the JPathWay items array.
+===== Syntax =====
+array getPathWay	( **$showHome**, **$showComponent** )
+| **$showHome** | boolean | is a flag which specifies whether or not the home element of the pathway should be returned. This parameter is optional and if omitted defaults to true. |
+| **$showComponent** | boolean | is a flag which specifies whether or not the component element of the pathway should be returned. This paramter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$pathway =& $mainframe->getPathWay();
+print_r( $pathway->getPathWay( true, false ) );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => stdClass Object
+        (
+            [name] => Home
+            [link] => index.php
+        )
+)
+</code>
+

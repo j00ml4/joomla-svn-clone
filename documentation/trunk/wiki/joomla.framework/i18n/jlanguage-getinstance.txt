@@ -1,0 +1,34 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getInstance]] | never | Work in progress |
+
+Returns a reference to a language object. This method must be invoked as:
+<code php>$browser = &JLanguage::getInstance([$lang]);</code>
+
+===== Syntax =====
+[[JLanguage|JLanguage]] &getInstance ( **$lang** )
+
+| **$lang** | string | is a string specifying the language to use. |
+
+===== Examples =====
+<code php|Example>
+$german = JLanguage::getInstance( 'de-DE' );
+print_r( $german->_metadata );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [name] => German (Deutschland)
+    [tag] => de-DE
+    [rtl] => 0
+    [locale] => ger, de, ger_DE, de_DE, german, german-de, germany
+    [wincodepage] => iso-8859-1
+    [backwardlang] => german
+)
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,34 @@
+====== JBrowser [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JBrowser.html|JBrowser]] |
+
+Browser class, provides capability information about the current web client.\\ Browser identification is performed by examining the HTTP_USER_AGENT  environment variable provided by the web server.\\ This module has many influences from the lib/Browser.php code in  version 3 of Horde.\\ 
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JBrowser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
+| [[JBrowser-getAgentString|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getAgentString|getAgentString]] | Return the full browser agent string. |
+| [[JBrowser-getBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getBrowser|getBrowser]] | Retrieve the current browser. |
+| [[JBrowser-getFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getFeature|getFeature]] | Retrieve the current browser capability. |
+| [[JBrowser-getHTTPProtocol|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getHTTPProtocol|getHTTPProtocol]] | Returns the server protocol in use on the current server. |
+| [[JBrowser-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getInstance|getInstance]] | Returns a reference to the global Browser object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JBrowser::getInstance([$userAgent[, $accept]]);</pre></p> |
+| [[JBrowser-getMajor|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getMajor|getMajor]] | Retrieve the current browser's major version. |
+| [[JBrowser-getMinor|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getMinor|getMinor]] | Retrieve the current browser's minor version. |
+| [[JBrowser-getPlatform|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getPlatform|getPlatform]] | Return the currently matched platform. |
+| [[JBrowser-getQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getQuirk|getQuirk]] | Retrieve unique behavior for the current browser. |
+| [[JBrowser-getVersion|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-getVersion|getVersion]] | Retrieve the current browser's version. |
+| [[JBrowser-hasFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-hasFeature|hasFeature]] | Check the current browser capabilities. |
+| [[JBrowser-hasQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-hasQuirk|hasQuirk]] | Check unique behavior for the current browser. |
+| [[JBrowser-isBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isBrowser|isBrowser]] | Determine if the given browser is the same as the current. |
+| [[JBrowser-isRobot|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isRobot|isRobot]] | Determines if the browser is a robot or not. |
+| [[JBrowser-isSSLConnection|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isSSLConnection|isSSLConnection]] | Determine if we are using a secure (SSL) connection. |
+| [[JBrowser-isViewable|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-isViewable|isViewable]] | Determines if a browser can display a given MIME type. |
+| [[JBrowser-match|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-match|match]] | Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser. |
+| [[JBrowser-setBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setBrowser|setBrowser]] | Sets the current browser. |
+| [[JBrowser-setFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setFeature|setFeature]] | Set capabilities for the current browser. |
+| [[JBrowser-setQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setQuirk|setQuirk]] | Set unique behavior for the current browser. |
+| [[JBrowser-_setPlatform|{{http://api.joomla.org/media/images/Method.png }}]]
+
+----
+
+~~DISCUSSION~~

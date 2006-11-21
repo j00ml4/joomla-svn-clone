@@ -1,0 +1,92 @@
+====== loadRowList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadRowList]] | never | Work in progress |
+
+Returns an array of database rows with numeric column indexing.  Returns null if the query fails.
+
+===== Syntax =====
+array loadRowList ( **$key** )
+
+| **$key** | string | is a string containing the field name. If $key is empty then loadRowList will return a sequential list of the database records returned by the current query. If $key is not empty then the array will be indexed by the value of the database key. This parameter is optional and if omitted will default to empty. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = "SELECT * FROM #__categories WHERE section = 4";
+$database->setQuery( $sql );
+$categories = $database->loadRowList( 2 );
+print_r( $categories );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [The CMS] => Array
+        (
+            [0] => 29
+            [1] => 0
+            [2] => The CMS
+            [3] => The CMS
+            [4] => 
+            [5] => 4
+            [6] => left
+            [7] => Information about the software behind Joomla!<br />
+            [8] => 1
+            [9] => 0
+            [10] => 0000-00-00 00:00:00
+            [11] => 
+            [12] => 2
+            [13] => 0
+            [14] => 0
+            [15] => 
+        )
+
+    [The Project] => Array
+        (
+            [0] => 25
+            [1] => 0
+            [2] => The Project
+            [3] => The Project
+            [4] => 
+            [5] => 4
+            [6] => left
+            [7] => General facts about Joomla!<br />
+            [8] => 1
+            [9] => 0
+            [10] => 0000-00-00 00:00:00
+            [11] => 
+            [12] => 1
+            [13] => 0
+            [14] => 0
+            [15] => 
+        )
+
+    [The Community] => Array
+        (
+            [0] => 30
+            [1] => 0
+            [2] => The Community
+            [3] => The Community
+            [4] => 
+            [5] => 4
+            [6] => left
+            [7] => About the millions of Joomla! users and websites<br />
+
+            [8] => 1
+            [9] => 0
+            [10] => 0000-00-00 00:00:00
+            [11] => 
+            [12] => 3
+            [13] => 0
+            [14] => 0
+            [15] => 
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

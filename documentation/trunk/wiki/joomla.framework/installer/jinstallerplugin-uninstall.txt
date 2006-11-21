@@ -1,0 +1,22 @@
+====== uninstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerPlugin|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->uninstall]] | never | Work in progress |
+
+Custom uninstall method for plugins. The uninstall method performs the following actions:
+  * determines the plugin directory
+  * determines path to the XML install file
+  * deletes plugin object
+  * deletes files and removes directory
+  
+This method returns true on success, false otherwise. 
+
+===== Syntax =====
+boolean uninstall ( **$id**, **$client** )
+
+| **$id** | integer | is an integer containing the id of the plugin to uninstall. |
+| **$client** | integer | is an integer containing the client id. |
+
+
+----
+
+~~DISCUSSION~~

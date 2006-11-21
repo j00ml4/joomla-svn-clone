@@ -1,0 +1,33 @@
+====== JTableCategory ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableCategory.html|JTableCategory]] | never | Work in progress |
+
+The JTableCategory class is an implementation of the JTable class to provide access to the categories table. This implementation provides data verification functionality via the check() method and defines the class variables to provide an interface to the database table.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableCategory-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableCategory-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableCategory-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableCategory-check|check]] | verifies that the current data is structurally sound. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$parent_id** | is an integer that contains the parent ID. This field is not used. |
+| **$title** | is a string that contains the title of the category (a short name). |
+| **$name** | is a string that contains the full name of the category (longer). |
+| **$image** | is a string that contains the name of the image that is associated with the category. |
+| **$section** | is a string that contains the section that the category belongs to. This is generally either a component name (i.e. com_contacts) or an integer that is the ID of a section in the #__sections table. |
+| **$image_position** | is a string that specifies the position in which the image should be displayed. |
+| **$description** | is a string that contains the description of the category. |
+| **$published** | is a boolean value indicating whether or not the category is published. |
+| **$checked_out** | is a boolean value indicating whether or not the category is checked out. |
+| **$checked_out_time** | is a date/time variable indicating the time that the category was checked out. |
+| **$ordering** | is an integer that contains the order number of the category. |
+| **$access** | is an integer that indicates who has access to the category. |
+| **$params** | is a string that contains the parameters for the category. |
+
+
+----
+
+~~DISCUSSION~~
+

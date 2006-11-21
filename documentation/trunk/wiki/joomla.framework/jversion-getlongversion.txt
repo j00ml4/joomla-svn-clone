@@ -1,0 +1,29 @@
+====== getLongVersion ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#|]] | [[JVersion|{{http://api.joomla.org/media/images/Class.png }}]][[JVersion|JVersion]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion->getLongVersion]] | never | Work in progress |
+
+===== Syntax =====
+string getLongVersion()
+
+
+===== Examples =====
+Retrieve the long version number of Joomla!
+
+<code php|Example>
+$version =& new JVersion;
+$long_version = $version->getLongVersion();
+echo "Powered by: ". $long_version;
+</code>
+
+might produce:
+
+<code php|Result>
+Powered by: Joomla! 1.5.0 BETA [ Khepri ] 12-OCT-2006 00:00 GMT
+</code>
+
+
+
+----
+
+~~DISCUSSION~~
+

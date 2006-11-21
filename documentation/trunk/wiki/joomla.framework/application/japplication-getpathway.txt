@@ -1,0 +1,20 @@
+====== getPathWay ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getPathWay]] | never | Work in progress |
+
+Return a reference to the JPathWay object. This method should be used by extensions to obtain access to the pathway object.
+
+===== Syntax =====
+JPathway &getPathWay ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$pathway = $mainframe->getPathWay();
+</code>
+will result in a reference to the application pathway object being stored in the $pathway variable.
+
+----
+
+~~DISCUSSION~~

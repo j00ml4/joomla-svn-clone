@@ -1,0 +1,23 @@
+====== exists ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#exists|JFile->exists]] | 11 Apr 2006 | Published |
+
+This function is a wrapper for the standard PHP [[http://www.php.net/file-exists|file_exists]] function. If the file exists, the function returns true. Otherwise, it returns false.
+
+===== Syntax =====
+boolean exists	( **$file** )
+| **$file** | string | is a string that contains the file path that is to be checked. |
+
+===== Examples =====
+Example: This example checks if a file exists.
+<code php|Example>
+if (JFile::exists( 'images/stories/clock.jpg' )) {
+    echo "<h3>File exists!</h3>";
+} else {
+    echo "<h3>File does not exist!</h3>";
+}
+</code>
+
+----
+
+~~DISCUSSION~~

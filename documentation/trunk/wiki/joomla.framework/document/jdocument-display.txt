@@ -1,0 +1,17 @@
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->display]] |
+
+Outputs the template to the browser.
+===== Syntax =====
+void display	( **$template**, **$compress**, **$outline** )
+| **$template** | string | is a string containing the name of the template to display. |
+| **$compress** | boolean | is a flag that specifies whether or not the output should be compressed using Zlib compression. This parameter is optional, and if omitted defaults to false. |
+| **$outline** | mixed | is a flag that specifies whether or not information about the placeholders should be displayed. |
+
+===== Examples =====
+The following code is executed in the index.php file:
+<code php|Example>
+$file = 'index.php';
+$document->display( $file, $mainframe->getCfg('gzip'), JRequest::getVar('tp', 0 ));
+</code>

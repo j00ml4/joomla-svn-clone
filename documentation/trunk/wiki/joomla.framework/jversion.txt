@@ -1,0 +1,25 @@
+====== JVersion ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion]] | never | Work in progress |
+
+Provides version information of Joomla!
+
+**Note:** If your code runs in the context of the Joomla! Front-end (Site) or Back-end (Administrator) you can use the global object variable **$_VERSION** instead of creating a new instance of ''JVersion''.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JVersion-getHelpVersion|{{http://api.joomla.org/media/images/Method.png}}]] [[JVersion-getHelpVersion|getHelpVersion]] | Returns a version suffix for help files. This method is used internally by the Back-end help system. |
+| [[JVersion-getLongVersion|{{http://api.joomla.org/media/images/Method.png}}]] [[JVersion-getLongVersion|getLongVersion]] | Returns the long format Joomla! version. |
+| [[JVersion-getShortVersion|{{http://api.joomla.org/media/images/Method.png}}]] [[JVersion-getShortVersion|getShortVersion]] | Returns the short format Joomla! version. |
+| [[JVersion-isCompatible|{{http://api.joomla.org/media/images/Method.png}}]] [[JVersion-isCompatible|isCompatible]] | Compares a "PHP standardized" version number against the current Joomla! version. |
+
+===== Constants =====
+^ Constant ^ Description ^
+| {{http://api.joomla.org/media/images/Constant.png}} **JVERSION** | A constant containing the Joomla! short version. |
+
+----
+
+~~DISCUSSION~~
+
+
+

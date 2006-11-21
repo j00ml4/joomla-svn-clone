@@ -1,0 +1,23 @@
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getName]] | never | Work in progress |
+
+Gets the name of the language.
+
+===== Syntax =====
+string getName ( **$value** )
+
+| **$value** | string | is an optional value that has no effect. |
+
+===== Examples =====
+<code php|Example>
+$german = JLanguage::getInstance( 'de-DE' );
+echo $german->getName();
+</code>
+might produce:
+<code php|Result>
+German (Deutschland)
+</code>
+----
+
+~~DISCUSSION~~

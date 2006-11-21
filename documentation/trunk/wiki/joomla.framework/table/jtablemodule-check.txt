@@ -1,0 +1,30 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableModule|{{http://api.joomla.org/media/images/Class.png }}]][[JTableModule|JTableModule]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. It ensures that the module has a valid title.
+
+===== Syntax =====
+boolean check ()
+
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$menutype =& JTable::getInstance('module', $db );
+$menutype->title = "     ";
+
+echo "Data Integrity Check " . ($menutype->check() ? "Passed" : "Failed -". $menutype->getError() . "<br />");
+$menutype->title = 'My Module';
+
+echo "Data Integrity Check " . ($menutype->check() ? "Passed" : "Failed -". $menutype->getError() . "<br />");
+</code>
+might produce:
+<code php|Result>
+Data Integrity Check Failed -Your Module must contain a title.
+Data Integrity Check Passed
+</code>
+
+----
+
+~~DISCUSSION~~

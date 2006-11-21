@@ -1,0 +1,24 @@
+====== addHeadLink ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addHeadLink]] |
+
+Adds <link> tags to the head of the document. $relType defaults to 'rel' as it is the most common relation type used. 'rev' refers to reverse relation. 'rel' indicates normal, forward relation. Typical tag: <link href="index.php" rel="Start">.
+===== Syntax =====
+void addHeadLink	( **$href**, **$relation**, **$relType**, **$attribs**, **$attributes** )
+| **$href** | string | is a string containing the link that is being related. |
+| **$relation** | string | is a string containing the relation of the link. |
+| **$relType** | string | is a string containing the relation type attribute.  This can be either rel (normal, forward relation) or rev (reverse relation). This parameter is optional and if omitted defaults to 'rel'. |
+| **$attributes** | array | is an associative array of the remaining attributes. This parameter is optional, and if omitted defaults to an empty array. These attributes are appended to the end of the head link tag. |
+
+===== Examples =====
+Add a head link to the page.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->addHeadLink( "http://www.gnu.org/copyleft/fdl.html", 'copyright', 'rel', array( 'charset' => 'UTF-8' ) );
+</code>
+adds the following code to the head block:
+<code php|Result>
+<link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright" charset="UTF-8" />
+</code>

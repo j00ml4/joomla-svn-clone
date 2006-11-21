@@ -1,0 +1,15 @@
+====== JElement_Spacer ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Spacer.html|JElement_Spacer]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render a spacer element. The JElement_Spacer class can be used to render a custom HTML spacer tag.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JElement_Spacer-fetchElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement_Spacer-fetchElement|fetchElement]] | Renders the HTML code for a spacer. |
+| [[JElement_Spacer-fetchTooltip|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement_Spacer-fetchTooltip|fetchTooltip]] | Renders the tooltip for the spacer. This method will always return '&nbsp;'. |
+
+----
+
+~~DISCUSSION~~
+

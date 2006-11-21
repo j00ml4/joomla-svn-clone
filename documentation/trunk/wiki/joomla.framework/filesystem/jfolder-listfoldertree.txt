@@ -1,0 +1,84 @@
+====== listFolderTree ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFolder|{{http://api.joomla.org/media/images/Class.png }}]][[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#listFolderTree|JFolder->listFolderTree]] | 26 Apr 2006 | Published |
+
+Lists folders in a format suitable for tree display. An array containing the folders is returned with appropriate information to relate the various folders in a tree structure.
+
+===== Syntax =====
+void listFolderTree	( **$path**, **$filter**, **$maxLevel**, **$level**, **$parent** )
+| **$path** | string | is a string containing the path of the folder to list. |
+| **$filter** | string | is a string containing a filter for folder names. The filter is applied as a [[http://en.wikipedia.org/wiki/Regular_expression|regular expression]], so this syntax should be followed. This parameter is optional and if omitted defaults to an empty string. |
+| **$maxLevel** | integer | is an integer containing the value of the maximum number of levels to traverse. This parameter is optional and if omitted defaults to 3. |
+| **$level** | integer | is an integer containing the level of the tree to start at. This parameter should usually not be specified. listFolderTree is a recursive function and this parameter is used to pass the level along to child folders. This parameter is optional and if omitted defaults to 0. |
+| **$parent** | integer | is an integer containing the parent of the folder to be listed. This parameter should not usually be specified as it is used by the function itself as a means of passing data during recursion. This parameter is optional and if omitted defaults to 0. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.filesystem.folder' );
+$folders = JFolder::listFolderTree( 'plugins/', '.' );
+print_r( $folders );
+</code>
+might produce:
+<code php|Result>
+											Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [parent] => 0
+            [name] => authentication
+            [fullname] => plugins\authentication
+            [relname] => plugins\authentication
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [parent] => 0
+            [name] => content
+            [fullname] => plugins\content
+            [relname] => plugins\content
+        )
+
+    [2] => Array
+        (
+            [id] => 3
+            [parent] => 0
+            [name] => editors
+            [fullname] => plugins\editors
+            [relname] => plugins\editors
+        )
+
+    [3] => Array
+        (
+            [id] => 4
+            [parent] => 3
+            [name] => tinymce
+            [fullname] => plugins\editors\tinymce
+            [relname] => plugins\editors\tinymce
+        )
+
+    [4] => Array
+        (
+            [id] => 5
+            [parent] => 4
+            [name] => jscripts
+            [fullname] => plugins\editors\tinymce\jscripts
+            [relname] => plugins\editors\tinymce\jscripts
+        )
+
+    [5] => Array
+        (
+            [id] => 6
+            [parent] => 3
+            [name] => xstandard
+            [fullname] => plugins\editors\xstandard
+            [relname] => plugins\editors\xstandard
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~

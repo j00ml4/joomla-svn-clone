@@ -1,0 +1,25 @@
+====== fetchIconClass ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JButton|{{http://api.joomla.org/media/images/Class.png }}]][[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#fetchiconclass|JButton->fetchIconClass]] | never | Internal review |
+
+Method to get the CSS class name for an icon identifier. This method dan be redefined in the final button class.
+
+===== Syntax =====
+string fetchIconClass ( **$identifier** )
+
+| **$identifier** | string | is a string containing the icon identification string. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Standard' );
+echo $button->fetchIconClass( 'example' );
+</code>
+might produce:
+<code php|Result>
+icon-32-example
+</code>
+
+----
+
+~~DISCUSSION~~

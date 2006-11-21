@@ -1,0 +1,32 @@
+====== replacePrefix ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->replacePrefix]] | never | Work in progress |
+
+This function replaces a string identifier $prefix with the string held in the _table_prefix class variable.
+
+===== Syntax =====
+void replacePrefix ( **$sql**, **$prefix** )
+
+| **$sql** | string | is a string containing the SQL query. |
+| **$prefix** | string | is a string containing the common table prefix. This parameter is optional and if omitted defaults to <nowiki>'#__'</nowiki>. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = "SELECT * FROM #__content WHERE introtext=test";
+
+echo $sql . '<br />';
+$sql = $database->replacePrefix( $sql );
+echo $sql;
+</code>
+might produce:
+<code php|Result>
+SELECT * FROM #__content WHERE introtext=test
+SELECT * FROM jos_content WHERE introtext=test
+</code>
+
+----
+
+~~DISCUSSION~~
+

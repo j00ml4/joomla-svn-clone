@@ -1,0 +1,24 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->getInstance]] | never | Work in progress |
+
+Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. This method will check to see if a registry has been created with the specified ID. If this registry has been created, a reference to it will be returned. Otherwise, a new registry will be created and a reference to the new registry will be returned.
+
+This method must be invoked as: <code>$registry = &JRegistry::getInstance($id[, $namespace]);</code>
+
+===== Syntax =====
+[[JRegistry|JRegistry]] &getInstance ( **$id**, **$namespace** )
+
+| **$id** | string | is a string containing the ID of the namespace. |
+| **$namespace** | string | is a string containing the default namespace to use if the registry does not already exist. This parameter is optional and if omitted defaults to 'default'. |
+
+===== Examples =====
+<code php|Example>
+    $registry = JRegistry::getInstance( 'global', 'settings' );
+</code>
+retrieves the JRegistry object with ID 'global'. If this object doesn't exist, a new one will be created and it will have default namespace 'settings'.
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,20 @@
+====== JArrayHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+|[[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper]] | never | Internal review |
+
+JArrayHelper is an array utility class for performing various operations to work with arrays.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JArrayHelper-fromObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-fromObject|fromObject]] | Maps an object to an array. |
+| [[JArrayHelper-getColumn|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-getColumn|getColumn]] | Extracts a column from an array of arrays or objects. |
+| [[JArrayHelper-getValue|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-getValue|getValue]] | Returns a value from a named array or a specified default. |
+| [[JArrayHelper-sortObjects|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-sortObjects|sortObjects]] | Sorts an array of objects on a given field. |
+| [[JArrayHelper-toInteger|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-toInteger|toInteger]] | Converts an array to integer values. |
+| [[JArrayHelper-toObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JArrayHelper-toObject|toObject]] | Maps an array to an stdClass object. |
+| [[JArrayHelper-_sortObjects|{{http://api.joomla.org/media/images/Method.png }}]]
+
+----
+
+~~DISCUSSION~~
+

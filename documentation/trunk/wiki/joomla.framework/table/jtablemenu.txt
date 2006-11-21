@@ -1,0 +1,42 @@
+====== JTableMenu ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenu.html|JTableMenu]] | never | Work in progress |
+
+The JTableMenu class is an implementation of the JTable interface which provides access to the menu table. This implementation provides a custom bind method which handles the parameters for the control and params fields.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableMenu-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableMenu-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableMenu-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableMenu-bind|bind]] | overloaded bind method that provides parameter handling for the control and params fields. |
+
+
+===== Properties =====
+
+| **$id** | is an integer that contains the primary key for the table. |
+| **$menutype** | is a string containing the menu type of the menu. |
+| **$name** | is a string containing the name of the menu item. |
+| **$link** | is a string containing the link that is used for site menu items. |
+| **$type** | is a string containing the menu type. |
+| **$published** | is a boolean specifying whether or not the menu is published. |
+| **$componentid** | is an integer containing the ID of the component the menu item points to. |
+| **$parent** | is an integer containing the parent of the menu item. |
+| **$sublevel** | is an integer containing the sublevel of the menu item. |
+| **$ordering** | is an integer containing the order of the entry in the menu. |
+| **$published** | is a boolean value indicating whether or not the menu item is published. |
+| **$checked_out** | is a boolean value indicating whether or not the menu item is checked out. |
+| **$checked_out_time** | is a date/time variable indicating the time that the menu item was checked out. |
+| **$pollid** | is an integer containing the ID of the poll associated with the menu item. |
+| **$browserNav** | is a string containing the browser navigation parameter for the menu item. |
+| **$access** | is an integer containing the access parameters for the menu item. |
+| **$utaccess** | is an integer containing the utaccess parameter for the menu item. This field is not used in Joomla! 1.5 |
+| **$params** | is a string containing the parameters for the menu item. |
+| **$control** | is a string containing the Model-View-Controller-Renderer-Template controls for the menu item. |
+| **$lft** | is the preorder tree traversal left value for the menu item. |
+| **$rgt** | is the preorder tree traversal right value for the menu item. |
+| **$home** | is a boolean value specifying whether the menu item points to the home page. |
+
+
+----
+
+~~DISCUSSION~~
+

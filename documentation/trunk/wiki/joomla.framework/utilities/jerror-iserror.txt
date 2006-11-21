@@ -1,0 +1,27 @@
+====== isError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->isError]] |
+
+Determines whether the return value of a pat application method (i.e. patTemplate method) is a patError object. If it is, the funtion returns true. Otherwise, it returns false.
+===== Syntax =====
+boolean isError	( **&$object** )
+| **&$object** | mixed | is the return value of the pat application method. If this is an object of type patError, the function will return true. Otherwise, it will return false. |
+
+===== Examples =====
+<code php|Example>
+JError::setErrorHandling( E_ALL, 'store' );
+
+$template = JTemplate::getInstance();
+$template->readTemplatesFromInput( 'page.html' );
+$result = $template->fetch( 'wrongname' );
+
+if (JError::isError( $result ) ) {
+    echo "Yes, it is an error";
+} else {
+    echo "No, it is not an error";
+}
+</code>
+might produce:
+<code php|Result>
+Yes, it is an error
+</code>

@@ -1,0 +1,35 @@
+====== getXMLParser ======
+^ API ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getXMLParser]] |
+
+This method creates an XML document. It will instantiate an object depending on the specified type.
+===== Syntax =====
+object &getXMLParser	( **$type**, **$options** )
+| **$type** | string | is a string containing the type of XML object to return. This parameter can be 'DOM', 'RSS' or 'Simple', which will create a DOMIT object, a DOMIT RSS object or a [[references:joomla.framework:utilities:jsimplexml|JSimpleXML]] object respectively. This parameter is optional and if omitted defaults to 'DOM'. |
+| **$options** | array | is an array containing options for the XML object. |
+Recognized array elements:
+  * boolean ['lite'] - When using 'DOM' if true or not defined then domit_lite is used.
+  * string ['rssUrl'] - The RSS URL to parse when using 'RSS'.
+  * string ['cache_time'] - When using 'RSS' - feed cache time. If not defined defaults to 3600 sec.
+
+===== Examples =====
+<code php|Example>
+$xmldoc =& JFactory::getXMLParser( 'Simple' );
+$xmlstring = 
+"<product>
+<name>Telephone</name>
+<price>$29.95</price>
+<manufacturer>CAMNAI Manufacturing Company</manufacturer>
+</product>
+";
+
+if ( $xmldoc->loadString( $xmlstring ) ) {
+    echo "String successfully loaded!";
+} else {
+    echo "Something didn't work!";
+}
+</code>
+might produce:
+<code php|Result>
+String successfully loaded!
+</code>

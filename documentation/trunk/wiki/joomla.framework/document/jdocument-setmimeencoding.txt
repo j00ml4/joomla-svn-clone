@@ -1,0 +1,25 @@
+====== setMimeEncoding ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setMimeEncoding]] |
+
+Sets the document MIME encoding that is sent to the browser.
+This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml, and to a lesser extent application/xml and text/xml. See the W3C note (http://www.w3.org/TR/xhtml-media-types/) for more details.
+
+===== Syntax =====
+void setMimeEncoding	( **$type** )
+| **$type** | string | is a string containing the MIME type. This parameter is optional and if omitted defaults to 'text/html'. |
+
+===== Examples =====
+Set the mime type of the current document.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setMimeEncoding( 'application/xml' );
+
+echo "MIME Type: " . $document->getMimeEncoding();
+</code>
+Might produce:
+<code php|Result>
+MIME Type: application/xml
+</code>

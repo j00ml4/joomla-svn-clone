@@ -1,0 +1,15 @@
+====== update ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstaller|{{http://api.joomla.org/media/images/Class.png }}]][[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->update]] | never | Work in progress |
+
+This is an abstract update method which must be overriden in the child class. If the function of the base class is called, the die function will be specifying that the method is not available. This function has not been implemented by any of the core installer classes. It has been specified to provide a future interface for updating existing extensions (i.e. applying patches, version upgrades, etc...).
+
+===== Syntax =====
+void update ()
+
+===== Examples =====
+This base class method should not be invoked. The invokation of this method is dependent on the implementation in the child class.
+
+----
+
+~~DISCUSSION~~

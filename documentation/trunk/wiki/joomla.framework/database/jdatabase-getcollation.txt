@@ -1,0 +1,24 @@
+====== getCollation ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getCollation]] | never | Work in progress |
+
+Returns the collation being used by the database. Collations are supported by MySQL database starting with version 4.1.2. Previous versions will return 'N/A (mySQL < 4.1.2)'.
+
+===== Syntax =====
+string getCollation ()
+
+
+===== Examples =====
+<code php|Example>
+$dbo = JFactory::getDBO();
+echo $dbo->getCollation();
+</code>
+might produce:
+<code php|Result>
+utf8_general_ci
+</code>
+
+----
+
+~~DISCUSSION~~
+

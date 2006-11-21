@@ -1,0 +1,32 @@
+====== getItemid ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getItemid]] | never | Work in progress |
+
+The concept of an item id in Joomla! is rather complex. It has come to be used in a multiplicity of ways which makes its use difficult to understand in some situations. The essence of the problem seems to be that there are itemids associated with menu items, and there are also itemids that are associated with content items. This method is intended to resolve a general itemid into a menu itemid.
+
+This method invokes the [[references:joomla.framework:jmenu-getitemid|JMenu->getItemid]] method. Further details can be found in its reference page.
+
+This method returns the itemid of the specified item. 
+
+===== Syntax =====
+integer getItemid ( **$id** )
+
+| **$id** | integer | is an integer containing the id of the content item to resolve. |
+
+===== Examples =====
+Using the default sample data, the following code:
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getItemid( 6 );
+</code>
+might output
+<code php|Result>
+4
+</code>
+This is not the case. Instead, it outputs 9999, indicating that it is unable to locate a proper itemid value. My hypothesis or assumption was that it would lookup the 6, find that this is a content item that can be accessed from the blog link on the menu, and return the itemid of this menu item, which is 4. This may be a bug or an intended behaviour.
+
+
+----
+
+~~DISCUSSION~~

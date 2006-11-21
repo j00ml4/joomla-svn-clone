@@ -1,0 +1,26 @@
+====== JModuleHelper [WIP] ======
+
+Module helper class
+
+===== Methods =====
+
+==== getModule ====
+Get module by name
+=== Syntax ===
+object The &getModule	( string $name )
+
+$name
+  * The name of the module
+
+=== Examples ===
+
+==== getModules ====
+Get modules by position
+=== Syntax ===
+array &getModules	( string $position )
+
+$position
+  * The position of the module
+
+=== Examples ===
+

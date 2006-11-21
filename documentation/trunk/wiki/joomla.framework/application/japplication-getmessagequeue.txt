@@ -1,0 +1,48 @@
+====== getMessageQueue ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getMessageQueue]] | never | Work in progress |
+
+Retrieves the system message queue. If the queue is empty, the message queue will be retrieved from the session.
+
+===== Syntax =====
+array getMessageQueue ()
+
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$mainframe->enqueueMessage( 'The first message!' );
+$mainframe->enqueueMessage( 'The second message!', 'alert' );
+$mainframe->enqueueMessage( 'The third message!' );
+
+print_r( $mainframe->getMessageQueue() );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => Array
+        (
+            [message] => The first message!
+            [type] => message
+        )
+
+    [1] => Array
+        (
+            [message] => The second message!
+            [type] => alert
+        )
+
+    [2] => Array
+        (
+            [message] => The third message!
+            [type] => message
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~

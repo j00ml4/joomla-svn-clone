@@ -1,0 +1,26 @@
+====== connect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->connect]] |
+
+This method makes the connection to the FTP server.
+===== Syntax =====
+boolean connect	( **$host**, **$port** )
+| **$host** | string | is a string containing the host to connect to. This parameter is optional and if omitted, defaults to '127.0.0.1'. |
+| **$port** | string | is a string containing the port to connect to. This parameter is optional and if omitted defaults to '21'. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+
+if ($ftp->connect( 'ftp.ftpserver.com' )) {
+    echo "Connection successful!";
+} else {
+    echo "Connection failed!";
+}
+</code>
+might produce:
+<code php|Result>
+Connection successful!
+</code>

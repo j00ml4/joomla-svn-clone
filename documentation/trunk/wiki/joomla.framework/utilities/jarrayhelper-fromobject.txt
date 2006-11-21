@@ -1,0 +1,322 @@
+====== fromObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#fromobject|JArrayHelper->fromObject]] | never | Internal review |
+
+Maps an object to an array. This method will recurse unless specified otherwise. An optional regular expression parameter allows field names to be filtered.
+
+===== Syntax =====
+array fromObject ( **$p_obj**, **$recurse**, **$regex** )
+
+| **$p_obj** | object | is the source object. |
+| **$recurse** | boolean | is a boolean value that is set to true to recurse through multi-level objects. This parameter is optional and if omitted defaults to true. |
+| **$regex** | string | is a string containing the regular expression to match on field names. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+
+==== Example 1 ====
+<code php|Example 1: Invoking JArrayHelper::fromObject using the default behaviour>
+$document =& JFactory::getDocument();
+
+echo "The document object: ";
+print_r ( $document );
+echo "In array form: ";
+print_r ( JArrayHelper::fromObject( $document ) );
+</code>
+might produce:
+<code php|Result 1>
+The document object: JDocumentHTML Object
+(
+    [_links] => Array
+        (
+        )
+
+    [_custom] => Array
+        (
+        )
+
+    [_buffer] => Array
+        (
+        )
+
+    [title] => Joomla 1.5 - Documentation
+    [description] => Joomla! - the dynamic portal engine and content management system
+    [link] => 
+    [language] => en-gb
+    [direction] => ltr
+    [_generator] => Joomla! 1.5
+    [_tab] =>   
+    [_lineEnd] => 
+
+    [_charset] => utf-8
+    [_mime] => text/html
+    [_namespace] => 
+    [_profile] => 
+    [_scripts] => Array
+        (
+        )
+
+    [_script] => Array
+        (
+        )
+
+    [_styleSheets] => Array
+        (
+        )
+
+    [_style] => Array
+        (
+        )
+
+    [_metaTags] => Array
+        (
+            [http-equiv] => Array
+                (
+                    [Content-Type] => text/html; charset=utf-8
+                )
+
+            [standard] => Array
+                (
+                    [robots] => index, follow
+                    [keywords] => joomla, Joomla
+                )
+
+        )
+
+    [_engine] => 
+    [_type] => html
+)
+In array form: Array
+(
+    [_links] => Array
+        (
+        )
+
+    [_custom] => Array
+        (
+        )
+
+    [_buffer] => Array
+        (
+        )
+
+    [title] => Joomla 1.5 - Documentation
+    [description] => Joomla! - the dynamic portal engine and content management system
+    [link] => 
+    [language] => en-gb
+    [direction] => ltr
+    [_generator] => Joomla! 1.5
+    [_tab] =>   
+    [_lineEnd] => 
+
+    [_charset] => utf-8
+    [_mime] => text/html
+    [_namespace] => 
+    [_profile] => 
+    [_scripts] => Array
+        (
+        )
+
+    [_script] => Array
+        (
+        )
+
+    [_styleSheets] => Array
+        (
+        )
+
+    [_style] => Array
+        (
+        )
+
+    [_metaTags] => Array
+        (
+            [http-equiv] => Array
+                (
+                    [Content-Type] => text/html; charset=utf-8
+                )
+
+            [standard] => Array
+                (
+                    [robots] => index, follow
+                    [keywords] => joomla, Joomla
+                )
+
+        )
+
+    [_engine] => 
+    [_type] => html
+)
+</code>
+
+<code php|Example 2: Invoking JArrayHelper::fromObject non-recursively>
+$example = new stdClass();
+
+$example->document =& JFactory::getDocument();
+$example->other     = "Sample value";
+$example->length    = 25;
+    
+echo "The example object: ";
+print_r ( $example );
+echo "In array form: ";
+print_r ( JArrayHelper::fromObject( $example, false ) );
+</code>
+might produce:
+<code php|Result 2>
+											The example object: stdClass Object
+(
+    [document] => JDocumentHTML Object
+        (
+            [_links] => Array
+                (
+                )
+
+            [_custom] => Array
+                (
+                )
+
+            [_buffer] => Array
+                (
+                )
+
+            [title] => Joomla 1.5 - Documentation
+            [description] => Joomla! - the dynamic portal engine and content management system
+            [link] => 
+            [language] => en-gb
+            [direction] => ltr
+            [_generator] => Joomla! 1.5
+            [_tab] =>   
+            [_lineEnd] => 
+
+            [_charset] => utf-8
+            [_mime] => text/html
+            [_namespace] => 
+            [_profile] => 
+            [_scripts] => Array
+                (
+                )
+
+            [_script] => Array
+                (
+                )
+
+            [_styleSheets] => Array
+                (
+                )
+
+            [_style] => Array
+                (
+                )
+
+            [_metaTags] => Array
+                (
+                    [http-equiv] => Array
+                        (
+                            [Content-Type] => text/html; charset=utf-8
+                        )
+
+                    [standard] => Array
+                        (
+                            [robots] => index, follow
+                            [keywords] => joomla, Joomla
+                        )
+
+                )
+
+            [_engine] => 
+            [_type] => html
+        )
+
+    [other] => Sample value
+    [length] => 25
+)
+In array form: Array
+(
+    [other] => Sample value
+    [length] => 25
+)
+</code>
+
+<code php|Example 3: Invoking JArrayHelper::fromObject using a regular expression to filter out private members>
+$document =& JFactory::getDocument();
+echo "The object: ";
+print_r ( $document );
+echo "In array form: ";
+print_r ( JArrayHelper::fromObject( $document, false, "/^[^_].*/" ) );
+</code>
+might produce:
+<code php|Result 3:>
+												The object: JDocumentHTML Object
+(
+    [_links] => Array
+        (
+        )
+
+    [_custom] => Array
+        (
+        )
+
+    [_buffer] => Array
+        (
+        )
+
+    [title] => Joomla 1.5 - Documentation
+    [description] => Joomla! - the dynamic portal engine and content management system
+    [link] => 
+    [language] => en-gb
+    [direction] => ltr
+    [_generator] => Joomla! 1.5
+    [_tab] =>   
+    [_lineEnd] => 
+
+    [_charset] => utf-8
+    [_mime] => text/html
+    [_namespace] => 
+    [_profile] => 
+    [_scripts] => Array
+        (
+        )
+
+    [_script] => Array
+        (
+        )
+
+    [_styleSheets] => Array
+        (
+        )
+
+    [_style] => Array
+        (
+        )
+
+    [_metaTags] => Array
+        (
+            [http-equiv] => Array
+                (
+                    [Content-Type] => text/html; charset=utf-8
+                )
+
+            [standard] => Array
+                (
+                    [robots] => index, follow
+                    [keywords] => joomla, Joomla
+                )
+
+        )
+
+    [_engine] => 
+    [_type] => html
+)
+In array form: Array
+(
+    [title] => Joomla 1.5 - Documentation
+    [description] => Joomla! - the dynamic portal engine and content management system
+    [link] => 
+    [language] => en-gb
+    [direction] => ltr
+)
+</code>
+
+
+----
+
+~~DISCUSSION~~

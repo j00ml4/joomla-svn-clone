@@ -1,0 +1,24 @@
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JButton|{{http://api.joomla.org/media/images/Class.png }}]][[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#getname|JButton->getName]] | never | Internal review |
+
+Gets the button name.
+
+===== Syntax =====
+string getName ()
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Standard' );
+$button->fetchId( 'Standard', 'send', 'Activate', 'activate', false );
+echo $button->getName();
+</code>
+might produce:
+<code php|Result>
+Standard
+</code>
+
+----
+
+~~DISCUSSION~~

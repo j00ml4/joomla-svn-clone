@@ -1,0 +1,46 @@
+====== stringToObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormatINI|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->stringToObject]] | never | Work in progress |
+
+Converts an INI string into an object. This method is based on the phpDocumentor_parse_ini_file function.
+
+===== Syntax =====
+object Data stringToObject	( **$data**, **$process_sections** )
+
+| **$data** | mixed | The INI string or array of lines |
+| **$process_sections** | boolean | add an associative index for each section [in brackets] |
+
+===== Examples =====
+<code php|Example>
+$iniFormat =& JRegistryFormat::getInstance( 'INI' );
+
+jimport( 'joomla.filesystem.file' );
+$data = JFile::read( JPATH_SITE . DS . 'language' . DS . 'en-GB' . DS . 'en-GB.ini' );
+
+print_r( $iniFormat->stringToObject( $data ) );
+</code>
+might produce:
+<code php|Result>
+stdClass Object
+(
+    [&LT] => &lt;
+
+    [&GT] => &gt;
+    [A USER SUBMITTED] => A user submitted
+    [ADMINISTRATOR] => administrator
+    [ALERTNOTAUTH] => You are not authorized to view this resource.
+    [APPLY] => Apply
+    [ARCHIVE] => archive
+    
+    ...
+    
+    [WYSYWYG EDITOR FOR THIS USER] => WYSYWYG Editor for this User
+    [YOU MUST CREATE A CATEGORY FIRST.] => You must create a category first.
+    [YOU NEED TO LOGIN.] => You need to login.
+    [YOUR] => Your
+)
+</code>
+
+----
+
+~~DISCUSSION~~

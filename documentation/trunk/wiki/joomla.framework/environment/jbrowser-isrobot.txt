@@ -1,0 +1,11 @@
+====== isRobot ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->isRobot]] |
+
+Determines if the browser is a robot or not.
+===== Syntax =====
+boolean isRobot ()
+
+===== Examples =====
+
+

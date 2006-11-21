@@ -1,0 +1,25 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormat|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->getInstance]] | never | Work in progress |
+
+Returns a reference to a JRegistryFormat object, only creating it if it doesn't already exist. This method will return a reference to an object of type JRegistryFormat$format. For example, if $format is 'XML', a reference to a JRegistryFormatXML object will be returned. The class definition must be in a file called $format.php in the libraries/joomla/registry/format folder.
+
+===== Syntax =====
+object &getInstance ( **$format** )
+
+| **$format** | string | is a string specifying the format to load. |
+
+===== Examples =====
+<code php|Example>
+$xmlFormat =& JRegistryFormat::getInstance( 'XML' );
+print_r( $xmlFormat );
+</code>
+will produce:
+<code php|Result>
+JRegistryFormatXML Object ( )
+</code>
+
+
+----
+
+~~DISCUSSION~~

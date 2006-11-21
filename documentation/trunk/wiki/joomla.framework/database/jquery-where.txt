@@ -1,0 +1,28 @@
+====== where ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQuery|JQuery]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery->where]] |
+
+Adds a 'where' clause to the query.
+
+===== Syntax =====
+void where	( **$conditions**, **$glue** )
+| **$conditions** | mixed | is a string containing the condition to add or an array of strings containing one or more conditions to add. |
+| **$glue** | string | is a string containing the glue to add between condition. This parameter is optional and if omitted defaults to 'AND'. |
+
+===== Examples =====
+<code php|Example>
+jimport('joomla.database.query');
+
+$query = new JQuery();
+
+$query->select( array( 'a.*' ) );
+$query->from( '#__content as a' );
+$query->order( 'a.title' );
+$query->where( 'a.sectionid = 2' );
+
+echo $query->toString();
+</code>
+might produce:
+<code sql|Result>
+SELECT a.* FROM #__content as a WHERE a.sectionid = 2 ORDER BY a.title
+</code>

@@ -1,0 +1,23 @@
+====== getIncludePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->getIncludePath]] | never | Work in progress |
+
+Gets the include path.
+
+===== Syntax =====
+string getIncludePath ()
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My Toolbar' );
+echo $bar->getIncludePath();
+</code>
+might produce:
+<code php|Result>
+C:\webroot\htdocs\joomla15\libraries\joomla\presentation\toolbar\button
+</code>    
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,31 @@
+====== strcspn ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strcspn]] | never | Work in progress |
+
+Finds the initial length of the string that does not contain certain characters. See [[http://www.php.net/manual/en/function.strcspn.php|strcspn]] for more information.
+
+===== Syntax =====
+integer strcspn	( **$str**, **$mask**, **$start**, **$length** )
+
+| **$str** | string | is the string to search for the mask string. |
+| **$mask** | string | is a string containing the mask characters. |
+| **$start** | integer | is an integer containing the optional starting character position (in characters). |
+| **$length** | integer | is an integer containing the optional length of the string to search. |
+
+===== Examples =====
+<code php|Example>
+$string = "και εισηλθεν παλιν εις";
+$mask1 = "ε";
+echo $string . "<br />$mask1<br />";
+echo "There are " . JString::strcspn( $string, $mask1 ) . " characters from the beginning of $string that do not contain $mask1.";
+</code>
+might produce:
+<code php|Result>
+και εισηλθεν παλιν εις
+ε
+There are 4 characters from the beginning of και εισηλθεν παλιν εις that do not contain ε.
+</code>
+
+----
+
+~~DISCUSSION~~

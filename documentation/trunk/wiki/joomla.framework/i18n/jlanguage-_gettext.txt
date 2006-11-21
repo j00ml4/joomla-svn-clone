@@ -1,0 +1,32 @@
+====== _ ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_]] | never | Work in progress |
+
+Translates a string. This method mimics the php gettext (alias _) function. The method looks the specified string up in its language array. If the string exists, the method will return the translated value. If it does not, it will return the original string. If the debug property is set, the method will append '&bull;' to the beginning and end of strings that exist, '!!' to the beginning and end of strings that are only defined as constants, and '??' to the beginning and end of strings that do not exist. If the $jsSafe parameter is true, the PHP [[http://www.php.net/addslashes|addslashes]] function will be invoked on the string.
+
+===== Syntax =====
+string _ ( **$string**, **$jsSafe** )
+
+| **$string** | string | is the string to translate |
+| **$jsSafe** | boolean | is a boolean value which specifies whether or not the result should be made javascript safe. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$language = JFactory::getLanguage();
+$keys = array( 'APPLY', 'ARCHIVE', 'ARCHIVED', 'BANNER' );
+foreach ($keys as $key) {
+    echo "$key " . $language->_( $key ) . "<br />";
+}
+</code>
+might produce:
+<code php|Result>
+APPLY Apply
+ARCHIVE archive
+ARCHIVED Archived
+BANNER Banner
+</code>
+The [[references:Joomla.Framework:base:JFactory-getLanguage|JFactory::getLanguage()]] method is used to get the current active language.
+
+----
+
+~~DISCUSSION~~

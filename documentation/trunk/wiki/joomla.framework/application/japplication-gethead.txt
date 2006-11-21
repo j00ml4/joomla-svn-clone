@@ -1,0 +1,24 @@
+====== getHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getHead]] | never | Work in progress |
+
+Returns the head block of the current document. This method is deprecated in Joomla! 1.5 (JDocument->renderHead should be used instead).
+
+===== Syntax =====
+void getHead ()
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+echo $mainframe->getHead();
+</code>
+might produce
+<code php|Result>
+this method was broken at time of writing.
+</code>
+
+----
+
+~~DISCUSSION~~
+

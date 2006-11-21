@@ -1,0 +1,17 @@
+====== close ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JLDAP|{{http://api.joomla.org/media/images/Class.png }}]][[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP->close]] | never | Work in progress |
+Close the connection
+===== Syntax =====
+void close ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

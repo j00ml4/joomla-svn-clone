@@ -1,0 +1,54 @@
+====== getParam ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->getParam]] | never | Work in progress |
+
+Renders a parameter into HTML. The method returns the results of the element's [[JElement-render|render]] method. See the [[JElement|JElement]] classes for more information on the XML schema for each element type.
+
+===== Syntax =====
+array getParam ( **&$node**, **$control_name** )
+
+| **&$node** | object | is a parameter tag node. This should be of type JSimpleXMLElement. |
+| **$control_name** | string | is a string containing the control name that will be used in the parameter form. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+print_r( $params->getParam( $nodes[0] ) );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => <label id="paramsname-lbl" for="paramsname"><span onmouseover="return overlib('Show/Hide the name info', CAPTION, 'Name', BELOW, RIGHT);" onmouseout="return nd();" >Name</span></label>
+
+    [1] => 
+	<input type="radio" name="params[name]" id="paramsname0" value="0"  />
+	<label for="paramsname0">Hide</label>
+	<input type="radio" name="params[name]" id="paramsname1" value="1" checked="checked"  />
+	<label for="paramsname1">Show</label>
+
+    [2] => Show/Hide the name info
+    [3] => Name
+    [4] => 1
+    [5] => name
+)
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+
+----
+
+~~DISCUSSION~~
+

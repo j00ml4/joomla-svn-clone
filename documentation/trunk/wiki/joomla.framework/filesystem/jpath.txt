@@ -1,0 +1,19 @@
+====== JPath ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html|JPath]] | 27 Apr 2006 | Published |
+
+This is a path handling class. It provides various path related utility functions. This is a [[http://www.php.net/manual/en/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JPath-canChmod|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-canChmod|canChmod]] | Checks if a path's permissions can be changed. |
+| [[JPath-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-check|check]] | Checks for snooping outside of the file system root. |
+| [[JPath-clean|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-clean|clean]] | Strips additional / or \ in a path name. |
+| [[JPath-getPermissions|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-getPermissions|getPermissions]] | Get the permissions of the file or folder at a given path. |
+| [[JPath-isOwner|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-isOwner|isOwner]] | Method to determine if the current script owns a given path. |
+| [[JPath-setPermissions|{{http://api.joomla.org/media/images/Method.png }}]] [[JPath-setPermissions|setPermissions]] | Changes permissions on files and directories recursively to given permissions. |
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,8 @@
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework//JObject.html|JObject->__construct]] |
+
+This is the Class constructor, overridden in descendant classes. It is empty.
+===== Syntax =====
+JObject __construct ()
+

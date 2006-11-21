@@ -1,0 +1,16 @@
+====== GetOne ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->GetOne]] | never | Work in progress |
+
+ADODB compatability function. See [[http://phplens.com/adodb/reference.functions.getone.html]] for more information.
+
+===== Syntax =====
+mixed GetOne ( **$query** )
+
+| **$query** | string | is a string containing an SQL query. |
+
+
+----
+
+~~DISCUSSION~~
+

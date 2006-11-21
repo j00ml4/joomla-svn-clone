@@ -1,0 +1,25 @@
+====== uninstall ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->uninstall]] | never | Work in progress |
+
+Custom uninstall method for modules. The uninstall method performs the following actions:
+  * finds and loads the XML install file for the module
+  * deletes any module copies that exist
+  * deletes module object
+  * processes XML file, removing any necessary files
+  * removes module folder
+
+This method returns true on success, false otherwise. 
+
+===== Syntax =====
+boolean uninstall	( **$id**, **$client**, **$cid** )
+
+| **$id** | integer | is an integer containing the id of the module to uninstall. |
+| **$client** | integer | is an integer containing the client id. |
+
+
+----
+
+~~DISCUSSION~~
+
+

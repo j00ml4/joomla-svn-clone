@@ -1,0 +1,32 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableSection|{{http://api.joomla.org/media/images/Class.png }}]][[JTableSection|JTableSection]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. Namely, it ensures that the section has both a title and a name, and that a section with the given name does not already exist in the section.
+
+===== Syntax =====
+void check ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$section =& JTable::getInstance('section', $db );
+$section->load( 2 );
+$section->name = '';   // an empty section name
+echo "Data Integrity Check " . ($section->check() ? "Passed" : "Failed") . "<br />";
+$section->name = 'The News';   // a section name that already exists
+echo "Data Integrity Check " . ($section->check() ? "Passed" : "Failed") . "<br />";
+$section->name = 'Completely New';   // a section name that should be okay
+echo "Data Integrity Check " . ($section->check() ? "Passed" : "Failed") . "<br />";
+</code>
+might produce:
+<code php|Result>
+Data Integrity Check Failed
+Data Integrity Check Failed
+Data Integrity Check Passed
+</code>
+
+
+----
+
+~~DISCUSSION~~

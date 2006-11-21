@@ -1,0 +1,15 @@
+====== getState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework//JObservable.html|JObservable->getState]] |
+
+Get the state of the JObservable object. This function returns the state of the JObservable object. The value returned is the _state property. This is a private property that can be utilised by child classes to communicate information about the state of the observable class in a standard way.
+
+===== Syntax =====
+mixed getState ()
+
+===== Examples =====
+The _state property is a private property and must be set by the child class.
+<code php|Example>
+$dispatcher =& JEventDispatcher::getInstance();
+echo "State: ". $dispatcher->getState();
+</code>

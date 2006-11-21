@@ -1,0 +1,23 @@
+====== setTitle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setTitle]] |
+
+Sets the title of the page.
+===== Syntax =====
+void setTitle	( **$title** )
+| **$title** | string | is a string containing the title for the page. |
+
+===== Examples =====
+Set the title for the page.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setTitle( 'Joomla! Documentation Test Bed' );
+
+echo "Title: " . $document->getTitle();
+</code>
+Might produce:
+<code php|Result>
+Title: Joomla! Documentation Test Bed
+</code>

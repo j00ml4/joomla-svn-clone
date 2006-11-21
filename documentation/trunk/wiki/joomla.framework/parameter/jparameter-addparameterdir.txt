@@ -1,0 +1,35 @@
+====== addParameterDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->addParameterDir]] | never | Work in progress |
+
+Adds a directory where JParameter should search for element types. You may either pass a string or an array of directories. JParameter will be searching directories for an element type in the same order you added them. If the parameter type cannot be found in  the custom folders, it will look in the libraries/joomla/presentation/parameter/element folder.
+
+===== Syntax =====
+void addParameterDir ( **$dir** )
+
+| **$dir** | mixed | is a string containing the directory to add or an array of strings containing multiple directories to add. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=1\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+$params->addParameterDir( dirname(__FILE__) . DS . 'element' );
+
+print_r( $params->_elementDirs );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => C:\webroot\htdocs\joomla15\administrator\components\com_document\element )
+</code>
+(Note that properties that begin with _ should not be directly accessed, but are used here for demonstration purposes)
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+----
+
+~~DISCUSSION~~
+

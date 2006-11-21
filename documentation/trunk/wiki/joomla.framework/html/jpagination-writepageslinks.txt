@@ -1,0 +1,42 @@
+====== writePagesLinks ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPagination|{{http://api.joomla.org/media/images/Class.png }}]][[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->writePagesLinks]] | never | Work in progress |
+
+Writes (echoes) the output of [[JPagination-getPagesLinks|getPagesLinks]]. This method has been deprecated as of Joomla! 1.5. Use [[JPagination-getPagesLinks|getPagesLinks]] instead.
+
+===== Syntax =====
+void writePagesLinks ( **$link** )
+
+| **$link** | string | is a string containing the value of the $link parameter to pass to [[JPagination-getPagesLinks|getPagesLinks]]. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe, $option;
+$db =& JFactory::getDBO();
+
+$limit		= $mainframe->getUserStateFromRequest("$option.limit", 'limit', $mainframe->getCfg('list_limit'), 0);
+$limitstart	= JRequest::getVar('limitstart', 0, '', 'int');
+$query = "SELECT count(*) "
+. "\n FROM #__weblinks"
+;
+$db->setQuery( $query );
+$total = $db->loadResult();
+
+jimport('joomla.presentation.pagination');
+$pageNav = new JPagination( $total, $limitstart, $limit );
+$pageNav->writePagesLinks();
+</code>
+might produce:
+<code php|Result>
+<div class="button2-right off"><div class="start"><span>Start</span></div></div>
+<div class="button2-right off"><div class="prev"><span>Prev</span></div></div>
+<div class="button2-left"><div class="page">
+<span>1</span>
+</div></div>
+<div class="button2-left off"><div class="next"><span>Next</span></div></div>
+<div class="button2-left off"><div class="end"><span>End</span></div></div>
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,33 @@
+====== move ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFolder|{{http://api.joomla.org/media/images/Class.png }}]][[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#move|JFolder->move]] | 26 Apr 2006 | Published |
+
+Moves a folder. This function uses FTP if enabled, otherwise, it will use the built in PHP functions. This function returns true on success, false otherwise.
+
+===== Syntax =====
+mixed move	( **$src**, **$dest**, **$path** )
+| **$src** | string | is a string containing the path to the source folder. |
+| **$dest** | string | is a string containing the path to the destination folder. |
+| **$path** | string | is an optional string containing a base path to prefix to the file names. |
+
+===== Examples =====
+In this example a folder called 'myfolder/oldsubfolder' in the Joomla! root folder is moved (together with its contents) to 'myfolder/newsubfolder'.
+<code php|Example>
+jimport( 'joomla.filesystem.folder' );
+
+global $mainframe;
+
+if (JFolder::move( 'oldsubfolder', 'newsubfolder', $mainframe->getCfg( 'absolute_path' ) . '/myfolder/' )) {
+    echo "Folder moved!";
+} else {
+    echo "Could not move folder!";
+}
+</code>
+might produce:
+<code php|Result>
+Folder moved!
+</code>
+
+----
+
+~~DISCUSSION~~

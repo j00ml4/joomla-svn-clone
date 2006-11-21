@@ -1,0 +1,23 @@
+====== setTab ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setTab]] |
+
+Sets the string used to indent HTML.
+===== Syntax =====
+void setTab	( **$string** )
+| **$string** | string | is a string containing the string used to indent ('\11', '\t', '  ', etc.). |
+
+===== Examples =====
+Set the indent string used to indent HTML.
+<code php|Example>
+global $mainframe;
+
+$document =& $mainframe->getDocument();
+$document->setTab( '    ' );
+
+echo "Tab: <" . $document->getTab() . ">";
+</code>
+Might produce:
+<code php|Result>
+Tab: <    >
+</code>

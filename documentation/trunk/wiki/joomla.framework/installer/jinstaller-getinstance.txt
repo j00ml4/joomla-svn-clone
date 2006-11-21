@@ -1,0 +1,23 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstaller|{{http://api.joomla.org/media/images/Class.png }}]][[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->getInstance]] | never | Work in progress |
+
+Returns a reference to the global Installer object, only creating it if it doesn't already exist.
+
+===== Syntax =====
+JInstaller &getInstance	( **&$db**, **$type** )
+
+| **$db** | object | is an object of type JDatabase which is used to manipulate the database. |
+| **$type** | string | is a string containing the installer type to instantiate. This parameter is optional and if omitted defaults to null, which will result in an instance of the base class being created. The value of this parameter must correspond to an existing JInstaller child class. Child classes that exist in the core API are: JInstallerComponent, JInstallerLanguage, JInstallerModule, JInstallerPlugin, and JInstallerTemplate. |
+
+===== Examples =====
+This method is called by the admin component to instantiate an object of the appropriate type. The JInstallerHelper class is used to unpack the file (if necessary) and determine the extension type. The $package array is returned from the JInstallerHelper::unpack() method.
+
+<code php|Example>
+$installer = & JInstaller::getInstance($db, $package['type']);
+</code>
+creates an instance of the JInstaller child class as specified by $package['type'].
+
+----
+
+~~DISCUSSION~~

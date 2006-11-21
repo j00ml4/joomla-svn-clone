@@ -1,0 +1,32 @@
+====== loadAssoc ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadAssoc]] | never | Work in progress |
+
+Executes the current query and returns the first result row in an associative array.
+
+===== Syntax =====
+void loadAssoc ()
+
+===== Examples =====
+<code php|Example>
+$dbo =& JFactory::getDBO();
+
+$query = "SELECT name, clickurl FROM #__banner";
+$dbo->setQuery( $query );
+$row = $dbo->loadAssoc();
+print_r( $row );
+echo "<br />";
+$row = $dbo->loadAssoc();
+print_r( $row );
+</code>
+might produce:
+<code php|Result>
+Array ( [name] => OSM 1 [clickurl] => http://www.opensourcematters.org )
+Array ( [name] => OSM 1 [clickurl] => http://www.opensourcematters.org )
+</code>
+Note that this method can only be used to obtain the first result (as illustrated above).
+
+----
+
+~~DISCUSSION~~
+

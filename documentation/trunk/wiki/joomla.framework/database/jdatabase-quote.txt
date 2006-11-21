@@ -1,0 +1,33 @@
+====== Quote ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->Quote]] | never | Work in progress |
+
+ADODB Compatibility function. See [[http://phplens.com/adodb/reference.functions.quote.html]] for more information. Returns a quoted string with all characters that have special meaning for the database escaped.  This function is the same as database->getEscaped except that the string returned is surrounded by single quotes.
+
+===== Syntax =====
+string Quote ( **$text** )
+
+| **$text** | string | is a string to be quoted. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$text = $database->Quote( "Joomla is 'Power in Simplicity'!" );
+$sql = "SELECT * FROM #__content WHERE introtext=$text";
+$database->setQuery( $sql );
+if (!$database->query()) {
+  echo $database->stderr();
+}
+ 
+echo $database->getQuery();
+</code>
+might produce:
+<code php|Result>
+SELECT * FROM jos_content WHERE introtext='Joomla is \'Power in Simplicity\'!'
+</code>
+
+----
+
+~~DISCUSSION~~
+

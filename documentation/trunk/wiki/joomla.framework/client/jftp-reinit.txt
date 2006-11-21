@@ -1,0 +1,28 @@
+====== reinit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->reinit]] |
+
+This method reinitializes the server. This method would be used if login had to be done again.
+NOTE: This command not available on all servers. The function returns true if successful, false otherwise.
+===== Syntax =====
+boolean reinit ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.connector.ftp' );
+
+$ftp = new JFTP( array( 'type' => FTP_BINARY ) );
+$ftp->connect( '127.0.0.1' );
+$ftp->login( 'testuser', 'testpass' );
+
+if ($ftp->reinit() ) {
+    echo "Reinitialization successful!";
+} else {
+    echo "Reinitialization failed!";
+}
+</code>
+might produce:
+<code php|Result>
+Reinitialization successful!
+</code>
+TODO: Please test this example...  I think my server performed the operation correctly, it returned a 230, but I don't think that the response was correctly recognized. It errored and killed my script.

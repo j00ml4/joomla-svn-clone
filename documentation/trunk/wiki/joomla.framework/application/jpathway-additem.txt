@@ -1,0 +1,19 @@
+====== addItem ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->addItem]] |
+
+Create and add an item to the pathway. The new item is appended to the end of the pathway. Links do not appear on the last item in the pathway as it is assumed that this points to the current page.
+
+===== Syntax =====
+boolean addItem	( **$name**, **$link** )
+| **$name** | string | is a string containing the name of the item to add. |
+| **$link** | string | is a string containing the URL for the link. This parameter is optional and if omitted will default to an empty string and the pathway item will not be linked. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$pathway =& $mainframe->getPathWay();
+$pathway->addItem( 'testing', 'http://www.joomla.org' );
+</code>
+which will add the item testing to the pathway.

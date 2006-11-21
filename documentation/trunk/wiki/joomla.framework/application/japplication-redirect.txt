@@ -1,0 +1,29 @@
+====== redirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->redirect]] | never | Work in progress |
+
+Redirects to another URL, optionally enqueueing a message in the system message queue (which will be displayed the next time a page is loaded) using the [[JApplication-enqueueMessage|enqueueMessage]] method. If the headers have not been sent, the redirect will be accomplished using a '301 Moved Permanently' code in the header pointing to a new location. If the headers have already been sent, this will be accomplished using a JavaScript statement.
+Redirect to another URL
+
+===== Syntax =====
+void redirect ( **$url**, **$msg**, **$msgType** )
+
+| **$url** | string | is a string containing the URL to which to redirect. |
+| **$msg** | string | is a string containing a message to display on redirect (see [[JApplication-enqueueMessage|enqueueMessage]] for more details). |
+| **$msgType** | string | is a string containing the message type (see [[JApplication-enqueueMessage|enqueueMessage]] for more details). |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$mainframe->enqueueMessage( 'The first message!' );
+$mainframe->enqueueMessage( 'The second message!', 'alert' );
+$mainframe->enqueueMessage( 'The third message!' );
+
+$mainframe->redirect( JURI::base() . 'index.php?option=com_poll&redirected=1' );
+</code>
+might redirect the browser to http://127.0.0.1/administrator/index.php?option=com_poll&redirected=1.
+
+----
+
+~~DISCUSSION~~

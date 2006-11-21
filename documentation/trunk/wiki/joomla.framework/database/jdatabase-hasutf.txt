@@ -1,0 +1,22 @@
+====== hasUTF ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->hasUTF]] | never | Work in progress |
+
+Determines whether or not the database has UTF support. Returns true if the database supports UTF, false otherwise.
+
+===== Syntax =====
+boolean hasUTF ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+echo 'The database ' . ($database->getVersion() ? 'has' : 'does not have') . ' UTF support.';
+</code>
+might produce:
+<code php|Result>
+The database has UTF support.
+</code>
+----
+
+~~DISCUSSION~~
+

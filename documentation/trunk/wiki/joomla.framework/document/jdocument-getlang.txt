@@ -1,0 +1,20 @@
+====== getLang ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->getLang]] |
+
+Gets the language of the current document.
+===== Syntax =====
+string getLang ()
+
+===== Examples =====
+This example displays the language code for the current document.
+<code php|Example>
+global $mainframe;
+
+$document = &$mainframe->getDocument();
+echo "Language: " . $document->getLang();
+</code>
+Might produce:
+<code php|Result>
+Language: en
+</code>

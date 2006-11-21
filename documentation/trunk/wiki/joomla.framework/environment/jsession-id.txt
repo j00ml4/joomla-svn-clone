@@ -1,0 +1,12 @@
+====== id ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->id]] |
+
+Sets new ID of a session
+===== Syntax =====
+string id	( **$id** )
+| **** | string |  |
+
+===== Examples =====
+
+

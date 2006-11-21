@@ -1,0 +1,20 @@
+====== setUTF ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setUTF]] | never | Work in progress |
+
+Manually sets UTF support for the database. Note that this method may be used to attempt to enable UTF support even if it does not exist for the specified database. The implementation of this method depends on the specific driver.
+
+===== Syntax =====
+void setUTF ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+$database->setUTF();
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

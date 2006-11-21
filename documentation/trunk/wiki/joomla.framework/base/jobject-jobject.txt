@@ -1,0 +1,9 @@
+====== JObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework//JObject.html|JObject->JObject]] |
+
+This function is a hack to support <nowiki>__construct()</nowiki> on PHP 4
+Descendant classes have no PHP4 class_name() constructors,  so this constructor gets called first and calls the top-layer <nowiki>__construct()</nowiki> which (if present) should call <nowiki>parent::__construct()</nowiki>
+===== Syntax =====
+JObject JObject ()
+

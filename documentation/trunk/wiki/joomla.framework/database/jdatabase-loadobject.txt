@@ -1,0 +1,30 @@
+====== loadObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObject]] | never | Work in progress |
+
+Loads an object with fields from the first row returned by the current SQL query. The method returns an object loaded with the data retrieved from the database. If the query fails, the method returns null.
+
+===== Syntax =====
+object loadObject ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$sql = 'SELECT name, username FROM #__users';
+$database->setQuery( $sql );
+$user = NULL;
+$user = $database->loadObject();
+echo 'Name: ' .  $user->name . '<br />';
+echo 'Username: ' .  $user->username;
+</code>
+might produce:
+<code php|Result>
+Name: Administrator
+Username: admin
+</code>
+
+----
+
+~~DISCUSSION~~
+

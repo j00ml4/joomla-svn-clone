@@ -1,0 +1,24 @@
+====== install ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerComponent|JInstallerComponent]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerComponent.html|JInstallerComponent->install]] | never | Work in progress |
+
+Custom install method for components. The install method performs the following actions:
+  * finds and checks the installation file and verifies that it is the proper installation type
+  * checks for the existence of the directory to ensure that it is not already being used
+  * copies files
+  * executes queries specified in SQL install files
+  * copies install and uninstall files
+  * adds appropriate entries to the administrator menus
+  * executes install script
+
+This method returns true on success, false otherwise.
+
+===== Syntax =====
+boolean install	( **$p_fromdir** )
+
+| **$p_fromdir** | string | is a string containing the directory from which to install the  component. |
+
+----
+
+~~DISCUSSION~~
+

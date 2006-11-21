@@ -1,0 +1,23 @@
+====== getPrefix ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getPrefix]] | never | Work in progress |
+
+Returns the current database table prefix code.  By default this will be 'mos_' but this may have been overridden during Joomla installation.
+
+===== Syntax =====
+string getPrefix ()
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+echo $database->getPrefix();
+</code>
+might produce:
+<code php|Result>
+jos_
+</code>
+
+----
+
+~~DISCUSSION~~
+

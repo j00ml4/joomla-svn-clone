@@ -1,0 +1,44 @@
+====== files ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFolder|{{http://api.joomla.org/media/images/Class.png }}]][[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#files|JFolder->files]] | 26 Apr 2006 | Published |
+
+Utility function to read the files in a folder. This function uses FTP if enabled, otherwise, it will use the built in PHP functions. An array containing the files in the folder is returned.
+===== Syntax =====
+array files	( **$path**, **$filter**, **$recurse**, **$fullpath** )
+| **$path** | string | is a string containing the path of the folder to read. |
+| **$filter** | string | is a string containing a filter for file names. The filter is applied as a [[http://en.wikipedia.org/wiki/Regular_expression|regular expression]], so this syntax should be followed. This parameter is optional and if omitted defaults to an empty string. |
+| **$recurse** | boolean | is a flag which specifies whether or not sub-folders should be recursively searched. This parameter is optional and if omitted defaults to false. |
+| **$fullpath** | boolean | is a flag which specifies whether or not the full path to the file should be returned. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+==== Example 1 ====
+Basic example:
+<code php|Example 1>
+jimport( 'joomla.filesystem.folder' );
+$files = JFolder::files( 'templates' );
+print_r( $files );
+</code>
+might produce:
+<code php|Result>
+Array ( [0] => index.html )
+</code>
+==== Example 2 ====
+Display only php files in all sub folders, showing full paths:
+<code php|Example 2>
+jimport( 'joomla.filesystem.folder' );
+$files = JFolder::files( 'templates', 'php$', true, true );
+print_r( $files );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [1] => templates\_system\error.php
+    [2] => templates\_system\offline.php
+    [0] => templates\rhuk_milkyway\index.php
+)
+</code>
+
+----
+
+~~DISCUSSION~~

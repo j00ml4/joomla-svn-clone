@@ -1,0 +1,45 @@
+====== getTableFields ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableFields]] | never | Work in progress |
+
+Returns a list of fields and field types given a list of tables.
+
+===== Syntax =====
+array getTableFields ( **$tables** )
+
+| **$tables** | array | is an array of strings containing a list of table names. |
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+
+$prefix = $database->_table_prefix;
+$tables = array( $prefix.'content_frontpage', $prefix.'content_rating' );
+$result = $database->getTableFields( $tables );
+print_r( $result );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [jos_content_frontpage] => Array
+        (
+            [content_id] => int
+            [ordering] => int
+        )
+ 
+    [jos_content_rating] => Array
+        (
+            [content_id] => int
+            [rating_sum] => int unsigned
+            [rating_count] => int unsigned
+            [lastip] => varchar
+        )
+ 
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

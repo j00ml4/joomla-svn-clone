@@ -1,0 +1,39 @@
+====== addButtonDir ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->addButtonDir]] | never | Work in progress |
+
+Adds a directory where JToolBar should search for button types. You may either pass a string or an array of directories. JToolBar will be searching directories for a button type in the same order you added them. If the button type cannot be found in the custom folders, it will look in the toolbar/button folder. This can be used to add custom toolbar classes.
+
+===== Syntax =====
+void addButtonDir ( **$dir** )
+
+| **$dir** | mixed | is a string containing the name of the directory or an array of string containing the names of multiple directories to search. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My Toolbar' );
+$bar->addButtonDir( dirname(__FILE__) . DS . 'button' );
+$bar->appendButton( 'Example', 'new', 'Example Test', 'http://www.joomla.org', 450, 450, 100, 100 );
+echo $bar->render();
+</code>
+might produce:
+<code php|Result>
+<div class="toolbar" id="My Toolbar">
+<table class="toolbar"><tr>
+<td class="button" id="My Toolbar-example-Example">
+<a onclick="document.popup.show('http://www.joomla.org', 450, 450, null)">
+<div class="icon-32-new" title="Example Test" type="Example">
+</div>
+Example Test
+</a>
+</td>
+
+</tr></table>
+</div>
+</code>
+The call to $bar->appendButton() employs a custom button type called example. This button is stored in the 'button' folder that is located in the same folder as the current file. The file containing the button class has been called example.php.
+
+----
+
+~~DISCUSSION~~
+

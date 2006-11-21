@@ -1,0 +1,34 @@
+====== JFTP [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP]] |
+
+This is an FTP client class. It is used, among other things, to enable proper operation in safe mode.
+===== Methods =====
+^ Method ^ Description ^
+| [[JFTP-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-__construct|__construct]] | Class constructor. |
+| [[JFTP-chdir|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-chdir|chdir]] | Method to change the current working directory on the FTP server. |
+| [[JFTP-chmod|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-chmod|chmod]] | Method to change mode for a path on the FTP server. |
+| [[JFTP-connect|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-connect|connect]] | Method to connect to a FTP server. |
+| [[JFTP-create|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-create|create]] | Method to create an empty file on the FTP server. |
+| [[JFTP-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-delete|delete]] | Method to delete a path [file/folder] on the FTP server. |
+| [[JFTP-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-get|get]] | Method to get a file from the FTP server and save it to a local file. |
+| [[JFTP-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-getInstance|getInstance]] | Returns a reference to the global FTP connector object, only creating it  if it doesn't already exist. |
+| [[JFTP-listDir|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-listDir|listDir]] | Method to list the contents of a directory on the FTP server. |
+| [[JFTP-login|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-login|login]] | Method to login to a server once connected. |
+| [[JFTP-mkdir|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-mkdir|mkdir]] | Method to create a directory on the FTP server. |
+| [[JFTP-nameList|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-nameList|nameList]] | Method to list the file/folder names of the contents of a directory on the FTP server. |
+| [[JFTP-pwd|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-pwd|pwd]] | Method to retrieve the current working directory on the FTP server. |
+| [[JFTP-quit|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-quit|quit]] | Method to quit and close the connection. |
+| [[JFTP-read|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-read|read]] | Method to read a file from the FTP server's contents into a buffer. |
+| [[JFTP-reinit|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-reinit|reinit]] | Method to reinitialize the server, i.e. need to login again. |
+| [[JFTP-rename|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-rename|rename]] | Method to rename a file/folder on the FTP server. |
+| [[JFTP-restart|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-restart|restart]] | Method to restart data transfer at a given byte. |
+| [[JFTP-setOptions|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-setOptions|setOptions]] | Set client options. |
+| [[JFTP-store|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-store|store]] | Method to store a file to the FTP server. |
+| [[JFTP-syst|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-syst|syst]] | Method to system string from the FTP server. |
+| [[JFTP-write|{{http://api.joomla.org/media/images/Method.png }}]] [[JFTP-write|write]] | Method to write a string to the FTP server. |
+
+----
+
+~~DISCUSSION~~
+

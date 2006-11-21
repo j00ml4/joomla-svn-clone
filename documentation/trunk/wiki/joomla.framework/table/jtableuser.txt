@@ -1,0 +1,38 @@
+====== JTableUser ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser]] | never | Work in progress |
+
+The JTableUser class is an implementation of the JTable interface which provides access to the users table. This implement provides methods to handle parameters, data verification, user deletion, updating last visit information and storing a user. It also provides a method of obtaining a complete user list or a user list for a specific group.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableUser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableUser-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
+| [[JTableUser-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
+| [[JTableUser-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |
+| [[JTableUser-getUserList|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserList|getUserList]] | returns a complete user list. |
+| [[JTableUser-getUserListFromGroup|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | returns a user list for a specific group. |
+| [[JTableUser-setLastVisit|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-setLastVisit|setLastVisit]] | updates the last visit time for the user. |
+| [[JTableUser-store|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-store|store]] | stores a user record and synchronizes related records. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$name** | is a string containing the name of the user. |
+| **$username** | is a string containing the username of the user. |
+| **$email** | is a string containing the user's email address. |
+| **$password** | is a string containing the user's password. |
+| **$usertype** | is a string containing the user type. |
+| **$block** | is a boolean specifying whether or not the user is blocked. |
+| **$sendEmail** | is a boolean specifying whether or not email should be sent to the user. |
+| **$gid** | is an integer containing the group ID of the user. |
+| **$registerDate** | is a datetime containing the date the user registered. |
+| **$lastVisitDate** | is a datetime containing the date of the user's last visit. |
+| **$activiation** | is a string containing the activation code for the user. |
+| **$params** | is a string containing the additional parameters for the user. |
+
+
+----
+
+~~DISCUSSION~~
+

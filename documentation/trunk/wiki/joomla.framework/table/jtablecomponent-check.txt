@@ -1,0 +1,33 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableComp|JTableComponent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent->check]] | never | Work in progress |
+
+Performs data integrity verification on the data. Namely, it converts the parent and ordering properties to integers, if they are not already (this is done using the intval method).
+
+===== Syntax =====
+void check ()
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$component =& JTable::getInstance('component', $db );
+$component->loadByOption( 'com_document' );
+$component->ordering = '5test';
+echo "Data Integrity Check " . ($component->check() ? "Passed" : "Failed") . "<br />";
+echo "The value of ordering is: $component->ordering <br />";
+
+$component->parent = '3.0004';
+echo "Data Integrity Check " . ($component->check() ? "Passed" : "Failed") . "<br />";
+echo "The value of parent is: $component->parent <br />";
+</code>
+might produce:
+<code php|Result>
+Data Integrity Check Passed
+The value of ordering is: 5
+Data Integrity Check Passed
+The value of parent is: 3
+</code>
+
+----
+
+~~DISCUSSION~~

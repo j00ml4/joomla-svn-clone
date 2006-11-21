@@ -1,0 +1,16 @@
+====== detectType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->detectType]] | never | Work in progress |
+
+Detects the extension type from a package directory. This method returns a string containing the extension type if successful, false otherwise.
+
+===== Syntax =====
+string detectType ( **$p_dir** )
+
+| **$p_dir** | string | is a string containing the path to package directory. |
+
+
+----
+
+~~DISCUSSION~~
+

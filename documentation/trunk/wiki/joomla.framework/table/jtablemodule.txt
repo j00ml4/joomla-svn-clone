@@ -1,0 +1,36 @@
+====== JTableModule ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule]] | never | Work in progress |
+
+The JTableMenu class is an implementation of the JTable interface which provides access to the modules table. This implementation provides data verification to ensure that the record's data is structurally sound and a customized bind method to handle parameters for the params and control fields.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableModule-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| [[JTableModule-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-bind|bind]] | overloaded bind method that provides parameter handling. |
+| [[JTableModule-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-check|check]] | verifies that the current data is structurally sound. |
+
+===== Properties =====
+^ Property ^ Description ^
+| **$id** | is an integer that contains the primary key for the table. |
+| **$title** | is a string containing the title of the module. |
+| **$content** | is a string containing content for custom modules. |
+| **$ordering** | is an integer containing the order of the entry in the module. |
+| **$position** | is a string containing the position for the module. |
+| **$checked_out** | is a boolean value indicating whether or not the module is checked out. |
+| **$checked_out_time** | is a date/time variable indicating the time that the module was checked out. |
+| **$published** | is a boolean value indicating whether or not the module is published. |
+| **$module** | is a string containing the install folder for the module (i.e. mod_stats). |
+| **$numnews** | is an integer containing the number of news items for the module. This is currently not used. |
+| **$access** | is an integer containing the access parameters for the module. |
+| **$showtitle** | is a boolean value specifying whether or not the title should be displayed. |
+| **$params** | is a string containing the configuration parameters for the component. |
+| **$iscore** | is a boolean value that specifies whether or not the module is a 'core' module. Core modules are a subset of the components that are packaged with the Joomla! system that are integral to the operation of the system. |
+| **$client_id** | is an integer containing the client ID for the module. |
+| **$control** | is a string containing the Model-View-Controller-Renderer-Template controls for the module. |
+
+
+----
+
+~~DISCUSSION~~
+

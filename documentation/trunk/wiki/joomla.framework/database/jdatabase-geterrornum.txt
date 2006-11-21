@@ -1,0 +1,30 @@
+====== getErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getErrorNum]] | never | Work in progress |
+
+Returns the most recent database error code.  See also [[JDatabase-stderr|JDatabase->stderr]].
+
+===== Syntax =====
+int getErrorNum ()
+
+
+===== Examples =====
+<code php|Example>
+$database =& JFactory::getDBO();
+$query = "SELECT * FROM 'bad_table'";
+$database->setQuery( $query );
+$rows = $database->loadObjectList();
+if ($database->getErrorNum()) {
+  echo 'Error ' . $database->getErrorNum() . ': ' . $database->getErrorMsg();
+}
+</code>
+might produce:
+<code php|Result>
+Error 1064: You have an error in your SQL syntax near \'\'bad_table\'\'
+        at line 1 SQL=SELECT * FROM \'bad_table\'
+</code>
+
+----
+
+~~DISCUSSION~~
+

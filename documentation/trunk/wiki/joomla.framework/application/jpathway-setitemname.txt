@@ -1,0 +1,18 @@
+====== setItemName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->setItemName]] |
+
+Sets the name of the specified item.
+===== Syntax =====
+boolean setItemName	( **$id**, **$name** )
+| **$id** | integer | is an integer containing the array index of the item to name. |
+| **$name** | string | is a string containing the name to apply to the pathway element. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$pathway =& $mainframe->getPathWay();
+$pathway->setItemName( '1', 'Joomla! Info' );
+</code>
+will change the name of the second element in the pathway (since the array is zero based). The home element usually has index 0.

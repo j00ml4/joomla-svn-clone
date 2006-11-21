@@ -1,0 +1,24 @@
+====== from ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQuery|JQuery]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery->from]] |
+
+Adds one or more tables to the FROM clause of the query.
+===== Syntax =====
+void from	( **$tables** )
+| **$tables** | mixed | is a string containing the name of the table to retrieve data from, or an array of strings which contain names of tables to retrieve data from. |
+
+===== Examples =====
+Adding a table to the 'from' clause:
+<code php|Example 1>
+$query = new JQuery();
+
+$query->from( '#__menu' );
+</code>
+
+Adding multiple tables to the 'from' clause:
+<code php|Example 2>
+$query = new JQuery();
+
+$query->from( array( '#__menu as a', '#__content as b', '#__newsfeeds as c' ) );
+</code>
+
