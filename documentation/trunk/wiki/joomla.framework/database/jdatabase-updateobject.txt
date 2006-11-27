@@ -13,7 +13,7 @@ void updateObject	( **$table**, **&$object**, **$keyName**, **$updateNulls** )
 | **$updateNulls** | boolean | is a flag.  If true then object attributes that are null will overwrite the corresponding database fields.  If false then null object attributes are ignored. |
 
 ===== Examples =====
-In this example the function newUser is called to create a record in the Joomla users table, then the function updateUser is called to update one of its fields.
+In this example the function newUser is called to create a record in the Joomla! users table, then the function updateUser is called to update one of its fields.
 <code php|Example>
 // Create new row in users table and return the unique id allocated
 // if successful or false otherwise.

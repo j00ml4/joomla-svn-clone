@@ -5,7 +5,12 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
 ===== Packages and Classes =====
   * [[references:joomla.framework:JFactory|JFactory]]
   * [[references:joomla.framework:JVersion|JVersion]]
-
+==== Abstract ====
+  * [[references:joomla.framework:abstract:JNode|JNode]]
+  * [[references:joomla.framework:abstract:JObject|JObject]]
+  * [[references:joomla.framework:abstract:JObservable|JObservable]]
+  * [[references:joomla.framework:abstract:JObserver|JObserver]]
+  * [[references:joomla.framework:abstract:JTree|JTree]]
 ==== Application ====
   * [[references:joomla.framework:application:JApplication|JApplication]]
   * [[references:joomla.framework:application:JApplicationHelper|JApplicationHelper]]
@@ -21,13 +26,6 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:application:JSearch|JSearch]]
   * [[references:joomla.framework:application:JSearchHelper|JSearchHelper]]
   * [[references:joomla.framework:application:JView|JView]]
-
-==== Base ====
-  * [[references:joomla.framework:base:JNode|JNode]]
-  * [[references:joomla.framework:base:JObject|JObject]]
-  * [[references:joomla.framework:base:JObservable|JObservable]]
-  * [[references:joomla.framework:base:JObserver|JObserver]]
-  * [[references:joomla.framework:base:JTree|JTree]]
 ==== Cache ====
   * [[references:joomla.framework:cache:JCache|JCache]]
   * [[references:joomla.framework:cache:JCacheFunction|JCacheFunction]]
@@ -153,6 +151,7 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:user:JTableAroGroup|JTableAroGroup]]
   * [[references:joomla.framework:user:JUser|JUser]]
   * [[references:joomla.framework:user:JUserHelper|JUserHelper]]
+
 ==== Utilities ====
   * [[references:joomla.framework:utilities:JArrayHelper|JArrayHelper]]
   * [[references:joomla.framework:utilities:JDate|JDate]]
@@ -164,3 +163,5 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:utilities:JSimpleXML|JSimpleXML]]
   * [[references:joomla.framework:utilities:JSimpleXMLElement|JSimpleXMLElement]]
   * [[references:joomla.framework:utilities:JUtility|JUtility]]
+
+  * [[references:joomla.framework:utilities:Functions|Functions]]

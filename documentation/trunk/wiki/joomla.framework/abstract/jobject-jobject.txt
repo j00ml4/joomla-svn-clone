@@ -1,0 +1,40 @@
+====== JObject ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png}} [[references:Joomla.Framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png}} [[Abstract|Abstract]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->JObject]] | never | Work in progress |
+
+This function is a hack to support the PHP5 %%__construct()%% on PHP4.
+
+Descendant classes have no PHP4 class_name() constructors. If the code runs in PHP4 this constructor gets called first and calls the %%__construct()%% of the inherited class which (if present) should call %%parent::__construct()%%.
+
+===== Syntax =====
+JObject JObject ()
+
+===== Examples =====
+This example declares the class ''MyObject'' which inherits from JObject implementing the PHP5 constructor ''%%__contruct()%%'' only.
+<code php|Example>
+class MyObject extends JObject 
+{
+    var $title;
+
+    function __construct($title) {
+        $this->title = $title;
+    }
+}
+
+$obj = new MyObject('New Title');
+</code>
+
+The calling chain in PHP4 would result in:
+  1.) JObject::JObject()
+  2.) %%MyObject::__construct()%%
+
+whereas in PHP5 the result is:
+  1.) %%MyObject __construct()%%
+
+See also PHP manual: 
+  * [[http://php.net/manual/language.oop.constructor.php|Classes and Objects (PHP 4): Constructors]]
+  * [[http://php.net/manual/language.oop5.decon.php|Classes and Objects (PHP 5): Constructors and Destructors]]
+
+----
+
+~~DISCUSSION~~

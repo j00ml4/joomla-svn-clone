@@ -2,7 +2,7 @@
 ^ API ^ Package ^ phpDocumentor ^
 | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay]] |
 
-Class to maintain a pathway. Main example of use so far is the mod_breadcrumbs module that keeps track of the user's navigated path within the Joomla application. A pathway object is created in the index.php file and a reference to it is stored in the $mainframe object. A reference to the PathWay object for the page can be retrieved by calling $mainframe->getPathWay( ).
+Class to maintain a pathway. Main example of use so far is the mod_breadcrumbs module that keeps track of the user's navigated path within the Joomla! application. A pathway object is created in the index.php file and a reference to it is stored in the $mainframe object. A reference to the PathWay object for the page can be retrieved by calling $mainframe->getPathWay( ).
 
 ===== Methods =====
 ^ Method ^ Description ^

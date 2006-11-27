@@ -9,7 +9,7 @@ array loadRow ()
 
 
 ===== Examples =====
-This example prints an array containing all the fields from a given Joomla category record.
+This example prints an array containing all the fields from a given Joomla! category record.
 <code php|Example>
 $database =& JFactory::getDBO();
 

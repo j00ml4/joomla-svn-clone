@@ -1,0 +1,23 @@
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png}} [[references:Joomla.Framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png}} [[Abstract|Abstract]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->toString]] | never | Work in progress |
+
+Object-to-string conversion. This function is empty and can be redefined by subclasses.
+
+===== Syntax =====
+string toString ()
+
+===== Examples =====
+In the base class, this function returns the name of the class to which the object belongs.
+<code php|Example>
+$object = new JObject();
+echo $object->toString();
+</code>
+Might produce:
+<code php|Result>
+jobject
+</code>
+
+----
+
+~~DISCUSSION~~

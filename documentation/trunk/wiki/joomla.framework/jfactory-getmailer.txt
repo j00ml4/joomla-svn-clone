@@ -14,5 +14,5 @@ echo "The current from name is: ". $mail->FromName;
 </code>
 might produce:
 <code php|Result>
-The current from name is: Joomla 1.1 Test Site
+The current from name is: Joomla! 1.5 Test Site
 </code>
