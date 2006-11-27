@@ -11,7 +11,7 @@ JDatabase __construct	( **$host**, **$user**, **$pass**, **$db**, **$table_prefi
 | **$user** | string | is the username required to connect to the database. |
 | **$pass** | string | is the password associated with $user to be used to connect to the database. |
 | **$db** | string | is the name of the database. |
-| **$table_prefix** | string | is the string that will be prefixed to all table names.  From Joomla 1.1 this parameter is optional and if omitted will default to 'jos_'. |
+| **$table_prefix** | string | is the string that will be prefixed to all table names.  From Joomla! 1.5 this parameter is optional and if omitted will default to 'jos_'. |
 
 ===== Examples =====
 <code php|Example>

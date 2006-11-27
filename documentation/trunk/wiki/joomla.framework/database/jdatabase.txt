@@ -4,7 +4,7 @@
 
 Generic database connector class.
 
-An instance of this class is created using the current Joomla configuration variables when each page is loaded. Therefore you do not generally need to create new instance of this object. A reference to the JDatabase instance can be obtained using the [[references:joomla.framework:jfactory-getDBO|JFactory::getDBO()]] method.
+An instance of this class is created using the current Joomla! configuration variables when each page is loaded. Therefore you do not generally need to create new instance of this object. A reference to the JDatabase instance can be obtained using the [[references:joomla.framework:jfactory-getDBO|JFactory::getDBO()]] method.
 
 Joomla! 1.5 works primarily with the MySQL and MySQLi database. If it possible to write adapter classes for other databases that may provide some functionality.
 

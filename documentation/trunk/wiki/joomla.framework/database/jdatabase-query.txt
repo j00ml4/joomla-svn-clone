@@ -4,7 +4,7 @@
 
 Executes the current SQL query string. This method returns a database resource if successful, false otherwise.
 
-The syntax and semantics of SQL statements are beyond the scope of this manual.  Prior to Joomla 1.5 the only database software supported was MySQL and the reference manual may be found at http://dev.mysql.com/doc/.
+The syntax and semantics of SQL statements are beyond the scope of this manual.  Prior to Joomla! 1.5 the only database software supported was MySQL and the reference manual may be found at http://dev.mysql.com/doc/.
 
 ===== Syntax =====
 mixed query()

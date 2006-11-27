@@ -1,0 +1,21 @@
+====== mosMambotHandler ======
+^ API ^ Package ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Legacy|Joomla.Legacy]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Legacy#|Legacy]] | never | Work in progress |
+
+This class contains **deprecated** legacy code and is scheduled to be removed.  It is provided only for backward compatibility.
+
+The functionality of mosMambotHandler was broken down into distinct classes to support the MVC design pattern.
+
+  * use [[references:Joomla.Framework:Application:JPluginHelper|JPluginHelper]] for plugin (mambot) file handling
+  * use [[references:Joomla.Framework:Application:JEventDispatcher|JEventDispatcher]] for event handling and notification
+
+===== Methods =====
+^ Method ^ Joomla! 1.5 ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png }} **call** | [[references:Joomla.Framework:Application:JEventDispatcher|JEventDispatcher]]::[[references:Joomla.Framework:Application:JEventDispatcher-trigger|trigger()]] | Call the handler function associated with a specific event. |
+| {{http://api.joomla.org/media/images/Method.png }} **loadBot** | [[references:Joomla.Framework:JPluginHelper|JPluginHelper]]::[[references:Joomla.Framework:JPluginHelper::getPlugin|getPlugin()]] | Loads a plugin (mambot) file |
+| {{http://api.joomla.org/media/images/Method.png }} **loadBotGroup** | [[references:Joomla.Framework:JPluginHelper|JPluginHelper]]::[[references:Joomla.Framework:JPluginHelper::importPlugin|importPlugin()]] | Loads all the plugin (mambot) files for a particular group |
+| {{http://api.joomla.org/media/images/Method.png }} **registerFunction** | [[references:Joomla.Framework:JApplication-registerEvent|JApplication]]::[[references:Joomla.Framework:JApplication-registerEvent|registerEvent()]] | Registers a handler to a particular event group |
+
+----
+
+~~DISCUSSION~~

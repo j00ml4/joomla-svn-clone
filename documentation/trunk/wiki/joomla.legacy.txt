@@ -1,7 +1,44 @@
 ====== Joomla.Legacy ======
 
 ===== Summary =====
+This package holds files which contain legacy code.  Everything within this package is **deprecated** and scheduled to be removed.  It is provided only for backward compatibility.
 
-===== Packages =====
+The Joomla! 1.5 legacy classes are located in the following folder of your Joomla! installation:
+  /libraries/joomla/common/legacy
 
-  * [[references:Joomla.Legacy:1.1|1.1]]
+For a full documentation of the legacy interface please refer to **Chapter 11. API Reference** of the [[http://help.joomla.org/content/category/12/108/125/|Joomla! 1.0 Developer Documentation]]
+
+===== Packages and Classes =====
+Joomla-Legacy
+	* [[references:joomla.legacy:database|database]]
+==== 1-5 ====
+	* [[references:joomla.legacy:1.5:MENU_Default|MENU_Default]]
+	* [[references:joomla.legacy:1.5:mosAbstractTasker|mosAbstractTasker]]
+	* [[references:joomla.legacy:1.5:mosCache|mosCache]]
+	* [[references:joomla.legacy:1.5:mosCommonHTML|mosCommonHTML]]
+	* [[references:joomla.legacy:1.5:mosContent|mosContent]]
+	* [[references:joomla.legacy:1.5:mosEmpty|mosEmpty]]
+	* [[references:joomla.legacy:1.5:mosHTML|mosHTML]]
+	* [[references:joomla.legacy:1.5:mosMambotHandler|mosMambotHandler]]
+	* [[references:joomla.legacy:1.5:mosPageNav|mosPageNav]]
+	* [[references:joomla.legacy:1.5:mosParameters|mosParameters]]
+	* [[references:joomla.legacy:1.5:mosProfiler|mosProfiler]]
+	* [[references:joomla.legacy:1.5:mosTabs|mosTabs]]
+	* [[references:joomla.legacy:1.5:mosToolBar|mosToolBar]]
+	* [[references:joomla.legacy:1.5:patFactory|patFactory]]
+==== Application ====
+	* [[references:joomla.legacy:application:mosMainFrame|mosMainFrame]]
+==== Model ====
+	* [[references:joomla.legacy:model:mosCategory|mosCategory]]
+	* [[references:joomla.legacy:model:mosComponent|mosComponent]]
+	* [[references:joomla.legacy:model:mosDBTable|mosDBTable]]
+	* [[references:joomla.legacy:model:mosMambot|mosMambot]]
+	* [[references:joomla.legacy:model:mosMenu|mosMenu]]
+	* [[references:joomla.legacy:model:mosModule|mosModule]]
+	* [[references:joomla.legacy:model:mosSection|mosSection]]
+	* [[references:joomla.legacy:model:mosSession|mosSession]]
+	* [[references:joomla.legacy:model:mosUser|mosUser]]
+
+----
+
+~~DISCUSSION~~

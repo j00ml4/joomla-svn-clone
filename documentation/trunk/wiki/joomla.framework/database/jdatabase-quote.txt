@@ -13,7 +13,7 @@ string Quote ( **$text** )
 <code php|Example>
 $database =& JFactory::getDBO();
 
-$text = $database->Quote( "Joomla is 'Power in Simplicity'!" );
+$text = $database->Quote( "Joomla! is 'Power in Simplicity'!" );
 $sql = "SELECT * FROM #__content WHERE introtext=$text";
 $database->setQuery( $sql );
 if (!$database->query()) {
@@ -24,7 +24,7 @@ echo $database->getQuery();
 </code>
 might produce:
 <code php|Result>
-SELECT * FROM jos_content WHERE introtext='Joomla is \'Power in Simplicity\'!'
+SELECT * FROM jos_content WHERE introtext='Joomla! is \'Power in Simplicity\'!'
 </code>
 
 ----

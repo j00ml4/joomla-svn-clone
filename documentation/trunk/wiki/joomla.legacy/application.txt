@@ -1,0 +1,27 @@
+====== Application ======
+This package contains legacy code that became **deprecated** with the advent of the Joomla! 1.5 Framework and is scheduled to be removed.
+
+It is **not recommended** to utilize any of the following classes for extensions that aim to be compatible with Joomla! 1.5 or later. Support for these interfaces will be discontinued in future versions of Joomla!
+
+The Joomla! 1.5 legacy classes are located in the following folder of your Joomla! installation:
+  /libraries/joomla/common/legacy
+
+The following list is provided as an entry point to the new MVC (Model View Controller) design pattern introduced in Joomla! 1.5.
+
+For a full documentation of the legacy interface please refer to **Chapter 11. API Reference** of the [[http://help.joomla.org/content/category/12/108/125/|Joomla! 1.0 Developer Documentation]]
+
+===== Summary =====
+mosMainFrame is the base class for a Joomla! 1.0 application. It provides many basic API functions relating to the application itself.
+
+An instance of this class, called ''$mainframe'', is created using the existing database object and the option parameter that was passed in the request. Therefore you do not generally need to create a new instance of this object.  If access to ''$mainframe'' is required within a function then it must be declared in a ''global'' statement at the top of the function so that the global variable is accessed.
+
+''$mainframe'' is an instance of mosMainFrame for both the Joomla! 1.0 Front-end (Site) and Back-end (Administrator). 
+
+===== Classes =====
+	* [[references:joomla.legacy:application:mosMainFrame|mosMainFrame]]
+
+===== Functions =====
+
+----
+
+~~DISCUSSION~~

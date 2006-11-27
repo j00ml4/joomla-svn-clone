@@ -2,7 +2,7 @@
 ^ API ^ phpDocumentor ^
 | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory]] |
 
-Joomla Framework Factory class. This class is used to create various Joomla! framework classes.  It facilitates lazy loading, which means that instead of including the appropriate library file for a given class, a call to the JFactory class will automatically load the correct library and return an instance of an object of the appropriate type.
+Joomla! Framework Factory class. This class is used to create various Joomla! framework classes.  It facilitates lazy loading, which means that instead of including the appropriate library file for a given class, a call to the JFactory class will automatically load the correct library and return an instance of an object of the appropriate type.
 
 ===== Methods =====
 ^ Method ^ Description ^

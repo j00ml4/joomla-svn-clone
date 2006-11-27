@@ -1,0 +1,33 @@
+====== getPublicProperties ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png}} [[references:Joomla.Framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png}} [[Abstract|Abstract]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->getPublicProperties]] | never | Work in progress |
+
+This function returns an array of public property names.
+
+===== Syntax =====
+array getPublicProperties ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.search' );
+$search =& new JSearch();
+
+print_r( $search->getPublicProperties() );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => text
+    [1] => ordering
+    [2] => matchType
+    [3] => limitstart
+    [4] => limit
+    [5] => count
+    [6] => results
+)
+</code>
+
+----
+
+~~DISCUSSION~~

@@ -38,7 +38,7 @@ The document object: JDocumentHTML Object
         (
         )
 
-    [title] => Joomla 1.5 - Documentation
+    [title] => Joomla! 1.5 - Documentation
     [description] => Joomla! - the dynamic portal engine and content management system
     [link] => 
     [language] => en-gb
@@ -99,7 +99,7 @@ In array form: Array
         (
         )
 
-    [title] => Joomla 1.5 - Documentation
+    [title] => Joomla! 1.5 - Documentation
     [description] => Joomla! - the dynamic portal engine and content management system
     [link] => 
     [language] => en-gb
@@ -178,7 +178,7 @@ might produce:
                 (
                 )
 
-            [title] => Joomla 1.5 - Documentation
+            [title] => Joomla! 1.5 - Documentation
             [description] => Joomla! - the dynamic portal engine and content management system
             [link] => 
             [language] => en-gb
@@ -259,7 +259,7 @@ might produce:
         (
         )
 
-    [title] => Joomla 1.5 - Documentation
+    [title] => Joomla! 1.5 - Documentation
     [description] => Joomla! - the dynamic portal engine and content management system
     [link] => 
     [language] => en-gb
@@ -308,7 +308,7 @@ might produce:
 )
 In array form: Array
 (
-    [title] => Joomla 1.5 - Documentation
+    [title] => Joomla! 1.5 - Documentation
     [description] => Joomla! - the dynamic portal engine and content management system
     [link] => 
     [language] => en-gb

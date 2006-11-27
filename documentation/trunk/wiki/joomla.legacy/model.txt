@@ -1,0 +1,30 @@
+====== Model ======
+This package contains legacy code that became **deprecated** with the advent of the Joomla! 1.5 Framework and is scheduled to be removed.
+
+It is **not recommended** to utilize any of the following classes for extensions that aim to be compatible with Joomla! 1.5 or later. Support for these interfaces will be discontinued in future versions of Joomla!
+
+The Joomla! 1.5 legacy classes are located in the following folder of your Joomla! installation:
+  /libraries/joomla/common/legacy
+
+The following list is provided as an entry point to the new MVC (Model View Controller) design patter used throughout Joomla! 1.5 and later.
+
+For a full documentation of the legacy interface please refer to **Chapter 11. API Reference** of the [[http://help.joomla.org/content/category/12/108/125/|Joomla! 1.0 Developer Documentation]]
+
+===== Summary =====
+
+===== Classes =====
+	* [[references:joomla.legacy:model:mosCategory|mosCategory]]
+	* [[references:joomla.legacy:model:mosComponent|mosComponent]]
+	* [[references:joomla.legacy:model:mosDBTable|mosDBTable]]
+	* [[references:joomla.legacy:model:mosMambot|mosMambot]]
+	* [[references:joomla.legacy:model:mosMenu|mosMenu]]
+	* [[references:joomla.legacy:model:mosModule|mosModule]]
+	* [[references:joomla.legacy:model:mosSection|mosSection]]
+	* [[references:joomla.legacy:model:mosSession|mosSession]]
+	* [[references:joomla.legacy:model:mosUser|mosUser]]
+
+===== Functions =====
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,24 @@
+
+$Id$
+
+Changelog
+---------
+This is a non-exhaustive (but still near complete) changelog for the
+Joomla! 1.5 API reference documentation.
+
+Legend:
+
+# -> Documentation fix
++ -> Addition
+^ -> Change
+- -> Removed
+! -> Note
+
+25.11.2006 René Serradeil
+ ^ joomla.legacy/1.1 => /1.5/
+ # Package and class index in joomla.legacy.txt
+ ^ joomla.framework/base/ => /abstract/
+ # "Joomla 1.1" => "Joomla! 1.5"
+ # "extended" header in jobject*.txt files
+ - jobject-_destruct.txt
+

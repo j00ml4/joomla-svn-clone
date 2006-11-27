@@ -16,5 +16,5 @@ echo "Title: " . $document->getTitle();
 </code>
 Might produce:
 <code php|Result>
-Title: Joomla! 1.1 Documentation Test Bed
+Title: Joomla! 1.5 Documentation Test Bed
 </code>

@@ -13,7 +13,7 @@ void insertObject	( **$table**, **&$object**, **$keyName**, **$verbose** )
 | **$verbose** | boolean | is a flag. If true then the SQL query and the unique id returned by the query are output. If false then no output is produced. This parameter is optional and if omitted defaults to false. |
 
 ===== Examples =====
-This example inserts a new row in the Joomla users table.  Notice that the 'id' field is set to null before calling insertObject and will be updated with the unique id number allocated by the database.
+This example inserts a new row in the Joomla! users table.  Notice that the 'id' field is set to null before calling insertObject and will be updated with the unique id number allocated by the database.
 
 <code php|Example>
 $database =& JFactory::getDBO();

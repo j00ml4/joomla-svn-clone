@@ -1,13 +1,13 @@
 ====== get ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework//JObject.html|JObject->get]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png}} [[references:Joomla.Framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png}} [[Abstract|Abstract]] | [[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->get]] | never | Work in progress |
 
 This function gets the value of an object's property.
 
 ===== Syntax =====
 mixed get	( **$property**, **$default** )
 | **$property** | string | is a string containing the name of the property to get. |
-| **$default** | mixed | is the default value to return in the event that the specified property is not set. This parameter is optional and if omitted defaults to null. |
+| **$default**  | mixed  | is the default value to return in the event that the specified property is not set. This parameter is optional and if omitted defaults to null. |
 
 ===== Examples =====
 This example uses the JBrowser class, which is a subclass of JObject.
@@ -31,3 +31,6 @@ Array
 )
 </code>
 
+----
+
+~~DISCUSSION~~

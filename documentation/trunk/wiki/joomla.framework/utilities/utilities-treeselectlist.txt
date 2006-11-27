@@ -31,7 +31,7 @@ echo mosHTML::treeSelectList( &$src_list, 1, array(), 'cid',
 which might produce:
 <code php|Result 1>
 <select name="cid" class="inputbox" size="1">
-  <option value="33">Joomla License</option>
+  <option value="33">Joomla! License</option>
   <option value="2" selected="selected">News</option>
   <option value="48">.      <sup>L</sup> All that's fit to print</option>
   <option value="49">.      <sup>L</sup> Everything else</option>
@@ -45,7 +45,7 @@ which might produce:
 which will render as:
 <html>
 <select name="cid" class="inputbox" size="1">
-  <option value="33">Joomla License</option>
+  <option value="33">Joomla! License</option>
   <option value="2" selected="selected">News</option>
   <option value="48">.      <sup>L</sup> All that's fit to print</option>
   <option value="49">.      <sup>L</sup> Everything else</option>
@@ -79,7 +79,7 @@ might produce:
 <code html|Result 2>
 <select name="cid" class="inputbox" size="10" multiple="true">
   <option value="0">Select one or more menu options</option>
-  <option value="33">Joomla License</option>
+  <option value="33">Joomla! License</option>
   <option value="2" selected="selected">News</option>
   <option value="48">.      <sup>L</sup> All that's fit to print</option>
   <option value="49">.      <sup>L</sup> Everything else</option>
@@ -95,7 +95,7 @@ which will render as:
 <html>
 <select name="cid" class="inputbox" size="10" multiple="true">
   <option value="0">Select one or more menu options</option>
-  <option value="33">Joomla License</option>
+  <option value="33">Joomla! License</option>
   <option value="2" selected="selected">News</option>
   <option value="48">.      <sup>L</sup> All that's fit to print</option>
   <option value="49">.      <sup>L</sup> Everything else</option>
