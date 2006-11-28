@@ -1,6 +1,0 @@
-====== JAuthenticateresponse [WIP] ======
-
-===== Methods =====
-
-==== JAuthenticateResponse  ====
- 
