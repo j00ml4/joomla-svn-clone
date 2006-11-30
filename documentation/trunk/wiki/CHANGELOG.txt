@@ -14,6 +14,9 @@ Legend:
 - -> Removed
 ! -> Note
 
+30.11.2006 René Serradeil
+ ^ moved jstring*.txt from I18N to Utilities
+
 27.11.2006 Ian MacLennan
  - duplicate/deprecated files
 
