@@ -93,7 +93,6 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:i18n:JHelp|JHelp]]
   * [[references:joomla.framework:i18n:JLanguage|JLanguage]]
   * [[references:joomla.framework:i18n:JLanguageHelper|JLanguageHelper]]
-  * [[references:joomla.framework:i18n:JString|JString]]
   * [[references:joomla.framework:i18n:JText|JText]]
 ==== Installer ====
   * [[references:joomla.framework:installer:JInstaller|JInstaller]]
@@ -151,7 +150,6 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:user:JTableAroGroup|JTableAroGroup]]
   * [[references:joomla.framework:user:JUser|JUser]]
   * [[references:joomla.framework:user:JUserHelper|JUserHelper]]
-
 ==== Utilities ====
   * [[references:joomla.framework:utilities:JArrayHelper|JArrayHelper]]
   * [[references:joomla.framework:utilities:JDate|JDate]]
@@ -162,6 +160,7 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:utilities:JProfiler|JProfiler]]
   * [[references:joomla.framework:utilities:JSimpleXML|JSimpleXML]]
   * [[references:joomla.framework:utilities:JSimpleXMLElement|JSimpleXMLElement]]
+  * [[references:joomla.framework:utilities:JString|JString]]
   * [[references:joomla.framework:utilities:JUtility|JUtility]]
 
   * [[references:joomla.framework:utilities:Functions|Functions]]
