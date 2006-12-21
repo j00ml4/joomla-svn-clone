@@ -1,6 +1,6 @@
 ====== update ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObserver|JObserver]] | [[http://api.joomla.org/Joomla-Framework//JObserver.html|JObserver->update]] |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Abstract|Abstract]] | [[JObserver|{{http://api.joomla.org/media/images/Class.png }}]][[JObserver|JObserver]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObserver.html|JObserver->update]] | never | Work in progress |
 
 Method to update the state of observable objects. All events are handled by the JEventDispatcher class which is instantiated by the [[references:joomla.framework:application:japplication|JApplication]] class. When an event is triggered (using the [[references:joomla.framework:application:japplication#triggerEvent|JApplication::triggerEvent]] method), all registered observers are checked to see if they have a method to handle the event. If a method exists in the observer class, then the update function is called with an array passed as its parameter. The update function should return the results of the function call.
 This method must be implemented by the child class.
