@@ -1,6 +1,7 @@
 ====== JObservable [Review] ======
 ^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[http://api.joomla.org/Joomla-Framework//JObservable.html|JObservable]] |
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Abstract|Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObservable.html|JObservable]] | never | Work in progress |
 
 This is an abstract observable class to implement the observer design pattern. It is extended by the [[references:joomla.framework:application:jeventdispatcher|JEventDispatcher]] class which is instantiated by the [[references:joomla.framework:application:japplication|JApplication]] class. This class is a child class of the [[references:joomla.framework:object|JObject]] class. Standard events can be triggered through the Event Dispatcher. The observer design pattern provides the possibility of having observable objects. Observers can be attached to observable classes so that they can be notified when events occur with the particular observable object.
 ===== Methods =====

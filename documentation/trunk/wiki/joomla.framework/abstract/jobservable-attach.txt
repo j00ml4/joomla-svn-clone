@@ -1,6 +1,6 @@
 ====== attach ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|]] | [[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework//JObservable.html|JObservable->attach]] |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Abstract|Abstract]] | [[JObservable|{{http://api.joomla.org/media/images/Class.png }}]][[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObservable.html|JObservable->attach]] | never | Work in progress |
 
 This method is used to attach an observer object.
 
