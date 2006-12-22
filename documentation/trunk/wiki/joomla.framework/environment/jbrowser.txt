@@ -27,7 +27,6 @@ Browser class, provides capability information about the current web client.\\ B
 | [[JBrowser-setBrowser|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setBrowser|setBrowser]] | Sets the current browser. |
 | [[JBrowser-setFeature|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setFeature|setFeature]] | Set capabilities for the current browser. |
 | [[JBrowser-setQuirk|{{http://api.joomla.org/media/images/Method.png }}]] [[JBrowser-setQuirk|setQuirk]] | Set unique behavior for the current browser. |
-| [[JBrowser-_setPlatform|{{http://api.joomla.org/media/images/Method.png }}]]
 
 ----
 
