@@ -9,8 +9,8 @@ require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
 // If a path is provided run the test
 if( $path = @$_REQUEST[ 'path' ] )
 {
-    new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
-    //new UnitTestController( urldecode( $path ), new HtmlReporter(), 'Unit Tests for Joomla: '.$path );
+    //new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+    new UnitTestController( urldecode( $path ), new HtmlReporter(), 'Unit Tests for Joomla: '.$path );
     exit();
 }
 ?>
