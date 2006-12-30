@@ -11,9 +11,9 @@ mixed cleanVar ( &**$var**, **$mask** )
 | **$mask** | int | is an options mask. This parameter is optional and if omitted defaults to 0 (no masks). |
 
 The available masks are:
-  * **_J_NOTRIM** : Prevents the trimming of the variable
-  * **_J_ALLOWHTML** : Allows safe HTML in the variable
-  * **_J_ALLOWRAW** : Allows raw input
+  * **JREQUEST_NOTRIM** : Prevents the trimming of the variable
+  * **JREQUEST_ALLOWHTML** : Allows safe HTML in the variable
+  * **JREQUEST_ALLOWRAW** : Allows raw input
 
 ===== Examples =====
 <code php|Example>
