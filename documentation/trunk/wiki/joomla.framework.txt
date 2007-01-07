@@ -76,6 +76,7 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
 ==== HTML ====
   * [[references:joomla.framework:html:JAdminMenus|JAdminMenus]]
   * [[references:joomla.framework:html:JButton|JButton]]
+  * [[references:joomla.framework:html:JButton_Confirm|JButton_Confirm]]
   * [[references:joomla.framework:html:JButton_Custom|JButton_Custom]]
   * [[references:joomla.framework:html:JButton_Help|JButton_Help]]
   * [[references:joomla.framework:html:JButton_Link|JButton_Link]]

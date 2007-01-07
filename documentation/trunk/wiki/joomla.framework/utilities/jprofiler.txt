@@ -1,0 +1,18 @@
+====== JProfiler ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JProfiler.html|JProfiler]] | never | Work in progress |
+
+Utility class to assist in the process of benchmarking the execution of sections of code to understand where time is being spent.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JProfiler-__construct|{{http://api.joomla.org/media/images/Constructor.png }}]] [[JProfiler-__construct|__construct]] | Class constructor. |
+| [[JProfiler-getbuffer|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getbuffer|getBuffer]] | Get the current profiler marks. |
+| [[JProfiler-getintance|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getinstance|getInstance]] | Returns a reference to the global Profiler object, only creating it if it doesn't exist. |
+| [[JProfiler-getmemory|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getmemory|getMemory]] | Get information about current memory usage. |
+| [[JProfiler-getmicrotime|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-getmicrotime|getmicrotime]] | Get the current time. |
+| [[JProfiler-mark|{{http://api.joomla.org/media/images/Method.png }}]] [[JProfiler-mark|mark]] | Output a time mark. |
+
+----
+
+~~DISCUSSION~~
