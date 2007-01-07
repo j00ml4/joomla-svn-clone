@@ -1,5 +1,5 @@
 
-$Id$
+$Id:$
 
 Changelog
 ---------
@@ -13,6 +13,10 @@ Legend:
 ^ -> Change
 - -> Removed
 ! -> Note
+
+06.01.2007 Chris Davenport
+ + Added JProfiler class page
+ ^ Added JButton_Confirm to joomla.framework.txt
 
 30.11.2006 René Serradeil
  ^ moved jstring*.txt from I18N to Utilities
