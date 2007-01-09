@@ -1,5 +1,5 @@
 
-$Id:$
+$Id$
 
 Changelog
 ---------
@@ -13,6 +13,9 @@ Legend:
 ^ -> Change
 - -> Removed
 ! -> Note
+
+08.01.2007 Chris Davenport
+ ^ Added JSessionHandler, JSessionHandlerFile and JSessionHandlerDatabase to joomla.framework.txt
 
 06.01.2007 Chris Davenport
  + Added JProfiler class page
