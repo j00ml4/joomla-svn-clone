@@ -14,6 +14,11 @@ Legend:
 - -> Removed
 ! -> Note
 
+09.01.2007 Chris Davenport
+ ^ Removed JSessionHandlerFile from joomla.framework.txt
+ ^ Added JSessionHandlerNone to joomla.framework.txt
+ ^ Added JApplication->close() to japplication.txt
+
 08.01.2007 Chris Davenport
  ^ Added JSessionHandler, JSessionHandlerFile and JSessionHandlerDatabase to joomla.framework.txt
  ^ Added JSessionHandlereAccelerator and JSessionHandlerAPC to joomla.framework.txt
