@@ -54,7 +54,7 @@ if( $path )
             exit();
     }
 }
-// Show the default start page
+// Otherwise show the default start page
 else
 {
     $testCases = array();
