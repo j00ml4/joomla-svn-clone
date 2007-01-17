@@ -18,19 +18,24 @@ if( $path = @$_REQUEST[ 'path' ] )
     switch( strtolower( @$_REQUEST['output'] ) )
     {
         case 'xml':
-            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            require_once( JPATH_BASE.'/unittest/views/JoomlaXml.php' );
+            new UnitTestController( urldecode( $path ), new JoomlaXml(), $path );
             exit();
         case 'php':
-            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            require_once( JPATH_BASE.'/unittest/views/JoomlaPhp.php' );
+            new UnitTestController( urldecode( $path ), new JoomlaPhp(), $path );
             exit();
         case 'json':
-            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            require_once( JPATH_BASE.'/unittest/views/JoomlaJson.php' );
+            new UnitTestController( urldecode( $path ), new JoomlaJson(), $path );
             exit();
         case 'text':
-            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            require_once( JPATH_BASE.'/unittest/views/JoomlaText.php' );
+            new UnitTestController( urldecode( $path ), new JoomlaText(), $path );
             exit();
         default:
-            new UnitTestController( urldecode( $path ), new HtmlReporter(), 'Unit Tests for Joomla: '.$path );
+            require_once( JPATH_BASE.'/unittest/views/JoomlaHtml.php' );
+            new UnitTestController( urldecode( $path ), new JoomlaHtml(), $path );
             exit();
     }
 }

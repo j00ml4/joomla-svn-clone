@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+body {
+    font: normal small arial;
+    font-size: 1.0em;
+    color: #596F80;
+    padding: 1.0em;
+}
+
+h1.header {
+	background-image: url(images/logo.png);
+	background-repeat: no-repeat;
+	padding-left: 130px;
+	height: 80px;
+}
+
+.testcase, .pass, .fail, .exception{
+    border-bottom: 1px solid #ccc;
+    padding: 0.2em;
+}
+
+.testcasefolder{
+    border-bottom: 3px solid #aaa;
+    background: #eee;
+    font-size: 1.3em;
+    padding: 0.2em;
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+
+.footer_fail, .footer_pass {
+	color: white;
+	padding: 1.0em;
+	margin-top: 0.5em;
+	background: green;
+}
+
+.footer_fail {
+	background: red;
+}
+
+.message {
+	background: #ccc;
+}
+
+.fail {
+	color: white;
+	background: red;
+}
+
+.exception {
+	color: white;
+	background: blue;
+}
