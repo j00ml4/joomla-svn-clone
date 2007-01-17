@@ -64,6 +64,10 @@ else
         if( count( explode( DIRECTORY_SEPARATOR, $path ) ) > 1 )
             $testCases[$path] = implode( '->', array_slice( explode( DIRECTORY_SEPARATOR, $path ), 1 ) );
     
-    include( JPATH_BASE.'/unittest/views/default.html' );
+    if( @$argv[1] == '-list' )
+        foreach( $testCases as $path => $test )
+            echo "$path\n";
+    else
+        include( JPATH_BASE.'/unittest/views/default.html' );
 }
 ?>
