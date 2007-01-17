@@ -12,10 +12,25 @@ require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
  */
 require_once( JPATH_BASE.'/libraries/joomla/common/abstract/object.php' ); // JObject
 
-// If a path is provided run the test
-if( $path = @$_REQUEST[ 'path' ] )
+$path = @$_REQUEST[ 'path' ];
+$output = @$_REQUEST['output'];
+
+// If run from the command line get the args
+if( in_array( @$argv[1], array( '-path', '-output' ) ) )
 {
-    switch( strtolower( @$_REQUEST['output'] ) )
+    for($i=0;$i<count($argv);$i++)
+    {
+        if( $argv[$i] == '-path' )
+            $path = trim( @$argv[$i+1] );
+        if( $argv[$i] == '-output' )
+            $output = trim( @$argv[$i+1] );
+    }
+}
+
+// If a path is provided run the test
+if( $path )
+{
+    switch( strtolower( $output ) )
     {
         case 'xml':
             require_once( JPATH_BASE.'/unittest/views/JoomlaXml.php' );
