@@ -1,7 +1,7 @@
 <?php
 class JoomlaPhp extends SimpleReporter
 {
-    var $unittests = array();
+    var $_joomlaTests = array();
     
     function paintHeader( $test_name )
     {
@@ -12,23 +12,35 @@ class JoomlaPhp extends SimpleReporter
         header( "Pragma: no-cache" );
         header( "Content-type: text/plain" );
         
-        $this->unittests['unittests']['testcase'] = $test_name;
+        flush();
+        
+        $this->joomlaHeader( $test_name );
     }
     
     function paintFooter( $test_name )
     {
-        $this->unittests['unittests']['result']['total'] = $this->getTestCaseCount();
-        $this->unittests['unittests']['result']['completed'] = $this->getTestCaseProgress();
-        $this->unittests['unittests']['result']['pass'] = $this->getPassCount();
-        $this->unittests['unittests']['result']['fail'] = $this->getFailCount();
-        $this->unittests['unittests']['result']['exceptions'] = $this->getExceptionCount();
+        $this->_joomlaTests['unittests']['result']['total'] = $this->getTestCaseCount();
+        $this->_joomlaTests['unittests']['result']['completed'] = $this->getTestCaseProgress();
+        $this->_joomlaTests['unittests']['result']['pass'] = $this->getPassCount();
+        $this->_joomlaTests['unittests']['result']['fail'] = $this->getFailCount();
+        $this->_joomlaTests['unittests']['result']['exceptions'] = $this->getExceptionCount();
         
-        echo $this->output();
+        echo $this->joomlaOutput();
     }
     
-    function output()
+    function joomlaHeader( $test_name )
     {
-        return serialize( $this->unittests );
+        $this->_joomlaTests['unittests']['pass'] = array();
+        $this->_joomlaTests['unittests']['fail'] = array();
+        $this->_joomlaTests['unittests']['exception'] = array();
+        $this->_joomlaTests['unittests']['result'] = array();
+        
+        $this->_joomlaTests['unittests']['testcase'] = $test_name;
+    }
+    
+    function joomlaOutput()
+    {
+        return serialize( $this->_joomlaTests );
     }
     
     function paintPass( $message )
@@ -38,8 +50,8 @@ class JoomlaPhp extends SimpleReporter
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
         
-        $this->unittests['unittests']['pass'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
-        $this->unittests['unittests']['pass'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
+        $this->_joomlaTests['unittests']['pass'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
+        $this->_joomlaTests['unittests']['pass'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
     }
     
     function paintFail( $message )
@@ -49,8 +61,8 @@ class JoomlaPhp extends SimpleReporter
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
         
-        $this->unittests['unittests']['fail'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
-        $this->unittests['unittests']['fail'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
+        $this->_joomlaTests['unittests']['fail'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
+        $this->_joomlaTests['unittests']['fail'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
     }
     
     function paintException( $message )
@@ -60,8 +72,8 @@ class JoomlaPhp extends SimpleReporter
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
         
-        $this->unittests['unittests']['exception'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
-        $this->unittests['unittests']['exception'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
+        $this->_joomlaTests['unittests']['exception'][$breadcrumb[1]][$breadcrumb[2]]['filepath'] = $breadcrumb[0];
+        $this->_joomlaTests['unittests']['exception'][$breadcrumb[1]][$breadcrumb[2]]['message'] = $message;
     }
 }
 ?>

@@ -15,6 +15,8 @@ class JoomlaHtml extends SimpleReporter
         header( "Cache-Control: post-check=0, pre-check=0", false );
         header( "Pragma: no-cache" );
         
+        flush();
+        
         echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
         echo "<html>\n<head>\n<title>Testcase: $test_name</title>\n";
         echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n";

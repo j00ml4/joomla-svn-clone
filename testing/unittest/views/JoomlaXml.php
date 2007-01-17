@@ -1,5 +1,7 @@
 <?php
-class JoomlaXml extends SimpleReporter
+require_once( 'JoomlaPhp.php' );
+
+class JoomlaXml extends JoomlaPhp
 {
     function paintHeader( $test_name )
     {
@@ -10,73 +12,64 @@ class JoomlaXml extends SimpleReporter
         header( "Pragma: no-cache" );
         header( "Content-type: application/xhtml+xml" );
         
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        echo "<unittests>";
-        echo "<testcase>{$test_name}</testcase>";
+        flush();
+        
+        $this->joomlaHeader( $test_name );
     }
     
-    function paintFooter( $test_name )
+    function joomlaOutput()
     {
-        $colour = ($this->getFailCount() + $this->getExceptionCount() > 0 ? "red" : "green");
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        echo "<unittests>";
+        echo "<testcase>".$this->_joomlaTests['unittests']['testcase']."</testcase>";
+        
+        foreach( $this->_joomlaTests['unittests']['pass'] as $class => $value )
+        {
+            foreach( $value as $method => $data )
+            {
+                echo "<pass>";
+                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
+                echo "</pass>";
+            }
+        }
+        
+        foreach( $this->_joomlaTests['unittests']['fail'] as $class => $value )
+        {
+            foreach( $value as $method => $data )
+            {
+                echo "<fail>";
+                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
+                echo "</fail>";
+            }
+        }
+        
+        foreach( $this->_joomlaTests['unittests']['exception'] as $class => $value )
+        {
+            foreach( $value as $method => $data )
+            {
+                echo "<exceptions>";
+                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
+                echo "</exceptions>";
+            }
+        }
         
         echo "<result>";
-        echo "<total>".$this->getTestCaseCount()."</total>";
-        echo "<completed>".$this->getTestCaseProgress()."</completed>";
-        echo "<pass>".$this->getPassCount()."</pass>";
-        echo "<fail>".$this->getFailCount()."</fail>";
-        echo "<exceptions>".$this->getExceptionCount()."</exceptions>";
+        echo "<total>".$this->_joomlaTests['unittests']['result']['total']."</total>";
+        echo "<completed>".$this->_joomlaTests['unittests']['result']['completed']."</completed>";
+        echo "<pass>".$this->_joomlaTests['unittests']['result']['pass']."</pass>";
+        echo "<fail>".$this->_joomlaTests['unittests']['result']['fail']."</fail>";
+        echo "<exceptions>".$this->_joomlaTests['unittests']['result']['exceptions']."</exceptions>";
         echo "</result>";
+        
         echo "</unittests>";
     }
     
-    function paintPass( $message )
+    function printEntry( $class, $method, $filepath, $message )
     {
-        parent::paintPass( $message );
-        
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
-        
-        echo "<pass>";
-        echo "<filepath>".$breadcrumb[0]."</filepath>";
-        echo "<class>".$breadcrumb[1]."</class>";
-        echo "<method>".$breadcrumb[2]."</method>";
-        echo "<message>".$this->_htmlEntities( $message )."</message>";
-        echo "</pass>";
-    }
-    
-    function paintFail( $message )
-    {
-        parent::paintFail( $message );
-        
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
-        
-        echo "<fail>";
-        echo "<filepath>".$breadcrumb[0]."</filepath>";
-        echo "<class>".$breadcrumb[1]."</class>";
-        echo "<method>".$breadcrumb[2]."</method>";
-        echo "<message>".$this->_htmlEntities( $message )."</message>";
-        echo "</fail>";
-    }
-    
-    function paintException( $message )
-    {
-        parent::paintException( $message );
-        
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
-        
-        echo "<exception>";
-        echo "<filepath>".$breadcrumb[0]."</filepath>";
-        echo "<class>".$breadcrumb[1]."</class>";
-        echo "<method>".$breadcrumb[2]."</method>";
-        echo "<message>".$this->_htmlEntities( $message )."</message>";
-        echo "</exception>";
-    }
-    
-    function _htmlEntities( $message )
-    {
-        return htmlentities( $message, ENT_COMPAT, 'UTF-8' );
+        echo "<class>".$class."</class>";
+        echo "<method>".$method."</method>";
+        echo "<filepath>".$filepath."</filepath>";
+        echo "<message>".htmlentities( $message, ENT_COMPAT, 'UTF-8' )."</message>";
     }
 }
 ?>
