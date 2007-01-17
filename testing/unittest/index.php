@@ -4,6 +4,7 @@ define( 'JPATH_BASE'   , dirname( dirname(__FILE__) ) );
 
 require_once( JPATH_BASE.'/includes/defines.php' );
 require_once( JPATH_BASE.'/libraries/loader.php' );
+require_once( JPATH_BASE.'/libraries/joomla/common/abstract/object.php' ); // Hmm!!!!
 require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
 
 // If a path is provided run the test
