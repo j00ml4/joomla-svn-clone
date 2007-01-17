@@ -24,7 +24,7 @@ class JoomlaXml extends SimpleReporter
         echo "<completed>".$this->getTestCaseProgress()."</completed>";
         echo "<pass>".$this->getPassCount()."</pass>";
         echo "<fail>".$this->getFailCount()."</fail>";
-        echo "<exception>".$this->getExceptionCount()."</exception>";
+        echo "<exceptions>".$this->getExceptionCount()."</exceptions>";
         echo "</result>";
         echo "</unittests>";
     }

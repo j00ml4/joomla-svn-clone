@@ -21,7 +21,7 @@ class JoomlaPhp extends SimpleReporter
         $this->unittests['unittests']['result']['completed'] = $this->getTestCaseProgress();
         $this->unittests['unittests']['result']['pass'] = $this->getPassCount();
         $this->unittests['unittests']['result']['fail'] = $this->getFailCount();
-        $this->unittests['unittests']['result']['exception'] = $this->getExceptionCount();
+        $this->unittests['unittests']['result']['exceptions'] = $this->getExceptionCount();
         
         echo $this->output();
     }
