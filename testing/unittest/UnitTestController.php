@@ -2,7 +2,7 @@
 require_once( dirname(__FILE__).'/simpletest/unit_tester.php' );
 require_once( dirname(__FILE__).'/simpletest/reporter.php' );
 
-if( !defined( 'TEST' ) )          define( 'TEST'         , __FILE__ );
+if( !defined( 'UNITTEST_ROOT' ) ) define( 'UNITTEST_ROOT', dirname( __FILE__ ) );
 if( !defined( 'UNITTEST_BASE' ) ) define( 'UNITTEST_BASE', 'tests' );
 
 class UnitTestController extends GroupTest
@@ -18,6 +18,13 @@ class UnitTestController extends GroupTest
         elseif( is_file( $path ) )
             $files[] = $path;
         
+        // Make new test files
+        if( count( $files ) == 0 )
+        {
+            $this->makeUnitTestFiles( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $path ) );
+            exit( 'New Files Created...' );
+        }
+            
         foreach( $files as $file )
         {
             include_once( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $file ) );
@@ -25,6 +32,53 @@ class UnitTestController extends GroupTest
         }
         
         $this->run( $reporter );
+    }
+    
+    function makeUnitTestFiles( $path )
+    {
+        $files = array();
+        
+        if( is_dir( $path ) )
+            $files = $this->_files( $path );
+        elseif( is_file( $path ) )
+            $files[] = $path;
+        
+        foreach( $files as $file ) $this->makeUnitTestFile( $file );
+    }
+    
+    function makeUnitTestFile( $sourceFile )
+    {
+        $file = UNITTEST_ROOT.DIRECTORY_SEPARATOR.UNITTEST_BASE . str_replace( '..', '', $sourceFile ); // create path in test dir
+        
+        if( file_exists( $file ) ) return; // Check if the file is already in the test dir, if it is return
+        
+        $dir = dirname( $file );
+        if( !is_dir( $dir ) ) mkdir( $dir ); // Create the dir if not found
+        
+        include_once( $sourceFile );
+        $class = $this->_getClassFromFile( $sourceFile );
+        
+        $handle = fopen( $file, 'wb' );
+        fwrite( $handle, $this->getUnitTestTemplate( $class, get_class_methods( $class ) ) );
+        fclose( $handle );
+    }
+    
+    function getUnitTestTemplate( $class, $methods )
+    {
+        $line = "<?php\n";
+        $line.= "class TestOf{$class} extends UnitTestCase\n";
+        $line.= "{\n";
+        foreach( $methods as $method )
+        {
+            $line.= "    function test_{$method}()\n";
+            $line.= "    {\n";
+            $line.= "        \$this->assertTrue( false );\n";
+            $line.= "    }\n";
+        }
+        $line.= "}\n";
+        $line.= "?>";
+        
+        return $line;
     }
     
     function getUnitTestsList()
@@ -67,6 +121,18 @@ class UnitTestController extends GroupTest
 		asort( $files );
 		
 		return $files;
+	}
+	
+	function _getClassFromFile( $path )
+	{
+	    $lines = file( $path );
+        
+        foreach( $lines as $line )
+            if( strtolower( substr( $line, 0, 5 ) ) == 'class' )
+            {
+                $parts = explode( ' ', $line );
+                return trim( @$parts[1] );
+            }
 	}
 }
 ?>
