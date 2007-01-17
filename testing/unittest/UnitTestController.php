@@ -22,7 +22,7 @@ class UnitTestController extends GroupTest
         if( count( $files ) == 0 )
         {
             $this->makeUnitTestFiles( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $path ) );
-            exit( 'New Files Created...' );
+            return $this->UnitTestController( $path, $reporter, $label );
         }
             
         foreach( $files as $file )
@@ -50,10 +50,16 @@ class UnitTestController extends GroupTest
     {
         $file = UNITTEST_ROOT.DIRECTORY_SEPARATOR.UNITTEST_BASE . str_replace( '..', '', $sourceFile ); // create path in test dir
         
-        if( file_exists( $file ) ) return; // Check if the file is already in the test dir, if it is return
+        // Check if the file is already in the test dir, if it is return
+        if( file_exists( $file ) ) return;
+        
+        // TODO: legacy  will need to be done by hand
+        if( strpos( $sourceFile, 'legacy' ) ) return;
+        // TODO: patTemplate will need to be done by hand
+        if( strpos( $sourceFile, 'template' ) ) return;
         
         $dir = dirname( $file );
-        if( !is_dir( $dir ) ) mkdir( $dir ); // Create the dir if not found
+        if( !is_dir( $dir ) ) mkdir( $dir, 0777, true ); // Create the dir if not found
         
         include_once( $sourceFile );
         $class = $this->_getClassFromFile( $sourceFile );
@@ -65,15 +71,20 @@ class UnitTestController extends GroupTest
     
     function getUnitTestTemplate( $class, $methods )
     {
+        if( !is_array( $methods ) ) return;
+        
+        // remove any overloaded methods
+        $methods = array_unique( $methods );
+        
         $line = "<?php\n";
         $line.= "class TestOf{$class} extends UnitTestCase\n";
         $line.= "{\n";
         foreach( $methods as $method )
         {
-            $line.= "    function test_{$method}()\n";
+            $line.= "    function test".ucfirst($method)."()\n";
             $line.= "    {\n";
             $line.= "        \$this->assertTrue( false );\n";
-            $line.= "    }\n";
+            $line.= "    }\n\n";
         }
         $line.= "}\n";
         $line.= "?>";
@@ -99,7 +110,21 @@ class UnitTestController extends GroupTest
 		// read the source directory
 		$handle = opendir( $path );
 		
+		// First get Files fron the Dir
 		while ( $file = readdir( $handle ) )
+		{
+			$fullpath = $path.DIRECTORY_SEPARATOR.$file;
+
+			if ( is_file( $fullpath ) && substr( $file, -4 ) == '.php' )
+			{
+				$files[] = $fullpath;
+			}
+		}
+		
+		rewinddir( $handle );
+		
+		// Now check directories in the dir
+	    while ( $file = readdir( $handle ) )
 		{
 			$fullpath = $path.DIRECTORY_SEPARATOR.$file;
 
@@ -110,15 +135,9 @@ class UnitTestController extends GroupTest
 				$folder = UnitTestController::_files( $fullpath, $showFolders );
 				$files = array_merge( $files, $folder );
 			}
-			elseif( substr( $file, -4 ) == '.php' )
-			{
-				$files[] = $fullpath;
-			}
 		}
 		
 		closedir( $handle );
-		
-		asort( $files );
 		
 		return $files;
 	}
