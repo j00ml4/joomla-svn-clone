@@ -9,24 +9,29 @@ require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
 // If a path is provided run the test
 if( $path = @$_REQUEST[ 'path' ] )
 {
-    //new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
-    new UnitTestController( urldecode( $path ), new HtmlReporter(), 'Unit Tests for Joomla: '.$path );
-    exit();
+    switch( strtolower( @$_REQUEST['output'] ) )
+    {
+        case 'xml':
+            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            exit();
+        case 'php':
+            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            exit();
+        case 'json':
+            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            exit();
+        case 'text':
+            new UnitTestController( urldecode( $path ), new TextReporter(), 'Unit Tests for Joomla: '.$path );
+            exit();
+        default:
+            new UnitTestController( urldecode( $path ), new HtmlReporter(), 'Unit Tests for Joomla: '.$path );
+            exit();
+    }
+}
+// Show the default start page
+else
+{
+    $tests = UnitTestController::getUnitTestsList();
+    include( JPATH_BASE.'/unittest/views/default.html' );
 }
 ?>
-<html>
-    <head>
-        <title>Unit Tests for Joomla</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    </head>
-    <body>
-        <h1>Select Joomla! Unit Tests to Perform</h1>
-        <!--Get a alist of all tests we can run-->
-        <?$tests = UnitTestController::getUnitTestsList()?>
-
-        <!--Loop through the tests and print a link for each one-->
-        <?foreach( $tests as $test ):?>
-        <div><a href="?path=<?=urlencode($test)?>"><?=$test?></a></div>
-        <?php endforeach; ?>
-    </body>
-</html>
