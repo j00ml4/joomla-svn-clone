@@ -2,9 +2,6 @@
 require_once( dirname(__FILE__).'/simpletest/unit_tester.php' );
 require_once( dirname(__FILE__).'/simpletest/reporter.php' );
 
-if( !defined( 'UNITTEST_ROOT' ) ) define( 'UNITTEST_ROOT', dirname( __FILE__ ) );
-if( !defined( 'UNITTEST_BASE' ) ) define( 'UNITTEST_BASE', 'tests' );
-
 class UnitTestController extends GroupTest
 {
     function UnitTestController( $path, $reporter, $label='' )
