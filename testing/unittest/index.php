@@ -1,6 +1,8 @@
 <?php
 define( '_JEXEC'       , 1 );
 define( 'JPATH_BASE'   , dirname( dirname(__FILE__) ) );
+define( 'UNITTEST_ROOT', dirname( __FILE__ ) );
+define( 'UNITTEST_BASE', 'tests' );
 
 require_once( JPATH_BASE.'/includes/defines.php' );
 require_once( JPATH_BASE.'/libraries/loader.php' );
@@ -30,6 +32,8 @@ if( in_array( @$argv[1], array( '-path', '-output' ) ) )
 // If a path is provided run the test
 if( $path )
 {
+    $path = UNITTEST_BASE.DIRECTORY_SEPARATOR.$path;
+    
     switch( strtolower( $output ) )
     {
         case 'xml':
@@ -62,7 +66,10 @@ else
     
     foreach( $tests as $path )
         if( count( explode( DIRECTORY_SEPARATOR, $path ) ) > 1 )
-            $testCases[$path] = implode( '->', array_slice( explode( DIRECTORY_SEPARATOR, $path ), 1 ) );
+        {
+            $path = implode( DIRECTORY_SEPARATOR, array_slice( explode( DIRECTORY_SEPARATOR, $path ), 1 ) );
+            $testCases[$path] = implode( '->', explode( DIRECTORY_SEPARATOR, $path ) );
+        }
     
     if( @$argv[1] == '-list' )
         foreach( $testCases as $path => $test )
