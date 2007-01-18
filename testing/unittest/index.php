@@ -27,6 +27,8 @@ if( in_array( @$argv[1], array( '-path', '-output' ) ) )
         if( $argv[$i] == '-output' )
             $output = trim( @$argv[$i+1] );
     }
+    
+    if( !$output ) $output = 'text';
 }
 
 // If a path is provided run the test
