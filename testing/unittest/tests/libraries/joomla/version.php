@@ -1,5 +1,5 @@
 <?php
-class TestOfJVersion extends UnitTestCase
+class TestJVersion extends UnitTestCase
 {
     function testGetLongVersion()
     {
