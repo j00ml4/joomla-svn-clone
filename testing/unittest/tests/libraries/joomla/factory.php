@@ -1,5 +1,5 @@
 <?php
-class TestOfJFactory extends UnitTestCase
+class TestJFactory extends UnitTestCase
 {
     function testGetConfig()
     {

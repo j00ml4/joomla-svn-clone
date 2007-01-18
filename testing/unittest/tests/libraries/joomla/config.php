@@ -1,5 +1,5 @@
 <?php
-class TestOfJFrameworkConfig extends UnitTestCase
+class TestJFrameworkConfig extends UnitTestCase
 {
 }
 ?>
