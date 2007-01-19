@@ -1,110 +1,85 @@
 <?php
 class TestJFactory extends UnitTestCase
 {
+    var $class = null;
+    
+    function TestJFactory()
+    {
+        $this->class = new JFactory();
+    }
+    
     function testGetConfig()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getConfig() ) == 'JRegistry' );
     }
 
     function testGetSession()
     {
-        $this->assertTrue( true );
+        // TODO: Die gracefully when headers sent 
+        $this->assertTrue( get_class( $this->class->getSession() ) == 'JSession' );
     }
 
     function testGetLanguage()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getLanguage() ) == 'JLanguage' );
     }
 
     function testGetDocument()
     {
-        $this->assertTrue( true );
+        include( JPATH_BASE.'/libraries/joomla/environment/request.php' ); //TODO: Factory should load this
+        
+        $this->assertTrue( get_class( $this->class->getDocument() ) == 'JDocumentHTML' );
     }
 
     function testGetUser()
     {
-        $this->assertTrue( false );
+        include( JPATH_BASE.'/libraries/joomla/user/user.php' ); //TODO: Factory should load this
+        
+        $this->assertTrue( get_class( $this->class->getUser() ) == 'JUser' );
     }
 
     function testGetCache()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getCache() ) == 'JCacheFunction' );
     }
 
     function testGetACL()
     {
-        $this->assertTrue( false );
+        include( JPATH_BASE.'/libraries/joomla/database/table.php' ); //TODO: Factory should load this
+        
+        $this->assertTrue( get_class( $this->class->getACL() ) == 'JAuthorization' );
     }
 
     function testGetTemplate()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getTemplate() ) == 'JTemplate' );
     }
 
     function testGetDBO()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getDBO() ) =='JDatabaseMySQL' );
     }
 
     function testGetMailer()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getMailer() ) == 'JMail' );
     }
 
     function testGetXMLParser()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getXMLParser() ) == 'DOMIT_Lite_Document' );
     }
 
     function testGetEditor()
     {
-        $this->assertTrue( false );
+        include( JPATH_BASE.'/libraries/joomla/application/event.php' ); //TODO: Factory should load this
+        
+        $this->assertTrue( get_class( $this->class->getEditor() ) =='JEditor' );
     }
 
     function testGetURI()
     {
-        $this->assertTrue( false );
+        $this->assertTrue( get_class( $this->class->getURI() ) == 'JURI' );
     }
-
-    function test_createConfig()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createSession()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createACL()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createDBO()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createMailer()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createTemplate()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createLanguage()
-    {
-        $this->assertTrue( false );
-    }
-
-    function test_createDocument()
-    {
-        $this->assertTrue( false );
-    }
-
 }
 ?>
