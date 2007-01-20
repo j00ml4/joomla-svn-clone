@@ -14,6 +14,9 @@ Legend:
 - -> Removed
 ! -> Note
 
+13.01.2007 Chris Davenport
+ ^ Added JException to joomla.framework.txt
+
 09.01.2007 Chris Davenport
  ^ Removed JSessionHandlerFile from joomla.framework.txt
  ^ Added JSessionHandlerNone to joomla.framework.txt
