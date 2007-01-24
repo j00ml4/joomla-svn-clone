@@ -15,7 +15,7 @@ class TestOfJFactory extends UnitTestCase
 
     function testGetSession()
     {
-        // TODO: Die gracefully when headers sent 
+        // TODO: Die gracefully when headers already sent 
         $this->assertTrue( get_class( $this->class->getSession() ) == 'JSession' );
     }
 
@@ -26,15 +26,11 @@ class TestOfJFactory extends UnitTestCase
 
     function testGetDocument()
     {
-        include( JPATH_BASE.'/libraries/joomla/environment/request.php' ); //TODO: Factory should load this
-        
         $this->assertTrue( get_class( $this->class->getDocument() ) == 'JDocumentHTML' );
     }
 
     function testGetUser()
     {
-        include( JPATH_BASE.'/libraries/joomla/user/user.php' ); //TODO: Factory should load this
-        
         $this->assertTrue( get_class( $this->class->getUser() ) == 'JUser' );
     }
 
@@ -45,13 +41,12 @@ class TestOfJFactory extends UnitTestCase
 
     function testGetACL()
     {
-        include( JPATH_BASE.'/libraries/joomla/database/table.php' ); //TODO: Factory should load this
-        
         $this->assertTrue( get_class( $this->class->getACL() ) == 'JAuthorization' );
     }
 
     function testGetTemplate()
     {
+        // TODO: Fix undefined index
         $this->assertTrue( get_class( $this->class->getTemplate() ) == 'JTemplate' );
     }
 
@@ -72,8 +67,6 @@ class TestOfJFactory extends UnitTestCase
 
     function testGetEditor()
     {
-        include( JPATH_BASE.'/libraries/joomla/application/event.php' ); //TODO: Factory should load this
-        
         $this->assertTrue( get_class( $this->class->getEditor() ) =='JEditor' );
     }
 

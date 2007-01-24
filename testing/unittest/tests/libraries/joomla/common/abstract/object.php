@@ -39,7 +39,7 @@ class TestOfJObject extends UnitTestCase
 
     function testToString()
     {
-        $this->assertTrue( $this->class->toString() == 'TextOfJObject' );
+        $this->assertTrue( $this->class->toString() == 'TestJObject' );
     }
 
 }
