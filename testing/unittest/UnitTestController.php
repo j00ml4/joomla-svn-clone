@@ -74,7 +74,7 @@ class UnitTestController extends GroupTest
         $methods = array_unique( $methods );
         
         $line = "<?php\n";
-        $line.= "class Test{$class} extends UnitTestCase\n";
+        $line.= "class TestOf{$class} extends UnitTestCase\n";
         $line.= "{\n";
         foreach( $methods as $method )
         {

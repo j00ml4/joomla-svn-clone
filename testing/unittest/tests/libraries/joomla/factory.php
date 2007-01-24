@@ -1,9 +1,9 @@
 <?php
-class TestJFactory extends UnitTestCase
+class TestOfJFactory extends UnitTestCase
 {
     var $class = null;
     
-    function TestJFactory()
+    function TestOfJFactory()
     {
         $this->class = new JFactory();
     }

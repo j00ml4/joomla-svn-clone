@@ -1,9 +1,9 @@
 <?php
-class TestJVersion extends UnitTestCase
+class TestOfJVersion extends UnitTestCase
 {
     var $class = null;
     
-    function TestJVersion()
+    function TestOfJVersion()
     {
         $this->class = new JVersion();
     }
