@@ -4,8 +4,8 @@ define( 'JPATH_BASE'   , dirname( dirname(__FILE__) ) );
 define( 'UNITTEST_ROOT', dirname( __FILE__ ) );
 define( 'UNITTEST_BASE', 'tests' );
 
-require_once( JPATH_BASE.'/includes/defines.php' );
 require_once( JPATH_BASE.'/libraries/loader.php' );
+require_once( JPATH_BASE.'/includes/defines.php' );
 require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
 
 /**
