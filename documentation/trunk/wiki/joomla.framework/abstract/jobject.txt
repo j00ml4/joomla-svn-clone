@@ -1,17 +1,17 @@
 ====== JObject [Review] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#Abstract|Abstract]] | [[JObject|{{http://api.joomla.org/media/images/Class.png }}]][[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->__construct]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework|Joomla-Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject]] | never | Work in progress |
 
 This is the Joomla! base Object class. It allows <nowiki>__construct</nowiki> and <nowiki>__destruct</nowiki> to be used in PHP4. It is the base class of most of the classes in the Joomla! API. This is an abstract class and defines an interface rather than functionality. As an example, see the [[references:joomla.framework:application:japplication|JApplication]] class which is a subclass of this class.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-get|get]] | Gets the value of an object's property. |
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-set|set]] | Sets the value of an object's property. |
-| {{http://api.joomla.org/media/images/Method.png}} [[JObject-toString|toString]] | Object-to-string conversion. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-get|get]] | Gets the value of an object's property. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-set|set]] | Sets the value of an object's property. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-toString|toString]] | Object-to-string conversion. |
 
 ----
 
