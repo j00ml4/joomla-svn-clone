@@ -1,0 +1,10 @@
+====== Abstract [Review] ======
+^ API ^ 
+| {{http://api.joomla.org/media/images/package.png}} [[references:Joomla.Framework|Joomla.Framework]] |
+
+===== Classes =====
+  * [[references:joomla.framework:abstract:JNode|JNode]]
+  * [[references:joomla.framework:abstract:JObject|JObject]]
+  * [[references:joomla.framework:abstract:JObservable|JObservable]]
+  * [[references:joomla.framework:abstract:JObserver|JObserver]]
+  * [[references:joomla.framework:abstract:JTree|JTree]]
