@@ -18,6 +18,13 @@ Might produce:
 jobject
 </code>
 
+Note: In PHP 4 get_class() returns a user defined class name in lowercase, but in PHP 5 it will return the class name in it's original notation.
+
+In PHP 5 the above example would produce:
+<code php|Result>
+JObject
+</code>
+
 ----
 
 ~~DISCUSSION~~
