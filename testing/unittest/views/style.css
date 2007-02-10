@@ -39,6 +39,10 @@ h1.header {
 	background: red;
 }
 
+.footer_footer {
+	margin-top: 0.5em;
+}
+
 .message {
 	background: #ccc;
 }

@@ -42,6 +42,7 @@ class JoomlaHtml extends SimpleReporter
         echo "<strong>" . $this->getFailCount() . "</strong> fails and ";
         echo "<strong>" . $this->getExceptionCount() . "</strong> exceptions.";
         echo "</div>\n";
+        echo "<div class=\"footer_footer\"><a href=\"?\">&lt;= Home</a></div>\n";
         echo "</body>\n</html>\n";
     }
     
