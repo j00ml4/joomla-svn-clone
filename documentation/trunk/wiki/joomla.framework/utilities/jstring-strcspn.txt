@@ -1,8 +1,8 @@
 ====== strcspn ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strcspn]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strcspn]] | never | Work in progress |
 
-Finds the initial length of the string that does not contain certain characters. See [[http://www.php.net/manual/en/function.strcspn.php|strcspn]] for more information.
+Finds the initial length of the string that does not contain certain characters. See [[http://php.net/manual/function.strcspn.php|strcspn]] for more information.
 
 ===== Syntax =====
 integer strcspn	( **$str**, **$mask**, **$start**, **$length** )

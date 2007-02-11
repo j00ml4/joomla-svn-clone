@@ -1,19 +1,19 @@
 ====== JTableUser ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser]] | never | Work in progress |
 
 The JTableUser class is an implementation of the JTable interface which provides access to the users table. This implement provides methods to handle parameters, data verification, user deletion, updating last visit information and storing a user. It also provides a method of obtaining a complete user list or a user list for a specific group.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableUser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| [[JTableUser-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
-| [[JTableUser-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
-| [[JTableUser-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |
-| [[JTableUser-getUserList|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserList|getUserList]] | returns a complete user list. |
-| [[JTableUser-getUserListFromGroup|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | returns a user list for a specific group. |
-| [[JTableUser-setLastVisit|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-setLastVisit|setLastVisit]] | updates the last visit time for the user. |
-| [[JTableUser-store|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableUser-store|store]] | stores a user record and synchronizes related records. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-getUserList|getUserList]] | returns a complete user list. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | returns a user list for a specific group. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-setLastVisit|setLastVisit]] | updates the last visit time for the user. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-store|store]] | stores a user record and synchronizes related records. |
 
 ===== Properties =====
 ^ Property ^ Description ^

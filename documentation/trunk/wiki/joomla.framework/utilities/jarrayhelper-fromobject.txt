@@ -1,6 +1,6 @@
 ====== fromObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#fromobject|JArrayHelper->fromObject]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#fromobject|JArrayHelper->fromObject]] | never | Internal review |
 
 Maps an object to an array. This method will recurse unless specified otherwise. An optional regular expression parameter allows field names to be filtered.
 

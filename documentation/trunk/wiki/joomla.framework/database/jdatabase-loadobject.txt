@@ -1,6 +1,6 @@
 ====== loadObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObject]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObject]] | never | Work in progress |
 
 Loads an object with fields from the first row returned by the current SQL query. The method returns an object loaded with the data retrieved from the database. If the query fails, the method returns null.
 

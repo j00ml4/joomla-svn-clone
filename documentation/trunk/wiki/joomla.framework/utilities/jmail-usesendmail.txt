@@ -1,6 +1,6 @@
 ====== useSendmail ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Mail|Mail]] | [[JArchive|{{http://api.joomla.org/media/images/Class.png }}]][[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#useSendmail|JMail->useSendmail]] | Never | Work in progress | 
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Mail|Mail]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#useSendmail|JMail->useSendmail]] | Never | Work in progress | 
 
 Use this class if you want to use the [[http://en.wikipedia.org/wiki/Sendmail|Sendmail]] MTA (Mail Transfer Agent), to send emails. 
 

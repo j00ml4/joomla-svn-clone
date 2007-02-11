@@ -1,6 +1,6 @@
 ====== cleanupInstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->cleanupInstall]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->cleanupInstall]] | never | Work in progress |
 
 Clean up temporary uploaded package and unpacked extension. It deletes the unpacked extension directory (if it exists) and deletes the package file.
 

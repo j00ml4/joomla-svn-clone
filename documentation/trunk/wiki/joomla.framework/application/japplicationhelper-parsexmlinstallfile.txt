@@ -1,6 +1,6 @@
 ====== parseXMLInstallFile ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplicationHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->parseXMLInstallFile]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->parseXMLInstallFile]] | never | Work in progress |
 
 Parses the XML file specified by the **$path** parameter and returns it in an object.
 

@@ -1,14 +1,14 @@
 ====== JRegistryFormat ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat]] | never | Work in progress |
 
 This is an abstract format class for [[JRegistry|JRegistry]]. This class defines an interface for registry formats. Its methods are defined in child classes.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRegistryFormat-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-getInstance|getInstance]] | Returns a reference to a JRegistryFormat object, only creating it if it doesn't already exist. |
-| [[JRegistryFormat-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-objectToString|objectToString]] | Converts an object into a formatted string. This method must be redefined in child classes. |
-| [[JRegistryFormat-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormat-stringToObject|stringToObject]] | Converts an string into an object. This method must be redefined in child classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormat-getInstance|getInstance]] | Returns a reference to a JRegistryFormat object, only creating it if it doesn't already exist. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormat-objectToString|objectToString]] | Converts an object into a formatted string. This method must be redefined in child classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormat-stringToObject|stringToObject]] | Converts an string into an object. This method must be redefined in child classes. |
 
 ----
 

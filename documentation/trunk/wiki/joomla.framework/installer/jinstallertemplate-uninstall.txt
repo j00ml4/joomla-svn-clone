@@ -1,6 +1,6 @@
 ====== uninstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerTemplate|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerTemplate|JInstallerTemplate]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerTemplate.html|JInstallerTemplate->uninstall]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerTemplate|JInstallerTemplate]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerTemplate.html|JInstallerTemplate->uninstall]] | never | Work in progress |
 
 Custom uninstall method for templates. The uninstall method performs the following actions:
   * remove any files added to the Joomla! images folder

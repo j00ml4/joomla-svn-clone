@@ -1,6 +1,6 @@
 ====== fetchTooltip ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement_ImageList|{{http://api.joomla.org/media/images/Class.png }}]][[JElement_ImageList|JElement_ImageList]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_ImageList.html|JElement_ImageList->fetchTooltip]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElement_ImageList|JElement_ImageList]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_ImageList.html|JElement_ImageList->fetchTooltip]] | never | Work in progress |
 
 Renders the HTML code for a tool tip for the element.
 

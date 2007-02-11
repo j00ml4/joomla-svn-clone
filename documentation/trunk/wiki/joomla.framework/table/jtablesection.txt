@@ -1,13 +1,13 @@
 ====== JTableSection ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection]] | never | Work in progress |
 
 The JTableSection class is an implementation of the JTable interface which provides access to the sections table. This implementation provides a data verification method to check the integrity of the data.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableSection-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSection-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| [[JTableSection-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSection-check|check]] | verifies that the current data is structurally sound. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSection-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSection-check|check]] | verifies that the current data is structurally sound. |
 
 ===== Properties =====
 ^ Property ^ Description ^

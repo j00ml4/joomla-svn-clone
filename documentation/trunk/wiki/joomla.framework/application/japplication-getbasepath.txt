@@ -1,8 +1,8 @@
 ====== getBasePath ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Application|Application]] | [[JApplication|{{http://api.joomla.org/media/images/Class.png }}]][[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getBasePath]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getBasePath]] | never | Work in progress |
 
-Returns the base path of the current application. This method has been deprecated in Joomla! 1.5. Use the [[references:Joomla.Framework:environment:JURI-base|JURI::base()]] method instead.
+Returns the base path of the current application. This method has been deprecated in Joomla! 1.5. Use the [[references:joomla.framework:environment:JURI-base|JURI::base()]] method instead.
 
 ===== Syntax =====
 string getBasePath ( **$client**, **$addTrailingSlash** )

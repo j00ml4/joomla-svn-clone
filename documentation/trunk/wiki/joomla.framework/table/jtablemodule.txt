@@ -1,14 +1,14 @@
 ====== JTableModule ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule]] | never | Work in progress |
 
 The JTableMenu class is an implementation of the JTable interface which provides access to the modules table. This implementation provides data verification to ensure that the record's data is structurally sound and a customized bind method to handle parameters for the params and control fields.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableModule-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| [[JTableModule-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-bind|bind]] | overloaded bind method that provides parameter handling. |
-| [[JTableModule-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableModule-check|check]] | verifies that the current data is structurally sound. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableModule-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableModule-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableModule-check|check]] | verifies that the current data is structurally sound. |
 
 ===== Properties =====
 ^ Property ^ Description ^

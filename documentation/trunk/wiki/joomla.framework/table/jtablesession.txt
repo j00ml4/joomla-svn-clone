@@ -1,16 +1,16 @@
 ====== JTableSession ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession]] | never | Work in progress |
 
 The JTableSession class is an implementation of the JTable interface which provides access to the session table. This implement provides methods ti insert sessions, purge old sessions and to update sessions.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableSession-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key and initializes session variables. |
-| [[JTableSession-destroy|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-destroy|destroy]] | destroys the persisting session by removing the record from the table. |
-| [[JTableSession-insert|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-insert|insert]] | inserts a new session into the table. |
-| [[JTableSession-purge|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-purge|purge]] | purges old sessions from the table. |
-| [[JTableSession-update|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableSession-update|update]] | updates the session time field. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSession-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key and initializes session variables. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSession-destroy|destroy]] | destroys the persisting session by removing the record from the table. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSession-insert|insert]] | inserts a new session into the table. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSession-purge|purge]] | purges old sessions from the table. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSession-update|update]] | updates the session time field. |
 
 ===== Properties =====
 ^ Property ^ Description ^

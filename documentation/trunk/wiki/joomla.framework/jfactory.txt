@@ -1,6 +1,6 @@
 ====== JFactory [Review] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JFactory.html|JFactory]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JFactory.html|JFactory]] | never | Internal review |
 
 Joomla! Framework Factory class. This class is used to create various Joomla! framework classes.  It facilitates lazy loading, which means that instead of manually including the appropriate library file for a given class, a call to the designated JFactory class method will automatically load the correct library and return an instance of an object of the appropriate type. The object will only be created if it doesn't already exist.
 

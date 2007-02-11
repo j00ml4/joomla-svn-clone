@@ -1,6 +1,6 @@
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->__construct]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->__construct]] | never | Work in progress |
 
 Constructs the toolbar, and defines the JBUTTON_INCLUDE_PATH constant. It sets the internal name property, imports the button class, and defines the JBUTTON_INCLUDE_PATH constant (if it is not already defined).
 

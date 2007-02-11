@@ -1,6 +1,6 @@
 ====== isQuoted ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework#Database|Database]] | [[JDatabase|{{http://api.joomla.org/media/images/Class.png }}]][[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->isQuoted]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->isQuoted]] | never | Work in progress |
 
 Checks if the field name needs to be quoted (i.e. if it has been added to the array of field names to be quoted with the [[JDatabase-addQuoted|JDatabase->addQuoted]] method). Returns true if the field is to be quoted, false otherwise.
 

@@ -1,12 +1,12 @@
 ====== JArchive ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive]] | 11 Apr 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive]] | 11 Apr 2006 | Published |
 
-This is an archive handling class.  In this context an archive is a file that contains other files which may or may not be compressed.  Examples are "tar" (uncompressed), "gz" (compressed) and "bz2" (best compression).  JArchive is a [[http://www.php.net/manual/en/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
+This is an archive handling class.  In this context an archive is a file that contains other files which may or may not be compressed.  Examples are "tar" (uncompressed), "gz" (compressed) and "bz2" (best compression).  JArchive is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JArchive-create|{{http://api.joomla.org/media/images/Method.png }}]] [[JArchive-create|create]] | Creates an archive. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArchive-create|create]] | Creates an archive. |
 
 ----
 

@@ -1,21 +1,21 @@
 ====== JFile ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html|JFile]] | 11 Apr 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html|JFile]] | 11 Apr 2006 | Published |
 
-JFile is a file handling class which provides an interface to the file system.  This is a [[http://www.php.net/manual/en/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
+JFile is a file handling class which provides an interface to the file system.  This is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JFile-copy|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-copy|copy]] | Copies a file. |
-| [[JFile-delete|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-delete|delete]] | Delete a file or array of files. |
-| [[JFile-exists|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-exists|exists]] | Wrapper for the standard file_exists function. |
-| [[JFile-getExt|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-getExt|getExt]] | Gets the extension of a file name. |
-| [[JFile-makeSafe|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-makeSafe|makeSafe]] | Makes file name safe to use. |
-| [[JFile-move|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-move|move]] | Moves a file. |
-| [[JFile-read|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-read|read]] | Read the contents of a file. |
-| [[JFile-stripExt|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-stripExt|stripExt]] | Strips the last extension off a file name. |
-| [[JFile-upload|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-upload|upload]] | Moves an uploaded file to a destination folder. |
-| [[JFile-write|{{http://api.joomla.org/media/images/Method.png }}]] [[JFile-write|write]] | Write contents to a file. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-copy|copy]] | Copies a file. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-delete|delete]] | Delete a file or array of files. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-exists|exists]] | Wrapper for the standard file_exists function. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-getExt|getExt]] | Gets the extension of a file name. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-makeSafe|makeSafe]] | Makes file name safe to use. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-move|move]] | Moves a file. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-read|read]] | Read the contents of a file. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-stripExt|stripExt]] | Strips the last extension off a file name. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-upload|upload]] | Moves an uploaded file to a destination folder. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-write|write]] | Write contents to a file. |
 
 ----
 

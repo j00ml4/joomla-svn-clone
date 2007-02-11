@@ -1,6 +1,6 @@
 ====== getVersion ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getVersion]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getVersion]] |
 
 Retrieve the current browser's version.
 ===== Syntax =====

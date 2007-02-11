@@ -1,6 +1,6 @@
 ====== uninstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->uninstall]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerLanguage|JInstallerLanguage]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerLanguage.html|JInstallerLanguage->uninstall]] | never | Work in progress |
 
 Custom uninstall method for components. The uninstall method performs the following actions:
   * checks the id to determine the subfolder that the language pack belongs in

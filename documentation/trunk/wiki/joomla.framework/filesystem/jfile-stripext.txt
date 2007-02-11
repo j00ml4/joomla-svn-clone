@@ -1,6 +1,6 @@
 ====== stripExt ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#stripExt|JFile->stripExt]] | 11 Apr 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#stripExt|JFile->stripExt]] | 11 Apr 2006 | Published |
 
 Strips the last extension off a file name. This function will remove the last '.' and all following characters from the string.
 

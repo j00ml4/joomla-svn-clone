@@ -1,6 +1,6 @@
 ====== loadByOption ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JTableComp|JTableComponent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent->loadByOption]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableComp|JTableComponent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent->loadByOption]] | never | Work in progress |
 
 Loads a data row using the specified option.
 

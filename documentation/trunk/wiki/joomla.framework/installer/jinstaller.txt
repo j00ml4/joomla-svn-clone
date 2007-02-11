@@ -1,17 +1,17 @@
 ====== JInstaller ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller]] | never | Work in progress |
 
 This is the abstract Joomla! base installer class. It provides various utilities and functionality that is used mainly by the installer component. In the 1.5 core, there are five child classes which implement functionality for specific types of extensions (components, languages, modules, plugins and templates).
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JInstaller-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-__construct|__construct]] | Constructor for the JInstaller class. Stores a reference to a database object. |
-| [[JInstaller-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-getInstance|getInstance]] | Returns a reference to the global Installer object, only creating it if it doesn't already exist. |
-| [[JInstaller-install|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-install|install]] | Abstract install method. This method should be overridden in child classes. |
-| [[JInstaller-preInstallCheck|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-preInstallCheck|preInstallCheck]] | Prepare for installation: this method sets the installation directory, finds and checks the installation file and verifies the installation type. |
-| [[JInstaller-uninstall|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-uninstall|uninstall]] | Abstract uninstall method. This method should be overridden in child classes. |
-| [[JInstaller-update|{{http://api.joomla.org/media/images/Method.png }}]] [[JInstaller-update|update]] | Abstract update method. This method should be overridden in child classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-__construct|__construct]] | Constructor for the JInstaller class. Stores a reference to a database object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-getInstance|getInstance]] | Returns a reference to the global Installer object, only creating it if it doesn't already exist. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-install|install]] | Abstract install method. This method should be overridden in child classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-preInstallCheck|preInstallCheck]] | Prepare for installation: this method sets the installation directory, finds and checks the installation file and verifies the installation type. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-uninstall|uninstall]] | Abstract uninstall method. This method should be overridden in child classes. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-update|update]] | Abstract update method. This method should be overridden in child classes. |
 
 ----
 

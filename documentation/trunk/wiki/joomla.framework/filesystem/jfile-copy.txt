@@ -1,6 +1,6 @@
 ====== copy ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JFile|{{http://api.joomla.org/media/images/Class.png }}]][[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#copy|JFile->copy]] | 11 Apr 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#copy|JFile->copy]] | 11 Apr 2006 | Published |
 
 Copies a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/copy|copy]] function. Otherwise, the function will use FTP (if enabled) to copy the file. The function returns true if the file was successfully copied.  Otherwise, the function returns false and may raise a warning using the JError class.
 

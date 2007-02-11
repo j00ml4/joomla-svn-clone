@@ -1,18 +1,18 @@
 ====== JLDAP ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP]] | never | Work in progress |
 
 LDAP client class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JLDAP-JLDAP|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-JLDAP|JLDAP]] | Constructor |
-| [[JLDAP-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-bind|bind]] | Binds to the LDAP directory |
-| [[JLDAP-close|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-close|close]] | Close the connection |
-| [[JLDAP-connect|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-connect|connect]] | Connect to server |
-| [[JLDAP-getDN|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-getDN|getDN]] |  |
-| [[JLDAP-ipToNetAddress|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-ipToNetAddress|ipToNetAddress]] | Converts a dot notation IP address to net address (e.g. for Netware, etc) |
-| [[JLDAP-search|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-search|search]] | Perform an LDAP search |
-| [[JLDAP-setDN|{{http://api.joomla.org/media/images/Method.png }}]] [[JLDAP-setDN|setDN]] | Sets the DN with some template replacements |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-JLDAP|JLDAP]] | Constructor |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-bind|bind]] | Binds to the LDAP directory |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-close|close]] | Close the connection |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-connect|connect]] | Connect to server |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-getDN|getDN]] |  |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-ipToNetAddress|ipToNetAddress]] | Converts a dot notation IP address to net address (e.g. for Netware, etc) |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-search|search]] | Perform an LDAP search |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLDAP-setDN|setDN]] | Sets the DN with some template replacements |
 
 ----
 

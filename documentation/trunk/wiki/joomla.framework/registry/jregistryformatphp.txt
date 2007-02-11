@@ -1,13 +1,13 @@
 ====== JRegistryFormatPHP ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP]] | never | Work in progress |
 
 This is an implementation of the JRegistryFormat interface. This class provides functionality to convert an object into a PHP class string. It should be noted that only one depth level in the object is supported. If two levels are required, INI format or XML format should be used. If more than two levels are required, XML format should be used.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRegistryFormatPHP-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a PHP class string. NOTE: Only one depth level is supported. |
-| [[JRegistryFormatPHP-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method (this format does not support the conversion from a string into an object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a PHP class string. NOTE: Only one depth level is supported. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method (this format does not support the conversion from a string into an object. |
 
 ----
 

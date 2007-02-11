@@ -1,6 +1,6 @@
 ====== JTableComponent ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent]] | never | Work in progress |
 
 The JTableComponent class is an implementation of the JTable class to provide access to the components table. This implementation provides data verification functionality via the check() method, the ability to load a row by its option field via the loadByOption() method and defines the class variables to provide an interface to the database table. It also implements a specialized bind() method to facilitate component configuration parameters.
 
@@ -8,10 +8,10 @@ The components table is used to manage the components that are installed in the 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableComponent-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| [[JTableComponent-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-bind|bind]] | overloaded bind method that provides parameter handling. |
-| [[JTableComponent-check|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-check|check]] | verifies that the current data is structurally sound. |
-| [[JTableComponent-loadByOption|{{http://api.joomla.org/media/images/Method.png }}]] [[JTableComponent-loadByOption|loadByOption]] | loads a data row using the specified option. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-check|check]] | verifies that the current data is structurally sound. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-loadByOption|loadByOption]] | loads a data row using the specified option. |
 
 ===== Properties =====
 ^ Property ^ Description ^
