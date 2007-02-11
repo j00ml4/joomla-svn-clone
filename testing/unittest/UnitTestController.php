@@ -4,7 +4,7 @@ require_once( dirname(__FILE__).'/simpletest/reporter.php' );
 
 class UnitTestController extends GroupTest
 {
-    function UnitTestController( $path, $reporter, $label='' )
+    function UnitTestController( $path, &$reporter, $label='' )
     {
         $this->GroupTest( $label );
         
