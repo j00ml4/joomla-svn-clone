@@ -1,6 +1,6 @@
 ====== getParam ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->getParam]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->getParam]] |
 
 Method to get a parameter value
 ===== Syntax =====

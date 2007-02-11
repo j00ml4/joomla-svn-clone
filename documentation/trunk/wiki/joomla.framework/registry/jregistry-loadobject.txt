@@ -1,6 +1,6 @@
 ====== loadObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadObject]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->loadObject]] | never | Work in progress |
 
 Loads the public variables of the object into the registry. If no namespace is specified, the variables are loaded into the default namespace.
 

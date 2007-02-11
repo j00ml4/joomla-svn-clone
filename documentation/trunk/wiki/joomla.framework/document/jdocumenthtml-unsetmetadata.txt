@@ -1,6 +1,6 @@
 ====== unsetMetaData ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->unsetMetaData]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->unsetMetaData]] |
 
 Unsets a meta tag.
 ===== Syntax =====

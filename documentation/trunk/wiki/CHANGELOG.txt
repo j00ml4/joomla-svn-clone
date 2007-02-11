@@ -14,6 +14,39 @@ Legend:
 - -> Removed
 ! -> Note
 
+10.02.2007 René Serradeil
+ ! house cleaning ;)
+ - empty (useless) links on API images:
+	old: [[|{{http://api.joomla.org/images/Method.php}}]]
+	new: {{http://api.joomla.org/images/Method.php?nolink}}
+ # consistant page headers to "extended table" layouts
+	classes:
+		^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+	methods:
+		^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+ ^ moved '/abstract' to '/common/abstract' to reflect code structure
+ + Abstract.txt index
+ ^ shortcut link [[Abstract]] in subpackage files
+ # HTML markup from Smarty templates in "application/jplugin-jplugin.txt"
+ # PHP.net manual links, see: http://www.php.net/my.php
+	- http://(www|ca|ca3).php.net/manual/en/foo.bar.php
+	+ http://php.net/manual/foo.bar.php
+ ! Please use the generic URI to allow language negotiation and automatic mirrors of the PHP web site
+ # wrong/empty wiki-links to Joomla.Framework in jversion*.txt
+ # jeventdispatcher-getinstance.txt, example + description
+ ^ added a leading "/" to anchor links pointing to: 
+	    [[references:joomla.framework#Package]]
+	 -> [[references:joomla.framework/#Package]]
+	this will fix/speed up navigation to the headings in the main index files,
+	The internal "page TOC" has a "bug" 
+ ^ added "deprecated" notice to "joomla.legacy/1.5/moshtml.txt" with ref. to JHTML
+ ^ added cross-link in "joomla/utilities/moshtml.txt" to "joomla.legacy/1.5/moshtml.txt"
+ - classes.txt, class_index.txt
+	not referenced anywhere, outdated, appear to be left-overs from phpDocmentor stubs
+ ^ JSession.txt, table of method for the (3rd!) brand-new interface of this class...
+ - all jsession*.txt method files: all outdated thanx to Jinx ;)
+ ^ other stuff I can't remember ...
+
 13.01.2007 Chris Davenport
  ^ Added JException to joomla.framework.txt
 

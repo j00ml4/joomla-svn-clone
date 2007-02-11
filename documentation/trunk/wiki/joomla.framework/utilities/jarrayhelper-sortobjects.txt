@@ -1,6 +1,6 @@
 ====== sortObjects ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[JArrayHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#sortobjects|JArrayHelper->sortObjects]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#sortobjects|JArrayHelper->sortObjects]] | never | Internal review |
 
 Sorts an array of objects on a given field. This method works directly on the passed array.
 

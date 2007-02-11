@@ -1,6 +1,6 @@
 ====== uninstall ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Installer|Installer]] | [[JInstallerModule|{{http://api.joomla.org/media/images/Class.png }}]][[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->uninstall]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->uninstall]] | never | Work in progress |
 
 Custom uninstall method for modules. The uninstall method performs the following actions:
   * finds and loads the XML install file for the module

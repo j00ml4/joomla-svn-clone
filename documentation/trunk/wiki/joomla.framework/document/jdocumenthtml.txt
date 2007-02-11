@@ -1,21 +1,21 @@
 ====== JDocumentHTML [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML]] |
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML]] |
 
 The JDocumentHTML class provides an easy interface to parse and display an HTML document. It extends the JDocument class. This class is instantiated when the JDocument::getInstance() method is called with 'html' as the type parameter.
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentHTML-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-__construct|__construct]] | Class constructor. |
-| [[JDocumentHTML-addCustomTag|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block. |
-| [[JDocumentHTML-addFavicon|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon). |
-| [[JDocumentHTML-addHeadLink|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds <link> tags to the head of the document. |
-| [[JDocumentHTML-fetchHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
-| [[JDocumentHTML-getBase|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-getBase|getBase]] | Returns the document base URL. |
-| [[JDocumentHTML-parse|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-parse|parse]] | Parse a document template. |
-| [[JDocumentHTML-setBase|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setBase|setBase]] | Sets the document base URL tag. |
-| [[JDocumentHTML-setMetaContentType|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setMetaContentType|setMetaContentType]] | Sets an http-equiv Content-Type meta tag. |
-| [[JDocumentHTML-setMetaData|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-setMetaData|setMetaData]] | Sets or alters a meta tag. |
-| [[JDocumentHTML-unsetMetaData|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentHTML-unsetMetaData|unsetMetaData]] | Unsets a meta tag. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon). |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds <link> tags to the head of the document. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-getBase|getBase]] | Returns the document base URL. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-parse|parse]] | Parse a document template. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setBase|setBase]] | Sets the document base URL tag. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setMetaContentType|setMetaContentType]] | Sets an http-equiv Content-Type meta tag. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setMetaData|setMetaData]] | Sets or alters a meta tag. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-unsetMetaData|unsetMetaData]] | Unsets a meta tag. |
 
 ----
 

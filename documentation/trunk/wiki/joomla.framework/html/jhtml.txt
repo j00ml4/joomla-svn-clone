@@ -1,34 +1,31 @@
-====== mosHTML ======
+====== JHTML ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+|{{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML]] |
 
-^ API ^ Package ^ phpDocumentor ^
-|[[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML]] |
-
-{{http://api.joomla.org/media/images/Method.png }}
-
-mosHTML is a helper class for rendering HTML controls.
+JHTML is a helper class for rendering HTML controls.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[Utilities-BackButton |{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-BackButton |BackButton ]] | Displays a standard back button. |
-| [[Utilities-cleanText |{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-cleanText |cleanText ]] |  |
-| [[Utilities-CloseButton|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-CloseButton|CloseButton]] | Displays a standard close button for a pop-up window. |
-| [[Utilities-emailCloaking|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-emailCloaking|emailCloaking]] | A simple method for cloaking email addresses. |
-| [[Utilities-idBox|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-idBox|idBox]] | Builds the HTML code for a standard selectable checkbox for use on a Database list-select screen. |
-| [[Utilities-Iframe|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-Iframe|Iframe]] | Builds a HTML iFrame for the specified URL. |
-| [[Utilities-Image|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-Image|Image]] | Builds a HTML iFrame for the specified URL. |
-| [[Utilities-integerSelectList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-integerSelectList|integerSelectList]] | Builds a selectlist of numbers from $start to $end with an increment of $inc. |
-| [[Utilities-Link|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-Link|Link]] | Builds a HTML iFrame for the specified URL. |
-| [[Utilities-makeOption|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-makeOption|makeOption]] | Returns an object that can be passed in an array to another list handling method such as mosHTML::selectList. |
-| [[Utilities-monthSelectList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-monthSelectList|monthSelectList]] | A convenient method for producing a list of months in an HTML form field using the current language settings. |
-| [[Utilities-PrintIcon|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-PrintIcon|PrintIcon]] | Displays a standard print icon. |
-|[[Utilities-radioList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-radioList|radioList]] | Produces a list of HTML radio buttons. |
-|[[Utilities-Script|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-Script|Script]] | Builds an HTML <select> form field with <options> built from an array of values. |
-|[[Utilities-selectList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-selectList|selectList]] | Builds the HTML code for displaying a standard select list. |
-|[[Utilities-sortIcon|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-sortIcon|sortIcon]] | Builds the HTML code for displaying a standard clickable sort icon. |
-|[[Utilities-treeSelectList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-treeSelectList|treeSelectList]] | Generates an HTML select list from a tree based query list. |
-|[[Utilities-WarningIcon|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-WarningIcon|WarningIcon]] | Generates an HTML select list from a tree based query list. |
-|[[Utilities-writableCell|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-writableCell|writableCell]] | Builds a HTML radio list consisting of just a ‘yes’ button and a ‘no’ button.|
-|[[Utilities-yesnoRadioList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-yesnoRadioList|yesnoRadioList]] | Builds a HTML Radio list consisting of just a ‘No’ and a ‘Yes’ option. |
-|[[Utilities-yesnoSelectList|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-yesnoSelectList|yesnoSelectList]] | Builds a HTML select list consisting of just a ‘No’ and a ‘Yes’ option. |
-|[[Utilities-_encoding_converter|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-_encoding_converter|_encoding_converter]] |
-|[[Utilities-_implode_assoc|{{http://api.joomla.org/media/images/Method.png }}]] [[Utilities-_implode_assoc|_implode_assoc]] |  |
+| [[Utilities-BackButton|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-BackButton |BackButton ]] | Displays a standard back button. |
+| [[Utilities-cleanText|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-cleanText |cleanText ]] |  |
+| [[Utilities-CloseButton|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-CloseButton|CloseButton]] | Displays a standard close button for a pop-up window. |
+| [[Utilities-emailCloaking|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-emailCloaking|emailCloaking]] | A simple method for cloaking email addresses. |
+| [[Utilities-idBox|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-idBox|idBox]] | Builds the HTML code for a standard selectable checkbox for use on a Database list-select screen. |
+| [[Utilities-Iframe|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Iframe|Iframe]] | Builds a HTML iFrame for the specified URL. |
+| [[Utilities-Image|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Image|Image]] | Builds a HTML iFrame for the specified URL. |
+| [[Utilities-integerSelectList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-integerSelectList|integerSelectList]] | Builds a selectlist of numbers from $start to $end with an increment of $inc. |
+| [[Utilities-Link|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Link|Link]] | Builds a HTML iFrame for the specified URL. |
+| [[Utilities-makeOption|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-makeOption|makeOption]] | Returns an object that can be passed in an array to another list handling method such as mosHTML::selectList. |
+| [[Utilities-monthSelectList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-monthSelectList|monthSelectList]] | A convenient method for producing a list of months in an HTML form field using the current language settings. |
+| [[Utilities-PrintIcon|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-PrintIcon|PrintIcon]] | Displays a standard print icon. |
+| [[Utilities-radioList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-radioList|radioList]] | Produces a list of HTML radio buttons. |
+| [[Utilities-Script|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Script|Script]] | Builds an HTML <select> form field with <options> built from an array of values. |
+| [[Utilities-selectList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-selectList|selectList]] | Builds the HTML code for displaying a standard select list. |
+| [[Utilities-sortIcon|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-sortIcon|sortIcon]] | Builds the HTML code for displaying a standard clickable sort icon. |
+| [[Utilities-treeSelectList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-treeSelectList|treeSelectList]] | Generates an HTML select list from a tree based query list. |
+| [[Utilities-WarningIcon|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-WarningIcon|WarningIcon]] | Generates an HTML select list from a tree based query list. |
+| [[Utilities-writableCell|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-writableCell|writableCell]] | Builds a HTML radio list consisting of just a ‘yes’ button and a ‘no’ button.|
+| [[Utilities-yesnoRadioList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-yesnoRadioList|yesnoRadioList]] | Builds a HTML Radio list consisting of just a ‘No’ and a ‘Yes’ option. |
+| [[Utilities-yesnoSelectList|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-yesnoSelectList|yesnoSelectList]] | Builds a HTML select list consisting of just a ‘No’ and a ‘Yes’ option. |
+| [[Utilities-_encoding_converter|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-_encoding_converter|_encoding_converter]] |
+| [[Utilities-_implode_assoc|{{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-_implode_assoc|_implode_assoc]] |  |

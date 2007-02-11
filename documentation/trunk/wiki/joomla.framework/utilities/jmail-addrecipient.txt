@@ -1,6 +1,6 @@
 ====== addRecipient ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Mail|Mail]] | [[JArchive|{{http://api.joomla.org/media/images/Class.png }}]][[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#addRecipient|JMail->addRecipient]] | Never | Work in progress | 
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Mail|Mail]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JMail|JMail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html#addRecipient|JMail->addRecipient]] | Never | Work in progress | 
 
 Use this class if you want to add one or more recepients these will be added to the (**To:** header field) for more information on header fields look up [[http://www.ietf.org/rfc/rfc2822.txt|RFC2822 - Internet Message Format]].
 

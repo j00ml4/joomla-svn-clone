@@ -1,6 +1,6 @@
 ====== render ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JButton_Separator|{{http://api.joomla.org/media/images/Class.png }}]][[JButton_Separator|JButton_Separator]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Separator.html#render|JButton_Separator->render]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Separator|JButton_Separator]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Separator.html#render|JButton_Separator->render]] | never | Internal review |
 
 Renders the button into HTML.
 

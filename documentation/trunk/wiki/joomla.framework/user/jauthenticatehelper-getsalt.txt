@@ -1,6 +1,6 @@
 ====== getSalt ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#User|User]] | [[JAuthenticateHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper->getSalt]] | 19 September 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper->getSalt]] | 19 September 2006 | Published |
 
 Returns a salt for the appropriate kind of password encryption.
 Optionally takes a seed and a plaintext password to extract the seed  of an existing password, or for encryption types that use the plaintext in the generation of the salt. For more information, see [[EncryptionTypes|Password Encryption Types]].

@@ -1,6 +1,6 @@
 ====== canChmod ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#FileSystem|FileSystem]] | [[JPath|{{http://api.joomla.org/media/images/Class.png }}]][[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#canChmod|JPath->canChmod]] | 27 Apr 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#canChmod|JPath->canChmod]] | 27 Apr 2006 | Published |
 
 Checks if a path's permissions can be changed. Returns true if permissions can be changed, false otherwise.
 ===== Syntax =====

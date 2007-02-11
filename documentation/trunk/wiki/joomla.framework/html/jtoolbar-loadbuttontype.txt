@@ -1,6 +1,6 @@
 ====== loadButtonType ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JToolBar|{{http://api.joomla.org/media/images/Class.png }}]][[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->loadButtonType]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->loadButtonType]] | never | Work in progress |
 
 Loads the class for the specified button type. If the class is not defined, the method will search the include directories that have been added and attempt to load the file that contains the class definition. This method is called by the [[JToolBar-renderButton|renderButton()]] method, so should not normally need to be called.
 

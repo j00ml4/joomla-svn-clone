@@ -1,13 +1,13 @@
 ====== JRegistryFormatINI ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI]] | never | Work in progress |
 
 This is an implementation of the JRegistryFormat interface. This class provides functionality to convert an object into an INI string. It should be noted that only two depth levels in the object is supported. If more than two levels are required, XML format should be used.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRegistryFormatINI-objectToString|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string. |
-| [[JRegistryFormatINI-stringToObject|{{http://api.joomla.org/media/images/Method.png }}]] [[JRegistryFormatINI-stringToObject|stringToObject]] | Converts an INI string into an object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatINI-stringToObject|stringToObject]] | Converts an INI string into an object. |
 
 ----
 

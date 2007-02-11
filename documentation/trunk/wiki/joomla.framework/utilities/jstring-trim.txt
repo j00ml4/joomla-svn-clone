@@ -1,14 +1,14 @@
 ====== trim ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->trim]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->trim]] | never | Work in progress |
 
-Strip whitespace (or other characters) from the beginning and end of a string. Note: you only need to use this if you are supplying the optional charlist argument and it contains UTF-8 characters. Otherwise trim will work normally on a UTF-8 string. See [[http://www.php.net/manual/en/function.trim.php|trim]] for more information.
+Strip whitespace (or other characters) from the beginning and end of a string. Note: you only need to use this if you are supplying the optional charlist argument and it contains UTF-8 characters. Otherwise trim will work normally on a UTF-8 string. See [[http://php.net/manual/function.trim.php|trim]] for more information.
 
 ===== Syntax =====
 string trim	( **$str**, **$charlist** )
 
 | **$str** | string | is the string to be trimmed |
-| **$charlist** | string | is a string containing the optional charlist of additional characters to trim. This parameter is optional and if omitted, defaults to the standard whitespace characters. If this parameter is omitted, this method will yield the same results as the built-in php [[http://www.php.net/manual/en/function.trim.php|trim]] function. |
+| **$charlist** | string | is a string containing the optional charlist of additional characters to trim. This parameter is optional and if omitted, defaults to the standard whitespace characters. If this parameter is omitted, this method will yield the same results as the built-in php [[http://php.net/manual/function.trim.php|trim]] function. |
 
 ===== Examples =====
 <code php|Example>

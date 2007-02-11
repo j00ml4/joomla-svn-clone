@@ -1,6 +1,6 @@
 ====== delete ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->delete]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->delete]] |
 
 This method deletes a path (file/folder) on the FTP server.
 ===== Syntax =====

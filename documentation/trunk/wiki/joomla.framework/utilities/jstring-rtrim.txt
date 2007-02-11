@@ -1,8 +1,8 @@
 ====== rtrim ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->rtrim]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->rtrim]] | never | Work in progress |
 
-Strips whitespace (or other characters) from the end of the string. This method is only necessary if the optional character list argument is supplied and contains UTF-8 characters. Otherwise, the standard function will work on a UTF-8 string. See [[http://www.php.net/manual/en/function.rtrim.php|rtrim]] for more information.
+Strips whitespace (or other characters) from the end of the string. This method is only necessary if the optional character list argument is supplied and contains UTF-8 characters. Otherwise, the standard function will work on a UTF-8 string. See [[http://php.net/manual/function.rtrim.php|rtrim]] for more information.
 
 ===== Syntax =====
 string rtrim ( **$str**, **$charlist** )

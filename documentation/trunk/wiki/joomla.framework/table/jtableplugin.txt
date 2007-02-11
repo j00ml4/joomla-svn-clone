@@ -1,13 +1,13 @@
 ====== JTablePlugin ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTablePlugin.html|JTablePlugin]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTablePlugin.html|JTablePlugin]] | never | Work in progress |
 
 The JTableMenu class is an implementation of the JTable interface which provides access to the modules table. This implementation provides a customized bind method to handle parameters for the params field.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTablePlugin-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JTablePlugin-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| [[JTablePlugin-bind|{{http://api.joomla.org/media/images/Method.png }}]] [[JTablePlugin-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTablePlugin-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTablePlugin-bind|bind]] | overloaded bind method that provides parameter handling. |
 
 ===== Properties =====
 ^ Property ^ Description ^

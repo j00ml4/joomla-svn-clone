@@ -1,6 +1,6 @@
 ====== getDebug ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JLanguage|{{http://api.joomla.org/media/images/Class.png }}]][[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getDebug]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getDebug]] | never | Work in progress |
 
 Gets the debug property. If the debug property is set, the _ method will add markers before and after each string to indicate whether or not the key exists in the language file.
 

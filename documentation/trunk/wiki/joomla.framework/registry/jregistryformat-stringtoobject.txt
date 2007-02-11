@@ -1,6 +1,6 @@
 ====== stringToObject ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistryFormat|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->stringToObject]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->stringToObject]] | never | Work in progress |
 
 Converts a formatted string into an object. The format of the string must correspond to current JRegistryFormat class.
 

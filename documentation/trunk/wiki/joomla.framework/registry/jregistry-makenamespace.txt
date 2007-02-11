@@ -1,6 +1,6 @@
 ====== makeNameSpace ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Registry|Registry]] | [[JRegistry|{{http://api.joomla.org/media/images/Class.png }}]][[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->makeNameSpace]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->makeNameSpace]] | never | Work in progress |
 
 Creates a namespace with the specified name. Care should be taken when using this method because there is no check to see if the namespace already exists, and therefore data in an existing namespace could be lost.
 

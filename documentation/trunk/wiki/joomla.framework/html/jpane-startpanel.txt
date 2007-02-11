@@ -1,6 +1,6 @@
 ====== startPanel ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JPane|{{http://api.joomla.org/media/images/Class.png }}]][[JPane|JPane]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPane.html|JPane->startPanel]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPane|JPane]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPane.html|JPane->startPanel]] | never | Work in progress |
 
 Outputs the necessary HTML code and JavaScript to create a panel with the title text and start the panel.
 

@@ -1,12 +1,12 @@
 ====== JHelp [Review] ======
-^ API ^ Package ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp]] |
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp]] |
 
 This is a static help system class which provides utility functions 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHelp-createSiteList|{{http://api.joomla.org/media/images/Method.png }}]] [[JHelp-createSiteList|createSiteList]] | Builds a list of the help sites which can be used in a select option. |
-| [[JHelp-createURL|{{http://api.joomla.org/media/images/Method.png }}]] [[JHelp-createURL|createURL]] | Creates an URL for a given help file reference. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JHelp-createSiteList|createSiteList]] | Builds a list of the help sites which can be used in a select option. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JHelp-createURL|createURL]] | Creates an URL for a given help file reference. |
 
 ----
 

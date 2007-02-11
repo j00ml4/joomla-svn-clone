@@ -1,6 +1,6 @@
 ====== render ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JButton|{{http://api.joomla.org/media/images/Class.png }}]][[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#render|JButton->render]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#render|JButton->render]] | never | Internal review |
 
 Renders the button. Retrieves the results from the [[JButton-fetchButton|fetchButton()]] method and encloses it in a <td> tag with an 'id' attribute that is retrieved from the [[JButton-fetchId|fetchId()]] method.
 

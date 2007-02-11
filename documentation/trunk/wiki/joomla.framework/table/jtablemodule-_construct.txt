@@ -1,6 +1,6 @@
 ====== __construct ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Table|Table]] | [[JTableModule|{{http://api.joomla.org/media/images/Class.png }}]][[JTableModule|JTableModule]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule->__construct]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableModule|JTableModule]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule->__construct]] | never | Work in progress |
 
 The class constructor calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key.
 

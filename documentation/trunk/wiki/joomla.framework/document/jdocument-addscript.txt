@@ -1,6 +1,6 @@
 ====== addScript ======
-^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScript]] |
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScript]] |
 
 Adds a linked script to the page
 ===== Syntax =====
