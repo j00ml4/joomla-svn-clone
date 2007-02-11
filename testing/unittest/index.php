@@ -16,6 +16,9 @@ require_once( JPATH_BASE.'/libraries/joomla/common/abstract/object.php' ); // JO
 
 $path = @$_REQUEST[ 'path' ];
 $output = @$_REQUEST['output'];
+if (get_magic_quotes_gpc()) {
+	$path = stripslashes($path);
+}
 
 // If run from the command line get the args
 if( in_array( @$argv[1], array( '-path', '-output' ) ) )
@@ -40,25 +43,32 @@ if( $path )
     {
         case 'xml':
             require_once( JPATH_BASE.'/unittest/views/JoomlaXml.php' );
-            new UnitTestController( urldecode( $path ), new JoomlaXml(), $path );
-            exit();
+            $reporter =& new JoomlaXml();
+            break;
+
         case 'php':
             require_once( JPATH_BASE.'/unittest/views/JoomlaPhp.php' );
-            new UnitTestController( urldecode( $path ), new JoomlaPhp(), $path );
-            exit();
+            $reporter =& new JoomlaPhp();
+            break;
+
         case 'json':
             require_once( JPATH_BASE.'/unittest/views/JoomlaJson.php' );
-            new UnitTestController( urldecode( $path ), new JoomlaJson(), $path );
-            exit();
+            $reporter =& new JoomlaJson();
+            break;
+
         case 'text':
             require_once( JPATH_BASE.'/unittest/views/JoomlaText.php' );
-            new UnitTestController( urldecode( $path ), new JoomlaText(), $path );
-            exit();
+            $reporter =& new JoomlaText();
+            break;
+
         default:
             require_once( JPATH_BASE.'/unittest/views/JoomlaHtml.php' );
-            new UnitTestController( urldecode( $path ), new JoomlaHtml(), $path );
-            exit();
+            $reporter =& new JoomlaHtml();
+            break;
     }
+
+    new UnitTestController( urldecode( $path ), $reporter, $path );
+    exit();
 }
 // Otherwise show the default start page
 else
