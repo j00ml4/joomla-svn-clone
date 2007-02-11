@@ -104,6 +104,25 @@ class JoomlaHtml extends SimpleReporter
     }
     
     /**
+     *    Paints a simple supplementary message.
+     *    @param string $message        Text to display.
+     *    @access public
+     */
+    function paintMessage( $message )
+    {
+        parent::paintMessage( $message );
+        
+        echo "<div class=\"message\">";
+        
+        $breadcrumb = $this->getTestList();
+        array_shift( $breadcrumb );
+        
+        echo implode( " -&gt; ", $breadcrumb );
+        echo " -&gt; " . $this->_htmlEntities($message);
+        echo "</div>";
+    }
+    
+    /**
      *    Paints formatted text such as dumped variables.
      *    @param string $message        Text to show.
      *    @access public
