@@ -1,0 +1,16 @@
+====== detach ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework|Joomla-Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework#Abstract|Abstract]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObservable.html|JObservable->detach]] | never | Work in progress |
+
+This member is used to detach an observer object.
+
+===== Syntax =====
+boolean detach	( **$observer** )
+| **$observer** | JObserver | An observer object to detach. If this observer object is referenced in the observer array, then it is removed and the function returns true. Otherwise, the function returns false. |
+
+===== Examples =====
+If a handler $handler was previously attached, it could be detached in the following way:
+<code php|Example>
+$dispatcher =& JEventDispatcher::getInstance();
+$dispatcher->detach( $handler );
+</code>
