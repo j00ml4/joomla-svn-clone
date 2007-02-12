@@ -1,0 +1,18 @@
+====== JObservable [Review] ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework|Joomla-Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObservable.html|JObservable]] | never | Work in progress |
+
+This is an abstract observable class to implement the observer design pattern. It is extended by the [[references:joomla.framework:application:jeventdispatcher|JEventDispatcher]] class which is instantiated by the [[references:joomla.framework:application:japplication|JApplication]] class. This class is a child class of the [[references:joomla.framework:object|JObject]] class. Standard events can be triggered through the Event Dispatcher. The observer design pattern provides the possibility of having observable objects. Observers can be attached to observable classes so that they can be notified when events occur within the particular observable object.
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-attach|attach]] | Attach an observer object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-detach|detach]] | Detach an observer object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-getState|getState]] | Get the state of the JObservable object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-notify|notify]] | Update each attached observer object and return an array of their return values. |
+
+----
+
+~~DISCUSSION~~
+
+
