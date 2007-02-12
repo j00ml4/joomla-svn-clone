@@ -14,6 +14,10 @@ Legend:
 - -> Removed
 ! -> Note
 
+12.02.2007 René Serradeil
++	/common/abstract/JNode.txt
++	/common/abstract/JTree.txt
+
 10.02.2007 René Serradeil
  ! house cleaning ;)
  - empty (useless) links on API images:
