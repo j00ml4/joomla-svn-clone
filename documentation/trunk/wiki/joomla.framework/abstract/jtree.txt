@@ -11,10 +11,8 @@ The Joomla! menu modules are typical tree structures inherited from JTree.
 ^ Method ^ Description ^
 | {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JNode-__construct|__construct]] | Class constructor, overridden in descendant classes. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-addChild|addChild]] | Adds a new child node object to the current object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-getChildren|getChildren]] | Returns all child nodes of the current object. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-getParent|getParent]] | Returns the parent node of the current object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-hasChildren|hasChildren]] | Tests whether the object has child nodes. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-setParent|setParent]] | Assigns a new parent node to the current object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-reset|reset]] | Resets the current node to the root node. |
 
 ----
 
