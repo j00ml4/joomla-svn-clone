@@ -8,18 +8,23 @@ class TestOfJFTP extends UnitTestCase
 		$this->UnitTestCase();
 
 		// Include custom ftp.conf file to allow overriding of FTP_NATIVE mode
-		/** @TODO Overriding of FTP_NATIVE does currently not work, as the file which should be tested is loaded first by the UnitTestController */
+		/**
+		 * @TODO Overriding of FTP_NATIVE does currently not work, as the file which should be
+		 * tested is loaded first by the UnitTestController
+		 */
 		@include('ftp.conf');
 
-		/** @TODO */
-		// temporary workaround, this should be included in a JoomlaTestCase which extends the UnitTestCase
+		/** @TODO this should be included in a JoomlaTestCase which extends the UnitTestCase */
 		jimport('joomla.utilities.error');
 		JError::setErrorHandling(E_NOTICE, 'trigger');
 		JError::setErrorHandling(E_WARNING, 'trigger');
 		JError::setErrorHandling(E_ERROR, 'trigger');
 
 		/** @TODO: Fix this in JFTP!!! */
-		// temporary workaround!!!! otherwise the destructor test will fail, as there is a reference to the object laying around in the unit tester's error handler
+		/*
+		 * temporary workaround!!!! otherwise the destructor test will fail,
+		 * as there is a reference to the object laying around in the unit tester's error handler
+		 */
 		!defined('JPATH_ISWIN') && define('JPATH_ISWIN', true);
 
 		jimport('joomla.client.ftp');
@@ -35,13 +40,23 @@ class TestOfJFTP extends UnitTestCase
 	{
 		if (($conf = $this->getCredentials()) === false)
 		{
-			$this->sendMessage('You need to set correct FTP credentials either in your global configuration, or in a file called "ftp.conf" in the directory of this test case. You may also override the FTP_NATIVE option in this file (comment out line 27 (include_once) in UnitTestController if you wanna use this feature). This is how the file could look like:');
-			$msg = "<?php\nif (isset(\$config)) {\n  \$config->ftp_user = 'test';\n  etc....\n}\n\n!defined('FTP_NATIVE') && define('FTP_NATIVE', false);\n?>";
+			$this->sendMessage('You need to set correct FTP credentials either in your global'
+				.' configuration, or in a file called "ftp.conf" in the directory of this test'
+				.' case. You may also override the FTP_NATIVE option in this file (comment out'
+				.' line 27 (include_once) in UnitTestController if you wanna use this feature).'
+				.' This is how the file could look like:'
+			);
+			$msg = "<?php\nif (isset(\$config)) {\n  \$config->ftp_user = 'test';\n  etc....\n}'
+				.'\n\n!defined('FTP_NATIVE') && define('FTP_NATIVE', false);\n?>"
+			;
 			echo "<pre>".htmlspecialchars($msg)."</pre>"; // ugly, i know ;)
 		}
 		else
 		{
-			$msg = 'Testing host ['.$conf['host'].'] on port ['.$conf['port'].'] with user ['.$conf['user'].'] and pass ['.str_repeat('*', strlen($conf['pass'])).']. FTP Root Path set to ['.$conf['root'].']';
+			$msg = 'Testing host ['.$conf['host'].'] on port ['.$conf['port'].'] with user ['
+				.$conf['user'].'] and pass ['.str_repeat('*', strlen($conf['pass'])).']. FTP'
+				.' Root Path set to ['.$conf['root'].']'
+			;
 			$this->sendMessage($msg);
 			$this->sendMessage('FTP_NATIVE mode is switched ' . (FTP_NATIVE? 'ON' : 'OFF'));
 		}
@@ -74,7 +89,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$return = $ftp->connect($conf['host'], $conf['port']);
 
 		$pass  = $this->assertIdenticalTrue($return);
@@ -93,7 +108,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$conn =& $ftp->_conn;
 
@@ -103,7 +118,7 @@ class TestOfJFTP extends UnitTestCase
 		if (version_compare(PHP_VERSION, '5', '>=')) {
 			$this->assertIdenticalFalse(is_resource($conn));
 		} else {
-			// PHP4 does not have destructors, so the object and thus the connection should still be there...
+			// PHP4 has no destructors, so the object and the connection should still be there...
 			$this->assertIdenticalTrue(is_resource($conn), '%s - ONLY PHP4');
 		}
 	}
@@ -129,7 +144,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$return1 = $ftp->isConnected();
 		$return2 = $ftp->connect($conf['host'], $conf['port']);
 		$return3 = $ftp->isConnected();
@@ -151,7 +166,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$return = $ftp->login($conf['user'], $conf['pass'].'_will_not_work');
 
@@ -167,7 +182,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$return = $ftp->login($conf['user'], $conf['pass']);
 
@@ -184,7 +199,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 
 		$this->assertIdenticalTrue(is_resource($ftp->_conn));
@@ -199,7 +214,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 		$return = $ftp->syst();
@@ -207,7 +222,9 @@ class TestOfJFTP extends UnitTestCase
 		if (isset($conf['syst'])) {
 			$this->assertIdentical($return, $conf['syst']);
 		} else {
-			$this->sendMessage("SYST command returned [$return], please evaluate manually if this is correct! You may also set a value for 'ftp_syst' in your configuration.");
+			$this->sendMessage("SYST command returned [$return], please evaluate manually if this'
+				.' is correct! You may also set a value for 'ftp_syst' in your configuration."
+			);
 		}
 		$this->assertIdenticalTrue($return=='UNIX' || $return=='WIN' || $return=='MAC');
 		$ftp->quit();
@@ -220,7 +237,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
@@ -238,7 +255,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
@@ -256,28 +273,41 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
 		$return1 = $ftp->pwd();
 		$return2 = $ftp->chdir($conf['root']);
 		$return3 = $ftp->pwd();
-		$return4 = $ftp->chdir();
+		$return4 = $ftp->chdir($return1);
 		$return5 = $ftp->pwd();
 		$return6 = $ftp->chdir($conf['root'].'/');
 		$return7 = $ftp->pwd();
+		$return8 = $ftp->chdir('/');
+		$return9 = $ftp->pwd();
 
 		$this->assertIdentical($return1, $return5);
 		$this->assertIdentical($return3, $return7);
-		$this->assertNotEqual($return1, $return3);
+		$this->assertIdentical($return3, $conf['root']);
+		$this->assertIdentical($return9, '/');
+		$this->assertNotIdentical($return1, $return3);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
 		$this->assertIdenticalTrue($return6);
-		$this->assertEqual($return3, $conf['root']);
-		$this->assertIdenticalFalse(strpos($return3, '\\'), "Dirname contains wrong DIRECTORY_SEPARATOR? [$return3]");
+		$this->assertIdenticalTrue($return8);
+		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
+		$this->assertIdenticalFalse(strpos($return3, '\\'), "Dirname contains wrong'
+			.' DIRECTORY_SEPARATOR? [$return3]"
+		);
 
-		if (!$return2===true) {
+		if ($return1 !== $return9) {
+			$this->sendMessage('Notice: the directory which is your Current Working Directory'
+				.' directly after connecting is NOT the root directory [/].'
+			);
+		}
+
+		if ($return2 !== true) {
 			$this->invalidateCredentials();
 			$this->sendMessage('Please set your ftp_root path correctly in your configuration.');
 		}
@@ -291,7 +321,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
@@ -300,15 +330,14 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->chdir($conf['root']);
 		$return3 = $ftp->listNames();
 		
-		/** @TODO: Shouldn't the return values of both calls be the same, not only the count? */
 		$this->assertIdentical($return1, $return2);
-		$this->assertIdentical(count($return1), count($return3));
+		$this->assertIdentical($return1, $return3);
 		$this->assertIsA($return1, 'array');
 		$this->assertIdenticalFalse(in_array('.', $return1), 'Directory listing contains [.]?');
 		$this->assertIdenticalFalse(in_array('..', $return1), 'Directory listing contains [..]?');
 		$this->assertNoErrors();
 
-		/** @TODO: What is this? Backslahes allowed in FTP paths? I thought they should be / always? */
+		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
 		$return1 = (array) $return1;
 		$test = true;
 		foreach($return1 as $file) {
@@ -333,7 +362,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
@@ -347,7 +376,7 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertIdentical($return1, $return3);
 		$this->assertNoErrors();
 
-		/** @TODO: What is this? Backslahes allowed in FTP paths? I thought they should be / always? */
+		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
 		$test1 = $test2 = $test3 = true;
 		$filename = '';
 		$return1 = (array) $return1;
@@ -365,8 +394,13 @@ class TestOfJFTP extends UnitTestCase
 
 		$return3 = $ftp->listDetails($conf['root'].'/blablabla');
 
-		$this->assertErrorPattern('/JFTP::listDetails: (Transfer Failed|Bad response)/');
-		$this->assertIdenticalFalse($return3);
+		$pass  = $this->assertErrorPattern('/JFTP::listDetails: (Transfer Failed|Bad response)/');
+		$pass &= $this->assertIdenticalFalse($return3);
+		if (!$pass) {
+			$this->sendMessage('The LIST command for a non-existing directory just '
+				.'returned without error. I\'ve seen this before, but nevertheless strange!'
+			);
+		}
 		$ftp->quit();
 	}
 
@@ -377,17 +411,17 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root'].'/');
+		$return1 = $ftp->listNames($conf['root']);
 		$return2 = $ftp->create($conf['root'].'/testfile');
-		$return3 = $ftp->listNames($conf['root'].'/');
+		$return3 = $ftp->listNames($conf['root']);
 
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdenticalFalse(in_array($conf['root'].'/testfile', $return1));
-		$this->assertIdenticalTrue(in_array($conf['root'].'/testfile', $return3));
+		$this->assertIdenticalFalse(in_array('testfile', $return1));
+		$this->assertIdenticalTrue(in_array('testfile', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
@@ -420,18 +454,18 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 		$ftp->create($conf['root'].'/testfile');
 
-		$return1 = $ftp->listNames($conf['root'].'/');
+		$return1 = $ftp->listNames($conf['root']);
 		$return2 = $ftp->delete($conf['root'].'/testfile');
-		$return3 = $ftp->listNames($conf['root'].'/');
+		$return3 = $ftp->listNames($conf['root']);
 
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdenticalTrue(in_array($conf['root'].'/testfile', $return1));
-		$this->assertIdenticalFalse(in_array($conf['root'].'/testfile', $return3));
+		$this->assertIdenticalTrue(in_array('testfile', $return1));
+		$this->assertIdenticalFalse(in_array('testfile', $return3));
 		$this->assertIdentical(count($return1), count($return3)+1);
 		$this->assertNoErrors();
 
@@ -463,7 +497,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 		$ftp->chdir($conf['root']);
@@ -504,7 +538,7 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 		$ftp->chdir($conf['root']);
@@ -520,8 +554,8 @@ class TestOfJFTP extends UnitTestCase
 				.' do not support it, this is just displayed as a notice, not as a failure.'
 			);
 			/**
-			 * @TODO: can we maybe even supress these errors in JFTP? Would probably better if the user
-			 * does not see such a notice/warning. Return code from chmod should be enough...
+			 * @TODO: can we maybe even supress these errors in JFTP? Would probably better if the
+			 * user does not see such a notice/warning. Return code from chmod should be enough...
 			 */
 			$this->assertError('JFTP::chmod: Bad response');
 			$this->assertError('JFTP::chmod: Bad response');
@@ -541,17 +575,17 @@ class TestOfJFTP extends UnitTestCase
 			return;
 		}
 
-		$ftp = new JFTP(array('timeout'=>1));
+		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root'].'/');
+		$return1 = $ftp->listNames($conf['root']);
 		$return2 = $ftp->mkdir($conf['root'].'/testdir');
-		$return3 = $ftp->listNames($conf['root'].'/');
+		$return3 = $ftp->listNames($conf['root']);
 
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdenticalFalse(in_array($conf['root'].'/testdir', $return1));
-		$this->assertIdenticalTrue(in_array($conf['root'].'/testdir', $return3));
+		$this->assertIdenticalFalse(in_array('testdir', $return1));
+		$this->assertIdenticalTrue(in_array('testdir', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
