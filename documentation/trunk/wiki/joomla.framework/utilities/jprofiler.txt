@@ -6,7 +6,7 @@ Utility class to assist in the process of benchmarking the execution of sections
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png }}]] [[JProfiler-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JProfiler-__construct|__construct]] | Class constructor. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JProfiler-getbuffer|getBuffer]] | Get the current profiler marks. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JProfiler-getinstance|getInstance]] | Returns a reference to the global Profiler object, only creating it if it doesn't exist. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JProfiler-getmemory|getMemory]] | Get information about current memory usage. |

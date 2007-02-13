@@ -12,11 +12,25 @@ Legend:
 + -> Addition
 ^ -> Change
 - -> Removed
+> -> Moved
 ! -> Note
 
+13.02.2007 René Serradeil
+ +	mosHTML to Joomla.Jegacy/1.5.txt
+ >	joomla.framework/utilities/utilities-*.txt to
+	joomla.legacy/1.5/moshtml-*.txt
+ ^ jhtml.txt: updated method list + descriptions (was based on mosHTML)
+ # link to JHTML in (both) moshtml.txt
+ # broken images introduced in "house cleaning":
+ 	jhtml.txt, jpagination.txt
+ # broken links to Joomla.Framework in /abstract/*
+ # JNode.txt, JTree.txt
+ ^ JModuleHelper, missing page header
+ ^ Constructor.png to __constructor methods
+
 12.02.2007 René Serradeil
-+	/common/abstract/JNode.txt
-+	/common/abstract/JTree.txt
+ +	/abstract/JNode.txt
+ +	/abstract/JTree.txt
 
 10.02.2007 René Serradeil
  ! house cleaning ;)

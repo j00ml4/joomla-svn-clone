@@ -3,7 +3,7 @@
 |{{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML]] |
 
 This file contains **deprecated** legacy code and is scheduled to be removed.
-Use [[references:joomla.framework:application:html|JHTML]] instead.
+Use [[references:joomla.framework:html:jhtml|JHTML]] instead.
 
 See [[references:joomla.legacy:1.5:moshtml|mosHTML]] in the [[references:joomla.legacy|Joomla.Legacy]] package.
 

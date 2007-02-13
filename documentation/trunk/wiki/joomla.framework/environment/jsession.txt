@@ -13,7 +13,7 @@ Provides access to session-state values as well as session-level settings and li
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-__construct|__construct]] |  |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JSession-__construct|__construct]] |  |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-clear|clear]] |  |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-close|close]] |  |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-destroy|destroy]] |  |

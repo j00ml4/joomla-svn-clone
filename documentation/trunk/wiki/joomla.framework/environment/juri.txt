@@ -7,7 +7,7 @@ The concept and implementation of this class is drawn heavily from the binary cl
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JURI-__construct|__construct]] | Class constructor. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getAnchor|getAnchor]] | Get the URI archor string everything after the '#'. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getHost|getHost]] | Get URI host returns the hostname/ip, or null if no hostname/ip was specified. |

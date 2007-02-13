@@ -6,7 +6,7 @@ The JRegistry class provides methods that assist in storing and retrieving name-
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-__construct|__construct]] | Constructs the object by creating and setting the default namespace. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JRegistry-__construct|__construct]] | Constructs the object by creating and setting the default namespace. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-getInstance|getInstance]] | Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-getValue|getValue]] | Gets a registry value. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadArray|loadArray]] | Loads an associative array of values into the registry. |
