@@ -1,0 +1,103 @@
+
+This is a helper plugin for the API Wiki @ dev.joomla.org
+
+The plugin has been tested with the default installation of OpenWiki 1.1.0 
+(aka JD-Wiki) on Joomla 1.0.12 and PHP 4.1.6
+
+Prerequisites:
+---------------------------------------
+The rendering routines expect the Wiki $format to be "xhtml". 
+Other formats have not been tested, and I have no idea whether "xhtml" is 
+the default 'Doku_Renderer' or not. If the renderer object is not 'xhtml'
+the plugin die()s with an error message:
+	The JAPI plugin requires the "xhtml" renderer!
+
+
+Purpose:
+---------------------------------------
+The plugin provides a new tag to create the reference headers of API pages at 
+http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,start/#api_references
+
+	{#JAPI params ... #}
+
+The following parameters are available and must be provided in the same order
+as denoted here. Later parameters can be left out and will be replaced by
+defaults where applicable.
+
+All parameters are separated by white-space, line-feeds are ignored.
+
+{#JAPI PackageName SubpackageName ClassName[::methodName] ReviewDate DocStatusCode#}
+
+- PackageName:
+	The @package the class/method belongs to
+
+	Example: Joomla.Framework
+
+- SubpackageName:
+	The @subpackage the class/method belongs to
+
+	Example: Environment
+
+- ClassName
+	The Class being documented
+
+	Example: JRequest
+OR
+- ClassName::methodName
+	The method of a Class being documented. The names MUST be separated with 
+	double colons :: aka "T_PAAMAYIM_NEKUDOTAYIM" :)
+	Parenthesis are not required and will be removed
+
+	Example: JRequest::getVar
+OR
+- ::functionName
+	A GLOBAL function not part of a class, i.e. the J! 1.0 legacy functions.
+
+	Example: ::mosLoadModules
+
+- ReviewDate (optional)
+	The date of the last document revision provided in ISO format: YYYY-MM-DD
+	If this parameter is ommitted, the string 'Never' will be used as a default.
+
+	Example: 2007-02-12
+
+- DocStatusCode (optional)
+	The document status code. Valid entries are:
+	- WIP   for  Work in progress
+	- IR    for  Internal review
+	- PR    for  Public review
+	If this parameter is ommitted/invalid, the string 'Work in progress' 
+	will be used as the default.
+
+	Example: WIP
+
+Knows issues + limitations
+---------------------------------------
+ 0.1.0 phpDoc URI generation not fully implemented.
+
+Installation:
+---------------------------------------
+Copy the files into the plugins/japi/ folder of the Wiki component
+	/components/com_openwiki/lib/plugins/japi
+or
+	/components/com_jd-wiki/lib/plugins/japi
+
+
+Please report all trouble or praise in this forum:
+	http://forum.joomla.org/index.php/board,61.0.html
+
+History:
+---------------------------------------
+ 0.1.0 internal release
+
+Have fun,
+
+CirTap
+
+References:
+---------------------------------------
+http://projects.j-prosolution.com/projects/os-projects/project-openwiki.html
+
+
+Copyright (c)2007 René Serradeil
+License   CC-SA-NC Creative Commons Share Alike Non Commercial
