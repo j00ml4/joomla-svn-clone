@@ -5,7 +5,7 @@
 User class.  Handles all application interaction with a user
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-__construct|__construct]] | Constructor activating the default information of the language |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JUser-__construct|__construct]] | Constructor activating the default information of the language |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-authorize|authorize]] | Method to check JUser object authorization against an access control  object and optionally an access extension object |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-defParam|defParam]] | Method to set a default parameter if it does not exist |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-get|get]] | Overridden get method to get properties from the user table |

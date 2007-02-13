@@ -5,7 +5,7 @@
 The JDocumentHTML class provides an easy interface to parse and display an HTML document. It extends the JDocument class. This class is instantiated when the JDocument::getInstance() method is called with 'html' as the type parameter.
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JDocumentHTML-__construct|__construct]] | Class constructor. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds <link> tags to the head of the document. |

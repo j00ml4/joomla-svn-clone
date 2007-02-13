@@ -7,7 +7,7 @@ The JParameter class is an extension of the JRegistry class that is used to rend
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-__construct|__construct]] | Constructs the object by loading the specified data and setup file (if given). |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JParameter-__construct|__construct]] | Constructs the object by loading the specified data and setup file (if given). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-addParameterDir|addParameterDir]] | Adds a directory where JParameter should search for element types. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-def|def]] | Sets a default value if not alreay assigned. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-get|get]] | Gets a value. |

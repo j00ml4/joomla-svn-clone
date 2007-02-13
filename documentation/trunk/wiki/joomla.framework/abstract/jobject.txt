@@ -1,12 +1,12 @@
 ====== JObject [Review] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework|Joomla-Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject]] | never | Work in progress |
 
 This is the Joomla! base Object class. It allows <nowiki>__construct</nowiki> and <nowiki>__destruct</nowiki> to be used in PHP4. It is the base class of most of the classes in the Joomla! API. This is an abstract class and defines an interface rather than functionality. As an example, see the [[references:joomla.framework:application:japplication|JApplication]] class which is a subclass of this class.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-get|get]] | Gets the value of an object's property. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |

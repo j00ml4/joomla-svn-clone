@@ -6,7 +6,7 @@ The JTableUser class is an implementation of the JTable interface which provides
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |

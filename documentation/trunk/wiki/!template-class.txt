@@ -6,8 +6,9 @@ Class description.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method|Method]] | Description |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method|Method]] | Description |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[__constructor|__constructor]] | Description |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method1|Method1]] | Description |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method2|Method2]] | Description |
 
 ----
 

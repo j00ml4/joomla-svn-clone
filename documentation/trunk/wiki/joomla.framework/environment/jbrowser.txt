@@ -6,7 +6,7 @@ Browser class, provides capability information about the current web client.\\ B
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getAgentString|getAgentString]] | Return the full browser agent string. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getBrowser|getBrowser]] | Retrieve the current browser. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getFeature|getFeature]] | Retrieve the current browser capability. |

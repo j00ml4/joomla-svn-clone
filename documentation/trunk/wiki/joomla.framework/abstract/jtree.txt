@@ -1,15 +1,15 @@
-====== JNode [WIP] ======
+====== JTree [WIP] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework|Joomla-Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Abstract]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JTree.html|JTree]] | never | Work in progress |
 
 Abstract Tree Node Class.
 
-This class is used by [[JTree]] to create a tree structure of objects similar to the JavaScript or XML DOM.
-The Joomla! menu modules are built on this foundation.
+This class creates and manages hierarchical structures (trees) similar to the HTML or XML DOM using the [[JNode]] class.
+The Joomla! menu modules are typical tree structures inherited from JTree.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JNode-__construct|__construct]] | Class constructor, overridden in descendant classes. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-addChild|addChild]] | Adds a new child node object to the current object. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-getChildren|getChildren]] | Returns all child nodes of the current object. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JNode-getParent|getParent]] | Returns the parent node of the current object. |

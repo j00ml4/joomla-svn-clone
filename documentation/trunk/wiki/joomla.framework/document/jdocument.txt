@@ -6,7 +6,7 @@ This is the Document class. It provides an easy interface to parse and display a
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-__construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JDocument-__construct|__construct]] | Class constructor. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addScript|addScript]] | Adds a linked script to the page. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page. |

@@ -10,7 +10,7 @@ In actual fact, $mainframe is an instance of either the JSite class or the JAdmi
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-__construct|__construct]] | Constructor for the JApplication class. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JApplication-__construct|__construct]] | Constructor for the JApplication class. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-addCustomHeadTag|addCustomHeadTag]] | Adds a custom HTML string to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:JDocumentHTML-addCustomTag|JDocumentHTML->addCustomTag]] should be used instead). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-addMetaTag|addMetaTag]] | Adds a meta tag to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:JDocument-setMetaData|JDocument->setMetaData]] should be used instead). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-appendMetaTag|appendMetaTag]] | Appends a value to an existing meta tag of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:JDocument-setMetaData|JDocument->setMetaData]] should be used instead). |
