@@ -125,8 +125,9 @@ class TestOfJFTP extends UnitTestCase
 
 	function testSetOptions()
 	{
+		/** @TODO: Should we also test non-existing values, e.g. a string for the timeout? */
 		$options1 = array('type'=>FTP_ASCII, 'timeout'=>10);
-		$options2 = array('type'=>FTP_BINARY, 'timeout'=>'abc');
+		$options2 = array('type'=>FTP_BINARY, 'timeout'=>0);
 
 		$ftp = new JFTP($options1);
 		$this->assertIdentical($ftp->_type, FTP_ASCII);
@@ -340,6 +341,7 @@ class TestOfJFTP extends UnitTestCase
 		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
 		$return1 = (array) $return1;
 		$test = true;
+		$file = '';
 		foreach($return1 as $file) {
 			if (strpos($file, '\\') !== false) {
 				$test = false;
@@ -394,13 +396,8 @@ class TestOfJFTP extends UnitTestCase
 
 		$return3 = $ftp->listDetails($conf['root'].'/blablabla');
 
-		$pass  = $this->assertErrorPattern('/JFTP::listDetails: (Transfer Failed|Bad response)/');
-		$pass &= $this->assertIdenticalFalse($return3);
-		if (!$pass) {
-			$this->sendMessage('The LIST command for a non-existing directory just '
-				.'returned without error. I\'ve seen this before, but nevertheless strange!'
-			);
-		}
+		$this->assertErrorPattern('/JFTP::list(Names|Details): (Transfer Failed|Bad response)/');
+		$this->assertIdenticalFalse($return3);
 		$ftp->quit();
 	}
 
@@ -611,23 +608,135 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->quit();
 	}
 
-/*
-	function testRead()
+	function testReadWrite()
 	{
-		$this->assertTrue( false );
+		if (($conf = $this->getCredentials()) === false) {
+			$this->fail('Credentials not set');
+			return;
+		}
+
+		$buffer = '';
+		for($i=0; $i<256; $i++) {
+			$buffer .= chr($i);
+		}
+		$buffer .= $buffer;
+
+		$ftp = new JFTP(array('timeout'=>2, 'type'=>FTP_BINARY));
+		$ftp->connect($conf['host'], $conf['port']);
+		$ftp->login($conf['user'], $conf['pass']);
+
+		$return1 = $ftp->listNames($conf['root']);
+		$return2 = $ftp->write($conf['root'].'/testfile', $buffer);
+		$return3 = $ftp->listNames($conf['root']);
+		$return4 = $ftp->read($conf['root'].'/testfile', $bufferRead);
+
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdenticalTrue($return4);
+		$this->assertIdenticalFalse(in_array('testfile', $return1));
+		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdentical(count($return1), count($return3)-1);
+		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+			'%s - Write: [Binary], Read: [Binary]'
+		);
+		$this->assertNoErrors();
+
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->chdir($conf['root']);
+
+		$return1 = $ftp->listNames();
+		$return2 = $ftp->write('testfile', $buffer);
+		$return3 = $ftp->listNames();
+		$return4 = $ftp->read('testfile', $bufferRead);
+
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdenticalTrue($return4);
+		$this->assertIdenticalFalse(in_array('testfile', $return1));
+		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdentical(count($return1), count($return3)-1);
+		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+			'%s - Write: [Binary], Read: [Binary]'
+		);
+		$this->assertNoErrors();
+
+		$return4 = $ftp->write($conf['root'].'/blablabla/testfile', $buffer);
+
+		$this->assertError('JFTP::write: Bad response');
+		$this->assertIdenticalFalse($return4);
+
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->quit();
 	}
 
+	function xtestReadWriteModes()
+	{
+		if (($conf = $this->getCredentials()) === false) {
+			$this->fail('Credentials not set');
+			return;
+		}
+
+		$buffer = '';
+		for($i=0; $i<256; $i++) {
+			$buffer .= chr($i);
+		}
+		$buffer = " \r \n \r\n ".$buffer.$buffer;
+
+		$ftp = new JFTP(array('timeout'=>2));
+		$ftp->connect($conf['host'], $conf['port']);
+		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->chdir($conf['root']);
+
+		$ftp->setOptions(array('type'=>FTP_BINARY));
+		$return1 = $ftp->write('testfile', $buffer);
+		$ftp->setOptions(array('type'=>FTP_ASCII));
+		$return2 = $ftp->read('testfile', $bufferRead);
+
+		$this->assertIdenticalTrue($return1);
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+			'%s - Write: [Binary], Read: [ASCII]'
+		);
+		$this->assertNoErrors();
+
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->setOptions(array('type'=>FTP_ASCII));
+		$return1 = $ftp->write('testfile', $buffer);
+		$ftp->setOptions(array('type'=>FTP_BINARY));
+		$return2 = $ftp->read('testfile', $bufferRead);
+
+		$expected = $buffer;
+//		$expected = str_replace("\n", "\r\n", $buffer);
+		$this->assertIdenticalTrue($return1);
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdentical(binaryToString($expected), binaryToString($bufferRead),
+			'%s - Write: [ASCII], Read: [Binary]'
+		);
+		$this->assertNoErrors();
+
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->setOptions(array('type'=>FTP_ASCII));
+		$return1 = $ftp->write('testfile', $buffer);
+		$ftp->setOptions(array('type'=>FTP_ASCII));
+		$return2 = $ftp->read('testfile', $bufferRead);
+
+		$expected = $buffer;
+//		$expected = str_replace("\n", "\r\n", $buffer);
+		$this->assertIdenticalTrue($return1);
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdentical(binaryToString($expected), binaryToString($bufferRead),
+			'%s - Write: [ASCII], Read: [ASCII]'
+		);
+
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->quit();
+	}
+
+/*
 	function testGet()
 	{
 		$this->assertTrue( false );
 	}
 
 	function testStore()
-	{
-		$this->assertTrue( false );
-	}
-
-	function testWrite()
 	{
 		$this->assertTrue( false );
 	}
@@ -795,5 +904,15 @@ function microtime_float()
 {
 	list($usec, $sec) = explode(" ", microtime());
 	return ((float)$usec + (float)$sec);
+}
+
+// Helper function
+function binaryToString($binary)
+{
+	$string = '';
+	for($i=0, $n=strlen($binary); $i<$n; $i++) {
+		$string .= ord($binary{$i}).'-';
+	}
+	return $string;
 }
 ?>
