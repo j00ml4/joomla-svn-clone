@@ -169,7 +169,7 @@ class TestOfJFTP extends UnitTestCase
 
 		$ftp = new JFTP(array('timeout'=>2));
 		$ftp->connect($conf['host'], $conf['port']);
-		$return = $ftp->login($conf['user'], $conf['pass'].'_will_not_work');
+		$return = $ftp->login($conf['user'], 'test'.$conf['pass'].'_will_not_work');
 
 		$this->assertErrorPattern('/JFTP::login: (Bad Password|Unable to login)/');
 		$this->assertIdenticalFalse($return);
@@ -223,8 +223,8 @@ class TestOfJFTP extends UnitTestCase
 		if (isset($conf['syst'])) {
 			$this->assertIdentical($return, $conf['syst']);
 		} else {
-			$this->sendMessage("SYST command returned [$return], please evaluate manually if this'
-				.' is correct! You may also set a value for 'ftp_syst' in your configuration."
+			$this->sendMessage("SYST command returned [$return], please evaluate manually if this"
+				.' is correct! You may also set a value for \'ftp_syst\' in your configuration.'
 			);
 		}
 		$this->assertIdenticalTrue($return=='UNIX' || $return=='WIN' || $return=='MAC');
@@ -298,8 +298,8 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertIdenticalTrue($return6);
 		$this->assertIdenticalTrue($return8);
 		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
-		$this->assertIdenticalFalse(strpos($return3, '\\'), "Dirname contains wrong'
-			.' DIRECTORY_SEPARATOR? [$return3]"
+		$this->assertIdenticalFalse(strpos($return3, '\\'), 'Dirname contains wrong'
+			." DIRECTORY_SEPARATOR? [$return3]"
 		);
 
 		if ($return1 !== $return9) {
@@ -667,7 +667,7 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->quit();
 	}
 
-	function xtestReadWriteModes()
+	function testReadWriteModes()
 	{
 		if (($conf = $this->getCredentials()) === false) {
 			$this->fail('Credentials not set');
@@ -684,15 +684,17 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 		$ftp->chdir($conf['root']);
+		$syst = $ftp->syst();
 
 		$ftp->setOptions(array('type'=>FTP_BINARY));
 		$return1 = $ftp->write('testfile', $buffer);
 		$ftp->setOptions(array('type'=>FTP_ASCII));
 		$return2 = $ftp->read('testfile', $bufferRead);
 
+		$expected = $this->getExpected($buffer, FTP_BINARY, FTP_ASCII, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+		$this->assertIdentical(binaryToString($expected), binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [ASCII]'
 		);
 		$this->assertNoErrors();
@@ -703,8 +705,7 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->setOptions(array('type'=>FTP_BINARY));
 		$return2 = $ftp->read('testfile', $bufferRead);
 
-		$expected = $buffer;
-//		$expected = str_replace("\n", "\r\n", $buffer);
+		$expected = $this->getExpected($buffer, FTP_ASCII, FTP_BINARY, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdentical(binaryToString($expected), binaryToString($bufferRead),
@@ -718,8 +719,7 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->setOptions(array('type'=>FTP_ASCII));
 		$return2 = $ftp->read('testfile', $bufferRead);
 
-		$expected = $buffer;
-//		$expected = str_replace("\n", "\r\n", $buffer);
+		$expected = $this->getExpected($buffer, FTP_ASCII, FTP_ASCII, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdentical(binaryToString($expected), binaryToString($bufferRead),
@@ -849,6 +849,64 @@ class TestOfJFTP extends UnitTestCase
 	{
 		$this->sendMessage('Invalidating Credentials due to previous error');
 		$this->_credentials = false;
+	}
+
+	function getExpected($buffer, $sendMode, $receiveMode, $systRemote)
+	{
+		$systLocal = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')? 'WIN' : 'UNIX';
+		$systLocal = (strtoupper(substr(PHP_OS, 0, 3)) === 'MAC')? 'MAC' : $systLocal;
+
+		// [Read] transformations in ASCII mode, client->server
+		$read = array(
+			'WIN' => array(
+				'WIN' => null,
+				'UNIX' => array("\n", "\r\n"),
+				'MAC' => null //???
+			),
+			'UNIX' => array(
+				'WIN' => array("\r", ''),
+				'UNIX' => array("\r", ''),
+				'MAC' => null //???
+			),
+			'MAC' => array(
+				'WIN' => null, //???
+				'UNIX' => null, //???
+				'MAC' => null //???
+			)
+		);
+
+		// [Write] transformations in ASCII mode, client->server
+		$write = array(
+			'WIN' => array(
+				'WIN' => array("\n", "\r\n"),
+				'UNIX' => array("\r", ''),
+				'MAC' => null //???
+			),
+			'UNIX' => array(
+				'WIN' => array("\n", "\r\n"),
+				'UNIX' => array("\r", ''),
+				'MAC' => null //???
+			),
+			'MAC' => array(
+				'WIN' => null, //???
+				'UNIX' => null, //???
+				'MAC' => null //???
+			)
+		);
+
+		// Apply transformations
+		if ($sendMode == FTP_ASCII) {
+			if (is_array($replace = $write[$systLocal][$systRemote])) {
+				$buffer = str_replace($replace[0], $replace[1], $buffer);
+			}
+		}
+		if ($receiveMode == FTP_ASCII) {
+			if (is_array($replace = $read[$systLocal][$systRemote])) {
+				$buffer = str_replace($replace[0], $replace[1], $buffer);
+			}
+		}
+
+		return $buffer;
 	}
 
 	function assertIdenticalFalse($value, $message='%s')
