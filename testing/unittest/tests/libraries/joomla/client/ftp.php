@@ -666,6 +666,11 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertError('JFTP::write: Bad response');
 		$this->assertIdenticalFalse($return4);
 
+		$return5 = $ftp->read($conf['root'].'/blablabla/testfile', $buffer);
+
+		$this->assertError('JFTP::read: Bad response');
+		$this->assertIdenticalFalse($return5);
+
 		$ftp->delete($conf['root'].'/testfile');
 		$ftp->quit();
 	}
@@ -733,17 +738,89 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->quit();
 	}
 
-/*
-	function testGet()
+	function testGetStore()
 	{
-		$this->assertTrue( false );
+		if (($conf = $this->getCredentials()) === false) {
+			$this->fail('Credentials not set');
+			return;
+		}
+
+		$buffer = '';
+		for($i=0; $i<256; $i++) {
+			$buffer .= chr($i);
+		}
+		$buffer .= $buffer;
+		$localpath = dirname(__FILE__).DS;
+		$file = fopen($localpath.'testfile', 'wb');
+		fwrite($file, $buffer);
+		fclose($file);
+
+		$ftp = new JFTP(array('timeout'=>5, 'type'=>FTP_BINARY));
+		$ftp->connect($conf['host'], $conf['port']);
+		$ftp->login($conf['user'], $conf['pass']);
+
+		$return1 = $ftp->listNames($conf['root']);
+		$return2 = $ftp->store($localpath.'testfile', $conf['root'].'/testfile');
+		$return3 = $ftp->listNames($conf['root']);
+		$return4 = $ftp->get($localpath.'testfile_returned', $conf['root'].'/testfile');
+
+		$bufferRead = file_get_contents($localpath.'testfile_returned');
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdenticalTrue($return4);
+		$this->assertIdenticalFalse(in_array('testfile', $return1));
+		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdentical(count($return1), count($return3)-1);
+		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+			'%s - Write: [Binary], Read: [Binary]'
+		);
+		$this->assertNoErrors();
+
+		unlink($localpath.'testfile_returned');
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->chdir($conf['root']);
+
+		$return1 = $ftp->listNames();
+		$return2 = $ftp->store($localpath.'testfile');
+		$return3 = $ftp->listNames();
+		$return4 = $ftp->get($localpath.'testfile_returned', 'testfile');
+
+		$bufferRead = file_get_contents($localpath.'testfile_returned');
+		$this->assertIdenticalTrue($return2);
+		$this->assertIdenticalTrue($return4);
+		$this->assertIdenticalFalse(in_array('testfile', $return1));
+		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdentical(count($return1), count($return3)-1);
+		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
+			'%s - Write: [Binary], Read: [Binary]'
+		);
+		$this->assertNoErrors();
+
+		$return4 = $ftp->store($localpath.'testfile', $conf['root'].'/blablabla/testfile');
+
+		$this->assertError('JFTP::store: Bad response');
+		$this->assertIdenticalFalse($return4);
+
+		$return5 = $ftp->get($localpath.'testfile_returned', $conf['root'].'/blablabla/testfile');
+
+		$this->assertError('JFTP::get: Bad response');
+		$this->assertIdenticalFalse($return5);
+		$pass = $this->assertIdenticalFalse(file_exists($localpath.'testfile_returned'), 'FTP '
+			.'(in native mode) deletes the local file when calling $ftp->get() on a non-existing '
+			.'file. Testing this behaviour...'
+		);
+		if (!$pass) {
+			unlink($localpath.'testfile_returned');
+		}
+
+		unlink($localpath.'testfile');
+		$ftp->delete($conf['root'].'/testfile');
+		$ftp->quit();
 	}
 
-	function testStore()
+	function disabledTestGetStoreModes()
 	{
 		$this->assertTrue( false );
 	}
-*/
 
 	function test_findMode()
 	{
