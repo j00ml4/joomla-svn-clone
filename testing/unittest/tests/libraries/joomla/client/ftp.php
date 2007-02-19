@@ -599,14 +599,7 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
-		/** @TODO: Interesting, this works on some servers. Maybe we should delete this test? */
-		$return4 = $ftp->mkdir($conf['root'].'/blablabla/testdir');
-
-		$this->assertError('JFTP::mkdir: Bad response');
-		$this->assertIdenticalFalse($return4);
-
-		@$ftp->delete($conf['root'].'/blablabla/testdir');
-		@$ftp->delete($conf['root'].'/blablabla');
+		// No failing test here, as some servers create directories recursively
 		$ftp->delete($conf['root'].'/testdir');
 		$ftp->quit();
 	}
@@ -804,14 +797,12 @@ class TestOfJFTP extends UnitTestCase
 
 		$this->assertError('JFTP::get: Bad response');
 		$this->assertIdenticalFalse($return5);
-		$pass = $this->assertIdenticalFalse(file_exists($localpath.'testfile_returned'), 'FTP '
-			.'(in native mode) deletes the local file when calling $ftp->get() on a non-existing '
-			.'file. Testing this behaviour...'
-		);
-		if (!$pass) {
-			unlink($localpath.'testfile_returned');
-		}
 
+		/*
+		 * In native mode, the destination file gets deleted if it does not exist on the server
+		 * It is accepted behaviour that the compatibility layer does not do so, therefore the @
+		 */
+		@unlink($localpath.'testfile_returned');
 		unlink($localpath.'testfile');
 		$ftp->delete($conf['root'].'/testfile');
 		$ftp->quit();
@@ -824,7 +815,7 @@ class TestOfJFTP extends UnitTestCase
 
 	function test_findMode()
 	{
-		$ftp = new JFTP();
+		$ftp = new JFTP(array('type'=>FTP_AUTOASCII));
 
 		$return1 = $ftp->_findMode('testfile.html');
 		$return2 = $ftp->_findMode('testfile.html.ext');
