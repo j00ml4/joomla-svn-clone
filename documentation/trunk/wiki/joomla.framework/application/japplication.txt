@@ -16,6 +16,7 @@ In actual fact, $mainframe is an instance of either the JSite class or the JAdmi
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-appendMetaTag|appendMetaTag]] | Appends a value to an existing meta tag of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:JDocument-setMetaData|JDocument->setMetaData]] should be used instead). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-appendPathWay|appendPathWay]] | Appends a value on to the end of the custom pathway array. This method is deprecated in Joomla! 1.5 ([[JPathway-addItem|JPathWay->addItem]] should be used instead). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-close|close]] | Exit the application. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-dispatch|dispatch]] | Dispatch the application. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-enqueueMessage|enqueueMessage]] | Adds a message to the system message queue. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-execute|execute]] | Executes the application. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-getBasePath|getBasePath]] | Returns the base path of the application. This method is deprecated in Joomla! 1.5 (Use the [[references:joomla.framework:environment:JURI-base|JURI::base()]] method instead). |
@@ -40,6 +41,8 @@ In actual fact, $mainframe is an instance of either the JSite class or the JAdmi
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-logout|logout]] | Logout authentication function. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-prependMetaTag|prependMetaTag]] | Prepends text to an existing meta tag of the current page being processed. This method is deprecated in Joomla! 1.5 (use [[references:joomla.framework:document:JDocument-setMetaData|JDocument->setMetadata]] instead). |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-redirect|redirect]] | Enqueues a system message and redirects the browser to an alternative URL. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-render|render]] | Render the application. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-route|route]] | Route the application. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-registerEvent|registerEvent]] | Registers a handler to a particular event group. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-setConfiguration|setConfiguration]] | Set a configuration value to the specified configuration file. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplication-setSession|setSession]] | Sets the user session, performing the necessary updates.  |

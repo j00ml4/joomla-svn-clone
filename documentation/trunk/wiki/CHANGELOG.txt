@@ -14,19 +14,25 @@ Legend:
 - -> Removed
 > -> Moved
 ! -> Note
+---------
+
+20.02.2007 René Serradeil
+ >	/abstract to /base (again)
+ ^	links and occurances of Abstract to Base
+
+18.02.2007 René Serradeil
+ +	JApplication.txt: dispatch, render, route methods, added related files.
 
 13.02.2007 René Serradeil
+ #	JNode.txt, JTree.txt
  +	mosHTML to Joomla.Jegacy/1.5.txt
  >	joomla.framework/utilities/utilities-*.txt to
 	joomla.legacy/1.5/moshtml-*.txt
- ^ jhtml.txt: updated method list + descriptions (was based on mosHTML)
  # link to JHTML in (both) moshtml.txt
  # broken images introduced in "house cleaning":
  	jhtml.txt, jpagination.txt
- # broken links to Joomla.Framework in /abstract/*
- # JNode.txt, JTree.txt
- ^ JModuleHelper, missing page header
- ^ Constructor.png to __constructor methods
+	
+ ^ jhtml.txt: updated method list + descriptions (was based on mosHTML)
 
 12.02.2007 René Serradeil
  +	/abstract/JNode.txt
