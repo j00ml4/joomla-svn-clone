@@ -1,0 +1,13 @@
+
+Dispatch the application.
+
+Dispatching is the process of pulling the option from the [[references:joomla.framework:Environment:JRequest|request object]] and mapping them to a component. If the component do not exist, it handles determining a default component to dispatch.
+
+The default implementation of this method does nothing.
+Subclasses should reimplement this method if they provide dispatching capabilities.
+
+===== Related Classes =====
+
+  * [[JRoute]]
+  * [[JRouter]]
+  * [[JEventDispatcher]]

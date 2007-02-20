@@ -5,12 +5,6 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
 ===== Packages and Classes =====
   * [[references:joomla.framework:JFactory|JFactory]]
   * [[references:joomla.framework:JVersion|JVersion]]
-==== Abstract ====
-  * [[references:joomla.framework:Abstract:JNode|JNode]]
-  * [[references:joomla.framework:Abstract:JObject|JObject]]
-  * [[references:joomla.framework:Abstract:JObservable|JObservable]]
-  * [[references:joomla.framework:Abstract:JObserver|JObserver]]
-  * [[references:joomla.framework:Abstract:JTree|JTree]]
 ==== Application ====
   * [[references:joomla.framework:Application:JApplication|JApplication]]
   * [[references:joomla.framework:Application:JApplicationHelper|JApplicationHelper]]
@@ -26,6 +20,12 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:Application:JSearch|JSearch]]
   * [[references:joomla.framework:Application:JSearchHelper|JSearchHelper]]
   * [[references:joomla.framework:Application:JView|JView]]
+==== Base ====
+  * [[references:joomla.framework:Base:JNode|JNode]]
+  * [[references:joomla.framework:Base:JObject|JObject]]
+  * [[references:joomla.framework:Base:JObservable|JObservable]]
+  * [[references:joomla.framework:Base:JObserver|JObserver]]
+  * [[references:joomla.framework:Base:JTree|JTree]]
 ==== Cache ====
   * [[references:joomla.framework:Cache:JCache|JCache]]
   * [[references:joomla.framework:Cache:JCacheFunction|JCacheFunction]]

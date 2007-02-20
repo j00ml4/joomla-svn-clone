@@ -1,0 +1,29 @@
+
+
+Route the application.
+
+Routing is the process of examining the request environment to determine which component should receive the request. This component optional parameters are then set in the [[references:joomla.framework:Environment:JRequest|request object]] to be processed when the application is being [[JApplication-dispatch|dispatched]].
+
+The default implementation of this method instatiates an instance of [[references:joomla.framework:Environment:JURI|JURI]] and passes it to the JRouter. 
+
+See [[JApplication-dispatch:dispatch()]].
+
+<code php|Implementation>
+class MyApp extends JApplication
+{
+  function route()
+    $router =& $this->getRouter();
+    $router->parse('/example/uri/display/foo:bar');
+  }
+}
+</code>
+
+<code php|Application>
+$myApp =& new MyApp;
+$myApp->route();
+</code>
+
+===== Related Classes =====
+
+  * [[JRoute]]
+  * [[JRouter]]

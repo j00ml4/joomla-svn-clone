@@ -1,6 +1,6 @@
 ====== get ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework#Abstract|Abstract]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObject.html|JObject->get]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Base/JObject.html|JObject->get]] | never | Work in progress |
 
 This function gets the value of an object's property.
 

@@ -1,12 +1,14 @@
 ====== update ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla-Framework#Abstract|Abstract]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObserver|JObserver]] | [[http://api.joomla.org/Joomla-Framework/Abstract/JObserver.html|JObserver->update]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JObserver]] | [[http://api.joomla.org/Joomla-Framework/Base/JObserver.html|JObserver->update]] | never | Work in progress |
 
-Method to update the state of observable objects. All events are handled by the JEventDispatcher class which is instantiated by the [[references:joomla.framework:application:japplication|JApplication]] class. When an event is triggered (using the [[references:joomla.framework:application:japplication#triggerEvent|JApplication::triggerEvent]] method), all registered observers are checked to see if they have a method to handle the event. If a method exists in the observer class, then the update function is called with an array passed as its parameter. The update function should return the results of the function call.
-This method must be implemented by the child class.
+Method to update the state of observable objects. 
+The default implementation of this method does nothing, but will raise an [[references:joomla.framework:Utilites|JError|error]] if called directly.
+
+Event distribution is handled by the [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]] class which is instantiated by [[references:joomla.framework:application:japplication|JApplication]]. When an event is [[references:joomla.framework:application:japplication#triggerEvent|triggered]], all registered Observers are checked to see if they provided a valid ***callback method*** to handle the event. If the callback exists in the Observer class, then the update function is called with an array passed as its parameter. The update function should return the results of the function call.
 
 ===== Syntax =====
 mixed update ()
 
 ===== Examples =====
-The update method is called by JEventDispatcher class. For an example of a child class which implements this method, see the [[references:joomla.framework:application:jplugin|JPlugin]] class.
+The update method is called by the [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]] class. For an example of a child class which implements this method, see the [[references:joomla.framework:application:jplugin|JPlugin]] class.

@@ -1,0 +1,8 @@
+
+Render the application.
+
+Rendering is the process of rendering the application into the [[references:joomla.framework:Environment:JResponse|JResponse]] buffer.
+
+The default implementation of this method does nothing.
+Subclasses should reimplement this method according to the current user interface, 
+e.g. web page (HTML markup), feeds (RSS, Atom), or CLI (text output).
