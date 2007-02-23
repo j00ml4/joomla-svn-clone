@@ -1,0 +1,142 @@
+====== JApi Plugin ======
+The JApi Plugin was designed to aid in writing the API documentation for the Joomla! 1.5 Framework and to create links to the associated resources such as the phpDocumentor API reference available at http://api.joomla.org.
+
+The plugin provides two new tags for use with DokuWiki aka JD-Wiki:
+  * ''%%{#JAPI#}%%'' -- to create the API tables at the top of each page
+  * ''%%{#JREF#}%%'' -- to create links between reference pages. 
+
+So instead of writing something like this:
+  ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+  | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser]] | Never | Work in progress |
+
+You write:
+  {#JAPI Joomla.Framework Environment JBrowser#}
+
+Finally, wiki syntax has become easy again ;)
+
+
+===== {#JAPI#} =====
+This tag creates an //API Reference Table//.
+These tables appear at the top of each document and contain an arbitrary amount of columns based on the document subject with links pinting to related API documents. For example, if the subject is a class' member method, there will be links to the method's parent class, the class package, and the URI of that method's phpDocumentor API reference. 
+The table also includes two "informal" fields: //Revision Date// and //Document Status//, which are modified by the author if the document is being revised. Their values default to ''Never'' and ''Work in progress'' respectively, which is usually true for new documents.
+
+==== Syntax ====
+The fully fledged syntax of the %%{#JAPI#}%% tag looks like this:
+  {#JAPI Package.Name Subpackage ClassName::methodName 2006-31-12 PR #}
+
+You're not required to provide every single parameter, but they **must** appear in the specified order as denoted in the next section. 
+The %%{#JAPI#}%% tag cannot be empty, e.g. ''%%{#JAPI#}%%'' would do plain nothing.
+
+==== Parameters ====
+The following parameters are supported. 
+  {#JAPI PackageName SubpackageName Subject ReviewDate DocStatusCode#}
+All parameters must be separated by a white-space character, that is a space, tab, or line-feed.
+
+You may however skip a column, if f.i. the document's subject is a global function that does not belong to a subpackage. Simply add a hyphen (''-'') instead of the Subpackage name to drop that column from output.
+
+%%{#JAPI#}%% will use the ''reference'' namespace to create internal links and will also default to ''Joomla.Framework'' as the package name if none is provided: ''%%[[references:joomla.framework]]%%''. 
+These defaults, among other settings, are available as private properties to the plugin renderer. The next version of the plugin may provide an external config file to edit these defaults.
+
+=== PackageName ===
+The @package the subject belongs to
+  Example: Joomla.Framework
+
+=== SubpackageName ===
+The @subpackage the subject belongs to
+  Example: Environment
+
+=== Subject ===
+The class, method, or function that's being documented. 
+It comes in three flavours:
+  * ''ClassName'' -- The Class being documented
+  * ''ClassName::methodName'' -- The method of a Class being documented. The names MUST be separated with double colons ''::'' aka "T_PAAMAYIM_NEKUDOTAYIM". Parenthesis are not required and will be removed.
+  * ''::functionName'' -- A GLOBAL function that is not part of a class, i.e. the Joomla! 1.0 legacy functions.
+  Example: JRequest
+  Example: JRequest::getVar
+  Example: ::mosLoadModules
+
+Since there's no safe way for the plugin to safely //predict// whether a single string like "mosLoadModules" is the name of a class or a function, you **must** provide a "hint" by preceeding the name of a global function with two colons.
+
+=== ReviewDate (optional) ===
+The date of the most recent document revision provided in ISO format: ''YYYY-MM-DD''.
+If this parameter is ommitted/skipped, the word "''Never''" will be used.
+If the date is invalid, the word "''Unknown''" will be used.
+	Example: 2007-07-27
+
+=== DocStatusCode (optional) ===
+The document status //code//. If this parameter is ommitted, skipped, or invalid, it defaults to ''WIP''.
+Valid codes are:
+  * ''WIP'' -- "Work in progress" (default)
+  * ''IR''  -- "Internal review"
+  * ''PR''  -- "Public review"
+  * ''FIN'' -- "Final"
+	Example: IR
+
+
+==== White space ====
+The amount of whitespace //between// parameters is insignificant. If this one's for you, it's fine with for the plugin
+  {#JAPI
+  	Joomla.Framework
+  	Environment
+  	JBrowser::match    #}
+and will produce:
+{#JAPI
+	Joomla.Framework
+	Environment
+	JBrowser::match    #}
+
+===== Examples =====
+In the following examples an extra space was added after the last parameter for easier reading.
+
+**Drop columns**\\
+  {#JAPI Joomla.Framework - ::jimport - IR #}
+{#JAPI Joomla.Framework - ::jimport - IR #}
+In this example the first hyphen will remove the //Subpackage// column, whereas the second hyphen, aimed to remove the //Revision date// as well, will actually force the default value ''Never'' to be used. 
+
+  {#JAPI Joomla.Legacy - ::mosMambotHandler - FIN #}
+{#JAPI Joomla.Legacy - ::mosMambotHandler - FIN #}
+An attempt to "drop" the Subpackage column for Legacy code will not work and always default to ''1.5''.
+
+Both examples also depict how you would link to a **global function**, such as the many from the ''Joomla.Legacy'' package. Simply put, don't provide a //classname//.
+The shortcuts ''IR'' and ''PR'' are expanded to the document status //Internal review// and //Final// respectively.
+
+**Plain simple**\\
+Any of the following will output the same:
+  {#JAPI Joomla.Framework #}
+  {#JAPI - #}
+  {#JAPI - - - - - #}
+{#JAPI Joomla.Framework #}
+The last example was added in case you wanted to know ... <g>
+
+**Setting a Revision Date**\\
+You may skip a few columns in order to set the date.
+  {#JAPI Joomla.Framework - - 2007-07-27 #}
+{#JAPI Joomla.Framework 2007-07-27 #}
+You're right; not very convenient. How 'bout this:
+  {#JAPI Joomla.Framework 2007-07-27 #}
+{#JAPI Joomla.Framework 2007-07-27 #}
+In fact you may provide the //revision date// right after your last parameter but it must only be followed by the document status. This one will not work as intended:
+
+  {#JAPI Joomla.Framework 2007-07-27 Base JObject #}
+{#JAPI Joomla.Framework 2007-07-27 Base JObject #}
+
+  {#JAPI Joomla.Framework Base #}
+{#JAPI Joomla.Framework Base #}
+
+  {#JAPI Joomla.Framework Application JEventDispatcher::trigger 2007-07-27 RP #}
+{#JAPI Joomla.Framework Application JEventDispatcher::trigger 2007-07-27 PR #}
+
+
+=== Document Status ===
+This column currently accepts four values, or abbreviations, to be exact:
+  * ''WIP'' will expand to "Work in progress"
+  * ''IR''  will expand to "Internal review"
+  * ''PR''  will expand to "Public review"
+  * ''FIN'' will expand to "Final"
+Any other string will default to ''WIP'', thus you cannot "invent" a new document status w/o telling the plugin it exists.
+
+
+----
+
+~~DISCUSSION~~
+

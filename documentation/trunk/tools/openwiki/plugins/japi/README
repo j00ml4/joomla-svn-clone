@@ -10,23 +10,25 @@ The rendering routines expect the Wiki $format to be "xhtml".
 Other formats have not been tested, and I have no idea whether "xhtml" is 
 the default 'Doku_Renderer' or not. If the renderer object is not 'xhtml'
 the plugin die()s with an error message:
-	The JAPI plugin requires the "xhtml" renderer!
 
+	The JAPI plugin requires the "xhtml" renderer!
 
 Purpose:
 ---------------------------------------
-The plugin provides a new tag to create the reference headers of API pages at 
+The plugin provides a new tag to create the documentation header for the 
+API reference pages available at 
 http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,start/#api_references
 
 	{#JAPI params ... #}
 
 The following parameters are available and must be provided in the same order
-as denoted here. Later parameters can be left out and will be replaced by
-defaults where applicable.
+as denoted here. Trailing parameters can be left out and will be replaced by
+defaults where applicable. The tag cannot be empty, ie {#JAPI#} would do
+nothing.
 
-All parameters are separated by white-space, line-feeds are ignored.
+All parameters must be separated by a white-space character.
 
-{#JAPI PackageName SubpackageName ClassName[::methodName] ReviewDate DocStatusCode#}
+{#JAPI PackageName SubpackageName Subject ReviewDate DocStatusCode#}
 
 - PackageName:
 	The @package the class/method belongs to
@@ -38,22 +40,25 @@ All parameters are separated by white-space, line-feeds are ignored.
 
 	Example: Environment
 
-- ClassName
-	The Class being documented
-
-	Example: JRequest
+- Subject:
+	The class &| method being documented. 
+	It takes three forms:
+	- ClassName
+		The Class being documented
+		Example: JRequest
 OR
-- ClassName::methodName
-	The method of a Class being documented. The names MUST be separated with 
-	double colons :: aka "T_PAAMAYIM_NEKUDOTAYIM" :)
-	Parenthesis are not required and will be removed
+	- ClassName::methodName
+		The method of a Class being documented. The names MUST be 
+		separated with double colons :: aka "T_PAAMAYIM_NEKUDOTAYIM" :)
+		Parenthesis are not required and will be removed
 
-	Example: JRequest::getVar
+		Example: JRequest::getVar
 OR
-- ::functionName
-	A GLOBAL function not part of a class, i.e. the J! 1.0 legacy functions.
+	- ::functionName
+		A GLOBAL function that is not part of a class, i.e. 
+		the J! 1.0 legacy functions.
 
-	Example: ::mosLoadModules
+		Example: ::mosLoadModules
 
 - ReviewDate (optional)
 	The date of the last document revision provided in ISO format: YYYY-MM-DD
@@ -71,13 +76,22 @@ OR
 
 	Example: WIP
 
+
 Knows issues + limitations
 ---------------------------------------
- 0.1.0 phpDoc URI generation not fully implemented.
+
+phpDocumentor URLs (api.joomla.org) are not fully implemented.
+The target URI is derived from the available parameters. The plugin
+may fail under certain conditions such as the location of a global 
+function and bogous Package/Subpackage names. Whilst phpDoc uses
+the physical filepath of a function's source file, the @package
+and @subpackage names may speak a different language and JAPI may
+take the wrong track.
+
 
 Installation:
 ---------------------------------------
-Copy the files into the plugins/japi/ folder of the Wiki component
+Copy the files into the plugins/japi/ folder of the Wiki component, e.g.
 	/components/com_openwiki/lib/plugins/japi
 or
 	/components/com_jd-wiki/lib/plugins/japi
@@ -85,6 +99,7 @@ or
 
 Please report all trouble or praise in this forum:
 	http://forum.joomla.org/index.php/board,61.0.html
+
 
 History:
 ---------------------------------------
