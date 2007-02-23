@@ -2,38 +2,13 @@
 /**
  * Joomla! API Reference Plugin.
  *
- * Allows to simplify the creation of the API reference header for DokuWiki
- * at http://dev.joomla.org/
- * Includes formatting of links to
- * - Package index
- * - Subpackage index
- * - Class index
- * - api.joomla.org (phpDocumentor URL)
- * and information on
- * - review status (using keywords)
- * - doc status (using keywords)
+ * Allows to simplify the addition of the API reference header
+ * for DokuWiki at http://dev.joomla.org/
  *
- * @synopsis {#JAPI PackageName SubpackageName ClassName::MethodName ReviewDate DocStatus#}
- *
- * To skip a "column" insert a hyphen (minus sign), i.e. for a class
- * that does not belong to a particular subpackage:
- *   {#JAPI PackageName - ClassName#}
- *
- * ReviewDate and DocStatus are optional. Defaults are:
- * 	- ReviewDate: never
- *  - DocStatus : WIP
- * If these columns are provided, their values must contain:
- * - ReviewDate:
- * 		an ISO date (YYYY-MM-DD), i.e. 2006-12-31
- *		Date formatting is handled by Joomla!
- * - DocStatus is any of:
- * 		WIP = Work in progress
- * 		IP  = Internal Review
- * 		PR  = Public Review
- * other values are ignored and the column will not be rendered.
+ * See README in this folder for syntax and requirements.
  *
  * @license CC-SA-NC Creative Commons Share Alike Non Commercial
- * @author  Rene Serradeil <serradeil@webmechanic.biz>
+ * @author  CirTap <cirtap-joomla@webmechanic.biz>
  * @version 0.1.0 $Id$
  *
  * @todo use external config file for helper.php (see comments there)
@@ -50,6 +25,9 @@ define('JAPI_PLUGIN', dirname(__FILE__));
  * need to inherit from this class
  */
 class syntax_plugin_japi extends DokuWiki_Syntax_Plugin {
+
+// either 'JAPI' or 'JREF' (not imlemented)
+var $japi_tag = 'JAPI';
 
     /**
      * General Info
@@ -117,8 +95,14 @@ class syntax_plugin_japi extends DokuWiki_Syntax_Plugin {
 				$match = preg_split('/[\s]+/', trim($match), -1, PREG_SPLIT_NO_EMPTY);
 
 				// drop '#JAPI' tag
-				array_shift($match);
-				$result = array($match, $state, $pos);
+				$this->japi_tag = array_shift($match);
+
+				// unlikely, but ...
+				if (count($match) > 0) {
+					$result = array($match, $state, $pos);
+				} else {
+					$result = false;
+				}
 			break;
 
 			default:
@@ -159,7 +143,7 @@ class syntax_plugin_japi extends DokuWiki_Syntax_Plugin {
 
 		require_once(dirname(__FILE__) . '/helper.php');
 
-    	$Japi =& new JApiHelper($data, $renderer);
+    	$Japi =& new JApiHelper($data, $renderer, $this->japi_tag);
     	$Japi->render();
 
     	return true;

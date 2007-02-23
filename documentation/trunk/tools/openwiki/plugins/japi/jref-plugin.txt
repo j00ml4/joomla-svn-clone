@@ -1,0 +1,26 @@
+===== {#JREF#} (planned) =====
+This second tag is available to create internal links to another wiki page of the Joomla Framework **Ref**erence, and is helpful in writing the index (overview) page of a class with all its members.
+
+The tag takes pretty much the very same arguments as JAPI (incl. their order) with the exception of the revision date and document status. Unlike %%{#JAPI#}%%, JREF only generates links that point to the wiki, including the icon for the "target", e.g. Package, Class, Method, and Constant.
+
+Its defaults are however slightly different than those of JAPI if you ommit arguments. Since its focussed to link between members of the same //subpackage//, the package name can usually be ommited.
+
+
+==== Examples ====
+Passing one parameter:
+  {#JREF JWhatever #}
+{#JREF JWhatever #}
+A class name located in the same (subpackage) folder: ''%%[[jwhatever.txt]]%%''
+
+  {#JREF JWhatever::fooBar #}
+{#JREF JWhatever::fooBar #}
+A class member (method) located in the same (subpackage) folder: ''%%[[jwhatever-foobar.txt]]%%''
+
+  {#JREF Joomla.Whatever #}
+{#JREF Joomla.Whatever #}
+A //package//: %%[[references:joomla.whatever]]%%
+
+Passing two parameters:
+  {#JREF Joomla.Whatever JWhatever::barBaz #}
+{#JREF Joomla.Whatever JWhatever::barBaz #}
+A class method located in some other package: ''%%[[references:joomla.whatever:jwhatever-barbaz.txt]]%%''
