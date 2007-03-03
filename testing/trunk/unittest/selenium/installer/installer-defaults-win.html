@@ -1,0 +1,137 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Installer with all defaults (Windows)</title>
+<script src="../joomla-selenium.js"></script>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">installer-defaults</td></tr>
+</thead>
+
+<tbody>
+<tr>
+	<td>open</td>
+	<td>/installation/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vars[lang]</td>
+	<td>label=en-GB - English (United Kingdom)</td>
+</tr>
+
+<tr title="Next button: language select, install check, licence">
+	<td>clickAndWait</td>
+	<td>xpath=//div[@class="next"]/a</td>
+	<td></td>
+</tr>
+<tr title="Next button">
+	<td>clickAndWait</td>
+	<td>xpath=//div[@class="next"]/a</td>
+	<td></td>
+</tr>
+<tr title="Next button">
+	<td>clickAndWait</td>
+	<td>xpath=//div[@class="next"]/a</td>
+	<td></td>
+</tr>
+
+<tr title="Step 4: database">
+	<td>type</td>
+	<td>vars_dbhostname</td>
+	<td>localhost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbusername</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbpassword</td>
+	<td>kachina</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>findbutton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbname</td>
+	<td>joonit</td>
+</tr>
+<tr title="Next button">
+	<td>click</td>
+	<td>xpath=//div[@class="next"]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForConfirmation</td>
+	<td>No collation was selected. To continue with default press OK. Press Cancel to return.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+
+<tr title="Step 6: Configuration">
+	<td>type</td>
+	<td>siteName</td>
+	<td>Joomla! v1.5 UnitTest Platform</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>adminEmail</td>
+	<td>webmaster@localhost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>adminPassword</td>
+	<td>secret</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmAdminPassword</td>
+	<td>secret</td>
+</tr>
+
+<tr title="install default data">
+	<td>click</td>
+	<td>instDefault</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>instDefault</td>
+	<td title="L10N ISSUE">Sample data installed successfully</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=//div[@class="next"]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+
+<tr title="Goto Site">
+	<td>clickAndWait</td>
+	<td title="L10N ISSUE">link=Site</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Main Menu</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

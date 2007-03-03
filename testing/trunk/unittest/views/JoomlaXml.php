@@ -1,75 +1,66 @@
 <?php
-require_once( 'JoomlaPhp.php' );
+/**
+ * Joomla! v1.5 UnitTest Platform
+ *
+ * @version	$Id$
+ * @package 	Joomla
+ * @subpackage 	UnitTest
+ */
+
+require_once( JUNITTEST_VIEWS . '/JoomlaPhp.php' );
 
 class JoomlaXml extends JoomlaPhp
 {
+
+	function JoomlaXml($character_set = 'UTF-8') {
+		parent::__construct($character_set);
+	}
+
     function paintHeader( $test_name )
     {
-        header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-        header( "Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
-        header( "Cache-Control: no-store, no-cache, must-revalidate" );
-        header( "Cache-Control: post-check=0, pre-check=0", false );
-        header( "Pragma: no-cache" );
-        header( "Content-type: application/xhtml+xml" );
-        
-        flush();
-        
-        $this->joomlaHeader( $test_name );
+	    parent::paintHeader( $test_name );
+        echo '<?xml version="1.0" encoding="UTF-8"?>', PHP_EOL;
+        echo "<unittests>", PHP_EOL;
     }
-    
+
+    function paintFooter( $test_name )
+    {
+	    parent::paintFooter( $test_name );
+        echo "</unittests>", PHP_EOL;
+        while (@ob_end_flush());
+    }
+
     function joomlaOutput()
     {
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        echo "<unittests>";
-        echo "<testcase>".$this->_joomlaTests['unittests']['testcase']."</testcase>";
-        
-        foreach( $this->_joomlaTests['unittests']['pass'] as $class => $value )
-        {
-            foreach( $value as $method => $data )
-            {
-                echo "<pass>";
-                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
-                echo "</pass>";
-            }
+        echo "<testcase>", $this->_joomlaTests['unittests']['testcase'], "</testcase>", PHP_EOL;
+
+        foreach ( $this->status as $state) {
+	        foreach( $this->_joomlaTests['unittests'][$state] as $class => $value )
+	        {
+	            foreach( $value as $method => $data )
+	            {
+	                echo "<{$state}>",
+	                $this->printEntry( $class, $method, $data['filepath'], $data['message'] ),
+	                     "</{$state}>", PHP_EOL;
+	            }
+	        }
         }
-        
-        foreach( $this->_joomlaTests['unittests']['fail'] as $class => $value )
-        {
-            foreach( $value as $method => $data )
-            {
-                echo "<fail>";
-                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
-                echo "</fail>";
-            }
+
+        echo "<result>". PHP_EOL;
+        echo "<total>", $this->_joomlaTests['unittests']['result']['total'], "</total>", PHP_EOL;
+        echo "<completed>", $this->_joomlaTests['unittests']['result']['completed'], "</completed>", PHP_EOL;
+        foreach ( $this->status as $state) {
+	        echo "<{$state}>", $this->_joomlaTests['unittests']['result'][$state], "</{$state}>", PHP_EOL;
         }
-        
-        foreach( $this->_joomlaTests['unittests']['exception'] as $class => $value )
-        {
-            foreach( $value as $method => $data )
-            {
-                echo "<exceptions>";
-                $this->printEntry( $class, $method, $data['filepath'], $data['message'] );
-                echo "</exceptions>";
-            }
-        }
-        
-        echo "<result>";
-        echo "<total>".$this->_joomlaTests['unittests']['result']['total']."</total>";
-        echo "<completed>".$this->_joomlaTests['unittests']['result']['completed']."</completed>";
-        echo "<pass>".$this->_joomlaTests['unittests']['result']['pass']."</pass>";
-        echo "<fail>".$this->_joomlaTests['unittests']['result']['fail']."</fail>";
-        echo "<exceptions>".$this->_joomlaTests['unittests']['result']['exceptions']."</exceptions>";
-        echo "</result>";
-        
-        echo "</unittests>";
+        echo "</result>", PHP_EOL;
     }
-    
+
     function printEntry( $class, $method, $filepath, $message )
     {
-        echo "<class>".$class."</class>";
-        echo "<method>".$method."</method>";
-        echo "<filepath>".$filepath."</filepath>";
-        echo "<message>".htmlentities( $message, ENT_COMPAT, 'UTF-8' )."</message>";
+        echo "<class>", $class, "</class>", PHP_EOL;
+        echo "<method>", $method, "</method>", PHP_EOL;
+        echo "<filepath>", $filepath, "</filepath>", PHP_EOL;
+        echo "<message>", htmlentities( $message, ENT_COMPAT, 'UTF-8' ), "</message>", PHP_EOL;
     }
+
 }
-?>

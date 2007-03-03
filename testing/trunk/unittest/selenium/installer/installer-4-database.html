@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Installer Step 4: Database</title>
+<script src="../joomla-selenium.js"></script>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Installer Step 4: Database</td></tr>
+</thead>
+
+<tbody>
+<tr>
+	<td>storeText</td>
+	<td>dbusernamemsg</td>
+	<td>label_dbusername</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>xpath=//label[@for="vars_dbpassword"]</td>
+	<td>label_dbpassword</td>
+</tr>
+
+<tr>
+	<td>storeEval</td>
+	<td>window.prompt("${label_dbusername}", "root")</td>
+	<td>txt_dbusername</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>window.prompt("${label_dbpassword}", "secret")</td>
+	<td>txt_dbpassword</td>
+</tr>
+
+<tr>
+	<td>select</td>
+	<td>vars_dbtype</td>
+	<td>label=mysql</td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>vars_dbhostname</td>
+	<td>localhost</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbusername</td>
+	<td>${txt_dbusername}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbpassword</td>
+	<td>${txt_dbpassword}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbname</td>
+	<td>joonit</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=//h3[@class="title-smenu moofx-toggler"]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>vars_dbolddel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>vars_dbprefix</td>
+	<td>jos_</td>
+</tr>
+
+<tr title="last in chain, if the collations are already set, this action fails">
+	<td>click</td>
+	<td>findbutton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>vars_dbcollation</td>
+	<td>label=utf8_general_ci</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
