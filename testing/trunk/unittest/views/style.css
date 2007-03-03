@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 
+html {
+    font: normal small 'trebuchet ms',verdana,arial,helvetica,sans-serif;
+}
+
 body {
-    font: normal small arial;
-    font-size: 1.0em;
+    font-size: 101.1%;
     color: #596F80;
     padding: 1.0em;
 }
@@ -12,6 +15,7 @@ h1.header {
 	background-repeat: no-repeat;
 	padding-left: 130px;
 	height: 80px;
+	cursor: pointer;
 }
 
 .testcase, .pass, .fail, .exception, .message {
@@ -22,9 +26,8 @@ h1.header {
 .testcasefolder{
     border-bottom: 3px solid #aaa;
     background: #eee;
-    font-size: 1.3em;
+    font: 1.3em arial,helvetica,sans-serif;
     padding: 0.2em;
-    margin-top: 0.5em;
     font-weight: bold;
 }
 
