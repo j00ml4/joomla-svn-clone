@@ -1,0 +1,61 @@
+====== addViewPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#addViewPath|JController->addViewPath]] | never | Work in progress |
+
+Adds to the stack of controller view paths in LIFO order.
+
+This method will invoke the protected JController::_addPath() method to add to the list of directories which are searched for views.
+
+===== Syntax =====
+void addViewPath	( **$path** )
+
+| **$path** | mixed | is either a string containing the directory to add, or an array of strings containing a list of directories to add to the view search path. |
+
+
+===== Examples =====
+
+<code php|Example>
+jimport( 'joomla.application.component.controller' );
+
+$controller = new JController();
+print_r( $controller->_path );
+$controller->addViewPath( JPATH_COMPONENT .DS. 'otherviews' );
+print_r( $controller->_path );
+</code>
+might produce (note that the _path property is private and should not be used by third party applications. It is used here only for demonstration purposes)
+<code php|Result>
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/components/com_prodigo/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/components/com_prodigo/views/
+        )
+
+)
+
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/components/com_prodigo/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/components/com_prodigo/otherviews/
+            [1] => /var/www/trunk/components/com_prodigo/views/
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

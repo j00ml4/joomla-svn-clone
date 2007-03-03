@@ -1,0 +1,29 @@
+====== execute ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#execute|JController->execute]] | never | Work in progress |
+
+Execute a task by triggering a method in the derived class.
+
+This method will check the task map to see if a method in the derived JController class is mapped to the specified task. If it is not, the default task is invoked, and if no default exists, then an error message is displayed.
+
+Once a method corresponding to the task is located, the event is recorded (using the name of the method actually invoked, not necessarily the specified task), authorization is checked and the appropriate method is invoked.
+
+The method returns the results of the invoked method if successful, or a JError object otherwise.
+
+===== Syntax =====
+mixed execute	( **$task** )
+
+| **$task** | string | is a string containing the task to perform. If no matching task is found, the  '__default' task is executed, if defined. |
+
+
+===== Examples =====
+This method is generally invoked by the component entry point. The weblinks component invokes this in the following manner:
+<code php|Example>
+$controller->execute( JRequest::getVar('task'));
+</code>
+This will invoke the method of the derived class specified by the task variable, or another method that this task is mapped to.
+
+----
+
+~~DISCUSSION~~
+

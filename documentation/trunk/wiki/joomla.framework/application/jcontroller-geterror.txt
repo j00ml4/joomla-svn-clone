@@ -1,0 +1,27 @@
+====== getError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#getError|JController->getError]] | never | Work in progress |
+
+Gets the error message.
+
+This will return the value that was last set using the [[jcontroller-seterror|setError]] method. If the error has not been set, null will be returned.
+
+===== Syntax =====
+string getError ()
+
+===== Examples =====
+<code php|Example>
+$controller = new JController();
+$controller->setError( 'Just an example' );
+echo $controller->getError();
+</code>
+might produce
+<code php|Result>
+Just an example
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

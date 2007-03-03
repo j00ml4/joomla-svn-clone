@@ -1,0 +1,34 @@
+====== authorize ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#authorize|JController->authorize]] | never | Work in progress |
+
+Checks whether the current user is authorized to execute the specified task.
+
+This check is dependent on the access control key being specified using the [[jcontroller-setaccesscontrol|JController->setAccessControl]] method.  If the current user (obtained using JFactory::getUser() method) has the required permission to execute the specified task, true is returned. If the user does not have permission to execute the specified task, false is returned. If no access control is setup, true is returned.
+
+If an access control section value has already been specified (using the [[jcontroller-setaccesscontrol|JController->setAccessControl]] method), then it is used instead of the value of the $task parameter.
+
+For information on how user permissions are determined, please refer to the [[juser-authorize|JUser->authorize]] method.
+
+===== Syntax =====
+boolean authorize	( **$task** )
+
+| **$task** | string | is a string containing the ACO Section Value to check access on. |
+
+
+===== See Also =====
+Introduction to ACL.
+
+===== Examples =====
+
+<code php|Example>
+</code>
+might produce
+<code php|Result>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,57 @@
+====== _addPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#_addPath|JController->_addPath]] | never | Work in progress |
+
+Adds to the search path for models and views.
+
+This method is protected and should only be called by methods in classes derived from JController.
+
+===== Syntax =====
+void _addPath ( **$type**, **$path** )
+| **$type** | string | The path type (e.g. 'model', 'view'. |
+| **$path** | mixed | is either a string containing the path to be added to the search list or an array of strings containing paths to be added. |
+
+
+===== Examples =====
+
+<code php|Example>
+$controller = new JController();
+print_r( $controller->_path );
+$controller->_addPath( 'view', JPATH_COMPONENT .DS. 'otherviews' );
+print_r( $controller->_path );
+</code>
+might produce (note that neither _addPath or _path should not be accessed directly and are only used here for demonstration purposes)
+<code php|Result>
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/views/
+        )
+
+)
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/otherviews/
+            [1] => /var/www/trunk/administrator/components/com_weblinks/views/
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

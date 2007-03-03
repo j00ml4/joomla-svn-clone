@@ -1,0 +1,29 @@
+====== setError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#setError|JController->setError]] | never | Work in progress |
+
+Sets the error message.
+
+This error message can later be retrieved using the [[jcontroller-geterror|JController->getError()]] method.
+
+This method will return the error message that was set (directly from the class property, so if for some reason something goes wrong, the return value will indicate this).
+
+===== Syntax =====
+string setError	( **$message** )
+| **$message** | string | is a string containing the error message. |
+
+
+===== Examples =====
+<code php|Example>
+$controller->setError( 'Not going to happen!' );
+echo $controller->getError();
+</code>
+might produce
+<code php|Result>
+Not going to happen!
+</code>
+
+----
+
+~~DISCUSSION~~
+

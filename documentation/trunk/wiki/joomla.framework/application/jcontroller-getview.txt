@@ -1,0 +1,30 @@
+====== getView ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#getView|JController->getView]] | never | Work in progress |
+
+Method to get a view object, loading it if required.
+
+This method will use the specified name and prefix to construct a view name and attempt to instantiate an object. The class name used for the view is determined by the specified name appended to the specified prefix (whitespace is removed). If the view class has not been defined, the view paths will be searched and the file (if found) will be loaded.
+
+The view should be stored in a file with the same name as the view. The extension should be the specified type with .php on the end (i.e. the weblinks view for an HTML document type should be stored in a file called weblinks.html.php).
+
+===== Syntax =====
+JView &getView ( **$name**, **$type**, **$prefix** )
+| **$name** | string | is a string containing the view name. This parameter is optional and if omitted defaults to the controller name. |
+| **$type** | string | is a string containing the view type. This parameter is optional and if omitted defaults to the document type. |
+| **$prefix** | string | is a string containing the class prefix. This parameter is optional and if omitted defaults to a string which is the controller name with the word 'View' appended to the end. |
+
+
+===== Examples =====
+
+<code php|Example>
+This method is invoked in the following way:
+<code php|Example>
+$view = $this->getView('weblink');
+</code>
+This will load the view class named 'WeblinksViewWeblink'. This view was found in the file 'weblink.html.php'.
+
+----
+
+~~DISCUSSION~~
+

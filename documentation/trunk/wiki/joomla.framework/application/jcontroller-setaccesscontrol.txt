@@ -1,0 +1,33 @@
+====== setAccessControl ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#setAccessControl|JController->setAccessControl]] | never | Work in progress |
+
+Maps the access control to a section in the ACO.
+
+The specified ACO section generally maps to the component. These settings are used by the [[jcontroller-authorize|authorize()]] method. 
+
+===== Syntax =====
+void setAccessControl ( **$section**, **$value** )
+| **$section** | string | is a string containing the ACO section (eg, the component). |
+| **$value** | string | is a string containing the ACO section value (if using a constant value). This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+If the following code was inserted into the constructor of the derived controller class:
+<code php|Example>
+$this->setAccessControl( 'com_weblinks' );
+</code>
+then
+<code php|Example>
+echo ($controller->authorize( 'manage' ) ? 'True' : 'False');
+</code>
+might produce
+<code php|Result>
+True
+</code>
+if the current user has manage rights on the com_weblinks controller.
+
+----
+
+~~DISCUSSION~~
+
+

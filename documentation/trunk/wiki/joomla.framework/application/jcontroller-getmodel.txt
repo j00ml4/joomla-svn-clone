@@ -1,0 +1,28 @@
+====== getModel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#getModel|JController->getModel]] | never | Work in progress |
+
+Method to get a model object, loading it if required.
+
+This method will use the specified name and prefix to construct a model name and attempt to instantiate an object. The class name used for the model is determined by the specified name appended to the specified prefix (whitespace is removed). If the model class has not been defined, the model paths will be searched and the file (if found) will be loaded.
+
+The model should be stored in a file with the same name as the model.
+
+===== Syntax =====
+JModel &getModel	( **$name**, **$prefix** )
+| **$name** | string | is a string containing the model name. |
+| **$prefix** | string | is a string containing the class prefix. This parameter is optional and if omitted defaults to a string which is the controller name with the word 'Model' appended to the end. |
+
+
+===== Examples =====
+This method is invoked in the following way:
+<code php|Example>
+$model = $this->getModel('weblink');
+</code>
+This will load the model class named 'WeblinksModelWeblink'. This model was found in the file 'weblink.php'.
+
+----
+
+~~DISCUSSION~~
+
+

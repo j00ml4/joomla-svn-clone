@@ -1,0 +1,35 @@
+====== redirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#redirect|JController->redirect]] | never | Work in progress |
+
+Redirects the browser or returns false if no redirect is set.
+
+The redirect is set using the [[jcontroller-setredirect|JController->setRedirect()]] method. It will invoke the [[japplication-redirect|JApplication->redirect()]] method.
+
+This will end execution unless redirect is not set, in which case the method returns false.
+
+===== Syntax =====
+boolean redirect ()
+
+===== Examples =====
+The code that instantiates the controller, executes the task and redirects might look like:
+<code php|Example>
+$classname	= 'WeblinksController'.$controller;
+$controller	= new $classname( );
+
+// Perform the Request task
+$controller->execute( JRequest::getVar('task'));
+$controller->redirect();
+</code>
+with the code in the task handling method being:
+<code>
+$link = 'index.php?option=com_weblinks';
+$this->setRedirect($link, $msg);
+</code>
+which would cause the browser to be redirected to the specified address. The message specified by $msg will be displayed on the target page (this is passed using the session).
+
+----
+
+~~DISCUSSION~~
+
+

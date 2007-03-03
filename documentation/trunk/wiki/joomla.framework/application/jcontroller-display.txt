@@ -1,0 +1,30 @@
+====== display ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#display|JController->display]] | never | Work in progress |
+
+Typical view method for MVC based architecture.
+
+This method will retrieve the view name and layout name from the request (using the 'view' and 'layout' variables, respectively) and attempt to instantiate a view object (using the [[jcontroller-getview|JController->getview]] method. It will attempt to instantiate the corresponding model and push it into the view (it assumes that the model has the same name as the view). If the view is cachable it will attempt to retrieve the output from the cache. Otherwise, it will invoke the views 'display' method.
+
+Please see [[mvcnaming|MVC Naming Conventions]] for more information on how models, views and controllers should be named.
+
+===== Syntax =====
+void display ( **$cachable** )
+
+| **$cachable** | boolean | is a boolean that specifies whether or not the view can be cached. This parameter is optional and if omitted defaults to false. |
+
+
+===== Examples =====
+Though not strictly necessary, many JController child classes will have a display method that invokes the parent method in the following manner:
+<code php|Example>
+function display() {
+	parent::display();
+}
+</code>
+This will result in the view specified in the request being rendered.
+
+----
+
+~~DISCUSSION~~
+
+

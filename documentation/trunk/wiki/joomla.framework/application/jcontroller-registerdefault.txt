@@ -1,0 +1,25 @@
+====== registerTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#registerTask|JController->registerTask]] | never | Work in progress |
+
+Register (map) a task to a method in the class.
+
+This method does not need to be invoked for methods in the derived class as they are automatically registered by the constructor. It is only required when a task should be registered for which a method does not exist. This is commonly done to map multiple tasks to one method.
+
+This method is generally invoked from the constructor of the derived class.
+
+===== Syntax =====
+void registerTask	( **$task**, **$method** )
+| **$task** | string | is a string containing the task to be mapped. |
+| **$method** | string | is a string containing the name of the method that should be executed for the specified task. |
+===== Examples =====
+<code php|Example>
+$this->registerTask( 'add'  , 	'edit' );
+</code>
+will result in the edit() method of the derived controller class being executed when the add task is fired.
+
+----
+
+~~DISCUSSION~~
+
+

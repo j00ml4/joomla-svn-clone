@@ -1,0 +1,30 @@
+====== setRedirect ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#setRedirect|JController->setRedirect]] | never | Work in progress |
+
+Sets a URL for browser redirection.
+
+A message and message type can optionally be specified. The message is displayed on the target page, and the message type determines which icon is displayed with the message.
+
+===== Syntax =====
+void setRedirect	( **$url**, **$msg**, **$type** )
+| **$url** | string | is a string containing the URL to redirect to. |
+| **$msg** | string | is a string containing the message to display on redirect. This parameter is optional and if omitted defaults to the value that is internally set by the controller, if any. |
+| **$type** | string | is a string containing the message type. This parameter is optional and if omitted efaults to 'message'. |
+
+
+===== Examples =====
+
+<code php|Example>
+if (JRequest::getVar( 'testvalue' ) != 1) {
+	$controller->setRedirect( 'index.php?option=com_weblinks&testvalue=1&view=weblinks' );
+	$controller->setMessage( 'This is the redirect message!' );
+	$controller->redirect();
+}
+</code>
+will result in the browser being redirected and the specified message being displayed at the top of the target page.
+
+----
+
+~~DISCUSSION~~
+
