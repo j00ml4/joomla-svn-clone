@@ -1,0 +1,27 @@
+====== getTask ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#getTask|JController->getTask]] | never | Work in progress |
+
+Get the last task that is or was to be performed.
+
+This method returns the value that was stored by the execute method.
+
+===== Syntax =====
+string getTask ()
+
+===== Examples =====
+<code php|Example>
+$controller->execute( JRequest::getVar('task'));
+echo $controller->getTask();
+</code>
+might produce
+<code php|Result>
+edit
+</code>
+if the ControllerClass->edit method was invoked by the execute method.
+
+----
+
+~~DISCUSSION~~
+
+

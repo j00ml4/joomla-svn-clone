@@ -1,0 +1,61 @@
+====== _setPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#_setPath|JController->_setPath]] | never | Work in progress |
+
+Sets an entire array of search paths for resources.
+
+The default directories are always added as a last resort for searches. The existing array is cleared, the default path is added and then the specified paths are added.
+
+This method is protected and should only be invoked by methods of derived classes.
+
+===== Syntax =====
+void _setPath	( **$type**, **$path** )
+| **$type** | string | is a string containing the type of path to set, typically 'view' or 'model'. |
+| **$path** | mixed | is either a string containing the new path, or an array of strings containing the new paths to add. |
+
+
+===== Examples =====
+<code php|Example>
+$viewPaths = array( '/var/www/trunk/administrator/components/com_weblinks/otherviews/',
+					'/var/www/trunk/administrator/components/com_weblinks/moreviews/'
+				  );
+$controller = new JController();
+print_r( $controller->_path );
+$controller->_setPath( 'view', $viewPaths );
+print_r( $controller->_path );
+</code>
+might produce (note that neither _addPath or _path should not be accessed directly and are only used here for demonstration purposes)
+<code php|Result>
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/views/
+        )
+
+)
+Array
+(
+    [model] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/models/
+        )
+
+    [view] => Array
+        (
+            [0] => /var/www/trunk/administrator/components/com_weblinks/moreviews/
+            [1] => /var/www/trunk/administrator/components/com_weblinks/otherviews/
+            [2] => /var/www/trunk/administrator/components/com_weblinks/views/
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
