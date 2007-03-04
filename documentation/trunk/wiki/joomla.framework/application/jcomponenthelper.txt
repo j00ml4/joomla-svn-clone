@@ -1,0 +1,19 @@
+====== JComponentHelper ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html|JComponentHelper]] | never | Work in progress |
+
+Component helper class.
+
+This class contains utility functions to assist in common functions required for components.  This is a static class.
+
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-getInfo|getInfo]] | Gets information about a component. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-getParams|getParams]] | Gets the parameter object for the component. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-isEnabled|isEnabled]] | Checks if the component is enabled. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-renderComponent|renderComponent]] | Renders the component. |
+
+----
+
+~~DISCUSSION~~
+

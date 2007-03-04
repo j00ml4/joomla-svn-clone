@@ -1,0 +1,32 @@
+====== renderComponent ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JComponentHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html#renderComponent|JComponentHelper->renderComponent]] | never | Work in progress |
+
+Renders the component.
+
+This method sets up the environment for the component to be executed and returns the output of the component.  The following actions are taken in preparation for rendering the component:
+  * retrieves the task parameter from the query
+  * defines the JPATH_COMPONENT, JPATH_COMPONENT_SITE and JPATH_COMPONENT_ADMINISTRATOR constants
+  * if the application is the admin application and the file exists, it loads the the admin.component.php file. Otherwise, it loads the component.php file (where component is the option parameter without the com_ prefix)
+  * checks if the component exists and returns an error if it is not
+  * handles legacy globals if legacy mode is enabled
+  * loads language files
+  * builds the toolbar
+
+This method is invoked by the Joomla! CMS application and should not normally need to be used by extensions.
+
+===== Syntax =====
+void renderComponent	( **$name**, **$params** )
+| **$name** | string | is a string containing the option value for the component. |
+| **$params** | array | is an associative array containing parameters for the component. This parameter is not used. |
+
+
+===== Examples =====
+This method is invoked by the application in the following manner:
+<code php|Example>
+$contents = JComponentHelper::renderComponent($component, array('outline' => JRequest::getVar('tp', 0 )));
+</code>
+
+----
+
+~~DISCUSSION~~

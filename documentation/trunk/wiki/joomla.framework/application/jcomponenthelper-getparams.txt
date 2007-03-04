@@ -1,0 +1,50 @@
+====== getParams ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JComponentHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html#getParams|JComponentHelper->getParams]] | never | Work in progress |
+
+Gets the parameter object for the component.
+
+===== Syntax =====
+JParameter &getParams ( **$name** )
+| **$name** | string | is a string containing the option value for the component. |
+
+
+===== Examples =====
+<code php|Example>
+$params =& JComponentHelper::getParams( 'com_weblinks' );
+print_r( $params );
+</code>
+might produce
+<code php|Result>
+JParameter Object
+(
+    [_raw] => 
+    [_xml] => 
+    [_elements] => Array
+        (
+        )
+
+    [_elementDirs] => Array
+        (
+        )
+
+    [_defaultNameSpace] => _default
+    [_registry] => Array
+        (
+            [_default] => Array
+                (
+                    [data] => stdClass Object
+                        (
+                        )
+
+                )
+
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+
