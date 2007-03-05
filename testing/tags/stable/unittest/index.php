@@ -12,7 +12,7 @@ require_once( JPATH_BASE.'/unittest/UnitTestController.php' );
  * TODO: Check why loader.php needed require_once?
  * TODO: Confirm if we can move these to a general location, or think about the use of extends?
  */
-require_once( JPATH_BASE.'/libraries/joomla/common/abstract/object.php' ); // JObject
+require_once( JPATH_BASE.'/libraries/joomla/base/object.php' ); // JObject
 
 $path = @$_REQUEST[ 'path' ];
 $output = @$_REQUEST['output'];
