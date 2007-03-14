@@ -22,6 +22,7 @@ var $row       = array();
 var $revision  = null;
 var $docstatus = null;
 
+/** default (Wiki) namespace (a folder name so to speak...) */
 var $namespace = 'references';
 
 /** API (Wiki) Homepage */
@@ -88,6 +89,7 @@ var $_cols = array(
 
 /**
  * Default icon decoration, 'externalmedia' or 'internalmedia'
+ * @see getIcon()
  */
 var $_icons = array(
 	'home' => array('externalmedia', 'package.png'),
@@ -123,6 +125,9 @@ var $_packs = array(
 
 /**
  * External icons URI with a TRAILING slash !
+ * It'd be nice if they can come from the "local" Wiki /media/ folder
+ * instead of remote api.joomla.org.
+ * @see getIcon()
  */
 var $_icon_uri = 'http://api.joomla.org/media/images/';
 
@@ -303,7 +308,7 @@ $this->_dump($this->_raw, 'after ');
 	}
 
 	/**
-	 * XHTML Decorator for the various collumns
+	 * XHTML Decorator for the various columns
 	 *
 	 * @param bool $head true = <th>, false = <td>
 	 */
@@ -345,10 +350,15 @@ $this->_dump($this->_raw, 'after ');
 	}
 
 	/**
-	 * Nifty little icons for the table cells
-	 externalmedia ($src, $title=NULL, $align=NULL,
-	 				$width=NULL, $height=NULL,
-	 				$cache=NULL, $linking=NULL)
+	 * Nifty little icons for the table cells.
+	 * Theory of operation:
+	 	$this->_renderer->externalmedia ($src, $title=NULL, $align=NULL,
+	 						$width=NULL, $height=NULL,
+	 						$cache=NULL, $linking=NULL)
+	 * Practice: no go! The results suck, hence this routine currently
+	 * spits out a "native" HTML image.
+	 * @todo see if we can't have all these icons in the Wiki meadi folder,
+	 * instead of loading them from api.joomla.org
 	 */
 	function getIcon($col, $align='left') {
 		$image = '';
@@ -453,7 +463,7 @@ var $type      = 'home';
 /** @var string  output value */
 var $value = 'API';
 
-/** @var string  namespace the entry belongs to, see {@link JApiHelper::namespace} */
+/** @var string  Wiki namespace the entry belongs to, see {@link JApiHelper::namespace} */
 var $namespace = null;
 
 /** @var string  this is what you "see"; link label, caption, title, you name it */
@@ -465,7 +475,7 @@ var $icon = false;
 /** @var string  wiki link */
 var $wiki = null;
 
-/** @var bool  this entry is a legacy */
+/** @var bool  this Entry objects is a legacy */
 var $legacy = false;
 
 /** @var array  siblings of this column, e.g. Pack to Sub or Meth */
@@ -511,7 +521,7 @@ var $filename = false;
 	/**
 	 * Interface methods to override in derived classes if necessary
 	 */
-	/** a value and it incarnations */
+	/** a value and its incarnations */
 	function setValue($value) {
 		$this->value =
 		$this->label =
@@ -784,6 +794,7 @@ var $scheme = '%pack%/%sub%/%cls%.html#%meth%';
 
 	function setValue($value) {
 		parent::setValue($value);
+		die($value);
 	}
 
 }
@@ -926,6 +937,7 @@ var $scheme = null;
 /**
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
+ * @deprecated
  */
 class JApiHelperLegacyCls extends JApiHelperCls
 {
@@ -941,6 +953,7 @@ var $scheme = '';
 /**
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
+ * @deprecated
  */
 class JApiHelperLegacyFunc extends JApiHelperFunc
 {
