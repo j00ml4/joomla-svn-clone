@@ -40,30 +40,39 @@ var $_skipped = array();
 	function WebMechanicRenderer($character_set = 'UTF-8') {
 		$this->__construct($character_set);
 	}
+
 	function __construct($character_set = 'UTF-8') {
 		$this->SimpleReporter();
 		$this->_character_set = $character_set;
+		$this->_env = 'PHP '.PHP_VERSION .' as '. PHP_SAPI .' on '. PHP_OS;
 		$this->sendNoCacheHeaders();
-
-		ob_start();
 	}
 
 	function sendNoCacheHeaders() {
-		if (! headers_sent()) {
+		if (! headers_sent() ) {
 			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 			header("Cache-Control: no-store, no-cache, must-revalidate");
 			header("Cache-Control: post-check=0, pre-check=0", false);
 			header("Pragma: no-cache");
+			header("Content-Type: text/html; charset=".$this->_character_set);
+			header("Content-Encoding: ".$this->_character_set);
 		}
+		ob_start();
 	}
 
     function paintHeader($test_name) {
     	$this->test_name = $test_name;
     	$verbose = (JUNITTEST_REPORTER_RENDER_PASSED)
-    			 ? '<small title="JUNITTEST_REPORTER_RENDER_PASSED = true">(verbose)</small>'
-    			 : '<small title="JUNITTEST_REPORTER_RENDER_PASSED = false">(compact)</small>';
+    			 ? '<small title="shows passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
+    			 : '<small title="hides passed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
+		$title = <<<HTML
+	<h1 style="cursor:pointer" onclick="location.href='/unittest/'">
+	<span>{$test_name}</span> {$verbose}
+	</h1>
+HTML;
 
+		if (! headers_sent() ) {
     	echo <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -75,15 +84,18 @@ var $_skipped = array();
 <link rel="StyleSheet" href="/unittest/views/renderer.css" type="text/css" />
 </head>
 <body>
-<div id="Header">
-	<h1 style="cursor:pointer" onclick="location.href='/unittest/'">
-	<span>{$test_name}</span> {$verbose}
-	</h1>
+<div class="Header">
+	{$title}
+	<p><small>{$this->_env}</small></p>
 </div>
 <div id="Content" class="MainContent">
 
 HTML;
 		# echo $this->testgroup->generateMenu();
+
+		} else {
+			echo $title;
+		}
     }
 
     function paintFooter($test_name) {
@@ -102,7 +114,6 @@ HTML;
 			$pp = $fp = 0;
 		}
 		// methods
-		$tech = 'PHP '.PHP_VERSION .' '. PHP_SAPI;
 
 //	print_r($this->_skipped);
 
@@ -114,7 +125,7 @@ HTML;
 	</div>
 </div>
 <div id="Footer">
-	<p>{$tech}</p>
+	<p>{$this->_env}</p>
 </div>
 HTML;
 

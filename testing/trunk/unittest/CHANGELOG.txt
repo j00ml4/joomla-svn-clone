@@ -15,12 +15,22 @@ Legend:
 x -> tests fail
 -------------------------------------------------
 
+2007-03-11 CirTap
+ #	issue with UnitTestReport::getTestcaseHelper()
+ #	several missing require_once() for the framework classes
+ 	! This is likely to have "side effects" with framework
+ 	  code that uses jimport() for the same files.
+ ^	AllTests.php using addTestFile() instead of addTestClass() to add
+ 	a single test case
+ +	new JoomlaTestSuite in /views/lobs/suite.php to be used in AllTests
+ ^	Skeleton templates
+
 2007-03-03 CirTap
  ^	code cleanup, docbloc
  # 	main() and self() methods in PHP4
 
 2007-02-28 CirTap
- ^	Skeleton templates using main()/self() 
+ ^	Skeleton templates using main()/self()
  +	AllTests.tpl
 
 2007-02-26 CirTap

@@ -15,6 +15,8 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+require_once('libraries/joomla/application/router.php');
+
 class TestOfJRouter extends UnitTestCase {
 
 	/**
@@ -52,7 +54,7 @@ class TestOfJRouter extends UnitTestCase {
 	function test__construct()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 
 		$instance = new JRouter;
 		$this->assertIsA($instance, 'JRouter');
@@ -62,17 +64,17 @@ class TestOfJRouter extends UnitTestCase {
 
 	/**
 	 * @todo Implement testGetInstance()
-	 * 
+	 *
 	 * Parameters: 1
 	 *   required: 0
 	 * @param #1  $options optional (Array) , allows NULL
-	 * @staticvar $instance 
+	 * @staticvar $instance
 	 */
 	function testGetInstance()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$options = array();
 		$compare1 =& JRouter::getInstance( $options );
@@ -80,7 +82,7 @@ class TestOfJRouter extends UnitTestCase {
 
 	/**
 	 * @todo Implement testParse()
-	 * 
+	 *
 	 * Parameters: 1
 	 *   required: 1
 	 * @param #1  $url required , allows NULL
@@ -88,8 +90,8 @@ class TestOfJRouter extends UnitTestCase {
 	function testParse()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$url = null;
 		$compare1 = JRouter::parse( $url );
@@ -97,17 +99,17 @@ class TestOfJRouter extends UnitTestCase {
 
 	/**
 	 * @todo Implement testBuild()
-	 * 
+	 *
 	 * Parameters: 1
 	 *   required: 1
 	 * @param #1  $value required , allows NULL
-	 * @staticvar $strings 
+	 * @staticvar $strings
 	 */
 	function testBuild()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$value = null;
 		$compare1 = JRouter::build( $value );
@@ -115,7 +117,7 @@ class TestOfJRouter extends UnitTestCase {
 
 	/**
 	 * @todo Implement testParseComponentSegment()
-	 * 
+	 *
 	 * Parameters: 2
 	 *   required: 2
 	 * @param #1  $component required , allows NULL
@@ -124,8 +126,8 @@ class TestOfJRouter extends UnitTestCase {
 	function testParseComponentSegment()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$component = null;
 		$route = null;
@@ -135,7 +137,7 @@ class TestOfJRouter extends UnitTestCase {
 
 	/**
 	 * @todo Implement testBuildComponentSegment()
-	 * 
+	 *
 	 * Parameters: 2
 	 *   required: 2
 	 * @param #1  $component required , allows NULL
@@ -144,8 +146,8 @@ class TestOfJRouter extends UnitTestCase {
 	function testBuildComponentSegment()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$component = null;
 		$query = null;

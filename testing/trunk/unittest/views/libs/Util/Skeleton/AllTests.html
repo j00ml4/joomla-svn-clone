@@ -14,9 +14,7 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/UnitTestController.php');
 }
 
-{testcases}
-
-{testsuites}
+{libraries}
 
 class Joomla_{PathName_}AllTests
 {
@@ -29,9 +27,11 @@ class Joomla_{PathName_}AllTests
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 
-        {tests}
+{testcases}
+
+{testsuites}
 
         return $suite;
     }

@@ -67,48 +67,58 @@ Note: Creation of skeletal Classes may not work where Classes extend from extern
 
 Location of the Framework and UnitTest Platform
 ===============================================
-(TODO: verify)
-You're not required to have the /unittest/ folder in your Joomla! installation path.
-As a developer you may wish to keep both things separated and have one VirtualHost to run Joomla! and another run the UnitTest.
-All TestCases and the UnitTestController will load library files using the
+You're not required to have the /unittest/ folder located in your Joomla! installation path. If you want to test on the command line only (cron jobs), you may drop this folder where PHP will be able to find it.
+As a developer you may wish to keep both things separated and have one VirtualHost to run and test Joomla! nice an clean, and another to run the unit tests.
+All TestCases and the UnitTestController will load library files using either the
 	JPATH_BASE
-constant.
+constant or rely on PHP's inlude_path which is taken care of the test setup scripts.
+
 Simply change JPATH_BASE in your local TestConfiguration.php to point to the Joomla! installation you wish to test, i.e. your SVN working copy, and you're done.
 
 
-TestCase structure
+TestCase structure [WIP]
 ==================
-(TODO)
 
-The following examples assume we have a file called
-	/stuff/whatever.php
+The following examples assume we have a framework library file called
+	/libraries/joomla/stuff/whatever.php
 that contains
 	class JWhatever
 
-Folder and file layout:
+Folder and file layout in the unit test folder /libraries/joomla/:
 [1]  /stuff/JWhateverTest.php
 [2]  /stuff/TODO.txt
-[3]  /stuff/_files/JWhatever_helper.php
+[3]  /stuff/_files/jwhatever_helper.php
 [4]  /stuff/_files/fixture1.ext
 [5]  /stuff/_files/README.txt
 
+Except for [1], the actual test case, the other entries are optional.
 
 [1] The TestCase of: class JWhatever
-    located in     : /libraries/joomla/stuff/whatever.php
+               from: /libraries/joomla/stuff/whatever.php
     implemented as : class TestOfJLoader extends UnitTestCase
 
-[2] Things to do with ANY of the TestCases in this folder.
-	Each entry should have a number so others can refer to it as "see: todo 23" in the file itself or "todo 23 in stuff" in the forums or Google group.
+[2] Optional notes with "things to do" about ANY of the TestCases in this folder.
+	Each entry should have a number so others can refer to it as "see: todo 23" in the file itself or "todo 23 in /stuff/" in the forums or Google group.
+	Comments about test failures should refer to this file rather then become an elaborate explanation in the PHP sources.
 
-[3] option helper class for JWhateverTest.
+[3] Optional helper class for JWhateverTest.
 	The name of this class name MUST follow this convention:
 	     JoomlaClass + TestHelper
 	e.g. JWhateverTestHelper
+	The filename MUST be all lowercase using
+		joomlaclass + _helper.php
+	e.g. jwhatever_helper.php
 
-[4] optional file resource(s) required by the test case, i.e. our famous TestOfJWhatever testcase may use this in order to test a feature of JWhatever.
-	This is also a good place to store Mock objects. However, before you create a new Mock Class you should take a look into the "JUNITTEST_LIBS" folder for an available Mock Class. "JUNITTEST_LIBS" is defined in TestConfiguration.php
+[4] Optional file resource(s) required by the test case.
+	Our TestOfJWhatever test case may use this in order to verify AND "stress" a feature of class JWhatever. The _files folder is also a good place to store Mock objects (see 'Mock Objects' section below)
 
-[5] optional instructions on how to deal with the fixtures in this folder. The user may need to copy them someplace for JWhatever
+[5] Optional instructions on how to deal with the fixtures in this folder. The user may need to copy them someplace for JWhatever
+
+Mock Objects [WIP]
+============
+(@instance: anything you'd like to add?)
+
+Before you create a new Mock Class you should take a look into the "JUNITTEST_LIBS" folder for an available Mock Class. "JUNITTEST_LIBS" is defined in TestConfiguration.php
 
 
 Known issues

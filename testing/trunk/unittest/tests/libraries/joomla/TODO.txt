@@ -22,3 +22,11 @@ factory.php
 		 ->	depends on $mainframe aka JSite's getTemplate()
 		 ->	which will call JFactory::getDBO() for the template ...
 
+4	JFactory::_createMailer() call to useSendmail()
+	is not working correctly.
+	-> testGetMailer_sendmail()
+
+version.php
+1	testIsCompatible_minor()
+	How do you define compatibility?
+	Will 1.5.1 really be incompatible with 1.5.0 ?

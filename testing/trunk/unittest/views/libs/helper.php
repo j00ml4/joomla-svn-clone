@@ -10,7 +10,7 @@
 class UnitTestHelper
 {
 	function &getReporter($output = null, $testfile = null)
-	{$o='';
+	{
 		if ( null === $output ) {
 			$output = JUNITTEST_CLI
 					? (getenv('JUNITTEST_CLI') ? getenv('JUNITTEST_CLI') : 'text')
@@ -21,6 +21,7 @@ class UnitTestHelper
 					? (getenv('JUNITTEST_CLI') ? getenv('JUNITTEST_CLI') : 'text')
 					: JUNITTEST_REPORTER;
 		}
+
 	    switch( strtolower( $output ) )
 	    {
         case 'xml':
@@ -44,30 +45,23 @@ class UnitTestHelper
             break;
 	    }
 
-        // load TestCaseHelper
-        $helper = UnitTestHelper::getTestcaseHelper($testfile);
-        if ($helper['can_help']) {
-        	include_once $helper['path'].$helper['basename'];
-        }
         $reporter =& new $renderer();
 	    return $reporter;
 	}
 
 	function &getTestcaseHelper($testfile)
 	{
+    	$path   = implode(DIRECTORY_SEPARATOR, array(JUNITTEST_ROOT,JUNITTEST_BASE, dirname($testfile), '_files'));
 		$class  = basename($testfile, 'Test.php');
-    	$file   = strtolower($class . '_helper.php');
-    	$path   = dirname(strstr($testfile, '/libraries/')) . '/_files/';
 
     	$helper =& UnitTestHelper::getProperty('Helper', $class);
     	$helper = array(
+					'path'    => $path,
+					'basename'=> strtolower($class . '_helper.php'),
 					'class'   => $class.'TestHelper',
-					'basename'=> $file,
-					'path'    => JUNITTEST_ROOT.'/'.JUNITTEST_BASE.$path,
 					'script'  => $testfile
 					);
-		$helper['can_help'] = is_readable($helper['path'].$helper['basename']);
-
+		$helper['location'] = realpath($helper['path'] .DIRECTORY_SEPARATOR. $helper['basename']);
     	return $helper;
 	}
 
@@ -398,7 +392,7 @@ class UnitTestHelper
             }
 
             if (is_readable($dir . DIRECTORY_SEPARATOR . $filename)) {
-                return true;
+                return $dir . DIRECTORY_SEPARATOR . $filename;
             }
         }
 

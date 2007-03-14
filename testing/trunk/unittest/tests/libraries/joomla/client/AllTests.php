@@ -14,8 +14,6 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once 'libraries/joomla/client/JFTPTest.php';
-
 class Joomla_Client_AllTests
 {
     function main()
@@ -27,7 +25,7 @@ class Joomla_Client_AllTests
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 		# this is pretty severe test and should best become a TestSuite
 		# of its own (client/JFTP/AllTests.php) divided into separate
 		# testcases for each "feature":
@@ -35,7 +33,7 @@ class Joomla_Client_AllTests
 		# - i/o
 		# - filesystem
 		# - ...
-        $suite->addTestClass( 'TestOfJFTP' );
+        $suite->addTestFile( 'libraries/joomla/client/JFTPTest.php' );
 
         return $suite;
     }

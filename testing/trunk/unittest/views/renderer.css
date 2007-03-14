@@ -18,8 +18,8 @@ body {
 	margin: 2em 4% 1em 4%;
 }
 
-/* identifiers */
-#Header {
+/* area */
+h1.Header {
 	padding: 0em;
 	clear: both;
 }

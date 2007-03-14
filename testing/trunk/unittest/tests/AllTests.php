@@ -14,8 +14,7 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once 'libraries/JLoaderTest.php';
-require_once 'libraries/joomla/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/AllTests.php';
 
 class AllTests
 {
@@ -30,7 +29,8 @@ class AllTests
     {
         $suite =& new TestSuite( 'Joomla! Framework' );
 
-        $suite->addTestClass( 'TestOfJLoader' );
+        $suite->addTestFile( 'libraries/JLoaderTest.php' );
+
         $suite->addTestCase( Joomla_AllTests::suite() );
 
         return $suite;
