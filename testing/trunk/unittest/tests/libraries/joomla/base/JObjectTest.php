@@ -9,6 +9,8 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+require_once('libraries/joomla/base/object.php');
+
 class TestOfJObject extends UnitTestCase
 {
     var $class = null;
@@ -115,21 +117,21 @@ class TestJObject extends JObject
  */
 class TestJObjectStatics
 {
-static $data = array();
+var $data = array();
 
 	/** stores an object */
 	function set($name, &$data) {
-		self::$data[$name] =& $data;
+		$this->data[$name] =& $data;
 	}
 
 	/** retrieves an object */
 	function &get($name) {
-		return self::$data[$name];
+		return $this->data[$name];
 	}
 
 	/** JObject::getPublicProperties() */
 	function getArray($name) {
-		return self::$data[$name]->getPublicProperties(true);
+		return $this->data[$name]->getPublicProperties(true);
 	}
 
 	/**
@@ -140,7 +142,7 @@ static $data = array();
 	function getPublicProperties_reprise($name, $assoc = false) {
 		// make sure items 0 and 1 EXIST if object has NO properties
 		$cache = array(array(),array());
-		foreach (get_object_vars(self::$data[$name]) as $key => $val)
+		foreach ( get_object_vars($this->data[$name]) as $key => $val)
 		{
 			if (substr( $key, 0, 1 ) != '_')
 			{

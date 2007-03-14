@@ -66,10 +66,12 @@ var $have_db = false;
 
     function testGetSession()
     {
-        // TODO: Die gracefully when headers already sent
+        if ( headers_sent() ) {
+    		return $this->_reporter->setMissingTestCase('Test unreliable: headers_sent()');
+        }
         $obj =& JFactory::getSession();
-        $this->assertIsA( $obj, 'JSession');
-        $this->assertIsA( $obj, 'JObject');
+	    $this->assertIsA( $obj, 'JSession');
+    	$this->assertIsA( $obj, 'JObject');
     }
 
     function testGetLanguage()
@@ -125,7 +127,7 @@ var $have_db = false;
     	$config =& JFactory::getConfig();
     	$config->setValue( 'config.mailer', $config->getValue('sendmail') );
 
-		// FIX: JFactory::_createMailer() call to useSendmail()
+		# FIX: JFactory::_createMailer() call to useSendmail()
     	$obj =& JFactory::getMailer();
         $this->assertEqual( $obj->Mailer, 'sendmail');
     }

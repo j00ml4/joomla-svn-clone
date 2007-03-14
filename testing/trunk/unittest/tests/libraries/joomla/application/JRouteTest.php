@@ -15,6 +15,8 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+require_once('libraries/joomla/application/router.php');
+
 class TestOfJRoute extends UnitTestCase {
 
 	/**
@@ -52,7 +54,7 @@ class TestOfJRoute extends UnitTestCase {
 	function test__construct()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 
 		$instance = new JRoute;
 		$this->assertIsA($instance, 'JRoute');
@@ -62,7 +64,7 @@ class TestOfJRoute extends UnitTestCase {
 
 	/**
 	 * @todo Implement test_()
-	 * 
+	 *
 	 * Parameters: 2
 	 *   required: 1
 	 * @param #1  $url required , allows NULL
@@ -71,8 +73,8 @@ class TestOfJRoute extends UnitTestCase {
 	function test_()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
-		
+		return $this->_reporter->setMissingTestCase();
+
 		// replace with sth. useful :)
 		$url = null;
 		$ssl = 0;

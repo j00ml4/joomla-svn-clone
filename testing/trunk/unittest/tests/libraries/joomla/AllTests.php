@@ -14,14 +14,10 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once 'libraries/joomla/JFactoryTest.php';
-require_once 'libraries/joomla/JFrameworkConfigTest.php';
-require_once 'libraries/joomla/JVersionTest.php';
-
-require_once 'libraries/joomla/base/AllTests.php';
-require_once 'libraries/joomla/utilities/AllTests.php';
-require_once 'libraries/joomla/client/AllTests.php';
-require_once 'libraries/joomla/application/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/base/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/utilities/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/client/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/application/AllTests.php';
 
 class Joomla_AllTests
 {
@@ -34,11 +30,11 @@ class Joomla_AllTests
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 
-        $suite->addTestClass( 'TestOfJVersion' );
-        $suite->addTestClass( 'TestOfJFactory' );
-        $suite->addTestClass( 'TestOfJFrameworkConfig' );
+        $suite->addClassTest( 'libraries/joomla/JVersionTest.php' );
+        $suite->addClassTest( 'libraries/joomla/JFrameworkConfigTest.php' );
+        $suite->addClassTest( 'libraries/joomla/JFactoryTest.php' );
 
         $suite->addTestCase( Joomla_Base_AllTests::suite() );
         $suite->addTestCase( Joomla_Utilities_AllTests::suite() );

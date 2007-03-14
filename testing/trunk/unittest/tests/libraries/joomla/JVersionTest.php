@@ -23,7 +23,7 @@ class TestOfJVersion extends UnitTestCase
 	 */
 	function main() {
 		$self = new TestOfJVersion;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter(null, __FILE__, $self) );
 	}
 
 	function setUp()
@@ -81,7 +81,7 @@ class TestOfJVersion extends UnitTestCase
     {
     	$minor = $this->class->RELEASE.'.'. ($this->class->DEV_LEVEL + 1);
         $this->assertTrue( $this->class->isCompatible ( $minor ),
-        			"$minor not compatible to ". JVERSION ."<br /> %s" );
+        			"$minor not compatible to ". JVERSION ."\n %s" );
     }
 
 }

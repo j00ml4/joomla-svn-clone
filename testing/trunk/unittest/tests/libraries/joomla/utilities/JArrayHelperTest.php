@@ -52,7 +52,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testToInteger()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -61,7 +61,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testToObject()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -70,7 +70,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testFromObject()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -79,7 +79,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testGetColumn()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -88,7 +88,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testGetValue()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -97,7 +97,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function testSortObjects()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/**
@@ -106,7 +106,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	function test_sortObjects()
 	{
 		// Remove the following line when you implement this test.
-		$this->_reporter->setMissingTestCase();
+		return $this->_reporter->setMissingTestCase();
 	}
 
 }

@@ -14,9 +14,6 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once 'libraries/joomla/application/JRouterTest.php';
-require_once 'libraries/joomla/application/JRouteTest.php';
-
 class Joomla_Application_AllTests
 {
     function main()
@@ -28,10 +25,10 @@ class Joomla_Application_AllTests
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 
-        $suite->addTestClass( 'TestOfJRouter' );
-        $suite->addTestClass( 'TestOfJRoute' );
+        $suite->addTestFile( 'libraries/joomla/application/JRouteTest.php' );
+        $suite->addTestFile( 'libraries/joomla/application/JRouterTest.php' );
 
         return $suite;
     }

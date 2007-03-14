@@ -14,8 +14,6 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once 'libraries/joomla/utilities/JArrayHelperTest.php';
-
 class Joomla_Utilities_AllTests
 {
     function main()
@@ -27,9 +25,9 @@ class Joomla_Utilities_AllTests
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 
-        $suite->addTestClass( 'TestOfJArrayHelper' );
+        $suite->addTestFile( 'libraries/joomla/utilities/JArrayHelperTest.php' );
 
         return $suite;
     }
