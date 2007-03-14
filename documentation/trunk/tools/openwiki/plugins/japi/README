@@ -1,13 +1,13 @@
 
 This is a helper plugin for the API Wiki @ dev.joomla.org
 
-The plugin has been tested with the default installation of OpenWiki 1.1.0 
-(aka JD-Wiki) on Joomla 1.0.12 and PHP 4.1.6
+The plugin has been tested with the default installation of OpenWiki 1.1.0
+(aka JD-Wiki) on Joomla 1.0.12 running PHP 4.1.6 + PHP 5.1.6
 
 Prerequisites:
 ---------------------------------------
-The rendering routines expect the Wiki $format to be "xhtml". 
-Other formats have not been tested, and I have no idea whether "xhtml" is 
+The rendering routines expect the Wiki $format to be "xhtml".
+Other formats have not been tested, and I have no idea whether "xhtml" is
 the default 'Doku_Renderer' or not. If the renderer object is not 'xhtml'
 the plugin die()s with an error message:
 
@@ -15,8 +15,8 @@ the plugin die()s with an error message:
 
 Purpose:
 ---------------------------------------
-The plugin provides a new tag to create the documentation header for the 
-API reference pages available at 
+The plugin provides a new tag to create the documentation header for the
+API reference pages available at
 http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,start/#api_references
 
 	{#JAPI params ... #}
@@ -41,21 +41,21 @@ All parameters must be separated by a white-space character.
 	Example: Environment
 
 - Subject:
-	The class &| method being documented. 
+	The class &| method being documented.
 	It takes three forms:
 	- ClassName
 		The Class being documented
 		Example: JRequest
 OR
 	- ClassName::methodName
-		The method of a Class being documented. The names MUST be 
+		The method of a Class being documented. The names MUST be
 		separated with double colons :: aka "T_PAAMAYIM_NEKUDOTAYIM" :)
 		Parenthesis are not required and will be removed
 
 		Example: JRequest::getVar
 OR
 	- ::functionName
-		A GLOBAL function that is not part of a class, i.e. 
+		A GLOBAL function that is not part of a class, i.e.
 		the J! 1.0 legacy functions.
 
 		Example: ::mosLoadModules
@@ -64,17 +64,18 @@ OR
 	The date of the last document revision provided in ISO format: YYYY-MM-DD
 	If this parameter is ommitted, the string 'Never' will be used as a default.
 
-	Example: 2007-02-12
+	Example: 2007-07-27
 
 - DocStatusCode (optional)
 	The document status code. Valid entries are:
 	- WIP   for  Work in progress
 	- IR    for  Internal review
 	- PR    for  Public review
-	If this parameter is ommitted/invalid, the string 'Work in progress' 
+	- FIN   for  Final
+	If this parameter is ommitted/invalid, the value 'WIP'
 	will be used as the default.
 
-	Example: WIP
+	Example: RP
 
 
 Knows issues + limitations
@@ -82,12 +83,15 @@ Knows issues + limitations
 
 phpDocumentor URLs (api.joomla.org) are not fully implemented.
 The target URI is derived from the available parameters. The plugin
-may fail under certain conditions such as the location of a global 
+may fail under certain conditions such as the location of a global
 function and bogous Package/Subpackage names. Whilst phpDoc uses
 the physical filepath of a function's source file, the @package
 and @subpackage names may speak a different language and JAPI may
 take the wrong track.
 
+All icons are loaded from api.joomla.org. It'd be nice if we can
+have a copy in the *local* Wiki media folder. Should this happen,
+the JApiHeler::getIcon() method needs to be adjusted.
 
 Installation:
 ---------------------------------------
@@ -96,6 +100,9 @@ Copy the files into the plugins/japi/ folder of the Wiki component, e.g.
 or
 	/components/com_jd-wiki/lib/plugins/japi
 
+An example file "japi-plugin.txt" to demonstrate alle features is
+include in this folder. Simply copy this file to the 'references'
+folder of DocuWiki.
 
 Please report all trouble or praise in this forum:
 	http://forum.joomla.org/index.php/board,61.0.html
@@ -103,6 +110,7 @@ Please report all trouble or praise in this forum:
 
 History:
 ---------------------------------------
+ 0.2.0 refactored to use OO paradigms, should make the Plugin "highly" extensible ;)
  0.1.0 internal release
 
 Have fun,
@@ -114,5 +122,5 @@ References:
 http://projects.j-prosolution.com/projects/os-projects/project-openwiki.html
 
 
-Copyright (c)2007 René Serradeil
+Copyright (c)2007 Renï¿½ Serradeil
 License   CC-SA-NC Creative Commons Share Alike Non Commercial

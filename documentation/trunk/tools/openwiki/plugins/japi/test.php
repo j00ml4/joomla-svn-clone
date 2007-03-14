@@ -56,12 +56,12 @@ public $tags = array(
 	);
 
 	// basically the same as in syntax.php
-	function connectTo()
+	public function connectTo()
 	{
 		array_walk($this->tags, array($this, 'handle') );
 	}
 
-	function handle($match)
+	public function handle($match)
 	{
 
 		$match = trim($match, '{}#');
@@ -75,7 +75,7 @@ echo '<hr><pre>handle(', implode(' ', $match),')</pre>';
 		self::render($data);
 	}
 
-    function render($data)
+    public function render($data)
     {
     	$this->JApi = new JApiHelper($data, $this);
     	$this->JApi->render();
