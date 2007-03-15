@@ -148,7 +148,7 @@ define('JUT_CACHE_HANDLERS_JCACHEPAGE', false);
 define('JUT_CACHE_HANDLERS_JCACHEVIEW', false);
 define('JUT_CACHE_STORAGE_JCACHESTORAGE', false);
 define('JUT_CACHE_STORAGE_JCACHESTORAGEAPC', @extension_loaded('apc'));
-define('JUT_CACHE_STORAGE_JCACHESTORAGEEACCELERATOR', false);
+define('JUT_CACHE_STORAGE_JCACHESTORAGEEACCELERATOR', @extension_loaded('eAccelerator'));
 define('JUT_CACHE_STORAGE_JCACHESTORAGEFILE', false);
 
 /**
@@ -160,8 +160,8 @@ define('JUT_CACHE_STORAGE_JCACHESTORAGEFILE', false);
 define('JUT_CLIENT_JFTP', false);
 define('JUT_FTP_NATIVE', false);
 /* if your ftp server runs on a windows box, use ?ftp_sys=WIN */
-define('JUT_FTP_CREDENTIALS', 'ftp://joonit:joonit@localhost/?ftp_sys=');
-define('JUT_FTP_CREDENTIALS_ROOT', 'D:\\Joomlas\\junittest\\joonit');
+define('JUT_FTP_CREDENTIALS', 'ftp://username:password@localhost/?ftp_sys=');
+define('JUT_FTP_CREDENTIALS_ROOT', '/htdocs/joomla');
 
 define('JUT_CLIENT_JLDAP', false);
 define('JUT_CLIENT_JCLIENTHELPER', false);
@@ -173,8 +173,8 @@ define('JUT_CLIENT_JCLIENTHELPER', false);
  * Never commit plaintext passwords to the source code repository!
  */
 define('JUT_DATABASE_JDATABASE', false);
-define('JUT_DATABASE_JDATABASEMYSQL', false);
-define('JUT_DATABASE_JDATABASEMYSQLI', false);
+define('JUT_DATABASE_JDATABASEMYSQL',  JUT_DATABASE_JDATABASE & @extension_loaded('mysql'));
+define('JUT_DATABASE_JDATABASEMYSQLI', JUT_DATABASE_JDATABASE & @extension_loaded('mysqli'));
 define('JUT_DATABASE_JRECORDSET', false);
 
 define('JUT_DATABASE_USE_MYSQL3', false);		// to run agains MySQL 3
