@@ -24,7 +24,7 @@ class UnitTestController extends GroupTest
             
         foreach( $files as $file )
         {
-            include_once( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $file ) );
+//            include_once( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $file ) );
             $this->addTestFile( $file );
         }
         
