@@ -27,7 +27,9 @@ class TestOfJFTP extends UnitTestCase
 		 */
 		!defined('JPATH_ISWIN') && define('JPATH_ISWIN', true);
 
-		jimport('joomla.client.ftp');
+		if (!class_exists('JFTP')) {
+			jimport('joomla.client.ftp');
+		}
 	}
 
 	function tearDown()
