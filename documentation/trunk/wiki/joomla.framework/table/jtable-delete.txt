@@ -1,0 +1,49 @@
+====== delete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#delete|JTable->delete]] | never | Work in progress |
+
+Deletes a record.
+
+This method will delete either the current record or the one specified by the $oid parameter.
+
+This method returns true of the operation is successful, false otherwise.
+
+This method can be overloaded/supplemented by the child class.
+
+===== Syntax =====
+boolean delete ( **$oid** )
+| **$oid** | mixed | is a variable specifying the primary key value of the record to delete. This parameter is optional and if omitted the currently referenced record will be deleted. |
+
+
+===== Examples =====
+
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$content = JTable::getInstance( 'content' );
+
+$query = "SELECT * FROM #__content WHERE id = 6";
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo 'Title: ' . $row->title . '<br />';
+
+$content->delete( 6 );
+
+$query = "SELECT * FROM #__content WHERE id = 6";
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo 'Title: ' . $row->title . '<br />';
+</code>
+might produce
+<code php|Result>
+Title: Example News Item 1
+Title: 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
