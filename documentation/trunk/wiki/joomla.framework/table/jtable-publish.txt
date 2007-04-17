@@ -1,0 +1,40 @@
+====== publish ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#publish|JTable->publish]] | never | Work in progress |
+
+Publishes or unpublishes the specified records.
+
+This method will update the database records specified by $cid with the specified value of $publish. If the table has a checked_out field, then only records that are not checked out or are checked out by the user specified in $user_id will be updated. If only one record is specified, then the record will also be checked in.
+
+The method returns true on success, false otherwise.
+
+If no records are specified, then error number 24 will be set.
+
+===== Syntax =====
+void publish	( **$cid**, **$publish**, **$user_id** )
+| **$cid** | array | is an array of integers specifying which records should be published or unpublished. |
+| **$publish** | integer | is an integer specifying whether records should be published or unpublished. This parameter is optional and if omitted defaults to 1 (published). |
+| **$user_id** | integer | is an integer containing the id of the user performing the operation (it is used in the event the table has a checked_out field). This parameter is optional and if omitted defaults to 0. |
+
+
+===== Examples =====
+
+<code php|Example>
+$category =& JTable::getInstance( 'category' );
+$category->load( 3 );
+
+echo 'The category has a published value of: '.$category->published.'.<br />';
+$category->publish( array( 3 ), 1, 62 );
+echo 'The category has a published value of: '.$category->published.'.<br />';
+</code>
+might produce
+<code php|Result>
+The category has a published value of: 0.
+The category has a published value of: 1.
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

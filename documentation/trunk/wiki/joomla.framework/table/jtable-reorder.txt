@@ -1,0 +1,56 @@
+====== reorder ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#reorder|JTable->reorder]] | never | Work in progress |
+
+Compacts the ordering sequence of the selected records.
+
+The method will retrieve the records from the table (limited to those specified by the $where parameter if supplied), and will resequence the ordering so that the ordering numbers will be continguous.
+
+This method will not changes records that have an ordering value of less than one.
+
+===== Syntax =====
+void reorder	( **$where** )
+| **$where** | string | is a string containing an ddditional where query to limit ordering to a particular subset of records. This parameter is optional and if omitted all records in the table will be used. |
+
+
+===== Examples =====
+
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$content =& JTable::getInstance( 'content' );
+$where = 'catid = 30';
+
+$query = 'SELECT id, title, ordering FROM #__content'
+. ' WHERE ordering >= 1 AND catid = 30'
+;
+$db->setQuery( $query );
+$articles = $db->loadObjectList();
+echo '<table>';
+foreach($articles as $article) {
+	echo '<tr><td>'.$article->id.'</td><td>'.$article->title.'</td><td>'.$article->ordering.'</td></tr>';
+}
+echo '</table>';
+$content->reorder( $where );
+
+$db->setQuery( $query );
+$articles = $db->loadObjectList();
+echo '<table>';
+foreach($articles as $article) {
+	echo '<tr><td>'.$article->id.'</td><td>'.$article->title.'</td><td>'.$article->ordering.'</td></tr>';
+}
+echo '</table>';
+</code>
+might produce
+<code php|Result>
+21	Joomla! Facts	8
+27	The Joomla Community	5
+21	Joomla! Facts	2
+27	The Joomla Community	1
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

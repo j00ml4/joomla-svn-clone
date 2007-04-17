@@ -1,0 +1,33 @@
+====== setErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#setErrorNum|JTable->setErrorNum]] | never | Work in progress |
+
+Sets the internal error number.
+
+This method is used to store error numbers that can be retrieved from code that invokes methods of the JTable class to determine what went wrong.
+
+===== Syntax =====
+void setErrorNum ( **$value** )
+| **$value** | integer | is an integer to be stored in the error number property. |
+
+
+===== Examples =====
+<code php|Example>
+JTable::addIncludePath( JPATH_ADMINISTRATOR.DS.'components'.DS.'com_poll'.DS.'tables' );
+
+$poll =& JTable::getInstance( 'poll', 'Table' );
+
+$poll->setErrorNum( 30 );
+
+echo $poll->getErrorNum();
+</code>
+might produce
+<code php|Result>
+30
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

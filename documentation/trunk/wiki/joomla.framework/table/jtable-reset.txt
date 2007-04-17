@@ -1,0 +1,191 @@
+====== reset ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#reset|JTable->reset]] | never | Work in progress |
+
+Resets the object to the default properties specified in the class declaration.
+
+===== Syntax =====
+void reset ()
+
+
+===== Examples =====
+
+<code php|Example>
+$content =& JTable::getInstance( 'content' );
+$content->load( 12 );
+print_r( $content );
+$content->reset();
+print_r( $content );
+</code>
+might produce
+<code php|Result>
+JTableContent Object
+(
+    [id] => 12
+    [title] => Why does Joomla! 1.5 use utf-8 encoding?
+    [alias] => why-does-joomla-15-use-utf-8-encoding
+    [title_alias] => 
+    [introtext] => <p>Well... how about never needing to mess with encoding settings again?</p><p>Ever needed to display several languages on one page or site and something always came up in Giberish?</p><p>With utf-8 (a variant of Unicode) glyphs (charcter forms) of all basically all languages can be displayed with one single encoding setting. For example if you might wish to say WELCOME in as many language possible you could do the following:</p>
+
+    [fulltext] => 
+    [state] => 1
+    [sectionid] => 3
+    [mask] => 0
+    [catid] => 31
+    [created] => 2006-10-05 03:11:29
+    [created_by] => 62
+    [created_by_alias] => 
+    [modified] => 2006-10-11 14:57:22
+    [modified_by] => 67
+    [checked_out] => 0
+    [checked_out_time] => 0000-00-00 00:00:00
+    [frontpage_up] => 
+    [frontpage_down] => 
+    [publish_up] => 2006-10-03 12:00:00
+    [publish_down] => 0000-00-00 00:00:00
+    [images] => 
+    [urls] => 
+    [attribs] => pageclass_sfx=
+item_title=1
+link_titles=
+introtext=1
+section=0
+section_link=0
+category=0
+category_link=0
+rating=
+author=
+createdate=
+modifydate=
+pdf=
+print=
+email=
+language=
+keyref=
+    [version] => 5
+    [parentid] => 0
+    [ordering] => 8
+    [metakey] => 
+    [metadesc] => 
+    [metadata] => 
+    [access] => 0
+    [hits] => 25
+    [_tbl] => #__content
+    [_tbl_key] => id
+    [_errorNum] => 0
+    [_db] => JDatabaseMySQL Object
+        (
+            [name] => mysql
+            [_nullDate] => 0000-00-00 00:00:00
+            [_nameQuote] => `
+            [_sql] => SELECT * FROM jos_content WHERE id = '12'
+            [_errorNum] => 0
+            [_errorMsg] => 
+            [_table_prefix] => jos_
+            [_resource] => Resource id #46
+            [_cursor] => Resource id #73
+            [_debug] => 0
+            [_limit] => 0
+            [_offset] => 0
+            [_ticker] => 0
+            [_log] => Array
+                (
+                )
+
+            [_utf] => 1
+            [_quoted] => Array
+                (
+                )
+
+            [_hasQuoted] => 
+            [_errors] => Array
+                (
+                )
+
+        )
+
+    [_errors] => Array
+        (
+        )
+
+)
+JTableContent Object
+(
+    [id] => 12
+    [title] => 
+    [alias] => 
+    [title_alias] => 
+    [introtext] => 
+    [fulltext] => 
+    [state] => 
+    [sectionid] => 
+    [mask] => 
+    [catid] => 
+    [created] => 
+    [created_by] => 
+    [created_by_alias] => 
+    [modified] => 
+    [modified_by] => 
+    [checked_out] => 0
+    [checked_out_time] => 0
+    [frontpage_up] => 
+    [frontpage_down] => 
+    [publish_up] => 
+    [publish_down] => 
+    [images] => 
+    [urls] => 
+    [attribs] => 
+    [version] => 
+    [parentid] => 
+    [ordering] => 
+    [metakey] => 
+    [metadesc] => 
+    [metadata] => 
+    [access] => 
+    [hits] => 
+    [_tbl] => #__content
+    [_tbl_key] => id
+    [_errorNum] => 0
+    [_db] => JDatabaseMySQL Object
+        (
+            [name] => mysql
+            [_nullDate] => 0000-00-00 00:00:00
+            [_nameQuote] => `
+            [_sql] => SELECT * FROM jos_content WHERE id = '12'
+            [_errorNum] => 0
+            [_errorMsg] => 
+            [_table_prefix] => jos_
+            [_resource] => Resource id #46
+            [_cursor] => Resource id #73
+            [_debug] => 0
+            [_limit] => 0
+            [_offset] => 0
+            [_ticker] => 0
+            [_log] => Array
+                (
+                )
+
+            [_utf] => 1
+            [_quoted] => Array
+                (
+                )
+
+            [_hasQuoted] => 
+            [_errors] => Array
+                (
+                )
+
+        )
+
+    [_errors] => Array
+        (
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

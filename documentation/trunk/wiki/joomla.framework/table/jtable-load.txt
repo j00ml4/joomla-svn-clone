@@ -1,0 +1,31 @@
+====== load ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#load|JTable->load]] | never | Work in progress |
+
+Loads a row from the database and binds the fields to the object properties.
+
+This method will retrieve the specified record from the database and copy those values into the object properties using the bind() method. If no $oid parameter is supplied, the method will attempt to load a record using the current value of the primary key field.
+
+===== Syntax =====
+boolean load ( **$oid** )
+| **$oid** | mixed | is a variable containing the primary key value of the record to load. This parameter is optional and if omitted defaults to the current key. |
+
+===== Examples =====
+
+<code php|Example>
+$content =& JTable::getInstance( 'content' );
+echo 'The current title is: '.$content->title.'. <br />';
+$content->load( 7 );
+echo 'The current title is: '.$content->title.'. <br />';
+</code>
+might produce
+<code php|Result>
+The current title is: .
+The current title is: Example News Item 2. 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

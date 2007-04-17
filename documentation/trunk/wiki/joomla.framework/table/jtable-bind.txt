@@ -1,0 +1,55 @@
+====== bind ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#bind|JTable->bind]] | never | Work in progress |
+
+Binds a named array/hash to this object.
+
+Copies values from the specified array or object into the properties of the JTable object. The public properties of the JTable object are enumerated and if an element of the same name exists in the supplied object or array (and not in the ignore parameter) the value is copied.
+
+This method returns false if an error occurs, true otherwise.
+
+This method can be overloaded/supplemented by the child class.
+
+===== Syntax =====
+boolean bind ( **$from**, **$ignore** )
+| **$from** | mixed | is an associative array or object containing the values to bind to this object. |
+| **$ignore** | mixed | is an array or a space separated list of fields that should not be bound. |
+
+===== Examples =====
+
+<code php|Example>
+$menudata = array(
+				'menutype'	=> 'MyMenu',
+				'title'		=> 'Menu Title',
+				'description' => 'This is a sample menu'
+				);
+
+$menutype = JTable::getInstance( 'MenuTypes' );
+print_r( $menutype );
+$menutype->bind( $menudata );
+print_r( $menutype );
+</code>
+might produce
+<code php|Result>
+JTableMenuTypes Object
+(
+    [id] => 
+    [menutype] => 
+    [title] => 
+    [description] => 
+...
+)
+JTableMenuTypes Object
+(
+    [id] => 
+    [menutype] => MyMenu
+    [title] => Menu Title
+    [description] => This is a sample menu
+...
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

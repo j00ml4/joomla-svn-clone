@@ -1,0 +1,29 @@
+====== setDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#setDBO|JTable->setDBO]] | never | Work in progress |
+
+Sets the internal database object.
+
+This method will result in the internal database object pointer to refer to the specified database object. This method would generally only be called directly if you need to change the object that is being referenced.
+
+===== Syntax =====
+void setDBO	( **&$db** )
+| **&$db** | JDatabase | is an object of type JDatabase which can be used to access the database that this table is stored in. |
+
+===== Examples =====
+
+<code php|Example>
+JTable::addIncludePath( JPATH_ADMINISTRATOR.DS.'components'.DS.'com_poll'.DS.'tables' );
+
+$poll =& JTable::getInstance( 'poll', 'Table' );
+$db =& JFactory::getDBO();
+$poll->setDBO( $db );
+</code>
+will set the internal database pointer to the application database object. Note that this is done automatically by the getInstance() method and does not need to be done unless an alternative database object is created and needs to be used.
+
+----
+
+~~DISCUSSION~~
+
+
+

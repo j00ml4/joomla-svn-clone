@@ -1,0 +1,44 @@
+====== canDelete ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#canDelete|JTable->canDelete]] | never | Work in progress |
+
+Checks whether dependancies exist for this object in the db schema.
+
+This method can be overloaded/supplemented by the child class.
+
+This method returns true if it is safe to delete the record.  If it is not safe to delete the record (i.e. referential integrity will be broken) then the method will return false and the list of tables that contain records that refer to this record will be passed to the setError method, and the error number will be set to 22.
+
+**This method is broken as of SVN 7081. Example demonstrates working method using a submitted patch.**
+
+===== Syntax =====
+boolean canDelete ( **$oid**, **$joins** )
+| **$oid** | integer | is an integer containing the ID field value of the object to check. This parameter is optional and if omitted the current ID field value will be used. |
+| **$joins** | array | is an array of associative arrays containing information about joins for the table. Each associative array should have four elements: 'label' (the label of the joined table), 'name' (the name of the joined table), 'idfield' (the key field of the joined table) and 'joinfield' (the field in the joined table that refers to this table).  This parameter is optional and if omitted defaults to null and the table will assume that no joins exist. |
+
+
+===== Examples =====
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+$section->load( 1 );
+$join = array(
+			'label' => 'Category Listing',
+			'name' => '#__categories',
+			'idfield' => 'id',
+			'joinfield' => 'section'
+			);
+if ($section->canDelete( null, array( $join ) )) {
+	echo 'We can delete this record!';
+} else {
+	echo 'We cannot delete this record! Error '.$section->getErrorNum().' Tables: '.$section->getError();
+}
+</code>
+might produce (if used by the sample data)
+<code php|Result>
+We cannot delete this record! Error 22 Tables: noDeleteRecord: Category Listing
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

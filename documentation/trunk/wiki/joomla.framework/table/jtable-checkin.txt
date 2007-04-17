@@ -1,0 +1,42 @@
+====== checkin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#checkin|JTable->checkin]] | never | Work in progress |
+
+Checks in a row.
+
+The table on question must have a field called 'checked_out' and a field called 'check_out_time'. See the core tables for examples of these fields. The method will invoke an SQL query on the database to set the values of these two fields to 0 values. The field that will be updated is either the record that the object currently points to or the record that has the ID that has passed in the method parameters. The object properties will also be reset to 0.
+
+The result of the DB query will be returned.
+
+If the object does not have a field called 'checked_out', the method will return true.
+
+===== Syntax =====
+boolean checkin	( **$oid** )
+| **$oid** | mixed | is a variable containing the primary key value for the row. This parameter is optional and if omitted the current value stored in the object will be used. |
+
+
+===== Examples =====
+
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+
+$section->checkout( 62 );
+if ($section->isCheckedOut()) {
+	echo 'The section is checked out! <br />';
+}
+$section->checkin();
+if ($section->isCheckedOut()) {
+	echo 'The section is now not checked out! <br />';
+}
+</code>
+might produce
+<code php|Result>
+The section is checked out!
+The section is now not checked out! 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

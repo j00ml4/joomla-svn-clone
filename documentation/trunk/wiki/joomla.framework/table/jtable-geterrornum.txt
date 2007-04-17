@@ -1,0 +1,36 @@
+====== getErrorNum ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#getErrorNum|JTable->getErrorNum]] | never | Work in progress |
+
+Returns the error number that was last set.
+
+===== Syntax =====
+int getErrorNum ()
+
+===== Examples =====
+
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+$section->load( 1 );
+$join = array(
+			'label' => 'Category Listing',
+			'name' => '#__categories',
+			'idfield' => 'id',
+			'joinfield' => 'section'
+			);
+if ($section->canDelete( null, array( $join ) )) {
+	echo 'We can delete this record!';
+} else {
+	echo 'We cannot delete this record! Error '.$section->getErrorNum();
+}
+</code>
+might produce (if used by the sample data)
+<code php|Result>
+We cannot delete this record! Error 22
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

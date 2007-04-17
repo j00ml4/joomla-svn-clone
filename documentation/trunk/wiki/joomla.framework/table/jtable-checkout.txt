@@ -1,0 +1,41 @@
+====== checkout ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#checkout|JTable->checkout]] | never | Work in progress |
+
+Checks out a row.
+
+This method will execute an update query on the database, setting the checked_out field to the $who parameter that is specified and the checked_out_time to the current time. The object properties will be updated to reflect the changes.
+
+The method will affect the currently referenced record unless the $oid parameter is specified. In this case, the specified record will be affected.
+
+===== Syntax =====
+boolean checkout	( **$who**, **$oid** )
+| **$who** | integer | is an integer containing the id of the user to store in the checked_out field. |
+| **$oid** | mixed | is a variable containing the primary key value for the row. This parameter is optional and if omitted the current object's primary key value will be usedd. |
+
+
+===== Examples =====
+
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+
+$section->checkout( 62 );
+if ($section->isCheckedOut()) {
+	echo 'The section is checked out! <br />';
+}
+$section->checkin();
+if ($section->isCheckedOut()) {
+	echo 'The section is now not checked out! <br />';
+}
+</code>
+might produce
+<code php|Result>
+The section is checked out!
+The section is now not checked out! 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

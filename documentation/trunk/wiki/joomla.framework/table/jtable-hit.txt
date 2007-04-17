@@ -1,0 +1,36 @@
+====== hit ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#hit|JTable->hit]] | never | Work in progress |
+
+Increments the table's 'hits' field by 1.
+
+If a value for $oid is supplied, that record will be updated. Otherwise, the currently referenced record will be updated.
+
+The $log parameter is not used.
+
+===== Syntax =====
+void hit ( **$oid**, **$log** )
+| **$oid** | integer | is an integer containing the primary key value of the record to update. This parameter is optional and if omitted the current record is incremented. |
+| **$log** | boolean | is a boolean value reserved for future use that may specify whether or not the hit should be logged. This parameter is optional and if omitted defaults to false. |
+
+
+===== Examples =====
+
+<code php|Example>
+$content =& JTable::getInstance( 'content' );
+$content->load( 7 );
+echo 'Current hits: '.$content->hits.'.<br />';
+$content->hit();
+echo 'Current hits: '.$content->hits.'.<br />';
+</code>
+might produce
+<code php|Result>
+Current hits: 4.
+Current hits: 5.
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
