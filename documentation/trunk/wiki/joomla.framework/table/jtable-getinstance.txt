@@ -1,0 +1,34 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#getInstance|JTable->getInstance]] | never | Work in progress |
+
+Returns a reference to the a Table object, always creating it.
+
+The class name is composed of {$prefix}{$type}. The method will check if the class already exists. If it does not, it will search the directories listed in the include path for a file named {$type}.php. If the class does not exist and no file is found, then a warning will be raised indicating that the class is not supported and the file was not found. If a file is found and the class does not exist in the file, a warning will be raised indicating this. If the class already exists, it will simply be instantiated.
+
+The type will automatically be converted to ucfirst format (i.e. all letters will be lowercase except the first letter, which will be uppercase).
+
+The default prefix is JTable. This prefix is reserved for core classes and should not be used by third party components. Third party components should use the prefix Table. Thus if a third party component used a class of type 'automobiles', the class name would be TableAutomobiles.
+
+===== Syntax =====
+JTable &getInstance ( **$type**, **$prefix** )
+| **$type** | type | is a string containing the table type to instantiate. |
+| **$prefix** | string | is a string containing the prefix of the table. This parameter is optional and if omitted default to 'JTable'. |
+
+
+===== Examples =====
+
+<code php|Example>
+$section =& JTable::getInstance( 'section' );
+</code>
+will create an object of class JTableSection.
+
+<code php|Example>
+$automobile =& JTable::getInstance( 'automobiles', 'Table' );
+<code>
+will create an object of class TableAutomobiles.
+----
+
+~~DISCUSSION~~
+
+

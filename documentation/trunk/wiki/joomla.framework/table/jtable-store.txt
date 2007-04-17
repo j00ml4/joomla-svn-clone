@@ -1,0 +1,47 @@
+====== store ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#store|JTable->store]] | never | Work in progress |
+
+Inserts a new row if id is zero or updates an existing row in the database table.
+
+If the primary key field of the record is 0, a new record will be created in the database.  If the primary key field of the record is not zero, then the specified record will be updated.
+
+This method can be overloaded/supplemented by the child class.
+
+This method will return true on success, false otherwise.  If the method fails, then the error message and error number are retrieved from the database object and stored in the JTable object.
+
+===== Syntax =====
+void store ( **$updateNulls** )
+| **$updateNulls** | boolean | is a boolean parameter which specifies whether null values in the object should be updated in the database.  This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT * FROM #__content WHERE id = 7';
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo 'The title of the article is '.$row->title.'<br />';
+
+$content =& JTable::getInstance( 'content' );
+$content->load( 7 );
+$content->title = 'The new title!';
+$content->store();
+
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo 'The title of the article is '.$row->title.'<br />';
+</code>
+might produce
+<code php|Result>
+The title of the article is Example News Item 2
+The title of the article is The new title!
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

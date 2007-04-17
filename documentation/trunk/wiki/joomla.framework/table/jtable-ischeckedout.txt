@@ -1,0 +1,45 @@
+====== isCheckedOut ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#isCheckedOut|JTable->isCheckedOut]] | never | Work in progress |
+
+Checks if an item is checked out.
+
+This method will compare the value of the $with parameter to the value of the checked_out field. If the checked_out field is 0 (i.e. the record is not checked out), or if the checked_out field is equal to $with (the record is checked out by the specified user), the method returns false. If the checked_out field is equal to a value other than $with, indicating that the record is checked out by a different user, then the method returns true.
+
+This method can also be called statically. In this case, the $against parameter must be supplied, and this parameter will be used instead of the checked_out field.
+
+===== Syntax =====
+boolean isCheckedOut ( **$with**, **$against** )
+| **$with** | integer | is an integer containing the userid to preform the match with. This parameter is optional and if omitted defaults to 0 (but if it is 0, the method will always return false). |
+| **$against** | integer | is an integer containing the userid to perform the match against when the method is used as a static function. This parameter is optional and if omitted defaults to null. |
+
+
+===== Examples =====
+
+<code php|Example>
+$content =& JTable::getInstance( 'content' );
+$content->load( 7 );
+if ($content->isCheckedOut( 60 )) {
+	echo 'The record is checked out!';
+} else {
+	echo 'The record is not checked out!';
+}
+$content->checkout( 62 );
+
+if ($content->isCheckedOut( 60 )) {
+	echo 'The record is checked out!';
+} else {
+	echo 'The record is not checked out!';
+}
+</code>
+might produce
+<code php|Result>
+The record is not checked out!
+The record is checked out! 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,57 @@
+====== check ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#check|JTable->check]] | never | Work in progress |
+
+Checks the integrity of the data in the object.
+
+This method is used to ensure that the data stored in the object is valid. This could be used for instance to ensure that foreign keys point to records for which a valid record exists, or that values of fields fall within specific ranges.
+
+This method returns true if the data is valid, false otherwise.
+
+This method can be overloaded/supplemented by the child class. In the JTable class implementation, it always returns true.
+
+===== Syntax =====
+boolean check ()
+
+===== Examples =====
+The JTableSection class has a check() method that ensures that the record has a title. Here is the code for it:
+<code php|Example>
+function check()
+{
+	// check for valid name
+	if (trim( $this->title ) == '') {
+		$this->_error = JText::sprintf( 'must contain a title', JText::_( 'Section') );
+		return false;
+	}
+
+	jimport('joomla.filter.output');
+	$alias = JOutputFilter::stringURLSafe($this->title);
+
+	if(empty($this->name) || $this->name === $alias ) {
+		$this->name = $alias;
+	}
+
+	return true;
+}
+</code>
+Therefore:
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+$section->load( 1 );
+
+$section->title = '';
+
+if (!$section->check()) {
+	echo $section->getError();
+}
+</code>
+would produce
+<code php|Result>
+Your Section must contain a title.
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

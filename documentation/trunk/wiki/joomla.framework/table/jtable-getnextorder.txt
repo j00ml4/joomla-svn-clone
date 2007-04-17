@@ -1,0 +1,39 @@
+====== getNextOrder ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#getNextOrder|JTable->getNextOrder]] | never | Work in progress |
+
+Returns the ordering value to place a new item last in its group.
+
+This method executes an SQL query to determine the maximum value of the ordering field that is stored in the database. It will then add one to this value and return the result.
+
+An optional where clause can be specified to limit the records selected. This is useful, for example, if the records in the table are divided in the category and it is desired to obtain the next ordering value for the category.
+
+This method will return an integer containing the next ordering value to use if successful, otherwise it will return false.
+
+If the table does not contain an ordering field, false will be returned and error 21 will be raised. If an error results from the query, the error number and message will be returned from the JDatabase class.
+
+===== Syntax =====
+void getNextOrder	( **$where** )
+| **$where** | string | is a string containing a WHERE clause that should be used to limit the records to search for the maximum ordering value. This parameter is optional and if omitted the entire table will be scanned. |
+
+
+===== Examples =====
+
+<code php|Example>
+$category =& JTable::getInstance( 'category' );
+
+echo 'The next ordering value is '.$category->getNextOrder() .'. <br />';
+
+echo 'The next ordering value for section 1 is '.$category->getNextOrder( 'section = 1' ) .'. <br />';
+</code>
+might produce
+<code php|Result>
+The next ordering value is 8.
+The next ordering value for section 1 is 3. 
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

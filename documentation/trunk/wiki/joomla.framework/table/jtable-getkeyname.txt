@@ -1,0 +1,27 @@
+====== getKeyName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#getKeyName|JTable->getKeyName]] | never | Work in progress |
+
+Gets the internal primary key name.
+
+The primary key name is set when the constructor is called.
+
+===== Syntax =====
+string getKeyName ()
+
+
+===== Examples =====
+<code php|Example>
+$section = JTable::getInstance( 'section' );
+
+echo 'The name of the primary key is '.$section->getKeyName();
+</code>
+might produce
+<code php|Result>
+The name of the primary key is id
+</code>
+
+----
+
+~~DISCUSSION~~
+

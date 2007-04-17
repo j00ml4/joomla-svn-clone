@@ -1,0 +1,35 @@
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#getDBO|JTable->getDBO]] | never | Work in progress |
+
+Gets the internal database object.
+
+This method returns a reference to the database object that the current JTable class is using to access the database.
+
+This method will not work if called statically.
+
+===== Syntax =====
+JDatabase &getDBO ()
+
+===== Examples =====
+<code php|Example>
+$content = JTable::getInstance( 'content' );
+
+$db =& $content->getDBO();
+
+$query = "SELECT * FROM #__content WHERE id = 7";
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo 'Title: ' . $row->title . '<br />';
+</code>
+might produce
+<code php|Result>
+Title: Example News Item 2
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

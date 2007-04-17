@@ -1,0 +1,93 @@
+====== save ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#save|JTable->save]] | never | Work in progress |
+
+Generic save method.
+
+This method is a wrapper method that invokes other lower level methods of this class. This method will first bind() to the specified source array.  Then, it will invoke the check() method to ensure that the data is proper.  Then it will invoke the store() method to save the changes to the database.  Then it will invoke the checkin() method to update the record's checked_out field.  Finally, the reorder method will be invoked to compact the ordering values of the records in the table.
+
+This method returns true on success, false otherwise.  Error messages are passed back using the classes built-in error handling.
+
+===== Syntax =====
+boolean save ( **$source**, **$order_filter** )
+| **$source** | array | is an array containing the values to save to the object. |
+| **$order_filter** | string | is a filter to use for the order updating. See the reorder() method for more details. This parameter is optional and if omitted defaults to an empty string and all records will be reordered. |
+
+
+===== Examples =====
+
+<code php|Example>
+JTable::addIncludePath( JPATH_ADMINISTRATOR.DS.'components'.DS.'com_poll'.DS.'tables' );
+
+$poll =& JTable::getInstance( 'poll', 'Table' );
+
+$polldata = array(	'title' => 'sample poll',
+					'alias' => 'sample',
+					'voters' => 7,
+					'published' => 1,
+					'access' => 0,
+					'lag' => 6000
+				);
+$poll->save( $polldata );
+
+print_r( $poll );
+</code>
+might produce
+<code php|Result>
+TablePoll Object
+(
+    [id] => 0
+    [title] => sample poll
+    [alias] => sample
+    [checked_out] => 0
+    [checked_out_time] => 0
+    [published] => 1
+    [access] => 0
+    [lag] => 6000
+    [_tbl] => #__polls
+    [_tbl_key] => id
+    [_errorNum] => 0
+    [_db] => JDatabaseMySQL Object
+        (
+            [name] => mysql
+            [_nullDate] => 0000-00-00 00:00:00
+            [_nameQuote] => `
+            [_sql] => SELECT id FROM jos_polls WHERE title = "sample poll"
+            [_errorNum] => 0
+            [_errorMsg] => 
+            [_table_prefix] => jos_
+            [_resource] => Resource id #46
+            [_cursor] => Resource id #73
+            [_debug] => 0
+            [_limit] => 0
+            [_offset] => 0
+            [_ticker] => 0
+            [_log] => Array
+                (
+                )
+
+            [_utf] => 1
+            [_quoted] => Array
+                (
+                )
+
+            [_hasQuoted] => 
+            [_errors] => Array
+                (
+                )
+
+        )
+
+    [_errors] => Array
+        (
+        )
+
+    [_error] => There is a Module already with that name, please try again.
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

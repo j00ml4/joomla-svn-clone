@@ -1,0 +1,40 @@
+====== move ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#move|JTable->move]] | never | Work in progress |
+
+Moves a record up or down.
+
+This method will swap ordering values with the closest record in the direction specified.
+
+The $dirn parameter should be negative to decrease the value of ordering or positive to increase the value of ordering.
+
+The $where parameter can be used to limit the selection of records to be considered for the move.
+
+===== Syntax =====
+void move	( **$dirn**, **$where** )
+| **$dirn** | $dirn | is an integer containing the direction that the record should be moved. |
+| **$where** | $where | is a string containing the WHERE clause to use to limit the records. This parameter is optional and if omitted the entire table is used. |
+
+
+===== Examples =====
+
+<code php|Example>
+$category =& JTable::getInstance( 'category' );
+$category->load( 3 );
+
+echo 'The current ordering is: '.$category->ordering.'. <br />';
+
+$category->move( -1, 'section = '.$category->section );
+
+echo 'The current ordering is: '.$category->ordering.'. <br />';
+</code>
+might produce
+<code php|Result>
+The current ordering is: 2.
+The current ordering is: 1. 
+</code>
+
+----
+
+~~DISCUSSION~~
+
