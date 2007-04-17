@@ -794,57 +794,67 @@ class TestOfJFTP extends UnitTestCase
 			$buffer .= chr($i);
 		}
 		$buffer .= $buffer;
-		$localpath = dirname(__FILE__).DS;
-		$file = fopen($localpath.'testfile', 'wb');
-		fwrite($file, $buffer);
-		fclose($file);
+		$sendFile = dirname(__FILE__).DS.'testfile.bin';
+		$bufferTest = file_get_contents($sendFile);
+		if ($buffer !== $bufferTest) {
+			$this->fail('The file '.$sendFile.' does not contain the expected content.'
+				.' (If you have uploaded this unit test via FTP, please use binary transfer mode).'
+				.' Skipping this test.'
+			);
+			return;
+		}
+		if (($returnedFile = tempnam('', 'JoomlaUnitTest_')) === false) {
+			$this->fail('Could not create a temporary file for file downloads. Skipping this test');
+			return;
+		}
+		unlink($returnedFile);
 
 		$ftp = new JFTP(array('timeout'=>5, 'type'=>FTP_BINARY));
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
 		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->store($localpath.'testfile', $conf['root'].'/testfile');
+		$return2 = $ftp->store($sendFile, $conf['root'].'/testfile.bin');
 		$return3 = $ftp->listNames($conf['root']);
-		$return4 = $ftp->get($localpath.'testfile_returned', $conf['root'].'/testfile');
+		$return4 = $ftp->get($returnedFile, $conf['root'].'/testfile.bin');
 
-		$bufferRead = file_get_contents($localpath.'testfile_returned');
+		$bufferRead = file_get_contents($returnedFile);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
-		$this->assertIdenticalFalse(in_array('testfile', $return1));
-		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdenticalFalse(in_array('testfile.bin', $return1));
+		$this->assertIdenticalTrue(in_array('testfile.bin', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
 
-		unlink($localpath.'testfile_returned');
-		$ftp->delete($conf['root'].'/testfile');
+		unlink($returnedFile);
+		$ftp->delete($conf['root'].'/testfile.bin');
 		$ftp->chdir($conf['root']);
 
 		$return1 = $ftp->listNames();
-		$return2 = $ftp->store($localpath.'testfile');
+		$return2 = $ftp->store($sendFile);
 		$return3 = $ftp->listNames();
-		$return4 = $ftp->get($localpath.'testfile_returned', 'testfile');
+		$return4 = $ftp->get($returnedFile, 'testfile.bin');
 
-		$bufferRead = file_get_contents($localpath.'testfile_returned');
+		$bufferRead = file_get_contents($returnedFile);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
-		$this->assertIdenticalFalse(in_array('testfile', $return1));
-		$this->assertIdenticalTrue(in_array('testfile', $return3));
+		$this->assertIdenticalFalse(in_array('testfile.bin', $return1));
+		$this->assertIdenticalTrue(in_array('testfile.bin', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertIdentical(binaryToString($buffer), binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
 
-		$return4 = $ftp->store($localpath.'testfile', $conf['root'].'/blablabla/testfile');
+		$return4 = $ftp->store($sendFile, $conf['root'].'/blablabla/testfile');
 
 		$this->assertError('JFTP::store: Bad response');
 		$this->assertIdenticalFalse($return4);
 
-		$return5 = $ftp->get($localpath.'testfile_returned', $conf['root'].'/blablabla/testfile');
+		$return5 = $ftp->get($returnedFile, $conf['root'].'/blablabla/testfile');
 
 		$this->assertError('JFTP::get: Bad response');
 		$this->assertIdenticalFalse($return5);
@@ -853,9 +863,8 @@ class TestOfJFTP extends UnitTestCase
 		 * In native mode, the destination file gets deleted if it does not exist on the server
 		 * It is accepted behaviour that the compatibility layer does not do so, therefore the @
 		 */
-		@unlink($localpath.'testfile_returned');
-		unlink($localpath.'testfile');
-		$ftp->delete($conf['root'].'/testfile');
+		@unlink($returnedFile);
+		$ftp->delete($conf['root'].'/testfile.bin');
 		$ftp->quit();
 	}
 
