@@ -15,7 +15,7 @@ Set a meta tag.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setMetaData( 'Publisher', 'Joomla! Documentation Team' );
 </code>
 might add the following tag to the head block:

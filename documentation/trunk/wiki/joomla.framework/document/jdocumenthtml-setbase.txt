@@ -12,7 +12,7 @@ Set the document base URL tag.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setBase( $mainframe->getBaseURL() );
 </code>
 might result in the following base tag in the head block:

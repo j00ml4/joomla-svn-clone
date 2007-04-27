@@ -10,7 +10,7 @@ string fetchHead ()
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 echo $document->fetchHead();
 </code>
 might produce:

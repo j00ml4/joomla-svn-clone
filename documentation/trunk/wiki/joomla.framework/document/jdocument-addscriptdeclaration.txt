@@ -15,7 +15,7 @@ global $mainframe;
 
 $script = "alert( 'A script has been added to the page!' );";
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 $document->addScriptDeclaration( $script );
 </code>
 Might add the following to the head of the document:

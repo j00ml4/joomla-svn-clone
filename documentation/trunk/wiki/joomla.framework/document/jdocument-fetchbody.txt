@@ -10,7 +10,7 @@ string fetchBody ()
 <code php|Example>
 global $mainframe;
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 $body = $document->fetchBody();
 </code>
 This function in the JDocument class returns an empty string.

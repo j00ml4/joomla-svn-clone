@@ -12,6 +12,6 @@ Add custom HTML code to the head block.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->addCustomTag( '<style><!-- body{font-family:arial;} // --></style>' );
 </code>

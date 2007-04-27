@@ -14,7 +14,7 @@ The 'rhuk_milkyway' document template in the core installation would be loaded i
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->parse( 'rhuk_milkyway' );
 </code>
 Templates are stored in the /templates directory using a subdirectory that is the name of the template. Therefore, this function will, by default, parse the file /templates/$template/index.php. In this case, $template is 'rhuk_milkyway', so the parsed file will be /templates/rhuk_milkyway/index.php. If this function is called from the Backend, this directory will be relative to the 'administrator' and will therefore load the specified admin template.

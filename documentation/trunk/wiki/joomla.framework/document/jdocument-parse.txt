@@ -18,6 +18,6 @@ global $mainframe;
 $cur_template = JRequest::getVar( 'template', $mainframe->getTemplate(), 'default', 'string' );
 $file     = 'index.php';
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->parse($cur_template, $file);
 </code>

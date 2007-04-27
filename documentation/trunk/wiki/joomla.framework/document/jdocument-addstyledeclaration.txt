@@ -19,7 +19,7 @@ $style = "body {"
         . "\n font-size: 76%;"
         . "\n}";
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 $document->addStyleDeclaration( $style );
 </code>
 Might add the following code to the head block of the current page:

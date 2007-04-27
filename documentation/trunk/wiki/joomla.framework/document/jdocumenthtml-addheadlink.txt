@@ -15,7 +15,7 @@ Add a head link to the page.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->addHeadLink( "http://www.gnu.org/copyleft/fdl.html", 'copyright', 'rel', array( 'charset' => 'UTF-8' ) );
 </code>
 adds the following code to the head block:

@@ -12,7 +12,7 @@ Set the indent string used to indent HTML.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setTab( '    ' );
 
 echo "Tab: <" . $document->getTab() . ">";

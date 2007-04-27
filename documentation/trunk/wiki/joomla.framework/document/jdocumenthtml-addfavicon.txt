@@ -14,7 +14,7 @@ Set the favourite icon to use for the document.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->addFavicon( "http://dev.joomla.org/images/favicon.ico" );
 </code>
 adds the following code to the head block:
