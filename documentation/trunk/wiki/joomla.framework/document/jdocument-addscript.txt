@@ -12,7 +12,7 @@ void addScript	( **$url**, **$type** )
 The following example adds a linked script to the header of the current document.
 <code php|Example>
 global $mainframe;
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 $document->addScript( $mainframe->getBaseURL() . 'includes/js/overlib_mini.js' );
 </code>
 Might add the following to the head tag:

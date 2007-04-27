@@ -13,7 +13,7 @@ Set the line end style of the current document.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setLineEnd( 'mac' );
 
 echo "Style: " . $document->getLang();

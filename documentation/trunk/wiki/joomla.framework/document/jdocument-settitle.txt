@@ -12,7 +12,7 @@ Set the title for the page.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setTitle( 'Joomla! Documentation Test Bed' );
 
 echo "Title: " . $document->getTitle();

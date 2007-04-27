@@ -10,7 +10,7 @@ string getBase ()
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 echo "Base URL: " . $document->getBase();
 </code>
 might produce:

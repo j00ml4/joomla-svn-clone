@@ -14,7 +14,7 @@ Set the mime type of the current document.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setMimeEncoding( 'application/xml' );
 
 echo "MIME Type: " . $document->getMimeEncoding();

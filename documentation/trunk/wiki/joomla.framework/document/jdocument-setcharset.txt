@@ -12,7 +12,7 @@ Set the character set of the current document.
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setCharset( 'utf-8' );
 
 echo "Character Set: " . $document->getCharset();

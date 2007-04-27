@@ -12,7 +12,7 @@ void unsetMetaData	( **$name**, **$http_equiv** )
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->unsetMetaData( 'robots' );
 </code>
 results in the 'robots' meta tag being unset and not inserted into the document head block.

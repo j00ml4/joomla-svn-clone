@@ -10,7 +10,7 @@ string getCharset ()
 <code php|Example>
 global $mainframe;
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 echo "Character Set: " . $document->getCharset();
 </code>
 Might produce:

@@ -11,7 +11,7 @@ This example displays the language code for the current document.
 <code php|Example>
 global $mainframe;
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 echo "Language: " . $document->getLang();
 </code>
 Might produce:

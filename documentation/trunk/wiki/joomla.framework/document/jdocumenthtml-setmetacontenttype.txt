@@ -10,6 +10,6 @@ void setMetaContentType ()
 <code php|Example>
 global $mainframe;
 
-$document =& $mainframe->getDocument();
+$document =& JFactory::getDocument();
 $document->setMetaContentType();
 </code>

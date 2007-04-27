@@ -13,7 +13,7 @@ void &getDocument ( **$type** )
 <code php|Example>
 global $mainframe;
 
-$document = $mainframe->getDocument();
+$document = JFactory::getDocument();
 </code>
 will result in a reference to the document object being stored in the $document variable.
 

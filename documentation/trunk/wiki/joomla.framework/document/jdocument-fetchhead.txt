@@ -10,7 +10,7 @@ string fetchHead ()
 <code php|Example>
 global $mainframe;
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 $head = $document->fetchHead();
 </code>
 This function in the JDocument class returns an empty string.

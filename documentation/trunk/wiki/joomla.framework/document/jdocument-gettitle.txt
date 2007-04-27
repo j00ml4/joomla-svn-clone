@@ -11,7 +11,7 @@ This example displays the title of the current document.
 <code php|Example>
 global $mainframe;
 
-$document = &$mainframe->getDocument();
+$document = &JFactory::getDocument();
 echo "Title: " . $document->getTitle();
 </code>
 Might produce:
