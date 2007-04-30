@@ -13,9 +13,9 @@ The following example adds a linked script to the header of the current document
 <code php|Example>
 global $mainframe;
 $document = &JFactory::getDocument();
-$document->addScript( $mainframe->getBaseURL() . 'includes/js/overlib_mini.js' );
+$document->addScript( JURI::base() . 'includes/js/overlib_mini.js' );
 </code>
 Might add the following to the head tag:
 <code php|Result>
-<script type="text/javascript" src="http://127.0.0.1/joomla11/includes/js/overlib_mini.js"></script>
+<script type="text/javascript" src="http://127.0.0.1/joomla15/includes/js/overlib_mini.js"></script>
 </code>

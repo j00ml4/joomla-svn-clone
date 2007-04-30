@@ -16,9 +16,9 @@ This example adds a link to a stylesheet in the head block of the current page.
 global $mainframe;
 
 $document = &JFactory::getDocument();
-$document->addStyleSheet( $mainframe->getBaseURL() . 'templates/rhuk_milkyway/css/template.css', 'text/css', null, array( 'id' => 'StyleSheet' ) );
+$document->addStyleSheet( JURI::base() . 'templates/rhuk_milkyway/css/template.css', 'text/css', null, array( 'id' => 'StyleSheet' ) );
 </code>
 Might add the following code to the head block of the current page:
 <code php|Result>
-<link rel="stylesheet" href="http://127.0.0.1/joomla11/templates/rhuk_milkyway/css/template.css" type="text/css"id="StyleSheet" />
+<link rel="stylesheet" href="http://127.0.0.1/joomla15/templates/rhuk_milkyway/css/template.css" type="text/css"id="StyleSheet" />
 </code>
