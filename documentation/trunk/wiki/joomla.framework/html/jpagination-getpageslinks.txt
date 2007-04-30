@@ -40,7 +40,7 @@ foreach ($rows as $row) {
     echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
 }
 echo "</table>";
-echo $pageNav->getPagesLinks( $mainframe->getBaseURL() . "index.php?option=$option" );
+echo $pageNav->getPagesLinks( JURI::base() . "index.php?option=$option" );
 </code>
 might display the following links at the end of the list:
 <code php|Result>

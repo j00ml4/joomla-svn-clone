@@ -40,7 +40,7 @@ foreach ($rows as $row) {
     echo "<tr><td>$row->name</td><td>$row->value</td></tr>";
 }
 echo "</table>";
-$pagesLinks = $pageNav->getPagesList( $mainframe->getBaseURL() . "index.php?option=$option" );
+$pagesLinks = $pageNav->getPagesList( JURI::base() . "index.php?option=$option" );
 print_r( $pagesLinks );
 </code>
 will display the following array at the end of the list (this array wouldn't normally be displayed in this raw form):
