@@ -12,7 +12,10 @@ class TestOfJFTP extends UnitTestCase
 		 * @TODO Overriding of FTP_NATIVE does currently not work, as the file which should be
 		 * tested is loaded first by the UnitTestController
 		 */
-		@include('ftp.conf');
+		$confFile = dirname(__FILE__).DS.'ftp.conf';
+		if (file_exists($confFile)) {
+			include $confFile;
+		}
 
 		/** @TODO this should be included in a JoomlaTestCase which extends the UnitTestCase */
 		jimport('joomla.utilities.error');
@@ -294,7 +297,9 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertIdentical($return3, $return7);
 		$this->assertIdentical($return3, $conf['root']);
 		$this->assertIdentical($return9, '/');
-		$this->assertNotIdentical($return1, $return3);
+		$this->assertNotIdentical($return1, $return3, '%s - Please make sure to run this test'
+			.' in a subdirectory of your FTP account'
+		);
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
 		$this->assertIdenticalTrue($return6);
@@ -332,16 +337,17 @@ class TestOfJFTP extends UnitTestCase
 		$return2 = $ftp->listNames($conf['root'].'/');
 		$ftp->chdir($conf['root']);
 		$return3 = $ftp->listNames();
-		
+
 		$this->assertIdentical($return1, $return2);
 		$this->assertIdentical($return1, $return3);
 		$this->assertIsA($return1, 'array');
+		$return1 = (array) $return1;
+		$return2 = (array) $return2;
 		$this->assertIdenticalFalse(in_array('.', $return1), 'Directory listing contains [.]?');
 		$this->assertIdenticalFalse(in_array('..', $return1), 'Directory listing contains [..]?');
 		$this->assertNoErrors();
 
 		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
-		$return1 = (array) $return1;
 		$test = true;
 		$file = '';
 		foreach($return1 as $file) {
@@ -955,7 +961,10 @@ class TestOfJFTP extends UnitTestCase
 
 		// Allow overriding of credentials from custom file, placed in the directory of this file
 		$config = new JConfig();
-		@include('ftp.conf');
+		$confFile = dirname(__FILE__).DS.'ftp.conf';
+		if (file_exists($confFile)) {
+			include $confFile;
+		}
 		$return = array(
 			'enabled'	=> 1,
 			'host'		=> $config->ftp_host,
