@@ -633,9 +633,9 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->connect($conf['host'], $conf['port']);
 		$ftp->login($conf['user'], $conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root']);
+		$return1 = $this->listAllNames($ftp, $conf['root']);
 		$return2 = $ftp->mkdir($conf['root'].'/testdir');
-		$return3 = $ftp->listNames($conf['root']);
+		$return3 = $this->listAllNames($ftp, $conf['root']);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalFalse(in_array('testdir', $return1));
@@ -646,9 +646,9 @@ class TestOfJFTP extends UnitTestCase
 		$ftp->delete($conf['root'].'/testdir');
 		$ftp->chdir($conf['root']);
 
-		$return1 = $ftp->listNames();
+		$return1 = $this->listAllNames($ftp, null);
 		$return2 = $ftp->mkdir('testdir');
-		$return3 = $ftp->listNames();
+		$return3 = $this->listAllNames($ftp, null);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalFalse(in_array('testdir', $return1));
@@ -1062,6 +1062,14 @@ class TestOfJFTP extends UnitTestCase
 	function assertIdenticalTrue($value, $message='%s')
 	{
 		return $this->assertIdentical($value, true, $message);
+	}
+
+	function listAllNames(&$ftp, $path) {
+		$return = $ftp->listDetails($path);
+		for ($i=0, $n=count($return); $i<$n; $i++) {
+			$return[$i] = $return[$i]['name'];
+		}
+		return $return;
 	}
 
 /**
