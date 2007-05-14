@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+  <title>Joomla! Developer Manual</title>
+
+  <part>
+    <title>Developing Templates</title>
+
+    <chapter>
+      <title>Creating your First Template</title>
+
+      <section>
+        <title></title>
+
+        <para></para>
+      </section>
+    </chapter>
+  </part>
+
+  <part>
+    <title>Developing Plugins</title>
+
+    <chapter>
+      <title>Creating your First Plugin</title>
+
+      <section>
+        <title></title>
+
+        <para></para>
+      </section>
+    </chapter>
+  </part>
+
+  <part>
+    <title>Developing Modules</title>
+
+    <chapter>
+      <title>Creating your first Module</title>
+
+      <section>
+        <title></title>
+
+        <para></para>
+      </section>
+    </chapter>
+  </part>
+
+  <part>
+    <title>Developing Components</title>
+
+    <chapter>
+      <title></title>
+
+      <section>
+        <title></title>
+
+        <para></para>
+      </section>
+    </chapter>
+  </part>
+
+  <appendix>
+    <title>Joomla! Framework API Reference</title>
+
+    <para></para>
+  </appendix>
+</book>
