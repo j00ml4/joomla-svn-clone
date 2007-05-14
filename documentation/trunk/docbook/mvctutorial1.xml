@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter id="mvcpart1">
   <title>Developing a Model-View-Controller Component - Part 1</title>
 
-  <section>
+  <section id="mvcpart1.introduction">
     <title>Introduction</title>
 
     <para>The new framework in Joomla! 1.5 unleashes a great deal of power for
@@ -16,13 +16,13 @@
     Joomla!</para>
   </section>
 
-  <section>
+  <section id="mvcpart1.requirements">
     <title>Requirements</title>
 
     <para>You need Joomla! 1.5 or greater for this tutorial.</para>
   </section>
 
-  <section>
+  <section id="mvcpart1.mvcintroduction">
     <title>Introduction to Model-View-Controller</title>
 
     <para>While the idea behind a component may seem extremely simple, code
@@ -87,42 +87,47 @@
     <title>Joomla! MVC Implementation</title>
 
     <para>In Joomla!, the MVC pattern is implemented using three classes:
-    JModel, JView and JController. For more detailed information about these
-    classes, please refer to the API reference documentation (WIP).</para>
+    <classname>JModel</classname>, <classname>JView</classname> and
+    <classname>JController</classname>. For more detailed information about
+    these classes, please refer to the API reference documentation
+    (WIP).</para>
   </section>
 
   <section>
     <title>Creating a Component</title>
 
     <para>For our basic component, we only require five files:<simplelist>
-        <member>hello.php - this is the entry point to our component</member>
+        <member><filename>hello.php</filename> - this is the entry point to
+        our component</member>
 
-        <member>controller.php - this file contains our base
-        controller</member>
+        <member><filename>controller.php</filename> - this file contains our
+        base controller</member>
 
-        <member>views/hello/view.html.php - this file retrieves the necessary
-        data and pushes it into the template</member>
+        <member><filename>views/hello/view.html.php</filename> - this file
+        retrieves the necessary data and pushes it into the template</member>
 
-        <member>views/hello/tmpl/default.php - this is the template for our
-        output</member>
+        <member><filename>views/hello/tmpl/default.php</filename> - this is
+        the template for our output</member>
 
-        <member>hello.xml - this is an XML file that tells Joomla! how to
-        install our component.</member>
+        <member><filename>hello.xml</filename> - this is an XML file that
+        tells Joomla! how to install our component.</member>
       </simplelist></para>
 
     <section>
       <title>Creating the Entry Point</title>
 
       <para>Joomla! is always accessed through a single point of entry:
-      index.php for the Site Application or administrator/index.php for the
-      Administrator Application. The application will then load the required
-      component, based on the value of 'option' in the URL or in the POST
-      data. For our component, the URL would be:</para>
+      <filename>index.php</filename> for the Site Application or
+      <filename>administrator/index.php</filename> for the Administrator
+      Application. The application will then load the required component,
+      based on the value of 'option' in the URL or in the POST data. For our
+      component, the URL would be:</para>
 
       <para><code>index.php?option=com_hello&amp;view=hello</code></para>
 
       <para>This will load our main file, which can be seen as the single
-      point of entry for our component: components/com_hello/hello.php.</para>
+      point of entry for our component:
+      <filename><filename>components/com_hello/hello.php</filename></filename>.</para>
 
       <para>The code for this file is fairly typical across components.</para>
 
@@ -176,15 +181,18 @@ $controller-&gt;redirect();
       controller is needed. In this component, the base controller is the only
       controller, but we will leave this here for future use.</para>
 
-      <para>JRequest:getVar() finds a variable in the URL or the POST data. So
-      if our URL is index.php?option=com_hello&amp;controller=controller_name,
-      then we can retrieve our controller name in our component using: echo
-      JRequest::getVar('controller');</para>
+      <para><classname>JRequest</classname>:getVar() finds a variable in the
+      URL or the POST data. So if our URL is
+      index.php?option=com_hello&amp;controller=controller_name, then we can
+      retrieve our controller name in our component using: echo
+      <classname>JRequest</classname>::getVar('controller');</para>
 
-      <para>Now we have our base controller 'HelloController' in
-      com_hello/controller.php, and, if needed, additional controllers like
-      'HelloControllerController1' in com_hello/controllers/controller1.php.
-      Using this standard naming scheme will make things easy later on:
+      <para>Now we have our base controller
+      '<classname>HelloController</classname>' in com_hello/controller.php,
+      and, if needed, additional controllers like
+      '<classname>HelloControllerController1</classname>' in
+      com_hello/controllers/controller1.php. Using this standard naming scheme
+      will make things easy later on:
       '{Componentname}{Controller}{Controllername}'</para>
 
       <para>After the controller is created, we instruct the controller to
@@ -246,22 +254,23 @@ class HelloController extends JController
 }
 ?&gt;</programlisting>
 
-      <para>The JController constructor will always register a display() task
-      and unless otherwise specified (using the registerDefaultTask() method),
-      it will set it as the default task.</para>
+      <para>The <classname>JController</classname> constructor will always
+      register a display() task and unless otherwise specified (using the
+      registerDefaultTask() method), it will set it as the default
+      task.</para>
 
       <para>This barebones display() method isn't really even necessary since
       all it does is invoke the parent constructor. However, it is a good
       visual clue to indicate what is happening in the controller.</para>
 
-      <para>The JController::display() method will determine the name of the
-      view and layout from the request and load that view and set the layout.
-      When you create a menu item for your component, the menu manager will
-      allow the administrator to select the view that they would like the menu
-      link to display and to specify the layout. A view usually refers to a
-      view of a certain set of data (i.e. a list of cars, a list of events, a
-      single car, a single event). A layout is a way that that view is
-      organized.</para>
+      <para>The <classname>JController</classname>::display() method will
+      determine the name of the view and layout from the request and load that
+      view and set the layout. When you create a menu item for your component,
+      the menu manager will allow the administrator to select the view that
+      they would like the menu link to display and to specify the layout. A
+      view usually refers to a view of a certain set of data (i.e. a list of
+      cars, a list of events, a single car, a single event). A layout is a way
+      that that view is organized.</para>
 
       <para>In our component, we will have a single view called hello, and a
       single layout (default).</para>
@@ -272,7 +281,8 @@ class HelloController extends JController
 
       <para>The task of the view is very simple: It retrieves the data to be
       displayed and pushes it into the template. Data is pushed into the
-      template using the JView::assignRef method.</para>
+      template using the <classname>JView</classname>::assignRef
+      method.</para>
 
       <para>The code for the view is:</para>
 
@@ -389,20 +399,23 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
 &lt;/install&gt;</programlisting>
 
       <para>If you look closely you will notice that there are some files that
-      will be copied that we have not discussed. These are the index.html
-      files. An index.html file is placed in each directory to prevent prying
-      users from getting a directory listing. If there is no index.html file,
-      some web servers will list the directory contents. This is often
-      undesirable. These files have the simple line:</para>
+      will be copied that we have not discussed. These are the
+      <filename>index.html</filename> files. An
+      <filename>index.html</filename> file is placed in each directory to
+      prevent prying users from getting a directory listing. If there is no
+      <filename>index.html</filename> file, some web servers will list the
+      directory contents. This is often undesirable. These files have the
+      simple line:</para>
 
       <programlisting>&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
 
       <para>It will simply display a blank page.</para>
 
-      <para>The other file is the admin.hello.php file. This is the entry
-      point for the admin section of our component. Since we don't have an
-      admin section of our component, it will have the same content as the
-      index.html files at this point in time.</para>
+      <para>The other file is the <filename>admin.hello.php</filename> file.
+      This is the entry point for the admin section of our component. Since we
+      don't have an admin section of our component, it will have the same
+      content as the <filename>index.html</filename> files at this point in
+      time.</para>
     </section>
   </section>
 
