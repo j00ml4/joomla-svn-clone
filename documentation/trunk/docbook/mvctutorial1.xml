@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<refentry>
-  <refmeta>
-    <refentrytitle>Developing a Model-View-Controller
-    Component</refentrytitle>
+<chapter>
+  <title>Developing a Model-View-Controller Component - Part 1</title>
 
-    <manvolnum>1</manvolnum>
-  </refmeta>
-
-  <refnamediv>
-    <refname>Developing a Model-View-Controller Component - Part 1</refname>
-
-    <refpurpose>This tutorial demonstrates the use of the new Joomla! 1.5 MVC
-    framework.</refpurpose>
-  </refnamediv>
-
-  <refsection>
+  <section>
     <title>Introduction</title>
 
     <para>The new framework in Joomla! 1.5 unleashes a great deal of power for
@@ -28,15 +14,15 @@
     component. In future tutorials, this simple framework will be built upon
     to show the full power and versatility of the MVC design pattern in
     Joomla!</para>
-  </refsection>
+  </section>
 
-  <refsection>
+  <section>
     <title>Requirements</title>
 
     <para>You need Joomla! 1.5 or greater for this tutorial.</para>
-  </refsection>
+  </section>
 
-  <refsection>
+  <section>
     <title>Introduction to Model-View-Controller</title>
 
     <para>While the idea behind a component may seem extremely simple, code
@@ -54,7 +40,7 @@
     here in brief, but for a more thorough explanation, please refer to the
     links provided at the end of this tutorial.</para>
 
-    <refsection>
+    <section>
       <title>Model</title>
 
       <para>The model is the part of the component that encapsulates the
@@ -68,9 +54,9 @@
       to be moved from a system that utilizes a flat file to store its
       information to a system that uses a database, the model is the only
       element that needs to be changed, not the view or the controller.</para>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>View</title>
 
       <para>The view is the part of the component that is used to render the
@@ -81,9 +67,9 @@
       which is populated and presented to the user. The view does not cause
       the data to be modified in any way, it only displays data retrieved from
       the model.</para>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>Controller</title>
 
       <para>The controller is responsible for responding to user actions. In
@@ -94,18 +80,18 @@
       does not display the data in the model, it only triggers methods in the
       model which modify the data, and then pass the model into the view which
       displays the data.</para>
-    </refsection>
-  </refsection>
+    </section>
+  </section>
 
-  <refsection>
+  <section>
     <title>Joomla! MVC Implementation</title>
 
     <para>In Joomla!, the MVC pattern is implemented using three classes:
     JModel, JView and JController. For more detailed information about these
     classes, please refer to the API reference documentation (WIP).</para>
-  </refsection>
+  </section>
 
-  <refsection>
+  <section>
     <title>Creating a Component</title>
 
     <para>For our basic component, we only require five files:<simplelist>
@@ -124,7 +110,7 @@
         install our component.</member>
       </simplelist></para>
 
-    <refsection>
+    <section>
       <title>Creating the Entry Point</title>
 
       <para>Joomla! is always accessed through a single point of entry:
@@ -136,8 +122,7 @@
       <para><code>index.php?option=com_hello&amp;view=hello</code></para>
 
       <para>This will load our main file, which can be seen as the single
-      point of entry for our component: components/com_hello/hello.php.
-      </para>
+      point of entry for our component: components/com_hello/hello.php.</para>
 
       <para>The code for this file is fairly typical across components.</para>
 
@@ -179,7 +164,7 @@ $controller-&gt;redirect();
       <para>JPATH_COMPONENT is the absolute path to the current component, in
       our case components/com_hello. If you specifically need either the Site
       component or the Administrator component, you can use
-      JPATH_COMPONENT_SITE or JPATH_COMPONENT_ADMINISTRATOR. </para>
+      JPATH_COMPONENT_SITE or JPATH_COMPONENT_ADMINISTRATOR.</para>
 
       <para>DS is the directory separator of your system: either '/' or '\'.
       This is automatically set by the framework so the developer doesn't have
@@ -216,9 +201,9 @@ $controller-&gt;redirect();
       <para>The main entry point (hello.php) essentially passes control to the
       controller, which handles performing the task that was specified in the
       request.</para>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>Creating the Controller</title>
 
       <para>Our component only has one task - greet the world. Therefore, the
@@ -280,9 +265,9 @@ class HelloController extends JController
 
       <para>In our component, we will have a single view called hello, and a
       single layout (default).</para>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>Creating the View</title>
 
       <para>The task of the view is very simple: It retrieves the data to be
@@ -318,9 +303,9 @@ class HelloViewHello extends JView
     }
 }
 ?&gt;</programlisting>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>Creating the Template</title>
 
       <para>Joomla! templates/layouts are regular PHP files that are used to
@@ -335,9 +320,9 @@ class HelloViewHello extends JView
       <programlisting>&lt;?php // no direct access
 defined('_JEXEC') or die('Restricted access'); ?&gt;
 &lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
-    </refsection>
+    </section>
 
-    <refsection>
+    <section>
       <title>Wrapping It All Up - Creating the hello.xml File</title>
 
       <para>It is possible to install a component manually by copying the
@@ -418,14 +403,14 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
       point for the admin section of our component. Since we don't have an
       admin section of our component, it will have the same content as the
       index.html files at this point in time.</para>
-    </refsection>
-  </refsection>
+    </section>
+  </section>
 
-  <refsection>
+  <section>
     <title>Contributors</title>
 
     <para><corpcredit>mjaz</corpcredit></para>
 
     <para><corpcredit>staalanden</corpcredit></para>
-  </refsection>
-</refentry>
+  </section>
+</chapter>
