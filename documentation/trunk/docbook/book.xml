@@ -3,6 +3,8 @@
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY jdmbook.mvctutorial1 SYSTEM "mvctutorial1.xml">
 <!ENTITY jdmbook.mvctutorial2 SYSTEM "mvctutorial2.xml">
+<!ENTITY jdmbook.mvctutorial3 SYSTEM "mvctutorial3.xml">
+<!ENTITY jdmbook.mvctutorial4 SYSTEM "mvctutorial4.xml">
 ]>
 <book id="jdmbook" lang="en">
   <title>Joomla! Developer Manual</title>
@@ -62,6 +64,9 @@
 
     &jdmbook.mvctutorial2;
 
+    &jdmbook.mvctutorial3;
+
+    &jdmbook.mvctutorial4;
   </part>
 
   <appendix>
