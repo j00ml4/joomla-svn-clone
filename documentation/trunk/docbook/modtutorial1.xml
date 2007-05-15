@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter id="helloworldmodule">
+  <chapterinfo>
+    <author>
+      <firstname>Ian</firstname>
+
+      <surname>MacLennan</surname>
+    </author>
+
+    <date>March 3, 2007</date>
+  </chapterinfo>
+
   <title>Creating a Hello World Module for Joomla! 1.5</title>
 
   <para>A module is a lightweight and flexible extension that is used for page
@@ -9,12 +19,12 @@
   <para>You can see many examples of modules in the standard Joomla! install:
   - menus - Latest News - Login form - and many more.</para>
 
-  <para> This tutorial will explain how to go about creating a simple Hello
+  <para>This tutorial will explain how to go about creating a simple Hello
   World module. Through this tutorial you will learn the basic file structure
   of a module. This basic structure can then be expanded to produce more
-  elaborate modules. </para>
+  elaborate modules.</para>
 
-  <section>
+  <section id="helloworldmodule.filestructure">
     <title>File Structure</title>
 
     <para>There are four basic files that are used in the standard pattern of
@@ -32,7 +42,7 @@
     displayed on the page.</para>
   </section>
 
-  <section>
+  <section id="helloworldmodule.mod_helloworld">
     <title>Creating mod_helloworld.php</title>
 
     <para>The mod_helloworld.php file will perform four tasks: # include the
@@ -62,7 +72,7 @@
 
     <programlisting>$hello = modHelloWorldHelper::getHello( $params );</programlisting>
 
-    <section>
+    <section id="helloworldmodule.mod_helloworld.completedmodhelloworld">
       <title>Completed mod_helloworld.php file</title>
 
       <para>The complete mod_helloworld.php file is as follows:</para>
@@ -97,15 +107,15 @@ require( JModuleHelper::getLayoutPath( 'mod_helloworld' ) );</programlisting>
     </section>
   </section>
 
-  <section>
+  <section id="helloworldmodule.helper">
     <title>Creating helper.php</title>
 
     <para>The helper.php file contains that helper class that is used to
     retrieve the data to be displayed in the module output. As stated earlier,
     our helper class will have one method: getHello(). This method will return
-    the ‘Hello, World’ message. </para>
+    the ‘Hello, World’ message.</para>
 
-    <para>Here is the code for the helper.php file: </para>
+    <para>Here is the code for the helper.php file:</para>
 
     <programlisting>&lt;?php
 /**
@@ -142,7 +152,7 @@ class modHelloWorldHelper
     functionality in the helper class method.</para>
   </section>
 
-  <section>
+  <section id="helloworldmodule.template">
     <title>Creating tmpl/default.php</title>
 
     <para>The default.php file is the template which displays the module
@@ -160,7 +170,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
     $hello file without any extra declarations or function calls.</para>
   </section>
 
-  <section>
+  <section id="helloworldmodule.manifest">
     <title>Creating mod_helloworld.xml</title>
 
     <para>The mod_helloworld.xml is used to specify which files the installer
@@ -197,11 +207,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
 
     <para>which will display an empty page.</para>
 
-    <para> Since our module does not use any parameters, this section is
-    empty. </para>
+    <para>Since our module does not use any parameters, this section is
+    empty.</para>
   </section>
 
-  <section>
+  <section id="helloworldmodule.conclusion">
     <title>Conclusion</title>
 
     <para>Module development for Joomla! is a fairly simple, straightforward

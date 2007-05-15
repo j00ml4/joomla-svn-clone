@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter id="mvctutorial4">
+  <chapterinfo>
+    <author>
+      <firstname>Ian</firstname>
+
+      <surname>MacLennan</surname>
+    </author>
+
+    <date>March 9, 2007</date>
+  </chapterinfo>
+
   <title>Developing a Model-View-Controller Component - Part 4 - Creating an
   Administrator Interface</title>
 
-  <section>
+  <section id="mvctutorial4.introduction">
     <title>Introduction</title>
 
     <para>In the first three tutorials, we have developed a MVC component that
@@ -14,7 +24,7 @@
     database.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial4.creatingframework">
     <title>Creating the Basic Framework</title>
 
     <para>The basic framework of the administrator panel is very similar to
@@ -31,7 +41,7 @@
     <para>The view and model that we will start with is the hellos view and
     the hellos model. We will start with the model.</para>
 
-    <section>
+    <section id="mvctutorial4.creatingframework.hellosmodel">
       <title>Creating the Hellos Model</title>
 
       <para>The Hellos Model will be very simple. The only operation that we
@@ -156,22 +166,23 @@ class HellosModelHellos extends JModel
 }</programlisting>
 
       <para>This file is saved as models/hellos.php.</para>
+    </section>
 
-      <section>
-        <title>Creating the Hellos View</title>
+    <section id="mvctutorial4.creatingframework.hellosview">
+      <title>Creating the Hellos View</title>
 
-        <para>Now that we have a model to retrieve our data, we need to
-        display it. This view will be fairly similar to the view from the site
-        section as well.</para>
+      <para>Now that we have a model to retrieve our data, we need to display
+      it. This view will be fairly similar to the view from the site section
+      as well.</para>
 
-        <para>Just as our model was automatically instantiated in the site, so
-        it is in the administrator. Methods that start with get in the model
-        can be accessed using the get() method of the JView class. So our view
-        has three lines: one to retrieve the data from the model, one to push
-        the data into the template, and one to invoke the display method to
-        display the output. Thus we have:</para>
+      <para>Just as our model was automatically instantiated in the site, so
+      it is in the administrator. Methods that start with get in the model can
+      be accessed using the get() method of the JView class. So our view has
+      three lines: one to retrieve the data from the model, one to push the
+      data into the template, and one to invoke the display method to display
+      the output. Thus we have:</para>
 
-        <programlisting>&lt;?php
+      <programlisting>&lt;?php
 /**
  * Hellos View for Hello World Component
  * 
@@ -214,22 +225,22 @@ class HellosViewHellos extends JView
     }
 }</programlisting>
 
-        <para>This file is saved as
-        <filename>views/hellos/view.html.php</filename>.</para>
-      </section>
+      <para>This file is saved as
+      <filename>views/hellos/view.html.php</filename>.</para>
+    </section>
 
-      <section>
-        <title>Creating the Hellos Template</title>
+    <section id="mvctutorial4.creatingframework.hellostemplate">
+      <title>Creating the Hellos Template</title>
 
-        <para>The template will take the data pushed into it from the view and
-        produce the output. We will display our output in a simple table.
-        While the frontend template was very simple, in the administrator we
-        will need a minimal amount of extra logic to handle looping through
-        the data.</para>
+      <para>The template will take the data pushed into it from the view and
+      produce the output. We will display our output in a simple table. While
+      the frontend template was very simple, in the administrator we will need
+      a minimal amount of extra logic to handle looping through the
+      data.</para>
 
-        <para>Here is our template:</para>
+      <para>Here is our template:</para>
 
-        <programlisting>&lt;?php defined('_JEXEC') or die('Restricted access'); ?&gt;
+      <programlisting>&lt;?php defined('_JEXEC') or die('Restricted access'); ?&gt;
 &lt;form action="index.php" method="post" name="adminForm"&gt;
 &lt;div id="editcell"&gt;
     &lt;table class="adminlist"&gt;
@@ -271,31 +282,30 @@ class HellosViewHellos extends JView
 
 &lt;/form&gt;</programlisting>
 
-        <para>This template is saved as views/hellos/tmpl/default.php.</para>
+      <para>This template is saved as views/hellos/tmpl/default.php.</para>
 
-        <para>You will notice that our output is enclosed in a form. Though
-        this is not necessary now, it will be soon.</para>
+      <para>You will notice that our output is enclosed in a form. Though this
+      is not necessary now, it will be soon.</para>
 
-        <para>We have now completed the basic part of the first view. We have
-        added five files to the admin section of our component:<simplelist>
-            <member>admin.hello.php</member>
+      <para>We have now completed the basic part of the first view. We have
+      added five files to the admin section of our component:<simplelist>
+          <member>admin.hello.php</member>
 
-            <member>controller.php</member>
+          <member>controller.php</member>
 
-            <member>models/hellos.php</member>
+          <member>models/hellos.php</member>
 
-            <member>views/hellos.php</member>
+          <member>views/hellos.php</member>
 
-            <member>views/tmpl/default.php</member>
-          </simplelist></para>
+          <member>views/tmpl/default.php</member>
+        </simplelist></para>
 
-        <para>You can now add these files to the XML install file and give it
-        a try!</para>
-      </section>
+      <para>You can now add these files to the XML install file and give it a
+      try!</para>
     </section>
   </section>
 
-  <section>
+  <section id="mvctutorial4.addingfunctionality">
     <title>Adding Functionality</title>
 
     <para>So far our administrator section is pretty useless. It doesn't
@@ -305,7 +315,7 @@ class HellosViewHellos extends JView
     <para>In order to make it useful, we need to add some buttons and
     links.</para>
 
-    <section>
+    <section id="mvctutorial4.addingfunctionality.toolbar">
       <title>Adding a Toolbar</title>
 
       <para>You may have noticed the toolbar that appears at the top of other
@@ -345,7 +355,7 @@ JToolBarHelper::addNewX();</programlisting>
       within the '' to the translated version of the string.</remark>
     </section>
 
-    <section>
+    <section id="mvctutorial4.addingfunctionality.checkboxes">
       <title>Adding Checkboxes and Links to our Form</title>
 
       <para>We now have buttons. Two of those buttons operate on existing
@@ -417,20 +427,20 @@ JToolBarHelper::addNewX();</programlisting>
     </section>
   </section>
 
-  <section>
+  <section id="mvctutorial4.downanddirty">
     <title>Getting Down and Dirty: Doing the Real Work</title>
 
     <para>Now that the Hellos view is done, it is time to move to the Hello
     view and model. This is where the real work will get done.</para>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.hellocontroller">
       <title>Creating the Hello Controller</title>
 
       <para>Our default controller just isn't going to cut it when it comes to
       doing work - all it is capable of doing is displaying views.</para>
 
       <para>We need to be able to handle the tasks that we are launching from
-      the Hellos view: add, edit and remove. </para>
+      the Hellos view: add, edit and remove.</para>
 
       <para>Add and edit are essentially the same task: they both display a
       form to the user that allows a greeting to be edited. The only
@@ -460,7 +470,7 @@ function __construct()
       tell Joomla! to disable the mainmenu while we are editing our greeting.
       This prevents users from leaving unsaved records open.</para>
 
-      <para>Our edit task handler looks like: </para>
+      <para>Our edit task handler looks like:</para>
 
       <programlisting>/**
  * display the edit form
@@ -476,7 +486,7 @@ function edit()
 }</programlisting>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.helloview">
       <title>Creating the Hello View</title>
 
       <para>The Hello view will display a form which will allow the user to
@@ -535,14 +545,14 @@ function display($tpl = null)
 }</programlisting>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.hellomodel">
       <title>Creating the Hello Model</title>
 
       <para>Our view needs data. Therefore, we need to create a model to model
-      a hello. </para>
+      a hello.</para>
 
       <para>Our model will have two properties: _id and _data. _id will hold
-      the id of the greeting and data will hold the data. </para>
+      the id of the greeting and data will hold the data.</para>
 
       <para>We will start with a constructor, which will attempt to retrieve
       the id from the query:</para>
@@ -566,10 +576,10 @@ function __construct()
       second parameter is the default value to assign if there is no value
       found. The third parameter is the name of the hash to retrieve the value
       from (get, post, etc), and the last value is the data type that should
-      be forced on the value. </para>
+      be forced on the value.</para>
 
       <para>Our constructor will take the first value from the cid array and
-      assign it to the id. </para>
+      assign it to the id.</para>
 
       <para>Our setId() method can be used to set our id. Changing the id that
       our model points to will mean the id points to the wrong data.
@@ -618,7 +628,7 @@ function &amp;getData()
 }</programlisting>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.form">
       <title>Creating the Form</title>
 
       <para>Now all that is left is to create the form that the data will go
@@ -659,14 +669,14 @@ function &amp;getData()
       so we silently pass it along in the form.</para>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.implementingfunctionality">
       <title>Implementing the Functionality</title>
 
       <para>So far, our controller only handles two tasks: edit and new.
       However, we also have buttons to save, delete and cancel records. We
       need to write code to handle and perform these tasks.</para>
 
-      <section>
+      <section id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord">
         <title>Saving a Record</title>
 
         <para>The logical next step is to implement the functionality to save
@@ -682,7 +692,7 @@ function &amp;getData()
         these updates. It also makes it easy to transfer data from an HTML
         form into the database.</para>
 
-        <section>
+        <section id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.tableclass">
           <title>Creating the Table Class</title>
 
           <para>The JTable class is an abstract class from which you can
@@ -748,7 +758,7 @@ class TableHello extends JTable
           component.</para>
         </section>
 
-        <section>
+        <section id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.modelfunction">
           <title>Implementing the Function in our Model</title>
 
           <para>We are now ready to add the method to the model which will
@@ -757,7 +767,7 @@ class TableHello extends JTable
           object, check to ensure that the record is properly formed, and
           store the record in the database.</para>
 
-          <para> Our method looks like:</para>
+          <para>Our method looks like:</para>
 
           <programlisting>/**
  * Method to store a record
@@ -802,8 +812,8 @@ function store()
           specify its name - the JModel class knows where to find it. You may
           recall that we called our table class TableHello and put it in a
           file called hello.php in the tables directory. If you follow this
-          convention, the JModel class can create your object automatically.
-          </para>
+          convention, the JModel class can create your object
+          automatically.</para>
 
           <para>The second line will retrieve the data from the form. The
           JRequest class makes this very easy. In this case, we are retrieving
@@ -820,7 +830,7 @@ function store()
           provide any value for us currently, by calling this method we make
           it possible to do data checking using our TableHello class in the
           future. This method can be overridden in our TableHello class with a
-          method that performs the appropriate checks. </para>
+          method that performs the appropriate checks.</para>
 
           <para>The store() method will take the data that is in the object
           and store it in the database. If the id is 0, it will create a new
@@ -828,12 +838,12 @@ function store()
           (UPDATE).</para>
         </section>
 
-        <section>
+        <section id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.addingtask">
           <title>Adding the Task to the Controller</title>
 
           <para>We are now ready to add our task to the controller. Since the
           task that we are firing is called 'save', we must call our method
-          'save'. This is simple: </para>
+          'save'. This is simple:</para>
 
           <programlisting>/**
  * save a record (and redirect to main page)
@@ -852,22 +862,31 @@ function save()
     // Check the table in so it can be edited.... we are done with it anyway
     $link = 'index.php?option=com_hello';
     $this-&gt;setRedirect($link, $msg);
-}
-
-</programlisting>
+}</programlisting>
 
           <para>All we do is get our model and invoke the store() method. Then
           we use the setRedirect() method to redirect back to our list of
           greetings. We also pass a message along, which will be displayed at
-          the top of the page, like: &lt;INSERT IMAGE HERE&gt; </para>
+          the top of the page.</para>
+
+          <figure id="mvctutorial4.message">
+            <title>The message that was passed is displayed at the top of the
+            page.</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/message.png" format="PNG" />
+              </imageobject>
+            </mediaobject>
+          </figure>
         </section>
       </section>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord">
       <title>Deleting a Record</title>
 
-      <section>
+      <section id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.implementingmodelfunction">
         <title>Implementing the Function in the Model</title>
 
         <para>In the model, we will retrieve the list of IDs to delete and
@@ -900,11 +919,11 @@ function delete()
         them later if we so choose.</para>
       </section>
 
-      <section>
+      <section id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.removetask">
         <title>Handling the Remove Task in the Controller</title>
 
         <para>This is similar to the save() method which handled the save
-        task: </para>
+        task:</para>
 
         <programlisting>/**
  * remove record(s)
@@ -924,7 +943,7 @@ function remove()
       </section>
     </section>
 
-    <section>
+    <section id="mvctutorial4.downanddirty.implementingfunctionality.canceloperation">
       <title>Cancelling the Edit Operation</title>
 
       <para>To cancel the edit operation, all we have to do is redirect back
@@ -942,7 +961,7 @@ function cancel()
     </section>
   </section>
 
-  <section>
+  <section id="mvctutorial4.conclusion">
     <title>Conclusion</title>
 
     <para>We have now implemented a basic backend to our component. We are now
@@ -954,11 +973,18 @@ function cancel()
     look between components.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial4.contributors">
     <title>Contributors</title>
 
-    <para><corpcredit>mjaz</corpcredit></para>
+    <simplelist>
+      <member>staalanden</member>
+    </simplelist>
+  </section>
 
-    <para><corpcredit>staalanden</corpcredit></para>
+  <section id="mvctutorial4.download">
+    <title>Download</title>
+
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello4.zip">com_hello4.zip</ulink></para>
   </section>
 </chapter>

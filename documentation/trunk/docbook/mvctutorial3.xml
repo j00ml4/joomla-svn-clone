@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter id="mvctutorial3">
+  <chapterinfo>
+    <author>
+      <firstname>Ian</firstname>
+
+      <surname>MacLennan</surname>
+    </author>
+
+    <date>March 5, 2007</date>
+  </chapterinfo>
+
   <title>Developing a Model-View-Controller Component - Part 3 - Using the
   Database</title>
 
-  <section>
+  <section id="mvctutorial3.introduction">
     <title>Introduction</title>
 
     <para>In the first two tutorials, we showed you how to build a simple
@@ -17,7 +27,7 @@
     retrieve data from the database.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial3.retrievingdata">
     <title>Retrieving the Data</title>
 
     <para>Our model currently has one method: getGreeting(). This method is
@@ -69,8 +79,8 @@
     <para>hello is the name of the table that we will create later, and
     greeting is the name of the field that stores the greetings. If you are
     not familiar with SQL, it would be helpful to take a tutorial or a lesson
-    to get yourself up to speed. One such tutorial can be found at <link
-    linkend="???">w3schools</link>.</para>
+    to get yourself up to speed. One such tutorial can be found at <ulink
+    url="http://www.w3schools.com/sql/default.asp">w3schools</ulink>.</para>
 
     <para>The $db-&gt;loadResult() method will execute the stored database
     query and return the first field of the first row of the result. See
@@ -79,7 +89,7 @@
     class.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial3.creatingsqlfile">
     <title>Creating the Installation SQL File</title>
 
     <para>The Joomla! installer has built-in support for executing queries
@@ -117,11 +127,11 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
     field that is used to uniquely identify a record. This is often used to
     lookup rows in the database. The other field is greeting. This is the
     field that stores the greeting that is returned from the query that we
-    used above. </para>
+    used above.</para>
 
     <para>We will save our queries in a file called install.sql.</para>
 
-    <section>
+    <section id="mvctutorial3.creatingsqlfile.uninstall">
       <title>Creating the Uninstall SQL File</title>
 
       <para>Though we might hope that people will never want to uninstall our
@@ -138,7 +148,7 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
     </section>
   </section>
 
-  <section>
+  <section id="mvctutorial3.updatinginstallfile">
     <title>Updating our Install File</title>
 
     <para>We need to change a few things in our install file. First, we need
@@ -215,7 +225,7 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
     Joomla! there may be more database drivers available.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial3.conclusion">
     <title>Conclusion</title>
 
     <para>We now have a component that takes advantage of both the Joomla! MVC
@@ -224,11 +234,18 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
     installer to create and populate database tables.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial3.contributors">
     <title>Contributors</title>
 
-    <para><corpcredit>mjaz</corpcredit></para>
+    <simplelist>
+      <member>staalanden</member>
+    </simplelist>
+  </section>
 
-    <para><corpcredit>staalanden</corpcredit></para>
+  <section id="mvctutorial3.download">
+    <title>Download</title>
+
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello3.zip">com_hello3.zip</ulink></para>
   </section>
 </chapter>

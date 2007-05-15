@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY jdmbook.modtutorial1 SYSTEM "modtutorial1.xml">
 <!ENTITY jdmbook.plugintutorial1 SYSTEM "plugintutorial1.xml">
+<!ENTITY jdmbook.modtutorial1 SYSTEM "modtutorial1.xml">
 <!ENTITY jdmbook.mvctutorial1 SYSTEM "mvctutorial1.xml">
 <!ENTITY jdmbook.mvctutorial2 SYSTEM "mvctutorial2.xml">
 <!ENTITY jdmbook.mvctutorial3 SYSTEM "mvctutorial3.xml">
 <!ENTITY jdmbook.mvctutorial4 SYSTEM "mvctutorial4.xml">
+<!ENTITY jdmbook.howto_savingformdata SYSTEM "howto_savingformdata.xml">
 ]>
 <book id="jdmbook" lang="en">
   <title>Joomla! Developer Manual</title>
 
-  <part>
+  <toc></toc>
+
+  <part id="jdmbook.templates">
     <title>Developing Templates</title>
-
-    <chapter>
-      <title>Creating your First Template</title>
-
-      <section>
-        <title></title>
-
-        <para></para>
-      </section>
-    </chapter>
   </part>
 
-  <part>
+  <part id="jdmbook.plugins">
     <title>Developing Plugins</title>
 
     &jdmbook.plugintutorial1;
   </part>
 
-  <part>
+  <part id="jdmbook.modules">
     <title>Developing Modules</title>
 
     &jdmbook.modtutorial1;
   </part>
 
-  <part>
+  <part id="jdmbook.components">
     <title>Developing Components</title>
 
     &jdmbook.mvctutorial1;
@@ -49,9 +42,15 @@
     &jdmbook.mvctutorial4;
   </part>
 
-  <appendix>
+  <appendix id="apireference">
     <title>Joomla! Framework API Reference</title>
 
     <para></para>
+  </appendix>
+
+  <appendix id="howtos">
+    <title>Development HOWTOs</title>
+
+    &jdmbook.howto_savingformdata;
   </appendix>
 </book>

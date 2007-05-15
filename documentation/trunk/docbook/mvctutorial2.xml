@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
-  <title>Developing a Model-View-Controller Component - Part 2 - Adding a Model</title>
+<chapter id="mvctutorial2">
+  <chapterinfo>
+    <author>
+      <firstname>Ian</firstname>
 
-  <section>
+      <surname>MacLennan</surname>
+    </author>
+
+    <date>March 3, 2007</date>
+  </chapterinfo>
+
+  <title>Developing a Model-View-Controller Component - Part 2 - Adding a
+  Model</title>
+
+  <section id="mvctutorial2.introduction">
     <title>Introduction</title>
 
     <para>In the first tutorial of this series, creating a simple
@@ -19,7 +30,7 @@
     provides.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial2.creatingmodel">
     <title>Creating the Model</title>
 
     <para>The concept of model gets its name because this class is intended to
@@ -79,13 +90,13 @@ class HelloModelHello extends JModel
     directory separators and the last part is the name of the file to load.
     All files are loaded relative to the libraries directory. This particular
     file contains the class definition for the JModel class, which is
-    necessary because our model extends this class. </para>
+    necessary because our model extends this class.</para>
 
     <para>Now that we have created our model, we must modify our view so that
     it uses it to obtain the greeting.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial2.usingmodel">
     <title>Using the Model</title>
 
     <para>The Joomla! framework is setup in such a way that the controller
@@ -139,13 +150,13 @@ class HelloViewHello extends JView
 }
 ?&gt;</programlisting>
 
-    <section>
+    <section id="mvctutorial2.usingmodel.addingtopackage">
       <title>Adding the File to the Package</title>
 
       <para>All that remains is to add an entry to the XML file so that our
       new model will be copied. The Joomla! framework will look for our model
       in the models directory, so the entry for this file will look like (it
-      should be added to the site section): </para>
+      should be added to the site section):</para>
 
       <programlisting>&lt;filename&gt;models/hello.php&lt;/filename&gt;</programlisting>
 
@@ -199,18 +210,25 @@ class HelloViewHello extends JView
     </section>
   </section>
 
-  <section>
+  <section id="mvctutorial2.conclusion">
     <title>Conclusion</title>
 
     <para>We now have a simple MVC component. Each element is very simple at
     this point, but provides a great deal of flexibility and power.</para>
   </section>
 
-  <section>
+  <section id="mvctutorial2.contributors">
     <title>Contributors</title>
 
-    <para><corpcredit>mjaz</corpcredit></para>
+    <simplelist>
+      <member>staalanden</member>
+    </simplelist>
+  </section>
 
-    <para><corpcredit>staalanden</corpcredit></para>
+  <section id="mvctutorial2.download">
+    <title>Download</title>
+
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello2.zip">com_hello2.zip</ulink></para>
   </section>
 </chapter>
