@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter id="plugintutorial">
+  <chapterinfo>
+    <author>
+      <surname>Unknown Author</surname>
+    </author>
+
+    <date>December 12, 2006</date>
+  </chapterinfo>
+
   <title>Creating a Plugin for Joomla! 1.5</title>
 
-  <section>
+  <section id="plugintutorial.createyourplugin">
     <title>How to create your own plugin</title>
 
     <para>This How-To should provide you with the basics of what you need to
@@ -11,7 +19,7 @@
     into an installation file which can be processed by the Joomla!
     installer.</para>
 
-    <section>
+    <section id="plugintutorial.createyourplugin.installationfile">
       <title>Creating the installation file</title>
 
       <para>As with all add-ons in Joomla!, plugins are easily installed as a
@@ -42,10 +50,10 @@
       installation files. You only have to look out for the group="xxx" entry
       in the &lt;install&gt; tag and the extended information in the
       &lt;filename&gt; tag. This information tells Joomla! into which folder
-      to copy the file and to which group the plugin should be added. </para>
+      to copy the file and to which group the plugin should be added.</para>
     </section>
 
-    <section>
+    <section id="plugintutorial.createyourplugin.creatingplugin">
       <title>Creating the Plugin</title>
 
       <para>Joomla! 1.5 introduces a new, more object-orientated, way of
@@ -93,7 +101,7 @@ class &lt;PluginName&gt; extends JPlugin
 }</programlisting>
     </section>
 
-    <section>
+    <section id="plugintutorial.createyourplugin.creatingpluginlegacy">
       <title>Creating the Plugin (Legacy Mode)</title>
 
       <para>This section describes the legacy method of creating plugins used
@@ -123,7 +131,7 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
       <para>With the function $mainframe→registerEvent() your plugin is
       registered into the Joomla! event system. This means that when the event
       called '&lt;EventName&gt;' is later triggered, the function called
-      '&lt;FunctionName&gt;' will be called. </para>
+      '&lt;FunctionName&gt;' will be called.</para>
 
       <para>Now you can write your plugin function code anyway you want. If
       you want to use parameters, it's no problem, just use them as usual. You
@@ -131,7 +139,7 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
       you want. When you're done, your plugin is ready for use.</para>
     </section>
 
-    <section>
+    <section id="plugintutorial.createyourplugin.usingplugin">
       <title>Using Plugins in Your Code</title>
 
       <para>Now that you've created your plugin, you will probably want to
@@ -151,7 +159,7 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
     </section>
   </section>
 
-  <section>
+  <section id="plugintutorial.conclusion">
     <title>Conclusion</title>
 
     <para>The plugin structure for Joomla! 1.5 is very flexible and powerful.

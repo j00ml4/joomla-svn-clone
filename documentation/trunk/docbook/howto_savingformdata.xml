@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="howto.savingformdata">
+  <title>HOWTO: Saving Form Data in Joomla! 1.5</title>
+
+  <articleinfo>
+    <author>
+      <firstname>Andrew</firstname>
+
+      <surname>Eddie</surname>
+    </author>
+
+    <date>July 31, 2006</date>
+  </articleinfo>
+
+  <section id="howto.savingformdata.safeway">
+    <title>The Safe Way to Bind the Request Array to a JTable Object</title>
+
+    <para>A common task when developing Joomla! components is saving data from
+    a form into a table in the database. One method of doing so that is both
+    save and easy is to process this data as follows:</para>
+
+    <programlisting>$post           = JRequest::get( ‘post’ );
+
+// fix up special html fields
+$post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’,
+’string’, _J_ALLOWRAW );
+
+$row = JTable::getInstance(‘category’, $db );
+if (!$row-&gt;bind( $post )) {
+...</programlisting>
+
+    <para>JRequest::get( ‘post’ ); 'get's an input filtered and slash
+    corrected (slashes stripped where magic quotes are enabled) copy of the
+    $_POST array. Because by default the array is filtered you loose any html
+    tags in fields that were input using an editor. We must redefine those
+    using JRequest::getVar and using the last option mark argument, in this
+    case telling us we want the raw value posted.</para>
+
+    <para>Following that we bind the JTable object to $post instead of
+    $_POST.</para>
+
+    <para>Doing things this way means:<simplelist>
+        <member>your code is independant of magic quotes (that is, you can
+        assume they are off and there are no unwanted slashes polluting your
+        strings)</member>
+
+        <member>your input is automatically filtered of many known
+        nasties</member>
+
+        <member>the is no risk of operating directly on the $_POST superglobal
+        (which is generally a no-no)</member>
+
+        <member>future creative exploits can be covered by a single upgrade to
+        the JRequest class</member>
+      </simplelist></para>
+
+    <para>Using this technique, you can safely store data from the request
+    into your database tables.</para>
+  </section>
+</article>
