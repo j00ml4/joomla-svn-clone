@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY jdmbook.modtutorial1 SYSTEM "modtutorial1.xml">
+<!ENTITY jdmbook.plugintutorial1 SYSTEM "plugintutorial1.xml">
 <!ENTITY jdmbook.mvctutorial1 SYSTEM "mvctutorial1.xml">
 <!ENTITY jdmbook.mvctutorial2 SYSTEM "mvctutorial2.xml">
 <!ENTITY jdmbook.mvctutorial3 SYSTEM "mvctutorial3.xml">
@@ -26,35 +28,13 @@
   <part>
     <title>Developing Plugins</title>
 
-    <chapter>
-      <title></title>
-
-      <para></para>
-    </chapter>
-
-    <chapter>
-      <title>Creating your First Plugin</title>
-
-      <section>
-        <title></title>
-
-        <para></para>
-      </section>
-    </chapter>
+    &jdmbook.plugintutorial1;
   </part>
 
   <part>
     <title>Developing Modules</title>
 
-    <chapter>
-      <title>Creating your first Module</title>
-
-      <section>
-        <title></title>
-
-        <para></para>
-      </section>
-    </chapter>
+    &jdmbook.modtutorial1;
   </part>
 
   <part>
