@@ -1,0 +1,41 @@
+<!--
+(prior parsing the document sources)
+this file should be auto-generated using a shell script
+that scans the manual directory for .xml files.
+an example script is included, ".build/mkentities.sh"
+
+ -->
+
+<!-- dir: joomla.org -->
+<!-- authors -->
+<!ENTITY author.maclennan SYSTEM "joomla.org/author_maclennan.xml">
+<!ENTITY author.davenport SYSTEM "joomla.org/author_davenport.xml">
+
+<!-- dir: ref -->
+<!-- ref/coding_standard.xml -->
+<!-- <!ENTITY ref.coding_standard SYSTEM "ref/coding_standard.xml"> -->
+<!-- ref/conf.xml -->
+<!-- <!ENTITY ref.conf SYSTEM "ref/conf.xml"> -->
+<!-- ref/copyrights.xml -->
+<!-- <!ENTITY ref.copyrights SYSTEM "ref/copyrights.xml"> -->
+<!-- ref/faq.xml -->
+<!-- <!ENTITY ref.faq SYSTEM "ref/faq.xml"> -->
+<!-- ref/install.xml -->
+<!-- <!ENTITY ref.install SYSTEM "ref/install.xml"> -->
+<!-- ref/preface.xml -->
+<!-- <!ENTITY ref.preface SYSTEM "ref/preface.xml"> -->
+<!-- ref -->
+<!-- <!ENTITY ref.all "&ref.coding_standard;&ref.conf;&ref.copyrights;&ref.faq;&ref.install;&ref.preface;"> -->
+
+<!-- dir: tutorials -->
+<!ENTITY tutorials.mvctutorial1 SYSTEM "tutorials/mvctutorial1.xml">
+<!ENTITY tutorials.mvctutorial1 SYSTEM "tutorials/mvctutorial1.xml">
+<!-- tutorials.mvc.all -->
+<!ENTITY tutorials.mvc.all "&tutorials.mvctutorial1;&tutorials.mvctutorial2;&tutorials.mvctutorial3;&tutorials.mvctutorial4;&tutorials.mvctutorial5;">
+
+<!ENTITY tutorials.plugins1 SYSTEM "tutorials/plugintutorial1.xml">
+
+<!ENTITY tutorials.modules1 SYSTEM "tutorials/modtutorial1.xml">
+
+<!-- tutorials.all -->
+<!ENTITY tutorials.all "&tutorials.modules.all;&tutorials.plugins.all;&tutorials.mvc.all;">

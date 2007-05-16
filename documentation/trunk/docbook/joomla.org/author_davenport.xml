@@ -1,0 +1,10 @@
+<!--
+ENTITY &author.davenport;
+for use inside <author> or <editor>
+-->
+  <firstname>Chris</firstname>
+  <surname>Davenport</surname>
+  <affiliation>
+	<orgname>Joomla!</orgname>
+	<orgdiv>Documentation Workgroup</orgdiv>
+  </affiliation>

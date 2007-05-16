@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE book SYSTEM "-//OASIS//DTD DocBook XML V4.4//EN"
+	"docbook-xml-4.4/docbookx.dtd"
+[
+    <!ENTITY % xinclude SYSTEM "xinclude.mod">
+    %xinclude;
+]>
+<!-- move XMLs to subdirectory and rename:
+	"tutorials/plugins_part1.xml"
+	"tutorials/modules_part1.xml"
+	"tutorials/mvc_part1.xml"
+	"tutorials/mvc_part2.xml"
+	"tutorials/mvc_part3.xml"
+	"tutorials/mvc_part4.xml"
+	"howtos/savingformdata.xml"
+-->
+<book id="jdmbook" lang="en" xmlns:xi="http://www.w3.org/2003/XInclude">
+  <bookinfo>
+    <title>Joomla! Developer Manual</title>
+
+    <copyright>
+      <year>2006</year>
+      <year>2007</year>
+      <holder>Joomla!</holder>
+      <!-- <holder>Open Source Matters Inc.</holder> -->
+    </copyright>
+
+    <legalnotice>
+    <para>The Joomla! Developer Manual content is copyright by the
+    individual contributors and can be used in accordance with the
+    <ulink url="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative
+    Commons License, Attribution-NonCommercial-ShareAlike 2.5</ulink>
+    </para>
+    </legalnotice>
+  </bookinfo>
+
+  <toc></toc>
+
+  <part id="jdmbook.templates">
+    <title>Developing Templates</title>
+  </part>
+
+  <part id="jdmbook.plugins">
+    <title>Developing Plugins</title>
+
+    <xi:include href="plugintutorial1.xml" />
+  </part>
+
+  <part id="jdmbook.modules">
+    <title>Developing Modules</title>
+
+    <xi:include href="modtutorial1.xml" />
+  </part>
+
+  <part id="jdmbook.components">
+    <title>Developing Components</title>
+
+    <xi:include href="mvctutorial1.xml" />
+
+    <xi:include href="mvctutorial2.xml" />
+
+    <xi:include href="mvctutorial3.xml" />
+
+    <xi:include href="mvctutorial4.xml" />
+  </part>
+
+  <appendix id="jdmbook.apireference">
+    <title>Joomla! Framework API Reference</title>
+
+  </appendix>
+
+  <appendix id="jdmbook.howtos">
+    <title>Development HOWTOs</title>
+
+    <xi:include href="howto_savingformdata.xml" />
+
+    <xi:include href="howto_loadextensionlibraryfiles.xml" />
+
+  </appendix>
+</book>
