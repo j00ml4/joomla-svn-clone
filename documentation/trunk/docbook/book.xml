@@ -8,6 +8,7 @@
 <!ENTITY jdmbook.mvctutorial3 SYSTEM "mvctutorial3.xml">
 <!ENTITY jdmbook.mvctutorial4 SYSTEM "mvctutorial4.xml">
 <!ENTITY jdmbook.howto_savingformdata SYSTEM "howto_savingformdata.xml">
+<!ENTITY jdmbook.howto_loadextensionlibraryfiles SYSTEM "howto_loadextensionlibraryfiles.xml">
 ]>
 <book id="jdmbook" lang="en">
   <title>Joomla! Developer Manual</title>
@@ -52,5 +53,7 @@
     <title>Development HOWTOs</title>
 
     &jdmbook.howto_savingformdata;
+
+    &jdmbook.howto_loadextensionlibraryfiles;
   </appendix>
 </book>
