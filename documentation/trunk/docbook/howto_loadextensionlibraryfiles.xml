@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="howto.loadextensionlibraryfiles">
+  <title>HOWTO: Loading Extension Library Files</title>
+
+  <articleinfo>
+    <author>
+      <firstname>Toby </firstname>
+
+      <surname>Patterson</surname>
+    </author>
+
+    <date>March 15, 2007</date>
+  </articleinfo>
+
+  <para>One common extension task is to load library files. If you're
+  extension employs many class files then you may wish to put all of these
+  files in a single libraries directory (as shown below).</para>
+
+  <figure id="howto.loadextensionlibraryfiles.lqmlibrarystructure">
+    <title>Directory Structure of Libraries Folder</title>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/lqmlibrarystructure.jpg" />
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para>To load my libraries I use a loader function that accepts a path
+  argument in dot notation. This file can be defined in an include.php file
+  that is included by anyone wishing to use the library.</para>
+
+  <programlisting>/**
+ * Loader for LQM Library files
+ *
+ * @param    string $path A dot syntax path
+ * @return   boolean True if the library has been loaded
+ * @access   public
+ * @since    1.0
+ */
+function lqmLibraryImport( $path ) {
+    $lqmLibraryDirectory = dirname(__FILE__);
+    return JLoader::import('lqm.'.$path, $lqmLibraryDirectory);
+}</programlisting>
+
+  <para>It is important that you use a prefix to avoid name collisions in
+  JLoader::import(). Perhaps the best prefix is the name of the extension (
+  without the 'mod_' or 'com_' ). Don't use 'joomla' unless you want some
+  angry emails from your users...!</para>
+
+  <para>Once the include file has been loaded, you can do this.</para>
+
+  <programlisting>lqmLibraryImport('variable.input.input');</programlisting>
+
+  <para>Because my function appends 'lqm.' to the path, I'm actually cheating
+  a bit. The function jimport() would require you provide the library's path
+  but then jimport() works with several libraries located under J/libraries.
+  Your function would work with one - yours.</para>
+</article>
