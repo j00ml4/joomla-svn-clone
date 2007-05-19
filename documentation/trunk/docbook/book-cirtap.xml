@@ -13,6 +13,7 @@
 	"tutorials/mvc_part3.xml"
 	"tutorials/mvc_part4.xml"
 	"howtos/savingformdata.xml"
+	"howtos/loadextensionlibraryfiles"
 -->
 <book id="jdmbook" lang="en" xmlns:xi="http://www.w3.org/2003/XInclude">
   <bookinfo>
@@ -43,25 +44,25 @@
   <part id="jdmbook.plugins">
     <title>Developing Plugins</title>
 
-    <xi:include href="plugintutorial1.xml" />
+    <xi:include href="tutorials/plugins_part1.xml" />
   </part>
 
   <part id="jdmbook.modules">
     <title>Developing Modules</title>
 
-    <xi:include href="modtutorial1.xml" />
+    <xi:include href="tutorials/modules_part1.xml" />
   </part>
 
   <part id="jdmbook.components">
     <title>Developing Components</title>
 
-    <xi:include href="mvctutorial1.xml" />
+    <xi:include href="tutorials/mvc_part1.xml" />
 
-    <xi:include href="mvctutorial2.xml" />
+    <xi:include href="tutorials/mvc_part2.xml" />
 
-    <xi:include href="mvctutorial3.xml" />
+    <xi:include href="tutorials/mvc_part3.xml" />
 
-    <xi:include href="mvctutorial4.xml" />
+    <xi:include href="tutorials/mvc_part4.xml" />
   </part>
 
   <appendix id="jdmbook.apireference">
@@ -72,9 +73,9 @@
   <appendix id="jdmbook.howtos">
     <title>Development HOWTOs</title>
 
-    <xi:include href="howto_savingformdata.xml" />
+    <xi:include href="howtos/savingformdata.xml" />
 
-    <xi:include href="howto_loadextensionlibraryfiles.xml" />
+    <xi:include href="howtos/loadextensionlibraryfiles.xml" />
 
   </appendix>
 </book>
