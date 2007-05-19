@@ -141,7 +141,7 @@
 
       <para>The code for this file is fairly typical across components.</para>
 
-      <programlisting>&lt;?php
+      <programlisting role="php">&lt;?php
 /**
  * @package    Joomla.Tutorials
  * @subpackage Components
