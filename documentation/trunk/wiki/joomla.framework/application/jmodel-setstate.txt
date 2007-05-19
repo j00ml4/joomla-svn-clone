@@ -1,0 +1,46 @@
+====== setState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#setState|JModel->setState]] | never | Work in progress |
+
+Sets model state variables.
+
+Model state variables can be used to pass information from the controller to the view and to the model. These values can later be retrieved using JModel::getState().
+
+This method returns the value that is assign to the state variable.
+
+===== Syntax =====
+mixed setState	( **$property**, **$value** )
+| **$property** | string | is a string containing the name of the property to set. |
+| **$value** | mixed | is a variable containing the value to set to the specified property. This parameter is optional and if omitted defaults to null. |
+
+
+===== Examples =====
+
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class PollModelPoll extends JModel
+{
+	function __construct() {
+		$config = array(
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+}
+
+$model =& JModel::getInstance( 'poll', 'PollModel' );
+
+$model->setState( 'filter', 'value1' );
+echo $model->getState( 'filter' );
+</code>
+might produce
+<code php|Result>
+value1
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

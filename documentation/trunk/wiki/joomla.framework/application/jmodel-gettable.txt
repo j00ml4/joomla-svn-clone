@@ -1,0 +1,52 @@
+====== getTable ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#getTable|JModel->getTable]] | never | Work in progress |
+
+Creates an instance of the specified table class and returns a reference to it.
+
+If no name or prefix is specified, the class name will be created by appending the model name to 'Table'.  The name and prefix can only contain letters, numbers and the '_' character.  If the class does not exist, it will be looked for in the include paths that have been specified in the JTable class in a file with the same name as the table (thus a table class called TableExample1 should be placed in a file called example1.php).
+
+All file names should be lowercase.
+
+This method returns a reference to a JTable object if successful, null otherwise.
+
+Method to get a table object, load it if necessary.
+
+===== Syntax =====
+JTable &getTable ( **$name**, **$prefix** )
+| **$name** | string | is a string containing the name of the table to load. This parameter is optional and if omitted defaults to the name of the model. |
+| **$prefix** | string | is a string containing the class prefix to load.  This parameter is optional and if omitted defaults to 'Table'. |
+
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class PollModelPoll extends JModel
+{
+	function __construct() {
+		$config = array(
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+}
+
+$model =& JModel::getInstance( 'poll', 'PollModel' );
+
+$table =& $model->getTable();
+$table->load( 14 );
+
+echo $table->title;
+</code>
+might produce
+<code php|Result>
+Joomla! is used for?
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
+

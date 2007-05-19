@@ -1,0 +1,49 @@
+====== _getList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#_getList|JModel->_getList]] | never | Work in progress |
+
+Returns an object list based on the specified query.
+
+This is a protected method that can be used to retrieve the model's data. It provides handling for selecting a subset of the total records of the query.
+
+===== Syntax =====
+array &_getList	( **$query**, **$limitstart**, **$limit** )
+| **$query** | string | is a string containing the query to be used to obtain the data list. |
+| **$limitstart** | integer | is an integer containing the record from which to start retrieving data. This parameter is optional and if omitted defaults to 0. |
+| **$limit** | integer | is an integer containing the number of records to retrieve. This parameter is optional and if omitted defaults to 0, resulting in all records being retrieved. |
+
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class PollModelPoll extends JModel
+{
+	function __construct() {
+		$config = array(
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+
+	function getData() {
+		$query = 'SELECT * FROM #__polls';
+		return $this->_getList( $query );
+	}
+}
+
+$model =& JModel::getInstance( 'poll', 'PollModel' );
+$data =& $model->getData();
+print_r( $data );
+</code>
+might produce
+<code php|Result>
+Array ( [0] => stdClass Object ( [id] => 14 [title] => Joomla! is used for? [alias] => joomla-is-used-for [voters] => 7 [checked_out] => 0 [checked_out_time] => 0000-00-00 00:00:00 [published] => 1 [access] => 0 [lag] => 86400 ) )
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
+
