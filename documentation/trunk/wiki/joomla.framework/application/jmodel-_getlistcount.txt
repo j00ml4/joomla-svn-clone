@@ -1,0 +1,48 @@
+====== _getListCount ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#_getListCount|JModel->_getListCount]] | never | Work in progress |
+
+Returns a record count for the specified query.
+
+This method returns an integer specifying the number of records that executing the query returns.
+
+This method is protected and should only be invoked by JModel child classes.
+
+===== Syntax =====
+int _getListCount	( **$query** )
+| **$query** | string | is a string containing the query for which to retrieve the record count. |
+
+
+===== Examples =====
+
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class PollModelPoll extends JModel
+{
+	function __construct() {
+		$config = array(
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+
+	function getDataCount() {
+		$query = 'SELECT * FROM #__polls';
+		return $this->_getListCount( $query );
+	}
+}
+
+$model =& JModel::getInstance( 'poll', 'PollModel' );
+$data =& $model->getDataCount();
+print_r( $data );
+</code>
+might produce
+<code php|Result>
+1
+</code>
+
+----
+
+~~DISCUSSION~~
+

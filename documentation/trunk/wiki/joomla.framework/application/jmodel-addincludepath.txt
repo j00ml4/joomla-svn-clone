@@ -1,0 +1,31 @@
+====== addIncludePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#addIncludePath|JModel->addIncludePath]] | never | Work in progress |
+
+Add a directory where JModel should search for models.
+
+This is a static method and will return the updated array of include paths.
+
+===== Syntax =====
+array addIncludePath ( **$path** )
+| **$path** | mixed | is a string containing the path that should be added to the include path. This parameter is optional and if omitted no path will be added. |
+
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+print_r( JModel::addIncludePath() );
+print_r( JModel::addIncludePath( JPATH_COMPONENT.DS.'models' ) );
+</code>
+might produce
+<code php|Result>
+Array ( )
+Array ( [0] => /var/www/joomla15/components/com_example/models )
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
+

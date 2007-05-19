@@ -1,0 +1,48 @@
+====== getState ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#getState|JModel->getState]] | never | Work in progress |
+
+Retrieves model state variables.
+
+This method will either return the value of a specified state variable, or will return a reference to the JObject object that is used to store the model's state variables.
+
+
+===== Syntax =====
+mixed getState ( **$property** )
+| **$property** | string | is the name of the state variable to retrieve. This parameter is optional and if omitted, defaults to null. If null is specified the internal state object is returned which stores all the state variables for the model. |
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class HelloModelHellos extends JModel
+{
+	function __construct() {
+		$config = array(
+			'name' => 'MyModel',
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+}
+
+$model =& JModel::getInstance( 'hellos', 'HelloModel' );
+
+$model->setState( 'filter', 'value1' );
+echo $model->getState( 'filter' )."\n";
+
+$states =& $model->getState();
+echo $states->get('filter');
+</code>
+might produce
+<code php|Result>
+value1
+value1
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
+

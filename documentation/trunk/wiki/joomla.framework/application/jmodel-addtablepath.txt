@@ -1,0 +1,25 @@
+====== addTablePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#addTablePath|JModel->addTablePath]] | never | Work in progress |
+
+Adds to the stack of model table paths in LIFO order.
+
+This method is a wrapper for the [[references:joomla.framework:table:jtable-addincludepath|JTable::addIncludePath()]] method.
+
+===== Syntax =====
+void addTablePath	( **$path** )
+| **$path** | mixed | is either a string containing the path that should be added to the search path list or an array of strings containing paths to search. This parameter is optional and if omitted defaults to null. |
+
+
+===== Examples =====
+<code php|Example>
+JModel::addTablePath( JPATH_COMPONENT.DS.'othertables' );
+</code>
+Will result in the specified directory being added to the list of directories which are searched for JTable class definitions.
+
+----
+
+~~DISCUSSION~~
+
+
+

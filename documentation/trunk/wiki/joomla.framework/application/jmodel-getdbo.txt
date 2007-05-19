@@ -1,0 +1,42 @@
+====== getDBO ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#getDBO|JModel->getDBO]] | never | Work in progress |
+
+Returns a reference to the database connector object used by the model.
+
+===== Syntax =====
+[[references:joomla.framework:database:jdatabase|JDatabase]] &getDBO ()
+
+
+===== Examples =====
+
+<code php|Example>
+jimport( 'joomla.application.component.model' );
+
+class HelloModelHellos extends JModel
+{
+	function __construct() {
+		$config = array(
+			'name' => 'MyModel',
+			'table_path' => JPATH_COMPONENT.DS.'tables'
+		);
+		parent::__construct( $config );
+	}
+}
+
+$model = new HelloModelHellos();
+
+$db =& $model->getDBO();
+echo $db->getVersion();
+</code>
+might produce
+<code php|Result>
+5.0.38-Ubuntu_0ubuntu1-log
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
+
