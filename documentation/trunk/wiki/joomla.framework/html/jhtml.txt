@@ -1,21 +1,22 @@
 ====== JHTML ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-|{{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML]] | never | Work in progress |
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML]] | never | Work in progress |
 
-JHTML is a utility class for all HTML drawing classes.
+The JHTML class is an interface class to all the HTML drawing classes. It provides an extensible framework for using and creating HTML elements.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-emailCloaking|emailCloaking]] | A simple method for cloaking email addresses. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-idBox|idBox]] | Builds the HTML code for a standard selectable checkbox for use on a Database list-select screen. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Iframe|Iframe]] | Builds a HTML iFrame for the specified URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Image|Image]] | Builds a HTML img element for the specified URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-keepAlive|keepAlive]] | Builds a HTML iFrame to keep the current edit session from timing out. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Link|Link]] | Builds a HTML iFrame for the specified URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Utilities-Script|Script]] | Builds an HTML <select> form field with <options> built from an array of values. |
+| [[JHTML-addIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-addIncludePath|addIncludePath]] | Adds a directory where JHTML should search for helpers. |
+| [[JHTML-date|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-date|date]] | Returns formated date according to the current locale and adds time offset. |
+| [[JHTML-iframe|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-iframe|iframe]] | Returns an &lt;iframe&gt; element. |
+| [[JHTML-image|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-image|image]] | Returns an &lt;img&gt; element. |
+| [[JHTML-link|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-link|link]] | Returns a link element. |
+| [[JHTML-tooltip|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-tooltip|tooltip]] | Creates a tooltip with an image as its button. |
+| [[JHTML-_|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-_|_]] | Creates an HTML element using one of the HTML object classes. |
+| [[JHTML-_implode_assoc|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-_implode_assoc|_implode_assoc]] | Converts an associative array into a string. |
 
-===== Related classes =====
-  * [[JCommonHTML]] Utility class for drawing common HTML elements.
-  * [[JHTMLSelect]] Utility class for creating HTML select lists.
-  * [[JAdminMenus]] Utility class for drawing admin menu HTML elements.
+----
+
+~~DISCUSSION~~
+
 
