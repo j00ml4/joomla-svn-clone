@@ -38,6 +38,41 @@
     that JController will by default load the hellos view, which will display
     a list of our greetings.</para>
 
+    <para>Here is the listing for admin.hello.php:</para>
+
+    <programlisting>&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Require the base controller
+
+require_once( JPATH_COMPONENT.DS.'controller.php' );
+
+// Require specific controller if requested
+if($controller = JRequest::getVar( 'controller' )) {
+    require_once( JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php' );
+}
+
+// Create the controller
+$classname    = 'HellosController'.$controller;
+$controller   = new $classname( );
+
+// Perform the Request task
+$controller-&gt;execute( JRequest::getVar( 'task' ) );
+
+// Redirect if set by the controller
+$controller-&gt;redirect();
+
+?&gt;</programlisting>
+
     <para>The view and model that we will start with is the hellos view and
     the hellos model. We will start with the model.</para>
 
@@ -295,9 +330,9 @@ class HellosViewHellos extends JView
 
           <member>models/hellos.php</member>
 
-          <member>views/hellos.php</member>
+          <member>views/hellos/view.html.php</member>
 
-          <member>views/tmpl/default.php</member>
+          <member>views/hellos/tmpl/default.php</member>
         </simplelist></para>
 
       <para>You can now add these files to the XML install file and give it a
@@ -388,7 +423,7 @@ JToolBarHelper::addNewX();</programlisting>
 
       <para>line:</para>
 
-      <programlisting>$checked     = JHTML::idBox( $i, $row-&gt;id );</programlisting>
+      <programlisting>$checked    = JHTML::_('grid.id',   $i, $row-&gt;id );</programlisting>
 
       <para>Then we will add a cell in between the two that we already
       have:</para>
