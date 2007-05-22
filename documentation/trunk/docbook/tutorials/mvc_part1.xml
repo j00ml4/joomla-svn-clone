@@ -241,6 +241,10 @@ $controller-&gt;redirect();
  * @license    GNU/GPL
  */
 
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
 jimport('joomla.application.component.controller');
 
 /**
@@ -303,6 +307,10 @@ class HelloController extends JController
  * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
  * @license    GNU/GPL
 */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view');
 
