@@ -1,0 +1,51 @@
+====== administrator ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLImage|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLImage|JHTMLImage]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLImage.html|JHTMLImage->administrator]] | never | Work in progress |
+
+Generates image tags for images contained in the administrator application directory.
+
+The method first checks to see if the specified image is a parameter image (i.e. $param evaluates to true).  If it is, then the image path is returned as $param_directory . $param.
+
+If $param is -1, then an empty string is used as the image path.
+
+If the image is not a parameter image, the method will search for specified file in the current template images directory.  If this file exists, then this image is used for the image tag.
+
+If it does not, then it will check to see if the specified $directory parameter starts with '/administrator'.  If so, it removes this part of image path and specifies a path relatives to the administrator directory, and uses this path for the image tag.
+
+If none of these conditions are met, the path $directory . $file is used for the image tag.
+
+An initial slash at the beginning of the path will be removed in an attempt to make the path relative.
+
+The method returns a string containing the path to the image (if $type is false), or the HTML code for an image tag for the specified image.
+
+===== Syntax =====
+string administrator ( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
+
+| **$file** | string | is a string containing the filename of the specified image. |
+| **$directory** | string | is a string containing the directory of the specified image.  This parameter is optional and if omitted defaults to '/images/'.  Note that this parameter should have a trailing slash. |
+| **$param** | string | is a string containing the name of a param image.  This parameter is optional and if omitted defaults to null, which will result in the method assuming the specified image is not a parameter image. |
+| **$param_directory** | string | is a string containing the parameter image directory. This parameter is optional and if omitted defaults to '/images/'. |
+| **$alt** | string | is a string containing the alt tage of the image.  This parameter is optional and if omitted defaults to a null. |
+| **$name** | string | is a string containing the name of the image.  This parameter is optional and is currently not used. |
+| **$type** | boolean | is a boolean value specifying whether the method should return an image tag or a path.  This parameter is optional and if omitted defaults to true, resulting in the method returning the HTML code for an image tag. |
+| **$align** | string | is a string containing the alignment value to be used for the image.  This parameter is optional and if omitted defaults to middle. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'image.administrator', 'browser.png' );
+echo JHTML::_( 'image.administrator', 'browser.png', '/images/', 'support.png', '/images/', 'Support' );
+echo JHTML::_( 'image.administrator', 'browser.png', '/images/', 'support.png', '/images/', 'Support', null, false );
+echo JHTML::_( 'image.administrator', 'browser.png', '/administrator/images/', '', '', 'Browser', 'Browser' );
+</code>
+might produce:
+<code php|Result>
+<img src="images/browser.png" alt="" align="middle" border="0" />
+<img src="images/support.png" alt="Support" align="middle" border="0" />
+images/support.png
+<img src="images/browser.png" alt="Browser" align="middle" border="0" />
+</code>
+
+----
+
+~~DISCUSSION~~
+
