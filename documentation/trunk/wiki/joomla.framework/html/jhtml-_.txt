@@ -1,0 +1,41 @@
+====== _ ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->_]] | never | Work in progress |
+
+The _ method is a wrapper method that is used to instantiate other JHTML classes and invoke their methods to render elements. This method is the main interface to the JHTML rendering system in the Joomla! 1.5 framework.
+
+The parameter used by this method is the $type parameter. This parameter is specified in the format class.method.  Class names and method names can only consist of letters, numbers and the '_' character.
+
+The method will refer to the class portion of the $type parameter and try to instantiate the class with the name JHTMLClass.  If the class does not exist, the method will search in the added include directories (see [[jhtml-addincludepath|addIncludePath]]) for a file named after the class.  For example, if the $type parameter was example1.foo, then the method would try to invoke the foo() method of the class JHTMLExample1.  If this class didn't exist, the method would search through the include paths for a file called example1.php and include this file.
+
+The additional parameters that are passed to this method are passed on to the invoked method.
+
+This method returns the results of the invoked method if successful, false otherwise.
+
+The following element classes are included in the core framework:
+  * [[JHTMLBehavior|JHTMLBehavior]]
+  * [[JHTMLEmail|JHTMLEmail]]
+  * [[JHTMLGrid|JHTMLGrid]]
+  * [[JHTMLImage|JHTMLImage]]
+  * [[JHTMLList|JHTMLList]]
+  * [[JHTMLMenu|JHTMLMenu]]
+  * [[JHTMLSelect|JHTMLSelect]]
+
+===== Syntax =====
+void _ ( **$type** )
+
+| **$type** | string | is a string containing the class and method to invoke. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'image.administrator', 'j_header_left.png' );  
+</code>
+will invoke the JHTMLImage::administrator() method and pass it the value 'j_header_left.png' as its first parameter.  This code will output:
+<code php|Result>
+<img src="templates/khepri/images/j_header_left.png" alt="" align="middle" border="0" />
+</code>
+
+----
+
+~~DISCUSSION~~
+

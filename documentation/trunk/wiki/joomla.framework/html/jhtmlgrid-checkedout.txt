@@ -1,0 +1,59 @@
+====== checkedOut ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->checkedOut]] | never | Work in progress |
+
+Generates the HTML code for a checked out indicator/checkbox.
+
+A row is considered checked out if the checked_out field is not equal to 0 (it is not checked out) and is not equal to the user ID of the current user (it is not checked out by the current user). If the row is not checked out, a checkbox will be returned that will allow the user to select the row. Otherwise, a lock image will be displayed indicating that the row is currently being edited.
+
+A string containing the HTML code is returned.
+
+===== Syntax =====
+string checkedOut	( **&$row**, **$i**, **$identifier** )
+
+| **&$row** | object | is an object containing a checked_out field. If this object is of type JTable or one of its descendants, its specialized (if any) isCheckedOut() method will be used to determine if the record is checked out. Otherwise, the static JTable::isCheckedOut() method will be used. |
+| **$i** | integer | is an integer specifying the row number of the object. |
+| **$identifier** | string | is a string specifying the name of the field that contains the primary key of the row. This parameter is optional and if omitted defaults to 'id'. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT p.*, g.name AS groupname FROM #__polls AS p'
+				.' LEFT JOIN #__groups AS g on g.id = p.access';
+$db->setQuery( $query );
+$rows = $db->loadObjectList();
+
+echo '<table><tr><th>ID</th><th></th><th>Name</th><th>Access</th></tr>';
+
+$i = 0;
+foreach ($rows as $row) {
+	$access = JHTML::_( 'grid.access', $row, $i ); 
+	$checked = JHTML::_( 'grid.checkedOut', $row, $i );
+	echo '<tr><td>'.$row->id.'</td><td>'.$checked.'</td><td>'.$row->title.'</td><td>'.$access.'</td></tr>';
+	$i++;
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<th>ID</th>
+		<th></th>
+		<th>Name</th>
+		<th>Access</th>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td><input type="checkbox" id="cb0" name="cid[]" value="14" onclick="isChecked(this.checked);" /></td>
+		<td>Joomla! is used for?</td>
+		<td><a href="javascript:void(0);" onclick="return listItemTask('cb0','accessregistered')" style="color: green;">Public</a></td>
+	</tr>
+</table>
+</code>
+
+----
+
+~~DISCUSSION~~
+

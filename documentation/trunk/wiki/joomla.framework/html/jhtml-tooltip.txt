@@ -1,0 +1,29 @@
+====== tooltip ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->tooltip]] | never | Work in progress |
+
+Returns a string containing the code for a tooltip with an image as its button.
+
+===== Syntax =====
+void tooltip ( **$tooltip**, **$title**, **$image**, **$text**, **$href**, **$link** )
+
+| **$tooltip** | string | is a string containing the tip that should be displayed when the mouse is moved over the image or link. |
+| **$title** | string | is a string containing the title of the tip that should be displayed. |
+| **$image** | string | is a string containing the path and filename of the image that should be displayed. This path should be relative to the 'includes/js/ThemeOffice/' directory. This parameter parameter is optional and if omitted defaults to 'tooltip.png'. |
+| **$text** | string | is a string containing the text to be displayed with the tooltip if a link is used instead of the image. This parameter is optional and if omitted defaults to an empty string and no link is used. |
+| **$href** | string | is a string containing the URL that the link should point to. This parameter is optional and if omitted defaults to an empty string. |
+| **$link** | boolean | is a boolean value specifying whether or not the tooltip should be a link. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::tooltip( 'Tip of the Day', 'Use Joomla! for all your coffee making needs!', 'tooltip.png' );
+</code>
+might produce:
+<code php|Result>
+<span class="editlinktip hasTip" title="Use Joomla! for all your coffee making needs!::Tip of the Day" style="text-decoration: none; color: #333;"><a href=""><img src="http://127.0.0.1/j15/includes/js/ThemeOffice/tooltip.png" border="0" alt="Tooltip"/></a></span><
+</code>
+
+----
+
+~~DISCUSSION~~
+

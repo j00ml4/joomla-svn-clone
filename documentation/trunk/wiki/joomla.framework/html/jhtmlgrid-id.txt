@@ -1,0 +1,59 @@
+====== id ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->id]] | never | Work in progress |
+
+Generates the HTML code for an ID box.
+
+This method will generate code for a checkbox that can be used to select the record in the grid.  If the $checkedOut parameter is false, the method will return an empty string.  Otherwise, the method returns a string containing the code for the checkbox.
+
+===== Syntax =====
+string id ( **$rowNum**, **$recId**, **$checkedOut**, **$name** )
+
+| **$rowNum** | integer | is an integer containing the row index. |
+| **$recId** | integer | is an integer containing the record id (primary key value) of the row. |
+| **$checkedOut** | boolean | is a boolean value specifying whether or not the record has been checked out. This parameter is optional and if omitted defaults to false. |
+| **$name** | string | is a string containing the name of the form element. This parameter is optional and if omitted defaults to 'cid'. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT p.*, g.name AS groupname FROM #__polls AS p'
+				.' LEFT JOIN #__groups AS g on g.id = p.access';
+$db->setQuery( $query );
+$rows = $db->loadObjectList();
+
+echo '<table><tr><th>ID</th><th></th><th>Name</th><th>Access</th></tr>';
+
+$i = 0;
+foreach ($rows as $row) {
+	$access = JHTML::_( 'grid.access', $row, $i ); 
+	$checked = JHTML::_( 'grid.id', $i, $row->id );
+	echo '<tr><td>'.$row->id.'</td><td>'.$checked.'</td><td>'.$row->title.'</td><td>'.$access.'</td></tr>';
+	$i++;
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<th>ID</th>
+		<th></th>
+		<th>Name</th>
+		<th>Access</th>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td><input type="checkbox" id="cb0" name="cid[]" value="14" onclick="isChecked(this.checked);" /></td>
+		<td>Joomla! is used for?</td>
+		<td><a href="javascript:void(0);" onclick="return listItemTask('cb0','accessregistered')" style="color: green;">Public</a></td>
+	</tr>
+</table>
+</code>
+(note that the grid.id method is invoked by the grid.checkedOut method in the event the record is not checked out - thus the results are the same for this and the previous example).
+
+----
+
+~~DISCUSSION~~
+

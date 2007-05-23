@@ -1,0 +1,30 @@
+====== date ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->date]] | never | Work in progress |
+
+Returns the formatted date according to the current locale and adds a time offset.
+
+The $date parameter can be in any format that is recognized by the [[references:joomla.framework:utilities:jdate|JDate]] class.
+
+The $format parameter should be a date format string that is in the syntax used by the [[http://www.php.net/function.strftime|strftime]] function. The default is the constant DATE_FORMAT_LC which is a string that is generally defined in the language file.
+
+===== Syntax =====
+string ( **$date**, **$format**, **$offset** )
+
+| **$date** | string | is a string containing the date in a US English date format. |
+| **$format** | string | is a string containing the optional format that is passed to strftime. This parameter is optional and if omitted defaults to DATE_FORMAT_LC, which is a string that is defined in the language file. || **$offset** | integer | is an integer specifying the offset, in hours, with which to adjust the time. This parameter is optional and if omitted the value configured in the framework is used. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::date( 'Sunday, May 20th, 2007 22:19', DATE_FORMAT_LC2, -3 );
+</code>
+might produce:
+<code php|Result>
+Sunday, 20 May 2007 19:19
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,110 @@
+====== state ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->state]] | never | Work in progress |
+
+Generates the HTML code for a state selection dropdown for use in filtering lists.
+
+This method is used to allow the user to filter the list results by the published state.  It presents three selectable options: Any, Published, and Unpublished.  If the $archived parameter is true, it will add a fourth state - Archived.  The values attached to these options are *, P, U and A.  These values can be used to filter the results.
+
+The method returns the HTML code for a select box for selecting state.
+
+===== Syntax =====
+void state	( **$filter_state**, **$published**, **$unpublished**, **$archived** )
+
+| **$filter_state** | string | is a string containing the current state value.  This parameter is optional and if omitted defaults to '*'. |
+| **$published** | string | is a string containing the text to be displayed for the published option.  This parameter is optional and if omitted defaults to 'Published'. |
+| **$unpublished** | string | is a string containing the text to be displayed for the unpublished option.  This parameter is optional and if omitted defaults to 'Unpublished'. |
+| **$archived** | string | is a string containing the text to be displayed for the archived option.  This parameter is optional and if omitted defaults to null, in which case no archived option will be displayed. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$where = '';
+$filter_state = JRequest::getVar( 'filter_state', '*' );
+if ($filter_state == 'P') {
+	$where = ' WHERE m.published = 1';
+}
+if ($filter_state == 'U') {
+	$where = ' WHERE m.published = 0';
+}
+
+$query = 'SELECT m.* FROM #__menu AS m'
+		.$where;
+$db->setQuery( $query, 0, 5 );
+$rows = $db->loadObjectList();
+
+?>
+<form action="index.php" method="post" name="adminForm">
+<?php echo JHTML::_( 'grid.state', $filter_state ); ?>
+<table>
+	<tr>
+		<th>
+			ID
+		</th>
+		<th>
+			Name
+		</th>
+	</tr>
+<?php
+
+$i = 0;
+foreach ($rows as $row) {
+?>
+	<tr>
+		<td><?php echo $row->id; ?></td>
+		<td><?php echo $row->name; ?></td>
+	</tr>
+<?php
+	$i++;
+}
+?>
+</table>
+<input type="hidden" name="option" value="com_poll" />
+</form>
+</code>
+might produce:
+<code php|Result>
+<form action="index.php" method="post" name="adminForm">
+<select name="filter_state" id="filter_state" class="inputbox" size="1" onchange="submitform( );">
+	<option value="" >- Select State -</option>
+	<option value="*" >Any</option>
+	<option value="P"  selected="selected">Published</option>
+	<option value="U" >Unpublished</option>
+</select>
+<table>
+	<tr>
+		<th>
+			ID
+		</th>
+		<th>
+			Name
+		</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Home</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Joomla! License</td>
+	</tr>
+	<tr>
+		<td>41</td>
+		<td>FAQ</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>Joomla! Home</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>Joomla! Forums</td>
+	</tr>
+</table>
+<input type="hidden" name="option" value="com_poll" />
+</form>
+
+----
+
+~~DISCUSSION~~
+

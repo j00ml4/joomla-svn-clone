@@ -1,0 +1,40 @@
+====== _implode_assoc ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->_implode_assoc]] | never | Work in progress |
+
+Implodes an associative array into attribute format.
+
+The $inner_glue parameter is inserted between keys and values, and the $outer_glue parameter is inserted between value pairs.  If the $keepOuterKey parameter is true, then keys that have arrays as values will also be output in the resulting string.
+
+===== Syntax =====
+void _implode_assoc	( **$array**, **$inner_glue**, **$outer_glue**, **$keepOuterKey** )
+
+| **$array** | string | is an associative array of key-value pairs to be used as attributes. This parameter is optional and if omitted defaults to null. |
+| **$inner_glue** | string | is a string to use as the separator between keys and values. This parameter is optional and if omitted defaults to '='. |
+| **$outer_glue** | string | is a string to use as a separator between key-value pairs. This parameter is optional and if omitted defaults to ' '. |
+| **$keepOuterKey** | boolean | is a boolean value that specifies whether or not keys that have array values should be inserted into the output. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$attribs = array( 'id' => 'iframe-id', 'class' => 'frame-class' );
+echo JHTML::_implode_assoc( $attribs );
+</code>
+might produce:
+<code php|Result>
+id="iframe-id" class="frame-class"
+</code>
+
+The following example has no particular use but does demonstrate how the glue parameters are used:
+<code php|Example>
+$attribs = array( 'id' => 'iframe-id', 'class' => array( 'class1' => 'class1', 'class2' => 'class2' ) );
+echo JHTML::_implode_assoc( $attribs, '+', '=', true );
+</code>
+might produce:
+<code php|Result>
+id+"iframe-id"=class=class1+"class1"=class2+"class2"
+</code>
+
+----
+
+~~DISCUSSION~~
+

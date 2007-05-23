@@ -1,0 +1,62 @@
+====== access ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->access]] | never | Work in progress |
+
+Generates the HTML code for an access level selector link.
+
+The row object that is passed to this method must have two specific properties: access, and groupname.  The groupname property is the name of the group that is current allowed access to the row.  The access parameter specifies who is permitted access to the row.  A value of 0 means that the public has access, a value of 1 means that registered users have access, and any other value means that only special users have access.
+
+If the $archived parameter is true, then no link will be displayed - only the groupname will be shown.
+
+A string containing the HTML code is returned.
+
+===== Syntax =====
+string access	( **&$row**, **$i**, **$archived** )
+
+| **&$row** | object | is an object with an integer value access property and a string value groupname property containing the current access level and groupname. |
+| **$i** | integer | is an integer containing the row number of the record to indicate which record needs to be changed when the link is clicked. |
+| **$archived** | boolean | is a boolean value which specifies whether or not the row is archived. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT p.*, g.name AS groupname FROM #__polls AS p'
+				.' LEFT JOIN #__groups AS g on g.id = p.access';
+$db->setQuery( $query );
+$rows = $db->loadObjectList();
+
+echo '<table><tr><th>ID</th><th>Name</th><th>Access</th></tr>';
+
+$i = 0;
+foreach ($rows as $row) {
+	$access = JHTML::_( 'grid.access', $row, $i ); 
+	echo '<tr><td>'.$row->id.'</td><td>'.$row->title.'</td><td>'.$access.'</td></tr>';
+	$i++;
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Access</th>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td>Joomla! is used for?</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb0','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+</table>
+</code>
+
+----
+
+~~DISCUSSION~~
+

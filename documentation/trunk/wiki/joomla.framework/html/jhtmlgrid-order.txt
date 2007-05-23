@@ -1,0 +1,106 @@
+====== order ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->order]] | never | Work in progress |
+
+Generates the HTML code for a save order icon to be used in the grid header.
+
+The resulting image will be enclosed in a link which will call the Javascript 'saveorder' function.  It will pass the number of rows less one and the value specified by the $task parameter to this function.
+
+The method returns a string containing the resulting HTML code.
+
+===== Syntax =====
+string order ( **$rows**, **$image**, **$task** )
+
+| **$rows** | array | is an array containing the objects which should have their ordering saved. This parameter is only used to obtain a count. |
+| **$image** | string | is a string containing the name of the image to use for the icon.  This parameter is optional and if omitted defaults to 'filesave.png'. |
+| **$task** | string | is a string containing the name of the task to fire when the icon is clicked. This parameter is optional and if omitted defaults to 'saveorder'. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT m.*, g.name AS groupname FROM #__menu AS m'
+		.' LEFT JOIN #__groups AS g ON g.id = m.access'
+		.' WHERE menutype = \'topmenu\''
+		.' ORDER BY ordering'
+		;
+$db->setQuery( $query );
+$rows = $db->loadObjectList();
+$order = JHTML::_( 'grid.order', $rows );
+
+echo '<table><tr><th>ID</th><th></th><th>Name</th><th>'.$order.'</th><th>Access</th></tr>';
+
+$i = 0;
+foreach ($rows as $row) {
+	$access = JHTML::_( 'grid.access', $row, $i ); 
+	$checked = JHTML::_( 'grid.id', $i, $row->id );
+	echo '<tr><td>'.$row->id.'</td><td>'.$checked.'</td><td>'.$row->name.'</td><td><input type="text" name="order[]" value="'.$row->ordering.'" /></td><td>'.$access.'</td></tr>';
+	$i++;
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<th>ID</th>
+		<th></th>
+		<th>Name</th>
+		<th>
+			<a href="javascript:saveorder(3, 'saveorder')" title="Save Order">
+				<img src="images/filesave.png" alt="Save Order" align="middle" border="0" />
+			</a>
+		</th>
+		<th>Access</th>
+	</tr>
+	<tr>
+		<td>28</td>
+		<td><input type="checkbox" id="cb0" name="cid[]" value="28" onclick="isChecked(this.checked);" /></td>
+		<td>About Joomla!</td>
+		<td><input type="text" name="order[]" value="1" /></td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb0','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>29</td>
+		<td><input type="checkbox" id="cb1" name="cid[]" value="29" onclick="isChecked(this.checked);" /></td>
+		<td>Features</td>
+		<td><input type="text" name="order[]" value="2" /></td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb1','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>18</td>
+		<td><input type="checkbox" id="cb2" name="cid[]" value="18" onclick="isChecked(this.checked);" /></td>
+		<td>News</td>
+		<td><input type="text" name="order[]" value="3" /></td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb2','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>30</td>
+		<td><input type="checkbox" id="cb3" name="cid[]" value="30" onclick="isChecked(this.checked);" /></td>
+		<td>The Community</td>
+		<td><input type="text" name="order[]" value="4" /></td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb3','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+</table>
+</code>
+
+----
+
+~~DISCUSSION~~
+
