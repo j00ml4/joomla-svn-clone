@@ -1,0 +1,50 @@
+====== cloak ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLEmail|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLEmail|JHTMLEmail]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLEmail.html|JHTMLEmail->cloak]] | never | Work in progress |
+
+Simple Javascript email cloaking method.
+
+This method returns Javascript code that will output the email address in a way that will be obscured from mechanical crawlers and bots.
+
+===== Syntax =====
+void cloak	( **$mail**, **$mailto**, **$text**, **$email** )
+
+| **$mail** | string | is a string containing the email address. |
+| **$mailto** | boolean | is a boolean value specifying whether or not a mailto: link should be inserted. This parameter is optional and if omitted defaults to true. |
+| **$text** | string | is a string containing the text that should be displayed on the link. This parameter is optional and if omitted defaults to an empty string, in which case the email address will be used as the text of the link. |
+| **$email** | boolean | is a boolean value specifying whether or not the $mail parameter is an email address. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'email.cloak', 'joe.blow@example.com' );
+</code>
+might produce:
+<code php|Result>
+<script language='JavaScript' type='text/javascript'>
+ <!--
+ var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+ var path = 'hr' + 'ef' + '=';
+ var addy83774 = 'j&#111;&#101;.bl&#111;w' + '&#64;';
+ addy83774 = addy83774 + '&#101;x&#97;mpl&#101;' + '&#46;' + 'c&#111;m';
+ document.write( '<a ' + path + '\'' + prefix + ':' + addy83774 + '\'>' );
+ document.write( addy83774 );
+ document.write( '<\/a>' );
+ //-->\n </script><script language='JavaScript' type='text/javascript'>
+ <!--
+ document.write( '<span style=\'display: none;\'>' );
+ //-->
+ </script>CLOAKING
+ <script language='JavaScript' type='text/javascript'>
+ <!--
+ document.write( '</' );
+ document.write( 'span>' );
+ //-->
+ </script>
+</code>
+which will add a mailto: link in the document.
+
+
+
+----
+
+~~DISCUSSION~~

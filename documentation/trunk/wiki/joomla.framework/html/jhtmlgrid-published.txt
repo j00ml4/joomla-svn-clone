@@ -1,0 +1,121 @@
+====== published ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->published]] | never | Work in progress |
+
+Generates the HTML code for a clickable published icon.
+
+The specified row object must have the property 'published', which should be a boolean value specifying whether or not the row is published.
+
+The images to be displayed can be specified using the appropriate parameters. The default task that will be fired is publish/unpublish. The $prefix parameter can be used to specify prefixes that should be preprended to these values to allow for alternatives.
+
+The method returns a string containing the generated HTML code.
+
+===== Syntax =====
+void published	( **&$row**, **$i**, **$imgY**, **$imgX**, **$prefix** )
+
+| **&$row** | object | is an object containing a 'published' property which is a boolean value indicating whether or not the row is published. |
+| **$i** | integer | is an integer containing the row index. |
+| **$imgY** | string | is a string containing the name of the image file to use to indicate the row is published.  This parameter is optional and if omitted defaults to 'tick.png'. |
+| **$imgX** | string | is a string containing the name of the image file to use to indicate the row is not published. This parameter is optional and if omitted defaults to publish_x.png'. |
+| **$prefix** | string | is a prefix to prepend to the task. This parameter is optional and if omitted defaults to an empty string. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT m.*, g.name AS groupname FROM #__menu AS m'
+		.' LEFT JOIN #__groups AS g ON g.id = m.access'
+		.' WHERE menutype = \'topmenu\''
+		.' ORDER BY ordering'
+		;
+$db->setQuery( $query );
+$rows = $db->loadObjectList();
+
+echo '<table><tr><th>ID</th><th></th><th>Name</th><th>Published</th><th>Access</th></tr>';
+
+$i = 0;
+foreach ($rows as $row) {
+	$access = JHTML::_( 'grid.access', $row, $i ); 
+	$checked = JHTML::_( 'grid.id', $i, $row->id );
+	$published = JHTML::_( 'grid.published', $row, $i );
+	echo '<tr><td>'.$row->id.'</td><td>'.$checked.'</td><td>'.$row->name.'</td><td>'.$published.'</td><td>'.$access.'</td></tr>';
+	$i++;
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<th>ID</th>
+		<th></th>
+		<th>Name</th>
+		<th>Published</th>
+		<th>Access</th>
+	</tr>
+	<tr>
+		<td>28</td>
+		<td><input type="checkbox" id="cb0" name="cid[]" value="28" onclick="isChecked(this.checked);" /></td>
+		<td>About Joomla!</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb0','unpublish')" title="Unpublish Item">
+				<img src="images/tick.png" border="0" alt="Published" />
+			</a>
+		</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb0','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>29</td>
+		<td><input type="checkbox" id="cb1" name="cid[]" value="29" onclick="isChecked(this.checked);" /></td>
+		<td>Features</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb1','unpublish')" title="Unpublish Item">
+				<img src="images/tick.png" border="0" alt="Published" />
+			</a>
+		</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb1','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>18</td>
+		<td><input type="checkbox" id="cb2" name="cid[]" value="18" onclick="isChecked(this.checked);" /></td>
+		<td>News</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb2','unpublish')" title="Unpublish Item">
+				<img src="images/tick.png" border="0" alt="Published" />
+			</a>
+		</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb2','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>30</td>
+		<td><input type="checkbox" id="cb3" name="cid[]" value="30" onclick="isChecked(this.checked);" /></td>
+		<td>The Community</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb3','unpublish')" title="Unpublish Item">
+				<img src="images/tick.png" border="0" alt="Published" />
+			</a>
+		</td>
+		<td>
+			<a href="javascript:void(0);" onclick="return listItemTask('cb3','accessregistered')" style="color: green;">
+			Public
+			</a>
+		</td>
+	</tr>
+</table>
+
+----
+
+~~DISCUSSION~~
+

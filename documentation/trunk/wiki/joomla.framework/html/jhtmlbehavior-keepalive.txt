@@ -1,0 +1,24 @@
+====== keepalive ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->keepalive]] | never | Work in progress |
+
+Adds the necessary Javascript and outputs the necessary code to keep the session alive, for example, while editing or creating an article.
+
+This method returns a string containing the Javascript and HTML code to keep the session alive.
+
+===== Syntax =====
+string keepalive ()
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'behavior.keepalive' );
+</code>
+might produce:
+<code php|Result>
+<iframe id="keepAliveFrame" name="keepAliveFrame" style="width:0px; height:0px; border: 0px" src="index.php?option=com_admin&tmpl=component&task=keepalive" onload="keepAlive();"></iframe>
+</code>
+The Javascript code for the keepAlive() function will also be added to the page.
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== calendar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->calendar]] | never | Work in progress |
+
+Includes the necessary Javascript in the page to use the date selector widget.
+
+===== Syntax =====
+void calendar ()
+
+===== Examples =====
+<code php|Example>
+JHTML::_( 'behavior.calendar' );
+echo '<input class="inputbox" type="text" name="publish_up" id="publish_up" size="25" maxlength="19" value="'.$this->article->publish_up.'" />';
+echo '<a href="#" onclick="return showCalendar(\'publish_up\', \'y-mm-dd\');"><img class="calendar" src="images/blank.png" alt="calendar" /></a>';
+</code>
+will include the necessary Javascript in the header and will display a date selection field in the form.
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,27 @@
+====== link ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->link]] | never | Work in progress |
+
+Returns a string containing the code for a link element.
+
+===== Syntax =====
+string link ( **$url**, **$text**, **$attribs** )
+
+| **$url** | string | is a string containing the URL to use for the href attribute. It is not modified in any way. |
+| **$text** | string | is a string containing the text to display in the link. |
+| **$attribs** | array | is an associative array of attributes to add to the link element.  This parameter is optional and if omitted no additional attributes will be added. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::link( 'http://www.joomla.org', 'Welcome to Joomla!' );
+</code>
+might produce:
+<code php|Result>
+<a href="http://www.joomla.org" >Welcome to Joomla!</a>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,39 @@
+====== addIncludePath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->addIncludePath]] | never | Work in progress |
+
+Add a directory where JHTML should search for helpers. You may  either pass a string or an array of directories.
+
+The directory (libraries/joomla/html/html) will be added by default.
+
+The method returns the array of paths that it will use to search for elements. If no $path parameter is specified, it will simply return this array.
+
+===== Syntax =====
+array addIncludePath ( **$path** )
+
+| **$path** | mixed | is a string containing the directory to add or an array of strings containing multiple directories to add. |
+
+===== Examples =====
+<code php|Example>
+$paths = JHTML::addIncludePath();
+print_r( $paths );
+$paths = JHTML::addIncludePath( JPATH_COMPONENT.DS.'html' );
+print_r( $paths );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => /var/www/j15/libraries/joomla/html/html
+)
+Array
+(
+    [0] => /var/www/j15/administrator/components/com_poll/html
+    [1] => /var/www/j15/libraries/joomla/html/html
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

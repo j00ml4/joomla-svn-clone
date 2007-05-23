@@ -1,0 +1,41 @@
+====== tooltip ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->tooltip]] | never | Work in progress |
+
+Injects the necessary Javascript into the page to display tooltips (help messages that appear when the user moves the mouse over an image or text). Tooltips can then be created using the JHTML::_( 'tooltip' ) command.
+
+There are eight parameters that are recognized by the tooltip method:
+  * maxTitleChars - default value 50
+  * showDelay - default value is 100 ms
+  * hideDelay - default value is 100 ms
+  * className - default value is tool
+  * fixed - default value is true
+  * onShow - default value is no additional behaviour
+  * onHide - default value is no additional behaviour
+  * offsets - default value is no offset
+
+See the [[http://docs.mootools.net/Plugins/Tips.js|MooTools documentation]] for more information.
+
+===== Syntax =====
+void tooltip	( **$selector**, **$params** )
+
+| **$selector** | string | is a string containing the elements to which this tooltip behaviour should apply. This is usually a CSS class name, such as '.hastip'. This parameter is optional and if omitted defaults to '.hastip'. |
+| **$params** | array | is an associative array of parameters to apply to the tooltip. This parameter is optional and if omitted the default values will be used (as indicated above). |
+
+===== Examples =====
+<code php|Example>
+$opts = array();
+$opts['maxTitleChars'] = 10;
+$opts['showDelay'] = 1000;
+$opts['hideDelay'] = 500;
+
+JHTML::_('behavior.tooltip', '.hasTip', $opts);
+echo JHTML::_('tooltip', 'Some Tip that provides helpful advice.', 'Some Title', null, 'When you move your mouse over...');
+</code>
+will produce text with a tooltip with a maximum title length of 10 characters which will delay 1 second before appearing and will stay half a second after the mouse has been moved off the text.
+
+----
+
+~~DISCUSSION~~
+
+

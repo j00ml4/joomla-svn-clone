@@ -1,0 +1,110 @@
+====== sort ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->sort]] | never | Work in progress |
+
+Generates the HTML code for a clickable sort icon to be used in the grid header.
+
+The clickable icon will be a toggle icon which will allow the data to be sorted in either an ascending or descending manner.  The sorting must be handle by the query.
+
+This element must appear in the context of a form called 'adminForm' for it to function it properly.  It requires two form elements (normally of type hidden): filter_order and filter_order_dir.
+
+The method returns a string containing the generated HTML code.
+
+===== Syntax =====
+void sort	( **$title**, **$order**, **$direction**, **$selected**, **$task** )
+
+| **$title** | string | is a string containing the link title. This is often the title of the column. |
+| **$order** | string | is a string containing the order field for the column. This is often a field name that can be used directly in the query. |
+| **$direction** | string | is a string containing the direction in which the data is currently sorted. This can be either 'asc' or 'desc'. |
+| **$selected** | string | is a string containing the currently selected ordering.  These values should match those in the $order parameter. |
+| **$task** | string | is a string containing an optional task override. This task is passed to the tableordering function.  This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$ordering = JRequest::getVar( 'filter_order', 'm.id' );
+$direction = JRequest::getVar( 'filter_order_Dir', 'asc' );
+
+$query = 'SELECT m.* FROM #__menu AS m'
+		.' ORDER BY '.$ordering.' '.$direction;
+$db->setQuery( $query, 0, 5 );
+$rows = $db->loadObjectList();
+
+?>
+<form action="index.php" method="post" name="adminForm">
+<table>
+	<tr>
+		<th>
+			<?php echo JHTML::_( 'grid.sort', 'ID', 'm.id', $direction, $ordering ); ?>
+		</th>
+		<th>
+			<?php echo JHTML::_( 'grid.sort', 'Name', 'm.name', $direction, $ordering ); ?>
+		</th>
+	</tr>
+<?php
+
+$i = 0;
+foreach ($rows as $row) {
+?>
+	<tr>
+		<td><?php echo $row->id; ?></td>
+		<td><?php echo $row->name; ?></td>
+	</tr>
+<?php
+	$i++;
+}
+?>
+</table>
+
+<input type="hidden" name="option" value="com_poll" />
+<input type="hidden" name="filter_order" value="" />
+<input type="hidden" name="filter_order_Dir" value ="" />
+</form>
+</code>
+might produce:
+<code php|Result>
+<form action="index.php" method="post" name="adminForm">
+<table>
+	<tr>
+		<th>
+			<a href="javascript:tableOrdering('m.id','asc','');" title="Click to sort this column">ID</a>		</th>
+
+		<th>
+			<a href="javascript:tableOrdering('m.name','asc','');" title="Click to sort this column">Name<img src="images/sort_desc.png" alt="" align="middle" border="0" /></a>		</th>
+	</tr>
+	<tr>
+		<td>20</td>
+		<td>Your Details</td>
+	</tr>
+
+	<tr>
+		<td>34</td>
+		<td>What's New in 1.5?</td>
+	</tr>
+	<tr>
+		<td>48</td>
+		<td>Web Links</td>
+
+	</tr>
+	<tr>
+		<td>50</td>
+		<td>The News</td>
+	</tr>
+	<tr>
+		<td>30</td>
+
+		<td>The Community</td>
+	</tr>
+</table>
+
+<input type="hidden" name="option" value="com_poll" />
+<input type="hidden" name="filter_order" value="" />
+<input type="hidden" name="filter_order_Dir" value ="" />
+</form>
+</code>
+
+----
+
+~~DISCUSSION~~
+

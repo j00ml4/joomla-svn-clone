@@ -1,0 +1,26 @@
+====== image ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTML|{{http://api.joomla.org/media/images/Class.png }}]][[JHTML|JHTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTML.html|JHTML->image]] | never | Work in progress |
+
+Returns a string containing the code for an image element.
+
+===== Syntax =====
+string image	( **$url**, **$alt**, **$attribs** )
+
+| **$url** | string | is a string containing the relative URL (relative to the live site URL) to use for the src attribute. |
+| **$alt** | string | is a string containing the value to use for the 'alt' attribute. |
+| **$attribs** | array | is an associative array of attributes to add to the element. This parameter is optional and if omitted no additional attributes will be added. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::image( '/administrator/images/backup.png', 'Backup Image' );
+</code>
+might produce:
+<code php|Result>
+<img src="http://127.0.0.1/j15/administrator/images/backup.png" alt="Backup Image"  />
+</code>
+
+----
+
+~~DISCUSSION~~
+
