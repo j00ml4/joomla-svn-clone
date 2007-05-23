@@ -1,0 +1,17 @@
+====== JHTMLImage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLImage.html|JHTMLImage]] | never | Work in progress |
+
+HTML utility drawing class for creating HTML image tags.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTMLImage-administrator|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLImage-administrator|administrator]] | Generates image tags for images contained in the administrator application directory. |
+| [[JHTMLImage-site|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLImage-site|site]] | Generates image tags for images contained in the site application directory. |
+
+----
+
+~~DISCUSSION~~
+
+
+
