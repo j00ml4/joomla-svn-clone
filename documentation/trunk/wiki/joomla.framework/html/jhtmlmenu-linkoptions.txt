@@ -1,0 +1,71 @@
+====== linkoptions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLMenu|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLMenu|JHTMLMenu]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLMenu.html|JHTMLMenu->linkoptions]] | never | Work in progress |
+
+Builds the multiple select list options for menu links/pages.
+
+This method invokes the treerecurse method to retrieve the list of items and creates list options from this list.  This method could be used for creating a list of pages that modules to which modules could be attached.
+
+This method returns an array of select list options.
+
+===== Syntax =====
+array linkoptions ( **$all**, **$unassigned** )
+
+| **$all** | boolean | is a boolean value specifying whether or not an 'All' option should be added to the group. This parameter is optional and if omitted defaults to false. |
+| **$unassigned** | boolean | is a boolean value specifying whether or not an 'Unassigned' option should be added to the group. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$options = JHTML::_( 'menu.linkoptions' );
+print_r( $options );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => stdClass Object
+        (
+            [value] => <OPTGROUP>
+            [text] => ExamplePages
+        )
+
+    [1] => stdClass Object
+        (
+            [value] => 44
+            [text] => Section Blog
+        )
+
+			...
+
+    [36] => stdClass Object
+        (
+            [value] => <OPTGROUP>
+
+            [text] => usermenu
+        )
+
+    [37] => stdClass Object
+        (
+            [value] => 20
+            [text] => Your Details
+        )
+
+    [38] => stdClass Object
+        (
+            [value] => 24
+            [text] => Logout
+        )
+
+    [39] => stdClass Object
+        (
+            [value] => </OPTGROUP>
+            [text] => </OPTGROUP>
+        )
+
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+

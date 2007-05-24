@@ -1,0 +1,18 @@
+====== JHTMLMenu ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLMenu.html|JHTMLMenu]] | never | Work in progress |
+
+Drawing utility class for building HTML elements for menus and related lists.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTMLMenu-linkoptions|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLMenu-linkoptions|linkoptions]] | Builds the multiple select list options for menu links/pages. |
+| [[JHTMLMenu-ordering|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLMenu-ordering|ordering]] | Builds the select list for menu ordering. |
+| [[JHTMLMenu-treerecurse|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLMenu-treerecurse|treerecurse]] | Creates an indented tree structured list of menu items. |
+
+----
+
+~~DISCUSSION~~
+
+
+

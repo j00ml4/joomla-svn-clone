@@ -1,0 +1,130 @@
+====== treerecurse ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLMenu|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLMenu|JHTMLMenu]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLMenu.html|JHTMLMenu->treerecurse]] | never | Work in progress |
+
+Creates an indented tree structured list of menu items.
+
+This is a recursive method which builds select list items of recursive tree lists.
+
+===== Syntax =====
+void treerecurse	( **$id**, **$indent**, **$list**, **&$children**, **$maxlevel**, **$level**, **$type** )
+
+| **$id** | integer | is an integer containing the id of the current element. |
+| **$indent** | string | is a string containing the characters to be used to indent the list. |
+| **$list** | array | is an array containing the list of items currently in the tree. This parameter can initially be an empty array. |
+| **&$children** | array | is a tree array of the items in the list. |
+| **$maxlevel** | integer | is an integer specifying the maximum level to which to recurse. This parameter is optional and if omitted defaults to 9999. |
+| **$level** | integer | is an integer specifying the current level of recursion. This parameter is optional and if omitted defaults to 0. |
+| **$type** | boolean | is a boolean value specifying the type of list. If this is false, the added prefix will be '- ' and the spacer will be '&nbsp;&nbsp;'.  If it is true, the added prefix will be '<sup>L</sup>&nbsp;' and the spacer will be '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT id, parent, name, menutype' .
+		' FROM #__menu' .
+		' WHERE menutype = \'usermenu\'' .
+		' ORDER BY menutype, parent, ordering'
+		;
+
+$db->setQuery($query);
+$menuItems = $db->loadObjectList();
+
+$children = array();
+
+if ($menuItems) {
+	// first pass - collect children
+	foreach ($menuItems as $v) {	// iterate through the menu items
+		$pt 	= $v->parent;		// we use parent as our array index
+
+		// if an array entry for the parent doesn't exist, we create a new array
+		$list 	= @$children[$pt] ? $children[$pt] : array();
+
+		// we push our item onto the array (either the existing one for the specified parent or the new one
+		array_push( $list, $v );
+		// We put out updated list into the array
+		$children[$pt] = $list;
+	}
+}
+print_r( $children );
+
+// second pass - get an indent list of the items
+$list = JHTML::_('menu.treerecurse', 0, '', array(), $children, 9999, 0, 0 );
+print_r( $list );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [id] => 20
+                    [parent] => 0
+                    [name] => Your Details
+                    [menutype] => usermenu
+                )
+
+            [1] => stdClass Object
+                (
+                    [id] => 24
+                    [parent] => 0
+                    [name] => Logout
+                    [menutype] => usermenu
+                )
+
+        )
+
+    [20] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [id] => 52
+                    [parent] => 20
+                    [name] => Newsfeeds
+                    [menutype] => usermenu
+                )
+
+        )
+
+)
+Array
+(
+    [20] => stdClass Object
+        (
+            [id] => 20
+            [parent] => 0
+            [name] => Your Details
+            [menutype] => usermenu
+            [treename] => Your Details
+            [children] => 1
+        )
+
+    [52] => stdClass Object
+        (
+            [id] => 52
+            [parent] => 20
+            [name] => Newsfeeds
+            [menutype] => usermenu
+            [treename] => &nbsp;&nbsp;- Newsfeeds
+            [children] => 0
+        )
+
+    [24] => stdClass Object
+        (
+            [id] => 24
+            [parent] => 0
+            [name] => Logout
+            [menutype] => usermenu
+            [treename] => Logout
+            [children] => 0
+        )
+
+)</code>
+
+----
+
+~~DISCUSSION~~
+
+
