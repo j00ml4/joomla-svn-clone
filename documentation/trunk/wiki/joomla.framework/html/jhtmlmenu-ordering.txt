@@ -1,0 +1,52 @@
+====== ordering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLMenu|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLMenu|JHTMLMenu]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLMenu.html|JHTMLMenu->ordering]] | never | Work in progress |
+
+Builds the select list for menu ordering.
+
+This method generates a select list that contains the list of menu items that are on the same level (have the same parent) and menu as the specified item.  If the $id parameter passed is zero, the row will be treated as a new row and a message will be returned instead stating that new items are always placed last in the list.
+
+The $row object must have the required properties for the method. The required properties are: menutype, parent and ordering.
+
+This method returns a string containing the generated select list or a string containing the hidden input field and the new item message.
+
+===== Syntax =====
+string ordering ( **&$row**, **$id** )
+
+| **&$row** | object | is an object containing the row for which the select list will be created. It must have menutype, parent and ordering properties. |
+| **$id** | integer | is an integer containing the ID of the row. If this is zero, the row will be treated as a new row. Otherwise, it will be treated as an existing row. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+
+$query = 'SELECT * FROM #__menu';
+$db->setQuery( $query );
+$row = $db->loadObject();
+
+echo JHTML::_( 'menu.ordering', $row, $row->id );
+</code>
+might produce:
+<code php|Result>
+<select name="ordering" id="ordering" class="inputbox" size="1">
+	<option value="0" >0 first</option>
+	<option value="1"  selected="selected">1 (Home)</option>
+	<option value="2" >2 (Joomla! Overview)</option>
+	<option value="3" >3 (What's New in 1.5?)</option>
+	<option value="4" >4 (Joomla! License)</option>
+	<option value="5" >5 (More about Joomla!)</option>
+	<option value="6" >6 (FAQ)</option>
+	<option value="7" >7 (The News)</option>
+	<option value="8" >8 (Web Links)</option>
+	<option value="9" >9 (News Feeds)</option>
+	<option value="10" >10 (Polls)</option>
+	<option value="11" >11 last</option>
+</select>
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+
