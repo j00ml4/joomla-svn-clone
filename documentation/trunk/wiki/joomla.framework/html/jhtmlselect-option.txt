@@ -1,0 +1,34 @@
+====== option ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->option]] | never | Work in progress |
+
+Generates an option value object for an HTML select list.
+
+The method returns an object with the specified properties and values.
+
+===== Syntax =====
+void option	( **$value**, **$text**, **$value_name**, **$text_name** )
+
+| **$value** | mixed | is an integer or string specifying the value of the option. |
+| **$text** | string | is a string containing the text to be displayed for the option. This parameter is optional and if omitted the $value parameter will be displayed as the text. |
+| **$value_name** | string | is a string containing the name of the property to be used for the value. This parameter is optional and if omitted defaults to 'value'. |
+| **$text_name** | string | is a string containing the name of the property to be used for the text. This parameter is optional and if omitted defaults to 'text'. |
+
+===== Examples =====
+<code php|Example>
+$option1 = JHTML::_( 'select.option', 'twelve' );
+$option2 = JHTML::_( 'select.option', 5, 'Weblink', 'key', 'title' );
+
+print_r( $option1 );
+print_r( $option2 );
+</code>
+might produce:
+<code php|Result>
+stdClass Object ( [value] => twelve [text] => twelve )
+stdClass Object ( [key] => 5 [title] => Weblink )
+</code>
+
+----
+
+~~DISCUSSION~~
+

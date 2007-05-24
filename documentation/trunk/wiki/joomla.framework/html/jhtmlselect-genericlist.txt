@@ -1,0 +1,47 @@
+====== genericlist ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->genericlist]] | never | Work in progress |
+
+Generates an HTML select list.
+
+The specified options will be used to generate the list.  The option text can be translated by the method if desired.
+
+The method returns a string containing the generated HTML code for the select list.
+
+===== Syntax =====
+string genericlist	( **$arr**, **$tag_name**, **$tag_attribs**, **$key**, **$text**, **$selected**, **$idtag**, **$translate** )
+
+| **$arr** | array | is an array of objects that are used to build the select list.  The value and name pairs in the objects should correspond to the $key and $text parameters. |
+| **$tag_name** | string | is a string containing the value of the HTML name attribute. |
+| **$tag_attribs** | string | is a string containing additional HTML attributes for the tag. |
+| **$key** | string | is a string containing the name of the object property for the option value. This parameter is optional and if omitted defaults to 'value'. |
+| **$text** | string | is a string containing the name of the object property for the option text. This parameter is optional and if omitted defaults to 'text'. |
+| **$selected** | mixed | is a variable containing the key(s) that are to be selected in the list. This can be either a single value or an array of values. |
+| **$idtag** | string | is a string containing the value of the HTML id attribute. |
+| **$translate** | boolean | is a boolean value which specifies whether or not the text should be translated using the JText::_() method. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$query = 'SELECT id AS value, title AS text FROM #__weblinks';
+$db->setQuery( $query );
+$weblinks = $db->loadObjectList();
+
+echo JHTML::_( 'select.genericlist', $weblinks, 'Web Link' );
+</code>
+might produce:
+<code php|Result>
+<select name="Web Link" id="Web Link" >
+	<option value="1" >Joomla!</option>
+	<option value="2" >php.net</option>
+	<option value="3" >MySQL</option>
+	<option value="4" >OpenSourceMatters</option>
+	<option value="5" >Joomla! - Forums</option>
+</select>
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

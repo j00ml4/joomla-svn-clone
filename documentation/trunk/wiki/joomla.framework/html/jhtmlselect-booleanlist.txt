@@ -1,0 +1,36 @@
+====== booleanlist ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->booleanlist]] | never | Work in progress |
+
+Generates a yes/no radio list.
+
+The list will have two options: 'No' and 'Yes'. The 'No' option will have value 0, and the 'Yes' option will have value 1.  These option names can be overridden with the method parameters.
+
+The method returns the HTML code for the radio list.
+
+===== Syntax =====
+string booleanlist	( **$tag_name**, **$tag_attribs**, **$selected**, **$yes**, **$no**, **$id** )
+
+| **$tag_name** | string | is a string containing the value of the HTML name attribute. |
+| **$tag_attribs** | string | is a string containing additional HTML attributes for the select list. |
+| **$selected** | integer | is an integer specifying the option that is currently selected. |
+| **$yes** | string | is a string containing the text that should be displayed for the yes option.  This parameter is optional and if omitted defaults to 'yes'. |
+| **$no** | string | is a string containing the text that should be displayed for the no option.  This parameter is optional and if omitted defaults to 'no'. |
+| **$id** | string | is a string containing the value that should be used for the ID attribute of the tag. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'select.booleanlist', 'game5', '', 1, 'Win', 'Loss' );
+</code>
+might produce:
+<code php|Result>
+<input type="radio" name="game5" id="game50" value="0"  />
+<label for="game50">Loss</label>
+<input type="radio" name="game5" id="game51" value="1" checked="checked"  />
+<label for="game51">Win</label>
+</code>
+
+----
+
+~~DISCUSSION~~
+

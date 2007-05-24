@@ -1,0 +1,39 @@
+====== options ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->options]] | never | Work in progress |
+
+Generates the option tags for an HTML select list.
+
+The method returns a string with the specified elements as option elements to be used in a select list.
+
+===== Syntax =====
+string options	( **$arr**, **$key**, **$text**, **$selected**, **$translate** )
+
+| **$arr** | array | is an array of objects that are used to build the select list.  The value and name pairs in the objects should correspond to the $key and $text parameters. |
+| **$key** | string | is a string containing the name of the object property for the option value. This parameter is optional and if omitted defaults to 'value'. |
+| **$text** | string | is a string containing the name of the object property for the option text. This parameter is optional and if omitted defaults to 'text'. |
+| **$selected** | mixed | is a variable containing the key(s) that are to be selected in the list. This can be either a single value or an array of values. |
+| **$translate** | boolean | is a boolean value which specifies whether or not the text should be translated using the JText::_() method. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$query = 'SELECT id AS value, title AS text FROM #__weblinks';
+$db->setQuery( $query );
+$weblinks = $db->loadObjectList();
+
+echo JHTML::_( 'select.options', $weblinks );
+</code>
+might produce:
+<code php|Result>
+<option value="1" >Joomla!</option>
+<option value="2" >php.net</option>
+<option value="3" >MySQL</option>
+<option value="4" >OpenSourceMatters</option>
+<option value="5" >Joomla! - Forums</option>
+</code>
+
+----
+
+~~DISCUSSION~~
+
