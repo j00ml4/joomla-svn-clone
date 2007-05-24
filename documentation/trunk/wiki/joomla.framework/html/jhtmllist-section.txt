@@ -1,0 +1,37 @@
+====== section ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->section]] | never | Work in progress |
+
+Builds the select list of active sections.
+
+The method will generate a list of all published sections and will also provide an option for uncategorized.  The order can be specified using the $order parameter.
+
+The method returns a string containing the generated HTML code.
+
+===== Syntax =====
+string section ( **$name**, **$active**, **$javascript**, **$order** )
+
+| **$name** | string | is a string containing the value to be used for the name attribute of the select box. |
+| **$active** | integer | is an integer containing the value that is currently selected. This parameter is optional and if omitted defaults to null. |
+| **$javascript** | string | is a string containing any Javascript that should be applied to the select box. This parameter is optional and if omitted defaults to null. |
+| **$order** | string | is a string specifying the field in the sections table which should be used to order the list. This parameter is optional and if omitted defaults to 'ordering'. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'list.section', 'section' );
+</code>
+might produce:
+<code php|Result>
+<select name="section" id="section" class="inputbox" size="1" >
+	<option value="-1" >- Select Section -</option>
+	<option value="0" >Uncategorized</option>
+	<option value="4" >About Joomla!</option>
+	<option value="1" >News</option>
+	<option value="3" >FAQs</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,45 @@
+====== specificordering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->specificordering]] | never | Work in progress |
+
+Builds the select list for ordering of a specified table.
+
+The specified query (which should have ordering aliased as value and the row title aliased as text) is used to retrieve a list of items in the table.
+
+If the $id field is not zero (meaning that it is not a new record), then a normal list is returned.  Otherwise, if $neworder is true, a message will be returned stating that new items are always placed first.  If $neworder is false, a message will be returned stating that new items are always placed last.
+
+The method returns a string with either the generated select box or the new ordering text and a hidden input field.
+
+===== Syntax =====
+void specificordering	( **&$row**, **$id**, **$query**, **$neworder** )
+
+| **&$row** | object | is an object containing an ordering property to be used as the current value. |
+| **$id** | integer | is an integer containing the current id of the row. |
+| **$query** | string | is a string containing the query to use to generate the list.  Its two fields should be text and value. |
+| **$neworder** | boolean | is a boolean value specifying whether new items should be ordered first (true), or last (false).  This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$query = 'SELECT name AS text, ordering AS value FROM #__menu'
+		.' WHERE menutype = \'usermenu\''
+		.' ORDER BY ordering';
+
+$row = new stdClass();
+$row->ordering = 0;
+
+echo JHTML::_( 'list.specificordering', $row, 2, $query );
+</code>
+might produce:
+<code php|Result>
+<select name="ordering" id="ordering" class="inputbox" size="1">
+	<option value="0"  selected="selected">0 first</option>
+	<option value="1" >1 (Your Details)</option>
+	<option value="2" >2 (Logout)</option>
+	<option value="3" >3 last</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+

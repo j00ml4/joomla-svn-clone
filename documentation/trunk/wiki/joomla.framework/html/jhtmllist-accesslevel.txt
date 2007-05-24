@@ -1,0 +1,51 @@
+====== accesslevel ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->accesslevel]] | never | Work in progress |
+
+Builds the select list for access level.
+
+The access property from the specified $row object is used to determine which option should be selected by default.  The resulting list has the name 'access', id 'access' and class 'inputbox'.
+
+The method returns a string containing the resulting select box.
+
+===== Syntax =====
+string accesslevel ( **&$row** )
+
+| **&$row** | object | is an object which has an access property. |
+
+===== Examples =====
+<code php|Example>
+$db =& JFactory::getDBO();
+$query = 'SELECT * FROM #__polls';
+$db->setQuery( $query );
+
+$rows = $db->loadObjectList();
+
+echo '<table>';
+foreach ($rows as $row) {
+	$accessList = JHTML::_( 'list.accesslevel', $row );
+	echo '<tr><td>'.$row->id.'</td><td>'.$row->title.'</td><td>'.$accessList.'</td></tr>';
+}
+echo '</table>';
+</code>
+might produce:
+<code php|Result>
+<table>
+	<tr>
+		<td>14</td>
+		<td>Joomla! is used for?</td>
+		<td>
+			<select name="access" id="access" class="inputbox" size="3">
+				<option value="0"  selected="selected">Public</option>
+				<option value="1" >Registered</option>
+				<option value="2" >Special</option>
+			</select>
+		</td>
+	</tr>
+</table>
+</code>
+
+----
+
+~~DISCUSSION~~
+

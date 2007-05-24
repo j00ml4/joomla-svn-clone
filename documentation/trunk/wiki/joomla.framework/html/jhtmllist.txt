@@ -1,0 +1,23 @@
+====== JHTMLList ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList]] | never | Work in progress |
+
+JHTMLList is a drawing utility class that facilities the use of various select lists.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTMLList-accesslevel|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-accesslevel|accesslevel]] | Builds the select list for access level. |
+| [[JHTMLList-category|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-category|category]] | Builds the select list of active categories for components. |
+| [[JHTMLList-genericordering|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-genericordering|genericordering]] | Builds the generic ordering select list options. |
+| [[JHTMLList-images|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-images|images]] | Builds the select list to choose an image. |
+| [[JHTMLList-positions|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-positions|positions]] | Builds the select list of positions - generally used for location of images. |
+| [[JHTMLList-section|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-section|section]] | Builds the select list of active sections. |
+| [[JHTMLList-specificordering|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-specificordering|specificordering]] | Builds the select list for ordering of a specified table. |
+| [[JHTMLList-users|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLList-users|users]] | Builds the select list of active users. |
+
+----
+
+~~DISCUSSION~~
+
+
+

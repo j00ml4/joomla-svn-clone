@@ -1,0 +1,41 @@
+====== users ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->users]] | never | Work in progress |
+
+Builds the select list of active users.
+
+The list of users will be retrieved from the database and used to generate a select list.
+
+The method returns the HTML code for the generated select list.
+
+===== Syntax =====
+void users	( **$name**, **$active**, **$nouser**, **$javascript**, **$order**, **$reg** )
+
+| **$name** | string | is a string containing the name attribute for the select list. |
+| **$active** | integer | is an integer containing the id of the currently selected user. |
+| **$nouser** | boolean | is a boolean value specifying whether or not a no user option should be added at the beginning of the list. This parameter is optional and if omitted defaults to false. |
+| **$javascript** | string | is a string containing any Javascript that should be applied to the list. This parameter is optional and if omitted defaults to null. |
+| **$order** | string | is a string specifying the field name which should be used to sort the users. This parameter is optional and if omitted defaults to name. |
+| **$reg** | boolean | is a boolean value which specifies whether or not only registered users should be listed. This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'list.users', 'userid', 0, true, null, 'name', false );
+</code>
+might produce:
+<code php|Result>
+<select name="userid" id="userid" class="inputbox" size="1" >
+	<option value="0"  selected="selected">- No User -</option>
+	<option value="62" >Administrator</option>
+	<option value="66" >Joe Blow</option>
+	<option value="65" >John Doe</option>
+	<option value="63" >Linus Torvalds</option>
+	<option value="64" >Linus Torvalds</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
