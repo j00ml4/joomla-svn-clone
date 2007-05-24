@@ -1,0 +1,62 @@
+====== genericordering ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->genericordering]] | never | Work in progress |
+
+Builds the options for a generic ordering select list.
+
+Given an SQL query statement, it will produce the select list options that can be used to specify build a select list for ordering a row.
+
+The method returns an array of objects with text value pairs that can be used for building a select list.
+
+===== Syntax =====
+array genericordering	( **$sql**, **$chop** )
+
+| **$sql** | string | is a string containing the SQL query with ordering As value and the name field AS text. |
+| **$chop** | integer | is an integer specifying the length of the truncated headline.  This parameter is optional and if omitted defaults to 30. |
+
+===== Examples =====
+<code php|Example>
+$query = 'SELECT name AS text, ordering AS value FROM #__menu'
+		.' WHERE menutype = \'usermenu\''
+		.' ORDER BY ordering';
+
+$ord =  JHTML::_( 'list.genericordering', $query );
+
+print_r( $ord );
+</code>
+might produce:
+<code>
+Array
+(
+    [0] => stdClass Object
+        (
+            [value] => 0
+            [text] => 0 first
+        )
+
+    [1] => stdClass Object
+        (
+            [value] => 1
+            [text] => 1 (Your Details)
+        )
+
+    [2] => stdClass Object
+        (
+            [value] => 2
+            [text] => 2 (Logout)
+        )
+
+    [3] => stdClass Object
+        (
+            [value] => 3
+            [text] => 3 last
+        )
+
+)
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,39 @@
+====== positions ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->positions]] | never | Work in progress |
+
+Builds the select list of positions - generally used for location of images.
+
+The select list by default has four options: none, center, left and right.  These can be disabled using the method parameters.
+
+The method returns the HTML code for the generated select box.
+
+===== Syntax =====
+string positions	( **$name**, **$active**, **$javascript**, **$none**, **$center**, **$left**, **$right**, **$id** )
+
+| **$name** | string | is a string containing the value of the name attribute of the select box. |
+| **$active** | string | is a string containing the value that is currently selected. This parameter is optional and if omitted defaults to null. |
+| **$javascript** | string | is a string containing any Javascript to be used for the select box. This parameter is optional and if omitted defaults to null. |
+| **$none** | boolean | is a boolean value specifying whether or not the 'none' value should be included in the list. This parameter is optional and if omitted defaults to true. |
+| **$center** | boolean | is a boolean value specifying whether or not the 'center' value should be included in the list. This parameter is optional and if omitted defaults to true. |
+| **$left** | boolean | is a boolean value specifying whether or not the 'left' value should be included in the list. This parameter is optional and if omitted defaults to true. |
+| **$right** | boolean | is a boolean value specifying whether or not the 'right' value should be included in the list. This parameter is optional and if omitted defaults to true. |
+| **$id** | string | is a string containing the value to be used for the id attribute of the select box. This parameter is optional and if omitted the $name parameter will be used as the id. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'list.positions', 'pos', 'left', null, true, true, true, false );
+</code>
+might produce:
+<code php|Result>
+<select name="pos" id="pos" class="inputbox" size="1">
+	<option value="" >None</option>
+	<option value="center" >Center</option>
+	<option value="left"  selected="selected">Left</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+

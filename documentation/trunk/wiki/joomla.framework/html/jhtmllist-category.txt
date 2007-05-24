@@ -1,0 +1,36 @@
+====== category ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->category]] | never | Work in progress |
+
+Builds the select list of active categories for components.
+
+The method returns a string containing the resulting select box.
+
+===== Syntax =====
+string category ( **$name**, **$section**, **$active**, **$javascript**, **$order**, **$size**, **$sel_cat** )
+
+| **$name** | string | is a string containing the value to use for the name and id attributes. |
+| **$section** | mixed | is a string or an integer specifying the section for which to list categories. |
+| **$active** | integer | is an integer containing the id of the category that should be selected initially. This parameter is optional and if omitted defaults to null. |
+| **$javascript** | string | is a string containing any Javascript that should be attached to the select list. This parameter is optional and if omitted defaults to null. |
+| **$order** | string | is a string containing the field name in the categories table that should be used to order the list of categories. |
+| **$size** | integer | is an integer specifying the size of the select list (i.e. number of entries that should be shown at once). This parameter is optional and if omitted defaults to 1. |
+| **$sel_cat** | boolean | is a boolean value specifying whether or not a 'Select a Category' entry should be listed at the top of the select box.  This parameter is optional and if omitted defaults to true. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'list.category', 'catid', 'com_weblinks', 2 );
+</code>
+might produce:
+<code php|Result>
+<select name="catid" id="catid" class="inputbox" size="1" >
+	<option value="0" >- Select a Category -</option>
+	<option value="2"  selected="selected">Joomla! Specific Links</option>
+	<option value="19" >Other Resources</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+

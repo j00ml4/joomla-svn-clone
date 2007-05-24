@@ -1,0 +1,42 @@
+====== images ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->images]] | never | Work in progress |
+
+Builds the select list to choose an image.
+
+The method will search through the specified directory for a list of image files (with extensions bmp, jpg, png or gif) and will create a select box, allowing the user to choose one of these images.
+
+The method returns the generated HTML code for the select list.
+
+===== Syntax =====
+string images	( **$name**, **&$active**, **$javascript**, **$directory** )
+
+| **$name** | string | is a string containing the name attribute to be used for the select list. |
+| **&$active** | string | is a string containing the name of the image that is currently selected. |
+| **$javascript** | string | is a string containing any Javascript that should be added to the select box. This parameter is optional and if omitted defaults to null. |
+| **$directory** | string | is a string containing the directory in which to search for images. This parameter is optional and if omitted the /images/stories directory will be used. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'list.images', 'image', 'key.jpg' );
+</code>
+might produce:
+<code php|Result>
+<select name="image" id="image" class="inputbox" size="1" 
+	onchange="javascript:if (document.forms[0].image.options[selectedIndex].value!='') {document.imagelib.src='../images/stories/' + document.forms[0].image.options[selectedIndex].value} else {document.imagelib.src='../images/blank.png'}">
+	<option value="" >- Select Image -</option>
+	<option value="articles.jpg" >articles.jpg</option>
+	<option value="clock.jpg" >clock.jpg</option>
+	<option value="joomla-dev_cycle.png" >joomla-dev_cycle.png</option>
+	<option value="key.jpg"  selected="selected">key.jpg</option>
+	<option value="pastarchives.jpg" >pastarchives.jpg</option>
+	<option value="powered_by.png" >powered_by.png</option>
+	<option value="taking_notes.jpg" >taking_notes.jpg</option>
+	<option value="web_links.jpg" >web_links.jpg</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+
