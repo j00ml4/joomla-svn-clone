@@ -1,0 +1,33 @@
+====== optgroup ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->option]] | never | Work in progress |
+
+Generates an option group object for an HTML select list.
+
+The method returns an object with the specified properties. The value will always be '<OPTGROUP>' and the text will be the supplied parameter.
+
+===== Syntax =====
+void optgroup ( **$text**, **$value_name**, **$text_name** )
+| **$text** | string | is a string containing the text to be displayed for the option group. |
+| **$value_name** | string | is a string containing the name of the property to be used for the value. This parameter is optional and if omitted defaults to 'value'. |
+| **$text_name** | string | is a string containing the name of the property to be used for the text. This parameter is optional and if omitted defaults to 'text'. |
+
+===== Examples =====
+<code php|Example>
+$optgroup = JHTML::_( 'select.optgroup', 'Group1' );
+print_r( $optgroup );
+</code>
+might produce:
+<code php|Result>
+stdClass Object
+(
+    [value] => <OPTGROUP>
+    [text] => Group1
+)
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

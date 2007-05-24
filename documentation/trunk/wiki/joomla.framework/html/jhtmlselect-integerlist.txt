@@ -1,0 +1,43 @@
+====== integerlist ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLSelect|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLSelect|JHTMLSelect]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect->integerlist]] | never | Work in progress |
+
+Generates a select list of integers.
+
+This method will create a list of integers between two specified indices.  There is no checking to ensure that the start, end and increment values makes sense, so be sure to do self checking (i.e. if $start is 5, $end is 25, and $inc is -1, you will find yourself in an infinite loop).  $start must be less than $end.
+
+The method returns a string containing the generated HTML code.
+
+===== Syntax =====
+string integerlist	( **$start**, **$end**, **$inc**, **$tag_name**, **$tag_attribs**, **$selected**, **$format** )
+
+| **$start** | integer | is an integer specifying the first and lowest value in the list. |
+| **$end** | integer | is an integer specifying the largest value that may appear in the list. |
+| **$inc** | integer | is an integer specifying the increment for the list. |
+| **$tag_name** | string | is a string containing the value of the HTML name attribute. |
+| **$tag_attribs** | string | is a string containing additional HTML attributes for the tag. |
+| **$selected** | integer | is an integer specifying the value that is currently selected. |
+| **$format** | string | is a string specifying the [[http://www.php.net/function.sprintf|printf]] format to be applied to the number. This parameter is optional and if omitted only the number itself will be displayed. |
+
+===== Examples =====
+<code php|Example>
+echo JHTML::_( 'select.integerlist', 1, 20, 3, 'lotnum', '', 7 );
+</code>
+might produce:
+<code php|Result>
+<select name="lotnum" id="lotnum" >
+	<option value="1" >1</option>
+	<option value="4" >4</option>
+	<option value="7"  selected="selected">7</option>
+	<option value="10" >10</option>
+	<option value="13" >13</option>
+	<option value="16" >16</option>
+	<option value="19" >19</option>
+</select>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

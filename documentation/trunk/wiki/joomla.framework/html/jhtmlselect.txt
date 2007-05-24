@@ -1,0 +1,21 @@
+====== JHTMLSelect ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLSelect.html|JHTMLSelect]] | never | Work in progress |
+
+Utility drawing class for creating HTML select lists.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JHTMLSelect-booleanlist|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-booleanlist|booleanlist]] | Generates a yes/no radio list. |
+| [[JHTMLSelect-genericlist|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-genericlist|genericlist]] | Generates an HTML select list. |
+| [[JHTMLSelect-integerlist|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-integerlist|integerlist]] | Generates a select list of integers. |
+| [[JHTMLSelect-option|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-option|option]] | Generates an option group object for an HTML select list. |
+| [[JHTMLSelect-option|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-option|option]] | Generates an option value object for an HTML select list. |
+| [[JHTMLSelect-options|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-options|options]] | Generates the option tags for an HTML select list. |
+| [[JHTMLSelect-radiolist|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLSelect-radiolist|radiolist]] | Generates an HTML radio list. |
+
+----
+
+~~DISCUSSION~~
+
+
