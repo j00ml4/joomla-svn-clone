@@ -1,6 +1,6 @@
 ====== accesslevel ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla-Framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->accesslevel]] | never | Work in progress |
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLList|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLList|JHTMLList]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList->accesslevel]] | never | Work in progress |
 
 Builds the select list for access level.
 
