@@ -1,0 +1,66 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentFeed|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentFeed|JDocumentFeed]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentFeed.html|JDocumentFeed->render]] | never | Work in progress |
+
+Renders the feed document.
+
+The feed type is retrieved from the 'type' parameter in the request.  A JDocumentRenderer object is created depending on this value (the default is rss).  The method will then set the appropriate mime type (based on the JDocumentRenderer object) and invoke the renderer to generate the feed markup.
+
+This method returns the rendered feed.
+
+===== Syntax =====
+The render	( **$cache**, **$params** )
+
+| **$cache** | boolean | is a boolean value which specifies whether or not the feed should be cached. This parameter is optional and if omitted defaults to false. |
+| **$params** | array | is an associative array of attributes.  These parameters are not used by the JDocumentFeed class. |
+
+===== Examples =====
+<code php|Example>
+$feedDoc =& JDocument::getInstance( 'feed' );
+$feedDoc->syndicationURL = 'http://example.com/feed.php';
+$feedDoc->copyright = 'Copyleft(C)';
+
+
+$item = new JFeedItem();
+$item->title            = 'Item Title';
+$item->link             = 'http://example.com/index.php?item_title';
+$item->description      = 'About the Item';
+$item->date             = mktime();
+$item->author           = 'Joe Blow';
+$item->category         = 'General Category';
+
+$feedDoc->addItem( $item );
+echo $feedDoc->render();
+</code>
+might produce:
+<code php|Result>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! 1.5 - Open Source Content Management" -->
+<rss version="2.0">
+	<channel>
+		<title></title>
+		<description></description>
+
+		<link></link>
+		<lastBuildDate>Fri, 25 May 2007 23:34:58 -0400</lastBuildDate>
+		<generator>Joomla! 1.5 - Open Source Content Management</generator>
+		<language>en</language>
+		<copyright>Copyleft(C)</copyright>
+		<item>
+			<title>Item Title</title>
+
+			<link>http://example.com/index.php?item_title</link>
+			<description><![CDATA[About the Item]]></description>
+			<author>Joe Blow</author>
+			<category>General Category</category>
+			<pubDate>Fri, 25 May 2007 23:34:58 -0400</pubDate>
+		</item>
+	</channel>
+
+</rss>
+</code>
+
+----
+
+~~DISCUSSION~~
+

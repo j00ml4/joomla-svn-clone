@@ -1,0 +1,68 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererRSS|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererRSS|JDocumentRendererRSS]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererRSS.html|JDocumentRendererRSS->render]] | never | Work in progress |
+
+Renders the feed.
+
+Extracts the data from the document object and wraps it into RSS format feed markup.
+
+===== Syntax =====
+string render ()
+
+===== Examples =====
+<code php|Example>
+$feedDoc =& JDocument::getInstance( 'feed' );
+$feedDoc->syndicationURL = 'http://example.com/feed.php';
+$feedDoc->copyright = 'Copyleft(C)';
+$feedDoc->editor = 'Feed Editor';
+$feedDoc->title = 'Feed Title';
+$feedDoc->subtitle = 'Feed sub title';
+
+
+$item = new JFeedItem();
+$item->title            = 'Item Title';
+$item->link             = 'http://example.com/index.php?item_title';
+$item->description      = 'About the Item';
+$item->date             = mktime();
+$item->author           = 'Joe Blow';
+$item->category         = 'General Category';
+
+$feedDoc->addItem( $item );
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.feed.renderer.rss' );
+$renderer = new JDocumentRendererRSS( $feedDoc );
+echo $renderer->render();
+</code>
+might produce:
+<code php|Result>
+<rss version="2.0">
+	<channel>
+		<title>Feed Title</title>
+		<description></description>
+		<link></link>
+
+		<lastBuildDate>Sat, 26 May 2007 03:09:45 -0400</lastBuildDate>
+		<generator>Joomla! 1.5 - Open Source Content Management</generator>
+		<language>en</language>
+		<copyright>Copyleft(C)</copyright>
+		<managingEditor>Feed Editor</managingEditor>
+		<item>
+
+			<title>Item Title</title>
+			<link>http://example.com/index.php?item_title</link>
+			<description><![CDATA[About the Item]]></description>
+			<author>Joe Blow</author>
+			<category>General Category</category>
+			<pubDate>Sat, 26 May 2007 03:09:45 -0400</pubDate>
+
+		</item>
+	</channel>
+</rss>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

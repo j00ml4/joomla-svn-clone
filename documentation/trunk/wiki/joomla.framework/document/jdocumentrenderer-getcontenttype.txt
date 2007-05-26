@@ -1,0 +1,27 @@
+====== getContentType ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRenderer|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->getContentType]] | never | Work in progress |
+
+Returns the content type of the renderer.
+
+The method returns a string containing the mime type of the document.
+
+===== Syntax =====
+string getContentType ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.module' );
+$renderer = new JDocumentRendererModule( $document );
+echo $renderer->getContentType();
+</code>
+might produce:
+<code php|Result>
+text/html
+</code>
+
+----
+
+~~DISCUSSION~~
+

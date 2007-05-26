@@ -1,0 +1,46 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentError|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentError|JDocumentError]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentError.html|JDocumentError->render]] | never | Work in progress |
+
+Renders the error document.
+
+Pushes the error message and debug information and loads the appropriate template for the specified error code.
+
+The following elements can be set in $params:
+| directory | is the directory in which to search for the templates.  The default is 'templates'. |
+| template | is the name of the template to use for the error page.  The default is '_system'. |
+| debug | is the debug information, or false if no debug information should be displayed. |
+
+===== Syntax =====
+void render	( **$cache**, **$params** )
+
+| **$cache** | boolean | is a boolean value that specifies whether or not the output should be cached. |
+| **$params** | array | is an associative array that specifies certain parameters for the page. |
+
+===== Examples =====
+The JError::customErrorPage invokes this method in the following manner:
+<code php|Example>
+$document	= & JDocument::getInstance('error');
+$config		= & JFactory::getConfig();
+
+// Get the current template from the application
+$template = $mainframe->getTemplate();
+
+// Push the error object into the document
+$document->setError($error);
+
+@ob_end_clean();
+jimport('joomla.i18n.language');
+$document->setTitle(JText::_('Error').': '.$error->code);
+$data = $document->render(false, array (
+	'template' => $template,
+	'directory' => JPATH_THEMES,
+	'debug' => $config->getValue('config.debug')
+));
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

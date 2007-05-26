@@ -1,0 +1,26 @@
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentPDF|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentPDF|JDocumentPDF]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentPDF.html|JDocumentPDF->getName]] | never | Work in progress |
+
+Returns the document name.
+
+The name is returned as part of the header in the render() method.
+
+===== Syntax =====
+string getName ()
+
+===== Examples =====
+<code php|Example>
+$pdfDoc =& JDocument::getInstance( 'pdf' );
+$pdfDoc->setName( 'This is the document name' );
+echo $pdfDoc->getName();
+</code>
+might produce:
+<code php|Result>
+This is the document name
+</code>
+
+----
+
+~~DISCUSSION~~
+

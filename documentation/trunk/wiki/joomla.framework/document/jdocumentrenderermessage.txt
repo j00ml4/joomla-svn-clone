@@ -1,0 +1,15 @@
+====== JDocumentRendererMessage ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererMessage.html|JDocumentRendererMessage]] | never | Work in progress |
+
+Class to render system messages into the HTML document.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRendererMessage-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererMessage-render|render]] | Renders the message stack and returns the results as a string. |
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,36 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererModules|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererModules|JDocumentRendererModules]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererModules.html|JDocumentRendererModules->render]] | never | Work in progress |
+
+Renders module scripts for the specified position and returns the results as a string.
+
+===== Syntax =====
+string render	( **$position**, **$params**, **$content**, **$name** )
+
+| **$position** | string | is a string containing the name of the position of the modules to render. |
+| **$params** | array | is an associative array of values that are passed to the module's render method. This parameter is optional and if omitted defaults to an empty array. |
+| **$content** | string | is a string that overrides the module output.  If this parameter is not null, it is used as the renderer output.  Otherwise, the method will invoke the module to render its output. This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.modules' );
+$renderer = new JDocumentRendererModules( $document );
+echo $renderer->render( 'status' );
+</code>
+might produce:
+<code php|Result>
+<span class="legacy-mode">Legacy: 1.0</span>
+<span class="preview"><a href="http://127.0.0.1/j15/" target="_blank">Preview</a></span>
+<a href="index.php?option=com_messages"><span class="no-unread-messages">0</span></a>
+<span class="loggedin-users">1</span>
+<span class="logout"><a href="index.php?option=com_login&task=logout">Logout</a></span>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

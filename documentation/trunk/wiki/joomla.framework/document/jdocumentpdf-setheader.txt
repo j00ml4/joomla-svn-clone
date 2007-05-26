@@ -1,0 +1,28 @@
+====== setHeader ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentPDF|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentPDF|JDocumentPDF]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentPDF.html|JDocumentPDF->setHeader]] | never | Work in progress |
+
+Sets the document header string
+
+The header is used in the response header.
+
+===== Syntax =====
+void setHeader ( **$text** )
+
+| **$text** | string | is a string containing the document header string. |
+
+===== Examples =====
+<code php|Example>
+$pdfDoc =& JDocument::getInstance( 'pdf' );
+$pdfDoc->setHeader( 'This is the header' );
+echo $pdfDoc->getHeader();
+</code>
+might produce:
+<code php|Result>
+This is the header
+</code>
+
+----
+
+~~DISCUSSION~~
+

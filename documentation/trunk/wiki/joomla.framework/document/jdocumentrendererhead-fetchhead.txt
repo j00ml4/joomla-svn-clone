@@ -1,0 +1,50 @@
+====== fetchHead ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererHead|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererHead|JDocumentRendererHead]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererHead.html|JDocumentRendererHead->fetchHead]] | never | Work in progress |
+
+Generates the head HTML and return the results as a string.
+
+Renders the following items:
+  * document title
+  * base href link
+  * meta tag data
+  * link declarations
+  * stylesheet links
+  * style declarations
+  * script file links
+  * script declarations
+  * custom tags
+
+The line end characters, tab characters and tag end characters are retrieved from the $document parameter.
+
+===== Syntax =====
+string fetchHead	( **&$document** )
+
+| **&$document** | [[jdocument|JDocument]] | is a [[jdocument|JDocument]] object containing the data to render. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.head' );
+$renderer = new JDocumentRendererHead( $document );
+echo $renderer->fetchHead( $document );
+</code>
+might produce:
+<code php|Result>
+<title>Joomla! 1.5 Testing - Administration</title>
+  <meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+
+  <meta name="keywords" content="joomla, Joomla" />
+  <script type="text/javascript" src="../includes/js/mootools-uncompressed.js"></script>
+  <script type="text/javascript" src="../includes/js/joomla.javascript.js"></script>
+</code>
+
+----
+
+~~DISCUSSION~~
+

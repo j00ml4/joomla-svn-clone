@@ -1,0 +1,20 @@
+====== JDocumentRendererAtom ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererAtom.html|JDocumentRendererAtom]] | never | Work in progress |
+
+JDocumentRendererAtom is a feed that implements the atom specification.
+
+Please note that just by using this class you won't automatically produce valid atom files. For example, you have to specify either an editor for the feed or an author for every single feed item.
+
+This class uses the mime type 'application/atom+xml'.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRendererAtom-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererAtom-render|render]] | Renders the feed. |
+
+----
+
+~~DISCUSSION~~
+
+
+

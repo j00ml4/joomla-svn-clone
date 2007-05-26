@@ -1,0 +1,28 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentPDF|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentPDF|JDocumentPDF]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentPDF.html|JDocumentPDF->render]] | never | Work in progress |
+
+Renders the document.
+
+The method pushes the document data into the PDF object and invokes the PDF method to render the HTML in PDF format.
+
+The method returns the rendered PDF document.
+
+===== Syntax =====
+string render ( **$cache**, **$params** )
+
+| **$cache** | boolean | is a boolean value which specifies whether or not the feed should be cached. This parameter is optional and if omitted defaults to false. |
+| **$params** | array | is an associative array of attributes.  These parameters are not used by the JDocumentPDF class. |
+
+===== Examples =====
+This method gets called by the JApplication::render() method in the following manner:
+<code php|Example>
+$data = $document->render( $this->getCfg('caching'), $params);
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

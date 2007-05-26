@@ -1,0 +1,40 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererHead|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererHead|JDocumentRendererHead]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererHead.html|JDocumentRendererHead->render]] | never | Work in progress |
+
+Renders the document head and returns the results as a string.
+
+===== Syntax =====
+string render	( **$head**, **$params**, **$content** )
+
+| **$head** | string | is an unused string. |
+| **$params** | array | is an associative array of parameter values.  This parameter is unused. |
+| **$content** | string | is an unused string. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.head' );
+$renderer = new JDocumentRendererHead( $document );
+echo $renderer->render();
+</code>
+might produce:
+<code php|Result>
+<title>Joomla! 1.5 Testing - Administration</title>
+  <meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+
+  <meta name="keywords" content="joomla, Joomla" />
+  <script type="text/javascript" src="../includes/js/mootools-uncompressed.js"></script>
+  <script type="text/javascript" src="../includes/js/joomla.javascript.js"></script>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,16 @@
+====== JDocumentRendererComponent ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererComponent.html|JDocumentRendererComponent]] | never | Work in progress |
+
+Component rendering class.  Returns the output untouched.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRendererComponent-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererComponent-render|render]] | Renders a component script and returns the results as a string. |
+
+----
+
+~~DISCUSSION~~
+
+
+
