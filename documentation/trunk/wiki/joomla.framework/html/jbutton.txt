@@ -14,12 +14,12 @@ This is an abstract button class. It is the base class for all other JButton cla
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-render|render]] | Renders the button. |
 
 ===== Child Classes =====
-| [[JButton_Custom|Custom]] |
-| [[JButton_Help|Help]] |
-| [[JButton_Link|Link]] |
-| [[JButton_Popup|Popup]] |
-| [[JButton_Separator|Separator]] |
-| [[JButton_Standard|Standard]] |
+| [[JButtonCustom|Custom]] |
+| [[JButtonHelp|Help]] |
+| [[JButtonLink|Link]] |
+| [[JButtonPopup|Popup]] |
+| [[JButtonSeparator|Separator]] |
+| [[JButtonStandard|Standard]] |
 
 
 ----

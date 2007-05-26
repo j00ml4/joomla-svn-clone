@@ -8,7 +8,7 @@ Gets the button ID. This method can be redefined in the final button class. The 
 void fetchId ()
 
 ===== Examples =====
-The following example illustrates the JButton_Standard class.
+The following example illustrates the JButtonStandard class.
 <code php|Example>
 $bar =& new JToolBar( 'My ToolBar' );
 $button =& $bar->loadButtonType( 'Standard' );
