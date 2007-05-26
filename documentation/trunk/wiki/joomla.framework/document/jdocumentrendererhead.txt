@@ -1,0 +1,17 @@
+====== JDocumentRendererHead ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererHead.html|JDocumentRendererHead]] | never | Work in progress |
+
+Renderer class to render the document head of an HTML document.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRendererHead-fetchHead|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererHead-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
+| [[JDocumentRendererHead-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererHead-render|render]] | Renders the document head and returns the results as a string. |
+
+----
+
+~~DISCUSSION~~
+
+
+

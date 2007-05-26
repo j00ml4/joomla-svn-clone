@@ -1,0 +1,15 @@
+====== JDocumentRendererModules ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererModules.html|JDocumentRendererModules]] | never | Work in progress |
+
+Class to render modules for the HTML document.  This class will render a group of modules from the specified position.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentRendererModules-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererModules-render|render]] | Renders module scripts for the specified position and returns the results as a string. |
+
+----
+
+~~DISCUSSION~~
+
+

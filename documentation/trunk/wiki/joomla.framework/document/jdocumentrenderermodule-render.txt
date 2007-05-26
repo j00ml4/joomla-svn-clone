@@ -1,0 +1,36 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererModule|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererModule|JDocumentRendererModule]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererModule.html|JDocumentRendererModule->render]] | never | Work in progress |
+
+Renders a module script and returns the results as a string.
+
+If the module is cachable and and caching is enabled, the output is retrieved from the caching layer.  Otherwise, the [[references:joomla.framework:application:jmodulehelper-rendermodule|JModuleHelper::renderModule()]] method is used to render the module.
+
+The method returns the rendered module.
+
+===== Syntax =====
+string render	( **$module**, **$params**, **$content** )
+
+| **$module** | string | is a string containing the name of the module to be rendered. |
+| **$params** | array | is an associative array of parameter values that get passed to the module. |
+| **$content** | string | is a string that overrides the module output.  If this parameter is not null, it is used as the renderer output.  Otherwise, the method will invoke the module to render its output. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.module' );
+$renderer = new JDocumentRendererModule( $document );
+echo $renderer->render( 'online' );
+</code>
+might produce:
+<code php|Result>
+1 <img src="images/users.png" align="middle" alt="Users Online" />
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

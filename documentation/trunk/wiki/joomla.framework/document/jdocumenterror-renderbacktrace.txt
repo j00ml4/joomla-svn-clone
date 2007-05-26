@@ -1,0 +1,60 @@
+====== renderBacktrace ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentError|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentError|JDocumentError]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentError.html|JDocumentError->renderBacktrace]] | never | Work in progress |
+
+Renders an error backtrace.
+
+This method is used inside error template files to render a backtrace if debug mode is turned on.
+
+The method returns the rendered code.
+
+===== Syntax =====
+void renderBacktrace ()
+
+===== Examples =====
+<code php|Example>
+echo $this->renderBacktrace();
+</code>
+might produce:
+<code php|Result>
+<table border="0" cellpadding="0" cellspacing="0" class="Table">
+	<tr>
+		<td colspan="3" align="left" class="TD"><strong>Call stack</strong></td>
+	</tr>
+	<tr>
+		<td class="TD"><strong>#</strong></td>
+		<td class="TD"><strong>Function</strong></td>
+		<td class="TD"><strong>Location</strong></td>
+	</tr>
+	<tr>
+		<td class="TD">1</td>
+		<td class="TD">JSite->route()</td>
+		<td class="TD">/var/www/j15/index.php:59</td>
+	</tr>
+	<tr>
+		<td class="TD">2</td>
+		<td class="TD">JApplication->route()</td>
+		<td class="TD">/var/www/j15/includes/application.php:85</td>
+	</tr>
+	<tr>
+		<td class="TD">3</td>
+		<td class="TD">JError->raiseError()</td>
+		<td class="TD">/var/www/j15/libraries/joomla/application/application.php:122</td>
+	</tr>
+	<tr>
+		<td class="TD">4</td>
+		<td class="TD">JError->raise()</td>
+		<td class="TD">/var/www/j15/libraries/joomla/utilities/error.php:167</td>
+	</tr>
+	<tr>
+		<td class="TD">5</td>
+		<td class="TD">JException->__construct()</td>
+		<td class="TD">/var/www/j15/libraries/joomla/utilities/error.php:132</td>
+	</tr>
+</table>
+</code>
+
+----
+
+~~DISCUSSION~~
+

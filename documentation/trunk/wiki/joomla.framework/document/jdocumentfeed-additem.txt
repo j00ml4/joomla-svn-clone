@@ -1,0 +1,30 @@
+====== addItem ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentFeed|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentFeed|JDocumentFeed]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentFeed.html|JDocumentFeed->addItem]] | never | Work in progress |
+
+Adds a JFeedItem to the feed.
+
+===== Syntax =====
+void addItem ( **&$item** )
+| **&$item** | [[jfeeditem|JFeedItem]] | is an object of type [[jfeeditem|JFeedItem]] that should be added to the feed. |
+
+===== Examples =====
+<code php|Example>
+$feedDoc =& JDocument::getInstance( 'feed' );
+
+$item = new JFeedItem();
+$item->title            = 'Item Title';
+$item->link             = 'http://example.com/feed.php';
+$item->description      = 'About the Item';
+$item->date             = mktime();
+$item->author           = 'Joe Blow';
+$item->category         = 'General Category';
+
+$feedDoc->addItem( $item );
+$feedDoc->render();
+</code>
+
+----
+
+~~DISCUSSION~~
+

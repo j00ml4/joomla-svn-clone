@@ -1,0 +1,28 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRAW.html|JDocumentRAW->render]] | never | Work in progress |
+
+Renders the document.
+
+The RAW document renderer simply returns the contents of the document buffer without any additional processing.
+
+The method returns the rendered document string.
+
+===== Syntax =====
+string render ( **$cache**, **$params** )
+
+| **$cache** | boolean | is a boolean value that specifies whether or not the output should be cached.  This parameter is optional and if omitted defaults to false. |
+| **$params** | array | is an associative array of parameters.  These parameters are not used.  This parameter is optional. |
+
+===== Examples =====
+The site application calls the render method in the following manner:
+<code php|Example>
+$data = $document->render( $this->getCfg('caching'), $params);
+</code>
+
+
+----
+
+~~DISCUSSION~~
+
+

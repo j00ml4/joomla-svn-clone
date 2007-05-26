@@ -1,0 +1,42 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRenderer|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->render]] | never | Work in progress |
+
+Renders a script and returns the results as a string.  This is an abstract method and must be implemented in the child class.
+
+===== Syntax =====
+string render	( **$name**, **$params**, **$content**, **$array** )
+
+| **$name** | string | is a string containing the name of the element to render.  This parameter is not used in the abstract method. |
+| **$params** | array | is an associative array of parameters.  These are not used in the abstract method. |
+| **$content** | string | is a string used to override the output of the renderer.  This parameter is not used in the abstract method. |
+| **$array** | array | is an array that may be implemented in child methods. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.head' );
+$renderer = new JDocumentRendererHead( $document );
+//echo $renderer->getContentType();
+echo $renderer->render();
+</code>
+might produce:
+<code php|Result>
+<title>Joomla! 1.5 Testing - Administration</title>
+  <meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+
+  <meta name="keywords" content="joomla, Joomla" />
+  <script type="text/javascript" src="../includes/js/mootools-uncompressed.js"></script>
+  <script type="text/javascript" src="../includes/js/joomla.javascript.js"></script>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

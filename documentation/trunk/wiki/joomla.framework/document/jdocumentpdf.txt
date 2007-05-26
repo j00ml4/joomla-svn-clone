@@ -1,0 +1,21 @@
+====== JDocumentPDF ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentPDF.html|JDocumentPDF]] | never | Work in progress |
+
+JDocumentPDF class, provides an easy interface to parse and display a PDF document.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JDocumentPDF-_construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-_construct|__construct]] | JDocumentPDF class constructor. |
+| [[JDocumentPDF-getHeader|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-getHeader|getHeader]] | Returns the document header string. |
+| [[JDocumentPDF-getName|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-getName|getName]] | Returns the document name. |
+| [[JDocumentPDF-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-render|render]] | Renders the document. |
+| [[JDocumentPDF-setHeader|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-setHeader|setHeader]] | Sets the document header string. |
+| [[JDocumentPDF-setName|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-setName|setName]] | Sets the document name. |
+
+----
+
+~~DISCUSSION~~
+
+
+

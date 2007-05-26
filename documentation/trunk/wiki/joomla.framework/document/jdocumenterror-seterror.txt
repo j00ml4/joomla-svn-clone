@@ -1,0 +1,23 @@
+====== setError ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentError|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentError|JDocumentError]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentError.html|JDocumentError->setError]] | never | Work in progress |
+
+Sets the error object.  The error object should be an object of type JException or Exception (for PHP5).
+
+===== Syntax =====
+boolean setError	( **$error** )
+
+| **$error** | object | is an object of type JException (or Exception) to set. |
+
+===== Examples =====
+<code php|Example>
+$error =& JError::raiseError( 404, 'Not found' );
+$errorDoc =& JDocument::getInstance( 'error' );
+$errorDoc->setError( $error );
+</code>
+
+
+----
+
+~~DISCUSSION~~
+

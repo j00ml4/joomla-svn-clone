@@ -1,0 +1,34 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererComponent|JDocumentRendererComponent]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererComponent.html|JDocumentRendererComponent->render]] | never | Work in progress |
+
+Renders a component script and returns the results as a string.
+
+The method returns the value of the $content parameter.
+
+===== Syntax =====
+string render	( **$component**, **$params**, **$content** )
+
+| **$component** | string | is a string containing the name of the component to render.  This parameter is not used.  This parameter is optional. |
+| **$params** | array | is an associative array of parameter values.  This parameter is not used.  This parameter is optional. |
+| **$content** | string | is a string containing the output that should be returned.  This parameter is optional and if omitted defaults to null. |
+
+===== Examples =====
+<code php|Example>
+$document =& JFactory::getDocument();
+
+jimport( 'joomla.document.renderer' );
+jimport( 'joomla.document.html.renderer.component' );
+$renderer = new JDocumentRendererComponent( $document );
+echo $renderer->render( 'com_example', array(), 'This is the renderer output.' );
+</code>
+might produce:
+<code php|Result>
+This is the renderer output.
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

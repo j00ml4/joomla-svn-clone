@@ -1,0 +1,50 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererMessage|JDocumentRendererMessage]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererMessage.html|JDocumentRendererMessage->render]] | never | Work in progress |
+
+Renders the message stack and returns the results as a string.
+
+Retrieves the message queue from the $mainframe object and renders them in HTML.
+
+The method returns the rendered HTML code.
+
+===== Syntax =====
+string render	( **$name**, **$params**, **$content** )
+
+| **$name** | string | is an unused string. |
+| **$params** | array | is an unused associative array of parameter values. |
+| **$content** | string | is an unused string. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+if ($task == 'displaymessage') {
+	$document =& JFactory::getDocument();
+
+	jimport( 'joomla.document.renderer' );
+	jimport( 'joomla.document.html.renderer.message' );
+	$renderer = new JDocumentRendererMessage( $document );
+	echo $renderer->render();
+} else {
+	$mainframe->redirect( 'index.php?option=com_poll&task=displaymessage', 'This is the message to display!' );
+}
+</code>
+might produce:
+<code php|Result>
+<dl id="system-message">
+<dt class="message">Message</dt>
+<dd class="message message fade">
+	<ul>
+		<li>This is the message to display!</li>
+	</ul>
+</dd>
+
+</dl>
+</code>
+
+----
+
+~~DISCUSSION~~
+
+
