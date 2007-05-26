@@ -11,13 +11,13 @@ You can force the source by setting the $hash parameter:
 | default | via default order (GET, POST, FILE) |
 
 ===== Syntax =====
-mixed getVar ( **$name**, [ **$default** [, **$hash** [, **$type** [, **$mask** ] ] ] ] )
+mixed getVar ( **$name**, **$default**, **$hash**, **$type**, **$mask** )
 
 
 | **$name** | string | is a string containing the variable name to fetch. |
 | **$default** | string | is a string containing the default value if the variable does not exist. This parameter is optional and if omitted defaults to null. |
 | **$hash** | string | is a string containing the name of the location from which to fetch the variable from. Where the var should come from (POST, GET, FILES, METHOD). This parameter is optional and if omitted defaults to 'default'. |
-| **$type** | string | is a string containing the return type for the variable (INT, FLOAT, STRING, BOOLEAN, ARRAY). This parameter is optional and if omitted defaults to 'none'. |
+| **$type** | string | is a string containing the return type for the variable. See the [[references:joomla.framework:filter:jinputfilter-clean|JInputFilter::clean]] method for valid values. This parameter is optional and if omitted defaults to 'none'. |
 | **$mask** | int | is an integer containing the filter mask for the variable. See the [[jrequest-cleanvar|cleanVar]] method for more information. This parameter is optional and if omitted defaults to 0 (most strict). |
 
 ===== Examples =====

@@ -5,11 +5,12 @@
 Gets the value of the user state variable. The method will first check the specified variable in the request to see if a new value has been specified. If it has been, then the value of the state variable is updated and the new value is returned. If it has not, then the stored value is returned. If there is no value specified in the request and no existing session value, then the specified default value is returned. User state variables are stored with the session and are persistent between requests.
 
 ===== Syntax =====
-mixed getUserStateFromRequest ( **$key**, **$request**, **$default** )
+mixed getUserStateFromRequest ( **$key**, **$request**, **$default**, **$type** )
 
 | **$key** | string | is a string containing the key of the user state variable. |
 | **$request** | string | is a string containing the name of the variable passed in a request. |
 | **$default** | mixed | is a variable containing the default value for the variable if not found. This parameter is optional and if omitted defaults to null. |
+| **$type** | string | Filter for the variable, for valid values see [[references:joomla.framework:Filter:JInputFilter-clean|JInputFilter::clean]]. This parameter is optional and if omitted defaults to 'none'. |
 
 ===== Examples =====
 <code php|Example>
