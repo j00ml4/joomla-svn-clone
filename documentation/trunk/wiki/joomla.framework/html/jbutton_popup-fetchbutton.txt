@@ -1,6 +1,6 @@
 ====== fetchButton ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Popup|JButton_Popup]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Popup.html#fetchbutton|JButton_Popup->fetchButton]] | never | Internal review |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButtonPopup|JButtonPopup]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonPopup.html#fetchbutton|JButtonPopup->fetchButton]] | never | Internal review |
 
 Returns the HTML code for the button. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with $name as its parameter. There are classes defined for certain values of $name in the standard administrator template. See the [[icon_class_list|list of icon classes]] for more details. If this class is used in the frontend, the appropriate class should be defined and any images used should be included.
 
