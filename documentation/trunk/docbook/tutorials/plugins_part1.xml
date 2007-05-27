@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<chapter id="plugintutorial">
+<?xml version="1.0"?>
+<chapter>plugintutorial
   <chapterinfo>
     <author>
       <surname>Unknown Author</surname>
@@ -10,7 +10,7 @@
 
   <title>Creating a Plugin for Joomla! 1.5</title>
 
-  <section id="plugintutorial.createyourplugin">
+  <sect1>
     <title>How to create your own plugin</title>
 
     <para>This How-To should provide you with the basics of what you need to
@@ -19,7 +19,7 @@
     into an installation file which can be processed by the Joomla!
     installer.</para>
 
-    <section id="plugintutorial.createyourplugin.installationfile">
+    <sect2>
       <title>Creating the installation file</title>
 
       <para>As with all add-ons in Joomla!, plugins are easily installed as a
@@ -51,9 +51,9 @@
       in the &lt;install&gt; tag and the extended information in the
       &lt;filename&gt; tag. This information tells Joomla! into which folder
       to copy the file and to which group the plugin should be added.</para>
-    </section>
+    </sect2>
 
-    <section id="plugintutorial.createyourplugin.creatingplugin">
+    <sect2>
       <title>Creating the Plugin</title>
 
       <para>Joomla! 1.5 introduces a new, more object-orientated, way of
@@ -99,9 +99,9 @@ class &lt;PluginName&gt; extends JPlugin
     }
 
 }</programlisting>
-    </section>
+    </sect2>
 
-    <section id="plugintutorial.createyourplugin.creatingpluginlegacy">
+    <sect2>
       <title>Creating the Plugin (Legacy Mode)</title>
 
       <para>This section describes the legacy method of creating plugins used
@@ -137,9 +137,9 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
       you want to use parameters, it's no problem, just use them as usual. You
       can register as many events and plugin functions together in one file as
       you want. When you're done, your plugin is ready for use.</para>
-    </section>
+    </sect2>
 
-    <section id="plugintutorial.createyourplugin.usingplugin">
+    <sect2>
       <title>Using Plugins in Your Code</title>
 
       <para>Now that you've created your plugin, you will probably want to
@@ -156,15 +156,15 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
       array. The plugin function itself will get the parameters as single
       values. The return value will consist of an array of return values from
       the different plugins (so it can also contain multilevel arrays).</para>
-    </section>
-  </section>
+    </sect2>
+  </sect1>
 
-  <section id="plugintutorial.conclusion">
+  <sect1>
     <title>Conclusion</title>
 
     <para>The plugin structure for Joomla! 1.5 is very flexible and powerful.
     Not only can plugins be used to handle events triggered by the core
     application and extensions, but plugins can also be used to make third
     party extensions extensible and powerful.</para>
-  </section>
+  </sect1>
 </chapter>

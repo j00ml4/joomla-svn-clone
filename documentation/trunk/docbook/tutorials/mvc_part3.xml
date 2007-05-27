@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<chapter id="mvctutorial3">
+<?xml version="1.0"?>
+<chapter>mvctutorial3
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
@@ -13,7 +13,7 @@
   <title>Developing a Model-View-Controller Component - Part 3 - Using the
   Database</title>
 
-  <section id="mvctutorial3.introduction">
+  <sect1>
     <title>Introduction</title>
 
     <para>In the first two tutorials, we showed you how to build a simple
@@ -25,9 +25,9 @@
 
     <para>This tutorial will demonstrate how to use the JDatabase class to
     retrieve data from the database.</para>
-  </section>
+  </sect1>
 
-  <section id="mvctutorial3.retrievingdata">
+  <sect1>
     <title>Retrieving the Data</title>
 
     <para>Our model currently has one method: getGreeting(). This method is
@@ -79,17 +79,16 @@
     <para>hello is the name of the table that we will create later, and
     greeting is the name of the field that stores the greetings. If you are
     not familiar with SQL, it would be helpful to take a tutorial or a lesson
-    to get yourself up to speed. One such tutorial can be found at <ulink
-    url="http://www.w3schools.com/sql/default.asp">w3schools</ulink>.</para>
+    to get yourself up to speed. One such tutorial can be found at <ulink>http://www.w3schools.com/sql/default.aspw3schools</ulink>.</para>
 
     <para>The $db-&gt;loadResult() method will execute the stored database
     query and return the first field of the first row of the result. See
     [[references:joomla.framework:database:jdatabase|JDatabase API reference]]
     for more information about other load methods in the JDatabase
     class.</para>
-  </section>
+  </sect1>
 
-  <section id="mvctutorial3.creatingsqlfile">
+  <sect1>
     <title>Creating the Installation SQL File</title>
 
     <para>The Joomla! installer has built-in support for executing queries
@@ -131,7 +130,7 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
 
     <para>We will save our queries in a file called install.sql.</para>
 
-    <section id="mvctutorial3.creatingsqlfile.uninstall">
+    <sect2>
       <title>Creating the Uninstall SQL File</title>
 
       <para>Though we might hope that people will never want to uninstall our
@@ -145,10 +144,10 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
 
       <para>We will save this query in a file called
       <filename>uninstall.sql</filename>.</para>
-    </section>
-  </section>
+    </sect2>
+  </sect1>
 
-  <section id="mvctutorial3.updatinginstallfile">
+  <sect1>
     <title>Updating our Install File</title>
 
     <para>We need to change a few things in our install file. First, we need
@@ -223,29 +222,28 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
     <para>The driver attribute specifies which database the queries were
     written for. Currently, this can only be mysql, but in future versions of
     Joomla! there may be more database drivers available.</para>
-  </section>
+  </sect1>
 
-  <section id="mvctutorial3.conclusion">
+  <sect1>
     <title>Conclusion</title>
 
     <para>We now have a component that takes advantage of both the Joomla! MVC
     framework classes and the JDatabase classes. You are now able to write MVC
     components that interact with the database and can use the Joomla!
     installer to create and populate database tables.</para>
-  </section>
+  </sect1>
 
-  <section id="mvctutorial3.contributors">
+  <sect1>
     <title>Contributors</title>
 
     <simplelist>
       <member>staalanden</member>
     </simplelist>
-  </section>
+  </sect1>
 
-  <section id="mvctutorial3.download">
+  <sect1>
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink
-    url="packages/com_hello3.zip">com_hello3.zip</ulink></para>
-  </section>
+    <para>The component can be downloaded at: <ulink>packages/com_hello3.zipcom_hello3.zip</ulink></para>
+  </sect1>
 </chapter>

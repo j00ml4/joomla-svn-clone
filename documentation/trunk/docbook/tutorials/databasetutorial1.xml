@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<chapter id="databasetutorial">
+<?xml version="1.0"?>
+<chapter>databasetutorial
 	<chapterinfo>
 		<author>
 			<surname>Louis Landry</surname>
@@ -10,7 +10,7 @@
 
 	<title>Using the 1.5 Database Libraries</title>
 
-	<section id="databasetutorial.getobject">
+	<sect1>
 		<title>Getting a database object</title>
 
 		<para>
@@ -18,7 +18,7 @@
 			need to know to use the Joomla! database libraries.
 		</para>
 
-		<section id="databasetutorial.getobject.system">
+		<sect2>
 			<title>Get the system database object</title>
 
 			<para>
@@ -34,9 +34,9 @@
 				// This gets the database object using the JFactory	class
 				$db = &amp;JFactory::getDBO();
 			</programlisting>
-		</section>
+		</sect2>
 
-		<section id="databasetutorial.getobject.custom">
+		<sect2>
 			<title>Creating a custom database object</title>
 
 			<para>
@@ -49,10 +49,10 @@
 				// Create a new database object
 				$myDB = new JDatabase::getInstance( $options );
 			</programlisting>
-		</section>
-	</section>
+		</sect2>
+	</sect1>
 
-	<section id="databasetutorial.usage">
+	<sect1>
 		<title>Using the database object</title>
 
 		<para>
@@ -84,14 +84,14 @@
 		</para>
 
 		<informaltable>
-			<tgroup cols="3">
+			<tgroup>3
 				<thead>
 					<row>
-						<entry align="center">dog_id</entry>
+						<entry>centerdog_id</entry>
 
-						<entry align="center">name</entry>
+						<entry>centername</entry>
 
-						<entry align="center">color</entry>
+						<entry>centercolor</entry>
 					</row>
 				</thead>
 
@@ -123,7 +123,7 @@
 			</tgroup>
 		</informaltable>
 
-		<section id="databasetutorial.usage.singlefield">
+		<sect2>
 			<title>Select one field from one row</title>
 
 			<para>
@@ -177,6 +177,6 @@
 					</programlisting>
 				</listitem>
 			</orderedlist>
-		</section>
-	</section>
+		</sect2>
+	</sect1>
 </chapter>
