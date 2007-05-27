@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<article id="howto.savingformdata">
+<?xml version="1.0"?>
+<article>howto.savingformdata
   <title>HOWTO: Saving Form Data in Joomla! 1.5</title>
 
   <articleinfo>
@@ -12,7 +12,7 @@
     <date>July 31, 2006</date>
   </articleinfo>
 
-  <section id="howto.savingformdata.safeway">
+  <section>howto.savingformdata.safeway
     <title>The Safe Way to Bind the Request Array to a JTable Object</title>
 
     <para>A common task when developing Joomla! components is saving data from
