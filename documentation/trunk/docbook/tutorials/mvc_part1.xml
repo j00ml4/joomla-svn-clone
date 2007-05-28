@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter>mvctutorial1
+<chapter id="mvctutorial1">
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
@@ -12,7 +12,7 @@
 
   <title>Developing a Model-View-Controller Component - Part 1</title>
 
-  <sect1>
+  <sect1 id="mvctutorial1.introduction">
     <title>Introduction</title>
 
     <para>The new framework in Joomla! 1.5 unleashes a great deal of power for
@@ -26,13 +26,13 @@
     Joomla!</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.requirements">
     <title>Requirements</title>
 
     <para>You need Joomla! 1.5 or greater for this tutorial.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.mvcintroduction">
     <title>Introduction to Model-View-Controller</title>
 
     <para>While the idea behind a component may seem extremely simple, code
@@ -50,7 +50,7 @@
     here in brief, but for a more thorough explanation, please refer to the
     links provided at the end of this tutorial.</para>
 
-    <sect2>
+    <sect2 id="mvctutorial1.mvcintroduction.model">
       <title>Model</title>
 
       <para>The model is the part of the component that encapsulates the
@@ -66,7 +66,7 @@
       element that needs to be changed, not the view or the controller.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.mvcintroduction.view">
       <title>View</title>
 
       <para>The view is the part of the component that is used to render the
@@ -79,7 +79,7 @@
       the model.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.mvcintroduction.controller">
       <title>Controller</title>
 
       <para>The controller is responsible for responding to user actions. In
@@ -93,7 +93,7 @@
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.mvcimplementation">
     <title>Joomla! MVC Implementation</title>
 
     <para>In Joomla!, the MVC pattern is implemented using three classes:
@@ -103,7 +103,7 @@
     (WIP).</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.creatingcomponent">
     <title>Creating a Component</title>
 
     <para>For our basic component, we only require five files:<simplelist>
@@ -123,7 +123,7 @@
         tells Joomla! how to install our component.</member>
       </simplelist></para>
 
-    <sect2>
+    <sect2 id="mvctutorial1.creatingcomponent.entrypoint">
       <title>Creating the Entry Point</title>
 
       <para>Joomla! is always accessed through a single point of entry:
@@ -141,7 +141,7 @@
 
       <para>The code for this file is fairly typical across components.</para>
 
-      <programlisting>php&lt;?php
+      <programlisting role="php">&lt;?php
 /**
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -221,7 +221,7 @@ $controller-&gt;redirect();
       request.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.creatingcomponent.creatingcontroller">
       <title>Creating the Controller</title>
 
       <para>Our component only has one task - greet the world. Therefore, the
@@ -290,7 +290,7 @@ class HelloController extends JController
       single layout (default).</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.creatingcomponent.creatingview">
       <title>Creating the View</title>
 
       <para>The task of the view is very simple: It retrieves the data to be
@@ -333,7 +333,7 @@ class HelloViewHello extends JView
 ?&gt;</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.creatingcomponent.creatingtemplate">
       <title>Creating the Template</title>
 
       <para>Joomla! templates/layouts are regular PHP files that are used to
@@ -350,7 +350,7 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
 &lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial1.creatingcomponent.wrappingitup">
       <title>Wrapping It All Up - Creating the hello.xml File</title>
 
       <para>It is possible to install a component manually by copying the
@@ -437,7 +437,7 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.contributors">
     <title>Contributors</title>
 
     <simplelist>
@@ -447,9 +447,9 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
     </simplelist>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial1.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink>packages/com_hello1.zipcom_hello4.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink url="packages/com_hello1.zip">com_hello4.zip</ulink></para>
   </sect1>
 </chapter>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter>mvctutorial4
+<chapter id="mvctutorial4">
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
@@ -13,7 +13,7 @@
   <title>Developing a Model-View-Controller Component - Part 4 - Creating an
   Administrator Interface</title>
 
-  <sect1>
+  <sect1 id="mvctutorial4.introduction">
     <title>Introduction</title>
 
     <para>In the first three tutorials, we have developed a MVC component that
@@ -24,7 +24,7 @@
     database.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.creatingframework">
     <title>Creating the Basic Framework</title>
 
     <para>The basic framework of the administrator panel is very similar to
@@ -76,7 +76,7 @@ $controller-&gt;redirect();
     <para>The view and model that we will start with is the hellos view and
     the hellos model. We will start with the model.</para>
 
-    <sect2>
+    <sect2 id="mvctutorial4.creatingframework.hellosmodel">
       <title>Creating the Hellos Model</title>
 
       <para>The Hellos Model will be very simple. The only operation that we
@@ -203,7 +203,7 @@ class HellosModelHellos extends JModel
       <para>This file is saved as models/hellos.php.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.creatingframework.hellosview">
       <title>Creating the Hellos View</title>
 
       <para>Now that we have a model to retrieve our data, we need to display
@@ -264,7 +264,7 @@ class HellosViewHellos extends JView
       <filename>views/hellos/view.html.php</filename>.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.creatingframework.hellostemplate">
       <title>Creating the Hellos Template</title>
 
       <para>The template will take the data pushed into it from the view and
@@ -340,7 +340,7 @@ class HellosViewHellos extends JView
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.addingfunctionality">
     <title>Adding Functionality</title>
 
     <para>So far our administrator section is pretty useless. It doesn't
@@ -350,7 +350,7 @@ class HellosViewHellos extends JView
     <para>In order to make it useful, we need to add some buttons and
     links.</para>
 
-    <sect2>
+    <sect2 id="mvctutorial4.addingfunctionality.toolbar">
       <title>Adding a Toolbar</title>
 
       <para>You may have noticed the toolbar that appears at the top of other
@@ -390,7 +390,7 @@ JToolBarHelper::addNewX();</programlisting>
       within the '' to the translated version of the string.</remark>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.addingfunctionality.checkboxes">
       <title>Adding Checkboxes and Links to our Form</title>
 
       <para>We now have buttons. Two of those buttons operate on existing
@@ -462,13 +462,13 @@ JToolBarHelper::addNewX();</programlisting>
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.downanddirty">
     <title>Getting Down and Dirty: Doing the Real Work</title>
 
     <para>Now that the Hellos view is done, it is time to move to the Hello
     view and model. This is where the real work will get done.</para>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.hellocontroller">
       <title>Creating the Hello Controller</title>
 
       <para>Our default controller just isn't going to cut it when it comes to
@@ -521,7 +521,7 @@ function edit()
 }</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.helloview">
       <title>Creating the Hello View</title>
 
       <para>The Hello view will display a form which will allow the user to
@@ -580,7 +580,7 @@ function display($tpl = null)
 }</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.hellomodel">
       <title>Creating the Hello Model</title>
 
       <para>Our view needs data. Therefore, we need to create a model to model
@@ -663,7 +663,7 @@ function &amp;getData()
 }</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.form">
       <title>Creating the Form</title>
 
       <para>Now all that is left is to create the form that the data will go
@@ -704,14 +704,14 @@ function &amp;getData()
       so we silently pass it along in the form.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.implementingfunctionality">
       <title>Implementing the Functionality</title>
 
       <para>So far, our controller only handles two tasks: edit and new.
       However, we also have buttons to save, delete and cancel records. We
       need to write code to handle and perform these tasks.</para>
 
-      <sect3>
+      <sect3 id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord">
         <title>Saving a Record</title>
 
         <para>The logical next step is to implement the functionality to save
@@ -727,7 +727,7 @@ function &amp;getData()
         these updates. It also makes it easy to transfer data from an HTML
         form into the database.</para>
 
-        <sect4>
+        <sect4 id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.tableclass">
           <title>Creating the Table Class</title>
 
           <para>The JTable class is an abstract class from which you can
@@ -793,7 +793,7 @@ class TableHello extends JTable
           component.</para>
         </sect4>
 
-        <sect4>
+        <sect4 id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.modelfunction">
           <title>Implementing the Function in our Model</title>
 
           <para>We are now ready to add the method to the model which will
@@ -873,7 +873,7 @@ function store()
           (UPDATE).</para>
         </sect4>
 
-        <sect4>
+        <sect4 id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.addingtask">
           <title>Adding the Task to the Controller</title>
 
           <para>We are now ready to add our task to the controller. Since the
@@ -904,13 +904,13 @@ function save()
           greetings. We also pass a message along, which will be displayed at
           the top of the page.</para>
 
-          <figure>mvctutorial4.message
+          <figure id="mvctutorial4.message">
             <title>The message that was passed is displayed at the top of the
             page.</title>
 
             <mediaobject>
               <imageobject>
-                <imagedata>images/message.pngPNG</imagedata>
+                <imagedata fileref="images/message.png" format="PNG"/>
               </imageobject>
             </mediaobject>
           </figure>
@@ -918,10 +918,10 @@ function save()
       </sect3>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord">
       <title>Deleting a Record</title>
 
-      <sect3>
+      <sect3 id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.implementingmodelfunction">
         <title>Implementing the Function in the Model</title>
 
         <para>In the model, we will retrieve the list of IDs to delete and
@@ -954,7 +954,7 @@ function delete()
         them later if we so choose.</para>
       </sect3>
 
-      <sect3>
+      <sect3 id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.removetask">
         <title>Handling the Remove Task in the Controller</title>
 
         <para>This is similar to the save() method which handled the save
@@ -978,7 +978,7 @@ function remove()
       </sect3>
     </sect2>
 
-    <sect2>
+    <sect2 id="mvctutorial4.downanddirty.implementingfunctionality.canceloperation">
       <title>Cancelling the Edit Operation</title>
 
       <para>To cancel the edit operation, all we have to do is redirect back
@@ -996,7 +996,7 @@ function cancel()
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.conclusion">
     <title>Conclusion</title>
 
     <para>We have now implemented a basic backend to our component. We are now
@@ -1008,7 +1008,7 @@ function cancel()
     look between components.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.contributors">
     <title>Contributors</title>
 
     <simplelist>
@@ -1016,9 +1016,9 @@ function cancel()
     </simplelist>
   </sect1>
 
-  <sect1>
+  <sect1 id="mvctutorial4.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink>packages/com_hello4.zipcom_hello4.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink url="packages/com_hello4.zip">com_hello4.zip</ulink></para>
   </sect1>
 </chapter>

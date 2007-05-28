@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter>databasetutorial
+<chapter id="databasetutorial">
 	<chapterinfo>
 		<author>
 			<surname>Louis Landry</surname>
@@ -10,7 +10,7 @@
 
 	<title>Using the 1.5 Database Libraries</title>
 
-	<sect1>
+	<sect1 id="databasetutorial.getobject">
 		<title>Getting a database object</title>
 
 		<para>
@@ -18,7 +18,7 @@
 			need to know to use the Joomla! database libraries.
 		</para>
 
-		<sect2>
+		<sect2 id="databasetutorial.getobject.system">
 			<title>Get the system database object</title>
 
 			<para>
@@ -36,7 +36,7 @@
 			</programlisting>
 		</sect2>
 
-		<sect2>
+		<sect2 id="databasetutorial.getobject.custom">
 			<title>Creating a custom database object</title>
 
 			<para>
@@ -52,7 +52,7 @@
 		</sect2>
 	</sect1>
 
-	<sect1>
+	<sect1 id="databasetutorial.usage">
 		<title>Using the database object</title>
 
 		<para>
@@ -84,14 +84,14 @@
 		</para>
 
 		<informaltable>
-			<tgroup>3
+			<tgroup cols="3">
 				<thead>
 					<row>
-						<entry>centerdog_id</entry>
+						<entry align="center">dog_id</entry>
 
-						<entry>centername</entry>
+						<entry align="center">name</entry>
 
-						<entry>centercolor</entry>
+						<entry align="center">color</entry>
 					</row>
 				</thead>
 
@@ -123,7 +123,7 @@
 			</tgroup>
 		</informaltable>
 
-		<sect2>
+		<sect2 id="databasetutorial.usage.singlefield">
 			<title>Select one field from one row</title>
 
 			<para>
