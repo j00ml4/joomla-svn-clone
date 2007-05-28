@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter>plugintutorial
+<chapter id="plugintutorial">
   <chapterinfo>
     <author>
       <surname>Unknown Author</surname>
@@ -10,7 +10,7 @@
 
   <title>Creating a Plugin for Joomla! 1.5</title>
 
-  <sect1>
+  <sect1 id="plugintutorial.createyourplugin">
     <title>How to create your own plugin</title>
 
     <para>This How-To should provide you with the basics of what you need to
@@ -19,7 +19,7 @@
     into an installation file which can be processed by the Joomla!
     installer.</para>
 
-    <sect2>
+    <sect2 id="plugintutorial.createyourplugin.installationfile">
       <title>Creating the installation file</title>
 
       <para>As with all add-ons in Joomla!, plugins are easily installed as a
@@ -53,7 +53,7 @@
       to copy the file and to which group the plugin should be added.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="plugintutorial.createyourplugin.creatingplugin">
       <title>Creating the Plugin</title>
 
       <para>Joomla! 1.5 introduces a new, more object-orientated, way of
@@ -101,7 +101,7 @@ class &lt;PluginName&gt; extends JPlugin
 }</programlisting>
     </sect2>
 
-    <sect2>
+    <sect2 id="plugintutorial.createyourplugin.creatingpluginlegacy">
       <title>Creating the Plugin (Legacy Mode)</title>
 
       <para>This section describes the legacy method of creating plugins used
@@ -139,7 +139,7 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
       you want. When you're done, your plugin is ready for use.</para>
     </sect2>
 
-    <sect2>
+    <sect2 id="plugintutorial.createyourplugin.usingplugin">
       <title>Using Plugins in Your Code</title>
 
       <para>Now that you've created your plugin, you will probably want to
@@ -159,7 +159,7 @@ function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="plugintutorial.conclusion">
     <title>Conclusion</title>
 
     <para>The plugin structure for Joomla! 1.5 is very flexible and powerful.

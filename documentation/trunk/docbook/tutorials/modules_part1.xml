@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter>helloworldmodule
+<chapter id="helloworldmodule">
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
@@ -24,7 +24,7 @@
   of a module. This basic structure can then be expanded to produce more
   elaborate modules.</para>
 
-  <sect1>
+  <sect1 id="helloworldmodule.filestructure">
     <title>File Structure</title>
 
     <para>There are four basic files that are used in the standard pattern of
@@ -42,7 +42,7 @@
     displayed on the page.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="helloworldmodule.mod_helloworld">
     <title>Creating mod_helloworld.php</title>
 
     <para>The mod_helloworld.php file will perform four tasks: # include the
@@ -72,7 +72,7 @@
 
     <programlisting>$hello = modHelloWorldHelper::getHello( $params );</programlisting>
 
-    <sect2>
+    <sect2 id="helloworldmodule.mod_helloworld.completedmodhelloworld">
       <title>Completed mod_helloworld.php file</title>
 
       <para>The complete mod_helloworld.php file is as follows:</para>
@@ -107,7 +107,7 @@ require( JModuleHelper::getLayoutPath( 'mod_helloworld' ) );</programlisting>
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="helloworldmodule.helper">
     <title>Creating helper.php</title>
 
     <para>The helper.php file contains that helper class that is used to
@@ -152,7 +152,7 @@ class modHelloWorldHelper
     functionality in the helper class method.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="helloworldmodule.template">
     <title>Creating tmpl/default.php</title>
 
     <para>The default.php file is the template which displays the module
@@ -170,7 +170,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
     $hello file without any extra declarations or function calls.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="helloworldmodule.manifest">
     <title>Creating mod_helloworld.xml</title>
 
     <para>The mod_helloworld.xml is used to specify which files the installer
@@ -211,7 +211,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
     empty.</para>
   </sect1>
 
-  <sect1>
+  <sect1 id="helloworldmodule.conclusion">
     <title>Conclusion</title>
 
     <para>Module development for Joomla! is a fairly simple, straightforward
