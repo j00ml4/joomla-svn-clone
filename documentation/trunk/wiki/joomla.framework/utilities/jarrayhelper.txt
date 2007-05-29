@@ -12,6 +12,7 @@ JArrayHelper is an array utility class for performing various operations to work
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-sortObjects|sortObjects]] | Sorts an array of objects on a given field. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toInteger|toInteger]] | Converts an array to integer values. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toObject|toObject]] | Maps an array to an stdClass object. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toString|toString]] | Converts an associative array into HTML attribute format. |
 
 ----
 
