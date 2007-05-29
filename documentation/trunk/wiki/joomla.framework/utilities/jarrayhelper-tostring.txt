@@ -1,0 +1,48 @@
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#tostring|JArrayHelper->toString]] | never | Internal review |
+
+Converts an associative array into HTML attribute format.
+
+The $inner_glue parameter is inserted between keys and values, and the $outer_glue parameter is inserted between value pairs.  If the $keepOuterKey parameter is true, then keys that have arrays as values will also be output in the resulting string.
+
+===== Syntax =====
+stdClass toString ( **$array**, **$inner_glue**, **$outer_glue**, **$keepOuterKey** )
+
+| **$array** | array | Optional, defaults to ''null''. An associative array of key-value pairs to be used as attributes. |
+| **$inner_glue** | string | Optional, defaults to "=". The string to be used as the separator between keys and values. |
+| **$outer_glue** | string | Optional, defaults to " " (space). The string to be used as a separator between key-value pairs. |
+| **$keepOuterKey** | boolean | Optional, default ''false''. A boolean value that specifies whether or not keys that have array values should be inserted into the output. |
+
+===== Examples =====
+<code php|Example>
+$attribs = array(
+        'id'    => 'iframe-id',
+        'class' => 'frame-class'
+        );
+echo JArrayHelper::toString( $attribs );
+</code>
+might produce:
+<code php|Result>
+id="iframe-id" class="frame-class"
+</code>
+
+The following example has no particular use but does demonstrate how the glue parameters are used:
+<code php|Example>
+$attribs = array(
+        'id'    => 'iframe-id',
+        'class' => array(
+                   'class1' => 'class1', 
+                   'class2' => 'class2' 
+                    )
+        );
+echo JArrayHelper::toString( $attribs, '+', '=', true );
+</code>
+might produce:
+<code php|Result>
+id+"iframe-id"=class=class1+"class1"=class2+"class2"
+</code>
+
+----
+
+~~DISCUSSION~~

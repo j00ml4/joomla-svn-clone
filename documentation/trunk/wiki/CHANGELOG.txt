@@ -16,8 +16,27 @@ Legend:
 ! -> Note
 ---------
 
+29.05.2007 René Serradeil
+ +	JFile::getFileName
+ -	JHTML::_implode_assoc, JDocumentHelper.txt
+ +	JArrayHelper::toString (adapted from JHTML::_implode_assoc)
+ !	source file "/libraries/joomla/utilities/array.php" req. phpDocs
+ ^	joomla.framework.txt
+ 
 29.05.2007
  -	Removed JDocumentHTML->unsetmetadata (deprecated)
+
+29.05.2007 Ian MacLennan
+ +	JElement package
+
+27.05.2007 Ian MacLennan
+ +	JDocument package
+
+09.05.2007 René Serradeil
+ >	session classes to /session
+
+15.03.2007 Ian MacLennan
+ +	folders: /filter, /template
 
 20.02.2007 René Serradeil
  >	/abstract to /base (again)
