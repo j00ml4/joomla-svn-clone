@@ -16,6 +16,9 @@ Legend:
 ! -> Note
 ---------
 
+29.05.2007
+ -	Removed JDocumentHTML->unsetmetadata (deprecated)
+
 20.02.2007 René Serradeil
  >	/abstract to /base (again)
  ^	links and occurances of Abstract to Base
