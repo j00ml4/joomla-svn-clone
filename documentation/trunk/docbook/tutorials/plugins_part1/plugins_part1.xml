@@ -31,8 +31,8 @@
 
       <para>As you can see, the system is similar to other Joomla! XML
       installation files. You only have to look out for the group="xxx" entry
-      in the <install> tag and the extended information in the
-      <filename> tag. This information tells Joomla! into which folder
+      in the &lt;install&gt; tag and the extended information in the
+      &lt;filename&gt; tag. This information tells Joomla! into which folder
       to copy the file and to which group the plugin should be added.</para>
     </sect2>
 
@@ -65,8 +65,8 @@
 
       <para>With the function $mainframe→registerEvent() your plugin is
       registered into the Joomla! event system. This means that when the event
-      called '<EventName>' is later triggered, the function called
-      '<FunctionName>' will be called.</para>
+      called '&lt;EventName&gt;' is later triggered, the function called
+      '&lt;FunctionName&gt;' will be called.</para>
 
       <para>Now you can write your plugin function code anyway you want. If
       you want to use parameters, it's no problem, just use them as usual. You

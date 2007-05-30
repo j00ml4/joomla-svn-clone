@@ -149,8 +149,8 @@
 
     <xi:include href="code/hello.xml.xml" />
 
-    <para>You will notice two attributes present on the <file> tags
-    within the <install> and <uninstall> sections: charset and
+    <para>You will notice two attributes present on the &lt;file&gt; tags
+    within the &lt;install&gt; and &lt;uninstall&gt; sections: charset and
     driver. The charset is the type of charset to use. The only valid charset
     is utf8. If you want to create install files for non-utf8 databases (for
     older version of MySQL), you should omit this attribute.</para>
