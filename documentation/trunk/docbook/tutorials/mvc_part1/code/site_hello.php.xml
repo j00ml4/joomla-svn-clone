@@ -25,9 +25,9 @@ $classname    = 'HelloController'.$controller;
 $controller   = new $classname( );
 
 // Perform the Request task
-$controller-&gt;execute( JRequest::getVar( 'task' ) );
+$controller->execute( JRequest::getVar( 'task' ) );
 
 // Redirect if set by the controller
-$controller-&gt;redirect();
+$controller->redirect();
 
-?&gt;]]></programlisting>
+?>]]>]]>    </programlisting>

@@ -19,15 +19,15 @@
     a form into a table in the database. One method of doing so that is both
     save and easy is to process this data as follows:</para>
 
-    <programlisting>$post           = JRequest::get( ‘post’ );
+    <programlisting>    <![CDATA[$post           = JRequest::get( ‘post’ );
 
 // fix up special html fields
 $post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’,
 ’string’, _J_ALLOWRAW );
 
 $row = JTable::getInstance(‘category’, $db );
-if (!$row-&gt;bind( $post )) {
-...</programlisting>
+if (!$row->bind( $post )) {
+...]]>    </programlisting>
 
     <para>JRequest::get( ‘post’ ); 'get's an input filtered and slash
     corrected (slashes stripped where magic quotes are enabled) copy of the

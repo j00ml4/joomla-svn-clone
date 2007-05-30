@@ -1,4 +1,4 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 /**
  * Hello World table class
  * 
@@ -36,8 +36,8 @@ class TableHello extends JTable
      *
      * @param object Database connector object
      */
-    function TableHello(&amp; $db) {
+    function TableHello(> $db) {
         parent::__construct('#__hello', 'id', $db);
     }
 }
-?&gt;</programlisting>
+?>]]>    </programlisting>

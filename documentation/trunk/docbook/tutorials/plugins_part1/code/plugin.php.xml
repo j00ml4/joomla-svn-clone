@@ -1,11 +1,11 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Import library dependencies
 jimport('joomla.application.plugin.helper');
 
-class &lt;PluginName&gt; extends JPlugin
+class <PluginName> extends JPlugin
 {
    /**
     * Constructor
@@ -15,19 +15,19 @@ class &lt;PluginName&gt; extends JPlugin
     * NOT references.  This causes problems with cross-referencing necessary for the
     * observer design pattern.
     */
-    function &lt;PluginName&gt;( &amp; $subject )
+    function <PluginName>( > $subject )
     {
             parent::__construct( $subject );
 
             // load plugin parameters
-            $this-&gt;_plugin = &amp; JPluginHelper::getPlugin( '&lt;EventName&gt;', '&lt;PluginName&gt;' );
-            $this-&gt;_params = new JParameter( $this-&gt;_plugin-&gt;params );
+            $this->_plugin = > JPluginHelper::getPlugin( '<EventName>', '<PluginName>' );
+            $this->_params = new JParameter( $this->_plugin->params );
     }
 
     /**
     * Plugin method with the same name as the event will be called automatically.
     */
-    function &lt;EventName&gt;()
+    function <EventName>()
     {
         global $mainframe;
 
@@ -36,4 +36,4 @@ class &lt;PluginName&gt; extends JPlugin
         return true;
     }
 
-}</programlisting>
+}]]>    </programlisting>

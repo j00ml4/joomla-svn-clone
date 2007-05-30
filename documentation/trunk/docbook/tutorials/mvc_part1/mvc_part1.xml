@@ -133,7 +133,7 @@
       based on the value of 'option' in the URL or in the POST data. For our
       component, the URL would be:</para>
 
-      <para><code>index.php?option=com_hello&amp;view=hello</code></para>
+      <para><code>index.php?option=com_hello>view=hello</code></para>
 
       <para>This will load our main file, which can be seen as the single
       point of entry for our component:
@@ -162,7 +162,7 @@
 
       <para><classname>JRequest</classname>:getVar() finds a variable in the
       URL or the POST data. So if our URL is
-      index.php?option=com_hello&amp;controller=controller_name, then we can
+      index.php?option=com_hello>controller=controller_name, then we can
       retrieve our controller name in our component using: echo
       <classname>JRequest</classname>::getVar('controller');</para>
 
@@ -176,7 +176,7 @@
 
       <para>After the controller is created, we instruct the controller to
       execute the task, as defined in the URL:
-      index.php?option=com_hello&amp;task=sometask. If no task is set, the
+      index.php?option=com_hello>task=sometask. If no task is set, the
       default task 'display' will be assumed. When display is used, the 'view'
       variable will decide what will be displayed. Other common tasks are
       save, edit, new...</para>
@@ -245,15 +245,15 @@
       <para>Joomla! templates/layouts are regular PHP files that are used to
       layout the data from the view in a particular manner. The variables
       assigned by the JView::assignRef method can be accessed from the
-      template using $this-&gt;propertyname (see the template code below for
+      template using $this->propertyname (see the template code below for
       an example).</para>
 
       <para>Our template is very simple: we only want to display the greeting
       that was passed in from the view:</para>
 
-      <programlisting>&lt;?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?&gt;
-&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
+      <programlisting>    <![CDATA[<?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?>
+<h1><?php echo $this->greeting; ?></h1>]]>    </programlisting>
     </sect2>
 
     <sect2 id="mvctutorial1.creatingcomponent.wrappingitup">
@@ -290,7 +290,7 @@ defined('_JEXEC') or die('Restricted access'); ?&gt;
       directory contents. This is often undesirable. These files have the
       simple line:</para>
 
-      <programlisting>&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
+      <programlisting>    <![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]>    </programlisting>
 
       <para>It will simply display a blank page.</para>
 

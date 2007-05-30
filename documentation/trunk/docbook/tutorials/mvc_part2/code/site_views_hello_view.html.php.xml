@@ -1,4 +1,4 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 
 /**
  * Hello View for Hello World Component
@@ -26,11 +26,11 @@ class HelloViewHello extends JView
 {
     function display($tpl = null)
     {
-        $model =&amp; $this-&gt;getModel();
-        $greeting = $model-&gt;getGreeting();
-        $this-&gt;assignRef( 'greeting',	$greeting );
+        $model => $this->getModel();
+        $greeting = $model->getGreeting();
+        $this->assignRef( 'greeting',	$greeting );
 
         parent::display($tpl);
     }
 }
-?&gt;</programlisting>
+?>]]>    </programlisting>
