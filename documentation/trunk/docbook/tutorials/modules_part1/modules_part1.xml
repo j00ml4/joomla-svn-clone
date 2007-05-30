@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<chapter id="helloworldmodule">
+  <chapterinfo>
+    <author>
+      <firstname>Ian</firstname>
+
+      <surname>MacLennan</surname>
+    </author>
+
+    <date>March 3, 2007</date>
+  </chapterinfo>
+
+  <title>Creating a Hello World Module for Joomla! 1.5</title>
+
+  <para>A module is a lightweight and flexible extension that is used for page
+  rendering. They are used for small bits of the page that are generally less
+  complex and are able to be seen across different components.</para>
+
+  <para>You can see many examples of modules in the standard Joomla! install:
+  - menus - Latest News - Login form - and many more.</para>
+
+  <para>This tutorial will explain how to go about creating a simple Hello
+  World module. Through this tutorial you will learn the basic file structure
+  of a module. This basic structure can then be expanded to produce more
+  elaborate modules.</para>
+
+  <sect1 id="helloworldmodule.filestructure">
+    <title>File Structure</title>
+
+    <para>There are four basic files that are used in the standard pattern of
+    module development: - mod_helloworld.php - This file is the main entry
+    point for the module. It will perform any necessary initialization
+    routines, call helper routines to collect any necessary data, and include
+    the template which will display the module output. - mod_helloworld.xml -
+    This file contains information about the module. It defines the files that
+    need to be installed by the Joomla! installer and specifies configuration
+    parameters for the module. - helper.php - This file contains the helper
+    class which is used to do the actual work in retrieving the information to
+    be displayed in the module (usually from the database or some other
+    source). - tmpl/default.php - This is the module template. This file will
+    take the data collected by mod_helloworld.php and generate the HTML to be
+    displayed on the page.</para>
+  </sect1>
+
+  <sect1 id="helloworldmodule.mod_helloworld">
+    <title>Creating mod_helloworld.php</title>
+
+    <para>The mod_helloworld.php file will perform four tasks: # include the
+    helper.php file which contains the class to be used to collect the
+    necessary data # invoke the appropriate helper class method to retrieve
+    the data # include the template to display the output.</para>
+
+    <para>The helper class is defined in our helper.php file. This file is
+    included with a require_once statement:</para>
+
+    <programlisting>require_once( dirname(__FILE__).DS.'helper.php' );</programlisting>
+
+    <para>require_once is used because our helper functions are defined within
+    a class, and we only want the class defined once.</para>
+
+    <para>Our helper class has not been defined yet, but when it is, it will
+    contain one method: getHello(). For our basic example, it is not really
+    necessary to do this - the “Hello, World” message that this method returns
+    could simply be included in the template. We use a helper class here to
+    demonstrate this basic technique.</para>
+
+    <para>Our module currently does not use any parameters, but we will pass
+    them to the helper method anyway so that it can be used later if we decide
+    to expand the functionality of our module.</para>
+
+    <para>The helper class method is invoked in the following way:</para>
+
+    <programlisting>$hello = modHelloWorldHelper::getHello( $params );</programlisting>
+
+    <sect2 id="helloworldmodule.mod_helloworld.completedmodhelloworld">
+      <title>Completed mod_helloworld.php file</title>
+
+      <para>The complete mod_helloworld.php file is as follows:</para>
+
+      <xi:include href="code/mod_helloworld.php.xml" />
+
+      <para>The one line that we haven’t explained so far is the first line.
+      This line checks to make sure that this file is being included from the
+      Joomla! application. This is necessary to prevent variable injection and
+      other possible security concerns.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="helloworldmodule.helper">
+    <title>Creating helper.php</title>
+
+    <para>The helper.php file contains that helper class that is used to
+    retrieve the data to be displayed in the module output. As stated earlier,
+    our helper class will have one method: getHello(). This method will return
+    the ‘Hello, World’ message.</para>
+
+    <para>Here is the code for the helper.php file:</para>
+
+    <xi:include href="code/helper.php.xml" />
+
+    <para>There is no rule stating that we must name our helper class as we
+    have, but it is helpful to do this so that it is easily identifiable and
+    locateable.</para>
+
+    <para>More advanced modules might include database requests or other
+    functionality in the helper class method.</para>
+  </sect1>
+
+  <sect1 id="helloworldmodule.template">
+    <title>Creating tmpl/default.php</title>
+
+    <para>The default.php file is the template which displays the module
+    output.</para>
+
+    <para>The code for the default.php file is as follows:</para>
+
+    <programlisting>&lt;?php // no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
+&lt;?php echo $hello; ?&gt;</programlisting>
+
+    <para>An important point to note is that the template file has the same
+    scope as the mod_helloworld.php file. What this means is that the variable
+    $hello can be defined in the mod_helloworld.php file and then used in the
+    $hello file without any extra declarations or function calls.</para>
+  </sect1>
+
+  <sect1 id="helloworldmodule.manifest">
+    <title>Creating mod_helloworld.xml</title>
+
+    <para>The mod_helloworld.xml is used to specify which files the installer
+    needs to copy and is used by the Module Manager to determine which
+    parameters are used to configure the module. Other information about the
+    module is also specified in this file.</para>
+
+    <para>The code for mod_helloworld.xml is as follows:</para>
+
+    <xi:include href="code/mod_helloworld.xml.xml" />
+
+    <para>You will notice that there are two additional files that we have not
+    yet mentioned: index.html and tmpl/index.html. These files are included so
+    that these directories cannot be browsed. If a used attempts to point
+    their browser to these folders, the index.html file will be displayed.
+    These files can be left empty or can contain the simple line:</para>
+
+    <programlisting>&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
+
+    <para>which will display an empty page.</para>
+
+    <para>Since our module does not use any parameters, this section is
+    empty.</para>
+  </sect1>
+
+  <sect1 id="helloworldmodule.conclusion">
+    <title>Conclusion</title>
+
+    <para>Module development for Joomla! is a fairly simple, straightforward
+    process. Using the techniques described in this tutorial, an endless
+    variety of modules can be developed with little hassle.</para>
+  </sect1>
+</chapter>

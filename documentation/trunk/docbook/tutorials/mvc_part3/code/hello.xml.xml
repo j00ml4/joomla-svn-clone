@@ -1,0 +1,55 @@
+<programlisting>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+   &lt;name&gt;Hello&lt;/name&gt;
+   &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+   &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+   &lt;author&gt;John Doe&lt;/author&gt;
+   &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+   &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+   &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+   &lt;license&gt;License Info&lt;/license&gt;
+   &lt;!--  The version string is recorded in the components table --&gt;
+   &lt;version&gt;Component Version String&lt;/version&gt;
+   &lt;!-- The description is optional and defaults to the name --&gt;
+   &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+   &lt;!-- Site Main File Copy Section --&gt;
+   &lt;files folder="site"&gt;
+      &lt;filename&gt;index.html&lt;/filename&gt;
+      &lt;filename&gt;hello.php&lt;/filename&gt;
+      &lt;filename&gt;controller.php&lt;/filename&gt;
+      &lt;filename&gt;views/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+      &lt;filename&gt;models/hello.php&lt;/filename&gt;
+   &lt;/files&gt;
+   &lt;install&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;install.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/install&gt;
+   &lt;uninstall&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;uninstall.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/uninstall&gt;   
+   &lt;administration&gt;
+      &lt;!-- Administration Menu Section --&gt;
+      &lt;menu&gt;Hello World!&lt;/menu&gt;
+      
+      &lt;!-- Administration Main File Copy Section --&gt;
+      &lt;!-- Note the folder attribute: This attribute describes the folder
+         to copy FROM in the package to install therefore files copied
+         in this section are copied from /admin/ in the package --&gt;
+      &lt;files folder="admin"&gt;
+   &lt;!-- Site Main File Copy Section --&gt;
+         &lt;filename&gt;index.html&lt;/filename&gt;
+         &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+         &lt;filename&gt;install.sql&lt;/filename&gt;
+         &lt;filename&gt;uninstall.sql&lt;/filename&gt;
+      &lt;/files&gt;      
+   &lt;/administration&gt;
+&lt;/install&gt;</programlisting>

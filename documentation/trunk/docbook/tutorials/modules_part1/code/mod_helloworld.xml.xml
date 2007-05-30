@@ -1,0 +1,16 @@
+<programlisting>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;install type="module" version="1.5.0"&gt;
+    &lt;name&gt;Hello, World!&lt;/name&gt;
+    &lt;author&gt;John Doe&lt;/author&gt;
+    &lt;version&gt;1.5.0&lt;/version&gt;
+    &lt;description&gt;A simple Hello, World! module.&lt;/description&gt;
+    &lt;files&gt;
+        &lt;filename module="mod_helloworld"&gt;mod_helloworld.php&lt;/filename&gt;
+        &lt;filename&gt;index.html&lt;/filename&gt;
+        &lt;filename&gt;helper.php&lt;/filename&gt;
+        &lt;filename&gt;tmpl/default.php&lt;/filename&gt;
+        &lt;filename&gt;tmpl/index.html&lt;/filename&gt;
+    &lt;/files&gt;
+    &lt;params&gt;
+    &lt;/params&gt;
+&lt;/install&gt;</programlisting>

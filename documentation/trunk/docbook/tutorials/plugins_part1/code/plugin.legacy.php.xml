@@ -1,0 +1,11 @@
+<programlisting>&lt;?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$mainframe-&gt;registerEvent( '&lt;EventName&gt;', '&lt;FunctionName&gt;' );
+
+function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
+
+    //Plugin code goes here
+
+}</programlisting>

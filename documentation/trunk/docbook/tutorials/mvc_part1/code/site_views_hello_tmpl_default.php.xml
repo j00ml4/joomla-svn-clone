@@ -1,0 +1,3 @@
+<programlisting>&lt;?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
