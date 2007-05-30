@@ -315,6 +315,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <sect1 id="mvctutorial1.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink url="packages/com_hello1.zip">com_hello4.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink url="packages/com_hello1.zip">com_hello1.zip</ulink></para>
   </sect1>
 </chapter>
