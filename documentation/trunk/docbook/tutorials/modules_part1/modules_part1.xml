@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter id="helloworldmodule">
+<chapter id="helloworldmodule" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
