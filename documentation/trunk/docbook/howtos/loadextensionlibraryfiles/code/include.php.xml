@@ -1,0 +1,12 @@
+<programlisting>/**
+ * Loader for LQM Library files
+ *
+ * @param    string $path A dot syntax path
+ * @return   boolean True if the library has been loaded
+ * @access   public
+ * @since    1.0
+ */
+function lqmLibraryImport( $path ) {
+    $lqmLibraryDirectory = dirname(__FILE__);
+    return JLoader::import('lqm.'.$path, $lqmLibraryDirectory);
+}</programlisting>
