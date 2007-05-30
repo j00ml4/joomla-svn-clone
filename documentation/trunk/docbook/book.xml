@@ -31,6 +31,8 @@
     <title>Programming with the Joomla! Framework</title>
 
     <xi:include href="tutorials/database_part1/database_part1.xml" />
+
+    <xi:include href="tutorials/router_part1/router_part1.xml" />
   </part>
 
   <part id="jdmbook.templates">
