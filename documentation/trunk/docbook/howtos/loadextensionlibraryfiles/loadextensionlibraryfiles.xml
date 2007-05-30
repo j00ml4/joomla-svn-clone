@@ -30,18 +30,7 @@
   argument in dot notation. This file can be defined in an include.php file
   that is included by anyone wishing to use the library.</para>
 
-  <programlisting>/**
- * Loader for LQM Library files
- *
- * @param    string $path A dot syntax path
- * @return   boolean True if the library has been loaded
- * @access   public
- * @since    1.0
- */
-function lqmLibraryImport( $path ) {
-    $lqmLibraryDirectory = dirname(__FILE__);
-    return JLoader::import('lqm.'.$path, $lqmLibraryDirectory);
-}</programlisting>
+  <xi:include href="code/include.php.xml" />
 
   <para>It is important that you use a prefix to avoid name collisions in
   JLoader::import(). Perhaps the best prefix is the name of the extension (

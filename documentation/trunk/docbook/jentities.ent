@@ -1,41 +1,159 @@
-<!--
-(prior parsing the document sources)
-this file should be auto-generated using a shell script
-that scans the manual directory for .xml files.
-an example script is included, ".build/mkentities.sh"
-
- -->
-
-<!-- dir: joomla.org -->
-<!-- authors -->
-<!ENTITY author.maclennan SYSTEM "joomla.org/author_maclennan.xml">
-<!ENTITY author.davenport SYSTEM "joomla.org/author_davenport.xml">
-
-<!-- dir: ref -->
-<!-- ref/coding_standard.xml -->
-<!-- <!ENTITY ref.coding_standard SYSTEM "ref/coding_standard.xml"> -->
-<!-- ref/conf.xml -->
-<!-- <!ENTITY ref.conf SYSTEM "ref/conf.xml"> -->
-<!-- ref/copyrights.xml -->
-<!-- <!ENTITY ref.copyrights SYSTEM "ref/copyrights.xml"> -->
-<!-- ref/faq.xml -->
-<!-- <!ENTITY ref.faq SYSTEM "ref/faq.xml"> -->
-<!-- ref/install.xml -->
-<!-- <!ENTITY ref.install SYSTEM "ref/install.xml"> -->
-<!-- ref/preface.xml -->
-<!-- <!ENTITY ref.preface SYSTEM "ref/preface.xml"> -->
-<!-- ref -->
-<!-- <!ENTITY ref.all "&ref.coding_standard;&ref.conf;&ref.copyrights;&ref.faq;&ref.install;&ref.preface;"> -->
-
-<!-- dir: tutorials -->
-<!ENTITY tutorials.mvctutorial1 SYSTEM "tutorials/mvctutorial1.xml">
-<!ENTITY tutorials.mvctutorial1 SYSTEM "tutorials/mvctutorial1.xml">
-<!-- tutorials.mvc.all -->
-<!ENTITY tutorials.mvc.all "&tutorials.mvctutorial1;&tutorials.mvctutorial2;&tutorials.mvctutorial3;&tutorials.mvctutorial4;&tutorials.mvctutorial5;">
-
-<!ENTITY tutorials.plugins1 SYSTEM "tutorials/plugintutorial1.xml">
-
-<!ENTITY tutorials.modules1 SYSTEM "tutorials/modtutorial1.xml">
-
-<!-- tutorials.all -->
-<!ENTITY tutorials.all "&tutorials.modules.all;&tutorials.plugins.all;&tutorials.mvc.all;">
+<!-- auto-generated -->
+<!-- dir: . -->
+<!-- ./book.xml -->
+<!ENTITY ..book SYSTEM "./book.xml">
+<!-- . -->
+<!ENTITY ..all "&..book;">
+<!-- dir: ./howtos -->
+<!-- ./howtos -->
+<!ENTITY ..howtos.all "">
+<!-- dir: ./howtos/savingformdata -->
+<!-- ./howtos/savingformdata/savingformdata.xml -->
+<!ENTITY ..howtos.savingformdata.savingformdata SYSTEM "./howtos/savingformdata/savingformdata.xml">
+<!-- ./howtos/savingformdata -->
+<!ENTITY ..howtos.savingformdata.all "&..howtos.savingformdata.savingformdata;">
+<!-- dir: ./howtos/loadextensionlibraryfiles -->
+<!-- ./howtos/loadextensionlibraryfiles/loadextensionlibraryfiles.xml -->
+<!ENTITY ..howtos.loadextensionlibraryfiles.loadextensionlibraryfiles SYSTEM "./howtos/loadextensionlibraryfiles/loadextensionlibraryfiles.xml">
+<!-- ./howtos/loadextensionlibraryfiles -->
+<!ENTITY ..howtos.loadextensionlibraryfiles.all "&..howtos.loadextensionlibraryfiles.loadextensionlibraryfiles;">
+<!-- dir: ./howtos/loadextensionlibraryfiles/images -->
+<!-- ./howtos/loadextensionlibraryfiles/images -->
+<!ENTITY ..howtos.loadextensionlibraryfiles.images.all "">
+<!-- dir: ./howtos/loadextensionlibraryfiles/code -->
+<!-- ./howtos/loadextensionlibraryfiles/code/include.php.xml -->
+<!ENTITY ..howtos.loadextensionlibraryfiles.code.include.php SYSTEM "./howtos/loadextensionlibraryfiles/code/include.php.xml">
+<!-- ./howtos/loadextensionlibraryfiles/code -->
+<!ENTITY ..howtos.loadextensionlibraryfiles.code.all "&..howtos.loadextensionlibraryfiles.code.include.php;">
+<!-- dir: ./html -->
+<!-- ./html -->
+<!ENTITY ..html.all "">
+<!-- dir: ./images -->
+<!-- ./images -->
+<!ENTITY ..images.all "">
+<!-- dir: ./tutorials -->
+<!-- ./tutorials -->
+<!ENTITY ..tutorials.all "">
+<!-- dir: ./tutorials/modules_part1 -->
+<!-- ./tutorials/modules_part1/modules_part1.xml -->
+<!ENTITY ..tutorials.modules_part1.modules_part1 SYSTEM "./tutorials/modules_part1/modules_part1.xml">
+<!-- ./tutorials/modules_part1 -->
+<!ENTITY ..tutorials.modules_part1.all "&..tutorials.modules_part1.modules_part1;">
+<!-- dir: ./tutorials/modules_part1/code -->
+<!-- ./tutorials/modules_part1/code/helper.php.xml -->
+<!ENTITY ..tutorials.modules_part1.code.helper.php SYSTEM "./tutorials/modules_part1/code/helper.php.xml">
+<!-- ./tutorials/modules_part1/code/mod_helloworld.php.xml -->
+<!ENTITY ..tutorials.modules_part1.code.mod_helloworld.php SYSTEM "./tutorials/modules_part1/code/mod_helloworld.php.xml">
+<!-- ./tutorials/modules_part1/code/mod_helloworld.xml.xml -->
+<!ENTITY ..tutorials.modules_part1.code.mod_helloworld.xml SYSTEM "./tutorials/modules_part1/code/mod_helloworld.xml.xml">
+<!-- ./tutorials/modules_part1/code -->
+<!ENTITY ..tutorials.modules_part1.code.all "&..tutorials.modules_part1.code.helper.php;&..tutorials.modules_part1.code.mod_helloworld.php;&..tutorials.modules_part1.code.mod_helloworld.xml;">
+<!-- dir: ./tutorials/database_part1 -->
+<!-- ./tutorials/database_part1/database_part1.xml -->
+<!ENTITY ..tutorials.database_part1.database_part1 SYSTEM "./tutorials/database_part1/database_part1.xml">
+<!-- ./tutorials/database_part1 -->
+<!ENTITY ..tutorials.database_part1.all "&..tutorials.database_part1.database_part1;">
+<!-- dir: ./tutorials/mvc_part1 -->
+<!-- ./tutorials/mvc_part1/mvc_part1.xml -->
+<!ENTITY ..tutorials.mvc_part1.mvc_part1 SYSTEM "./tutorials/mvc_part1/mvc_part1.xml">
+<!-- ./tutorials/mvc_part1 -->
+<!ENTITY ..tutorials.mvc_part1.all "&..tutorials.mvc_part1.mvc_part1;">
+<!-- dir: ./tutorials/mvc_part1/code -->
+<!-- ./tutorials/mvc_part1/code/hello.xml.xml -->
+<!ENTITY ..tutorials.mvc_part1.code.hello.xml SYSTEM "./tutorials/mvc_part1/code/hello.xml.xml">
+<!-- ./tutorials/mvc_part1/code/site_controller.php.xml -->
+<!ENTITY ..tutorials.mvc_part1.code.site_controller.php SYSTEM "./tutorials/mvc_part1/code/site_controller.php.xml">
+<!-- ./tutorials/mvc_part1/code/site_hello.php.xml -->
+<!ENTITY ..tutorials.mvc_part1.code.site_hello.php SYSTEM "./tutorials/mvc_part1/code/site_hello.php.xml">
+<!-- ./tutorials/mvc_part1/code/site_views_hello_tmpl_default.php.xml -->
+<!ENTITY ..tutorials.mvc_part1.code.site_views_hello_tmpl_default.php SYSTEM "./tutorials/mvc_part1/code/site_views_hello_tmpl_default.php.xml">
+<!-- ./tutorials/mvc_part1/code/site_views_hello_view.html.php.xml -->
+<!ENTITY ..tutorials.mvc_part1.code.site_views_hello_view.html.php SYSTEM "./tutorials/mvc_part1/code/site_views_hello_view.html.php.xml">
+<!-- ./tutorials/mvc_part1/code -->
+<!ENTITY ..tutorials.mvc_part1.code.all "&..tutorials.mvc_part1.code.hello.xml;&..tutorials.mvc_part1.code.site_controller.php;&..tutorials.mvc_part1.code.site_hello.php;&..tutorials.mvc_part1.code.site_views_hello_tmpl_default.php;&..tutorials.mvc_part1.code.site_views_hello_view.html.php;">
+<!-- dir: ./tutorials/mvc_part1/images -->
+<!-- ./tutorials/mvc_part1/images -->
+<!ENTITY ..tutorials.mvc_part1.images.all "">
+<!-- dir: ./tutorials/mvc_part2 -->
+<!-- ./tutorials/mvc_part2/mvc_part2.xml -->
+<!ENTITY ..tutorials.mvc_part2.mvc_part2 SYSTEM "./tutorials/mvc_part2/mvc_part2.xml">
+<!-- ./tutorials/mvc_part2 -->
+<!ENTITY ..tutorials.mvc_part2.all "&..tutorials.mvc_part2.mvc_part2;">
+<!-- dir: ./tutorials/mvc_part2/code -->
+<!-- ./tutorials/mvc_part2/code/hello.xml.xml -->
+<!ENTITY ..tutorials.mvc_part2.code.hello.xml SYSTEM "./tutorials/mvc_part2/code/hello.xml.xml">
+<!-- ./tutorials/mvc_part2/code/site_models_hello.php.xml -->
+<!ENTITY ..tutorials.mvc_part2.code.site_models_hello.php SYSTEM "./tutorials/mvc_part2/code/site_models_hello.php.xml">
+<!-- ./tutorials/mvc_part2/code/site_views_hello_view.html.php.xml -->
+<!ENTITY ..tutorials.mvc_part2.code.site_views_hello_view.html.php SYSTEM "./tutorials/mvc_part2/code/site_views_hello_view.html.php.xml">
+<!-- ./tutorials/mvc_part2/code -->
+<!ENTITY ..tutorials.mvc_part2.code.all "&..tutorials.mvc_part2.code.hello.xml;&..tutorials.mvc_part2.code.site_models_hello.php;&..tutorials.mvc_part2.code.site_views_hello_view.html.php;">
+<!-- dir: ./tutorials/mvc_part3 -->
+<!-- ./tutorials/mvc_part3/mvc_part3.xml -->
+<!ENTITY ..tutorials.mvc_part3.mvc_part3 SYSTEM "./tutorials/mvc_part3/mvc_part3.xml">
+<!-- ./tutorials/mvc_part3 -->
+<!ENTITY ..tutorials.mvc_part3.all "&..tutorials.mvc_part3.mvc_part3;">
+<!-- dir: ./tutorials/mvc_part3/code -->
+<!-- ./tutorials/mvc_part3/code/admin_sql_install.utf.sql.xml -->
+<!ENTITY ..tutorials.mvc_part3.code.admin_sql_install.utf.sql SYSTEM "./tutorials/mvc_part3/code/admin_sql_install.utf.sql.xml">
+<!-- ./tutorials/mvc_part3/code/hello.xml.xml -->
+<!ENTITY ..tutorials.mvc_part3.code.hello.xml SYSTEM "./tutorials/mvc_part3/code/hello.xml.xml">
+<!-- ./tutorials/mvc_part3/code -->
+<!ENTITY ..tutorials.mvc_part3.code.all "&..tutorials.mvc_part3.code.admin_sql_install.utf.sql;&..tutorials.mvc_part3.code.hello.xml;">
+<!-- dir: ./tutorials/mvc_part4 -->
+<!-- ./tutorials/mvc_part4/mvc_part4.xml -->
+<!ENTITY ..tutorials.mvc_part4.mvc_part4 SYSTEM "./tutorials/mvc_part4/mvc_part4.xml">
+<!-- ./tutorials/mvc_part4 -->
+<!ENTITY ..tutorials.mvc_part4.all "&..tutorials.mvc_part4.mvc_part4;">
+<!-- dir: ./tutorials/mvc_part4/code -->
+<!-- ./tutorials/mvc_part4/code/admin_models_hellos.php.xml -->
+<!ENTITY ..tutorials.mvc_part4.code.admin_models_hellos.php SYSTEM "./tutorials/mvc_part4/code/admin_models_hellos.php.xml">
+<!-- ./tutorials/mvc_part4/code/admin_tables_hello.php.xml -->
+<!ENTITY ..tutorials.mvc_part4.code.admin_tables_hello.php SYSTEM "./tutorials/mvc_part4/code/admin_tables_hello.php.xml">
+<!-- ./tutorials/mvc_part4/code/admin_views_hello_tmpl_form.php.xml -->
+<!ENTITY ..tutorials.mvc_part4.code.admin_views_hello_tmpl_form.php SYSTEM "./tutorials/mvc_part4/code/admin_views_hello_tmpl_form.php.xml">
+<!-- ./tutorials/mvc_part4/code/admin_views_hellos_tmpl_default.php.xml -->
+<!ENTITY ..tutorials.mvc_part4.code.admin_views_hellos_tmpl_default.php SYSTEM "./tutorials/mvc_part4/code/admin_views_hellos_tmpl_default.php.xml">
+<!-- ./tutorials/mvc_part4/code/admin_views_hellos_view.html.php.xml -->
+<!ENTITY ..tutorials.mvc_part4.code.admin_views_hellos_view.html.php SYSTEM "./tutorials/mvc_part4/code/admin_views_hellos_view.html.php.xml">
+<!-- ./tutorials/mvc_part4/code -->
+<!ENTITY ..tutorials.mvc_part4.code.all "&..tutorials.mvc_part4.code.admin_models_hellos.php;&..tutorials.mvc_part4.code.admin_tables_hello.php;&..tutorials.mvc_part4.code.admin_views_hello_tmpl_form.php;&..tutorials.mvc_part4.code.admin_views_hellos_tmpl_default.php;&..tutorials.mvc_part4.code.admin_views_hellos_view.html.php;">
+<!-- dir: ./tutorials/mvc_part4/images -->
+<!-- ./tutorials/mvc_part4/images -->
+<!ENTITY ..tutorials.mvc_part4.images.all "">
+<!-- dir: ./tutorials/plugins_part1 -->
+<!-- ./tutorials/plugins_part1/plugins_part1.xml -->
+<!ENTITY ..tutorials.plugins_part1.plugins_part1 SYSTEM "./tutorials/plugins_part1/plugins_part1.xml">
+<!-- ./tutorials/plugins_part1 -->
+<!ENTITY ..tutorials.plugins_part1.all "&..tutorials.plugins_part1.plugins_part1;">
+<!-- dir: ./tutorials/plugins_part1/code -->
+<!-- ./tutorials/plugins_part1/code/plugin.legacy.php.xml -->
+<!ENTITY ..tutorials.plugins_part1.code.plugin.legacy.php SYSTEM "./tutorials/plugins_part1/code/plugin.legacy.php.xml">
+<!-- ./tutorials/plugins_part1/code/plugin.php.xml -->
+<!ENTITY ..tutorials.plugins_part1.code.plugin.php SYSTEM "./tutorials/plugins_part1/code/plugin.php.xml">
+<!-- ./tutorials/plugins_part1/code/plugin.xml.xml -->
+<!ENTITY ..tutorials.plugins_part1.code.plugin.xml SYSTEM "./tutorials/plugins_part1/code/plugin.xml.xml">
+<!-- ./tutorials/plugins_part1/code -->
+<!ENTITY ..tutorials.plugins_part1.code.all "&..tutorials.plugins_part1.code.plugin.legacy.php;&..tutorials.plugins_part1.code.plugin.php;&..tutorials.plugins_part1.code.plugin.xml;">
+<!-- dir: ./tutorials/router_part1 -->
+<!-- ./tutorials/router_part1/router1.xml -->
+<!ENTITY ..tutorials.router_part1.router1 SYSTEM "./tutorials/router_part1/router1.xml">
+<!-- ./tutorials/router_part1 -->
+<!ENTITY ..tutorials.router_part1.all "&..tutorials.router_part1.router1;">
+<!-- dir: ./joomla.org -->
+<!-- ./joomla.org/author_davenport.xml -->
+<!ENTITY ..joomla.org.author_davenport SYSTEM "./joomla.org/author_davenport.xml">
+<!-- ./joomla.org/author_eddie.xml -->
+<!ENTITY ..joomla.org.author_eddie SYSTEM "./joomla.org/author_eddie.xml">
+<!-- ./joomla.org/author_landry.xml -->
+<!ENTITY ..joomla.org.author_landry SYSTEM "./joomla.org/author_landry.xml">
+<!-- ./joomla.org/author_maclennan.xml -->
+<!ENTITY ..joomla.org.author_maclennan SYSTEM "./joomla.org/author_maclennan.xml">
+<!-- ./joomla.org -->
+<!ENTITY ..joomla.org.all "&..joomla.org.author_davenport;&..joomla.org.author_eddie;&..joomla.org.author_landry;&..joomla.org.author_maclennan;">
+<!-- dir: ./.build -->
+<!-- ./.build -->
+<!ENTITY ...build.all "">
+<!-- dir: ./packages -->
+<!-- ./packages -->
+<!ENTITY ..packages.all "">
