@@ -1,4 +1,4 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 /**
  * Hellos Model for Hello World Component
  * 
@@ -47,12 +47,12 @@ class HellosModelHellos extends JModel
     function getData()
     {
         // Lets load the data if it doesn't already exist
-        if (empty( $this-&gt;_data ))
+        if (empty( $this->_data ))
         {
-            $query = $this-&gt;_buildQuery();
-            $this-&gt;_data = $this-&gt;_getList( $query );
+            $query = $this->_buildQuery();
+            $this->_data = $this->_getList( $query );
         }
 
-        return $this-&gt;_data;
+        return $this->_data;
     }
-}</programlisting>
+}]]>    </programlisting>

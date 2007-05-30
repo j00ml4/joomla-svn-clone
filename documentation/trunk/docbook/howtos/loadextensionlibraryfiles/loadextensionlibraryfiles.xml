@@ -39,7 +39,7 @@
 
   <para>Once the include file has been loaded, you can do this.</para>
 
-  <programlisting>lqmLibraryImport('variable.input.input');</programlisting>
+  <programlisting>    <![CDATA[lqmLibraryImport('variable.input.input');]]>    </programlisting>
 
   <para>Because my function appends 'lqm.' to the path, I'm actually cheating
   a bit. The function jimport() would require you provide the library's path

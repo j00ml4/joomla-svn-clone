@@ -35,10 +35,10 @@
       object regardless of scope and is the recommended way of getting this
       object.</para>
 
-      <programlisting>
+      <programlisting>    <![CDATA[
 				// This gets the database object using the JFactory	class
-				$db = &amp;JFactory::getDBO();
-			</programlisting>
+				$db = >JFactory::getDBO();
+			]]>    </programlisting>
     </sect2>
 
     <sect2 id="databasetutorial.getobject.custom">
@@ -48,10 +48,10 @@
       allow you to get database objects that point to different database
       sources.</para>
 
-      <programlisting>
+      <programlisting>    <![CDATA[
 				// Create a new database object
 				$myDB = new JDatabase::getInstance( $options );
-			</programlisting>
+			]]>    </programlisting>
     </sect2>
   </sect1>
 </chapter>

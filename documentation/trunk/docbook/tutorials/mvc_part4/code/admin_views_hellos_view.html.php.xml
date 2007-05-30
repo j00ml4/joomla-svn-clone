@@ -1,4 +1,4 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 /**
  * Hellos View for Hello World Component
  * 
@@ -33,10 +33,10 @@ class HellosViewHellos extends JView
         JToolBarHelper::addNewX();
 
         // Get data from the model
-        $items        = &amp; $this-&gt;get( 'Data');
+        $items        = > $this->get( 'Data');
 
-        $this-&gt;assignRef('items',        $items);
+        $this->assignRef('items',        $items);
 
         parent::display($tpl);
     }
-}</programlisting>
+}]]>    </programlisting>

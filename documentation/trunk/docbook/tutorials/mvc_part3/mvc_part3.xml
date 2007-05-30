@@ -45,7 +45,7 @@
     already exists; therefore, it is not necessary to create your own. A
     reference to the existing database can be obtained using:</para>
 
-    <programlisting>$db =&amp; JFactory::getDBO();</programlisting>
+    <programlisting>    <![CDATA[$db => JFactory::getDBO();]]>    </programlisting>
 
     <para>JFactory is a static class that is used to retrieve references to
     many of the system objects. More information about this class can be found
@@ -65,23 +65,23 @@
 
     <para>Our new getGreeting() method will therefore look like:</para>
 
-    <programlisting>function getGreeting()
+    <programlisting>    <![CDATA[function getGreeting()
 {
-   $db =&amp; JFactory::getDBO();
+   $db => JFactory::getDBO();
 
    $query = 'SELECT greeting FROM #__hello';
-   $db-&gt;setQuery( $query );
-   $greeting = $db-&gt;loadResult();
+   $db->setQuery( $query );
+   $greeting = $db->loadResult();
 
    return $greeting;
-}</programlisting>
+}]]>    </programlisting>
 
     <para>hello is the name of the table that we will create later, and
     greeting is the name of the field that stores the greetings. If you are
     not familiar with SQL, it would be helpful to take a tutorial or a lesson
     to get yourself up to speed. One such tutorial can be found at <ulink url="http://www.w3schools.com/sql/default.asp">w3schools</ulink>.</para>
 
-    <para>The $db-&gt;loadResult() method will execute the stored database
+    <para>The $db->loadResult() method will execute the stored database
     query and return the first field of the first row of the result. See
     [[references:joomla.framework:database:jdatabase|JDatabase API reference]]
     for more information about other load methods in the JDatabase
@@ -130,7 +130,7 @@
       will remove and tables that have been added to the database. Since we
       have only created one table, we only need one query:</para>
 
-      <programlisting>DROP TABLE IF EXISTS `#__hello`;</programlisting>
+      <programlisting>    <![CDATA[DROP TABLE IF EXISTS `#__hello`;]]>    </programlisting>
 
       <para>We will save this query in a file called
       <filename>uninstall.utf.sql</filename>.</para>
@@ -149,8 +149,8 @@
 
     <xi:include href="code/hello.xml.xml" />
 
-    <para>You will notice two attributes present on the &lt;file&gt; tags
-    within the &lt;install&gt; and &lt;uninstall&gt; sections: charset and
+    <para>You will notice two attributes present on the <file> tags
+    within the <install> and <uninstall> sections: charset and
     driver. The charset is the type of charset to use. The only valid charset
     is utf8. If you want to create install files for non-utf8 databases (for
     older version of MySQL), you should omit this attribute.</para>

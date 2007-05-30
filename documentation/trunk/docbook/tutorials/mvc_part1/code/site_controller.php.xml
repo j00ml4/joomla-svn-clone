@@ -1,4 +1,4 @@
-<programlisting>&lt;?php
+<programlisting>    <![CDATA[<?php
 /**
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -31,4 +31,4 @@ class HelloController extends JController
     }
 
 }
-?&gt;</programlisting>
+?>]]>    </programlisting>

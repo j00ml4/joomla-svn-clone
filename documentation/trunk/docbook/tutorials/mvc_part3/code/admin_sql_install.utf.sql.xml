@@ -1,4 +1,4 @@
-<programlisting>DROP TABLE IF EXISTS `#__hello`;
+<programlisting>    <![CDATA[DROP TABLE IF EXISTS `#__hello`;
 
 CREATE TABLE `#__hello` (
   `id` int(11) NOT NULL auto_increment,
@@ -8,4 +8,4 @@ CREATE TABLE `#__hello` (
 
 INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
 ('Bonjour, Monde!'),
-('Ciao, Mondo!');</programlisting>
+('Ciao, Mondo!');]]>    </programlisting>

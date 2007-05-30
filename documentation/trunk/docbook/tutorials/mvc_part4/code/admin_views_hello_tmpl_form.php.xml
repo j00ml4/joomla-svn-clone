@@ -1,28 +1,28 @@
-<programlisting>&lt;?php defined('_JEXEC') or die('Restricted access'); ?&gt;
+<programlisting>    <![CDATA[<?php defined('_JEXEC') or die('Restricted access'); ?>
 
-&lt;form action="index.php" method="post" name="adminForm" id="adminForm"&gt;
-&lt;div class="col100"&gt;
-    &lt;fieldset class="adminform"&gt;
-        &lt;legend&gt;&lt;?php echo JText::_( 'Details' ); ?&gt;&lt;/legend&gt;
-        &lt;table class="admintable"&gt;
-        &lt;tr&gt;
-            &lt;td width="100" align="right" class="key"&gt;
-                &lt;label for="greeting"&gt;
-                    &lt;?php echo JText::_( 'Greeting' ); ?&gt;:
-                &lt;/label&gt;
-            &lt;/td&gt;
-            &lt;td&gt;
-                &lt;input class="text_area" type="text" name="greeting" id="greeting" size="32" maxlength="250" value="&lt;?php echo $this-&gt;hello-&gt;greeting;?&gt;" /&gt;
-            &lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;
-    &lt;/fieldset&gt;
-&lt;/div&gt;
+<form action="index.php" method="post" name="adminForm" id="adminForm">
+<div class="col100">
+    <fieldset class="adminform">
+        <legend><?php echo JText::_( 'Details' ); ?></legend>
+        <table class="admintable">
+        <tr>
+            <td width="100" align="right" class="key">
+                <label for="greeting">
+                    <?php echo JText::_( 'Greeting' ); ?>:
+                </label>
+            </td>
+            <td>
+                <input class="text_area" type="text" name="greeting" id="greeting" size="32" maxlength="250" value="<?php echo $this->hello->greeting;?>" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+</div>
 
-&lt;div class="clr"&gt;&lt;/div&gt;
+<div class="clr"></div>
 
-&lt;input type="hidden" name="option" value="com_hello" /&gt;
-&lt;input type="hidden" name="id" value="&lt;?php echo $this-&gt;hello-&gt;id; ?&gt;" /&gt;
-&lt;input type="hidden" name="task" value="" /&gt;
-&lt;input type="hidden" name="controller" value="hello" /&gt;
-&lt;/form&gt;</programlisting>
+<input type="hidden" name="option" value="com_hello" />
+<input type="hidden" name="id" value="<?php echo $this->hello->id; ?>" />
+<input type="hidden" name="task" value="" />
+<input type="hidden" name="controller" value="hello" />
+</form>]]>    </programlisting>

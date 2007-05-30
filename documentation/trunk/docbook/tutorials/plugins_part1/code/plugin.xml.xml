@@ -1,18 +1,18 @@
-<programlisting>&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;
-&lt;install version="1.5" type="plugin" group="search"&gt;
-    &lt;name&gt;Categories searchbot&lt;/name&gt;
-    &lt;author&gt;Joomla! Project&lt;/author&gt;
-    &lt;creationDate&gt;November 2005&lt;/creationDate&gt;
-    &lt;copyright&gt;(C) 2005 Open Source Matters. All rights reserved.&lt;/copyright&gt;
-    &lt;license&gt;GNU/GPL&lt;/license&gt;
-    &lt;authorEmail&gt;admin@joomla.org&lt;/authorEmail&gt;
-    &lt;authorUrl&gt;www.joomla.org&lt;/authorUrl&gt;
-    &lt;version&gt;1.1&lt;/version&gt;
-    &lt;description&gt;Allows searching of Categories information&lt;/description&gt;
-    &lt;files&gt;
-        &lt;filename plugin="categories.searchbot"&gt;categories.searchbot.php&lt;/filename&gt;
-    &lt;/files&gt;
-    &lt;params&gt;
-        &lt;param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of search items to return"/&gt;        
-    &lt;/params&gt;
-&lt;/install&gt;</programlisting>
+<programlisting>    <![CDATA[<?xml version="1.0" encoding="iso-8859-1"?>
+<install version="1.5" type="plugin" group="search">
+    <name>Categories searchbot</name>
+    <author>Joomla! Project</author>
+    <creationDate>November 2005</creationDate>
+    <copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
+    <license>GNU/GPL</license>
+    <authorEmail>admin@joomla.org</authorEmail>
+    <authorUrl>www.joomla.org</authorUrl>
+    <version>1.1</version>
+    <description>Allows searching of Categories information</description>
+    <files>
+        <filename plugin="categories.searchbot">categories.searchbot.php</filename>
+    </files>
+    <params>
+        <param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of search items to return"/>        
+    </params>
+</install>]]>    </programlisting>
