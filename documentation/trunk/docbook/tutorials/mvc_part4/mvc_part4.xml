@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<chapter id="mvctutorial4">
+<chapter id="mvctutorial4" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
       <firstname>Ian</firstname>
@@ -146,7 +146,7 @@ function getData()
 
       <para>Here is our template:</para>
 
-      <xi:include href="admin_views_hellos_tmpl_default.php.xml" />
+      <xi:include href="code/admin_views_hellos_tmpl_default.php.xml" />
 
       <para>This template is saved as views/hellos/tmpl/default.php.</para>
 
