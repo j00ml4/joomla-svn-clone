@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="router_part1">
+  <chapterinfo>
+    <author>
+      <surname>Christoph Lukes</surname>
+    </author>
+
+    <date>May 19, 2007</date>
+  </chapterinfo>
+
+  <title>Creating Custom URLs</title>
+
+  <sect1 id="router_part1.introduction">
+    <title>Introduction</title>
+
+    <para>In Joomla! 1.5 the URL generation mechanism was completely
+    refactored. Joomla! is now capable of creating and parsing URLs in any
+    format, including human readable URL's. Another improvement is that this
+    still works even if Joomla! runs a server other than Apache with the
+    mod_rewrite module.</para>
+
+    <para>A good example of this is the "Welcome to Joomla" article. The first
+    link shown was generated without mod_rewrite, and the second link was
+    generated with mod_rewrite:
+    <code>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</code><code>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla
+    </code></para>
+
+    <sect2 id="router_part1.alias">
+      <title>The Alias</title>
+
+      <para>The first step is the generation of the so called alias. The alias
+      is used in the URL instead of the title (title = the text you want to
+      have in the url). The alias has to be URI safe, which means accented
+      UTF­8 characters are replaced by their ASCII­7 equivalents, whitespaces
+      by hyphens, etc.</para>
+
+      <para>The alias can be defined by the user, but you should ensure that
+      the above requirements for a URL safe alias are met. A good way to do so
+      is to use the JTable::check() method during the save process. Have a
+      look at this example code:</para>
+
+      <xi:include href="code/function.check.xml" />
+
+      <para>If the alias field is empty or has a different type than the URL
+      safe title then this one will be used as the alias.</para>
+    </sect2>
+
+    <sect2 id="databasetutorial.getobject.custom">
+      <title>The Slug</title>
+
+      <para>Continuing with the same example, the "slug" -
+      "1­welcome­to­joomla" has two parts. The first part is the article
+      identifier (id) and the second is the alias. They are separated by a
+      hyphen. These two elements were combined during the database query in
+      the model:</para>
+
+      <programlisting>$query = 'SELECT a.*'.
+        ' CASE WHEN CHAR_LENGTH (a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug,'.
+        [...];</programlisting>
+
+      <para>After this step the slug is used instead of the id.</para>
+    </sect2>
+
+    <sect2>
+      <title>JRoute</title>
+
+      <para>The JRoute::_() method translates the internal Joomla URL to a
+      custom URL. JRoute has three parameters and its prototype is:</para>
+
+      <programlisting>JRoute::_( $url, $xhtml = true, $ssl=0);</programlisting>
+
+      <para>$url is a string containing the absolute or relative internal
+      Joomla! URL.</para>
+
+      <para>$xhtml is a boolean value that specifies whether or not the output
+      should be in XHTML. This parameter is optional and if omitted defaults
+      to true.</para>
+
+      <para>$ssl is an integer value that specifies whether the URI should be
+      secure. It should be set to 1 to force the URI to be secure using the
+      global secure site URI, 0 to leave it in the same state as when it was
+      passed, and -1 to force the URI to be unsecure using the global unsecure
+      site URI.</para>
+
+      <para>The most important parameter is $url. A call to this method might
+      look like:</para>
+
+      <programlisting>JRoute::_( 'index.php?view=article&amp;id='.$row­&gt;slug );</programlisting>
+
+      <para>$row­&gt;slug is the value that was generated in step 2 from a
+      combination of id and title alias.</para>
+
+      <para>Another advantage of using JRoute is that the router now handles
+      $option (the component name) and the $Itemid (the menu item ID). The
+      component itself doesn't have to know its name ($option) or the active
+      menuitem ($Itemid) like it did in previous version of Joomla!.</para>
+
+      <para>It is important that you think about the sequence of the URL
+      parameter in this stage. This will be more clear when we have a deeper
+      look at the router.php in the next chapter. </para>
+
+      <para>The buidling process of JRouter is divided into two steps:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Create the application route:</para>
+
+          <para>The appliction route is fully handled by JRouter and the
+          component developer doesn't have to do anything to make it
+          work.</para>
+        </listitem>
+
+        <listitem>
+          <para>Create the component route</para>
+
+          <para>To create the component route, JRouter looks for the
+          router.php in the component directory which is responsible for
+          building the route for the component.</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+
+    <sect2>
+      <title>router.php</title>
+
+      <para>We will have two functions In the router.php. One is responsible
+      for building the URL and the other is responsible for parsing it. In the
+      next examples, a very basic and a more advanced one, we assume that we
+      have three views that links can point to. The first is a categories
+      overview (view=categories), the second is a single category
+      (view=category) and the third is a single article (view=article).
+      </para>
+
+      <sect3>
+        <title>A Simple Example</title>
+
+        <para>This simple example will illustrate the basics of implementing a
+        router for your component.</para>
+
+        <xi:include href="code/example1.function.buildroute.xml" />
+
+        <para>JRouter passes a $query array to the [Componentname]BuildRoute
+        function. This function will add the relevant parts of the array to
+        the $segments array in the right order will return the properly
+        ordered array. The content of the $query array needs to be unset,
+        otherwise JRouter will add it to the URL in the form of a query string
+        (i.e. any variables that are not handled by the router will be passed
+        in the query string)</para>
+
+        <para>The next function in the router.php parses the URL:</para>
+
+        <xi:include href="code/example1.function.parseroute.xml" />
+
+        <para>What happens here? In the function [Componentname]BuildRoute we
+        arranged the items in the $query array in a specific sequence. This
+        means that in this example the view is first, the catid is second and
+        the id is third in the array.</para>
+
+        <para>By reading $segments[0], we access the name of the view. We set
+        the right view and/or identifier depending on its value and we return
+        the $vars array to JRouter. $vars should be an associative array
+        similar to the array that was bassed to the BuildRoute method.</para>
+
+        <para>The above example of the router.php is a very simple way to
+        generate sef URL's but should show how this works quite
+        clearly.</para>
+
+        <para>The generated URL in this example contains the name of the view
+        and doesn't reflect the content hierarchy:</para>
+
+        <para>http://www.example.com/[menualias]/[view]/[slug] .</para>
+      </sect3>
+
+      <sect3>
+        <title>A More Advanced Example</title>
+
+        <para>In the next example we will try to get rid of the need for the
+        view and we will try to reflect the current hierarchy level in the
+        URL.</para>
+
+        <para>The goal is URL's that look like:<simplelist>
+            <member>When viewing an article:
+            http://www.example.com/[menualias]/[category]/[article]</member>
+
+            <member>When viewing a category:
+            http://www.example.com/[menualias]/[category]</member>
+
+            <member>When viewing the categories overview:
+            http://www.example.com/[menualias]</member>
+          </simplelist></para>
+
+        <para>Let's assume we have done step 1 and 2 also for the
+        category.</para>
+
+        <para>The link to the article would look like this:</para>
+
+        <programlisting>JRoute::_('index.php?view=article&amp;catid='.$row­&gt;catslug .'&amp;id='.$row­&gt;slug);</programlisting>
+
+        <para>And the Link to the category would look like this:</para>
+
+        <programlisting>JRoute::_('index.php?view=category&amp;id='.$row­&gt;catslug);</programlisting>
+
+        <para>The corresponding router.php:</para>
+
+        <xi:include href="code/example2.function.buildroute.xml" />
+
+        <para>The difference now is that we don't add the name of the view to
+        the $segments array. We still unset the view key since otherwise,
+        JRouter would add it to the URL as part of the query string. Another
+        new thing here is the additional parameter catid that we push into the
+        $segments array.</para>
+
+        <xi:include href="code/example2.function.parseroute.xml" />
+
+        <para> You can see that this ParseRoute function has a lot of
+        different code parts in comparison to the previous. The reason for
+        this is simple. We don't have the name of the view in the $segments
+        array and we need to find another way to determine it.</para>
+
+        <para> We need to find out which level of hierarchy we are in by
+        recieving the root element. We do this by looking to the view name of
+        the active menuitem:</para>
+
+        <programlisting>$item­&gt;query['view']</programlisting>
+
+        <para> Also we need to know the number of items in the $segments
+        array:</para>
+
+        <programlisting>$count = count($segments);</programlisting>
+
+        <para>With this information we can correctly set the view for all
+        possible three cases:<simplelist>
+            <member>The menu item is a link to the categories view and the
+            $segments array has two items ($catid and $id). In this case we
+            know that we need to parse a link to an article .</member>
+
+            <member>The menu item is a link to the categories view and the
+            $segments array has one item ($id). In this case we know that we
+            need to parse a link to a category. </member>
+
+            <member>The menu item is a link to a category. In this case, we
+            know that any item in the $segments array is the identifier for an
+            article .</member>
+          </simplelist></para>
+
+        <para>The result of all this brainwork is nice and human readable
+        component URL's.</para>
+      </sect3>
+    </sect2>
+  </sect1>
+</chapter>
