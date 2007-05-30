@@ -12,7 +12,7 @@
     <date>July 31, 2006</date>
   </articleinfo>
 
-  <sect>howto.savingformdata.safeway
+  <sect1>howto.savingformdata.safeway
     <title>The Safe Way to Bind the Request Array to a JTable Object</title>
 
     <para>A common task when developing Joomla! components is saving data from
