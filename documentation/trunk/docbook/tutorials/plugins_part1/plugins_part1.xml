@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<chapter id="plugintutorial">
+  <chapterinfo>
+    <author>
+      <surname>Unknown Author</surname>
+    </author>
+
+    <date>December 12, 2006</date>
+  </chapterinfo>
+
+  <title>Creating a Plugin for Joomla! 1.5</title>
+
+  <sect1 id="plugintutorial.createyourplugin">
+    <title>How to create your own plugin</title>
+
+    <para>This How-To should provide you with the basics of what you need to
+    know to develop your own plugin. Most plugins consist of just a single
+    code file but to correctly install the plugin code it must be packaged
+    into an installation file which can be processed by the Joomla!
+    installer.</para>
+
+    <sect2 id="plugintutorial.createyourplugin.installationfile">
+      <title>Creating the installation file</title>
+
+      <para>As with all add-ons in Joomla!, plugins are easily installed as a
+      .zip file (.tar.gz is also supported) but a correctly formatted XML file
+      must be included. As an example, here is the XML installation file for
+      the categories searchbot plugin.</para>
+
+      <xi:include href="code/plugin.xml.xml" />
+
+      <para>As you can see, the system is similar to other Joomla! XML
+      installation files. You only have to look out for the group="xxx" entry
+      in the &lt;install&gt; tag and the extended information in the
+      &lt;filename&gt; tag. This information tells Joomla! into which folder
+      to copy the file and to which group the plugin should be added.</para>
+    </sect2>
+
+    <sect2 id="plugintutorial.createyourplugin.creatingplugin">
+      <title>Creating the Plugin</title>
+
+      <para>Joomla! 1.5 introduces a new, more object-orientated, way of
+      writing plugins. The old method is still supported for
+      backwards-compatibility (see next section).</para>
+
+      <xi:include href="code/plugin.php.xml" />
+    </sect2>
+
+    <sect2 id="plugintutorial.createyourplugin.creatingpluginlegacy">
+      <title>Creating the Plugin (Legacy Mode)</title>
+
+      <para>This section describes the legacy method of creating plugins used
+      prior to Joomla! 1.5. Some core Joomla! plugins may still use this
+      method but will be gradually re-written over time. This method is still
+      supported for backwards-compatibility.</para>
+
+      <para>The code that you want executed when the event triggers is written
+      as a PHP function. Prior to the function definition you make a call to
+      the registerEvent() method so that the Joomla! event system associates
+      your function with the appropriate event.</para>
+
+      <para>For example, take a look at this skeleton code:</para>
+
+      <xi:include href="code/plugin.legacy.php.xml" />
+
+      <para>With the function $mainframe→registerEvent() your plugin is
+      registered into the Joomla! event system. This means that when the event
+      called '&lt;EventName&gt;' is later triggered, the function called
+      '&lt;FunctionName&gt;' will be called.</para>
+
+      <para>Now you can write your plugin function code anyway you want. If
+      you want to use parameters, it's no problem, just use them as usual. You
+      can register as many events and plugin functions together in one file as
+      you want. When you're done, your plugin is ready for use.</para>
+    </sect2>
+
+    <sect2 id="plugintutorial.createyourplugin.usingplugin">
+      <title>Using Plugins in Your Code</title>
+
+      <para>Now that you've created your plugin, you will probably want to
+      call it in your code. You might not; the Joomla! core has a number of
+      built-in events that you might want your plugin code to be registered
+      to. In which case you don't need to do the following.</para>
+
+      <para>If you want to trigger an event then you use code like
+      this:</para>
+
+      <programlisting>$results = $mainframe-&gt;triggerEvent( '&lt;EventName&gt;', &lt;ParameterArray&gt; );</programlisting>
+
+      <para>It is important to note that the parameters have to be in an
+      array. The plugin function itself will get the parameters as single
+      values. The return value will consist of an array of return values from
+      the different plugins (so it can also contain multilevel arrays).</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="plugintutorial.conclusion">
+    <title>Conclusion</title>
+
+    <para>The plugin structure for Joomla! 1.5 is very flexible and powerful.
+    Not only can plugins be used to handle events triggered by the core
+    application and extensions, but plugins can also be used to make third
+    party extensions extensible and powerful.</para>
+  </sect1>
+</chapter>

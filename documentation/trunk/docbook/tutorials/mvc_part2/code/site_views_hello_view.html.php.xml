@@ -1,0 +1,36 @@
+<programlisting>&lt;?php
+
+/**
+ * Hello View for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $model =&amp; $this-&gt;getModel();
+        $greeting = $model-&gt;getGreeting();
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;</programlisting>

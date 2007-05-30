@@ -141,7 +141,38 @@
 
       <para>The code for this file is fairly typical across components.</para>
 
-      <xi:include href="code/site_hello.php.xml" />
+      <programlisting role="php">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Require the base controller
+
+require_once( JPATH_COMPONENT.DS.'controller.php' );
+
+// Require specific controller if requested
+if($controller = JRequest::getVar( 'controller' )) {
+    require_once( JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php' );
+}
+
+// Create the controller
+$classname    = 'HelloController'.$controller;
+$controller   = new $classname( );
+
+// Perform the Request task
+$controller-&gt;execute( JRequest::getVar( 'task' ) );
+
+// Redirect if set by the controller
+$controller-&gt;redirect();
+
+?&gt;</programlisting>
 
       <para>The first statement is a security check.</para>
 
@@ -202,7 +233,40 @@
 
       <para>The code for the base controller is:</para>
 
-      <xi:include href="code/site_controller.php.xml" />
+      <programlisting>&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+/**
+ * Hello World Component Controller
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloController extends JController
+{
+    /**
+     * Method to display the view
+     *
+     * @access    public
+     */
+    function display()
+    {
+        parent::display();
+    }
+
+}
+?&gt;</programlisting>
 
       <para>The <classname>JController</classname> constructor will always
       register a display() task and unless otherwise specified (using the
@@ -236,7 +300,37 @@
 
       <para>The code for the view is:</para>
 
-      <xi:include href="code/site_views_hello_view.html.php.xml" />
+      <programlisting>&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    HelloWorld
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $greeting = "Hello World!";
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;</programlisting>
     </sect2>
 
     <sect2 id="mvctutorial1.creatingcomponent.creatingtemplate">
@@ -251,7 +345,9 @@
       <para>Our template is very simple: we only want to display the greeting
       that was passed in from the view:</para>
 
-      <xi:include href="code/site_views_hello_tmpl_default.php.xml" />
+      <programlisting>&lt;?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
     </sect2>
 
     <sect2 id="mvctutorial1.creatingcomponent.wrappingitup">
@@ -277,7 +373,48 @@
 
       <para>The format of the XML file is as follows:</para>
 
-      <xi:include href="code/hello.xml.xml" />
+      <programlisting>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+ &lt;name&gt;Hello&lt;/name&gt;
+ &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+ &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+ &lt;author&gt;John Doe&lt;/author&gt;
+ &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+ &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+ &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+ &lt;license&gt;License Info&lt;/license&gt;
+ &lt;!--  The version string is recorded in the components table --&gt;
+ &lt;version&gt;Component Version String&lt;/version&gt;
+ &lt;!-- The description is optional and defaults to the name --&gt;
+ &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+ &lt;!-- Site Main File Copy Section --&gt;
+ &lt;!-- Note the folder attribute: This attribute describes the folder
+      to copy FROM in the package to install therefore files copied
+      in this section are copied from /site/ in the package --&gt;
+ &lt;files folder="site"&gt;
+  &lt;filename&gt;index.html&lt;/filename&gt;
+  &lt;filename&gt;hello.php&lt;/filename&gt;
+  &lt;filename&gt;controller.php&lt;/filename&gt;
+  &lt;filename&gt;views/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+ &lt;/files&gt;
+ 
+ &lt;administration&gt;
+  &lt;!-- Administration Menu Section --&gt;
+  &lt;menu&gt;Hello World!&lt;/menu&gt;
+  
+  &lt;!-- Administration Main File Copy Section --&gt;
+  &lt;files folder="admin"&gt;
+   &lt;filename&gt;index.html&lt;/filename&gt;
+   &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+  &lt;/files&gt;  
+ &lt;/administration&gt;
+&lt;/install&gt;</programlisting>
 
       <para>If you look closely you will notice that there are some files that
       will be copied that we have not discussed. These are the
