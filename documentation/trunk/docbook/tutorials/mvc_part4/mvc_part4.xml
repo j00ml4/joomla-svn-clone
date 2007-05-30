@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="mvctutorial4" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
@@ -246,15 +246,14 @@ JToolBarHelper::addNewX();</programlisting>
       we want here.</para>
 
       <para>Now we need to add the checkboxes into the individual rows.
-      Joomla!'s JHTML class has a method call idBox which will generate our
-      checkbox for us. We will add the following line to our loop after
-      the</para>
-
-      <programlisting>$row = &amp;$this-&gt;items[$i];</programlisting>
-
-      <para>line:</para>
+      Joomla!'s JHTML class has a method, JHTML::_(), which will generate our
+      checkbox for us. We will add the following line to our loop:</para>
 
       <programlisting>$checked    = JHTML::_('grid.id',   $i, $row-&gt;id );</programlisting>
+
+      <para>after the line:</para>
+
+      <programlisting>$row = &amp;$this-&gt;items[$i];</programlisting>
 
       <para>Then we will add a cell in between the two that we already
       have:</para>
@@ -265,11 +264,18 @@ JToolBarHelper::addNewX();</programlisting>
 
       <para>It can be cumbersome to have to check the box that we want to edit
       and then move up and click the edit button. Therefore, we will add a
-      link to the greeting so that it will go straight to the edit form. We
-      will add the following line after the call to the JHTML::idBox()
-      method:</para>
+      link that it will go straight to the greeting's edit form. We will add
+      the following line after the call to the JHTML::_() method to generate
+      the link HTML:</para>
 
-      <programlisting>$link     = JOutputFilter::ampReplace( 'index.php?option=com_hello&amp;controller=hello&amp;task=edit&amp;cid[]='. $row-&gt;id );</programlisting>
+      <programlisting>$link = JRoute::_( 'index.php?option=com_hello&amp;controller=hello&amp;task=edit&amp;cid[]='. $row-&gt;id );</programlisting>
+
+      <para>And we include the link in the cell showing the greeting text:
+      </para>
+
+      <programlisting>&lt;td&gt;
+    &lt;a href="&lt;?php echo $link; ?&gt;"&gt;&lt;?php echo $row-&gt;greeting; ?&gt;&lt;/a&gt;
+&lt;/td&gt;</programlisting>
 
       <para>You will notice that this link points to the hello controller.
       This controller will handle the data manipulation of our
@@ -287,6 +293,10 @@ JToolBarHelper::addNewX();</programlisting>
       not. The fourth input field is the controller field. This is used to
       specify that tasks fired from this form will be handled by the hello
       controller.</para>
+
+      <para>Here is the code for the completed default.php file:</para>
+
+      <xi:include href="code/admin_views_hellos_tmpl_default.phpa.xml" />
 
       <para>Our hellos view is now complete. You can try out the component now
       to see the results.</para>
@@ -672,7 +682,7 @@ function save()
 
             <mediaobject>
               <imageobject>
-                <imagedata fileref="images/message.png" format="PNG"/>
+                <imagedata fileref="images/message.png" format="PNG" />
               </imageobject>
             </mediaobject>
           </figure>
@@ -781,6 +791,7 @@ function cancel()
   <sect1 id="mvctutorial4.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink url="packages/com_hello4.zip">com_hello4.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello4.zip">com_hello4.zip</ulink></para>
   </sect1>
 </chapter>

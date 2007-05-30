@@ -30,10 +30,8 @@
 				getting this object.
 			</para>
 
-			<programlisting>
-				// This gets the database object using the JFactory	class
-				$db = &amp;JFactory::getDBO();
-			</programlisting>
+			<programlisting>// This gets the database object using the JFactory	class
+$db = &amp;JFactory::getDBO();</programlisting>
 		</sect2>
 
 		<sect2 id="databasetutorial.getobject.custom">
@@ -45,9 +43,8 @@
 				to different database sources.
 			</para>
 
-			<programlisting>
-				// Create a new database object
-				$myDB = new JDatabase::getInstance( $options );
+			<programlisting>// Create a new database object
+$myDB = new JDatabase::getInstance( $options );
 			</programlisting>
 		</sect2>
 	</sect1>
@@ -149,10 +146,8 @@
 						is in.
 					</para>
 
-					<programlisting>
-						// Get the system database object.
-						$db = &amp;JFactory::getDBO();
-					</programlisting>
+					<programlisting>// Get the system database object.
+$db = &amp;JFactory::getDBO();</programlisting>
 				</listitem>
 
 				<listitem>
@@ -162,19 +157,15 @@
 						method.
 					</para>
 
-					<programlisting>
-						// Set our query to the database object.
-						$db-&gt;setQuery('SELECT name FROM dogs WHERE dog_id = 2');
-					</programlisting>
+					<programlisting>// Set our query to the database object.
+$db-&gt;setQuery('SELECT name FROM dogs WHERE dog_id = 2');</programlisting>
 				</listitem>
 
 				<listitem>
 					<para>Lastly we call the loadResult() method.</para>
 
-					<programlisting>
-						// Use the loadResult() method to get only the first value from the first row of the result set.
-						$name = $db-&gt;loadResult();
-					</programlisting>
+					<programlisting>// Use the loadResult() method to get only the first value from the first row of the result set.
+$name = $db-&gt;loadResult();</programlisting>
 				</listitem>
 			</orderedlist>
 		</sect2>
