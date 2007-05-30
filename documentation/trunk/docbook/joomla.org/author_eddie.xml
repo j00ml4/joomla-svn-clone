@@ -2,7 +2,7 @@
 ENTITY &author.eddie;
 for use inside <author> or <editor>
 -->
-  <firstname>Andres</firstname>
+  <firstname>Andrew</firstname>
   <surname>Eddie</surname>
   <affiliation>
 	<orgname>Joomla!</orgname>
