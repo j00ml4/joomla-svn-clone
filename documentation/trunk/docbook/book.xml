@@ -43,6 +43,8 @@
     <title>Developing Plugins</title>
 
     <xi:include href="tutorials/plugins_part1/plugins_part1.xml" />
+
+    <xi:include href="tutorials/plugins_part2/plugins_part2.xml" />
   </part>
 
   <part id="jdmbook.modules">
