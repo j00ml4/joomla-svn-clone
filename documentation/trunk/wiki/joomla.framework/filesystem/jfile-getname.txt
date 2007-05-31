@@ -1,6 +1,6 @@
-====== getFileName ======
+====== getName ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#getFileName|JFile->getFileName]] | never | Work in progress |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#getName|JFile->getFileName]] | never | Work in progress |
 
 This function returns the file name component of a provided path. 
 Unlike the built-in PHP function ''basename()'', an empty string is returned if the path ends with a trailing ***directory separator***.
@@ -8,19 +8,19 @@ Unlike the built-in PHP function ''basename()'', an empty string is returned if 
 **Warning:** Do not use this with URIs! Use the [[references:joomla.framework:Environment:JURI|JURI]] class instead which provides several methods to extract bits and pieces of URIs and URLs.
 
 ===== Syntax =====
-boolean getFileName	( **$file** )
+boolean getName	( **$file** )
 | **$file** | string | is a string that contains a file path. |
 
 ===== Examples =====
 Example 1: This example returns the filename component of each provided path.
 <code php|Example 1>
-$filename = JFile::getFileName( 'images/stories/clock.jpg' );
+$filename = JFile::getName( 'images/stories/clock.jpg' );
 echo "File 1: '", $filename, "'";
 
-$filename = JFile::getFileName( 'images/stories/' );
+$filename = JFile::getName( 'images/stories/' );
 echo "File 2: '", $filename, "'";
 
-$filename = JFile::getFileName( 'images/stories/foobar' );
+$filename = JFile::getName( 'images/stories/foobar' );
 echo "File 3: '", $filename, "'";
 </code>
 will produce:
