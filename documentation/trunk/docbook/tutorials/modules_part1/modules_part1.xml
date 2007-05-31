@@ -45,10 +45,13 @@
   <sect1 id="helloworldmodule.mod_helloworld">
     <title>Creating mod_helloworld.php</title>
 
-    <para>The mod_helloworld.php file will perform four tasks: # include the
-    helper.php file which contains the class to be used to collect the
-    necessary data # invoke the appropriate helper class method to retrieve
-    the data # include the template to display the output.</para>
+    <para>The mod_helloworld.php file will perform four tasks:
+    <itemizedlist mark='bullet'>
+    <listitem>include the helper.php file which contains the class to be used to collect the necessary data</listitem>
+    <listitem>invoke the appropriate helper class method to retrieve the data</listitem>
+    <listitem>include the template to display the output.</listitem>
+    </itemizedlist>
+    </para>
 
     <para>The helper class is defined in our helper.php file. This file is
     included with a require_once statement:</para>
