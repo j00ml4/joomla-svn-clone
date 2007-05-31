@@ -30,8 +30,8 @@
 				getting this object.
 			</para>
 
-			<programlisting>    <![CDATA[// This gets the database object using the JFactory	class
-$db = >JFactory::getDBO();]]>    </programlisting>
+			<programlisting><![CDATA[// This gets the database object using the JFactory	class
+$db = >JFactory::getDBO();]]></programlisting>
 		</sect2>
 
 		<sect2 id="databasetutorial.getobject.custom">
@@ -43,9 +43,8 @@ $db = >JFactory::getDBO();]]>    </programlisting>
 				to different database sources.
 			</para>
 
-			<programlisting>    <![CDATA[// Create a new database object
-$myDB = new JDatabase::getInstance( $options );
-			]]>    </programlisting>
+			<programlisting><![CDATA[// Create a new database object
+$myDB = new JDatabase::getInstance( $options );]]></programlisting>
 		</sect2>
 	</sect1>
 
@@ -131,7 +130,7 @@ $myDB = new JDatabase::getInstance( $options );
 				SQL query to do that.
 			</para>
 
-			<programlisting>    <![CDATA[SELECT name FROM dogs WHERE dog_id = 2]]>    </programlisting>
+			<programlisting><![CDATA[SELECT name FROM dogs WHERE dog_id = 2]]></programlisting>
 
 			<para>
 				Easy enough, now we need to actually get the value using
@@ -146,8 +145,8 @@ $myDB = new JDatabase::getInstance( $options );
 						is in.
 					</para>
 
-					<programlisting>    <![CDATA[// Get the system database object.
-$db = >JFactory::getDBO();]]>    </programlisting>
+					<programlisting><![CDATA[// Get the system database object.
+$db = >JFactory::getDBO();]]></programlisting>
 				</listitem>
 
 				<listitem>
@@ -157,15 +156,15 @@ $db = >JFactory::getDBO();]]>    </programlisting>
 						method.
 					</para>
 
-					<programlisting>    <![CDATA[// Set our query to the database object.
-$db->setQuery('SELECT name FROM dogs WHERE dog_id = 2');]]>    </programlisting>
+					<programlisting><![CDATA[// Set our query to the database object.
+$db->setQuery('SELECT name FROM dogs WHERE dog_id = 2');]]></programlisting>
 				</listitem>
 
 				<listitem>
 					<para>Lastly we call the loadResult() method.</para>
 
-					<programlisting>    <![CDATA[// Use the loadResult() method to get only the first value from the first row of the result set.
-$name = $db->loadResult();]]>    </programlisting>
+					<programlisting><![CDATA[// Use the loadResult() method to get only the first value from the first row of the result set.
+$name = $db->loadResult();]]></programlisting>
 				</listitem>
 			</orderedlist>
 		</sect2>

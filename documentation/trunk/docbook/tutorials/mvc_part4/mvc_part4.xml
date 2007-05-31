@@ -46,7 +46,7 @@
     the hellos model. We will start with the model.</para>
 
     <sect2 id="mvctutorial4.creatingframework.hellosmodel">
-      <title>Creating the Hellos Model</title>
+      <title>The Hellos Model</title>
 
       <para>The Hellos Model will be very simple. The only operation that we
       currently need is the ability to retrieve the list of hellos from the
@@ -116,7 +116,7 @@ function getData()
     </sect2>
 
     <sect2 id="mvctutorial4.creatingframework.hellosview">
-      <title>Creating the Hellos View</title>
+      <title>The Hellos View</title>
 
       <para>Now that we have a model to retrieve our data, we need to display
       it. This view will be fairly similar to the view from the site section
@@ -136,7 +136,7 @@ function getData()
     </sect2>
 
     <sect2 id="mvctutorial4.creatingframework.hellostemplate">
-      <title>Creating the Hellos Template</title>
+      <title>The Hellos Template</title>
 
       <para>The template will take the data pushed into it from the view and
       produce the output. We will display our output in a simple table. While
@@ -182,7 +182,7 @@ function getData()
     links.</para>
 
     <sect2 id="mvctutorial4.addingfunctionality.toolbar">
-      <title>Adding a Toolbar</title>
+      <title>The Toolbar</title>
 
       <para>You may have noticed the toolbar that appears at the top of other
       Joomla! component administrator panels. Our component needs one as well.
@@ -222,7 +222,7 @@ JToolBarHelper::addNewX();]]>    </programlisting>
     </sect2>
 
     <sect2 id="mvctutorial4.addingfunctionality.checkboxes">
-      <title>Adding Checkboxes and Links to our Form</title>
+      <title>Checkboxes and Links</title>
 
       <para>We now have buttons. Two of those buttons operate on existing
       records. But how do we know which records to operate on? We have to let
@@ -310,7 +310,7 @@ JToolBarHelper::addNewX();]]>    </programlisting>
     view and model. This is where the real work will get done.</para>
 
     <sect2 id="mvctutorial4.downanddirty.hellocontroller">
-      <title>Creating the Hello Controller</title>
+      <title>The Hello Controller</title>
 
       <para>Our default controller just isn't going to cut it when it comes to
       doing work - all it is capable of doing is displaying views.</para>
@@ -363,7 +363,7 @@ function edit()
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.helloview">
-      <title>Creating the Hello View</title>
+      <title>The Hello View</title>
 
       <para>The Hello view will display a form which will allow the user to
       edit a greeting. The display method if the hello view has to do a few
@@ -422,7 +422,7 @@ function display($tpl = null)
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.hellomodel">
-      <title>Creating the Hello Model</title>
+      <title>The Hello Model</title>
 
       <para>Our view needs data. Therefore, we need to create a model to model
       a hello.</para>
@@ -486,7 +486,7 @@ function setId($id)
  * @return object with data
  */
 
-function >getData()
+function &getData()
 {
     // Load the data
     if (empty( $this->_data )) {
@@ -505,7 +505,7 @@ function >getData()
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.form">
-      <title>Creating the Form</title>
+      <title>The Form</title>
 
       <para>Now all that is left is to create the form that the data will go
       into. Since we specified our layout as form, the form will go in a file
