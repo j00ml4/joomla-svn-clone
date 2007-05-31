@@ -16,6 +16,10 @@ Legend:
 ! -> Note
 ---------
 
+31.05.2007 Ian MacLennan
+ +	JFile::getName
+ -	JFile::getFileName
+
 29.05.2007 René Serradeil
  +	JFile::getFileName
  -	JHTML::_implode_assoc, JDocumentHelper.txt
