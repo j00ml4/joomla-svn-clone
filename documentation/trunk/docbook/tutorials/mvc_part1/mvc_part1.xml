@@ -251,9 +251,9 @@
       <para>Our template is very simple: we only want to display the greeting
       that was passed in from the view:</para>
 
-      <programlisting>    <![CDATA[<?php // no direct access
+      <programlisting><![CDATA[<?php // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<h1><?php echo $this->greeting; ?></h1>]]>    </programlisting>
+<h1><?php echo $this->greeting; ?></h1>]]></programlisting>
     </sect2>
 
     <sect2 id="mvctutorial1.creatingcomponent.wrappingitup">
@@ -290,7 +290,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       directory contents. This is often undesirable. These files have the
       simple line:</para>
 
-      <programlisting>    <![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]>    </programlisting>
+      <programlisting><![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]></programlisting>
 
       <para>It will simply display a blank page.</para>
 

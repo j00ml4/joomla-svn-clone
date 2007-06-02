@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 /**
  * Hellos Model for Hello World Component
  * 
@@ -55,4 +55,4 @@ class HellosModelHellos extends JModel
 
         return $this->_data;
     }
-}]]>    </programlisting>
+}]]></programlisting>

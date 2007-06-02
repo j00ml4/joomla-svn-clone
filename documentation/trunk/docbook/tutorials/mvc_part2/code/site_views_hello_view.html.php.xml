@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 
 /**
  * Hello View for Hello World Component
@@ -33,4 +33,4 @@ class HelloViewHello extends JView
         parent::display($tpl);
     }
 }
-?>]]>    </programlisting>
+?>]]></programlisting>

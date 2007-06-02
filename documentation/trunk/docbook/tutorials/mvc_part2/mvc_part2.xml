@@ -77,12 +77,12 @@
 
     <para>Our previous view code contained the lines:</para>
 
-    <programlisting>    <![CDATA[$greeting = "Hello World!";]]>    </programlisting>
+    <programlisting><![CDATA[$greeting = "Hello World!";]]></programlisting>
 
     <para>To take advantage of our model, we change this line to:</para>
 
-    <programlisting>    <![CDATA[$model => $this->getModel();
-$greeting = $model->getGreeting();]]>    </programlisting>
+    <programlisting><![CDATA[$model => $this->getModel();
+$greeting = $model->getGreeting();]]></programlisting>
 
     <para>The complete view now looks like:</para>
 
@@ -96,7 +96,7 @@ $greeting = $model->getGreeting();]]>    </programlisting>
       in the models directory, so the entry for this file will look like (it
       should be added to the site section):</para>
 
-      <programlisting>    <![CDATA[<filename>models/hello.php</filename>]]>    </programlisting>
+      <programlisting><![CDATA[<filename>models/hello.php</filename>]]></programlisting>
 
       <para>Our new hello.xml file will look like:</para>
 

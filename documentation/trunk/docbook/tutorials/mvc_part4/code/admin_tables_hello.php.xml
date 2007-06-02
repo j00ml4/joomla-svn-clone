@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 /**
  * Hello World table class
  * 
@@ -40,4 +40,4 @@ class TableHello extends JTable
         parent::__construct('#__hello', 'id', $db);
     }
 }
-?>]]>    </programlisting>
+?>]]></programlisting>

@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 /**
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -29,4 +29,4 @@ $controller->execute( JRequest::getVar( 'task' ) );
 // Redirect if set by the controller
 $controller->redirect();
 
-?>]]>    </programlisting>
+?>]]></programlisting>
