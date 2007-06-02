@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 /**
  * Helper class for Hello World! module
  * 
@@ -23,4 +23,4 @@ class modHelloWorldHelper
     {
         return 'Hello, World!';
     }
-}]]>    </programlisting>
+}]]></programlisting>

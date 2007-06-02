@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php defined('_JEXEC') or die('Restricted access'); ?>
+<programlisting><![CDATA[<?php defined('_JEXEC') or die('Restricted access'); ?>
 <form action="index.php" method="post" name="adminForm">
 <div id="editcell">
     <table class="adminlist">
@@ -38,4 +38,4 @@
 <input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="controller" value="hello" />
 
-</form>]]>    </programlisting>
+</form>]]></programlisting>

@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 /**
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -28,4 +28,4 @@ class HelloViewHello extends JView
         parent::display($tpl);
     }
 }
-?>]]>    </programlisting>
+?>]]></programlisting>

@@ -69,7 +69,7 @@
 
       <para>_buildQuery() simply returns the query. It looks like:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * Returns the query
  * @return string The query to be used to retrieve the rows from the database
  */
@@ -80,7 +80,7 @@ function _buildQuery()
     ;
 
     return $query;
-}]]>    </programlisting>
+}]]></programlisting>
 
       <para>getData() will obtain the query and retrieve the records from the
       database. Now it might happen that we need to retrieve this list of data
@@ -92,7 +92,7 @@ function _buildQuery()
 
       <para>Here is the getData() method:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * Retrieves the hello data
  * @return array Array of objects containing the data from the database
  */
@@ -106,7 +106,7 @@ function getData()
     }
 
     return $this->_data;
-}]]>    </programlisting>
+}]]></programlisting>
 
       <para>The completed model looks like:</para>
 
@@ -194,10 +194,10 @@ function getData()
       use static methods from the Joomla! JToolBarHelper class. The code looks
       like:</para>
 
-      <programlisting>    <![CDATA[JToolBarHelper::title(   JText::_( 'Hello Manager' ), 'generic.png' );
+      <programlisting><![CDATA[JToolBarHelper::title(   JText::_( 'Hello Manager' ), 'generic.png' );
 JToolBarHelper::deleteList();
 JToolBarHelper::editListX();
-JToolBarHelper::addNewX();]]>    </programlisting>
+JToolBarHelper::addNewX();]]></programlisting>
 
       <para>These three methods will create the appropriate buttons. The
       deleteList() method can optionally take up to three parameters - the
@@ -237,9 +237,9 @@ JToolBarHelper::addNewX();]]>    </programlisting>
       <para>In the header of the column, we will add a checkbox which can be
       used to toggle all the boxes below it on or off:</para>
 
-      <programlisting>    <![CDATA[<th width="20">
+      <programlisting><![CDATA[<th width="20">
     <input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
-</th>]]>    </programlisting>
+</th>]]></programlisting>
 
       <para>The Javascript checkAll function is a function that is built into
       the Joomla! base Javascript package that provides the functionality that
@@ -249,18 +249,18 @@ JToolBarHelper::addNewX();]]>    </programlisting>
       Joomla!'s JHTML class has a method, JHTML::_(), which will generate our
       checkbox for us. We will add the following line to our loop:</para>
 
-      <programlisting>    <![CDATA[$checked    = JHTML::_('grid.id',   $i, $row->id );]]>    </programlisting>
+      <programlisting><![CDATA[$checked    = JHTML::_('grid.id',   $i, $row->id );]]></programlisting>
 
       <para>after the line:</para>
 
-      <programlisting>    <![CDATA[$row = >$this->items[$i];]]>    </programlisting>
+      <programlisting><![CDATA[$row = >$this->items[$i];]]></programlisting>
 
       <para>Then we will add a cell in between the two that we already
       have:</para>
 
-      <programlisting>    <![CDATA[<td>
+      <programlisting><![CDATA[<td>
     <?php echo $checked; ?>
-</td>]]>    </programlisting>
+</td>]]></programlisting>
 
       <para>It can be cumbersome to have to check the box that we want to edit
       and then move up and click the edit button. Therefore, we will add a
@@ -268,14 +268,14 @@ JToolBarHelper::addNewX();]]>    </programlisting>
       the following line after the call to the JHTML::_() method to generate
       the link HTML:</para>
 
-      <programlisting>    <![CDATA[$link = JRoute::_( 'index.php?option=com_hello>controller=hello>task=edit>cid[]='. $row->id );]]>    </programlisting>
+      <programlisting><![CDATA[$link = JRoute::_( 'index.php?option=com_hello>controller=hello>task=edit>cid[]='. $row->id );]]></programlisting>
 
       <para>And we include the link in the cell showing the greeting text:
       </para>
 
-      <programlisting>    <![CDATA[<td>
+      <programlisting><![CDATA[<td>
     <a href="<?php echo $link; ?>"><?php echo $row->greeting; ?></a>
-</td>]]>    </programlisting>
+</td>]]></programlisting>
 
       <para>You will notice that this link points to the hello controller.
       This controller will handle the data manipulation of our
@@ -325,7 +325,7 @@ JToolBarHelper::addNewX();]]>    </programlisting>
       task onto the edit task handler. This is specified in our
       constructor:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * constructor (registers additional tasks to methods)
  * @return void
  */
@@ -335,7 +335,7 @@ function __construct()
 
     // Register Extra tasks
     $this->registerTask( 'add'  ,     'edit' );
-}]]>    </programlisting>
+}]]></programlisting>
 
       <para>The first parameter of JController::registerTask is the task to
       map, and the second is the method to map it to.</para>
@@ -348,7 +348,7 @@ function __construct()
 
       <para>Our edit task handler looks like:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * display the edit form
  * @return void
  */
@@ -359,7 +359,7 @@ function edit()
     JRequest::setVar('hidemainmenu', 1);
 
     parent::display();
-}]]>    </programlisting>
+}]]></programlisting>
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.helloview">
@@ -396,7 +396,7 @@ function edit()
 
       <para>Thus our display method looks like this:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * display method of Hello view
  * @return void
  **/
@@ -418,7 +418,7 @@ function display($tpl = null)
 
     $this->assignRef('hello',        $hello);
     parent::display($tpl);
-}]]>    </programlisting>
+}]]></programlisting>
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.hellomodel">
@@ -433,7 +433,7 @@ function display($tpl = null)
       <para>We will start with a constructor, which will attempt to retrieve
       the id from the query:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * Constructor that retrieves the ID from the request
  *
  * @access    public
@@ -445,7 +445,7 @@ function __construct()
 
     $array = JRequest::getVar('cid',  0, '', 'array');
     $this->setId((int)$array[0]);
-}]]>    </programlisting>
+}]]></programlisting>
 
       <para>The JRequest::getVar() method is used to retrieve data from the
       request. The first parameter is the name of the form variable. The
@@ -461,7 +461,7 @@ function __construct()
       our model points to will mean the id points to the wrong data.
       Therefore, when we set the id, we will clear the data property:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * Method to set the hello identifier
  *
  * @access    public
@@ -473,7 +473,7 @@ function setId($id)
     // Set id and wipe data
     $this->_id        = $id;
     $this->_data    = null;
-}]]>    </programlisting>
+}]]></programlisting>
 
       <para>Finally, we need a method to retrieve our data: getData()</para>
 
@@ -481,7 +481,7 @@ function setId($id)
       it has, it will simply return it. Otherwise, it will load the data from
       the database.</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * Method to get a hello
  * @return object with data
  */
@@ -501,7 +501,7 @@ function &getData()
         $this->_data->greeting = null;
     }
     return $this->_data;
-}]]>    </programlisting>
+}]]></programlisting>
     </sect2>
 
     <sect2 id="mvctutorial4.downanddirty.form">
@@ -576,7 +576,7 @@ function &getData()
 
           <para>Our method looks like:</para>
 
-          <programlisting>    <![CDATA[/**
+          <programlisting><![CDATA[/**
  * Method to store a record
  *
  * @access    public
@@ -606,7 +606,7 @@ function store()
     }
 
     return true;
-}]]>    </programlisting>
+}]]></programlisting>
 
           <para>This method gets added to the hello model.</para>
 
@@ -652,7 +652,7 @@ function store()
           task that we are firing is called 'save', we must call our method
           'save'. This is simple:</para>
 
-          <programlisting>    <![CDATA[/**
+          <programlisting><![CDATA[/**
  * save a record (and redirect to main page)
  * @return void
  */
@@ -669,7 +669,7 @@ function save()
     // Check the table in so it can be edited.... we are done with it anyway
     $link = 'index.php?option=com_hello';
     $this->setRedirect($link, $msg);
-}]]>    </programlisting>
+}]]></programlisting>
 
           <para>All we do is get our model and invoke the store() method. Then
           we use the setRedirect() method to redirect back to our list of
@@ -699,7 +699,7 @@ function save()
         <para>In the model, we will retrieve the list of IDs to delete and
         call the JTable class to delete them. Here it is:</para>
 
-        <programlisting>    <![CDATA[/**
+        <programlisting><![CDATA[/**
  * Method to delete record(s)
  *
  * @access    public
@@ -718,7 +718,7 @@ function delete()
     }                        
 
     return true;
-}]]>    </programlisting>
+}]]></programlisting>
 
         <para>We invoke the JRequest::getVar() method to get the data from the
         request, then we invoke the $row->delete() method to delete each
@@ -732,7 +732,7 @@ function delete()
         <para>This is similar to the save() method which handled the save
         task:</para>
 
-        <programlisting>    <![CDATA[/**
+        <programlisting><![CDATA[/**
  * remove record(s)
  * @return void
  */
@@ -746,7 +746,7 @@ function remove()
     }
 
     $this->setRedirect( 'index.php?option=com_hello', $msg );
-}]]>    </programlisting>
+}]]></programlisting>
       </sect3>
     </sect2>
 
@@ -756,7 +756,7 @@ function remove()
       <para>To cancel the edit operation, all we have to do is redirect back
       to the main view:</para>
 
-      <programlisting>    <![CDATA[/**
+      <programlisting><![CDATA[/**
  * cancel editing a record
  * @return void
  */
@@ -764,7 +764,7 @@ function cancel()
 {
     $msg = JText::_( 'Operation Cancelled' );
     $this->setRedirect( 'index.php?option=com_hello', $msg );
-}]]>    </programlisting>
+}]]></programlisting>
     </sect2>
   </sect1>
 

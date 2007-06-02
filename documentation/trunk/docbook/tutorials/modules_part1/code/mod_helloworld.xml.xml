@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<programlisting><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <install type="module" version="1.5.0">
     <name>Hello, World!</name>
     <author>John Doe</author>
@@ -13,4 +13,4 @@
     </files>
     <params>
     </params>
-</install>]]>    </programlisting>
+</install>]]></programlisting>

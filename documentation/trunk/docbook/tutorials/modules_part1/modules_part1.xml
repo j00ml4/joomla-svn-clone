@@ -56,7 +56,7 @@
     <para>The helper class is defined in our helper.php file. This file is
     included with a require_once statement:</para>
 
-    <programlisting>    <![CDATA[require_once( dirname(__FILE__).DS.'helper.php' );]]>    </programlisting>
+    <programlisting><![CDATA[require_once( dirname(__FILE__).DS.'helper.php' );]]></programlisting>
 
     <para>require_once is used because our helper functions are defined within
     a class, and we only want the class defined once.</para>
@@ -73,7 +73,7 @@
 
     <para>The helper class method is invoked in the following way:</para>
 
-    <programlisting>    <![CDATA[$hello = modHelloWorldHelper::getHello( $params );]]>    </programlisting>
+    <programlisting><![CDATA[$hello = modHelloWorldHelper::getHello( $params );]]></programlisting>
 
     <sect2 id="helloworldmodule.mod_helloworld.completedmodhelloworld">
       <title>Completed mod_helloworld.php file</title>
@@ -117,9 +117,9 @@
 
     <para>The code for the default.php file is as follows:</para>
 
-    <programlisting>    <![CDATA[<?php // no direct access
+    <programlisting><![CDATA[<?php // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
-<?php echo $hello; ?>]]>    </programlisting>
+<?php echo $hello; ?>]]></programlisting>
 
     <para>An important point to note is that the template file has the same
     scope as the mod_helloworld.php file. What this means is that the variable
@@ -145,7 +145,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
     their browser to these folders, the index.html file will be displayed.
     These files can be left empty or can contain the simple line:</para>
 
-    <programlisting>    <![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]>    </programlisting>
+    <programlisting><![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]></programlisting>
 
     <para>which will display an empty page.</para>
 

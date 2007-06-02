@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[<?php
+<programlisting><![CDATA[<?php
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
@@ -36,4 +36,4 @@ class <PluginName> extends JPlugin
         return true;
     }
 
-}]]>    </programlisting>
+}]]></programlisting>

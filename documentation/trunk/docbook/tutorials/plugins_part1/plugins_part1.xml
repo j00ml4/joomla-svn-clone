@@ -85,7 +85,7 @@
       <para>If you want to trigger an event then you use code like
       this:</para>
 
-      <programlisting>    <![CDATA[$results = $mainframe->triggerEvent( '<EventName>', <ParameterArray> );]]>    </programlisting>
+      <programlisting><![CDATA[$results = $mainframe->triggerEvent( '<EventName>', <ParameterArray> );]]></programlisting>
 
       <para>It is important to note that the parameters have to be in an
       array. The plugin function itself will get the parameters as single
