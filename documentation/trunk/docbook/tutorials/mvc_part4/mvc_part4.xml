@@ -296,7 +296,7 @@ JToolBarHelper::addNewX();]]></programlisting>
 
       <para>Here is the code for the completed default.php file:</para>
 
-      <xi:include href="code/admin_views_hellos_tmpl_default.phpa.xml" />
+      <xi:include href="code/admin_views_hellos_tmpl_default.php.xml" />
 
       <para>Our hellos view is now complete. You can try out the component now
       to see the results.</para>
@@ -715,7 +715,7 @@ function delete()
             $this->setError( $row->getErrorMsg() );
             return false;
         }
-    }                        
+    }
 
     return true;
 }]]></programlisting>
