@@ -15,7 +15,7 @@ for dir in `find $* -type d | grep -v \.svn | grep -v CVS` ; do
       *.xml)
         ent=`echo $item | sed -e s/\.xml// -e s#^\./docbook/## -e s#/#.#g`
         echo "<!-- $item -->"
-        echo "<!ENTITY $ent SYSTEM \"$item\">"
+        echo "<!ENTITY % $ent SYSTEM \"$item\">"
         all="$all&$ent;"
       ;;
     esac
@@ -24,7 +24,7 @@ for dir in `find $* -type d | grep -v \.svn | grep -v CVS` ; do
   ent=`echo $dir | sed -e s/\.xml// -e s#^\./docbook## -e s#^/## -e s#/#.#g`
   if test -n "$ent" ; then
     echo "<!-- $dir -->"
-    echo "<!ENTITY $ent.all \"$all\">"
+    echo "<!ENTITY % $ent.all \"$all\">"
   fi
 done
 

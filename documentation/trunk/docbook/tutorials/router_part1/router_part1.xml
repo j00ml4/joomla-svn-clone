@@ -22,8 +22,9 @@
     <para>A good example of this is the "Welcome to Joomla" article. The first
     link shown was generated without mod_rewrite, and the second link was
     generated with mod_rewrite:
-    <code>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</code><code>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla
-    </code></para>
+    <code>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</code>
+    <code>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla</code>
+    </para>
   </sect1>
 
   <sect1 id="router_part1.alias">
@@ -40,7 +41,11 @@
     use the JTable::check() method during the save process. Have a look at
     this example code:</para>
 
-    <xi:include href="code/function.check.xml" />
+    <xi:include href="code/function.check.xml">
+<xi:fallback>
+	<programlisting>Example code not available</programlisting>
+</xi:fallback>
+</xi:include>
 
     <para>If the alias field is empty or has a different type than the URL
     safe title then this one will be used as the alias.</para>
@@ -136,7 +141,11 @@
       <para>This simple example will illustrate the basics of implementing a
       router for your component.</para>
 
-      <xi:include href="code/example1.function.buildroute.xml" />
+      <xi:include href="code/example1.function.buildroute.xml">
+<xi:fallback>
+	<programlisting>Example code not available</programlisting>
+</xi:fallback>
+</xi:include>
 
       <para>JRouter passes a $query array to the [Componentname]BuildRoute
       function. This function will add the relevant parts of the array to the
@@ -148,7 +157,11 @@
 
       <para>The next function in the router.php parses the URL:</para>
 
-      <xi:include href="code/example1.function.parseroute.xml" />
+      <xi:include href="code/example1.function.parseroute.xml">
+<xi:fallback>
+	<programlisting>Example code not available</programlisting>
+</xi:fallback>
+</xi:include>
 
       <para>What happens here? In the function [Componentname]BuildRoute we
       arranged the items in the $query array in a specific sequence. This
@@ -200,7 +213,11 @@
 
       <para>The corresponding router.php:</para>
 
-      <xi:include href="code/example2.function.buildroute.xml" />
+      <xi:include href="code/example2.function.buildroute.xml">
+<xi:fallback>
+	<programlisting>Example code not available</programlisting>
+</xi:fallback>
+</xi:include>
 
       <para>The difference now is that we don't add the name of the view to
       the $segments array. We still unset the view key since otherwise,
@@ -208,7 +225,11 @@
       thing here is the additional parameter catid that we push into the
       $segments array.</para>
 
-      <xi:include href="code/example2.function.parseroute.xml" />
+      <xi:include href="code/example2.function.parseroute.xml">
+<xi:fallback>
+	<programlisting>Example code not available</programlisting>
+</xi:fallback>
+</xi:include>
 
       <para>You can see that this ParseRoute function has a lot of different
       code parts in comparison to the previous. The reason for this is simple.
