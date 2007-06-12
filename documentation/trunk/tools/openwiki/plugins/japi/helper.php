@@ -6,7 +6,7 @@
  * @subpackage 	Utilities
  * @license 	CC-SA-NC Creative Commons Share Alike Non Commercial
  * @author 		CirTap <cirtap-joomla@webmechanic.biz>
- * @version 	0.1.0 $Id$
+ * @version 	0.2.1 $Id$
  */
 
 defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
@@ -14,10 +14,14 @@ defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.'
 if (!defined('PHP_EOL')) {
 	define('PHP_EOL', DOKU_LF);
 }
+error_reporting(E_ALL);
 
+/**
+ * A helful class for the Joomla! API Wiki.
+ */
 class JApiHelper
 {
-/** some JApiHelperEntry thingies */
+/** some {@link JApiHelperEntry} thingies */
 var $row       = array();
 var $revision  = null;
 var $docstatus = null;
@@ -66,7 +70,10 @@ var $_syntax   = 'JAPI';
 /** phpDocumentor, filename candidate of the current class */
 var $_filename;
 
+
 /**@#+
+ * Configuration settings.
+ *
  * @todo take from a config file / localize
  */
 
@@ -75,20 +82,29 @@ var $_filename;
  * of the {#JAPI#} parameters
  */
 var $_cols = array(
-	'home' => 'API',
+	'home' => 'API',			# not implemented, maybe redundant
 	'pack' => 'Package',
 	'sub'  => 'Subpackage',
 	'cls'  => 'Class',
 	'meth' => 'Method',
 	'func' => 'Function',
-	'cons' => 'Constant',
-	'doc'  => 'Reference',
+	'cons' => 'Constant',		# not implemented
+	'doc'  => 'Reference',		# automagically inserted
 	'rev'  => 'Last reviewed',
 	'stat' => 'Doc status',
 	);
 
 /**
+ * Entries that point to the phpDoc API Reference web site
+ * <b>IN REVERSE ORDER</b> of the hierarchy listed in $_cols
+ * @see JApiHelperDoc::setValue()
+ */
+var $apicols = array('func','meth','cls','sub','pack');
+
+/**
  * Default icon decoration, 'externalmedia' or 'internalmedia'
+ * some icons are not (yet) used and may even be removed should
+ * this plugin evolve.
  * @see getIcon()
  */
 var $_icons = array(
@@ -99,7 +115,7 @@ var $_icons = array(
 	'meth' => array('externalmedia', 'Method.png'),
 	// handy supplementals and derivates
 	'acls' => array('externalmedia', 'AbstractClass.png'),
-	'const'=> array('externalmedia', 'Constant.png'),
+	'cons' => array('externalmedia', 'Constant.png'),
 	'func' => array('externalmedia', 'Function.png'),
 	// these are nice, too, but not "required"
 	'doc'  => array('externalmedia', 'Index.png'),
@@ -109,32 +125,36 @@ var $_icons = array(
 /**
  * Package + Subpackage defaults
  * this will probably break in future versions of J! if the
- * the legacy grows AND current 1.5 remains documented!
- * by then, we hopefully have a more adequate documentation
- * system than err.. ah.. a wiki :)
+ * legacy grows AND current 1.5 remains documented!
+ * by then, we hopefully have a more powerful documentation
+ * system than <cough> DokuWiki :)
  * @todo verify assignments
  */
 var $_packs = array(
-	# pkg-key   => array('package', 'default subpackage'),
-	'joomla'    => array('Joomla', 'Libraries'),
+	# pkg-key   => array('package',          'default subpackage'),
+	'joomla'    => array('Joomla',          'Libraries'),
 	'framework' => array('Joomla.Framework', false),	// do we have a default for this?
-	'legacy'    => array('Joomla.Legacy', '1.5'),
-	'xml'       => array('XML_Parameters', false),
-	'3pd'       => array('3PD-Libraries',  false),
+	'legacy'    => array('Joomla.Legacy',    '1.5'),
+/* not implemented (implementable? due to bizarre naming schemata)
+	'xml'       => array('XML_Parameters',   false),
+	'3pd'       => array('3PD-Libraries',    false),
+*/
 	);
 
 /**
- * External icons URI with a TRAILING slash !
- * It'd be nice if they can come from the "local" Wiki /media/ folder
- * instead of remote api.joomla.org.
+ * External icons base URL with a TRAILING slash !
+ * It'd be nice if they can come from the Wiki /media/japi/ folder
+ * instead of remote api.joomla.org to spead up page loads esp.
+ * if you try this at home.
  * @see getIcon()
  */
 var $_icon_uri = 'http://api.joomla.org/media/images/';
+# var $_icon_uri = '/components/com_openwiki/data/media/japi/';
 
 /**
- * phpDocumentor URI with a TRAILING slash !
+ * phpDocumentor base URI with a TRAILING slash !
  */
-var $_doc_uri  = 'http://api.joomla.org/';
+var $_api_uri  = 'http://api.joomla.org/';
 
 /**@#- */
 
@@ -143,7 +163,7 @@ var $_doc_uri  = 'http://api.joomla.org/';
 	 */
 	function JApiHelper(&$data, &$renderer)
 	{
-		$this->__construct($data, $renderer);
+		$this->__construct($data, $renderer, 'JAPI');
 	}
 
 	/**
@@ -168,12 +188,11 @@ var $_doc_uri  = 'http://api.joomla.org/';
 		$this->_raw = array_values($data[0]);
 
 		$this->_cleanup();
-$this->_dump($this->_raw, 'after ');
 
 		/* now, populate the main properties and hope for the best
 		 * the argument order won't change :)
-		 * @TODO allow shorthand, "named arguments"? like
-		 * 			Pascal-esque p:Packagename c:Classname r:2006-12-31
+		 * @TODO allow "named arguments"? like Pascal-esque
+		 * 			{#JAPI p:Packagename c:Classname r:2006-12-31 #}
 		 */
 		list(
 			$this->pack,
@@ -212,7 +231,7 @@ $this->_dump($this->_raw, 'after ');
 
 		/* starting with the "right-most" column, each JApiHelperEntry will
 		 * take care of it's siblings and will populate $this->row, EXCEPT
-		 * revision and doc status which are taken care of later.
+		 * revision and doc status which are taken care of by default.
 		 */
 		$siblings = $this->__toArray();
 
@@ -226,9 +245,39 @@ $this->_dump($this->_raw, 'after ');
 			$this->addEntry($col, $siblings);
 		}
 
+		/* here they are: the defaults */
 		$this->addEntry('home', array());
 		$this->addEntry('rev',  array());
 		$this->addEntry('stat', array());
+
+		/* and these should have a corresponding phpDoc page,
+		 * we need the schema of the "lowest" item to generate
+		 * its URI to the API web site. */
+		foreach ( $this->apicols as $col) {
+			$schema = '';
+			switch (true)
+			{
+			case isset($this->row['func']):
+				$schema = 'func';
+				break;
+			case isset($this->row['meth']):
+				$schema = 'meth';
+				break;
+			case isset($this->row['cls']):
+				$schema = 'cls';
+				break;
+			case isset($this->row['sub']):
+				$schema = 'sub';
+				break;
+			case isset($this->row['pack']):
+				$schema = 'pack';
+				break;
+			}
+		}
+
+		if ($schema != '') {
+			$this->addEntry('doc', $this->row[$schema]);
+		}
 	}
 
 	/**
@@ -254,24 +303,43 @@ $this->_dump($this->_raw, 'after ');
 	 * pushes a new column to the $row
 	 */
 	function &addEntry($col, $siblings=array()) {
+
 		if ( isset($this->row[$col]) ) {
 			return $this->row[$col];
 		}
+		// if it's not a known column, we can't create an object for it
+		if ( !isset($this->_cols[$col]) ) {
+			return $col;
+		}
+$this->_dump($siblings, "addEntry($col)");
+
 		$classname = 'JApiHelper'.ucwords($col);
+
 		$this->row[$col] =& new $classname($this, $siblings);
 		$this->$col = $this->row[$col]->label;
+
 		return $this->row[$col];
 	}
 
+	/**
+	 * return the Entry object given by its column name.
+	 * @param string $col
+	 * @see $_cols
+	 */
 	function getEntry($col) {
 		return @$this->row[$col];
 	}
+
+	/**
+	 * Return a property of an Entry object or empty string
+	 * @param string $col  column key
+	 * @param string $prop property name
+	 */
 	function getEntryProp($col, $prop) {
 		if ( isset($this->row[$col]) ) {
 			return $this->row[$col]->$prop;
-		} else {
-			return '';
 		}
+		return '';
 	}
 
 	/**
@@ -280,7 +348,7 @@ $this->_dump($this->_raw, 'after ');
 	function render() {
 		// no renderer, no output
 		if (!is_object($this->_renderer)) return false;
-
+echo '<hr>render()';
 		$this->_renderer->table_open();
 
 		$this->renderTableRow(true);
@@ -288,63 +356,91 @@ $this->_dump($this->_raw, 'after ');
 
 		$this->_renderer->table_close();
 
+		if ( isset($_SERVER['SCRIPTBASE']) ) {
+			$this->_renderer->doc .= implode('  * ', array_keys($this->row));
+		}
+
+
 		return true;
 	}
 
+	/**
+	 * @param bool $head true = <th>, false = <td>
+	 */
 	function renderTableRow($head = true) {
 		$this->_renderer->tablerow_open();
 
 		/* loop thru the list of columns */
 		foreach ( array_keys($this->_cols) as $col) {
-			if ( $entry =& $this->getEntry($col) ) {
+			if ( $entry = $this->getEntry($col) ) {
 				$decorator = 'decorate_'.$this->_format;
 				$this->$decorator($entry, $head);
 				$this->_renderer->doc .= DOKU_LF;
+echo "<li> $col: $entry->type / $entry->value /".gettype($entry);
 			}
 		}
 
 		$this->_renderer->tablerow_close();
-
 	}
 
 	/**
 	 * XHTML Decorator for the various columns
 	 *
+	 * @param JApiHelperEntry $instance object representing a column entry
 	 * @param bool $head true = <th>, false = <td>
 	 */
-	function decorate_xhtml(&$instance, $head = true)
+	function decorate_xhtml(&$entry, $head = true)
 	{
-		if ( empty($instance->value) ) {
+		if ( empty($entry->value) ) {
 			return;
 		}
 
 		$html = '';
+
 		if ($head) {
-			$html .= $this->_cols[$instance->type];
+			$html .= $this->_cols[$entry->type];
 		} else {
-			if ($instance->icon) {
-				$html .= $this->getIcon($instance->type);
+			if ($entry->icon) {
+				$html .= $this->getIcon($entry->type);
+				$html  = rtrim($html);
 			}
-			$value = $instance->getFormattedValue($this);
+			$value = $entry->getFormattedValue($this);
 		}
 
 		list($open_func, $close_func) = ($head)
 								? array('tableheader_open', 'tableheader_close')
 								: array('tablecell_open',   'tablecell_close');
 
-		# TODO: find name of the CSS "center" class to be use as the 2nd argument
+		# TODO: need the name of the CSS "center" class ("???align") to be use as the 2nd argument
 		$this->_renderer->$open_func(1 /*, 'center'*/ );
 
 		if ( !$head ) {
 			if (is_array($value)) {
 				// sth. like 'internallink', 'externallink'
-				$func  = array_shift($value);
-				$html .= call_user_func_array( array($this->_renderer, $func), $value);
+				switch ( array_shift($value) ) {
+
+				case 'internallink':
+				# Doku_Renderer_xhtml::internallink($id, $name = NULL, $search=NULL,$returnonly=false)
+					$html .= $this->_renderer->internallink($value[0], $value[1], null, true);
+					break;
+
+				case 'externallink':
+				# Doku_Renderer_xhtml::externallink($url, $name = NULL)
+//					$html .= $this->_renderer->externallink($value['url'], $value['name']);
+					$html .= sprintf('<a href="%s" title="API: %s">%s</a>',
+									$value['url'], $value['url'], $value['name']);
+					break;
+
+				default:
+					$html .= $value[1];
+				}
 			} else {
 				$html .= $value;
 			}
 		}
-		$this->_renderer->doc .= $html;
+
+		/* drop linefeeds so icon and text lign up nicely */
+		$this->_renderer->doc .= str_replace(DOKU_LF, '', $html);
 
 		$this->_renderer->$close_func(1 /*, 'center'*/ );
 	}
@@ -352,26 +448,30 @@ $this->_dump($this->_raw, 'after ');
 	/**
 	 * Nifty little icons for the table cells.
 	 * Theory of operation:
-	 	$this->_renderer->externalmedia ($src, $title=NULL, $align=NULL,
-	 						$width=NULL, $height=NULL,
-	 						$cache=NULL, $linking=NULL)
+	 * <code>
+	 *	$this->_renderer->externalmedia ($src, $title=NULL, $align=NULL,
+	 *						$width=NULL, $height=NULL,
+	 *						$cache=NULL, $linking=NULL)
+	 * </code>
 	 * Practice: no go! The results suck, hence this routine currently
-	 * spits out a "native" HTML image.
-	 * @todo see if we can't have all these icons in the Wiki meadi folder,
-	 * instead of loading them from api.joomla.org
+	 * spits out its own "native" HTML image element which aligns nicely.
+	 *
+	 * @todo see if we can't have all these icons in the "local" Wiki
+	 * media folder, instead of loading them remote from api.joomla.org,
+	 * a not-so-nice external dependency.
+	 * @see $_icon_uri
 	 */
 	function getIcon($col, $align='left') {
 		$image = '';
 		if ( isset($this->_icons[$col]) ) {
-			// $func = 'externalmedia' or 'internalmedia'
+			/* $func = 'externalmedia' or 'internalmedia' */
 			list($func, $src) = $this->_icons[$col];
-#			$this->_renderer->$func($src, @$this->_cols[$col], $align, NULL,NULL, true, 'nolink');
+//			$this->_renderer->$func($src, @$this->_cols[$col], $align, NULL,NULL, true, 'nolink');
 
 			$image .= '<img src="'. $this->_icon_uri . $src
 						.'" alt="'. $this->_cols[$col]
 						.'" title="'. $this->_cols[$col]
-						.'" align="bottom" />';
-			$image .= '&nbsp;';
+						.'" align="bottom" />&nbsp;';
 
 		}
 		return $image;
@@ -379,6 +479,8 @@ $this->_dump($this->_raw, 'after ');
 
 	/**
 	 * gets the default name of a package or subpackage
+	 * @param string $key    A main J! Package
+	 * @param string $level 'pack' or 'sub'
 	 */
 	function getPack($key, $level)
 	{
@@ -386,13 +488,39 @@ $this->_dump($this->_raw, 'after ');
 		return $this->_packs[$key][$item];
 	}
 
+	/**
+	 * Return the phpDoc base URI for the API web site
+	 */
+	function getApiUri()
+	{
+		return $this->_api_uri;
+	}
 
 	/**
 	 * Internal Toolz
 	 */
 
+	/**
+	 * Return file and pathname information for unresolvable entries,
+	 * such as global functions, helper classes, abstract classes.
+	 * @param string $type column type or '*' to return all hints
+	 */
+	function getHints($type='*')
+	{
+		static $hints = null;
+		if ( null === $hints ) {
+			// yep, hints.php IS a .ini file.
+			$hints = parse_ini_file(dirname(__FILE__) . '/hints.php', true);
+		}
+		return ($type=='*') ? $hints : @$hints[$type];
+	}
+
+	/**
+	 * attempts to clean up the parameter list and repopulate an array
+	 * in a reasonably manner a stupid programm script can deal with.
+	 */
 	function _cleanup() {
-		/* goodie: lazy rev-date column shift.
+		/* goodie: lazy revision date column shift.
 		 * expected order: pack,sub,cls,rev,stat
 		 * push 'rev' to it's intended position (3) and make 'stat' (4)
 		 * whatever follows and have JApiHelperStat deal with it ;) */
@@ -413,19 +541,28 @@ $this->_dump($this->_raw, 'after ');
 		if ( $this->_syntax == 'JAPI' ) {
 			$this->_raw = $stack + array_fill(0, 5, '-');
 		} else {
-			// @todo implement "inline" {#JREF class:method #} variant
+			// @todo implement "inline" link syntax variant
+			//    {#JREF class::method #}
 			// using only pack,sub,[cls,meth|func|cons]
 			$this->_raw = $stack + array_fill(0, 5, '-');
 		}
 		ksort($this->_raw);
 	}
 
+	/**
+	 * dumps $that with $rem as a tiny remark in the deprecated but
+	 * handy <xmp> HTML element.
+	 */
 	function _dump($that, $rem='') {
+		// local machine debug flag:
+		// add to httpd.conf `SetEnv SCRIPTBASE whatever`
+		if ( !isset($_SERVER['SCRIPTBASE']) ) return;
+
 		if (!empty($rem)) $rem = "$rem\n";
 		echo '<xmp style="clear:both">'. $rem . print_r($that, 1) .'</xmp>';
 	}
 
-	/** PHP 5.2+ */
+	/** PHP 5.2+ stuff */
 	function __toString() {
 		$str = '';
 		foreach (array_keys($this->_cols) as $col) {
@@ -452,6 +589,7 @@ $this->_dump($this->_raw, 'after ');
 
 
 /**
+ * Root class all Entry-Helper extend from.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -475,18 +613,30 @@ var $icon = false;
 /** @var string  wiki link */
 var $wiki = null;
 
-/** @var bool  this Entry objects is a legacy */
+/** @var bool  this Entry object is a legacy */
 var $legacy = false;
 
 /** @var array  siblings of this column, e.g. Pack to Sub or Meth */
 var $siblings = null;
 
-/** @var string  phpDoc URI scheme */
-var $scheme = '';
+/** @var string  phpDoc URI schema, @see JApiHelperDoc */
+var $schema = null;
 
-/** @var string  filename used in $scheme */
+/** @var string  phpDoc URI, populated by {@link JApiHelperDoc} */
+var $uri = '';
+
+/** @var string  filename used in $schema to generate $uri */
 var $filename = false;
 
+	/**
+	 * Creates a new object representing a table column.
+	 * $siblings may be added by other column objects to complement the table,
+	 * i.e. the 'cls' column object may add 'meth' or 'cons' sibling as
+	 * given by the JAPI params.
+	 *
+	 * @param JApiHelper $helper Reference of the main JApiHelper instance.
+	 * @param array $siblings column name(s) related to the entry
+	 */
 	function JApiHelperEntry(&$helper, $siblings=array() ) {
 		$this->__construct($helper, $siblings);
 	}
@@ -505,6 +655,10 @@ var $filename = false;
 		}
 	}
 
+	/**
+	 * Will take care than columns are only added once to the JApiHelper.
+	 * @uses JApiHelper::addEntry()
+	 */
 	function spreadSiblings() {
 		$helper =& JApiHelper::getInstance();
 		foreach ( (array)$this->siblings as $sibling => $value) {
@@ -518,10 +672,13 @@ var $filename = false;
 		}
 	}
 
+/*
+ * Interface methods; override in derived classes if necessary
+ */
 	/**
-	 * Interface methods to override in derived classes if necessary
+	 * A value and its incarnations.
+	 * @param string $value The incoming value for this Entry
 	 */
-	/** a value and its incarnations */
 	function setValue($value) {
 		$this->value =
 		$this->label =
@@ -529,7 +686,12 @@ var $filename = false;
 		$this->uri   = str_replace('.', '-', $value);
 	}
 
-	/* override in subclasses */
+	/**
+	 * gets the formatted value - what else?
+	 * @param JApiHelper $helper Reference of the main JApiHelper instance.
+	 * @return string|array
+	 * @see JApiHelper::decorate_xhtml()
+	 */
 	function getFormattedValue(&$helper) {
 		return $this->value;
 	}
@@ -537,6 +699,8 @@ var $filename = false;
 }
 
 /**
+ * Creates the link to the API Referende Home Page.
+ *
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -550,17 +714,21 @@ var $icon      = true;
 		parent::__construct($helper, $siblings);
 	}
 
+	function setValue($value) {
+		parent::setValue('Home');
+	}
+
 	function getFormattedValue(&$helper) {
 		return array(
 				'internallink',
 				sprintf('[[%s]]', $this->namespace),
-				$this->label,
-				null, true
-			);
+				$this->label
+				);
 	}
 }
 
 /**
+ * Creates the link for the package index page.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -570,7 +738,7 @@ var $type   = 'pack';
 var $icon   = true;
 
 # /classtrees_Joomla-Framework.html
-var $scheme = 'classtrees_%pack%.html';
+var $schema = 'classtrees_%pack%.html';
 
 	function JApiHelperPack(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
@@ -590,13 +758,15 @@ var $scheme = 'classtrees_%pack%.html';
 		return array(
 				'internallink',
 				sprintf('[[%s:%s]]', $helper->namespace, $this->value),
-				$this->label,
-				null, true
+				$this->label
 			);
 	}
 }
 
 /**
+ * Generates the link for the Subpackage index page in the Wiki.
+ * The phpDoc URI will point to the Package index in lack of such.
+ *
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  * @todo using what $format? check/decide whether we use:
@@ -613,12 +783,12 @@ var $format = array(
 		'subpackage' => '[[%ns%:%pack%:%sub%:%sub%]]',
 		/* this one points to an index.txt in the subpackage folder*/
 		'index'      => '[[%ns%:%pack%:%sub%:index]]',
-		/* this one points to the package index using a section link */
+		/* this one points to the package index using an anchor */
 		'section'    => '[[%ns%:%pack%#%sub%]]',
 	);
 
-# /Joomla-Framework/Environment/_libraries---joomla---environment---request.php.html
-var $scheme = '%pack%/%sub%/_libraries---joomla---%sub%---%filename%.php.html';
+/** can't create a phpDoc link for something that doesn't exist */
+var $schema = null;
 
 	function JApiHelperSub(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
@@ -627,7 +797,7 @@ var $scheme = '%pack%/%sub%/_libraries---joomla---%sub%---%filename%.php.html';
 	function getFormattedValue(&$helper) {
 		$pack = $helper->getEntryProp('pack', 'wiki');
 
-		// temporary; late ask $helper what format to use
+		// temporary; should ask $helper what format to use based on its configuration
 		$format = $this->format['section'];
 
 		$link = str_replace(
@@ -636,12 +806,13 @@ var $scheme = '%pack%/%sub%/_libraries---joomla---%sub%---%filename%.php.html';
 					$format);
 
 		$link = str_replace('::', ':', $link);
-		return array( 'internallink', $link, $this->label, null, true);
+		return array( 'internallink', $link, $this->label);
 
 	}
 }
 
 /**
+ * Generates the link for a class.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -651,15 +822,15 @@ var $type   ='cls';
 var $icon   = true;
 
 # /Joomla-Framework/Environment/JRequest.html
-var $scheme = '%pack%/%sub%/%cls%.html';
+var $schema = '%pack%/%sub%/%cls%.html';
 var $helper = false;
 
 /**
- * these files(!) have a 'Helper' companion class
- * located in it's own file ... like this one ;)
+ * these files(!) have a 'Helper' companion class usually located in
+ * it's own file ... like this one ;)
  * other classes take their JWhateverHelper with them.
- * We need to know this to create the phpDocumentor URI
- * for such helpers which requires the filename.
+ * We need to know this to create the phpDocumentor URI for
+ * such helpers which requires a filename and location.
  */
 var $_external_helpers = array(
 # 	sourcefile    => rel. location of "helper.php"
@@ -681,17 +852,18 @@ var $_external_helpers = array(
 	 * Value can have any of the following values:
 	 * - ClassName
 	 * - ClassName::methodName
+	 * - ClassName::		alias for __constructor
 	 * - ::functionName
 	 *
 	 * @todo: add code to find if the class is a'*Helper' via
-	 * 		isHelperClass(), and/or if it's a known abstract class,
+	 * 		guessHelperClass(), and/or if it's a known abstract class,
 	 * 		to create the correct URI for phpDocumentor
 	 */
 	function setValue($value) {
 		$meth   = false;
 		$constructor = false;
 		$helper =& JApiHelper::getInstance();
-
+		$v = $value;
 		if ( $value ) {
 			// just in case
 			$value = trim($value, '()');
@@ -699,10 +871,10 @@ var $_external_helpers = array(
 				list($value, $meth) = explode('::', $value);
 			}
 			// "Classname::"
-			$constructor = empty($meth);
+			$constructor = empty($meth) && is_string($meth);
 		}
 
-		// set with 'Class::meth' or '::function'
+		// set if 'Class::method' or '::functionName'
 		if ( $meth ) {
 			$sibling = 'meth';
 		}
@@ -727,28 +899,35 @@ var $_external_helpers = array(
 			$helper->$sibling = $meth;
 			// add found $sibling for spreadSiblings()
 			$this->siblings[$sibling] = $meth;
-			$helper->addEntry($sibling, $meth);
 		}
 
 		parent::setValue($value);
+
+		$this->guessHelperClass();
 	}
 
 	function getFormattedValue(&$helper) {
 		$pack = $helper->getEntryProp('pack', 'wiki');
 		$sub  = $helper->getEntryProp('sub', 'wiki');
+		// might contain __constructor
+		if ( $meth = $helper->getEntryProp('meth', 'wiki') ) {
+echo '<br> ** getFormattedValue ', $meth;
+		}
 		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $this->value);
 		$link = str_replace('::', ':', $link);
-		return array( 'internallink', $link, $this->label, null, true);
+		return array( 'internallink', $link, $this->label);
 	}
 
 	/**
-	 * @todo harden the algo if somehow possible.
+	 * @todo harden the algo if somehow possible
+	 * @todo add fallback to hints.php
+	 * @todo add icon toggle if abstract class is present
 	 *
-	 * builds a filename candidate likely to containing the "JWhatever"
-	 * and it's JWheteverHelper.
-	 * long live smart nameing schemes ;)
+	 * builds a filename candidate likely to contain both, "JWhatever"
+	 * and its "JWheteverHelper" class.
+	 * long live smart nameing schemas ;)
 	 */
-	function isHelperClass() {
+	function guessHelperClass() {
 		if ( substr($this->value, 0, 1) != 'J' ) {
 			return;
 		}
@@ -757,12 +936,13 @@ var $_external_helpers = array(
 		array_shift($sniff);
 		$parts = count($sniff) / 2;
 
-		// JWhatever => whatever
+		// blatant assumption: JWhatever => whatever
 		$this->filename = strtolower($sniff[0][0] . $sniff[1][0]);
 
-		// this could indicate an helper class, but there
-		// are of course exceptions to every scheme ;)
+		// this could indicate a helper class, but there
+		// are of course exceptions to every schema ;)
 		if ($parts >= 2) {
+			// 'H' + 'elper'
 			$helper = $sniff[2][0] . $sniff[3][0];
 			if ($helper == 'Helper') {
 				$this->helper = true;
@@ -772,11 +952,16 @@ var $_external_helpers = array(
 			} else {
 				$this->filename .= '.php';
 			}
+		} else {
+			$this->filename .= '.php';
 		}
+
+		return $this->filename;
 	}
 }
 
 /**
+ * Generates the link for a class' member method.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -784,9 +969,10 @@ class JApiHelperMeth extends JApiHelperEntry
 {
 var $type   = 'meth';
 var $icon   = true;
+var $constructor = false;
 
 # /Joomla-Framework/Environment/JRequest.html#getVar
-var $scheme = '%pack%/%sub%/%cls%.html#%meth%';
+var $schema = '%pack%/%sub%/%cls%.html#%meth%';
 
 	function JApiHelperMeth(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
@@ -794,12 +980,21 @@ var $scheme = '%pack%/%sub%/%cls%.html#%meth%';
 
 	function setValue($value) {
 		parent::setValue($value);
-		die($value);
+		$this->constructor = ( $value == '__construct' );
 	}
 
+	function getFormattedValue(&$helper) {
+		$pack = $helper->getEntryProp('pack', 'wiki');
+		$sub  = $helper->getEntryProp('sub', 'wiki');
+		$cls  = $helper->getEntryProp('cls', 'wiki');
+		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $cls.'-'.$this->value);
+		$link = str_replace('::', ':', $link);
+		return array( 'internallink', $link, $this->label);
+	}
 }
 
 /**
+ * Generates the link for a global function.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
@@ -807,6 +1002,8 @@ class JApiHelperFunc extends JApiHelperMeth
 {
 var $type   = 'func';
 var $icon   = true;
+# /Joomla-Framework/_loader.php.html#functionjimport
+var $schema = '%pack%/_%filename%.html#function%func%';
 
 	function JApiHelperFunc(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
@@ -817,13 +1014,18 @@ var $icon   = true;
 		$sub  = $helper->getEntryProp('sub', 'wiki');
 		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $this->value);
 		$link = str_replace('::', ':', $link);
-		return array( 'internallink', $link, $this->label, null, true);
+$helper->_dump($this, 'FUNC '.$this->label);
+		return array( 'internallink', $link, $this->label);
 	}
 }
 
 /**
+ * Generates the link for a constant.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
+ * @todo implement if CONSTANTS get documented,
+ * 		there's a section for constants in phpDoc class pages.
+ * 		might be useful for {#JREF#} only
  */
 class JApiHelperCons extends JApiHelperMeth
 {
@@ -836,18 +1038,24 @@ var $icon   = true;
 }
 
 /**
+ * Generates the revision date.
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
 class JApiHelperRev extends JApiHelperEntry
 {
 var $type   = 'rev';
-var $scheme = null;
+var $schema = null;
 
 	function JApiHelperRev(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
 	}
 
+	/**
+	 * Using a ISO date input, reformats the date using Joomla!s
+	 * date function: mosFormatDate in J! 1.x, JHTML::date in J! 1.5
+	 * @param string $value an ISO date YYYY-MM-DD
+	 */
 	function setValue($value) {
 		// numbers only
 		if ( !ctype_digit(str_replace('-', '', $value)) ) {
@@ -859,7 +1067,7 @@ var $scheme = null;
 			# { comment this part, if we should keep the input ISO format
 			if ( class_exists('JHTML') && class_exists('JText') ) {
 				/* J! 1.5+ */
-				$value = JHTML::Date($value, JText::_( 'DATE_FORMAT_LC' ) );
+				$value = JHTML::date($value, JText::_( 'DATE_FORMAT_LC' ) );
 			} else if ( function_exists('mosFormatDate') ) {
 				/* J! 1.0 */
 				$value = mosFormatDate($value, @constant('_DATE_FORMAT_LC') );
@@ -875,7 +1083,7 @@ var $scheme = null;
 	/**
 	 * 'Last reviewed' label mappings
 	 *
-	 * @param string   $value any of 'never',... -- that's it so far
+	 * @param string   $value any of 'never',... -- well, that's it so far
 	 * @static
 	 * @staticvar array $labels
 	 * @todo l10n, read from config file
@@ -894,13 +1102,16 @@ var $scheme = null;
 }
 
 /**
+ * Generates the documentation status given by its abbreviation or the default
+ * if not a match.
+ *
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
 class JApiHelperStat extends JApiHelperEntry
 {
 var $type   = 'stat';
-var $scheme = null;
+var $schema = null;
 
 	function JApiHelperStat(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
@@ -930,8 +1141,89 @@ var $scheme = null;
 		if ( !in_array($value, array_keys($labels)) ) {
 			$value = key($labels);
 		}
-		return $labels[ $value ];
+		return str_replace(' ', '&nbsp;', $labels[ $value ]);
 	}
+}
+
+/**
+ * Generates the link for the phpDoc page
+ * @package 	Joomla.Documentation
+ * @subpackage 	Utilities
+ */
+class JApiHelperDoc extends JApiHelperEntry
+{
+var $type   = 'doc';
+var $icon   = true;
+
+/** copy of JApiHelper::$_cols_api */
+var $cols = array();
+
+/**
+ * although declared as an array for consistancy, the single item
+ * is an instance of THE entry object being documented. setValue()
+ * and getFormattedValue() will query this item to read its $schema,
+ * $uri, and $label. */
+var $siblings = array();
+
+	function JApiHelperDoc(&$helper, &$sibling) {
+		parent::__construct($helper, array(0 => &$sibling) );
+	}
+
+	function setValue($value) {
+		// no URI schematics? leave.
+		if ( empty($this->siblings[0]->schema) ) {
+			parent::setValue( null );
+			return;
+		}
+
+		// spread some defaults
+		parent::setValue( $this->siblings[0]->label );
+
+		// steal The Entry's schema
+		$this->schema = $this->siblings[0]->schema;
+		$this->uri    = $this->schema;
+
+		$helper = JApiHelper::getInstance();
+		$this->cols = $helper->apicols;
+
+		foreach ($this->cols as $entry) {
+			if ( $uri = $helper->getEntryProp($entry, 'uri') ) {
+				$this->uri = str_replace("%{$entry}%", $uri, $this->uri);
+			}
+		}
+
+		if ( in_array($this->siblings[0]->type, array('cls','func')) ) {
+			if ( $filename = $helper->getEntryProp($entry, 'filename') ) {
+				$this->uri = str_replace("%filename%", $filename, $this->uri);
+			}
+		}
+
+		// entry type specific adjustments
+		switch ($this->siblings[0]->type)
+		{
+			case 'func':
+			case 'meth':
+				$this->label .= '()';
+				break;
+		}
+
+		// if there's still a %placeholder%, try the static lookup table
+		if ( strpos($this->uri, '%') !== false) {
+			$hints = $helper->getHints($this->siblings[0]->type);
+			if ( isset($hints[$this->value]) ) {
+				list($filename, $location) = explode(' ', $hints[$this->value]);
+				$this->uri = str_replace("%filename%", $filename, $this->uri);
+				$this->uri = str_replace("%location%", $location, $this->uri);
+			}
+		}
+	}
+
+	function getFormattedValue(&$helper) {
+		return array( 'externallink',
+					'url'=> $helper->getApiUri() . $this->uri,
+					'name'=> $this->label);
+	}
+
 }
 
 /**
@@ -944,7 +1236,7 @@ class JApiHelperLegacyCls extends JApiHelperCls
 var $type ='cls';
 
 # /Joomla-Legacy/1-5/_joomla---common---legacy---classes.php.html#classmosHTML
-var $scheme = '';
+var $schema = '';
 	function JApiHelperLegacyCls(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
 	}
@@ -960,10 +1252,9 @@ class JApiHelperLegacyFunc extends JApiHelperFunc
 var $type ='func';
 
 # /Joomla-Legacy/1-5/_joomla---common---legacy---functions.php.html#functioninitEditor
-var $scheme = '';
+var $schema = '';
 	function JApiHelperLegacyFunc(&$helper, $siblings=array() ) {
 		parent::__construct($helper, $siblings);
 	}
 }
 
-?>
