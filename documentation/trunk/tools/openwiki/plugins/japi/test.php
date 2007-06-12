@@ -1,8 +1,18 @@
 <?php
 /**
- * Test script for helper.php
- * Requires PHP 5 for the __call() method.
+ * Requires PHP 5!
+ * Test script for helper.php. This MUST NOT be published to the live webserver
+ * that runs J! and the Wiki! It contains a stub class to mimic the behaviour
+ * of the Wiki XHTML parser and calls a series of {JAPI} tags for evaluation
+ * and: tests!
+ *
  * /components/com_openwiki/lib/plugins/japi/test.php
+ *
+ * If you get this error:
+ *   Parse error: syntax error, unexpected T_STATIC, expecting
+ *   T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in
+ *   <local-path-to>/plugins/japi/test.php on line 26
+ * you're NOT running PHP 5.
  *
  * @license CC-SA-NC Creative Commons Share Alike Non Commercial
  * @author  CirTap <cirtap-joomla@webmechanic.biz>
@@ -17,7 +27,7 @@ define( '_JEXEC', 'certainly');
 define( 'DOKU_LF', "\r\n");
 define( 'DOKU_TAB', "\t");
 
-include( dirname(__FILE__) . '/helper.php');
+require_once( dirname(__FILE__) . '/helper.php');
 
 ini_set('html_errors', 'On');
 /* stub */
@@ -32,23 +42,24 @@ public $tags = array(
 	'{#JAPI Joomla.Framework 2007-02-01 #}',
 	'{#JAPI Joomla.Framework 2007-02-01 PR #}',
 //
-//	'{#JAPI Joomla.Framework Environment #}',
+	'{#JAPI Joomla.Framework Environment #}',
 	'{#JAPI Joomla.Framework Environment 2007-02-01 Classname WIP #}',
 //
 	'{#JAPI Joomla.Framework Environment JSession #}',
 	'{#JAPI Joomla.Framework Environment JSession 2007-02-01 FIN #}',
 //
+	'{#JAPI Joomla.Framework Environment JSession:: #}',
 	'{#JAPI Joomla.Framework Environment JSession::close #}',
-//	'{#JAPI Joomla.Framework -           ::jimport #}',
+	'{#JAPI Joomla.Framework -           ::jimport #}',
 
-	'{#JAPI Joomla.Legacy 1.5 mosHTML #}',
+//	'{#JAPI Joomla.Legacy 1.5 mosHTML #}',
 //	'{#JAPI -             -   mosHTML #}',
 //	'{#JAPI Joomla.Legacy 1.5 mosHTML::BackButton #}',
 //	'{#JAPI -             -   mosHTML::BackButton #}',
 //	'{#JAPI Joomla.Legacy 1.5 ::mosMainBody #}',
 //	'{#JAPI -             -   ::mosMainBody #}',
 
-//	'{#JAPI Joomla Utilities Foo      - -	#}',
+	'{#JAPI Joomla Utilities Foo      - -	#}',
 //	'{#JAPI Joomla Utilities Foo::bar - WIP #}',
 //	'{#JAPI Joomla Utilities Foo::bar - PR  #}',
 //	'{#JAPI Joomla Utilities Foo::bar - IR  #}',
@@ -67,7 +78,7 @@ public $tags = array(
 		$match = trim($match, '{}#');
 		$match = preg_split('/[\s]+/', trim($match), -1, PREG_SPLIT_NO_EMPTY);
 
-echo '<hr><pre>handle(', implode(' ', $match),')</pre>';
+echo '<hr><pre>handle(<b>', implode(' ', $match),'</b>)</pre>';
 
 		// drop '#JAPI' tag
 		array_shift($match);
@@ -149,4 +160,3 @@ echo '<hr><pre>handle(', implode(' ', $match),')</pre>';
 $Test = new TestCaseHelper_xhtml;
 $Test->connectTo();
 
-?>
