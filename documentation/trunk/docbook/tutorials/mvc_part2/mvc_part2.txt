@@ -1,0 +1,231 @@
+
+Chapter 1. Developing a Model-View-Controller Component - Part 2 - Adding a
+Model
+
+Ian MacLennan
+
+   Table of Contents
+
+   [1]Introduction
+   [2]Creating the Model
+   [3]Using the Model
+
+        [4]Adding the File to the Package
+
+   [5]Conclusion
+   [6]Contributors
+   [7]Download
+
+Introduction
+
+   In the first tutorial of this series, creating a simple
+   view-controller component using the Joomla! 1.5 CMS framework was
+   demonstrated.
+
+   In the first tutorial, the greeting was hardcoded into the view. This
+   doesn't follow the MVC pattern exactly because the view is intended to
+   only display the data, and not contain it.
+
+   In this second part of the tutorial we will demonstrate how to move
+   this out of the view and into a model. In future tutorials we will
+   demonstrate the power and flexibility that this design pattern
+   provides.
+
+Creating the Model
+
+   The concept of model gets its name because this class is intended to
+   represent (or 'model') some entity. In our case, our first model will
+   represent a 'hello', or a greeting. This is in line with our design
+   thus far, because we have one view ('hello'), which is a view of our
+   greeting.
+
+   The naming convention for models in the Joomla! framework is that the
+   class name starts with the name of the component (in our case 'hello',
+   followed by 'model', followed by the model name. Therefore, our model
+   class is called HelloModelHello.
+
+   At this point, we will only model one behaviour of our hello, and that
+   is retrieving the greeting. We will thus have one method, called
+   getGreeting(). It will simply return the string 'Hello, World!'.
+
+   Here is the code for our model class:
+    <?php
+/**
+ * Hello Model for Hello World Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutori
+als:modules/
+ * @license    GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.model' );
+
+/**
+ * Hello Model
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloModelHello extends JModel
+{
+    /**
+    * Gets the greeting
+    * @return string The greeting to be displayed to the user
+    */
+    function getGreeting()
+    {
+        return 'Hello, World!';
+    }
+}
+
+   You will notice a line that starts with jimport. The jimport function
+   is used to load files from the Joomla! framework that are required for
+   our component. This particular statement will load the file
+   /libraries/joomla/application/component/model.php. The '.'s are used
+   as directory separators and the last part is the name of the file to
+   load. All files are loaded relative to the libraries directory. This
+   particular file contains the class definition for the JModel class,
+   which is necessary because our model extends this class.
+
+   Now that we have created our model, we must modify our view so that it
+   uses it to obtain the greeting.
+
+Using the Model
+
+   The Joomla! framework is setup in such a way that the controller will
+   automatically load the model that has the same name as the view and
+   will push it into the view. Since our view is called 'Hello', our
+   'Hello' model will automatically be loaded and pushed into the view.
+   Therefore, we can easily retrieve a reference to our model using the
+   JView::getModel() method.
+
+   Our previous view code contained the lines:
+    $greeting = "Hello World!";
+
+   To take advantage of our model, we change this line to:
+    $model => $this->getModel();
+$greeting = $model->getGreeting();
+
+   The complete view now looks like:
+    <?php
+
+/**
+ * Hello View for Hello World Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutori
+als:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $model => $this->getModel();
+        $greeting = $model->getGreeting();
+        $this->assignRef( 'greeting',   $greeting );
+
+        parent::display($tpl);
+    }
+}
+?>
+
+Adding the File to the Package
+
+   All that remains is to add an entry to the XML file so that our new
+   model will be copied. The Joomla! framework will look for our model in
+   the models directory, so the entry for this file will look like (it
+   should be added to the site section):
+    <filename>models/hello.php</filename>
+
+   Our new hello.xml file will look like:
+    <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+        <name>Hello</name>
+    <!-- The following elements are optional and free of formatting conttraints
+ -->
+    <creationDate>2007 02 22</creationDate>
+    <author>John Doe</author>
+    <authorEmail>john.doe@example.org</authorEmail>
+    <authorUrl>http://www.example.org</authorUrl>
+    <copyright>Copyright Info</copyright>
+    <license>License Info</license>
+    <!--  The version string is recorded in the components table -->
+    <version>Component Version String</version>
+    <!-- The description is optional and defaults to the name -->
+    <description>Description of the component ...</description>
+
+    <!-- Site Main File Copy Section -->
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>hello.php</filename>
+        <filename>controller.php</filename>
+        <filename>views/index.html</filename>
+        <filename>views/hello/index.html</filename>
+        <filename>views/hello/view.html.php</filename>
+        <filename>views/hello/tmpl/index.html</filename>
+        <filename>views/hello/tmpl/default.php</filename>
+        <filename>models/index.html</filename>
+        <filename>models/hello.php</filename>
+    </files>
+
+    <administration>
+        <!-- Administration Menu Section -->
+        <menu>Hello World!</menu>
+
+        <!-- Administration Main File Copy Section -->
+        <!-- Note the folder attribute: This attribute describes the folder
+            to copy FROM in the package to install therefore files copied
+            in this section are copied from /admin/ in the package -->
+        <files folder="admin">
+    <!-- Site Main File Copy Section -->
+            <filename>index.html</filename>
+            <filename>admin.hello.php</filename>
+        </files>
+    </administration>
+</install>
+
+Conclusion
+
+   We now have a simple MVC component. Each element is very simple at
+   this point, but provides a great deal of flexibility and power.
+
+Contributors
+
+   staalanden
+
+Download
+
+   The component can be downloaded at: [8]com_hello2.zip
+
+References
+
+   1. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.introduction
+   2. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.creatingmodel
+   3. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.usingmodel
+   4. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.usingmodel.addingtopackage
+   5. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.conclusion
+   6. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.contributors
+   7. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/mvc_part2.html#mvctutorial2.download
+   8. file://localhost/home/ianmac/joomla/jdocs/trunk/docbook/tutorials/mvc_part2/packages/com_hello2.zip

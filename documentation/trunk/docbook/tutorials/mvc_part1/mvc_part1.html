@@ -1,0 +1,267 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Developing a Model-View-Controller Component - Part 1</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mvctutorial1"></a>Chapter 1. Developing a Model-View-Controller Component - Part 1</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial1.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.requirements">Requirements</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.mvcintroduction">Introduction to Model-View-Controller</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.model">Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.view">View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.controller">Controller</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.mvcimplementation">Joomla! MVC Implementation</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.creatingcomponent">Creating a Component</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.entrypoint">Creating the Entry Point</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingcontroller">Creating the Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingview">Creating the View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingtemplate">Creating the Template</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.wrappingitup">Wrapping It All Up - Creating the hello.xml File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.download">Download</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.introduction"></a>Introduction</h2></div></div></div><p>The new framework in Joomla! 1.5 unleashes a great deal of power for
+    developers. The code has been completely overhauled and cleaned up. This
+    tutorial will guide you through the process of developing a component
+    using this new framework.</p><p>The scope of this project will be to develop a simple Hello World!
+    component. In future tutorials, this simple framework will be built upon
+    to show the full power and versatility of the MVC design pattern in
+    Joomla!</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.requirements"></a>Requirements</h2></div></div></div><p>You need Joomla! 1.5 or greater for this tutorial.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.mvcintroduction"></a>Introduction to Model-View-Controller</h2></div></div></div><p>While the idea behind a component may seem extremely simple, code
+    can quickly become very complex as additional features are added or the
+    interface is customized.</p><p>Model-View-Controller (herein referred to as MVC) is a software
+    design pattern that can be used to organize code in such a way that the
+    business logic and data presentation are separate. The premise behind this
+    approach is that if the business logic is grouped into one section, then
+    the interface and user interaction that surrounds the data can revised and
+    customized without having to reprogram the business logic.</p><p>There are three main parts of an MVC component. They are described
+    here in brief, but for a more thorough explanation, please refer to the
+    links provided at the end of this tutorial.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.mvcintroduction.model"></a>Model</h3></div></div></div><p>The model is the part of the component that encapsulates the
+      application's data. It will often provide routines to manage and
+      manipulate this data in a meaningful way in addition to routines that
+      retrieve the data from the model. In our case, the model will contain
+      methods to add, remove and update information about the books in the
+      database. It will also contain methods to retrieve the list of books
+      from the database. In general, the underlying data access technique
+      should be encapsulated in the model. In this way, if an application is
+      to be moved from a system that utilizes a flat file to store its
+      information to a system that uses a database, the model is the only
+      element that needs to be changed, not the view or the controller.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.mvcintroduction.view"></a>View</h3></div></div></div><p>The view is the part of the component that is used to render the
+      data from the model in a manner that is suitable for interaction. For a
+      web-based application, the view would generally be an HTML page that is
+      returned to the data. The view pulls data from the model (which is
+      passed to it from the controller) and feeds the data into a template
+      which is populated and presented to the user. The view does not cause
+      the data to be modified in any way, it only displays data retrieved from
+      the model.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.mvcintroduction.controller"></a>Controller</h3></div></div></div><p>The controller is responsible for responding to user actions. In
+      the case of a web application, a user action is (generally) a page
+      request. The controller will determine what request is being made by the
+      user and respond appropriately by triggering the model to manipulate the
+      data appropriately and passing the model into the view. The controller
+      does not display the data in the model, it only triggers methods in the
+      model which modify the data, and then pass the model into the view which
+      displays the data.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.mvcimplementation"></a>Joomla! MVC Implementation</h2></div></div></div><p>In Joomla!, the MVC pattern is implemented using three classes:
+    <code class="classname">JModel</code>, <code class="classname">JView</code> and
+    <code class="classname">JController</code>. For more detailed information about
+    these classes, please refer to the API reference documentation
+    (WIP).</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.creatingcomponent"></a>Creating a Component</h2></div></div></div><p>For our basic component, we only require five files:</p><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="filename">hello.php</code> - this is the entry point to
+        our component</td></tr><tr><td><code class="filename">controller.php</code> - this file contains our
+        base controller</td></tr><tr><td><code class="filename">views/hello/view.html.php</code> - this file
+        retrieves the necessary data and pushes it into the template</td></tr><tr><td><code class="filename">views/hello/tmpl/default.php</code> - this is
+        the template for our output</td></tr><tr><td><code class="filename">hello.xml</code> - this is an XML file that
+        tells Joomla! how to install our component.</td></tr></table><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.creatingcomponent.entrypoint"></a>Creating the Entry Point</h3></div></div></div><p>Joomla! is always accessed through a single point of entry:
+      <code class="filename">index.php</code> for the Site Application or
+      <code class="filename">administrator/index.php</code> for the Administrator
+      Application. The application will then load the required component,
+      based on the value of 'option' in the URL or in the POST data. For our
+      component, the URL would be:</p><p><code class="code">index.php?option=com_hello&gt;view=hello</code></p><p>This will load our main file, which can be seen as the single
+      point of entry for our component:
+      <code class="filename">components/com_hello/hello.php</code>.</p><p>The code for this file is fairly typical across components.</p><pre class="programlisting">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * components/com_hello/hello.php
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Require the base controller
+
+require_once( JPATH_COMPONENT.DS.'controller.php' );
+
+// Require specific controller if requested
+if($controller = JRequest::getVar( 'controller' )) {
+    require_once( JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php' );
+}
+
+// Create the controller
+$classname    = 'HelloController'.$controller;
+$controller   = new $classname( );
+
+// Perform the Request task
+$controller-&gt;execute( JRequest::getVar( 'task' ) );
+
+// Redirect if set by the controller
+$controller-&gt;redirect();
+
+?&gt;</pre><p>The first statement is a security check.</p><p>JPATH_COMPONENT is the absolute path to the current component, in
+      our case components/com_hello. If you specifically need either the Site
+      component or the Administrator component, you can use
+      JPATH_COMPONENT_SITE or JPATH_COMPONENT_ADMINISTRATOR.</p><p>DS is the directory separator of your system: either '/' or '\'.
+      This is automatically set by the framework so the developer doesn't have
+      to worry about developing different versions for different server OSs.
+      DS should always be used when referring to files on the local
+      server.</p><p>After loading the base controller, we check if a specific
+      controller is needed. In this component, the base controller is the only
+      controller, but we will leave this here for future use.</p><p><code class="classname">JRequest</code>:getVar() finds a variable in the
+      URL or the POST data. So if our URL is
+      index.php?option=com_hello&gt;controller=controller_name, then we can
+      retrieve our controller name in our component using: echo
+      <code class="classname">JRequest</code>::getVar('controller');</p><p>Now we have our base controller
+      '<code class="classname">HelloController</code>' in com_hello/controller.php,
+      and, if needed, additional controllers like
+      '<code class="classname">HelloControllerController1</code>' in
+      com_hello/controllers/controller1.php. Using this standard naming scheme
+      will make things easy later on:
+      '{Componentname}{Controller}{Controllername}'</p><p>After the controller is created, we instruct the controller to
+      execute the task, as defined in the URL:
+      index.php?option=com_hello&gt;task=sometask. If no task is set, the
+      default task 'display' will be assumed. When display is used, the 'view'
+      variable will decide what will be displayed. Other common tasks are
+      save, edit, new...</p><p>The controller might decide to redirect the page, usually after a
+      task like 'save' has been completed. This last statement takes care of
+      the actual redirection.</p><p>The main entry point (hello.php) essentially passes control to the
+      controller, which handles performing the task that was specified in the
+      request.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.creatingcomponent.creatingcontroller"></a>Creating the Controller</h3></div></div></div><p>Our component only has one task - greet the world. Therefore, the
+      controller will be very simple. No data manipulation is required. All
+      that needs to be done is the appropriate view loaded. We will have only
+      one method in our controller: display(). Most of the required
+      functionality is built into the JController class, so all that we need
+      to do is invoke the JController::display() method.</p><p>The code for the base controller is:</p><pre class="programlisting">    &lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+/**
+ * Hello World Component Controller
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloController extends JController
+{
+    /**
+     * Method to display the view
+     *
+     * @access    public
+     */
+    function display()
+    {
+        parent::display();
+    }
+
+}
+?&gt;    </pre><p>The <code class="classname">JController</code> constructor will always
+      register a display() task and unless otherwise specified (using the
+      registerDefaultTask() method), it will set it as the default
+      task.</p><p>This barebones display() method isn't really even necessary since
+      all it does is invoke the parent constructor. However, it is a good
+      visual clue to indicate what is happening in the controller.</p><p>The <code class="classname">JController</code>::display() method will
+      determine the name of the view and layout from the request and load that
+      view and set the layout. When you create a menu item for your component,
+      the menu manager will allow the administrator to select the view that
+      they would like the menu link to display and to specify the layout. A
+      view usually refers to a view of a certain set of data (i.e. a list of
+      cars, a list of events, a single car, a single event). A layout is a way
+      that that view is organized.</p><p>In our component, we will have a single view called hello, and a
+      single layout (default).</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.creatingcomponent.creatingview"></a>Creating the View</h3></div></div></div><p>The task of the view is very simple: It retrieves the data to be
+      displayed and pushes it into the template. Data is pushed into the
+      template using the <code class="classname">JView</code>::assignRef
+      method.</p><p>The code for the view is:</p><pre class="programlisting">    &lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    HelloWorld
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $greeting = "Hello World!";
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;    </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.creatingcomponent.creatingtemplate"></a>Creating the Template</h3></div></div></div><p>Joomla! templates/layouts are regular PHP files that are used to
+      layout the data from the view in a particular manner. The variables
+      assigned by the JView::assignRef method can be accessed from the
+      template using $this-&gt;propertyname (see the template code below for
+      an example).</p><p>Our template is very simple: we only want to display the greeting
+      that was passed in from the view:</p><pre class="programlisting">    &lt;?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;    </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial1.creatingcomponent.wrappingitup"></a>Wrapping It All Up - Creating the hello.xml File</h3></div></div></div><p>It is possible to install a component manually by copying the
+      files using an FTP client and modifying the database tables. It is more
+      efficient to create a package file that will allow the Joomla! Installer
+      to do this for you. This package file contains a variety of
+      information:</p><table class="simplelist" border="0" summary="Simple list"><tr><td>basic descriptive details about your component (i.e. name),
+          and optionally, a description, copyright and license
+          information.</td></tr><tr><td>a list of files that need to be copied.</td></tr><tr><td>optionally, a PHP file that performs additional install and
+          uninstall operations.</td></tr><tr><td>optionally, an SQL file which contains database queries that
+          should be executed upon install/uninstall</td></tr></table><p>The format of the XML file is as follows:</p><pre class="programlisting">    &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+ &lt;name&gt;Hello&lt;/name&gt;
+ &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+ &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+ &lt;author&gt;John Doe&lt;/author&gt;
+ &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+ &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+ &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+ &lt;license&gt;License Info&lt;/license&gt;
+ &lt;!--  The version string is recorded in the components table --&gt;
+ &lt;version&gt;Component Version String&lt;/version&gt;
+ &lt;!-- The description is optional and defaults to the name --&gt;
+ &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+ &lt;!-- Site Main File Copy Section --&gt;
+ &lt;!-- Note the folder attribute: This attribute describes the folder
+      to copy FROM in the package to install therefore files copied
+      in this section are copied from /site/ in the package --&gt;
+ &lt;files folder="site"&gt;
+  &lt;filename&gt;index.html&lt;/filename&gt;
+  &lt;filename&gt;hello.php&lt;/filename&gt;
+  &lt;filename&gt;controller.php&lt;/filename&gt;
+  &lt;filename&gt;views/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+ &lt;/files&gt;
+ 
+ &lt;administration&gt;
+  &lt;!-- Administration Menu Section --&gt;
+  &lt;menu&gt;Hello World!&lt;/menu&gt;
+  
+  &lt;!-- Administration Main File Copy Section --&gt;
+  &lt;files folder="admin"&gt;
+   &lt;filename&gt;index.html&lt;/filename&gt;
+   &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+  &lt;/files&gt;  
+ &lt;/administration&gt;
+&lt;/install&gt;    </pre><p>If you look closely you will notice that there are some files that
+      will be copied that we have not discussed. These are the
+      <code class="filename">index.html</code> files. An
+      <code class="filename">index.html</code> file is placed in each directory to
+      prevent prying users from getting a directory listing. If there is no
+      <code class="filename">index.html</code> file, some web servers will list the
+      directory contents. This is often undesirable. These files have the
+      simple line:</p><pre class="programlisting">    &lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;    </pre><p>It will simply display a blank page.</p><p>The other file is the <code class="filename">admin.hello.php</code> file.
+      This is the entry point for the admin section of our component. Since we
+      don't have an admin section of our component, it will have the same
+      content as the <code class="filename">index.html</code> files at this point in
+      time.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>mjaz</td></tr><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial1.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello1.zip" target="_top">com_hello1.zip</a></p></div></div></body></html>

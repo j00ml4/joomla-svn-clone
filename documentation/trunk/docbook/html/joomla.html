@@ -1,0 +1,1521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Joomla! Developer Manual</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0" />
+<link rel="stylesheet" media="screen" type="text/css" href="test.css" />
+</head><body><div class="book" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook"></a>Joomla! Developer Manual</h1></div><div><p class="copyright">Copyright © 2006, 2007 Joomla!</p></div><div><div class="legalnotice"><a id="id2527234"></a><p>The Joomla! Developer Manual content is copyright by the
+    individual contributors and can be used in accordance with the
+    <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/" target="_top">Creative
+    Commons License, Attribution-NonCommercial-ShareAlike 2.5</a>
+    </p></div></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="part"><a href="#jdmbook.framework">I. Programming with the Joomla! Framework</a></span></dt><dd><dl><dt><span class="chapter"><a href="#databasetutorial">1. Using the 1.5 Database Libraries</a></span></dt><dd><dl><dt><span class="sect1"><a href="#databasetutorial.getobject">Getting a database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.getobject.system">Get the system database object</a></span></dt><dt><span class="sect2"><a href="#databasetutorial.getobject.custom">Creating a custom database object</a></span></dt></dl></dd><dt><span class="sect1"><a href="#databasetutorial.usage">Using the database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.usage.singlefield">Select one field from one row</a></span></dt></dl></dd></dl></dd></dl></dd><dt><span class="part"><a href="#jdmbook.templates">II. Developing Templates</a></span></dt><dt><span class="part"><a href="#jdmbook.plugins">III. Developing Plugins</a></span></dt><dd><dl><dt><span class="chapter"><a href="#plugintutorial">2. Creating a Plugin for Joomla! 1.5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#plugintutorial.createyourplugin">How to create your own plugin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.installationfile">Creating the installation file</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingplugin">Creating the Plugin</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingpluginlegacy">Creating the Plugin (Legacy Mode)</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.usingplugin">Using Plugins in Your Code</a></span></dt></dl></dd><dt><span class="sect1"><a href="#plugintutorial.conclusion">Conclusion</a></span></dt></dl></dd></dl></dd><dt><span class="part"><a href="#jdmbook.modules">IV. Developing Modules</a></span></dt><dd><dl><dt><span class="chapter"><a href="#helloworldmodule">3. Creating a Hello World Module for Joomla! 1.5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#helloworldmodule.filestructure">File Structure</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.mod_helloworld">Creating mod_helloworld.php</a></span></dt><dd><dl><dt><span class="sect2"><a href="#helloworldmodule.mod_helloworld.completedmodhelloworld">Completed mod_helloworld.php file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#helloworldmodule.helper">Creating helper.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.template">Creating tmpl/default.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.manifest">Creating mod_helloworld.xml</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.conclusion">Conclusion</a></span></dt></dl></dd></dl></dd><dt><span class="part"><a href="#jdmbook.components">V. Developing Components</a></span></dt><dd><dl><dt><span class="chapter"><a href="#mvctutorial1">4. Developing a Model-View-Controller Component - Part 1</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial1.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.requirements">Requirements</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.mvcintroduction">Introduction to Model-View-Controller</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.model">Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.view">View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.controller">Controller</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.mvcimplementation">Joomla! MVC Implementation</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.creatingcomponent">Creating a Component</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.entrypoint">Creating the Entry Point</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingcontroller">Creating the Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingview">Creating the View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingtemplate">Creating the Template</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.wrappingitup">Wrapping It All Up - Creating the hello.xml File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial2">5. Developing a Model-View-Controller Component - Part 2 - Adding a
+  Model</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial2.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.creatingmodel">Creating the Model</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.usingmodel">Using the Model</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial2.usingmodel.addingtopackage">Adding the File to the Package</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial2.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial3">6. Developing a Model-View-Controller Component - Part 3 - Using the
+  Database</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial3.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.retrievingdata">Retrieving the Data</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.creatingsqlfile">Creating the Installation SQL File</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial3.creatingsqlfile.uninstall">Creating the Uninstall SQL File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial3.updatinginstallfile">Updating our Install File</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial4">7. Developing a Model-View-Controller Component - Part 4 - Creating an
+  Administrator Interface</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial4.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.creatingframework">Creating the Basic Framework</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosmodel">Creating the Hellos Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosview">Creating the Hellos View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellostemplate">Creating the Hellos Template</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.addingfunctionality">Adding Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.toolbar">Adding a Toolbar</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.checkboxes">Adding Checkboxes and Links to our Form</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.downanddirty">Getting Down and Dirty: Doing the Real Work</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellocontroller">Creating the Hello Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.helloview">Creating the Hello View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellomodel">Creating the Hello Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.form">Creating the Form</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality">Implementing the Functionality</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.deletingrecord">Deleting a Record</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.canceloperation">Cancelling the Edit Operation</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.download">Download</a></span></dt></dl></dd></dl></dd><dt><span class="appendix"><a href="#jdmbook.apireference">A. Joomla! Framework API Reference</a></span></dt><dt><span class="appendix"><a href="#jdmbook.howtos">B. Development HOWTOs</a></span></dt></dl></div><div class="list-of-figures"><p><b>List of Figures</b></p><dl><dt>7.1. <a href="#mvctutorial4.message">The message that was passed is displayed at the top of the
+            page.</a></dt><dt>B..1. <a href="#howto.loadextensionlibraryfiles.lqmlibrarystructure">Directory Structure of Libraries Folder</a></dt></dl></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook.framework"></a>Part I. Programming with the Joomla! Framework</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#databasetutorial">1. Using the 1.5 Database Libraries</a></span></dt><dd><dl><dt><span class="sect1"><a href="#databasetutorial.getobject">Getting a database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.getobject.system">Get the system database object</a></span></dt><dt><span class="sect2"><a href="#databasetutorial.getobject.custom">Creating a custom database object</a></span></dt></dl></dd><dt><span class="sect1"><a href="#databasetutorial.usage">Using the database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.usage.singlefield">Select one field from one row</a></span></dt></dl></dd></dl></dd></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="databasetutorial"></a>Chapter 1. Using the 1.5 Database Libraries</h2></div><div><div class="author"><h3 class="author"><span class="surname">Louis Landry</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#databasetutorial.getobject">Getting a database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.getobject.system">Get the system database object</a></span></dt><dt><span class="sect2"><a href="#databasetutorial.getobject.custom">Creating a custom database object</a></span></dt></dl></dd><dt><span class="sect1"><a href="#databasetutorial.usage">Using the database object</a></span></dt><dd><dl><dt><span class="sect2"><a href="#databasetutorial.usage.singlefield">Select one field from one row</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="databasetutorial.getobject"></a>Getting a database object</h2></div></div></div><p>
+			This tutorial should provide you with the basics of what you
+			need to know to use the Joomla! database libraries.
+		</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="databasetutorial.getobject.system"></a>Get the system database object</h3></div></div></div><p>
+				The easiest way to get a database object is by getting
+				the system database object returned by the JFactory
+				class. The static method JFactory::getDBO() returns a
+				singleton instance of the system database object
+				regardless of scope and is the recommended way of
+				getting this object.
+			</p><pre class="programlisting">// This gets the database object using the JFactory	class
+$db = &amp;JFactory::getDBO();</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="databasetutorial.getobject.custom"></a>Creating a custom database object</h3></div></div></div><p>
+				Joomla! 1.5 introduces the concept of database drivers
+				which will allow you to get database objects that point
+				to different database sources.
+			</p><pre class="programlisting">// Create a new database object
+$myDB = new JDatabase::getInstance( $options );
+			</pre></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="databasetutorial.usage"></a>Using the database object</h2></div></div></div><p>
+			For the purposes of this tutorial we will use a very simple
+			database table that stores information about dogs. The
+			database table has a dog_id field with a unique integer id
+			field, a name field and a color field for each dog. To keep
+			things simple we have only added three dogs to our database
+			table:
+		</p><div class="orderedlist"><ol type="1"><li><p>Dog 1 is named Spot and is white.</p></li><li><p>Dog 2 is named Fido and is brown.</p></li><li><p>Dog 3 is named Buster and is also brown.</p></li></ol></div><p>
+			The following table represents our database table which we
+			will simply call, dogs.
+		</p><div class="informaltable"><table border="1"><colgroup><col /><col /><col /></colgroup><thead><tr><th align="center">dog_id</th><th align="center">name</th><th align="center">color</th></tr></thead><tbody><tr><td>1</td><td>Spot</td><td>white</td></tr><tr><td>2</td><td>Fido</td><td>brown</td></tr><tr><td>3</td><td>Buster</td><td>brown</td></tr></tbody></table></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="databasetutorial.usage.singlefield"></a>Select one field from one row</h3></div></div></div><p>
+				Lets say for example that I want to find out the name of
+				the second dog in my database table. This is a fairly
+				straightfoward task, I simply need to get the name value
+				in the name field where the dog_id is 2 so lets build an
+				SQL query to do that.
+			</p><pre class="programlisting">SELECT name FROM dogs WHERE dog_id = 2</pre><p>
+				Easy enough, now we need to actually get the value using
+				our database object.
+			</p><div class="orderedlist"><ol type="1"><li><p>
+						First we need to get ourselves a database object
+						that is connected to the database our dogs table
+						is in.
+					</p><pre class="programlisting">// Get the system database object.
+$db = &amp;JFactory::getDBO();</pre></li><li><p>
+						Next we need to set our query to the database
+						object. To do this we will use the setQuery
+						method.
+					</p><pre class="programlisting">// Set our query to the database object.
+$db-&gt;setQuery('SELECT name FROM dogs WHERE dog_id = 2');</pre></li><li><p>Lastly we call the loadResult() method.</p><pre class="programlisting">// Use the loadResult() method to get only the first value from the first row of the result set.
+$name = $db-&gt;loadResult();</pre></li></ol></div></div></div></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook.templates"></a>Part II. Developing Templates</h1></div></div></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook.plugins"></a>Part III. Developing Plugins</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#plugintutorial">2. Creating a Plugin for Joomla! 1.5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#plugintutorial.createyourplugin">How to create your own plugin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.installationfile">Creating the installation file</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingplugin">Creating the Plugin</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingpluginlegacy">Creating the Plugin (Legacy Mode)</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.usingplugin">Using Plugins in Your Code</a></span></dt></dl></dd><dt><span class="sect1"><a href="#plugintutorial.conclusion">Conclusion</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="plugintutorial"></a>Chapter 2. Creating a Plugin for Joomla! 1.5</h2></div><div><div class="author"><h3 class="author"><span class="surname">Unknown Author</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#plugintutorial.createyourplugin">How to create your own plugin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.installationfile">Creating the installation file</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingplugin">Creating the Plugin</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.creatingpluginlegacy">Creating the Plugin (Legacy Mode)</a></span></dt><dt><span class="sect2"><a href="#plugintutorial.createyourplugin.usingplugin">Using Plugins in Your Code</a></span></dt></dl></dd><dt><span class="sect1"><a href="#plugintutorial.conclusion">Conclusion</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="plugintutorial.createyourplugin"></a>How to create your own plugin</h2></div></div></div><p>This How-To should provide you with the basics of what you need to
+    know to develop your own plugin. Most plugins consist of just a single
+    code file but to correctly install the plugin code it must be packaged
+    into an installation file which can be processed by the Joomla!
+    installer.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="plugintutorial.createyourplugin.installationfile"></a>Creating the installation file</h3></div></div></div><p>As with all add-ons in Joomla!, plugins are easily installed as a
+      .zip file (.tar.gz is also supported) but a correctly formatted XML file
+      must be included. As an example, here is the XML installation file for
+      the categories searchbot plugin.</p><pre class="programlisting">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;
+&lt;install version="1.5" type="plugin" group="search"&gt;
+    &lt;name&gt;Categories searchbot&lt;/name&gt;
+    &lt;author&gt;Joomla! Project&lt;/author&gt;
+    &lt;creationDate&gt;November 2005&lt;/creationDate&gt;
+    &lt;copyright&gt;(C) 2005 Open Source Matters. All rights reserved.&lt;/copyright&gt;
+    &lt;license&gt;GNU/GPL&lt;/license&gt;
+    &lt;authorEmail&gt;admin@joomla.org&lt;/authorEmail&gt;
+    &lt;authorUrl&gt;www.joomla.org&lt;/authorUrl&gt;
+    &lt;version&gt;1.1&lt;/version&gt;
+    &lt;description&gt;Allows searching of Categories information&lt;/description&gt;
+    &lt;files&gt;
+        &lt;filename plugin="categories.searchbot"&gt;categories.searchbot.php&lt;/filename&gt;
+    &lt;/files&gt;
+    &lt;params&gt;
+        &lt;param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of search items to return"/&gt;        
+    &lt;/params&gt;
+&lt;/install&gt;</pre><p>As you can see, the system is similar to other Joomla! XML
+      installation files. You only have to look out for the group="xxx" entry
+      in the &lt;install&gt; tag and the extended information in the
+      &lt;filename&gt; tag. This information tells Joomla! into which folder
+      to copy the file and to which group the plugin should be added.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="plugintutorial.createyourplugin.creatingplugin"></a>Creating the Plugin</h3></div></div></div><p>Joomla! 1.5 introduces a new, more object-orientated, way of
+      writing plugins. The old method is still supported for
+      backwards-compatibility (see next section).</p><pre class="programlisting">&lt;?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Import library dependencies
+jimport('joomla.application.plugin.helper');
+
+class &lt;PluginName&gt; extends JPlugin
+{
+   /**
+    * Constructor
+    *
+    * For php4 compatability we must not use the __constructor as a constructor for
+    * plugins because func_get_args ( void ) returns a copy of all passed arguments
+    * NOT references.  This causes problems with cross-referencing necessary for the
+    * observer design pattern.
+    */
+    function &lt;PluginName&gt;( &amp; $subject )
+    {
+            parent::__construct( $subject );
+
+            // load plugin parameters
+            $this-&gt;_plugin = &amp; JPluginHelper::getPlugin( '&lt;EventName&gt;', '&lt;PluginName&gt;' );
+            $this-&gt;_params = new JParameter( $this-&gt;_plugin-&gt;params );
+    }
+
+    /**
+    * Plugin method with the same name as the event will be called automatically.
+    */
+    function &lt;EventName&gt;()
+    {
+        global $mainframe;
+
+        // Plugin code goes here.
+
+        return true;
+    }
+
+}</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="plugintutorial.createyourplugin.creatingpluginlegacy"></a>Creating the Plugin (Legacy Mode)</h3></div></div></div><p>This section describes the legacy method of creating plugins used
+      prior to Joomla! 1.5. Some core Joomla! plugins may still use this
+      method but will be gradually re-written over time. This method is still
+      supported for backwards-compatibility.</p><p>The code that you want executed when the event triggers is written
+      as a PHP function. Prior to the function definition you make a call to
+      the registerEvent() method so that the Joomla! event system associates
+      your function with the appropriate event.</p><p>For example, take a look at this skeleton code:</p><pre class="programlisting">&lt;?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$mainframe-&gt;registerEvent( '&lt;EventName&gt;', '&lt;FunctionName&gt;' );
+
+function &lt;FunctionName&gt;( &lt;ParameterList&gt; ) {
+
+    //Plugin code goes here
+
+}</pre><p>With the function $mainframe→registerEvent() your plugin is
+      registered into the Joomla! event system. This means that when the event
+      called '&lt;EventName&gt;' is later triggered, the function called
+      '&lt;FunctionName&gt;' will be called.</p><p>Now you can write your plugin function code anyway you want. If
+      you want to use parameters, it's no problem, just use them as usual. You
+      can register as many events and plugin functions together in one file as
+      you want. When you're done, your plugin is ready for use.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="plugintutorial.createyourplugin.usingplugin"></a>Using Plugins in Your Code</h3></div></div></div><p>Now that you've created your plugin, you will probably want to
+      call it in your code. You might not; the Joomla! core has a number of
+      built-in events that you might want your plugin code to be registered
+      to. In which case you don't need to do the following.</p><p>If you want to trigger an event then you use code like
+      this:</p><pre class="programlisting">$results = $mainframe-&gt;triggerEvent( '&lt;EventName&gt;', &lt;ParameterArray&gt; );</pre><p>It is important to note that the parameters have to be in an
+      array. The plugin function itself will get the parameters as single
+      values. The return value will consist of an array of return values from
+      the different plugins (so it can also contain multilevel arrays).</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="plugintutorial.conclusion"></a>Conclusion</h2></div></div></div><p>The plugin structure for Joomla! 1.5 is very flexible and powerful.
+    Not only can plugins be used to handle events triggered by the core
+    application and extensions, but plugins can also be used to make third
+    party extensions extensible and powerful.</p></div></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook.modules"></a>Part IV. Developing Modules</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#helloworldmodule">3. Creating a Hello World Module for Joomla! 1.5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#helloworldmodule.filestructure">File Structure</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.mod_helloworld">Creating mod_helloworld.php</a></span></dt><dd><dl><dt><span class="sect2"><a href="#helloworldmodule.mod_helloworld.completedmodhelloworld">Completed mod_helloworld.php file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#helloworldmodule.helper">Creating helper.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.template">Creating tmpl/default.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.manifest">Creating mod_helloworld.xml</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.conclusion">Conclusion</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="helloworldmodule"></a>Chapter 3. Creating a Hello World Module for Joomla! 1.5</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#helloworldmodule.filestructure">File Structure</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.mod_helloworld">Creating mod_helloworld.php</a></span></dt><dd><dl><dt><span class="sect2"><a href="#helloworldmodule.mod_helloworld.completedmodhelloworld">Completed mod_helloworld.php file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#helloworldmodule.helper">Creating helper.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.template">Creating tmpl/default.php</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.manifest">Creating mod_helloworld.xml</a></span></dt><dt><span class="sect1"><a href="#helloworldmodule.conclusion">Conclusion</a></span></dt></dl></div><p>A module is a lightweight and flexible extension that is used for page
+  rendering. They are used for small bits of the page that are generally less
+  complex and are able to be seen across different components.</p><p>You can see many examples of modules in the standard Joomla! install:
+  - menus - Latest News - Login form - and many more.</p><p>This tutorial will explain how to go about creating a simple Hello
+  World module. Through this tutorial you will learn the basic file structure
+  of a module. This basic structure can then be expanded to produce more
+  elaborate modules.</p><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.filestructure"></a>File Structure</h2></div></div></div><p>There are four basic files that are used in the standard pattern of
+    module development: - mod_helloworld.php - This file is the main entry
+    point for the module. It will perform any necessary initialization
+    routines, call helper routines to collect any necessary data, and include
+    the template which will display the module output. - mod_helloworld.xml -
+    This file contains information about the module. It defines the files that
+    need to be installed by the Joomla! installer and specifies configuration
+    parameters for the module. - helper.php - This file contains the helper
+    class which is used to do the actual work in retrieving the information to
+    be displayed in the module (usually from the database or some other
+    source). - tmpl/default.php - This is the module template. This file will
+    take the data collected by mod_helloworld.php and generate the HTML to be
+    displayed on the page.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.mod_helloworld"></a>Creating mod_helloworld.php</h2></div></div></div><p>The mod_helloworld.php file will perform four tasks: # include the
+    helper.php file which contains the class to be used to collect the
+    necessary data # invoke the appropriate helper class method to retrieve
+    the data # include the template to display the output.</p><p>The helper class is defined in our helper.php file. This file is
+    included with a require_once statement:</p><pre class="programlisting">require_once( dirname(__FILE__).DS.'helper.php' );</pre><p>require_once is used because our helper functions are defined within
+    a class, and we only want the class defined once.</p><p>Our helper class has not been defined yet, but when it is, it will
+    contain one method: getHello(). For our basic example, it is not really
+    necessary to do this - the “Hello, World” message that this method returns
+    could simply be included in the template. We use a helper class here to
+    demonstrate this basic technique.</p><p>Our module currently does not use any parameters, but we will pass
+    them to the helper method anyway so that it can be used later if we decide
+    to expand the functionality of our module.</p><p>The helper class method is invoked in the following way:</p><pre class="programlisting">$hello = modHelloWorldHelper::getHello( $params );</pre><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="helloworldmodule.mod_helloworld.completedmodhelloworld"></a>Completed mod_helloworld.php file</h3></div></div></div><p>The complete mod_helloworld.php file is as follows:</p><pre class="programlisting">&lt;?php
+/**
+ * Hello World! Module Entry Point
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Modules
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license        GNU/GPL, see LICENSE.php
+ * mod_helloworld is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Include the syndicate functions only once
+require_once( dirname(__FILE__).DS.'helper.php' );
+
+$hello = modHelloWorldHelper::getHello( $params );
+require( JModuleHelper::getLayoutPath( 'mod_helloworld' ) );</pre><p>The one line that we haven’t explained so far is the first line.
+      This line checks to make sure that this file is being included from the
+      Joomla! application. This is necessary to prevent variable injection and
+      other possible security concerns.</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.helper"></a>Creating helper.php</h2></div></div></div><p>The helper.php file contains that helper class that is used to
+    retrieve the data to be displayed in the module output. As stated earlier,
+    our helper class will have one method: getHello(). This method will return
+    the ‘Hello, World’ message.</p><p>Here is the code for the helper.php file:</p><pre class="programlisting">&lt;?php
+/**
+ * Helper class for Hello World! module
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Modules
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license        GNU/GPL, see LICENSE.php
+ * mod_helloworld is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ */
+class modHelloWorldHelper
+{
+    /**
+     * Retrieves the hello message
+     *
+     * @param array $params An object containing the module parameters
+     * @access public
+     */    
+    function getHello( &amp;$params )
+    {
+        return 'Hello, World!';
+    }
+}</pre><p>There is no rule stating that we must name our helper class as we
+    have, but it is helpful to do this so that it is easily identifiable and
+    locateable.</p><p>More advanced modules might include database requests or other
+    functionality in the helper class method.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.template"></a>Creating tmpl/default.php</h2></div></div></div><p>The default.php file is the template which displays the module
+    output.</p><p>The code for the default.php file is as follows:</p><pre class="programlisting">&lt;?php // no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
+&lt;?php echo $hello; ?&gt;</pre><p>An important point to note is that the template file has the same
+    scope as the mod_helloworld.php file. What this means is that the variable
+    $hello can be defined in the mod_helloworld.php file and then used in the
+    $hello file without any extra declarations or function calls.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.manifest"></a>Creating mod_helloworld.xml</h2></div></div></div><p>The mod_helloworld.xml is used to specify which files the installer
+    needs to copy and is used by the Module Manager to determine which
+    parameters are used to configure the module. Other information about the
+    module is also specified in this file.</p><p>The code for mod_helloworld.xml is as follows:</p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;install type="module" version="1.5.0"&gt;
+    &lt;name&gt;Hello, World!&lt;/name&gt;
+    &lt;author&gt;John Doe&lt;/author&gt;
+    &lt;version&gt;1.5.0&lt;/version&gt;
+    &lt;description&gt;A simple Hello, World! module.&lt;/description&gt;
+    &lt;files&gt;
+        &lt;filename module="mod_helloworld"&gt;mod_helloworld.php&lt;/filename&gt;
+        &lt;filename&gt;index.html&lt;/filename&gt;
+        &lt;filename&gt;helper.php&lt;/filename&gt;
+        &lt;filename&gt;tmpl/default.php&lt;/filename&gt;
+        &lt;filename&gt;tmpl/index.html&lt;/filename&gt;
+    &lt;/files&gt;
+    &lt;params&gt;
+    &lt;/params&gt;
+&lt;/install&gt;</pre><p>You will notice that there are two additional files that we have not
+    yet mentioned: index.html and tmpl/index.html. These files are included so
+    that these directories cannot be browsed. If a used attempts to point
+    their browser to these folders, the index.html file will be displayed.
+    These files can be left empty or can contain the simple line:</p><pre class="programlisting">&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</pre><p>which will display an empty page.</p><p>Since our module does not use any parameters, this section is
+    empty.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="helloworldmodule.conclusion"></a>Conclusion</h2></div></div></div><p>Module development for Joomla! is a fairly simple, straightforward
+    process. Using the techniques described in this tutorial, an endless
+    variety of modules can be developed with little hassle.</p></div></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="jdmbook.components"></a>Part V. Developing Components</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#mvctutorial1">4. Developing a Model-View-Controller Component - Part 1</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial1.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.requirements">Requirements</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.mvcintroduction">Introduction to Model-View-Controller</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.model">Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.view">View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.controller">Controller</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.mvcimplementation">Joomla! MVC Implementation</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.creatingcomponent">Creating a Component</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.entrypoint">Creating the Entry Point</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingcontroller">Creating the Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingview">Creating the View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingtemplate">Creating the Template</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.wrappingitup">Wrapping It All Up - Creating the hello.xml File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial2">5. Developing a Model-View-Controller Component - Part 2 - Adding a
+  Model</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial2.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.creatingmodel">Creating the Model</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.usingmodel">Using the Model</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial2.usingmodel.addingtopackage">Adding the File to the Package</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial2.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial3">6. Developing a Model-View-Controller Component - Part 3 - Using the
+  Database</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial3.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.retrievingdata">Retrieving the Data</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.creatingsqlfile">Creating the Installation SQL File</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial3.creatingsqlfile.uninstall">Creating the Uninstall SQL File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial3.updatinginstallfile">Updating our Install File</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.download">Download</a></span></dt></dl></dd><dt><span class="chapter"><a href="#mvctutorial4">7. Developing a Model-View-Controller Component - Part 4 - Creating an
+  Administrator Interface</a></span></dt><dd><dl><dt><span class="sect1"><a href="#mvctutorial4.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.creatingframework">Creating the Basic Framework</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosmodel">Creating the Hellos Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosview">Creating the Hellos View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellostemplate">Creating the Hellos Template</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.addingfunctionality">Adding Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.toolbar">Adding a Toolbar</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.checkboxes">Adding Checkboxes and Links to our Form</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.downanddirty">Getting Down and Dirty: Doing the Real Work</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellocontroller">Creating the Hello Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.helloview">Creating the Hello View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellomodel">Creating the Hello Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.form">Creating the Form</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality">Implementing the Functionality</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.deletingrecord">Deleting a Record</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.canceloperation">Cancelling the Edit Operation</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.download">Download</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="mvctutorial1"></a>Chapter 4. Developing a Model-View-Controller Component - Part 1</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial1.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.requirements">Requirements</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.mvcintroduction">Introduction to Model-View-Controller</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.model">Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.view">View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.mvcintroduction.controller">Controller</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.mvcimplementation">Joomla! MVC Implementation</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.creatingcomponent">Creating a Component</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.entrypoint">Creating the Entry Point</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingcontroller">Creating the Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingview">Creating the View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.creatingtemplate">Creating the Template</a></span></dt><dt><span class="sect2"><a href="#mvctutorial1.creatingcomponent.wrappingitup">Wrapping It All Up - Creating the hello.xml File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial1.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial1.download">Download</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.introduction"></a>Introduction</h2></div></div></div><p>The new framework in Joomla! 1.5 unleashes a great deal of power for
+    developers. The code has been completely overhauled and cleaned up. This
+    tutorial will guide you through the process of developing a component
+    using this new framework.</p><p>The scope of this project will be to develop a simple Hello World!
+    component. In future tutorials, this simple framework will be built upon
+    to show the full power and versatility of the MVC design pattern in
+    Joomla!</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.requirements"></a>Requirements</h2></div></div></div><p>You need Joomla! 1.5 or greater for this tutorial.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.mvcintroduction"></a>Introduction to Model-View-Controller</h2></div></div></div><p>While the idea behind a component may seem extremely simple, code
+    can quickly become very complex as additional features are added or the
+    interface is customized.</p><p>Model-View-Controller (herein referred to as MVC) is a software
+    design pattern that can be used to organize code in such a way that the
+    business logic and data presentation are separate. The premise behind this
+    approach is that if the business logic is grouped into one section, then
+    the interface and user interaction that surrounds the data can revised and
+    customized without having to reprogram the business logic.</p><p>There are three main parts of an MVC component. They are described
+    here in brief, but for a more thorough explanation, please refer to the
+    links provided at the end of this tutorial.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.mvcintroduction.model"></a>Model</h3></div></div></div><p>The model is the part of the component that encapsulates the
+      application's data. It will often provide routines to manage and
+      manipulate this data in a meaningful way in addition to routines that
+      retrieve the data from the model. In our case, the model will contain
+      methods to add, remove and update information about the books in the
+      database. It will also contain methods to retrieve the list of books
+      from the database. In general, the underlying data access technique
+      should be encapsulated in the model. In this way, if an application is
+      to be moved from a system that utilizes a flat file to store its
+      information to a system that uses a database, the model is the only
+      element that needs to be changed, not the view or the controller.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.mvcintroduction.view"></a>View</h3></div></div></div><p>The view is the part of the component that is used to render the
+      data from the model in a manner that is suitable for interaction. For a
+      web-based application, the view would generally be an HTML page that is
+      returned to the data. The view pulls data from the model (which is
+      passed to it from the controller) and feeds the data into a template
+      which is populated and presented to the user. The view does not cause
+      the data to be modified in any way, it only displays data retrieved from
+      the model.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.mvcintroduction.controller"></a>Controller</h3></div></div></div><p>The controller is responsible for responding to user actions. In
+      the case of a web application, a user action is (generally) a page
+      request. The controller will determine what request is being made by the
+      user and respond appropriately by triggering the model to manipulate the
+      data appropriately and passing the model into the view. The controller
+      does not display the data in the model, it only triggers methods in the
+      model which modify the data, and then pass the model into the view which
+      displays the data.</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.mvcimplementation"></a>Joomla! MVC Implementation</h2></div></div></div><p>In Joomla!, the MVC pattern is implemented using three classes:
+    <code class="classname">JModel</code>, <code class="classname">JView</code> and
+    <code class="classname">JController</code>. For more detailed information about
+    these classes, please refer to the API reference documentation
+    (WIP).</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.creatingcomponent"></a>Creating a Component</h2></div></div></div><p>For our basic component, we only require five files:</p><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="filename">hello.php</code> - this is the entry point to
+        our component</td></tr><tr><td><code class="filename">controller.php</code> - this file contains our
+        base controller</td></tr><tr><td><code class="filename">views/hello/view.html.php</code> - this file
+        retrieves the necessary data and pushes it into the template</td></tr><tr><td><code class="filename">views/hello/tmpl/default.php</code> - this is
+        the template for our output</td></tr><tr><td><code class="filename">hello.xml</code> - this is an XML file that
+        tells Joomla! how to install our component.</td></tr></table><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.creatingcomponent.entrypoint"></a>Creating the Entry Point</h3></div></div></div><p>Joomla! is always accessed through a single point of entry:
+      <code class="filename">index.php</code> for the Site Application or
+      <code class="filename">administrator/index.php</code> for the Administrator
+      Application. The application will then load the required component,
+      based on the value of 'option' in the URL or in the POST data. For our
+      component, the URL would be:</p><p><code class="code">index.php?option=com_hello&amp;view=hello</code></p><p>This will load our main file, which can be seen as the single
+      point of entry for our component:
+      <code class="filename">components/com_hello/hello.php</code>.</p><p>The code for this file is fairly typical across components.</p><pre class="programlisting">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * components/com_hello/hello.php
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Require the base controller
+
+require_once( JPATH_COMPONENT.DS.'controller.php' );
+
+// Require specific controller if requested
+if($controller = JRequest::getVar( 'controller' )) {
+    require_once( JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php' );
+}
+
+// Create the controller
+$classname    = 'HelloController'.$controller;
+$controller   = new $classname( );
+
+// Perform the Request task
+$controller-&amp;gt;execute( JRequest::getVar( 'task' ) );
+
+// Redirect if set by the controller
+$controller-&amp;gt;redirect();
+
+?&amp;gt;</pre><p>The first statement is a security check.</p><p>JPATH_COMPONENT is the absolute path to the current component, in
+      our case components/com_hello. If you specifically need either the Site
+      component or the Administrator component, you can use
+      JPATH_COMPONENT_SITE or JPATH_COMPONENT_ADMINISTRATOR.</p><p>DS is the directory separator of your system: either '/' or '\'.
+      This is automatically set by the framework so the developer doesn't have
+      to worry about developing different versions for different server OSs.
+      DS should always be used when referring to files on the local
+      server.</p><p>After loading the base controller, we check if a specific
+      controller is needed. In this component, the base controller is the only
+      controller, but we will leave this here for future use.</p><p><code class="classname">JRequest</code>:getVar() finds a variable in the
+      URL or the POST data. So if our URL is
+      index.php?option=com_hello&amp;controller=controller_name, then we can
+      retrieve our controller name in our component using: echo
+      <code class="classname">JRequest</code>::getVar('controller');</p><p>Now we have our base controller
+      '<code class="classname">HelloController</code>' in com_hello/controller.php,
+      and, if needed, additional controllers like
+      '<code class="classname">HelloControllerController1</code>' in
+      com_hello/controllers/controller1.php. Using this standard naming scheme
+      will make things easy later on:
+      '{Componentname}{Controller}{Controllername}'</p><p>After the controller is created, we instruct the controller to
+      execute the task, as defined in the URL:
+      index.php?option=com_hello&amp;task=sometask. If no task is set, the
+      default task 'display' will be assumed. When display is used, the 'view'
+      variable will decide what will be displayed. Other common tasks are
+      save, edit, new...</p><p>The controller might decide to redirect the page, usually after a
+      task like 'save' has been completed. This last statement takes care of
+      the actual redirection.</p><p>The main entry point (hello.php) essentially passes control to the
+      controller, which handles performing the task that was specified in the
+      request.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.creatingcomponent.creatingcontroller"></a>Creating the Controller</h3></div></div></div><p>Our component only has one task - greet the world. Therefore, the
+      controller will be very simple. No data manipulation is required. All
+      that needs to be done is the appropriate view loaded. We will have only
+      one method in our controller: display(). Most of the required
+      functionality is built into the JController class, so all that we need
+      to do is invoke the JController::display() method.</p><p>The code for the base controller is:</p><pre class="programlisting">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+/**
+ * Hello World Component Controller
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloController extends JController
+{
+    /**
+     * Method to display the view
+     *
+     * @access    public
+     */
+    function display()
+    {
+        parent::display();
+    }
+
+}
+?&gt;</pre><p>The <code class="classname">JController</code> constructor will always
+      register a display() task and unless otherwise specified (using the
+      registerDefaultTask() method), it will set it as the default
+      task.</p><p>This barebones display() method isn't really even necessary since
+      all it does is invoke the parent constructor. However, it is a good
+      visual clue to indicate what is happening in the controller.</p><p>The <code class="classname">JController</code>::display() method will
+      determine the name of the view and layout from the request and load that
+      view and set the layout. When you create a menu item for your component,
+      the menu manager will allow the administrator to select the view that
+      they would like the menu link to display and to specify the layout. A
+      view usually refers to a view of a certain set of data (i.e. a list of
+      cars, a list of events, a single car, a single event). A layout is a way
+      that that view is organized.</p><p>In our component, we will have a single view called hello, and a
+      single layout (default).</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.creatingcomponent.creatingview"></a>Creating the View</h3></div></div></div><p>The task of the view is very simple: It retrieves the data to be
+      displayed and pushes it into the template. Data is pushed into the
+      template using the <code class="classname">JView</code>::assignRef
+      method.</p><p>The code for the view is:</p><pre class="programlisting">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    HelloWorld
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $greeting = "Hello World!";
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.creatingcomponent.creatingtemplate"></a>Creating the Template</h3></div></div></div><p>Joomla! templates/layouts are regular PHP files that are used to
+      layout the data from the view in a particular manner. The variables
+      assigned by the JView::assignRef method can be accessed from the
+      template using $this-&gt;propertyname (see the template code below for
+      an example).</p><p>Our template is very simple: we only want to display the greeting
+      that was passed in from the view:</p><pre class="programlisting">&lt;?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial1.creatingcomponent.wrappingitup"></a>Wrapping It All Up - Creating the hello.xml File</h3></div></div></div><p>It is possible to install a component manually by copying the
+      files using an FTP client and modifying the database tables. It is more
+      efficient to create a package file that will allow the Joomla! Installer
+      to do this for you. This package file contains a variety of
+      information:</p><table class="simplelist" border="0" summary="Simple list"><tr><td>basic descriptive details about your component (i.e. name),
+          and optionally, a description, copyright and license
+          information.</td></tr><tr><td>a list of files that need to be copied.</td></tr><tr><td>optionally, a PHP file that performs additional install and
+          uninstall operations.</td></tr><tr><td>optionally, an SQL file which contains database queries that
+          should be executed upon install/uninstall</td></tr></table><p>The format of the XML file is as follows:</p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+ &lt;name&gt;Hello&lt;/name&gt;
+ &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+ &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+ &lt;author&gt;John Doe&lt;/author&gt;
+ &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+ &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+ &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+ &lt;license&gt;License Info&lt;/license&gt;
+ &lt;!--  The version string is recorded in the components table --&gt;
+ &lt;version&gt;Component Version String&lt;/version&gt;
+ &lt;!-- The description is optional and defaults to the name --&gt;
+ &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+ &lt;!-- Site Main File Copy Section --&gt;
+ &lt;!-- Note the folder attribute: This attribute describes the folder
+      to copy FROM in the package to install therefore files copied
+      in this section are copied from /site/ in the package --&gt;
+ &lt;files folder="site"&gt;
+  &lt;filename&gt;index.html&lt;/filename&gt;
+  &lt;filename&gt;hello.php&lt;/filename&gt;
+  &lt;filename&gt;controller.php&lt;/filename&gt;
+  &lt;filename&gt;views/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+  &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+ &lt;/files&gt;
+ 
+ &lt;administration&gt;
+  &lt;!-- Administration Menu Section --&gt;
+  &lt;menu&gt;Hello World!&lt;/menu&gt;
+  
+  &lt;!-- Administration Main File Copy Section --&gt;
+  &lt;files folder="admin"&gt;
+   &lt;filename&gt;index.html&lt;/filename&gt;
+   &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+  &lt;/files&gt;  
+ &lt;/administration&gt;
+&lt;/install&gt;</pre><p>If you look closely you will notice that there are some files that
+      will be copied that we have not discussed. These are the
+      <code class="filename">index.html</code> files. An
+      <code class="filename">index.html</code> file is placed in each directory to
+      prevent prying users from getting a directory listing. If there is no
+      <code class="filename">index.html</code> file, some web servers will list the
+      directory contents. This is often undesirable. These files have the
+      simple line:</p><pre class="programlisting">&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</pre><p>It will simply display a blank page.</p><p>The other file is the <code class="filename">admin.hello.php</code> file.
+      This is the entry point for the admin section of our component. Since we
+      don't have an admin section of our component, it will have the same
+      content as the <code class="filename">index.html</code> files at this point in
+      time.</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>mjaz</td></tr><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial1.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello1.zip" target="_top">com_hello4.zip</a></p></div></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="mvctutorial2"></a>Chapter 5. Developing a Model-View-Controller Component - Part 2 - Adding a
+  Model</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial2.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.creatingmodel">Creating the Model</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.usingmodel">Using the Model</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial2.usingmodel.addingtopackage">Adding the File to the Package</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial2.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.download">Download</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.introduction"></a>Introduction</h2></div></div></div><p>In the first tutorial of this series, creating a simple
+    view-controller component using the Joomla! 1.5 CMS framework was
+    demonstrated.</p><p>In the first tutorial, the greeting was hardcoded into the view.
+    This doesn't follow the MVC pattern exactly because the view is intended
+    to only display the data, and not contain it.</p><p>In this second part of the tutorial we will demonstrate how to move
+    this out of the view and into a model. In future tutorials we will
+    demonstrate the power and flexibility that this design pattern
+    provides.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.creatingmodel"></a>Creating the Model</h2></div></div></div><p>The concept of model gets its name because this class is intended to
+    represent (or 'model') some entity. In our case, our first model will
+    represent a 'hello', or a greeting. This is in line with our design thus
+    far, because we have one view ('hello'), which is a view of our
+    greeting.</p><p>The naming convention for models in the Joomla! framework is that
+    the class name starts with the name of the component (in our case 'hello',
+    followed by 'model', followed by the model name. Therefore, our model
+    class is called HelloModelHello.</p><p>At this point, we will only model one behaviour of our hello, and
+    that is retrieving the greeting. We will thus have one method, called
+    getGreeting(). It will simply return the string 'Hello, World!'.</p><p>Here is the code for our model class:</p><pre class="programlisting">&lt;?php
+/**
+ * Hello Model for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.model' );
+
+/**
+ * Hello Model
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloModelHello extends JModel
+{
+    /**
+    * Gets the greeting
+    * @return string The greeting to be displayed to the user
+    */
+    function getGreeting()
+    {
+        return 'Hello, World!';
+    }
+}</pre><p>You will notice a line that starts with jimport. The jimport
+    function is used to load files from the Joomla! framework that are
+    required for our component. This particular statement will load the file
+    /libraries/joomla/application/component/model.php. The '.'s are used as
+    directory separators and the last part is the name of the file to load.
+    All files are loaded relative to the libraries directory. This particular
+    file contains the class definition for the JModel class, which is
+    necessary because our model extends this class.</p><p>Now that we have created our model, we must modify our view so that
+    it uses it to obtain the greeting.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.usingmodel"></a>Using the Model</h2></div></div></div><p>The Joomla! framework is setup in such a way that the controller
+    will automatically load the model that has the same name as the view and
+    will push it into the view. Since our view is called 'Hello', our 'Hello'
+    model will automatically be loaded and pushed into the view. Therefore, we
+    can easily retrieve a reference to our model using the JView::getModel()
+    method.</p><p>Our previous view code contained the lines:</p><pre class="programlisting">$greeting = "Hello World!";</pre><p>To take advantage of our model, we change this line to:</p><pre class="programlisting">$model =&amp; $this-&gt;getModel();
+$greeting = $model-&gt;getGreeting();</pre><p>The complete view now looks like:</p><pre class="programlisting">&lt;?php
+
+/**
+ * Hello View for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $model =&amp; $this-&gt;getModel();
+        $greeting = $model-&gt;getGreeting();
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;</pre><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial2.usingmodel.addingtopackage"></a>Adding the File to the Package</h3></div></div></div><p>All that remains is to add an entry to the XML file so that our
+      new model will be copied. The Joomla! framework will look for our model
+      in the models directory, so the entry for this file will look like (it
+      should be added to the site section):</p><pre class="programlisting">&lt;filename&gt;models/hello.php&lt;/filename&gt;</pre><p>Our new hello.xml file will look like:</p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+	&lt;name&gt;Hello&lt;/name&gt;
+    &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+    &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+    &lt;author&gt;John Doe&lt;/author&gt;
+    &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+    &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+    &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+    &lt;license&gt;License Info&lt;/license&gt;
+    &lt;!--  The version string is recorded in the components table --&gt;
+    &lt;version&gt;Component Version String&lt;/version&gt;
+    &lt;!-- The description is optional and defaults to the name --&gt;
+    &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+    &lt;!-- Site Main File Copy Section --&gt;
+    &lt;files folder="site"&gt;
+        &lt;filename&gt;index.html&lt;/filename&gt;
+        &lt;filename&gt;hello.php&lt;/filename&gt;
+        &lt;filename&gt;controller.php&lt;/filename&gt;
+        &lt;filename&gt;views/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+        &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+        &lt;filename&gt;models/index.html&lt;/filename&gt;
+        &lt;filename&gt;models/hello.php&lt;/filename&gt;
+    &lt;/files&gt;
+    
+    &lt;administration&gt;
+        &lt;!-- Administration Menu Section --&gt;
+        &lt;menu&gt;Hello World!&lt;/menu&gt;
+        
+        &lt;!-- Administration Main File Copy Section --&gt;
+        &lt;!-- Note the folder attribute: This attribute describes the folder
+            to copy FROM in the package to install therefore files copied
+            in this section are copied from /admin/ in the package --&gt;
+        &lt;files folder="admin"&gt;
+    &lt;!-- Site Main File Copy Section --&gt;
+            &lt;filename&gt;index.html&lt;/filename&gt;
+            &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+        &lt;/files&gt;        
+    &lt;/administration&gt;
+&lt;/install&gt;</pre></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.conclusion"></a>Conclusion</h2></div></div></div><p>We now have a simple MVC component. Each element is very simple at
+    this point, but provides a great deal of flexibility and power.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial2.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello2.zip" target="_top">com_hello2.zip</a></p></div></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="mvctutorial3"></a>Chapter 6. Developing a Model-View-Controller Component - Part 3 - Using the
+  Database</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial3.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.retrievingdata">Retrieving the Data</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.creatingsqlfile">Creating the Installation SQL File</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial3.creatingsqlfile.uninstall">Creating the Uninstall SQL File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial3.updatinginstallfile">Updating our Install File</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.download">Download</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.introduction"></a>Introduction</h2></div></div></div><p>In the first two tutorials, we showed you how to build a simple
+    model-view-controller component. We had one view which retrieved data from
+    a model (which was created in the 2nd tutorial). In this tutorial, we will
+    be working with the model. Instead of the data being hard coded in the
+    model, the model will retrieve the data from a table in the
+    database.</p><p>This tutorial will demonstrate how to use the JDatabase class to
+    retrieve data from the database.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.retrievingdata"></a>Retrieving the Data</h2></div></div></div><p>Our model currently has one method: getGreeting(). This method is
+    very simple - all it does is return the hard-coded greeting.</p><p>To make things more interesting, we will load the greeting from a
+    database table. We will demonstrate later how to create an SQL file and
+    add the appropriate code to the XML manifest file so that the table and
+    some sample data will be created when the component is installed. For now,
+    we will simply replace our return statement with some code that will
+    retrieve the greeting from the database and return it.</p><p>The first step is to obtain a reference to a database object. Since
+    Joomla! uses the database for its normal operation, a database connection
+    already exists; therefore, it is not necessary to create your own. A
+    reference to the existing database can be obtained using:</p><pre class="programlisting">$db =&amp; JFactory::getDBO();</pre><p>JFactory is a static class that is used to retrieve references to
+    many of the system objects. More information about this class can be found
+    in the API documentation.</p><p>The method name (getDBO) stands for get DataBase Object, and is easy
+    and important to remember.</p><p>Now that we have obtained a reference to the database object, we can
+    retrieve our data. We do this in two steps:</p><div class="orderedlist"><ol type="1"><li><p>store our query in the database object</p><p>load the result</p></li></ol></div><p>Our new getGreeting() method will therefore look like:</p><pre class="programlisting">function getGreeting()
+{
+   $db =&amp; JFactory::getDBO();
+
+   $query = 'SELECT greeting FROM #__hello';
+   $db-&gt;setQuery( $query );
+   $greeting = $db-&gt;loadResult();
+
+   return $greeting;
+}</pre><p>hello is the name of the table that we will create later, and
+    greeting is the name of the field that stores the greetings. If you are
+    not familiar with SQL, it would be helpful to take a tutorial or a lesson
+    to get yourself up to speed. One such tutorial can be found at <a href="http://www.w3schools.com/sql/default.asp" target="_top">w3schools</a>.</p><p>The $db-&gt;loadResult() method will execute the stored database
+    query and return the first field of the first row of the result. See
+    [[references:joomla.framework:database:jdatabase|JDatabase API reference]]
+    for more information about other load methods in the JDatabase
+    class.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.creatingsqlfile"></a>Creating the Installation SQL File</h2></div></div></div><p>The Joomla! installer has built-in support for executing queries
+    during component installation. These queries are all stored in a standard
+    text file.</p><p>We will have three queries in our install file: the first will drop
+    the table in case it already exists, the second will create the table with
+    the appropriate fields, and the third will insert the data.</p><p>Here are our queries:</p><pre class="programlisting">DROP TABLE IF EXISTS `#__hello`;
+
+CREATE TABLE `#__hello` (
+  `id` int(11) NOT NULL auto_increment,
+  `greeting` varchar(25) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT DEFAULT CHARSET=utf8;
+
+INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
+('Bonjour, Monde!'),
+('Ciao, Mondo!');</pre><p>You might find the #__ prefix on the table names rather odd. Joomla!
+    will replace this prefix with the prefix used by the current install. For
+    most installs, this table will become jos_hello. This allows multiple
+    installs of Joomla! to use the same database, and prevents collisions with
+    other applications using the same table names (i.e. two applications might
+    share a database, but might both require a 'users' table. This convention
+    avoids problems.)</p><p>We have specified two fields in our database. The first field is id,
+    and is called the 'primary key'. The primary key of a database table is a
+    field that is used to uniquely identify a record. This is often used to
+    lookup rows in the database. The other field is greeting. This is the
+    field that stores the greeting that is returned from the query that we
+    used above.</p><p>We will save our queries in a file called install.utf.sql.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial3.creatingsqlfile.uninstall"></a>Creating the Uninstall SQL File</h3></div></div></div><p>Though we might hope that people will never want to uninstall our
+      component, it is important that if they do, we don't leave anything
+      behind. Joomla! will look after deleting the files and directories that
+      were created during install, but you must manually include queries that
+      will remove and tables that have been added to the database. Since we
+      have only created one table, we only need one query:</p><pre class="programlisting">DROP TABLE IF EXISTS `#__hello`;</pre><p>We will save this query in a file called
+      <code class="filename">uninstall.utf.sql</code>.</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.updatinginstallfile"></a>Updating our Install File</h2></div></div></div><p>We need to change a few things in our install file. First, we need
+    to add our two new files to the list of files to install. SQL install file
+    have to go in the admin directory. Second, we need to tell the installer
+    to execute the queries in our files on install and uninstall.</p><p>Our new file looks like this:</p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+   &lt;name&gt;Hello&lt;/name&gt;
+   &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+   &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+   &lt;author&gt;John Doe&lt;/author&gt;
+   &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+   &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+   &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+   &lt;license&gt;License Info&lt;/license&gt;
+   &lt;!--  The version string is recorded in the components table --&gt;
+   &lt;version&gt;Component Version String&lt;/version&gt;
+   &lt;!-- The description is optional and defaults to the name --&gt;
+   &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+   &lt;!-- Site Main File Copy Section --&gt;
+   &lt;files folder="site"&gt;
+      &lt;filename&gt;index.html&lt;/filename&gt;
+      &lt;filename&gt;hello.php&lt;/filename&gt;
+      &lt;filename&gt;controller.php&lt;/filename&gt;
+      &lt;filename&gt;views/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+      &lt;filename&gt;models/hello.php&lt;/filename&gt;
+   &lt;/files&gt;
+   &lt;install&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;install.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/install&gt;
+   &lt;uninstall&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;uninstall.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/uninstall&gt;   
+   &lt;administration&gt;
+      &lt;!-- Administration Menu Section --&gt;
+      &lt;menu&gt;Hello World!&lt;/menu&gt;
+      
+      &lt;!-- Administration Main File Copy Section --&gt;
+      &lt;!-- Note the folder attribute: This attribute describes the folder
+         to copy FROM in the package to install therefore files copied
+         in this section are copied from /admin/ in the package --&gt;
+      &lt;files folder="admin"&gt;
+   &lt;!-- Site Main File Copy Section --&gt;
+         &lt;filename&gt;index.html&lt;/filename&gt;
+         &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+         &lt;filename&gt;install.sql&lt;/filename&gt;
+         &lt;filename&gt;uninstall.sql&lt;/filename&gt;
+      &lt;/files&gt;      
+   &lt;/administration&gt;
+&lt;/install&gt;</pre><p>You will notice two attributes present on the &lt;file&gt; tags
+    within the &lt;install&gt; and &lt;uninstall&gt; sections: charset and
+    driver. The charset is the type of charset to use. The only valid charset
+    is utf8. If you want to create install files for non-utf8 databases (for
+    older version of MySQL), you should omit this attribute.</p><p>The driver attribute specifies which database the queries were
+    written for. Currently, this can only be mysql, but in future versions of
+    Joomla! there may be more database drivers available.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.conclusion"></a>Conclusion</h2></div></div></div><p>We now have a component that takes advantage of both the Joomla! MVC
+    framework classes and the JDatabase classes. You are now able to write MVC
+    components that interact with the database and can use the Joomla!
+    installer to create and populate database tables.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial3.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello3.zip" target="_top">com_hello3.zip</a></p></div></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="mvctutorial4"></a>Chapter 7. Developing a Model-View-Controller Component - Part 4 - Creating an
+  Administrator Interface</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial4.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.creatingframework">Creating the Basic Framework</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosmodel">Creating the Hellos Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellosview">Creating the Hellos View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.creatingframework.hellostemplate">Creating the Hellos Template</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.addingfunctionality">Adding Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.toolbar">Adding a Toolbar</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.addingfunctionality.checkboxes">Adding Checkboxes and Links to our Form</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.downanddirty">Getting Down and Dirty: Doing the Real Work</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellocontroller">Creating the Hello Controller</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.helloview">Creating the Hello View</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.hellomodel">Creating the Hello Model</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.form">Creating the Form</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality">Implementing the Functionality</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.deletingrecord">Deleting a Record</a></span></dt><dt><span class="sect2"><a href="#mvctutorial4.downanddirty.implementingfunctionality.canceloperation">Cancelling the Edit Operation</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial4.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial4.download">Download</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.introduction"></a>Introduction</h2></div></div></div><p>In the first three tutorials, we have developed a MVC component that
+    retrieves its data from a table in the database. Currently, there is no
+    way to add data to the database except to do it manually using another
+    tool. In this tutorial, we will develop an administrator section for our
+    component which will make it possible to manage the entries in the
+    database.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.creatingframework"></a>Creating the Basic Framework</h2></div></div></div><p>The basic framework of the administrator panel is very similar to
+    the site portion. The main entry point for the administrator section of
+    the component is admin.hello.php. This file is identical to the hello.php
+    file that was used in the site portion except the name of the controller
+    it loads will be changed to HellosController. The default controller is
+    also called controller.php and this file is identical to the default
+    controller in the site portion, with the exception that the controller is
+    named HellosController instead of HelloController. This difference is so
+    that JController will by default load the hellos view, which will display
+    a list of our greetings.</p><p>Here is the listing for admin.hello.php:</p><pre class="programlisting">&lt;?php
+/**
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
+ * @license    GNU/GPL
+*/
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Require the base controller
+
+require_once( JPATH_COMPONENT.DS.'controller.php' );
+
+// Require specific controller if requested
+if($controller = JRequest::getVar( 'controller' )) {
+    require_once( JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php' );
+}
+
+// Create the controller
+$classname    = 'HellosController'.$controller;
+$controller   = new $classname( );
+
+// Perform the Request task
+$controller-&gt;execute( JRequest::getVar( 'task' ) );
+
+// Redirect if set by the controller
+$controller-&gt;redirect();
+
+?&gt;</pre><p>The view and model that we will start with is the hellos view and
+    the hellos model. We will start with the model.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.creatingframework.hellosmodel"></a>Creating the Hellos Model</h3></div></div></div><p>The Hellos Model will be very simple. The only operation that we
+      currently need is the ability to retrieve the list of hellos from the
+      database. This operation will be implemented in a method called
+      getData().</p><p>The JModel class has a built in protected method called
+      _getList(). This method can be used to simplify the task of retrieving a
+      list of records from the database. We simply need to pass it the query
+      and it will return the list of records.</p><p>At a later point in time, we might want to use our query from
+      within another method. Therefore, we will create a private method called
+      _buildQuery() which will return the query that will be passed to
+      _getList(). This makes it easier to change the query as well since it is
+      localized in one place.</p><p>Therefore we need two methods in our class: getData() and
+      _buildQuery().</p><p>_buildQuery() simply returns the query. It looks like:</p><pre class="programlisting">/**
+ * Returns the query
+ * @return string The query to be used to retrieve the rows from the database
+ */
+function _buildQuery()
+{
+    $query = ' SELECT * '
+           . ' FROM #__hello '
+    ;
+
+    return $query;
+}</pre><p>getData() will obtain the query and retrieve the records from the
+      database. Now it might happen that we need to retrieve this list of data
+      twice in one page load. It would be a waste to have to query the
+      database twice. Therefore, we will have this method store the data in a
+      protected property so that on subsequent requests it can simply return
+      the data it has already retrieved. This property will be called
+      _data.</p><p>Here is the getData() method:</p><pre class="programlisting">/**
+ * Retrieves the hello data
+ * @return array Array of objects containing the data from the database
+ */
+function getData()
+{
+    // Lets load the data if it doesn't already exist
+    if (empty( $this-&gt;_data ))
+    {
+        $query = $this-&gt;_buildQuery();
+        $this-&gt;_data = $this-&gt;_getList( $query );
+    }
+
+    return $this-&gt;_data;
+}</pre><p>The completed model looks like:</p><pre class="programlisting">&lt;?php
+/**
+ * Hellos Model for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
+ * @license        GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.model' );
+
+/**
+ * Hello Model
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HellosModelHellos extends JModel
+{
+    /**
+     * Hellos data array
+     *
+     * @var array
+     */
+    var $_data;
+
+    /**
+     * Returns the query
+     * @return string The query to be used to retrieve the rows from the database
+     */
+    function _buildQuery()
+    {
+        $query = ' SELECT * '
+            . ' FROM #__hello '
+        ;
+        return $query;
+    }
+
+    /**
+     * Retrieves the hello data
+     * @return array Array of objects containing the data from the database
+     */
+    function getData()
+    {
+        // Lets load the data if it doesn't already exist
+        if (empty( $this-&gt;_data ))
+        {
+            $query = $this-&gt;_buildQuery();
+            $this-&gt;_data = $this-&gt;_getList( $query );
+        }
+
+        return $this-&gt;_data;
+    }
+}</pre><p>This file is saved as models/hellos.php.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.creatingframework.hellosview"></a>Creating the Hellos View</h3></div></div></div><p>Now that we have a model to retrieve our data, we need to display
+      it. This view will be fairly similar to the view from the site section
+      as well.</p><p>Just as our model was automatically instantiated in the site, so
+      it is in the administrator. Methods that start with get in the model can
+      be accessed using the get() method of the JView class. So our view has
+      three lines: one to retrieve the data from the model, one to push the
+      data into the template, and one to invoke the display method to display
+      the output. Thus we have:</p><pre class="programlisting">&lt;?php
+/**
+ * Hellos View for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
+ * @license        GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.view' );
+
+/**
+ * Hellos View
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HellosViewHellos extends JView
+{
+    /**
+     * Hellos view display method
+     * @return void
+     **/
+    function display($tpl = null)
+    {
+        JToolBarHelper::title(   JText::_( 'Hello Manager' ), 'generic.png' );
+        JToolBarHelper::deleteList();
+        JToolBarHelper::editListX();
+        JToolBarHelper::addNewX();
+
+        // Get data from the model
+        $items        = &amp; $this-&gt;get( 'Data');
+
+        $this-&gt;assignRef('items',        $items);
+
+        parent::display($tpl);
+    }
+}</pre><p>This file is saved as
+      <code class="filename">views/hellos/view.html.php</code>.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.creatingframework.hellostemplate"></a>Creating the Hellos Template</h3></div></div></div><p>The template will take the data pushed into it from the view and
+      produce the output. We will display our output in a simple table. While
+      the frontend template was very simple, in the administrator we will need
+      a minimal amount of extra logic to handle looping through the
+      data.</p><p>Here is our template:</p><pre class="programlisting">&lt;?php defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;form action="index.php" method="post" name="adminForm"&gt;
+&lt;div id="editcell"&gt;
+    &lt;table class="adminlist"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th width="5"&gt;
+                &lt;?php echo JText::_( 'ID' ); ?&gt;
+            &lt;/th&gt;
+            &lt;th&gt;
+                &lt;?php echo JText::_( 'Greeting' ); ?&gt;
+            &lt;/th&gt;
+        &lt;/tr&gt;            
+    &lt;/thead&gt;
+    &lt;?php
+    $k = 0;
+    for ($i=0, $n=count( $this-&gt;items ); $i &lt; $n; $i++)
+    {
+        $row = &amp;$this-&gt;items[$i];
+        ?&gt;
+        &lt;tr class="&lt;?php echo "row$k"; ?&gt;"&gt;
+            &lt;td&gt;
+                &lt;?php echo $row-&gt;id; ?&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;?php echo $row-&gt;greeting; ?&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;?php
+        $k = 1 - $k;
+    }
+    ?&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;input type="hidden" name="option" value="com_hello" /&gt;
+&lt;input type="hidden" name="task" value="" /&gt;
+&lt;input type="hidden" name="boxchecked" value="0" /&gt;
+&lt;input type="hidden" name="controller" value="hello" /&gt;
+
+&lt;/form&gt;</pre><p>This template is saved as views/hellos/tmpl/default.php.</p><p>You will notice that our output is enclosed in a form. Though this
+      is not necessary now, it will be soon.</p><p>We have now completed the basic part of the first view. We have
+      added five files to the admin section of our component:</p><table class="simplelist" border="0" summary="Simple list"><tr><td>admin.hello.php</td></tr><tr><td>controller.php</td></tr><tr><td>models/hellos.php</td></tr><tr><td>views/hellos/view.html.php</td></tr><tr><td>views/hellos/tmpl/default.php</td></tr></table><p>You can now add these files to the XML install file and give it a
+      try!</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.addingfunctionality"></a>Adding Functionality</h2></div></div></div><p>So far our administrator section is pretty useless. It doesn't
+    really do anything - all it does is display the entries that we have in
+    our database.</p><p>In order to make it useful, we need to add some buttons and
+    links.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.addingfunctionality.toolbar"></a>Adding a Toolbar</h3></div></div></div><p>You may have noticed the toolbar that appears at the top of other
+      Joomla! component administrator panels. Our component needs one as well.
+      Joomla! makes this very easy to do. We will add buttons Delete records,
+      Edit records, and create New records. We will also add a title that will
+      be displayed on our toolbar.</p><p>This is done by adding code to the view. To add the buttons, we
+      use static methods from the Joomla! JToolBarHelper class. The code looks
+      like:</p><pre class="programlisting">JToolBarHelper::title(   JText::_( 'Hello Manager' ), 'generic.png' );
+JToolBarHelper::deleteList();
+JToolBarHelper::editListX();
+JToolBarHelper::addNewX();</pre><p>These three methods will create the appropriate buttons. The
+      deleteList() method can optionally take up to three parameters - the
+      first parameter is a string to display to the user to confirm that they
+      want to delete the records. The second is the task that should be sent
+      with the query (the default is 'remove'), and the third is the text that
+      should be displayed below the button.</p><p>The editListX() and addNewX() methods can each take two optional
+      parameters. The first is the task (which are by default edit and add,
+      respectively), and the second is the text that should be displayed below
+      the button.</p><p class="remark"><i><span class="remark">*You may have noticed the use of the JText::_ method in the
+      template before and here as well. This is a handy function that makes
+      component translation much easier. The JText::_ method will look up the
+      string in your component language file and return the translated string.
+      If not translation is found, it will return the string that you passed
+      it. If you want to translate your component into another language, all
+      you have to do is create a language file that will map the strings
+      within the '' to the translated version of the string.</span></i></p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.addingfunctionality.checkboxes"></a>Adding Checkboxes and Links to our Form</h3></div></div></div><p>We now have buttons. Two of those buttons operate on existing
+      records. But how do we know which records to operate on? We have to let
+      the user tell us. To do this, we need to add checkboxes to our table so
+      that the user can select certain records. This is done in our
+      template.</p><p>In order to the add the checkboxes, we need to add an extra column
+      into our table. We will add the column in between the two that we
+      already have.</p><p>In the header of the column, we will add a checkbox which can be
+      used to toggle all the boxes below it on or off:</p><pre class="programlisting">&lt;th width="20"&gt;
+    &lt;input type="checkbox" name="toggle" value="" onclick="checkAll(&lt;?php echo count( $this-&gt;items ); ?&gt;);" /&gt;
+&lt;/th&gt;</pre><p>The Javascript checkAll function is a function that is built into
+      the Joomla! base Javascript package that provides the functionality that
+      we want here.</p><p>Now we need to add the checkboxes into the individual rows.
+      Joomla!'s JHTML class has a method call idBox which will generate our
+      checkbox for us. We will add the following line to our loop after
+      the</p><pre class="programlisting">$row = &amp;$this-&gt;items[$i];</pre><p>line:</p><pre class="programlisting">$checked    = JHTML::_('grid.id',   $i, $row-&gt;id );</pre><p>Then we will add a cell in between the two that we already
+      have:</p><pre class="programlisting">&lt;td&gt;
+    &lt;?php echo $checked; ?&gt;
+&lt;/td&gt;</pre><p>It can be cumbersome to have to check the box that we want to edit
+      and then move up and click the edit button. Therefore, we will add a
+      link to the greeting so that it will go straight to the edit form. We
+      will add the following line after the call to the JHTML::idBox()
+      method:</p><pre class="programlisting">$link     = JOutputFilter::ampReplace( 'index.php?option=com_hello&amp;controller=hello&amp;task=edit&amp;cid[]='. $row-&gt;id );</pre><p>You will notice that this link points to the hello controller.
+      This controller will handle the data manipulation of our
+      greetings.</p><p>If you recall from above, we had four hidden input fields at the
+      bottom of our form. The first input field was named 'option'. This field
+      is necessary so that we stay in our component. The second input field
+      was task. This form property gets set when one of the buttons in the
+      toolbar is clicked. A Javascript error will result and the buttons will
+      not work if this input field is omitted. The third input field is the
+      boxchecked field. This field keeps track of the number of boxes that are
+      checked. The edit and delete buttons will check to ensure that this is
+      greater than zero and will not allow the form to be submitted if it is
+      not. The fourth input field is the controller field. This is used to
+      specify that tasks fired from this form will be handled by the hello
+      controller.</p><p>Our hellos view is now complete. You can try out the component now
+      to see the results.</p></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.downanddirty"></a>Getting Down and Dirty: Doing the Real Work</h2></div></div></div><p>Now that the Hellos view is done, it is time to move to the Hello
+    view and model. This is where the real work will get done.</p><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.hellocontroller"></a>Creating the Hello Controller</h3></div></div></div><p>Our default controller just isn't going to cut it when it comes to
+      doing work - all it is capable of doing is displaying views.</p><p>We need to be able to handle the tasks that we are launching from
+      the Hellos view: add, edit and remove.</p><p>Add and edit are essentially the same task: they both display a
+      form to the user that allows a greeting to be edited. The only
+      difference is that new displays a blank form, and edit displays a form
+      with data already in it. Since they are similar, we will map the add
+      task onto the edit task handler. This is specified in our
+      constructor:</p><pre class="programlisting">/**
+ * constructor (registers additional tasks to methods)
+ * @return void
+ */
+function __construct()
+{
+    parent::__construct();
+
+    // Register Extra tasks
+    $this-&gt;registerTask( 'add'  ,     'edit' );
+}</pre><p>The first parameter of JController::registerTask is the task to
+      map, and the second is the method to map it to.</p><p>We will start with handling the edit task. The controller's job is
+      fairly simple for the edit task. All it has to do is specify the view
+      and layout to load (the hello view and the form layout). We will also
+      tell Joomla! to disable the mainmenu while we are editing our greeting.
+      This prevents users from leaving unsaved records open.</p><p>Our edit task handler looks like:</p><pre class="programlisting">/**
+ * display the edit form
+ * @return void
+ */
+function edit()
+{
+    JRequest::setVar( 'view', 'hello' );
+    JRequest::setVar( 'layout', 'form'  );
+    JRequest::setVar('hidemainmenu', 1);
+
+    parent::display();
+}</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.helloview"></a>Creating the Hello View</h3></div></div></div><p>The Hello view will display a form which will allow the user to
+      edit a greeting. The display method if the hello view has to do a few
+      simple tasks:</p><table class="simplelist" border="0" summary="Simple list"><tr><td>retrieve the data from the model</td></tr><tr><td>create the toolbar</td></tr><tr><td>pass the data into the template</td></tr><tr><td>invoke the display() method to render the template</td></tr></table><p>This becomes a bit more complicated because the one view handles
+      both the edit and add tasks. In our toolbar we want the user to know
+      what whether they are adding or editing, so we have to determine which
+      task was fired.</p><p>Since we are already retrieving the record that we want to display
+      from the model, we can use this data to determine what task was fired.
+      If the task was edit, then the id field of our record will have been
+      set. If the task was new, then it will not have been set. This can be
+      used to determine if we have a new record or an existing record.</p><p>We will add two buttons to the toolbar: save and cancel. Though
+      the functionality will be the same, we want to display different buttons
+      depending on whether it is a new or existing record. If it is a new
+      record, we will display cancel. If it already exists, we will display
+      close.</p><p>Thus our display method looks like this:</p><pre class="programlisting">/**
+ * display method of Hello view
+ * @return void
+ **/
+function display($tpl = null)
+{
+    //get the hello
+    $hello        =&amp; $this-&gt;get('Data');
+    $isNew        = ($hello-&gt;id &lt; 1);
+
+    $text = $isNew ? JText::_( 'New' ) : JText::_( 'Edit' );
+    JToolBarHelper::title(   JText::_( 'Hello' ).': &lt;small&gt;&lt;small&gt;[ ' . $text.' ]&lt;/small&gt;&lt;/small&gt;' );
+    JToolBarHelper::save();
+    if ($isNew)  {
+        JToolBarHelper::cancel();
+    } else {
+        // for existing items the button is renamed `close`
+        JToolBarHelper::cancel( 'cancel', 'Close' );
+    }
+
+    $this-&gt;assignRef('hello',        $hello);
+    parent::display($tpl);
+}</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.hellomodel"></a>Creating the Hello Model</h3></div></div></div><p>Our view needs data. Therefore, we need to create a model to model
+      a hello.</p><p>Our model will have two properties: _id and _data. _id will hold
+      the id of the greeting and data will hold the data.</p><p>We will start with a constructor, which will attempt to retrieve
+      the id from the query:</p><pre class="programlisting">/**
+ * Constructor that retrieves the ID from the request
+ *
+ * @access    public
+ * @return    void
+ */
+function __construct()
+{
+    parent::__construct();
+
+    $array = JRequest::getVar('cid',  0, '', 'array');
+    $this-&gt;setId((int)$array[0]);
+}</pre><p>The JRequest::getVar() method is used to retrieve data from the
+      request. The first parameter is the name of the form variable. The
+      second parameter is the default value to assign if there is no value
+      found. The third parameter is the name of the hash to retrieve the value
+      from (get, post, etc), and the last value is the data type that should
+      be forced on the value.</p><p>Our constructor will take the first value from the cid array and
+      assign it to the id.</p><p>Our setId() method can be used to set our id. Changing the id that
+      our model points to will mean the id points to the wrong data.
+      Therefore, when we set the id, we will clear the data property:</p><pre class="programlisting">/**
+ * Method to set the hello identifier
+ *
+ * @access    public
+ * @param    int Hello identifier
+ * @return    void
+ */
+function setId($id)
+{
+    // Set id and wipe data
+    $this-&gt;_id        = $id;
+    $this-&gt;_data    = null;
+}</pre><p>Finally, we need a method to retrieve our data: getData()</p><p>getData will check if the _data property has already been set. If
+      it has, it will simply return it. Otherwise, it will load the data from
+      the database.</p><pre class="programlisting">/**
+ * Method to get a hello
+ * @return object with data
+ */
+
+function &amp;getData()
+{
+    // Load the data
+    if (empty( $this-&gt;_data )) {
+        $query = ' SELECT * FROM #__hello '.
+                '  WHERE id = '.$this-&gt;_id;
+        $this-&gt;_db-&gt;setQuery( $query );
+        $this-&gt;_data = $this-&gt;_db-&gt;loadObject();
+    }
+    if (!$this-&gt;_data) {
+        $this-&gt;_data = new stdClass();
+        $this-&gt;_data-&gt;id = 0;
+        $this-&gt;_data-&gt;greeting = null;
+    }
+    return $this-&gt;_data;
+}</pre></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.form"></a>Creating the Form</h3></div></div></div><p>Now all that is left is to create the form that the data will go
+      into. Since we specified our layout as form, the form will go in a file
+      in the tmpl directory of the hello view called form.php:</p><pre class="programlisting">&lt;?php defined('_JEXEC') or die('Restricted access'); ?&gt;
+
+&lt;form action="index.php" method="post" name="adminForm" id="adminForm"&gt;
+&lt;div class="col100"&gt;
+    &lt;fieldset class="adminform"&gt;
+        &lt;legend&gt;&lt;?php echo JText::_( 'Details' ); ?&gt;&lt;/legend&gt;
+        &lt;table class="admintable"&gt;
+        &lt;tr&gt;
+            &lt;td width="100" align="right" class="key"&gt;
+                &lt;label for="greeting"&gt;
+                    &lt;?php echo JText::_( 'Greeting' ); ?&gt;:
+                &lt;/label&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input class="text_area" type="text" name="greeting" id="greeting" size="32" maxlength="250" value="&lt;?php echo $this-&gt;hello-&gt;greeting;?&gt;" /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;/fieldset&gt;
+&lt;/div&gt;
+
+&lt;div class="clr"&gt;&lt;/div&gt;
+
+&lt;input type="hidden" name="option" value="com_hello" /&gt;
+&lt;input type="hidden" name="id" value="&lt;?php echo $this-&gt;hello-&gt;id; ?&gt;" /&gt;
+&lt;input type="hidden" name="task" value="" /&gt;
+&lt;input type="hidden" name="controller" value="hello" /&gt;
+&lt;/form&gt;</pre><p>Notice that in addition to the input field, there is a hidden
+      field for the id. The user doesn't need to edit the id (and shouldn't),
+      so we silently pass it along in the form.</p></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality"></a>Implementing the Functionality</h3></div></div></div><p>So far, our controller only handles two tasks: edit and new.
+      However, we also have buttons to save, delete and cancel records. We
+      need to write code to handle and perform these tasks.</p><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord"></a>Saving a Record</h4></div></div></div><p>The logical next step is to implement the functionality to save
+        a record. Normally, this would require some switches and logic to
+        handle various cases, such as the difference between creating a new
+        record (an INSERT query), and updating an existing query (an UPDATE
+        query). Also, there are complexities involved in getting the data from
+        the form and putting it into the query.</p><p>The Joomla! framework takes care of a lot of this for you. The
+        JTable class makes it easy to manipulate records in the database
+        without having to worry about writing the SQL code that lies behind
+        these updates. It also makes it easy to transfer data from an HTML
+        form into the database.</p><div class="sect4" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.tableclass"></a>Creating the Table Class</h5></div></div></div><p>The JTable class is an abstract class from which you can
+          derive child classes to work with specific tables. To use it, you
+          simply create a class that extends the JTable class, add your
+          database fields as properties, and override the constructor to
+          specify the name of the table and the primary key.</p><p>Here is our JTable class:</p><pre class="programlisting">&lt;?php
+/**
+ * Hello World table class
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
+ * @license        GNU/GPL
+ */
+
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+
+/**
+ * Hello Table class
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class TableHello extends JTable
+{
+    /**
+     * Primary Key
+     *
+     * @var int
+     */
+    var $id = null;
+
+    /**
+     * @var string
+     */
+    var $greeting = null;
+
+    /**
+     * Constructor
+     *
+     * @param object Database connector object
+     */
+    function TableHello(&amp; $db) {
+        parent::__construct('#__hello', 'id', $db);
+    }
+}
+?&gt;</pre><p>You will see here that we have defined our two fields: the id
+          field and the greeting field. Then we have defined a constructor,
+          which will call the constructor of the parent class and pass it the
+          name of the table (#__hello), the name of the field which is the
+          primary key (id), and the database connector object.</p><p>This file should be called hello.php and it will go in a
+          directory called tables in the administrator section of our
+          component.</p></div><div class="sect4" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.modelfunction"></a>Implementing the Function in our Model</h5></div></div></div><p>We are now ready to add the method to the model which will
+          save our record. We will call this method store. Our store() method
+          will do three things: bind the data from the form to the TableHello
+          object, check to ensure that the record is properly formed, and
+          store the record in the database.</p><p>Our method looks like:</p><pre class="programlisting">/**
+ * Method to store a record
+ *
+ * @access    public
+ * @return    boolean    True on success
+ */
+function store()
+{
+    $row =&amp; $this-&gt;getTable();
+
+    $data = JRequest::get( 'post' );
+    // Bind the form fields to the hello table
+    if (!$row-&gt;bind($data)) {
+        $this-&gt;setError($this-&gt;_db-&gt;getErrorMsg());
+        return false;
+    }
+
+    // Make sure the hello record is valid
+    if (!$row-&gt;check()) {
+        $this-&gt;setError($this-&gt;_db-&gt;getErrorMsg());
+        return false;
+    }
+
+    // Store the web link table to the database
+    if (!$row-&gt;store()) {
+        $this-&gt;setError($this-&gt;_db-&gt;getErrorMsg());
+        return false;
+    }
+
+    return true;
+}</pre><p>This method gets added to the hello model.</p><p>The method takes one parameter, which is an associative array
+          of data that we want to store in the database. This can easily be
+          retrieved from the request as will be seen later.</p><p>You will see that the first line retrieves a reference to our
+          JTable object. If we name our table properly, we don't have to
+          specify its name - the JModel class knows where to find it. You may
+          recall that we called our table class TableHello and put it in a
+          file called hello.php in the tables directory. If you follow this
+          convention, the JModel class can create your object
+          automatically.</p><p>The second line will retrieve the data from the form. The
+          JRequest class makes this very easy. In this case, we are retrieving
+          all of the variables that were submitted using the 'POST' method.
+          These will be returned as an associative array.</p><p>The rest is easy - we bind, check and store. The bind() method
+          will copy values from the array into the corresponding property of
+          the table object. In this case, it will take the values of id and
+          greeting and copy them to our TableHello object.</p><p>The check() method will perform data verification. In the
+          JTable() class, this method simply returns true. While this doesn't
+          provide any value for us currently, by calling this method we make
+          it possible to do data checking using our TableHello class in the
+          future. This method can be overridden in our TableHello class with a
+          method that performs the appropriate checks.</p><p>The store() method will take the data that is in the object
+          and store it in the database. If the id is 0, it will create a new
+          record (INSERT), otherwise, it will update the existing record
+          (UPDATE).</p></div><div class="sect4" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.savingrecord.addingtask"></a>Adding the Task to the Controller</h5></div></div></div><p>We are now ready to add our task to the controller. Since the
+          task that we are firing is called 'save', we must call our method
+          'save'. This is simple:</p><pre class="programlisting">/**
+ * save a record (and redirect to main page)
+ * @return void
+ */
+function save()
+{
+    $model = $this-&gt;getModel('hello');
+
+    if ($model-&gt;store()) {
+        $msg = JText::_( 'Greeting Saved!' );
+    } else {
+        $msg = JText::_( 'Error Saving Greeting' );
+    }
+
+    // Check the table in so it can be edited.... we are done with it anyway
+    $link = 'index.php?option=com_hello';
+    $this-&gt;setRedirect($link, $msg);
+}</pre><p>All we do is get our model and invoke the store() method. Then
+          we use the setRedirect() method to redirect back to our list of
+          greetings. We also pass a message along, which will be displayed at
+          the top of the page.</p><div class="figure"><a id="mvctutorial4.message"></a><p class="title"><b>Figure 7.1. The message that was passed is displayed at the top of the
+            page.</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/message.png" alt="The message that was passed is displayed at the top of the page." /></div></div></div><br class="figure-break" /></div></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord"></a>Deleting a Record</h3></div></div></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.implementingmodelfunction"></a>Implementing the Function in the Model</h4></div></div></div><p>In the model, we will retrieve the list of IDs to delete and
+        call the JTable class to delete them. Here it is:</p><pre class="programlisting">/**
+ * Method to delete record(s)
+ *
+ * @access    public
+ * @return    boolean    True on success
+ */
+function delete()
+{
+    $cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
+    $row =&amp; $this-&gt;getTable();
+
+    foreach($cids as $cid) {
+        if (!$row-&gt;delete( $cid )) {
+            $this-&gt;setError( $row-&gt;getErrorMsg() );
+            return false;
+        }
+    }                        
+
+    return true;
+}</pre><p>We invoke the JRequest::getVar() method to get the data from the
+        request, then we invoke the $row-&gt;delete() method to delete each
+        row. By storing errors in the model we make it possible to retrieve
+        them later if we so choose.</p></div><div class="sect3" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.deletingrecord.removetask"></a>Handling the Remove Task in the Controller</h4></div></div></div><p>This is similar to the save() method which handled the save
+        task:</p><pre class="programlisting">/**
+ * remove record(s)
+ * @return void
+ */
+function remove()
+{
+    $model = $this-&gt;getModel('hello');
+    if(!$model-&gt;delete()) {
+        $msg = JText::_( 'Error: One or More Greetings Could not be Deleted' );
+    } else {
+        $msg = JText::_( 'Greeting(s) Deleted' );
+    }
+
+    $this-&gt;setRedirect( 'index.php?option=com_hello', $msg );
+}</pre></div></div><div class="sect2" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mvctutorial4.downanddirty.implementingfunctionality.canceloperation"></a>Cancelling the Edit Operation</h3></div></div></div><p>To cancel the edit operation, all we have to do is redirect back
+      to the main view:</p><pre class="programlisting">/**
+ * cancel editing a record
+ * @return void
+ */
+function cancel()
+{
+    $msg = JText::_( 'Operation Cancelled' );
+    $this-&gt;setRedirect( 'index.php?option=com_hello', $msg );
+}</pre></div></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.conclusion"></a>Conclusion</h2></div></div></div><p>We have now implemented a basic backend to our component. We are now
+    able to edit the entries that are viewed in the frontend. We have
+    demonstrated the interaction between models, views and controllers. We
+    have shown how the JTable class can be extended to provide easy access to
+    tables in the database. It can also be seen how the JToolBarHelper class
+    can be used to create button bars in components to present a standardized
+    look between components.</p></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mvctutorial4.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello4.zip" target="_top">com_hello4.zip</a></p></div></div></div><div class="appendix" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="jdmbook.apireference"></a>Appendix A. Joomla! Framework API Reference</h2></div></div></div></div><div class="appendix" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="jdmbook.howtos"></a>Appendix B. Development HOWTOs</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="article"><a href="#howto.savingformdata">HOWTO: Saving Form Data in Joomla! 1.5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#howto.savingformdata.safeway">The Safe Way to Bind the Request Array to a JTable Object</a></span></dt></dl></dd><dt><span class="article"><a href="#howto.loadextensionlibraryfiles">HOWTO: Loading Extension Library Files</a></span></dt></dl></div><div class="article" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="howto.savingformdata"></a>HOWTO: Saving Form Data in Joomla! 1.5</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Andrew</span> <span class="surname">Eddie</span></h3></div></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#howto.savingformdata.safeway">The Safe Way to Bind the Request Array to a JTable Object</a></span></dt></dl></div><div class="sect1" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="howto.savingformdata.safeway"></a>The Safe Way to Bind the Request Array to a JTable Object</h2></div></div></div><p>A common task when developing Joomla! components is saving data from
+    a form into a table in the database. One method of doing so that is both
+    save and easy is to process this data as follows:</p><pre class="programlisting">$post           = JRequest::get( ‘post’ );
+
+// fix up special html fields
+$post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’,
+’string’, _J_ALLOWRAW );
+
+$row = JTable::getInstance(‘category’, $db );
+if (!$row-&gt;bind( $post )) {
+...</pre><p>JRequest::get( ‘post’ ); 'get's an input filtered and slash
+    corrected (slashes stripped where magic quotes are enabled) copy of the
+    $_POST array. Because by default the array is filtered you loose any html
+    tags in fields that were input using an editor. We must redefine those
+    using JRequest::getVar and using the last option mark argument, in this
+    case telling us we want the raw value posted.</p><p>Following that we bind the JTable object to $post instead of
+    $_POST.</p><p>Doing things this way means:</p><table class="simplelist" border="0" summary="Simple list"><tr><td>your code is independant of magic quotes (that is, you can
+        assume they are off and there are no unwanted slashes polluting your
+        strings)</td></tr><tr><td>your input is automatically filtered of many known
+        nasties</td></tr><tr><td>the is no risk of operating directly on the $_POST superglobal
+        (which is generally a no-no)</td></tr><tr><td>future creative exploits can be covered by a single upgrade to
+        the JRequest class</td></tr></table><p>Using this technique, you can safely store data from the request
+    into your database tables.</p></div></div><div class="article" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="howto.loadextensionlibraryfiles"></a>HOWTO: Loading Extension Library Files</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Toby </span> <span class="surname">Patterson</span></h3></div></div></div><hr /></div><p>One common extension task is to load library files. If you're
+  extension employs many class files then you may wish to put all of these
+  files in a single libraries directory (as shown below).</p><div class="figure"><a id="howto.loadextensionlibraryfiles.lqmlibrarystructure"></a><p class="title"><b>Figure B..1. Directory Structure of Libraries Folder</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/lqmlibrarystructure.jpg" alt="Directory Structure of Libraries Folder" /></div></div></div><br class="figure-break" /><p>To load my libraries I use a loader function that accepts a path
+  argument in dot notation. This file can be defined in an include.php file
+  that is included by anyone wishing to use the library.</p><pre class="programlisting">/**
+ * Loader for LQM Library files
+ *
+ * @param    string $path A dot syntax path
+ * @return   boolean True if the library has been loaded
+ * @access   public
+ * @since    1.0
+ */
+function lqmLibraryImport( $path ) {
+    $lqmLibraryDirectory = dirname(__FILE__);
+    return JLoader::import('lqm.'.$path, $lqmLibraryDirectory);
+}</pre><p>It is important that you use a prefix to avoid name collisions in
+  JLoader::import(). Perhaps the best prefix is the name of the extension (
+  without the 'mod_' or 'com_' ). Don't use 'joomla' unless you want some
+  angry emails from your users...!</p><p>Once the include file has been loaded, you can do this.</p><pre class="programlisting">lqmLibraryImport('variable.input.input');</pre><p>Because my function appends 'lqm.' to the path, I'm actually cheating
+  a bit. The function jimport() would require you provide the library's path
+  but then jimport() works with several libraries located under J/libraries.
+  Your function would work with one - yours.</p></div></div></div></body></html>
