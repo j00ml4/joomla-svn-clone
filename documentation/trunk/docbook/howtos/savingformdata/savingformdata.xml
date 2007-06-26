@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <article id="howto.savingformdata">
-  <title>HOWTO: Saving Form Data in Joomla! 1.5</title>
-
   <articleinfo>
     <firstname>Andrew</firstname>
 
@@ -10,6 +8,8 @@
     <date>July 31, 2006</date>
   </articleinfo>
 
+  <title>HOWTO: Saving Form Data in Joomla! 1.5</title>
+
   <sect1 id="howto.savingformdata.safeway">
     <title>The Safe Way to Bind the Request Array to a JTable Object</title>
 
@@ -17,7 +17,7 @@
     a form into a table in the database. One method of doing so that is both
     save and easy is to process this data as follows:</para>
 
-    <programlisting>    <![CDATA[$post           = JRequest::get( ‘post’ );
+    <programlisting><![CDATA[$post           = JRequest::get( ‘post’ );
 
 // fix up special html fields
 $post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’,
@@ -25,7 +25,7 @@ $post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post�
 
 $row = JTable::getInstance(‘category’, $db );
 if (!$row->bind( $post )) {
-...]]>    </programlisting>
+...]]></programlisting>
 
     <para>JRequest::get( ‘post’ ); 'get's an input filtered and slash
     corrected (slashes stripped where magic quotes are enabled) copy of the

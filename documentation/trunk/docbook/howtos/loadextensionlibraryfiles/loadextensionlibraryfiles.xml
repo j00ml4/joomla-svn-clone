@@ -12,7 +12,7 @@
 
   <title>HOWTO: Loading Extension Library Files</title>
 
-  <para>One common extension task is to load library files. If you're
+  <para>One common extension task is to load library files. If your
   extension employs many class files then you may wish to put all of these
   files in a single libraries directory (as shown below).</para>
 
