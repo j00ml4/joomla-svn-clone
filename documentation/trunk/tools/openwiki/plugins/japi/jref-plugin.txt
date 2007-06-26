@@ -1,26 +1,55 @@
-===== {#JREF#} (planned) =====
-This second tag is available to create internal links to another wiki page of the Joomla Framework **Ref**erence, and is helpful in writing the index (overview) page of a class with all its members.
+===== {#JREF#} (WIP) =====
+This second tag is available to create internal links to another wiki page of the Joomla Framework **Ref**erence, and -- among other things -- should be helpful in writing the index (overview) page of a class with all its members.
 
-The tag takes pretty much the very same arguments as JAPI (incl. their order) with the exception of the revision date and document status. Unlike %%{#JAPI#}%%, JREF only generates links that point to the wiki, including the icon for the "target", e.g. Package, Class, Method, and Constant.
+%%{#JREF#}%% is an //inline element// and as such won't create line breaks.
 
-Its defaults are however slightly different than those of JAPI if you ommit arguments. Since its focussed to link between members of the same //subpackage//, the package name can usually be ommited.
+The tag pretty much takes the very same arguments as JAPI (incl. their order) with the exception of the revision date and document status. Unlike %%{#JAPI#}%%, JREF only generates links that point to a document in the (same) Wiki, including the icon for the "target", e.g. Package, Class, Method, and Constant.
+
+==== Syntax ====
+The fully fledged syntax of the %%{#JREF#}%% tag looks like this:
+  {#JREF Package.Name Subpackage ClassName::methodName#}
+
+The defaults are however slightly different than those of JAPI if you ommit arguments, in fact their precedence is reversed. Since the aim of JREF is to link between members of the same //hierarchy// of documents, the "upper level" members, such as the package or subpackage names can usually be ommited. This is the same behaviour when creating internal links with regular Wiki syntax to a page in the same folder; %%[[Document-In-SameFolder]]%%.
+
+The default for //Package.Name// is "Joomla.Framework", hence you'd probably never feel the need to provide it when documenting the Joomla! 1.5 Framework.
 
 
 ==== Examples ====
-Passing one parameter:
-  {#JREF JWhatever #}
-{#JREF JWhatever #}
-A class name located in the same (subpackage) folder: ''%%[[jwhatever.txt]]%%''
+For easier reading of the examples, the last parameter has a trailing space. Similar to the %%{#JAPI#}}%% element, the amount of white-space between parameters is not significant.
 
-  {#JREF JWhatever::fooBar #}
-{#JREF JWhatever::fooBar #}
-A class member (method) located in the same (subpackage) folder: ''%%[[jwhatever-foobar.txt]]%%''
+**Passing one parameter only**, the value is assumed to be a "document name" in the same folder, and it will be used for the label of the link.
 
-  {#JREF Joomla.Whatever #}
-{#JREF Joomla.Whatever #}
-A //package//: %%[[references:joomla.whatever]]%%
+A class:
+  Tag : {#JREF JWhatever #}
+  Wiki: [[JWhatever]]
+  File: ./jwhatever.txt
+{#JREF JWhatever#}
+There's no real advantage in using this syntax except for the (more) fancy icon that'd be placed in front of the link.
 
-Passing two parameters:
-  {#JREF Joomla.Whatever JWhatever::barBaz #}
-{#JREF Joomla.Whatever JWhatever::barBaz #}
-A class method located in some other package: ''%%[[references:joomla.whatever:jwhatever-barbaz.txt]]%%''
+A class member function:
+  Tag : {#JREF JWhatever::fooBarBazBat #}
+  Wiki: [[JWhatever-fooBarBazBat|JWhatever::fooBarBazBat]]
+  File: ./jwhatever-foobarbazbat.txt
+{#JREF JWhatever::fooBarBazBat#}
+You'd have to duplicate a lot more characters using Wiki syntax.
+
+A class %%__constructor%% :
+  Tag : {#JREF JWhatever:: #}
+  Wiki: [[JWhatever-__constructor|__constructor]]
+  File: ./jwhatever-_constructor.txt
+{#JREF JWhatever::#}
+
+A package index page located in the root of the //reference// namespace:
+  Tag : {#JREF Joomla.Whatever #}
+  Wiki: [[references:Joomla.Whatever]]
+  File: /references/joomla.whatever.txt
+{#JREF Joomla.Whatever#}
+The JREF (JAPI) parser doesn't come with sophisticated AI nor a spell checker, so as soon as it encounters a "dot" in the string it treats it as a Package name.
+
+**Passing two parameters** shows the usefulness and improved readability of the Plugin.
+  Tag : {#JREF Whatever JWhatever::fooBar #}
+  Wiki: [[references:Joomla.Framework:Whatever:JWhatever-fooBar]]
+  File: ~ /references/joomla.framework/whatever/jwhatever-foobar.txt
+{#JREF Whatever JWhatever::fooBar#}
+The //fooBar// method document of //class// JWhatever located in the package //Joomla.Whatever//.
+
