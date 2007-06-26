@@ -1,0 +1,146 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Developing a Model-View-Controller Component - Part 2 - Adding a Model</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mvctutorial2"></a>Chapter 1. Developing a Model-View-Controller Component - Part 2 - Adding a
+  Model</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial2.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.creatingmodel">Creating the Model</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.usingmodel">Using the Model</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial2.usingmodel.addingtopackage">Adding the File to the Package</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial2.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial2.download">Download</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.introduction"></a>Introduction</h2></div></div></div><p>In the first tutorial of this series, creating a simple
+    view-controller component using the Joomla! 1.5 CMS framework was
+    demonstrated.</p><p>In the first tutorial, the greeting was hardcoded into the view.
+    This doesn't follow the MVC pattern exactly because the view is intended
+    to only display the data, and not contain it.</p><p>In this second part of the tutorial we will demonstrate how to move
+    this out of the view and into a model. In future tutorials we will
+    demonstrate the power and flexibility that this design pattern
+    provides.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.creatingmodel"></a>Creating the Model</h2></div></div></div><p>The concept of model gets its name because this class is intended to
+    represent (or 'model') some entity. In our case, our first model will
+    represent a 'hello', or a greeting. This is in line with our design thus
+    far, because we have one view ('hello'), which is a view of our
+    greeting.</p><p>The naming convention for models in the Joomla! framework is that
+    the class name starts with the name of the component (in our case 'hello',
+    followed by 'model', followed by the model name. Therefore, our model
+    class is called HelloModelHello.</p><p>At this point, we will only model one behaviour of our hello, and
+    that is retrieving the greeting. We will thus have one method, called
+    getGreeting(). It will simply return the string 'Hello, World!'.</p><p>Here is the code for our model class:</p><pre class="programlisting">    &lt;?php
+/**
+ * Hello Model for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.model' );
+
+/**
+ * Hello Model
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+class HelloModelHello extends JModel
+{
+    /**
+    * Gets the greeting
+    * @return string The greeting to be displayed to the user
+    */
+    function getGreeting()
+    {
+        return 'Hello, World!';
+    }
+}    </pre><p>You will notice a line that starts with jimport. The jimport
+    function is used to load files from the Joomla! framework that are
+    required for our component. This particular statement will load the file
+    /libraries/joomla/application/component/model.php. The '.'s are used as
+    directory separators and the last part is the name of the file to load.
+    All files are loaded relative to the libraries directory. This particular
+    file contains the class definition for the JModel class, which is
+    necessary because our model extends this class.</p><p>Now that we have created our model, we must modify our view so that
+    it uses it to obtain the greeting.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.usingmodel"></a>Using the Model</h2></div></div></div><p>The Joomla! framework is setup in such a way that the controller
+    will automatically load the model that has the same name as the view and
+    will push it into the view. Since our view is called 'Hello', our 'Hello'
+    model will automatically be loaded and pushed into the view. Therefore, we
+    can easily retrieve a reference to our model using the JView::getModel()
+    method.</p><p>Our previous view code contained the lines:</p><pre class="programlisting">    $greeting = "Hello World!";    </pre><p>To take advantage of our model, we change this line to:</p><pre class="programlisting">    $model =&gt; $this-&gt;getModel();
+$greeting = $model-&gt;getGreeting();    </pre><p>The complete view now looks like:</p><pre class="programlisting">    &lt;?php
+
+/**
+ * Hello View for Hello World Component
+ * 
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:modules/
+ * @license    GNU/GPL
+ */
+
+// no direct access
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport( 'joomla.application.component.view');
+
+/**
+ * HTML View class for the HelloWorld Component
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Components
+ */
+
+class HelloViewHello extends JView
+{
+    function display($tpl = null)
+    {
+        $model =&gt; $this-&gt;getModel();
+        $greeting = $model-&gt;getGreeting();
+        $this-&gt;assignRef( 'greeting',	$greeting );
+
+        parent::display($tpl);
+    }
+}
+?&gt;    </pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial2.usingmodel.addingtopackage"></a>Adding the File to the Package</h3></div></div></div><p>All that remains is to add an entry to the XML file so that our
+      new model will be copied. The Joomla! framework will look for our model
+      in the models directory, so the entry for this file will look like (it
+      should be added to the site section):</p><pre class="programlisting">    &lt;filename&gt;models/hello.php&lt;/filename&gt;    </pre><p>Our new hello.xml file will look like:</p><pre class="programlisting">    &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+	&lt;name&gt;Hello&lt;/name&gt;
+    &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+    &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+    &lt;author&gt;John Doe&lt;/author&gt;
+    &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+    &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+    &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+    &lt;license&gt;License Info&lt;/license&gt;
+    &lt;!--  The version string is recorded in the components table --&gt;
+    &lt;version&gt;Component Version String&lt;/version&gt;
+    &lt;!-- The description is optional and defaults to the name --&gt;
+    &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+    &lt;!-- Site Main File Copy Section --&gt;
+    &lt;files folder="site"&gt;
+        &lt;filename&gt;index.html&lt;/filename&gt;
+        &lt;filename&gt;hello.php&lt;/filename&gt;
+        &lt;filename&gt;controller.php&lt;/filename&gt;
+        &lt;filename&gt;views/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+        &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+        &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+        &lt;filename&gt;models/index.html&lt;/filename&gt;
+        &lt;filename&gt;models/hello.php&lt;/filename&gt;
+    &lt;/files&gt;
+    
+    &lt;administration&gt;
+        &lt;!-- Administration Menu Section --&gt;
+        &lt;menu&gt;Hello World!&lt;/menu&gt;
+        
+        &lt;!-- Administration Main File Copy Section --&gt;
+        &lt;!-- Note the folder attribute: This attribute describes the folder
+            to copy FROM in the package to install therefore files copied
+            in this section are copied from /admin/ in the package --&gt;
+        &lt;files folder="admin"&gt;
+    &lt;!-- Site Main File Copy Section --&gt;
+            &lt;filename&gt;index.html&lt;/filename&gt;
+            &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+        &lt;/files&gt;        
+    &lt;/administration&gt;
+&lt;/install&gt;    </pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.conclusion"></a>Conclusion</h2></div></div></div><p>We now have a simple MVC component. Each element is very simple at
+    this point, but provides a great deal of flexibility and power.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial2.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello2.zip" target="_top">com_hello2.zip</a></p></div></div></body></html>

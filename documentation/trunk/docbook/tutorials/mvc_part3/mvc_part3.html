@@ -1,0 +1,134 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Developing a Model-View-Controller Component - Part 3 - Using the Database</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mvctutorial3"></a>Chapter 1. Developing a Model-View-Controller Component - Part 3 - Using the
+  Database</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Ian</span> <span class="surname">MacLennan</span></h3></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#mvctutorial3.introduction">Introduction</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.retrievingdata">Retrieving the Data</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.creatingsqlfile">Creating the Installation SQL File</a></span></dt><dd><dl><dt><span class="sect2"><a href="#mvctutorial3.creatingsqlfile.uninstall">Creating the Uninstall SQL File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#mvctutorial3.updatinginstallfile">Updating our Install File</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.conclusion">Conclusion</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.contributors">Contributors</a></span></dt><dt><span class="sect1"><a href="#mvctutorial3.download">Download</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.introduction"></a>Introduction</h2></div></div></div><p>In the first two tutorials, we showed you how to build a simple
+    model-view-controller component. We had one view which retrieved data from
+    a model (which was created in the 2nd tutorial). In this tutorial, we will
+    be working with the model. Instead of the data being hard coded in the
+    model, the model will retrieve the data from a table in the
+    database.</p><p>This tutorial will demonstrate how to use the JDatabase class to
+    retrieve data from the database.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.retrievingdata"></a>Retrieving the Data</h2></div></div></div><p>Our model currently has one method: getGreeting(). This method is
+    very simple - all it does is return the hard-coded greeting.</p><p>To make things more interesting, we will load the greeting from a
+    database table. We will demonstrate later how to create an SQL file and
+    add the appropriate code to the XML manifest file so that the table and
+    some sample data will be created when the component is installed. For now,
+    we will simply replace our return statement with some code that will
+    retrieve the greeting from the database and return it.</p><p>The first step is to obtain a reference to a database object. Since
+    Joomla! uses the database for its normal operation, a database connection
+    already exists; therefore, it is not necessary to create your own. A
+    reference to the existing database can be obtained using:</p><pre class="programlisting">    $db =&gt; JFactory::getDBO();    </pre><p>JFactory is a static class that is used to retrieve references to
+    many of the system objects. More information about this class can be found
+    in the API documentation.</p><p>The method name (getDBO) stands for get DataBase Object, and is easy
+    and important to remember.</p><p>Now that we have obtained a reference to the database object, we can
+    retrieve our data. We do this in two steps:</p><div class="orderedlist"><ol type="1"><li><p>store our query in the database object</p><p>load the result</p></li></ol></div><p>Our new getGreeting() method will therefore look like:</p><pre class="programlisting">    function getGreeting()
+{
+   $db =&gt; JFactory::getDBO();
+
+   $query = 'SELECT greeting FROM #__hello';
+   $db-&gt;setQuery( $query );
+   $greeting = $db-&gt;loadResult();
+
+   return $greeting;
+}    </pre><p>hello is the name of the table that we will create later, and
+    greeting is the name of the field that stores the greetings. If you are
+    not familiar with SQL, it would be helpful to take a tutorial or a lesson
+    to get yourself up to speed. One such tutorial can be found at <a href="http://www.w3schools.com/sql/default.asp" target="_top">w3schools</a>.</p><p>The $db-&gt;loadResult() method will execute the stored database
+    query and return the first field of the first row of the result. See
+    [[references:joomla.framework:database:jdatabase|JDatabase API reference]]
+    for more information about other load methods in the JDatabase
+    class.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.creatingsqlfile"></a>Creating the Installation SQL File</h2></div></div></div><p>The Joomla! installer has built-in support for executing queries
+    during component installation. These queries are all stored in a standard
+    text file.</p><p>We will have three queries in our install file: the first will drop
+    the table in case it already exists, the second will create the table with
+    the appropriate fields, and the third will insert the data.</p><p>Here are our queries:</p><pre class="programlisting">    DROP TABLE IF EXISTS `#__hello`;
+
+CREATE TABLE `#__hello` (
+  `id` int(11) NOT NULL auto_increment,
+  `greeting` varchar(25) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT DEFAULT CHARSET=utf8;
+
+INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
+('Bonjour, Monde!'),
+('Ciao, Mondo!');    </pre><p>You might find the #__ prefix on the table names rather odd. Joomla!
+    will replace this prefix with the prefix used by the current install. For
+    most installs, this table will become jos_hello. This allows multiple
+    installs of Joomla! to use the same database, and prevents collisions with
+    other applications using the same table names (i.e. two applications might
+    share a database, but might both require a 'users' table. This convention
+    avoids problems.)</p><p>We have specified two fields in our database. The first field is id,
+    and is called the 'primary key'. The primary key of a database table is a
+    field that is used to uniquely identify a record. This is often used to
+    lookup rows in the database. The other field is greeting. This is the
+    field that stores the greeting that is returned from the query that we
+    used above.</p><p>We will save our queries in a file called install.utf.sql.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mvctutorial3.creatingsqlfile.uninstall"></a>Creating the Uninstall SQL File</h3></div></div></div><p>Though we might hope that people will never want to uninstall our
+      component, it is important that if they do, we don't leave anything
+      behind. Joomla! will look after deleting the files and directories that
+      were created during install, but you must manually include queries that
+      will remove and tables that have been added to the database. Since we
+      have only created one table, we only need one query:</p><pre class="programlisting">    DROP TABLE IF EXISTS `#__hello`;    </pre><p>We will save this query in a file called
+      <code class="filename">uninstall.utf.sql</code>.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.updatinginstallfile"></a>Updating our Install File</h2></div></div></div><p>We need to change a few things in our install file. First, we need
+    to add our two new files to the list of files to install. SQL install file
+    have to go in the admin directory. Second, we need to tell the installer
+    to execute the queries in our files on install and uninstall.</p><p>Our new file looks like this:</p><pre class="programlisting">    &lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd"&gt;
+&lt;install type="component" version="1.5.0"&gt;
+   &lt;name&gt;Hello&lt;/name&gt;
+   &lt;!-- The following elements are optional and free of formatting conttraints --&gt;
+   &lt;creationDate&gt;2007 02 22&lt;/creationDate&gt;
+   &lt;author&gt;John Doe&lt;/author&gt;
+   &lt;authorEmail&gt;john.doe@example.org&lt;/authorEmail&gt;
+   &lt;authorUrl&gt;http://www.example.org&lt;/authorUrl&gt;
+   &lt;copyright&gt;Copyright Info&lt;/copyright&gt;
+   &lt;license&gt;License Info&lt;/license&gt;
+   &lt;!--  The version string is recorded in the components table --&gt;
+   &lt;version&gt;Component Version String&lt;/version&gt;
+   &lt;!-- The description is optional and defaults to the name --&gt;
+   &lt;description&gt;Description of the component ...&lt;/description&gt;
+
+   &lt;!-- Site Main File Copy Section --&gt;
+   &lt;files folder="site"&gt;
+      &lt;filename&gt;index.html&lt;/filename&gt;
+      &lt;filename&gt;hello.php&lt;/filename&gt;
+      &lt;filename&gt;controller.php&lt;/filename&gt;
+      &lt;filename&gt;views/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/view.html.php&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/index.html&lt;/filename&gt;
+      &lt;filename&gt;views/hello/tmpl/default.php&lt;/filename&gt;
+      &lt;filename&gt;models/hello.php&lt;/filename&gt;
+   &lt;/files&gt;
+   &lt;install&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;install.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/install&gt;
+   &lt;uninstall&gt;
+      &lt;sql&gt;
+         &lt;file charset="utf8" driver="mysql"&gt;uninstall.sql&lt;/file&gt;
+      &lt;/sql&gt;
+   &lt;/uninstall&gt;   
+   &lt;administration&gt;
+      &lt;!-- Administration Menu Section --&gt;
+      &lt;menu&gt;Hello World!&lt;/menu&gt;
+      
+      &lt;!-- Administration Main File Copy Section --&gt;
+      &lt;!-- Note the folder attribute: This attribute describes the folder
+         to copy FROM in the package to install therefore files copied
+         in this section are copied from /admin/ in the package --&gt;
+      &lt;files folder="admin"&gt;
+   &lt;!-- Site Main File Copy Section --&gt;
+         &lt;filename&gt;index.html&lt;/filename&gt;
+         &lt;filename&gt;admin.hello.php&lt;/filename&gt;
+         &lt;filename&gt;install.sql&lt;/filename&gt;
+         &lt;filename&gt;uninstall.sql&lt;/filename&gt;
+      &lt;/files&gt;      
+   &lt;/administration&gt;
+&lt;/install&gt;    </pre><p>You will notice two attributes present on the &lt;file&gt; tags
+    within the &lt;install&gt; and &lt;uninstall&gt; sections: charset and
+    driver. The charset is the type of charset to use. The only valid charset
+    is utf8. If you want to create install files for non-utf8 databases (for
+    older version of MySQL), you should omit this attribute.</p><p>The driver attribute specifies which database the queries were
+    written for. Currently, this can only be mysql, but in future versions of
+    Joomla! there may be more database drivers available.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.conclusion"></a>Conclusion</h2></div></div></div><p>We now have a component that takes advantage of both the Joomla! MVC
+    framework classes and the JDatabase classes. You are now able to write MVC
+    components that interact with the database and can use the Joomla!
+    installer to create and populate database tables.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.contributors"></a>Contributors</h2></div></div></div><table class="simplelist" border="0" summary="Simple list"><tr><td>staalanden</td></tr></table></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mvctutorial3.download"></a>Download</h2></div></div></div><p>The component can be downloaded at: <a href="packages/com_hello3.zip" target="_top">com_hello3.zip</a></p></div></div></body></html>
