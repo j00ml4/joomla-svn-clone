@@ -1,4 +1,4 @@
-<programlisting>    <![CDATA[/**
+<programlisting><![CDATA[/**
  * Loader for LQM Library files
  *
  * @param    string $path A dot syntax path
@@ -9,4 +9,4 @@
 function lqmLibraryImport( $path ) {
     $lqmLibraryDirectory = dirname(__FILE__);
     return JLoader::import('lqm.'.$path, $lqmLibraryDirectory);
-}]]>    </programlisting>
+}]]></programlisting>

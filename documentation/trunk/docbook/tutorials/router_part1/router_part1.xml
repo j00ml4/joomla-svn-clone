@@ -22,9 +22,13 @@
     <para>A good example of this is the "Welcome to Joomla" article. The first
     link shown was generated without mod_rewrite, and the second link was
     generated with mod_rewrite:
+<<<<<<< .mine
+    <code>http://www.example.com/index.php/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code><code>http://www.example.com/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code></para>
+=======
     <code>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</code>
     <code>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla</code>
     </para>
+>>>>>>> .r7763
   </sect1>
 
   <sect1 id="router_part1.alias">
