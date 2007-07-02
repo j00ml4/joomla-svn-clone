@@ -91,13 +91,48 @@ If you're encountering errors while trying the build instructions above...
      program versions incl. the DocBook XML and XSLT versions.
 
 
+DOCBOOK DTD + XSL locations
+The `Makefile.in` template contains two URIs that point to the locations
+of the DocBook 4.4 DTD and the XSLT (v1.72) stylesheets. 
+  DOCBOOK_DTD=http://www.oasis-open.org/docbook/xml/4.4/
+  DOCBOOK_XSL=http://docbook.sourceforge.net/release/xsl/current/
+
+If your system is properly configured, you do not need to change these
+URIs to point to a local path. xsltproc should use the LOCAL copies of 
+each as configured in the 'catalog files'.
+
+The file `/etc/xml/catalog` should contain these entries:
+  <rewriteSystem 
+       systemIdStartString="http://www.oasis-open.org/docbook/xml/4.4/" 
+             rewritePrefix="/usr/share/xml/docbook/4.4/"/>
+  <rewriteURI 
+       uriStartString="http://docbook.sourceforge.net/release/xsl/current/" 
+             rewritePrefix="/usr/share/docbook-xsl/"/>
+
+In a future version of the documentation built files, these URIs may be
+replaced with joomla.org URIs to ensure the integrity of the DTD and XSL
+files used, and bypass the dependency to the public versions in case
+they may change and thus break the built process.
+
+The DocBook XSLT should be version 1.72 -- if your system comes with 1.69
+or earlier you may want to update. You can find the version number in
+/usr/share/docbook-xsl/VERSION 
+   <fm:Version>1.72.0</fm:Version>
+
 The 'docbook-xml-*' and 'docbook-xsl' subdirectories have been excluded
 from SVN so you can safely unpack these archives in the docbook/ folder.
 
 
-FUTURE
+TODO
+ -	extend the current XSLT stylesheet (html.xsl) to match the corporate
+	design of other Joomla! websites.
+ -	add built files to support the Win32 native binaries of xsltproc to
+	avoid people having to install Cygwin.
+ -	add sanity checks, xref tools
 
-This README will be updated if the built process and structure of the 
-manual mature -- or change. Once they're "done", the built process will
-also be available using native Windows binaries.
 
+CREDITS
+This file and several parts of the xsltproc built files are based on the
+work and ideas of the Zend Framework documentation team.
+
+2007-06-12 .CirTap

@@ -37,14 +37,18 @@ FOP=@FOP@
 XSLTPROC=@XSLTPROC@
 XMLLINT=@XMLLINT@
 ECSRC=@ECSRC@
-HERE=@HERE@
+HERE=$(readlink -f $(dirname $0))
 
-DOCBOOK_DTD=./docbook-xml-4.4/docbookx.dtd
-DOCBOOK_XSL=./docbook-xsl/html/chunk.xsl
+# see README.txt Troubleshooting
+DOCBOOK_DTD=http://www.oasis-open.org/docbook/xml/4.4/
+DOCBOOK_XSL=http://docbook.sourceforge.net/release/xsl/current/
+
 HTML_XSL=html.xsl
 MANUAL_XML=manual.xml
 MANUAL_LINT_XML=manual-lint.xml.in
-MODULE=module_specs
+
+# documentation module (folder) for lint mode only: either howtos | tutorials
+MODULE=
 XMLFILE=
 
 all:	$(MANUAL_XML) html
@@ -89,7 +93,7 @@ check1: $(MANUAL_LINT_XML)
 		echo "File $(MODULE)/$(XMLFILE) not found." ; \
 	    fi ; \
 	else \
-	    echo "Please specify a filename, e.g. 'make XMLFILE=manual.xml lint'" ; \
+	    echo "Please specify a filename, e.g. 'make MODULE=subdir XMLFILE=filename.xml lint'" ; \
 	fi
 
 clean:

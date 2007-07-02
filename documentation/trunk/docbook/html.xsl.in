@@ -3,7 +3,7 @@
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"   
 				version="1.0">
 
-<xsl:import href="@DOCBOOK_XSL@"/>
+<xsl:import href="@DOCBOOK_XSL@html/chunk.xsl"/>
 	<xsl:param name="use.extensions">0</xsl:param>
 	<xsl:param name="use.id.as.filename">1</xsl:param>
 	<xsl:param name="base.dir">./</xsl:param>
@@ -17,7 +17,7 @@
 	<xsl:param name="chunk.first.sections">0</xsl:param>
 	<xsl:param name="chunk.tocs.and.lots">0</xsl:param>
 	<xsl:param name="html.extra.head.links">1</xsl:param>
-	<xsl:param name="generate.manifest">1</xsl:param>
+	<xsl:param name="generate.manifest">0</xsl:param>
 	<xsl:param name="admon.graphics">1</xsl:param>
 	<xsl:param name="admon.style"></xsl:param>
 	<xsl:param name="html.stylesheet">dbstyle.css</xsl:param>
