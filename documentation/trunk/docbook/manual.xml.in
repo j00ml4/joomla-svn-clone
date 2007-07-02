@@ -5,10 +5,8 @@
     <!ENTITY % xinclude SYSTEM "xinclude.mod">
     %xinclude;
 
-    <!ENTITY % author.davenport SYSTEM "joomla.org/author_davenport.xml">
-    <!ENTITY % author.eddie     SYSTEM "joomla.org/author_eddie.xml">
-    <!ENTITY % author.landry    SYSTEM "joomla.org/author_landry.xml">
-    <!ENTITY % author.maclennan SYSTEM "joomla.org/author_maclennan.xml">
+    <!ENTITY % jdm_authors SYSTEM "joomla.org/authors.ent">
+    %jdm_authors;
 
 ]>
 <book id="jdmbook" lang="en" xmlns:xi="http://www.w3.org/2003/XInclude">

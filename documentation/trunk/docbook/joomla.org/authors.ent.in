@@ -1,0 +1,20 @@
+<!-- -*- SGML -*-
+
+ $Id$
+ joomla.org./authors.ent.in
+
+ This is a list of file locations pointing to the various author XML fragments.
+ Pathnames are relative to @HERE@, the manual root, as declared in `Makefile.in`
+ These entities are supposed to be used with XInclude, i.e.
+
+ <author>
+    <xi:include href="&author.lastname" />
+ </author>
+
+ -->
+
+<!-- JDM authors -->
+<!ENTITY author.davenport SYSTEM "@HERE@/joomla.org/author_davenport.xml">
+<!ENTITY author.eddie     SYSTEM "@HERE@/joomla.org/author_eddie.xml">
+<!ENTITY author.landry    SYSTEM "@HERE@/joomla.org/author_landry.xml">
+<!ENTITY author.maclennan SYSTEM "@HERE@/joomla.org/author_maclennan.xml">
