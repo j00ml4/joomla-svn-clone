@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+
+<project name="Joomla! Build"
+	basedir="."
+	default="main">
+
+	<taskdef name="svnupdate"   classname="phing.tasks.ext.svn.SvnUpdateTask" />
+	<taskdef name="svncheckout"   classname="phing.tasks.ext.svn.SvnCheckoutTask" />
+
+	<property
+		name="joomla_scm_stable"
+		value="http://joomlacode.org/svn/joomla/development/releases"
+		override="true" />
+
+	<property
+		name="joomla_scm_trunk"
+		value="http://joomlacode.org/svn/joomla/development/trunk"
+		override="true" />
+
+	<property
+		name="joomla_scm_tags"
+		value="http://joomlacode.org/svn/joomla/development/tags"
+		override="true" />
+
+	<property
+		name="targetdir"
+		value="."
+		override="true" />
+
+	<property
+		name="chown"
+		value="."
+		override="www-data:staff" />
+
+	<property
+		name="scmusr"
+		value="anonymous"
+		override="true" />
+
+	<property
+		name="scmpwd"
+		value=""
+		override="true" />
+
+	<!-- MAIN -->
+	<target name="main" description="Build packages for a release">
+
+		<phingcall target="clean" />
+
+		<if>
+			<not><isset property="release"/></not>
+			<then>
+				<input propertyname="release"
+					defaultValue="trunk" promptChar="?">Release</input>
+			</then>
+		</if>
+
+		<!-- Look for a release, otherwise use the trunk -->
+		<if>
+			<or>
+				<equals arg1="${release}" arg2="1.5" />
+				<equals arg1="${release}" arg2="trunk" />
+				<equals arg1="${release}" arg2="" />
+			</or>
+			<then>
+				<property name="filename" value="1.5-trunk" override="true" />
+				<svnexport
+					username="${scmusr}"
+					password="${scmpwd}"
+					repositoryurl="${joomla_scm_trunk}"
+					todir="${targetdir}/src"
+					force="true" />
+			</then>
+			<else>
+				<property name="filename" value="${release}-svn" override="true" />
+				<svnexport
+					username="${scmusr}"
+					password="${scmpwd}"
+					repositoryurl="${joomla_scm_stable}/${release}"
+					todir="${targetdir}/src"
+					force="true" />
+			</else>
+		</if>
+
+		<!-- Lets add the empty configuration.php file :) -->
+		<touch file="${targetdir}/src/configuration.php" />
+
+		<!-- Ok, lets build the packages -->
+		<tar destfile="${targetdir}/bin/joomla_${filename}.tar.gz" basedir="${targetdir}/src" compression="gzip" />
+		<tar destfile="${targetdir}/bin/joomla_${filename}.tar.bz2" basedir="${targetdir}/src" compression="bzip2" />
+		<zip destfile="${targetdir}/bin/joomla_${filename}.zip" basedir="${targetdir}/src" />
+
+	</target>
+
+	<target name="clean" description="Clean up the files for a new build">
+		<delete dir="${targetdir}/src" includeemptydirs="true" failonerror="true" />
+		<delete dir="${targetdir}/bin" includeemptydirs="true" failonerror="true" />
+		<mkdir dir="${targetdir}/bin" />
+	</target>
+
+</project>
