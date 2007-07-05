@@ -7,7 +7,7 @@ Renders the feed.
 Extracts the data from the document object and wraps it into ATOM format feed markup.
 
 ===== Syntax =====
-string render ()
+string render ()
 
 ===== Examples =====
 <code php|Example>

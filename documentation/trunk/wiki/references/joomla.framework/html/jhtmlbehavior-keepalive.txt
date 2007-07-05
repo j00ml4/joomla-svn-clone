@@ -7,7 +7,7 @@ Adds the necessary Javascript and outputs the necessary code to keep the session
 This method returns a string containing the Javascript and HTML code to keep the session alive.
 
 ===== Syntax =====
-string keepalive ()
+string keepalive ()
 
 ===== Examples =====
 <code php|Example>
