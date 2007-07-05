@@ -35,9 +35,13 @@ This is the parent class to all table classes and is used to provide database in
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-store|store]] | Inserts a new row if id is zero or updates an existing row in the database table. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-toXML|toXML]] | Export item list to XML. |
 
+
 ----
 
+
+
 ~~DISCUSSION~~
+
 
 
 

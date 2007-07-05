@@ -17,6 +17,8 @@ All parameters have the following attributes:
   * **description** - The text that will display when you hover over the label
   * **default** - The default value to use
 
+
+
 ===== General Use =====
 
 Parameters definitions are made up of one ''params'' tag and one or more ''param'' tags, for example:
@@ -26,9 +28,9 @@ Parameters definitions are made up of one ''params'' tag and one or more ''param
   <param ... />
 </params></php>
 
-The ''params'' tag can take the optional ''addparameterdir'' attribute which is equivalent to calling ''$params->addParameterDir()'' in the code.  It should hold a full path relative to the site installation folder, for example:
+The ''params'' tag can take the optional ''addpath'' attribute which is equivalent to calling ''$params->addElementPath()'' in the code.  It should hold a full path relative to the site installation folder, for example:
 
-<php><params addparameterdir="/components/com_contact/elements">
+<php><params addpath="/components/com_contact/elements">
   <param ... /></php>
 
 This allows any developer to define custom controls.
