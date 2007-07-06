@@ -1,6 +1,8 @@
 ====== Welcome to the Joomla! Development Wiki ======
 
+
 The Joomla! project has several working groups that have been created to utilise the wealth of knowledge our community provides. Each of these groups focuses on a specific aspect of Joomla! essential to the project's growth and development.
+
 
 The working groups use the wiki to draft information sheets, howto's and general information related to their activities.  Only working group members have write access on the wiki. 
 
