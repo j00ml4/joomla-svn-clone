@@ -1,0 +1,15 @@
+====== Path constants ======
+Joomla! implements a three tiered architecture where we have independent applications that sit on top of the Joomla! framework.  The system needs to know about some specific filesystem paths for a multitude of operations within the system.  To reduce the possibility of XSS we define these paths as PHP constants.
+
+====1. What are JPATH_SITE and JPATH_ADMINISTRATOR?====
+There are three applications that are packaged with a base Joomla! install: JSite, JAdministrator and JInstallation.
+
+JPATH_SITE represents the root path of the JSite application, JPATH_ADMINISTRATOR represents the root path of the JAdministrator application, and JPATH_INSTALLATION represents the root path of the JInstallation application.  Of course, the JInstallation application is to be removed after installation so after removal the only two applications left would be JSite and JAdministrator.
+
+====2. What is JPATH_BASE?====
+During script execution it is important in many cases to know the root path of the application that was invoked.  JPATH_BASE is that path.  For example, if the requested page is on the JSite application JPATH_BASE is equivalent to JPATH_SITE and if the requested page is on the JAdministrator application then JPATH_BASE is equivalent to JPATH_ADMINISTRATOR.
+
+Obviously the same would be true for any application utilizing the Joomla! framework such as JInstallation or any custom application.
+
+====3. What is JPATH_ROOT?====
+Another important path for Joomla! is the root path to the Joomla! framework.  This is what JPATH_ROOT defines.  JPATH_ROOT is the root path for the Joomla! install and is independent of any application.

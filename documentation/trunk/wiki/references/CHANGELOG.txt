@@ -1,0 +1,103 @@
+
+$Id: CHANGELOG.txt 85 2007-02-20 19:21:31Z cirtap $
+
+Changelog
+---------
+This is a non-exhaustive (but still near complete) changelog for the
+Joomla! 1.5 API reference documentation.
+
+Legend:
+
+# -> Documentation fix
++ -> Addition
+^ -> Change
+- -> Removed
+> -> Moved
+! -> Note
+---------
+
+20.02.2007 René Serradeil
+ >	/abstract to /base (again)
+ ^	links and occurances of Abstract to Base
+
+18.02.2007 René Serradeil
+ +	JApplication.txt: dispatch, render, route methods, added related files.
+
+13.02.2007 René Serradeil
+ #	JNode.txt, JTree.txt
+ +	mosHTML to Joomla.Jegacy/1.5.txt
+ >	joomla.framework/utilities/utilities-*.txt to
+	joomla.legacy/1.5/moshtml-*.txt
+ # link to JHTML in (both) moshtml.txt
+ # broken images introduced in "house cleaning":
+ 	jhtml.txt, jpagination.txt
+	
+ ^ jhtml.txt: updated method list + descriptions (was based on mosHTML)
+
+12.02.2007 René Serradeil
+ +	/abstract/JNode.txt
+ +	/abstract/JTree.txt
+
+10.02.2007 René Serradeil
+ ! house cleaning ;)
+ - empty (useless) links on API images:
+	old: [[|{{http://api.joomla.org/images/Method.php}}]]
+	new: {{http://api.joomla.org/images/Method.php?nolink}}
+ # consistant page headers to "extended table" layouts
+	classes:
+		^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+	methods:
+		^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+ ^ moved '/abstract' to '/common/abstract' to reflect code structure
+ + Abstract.txt index
+ ^ shortcut link [[Abstract]] in subpackage files
+ # HTML markup from Smarty templates in "application/jplugin-jplugin.txt"
+ # PHP.net manual links, see: http://www.php.net/my.php
+	- http://(www|ca|ca3).php.net/manual/en/foo.bar.php
+	+ http://php.net/manual/foo.bar.php
+ ! Please use the generic URI to allow language negotiation and automatic mirrors of the PHP web site
+ # wrong/empty wiki-links to Joomla.Framework in jversion*.txt
+ # jeventdispatcher-getinstance.txt, example + description
+ ^ added a leading "/" to anchor links pointing to: 
+	    [[references:joomla.framework#Package]]
+	 -> [[references:joomla.framework/#Package]]
+	this will fix/speed up navigation to the headings in the main index files,
+	The internal "page TOC" has a "bug" 
+ ^ added "deprecated" notice to "joomla.legacy/1.5/moshtml.txt" with ref. to JHTML
+ ^ added cross-link in "joomla/utilities/moshtml.txt" to "joomla.legacy/1.5/moshtml.txt"
+ - classes.txt, class_index.txt
+	not referenced anywhere, outdated, appear to be left-overs from phpDocmentor stubs
+ ^ JSession.txt, table of method for the (3rd!) brand-new interface of this class...
+ - all jsession*.txt method files: all outdated thanx to Jinx ;)
+ ^ other stuff I can't remember ...
+
+13.01.2007 Chris Davenport
+ ^ Added JException to joomla.framework.txt
+
+09.01.2007 Chris Davenport
+ ^ Removed JSessionHandlerFile from joomla.framework.txt
+ ^ Added JSessionHandlerNone to joomla.framework.txt
+ ^ Added JApplication->close() to japplication.txt
+
+08.01.2007 Chris Davenport
+ ^ Added JSessionHandler, JSessionHandlerFile and JSessionHandlerDatabase to joomla.framework.txt
+ ^ Added JSessionHandlereAccelerator and JSessionHandlerAPC to joomla.framework.txt
+
+06.01.2007 Chris Davenport
+ + Added JProfiler class page
+ ^ Added JButton_Confirm to joomla.framework.txt
+
+30.11.2006 René Serradeil
+ ^ moved jstring*.txt from I18N to Utilities
+
+27.11.2006 Ian MacLennan
+ - duplicate/deprecated files
+
+25.11.2006 René Serradeil
+ ^ joomla.legacy/1.1 => /1.5/
+ # Package and class index in joomla.legacy.txt
+ ^ joomla.framework/base/ => /abstract/
+ # "Joomla 1.1" => "Joomla! 1.5"
+ # "extended" header in jobject*.txt files
+ - jobject-_destruct.txt
+

@@ -1,0 +1,65 @@
+====== How to use the database classes in your script ======
+Joomla provides a sopisticated database abstraction layer to simplify the usage for 3PD. This guide should help you using this layer.
+
+=====1. Why should I use the Joomla database class?=====
+Joomla is build to be able to use several different kinds of SQL-database-systems and to run in a variety of environments with different table-prefixes. In addition to these functions, the class automatically creates the database connection. Besides instantiating the object, you only need 2 lines of code to get a result from the database and that in a variety of formats. Using the Joomla database layer ensures a maximum of compatibility and flexibility for your extension.
+
+
+=====2. Preparating the query=====
+<code php|Database usage>
+// Get a database object
+$db = JFactory::getDBO();
+
+$query = "SELECT * FROM #__example_table WHERE id = 999999";
+$db->setQuery($query);
+</code>
+First we instantiate the database object, then we prepare the query. You can use the normal SQL-syntax, the only thing you have to change is the table-prefix. To make this as flexible as possible, Joomla uses a placeholder for the prefix, the %%#__%%. In the next step, the setQuery(), this string is replaced with the correct prefix.
+
+Now, if we don't want to get information from the database, but insert a row into it, we need one more function. Every string-value in the SQL-syntax has to be quoted, therefore we have to hand over these values to the function $db->Quote($value).
+
+Whatever we want to do, we have to set the query with the setQuery()-function. Although you could write the query directly as a parameter for setQuery(), its commonly done by first saving it in a variable, normally $query, and then handing this variable over. This helps writing clean, readable code.
+
+=====3. Executing the Query=====
+To execute the query, Joomla provides several functions, which differ in their return value.
+
+==== Basic Query Execution ====
+  * query
+
+==== Query Execution Information ====
+  * getAffectedRows
+  * explain
+  * insertid
+
+==== Insert Query Execution ====
+  * insertObject
+
+=====4. Query Results =====
+The database class contains many methods for working with a query's result set.
+
+==== Single Value Result ====
+  * loadResult
+
+====Single Row Results ====
+  * loadObject
+  * loadRow
+  * loadResultArray
+
+==== Multi-Row Results ====
+  * loadObjectList
+  * loadRowList
+  * loadAssocList
+
+==== Misc Result Set Methods ====
+  * getNumRows
+
+=====5. Tips, Tricks & FAQ=====
+We had a few people lately using sub-queries like these:
+<code sql|Sub-queries>
+SELECT * FROM #__example WHERE id IN (SELECT * FROM #__example2);
+</code>
+These kind of queries are only possible in MySQL 4.1 and above. Another way to achieve this, is splitting the query into two:
+<code php|Splitted query>
+$query = "SELECT * FROM #__example2";
+$database->setQuery($query);
+$query = "SELECT * FROM #__example WHERE id IN (". implode(",", $database->loadArray()) .")";
+</code>

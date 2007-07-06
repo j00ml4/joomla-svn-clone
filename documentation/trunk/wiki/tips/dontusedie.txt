@@ -1,0 +1,29 @@
+====== Don't use die() to debug ======
+
+Joomla! 1.5 includes the ability to optionally store the user session in the database.  In PHP 5, because of the order in which it does things, an connection to the database will be closed before it fires the session handlers.
+
+As a result of this, the common-place practice of using the ''die('test1');'' function will result in a plethora of errors being thrown, similar to the following:
+
+''Warning: mysqli_query() [<a href='function.mysqli-query'>function.mysqli-query</a>]: Couldn't fetch mysqli in C:\Apache2\htdocs\www_site\libraries\joomla\database\database\mysqli.php on line 147''
+
+or:
+
+''Warning: mysql_real_escape_string() [function.mysql-real-escape-string]: Access denied for user 'root'@'localhost' (using password: NO) in /var/www/html/libraries/joomla/database/database/mysql.php on line 105''
+
+In order to stop execution gracefully, you need to use the following code:
+
+<code|Correct way to gracefully stop execution>
+echo 'Test';
+$mainframe->close();
+</code>
+
+If you are developing your own component, you might like to include your own utility function to provide this functionality:
+
+<code|Function to stop execution with a message>
+function stop($msg = '')
+{
+    global $mainframe;
+    echo $msg;
+    $mainframe->close();
+}
+</code>

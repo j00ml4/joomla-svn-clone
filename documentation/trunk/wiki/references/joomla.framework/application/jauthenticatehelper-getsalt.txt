@@ -1,0 +1,35 @@
+====== getSalt ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JAuthenticateHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper->getSalt]] | 19 September 2006 | Published |
+
+Returns a salt for the appropriate kind of password encryption.
+Optionally takes a seed and a plaintext password to extract the seed  of an existing password, or for encryption types that use the plaintext in the generation of the salt. For more information, see [[EncryptionTypes|Password Encryption Types]].
+
+===== Syntax =====
+string getSalt	( **$encryption**, **$seed**, **$plaintext** )
+| **$encryption** | string | is a string containing the kind of password encryption to use. This parameter is optional and if omitted defaults to md5-hex. |
+| **$seed** | string | is a string containing the seed to get the salt from (usually a previously generated password). This parameter is optional and if omitted a new seed will be generated. |
+| **$plaintext** | string | is a string containing the plaintext password that we're generating a salt for. This parameter is optional and if omitted defaults to an empty string. |
+
+===== Examples =====
+The [[JAuthenticateHelper-getcryptedpassword|getCryptedPassword]] method calls this method in the following way:
+<code php|Example 1>
+jimport( 'joomla.application.user.authenticate' );
+
+$salt = JAuthenticateHelper::getSalt( $encryption, $salt, $plaintext );
+</code>
+
+Generate a salt for a password:
+<code php|Example 2>
+jimport( 'joomla.application.user.authenticate' );
+
+echo "Salt: " . JAuthenticateHelper::getSalt( 'crypt', '', 'password' );
+</code>
+might produce:
+<code php|Result>
+Salt: f6
+</code>
+
+----
+
+~~DISCUSSION~~

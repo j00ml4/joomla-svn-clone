@@ -1,0 +1,25 @@
+======How to determine if the user is viewing the front page======
+
+In Joomla! 1.0.x it was possible to determine if the user was viewing the front page by using code like this:
+
+<code php|Determine if user is viewing the front page in Joomla! 1.0.x>
+<?php
+if ($option == 'com_frontpage') {
+	echo 'This is the front page';
+}
+?>
+</code>
+
+But in Joomla! 1.5.x the com_frontpage component is no longer present.  This is how to achieve the same result in Joomla! 1.5.x
+
+<code php|Determine if user is viewing the front page in Joomla! 1.5.x>
+<?php
+if (JRequest::getVar('view') === 'frontpage') {
+	echo 'This is the front page';
+}
+?>
+</code>
+
+----
+
+~~DISCUSSION~~

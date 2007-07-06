@@ -1,0 +1,142 @@
+====5.3 User Events for Plugin System====
+
+===5.3.1 Overview===
+In a standard installation of Joomla! 1.5 we have several predefined events which, when triggered, call functions in the associated plugins. For more information on plugins,
+look [[plugins:create_plugin|here]].
+
+The user events are divided into two parts. First we have the events used while 
+authentication of a user takes place:
+  *onLoginUser
+  *onLogoutUser
+  *onAuthenticate
+  *onAuthenticateFailure
+  
+Second we have the events triggered during user management:
+  *onBeforeStoreUser
+  *onAfterStoreUser
+  *onBeforeDeleteUser
+  *onAfterDeleteUser
+
+===5.3.2 onLoginUser===
+==5.3.2.1 Description==
+This event is triggered after the user is authenticated against the Joomla! user-base.
+If one plugin returns false, the entire authentication process fails.
+==5.3.2.2 Parameters==
+Two parameters: credentials, and remember.\\
+Credentials is an array with this structure:\\
+['username']\\
+['password']\\
+Remember is a boolean, set to true if the login needs to be remembered by the application.
+==5.3.2.3 Return Value==
+Boolean
+==5.3.2.4 Used in files==
+  *libraries/joomla/application/application.php
+  *plugins/user/joomla.php
+==5.3.2.5 Examples==
+  *plugins/user/example.php
+  
+
+===5.3.3 onLogoutUser===
+==5.3.3.1 Description==
+This event is triggered before the user is logged out of the system. If one plugin
+returns false, the global logout fails.
+==5.3.3.2 Parameters==
+Array of credentials. Structure:\\
+['username']\\
+['id']\\
+==5.3.3.3 Return Value==
+Boolean
+==5.3.3.4 Used in files==
+  *libraries/joomla/application/application.php
+  *plugins/user/joomla.php
+==5.3.3.5 Examples==
+  *plugins/user/example.php
+
+===5.3.4 onAuthenticate===
+==5.3.4.1 Description==
+This event is triggered to verify that a set of login credentials is valid.
+==5.3.4.2 Parameters==
+Array of credentials. Structure:\\
+['username']\\
+['password']\\
+Alternative authentication mechanisms can supply additional credentials.
+
+==5.3.4.3 Return Value==
+An array of [[references:joomla.framework:user:jauthenticateresponse|JAuthenticateResponse]] objects detailing the results of each called plugin, including success or failure.
+==5.3.4.4 Used in files==
+  *libraries/joomla/application/user/authentication.php
+  *plugins/authentication/gmail.php
+  *plugins/authentication/joomla.php
+  *plugins/authentication/ldap.php
+==5.3.4.5 Examples==
+  *plugins/authentication/example.php
+
+===5.3.5 onAuthenticateFailure===
+==5.3.5.1 Description==
+This event is triggered whenever a user authentication request is failed by any plugin.
+==5.3.5.2 Parameters==
+Two parameters. The credentials array for the user (see onAuthenticate), and the
+[[references:joomla.framework:user:jauthenticateresponse|JAuthenticateResponse]] that caused the failure.
+==5.3.5.3 Return Value==
+Unknown. The return value appears to be ignored in any case.
+==5.3.5.4 Used in files==
+  *libraries/joomla/application/user/authentication.php
+
+===5.3.6 onBeforeStoreUser===
+==5.3.6.1 Description==
+This event is triggered before a new user is stored in the database.
+==5.3.6.2 Parameters==
+Two parameters:
+  *An associative array of the columns in the user table.
+  *A unique identifier for this user.
+==5.3.6.3 Return Value==
+None
+==5.3.6.4 Used in files==
+  *libraries/joomla/user/user.php
+==5.3.6.5 Examples==
+  *plugins/user/example.php
+
+===5.3.7 onAfterStoreUser===
+==5.3.7.1 Description==
+This event is triggered after a new user has been stored in the database.
+==5.3.7.2 Parameters==
+Two parameters:
+  *An associative array of the columns in the user table.
+  *A unique identifier for this user.
+==5.3.7.3 Return Value==
+None
+==5.3.7.4 Used in files==
+  *libraries/joomla/user/user.php
+==5.3.7.5 Examples==
+  *plugins/user/example.php
+
+===5.3.8 onBeforeDeleteUser===
+==5.3.8.1 Description==
+The event is triggered when a user is about to be deleted from the system.
+==5.3.8.2 Parameters==
+An associative array containing user information. Structure:\\
+['id']\\
+==5.3.8.3 Return Value==
+None.
+==5.3.8.4 Used in files==
+  *libraries/joomla/user/user.php
+  *plugins/user/joomla.php
+==5.3.8.5 Examples==
+  *plugins/user/example.php
+
+===5.3.9 onAfterDeleteUser===
+==5.3.9.1 Description==
+The event is triggered after a user has been deleted from the system.
+==5.3.9.2 Parameters==
+Three parameters: user information, delete result, and error result.
+User information is an associative array. Structure:\\
+['id']\\
+Delete result is boolean true if the delete succeeded or an error message on failure.\\
+Error result is a [[references:joomla.framework:utilities:jerror|JError]] object detailing the error, if any.
+==5.3.9.3 Return Value==
+None.
+==5.3.9.4 Used in files==
+  *libraries/joomla/user/user.php
+  *plugins/user/joomla.php
+==5.3.9.5 Examples==
+  *plugins/user/example.php

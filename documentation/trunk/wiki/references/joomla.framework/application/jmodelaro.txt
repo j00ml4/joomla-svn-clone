@@ -1,0 +1,14 @@
+====== JModelARO [WIP] ======
+
+
+
+===== Methods =====
+
+==== __construct ====
+
+=== Syntax ===
+JModelARO __construct	( mixed &$db )
+
+
+=== Examples ===
+

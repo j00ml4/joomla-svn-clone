@@ -1,0 +1,8 @@
+====== Templates ======
+A template is an extension that puts a certain look and feel on your site. With a template you can change the layout, pallete and overall user experience for your site. Templates have placeholders which are filled in with the output from modules and components. They also have their own CSS files and image directories to provide maximum flexibility in how you style your site.
+
+===== 1. How-To's =====
+
+===== 2. Manuals =====
+  * [[templates:parameters|Template Parameters]]
+  * [[templates:xml_installfile|XML-Installation file]]

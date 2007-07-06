@@ -1,0 +1,114 @@
+====== How to use User State Variables ======
+Joomla! provides built in functionality to make it easy for Joomla! developers to store and retrieve variables that are stored with the session.
+
+=====1. Why should I use the Joomla! User State Variables?=====
+Joomla!'s built in session handling capabilities make it easy to retain values of certain variables across page accesses. This makes development much simpler because the developer no longer has to worry about losing variable values if it is left out of a form. Storing variables with sessions also makes the application cleaner and tidier since it reduces the amount of form variables, and persistent variables no longer have to be passed in either the query string (making very long URLs) or in POST variables.
+
+The downside of using session variables is that it makes page URLs stateful. That is, if used improperly, a URL might point to certain information in one context, but different information in another context. This can make search engines less effective since the web crawler might pull up a certain page using a certain URL, that when the user links to the URL from the search engine, might pull up a different page, resulting in user confusion and frustration.
+
+=====2. Setting and retrieving user state variables=====
+There are two ways to set user state variables. The first is fairly intuitive, and is done using the JApplication::setUserState method. The second is a little less obvious, and uses the JApplication::getUserStateFromRequest method. There are also two ways to retrieve user state variables. The first is using the JApplication::getUserState method, and the second is to use the JApplication::getUserStateFromRequest method. JApplication::getUserStateFromRequest can be used to both store and retrieve user state variables.
+
+The following methods are used for accessing the user state variables:
+
+====Method 1: JApplication::setUserState====
+<code php|Using the JApplication::setUserState method:>
+global $mainframe;
+
+// store the variable that we would like to keep for next time
+// function syntax is setUserState( $key, $value );
+$mainframe->setUserState( "$option.state_variable", "state1" );
+</code>
+
+The first parameter is the key under which to store the variable. You will note that in this example the key began with the $option variable. Although the value for $key is arbitrary, it is good practice to use this as a prefix for all user state variables since these are all in the same name space. Using an extension specific prefix avoids extensions interfering with each other. In the example above, state_variable is the name of the state variable that will be stored, and the second parameter is the value to store with the state variable.
+
+
+====Method 2: JApplication::getUserStateFromRequest====
+<code php|Using the JApplication::getUserStateFromRequest method:>
+global $mainframe;
+
+// retrieve the value of the state variable. First see if the variable has been passed
+// in the request. Otherwise retrieve the stored value. If none of these are specified,
+// the specified default value will be returned
+// function syntax is getUserStateFromRequest( $key, $request, $default );
+$stateVar = $mainframe->getUserStateFromRequest( "$option.state_variable", 'state_variable', 'state1' );
+</code>
+
+The first parameter is the key under which to store the variable. Note again that this is prefixed with the name of the current extension. This method will update the user state variable by looking in the variables that were passed with the request (in either GET or POST) and updating the user state variable if the specified request variable is set. This can be used to set user state variables with values that are passed from forms (i.e. from the user). If an existing value can be found either in the request or in the stored state variable, this is returned. Otherwise, the specified default value is returned (if it is specified), or NULL is returned if no value can be found.
+
+====Method 3: JApplication::getUserState====
+<code php|Using the JApplication::getUserState method:>
+global $mainframe;
+
+// retrieve the value of the state variable. If no value is specified,
+// the specified default value will be returned.
+// function syntax is getUserState( $key, $default );
+$stateVar = $mainframe->getUserState( "$option.state_variable", 'state1' );
+</code>
+
+The first parameter is the key under which to store the variable. Note again that this is prefixed with the name of the current extension. This method will retrieve the value of the specified user state variable. If this user state variable has not been set, then the value is read from the $default parameter. If the user state variable has not been set and $default is not specified, the method will return NULL.
+
+
+=====3. A real life example of the use of Joomla! user state variables=====
+The following code excerpts are taken from the admin section of the Newsfeed component, which is a core Joomla! component. These snippets are meant to demonstrate how user state variable can be used in an actual application.
+
+====Purpose====
+It will be noticed that in many of the components that have database tables associated with them present to the user a list of items. In the case of the Newsfeed component, the administration section presents to the user a list of Newsfeeds. If there are too many newsfeeds to list on one page, then two variables are used to keep track of where the user is in the list: the limit variable, and the limitstart variable. The Newsfeed component (like other components) uses state variable to store the value of these variables between page requests.
+
+By storing these variable in a state variable, then if a user goes to administer another component or navigates away from the component, then these values are still remembered when the user returns. In addition, these values then only have to be passed if they are being changed. The developer does not have to bother with inserting hidden form feeds to pass these values along.
+
+====Setting and retrieving the variables====
+The following code is user to set and retrieve the values of these variables:
+<code php|Setting and retrieving state variables>
+global $mainframe;
+
+$limit = $mainframe->getUserStateFromRequest( "limit", 'limit', $mainframe->getCfg('list_limit') );
+$limitstart = $mainframe->getUserStateFromRequest( "$option.limitstart", 'limitstart', 0 );
+</code>
+
+The first variable that is stored is the limit variable. The limit variable specifies how many records should be retrieved from the database and displayed. It is noted that there is no **$option** prefix in the **$key** parameter. This is because this variable is used as a global parameter (and its initial value is retrieved from the site configuration value). The value is retrieved from the request variable called 'limit'. If the state variable has not been specified yet and it is not specified in the request, then the value is retrieved from the site configuration using the JApplication::getCfg method.
+
+The second variable that is stored is the limitstart variable. This specifies how many records to skip over before returning records from the database. Each component has its own list and so keeps its own place in its own list. The **$option** parameter in this case has the value 'com_newsfeeds', and so the session variable name is 'com_newsfeeds.limitstart'. 
+
+====Passing values to JPagination class====
+In this example, the stored values are used as parameters for constructing the pagination class, which helps the developer implement pagination functionality.
+
+Ultimately, this will result in the following form elements being displayed on the page:
+<code php|Form code>
+<div class="limit">Display #
+<select name="limit" id="limit" class="inputbox" size="1" onchange="document.adminForm.submit();">
+<option value="5"  selected="selected">5</option>
+<option value="10" >10</option>
+<option value="15" >15</option>
+<option value="20" >20</option>
+<option value="25" >25</option>
+<option value="30" >30</option>
+<option value="50" >50</option>
+<option value="100" >100</option></select>
+</div>
+
+<div class="start"><span>Start</span></div>
+<div class="button2-right off"><div class="prev"><span>Prev</span></div></div>
+<div class="button2-left"><div class="page">
+<span>1</span>
+<a title="2" onclick="javascript: document.adminForm.limitstart.value=5; document.adminForm.submit();return false;">2</a>
+</div></div>
+
+<div class="button2-left"><div class="next">
+<a title="Next" onclick="javascript: document.adminForm.limitstart.value=5; document.adminForm.submit();return false;">Next</a>
+</div></div>
+
+<div class="button2-left"><div class="end"><a title="End" onclick="javascript: document.adminForm.limitstart.value=5; document.adminForm.submit();return false;">End</a></div></div>
+
+<div class="limit">
+Results 1 - 5 of 10</div>
+
+<input type="hidden" name="limitstart" value="0" />
+</code>
+
+One may be observant and notice that the values are passed in hidden form elements anyway, and claim therefore that it is really not necessary to use state variables. But this will not help in the situation where the user has navigated away from the component, and it will also not help in the situation which occurs in the list, for example, where each newsfeed is listed and linked using a standard link, and not the form. Using state variables saves having to add limit and limitstart on to the end of these URLs.
+
+=====4. See Also====
+For information on the Joomla! API relating to session variables, please consult the following sources:
+  * [[references:joomla.framework:application:japplication|JApplication class]]
+  * [[references:joomla.framework:application:jsession|JSession class]]

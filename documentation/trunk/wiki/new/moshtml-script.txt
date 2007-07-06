@@ -1,0 +1,19 @@
+==== Usage of moshtml::script ====
+
+=== 1. Function description ===
+This function will write a <script></script> element. 
+
+=== 2. Function usage ===
+
+== 2.1. Example ==
+<code php|Example Code>
+echo mosHTML::script('includes/js/joomla.javascript.js');
+</code>
+
+== 2.2. Parameters ==
+
+url : string : the url of the script you wish to include\\
+attribs : array : the attributes that you wish to apply to the script tags\\ \\
+
+[[:start|Back to the Startpage]]
+ 

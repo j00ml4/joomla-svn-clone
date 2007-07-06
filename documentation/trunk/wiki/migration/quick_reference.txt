@@ -1,0 +1,76 @@
+====== Migrating to 1.5 Quick Reference ======
+
+This page forms a summary of new techniques available in the version 1.5 API and their version 1.0 counterparts where applicable.
+
+===== PHP Related =====
+
+==== Handling Input ====
+
+^ Old Way / Usage ^ New Way ^
+| <php>$id = mosGetParam( $_REQUEST, 'id', 0 );</php>    | <php>$id = JRequest::getVar( 'id', 0 );</php> |
+
+==== Global Vars ====
+
+^ Old Way / Usage ^ New Way ^
+| <php>global $acl;</php>    | <php>$acl =& JFactory::getACL();</php>     |
+| <php>global $mosConfig_live_site;</php> | <php>$mainframe->getCfg( 'live_site' );</php> |
+| <php>global $database;</php> | <php>$database = $mainframe->getDBO();
+// or:
+$database = &JFactory::getDBO();</php> |
+
+==== Raising Errors ====
+
+^ Old Way / Usage ^ New Way ^
+| <php>mosNotAuth();</php>    | <php>JError::raiseError( 403, JText::_("ALERTNOTAUTH") );</php>     |
+| A fatal error | <php>if (!$row->check())
+{
+  JError::raiseError( 500, $row->getError());
+}</php> |
+
+==== Including common files ====
+
+^ Old Way / Usage ^ New Way ^
+| <php>$mainframe->getPath( 'admin_html' )</php> | <php>JApplicationHelper::getPath('admin_html')</php> |
+
+==== Internationisation Support ====
+
+^ Old Way / Usage ^ New Way ^
+| <php>echo _HELLO;</php> | <php>echo JText::_( 'Hello' );</php> |
+| UTF8 Safe Lower Casing | <php>$search = JString::strtolower($search)</php>
+
+
+==== Common Component Coding ====
+
+^ Old Way / Usage ^ New Way ^
+| List pagination | <php>jimport('joomla.presentation.pagination');
+$pagination = new JPagination($total, $limitstart, $limit);</php> |
+
+==== File Handling ====
+
+^ Old Way / Usage ^ New Way ^
+| Listing files or folders <php>mosReadDirectory(...)</php> | <php>JFolder::files(...)
+// or
+JFolder::files(...)</php> |
+
+==== Miscellaneous ====
+
+^ Old Way / Usage ^ New Way ^
+| Get the menu parameters in a component (frontend) | <php>jimport('joomla.application.extension.component');
+$mParams = &JComponentHelper::getMenuParams();
+// example:
+$pageclass_sfx = $mParams->get( 'pageclass_sfx' );</php> |
+| Get the control (model, view, controller, renderer, template) parameters in a component (frontend) | <php>jimport('joomla.application.extension.component');
+$cParams = &JComponentHelper::getControlParams();
+// example:
+$viewName = $cParams->get('view_name');</php> |
+| <php></php> | <php></php> |
+
+
+===== HTML Related =====
+
+==== Buttons ====
+
+The use of the BUTTON tag is prefered to INPUT.
+
+^ Old Way / Usage     ^ New Way       ^
+| Submit Button    | <php><button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button></php>     |

@@ -1,0 +1,19 @@
+====== Ajax in Joomla ======
+
+=====1. What is Ajax?=====
+Ajax is a combination of old techniques to make the appearance of a webapplication/webpage more like a desktop application. The goal is to not reload and re-render the page each time you make a little change, but to only reload the for example two rows in the table that you exchanged with each other. This means a significant decrease in server load, bandwith usage and it just looks nicer for the user.
+
+=====2. Why isn't Ajax already used in Joomla?=====
+The core team is currently planning to implement Ajax into Joomla, but this will take time and I wouldn't expect it before Joomla 1.5. The core team is also debating if they should use a third party API or if they should develop one themself.
+
+=====3. Where will Ajax be used?=====
+The core components and modules will use Ajax only in the backend or as addition to normal functions, like the Google Suggest function.
+
+=====4. What are the positive aspects of Ajax?=====
+Ajax decreases the server load, can save bandwith and improve the impression for the user of your page. For the end user, it all works more seemless and it has the feeling of a desktop application.
+
+=====5. What are the negative aspects of Ajax?=====
+Ajax breaks a lot of web functionality. For the standard user, the browser back button won't work. For all those disabled people who use a screenreader, Ajax enabled content won't work either, which means Ajax needs to be depreciable to allow content to be read by screenreaders.  Ajax also prevents a lot of search engines indexing your content as search robots cannot find content that only shows up when doing partial requests to the server.
+
+=====6. What is the view of the core team?=====
+The core team sees the advantages of Ajax and works towards integrating it, but it also wants to make sure that the sites using Joomla are accessible and user and search engine friendly. Therefore Ajax will be used like caviar. Used where usefull and necessary, but all the time looking out its not to much. 8-)

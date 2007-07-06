@@ -1,0 +1,18 @@
+====== unsetMetaData ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->unsetMetaData]] |
+
+Unsets a meta tag.
+===== Syntax =====
+void unsetMetaData	( **$name**, **$http_equiv** )
+| **$name** | string | is a string containing the name of the meta or http-equiv tag. |
+| **$http_equiv** | boolean | is a flag specifying whether or not the tag is an http-equiv tag. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+global $mainframe;
+
+$document =& JFactory::getDocument();
+$document->unsetMetaData( 'robots' );
+</code>
+results in the 'robots' meta tag being unset and not inserted into the document head block.

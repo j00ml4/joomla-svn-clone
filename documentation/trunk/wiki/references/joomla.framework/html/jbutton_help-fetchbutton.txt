@@ -1,0 +1,34 @@
+====== fetchButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Help|JButton_Help]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Help.html#fetchbutton|JButton_Help->fetchButton]] | never | Internal review |
+
+Returns the HTML code for the button. The created button will include code to open up a popup window with the specified help screen when it is clicked. For more information on how the $ref and $com parameters function (they are used to derive the URL of the target help file), see the [[references:joomla.framework:i18n:jhelp-createurl|JHelp::createURL]] method. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with 'help' as its parameter. This class is defined in the standard administrator template. If this class is used in the frontend, this class should be defined and any images used should be included.
+
+===== Syntax =====
+void fetchButton ( **$type**, **$ref**, **$com** )
+
+| **$type** | string | is a string containing the button type. This parameter should normally be 'Help'. This parameter is optional and if omitted defaults to 'Help'. |
+| **$ref** | string | is a string containing the name of the popup file (excluding the file extension for an xml file). For more information see the  [[references:joomla.framework:i18n:jhelp-createurl|JHelp::createURL]] method. |
+| **$com** | boolean | is a flag which specifies whether or not to use the help file in the component directory. For more information see the  [[references:joomla.framework:i18n:jhelp-createurl|JHelp::createURL]] method. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Help' );
+echo $button->fetchButton( 'Help', 'screen.config', true );
+</code>
+might produce:
+<code php|Result>
+<a onclick="popupWindow('http://127.0.0.1/joomla15/components/com_document/help/screen.config.html', 'Help', 640, 480, 1)" class="toolbar">
+
+<div class="icon-32-help" title="Help" type="Help">
+</div>
+Help
+</a>
+</code>
+In the standard administrator's template, this button looks like: {{:references:joomla.framework:html:help_button.png|:references:joomla.framework:html:help_button.png}}
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,59 @@
+====== fetchElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElement_Languages|JElement_Languages]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Languages.html|JElement_Languages->fetchElement]] | never | Work in progress |
+
+Renders the HTML code for a selection list containing the available languages. The resulting selection list will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
+
+The JElement_Language element uses only the 'client' attribute. This attribute determines which client languages to list. Possible values are SITE and ADMIN.
+
+The XML for a language element looks like:
+<code><param name="language" type="languages" client="site" default="" label="Front-end Language" description="paramLanguage" /></code>
+
+===== Syntax =====
+void fetchElement ( **$name**, **$value**, **&$node**, **$control_name** )
+
+| **$name** | string | is a string containing the name of the HTML select list form element. |
+| **$value** | string | is a string containing the value of the element. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement object containing the settings for the element. |
+| **$control_name** | string | is a string containing the name of the control for the element. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file = JPATH_ADMINISTRATOR.DS.'components'.DS.'com_document'.DS.'document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'languages' );
+
+echo $element->fetchElement( 'language', 'com_document', $nodes[0], 'params' );
+</code>
+might produce:
+<code php|Result>
+<select name="params[language]" id="paramslanguage" class="inputbox">
+    <option value="" >- Select Language -</option>
+    <option value="de-DE" >German (Deutschland)</option>
+    <option value="en-GB" >English (United Kingdom)</option>
+    <option value="he-IL" >Hebrew (Israel)</option>
+</select>
+</code>
+The contents of the document_items.xml file are:
+<code php|document_items.xml>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install type="component" version="1.0.0">
+	<name>Document Items</name>
+	<version>1.0.0</version>
+	<description>Example Parameters</description>
+    <params>
+        <param name="language" type="languages" client="site" default="" label="Front-end Language" description="paramLanguage" />
+    </params>
+</install>
+</code>
+
+
+----
+
+~~DISCUSSION~~

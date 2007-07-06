@@ -1,0 +1,114 @@
+====== Joomla Error Handling ======
+
+
+===== 1. Overview and Description: =====
+New in Joomla 1.5 is a JError class.  The class is based on patErrorManager which provides static methods to handle error conditions in Joomla.  Previously, there was not a consistent method to handle and display errors.  This class allows developers to set error codes and error messages displayed to the user as well as internal information to help debug the problem.  By setting a certain error code for a certain error condition, you can better understand what happened when a user complains of some sort of error.
+
+===== 2. Implementation =====
+
+==== 2.1 JError Class Static Methods ====
+=== 2.1.1 isError( &$object ) ===
+
+<code php|Source Code>
+/**
+ * method for checking whether the return value of a pat application method is a pat
+ * error object.
+ *
+ * @static
+ * @access	public
+ * @param	mixed	&$object
+ * @return	boolean $result	True if argument is a patError-object, false otherwise.
+ */
+function isError( &$object ) {
+    return patErrorManager::isError($object);
+}
+</code>
+
+=== 2.1.1.1 Description ===
+
+
+=== 2.1.2 raiseError( $code, $msg, $info = null ) ===
+
+<code php|Source Code>
+/**
+ * wrapper for the {@link raise()} method where you do not have to specify the
+ * error level - a {@link patError} object with error level E_ERROR will be returned.
+ *
+ * @static
+ * @access	public
+ * @param	string	$code	The application-internal error code for this error
+ * @param	string	$msg	The error message, which may also be shown the user if need be.
+ * @param	mixed	$info	Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN).
+ * @return	object	$error	The configured patError object
+ * @see		patErrorManager
+ */
+function &raiseError( $code, $msg, $info = null ) {
+    return patErrorManager::raise( E_ERROR, $code, $msg, $info );
+}
+</code>
+
+=== 2.1.2.1 Description ===
+
+
+=== 2.1.3 raiseWarning( $code, $msg, $info = null ) ===
+
+<code php|Source Code>
+/**
+ * wrapper for the {@link raise()} method where you do not have to specify the
+ * error level - a {@link patError} object with error level E_WARNING will be returned.
+ *
+ * @static
+ * @access	public
+ * @param	string	$code	The application-internal error code for this error
+ * @param	string	$msg	The error message, which may also be shown the user if need be.
+ * @param	mixed	$info	Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN).
+ * @return	object	$error	The configured patError object
+ * @see		patErrorManager
+ */
+function &raiseWarning( $code, $msg, $info = null ) {
+    return patErrorManager::raise( E_WARNING, $code, $msg, $info );
+}
+</code>
+
+=== 2.1.3.1 Description ===
+
+=== 2.1.4 raiseNotice( $code, $msg, $info = null ) ===
+
+<code php|Source Code>
+/**
+ * wrapper for the {@link raise()} method where you do not have to specify the
+ * error level - a {@link patError} object with error level E_NOTICE will be returned.
+ *
+ * @static
+ * @access	public
+ * @param	string	$code	The application-internal error code for this error
+ * @param	string	$msg	The error message, which may also be shown the user if need be.
+ * @param	mixed	$info	Optional: Additional error information (usually only developer-relevant information that the user should never see, like a database DSN).
+ * @return	object	$error	The configured patError object
+ * @see		patErrorManager
+ */
+function &raiseNotice( $code, $msg, $info = null ) {
+    return patErrorManager::raise( E_NOTICE, $code, $msg, $info );
+}
+</code>
+
+=== 2.1.4.1 Description ===
+
+
+===== 3. Third Party Developer Usage =====
+
+==== 3.1 Error levels ====
+
+=== 3.1.1 Error ===
+The most serious error level is E_ERROR.  When this error type is thrown, the error handler will stop execution of the script and display the error number and message to the screen.  Examples of when this error level should be used would be when continuing execution of the script will either cause a loss of data integrity or an infinite loop.
+
+=== 3.1.2 Warning ===
+The intermediate error level is E_WARNING.  When this error type is thrown, the error handler will display a warning message with the error number and message to the screen but allow the script to continue execution.  An example of when this error level might be used would be if an expected dataset was not retrieved from the database.
+
+=== 3.1.3 Notice ===
+The lowest error level is E_NOTICE. This error type behaves in the same way which E_WARNING does, but implies a less serious problem.
+
+===== 4. Special Considerations =====
+Because the JError class wraps only some functionality from the patErrorManager class, there are parts of the patErrorManager that are not implemented in JError.  JError is, however, implemented in such a way that would allow a developer to utilize the full power of patErrorManager should that be deemed necessary.  See the [[http://trac.php-tools.net/patError/wiki|patError Website]] for more information.
+
+[[:start|Back to the Startpage]]

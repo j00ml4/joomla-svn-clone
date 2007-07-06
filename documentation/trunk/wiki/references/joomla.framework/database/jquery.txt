@@ -1,0 +1,22 @@
+====== JQuery [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[http://api.joomla.org/Joomla-Framework/Database/JQuery.html|JQuery]] |
+
+This is a query builder class which can be used to build queries by adding individual elements. For a complete example using all the elements, see the [[#tostring|toString]] method. Each element of the query is stored as a [[JQueryElement|JQueryElement]] object.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JQuery-JQuery|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-JQuery|JQuery]] | Class constructor. |
+| [[JQuery-from|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-from|from]] | Adds one or more tables to the FROM clause of the query. |
+| [[JQuery-group|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-group|group]] | Inserts a 'GROUP BY' clause into the query. |
+| [[JQuery-join|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-join|join]] | Adds a join to a query. |
+| [[JQuery-order|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-order|order]] | Adds an order clause to a query. |
+| [[JQuery-select|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-select|select]] | Adds columns to the list of columns to select from. |
+| [[JQuery-toString|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-toString|toString]] | Returns the completed query as a string. |
+| [[JQuery-where|{{http://api.joomla.org/media/images/Method.png }}]] [[JQuery-where|where]] | Adds a 'where' clause to the query. |
+
+----
+
+~~DISCUSSION~~
+
+

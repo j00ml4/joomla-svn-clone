@@ -1,0 +1,14 @@
+====== JElement_List ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_List.html|JElement_List]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render a list element. The JElement_List class can be used to render a select list that will the options specified in the XML file.
+
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement_List-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the entries specified in the XML file. |
+
+----
+
+~~DISCUSSION~~
+

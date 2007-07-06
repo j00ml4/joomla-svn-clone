@@ -1,0 +1,11 @@
+====== Joomla! database schema ======
+
+The [[http://dev.joomla.org/downloads/Joomla15_DB-Schema.htm|current Joomla! database schema]] is available in HTML (thanks RussW).
+
+There is also an image of the Joomla! database schema in classic crow foot notation below.  A must-have for Joomla! developers, although it is currently not up-to-date.
+
+Please comment and discuss this schema in [[http://forum.joomla.org/index.php/topic,55622.0.html|this discussion]] on the Joomla! forums.
+
+Click on the schema thumbnail below to download the full size schema (png-format).
+
+{{wiki:joomla_15_database_schema.png?400x500}}

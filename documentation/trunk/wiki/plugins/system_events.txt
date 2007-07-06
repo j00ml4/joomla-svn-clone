@@ -1,0 +1,123 @@
+====5.2 System Events for Plugin System====
+
+===5.2.1 Overview===
+In a standard installation of Joomla! 1.5 we have several predefined events which, when triggered, call functions in the associated plugins.  For more information on plugins, look [[plugins:create_plugin|here]].
+
+This topic is aimed at "global" system events, including those triggered on every page load (onAfterInitialise, onAfterRoute, onAfterDispatch, onAfterRender), those supporting search within multiple plugins (onSearch, onSearchArea) and those supporting the presentation of web services (onGetWebServices).
+
+===5.2.2 onAfterInitialise===
+==5.2.2.1 Description==
+This event is triggered after the framework has loaded and the applicaiton initialise function has been called.
+==5.2.2.2 Parameters==
+None.
+==5.2.2.3 Return Value==
+None.
+==5.2.2.4 Called in files==
+  *index.php
+  *administrator/index.php
+
+===5.2.3 onAfterRoute===
+==5.2.3.1 Description==
+This event is triggered after the framework has loaded and initialised and the router has route the client request. 
+
+Routing is the process of examining the request environment to determine which component should receive the request. This component optional parameters are then set in the request object to be processed when the application is being dispatched.
+
+When this event triggers the router has parsed the route and pushed the request parameters into JRequest for retrieval by the application.
+==5.2.3.2 Parameters==
+None.
+==5.2.3.3 Return Value==
+None.
+==5.2.3.4 Used in files==
+  *index.php
+  *administrator/index.php
+
+===5.2.3 onAfterDispatch===
+==5.2.3.1 Description==
+This event is triggered after the framework has dispatched the application. 
+
+Dispatching is the process of pulling the option from the request object and mapping them to a component. If the component do not exist, it handles determining a default component to dispatch. 
+
+When this event is triggered the output of the component is available in the document buffer. 
+==5.2.3.2 Parameters==
+None.
+==5.2.3.3 Return Value==
+None.
+==5.2.3.4 Used in files==
+  *index.php
+  *administrator/index.php
+
+===5.2.3 onAfterRender===
+==5.2.3.1 Description==
+This event is triggered after the framework has rendered the application. 
+
+Rendering is the process of pushing the document buffers into the template placeholders, retrieving data from the document and pushing it into the into the JResponse buffer. 
+
+When this event is triggered the output of the application is available in the response buffer. 
+==5.2.3.2 Parameters==
+None.
+==5.2.3.3 Return Value==
+None.
+==5.2.3.4 Used in files==
+  *index.php
+  *administrator/index.php
+
+===5.2.4 onSearch===
+==5.2.4.1 Description==
+This event is triggered by a variety of search related operations. It is a request for a 
+plugin to return the result of a search request. The rows must return the following fields, which are used in a common display routine:
+  *href
+  *title
+  *section
+  *created
+  *text
+  *browsernav
+==5.2.4.2 Parameters==
+  *The target search string.
+  *A string matching option (exact|any|all).
+  *A string ordering option (newest|oldest|popular|alpha|category)
+  *An array if restricted to areas, null if search all.
+==5.2.4.3 Return Value==
+Array of stdClass objects with members as described above.
+==5.2.3.4 Used in files==
+  *administrator/components/com_statistics/admin.statistics.php
+  *components/com_search/search.php
+  *plugins/search/categories.php
+  *plugins/search/contacts.php
+  *plugins/search/content.php
+  *plugins/search/newsfeeds.php
+  *plugins/search/sections.php
+  *plugins/search/weblinks.php
+  *plugins/xmlrpc/joomla.php
+
+===5.2.5 onSearchAreas===
+==5.2.5.1 Description==
+This appears to be a request for plugins to identify which "areas" they provide 
+search facilities for.
+==5.2.5.2 Parameters==
+None.
+==5.2.5.3 Return Value==
+An associative array of area names, indexed by the area identifier. For example, array( 'categories' => 'Categories' ).
+==5.2.5.4 Used in files==
+  *components/com_search/search.php
+  *plugins/search/categories.php
+  *plugins/search/contacts.php
+  *plugins/search/content.php
+  *plugins/search/newsfeeds.php
+  *plugins/search/sections.php
+  *plugins/search/weblinks.php
+
+===5.2.6 onGetWebServices===
+==5.2.6.1 Description==
+This is an introspection request for plugins that provide web services.
+==5.2.6.2 Parameters==
+None.
+==5.2.6.3 Return Value==
+An array of associative arrays. The outer array is indexed by the service method name and 
+contains an array with the following elements:
+  *['function'] The method to be invoked, typically a string like 'ClassName::staticMethod'
+  *['docstring'] A human-readable definition of the method's purpose.
+  *['signature'] An array identifying the types of the method's parameters. See the global variables $xmlrpc* for more information.
+==5.2.6.4 Used in files==
+  *plugins/xmlrpc/blogger.php
+  *plugins/xmlrpc/joomla.php
+  *xmlrpc/index.php

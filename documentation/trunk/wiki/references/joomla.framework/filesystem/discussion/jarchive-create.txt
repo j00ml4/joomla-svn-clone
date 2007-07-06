@@ -1,0 +1,7 @@
+ 
+
+<sub>Dan3000, 2006/04/30 11:02:</sub>
+
+Should there be a reference that bz2 is the best compression format? Or link the names to wikipedia pages that show the difference in formats? I think this might help developer pick a format.
+
+----

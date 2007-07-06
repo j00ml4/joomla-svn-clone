@@ -1,0 +1,238 @@
+======Using Caching to Speed Up Your Code======
+
+Typically in web environments, the same content is displayed over and over to everyone who visits your site.  Caching can speed this up by storing some or all of the information your code generates in a file and returning it when needed. There are different ways to do this, but this tutorial only deals with functions.  The good news is that in Joomla! 1.5 it's dead simple.
+
+[[|{{http://help.joomla.org/images/stories/Images_1.0x/1.0x_hs_icons/warning_711_small.png}}]] **Warning**: The Joomla! 1.5 cache API is currently being refactored and you should not rely on the information contained in this tutorial remaining true.  Further information may be found in this [[http://forum.joomla.org/index.php/topic,128252.0.html|forum thread]].
+
+======1. Using the Profiler======
+
+When using cached functions you need to be sure the cached function really is faster than using the function without caching. We'll use the Joomla! profiler ([[reference:joomla.framework:utilities:jprofiler|JProfiler]]) to test this.
+
+<code php|Simple use of the Joomla! profiler class>
+<?php
+// Create the profiler object.
+$profiler = new JProfiler();
+
+// Do some stuff.
+echo $profiler->mark( ' seconds to do stuff' );
+
+?>
+</code>
+
+This might output something like:
+
+''0.001 seconds to do stuff''
+
+If you run the same code over and over, you might see some small differences in the number. This is probably because of other processes running on your system. 
+
+======2. The Function to Test======
+
+We'll make a small component that doesn't really do anything, but that will allow us to calculate the time it takes to execute a function. First create the component's file:
+
+''/components/com_testcache/testcache.php''
+
+Inside, we'll make a class with one method.
+
+<code php|Simple class to test Joomla! caching>
+<?php 
+// No direct access.
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+class TestClass {
+
+    function testMethod() {
+
+        // Get a reference to the global database object.
+        $db = & JFactory::getDBO();
+
+        // Execute the same database query 250 times.
+        for ($i=0; $i<250; $i++) {
+            $db->setQuery( 'SELECT * FROM #__content' );
+            $rows = $db->loadObjectList();
+        }
+
+        return $rows;
+    }
+}
+
+// Run the test.
+$rows = TestClass::testMethod();
+
+?>
+</code>
+
+We're looping the database call 250 times so the function would become very slow. That way we will see a big difference using the cache. Of course in real code we would never do a thing like that.
+
+======3. The Cache Object======
+
+First, make sure you have **Extension Cache** set to //Yes// in the Global Configuration.
+
+We get a reference to the cache using the [[references:joomla.framework:jfactory|JFactory]] class.
+
+<code php|Getting a reference to the global cache>
+<?php
+$cache = & JFactory::getCache();
+?>
+</code>
+
+If you want your component to use caching, even if it's turned off in the Global Configuration, you can set it yourself:
+
+<code php|Enabling caching from within a component>
+<?php
+$cache->setCaching( 1 );
+?>
+</code>
+
+Next we call our method:
+
+<code php|Running the test with caching enabled>
+<?php
+$rows = $cache->call( array( 'TestClass', 'testMethod' ) );
+?>
+</code>
+
+If we want to cache a function that is not in a class, we don't need to use an array:
+
+<code php|Caching a function not in a class>
+<?php
+$rows  = $cache->call( 'testFunction' );
+?>
+</code>
+
+While testing the code we can use the following method to clean the cache:
+
+<code php|Cleaning the cache>
+<?php
+$cache->cleanCache();
+?>
+</code>
+
+This will delete all files in the ''/cache'' folder.
+
+
+======4. Putting It All Together======
+
+To compare speed we will now call the test method twice; once using the 'normal' way and once using caching. We'll wrap both calls in a profiler object so we can see the difference.
+
+<code php|Comparison: with and without caching>
+<?php
+
+class TestClass {
+
+    function testMethod() {
+
+        // Get a reference to the global database object.
+        $db = & JFactory::getDBO();
+
+        // Execute the same database query 250 times.
+        for( $i=0; $i<250; $i++) {
+            $db->setQuery( 'SELECT * FROM #__content' );
+            $rows = $db->loadObjectList();
+        }
+
+        return $rows;
+    }
+}
+
+// Get a reference to the global cache object.
+$cache = & JFactory::getCache();
+
+// Run the test without caching.
+$profiler = new JProfiler();
+$rows = TestClass::testMethod();
+echo $profiler->mark( ' without caching' );
+
+// Run the test with caching.
+$profiler = new JProfiler();
+$rows  = $cache->call( array( 'TestClass', 'testMethod' ) );
+echo $profiler->mark( ' with caching' );
+
+?>
+</code>
+
+Now execute the component using ''index.php?option=com_testcache''. The first time you might see something like this:
+
+''2.093 without caching\\
+
+2.160 with caching''
+
+The second one is a bit slower because the returned data needs to be written to a file. Now reload the page in your browser. 
+
+''2.073 without caching\\
+
+0.008 with caching''
+
+Multiply those numbers by the number of hits your site gets in 900 seconds (the default time Joomla! stores the cached data). Not bad huh? Again, reload the page a couple of times and you will see small differences in the numbers. 
+
+======5. Using Arguments======
+
+In our example the function returns the same data over and over. However, often you'll write functions that take some arguments and calculate different data. This is just as easy: simply add the arguments to the call. We'll extend our example with a variable table.
+
+<code php|Caching a function with arguments>
+<?php
+
+class TestClass {
+
+    function testMethod( $table ) {
+
+        // Get a reference to the global database object.
+        $db = & JFactory::getDBO();
+
+        // Execute the same database query 250 times.
+        for( $i=0; $i<250; $i++) {
+            $db->setQuery( "SELECT * FROM #__$table" );
+            $rows = $db->loadObjectList();
+        }
+
+        return $rows;
+    }
+}
+
+// Determine which database table to query.
+$table = JRequest::getVar( 'table', 'content' );
+
+// Get a reference to the global cache object.
+$cache = & JFactory::getCache();
+
+// Run the test without caching.
+$profiler = new JProfiler();
+$rows = TestClass::testMethod( $table );
+echo $profiler->mark( ' without caching' );
+
+// Run the test with caching.
+$profiler = new JProfiler();
+$rows  = $cache->call( array( 'TestClass', 'testMethod' ), $table );
+echo $profiler->mark( ' with caching' );
+
+?>
+</code>
+
+Try loading the page with different table names:
+
+''index.php?option=com_testcache&table=content\\
+
+index.php?option=com_testcache&table=users\\
+
+index.php?option=com_testcache&table=menu''
+
+You'll see that if a page is loaded for the first time the cached method takes a little longer, but when reloading the cache is faster.
+
+======6. The Real World======
+
+Our example uses a very slow function which queries the database 250 times. It's easy to see how using caching here can really speed things up. However, using the cache won't always be faster. Try removing the loop in the example and see for yourself. That's why it's important to use the profiler to see if you can benefit from caching. Of course, it also depends on the system your code will run on. If it has a huge database, caching might be faster. 
+
+It's also important to keep caching in mind when planning your code. A function can only be cached if it returns the same data everytime for a given set of arguments. And of course, caching is no substitute for efficient coding. ;-)
+
+======References======
+  * [[references:joomla.framework:cache:jcache|JCache wiki reference page]]
+  * [[http://api.joomla.org/Joomla-Framework/Cache/JCacheFunction.html|JCacheFunction API reference page]]
+  * [[http://pear.php.net/package/Cache_Lite/|Cache_Lite home page]]
+
+
+======Acknowledgement======
+
+This tutorial was adapted from an original contribution by Mathias (mjaz).
+
+----
+
+~~DISCUSSION~~

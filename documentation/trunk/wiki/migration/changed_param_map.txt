@@ -1,0 +1,269 @@
+This page documents the changes in parameters between Joomla! 1.0 and 1.5 releases. They are split into migrated and unmigrated tables. Migrated tables are tables that the Joomla! 1.0 Migrator exports.
+
+
+
+
+===== Migrated Tables =====
+
+==== Categories ====
+
+
+
+
+
+
+
+
+
+
+==== Menu ====
+Note: This list may not be completely comprehensive.
+
+Changed:
+  * readmore -> show_readmore
+  * pdf -> show_pdf_icon
+  * print -> show_print_icon
+  * email -> show_email_icon
+  * leading -> num_leading_articles
+  * page_title -> show_page_title
+  * header -> page_title
+  * intro -> num_intro_articles
+  * columns -> num_columns
+  * link -> num_links
+  * pagination -> show_pagination
+  * pagination_results -> show_pagination_results
+  * item_title -> show_title
+  * category -> show_category
+  * category_link -> link_category
+  * rating -> show_vote
+  * createdate -> show_create_date
+  * modifydate -> show_modify_date
+  * description -> show_description
+  * description_image -> show_description_image
+  * introtext -> show_intro
+  * section -> show_section
+  * section_link -> link_section
+  * description_cat -> show_category_description
+  * date -> show_date
+  * hits -> show_hits
+  * headings -> show_headings
+  * empty_cat -> show_empty_categories
+  * other_cat -> show_categories
+  * cat_items -> show_cat_num_articles
+  * display -> show_pagination_limit
+  * navigation -> show_item_navigation
+  * author -> show_author
+
+Unchanged:
+  * orderby_pri
+  * orderby_sec
+  * link_titles
+  * menu_image
+  * pageclass_sfx
+  * orderby
+  * date_format
+  * filter
+  * filter_type
+
+New:
+  * secure
+  * show_icons
+  * show_noauth
+  * show_title
+  * show_intro
+
+Removed:
+  * image (Note: mosimage, which is linked to this, has been removed)
+  * back_button
+  * unpublished
+  * categoryid
+  * description_cat_image
+  * order_select
+  * display_num
+
+==== Sections ====
+
+
+
+==== Users ====
+
+** Unchanged **
+  * editor (Note: This is stripped by the migration script otherwise users may not be able to edit content because their selected editor may not be installed).
+
+==== Weblinks ====
+
+
+
+===== configuration.php settings =====
+
+Some configuration.php settings have been moved to within their component area (e.g. content) as well as some that have been renamed.
+
+
+
+==== Global ====
+These settings are either removed, remain, are new or have been renamed within the global scope (e.g. the non removed elements are in configuration.php still)
+
+
+=== Removed ===
+  * cachepath
+  * session_type (??)
+  * back_button
+  * pagetitles  (Dynamic page titles)
+
+
+
+
+=== Unchanged ===
+Site Settings
+  * offline
+  * offilne_message
+  * sitename
+  * editor
+  * list_limit
+
+Debug
+  * debug
+
+Database
+  * host
+  * user
+  * password
+  * db
+  * dbprefix
+
+Server Settings
+  * secret 
+  * gzip
+  * error_reporting
+  * helpurl
+
+Locale Settings
+  * lang
+  * offset
+  * offset_user
+
+Meta Settings
+  * MetaAuthor
+  * MetaDesc
+  * MetaKeys
+  * MetaTitle
+
+Cache Settings
+  * caching
+  * cachetime
+
+Mail Settings
+  * mailer
+  * mailfrom
+  * fromname
+  * sendmail
+  * smtpauth
+  * smtpuser
+  * smtppass
+  * smtphost
+
+SEO Settings
+  * sef
+
+Session Settings
+  * lifetime
+
+
+
+=== New ===
+Site Settings
+  * legacy
+
+Debug
+  * debug_db
+  * debug_lang
+
+Database
+  * dbtype
+
+Server Settings
+  * xmlrpc_server
+  * ftp_host
+  * ftp_port
+  * ftp_user
+  * ftp_pass
+  * ftp_root
+  * ftp_enable
+  * log_path
+  * tmp_path
+
+SEO Settings
+  * sef_rewrite
+
+Feed Settings
+  * feed_limit
+  * feed_summary
+
+Session Settings
+  * session_handler
+
+Cache Settings
+  * memcache_settings
+
+=== Renamed ===
+Locale Settings
+  * locale has been renamed to lang_site and lang_administrator
+
+Session Settings
+  * session_life_admin has been merged into lifetime
+
+
+
+==== Unknown ====
+These settings are presently marked 'unknown'. They have most probably been deleted or where they have been moved hasn't been documented yet.
+
+  * admin_expired
+  * allowUserRegistration
+  * dirperms
+  * enable_log_items
+  * enable_log_searches
+  * enable_stats
+  * error_message
+  * favicon
+  * fileperms
+  * frontend_login
+  * frontend_userparams
+  * multilingual_support
+  * multipage_toc
+  * uniquemail
+  * useractivation
+
+
+==== Content ====
+The following items have been moved (and possibly renamed) into the content area. They show up as new items in the menu area as well. Renamed items are also moved, parameters in the moved section has not been renamed.
+
+=== Moved ===
+  * link_titles
+  * 
+
+
+
+=== Renamed ===
+  * hideAuthor -> show_author
+  * hideCreateDate -> hide_create_date
+  * hideModifyDate -> hide_modify_date
+  * hideEmail -> show_email_icon
+  * hidePdf -> show_pdf_icon
+  * hidePrint -> hide_print_icon
+  * hits -> show_hits
+  * icons -> show_icons
+  * readmore -> show_readmore
+  * shownoauth -> show_noauth
+  * item_navigation -> show_item_navigation
+  * vote -> show_vote
+
+
+
+===== Unmigrated Tables =====
+The following three tables typically hold third party and potentially content. They will not be migrated.
+
+**Plugins** (Core Plugins; previously mambots)
+
+**Components** (Core Components)
+
+**Modules** (Core Modules)

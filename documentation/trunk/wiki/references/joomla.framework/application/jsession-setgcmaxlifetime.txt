@@ -1,0 +1,12 @@
+====== setGcMaxLifetime ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Application/JSession.html|JSession->setGcMaxLifetime]] |
+
+If optional parameter is specified it determines the number of seconds  after which session data will be seen as 'garbage' and cleaned up<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean setGcMaxLifetime	( **$gcMaxLifetime** )
+| **** | boolean |  |
+
+===== Examples =====
+
+

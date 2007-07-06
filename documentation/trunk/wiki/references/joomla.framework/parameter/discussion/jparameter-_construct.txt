@@ -1,0 +1,49 @@
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->__construct]] | never | Work in progress |
+
+Constructs the class. The constructor will load the data specified in the $data parameter (this should be in INI format). Then it will load the setup file (if one was specified). If the JPARAMETER_INCLUDE_PATH constant has not yet been defined, it will do so. This path will be set to libraries/joomla/presentation/parameter/element.
+
+This class is used to handle parameters that are stored by the core components and can be used for third-party components as well.
+
+===== Syntax =====
+JParameter __construct	( **$data**, **$path** )
+
+| **$data** | string | is a string containing the INI format data for the parameters. |
+| **$path** | string | is a string containing the path to the XML setup file. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=1\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+</code>
+
+The document_items.xml file used here is:
+<code>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install type="component" version="1.0.0">
+	<name>Document Items</name>
+	<version>1.0.0</version>
+	<description>Example Parameters</description>
+	<params>
+		<param name="name" type="radio" default="1" label="Name" description="Show/Hide the name info">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="position" type="text" default="" label="Position" description="Position">
+		</param>
+		<param name="category" type="category" default="0" section="com_newsfeeds" class="testclass" label="Category" description="Category">
+		</param>
+	</params>
+</install>
+</code>    
+
+----
+
+~~DISCUSSION~~
+

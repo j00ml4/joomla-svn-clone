@@ -1,0 +1,26 @@
+====== Components ======
+
+A component is the largest and most complex of the extension types. Components can be seen as mini-applications. An easy analogy would be that Joomla! is the operating system and all the components are desktop applications. Every Joomla! page load calls a component to render the main page body. The core content component (com_content), for example, is the mini-application that handles all core content rendering just as the core registration component (com_registration) is the mini-application that handles user registration. A component has two main parts, an administrator part and a site part. The site part is what is used to render pages when being called during normal site operation. The administrator part provides an interface to configure and manage different aspects of the component and is accessible through the Joomla! administrator application.
+
+This chapter serves to provide you with a number of useful examples that help you to learn how to create your components.
+
+While we have gone to great lengths to make Joomla easy for content providers to use, we have equally spent a lot of time developing a flexible framework for developers to extend the capabilities of Joomla without having to touch the Core code.
+
+
+===== 1. How-To's=====
+  * [[components:hello_world|Hello World 1 Component]] - The beginning
+  * [[components:hello_world2|Hello World 2 Component]] - Database and breadcrumb
+  * [[components:hello_world3|Hello World 3 Component]] - Specialities of an administrative interface
+  * [[components:hello_world4|Hello World 4 Component]] - Internationlisation
+  * [[components:hello_world5|Hello World 5 Component]] - Adding and using javascript (moo.fx example)
+
+  * [[components:hello_world_mvc1|Hello World MVC 1 Component]] - The frame
+  * [[components:hello_world_mvc2|Hello World MVC 2 Component]] - The model
+  * [[components:hello_world_mvc3|Hello World MVC 3 Component]] - The table
+  * [[components:hello_world_mvc4|Hello World MVC 4 Component]] - The admin interface
+
+==== 1.1 Administrator====
+  * [[components:menubarTitleImage|Using a custom image in the Menu Bar title]]
+
+===== 2. Manuals=====
+  * [[components:xml_installfile|XML-Installation file]]

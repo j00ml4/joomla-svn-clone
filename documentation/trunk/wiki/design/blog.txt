@@ -1,0 +1,32 @@
+<code html|Blog Layout>
+  ...
+  <div class="content-component">
+    <div class="content-item column1">
+
+      .... Content Item ...
+
+    </div>
+    <div class="content-item column1">
+
+      .... Content Item ...
+
+    </div>
+    <div class="content-item column2">
+
+      .... Content Item ...
+
+    </div>
+    <div class="content-item column2">
+
+      .... Content Item ...
+
+    </div>
+
+  </div>
+  ...
+</code>
+
+====== Notes ======
+
+  *  Major difference from current rendering is use of a **.content-item** div to provide block seperation for articles
+  * **.column1** and **.column2** are examples of how we could provide multi-column rendering 

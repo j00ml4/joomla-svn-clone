@@ -1,0 +1,22 @@
+====== BackButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->BackButton]] | never | Work in progress |
+
+Displays a standard back button. The text for the button will be taken from the current language settings.  The button is created with a CSS class of 'back_button'.  This function has been **deprecated** in the conversion to patTemplate in Joomla! 1.5.  It is no longer used by the Joomla! Core but is being kept for compatibility with third-party software.
+
+===== Syntax =====
+void BackButton ( object &$params [, boolean $enable] )
+| **$params** | mixed | is an object of type mosParameters. If $params->get( 'back_button' ) is false then this function will not produce any output. If $params->get( 'popup' ) is true then this function will not produce any output (in other words, the back button will be suppressed if the window is a pop-up). |
+| **$enable** | mixed | is a flag. If false then this function will not produce any output. The flag is optional and if omitted will default to false. |
+
+===== Examples =====
+Example: This example uses the global configuration 'back_button' setting.
+<code php|Example>
+// Set-up the Parameters object.
+$params = & new mosParameters( '' );
+$params->def( 'back_button', $mainframe->getCfg( 'back_button' ));
+$params->def( 'popup', false );
+ 
+// Draw the Back button.
+mosHTML::BackButton( $params );
+</code>

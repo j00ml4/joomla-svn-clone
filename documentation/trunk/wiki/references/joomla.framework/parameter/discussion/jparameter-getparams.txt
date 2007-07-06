@@ -1,0 +1,73 @@
+====== getParams ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->getParams]] | never | Work in progress |
+
+Renders each parameter and returns the results in an array. If no setup file was found, then the parameters are rendered as a TEXTAREA control containing the raw INI data.
+
+===== Syntax =====
+array getParams	( **$name** )
+
+| **$name** | string | is a string containing the name of the form control or the name of the default text area (if the setup file was not found). This parameter is optional and if omitted defaults to 'params'. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+
+print_r( $params->getParams() );
+</code>
+might produce:
+<code php|Result>
+Array
+(
+    [0] => Array
+        (
+            [0] => <label id="paramsname-lbl" for="paramsname"><span onmouseover="return overlib('Show/Hide the name info', CAPTION, 'Name', BELOW, RIGHT);" onmouseout="return nd();" >Name</span></label>
+
+            [1] => 
+	<input type="radio" name="params[name]" id="paramsname0" value="0"  />
+	<label for="paramsname0">Hide</label>
+	<input type="radio" name="params[name]" id="paramsname1" value="1" checked="checked"  />
+	<label for="paramsname1">Show</label>
+
+            [2] => Show/Hide the name info
+            [3] => Name
+            [4] => 1
+            [5] => name
+        )
+
+    [1] => Array
+        (
+            [0] => <label id="paramsposition-lbl" for="paramsposition"><span onmouseover="return overlib('Position', CAPTION, 'Position', BELOW, RIGHT);" onmouseout="return nd();" >Position</span></label>
+            [1] => <input type="text" name="params[position]" id="paramsposition" value="Chef" class="text_area"  />
+
+            [2] => Position
+            [3] => Position
+            [4] => Chef
+            [5] => position
+        )
+
+    [2] => Array
+        (
+            [0] => <label id="paramscategory-lbl" for="paramscategory"><span onmouseover="return overlib('Category', CAPTION, 'Category', BELOW, RIGHT);" onmouseout="return nd();" >Category</span></label>
+            [1] => <select name="params[category]" id="paramscategory" class="testclass"><option value="0" >- Select Category -</option><option value="5" >Business: general</option><option value="9" >Finance</option><option value="11" >Internet</option><option value="4"  selected="selected">Joomla!</option><option value="10" >Linux</option></select>
+            [2] => Category
+            [3] => Category
+            [4] => 4
+            [5] => category
+        )
+
+)
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+    
+----
+
+~~DISCUSSION~~

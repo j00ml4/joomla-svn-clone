@@ -1,0 +1,53 @@
+====== monthSelectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->monthSelectList ]] | never | Work in progress |
+
+A convenient method for producing a list of months in an HTML form field using the current language settings.
+
+===== Syntax =====
+string  monthSelectList ( string $tag_name, string $tag_attribs, mixed $selected )
+
+| **$tag_name** | string | is the name attribute of the HTML <select> tag.. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the HTML <select> tag.. |
+| **$selected** | mixed |  is either a string value for a single value select list or an array for a multiple value select list.  Note that the values used here are the month numbers with a leading zero for months 1 to 9. |
+
+===== Examples =====
+Example:
+<code php|Example>
+$html = mosHTML::monthSelectList( 'month', 'class="inputbox"', '01' );
+echo $html;
+</code>
+which produces:
+<code html|Result>
+<select name="month" class="inputbox">
+  <option value="01" selected="selected">January</option>
+  <option value="02">February</option>
+  <option value="03">March</option>
+  <option value="04">April</option>
+  <option value="05">May</option>
+  <option value="06">June</option>
+  <option value="07">July</option>
+  <option value="08">August</option>
+  <option value="09">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+</code>
+Which renders as:
+<html>
+<select name="month" class="inputbox">
+  <option value="01" selected="selected">January</option>
+  <option value="02">February</option>
+  <option value="03">March</option>
+  <option value="04">April</option>
+  <option value="05">May</option>
+  <option value="06">June</option>
+  <option value="07">July</option>
+  <option value="08">August</option>
+  <option value="09">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+</html>

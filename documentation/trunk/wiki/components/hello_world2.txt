@@ -1,0 +1,128 @@
+====3.1.2 Hello World 2 (WIP)====
+In the [[components:hello_world|first part]] we learned the common filestructure of a Joomla! component and developed the basic code for changing the displayed name with a global parameter. Now we want to add a database-table to get the names from and use the pathway-system to show where we are in our component. At last we create our installation package, so that we can distribute our component.
+
+===3.1.2.1 The database===
+In our example we want to use a table created by the installation-file and which is prefilled with a few names. How this is done, I will explain in the installation-file section. For the moment its enough when you know that our table is called %%#__hello_world%% and has two fields. The first is 'id', which is an integer field and auto increments and the second is called 'name', a varchar-field, which is 255 characters long.
+
+===3.1.2.2 A few preparations===
+Our plan is to create a page where we can choose which name to display. Therefore we create two functions in our main hello.php that do the task for us:
+<code php|hello.php - version 4>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+ 
+// require the html view class
+require_once( JApplicationHelper::getPath( 'front_html', 'com_hello' ) );
+ 
+$task = JRequest::getVar( 'task' );
+ 
+switch ($task) {
+	case 'view':
+		view_name();
+		break;
+	case 'show':
+	default:
+		show_names();
+		break;
+}
+
+//function to show a list of names
+function show_names() {
+
+	//getting the connection to the db
+	$db = & JFactory::getDBO();
+
+	//preparing the query
+	$query = 'SELECT id, name FROM #__hello_world';
+	$db->setQuery( $query );
+
+	//getting the results
+	$result = $db->loadRowList();
+
+	hello_HTML::show_names_html( $result );
+}
+
+function view_name() {
+
+	//getting the connection to the db
+	$db = & JFactory::getDBO();
+
+	//getting the id of the selected name
+	$name_id = JRequest::getVar( 'id' );
+
+	//preparing the query
+	$query = 'SELECT name FROM #__hello_world WHERE id = ' . $name_id;
+	$db->setQuery( $query );
+
+	//getting the result
+	$result = $db->loadResult();
+
+	hello_HTML::view_name_html( $result );
+}
+?>
+</code>
+You can see, the database usage is very easy. You first get a database-object, then set the query and with the last command, the query is executed. There are a lot of functions to get the result of a query, whether it's a single value ($db->loadResult()) or a multi-dimensional array ($db->loadRowList()). For in-depth information, look into the API documentation.
+
+But back to the output:
+<code php|hello.html.php - version 2>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+ 
+class hello_HTML {
+ 
+	function show_names_html( $names ) {
+		foreach ($names as $name) {
+			echo '<a href="index.php?option=com_hello&id='. $name[0] .'">'. $name[1] .'</a><br/>';
+        	}
+	}
+
+	function view_name_html( $name ) {
+		echo 'Hello '. $name .' in our World!';
+	}
+}
+?>
+</code>
+You see, the hello.html.php didn't really change much. What might be interesting is the URL in show_names_html. 
+
+===3.1.2.3 The pathway-system===
+After we've created most of the functionality, we want to show the user in which area of our component and in that respect in Joomla, he is at the moment. Therefore we use the breadcrumb system and give it the information it needs to show the right path.
+Since the procedure is similar for both functions, I'm just showing you view_name:
+<code php|breadcrumb system>
+function view_name() {
+	global $mainframe;
+ 
+	//getting the connection to the db
+	$db = & JFactory::getDBO();
+ 
+	//getting the id of the selected name
+	$name_id = JRequest::getVar( 'id' );
+ 
+	//preparing the query
+	$query = 'SELECT name FROM #__hello_world WHERE id = ' . $name_id;
+	$db->setQuery( $query );
+ 
+	//getting the result
+	$result = $db->loadResult();
+
+	$breadcrumbs = & $mainframe->getPathWay();
+	$breadcrumbs->addItem( 'Hello World', sefRelToAbs( 'index.php?option=com_hello' ) );
+	$breadcrumbs->addItem( $result, '' );
+
+	hello_HTML::view_name_html( $result );
+}
+</code>
+As you can see, its very simple. First we get our JPathway-object by calling the correct $mainframe-function and then we add the single items in the order they are suposed to be to the pathway. The first parameter is the string thats displayed, where the second parameter is the link-adress this item should link to. Notice that we don't use a link on the last item. That would be the content currently on display and therefore needs no further link. Another thing about the link is the function sefRelToAbs, which changes the relative link to an absolute one. Joomla (should) allways use absolute links, so its a good thing if we use it, too.
+
+===3.1.2.4 The installation-file and packaging===
+To install the component on other systems, we have to create a package, that contains all files and informations necessary for our component. To store the informations, Joomla uses an XML-file:
+<code xml|hello.xml>
+</code>
+For the database-table we use separate SQL-files. Since Joomla! 1.5 supports UTF-8, but we want to maintain a maximum of compatibility, especially with MySQL-engines without UTF-8 support, we use two files. One with and one without UTF-8 conform tables:
+<code sql|hello.sql>
+</code>
+<code sql|hello_comp.sql>
+</code>
+Now that we've got all files ready and tested, we just have to create a zip-file of our component and voila, we have our packaged component, ready to be distributed.
+
+If you still want to do more and have a backend admin interface, read on in [[components:hello_world3|Hello World 3]].

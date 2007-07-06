@@ -1,0 +1,53 @@
+====== yesnoRadioList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->yesnoRadioList]] | never | Work in progress |
+
+A convenient method of building an HTML radio list consisting of just a 'yes' button and a 'no' button. The words for 'yes' and 'no' are taken from the current language settings.  The HTML field will return a '0' is the user selects 'no' or '1' if the user selects 'yes'.
+
+===== Syntax =====
+string yesnoRadioList ( string $tag_name, string $tag_attribs, mixed $selected [,string $yes [, string $no ]] )
+| **$tag_name** | string | iis the name attribute of the HTML radio button field. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to each HTML radio button field. |
+| **$selected** | mixed | is a string containing the value of the radio button that will be selected by default.  This will be '0' for 'no' or '1' for 'yes'. |
+| **$yes** | string | is a string containing the word for 'Yes' that will be displayed to the user. This parameter is optional and if omitted will default to the word for 'Yes' taken from the current language settings. |
+| **$no** | string | is a string containing the word for 'No' that will be displayed to the user. This parameter is optional and if omitted will default to the word for 'No' taken from the current language settings. |
+
+===== Examples =====
+Example 1: A simple yes/no radio button field with 'No' selected by default.
+<code php|Example 1>
+// A simple yes/no radio button field.
+$html = mosHTML::yesnoRadioList( 'myswitch', 'class="inputbox"', '0' );
+echo $html;
+</code>
+which produces:
+<code html|Result 1>
+<input type="radio" name="myswitch" value="0" checked="checked" class="inputbox" />No
+<input type="radio" name="myswitch" value="1" class="inputbox" />Yes
+</code>
+
+which renders as:
+<html>
+<input type="radio" name="myswitch" value="0" checked="checked" class="inputbox" />No
+<input type="radio" name="myswitch" value="1" class="inputbox" />Yes
+</html>
+
+
+Example 2: A radio button field for 'On' or 'Off' selection with 'On' selected by default.
+<code php|Example 2>
+// An on/off radio button field.
+$html = mosHTML::yesnoRadioList( 'myswitch', 'class="inputbox"', '1', 'On', 'Off' );
+echo $html;
+</code>
+
+which produces:
+
+<code html|Result 2>
+<input type="radio" name="myswitch" value="0" class="inputbox" />Off
+<input type="radio" name="myswitch" value="1" checked="checked" class="inputbox" />On
+</code>
+
+which renders as:
+<html>
+<input type="radio" name="myswitch" value="0" class="inputbox" />Off
+<input type="radio" name="myswitch" value="1" checked="checked" class="inputbox" />On
+</html>

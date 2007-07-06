@@ -1,0 +1,12 @@
+====== setIdle ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Application/JSession.html|JSession->setIdle]] |
+
+Sets the maximum idle time<p>Sets the time-out period allowed  between requests before the session-state  provider terminates the session.</p>
+===== Syntax =====
+void setIdle	( **$time** )
+| **** | integer |  |
+
+===== Examples =====
+
+

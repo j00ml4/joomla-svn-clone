@@ -1,0 +1,10 @@
+====5.5 Using plugins in your own addon====
+Using the plugin system in your addon is fairly simple. The most important part is good planning because, to some degree, you're defining an interface for other people to use.
+
+To activate the plugins for your addon, you just have to use the following line of code:
+<code php|Plugin activation>
+$result = $mainframe->triggerEvent( 'onSomething', $param );
+</code>
+This function calls every plugin that has registered itself for the event 'onSomething' and hands over the array $param as parameter. 
+
+As a return value you get an array of results from these plugins. All this is of course optional, you could also use the system without parameters and/or a result. 

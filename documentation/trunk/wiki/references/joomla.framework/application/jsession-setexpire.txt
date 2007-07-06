@@ -1,0 +1,13 @@
+====== setExpire ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Application/JSession.html|JSession->setExpire]] |
+
+Sets the maximum expire time
+===== Syntax =====
+void setExpire	( **$time**, **$add** )
+| **** | integer |  |
+| **** | bool |  |
+
+===== Examples =====
+
+

@@ -1,0 +1,35 @@
+====== getVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[references:joomla.framework|Joomla.Framework]] | [[|Application]] | [[jrequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->getVar]] |
+
+Fetches and returns a given variable. The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.
+You can force the source by setting the $hash parameter:
+| post | $_POST |
+| get | $_GET |
+| files | $_FILES |
+| method | via current $_SERVER['REQUEST_METHOD'] |
+| default | via default order (GET, POST, FILE) |
+
+===== Syntax =====
+mixed getVar ( **$name**, [ **$default** [, **$hash** [, **$type** [, **$mask** ] ] ] ] )
+
+
+| **$name** | string | is a string containing the variable name to fetch. |
+| **$default** | string | is a string containing the default value if the variable does not exist. This parameter is optional and if omitted defaults to null. |
+| **$hash** | string | is a string containing the name of the location from which to fetch the variable from. Where the var should come from (POST, GET, FILES, METHOD). This parameter is optional and if omitted defaults to 'default'. |
+| **$type** | string | is a string containing the return type for the variable (INT, FLOAT, STRING, BOOLEAN, ARRAY). This parameter is optional and if omitted defaults to 'none'. |
+| **$mask** | int | is an integer containing the filter mask for the variable. See the [[jrequest-cleanvar|cleanVar]] method for more information. This parameter is optional and if omitted defaults to 0 (most strict). |
+
+===== Examples =====
+
+==== Example 1 ====
+Fetch the 'id' variable assigning the value 0 if it does not exist.
+<code php|Example 1>
+$id = JRequest::getVar( 'id', 0 );
+</code>
+==== Example 2 ====
+
+Fetch the 'name' variable, assigning the value 'none' if it doesn't exist. The variable will be retrieved from the $_POST variable and will be treated as a string. Unsafe HTML will be filtered out.
+<code php|Example 2>
+$name = JRequest::getVar( 'name', 'none', 'POST', 'STRING', _J_ALLOWHTML );
+</code>

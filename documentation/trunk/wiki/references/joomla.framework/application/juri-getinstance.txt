@@ -1,0 +1,17 @@
+====== getInstance ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getInstance]] |
+
+Returns a reference to a global JURI object, only creating it if it doesn't already exist.
+This method must be invoked as:
+    $uri =& JURI::getInstance();
+
+===== Syntax =====
+JURI &getInstance ( **$uri** )
+| **$uri** | string | is a string containing the URI to parse. This parameter is optional and if omitted uses the URI of the script. |
+
+===== Examples =====
+<code php|Example>
+$uri =& JURI::getInstance();
+</code>
+

@@ -1,0 +1,18 @@
+====== toString ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQueryElement|JQueryElement]] | [[http://api.joomla.org/Joomla-Framework/Database/JQueryElement.html|JQueryElement->toString]] |
+
+Return the rendered query element as a string.
+===== Syntax =====
+string toString ()
+
+===== Examples =====
+<code php|Example>
+$whereclause = new JQueryElement( 'where', array( 'a.id = 5' ), 'AND' );
+$whereclause->append( array( 'a.state = 1' ), 'AND' );
+echo $whereclause->toString();
+</code>
+might produce:
+<code sql|Result>
+where a.id = 5 AND a.state = 1
+</code>

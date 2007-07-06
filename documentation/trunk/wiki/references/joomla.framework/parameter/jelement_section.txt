@@ -1,0 +1,14 @@
+====== JElement_Section ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Section.html|JElement_Section]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render a section element. The JElement_Section class can be used to render a select list that will list available content sections.
+
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement_Section-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available content sections. |
+
+----
+
+~~DISCUSSION~~
+

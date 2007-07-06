@@ -1,0 +1,55 @@
+====== getFileName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#getFileName|JFile->getFileName]] | never | Work in progress |
+
+This function returns the file name component of a provided path. 
+Unlike the built-in PHP function ''basename()'', an empty string is returned if the path ends with a trailing ***directory separator***.
+
+**Warning:** Do not use this with URIs! Use the [[references:joomla.framework:Environment:JURI|JURI]] class instead which provides several methods to extract bits and pieces of URIs and URLs.
+
+===== Syntax =====
+boolean getFileName	( **$file** )
+| **$file** | string | is a string that contains a file path. |
+
+===== Examples =====
+Example 1: This example returns the filename component of each provided path.
+<code php|Example 1>
+$filename = JFile::getFileName( 'images/stories/clock.jpg' );
+echo "File 1: '", $filename, "'";
+
+$filename = JFile::getFileName( 'images/stories/' );
+echo "File 2: '", $filename, "'";
+
+$filename = JFile::getFileName( 'images/stories/foobar' );
+echo "File 3: '", $filename, "'";
+</code>
+will produce:
+<code php|Results>
+File 1: "clock.jpg"
+File 2: ""
+File 2: "foobar"
+</code>
+
+Example 2: The same examples using PHP's ''basename()'':
+<code php|Example 2>
+$filename = basename( 'images/stories/clock.jpg' );
+echo "File 1: '", $filename, "'";
+
+$filename = basename( 'images/stories/' );
+echo "File 2: '", $filename, "'";
+
+$filename = basename( 'images/stories/foobar' );
+echo "File 3: '", $filename, "'";
+</code>
+will produce:
+<code php|Results>
+File 1: "clock.jpg"
+File 2: "stories"
+File 2: "foobar"
+</code>
+
+This function utilizes the ''DS'' constant which holds the valid directory separator character of the webserver's operating system; ''/'' on UNIX-systems, ''\'' on Windows. Additionally there is no check provided whether the path or file are actually present on the webserver's filesystem; use [[jfolder-exists|JFolder::exists]] or [[jfile-exists|JFile::exists]] if you need to know.
+
+----
+
+~~DISCUSSION~~

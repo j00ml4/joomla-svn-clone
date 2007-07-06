@@ -1,0 +1,13 @@
+====== setFeature ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla-Framework/Application/JBrowser.html|JBrowser->setFeature]] |
+
+Set capabilities for the current browser.
+===== Syntax =====
+void setFeature	( **$feature**, **$value** )
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

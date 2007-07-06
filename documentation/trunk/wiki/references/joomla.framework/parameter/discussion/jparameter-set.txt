@@ -1,0 +1,39 @@
+====== set ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JParameter|{{http://api.joomla.org/media/images/Class.png }}]][[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->set]] | never | Work in progress |
+
+Sets a value.
+
+===== Syntax =====
+string set	( **$key**, **$value** )
+
+| **$key** | string | is a string containing the name of the parameter to set. |
+| **$value** | string | is a string containing the value to assign to the parameter. |
+
+===== Examples =====
+<code php|Example>
+$paramString = "name=\n"
+    . "position=Chef\n"
+    . "category=4"
+    ;
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+$params = new JParameter( $paramString, $file );
+
+$params->set( 'name', 'Allen' );
+$params->set( 'position', 'Driver' );
+
+echo $params->get( 'name', 'George' ) . "<br />";
+echo $params->get( 'position', 'Mechanic' );
+</code>
+might produce:
+<code php|Result>
+Allen
+Driver
+</code>
+See the [[JParameter-__construct|__construct]] method for the contents of the document_items.xml file.
+
+----
+
+~~DISCUSSION~~
+

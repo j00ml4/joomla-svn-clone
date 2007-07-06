@@ -1,0 +1,28 @@
+======Third-party Libraries included with Joomla!======
+
+The following library packages, listed alphabetically, are included in the standard Joomla! 1.5 distribution.  Libraries marked "deprecated" are included for backwards compatibility only and may be removed from future versions of Joomla!.
+
+
+^ Package ^ Description ^ Status ^
+| [[http://pear.php.net/package/Archive_Tar/|Archive_Tar]] | GNU tar file management class | Deprecated |
+| [[http://pear.php.net/package/Cache_Lite|Cache_Lite]] | Fast and safe lightweight cache system. | Current |
+| [[http://sourceforge.net/projects/domit-xmlparser|DOMIT! XML]] | Document Object Model (DOM) XML parser. | Deprecated |
+| [[http://sourceforge.net/projects/domit-rssparser|DOMIT! RSS]] | RSS parser which uses DOMIT! XML parser to convert an RSS feed into a DOM document that can be traversed using the standard DOM methods.| Deprecated |
+| [[http://www.bitfolge.de/rsscreator-en.html|Feedcreator]] | Class to create RSS feeds. | Deprecated |
+| [[http://qbnz.com/highlighter/|Geshi]] | Generic syntax highlighter. | Current |
+| [[http://www.openidenabled.com/|OpenID]] | A URL-based identity system. | Current |
+| [[http://trac.php-tools.net/patError|patError]] | A generic error handler. | Not recommended |
+| [[http://trac.php-tools.net/patTemplate|patTemplate]] | A sophisticated template system. | Not recommended |
+| [[http://www.phpconcept.net/pcltar/index.en.php|pclTar]] | Archives or extracts a list of files or directories using GNU tar format, with or without compression. | Deprecated |
+| [[http://www.phpconcept.net/pclzip/index.en.php|pclZip]] | Compression and extraction functions for Zip formatted archives (WinZip, PKZIP). | Deprecated |
+| [[http://phpgacl.sourceforge.net/|phpGACL]] | Generic access control lists. | Current |
+| phpInputFilter | Input cleaning and sanitizing. | Deprecated |
+| [[http://phpmailer.sourceforge.net/|phpMailer]] | SMTP email transfer class. | Current |
+| [[http://phputf8.sourceforge.net/|phpUTF8]] | A collection of UTF-8 support functions. | Current |
+| [[http://phpxmlrpc.sourceforge.net/|phpXML-RPC]] | Implementation of the XML-RPC protocol. | Current |
+| [[http://simplepie.org/|SimplePie]] | A class for reading RSS and Atom syndication feeds. | Current |
+| [[http://sourceforge.net/projects/tcpdf/|TCPDF]] | A class for generating PDF files on-the-fly without requiring external extensions. | Current |
+| [[http://www.bitfolge.de/phpvcard-en.html|vCard]] | Class for producing vCard output. | Current |
+
+----
+~~DISCUSSION~~

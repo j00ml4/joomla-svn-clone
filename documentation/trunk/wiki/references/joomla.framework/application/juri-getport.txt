@@ -1,0 +1,17 @@
+====== getPort ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getPort]] |
+
+Gets URI port number, or null if no port was specified.
+===== Syntax =====
+int getPort ()
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org:1572/index.php/topic,41464.msg227819.html#msg227819' );
+echo "Port: " . $uri->getPort();
+</code>
+might produce:
+<code php|Result>
+Port: 1572
+</code>

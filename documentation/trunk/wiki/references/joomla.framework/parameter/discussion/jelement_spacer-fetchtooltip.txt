@@ -1,0 +1,37 @@
+====== fetchTooltip ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement_Spacer|{{http://api.joomla.org/media/images/Class.png }}]][[JElement_Spacer|JElement_Spacer]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Spacer.html|JElement_Spacer->fetchTooltip]] | never | Work in progress |
+
+Redefines the fetchTooltip method if the JElement class. This method returns &nbsp;
+
+===== Syntax =====
+void fetchTooltip	( **$label**, **$description**, **&$node**, **$control_name**, **$name** )
+
+| **$label** | string | is a string. This parameter is not used. |
+| **$description** | string | is a string. This parameter is not used. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement node object containing the settings for the element. This parameter is not used by this method. |
+| **$control_name** | string | is a string. This parameter is not used. |
+| **$name** | string | is a string. This parameter is not used. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR .'/components/com_document/document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'spacer' );
+
+echo $element->fetchTooltip( 'Image Name:', 'Select the image to be used: ', $nodes[0], 'params', 'imagename' );
+</code>
+might produce:
+<code php|Result>
+&nbsp;
+</code>
+(See the [[JElement_Spacer-fetchElement|fetchElement]] method for the contents of the document_items.xml file).
+----
+
+~~DISCUSSION~~

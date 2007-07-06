@@ -1,0 +1,25 @@
+====== fetchId ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Popup|JButton_Popup]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Popup.html#fetchid|JButton_Popup->fetchId]] | never | Internal review |
+
+Gets the button's CSS ID. The value returned is a concatenation of the parent's name property, the string 'popup' and the specified $name parameter.
+
+===== Syntax =====
+string fetchId	( **$name** )
+
+| **$name** | string | is a string containing the button name. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Popup' );
+echo $button->fetchId( 'Popup', 'new', 'Popup Test', 'http://www.joomla.org', 300, 300, 150, 150 );
+</code>
+might produce:
+<code php|Result>
+My ToolBar-popup-Popup
+</code>
+
+----
+
+~~DISCUSSION~~

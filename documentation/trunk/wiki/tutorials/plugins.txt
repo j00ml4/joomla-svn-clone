@@ -1,0 +1,51 @@
+====== Plugins ======
+Joomla! plugins enable you to execute code in response to certain events, either Joomla! core events or custom events that are triggered from your own code.  This is a powerful way of extending the basic Joomla! functionality.  To see where plugins fit in with the overall Joomla! architecture, look at [[http://dev.joomla.org/content/view/1137/80/|Framework overview]].
+
+The Joomla! plugin architecture follows the [[http://en.wikipedia.org/wiki/Observer_pattern|Observer]] design pattern.  The [[references:joomla.framework:application:jplugin|JPlugin]] class is derived from [[references:joomla.framework:base:jobserver|JObserver]] and provides the means to register custom plugin code with core or custom events.  The [[references:joomla.framework:application:jeventdispatcher|JEventDispatcher]] class, derived from [[references:joomla.framework:base:jobservable|JObservable]], is an event handler which calls all plugins registered for a particular event, when that event is triggered.
+
+  * [[plugins:create_plugin|How to create your own plugin]]
+  * [[plugins:using_plugins|How to use plugins in your own code]]
+  * [[plugins:plugins_part2|Creating an Authentication Plugin]]
+
+Useful reference: [[http://codex.gallery2.org/index.php/Gallery2:Embedding:Event-Based_Loose-Coupled_Integration|Gallery 2: Embedding: Event-Based Loose-Coupled Integration]]
+
+Prior to Joomla! 1.5 plugins were known as mambots.  Mambots were able to change content only and were based on certain signal words.  Since then their scope has been stretched and extended to such an extent that to enhance the meaning of the new functionality the developers decided to change the name from mambots to plugins.  Joomla! 1.5 includes legacy support for Joomla! 1.0 mambots.
+
+======Events======
+Joomla! ships with a variety of core events, organised into groups.  These are described in the following topics.
+
+  * [[plugins:system_events|System events]]
+  * [[plugins:user_events|User events]]
+  * [[plugins:editor_events|Editor events]]
+  * [[plugins:content_events|Content events]]
+
+This is an alphabetical list of the core events in Joomla! 1.5 together with the group name to which each belongs.  Each event name links to more detailed information.
+
+  *[[plugins:user_events#onAfterDeleteUser|onAfterDeleteUser]] (user)
+  *[[plugins:content_events#onAfterDisplay|onAfterDisplay]] (content)
+  *[[plugins:content_events#onAfterDisplayTitle|onAfterDisplayTitle]] (content)
+  *[[plugins:content_events#onAfterDisplayContent|onAfterDisplayContent]] (content)
+  *[[plugins:system_events#onAfterInitialise|onAfterInitialise]] (system)
+  *[[plugins:system_events#onAfterRoute|onAfterRoute]] (system)
+  *[[plugins:system_events#onAfterDispatch|onAfterDispatch]] (system)
+  *[[plugins:system_events#onAfterRender|onAfterRender]] (system)
+  *[[plugins:user_events#onAfterStoreUser|onAfterStoreUser]] (user)
+  *[[plugins:user_events#onAuthenticate|onAuthenticate]] (authentication)
+  *[[plugins:user_events#onAuthenticateFailure|onAuthenticateFailure]] (authentication)
+  *[[plugins:user_events#onBeforeDeleteUser|onBeforeDeleteUser]] (user)
+  *[[plugins:content_events#onBeforeDisplay|onBeforeDisplay]] (content)
+  *[[plugins:content_events#onBeforeDisplayContent|onBeforeDisplayContent]] (content)
+  *[[plugins:user_events#onBeforeStoreUser|onBeforeStoreUser]] (user)
+  *[[plugins:editor_events#onCustomEditorButton|onCustomEditorButton]] (editors-xtd)
+  *[[plugins:editor_events#onDisplay|onDisplay]] (editors)
+  *[[plugins:editor_events#onGetContent|onGetContent]] (editors)
+  *[[plugins:editor_events#onGetInsertMethod|onGetInsertMethod]] (editors)
+  *[[plugins:system_events#onGetWebServices|onGetWebServices]] (xmlrpc)
+  *[[plugins:editor_events#onInit|onInit]] (editors)
+  *[[plugins:user_events#onLoginUser|onLoginUser]] (user)
+  *[[plugins:user_events#onLogoutUser|onLogoutUser]] (user)
+  *[[plugins:content_events#onPrepareContent|onPrepareContent]] (content)
+  *[[plugins:editor_events#onSave|onSave]] (editors)
+  *[[plugins:system_events#onSearch|onSearch]] (search)
+  *[[plugins:system_events#onSearchAreas|onSearchAreas]] (search)
+  *[[plugins:editor_events#onSetContent|onSetContent]] (editors)

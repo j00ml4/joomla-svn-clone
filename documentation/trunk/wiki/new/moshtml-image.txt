@@ -1,0 +1,21 @@
+==== Usage of moshtml::image ====
+
+=== 1. Function description ===
+This function will write a <img></img> element
+
+=== 2. Function usage ===
+
+== 2.1. Example ==
+<code php|Example Code>
+
+$attribs = array('class' => 'main');
+echo mosHTML::link('images/stories/articles.jpg', 'Articles', $attribs);
+</code>
+
+== 2.2. Parameters ==
+
+url : string : the url to your image\\
+alt : string : alternative image text\\
+attribs : array : the attributes that you wish to apply to your image\\ \\
+
+[[:start|Back to the Startpage]]

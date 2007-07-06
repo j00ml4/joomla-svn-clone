@@ -1,0 +1,42 @@
+<code html|Menu (Only ModulContent in this box)>
+01: <ul>
+02:     <li><a href="#">menuentry1</a></li>
+03:     <li><a href="#">menuentry2</a></li>
+04:     <li class="selected"><a href="#">Linkmenuentry3</a>
+05:       <ul>
+06:         <li><a href="#">menuentry3.1</a></li>
+07:         <li class="selected">menuentry3.2</li>
+08:         <li><a href="#">menuentry3.3</a></li>
+09:       </ul>
+10:     </li>
+11:     <li><a href="#">menuentry4</a></li>
+12: </ul>
+</code>
+
+====== Notes ======
+
+  * **selected** used to indicate currently selected item. 
+
+----
+
+<code html|menu Absalom>
+<div class="module" id="menu">
+  <h3>Module Title</h3>
+    <ul>
+     <li><a href="#">menuentry1</a></li>
+     <li><a href="#">menuentry2</a></li>
+     <li class="selected"><a href="#">Linkmenuentry3</a>
+      <ul>
+       <li><a href="#">menuentry3.1</a></li>
+       <li class="selected"><a href="#">menuentry3.2</a></li>
+       <li><a href="#">menuentry3.3</a></li>
+      </ul>
+     </li>
+     <li><a href="#">menuentry4</a></li>
+    </ul>
+  </div>
+</div>
+</code>
+
+
+~~DISCUSSION~~

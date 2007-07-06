@@ -1,0 +1,33 @@
+<code html|standard css>
+<style>
+.login input.input-box { width: 15em; }
+.login .label-block { display: block; }
+.login legend {visibility: hidden; }
+</style>
+</code>
+<code html|Login Only ModuleContent in this box>
+01: <a name="modlogin"></a>
+02: <form action="index.php#login" alt="Login Form">
+03:   <fieldset>
+04:     <legend>Login</legend>
+05:     <label for="txtUsername" class="label-block">Username:</label>
+06:     <input name="username" id="txtUsername" type="text" class="input-box" /><br />
+07:     <label for="txtPassword" class="label-block">Password:</label>
+08:     <input name="password" id="txtPassword" type="password" class="input-box" /><br />
+09:     <input name="remember" value="yes" alt="Remember Me" type="check-box" id="chkRemeber" class="check-box" />
+10:     <label for="chkRemember">Remember me</label><br />
+11:     <input value="Login" name="Login" type="submit" />
+12:     <!-- hidden fields here -->
+13:   </fieldset>
+14: </form>
+</code>
+
+
+====== Notes ======
+  * This might look like a lot of classes and stuff, but without any tables, we need to ensure this is as flexible as possible.
+  * The use of **.label-block** allows this label to be on a newline (default) but can override to make inline as label is by default.
+  * standard css block is the sample css that should be included in a global css file for 508 templates.
+~~DISCUSSION~~
+
+
+

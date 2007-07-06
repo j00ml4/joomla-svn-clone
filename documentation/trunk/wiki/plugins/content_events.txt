@@ -1,0 +1,123 @@
+====5.5 Content Events for Plugin System====
+===5.5.1 Overview===
+Content events are triggered during the content creation process. This may occur 
+in views in the com_content component, or in other components or modules.
+
+===5.5.2 onBeforeDisplay===
+==5.5.2.1 Description==
+This event is triggered when the framework is ready to create content. When this event 
+triggers, all features that can affect the presentation format are loaded.
+==5.5.2.2 Parameters==
+None.
+==5.5.2.3 Return Value==
+None.
+==5.5.2.4 Used in files==
+  *index.php
+  *administrator/index.php
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+  *modules/mod_newsflash/helper.php
+  *plugins/content/pagenavigation.php
+  *plugins/content/vote.php
+
+===5.5.3 onAfterDisplay===
+==5.5.3.1 Description==
+This event is triggered when the framework has finished creating content.
+==5.5.3.2 Parameters==
+None.
+==5.5.3.3 Return Value==
+None.
+==5.5.3.4 Used in files==
+  *index.php
+  *administrator/index.php
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+  *modules/mod_newsflash/helper.php
+  
+===5.5.4 onPrepareContent===
+==5.5.4.1 Description==
+This is the first stage in preparing content for output and is the most common point 
+for content orientated plugins to do their work. Since the article and related parameters 
+are passed by reference, event handlers can modify them prior to display.
+==5.5.4.2 Parameters==
+  *article A reference to the article that is being rendered by the view.
+  *params A reference to an associative array of relevant parameters. The view determines what it considers to be relevant and passes that information along.
+  *limitstart An integer that determines the "page" of the content that is to be generated. Note that in the context of views that might not generate HTML output, a page is a reasonably abstract concept that depends on the context.
+==5.5.4.3 Return Value==
+None. Results are returned by modifying the referenced arguments.
+==5.5.4.4 Used in files==
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/article/view.pdf.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+  *plugins/content/code.php
+  *plugins/content/emailcloak.php
+  *plugins/content/geshi.php
+  *plugins/content/image.php
+  *plugins/content/loadmodule.php
+  *plugins/content/pagebreak.php
+  *plugins/content/sef.php
+
+===5.5.5 onAfterDisplayTitle===
+==5.5.5.1 Description==
+This is a request for information that should be placed between the content title and 
+the content body.
+==5.5.5.2 Parameters==
+See the onPrepareContent event for additional discussion of these parameters. Note that 
+unlike onPrepareContent, these parameters are passed by value.
+  *article The article that is being rendered by the view.
+  *params An associative array of relevant parameters.
+  *limitstart An integer that determines the "page" of the content that is to be generated.
+==5.5.5.3 Return Value==
+An array. In XHTML/HTML views, this is is an array of strings, each of which becomes a line in the output stream.
+==5.5.5.4 Used in files==
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+  *modules/mod_newsflash/helper.php
+==5.5.5.5 See Also==
+  *components/com_content/views/article/tmpl/default.php
+
+===5.5.6 onBeforeDisplayContent===
+==5.5.6.1 Description==
+This is a request for information that should be placed immediately before the generated content. For views that generate XHTML/HTML, this might include the use of styles that are specified as part of the content or related parameters.
+==5.5.6.2 Parameters==
+See the onPrepareContent event for additional discussion of these parameters. Note that 
+unlike onPrepareContent, these parameters are passed by value.
+  *article The article that is being rendered by the view.
+  *params An associative array of relevant parameters.
+  *limitstart An integer that determines the "page" of the content that is to be generated.
+==5.5.6.3 Return Value==
+An array. In XHTML/HTML views, this is is an array of strings, each of which becomes a line in the output stream.
+==5.5.6.4 Used in files==
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+  *modules/mod_newsflash/helper.php
+==5.5.6.5 See Also==
+  *components/com_content/views/article/tmpl/default.php
+
+===5.5.7 onAfterDisplayContent===
+==5.5.7.1 Description==
+This is a request for information that should be placed immediately after the generated content. For views that generate XHTML/HTML, this might include the closure of styles that are specified as part of the content or related parameters.
+==5.5.7.2 Parameters==
+See the onPrepareContent event for additional discussion of these parameters. Note that unlike onPrepareContent, these parameters are passed by value.
+  *article The article that is being rendered by the view.
+  *params An associative array of relevant parameters.
+  *limitstart An integer that determines the "page" of the content that is to be generated.
+==5.5.7.3 Return Value==
+An array. In XHTML/HTML views, this is is an array of strings, each of which becomes a line in the output stream.
+==5.5.7.4 Used in files==
+  *components/com_content/views/article/view.html.php
+  *components/com_content/views/category/view.html.php
+  *components/com_content/views/frontpage/view.html.php
+  *components/com_content/views/section/view.html.php
+==5.5.7.5 See Also==
+  *components/com_content/views/article/tmpl/default.php

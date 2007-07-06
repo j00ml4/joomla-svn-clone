@@ -1,0 +1,7 @@
+<form action="<?  echo "http://".getenv("HTTP_HOST") . getenv("REQUEST_URI");
+?>"  method="post">
+
+
+I think it's more comfortable, when we can choose the template on every site
+( The template chooser is a good tool to offer a acessible stylesheet)
+

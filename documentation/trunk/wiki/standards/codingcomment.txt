@@ -1,0 +1,181 @@
+===== Joomla! Commnent Standards =====
+
+=== Start Of the Document ===
+
+Joomla Coding Documentation Quickstart. This file demonstrates the rich information that can be included in-code and subsequently used to generate documentation for Joomla! components using phpDocumentor.
+ 
+
+
+<code php|Example Code>
+/**
+ * Joomla Coding Documentation Quickstart
+ *
+ * This file demonstrates the rich information
+ * that can be included in-code and subsequently
+ * used to generate documentation for Joomla!
+ * components using phpDocumentor
+ *
+ * This is a copy of sample2.php by Greg Beaver of
+ * php.net and is provided with phpDocumentor package.
+ *
+ * @author copy/pasted by Predator < Smiley >
+ * @package sample
+ */
+</code>
+
+=== Add descriptions to included files ===
+
+<code php|Example Code>
+/**
+ * Provide a description of 'include' or 'required'
+ * and its purpose
+ */
+include_once 'sample3.php';
+</code>
+
+=== Use special declaration for global variables. ===
+
+<code php|Example Code>
+/**
+ * Special global variable declaration DocBlock
+ * @global integer $GLOBALS['_myvar']
+ * @name $_myvar
+ */
+$GLOBALS['_myvar'] = 6;
+</code>
+
+=== Use special declaration for Constants. ===
+
+<code php|Example Code>
+/**#@+
+ * Constants
+ */
+/**
+ * first constant
+ */
+define('testing', 6);
+/**
+ * second constant
+ */
+define('anotherconstant', strlen('hello'));
+
+/**#@-*/
+</code>
+
+=== Functions or Methods have lots of valuable information you can declare ===
+
+<code php|Example Code>
+/**
+ * A sample function docblock
+ * @global string document that this function uses $_myvar
+ * @staticvar integer $staticvar this is what is returned
+ * @param string $param1 name to declare
+ * @param string $param2 value of the name
+ * @return integer
+ */
+function firstFunc( $param1, $param2 = 'optional' ){
+    static $staticvar = 7;
+    global $_myvar;
+    return $staticvar;
+}
+</code>
+
+=== Many special declarations for Classes as well. ===
+
+<code php|Example Code>
+/**
+ * The first example class, this is in the same
+ * package as declared at the start of file but
+ * this example has a defined subpackage
+ * @package sample
+ * @subpackage classes
+ */
+class myclass {
+    /**
+     * A sample private variable, this can be hidden with the --parseprivate
+     * option
+     * @access private
+     * @var integer|string
+     */
+    var $firstvar = 6;
+    /**
+     * @link http://www.example.com Example link
+     * @see myclass()
+     * @uses testing, anotherconstant
+     * @var array
+     */
+    var $secondvar =
+        array(
+            'stuff' =>
+                array(
+                    6,
+                    17,
+                    'armadillo'
+                ),
+            testing => anotherconstant
+        );
+
+    /**
+     * Constructor sets up {@link $firstvar}
+     */
+    function myclass(){
+        $this->firstvar = 7;
+    }
+
+    /**
+     * Return a thingie based on $paramie
+     * @param boolean $paramie
+     * @return integer|babyclass
+     */
+    function parentfunc( $paramie ){
+        if ($paramie) {
+            return 6;
+        } else {
+            return new babyclass;
+        }
+    }
+}
+</code>
+
+=== Here is a child class of the previous example. ===
+
+<code php|Example Code>
+/**
+ * @package sample1
+ */
+class babyclass extends myclass {
+    /**
+     * The answer to Life, the Universe and Everything
+     * @var integer
+     */
+    var $secondvar = 42;
+    /**
+     * Configuration values
+     * @var array
+     */
+    var $thirdvar;
+
+    /**
+     * Calls parent constructor, then increments {@link $firstvar}
+     */
+    function babyclass(){
+        parent::myclass();
+        $this->firstvar++;
+    }
+
+    /**
+     * This always returns a myclass
+     * @param ignored $paramie
+     * @return myclass
+     */
+    function parentfunc( $paramie ){
+        return new myclass;
+    }
+}
+</code>
+
+[[:start|Back to the Startpage]]
+
+~~DISCUSSION~~
+
+

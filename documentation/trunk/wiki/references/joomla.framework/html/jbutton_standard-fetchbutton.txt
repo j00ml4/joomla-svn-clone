@@ -1,0 +1,36 @@
+====== fetchButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Standard|JButton_Standard]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Standard.html#fetchbutton|JButton_Standard->fetchButton]] | never | Internal review |
+
+Returns the HTML code for the button. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with $name as its parameter. There are classes defined for certain values of $name in the standard administrator template. See the [[icon_class_list|list of icon classes]] for more details. If this class is used in the frontend, the appropriate class should be defined and any images used should be included. The resulting button will call the Javascript submitbutton function with the $task parameter as its parameter. If the $list parameter is true, the code will ensure that there is an item selected in the list by checking to ensure that the document.adminForm.boxchecked variable is not equal to zero. If the $hide parameter is true, the main menu will be hidden before the submitbutton function is called.
+
+===== Syntax =====
+void fetchButton	( **$type**, **$name**, **$text**, **$task**, **$list**, **$hideMenu** )
+
+| **$type** | string | is a string containing the button type. This should be 'Standard'. This parameter is optional and if omitted defaults to 'Standard'. |
+| **$name** | string | is a string containing the name of the button. This parameter is used to determine the icon class. This parameter is optional and if omitted defaults to ''. |
+| **$text** | string | is a string containing the text to display below the button. This parameter is optional and if omitted defaults to an empty string. |
+| **$task** | string | is a string containing the task that should be passed to the submitbutton function. This parameter is optional and if omitted will defaults to an empty string. |
+| **$list** | boolean | is a boolean specifying whether or not the button should ensure that an item is selected from the admin list. This parameter is optional and if omitted defaults to true. |
+| **$hideMenu** | boolean | is a boolean specifying whether or not the main menu should be hidden before the submitbutton function is called. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Standard' );
+echo $button->fetchButton( 'Standard', 'save', 'Save', 'save', true, true );
+</code>
+might produce:
+<code php|Result>
+<a onclick="javascript:if(document.adminForm.boxchecked.value==0){alert('Please make a selection from the list to Save');}else{hideMainMenu();submitbutton('save')}" class="toolbar">
+
+<div class="icon-32-save" title="Save" type="Standard">
+</div>
+Save
+</a>
+</code>
+When this button is displayed, it looks like: {{:references:joomla.framework:html:save_button.png|:references:joomla.framework:html:save_button.png}}
+
+----
+
+~~DISCUSSION~~

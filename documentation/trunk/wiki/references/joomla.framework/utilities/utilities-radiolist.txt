@@ -1,0 +1,46 @@
+====== radioList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->radioList ]] | never | Work in progress |
+
+A convenient method of producing a list of HTML radio buttons.
+Syntax
+
+===== Syntax =====
+string  radioList ( array &$arr, string $tag_name, string $tag_attribs [, mixed $selected [, string $key [, string $text ]]] )
+
+| **$arr** | interger | is an array of objects that have been returned by a query or the mosHTML::makeOption method. |
+| **$tag_name** | object | is the name of the HTML radio button field. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to each HTML radio button field. |
+| **$selected** | string | is a string containing the value of the radio button that will be selected as the default.  This parameter is optional and if absent none of the radio buttons will be selected by default. |
+| **$key** | string | is the name of the class variable holding the option 'value'.  Should generally be 'value' and will default to this if this parameter is omitted. |
+| **$text** | string | is the name of the class variable holding the option 'text'.  Should generally be 'text' and will default to this if this parameter is omitted.|
+
+===== Examples =====
+Example:
+<code php|Example>
+// Create an array of options.
+$mylist = array();
+$mylist[] = mosHTML::makeOption( 'Radio 1' );
+$mylist[] = mosHTML::makeOption( 'Radio 2' );
+$mylist[] = mosHTML::makeOption( 'Radio 3' );
+ 
+// Generate the HTML radio button list.
+$html = mosHTML::radioList( $mylist, 'chan', 'class="inputbox"', 'Radio 2' );
+echo $html;
+</code>
+which produces:
+<code html|Result>
+<input type="radio" name="chan" id="chanRadio 1" value="Radio 1" class="inputbox" />
+<label for="chanRadio 1">Radio 1</label>
+<input type="radio" name="chan" id="chanRadio 2" value="Radio 2" checked="checked" class="inputbox" />
+<label for="chanRadio 2">Radio 2</label>
+<input type="radio" name="chan" id="chanRadio 3" value="Radio 3" class="inputbox" />
+<label for="chanRadio 3">Radio 3</label>
+</code>
+which renders as:
+
+<html>
+<input type="radio" name="chan" id="chanRadio 1" value="Radio 1" class="inputbox" /><label for="chanRadio 1">Radio 1</label>
+<input type="radio" name="chan" id="chanRadio 2" value="Radio 2" checked="checked" class="inputbox" /><label for="chanRadio 2">Radio 2</label>
+<input type="radio" name="chan" id="chanRadio 3" value="Radio 3" class="inputbox" /><label for="chanRadio 3">Radio 3</label>
+</html>

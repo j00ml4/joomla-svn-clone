@@ -1,0 +1,22 @@
+====== cleantext ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->cleantext]] | never | Work in progress |
+
+Cleans text of all formating and scripting code
+
+===== Syntax =====
+cleanText  (mixed &$text)
+| **$text** | mixed | is an object of type mosParameters. If $params->get( 'back_button' ) is the text value to be cleaned |
+
+===== Examples =====
+Example: This example uses the global configuration 'back_button' setting.
+<code php|Example>
+$text = "Hello&nbsp;there";
+$cleaned_text = mosHTML::cleanText($text);
+echo $text . " has become " . $cleaned_text;
+</code>
+
+Would produce:
+<html>
+Hello there has become Hellothere
+</html>

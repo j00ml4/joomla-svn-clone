@@ -1,0 +1,29 @@
+====== PrintIcon ====== 
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->PrintIcon ]] | never | Work in progress |
+
+Displays a standard print icon. The alternative text for the icon will be taken from the current language settings. This function has been deprecated in the conversion to patTemplate in Joomla! 1.5.  It is no longer used by the Joomla! Core but is being kept for compatibility with third-party software.
+
+===== Syntax =====
+void PrintIcon ( int &$row, object &$params, boolean $enable, string $link [, string $window_params] )
+| **$row** | interger | is the row index. |
+| **$params** | object | is an object of type mosParameters. If $params->get( 'print' ) is false then this function will produce no output. If $params->get( 'popup' ) is true then the icon will be a print icon; if false it will be a print Preview icon. |
+| **$enable** | boolean | is a flag. If false then this function will produce no output. |
+| **$link** | string | is the complete URI of the resource to be printed or print previewed. |
+| **$window_params** | string | is a string containing the window Parameters that will be used for the popup print preview window. This parameter is optional and if omitted will default to 'status=no, toolbar=no, scrollbars=yes, titlebar=no, menubar=no, resizable=yes, width=640, height=480, directories=no, location=no'. |
+
+===== Examples =====
+Example: In this example the popup window that will be opened if the print icon is clicked will make use of the standard window parameters.
+<code php|Example>
+// Set-up the parameters object.
+$params = & new mosParameters( '' );
+$params->def( 'print', true );
+$params->def( 'popup', true );
+ 
+// Set-up the URL that will be opened if the print icon is clicked.
+$url = $mosConfig_live_site . '/index2.PHP?option=com_content&task=view&id=' .
+      $row->id .'&Itemid='. $Itemid;
+ 
+// Draw the Print icon.
+mosHTML::PrintIcon( $row, $params, true, $url );
+</code>

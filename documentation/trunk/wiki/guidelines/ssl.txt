@@ -1,0 +1,125 @@
+====== Joomla SSL Specification ======
+
+===== 1. Overview and Description: =====
+
+An SSL certificate is a file that identifies a distinct user or server.  The use of SSL certificates allows a client to authenticate a server prior to establishing an SSL session. Generally, SSL certificates are signed by a third party that is trusted by both client and server.
+
+Joomla, as of version 1.5, has added the capability to switch between a secured (SSL signed) server and an unsecured server.  Some uses for this functionality would be:
+
+    * Submitting credit card information (e-commerce)
+    * Submitting sensitive personal information (dating service)
+    * Submitting secure site login information
+
+===== 2. Implementation =====
+
+==== 2.1 URL Transformation Function ====
+
+<code php|Source Code>
+/**
+ * Method to process internal Joomla URLs
+ *
+ * @package Joomla.Framework
+ * @param string $url Absolute or Relative URL to Joomla resource
+ * @param int $ssl Secure state for the processed URL
+ *    1: Make URL secure using global secure site URL
+ *    0: Leave URL in the same secure state as it was passed to the function
+ *   -1: Make URL unsecure using the global unsecure site URL
+ * @param int $sef Search engine friendly state for the processed URL
+ *    1: Make URL search engine friendly
+ *    0: Leave URL in the same sef state as it was passed to the function
+ * @since 1.1
+ */
+function josURL( $url, $ssl=0, $sef=1 ) {
+	global $mainframe;
+
+	/*
+	 * Get the base request URL from the JApplication object
+	 */
+	$RURL = $mainframe->getBaseURL();
+	
+	/*
+	 * First we need to get the secure/unsecure URLs.  To do this we get the
+	 * request URL from the JApplication and do a quick test.  If the first 5
+	 * characters of the RURL are 'https', then we are on an ssl connection over
+	 * https and need to set our secure URL to the current request URL, if not,
+	 * and the scheme is 'http', then we need to do a quick string manipulation
+	 * to switch schemes.
+	 */
+	if ( substr( $RURL, 0, 5 ) == 'https' )
+	{
+		$secure 	= $RURL;
+		$unsecure	= 'http'.substr( $RURL, 5 );
+	} elseif ( substr( $RURL, 0, 4 ) == 'http' )
+	{
+		$secure		= 'https'.substr( $RURL, 4 );
+		$unsecure	= $RURL;
+	}
+
+	/*
+	 * If we want to SEF the url, and the SEF function exists... lets pass the
+	 * url through it.
+	 */
+	if ( ( $sef == 1 ) && ( function_exists('sefRelToAbs' ) ) ) {
+		$url = sefRelToAbs( $url );
+	}
+
+	/*
+	 * Were we fed a relative URL?
+	 */
+	if ( substr( $url,0,4 ) != 'http' ) {
+		$url = $RURL . $url;
+	}
+
+	/*
+	 * Ensure that proper secure site url is used if ssl flag set and url
+	 * doesn't already include it
+	 */
+	if ($ssl == 1 && strstr($url, $unsecure)) {
+		$url = str_replace( $unsecure, $secure , $url );
+	}
+
+	/*
+	 * Ok, now if the SSL flag is set to always unsecure, and we are in SSL
+	 * mode, lets change the link to use the unsecure URL
+	 */
+	if ($ssl == -1 && strstr($url, $secure)) {
+		$url = str_replace( $secure, $unsecure , $url );
+	}
+
+	return $url;
+}
+</code>
+
+
+==== 2.1.1 Description ====
+The josURL() function is a new global function which is used in lieu of the sefToRelAbs() function and adds functionality to transform an internal URL to a secured internal URL to be served from the SSL secured server.
+
+===== 3. Third Party Developer Usage =====
+The only aspect of this implementation which is needed by the third party developers is the global josURL() function.  The function takes three parameters: $url, $ssl, and $sef. The only mandatory parameter is $url as the other two parameters have default values set.
+
+    * $url – String variable containing the relative path to transform [eg. index.php?option=com_content]
+
+    * $ssl – Integer variable indicating how the $url should be transformed
+      * [1 Transform the URL to a secure URL], or
+      * [0 Leave the URL in the same secured or unsecured state it is in], or
+      * [-1 Transform the URL to an unsecured URL]
+    * $sef – Integer variable representing a boolean true
+      * [ 1 ] or false 
+      * [ 0 ] depending upon if the $url variable should be transformed to a search engine friendly URL.
+
+     Example: $url = 'index.php?option=com_test' from https://www.domain.com [secured] 
+
+|$sef = 1  |https://www.domain.com/component/option,com_test/|
+|$sef = 0  |https://www.domain.com/component/option,com_test/|
+|$sef = -1 |http://www.domain.com/component/option,com_test/ |
+
+      Example: $url = 'index.php?option=com_test' from http://www.domain.com [unsecured] 
+
+|$sef = 1  |https://www.domain.com/component/option,com_test/|
+|$sef = 0  |http://www.domain.com/component/option,com_test/ |
+|$sef = -1 |http://www.domain.com/component/option,com_test/ |
+
+===== 4. Special Considerations =====
+Not every user will have an SSL signed certificate, therefore remember that if your component requires SSL authentication you should communicate that to the potential user in the user documentation as well as in the installation information.
+
+[[:start|Back to the Startpage]]

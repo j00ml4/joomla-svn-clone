@@ -1,0 +1,14 @@
+====== append ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Database|Database]] | [[JQueryElement|JQueryElement]] | [[http://api.joomla.org/Joomla-Framework/Database/JQueryElement.html|JQueryElement->append]] |
+
+Appends element parts to the internal list.
+===== Syntax =====
+void append	( **$elements** )
+| **$elements** | mixed | is a string containing the element part to add or an array of string containing one or more element parts to add. |
+
+===== Examples =====
+<code php|Example>
+$whereclause = new JQueryElement( 'where', array( 'a.id = 5' ), 'AND' );
+$whereclause->append( array( 'a.state = 1' ) );
+</code>

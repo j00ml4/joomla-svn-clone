@@ -1,0 +1,56 @@
+====== yesnoSelectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->yesnoSelectList]] | never | Work in progress |
+
+A convenient method of building an HTML select list consisting of just a 'No' and a 'Yes' option.  The words for 'Yes' and 'No' are taken from the current language settings. The HTML field will return a '0' is the user selects 'no' or '1' if the user selects 'yes'.
+
+===== Syntax =====
+string yesnoSelectList ( string $tag_name, string $tag_attribs, mixed $selected [,string $yes [, string $no ]] )
+| **$tag_name** | string | is the name attribute of the HTML <select> tag.|
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the HTML <select> tag. |
+| **$selected** | mixed | is either a string value for a single value select list or an array for a multiple value select list. |
+| **$yes** | string | is a string containing the word for 'Yes' that will be displayed to the user. This parameter is optional and if omitted will default to the word for 'Yes' taken from the current language settings. |
+| **$no** | string | is a string containing the word for 'No' that will be displayed to the user. This parameter is optional and if omitted will default to the word for 'No' taken from the current language settings. |
+
+===== Examples =====
+
+Example 1: A simple yes/no select field with 'No' selected by default
+<code php|Example 1>
+$html = mosHTML::yesnoSelectList( 'show_banners', 'class="inputbox"', '0' );
+echo $html;
+</code
+which produces:
+<code html| Result 1>
+<select name="show_banners" class="inputbox">
+  <option value="0" selected="selected">No</option>
+  <option value="1">Yes</option>
+</select>
+</code>
+which renders as:
+<html>
+<select name="show_banners" class="inputbox">
+  <option value="0" selected="selected">No</option>
+  <option value="1">Yes</option>
+</select>
+</html>
+
+
+Example 2: A select list for 'On' or 'Off' with 'On' selected by default.
+<code php|Example 2>
+$html = mosHTML::yesnoSelectList( 'myswitch', 'class="inputbox"', '1', 'On', 'Off' );
+echo $html;
+</code>
+which produces:
+<code html|Result 2>
+<select name="myswitch" class="inputbox">
+  <option value="0">Off</option>
+  <option value="1" selected="selected">On</option>
+</select>
+</code>
+ which renders as:
+<html>
+<select name="myswitch" class="inputbox">
+  <option value="0">Off</option>
+  <option value="1" selected="selected">On</option>
+</select>
+</html>

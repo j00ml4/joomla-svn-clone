@@ -1,0 +1,15 @@
+====== authorize ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla-Framework/Application/JUser.html|JUser->authorize]] |
+
+Method to check JUser object authorization against an access control  object and optionally an access extension object
+===== Syntax =====
+boolean authorize	( **$acoSection**, **$aco**, **$axoSection**, **$axo** )
+| **** | string |  |
+| **** | string |  |
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

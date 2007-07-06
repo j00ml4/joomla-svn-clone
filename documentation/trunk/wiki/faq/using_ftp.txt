@@ -1,0 +1,16 @@
+====== Joomla! 1.5 FTP for handling Safe Mode issues ======
+
+Joomla! 1.5 comes with an build in FTP library which helps you to solve issues which occour in environments with the so called SAFE_MODE enabled.
+
+<code|Safe Mode manual abstract>The PHP safe mode is an attempt to solve the shared-server security problem. It is architecturally incorrect to try to solve this problem at the PHP level, but since the alternatives at the web server and OS levels aren't very realistic, many people, especially ISP's, use safe mode for now.</code>
+Source: http://www.php.net/manual/en/features.safe-mode.php
+
+
+What does this mean for you? Basically if you are on a shared server with safe_mode=on the main issue is that the user you are using to upload your files will be a different one than the one your server will use. This can cause a conflict in access rights and with that e.g. does not allow you to install any extension at all.
+
+===== Web server and access handling =====
+
+This is just a short reference of what this is all about. As already said the main issue are the user who is accessing files. This problem occurs primarily on *nix based servers as they do have a very strict user/group/world access right scheme. However this problem can also occour on a Windows based server such as IIS, specially when you configure the file access rights much different to the user that is assigned to the IIS service.
+
+
+The safe mode settings prevent PHP to access files which are created or assigned to a different user than the CGI script or the web server is using. The group rights, can count but this is very tricky.

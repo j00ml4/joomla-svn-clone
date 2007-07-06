@@ -1,0 +1,16 @@
+====== JButton_Standard ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Standard.html|JButton_Standard]] | never | Internal review |
+
+Renders a standard button. This is an implementation of the abstract [[JButton|JButton]] class. It is used to create a button that will call the Javascript submitbutton function when it is clicked. The submitbutton function is a standard function that is used in the administrator backend to process form submission. The function will be called with the specified task as its parameter. If the current admin page has a list, the resulting code will check to ensure that an item from the list has been checked. The code will hide the main menu if specified.
+
+
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton_Standard-fetchButton|fetchButton]] | Returns the HTML code for the button. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton_Standard-fetchId|fetchId]] | Gets the button's CSS ID. |
+
+----
+
+~~DISCUSSION~~
+

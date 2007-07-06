@@ -1,0 +1,19 @@
+<code html|Content Item>
+  ...
+      <h4>Content Item Title</h4>
+      <span class="date-create">03/17/06</span>
+      <span class="author">Franky Smith</span>
+
+      .... Content Body ...
+
+      <span class="readmore"><a href="#">readmore text</a></span>
+      <span class="date-update">03/20/06</span>
+  ...
+</code>
+
+====== Notes ======
+
+  * **h4** instead of your proposed **h2**? Probably need to discuss this.
+  * propose surrounding readmore <a> tag with span for consistency with other content elements (eg createdate, author) 
+
+~~DISCUSSION~~

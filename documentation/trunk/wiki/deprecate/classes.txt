@@ -1,0 +1,22 @@
+===== 5.2 Deprecated Classes =====
+
+  * database\\
+  * mosAbstractTasker\\
+  * mosCache\\
+  * mosDBTable\\
+  * mosEmpty\\
+  * mosMainFrame\\
+  * mosMambotHandler\\
+  * mosProfiler\\ \\
+  * mosParamaters, use JParameters instead\\ 
+  * mosCategory, use JCategoryModel instead\\ 
+  * mosComponent, use JComponentModel instead\\ 
+  * mosContent, use JContentModel instead\\ 
+  * mosMambot, use JMambotModel instead\\ 
+  * mosMenu, use JMenuModel instead\\ 
+  * mosModule, use JModuleModel instead\\ 
+  * mosSection, use JSectionModel instead\\ 
+  * mosSession, use JSessionModel instead\\ 
+  * mosUser, use JUserModel instead\\ 
+
+[[:start|Back to the Startpage]]

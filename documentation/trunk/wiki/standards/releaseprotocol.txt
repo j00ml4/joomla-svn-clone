@@ -1,0 +1,23 @@
+==== Release Protocol ====
+
+**Please be aware of the proper use of the terms beta and release candidate (RC).**\\ \\
+
+Beta releases are development releases where newly added code can be tested and expanded upon. These releases still have features to be added before it reaches the final and stable status. Make sure you have documented which features are going to be added to the current release. Thus, when all these features have been added, you can call a feature freeze. This means that from that moment on, no new features are to be added to this particular release. The frozen releases are for bug testing only.\\ \\
+
+Release Candidates (commonly referred to as RC's), are public feature-frozen releases for public testing. This means that there should be no more features on the to-do list for this particular release. All new features are for the next decimal increment: 1.0 is current (RC) release, 1.1 is for new features. Release Candidates are developer tested, and feedback from the community is wanted.\\ \\
+
+So, please use these guidelines to your and our advantage!\\ \\
+
+RC for your own community first, then public to all communities\\ \\
+
+Components that are deemed stable enough to have the status of Release Candidate are first released at an developers community or your own community. This internal RC will have a deadline of (at least) one week.\\ \\
+
+This time will give the community a chance to do some final testing with the component. Thus, when releasing the internal RC, it's best to include a list of areas that need special attention during testing (this will evolve into using smoke tests for beta and RC releases). Also, give clear reporting instructions (a link to the bug tracker if used Joomla! Forge).\\ \\
+
+Prior to the first (internal) RC, the (lead) component developer(s) should create the README, INSTALL, UPGRADE, CHANGELOG, LANGDIFF and LICENSE texts, make sure there aren't any PHP notices in the code, and get the credits, about and help sections written. Also, if it is a big component, basic user documentation is highly recommended.\\ \\
+
+When there are no more bugs found and all reported bugs have been resolved, make the RC public by announcing it on the Joomla! Forge or the http://news.joomla.org. These public release candidates should be as complete as possible, with a link to the bug reporting page and the aforementioned texts included.\\ \\
+
+[[:start|Back to the Startpage]]
+
+~~DISCUSSION~~

@@ -1,0 +1,91 @@
+====== Adapting Joomla 1.0 extensions to Joomla 1.5 ======
+//This is a first draft... Please complete or comment so we can complete it...//
+Although Joomla 1.5 has been designed with Joomla 1.0 backwards compatibility in mind, there are a very few items which are not backwards compatible, and require minimal adaptations.
+This document sumarizes the changes which need to be made to Joomla 1.0 extensions to make them run in Joomla 1.5.
+===== Components =====
+==== Global scope ====
+For security enhancement reasons and better encapsulation reasons, the components are not anymore just included from the main index.php, but called from a function. Thus their variables scope is not the global scope anymore.
+This means that variables created in the main part of a component, which are not declared as "global" before creation belong to the component's main execution, and are not accessible as global from the components functions.
+The adaptation is trivial: just add one line in the begin of the component: "global ...." enumerating the global variables of the component.
+
+==== Request/Post parameters ====
+By default URL parameters are not translated anymore into globals of same name, but should be accessed the standard way.
+Here too, the change is trivial: instead of looking directly at for instance at $form, do first a:
+<code php|Getting a request variable in joomla 1.0 (works also in Joomla 1.5)>
+ $form = mosGetParam( $_REQUEST, 'reportform');
+</code>
+<code php|New way of getting a request variable in joomla 1.5>
+ $form = JRequest::getVar('reportform');
+</code>
+This will prevent SQL injection attacks by the way, as both mosGetParam and JRequest escape the variables for malicious SQL code.
+
+==== Start of changes in ACL ====
+The tables structure of the used phpGACL has changed slightly, due to an update to latest phpGACL.
+The $acl->.... methods remain backwards compatible, so components which do not access ACL tables wildly are ok. Please report incompatibilities, so they can be fixed in the core.
+===== Modules =====
+Modules share most of the Components changes above. In addition:
+==== Modules path ====
+Each module is installed in its own sub-directory, like components, meaning if they have images or other files, the path changes.
+===== Joomla Plugins (previously Mambots) =====
+
+==== Change of name ====
+The mambots have been renamed to joomla plugins, as well as the directory, so same remark applies there.
+\\ 
+This remark applies on content plugins vs content mambots\\ 
+\\ 
+**Remark #1**\\ 
+Accordingly with general Joomla changes the old way for deny access for external direct call :\\ 
+\\ 
+\\ 
+<code php |old mambots way (still works also in Joomla 1.5)>
+defined('_VALID_MOS') or die('Direct Access to this location is not allowed.');
+</code>
+\\ 
+<code php |new plugins Joomla 1.5 way>
+defined( '_JEXEC' ) or die( 'Restricted access' );
+</code> 
+\\ 
+**Remark #2**\\ 
+Registering the event\\ 
+
+\\ 
+<code php |old mambots way>$_MAMBOTS->registerFunction( 'onPrepareContent', 'botMybot' );</code>\\ 
+ 
+
+\\ 
+ <code php |new plugins Joomla 1.5 way >$mainframe->registerEvent( 'onPrepareContent', 'botMybot' );</code>\\ 
+
+ \\ 
+
+
+**Remark #3**\\ 
+A new core class was developed for helping us to manage plugins, this  class is JPluginHelper.\\ 
+
+It can be used (for example) to know if a plugin was published or not \\ 
+
+<code php>$plugin =& JPluginHelper::getPlugin('content', 'mybot');
+if (!$plugin->published){ 
+ //plugin not published 
+}else  { 
+  //plugin published 
+}</code> \\ 
+
+\\ 
+**Remark #4**\\ 
+A new core class was developed for helping us to manage plugins ,this  class is JParameter.\\ 
+
+It can be used to know plugins paramaters here is an example:\\ 
+\\ 
+<code php>$pluginParams = new JParameter( $plugin->params );</code>
+\\ 
+Please note that we pass at the constructor the data of instace prevoiusly declared at remark #3 and the we can manage the plugins paramater, for example we assume  that the Mybot Plugin have 3 parameter : P1,P2,P3 so retriving paramater values is easy ,
+<code php>$pluginParams->def( 'P1', 0 );</code>
+
+==== Other changes ====
+__There is another section covering the joomla plugins... link?__
+
+Here is one:
+[[http://forum.joomla.org/index.php/topic,36810.0.html|Fitting Community builder in 1.5 legacy mode, while preserving compatibility to Joomla 1.0 and Mambo 4.5.x]]
+
+
+[[:start|Back to the Startpage]]

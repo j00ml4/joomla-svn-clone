@@ -1,0 +1,22 @@
+==== Usage of moshtml::link ====
+
+=== 1. Function description ===
+This function will write a <a></a> element. If SEF is enabled, it will create a SEF link for the url passed.
+
+=== 2. Function usage ===
+
+== 2.1. Example ==
+<code php|Example Code>
+
+$attribs = array('class' => 'mainlevel');
+echo mosHTML::link('index.php', 'Back to main', $attribs);
+</code>
+
+== 2.2. Parameters ==
+
+url : string : the url you wish to link to\\
+text : string : the text that will be linked\\
+attribs : array : the attributes that you wish to apply to your link\\
+ssl : int : ssl enabled\\ \\
+
+[[:start|Back to the Startpage]]

@@ -1,0 +1,49 @@
+====5.4 Editor Events for Plugin System====
+===5.4.1 Overview===
+There are two kinds of editor-related events in Joomla! 1.5. The first is similar to 
+other events in Joomla! 1.0 where a set of plugin functions can be called as a 
+result of the event triggering. The second kind is somewhat more object orientated, 
+where the event causes invocation of methods in objects derived from the [[references:joomla.framework:application:jplugin|JPlugin]] class.
+
+===5.4.2 onCustomEditorButton===
+==5.4.2.1 Description==
+==5.4.2.2 Parameters==
+==5.4.2.3 Return Value==
+==5.4.2.4 Used in files==
+
+===5.4.3 onInit===
+==5.4.3.1 Description==
+==5.4.3.2 Parameters==
+==5.4.3.3 Return Value==
+==5.4.3.4 Used in files==
+
+===5.4.4 onDisplay===
+==5.4.4.1 Description==
+==5.4.4.2 Parameters==
+==5.4.4.3 Return Value==
+==5.4.4.4 Used in files==
+
+===5.4.5 onGetContent===
+==5.4.5.1 Description==
+==5.4.5.2 Parameters==
+==5.4.5.3 Return Value==
+==5.4.5.4 Used in files==
+
+===5.4.6 onSetContent===
+==5.4.6.1 Description==
+==5.4.6.2 Parameters==
+==5.4.6.3 Return Value==
+==5.4.6.4 Used in files==
+
+===5.4.7 onSave===
+==5.4.7.1 Description==
+==5.4.7.2 Parameters==
+==5.4.7.3 Return Value==
+==5.4.7.4 Used in files==
+
+===5.4.8 onGetInsertMethod===
+==5.4.8.1 Description==
+==5.4.8.2 Parameters==
+==5.4.8.3 Return Value==
+==5.4.8.4 Used in files==
+

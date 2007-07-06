@@ -1,0 +1,63 @@
+====== fetchElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement_Radio|{{http://api.joomla.org/media/images/Class.png }}]][[JElement_Radio|JElement_Radio]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Radio.html|JElement_Radio->fetchElement]] | never | Work in progress |
+
+Renders the HTML code for a radio list containing the entries specified in the XML file. The resulting radio list will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
+
+The XML code for a list element might look like:
+<code php|XML for list element>
+<param name="cache" type="radio" default="0" label="Enable Cache" description="PARAMENABLECACHE">
+	<option value="0">No</option>
+	<option value="1">Yes</option>
+</param>
+</code>
+The child parameters (options) are defined in the same format as standard HTML select list options (see example).
+
+===== Syntax =====
+void fetchElement	( **$name**, **$value**, **&$node**, **$control_name** )
+
+| **$name** | string | is a string containing the value for the name attribute of the form element. |
+| **$value** | string | is a string specifying the original value of the parameter. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement node object containing the settings for the element. |
+| **$control_name** | string | is a string containing the name of the control for the element. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR.DS.'components'.DS.'com_document.DS.'document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'radio' );
+
+echo $element->fetchElement( 'enablecache', '0', $nodes[0], 'params' );
+</code>
+might produce:
+<code php|Result>
+<input type="radio" name="params[enablecache]" id="paramsenablecache0" value="0" checked="checked"  />
+<label for="paramsenablecache0">No</label>
+<input type="radio" name="params[enablecache]" id="paramsenablecache1" value="1"  />
+<label for="paramsenablecache1">Yes</label>
+</code>
+The contents of the document_items.xml for this example are:
+<code php|document_items.xml>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install type="component" version="1.0.0">
+	<name>Document Items</name>
+	<version>1.0.0</version>
+	<description>Example Parameters</description>
+    <params>
+        <param name="cache" type="radio" default="0" label="Enable Cache" description="PARAMENABLECACHE">
+        	<option value="0">No</option>
+        	<option value="1">Yes</option>
+        </param>
+	</params>
+</install>
+</code>
+
+----
+
+~~DISCUSSION~~

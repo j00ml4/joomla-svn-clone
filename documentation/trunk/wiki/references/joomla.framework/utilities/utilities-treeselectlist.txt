@@ -1,0 +1,107 @@
+====== treeSelectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->treeSelectList ]] | never | Work in progress |
+
+Generates an HTML select list from a tree based query list.
+
+===== Syntax =====
+string treeSelectList ( array &$options, int $id, array $preload, string $tag_name,                                             string $tag_attribs, string $key, string $text, mixed $selected )
+
+| **$options** | object | is an array of objects that have been returned by a Database query or the mosHTML::makeOption method.  Each object in the array must contain id and parent properties. |
+| **$id** | integer| is the id of the current list Item. |
+| **$preload** | object | is an array of objects that will be used to preload the selection list.  The objects might have been returned by a database query or the mosHTML::makeOption method.  The array may be empty. |
+| **$tag_name** | string | is the name attribute of the HTML <select> tag. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the HTML <select> tag. |
+| **$key** | string | is the name of the class variable holding the option 'value'.  Should generally be 'value' |
+| **$text** | string | is the name of the class variable holding the option 'text'.  Should generally be 'text'. |
+| **$selected** | mixed | is either a string value for a single value select list or an array for a multiple value select list. |
+
+===== Examples =====
+Example 1: a single value select list:
+<code php|Example 1>
+$query = "SELECT * FROM #__menu WHERE menutype='mainmenu' ORDER BY ordering";
+$database->setQuery( $query );
+$src_list = $database->loadObjectList();
+$selected = array();
+$selected[] = mosHTML::makeOption( '2' );
+echo mosHTML::treeSelectList( &$src_list, 1, array(), 'cid',
+                 'class="inputbox" size="1"', 'value', 'text', $selected );
+</code>
+
+which might produce:
+<code php|Result 1>
+<select name="cid" class="inputbox" size="1">
+  <option value="33">Joomla! License</option>
+  <option value="2" selected="selected">News</option>
+  <option value="48">.      <sup>L</sup> All that's fit to print</option>
+  <option value="49">.      <sup>L</sup> Everything else</option>
+  <option value="39">Blog</option>
+  <option value="4">Links</option>
+  <option value="3">Contact Us</option>
+  <option value="27">Search</option>
+</select>
+</code>
+
+which will render as:
+<html>
+<select name="cid" class="inputbox" size="1">
+  <option value="33">Joomla! License</option>
+  <option value="2" selected="selected">News</option>
+  <option value="48">.      <sup>L</sup> All that's fit to print</option>
+  <option value="49">.      <sup>L</sup> Everything else</option>
+  <option value="39">Blog</option>
+  <option value="4">Links</option>
+  <option value="3">Contact Us</option>
+  <option value="27">Search</option>
+</select>
+</html>
+
+
+Example 2: a multiple value select list:
+
+<code php|Example 2>
+$query = "SELECT * FROM #__menu WHERE menutype='mainmenu' ORDER BY ordering";
+$database->setQuery( $query );
+$src_list = $database->loadObjectList();
+ 
+$preload = array();
+$preload[] = mosHTML::makeOption( '0', 'Select one or more menu options' );
+ 
+$selected = array();
+$selected[] = mosHTML::makeOption( '2' );
+$selected[] = mosHTML::makeOption( '4' );
+echo mosHTML::treeSelectList( &$src_list, 1, $preload, 'cid',
+        'class="inputbox" size="10" multiple="true"', 'value', 'text', $selected );
+</code>
+
+might produce:
+
+<code html|Result 2>
+<select name="cid" class="inputbox" size="10" multiple="true">
+  <option value="0">Select one or more menu options</option>
+  <option value="33">Joomla! License</option>
+  <option value="2" selected="selected">News</option>
+  <option value="48">.      <sup>L</sup> All that's fit to print</option>
+  <option value="49">.      <sup>L</sup> Everything else</option>
+  <option value="39">Blog</option>
+  <option value="4" selected="selected">Links</option>
+  <option value="3">Contact Us</option>
+  <option value="27">Search</option>
+</select>
+</code>
+
+which will render as:
+
+<html>
+<select name="cid" class="inputbox" size="10" multiple="true">
+  <option value="0">Select one or more menu options</option>
+  <option value="33">Joomla! License</option>
+  <option value="2" selected="selected">News</option>
+  <option value="48">.      <sup>L</sup> All that's fit to print</option>
+  <option value="49">.      <sup>L</sup> Everything else</option>
+  <option value="39">Blog</option>
+  <option value="4" selected="selected">Links</option>
+  <option value="3">Contact Us</option>
+  <option value="27">Search</option>
+</select>
+</html>

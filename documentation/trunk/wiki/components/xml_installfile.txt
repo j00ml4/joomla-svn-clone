@@ -1,0 +1,97 @@
+This is an example of a component install manifest (as of January 12, 2007.
+There are some additional elements planned for the J1.5 release).
+
+<code xml|hello.xml>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+	<name>hello_world</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>2007 01 17</creationDate>
+	<author>John Doe</author>
+	<authorEmail>john.doe@example.org</authorEmail>
+	<authorUrl>http://www.example.org</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>Component Version String</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Description of the component ...</description>
+
+	<!-- Custom Install Script to execute -->
+	<installfile>install.eventlist.php</installfile>
+	
+	<!-- Custom Uninstall Script to execute -->
+	<uninstallfile>uninstall.eventlist.php</uninstallfile>
+
+	<!-- Install Database Section -->
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
+			<file driver="mysql">install.mysql.nonutf8.sql</file>
+		</sql>
+	</install>
+	
+	<!-- Uninstall Database Section -->
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">uninstall.mysql.utf8.sql</file>
+			<file driver="mysql">uninstall.mysql.nonutf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<!-- Site Main File Copy Section -->
+	<files>
+		<filename>index.html</filename>
+		<filename>test.php</filename>
+	</files>
+	
+	<!-- Site Main Language File Copy Section -->
+	<languages>
+		<language tag="en-GB">en-GB.com_test.ini</language>
+		<language tag="de-DE">de-DE.com_test.ini</language>
+		<language tag="nl-NL">nl-NL.com_test.ini</language>
+	</languages>
+	
+	<!-- Site Main Media File Copy Section -->
+	<media destination="com_test">
+		<filename>image.png</filename>
+		<filename>flash.swf</filename>
+	</media>
+
+	<administration>
+	
+		<!-- Administration Menu Section -->
+		<menu img="components/com_test/assets/test-16.png">EventList</menu>
+		<submenu>
+			<!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+			<menu link="option=com_helloworld&amp;task=hello&amp;who=world">Hello World!</menu>
+			<!-- Instead of link you can specify individual link attributes -->
+			<menu img="icon" task="hello" controller="z" view="a" layout="b" sub="c">Hello Again!</menu>
+			<menu view="test" layout="foo">Testing Foo Layout</menu>
+		</submenu>
+		
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>admin.test.php</filename>
+		</files>
+		
+		<!-- Administration Language File Copy Section -->
+		<languages folder="admin">
+			<language tag="en-GB">en-GB.com_test.ini</language>
+			<language tag="de-DE">de-DE.com_test.ini</language>
+			<language tag="nl-NL">nl-NL.com_test.ini</language>
+		</languages>
+		
+		<!-- Administration Main Media File Copy Section -->
+		<media folder="admin" destination="com_test">
+			<filename>admin-image.png</filename>
+			<filename>admin-flash.swf</filename>
+		</media>
+	</administration>
+</install>
+</code>

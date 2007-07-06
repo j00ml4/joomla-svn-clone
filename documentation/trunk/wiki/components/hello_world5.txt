@@ -1,0 +1,170 @@
+====3.1.5 Adding Javascript (moo.fx) to your component (WIP)====
+This tutorial starts out with the ground work from Hello World 1, and extends that code to include use of javascript.
+
+In this example we will utilize some functions from the the moo.fx library that comes bundled with Joomla! 1.5
+
+===3.1.5.1 The basis===
+For simplicity of this tutorial, we use [[components:hello_world|Hello World 1]] as a basis of our example. Here are the final versions of the files included in the [[components:hello_world|Hello World 1]] example:
+<code php|hello.php>
+<?php
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+
+
+// require the html view class
+require_once (JApplicationHelper :: getPath('front_html', 'com_hello'));
+
+$task = JRequest::getVar('task');
+$name = JRequest::getVar('name', 'John');
+
+switch ($task) {
+	case 'show':
+	default:
+		hello_HTML::show($name);
+		break;
+}
+?>
+</code>
+<code php|hello.html.php>
+<?php
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+
+class hello_HTML {
+
+	function show($name) {
+		echo 'Hello ' . $name . ' in our World!';
+	}
+
+}
+?>
+</code>
+
+For details on how this code works, please go back and read up on the [[components:hello_world|Hello World 1]] tutorial.
+
+===3.1.5.2 Add some javascript===
+We are now going to load some javascript into our component, and we want to do this in the <head> section of the page. For this example we have used the moo.fx libraries, which come included with Joomla, but you could just as well use any other Javascript library in a similar fashion.
+
+We can add both links to js-files or add code declarations directly. Here, we have set up links to the three js-files in the moo.fx library.
+<code php|hello.html.php - version 2>
+<?php
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+
+class hello_HTML {
+
+	function show($name) {
+		// make mainframe variable available
+		global $mainframe;	
+
+		// Load the moo.fx scripts
+		$document = & $mainframe->getDocument();
+		
+		// Add the js-files
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/joomla/common.js');
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/moofx/moo.fx.js');
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/moofx/moo.fx.pack.js');
+		
+		echo 'Hello ' . $name . ' in our World!';
+	}
+
+}
+?>
+</code>
+
+First off, we made $mainframe available to the show-function. Then, we set $document variable by reference so that we can modify the document output. We then added the three moo.fx scripts and a small code snippet at the bottom. 
+
+$mainframe->getCfg('live_site') is used to fetch the site address from the configuration.
+
+The HTML output of the <head> section page now looks like this:
+
+<code html4strict|index.php?option=com_hello>
+<html>
+<head>
+	<!-- some meta tags and other code removed from here for clarity -->
+	<script type="text/javascript" src="http://www.example.com/includes/js/joomla/common.js"></script>
+	<script type="text/javascript" src="http://www.example.com/includes/js/moofx/moo.fx.js"></script>
+	<script type="text/javascript" src="http://www.example.com/includes/js/moofx/moo.fx.pack.js"></script>
+</head>
+</code>
+
+The result is a component that loads three javascript files when the show() function is called and the files are needed. Beats loading them into your template code with some php if-statements huh?
+
+===3.1.5.3 Create the moo.fx effect===
+We now want to show how to use some of the available functionality in moo.fx. For this example we will create an effect that makes a box expand and it's contents to fade in on click.
+
+This is the javascript we will use:
+<code javascript|javascript snippet>
+<script type="text/javascript">
+	// <!--
+		var greeting;
+		window.onload = function() {
+			greeting = new fx.Combo('greetingContainer', {height: true, opacity: true, duration: 500});
+			greeting.hide();
+		}	
+	// -->
+</script>
+</code>
+The source code itself should be easy to read for those of you familiar with Javascript. For all the others, here is a brief breakdown:
+
+On the third line, the variable greeting is declared. Window.onload is an event that occurs when the page has loaded and here we initialize our nice effects.
+
+On the fifth line we define the greeting variable to be an fx.Combo effect. It is going to affect the object with id 'greetingContainer', and it will set the object to it's normal height and opacity. Duration is the time in milliseconds that the transition effect will last.
+
+Last but not least, we call greeting.hide(); so that the greetingContainer is hidden when the page loads.
+
+For more information on moo.fx syntas you should read [[http://moofx.mad4milk.net/documentation/|the moo.fx documentation]].
+
+===3.1.5.4 Add containers and an event===
+What remains now is to add the greetingContainer to our HTML output. This is the code we will use:
+<code php|html snippet>
+echo '<div onclick="greeting.toggle();">Click to see the greeting</div>
+	  <div id="greetingContainer" style="background-color: #CCC;">
+		  Hello ' . $name . ' in our World!
+	  </div>';
+</code>
+
+Notice the onclick function in the first div and that the second div has it's id set to 'greetingContainer'. The toggle function will toggle the containers height and opacity between 0 and true when we click it, and the transition will be done in 500 milliseconds, as we have defined in our javascript already. 
+
+I have also added a background color to the container, just to make the container easier to spot on screen. Normally you would do this in a CSS stylesheet file.
+
+===3.1.5.5 The result===
+This is the end result and final version of hello.html.php. From version 2 you can see that I have added the javascript declaration in a simliar fashion to how I loaded the external javascript libraries, and I have modified the Hello World output as well to show the two boxes: One clickable and one that is toggled.
+<code php|hello.html.php - version 3>
+<?php
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+
+class hello_HTML {
+
+	function show($name) {
+		// make mainframe variable available
+		global $mainframe;	
+
+		// Load the moo.fx scripts
+		$document = & $mainframe->getDocument();
+		
+		// Add the js-files
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/joomla/common.js');
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/moofx/moo.fx.js');
+		$document->addScript($mainframe->getCfg('live_site').'/includes/js/moofx/moo.fx.pack.js');
+		
+		// Add a script declaration as well
+		$document->addScriptDeclaration("
+			var greeting;
+			window.onload = function() {
+				greeting = new fx.Combo('greetingContainer', {height: true, opacity: true, duration: 500});
+				greeting.hide();
+			}	
+		");
+		
+		// Show the greeting, this time with a clickable header
+		echo '<div onclick="greeting.toggle();">Click to see the greeting</div>
+			  <div id="greetingContainer" style="background-color: #CCC;">
+			      Hello ' . $name . ' in our World!
+			  </div>';
+	}
+
+}
+?>
+</code>

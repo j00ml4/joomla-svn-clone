@@ -1,0 +1,40 @@
+====== makeOption ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->makeOption ]] | never | Work in progress |
+
+This method returns an object that can be passed in an array to another list handling method such as mosHTML::selectList.  The method takes two arguments, one for the value of the option tag and optionally one for the text to display.  If the text is omitted the single string is used for both the option value and the text.
+From Joomla! 1.0 onwards it is also optionally possible to override the default attribute names ('value' and 'text').
+
+===== Syntax =====
+object makeOption ( string $value [, string $text [, string $value_name [, string $text_name ] ] ] )
+| **$value** | string | is the value that will be used for the HTML tag. |
+| **$text** | string | is the text to be displayed in the HTML tag. This parameter is optional and if omitted the text displayed will be the same as $value. |
+| **$value_name** | string | is the class variable name to be used for the 'value' attribute. This parameter is optional and if omitted will default to 'value'. This parameter was introduced in Joomla! 1.0.|
+| **$text_name** | string | is the class variable name to be used for the 'text' attribute. This parameter is optional and if omitted will default to 'text'. This parameter was introduced in Joomla! 1.0. |
+
+The mosHTML::makeOption method returns a stdClass object with class variables 'value' and 'text'. From Joomla! 1.0 onwards the class variable names actually used can be overridden as described above.
+
+===== Examples =====
+Example 1: Creating a list with hard coded values
+<code php|Example 1>
+// Option value and text will be the same.
+$mylist1 = array();
+$mylist1[] = mosHTML::makeOption( 'Good' );
+$mylist1[] = mosHTML::makeOption( 'Bad' );
+$mylist1[] = mosHTML::makeOption( 'Ugly' );
+ 
+// Option value and text will be different.
+$mylist2 = array();
+$mylist2 = mosHTML::makeOption( '0', 'Select priority' );
+$mylist2 = mosHTML::makeOption( '1', 'Low' );
+$mylist2 = mosHTML::makeOption( '2', 'High' );
+</code>
+Example 2: creating a list from a Database query:
+<code php|Example 2>
+// alias the 'value' and 'text' fields and the array will
+// be in the correct format.
+$users = array();
+$users[] = mosHTML::makeOption( '0', 'Select user' );
+$database->setQuery( "SELECT id AS value, username AS text FROM #__users" );
+$users = array_merge( $users, $database->loadObjectList() );
+</code>

@@ -1,0 +1,23 @@
+====== render ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement.html|JElement->render]] |
+
+Renders the HTML code for the parameter. The function returns the code for the element.
+
+===== Syntax =====
+void render	( **&$xmlElement**, **$control_name** )
+| **&$xmlElement** | JSimpleXMLElement | is an XML element object that contains the information pertaining to the parameter. This element is of type [[references:joomla.framework:utilities:jsimplexmlelement|JSimpleXMLElement]]. |
+| **$control_name** | string | is a string contains the control name. This parameter is optional and if omitted defaults to 'params'. |
+
+===== Examples =====
+This method is called indirectly through the [[jparameter|JParameter]] class. The following is an example taken from the contact component.
+<code php|Example>
+$file 	= JPATH_ADMINISTRATOR .'/components/com_contact/contact_items.xml';
+$params = new JParameter( $row->params, $file, 'component' );
+echo $params->render();
+</code>
+the JParameter::render() method then invokes JParameter::renderParam(), which in turn runs the following code:
+<code php|Example>
+return $element->render($node, $control_name);
+</code>
+where $node is an object of type [[references:joomla.framework:utilities:jsimplexmlelement|JSimpleXMLElement]] that is created when the XML file is parsed.

@@ -1,0 +1,49 @@
+====5.1 Creating your own Plugin====
+This How-To should provide you with the basics to develop your own plugin.
+
+===5.1.1 Creating the installation-file===
+As every other add-on in Joomla, it can be easily installed as a .zip-file when shipped with the right .xml-file. As an example, here the .xml-file of the categories-searchbot.
+
+<code xml|XML-installation file for plugins>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install version="1.1" type="plugin" group="search">
+	<name>Categories searchbot</name>
+	<author>Joomla! Project</author>
+	<creationDate>November 2005</creationDate>
+	<copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>1.1</version>
+	<description>Allows Searching of Categories information</description>
+	<files>
+		<filename plugin="categories.searchbot">categories.searchbot.php</filename>
+	</files>
+	<params>
+		<param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of Search items to return"/>		
+	</params>
+</install>
+</code>
+As you can see, the system is similar to other .xml-installation files. You only have to look out for the group="xxx" entry in the <install>-tag and the extended information in the <filename>-tag. These informations tell Joomla! into which folder to copy the file and to which group this plugin has to be added. (Look into the jos_plugins-table for more information)
+
+===5.1.2 Creating the actual plugin===
+As allways, creating a plugin in Joomla! is very easy. You first have to register the plugin for a special event. This can be done with this code:
+<code php|Registering a plugin for an event>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$mainframe->registerEvent( '<event>', '<function to call>' );
+</code>
+With the function $mainframe->registerEvent(), your plugin is signed into the event-system. When you later trigger the event '<event>', the function mentioned in the second parameter is called. The parameter '<function to call>' is really just the string of the function, besides that, its just in inverted commas. (just like the event-name) 
+
+Now you can create your function whatever way you want. If you want to use parameters, its no problem. Just use them as allways. If you want, you can register as many events together with the functions in one file as you want. When you're done, your plugin is allready ready. 8-)
+
+===5.1.3 Using plugins in your code===
+Now that we've created our plugin, we want to call it in our code.
+<code php|Trigger events in Joomla 1.1>
+$results = $mainframe->triggerEvent( '<event>', <parameters> );
+</code>
+The parameters have to be in an array. The function itself will get the parameters as single values. The return value will consist of an array of return values of the different plugins.  (So it can also contain multilevel arrays)
+
+[[:start|Back to the Startpage]]

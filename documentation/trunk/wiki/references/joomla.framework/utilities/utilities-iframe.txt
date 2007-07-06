@@ -1,0 +1,14 @@
+====== Iframe ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->Iframe ]] | never | Work in progress |
+
+Builds a HTML iFrame for the specified URL.
+
+===== Syntax =====
+void Iframe (string $url, string $name, [array $attribs = null], integer $ssl)
+| **$url** | string | The relative URL to use for the src attribute |
+| **$name** | string  | The target attribute to use|
+| **$attribs** | array| An associative array of attributes to add |
+| **$ssl** | integer |Set the SSL functionality|
+
+===== Examples =====

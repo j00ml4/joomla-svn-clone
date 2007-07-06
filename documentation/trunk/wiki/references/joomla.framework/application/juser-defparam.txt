@@ -1,0 +1,13 @@
+====== defParam ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla-Framework/Application/JUser.html|JUser->defParam]] |
+
+Method to set a default parameter if it does not exist
+===== Syntax =====
+mixed defParam	( **$key**, **$value** )
+| **** | string |  |
+| **** | mixed |  |
+
+===== Examples =====
+
+
