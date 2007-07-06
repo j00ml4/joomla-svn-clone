@@ -1,0 +1,27 @@
+====== JParameter ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter]] | never | Work in progress |
+
+The JParameter class is an extension of the JRegistry class that is used to render parameters into HTML. 
+
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JParameter-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-__construct|__construct]] | Constructs the object by loading the specified data and setup file (if given). |
+| [[JParameter-addParameterDir|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-addParameterDir|addParameterDir]] | Adds a directory where JParameter should search for element types. |
+| [[JParameter-def|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-def|def]] | Sets a default value if not alreay assigned. |
+| [[JParameter-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-get|get]] | Gets a value. |
+| [[JParameter-getIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-getIncludePath|getIncludePath]] | Gets the include path. |
+| [[JParameter-getParam|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-getParam|getParam]] | Renders a parameter. |
+| [[JParameter-getParams|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-getParams|getParams]] | Render all parameters. |
+| [[JParameter-loadElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-loadElement|loadElement]] | Loads an element type. |
+| [[JParameter-loadSetupFile|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-loadSetupFile|loadSetupFile]] | Loads an xml setup file and parses it. |
+| [[JParameter-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-render|render]] | Renders the parameters. |
+| [[JParameter-renderToArray|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-renderToArray|renderToArray]] | Renders all the parameters to an array. |
+| [[JParameter-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-set|set]] | Sets a value. |
+| [[JParameter-setXML|{{http://api.joomla.org/media/images/Method.png }}]] [[JParameter-setXML|setXML]] | Sets the XML object from custom xml files. |
+
+----
+
+~~DISCUSSION~~
+

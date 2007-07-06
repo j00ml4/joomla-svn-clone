@@ -1,0 +1,534 @@
+===== Joomla! UTF-8 Specification (WIP)=====
+==== 1. Overview ====
+=== 1.1 Introduction to UTF-8 ===
+UTF-8 is a variable length character encoding using one to four bytes per character, depending on the Unicode symbol. Character sets of all languages are implemented with up to three bytes. Four bytes are only required only for special characters outside the Basic Multilingual Plane, which are generally very rare.
+
+UTF-8 is becoming the standard and internationally accepted multilingual environment and is the preferred way to communicate non-ASCII characters over the Internet. Being a subset of Unicode, UTF-8 has the special benefit of using less space to store or transmit ASCII. As the bulk of Internet transmissions are using the 7 bit ASCII characters, UTF-8 encoding saves volume and bandwidth.
+=== 1.2 Joomla! UTF-8 Implementation Considerations ===
+The use of multibyte characters between one byte and three bytes long has an effect on several areas of Joomla!'s functionality:
+
+  * The database needs to support UTF-8 data storage. For example: a text field of type varchar with size 20 should store up to 20 characters. With utf-8 this now means up to 60 bytes. The database needs to be able to adjust accordingly. MySQL versions 4.1.2 and up, support UTF-8 however backward compatibility to use older versions needs to be maintained. The danger of using UTF-* data in a non-UTF-8 database is the possibility of string truncation.
+  * The communication channel between the Joomla! application and the database needs to be defined as UTF-8 else unwanted encoding translations might occur.
+  * The html page needs to know which encoding it carries. This is trivial.
+  * Joomla!’s PHP string handling functions need to be UTF-8 aware. PHP’s regular string functions are all single-byte aware and a special set of functions is needed. The 'mbstring' extension to PHP, which has multibyte string functions, is not present in all hosts. The dangers of using the regular single-byte string functions on UTF-8 encoded data is both logical failures of the Joomla! application and data corruption. A reference of potential problems can be found at http://www.phpwact.org/php/i18n/utf-8.
+
+=== 1.3 UTF-8 Implementation Strategy in Joomla! ===
+== 1.3.1 Preinstall checks ==
+The installer checks for the existence of the 'mbstring' PHP extension. (If available it is used - see 1.3.3). If present and if settings that are adverse to UTF-8 handling, the user is warned and requested to change the settings.
+== 1.3.2 Database backward compatibility ==
+At install time the version of the database is checked. If it supports UTF-8 then database and tables are created with utf-8 encoding. If not UTF-8 aware version is found, data truncation is avoided by enlarging string fields.
+== 1.3.3 Multibyte string handling and compatibility ==
+A pure PHP library of multibyte string functions is provided. As these functions are slower than the 'mbstring' functions, 'mbstring' functions are used if available else the native PHP version is used. This is kept transparent by a Joomla! wrapper JString class.
+== 1.3.4 3PD components specification ==
+There are changes in the specifications for Third Party components as a result of the transition of Joomla! to UTF-8 (this is a major element of version 1.5 release). Backwards compatibility with existing components is maintained to a degree. 3PD issues are further discussed in the following sections.
+
+==== 2. Database UTF-8 Implementation ====
+UTF-8 support in MySQL databases was introduced with version 4.1.2. Joomla! is specified to function when using older versions of MySQL. Joomla! 1.5 provides safe backward compatibility when using non-UTF-8 versions of MySQL.
+
+=== 2.1 New feature - Joomla! sets database and table encoding ===
+UTF-8 support in the database only exists if the 'character set' (encoding) is set to 'utf8'. During the installation, Joomla! determines if the database supports UTF-8. If it does then the user is asked to select a suitable collation and the database is created with 'utf8' encoding and the selected collation. The tables are also created in the same manner (see following script). The user selected collation substitutes the default 'utf8_general_ci' collation as seen in the script before the script is run.
+<code sql|UTF-8 table creation script sample>
+#
+# Table structure for table `#__bannerclient` in a UTF-8 database
+#
+
+CREATE TABLE `#__bannerclient` (
+  `cid` int(11) NOT NULL auto_increment,
+  `name` varchar(60) NOT NULL default '',
+  `contact` varchar(60) NOT NULL default '',
+  `email` varchar(60) NOT NULL default '',
+  `extrainfo` text NOT NULL,
+  `checked_out` tinyint(1) NOT NULL default '0',
+  `checked_out_time` time default NULL,
+  `editor` varchar(50) default NULL,
+  PRIMARY KEY  (`cid`)
+) TYPE=MyISAM CHARACTER SET `utf8` COLLATE `utf8_general_ci`;
+</code>
+The redundancy of setting encoding both at database and at table creation support the cases when a pre-exisiting empty database exists which might not have default encoding set to 'utf8'. 
+
+
+=== 2.2 Method for achieving backward compatibility ===
+The main issue in storing UTF-8 string data in non-UTF-8 versions of MySQL is that 'varchar' fields have a fixed byte length assuming that one character equals one byte. The UTF-8 characters could be between one and three bytes long. The danger is that string truncation can occur if the byte count exceeds the space provided even though character count limit is not exceeded.
+
+A second installation sql script named 'joomla_backward.sql' is used instead of 'joomla.sql' when a non-UTF-8 version of MySQL is encountered. In this case only the default charset/collation pair 'latin1_swedish_ci' is used. (This actually has no adverse effect on actual collation of UTF-8 data). In addition some of the 'varchar' fields have their length set to three times the original value. This is to protect from string truncation.
+
+The criteria for expanding string storage is as follows:
+  * Fields of type 'varchar' that are known to hold only ASCII data (such as url's, email addresses, system keys etc.) maintain their original length settings.
+  * Fields of type 'varchar' that might contain multibyte UTF-8 characters are expanded by a factor of three.
+  * If the expanded factor exceeds the 'varchar' limit of 255 then the field is defined to be type 'text'
+
+Note the increased size of varchar fields in the following example:
+<code sql|Non-UTF-8 table creation script sample>
+#
+# Table structure for table `#__bannerclient` in a non-UTF-8 database
+#
+
+CREATE TABLE `#__bannerclient` (
+  `cid` int(11) NOT NULL auto_increment,
+  `name` varchar(180) NOT NULL default '',
+  `contact` varchar(180) NOT NULL default '',
+  `email` varchar(60) NOT NULL default '',
+  `extrainfo` text NOT NULL,
+  `checked_out` tinyint(1) NOT NULL default '0',
+  `checked_out_time` time default NULL,
+  `editor` varchar(150) default NULL,
+  PRIMARY KEY  (`cid`)
+) TYPE=MyISAM;
+</code>
+This method will also be used for creating database tables during component installation. See section 4 below.
+
+=== 2.3 Database class API (relevant to UTF-8) ===
+The following snippets show functions that can be used to determine:
+  * the database version
+  * the collation set at install time 
+  * if the database provides UTF-8 support.
+<code php|UTF-8 relevant functions in 'database' and sub classes>
+	/**
+	 * Assumes database collation in use by sampling one text field in one core table
+	 * @return string Collation in use
+	 */
+	function getCollation ()
+
+	/**
+	 * @return string database version in use
+	 */
+	function getVersion() 
+
+	/**
+	 * Determines if database has UTF support
+         * @return boolean True if UTF-8 support exists
+	 */
+	function hasUTF() 
+
+</code>
+
+==== 3. PHP multibyte (UTF-8) implementation ====
+
+=== 3.1 Description of the implementation ===
+Joomla! 1.5 will store and process all content and other string values in utf-8 encoding. The immediate implication is that virtually all languages' character sets will contain multibyte characters. This includes all diacritic Latin characters that are common in European languages. Non-Latin character languages will be entirely multibyte. To avoid data corruption and logical errors related to content processing, PHP's string handling functions should be multibtye aware. Unfortunately all core string functions in PHP 4 and PHP 5 are only singlebyte versions.
+
+The multibyte set of string functions provided by PHP - the 'mbstring' extension is not always available and not always loaded in many hosts. To keep with Joomla!'s specified requirements regarding PHP compatibility, a self-contained library of UTF-8 multibyte string functions has been introduced in version 1.5. The library is named JString and its methods are identified with the same names as the regular PHP string functions.
+  strtolower($text)           //singlebyte php string function
+  JString::strtolower($text)  //utf-8 string function
+
+This library works in combination with the 'mbstring' functions if they are available. The library loader checks if 'mbstring' is available and will use the appropriate 'mbstring' function in the cases that the library provided function is slower (not in all cases).
+
+Prior to the library loading, the application loader calls a set of PHP compatibility routines residing in the 'libraries/joomla/common/compat' library folder. The file 'phputf8env.php' tries to dynamically load mbstring if missing. If mbstring is loaded, then the appropriate environmental settings for UTF-8 are set. Normally no administrator pre-configuration of PHP, globally or locally, is required. The exception to this would be identified at install time.
+
+During the installation preinstall checks, the installer checks for two potentially adverse settings of mbstring that **cannot be overridden** at runtime. The required settings are:
+  mbsring.language = neutral
+  mbstring.func_overload = 0
+The first setting might for instance be set to "Japanese" and the second which enables shadowing of mb_string function over the regular string functions might be activated i.e. with value 2.
+
+Fortunately these two required settings can be set globally (in the php.ini file) or locally in the .htaccess file. The prerequisites for local configuration are:
+  * Apache web server
+  * 'Allow Override' set to 'All' or 'Options' 
+The statements required in the .htaccess file, in the case that override is needed, are:
+  php_value mbstring.language neutral
+  php_value mbstring.func_overload 0
+
+
+
+
+=== 3.2 Criteria for using JString class UTF-8 string functions ===
+Not all string functions need to be replaced with multibyte versions. In fact there are cases of usage that would break Joomla if multibyte versions would be used instead of singlebyte functions. Therefore a clear critera defining which string functions ahould be replaced is needed.
+
+__**First rule**__: Not all PHP string functions have a multibyte version. If a parallel JString method is not found for a PHP string function then the particular function **is safe to use** with UTF-8 data. An example is 'explode()'.
+
+__**Second rule**__: This applies only to 'strlen()' and relates to the usage of the returned value. 
+  $byte_count = strlen($utf_string);          // how many bytes in utf-8 string?
+  $char_count = JString::strlen($utf_string); // how many characters in utf-8 string? 
+The singlebyte, original PHP function, should be used when the binary length of the string data is needed. This is common in providing size input to the 'fwrite' function. The JString version should be used when a character count is needed.
+
+__**Third rule**__: Not all other string functions need to be replaced. In cases where it can be established that the functions will always be used on ASCII data or binary data, the original php string functions can safely be used. Examples of usage of string functions on binary data can seen in gzip routines. The occurences of string handling operations that can be considered ASCII only are:
+  * url's 
+  * paths 
+  * email addresses 
+  * internal code identifiers and keys
+  * xml keys and values
+ 
+
+=== 3.3 JString class API ===
+
+<code php|JString API>
+/**
+ * String handling class for utf-8 data
+ * Wraps the phputf8 library
+ * All functions assume the validity of utf-8 strings. If in doubt use TODO
+ *
+ * @author David Gal <david@joomla.co.il>
+ * @package Joomla.Framework
+ * @since 1.5
+ */
+class JString
+{
+	/**
+	 * UTF-8 aware alternative to strpos
+	 * Find position of first occurrence of a string
+	 *
+	 * @static
+	 * @access public
+	 * @param $str - string String being examined
+	 * @param $search - string String being searced for
+	 * @param $offset - int Optional, specifies the position from 
+         *                  which the search should be performed
+	 * @return mixed Number of characters before the first match or FALSE on failure
+	 * @see http://www.php.net/strpos
+	 */
+	function strpos($str, $search, $offset = FALSE) 
+
+	/**
+	 * UTF-8 aware alternative to strrpos
+	 * Finds position of last occurrence of a string
+	 *
+	 * @static
+	 * @access public
+	 * @param $str - string String being examined
+	 * @param $search - string String being searced for
+	 * @return mixed Number of characters before the last match or FALSE on failure
+	 * @see http://www.php.net/strrpos
+	 */
+	function strrpos($str, $search) 
+
+	/**
+	 * UTF-8 aware alternative to substr
+	 * Return part of a string given character offset (and optionally length)
+	 *
+	 * @static
+	 * @access public
+	 * @param string
+	 * @param integer number of UTF-8 characters offset (from left)
+	 * @param integer (optional) length in UTF-8 characters from offset
+	 * @return mixed string or FALSE if failure
+	 * @see http://www.php.net/substr
+	 */
+	function substr($str, $offset, $length = FALSE) 
+
+	/**
+	 * UTF-8 aware alternative to strtlower
+	 * Make a string lowercase
+	 * Note: The concept of a characters "case" only exists is some alphabets
+	 * such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does
+	 * not exist in the Chinese alphabet, for example. See Unicode Standard
+	 * Annex #21: Case Mappings
+	 *
+	 * @access public
+	 * @param string
+	 * @return mixed either string in lowercase or FALSE is UTF-8 invalid
+	 * @see http://www.php.net/strtolower
+	 */
+	function strtolower($str) 
+
+	/**
+	 * UTF-8 aware alternative to strtoupper
+	 * Make a string uppercase
+	 * Note: The concept of a characters "case" only exists is some alphabets
+	 * such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does
+	 * not exist in the Chinese alphabet, for example. See Unicode Standard
+	 * Annex #21: Case Mappings
+	 *
+	 * @access public
+	 * @param string
+	 * @return mixed either string in uppercase or FALSE is UTF-8 invalid
+	 * @see http://www.php.net/strtoupper
+	 */
+	function strtoupper($str) 
+
+	/**
+	 * UTF-8 aware alternative to strlen
+	 * Returns the number of characters in the string (NOT THE NUMBER OF BYTES),
+	 *
+	 * @access public
+	 * @param string UTF-8 string
+	 * @return int number of UTF-8 characters in string
+	 * @see http://www.php.net/strlen
+	 */
+	function strlen($str) 
+
+	/**
+	 * UTF-8 aware alternative to str_ireplace
+	 * Case-insensitive version of str_replace
+	 *
+	 * @static
+	 * @access public
+	 * @param string string to search
+	 * @param string existing string to replace
+	 * @param string new string to replace with
+	 * @param int optional count value to be passed by referene
+	 * @see http://www.php.net/str_ireplace
+	*/
+	function str_ireplace($search, $replace, $str, $count = NULL) 
+
+	/**
+	 * UTF-8 aware alternative to str_split
+	 * Convert a string to an array
+	 *
+	 * @static
+	 * @access public
+	 * @param string UTF-8 encoded
+	 * @param int number to characters to split string by
+	 * @return array
+	 * @see http://www.php.net/str_split
+	*/
+	function str_split($str, $split_len = 1) 
+
+	/**
+	 * UTF-8 aware alternative to strcasecmp
+	 * A case insensivite string comparison
+	 *
+	 * @static
+	 * @access public
+	 * @param string string 1 to compare
+	 * @param string string 2 to compare
+	 * @return int < 0 if str1 is less than str2; > 0 if str1 is 
+         *         greater than str2, and 0 if they are equal.
+	 * @see http://www.php.net/strcasecmp
+	*/
+	function strcasecmp($str1, $str2) 
+
+	/**
+	 * UTF-8 aware alternative to strcspn
+	 * Find length of initial segment not matching mask
+	 *
+	 * @static
+	 * @access public
+	 * @param string
+	 * @param string the mask
+	 * @param int Optional starting character position (in characters)
+	 * @param int Optional length
+	 * @return int the length of the initial segment of str1 which does not 
+         *         contain any of the characters in str2
+	 * @see http://www.php.net/strcspn
+	*/
+	function strcspn($str, $mask, $start = NULL, $length = NULL) 
+
+	/**
+	 * UTF-8 aware alternative to stristr
+	 * Returns all of haystack from the first occurrence of needle to the end.
+	 * needle and haystack are examined in a case-insensitive manner
+	 * Find first occurrence of a string using case insensitive comparison
+	 *
+	 * @static
+	 * @access public
+	 * @param string the haystack
+	 * @param string the needle
+	 * @return string the sub string
+	 * @see http://www.php.net/stristr
+	*/
+	function stristr($str, $search) 
+
+	/**
+	 * UTF-8 aware alternative to strrev
+	 * Reverse a string
+	 *
+	 * @static
+	 * @access public
+	 * @param string String to be reversed
+	 * @return string The string in reverse character order
+	 * @see http://www.php.net/strrev
+	*/
+	function strrev($str) 
+
+	/**
+	 * UTF-8 aware alternative to strspn
+	 * Find length of initial segment matching mask
+	 *
+	 * @static
+	 * @access public
+	 * @param string the haystack
+	 * @param string the mask
+	 * @param int start optional
+	 * @param int length optional
+	 * @see http://www.php.net/strspn
+	*/
+	function strspn($str, $mask, $start = NULL, $length = NULL) 
+
+	/**
+	 * UTF-8 aware substr_replace
+	 * Replace text within a portion of a string
+	 *
+	 * @static
+	 * @access public
+	 * @param string the haystack
+	 * @param string the replacement string
+	 * @param int start
+	 * @param int length (optional)
+	 * @see http://www.php.net/substr_replace
+	*/
+	function substr_replace($str, $repl, $start, $length = NULL ) 
+
+	/**
+	 * UTF-8 aware replacement for ltrim()
+	 * Strip whitespace (or other characters) from the beginning of a string
+	 * Note: you only need to use this if you are supplying the charlist
+	 * optional arg and it contains UTF-8 characters. Otherwise ltrim will
+	 * work normally on a UTF-8 string
+	 *
+	 * @static
+	 * @access public
+	 * @param string the string to be trimmed
+	 * @param string the optional charlist of additional characters to trim
+	 * @return string the trimmed string
+	 * @see http://www.php.net/ltrim
+	*/
+	function ltrim( $str, $charlist = FALSE ) 
+
+	/**
+	 * UTF-8 aware replacement for rtrim()
+	 * Strip whitespace (or other characters) from the end of a string
+	 * Note: you only need to use this if you are supplying the charlist
+	 * optional arg and it contains UTF-8 characters. Otherwise rtrim will
+	 * work normally on a UTF-8 string
+	 *
+	 * @static
+	 * @access public
+	 * @param string the string to be trimmed
+	 * @param string the optional charlist of additional characters to trim
+	 * @return string the trimmed string
+	 * @see http://www.php.net/rtrim
+	*/
+	function rtrim( $str, $charlist = FALSE ) 
+
+	/**
+	 * UTF-8 aware replacement for trim()
+	 * Strip whitespace (or other characters) from the beginning and end of a string
+	 * Note: you only need to use this if you are supplying the charlist
+	 * optional arg and it contains UTF-8 characters. Otherwise trim will
+	 * work normally on a UTF-8 string
+	 *
+	 * @static
+	 * @access public
+	 * @param string the string to be trimmed
+	 * @param string the optional charlist of additional characters to trim
+	 * @return string the trimmed string
+	 * @see http://www.php.net/trim
+	*/
+	function trim( $str, $charlist = FALSE ) 
+
+	/**
+	 * UTF-8 aware alternative to ucfirst
+	 * Make a string's first character uppercase
+	 *
+	 * @static
+	 * @access public
+	 * @param string
+	 * @return string with first character as upper case (if applicable)
+	 * @see http://www.php.net/ucfirst
+	*/
+	function ucfirst($str)
+
+	/**
+	 * UTF-8 aware alternative to ucwords
+	 * Uppercase the first character of each word in a string
+	 *
+	 * @static
+	 * @access public
+	 * @param string
+	 * @return string with first char of each word uppercase
+	 * @see http://www.php.net/ucwords
+	*/
+	function ucwords($str) 
+</code>
+
+
+==== 4 UTF-8 Guidelines for 3PD components ====
+UTF-8 is one of the aspects that apply to 3PD components that are installed in Joomla! 1.5. These guidlines summarise the elements of the UTF-8 specification that need to be applied to components.
+=== 4.1 Limits of backward compatibility for existing components ===
+Existing components are safe to use when the MySQL database is UTF-8 compliant (version 4.1.2 and up), as the 'utf8' character set and selected collation are set to the database. Tables created during the component installation will inherit the UTF-8 settings UNLESS the component's SQL query sets table character set to be otherwise.
+
+Installing existing components on a MySQL database older than version 4.1.2 is not recommended as string truncation could easily occur.
+
+PHP string fuctions in existing components are not UTF-8 aware and there might be instances of character corruption or logical errors as described above.
+
+=== 4.2 Guidlines for creating Joomla! 1.5 compatible components ===
+== 4.2.1 Database table creation ==
+To be able to be compatible with older, non-UTF-8 compliant, databases, the table creation process should no longer use the method of placing table creation SQL queries in the xml file but rather do the following:
+  * Provide two SQL scripts: one for UTF-8 databases and one for non-UTF-8 databases. The relevant varchar fields in the non-UTF-8 version should be expanded by a factor of 3 as explained in the specification.
+  * The old version query inside the XML with the following tags should be removed (otherwise backward compatibilty will be assumed i.e old component)
+<code xml|Old XML tags that should be deleted>
+<install>
+    <queries>
+        <query>
+            ...query text...
+        </query>
+        <query>
+            ...another query text...
+        </query>
+    </queries>
+...
+</install>
+</code>
+  * Instead the following tags should be provided to identify the discrete SQL files that should be placed in the component folder in the administrator folder tree.
+<code xml|New XML tags for discrete sql installation files>
+<install>
+  <sql>
+    <file driver="mysql" charset="utf8">install.utf.sql</file>
+    <file driver="mysql">install.nonutf.sql</file>
+  </sql>
+</install>
+</code>
+  * Note the attributes defining the MySQL UTF compatibility. The tag content for attribute version="4.1.2" is used when the installer finds that the database is version >= 4.1.2. The "3.2.0" attribute's tag content is used when the version is < 4.1.2 but >= 3.2.0. No other attribute values should be used - the component installer will not recognise them.
+  * Naming of the SQL files for install or uninstall are only examples. Actual names are at the developer's discretion.
+  * Following is an example of a complete component XML file for Joomla! 1.5. Note the uninstall scripts as well. Also note the additional 'filename' tags for the SQL files in the administrator section.
+<code xml|Sample component XML script modified for Joomla! 1.5>
+<?xml version="1.0" ?>
+<install type="component">
+<name>DailyMessage</name>
+<creationDate>10/4/2005</creationDate>
+<author>Joseph LeBlanc</author>
+<copyright>This component in released under the GNU/GPL License</copyright>
+<authorEmail>contact@jlleblanc.com</authorEmail>
+<authorUrl>www.jlleblanc.com</authorUrl>
+<version>1.0.3</version>
+<files>
+  <filename>dailymessage.php</filename>
+  <filename>dailymessage.class.php</filename>
+</files>
+<install>
+  <sql>
+    <file driver="mysql" charset="utf8">install.utf.sql</file>
+    <file driver="mysql">install.nonutf.sql</file>
+  </sql>
+</install>
+
+<uninstall>
+  <sql>
+    <file driver="mysql" charset="utf8">uninstall.utf.sql</file>
+    <file driver="mysql">uninstall.nonutf.sql</file>
+  </sql>
+</uninstall>
+
+<installfile>
+	<filename>install.dailymessage.php</filename>
+</installfile>
+
+<uninstallfile>
+	<filename>uninstall.dailymessage.php</filename>
+</uninstallfile>
+
+<administration>
+	<menu>Daily Message</menu>
+	<submenu>
+		<menu act="all">Edit Messages</menu>
+		<menu act="configure">Configure</menu>
+	</submenu>
+  <files>
+  	<filename>admin.dailymessage.php</filename>
+  	<filename>admin.dailymessage.html.php</filename>
+  	<filename>toolbar.dailymessage.php</filename>
+  	<filename>toolbar.dailymessage.html.php</filename>
+  	<filename>install.utf.sql</filename>
+  	<filename>uninstall.utf.sql</filename>
+  	<filename>install.nonutf.sql</filename>
+  	<filename>uninstall.nonutf.sql</filename>
+  </files>
+</administration>
+</install>
+</code>
+
+== 4.2.2 UTF-8 string handling ==
+  * PHP string functions should be modified to calls to the JString class parallel functions based on the criteria set out in section 3.2 above.
+
+\\ \\
+
+[[:start|Back to the Startpage]]

@@ -1,0 +1,14 @@
+====== JElement_Radio ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Radio.html|JElement_Radio]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render a radio list element. The JElement_Radio class can be used to render a radio list that contains the options specified in the XML file.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JElement_Radio-fetchElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement_Radio-fetchElement|fetchElement]] | Renders the HTML code for a radio list containing the entries specified in the XML file. |
+
+----
+
+~~DISCUSSION~~
+

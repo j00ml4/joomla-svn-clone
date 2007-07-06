@@ -1,0 +1,154 @@
+This page lists the core tables in Joomla! 1.0 and their status in 1.5
+
+For most cases fields have been extended in their size either by enlargening the width or changing type to a large type (e.g. varchar to text).
+
+====== Changed ======
+
+**Banner**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Banner Client**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Banner Finish**
+Removed
+
+**Categories**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Components**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Contact Details**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Content**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Content Frontpage**
+Exists in 1.5
+
+**Content Rating**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Core Log Items**
+Exists in 1.5
+
+**Core Log Searches**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Groups**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+
+**Mambots**
+Renamed to Plugins in 1.5;
+Has extended/altered fields in 1.5
+
+
+**Menu**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+
+**Messsages**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Messages Configuration**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Modules**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Modules Menu**
+Exists in 1.5;
+
+**Newsfeeds**
+Exists in 1.5;
+Has extra fields in 1.5;
+
+**Poll Data**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Poll Date**
+Exists in 1.5;
+
+**Polls**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Poll Menu**
+Exists in 1.5;
+
+**Sections**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Session**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Stats Agents**
+Exists in 1.5
+
+**Templates Menu**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Template Positions**
+Removed
+
+**Users**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**User Types**
+Removed
+
+**Weblinks**
+Exists in 1.5;
+Has extra fields in 1.5;
+Has extended/altered fields in 1.5
+
+**Core ACL ARO**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Core ACL ARO Groups**
+Exists in 1.5;
+Has extended/altered fields in 1.5
+
+**Core ACL Groups ARO Map**
+Exists in 1.5
+
+**Core ACL ARO Sections**
+Exists in 1.5
+
+====== Added ======
+These tables have been added in 1.5
+
+**Banner Track**
+
+**Menu Types**

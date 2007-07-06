@@ -1,0 +1,13 @@
+====== getPlugin ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[JPluginHelper|JPluginHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JPluginHelper.html|JPluginHelper->getPlugin]] |
+
+Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned
+===== Syntax =====
+mixed &getPlugin	( **$group**, **$plugin** )
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

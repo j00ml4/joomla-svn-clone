@@ -1,0 +1,14 @@
+====== JElement_Category ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Category.html|JElement_Category]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render a category element. The JElement_Category class can be used to render a select list that will list available categories in a given section.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JElement_Category-fetchElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement_Category-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the categories in the specified section. |
+
+----
+
+~~DISCUSSION~~
+

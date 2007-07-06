@@ -1,0 +1,9 @@
+ 
+
+<sub>absalom, 2006/04/19 21:30:</sub>
+
+I revised the code to allow greater flexibility for styling of each component. I still don't think you need to the whole <div class="content-component"> thing as it may not be appropriate in some circumstances. 
+
+In fact, since I've now rewritten the "overall" class, it allows you to style everything independently, using .component and #componentname (in this case, #frontpage). My recommendation is to remove "content-component" completely as the CSS I've done allows both individual component styling and global component styling without resorting to an extra div. Divitis is bad, right? ;)
+
+----

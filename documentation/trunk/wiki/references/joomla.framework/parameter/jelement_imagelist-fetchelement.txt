@@ -1,0 +1,68 @@
+====== fetchElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElement_ImageList|JElement_ImageList]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_ImageList.html|JElement_ImageList->fetchElement]] | never | Work in progress |
+
+Renders the HTML code for a selection list containing the available editors. The resulting selection list will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
+
+The node attributes for this element are:
+  * **directory** - the directory in which to list the files. This should be a path relative to JPATH_ROOT.
+  * **hide_none** - set to 1 to hide the 'Do not use' list option.
+  * **hide_default** - set to 1 to hide the 'Use Default' list option.
+
+The XML for an image list element looks like:  
+<code><param name="image_name" type="imagelist" directory="/images/stories" filter="" hide_default="1" default="" label="Menu Image" description="PARAMMENUIMAGE" /></code>
+
+===== Syntax =====
+void fetchElement	( **$name**, **$value**, **&$node**, **$control_name** )
+
+| **$name** | string | is a string containing the name of the HTML select list form element. |
+| **$value** | string | is a string containing the value of the element. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement object containing the settings for the element. |
+| **$control_name** | string | is a string containing the name of the control for the element. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file = JPATH_ADMINISTRATOR.DS.'components'.DS.'com_document'.DS.'document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'imagelist' );
+
+echo $element->fetchElement( 'menu_image', 'com_document', $nodes[0], 'params' );
+</code>
+might produce:
+<code php|Result>
+<select name="params[menu_image]" id="parammenu_image" class="inputbox">
+    <option value="-1" >- Do not use -</option>
+    <option value="articles.jpg" >articles.jpg</option>
+    <option value="clock.jpg" >clock.jpg</option>
+    <option value="index.html" >index.html</option>
+    <option value="joomla-dev_cycle.png" >joomla-dev_cycle.png</option>
+    <option value="key.jpg" >key.jpg</option>
+    <option value="pastarchives.jpg" >pastarchives.jpg</option>
+    <option value="powered_by.png" >powered_by.png</option>
+    <option value="taking_notes.jpg" >taking_notes.jpg</option>
+    <option value="web_links.jpg" >web_links.jpg</option>
+</select>
+</code>
+The contents of the document_items.xml file are:
+<code php|document_items.xml>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install type="component" version="1.0.0">
+	<name>Document Items</name>
+	<version>1.0.0</version>
+	<description>Example Parameters</description>
+    <params>
+        <param name="menu_image" type="imagelist" directory="/images/stories" hide_default="1" default="" label="Menu Image" description="PARAMMENUIMAGE" />
+	</params>
+</install>
+</code>
+
+----
+
+~~DISCUSSION~~
+

@@ -1,0 +1,15 @@
+====== JPluginHelper [Review] ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JPluginHelper.html|JPluginHelper]] |
+
+Plugin helper class
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPluginHelper-getPlugin|getPlugin]] | Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPluginHelper-importPlugin|importPlugin]] | Loads all the plugin files for a particular group if no specific plugin is specified  otherwise only the specific pugin is loaded. |
+
+----
+
+~~DISCUSSION~~
+
+

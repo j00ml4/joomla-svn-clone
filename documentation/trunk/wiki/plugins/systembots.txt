@@ -1,0 +1,84 @@
+==== Joomla! System Plugin Specification ====
+
+
+=== 1. Overview and Description ===
+System bots are used for core interaction with Joomla. Examples of these types of bots are SEF or Joomfish related bots. There are currently two triggers available:
+
+onBeforeStart\\
+onAfterStart\\
+
+=== 2. Implementation ===
+
+The implementation code used in this specification guide comes from the sef url systembot from the Joomla distribution
+
+== 2.1 onBeforeStart ==
+
+<code php|Example Code>
+/**
+* Converting the site URL to fit to the HTTP request
+*
+*/
+function botJoomlaSEFUrl( ) {
+	global $task, $sectionid, $id, $Itemid, $limit, $limitstart, $database, $mod_rewrite_off;
+
+	$mod_rewrite_off = 0;
+	
+	if ($GLOBALS['mosConfig_sef']) {
+	  //do sef related stuff
+	}
+
+}
+
+</code>
+
+== 2.1.1 Description ==
+
+The onBeforeStart function is called before anything else in Joomla the only thing available at this point is the mainframe class and the database class.
+
+== 2.1.2 Parameters ==
+
+none
+
+== 2.1.3 Return Value ==
+
+none
+
+== 2.2. onAfterStart ==
+
+<code php|Example Code>
+/**
+ * Detects a 'visit'
+ *
+ * This function updates the agent and domain table hits for a particular
+ * visitor.  The user agent is recorded/incremented if this is the first visit.
+ * A cookie is set to mark the first visit.
+ */
+function botDetectVisitor() {
+	global $database, $mainframe;
+
+	if ( mosGetParam( $_COOKIE, 'mosvisitor', 0 ) || !$mainframe->isSite() ) {
+		return;
+	}
+
+	//do other things
+}
+
+</code>
+
+== 2.2.1 Description ==
+
+The onAfterStart function is called after core variables in Joomla are loaded, but before the actual page content is loaded.
+
+== 2.2.2 Parameters ==
+
+none
+
+== 2.2.3 Return Value ==
+
+none
+
+=== 3. ===
+
+=== 4. ===
+
+[[:start|Back to the Startpage]]

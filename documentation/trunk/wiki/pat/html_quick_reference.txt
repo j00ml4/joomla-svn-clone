@@ -1,0 +1,19 @@
+====== HTML Quick Reference ======
+
+=== Simple Condition ===
+
+Following example shows how to use a simple condition template to display an unordered list of items.
+
+<ul>
+<jtmpl:tmpl name="list-items" type="simplecondition" requiredvars="ITEM_ID" varscope="body">
+  <li>{ITEM_TITLE}</li>
+</jtmpl:tmpl>
+</ul>
+
+=== Plain Loop ===
+
+Just a simple loop a number of times.
+
+<jtmpl:tmpl loop="10">
+  {PAT_ROW_VAR} Test<br />
+</jtmpl:tmpl>

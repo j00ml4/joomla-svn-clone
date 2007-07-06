@@ -1,0 +1,20 @@
+====== CloseButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png }}[[Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Database/mosHTML.html|mosHTML->CloseButton]] | never | Work in progress |
+
+Adds columns to the list of columns to select from.
+
+===== Syntax =====
+void CloseButton ( object &$params [, boolean $enable] )
+| **$params** | mixed | is a Parameters object. If $params→get( ‘popup’ ) is false then this function will not produce any output. |
+| **$enable** | mixed | is a flag. If false then this function will not produce any output. This flag is optional and if omitted will default to false. |
+
+===== Examples =====
+<code php|Example>
+// Set-up the parameters object.
+$params = & new mosParameters( '' );
+$params->def( 'popup', true );
+ 
+// Draw the Close button.
+mosHTML::CloseButton( $params );
+</code>

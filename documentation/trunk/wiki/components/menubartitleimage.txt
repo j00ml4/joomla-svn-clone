@@ -1,0 +1,41 @@
+====== Using a custom image in the Menu Bar title ======
+
+To use a custom image in the Menu Bar title we need an image (obviously) and a little bit of css.
+
+First off, create the following folders in your administrator component (we're using a ficticious component called com_notes as the example).  Then place your image in the ''images'' folder and create a new file called ''default.css'' in the css folder, like this:
+
+<code|Folder Structure>
+com_notes
+|- assets
+..|- css
+....|- default.css
+..|- images
+....|- logo.png
+</code>
+
+The code for the css file looks like this:
+
+<code|default.css>
+/* Toolbar */
+
+.icon-48-notes {
+    background: url(../images/logo.png) no-repeat left;
+}
+</code>
+
+Next we tell the menubar handler function to use this css by the following invocation of the ''title'' method of ''JMenuBar'':
+
+<code>
+JMenuBar::title( JText::_( 'Notes List' ), 'notes' );
+</code>
+
+Notice that value of the second argument, ''notes'', marries with the suffix of the css class.
+
+Finally we need to load the component custom css file.  Place the following code typically near the top of ''admin.notes.php'':
+
+<code>
+$document =& JFactory::getDocument();
+$document->addStyleSheet('/components/com_notes/assets/css/default.css');
+</code>
+
+You can, of course, use ''default.css'' for more than just the title styling.

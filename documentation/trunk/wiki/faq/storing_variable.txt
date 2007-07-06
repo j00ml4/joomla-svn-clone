@@ -1,0 +1,54 @@
+There are several ways to store variables either just for the running execution of the script, or persistently.
+
+In the case where you want to make a variable in a component available to a module, you will use the ''set'' and ''get'' methods of the Application object.  You might use the following example to write a shop component and require a module to show related products based on the selected product:
+
+In the component:
+<php>$mainframe->set( 'shop.currentProduct', $product );</php>
+
+Then in the module, to retrieve that varible:
+<php>$product = $mainframe->get( 'shop.currentProduct' );
+if (is_object( $product ))
+{
+  // do something
+}
+</php>
+
+Another example you can use is for a tracking plugin that is triggered late in the execution of the Joomla! script.
+
+In the component:
+<php>$mainframe->set( 'tracking.title', $row->title );</php>
+
+In the plugin:
+<php>$title = $mainframe->get( 'tracking.title' );
+$url   = $_SERVER['QUERY_STRING'];
+$ip    = $_SERVER['REMOTE_ADDR'];
+
+$query = 'INSERT INTO #__tracker' .
+  ' SET ip = ' . $db->Quote( $ip ) .
+  ' url    = ' . $db->Quote( url_encode( $url ) .
+  ' title  = ' . $db->Quote( $title );
+$db = &JFactory::getDBO();
+$db->setQuery( $query );
+if (!$db->query())
+{
+  JError::raiseWarning( '500', 'A problem occurred' );
+  return false;
+}</php>
+
+To persist the variable in the session, that is, have it available between different pages, you use the ''setUserState'' and ''getUserState'' methods in the Application object, for example:
+
+<php>$cart = &$mainframe->getUserState( 'shop.cart' );
+$cart->addProduct( $product );
+$mainframe->setUserState( 'shop.cart', $cart );</php>
+
+A final example is where you want to persist a filter on a list screen, for example when you select a category on a list of articles.  In this case you would use the ''getUserStateFromRequest'' method in the Application object.
+
+<php>$catid = $mainframe->getUserStateFromRequest( 'com_content.list.catid', 'catid', 0 );</php>
+
+Where:
+
+  * The first argument is the label for the variable (anything you like, but a system like ''component_option.view.variable_name'' is useful)
+  * The second argument is the name of the form field that you used
+  * The third argument is the default value to set if the variable is not set
+
+This method is a short hand for using a combination of ''getUserState'' and ''setUserState''.  Many Administrator components use this technique so there are plenty of real examples to follow.

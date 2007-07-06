@@ -1,0 +1,6 @@
+====== Content Types ======
+
+  - [[blog|Blog Content]]
+  - [[contentitem|Content Item]]
+  - [[contentlist|Content List]]
+

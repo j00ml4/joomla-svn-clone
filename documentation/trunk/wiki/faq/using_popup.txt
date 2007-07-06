@@ -1,0 +1,40 @@
+Joomla 1.5 comes with a popup window manager.  The library pops a sized ''iframe'' in the center of the screen while darkening the surroundings.  It is useful for wizards, performing minor actions, reporting information and for many other uses.
+
+To invoke a popup you must include the javascript library and stylesheet:
+
+<code php|Typical Practice>global $mainframe;
+  $document = &$mainframe->getDocument();
+
+  $document->addScript('../includes/js/joomla/popup.js');
+  $document->addStyleSheet('../includes/js/joomla/popup.css');</code>
+or
+<code php|Within a JView display method>
+  $document	= &$this->getDocument();
+  $document->addScript('../includes/js/joomla/popup.js');
+  $document->addStyleSheet('../includes/js/joomla/popup.css');</code>
+
+To display the popup, called ''window.open'':
+
+<code php>var url='index3.php?option=com_content&task=wizard';
+document.popup.show(url, 700, 500, null);</code>
+
+A typical case might be to link the popup to an Administrator toolbar task.  In this case, use something similar to the following:
+
+<code php|Popup linked to toolbar task><script language="javascript" type="text/javascript">
+  function submitbutton(task)
+  {
+    var f = document.adminForm;
+    if (task == 'deleteconfirm')
+    {
+      id = radioGetCheckedValue( f.id );
+      var url='index3.php?option=com_content&task=wizard';
+      document.popup.show(url, 700, 500, null);
+    }
+    else
+    {
+      submitform(task);
+    }
+  }
+</script></code>
+
+... to be continued

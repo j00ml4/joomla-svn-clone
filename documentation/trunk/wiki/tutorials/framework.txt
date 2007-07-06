@@ -1,0 +1,9 @@
+====== Framework ======
+
+The core of Joomla! 1.5 is the new, streamlined framework.  It is incredibly flexible and powerful.
+
+This chapter aims to provide useful tutorials on exploiting some of the functionality and utility of this new framework.
+
+===== 1. How-To's=====
+  * [[framework:database_part1|Using the 1.5 Database Libraries]]
+  * [[framework:router_part1|Creating Custom URLs]]

@@ -1,0 +1,219 @@
+
+====== Creating an Authentication Plugin for Joomla! 1.5 ======
+
+===== Introduction =====
+
+The new authentication plugin system for Joomla! 1.5 offers a great deal of flexibility and power to the system. Using the new system, it is possible to authenticate users from any source - the Joomla! internal database, the Open ID system, an LDAP directory, or any authentication system that can be accessed using PHP.
+
+This HOWTO will present a really basic example of an authentication plugin that demonstrates how to create custom authentication plugins for the Joomla! framework.
+
+===== The plgAuthenticationMyauth Class =====
+
+Joomla! 1.5 plugins are created by creating a child class of the JPlugin class. The JPlugin class provides all the infrastructure and basic functionality that is required. All that is necessary is to provide the necessary methods to handle the desired event.
+
+To create an authentication plugin, the name of the child class must begin with plgAuthentication, and must end with the name of the plugin that is being created. In our case, the plugin is called Myauth, so the class will be called plgAuthenticationMyauth.
+
+The class will have two methods. The first method is the constructor. The second method is the onAuthenticate() method. These methods are actually very simple, as will be demonstrated.
+
+==== The plgAuthenticationMyauth() Method ====
+
+The constructor should take one parameter, which should be passed by reference. All it will do is pass this parameter onto the constructor of its parent class. We should note that this constructor method should have the same name as the class. The name <nowiki>'__construct'</nowiki> cannot be used because PHP4 does not support this mechanism and the fix that is used in the Joomla! core will not allow passing the arguments by reference. Therefore, our constructor looks like:
+
+
+<code php>function plgAuthenticationMyauth(& $subject) {
+    parent::__construct($subject);
+}</code>
+
+The parent constructor will handle attaching our event observer (plugin) to the subject (the event dispatcher).
+
+==== The onAuthenticate() Method ====
+
+The onAuthenticate() method is the method that will be called when the system is trying to use your plugin to authenticate the user. This method will be passed three parameters: the username, the password, and a reference to an object of type JAuthenticationResponse. This method needs to determine if the username and password are a valid combination for authentication and return the result in the JAuthenticationResponse object.
+
+For our example, the authentication check that we are going to do is very simple. We will simply make sure that the specified username exists in the <nowiki>#__</nowiki>users table, and if it does, we will check to see if the username is the reverse of the password. So our authentication check will look like:
+
+
+<code php>$db =& JFactory::getDBO();
+$query = 'SELECT `id`'
+    . ' FROM #__users'
+    . ' WHERE username=' . $db->quote( $username );
+$db->setQuery( $query );
+$result = $db->loadResult();
+
+// to authenticate, the username must exist in the database, and the password should be equal
+// to the reverse of the username (so user joeblow would have password wolbeoj)
+if($result && ($username == strrev( $password )))</code>
+
+Although this is very basic in our example, this code can be replaced with any code that is necessary to perform the authentication checking that is necessary for your plugin. The flexibility is only limited by what PHP can do.
+
+Now that we have determined whether or not authentication was successful, we can now create our response:
+
+
+<code php>$db =& JFactory::getDBO();
+$query = 'SELECT `id`'
+    . ' FROM #__users'
+    . ' WHERE username=' . $db->quote( $username );
+$db->setQuery( $query );
+$result = $db->loadResult();
+
+if (!$result) {
+    $response->status = JAUTHENTICATE_STATUS_FAILURE;
+    $response->error_message = 'User does not exist';
+}
+// to authenticate, the username must exist in the database, and the password should be equal
+// to the reverse of the username (so user joeblow would have password wolbeoj)
+if($result && ($username == strrev( $password )))
+{
+    $email = JUser::getInstance($result); // Bring this in line with the rest of the system
+    $response->email = $email->email;
+    $response->status = JAUTHENTICATE_STATUS_SUCCESS;
+}
+else
+{
+    $response->status = JAUTHENTICATE_STATUS_FAILURE;
+    $response->error_message = 'Invalid username and password';
+}</code>
+
+For failed responses, we set two properties of the response object: the status property, and the error_message property. Currently there are three recognized response status value - JAUTHENTICATE_STATUS_SUCCESS, JAUTHENTICATE_STATUS_FAILURE, and JAUTHENTICATE_STATUS_CANCEL. For more information on these status values, consult the libraries/joomla/user/authentication.php file.
+
+The error_message property is set in case the authentication is not successful. In our plugin, we set two possible values to this property: "User does not exist", which indicates that our query did not return any results, and "Invalid username and password", which indicates that the password was not the reverse of the username. It should be noted that these values are not returned to the user. For security reasons, the only thing the user will see is a successful login, or a message that says, "Username and password do not match." The Joomla! system can be configured so that these error messages can be stored in a log file for debugging purposes.
+
+If authentication is successful, we can optionally add information from our authentication source to the response. In this case, we are retrieving the user information from the Joomla! database and storing the email address in the response object. For more information on what data can be stored in the response object, please consult[[http://api.joomla.org/Joomla-Framework/User/JAuthenticationResponse.html|http://api.joomla.org]]. This data can then be used by user plugins in the event it is desired to automatically create users or perform other login tasks.
+
+==== The Complete myauth.php File ====
+
+Now that we have completed the two methods that are necessary for our class, we put our class into a PHP file that has the same name as our plugin. Since our plugin is called Myauth, we call our file myauth.php. Here is the complete listing for this file:
+
+
+<code php><?php
+/**
+ * @version    $Id: myauth.php 7180 2007-04-23 16:51:53Z jinx $
+ * @package    Joomla.Tutorials
+ * @subpackage Plugins
+ * @license    GNU/GPL
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport('joomla.event.plugin');
+
+/**
+ * Example Authentication Plugin.  Based on the example.php plugin in the Joomla! Core installation
+ *
+ * @package    Joomla.Tutorials
+ * @subpackage Plugins
+ * @license    GNU/GPL
+ */
+class plgAuthenticationMyauth extends JPlugin
+{
+    /**
+     * Constructor
+     *
+     * For php4 compatability we must not use the __constructor as a constructor for plugins
+     * because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+     * This causes problems with cross-referencing necessary for the observer design pattern.
+     *
+     * @param object $subject The object to observe
+     * @since 1.5
+     */
+    function plgAuthenticationMyauth(& $subject) {
+        parent::__construct($subject);
+    }
+
+    /**
+     * This method should handle any authentication and report back to the subject
+     * This example uses simple authentication - it checks if the password is the reverse
+     * of the username (and the user exists in the database).
+     *
+     * @access    public
+     * @param    string    $username    Username for authentication
+     * @param    string    $password    Password for authentication
+     * @param    object    $response    Authentication response object
+     * @return    boolean
+     * @since 1.5
+     */
+    function onAuthenticate( $username, $password, &$response )
+    {
+        /*
+         * Here you would do whatever you need for an authentication routine with the credentials
+         *
+         * In this example the mixed variable $return would be set to false
+         * if the authentication routine fails or an integer userid of the authenticated
+         * user if the routine passes
+         */
+        $db =& JFactory::getDBO();
+        $query = 'SELECT `id`'
+            . ' FROM #__users'
+            . ' WHERE username=' . $db->quote( $username );
+        $db->setQuery( $query );
+        $result = $db->loadResult();
+        
+        if (!$result) {
+            $response->status = JAUTHENTICATE_STATUS_FAILURE;
+            $response->error_message = 'User does not exist';
+        }
+        // to authenticate, the username must exist in the database, and the password should be equal
+        // to the reverse of the username (so user joeblow would have password wolbeoj)
+        if($result && ($username == strrev( $password )))
+        {
+            $email = JUser::getInstance($result); // Bring this in line with the rest of the system
+            $response->email = $email->email;
+            $response->status = JAUTHENTICATE_STATUS_SUCCESS;
+        }
+        else
+        {
+            $response->status = JAUTHENTICATE_STATUS_FAILURE;
+            $response->error_message = 'Invalid username and password';
+        }
+    }
+}
+?></code>
+
+You will notice that we have to add<code>jimport('joomla.event.plugin');</code>to the beginning of our file in order to load the JPlugin class definition.
+
+===== The XML Install Manifest =====
+
+Now that we have created our JPlugin class, all we have to do is create our XML install file that will tell the Joomla! installer how to install our plugin. This file is simple:
+
+
+<code php><?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="authentication">
+    <name>Authentication - Myauth</name>
+    <author>Joomla! Documentation Project</author>
+    <creationDate>May 30, 2007</creationDate>
+    <copyright>(C) 2005 - 2007 Open Source Matters. All rights reserved.</copyright>
+    <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <authorEmail>ian.maclennan@help.joomla.org</authorEmail>
+    <authorUrl>www.joomla.org</authorUrl>
+    <version>1.5</version>
+    <description>An sample authentication plugin</description>
+    <files>
+        <filename plugin="myauth">myauth.php</filename>
+    </files>
+    <params/>
+</install></code>
+
+You will notice that this file looks very similar to any other Joomla! XML install manifest file. There are a view important things to notice.
+
+The first thing to notice is the group attribute on the root element. For authentication plugins, the group attribute must have the value 'authentication'. This tells the Joomla! system to treat your plugin as an authentication plugin.
+
+It is also important to note that the version attribute of the root element (install) should be 1.5. This will tell Joomla! that your plugin is written for Joomla! 1.5 and will operate without legacy mode.
+
+We entered the name 'Authentication - Myauth' in the name field. Your plugin doesn't HAVE to follow this convention, but it looks better because then it will match the standard authentication plugins that are listed in the plugin manager.
+
+Finally, notice that filename attribute that contains our plugin file has an attribute called plugin. The value of this should be the name of our plugin. In this case, it is myauth.
+
+===== Wrapping it All Up and Using It =====
+
+Now that we have created our two files, all we have to do is package them up into an archive file that can be read by the Joomla! installer system.
+
+Once we package and install our plugin, it is ready to be used. The plugin is published using the Plugin Manager. All of the authentication plugins will be grouped together. Plugins are enabled by 'publishing them'. You can publish as many authentication plugins as you want. In order for successful authentication to occur, only one of the plugins needs to return a JAUTHENTICATE_STATUS_SUCCESS result.
+
+===== Conclusion =====
+
+We have now created a simple authentication plugin. We have demonstrated the basic process of doing an authentication check and return the results to the Joomla! system.
+
+===== Download =====
+
+The component can be downloaded at:[[packages/plg_myauth.zip|plg_myauth.zip]].

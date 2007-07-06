@@ -1,0 +1,105 @@
+====3.1.1 Hello World (WIP)====
+So, you want to learn how to create your own component. That's great and we hope you succede and later give back to the community. This How-To should guide you on your first steps. Please give us feedback in the forum, wether you have a question or a comment or just want to say how great Joomla! is.
+
+This guide is designed for a frontend component and describes a few coding standards in Joomla! that have been established. It gives you a good starting point for your own component. If you look for things like a database-connection or a breadcrumb-system, look at [[components:hello_world2|Hello World 2]]. Here we also discuss how to create our own installation package. In [[components:hello_world3|Hello World 3]] we take a look at the specialities of an administrative interface in a backend-component. An indepth view on the XML-installation file can be found [[components:xml_installfile|here]].
+
+===3.1.1.1 The filestructure===
+A component consists at least of one file, in our case hello.php. This file has to reside in the folder /components/com_hello. When a component is called, Joomla! looks for a folder with the name of the component, removes the 'com_' and looks for a PHP-file with that name. So if you called your component 'Content', your folder would have the name 'com_content' and the file that Joomla! would load, would be 'content.php'.
+
+From this file, you can link to other files. Joomla! provides a special way to do this, more to that later.
+
+===3.1.1.2 Our first code===
+If we just wanted to print 'Hello World!' into the content area of our Joomla!-installation, we just need this:
+<code php|hello.php - version 0>
+<?php
+echo 'Hello World!';
+?>
+</code>
+But this would allow everybody that knows the name of the file and its location to call it and execute it. When our component is more complex, this could lead to errors that give away to much information about our system and make it vulnerable to hacker attacks. Therefore we add a few lines:
+<code php|hello.php - version 1>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+echo 'Hello World!';
+?>
+</code>
+When Joomla! is started, the constant '_JEXEC' is set and we now check if the Joomla!-framework has been loaded before this file. If this constant is not set, we know a hacker is trying to load our file and stop execution before anything has happened.
+
+**Notice:** If you want to develop for a version of Joomla prior to 1.1, you have to check for '_VALID_MOS' being defined instead of '_JEXEC'. '_VALID_MOS' is also defined in Joomla! 1.1.
+
+===3.1.1.3 Our first event===
+Now we want to add some interactivity to our code:
+<code php|hello.php - version 2>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$task = JRequest::getVar( 'task' );
+$name = JRequest::getVar( 'name', 'John' );
+
+switch ($task) {
+	case 'show':
+	default:
+		echo 'Hello ' . $name . ' in our World!';
+		break;
+}
+?>
+</code>
+You may have asked yourself 'Whats the JRequest::getVar() for? And whats it doing with that variable?'. To make Joomla more secure, all global variables should be read through this function. It removes the possibility for code injection and/or SQL injection. You can also define a default value (as you can see in line 6).
+
+In Joomla! the variable 'task' is commonly used to switch between different, you might guess it, tasks. Besides that, there is the variable 'option', whose value is used to determine which component is supposed to be loaded. So never use it for anything else, otherwise you might get funny errors.
+
+===3.1.1.4 Separating logic from output and including other files===
+Have you ever read a PHP-script? It often gets very ugly, because you have PHP-code, then HTML, then PHP again and every now and then you echo your data as HTML. To make this more readable, Joomla! uses a separation between logic and output. We use two different files for that.
+<code php|hello.php - version 3>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// require the html view class
+jimport( 'joomla.application.helper' );
+require_once( JApplicationHelper::getPath( 'front_html', 'com_hello' ) );
+
+$task = JRequest::getVar( 'task' );
+$name = JRequest::getVar( 'name', 'John' );
+
+switch ($task) {
+	case 'show':
+	default:
+		hello_HTML::show( $name );
+		break;
+}
+?>
+</code>
+<code php|hello.html.php - version 2>
+<?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+class hello_HTML {
+
+	function show( $name ) {
+		echo 'Hello ' . $name . ' in our World!';
+	}
+
+}
+?>
+</code>
+With the JApplicationHelper::getPath() function we determine the path to the file with the HTML ouput. In the switch statement we use the call for the function 'show' in the class 'hello_HTML' instead of the echo, so now we can create whatever HTML-output in the hello.html.php file instead of messing around in the real logic behind our component. Its also very easy to update the component. In case we made an error in our logic, we just have to replace the logic file and don't mess with possible modifications the user has made in the .html.php-file.
+
+===3.1.1.6 Starting our component===
+Lets take stock of our current situation:
+  * We've created a folder 'com_hello' in the folder 'components'
+  * In the file /components/com_hello/hello.php, we ...
+    * checked if we are in the Joomla! framework
+    * loaded the file with the output
+    * checked the variable 'task' and switched to the apropiate task
+    * read the variable 'name' and handed it over to our output-function
+  * In the file /components/com_hello/hello.html.php, we ...
+    * filled in the variable 'name'
+    * returned the whole thing to the users browser
+
+Now that we've done all this, we want to see our component in action. To see all the magic happen, we just have to call it through the URL, which would be in our example index.php?option=com_hello. Thats allmost all the magic. If you wanted to change the displayed name, you would have to add a '&name=Marc' to the URL, making it 'index.php?option=com_hello&name=Marc'. It's of course similar for the task variable and every other variable you'd want to add.
+
+Allthough the result seems utterly simple and stupid, it still represents about 80% of the stuff you'll need to know to create your own component. It even shows you the most important  things in PHP. Of course there is a lot more to Joomla and it provides you a LOT more functions than these few, but all you need to know for starters, are allready mentioned here. You want to know more? Read on in [[components:hello_world2|Hello World 2]].

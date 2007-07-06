@@ -1,0 +1,24 @@
+====== stristr ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->stristr]] | never | Work in progress |
+
+Returns all of haystack from the first occurrence of needle to the end. Needle and haystack are examined in a case-insensitive manner. See [[http://www.php.net/manual/en/function.stristr.php|stristr]] for more information.
+
+===== Syntax =====
+string stristr	( **$haystack**, **$needle** )
+
+| **$haystack** | string | is a string containing the haystack. |
+| **$needle** | string | is a string containing the needle. |
+
+===== Examples =====
+<code php|Example>
+$haystack = "και εισηλθεν παλιν εις";
+$needle = JString::strtoupper( "πα" );
+echo "The string starting from the first occurence of $needle in $haystack is " . JString::stristr( $haystack, $needle ) . ".";
+</code>
+might produce:
+<code php|Result>
+The string starting from the first occurence of ΠΑ in και εισηλθεν παλιν εις is παλιν εις.
+</code>
+
+----

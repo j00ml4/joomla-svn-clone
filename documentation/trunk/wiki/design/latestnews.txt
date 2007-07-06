@@ -1,0 +1,14 @@
+<code html|Latest News (Only ModuleContent in this Box)>
+01: <ul>
+02:   <li><a href="#">Newstitle 1</a></li>
+03:   <li><a href="#">Newstitle 2</a></li>
+04:   <li><a href="#">Newstitle 3</a></li>
+.....
+05:   <li><a href="#">Newstitle n-1</a></li>
+06:   <li><a href="#">Newstitle n</a></li>
+07: </ul>
+</code>
+
+
+
+~~DISCUSSION~~

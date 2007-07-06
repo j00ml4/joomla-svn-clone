@@ -1,0 +1,13 @@
+====== setLocal ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Application/JSession.html|JSession->setLocal]] |
+
+Sets local variable of a script.<p>Two scripts can have local variables with the same names.</p>
+===== Syntax =====
+mixed setLocal	( **$name**, **$value** )
+| **** | string |  |
+| **** | mixed |  |
+
+===== Examples =====
+
+

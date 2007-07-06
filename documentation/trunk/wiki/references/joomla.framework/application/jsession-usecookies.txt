@@ -1,0 +1,12 @@
+====== useCookies ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla-Framework/Application/JSession.html|JSession->useCookies]] |
+
+If optional parameter is specified it indicates  whether the module will use cookies to store  the session id on the client side<p>It returns the previous value of this property</p>
+===== Syntax =====
+boolean useCookies	( **$useCookies** )
+| **** | boolean |  |
+
+===== Examples =====
+
+

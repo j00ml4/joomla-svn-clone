@@ -1,0 +1,18 @@
+====== getPath ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getPath]] |
+
+Gets the URI path string.
+===== Syntax =====
+string getPath ()
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org/index.php/topic,41464.msg227819.html#msg227819' );
+echo "Path: " . $uri->getPath();
+</code>
+might produce:
+<code php|Result>
+Path: /index.php/topic,41464.msg227819.html
+</code>
+

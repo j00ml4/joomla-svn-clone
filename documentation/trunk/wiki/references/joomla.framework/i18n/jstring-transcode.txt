@@ -1,0 +1,28 @@
+====== transcode ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->transcode]] | never | Work in progress |
+
+Transcode a string from one character encoding to another.
+
+===== Syntax =====
+string transcode	( **$source**, **$from_encoding**, **$to_encoding** )
+
+| **$source** | string | The string to transcode. |
+| **$from_encoding** | string | The source encoding. |
+| **$to_encoding** | string | The target encoding. |
+
+===== Examples =====
+<code php|Example>
+$string = "και εισηλθεν παλιν εις";
+echo "Using transcode on $string yields: ";
+echo JString::transcode( $string, "UTF-8", "ISO-8859-7" );
+</code>
+might produce:
+<code php|Result>
+Using transcode on και εισηλθεν παλιν εις yields: και εισηλθεν παλιν εις
+</code>    
+Due to documentation system limitations, the results of this example cannot be properly displayed. If one executes this example, the first or the second version of the string will be displayed properly depending on whether UTF-8 encoding or ISO-8859-7 encoding is used.
+
+----
+
+~~DISCUSSION~~

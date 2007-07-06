@@ -1,0 +1,14 @@
+====== JElement_Editors ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Editors.html|JElement_Editors]] | never | Work in progress |
+
+This class implements the JElement interface and is used to render an editor element. The JElement_Editor class can be used to render a select list that will list available editors.
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JElement_Editors-fetchElement|{{http://api.joomla.org/media/images/Method.png }}]] [[JElement_Editors-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available editors. |
+
+----
+
+~~DISCUSSION~~
+

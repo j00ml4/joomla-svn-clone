@@ -1,0 +1,21 @@
+ 
+
+<sub>aradtke, 2006/04/15 05:37:</sub>
+
+DESCRIPTION #login
+The Component needs <a name="login"></a> after the headline, because than the page starts not at the beginning,but at this anker. It's important for screenreader-users, becáuse screenreaders start reading every time at the beginning of the page. If we use the anker, it's more easy for them, because they come direct to the content .
+The legend is important because yaws-users can jump from legend to legend, if the are in form-mode
+
+----
+
+<sub>rhuk, 2006/04/18 18:41:</sub>
+
+Ok, good points regarding the anchor and the legend
+
+----
+
+<sub>lukewill, 2006/04/24 14:32:</sub>
+
+This is the module and the anchor should named modlogin. If anyone has placed the module on all pages and choose the login-component we have the login anchor twice
+
+----

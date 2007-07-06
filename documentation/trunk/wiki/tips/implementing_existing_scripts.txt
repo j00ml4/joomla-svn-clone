@@ -1,0 +1,138 @@
+======Implementing existing scripts into Joomla (WIP)======
+So you decided to go Joomla, but have older PHP scripts you need to rescue over to your new site. This guide should help you to take the first steps.
+
+=====1. What do I want?=====
+In Joomla there are three kinds of add-ons. There are the modules, like the "Latest News" on your frontpage (When you installed the sample data), the plugins (formerly known as mambots), like the mosimage-plugin, that fills in images into your text. And the last and probably most important onces are the components, which we are going to deal with in this guide. Components output the main content on your site, like articles and news. We recommend to start with a component and if needed, work your way "up".
+
+=====2. Why should I first create a component?=====
+Components are very easy to create and they are the one thing that is called directly in the Joomla URL. Look at the URL of your Joomla page and notice the "option=com_something" behind the "index.php?". This tells Joomla which component to load. If you have an URL like "index.php?option=com_content", Joomla knows you want to open the component com_content. Joomla now prepares the parts around your content-area (HTML-header, menu, grafics, CSS) and loads your component. Everything after that, is purely in your hands.
+
+=====3. How should I start?=====
+Now, Joomla has a few rules we should pay attention to. First, there is the naming scheme. When you have this URL with the part "option=com_content", Joomla searches for the folder com_content in the folder components. Depending wether you are in the backend or frontend, Joomla either uses your root Joomla components-directory or the one situated in the /administrator folder. When it has found the folder, it looks if it can find a file content.php in that folder (admin.content.php in the backend). You have to have this folder and this file to make it all work. You can include whatever file you want once inside this content.php. So to create a simple component, we just have to save the following code into a file with the name "hello.php" in the folder /components/com_hello:
+<code php|Com_Hello sample>
+<?php
+echo "hello world.";
+?>
+</code>
+Now we can call this component with "www.testsite.com/index.php?option=com_hello" and we get a nice page with "hello world." printed in the area normally occupied by our content.
+
+=====4. More rules...=====
+The following is not entirely necessary, but it will give your code more structure (hopefully) and make it easier for people (and yourself) to get through even big code blocks.
+Joomla has established splitting the code from the logic quite some time ago and we encourage you to follow our example. At the moment there are two ways to achieve this. Either use patTemplate, which is brand new and would be the way to go in the future, or create your .html.php-file, like it has been done up till now. patTemplate has the advantage of a more clean division between logic and output and it is easier adjustable for the end-user, but the author of this text has some problems at learning the new commands to use it, so we stick with the old way, the .html.php-file, which means in our com_hello-example, we create the file "hello.html.php":
+<code php|hello.html.php>
+<?php
+class hello_HTML {
+
+function hello() {
+echo "hello";
+}
+}
+?>
+</code>
+Now this file does the output for us, but Joomla doesn't know that, so we have to teach it this in our "hello.php":
+<code php|hello.php>
+<?php
+//echo "hello";
+
+// no direct access
+defined( '_VALID_MOS' ) or die( 'Restricted access' );
+
+require_once( $mainframe->getPath( 'front_html' ) );
+
+hello_HTML::hello();
+?>
+</code>
+You'll notice several things here. For one, we are checking if the variable _VALID_MOS is set to restrict possible attempts to execute this file from outside the Joomla-framework. Second we include the hello.html.php with the require_once-command. The function in the brackets gets the path and filename for the .html.php of the currently requested component. At last we call the function hello in the class we defined in "hello.html.php". We still have the same output, but now we have separated the output from our (possible) logic.
+
+=====5. Getting really started=====
+Ok, now we know some basics about Joomla and how it includes the components. Since you got your script allready running and just want to convert it to a component in Joomla, we cut the crap and get to the part thats important to you.
+
+====5.1 The database====
+Joomla has a nice database abstraction layer, that makes usage much more simple. You don't have to worry about the login/password for your db and it makes usage with other Joomla-installations with different table-prefixes very easy. Take a look at the following code:
+<code php|Database usage>
+function read_db() {
+global $database;
+
+$query = "SELECT title FROM #__content WHERE id = 1";
+$database->setQuery($query);
+$result = $database->loadResult();
+}
+</code>
+In this function read_db, we first load the global $database and then prepare our query. Notice that the tablename is written with an <nowiki>#__</nowiki> (double underscore!!). This is replaced with the correct table-prefix of the current Joomla-installation in the next step, when you set the query to be executed. In the third and last command, the result of the query is saved in the variable $result. The function $database->loadResult() loads only the first value of the first row of a result. If you need more, you should take a look at the file database.php in the folder /includes in Joomla 1.0 or /libraries/joomla/database for Joomla 1.1. There are several functions that return arrays of the first row, arrays of the complete result, arrays of the first value in each row and so on....
+====5.2 Getting user-values====
+Since the normal $_POST poses a possible risk for code injection, Joomla provides you with the function mosGetParam(). mosGetParam() retrieves values from the user and filters them for malicious code.
+<code php|mosGetParam>
+$task = mosGetParam($_REQUEST, 'task', '');
+$other_stuff = mosGetParam($_POST, 'nothing', array( 0 ) );
+</code>
+Here you see two examples of the usage of mosGetParam(). mosGetParam searches in the global variable defined in the first parameter and it searches for the value-name defined in the second parameter. The third parameter is optional and defines a default value, when the value hasn't been found.
+====5.3 Getting those values back to my script====
+Most people have problems when starting to develop something in Joomla, that when they send their form, they don't get the values back into their code and are returned to the Joomla homepage. This is due to a missing input-field in your form. Remember the talk about how Joomla recognizes which component to load? We still have to tell it, that we want our component to handle the input. Therefore we have to put this somewhere inside our form:
+<code html|Hidden input field>
+<input type="hidden" name="option" value="com_hello">
+</code>
+Now Joomla calls our component again and we can handle that data we wanted from our user.
+=====6. Calling different scripts in Joomla=====
+Now we've changed a lot of our database and variable-retrieving code, but we still don't know how to properly call our different script-files our former script consists of.\\
+If you have more than just one file in your script, you seem to have a problem calling those inside of Joomla. Joomla uses a case switching for this:
+<code php|Case switching for multiple scripts>
+<?php
+// no direct access
+defined( '_VALID_MOS' ) or die( 'Restricted access' );
+
+require_once( $mainframe->getPath( 'front_html' ) );
+
+$task = mosGetParam( $_REQUEST, 'task', 'view' );
+switch ($task) {
+case 'edit':
+    include('edit.php');
+    break;
+case 'save':
+    include('save.php');
+    break;
+case 'view':
+default:
+    include('view.php');
+    break;
+}
+?>
+</code>
+As you can see, we first read the value of the POST-variable "task" and then differentiate between the different tasks at hand. When we find our correct task, we link to the file with the corresponding code. You could also link to a function, which would reduce the number of files in your components-folder and gives you the chance to easily call, for example, the view-function after saving your data.
+
+=====7. Creating my installation-package=====
+Now we have (more or less) working code and want to install it in Joomla. Therefore we create an .xml-file with the necessary commands to prepare everything for our script:
+<code xml|Installation XML>
+<?xml version="1.0" ?>
+<mosinstall type="component">
+  <name>hello</name>
+  <creationDate>07/02/06</creationDate>
+  <author>That scripting guy</author>
+  <copyright>This component is released under the GNU/GPL License</copyright>
+  <authorEmail>author@author.com</authorEmail>
+  <authorUrl>www.author.com</authorUrl>
+  <version>0.1</version>
+  <description>This is the installation-file for our script</description>
+  <files>
+    <filename>hello.php</filename>
+    <filename>hello.html.php</filename>
+  </files>
+  <install>
+    <queries>
+	<query>
+	CREATE #__hello (
+        'hello' char(230) NOT NULL default ''
+        ) Type=MyISAM;
+	</query>
+    </queries>
+  </install>
+<administration>
+<menu>Hello</menu>
+<files>
+    <filename>admin.hello.php</filename>
+</files>
+</administration>
+</mosinstall>
+</code>
+You can see, we have some trivia about our component at the beginning, then we copy some files, execute a few querys and then we install the administrative part of the component. A little notice: The string between the <name></name>-tags is part of the folder your component-files are copied to. Joomla extends it with the prefix com_, so in case of our hello-script, the files would be copied into the folder com_hello. \\ \\
+
+[[:start|Back to the Startpage]]

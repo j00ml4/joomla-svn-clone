@@ -1,0 +1,269 @@
+==== Joomla Userbot Specification ====
+
+=== 1. Overview and Description: ===
+
+Userbots implement the user authentication and registration system for Joomla.  There are currently six available triggers for a
+userbot:
+
+onLoginUser\\
+onLogoutUser\\
+onBeforeStoreUser\\
+onAfterStoreUser\\
+onBeforeDeleteUser\\
+onAfterDeleteUser\\
+
+=== 2. Implementation ===
+
+The implementation code used in this specification guide comes from the example userbot from the Joomla distribution
+
+== 2.1 onLoginUser ==
+
+<code php|Example Code>
+/**
+* Example login user method
+* Method is called when a user is login in
+* @param 	string	The user name
+* @param	string	The password
+* @return	int		The id of the user
+*/
+function botExampleLoginUser( $username, $password )
+{
+	global $mainframe, $_LANG;
+
+	/*
+	 * function can be used in two ways
+	 * 	1. Authenticate user using an external protocol
+	 *  2. Log the user on a external app
+	 */
+
+	// 1. Call a function in the external app to authenticate the user and
+	//    ThirdPartyApp::authenticateUser($user->username, $user->password);
+
+	if ($authenticated) {
+		//Add the user to the Joomla database and return the userid
+		return $userid;
+	} else {
+		return 0;
+	}
+
+	// 2. Call a function in the external app to authenticate the user and
+	//    ThirdPartyApp::loginUser($user->username, $user->password);
+}
+</code>
+
+== 2.1.1 Description ==
+
+The onLoginUser function is called when a user logs into Joomla.  It can be used to authenticate a Joomla user using a separate authentication system or log an authenticated user into a separate system.
+
+== 2.1.2 Parameters ==
+
+username : string : passed from joomla core\\
+password : string : passed from joomla core\\
+
+== 2.1.3 Return Value ==
+
+int : User ID [ 0 if user is not authenticated ]
+
+== 2.2 onLogoutUser ==
+
+<code php|Example Code>
+/**
+* Example login user method
+* Method is called when a user is login out
+* @param 	array	  	holds the user data
+*/
+function botExampleLogoutUser( $user ){
+	// Call a function in the external app log the user out
+	// ThirdPartyApp::logoutUser($user->username, $user->password);
+}
+</code>
+
+== 2.2.1 Description ==
+
+The onLogoutUser function is called when a user logs out of Joomla.  It can be used to  log an authenticated user out of a separate system.
+
+== 2.2.2 Parameters ==
+
+user : array : passed from joomla core\\ \\
+
+user[username] : string : username of user to logout\\
+user[password] : string : password of user to logout\\
+
+== 2.2.3 Return Value ==
+
+void
+
+== 2.3 onBeforeStoreUser ==
+
+<code php|Example Code>
+/**
+* Example store user method
+* Method is called before user data is stored in the database
+* @param 	array	  	holds the user data
+* @param 	boolean		true if a new user is stored
+*/
+function botExampleBeforeStoreUser( $user, $isnew ){
+	global $mosConfig_db;
+
+	//Make sure
+	 mysql_select_db($mosConfig_db);
+}
+</code>
+
+== 2.3.1 Description ==
+
+The onBeforeStoreUser function is called when a user logs into Joomla.  It can be used to authenticate a Joomla user using a separate authentication system or log an authenticated user into a separate system.
+
+== 2.3.2 Parameters ==
+
+user : array : passed from joomla core\\ \\
+
+user[username] : string : username of user to logout\\
+user[password] : string : password of user to logout\\
+isnew : boolean : passed from joomla core\\
+
+== 2.3.3 Return Value ==
+
+void
+
+== 2.4 onAfterStoreUser ==
+
+<code php|Example Code>
+/**
+* Example store user method
+* Method is called after user data is stored in the database
+* @param 	array	  	holds the user data
+* @param 	boolean		true if a new user is stored
+* @param	boolean		true if user was succesfully stored in the database
+* @param	string		message
+*/
+function botExampleAfterStoreUser( $user, $isnew, $succes, $msg ){
+	global $mosConfig_db;
+
+	/*
+	 * convert the user parameters passed to the event to a format the
+	 * external appliction nds
+	 */
+
+	$args = array();
+	$args['username'] = $user['username'];
+	$args['email'] 	  = $user['email'];
+	$args['fullname'] = $user['name'];
+	$args['password'] = $user['password'];
+
+	if($isnew) {
+		// Call a function in the external app to create the user
+		// ThirdPartyApp::createUser($user['id'], $args);
+	} else {
+		// Call a function in the external app to update the user
+		// ThirdPartyApp::updateUser($user['id'], $args);
+	}
+
+	//Make sure
+	 mysql_select_db($mosConfig_db);
+}
+</code>
+
+== 2.4.1 Description ==
+
+The onAfterStoreUser function is called after a user object has been stored to the database.  This trigger will help allow 3rd party applications sync user accounts with Joomla.
+
+== 2.4.2 Parameters ==
+
+user : array : passed from joomla core\\ \\
+
+user[username] : string : username of user to logout\\
+user[fullname] : string : full name of user to logout\\
+user[email] : string : email address of user to logout\\
+user[password] : string : password of user to logout\\
+isnew : boolean : passed from joomla core\\
+success : boolean : passed from joomla core\\
+msg : string : passed from joomla core\ß
+
+== 2.4.3 Return Value ==
+
+void
+
+== 2.5 onBeforeDeleteUser ==
+
+<code php|Example Code>
+/**
+* Example store user method
+* Method is called before user data is deleted from the database
+* @param 	array	  	holds the user data
+*/
+function botExampleBeforeDeleteUser( $user ){
+	global $mosConfig_db;
+
+	//Make sure
+	 mysql_select_db($mosConfig_db);
+}
+</code>
+
+== 2.5.1 Description ==
+
+The onBeforeDeleteUser function is called before a user object is deleted from the database.  This trigger will help allow 3rd party applications sync user accounts with Joomla.
+
+== 2.5.2 Parameters ==
+
+user : array : passed from joomla core\\ \\
+
+user[username] : string : username of user to logout\\
+user[fullname] : string : full name of user to logout\\
+user[email] : string : email address of user to logout\\
+user[password] : string : password of user to logout\\
+
+== 2.5.3 Return Value ==
+
+void
+
+== 2.6 onAfterDeleteUser ==
+
+<code php|Example Code>
+/**
+* Example store user method
+* Method is called after user data is deleted from the database
+* @param 	array	  	holds the user data
+* @param	boolean		true if user was succesfully stored in the database
+* @param	string		message
+*/
+function botExampleAfterDeleteUser( $user, $succes, $msg ){
+	global $mosConfig_db;
+
+	/*
+	 * only the $user['id'] exists and carries valid information
+	 */
+
+	// Call a function in the external app to delete the user
+	// ThirdPartyApp::deleteUser($user['id']);
+
+	//Make sure
+	 mysql_select_db($mosConfig_db);
+}
+</code>
+
+== 2.6.1 Description ==
+
+The onAfterDeleteUser function is called after a user object has been removed from the database.  This trigger will help allow 3rd party applications sync user accounts with Joomla.
+
+== 2.6.2 Parameters ==
+
+user : array : passed from joomla core\\ \\
+
+user[id] : string : id of user to delete\\
+user[username] : string : username of user to delete\\
+user[fullname] : string : full name of user to delete\\
+user[email] : string : email address of user to delete\\
+user[password] : string : password of user to logout\\
+success : boolean : passed from joomla core\\
+msg : string : passed from joomla core\\
+
+== 2.6.3 Return Value ==
+
+void
+
+=== 3. ===
+
+=== 4. ===
+
+[[:start|Back to the Startpage]]

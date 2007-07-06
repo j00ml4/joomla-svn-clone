@@ -1,0 +1,19 @@
+ 
+
+<sub>Dan3000, 2006/04/30 11:27:</sub>
+
+"folder" folder ??? a bit confusing? changed it
+
+----
+
+<sub>Dan3000, 2006/04/30 11:28:</sub>
+
+what does this piece of code do? jimport( 'joomla.filesystem.folder' )
+
+----
+
+<sub>chrisdavenport, 2006/05/02 11:58:</sub>
+
+jimport is a function which calls JLoader, the 'smart' class loader.  It is defined in libraries/loader.php.  Without it you would get an 'undefined class' error when you tried to call JFolder::create.
+
+----

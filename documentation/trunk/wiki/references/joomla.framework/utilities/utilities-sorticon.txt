@@ -1,0 +1,55 @@
+====== sortIcon ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->sortIcon]] | never | Work in progress |
+
+Builds the HTML code for displaying a standard clickable sort icon.  The alternative text for the image is taken from the current language settings.
+
+===== Syntax =====
+string sortIcon ( string $base_href, string $field [, string $state] )
+
+| **$base_href** | string | is the base URL that will be used if the user clicks the image. |
+| **$field** | string | is the name of the field that is being sorted. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the HTML <select> tag. |
+| **$state** | string | is the current sort state of the field.  This parameter is optional and if omitted will default to 'none'.  Possible values are: none - indicates that the field is not currently sorted.  Clicking the image will request an ascending sort. asc - indicates that the field is currently sorted in ascending order.  Clicking the image will request a descending sort. desc - indicates that the field is currently sorted in descending order.  Clicking the image will request an ascending sort. |
+
+===== Examples =====
+Example: This example (abstracted from the com_statistics component) shows the construction of an array, $sorts, containing the HTML for two sort icons.
+<code php|Example>
+// get sort field and check against allowable field names
+$field = strtolower( mosGetParam( $_REQUEST, 'field', '' ) );
+if (!in_array( $field, array( 'agent', 'hits' ) )) {
+  $field = '';
+}
+ 
+// get field ordering or set the default field to order
+$order = strtolower( mosGetParam( $_REQUEST, 'order', 'asc' ) );
+if ($order != 'asc' && $order != 'desc' && $order != 'none') {
+  $order = 'asc';
+} else if ($order == 'none') {
+  $field = 'agent';
+  $order = 'asc';
+}
+ 
+// Browser stats
+$order_by = '';
+$sorts = array();
+$sort_base = "index2.PHP?option=$option&task=$task";
+ 
+switch ($field) {
+  case 'hits':
+    $order_by = "hits $order";
+    $sorts['agent'] = mosHTML::sortIcon( "$sort_base", "agent" );
+    $sorts['hits']  = mosHTML::sortIcon( "$sort_base", "hits", $order );
+    break;
+ 
+  case 'agent':
+  default:
+    $order_by = "agent $order";
+    $sorts['agent'] = mosHTML::sortIcon( "$sort_base", "agent", $order );
+    $sorts['hits']  = mosHTML::sortIcon( "$sort_base", "hits" );
+    break;
+}
+ 
+$Database->setQuery( "SELECT * FROM #__stats_agents WHERE type='0' ORDER BY $order_by" );
+$browsers = $database->loadObjectList();
+</code>

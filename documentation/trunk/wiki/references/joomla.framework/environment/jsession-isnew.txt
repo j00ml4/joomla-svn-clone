@@ -1,0 +1,11 @@
+====== isNew ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->isNew]] |
+
+Gets a value indicating whether the session  was created with the current request<p>You MUST call this method only after you have started  the session with the JSession::start() method.</p>
+===== Syntax =====
+boolean isNew ()
+
+===== Examples =====
+
+

@@ -1,0 +1,18 @@
+====== __construct ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JAuthenticate|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticate|JAuthenticate]] | [[http://api.joomla.org/Joomla-Framework/Application/JAuthenticate.html|JAuthenticate->__construct]] | 19 September 2006 | Published |
+
+The class constructor loads all the plugins in the group 'authentication'. If one of the plugins does not load, a warning is raised.
+
+===== Syntax =====
+void __construct ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.user.authenticate' );
+$instances[0] = new JAuthenticate();
+</code>
+
+----
+
+~~DISCUSSION~~

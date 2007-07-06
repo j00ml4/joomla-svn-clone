@@ -1,0 +1,17 @@
+<code html|Beadcrumbs Only ModuleContent in this Box>
+01: <ul>
+02:   <li><a href="#">Crumb.1</a></li>
+03:   <li><a href="#">Crumb.2</a></li>
+04:   <li><a href="#">Crumb.3</a></li>
+05:   <li><a href="#">Crumb.4</a></li>
+06:   <li>Crumb.5</li>
+07: </ul>
+</code>
+
+====== Notes ======
+
+  * This is now a module in 1.5 like any other, by default module title is off
+  * Move to more standard Breadcrumb name
+  * Breadcrumbs should be a standard list like any other
+  * Current item (last in list) should not be linkable 
+~~DISCUSSION~~

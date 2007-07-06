@@ -1,0 +1,18 @@
+===== Types of Contributions =====
+
+There are two basic types of contributions you can make the Joomla! Project:\\
+
+  * contributing Addons ( Components, Modules, etc ) or Themes and
+  * [[howto:corepatches| contributions to the Joomla! Core]]
+
+In contrast,  changes to the Joomla! Core are made through a thorough consultative process to ensure the overall integrity of the software.
+
+Changes to the Joomla! Core are generally of three types:
+
+    * [[howto:bugreports|Bug fixes]].  These changes respond to identified problems in the existing code.
+    * [[howto:newfeatures|New features]].  These changes are enhancements on what is already available.
+    * Code maintenance.  These changes are to improve the quality of the code or bring it up to date with changes elsewhere in Joomla!.  This can include bringing code in line with coding standards, improving efficiency (e.g., eliminating unneeded database queries), introducing or improving in-line comments, and doing upgrades for compliance with a new release version.\\ \\
+
+
+
+[[:start|Back to the Startpage]]

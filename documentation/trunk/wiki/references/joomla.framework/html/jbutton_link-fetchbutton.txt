@@ -1,0 +1,34 @@
+====== fetchButton ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton_Link|JButton_Link]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Link.html#fetchbutton|JButton_Link->fetchButton]] | never | Internal review |
+
+Returns the HTML code for the button. The created button will open the specified URL when it is clicked. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with 'back' as its parameter. This class is defined in the standard administrator template. If this class is used in the frontend, this class should be defined and any images used should be included. The standard button appears with a 'back' icon.
+
+===== Syntax =====
+void fetchButton ( **$type**, **$name**, **$text**, **$url** )
+
+| **$type** | string | is a string containing the button type. This parameter should normally be 'Link'. This parameter is optional and if omitted defaults to 'Link'. |
+| **$name** | string | is a string containing the button name. This parameter is not used for this method. This parameter is optional and if omitted defaults to ''. |
+| **$text** | string | is a string containing the text to display underneath the button. This parameter is optional and if omitted defaults to ''. |
+| **$url** | string | is a string containing the URL that the button should link to. This parameter is optional and if omitted defaults to ''. |
+
+===== Examples =====
+<code php|Example>
+$bar =& new JToolBar( 'My ToolBar' );
+$button =& $bar->loadButtonType( 'Link' );
+echo $button->fetchButton( 'Link', 'return', 'Return', 'http://www.joomla.org' );
+</code>
+might produce:
+<code php|Result>
+<a href="http://www.joomla.org">
+
+<div class="icon-32-back" title="Return" type="Link">
+</div>
+Return
+</a>
+</code>
+Which might appear like: {{:references:joomla.framework:html:back_button.png|:references:joomla.framework:html:back_button.png}}
+
+----
+
+~~DISCUSSION~~

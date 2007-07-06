@@ -1,0 +1,26 @@
+====== implodeAttribs ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHelper|JDocumentHelper]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHelper.html|JDocumentHelper->implodeAttribs]] |
+
+A utility function to implode HTML element attributes from an associative array into a string appropriate for including as part of an XML tag.
+
+===== Syntax =====
+void implodeAttribs	( **$inner_glue**, **$outer_glue**, **$array**, **$keepOuterKey** )
+
+| **$inner_glue** | string | is a string containing the inner glue that is used inside the attributes. This parameter is optional and if omitted defaults to '='. |
+| **$outer_glue** | string | is a string containing the outer glue that is used between the attributes. This parameter is optional and if omitted defaults to '\n'. |
+| **$array** | array | is an associative array containing the attributes to implode. This parameter is optional and of omitted defaults to an empty array. |
+| **keepOuterKey** | boolean | is a flag which specifies whether the outer key should be kept in the case of a nested array. This parameter is optional and if omitted defaults to false. |
+
+===== Examples =====
+<code php|Example>
+$array = array( 'attrib1' => 'value1', 'attrib2' => 'value2', 'attrib3' => 'value3', 'arrayattribs' => array( 'attrib4' => 'value4', 'attrib5' => 'value5' ) );
+
+echo "Keeping the outer key: " . JDocumentHelper::implodeAttribs( '=', ' ', $array, true );
+echo "Dropping the outer key: " . JDocumentHelper::implodeAttribs( '=', ' ', $array, false );
+</code>
+might produce:
+<code php|Result>
+Keeping the outer key: attrib1="value1" attrib2="value2" attrib3="value3" arrayattribs attrib4="value4" attrib5="value5"
+Dropping the outer key: attrib1="value1" attrib2="value2" attrib3="value3" attrib4="value4" attrib5="value5"
+</code>

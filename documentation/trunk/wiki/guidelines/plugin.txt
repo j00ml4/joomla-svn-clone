@@ -1,0 +1,137 @@
+====== Joomla Plugin Specification ======
+
+===== 1. Overview and Description: =====
+
+New in Joomla! 1.5 is a JPlugin class.  In the effort to move Joomla! toward a more efficient object-oriented framework a new plugin system has been developed.  Plugins are observer classes that attach to a global event dispatcher object in the Joomla! core.  What does this mean in english?  It means that either the Joomla! core or a third party component or module can trigger an event which causes one or more JPlugins to execute some code.  Isn't this the same as a mambot?  No, not exactly.  It is similar in basic principle in that both a JPlugin and a mambot are triggered by an event and both execute code.  One issue with a mambot is that it requires its functions to be declared in a global scope.  Since a JPlugin is a class, the methods that handle the events can share variables and have private helper methods as well, which makes for a much cleaner system for handling events.
+
+===== 2. Implementation =====
+
+The implementation of the JPlugin system is that of an observer pattern. It has two parts, an observer class (JPlugin) and an observable class (JEventDispatcher).
+
+==== 2.1 JPlugin Class ====
+
+<code php|Source Code>
+/**
+ * JPlugin Class
+ *
+ * @author Louis Landry <louis@webimagery.net>
+ * @package Joomla.Framework
+ * @subpackage Application
+ * @since 1.5
+ */
+class JPlugin extends JObserver {
+
+	/**
+	 * Constructor
+	 * 
+	 * For php4 compatability we must not use the __constructor as a constructor for plugins
+	 * because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+	 * This causes problems with cross-referencing necessary for the observer design pattern.
+	 * 
+	 * @param object $subject The object to observe
+	 * @since 1.5
+	 */
+	function JPlugin(& $subject) {
+		parent::__construct($subject);
+	}
+
+	/**
+	 * Method to map events to handler methods
+	 * 
+	 * @access public
+	 * @param array Arguments
+	 * @return mixed Routine return value
+	 * @since 1.1
+	 */
+	function update(& $args) {
+		/*
+		 * First lets get the event from the argument array.  Next we will unset the 
+		 * event argument as it has no bearing on the method to handle the event.
+		 */
+		$event = $args['event'];
+		unset($args['event']);
+		
+		/*
+		 * If the method to handle an event exists, call it and return its return
+		 * value.  If it does not exist, return a boolean true.
+		 */ 
+		if (method_exists($this, $event)) {
+			return call_user_func_array(array($this, $event), $args);
+		} else {
+			return true;
+		}
+	}
+}
+</code>
+
+==== 2.1.1 Description ====
+
+There are two important things that makes this class work.  
+
+One is the constructor which actually gets executed by the parent class of this class JObserver.  The following is what happens in the constructor:
+	// Register the observer ($this) so we can be notified
+	$subject->attach($this);
+
+	// Set the subject to observe
+	$this->_subject = & $subject;
+This attaches the JPlugin to an observable object.  In the case of plugins, they observe the JEventDispatcher object.
+
+The second important thing to note is the update method.  The update method is passed an array from its trigger.  The array contains two elements - the event and the arguments.  Once the update method receives this array it extracts the event and removes it from the arguments.  It then calls a method of name 'event' (passing the arguments array) and returns its response.
+
+===== 3. Third Party Usage =====
+
+<code php|Example Code>
+<?php
+/**
+ * @version $Id: $
+ * @package 
+ * @subpackage 
+ * @copyright 
+ * @license 
+ */
+
+jimport('joomla.plugin');
+
+
+/**
+ * Example Plugin
+ *
+ * @author 
+ * @package 
+ * @subpackage 
+ * @since 
+ */
+class ExamplePlugin extends JPlugin {
+
+	/**
+	 * Constructor
+	 * 
+	 * @param object $subject The object to observe
+	 * @since 1.1
+	 */
+	function ExamplePlugin(& $subject) {
+		parent::__construct($subject);
+	}
+
+	/**
+	 * This method handles the onIncrement event.  It takes an integer input and 
+	 * increments its value.
+	 * 
+	 * @access public
+	 * @param int $input An integer to increment
+	 * @return int Incremented integer
+	 * @since 1.1
+	 */
+	function onIncrement($input) {
+		
+		return $input++;
+	}
+}
+?>
+</code>
+
+As you can see, it is quite simple to create a JPlugin.  It is truly as simple as creating a class that extends JPlugin and writing a method for each event you want the plugin to handle.
+
+
+
+[[:start|Back to the Startpage]]

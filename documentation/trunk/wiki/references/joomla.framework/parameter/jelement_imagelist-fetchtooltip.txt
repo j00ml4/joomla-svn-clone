@@ -1,0 +1,37 @@
+====== fetchTooltip ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElement_ImageList|JElement_ImageList]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_ImageList.html|JElement_ImageList->fetchTooltip]] | never | Work in progress |
+
+Renders the HTML code for a tool tip for the element.
+
+===== Syntax =====
+void fetchTooltip	( **$label**, **$description**, **&$node**, **$control_name**, **$name** )
+
+| **$label** | string | is a string containing the label to attach to the element. |
+| **$description** | string | is a string containing the description to display in the tool tip. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement object containing the settings for the parameter. This method does not use the node parameter. |
+| **$control_name** | string | is a string containing the name of the control for the element. |
+| **$name** | string | is a string containing the name of the element. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file = JPATH_ADMINISTRATOR.DS.'components'.DS.'com_document'.DS.'document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'imagelist' );
+
+echo $element->fetchTooltip( 'Image Name:', 'Select the image to be used: ', $nodes[0], 'params', 'imagename' );
+</code>
+might produce:
+<code php|Result>
+<label for="paramimagename"><span onmouseover="return overlib('Select the image to be used: ', CAPTION, 'Image Name:', BELOW, RIGHT);" onmouseout="return nd();" >Image Name:</span></label>
+</code>
+
+----
+
+~~DISCUSSION~~

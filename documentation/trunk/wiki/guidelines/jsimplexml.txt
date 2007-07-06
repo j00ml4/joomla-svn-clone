@@ -1,0 +1,220 @@
+====== Joomla XML Parser Specification ======
+
+===== 1. Overview and Description =====
+
+New in Joomla! 1.5 is the JSimpleXML class. JSimpleXML is a PHP4 backport of the new PHP5 API called [[http://www.php.net/manual/en/ref.simplexml.php|SimpleXML]]. It provides a simple access to XML files, optimzed for reading. The current implementation doesn't allow changing the CDATA nodes or attributes nor does it support XPath. 
+
+JSimpleXML is written in pure PHP and requires PHP >= 4.2.0 and the XML Parser Extension (Expat). Internaly JSimpleXML is used to parse the extension xml files.
+
+===== 2. Implementation =====
+
+<code php|JSimpleXML API>
+
+/**
+ * SimpleXML implementation.
+ *
+ * The XML Parser extension (expat) is required to use JSimpleXML.
+ *
+ * The class provides a pure PHP4 implementation of the PHP5
+ * interface SimpleXML. As with PHP5's SimpleXML it is what it says:
+ * simple. Nevertheless, it is an easy way to deal with XML data,
+ * especially for read only access.
+ *
+ * Because it's not possible to use the PHP5 ArrayIterator interface
+ * with PHP4 there are some differences between this implementation
+ * and that of PHP5:
+ * @author	Johan Janssens <johan.janssens@joomla.org>
+ * @package 	Joomla.Framework
+ * @subpackage	Utilities
+ * @since 1.5
+ */
+class JSimpleXML extends JObject
+{
+    /**
+    * Document element
+    *
+    * @var object
+    */
+    var $document = null;
+    
+     /**
+     * Interprets a string of XML into an object
+     * 
+     * This function will take the well-formed xml string data and return an object of class 
+     * JSimpleXMLElement with properties containing the data held within the xml document. 
+     * If any errors occur, it returns FALSE.
+     * 
+     * @param string  Well-formed xml string data
+     * @param string  currently ignored
+     * @return object JSimpleXMLElement
+     */
+    function loadString($string, $classname = null) 
+    {
+		$this->_parse($string);
+		return true;
+    }
+
+     /**
+     * Interprets an XML file into an object
+     * 
+     * This function will convert the well-formed XML document in the file specified by 
+     * filename to an object  of class JSimpleXMLElement. If any errors occur during file 
+     * access or interpretation, the function returns FALSE.
+     * 
+     * @param string  Path to xml file containing a well-formed XML document
+     * @param string  currently ignored
+     * @return object JSimpleXMLElement
+     */
+    function loadFile($path, $classname = null) 
+    {
+		//Get the XML document loaded into a variable
+		$xml = file_get_contents($path);
+		$this->_parse($xml);
+		return true;
+    }
+
+    /**
+     * Get the parser
+     *
+     * @access public
+     * @return resource XML parser resource handle
+     */
+    function getParser() {
+		return $this->_parser;
+    }
+
+    /**
+     * Set the parser
+     * 
+     * @access public
+     * @param resource	XML parser resource handle
+     */
+    function setParser($parser) {
+		$this->_parser = $parser;
+    }
+}
+</code>
+
+===== 3. Third Party Developer Usage =====
+
+As the name says it is simple and easy to use JSimpleXML. You may refer to the PHP documentation to get an idea of [[http://www.php.net/manual/en/ref.simplexml.php|SimpleXML]] as it is implemented with PHP5. Due to the nature of PHP4 JSimpleXML is a little bit different, but usage of this package is straightforward too.
+
+
+<code xml|example XML document(example.xml)>
+<?xml version='1.0' standalone='yes' ?>
+<movies>
+ <movie>
+  <title>PHP: Behind the Parser</title>
+  <characters>
+    <character>
+     <name>Ms. Coder</name>
+     <actor>Onlivia Actora</actor>
+    </character>
+    <character>
+     <name>Mr. Coder</name>
+     <actor>El Act&#211;r</actor>
+    </character>
+  </characters>
+  <plot>
+   So, this language. It's like, a programming language. Or is it a scripting language? All   
+   is revealed in this thrilling horror spoof of a documentary.
+  </plot>
+  <rating type="thumbs">7</rating>
+  <rating type="stars">5</rating>
+ </movie>
+</movies>
+</code>
+
+==== 2.1 Getting started ==== 
+
+To get started with the parser, you need to first load the XML document you are working with. For our purposes, we're going to call the document example.xml. Like SimpleXML, the JSimpleXML loadFile takes the name of the file which contains the xml data. So, what this means is that internaly the loadFile method uses a file_get_contents() call to get the xml data and passes this to the parser.
+
+<code php|Setting up the parser>
+<?php
+//Create a JSimpleXML object
+$xml = new JSimpleXML();
+
+//Load the xml file
+$xml->loadFile($file);
+?>
+</code>
+
+The XML parser has a error handling function which should trigger a JError if there are any issues parsing the XML document. Assuming, however, we didn't get any errors, we can press forward.
+
+The object structure of JSimpleXML is really quite straight forward, however, it takes some getting used to. The document root is contained in the document member of the parser. This means, in the above example, $xml->document would be the root tag, regardless of the tag's name. From there, each child tag encountered is assigned to an array named for the tag's name. So, $xml->document->movie[0] would be the way to access the first movie tag. $xml->document->movie is an array, not an JSimpleXMLElement object. Therefore, in most cases, trying to access the first movie object through $xml->document->movie would be incorrect.
+
+==== 2.2 Working with JSimpleXML ====
+
+=== Example 1. Accessing a node's CDATA ===
+
+The simplicity of SimpleXML appears most clearly when one extracts a string or number from a basic XML document.
+
+<code php>
+<?php
+$xml = new JSimpleXML();
+$xml->loadFile($file);
+
+echo $xml->movie[0]->plot->data(); // "So this language. It's like..."
+?> 
+</code>
+
+=== Example 2. Accessing a node's children ===
+
+When multiple instances of an element exist as children of a single parent element, normal iteration techniques apply.
+
+<code php>
+<?php
+$xml = new JSimpleXML();
+$xml->loadFile($file);
+
+/* For each <movie> node, we echo a separate <plot>. */
+foreach ($xml->movie->children() as $movie) {
+   echo $movie->plot->data(), '<br />';
+}
+
+?> 
+</code>
+
+=== Example 3. Accessing a node's attributes ===
+
+So far, we have only covered the work of reading element names and their values. JSimpleXML can also access element attributes. Access attributes of an element just as you would elements of an array.
+
+<code php>
+<?php
+$xml = new JSimpleXML();
+$xml->loadFile($file);
+
+/* Access the <rating> nodes of the first movie.
+ * Output the rating scale, too. */
+foreach ($xml->movie[0]->rating->children() as $rating) {
+   switch((string) $rating->attributes('type')) { // Get attributes as element indices
+   case 'thumbs':
+       echo $rating, ' thumbs up';
+       break;
+   case 'stars':
+       echo $rating, ' stars';
+       break;
+   }
+}
+?> 
+</code>
+
+===== 4. Special Considerations =====
+
+==== 4.1 Setting and comparing values ====
+
+Because we aren't using any of PHP 5's hip new OO features to make this parser easy to work with (once again, for PHP 4 compatability), setting and comparing values is much easier. In SimpleXML, you need to type cast things before you are allowed to work with them like strings. In JSimpleXML, by contrast, you don't need to type cast. Just use = or == like normal and things will work fine. Just make sure you are working with data(), attributes(), or one of the other JSimpleXMLElement functions. If you aren't, you're trying to preform string operations on an object and will get errors out of PHP. 
+
+==== 4.2 Outputting the XML document ===
+
+As if just parsing XML documents in both PHP 4 and PHP 5 wasn't good enough, there is also functionality in this system to output the XML document. For the most part, this functionality was only used by me to test to be sure that the system was properly parsing the entire XML tree without having to resort to lots of difficult to read var_dump() statements, however, this could also be used to modify XML data (through the document tree) and output it again, or to create a whole new document tree from the ground up and get the XML for that. To access this functionality, simply output the return value of the asXML() method on a JSimpleXMLElement object. So, in the above examples, it would just be something as simple as the below. 
+
+<code php|Output the XML document>
+<?php
+echo $xml->document->asXML();
+?> 
+</code>
+
+==== 4.3 Character sets ====
+
+Take care on your character encoding. The parser expects UTF-8 XML files and will produce UTF-8 output as well. Currently there is no way to change this unless you decide to patch the sources (and the underlying expat parser restricts character sets to UTF-8, ISO-8859-1 and US-ASCII). As long as you are using only ASCII characters there is no difference between ISO-8859-1 and UTF-8 and you will notice no problems, but if you are using characters of the higher part of ISO-8859-1 the differences will come into effect.

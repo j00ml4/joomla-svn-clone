@@ -1,0 +1,9 @@
+====== Languages ======
+Perhaps the most basic and critical extension type is a language. Languages are packaged as either a core language pack or an extension language pack. These packages consist of INI files which contain key/value pairs.  These key/value pairs provide the translation of static text strings within Joomla! source code.  This allows both the Joomla! core and third party components and modules to be internaionalised.  Core language packs also include an XML meta file describing the language and providing information about the fonts to use for PDF content generation.
+
+===== 1. How-To's =====
+  * [[languages:core_pack|Building a Core Language Pack]]
+  * [[languages:ext_pack|Building an Extension Language Pack]]
+
+===== 2. Manuals =====
+  * [[languages:xml_installfile|XML-Installation file]]

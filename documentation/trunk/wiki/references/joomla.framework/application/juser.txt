@@ -1,0 +1,25 @@
+====== JUser [Review] ======
+^ API ^ Package ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JUser.html|JUser]] |
+
+User class.  Handles all application interaction with a user
+===== Methods =====
+^ Method ^ Description ^
+| [[JUser-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-__construct|__construct]] | Constructor activating the default information of the language |
+| [[JUser-authorize|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-authorize|authorize]] | Method to check JUser object authorization against an access control  object and optionally an access extension object |
+| [[JUser-defParam|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-defParam|defParam]] | Method to set a default parameter if it does not exist |
+| [[JUser-get|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-get|get]] | Overridden get method to get properties from the user table |
+| [[JUser-getError|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-getError|getError]] | Method to get JUser error message |
+| [[JUser-getInstance|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-getInstance|getInstance]] | Returns a reference to the global User object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $user = JUser::getInstance($id);</pre></p> |
+| [[JUser-getParam|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-getParam|getParam]] | Method to get a parameter value |
+| [[JUser-getParameters|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-getParameters|getParameters]] | Method to get the user parameters |
+| [[JUser-set|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-set|set]] | Overridden set method to pass properties on to the user table |
+| [[JUser-setLastVisit|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-setLastVisit|setLastVisit]] | Pass through method to the table for setting the last visit date |
+| [[JUser-setParam|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-setParam|setParam]] | Method to set a parameter |
+| [[JUser-setParameters|{{http://api.joomla.org/media/images/Method.png }}]] [[JUser-setParameters|setParameters]] | Method to set the user parameters |
+
+----
+
+~~DISCUSSION~~
+
+

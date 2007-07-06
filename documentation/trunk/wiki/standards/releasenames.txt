@@ -1,0 +1,23 @@
+==== Release Names ====
+
+Script Release Naming, a long word for naming your release files right. For the benefit of the users, for better overview and easier upgrading, component release files should be named according to the Script Release Naming convention. This is a very simple guideline with many benefits.\\ \\
+
+A component release file is a (compressed) archive of the component files. The root of the archive contains the folder with the component files.\\ \\
+
+The component release file name itself follows this simple rule:\\ \\
+**joomla_com_componentname_version.number_status_developername.extension**\\ \\
+
+Thus, the weblinks component release file name would (could) be: \\ \\
+**joomla_com_weblinks_1.1_beta_stingrey.zip**\\ \\
+
+Statuses can be "alpha", "beta", "RC" (Release Candidate) and "final"\\ \\
+
+Replace **com** with **mod** or **bot** if you release a module or bot.\\ \\
+
+note the use of underscores and points. Do not use spaces, parenthises and "~" in the component release name.\\ \\
+
+To use Joomla! at the begining is to avoid confusen with Mambo and show that this component is developed for Joomla! and therefor only tested for Joomla!.\\ \\
+
+~~DISCUSSION~~
+
+[[:start|Back to the Startpage]]

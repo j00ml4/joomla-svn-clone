@@ -1,0 +1,18 @@
+====== getHost ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla-Framework/Application/JURI.html|JURI->getHost]] |
+
+Gets the URI host. This function returns the hostname/ip, or null if no hostname/ip was specified.
+
+===== Syntax =====
+string getHost ()
+
+===== Examples =====
+<code php|Example>
+$uri = new JURI( 'http://forum.joomla.org/index.php/topic,41464.msg227819.html#msg227819' );
+echo "Host: " . $uri->getHost();
+</code>
+might produce:
+<code php|Result>
+Host: forum.joomla.org
+</code>

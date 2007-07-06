@@ -1,0 +1,19 @@
+===== 5.3 Deprecated Functions =====
+
+  * deldir\\
+  * doGzip\\
+  * initGzip\\
+  * mosChmod\\
+  * mosChmodRecursive\\
+  * mosGetBrowser\\
+  * mosGetOS\\
+  * mosIsChmodable\\
+  * mosMakePath\\
+  * mosParseParams\\
+  * mosPathName\\
+  * mosPathWay\\
+  * mosReadDirectory\\
+  * mosShowSource\\ \\
+
+
+[[:start|Back to the Startpage]]

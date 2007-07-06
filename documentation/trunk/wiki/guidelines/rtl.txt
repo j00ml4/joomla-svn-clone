@@ -1,0 +1,122 @@
+===== Joomla RTL Specification =====
+==== 1. Overview and Description ====
+There is a family of Right-to-Left languages (RTL). This family includes (among others) Arabic, Farsi (Persian), Hebrew and Urdu. In these languages text is presented in RTL direction with the start of the text on the right margin. Alignment is normally to the right.
+
+In computer applications RTL texts are kept in data in logical order (the same as Left-to-Right texts). This implies that the first character in the text is represented by the first byte/s in the data. However display on a screen or printed output should be in visual order, i.e. first characters on the right. To further compound this, many times numbers or Latin texts are part of the data and these need to be presented in LTR even though they are inserted in the RTL texts. A BIDI (bi-directional) algorithm is applied to correctly order mixed texts.
+
+Fortunately, web browsers are designed to handle RTL texts and to apply the BIDI algorithm. In fact they always apply the BIDI algorithm. If an Arabic word in inserted into a LTR (Left-to-Right) Latin document, the Arabic word resides in data in the same logical order as the rest of the text, but on the display it is in visual order and characters appear from right to left.
+
+Browsers will correctly display RTL texts once they encounter the appropriate 'dir' attribute in a tag or 'direction' directive in a style. The default alignment will be to the right, table column order is horizontally flipped, bullets and numbering will be flushed to the right, in some cases the vertical scroll bar will appear on the left. Basically a horizontal mirror image of regular LTR display is achieved. To correctly present RTL languages and to avoid artefacts of neutral characters (punctuation and numbers) appearing in incorrect locations - RTL languages should be displayed in the RTL HTML display context. In other words - right align alone is not enough.
+==== 2. Implementation in Joomla ====
+Joomla 1.1 is RTL aware. If a RTL language is used the back end will appear in RTL display context. The default front-end template is also implements LTR/RTL switching based on the language selection.
+
+Joomla's language class is aware of the language direction and provides an accessor to assist when implementation needs to know the language direction.
+=== 2.1 Language direction attribute management ===
+The display direction for the language is specified in the language meta-data which can be found in the xml files for the specific language. Following is an example for Hebrew. The value 1 in the 'rtl' tag indicates RTL language.
+<code xml|Meta data>
+    <metadata>
+    	<name>Hebrew(IL)</name>
+    	<tag>heb_IL</tag>
+    	<rtl>1</rtl>
+   	<locale>he_IL</locale>
+    </metadata>
+</code>
+This data is read when an language object is instantiated and the RTL knowledge is stored in a class field with an appropriate accessor function. Following are snippets of the Language class showing the RTL related code.
+<code php|RTL related code in Language class>
+class JLanguage extends JObject
+{
+	...
+	/** @var array 	Array holding the language metadata */
+	var $_metadata 	= null;
+        ...
+	/**
+	* Get the RTL property
+	*
+	* @access public
+	* @return boolean True is it an RTL language
+	*/
+	function isRTL($value = null) {
+		return $this->_metadata['rtl'];
+	}
+</code>
+
+=== 2.2 Usage examples in Joomla ===
+Following are some sample snippets of code where RTL implementation is applied.
+<code php|Sample RTL implementation in Joomla>
+$lang =& $mainframe->getLanguage();
+...
+<link rel="stylesheet" href="templates/<?php echo $mainframe->getTemplate(); ?>/css/<?php echo ($lang->isRTL()) ? 'theme_rtl.css' : 'theme.css' ?>" type="text/css">
+...
+<script language="JavaScript" src="includes/js/ThemeOffice/<?php echo ($lang->isRTL()) ? 'theme_rtl.js' : 'theme.js' ?>" type="text/javascript"></script>
+...
+<div style="float:<?php echo ($lang->isRTL()) ? 'right' : 'left'; ?>;">
+...
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang->getTag();?>" lang="<?php echo $lang->getTag();?>" dir="<?php echo $lang->isRTL() ? 'rtl' : 'ltr'; ?>">
+</code>
+
+==== 3. Implementing an RTL Aware Component ====
+A component in Joomla is displayed in the current Joomla template. In the case of an RTL language the working assumption should be that the template provides the RTL directional context. This RTL context is inherited by the component. 
+
+In an ideal world there would be nothing to do!: The texts in the component will be right aligned; text flow will be right-to-left; table structure will be flipped horizontally. All that is left to do is to stick an "RTL Aware" sticker on the component and ship it out.
+
+However, in some cases the component's presentation design features hard-coded elements that change the default alignments or symmetry. These could be cases where text is right aligned (try to think 'flushed to the end') or horizontal symmetry of margins or padding is set (i.e. different values for right and for left).
+
+More problematic are the cases of overzealous programmers who insert hard-coded left align statements (think 'flush to start') where the default alignment is to the left to begin with!
+
+To make components RTL aware one has to recognise that: default alignment is to the right; 'flush to end' now means left aligned; a particular left margin is now the 'end margin'; etc.
+
+In implementing RTL awareness the objective should be to create a single version of the component that will display correctly both in LRT and RTL contexts. Elements that have different values for different contexts need to be identified and code should be modified to allow conditional setting of appropriate values based on value returned by
+  $lang->isRTL()
+as shown in above example snippets.
+=== 3.1 Mechanisms for applying RTL awareness ===
+When the code that needs to be modified is part of the HTML code then an inline conditional statement can provide an easy solution. For example:
+<code php|Inline conditional switching>
+  <div align="right" width="50px">
+  ...becomes...
+  <div align="<?php echo ($lang->isRTL()) ? 'left': 'right' ?>" width="50px">
+</code>
+CSS files present more of a challenge as they cannot contain the required conditional statements. The solution is to either provide a complete RTL version of the original CSS file and then conditionally link in the original or the RTL version. The following example shows this approach:
+<code php|Either LTR CSS or RTL CSS>
+  <link rel="stylesheet" href="mycomponent/css/<?php echo ($lang->isRTL ()) ? 'mycss_rtl.css' : 'mycss.css' ?>" type="text/css">
+</code>
+An alternate approach is to always use the original CSS file (LTR) and in addition to conditionally load an RTL CSS file that only overrides the necessary style directives to achieve RTL awareness. For example:
+<code php|Incremental/override RTL CSS>
+  <link rel"stylesheet" href="mycomponent/css/my_regular.css" type="text/css">  
+  <?php if($lang->isRTL(){ ?>
+    <link rel"stylesheet" href="mycomponent/css/my_incremental_rtl.css" type="text/css">
+  <?php } ?>
+</code>
+=== 3.2 Basic checklist for implementing RTL awareness ===
+A basic checklist for making a component RTL aware would be:
+  * Find any left align statements (either in html or in css) that are not required and remove them (where left align is already the default).
+  * Find all hard-coded right align statements and conditionally set them to left align statements ('flush to end') by using the appropriate conditional code as shown in 3.1
+  * Find any margin or padding assymmetric values and conditionally flip them horizontally
+  * Find any images that need to be reversed (such as tree menu branches), create RTL versions and in the code apply appropriate conditional statements to load appropriate images
+
+==== 4. Implementing an RTL Template ====
+This section is only a general guideline and does not attempt to suggest specific HTML or CSS techniques.
+
+There are three basic options to creating an RTL template:
+  * Create a dedicated RTL template from scratch
+  * Convert an existing LTR template to become a dedicated RTL template
+  * Create a switchable template capable of displaying both LTR and RTL
+The first option is straight forward as this guideline is not an HTML or CSS tutorial it will be skipped.
+
+The first step in modifying or creating an RTL template is to place the rtl attribute or style in the appropriate place. There are several schools of thought, each arguing whether this should by applied to the 'html' tag or the 'body' tag or to a 'div' tag within the 'body'. The recommendation is to apply the direction to the 'html' tag with an attribute or style. Other possibilities can be considered if template design dictates it.
+=== 4.1 Checklist for converting an existing LTR template ===
+  * First determine if the structure of the template is entirely table based or does it include CSS positioning. RTL conversion of a table based template is simple. The application of the 'rtl' direction will flip the table horizontally. Left columns become right columns and effectively the entire template is mirrored as required. With CSS positioning 'float' directions and 'position' statements need to be modified to achieve mirror positioning of template elements.
+  * Find any left align statements (either in html or in css) that are not required and remove them (when left align is already the default).
+  * Find all hard-coded right align statements and conditionally set them to left align statements ('flush to end').
+  * Find any margin or padding assymmetry and flip them horizontally.
+  * Find any images that need to be reversed (such as tree menu branches), create RTL versions of the images and maintain the same filenames.
+
+=== 4.2 Checklist for creating a switchable LTR/RTL template ===
+This basically involves the steps shown in 4.1 above while applying all changes for RTL in a conditional manner as described in 3.1 above including example code snippets.
+
+\\ \\
+
+[[:start|Back to the Startpage]]
+
+
+
+

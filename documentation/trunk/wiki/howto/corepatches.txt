@@ -1,0 +1,20 @@
+===== Tips for contributing to the Joomla! Core =====
+
+The following tips might improve the chances of your contributions being accepted. Supplying patches is how to make changes to Joomla! Core or contributed code.
+
+    * Take a step back and objectively evaluate whether the changes are appropriate for the Joomla! Core. Ask yourself:
+          * Is the feature already implemented? Search the forums and issue tracker.
+          * Could the feature be implemented as a contributed Addon ( Component, Modules, bot, etc ) rather than a patch to the Joomla! Core?
+          * Will the change benefit a substantial portion of the Joomla! Core API?
+          * Is the change sufficiently general for others to build upon cleanly?\\
+
+    * Be explanatory, provide descriptions and illustrations, make a good case. Don't count on others downloading, installing, and testing your changes. Rather, show them in a nutshell what your changes would mean. Anticipate and address questions or concerns. If appropriate, provide screenshots.
+    * Be friendly and respectful. Acknowledge the effort others put in.
+    * Be open to suggestions and to other ways of accomplishing what you're aiming for.
+    * Be persistent. If you don't get any response right away, don't necessarily give up. If you're still convinced your idea has merit, find another way to present it.
+    * Respond, in a timely way, to suggestions, requests, or issues raised. Revise your work accordingly.
+    * If some time has gone by, update your changes to work with the current SVN Version.
+
+
+
+[[:start|Back to the Startpage]]

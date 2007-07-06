@@ -1,0 +1,58 @@
+===== Joomla! Best practices =====
+
+==== Reduced SQL query count ==== 
+
+Great pains should be taken to reduce the amount of queries needed on a page.\\ \\
+
+==== No queries within loops ====
+
+If you need information based on a previous query, loop through the results of the first query to find the items needed in the second query and retrieve all that information in one go.\\ \\
+
+e.g. instead of retrieving user information inside a loop of articles, first retrieve the articles, then find the userid's, you need, and then retrieve user information for the found userid's.\\ \\
+
+==== Improve readability ====
+
+Nobody likes to read a page full of complex processing and SQL queries.\\ \\
+
+==== Place complex processing in functions or class methods. ====
+
+If you are doing complex processing, put it in a function or a class method with a descriptive name. If you should need the same processing done later, you have a handy function for it.\\ \\
+
+==== Place all SQL queries in functions or class methods ====
+
+There should be no need for SQL queries outside functions or class methods. It greatly improves readability to have only descriptive calls to functions or class methods instead of SQL queries and subsequent going throught the resultset.
+
+==== Try to help the PHP parser ====
+
+When you use the simple PHP syntax to combine variables and string to one string, this causes a lot of parsing work. That's why it is suggested to help the parser at this point and with that increase performance. \\ \\
+
+=== Usage of " " or ' ' apostrophe for your strings ===
+
+
+All use of " apostrophe causes the parser to check if there is a variable included and if yes to replace the variable itself with the value of it.
+
+By using
+''$sql = 'select * from mytable where id=' .$whereID;''
+
+instead of
+
+''$sql = "select * from mytable where id=$whereID";''
+
+you help the parser. \\ \\
+
+Please be aware that some chars need to have the " apostrophe in order to work. E.g 
+
+''$text = 'What ever text\nSecond line of the text';'' 
+
+will not work. Here you need
+
+ ''$text = "What ever text\nSecond line of text";''
+
+
+==== Use JHTML ====
+
+Forms should be using the JHTML class. It is an easy way to have a form and will make it easier to modify and add elements to it.
+
+
+
+[[:start|Back to the Startpage]]

@@ -1,0 +1,7 @@
+ 
+
+<sub>Dan3000, 2006/04/30 11:25:</sub>
+
+This example reads the robot.txt file ???
+
+----

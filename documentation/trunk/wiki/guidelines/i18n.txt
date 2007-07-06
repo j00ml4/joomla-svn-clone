@@ -1,0 +1,12 @@
+====== I18N Internationalization ======
+
+The aspects of Joomla internationalization are covered in the following three specifications:
+
+===== Localization API Specification =====
+The localization of the entire Joomla application is decribed here. Guidlines for new language packages and 3PD extensions is also included. [[guidelines:Localization|Joomla Localization API Specification]]
+
+===== UTF-8 Specification =====
+The impementation of utf-8 in Joomla is described here and guidlines for 3PD's are given. [[guidelines:utf-8|Joomla UTF-8 Specification]]
+
+===== RTL ( Right to Left ) Specification =====
+This specification covers the methods that Joomla handles RTL compatibility and provides guidlines to 3PD's for creating RTL aware components and templates. [[guidelines:rtl|Joomla RTL ( Right to Left ) Specification]]

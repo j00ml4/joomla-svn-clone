@@ -1,0 +1,23 @@
+====== isAuthenticated ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[|Application]] | [[JAuthenticateHelper|{{http://api.joomla.org/media/images/Class.png }}]][[JAuthenticateHelper|JAuthenticateHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper->isAuthenticated]] | 19 September 2006 | Published |
+
+Determines whether there is an authenticated user in the current session.
+
+===== Syntax =====
+boolean isAuthenticated ()
+
+===== Examples =====
+<code php|Example>
+jimport( 'joomla.application.user.authenticate' );
+
+echo (JAuthenticateHelper::isAuthenticated()) ? "We're in!" : "No go.";
+</code>
+might produce:
+<code php|Result>
+No go.
+</code>
+
+----
+
+~~DISCUSSION~~

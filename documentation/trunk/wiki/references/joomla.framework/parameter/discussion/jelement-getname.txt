@@ -1,0 +1,16 @@
+====== getName ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement.html|JElement->getName]] |
+
+Gets the element name. Returns the value of the element's name property.
+
+===== Syntax =====
+string getName ()
+
+===== Examples =====
+In the base class, getName returns an empty value because there are no functions which alter the value of the name property.
+<code php|Example>
+jimport( 'joomla.presentation.parameter.element' );
+$element = new JElement( $this );
+echo $element->getName();
+</code>

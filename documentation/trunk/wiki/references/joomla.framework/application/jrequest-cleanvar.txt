@@ -1,0 +1,25 @@
+====== cleanVar ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[references:joomla.framework|Joomla.Framework]] | [[|Application]] | [[jrequest|JRequest]] | [[http://api.joomla.org/Joomla-Framework/Application/JRequest.html|JRequest->cleanVar]] |
+
+Utility method to clean a string variable using input filters. This function operates on strings. If an array is passed, the function recursively calls itself to traverse each element of the array. It will return raw variables which are not strings.
+
+===== Syntax =====
+mixed cleanVar ( &**$var**, **$mask** )
+
+
+
+| **$var** | mixed | is the variable to clean |
+| **$mask** | int | is an options mask. This parameter is optional and if omitted defaults to 0 (no masks). |
+
+The available masks are:
+  * **_J_NOTRIM** : Prevents the trimming of the variable
+  * **_J_ALLOWHTML** : Allows safe HTML in the variable
+  * **_J_ALLOWRAW** : Allows raw input
+
+===== Examples =====
+<code php|Example>
+$dirty = '<B>Testing cleaning<INPUT type="hidden" name="password" value="password" />';
+
+echo JRequest::cleanVar ( $dirty );
+</code>

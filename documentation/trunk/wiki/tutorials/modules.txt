@@ -1,0 +1,8 @@
+====== Modules ======
+A more lightweight and flexible extension used for page rendering is a module. Modules are used for small bits of the page that are generally less complex and able to be seen across different components. Sometimes modules are linked to a component such as the core latest news module. This module displays links to the newest content items from the com_content component, but since it is a module, it can be rendered even while com_content is not the active component. The site menus are modules. These modules, however are not linked to any particular component as they are more closely related to the Joomla! core application. Modules, do not necessarily have to be linked to any particular thing and can just be some static html or text that you want displayed on certain pages.
+
+===== 1. How-To's=====
+  * [[modules:hello_world|Hello World Module]] - Basic Module
+
+===== 2. Manuals=====
+  * [[modules:xml_installfile|XML-Installation file]]

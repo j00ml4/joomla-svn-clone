@@ -1,0 +1,28 @@
+====== substr_replace ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#I18N|I18N]] | [[JString|{{http://api.joomla.org/media/images/Class.png }}]][[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->substr_replace]] | never | Work in progress |
+
+Replace text within a portion of a string. See [[http://www.php.net/manual/en/function.substr_replace.php|substr_replace]] for more information.
+
+===== Syntax =====
+void substr_replace	( **$string**, **$replace**, **$start**, **$length** )
+
+| **$string** | string | is the string to be operated on. |
+| **$replace** | string | is the string to replace the substring with. |
+| **$start** | integer | is an integer specifying the beginning of the substring to replace. |
+| **$length** | integer | is an integer specifying the length of the substring to replace. |
+
+===== Examples =====
+<code php|Example>
+$string = "Και Εισηλθεν Παλιν Εις";
+$replace = "οτι";
+echo "If we replace five characters string at position three of $string with $replace we get: " . JString::substr_replace( $string, $replace, 3, 5 ) . ".";
+</code>
+might produce:
+<code php|Result>
+If we replace five characters string at position three of Και Εισηλθεν Παλιν Εις with οτι we get: Καιοτιλθεν Παλιν Εις.
+</code>
+
+----
+
+~~DISCUSSION~~

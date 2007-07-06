@@ -1,0 +1,48 @@
+====== fetchElement ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Parameter|Parameter]] | [[JElement_Category|{{http://api.joomla.org/media/images/Class.png }}]][[JElement_Category|JElement_Category]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement_Category.html|JElement_Category->fetchElement]] | never | Work in progress |
+
+Renders the HTML code for a selection list containing the categories in the specified section. The resulting selection list will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
+
+$node is an XML node that contains the settings for the parameter. The XML code for a category parameter might look like:
+<code php>
+<param name="category" type="category" default="0" section="com_newsfeeds" class="testclass" label="Category" description="Category" value="2" />
+</code>
+
+===== Syntax =====
+void fetchElement	( **$name**, **$value**, **&$node**, **$control_name** )
+
+| **$name** | string | is a string containing the value for the name attribute of the form element. |
+| **$value** | string | is a string specifying the original value of the parameter. |
+| **&$node** | JSimpleXMLElement | is a JSimpleXMLElement node object containing the settings for the element. |
+| **$control_name** | string | is a string containing the name of the control for the element. |
+
+===== Examples =====
+<code php|Example>
+$xml = & JFactory::getXMLParser('Simple');
+    
+$file 	= JPATH_ADMINISTRATOR.DS.'components'.DS.'com_document'.DS.'document_items.xml';
+ 
+$xml->loadFile( $file );
+$parameters =& $xml->document->params[0];
+$nodes =& $parameters->children();
+$parameter = new JParameter( '' );
+$element = $parameter->loadElement( 'category' );
+echo $element->fetchElement( 'cat', '5', $nodes[2], 'params' );
+</code>
+might produce (line feeds added for readability):
+<code php|Result>
+<select name="params[cat]" id="paramscat" class="testclass">
+    <option value="0" >- Select Category -</option>
+    <option value="5"  selected="selected">Business: general</option>
+    <option value="9" >Finance</option>
+    <option value="11" >Internet</option>
+    <option value="4" >Joomla!</option>
+    <option value="10" >Linux</option>
+</select>
+</code>
+See the [[JParameter-__construct|JParameter->__construct]] method for the contents of the document_items.xml file.
+
+----
+
+~~DISCUSSION~~

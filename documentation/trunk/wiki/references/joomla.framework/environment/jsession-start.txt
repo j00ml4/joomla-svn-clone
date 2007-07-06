@@ -1,0 +1,13 @@
+====== start ======
+^ API ^ Package ^ Class ^ phpDocumentor ^
+| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->start]] |
+
+Initializes session data<p>Creates a session (or resumes the current one  based on the session id being passed  via a GET variable or a cookie).  You can provide your own name and/or id for a session.</p>
+===== Syntax =====
+void start	( **$name**, **$id** )
+| **** | $name |  |
+| **** | $id |  |
+
+===== Examples =====
+
+

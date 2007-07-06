@@ -1,0 +1,29 @@
+Joomla! 1.5 provides a generic Mail-To-Friend component, called ''com_mailto''.  It's very easy to implement.
+
+In your component, you will create a small form and Javascript action:
+
+<code php>
+<script language="JavaScript" type="text/javascript">
+<!--
+function mailToFriend() {
+  if (document.mailToFriend) {
+    window.open('about:blank',
+      'MailToFriend',
+      'width=400,height=300,menubar=yes,resizable=yes');
+    document.mailToFriend.submit();
+  }
+}
+-->
+</script>
+<form action="index2.php" name="mailToFriend" method="post" target="MailToFriend" style="display:inline">
+  <input type="hidden" name="option" value="com_mailto" />
+  <input type="hidden" name="link" value="<?php echo urlencode( JRequest::getURI() );?>" />
+</form>
+
+...
+
+<a href="javascript:void mailToFriend()">
+  <?php echo JText::_( 'Mail to Friend' );?></a>
+</code>
+
+When the link is clicked, it will open a new browser window with the wherein your visitor can enter the details for mailing.  All you need to to is pass a ''link'' field to the form, it does the rest.  A minor degree of CAPTCHA support is given in the popup form.

@@ -1,0 +1,16 @@
+====== JButton_Link ======
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton_Link.html|JButton_Link]] | never | Internal review |
+
+
+Renders a link button. This is an implimentation of the abstract [[JButton|JButton]] class. It provides the ability to create a button that links to a specified URL. This button type uses a back arrow as its icon.
+
+===== Methods =====
+^ Method ^ Description ^
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton_Link-fetchButton|fetchButton]] | Returns the HTML code for the button. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton_Link-fetchId|fetchId]] | Gets the button's CSS ID. |
+
+----
+
+~~DISCUSSION~~
+

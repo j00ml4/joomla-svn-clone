@@ -1,0 +1,7 @@
+===== 5.3 Deprecated Variables ====
+
+==== 1. $act ====
+
+If your component uses this variable in the administrator section u will need to add the following to your admin.mycomponent.php and toolbar.mycomponent.php files
+
+<code php|Example Code>$act = mosGetParam( $_REQUEST, 'act', '' );</code>

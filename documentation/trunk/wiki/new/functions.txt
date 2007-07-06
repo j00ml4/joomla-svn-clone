@@ -1,0 +1,5 @@
+===== Functions =====  
+
+  * [[new:moshtml-link|mosHTML::Link]]\\
+  * [[new:moshtml-image|mosHTML::Image]]\\
+  * [[new:moshtml-script|mosHTML::Script]]\\ 

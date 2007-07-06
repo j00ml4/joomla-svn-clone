@@ -1,0 +1,59 @@
+====== emailCloaking======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->emailCloaking]] | never | Work in progress |
+
+A simple method for cloaking email addresses. Returns JavaScript that replaces the email address with a mailto link with the address cloaked.
+
+===== Syntax =====
+string emailCloaking ( string $address [, boolean $maito [, string $text [, boolean $email [, boolean $noscript ]]]] )
+| **$address ** | string | is the email address to be cloaked. |
+| **$mailto** | boolean| is a flag. If true then a clickable “mailto:” link will be produced; otherwise $address will be shown but not as a link. This parameter is optional and if omitted will default to true. |
+| **$text** | string| is the text to be displayed to the user for the address link. If empty then $address will be displayed to the user. This parameter is optional and if omitted will default to an empty string (so that the displayed text will be $address). |
+| **$email ** | boolean| is a flag. If true then it indicates that $text is itself an email address and an extra precaution against address harvesting can be taken; otherwise $text is considered to be an arbitrary string and only basic encoding will be applied. This parameter is optional and if omitted will default to true. This parameter was introduced in mambo 4.5.2.2. |
+| **$noscript ** | boolean| is a flag. If true then an HTML <noscript> tag pair will be appended to the returned string containing a message that may be shown to the user in the event that their Browser does not support scripts or currently has them disabled. The text returned is taken from the CLOAKING language variable. This parameter is optional and if omitted will default to false. This parameter was introduced in Joomla! 1.5 with prior versions always outputting a <noscript> tag pair. |
+
+===== Examples =====
+Example 1: Just using the email address with none of the optional Parameters. The user will see the email address as a clickable link.
+<code php|Example 1>
+$address = 'john.doe@w3c.org';
+echo mosHTML::emailcloaking( $address );
+</code>
+which will produce something like:
+<code php|Result 1>
+<script language='JavaScript' type='text/javascript'> 
+<!-- 
+var prefix = 'ma' + 'il' + 'to'; 
+var path = 'hr' + 'ef' + '='; 
+var addy39561 = 'john.doe' + '@' + 'w3c' + '.' + 'org'; 
+document.write( '<a ' + path + '\'' + prefix + ':' + addy39561 + '\'>' ); 
+document.write( addy39561 ); 
+document.write( '<\/a>' ); 
+//--> 
+</script> 
+<noscript> 
+This email address is being protected from spam bots, you need Javascript enabled to view it
+</noscript>
+</code>
+Example 2: In this example the user will see the link as 'John Doe':
+<code php|Example 2>
+$address = 'john.doe@w3c.org';
+$name = 'John Doe';
+echo mosHTML::emailcloaking( $address, true, $name, false );
+</code>
+which will produce something like:
+<code php|Result 2>
+<script language='JavaScript' type='text/javascript'> 
+<!-- 
+var prefix = 'ma' + 'il' + 'to'; 
+var path = 'hr' + 'ef' + '='; 
+var addy38289 = 'john.doe' + '@' + 'w3c' + '.' + 'org'; 
+var addy_text38289 = 'John Doe';
+document.write( '<a ' + path + '\'' + prefix + ':' + addy38289 + '\'>' ); 
+document.write( addy_text38289 ); 
+document.write( '<\/a>' ); 
+//--> 
+</script> 
+<noscript> 
+This email address is being protected from spam bots, you need Javascript enabled to view it
+</noscript>
+</code>

@@ -1,0 +1,30 @@
+=== Initialising variables the correct way (because of globals.php) ===
+
+<code php|Example Code>
+if ( !$sectionid && @$_POST['filter_sectionid'] ) {
+         $sectionid = $_POST['filter_sectionid'];
+}
+</code>
+
+This style of code is a source of potential injection.  You should use
+mosGetParam with a default, eg:
+
+$filter_sectionid= mosGetParam( $_POST, 'filter_sectionid', 0 );
+
+If you are expecting an integer you could use:
+
+$filter_sectionid= intval( mosGetParam( $_POST, 'filter_sectionid' ) );
+
+If it's text to be later used in a query you should also do the following:
+
+$filter_sectionid= mosGetParam( $_POST, 'filter_sectionid', '' );
+$filter_sectionid= $database->getEscaped( $filter_sectionid);
+// or
+$filter_sectionid= $database->Quote( $filter_sectionid);
+
+We should never ever see the use of @$_GET or @$_POST, etc, in the code
+
+By default, mosGetParam trims and strips html out of the input to make
+it quite safe to use in most places (except the db).
+
+[[:start|Back to the Startpage]]

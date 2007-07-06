@@ -1,0 +1,90 @@
+====== integerSelectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->integerSelectList ]] | never | Work in progress |
+
+This method builds a list of numbers from $start to $end with an increment of $inc. The optional $format argument allows you to apply a printf sytle format to the numbers.
+
+===== Syntax =====
+string integerSelectList ( int $start, int $end, int $inc, string $tag_name,                                              string $tag_attribs, mixed $selected [, string $format] )
+| **$start** | integer | is the first number on the select list. |
+| **$end** | integer | is the last number on the select list. |
+| **$inc** | integer | is the increment between successive numbers on the list. |
+| **$tag_name** | string | is the name attribute of the HTML <select> tag. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the <select> tag. |
+| **$selected** | mixed |  is either a string value for a single value select list or an array for a multiple value select list. |
+| **$format** | string |  is a printf style format string to be applied to each number in the list. |
+
+===== Examples =====
+Example:
+<code php|Example>
+$html = mosHTML::integerSelectList( -12, 12, 1, 'tzoffset', 'size="1" class="inputbox"', 0, "%02d" );
+echo $html;
+</code>
+which produces:
+<code php|result>
+<select name="tzoffset" size="1" class="inputbox">
+  <option value="-12">-12</option>
+  <option value="-11">-11</option>
+  <option value="-10">-10</option>
+
+  <option value="-9">-9</option>
+  <option value="-8">-8</option>
+  <option value="-7">-7</option>
+  <option value="-6">-6</option>
+  <option value="-5">-5</option>
+  <option value="-4">-4</option>
+
+  <option value="-3">-3</option>
+  <option value="-2">-2</option>
+  <option value="-1">-1</option>
+  <option value="00" selected="selected">00</option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+</code>
+which renders as:
+<html>
+<select name="tzoffset" size="1" class="inputbox">
+  <option value="-12">-12</option>
+  <option value="-11">-11</option>
+  <option value="-10">-10</option>
+
+  <option value="-9">-9</option>
+  <option value="-8">-8</option>
+  <option value="-7">-7</option>
+  <option value="-6">-6</option>
+  <option value="-5">-5</option>
+  <option value="-4">-4</option>
+
+  <option value="-3">-3</option>
+  <option value="-2">-2</option>
+  <option value="-1">-1</option>
+  <option value="00" selected="selected">00</option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+</html>

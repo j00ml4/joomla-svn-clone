@@ -1,0 +1,159 @@
+
+====== Developing a Model-View-Controller Component - Part 3 - Using the Database ======
+
+===== Introduction =====
+
+In the first two tutorials, we showed you how to build a simple model-view-controller component. We had one view which retrieved data from a model (which was created in the 2nd tutorial). In this tutorial, we will be working with the model. Instead of the data being hard coded in the model, the model will retrieve the data from a table in the database.
+
+This tutorial will demonstrate how to use the JDatabase class to retrieve data from the database.
+
+===== Retrieving the Data =====
+
+Our model currently has one method: getGreeting(). This method is very simple - all it does is return the hard-coded greeting.
+
+To make things more interesting, we will load the greeting from a database table. We will demonstrate later how to create an SQL file and add the appropriate code to the XML manifest file so that the table and some sample data will be created when the component is installed. For now, we will simply replace our return statement with some code that will retrieve the greeting from the database and return it.
+
+The first step is to obtain a reference to a database object. Since Joomla! uses the database for its normal operation, a database connection already exists; therefore, it is not necessary to create your own. A reference to the existing database can be obtained using:
+
+
+<code php>$db => JFactory::getDBO();</code>
+
+JFactory is a static class that is used to retrieve references to many of the system objects. More information about this class can be found in the API documentation.
+
+The method name (getDBO) stands for get DataBase Object, and is easy and important to remember.
+
+Now that we have obtained a reference to the database object, we can retrieve our data. We do this in two steps:
+  - store our query in the database object   load the result
+
+Our new getGreeting() method will therefore look like:
+
+
+<code php>function getGreeting()
+{
+   $db => JFactory::getDBO();
+
+   $query = 'SELECT greeting FROM #__hello';
+   $db->setQuery( $query );
+   $greeting = $db->loadResult();
+
+   return $greeting;
+}</code>
+
+hello is the name of the table that we will create later, and greeting is the name of the field that stores the greetings. If you are not familiar with SQL, it would be helpful to take a tutorial or a lesson to get yourself up to speed. One such tutorial can be found at[[http://www.w3schools.com/sql/default.asp|w3schools]].
+
+The $db->loadResult() method will execute the stored database query and return the first field of the first row of the result. See [[references:joomla.framework:database:jdatabase|JDatabase API reference]] for more information about other load methods in the JDatabase class.
+
+===== Creating the Installation SQL File =====
+
+The Joomla! installer has built-in support for executing queries during component installation. These queries are all stored in a standard text file.
+
+We will have three queries in our install file: the first will drop the table in case it already exists, the second will create the table with the appropriate fields, and the third will insert the data.
+
+Here are our queries:
+
+
+<code php>DROP TABLE IF EXISTS `#__hello`;
+
+CREATE TABLE `#__hello` (
+  `id` int(11) NOT NULL auto_increment,
+  `greeting` varchar(25) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT DEFAULT CHARSET=utf8;
+
+INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
+('Bonjour, Monde!'),
+('Ciao, Mondo!');</code>
+
+You might find the <nowiki>#__</nowiki> prefix on the table names rather odd. Joomla! will replace this prefix with the prefix used by the current install. For most installs, this table will become jos_hello. This allows multiple installs of Joomla! to use the same database, and prevents collisions with other applications using the same table names (i.e. two applications might share a database, but might both require a 'users' table. This convention avoids problems.)
+
+We have specified two fields in our database. The first field is id, and is called the 'primary key'. The primary key of a database table is a field that is used to uniquely identify a record. This is often used to lookup rows in the database. The other field is greeting. This is the field that stores the greeting that is returned from the query that we used above.
+
+We will save our queries in a file called install.utf.sql.
+
+==== Creating the Uninstall SQL File ====
+
+Though we might hope that people will never want to uninstall our component, it is important that if they do, we don't leave anything behind. Joomla! will look after deleting the files and directories that were created during install, but you must manually include queries that will remove and tables that have been added to the database. Since we have only created one table, we only need one query:
+
+
+<code php>DROP TABLE IF EXISTS `#__hello`;</code>
+
+We will save this query in a file calleduninstall.utf.sql.
+
+===== Updating our Install File =====
+
+We need to change a few things in our install file. First, we need to add our two new files to the list of files to install. SQL install file have to go in the admin directory. Second, we need to tell the installer to execute the queries in our files on install and uninstall.
+
+Our new file looks like this:
+
+
+<code php><?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+   <name>Hello</name>
+   <!-- The following elements are optional and free of formatting conttraints -->
+   <creationDate>2007 02 22</creationDate>
+   <author>John Doe</author>
+   <authorEmail>john.doe@example.org</authorEmail>
+   <authorUrl>http://www.example.org</authorUrl>
+   <copyright>Copyright Info</copyright>
+   <license>License Info</license>
+   <!--  The version string is recorded in the components table -->
+   <version>Component Version String</version>
+   <!-- The description is optional and defaults to the name -->
+   <description>Description of the component ...</description>
+
+   <!-- Site Main File Copy Section -->
+   <files folder="site">
+      <filename>index.html</filename>
+      <filename>hello.php</filename>
+      <filename>controller.php</filename>
+      <filename>views/index.html</filename>
+      <filename>views/hello/index.html</filename>
+      <filename>views/hello/view.html.php</filename>
+      <filename>views/hello/tmpl/index.html</filename>
+      <filename>views/hello/tmpl/default.php</filename>
+      <filename>models/hello.php</filename>
+   </files>
+   <install>
+      <sql>
+         <file charset="utf8" driver="mysql">install.sql</file>
+      </sql>
+   </install>
+   <uninstall>
+      <sql>
+         <file charset="utf8" driver="mysql">uninstall.sql</file>
+      </sql>
+   </uninstall>   
+   <administration>
+      <!-- Administration Menu Section -->
+      <menu>Hello World!</menu>
+      
+      <!-- Administration Main File Copy Section -->
+      <!-- Note the folder attribute: This attribute describes the folder
+         to copy FROM in the package to install therefore files copied
+         in this section are copied from /admin/ in the package -->
+      <files folder="admin">
+   <!-- Site Main File Copy Section -->
+         <filename>index.html</filename>
+         <filename>admin.hello.php</filename>
+         <filename>install.sql</filename>
+         <filename>uninstall.sql</filename>
+      </files>      
+   </administration>
+</install></code>
+
+You will notice two attributes present on the<file>tags within the<install>and<uninstall>sections: charset and driver. The charset is the type of charset to use. The only valid charset is utf8. If you want to create install files for non-utf8 databases (for older version of MySQL), you should omit this attribute.
+
+The driver attribute specifies which database the queries were written for. Currently, this can only be mysql, but in future versions of Joomla! there may be more database drivers available.
+
+===== Conclusion =====
+
+We now have a component that takes advantage of both the Joomla! MVC framework classes and the JDatabase classes. You are now able to write MVC components that interact with the database and can use the Joomla! installer to create and populate database tables.
+
+===== Contributors =====
+
+  * staalanden
+
+===== Download =====
+
+The component can be downloaded at:[[packages/com_hello3.zip|com_hello3.zip]]

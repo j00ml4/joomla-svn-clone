@@ -1,0 +1,88 @@
+====== selectList ======
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->selectList]] | never | Work in progress |
+
+Builds an HTML <select> form field with <options> built from an array of values.  Both single Item selects and multiple item selects are supported.
+
+===== Syntax =====
+string selectList ( array &$options, string $tag_name, string $tag_attribs, string $key, string $text [, mixed $selected ] )
+
+| **$options** | object | is an array of objects that have been returned by a query or the mosHTML::makeOption function. |
+| **$tag_name** | object | is the name attribute of the HTML <select> tag. |
+| **$tag_attribs** | string | is a string containing any additional attributes that you want to assign to the HTML <select> tag. |
+| **$key** | string | is the name of the class variable holding the option 'value'.  Should generally be 'value'. |
+| **$text** | string | is the name of the class variable holding the option 'text'.  Should generally be 'text'. |
+| **$selected** | mixed| is either a string value for a single value select list or an array for a multiple value select list.  This parameter is optional and if omitted defaults to null.|
+
+===== Examples =====
+Example 1: a single value select list:
+<code php|Example 1>
+// The option tag with the value of zero is selected.
+$colours = array();
+$colours[] = mosHTML::makeOption( '0', 'Red');
+$colours[] = mosHTML::makeOption( '1', 'Green');
+$colours[] = mosHTML::makeOption( '2', 'Blue');
+$html = mosHTML::selectList( $colours, 'colour', 'size="1" class="inputbox"', 'value', 'text', 0 );
+echo $html;
+</code>
+which produces:
+<code html|Result 1>
+<select name="colour" size="1" class="inputbox">
+  <option value="0" selected="selected">Red</option>
+  <option value="1">Green</option>
+  <option value="2">Blue</option>
+</select>
+</code>
+which renders as:
+<html>
+<select name="colour" size="1" class="inputbox">
+  <option value="0" selected="selected">Red</option>
+  <option value="1">Green</option>
+  <option value="2">Blue</option>
+</select>
+</html>
+
+Example 2: a multiple value select list:
+<code php|Example 2>
+// alias the 'value' and 'text' fields and the array will
+// be in the correct format.
+$users = array();
+$users[] = mosHTML::makeOption( '0', 'No user' );
+$Database->setQuery( "SELECT id AS value, username AS text FROM #__users" );
+$users = array_merge( $users, $database->loadObjectList() );
+ 
+// Get selected users from a ficticious table.
+// We only need the 'value' to lookup the selected options.
+$database->setQuery( "SELECT id AS value FROM #__users_selected" );
+$selected = $database->loadObjectList();
+ 
+// Creates the HTML.
+// Note that 'multiple="true"' is required to make the HTML work properly.
+$html = mosHTML::selectList( $users, 'user_ids',
+       'size="10" class="inputbox" multiple="true"', 'value', 'text', $selected );
+echo $html;
+</code>
+
+which might produce:
+<code html|Result 2>
+<select name="user_ids" size="10" class="inputbox" multiple="true">
+  <option value="0">No user</option>
+  <option value="1">Bill Williams</option>
+  <option value="2" selected="selected">Fred Bloggs</option>
+
+  <option value="3">Amanda Fredericks</option>
+  <option value="4" selected="selected">Natalie Sargos</option>
+</select>
+</code>
+which renders as:
+
+<html>
+<select name="user_ids" size="10" class="inputbox" multiple="true">
+  <option value="0">No user</option>
+  <option value="1">Bill Williams</option>
+  <option value="2" selected="selected">Fred Bloggs</option>
+
+  <option value="3">Amanda Fredericks</option>
+  <option value="4" selected="selected">Natalie Sargos</option>
+</select>
+</html>

@@ -1,0 +1,14 @@
+====== Joomla Application Specification ======
+From version 1.1 onwards, Joomla! uses a special system to differentiate between frontend, backend and installation. The basis for this system is the class JApplication, which has three sub-classes, JSite, JAdministration and JInstallation. These sub-classes provide an environment specific to the current working area.
+
+=====1. JSite=====
+JSite provides the functions commonly available in the frontend.
+
+=====2. JAdministrator=====
+JAdministrator provides the functions commonly available in the backend.
+
+=====3. JInstallation=====
+JInstallation is used in the installation of Joomla.
+
+=====4. Paths=====
+The different applications provide you with different path-variables to access files inside the site. We have four constant variables, JPATH_ROOT, JPATH_SITE, JPATH_ADMINISTRATOR and JPATH_INSTALLATION, which hold the path to the different root-folders. To make functions interchangeable between JSite and JAdministrator, etc. we have another variable that holds the root path to the currently loaded application, JPATH_BASE. So in case you have a function in both front- and backend, that loads a file with functions depending on the loaded application, you just use the JPATH_BASE.
