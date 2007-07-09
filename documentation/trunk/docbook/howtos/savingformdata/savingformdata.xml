@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <article id="howto.savingformdata">
   <articleinfo>
     <firstname>Andrew</firstname>
@@ -17,15 +17,14 @@
     a form into a table in the database. One method of doing so that is both
     save and easy is to process this data as follows:</para>
 
-    <programlisting><![CDATA[$post           = JRequest::get( ‘post’ );
+    <programlisting>$post = JRequest::get( ‘post’ );
 
 // fix up special html fields
-$post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’,
-’string’, _J_ALLOWRAW );
+$post[‘description’] = JRequest::getVar( ‘description’, ‘’, ‘post’, ’string’, _J_ALLOWRAW );
 
-$row = JTable::getInstance(‘category’, $db );
-if (!$row->bind( $post )) {
-...]]></programlisting>
+$row =&amp; JTable::getInstance( ‘category’, $db );
+if (!$row-&gt;bind( $post )) {
+...</programlisting>
 
     <para>JRequest::get( ‘post’ ); 'get's an input filtered and slash
     corrected (slashes stripped where magic quotes are enabled) copy of the

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="mvctutorial1" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
@@ -57,8 +57,8 @@
       application's data. It will often provide routines to manage and
       manipulate this data in a meaningful way in addition to routines that
       retrieve the data from the model. In our case, the model will contain
-      methods to add, remove and update information about the books in the
-      database. It will also contain methods to retrieve the list of books
+      methods to add, remove and update information about the greetings in the
+      database. It will also contain methods to retrieve the list of greetings
       from the database. In general, the underlying data access technique
       should be encapsulated in the model. In this way, if an application is
       to be moved from a system that utilizes a flat file to store its
@@ -133,7 +133,9 @@
       based on the value of 'option' in the URL or in the POST data. For our
       component, the URL would be:</para>
 
-      <para><code>index.php?option=com_hello>view=hello</code></para>
+      <para>
+        <code>index.php?option=com_hello&amp;view=hello</code>
+      </para>
 
       <para>This will load our main file, which can be seen as the single
       point of entry for our component:
@@ -162,7 +164,7 @@
 
       <para><classname>JRequest</classname>:getVar() finds a variable in the
       URL or the POST data. So if our URL is
-      index.php?option=com_hello>controller=controller_name, then we can
+      index.php?option=com_hello&gt;controller=controller_name, then we can
       retrieve our controller name in our component using: echo
       <classname>JRequest</classname>::getVar('controller');</para>
 
@@ -176,7 +178,7 @@
 
       <para>After the controller is created, we instruct the controller to
       execute the task, as defined in the URL:
-      index.php?option=com_hello>task=sometask. If no task is set, the
+      index.php?option=com_hello&amp;task=sometask. If no task is set, the
       default task 'display' will be assumed. When display is used, the 'view'
       variable will decide what will be displayed. Other common tasks are
       save, edit, new...</para>
@@ -245,15 +247,15 @@
       <para>Joomla! templates/layouts are regular PHP files that are used to
       layout the data from the view in a particular manner. The variables
       assigned by the JView::assignRef method can be accessed from the
-      template using $this->propertyname (see the template code below for
+      template using $this-&gt;{propertyname} (see the template code below for
       an example).</para>
 
       <para>Our template is very simple: we only want to display the greeting
       that was passed in from the view:</para>
 
-      <programlisting><![CDATA[<?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<h1><?php echo $this->greeting; ?></h1>]]></programlisting>
+      <programlisting>&lt;?php // no direct access
+defined('_JEXEC') or die('Restricted access'); ?&gt;
+&lt;h1&gt;&lt;?php echo $this-&gt;greeting; ?&gt;&lt;/h1&gt;</programlisting>
     </sect2>
 
     <sect2 id="mvctutorial1.creatingcomponent.wrappingitup">
@@ -290,7 +292,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
       directory contents. This is often undesirable. These files have the
       simple line:</para>
 
-      <programlisting><![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]></programlisting>
+      <programlisting>&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
 
       <para>It will simply display a blank page.</para>
 
@@ -315,6 +317,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
   <sect1 id="mvctutorial1.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink url="packages/com_hello1.zip">com_hello1.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello1.zip">com_hello1.zip</ulink></para>
   </sect1>
 </chapter>

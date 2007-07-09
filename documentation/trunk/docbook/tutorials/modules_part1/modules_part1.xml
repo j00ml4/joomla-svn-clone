@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="helloworldmodule" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
@@ -28,35 +28,54 @@
     <title>File Structure</title>
 
     <para>There are four basic files that are used in the standard pattern of
-    module development: - mod_helloworld.php - This file is the main entry
-    point for the module. It will perform any necessary initialization
-    routines, call helper routines to collect any necessary data, and include
-    the template which will display the module output. - mod_helloworld.xml -
-    This file contains information about the module. It defines the files that
-    need to be installed by the Joomla! installer and specifies configuration
-    parameters for the module. - helper.php - This file contains the helper
-    class which is used to do the actual work in retrieving the information to
-    be displayed in the module (usually from the database or some other
-    source). - tmpl/default.php - This is the module template. This file will
-    take the data collected by mod_helloworld.php and generate the HTML to be
-    displayed on the page.</para>
+    module development:<orderedlist>
+        <listitem>
+          <para>mod_helloworld.php - This file is the main entry point for the
+          module. It will perform any necessary initialization routines, call
+          helper routines to collect any necessary data, and include the
+          template which will display the module output.</para>
+        </listitem>
+
+        <listitem>
+          <para>mod_helloworld.xml - This file contains information about the
+          module. It defines the files that need to be installed by the
+          Joomla! installer and specifies configuration parameters for the
+          module.</para>
+        </listitem>
+
+        <listitem>
+          <para>helper.php - This file contains the helper class which is used
+          to do the actual work in retrieving the information to be displayed
+          in the module (usually from the database or some other
+          source).</para>
+        </listitem>
+
+        <listitem>
+          <para>tmpl/default.php - This is the module template. This file will
+          take the data collected by mod_helloworld.php and generate the HTML
+          to be displayed on the page.</para>
+        </listitem>
+      </orderedlist></para>
   </sect1>
 
   <sect1 id="helloworldmodule.mod_helloworld">
     <title>Creating mod_helloworld.php</title>
 
-    <para>The mod_helloworld.php file will perform four tasks:
-    <itemizedlist mark='bullet'>
-    <listitem>include the helper.php file which contains the class to be used to collect the necessary data</listitem>
-    <listitem>invoke the appropriate helper class method to retrieve the data</listitem>
-    <listitem>include the template to display the output.</listitem>
-    </itemizedlist>
-    </para>
+    <para>The mod_helloworld.php file will perform three tasks: <itemizedlist
+        mark="bullet">
+        <listitem>include the helper.php file which contains the class to be
+        used to collect the necessary data</listitem>
+
+        <listitem>invoke the appropriate helper class method to retrieve the
+        data</listitem>
+
+        <listitem>include the template to display the output.</listitem>
+      </itemizedlist></para>
 
     <para>The helper class is defined in our helper.php file. This file is
     included with a require_once statement:</para>
 
-    <programlisting><![CDATA[require_once( dirname(__FILE__).DS.'helper.php' );]]></programlisting>
+    <programlisting>require_once( dirname(__FILE__).DS.'helper.php' );</programlisting>
 
     <para>require_once is used because our helper functions are defined within
     a class, and we only want the class defined once.</para>
@@ -73,7 +92,7 @@
 
     <para>The helper class method is invoked in the following way:</para>
 
-    <programlisting><![CDATA[$hello = modHelloWorldHelper::getHello( $params );]]></programlisting>
+    <programlisting>$hello = modHelloWorldHelper::getHello( $params );</programlisting>
 
     <sect2 id="helloworldmodule.mod_helloworld.completedmodhelloworld">
       <title>Completed mod_helloworld.php file</title>
@@ -85,7 +104,7 @@
       <para>The one line that we haven’t explained so far is the first line.
       This line checks to make sure that this file is being included from the
       Joomla! application. This is necessary to prevent variable injection and
-      other possible security concerns.</para>
+      other potential security concerns.</para>
     </sect2>
   </sect1>
 
@@ -117,9 +136,9 @@
 
     <para>The code for the default.php file is as follows:</para>
 
-    <programlisting><![CDATA[<?php // no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
-<?php echo $hello; ?>]]></programlisting>
+    <programlisting>&lt;?php // no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' ); ?&gt;
+&lt;?php echo $hello; ?&gt;</programlisting>
 
     <para>An important point to note is that the template file has the same
     scope as the mod_helloworld.php file. What this means is that the variable
@@ -145,7 +164,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
     their browser to these folders, the index.html file will be displayed.
     These files can be left empty or can contain the simple line:</para>
 
-    <programlisting><![CDATA[<html><body bgcolor="#FFFFFF"></body></html>]]></programlisting>
+    <programlisting>&lt;html&gt;&lt;body bgcolor="#FFFFFF"&gt;&lt;/body&gt;&lt;/html&gt;</programlisting>
 
     <para>which will display an empty page.</para>
 

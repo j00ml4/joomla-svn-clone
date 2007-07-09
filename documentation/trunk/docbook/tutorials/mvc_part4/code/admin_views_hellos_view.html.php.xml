@@ -27,15 +27,15 @@ class HellosViewHellos extends JView
      **/
     function display($tpl = null)
     {
-        JToolBarHelper::title(   JText::_( 'Hello Manager' ), 'generic.png' );
+        JToolBarHelper::title( JText::_( 'Hello Manager' ), 'generic.png' );
         JToolBarHelper::deleteList();
         JToolBarHelper::editListX();
         JToolBarHelper::addNewX();
 
         // Get data from the model
-        $items        = > $this->get( 'Data');
+        $items =& $this->get( 'Data');
 
-        $this->assignRef('items',        $items);
+        $this->assignRef( 'items', $items );
 
         parent::display($tpl);
     }

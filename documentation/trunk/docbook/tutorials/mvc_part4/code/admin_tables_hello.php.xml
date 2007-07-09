@@ -36,7 +36,7 @@ class TableHello extends JTable
      *
      * @param object Database connector object
      */
-    function TableHello(> $db) {
+    function TableHello( &$db ) {
         parent::__construct('#__hello', 'id', $db);
     }
 }

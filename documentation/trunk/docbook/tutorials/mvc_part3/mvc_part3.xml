@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="mvctutorial3" xmlns:xi="http://www.w3.org/2003/XInclude">
   <chapterinfo>
     <author>
@@ -45,7 +45,7 @@
     already exists; therefore, it is not necessary to create your own. A
     reference to the existing database can be obtained using:</para>
 
-    <programlisting><![CDATA[$db => JFactory::getDBO();]]></programlisting>
+    <programlisting>$db =&amp; JFactory::getDBO();</programlisting>
 
     <para>JFactory is a static class that is used to retrieve references to
     many of the system objects. More information about this class can be found
@@ -58,34 +58,38 @@
     retrieve our data. We do this in two steps:<orderedlist>
         <listitem>
           <para>store our query in the database object</para>
+        </listitem>
 
+        <listitem>
           <para>load the result</para>
         </listitem>
       </orderedlist></para>
 
     <para>Our new getGreeting() method will therefore look like:</para>
 
-    <programlisting><![CDATA[function getGreeting()
+    <programlisting>function getGreeting()
 {
-   $db => JFactory::getDBO();
+   $db =&amp; JFactory::getDBO();
 
    $query = 'SELECT greeting FROM #__hello';
-   $db->setQuery( $query );
-   $greeting = $db->loadResult();
+   $db-&gt;setQuery( $query );
+   $greeting = $db-&gt;loadResult();
 
    return $greeting;
-}]]></programlisting>
+}</programlisting>
 
     <para>hello is the name of the table that we will create later, and
     greeting is the name of the field that stores the greetings. If you are
     not familiar with SQL, it would be helpful to take a tutorial or a lesson
-    to get yourself up to speed. One such tutorial can be found at <ulink url="http://www.w3schools.com/sql/default.asp">w3schools</ulink>.</para>
+    to get yourself up to speed. One such tutorial can be found at <ulink
+    url="http://www.w3schools.com/sql/default.asp">w3schools</ulink>.</para>
 
-    <para>The $db->loadResult() method will execute the stored database
+    <para>The $db-&gt;loadResult() method will execute the stored database
     query and return the first field of the first row of the result. See
-    [[references:joomla.framework:database:jdatabase|JDatabase API reference]]
-    for more information about other load methods in the JDatabase
-    class.</para>
+    <ulink
+    url="http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,references:joomla.framework:database:jdatabase/">JDatabase
+    API reference</ulink> for more information about other load methods in the
+    JDatabase class.</para>
   </sect1>
 
   <sect1 id="mvctutorial3.creatingsqlfile">
@@ -130,7 +134,7 @@
       will remove and tables that have been added to the database. Since we
       have only created one table, we only need one query:</para>
 
-      <programlisting><![CDATA[DROP TABLE IF EXISTS `#__hello`;]]></programlisting>
+      <programlisting>DROP TABLE IF EXISTS `#__hello`;</programlisting>
 
       <para>We will save this query in a file called
       <filename>uninstall.utf.sql</filename>.</para>
@@ -180,6 +184,7 @@
   <sect1 id="mvctutorial3.download">
     <title>Download</title>
 
-    <para>The component can be downloaded at: <ulink url="packages/com_hello3.zip">com_hello3.zip</ulink></para>
+    <para>The component can be downloaded at: <ulink
+    url="packages/com_hello3.zip">com_hello3.zip</ulink></para>
   </sect1>
 </chapter>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<article id="howto.loadextensionlibraryfiles" xmlns:xi="http://www.w3.org/2003/XInclude">
+<article id="howto.loadextensionlibraryfiles"
+         xmlns:xi="http://www.w3.org/2003/XInclude">
   <articleinfo>
     <author>
-      <firstname>Toby </firstname>
+      <firstname>Toby</firstname>
 
       <surname>Patterson</surname>
     </author>
@@ -12,9 +13,9 @@
 
   <title>HOWTO: Loading Extension Library Files</title>
 
-  <para>One common extension task is to load library files. If your
-  extension employs many class files then you may wish to put all of these
-  files in a single libraries directory (as shown below).</para>
+  <para>One common extension task is to load library files. If your extension
+  employs many class files then you may wish to put all of these files in a
+  single libraries directory (as shown below).</para>
 
   <figure id="howto.loadextensionlibraryfiles.lqmlibrarystructure">
     <title>Directory Structure of Libraries Folder</title>
@@ -39,7 +40,7 @@
 
   <para>Once the include file has been loaded, you can do this.</para>
 
-  <programlisting><![CDATA[lqmLibraryImport('variable.input.input');]]></programlisting>
+  <programlisting>lqmLibraryImport( 'variable.input.input' );</programlisting>
 
   <para>Because my function appends 'lqm.' to the path, I'm actually cheating
   a bit. The function jimport() would require you provide the library's path
