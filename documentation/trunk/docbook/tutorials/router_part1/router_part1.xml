@@ -21,22 +21,19 @@
 
     <para>A good example of this is the "Welcome to Joomla" article. The first
     link shown was generated without mod_rewrite, and the second link was
-    generated with mod_rewrite:
-<<<<<<< .mine
-    <code>http://www.example.com/index.php/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code><code>http://www.example.com/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code></para>
-=======
-    <code>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</code>
-    <code>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla</code>
-    </para>
->>>>>>> .r7763
+    generated with mod_rewrite: <simplelist>
+        <member>http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla</member>
+
+        <member>http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla</member>
+      </simplelist></para>
   </sect1>
 
   <sect1 id="router_part1.alias">
     <title>The Alias</title>
 
     <para>The first step is the generation of the so called alias. The alias
-    is used in the URL instead of the title (title = the text you want to have
-    in the url). The alias has to be URI safe, which means accented UTF­8
+    is used in the URL instead of the title (the title is the text you want to
+    have in the url). The alias has to be URI safe, which means accented UTF­8
     characters are replaced by their ASCII­7 equivalents, whitespaces by
     hyphens, etc.</para>
 
@@ -46,10 +43,10 @@
     this example code:</para>
 
     <xi:include href="code/function.check.xml">
-<xi:fallback>
-	<programlisting>Example code not available</programlisting>
-</xi:fallback>
-</xi:include>
+      <xi:fallback>
+        <programlisting>Example code not available</programlisting>
+      </xi:fallback>
+    </xi:include>
 
     <para>If the alias field is empty or has a different type than the URL
     safe title then this one will be used as the alias.</para>
@@ -76,7 +73,7 @@
     <para>The JRoute::_() method translates the internal Joomla URL to a
     custom URL. JRoute has three parameters and its prototype is:</para>
 
-    <programlisting>JRoute::_( $url, $xhtml = true, $ssl=0);</programlisting>
+    <programlisting>JRoute::_( $url, $xhtml = true, $ssl=0 );</programlisting>
 
     <para>$url is a string containing the absolute or relative internal
     Joomla! URL.</para>
@@ -106,7 +103,7 @@
 
     <para>It is important that you think about the sequence of the URL
     parameter in this stage. This will be more clear when we have a deeper
-    look at the router.php in the next chapter.</para>
+    look at the router.php in the next section.</para>
 
     <para>The buidling process of JRouter is divided into two steps:</para>
 
@@ -146,26 +143,26 @@
       router for your component.</para>
 
       <xi:include href="code/example1.function.buildroute.xml">
-<xi:fallback>
-	<programlisting>Example code not available</programlisting>
-</xi:fallback>
-</xi:include>
+        <xi:fallback>
+          <programlisting>Example code not available</programlisting>
+        </xi:fallback>
+      </xi:include>
 
       <para>JRouter passes a $query array to the [Componentname]BuildRoute
       function. This function will add the relevant parts of the array to the
-      $segments array in the right order will return the properly ordered
+      $segments array in the right order and will return the properly ordered
       array. The content of the $query array needs to be unset, otherwise
       JRouter will add it to the URL in the form of a query string (i.e. any
       variables that are not handled by the router will be passed in the query
-      string)</para>
+      string).</para>
 
       <para>The next function in the router.php parses the URL:</para>
 
       <xi:include href="code/example1.function.parseroute.xml">
-<xi:fallback>
-	<programlisting>Example code not available</programlisting>
-</xi:fallback>
-</xi:include>
+        <xi:fallback>
+          <programlisting>Example code not available</programlisting>
+        </xi:fallback>
+      </xi:include>
 
       <para>What happens here? In the function [Componentname]BuildRoute we
       arranged the items in the $query array in a specific sequence. This
@@ -175,7 +172,7 @@
       <para>By reading $segments[0], we access the name of the view. We set
       the right view and/or identifier depending on its value and we return
       the $vars array to JRouter. $vars should be an associative array similar
-      to the array that was bassed to the BuildRoute method.</para>
+      to the array that was passed to the BuildRoute method.</para>
 
       <para>The above example of the router.php is a very simple way to
       generate sef URL's but should show how this works quite clearly.</para>
@@ -209,19 +206,19 @@
 
       <para>The link to the article would look like this:</para>
 
-      <programlisting>JRoute::_('index.php?view=article&amp;catid='.$row­&gt;catslug .'&amp;id='.$row­&gt;slug);</programlisting>
+      <programlisting>JRoute::_( 'index.php?view=article&amp;catid='.$row­&gt;catslug .'&amp;id='.$row­&gt;slug );</programlisting>
 
       <para>And the Link to the category would look like this:</para>
 
-      <programlisting>JRoute::_('index.php?view=category&amp;id='.$row­&gt;catslug);</programlisting>
+      <programlisting>JRoute::_( 'index.php?view=category&amp;id='.$row­&gt;catslug );</programlisting>
 
       <para>The corresponding router.php:</para>
 
       <xi:include href="code/example2.function.buildroute.xml">
-<xi:fallback>
-	<programlisting>Example code not available</programlisting>
-</xi:fallback>
-</xi:include>
+        <xi:fallback>
+          <programlisting>Example code not available</programlisting>
+        </xi:fallback>
+      </xi:include>
 
       <para>The difference now is that we don't add the name of the view to
       the $segments array. We still unset the view key since otherwise,
@@ -230,10 +227,10 @@
       $segments array.</para>
 
       <xi:include href="code/example2.function.parseroute.xml">
-<xi:fallback>
-	<programlisting>Example code not available</programlisting>
-</xi:fallback>
-</xi:include>
+        <xi:fallback>
+          <programlisting>Example code not available</programlisting>
+        </xi:fallback>
+      </xi:include>
 
       <para>You can see that this ParseRoute function has a lot of different
       code parts in comparison to the previous. The reason for this is simple.
@@ -241,7 +238,7 @@
       find another way to determine it.</para>
 
       <para>We need to find out which level of hierarchy we are in by
-      recieving the root element. We do this by looking to the view name of
+      receiving the root element. We do this by looking to the view name of
       the active menuitem:</para>
 
       <programlisting>$item­&gt;query['view']</programlisting>
@@ -249,22 +246,28 @@
       <para>Also we need to know the number of items in the $segments
       array:</para>
 
-      <programlisting>$count = count($segments);</programlisting>
+      <programlisting>$count = count( $segments );</programlisting>
 
       <para>With this information we can correctly set the view for all
-      possible three cases:<simplelist>
-          <member>The menu item is a link to the categories view and the
-          $segments array has two items ($catid and $id). In this case we know
-          that we need to parse a link to an article .</member>
+      possible three cases:<orderedlist>
+          <listitem>
+            <para>The menu item is a link to the categories view and the
+            $segments array has two items ($catid and $id). In this case we
+            know that we need to parse a link to an article .</para>
+          </listitem>
 
-          <member>The menu item is a link to the categories view and the
-          $segments array has one item ($id). In this case we know that we
-          need to parse a link to a category.</member>
+          <listitem>
+            <para>The menu item is a link to the categories view and the
+            $segments array has one item ($id). In this case we know that we
+            need to parse a link to a category.</para>
+          </listitem>
 
-          <member>The menu item is a link to a category. In this case, we know
-          that any item in the $segments array is the identifier for an
-          article .</member>
-        </simplelist></para>
+          <listitem>
+            <para>The menu item is a link to a category. In this case, we know
+            that any item in the $segments array is the identifier for an
+            article .</para>
+          </listitem>
+        </orderedlist></para>
 
       <para>The result of all this brainwork is nice and human readable
       component URL's.</para>

@@ -1,8 +1,8 @@
 <programlisting><![CDATA[function check()
 {
-       jimport('joomla.filter.output');
-       $alias = JOutputFilter::stringURLSafe($this­>title);
-       if(empty($this­>alias) || $this­>alias === $alias ) {
+       jimport( 'joomla.filter.output' );
+       $alias = JOutputFilter::stringURLSafe( $this­>title );
+       if(empty( $this­>alias ) || $this­>alias === $alias ) {
                $this­>alias = $alias;
        }
        /* All your other checks */
