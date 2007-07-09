@@ -16,6 +16,7 @@ This page documents the changes in parameters between Joomla! 1.0 and 1.5 releas
 
 
 
+
 ==== Menu ====
 Note: This list may not be completely comprehensive.
 
@@ -69,7 +70,6 @@ New:
   * secure
   * show_icons
   * show_noauth
-  * show_title
   * show_intro
 
 Removed:
