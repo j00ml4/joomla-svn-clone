@@ -1,16 +1,16 @@
 <programlisting><![CDATA[function [Componentname]BuildRoute(&$query)
 {
        $segments = array();
-       if(isset($query['catid']))
+       if(isset( $query['catid'] ))
        {
                 $segments[] = $query['catid'];
-                unset($query['catid']);
+                unset( $query['catid'] );
        };
-       if(isset($query['id']))
+       if( isset($query['id']) )
        {
                 $segments[] = $query['id'];
-                unset($query['id']);
+                unset( $query['id'] );
        };
-       unset($query['view']);
+       unset( $query['view'] );
        return $segments;
 }]]></programlisting>
