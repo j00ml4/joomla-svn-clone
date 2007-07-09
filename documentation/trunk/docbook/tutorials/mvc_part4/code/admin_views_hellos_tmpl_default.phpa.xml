@@ -34,10 +34,10 @@ defined('_JEXEC') or die('Restricted access');
 
     for ($i=0, $n=count( $this->items ); $i < $n; $i++)
     {
-        $row => $this->items[$i];
+        $row =& $this->items[$i];
         $checked = JHTML::_('grid.id', $i, $row->id );     //get checkbox HTML
         // get link HTML to edit task for this greeting
-        $link = JRoute::_( 'index.php?option=com_hello>controller=hello>task=edit>cid[]='. $row->id );
+        $link = JRoute::_( 'index.php?option=com_hello&controller=hello&task=edit&cid[]='. $row->id );
     ?>
         <tr class="<?php echo "row$k"; ?>">
             <td>

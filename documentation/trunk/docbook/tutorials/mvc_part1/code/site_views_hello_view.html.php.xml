@@ -23,7 +23,7 @@ class HelloViewHello extends JView
     function display($tpl = null)
     {
         $greeting = "Hello World!";
-        $this->assignRef( 'greeting',	$greeting );
+        $this->assignRef( 'greeting', $greeting );
 
         parent::display($tpl);
     }

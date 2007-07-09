@@ -1,172 +1,149 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="databasetutorial">
-	<chapterinfo>
-		<author>
-			<surname>Louis Landry</surname>
-		</author>
+  <chapterinfo>
+    <author>
+      <surname>Louis Landry</surname>
+    </author>
 
-		<date>May 19, 2007</date>
-	</chapterinfo>
+    <date>May 19, 2007</date>
+  </chapterinfo>
 
-	<title>Using the 1.5 Database Libraries</title>
+  <title>Using the 1.5 Database Libraries</title>
 
-	<sect1 id="databasetutorial.getobject">
-		<title>Getting a database object</title>
+  <sect1 id="databasetutorial.getobject">
+    <title>Getting a database object</title>
 
-		<para>
-			This tutorial should provide you with the basics of what you
-			need to know to use the Joomla! database libraries.
-		</para>
+    <para>This tutorial should provide you with the basics of what you need to
+    know to use the Joomla! database libraries.</para>
 
-		<sect2 id="databasetutorial.getobject.system">
-			<title>Get the system database object</title>
+    <sect2 id="databasetutorial.getobject.system">
+      <title>Get the system database object</title>
 
-			<para>
-				The easiest way to get a database object is by getting
-				the system database object returned by the JFactory
-				class. The static method JFactory::getDBO() returns a
-				singleton instance of the system database object
-				regardless of scope and is the recommended way of
-				getting this object.
-			</para>
+      <para>The easiest way to get a database object is by getting the system
+      database object returned by the JFactory class. The static method
+      JFactory::getDBO() returns a singleton instance of the system database
+      object regardless of scope and is the recommended way of getting this
+      object.</para>
 
-			<programlisting><![CDATA[// This gets the database object using the JFactory	class
-$db = &JFactory::getDBO();]]></programlisting>
-		</sect2>
+      <programlisting>// This gets the database object using the JFactory class
+$db = &amp;JFactory::getDBO();</programlisting>
+    </sect2>
 
-		<sect2 id="databasetutorial.getobject.custom">
-			<title>Creating a custom database object</title>
+    <sect2 id="databasetutorial.getobject.custom">
+      <title>Creating a custom database object</title>
 
-			<para>
-				Joomla! 1.5 introduces the concept of database drivers
-				which will allow you to get database objects that point
-				to different database sources.
-			</para>
+      <para>Joomla! 1.5 introduces the concept of database drivers which will
+      allow you to get database objects that point to different database
+      sources.</para>
 
-			<programlisting><![CDATA[// Create a new database object
-$myDB = new JDatabase::getInstance( $options );]]></programlisting>
-		</sect2>
-	</sect1>
+      <programlisting>// Create a new database object
+$myDB = new JDatabase::getInstance( $options );</programlisting>
+    </sect2>
+  </sect1>
 
-	<sect1 id="databasetutorial.usage">
-		<title>Using the database object</title>
+  <sect1 id="databasetutorial.usage">
+    <title>Using the database object</title>
 
-		<para>
-			For the purposes of this tutorial we will use a very simple
-			database table that stores information about dogs. The
-			database table has a dog_id field with a unique integer id
-			field, a name field and a color field for each dog. To keep
-			things simple we have only added three dogs to our database
-			table:
-		</para>
+    <para>For the purposes of this tutorial we will use a very simple database
+    table that stores information about dogs. The database table has a dog_id
+    field with a unique integer id field, a name field and a color field for
+    each dog. To keep things simple we have only added three dogs to our
+    database table:</para>
 
-		<orderedlist>
-			<listitem>
-				<para>Dog 1 is named Spot and is white.</para>
-			</listitem>
+    <orderedlist>
+      <listitem>
+        <para>Dog 1 is named Spot and is white.</para>
+      </listitem>
 
-			<listitem>
-				<para>Dog 2 is named Fido and is brown.</para>
-			</listitem>
+      <listitem>
+        <para>Dog 2 is named Fido and is brown.</para>
+      </listitem>
 
-			<listitem>
-				<para>Dog 3 is named Buster and is also brown.</para>
-			</listitem>
-		</orderedlist>
+      <listitem>
+        <para>Dog 3 is named Buster and is also brown.</para>
+      </listitem>
+    </orderedlist>
 
-		<para>
-			The following table represents our database table which we
-			will simply call, dogs.
-		</para>
+    <para>The following table represents our database table which we will
+    simply call, dogs.</para>
 
-		<informaltable>
-			<tgroup cols="3">
-				<thead>
-					<row>
-						<entry align="center">dog_id</entry>
+    <informaltable>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry align="center">dog_id</entry>
 
-						<entry align="center">name</entry>
+            <entry align="center">name</entry>
 
-						<entry align="center">color</entry>
-					</row>
-				</thead>
+            <entry align="center">color</entry>
+          </row>
+        </thead>
 
-				<tbody>
-					<row>
-						<entry>1</entry>
+        <tbody>
+          <row>
+            <entry>1</entry>
 
-						<entry>Spot</entry>
+            <entry>Spot</entry>
 
-						<entry>white</entry>
-					</row>
+            <entry>white</entry>
+          </row>
 
-					<row>
-						<entry>2</entry>
+          <row>
+            <entry>2</entry>
 
-						<entry>Fido</entry>
+            <entry>Fido</entry>
 
-						<entry>brown</entry>
-					</row>
+            <entry>brown</entry>
+          </row>
 
-					<row>
-						<entry>3</entry>
+          <row>
+            <entry>3</entry>
 
-						<entry>Buster</entry>
+            <entry>Buster</entry>
 
-						<entry>brown</entry>
-					</row>
-				</tbody>
-			</tgroup>
-		</informaltable>
+            <entry>brown</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
 
-		<sect2 id="databasetutorial.usage.singlefield">
-			<title>Select one field from one row</title>
+    <sect2 id="databasetutorial.usage.singlefield">
+      <title>Select one field from one row</title>
 
-			<para>
-				Lets say for example that I want to find out the name of
-				the second dog in my database table. This is a fairly
-				straightfoward task, I simply need to get the name value
-				in the name field where the dog_id is 2 so lets build an
-				SQL query to do that.
-			</para>
+      <para>Lets say for example that I want to find out the name of the
+      second dog in my database table. This is a fairly straightfoward task, I
+      simply need to get the name value in the name field where the dog_id is
+      2 so lets build an SQL query to do that.</para>
 
-			<programlisting><![CDATA[SELECT name FROM dogs WHERE dog_id = 2]]></programlisting>
+      <programlisting>SELECT name FROM dogs WHERE dog_id = 2</programlisting>
 
-			<para>
-				Easy enough, now we need to actually get the value using
-				our database object.
-			</para>
+      <para>Easy enough, now we need to actually get the value using our
+      database object.</para>
 
-			<orderedlist>
-				<listitem>
-					<para>
-						First we need to get ourselves a database object
-						that is connected to the database our dogs table
-						is in.
-					</para>
+      <orderedlist>
+        <listitem>
+          <para>First we need to get ourselves a database object that is
+          connected to the database our dogs table is in.</para>
 
-					<programlisting><![CDATA[// Get the system database object.
-$db = &JFactory::getDBO();]]></programlisting>
-				</listitem>
+          <programlisting>// Get the system database object.
+$db = &amp;JFactory::getDBO();</programlisting>
+        </listitem>
 
-				<listitem>
-					<para>
-						Next we need to set our query to the database
-						object. To do this we will use the setQuery
-						method.
-					</para>
+        <listitem>
+          <para>Next we need to set our query to the database object. To do
+          this we will use the setQuery method.</para>
 
-					<programlisting><![CDATA[// Set our query to the database object.
-$db->setQuery('SELECT name FROM dogs WHERE dog_id = 2');]]></programlisting>
-				</listitem>
+          <programlisting>// Set our query to the database object.
+$db-&gt;setQuery( 'SELECT name FROM dogs WHERE dog_id = 2' );</programlisting>
+        </listitem>
 
-				<listitem>
-					<para>Lastly we call the loadResult() method.</para>
+        <listitem>
+          <para>Lastly we call the loadResult() method.</para>
 
-					<programlisting><![CDATA[// Use the loadResult() method to get only the first value from the first row of the result set.
-$name = $db->loadResult();]]></programlisting>
-				</listitem>
-			</orderedlist>
-		</sect2>
-	</sect1>
+          <programlisting>// Use the loadResult() method to get only the first value from the first row of the result set.
+$name = $db-&gt;loadResult();</programlisting>
+        </listitem>
+      </orderedlist>
+    </sect2>
+  </sect1>
 </chapter>

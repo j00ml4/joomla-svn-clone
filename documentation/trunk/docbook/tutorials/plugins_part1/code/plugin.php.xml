@@ -15,12 +15,12 @@ class <PluginName> extends JPlugin
     * NOT references.  This causes problems with cross-referencing necessary for the
     * observer design pattern.
     */
-    function <PluginName>( > $subject )
+    function <PluginName>( &$subject )
     {
             parent::__construct( $subject );
 
             // load plugin parameters
-            $this->_plugin = > JPluginHelper::getPlugin( '<EventName>', '<PluginName>' );
+            $this->_plugin =& JPluginHelper::getPlugin( '<EventName>', '<PluginName>' );
             $this->_params = new JParameter( $this->_plugin->params );
     }
 
