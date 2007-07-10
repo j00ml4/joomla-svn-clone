@@ -3,7 +3,17 @@ This page documents the changes in parameters between Joomla! 1.0 and 1.5 releas
 
 
 
+
 ===== Migrated Tables =====
+
+==== Modules ====
+Modules are migrated to allow for their data to be handled. All modules are unpublished in the target site. You can then install 1.5 compatible (or legacy compatible) versions of the modules so that their data is retained.
+
+
+
+
+==== Content ====
+The content table is migrated. The migration system handles the translation and expansion of mosimage (removed in 1.5), updating mospagebreak to be 1.5 compatible, renames mosloadposition to loadposition and moscode translates into geshi (renamed to pre tags). No other text content transformations are applied. mosimage tags are expanded into what they would be on the old site, this means that if you are using a different site, the image tags will point to its live site location.
 
 ==== Categories ====
 
@@ -259,11 +269,10 @@ The following items have been moved (and possibly renamed) into the content area
 
 
 
+
 ===== Unmigrated Tables =====
 The following three tables typically hold third party and potentially content. They will not be migrated.
 
 **Plugins** (Core Plugins; previously mambots)
 
 **Components** (Core Components)
-
-**Modules** (Core Modules)
