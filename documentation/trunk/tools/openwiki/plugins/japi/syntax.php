@@ -15,8 +15,8 @@
  */
 
 defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
-global $mosConfig_absolute_path;
-require_once($mosConfig_absolute_path.'/components/com_openwiki/lib/plugins/syntax.php');
+global $mosConfig_absolute_path, $option;
+require_once($mosConfig_absolute_path.'/components/'.$option.'/lib/plugins/syntax.php');
 
 define('JAPI_PLUGIN', dirname(__FILE__));
 
@@ -149,4 +149,3 @@ var $japi_tag = 'JAPI';
 
 }
 
-?>

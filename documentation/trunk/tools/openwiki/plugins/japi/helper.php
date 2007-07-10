@@ -149,7 +149,7 @@ var $_packs = array(
  * global $option;
  */
 # var $_icon_uri = 'http://api.joomla.org/media/images/';
-var $_icon_uri = '/components/com_openwiki/data/media/references/';
+var $_icon_uri = '/components/{component}/data/media/references/';
 
 /**
  * phpDocumentor base URI with a TRAILING slash !
@@ -174,6 +174,8 @@ var $_api_uri  = 'http://api.joomla.org/';
 	 */
 	function __construct(&$data, &$renderer, $syntax = 'JAPI')
 	{
+		$this->_icon_uri = str_replace('', $GLOBALS['option'], $this->_icon_uri);
+
 		$renderer->acronyms['J!']  = 'Joomla!';
 		$renderer->acronyms['J!F'] = 'Joomla! Framework';
 
