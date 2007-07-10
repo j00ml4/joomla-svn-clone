@@ -1,7 +1,0 @@
- 
-
-<sub>Dan3000, 2006/04/30 11:29:</sub>
-
-what about gz? is not mention here but is mentioned in the example. Changed it and also added qualification of compression "bz2" best compression.
-
-----
