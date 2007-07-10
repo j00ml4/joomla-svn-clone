@@ -146,9 +146,10 @@ var $_packs = array(
  * instead of remote api.joomla.org to spead up page loads esp.
  * if you try this at home.
  * @see getIcon()
+ * global $option;
  */
-var $_icon_uri = 'http://api.joomla.org/media/images/';
-# var $_icon_uri = '/components/com_openwiki/data/media/japi/';
+# var $_icon_uri = 'http://api.joomla.org/media/images/';
+var $_icon_uri = '/components/com_openwiki/data/media/references/';
 
 /**
  * phpDocumentor base URI with a TRAILING slash !
@@ -347,7 +348,7 @@ $this->_dump($siblings, "addEntry($col)");
 	function render() {
 		// no renderer, no output
 		if (!is_object($this->_renderer)) return false;
-echo '<hr>render()';
+
 		$this->_renderer->table_open();
 
 		$this->renderTableRow(true);
@@ -375,7 +376,6 @@ echo '<hr>render()';
 				$decorator = 'decorate_'.$this->_format;
 				$this->$decorator($entry, $head);
 				$this->_renderer->doc .= DOKU_LF;
-echo "<li> $col: $entry->type / $entry->value /".gettype($entry);
 			}
 		}
 
@@ -910,7 +910,7 @@ var $_external_helpers = array(
 		$sub  = $helper->getEntryProp('sub', 'wiki');
 		// might contain __constructor
 		if ( $meth = $helper->getEntryProp('meth', 'wiki') ) {
-echo '<br> ** getFormattedValue ', $meth;
+# echo '<br> ** getFormattedValue ', $meth;
 		}
 		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $this->value);
 		$link = str_replace('::', ':', $link);
