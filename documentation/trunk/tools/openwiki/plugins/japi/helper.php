@@ -14,7 +14,6 @@ defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.'
 if (!defined('PHP_EOL')) {
 	define('PHP_EOL', DOKU_LF);
 }
-error_reporting(E_ALL);
 
 /**
  * A helful class for the Joomla! API Wiki.

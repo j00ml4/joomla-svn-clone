@@ -86,7 +86,6 @@ var $japi_tag = 'JAPI';
      * @return  array              Return an array with all data you want to use in render()
      */
     function handle($match, $state, $pos, &$handler) {
-    	$er = error_reporting(E_ALL);
 
 		switch ($state) {
 			case DOKU_LEXER_SPECIAL:
@@ -109,7 +108,6 @@ var $japi_tag = 'JAPI';
 				$result = false;
 		}
 
-    	error_reporting($er);
 		return $result;
     }
 
