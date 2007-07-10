@@ -174,7 +174,7 @@ var $_api_uri  = 'http://api.joomla.org/';
 	 */
 	function __construct(&$data, &$renderer, $syntax = 'JAPI')
 	{
-		$this->_icon_uri = str_replace('', $GLOBALS['option'], $this->_icon_uri);
+		$this->_icon_uri = str_replace('{component}', $GLOBALS['option'], $this->_icon_uri);
 
 		$renderer->acronyms['J!']  = 'Joomla!';
 		$renderer->acronyms['J!F'] = 'Joomla! Framework';

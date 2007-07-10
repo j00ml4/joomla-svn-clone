@@ -27,6 +27,15 @@ define( '_JEXEC', 'certainly');
 define( 'DOKU_LF', "\r\n");
 define( 'DOKU_TAB', "\t");
 
+/* mimic J! component name */
+if ( isset($_SERVER['SCRIPTBASE']) ) {
+	// CirTap's local test box
+	$GLOBALS['option'] = 'com_openwiki';
+} else {
+	// anybody else :)
+	$GLOBALS['option'] = 'com_jd-wiki';
+}
+
 require_once( dirname(__FILE__) . '/helper.php');
 
 ini_set('html_errors', 'On');
