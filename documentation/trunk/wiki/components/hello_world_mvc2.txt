@@ -19,7 +19,7 @@ At this point, we will only model one behaviour of our hello, and that is retrie
 
 Here is the code for our model class:
 
-
+ 
 <code php><?php
 /**
  * Hello Model for Hello World Component
@@ -63,18 +63,18 @@ The Joomla! framework is setup in such a way that the controller will automatica
 
 Our previous view code contained the lines:
 
-
+ 
 <code php>$greeting = "Hello World!";</code>
 
 To take advantage of our model, we change this line to:
 
-
-<code php>$model => $this->getModel();
+ 
+<code php>$model =& $this->getModel();
 $greeting = $model->getGreeting();</code>
 
 The complete view now looks like:
 
-
+ 
 <code php><?php
 
 /**
@@ -103,7 +103,7 @@ class HelloViewHello extends JView
 {
     function display($tpl = null)
     {
-        $model => $this->getModel();
+        $model =& $this->getModel();
         $greeting = $model->getGreeting();
         $this->assignRef( 'greeting',	$greeting );
 
@@ -116,12 +116,12 @@ class HelloViewHello extends JView
 
 All that remains is to add an entry to the XML file so that our new model will be copied. The Joomla! framework will look for our model in the models directory, so the entry for this file will look like (it should be added to the site section):
 
-
+ 
 <code php><filename>models/hello.php</filename></code>
 
 Our new hello.xml file will look like:
 
-
+ 
 <code php><?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
 <install type="component" version="1.5.0">
@@ -178,4 +178,5 @@ We now have a simple MVC component. Each element is very simple at this point, b
 
 ===== Download =====
 
-The component can be downloaded at:[[packages/com_hello2.zip|com_hello2.zip]]
+The component can be downloaded at: [[packages/com_hello2.zip|com_hello2.zip]]
+

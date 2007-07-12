@@ -17,9 +17,9 @@ The class will have two methods. The first method is the constructor. The second
 
 ==== The plgAuthenticationMyauth() Method ====
 
-The constructor should take one parameter, which should be passed by reference. All it will do is pass this parameter onto the constructor of its parent class. We should note that this constructor method should have the same name as the class. The name <nowiki>'__construct'</nowiki> cannot be used because PHP4 does not support this mechanism and the fix that is used in the Joomla! core will not allow passing the arguments by reference. Therefore, our constructor looks like:
+The constructor should take one parameter, which should be passed by reference. All it will do is pass this parameter onto the constructor of its parent class. We should note that this constructor method should have the same name as the class. The name '__construct' cannot be used because PHP4 does not support this mechanism and the fix that is used in the Joomla! core will not allow passing the arguments by reference. Therefore, our constructor looks like:
 
-
+ 
 <code php>function plgAuthenticationMyauth(& $subject) {
     parent::__construct($subject);
 }</code>
@@ -30,9 +30,9 @@ The parent constructor will handle attaching our event observer (plugin) to the 
 
 The onAuthenticate() method is the method that will be called when the system is trying to use your plugin to authenticate the user. This method will be passed three parameters: the username, the password, and a reference to an object of type JAuthenticationResponse. This method needs to determine if the username and password are a valid combination for authentication and return the result in the JAuthenticationResponse object.
 
-For our example, the authentication check that we are going to do is very simple. We will simply make sure that the specified username exists in the <nowiki>#__</nowiki>users table, and if it does, we will check to see if the username is the reverse of the password. So our authentication check will look like:
+For our example, the authentication check that we are going to do is very simple. We will simply make sure that the specified username exists in the users table, and if it does, we will check to see if the username is the reverse of the password. So our authentication check will look like:
 
-
+ 
 <code php>$db =& JFactory::getDBO();
 $query = 'SELECT `id`'
     . ' FROM #__users'
@@ -48,7 +48,7 @@ Although this is very basic in our example, this code can be replaced with any c
 
 Now that we have determined whether or not authentication was successful, we can now create our response:
 
-
+ 
 <code php>$db =& JFactory::getDBO();
 $query = 'SELECT `id`'
     . ' FROM #__users'
@@ -78,13 +78,13 @@ For failed responses, we set two properties of the response object: the status p
 
 The error_message property is set in case the authentication is not successful. In our plugin, we set two possible values to this property: "User does not exist", which indicates that our query did not return any results, and "Invalid username and password", which indicates that the password was not the reverse of the username. It should be noted that these values are not returned to the user. For security reasons, the only thing the user will see is a successful login, or a message that says, "Username and password do not match." The Joomla! system can be configured so that these error messages can be stored in a log file for debugging purposes.
 
-If authentication is successful, we can optionally add information from our authentication source to the response. In this case, we are retrieving the user information from the Joomla! database and storing the email address in the response object. For more information on what data can be stored in the response object, please consult[[http://api.joomla.org/Joomla-Framework/User/JAuthenticationResponse.html|http://api.joomla.org]]. This data can then be used by user plugins in the event it is desired to automatically create users or perform other login tasks.
+If authentication is successful, we can optionally add information from our authentication source to the response. In this case, we are retrieving the user information from the Joomla! database and storing the email address in the response object. For more information on what data can be stored in the response object, please consult [[http://api.joomla.org/Joomla-Framework/User/JAuthenticationResponse.html|http://api.joomla.org]]. This data can then be used by user plugins in the event it is desired to automatically create users or perform other login tasks.
 
 ==== The Complete myauth.php File ====
 
 Now that we have completed the two methods that are necessary for our class, we put our class into a PHP file that has the same name as our plugin. Since our plugin is called Myauth, we call our file myauth.php. Here is the complete listing for this file:
 
-
+ 
 <code php><?php
 /**
  * @version    $Id: myauth.php 7180 2007-04-23 16:51:53Z jinx $
@@ -170,13 +170,13 @@ class plgAuthenticationMyauth extends JPlugin
 }
 ?></code>
 
-You will notice that we have to add<code>jimport('joomla.event.plugin');</code>to the beginning of our file in order to load the JPlugin class definition.
+You will notice that we have to add <code>jimport('joomla.event.plugin');</code>to the beginning of our file in order to load the JPlugin class definition.
 
 ===== The XML Install Manifest =====
 
 Now that we have created our JPlugin class, all we have to do is create our XML install file that will tell the Joomla! installer how to install our plugin. This file is simple:
 
-
+ 
 <code php><?xml version="1.0" encoding="utf-8"?>
 <install version="1.5" type="plugin" group="authentication">
     <name>Authentication - Myauth</name>
@@ -217,3 +217,4 @@ We have now created a simple authentication plugin. We have demonstrated the bas
 ===== Download =====
 
 The component can be downloaded at:[[packages/plg_myauth.zip|plg_myauth.zip]].
+
