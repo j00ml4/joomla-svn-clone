@@ -1,0 +1,118 @@
+
+====== Creating a Plugin for Joomla! 1.5 ======
+
+===== How to create your own plugin =====
+
+This How-To should provide you with the basics of what you need to know to develop your own plugin. Most plugins consist of just a single code file but to correctly install the plugin code it must be packaged into an installation file which can be processed by the Joomla! installer.
+
+==== Creating the installation file ====
+
+As with all add-ons in Joomla!, plugins are easily installed as a .zip file (.tar.gz is also supported) but a correctly formatted XML file must be included. As an example, here is the XML installation file for the categories searchbot plugin.
+
+ 
+<code php><?xml version="1.0" encoding="iso-8859-1"?>
+<install version="1.5" type="plugin" group="search">
+    <name>Categories searchbot</name>
+    <author>Joomla! Project</author>
+    <creationDate>November 2005</creationDate>
+    <copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
+    <license>GNU/GPL</license>
+    <authorEmail>admin@joomla.org</authorEmail>
+    <authorUrl>www.joomla.org</authorUrl>
+    <version>1.1</version>
+    <description>Allows searching of Categories information</description>
+    <files>
+        <filename plugin="categories.searchbot">categories.searchbot.php</filename>
+    </files>
+    <params>
+        <param name="search_limit" type="text" size="5" default="50" label="Search Limit" description="Number of search items to return"/>        
+    </params>
+</install></code>
+
+As you can see, the system is similar to other Joomla! XML installation files. You only have to look out for the group="xxx" entry in the <install> tag and the extended information in the <filename> tag. This information tells Joomla! into which folder to copy the file and to which group the plugin should be added.
+
+==== Creating the Plugin ====
+
+Joomla! 1.5 introduces a new, more object-orientated, way of writing plugins. The old method is still supported for backwards-compatibility (see next section).
+
+ 
+<code php><?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+// Import library dependencies
+jimport('joomla.application.plugin.helper');
+
+class <PluginName> extends JPlugin
+{
+   /**
+    * Constructor
+    *
+    * For php4 compatability we must not use the __constructor as a constructor for
+    * plugins because func_get_args ( void ) returns a copy of all passed arguments
+    * NOT references.  This causes problems with cross-referencing necessary for the
+    * observer design pattern.
+    */
+    function <PluginName>( &$subject )
+    {
+            parent::__construct( $subject );
+
+            // load plugin parameters
+            $this->_plugin =& JPluginHelper::getPlugin( '<EventName>', '<PluginName>' );
+            $this->_params = new JParameter( $this->_plugin->params );
+    }
+
+    /**
+    * Plugin method with the same name as the event will be called automatically.
+    */
+    function <EventName>()
+    {
+        global $mainframe;
+
+        // Plugin code goes here.
+
+        return true;
+    }
+
+}</code>
+
+==== Creating the Plugin (Legacy Mode) ====
+
+This section describes the legacy method of creating plugins used prior to Joomla! 1.5. Some core Joomla! plugins may still use this method but will be gradually re-written over time. This method is still supported for backwards-compatibility.
+
+The code that you want executed when the event triggers is written as a PHP function. Prior to the function definition you make a call to the registerEvent() method so that the Joomla! event system associates your function with the appropriate event.
+
+For example, take a look at this skeleton code:
+
+ 
+<code php><?php
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$mainframe->registerEvent( '<EventName>', '<FunctionName>' );
+
+function <FunctionName>( <ParameterList> ) {
+
+    //Plugin code goes here
+
+}</code>
+
+With the function $mainframe→registerEvent() your plugin is registered into the Joomla! event system. This means that when the event called '<EventName>' is later triggered, the function called '<FunctionName>' will be called.
+
+Now you can write your plugin function code anyway you want. If you want to use parameters, it's no problem, just use them as usual. You can register as many events and plugin functions together in one file as you want. When you're done, your plugin is ready for use.
+
+==== Using Plugins in Your Code ====
+
+Now that you've created your plugin, you will probably want to call it in your code. You might not; the Joomla! core has a number of built-in events that you might want your plugin code to be registered to. In which case you don't need to do the following.
+
+If you want to trigger an event then you use code like this:
+
+ 
+<code php>$results = $mainframe->triggerEvent( '<EventName>', <ParameterArray> );</code>
+
+It is important to note that the parameters have to be in an array. The plugin function itself will get the parameters as single values. The return value will consist of an array of return values from the different plugins (so it can also contain multilevel arrays).
+
+===== Conclusion =====
+
+The plugin structure for Joomla! 1.5 is very flexible and powerful. Not only can plugins be used to handle events triggered by the core application and extensions, but plugins can also be used to make third party extensions extensible and powerful.
+
