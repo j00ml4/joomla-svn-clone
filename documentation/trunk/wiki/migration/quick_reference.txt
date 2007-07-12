@@ -32,7 +32,7 @@ $database = &JFactory::getDBO();</php> |
 ^ Old Way / Usage ^ New Way ^
 | <php>$mainframe->getPath( 'admin_html' )</php> | <php>JApplicationHelper::getPath('admin_html')</php> |
 
-==== Internationisation Support ====
+==== Internationalization Support ====
 
 ^ Old Way / Usage ^ New Way ^
 | <php>echo _HELLO;</php> | <php>echo JText::_( 'Hello' );</php> |
