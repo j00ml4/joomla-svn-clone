@@ -6,7 +6,7 @@
  * @subpackage 	Utilities
  * @license 	CC-SA-NC Creative Commons Share Alike Non Commercial
  * @author 		CirTap <cirtap-joomla@webmechanic.biz>
- * @version 	0.2.1 $Id$
+ * @version 	0.2.2 $Id$
  */
 
 defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
@@ -133,8 +133,8 @@ var $_packs = array(
 	# pkg-key   => array('package',          'default subpackage'),
 	'joomla'    => array('Joomla',          'Libraries'),
 	'framework' => array('Joomla.Framework', false),	// do we have a default for this?
-	'legacy'    => array('Joomla.Legacy',    '1.5'),
 /* not implemented (implementable? due to bizarre naming schemata)
+	'legacy'    => array('Joomla.Legacy',    '1.5'),
 	'xml'       => array('XML_Parameters',   false),
 	'3pd'       => array('3PD-Libraries',    false),
 */
@@ -142,14 +142,12 @@ var $_packs = array(
 
 /**
  * External icons base URL with a TRAILING slash !
- * It'd be nice if they can come from the Wiki /media/japi/ folder
- * instead of remote api.joomla.org to spead up page loads esp.
- * if you try this at home.
+ * Location of the Wiki /media/references/ images folder.
+ * Placeholders {xxx} are substituted in __constructor
  * @see getIcon()
  * global $option;
  */
-# var $_icon_uri = 'http://api.joomla.org/media/images/';
-var $_icon_uri = '/components/{component}/data/media/references/';
+var $_icon_uri = '{live_site}/components/{option}/data/media/references/';
 
 /**
  * phpDocumentor base URI with a TRAILING slash !
@@ -174,7 +172,10 @@ var $_api_uri  = 'http://api.joomla.org/';
 	 */
 	function __construct(&$data, &$renderer, $syntax = 'JAPI')
 	{
-		$this->_icon_uri = str_replace('{component}', $GLOBALS['option'], $this->_icon_uri);
+		$this->_icon_uri = str_replace(
+							array('{live_site}', '{option}'),
+							array($GLOBALS['mosConfig_live_site'], $GLOBALS['option']),
+							$this->_icon_uri);
 
 		$renderer->acronyms['J!']  = 'Joomla!';
 		$renderer->acronyms['J!F'] = 'Joomla! Framework';
@@ -702,12 +703,14 @@ var $filename = false;
 /**
  * Creates the link to the API Referende Home Page.
  *
+ * /component/option,com_jd-wiki/Itemid,/id,start/#api_references
  * @package 	Joomla.Documentation
  * @subpackage 	Utilities
  */
 class JApiHelperHome extends JApiHelperEntry
 {
-var $namespace = 'start';
+var $namespace = ':start';
+var $section   = '#api_reference';
 var $type      = 'home';
 var $icon      = true;
 
@@ -722,7 +725,7 @@ var $icon      = true;
 	function getFormattedValue(&$helper) {
 		return array(
 				'internallink',
-				sprintf('[[%s]]', $this->namespace),
+				sprintf('[[%s]]', $this->namespace . $this->section),
 				$this->label
 				);
 	}

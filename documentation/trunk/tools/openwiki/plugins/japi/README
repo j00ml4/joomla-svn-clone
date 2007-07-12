@@ -102,9 +102,9 @@ function and bogous Package/Subpackage names. Whilst phpDoc uses
 the physical filepath of a function's source file, the @package
 and @subpackage names may speak a different language and JAPI may
 take the wrong track.
-As an attempt to solve this issue, an experimental "hints.php" file is 
-included in the folder which lists known files, classes, and such that 
-do not follow the general naming scheme of the Joomla! 1.5 framework 
+As an attempt to solve this issue, an experimental "hints.php" file is
+included in the folder which lists known files, classes, and such that
+do not follow the general naming scheme of the Joomla! 1.5 framework
 for whatever reason.
 
 All icons are loaded from api.joomla.org. It'd be nice if we can
@@ -114,17 +114,17 @@ the JApiHelper::$_icon_uri property needs to be adjusted.
 
 Installation:
 ---------------------------------------
-Again: THIS IS AN EXPERIMENTAL RELEASE. 
+Again: THIS IS AN EXPERIMENTAL RELEASE.
 Only try this "at home" OR on a non-public server.
 
-Copy the entire /japi/ folder to ./plugins/japi/ folder of the 
+Copy the entire /japi/ folder to ./plugins/japi/ folder of the
 Joomla! Wiki component, e.g.
 	/components/com_openwiki/lib/plugins/japi
 or
 	/components/com_jd-wiki/lib/plugins/japi
 
-	** REMOVE `.htaccess` and `test.php` from the destination 
-		folder if do not want to run the test file, which 
+	** REMOVE `.htaccess` and `test.php` from the destination
+		folder if do not want to run the test file, which
 		requires PHP5 by the way.
 
 An example file "japi-plugin.txt" to demonstrate the features is
@@ -153,15 +153,18 @@ CirTap
 Todo:
 ---------------------------------------
  - drop fancy code for legacy code detection in cls, meth, func helpers
+
  - make some of the various hardcoded properties configurable
    - URIs, column order in JApiHelper
    - JApiHelperSub::$format
    - JApiHelperEntry::$schema
+
  - JApiHelperSub: harden Subpackage index page location (URL)
    check/decide whether we use:
   		- /package/#subpackage
   		- /subpackage/index.txt
   		- /subpackage/subpackage.txt
+
  - JREF: implement suppt. for constants declared in class files and
  	link to the appropriate page on the API site
 
@@ -169,10 +172,6 @@ Nice to have:
  - l10n ? JApiHelperRev, JApiHelperStat, column headers
  - different layouts for JAPI: vertical, horizontal, list
 
-References:
----------------------------------------
-http://projects.j-prosolution.com/projects/os-projects/project-openwiki.html
-
 
 Copyright (c)2007 Rene Serradeil
-License   CC-SA-NC Creative Commons Share Alike Non Commercial
+License   CC-SA-NC Creative Commons ShareAlike Non Commercial

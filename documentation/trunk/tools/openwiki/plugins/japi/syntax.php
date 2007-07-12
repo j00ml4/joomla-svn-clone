@@ -9,7 +9,7 @@
  *
  * @license CC-SA-NC Creative Commons Share Alike Non Commercial
  * @author  CirTap <cirtap-joomla@webmechanic.biz>
- * @version 0.1.0 $Id$
+ * @version 0.2.2 $Id$
  *
  * @todo use external config file for helper.php (see comments there)
  */
