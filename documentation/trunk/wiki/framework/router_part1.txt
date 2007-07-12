@@ -5,20 +5,24 @@
 
 In Joomla! 1.5 the URL generation mechanism was completely refactored. Joomla! is now capable of creating and parsing URLs in any format, including human readable URL's. Another improvement is that this still works even if Joomla! runs a server other than Apache with the mod_rewrite module.
 
-A good example of this is the "Welcome to Joomla" article. The first link shown was generated without mod_rewrite, and the second link was generated with mod_rewrite:<code>http://www.example.com/index.php/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code><code>http://www.example.com/the-­news/1-­latest-­news/1-­welcome-­to-­joomla</code>
+A good example of this is the "Welcome to Joomla" article. The first link shown was generated without mod_rewrite, and the second link was generated with mod_rewrite:
+
+  * http://www.example.com/index.php/the­news/1­latest­news/1­welcome­to­joomla
+
+  * http://www.example.com/the­news/1­latest­news/1­welcome­to­joomla
 
 ===== The Alias =====
 
-The first step is the generation of the so called alias. The alias is used in the URL instead of the title (title = the text you want to have in the url). The alias has to be URI safe, which means accented UTF­8 characters are replaced by their ASCII­7 equivalents, whitespaces by hyphens, etc.
+The first step is the generation of the so called alias. The alias is used in the URL instead of the title (the title is the text you want to have in the url). The alias has to be URI safe, which means accented UTF­8 characters are replaced by their ASCII­7 equivalents, whitespaces by hyphens, etc.
 
 The alias can be defined by the user, but you should ensure that the above requirements for a URL safe alias are met. A good way to do so is to use the JTable::check() method during the save process. Have a look at this example code:
 
-
+ 
 <code php>function check()
 {
-       jimport('joomla.filter.output');
-       $alias = JOutputFilter::stringURLSafe($this­>title);
-       if(empty($this­>alias) || $this­>alias === $alias ) {
+       jimport( 'joomla.filter.output' );
+       $alias = JOutputFilter::stringURLSafe( $this­>title );
+       if(empty( $this­>alias ) || $this­>alias === $alias ) {
                $this­>alias = $alias;
        }
        /* All your other checks */
@@ -31,7 +35,7 @@ If the alias field is empty or has a different type than the URL safe title then
 
 Continuing with the same example, the "slug" - "1­welcome­to­joomla" has two parts. The first part is the article identifier (id) and the second is the alias. They are separated by a hyphen. These two elements were combined during the database query in the model:
 
-
+ 
 <code php>$query = 'SELECT a.*'.
         ' CASE WHEN CHAR_LENGTH (a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug,'.
         [...];</code>
@@ -42,8 +46,8 @@ After this step the slug is used instead of the id.
 
 The JRoute::_() method translates the internal Joomla URL to a custom URL. JRoute has three parameters and its prototype is:
 
-
-<code php>JRoute::_( $url, $xhtml = true, $ssl=0);</code>
+ 
+<code php>JRoute::_( $url, $xhtml = true, $ssl=0 );</code>
 
 $url is a string containing the absolute or relative internal Joomla! URL.
 
@@ -53,19 +57,26 @@ $ssl is an integer value that specifies whether the URI should be secure. It sho
 
 The most important parameter is $url. A call to this method might look like:
 
-
+ 
 <code php>JRoute::_( 'index.php?view=article&id='.$row­>slug );</code>
 
 $row­>slug is the value that was generated in step 2 from a combination of id and title alias.
 
 Another advantage of using JRoute is that the router now handles $option (the component name) and the $Itemid (the menu item ID). The component itself doesn't have to know its name ($option) or the active menuitem ($Itemid) like it did in previous version of Joomla!.
 
-It is important that you think about the sequence of the URL parameter in this stage. This will be more clear when we have a deeper look at the router.php in the next chapter.
+It is important that you think about the sequence of the URL parameter in this stage. This will be more clear when we have a deeper look at the router.php in the next section.
 
 The buidling process of JRouter is divided into two steps:
 
-  - Create the application route:   The appliction route is fully handled by JRouter and the component developer doesn't have to do anything to make it work.
-  - Create the component route   To create the component route, JRouter looks for the router.php in the component directory which is responsible for building the route for the component.
+  *
+Create the application route:
+
+The appliction route is fully handled by JRouter and the component developer doesn't have to do anything to make it work.
+
+  *
+Create the component route
+
+To create the component route, JRouter looks for the router.php in the component directory which is responsible for building the route for the component.
 
 ===== router.php =====
 
@@ -75,56 +86,53 @@ We will have two functions In the router.php. One is responsible for building th
 
 This simple example will illustrate the basics of implementing a router for your component.
 
-
-<code php>function [Componentname]BuildRoute(&$query)
+ 
+<code php>function [Componentname]BuildRoute( &$query )
 {
        $segments = array();
        if(isset($query['view']))
        {
                 $segments[] = $query['view'];
-                unset($query['view']);
+                unset( $query['view'] );
        }
        if(isset($query['id']))
        {
                 $segments[] = $query['id'];
-                unset($query['id']);
+                unset( $query['id'] );
        };
        return $segments;
 }</code>
 
-JRouter passes a $query array to the [Componentname]BuildRoute function. This function will add the relevant parts of the array to the $segments array in the right order will return the properly ordered array. The content of the $query array needs to be unset, otherwise JRouter will add it to the URL in the form of a query string (i.e. any variables that are not handled by the router will be passed in the query string)
+JRouter passes a $query array to the [Componentname]BuildRoute function. This function will add the relevant parts of the array to the $segments array in the right order and will return the properly ordered array. The content of the $query array needs to be unset, otherwise JRouter will add it to the URL in the form of a query string (i.e. any variables that are not handled by the router will be passed in the query string).
 
 The next function in the router.php parses the URL:
 
-
-<code php>function [Componentname]ParseRoute($segments)
+ 
+<code php>function [Componentname]ParseRoute( $segments )
 {
        $vars = array();
        switch($segments[0])
        {
                case 'categories':
-               {
                        $vars['view'] = 'categories';
-               }
+                       break;
                case 'category':
-               {
                        $vars['view'] = 'category';
-                       $id = explode(':', $segments[1]);
+                       $id = explode( ':', $segments[1] );
                        $vars['id'] = (int) $id[0];
-               } break;
+                       break;
                case 'article':
-               {
-                       $vars['view'] = 'article;
-                       $id = explode(':', $segments[1]);
+                       $vars['view'] = 'article';
+                       $id = explode( ':', $segments[1] );
                        $vars['id'] = (int) $id[0];
-               } break;
+                       break;
        }
        return $vars;
 }</code>
 
 What happens here? In the function [Componentname]BuildRoute we arranged the items in the $query array in a specific sequence. This means that in this example the view is first, the catid is second and the id is third in the array.
 
-By reading $segments[0], we access the name of the view. We set the right view and/or identifier depending on its value and we return the $vars array to JRouter. $vars should be an associative array similar to the array that was bassed to the BuildRoute method.
+By reading $segments[0], we access the name of the view. We set the right view and/or identifier depending on its value and we return the $vars array to JRouter. $vars should be an associative array similar to the array that was passed to the BuildRoute method.
 
 The above example of the router.php is a very simple way to generate sef URL's but should show how this works quite clearly.
 
@@ -148,86 +156,86 @@ Let's assume we have done step 1 and 2 also for the category.
 
 The link to the article would look like this:
 
-
-<code php>JRoute::_('index.php?view=article&catid='.$row­>catslug .'&id='.$row­>slug);</code>
+ 
+<code php>JRoute::_( 'index.php?view=article&catid='.$row­>catslug .'&id='.$row­>slug );</code>
 
 And the Link to the category would look like this:
 
-
-<code php>JRoute::_('index.php?view=category&id='.$row­>catslug);</code>
+ 
+<code php>JRoute::_( 'index.php?view=category&id='.$row­>catslug );</code>
 
 The corresponding router.php:
 
-
+ 
 <code php>function [Componentname]BuildRoute(&$query)
 {
        $segments = array();
-       if(isset($query['catid']))
+       if(isset( $query['catid'] ))
        {
                 $segments[] = $query['catid'];
-                unset($query['catid']);
+                unset( $query['catid'] );
        };
-       if(isset($query['id']))
+       if( isset($query['id']) )
        {
                 $segments[] = $query['id'];
-                unset($query['id']);
+                unset( $query['id'] );
        };
-       unset($query['view']);
+       unset( $query['view'] );
        return $segments;
 }</code>
 
 The difference now is that we don't add the name of the view to the $segments array. We still unset the view key since otherwise, JRouter would add it to the URL as part of the query string. Another new thing here is the additional parameter catid that we push into the $segments array.
 
-
+ 
 <code php>function [Componentname]ParseRoute($segments)
 {
        $vars = array();
        $menu =& JMenu::getInstance();
        $item =& $menu­>getActive();
        // Count segments
-       $count = count($segments);
+       $count = count( $segments );
        //Handle View and Identifier
-       switch($item­>query['view'])
+       switch( $item­>query['view'] )
        {
-               case 'categories' :
-               {
+               case 'categories':
                        if($count == 1) {
                                $vars['view'] = 'category';
                        }
                        if($count == 2) {
                                $vars['view'] = 'article';
                        }
-                       $id = explode(':', $segments[$count­1]);
+                       $id = explode( ':', $segments[$count­1] );
                        $vars['id'] = (int) $id[0];
-               } break;
-               case 'category'   :
-               {
-                       $id   = explode(':', $segments[$count­1]);
+                       break;
+               case 'category':
+                       $id   = explode( ':', $segments[$count­1] );
                        $vars['id']   = (int) $id[0];
                        $vars['view'] = 'article';
-               } break;
+                       break;
        }
        return $vars;
 }</code>
 
 You can see that this ParseRoute function has a lot of different code parts in comparison to the previous. The reason for this is simple. We don't have the name of the view in the $segments array and we need to find another way to determine it.
 
-We need to find out which level of hierarchy we are in by recieving the root element. We do this by looking to the view name of the active menuitem:
+We need to find out which level of hierarchy we are in by receiving the root element. We do this by looking to the view name of the active menuitem:
 
-
-<code php>$item->query['view']</code>
+ 
+<code php>$item­>query['view']</code>
 
 Also we need to know the number of items in the $segments array:
 
+ 
+<code php>$count = count( $segments );</code>
 
-<code php>$count = count($segments);</code>
+With this information we can correctly set the view for all possible three cases: *
+The menu item is a link to the categories view and the $segments array has two items ($catid and $id). In this case we know that we need to parse a link to an article .
 
-With this information we can correctly set the view for all possible three cases:
+  *
+The menu item is a link to the categories view and the $segments array has one item ($id). In this case we know that we need to parse a link to a category.
 
-  * The menu item is a link to the categories view and the $segments array has two items ($catid and $id). In this case we know that we need to parse a link to an article .
-
-  * The menu item is a link to the categories view and the $segments array has one item ($id). In this case we know that we need to parse a link to a category.
-
-  * The menu item is a link to a category. In this case, we know that any item in the $segments array is the identifier for an article .
+  *
+The menu item is a link to a category. In this case, we know that any item in the $segments array is the identifier for an article .
 
 The result of all this brainwork is nice and human readable component URL's.
+

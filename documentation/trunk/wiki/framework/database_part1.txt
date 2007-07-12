@@ -3,63 +3,66 @@
 
 ===== Getting a database object =====
 
-This tutorial should provide you with the basics of what you
-need to know to use the Joomla! database libraries.
+This tutorial should provide you with the basics of what you need to know to use the Joomla! database libraries.
 
 ==== Get the system database object ====
 
-The easiest way to get a database object is by getting
-the system database object returned by the JFactory
-class. The static method JFactory::getDBO() returns a
-singleton instance of the system database object
-regardless of scope and is the recommended way of
-getting this object.
+The easiest way to get a database object is by getting the system database object returned by the JFactory class. The static method JFactory::getDBO() returns a singleton instance of the system database object regardless of scope and is the recommended way of getting this object.
 
-
-<code php>// This gets the database object using the JFactory	class
+ 
+<code php>// This gets the database object using the JFactory class
 $db = &JFactory::getDBO();</code>
 
 ==== Creating a custom database object ====
 
-Joomla! 1.5 introduces the concept of database drivers
-which will allow you to get database objects that point
-to different database sources.
+Joomla! 1.5 introduces the concept of database drivers which will allow you to get database objects that point to different database sources.
 
-
+ 
 <code php>// Create a new database object
 $myDB = new JDatabase::getInstance( $options );</code>
 
 ===== Using the database object =====
 
-For the purposes of this tutorial we will use a very simple
-database table that stores information about dogs. The
-database table has a dog_id field with a unique integer id
-field, a name field and a color field for each dog. To keep
-things simple we have only added three dogs to our database
-table:
+For the purposes of this tutorial we will use a very simple database table that stores information about dogs. The database table has a dog_id field with a unique integer id field, a name field and a color field for each dog. To keep things simple we have only added three dogs to our database table:
 
-  - Dog 1 is named Spot and is white.
-  - Dog 2 is named Fido and is brown.
-  - Dog 3 is named Buster and is also brown.
+  *
+Dog 1 is named Spot and is white.
 
- The following table represents our database table which we will simply call, dogs.
-^ dog_id ^ name ^ color ^
-| 1 | Spot | white |
-| 2 | Fido | brown |
-| 3 | Buster | brown |
+  *
+Dog 2 is named Fido and is brown.
+
+  *
+Dog 3 is named Buster and is also brown.
+
+The following table represents our database table which we will simply call, dogs.
+
+ <informaltable> <tgroup cols="3"> <thead> <row> <entry align="center">dog_id</entry> <entry align="center">name</entry> <entry align="center">color</entry> </row> </thead> <tbody> <row> <entry>1</entry> <entry>Spot</entry> <entry>white</entry> </row> <row> <entry>2</entry> <entry>Fido</entry> <entry>brown</entry> </row> <row> <entry>3</entry> <entry>Buster</entry> <entry>brown</entry> </row> </tbody> </tgroup> </informaltable>
 ==== Select one field from one row ====
- Lets say for example that I want to find out the name of the second dog in my database table. This is a fairly straightfoward task, I simply need to get the name value in the name field where the dog_id is 2 so lets build an SQL query to do that.  
+
+Lets say for example that I want to find out the name of the second dog in my database table. This is a fairly straightfoward task, I simply need to get the name value in the name field where the dog_id is 2 so lets build an SQL query to do that.
+
+ 
 <code php>SELECT name FROM dogs WHERE dog_id = 2</code>
- Easy enough, now we need to actually get the value using our database object.
-  * First we need to get ourselves a database object that is connected to the database our dogs table is in.  
+
+Easy enough, now we need to actually get the value using our database object.
+
+  *
+First we need to get ourselves a database object that is connected to the database our dogs table is in.
+
+ 
 <code php>// Get the system database object.
 $db = &JFactory::getDBO();</code>
+  *
+Next we need to set our query to the database object. To do this we will use the setQuery method.
 
-  * Next we need to set our query to the database object. To do this we will use the setQuery method.  
+ 
 <code php>// Set our query to the database object.
-$db->setQuery('SELECT name FROM dogs WHERE dog_id = 2');</code>
+$db->setQuery( 'SELECT name FROM dogs WHERE dog_id = 2' );</code>
+  *
+Lastly we call the loadResult() method.
 
-  * Lastly we call the loadResult() method.  
+ 
 <code php>// Use the loadResult() method to get only the first value from the first row of the result set.
 $name = $db->loadResult();</code>
+
 

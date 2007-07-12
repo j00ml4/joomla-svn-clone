@@ -9,17 +9,25 @@ This tutorial will explain how to go about creating a simple Hello World module.
 
 ===== File Structure =====
 
-There are four basic files that are used in the standard pattern of module development: - mod_helloworld.php - This file is the main entry point for the module. It will perform any necessary initialization routines, call helper routines to collect any necessary data, and include the template which will display the module output. - mod_helloworld.xml - This file contains information about the module. It defines the files that need to be installed by the Joomla! installer and specifies configuration parameters for the module. - helper.php - This file contains the helper class which is used to do the actual work in retrieving the information to be displayed in the module (usually from the database or some other source). - tmpl/default.php - This is the module template. This file will take the data collected by mod_helloworld.php and generate the HTML to be displayed on the page.
+There are four basic files that are used in the standard pattern of module development: *
+mod_helloworld.php - This file is the main entry point for the module. It will perform any necessary initialization routines, call helper routines to collect any necessary data, and include the template which will display the module output.
+
+  *
+mod_helloworld.xml - This file contains information about the module. It defines the files that need to be installed by the Joomla! installer and specifies configuration parameters for the module.
+
+  *
+helper.php - This file contains the helper class which is used to do the actual work in retrieving the information to be displayed in the module (usually from the database or some other source).
+
+  *
+tmpl/default.php - This is the module template. This file will take the data collected by mod_helloworld.php and generate the HTML to be displayed on the page.
 
 ===== Creating mod_helloworld.php =====
 
-The mod_helloworld.php file will perform four tasks:<itemizedlist mark="bullet">  - include the helper.php file which contains the class to be used to collect the necessary data
-  - invoke the appropriate helper class method to retrieve the data
-  - include the template to display the output.
+The mod_helloworld.php file will perform three tasks: <itemizedlist mark="bullet"> *include the helper.php file which contains the class to be used to collect the necessary data *invoke the appropriate helper class method to retrieve the data *include the template to display the output.
 
 The helper class is defined in our helper.php file. This file is included with a require_once statement:
 
-
+ 
 <code php>require_once( dirname(__FILE__).DS.'helper.php' );</code>
 
 require_once is used because our helper functions are defined within a class, and we only want the class defined once.
@@ -30,14 +38,14 @@ Our module currently does not use any parameters, but we will pass them to the h
 
 The helper class method is invoked in the following way:
 
-
+ 
 <code php>$hello = modHelloWorldHelper::getHello( $params );</code>
 
 ==== Completed mod_helloworld.php file ====
 
 The complete mod_helloworld.php file is as follows:
 
-
+ 
 <code php><?php
 /**
  * Hello World! Module Entry Point
@@ -61,7 +69,7 @@ require_once( dirname(__FILE__).DS.'helper.php' );
 $hello = modHelloWorldHelper::getHello( $params );
 require( JModuleHelper::getLayoutPath( 'mod_helloworld' ) );</code>
 
-The one line that we haven’t explained so far is the first line. This line checks to make sure that this file is being included from the Joomla! application. This is necessary to prevent variable injection and other possible security concerns.
+The one line that we haven’t explained so far is the first line. This line checks to make sure that this file is being included from the Joomla! application. This is necessary to prevent variable injection and other potential security concerns.
 
 ===== Creating helper.php =====
 
@@ -69,7 +77,7 @@ The helper.php file contains that helper class that is used to retrieve the data
 
 Here is the code for the helper.php file:
 
-
+ 
 <code php><?php
 /**
  * Helper class for Hello World! module
@@ -107,7 +115,7 @@ The default.php file is the template which displays the module output.
 
 The code for the default.php file is as follows:
 
-
+ 
 <code php><?php // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 <?php echo $hello; ?></code>
@@ -120,7 +128,7 @@ The mod_helloworld.xml is used to specify which files the installer needs to cop
 
 The code for mod_helloworld.xml is as follows:
 
-
+ 
 <code php><?xml version="1.0" encoding="utf-8"?>
 <install type="module" version="1.5.0">
     <name>Hello, World!</name>
@@ -140,7 +148,7 @@ The code for mod_helloworld.xml is as follows:
 
 You will notice that there are two additional files that we have not yet mentioned: index.html and tmpl/index.html. These files are included so that these directories cannot be browsed. If a used attempts to point their browser to these folders, the index.html file will be displayed. These files can be left empty or can contain the simple line:
 
-
+ 
 <code php><html><body bgcolor="#FFFFFF"></body></html></code>
 
 which will display an empty page.
@@ -150,3 +158,4 @@ Since our module does not use any parameters, this section is empty.
 ===== Conclusion =====
 
 Module development for Joomla! is a fairly simple, straightforward process. Using the techniques described in this tutorial, an endless variety of modules can be developed with little hassle.
+

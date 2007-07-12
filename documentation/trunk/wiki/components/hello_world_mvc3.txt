@@ -15,22 +15,25 @@ To make things more interesting, we will load the greeting from a database table
 
 The first step is to obtain a reference to a database object. Since Joomla! uses the database for its normal operation, a database connection already exists; therefore, it is not necessary to create your own. A reference to the existing database can be obtained using:
 
-
-<code php>$db => JFactory::getDBO();</code>
+ 
+<code php>$db =& JFactory::getDBO();</code>
 
 JFactory is a static class that is used to retrieve references to many of the system objects. More information about this class can be found in the API documentation.
 
 The method name (getDBO) stands for get DataBase Object, and is easy and important to remember.
 
-Now that we have obtained a reference to the database object, we can retrieve our data. We do this in two steps:
-  - store our query in the database object   load the result
+Now that we have obtained a reference to the database object, we can retrieve our data. We do this in two steps: *
+store our query in the database object
+
+  *
+load the result
 
 Our new getGreeting() method will therefore look like:
 
-
+ 
 <code php>function getGreeting()
 {
-   $db => JFactory::getDBO();
+   $db =& JFactory::getDBO();
 
    $query = 'SELECT greeting FROM #__hello';
    $db->setQuery( $query );
@@ -39,9 +42,9 @@ Our new getGreeting() method will therefore look like:
    return $greeting;
 }</code>
 
-hello is the name of the table that we will create later, and greeting is the name of the field that stores the greetings. If you are not familiar with SQL, it would be helpful to take a tutorial or a lesson to get yourself up to speed. One such tutorial can be found at[[http://www.w3schools.com/sql/default.asp|w3schools]].
+hello is the name of the table that we will create later, and greeting is the name of the field that stores the greetings. If you are not familiar with SQL, it would be helpful to take a tutorial or a lesson to get yourself up to speed. One such tutorial can be found at [[http://www.w3schools.com/sql/default.asp|w3schools]].
 
-The $db->loadResult() method will execute the stored database query and return the first field of the first row of the result. See [[references:joomla.framework:database:jdatabase|JDatabase API reference]] for more information about other load methods in the JDatabase class.
+The $db->loadResult() method will execute the stored database query and return the first field of the first row of the result. See [[http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,references:joomla.framework:database:jdatabase/|JDatabase API reference]] for more information about other load methods in the JDatabase class.
 
 ===== Creating the Installation SQL File =====
 
@@ -51,7 +54,7 @@ We will have three queries in our install file: the first will drop the table in
 
 Here are our queries:
 
-
+ 
 <code php>DROP TABLE IF EXISTS `#__hello`;
 
 CREATE TABLE `#__hello` (
@@ -64,7 +67,7 @@ INSERT INTO `#__hello` (`greeting`) VALUES ('Hello, World!'),
 ('Bonjour, Monde!'),
 ('Ciao, Mondo!');</code>
 
-You might find the <nowiki>#__</nowiki> prefix on the table names rather odd. Joomla! will replace this prefix with the prefix used by the current install. For most installs, this table will become jos_hello. This allows multiple installs of Joomla! to use the same database, and prevents collisions with other applications using the same table names (i.e. two applications might share a database, but might both require a 'users' table. This convention avoids problems.)
+You might find the  prefix on the table names rather odd. Joomla! will replace this prefix with the prefix used by the current install. For most installs, this table will become jos_hello. This allows multiple installs of Joomla! to use the same database, and prevents collisions with other applications using the same table names (i.e. two applications might share a database, but might both require a 'users' table. This convention avoids problems.)
 
 We have specified two fields in our database. The first field is id, and is called the 'primary key'. The primary key of a database table is a field that is used to uniquely identify a record. This is often used to lookup rows in the database. The other field is greeting. This is the field that stores the greeting that is returned from the query that we used above.
 
@@ -74,10 +77,10 @@ We will save our queries in a file called install.utf.sql.
 
 Though we might hope that people will never want to uninstall our component, it is important that if they do, we don't leave anything behind. Joomla! will look after deleting the files and directories that were created during install, but you must manually include queries that will remove and tables that have been added to the database. Since we have only created one table, we only need one query:
 
-
+ 
 <code php>DROP TABLE IF EXISTS `#__hello`;</code>
 
-We will save this query in a file calleduninstall.utf.sql.
+We will save this query in a file called uninstall.utf.sql.
 
 ===== Updating our Install File =====
 
@@ -85,7 +88,7 @@ We need to change a few things in our install file. First, we need to add our tw
 
 Our new file looks like this:
 
-
+ 
 <code php><?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
 <install type="component" version="1.5.0">
@@ -142,7 +145,7 @@ Our new file looks like this:
    </administration>
 </install></code>
 
-You will notice two attributes present on the<file>tags within the<install>and<uninstall>sections: charset and driver. The charset is the type of charset to use. The only valid charset is utf8. If you want to create install files for non-utf8 databases (for older version of MySQL), you should omit this attribute.
+You will notice two attributes present on the <file> tags within the <install> and <uninstall> sections: charset and driver. The charset is the type of charset to use. The only valid charset is utf8. If you want to create install files for non-utf8 databases (for older version of MySQL), you should omit this attribute.
 
 The driver attribute specifies which database the queries were written for. Currently, this can only be mysql, but in future versions of Joomla! there may be more database drivers available.
 
@@ -156,4 +159,5 @@ We now have a component that takes advantage of both the Joomla! MVC framework c
 
 ===== Download =====
 
-The component can be downloaded at:[[packages/com_hello3.zip|com_hello3.zip]]
+The component can be downloaded at: [[packages/com_hello3.zip|com_hello3.zip]]
+
