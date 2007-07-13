@@ -1,5 +1,5 @@
 This is an example of a component install manifest (as of January 12, 2007.
-There are some additional elements planned for the J1.5 release).
+There are some additional elements planned for the Joomla! 1.5 release).
 
 <code xml|hello.xml>
 <?xml version="1.0" encoding="utf-8"?>
