@@ -159,5 +159,5 @@ We now have a component that takes advantage of both the Joomla! MVC framework c
 
 ===== Download =====
 
-The component can be downloaded at: [[packages/com_hello3.zip|com_hello3.zip]]
+The component can be downloaded at: [[http://dev.joomla.org/components/com_jd-wiki/data/media/components/com_hello3.zip|com_hello3.zip]]
 

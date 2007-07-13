@@ -400,6 +400,8 @@ Here is the code for the completed default.php file:
 
 Our hellos view is now complete. You can try out the component now to see the results.
 
+The component can be downloaded at: [[http://dev.joomla.org/components/com_jd-wiki/data/media/components/com_hello4a.zip|com_hello4a.zip]]
+
 ===== Getting Down and Dirty: Doing the Real Work =====
 
 Now that the Hellos view is done, it is time to move to the Hello view and model. This is where the real work will get done.
@@ -818,5 +820,5 @@ We have now implemented a basic backend to our component. We are now able to edi
 
 ===== Download =====
 
-The component can be downloaded at: [[packages/com_hello4.zip|com_hello4.zip]]
+The component can be downloaded at: [[http://dev.joomla.org/components/com_jd-wiki/data/media/components/com_hello4.zip|com_hello4.zip]]
 

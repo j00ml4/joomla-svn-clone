@@ -178,5 +178,5 @@ We now have a simple MVC component. Each element is very simple at this point, b
 
 ===== Download =====
 
-The component can be downloaded at: [[packages/com_hello2.zip|com_hello2.zip]]
+The component can be downloaded at: [[http://dev.joomla.org/components/com_jd-wiki/data/media/components/com_hello2.zip|com_hello2.zip]]
 
