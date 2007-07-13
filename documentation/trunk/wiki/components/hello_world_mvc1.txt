@@ -292,5 +292,5 @@ The other file is the admin.hello.php file. This is the entry point for the admi
 
 ===== Download =====
 
-The component can be downloaded at: [[packages/com_hello1.zip|com_hello1.zip]]
+The component can be downloaded at: [[http://dev.joomla.org/components/com_jd-wiki/data/media/components/com_hello1.zip|com_hello1.zip]]
 
