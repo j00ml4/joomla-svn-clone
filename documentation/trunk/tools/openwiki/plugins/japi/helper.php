@@ -710,7 +710,7 @@ var $filename = false;
 class JApiHelperHome extends JApiHelperEntry
 {
 var $namespace = ':start';
-var $section   = '#api_reference';
+var $section   = '#api_references';
 var $type      = 'home';
 var $icon      = true;
 
