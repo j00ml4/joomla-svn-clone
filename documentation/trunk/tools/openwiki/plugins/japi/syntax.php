@@ -16,7 +16,7 @@
 
 defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
 global $mosConfig_absolute_path, $option;
-require_once($mosConfig_absolute_path.'/components/'.$option.'/lib/plugins/syntax.php');
+require_once($mosConfig_absolute_path.'/components/com_jd-wiki/lib/plugins/syntax.php');
 
 define('JAPI_PLUGIN', dirname(__FILE__));
 
