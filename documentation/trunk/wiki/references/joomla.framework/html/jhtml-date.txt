@@ -16,7 +16,7 @@ string ( **$date**, **$format**, **$offset** )
 
 ===== Examples =====
 <code php|Example>
-echo JHTML::date( 'Sunday, May 20th, 2007 22:19', DATE_FORMAT_LC2, -3 );
+echo JHTML::_( 'date', 'Sunday, May 20th, 2007 22:19', DATE_FORMAT_LC2, -3 );
 </code>
 might produce:
 <code php|Result>

@@ -14,7 +14,7 @@ string iframe	( **$url**, **$name**, **$attribs** )
 ===== Examples =====
 <code php|Example>
 $attribs = array( 'id' => 'iframe-id', 'class' => 'frame-class' );
-echo JHTML::iframe( 'http://www.joomla.org', 'Iframe-name', $attribs );
+echo JHTML::_( 'iframe', 'http://www.joomla.org', 'Iframe-name', $attribs );
 </code>
 might produce:
 <code php|Result>

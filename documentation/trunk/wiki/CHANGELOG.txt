@@ -19,6 +19,7 @@ Legend:
 16.07.2007 Ian MacLennan
  ^	JFolder::files - added $exclude parameter
  ^	JFolder::folders - added $exclude parameter
+ ^  Updated JHTML method examples to be called via JHTML::_ instead of directly
 
 31.05.2007 Ian MacLennan
  +	JFile::getName
