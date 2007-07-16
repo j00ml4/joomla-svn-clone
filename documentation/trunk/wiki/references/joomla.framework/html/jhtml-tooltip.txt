@@ -16,7 +16,7 @@ void tooltip ( **$tooltip**, **$title**, **$image**, **$text**, **$href**, **$li
 
 ===== Examples =====
 <code php|Example>
-echo JHTML::tooltip( 'Tip of the Day', 'Use Joomla! for all your coffee making needs!', 'tooltip.png' );
+echo JHTML::_( 'tooltip', 'Tip of the Day', 'Use Joomla! for all your coffee making needs!', 'tooltip.png' );
 </code>
 might produce:
 <code php|Result>

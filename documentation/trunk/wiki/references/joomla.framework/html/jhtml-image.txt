@@ -13,7 +13,7 @@ string image	( **$url**, **$alt**, **$attribs** )
 
 ===== Examples =====
 <code php|Example>
-echo JHTML::image( '/administrator/images/backup.png', 'Backup Image' );
+echo JHTML::_( 'image', '/administrator/images/backup.png', 'Backup Image' );
 </code>
 might produce:
 <code php|Result>

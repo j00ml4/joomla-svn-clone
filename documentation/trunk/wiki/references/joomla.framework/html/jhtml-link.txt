@@ -13,7 +13,7 @@ string link ( **$url**, **$text**, **$attribs** )
 
 ===== Examples =====
 <code php|Example>
-echo JHTML::link( 'http://www.joomla.org', 'Welcome to Joomla!' );
+echo JHTML::_( 'link', 'http://www.joomla.org', 'Welcome to Joomla!' );
 </code>
 might produce:
 <code php|Result>
