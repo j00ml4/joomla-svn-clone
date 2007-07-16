@@ -3,12 +3,14 @@
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#files|JFolder->files]] | 26 Apr 2006 | Published |
 
 Utility function to read the files in a folder. This function uses FTP if enabled, otherwise, it will use the built in PHP functions. An array containing the files in the folder is returned.
+
 ===== Syntax =====
-array files	( **$path**, **$filter**, **$recurse**, **$fullpath** )
+array files	( **$path**, **$filter**, **$recurse**, **$fullpath**, **$exclude** )
 | **$path** | string | is a string containing the path of the folder to read. |
 | **$filter** | string | is a string containing a filter for file names. The filter is applied as a [[http://en.wikipedia.org/wiki/Regular_expression|regular expression]], so this syntax should be followed. This parameter is optional and if omitted defaults to an empty string. |
 | **$recurse** | boolean | is a flag which specifies whether or not sub-folders should be recursively searched. This parameter is optional and if omitted defaults to false. |
 | **$fullpath** | boolean | is a flag which specifies whether or not the full path to the file should be returned. This parameter is optional and if omitted defaults to false. |
+| **$exclude** | array | is an array of strings containing filenames that should be excluded from the result. This parameter is optional and if omitted defaults to an array containing the entries '.svn' and 'CVS', which will result in SVN and CVS files being filtered out. |
 
 ===== Examples =====
 ==== Example 1 ====
@@ -23,7 +25,7 @@ might produce:
 Array ( [0] => index.html )
 </code>
 ==== Example 2 ====
-Display only php files in all sub folders, showing full paths:
+Display only PHP files in all sub folders, showing full paths:
 <code php|Example 2>
 jimport( 'joomla.filesystem.folder' );
 $files = JFolder::files( 'templates', 'php$', true, true );

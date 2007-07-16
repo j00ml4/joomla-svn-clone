@@ -16,6 +16,10 @@ Legend:
 ! -> Note
 ---------
 
+16.07.2007 Ian MacLennan
+ ^	JFolder::files - added $exclude parameter
+ ^	JFolder::folders - added $exclude parameter
+
 31.05.2007 Ian MacLennan
  +	JFile::getName
  -	JFile::getFileName
