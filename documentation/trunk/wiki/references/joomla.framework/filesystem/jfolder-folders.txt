@@ -10,6 +10,7 @@ array folders	( **$path**, **$filter**, **$recurse**, **$fullpath** )
 | **$filter** | string | is a string containing a filter for folder names. The filter is applied as a [[http://en.wikipedia.org/wiki/Regular_expression|regular expression]], so this syntax should be followed. This parameter is optional and if omitted defaults to an empty string. |
 | **$recurse** | boolean | is a flag which specifies whether or not sub-folders should be recursively searched. This parameter is optional and if omitted defaults to false. |
 | **$fullpath** | boolean | is a flag which specifies whether or not the full path to the folder should be returned. This parameter is optional and if omitted defaults to false. |
+| **$exclude** | array | is an array of strings containing folders that should be excluded from the result. This parameter is optional and if omitted defaults to an array containing the entries '.svn' and 'CVS', which will result in SVN and CVS folders being filtered out. |
 
 ===== Examples =====
 <code php|Example>
