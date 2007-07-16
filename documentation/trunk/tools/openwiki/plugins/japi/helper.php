@@ -172,9 +172,11 @@ var $_api_uri  = 'http://api.joomla.org/';
 	 */
 	function __construct(&$data, &$renderer, $syntax = 'JAPI')
 	{
+# FIX component name $GLOBALS['option']
+
 		$this->_icon_uri = str_replace(
 							array('{live_site}', '{option}'),
-							array($GLOBALS['mosConfig_live_site'], $GLOBALS['option']),
+							array($GLOBALS['mosConfig_live_site'], 'com_jd-wiki'),
 							$this->_icon_uri);
 
 		$renderer->acronyms['J!']  = 'Joomla!';
@@ -314,7 +316,6 @@ var $_api_uri  = 'http://api.joomla.org/';
 		if ( !isset($this->_cols[$col]) ) {
 			return $col;
 		}
-$this->_dump($siblings, "addEntry($col)");
 
 		$classname = 'JApiHelper'.ucwords($col);
 
@@ -915,7 +916,7 @@ var $_external_helpers = array(
 		$sub  = $helper->getEntryProp('sub', 'wiki');
 		// might contain __constructor
 		if ( $meth = $helper->getEntryProp('meth', 'wiki') ) {
-# echo '<br> ** getFormattedValue ', $meth;
+# TODO
 		}
 		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $this->value);
 		$link = str_replace('::', ':', $link);
@@ -1018,7 +1019,6 @@ var $schema = '%pack%/_%filename%.html#function%func%';
 		$sub  = $helper->getEntryProp('sub', 'wiki');
 		$link = sprintf('[[%s:%s:%s:%s]]', $helper->namespace, $pack, $sub, $this->value);
 		$link = str_replace('::', ':', $link);
-$helper->_dump($this, 'FUNC '.$this->label);
 		return array( 'internallink', $link, $this->label);
 	}
 }
