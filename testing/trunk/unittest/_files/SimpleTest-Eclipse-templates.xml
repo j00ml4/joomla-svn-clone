@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-	PHP code templates for Eclipse 3.x (phpEclipse)
-	Simletest assertion snippets.
-	Install: Window > Preferences > your PHP Plugin ... > Import
+ $Id$
+
+ PHP Simletest assertion code templates for Eclipse 3.2
+	PDT:		Window > Preferences > PHP > Templates > Import
+	PHPeclipse:	Window > Preferences > PHPeclipse Web Development > PHP > Templates > Import
+
 -->
 <templates>
 	<template name="assertClone"

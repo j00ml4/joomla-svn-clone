@@ -1,0 +1,84 @@
+
+Some general examples for UnitTestHelper
+./_files/libs/helper.php
+
+
+(object) getInfoObject( $path )
+you need the returning object as an input argument for several other get-methods.
+$path is the location of a Framework file, a Testcase, or a Testsuite
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	$helper  = UnitTestHelper::getTestHelper();
+	require_once( $helper['location'] );
+
+
+(bool) isTestEnabled( $infoobj )
+whether the test identified by $infoobj is enabled, read: can/will run
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	if ( !UnitTestHelper::isTestEnabled($infoobj) ) {
+		UnitTestHelper::setTestEnabled($this, false);
+	}
+
+
+(string) getTestConfigVar( $infoobj )
+returns the name of a configuration directive the test identified by $infoobj
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	$setting = UnitTestHelper::getTestConfigVar( $infoobj );
+	if ( constant($setting) !== true ) {
+		UnitTestHelper::setTestEnabled($this, false);
+	}
+
+
+(mixed) getProperty($namespace, $prop, $forcetype = null, $destroy = false)
+poor man's registry. Use this to mimic a "static class" variable w/o poluting the global variable namespace ($GLOBALS).
+
+	Example:
+	// initialize
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	$somedata = expensive_operation();
+	...
+	// retrieve
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	echo $somedata->foobar;
+
+
+(void) unsetProperty($namespace, $prop)
+the counterpart of getProperty() will destroy the "property"
+
+	Example:
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	// do stuff with $somedata
+	...
+	// release
+	UnitTestHelper::unsetProperty('MyNamespace', 'fatObject');
+
+
+(JConfig|stdClass) makeCfg($value, $merge = false, $asArray = false)
+Parse URI schemes into JConfig compliant properties. Usefull to pimp a generic JConfig object with user provided credentials.
+
+	Examples:
+	// ie. 'mysql://user:pass@localhost/testdb1?dbprefix=jos_';
+	$options = UnitTestHelper::makeCfg(JUNITTEST_DATABASE_MYSQL4, false, true);
+	$db      =& JDatabase::getInstance( $options );
+
+	// ie. 'ftp://unit:test@localhost/?ftp_sys=WIN';
+	$cfg = UnitTestHelper::makeCfg(JUT_FTP_CREDENTIALS);
+	$FTP =& JFTP::getInstance($cfg->host, $cfg->port);
+	$FTP->login($cfg->user, $cfg->pass);
+
+
+(bool) log($label, $testfile, $message = '')
+a WIP vanilla proxy to error_log()
+Inout is sent to PHP's system logger, using the Operating System's 
+system logging mechanism or a file, depending on what the error_log 
+configuration directive is set to.
+
+	Examples:
+	UnitTestHelper::log('Jwhatever', __FILE__, 'something´s fishy');
+	// in PHP's error log the user will find:
+	Jwhatever (/foobar/JWhateverTest.php) something´s fishy

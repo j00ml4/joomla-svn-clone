@@ -3,9 +3,10 @@ ftp.php
 1	testSetOptions()
 	Should we also test non-existing values, e.g. a string for the timeout?
 
-2	this is pretty "complex" test and should best become a TestSuite by
-	its own (client/JFTP/AllTests.php) divided into separate testcases
+2	this is a pretty "complex" test and should best become a TestSuite by
+	its own (client/JFtp/AllTests.php) divided into separate testcases
 	for each "feature", i.e.
+	- connection
 	- filesystem I/O
 	- permissions
 	- upload

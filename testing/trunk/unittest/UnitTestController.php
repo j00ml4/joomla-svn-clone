@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Joomla! v1.5 UnitTest Platform.
  *
@@ -7,212 +8,198 @@
  * @subpackage 	UnitTest
  */
 
-require_once( dirname(__FILE__) . '/prepend.php');
-
 !defined('JUNITTEST_MAIN_METHOD') && define('JUNITTEST_MAIN_METHOD', 'UnitTestController::main');
 
+require_once (dirname(__FILE__) . '/prepend.php');
+
 /* called from a TestCase */
-if ( JUNITTEST_MAIN_METHOD !== 'UnitTestController::main') {
+if (JUNITTEST_MAIN_METHOD !== 'UnitTestController::main') {
 	return 1;
 }
 
 /**
  * The Controller ...
  */
-class UnitTestController
-{
+class UnitTestController {
+
 	/**
 	 * @param string $path   filepath in JUNITTEST_BASE
 	 * @param string $output renderer [html|xml|json|php|text|custom]
-	 * @param string $label  TestCase caption, defaults to $path
+	 * @param string [$label] TestCase caption
 	 */
-    function main( $path, $output, $label='' )
-    {
-    	$ds     = DIRECTORY_SEPARATOR;
-		$source = JPATH_BASE     .$ds. $path;
-    	$target = JUNITTEST_ROOT .$ds. JUNITTEST_BASE .$ds. $path;
-        $files  = array();
+	function main($path, $output, $label='') {
+		$task  = null;
+		$path  = preg_replace('#[/\\\\]+#', '/', $path);
 
-print_r( array(
-$target,
-$source
-)
-);
-exit;
-		/* run an existing TestCase? */
-		if ( is_file($target) ) {
-            $files = array('RUN'=>$target);
-		}
-		elseif ( is_file($source) || is_dir($source) ) {
-            $files = array('MAKE'=>$source);
-		}
+		$input = UnitTestHelper::getInfoObject( $path );
 
-        if ( JUNITTEST_CLI && isset($files['MAKE']) ) {
-	    	/* create Skeleton(s), CLI + PHP5 only! */
-			$target = dirname(JUNITTEST_ROOT .$ds. JUNITTEST_BASE . str_replace(JPATH_BASE, '', $source));
-			echo PHP_EOL, 'SOURCE: ', $source, PHP_EOL, 'TARGET: ', $target, PHP_EOL, PHP_EOL;
+echo '<pre>'
+	, print_r( $input, true )
+	, '</pre>';
 
-die(PHP_EOL.'Sorry! Calling Skeleton builder from CLI is currently broken.'.PHP_EOL);
-
-			$files = UnitTestController::makeUnitTestFiles( $source );
+		/* create Skeleton(s), CLI + PHP5 only! */
+		if ( JUNITTEST_CLI ) {
+			die(PHP_EOL.'Sorry! Skeleton builder is currently disabled.'.PHP_EOL);
+//			$files = UnitTestController::makeUnitTestFiles($source);
 //			return UnitTestController::main( $path, $output, $label );
-        }
+		}
 
-        $suite = new TestSuite( (count($files) ? $label : 'Empty TestSuite') );
+		$suite = new TestSuite(!empty($label) ? $label : $input->package);
 
-        foreach( $files as $file )
-        {
-        	$const = UnitTestHelper::getTestCaseConfigVar($file);
+/*
+require_once( SIMPLE_TEST.'collector.php' );
+$collector = &new SimplePatternCollector('/Test\.php$/');
+$suite->collect($path, &$collector)
+*/
 
-        	if ( !@constant($const) ) continue;
+exit;
+		$suite->run( UnitTestHelper::getReporter($output) );
 
-			$helper = str_replace(basename($file), '_files'.$ds.basename($file,'.php').'_helper.php', $file);
-			include_once( $helper );
+	}
 
-            include_once( str_replace( JUNITTEST_BASE.$ds, '..'.$ds, $file ) );
-            $suite->addTestFile( $file );
-        }
+	function makeUnitTestFiles($path) {
+		$files  = array ();
+		$folder = array ();
 
-        $suite->run( UnitTestHelper::getReporter($output) );
+		if (is_dir($path)) {
+			$files = UnitTestController::_files($path, true);
+		}
+		elseif (is_file($path)) {
+			$files = array ($path);
+		}
 
-    }
+		foreach ($files as $file) {
+			$folder[] = UnitTestController::makeUnitTestFile($file);
+		}
+		return array_merge($files, $folder);
+	}
 
-    function makeUnitTestFiles( $path )
-    {
-        $files  = array();
-		$folder = array();
-
-        if ( is_dir( $path ) ) {
-            $files = UnitTestController::_files( $path, true);
-        } elseif( is_file( $path ) ) {
-            $files = array($path);
-        }
-
-        foreach( $files as $file ) {
-        	$folder[] = UnitTestController::makeUnitTestFile( $file );
-        }
-        return array_merge($files, $folder);
-    }
-
-    function makeUnitTestFile( $sourceFile )
-    {
-		$files = array();
-        // TODO: legacy will need to be done by hand
-        // NOTE: probably solved since legacy code moved to CMS /plugins/system/legacy
-        if ( strpos( $sourceFile, 'legacy' ) ) return $files;
-        // TODO: patTemplate will need to be done by hand
-        if ( strpos( $sourceFile, 'template' ) ) return $files;
+	function makeUnitTestFile($sourceFile) {
+		$files= array ();
+		// TODO: legacy will need to be done by hand
+		// NOTE: probably solved since legacy code moved to CMS /plugins/system/legacy
+		if (strpos($sourceFile, 'legacy'))
+			return $files;
+		// TODO: patTemplate will need to be done by hand
+		if (strpos($sourceFile, 'template'))
+			return $files;
 
 		// make absolute paths
 		$target     = $sourceFile;
 		$sourceFile = $sourceFile;
 
+		// Create the dir if not found
+		$dir = dirname($target);
 
-        // Create the dir if not found
-        $dir = dirname( $target );
-//print_r( array($sourceFile, $target, $dir) );
-if (1) return array();
+echo "<br>makeUnitTestFile( $sourceFile )<br>";
+print_r(array($sourceFile,$target,$dir));
+if (1) return array ();
 
-        if ( !is_dir( $dir ) ) mkdir( $dir, 0777, true );
+		if (!is_dir($dir)) {
+			mkdir($dir, 0777, true);
+		}
 
-        $classes = UnitTestController::_getClassFromFile( $sourceFile );
+		$classes = UnitTestController::_getClassFromFile($sourceFile);
 
 		foreach ($classes as $class => $extends) {
-			$testfile = dirname($target) .DIRECTORY_SEPARATOR. $class . 'Test.php';
+			$testfile = dirname($target) . DIRECTORY_SEPARATOR . $class . 'Test.php';
 
 			// Check if the file is already in the test dir, if it is continue
-			if ( file_exists( $testfile ) ) continue;
-			$handle = fopen( $testfile, 'wb' );
-			if ( class_exists('Reflection') ) {
-				$skeleton = UnitTestController::getUnitTestTemplateReflection( $class, $sourceFile, $extends );
-	        } else {
-	        	$skeleton = UnitTestController::getUnitTestTemplate( $class, get_class_methods( $class ), $extends );
-	        }
-	        fwrite( $handle, $skeleton);
-	        fclose( $handle );
-	        $files[] = $testfile;
+			if (file_exists($testfile)) {
+				continue;
+			}
+			$handle = fopen($testfile, 'wb');
+			if (((int) PHP_VERSION >= 5) && class_exists('Reflection')) {
+				$skeleton = UnitTestController::getUnitTestTemplate($class, $sourceFile, $extends);
+			}
+			fwrite($handle, $skeleton);
+			fclose($handle);
+			$files[] = $testfile;
 		}
 		return $files;
-    }
-
-	/**
-	 * Due to the limitation in PHP4 it's HIGHLY recommended to use PHP 5
-	 * to create new testcase Skeletons.
-	 * @see getUnitTestTemplateReflection()
-	 */
-    function getUnitTestTemplate( $class, $methods, $extends=false )
-    {
-        if( !is_array( $methods ) ) return;
-
-        // remove any overloaded methods
-        $methods = array_unique( $methods );
-
-        $line = "<?php\n";
-        $line = "// \$Id\$\n";
-        $line.= "class TestOf{$class} extends UnitTestCase\n";
-        $line.= "{\n";
-        $line.= "    function setUp()\n    {\n    }\n";
-        $line.= "    function tearDown()\n    {\n    }\n";
-        foreach( $methods as $method )
-        {
-            $line.= "    function test".ucfirst($method)."()\n";
-            $line.= "    {\n";
-            $line.= "        \$this->assertTrue( false );\n";
-			$line.= "        \$this->_reporter->setMissingTestCase(__FUNCTION__, 'Implement');\n";
-            $line.= "    }\n\n";
-        }
-        $line.= "}\n";
-        $line.= "?>";
-
-        return $line;
-    }
+	}
 
 	/**
 	 * PHP5 only, but more accurate TestCase Skeletons -- thanx to PHPUnit :)
 	 */
-    function getUnitTestTemplateReflection( $class, $file, $extends=false )
-    {
-    	if ( !class_exists($class, false) ) return;
-    	if ( !class_exists('PHPUnit_Util_Skeleton', false) ) {
-			UnitTestHelper::loadFile('Skeleton.php', JUNITTEST_LIBS .'/Util', true);
-    	}
-    	$Skeleton = new PHPUnit_Util_Skeleton($class, $file);
-    	return $Skeleton->generate( false );
-    }
+	function getUnitTestTemplate($class, $file, $extends= false) {
+		if (!class_exists($class, false)) {
+			return;
+		}
+		if (!class_exists('PHPUnit_Util_Skeleton', false)) {
+			UnitTestHelper::loadFile('Skeleton.php', JUNITTEST_LIBS . '/Util', true);
+		}
+		$Skeleton = new PHPUnit_Util_Skeleton($class, $file);
+		return $Skeleton->generate(false);
+	}
 
-    function getUnitTestsList( $path )
-    {
-        return UnitTestController::_files( $path, true );
-    }
+	/**
+	 * Retrieves all available testcases and testsuits.
+	 *
+	 * Creates and populates static properties:
+	 * - 'Controller', 'Tests'
+	 * - 'Controller', 'Disabled'
+	 * - 'Controller', 'Enabled'
+	 *
+	 * @uses UnitTestHelper::getProperty()
+	 * @return array all tests
+	 */
+	function &getUnitTestsList()
+	{
+		$path  = JUNITTEST_ROOT .'/'. JUNITTEST_BASE;
+		$files = UnitTestController::_files($path, true);
+
+		$tests    =& UnitTestHelper::getProperty('Controller', 'Tests', 'array');
+		$disabled =& UnitTestHelper::getProperty('Controller', 'Disabled', 'array');
+		$enabled  =& UnitTestHelper::getProperty('Controller', 'Enabled', 'array');
+
+		foreach( $files as $path ) {
+			$info = UnitTestHelper::getInfoObject($path);
+			if ( $info->enabled ) {
+				$enabled[$path] = $info;
+			} else {
+				$disabled[$path] = $info;
+			}
+			$tests[$path] = $info;
+		}
+		ksort($tests);
+
+		return $tests;
+	}
 
 	/**
 	 * @param string $path full qualified path
 	 */
-    function _files( $path, $showFolders=false )
-	{
-		// Initialize variables
-		$files   =
-		$folder  = array();
-		$xfolder = array('.', '..','.svn', '_files');
+	function _files($path, $showFolders=false) {
 
-		// Is the path a folder?
-		if ( !is_dir( $path ) ) return $files;
+		// Initialize variables
+		$path    = rtrim($path, '\\/');
+		$files   = array();
+		$folder  = array();
+		$xfolder = array('.', '..', '.svn', '_files');
+
+		// Is $path as file?
+		if (!is_dir($path)) {
+			return $files;
+		}
 
 		// First get Files from the Dir
-		foreach (glob($path.DIRECTORY_SEPARATOR.'*.php') as $filename) {
-			if ( substr(basename($filename), 0, 1) != '_') {
-			    $files[] = $filename;
+		$l = strlen(JUNITTEST_ROOT .'/'. JUNITTEST_BASE) + 1;
+		foreach (glob($path .'/*.php') as $filename) {
+			if (substr(basename($filename), 0, 1) != '_') {
+				$files[] = substr($filename, $l);
 			}
 		}
 
 		if ($showFolders) {
-			foreach (glob($path.DIRECTORY_SEPARATOR.'*', GLOB_ONLYDIR) as $foldername) {
-			    $path = $foldername;
-			    if ( false === in_array(basename($path), $xfolder) ) {
-				    $folder += UnitTestController::_files($foldername, $showFolders);
-			    }
-			}
+			foreach (glob("$path/*", GLOB_ONLYDIR) as $foldername) {
+				$path = substr($foldername, $l);
+
+				if (false === in_array(basename($path), $xfolder)) {
+					$folder = UnitTestController::_files($foldername, $showFolders);
+				}
 			$files = array_merge($files, $folder);
+			}
 		}
 
 		return $files;
@@ -221,25 +208,23 @@ if (1) return array();
 	/**
 	 * @todo: fix to read ALL classes incl. Helpers
 	 */
-	function _getClassFromFile( $path )
-	{
-        include_once( $path );
+	function _getClassFromFile($path) {
+		include_once ($path);
 
-	    $lines   = file( $path );
-	    $found   = array();
+		$lines = file($path);
+		$found = array();
 
-	    $classes = preg_grep('/^\s?class\sJ[A-Z][a-z]+/', $lines);
+		$classes = preg_grep('/^\s?class\sJ[A-Z][a-z]+/', $lines);
 		foreach ($classes as $decl) {
 			$tokens = preg_split('/\s+/', trim($decl));
-			if ( isset($tokens[1]) ) {
-				$found[ $tokens[1] ] = isset($tokens[3]) ? $tokens[3] : false;
+			if (isset ($tokens[1])) {
+				$found[$tokens[1]]= isset ($tokens[3]) ? $tokens[3] : false;
 			}
 		}
 		return $found;
 	}
 }
 
-
-if ( JUNITTEST_MAIN_METHOD == 'UnitTestController::main') {
-	UnitTestController::main( JUNITTEST_BASE , JUNITTEST_REPORTER );
+if (JUNITTEST_MAIN_METHOD == 'UnitTestController::main') {
+	UnitTestController::main(JUNITTEST_BASE, JUNITTEST_REPORTER);
 }

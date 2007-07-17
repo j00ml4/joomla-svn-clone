@@ -22,17 +22,19 @@ class JoomlaTestSuite extends TestSuite
 
 	function addClassTest($test_file)
 	{
-		$class  = basename($test_file, 'Test.php');
-		$helper = UnitTestHelper::getTestcaseHelper($test_file);
-		if ($helper['location']) {
-			require_once $helper['location'];
+		$finfo  = UnitTestHelper::getInfoObject($test_file);
+
+		if ( $finfo->enabled ) {
+			if ($finfo->helper['location']) {
+				require_once $finfo->helper['location'];
+			}
+
+			/* load testcase */
+			require_once JUNITTEST_BASE .DIRECTORY_SEPARATOR. ltrim($test_file);
+
+			/* add testclass */
+			parent::addTestClass($finfo->testclass);
 		}
-
-		/* load testcase */
-		require_once JUNITTEST_BASE .DIRECTORY_SEPARATOR. ltrim($test_file);
-
-		/* add testclass */
-		parent::addTestClass('TestOf'.$class);
 	}
 
 }

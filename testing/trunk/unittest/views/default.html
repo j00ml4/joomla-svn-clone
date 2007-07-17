@@ -8,39 +8,40 @@
     <body>
         <h1 class="header" style="cursor:default">Joomla! v1.5 UnitTest Platform</h1>
 
-        <div class="testcasefolder">
-        Sorry. This view is currently broken.
-        </div>
         <div class="testcase">
         You may run each test case directly either via CLI or simply by URL, i.e.
         <a href="tests/AllTests.php">
         <?php echo '/'.trim($_SERVER['REQUEST_URI'],'\/'); ?>/tests/AllTests.php
         </a>
         </div>
-        <div class="testcase">
-        .CirTap
-        </div>
-
-        <!-- Loop through the tests and print a link for each one
-        <?php foreach( $testCases as $uri => $unittest ):?>
-        <?php if ( $unittest['basename'] == 'AllTests.php' ):?>
+<!--
+[tests/libraries/joomla/JFactoryTest.php] => Array
+(
+    [dirname] => libraries/joomla
+    [basename] => JFactoryTest.php
+    [extension] => php
+    [screen] => libraries»joomla» JFactory
+)
+-->
+       <!-- Loop through the tests and print a link for each one -->
+	<?php foreach( $testCases as $uri => $unittest ): ?>
+	<?php if ( $unittest['basename'] == 'AllTests.php' ): ?>
         <div class="testcasefolder">
-        	<?php if ( isset($disabledTests[$uri]) ):?>
-        	<?php echo $unittest['screen']; ?> (partially disabled)
-        	<?php else:?>
-            <a href="?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
-            <?php endif;?>
-        </div>
-        <?php else:?>
+			<?php if ( isset($disabled[$uri]) ):?>
+			<?php echo $unittest['screen']; ?> (partially disabled)
+			<?php else:?>
+			<a href="index.php?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
+			<?php endif;?>
+		</div>
+	<?php else:?>
         <div class="testcase">
-        	<?php if ( isset($disabledTests[$uri]) ):?>
-        	<?php echo $unittest['screen']; ?> (disabled)
-        	<?php else:?>
-            <a href="?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
-            <?php endif;?>
-        </div>
-        <?php endif;?>
-        <?php endforeach;?>
-        -->
+			<?php if ( isset($disabled[$uri]) ):?>
+			<?php echo $unittest['screen']; ?> (disabled)
+			<?php else:?>
+			<a href="index.php?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
+			<?php endif;?>
+			</div>
+	<?php endif;?>
+	<?php endforeach;?>
     </body>
 </html>

@@ -2,9 +2,9 @@
 /**
  * Joomla! v1.5 UnitTest Platform Configuration.
  *
- * This file defines configuration for running the unit tests for the
+ * This file contains configuration directives to run the unit tests of the
  * Joomla! 1.5 Framework.  Some tests have dependencies to PHP extensions
- * or databases which may not necessary be installed on the target system.
+ * or databases which may not necessary be installed/available on your system.
  * For these cases, the ability to disable or configure testing is provided
  * below.
  *
@@ -39,14 +39,25 @@ define('JPATH_BASE', dirname( dirname(__FILE__) ));
 define('JUNITTEST_ROOT',  dirname( __FILE__ ));
 define('JUNITTEST_BASE',  'tests');
 
+/**
+ * Templates and renderer
+ */
 define('JUNITTEST_VIEWS',  JUNITTEST_ROOT.'/views');
-# TODO: find a better location ...
-define('JUNITTEST_LIBS',   JUNITTEST_ROOT.'/views/libs');
+
+/**
+ * UnitTest Framework libraries and tests
+ */
+define('JUNITTEST_LIBS',   JUNITTEST_ROOT.'/_files/libs');
 
 /**
  * This file should be writable by the web server's user.
  */
 define('JUNITTEST_PHP_ERRORLOG', JUNITTEST_ROOT . '/php'.PHP_VERSION.'_errors.log');
+
+/**
+ * Enable the skeletal builder from CLI. PHP 5 only.
+ */
+define('JUNITTEST_SKELETAL_BUILDER', JUNITTEST_CLI && ((int)PHP_VERSION >= 5));
 
 /**
  * Whether to add stub code to generated Skeleton tests
@@ -62,13 +73,24 @@ define('JUNITTEST_HOME_PHP5', 'http://php5.example.com/unittest/');
 
 /**
  * Default $output format for index.php unless provided by URL or argument.
- * Standard Joomla reporters are: html, xml, php, json, text
+ * Standard Joomla reporters are: html, xml, php, json, text.
+ *
  * Use 'custom' for another renderer/output format.
+ * @see JUNITTEST_REPORTER_CLI
  */
 define('JUNITTEST_REPORTER', 'html');
 
 /**
- * Full qualified path and classname of the 'custom' reported.
+ * Default $output format for index.php in CLI mode.
+ * Standard Joomla reporters are: text, html, xml, php, json.
+ *
+ * Use 'custom' for another renderer/output format.
+ * @see JUNITTEST_REPORTER
+ */
+define('JUNITTEST_REPORTER_CLI', 'text');
+
+/**
+ * Full qualified path and classname of the 'custom' reporter.
  * Only used if JUNITTEST_REPORTER == 'custom'
  */
 define('JUNITTEST_REPORTER_CUSTOM_PATH',  JUNITTEST_VIEWS.'/WebMechanicRenderer.php');
@@ -90,7 +112,7 @@ define('JUNITTEST_REPORTER_RENDER_PASSED', true);
  * Never commit plaintext passwords to the source code repository!
  */
 define('JUNITTEST_DATABASE_MYSQL3', 'mysql://username:password@localhost:3303/database_name');
-define('JUNITTEST_DATABASE_MYSQL4', 'mysql://username:password@localhost/database_name');
+define('JUNITTEST_DATABASE_MYSQL4', 'mysql://username:password@localhost:3306/database_name');
 define('JUNITTEST_DATABASE_MYSQL5', 'mysql://username:password@localhost:3307/database_name');
 
 /**@#+
@@ -100,15 +122,15 @@ define('JUNITTEST_DATABASE_MYSQL5', 'mysql://username:password@localhost:3307/da
 /**
  * /libraries/joomla
  */
-define('JUT_JVERSION', true);
-define('JUT_JCONFIG', false);
-define('JUT_JLOADER', true);
+define('JUT_JOOMLA_JFACTORY', true);
+define('JUT_JOOMLA_JFRAMEWORKCONFIG', false);
+define('JUT_JOOMLA_JLOADER', true);
+define('JUT_JOOMLA_JVERSION', true);
 
 /*
  * Edit TestConfiguration.php, not TestConfiguration-dist.php.
  * Never commit plaintext passwords to the source code repository!
  */
-define('JUT_JFACTORY', true);
 define('JUT_FACTORY_DBO',          JUNITTEST_DATABASE_MYSQL4);
 define('JUT_FACTORY_SMTP_NOAUTH', 'smtp://someone@example.com:secret@localhost/?smtpauth=0');
 define('JUT_FACTORY_SMTP_AUTH',   'smtp://someone@example.com:secret@localhost/?smtpauth=1');
@@ -118,7 +140,6 @@ define('JUT_FACTORY_SMTP_AUTH',   'smtp://someone@example.com:secret@localhost/?
  */
 define('JUT_APPLICATION_JAPPLICATION', false);
 define('JUT_APPLICATION_JAPPLICATIONHELPER', false);
-define('JUT_APPLICATION_JEVENTDISPATCHER', false);
 define('JUT_APPLICATION_JMENU', false);
 define('JUT_APPLICATION_JPATHWAY', false);
 define('JUT_APPLICATION_JROUTER', false);
@@ -129,7 +150,6 @@ define('JUT_APPLICATION_COMPONENT_JMODEL', false);
 define('JUT_APPLICATION_COMPONENT_JVIEW', false);
 define('JUT_APPLICATION_COMPONENT_JCOMPONENTHELPER', false);
 define('JUT_APPLICATION_MODULE_JMODULEHELPER', false);
-define('JUT_APPLICATION_PLUGIN_JPLUGINHELPER', false);
 
 /**
  * /libraries/joomla/base
@@ -142,14 +162,23 @@ define('JUT_BASE_JTREE', false);
  * /libraries/joomla/cache
  */
 define('JUT_CACHE_JCACHE', false);
+define('JUT_CACHE_JCACHESTORAGE', false);
+
+/**
+ * /libraries/joomla/cache/handlers
+ */
 define('JUT_CACHE_HANDLERS_JCACHECALLBACK', false);
 define('JUT_CACHE_HANDLERS_JCACHEOUTPUT', false);
 define('JUT_CACHE_HANDLERS_JCACHEPAGE', false);
 define('JUT_CACHE_HANDLERS_JCACHEVIEW', false);
-define('JUT_CACHE_STORAGE_JCACHESTORAGE', false);
+
+/**
+ * /libraries/joomla/cache/storage
+ */
 define('JUT_CACHE_STORAGE_JCACHESTORAGEAPC', @extension_loaded('apc'));
-define('JUT_CACHE_STORAGE_JCACHESTORAGEEACCELERATOR', @extension_loaded('eAccelerator'));
+define('JUT_CACHE_STORAGE_JCACHESTORAGEEACCELERATOR', @extension_loaded('eaccelerator'));
 define('JUT_CACHE_STORAGE_JCACHESTORAGEFILE', false);
+define('JUT_CACHE_STORAGE_JCACHESTORAGEMEMCACHE', @extension_loaded('memcache'));
 
 /**
  * /libraries/joomla/client
@@ -157,13 +186,13 @@ define('JUT_CACHE_STORAGE_JCACHESTORAGEFILE', false);
  * Edit TestConfiguration.php, not TestConfiguration-dist.php.
  * Never commit plaintext passwords to the source code repository!
  */
-define('JUT_CLIENT_JFTP', false);
-define('JUT_FTP_NATIVE', false);
+define('JUT_CLIENT_JFTP', false);  # uppercase class suffix
+define('JUT_FTP_NATIVE', (function_exists('ftp_connect'))? 1 : 0);
 /* if your ftp server runs on a windows box, use ?ftp_sys=WIN */
 define('JUT_FTP_CREDENTIALS', 'ftp://username:password@localhost/?ftp_sys=');
 define('JUT_FTP_CREDENTIALS_ROOT', '/htdocs/joomla');
 
-define('JUT_CLIENT_JLDAP', false);
+define('JUT_CLIENT_JLDAP', false);  # uppercase class suffix
 define('JUT_CLIENT_JCLIENTHELPER', false);
 
 /**
@@ -210,29 +239,24 @@ define('JUT_DOCUMENT_JDOCUMENTRENDERER', false);
 define('JUT_DOCUMENT_ERROR_JDOCUMENTERROR', false);
 
 /**
- * /libraries/joomla/document/raw
- */
-define('JUT_DOCUMENT_RAW_JDOCUMENTRAW', false);
-
-/**
  * /libraries/joomla/document/feed
  */
 define('JUT_DOCUMENT_FEED_JDOCUMENTFEED', false);
 define('JUT_DOCUMENT_FEED_JFEEDITEM', false);
 define('JUT_DOCUMENT_FEED_JFEEDENCLOSURE', false);
 define('JUT_DOCUMENT_FEED_JFEEDIMAGE', false);
-define('JUT_DOCUMENT_FEED_JDOCUMENTRENDERER_ATOM', false);  # '_' in class name ?
-define('JUT_DOCUMENT_FEED_JDOCUMENTRENDERER_RSS', false);  # '_' in class name ?
+define('JUT_DOCUMENT_FEED_JDOCUMENTRENDERERATOM', false);
+define('JUT_DOCUMENT_FEED_JDOCUMENTRENDERERRSS', false);  # uppercase class suffix
 
 /**
  * /libraries/joomla/document/html
  */
-define('JUT_DOCUMENT_HTML_JDOCUMENTHTML', false);
-define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_COMPONENT', false);  # '_' in class name ?
-define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_HEAD', false);  # '_' in class name ?
-define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_MESSAGE', false);  # '_' in class name ?
-define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_MODULE', false);  # '_' in class name ?
-define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_MODULES', false);  # '_' in class name ?
+define('JUT_DOCUMENT_HTML_JDOCUMENTHTML', false);  # uppercase class suffix
+define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERERCOMPONENT', false);
+define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERERHEAD', false);
+define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERERMESSAGE', false);
+define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERERMODULE', false);
+define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERERMODULES', false);
 
 /**
  * /libraries/joomla/document/pdf
@@ -240,26 +264,25 @@ define('JUT_DOCUMENT_HTML_JDOCUMENTRENDERER_MODULES', false);  # '_' in class na
 define('JUT_DOCUMENT_PDF_JDOCUMENTPDF', false);
 
 /**
+ * /libraries/joomla/document/raw
+ */
+define('JUT_DOCUMENT_RAW_JDOCUMENTRAW', false);  # uppercase class suffix
+
+/**
  * /libraries/joomla/environment
  */
-define('JUT_ENVIRONMENT_JURI', false);
+define('JUT_ENVIRONMENT_JURI', false);  # uppercase class suffix
 define('JUT_ENVIRONMENT_JBROWSER', false);
 define('JUT_ENVIRONMENT_JREQUEST', false);
 define('JUT_ENVIRONMENT_JRESPONSE', false);
 
 /**
- * /libraries/joomla/environment/sessionstorage
+ * /libraries/joomla/event
  */
-define('JUT_ENVIRONMENT_JSESSION', false);
-define('JUT_ENVIRONMENT_JSESSIONSTORAGE', false);
-define('JUT_ENVIRONMENT_JSESSIONSTORAGENONE', false);
-define('JUT_ENVIRONMENT_JSESSIONSTORAGEDATABASE', false);
-
-/** requires APC extension */
-define('JUT_ENVIRONMENT_JSESSIONSTORAGEAPC', @extension_loaded('apc'));
-
-/** requires eAccellerator */
-define('JUT_ENVIRONMENT_JSESSIONSTORAGEEACCELERATOR', false);
+define('JUT_EVENT_JEVENTDISPATCHER', false);
+define('JUT_EVENT_JEVENTHANDLER', false);
+define('JUT_EVENT_JPLUGIN', false);
+define('JUT_EVENT_JPLUGINHELPER', false);
 
 /**
  * /libraries/joomla/filesystem
@@ -280,23 +303,41 @@ define('JUT_FILESYSTEM_JARCHIVEZIP', false);
 /**
  * /libraries/joomla/filter
  */
-define('JUT_FILTER_JINPUTFILTER',  false); // "wrong" class name, should be JFilterInput
-define('JUT_FILTER_JOUTPUTFILTER', false); // "wrong" class name, should be JFilterOutput
+define('JUT_FILTER_JINPUTFILTER',  false);  # class name mismatch, expected: JFilterInput (input.php)
+define('JUT_FILTER_JOUTPUTFILTER', false);  # class name mismatch, expected: JFilterOutput (output.php)
 
 /**
  * /libraries/joomla/html
  */
 define('JUT_HTML_JEDITOR', false);
-define('JUT_HTML_JHTML', false);
+define('JUT_HTML_JHTML', false);  # uppercase class suffix
 define('JUT_HTML_JPAGINATION', false);
+define('JUT_HTML_JPAGINATIONOBJECT', false);
 define('JUT_HTML_JPANE', false);
-define('JUT_HTML_JTOOLTIPS', false);
+define('JUT_HTML_JPANETABS', false);
+define('JUT_HTML_JPANESLIDERS', false);
+define('JUT_HTML_JPARAMETER', false);
+define('JUT_HTML_JTOOLBAR', false);
+
+/**
+ * /libraries/joomla/html/html
+ */
+define('JUT_HTML_HTML_JHTMLBEHAVIOR', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLEMAIL', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLGRID', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLIMAGE', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLLIST', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLMENU', false);  # uppercase class fragment
+define('JUT_HTML_HTML_JHTMLSELECT', false);  # uppercase class fragment
 
 /**
  * /libraries/joomla/html/parameter
  */
-define('JUT_HTML_JPARAMETER', false);
 define('JUT_HTML_PARAMETER_JELEMENT', false);
+
+/**
+ * /libraries/joomla/html/parameter/element
+ */
 define('JUT_HTML_PARAMETER_JELEMENTCATEGORY', false);
 define('JUT_HTML_PARAMETER_JELEMENTEDITORS', false);
 define('JUT_HTML_PARAMETER_JELEMENTFILELIST', false);
@@ -312,7 +353,7 @@ define('JUT_HTML_PARAMETER_JELEMENTPASSWORD', false);
 define('JUT_HTML_PARAMETER_JELEMENTRADIO', false);
 define('JUT_HTML_PARAMETER_JELEMENTSECTION', false);
 define('JUT_HTML_PARAMETER_JELEMENTSPACER', false);
-define('JUT_HTML_PARAMETER_JELEMENTSQL', false);
+define('JUT_HTML_PARAMETER_JELEMENTSQL', false);  # uppercase class suffix
 define('JUT_HTML_PARAMETER_JELEMENTTEXT', false);
 define('JUT_HTML_PARAMETER_JELEMENTTEXTAREA', false);
 define('JUT_HTML_PARAMETER_JELEMENTTIMEZONES', false);
@@ -320,8 +361,11 @@ define('JUT_HTML_PARAMETER_JELEMENTTIMEZONES', false);
 /**
  * /libraries/joomla/html/toolbar
  */
-define('JUT_HTML_JTOOLBAR', false);
 define('JUT_HTML_TOOLBAR_JBUTTON', false);
+
+/**
+ * /libraries/joomla/html/toolbar/button
+ */
 define('JUT_HTML_TOOLBAR_JBUTTONCONFIRM', false);
 define('JUT_HTML_TOOLBAR_JBUTTONCUSTOM', false);
 define('JUT_HTML_TOOLBAR_JBUTTONHELP', false);
@@ -334,7 +378,9 @@ define('JUT_HTML_TOOLBAR_JBUTTONSTANDARD', false);
  * /libraries/joomla/i18n
  */
 define('JUT_I18N_JHELP', false);
+define('JUT_I18N_JTEXT', false);  # class name mismatch, expected: JLanguage (language.php)
 define('JUT_I18N_JLANGUAGE', false);
+define('JUT_I18N_JLANGUAGEHELPER', false);
 
 define('JUT_LANGUAGE_HELP',     'en-GB'); // context help (admin)
 define('JUT_LANGUAGE_FRONTEND', 'en-GB'); // JSite
@@ -345,25 +391,47 @@ define('JUT_LANGUAGE_INSTALL',  'en-GB'); // JInstaller
  * /libraries/joomla/installer
  */
 define('JUT_INSTALLER_JINSTALLER', false);
-
-define('JUT_INSTALLER_ADAPTERS_JINSTALLERPLUGIN', false);
-define('JUT_INSTALLER_ADAPTERS_JINSTALLERMODULE', false);
-define('JUT_INSTALLER_ADAPTERS_JINSTALLERLANGUAGE', false);
-define('JUT_INSTALLER_ADAPTERS_JINSTALLERTEMPLATE', false);
-define('JUT_INSTALLER_ADAPTERS_JINSTALLERCOMPONENT', false);
+define('JUT_INSTALLER_JINSTALLERHELPER', false);
 
 /**
- * /libraries/joomla/registry/format
+ * /libraries/joomla/installer/adapters
+ */
+define('JUT_INSTALLER_ADAPTERS_JINSTALLERCOMPONENT', false);
+define('JUT_INSTALLER_ADAPTERS_JINSTALLERLANGUAGE', false);
+define('JUT_INSTALLER_ADAPTERS_JINSTALLERMODULE', false);
+define('JUT_INSTALLER_ADAPTERS_JINSTALLERPLUGIN', false);
+define('JUT_INSTALLER_ADAPTERS_JINSTALLERTEMPLATE', false);
+
+/**
+ * /libraries/joomla/registry
  */
 define('JUT_REGISTRY_JREGISTRY', false);
+define('JUT_REGISTRY_JREGISTRYFORMAT', false);
 
 /**
  * /libraries/joomla/registry/format
  */
-define('JUT_REGISTRY_JREGISTRYFORMAT', false);
-define('JUT_REGISTRY_JREGISTRYFORMATINI', false);
-define('JUT_REGISTRY_JREGISTRYFORMATPHP', false);
-define('JUT_REGISTRY_JREGISTRYFORMATXML', false);
+define('JUT_REGISTRY_FORMAT_JREGISTRYFORMATINI', false);  # uppercase class suffix
+define('JUT_REGISTRY_FORMAT_JREGISTRYFORMATPHP', false);  # uppercase class suffix
+define('JUT_REGISTRY_FORMAT_JREGISTRYFORMATXML', false);  # uppercase class suffix
+
+/**
+ * /libraries/joomla/session
+ */
+define('JUT_SESSION_JSESSION', false);
+define('JUT_SESSION_JSESSIONSTORAGE', false);
+
+/**
+ * /libraries/joomla/session/storage
+ */
+// requires APC extension
+define('JUT_SESSION_STORAGE_JSESSIONSTORAGEAPC', @extension_loaded('apc'));
+define('JUT_SESSION_STORAGE_JSESSIONSTORAGEDATABASE', false);
+// requires eAccellerator
+define('JUT_SESSION_STORAGE_JSESSIONSTORAGEEACCELERATOR', @extension_loaded('eaccelerator'));
+// requires memcache
+define('JUT_SESSION_STORAGE_JSESSIONSTORAGEMEMCACHE', false);
+define('JUT_SESSION_STORAGE_JSESSIONSTORAGENONE', false);
 
 /**
  * /libraries/joomla/template
@@ -379,12 +447,13 @@ define('JUT_TEMPLATE_JTEMPLATE', false);
 define('JUT_USER_JUSER', false);
 define('JUT_USER_JUSERHELPER', false);
 
-define('JUT_USER_JAUTHENTICATE', false);
-define('JUT_USER_JAUTHENTICATERESPONSE', false);
+define('JUT_USER_JAUTHENTICATION', false);
+define('JUT_USER_JAUTHENTICATIONRESPONSE', false);
 
 define('JUT_USER_JAUTHORIZATION', false);
-define('JUT_USER_JTABLEARO',      false); // what are they doin' here?
-define('JUT_USER_JTABLEAROGROUP', false); // -> /database/table/aro.php, arogroup.php
+// what are they doin' here? -> /database/table/aro.php, arogroup.php
+define('JUT_USER_JTABLEARO', false);  # uppercase class fragment
+define('JUT_USER_JTABLEAROGROUP', false);  # uppercase class fragment
 
 /**
  * /libraries/joomla/utilities
@@ -394,13 +463,13 @@ define('JUT_UTILITIES_JBUFFERSTREAM', false);
 define('JUT_UTILITIES_JDATE', false);
 define('JUT_UTILITIES_JERROR', false);
 define('JUT_UTILITIES_JEXCEPTION', false);
-define('JUT_UTILITIES_FUNCTIONS', false);  # no class found
 define('JUT_UTILITIES_JLOG', false);
 define('JUT_UTILITIES_JMAIL', false);
 define('JUT_UTILITIES_JMAILHELPER', false);
 define('JUT_UTILITIES_JPROFILER', false);
-define('JUT_UTILITIES_JSIMPLEXML', false);
-define('JUT_UTILITIES_JSIMPLEXMLELEMENT', false);
+define('JUT_UTILITIES_JSIMPLECRYPT', false);
+define('JUT_UTILITIES_JSIMPLEXML', false);  # uppercase class suffix
+define('JUT_UTILITIES_JSIMPLEXMLELEMENT', false);  # uppercase class fragment
 define('JUT_UTILITIES_JSTRING', false);
 define('JUT_UTILITIES_JUTILITY', false);
 

@@ -29,12 +29,14 @@ var $method_name;
 
         flush();
 
-        echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
-        echo "<html>\n<head>\n<title>Testcase: $test_name</title>\n";
-        echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n";
-        echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"views/style.css\" />\n";
-        echo "</head>\n<body>\n";
-        echo "<h1 class=\"header\" onclick=\"location.href='/unittest/';\">Testcase: $test_name</h1>\n";
+		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">', PHP_EOL
+			, '<html><head>', PHP_EOL
+			, '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">', PHP_EOL
+			, '<title>Testcase:', $test_name, '</title>', PHP_EOL
+			, '<link rel="stylesheet" type="text/css" href="views/style.css" />', PHP_EOL
+			, '</head><body>', PHP_EOL
+			, '<h1 class="header" onclick="location.href=\'/unittest/\';">Testcase: ', $test_name,'</h1>'
+			, PHP_EOL;
     }
 
     /**
@@ -46,30 +48,25 @@ var $method_name;
     {
         $state = ($this->getFailCount() + $this->getExceptionCount() > 0 ? "fail" : "pass");
 
-        echo "<div class=\"footer_{$state}\">";
-        echo $this->getTestCaseProgress() . "/" . $this->getTestCaseCount();
-        echo " test cases complete:\n";
-        echo "<strong>" . $this->getPassCount() . "</strong> passes, ";
-        echo "<strong>" . $this->getFailCount() . "</strong> fails and ";
-        echo "<strong>" . $this->getExceptionCount() . "</strong> exceptions.";
-        echo "</div>\n";
-        echo "<div class=\"footer_footer\"><a href=\"../\">&lt;= Home</a></div>\n";
-        echo "</body>\n</html>\n";
+		echo '<div class="footer_', $state, '>'
+			, $this->getTestCaseProgress(), '/', $this->getTestCaseCount()
+			, ' test cases complete:', PHP_EOL
+			, '<strong>' , $this->getPassCount() , '</strong> passes, ', PHP_EOL
+			, '<strong>' , $this->getFailCount() , '</strong> fails and ', PHP_EOL
+			, '<strong>' , $this->getExceptionCount() , '</strong> exceptions.', PHP_EOL
+			, '</div>', PHP_EOL
+			, '<div class="footer_footer"><a href="../">&lt;= Home</a></div>', PHP_EOL
+			, '</body>', PHP_EOL, '</html>';
     }
 
     function paintPass( $message )
     {
         parent::paintPass( $message );
 
-        echo "<div class=\"pass\">";
-
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
 
-        echo implode(" -&gt; ", $breadcrumb );
-
-        echo " -&gt; " . $this->_htmlEntities( $message );
-        echo "</div>";
+        $this->_paintHelper('pass', $breadcrumb, $message);
     }
 
     /**
@@ -83,15 +80,10 @@ var $method_name;
     {
         parent::paintFail( $message );
 
-        echo "<div class=\"fail\">";
-
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
 
-        echo implode(" -&gt; ", $breadcrumb );
-
-        echo " -&gt; " . $this->_htmlEntities( $message );
-        echo "</div>";
+        $this->_paintHelper('fail', $breadcrumb, $message);
     }
 
     /**
@@ -103,33 +95,25 @@ var $method_name;
     {
         parent::paintException( $message );
 
-        echo "<div class=\"exception\">";
-
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
 
-        echo implode( " -&gt; ", $breadcrumb );
-        echo " -&gt; " . $this->_htmlEntities($message);
-        echo "</div>";
+        $this->_paintHelper('exception', $breadcrumb, $message);
     }
 
     /**
-     *    Paints a simple supplementary message.
-     *    @param string $message        Text to display.
-     *    @access public
+     * Paints a simple supplementary message.
+     * @param string $message        Text to display.
+     * @access public
      */
     function paintMessage( $message )
     {
         parent::paintMessage( $message );
 
-        echo "<div class=\"message\">";
-
         $breadcrumb = $this->getTestList();
         array_shift( $breadcrumb );
 
-        echo implode( " -&gt; ", $breadcrumb );
-        echo " -&gt; " . $this->_htmlEntities($message);
-        echo "</div>";
+		$this->_paintHelper('message', $breadcrumb, $message);
     }
 
     /**
@@ -138,8 +122,16 @@ var $method_name;
      */
     function paintFormattedMessage( $message )
     {
-        echo '<pre class="message">'.$this->_htmlEntities( $message ).'</pre>';
+        echo '<pre class="message">', $this->_htmlEntities( $message ), '</pre>';
     }
+
+	function _paintHelper($type, $breadcrumb, $message)
+	{
+        echo '<div class="', $type, '">'
+        	, implode(' -&gt; ', $breadcrumb )
+        	, ' -&gt; ', $this->_htmlEntities( $message )
+        	, '</div>', PHP_EOL;
+	}
 
     /**
      * Character set adjusted entity conversion.
@@ -179,7 +171,7 @@ var $method_name;
 	function setMissingTestCase($method_name, $reason='') {
 		$this->_methods[$method_name]['skip']++;
 		// flag as failed
-		$this->assertTrue( false, "$method_name needs implementation. ".$reason );
+		$this->assertTrue( false, "$method_name needs implementation. " . $reason );
 	}
 
 }

@@ -16,5 +16,5 @@ if (isset($config))
 // Please test both FTP_NATIVE and emulated mode, by setting this to true/false
 // Currently, you need to comment out line 27 from /unittest/UnitTestController.php for this to work:
 //            include_once( str_replace( UNITTEST_BASE.DIRECTORY_SEPARATOR, '..'.DIRECTORY_SEPARATOR, $file ) );
-!defined('FTP_NATIVE') && define('FTP_NATIVE', true);
+!defined('FTP_NATIVE') && define('FTP_NATIVE', false);
 ?>

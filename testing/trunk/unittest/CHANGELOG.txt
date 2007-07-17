@@ -15,6 +15,39 @@ Legend:
 x -> tests fail
 -------------------------------------------------
 
+2007-07-17 CirTap
+ !	upd. README.txt
+ ^	UnitTestHelper methods now use "info object" as their parameter
+ 	instead of a file path
+ +	UnitTestHelper::getTestDocs()
+ #  UnitTestHelper::getTestConfigVar()
+ ^	libs/suite.php, prepend.php using getInfoObject()
+ ^	TestConfiguration-dist.php, reordered items, fixed wrong
+ 	constant names
+ ^	getUnitTestsList() to handle all file retrieval and test status
+ +	3 new static properties containing all testcase information:
+ 	('Controller', 'Tests'), ('Controller', 'Disabled'), ('Controller', 'Enabled')
+
+ ^	better handling of enabled/disabled tests in index.php for
+ 	list-mode output
+ +	experimental: ability to disable AllTests.php for a complete
+ 	package/subtree using optional JUT_<PACKAGENAME>_ALL directive
+ !	JUT_*_ALL directives are not listed in TestConfiguration-dist.php
+
+2007-07-10 CirTap
+ #	UnitTestHelper::getTestHelper(), wrong paths returned
+ +	1 new static property: ('Helper', $infoobj->classname)
+
+2007-07-07 CirTap
+ !	upd. README.txt
+ +	UnitTestHelper::getInfoObject()
+
+2007-05-23 CirTap
+ ^	upd. JFTPTest with changes from /tags
+ ^	constants in TestConfiguration-dist.php to match
+	present class/file structure
+ ^	minor typos in README.txt
+
 2007-03-11 CirTap
  #	issue with UnitTestReport::getTestcaseHelper()
  #	several missing require_once() for the framework classes
@@ -22,7 +55,7 @@ x -> tests fail
  	  code that uses jimport() for the same files.
  ^	AllTests.php using addTestFile() instead of addTestClass() to add
  	a single test case
- +	new JoomlaTestSuite in /views/lobs/suite.php to be used in AllTests
+ +	new JoomlaTestSuite in /views/libs/suite.php to be used in AllTests
  ^	Skeleton templates
 
 2007-03-03 CirTap

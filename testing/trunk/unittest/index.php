@@ -2,6 +2,8 @@
 /**
  * Joomla! v1.5 UnitTest Platform
  *
+ * Bootstrap file, see README.txt for usage examples.
+ *
  * @version	$Id$
  * @package 	Joomla
  * @subpackage 	UnitTest
@@ -12,104 +14,42 @@
  */
 error_reporting(E_ALL);
 
+// glob() and GLOB_ONLYDIR used in: UnitTestController::_files()
+if ( version_compare(PHP_VERSION, '4.3.3') < 0 ) {
+	die('Sorry. PHP 4.3.3 or later required.');
+}
+
 define('JUNITTEST_MAIN_METHOD', '-stub-');
 
 require_once( dirname(__FILE__) . '/UnitTestController.php' );
 
-// If run thru browser get REQUEST
-if (JUNITTEST_CLI == false )
-{
-	$path   = @$_REQUEST[ 'path' ];
-	$output = @$_REQUEST['output'];
-	if (get_magic_quotes_gpc()) {
-		$path = stripslashes($path);
-	}
-}
-// If run from the command line get the args
-else if ( count($_SERVER['argv']) > 1 )
-{
-	// kick scriptname
-	array_shift($_SERVER['argv']);
+$input =& UnitTestHelper::getProperty('Controller', 'Input', 'object');
 
-    while ($token = array_shift($_SERVER['argv'])) {
-    	switch ($token) {
-    	case '-path':
-    		$path   = trim(array_shift($_SERVER['argv']));
-    		break;
-    	case '-output':
-    		$output = trim(array_shift($_SERVER['argv']));
-    		break;
-    	case '-list':
-    		$list   = true;
-    		break;
-    	}
-    }
+jutdump($input, __FILE__);
 
-}
 
-/* no output format given, use default reporter */
-if ( empty($output) ) {
-	$output = JUNITTEST_CLI ? 'text' : JUNITTEST_REPORTER;
-}
-
-/* If a path is provided run the test */
+/* If a path is provided, run the test,
+ * otherwise show the fancy default start page */
 if( !empty($path) )
 {
-    UnitTestController::main( urldecode( $path ), $output, $path );
-    exit();
+	return UnitTestController::main( $path, $output, $path );
 }
-/* Otherwise show the fancy default start page */
 else
 {
-    $testCases = array();
-    $disabled  = array();
-    $tests     = UnitTestController::getUnitTestsList( JUNITTEST_ROOT .DIRECTORY_SEPARATOR. JUNITTEST_BASE);
+	UnitTestController::getUnitTestsList();
 
-	$s = ($output != 'xml') ? (JUNITTEST_CLI ? '>' : '&raquo;') : '&gt;';
+$tests    =& UnitTestHelper::getProperty('Controller', 'Tests');
+$disabled =& UnitTestHelper::getProperty('Controller', 'Disabled');
+$enabled  =& UnitTestHelper::getProperty('Controller', 'Enabled');
 
-    foreach( $tests as $t => $path ) {
-        if ( count( explode( DIRECTORY_SEPARATOR, $path ) ) > 1 )
-        {
-        	// from here on we use '/' rather than DIRECTORY_SEPARATOR
+jutdump($enabled, 'testCases '.__FILE__.__LINE__);
+exit;
 
-        	$path  = preg_replace('#[/\\\\]+#', '/', $path);
-            $path  = implode( '/', array_slice( explode( '/', $path ), 1 ) );
-	        $pinfo = pathinfo( $path );
-
-	        // first entry will be '.'
-	        $pinfo['dirname'] = ltrim($pinfo['dirname'], '.');
-	        $pinfo['screen']  = str_replace('/', $s, $pinfo['dirname']);
-
-	        if ( $pinfo['basename'] == 'AllTests.php') {
-	        	$pinfo['screen'] .= "$s All Tests";
-	        } else {
-	        	$pinfo['screen'] .= "$s ". basename($pinfo['basename'], 'Test.php') ;
-	        }
-
-			// presuming "text" is used in a cron job so we wanna
-			// know EVERYTHING, whereas others run interactive
-			# {{ FIX
-			if ( !JUNITTEST_CLI || $output != 'text') {
-				if ( false == UnitTestHelper::isTestCaseEnabled( $pinfo ) ) {
-					$disabled[JUNITTEST_BASE."/$path"] = 'disabled';
-					// disable parent folder
-					$parent = str_replace('/'.basename($path), '', $path);
-					$disabled[JUNITTEST_BASE."/$parent"] = 'disabled';
-				}
-			}
-			# }}
-			$testCases[JUNITTEST_BASE."/$path"] = $pinfo;
-        }
-    }
-
-    ksort($testCases);
-
-    if ( isset($list) || JUNITTEST_CLI ) {
-        foreach( $testCases as $path => $test ) {
-            echo "$path\n";
-        }
-    } else {
-        include( JUNITTEST_VIEWS.'/default.html' );
-    }
+	if ( isset($list) || JUNITTEST_CLI ) {
+		$disabled_tests = array();
+	} else {
+		include( JUNITTEST_VIEWS.'/default.html' );
+	}
 
 }
+

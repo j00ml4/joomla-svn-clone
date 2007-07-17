@@ -30,8 +30,8 @@
 class Zend_Json
 {
     /**
-     * How objects should be encoded -- arrays or as StdClass. TYPE_ARRAY is 1 
-     * so that it is a boolean true value, allowing it to be used with 
+     * How objects should be encoded -- arrays or as StdClass. TYPE_ARRAY is 1
+     * so that it is a boolean true value, allowing it to be used with
      * ext/json's functions.
      */
     const TYPE_ARRAY  = 1;
@@ -48,13 +48,13 @@ class Zend_Json
      * objects. See {@link ZJsonDecoder::decode()} for details.
      * @return mixed
      */
-    static public function decode($encodedValue, $objectDecodeType = Zend_Json::TYPE_ARRAY)
+    public static function decode($encodedValue, $objectDecodeType = Zend_Json::TYPE_ARRAY)
     {
         if (function_exists('json_decode')) {
             return json_decode($encodedValue, $objectDecodeType);
         }
 
-        include_once 'Zend/Json/Decoder.php';
+        include_once dirname(__FILE__).'/Json/Decoder.php';
         return Zend_Json_Decoder::decode($encodedValue, $objectDecodeType);
     }
 
@@ -73,13 +73,13 @@ class Zend_Json
      * @param boolean $cycleCheck Optional; whether or not to check for object recursion; off by default
      * @return string JSON encoded object
      */
-    static public function encode($valueToEncode, $cycleCheck = false)
+    public static function encode($valueToEncode, $cycleCheck = false)
     {
         if (function_exists('json_encode')) {
             return json_encode($valueToEncode);
         }
 
-        include_once 'Zend/Json/Encoder.php';
+        include_once dirname(__FILE__).'/Json/Encoder.php';
     	return Zend_Json_Encoder::encode($valueToEncode, $cycleCheck);
     }
 }
