@@ -19,18 +19,18 @@ require_once JUNITTEST_BASE .'/libraries/joomla/utilities/AllTests.php';
 require_once JUNITTEST_BASE .'/libraries/joomla/client/AllTests.php';
 require_once JUNITTEST_BASE .'/libraries/joomla/application/AllTests.php';
 
-class Joomla_AllTests
+class Joomla_Libraries_AllTests
 {
     function main()
     {
-		$self =& new Joomla_AllTests;
+		$self =& new Joomla_Libraries_AllTests;
 		$suite =& $self->suite();
 		$suite->run( UnitTestHelper::getReporter() );
     }
 
     function &suite()
     {
-        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Libraries' );
 
         $suite->addClassTest( 'libraries/joomla/JVersionTest.php' );
         $suite->addClassTest( 'libraries/joomla/JFrameworkConfigTest.php' );

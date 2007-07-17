@@ -21,35 +21,33 @@ if ( version_compare(PHP_VERSION, '4.3.3') < 0 ) {
 
 define('JUNITTEST_MAIN_METHOD', '-stub-');
 
+/**
+ * Controller class.
+ */
 require_once( dirname(__FILE__) . '/UnitTestController.php' );
 
-$input =& UnitTestHelper::getProperty('Controller', 'Input', 'object');
+/**
+ * If a path is provided, run the test,
+ * otherwise show a fancy default start page
+ */
+$input =& UnitTestHelper::getProperty('Controller', 'Input');
 
-jutdump($input, __FILE__);
+//die(jutdump($input,__FILE__.__LINE__));
 
-
-/* If a path is provided, run the test,
- * otherwise show the fancy default start page */
-if( !empty($path) )
+if ( !empty($input->info->testclass) )
 {
-	return UnitTestController::main( $path, $output, $path );
+	return UnitTestController::main( $input->info );
 }
 else
 {
 	UnitTestController::getUnitTestsList();
 
-$tests    =& UnitTestHelper::getProperty('Controller', 'Tests');
-$disabled =& UnitTestHelper::getProperty('Controller', 'Disabled');
-$enabled  =& UnitTestHelper::getProperty('Controller', 'Enabled');
+	$tests =& UnitTestHelper::getProperty('Controller', 'Tests');
 
-jutdump($enabled, 'testCases '.__FILE__.__LINE__);
-exit;
-
-	if ( isset($list) || JUNITTEST_CLI ) {
-		$disabled_tests = array();
+	if ( file_exists(JUNITTEST_VIEWS.'/default_'.$input->output.'.html') ) {
+		include( JUNITTEST_VIEWS.'/default_'.$input->output.'.php' );
 	} else {
 		include( JUNITTEST_VIEWS.'/default.html' );
 	}
-
 }
 

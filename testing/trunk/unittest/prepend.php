@@ -6,15 +6,21 @@
  * @version	$Id$
  * @package 	Joomla
  * @subpackage 	UnitTest
+ * @copyright 	Copyright (C) 2007 Rene Serradeil. All rights reserved.
+ * @license		GNU/GPL
  */
 
 error_reporting(E_ALL);
 
 /**
- * Simple data dumper.
+ * Simple variable dumper.
+ *
  * recommended usage: jutdump($data, 'hint '.__FILE__.__LINE__)
- * If !JUNITTEST_CLI, wraps output in <xmp>, which is deprecated
- * but extremely handy.
+ *
+ * For anthing but JUNITTEST_CLI, output in wrapped in <xmp>,
+ * which is deprecated in HTML but extremely handy. Does anybody
+ * case for compliance in debug mode??
+ *
  * @ignore
  */
 function jutdump($data, $rem='')
@@ -25,11 +31,16 @@ function jutdump($data, $rem='')
 
 	if (!empty($rem)) {
 		$rem = preg_replace('/(?:[\.\-\:]?)(\d+)$/', ' (\1)', $rem);
+	} else {
+		if ( function_exists('debug_backtrace') ) {
+			$trace = array_shift(debug_backtrace());
+			$rem = $trace['file'].' ('.$trace['line']. ')';
+		}
 	}
 	echo $po, 'DEBUG: ', $rem, $lf, print_r($data, true), $pc;
 }
 
-/* if we come from a testcase */
+/* if included by a testcase */
 unset($JUNITTEST_ROOT);
 
 define('JUNITTEST_PREFIX', 'JUT_');
@@ -43,17 +54,11 @@ require_once( SIMPLE_TEST.'reporter.php' );
 /* Read in user-defined test configuration if available;
  * otherwise, read default test configuration.
  */
-if (is_readable( dirname(__FILE__) . '/TestConfiguration.php') ) {
+if (is_readable(dirname(__FILE__) . '/TestConfiguration.php') ) {
     require_once dirname(__FILE__) . '/TestConfiguration.php';
 } else {
     require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
 }
-
-if ((int)PHP_VERSION >= 5) {
-	require_once( JUNITTEST_LIBS . '/overload5.php' );
-}
-require_once( JUNITTEST_LIBS . '/suite.php' );
-require_once( JUNITTEST_LIBS . '/helper.php' );
 
 /* TestCases are main files */
 define( '_JEXEC', 1 );
@@ -69,11 +74,25 @@ set_include_path( '.' .
 	PATH_SEPARATOR. get_include_path()
 	);
 
-/* If run thru browser use $_REQUEST,
- * from the command line use $argv */
+
+if ((int)PHP_VERSION >= 5) {
+	require_once( JUNITTEST_LIBS . '/overload5.php' );
+}
+
+require_once( JUNITTEST_LIBS . '/helper.php' );
+require_once( JUNITTEST_LIBS . '/suite.php' );
+
+/**
+ * If run thru browser use $_REQUEST, from the command line use $argv
+ * - path    : file to test
+ * - output  : renderer output
+ * - list    : list mode
+ * - renderer: reporter class
+ */
 
 $input =& UnitTestHelper::getProperty('Controller', 'Input');
 $input = new stdClass;
+
 if (JUNITTEST_CLI == false )
 {
 	$input->path   = @$_REQUEST[ 'path' ];
@@ -107,32 +126,38 @@ else if ( count($_SERVER['argv']) > 1 )
 	unset($token);
 }
 
-settype($input->path, 'string');
+$input->reporter = UnitTestHelper::getReporterInfo();
 
-/* from here on we use '/' rather than DIRECTORY_SEPARATOR
- * which "WAMP" can perfectly handle for our means */
-if ( !empty($input->path) ) {
-	$input->path = preg_replace('#[/\\\\]+#', '/', $input->path);
-	$input->path = urldecode( ltrim($input->path, '\\/') );
-}
-
-/* no output format given, use default reporter */
 if ( empty($input->output) ) {
-	$input->output = (JUNITTEST_CLI == false ) ? JUNITTEST_REPORTER : 'text';
+	$input->output = $input->reporter['format'];
 }
 
 /* load a TestCase' helper file */
 if ( strpos(JUNITTEST_MAIN_METHOD, 'AllTests') === false ) {
-	$input->file = strstr($_SERVER['SCRIPT_FILENAME'], JUNITTEST_BASE);
-	$input->info = UnitTestHelper::getInfoObject($input->file);
+	$path = strstr($_SERVER['SCRIPT_FILENAME'], JUNITTEST_BASE);
+	$input->info = UnitTestHelper::getInfoObject($path);
 	if ($input->info->enabled && $input->info->helper['location']) {
 		include_once($input->info->helper['location']);
 	}
 }
 
+/**
+ * from here on we use '/' rather than DIRECTORY_SEPARATOR
+ * which "WAMP" can perfectly handle for our means
+ */
+if ( empty($input->path) ) {
+	$input->path = $input->info->path;
+} else {
+	$input->path = preg_replace('#[/\\\\]+#', '/', $input->path);
+	$input->path = urldecode( ltrim($input->path, '\\/') );
+	$input->info = UnitTestHelper::getInfoObject($input->path);
+}
+
+// clean up
 unset($input);
 
-/* Set PHP error reporting level and output directives
+/**
+ * Set PHP error reporting level and output directives
  *  -> TestConfiguration.php ?
  */
 ini_set('display_errors'         , 'On');

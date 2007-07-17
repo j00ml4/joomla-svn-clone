@@ -1,47 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Joomla! v1.5 UnitTest Platform</title>
-        <link rel="stylesheet" type="text/css" href="views/style.css" />
-    </head>
-    <body>
-        <h1 class="header" style="cursor:default">Joomla! v1.5 UnitTest Platform</h1>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Joomla! v1.5 UnitTest Platform</title>
+	<link rel="stylesheet" type="text/css" href="views/style.css" />
+</head>
+<body>
+	<h1 class="header" onclick="location.href='/unittest/'">
+	<span>Joomla! v1.5 UnitTest Platform</span>
+	</h1>
 
-        <div class="testcase">
-        You may run each test case directly either via CLI or simply by URL, i.e.
-        <a href="tests/AllTests.php">
-        <?php echo '/'.trim($_SERVER['REQUEST_URI'],'\/'); ?>/tests/AllTests.php
-        </a>
-        </div>
-<!--
-[tests/libraries/joomla/JFactoryTest.php] => Array
-(
-    [dirname] => libraries/joomla
-    [basename] => JFactoryTest.php
-    [extension] => php
-    [screen] => libraries»joomla» JFactory
-)
--->
-       <!-- Loop through the tests and print a link for each one -->
-	<?php foreach( $testCases as $uri => $unittest ): ?>
-	<?php if ( $unittest['basename'] == 'AllTests.php' ): ?>
-        <div class="testcasefolder">
-			<?php if ( isset($disabled[$uri]) ):?>
-			<?php echo $unittest['screen']; ?> (partially disabled)
-			<?php else:?>
-			<a href="index.php?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
-			<?php endif;?>
-		</div>
-	<?php else:?>
-        <div class="testcase">
-			<?php if ( isset($disabled[$uri]) ):?>
-			<?php echo $unittest['screen']; ?> (disabled)
-			<?php else:?>
-			<a href="index.php?path=<?php echo $uri; ?>"><?php echo $unittest['screen']; ?></a>
-			<?php endif;?>
-			</div>
-	<?php endif;?>
+	<!-- Loop through the tests and print a link for each one -->
+<?php
+	foreach( $tests as $unittest ):
+		if ( !$unittest->enabled ) {
+			continue;
+		}
+		if ($unittest->is_test == JUNITTEST_IS_TESTSUITE) {
+			$css = 'testcasefolder';
+		} else {
+			$css = 'testcase';
+		}
+?>
+	<div class="<?php echo $css; ?>">
+	<a href="index.php?path=<?php echo $unittest->path; ?>"><?php echo $unittest->testclass; ?></a>
+
+	<?php foreach ( $unittest->docs as $doc ): ?>
+	<span><?php echo $doc; ?></span>&nbsp;
 	<?php endforeach;?>
-    </body>
+	</div>
+<?php endforeach;?>
+
+</body>
 </html>
