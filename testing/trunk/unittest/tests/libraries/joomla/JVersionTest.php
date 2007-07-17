@@ -23,7 +23,7 @@ class TestOfJVersion extends UnitTestCase
 	 */
 	function main() {
 		$self = new TestOfJVersion;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__, $self) );
+		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
 	}
 
 	function setUp()

@@ -26,13 +26,7 @@ class Joomla_Client_AllTests
     function &suite()
     {
         $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
-		# this is pretty severe test and should best become a TestSuite
-		# of its own (client/JFTP/AllTests.php) divided into separate
-		# testcases for each "feature":
-		# - upload / download
-		# - i/o
-		# - filesystem
-		# - ...
+		# see TODO 2
         $suite->addTestFile( 'libraries/joomla/client/JFTPTest.php' );
 
         return $suite;

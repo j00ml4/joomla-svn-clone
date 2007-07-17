@@ -13,6 +13,11 @@
 // $Id$
 
 /**
+ * Output format provided by the WebMechanicRenderer class.
+ */
+define('JUNITTEST_REPORTER_CUSTOM_FORMAT', 'html');
+
+/**
  * Ein gegenüber HtmlReporter() übersichtlicherer Renderer.
  * Auf die Instanz kann in den TestCases via <var>$this->_reporter</var>
  * zugegriffen werden.

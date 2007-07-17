@@ -7,36 +7,36 @@
  * @subpackage UnitTest
  */
 
-// Call AllTests::main() if this source file is executed directly.
+// Call Framework_AllTests::main() if this source file is executed directly.
 if (!defined('JUNITTEST_MAIN_METHOD')) {
-    define('JUNITTEST_MAIN_METHOD', 'AllTests::main');
+    define('JUNITTEST_MAIN_METHOD', 'Framework_AllTests::main');
     $JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
-require_once JUNITTEST_BASE .'/libraries/joomla/AllTests.php';
+require_once JUNITTEST_BASE .'/libraries/joomla/Framework_AllTests.php';
 
-class AllTests
+class Framework_AllTests
 {
     function main()
     {
-		$self =& new AllTests;
+		$self =& new Framework_AllTests;
 		$suite =& $self->suite();
 		$suite->run( UnitTestHelper::getReporter() );
     }
 
     function &suite()
     {
-        $suite =& new TestSuite( 'Joomla! Framework' );
+        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
 
-        $suite->addTestFile( 'libraries/JLoaderTest.php' );
+        $suite->addClassTest( 'libraries/JLoaderTest.php' );
 
-        $suite->addTestCase( Joomla_AllTests::suite() );
+        $suite->addTestCase( Joomla_Framework_AllTests::suite() );
 
         return $suite;
     }
 }
 
-if (JUNITTEST_MAIN_METHOD == 'AllTests::main') {
-    AllTests::main();
+if (JUNITTEST_MAIN_METHOD == 'Framework_AllTests::main') {
+    Framework_AllTests::main();
 }

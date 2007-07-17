@@ -15,10 +15,10 @@
  * If you can't test for true/false and none of the available assertXxx()
  * methods make sense, wite a new Expectation class to teach Simpletest
  * a new assertion.
+ * - <var>__constructor()</var> should usually accept the expected result
+ * 								as it's first and only argument.
  * - <var>test()</var> must return true/false.
  * - <var>testMessage()</var> formats a nice Fehlermeldung
- * - <var>__constructor()</var> should usually accept the expected result
- * 		as it's first and only argument.
  *
  * More information {@link http://www.simpletest.org/} and the Simpletest sources.
  *
@@ -145,4 +145,3 @@ private $_value_items = array('level');
 
 }
 
-?>

@@ -22,6 +22,7 @@ var $method_name;
 	function __construct($character_set = 'UTF-8') {
 		$this->SimpleReporter();
 		$this->_character_set = $character_set;
+		ini_set('default_charset', $character_set);
 		$this->sendNoCacheHeaders();
 
 		ob_start();
@@ -29,11 +30,11 @@ var $method_name;
 
 	function sendNoCacheHeaders() {
 		if (! headers_sent()) {
-			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-			header("Cache-Control: no-store, no-cache, must-revalidate");
-			header("Cache-Control: post-check=0, pre-check=0", false);
-			header("Pragma: no-cache");
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+			header('Cache-Control: no-store, no-cache, must-revalidate', true);
+			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Pragma: no-cache');
 		}
 	}
 
