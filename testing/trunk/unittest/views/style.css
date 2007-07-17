@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    font-size: 101.1%;
+    font-size: 100.1%;
     color: #596F80;
     padding: 1.0em;
 }
@@ -13,15 +13,24 @@ body {
 h1.header {
 	background-image: url(images/logo.png);
 	background-repeat: no-repeat;
-	padding-left: 130px;
+	padding: 0 0 0 130px;
 	height: 80px;
 	cursor: pointer;
+}
+
+h1.header span {
+	line-height:2em;
 }
 
 .testcase, .pass, .fail, .exception, .message {
     border-bottom: 1px solid #ccc;
     padding: 0.2em;
 }
+
+.pass      { color: #4D9D15; }
+.fail      { color: #E52929; }
+.exception { color: #FC8E30; }
+.message   { color: #0F6DAB; }
 
 .testcasefolder{
     border-bottom: 3px solid #aaa;

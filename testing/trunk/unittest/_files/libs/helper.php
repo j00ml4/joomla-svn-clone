@@ -28,9 +28,8 @@ class UnitTestHelper
 	function &getReporter($output = null)
 	{
 		if ($output == null) {
-			$output = (JUNITTEST_CLI) ? JUNITTEST_REPORTER_CLI : JUNITTEST_REPORTER;
-		} elseif ( strstr(' custom html json php text xml ', strtolower( "$output" )) === false ) {
-			$output = (JUNITTEST_CLI) ? JUNITTEST_REPORTER_CLI : JUNITTEST_REPORTER;
+			$input  =& UnitTestHelper::getProperty('Controller', 'Input');
+			$output = $input->reporter['output'];
 		}
 
 	    switch( strtolower( $output ) )
@@ -66,25 +65,29 @@ class UnitTestHelper
 	 * If JUNITTEST_REPORTER is 'custom' and JUNITTEST_REPORTER_CUSTOM_FORMAT
 	 * is not provided, $output defaults to 'text'
 	 *
-	 * @return array [(string) $name, (string)$output]
+	 * @return array ('class'=>$name, 'format'=>$output)
 	 * @see getReporter()
 	 * @uses JUNITTEST_REPORTER, JUNITTEST_REPORTER_CUSTOM_CLASS, JUNITTEST_REPORTER_CUSTOM_FORMAT
 	 */
 	function getReporterInfo()
 	{
-		$output = strtolower(JUNITTEST_REPORTER);
+		$output = (JUNITTEST_CLI)
+				? strtolower(JUNITTEST_REPORTER_CLI)
+				: strtolower(JUNITTEST_REPORTER);
 
 		if ($output == 'custom') {
-			$output = @constant('JUNITTEST_REPORTER_CUSTOM_FORMAT');
-			if (empty($output)) {
-				$output = 'text';
+			$format = JUNITTEST_REPORTER_CUSTOM_FORMAT;
+			if ( strstr(' html xml text php json ', $format) === false) {
+				$format = 'text';
+				$name   = 'Joomla'.ucfirst($format);
 			} else {
-				$name = JUNITTEST_REPORTER_CUSTOM_CLASS;
+				$name   = JUNITTEST_REPORTER_CUSTOM_CLASS;
 			}
 		} else {
-			$name = 'Joomla'.ucfirst($output);
+			$format = $output;
+			$name   = 'Joomla'.ucfirst($output);
 		}
-		return array($name, $output);
+		return array('class'=>$name, 'format'=>$format, 'output'=>$output);
 	}
 
 	/**
@@ -176,12 +179,14 @@ The value of $is_test consist of either
 	 */
 	function getInfoObject( $path )
 	{
+
 		if ( strrpos(basename($path), '.') === false) {
 			if ( strrpos($path, '/') < strlen($path)-1 ) {
 				$path = rtrim($path, '/') . '/';
 			}
 		}
 
+		$path   = preg_replace('#[/\\\\]+#', '/', $path);
 		$slash  = strrpos($path, '/') + 1;
 		$sbase  = ($slash > 1)
 					? basename( substr($path, $slash), '.php')

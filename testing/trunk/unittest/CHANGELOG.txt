@@ -27,9 +27,9 @@ x -> tests fail
  ^	getUnitTestsList() to handle all file retrieval and test status
  +	3 new static properties containing all testcase information:
  	('Controller', 'Tests'), ('Controller', 'Disabled'), ('Controller', 'Enabled')
-
  ^	better handling of enabled/disabled tests in index.php for
  	list-mode output
+ ^	views/default.html
  +	experimental: ability to disable AllTests.php for a complete
  	package/subtree using optional JUT_<PACKAGENAME>_ALL directive
  !	JUT_*_ALL directives are not listed in TestConfiguration-dist.php

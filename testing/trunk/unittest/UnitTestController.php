@@ -23,19 +23,13 @@ if (JUNITTEST_MAIN_METHOD !== 'UnitTestController::main') {
 class UnitTestController {
 
 	/**
-	 * @param string $path   filepath in JUNITTEST_BASE
-	 * @param string $output renderer [html|xml|json|php|text|custom]
-	 * @param string [$label] TestCase caption
+	 * @param object $fileinfo info object
 	 */
-	function main($path, $output, $label='') {
-		$task  = null;
-		$path  = preg_replace('#[/\\\\]+#', '/', $path);
+	function main($fileinfo, $label='') {
 
-		$input = UnitTestHelper::getInfoObject( $path );
-
-echo '<pre>'
-	, print_r( $input, true )
-	, '</pre>';
+		if (is_string($fileinfo)) {
+			$fileinfo = UnitTestHelper::getInfoObject( $fileinfo );
+		}
 
 		/* create Skeleton(s), CLI + PHP5 only! */
 		if ( JUNITTEST_CLI ) {
@@ -44,16 +38,14 @@ echo '<pre>'
 //			return UnitTestController::main( $path, $output, $label );
 		}
 
-		$suite = new TestSuite(!empty($label) ? $label : $input->package);
+		$suite = new TestSuite(!empty($label) ? $label : $fileinfo->package .''.$fileinfo->basename);
 
 /*
 require_once( SIMPLE_TEST.'collector.php' );
 $collector = &new SimplePatternCollector('/Test\.php$/');
 $suite->collect($path, &$collector)
 */
-
-exit;
-		$suite->run( UnitTestHelper::getReporter($output) );
+		$suite->run( UnitTestHelper::getReporter() );
 
 	}
 
@@ -228,3 +220,4 @@ if (1) return array ();
 if (JUNITTEST_MAIN_METHOD == 'UnitTestController::main') {
 	UnitTestController::main(JUNITTEST_BASE, JUNITTEST_REPORTER);
 }
+
