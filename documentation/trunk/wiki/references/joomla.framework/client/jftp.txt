@@ -3,6 +3,7 @@
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP]] |
 
 This is an FTP client class. It is used, among other things, to enable proper operation in safe mode.
+
 ===== Methods =====
 ^ Method ^ Description ^
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-__construct|__construct]] | Class constructor. |
