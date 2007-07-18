@@ -2,8 +2,8 @@
 
 How many times you have dreamed "Gee...I wish Joomla! could do that" or "I like the xxx feature, but it should work better". If you want to improve Joomla!, send us you wishes as a feature request. Your feature requests are playing an essential role in making Joomla! more usable and feature-rich.\\ \\
 
-You can submit a feature request by creating a new artifact at the [[http://developer.joomla.org/sf/tracker/do/listTrackers/projects.joomla/tracker|Joomla! Developerforge]] or by posting it in the [[http://forum.joomla.org/index.php/board,38.0.html|Wishlists and Feature Requests Forum]].\\ \\
-Note that you need to be logged in and therefor a member of Joomla! Developerforge to suggest features.\\ \\
+You can submit a feature request by creating a new artifact at the [[http://joomlacode.org/gf/project/joomla/tracker/?action=TrackerItemBrowse&tracker_id=20|Joomla! Forge]] or by posting it in the [[http://forum.joomla.org/index.php/board,38.0.html|Wishlists and Feature Requests Forum]].\\ \\
+Note that you need to be logged in and therefor a member of Joomla! Forge to suggest features.\\ \\
 
 
 

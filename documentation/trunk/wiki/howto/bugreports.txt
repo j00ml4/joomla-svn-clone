@@ -1,7 +1,7 @@
 ===== Bug reports =====
 
 If you found a bug, send us the bug report and we will fix it provided you include enough diagnostic information for us to go on. Your bug reports play an essential role in making Joomla! stable and secure.\\ \\
-Bug reports can be reported in the [[http://forum.joomla.org/index.php/board,179.0.htm|Q&A Forum]] for first reviews, but must be added to the [[http://developer.joomla.org/sf/tracker/do/listTrackers/projects.joomla/tracker|Forge Bugtracker]] to get fixed.\\ \\
+Bug reports can be reported in the [[http://forum.joomla.org/index.php/board,179.0.htm|Q&A Forum]] for first reviews, but must be added to the [[http://joomlacode.org/gf/project/joomla/tracker/|Forge Bugtracker]] to get fixed.\\ \\
 Provide a sensible title for the bug, and choose the category you think you have found the bug in and provide more details about the bug, including the description of the problem itself. Please include any error messages you received and a detailed description of what you were doing at the time.\\ \\
 Note that you need to be logged in and therefor a member of Joomla! Developerforge to submit bugs.\\ \\
 Always include PHP, database and webserver version information.\\ \\
