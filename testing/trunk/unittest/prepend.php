@@ -43,6 +43,9 @@ function jutdump($data, $rem='')
 /* if included by a testcase */
 unset($JUNITTEST_ROOT);
 
+// 4.3.10 and PHP 5.0.2
+!defined('PHP_EOL') && define('PHP_EOL', "\n");
+
 define('JUNITTEST_PREFIX', 'JUT_');
 define('JUNITTEST_CLI', ( PHP_SAPI == 'cli') ); // SimpleReporter::inCli()
 
