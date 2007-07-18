@@ -15,6 +15,9 @@ Legend:
 > -> Moved
 ! -> Note
 ---------
+18.07.2007 René Serradeil
+ -	old references/CHANGELOG.txt
+ #	joomla.framework.txt: JOutputFilter/JInputFilter renamed to JFilterInput/JFilterOutput
 
 16.07.2007 Ian MacLennan
  ^	JFolder::files - added $exclude parameter

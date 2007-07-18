@@ -104,8 +104,8 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:FileSystem:JPath|JPath]]
 ==== Filter ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.filter_detail.png|UML Diagram]]
-  * [[references:joomla.framework:Filter:JInputFilter|JInputFilter]]
-  * [[references:joomla.framework:Filter:JOutputFilter|JOutputFilter]]
+  * [[references:joomla.framework:Filter:JFilterInput|JFilter]]
+  * [[references:joomla.framework:Filter:JFilterOutput|JFilterOutput]]
 
 ==== HTML ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.html_detail.png|UML Diagram]]
