@@ -28,7 +28,7 @@ class TestOfJFrameworkConfig extends UnitTestCase {
 	 */
 	function main() {
 		$self = new TestOfJFrameworkConfig;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
     /**

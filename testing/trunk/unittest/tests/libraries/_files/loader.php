@@ -1,9 +1,6 @@
 <?php
 /**
- * Stub for loader.php and jimport()
- *
- * @package 	Joomla
- * @subpackage 	Unittest
- * @author 		Rene Serradeil <serradeil@webmechanic.biz>
- * @version 	$Id$
+ * Stub for loader.php
  */
+
+define('JLOADER_TEST_IMPORT_BASE', true);

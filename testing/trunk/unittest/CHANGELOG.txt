@@ -15,8 +15,15 @@ Legend:
 x -> tests fail
 -------------------------------------------------
 
+2007-07-21 CirTap
+ +	template for text list mode
+ +	some stats in html, text render
+ #	missing call to addTestFile() in controller %-/
+ !	signature change: UnitTestHelper::getReporter()
+ ^	*::main() methods in TestCases
+
 2007-07-20 CirTap
- ^	Simpletest 1.0.1beta2
+ !	Simpletest 1.0.1beta2
 
 2007-07-17 CirTap
  !	upd. README.txt

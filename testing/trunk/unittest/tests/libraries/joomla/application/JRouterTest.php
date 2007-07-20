@@ -27,7 +27,7 @@ class TestOfJRouter extends UnitTestCase {
 	 */
 	function main() {
 		$self = new TestOfJRouter;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	/**

@@ -160,35 +160,8 @@ class UnitTestHelper
 	 * of stuff in it. The value of $path is the "path" input argument
 	 * provided via $_REQUEST (browser mode) or the command-line (CLI Mode).
 	 *
-	 * See README.txt for more information about this array and it's drawbacks.
-
-The value of $is_test consist of either
-	2 JUNITTEST_IS_TESTSUITE  e.g.  AllTests.php
-	1 JUNITTEST_IS_TESTCASE   e.g.  JWhateverTest.php
-	0 JUNITTEST_IS_FRAMEWORK  e.g.  whatever.php
-
-[path]      => libraries/joomla/foobar/JWhateverTest.php
-[dirname]   => libraries/joomla/foobar/
-[filename]  => JWhateverTest.php
-[basename]  => JWhateverTest
-[classname] => JWhatever
-[testclass] => TestOfJWhatever
-[package]   => Foobar
-[is_test]   => JUNITTEST_IS_TESTCASE
-[helper]    => Array
-  (
-	[dirname]   => libraries/joomla/foobar/_files/
-	[filename]  => JWhatever_helper.php
-	[classname] => JWhateverTestHelper
-	[script]    => libraries/joomla/foobar/JWhateverTest.php
-	[location]  => libraries/joomla/foobar/_files/JWhatever_helper.php
-  )
-[docs]      => Array
-  (
-    [0]     => /full/path/to/libraries/joomla/foobar/_files/JWhatever_readme.txt
-    [1]     => /full/path/to/libraries/joomla/foobar/_files/JWhatever_todo.txt
-  )
-
+	 * See UnitTestHelper_examples.txt for more information about this array and it's drawbacks.
+	 *
 	 * @param  string $path relative of a framework or testcase file/dir
 	 * @return array
 	 * @uses getTestConfigVar(), isTestEnabled(), getTestDocs(), getTestHelper()
@@ -410,6 +383,7 @@ The value of $is_test consist of either
 	 * @return JConfig or stdClass on success, array parsed from input string on error
 	 * @throws E_USER_WARNING if scheme is missing
 	 * @throws E_USER_NOTICE  if scheme is not supported
+	 * @uses parseDSN(), loadFile(), JConfig
 	 */
 	function makeCfg($value, $merge = false, $asArray = false)
 	{
@@ -440,7 +414,7 @@ The value of $is_test consist of either
 			}
 		}
 
-		$parsed = UnitTestHelper::_parseDSN($value);
+		$parsed = UnitTestHelper::parseDSN($value);
 
 		if ( empty($parsed['scheme']) ) {
 			trigger_error(__FUNCTION__.'() missing scheme: "'. $value .'"', E_USER_WARNING);
@@ -494,13 +468,13 @@ The value of $is_test consist of either
 	/**
 	 * Loads a PHP file.  This is a wrapper for PHP's include() function.
 	 *
-	 * $filename must be the complete filename, including any
-	 * extension such as ".php".  Note that a security check is performed that
-	 * does not permit extended characters in the filename.  This method is
-	 * intended for loading Framework or UnitTest files.
+	 * $filename must be the complete filename, including any extension such
+	 * as ".php".  Note that a security check is performed that does not permit
+	 * extended characters in the filename.  This method is intended for
+	 * loading Mock Object for the UnitTest files.
 	 *
-	 * If $dirs is a string or an array, it will search the directories
-	 * in the order supplied, and attempt to load the first matching file.
+	 * If $dirs is a string or an array, it will search the directories in the
+	 * order supplied, and attempt to load the first matching file.
 	 *
 	 * If the file was not found in the $dirs, or if no $dirs were specified,
 	 * it will attempt to load it from PHP's include_path.
@@ -514,6 +488,7 @@ The value of $is_test consist of either
 	 * @return boolean
 	 * @throws E_USER_ERROR on illegal filename
 	 * @throws E_USER_ERROR file was not found
+	 * @uses isReadable(), _includeFile()
 	 * @internal borrowed and adapted to PHP4 from Zend_Loader
 	 */
 	function loadFile($filename, $dirs = null, $once = false)
@@ -555,29 +530,6 @@ The value of $is_test consist of either
 	}
 
 	/**
-	 * Attempt to include() the file.
-	 *
-	 * include() is not prefixed with the @ operator because if
-	 * the file is loaded and contains a parse error, execution
-	 * will halt silently and this is difficult to debug.
-	 *
-	 * Always set display_errors = Off on production servers!
-	 *
-	 * @param  string  $filespec
-	 * @param  boolean $once
-	 * @return boolean
-	 * @internal borrowed from Zend_Loader
-	 */
-	function _includeFile($filespec, $once = false)
-	{
-	    if ($once) {
-	        return (bool)(@include_once $filespec );
-	    } else {
-	        return (bool)(@include $filespec );
-	    }
-	}
-
-	/**
 	 * Returns TRUE if the $filename is readable, or FALSE otherwise.
 	 * This function uses the PHP include_path, where PHP's is_readable()
 	 * does not.
@@ -615,23 +567,6 @@ The value of $is_test consist of either
 	 * Additional keys can be added by appending a URI query string to the
 	 * end of the DSN.
 	 *
-	 * The format of the supplied DSN is in its fullest form:
-	 * <code>
-	 *  scheme(dbsyntax)://user:pass@protocol+host:port/target?option=8&another=true
-	 * </code>
-	 *
-	 * Most variations are allowed:
-	 * <code>
-	 *  scheme://user:pass@prot+host:110//usr/db_file.db?mode=0644
-	 *  scheme://user:pass@host/database_name
-	 *  scheme://user:pass@host
-	 *  scheme://user@host
-	 *  scheme://host/database
-	 *  scheme://host
-	 *  scheme(dbsyntax)
-	 *  scheme
-	 * </code>
-	 *
 	 * @param string $dsn Data Source Name to be parsed
 	 *
 	 * @return array an associative array with the following keys:
@@ -643,7 +578,7 @@ The value of $is_test consist of either
 	 *  + user:     User name for login
 	 *  + pass:     Password for login
 	 */
-	function _parseDSN($dsn)
+	function parseDSN($dsn)
 	{
 		$parsed = array(
 			'scheme'   => false,
@@ -823,4 +758,31 @@ The value of $is_test consist of either
 		return error_log($label . '(', $testfile, ') '. $message. PHP_EOL, 0);
 	}
 
+	/**#@+
+	 * @access private
+	 * @ignore
+	 */
+
+	/**
+	 * Attempt to include() the file.
+	 *
+	 * include() is not prefixed with the @ operator because if
+	 * the file is loaded and contains a parse error, execution
+	 * will halt silently and this is difficult to debug.
+	 *
+	 * @param  string  $filespec
+	 * @param  boolean $once
+	 * @return boolean
+	 * @internal borrowed from Zend_Loader
+	 */
+	function _includeFile($filespec, $once = false)
+	{
+	    if ($once) {
+	        return (bool)(@include_once $filespec );
+	    } else {
+	        return (bool)(@include $filespec );
+	    }
+	}
+
+	/**#@- */
 }

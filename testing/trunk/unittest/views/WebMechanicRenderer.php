@@ -338,13 +338,16 @@ HTML;
 
 		$this->_methods[$this->method_name]['pass']++;
 
-		if (JUNITTEST_REPORTER_RENDER_PASSED == false)
+		if (JUNITTEST_REPORTER_RENDER_PASSED == false) {
 			return;
+		}
+		list($expected, $file) = explode('at [', $message);
+		$line = trim(array_pop(explode(' line ', $file)), '[]');
 
         echo <<<HTML
 
 	<tr><th>{$this->method_name}</th>
-		<td><span class="pass">&nbsp;</span> {$message}</td></tr>
+		<td><span class="pass">&nbsp;</span> {$expected} at [line {$line}]</td></tr>
 HTML;
 
     }

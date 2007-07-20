@@ -28,7 +28,7 @@ var $have_db = false;
 	 */
 	function main() {
 		$self = new TestOfJFactory;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	function tearDown()

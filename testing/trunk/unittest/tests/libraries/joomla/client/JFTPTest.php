@@ -27,7 +27,7 @@ var $_credentials = null;
 	 */
 	function main() {
 		$self = new TestOfJFTP;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	function x__TestOfJFTP()

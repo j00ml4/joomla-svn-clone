@@ -23,7 +23,7 @@ class TestOfJObject extends UnitTestCase
 	 */
 	function main() {
 		$self = new TestOfJObject;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	function setUp()

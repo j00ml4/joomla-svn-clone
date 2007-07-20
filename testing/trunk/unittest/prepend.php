@@ -59,8 +59,10 @@ require_once( SIMPLE_TEST.'reporter.php' );
  */
 if (is_readable(dirname(__FILE__) . '/TestConfiguration.php') ) {
     require_once dirname(__FILE__) . '/TestConfiguration.php';
+    define('JUNITTEST_USERCONFIG', true);
 } else {
     require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
+    define('JUNITTEST_USERCONFIG', false);
 }
 
 /* TestCases are main files */
@@ -69,6 +71,16 @@ define( '_JEXEC', 1 );
 /* assume parent folder to be the base path */
 !defined('JPATH_BASE') && define('JPATH_BASE', dirname( dirname(__FILE__) ));
 
+/* check /libraries/joomla folder in JPATH_BASE */
+if ( !is_dir(JPATH_BASE . '/libraries/joomla') ) {
+   $EOL = (JUNITTEST_CLI) ? PHP_EOL : '<br />';
+   echo $EOL, ' JPATH_BASE does not point to your Joomla! installation:',
+	    $EOL, ' - ', JPATH_BASE,
+	    $EOL, ' Please modify your copy of "TestConfiguration.php"',
+	    $EOL;
+   exit(0);
+}
+
 /* make sure our tests only run into ONE JOOMLA! FRAMEWORK */
 set_include_path( '.' .
 	PATH_SEPARATOR. JUNITTEST_ROOT .
@@ -76,7 +88,6 @@ set_include_path( '.' .
 	PATH_SEPARATOR. JUNITTEST_LIBS .
 	PATH_SEPARATOR. get_include_path()
 	);
-
 
 if ((int)PHP_VERSION >= 5) {
 	require_once( JUNITTEST_LIBS . '/overload5.php' );
