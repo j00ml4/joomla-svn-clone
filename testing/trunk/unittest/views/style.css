@@ -14,25 +14,41 @@ h1.header {
 	background-image: url(images/logo.png);
 	background-repeat: no-repeat;
 	padding: 0 0 0 130px;
+	margin-top:0;
 	height: 80px;
 	cursor: pointer;
+	font-size: 1.5em;
+	margin-right: 15em;
 }
 
 h1.header span {
 	line-height:2em;
 }
 
-.testcase, .pass, .fail, .exception, .message {
+#userconfig {
+	position: absolute;
+	top: 1.5em;
+	right: 1.5em;
+	width: 18.5em;
+	font: inherit;
+	font-size: 1.5ex;
+	border: 1px solid #ccc;
+}
+#userconfig strong { color: #578AD6; }
+#userconfig span   { color: #EBAD14; }
+
+a { color: #578AD6; }
+a:visited { color: #61BF1A; }
+
+.testcase {
     border-bottom: 1px solid #ccc;
-    padding: 0.2em;
+    padding: 0.2em 2em;
+}
+.docs {
+	font: 0.85em 'lucida console','courier new',courier,monospace;
 }
 
-.pass      { color: #4D9D15; }
-.fail      { color: #E52929; }
-.exception { color: #FC8E30; }
-.message   { color: #0F6DAB; }
-
-.testcasefolder{
+.testcasefolder {
     border-bottom: 3px solid #aaa;
     background: #eee;
     font: 1.3em arial,helvetica,sans-serif;
@@ -55,16 +71,20 @@ h1.header span {
 	margin-top: 0.5em;
 }
 
-.message {
-	background: #ccc;
+.pass, .fail, .exception, .message {
+	color: white;
+    border-bottom: 1px solid;
+	text-decoration: none;
+    padding: 0.2em;
 }
 
-.fail {
-	color: white;
-	background: red;
-}
+.pass      { background: #61BF1A; } /* Joomla-green   */
+.fail      { background: #ED2E38; } /* Joomla-red   */
+.exception { background: #EBAD14; } /* Joomla-orange */
+.message   { background: #578AD6; } /* Joomla-blue   */
 
-.exception {
-	color: white;
-	background: blue;
-}
+.tpass      { color: #61BF1A; background: inherit; } /* Joomla-green   */
+.tfail      { color: #ED2E38; background: inherit; } /* Joomla-red   */
+.texception { color: #EBAD14; background: inherit; } /* Joomla-orange */
+.tmessage   { color: #578AD6; background: inherit; } /* Joomla-blue   */
+

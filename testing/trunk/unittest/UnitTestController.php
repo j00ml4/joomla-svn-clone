@@ -35,10 +35,12 @@ class UnitTestController {
 		if ( JUNITTEST_CLI ) {
 			die(PHP_EOL.'Sorry! Skeleton builder is currently disabled.'.PHP_EOL);
 //			$files = UnitTestController::makeUnitTestFiles($source);
-//			return UnitTestController::main( $path, $output, $label );
+//			return UnitTestController::main( $path, $label );
 		}
 
 		$suite = new TestSuite(!empty($label) ? $label : $fileinfo->package .''.$fileinfo->basename);
+
+		$suite->addTestFile(JUNITTEST_ROOT .'/'. JUNITTEST_BASE .'/'. $fileinfo->path);
 
 /*
 require_once( SIMPLE_TEST.'collector.php' );

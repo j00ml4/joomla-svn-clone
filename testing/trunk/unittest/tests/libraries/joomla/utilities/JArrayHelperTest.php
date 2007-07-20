@@ -25,7 +25,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	 */
 	function main() {
 		$self = new TestOfJArrayHelper;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	/**

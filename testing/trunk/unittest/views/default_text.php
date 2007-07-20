@@ -7,17 +7,23 @@
  * @subpackage 	UnitTest
  */
 
+if ( !JUNITTEST_CLI ) {
+	header('Content-type: text/plain');
+}
+
 if (JUNITTEST_LISTMODE_HEADER) {
 	echo PHP_EOL, 'Joomla! v1.5 UnitTest Platform',
-		 PHP_EOL, 'Date run: ' . date('Y-m-d H:n:s');
+		 PHP_EOL, 'PHP: ' . PHP_VERSION;
 	echo PHP_EOL, str_repeat('=', 70);
 }
 
 /* Loop through the tests and print a line for each one */
 $i = 0;
+$skip = array();
 foreach( $tests as $unittest )
 {
 	if ( !$unittest->enabled ) {
+		$skip[$unittest->testclass] = $unittest->config;
 		continue;
 	}
 
@@ -42,10 +48,13 @@ if (JUNITTEST_LISTMODE_FOOTER) {
 }
 
 if (JUNITTEST_LISTMODE_STATS) {
-	$s = count($tests);
+	$cfgs = get_defined_constants();
+	$tpos = count(preg_grep("/^JUT\_*/", array_keys($cfgs)));
+	$s    = count($tests);
 	if ( $i != $s ) {
-		echo PHP_EOL, str_pad($i,    3, ' ', STR_PAD_LEFT), ' of ', $s, ' tests available.';
-		echo PHP_EOL, str_pad($s-$i, 3, ' ', STR_PAD_LEFT), ' tests disabled by configuration.';
+		echo PHP_EOL, str_pad($i,    3, ' ', STR_PAD_LEFT), ' of ', $tpos, ' possible tests available.',
+			 PHP_EOL, str_pad($s-$i, 3, ' ', STR_PAD_LEFT), ' existing tests are disabled via configuration: ',
+			 PHP_EOL, wordwrap(implode(', ', array_keys($skip)), 72, PHP_EOL);
 	} else {
 		echo PHP_EOL, 'All tests enabled.';
 	}

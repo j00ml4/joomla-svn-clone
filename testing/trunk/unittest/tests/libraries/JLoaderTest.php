@@ -25,22 +25,41 @@ class TestOfJLoader extends UnitTestCase
 	 */
 	function main() {
 		$self = new TestOfJLoader;
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
-	/** function import($filePath) */
+	/** function import( $filePath, $base = null, $key = null ) */
 	function test_import()
 	{
+		$r = JLoader::import('joomla.factory');
+		$this->assertEqual($r, 1, '%s');
+	}
+
+	/** function import( $filePath, $base = null, $key = null ) */
+	function test_import_base()
+	{
+		$r = JLoader::import('_files.loader', dirname(__FILE__) );
+		if ($this->assertEqual($r, 1, '%s') ) {
+			$this->assertTrue(defined('JLOADER_TEST_IMPORT_BASE'), '%s');
+		}
+
+		// retry
+		$r = JLoader::import('_files.loader', dirname(__FILE__) );
+		$this->assertEqual($r, 1, '%s');
+	}
+
+	/** function import( $filePath, $base = null, $key = null ) */
+	function test_import_key()
+	{
+		// Remove the following line when you implement this test.
+		return $this->_reporter->setMissingTestCase();
 	}
 
 	/** function &factory($class, $options=null) */
 	function test_factory()
 	{
-	}
-
-	/** function _requireOnce( $file ) */
-	function test__requireOnce()
-	{
+		// Remove the following line when you implement this test.
+		return $this->_reporter->setMissingTestCase();
 	}
 
 }

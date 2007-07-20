@@ -1,5 +1,5 @@
 /**
- * CSS für "setien.shtml" und anderen "index.html" in den
+ * CSS fï¿½r "setien.shtml" und anderen "index.html" in den
  * testverzeichnissen (LOV Tests, ACL Tests ...)
  */
 * html {
@@ -202,7 +202,7 @@ tr.phperror td {
 }
 
 tbody.methods-summary td tt {
-	font: "Lucida Console", "Andale Mono", "Courier New", monospace;
+	font-family: "Lucida Console", "Andale Mono", "Courier New", monospace;
 }
 
 div.tests-total {
@@ -213,6 +213,11 @@ div.tests-total {
 	background-color: #606060;
 	border: 1px solid;
 }
+
+/* .pass      { background: #61BF1A; } */ /* Joomla-green  */
+/* .fail      { background: #ED2E38; } */ /* Joomla-red    */
+/* .exception { background: #EBAD14; } */ /* Joomla-orange */
+/* .message   { background: #578AD6; } */ /* Joomla-blue   */
 
 div.fail {
 	background: #CC0000;
