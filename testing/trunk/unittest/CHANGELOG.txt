@@ -15,6 +15,9 @@ Legend:
 x -> tests fail
 -------------------------------------------------
 
+2007-07-20 CirTap
+ ^	Simpletest 1.0.1beta2
+
 2007-07-17 CirTap
  !	upd. README.txt
  ^	UnitTestHelper methods now use "info object" as their parameter

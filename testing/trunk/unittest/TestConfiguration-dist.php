@@ -101,6 +101,10 @@ define('JUNITTEST_REPORTER_CUSTOM_CLASS', 'WebMechanicRenderer');
  */
 define('JUNITTEST_REPORTER_RENDER_PASSED', true);
 
+define('JUNITTEST_LISTMODE_HEADER', true);
+define('JUNITTEST_LISTMODE_FOOTER', true);
+define('JUNITTEST_LISTMODE_STATS', true);
+
 /**
  * Database credentials for MySQL 3/4/5 servers.
  * These MUST point to the standard installation of Joomla! 1.5 incl. all
