@@ -43,8 +43,9 @@ else
 	UnitTestController::getUnitTestsList();
 
 	$tests =& UnitTestHelper::getProperty('Controller', 'Tests');
+//die(jutdump($tests,__FILE__.__LINE__));
 
-	if ( file_exists(JUNITTEST_VIEWS.'/default_'.$input->output.'.html') ) {
+	if ( file_exists(JUNITTEST_VIEWS.'/default_'.$input->output.'.php') ) {
 		include( JUNITTEST_VIEWS.'/default_'.$input->output.'.php' );
 	} else {
 		include( JUNITTEST_VIEWS.'/default.html' );

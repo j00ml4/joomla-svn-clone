@@ -19,9 +19,10 @@ The Joomla Unit-testing platform is built using SimpleTest for PHP and provides 
    * Logging and messages
    * Assertion $message format
    * Testcase structure [WIP]
+   * Test Helper Classes
    * The "Info Object"
 
- * Mock Object
+ * Mock Object [WIP]
  * Known issues
  * Updates
  * Resources
@@ -52,7 +53,6 @@ All your personal and local environment settings belong *exclusively* to the cop
 	`TestConfiguration.php` is explicitely 'ignored' and will NOT
 	be committed by your SVN client if you happen to make changes
 	to the UnitTest Framework.
-
 
 
 Locations of the Framework and UnitTest Platform
@@ -141,6 +141,7 @@ In CLI mode -path is expected to locate a *Test.php file in the JUNITTEST_BASE d
 If you're using PHP5 from the command-line, and the UnitTest controller is unable to locate the test case, -path is assumed to point to a file in the Joomla! Framework directory (JPATH_BASE) in order to create a new Skeletal Testcase for any class therein. 
 With PHP4 this feature is not available and you'll receive an error message that the given "Testcase" does not exist.
 
+
 Enabling a Testcase
 -------------------
 Each Testcase is associated with a configuration setting (constant) that tells the UnitTest controller whether this test should run or not. This value is likely to be set to FALSE for any Test that requires access to an external resource or a server, read: such tests won't run by default.
@@ -157,6 +158,7 @@ As of JROUTE, you should see:
 	define('JUT_APPLICATION_JROUTE', false);
 To enable "your Testcase", simply change its value to: true.
 
+
 Troubleshooting
 ---------------
 
@@ -167,6 +169,29 @@ You may either write a new Testcase from scratch or use the "Skeleton builder" t
 To utilize the Skeleton builder you must however run PHP5 from the command-line. The ability to create class skeltons with PHP4 OR via the browser interface has been removed -- and it won't come back! The skeleton files are more accurate when using PHP5, and it's more likely the author of a UnitTest case can use the PHP5 CLI for that matter.
 
 Note: Creation of skeletal Classes may not work where Classes extend from external files that are not located in the PHP include_path.
+
+
+The nature of a test
+--------------------
+	"A test that does not operate in isoation is not a unit test.
+	 It is safe to assume that a test that connects to the network
+	 or a database or a real file is not a unit test.
+	 Use mock objects or stubs to test in isolation."
+		- Gunja Doshi
+
+You may now think of something like: "but Joomla! uses a database and connects to a network and it's reading files." 
+Yes, Joomla! the CMS, but not the enire Framework.
+There are in fact only very few classes in the Joomla! Framework that actually do such nasty things, and these are the only ones that form a partial exception to the statement above.
+
+Example 1: 
+A database' connect() method must be able to connect to a physical database server to handle it's return values, connection errores etc. Some internal "SQL builder" or data formatter methods must not. They deals with result sets, strings, or any other arbitrary data, usually provided as arrays or objects. There's no need to have a database server anywhere near, up and running to test these methods.
+
+Example 2: 
+A function that "believes" it writes some data to a file using some other "file class" must only know about the interface of that very class. Whether the file is actually created or not is neither the problem not in the scope of the function using the "file writer". It can safely assume that, should the write operation fail, the writer class would have returned an error code. And it's that error code only that the tested class needs to deal with.
+
+The second example denotes a typical case when a "Mock Object" should be used instead of the real file-writer (or anything alike.) Any possible errors that may occure when creating and writing a file or data stream must *not* be handled by the testcase of a class that simply interacts and uses an external file class. If it does, it is not a valid testcase.
+You can read more about Mock Objects below.
+
 
 Adding a new Testcase
 ---------------------
@@ -189,12 +214,14 @@ In case of `route.php` you'll find the following files in the target directory f
 If a file already exists, it will not be overwritten, hence you should not "play" with the Skeleton builder to polute the tests folder with empty and as such, useless testcases.
 In case you don't have the time (mood, intend, knowledge ...) to implementing any newly created Testcase, remove the obsolete skeletal files before you commit to SVN for somebody else to take it over.
 
+
 Stub code
 ---------
 Each skeletal *Test.php file contains a preconfigured Testcase with a set of stub functions for each of the source class' methods and their parameters. Although you may now *try* to run the generated file, the test won't do anything but to report that the tests need to be implemented -- in fact, the testcase may not even run at all because it's initially disabled.
 If you believe the content of these stub-functions is rather disturbing, you may tell the Skeleton builder not to add any such code, by changing the
 	JUNITTEST_ADD_STUBS
 config value in your local `TestConfiguration.php`.
+
 
 Custom Testcase parameters
 --------------------------
@@ -204,12 +231,14 @@ Depending on the complexity or dependencies of the class you're about to write a
  - constants for a variety of paths
 Unlike the 'JUT_' family of constants, they provide global settings for all Testcases and the UnitTest controller itself.
 
+
 Testcase user instructions
 --------------------------
 Users may need to copy supplementary files someplace in the DocumentRoot or some other data storage in order for your test to work properly. The UnitTest controller will look for any README* files in the `_files` subfolder and provide a facility for the user to access them easily, i.e. the webbrowser output will create links to these README files.
 
 Since several tests may share a `_files` folder, you should add the classname prefix to the README's filename, e.g. README_JFTP, README_JVersion. You may or may not add a .txt extension.
 The README files should be simple textfiles w/o any markup to allow viewing them on the command-line.
+
 
 Retain independence
 -------------------
@@ -221,10 +250,12 @@ For example, it doesn't make sense to rely on JDocument & Co. if there's no Test
 
 Simply put: should JFactory be disabled, almost any other Testcase will be prohibited to run as well. Chain reaction.
 
+
 User configuration
 ------------------
 You Testcase may require specific settings from the Joomla! configuration object to be available. It's very inconvenient for a UnitTest Framework user if s/he needs to set any kind of values in order for some Testcase to perform, but toggle them back and forth for any other tests.
 DON'T try to write a Testcase that covers a gazillion different user settings per se: each user will provide an environment that differs from yours; this should be enough of fuzziness to stress the J! Framework classes for that matter.
+
 
 Logging and messages
 --------------------
@@ -240,14 +271,18 @@ A vanilla logger is available via:
 which in it's current incarnation serves as a proxy to PHP's error_log() function.
 Its destination and format etc. may be configurable in the future using some yet to be invented JUNITTEST_LOG_* settings.
 
+
 Assertion $message format
 -------------------------
 The $message argument avilable for any standard assert-function should be brief.
 
-If you need to add a line break for whatever reason, use the PHP_EOL constant to do so. DON'T use \r, \n, <br /> or any combination thereof. Each UnitTest renderer class will transform PHP_EOL into the appropriate "line feed" of the generated format. The HTML renderers will use <br /> for instance.
+If you need to add a line break for whatever reason, use the PHP_EOL constant to do so. DON'T use \r, \n, <br /> or any combination thereof. Each UnitTest renderer class will transform PHP_EOL into the appropriate "line feed" of its output format. The HTML renderer for instance will translate this into the '<br />' element.
 
 Any lenghty instructions or descriptions 'why-things-didn't-work' should go into your Testcase' README file. Refer to this file in your failure $message if you can't express the problem in a few words:
-	Error: 4711 bad output - see README_JWhatever
+	Error: 4711 Bad response - see JWhatever_readme.txt
+
+In `JWhatever_readme.txt` expain what error 4711 means and how the user may help to prevent it, i.e. by installing a database or ftp server ;)
+
 
 Testcase structure [WIP]
 ------------------
@@ -265,12 +300,13 @@ Folder and file layout in the unit test folder /tests/libraries/joomla/:
 
 Except for [1], the actual Testcase, other entries are optional.
 
-[1] JWhateverTest.php -- The Testcase of: class JWhatever
+[1] JWhateverTest.php -- The Testcase of class JWhatever
                from: /libraries/joomla/foobar/whatever.php
      implemented as: class TestOfJWhatever extends UnitTestCase
 
-[2] TODO.txt -- Optional notes with "things to do" about ANY of the Testcases in the ./foobar folder. Each entry should have a unique number so others can refer to it as "see: #23" in the file itself or "Foobar todo 23" in other areas of communication (forum, tracker, mail, IRC ...)
-Comments about failing Tests should refer to this file in prose and referenced in the test file's sources via "@todo number [other package]".
+[2] TODO.txt -- Optional notes with "things to do" about ANY of the Testcases in the ./foobar package. 
+	Each entry should have a unique number so others can refer to it as "see: #23" in the file itself or "Foobar todo 23" in other areas of communication (forum, tracker, mail, IRC ...)
+	Comments and reasons about Tests failing should go into this file in prose and be simply referenced in the test file's sources via "@todo number [other package]".
 
 [3] JWhatever_helper.php -- Optional helper class for JWhateverTest.
 	The name of this class name MUST follow this convention:
@@ -284,6 +320,11 @@ Comments about failing Tests should refer to this file in prose and referenced i
 	Our TestOfJWhatever test case may use this in order to verify AND "stress" a feature of class JWhatever. The _files folder is also a good place to store Mock objects (see 'Mock Objects' section below)
 
 [5] JWhatever_*.txt -- In list mode, any "JWhatever_*.txt" file will be listed as a related "document" for this test case. User instructions about how to deal with the fixtures [4] in this folder and/or how to prepare the local Test environment to run tests for "JWhatever".
+
+
+Test Helper Classes
+-------------------
+Each Testcase may provide a Helper class that contains utility functions. The Helper class will be loaded by the UnitTest Controller prior to the actual testcase, so it's a good place to add conditional define() statements that would not be possible otherwise.
 
 
 The "Info Object"
@@ -346,25 +387,27 @@ Substatial modifications will be denoted in the CHANGELOG.txt -- at least, that'
 
 Resources
 =========
-Simpletest
- - /simpletest/HELP_MY_TESTS_DONT_WORK_ANYMORE
-
- - http://simpletest.org/
- - http://simpletest.org/api/
-
- - http://www.lastcraft.com/first_test_tutorial.php
- - http://www.lastcraft.com/mock_objects_tutorial.php
-
-Joomla! Framework
+Joomla! Framework API
  - http://api.joomla.org/li_Joomla-Framework.html
  - http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,references:joomla.framework/
+
+Simpletest
+ - /simpletest/HELP_MY_TESTS_DONT_WORK_ANYMORE
+ - http://simpletest.org/
+ - http://simpletest.org/api/
+ - http://www.lastcraft.com/first_test_tutorial.php
+ - http://www.lastcraft.com/mock_objects_tutorial.php
 
 Selenium
  - http://www.openqa.org/selenium-ide/
  - http://www.openqa.org/selenium-core/
 
+Test-driven Development
+ - http://www.instrumentalservices.com/media/TDDRhythmReference.pdf
+ - http://www.instrumentalservices.com/media/TestDrivenDevelopmentReferenceGuide.pdf
+
 
 -----------------------
-Last review: 2007-07-17
+Last review: 2007-07-20
 Status     : WIP
 

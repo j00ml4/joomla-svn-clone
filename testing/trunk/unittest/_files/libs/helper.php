@@ -93,13 +93,29 @@ class UnitTestHelper
 	/**
 	 * Tells whether the provided test is enabled via its config setting.
 	 *
+	 * Testsuites (AllTests.php) are enabled by default unless explicitly
+	 * disabled using their *_ALL directive in `TestConfiguration.php`.
+	 *
 	 * @param  object $infoobj as returned from {@link getInfoObject()}
 	 * @return int 0 = disabled, 1 = enabled
 	 */
 	function isTestEnabled( $infoobj )
 	{
-		$constant = UnitTestHelper::getTestConfigVar( $infoobj );
-		return (int) (defined($constant) && (bool)@constant($constant));
+		$constant   = UnitTestHelper::getTestConfigVar( $infoobj );
+		if ($infoobj->is_test == JUNITTEST_IS_TESTSUITE) {
+			// mark AllTest enabled by default
+			$configured = true;
+			if (defined($constant)) {
+				$configured = (bool)@constant($constant);
+			} else {
+				$available = true;
+			}
+		} else {
+			$available  = defined($constant);
+			$configured = (bool)@constant($constant);
+		}
+
+		return (int)($available && $configured);
 	}
 
 	/**

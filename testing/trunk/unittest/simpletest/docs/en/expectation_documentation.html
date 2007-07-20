@@ -99,7 +99,7 @@
 <pre>
 class TestOfNewsService extends UnitTestCase {
     ...
-    function testConnectionFailure() {&lt;strong&gt;
+    function testConnectionFailure() {<strong>
         $writer = &amp;new MockWriter();
         $writer-&gt;expectOnce('write', array(
                 'Cannot connect to news service ' .
@@ -107,7 +107,7 @@ class TestOfNewsService extends UnitTestCase {
                 'Please try again later.'));
         
         $service = &amp;new NewsService('BBC News');
-        $service-&gt;publish($writer);
+        $service-&gt;publish($writer);</strong>
     }
 }
 </pre>
