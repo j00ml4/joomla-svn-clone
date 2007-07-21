@@ -1,19 +1,23 @@
 ====== setLayout ======
 {#JAPI Joomla.Framework Application JView::setLayout #}
 
-Sets the layout name to use
+Sets the layout name to use. This method is used to control the layout template name that is used to render the view.
+
+The method returns a string containing the name of the previous layout template.
 
 ===== Syntax =====
-string setLayout	( **$layout**, **$template** )
+string setLayout ( **$layout** )
 
-| **$template** | string | The template name. |
-| **$layout** |  |  |
+| **$layout** | string | is a string containing the name of the layout to use. |
 
 ===== Examples =====
 <code php|Example>
-
+echo $this->setLayout( 'form' );
 </code>
-
+might produce:
+<code php|Result>
+default
+</code>
 
 ----
 

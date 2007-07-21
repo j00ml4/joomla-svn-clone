@@ -1,18 +1,25 @@
 ====== setLayoutExt ======
 {#JAPI Joomla.Framework Application JView::setLayoutExt #}
 
-Allows a different extension for the layout files to be used
+Changes the extension that is used for layout files.
+
+The layout extension is appended onto the layout name to determine the file that is used for rendering the view.  The only characters where are permitted are English letters and numbers.
+
+The method returns the previous layout extension value.
 
 ===== Syntax =====
-string setLayoutExt	( **$value** )
+string setLayoutExt ( **$value** )
 
-| **$value** | string | The extension |
+| **$value** | string | is a string containing the file extension to be used for layouts. |
 
 ===== Examples =====
 <code php|Example>
-
+echo $view->setLayoutExt( 'html' );
 </code>
-
+might return:
+<code php|Result>
+php
+</code>
 
 ----
 

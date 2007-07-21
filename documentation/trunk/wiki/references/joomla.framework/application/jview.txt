@@ -1,17 +1,13 @@
 ====== JView ======
 {#JAPI Joomla.Framework Application JView #}
 
-Base class for a Joomla View<p>Class holding methods for displaying presentation data.</p>
+JView is the base class for a Joomla! view.  This class is designed to be used within the Joomla! MVC framework, although it can be used
+outside of it as well.  It contains holding methods for displaying presentation data.
+
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JView-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-__construct|__construct]] | Constructor |
-| [[JView-addEscape|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-addEscape|addEscape]] | Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</pre></code></ol></div></p> |
+| [[JView-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-__construct|__construct]] | Constructor for the JView class. Setups up paths and configuration values. |
+| [[JView-addEscape|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-addEscape|addEscape]] | Adds to the callbacks used when calling JView::escape(). |
 | [[JView-addHelperPath|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-addHelperPath|addHelperPath]] | Adds to the stack of helper script paths in LIFO order. |
 | [[JView-addTemplatePath|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-addTemplatePath|addTemplatePath]] | Adds to the stack of view script paths in LIFO order. |
 | [[JView-assign|{{http://dev.joomla.org/media/images/Method.png }}]] [[JView-assign|assign]] | Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>

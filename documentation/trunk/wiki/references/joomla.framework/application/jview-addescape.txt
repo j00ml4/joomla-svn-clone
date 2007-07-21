@@ -1,7 +1,19 @@
 ====== addEscape ======
 {#JAPI Joomla.Framework Application JView::addEscape #}
 
-Adds to the callbacks used when calling JView::escape().<p>Each parameter passed to this function is treated as a separate  callback.  For example:</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
+Adds to the callbacks used when calling JView::escape().
+
+Each parameter passed to this function is treated as a separate  callback.
+
+For example:
+$savant->addEscape(
+	 'stripslashes',
+	 'htmlspecialchars',
+	 array('StaticClass', 'method'),
+	 array($object, $method)
+);
+
+<code php><pre><li><div class="src-line">&nbsp;<span class="src-var">$savant</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodaddEscape">addEscape</a><span class="src-sym">(</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>

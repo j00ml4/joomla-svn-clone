@@ -1,19 +1,31 @@
 ====== get ======
 {#JAPI Joomla.Framework Application JView::get #}
 
-Method to get data from a registered model
+Retrieves data from a registered model.
+
+This method can be used from the view to invoke data retrieval methods on the model.  The method will invoke the specified 'get' method on the specified model.  A call to get( 'example' ) will invoke the method getExample on the model.  If no model is specified, the default model will be used.  If the method does not exist on the specified model, then a warning will be raised.
+
+If the specified model does not exist then the JObject::get() method will be invoked with the specified parameters.
+
+The method returns the result of the model method call or false if the method failed.
 
 ===== Syntax =====
-mixed &get	( **$method**, **$model** )
+mixed &get ( **$method**, **$model** )
 
-| **$method** | string | The name of the method to call on the model |
-| **$model** | string | The name of the model to reference [optional] |
+| **$method** | string | is a string containing the name of the method to call on the model. |
+| **$model** | string | is a string containing the name of the model to reference.  This parameter is optional and if omitted the default model will be used. |
 
 ===== Examples =====
-<code php|Example>
-
+If you had a model object with the following method:
+<code php|JModel::getExample() method>
+function getExample() {
+	return 'example';
+}
 </code>
-
+you might call it in your view using:
+<code php|Example>
+$example = $this->get('example');
+</code>
 
 ----
 

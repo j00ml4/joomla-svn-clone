@@ -1,7 +1,9 @@
 ====== getLayout ======
 {#JAPI Joomla.Framework Application JView::getLayout #}
 
-Get the layout.
+Gets the current layout.
+
+Returns a string containing the current layout.
 
 ===== Syntax =====
 string getLayout ()
@@ -9,9 +11,12 @@ string getLayout ()
 
 ===== Examples =====
 <code php|Example>
-
+echo $view->getLayout();
 </code>
-
+might produce:
+<code php|Result>
+default
+</code>
 
 ----
 

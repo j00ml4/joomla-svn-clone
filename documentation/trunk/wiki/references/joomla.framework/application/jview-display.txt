@@ -1,18 +1,20 @@
 ====== display ======
 {#JAPI Joomla.Framework Application JView::display #}
 
-Execute and display a template script.
+Executes and displays the template script.
+
+This method invokes the JView->loadTemplate() method and displays the results.
 
 ===== Syntax =====
-void display	( **$tpl** )
+void display ( **$tpl** )
 
-| **$tpl** | string | The name of the template file to parse;  automatically searches through the template paths. |
+| **$tpl** | string | is a stirng containing the name of the template to display.  See the [[jview-loadtemplate|loadTemplate]] method for more information.  This parameter is optional and if omitted defaults to null and the base template will be used. |
 
 ===== Examples =====
 <code php|Example>
-
+$view->display();
 </code>
-
+will cause the current view to be displayed using the current template.
 
 ----
 

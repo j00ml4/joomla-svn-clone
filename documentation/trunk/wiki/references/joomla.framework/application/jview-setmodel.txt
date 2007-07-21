@@ -1,21 +1,26 @@
-====== setModel ======
+====== setModel ======
 {#JAPI Joomla.Framework Application JView::setModel #}
 
-Method to add a model to the view.  We support a multiple model single<p>view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be  referenced by the name without JModel, eg. JModelCategory is just  Category.</p>
+Adds a model to the view.  The system supports a multiple model single view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be referenced by the name without JModel, eg. JModelCategory is just Category.
 
-===== Syntax =====
-object The &setModel	( **&$model**, **$default**, **$model** )
+The method returns a reference to the JModel object that was added to the view.
 
-| **$model** | object | The model to add to the view. |
-| **$default** | boolean | Is this the default model? |
-| **&$model** |  |  |
+===== Syntax =====
+JModel &setModel ( **&$model**, **$default**, **$model** )
+
+| **$model** | JModel | is the JModel object to add to the view. |
+| **$default** | boolean | is a boolean value that specifies whether or not the added model should be made the default model. |
+
+===== Examples =====
+The setModel method could be called in the following way from within the JController class:
+<code php|Example>
+// Push a model into the view
+$model	= &$this->getModel( $viewName );
+if (!JError::isError( $model )) {
+	$view->setModel( $model, true );
+}
+</code>
 
-===== Examples =====
-<code php|Example>
-
-</code>
-
-
-----
-
-~~DISCUSSION~~
+----
+
+~~DISCUSSION~~

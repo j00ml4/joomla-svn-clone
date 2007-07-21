@@ -1,18 +1,26 @@
 ====== loadTemplate ======
 {#JAPI Joomla.Framework Application JView::loadTemplate #}
 
-Load a template file -- first look in the templates folder for an override
+Loads the template file.
+
+The method will look in the specified search folders until it locates the file.  It will first look in any paths that have been added to the view.  Then it will look in the templates directory (if invoked from the Joomla! application), and will finally look in the view's template directory.
+
+The template filename is constructed based on the current layout and the current layout extension.  If the optional $tpl parameter is specified, then an underscore and that value will be appended to the end of the current layout to determine the filename (so if the current layout is 'default', the layout extension 'php' and the $tpl parameter is 'round', then the template filename will be default_round.php.
+
+If the specified template is found, then it will included, the output will be captured and the results will be returned.  If the template file cannot be found, a 500 error will be thrown.
+
+This method returns a string containing the output of the template.
 
 ===== Syntax =====
-string loadTemplate	( **$tpl** )
+string loadTemplate ( **$tpl** )
 
-| **$tpl** | string | The name of the template source file ...  automatically searches the template paths and compiles as needed. |
+| **$tpl** | string | is a string containing the template name.  This parameter is optional and if omitted defaults to null. |
 
 ===== Examples =====
 <code php|Example>
-
+echo $view->loadTemplate( 'round' );
 </code>
-
+might load the default_round.php file from either the site template directory or the view template directory and will display the results.
 
 ----
 
