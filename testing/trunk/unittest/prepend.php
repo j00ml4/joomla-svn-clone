@@ -147,9 +147,8 @@ if ( empty($input->output) ) {
 }
 
 /* load a TestCase' helper file */
-if ( strpos(JUNITTEST_MAIN_METHOD, 'AllTests') === false ) {
-	$path = strstr($_SERVER['SCRIPT_FILENAME'], JUNITTEST_BASE);
-	$input->info = UnitTestHelper::getInfoObject($path);
+if ( basename($input->path, '.php') !== 'AllTests') {
+	$input->info = UnitTestHelper::getInfoObject($input->path);
 	if ($input->info->enabled && $input->info->helper['location']) {
 		include_once($input->info->helper['location']);
 	}

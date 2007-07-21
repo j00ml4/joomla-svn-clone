@@ -21,6 +21,7 @@ x -> tests fail
  #	missing call to addTestFile() in controller %-/
  !	signature change: UnitTestHelper::getReporter()
  ^	*::main() methods in TestCases
+ #	prepend.php using wrong input path, failed to load test-helper
 
 2007-07-20 CirTap
  !	Simpletest 1.0.1beta2

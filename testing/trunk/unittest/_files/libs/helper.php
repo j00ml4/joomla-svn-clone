@@ -292,7 +292,7 @@ class UnitTestHelper
 
 		$location = $helper['dirname'] . $helper['filename'];
 		if (file_exists(JUNITTEST_ROOT .'/'. JUNITTEST_BASE .'/'. $location)) {
-			$helper['location'] = preg_replace('#[/\\\\]+#', '/', $location);
+			$helper['location'] = preg_replace('#[/\\\\]+#', '/', JUNITTEST_ROOT .'/'. JUNITTEST_BASE .'/'. $location);
 		}
     	return $helper;
 	}
