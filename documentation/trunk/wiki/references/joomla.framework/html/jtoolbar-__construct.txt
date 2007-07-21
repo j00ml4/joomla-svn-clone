@@ -1,19 +1,29 @@
 ====== __construct ======
-{#JAPI Joomla.Framework HTML JToolBar::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->__construct]] | never | Work in progress |
 
-Constructor
+Constructs the toolbar, and defines the JBUTTON_INCLUDE_PATH constant. It sets the internal name property, imports the button class, and defines the JBUTTON_INCLUDE_PATH constant (if it is not already defined).
 
 ===== Syntax =====
-JToolBar __construct	( **$name** )
+JToolBar __construct ( **$name** )
 
-| **$name** | string | The toolbar name |
+| **$name** | string | is a string containing the toolbar name. |
 
 ===== Examples =====
 <code php|Example>
-
+$bar =& new JToolBar( 'My Toolbar' );
+echo $bar->render();
 </code>
-
+might produce:
+<code php|Result>
+<div class="toolbar" id="My Toolbar">
+<table class="toolbar"><tr>
+</tr></table>
+</div>
+</code>
+The $name property is used as the ID tag for the toolbar.
 
 ----
 
 ~~DISCUSSION~~
+

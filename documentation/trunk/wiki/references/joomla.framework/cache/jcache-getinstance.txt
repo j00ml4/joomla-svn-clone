@@ -6,7 +6,7 @@ Returns a reference to the global cache object, only creating it if it doesn't a
 ===== Syntax =====
 JCache &getInstance	( **$handler**, **$options** )
 | **$handler** | string | is a string containing the cache handler to instantiate. The currently available handlers are: Function, Hash, Output and Page. This parameter is optional and if omitted defaults to 'Function'. |
-| **$options** | array | is an associative array of cache options. See [[references:joomla.framework:cache:jcache-__construct|_construct]] for more information. |
+| **$options** | array | is an associative array of cache options. See [[references:joomla.framework:cache:jcache-__construct|__construct]] for more information. |
 
 ===== Examples =====
 This function is called by the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method using the following code:

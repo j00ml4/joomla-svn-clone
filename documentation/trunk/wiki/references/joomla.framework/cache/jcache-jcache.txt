@@ -2,9 +2,9 @@
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Cache|Cache]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#methodJCache|JCache->JCache]] | Never | Public review |
 
-This class constructor calls the [[JCache-__construct|_construct]] method.  It is provided for compatibility with PHP 4.x.  PHP 5.x and later will call [[JCache-__construct|_construct]] directly.
+This class constructor calls the [[JCache-__construct|__construct]] method.  It is provided for compatibility with PHP 4.x.  PHP 5.x and later will call [[JCache-__construct|__construct]] directly.
 ===== Syntax =====
 JCache JCache ( **$options** )
-| **$options** | array | is an associative array containing the caching options. For more information, see [[JCache-__construct|_construct]]. This parameter is optional and if omitted defaults to an empty array. |
+| **$options** | array | is an associative array containing the caching options. For more information, see [[JCache-__construct|__construct]]. This parameter is optional and if omitted defaults to an empty array. |
 
 ~~DISCUSSION~~

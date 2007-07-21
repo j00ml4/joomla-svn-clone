@@ -5,8 +5,8 @@
 This abstract class for caching handlers is an implementation of the [[http://pear.php.net/package/Cache_Lite/|Cache_Lite]] cache system.
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-JCache|JCache]] | This class constructor calls the [[JCache-__construct|_construct]] method. |
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-__construct|_construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-JCache|JCache]] | This class constructor calls the [[JCache-__construct|__construct]] method. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-__construct|__construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-cleanCache|cleanCache]] | Cleans the cache. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-generateId|generateId]] | Make a control key with the string containing data. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-getCache|getCache]] | This method is deprecated, use [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] instead. This method calls the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method. |

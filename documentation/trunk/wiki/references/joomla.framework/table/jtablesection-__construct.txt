@@ -1,19 +1,25 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Table JTableSection::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSection|JTableSection]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection->__construct]] | never | Work in progress |
 
-
+The class constructor calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key.
 
 ===== Syntax =====
-JTableSection __construct	( **&$db** )
+JTableSection __construct ( **&$db** )
 
-| **&$db** | database | A database connector object |
+| **&$db** | [[JDatabase|JDatabase]] | is a database connector object. |
 
 ===== Examples =====
+The JTableModule class should be instantiated in the following way:
 <code php|Example>
-
+$db =& JFactory::getDBO();
+$section =& JTable::getInstance('section', $db );
+</code>
+The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 </code>
 
 
 ----
 
 ~~DISCUSSION~~
+
