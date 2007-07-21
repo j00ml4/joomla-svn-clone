@@ -1,15 +1,15 @@
-====== JAuthenticate ======
+====== JAuthentication ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthenticate.html|JAuthenticate]] | 19 September 2006 | Published |
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthentication.html|JAuthentication]] | 19 September 2006 | Published |
 
 An authorisation class which provides an interface to the Joomla! authentication system.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JAuthenticate-__construct|__construct]] | Constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticate-authenticate|authenticate]] | Finds out if a set of login credentials are valid by asking all observing objects to run their respective authentication routines. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticate-getInstance|getInstance]] | Returns a reference to a global authentication object, only creating it  if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticate-loadPlugin|loadPlugin]] | Static method to load an auth plugin and attach it to the [[JEventDispatcher|JEventDispatcher]] object. |
+| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JAuthentication-__construct|__construct]] | Constructor. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthentication-authenticate|authenticate]] | Finds out if a set of login credentials are valid by asking all observing objects to run their respective authentication routines. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthentication-getInstance|getInstance]] | Returns a reference to a global authentication object, only creating it  if it doesn't already exist. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthentication-loadPlugin|loadPlugin]] | Static method to load an auth plugin and attach it to the [[JEventDispatcher|JEventDispatcher]] object. |
 
 ----
 
