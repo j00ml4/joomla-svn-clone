@@ -1,0 +1,20 @@
+====== _characterData ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_characterData #}
+
+Handler function for the character data within a tag
+
+===== Syntax =====
+void _characterData	( **$parser**, **$data** )
+
+| **$parser** | resource |  |
+| **$data** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

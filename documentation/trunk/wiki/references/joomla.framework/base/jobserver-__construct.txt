@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Base JObserver::__construct #}
+
+Constructor
+
+===== Syntax =====
+JObserver __construct	( **&$subject** )
+
+| **&$subject** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

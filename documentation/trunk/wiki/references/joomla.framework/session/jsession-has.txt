@@ -1,0 +1,20 @@
+====== has ======
+{#JAPI Joomla.Framework Session JSession::has #}
+
+Check wheter data exists in the session store
+
+===== Syntax =====
+boolean has	( **$name**, **$namespace** )
+
+| **$name** | string | Name of variable |
+| **$namespace** | string | Namespace to use, default to 'default' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

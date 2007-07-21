@@ -1,0 +1,19 @@
+====== getModule ======
+{#JAPI Joomla.Framework Application JModuleHelper::getModule #}
+
+Get module by name
+
+===== Syntax =====
+object The &getModule	( **$name** )
+
+| **$name** | string | The name of the module |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

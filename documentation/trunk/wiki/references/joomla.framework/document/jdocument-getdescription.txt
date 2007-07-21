@@ -1,0 +1,18 @@
+====== getDescription ======
+{#JAPI Joomla.Framework Document JDocument::getDescription #}
+
+Return the title of the page.
+
+===== Syntax =====
+string getDescription ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

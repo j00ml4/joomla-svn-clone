@@ -1,0 +1,18 @@
+====== serverOffset ======
+{#JAPI Joomla.Framework Utilities JDate::serverOffset #}
+
+
+
+===== Syntax =====
+void serverOffset ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

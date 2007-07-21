@@ -1,0 +1,19 @@
+====== setParser ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::setParser #}
+
+Set the parser
+
+===== Syntax =====
+void setParser	( **$parser** )
+
+| **$parser** | resource | XML parser resource handle |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

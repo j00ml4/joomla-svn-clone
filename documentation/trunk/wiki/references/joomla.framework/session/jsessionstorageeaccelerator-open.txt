@@ -1,0 +1,20 @@
+====== open ======
+{#JAPI Joomla.Framework Session JSessionStorageEaccelerator::open #}
+
+Open the SessionHandler backend.
+
+===== Syntax =====
+boolean open	( **$save_path**, **$session_name** )
+
+| **$save_path** | string | The path to the session object. |
+| **$session_name** | string | The name of the session. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

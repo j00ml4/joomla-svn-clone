@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JPaneSliders::__construct #}
+
+Constructor
+
+===== Syntax =====
+JPaneSliders __construct	( **$params** )
+
+| **$params** | int | useCookies, if set to 1 cookie will hold last used tab between page refreshes |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

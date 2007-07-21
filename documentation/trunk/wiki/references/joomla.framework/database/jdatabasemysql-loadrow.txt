@@ -1,0 +1,18 @@
+====== loadRow ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::loadRow #}
+
+
+
+===== Syntax =====
+The loadRow ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

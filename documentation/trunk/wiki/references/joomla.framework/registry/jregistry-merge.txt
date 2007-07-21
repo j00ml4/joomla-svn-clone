@@ -1,0 +1,20 @@
+====== merge ======
+{#JAPI Joomla.Framework Registry JRegistry::merge #}
+
+Merge a JRegistry object into this one
+
+===== Syntax =====
+boolean merge	( **&$source**, **$source** )
+
+| **$source** | object | Source JRegistry object ot merge |
+| **&$source** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

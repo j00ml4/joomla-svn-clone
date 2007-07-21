@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Template JTemplate::__construct #}
+
+Class constructor<p>The type influences the tags you are using in your templates.</p>
+
+===== Syntax =====
+JTemplate __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== register ======
+{#JAPI Joomla.Framework Session JSessionStorageNone::register #}
+
+Register the functions of this class with PHP's session handler
+
+===== Syntax =====
+void register	( **$options** )
+
+| **$options** | array | optional parameters |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

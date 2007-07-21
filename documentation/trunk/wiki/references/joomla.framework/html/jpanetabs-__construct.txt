@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JPaneTabs::__construct #}
+
+Constructor
+
+===== Syntax =====
+JPaneTabs __construct	( **$params** )
+
+| **$params** | array | Associative array of values |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,22 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::__construct #}
+
+Constructor, sets up all the default values
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">JSimpleXMLElement</a> __construct	( **$name**, **$attrs**, **$level**, **$parents** )
+
+| **$name** | string |  |
+| **$attrs** | array |  |
+| **$parents** | int |  |
+| **$level** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

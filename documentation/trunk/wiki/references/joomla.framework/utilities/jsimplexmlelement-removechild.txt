@@ -1,0 +1,19 @@
+====== removeChild ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::removeChild #}
+
+
+
+===== Syntax =====
+void removeChild	( **&$child** )
+
+| **&$child** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

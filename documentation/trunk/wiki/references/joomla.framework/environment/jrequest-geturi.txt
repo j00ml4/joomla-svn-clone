@@ -1,0 +1,18 @@
+====== getURI ======
+{#JAPI Joomla.Framework Environment JRequest::getURI #}
+
+Gets the full request path
+
+===== Syntax =====
+string getURI ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,13 @@
+====== JAuthentication ======
+{#JAPI Joomla.Framework User JAuthentication #}
+
+Authenthication class, provides an interface for the Joomla authentication system
+===== Methods =====
+^ Method ^ Description ^
+| [[JAuthentication-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthentication-__construct|__construct]] | Constructor |
+| [[JAuthentication-authenticate|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthentication-authenticate|authenticate]] | Finds out if a set of login credentials are valid by asking all obvserving  objects to run their respective authentication routines. |
+| [[JAuthentication-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthentication-getInstance|getInstance]] | Returns a reference to a global authentication object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $auth = &JAuthenticate::getInstance();</pre></p> |
+
+----
+
+~~DISCUSSION~~

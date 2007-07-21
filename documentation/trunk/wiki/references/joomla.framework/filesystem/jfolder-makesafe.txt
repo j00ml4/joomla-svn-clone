@@ -1,0 +1,19 @@
+====== makeSafe ======
+{#JAPI Joomla.Framework FileSystem JFolder::makeSafe #}
+
+Makes path name safe to use
+
+===== Syntax =====
+string makeSafe	( **$path** )
+
+| **$path** | string | The full path to sanitise |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,27 @@
+====== assignRef ======
+{#JAPI Joomla.Framework Application JView::assignRef #}
+
+Assign variable for the view (by reference).<p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassignRef">assignRef</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$ref</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">ref&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-var">$var1</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+
+===== Syntax =====
+bool assignRef	( **$key**, **&$val** )
+
+| **$key** | string | The name for the reference in the view. |
+| **&$val** | mixed | The referenced variable. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

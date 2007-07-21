@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JEditor::__construct #}
+
+constructor
+
+===== Syntax =====
+JEditor __construct	( **$editor** )
+
+| **$editor** | string | The editor name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== _setOptions ======
+{#JAPI Joomla.Framework Session JSession::_setOptions #}
+
+set additional session options
+
+===== Syntax =====
+boolean _setOptions	( **&$options**, **$options** )
+
+| **$options** | array | list of parameter |
+| **&$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

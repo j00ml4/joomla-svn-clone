@@ -1,0 +1,19 @@
+====== _parse ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_parse #}
+
+Start parsing an XML document<p>Parses an XML document. The handlers for the configured events are called as many times as necessary.</p>
+
+===== Syntax =====
+void _parse	( **$data** )
+
+| **$data** | $xml | string     data to parse |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

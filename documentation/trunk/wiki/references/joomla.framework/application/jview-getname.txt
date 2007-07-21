@@ -1,0 +1,18 @@
+====== getName ======
+{#JAPI Joomla.Framework Application JView::getName #}
+
+Method to get the view name<p>The model name by default parsed using the classname, or it can be set  by passing a $config['name'] in the class constructor</p>
+
+===== Syntax =====
+string getName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

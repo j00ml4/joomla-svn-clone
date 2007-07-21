@@ -1,0 +1,18 @@
+====== loadAssoc ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::loadAssoc #}
+
+Fetch a result row as an associative array<p>return array</p>
+
+===== Syntax =====
+void loadAssoc ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

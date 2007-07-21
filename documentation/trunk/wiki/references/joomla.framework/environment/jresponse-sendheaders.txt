@@ -1,0 +1,18 @@
+====== sendHeaders ======
+{#JAPI Joomla.Framework Environment JResponse::sendHeaders #}
+
+Send all headers
+
+===== Syntax =====
+void sendHeaders ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

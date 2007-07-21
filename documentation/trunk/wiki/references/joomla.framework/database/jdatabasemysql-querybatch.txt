@@ -1,0 +1,20 @@
+====== queryBatch ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::queryBatch #}
+
+Execute a batch query
+
+===== Syntax =====
+mixed queryBatch	( **$abort_on_error**, **$p_transaction_safe** )
+
+| **$abort_on_error** |  |  |
+| **$p_transaction_safe** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

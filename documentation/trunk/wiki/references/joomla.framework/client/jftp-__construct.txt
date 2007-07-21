@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Client JFTP::__construct #}
+
+JFTP object constructor
+
+===== Syntax =====
+JFTP __construct	( **$options** )
+
+| **$options** | array | Associative array of options to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

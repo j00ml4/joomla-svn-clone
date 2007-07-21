@@ -1,0 +1,19 @@
+====== setLayoutExt ======
+{#JAPI Joomla.Framework Application JView::setLayoutExt #}
+
+Allows a different extension for the layout files to be used
+
+===== Syntax =====
+string setLayoutExt	( **$value** )
+
+| **$value** | string | The extension |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

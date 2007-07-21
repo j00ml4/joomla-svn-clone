@@ -1,0 +1,19 @@
+====== setParent ======
+{#JAPI Joomla.Framework Base JNode::setParent #}
+
+
+
+===== Syntax =====
+void setParent	( **&$node** )
+
+| **&$node** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

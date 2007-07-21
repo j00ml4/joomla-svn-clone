@@ -1,0 +1,18 @@
+====== getUser ======
+{#JAPI Joomla.Framework  JFactory::getUser #}
+
+Get an user object<p>Returns a reference to the global <a href="../Joomla-Framework/User/JUser.html">JUser</a> object, only creating it  if it doesn't already exist.</p>
+
+===== Syntax =====
+<a href="../Joomla-Framework/User/JUser.html">object JUser</a> &getUser ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

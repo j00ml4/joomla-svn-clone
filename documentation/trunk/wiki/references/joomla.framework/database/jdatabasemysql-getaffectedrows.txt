@@ -1,0 +1,18 @@
+====== getAffectedRows ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getAffectedRows #}
+
+
+
+===== Syntax =====
+int getAffectedRows ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

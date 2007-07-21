@@ -1,0 +1,18 @@
+====== _openLog ======
+{#JAPI Joomla.Framework Utilities JLog::_openLog #}
+
+Open the log file pointer and create the file if it doesn't exist
+
+===== Syntax =====
+boolean _openLog ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

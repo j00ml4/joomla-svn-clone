@@ -1,0 +1,19 @@
+====== getElementByPath ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::getElementByPath #}
+
+Get an element in the document by / separated path
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> &getElementByPath	( **$path** )
+
+| **$path** | string | The / separated path to the element |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

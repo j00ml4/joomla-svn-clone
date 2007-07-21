@@ -1,0 +1,18 @@
+====== getParent ======
+{#JAPI Joomla.Framework Base JTree::getParent #}
+
+
+
+===== Syntax =====
+void getParent ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

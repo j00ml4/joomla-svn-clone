@@ -1,0 +1,18 @@
+====== Close ======
+{#JAPI Joomla.Framework Database JRecordSet::Close #}
+
+TODO: No working
+
+===== Syntax =====
+void Close ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

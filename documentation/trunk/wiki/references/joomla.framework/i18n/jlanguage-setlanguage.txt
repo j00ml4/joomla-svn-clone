@@ -1,0 +1,19 @@
+====== setLanguage ======
+{#JAPI Joomla.Framework I18N JLanguage::setLanguage #}
+
+Set the language attributes to the given language<p>Once called, the language still needs to be loaded using JLanguage::load()</p>
+
+===== Syntax =====
+string setLanguage	( **$lang** )
+
+| **$lang** | string | Language code |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

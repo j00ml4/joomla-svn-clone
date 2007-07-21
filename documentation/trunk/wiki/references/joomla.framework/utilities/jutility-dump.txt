@@ -1,0 +1,20 @@
+====== dump ======
+{#JAPI Joomla.Framework Utilities JUtility::dump #}
+
+Method to dump the structure of a variable for debugging purposes
+
+===== Syntax =====
+string dump	( **&$var**, **$htmlSafe** )
+
+| **&$var** | mixed | A variable |
+| **$htmlSafe** | boolean | True to ensure all characters are htmlsafe |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

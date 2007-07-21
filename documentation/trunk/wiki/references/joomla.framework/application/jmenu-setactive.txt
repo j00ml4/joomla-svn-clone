@@ -1,0 +1,19 @@
+====== setActive ======
+{#JAPI Joomla.Framework Application JMenu::setActive #}
+
+Set the default item by id
+
+===== Syntax =====
+If &setActive	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

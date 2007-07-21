@@ -1,0 +1,18 @@
+====== getResultsCounter ======
+{#JAPI Joomla.Framework HTML JPagination::getResultsCounter #}
+
+Create and return the pagination result set counter string, ie. Results 1-10 of 42
+
+===== Syntax =====
+string getResultsCounter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

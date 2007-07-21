@@ -1,0 +1,18 @@
+====== formvalidation ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::formvalidation #}
+
+
+
+===== Syntax =====
+void formvalidation ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

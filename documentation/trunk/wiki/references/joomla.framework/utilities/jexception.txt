@@ -1,0 +1,13 @@
+====== JException ======
+{#JAPI Joomla.Framework Utilities JException #}
+
+Joomla! Exception object.<p>This class is inspired in design and concept by patError &lt;http://www.php-tools.net&gt;</p><p>patError contributors include: <ul><li>gERD Schaufelberger	&lt;gerd@php-tools.net&gt;</li><li>Sebastian Mordziol	&lt;argh@php-tools.net&gt;</li><li>Stephan Schmidt		&lt;scst@php-tools.net&gt;</li></ul></p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JException-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JException-__construct|__construct]] | Constructor <ul><li>used to set up the error with all needed error details.</li></ul> |
+| [[JException-getBacktrace|{{http://dev.joomla.org/media/images/Method.png }}]] [[JException-getBacktrace|getBacktrace]] | Method to get the backtrace information for an exception object |
+| [[JException-toString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JException-toString|toString]] | Returns to error message |
+
+----
+
+~~DISCUSSION~~

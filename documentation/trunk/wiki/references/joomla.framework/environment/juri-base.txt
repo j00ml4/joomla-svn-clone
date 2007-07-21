@@ -1,0 +1,18 @@
+====== base ======
+{#JAPI Joomla.Framework Environment JURI::base #}
+
+Returns the base URI for the request.
+
+===== Syntax =====
+string base ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

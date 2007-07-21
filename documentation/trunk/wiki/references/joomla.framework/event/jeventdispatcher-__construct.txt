@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Event JEventDispatcher::__construct #}
+
+Constructor
+
+===== Syntax =====
+JEventDispatcher __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

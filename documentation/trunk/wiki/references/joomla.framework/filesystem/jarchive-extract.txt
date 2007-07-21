@@ -1,0 +1,20 @@
+====== extract ======
+{#JAPI Joomla.Framework FileSystem JArchive::extract #}
+
+
+
+===== Syntax =====
+void extract	( **$archivename**, **$extractdir** )
+
+| **$archivename** | string | The name of the archive file |
+| **$extractdir** | string | Directory to unpack into  $return boolean for success |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

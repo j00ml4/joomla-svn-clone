@@ -1,0 +1,21 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JPagination::__construct #}
+
+Constructor
+
+===== Syntax =====
+JPagination __construct	( **$total**, **$limitstart**, **$limit** )
+
+| **$total** |  |  |
+| **$limitstart** |  |  |
+| **$limit** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

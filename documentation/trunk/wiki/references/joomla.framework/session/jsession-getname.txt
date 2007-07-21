@@ -1,0 +1,18 @@
+====== getName ======
+{#JAPI Joomla.Framework Session JSession::getName #}
+
+Get session name
+
+===== Syntax =====
+string getName ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

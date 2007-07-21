@@ -1,0 +1,20 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Session JSession::getInstance #}
+
+Returns a reference to the global Session object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $session = &JSession::getInstance();</pre></p>
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Session/JSession.html">JSession</a> &getInstance	( **$handler**, **$options** )
+
+| **$handler** |  |  |
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

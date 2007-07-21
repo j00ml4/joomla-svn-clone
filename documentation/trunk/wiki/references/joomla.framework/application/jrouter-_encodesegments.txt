@@ -1,0 +1,19 @@
+====== _encodeSegments ======
+{#JAPI Joomla.Framework Application JRouter::_encodeSegments #}
+
+
+
+===== Syntax =====
+void _encodeSegments	( **$segments** )
+
+| **$segments** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

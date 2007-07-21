@@ -1,0 +1,19 @@
+====== toString ======
+{#JAPI Joomla.Framework Environment JResponse::toString #}
+
+Sends all headers prior to returning the string
+
+===== Syntax =====
+string toString	( **$compress** )
+
+| **$compress** | boolean | If true, compress the data |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

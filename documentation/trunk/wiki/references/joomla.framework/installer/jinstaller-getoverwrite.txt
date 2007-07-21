@@ -1,0 +1,18 @@
+====== getOverwrite ======
+{#JAPI Joomla.Framework Installer JInstaller::getOverwrite #}
+
+Get the allow overwrite switch
+
+===== Syntax =====
+boolean getOverwrite ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

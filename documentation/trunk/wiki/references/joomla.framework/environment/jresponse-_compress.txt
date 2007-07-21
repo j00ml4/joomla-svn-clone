@@ -1,0 +1,19 @@
+====== _compress ======
+{#JAPI Joomla.Framework Environment JResponse::_compress #}
+
+Compress the data<p>Checks the accept encoding of the browser and compresses the data before  sending it to the client.</p>
+
+===== Syntax =====
+string _compress	( **$data** )
+
+| **$data** | string | data |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

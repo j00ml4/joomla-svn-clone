@@ -1,0 +1,21 @@
+====== listDetails ======
+{#JAPI Joomla.Framework Client JFTP::listDetails #}
+
+Method to list the contents of a directory on the FTP server
+
+===== Syntax =====
+mixed listDetails	( **$path**, **$type**, **$search** )
+
+| **$path** | string | Path local file to store on the FTP server |
+| **$type** | string | Return type [raw|all|folders|files] |
+| **$search** | boolean | Recursively search subdirectories |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

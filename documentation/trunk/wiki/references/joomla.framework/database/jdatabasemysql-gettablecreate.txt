@@ -1,0 +1,19 @@
+====== getTableCreate ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getTableCreate #}
+
+
+
+===== Syntax =====
+array getTableCreate	( **$tables** )
+
+| **$tables** | array | A list of table names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

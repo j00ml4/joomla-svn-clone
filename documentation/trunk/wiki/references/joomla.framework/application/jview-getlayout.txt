@@ -1,0 +1,18 @@
+====== getLayout ======
+{#JAPI Joomla.Framework Application JView::getLayout #}
+
+Get the layout.
+
+===== Syntax =====
+string getLayout ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== _xorString ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::_xorString #}
+
+
+
+===== Syntax =====
+void _xorString	( **$ai** )
+
+| **$ai** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

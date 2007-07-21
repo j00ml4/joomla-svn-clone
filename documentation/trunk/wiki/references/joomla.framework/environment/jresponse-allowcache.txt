@@ -1,0 +1,19 @@
+====== allowCache ======
+{#JAPI Joomla.Framework Environment JResponse::allowCache #}
+
+Set/get cachable state for the response<p>If $allow is set, sets the cachable state of the response.  Always returns current state</p>
+
+===== Syntax =====
+boolean allowCache	( **$allow** )
+
+| **$allow** | boolean |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

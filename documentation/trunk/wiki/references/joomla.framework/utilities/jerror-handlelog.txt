@@ -1,0 +1,21 @@
+====== handleLog ======
+{#JAPI Joomla.Framework Utilities JError::handleLog #}
+
+Log error handler <ul><li>Logs the error message to a system log file</li></ul>
+
+===== Syntax =====
+object The &handleLog	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

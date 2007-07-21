@@ -1,0 +1,20 @@
+====== loadHelper ======
+{#JAPI Joomla.Framework Application JView::loadHelper #}
+
+Load a helper file
+
+===== Syntax =====
+boolean loadHelper	( **$hlp**, **$tpl** )
+
+| **$tpl** | string | The name of the helper source file ...  automatically searches the helper paths and compiles as needed. |
+| **$hlp** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

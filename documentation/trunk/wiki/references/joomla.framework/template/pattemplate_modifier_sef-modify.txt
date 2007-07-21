@@ -1,0 +1,20 @@
+====== modify ======
+{#JAPI Joomla.Framework Template patTemplate_Modifier_SEF::modify #}
+
+modify the value
+
+===== Syntax =====
+string modify	( **$value**, **$params** )
+
+| **$value** | string | value |
+| **$params** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== addChild ======
+{#JAPI Joomla.Framework Base JNode::addChild #}
+
+
+
+===== Syntax =====
+void addChild	( **&$node** )
+
+| **&$node** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

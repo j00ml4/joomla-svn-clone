@@ -1,0 +1,21 @@
+====== getBool ======
+{#JAPI Joomla.Framework Environment JRequest::getBool #}
+
+Fetches and returns a given filtered variable. The bool  filter will only return true/false bool values. This is  currently only a proxy function for getVar().<p>See getVar() for more in-depth documentation on the parameters.</p>
+
+===== Syntax =====
+bool getBool	( **$name**, **$default**, **$hash** )
+
+| **$name** | string | Variable name |
+| **$default** | string | Default value if the variable does not exist |
+| **$hash** | string | Where the var should come from (POST, GET, FILES, COOKIE, METHOD) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

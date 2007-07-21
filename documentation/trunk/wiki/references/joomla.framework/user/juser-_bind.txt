@@ -1,0 +1,20 @@
+====== _bind ======
+{#JAPI Joomla.Framework User JUser::_bind #}
+
+Binds a named array/hash to this object
+
+===== Syntax =====
+boolean _bind	( **$from**, **$ignore** )
+
+| **$from** | $array | mixed Either and associative array or another object |
+| **$ignore** | $ignore | string    Space separated list of fields not to bind |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

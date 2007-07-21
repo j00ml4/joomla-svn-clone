@@ -1,0 +1,18 @@
+====== check ======
+{#JAPI Joomla.Framework Table JTableMenu::check #}
+
+Overloaded check function
+
+===== Syntax =====
+boolean check ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

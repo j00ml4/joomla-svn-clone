@@ -1,0 +1,18 @@
+====== level ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::level #}
+
+Get the level of the element
+
+===== Syntax =====
+int level ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

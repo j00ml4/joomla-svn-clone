@@ -1,0 +1,14 @@
+====== JClientHelper ======
+{#JAPI Joomla.Framework Client JClientHelper #}
+
+Client helper class
+===== Methods =====
+^ Method ^ Description ^
+| [[JClientHelper-getCredentials|{{http://dev.joomla.org/media/images/Method.png }}]] [[JClientHelper-getCredentials|getCredentials]] | Method to return the array of client layer configuration options |
+| [[JClientHelper-hasCredentials|{{http://dev.joomla.org/media/images/Method.png }}]] [[JClientHelper-hasCredentials|hasCredentials]] | Method to determine if client login credentials are present |
+| [[JClientHelper-setCredentials|{{http://dev.joomla.org/media/images/Method.png }}]] [[JClientHelper-setCredentials|setCredentials]] | Method to set client login credentials |
+| [[JClientHelper-setCredentialsFromRequest|{{http://dev.joomla.org/media/images/Method.png }}]] [[JClientHelper-setCredentialsFromRequest|setCredentialsFromRequest]] | Determine wether input fields for client settings need to be shown<p>If valid credentials were passed along with the request, they are saved to the session.  This functions returns an exeption if invalid credentials have been given or if the  connection to the server failed for some other reason.</p> |
+
+----
+
+~~DISCUSSION~~

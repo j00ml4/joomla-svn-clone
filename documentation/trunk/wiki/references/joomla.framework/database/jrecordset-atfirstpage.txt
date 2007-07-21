@@ -1,0 +1,18 @@
+====== atfirstpage ======
+{#JAPI Joomla.Framework Database JRecordSet::atfirstpage #}
+
+TODO: No working
+
+===== Syntax =====
+void atfirstpage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

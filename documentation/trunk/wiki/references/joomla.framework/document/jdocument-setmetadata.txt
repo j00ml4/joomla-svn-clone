@@ -1,0 +1,21 @@
+====== setMetaData ======
+{#JAPI Joomla.Framework Document JDocument::setMetaData #}
+
+Sets or alters a meta tag.
+
+===== Syntax =====
+void setMetaData	( **$name**, **$content**, **$http_equiv** )
+
+| **$name** | string | Value of name or http-equiv tag |
+| **$content** | string | Value of the content tag |
+| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

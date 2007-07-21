@@ -1,0 +1,20 @@
+====== addChild ======
+{#JAPI Joomla.Framework Base JTree::addChild #}
+
+
+
+===== Syntax =====
+void addChild	( **&$node**, **$setCurrent** )
+
+| **&$node** |  |  |
+| **$setCurrent** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

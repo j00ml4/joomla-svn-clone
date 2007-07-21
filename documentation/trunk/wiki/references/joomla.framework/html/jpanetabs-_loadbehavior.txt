@@ -1,0 +1,19 @@
+====== _loadBehavior ======
+{#JAPI Joomla.Framework HTML JPaneTabs::_loadBehavior #}
+
+Load the javascript behavior and attach it to the document
+
+===== Syntax =====
+void _loadBehavior	( **$params** )
+
+| **$params** | array | Associative array of values |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

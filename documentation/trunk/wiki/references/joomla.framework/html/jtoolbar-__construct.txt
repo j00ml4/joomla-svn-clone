@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JToolBar::__construct #}
+
+Constructor
+
+===== Syntax =====
+JToolBar __construct	( **$name** )
+
+| **$name** | string | The toolbar name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

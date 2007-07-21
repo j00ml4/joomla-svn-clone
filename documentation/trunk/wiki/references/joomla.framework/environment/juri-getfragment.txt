@@ -1,0 +1,18 @@
+====== getFragment ======
+{#JAPI Joomla.Framework Environment JURI::getFragment #}
+
+Get the URI archor string  		everything after the &quot;#&quot;
+
+===== Syntax =====
+string getFragment ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

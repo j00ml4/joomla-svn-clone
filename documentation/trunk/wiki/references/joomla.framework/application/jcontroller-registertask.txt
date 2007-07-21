@@ -1,0 +1,20 @@
+====== registerTask ======
+{#JAPI Joomla.Framework Application JController::registerTask #}
+
+Register (map) a task to a method in the class.
+
+===== Syntax =====
+void registerTask	( **$task**, **$method** )
+
+| **$task** | string | The task. |
+| **$method** | string | The name of the method in the derived class to perform  for this task. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

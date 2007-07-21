@@ -1,0 +1,19 @@
+====== _parseComponentRoute ======
+{#JAPI Joomla.Framework Application JRouter::_parseComponentRoute #}
+
+Parse a component specific route
+
+===== Syntax =====
+void _parseComponentRoute	( **$url** )
+
+| **$url** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

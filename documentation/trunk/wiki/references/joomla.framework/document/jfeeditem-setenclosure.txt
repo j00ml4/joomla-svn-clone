@@ -1,0 +1,19 @@
+====== setEnclosure ======
+{#JAPI Joomla.Framework Document JFeedItem::setEnclosure #}
+
+Set the JFeedEnclosure for this item
+
+===== Syntax =====
+void setEnclosure	( **$enclosure** )
+
+| **$enclosure** | object | The JFeedItem to add to the feed. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

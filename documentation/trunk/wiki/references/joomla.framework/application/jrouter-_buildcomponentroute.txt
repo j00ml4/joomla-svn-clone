@@ -1,0 +1,19 @@
+====== _buildComponentRoute ======
+{#JAPI Joomla.Framework Application JRouter::_buildComponentRoute #}
+
+Build the component specific route
+
+===== Syntax =====
+void _buildComponentRoute	( **&$query** )
+
+| **&$query** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

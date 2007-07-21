@@ -1,0 +1,18 @@
+====== test ======
+{#JAPI Joomla.Framework Cache JCacheStorage::test #}
+
+Test to see if the storage handler is available.
+
+===== Syntax =====
+boolean test ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

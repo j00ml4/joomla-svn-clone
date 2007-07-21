@@ -1,0 +1,19 @@
+====== JDate ======
+{#JAPI Joomla.Framework Utilities JDate #}
+
+JDate is a class that stores a date
+===== Methods =====
+^ Method ^ Description ^
+| [[JDate-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-__construct|__construct]] | Creates a new instance of JDate representing a given date.<p>Accepts RFC 822, ISO 8601 date formats as well as unix time stamps.  If not specified, the current date and time is used.</p> |
+| [[JDate-getOffset|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-getOffset|getOffset]] | Get the date offset (in hours) |
+| [[JDate-serverOffset|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-serverOffset|serverOffset]] |  |
+| [[JDate-setOffset|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-setOffset|setOffset]] | Set the date offset (in hours) |
+| [[JDate-toFormat|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-toFormat|toFormat]] | Gets the date in a specific format<p>Returns a string formatted according to the given format. Month and weekday names and  other language dependent strings respect the current locale</p> |
+| [[JDate-toISO8601|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-toISO8601|toISO8601]] | Gets the date as an ISO 8601 date. |
+| [[JDate-toMySQL|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-toMySQL|toMySQL]] | Gets the date as in MySQL datetime format |
+| [[JDate-toRFC822|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-toRFC822|toRFC822]] | Gets the date as an RFC 822 date. |
+| [[JDate-toUnix|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDate-toUnix|toUnix]] | Gets the date as UNIX time stamp. |
+
+----
+
+~~DISCUSSION~~

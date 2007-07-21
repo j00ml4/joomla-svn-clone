@@ -1,0 +1,19 @@
+====== display ======
+{#JAPI Joomla.Framework Template JTemplate::display #}
+
+Execute and display a the template
+
+===== Syntax =====
+void display	( **$name** )
+
+| **$name** | string | The name of the template |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,21 @@
+====== load ======
+{#JAPI Joomla.Framework User JUser::load #}
+
+Method to load a JUser object by user id number
+
+===== Syntax =====
+boolean load	( **$id**, **$identifier**, **$path** )
+
+| **$identifier** | mixed | The user id of the user to load |
+| **$path** | string | Path to a parameters xml file |
+| **$id** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

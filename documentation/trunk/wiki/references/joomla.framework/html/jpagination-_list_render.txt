@@ -1,0 +1,19 @@
+====== _list_render ======
+{#JAPI Joomla.Framework HTML JPagination::_list_render #}
+
+
+
+===== Syntax =====
+void _list_render	( **$list** )
+
+| **$list** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,11 @@
+====== JTableARO ======
+{#JAPI Joomla.Framework User JTableARO #}
+
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableARO-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableARO-__construct|__construct]] |  |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== JRecordSet ======
+{#JAPI Joomla.Framework Database JRecordSet #}
+
+Simple Record Set object to allow our database connector to be used with  ADODB driven 3rd party libraries
+===== Methods =====
+^ Method ^ Description ^
+| [[JRecordSet-JRecordSet|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-JRecordSet|JRecordSet]] | Constuctor |
+| [[JRecordSet-absolutepage|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-absolutepage|absolutepage]] | TODO: No working |
+| [[JRecordSet-atfirstpage|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-atfirstpage|atfirstpage]] | TODO: No working |
+| [[JRecordSet-atlastpage|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-atlastpage|atlastpage]] | TODO: No working |
+| [[JRecordSet-Close|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-Close|Close]] | TODO: No working |
+| [[JRecordSet-FetchRow|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-FetchRow|FetchRow]] |  |
+| [[JRecordSet-GetRows|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-GetRows|GetRows]] |  |
+| [[JRecordSet-lastpageno|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-lastpageno|lastpageno]] | TODO: No working |
+| [[JRecordSet-RecordCount|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRecordSet-RecordCount|RecordCount]] |  |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,21 @@
+====== addChild ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::addChild #}
+
+Adds a direct child to the element
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">JSimpleXMLElement</a> &addChild	( **$name**, **$attrs**, **$level** )
+
+| **$name** | string |  |
+| **$attrs** | array |  |
+| **$level** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

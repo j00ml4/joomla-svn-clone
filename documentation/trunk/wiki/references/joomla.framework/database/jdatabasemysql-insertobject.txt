@@ -1,0 +1,21 @@
+====== insertObject ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::insertObject #}
+
+Inserts a row into a table based on an objects properties
+
+===== Syntax =====
+void insertObject	( **$table**, **&$object**, **$keyName** )
+
+| **$table** | string | The name of the table |
+| **&$object** | object An | object whose properties match table fields |
+| **$keyName** | string | The name of the primary key. If provided the object property is updated. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

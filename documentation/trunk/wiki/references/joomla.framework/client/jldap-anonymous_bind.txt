@@ -1,0 +1,18 @@
+====== anonymous_bind ======
+{#JAPI Joomla.Framework Client JLDAP::anonymous_bind #}
+
+Anonymously Binds to LDAP Directory
+
+===== Syntax =====
+void anonymous_bind ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

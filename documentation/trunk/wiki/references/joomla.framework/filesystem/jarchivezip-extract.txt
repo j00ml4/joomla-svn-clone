@@ -1,0 +1,21 @@
+====== extract ======
+{#JAPI Joomla.Framework FileSystem JArchiveZip::extract #}
+
+Extract a ZIP compressed file to a given path
+
+===== Syntax =====
+boolean extract	( **$archive**, **$destination**, **$options** )
+
+| **$archive** | string | Path to ZIP archive to extract |
+| **$destination** | string | Path to extract archive into |
+| **$options** | array | Extraction options [unused] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

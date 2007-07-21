@@ -1,0 +1,19 @@
+====== encrypt ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::encrypt #}
+
+
+
+===== Syntax =====
+void encrypt	( **$s** )
+
+| **$s** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

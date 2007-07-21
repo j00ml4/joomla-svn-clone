@@ -1,0 +1,19 @@
+====== getModules ======
+{#JAPI Joomla.Framework Application JModuleHelper::getModules #}
+
+Get modules by position
+
+===== Syntax =====
+array &getModules	( **$position** )
+
+| **$position** | string | The position of the module |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== setHeadData ======
+{#JAPI Joomla.Framework Document JDocumentHTML::setHeadData #}
+
+Set the html document head data
+
+===== Syntax =====
+void setHeadData	( **$data** )
+
+| **$data** | array | The document head data in array form |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

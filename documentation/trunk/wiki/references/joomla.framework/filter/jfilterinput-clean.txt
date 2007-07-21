@@ -1,0 +1,20 @@
+====== clean ======
+{#JAPI Joomla.Framework Filter JFilterInput::clean #}
+
+Method to be called by another php script. Processes for XSS and  specified bad code.
+
+===== Syntax =====
+mixed clean	( **$source**, **$type** )
+
+| **$source** | mixed | Input string/array-of-string to be 'cleaned' |
+| **$type** | string | Return type for the variable (INT, FLOAT, BOOLEAN, WORD, ALNUM, CMD, BASE64, STRING, ARRAY, PATH, NONE) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

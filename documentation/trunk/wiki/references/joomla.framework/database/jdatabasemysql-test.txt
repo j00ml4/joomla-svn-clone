@@ -1,0 +1,18 @@
+====== test ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::test #}
+
+Test to see if the MySQL connector is available
+
+===== Syntax =====
+boolean test ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

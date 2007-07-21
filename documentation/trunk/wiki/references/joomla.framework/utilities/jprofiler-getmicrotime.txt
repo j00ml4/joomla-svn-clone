@@ -1,0 +1,18 @@
+====== getmicrotime ======
+{#JAPI Joomla.Framework Utilities JProfiler::getmicrotime #}
+
+Get the current time.
+
+===== Syntax =====
+float getmicrotime ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

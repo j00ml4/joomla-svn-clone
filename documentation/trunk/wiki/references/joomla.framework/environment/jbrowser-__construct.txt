@@ -1,0 +1,20 @@
+====== __construct ======
+{#JAPI Joomla.Framework Environment JBrowser::__construct #}
+
+Create a browser instance (Constructor).
+
+===== Syntax =====
+JBrowser __construct	( **$userAgent**, **$accept** )
+
+| **$userAgent** | string | The browser string to parse. |
+| **$accept** | string | The HTTP_ACCEPT settings to use. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

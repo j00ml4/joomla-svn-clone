@@ -1,0 +1,20 @@
+====== write ======
+{#JAPI Joomla.Framework Session JSessionStorageMemcache::write #}
+
+Write session data to the SessionHandler backend.
+
+===== Syntax =====
+boolean write	( **$id**, **$session_data** )
+
+| **$id** | string | The session identifier. |
+| **$session_data** | string | The session data. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

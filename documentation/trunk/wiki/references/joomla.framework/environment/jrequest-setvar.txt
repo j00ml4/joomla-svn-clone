@@ -1,0 +1,22 @@
+====== setVar ======
+{#JAPI Joomla.Framework Environment JRequest::setVar #}
+
+Set a variabe in on of the request variables
+
+===== Syntax =====
+string setVar	( **$name**, **$value**, **$hash**, **$overwrite** )
+
+| **$name** | string | Name |
+| **$value** | string | Value |
+| **$hash** | string | Hash |
+| **$overwrite** | boolean | Boolean |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

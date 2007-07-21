@@ -1,0 +1,24 @@
+====== _getBelow ======
+{#JAPI Joomla.Framework User JAuthorization::_getBelow #}
+
+
+
+===== Syntax =====
+void _getBelow	( **$table**, **$fields**, **$groupby**, **$root_id**, **$root_name**, **$inclusive** )
+
+| **$table** |  |  |
+| **$fields** |  |  |
+| **$groupby** |  |  |
+| **$root_id** |  |  |
+| **$root_name** |  |  |
+| **$inclusive** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

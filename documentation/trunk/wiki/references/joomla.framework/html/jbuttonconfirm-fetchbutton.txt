@@ -1,0 +1,25 @@
+====== fetchButton ======
+{#JAPI Joomla.Framework HTML JButtonConfirm::fetchButton #}
+
+
+
+===== Syntax =====
+void fetchButton	( **$type**, **$msg**, **$name**, **$text**, **$task**, **$list**, **$hideMenu** )
+
+| **$type** |  |  |
+| **$msg** |  |  |
+| **$name** |  |  |
+| **$text** |  |  |
+| **$task** |  |  |
+| **$list** |  |  |
+| **$hideMenu** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== setPass ======
+{#JAPI Joomla.Framework Environment JURI::setPass #}
+
+Set URI password
+
+===== Syntax =====
+void setPass	( **$pass** )
+
+| **$pass** | string | The URI password |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

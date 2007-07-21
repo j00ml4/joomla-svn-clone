@@ -1,0 +1,21 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Utilities JLog::getInstance #}
+
+Returns a reference to the global log object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $log = & JLog::getInstance();</pre></p>
+
+===== Syntax =====
+object The &getInstance	( **$file**, **$options**, **$path** )
+
+| **$file** |  |  |
+| **$options** |  |  |
+| **$path** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

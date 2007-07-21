@@ -1,0 +1,19 @@
+====== _list_footer ======
+{#JAPI Joomla.Framework HTML JPagination::_list_footer #}
+
+
+
+===== Syntax =====
+void _list_footer	( **$list** )
+
+| **$list** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== countModules ======
+{#JAPI Joomla.Framework Document JDocumentHTML::countModules #}
+
+Count the modules based on the given condition
+
+===== Syntax =====
+integer countModules	( **$condition** )
+
+| **$condition** | string | The condition to use |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

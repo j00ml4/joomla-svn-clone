@@ -1,0 +1,18 @@
+====== getUsed ======
+{#JAPI Joomla.Framework I18N JLanguage::getUsed #}
+
+Get the list of used strings<p>Used strings are those strings requested and found either as a string or a constant</p>
+
+===== Syntax =====
+array getUsed ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

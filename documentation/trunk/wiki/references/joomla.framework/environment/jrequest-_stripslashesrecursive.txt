@@ -1,0 +1,20 @@
+====== _stripSlashesRecursive ======
+{#JAPI Joomla.Framework Environment JRequest::_stripSlashesRecursive #}
+
+Strips slashes recursively on an array
+
+===== Syntax =====
+array _stripSlashesRecursive	( **$value**, **$array** )
+
+| **$array** | array | Array of (nested arrays of) strings |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

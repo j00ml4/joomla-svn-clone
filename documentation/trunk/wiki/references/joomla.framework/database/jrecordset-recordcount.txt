@@ -1,0 +1,18 @@
+====== RecordCount ======
+{#JAPI Joomla.Framework Database JRecordSet::RecordCount #}
+
+
+
+===== Syntax =====
+int RecordCount ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== gc ======
+{#JAPI Joomla.Framework Cache JCache::gc #}
+
+Garbage collect expired cache data
+
+===== Syntax =====
+boolean gc ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

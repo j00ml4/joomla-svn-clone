@@ -1,0 +1,18 @@
+====== fork ======
+{#JAPI Joomla.Framework Session JSession::fork #}
+
+Create a new session and copy variables from the old one
+
+===== Syntax =====
+boolean fork ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

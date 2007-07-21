@@ -1,0 +1,21 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JPaginationObject::__construct #}
+
+
+
+===== Syntax =====
+JPaginationObject __construct	( **$text**, **$base**, **$link** )
+
+| **$text** |  |  |
+| **$base** |  |  |
+| **$link** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

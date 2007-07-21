@@ -1,0 +1,19 @@
+====== getTableFields ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getTableFields #}
+
+
+
+===== Syntax =====
+array getTableFields	( **$tables** )
+
+| **$tables** | array | A list of table names |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

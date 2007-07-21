@@ -1,0 +1,21 @@
+====== extract ======
+{#JAPI Joomla.Framework FileSystem JArchiveBzip2::extract #}
+
+Extract a Bzip2 compressed file to a given path
+
+===== Syntax =====
+boolean extract	( **$archive**, **$destination**, **$options** )
+
+| **$archive** | string | Path to Bzip2 archive to extract |
+| **$destination** | string | Path to extract archive to |
+| **$options** | array | Extraction options [unused] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

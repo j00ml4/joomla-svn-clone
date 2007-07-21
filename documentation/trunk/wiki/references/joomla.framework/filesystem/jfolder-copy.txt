@@ -1,0 +1,22 @@
+====== copy ======
+{#JAPI Joomla.Framework FileSystem JFolder::copy #}
+
+Copies a folder
+
+===== Syntax =====
+mixed copy	( **$src**, **$dest**, **$path**, **$force** )
+
+| **$src** | string | The path to the source folder |
+| **$dest** | string | The path to the destination folder |
+| **$path** | string | An optional base path to prefix to the file names |
+| **$force** | boolean | Optionally force folder/file overwrites |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

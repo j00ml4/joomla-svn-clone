@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JModel::__construct #}
+
+Constructor
+
+===== Syntax =====
+JModel __construct	( **$config** )
+
+| **$config** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

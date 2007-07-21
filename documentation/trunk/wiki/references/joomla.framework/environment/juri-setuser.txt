@@ -1,0 +1,19 @@
+====== setUser ======
+{#JAPI Joomla.Framework Environment JURI::setUser #}
+
+Set URI username
+
+===== Syntax =====
+void setUser	( **$user** )
+
+| **$user** | string | The URI username |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

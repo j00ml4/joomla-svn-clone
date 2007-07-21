@@ -1,0 +1,18 @@
+====== getCollation ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getCollation #}
+
+Assumes database collation in use by sampling one text field in one table
+
+===== Syntax =====
+string getCollation ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

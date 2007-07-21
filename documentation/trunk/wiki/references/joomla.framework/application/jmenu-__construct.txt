@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JMenu::__construct #}
+
+Class constructor
+
+===== Syntax =====
+boolean __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

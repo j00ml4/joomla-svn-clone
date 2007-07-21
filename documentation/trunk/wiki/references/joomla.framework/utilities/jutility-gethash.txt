@@ -1,0 +1,19 @@
+====== getHash ======
+{#JAPI Joomla.Framework Utilities JUtility::getHash #}
+
+Provides a secure hash based on a seed
+
+===== Syntax =====
+string getHash	( **$seed** )
+
+| **$seed** | string | Seed string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

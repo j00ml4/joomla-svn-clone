@@ -1,0 +1,20 @@
+====== setContent ======
+{#JAPI Joomla.Framework HTML JEditor::setContent #}
+
+Set the editor contents
+
+===== Syntax =====
+void setContent	( **$editor**, **$html** )
+
+| **$editor** |  |  |
+| **$html** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

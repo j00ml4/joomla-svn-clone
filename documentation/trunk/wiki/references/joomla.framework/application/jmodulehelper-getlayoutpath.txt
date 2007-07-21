@@ -1,0 +1,20 @@
+====== getLayoutPath ======
+{#JAPI Joomla.Framework Application JModuleHelper::getLayoutPath #}
+
+Get the path to a layout for a module
+
+===== Syntax =====
+string getLayoutPath	( **$module**, **$layout** )
+
+| **$module** | string | The name of the module |
+| **$layout** | string | The name of the module layout |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

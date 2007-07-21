@@ -1,0 +1,19 @@
+====== setDefault ======
+{#JAPI Joomla.Framework I18N JLanguage::setDefault #}
+
+Set the default language code
+
+===== Syntax =====
+string setDefault	( **$lang** )
+
+| **$lang** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== getError ======
+{#JAPI Joomla.Framework Base JObject::getError #}
+
+Get the most recent error message
+
+===== Syntax =====
+string getError	( **$i**, **$toString** )
+
+| **$i** | int | Option error index |
+| **$toString** | boolean | Indicates if JError objects should return their error message |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

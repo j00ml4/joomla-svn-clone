@@ -1,0 +1,16 @@
+====== JLog ======
+{#JAPI Joomla.Framework Utilities JLog #}
+
+Joomla! Logging class<p>This class is designed to build log files based on the  W3C specification at: http://www.w3.org/TR/WD-logfile.html</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JLog-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-__construct|__construct]] | Constructor |
+| [[JLog-addEntry|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-addEntry|addEntry]] |  |
+| [[JLog-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-getInstance|getInstance]] | Returns a reference to the global log object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $log = & JLog::getInstance();</pre></p> |
+| [[JLog-setOptions|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-setOptions|setOptions]] | Set log file options |
+| [[JLog-_closeLog|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-_closeLog|_closeLog]] | Close the log file pointer |
+| [[JLog-_openLog|{{http://dev.joomla.org/media/images/Method.png }}]] [[JLog-_openLog|_openLog]] | Open the log file pointer and create the file if it doesn't exist |
+
+----
+
+~~DISCUSSION~~

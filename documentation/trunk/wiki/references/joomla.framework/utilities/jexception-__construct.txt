@@ -1,0 +1,23 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JException::__construct #}
+
+Constructor <ul><li>used to set up the error with all needed error details.</li></ul>
+
+===== Syntax =====
+JException __construct	( **$level**, **$code**, **$msg**, **$info**, **$backtrace** )
+
+| **$level** | int | The error level (use the PHP constants E_ALL, E_NOTICE etc.). |
+| **$code** | string | The error code from the application |
+| **$msg** | string | The error message |
+| **$info** | string | Optional: The additional error information. |
+| **$backtrace** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

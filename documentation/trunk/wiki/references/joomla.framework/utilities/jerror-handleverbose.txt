@@ -1,0 +1,21 @@
+====== handleVerbose ======
+{#JAPI Joomla.Framework Utilities JError::handleVerbose #}
+
+Verbose error handler <ul><li>Echos the error message to output as well as related info</li></ul>
+
+===== Syntax =====
+object The &handleVerbose	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

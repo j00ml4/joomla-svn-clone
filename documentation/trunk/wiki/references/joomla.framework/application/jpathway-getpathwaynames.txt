@@ -1,0 +1,18 @@
+====== getPathWayNames ======
+{#JAPI Joomla.Framework Application JPathWay::getPathWayNames #}
+
+Create and return an array of the pathway names.
+
+===== Syntax =====
+array getPathWayNames ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

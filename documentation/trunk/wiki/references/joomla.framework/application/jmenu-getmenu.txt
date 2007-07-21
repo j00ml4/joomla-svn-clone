@@ -1,0 +1,19 @@
+====== getMenu ======
+{#JAPI Joomla.Framework Application JMenu::getMenu #}
+
+Getter for the menu array
+
+===== Syntax =====
+array getMenu	( **$name** )
+
+| **$name** | string | The menu name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

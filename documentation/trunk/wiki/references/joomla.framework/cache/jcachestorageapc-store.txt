@@ -1,0 +1,21 @@
+====== store ======
+{#JAPI Joomla.Framework Cache JCacheStorageApc::store #}
+
+Store the data to APC by id and group
+
+===== Syntax =====
+boolean store	( **$id**, **$group**, **$data** )
+
+| **$id** | string | The cache data id |
+| **$group** | string | The cache data group |
+| **$data** | string | The data to store in cache |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

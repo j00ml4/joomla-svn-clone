@@ -1,0 +1,18 @@
+====== JCacheStorage ======
+{#JAPI Joomla.Framework Cache JCacheStorage #}
+
+Abstract cache storage handler
+===== Methods =====
+^ Method ^ Description ^
+| [[JCacheStorage-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-__construct|__construct]] | Constructor |
+| [[JCacheStorage-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
+| [[JCacheStorage-gc|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-gc|gc]] | Garbage collect expired cache data |
+| [[JCacheStorage-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-get|get]] | Get cached data by id and group |
+| [[JCacheStorage-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-getInstance|getInstance]] | Returns a reference to a cache storage hanlder object, only creating it  if it doesn't already exist. |
+| [[JCacheStorage-remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-remove|remove]] | Remove a cached data entry by id and group |
+| [[JCacheStorage-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-store|store]] | Store the data to cache by id and group |
+| [[JCacheStorage-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorage-test|test]] | Test to see if the storage handler is available. |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== removeFiles ======
+{#JAPI Joomla.Framework Installer JInstaller::removeFiles #}
+
+Method to parse through a files element of the installation manifest and remove  the files that were installed
+
+===== Syntax =====
+boolean removeFiles	( **$element**, **$cid** )
+
+| **$element** | object | The xml node to process |
+| **$cid** | int | Application ID of application to remove from |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

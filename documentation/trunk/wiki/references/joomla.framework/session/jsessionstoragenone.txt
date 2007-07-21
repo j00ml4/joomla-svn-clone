@@ -1,0 +1,11 @@
+====== JSessionStorageNone ======
+{#JAPI Joomla.Framework Session JSessionStorageNone #}
+
+File session handler for PHP
+===== Methods =====
+^ Method ^ Description ^
+| [[JSessionStorageNone-register|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSessionStorageNone-register|register]] | Register the functions of this class with PHP's session handler |
+
+----
+
+~~DISCUSSION~~

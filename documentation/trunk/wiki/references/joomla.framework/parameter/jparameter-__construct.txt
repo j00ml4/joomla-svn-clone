@@ -1,0 +1,20 @@
+====== __construct ======
+{#JAPI Joomla.Framework Parameter JParameter::__construct #}
+
+Constructor
+
+===== Syntax =====
+JParameter __construct	( **$data**, **$path** )
+
+| **$data** | string | The raw parms text |
+| **$path** | string | Path to the xml setup file |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

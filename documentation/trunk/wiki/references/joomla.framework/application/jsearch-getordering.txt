@@ -1,0 +1,18 @@
+====== getOrdering ======
+{#JAPI Joomla.Framework Application JSearch::getOrdering #}
+
+
+
+===== Syntax =====
+string getOrdering ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

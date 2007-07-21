@@ -1,0 +1,18 @@
+====== getId ======
+{#JAPI Joomla.Framework Session JSession::getId #}
+
+Get session id
+
+===== Syntax =====
+string getId ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

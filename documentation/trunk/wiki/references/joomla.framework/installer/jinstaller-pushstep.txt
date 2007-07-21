@@ -1,0 +1,19 @@
+====== pushStep ======
+{#JAPI Joomla.Framework Installer JInstaller::pushStep #}
+
+Pushes a step onto the installer stack for rolling back steps
+
+===== Syntax =====
+void pushStep	( **$step** )
+
+| **$step** | array | Installer step |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

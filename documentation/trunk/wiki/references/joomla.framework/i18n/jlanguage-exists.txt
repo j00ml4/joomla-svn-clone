@@ -1,0 +1,20 @@
+====== exists ======
+{#JAPI Joomla.Framework I18N JLanguage::exists #}
+
+Check if a language exists<p>This is a simple, quick check for the directory that should contain language files for the given user.</p>
+
+===== Syntax =====
+boolean exists	( **$lang**, **$basePath** )
+
+| **$lang** | string | Language to check |
+| **$basePath** | string | Optional path to check |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

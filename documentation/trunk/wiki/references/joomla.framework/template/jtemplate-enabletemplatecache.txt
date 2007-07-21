@@ -1,0 +1,20 @@
+====== enableTemplateCache ======
+{#JAPI Joomla.Framework Template JTemplate::enableTemplateCache #}
+
+enable a template cache<p>A template cache will improve performace, as the templates  do not have to be read on each request.</p>
+
+===== Syntax =====
+boolean enableTemplateCache	( **$handler**, **$folder** )
+
+| **$handler** | string | name of the template cache |
+| **$folder** | string | folder to store the cached files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

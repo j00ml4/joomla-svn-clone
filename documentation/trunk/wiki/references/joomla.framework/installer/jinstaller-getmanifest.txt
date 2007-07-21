@@ -1,0 +1,18 @@
+====== getManifest ======
+{#JAPI Joomla.Framework Installer JInstaller::getManifest #}
+
+Get the installation manifest object
+
+===== Syntax =====
+object Manifest &getManifest ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

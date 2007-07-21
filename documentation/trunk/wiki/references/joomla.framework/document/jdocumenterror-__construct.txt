@@ -1,0 +1,21 @@
+====== __construct ======
+{#JAPI Joomla.Framework Document JDocumentError::__construct #}
+
+Class constructor
+
+===== Syntax =====
+JDocumentError __construct	( **$options**, **$type**, **$attributes** )
+
+| **$type** | string | (either html or tex) |
+| **$attributes** | array | Associative array of attributes |
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== get ======
+{#JAPI Joomla.Framework Environment JRequest::get #}
+
+Fetches and returns a request array.<p>The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning  $_GET, POST and PUT will result in returning $_POST.</p><p>You can force the source by setting the $hash parameter:</p><p>post		$_POST    get		$_GET    files		$_FILES    cookie		$_COOKIE    method		via current $_SERVER['REQUEST_METHOD']    default	$_REQUEST</p>
+
+===== Syntax =====
+mixed get	( **$hash**, **$mask** )
+
+| **$hash** | string | to get (POST, GET, FILES, METHOD) |
+| **$mask** | int | Filter mask for the variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

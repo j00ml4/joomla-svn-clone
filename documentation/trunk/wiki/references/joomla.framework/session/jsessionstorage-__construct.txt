@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Session JSessionStorage::__construct #}
+
+Constructor
+
+===== Syntax =====
+JSessionStorage __construct	( **$options** )
+
+| **$options** | array | optional parameters |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

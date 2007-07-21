@@ -1,0 +1,18 @@
+====== JFilterInput ======
+{#JAPI Joomla.Framework Filter JFilterInput #}
+
+JFilterInout is a class for filtering input from any data source<p>Forked from the php input filter library by: Daniel Morris &lt;dan@rootcube.com&gt;  Original Contributors: Gianpaolo Racca, Ghislain Picard, Marco Wandschneider, Chris Tobin and Andrew Eddie.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JFilterInput-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-__construct|__construct]] | Constructor for inputFilter class. Only first parameter is required. |
+| [[JFilterInput-checkAttribute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-checkAttribute|checkAttribute]] | Function to determine if contents of an attribute is safe |
+| [[JFilterInput-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-clean|clean]] | Method to be called by another php script. Processes for XSS and  specified bad code. |
+| [[JFilterInput-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-getInstance|getInstance]] | Returns a reference to an input filter object, only creating it if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $filter = & JFilterInput::getInstance();</pre></p> |
+| [[JFilterInput-_cleanAttributes|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-_cleanAttributes|_cleanAttributes]] | Internal method to strip a tag of certain attributes |
+| [[JFilterInput-_cleanTags|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-_cleanTags|_cleanTags]] | Internal method to strip a string of certain tags |
+| [[JFilterInput-_decode|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-_decode|_decode]] | Try to convert to plaintext |
+| [[JFilterInput-_remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFilterInput-_remove|_remove]] | Internal method to iteratively remove all unwanted tags and attributes |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== loadTemplate ======
+{#JAPI Joomla.Framework Application JView::loadTemplate #}
+
+Load a template file -- first look in the templates folder for an override
+
+===== Syntax =====
+string loadTemplate	( **$tpl** )
+
+| **$tpl** | string | The name of the template source file ...  automatically searches the template paths and compiles as needed. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

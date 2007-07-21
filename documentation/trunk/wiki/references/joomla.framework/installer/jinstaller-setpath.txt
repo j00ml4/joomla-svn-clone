@@ -1,0 +1,20 @@
+====== setPath ======
+{#JAPI Joomla.Framework Installer JInstaller::setPath #}
+
+Sets an installer path by name
+
+===== Syntax =====
+void setPath	( **$name**, **$value** )
+
+| **$name** | string | Path name |
+| **$value** | string | Path |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

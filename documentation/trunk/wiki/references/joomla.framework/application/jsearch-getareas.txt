@@ -1,0 +1,18 @@
+====== getAreas ======
+{#JAPI Joomla.Framework Application JSearch::getAreas #}
+
+
+
+===== Syntax =====
+array getAreas ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

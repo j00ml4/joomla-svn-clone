@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Base JObject::__construct #}
+
+Class constructor, overridden in descendant classes.
+
+===== Syntax =====
+JObject __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== hasToken ======
+{#JAPI Joomla.Framework Session JSession::hasToken #}
+
+Method to determine if a token exists in the session. If not the  session will be set to expired
+
+===== Syntax =====
+void hasToken	( **$tCheck**, **$forceExpire** )
+
+| **$tCheck** | string | Hashed token to be verified |
+| **$forceExpire** | boolean | If true, expires the session |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

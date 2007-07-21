@@ -1,0 +1,18 @@
+====== getDefault ======
+{#JAPI Joomla.Framework Application JMenu::getDefault #}
+
+Get menu item by id
+
+===== Syntax =====
+object The &getDefault ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

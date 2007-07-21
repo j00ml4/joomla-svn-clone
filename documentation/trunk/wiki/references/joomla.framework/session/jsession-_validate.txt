@@ -1,0 +1,19 @@
+====== _validate ======
+{#JAPI Joomla.Framework Session JSession::_validate #}
+
+Do some checks for security reason<p><ul><li>timeout check (expire)</li><li>ip-fixiation</li><li>browser-fixiation</li></ul>  If one check failed, session data has to be cleaned.</p>
+
+===== Syntax =====
+boolean _validate	( **$restart** )
+
+| **$restart** | boolean | reactivate session |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== toMySQL ======
+{#JAPI Joomla.Framework Utilities JDate::toMySQL #}
+
+Gets the date as in MySQL datetime format
+
+===== Syntax =====
+a toMySQL ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

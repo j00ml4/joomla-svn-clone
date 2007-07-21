@@ -1,0 +1,18 @@
+====== setUTF ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::setUTF #}
+
+Custom settings for UTF support
+
+===== Syntax =====
+void setUTF ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

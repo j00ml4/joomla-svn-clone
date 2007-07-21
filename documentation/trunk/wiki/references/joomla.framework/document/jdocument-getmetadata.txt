@@ -1,0 +1,20 @@
+====== getMetaData ======
+{#JAPI Joomla.Framework Document JDocument::getMetaData #}
+
+Gets a meta tag.
+
+===== Syntax =====
+string getMetaData	( **$name**, **$http_equiv** )
+
+| **$name** | string | Value of name or http-equiv tag |
+| **$http_equiv** | bool | META type &quot;http-equiv&quot; defaults to null |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

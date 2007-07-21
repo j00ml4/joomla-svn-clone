@@ -1,0 +1,18 @@
+====== getParser ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::getParser #}
+
+Get the parser
+
+===== Syntax =====
+resource getParser ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

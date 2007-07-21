@@ -1,0 +1,18 @@
+====== getDirection ======
+{#JAPI Joomla.Framework Document JDocument::getDirection #}
+
+Returns the document language.
+
+===== Syntax =====
+string getDirection ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

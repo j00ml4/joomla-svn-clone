@@ -1,0 +1,19 @@
+====== setGenerator ======
+{#JAPI Joomla.Framework Document JDocument::setGenerator #}
+
+Sets the document generator
+
+===== Syntax =====
+void setGenerator	( **$generator** )
+
+| **$generator** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

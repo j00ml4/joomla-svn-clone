@@ -1,0 +1,18 @@
+====== getChildren ======
+{#JAPI Joomla.Framework Base JNode::getChildren #}
+
+
+
+===== Syntax =====
+void &getChildren ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

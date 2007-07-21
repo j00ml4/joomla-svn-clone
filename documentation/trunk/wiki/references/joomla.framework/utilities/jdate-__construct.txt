@@ -1,0 +1,20 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JDate::__construct #}
+
+Creates a new instance of JDate representing a given date.<p>Accepts RFC 822, ISO 8601 date formats as well as unix time stamps.  If not specified, the current date and time is used.</p>
+
+===== Syntax =====
+JDate __construct	( **$date**, **$tzOffset** )
+
+| **$date** | mixed | optional the date this JDate will represent. |
+| **$tzOffset** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

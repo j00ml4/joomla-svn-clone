@@ -1,0 +1,18 @@
+====== toRFC822 ======
+{#JAPI Joomla.Framework Utilities JDate::toRFC822 #}
+
+Gets the date as an RFC 822 date.
+
+===== Syntax =====
+a toRFC822 ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

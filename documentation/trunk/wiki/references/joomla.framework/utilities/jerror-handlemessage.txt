@@ -1,0 +1,21 @@
+====== handleMessage ======
+{#JAPI Joomla.Framework Utilities JError::handleMessage #}
+
+Message error handler <ul><li>Enqueues the error message into the system queue</li></ul>
+
+===== Syntax =====
+object The &handleMessage	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

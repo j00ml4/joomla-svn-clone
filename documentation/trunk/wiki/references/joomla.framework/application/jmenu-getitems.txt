@@ -1,0 +1,21 @@
+====== getItems ======
+{#JAPI Joomla.Framework Application JMenu::getItems #}
+
+Gets menu items by attribute
+
+===== Syntax =====
+array getItems	( **$attribute**, **$value**, **$firstonly** )
+
+| **$attribute** | string | The field name |
+| **$value** | string | The value of the field |
+| **$firstonly** | boolean | If true, only returns the first item found |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

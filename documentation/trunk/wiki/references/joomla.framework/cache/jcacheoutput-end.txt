@@ -1,0 +1,18 @@
+====== end ======
+{#JAPI Joomla.Framework Cache JCacheOutput::end #}
+
+Stop the cache buffer and store the cached data
+
+===== Syntax =====
+boolean end ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

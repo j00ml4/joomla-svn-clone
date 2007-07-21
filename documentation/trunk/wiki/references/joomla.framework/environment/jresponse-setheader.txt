@@ -1,0 +1,21 @@
+====== setHeader ======
+{#JAPI Joomla.Framework Environment JResponse::setHeader #}
+
+Set a header<p>If $replace is true, replaces any headers already defined with that  $name.</p>
+
+===== Syntax =====
+void setHeader	( **$name**, **$value**, **$replace** )
+
+| **$name** | string |  |
+| **$value** | string |  |
+| **$replace** | boolean |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

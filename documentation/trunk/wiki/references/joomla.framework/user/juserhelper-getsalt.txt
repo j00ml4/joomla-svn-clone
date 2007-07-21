@@ -1,0 +1,21 @@
+====== getSalt ======
+{#JAPI Joomla.Framework User JUserHelper::getSalt #}
+
+Returns a salt for the appropriate kind of password encryption.<p>Optionally takes a seed and a plaintext password, to extract the seed  of an existing password, or for encryption types that use the plaintext  in the generation of the salt.</p>
+
+===== Syntax =====
+string getSalt	( **$encryption**, **$seed**, **$plaintext** )
+
+| **$encryption** | string | The kind of pasword encryption to use.                             Defaults to md5-hex. |
+| **$seed** | string | The seed to get the salt from (probably a                             previously generated password). Defaults to                             generating a new seed. |
+| **$plaintext** | string | The plaintext password that we're generating                             a salt for. Defaults to none. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== prependBody ======
+{#JAPI Joomla.Framework Environment JResponse::prependBody #}
+
+Prepend content to the body content
+
+===== Syntax =====
+void prependBody	( **$content** )
+
+| **$content** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

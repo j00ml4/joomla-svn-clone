@@ -1,0 +1,19 @@
+====== _convertEncoding ======
+{#JAPI Joomla.Framework HTML JHTMLEmail::_convertEncoding #}
+
+
+
+===== Syntax =====
+void _convertEncoding	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

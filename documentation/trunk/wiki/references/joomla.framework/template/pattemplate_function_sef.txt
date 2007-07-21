@@ -1,0 +1,11 @@
+====== patTemplate_Function_Sef ======
+{#JAPI Joomla.Framework Template patTemplate_Function_Sef #}
+
+JTemplate SEF function
+===== Methods =====
+^ Method ^ Description ^
+| [[patTemplate_Function_Sef-call|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Function_Sef-call|call]] | call the function |
+
+----
+
+~~DISCUSSION~~

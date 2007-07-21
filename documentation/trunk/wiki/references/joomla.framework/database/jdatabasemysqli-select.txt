@@ -1,0 +1,19 @@
+====== select ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::select #}
+
+Select a database for use
+
+===== Syntax =====
+boolean select	( **$database** )
+
+| **$database** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

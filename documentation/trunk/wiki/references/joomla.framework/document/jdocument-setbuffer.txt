@@ -1,0 +1,19 @@
+====== setBuffer ======
+{#JAPI Joomla.Framework Document JDocument::setBuffer #}
+
+Set the contents of the document buffer
+
+===== Syntax =====
+void setBuffer	( **$content** )
+
+| **$content** | string | The content to be set in the buffer |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

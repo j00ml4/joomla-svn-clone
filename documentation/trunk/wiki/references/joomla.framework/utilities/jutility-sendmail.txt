@@ -1,0 +1,29 @@
+====== sendMail ======
+{#JAPI Joomla.Framework Utilities JUtility::sendMail #}
+
+Mail function (uses phpMailer)
+
+===== Syntax =====
+boolean sendMail	( **$from**, **$fromname**, **$recipient**, **$subject**, **$body**, **$mode**, **$cc**, **$bcc**, **$attachment**, **$replyto**, **$replytoname** )
+
+| **$from** | string | From e-mail address |
+| **$fromname** | string | From name |
+| **$recipient** | mixed | Recipient e-mail address(es) |
+| **$subject** | string | E-mail subject |
+| **$body** | string | Message body |
+| **$mode** | boolean | false = plain text, true = HTML |
+| **$cc** | mixed | CC e-mail address(es) |
+| **$bcc** | mixed | BCC e-mail address(es) |
+| **$attachment** | mixed | Attachment file name(s) |
+| **$replyto** | mixed | Reply to email address(es) |
+| **$replytoname** | mixed | Reply to name(s) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

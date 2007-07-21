@@ -1,0 +1,18 @@
+====== insertid ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::insertid #}
+
+
+
+===== Syntax =====
+void insertid ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

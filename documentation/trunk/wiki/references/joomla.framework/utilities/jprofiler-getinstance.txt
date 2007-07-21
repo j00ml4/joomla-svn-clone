@@ -1,0 +1,19 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Utilities JProfiler::getInstance #}
+
+Returns a reference to the global Profiler object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = & JProfiler::getInstance( $prefix );</pre></p>
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JProfiler.html">JProfiler</a> &getInstance	( **$prefix** )
+
+| **$prefix** | string | Prefix used to distinguish profiler objects. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

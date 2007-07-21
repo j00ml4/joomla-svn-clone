@@ -1,0 +1,37 @@
+====== assign ======
+{#JAPI Joomla.Framework Application JView::assign #}
+
+Assigns variables to the view script via differing strategies.<p>This method is overloaded; you can assign all the properties of  an object, an associative array, or a single value by name.</p><p>You are not allowed to set variables that begin with an underscore;  these are either private properties for JView or private variables  within the template script itself.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-var">$view&nbsp;</span>=<span class="src-sym">&amp;&nbsp;</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../../Joomla-Framework/Application/JView.html">JView</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;directly</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;name&nbsp;and&nbsp;value</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var1'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'something'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'var2'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;assoc-array</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$ary&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'var1'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'something'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'var2'&nbsp;</span>=&gt;&nbsp;<span class="src-str">'else'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;assign&nbsp;by&nbsp;object</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">stdClass</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var1&nbsp;</span>=&nbsp;<span class="src-str">'something'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">var2&nbsp;</span>=&nbsp;<span class="src-str">'else'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-var">$obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+
+===== Syntax =====
+bool assign ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

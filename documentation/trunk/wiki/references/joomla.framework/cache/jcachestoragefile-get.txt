@@ -1,0 +1,21 @@
+====== get ======
+{#JAPI Joomla.Framework Cache JCacheStorageFile::get #}
+
+Get cached data from a file by id and group
+
+===== Syntax =====
+mixed get	( **$id**, **$group**, **$checkTime** )
+
+| **$id** | string | The cache data id |
+| **$group** | string | The cache data group |
+| **$checkTime** | boolean | True to verify cache time expiration threshold |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

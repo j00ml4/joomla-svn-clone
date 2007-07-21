@@ -1,0 +1,19 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Template JTemplate::getInstance #}
+
+Returns a reference to a global Template object, only creating it  if it doesn't already exist.
+
+===== Syntax =====
+jtemplate &getInstance	( **$type** )
+
+| **$type** | string | (either html or tex) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Base JNode::__construct #}
+
+
+
+===== Syntax =====
+JNode __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== stream_tell ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_tell #}
+
+
+
+===== Syntax =====
+void stream_tell ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

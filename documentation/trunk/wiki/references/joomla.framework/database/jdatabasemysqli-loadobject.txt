@@ -1,0 +1,18 @@
+====== loadObject ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::loadObject #}
+
+This global function loads the first row of a query into an object<p>return object</p>
+
+===== Syntax =====
+void loadObject ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

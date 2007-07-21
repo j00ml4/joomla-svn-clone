@@ -1,0 +1,20 @@
+====== _getGroup ======
+{#JAPI Joomla.Framework User JAuthorization::_getGroup #}
+
+
+
+===== Syntax =====
+void _getGroup	( **$type**, **$value** )
+
+| **$type** |  |  |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

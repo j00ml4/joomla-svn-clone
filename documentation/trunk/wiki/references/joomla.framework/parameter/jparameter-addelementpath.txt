@@ -1,0 +1,19 @@
+====== addElementPath ======
+{#JAPI Joomla.Framework Parameter JParameter::addElementPath #}
+
+Add a directory where JParameter should search for element types<p>You may either pass a string or an array of directories.</p><p>JParameter will be searching for a element type in the same  order you added them. If the parameter type cannot be found in  the custom folders, it will look in  JParameter/types.</p>
+
+===== Syntax =====
+void addElementPath	( **$path** )
+
+| **$path** | string|array | directory or directories to search. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

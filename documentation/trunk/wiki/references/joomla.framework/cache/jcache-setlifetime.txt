@@ -1,0 +1,19 @@
+====== setLifeTime ======
+{#JAPI Joomla.Framework Cache JCache::setLifeTime #}
+
+Set cache lifetime
+
+===== Syntax =====
+void setLifeTime	( **$lt** )
+
+| **$lt** | int | Cache lifetime |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

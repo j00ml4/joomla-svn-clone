@@ -1,0 +1,21 @@
+====== JResponse ======
+{#JAPI Joomla.Framework Environment JResponse #}
+
+JResponse Class<p>This class serves to provide the Joomla Framework with a common interface to access  response variables.  This includes header and body.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JResponse-allowCache|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-allowCache|allowCache]] | Set/get cachable state for the response<p>If $allow is set, sets the cachable state of the response.  Always returns current state</p> |
+| [[JResponse-appendBody|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-appendBody|appendBody]] | Append content to the body content |
+| [[JResponse-clearHeaders|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-clearHeaders|clearHeaders]] | Clear headers |
+| [[JResponse-getBody|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-getBody|getBody]] | Return the body content |
+| [[JResponse-getHeaders|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-getHeaders|getHeaders]] | Return array of headers; |
+| [[JResponse-prependBody|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-prependBody|prependBody]] | Prepend content to the body content |
+| [[JResponse-sendHeaders|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-sendHeaders|sendHeaders]] | Send all headers |
+| [[JResponse-setBody|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-setBody|setBody]] | Set body content<p>If body content already defined, this will replace it.</p> |
+| [[JResponse-setHeader|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-setHeader|setHeader]] | Set a header<p>If $replace is true, replaces any headers already defined with that  $name.</p> |
+| [[JResponse-toString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-toString|toString]] | Sends all headers prior to returning the string |
+| [[JResponse-_compress|{{http://dev.joomla.org/media/images/Method.png }}]] [[JResponse-_compress|_compress]] | Compress the data<p>Checks the accept encoding of the browser and compresses the data before  sending it to the client.</p> |
+
+----
+
+~~DISCUSSION~~

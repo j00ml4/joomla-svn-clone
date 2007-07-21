@@ -1,0 +1,18 @@
+====== getResults ======
+{#JAPI Joomla.Framework Application JSearch::getResults #}
+
+
+
+===== Syntax =====
+array getResults ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

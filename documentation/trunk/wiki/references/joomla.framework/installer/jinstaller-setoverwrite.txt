@@ -1,0 +1,19 @@
+====== setOverwrite ======
+{#JAPI Joomla.Framework Installer JInstaller::setOverwrite #}
+
+Set the allow overwrite switch
+
+===== Syntax =====
+boolean setOverwrite	( **$state** )
+
+| **$state** | boolean | Overwrite switch state |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

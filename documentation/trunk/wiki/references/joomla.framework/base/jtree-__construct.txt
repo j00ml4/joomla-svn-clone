@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Base JTree::__construct #}
+
+
+
+===== Syntax =====
+JTree __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

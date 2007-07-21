@@ -1,0 +1,20 @@
+====== inArea ======
+{#JAPI Joomla.Framework Application JSearchHelper::inArea #}
+
+
+
+===== Syntax =====
+boolean inArea	( **$formAreas**, **$pluginAreas** )
+
+| **$formAreas** | array | A flat array of search areas |
+| **$pluginAreas** | array | A named array of search areas for the plugin |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

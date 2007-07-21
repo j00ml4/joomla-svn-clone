@@ -1,0 +1,19 @@
+====== _parseXMLLanguageFile ======
+{#JAPI Joomla.Framework I18N JLanguage::_parseXMLLanguageFile #}
+
+Parse XML file for language information
+
+===== Syntax =====
+array _parseXMLLanguageFile	( **$path** )
+
+| **$path** | string | Path to the xml files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

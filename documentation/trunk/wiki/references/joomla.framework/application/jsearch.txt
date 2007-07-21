@@ -1,0 +1,23 @@
+====== JSearch ======
+{#JAPI Joomla.Framework Application JSearch #}
+
+Base search class
+===== Methods =====
+^ Method ^ Description ^
+| [[JSearch-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-__construct|__construct]] | Constructor |
+| [[JSearch-addResultCount|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-addResultCount|addResultCount]] | Adds the total number of returns of the current search plugin to the<p>running total and determines the limit and limitstart for the query</p> |
+| [[JSearch-addResults|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-addResults|addResults]] |  |
+| [[JSearch-getAreas|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getAreas|getAreas]] |  |
+| [[JSearch-getMatchType|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getMatchType|getMatchType]] |  |
+| [[JSearch-getNeedle|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getNeedle|getNeedle]] |  |
+| [[JSearch-getOrdering|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getOrdering|getOrdering]] |  |
+| [[JSearch-getQueryLimit|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getQueryLimit|getQueryLimit]] | Returns the limit for the next search query |
+| [[JSearch-getQueryLimitStart|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getQueryLimitStart|getQueryLimitStart]] | Returns the limit start for the next search query |
+| [[JSearch-getResultCount|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getResultCount|getResultCount]] |  |
+| [[JSearch-getResults|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-getResults|getResults]] |  |
+| [[JSearch-setLimit|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-setLimit|setLimit]] |  |
+| [[JSearch-setLimitStart|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearch-setLimitStart|setLimitStart]] |  |
+
+----
+
+~~DISCUSSION~~

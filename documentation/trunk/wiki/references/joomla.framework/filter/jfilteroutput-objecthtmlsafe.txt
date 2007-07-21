@@ -1,0 +1,21 @@
+====== objectHTMLSafe ======
+{#JAPI Joomla.Framework Filter JFilterOutput::objectHTMLSafe #}
+
+Makes an object safe to display in forms<p>Object parameters that are non-string, array, object or start with underscore  will be converted</p>
+
+===== Syntax =====
+void objectHTMLSafe	( **&$mixed**, **$quote_style**, **$exclude_keys** )
+
+| **&$mixed** | object An | object to be parsed |
+| **$quote_style** | int | The optional quote style for the htmlspecialchars function |
+| **$exclude_keys** | string|array | An optional single field name or array of field names not                      to be parsed (eg, for a textarea) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

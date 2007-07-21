@@ -1,0 +1,18 @@
+====== GetRows ======
+{#JAPI Joomla.Framework Database JRecordSet::GetRows #}
+
+
+
+===== Syntax =====
+array GetRows ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

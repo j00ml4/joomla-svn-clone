@@ -1,0 +1,18 @@
+====== children ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::children #}
+
+Get the children of the element
+
+===== Syntax =====
+array children ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

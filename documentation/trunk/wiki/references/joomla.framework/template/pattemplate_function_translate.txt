@@ -1,0 +1,11 @@
+====== patTemplate_Function_Translate ======
+{#JAPI Joomla.Framework Template patTemplate_Function_Translate #}
+
+JTemplate Translate function
+===== Methods =====
+^ Method ^ Description ^
+| [[patTemplate_Function_Translate-call|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Function_Translate-call|call]] | call the function |
+
+----
+
+~~DISCUSSION~~

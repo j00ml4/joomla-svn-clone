@@ -1,0 +1,18 @@
+====== getPass ======
+{#JAPI Joomla.Framework Environment JURI::getPass #}
+
+Get URI password  		returns the password, or null if no password was specified
+
+===== Syntax =====
+string getPass ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

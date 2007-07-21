@@ -1,0 +1,18 @@
+====== _getStackLocation ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_getStackLocation #}
+
+Gets the reference to the current direct parent
+
+===== Syntax =====
+object _getStackLocation ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

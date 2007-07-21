@@ -1,0 +1,19 @@
+====== exists ======
+{#JAPI Joomla.Framework Table JTableSession::exists #}
+
+Find out if a user has a one or more active sessions
+
+===== Syntax =====
+boolean exists	( **$userid** )
+
+| **$userid** | int | The identifier of the user |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

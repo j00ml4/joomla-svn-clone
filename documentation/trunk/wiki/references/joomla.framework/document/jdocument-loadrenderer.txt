@@ -1,0 +1,19 @@
+====== loadRenderer ======
+{#JAPI Joomla.Framework Document JDocument::loadRenderer #}
+
+Load a renderer
+
+===== Syntax =====
+object &loadRenderer	( **$type** )
+
+| **$type** | string | The renderer type |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

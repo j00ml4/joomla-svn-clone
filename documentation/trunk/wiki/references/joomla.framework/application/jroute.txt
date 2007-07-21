@@ -1,0 +1,11 @@
+====== JRoute ======
+{#JAPI Joomla.Framework Application JRoute #}
+
+Route handling class
+===== Methods =====
+^ Method ^ Description ^
+| [[JRoute-_|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRoute-_|_]] | Translates an internal Joomla URL to a humanly readible URL. |
+
+----
+
+~~DISCUSSION~~

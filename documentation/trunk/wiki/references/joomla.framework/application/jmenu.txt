@@ -1,0 +1,22 @@
+====== JMenu ======
+{#JAPI Joomla.Framework Application JMenu #}
+
+JMenu class
+===== Methods =====
+^ Method ^ Description ^
+| [[JMenu-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-__construct|__construct]] | Class constructor |
+| [[JMenu-authorize|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-authorize|authorize]] | Method to check JMenu object authorization against an access control  object and optionally an access extension object |
+| [[JMenu-getActive|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getActive|getActive]] | Get menu item by id |
+| [[JMenu-getDefault|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getDefault|getDefault]] | Get menu item by id |
+| [[JMenu-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getInstance|getInstance]] | Returns a reference to the global JMenu object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $menu = &JMenu::getInstance();</pre></p> |
+| [[JMenu-getItem|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getItem|getItem]] | Get menu item by id |
+| [[JMenu-getItems|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getItems|getItems]] | Gets menu items by attribute |
+| [[JMenu-getMenu|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getMenu|getMenu]] | Getter for the menu array |
+| [[JMenu-getParams|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-getParams|getParams]] | Gets the parameter object for a certain menu item |
+| [[JMenu-setActive|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-setActive|setActive]] | Set the default item by id |
+| [[JMenu-setDefault|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-setDefault|setDefault]] | Set the default item by id |
+| [[JMenu-_load|{{http://dev.joomla.org/media/images/Method.png }}]] [[JMenu-_load|_load]] | Loads the entire menu table into memory |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== loadResult ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::loadResult #}
+
+This method loads the first field of the first row returned by the query.
+
+===== Syntax =====
+The loadResult ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

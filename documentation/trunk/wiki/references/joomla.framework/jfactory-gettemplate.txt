@@ -1,0 +1,18 @@
+====== getTemplate ======
+{#JAPI Joomla.Framework  JFactory::getTemplate #}
+
+Get a template object<p>Returns a reference to the global <a href="../Joomla-Framework/Template/JTemplate.html">JTemplate</a> object, only creating it  if it doesn't already exist.</p>
+
+===== Syntax =====
+<a href="../Joomla-Framework/Template/JTemplate.html">object JTemplate</a> &getTemplate ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

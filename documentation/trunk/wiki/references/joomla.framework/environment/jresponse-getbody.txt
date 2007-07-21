@@ -1,0 +1,19 @@
+====== getBody ======
+{#JAPI Joomla.Framework Environment JResponse::getBody #}
+
+Return the body content
+
+===== Syntax =====
+string|array getBody	( **$toArray** )
+
+| **$toArray** | boolean | Whether or not to return the body content as an  array of strings or as a single string; defaults to false |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

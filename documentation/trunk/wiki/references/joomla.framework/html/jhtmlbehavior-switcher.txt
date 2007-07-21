@@ -1,0 +1,18 @@
+====== switcher ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::switcher #}
+
+
+
+===== Syntax =====
+void switcher ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

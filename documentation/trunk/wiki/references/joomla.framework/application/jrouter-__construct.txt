@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JRouter::__construct #}
+
+Class constructor
+
+===== Syntax =====
+JRouter __construct	( **$options** )
+
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

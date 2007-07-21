@@ -1,0 +1,19 @@
+====== setQuery ======
+{#JAPI Joomla.Framework Environment JURI::setQuery #}
+
+Sets the query to a supplied string in format:  		foo=bar&amp;x=y
+
+===== Syntax =====
+void setQuery	( **$query** )
+
+| **$query** | mixed | (array|string) $query The query string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Base JObservable::__construct #}
+
+Constructor
+
+===== Syntax =====
+JObservable __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

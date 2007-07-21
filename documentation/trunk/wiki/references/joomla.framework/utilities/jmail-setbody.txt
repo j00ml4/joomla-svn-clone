@@ -1,0 +1,19 @@
+====== setBody ======
+{#JAPI Joomla.Framework Utilities JMail::setBody #}
+
+Set the E-Mail body
+
+===== Syntax =====
+void setBody	( **$content** )
+
+| **$content** | string | Body of the e-mail |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

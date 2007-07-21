@@ -1,0 +1,19 @@
+====== loadObjectList ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::loadObjectList #}
+
+Load a list of database objects
+
+===== Syntax =====
+array loadObjectList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

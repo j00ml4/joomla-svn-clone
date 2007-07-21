@@ -1,0 +1,20 @@
+====== _hexToInt ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::_hexToInt #}
+
+
+
+===== Syntax =====
+void _hexToInt	( **$s**, **$i** )
+
+| **$s** |  |  |
+| **$i** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

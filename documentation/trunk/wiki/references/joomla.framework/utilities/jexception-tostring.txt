@@ -1,0 +1,18 @@
+====== toString ======
+{#JAPI Joomla.Framework Utilities JException::toString #}
+
+Returns to error message
+
+===== Syntax =====
+string toString ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

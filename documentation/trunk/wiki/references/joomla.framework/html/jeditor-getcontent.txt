@@ -1,0 +1,19 @@
+====== getContent ======
+{#JAPI Joomla.Framework HTML JEditor::getContent #}
+
+Get the editor contents
+
+===== Syntax =====
+void getContent	( **$editor** )
+
+| **$editor** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

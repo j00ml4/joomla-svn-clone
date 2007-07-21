@@ -1,0 +1,18 @@
+====== atlastpage ======
+{#JAPI Joomla.Framework Database JRecordSet::atlastpage #}
+
+TODO: No working
+
+===== Syntax =====
+void atlastpage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

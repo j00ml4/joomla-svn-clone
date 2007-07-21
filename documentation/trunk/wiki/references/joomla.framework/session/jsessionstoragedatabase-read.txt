@@ -1,0 +1,19 @@
+====== read ======
+{#JAPI Joomla.Framework Session JSessionStorageDatabase::read #}
+
+Read the data for a particular session identifier from the  SessionHandler backend.
+
+===== Syntax =====
+string read	( **$id** )
+
+| **$id** | string | The session identifier. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

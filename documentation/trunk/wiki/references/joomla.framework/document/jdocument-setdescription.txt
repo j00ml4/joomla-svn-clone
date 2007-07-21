@@ -1,0 +1,20 @@
+====== setDescription ======
+{#JAPI Joomla.Framework Document JDocument::setDescription #}
+
+Sets the description of the document
+
+===== Syntax =====
+void setDescription	( **$description**, **$title** )
+
+| **$title** | string |  |
+| **$description** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

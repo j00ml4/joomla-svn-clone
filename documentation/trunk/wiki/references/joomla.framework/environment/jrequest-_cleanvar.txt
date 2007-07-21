@@ -1,0 +1,21 @@
+====== _cleanVar ======
+{#JAPI Joomla.Framework Environment JRequest::_cleanVar #}
+
+
+
+===== Syntax =====
+void _cleanVar	( **$var**, **$mask**, **$type** )
+
+| **$var** |  |  |
+| **$mask** |  |  |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

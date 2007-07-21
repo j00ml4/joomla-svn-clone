@@ -1,0 +1,19 @@
+====== _parseTemplate ======
+{#JAPI Joomla.Framework Document JDocumentHTML::_parseTemplate #}
+
+Parse a document template
+
+===== Syntax =====
+The _parseTemplate	( **$data** )
+
+| **$data** | string | The data too parse |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

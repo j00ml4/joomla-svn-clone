@@ -1,0 +1,19 @@
+====== _decode ======
+{#JAPI Joomla.Framework Filter JFilterInput::_decode #}
+
+Try to convert to plaintext
+
+===== Syntax =====
+string _decode	( **$source** )
+
+| **$source** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

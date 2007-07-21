@@ -1,0 +1,19 @@
+====== getAroGroup ======
+{#JAPI Joomla.Framework User JAuthorization::getAroGroup #}
+
+
+
+===== Syntax =====
+object The getAroGroup	( **$value** )
+
+| **$value** | string | The value for the group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

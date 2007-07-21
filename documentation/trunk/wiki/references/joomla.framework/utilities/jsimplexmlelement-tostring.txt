@@ -1,0 +1,19 @@
+====== toString ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::toString #}
+
+Return a well-formed XML string based on SimpleXML element
+
+===== Syntax =====
+string toString	( **$whitespace** )
+
+| **$whitespace** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

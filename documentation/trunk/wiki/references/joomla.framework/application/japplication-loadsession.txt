@@ -1,0 +1,19 @@
+====== loadSession ======
+{#JAPI Joomla.Framework Application JApplication::loadSession #}
+
+Load the user session.
+
+===== Syntax =====
+void loadSession	( **$name** )
+
+| **$name** | string | The session's name. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== getQueryLimit ======
+{#JAPI Joomla.Framework Application JSearch::getQueryLimit #}
+
+Returns the limit for the next search query
+
+===== Syntax =====
+int getQueryLimit ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

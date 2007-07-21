@@ -1,0 +1,18 @@
+====== hasUTF ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::hasUTF #}
+
+Determines UTF support
+
+===== Syntax =====
+boolean hasUTF ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

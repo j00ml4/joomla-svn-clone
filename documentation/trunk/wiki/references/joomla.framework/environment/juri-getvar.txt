@@ -1,0 +1,20 @@
+====== getVar ======
+{#JAPI Joomla.Framework Environment JURI::getVar #}
+
+Returns a query variable by name
+
+===== Syntax =====
+array getVar	( **$name**, **$default** )
+
+| **$name** | string | Name of the query variable to get |
+| **$default** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

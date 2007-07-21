@@ -1,0 +1,18 @@
+====== getBuffer ======
+{#JAPI Joomla.Framework Utilities JProfiler::getBuffer #}
+
+Get all profiler marks.<p>Returns an array of all marks created since the Profiler object  was instantiated.  Marks are strings as per <a href="../../Joomla-Framework/Utilities/JProfiler.html#methodmark">JProfiler::mark()</a>.</p>
+
+===== Syntax =====
+array getBuffer ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

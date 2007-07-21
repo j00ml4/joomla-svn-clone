@@ -1,0 +1,19 @@
+====== _cleanTags ======
+{#JAPI Joomla.Framework Filter JFilterInput::_cleanTags #}
+
+Internal method to strip a string of certain tags
+
+===== Syntax =====
+string _cleanTags	( **$source** )
+
+| **$source** | string | Input string to be 'cleaned' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

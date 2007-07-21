@@ -1,0 +1,20 @@
+====== customErrorPage ======
+{#JAPI Joomla.Framework Utilities JError::customErrorPage #}
+
+Display a custom error page and exit gracefully
+
+===== Syntax =====
+void customErrorPage	( **&$error**, **$error** )
+
+| **$error** | object | Exception object |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

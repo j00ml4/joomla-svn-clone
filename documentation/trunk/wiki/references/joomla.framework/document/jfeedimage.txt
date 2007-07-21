@@ -1,0 +1,10 @@
+====== JFeedImage ======
+{#JAPI Joomla.Framework Document JFeedImage #}
+
+JFeedImage is an internal class that stores feed image information
+===== Methods =====
+^ Method ^ Description ^
+
+----
+
+~~DISCUSSION~~

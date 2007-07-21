@@ -1,0 +1,19 @@
+====== getModel ======
+{#JAPI Joomla.Framework Application JView::getModel #}
+
+Method to get the model object
+
+===== Syntax =====
+mixed &getModel	( **$name** )
+
+| **$name** | string | The name of the model (optional) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== toISO8601 ======
+{#JAPI Joomla.Framework Utilities JDate::toISO8601 #}
+
+Gets the date as an ISO 8601 date.
+
+===== Syntax =====
+a toISO8601 ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

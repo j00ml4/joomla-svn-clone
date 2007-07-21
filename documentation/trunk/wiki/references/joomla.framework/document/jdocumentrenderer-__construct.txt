@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Document JDocumentRenderer::__construct #}
+
+Class constructor
+
+===== Syntax =====
+JDocumentRenderer __construct	( **&$doc** )
+
+| **&$doc** | object A | reference to the JDocument object that instantiated the renderer |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

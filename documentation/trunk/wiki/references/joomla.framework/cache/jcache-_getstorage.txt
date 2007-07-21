@@ -1,0 +1,18 @@
+====== _getStorage ======
+{#JAPI Joomla.Framework Cache JCache::_getStorage #}
+
+Get the cache storage handler
+
+===== Syntax =====
+object A &_getStorage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

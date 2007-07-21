@@ -1,0 +1,20 @@
+====== setDirection ======
+{#JAPI Joomla.Framework Document JDocument::setDirection #}
+
+Sets the global document direction declaration. Default is left-to-right (ltr).
+
+===== Syntax =====
+void setDirection	( **$dir**, **$lang** )
+
+| **$lang** | string |  |
+| **$dir** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

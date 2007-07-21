@@ -1,0 +1,14 @@
+====== JTableComponent ======
+{#JAPI Joomla.Framework Table JTableComponent #}
+
+Component table
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableComponent-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-__construct|__construct]] |  |
+| [[JTableComponent-bind|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-bind|bind]] | Overloaded bind function |
+| [[JTableComponent-check|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-check|check]] | Validate and filter fields |
+| [[JTableComponent-loadByOption|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-loadByOption|loadByOption]] | Loads a data row by option |
+
+----
+
+~~DISCUSSION~~

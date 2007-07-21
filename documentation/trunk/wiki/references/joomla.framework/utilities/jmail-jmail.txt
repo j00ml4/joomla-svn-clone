@@ -1,0 +1,18 @@
+====== JMail ======
+{#JAPI Joomla.Framework Utilities JMail::JMail #}
+
+Constructor
+
+===== Syntax =====
+JMail JMail ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

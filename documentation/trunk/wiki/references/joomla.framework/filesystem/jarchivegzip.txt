@@ -1,0 +1,12 @@
+====== JArchiveGzip ======
+{#JAPI Joomla.Framework FileSystem JArchiveGzip #}
+
+Gzip format adapter for the JArchive class<p>This class is inspired from and draws heavily in code and concept from the Compress package of  The Horde Project &lt;http://www.horde.org&gt;</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JArchiveGzip-extract|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveGzip-extract|extract]] | Extract a Gzip compressed file to a given path |
+| [[JArchiveGzip-_getFilePosition|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveGzip-_getFilePosition|_getFilePosition]] | Get file data offset for archive |
+
+----
+
+~~DISCUSSION~~

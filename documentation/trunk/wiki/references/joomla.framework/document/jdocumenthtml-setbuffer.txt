@@ -1,0 +1,22 @@
+====== setBuffer ======
+{#JAPI Joomla.Framework Document JDocumentHTML::setBuffer #}
+
+Set the contents a document include
+
+===== Syntax =====
+void setBuffer	( **$contents**, **$type**, **$name**, **$content** )
+
+| **$type** | string | The type of renderer |
+| **$name** | string | oke The name of the element to render |
+| **$content** | string | The content to be set in the buffer |
+| **$contents** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

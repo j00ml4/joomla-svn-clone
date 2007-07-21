@@ -1,0 +1,21 @@
+====== handleTrigger ======
+{#JAPI Joomla.Framework Utilities JError::handleTrigger #}
+
+Trigger error handler <ul><li>Triggers a PHP native error with the error message</li></ul>
+
+===== Syntax =====
+object The &handleTrigger	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

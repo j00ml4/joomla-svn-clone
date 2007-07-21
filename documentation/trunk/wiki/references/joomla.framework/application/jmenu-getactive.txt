@@ -1,0 +1,18 @@
+====== getActive ======
+{#JAPI Joomla.Framework Application JMenu::getActive #}
+
+Get menu item by id
+
+===== Syntax =====
+object The &getActive ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

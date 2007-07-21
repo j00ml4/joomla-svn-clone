@@ -1,0 +1,19 @@
+====== LDAPNetAddr ======
+{#JAPI Joomla.Framework Client JLDAP::LDAPNetAddr #}
+
+extract readable network address from the LDAP encoded networkAddress attribute.
+
+===== Syntax =====
+void LDAPNetAddr	( **$networkaddress** )
+
+| **$networkaddress** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

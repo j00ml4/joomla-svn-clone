@@ -1,0 +1,18 @@
+====== _buildDataObject ======
+{#JAPI Joomla.Framework HTML JPagination::_buildDataObject #}
+
+Create and return the pagination data object
+
+===== Syntax =====
+object Pagination _buildDataObject ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

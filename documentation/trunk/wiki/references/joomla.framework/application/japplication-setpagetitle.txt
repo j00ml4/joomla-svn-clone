@@ -1,0 +1,19 @@
+====== setPageTitle ======
+{#JAPI Joomla.Framework Application JApplication::setPageTitle #}
+
+Deprecated, use JDocument::setTitle instead.
+
+===== Syntax =====
+void setPageTitle	( **$title** )
+
+| **$title** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

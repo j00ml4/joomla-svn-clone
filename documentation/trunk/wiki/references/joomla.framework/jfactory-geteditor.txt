@@ -1,0 +1,19 @@
+====== getEditor ======
+{#JAPI Joomla.Framework  JFactory::getEditor #}
+
+Get an editor object
+
+===== Syntax =====
+<a href="../Joomla-Framework/HTML/JEditor.html">object JEditor</a> &getEditor	( **$editor** )
+
+| **$editor** | string | The editor to load, depends on the editor plugins that are installed |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

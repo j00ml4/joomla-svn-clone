@@ -1,0 +1,19 @@
+====== _intToHex ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::_intToHex #}
+
+
+
+===== Syntax =====
+void _intToHex	( **$i** )
+
+| **$i** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

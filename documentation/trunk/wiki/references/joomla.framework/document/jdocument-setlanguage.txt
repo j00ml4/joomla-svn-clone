@@ -1,0 +1,19 @@
+====== setLanguage ======
+{#JAPI Joomla.Framework Document JDocument::setLanguage #}
+
+Sets the global document language declaration. Default is English (en).
+
+===== Syntax =====
+void setLanguage	( **$lang** )
+
+| **$lang** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

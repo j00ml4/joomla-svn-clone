@@ -1,0 +1,21 @@
+====== get_group_parents ======
+{#JAPI Joomla.Framework User JAuthorization::get_group_parents #}
+
+
+
+===== Syntax =====
+void get_group_parents	( **$group_id**, **$group_type**, **$recurse** )
+
+| **$group_id** |  |  |
+| **$group_type** |  |  |
+| **$recurse** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

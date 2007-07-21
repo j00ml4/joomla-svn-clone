@@ -1,0 +1,19 @@
+====== getEscaped ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::getEscaped #}
+
+Get a database escaped string
+
+===== Syntax =====
+string getEscaped	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

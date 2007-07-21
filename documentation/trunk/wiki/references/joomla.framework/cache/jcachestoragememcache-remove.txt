@@ -1,0 +1,20 @@
+====== remove ======
+{#JAPI Joomla.Framework Cache JCacheStorageMemcache::remove #}
+
+Remove a cached data entry by id and group
+
+===== Syntax =====
+boolean remove	( **$id**, **$group** )
+
+| **$id** | string | The cache data id |
+| **$group** | string | The cache data group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

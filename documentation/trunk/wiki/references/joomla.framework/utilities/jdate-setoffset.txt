@@ -1,0 +1,19 @@
+====== setOffset ======
+{#JAPI Joomla.Framework Utilities JDate::setOffset #}
+
+Set the date offset (in hours)
+
+===== Syntax =====
+void setOffset	( **$offset** )
+
+| **$offset** | integer | The offset in hours |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

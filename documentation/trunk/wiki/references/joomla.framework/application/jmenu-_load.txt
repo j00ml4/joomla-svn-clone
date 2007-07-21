@@ -1,0 +1,18 @@
+====== _load ======
+{#JAPI Joomla.Framework Application JMenu::_load #}
+
+Loads the entire menu table into memory
+
+===== Syntax =====
+array _load ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

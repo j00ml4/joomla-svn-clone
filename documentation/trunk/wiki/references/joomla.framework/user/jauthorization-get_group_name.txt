@@ -1,0 +1,20 @@
+====== get_group_name ======
+{#JAPI Joomla.Framework User JAuthorization::get_group_name #}
+
+Gets the 'name' of a group
+
+===== Syntax =====
+string get_group_name	( **$group_id**, **$group_type** )
+
+| **$group_id** | int | The group id |
+| **$group_type** | string | The type: [ARO]|AXO |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

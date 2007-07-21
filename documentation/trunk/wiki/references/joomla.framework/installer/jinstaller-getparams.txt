@@ -1,0 +1,18 @@
+====== getParams ======
+{#JAPI Joomla.Framework Installer JInstaller::getParams #}
+
+Method to parse the parameters of an extension, build the INI  string for it's default parameters, and return the INI string.
+
+===== Syntax =====
+string getParams ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

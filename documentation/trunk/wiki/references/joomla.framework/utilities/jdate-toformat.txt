@@ -1,0 +1,19 @@
+====== toFormat ======
+{#JAPI Joomla.Framework Utilities JDate::toFormat #}
+
+Gets the date in a specific format<p>Returns a string formatted according to the given format. Month and weekday names and  other language dependent strings respect the current locale</p>
+
+===== Syntax =====
+a toFormat	( **$format** )
+
+| **$format** | string | The date format specification string (see <a href="http://www.php.net/strftime">http://www.php.net/strftime</a>) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

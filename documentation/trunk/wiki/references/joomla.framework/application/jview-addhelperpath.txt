@@ -1,0 +1,19 @@
+====== addHelperPath ======
+{#JAPI Joomla.Framework Application JView::addHelperPath #}
+
+Adds to the stack of helper script paths in LIFO order.
+
+===== Syntax =====
+void addHelperPath	( **$path** )
+
+| **$path** | string|array | The directory (-ies) to add. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

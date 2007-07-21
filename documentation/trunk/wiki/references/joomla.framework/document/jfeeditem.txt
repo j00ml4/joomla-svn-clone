@@ -1,0 +1,11 @@
+====== JFeedItem ======
+{#JAPI Joomla.Framework Document JFeedItem #}
+
+JFeedItem is an internal class that stores feed item information
+===== Methods =====
+^ Method ^ Description ^
+| [[JFeedItem-setEnclosure|{{http://dev.joomla.org/media/images/Method.png }}]] [[JFeedItem-setEnclosure|setEnclosure]] | Set the JFeedEnclosure for this item |
+
+----
+
+~~DISCUSSION~~

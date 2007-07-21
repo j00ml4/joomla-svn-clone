@@ -1,0 +1,30 @@
+====== escape ======
+{#JAPI Joomla.Framework Application JView::escape #}
+
+Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;replacement&nbsp;callbacks</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</pre></code></ol></div></p>
+
+===== Syntax =====
+mixed escape	( **$value** )
+
+| **$value** | mixed | The value to be escaped. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

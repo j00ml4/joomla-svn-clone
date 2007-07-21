@@ -1,0 +1,18 @@
+====== getExpire ======
+{#JAPI Joomla.Framework Session JSession::getExpire #}
+
+Get expiration time in minutes
+
+===== Syntax =====
+integer getExpire ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

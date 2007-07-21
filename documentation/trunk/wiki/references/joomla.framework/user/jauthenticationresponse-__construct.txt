@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework User JAuthenticationResponse::__construct #}
+
+Constructor
+
+===== Syntax =====
+JAuthenticationResponse __construct	( **$name** )
+
+| **$name** | string | The type of the response |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

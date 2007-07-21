@@ -1,0 +1,19 @@
+====== getNumRows ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getNumRows #}
+
+
+
+===== Syntax =====
+int getNumRows	( **$cur** )
+
+| **$cur** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

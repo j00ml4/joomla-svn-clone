@@ -1,0 +1,18 @@
+====== combobox ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::combobox #}
+
+
+
+===== Syntax =====
+void combobox ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
