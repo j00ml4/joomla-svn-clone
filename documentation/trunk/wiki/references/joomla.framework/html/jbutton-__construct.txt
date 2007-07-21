@@ -1,18 +1,20 @@
 ====== __construct ======
-{#JAPI Joomla.Framework HTML JButton::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButton|JButton]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButton.html#__construct|JButton->__construct]] | never | Internal review |
 
-Constructor
+Button constructor. Stores a reference to the instantiating object (parent).
 
 ===== Syntax =====
 JButton __construct	( **$parent** )
 
-| **$parent** |  |  |
+| **$parent** | object | is a reference to the object that instantiated the button. |
 
 ===== Examples =====
+The button classes are instantiated by the JToolBar class in the following way:
 <code php|Example>
-
+$this->_buttons[$signature] = new $buttonClass($this);
 </code>
-
+The JToolBar object passes a reference to itself as the parent object.
 
 ----
 

@@ -1,19 +1,16 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Base JObserver::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObserver|JObserver]] | [[http://api.joomla.org/Joomla-Framework/Base/JObserver.html|JObserver->__construct]] | never | Work in progress |
 
-Constructor
+This is the class constructor. It performs two function: first, it registers itself with the subject so that the subject knows to notify this observer. Second, it sets up the subject property so that this object can reference the subject it is observing.
 
 ===== Syntax =====
 JObserver __construct	( **&$subject** )
 
-| **&$subject** |  |  |
+| **$subject** | string | is an object whose class is a child class of the JObservable class. |
 
 ===== Examples =====
+The JEventDispatcher::register function instantiates a JObserver class (or subclass) by passing itself to the JObserver constructor:
 <code php|Example>
-
+$this->attach(new $handler($this));
 </code>
-
-
-----
-
-~~DISCUSSION~~

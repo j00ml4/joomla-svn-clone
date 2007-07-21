@@ -1,19 +1,28 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Application JController::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#__construct|JController->__construct]] | never | Work in progress |
 
-Constructor.
+The class constructor performs the necessary tasks to instantiate the controller.
+
+This involves the following steps:
+  * initialize private variables
+  * determine the methods to be mapped to tasks by detecting which methods do not exist in the base JController class
+  * register the default task
+  * set the default model search path
+  * set the default view search path
 
 ===== Syntax =====
 JController __construct	( **$config** )
 
-| **$config** | array | An optional associative array of configuration settings.  Recognized key values include 'name', 'default_task', 'model_path', and  'view_path' (this list is not meant to be comprehensive). |
+| **$config** | array | is an optional associative array of configuration settings. Recognized key values include 'name', 'default_task', 'model_path', and 'view_path' (this list is not meant to be comprehensive). |
 
 ===== Examples =====
+A controller is often instantiated in the component entry point (the admin.component.php or component.php file, where component is the name of the component). This might be done in the following way:
 <code php|Example>
-
+$controller = new BannersController( array('default_task' => 'click') );
 </code>
-
 
 ----
 
 ~~DISCUSSION~~
+

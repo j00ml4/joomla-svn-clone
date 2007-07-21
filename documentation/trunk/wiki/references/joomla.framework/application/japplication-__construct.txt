@@ -1,18 +1,19 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Application JApplication::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html#method_construct|JApplication->__construct]] | never | Work in progress |
 
-Class constructor.
+Constructor for the JApplication class. The client ID and request time (current time) is stored.
 
 ===== Syntax =====
-JApplication __construct	( **$clientId** )
+JApplication <nowiki>__construct</nowiki> ( **$clientId** )
 
-| **$clientId** | integer | A client identifier. |
+| **$clientId** | integer | is an integer containing the client identifier.  The client ID is 0 for site, 1 for administrator and 2 for installation.  This parameter is optional and if omitted defaults to 0. |
 
 ===== Examples =====
+This method is invoked by the JAdministrator class (which extends JApplication) in the following manner (this class is defined in /administrator/includes/application.php):
 <code php|Example>
-
+parent::__construct( 1 );
 </code>
-
 
 ----
 

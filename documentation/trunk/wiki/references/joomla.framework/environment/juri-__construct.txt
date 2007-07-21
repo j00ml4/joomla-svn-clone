@@ -1,19 +1,16 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Environment JURI::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->__construct]] |
 
-Constructor.<p>You can pass a URI string to the constructor to initialize a specific URI.</p>
+This is the class constructor. You can pass a URI string to the constructor to initialize it to a specific URI.
 
 ===== Syntax =====
 JURI __construct	( **$uri** )
-
-| **$uri** | string | The optional URI string |
+| **$uri** | string | is a string containing the URI. This parameter is optional and if omitted defaults to null. |
 
 ===== Examples =====
 <code php|Example>
-
+global $mainframe;
+$uri = new JURI( $mainframe->getBaseURL() );
 </code>
 
-
-----
-
-~~DISCUSSION~~

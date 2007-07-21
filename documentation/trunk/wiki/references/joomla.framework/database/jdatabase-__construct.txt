@@ -1,19 +1,30 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Database JDatabase::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->__construct]] | never | Work in progress |
 
-Database object constructor
+The constructor for the database class. The construct is responsible for opening a connection to the database and setting any necessary settings.
 
 ===== Syntax =====
-JDatabase __construct	( **$options** )
+JDatabase __construct	( **$host**, **$user**, **$pass**, **$db**, **$table_prefix** )
 
-| **$options** | array | List of options used to configure the connection |
+| **$host** | string | is the URL of the system that is hosting the database.  Usually 'localhost'.  This parameter is optional and if omitted will default to 'localhost'. |
+| **$user** | string | is the username required to connect to the database. |
+| **$pass** | string | is the password associated with $user to be used to connect to the database. |
+| **$db** | string | is the name of the database. |
+| **$table_prefix** | string | is the string that will be prefixed to all table names.  From Joomla! 1.5 this parameter is optional and if omitted will default to 'jos_'. |
 
 ===== Examples =====
 <code php|Example>
-
+$host = 'localhost';
+$user = 'joomlauser';
+$password = 'itsasecret';
+$dbase = 'test';
+$dbprefix = 'jos_';
+$db = new JDatabase( $host, $user, $password, $dbase, $dbprefix );
 </code>
 
 
 ----
 
 ~~DISCUSSION~~
+

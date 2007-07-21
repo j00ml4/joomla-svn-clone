@@ -1,18 +1,19 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Registry JRegistry::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->__construct]] | never | Work in progress |
 
-Constructor
+Constructs the object by creating and setting the default namespace.
 
 ===== Syntax =====
-void __construct	( **$namespace** )
+JRegistry __construct ( **$namespace** )
 
-| **$namespace** | string | Default registry namespace |
+| **$namespace** | string | is a string containing the name of the default namespace. |
 
 ===== Examples =====
 <code php|Example>
-
+$registry = new JRegistry( 'com_example' );
 </code>
-
+creates a JRegistry object with a default namespace called 'com_example'.
 
 ----
 

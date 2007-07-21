@@ -1,20 +1,13 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Environment JBrowser::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->__construct]] |
 
 Create a browser instance (Constructor).
-
 ===== Syntax =====
 JBrowser __construct	( **$userAgent**, **$accept** )
-
-| **$userAgent** | string | The browser string to parse. |
-| **$accept** | string | The HTTP_ACCEPT settings to use. |
+| **** | string |  |
+| **** | string |  |
 
 ===== Examples =====
-<code php|Example>
-
-</code>
 
 
-----
-
-~~DISCUSSION~~

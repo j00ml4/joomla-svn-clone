@@ -1,19 +1,23 @@
 ====== __construct ======
-{#JAPI Joomla.Framework HTML JPaneTabs::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPaneTabs|JPaneTabs]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneTabs.html|JPaneTabs->__construct]] | never | Work in progress |
 
-Constructor
+Constructs the JPaneTabs class, adding the necessary CSS and JS to the current document. The parent constructor is called. The method then will check to see if the JPaneTabs class has already been used. If it has not, then it will add links to the CSS and JavaScript files to the head tags of the document. This is done in a way that handles RTL languages.
 
 ===== Syntax =====
 JPaneTabs __construct	( **$params** )
 
-| **$params** | array | Associative array of values |
+| **$params** | array | is an associative array of values containing settings for the tabs. None of these settings are currently used. |
 
 ===== Examples =====
+The [[JPane-getInstance|JPane::getInstance]] method calls the constructor in the following manner (where $behavior is 'Tabs' for a tab pane):
 <code php|Example>
-
+$classname = 'JPane'.$behavior;
+$instance = new $classname($params);
 </code>
 
 
 ----
 
 ~~DISCUSSION~~
+

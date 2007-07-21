@@ -1,19 +1,25 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Table JTableMenuTypes::__construct #}
+^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableMenuTypes|JTableMenuTypes]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenuTypes.html|JTableMenuTypes->__construct]] | never | Work in progress |
 
-Constructor
+The class constructor calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key.
 
 ===== Syntax =====
 JTableMenuTypes __construct	( **&$db** )
 
-| **&$db** | database | A database connector object |
+| **&$db** | [[JDatabase|JDatabase]] | is a database connector object. |
 
 ===== Examples =====
+The JTableMenuTypes class should be instantiated in the following way:
 <code php|Example>
-
+$db =& JFactory::getDBO();
+$menutype =& JTable::getInstance('menutypes', $db );
+</code>
+The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 </code>
 
 
 ----
 
 ~~DISCUSSION~~
+
