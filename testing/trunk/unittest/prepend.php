@@ -151,8 +151,13 @@ if ( basename($input->path, '.php') !== 'AllTests') {
 	$input->info = UnitTestHelper::getInfoObject($input->path);
 	if ($input->info->enabled && $input->info->helper['location']) {
 		include_once($input->info->helper['location']);
+		// call testcase init if available
+		if (is_callable($input->info->helper['classname'], 'setUpTestCase')) {
+			call_user_func(array($input->info->helper['classname'], 'setUpTestCase'));
+		}
 	}
 }
+die(jutdump($input));
 
 /**
  * from here on we use '/' rather than DIRECTORY_SEPARATOR

@@ -15,6 +15,8 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+require_once('libraries/joomla/client/ftp.php');
+
 class TestOfJFTP extends UnitTestCase
 {
 var $_credentials = null;
@@ -28,12 +30,6 @@ var $_credentials = null;
 	function main() {
 		$self = new TestOfJFTP;
 		$self->run( UnitTestHelper::getReporter() );
-	}
-
-	function x__TestOfJFTP()
-	{
-		$this->UnitTestCase();
-		FtpTestHelper::setUpTestCase();
 	}
 
 	// Not a real test. Only used to display some general information
@@ -83,9 +79,9 @@ var $_credentials = null;
 	{
 		$ftp = new JFTP(array('timeout'=>1));
 
-		$before	= FtpTestHelper::microtime_float();
+		$before	= JFTPTestHelper::microtime_float();
 		$return	= $ftp->connect('127.0.0.1', '1');
-		$after	= FtpTestHelper::microtime_float();
+		$after	= JFTPTestHelper::microtime_float();
 
 		$this->assertIdenticalFalse($return);
 		$this->assertIdenticalTrue(($after - $before) < 1.5, '%s - Connect timeout?');
@@ -676,7 +672,7 @@ var $_credentials = null;
 		$this->assertIdenticalFalse(in_array('testfile', $return1));
 		$this->assertIdenticalTrue(in_array('testfile', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
-		$this->assertIdentical(FtpTestHelper::binaryToString($buffer), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($buffer), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
@@ -694,7 +690,7 @@ var $_credentials = null;
 		$this->assertIdenticalFalse(in_array('testfile', $return1));
 		$this->assertIdenticalTrue(in_array('testfile', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
-		$this->assertIdentical(FtpTestHelper::binaryToString($buffer), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($buffer), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
@@ -740,7 +736,7 @@ var $_credentials = null;
 		$expected = $this->getExpected($buffer, FTP_BINARY, FTP_ASCII, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdentical(FtpTestHelper::binaryToString($expected), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($expected), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [ASCII]'
 		);
 		$this->assertNoErrors();
@@ -754,7 +750,7 @@ var $_credentials = null;
 		$expected = $this->getExpected($buffer, FTP_ASCII, FTP_BINARY, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdentical(FtpTestHelper::binaryToString($expected), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($expected), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [ASCII], Read: [Binary]'
 		);
 		$this->assertNoErrors();
@@ -768,7 +764,7 @@ var $_credentials = null;
 		$expected = $this->getExpected($buffer, FTP_ASCII, FTP_ASCII, $syst);
 		$this->assertIdenticalTrue($return1);
 		$this->assertIdenticalTrue($return2);
-		$this->assertIdentical(FtpTestHelper::binaryToString($expected), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($expected), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [ASCII], Read: [ASCII]'
 		);
 
@@ -817,7 +813,7 @@ var $_credentials = null;
 		$this->assertIdenticalFalse(in_array('testfile.bin', $return1));
 		$this->assertIdenticalTrue(in_array('testfile.bin', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
-		$this->assertIdentical(FtpTestHelper::binaryToString($buffer), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($buffer), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
@@ -837,7 +833,7 @@ var $_credentials = null;
 		$this->assertIdenticalFalse(in_array('testfile.bin', $return1));
 		$this->assertIdenticalTrue(in_array('testfile.bin', $return3));
 		$this->assertIdentical(count($return1), count($return3)-1);
-		$this->assertIdentical(FtpTestHelper::binaryToString($buffer), FtpTestHelper::binaryToString($bufferRead),
+		$this->assertIdentical(JFTPTestHelper::binaryToString($buffer), JFTPTestHelper::binaryToString($bufferRead),
 			'%s - Write: [Binary], Read: [Binary]'
 		);
 		$this->assertNoErrors();
@@ -906,14 +902,14 @@ var $_credentials = null;
 
 	function testGetInstanceReference()
 	{
-		$before = FtpTestHelper::microtime_float();
+		$before = JFTPTestHelper::microtime_float();
 		$ftp1 =& JFTP::getInstance('127.0.0.1', '1', array('timeout'=>0));
 		$ftp2 =& JFTP::getInstance('127.0.0.1', '1', array('timeout'=>0));
 		$ftp3 =& JFTP::getInstance('127.0.0.1', '1', array('test'));
 		$ftp4 =& JFTP::getInstance('127.0.0.1', '2', array('timeout'=>0));
 		$ftp5 =& JFTP::getInstance('127.0.0.1', '1', array('timeout'=>0), 'username', 'password');
 		$ftp6 =& JFTP::getInstance('127.0.0.1', '1', null, 'username', 'password');
-		$after = FtpTestHelper::microtime_float();
+		$after = JFTPTestHelper::microtime_float();
 
 		$this->assertError('JFTP::connect: Could not connect to host "127.0.0.1" on port 1');
 		$this->assertError('JFTP::connect: Could not connect to host "127.0.0.1" on port 1');
