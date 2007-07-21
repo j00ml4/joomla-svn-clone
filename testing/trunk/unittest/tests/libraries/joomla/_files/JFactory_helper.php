@@ -7,7 +7,6 @@
  * @version    $Id$
  */
 
-
 class JFactoryTestHelper
 {
 
