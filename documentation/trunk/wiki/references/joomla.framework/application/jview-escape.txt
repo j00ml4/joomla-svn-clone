@@ -1,28 +1,41 @@
 ====== escape ======
 {#JAPI Joomla.Framework Application JView::escape #}
 
-Applies escaping to a value.<p>You can override the predefined escaping callbacks by passing  added parameters as replacement callbacks.</p><p><div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;predefined&nbsp;callbacks</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;use&nbsp;replacement&nbsp;callbacks</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$view</span><span class="src-sym">-&gt;</span><a href="../../Joomla-Framework/Application/JView.html#methodescape">escape</a><span class="src-sym">(</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$value</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'stripslashes'</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'htmlspecialchars'</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'StaticClass'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'method'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-var">$object</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method</span><span class="src-sym">)</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-</pre></code></ol></div></p>
+Applies escaping to a value.
+
+Escaping is used to prepare data so that its characters are not interpreted as special characters.  As an example, having '<' signs in HTML documents can interfere with the markup of the page.
+
+This is a flexible escape() method which allows any combination of methods to be used to escape values.
+
+By default, the escape rules that have been defined in the object using the [[jview-addescape|addEscape]] and [[jview-setescape|setEscape]] methods are used.  If additional parameters are provided, the escape methods specified in the method parameters are used instead.
+
+Escape methods are specified by providing additional string parameters which contain the names of escape callback functions to be called (e.g. stripslashes, htmlspecialchars, etc.).
+
+It is possible to perform escaping for values that are not strings by providing escape() methods that will operate on the supplied type.
+
+This method returns the escaped value.
 
 ===== Syntax =====
-mixed escape	( **$value** )
+mixed escape ( **$value** )
 
-| **$value** | mixed | The value to be escaped. |
+| **$value** | mixed | is a variable containing the value to be escaped. |
 
 ===== Examples =====
-<code php|Example>
-
+<code php|Example - Using Predefined Callbacks>
+$result = $view->escape($value);
 </code>
+will escape $value using the callback functions that have been setup.
+
+<code php|Example - Using Replacement Callbacks>
+$result = $view->escape(
+	$value,
+	'stripslashes',
+	'htmlspecialchars',
+	array('StaticClass', 'method'),
+	array($object, $method)
+);
+</code>
+will escape $value using the specified callback functions.
 
 
 ----
