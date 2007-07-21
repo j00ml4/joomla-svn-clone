@@ -1,0 +1,18 @@
+====== __destruct ======
+{#JAPI Joomla.Framework Client JFTP::__destruct #}
+
+JFTP object destructor<p>Closes an existing connection, if we have one</p>
+
+===== Syntax =====
+void __destruct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

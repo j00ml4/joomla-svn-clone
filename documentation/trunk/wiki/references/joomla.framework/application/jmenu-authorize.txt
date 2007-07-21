@@ -1,0 +1,20 @@
+====== authorize ======
+{#JAPI Joomla.Framework Application JMenu::authorize #}
+
+Method to check JMenu object authorization against an access control  object and optionally an access extension object
+
+===== Syntax =====
+boolean authorize	( **$id**, **$accessid** )
+
+| **$id** | integer | The menu id |
+| **$accessid** | integer | The users access identifier |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

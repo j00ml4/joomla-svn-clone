@@ -1,0 +1,52 @@
+====== JSimpleXML ======
+{#JAPI Joomla.Framework Utilities JSimpleXML #}
+
+SimpleXML implementation.<p>The XML Parser extension (expat) is required to use JSimpleXML.</p><p>The class provides a pure PHP4 implementation of the PHP5  interface SimpleXML. As with PHP5's SimpleXML it is what it says:  simple. Nevertheless, it is an easy way to deal with XML data,  especially for read only access.</p><p>Because it's not possible to use the PHP5 ArrayIterator interface  with PHP4 there are some differences between this implementation  and that of PHP5:</p><p><ul><li>The access to the root node has to be explicit in
+ JSimpleXML, not implicit as with PHP5. Write
+ $xml-&gt;document-&gt;node instead of $xml-&gt;node</li><li>You cannot acces CDATA using array syntax. Use the method data() instead</li><li>You cannot access attributes directly with array syntax. use attributes()
+ to read them.</li><li>Comments are ignored.</li><li>Last and least, this is not as fast as PHP5 SimpleXML--it is pure PHP4.</li></ul></p><p>Example:  <div class="src-code"><ol><code><pre><li><div class="src-line">&nbsp;:simple.xml:</div></li>
+<li><div class="src-line">&nbsp;<span class="src-php">&lt;?</span><span class="src-id">xml&nbsp;version</span>=<span class="src-str">&quot;1.0&quot;&nbsp;</span><span class="src-id">encoding</span>=<span class="src-str">&quot;utf-8&quot;&nbsp;</span><span class="src-id">standalon</span>=<span class="src-str">&quot;yes&quot;</span><span class="src-php">?&gt;</span></div></li>
+<li><div class="src-line">&nbsp;&lt;document&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&lt;node&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;gender=&quot;m&quot;&gt;Tom&nbsp;Foo&lt;/child&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;gender=&quot;f&quot;&gt;Tamara&nbsp;Bar&lt;/child&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&lt;node&gt;</div></li>
+<li><div class="src-line">&nbsp;&lt;/document&gt;</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;---</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;//&nbsp;read&nbsp;and&nbsp;write&nbsp;a&nbsp;document</div></li>
+<li><div class="src-line">&nbsp;$xml&nbsp;=&nbsp;new&nbsp;JSimpleXML;</div></li>
+<li><div class="src-line">&nbsp;$xml-&gt;loadFile('simple.xml');</div></li>
+<li><div class="src-line">&nbsp;print&nbsp;$xml-&gt;toString();</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;//&nbsp;access&nbsp;a&nbsp;given&nbsp;node's&nbsp;CDATA</div></li>
+<li><div class="src-line">&nbsp;print&nbsp;$xml-&gt;root-&gt;node-&gt;child[0]-&gt;data();&nbsp;//&nbsp;Tom&nbsp;Foo</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;//&nbsp;access&nbsp;attributes</div></li>
+<li><div class="src-line">&nbsp;$attr&nbsp;=&nbsp;$xml-&gt;root-&gt;node-&gt;child[1]-&gt;attributes();</div></li>
+<li><div class="src-line">&nbsp;print&nbsp;$attr['gender'];&nbsp;//&nbsp;f</div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;//&nbsp;access&nbsp;children</div></li>
+<li><div class="src-line">&nbsp;foreach(&nbsp;$xml-&gt;root-&gt;node-&gt;children()&nbsp;as&nbsp;$child&nbsp;)&nbsp;{</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;print&nbsp;$child-&gt;data();</div></li>
+<li><div class="src-line">&nbsp;}</div></li>
+</pre></code></ol></div></p><p>Note: JSimpleXML cannot be used to access sophisticated XML doctypes  using datatype ANY (e.g. XHTML). With a DOM implementation you can  handle this.</p>
+===== Methods =====
+^ Method ^ Description ^
+| [[JSimpleXML-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-__construct|__construct]] | Constructor. |
+| [[JSimpleXML-getParser|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-getParser|getParser]] | Get the parser |
+| [[JSimpleXML-importDom|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-importDom|importDom]] | Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of a DOM  document and makes it into a JSimpleXML node.  This new object can then be used as a native JSimpleXML element. If any errors occur,  it returns FALSE.</p> |
+| [[JSimpleXML-loadFile|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-loadFile|loadFile]] | Interprets an XML file into an object<p>This function will convert the well-formed XML document in the file specified by filename  to an object  of class JSimpleXMLElement. If any errors occur during file access or  interpretation, the function returns FALSE.</p> |
+| [[JSimpleXML-loadString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-loadString|loadString]] | Interprets a string of XML into an object<p>This function will take the well-formed xml string data and return an object of class  JSimpleXMLElement with properties containing the data held within the xml document.  If any errors occur, it returns FALSE.</p> |
+| [[JSimpleXML-setParser|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-setParser|setParser]] | Set the parser |
+| [[JSimpleXML-_characterData|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_characterData|_characterData]] | Handler function for the character data within a tag |
+| [[JSimpleXML-_endElement|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_endElement|_endElement]] | Handler function for the end of a tag |
+| [[JSimpleXML-_getStackLocation|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_getStackLocation|_getStackLocation]] | Gets the reference to the current direct parent |
+| [[JSimpleXML-_handleError|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_handleError|_handleError]] | Handles an XML parsing error |
+| [[JSimpleXML-_parse|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_parse|_parse]] | Start parsing an XML document<p>Parses an XML document. The handlers for the configured events are called as many times as necessary.</p> |
+| [[JSimpleXML-_startElement|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXML-_startElement|_startElement]] | Handler function for the start of a tag |
+
+----
+
+~~DISCUSSION~~

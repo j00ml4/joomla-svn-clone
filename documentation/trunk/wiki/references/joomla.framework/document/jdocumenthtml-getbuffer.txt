@@ -1,0 +1,21 @@
+====== getBuffer ======
+{#JAPI Joomla.Framework Document JDocumentHTML::getBuffer #}
+
+Get the contents of a document include
+
+===== Syntax =====
+The getBuffer	( **$type**, **$name**, **$attribs** )
+
+| **$type** | string | The type of renderer |
+| **$name** | string | The name of the element to render |
+| **$attribs** | array | Associative array of remaining attributes. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

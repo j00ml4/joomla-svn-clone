@@ -1,0 +1,12 @@
+====== JArchiveBzip2 ======
+{#JAPI Joomla.Framework FileSystem JArchiveBzip2 #}
+
+Bzip2 format adapter for the JArchive class
+===== Methods =====
+^ Method ^ Description ^
+| [[JArchiveBzip2-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveBzip2-__construct|__construct]] | Constructor tries to load the bz2 extension of not loaded |
+| [[JArchiveBzip2-extract|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveBzip2-extract|extract]] | Extract a Bzip2 compressed file to a given path |
+
+----
+
+~~DISCUSSION~~

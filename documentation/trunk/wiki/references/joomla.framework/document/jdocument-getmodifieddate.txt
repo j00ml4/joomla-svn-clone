@@ -1,0 +1,18 @@
+====== getModifiedDate ======
+{#JAPI Joomla.Framework Document JDocument::getModifiedDate #}
+
+Returns the document modified date
+
+===== Syntax =====
+string getModifiedDate ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

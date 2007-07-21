@@ -1,0 +1,11 @@
+====== JPaginationObject ======
+{#JAPI Joomla.Framework HTML JPaginationObject #}
+
+Pagination object representing a particular item in the pagination lists
+===== Methods =====
+^ Method ^ Description ^
+| [[JPaginationObject-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JPaginationObject-__construct|__construct]] |  |
+
+----
+
+~~DISCUSSION~~

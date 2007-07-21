@@ -1,0 +1,19 @@
+====== setOptions ======
+{#JAPI Joomla.Framework Utilities JLog::setOptions #}
+
+Set log file options
+
+===== Syntax =====
+boolean setOptions	( **$options** )
+
+| **$options** | array | Associative array of options to set |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

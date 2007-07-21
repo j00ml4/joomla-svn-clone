@@ -1,0 +1,22 @@
+====== _sortObjects ======
+{#JAPI Joomla.Framework Utilities JArrayHelper::_sortObjects #}
+
+Private callback function for sorting an array of objects on a key
+
+===== Syntax =====
+int _sortObjects	( **&$a**, **&$b**, **$a**, **$b** )
+
+| **$a** | array | An array of objects |
+| **$b** | array | An array of objects |
+| **&$a** |  |  |
+| **&$b** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

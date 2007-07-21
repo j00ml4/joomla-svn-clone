@@ -1,0 +1,18 @@
+====== getType ======
+{#JAPI Joomla.Framework Document JDocument::getType #}
+
+Returns the document type
+
+===== Syntax =====
+string getType ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== stream_write ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_write #}
+
+
+
+===== Syntax =====
+void stream_write	( **$data** )
+
+| **$data** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

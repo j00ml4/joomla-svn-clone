@@ -1,0 +1,21 @@
+====== handleIgnore ======
+{#JAPI Joomla.Framework Utilities JError::handleIgnore #}
+
+Ignore error handler <ul><li>Ignores the error</li></ul>
+
+===== Syntax =====
+object The &handleIgnore	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

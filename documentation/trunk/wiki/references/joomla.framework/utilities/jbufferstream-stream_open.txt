@@ -1,0 +1,22 @@
+====== stream_open ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_open #}
+
+
+
+===== Syntax =====
+void stream_open	( **$path**, **$mode**, **$options**, **&$opened_path** )
+
+| **$path** |  |  |
+| **$mode** |  |  |
+| **$options** |  |  |
+| **&$opened_path** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

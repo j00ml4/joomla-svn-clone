@@ -1,0 +1,19 @@
+====== getBacktrace ======
+{#JAPI Joomla.Framework Utilities JException::getBacktrace #}
+
+Method to get the backtrace information for an exception object
+
+===== Syntax =====
+array getBacktrace	( **$formatted** )
+
+| **$formatted** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

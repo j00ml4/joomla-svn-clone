@@ -1,0 +1,21 @@
+====== handleCallback ======
+{#JAPI Joomla.Framework Utilities JError::handleCallback #}
+
+Callback error handler <ul><li>Send the error object to a callback method for error handling</li></ul>
+
+===== Syntax =====
+object The &handleCallback	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

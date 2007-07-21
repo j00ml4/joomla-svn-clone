@@ -1,0 +1,19 @@
+====== _rollback_menu ======
+{#JAPI Joomla.Framework Installer JInstallerModule::_rollback_menu #}
+
+Custom rollback method <ul><li>Roll back the menu item</li></ul>
+
+===== Syntax =====
+boolean _rollback_menu	( **$arg** )
+
+| **$arg** | array | Installation step to rollback |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

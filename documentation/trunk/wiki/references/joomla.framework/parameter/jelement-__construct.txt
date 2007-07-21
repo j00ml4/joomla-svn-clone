@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Parameter JElement::__construct #}
+
+Constructor
+
+===== Syntax =====
+JElement __construct	( **$parent** )
+
+| **$parent** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

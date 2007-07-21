@@ -1,0 +1,19 @@
+====== getNumParams ======
+{#JAPI Joomla.Framework Parameter JParameter::getNumParams #}
+
+Return number of params to render
+
+===== Syntax =====
+mixed getNumParams	( **$group** )
+
+| **$group** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,24 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JSearch::__construct #}
+
+Constructor
+
+===== Syntax =====
+JSearch __construct	( **$needle**, **$matchType**, **$ordering**, **$areas**, **$limitstart**, **$limit** )
+
+| **$needle** |  |  |
+| **$matchType** |  |  |
+| **$ordering** |  |  |
+| **$areas** |  |  |
+| **$limitstart** |  |  |
+| **$limit** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

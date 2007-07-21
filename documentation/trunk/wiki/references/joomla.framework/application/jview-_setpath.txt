@@ -1,0 +1,20 @@
+====== _setPath ======
+{#JAPI Joomla.Framework Application JView::_setPath #}
+
+Sets an entire array of search paths for templates or resources.
+
+===== Syntax =====
+void _setPath	( **$type**, **$path** )
+
+| **$type** | string | The type of path to set, typically 'template'. |
+| **$path** | string|array | The new set of search paths.  If null or  false, resets to the current directory only. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

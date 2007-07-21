@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Registry JRegistry::__construct #}
+
+Constructor
+
+===== Syntax =====
+void __construct	( **$namespace** )
+
+| **$namespace** | string | Default registry namespace |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

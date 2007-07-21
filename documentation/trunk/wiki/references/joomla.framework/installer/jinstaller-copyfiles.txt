@@ -1,0 +1,20 @@
+====== copyFiles ======
+{#JAPI Joomla.Framework Installer JInstaller::copyFiles #}
+
+Copy files from source directory to the target directory
+
+===== Syntax =====
+boolean copyFiles	( **$files**, **$overwrite** )
+
+| **$files** | array | array with filenames |
+| **$overwrite** | boolean | True if existing files can be replaced |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

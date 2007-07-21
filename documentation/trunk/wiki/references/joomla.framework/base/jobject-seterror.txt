@@ -1,0 +1,19 @@
+====== setError ======
+{#JAPI Joomla.Framework Base JObject::setError #}
+
+Add an error message
+
+===== Syntax =====
+void setError	( **$error** )
+
+| **$error** | string | Error message |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

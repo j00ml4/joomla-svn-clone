@@ -1,0 +1,26 @@
+====== acl_check ======
+{#JAPI Joomla.Framework User JAuthorization::acl_check #}
+
+Wraps the actual acl_query() function.<p>It is simply here to return TRUE/FALSE accordingly.</p>
+
+===== Syntax =====
+mixed acl_check	( **$aco_section_value**, **$aco_value**, **$aro_section_value**, **$aro_value**, **$axo_section_value**, **$axo_value**, **$root_aro_group**, **$root_axo_group** )
+
+| **$aco_section_value** | string | The ACO section value |
+| **$aco_value** | string | The ACO value |
+| **$aro_section_value** | string | The ARO section value |
+| **$aro_value** | string | The ARO section |
+| **$axo_section_value** | string | The AXO section value (optional) |
+| **$axo_value** | string | The AXO section value (optional) |
+| **$root_aro_group** | integer | The group id of the ARO ??Mike?? (optional) |
+| **$root_axo_group** | integer | The group id of the AXO ??Mike?? (optional) |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

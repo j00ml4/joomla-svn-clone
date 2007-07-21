@@ -1,0 +1,11 @@
+====== JTableAROGroup ======
+{#JAPI Joomla.Framework User JTableAROGroup #}
+
+
+===== Methods =====
+^ Method ^ Description ^
+| [[JTableAROGroup-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableAROGroup-__construct|__construct]] |  |
+
+----
+
+~~DISCUSSION~~

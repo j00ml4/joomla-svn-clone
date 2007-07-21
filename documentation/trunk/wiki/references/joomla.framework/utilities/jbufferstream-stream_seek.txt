@@ -1,0 +1,20 @@
+====== stream_seek ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_seek #}
+
+
+
+===== Syntax =====
+void stream_seek	( **$offset**, **$whence** )
+
+| **$offset** |  |  |
+| **$whence** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

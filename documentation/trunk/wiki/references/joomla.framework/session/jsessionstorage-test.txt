@@ -1,0 +1,18 @@
+====== test ======
+{#JAPI Joomla.Framework Session JSessionStorage::test #}
+
+Test to see if the SessionHandler is available.
+
+===== Syntax =====
+boolean test ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

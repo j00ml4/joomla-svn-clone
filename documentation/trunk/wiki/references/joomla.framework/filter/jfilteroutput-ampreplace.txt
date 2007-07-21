@@ -1,0 +1,19 @@
+====== ampReplace ======
+{#JAPI Joomla.Framework Filter JFilterOutput::ampReplace #}
+
+Replaces &amp;amp; with &amp; for xhtml compliance
+
+===== Syntax =====
+void ampReplace	( **$text** )
+
+| **$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

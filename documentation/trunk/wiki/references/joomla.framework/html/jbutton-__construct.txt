@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework HTML JButton::__construct #}
+
+Constructor
+
+===== Syntax =====
+JButton __construct	( **$parent** )
+
+| **$parent** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

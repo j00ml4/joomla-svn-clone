@@ -1,0 +1,18 @@
+====== FetchRow ======
+{#JAPI Joomla.Framework Database JRecordSet::FetchRow #}
+
+
+
+===== Syntax =====
+mixed FetchRow ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

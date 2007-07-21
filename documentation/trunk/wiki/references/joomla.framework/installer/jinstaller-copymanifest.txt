@@ -1,0 +1,19 @@
+====== copyManifest ======
+{#JAPI Joomla.Framework Installer JInstaller::copyManifest #}
+
+Copies the installation manifest file to the extension folder in the given client
+
+===== Syntax =====
+boolean copyManifest	( **$cid** )
+
+| **$cid** | int | Where to copy the installfile [optional: defaults to 1 (admin)] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

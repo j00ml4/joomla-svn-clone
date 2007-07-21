@@ -1,0 +1,22 @@
+====== useSMTP ======
+{#JAPI Joomla.Framework Utilities JMail::useSMTP #}
+
+Use SMTP for sending the e-mail
+
+===== Syntax =====
+boolean useSMTP	( **$auth**, **$host**, **$user**, **$pass** )
+
+| **$auth** | string | SMTP Authentication [optional] |
+| **$host** | string | SMTP Host [optional] |
+| **$user** | string | SMTP Username [optional] |
+| **$pass** | string | SMTP Password [optional] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

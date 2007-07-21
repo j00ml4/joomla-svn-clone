@@ -1,0 +1,19 @@
+====== close ======
+{#JAPI Joomla.Framework Application JApplication::close #}
+
+Exit the application.
+
+===== Syntax =====
+void close	( **$code** )
+
+| **$code** | int | Exit code |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

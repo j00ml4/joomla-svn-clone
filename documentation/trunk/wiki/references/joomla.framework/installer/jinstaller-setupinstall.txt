@@ -1,0 +1,18 @@
+====== setupInstall ======
+{#JAPI Joomla.Framework Installer JInstaller::setupInstall #}
+
+Prepare for installation: this method sets the installation directory, finds  and checks the installation file and verifies the installation type
+
+===== Syntax =====
+boolean setupInstall ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

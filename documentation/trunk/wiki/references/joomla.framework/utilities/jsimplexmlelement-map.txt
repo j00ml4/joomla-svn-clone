@@ -1,0 +1,20 @@
+====== map ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::map #}
+
+traverses the tree calling the $callback( JSimpleXMLElement  $this, mixed $args=array() ) function with each JSimpleXMLElement.
+
+===== Syntax =====
+void map	( **$callback**, **$args** )
+
+| **$callback** | string | function name |
+| **$args** | array |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

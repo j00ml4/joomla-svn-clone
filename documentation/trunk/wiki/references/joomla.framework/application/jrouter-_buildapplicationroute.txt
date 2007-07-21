@@ -1,0 +1,19 @@
+====== _buildApplicationRoute ======
+{#JAPI Joomla.Framework Application JRouter::_buildApplicationRoute #}
+
+Build the application specific route
+
+===== Syntax =====
+void _buildApplicationRoute	( **&$query** )
+
+| **&$query** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

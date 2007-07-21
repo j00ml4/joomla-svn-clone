@@ -1,0 +1,18 @@
+====== isConnected ======
+{#JAPI Joomla.Framework Client JFTP::isConnected #}
+
+Method to determine if the object is connected to an FTP server
+
+===== Syntax =====
+boolean isConnected ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JApplication::__construct #}
+
+Class constructor.
+
+===== Syntax =====
+JApplication __construct	( **$clientId** )
+
+| **$clientId** | integer | A client identifier. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

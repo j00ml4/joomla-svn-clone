@@ -1,0 +1,19 @@
+====== _charToInt ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::_charToInt #}
+
+
+
+===== Syntax =====
+void _charToInt	( **$c** )
+
+| **$c** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

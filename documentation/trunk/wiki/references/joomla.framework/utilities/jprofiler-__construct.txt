@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JProfiler::__construct #}
+
+Constructor
+
+===== Syntax =====
+JProfiler __construct	( **$prefix** )
+
+| **$prefix** | string | Prefix for mark messages |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== getError ======
+{#JAPI Joomla.Framework Utilities JError::getError #}
+
+Method for retrieving the last exception object in the error stack
+
+===== Syntax =====
+mixed &getError	( **$unset** )
+
+| **$unset** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

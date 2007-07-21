@@ -1,0 +1,18 @@
+====== _setTimers ======
+{#JAPI Joomla.Framework Session JSession::_setTimers #}
+
+Set the session timers
+
+===== Syntax =====
+boolean _setTimers ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

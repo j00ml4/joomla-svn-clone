@@ -1,0 +1,18 @@
+====== clean ======
+{#JAPI Joomla.Framework Environment JRequest::clean #}
+
+Cleans the request from script injection.
+
+===== Syntax =====
+void clean ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

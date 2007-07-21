@@ -1,0 +1,19 @@
+====== getToken ======
+{#JAPI Joomla.Framework Utilities JUtility::getToken #}
+
+Method to determine a hash for anti-spoofing variable names
+
+===== Syntax =====
+string getToken	( **$forceNew** )
+
+| **$forceNew** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

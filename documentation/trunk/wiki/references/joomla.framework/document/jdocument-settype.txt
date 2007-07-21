@@ -1,0 +1,19 @@
+====== setType ======
+{#JAPI Joomla.Framework Document JDocument::setType #}
+
+Set the document type
+
+===== Syntax =====
+void setType	( **$type** )
+
+| **$type** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

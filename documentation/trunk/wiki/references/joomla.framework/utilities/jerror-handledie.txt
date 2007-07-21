@@ -1,0 +1,21 @@
+====== handleDie ======
+{#JAPI Joomla.Framework Utilities JError::handleDie #}
+
+Die error handler <ul><li>Echos the error message to output and then dies</li></ul>
+
+===== Syntax =====
+object The &handleDie	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

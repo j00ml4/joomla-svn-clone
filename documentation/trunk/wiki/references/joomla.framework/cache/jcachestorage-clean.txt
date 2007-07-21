@@ -1,0 +1,20 @@
+====== clean ======
+{#JAPI Joomla.Framework Cache JCacheStorage::clean #}
+
+Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p>
+
+===== Syntax =====
+boolean clean	( **$group**, **$mode** )
+
+| **$group** | string | The cache data group |
+| **$mode** | string | The mode for cleaning cache [group|notgroup] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

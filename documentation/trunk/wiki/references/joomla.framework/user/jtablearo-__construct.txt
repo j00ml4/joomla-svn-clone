@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework User JTableARO::__construct #}
+
+
+
+===== Syntax =====
+JTableARO __construct	( **&$db** )
+
+| **&$db** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

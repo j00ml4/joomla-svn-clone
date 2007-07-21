@@ -1,0 +1,18 @@
+====== __destruct ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::__destruct #}
+
+Database object destructor
+
+===== Syntax =====
+boolean __destruct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

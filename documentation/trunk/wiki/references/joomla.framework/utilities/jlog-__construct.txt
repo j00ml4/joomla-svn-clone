@@ -1,0 +1,20 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JLog::__construct #}
+
+Constructor
+
+===== Syntax =====
+JLog __construct	( **$path**, **$options** )
+
+| **$path** | string | Log file path |
+| **$options** | array | Log file options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

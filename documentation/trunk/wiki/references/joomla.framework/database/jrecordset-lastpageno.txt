@@ -1,0 +1,18 @@
+====== lastpageno ======
+{#JAPI Joomla.Framework Database JRecordSet::lastpageno #}
+
+TODO: No working
+
+===== Syntax =====
+void lastpageno ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

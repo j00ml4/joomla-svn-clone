@@ -1,0 +1,18 @@
+====== getLink ======
+{#JAPI Joomla.Framework Document JDocument::getLink #}
+
+Returns the document base url
+
+===== Syntax =====
+string getLink ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

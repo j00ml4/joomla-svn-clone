@@ -1,0 +1,25 @@
+====== _mos_add_acl ======
+{#JAPI Joomla.Framework User JAuthorization::_mos_add_acl #}
+
+Deprecated, use JAuthorisation::addACL() instead.
+
+===== Syntax =====
+void _mos_add_acl	( **$aco_section_value**, **$aco_value**, **$aro_section_value**, **$aro_value**, **$axo_section_value**, **$axo_value**, **$return_value** )
+
+| **$aco_section_value** |  |  |
+| **$aco_value** |  |  |
+| **$aro_section_value** |  |  |
+| **$aro_value** |  |  |
+| **$axo_section_value** |  |  |
+| **$axo_value** |  |  |
+| **$return_value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

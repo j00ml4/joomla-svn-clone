@@ -1,0 +1,18 @@
+====== explain ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::explain #}
+
+Diagnostic function
+
+===== Syntax =====
+void explain ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

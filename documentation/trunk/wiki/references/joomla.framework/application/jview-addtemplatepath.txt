@@ -1,0 +1,19 @@
+====== addTemplatePath ======
+{#JAPI Joomla.Framework Application JView::addTemplatePath #}
+
+Adds to the stack of view script paths in LIFO order.
+
+===== Syntax =====
+void addTemplatePath	( **$path** )
+
+| **$path** | string|array | The directory (-ies) to add. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

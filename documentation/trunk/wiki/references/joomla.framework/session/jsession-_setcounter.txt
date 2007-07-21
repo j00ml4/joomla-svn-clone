@@ -1,0 +1,18 @@
+====== _setCounter ======
+{#JAPI Joomla.Framework Session JSession::_setCounter #}
+
+Set counter of session usage
+
+===== Syntax =====
+boolean _setCounter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

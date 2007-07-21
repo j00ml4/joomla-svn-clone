@@ -1,0 +1,20 @@
+====== stringURLSafe ======
+{#JAPI Joomla.Framework Filter JFilterOutput::stringURLSafe #}
+
+This method processes a string and replaces all accented UTF-8 characters by unaccented  ASCII-7 &quot;equivalents&quot;, whitespaces are replaced by hyphens and the string is lowercased.
+
+===== Syntax =====
+string stringURLSafe	( **$string**, **$input** )
+
+| **$input** | string | String to process |
+| **$string** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

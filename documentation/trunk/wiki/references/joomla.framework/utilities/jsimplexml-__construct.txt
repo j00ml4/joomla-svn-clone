@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::__construct #}
+
+Constructor.
+
+===== Syntax =====
+JSimpleXML __construct	( **$options** )
+
+| **$options** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

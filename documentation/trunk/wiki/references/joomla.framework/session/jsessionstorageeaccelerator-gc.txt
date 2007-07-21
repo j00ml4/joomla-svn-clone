@@ -1,0 +1,19 @@
+====== gc ======
+{#JAPI Joomla.Framework Session JSessionStorageEaccelerator::gc #}
+
+Garbage collect stale sessions from the SessionHandler backend.
+
+===== Syntax =====
+boolean gc	( **$maxlifetime** )
+
+| **$maxlifetime** | integer | The maximum age of a session. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

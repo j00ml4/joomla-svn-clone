@@ -1,0 +1,18 @@
+====== getHeadData ======
+{#JAPI Joomla.Framework Document JDocumentHTML::getHeadData #}
+
+Get the html document head data
+
+===== Syntax =====
+array getHeadData ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

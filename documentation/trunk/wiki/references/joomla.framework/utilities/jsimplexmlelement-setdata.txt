@@ -1,0 +1,19 @@
+====== setData ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::setData #}
+
+Set the data of the element
+
+===== Syntax =====
+string setData	( **$data** )
+
+| **$data** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

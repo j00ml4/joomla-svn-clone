@@ -1,0 +1,20 @@
+====== build ======
+{#JAPI Joomla.Framework Application JRouter::build #}
+
+Function to convert an internal URI to a route
+
+===== Syntax =====
+string build	( **$value**, **$string** )
+
+| **$string** | string | The internal URL |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

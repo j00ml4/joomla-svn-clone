@@ -1,0 +1,20 @@
+====== call ======
+{#JAPI Joomla.Framework Template patTemplate_Function_Sef::call #}
+
+call the function
+
+===== Syntax =====
+string call	( **$params**, **$content** )
+
+| **$params** | array | parameters of the function (= attributes of the tag) |
+| **$content** | string | content of the tag |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

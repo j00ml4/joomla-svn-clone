@@ -1,0 +1,20 @@
+====== parseSQLFiles ======
+{#JAPI Joomla.Framework Installer JInstaller::parseSQLFiles #}
+
+Method to extract the name of a discreet installation sql file from the installation manifest file.
+
+===== Syntax =====
+mixed parseSQLFiles	( **$element**, **$version** )
+
+| **$element** | object | The xml node to process |
+| **$version** | string | The database connector to use |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,23 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Filter JFilterInput::getInstance #}
+
+Returns a reference to an input filter object, only creating it if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $filter = & JFilterInput::getInstance();</pre></p>
+
+===== Syntax =====
+object The &getInstance	( **$tagsArray**, **$attrArray**, **$tagsMethod**, **$attrMethod**, **$xssAuto** )
+
+| **$tagsArray** | array | list of user-defined tags |
+| **$attrArray** | array | list of user-defined attributes |
+| **$tagsMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$attrMethod** | int | WhiteList method = 0, BlackList method = 1 |
+| **$xssAuto** | int | Only auto clean essentials = 0, Allow clean blacklisted tags/attr = 1 |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

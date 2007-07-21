@@ -1,0 +1,11 @@
+====== JAuthenticationResponse ======
+{#JAPI Joomla.Framework User JAuthenticationResponse #}
+
+Authorization response class, provides an object for storing user and error details
+===== Methods =====
+^ Method ^ Description ^
+| [[JAuthenticationResponse-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthenticationResponse-__construct|__construct]] | Constructor |
+
+----
+
+~~DISCUSSION~~

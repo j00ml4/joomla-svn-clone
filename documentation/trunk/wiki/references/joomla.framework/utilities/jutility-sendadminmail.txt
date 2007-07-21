@@ -1,0 +1,25 @@
+====== sendAdminMail ======
+{#JAPI Joomla.Framework Utilities JUtility::sendAdminMail #}
+
+Sends mail to administrator for approval of a user submission
+
+===== Syntax =====
+boolean sendAdminMail	( **$adminName**, **$adminEmail**, **$email**, **$type**, **$title**, **$author**, **$url** )
+
+| **$adminName** | string | Name of administrator |
+| **$adminEmail** | string | Email address of administrator |
+| **$email** | string | [NOT USED TODO: Deprecate?] |
+| **$type** | string | Type of item to approve |
+| **$title** | string | Title of item to approve |
+| **$author** | string | Author of item to approve |
+| **$url** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

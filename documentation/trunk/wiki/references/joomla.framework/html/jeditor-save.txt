@@ -1,0 +1,19 @@
+====== save ======
+{#JAPI Joomla.Framework HTML JEditor::save #}
+
+Save the editor content
+
+===== Syntax =====
+void save	( **$editor** )
+
+| **$editor** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

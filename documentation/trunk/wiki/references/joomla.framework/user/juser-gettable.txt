@@ -1,0 +1,18 @@
+====== getTable ======
+{#JAPI Joomla.Framework User JUser::getTable #}
+
+Method to get the user table object
+
+===== Syntax =====
+object The &getTable ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

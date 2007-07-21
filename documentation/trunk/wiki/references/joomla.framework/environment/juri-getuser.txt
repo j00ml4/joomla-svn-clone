@@ -1,0 +1,18 @@
+====== getUser ======
+{#JAPI Joomla.Framework Environment JURI::getUser #}
+
+Get URI username  		returns the username, or null if no username was specified
+
+===== Syntax =====
+string getUser ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== loadResultArray ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::loadResultArray #}
+
+Load an array of single field results into an array
+
+===== Syntax =====
+void loadResultArray	( **$numinarray** )
+
+| **$numinarray** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,22 @@
+====== fetchElement ======
+{#JAPI Joomla.Framework Parameter JElementSQL::fetchElement #}
+
+
+
+===== Syntax =====
+void fetchElement	( **$name**, **$value**, **&$node**, **$control_name** )
+
+| **$name** |  |  |
+| **$value** |  |  |
+| **&$node** |  |  |
+| **$control_name** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

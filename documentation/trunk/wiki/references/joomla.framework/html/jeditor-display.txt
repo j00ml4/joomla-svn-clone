@@ -1,0 +1,25 @@
+====== display ======
+{#JAPI Joomla.Framework HTML JEditor::display #}
+
+Present a text area
+
+===== Syntax =====
+void display	( **$name**, **$html**, **$width**, **$height**, **$col**, **$row**, **$buttons** )
+
+| **$name** |  |  |
+| **$html** |  |  |
+| **$width** |  |  |
+| **$height** |  |  |
+| **$col** |  |  |
+| **$row** |  |  |
+| **$buttons** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

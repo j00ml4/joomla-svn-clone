@@ -1,0 +1,20 @@
+====== getPath ======
+{#JAPI Joomla.Framework Installer JInstaller::getPath #}
+
+Get an installer path by name
+
+===== Syntax =====
+string getPath	( **$name**, **$default** )
+
+| **$name** | string | Path name |
+| **$default** | string | Default value |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

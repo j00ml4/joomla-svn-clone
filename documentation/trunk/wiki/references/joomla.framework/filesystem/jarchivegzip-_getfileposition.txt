@@ -1,0 +1,18 @@
+====== _getFilePosition ======
+{#JAPI Joomla.Framework FileSystem JArchiveGzip::_getFilePosition #}
+
+Get file data offset for archive
+
+===== Syntax =====
+int _getFilePosition ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== mark ======
+{#JAPI Joomla.Framework Utilities JProfiler::mark #}
+
+Output a time mark<p>The mark is returned as text enclosed in &lt;div&gt; tags  with a CSS class of 'profiler'.</p>
+
+===== Syntax =====
+string mark	( **$label** )
+
+| **$label** | string | A label for the time mark |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== getPaths ======
+{#JAPI Joomla.Framework I18N JLanguage::getPaths #}
+
+Get a list of language files that have been loaded
+
+===== Syntax =====
+array getPaths	( **$extension** )
+
+| **$extension** | string | An option extension name |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

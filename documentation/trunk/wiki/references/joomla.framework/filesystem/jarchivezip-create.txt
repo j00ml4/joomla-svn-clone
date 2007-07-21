@@ -1,0 +1,21 @@
+====== create ======
+{#JAPI Joomla.Framework FileSystem JArchiveZip::create #}
+
+Create a ZIP compressed file from an array of file data.
+
+===== Syntax =====
+boolean create	( **$archive**, **$files**, **$options** )
+
+| **$archive** | string | Path to save archive |
+| **$files** | array | Array of files to add to archive |
+| **$options** | array | Compression options [unused] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

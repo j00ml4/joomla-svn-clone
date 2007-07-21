@@ -1,0 +1,19 @@
+====== getInstance ======
+{#JAPI Joomla.Framework HTML JEditor::getInstance #}
+
+Returns a reference to a global Editor object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $editor = &JEditor::getInstance([$editor);</pre></p>
+
+===== Syntax =====
+<a href="../../Joomla-Framework/HTML/JEditor.html">JEditor</a> &getInstance	( **$editor** )
+
+| **$editor** | string | The editor to use. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

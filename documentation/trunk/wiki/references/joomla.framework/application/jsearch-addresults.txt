@@ -1,0 +1,19 @@
+====== addResults ======
+{#JAPI Joomla.Framework Application JSearch::addResults #}
+
+
+
+===== Syntax =====
+void addResults	( **$array** )
+
+| **$array** | array | An array of object results |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

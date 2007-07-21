@@ -1,0 +1,19 @@
+====== _ampReplaceCallback ======
+{#JAPI Joomla.Framework Filter JFilterOutput::_ampReplaceCallback #}
+
+Callback method for replacing &amp; with &amp;amp; in a string
+
+===== Syntax =====
+string _ampReplaceCallback	( **$m** )
+
+| **$m** | string | String to process |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

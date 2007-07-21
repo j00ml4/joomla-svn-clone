@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::__construct #}
+
+Object Constructor takes an optional key to be used for encryption/decryption.  If no key is given then the  secret word from the configuration object is used.
+
+===== Syntax =====
+void __construct	( **$key** )
+
+| **$key** | string | Optional encryption key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

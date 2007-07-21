@@ -1,0 +1,16 @@
+====== JCacheStorageApc ======
+{#JAPI Joomla.Framework Cache JCacheStorageApc #}
+
+APC cache storage handler
+===== Methods =====
+^ Method ^ Description ^
+| [[JCacheStorageApc-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-__construct|__construct]] | Constructor |
+| [[JCacheStorageApc-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
+| [[JCacheStorageApc-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-get|get]] | Get cached data from APC by id and group |
+| [[JCacheStorageApc-remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-remove|remove]] | Remove a cached data entry by id and group |
+| [[JCacheStorageApc-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-store|store]] | Store the data to APC by id and group |
+| [[JCacheStorageApc-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageApc-test|test]] | Test to see if the cache storage is available. |
+
+----
+
+~~DISCUSSION~~

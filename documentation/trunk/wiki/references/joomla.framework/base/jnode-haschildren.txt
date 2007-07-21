@@ -1,0 +1,18 @@
+====== hasChildren ======
+{#JAPI Joomla.Framework Base JNode::hasChildren #}
+
+
+
+===== Syntax =====
+void hasChildren ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

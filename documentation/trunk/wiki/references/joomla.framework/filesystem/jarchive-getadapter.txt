@@ -1,0 +1,19 @@
+====== getAdapter ======
+{#JAPI Joomla.Framework FileSystem JArchive::getAdapter #}
+
+
+
+===== Syntax =====
+void &getAdapter	( **$type** )
+
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

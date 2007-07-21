@@ -1,0 +1,19 @@
+====== setCheckMode ======
+{#JAPI Joomla.Framework User JAuthorization::setCheckMode #}
+
+Sets the check mode.<p>Only used if the full implementation of the phpGACL library is installed and configured</p>
+
+===== Syntax =====
+int setCheckMode	( **$value** )
+
+| **$value** | int | 0 = Joomla!, 1 = phpGACL native |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

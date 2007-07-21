@@ -1,0 +1,19 @@
+====== parse ======
+{#JAPI Joomla.Framework Template JTemplate::parse #}
+
+Parse a file
+
+===== Syntax =====
+void parse	( **$file** )
+
+| **$file** | string | The filename |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

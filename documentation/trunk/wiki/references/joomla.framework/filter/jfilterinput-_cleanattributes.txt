@@ -1,0 +1,19 @@
+====== _cleanAttributes ======
+{#JAPI Joomla.Framework Filter JFilterInput::_cleanAttributes #}
+
+Internal method to strip a tag of certain attributes
+
+===== Syntax =====
+array _cleanAttributes	( **$attrSet** )
+
+| **$attrSet** | array | Array of attribute pairs to filter |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

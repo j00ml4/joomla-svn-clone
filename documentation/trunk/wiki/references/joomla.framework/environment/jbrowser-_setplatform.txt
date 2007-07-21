@@ -1,0 +1,18 @@
+====== _setPlatform ======
+{#JAPI Joomla.Framework Environment JBrowser::_setPlatform #}
+
+Match the platform of the browser.<p>This is a pretty simplistic implementation, but it's intended  to let us tell what line breaks to send, so it's good enough  for its purpose.</p>
+
+===== Syntax =====
+void _setPlatform ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

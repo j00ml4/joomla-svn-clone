@@ -1,0 +1,20 @@
+====== setAdapter ======
+{#JAPI Joomla.Framework Installer JInstaller::setAdapter #}
+
+Set an installer adapter by name
+
+===== Syntax =====
+boolean setAdapter	( **$name**, **$adapter** )
+
+| **$name** | string | Adapter name |
+| **$adapter** | object | Installer adapter object |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

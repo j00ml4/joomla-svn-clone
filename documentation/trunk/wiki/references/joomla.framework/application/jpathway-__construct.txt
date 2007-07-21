@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JPathWay::__construct #}
+
+Class constructor
+
+===== Syntax =====
+JPathWay __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

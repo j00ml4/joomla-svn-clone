@@ -1,0 +1,20 @@
+====== _endElement ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_endElement #}
+
+Handler function for the end of a tag
+
+===== Syntax =====
+void _endElement	( **$parser**, **$name** )
+
+| **$parser** | resource |  |
+| **$name** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

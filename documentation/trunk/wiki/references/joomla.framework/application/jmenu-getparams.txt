@@ -1,0 +1,19 @@
+====== getParams ======
+{#JAPI Joomla.Framework Application JMenu::getParams #}
+
+Gets the parameter object for a certain menu item
+
+===== Syntax =====
+object A &getParams	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

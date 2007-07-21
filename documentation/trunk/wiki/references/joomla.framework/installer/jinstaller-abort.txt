@@ -1,0 +1,20 @@
+====== abort ======
+{#JAPI Joomla.Framework Installer JInstaller::abort #}
+
+Installation abort method
+
+===== Syntax =====
+boolean abort	( **$msg**, **$type** )
+
+| **$msg** | string | Abort message from the installer |
+| **$type** | string | Package type if defined |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

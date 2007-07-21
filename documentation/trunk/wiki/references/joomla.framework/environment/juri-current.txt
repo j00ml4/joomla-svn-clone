@@ -1,0 +1,18 @@
+====== current ======
+{#JAPI Joomla.Framework Environment JURI::current #}
+
+Returns the URL for the request, minus the query
+
+===== Syntax =====
+string current ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

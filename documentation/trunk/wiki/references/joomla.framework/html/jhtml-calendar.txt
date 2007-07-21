@@ -1,0 +1,23 @@
+====== calendar ======
+{#JAPI Joomla.Framework HTML JHTML::calendar #}
+
+
+
+===== Syntax =====
+void calendar	( **$value**, **$name**, **$id**, **$format**, **$attribs** )
+
+| **$value** |  |  |
+| **$name** |  |  |
+| **$id** |  |  |
+| **$format** |  |  |
+| **$attribs** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

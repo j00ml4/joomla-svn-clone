@@ -1,0 +1,18 @@
+====== getCheckMode ======
+{#JAPI Joomla.Framework User JAuthorization::getCheckMode #}
+
+Gets the chec mode
+
+===== Syntax =====
+int getCheckMode ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

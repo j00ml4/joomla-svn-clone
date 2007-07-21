@@ -1,0 +1,21 @@
+====== find ======
+{#JAPI Joomla.Framework FileSystem JPath::find #}
+
+Searches the directory paths for a given file.
+
+===== Syntax =====
+mixed find	( **$paths**, **$file**, **$path** )
+
+| **$path** | array | An array of paths to search in |
+| **$file** | string | The file name to look for. |
+| **$paths** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

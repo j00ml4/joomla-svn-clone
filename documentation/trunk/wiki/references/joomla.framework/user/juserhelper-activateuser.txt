@@ -1,0 +1,19 @@
+====== activateUser ======
+{#JAPI Joomla.Framework User JUserHelper::activateUser #}
+
+Method to activate a user
+
+===== Syntax =====
+boolean activateUser	( **$activation** )
+
+| **$activation** | string | Activation string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

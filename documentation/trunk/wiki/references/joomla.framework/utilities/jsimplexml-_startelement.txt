@@ -1,0 +1,21 @@
+====== _startElement ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_startElement #}
+
+Handler function for the start of a tag
+
+===== Syntax =====
+void _startElement	( **$parser**, **$name**, **$attrs** )
+
+| **$parser** | resource |  |
+| **$name** | string |  |
+| **$attrs** | array |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework FileSystem JArchiveBzip2::__construct #}
+
+Constructor tries to load the bz2 extension of not loaded
+
+===== Syntax =====
+void __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

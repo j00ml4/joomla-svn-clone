@@ -1,0 +1,21 @@
+====== bind ======
+{#JAPI Joomla.Framework Table JTableSection::bind #}
+
+Overloaded bind function
+
+===== Syntax =====
+null|string bind	( **$array**, **$ignore**, **$hash** )
+
+| **$hash** | array | named array |
+| **$array** |  |  |
+| **$ignore** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

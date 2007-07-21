@@ -1,0 +1,19 @@
+====== getQuery ======
+{#JAPI Joomla.Framework Environment JURI::getQuery #}
+
+Returns flat query string
+
+===== Syntax =====
+string getQuery	( **$toArray** )
+
+| **$toArray** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

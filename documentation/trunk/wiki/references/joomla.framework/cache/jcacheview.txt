@@ -1,0 +1,11 @@
+====== JCacheView ======
+{#JAPI Joomla.Framework Cache JCacheView #}
+
+Joomla! Cache view type object
+===== Methods =====
+^ Method ^ Description ^
+| [[JCacheView-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheView-get|get]] | Get the cached view data |
+
+----
+
+~~DISCUSSION~~

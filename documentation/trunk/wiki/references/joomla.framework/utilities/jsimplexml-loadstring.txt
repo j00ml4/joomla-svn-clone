@@ -1,0 +1,20 @@
+====== loadString ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::loadString #}
+
+Interprets a string of XML into an object<p>This function will take the well-formed xml string data and return an object of class  JSimpleXMLElement with properties containing the data held within the xml document.  If any errors occur, it returns FALSE.</p>
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> loadString	( **$string**, **$classname** )
+
+| **$string** | string | Well-formed xml string data |
+| **$classname** | string | currently ignored |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

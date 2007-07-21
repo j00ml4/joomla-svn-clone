@@ -1,0 +1,18 @@
+====== JEditor ======
+{#JAPI Joomla.Framework HTML JEditor #}
+
+JEditor class to handle WYSIWYG editors
+===== Methods =====
+^ Method ^ Description ^
+| [[JEditor-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-__construct|__construct]] | constructor |
+| [[JEditor-display|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-display|display]] | Present a text area |
+| [[JEditor-getButtons|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-getButtons|getButtons]] | Get the editor buttons |
+| [[JEditor-getContent|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-getContent|getContent]] | Get the editor contents |
+| [[JEditor-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-getInstance|getInstance]] | Returns a reference to a global Editor object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $editor = &JEditor::getInstance([$editor);</pre></p> |
+| [[JEditor-initialise|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-initialise|initialise]] | Initialize the editor |
+| [[JEditor-save|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-save|save]] | Save the editor content |
+| [[JEditor-setContent|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-setContent|setContent]] | Set the editor contents |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,21 @@
+====== get ======
+{#JAPI Joomla.Framework Cache JCacheCallback::get #}
+
+Executes a cacheable callback if not found in cache else returns cached output and result
+
+===== Syntax =====
+mixed get	( **$callback**, **$args**, **$id** )
+
+| **$callback** | mixed | Callback or string shorthand for a callback |
+| **$args** | array | Callback arguments |
+| **$id** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

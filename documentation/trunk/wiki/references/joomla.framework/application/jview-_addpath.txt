@@ -1,0 +1,20 @@
+====== _addPath ======
+{#JAPI Joomla.Framework Application JView::_addPath #}
+
+Adds to the search path for templates and resources.
+
+===== Syntax =====
+void _addPath	( **$type**, **$path** )
+
+| **$path** | string|array | The directory or stream to search. |
+| **$type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

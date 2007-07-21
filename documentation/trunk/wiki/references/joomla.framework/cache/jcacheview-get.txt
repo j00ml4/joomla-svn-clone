@@ -1,0 +1,23 @@
+====== get ======
+{#JAPI Joomla.Framework Cache JCacheView::get #}
+
+Get the cached view data
+
+===== Syntax =====
+boolean get	( **&$view**, **$method**, **$id**, **$view**, **$group** )
+
+| **$view** | object | The view object to cache output for |
+| **$method** | string | The method name of the view method to cache output for |
+| **$group** | string | The cache data group |
+| **$id** | string | The cache data id |
+| **&$view** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== _getArrayString ======
+{#JAPI Joomla.Framework Registry JRegistryFormatPHP::_getArrayString #}
+
+
+
+===== Syntax =====
+void _getArrayString	( **$a** )
+
+| **$a** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

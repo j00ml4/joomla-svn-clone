@@ -1,0 +1,21 @@
+====== addAttribute ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::addAttribute #}
+
+Adds an attribute to the element
+
+===== Syntax =====
+void addAttribute	( **$name**, **$value**, **$attrs** )
+
+| **$name** | string |  |
+| **$attrs** | array |  |
+| **$value** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

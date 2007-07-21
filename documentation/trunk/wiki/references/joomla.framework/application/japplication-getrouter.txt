@@ -1,0 +1,18 @@
+====== getRouter ======
+{#JAPI Joomla.Framework Application JApplication::getRouter #}
+
+Return a reference to the JRouter object.
+
+===== Syntax =====
+object JRouter. &getRouter ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

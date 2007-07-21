@@ -1,0 +1,18 @@
+====== getNeedle ======
+{#JAPI Joomla.Framework Application JSearch::getNeedle #}
+
+
+
+===== Syntax =====
+string getNeedle ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

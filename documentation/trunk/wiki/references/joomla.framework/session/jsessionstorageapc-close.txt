@@ -1,0 +1,18 @@
+====== close ======
+{#JAPI Joomla.Framework Session JSessionStorageApc::close #}
+
+Close the SessionHandler backend.
+
+===== Syntax =====
+boolean close ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

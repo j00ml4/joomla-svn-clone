@@ -1,0 +1,19 @@
+====== translateErrorLevel ======
+{#JAPI Joomla.Framework Utilities JError::translateErrorLevel #}
+
+Translate an error level integer to a human readable string  e.g. E_ERROR will be translated to 'Error'
+
+===== Syntax =====
+mixed translateErrorLevel	( **$level** )
+
+| **$level** | int | Error level to translate |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

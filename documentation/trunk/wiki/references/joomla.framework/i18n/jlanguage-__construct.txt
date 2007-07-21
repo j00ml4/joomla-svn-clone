@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework I18N JLanguage::__construct #}
+
+Constructor activating the default information of the language
+
+===== Syntax =====
+JLanguage __construct	( **$lang** )
+
+| **$lang** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,20 @@
+====== _checkedOut ======
+{#JAPI Joomla.Framework HTML JHTMLGrid::_checkedOut #}
+
+
+
+===== Syntax =====
+void _checkedOut	( **&$row**, **$overlib** )
+
+| **&$row** |  |  |
+| **$overlib** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

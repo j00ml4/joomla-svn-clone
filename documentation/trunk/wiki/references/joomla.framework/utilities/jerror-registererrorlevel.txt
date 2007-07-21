@@ -1,0 +1,21 @@
+====== registerErrorLevel ======
+{#JAPI Joomla.Framework Utilities JError::registerErrorLevel #}
+
+Method to register a new error level for handling errors<p>This allows you to add custom error levels to the built-in <ul><li>E_NOTICE</li><li>E_WARNING</li><li>E_NOTICE</li></ul></p>
+
+===== Syntax =====
+boolean registerErrorLevel	( **$level**, **$name**, **$handler** )
+
+| **$level** | int | Error level to register |
+| **$name** | string | Human readable name for the error level |
+| **$handler** | string | Error handler to set for the new error level [optional] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

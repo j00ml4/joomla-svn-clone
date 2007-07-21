@@ -1,0 +1,19 @@
+====== loadAssocList ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::loadAssocList #}
+
+Load a assoc list of database rows
+
+===== Syntax =====
+array loadAssocList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

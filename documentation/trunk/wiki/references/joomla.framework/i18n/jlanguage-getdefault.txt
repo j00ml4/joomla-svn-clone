@@ -1,0 +1,18 @@
+====== getDefault ======
+{#JAPI Joomla.Framework I18N JLanguage::getDefault #}
+
+Get the default language code
+
+===== Syntax =====
+string getDefault ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

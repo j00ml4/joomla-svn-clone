@@ -1,0 +1,19 @@
+====== getToken ======
+{#JAPI Joomla.Framework Session JSession::getToken #}
+
+Get a session token, if a token isn't set yet one will be generated.<p>Tokens are used to secure forms from spamming attacks. Once a token  has been generated the system will check the post request to see if  it is present, if not it will invalidate the session.</p>
+
+===== Syntax =====
+string getToken	( **$forceNew** )
+
+| **$forceNew** | boolean | If true, force a new token to be created |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

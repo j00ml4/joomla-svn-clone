@@ -1,0 +1,18 @@
+====== _loadBehavior ======
+{#JAPI Joomla.Framework HTML JPane::_loadBehavior #}
+
+Load the javascript behavior and attach it to the document
+
+===== Syntax =====
+void _loadBehavior ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

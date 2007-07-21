@@ -1,0 +1,18 @@
+====== getTableList ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::getTableList #}
+
+
+
+===== Syntax =====
+array getTableList ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

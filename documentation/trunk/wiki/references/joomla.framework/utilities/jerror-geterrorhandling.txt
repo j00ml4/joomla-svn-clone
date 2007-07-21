@@ -1,0 +1,19 @@
+====== getErrorHandling ======
+{#JAPI Joomla.Framework Utilities JError::getErrorHandling #}
+
+Method to get the current error handler settings for a specified error level.
+
+===== Syntax =====
+array getErrorHandling	( **$level** )
+
+| **$level** | int | The error level to retrieve. This can be any of PHP's own error levels, e.g. E_ALL, E_NOTICE... |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

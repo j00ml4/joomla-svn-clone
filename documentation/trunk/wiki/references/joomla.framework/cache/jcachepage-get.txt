@@ -1,0 +1,20 @@
+====== get ======
+{#JAPI Joomla.Framework Cache JCachePage::get #}
+
+Get the cached page data
+
+===== Syntax =====
+boolean get	( **$id**, **$group** )
+
+| **$id** | string | The cache data id |
+| **$group** | string | The cache data group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

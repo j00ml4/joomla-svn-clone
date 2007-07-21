@@ -1,0 +1,19 @@
+====== setTemplateCachePrefix ======
+{#JAPI Joomla.Framework Template JTemplate::setTemplateCachePrefix #}
+
+Set the prefix of the template cache
+
+===== Syntax =====
+boolean setTemplateCachePrefix	( **$prefix** )
+
+| **$prefix** | string | the prefix of the template cache |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

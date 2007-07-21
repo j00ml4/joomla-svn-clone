@@ -1,0 +1,18 @@
+====== getState ======
+{#JAPI Joomla.Framework Session JSession::getState #}
+
+Get current state of session
+
+===== Syntax =====
+string getState ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

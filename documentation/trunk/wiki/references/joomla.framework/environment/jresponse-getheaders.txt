@@ -1,0 +1,18 @@
+====== getHeaders ======
+{#JAPI Joomla.Framework Environment JResponse::getHeaders #}
+
+Return array of headers;
+
+===== Syntax =====
+array getHeaders ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

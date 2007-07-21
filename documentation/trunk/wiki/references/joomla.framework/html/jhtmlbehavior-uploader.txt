@@ -1,0 +1,20 @@
+====== uploader ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::uploader #}
+
+
+
+===== Syntax =====
+void uploader	( **$id**, **$params** )
+
+| **$id** |  |  |
+| **$params** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

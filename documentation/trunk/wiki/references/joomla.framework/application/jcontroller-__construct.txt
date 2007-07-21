@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JController::__construct #}
+
+Constructor.
+
+===== Syntax =====
+JController __construct	( **$config** )
+
+| **$config** | array | An optional associative array of configuration settings.  Recognized key values include 'name', 'default_task', 'model_path', and  'view_path' (this list is not meant to be comprehensive). |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

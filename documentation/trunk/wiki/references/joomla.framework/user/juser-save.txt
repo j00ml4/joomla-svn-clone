@@ -1,0 +1,19 @@
+====== save ======
+{#JAPI Joomla.Framework User JUser::save #}
+
+Method to save the JUser object to the database
+
+===== Syntax =====
+boolean save	( **$updateOnly** )
+
+| **$updateOnly** | boolean | Save the object only if not a new user |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

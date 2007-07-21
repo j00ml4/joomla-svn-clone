@@ -1,0 +1,18 @@
+====== restart ======
+{#JAPI Joomla.Framework Session JSession::restart #}
+
+restart an expired or locked session
+
+===== Syntax =====
+boolean restart ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

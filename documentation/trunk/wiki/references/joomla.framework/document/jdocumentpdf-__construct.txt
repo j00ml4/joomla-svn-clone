@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Document JDocumentPDF::__construct #}
+
+Class constructore
+
+===== Syntax =====
+JDocumentPDF __construct	( **$options** )
+
+| **$options** | array | Associative array of options |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,22 @@
+====== updateObject ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::updateObject #}
+
+Document::db_updateObject()
+
+===== Syntax =====
+void updateObject	( **$table**, **&$object**, **$keyName**, **$updateNulls** )
+
+| **$updateNulls** | [type] |  |
+| **$table** |  |  |
+| **&$object** |  |  |
+| **$keyName** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

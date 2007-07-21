@@ -1,0 +1,19 @@
+====== getUserId ======
+{#JAPI Joomla.Framework User JUserHelper::getUserId #}
+
+Returns userid if a user exists
+
+===== Syntax =====
+int getUserId	( **$username** )
+
+| **$username** | string | The username to search on |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== setLimit ======
+{#JAPI Joomla.Framework Application JSearch::setLimit #}
+
+
+
+===== Syntax =====
+void setLimit	( **$value** )
+
+| **$value** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

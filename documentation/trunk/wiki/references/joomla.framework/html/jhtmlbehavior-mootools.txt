@@ -1,0 +1,19 @@
+====== mootools ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::mootools #}
+
+Method to load the mootools framework into the document head<p><ul><li>If debugging mode is on an uncompressed version of mootools is included for easier debugging.</li></ul></p>
+
+===== Syntax =====
+void mootools	( **$debug** )
+
+| **$debug** | boolean | Is debugging mode on? [optional] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

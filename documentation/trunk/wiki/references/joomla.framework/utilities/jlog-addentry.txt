@@ -1,0 +1,19 @@
+====== addEntry ======
+{#JAPI Joomla.Framework Utilities JLog::addEntry #}
+
+
+
+===== Syntax =====
+void addEntry	( **$entry** )
+
+| **$entry** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

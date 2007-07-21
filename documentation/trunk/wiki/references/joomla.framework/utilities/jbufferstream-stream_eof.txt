@@ -1,0 +1,18 @@
+====== stream_eof ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_eof #}
+
+
+
+===== Syntax =====
+void stream_eof ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

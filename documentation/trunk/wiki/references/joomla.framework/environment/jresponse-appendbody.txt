@@ -1,0 +1,19 @@
+====== appendBody ======
+{#JAPI Joomla.Framework Environment JResponse::appendBody #}
+
+Append content to the body content
+
+===== Syntax =====
+void appendBody	( **$content** )
+
+| **$content** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

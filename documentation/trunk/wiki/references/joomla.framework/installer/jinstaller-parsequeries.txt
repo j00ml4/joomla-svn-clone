@@ -1,0 +1,19 @@
+====== parseQueries ======
+{#JAPI Joomla.Framework Installer JInstaller::parseQueries #}
+
+Backward compatible Method to parse through a queries element of the  installation manifest file and take appropriate action.
+
+===== Syntax =====
+mixed parseQueries	( **$element** )
+
+| **$element** | object | The xml node to process |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

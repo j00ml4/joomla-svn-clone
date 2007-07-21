@@ -1,0 +1,19 @@
+====== setDefault ======
+{#JAPI Joomla.Framework Application JMenu::setDefault #}
+
+Set the default item by id
+
+===== Syntax =====
+True, setDefault	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

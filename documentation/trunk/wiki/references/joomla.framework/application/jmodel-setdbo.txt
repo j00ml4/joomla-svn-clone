@@ -1,0 +1,20 @@
+====== setDBO ======
+{#JAPI Joomla.Framework Application JModel::setDBO #}
+
+Method to set the database connector object
+
+===== Syntax =====
+void setDBO	( **&$db**, **$db** )
+
+| **$db** | object | A JDatabase based object |
+| **&$db** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

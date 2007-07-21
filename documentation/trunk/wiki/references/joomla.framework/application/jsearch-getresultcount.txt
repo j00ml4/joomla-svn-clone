@@ -1,0 +1,18 @@
+====== getResultCount ======
+{#JAPI Joomla.Framework Application JSearch::getResultCount #}
+
+
+
+===== Syntax =====
+int getResultCount ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== destroy ======
+{#JAPI Joomla.Framework Session JSessionStorageDatabase::destroy #}
+
+Destroy the data for a particular session identifier in the  SessionHandler backend.
+
+===== Syntax =====
+boolean destroy	( **$id** )
+
+| **$id** | string | The session identifier. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== getPageTitle ======
+{#JAPI Joomla.Framework Application JApplication::getPageTitle #}
+
+Deprecated, use JDocument::getTitle instead.
+
+===== Syntax =====
+void getPageTitle ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

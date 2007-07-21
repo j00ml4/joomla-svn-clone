@@ -1,0 +1,18 @@
+====== isWinOS ======
+{#JAPI Joomla.Framework Utilities JUtility::isWinOS #}
+
+Method to determine if the host OS is  Windows
+
+===== Syntax =====
+true isWinOS ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

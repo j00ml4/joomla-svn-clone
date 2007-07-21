@@ -1,0 +1,11 @@
+====== patTemplate_Modifier_SEF ======
+{#JAPI Joomla.Framework Template patTemplate_Modifier_SEF #}
+
+JTemplate Translate modifier
+===== Methods =====
+^ Method ^ Description ^
+| [[patTemplate_Modifier_SEF-modify|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Modifier_SEF-modify|modify]] | modify the value |
+
+----
+
+~~DISCUSSION~~

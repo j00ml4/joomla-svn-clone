@@ -1,0 +1,19 @@
+====== addResultCount ======
+{#JAPI Joomla.Framework Application JSearch::addResultCount #}
+
+Adds the total number of returns of the current search plugin to the<p>running total and determines the limit and limitstart for the query</p>
+
+===== Syntax =====
+void addResultCount	( **$n** )
+
+| **$n** | int |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

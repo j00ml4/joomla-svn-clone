@@ -1,0 +1,20 @@
+====== start ======
+{#JAPI Joomla.Framework Cache JCacheOutput::start #}
+
+Start the cache
+
+===== Syntax =====
+boolean start	( **$id**, **$group** )
+
+| **$id** | string | The cache data id |
+| **$group** | string | The cache data group |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

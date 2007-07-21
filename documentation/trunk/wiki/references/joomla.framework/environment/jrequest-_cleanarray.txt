@@ -1,0 +1,21 @@
+====== _cleanArray ======
+{#JAPI Joomla.Framework Environment JRequest::_cleanArray #}
+
+Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked
+
+===== Syntax =====
+void _cleanArray	( **&$array**, **$globalise**, **$array** )
+
+| **$array** | array | Array to clean |
+| **$globalise** | boolean | True if the array is to be added to the GLOBALS |
+| **&$array** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

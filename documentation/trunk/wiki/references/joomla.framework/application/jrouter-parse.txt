@@ -1,0 +1,19 @@
+====== parse ======
+{#JAPI Joomla.Framework Application JRouter::parse #}
+
+Route a request
+
+===== Syntax =====
+void parse	( **$url** )
+
+| **$url** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

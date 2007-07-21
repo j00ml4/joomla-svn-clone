@@ -1,0 +1,20 @@
+====== setLayout ======
+{#JAPI Joomla.Framework Application JView::setLayout #}
+
+Sets the layout name to use
+
+===== Syntax =====
+string setLayout	( **$layout**, **$template** )
+
+| **$template** | string | The template name. |
+| **$layout** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

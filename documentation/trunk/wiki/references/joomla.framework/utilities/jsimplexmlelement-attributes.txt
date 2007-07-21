@@ -1,0 +1,19 @@
+====== attributes ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::attributes #}
+
+Get the an attribute of the element
+
+===== Syntax =====
+mixed attributes	( **$attribute** )
+
+| **$attribute** | string | The name of the attribute |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

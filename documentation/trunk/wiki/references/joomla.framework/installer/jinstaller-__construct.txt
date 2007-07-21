@@ -1,0 +1,18 @@
+====== __construct ======
+{#JAPI Joomla.Framework Installer JInstaller::__construct #}
+
+Constructor
+
+===== Syntax =====
+JInstaller __construct ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

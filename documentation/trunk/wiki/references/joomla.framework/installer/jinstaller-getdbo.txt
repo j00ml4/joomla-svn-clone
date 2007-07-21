@@ -1,0 +1,18 @@
+====== getDBO ======
+{#JAPI Joomla.Framework Installer JInstaller::getDBO #}
+
+Get the database connector object
+
+===== Syntax =====
+object Database &getDBO ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

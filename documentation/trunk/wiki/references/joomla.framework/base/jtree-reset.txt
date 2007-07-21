@@ -1,0 +1,18 @@
+====== reset ======
+{#JAPI Joomla.Framework Base JTree::reset #}
+
+
+
+===== Syntax =====
+void reset ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

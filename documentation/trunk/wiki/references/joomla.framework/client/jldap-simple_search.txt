@@ -1,0 +1,19 @@
+====== simple_search ======
+{#JAPI Joomla.Framework Client JLDAP::simple_search #}
+
+Perform an LDAP search using comma seperated search strings
+
+===== Syntax =====
+void simple_search	( **$search** )
+
+| **$search** | string | search string of search values |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

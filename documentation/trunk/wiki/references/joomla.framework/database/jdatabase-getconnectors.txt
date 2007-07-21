@@ -1,0 +1,18 @@
+====== getConnectors ======
+{#JAPI Joomla.Framework Database JDatabase::getConnectors #}
+
+Get the database connectors
+
+===== Syntax =====
+array getConnectors ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

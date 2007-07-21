@@ -1,0 +1,19 @@
+====== _hexToIntArray ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::_hexToIntArray #}
+
+
+
+===== Syntax =====
+void _hexToIntArray	( **$s** )
+
+| **$s** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

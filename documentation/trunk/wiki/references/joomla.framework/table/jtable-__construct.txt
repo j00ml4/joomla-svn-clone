@@ -1,0 +1,22 @@
+====== __construct ======
+{#JAPI Joomla.Framework Table JTable::__construct #}
+
+Object constructor to set table and key field<p>Can be overloaded/supplemented by the child class</p>
+
+===== Syntax =====
+JTable __construct	( **$table**, **$key**, **&$db**, **$db** )
+
+| **$table** | string | name of the table in the db schema relating to child class |
+| **$key** | string | name of the primary key field in the table |
+| **$db** | object | JDatabase object |
+| **&$db** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

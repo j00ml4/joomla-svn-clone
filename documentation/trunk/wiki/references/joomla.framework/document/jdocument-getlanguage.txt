@@ -1,0 +1,18 @@
+====== getLanguage ======
+{#JAPI Joomla.Framework Document JDocument::getLanguage #}
+
+Returns the document language.
+
+===== Syntax =====
+string getLanguage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

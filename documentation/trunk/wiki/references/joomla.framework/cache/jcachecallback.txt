@@ -1,0 +1,12 @@
+====== JCacheCallback ======
+{#JAPI Joomla.Framework Cache JCacheCallback #}
+
+Joomla! Cache callback type object
+===== Methods =====
+^ Method ^ Description ^
+| [[JCacheCallback-call|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheCallback-call|call]] | Executes a cacheable callback if not found in cache else returns cached output and result<p>Since arguments to this function are read with func_get_args you can pass any number of arguments to this method  as long as the first argument passed is the callback definition.</p><p>The callback definition can be in several forms: <ul><li>Standard PHP Callback array &lt;http://php.net/callback&gt; [recommended]</li><li>Function name as a string eg. 'foo' for function foo()</li><li>Static method name as a string eg. 'MyClass::myMethod' for method myMethod() of class MyClass</li></ul></p> |
+| [[JCacheCallback-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheCallback-get|get]] | Executes a cacheable callback if not found in cache else returns cached output and result |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== toUnix ======
+{#JAPI Joomla.Framework Utilities JDate::toUnix #}
+
+Gets the date as UNIX time stamp.
+
+===== Syntax =====
+a toUnix ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

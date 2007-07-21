@@ -1,0 +1,20 @@
+====== modal ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::modal #}
+
+
+
+===== Syntax =====
+void modal	( **$selector**, **$params** )
+
+| **$selector** |  |  |
+| **$params** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

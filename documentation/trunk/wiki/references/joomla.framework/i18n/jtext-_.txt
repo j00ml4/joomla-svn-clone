@@ -1,0 +1,20 @@
+====== _ ======
+{#JAPI Joomla.Framework I18N JText::_ #}
+
+Translates a string into the current language
+
+===== Syntax =====
+void _	( **$string**, **$jsSafe** )
+
+| **$string** | string | The string to translate |
+| **$jsSafe** | boolean | Make the result javascript safe |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== _closeLog ======
+{#JAPI Joomla.Framework Utilities JLog::_closeLog #}
+
+Close the log file pointer
+
+===== Syntax =====
+boolean _closeLog ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

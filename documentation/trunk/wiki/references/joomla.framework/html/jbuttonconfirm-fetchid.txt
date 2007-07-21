@@ -1,0 +1,24 @@
+====== fetchId ======
+{#JAPI Joomla.Framework HTML JButtonConfirm::fetchId #}
+
+Get the button CSS Id
+
+===== Syntax =====
+string fetchId	( **$type**, **$name**, **$text**, **$task**, **$list**, **$hideMenu** )
+
+| **$type** |  |  |
+| **$name** |  |  |
+| **$text** |  |  |
+| **$task** |  |  |
+| **$list** |  |  |
+| **$hideMenu** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

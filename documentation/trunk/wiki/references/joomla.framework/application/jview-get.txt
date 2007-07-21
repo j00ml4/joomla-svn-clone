@@ -1,0 +1,20 @@
+====== get ======
+{#JAPI Joomla.Framework Application JView::get #}
+
+Method to get data from a registered model
+
+===== Syntax =====
+mixed &get	( **$method**, **$model** )
+
+| **$method** | string | The name of the method to call on the model |
+| **$model** | string | The name of the model to reference [optional] |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

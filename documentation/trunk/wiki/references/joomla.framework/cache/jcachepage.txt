@@ -1,0 +1,12 @@
+====== JCachePage ======
+{#JAPI Joomla.Framework Cache JCachePage #}
+
+Joomla! Cache page type object
+===== Methods =====
+^ Method ^ Description ^
+| [[JCachePage-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCachePage-get|get]] | Get the cached page data |
+| [[JCachePage-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCachePage-store|store]] | Stop the cache buffer and store the cached data |
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== getOffset ======
+{#JAPI Joomla.Framework Utilities JDate::getOffset #}
+
+Get the date offset (in hours)
+
+===== Syntax =====
+integer getOffset ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

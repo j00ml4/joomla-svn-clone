@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::__construct #}
+
+Database object constructor
+
+===== Syntax =====
+JDatabaseMySQL __construct	( **$options** )
+
+| **$options** | array | List of options used to configure the connection |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

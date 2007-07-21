@@ -1,0 +1,19 @@
+====== cleanText ======
+{#JAPI Joomla.Framework Filter JFilterOutput::cleanText #}
+
+Cleans text of all formating and scripting code
+
+===== Syntax =====
+void cleanText	( **&$text** )
+
+| **&$text** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

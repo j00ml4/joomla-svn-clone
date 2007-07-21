@@ -1,0 +1,19 @@
+====== setFragment ======
+{#JAPI Joomla.Framework Environment JURI::setFragment #}
+
+Set the URI anchor string  		everything after the &quot;#&quot;
+
+===== Syntax =====
+void setFragment	( **$anchor** )
+
+| **$anchor** | string | The URI anchor string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== listNames ======
+{#JAPI Joomla.Framework Client JFTP::listNames #}
+
+Method to list the filenames of the contents of a directory on the FTP server<p>Note: Some servers also return folder names. However, to be sure to list folders on all  servers, you should use listDetails() instead, if you also need to deal with folders</p>
+
+===== Syntax =====
+string listNames	( **$path** )
+
+| **$path** | string | Path local file to store on the FTP server |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

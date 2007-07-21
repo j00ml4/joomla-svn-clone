@@ -1,0 +1,19 @@
+====== setModifiedDate ======
+{#JAPI Joomla.Framework Document JDocument::setModifiedDate #}
+
+Sets the document modified date
+
+===== Syntax =====
+void setModifiedDate	( **$date** )
+
+| **$date** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

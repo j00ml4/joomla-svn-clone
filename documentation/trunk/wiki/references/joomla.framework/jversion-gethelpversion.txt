@@ -1,0 +1,18 @@
+====== getHelpVersion ======
+{#JAPI Joomla.Framework  JVersion::getHelpVersion #}
+
+
+
+===== Syntax =====
+string getHelpVersion ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

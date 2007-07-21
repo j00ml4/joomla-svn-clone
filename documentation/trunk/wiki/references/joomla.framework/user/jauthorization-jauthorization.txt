@@ -1,0 +1,19 @@
+====== JAuthorization ======
+{#JAPI Joomla.Framework User JAuthorization::JAuthorization #}
+
+Constructor
+
+===== Syntax =====
+JAuthorization JAuthorization	( **$options** )
+
+| **$options** | array | An arry of options to oeverride the class defaults |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

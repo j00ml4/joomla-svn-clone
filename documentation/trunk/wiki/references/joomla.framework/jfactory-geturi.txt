@@ -1,0 +1,19 @@
+====== getURI ======
+{#JAPI Joomla.Framework  JFactory::getURI #}
+
+Return a reference to the <a href="../Joomla-Framework/Environment/JURI.html">JURI</a> object
+
+===== Syntax =====
+<a href="../Joomla-Framework/Environment/JURI.html">object JURI</a> &getURI	( **$uri** )
+
+| **$uri** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

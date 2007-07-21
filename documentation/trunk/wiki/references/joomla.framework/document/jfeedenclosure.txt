@@ -1,0 +1,10 @@
+====== JFeedEnclosure ======
+{#JAPI Joomla.Framework Document JFeedEnclosure #}
+
+JFeedEnclosure is an internal class that stores feed enclosure information
+===== Methods =====
+^ Method ^ Description ^
+
+----
+
+~~DISCUSSION~~

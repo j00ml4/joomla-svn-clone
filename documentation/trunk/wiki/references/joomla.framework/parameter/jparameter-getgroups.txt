@@ -1,0 +1,18 @@
+====== getGroups ======
+{#JAPI Joomla.Framework Parameter JParameter::getGroups #}
+
+Get the number of params in each group
+
+===== Syntax =====
+array getGroups ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

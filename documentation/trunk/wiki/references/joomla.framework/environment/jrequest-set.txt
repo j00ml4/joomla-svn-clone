@@ -1,0 +1,21 @@
+====== set ======
+{#JAPI Joomla.Framework Environment JRequest::set #}
+
+
+
+===== Syntax =====
+void set	( **$array**, **$hash**, **$overwrite** )
+
+| **$array** |  |  |
+| **$hash** |  |  |
+| **$overwrite** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== cleanText ======
+{#JAPI Joomla.Framework Utilities JMailHelper::cleanText #}
+
+Cleans multi-line inputs.
+
+===== Syntax =====
+string cleanText	( **$value** )
+
+| **$value** | string | Multi-line string to be cleaned. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

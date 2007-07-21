@@ -1,0 +1,19 @@
+====== _getJSObject ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::_getJSObject #}
+
+Internal method to get a JavaScript object notation string from an array
+
+===== Syntax =====
+string _getJSObject	( **$array** )
+
+| **$array** | array | The array to convert to JavaScript object notation |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

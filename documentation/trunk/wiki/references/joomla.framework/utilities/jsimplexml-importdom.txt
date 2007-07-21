@@ -1,0 +1,20 @@
+====== importDom ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::importDom #}
+
+Get a JSimpleXMLElement object from a DOM node.<p>This function takes a node of a DOM  document and makes it into a JSimpleXML node.  This new object can then be used as a native JSimpleXML element. If any errors occur,  it returns FALSE.</p>
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Utilities/JSimpleXMLElement.html">object JSimpleXMLElement</a> importDom	( **$node**, **$classname** )
+
+| **$node** | string | DOM  document |
+| **$classname** | string | currently ignored |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

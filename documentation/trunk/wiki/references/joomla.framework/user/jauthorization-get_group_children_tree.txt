@@ -1,0 +1,22 @@
+====== get_group_children_tree ======
+{#JAPI Joomla.Framework User JAuthorization::get_group_children_tree #}
+
+
+
+===== Syntax =====
+string|array get_group_children_tree	( **$root_id**, **$root_name**, **$inclusive**, **$html** )
+
+| **$root_id** | int |  |
+| **$root_name** | string |  |
+| **$inclusive** | boolean |  |
+| **$html** | boolean | Returns the complete html if true |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

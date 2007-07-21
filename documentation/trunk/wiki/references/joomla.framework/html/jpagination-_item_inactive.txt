@@ -1,0 +1,19 @@
+====== _item_inactive ======
+{#JAPI Joomla.Framework HTML JPagination::_item_inactive #}
+
+
+
+===== Syntax =====
+void _item_inactive	( **&$item** )
+
+| **&$item** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

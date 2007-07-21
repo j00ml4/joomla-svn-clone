@@ -1,0 +1,18 @@
+====== query ======
+{#JAPI Joomla.Framework Database JDatabaseMySQLi::query #}
+
+Execute the query
+
+===== Syntax =====
+mixed query ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

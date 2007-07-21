@@ -1,0 +1,19 @@
+====== _createToken ======
+{#JAPI Joomla.Framework Session JSession::_createToken #}
+
+Create a token-string
+
+===== Syntax =====
+string _createToken	( **$length** )
+
+| **$length** | int | lenght of string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

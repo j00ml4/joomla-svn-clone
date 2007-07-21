@@ -1,0 +1,20 @@
+====== getPluginParams ======
+{#JAPI Joomla.Framework Application JSearchHelper::getPluginParams #}
+
+
+
+===== Syntax =====
+<a href="../../Joomla-Framework/Parameter/JParameter.html">JParameter</a> &getPluginParams	( **$folder**, **$name** )
+
+| **$folder** |  |  |
+| **$name** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

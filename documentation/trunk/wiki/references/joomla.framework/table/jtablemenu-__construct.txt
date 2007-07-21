@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Table JTableMenu::__construct #}
+
+Constructor
+
+===== Syntax =====
+JTableMenu __construct	( **&$db** )
+
+| **&$db** | database | A database connector object |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

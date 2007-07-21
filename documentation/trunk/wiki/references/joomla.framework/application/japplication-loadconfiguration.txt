@@ -1,0 +1,20 @@
+====== loadConfiguration ======
+{#JAPI Joomla.Framework Application JApplication::loadConfiguration #}
+
+Load the configuration
+
+===== Syntax =====
+void loadConfiguration	( **$file**, **1** )
+
+| **1** | string | The type of the configuration file |
+| **$file** | string | The path to the configuration file |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

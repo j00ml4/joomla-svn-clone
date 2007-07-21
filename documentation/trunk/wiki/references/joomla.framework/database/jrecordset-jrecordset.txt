@@ -1,0 +1,19 @@
+====== JRecordSet ======
+{#JAPI Joomla.Framework Database JRecordSet::JRecordSet #}
+
+Constuctor
+
+===== Syntax =====
+JRecordSet JRecordSet	( **$data** )
+
+| **$data** | array |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

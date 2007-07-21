@@ -1,0 +1,19 @@
+====== setLink ======
+{#JAPI Joomla.Framework Document JDocument::setLink #}
+
+Sets the document link
+
+===== Syntax =====
+void setLink	( **$url** )
+
+| **$url** | string | A url |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

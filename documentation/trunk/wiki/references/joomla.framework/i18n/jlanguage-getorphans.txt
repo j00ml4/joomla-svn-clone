@@ -1,0 +1,18 @@
+====== getOrphans ======
+{#JAPI Joomla.Framework I18N JLanguage::getOrphans #}
+
+Get the list of orphaned strings if being tracked
+
+===== Syntax =====
+boolean getOrphans ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

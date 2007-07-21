@@ -1,0 +1,18 @@
+====== clearHeaders ======
+{#JAPI Joomla.Framework Environment JResponse::clearHeaders #}
+
+Clear headers
+
+===== Syntax =====
+void clearHeaders ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

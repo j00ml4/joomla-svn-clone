@@ -1,0 +1,21 @@
+====== handleEcho ======
+{#JAPI Joomla.Framework Utilities JError::handleEcho #}
+
+Echo error handler <ul><li>Echos the error message to output</li></ul>
+
+===== Syntax =====
+object The &handleEcho	( **&$error**, **$options**, **$error** )
+
+| **$error** | object | Exception object to handle |
+| **$options** | array | Handler options |
+| **&$error** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,19 @@
+====== _parseApplicationRoute ======
+{#JAPI Joomla.Framework Application JRouter::_parseApplicationRoute #}
+
+Parse a application specific route
+
+===== Syntax =====
+void _parseApplicationRoute	( **&$url** )
+
+| **&$url** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

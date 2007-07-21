@@ -1,0 +1,19 @@
+====== initialise ======
+{#JAPI Joomla.Framework Application JApplication::initialise #}
+
+Initialise the application.
+
+===== Syntax =====
+void initialise	( **$options** )
+
+| **$options** | array | An optional associative array of configuration settings. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== caption ======
+{#JAPI Joomla.Framework HTML JHTMLBehavior::caption #}
+
+
+
+===== Syntax =====
+void caption ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

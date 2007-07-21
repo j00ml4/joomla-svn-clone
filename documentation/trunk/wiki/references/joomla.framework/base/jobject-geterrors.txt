@@ -1,0 +1,18 @@
+====== getErrors ======
+{#JAPI Joomla.Framework Base JObject::getErrors #}
+
+Return all errors, if any
+
+===== Syntax =====
+array getErrors ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

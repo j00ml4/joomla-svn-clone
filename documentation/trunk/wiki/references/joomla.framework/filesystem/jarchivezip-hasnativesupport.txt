@@ -1,0 +1,18 @@
+====== hasNativeSupport ======
+{#JAPI Joomla.Framework FileSystem JArchiveZip::hasNativeSupport #}
+
+Method to determine if the server has native zip support for faster handling
+
+===== Syntax =====
+boolean hasNativeSupport ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

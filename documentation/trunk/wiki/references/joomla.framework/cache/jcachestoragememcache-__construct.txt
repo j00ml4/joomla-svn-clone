@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Cache JCacheStorageMemcache::__construct #}
+
+Constructor
+
+===== Syntax =====
+JCacheStorageMemcache __construct	( **$options** )
+
+| **$options** | array | optional parameters |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

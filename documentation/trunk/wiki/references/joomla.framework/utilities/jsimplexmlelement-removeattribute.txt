@@ -1,0 +1,19 @@
+====== removeAttribute ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::removeAttribute #}
+
+Removes an attribute from the element
+
+===== Syntax =====
+void removeAttribute	( **$name** )
+
+| **$name** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

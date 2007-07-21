@@ -1,0 +1,18 @@
+====== getBuffer ======
+{#JAPI Joomla.Framework Document JDocument::getBuffer #}
+
+Get the contents of the document buffer
+
+===== Syntax =====
+The getBuffer ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

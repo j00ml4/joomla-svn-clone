@@ -1,0 +1,19 @@
+====== _remove ======
+{#JAPI Joomla.Framework Filter JFilterInput::_remove #}
+
+Internal method to iteratively remove all unwanted tags and attributes
+
+===== Syntax =====
+string _remove	( **$source** )
+
+| **$source** | string | Input string to be 'cleaned' |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,0 +1,18 @@
+====== getGenerator ======
+{#JAPI Joomla.Framework Document JDocument::getGenerator #}
+
+Returns the document generator
+
+===== Syntax =====
+string getGenerator ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

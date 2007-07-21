@@ -1,0 +1,22 @@
+====== getString ======
+{#JAPI Joomla.Framework Environment JRequest::getString #}
+
+Fetches and returns a given filtered variable. The string  filter deletes 'bad' HTML code, if not overridden by the mask.<p>This is currently only a proxy function for getVar().</p><p>See getVar() for more in-depth documentation on the parameters.</p>
+
+===== Syntax =====
+string getString	( **$name**, **$default**, **$hash**, **$mask** )
+
+| **$name** | string | Variable name |
+| **$default** | string | Default value if the variable does not exist |
+| **$hash** | string | Where the var should come from (POST, GET, FILES, COOKIE, METHOD) |
+| **$mask** | int | Filter mask for the variable |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

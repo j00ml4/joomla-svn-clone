@@ -1,0 +1,18 @@
+====== getMemory ======
+{#JAPI Joomla.Framework Utilities JProfiler::getMemory #}
+
+Get information about current memory usage.
+
+===== Syntax =====
+int getMemory ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

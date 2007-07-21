@@ -1,0 +1,20 @@
+====== parseMedia ======
+{#JAPI Joomla.Framework Installer JInstaller::parseMedia #}
+
+Method to parse through a media element of the installation manifest and take appropriate  action.
+
+===== Syntax =====
+boolean parseMedia	( **$element**, **$cid** )
+
+| **$element** | object | The xml node to process |
+| **$cid** | int | Application ID of application to install to |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

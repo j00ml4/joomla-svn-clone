@@ -1,0 +1,19 @@
+====== loadRowList ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::loadRowList #}
+
+Load a list of database rows (numeric column indexing)
+
+===== Syntax =====
+array loadRowList	( **$key** )
+
+| **$key** | string | The field name of a primary key |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

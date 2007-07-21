@@ -1,0 +1,19 @@
+====== getItem ======
+{#JAPI Joomla.Framework Application JMenu::getItem #}
+
+Get menu item by id
+
+===== Syntax =====
+mixed &getItem	( **$id** )
+
+| **$id** | int | The item id |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

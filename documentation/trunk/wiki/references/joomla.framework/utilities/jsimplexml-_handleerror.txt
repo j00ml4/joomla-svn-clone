@@ -1,0 +1,21 @@
+====== _handleError ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::_handleError #}
+
+Handles an XML parsing error
+
+===== Syntax =====
+void _handleError	( **$code**, **$line**, **$col** )
+
+| **$code** | int | XML Error Code |
+| **$line** | int | Line on which the error happened |
+| **$col** | int | Column on which the error happened |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

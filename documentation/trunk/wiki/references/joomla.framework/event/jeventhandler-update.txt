@@ -1,0 +1,19 @@
+====== update ======
+{#JAPI Joomla.Framework Event JEventHandler::update #}
+
+Method to trigger events
+
+===== Syntax =====
+mixed update	( **&$args** )
+
+| **&$args** | array | Arguments |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

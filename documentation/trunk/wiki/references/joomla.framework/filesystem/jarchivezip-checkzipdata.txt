@@ -1,0 +1,20 @@
+====== checkZipData ======
+{#JAPI Joomla.Framework FileSystem JArchiveZip::checkZipData #}
+
+Checks to see if the data is a valid ZIP file.
+
+===== Syntax =====
+boolean checkZipData	( **&$data**, **$data** )
+
+| **$data** | string | ZIP archive data buffer |
+| **&$data** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

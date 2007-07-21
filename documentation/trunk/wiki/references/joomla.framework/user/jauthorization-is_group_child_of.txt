@@ -1,0 +1,21 @@
+====== is_group_child_of ======
+{#JAPI Joomla.Framework User JAuthorization::is_group_child_of #}
+
+
+
+===== Syntax =====
+void is_group_child_of	( **$grp_src**, **$grp_tgt**, **$group_type** )
+
+| **$grp_src** |  |  |
+| **$grp_tgt** |  |  |
+| **$group_type** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

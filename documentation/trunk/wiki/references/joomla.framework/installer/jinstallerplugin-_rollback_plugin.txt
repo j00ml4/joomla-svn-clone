@@ -1,0 +1,19 @@
+====== _rollback_plugin ======
+{#JAPI Joomla.Framework Installer JInstallerPlugin::_rollback_plugin #}
+
+Custom rollback method <ul><li>Roll back the plugin item</li></ul>
+
+===== Syntax =====
+boolean _rollback_plugin	( **$arg** )
+
+| **$arg** | array | Installation step to rollback |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

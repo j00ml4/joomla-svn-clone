@@ -1,0 +1,19 @@
+====== setBody ======
+{#JAPI Joomla.Framework Environment JResponse::setBody #}
+
+Set body content<p>If body content already defined, this will replace it.</p>
+
+===== Syntax =====
+void setBody	( **$content** )
+
+| **$content** | string |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

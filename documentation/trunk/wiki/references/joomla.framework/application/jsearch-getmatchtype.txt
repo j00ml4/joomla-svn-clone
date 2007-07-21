@@ -1,0 +1,18 @@
+====== getMatchType ======
+{#JAPI Joomla.Framework Application JSearch::getMatchType #}
+
+
+
+===== Syntax =====
+string getMatchType ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

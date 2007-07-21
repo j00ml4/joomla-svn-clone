@@ -1,0 +1,21 @@
+====== render ======
+{#JAPI Joomla.Framework Document JDocumentHTML::render #}
+
+Outputs the template to the browser.
+
+===== Syntax =====
+The render	( **$caching**, **$params**, **$cache** )
+
+| **$cache** | boolean | If true, cache the output |
+| **$params** | array | Associative array of attributes |
+| **$caching** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

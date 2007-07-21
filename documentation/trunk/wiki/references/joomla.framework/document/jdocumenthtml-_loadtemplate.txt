@@ -1,0 +1,21 @@
+====== _loadTemplate ======
+{#JAPI Joomla.Framework Document JDocumentHTML::_loadTemplate #}
+
+Load a template file
+
+===== Syntax =====
+string _loadTemplate	( **$directory**, **$filename**, **$template** )
+
+| **$template** | string | The name of the template |
+| **$filename** | string | The actual filename |
+| **$directory** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

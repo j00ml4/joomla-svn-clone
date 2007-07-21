@@ -1,0 +1,18 @@
+====== absolutepage ======
+{#JAPI Joomla.Framework Database JRecordSet::absolutepage #}
+
+TODO: No working
+
+===== Syntax =====
+void absolutepage ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

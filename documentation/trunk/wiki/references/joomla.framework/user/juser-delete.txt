@@ -1,0 +1,19 @@
+====== delete ======
+{#JAPI Joomla.Framework User JUser::delete #}
+
+Method to delete the JUser object from the database
+
+===== Syntax =====
+boolean delete	( **$updateOnly** )
+
+| **$updateOnly** | boolean | Save the object only if not a new user |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

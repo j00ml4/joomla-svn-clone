@@ -1,0 +1,20 @@
+====== renderModule ======
+{#JAPI Joomla.Framework Application JModuleHelper::renderModule #}
+
+
+
+===== Syntax =====
+void renderModule	( **$module**, **$attribs** )
+
+| **$module** |  |  |
+| **$attribs** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

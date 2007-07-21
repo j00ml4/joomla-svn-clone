@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Environment JURI::__construct #}
+
+Constructor.<p>You can pass a URI string to the constructor to initialize a specific URI.</p>
+
+===== Syntax =====
+JURI __construct	( **$uri** )
+
+| **$uri** | string | The optional URI string |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

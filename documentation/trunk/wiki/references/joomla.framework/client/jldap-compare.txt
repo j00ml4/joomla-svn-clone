@@ -1,0 +1,21 @@
+====== compare ======
+{#JAPI Joomla.Framework Client JLDAP::compare #}
+
+Compare an entry and return a true or false result
+
+===== Syntax =====
+mixed compare	( **$dn**, **$attribute**, **$value** )
+
+| **$dn** | string | dn The DN which contains the attribute you want to compare |
+| **$attribute** | string | attribute The attribute whose value you want to compare |
+| **$value** | string | value The value you want to check against the LDAP attribute |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

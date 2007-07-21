@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Table JTablePlugin::__construct #}
+
+
+
+===== Syntax =====
+JTablePlugin __construct	( **&$db** )
+
+| **&$db** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

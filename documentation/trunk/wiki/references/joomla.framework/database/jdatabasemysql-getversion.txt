@@ -1,0 +1,18 @@
+====== getVersion ======
+{#JAPI Joomla.Framework Database JDatabaseMySQL::getVersion #}
+
+
+
+===== Syntax =====
+void getVersion ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

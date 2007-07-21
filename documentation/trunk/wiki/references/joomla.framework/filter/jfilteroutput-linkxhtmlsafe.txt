@@ -1,0 +1,19 @@
+====== linkXHTMLSafe ======
+{#JAPI Joomla.Framework Filter JFilterOutput::linkXHTMLSafe #}
+
+This method processes a string and replaces all instances of &amp; with &amp;amp; in links only
+
+===== Syntax =====
+string linkXHTMLSafe	( **$input** )
+
+| **$input** | string | String to process |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

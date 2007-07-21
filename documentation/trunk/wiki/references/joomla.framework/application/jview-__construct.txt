@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework Application JView::__construct #}
+
+Constructor
+
+===== Syntax =====
+JView __construct	( **$config** )
+
+| **$config** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

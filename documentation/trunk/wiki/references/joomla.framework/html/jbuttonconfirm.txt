@@ -1,0 +1,12 @@
+====== JButtonConfirm ======
+{#JAPI Joomla.Framework HTML JButtonConfirm #}
+
+Renders a standard button with a confirm dialog
+===== Methods =====
+^ Method ^ Description ^
+| [[JButtonConfirm-fetchButton|{{http://dev.joomla.org/media/images/Method.png }}]] [[JButtonConfirm-fetchButton|fetchButton]] |  |
+| [[JButtonConfirm-fetchId|{{http://dev.joomla.org/media/images/Method.png }}]] [[JButtonConfirm-fetchId|fetchId]] | Get the button CSS Id |
+
+----
+
+~~DISCUSSION~~

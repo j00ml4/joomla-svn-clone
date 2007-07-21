@@ -1,0 +1,18 @@
+====== getNameSpaces ======
+{#JAPI Joomla.Framework Registry JRegistry::getNameSpaces #}
+
+Get the list of namespaces
+
+===== Syntax =====
+array getNameSpaces ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

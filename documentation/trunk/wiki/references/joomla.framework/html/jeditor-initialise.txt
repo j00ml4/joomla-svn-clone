@@ -1,0 +1,18 @@
+====== initialise ======
+{#JAPI Joomla.Framework HTML JEditor::initialise #}
+
+Initialize the editor
+
+===== Syntax =====
+void initialise ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

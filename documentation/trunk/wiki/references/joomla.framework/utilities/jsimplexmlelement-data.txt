@@ -1,0 +1,18 @@
+====== data ======
+{#JAPI Joomla.Framework Utilities JSimpleXMLElement::data #}
+
+Get the data of the element
+
+===== Syntax =====
+string data ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

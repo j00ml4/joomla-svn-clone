@@ -1,0 +1,19 @@
+====== stream_read ======
+{#JAPI Joomla.Framework Utilities JBufferStream::stream_read #}
+
+
+
+===== Syntax =====
+void stream_read	( **$count** )
+
+| **$count** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

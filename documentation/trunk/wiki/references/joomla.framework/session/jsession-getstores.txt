@@ -1,0 +1,18 @@
+====== getStores ======
+{#JAPI Joomla.Framework Session JSession::getStores #}
+
+Get the session handlers
+
+===== Syntax =====
+array getStores ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

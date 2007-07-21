@@ -1,0 +1,19 @@
+====== __construct ======
+{#JAPI Joomla.Framework User JUser::__construct #}
+
+Constructor activating the default information of the language
+
+===== Syntax =====
+JUser __construct	( **$identifier** )
+
+| **$identifier** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

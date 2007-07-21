@@ -1,0 +1,18 @@
+====== connected ======
+{#JAPI Joomla.Framework Database JDatabase::connected #}
+
+Determines if the connection to the server is active.
+
+===== Syntax =====
+boolean connected ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

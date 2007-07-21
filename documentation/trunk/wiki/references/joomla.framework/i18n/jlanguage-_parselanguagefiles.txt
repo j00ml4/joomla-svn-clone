@@ -1,0 +1,19 @@
+====== _parseLanguageFiles ======
+{#JAPI Joomla.Framework I18N JLanguage::_parseLanguageFiles #}
+
+Searches for language directories within a certain base dir
+
+===== Syntax =====
+array _parseLanguageFiles	( **$dir** )
+
+| **$dir** | string | directory of files |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

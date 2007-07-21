@@ -1,0 +1,20 @@
+====== __construct ======
+{#JAPI Joomla.Framework Installer JInstallerComponent::__construct #}
+
+Constructor
+
+===== Syntax =====
+void __construct	( **&$parent**, **$parent** )
+
+| **$parent** | object | Parent object [JInstaller instance] |
+| **&$parent** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

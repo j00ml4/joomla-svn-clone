@@ -1,0 +1,19 @@
+====== getRowOffset ======
+{#JAPI Joomla.Framework HTML JPagination::getRowOffset #}
+
+Return the rationalised offset for a row with a given index.
+
+===== Syntax =====
+int getRowOffset	( **$index** )
+
+| **$index** | int | The row index |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

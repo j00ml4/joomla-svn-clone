@@ -1,0 +1,20 @@
+====== loadFile ======
+{#JAPI Joomla.Framework Utilities JSimpleXML::loadFile #}
+
+Interprets an XML file into an object<p>This function will convert the well-formed XML document in the file specified by filename  to an object  of class JSimpleXMLElement. If any errors occur during file access or  interpretation, the function returns FALSE.</p>
+
+===== Syntax =====
+boolean loadFile	( **$path**, **$classname** )
+
+| **$path** | string | Path to xml file containing a well-formed XML document |
+| **$classname** | string | currently ignored |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

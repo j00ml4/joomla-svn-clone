@@ -1,0 +1,19 @@
+====== decrypt ======
+{#JAPI Joomla.Framework Utilities JSimpleCrypt::decrypt #}
+
+
+
+===== Syntax =====
+void decrypt	( **$s** )
+
+| **$s** |  |  |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
