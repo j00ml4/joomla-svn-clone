@@ -1,11 +1,12 @@
 ====== JSearchHelper ======
 {#JAPI Joomla.Framework Application JSearchHelper #}
 
-Search helper class
+JSearchHelper contains utility functions that can be used to perform various actions related to searches.
+
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JSearchHelper-getPluginParams|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-getPluginParams|getPluginParams]] |  |
-| [[JSearchHelper-inArea|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-inArea|inArea]] |  |
+| [[JSearchHelper-getPluginParams|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-getPluginParams|getPluginParams]] | Retrieves a [[references:joomla.framework:parameter:jparameter|JParameter]] object containing the parameters for the plugin. |
+| [[JSearchHelper-inArea|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-inArea|inArea]] | Determines whether or not the the specified areas intersect with the areas that the search plugin handles. |
 
 ----
 

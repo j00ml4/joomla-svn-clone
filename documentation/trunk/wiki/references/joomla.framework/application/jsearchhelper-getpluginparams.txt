@@ -1,19 +1,21 @@
 ====== getPluginParams ======
 {#JAPI Joomla.Framework Application JSearchHelper::getPluginParams #}
 
+Retrieves a [[references:joomla.framework:parameter:jparameter|JParameter]] object containing the parameters for the plugin.
 
+If the specified plugin is found, then its parameters are used to create the JParameter object.  If the plugin is not found, then a JParameter object is created without any data.
 
 ===== Syntax =====
-<a href="../../Joomla-Framework/Parameter/JParameter.html">JParameter</a> &getPluginParams	( **$folder**, **$name** )
+[[references:joomla.framework:parameter:jparameter|JParameter]] &getPluginParams ( **$folder**, **$name** )
 
-| **$folder** |  |  |
-| **$name** |  |  |
+| **$folder** | string | is a string containing the name of the folder in which to search for the plugin. |
+| **$name** | string | is a string containing the name of the plugin for which to load the parameters. |
 
 ===== Examples =====
 <code php|Example>
-
+$params =& JSearchHelper::getPluginParams( 'search', 'content' );
 </code>
-
+will retrieve a reference to the plugin parameter object.
 
 ----
 
