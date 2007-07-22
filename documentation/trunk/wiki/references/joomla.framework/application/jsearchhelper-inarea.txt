@@ -1,19 +1,30 @@
 ====== inArea ======
 {#JAPI Joomla.Framework Application JSearchHelper::inArea #}
 
-
+Determines whether or not the the specified areas intersect with the areas that the search plugin handles.
 
 ===== Syntax =====
 boolean inArea	( **$formAreas**, **$pluginAreas** )
 
-| **$formAreas** | array | A flat array of search areas |
-| **$pluginAreas** | array | A named array of search areas for the plugin |
+| **$formAreas** | array | is an array of strings specifying search areas from the form. |
+| **$pluginAreas** | array | is an associative array of search areas that the plugin handles.  The array keys correspond to the areas from the form. |
 
 ===== Examples =====
 <code php|Example>
+$areas = array( 'weblinks' => 'Weblinks' );
+$formAreas = array( 'content', 'contacts', 'weblinks' );
 
+if (JSearchHelper::inAreas( $formAreas, $areas )) {
+	echo 'Search';
+} else {
+	echo 'Don't Search';
+}
 </code>
-
+will produce:
+<code php|Result>
+Search
+</code>
+Normally, the $formAreas array would come from the form.
 
 ----
 
