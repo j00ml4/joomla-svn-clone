@@ -1,6 +1,6 @@
 <?php
 /**
- * Test class for JRouter.
+ * Test class for JFTP
  * Handcrafted by friesengeist ;)
  *
  * @version	$Id$
@@ -10,8 +10,8 @@
 
 // Call TestOfJFTP::main() if this source file is executed directly.
 if (!defined('JUNITTEST_MAIN_METHOD')) {
-    define('JUNITTEST_MAIN_METHOD', 'TestOfJFTP::main');
-    $JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+	define('JUNITTEST_MAIN_METHOD', 'TestOfJFTP::main');
+	$JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
@@ -197,11 +197,11 @@ var $conf = null;
 		$ftp->login($this->conf['user'], $this->conf['pass']);
 		$return = $ftp->syst();
 
-		if (isset($this->conf['syst'])) {
-			$this->assertIdentical($return, $this->conf['syst']);
+		if (isset($this->conf['ftp_sys'])) {
+			$this->assertIdentical($return, $this->conf['ftp_sys']);
 		} else {
 			$this->paintMessage("SYST command returned [$return], please evaluate manually if this"
-				.' is correct! You may also set a value for \'ftp_syst\' in your configuration.'
+				.' is correct! You may also set a value for \'ftp_sys\' in your configuration.'
 			);
 		}
 		$this->assertIdenticalTrue($return=='UNIX' || $return=='WIN' || $return=='MAC');

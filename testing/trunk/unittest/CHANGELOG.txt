@@ -22,11 +22,14 @@ Tests failing / issues:
  	! temporary fix by adding it to the TestCase
 
  X	JFTP: testChdirSuccess() - should use alternative set of credentials
- !	JFTP: testSyst() -- doesn't catch ?ftp_sys=WIN in JUT_JFTP_CREDENTIALS
  X	JFTP: testCreate(): [Integer: 17] fails with [Integer: 16]
  	! WinXP Home SP2, FileZilla 0.9.21
 
 -------------------------------------------------
+2007-07-23 Enno Klasing
+ #  JFTP: testSyst() now correctly catches the configuration setting
+ ^  Improved documentation for TestOfJFTP
+
 2007-07-22 CirTap
  -	old skeletons in /application/, JRouteTest.php, JRouterTest.php
  +	TestOfJFrameworkConfig, enabled: JUT_JOOMLA_JFRAMEWORKCONFIG = true
