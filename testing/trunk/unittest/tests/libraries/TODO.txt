@@ -1,6 +1,6 @@
 
 loader.php
-
+==========
 1	Mock jimport() to "talk" with a TestCase' Helper class to learn 
 	what classes (files) should be taken from the framework our our 
 	yet-to-come "Joomla! Library Of Mocks".

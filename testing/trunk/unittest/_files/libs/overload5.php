@@ -20,7 +20,7 @@
  * - PHP manual:     http://www.php.net/manual/ref.apd.php
  *
  * @version 	$Id$
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  * @copyright 	Copyright (C) 2007 Rene Serradeil. All rights reserved.
  * @license		GNU/GPL

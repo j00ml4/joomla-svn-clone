@@ -12,8 +12,47 @@ Legend:
 - -> Removed
 > -> Moved
 ! -> Note
-x -> tests fail
+X -> tests fail
 -------------------------------------------------
+TestCase coverage:  of  175
+
+Tests failing / issues:
+ X	JFactory: testgetmailer_sendmail()
+ X	JFactory: JFilterInput not preloaded by factory although used
+ 	! temporary fix by adding it to the TestCase
+
+ X	JFTP: testChdirSuccess() - should use alternative set of credentials
+ !	JFTP: testSyst() -- doesn't catch ?ftp_sys=WIN in JUT_JFTP_CREDENTIALS
+ X	JFTP: testCreate(): [Integer: 17] fails with [Integer: 16]
+ 	! WinXP Home SP2, FileZilla 0.9.21
+
+-------------------------------------------------
+2007-07-22 CirTap
+ -	old skeletons in /application/, JRouteTest.php, JRouterTest.php
+ +	TestOfJFrameworkConfig, enabled: JUT_JOOMLA_JFRAMEWORKCONFIG = true
+ +	uloader.php; EXPERIMENTAL
+ +	prepend.php: added Mockup for jimport() using include_path
+ ^	JFTPTest / JFTP_helper: sendMessage() to paintMessage() since
+ 	formed is deprecated;
+ >	JFTPTest local helper methods to JFTP_helper
+
+2007-07-21 CirTap
+
+ !	TestConfiguration directives changed
+ 		settings that belong to a class-test have changed from
+ 		JUT_<filename>_FOOBAR to JUT_<classname>_FOOBAR
+ ^	JUT_FACTORY_*       >> JUT_JFACTORY_*
+ ^	JUT_FTP_CREDENTIALS >> JUT_JFTP_CREDENTIALS
+ 	JUT_FTP_NATIVE      >> JUT_JFTP_NATIVE
+ ^	JUT_DATABASE_MYSQL* >> JUT_JDATABASE_MYSQL*
+ ^	JUT_FILTER_JINPUTFILTER  >> JUT_FILTER_JFILTERINPUT
+	JUT_FILTER_JOUTPUTFILTER >> JUT_FILTER_JFILTEROUTPUT
+ ^	JUT_LANGUAGE_*      >> JUT_JLANGUAGE_*
+ !	updated JFTP_readme.txt
+ ^	JFTP_helper.php, JFactory_helper.php
+ ^	JoomlaHtml.php XHTML compliant, minor improvements
+ #	JoomlaHtml::setMissingTestCase()
+ #	TestOfJVersion before/setUp/tearDown
 
 2007-07-21 CirTap
  +	template for text list mode

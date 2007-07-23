@@ -2,7 +2,7 @@
 /**
  * Description
  *
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	Unittest
  * @author 		Rene Serradeil <serradeil@webmechanic.biz>
  * @version 	$Id$

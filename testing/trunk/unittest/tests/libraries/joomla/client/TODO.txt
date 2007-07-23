@@ -1,15 +1,39 @@
 
 ftp.php
+=======
 1	testSetOptions()
 	Should we also test non-existing values, e.g. a string for the timeout?
 
 2	this is a pretty "complex" test and should best become a TestSuite by
-	its own (client/JFtp/AllTests.php) divided into separate testcases
+	its own (client/JFTP_AllTests.php) divided into separate testcases
 	for each "feature", i.e.
 	- connection
 	- filesystem I/O
 	- permissions
 	- upload
 	- download
+	- commands
 	- ...
 	Ideas?
+	PS: provided AllTests work :)
+
+3	testSetOptions()
+	Should we also test non-existing values, e.g. a string for the timeout?
+
+4	testChmod()
+	can we maybe even supress these errors in JFTP? Would probably better
+	if the user does not see such a notice/warning.
+	Return code from chmod should be enough...
+
+5	use UnitTestHelper::log() for "informational" test results rather than
+	sendMessage() to not populte TestCase output.
+	Call ONE sendMessage() via JFTPTestHelper::tearDownTestCase() to tell
+	the user there are some notes waiting in the log ;)
+
+6	testSyst()
+	Response from FileZilla 0.9.21: 215 UNIX emulated by FileZilla
+	will other servers also "emulate"? if so accept emulation as passed
+	OR accept response code 215/21x
+
+
+

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Joomla! v1.5 UnitTest Platform.
  *
@@ -33,12 +32,12 @@ class UnitTestController {
 
 		/* create Skeleton(s), CLI + PHP5 only! */
 		if ( JUNITTEST_CLI ) {
-			die(PHP_EOL.'Sorry! Skeleton builder is currently disabled.'.PHP_EOL);
+			die(jutdump('Sorry! Skeleton builder is currently disabled.'));
 //			$files = UnitTestController::makeUnitTestFiles($source);
 //			return UnitTestController::main( $path, $label );
 		}
 
-		$suite = new TestSuite(!empty($label) ? $label : $fileinfo->package .''.$fileinfo->basename);
+		$suite = new TestSuite(!empty($label) ? $label : $fileinfo->package .': '.$fileinfo->basename);
 
 		$suite->addTestFile(JUNITTEST_ROOT .'/'. JUNITTEST_BASE .'/'. $fileinfo->path);
 
@@ -47,7 +46,7 @@ require_once( SIMPLE_TEST.'collector.php' );
 $collector = &new SimplePatternCollector('/Test\.php$/');
 $suite->collect($path, &$collector)
 */
-		$suite->run( UnitTestHelper::getReporter() );
+		return $suite->run( UnitTestHelper::getReporter() );
 
 	}
 
@@ -149,12 +148,12 @@ if (1) return array ();
 
 		foreach( $files as $path ) {
 			$info = UnitTestHelper::getInfoObject($path);
-			if ( $info->enabled ) {
-				$enabled[$path] = $info;
-			} else {
-				$disabled[$path] = $info;
-			}
 			$tests[$path] = $info;
+			if ( $info->enabled ) {
+				$enabled[$path]  = &$tests[$path];
+			} else {
+				$disabled[$path] = &$tests[$path];
+			}
 		}
 		ksort($tests);
 

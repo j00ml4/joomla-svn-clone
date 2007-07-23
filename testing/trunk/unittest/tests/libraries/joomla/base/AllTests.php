@@ -3,7 +3,7 @@
  * Joomla! v1.5 UnitTest Platform.
  *
  * @version    $Id$
- * @package    Joomla
+ * @package    Joomla.Framework
  * @subpackage UnitTest
  */
 

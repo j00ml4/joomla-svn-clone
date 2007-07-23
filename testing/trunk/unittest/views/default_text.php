@@ -19,18 +19,12 @@ if (JUNITTEST_LISTMODE_HEADER) {
 
 /* Loop through the tests and print a line for each one */
 $i = 0;
-$skip = array();
 foreach( $tests as $unittest )
 {
-	if ( !$unittest->enabled ) {
-		$skip[$unittest->testclass] = $unittest->config;
-		continue;
-	}
-
 	$i++;
 
 	echo PHP_EOL, ' ', str_pad($i, 2, ' ', STR_PAD_LEFT), ') '
-		, $unittest->dirname;
+		, $unittest->path;
 
 	$docs = array();
 	foreach ( $unittest->docs as $doc )
@@ -48,9 +42,9 @@ if (JUNITTEST_LISTMODE_FOOTER) {
 }
 
 if (JUNITTEST_LISTMODE_STATS) {
-	$cfgs = get_defined_constants();
-	$tpos = count(preg_grep("/^JUT\_*/", array_keys($cfgs)));
-	$s    = count($tests);
+	$tpos = count(preg_grep('/^JUT\_*/', array_keys(get_defined_constants())));
+	$skip = &UnitTestHelper::getProperty('Controller', 'Disabled');
+	$s    = count( $skip );
 	if ( $i != $s ) {
 		echo PHP_EOL, str_pad($i,    3, ' ', STR_PAD_LEFT), ' of ', $tpos, ' possible tests available.',
 			 PHP_EOL, str_pad($s-$i, 3, ' ', STR_PAD_LEFT), ' existing tests are disabled via configuration: ',

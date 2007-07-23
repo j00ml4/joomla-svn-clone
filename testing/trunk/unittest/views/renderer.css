@@ -1,7 +1,14 @@
 /**
- * CSS f�r "setien.shtml" und anderen "index.html" in den
- * testverzeichnissen (LOV Tests, ACL Tests ...)
+ * WebMechanicRenderer stylesheet
+ *
+ * @package 	ScriptBase
+ * @subpackage 	UnitTests
+ * @author 		Rene Serradeil <serradeil@webmechanic.biz>
+ * @copyright 	Copyright (c)2006-2007, media++|webmechanic.biz
+ * @version 	0.1.0 $Id$
+ * @filesource
  */
+
 * html {
 	font-size: medium;
 }
@@ -19,7 +26,7 @@ body {
 }
 
 /* area */
-h1.Header {
+#Header {
 	padding: 0em;
 	clear: both;
 }
@@ -42,6 +49,12 @@ h1, p, div, li, a {
 
 h1 {
 	font-size: 1.45em;
+}
+#Header h1 {
+	cursor:pointer;
+}
+#Header h1 span:hover {
+	text-decoration: underline;
 }
 
 h2 {
@@ -112,55 +125,6 @@ div.DbgPrint {
 	line-height: normal;
 }
 
-.contentGroup {
-	float: left;
-	margin: 0.5em;
-	min-width: 7em;
-	width: 27%;
-	background-color: #606060;
-	padding: 1ex 1em 0em 0em;
-}
-
-/* Contextual selectors */
-.contentGroup h2 {
-	position: absolute;
-	margin-top: -1ex;
-	margin-left: -1ex;
-	padding: 3px 0.5ex;
-	background-color: #505050;
-	font-size: 1em;
-	font-weight: bold;
-	border: 1px outset;
-	border-right: none;
-	border-bottom: none;
-}
-
-.contentGroup ul { /* das schiebt die abs. pos H2 nach unten */
-	padding-bottom: 1em;
-}
-
-.contentGroup h2+p,.contentGroup h2+ul,.contentGroup h2+h3 {
-	margin-top: 1.1em;
-}
-
-.contentGroup h3 {
-	font-size: 0.9em;
-	font-weight: bold;
-	margin: 0 0 0 0;
-	padding: 0 0 0 1ex;
-}
-
-/* und noch ein paar ie haxx */
-* html #Content ul {
-	margin-top: 1em;
-	margin-left: 2em;
-}
-
-* html #Content .contentGroup p {
-	margin-top: -2ex;
-	margin-left: -3ex;
-}
-
 table.testcase {
 	width: 100%;
 	margin-top: 1ex;
@@ -193,12 +157,19 @@ table.testcase td {
 	width: 80%;
 }
 
+tr.message th {
+	background: #CC0000;
+}
+tr.message td {
+	padding: 0.5ex;
+}
+
 tr.phperror th {
 	background: #CC0000;
-	text-align: right;
 }
 tr.phperror td {
-	text-align: right;
+	padding: 0.5ex 1ex;
+	border-left: 1ex solid #ED2E38;
 }
 
 tbody.methods-summary td tt {
@@ -239,6 +210,9 @@ span.pass, b.pass {
 	color: white;
 	padding-left: 0.5ex;
 	padding-right: 0.5ex;
+}
+tr.message span.pass {
+	background: #808080;
 }
 
 tr.skip th {

@@ -37,24 +37,30 @@ h1.header span {
 #userconfig strong { color: #578AD6; }
 #userconfig span   { color: #EBAD14; }
 
-a { color: #578AD6; }
+a { color: inherit; }
+a:link { color: #578AD6; }
 a:visited { color: #61BF1A; }
 
+.testsuite {
+    font: bold 1.3em arial,helvetica,sans-serif;
+    padding: 0.2ex 1ex;
+    margin-top: 1ex;
+    margin-bottom: 0;
+    border-bottom: 3px solid #aaa;
+    background: #eee;
+}
+.testsuite small {
+	font-size: 0.6em;
+	padding-left:1em;
+}
 .testcase {
-    border-bottom: 1px solid #ccc;
-    padding: 0.2em 2em;
+	display: inline;
+    padding: 0 0 0 1em;
 }
 .docs {
 	font: 0.85em 'lucida console','courier new',courier,monospace;
 }
 
-.testcasefolder {
-    border-bottom: 3px solid #aaa;
-    background: #eee;
-    font: 1.3em arial,helvetica,sans-serif;
-    padding: 0.2em;
-    font-weight: bold;
-}
 
 .footer_fail, .footer_pass {
 	color: white;
@@ -83,8 +89,8 @@ a:visited { color: #61BF1A; }
 .exception { background: #EBAD14; } /* Joomla-orange */
 .message   { background: #578AD6; } /* Joomla-blue   */
 
-.tpass      { color: #61BF1A; background: inherit; } /* Joomla-green   */
-.tfail      { color: #ED2E38; background: inherit; } /* Joomla-red   */
-.texception { color: #EBAD14; background: inherit; } /* Joomla-orange */
-.tmessage   { color: #578AD6; background: inherit; } /* Joomla-blue   */
+.tpass      { color: #61BF1A !important; background: inherit; } /* Joomla-green   */
+.tfail      { color: #ED2E38 !important; background: inherit; } /* Joomla-red   */
+.texception { color: #EBAD14 !important; background: inherit; } /* Joomla-orange */
+.tmessage   { color: #578AD6 !important; background: inherit; } /* Joomla-blue   */
 

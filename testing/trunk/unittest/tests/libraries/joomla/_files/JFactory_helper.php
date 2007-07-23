@@ -2,13 +2,21 @@
 /**
  * Helper class for /joomla/factory.php
  *
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  * @version    $Id$
  */
 
+/* class to test */
+require_once('libraries/joomla/factory.php');
+require_once('libraries/joomla/registry/registry.php');
+
 class JFactoryTestHelper
 {
+
+	function tearDownTestCase() {
+		jutdump(JFactory::getConfig());
+	}
 
 	/**
 	 * Helper used with TestOfJFactory::testGetMailer_smpt() to
@@ -21,8 +29,8 @@ class JFactoryTestHelper
 
     	// get credentials form TestConfiguration.php
 		$cfg = ($auth == false)
-			 ? UnitTestHelper::makeCfg(JUT_FACTORY_SMTP_NOAUTH, false, true)
-			 : UnitTestHelper::makeCfg(JUT_FACTORY_SMTP_AUTH,   false, true);
+			 ? UnitTestHelper::makeCfg(JUT_JFACTORY_SMTP_NOAUTH, false, true)
+			 : UnitTestHelper::makeCfg(JUT_JFACTORY_SMTP_AUTH,   false, true);
 
     	$config->setValue( 'config.smtpuser', $cfg['user'] );
     	$config->setValue( 'config.smtppass', $cfg['pass'] );
