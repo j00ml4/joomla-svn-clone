@@ -56,7 +56,7 @@ class JFTPTestHelper
 		{
 			$reporter->skip();
 			$reporter->ignore( 'JFTPTest' );
-			$reporter->paintMessage('Missing credentials. See JFTP_reame.txt for instructions.');
+			$reporter->paintMessage('Missing credentials. See JFTP_readme.txt for instructions.');
 		}
 		else
 		{

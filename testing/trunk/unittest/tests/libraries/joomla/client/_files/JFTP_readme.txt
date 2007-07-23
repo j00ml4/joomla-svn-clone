@@ -19,8 +19,14 @@ You need to set correct FTP credentials in your local TestConfiguration.php
 using the JUT_JFTP_CREDENTIALS directive:
 	ftp://username:password@servername/
 
-If your FTP server runs on a windows box, add ?ftp_sys=WIN
-	ftp://username:password@servername/?ftp_sys=WIN
+Make sure to run the test in an empty subdirectory of your FTP server:
+	ftp://username:password@servername/directory
+
+If you know what your FTP server should report for the SYST command, add ?ftp_sys=[WIN|MAC|UNIX]
+	ftp://username:password@servername/directory?ftp_sys=WIN
+
+If your server does not listen on port 21, specify the port as follows:
+	ftp://username:password@servername:port/directory
 
 You may also override the JUT_JFTP_NATIVE option to either
 	1 = native ftp enabled

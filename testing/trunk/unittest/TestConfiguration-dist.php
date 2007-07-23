@@ -194,8 +194,8 @@ define('JUT_CACHE_STORAGE_JCACHESTORAGEMEMCACHE', @extension_loaded('memcache'))
  */
 define('JUT_CLIENT_JFTP', false);  # uppercase class suffix
 define('JUT_JFTP_NATIVE', (function_exists('ftp_connect'))? 1 : 0);
-/* if your ftp server runs on a windows box, use ?ftp_sys=WIN */
-define('JUT_JFTP_CREDENTIALS', 'ftp://username:password@localhost/?ftp_sys=');
+/* if your ftp server runs on a windows box, use ?ftp_sys=WIN. Please test in an empty directory */
+define('JUT_JFTP_CREDENTIALS', 'ftp://username:password@localhost/directory?ftp_sys=UNIX');
 
 define('JUT_CLIENT_JLDAP', false);  # uppercase class suffix
 define('JUT_CLIENT_JCLIENTHELPER', false);
