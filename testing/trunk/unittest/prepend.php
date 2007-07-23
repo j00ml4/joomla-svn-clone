@@ -4,7 +4,7 @@
  * Setup file for UnitTestController and TestCases.
  *
  * @version	$Id$
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  * @copyright 	Copyright (C) 2007 Rene Serradeil. All rights reserved.
  * @license		GNU/GPL
@@ -43,16 +43,11 @@ function jutdump($data, $rem='')
 /* if included by a testcase */
 unset($JUNITTEST_ROOT);
 
-// 4.3.10 and PHP 5.0.2
+// 4.3.10- and PHP 5.0.2-
 !defined('PHP_EOL') && define('PHP_EOL', "\n");
 
 define('JUNITTEST_PREFIX', 'JUT_');
 define('JUNITTEST_CLI', ( PHP_SAPI == 'cli') ); // SimpleReporter::inCli()
-
-/* Simpletest location is NOT an option. see README.txt */
-define('SIMPLE_TEST', dirname(__FILE__) . '/simpletest/');
-require_once( SIMPLE_TEST.'unit_tester.php' );
-require_once( SIMPLE_TEST.'reporter.php' );
 
 /* Read in user-defined test configuration if available;
  * otherwise, read default test configuration.
@@ -68,18 +63,12 @@ if (is_readable(dirname(__FILE__) . '/TestConfiguration.php') ) {
 /* TestCases are main files */
 define( '_JEXEC', 1 );
 
-/* assume parent folder to be the base path */
+/* assume parent folder to be the base path. this only works
+ * if the unittest folder is located in the Joomla! directory.
+ */
 !defined('JPATH_BASE') && define('JPATH_BASE', dirname( dirname(__FILE__) ));
 
-/* check /libraries/joomla folder in JPATH_BASE */
-if ( !is_dir(JPATH_BASE . '/libraries/joomla') ) {
-   $EOL = (JUNITTEST_CLI) ? PHP_EOL : '<br />';
-   echo $EOL, ' JPATH_BASE does not point to your Joomla! installation:',
-	    $EOL, ' - ', JPATH_BASE,
-	    $EOL, ' Please modify your copy of "TestConfiguration.php"',
-	    $EOL;
-   exit(0);
-}
+define('JUNITTEST_HOME_URL', ((int)PHP_VERSION == 4) ? JUNITTEST_HOME_PHP4 : JUNITTEST_HOME_PHP5);
 
 /* make sure our tests only run into ONE JOOMLA! FRAMEWORK */
 set_include_path( '.' .
@@ -94,6 +83,21 @@ if ((int)PHP_VERSION >= 5) {
 }
 
 require_once( JUNITTEST_LIBS . '/helper.php' );
+
+/* check /libraries/joomla folder in JPATH_BASE */
+if ( !is_dir(JPATH_BASE . '/libraries/joomla') ) {
+   $EOL = (JUNITTEST_CLI) ? PHP_EOL : '<br />';
+   echo $EOL, ' JPATH_BASE does not point to a valid Joomla! installation:',
+	    $EOL, ' - ', JPATH_BASE,
+	    $EOL, ' Please modify your copy of "TestConfiguration.php"',
+	    $EOL;
+   exit(0);
+}
+
+
+/* Simpletest location is NOT an option. see README.txt */
+define('SIMPLE_TEST', dirname(__FILE__) . '/simpletest/');
+require_once( SIMPLE_TEST.'unit_tester.php' );
 require_once( JUNITTEST_LIBS . '/suite.php' );
 
 /**
@@ -104,29 +108,30 @@ require_once( JUNITTEST_LIBS . '/suite.php' );
  * - renderer: reporter class
  */
 
-$input =& UnitTestHelper::getProperty('Controller', 'Input');
-$input = new stdClass;
+$input         = &UnitTestHelper::getProperty('Controller', 'Input');
+$input         = new stdClass;
+$input->path   = '';
+$input->output = '';
+$input->list   = false;
 
 if (JUNITTEST_CLI == false )
 {
-	$input->path   = @$_REQUEST[ 'path' ];
+	$input->path   = @$_REQUEST['path'];
 	$input->output = @$_REQUEST['output'];
 	if (get_magic_quotes_gpc()) {
 		$input->path = stripslashes($input->path);
 	}
+	unset($_REQUEST['path'], $_GET['path']);
+	unset($_REQUEST['output'], $_GET['output']);
 }
 else if ( count($_SERVER['argv']) > 1 )
 {
 	// kick scriptname
 	array_shift($_SERVER['argv']);
 
-	$input->list = false;
 	while ($token = array_shift($_SERVER['argv'])) {
 		switch ($token) {
 		case '-path':
-			$input->path   = trim(array_shift($_SERVER['argv']));
-			break;
-		case '-run':
 			$input->path   = trim(array_shift($_SERVER['argv']));
 			break;
 		case '-output':
@@ -137,27 +142,19 @@ else if ( count($_SERVER['argv']) > 1 )
 			break;
 		}
 	}
-	unset($token);
+	unset($token, $_SERVER['argv'], $_SERVER['args']);
 }
 
+if (preg_match('#[^a-z0-9\-_./]#i', $input->path)) {
+    trigger_error('Security check: Illegal character in filepath', E_USER_ERROR);
+}
 $input->reporter = UnitTestHelper::getReporterInfo();
 
 if ( empty($input->output) ) {
-	$input->output = $input->reporter['format'];
+	$input->output = $input->reporter['output'];
 }
 
-/* load a TestCase' helper file */
-if ( basename($input->path, '.php') !== 'AllTests') {
-	$input->info = UnitTestHelper::getInfoObject($input->path);
-	if ($input->info->enabled && $input->info->helper['location']) {
-		include_once($input->info->helper['location']);
-		// call testcase init if available
-		if (is_callable($input->info->helper['classname'], 'setUpTestCase')) {
-			call_user_func(array($input->info->helper['classname'], 'setUpTestCase'));
-		}
-	}
-}
-die(jutdump($input));
+$input->info = UnitTestHelper::getInfoObject($input->path);
 
 /**
  * from here on we use '/' rather than DIRECTORY_SEPARATOR
@@ -171,8 +168,6 @@ if ( empty($input->path) ) {
 	$input->info = UnitTestHelper::getInfoObject($input->path);
 }
 
-// clean up
-unset($input);
 
 /**
  * Set PHP error reporting level and output directives
@@ -192,10 +187,30 @@ if (is_writable( dirname(JUNITTEST_PHP_ERRORLOG) )) {
 /* and of course ... */
 ini_set('register_globals', 'Off');
 
-# {{ TODO: get rid of these!
-#    SEE: JUNITTEST_LIBS . '/overload5.php'
-require_once( 'libraries/loader.php' );
-require_once( 'includes/defines.php' );
-# }}
+#
+#  EXPERIMENTAL!
+#
+/* Mockup for jimport() - not used for Framework packages itself ;) */
+if ($input->info->is_test !== JUNITTEST_IS_FRAMEWORK && !function_exists('jimport')) {
+	require_once( JUNITTEST_LIBS . '/uloader.php' );
+}
 
+if (!function_exists('jimport')) {
+	require_once( 'libraries/loader.php' );
+}
+
+require_once( 'includes/defines.php' );
 require_once( 'libraries/joomla/base/object.php' ); // JObject
+
+/* load a TestCase' helper file */
+if ( basename($input->path, '.php') !== 'AllTests') {
+	if ($input->info->enabled && !empty($input->info->helper['location'])) {
+		include_once($input->info->helper['location']);
+		if (is_callable(array($input->info->helper['classname'], 'setUpTestCase'))) {
+			call_user_func(array($input->info->helper['classname'], 'setUpTestCase'));
+		}
+	}
+}
+
+/* clean up */
+unset($input);

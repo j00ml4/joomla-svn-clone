@@ -259,11 +259,12 @@ DON'T try to write a Testcase that covers a gazillion different user settings pe
 
 Logging and messages
 --------------------
-Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, var_dump or anything else. 
+Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, var_dump, $this->paintMessage() or anything else. 
 A Test either works or fails. Period. The internals and statistics are of no particular interest for the user. If a Test fails, it fails, thus use the $message argument of the assert-function to provide a brief reason why.
 The output of a Testcase is "captured" by the UnitTest Controller and its renderes, creating different output formats such as HTML, XML, or JSON data. If your code starts to yell inbetween this using echo or print(), you'd screw up this output and prevent subsequent analyzing or postprocessing of the results (think of cron jobs!)
 
-If you can't resist to create elaburous status messages to tell the user about all the vivid things your Testcase performed, write them *INTO A DEDICATED LOG FILE* using the plain file I/O functions of PHP (fopen, fputs, etc.) DON'T use any J! Framework classes to perform file loggin: these classes might be broken or disabled at the time the user runs your test. 
+If you can't resist to create elaborous status messages to tell the user about all the vivid things your Testcase performed, write them *INTO A DEDICATED LOG FILE* using the plain file I/O functions of PHP (fopen, fputs, etc.) or the UnitTestHelper::log() function. 
+DON'T use any J! Framework classes to perform file loggin: these classes might be broken or disabled at the time the user runs your test. 
 Just K.I.S.S!
 
 A vanilla logger is available via:
@@ -362,7 +363,7 @@ The following things are missing or do not [yet] work as intended:
 
  * scoring is not yet implemented
 
- * "list mode" might be broken for some renderers; 
+ * "list mode" might be broken/imcomplete for some renderers; 
 	you can however run each testcase directly via CLI or browser, 
 	i.e. http://localhost/unittest/tests/libraries/JLoaderTest.php
 
@@ -375,6 +376,14 @@ The following things are missing or do not [yet] work as intended:
  * "PHP 5.2 often breaks SimpleTest"
 	http://sourceforge.net/forum/forum.php?forum_id=646018
 	(has been reported to be 'Fixed in CVS')
+
+ * only 1 AllTests.php per package allowed, this prevents creating Suites 
+	for complex/large/long tests that'd better be done in individual parts
+	"per feature", i.e. for JFTP, JLDAP, JDatabase (per mysql, msqli). 
+	Need support for "JWhatever_AllTests.php"
+
+ * YouTestCaseHelper::tearDownTestCase() not called
+	might req. register_shutdown() or JTestSuite to call it after run()
 
 
 Updates
@@ -409,6 +418,6 @@ Test-driven Development
 
 Status of this document
 -----------------------
-Last review: 2007-07-20
+Last review: 2007-07-23
 Status     : WIP
 

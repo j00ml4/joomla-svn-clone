@@ -2,7 +2,7 @@
 /**
  * Test class for JFactory.
  *
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  * @version 	$Id$
  */
@@ -14,7 +14,11 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+/* class to test */
 require_once('libraries/joomla/factory.php');
+
+# TODO: should be handled by factory.php
+require_once('libraries/joomla/filter/input.php');
 
 class TestOfJFactory extends UnitTestCase
 {
@@ -28,7 +32,7 @@ var $have_db = false;
 	 */
 	function main() {
 		$self = new TestOfJFactory;
-		$self->run( UnitTestHelper::getReporter() );
+		return $self->run( UnitTestHelper::getReporter() );
 	}
 
 	function tearDown()
@@ -69,6 +73,10 @@ var $have_db = false;
         if ( headers_sent() ) {
     		return $this->_reporter->setMissingTestCase('Test unreliable: headers_sent()');
         }
+        if ( !class_exists('JFilterInput') ) {
+    		return $this->_reporter->setMissingTestCase('Unhandled class dependency: JFilterInput');
+        }
+
         $obj =& JFactory::getSession();
 	    $this->assertIsA( $obj, 'JSession');
     	$this->assertIsA( $obj, 'JObject');

@@ -6,11 +6,11 @@
  * @subpackage 	UnitTests
  * @author 		Rene Serradeil <serradeil@webmechanic.biz>
  * @copyright 	Copyright (c)2006-2007, media++|webmechanic.biz
- * @version 	$Rev$ $Date$
+ * @version 	0.5.0 $Id$
  * @filesource
  */
 
-// $Id$
+require_once( SIMPLE_TEST.'reporter.php' );
 
 /**
  * Ein gegenüber HtmlReporter() übersichtlicherer Renderer.
@@ -34,8 +34,8 @@ var $_methods = array();
 
 /** @see setMissingTestCase() */
 var $_missing_tests = array();
-
 var $_skipped = array();
+var $_env = '';
 
 	function WebMechanicRenderer($character_set = 'UTF-8') {
 		$this->__construct($character_set);
@@ -63,16 +63,21 @@ var $_skipped = array();
 
     function paintHeader($test_name) {
     	$this->test_name = $test_name;
+
     	$verbose = (JUNITTEST_REPORTER_RENDER_PASSED)
-    			 ? '<small title="shows passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
-    			 : '<small title="hides passed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
+    			 ? '<small title="Include messages of passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
+    			 : '<small title="Only show messages of failed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
+		$home_url = JUNITTEST_HOME_URL;
 		$title = <<<HTML
-	<h1 style="cursor:pointer" onclick="location.href='/unittest/'">
-	<span>{$test_name}</span> {$verbose}
+	<h1 onclick="location.href='{$home_url}'">
+	<span>{$test_name}</span> <span style="cursor:help">{$verbose}</span>
 	</h1>
 HTML;
+    	if ( headers_sent() ) {
+    		echo $title;
+    		return;
+    	}
 
-		if (! headers_sent() ) {
     	echo <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -84,18 +89,15 @@ HTML;
 <link rel="StyleSheet" href="/unittest/views/renderer.css" type="text/css" />
 </head>
 <body>
-<div class="Header">
+<div id="Header">
 	{$title}
 	<p><small>{$this->_env}</small></p>
 </div>
 <div id="Content" class="MainContent">
 
 HTML;
-		# echo $this->testgroup->generateMenu();
+//		 echo $this->testgroup->generateMenu();
 
-		} else {
-			echo $title;
-		}
     }
 
     function paintFooter($test_name) {
@@ -150,6 +152,11 @@ HTML;
 	</thead>
 HTML;
 
+		// trigger possible cached PaintMessages
+		if ($cp == 1) {
+			$this->PaintMessage(null);
+		}
+
 	}
 
 	/**
@@ -176,12 +183,12 @@ HTML;
 
 		echo PHP_EOL, '<tbody class="methods-summary"><tr><td colspan="2">';
 		if (count($mpass)) {
-			echo PHP_EOL,'	<span class="pass">&nbsp;</span><strong>passed: </strong> <tt>'
+			echo PHP_EOL,'	<span class="pass">&nbsp;</span> <strong>passed: </strong> <tt>'
 				, $passed ,' &nbsp;</tt>';
 		}
 		if (count($mfail)) {
 			if (count($mpass)) echo '<br />';
-			echo PHP_EOL, '<span class="fail">&nbsp;</span><strong>failed: </strong> <tt>'
+			echo PHP_EOL, '<span class="fail">&nbsp;</span> <strong>failed: </strong> <tt>'
 				, $failed ,'&nbsp;</tt>';
 		}
 		echo PHP_EOL, '</td></tr></tbody>
@@ -279,7 +286,7 @@ HTML;
 		$this->_missing_tests[] = $this->method_name;
 		$this->_methods[$this->method_name]['miss'] = true;
 		if ($reason) {
-			$this->_methods[$this->method_name]['reason'] = $this->_htmlEntities($reason);
+			$this->_methods[$this->method_name]['reason'] = $this->_htmlEntities($reason).PHP_EOL;
 		}
 		return count($this->_missing_tests);
 	}
@@ -294,8 +301,30 @@ HTML;
 	}
 
 	/* Callable from inside a UnitTestCase using $this->sendMessage() */
-	function PaintMessage($message) {
-		echo $this->method_name ,': ', $message;
+	function paintMessage($message) {
+		static $stack = array();
+
+		// buffer too early calls of PaintMessage
+		if ($this->getTestCaseCount() == 0) {
+			$stack[] = $message;
+			return;
+		} elseif (count($stack)) {
+			$message = implode(PHP_EOL, $stack) . PHP_EOL . $message;
+			$stack   = array();
+		}
+
+		if ( !$message ) {
+			return;
+		}
+		$message = htmlentities($message, ENT_COMPAT, $this->_character_set);
+		$message = $this->nl($message);
+
+		echo <<<HTML
+	<tr class="message">
+		<td colspan="2"><span class="pass">&nbsp;</span> <b>{$this->method_name}</b>: {$message}</td>
+	</tr>
+
+HTML;
 	}
 
 	function paintFormattedMessage($message) {
@@ -316,12 +345,15 @@ HTML;
 		} else {
 			print_r($data);
 		}
-		echo "\n</textarea>";
-		echo "</div>\n";
+		echo PHP_EOL. '</textarea>',
+			'</div>', PHP_EOL;
 
 	}
 
 	function paintSkip($message) {
+    	// increment global counter
+		parent::paintSkip($message);
+
 		$this->_methods[$this->method_name]['skip'] = true;
 
         echo <<<HTML
@@ -391,7 +423,9 @@ HTML;
 	function paintError($message) {
 		static $base;
 		if (!isset($base)) $base = realpath(dirname(__FILE__));
-		parent::paintError($message);
+
+    	// increment global counter
+    	parent::paintError($message);
 
 		$message = $this->_htmlEntities($message);
 		$message = str_replace('called in', '<br/>called in: ', $message);
@@ -405,6 +439,7 @@ HTML;
 		static $base;
 		if (!isset($base)) $base = realpath(dirname(__FILE__));
 
+    	// increment global counter
 		parent::paintException($message);
 
 		$message = str_replace(']', ']<br/>', $message);
@@ -430,6 +465,13 @@ HTML;
 
 	function _htmlEntities($message) {
 		return htmlentities($message, ENT_COMPAT, $this->_character_set);
+	}
+
+	/**
+	 * PHP_EOL to line-break
+	 */
+	function nl($message) {
+		return str_replace(PHP_EOL, '<br />', $message);
 	}
 
 }

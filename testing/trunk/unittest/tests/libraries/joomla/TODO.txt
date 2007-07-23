@@ -1,5 +1,6 @@
 
 factory.php
+===========
 1	testGetXMLParser_feeds()
 	# FIX in framework class:
 	JFactory::getXMLParser('RSS') and JFactory::getXMLParser('Atom')
@@ -26,7 +27,10 @@ factory.php
 	is not working correctly.
 	-> testGetMailer_sendmail()
 
+5	JFilterInput not preloaded by factory although used
+
 version.php
+===========
 1	testIsCompatible_minor()
 	How do you define compatibility?
 	Will 1.5.1 really be incompatible with 1.5.0 ?

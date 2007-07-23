@@ -27,17 +27,15 @@ class TestOfJVersion extends UnitTestCase
 	}
 
 	function setUp()
-	{
+    {
+        $this->class = new JVersion();
 	}
 
 	function tearDown()
 	{
+		$this->class = null;
+		unset($this->class);
 	}
-
-    function before()
-    {
-        $this->class = new JVersion();
-    }
 
     function testJVERSION()
     {

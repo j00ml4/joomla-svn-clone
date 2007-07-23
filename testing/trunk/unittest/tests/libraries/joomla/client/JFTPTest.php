@@ -4,7 +4,7 @@
  * Handcrafted by friesengeist ;)
  *
  * @version	$Id$
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  */
 
@@ -19,7 +19,8 @@ require_once('libraries/joomla/client/ftp.php');
 
 class TestOfJFTP extends UnitTestCase
 {
-var $_credentials = null;
+
+var $conf = null;
 
 	/**
 	 * Runs the test methods of this class.
@@ -30,42 +31,17 @@ var $_credentials = null;
 	function main() {
 		$self = new TestOfJFTP;
 		$self->run( UnitTestHelper::getReporter() );
+		JFTPTestHelper::tearDownTestCase();
 	}
 
-	// Not a real test. Only used to display some general information
-	function testCredentialsAvailable()
+    function setUp() {
+		$this->conf = JFTPTestHelper::getCredentials();
+    }
+
+	function tearDown()
 	{
-		if (($conf = $this->getCredentials()) === false)
-		{
-			$this->sendMessage('You need to set correct FTP credentials either in your global'
-				.' configuration, or in a file called "ftp.conf" in the directory of this test'
-				.' case. You may also override the FTP_NATIVE option in this file (comment out'
-				.' line 27 (include_once) in UnitTestController if you wanna use this feature).'
-				.' This is how the file could look like:'
-			);
-			$msg = "<?php\nif (isset(\$config)) {\n  \$config->ftp_user = 'test';\n  etc....\n}'
-				.'\n\n!defined('FTP_NATIVE') && define('FTP_NATIVE', false);\n?>"
-			;
-			$this->skip();
-			SimpleTest::ignore( get_class($this) );
-
-			$this->sendMessage("<pre>".htmlspecialchars($msg)."</pre>"); // ugly, i know ;)
-		}
-		else
-		{
-			$msg = 'Testing host ['.$conf['host'].'] on port ['.$conf['port'].'] with user ['
-				.$conf['user'].'] and pass ['.str_repeat('*', strlen($conf['pass'])).']. FTP'
-				.' Root Path set to ['.$conf['root'].']'
-			;
-			$this->sendMessage($msg);
-			$this->sendMessage('FTP_NATIVE mode is switched ' . (FTP_NATIVE? 'ON' : 'OFF'));
-		}
+		$this->conf = null;
 	}
-
-//	function tearDown()
-//	{
-//		$this->assertNoErrors();
-//	}
 
 	function test__construct()
 	{
@@ -91,30 +67,30 @@ var $_credentials = null;
 
 	function testConnectSuccess()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$return = $ftp->connect($conf['host'], $conf['port']);
+		$return = $ftp->connect($this->conf['host'], $this->conf['port']);
 
 		$pass  = $this->assertIdenticalTrue($return);
 		$pass &= $this->assertIdenticalTrue(is_resource($ftp->_conn));
 
 		if (!$pass) {
-			$this->invalidateCredentials();
+			JFTPTestHelper::invalidateCredentials();
 		}
 		@$ftp->quit();
 	}
 
 	function test__destruct()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
 		$conn =& $ftp->_conn;
 
 		$this->assertIdenticalTrue(is_resource($conn));
@@ -128,9 +104,9 @@ var $_credentials = null;
 		}
 	}
 
+	/** @see TODO 3 */
 	function testSetOptions()
 	{
-		/** @TODO: Should we also test non-existing values, e.g. a string for the timeout? */
 		$options1 = array('type'=>FTP_ASCII, 'timeout'=>10);
 		$options2 = array('type'=>FTP_BINARY, 'timeout'=>0);
 
@@ -145,13 +121,13 @@ var $_credentials = null;
 
 	function testIsConnected()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
 		$return1 = $ftp->isConnected();
-		$return2 = $ftp->connect($conf['host'], $conf['port']);
+		$return2 = $ftp->connect($this->conf['host'], $this->conf['port']);
 		$return3 = $ftp->isConnected();
 
 		$pass  = $this->assertIdenticalFalse($return1);
@@ -159,20 +135,20 @@ var $_credentials = null;
 		$pass &= $this->assertIdenticalTrue($return3);
 
 		if (!$pass) {
-			$this->invalidateCredentials();
+			JFTPTestHelper::invalidateCredentials();
 		}
 		@$ftp->quit();
 	}
 
 	function testLoginFailure()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$return = $ftp->login($conf['user'], 'test'.$conf['pass'].'_will_not_work');
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$return = $ftp->login($this->conf['user'], 'test'.$this->conf['pass'].'_will_not_work');
 
 		$this->assertErrorPattern('/JFTP::login: (Bad Password|Unable to login)/');
 		$this->assertIdenticalFalse($return);
@@ -181,49 +157,50 @@ var $_credentials = null;
 
 	function testLoginSuccess()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$return = $ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$return = $ftp->login($this->conf['user'], $this->conf['pass']);
 
 		if (!$this->assertIdenticalTrue($return)) {
-			$this->invalidateCredentials();
+			JFTPTestHelper::invalidateCredentials();
 		}
 		@$ftp->quit();
 	}
 
 	function testQuit()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
 
 		$this->assertIdenticalTrue(is_resource($ftp->_conn));
 		$ftp->quit();
 		$this->assertIdenticalFalse(is_resource($ftp->_conn));
 	}
 
+	/** @see TODO 6 SYST "emulated" */
 	function testSyst()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 		$return = $ftp->syst();
 
-		if (isset($conf['syst'])) {
-			$this->assertIdentical($return, $conf['syst']);
+		if (isset($this->conf['syst'])) {
+			$this->assertIdentical($return, $this->conf['syst']);
 		} else {
-			$this->sendMessage("SYST command returned [$return], please evaluate manually if this"
+			$this->paintMessage("SYST command returned [$return], please evaluate manually if this"
 				.' is correct! You may also set a value for \'ftp_syst\' in your configuration.'
 			);
 		}
@@ -233,13 +210,13 @@ var $_credentials = null;
 
 	function testPwd()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
 		$return = $ftp->pwd();
 
@@ -250,13 +227,13 @@ var $_credentials = null;
 
 	function testChdirFailure()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
 		$return = $ftp->chdir('this_is_probably_not_a_real_path');
 
@@ -265,29 +242,31 @@ var $_credentials = null;
 		$ftp->quit();
 	}
 
+
+	/** @see TODO 5 */
 	function testChdirSuccess()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
 		$return1 = $ftp->pwd();
-		$return2 = $ftp->chdir($conf['root']);
+		$return2 = $ftp->chdir($this->conf['root']);
 		$return3 = $ftp->pwd();
 		$return4 = $ftp->chdir($return1);
 		$return5 = $ftp->pwd();
-		$return6 = $ftp->chdir($conf['root'].'/');
+		$return6 = $ftp->chdir($this->conf['root'].'/');
 		$return7 = $ftp->pwd();
 		$return8 = $ftp->chdir('/');
 		$return9 = $ftp->pwd();
 
 		$this->assertIdentical($return1, $return5);
 		$this->assertIdentical($return3, $return7);
-		$this->assertIdentical($return3, $conf['root']);
+		$this->assertIdentical($return3, $this->conf['root']);
 		$this->assertIdentical($return9, '/');
 		$this->assertNotIdentical($return1, $return3, '%s - Please make sure to run this test'
 			.' in a subdirectory of your FTP account' );
@@ -301,31 +280,31 @@ var $_credentials = null;
 		);
 
 		if ($return1 !== $return9) {
-			$this->sendMessage('Notice: the directory which is your Current Working Directory'
+			$this->paintMessage('Notice: the directory which is your Current Working Directory'
 				.' directly after connecting is NOT the root directory [/].'
 			);
 		}
 
 		if ($return2 !== true) {
-			$this->invalidateCredentials();
-			$this->sendMessage('Please set your ftp_root path correctly in your configuration.');
+			JFTPTestHelper::invalidateCredentials();
+			$this->paintMessage('Please set your ftp_root path correctly in your configuration.');
 		}
 		$ftp->quit();
 	}
 
 	function testListNames()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->listNames($conf['root'].'/');
-		$ftp->chdir($conf['root']);
+		$return1 = $ftp->listNames($this->conf['root']);
+		$return2 = $ftp->listNames($this->conf['root'].'/');
+		$ftp->chdir($this->conf['root']);
 		$return3 = $ftp->listNames();
 
 		$this->assertIdentical($return1, $return2);
@@ -348,8 +327,8 @@ var $_credentials = null;
 		}
 		$this->assertIdenticalTrue($test, "Filename contains wrong DIRECTORY_SEPARATOR? [$file]");
 
-		/** FTP servers behave differently. No failing test for now, maybe for J! 1.6 */
-		//$return3 = $ftp->listNames($conf['root'].'/blablabla');
+		// ** FTP servers behave differently. No failing test for now, maybe for J! 1.6
+		//$return3 = $ftp->listNames($this->conf['root'].'/blablabla');
 
 		//$this->assertErrorPattern('/JFTP::listNames: (Transfer Failed|Bad response)/');
 		//$this->assertIdenticalFalse($return3);
@@ -358,17 +337,17 @@ var $_credentials = null;
 
 	function testListDetails()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listDetails($conf['root']);
-		$return2 = $ftp->listDetails($conf['root'].'/');
-		$ftp->chdir($conf['root']);
+		$return1 = $ftp->listDetails($this->conf['root']);
+		$return2 = $ftp->listDetails($this->conf['root'].'/');
+		$ftp->chdir($this->conf['root']);
 		$return3 = $ftp->listDetails();
 
 		$this->assertIsA($return1, 'array');
@@ -392,8 +371,8 @@ var $_credentials = null;
 		$this->assertTrue($test2, "Directory listing contains [.]?");
 		$this->assertTrue($test3, "Directory listing contains [..]?");
 
-		/** FTP servers behave differently. No failing test for now, maybe for J! 1.6 */
-		//$return3 = $ftp->listDetails($conf['root'].'/blablabla');
+		// ** FTP servers behave differently. No failing test for now, maybe for J! 1.6
+		//$return3 = $ftp->listDetails($this->conf['root'].'/blablabla');
 
 		//$this->assertErrorPattern('/JFTP::list(Names|Details): (Transfer Failed|Bad response)/');
 		//$this->assertIdenticalFalse($return3);
@@ -403,17 +382,17 @@ var $_credentials = null;
 
 	function testCreate()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->create($conf['root'].'/testfile');
-		$return3 = $ftp->listNames($conf['root']);
+		$return1 = $ftp->listNames($this->conf['root']);
+		$return2 = $ftp->create($this->conf['root'].'/testfile');
+		$return3 = $ftp->listNames($this->conf['root']);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalFalse(in_array('testfile', $return1));
@@ -421,8 +400,8 @@ var $_credentials = null;
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
-		@$ftp->delete($conf['root'].'/testfile');
-		$ftp->chdir($conf['root']);
+		@$ftp->delete($this->conf['root'].'/testfile');
+		$ftp->chdir($this->conf['root']);
 
 		$return1 = $ftp->listNames();
 		$return2 = $ftp->create('testfile');
@@ -434,32 +413,32 @@ var $_credentials = null;
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
-		$return4 = $ftp->create($conf['root'].'/blablabla/testfile');
+		$return4 = $ftp->create($this->conf['root'].'/blablabla/testfile');
 
 		$this->assertError('JFTP::create: Bad response');
 		$this->assertIdenticalFalse($return4);
 
-		@$ftp->delete($conf['root'].'/testfile');
+		@$ftp->delete($this->conf['root'].'/testfile');
 		$ftp->quit();
 	}
 
 	function testListDetails2()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			$this->fail('Credentials not set');
 			return;
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listDetails($conf['root']);
-		$ftp->create($conf['root'].'/testfile');
-		$ftp->create($conf['root'].'/testfile2');
-		$return2 = $ftp->listDetails($conf['root']);
-		$ftp->delete($conf['root'].'/testfile');
-		$ftp->delete($conf['root'].'/testfile2');
+		$return1 = $ftp->listDetails($this->conf['root']);
+		$ftp->create($this->conf['root'].'/testfile');
+		$ftp->create($this->conf['root'].'/testfile2');
+		$return2 = $ftp->listDetails($this->conf['root']);
+		$ftp->delete($this->conf['root'].'/testfile');
+		$ftp->delete($this->conf['root'].'/testfile2');
 
 		$this->assertIsA($return1, 'array');
 		$this->assertIsA($return2, 'array');
@@ -491,18 +470,18 @@ var $_credentials = null;
 
 	function testDelete()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
-		$ftp->create($conf['root'].'/testfile');
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
+		$ftp->create($this->conf['root'].'/testfile');
 
-		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->delete($conf['root'].'/testfile');
-		$return3 = $ftp->listNames($conf['root']);
+		$return1 = $ftp->listNames($this->conf['root']);
+		$return2 = $ftp->delete($this->conf['root'].'/testfile');
+		$return3 = $ftp->listNames($this->conf['root']);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue(in_array('testfile', $return1));
@@ -510,7 +489,7 @@ var $_credentials = null;
 		$this->assertIdentical(count($return1), count($return3)+1);
 		$this->assertNoErrors();
 
-		$ftp->chdir($conf['root']);
+		$ftp->chdir($this->conf['root']);
 		$ftp->create('testfile');
 
 		$return1 = $ftp->listNames();
@@ -533,14 +512,14 @@ var $_credentials = null;
 
 	function testRename()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
-		$ftp->chdir($conf['root']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
+		$ftp->chdir($this->conf['root']);
 		$ftp->create('testfile');
 
 		$return1 = $ftp->listNames();
@@ -559,7 +538,7 @@ var $_credentials = null;
 		$this->assertIdenticalFalse($return4);
 		$this->assertNoErrors();
 
-		$return5 = $ftp->rename('testfile2', $conf['root'].'/testfile4');
+		$return5 = $ftp->rename('testfile2', $this->conf['root'].'/testfile4');
 		$return6 = $ftp->listNames();
 
 		$this->assertIdenticalTrue($return5);
@@ -571,16 +550,17 @@ var $_credentials = null;
 		$ftp->quit();
 	}
 
+	// @see TODO 4
 	function testChmod()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
-		$ftp->chdir($conf['root']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
+		$ftp->chdir($this->conf['root']);
 		$ftp->create('testfile');
 
 		$return1 = $ftp->chmod('testfile', 0666);
@@ -588,14 +568,10 @@ var $_credentials = null;
 
 		// Not supported on all systems. Print message instead of failure when not supported
 		if ($return1 === false && $return2 === false) {
-			$this->sendMessage('Your server does not support the CHMOD command! Since this is'
+			$this->paintMessage('Your server does not support the CHMOD command! Since this is'
 				.' nothing we rely on in Joomla!, and since there are probably more servers which'
 				.' do not support it, this is just displayed as a notice, not as a failure.'
 			);
-			/**
-			 * @TODO: can we maybe even supress these errors in JFTP? Would probably better if the
-			 * user does not see such a notice/warning. Return code from chmod should be enough...
-			 */
 			$this->assertError('JFTP::chmod: Bad response');
 			$this->assertError('JFTP::chmod: Bad response');
 		} else {
@@ -609,17 +585,17 @@ var $_credentials = null;
 
 	function testMkdir()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $this->listAllNames($ftp, $conf['root']);
-		$return2 = $ftp->mkdir($conf['root'].'/testdir');
-		$return3 = $this->listAllNames($ftp, $conf['root']);
+		$return1 = $this->listAllNames($ftp, $this->conf['root']);
+		$return2 = $ftp->mkdir($this->conf['root'].'/testdir');
+		$return3 = $this->listAllNames($ftp, $this->conf['root']);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalFalse(in_array('testdir', $return1));
@@ -627,8 +603,8 @@ var $_credentials = null;
 		$this->assertIdentical(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
-		$ftp->delete($conf['root'].'/testdir');
-		$ftp->chdir($conf['root']);
+		$ftp->delete($this->conf['root'].'/testdir');
+		$ftp->chdir($this->conf['root']);
 
 		$return1 = $this->listAllNames($ftp, null);
 		$return2 = $ftp->mkdir('testdir');
@@ -641,13 +617,13 @@ var $_credentials = null;
 		$this->assertNoErrors();
 
 		// No failing test here, as some servers create directories recursively
-		$ftp->delete($conf['root'].'/testdir');
+		$ftp->delete($this->conf['root'].'/testdir');
 		$ftp->quit();
 	}
 
 	function testReadWrite()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
@@ -659,13 +635,13 @@ var $_credentials = null;
 		$buffer .= $buffer;
 
 		$ftp = new JFTP(array('timeout'=>5, 'type'=>FTP_BINARY));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->write($conf['root'].'/testfile', $buffer);
-		$return3 = $ftp->listNames($conf['root']);
-		$return4 = $ftp->read($conf['root'].'/testfile', $bufferRead);
+		$return1 = $ftp->listNames($this->conf['root']);
+		$return2 = $ftp->write($this->conf['root'].'/testfile', $buffer);
+		$return3 = $ftp->listNames($this->conf['root']);
+		$return4 = $ftp->read($this->conf['root'].'/testfile', $bufferRead);
 
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
@@ -677,8 +653,8 @@ var $_credentials = null;
 		);
 		$this->assertNoErrors();
 
-		$ftp->delete($conf['root'].'/testfile');
-		$ftp->chdir($conf['root']);
+		$ftp->delete($this->conf['root'].'/testfile');
+		$ftp->chdir($this->conf['root']);
 
 		$return1 = $ftp->listNames();
 		$return2 = $ftp->write('testfile', $buffer);
@@ -695,23 +671,23 @@ var $_credentials = null;
 		);
 		$this->assertNoErrors();
 
-		$return4 = $ftp->write($conf['root'].'/blablabla/testfile', $buffer);
+		$return4 = $ftp->write($this->conf['root'].'/blablabla/testfile', $buffer);
 
 		$this->assertError('JFTP::write: Bad response');
 		$this->assertIdenticalFalse($return4);
 
-		$return5 = $ftp->read($conf['root'].'/blablabla/testfile', $buffer);
+		$return5 = $ftp->read($this->conf['root'].'/blablabla/testfile', $buffer);
 
 		$this->assertError('JFTP::read: Bad response');
 		$this->assertIdenticalFalse($return5);
 
-		$ftp->delete($conf['root'].'/testfile');
+		$ftp->delete($this->conf['root'].'/testfile');
 		$ftp->quit();
 	}
 
 	function disabledTestReadWriteModes()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
@@ -723,9 +699,9 @@ var $_credentials = null;
 		$buffer = " \r \n \r\n ".$buffer.$buffer;
 
 		$ftp = new JFTP(array('timeout'=>5));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
-		$ftp->chdir($conf['root']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
+		$ftp->chdir($this->conf['root']);
 		$syst = $ftp->syst();
 
 		$ftp->setOptions(array('type'=>FTP_BINARY));
@@ -741,7 +717,7 @@ var $_credentials = null;
 		);
 		$this->assertNoErrors();
 
-		$ftp->delete($conf['root'].'/testfile');
+		$ftp->delete($this->conf['root'].'/testfile');
 		$ftp->setOptions(array('type'=>FTP_ASCII));
 		$return1 = $ftp->write('testfile', $buffer);
 		$ftp->setOptions(array('type'=>FTP_BINARY));
@@ -755,7 +731,7 @@ var $_credentials = null;
 		);
 		$this->assertNoErrors();
 
-		$ftp->delete($conf['root'].'/testfile');
+		$ftp->delete($this->conf['root'].'/testfile');
 		$ftp->setOptions(array('type'=>FTP_ASCII));
 		$return1 = $ftp->write('testfile', $buffer);
 		$ftp->setOptions(array('type'=>FTP_ASCII));
@@ -768,13 +744,13 @@ var $_credentials = null;
 			'%s - Write: [ASCII], Read: [ASCII]'
 		);
 
-		$ftp->delete($conf['root'].'/testfile');
+		$ftp->delete($this->conf['root'].'/testfile');
 		$ftp->quit();
 	}
 
 	function testGetStore()
 	{
-		if (($conf = $this->getCredentials()) === false) {
+		if ($this->conf === null) {
 			return $this->_reporter->setMissingTestCase('Credentials not set');
 		}
 
@@ -799,13 +775,13 @@ var $_credentials = null;
 		unlink($returnedFile);
 
 		$ftp = new JFTP(array('timeout'=>5, 'type'=>FTP_BINARY));
-		$ftp->connect($conf['host'], $conf['port']);
-		$ftp->login($conf['user'], $conf['pass']);
+		$ftp->connect($this->conf['host'], $this->conf['port']);
+		$ftp->login($this->conf['user'], $this->conf['pass']);
 
-		$return1 = $ftp->listNames($conf['root']);
-		$return2 = $ftp->store($sendFile, $conf['root'].'/testfile.bin');
-		$return3 = $ftp->listNames($conf['root']);
-		$return4 = $ftp->get($returnedFile, $conf['root'].'/testfile.bin');
+		$return1 = $ftp->listNames($this->conf['root']);
+		$return2 = $ftp->store($sendFile, $this->conf['root'].'/testfile.bin');
+		$return3 = $ftp->listNames($this->conf['root']);
+		$return4 = $ftp->get($returnedFile, $this->conf['root'].'/testfile.bin');
 
 		$bufferRead = file_get_contents($returnedFile);
 		$this->assertIdenticalTrue($return2);
@@ -819,8 +795,8 @@ var $_credentials = null;
 		$this->assertNoErrors();
 
 		unlink($returnedFile);
-		$ftp->delete($conf['root'].'/testfile.bin');
-		$ftp->chdir($conf['root']);
+		$ftp->delete($this->conf['root'].'/testfile.bin');
+		$ftp->chdir($this->conf['root']);
 
 		$return1 = $ftp->listNames();
 		$return2 = $ftp->store($sendFile);
@@ -838,22 +814,20 @@ var $_credentials = null;
 		);
 		$this->assertNoErrors();
 
-		$return4 = $ftp->store($sendFile, $conf['root'].'/blablabla/testfile');
+		$return4 = $ftp->store($sendFile, $this->conf['root'].'/blablabla/testfile');
 
 		$this->assertError('JFTP::store: Bad response');
 		$this->assertIdenticalFalse($return4);
 
-		$return5 = $ftp->get($returnedFile, $conf['root'].'/blablabla/testfile');
+		$return5 = $ftp->get($returnedFile, $this->conf['root'].'/blablabla/testfile');
 
 		$this->assertError('JFTP::get: Bad response');
 		$this->assertIdenticalFalse($return5);
 
-		/*
-		 * In native mode, the destination file gets deleted if it does not exist on the server
-		 * It is accepted behaviour that the compatibility layer does not do so, therefore the @
-		 */
+//		 * In native mode, the destination file gets deleted if it does not exist on the server
+//		 * It is accepted behaviour that the compatibility layer does not do so, therefore the @
 		@unlink($returnedFile);
-		$ftp->delete($conf['root'].'/testfile.bin');
+		$ftp->delete($this->conf['root'].'/testfile.bin');
 		$ftp->quit();
 	}
 
@@ -929,29 +903,11 @@ var $_credentials = null;
 		$this->assertReference($ftp5, $ftp6);
 	}
 
-	function getCredentials()
-	{
-		if ($this->_credentials !== null) {
-			return $this->_credentials;
-		}
-
-		$config = UnitTestHelper::makeCfg(JUT_FTP_CREDENTIALS, false, true);
-
-		// Credentials valid?
-		if (!($config['host'] && $config['port'] && $config['user'] && $config['pass'])) {
-			$this->_credentials = null;
-		} else {
-			$this->_credentials = $config;
-		}
-
-		return $this->_credentials;
-
-	}
-
-	function invalidateCredentials()
-	{
-		$this->sendMessage('Invalidating Credentials due to previous error');
-		$this->_credentials = null;
+	/**
+	 * $this->sendMessage was deprecated, not supported in Simpletest 1.0.1b2+
+	 */
+	function paintMessage($message) {
+		$this->_reporter->paintMessage($message);
 	}
 
 	function getExpected($buffer, $sendMode, $receiveMode, $systRemote)

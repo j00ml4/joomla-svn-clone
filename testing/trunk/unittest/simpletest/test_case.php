@@ -506,10 +506,10 @@
         function add(&$test_case) {
             if (! is_string($test_case)) {
                 $this->_test_cases[] = &$test_case;
-            } elseif (TestSuite::getBaseTestCase($class) == 'testsuite') {
-                $this->_test_cases[] = &new $class();
+            } elseif (TestSuite::getBaseTestCase($test_case) == 'testsuite') {
+                $this->_test_cases[] = &new $test_case();
             } else {
-                $this->_test_cases[] = $class;
+                $this->_test_cases[] = $test_case;
             }
         }
 

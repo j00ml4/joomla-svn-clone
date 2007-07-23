@@ -3,7 +3,7 @@
  * Joomla! v1.5 UnitTest Platform Helper class.
  *
  * @version 	$Id$
- * @package 	Joomla
+ * @package 	Joomla.Framework
  * @subpackage 	UnitTest
  * @copyright 	Copyright (C) 2007 Rene Serradeil. All rights reserved.
  * @license		GNU/GPL
@@ -13,9 +13,9 @@
  * constants for $is_test property of the info object
  * @see UnitTestHelper::getInfoObject()
  */
-define('JUNITTEST_IS_FRAMEWORK', 0);
 define('JUNITTEST_IS_TESTSUITE', 1);
 define('JUNITTEST_IS_TESTCASE',  2);
+define('JUNITTEST_IS_FRAMEWORK', 4);
 
 class UnitTestHelper
 {
@@ -27,6 +27,12 @@ class UnitTestHelper
 	 */
 	function &getReporter($output = null)
 	{
+		static $instance;
+
+		if ($instance !== null) {
+			return $instance;
+		}
+
 		if ($output == null) {
 			$input  =& UnitTestHelper::getProperty('Controller', 'Input');
 			$output = $input->reporter['output'];
@@ -55,8 +61,8 @@ class UnitTestHelper
             break;
 	    }
 
-        $reporter =& new $renderer();
-	    return $reporter;
+        $instance =& new $renderer();
+	    return $instance;
 	}
 
 	/**
@@ -71,9 +77,14 @@ class UnitTestHelper
 	 */
 	function getReporterInfo()
 	{
-		$output = (JUNITTEST_CLI)
-				? strtolower(JUNITTEST_REPORTER_CLI)
-				: strtolower(JUNITTEST_REPORTER);
+		$input =& UnitTestHelper::getProperty('Controller', 'Input');
+		if (isset($input->output)) {
+			$output = $input->output;
+		} else {
+			$output = (JUNITTEST_CLI)
+					? strtolower(JUNITTEST_REPORTER_CLI)
+					: strtolower(JUNITTEST_REPORTER);
+		}
 
 		if ($output == 'custom') {
 			$format = JUNITTEST_REPORTER_CUSTOM_FORMAT;
@@ -122,20 +133,22 @@ class UnitTestHelper
 	 * @param  object $infoobj as returned from {@link getInfoObject()}
 	 * @return string name of the configuration
 	 */
-	function getTestConfigVar( $infoobj )
+	function getTestConfigVar( &$infoobj )
 	{
 		switch ($infoobj->is_test) {
 		case JUNITTEST_IS_TESTSUITE:
 			switch (trim($infoobj->dirname,'\\/')) {
 			case '':
-				$constant = JUNITTEST_PREFIX . 'FRAMEWORK_ALL';
+				$constant = JUNITTEST_PREFIX . 'FRAMEWORK';
 				break;
 			case 'libraries':
-				$constant = JUNITTEST_PREFIX . 'LIBRARIES_ALL';
+				$constant = JUNITTEST_PREFIX . 'LIBRARIES';
 				break;
 			default:
-				$constant = JUNITTEST_PREFIX . $infoobj->package . '_ALL';
+				$constant = JUNITTEST_PREFIX . $infoobj->package;
 			}
+
+			$constant .= '_ALL';
 			break;
 
 		case JUNITTEST_IS_TESTCASE:
@@ -148,12 +161,28 @@ class UnitTestHelper
 
 		/* allow hook function to fix nameing scheme violations */
 		if ( !defined($constant) ) {
+			$infoobj->violation = true;
 			# TODO: implement hook for config variables
 			// someHackishConstantsHook( &$out )
 		}
 
 		return strtoupper($constant);
 	}
+
+	/**
+	 * Returns the line number of a configuration directive (constant) in
+	 * `TestConfiguration.php`
+	 */
+	function getConfigLine($directive, $source='TestConfiguration.php') {
+		$lines = file($source, true);
+		$line  = preg_grep('#'. strtoupper($directive) .'#', $lines);
+		return key($line) + 1;
+	}
+
+	/**
+	 * Returns the estimated amount of possible testcases based on the
+	 * predefined configuration settings.
+	 */
 
 	/**
 	 * Plucks $path into pieces and returns a standard object with all kind
@@ -197,40 +226,50 @@ class UnitTestHelper
 		$out->testclass = $sbase;
 		$out->package   = 'Joomla';
 		$out->enabled   = false;
+		$out->is_test   = 0;
 
 		// determine "TestSuite Package" 'libraries/joomla/package/subpackage/'
 		// not necessarily identical to the J!F Package the tested file belongs to
 		$parts = explode('/', rtrim($out->dirname, '\\/') );
-		if ($slash > 1) {
+		if ( count($parts) > 1 ) {
 			if (isset($parts[2])) {
 				$out->package = ucwords($parts[2]);
-			}
-			if (isset($parts[3])) {
-				$out->package .= '_'.ucwords($parts[3]);
+				if (isset($parts[3])) {
+					$out->package .= '_'.ucwords($parts[3]);
+				}
+			} else {
+				// Libraries
+				$out->package = ucwords($parts[0]);
 			}
 		} else {
-			$out->package = 'Framework';
+			if (empty($sbase)) {
+				$out->package = 'UnitTests';
+			} else {
+				$out->package = 'Framework';
+			}
 		}
 
-		// calls for TestCase and Suits req.
-		$file = strtolower($out->filename);
-
-		if (strpos($file, 'alltests.php') !== false) {
+		/* let's have a first peak of what this might be */
+		$file = ' '.strtolower($out->filename);
+		if ( strpos($file, 'alltests.php') !== false) {
 			$out->is_test   = JUNITTEST_IS_TESTSUITE;
 			$out->classname = false;
 			$out->config    = UnitTestHelper::getTestConfigVar($out);
-		} elseif (strpos($file, 'test.php') !== false) {
+		} elseif ( strpos($file, 'test.php') !== false) {
 			$out->is_test   = JUNITTEST_IS_TESTCASE;
 			$out->classname = basename($sbase, 'Test');
 			$out->config    = UnitTestHelper::getTestConfigVar($out);
-		} else {
-			$out->is_test   = JUNITTEST_IS_FRAMEWORK;
-			$out->basename = substr($sbase, 1);
 		}
+		if ($out->package == 'Framework') {
+			$out->is_test   = $out->is_test | JUNITTEST_IS_FRAMEWORK;
+			$out->basename = $sbase;
+		}
+
 		unset($file);
 
-		/* allow hook function to fix nameing scheme violations */
+		/* allow hook function to fix naming scheme violations */
 		if ( isset($out->config) && !defined($out->config) ) {
+			$out->violation = true;
 			# TODO: implement hook for path+class+whatever variables
 			// someHackishNamesHook( &$out )
 		}
@@ -526,6 +565,7 @@ class UnitTestHelper
 	    /**
 	     * The file was not located anywhere.
 	     */
+jutdump(debug_backtrace());
 	    trigger_error("File \"$filename\" was not found", E_USER_ERROR);
 	}
 

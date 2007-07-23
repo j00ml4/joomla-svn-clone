@@ -3,7 +3,7 @@
  * Joomla! v1.5 UnitTest Platform.
  *
  * @version    $Id$
- * @package    Joomla
+ * @package    Joomla.Framework
  * @subpackage UnitTest
  */
 
@@ -16,11 +16,11 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 
 require_once JUNITTEST_BASE .'/libraries/joomla/AllTests.php';
 
-class Joomla_AllTests
+class Libraries_AllTests
 {
 	function main()
 	{
-		$self  =& new Joomla_AllTests;
+		$self  =& new Libraries_AllTests;
 		$suite =& $self->suite();
 		$suite->run( UnitTestHelper::getReporter() );
 	}

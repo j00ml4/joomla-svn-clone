@@ -15,7 +15,7 @@
  * @package 	Joomla
  * @subpackage 	UnitTest
  *
- * Last review: 2007-03-01 CirTap
+ * Last review: 2007-07-22 CirTap
  */
 
 /**
@@ -90,16 +90,18 @@ define('JUNITTEST_REPORTER', 'html');
 define('JUNITTEST_REPORTER_CLI', 'text');
 
 /**
- * Full qualified path and classname of the 'custom' reporter.
+ * Full qualified path, classname, and output format of the 'custom' reporter.
  * Only used if JUNITTEST_REPORTER == 'custom'
  */
 define('JUNITTEST_REPORTER_CUSTOM_PATH',  JUNITTEST_VIEWS.'/WebMechanicRenderer.php');
 define('JUNITTEST_REPORTER_CUSTOM_CLASS', 'WebMechanicRenderer');
+define('JUNITTEST_REPORTER_CUSTOM_FORMAT', 'html');
 
 /**
  * Whether passed tests should be rendered, not available with every reporter.
+ * This will generate a lot of "noise", hence the default if false.
  */
-define('JUNITTEST_REPORTER_RENDER_PASSED', true);
+define('JUNITTEST_REPORTER_RENDER_PASSED', false);
 
 define('JUNITTEST_LISTMODE_HEADER', true);
 define('JUNITTEST_LISTMODE_FOOTER', true);
@@ -127,7 +129,7 @@ define('JUNITTEST_DATABASE_MYSQL5', 'mysql://username:password@localhost:3307/da
  * /libraries/joomla
  */
 define('JUT_JOOMLA_JFACTORY', true);
-define('JUT_JOOMLA_JFRAMEWORKCONFIG', false);
+define('JUT_JOOMLA_JFRAMEWORKCONFIG', true);
 define('JUT_JOOMLA_JLOADER', true);
 define('JUT_JOOMLA_JVERSION', true);
 
@@ -135,9 +137,9 @@ define('JUT_JOOMLA_JVERSION', true);
  * Edit TestConfiguration.php, not TestConfiguration-dist.php.
  * Never commit plaintext passwords to the source code repository!
  */
-define('JUT_FACTORY_DBO',          JUNITTEST_DATABASE_MYSQL4);
-define('JUT_FACTORY_SMTP_NOAUTH', 'smtp://someone@example.com:secret@localhost/?smtpauth=0');
-define('JUT_FACTORY_SMTP_AUTH',   'smtp://someone@example.com:secret@localhost/?smtpauth=1');
+define('JUT_JFACTORY_DBO',          JUNITTEST_DATABASE_MYSQL4);
+define('JUT_JFACTORY_SMTP_NOAUTH', 'smtp://someone@example.com:secret@localhost/?smtpauth=0');
+define('JUT_JFACTORY_SMTP_AUTH',   'smtp://someone@example.com:secret@localhost/?smtpauth=1');
 
 /**
  * /libraries/joomla/application
@@ -191,9 +193,9 @@ define('JUT_CACHE_STORAGE_JCACHESTORAGEMEMCACHE', @extension_loaded('memcache'))
  * Never commit plaintext passwords to the source code repository!
  */
 define('JUT_CLIENT_JFTP', false);  # uppercase class suffix
-define('JUT_FTP_NATIVE', (function_exists('ftp_connect'))? 1 : 0);
+define('JUT_JFTP_NATIVE', (function_exists('ftp_connect'))? 1 : 0);
 /* if your ftp server runs on a windows box, use ?ftp_sys=WIN */
-define('JUT_FTP_CREDENTIALS', 'ftp://username:password@localhost/?ftp_sys=');
+define('JUT_JFTP_CREDENTIALS', 'ftp://username:password@localhost/?ftp_sys=');
 
 define('JUT_CLIENT_JLDAP', false);  # uppercase class suffix
 define('JUT_CLIENT_JCLIENTHELPER', false);
@@ -208,27 +210,27 @@ define('JUT_DATABASE_JDATABASE', false);
 define('JUT_DATABASE_JDATABASEMYSQL',  JUT_DATABASE_JDATABASE & @extension_loaded('mysql'));
 define('JUT_DATABASE_JDATABASEMYSQLI', JUT_DATABASE_JDATABASE & @extension_loaded('mysqli'));
 define('JUT_DATABASE_JRECORDSET', false);
+define('JUT_DATABASE_JTABLE', false);
 
-define('JUT_DATABASE_USE_MYSQL3', false);		// to run agains MySQL 3
-define('JUT_DATABASE_USE_MYSQL40', true);		// to run agains MySQL 4.0x
-define('JUT_DATABASE_USE_MYSQL41', false);		// to run agains MySQL 4.1x
-define('JUT_DATABASE_USE_MYSQL50', false);		// to run agains MySQL 5.0x
-define('JUT_DATABASE_USE_MYSQL51', false);		// to run agains MySQL 5.1x
+define('JUT_JDATABASE_MYSQL3', false); 	// to run agains MySQL 3
+define('JUT_JDATABASE_MYSQL40', true); 	// to run agains MySQL 4.0x
+define('JUT_JDATABASE_MYSQL41', false); 	// to run agains MySQL 4.1x
+define('JUT_JDATABASE_MYSQL50', false); 	// to run agains MySQL 5.0x
+define('JUT_JDATABASE_MYSQL51', false); 	// to run agains MySQL 5.1x
 
 /**
  * /libraries/joomla/database/table
  */
-define('JUT_DATABASE_JTABLE', false);
-define('JUT_DATABASE_JTABLECATEGORY', false);
-define('JUT_DATABASE_JTABLECOMPONENT', false);
-define('JUT_DATABASE_JTABLECONTENT', false);
-define('JUT_DATABASE_JTABLEMENU', false);
-define('JUT_DATABASE_JTABLEMENUTYPES', false);
-define('JUT_DATABASE_JTABLEMODULE', false);
-define('JUT_DATABASE_JTABLEPLUGIN', false);
-define('JUT_DATABASE_JTABLESECTION', false);
-define('JUT_DATABASE_JTABLESESSION', false);
-define('JUT_DATABASE_JTABLEUSER', false);
+define('JUT_DATABASE_TABLE_JTABLECATEGORY', false);
+define('JUT_DATABASE_TABLE_JTABLECOMPONENT', false);
+define('JUT_DATABASE_TABLE_JTABLECONTENT', false);
+define('JUT_DATABASE_TABLE_JTABLEMENU', false);
+define('JUT_DATABASE_TABLE_JTABLEMENUTYPES', false);
+define('JUT_DATABASE_TABLE_JTABLEMODULE', false);
+define('JUT_DATABASE_TABLE_JTABLEPLUGIN', false);
+define('JUT_DATABASE_TABLE_JTABLESECTION', false);
+define('JUT_DATABASE_TABLE_JTABLESESSION', false);
+define('JUT_DATABASE_TABLE_JTABLEUSER', false);
 
 /**
  * /libraries/joomla/document
@@ -385,10 +387,10 @@ define('JUT_I18N_JTEXT', false);  # class name mismatch, expected: JLanguage (la
 define('JUT_I18N_JLANGUAGE', false);
 define('JUT_I18N_JLANGUAGEHELPER', false);
 
-define('JUT_LANGUAGE_HELP',     'en-GB'); // context help (admin)
-define('JUT_LANGUAGE_FRONTEND', 'en-GB'); // JSite
-define('JUT_LANGUAGE_BACKEND',  'en-GB'); // JAdministrator
-define('JUT_LANGUAGE_INSTALL',  'en-GB'); // JInstaller
+define('JUT_JLANGUAGE_HELP',     'en-GB'); // context help (admin)
+define('JUT_JLANGUAGE_FRONTEND', 'en-GB'); // JSite
+define('JUT_JLANGUAGE_BACKEND',  'en-GB'); // JAdministrator
+define('JUT_JLANGUAGE_INSTALL',  'en-GB'); // JInstaller
 
 /**
  * /libraries/joomla/installer
