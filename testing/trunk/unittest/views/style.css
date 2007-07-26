@@ -31,7 +31,7 @@ h1.header span {
 	right: 1.5em;
 	width: 18.5em;
 	font: inherit;
-	font-size: 1.5ex;
+	font-size: 0.9em;
 	border: 1px solid #ccc;
 }
 #userconfig strong { color: #578AD6; }

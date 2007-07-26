@@ -49,10 +49,21 @@ class JFactoryTestHelper
 		$config =& JFactory::getConfig();
 		$config = UnitTestHelper::makeCfg(JUNITTEST_DATABASE_MYSQL4, true);
 
-//$config  =& JFactory::getConfig();
-//$context =& SimpleTest::getContext();
-//$context->_reporter->dumpCode($config, __FUNCTION__);
+//		SimpleTest::getContext()
+//					->getReporter()
+//					->dumpCode( JFactory::getConfig() , __FUNCTION__);
 
 	}
 
 }
+
+class JFactoryTestObserver
+{
+	/* called from Simpletest */
+	function atTestEnd($method, &$test_case) {
+//		$context  = &SimpleTest::getContext();
+//		$reporter = &$context->getReporter();
+	}
+
+}
+

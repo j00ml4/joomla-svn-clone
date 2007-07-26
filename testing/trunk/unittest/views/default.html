@@ -52,11 +52,10 @@ function testLink($infoobj) {
 		}
 	}
 
-// $lbl .= ' <small><small>'.$infoobj->config.'</small></small>';
 	return "<$elt class=\"$css\">".$pre.$open.$lbl.$close.$post."</$elt>" . PHP_EOL;
 }
 
-function docLink($infoobj, $file) {
+function docLink(&$infoobj, $file) {
 	$fbase = basename($file);
 	$label = ucfirst(substr(basename($file, '.txt'), 1+strlen($infoobj->classname)));
 	$ahref = sprintf('<a href="%s" title="%s" target="_blank">',
@@ -76,35 +75,33 @@ function todoLink($infoobj) {
 }
 ?>
 
-<?php if (JUNITTEST_LISTMODE_HEADER): ?>
+<?php
+	if (JUNITTEST_LISTMODE_HEADER): ?>
 	<h1 class="header" onclick="location.href='/unittest/'">
 	<span>Joomla! v1.5 UnitTest Platform</span>
 	</h1>
 
 	<div id="userconfig">
-	<strong>PHP:</strong> <span><?php echo PHP_VERSION; ?></span>
+	<strong>PHP:</strong> <span style="cursor:help" title="<?php echo PHP_SAPI .' on '. PHP_OS; ?>"><?php echo PHP_VERSION; ?></span>
+		&nbsp; Switch to:
 <?php
-	if (JUNITTEST_HOME_PHP4 != JUNITTEST_HOME_PHP5) {
-		$php4 = 'php4'; $php5 = 'php5';
-		if (strpos(JUNITTEST_HOME_PHP4, $_SERVER['HTTP_HOST']) !== false) {
-			$php4 = '<b class="tmessage" title="Current environment">PHP4</b>';
+	list($php, $url) = UnitTestHelper::toggleHostUrl();
+	if ( !empty($url) ) {
+		if (strpos(JUNITTEST_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
+			$php = '<b class="tmessage" title="toggle environment">PHP4</b>';
 		}
-		if (strpos(JUNITTEST_HOME_PHP5, $_SERVER['HTTP_HOST']) !== false) {
-			$php5 = '<b class="tmessage" title="Current environment">PHP5</b>';
+		if (strpos(JUNITTEST_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
+			$php = '<b class="tmessage" title="toggle environment">PHP5</b>';
 		}
 	?>
-		&nbsp; switch:
-		<span><a class="tpass" href="<?php echo JUNITTEST_HOME_PHP4.'?output='.$input->output; ?>"><?php echo $php4; ?></a></span>
-		<span><a class="tpass" href="<?php echo JUNITTEST_HOME_PHP5.'?output='.$input->output; ?>"><?php echo $php5; ?></a></span>
+		<span><a class="tpass" href="<?php echo $url.'?output='.$input->output; ?>"><?php echo $php; ?></a></span>
 <?php } ?>
 	<br />
-
-	<strong>User settings:</strong> <span><?php echo (!JUNITTEST_USERCONFIG) ? '<b class="tfail">missing</b>' : '<b class="tpass">enabled</b>'; ?></span><br />
-	<strong>Test reporter:</strong> <span><?php echo $input->output; ?></span><br />
+	<strong>User settings:</strong> <?php echo (!JUNITTEST_USERCONFIG) ? '<b class="tfail">missing</b>' : '<b class="tpass">enabled</b>'; ?><br />
+	<strong>Test reporter:</strong> <b class="tpass"><?php echo $input->output; ?></b><br />
 	</div>
-<?php endif; ?>
-
 <?php
+	endif;
 
 /* Loop through the tests and print a link for each one */
 
@@ -119,10 +116,7 @@ function todoLink($infoobj) {
 		echo testLink($infoobj);
 
 		foreach ( $infoobj->docs as $doc ) {
-			echo <<<HTML
-	&nbsp;<span class="docs"><?php echo docLink($infoobj, $doc); ?></span>
-
-HTML;
+			echo '&nbsp;<span class="docs">', docLink($infoobj, $doc), '</span>', PHP_EOL;
 		}
 
 	}

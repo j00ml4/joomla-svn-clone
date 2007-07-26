@@ -259,9 +259,10 @@ DON'T try to write a Testcase that covers a gazillion different user settings pe
 
 Logging and messages
 --------------------
-Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, var_dump, $this->paintMessage() or anything else. 
-A Test either works or fails. Period. The internals and statistics are of no particular interest for the user. If a Test fails, it fails, thus use the $message argument of the assert-function to provide a brief reason why.
-The output of a Testcase is "captured" by the UnitTest Controller and its renderes, creating different output formats such as HTML, XML, or JSON data. If your code starts to yell inbetween this using echo or print(), you'd screw up this output and prevent subsequent analyzing or postprocessing of the results (think of cron jobs!)
+Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, or var_dump. If at all, use $this->_reporter->paintMessage(). 
+A Test either works or fails. Period. 
+A test's internals and statistics are of no particular interest for the user. If a Test fails, it fails, thus use the $message argument of the assert-function to provide a brief reason why it failed.
+The output of a Testcase is "captured" by the UnitTest Controller and its renderes attempting to create different output formats such as clean HTML, XML, TEXT, PHP arrays or JSON data. If your code starts to yell inbetween you're likely to screw up and invalidate the output format and prevent subsequent analyzing or postprocessing of the results (think of cron jobs!)
 
 If you can't resist to create elaborous status messages to tell the user about all the vivid things your Testcase performed, write them *INTO A DEDICATED LOG FILE* using the plain file I/O functions of PHP (fopen, fputs, etc.) or the UnitTestHelper::log() function. 
 DON'T use any J! Framework classes to perform file loggin: these classes might be broken or disabled at the time the user runs your test. 
@@ -272,6 +273,21 @@ A vanilla logger is available via:
 which in it's current incarnation serves as a proxy to PHP's error_log() function.
 Its destination and format etc. may be configurable in the future using some yet to be invented JUNITTEST_LOG_* settings.
 
+Error reporting and skipping
+----------------------------
+Simpletest allows each UnitTestCase to signal an error, an exception, or to skip further processing of the test. Incidently, these methods are:
+ - error($severity, $message, $file, $line)
+ - exception(Exception $exception)
+ - skip()
+available as class methods of a UnitTestCase instance.
+
+Like the startUp() and tearDown() methods, skip() is called everytime a new test function is about to run and if implemented, should call:
+ - $this->skipIf($should_skip, $message = '%s')
+to evaluate a condition causing the tests to be skipped OR
+ - $this->skipUnless($shouldnt_skip, $message = false)
+to evaluate a condition causing the tests to be run.
+
+A typical usage would be to verify the existance of user credentials.
 
 Assertion $message format
 -------------------------

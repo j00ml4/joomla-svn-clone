@@ -2,76 +2,60 @@
 /**
  * Joomla! v1.5 UnitTest Platform
  *
- * @version	$Id$
+ * @version 	$Id$
  * @package 	Joomla
  * @subpackage 	UnitTest
  */
 
-require_once( JUNITTEST_VIEWS . '/JoomlaPhp.php' );
+require_once( SIMPLE_TEST.'xml.php' );
 
-class JoomlaXml extends JoomlaPhp
+class JoomlaXml extends XmlReporter
 {
+var $_character_set = 'UTF-8';
+var $_namespace;
+var $_indent = '    ';
 
-	function JoomlaXml($character_set = 'UTF-8') {
-		parent::__construct($character_set);
-		if (! headers_sent()) {
-			header('Accept-Charset: '.$this->_character_set, true);
-			header('Content-Type: text/xml; charset='.$this->_character_set, true);
-			header('Content-Encoding: '.$this->_character_set, true);
-			header('Encoding: '.$this->_character_set, true);
-		}
-	}
-
-    function paintHeader( $test_name )
-    {
-	    parent::paintHeader( $test_name );
-        echo '<?xml version="1.0" encoding="', $this->_character_set ,'"?>', PHP_EOL;
-        echo '<unittests>', PHP_EOL;
-    }
-
-    function paintFooter( $test_name )
-    {
-	    parent::paintFooter( $test_name );
-        echo '</unittests>', PHP_EOL;
-        while (@ob_end_flush());
-    }
-
-    function joomlaOutput()
-    {
-		echo '<testcase>', $this->_joomlaTests['unittests']['testcase'], '</testcase>', PHP_EOL;
-
-		foreach ( $this->status as $state) {
-			foreach( $this->_joomlaTests['unittests'][$state] as $class => $value ) {
-				foreach( $value as $method => $data ) {
-					echo "<{$state}>"
-						, $this->printEntry( $class, $method, $data['filepath'], $data['message'] )
-						, "</{$state}>", PHP_EOL;
-				}
+	function JoomlaXml($namespace=false, $indent='    ') {
+		$this->SimpleReporter();
+		if ($namespace) {
+			$this->_namespace = trim($namespace, ':');
+			if (!empty($this->_namespace)) {
+				$this->_namespace .= ':';
 			}
 		}
+		$this->_indent = $indent;
+		$this->sendNoCacheHeaders();
+	}
 
-		echo '<result>'. PHP_EOL
-			, '<total>', $this->_joomlaTests['unittests']['result']['total'], '</total>', PHP_EOL
-			, '<completed>', $this->_joomlaTests['unittests']['result']['completed'], '</completed>', PHP_EOL;
-		foreach ( $this->status as $state) {
-		    echo "<{$state}>"
-		    	, $this->_joomlaTests['unittests']['result'][$state]
-		    	, "</{$state}>"
-		    	, PHP_EOL;
+	function sendNoCacheHeaders() {
+		if (! SimpleReporter::inCli() && ! headers_sent() ) {
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Pragma: no-cache');
+			header('Content-Type: text/xml; charset=UTF-8', true);
+			header('Content-Encoding: '.$this->_character_set, true);
 		}
-		echo '</result>', PHP_EOL;
-    }
+		ob_start();
+	}
 
-    function printEntry( $class, $method, $filepath, $message )
-    {
-		echo '<class>', $class, "</class>", PHP_EOL
-			, '<method>', $method, "</method>", PHP_EOL
-			, '<filepath>', $filepath, "</filepath>", PHP_EOL
-			, '<message><![CDATA['
-			, htmlentities( $message, ENT_COMPAT, $this->_character_set )
-			, ']]></message>'
-			, PHP_EOL;
-    }
+	function paintHeader($test_name) {
+		$xmlns = ($this->_namespace)
+				? ' xmlns:'. rtrim($this->_namespace, ':') .'="http://www.joomla.org/unittests"'
+				: '';
+		echo	'<?xml version="1.0" encoding="utf-8"', '?>',
+				PHP_EOL,
+				'<', $this->_namespace, 'run', $xmlns, '>', PHP_EOL;
+	}
 
+	function paintFooter($test_name) {
+		echo '</', $this->_namespace, 'run>', PHP_EOL;
+	}
+
+	function toParsedXml($text) {
+		$text = parent::toParsedXml($text);
+		return str_replace( array('['.JUNITTEST_ROOT.'/', '['.JUNITTEST_ROOT.'\\'), '[', $text);
+	}
 }
 

@@ -130,6 +130,25 @@ class UnitTestHelper
 	}
 
 	/**
+	 * Allows a Reporter class to query testcase configuration.
+	 *
+	 * @param  SimpleReporter $reporter
+	 * @return bool true if a testcase is enabled
+	 */
+	function shouldInvoke( &$reporter, $class_name )
+	{
+		$UnitTests =& UnitTestHelper::getProperty('Reporter', 'UnitTests');
+		$class_name = strtolower($class_name);
+		if (isset($UnitTests[$class_name])) {
+			$invoke = (bool)$UnitTests[$class_name]->enabled;
+		} else {
+			$invoke = false;
+		}
+
+		return $invoke;
+	}
+
+	/**
 	 * @param  object $infoobj as returned from {@link getInfoObject()}
 	 * @return string name of the configuration
 	 */
@@ -211,7 +230,7 @@ class UnitTestHelper
 					: basename( $path, '.php');
 
 		$out       = new stdClass;
-		$out->path = $path;
+		$out->path = rtrim($path, '/');
 		if ($slash > 1) {
 			$out->dirname  = substr($path, 0, $slash);
 			$out->filename  = substr($path, $slash);
@@ -275,8 +294,9 @@ class UnitTestHelper
 		}
 
 		if ( !is_dir(JPATH_BASE .'/'. $out->dirname) ) {
-			$out->task  = 'error';
-			$out->error = sprintf('Directory does not exist in JPATH_BASE: "%1$s"', $out->dirname);
+			$out->enabled = false;
+			$out->task    = 'error';
+			$out->error   = sprintf('Directory does not exist in JPATH_BASE: "%1$s"', $out->dirname);
 			return $out;
 		}
 
@@ -298,7 +318,7 @@ class UnitTestHelper
 			$out->docs = UnitTestHelper::getTestDocs($out);
 		}
 
-		if ( $out->enabled == false) {
+		if ($out->enabled == false) {
 			return $out;
 		}
 
@@ -308,6 +328,8 @@ class UnitTestHelper
 			}
 		}
 
+		$testcase =& UnitTestHelper::getProperty('Reporter', 'UnitTests', 'array');
+		$testcase[strtolower($out->testclass)] =& $out;
 
 		// JUNITTEST_CLI
 
@@ -402,6 +424,23 @@ class UnitTestHelper
 	function unsetProperty($namespace, $prop)
 	{
 		UnitTestHelper::getProperty($namespace, $prop, null, true);
+	}
+
+	function toggleHostUrl()
+	{
+		if (JUNITTEST_HOME_PHP4 != JUNITTEST_HOME_PHP5) {
+			if (strpos(JUNITTEST_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
+				$php = 'PHP4';
+				$url = JUNITTEST_HOME_PHP4;
+			}
+			if (strpos(JUNITTEST_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
+				$php = 'PHP5';
+				$url = JUNITTEST_HOME_PHP5;
+			}
+		} else {
+			$php = $url = $output = '';
+		}
+		return array($php, $url);
 	}
 
 	/**
@@ -737,6 +776,16 @@ jutdump(debug_backtrace());
 		return $parsed;
 	}
 
+	/**
+	 * @TODO: add optional file logging
+	 * @see JUNITTEST_PHP_ERRORLOG
+	 */
+	function log($label, $testfile, $message = '')
+	{
+		$logfile = ini_get('error_log');
+		return error_log($label . '(', $testfile, ') '. $message. PHP_EOL, 0);
+	}
+
 	/**#@+
 	 * Shamelessly borrowed from PhpWiki stdlib.php, slightly
 	 * modified to suite code-style
@@ -787,16 +836,6 @@ jutdump(debug_backtrace());
 	}
 
 	/**#@- */
-
-	/**
-	 * @TODO: add optional file logging
-	 * @see JUNITTEST_PHP_ERRORLOG
-	 */
-	function log($label, $testfile, $message = '')
-	{
-		$logfile = ini_get('error_log');
-		return error_log($label . '(', $testfile, ') '. $message. PHP_EOL, 0);
-	}
 
 	/**#@+
 	 * @access private
