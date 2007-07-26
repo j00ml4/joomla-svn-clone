@@ -15,6 +15,8 @@ if (!defined('JUNITTEST_MAIN_METHOD')) {
 	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
 }
 
+require_once('libraries/joomla/utilities/array.php');
+
 class TestOfJArrayHelper extends UnitTestCase {
 
 	/**
@@ -50,6 +52,14 @@ class TestOfJArrayHelper extends UnitTestCase {
 	 * @todo Implement testToInteger().
 	 */
 	function testToInteger()
+	{
+		$array   = array("1","2","3");
+		$compare = array( 1 , 2 , 3 );
+		JArrayHelper::toInteger($array);
+		$this->assertEqual($array, $compare);
+	}
+
+	function testToInteger_default()
 	{
 		// Remove the following line when you implement this test.
 		return $this->_reporter->setMissingTestCase();

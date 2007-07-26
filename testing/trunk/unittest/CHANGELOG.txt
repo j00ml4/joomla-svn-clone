@@ -26,6 +26,14 @@ Tests failing / issues:
  	! WinXP Home SP2, FileZilla 0.9.21
 
 -------------------------------------------------
+2007-07-27 CirTap
+ ^	removed output buffering from Simpletest dumper
+ +	added skip/error/exception handler + counter to custom renderer
+ +	example of using testcase observers in JObjectTest.php (source only)
+ +	UnitTestHelper::toggleHostUrl() for renderes to create a link of
+ 	the 2nd PHP environment (if enabled)
+ !	README.txt
+
 2007-07-23 Enno Klasing
  #  JFTP: testSyst() now correctly catches the configuration setting
  ^  Improved documentation for TestOfJFTP

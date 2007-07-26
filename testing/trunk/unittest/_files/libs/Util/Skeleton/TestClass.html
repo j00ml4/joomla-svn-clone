@@ -27,7 +27,7 @@ class TestOf{className} extends UnitTestCase {
 	 */
 	function main() {
 		$self = new TestOf{className};
-		$self->run( UnitTestHelper::getReporter(null, __FILE__) );
+		$self->run( UnitTestHelper::getReporter() );
 	}
 
 	/**
@@ -46,6 +46,15 @@ class TestOf{className} extends UnitTestCase {
 	 * @access protected
 	 */
 	function tearDown() {
+	}
+
+	/**
+	 * This is a placeholder for skipping tests. In this method you place
+	 * skipIf() and skipUnless() calls to set the skipping state.
+	 * @access public
+	 */
+	function skip() {
+		$this->skipIf( false, __CLASS__.' requires implementation');
 	}
 
 	/**

@@ -71,7 +71,7 @@ the counterpart of getProperty() will destroy the "property"
 
 -------------------------------------------------
 (JConfig|stdClass) makeCfg($value, $merge = false, $asArray = false)
-Parse URI schemes and DSN into various JConfig compliant properties. 
+Parse URI schemes and DSN into various JConfig compliant properties.
 Useful to pimp a generic JConfig object with user provided credentials
 from `TestConfiguration.php`
 
@@ -175,6 +175,8 @@ A brief overview of the static properties used by the UnitTest Controller
 (array) UnitTestHelper::getProperty('Controller', 'Enabled');
 - init in: UnitTestController::getUnitTestsList()
 - reference subset of Controller::Tests of enabled tests only
+
+(object) UnitTestHelper::getProperty('Reporter', 'UnitTests')
 
 
 Status of this document

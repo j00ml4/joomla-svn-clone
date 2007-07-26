@@ -190,6 +190,11 @@ div.tests-total {
 /* .exception { background: #EBAD14; } */ /* Joomla-orange */
 /* .message   { background: #578AD6; } */ /* Joomla-blue   */
 
+.tpass      { color: #61BF1A !important; background: inherit; } /* Joomla-green   */
+.tfail      { color: #ED2E38 !important; background: inherit; } /* Joomla-red   */
+.texception { color: #EBAD14 !important; background: inherit; } /* Joomla-orange */
+.tmessage   { color: #578AD6 !important; background: inherit; } /* Joomla-blue   */
+
 div.fail {
 	background: #CC0000;
 	border-top:none;
@@ -234,6 +239,9 @@ span.miss, b.miss {
 .skip[title],
 .miss[title] {
 	outline: 1px solid #CC0000;
+}
+span.skip {
+	color: #CC0000;
 }
 
 div.exception {

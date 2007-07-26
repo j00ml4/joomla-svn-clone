@@ -30,14 +30,14 @@ var $_env = '';
 	}
 
 	function sendNoCacheHeaders() {
-		if (! headers_sent() ) {
-			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-			header("Cache-Control: no-store, no-cache, must-revalidate");
-			header("Cache-Control: post-check=0, pre-check=0", false);
-			header("Pragma: no-cache");
-			header("Content-Type: text/html; charset=".$this->_character_set);
-			header("Content-Encoding: ".$this->_character_set);
+		if (! SimpleReporter::inCli() && ! headers_sent() ) {
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Cache-Control: post-check=0, pre-check=0', false);
+			header('Pragma: no-cache');
+			header('Content-Type: text/html; charset='.$this->_character_set, true);
+			header('Content-Encoding: '.$this->_character_set, true);
 		}
 		ob_start();
 	}
@@ -50,9 +50,16 @@ var $_env = '';
     function paintHeader( $test_name )
     {
     	$this->test_name = $test_name;
+		$verbose = (JUNITTEST_REPORTER_RENDER_PASSED)
+				 ? '<small title="Also displays messages of passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
+				 : '<small title="Only displays messages of failed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
 		$home_url = JUNITTEST_HOME_URL;
+
     	$title = <<<HTML
-	<h1 class="header" onclick="location.href='{$home_url}';">Testcase: {$test_name} </h1>
+	<h1 class="header" onclick="location.href='{$home_url}';">
+	Testcase: {$test_name}
+	<small><span style="cursor:help">{$verbose}</span></small>
+	</h1>
 HTML;
 
 		if ( headers_sent() ) {

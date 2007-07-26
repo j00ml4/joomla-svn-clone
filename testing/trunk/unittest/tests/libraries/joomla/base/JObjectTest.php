@@ -13,7 +13,7 @@ require_once('libraries/joomla/base/object.php');
 
 class TestOfJObject extends UnitTestCase
 {
-    var $class = null;
+    var $instance = null;
 
 	/**
 	 * Runs the test methods of this class.
@@ -25,21 +25,28 @@ class TestOfJObject extends UnitTestCase
 		$self = new TestOfJObject;
 		$self->run( UnitTestHelper::getReporter() );
 	}
-
+/*
+	function before($method)
+	{
+		parent::before($method);
+		$observer = JObjectTestObserver::getAlan();
+		$this->tell($observer);
+	}
+*/
 	function setUp()
 	{
-        $this->class = new TestJObject;
+        $this->instance = new TestJObject;
 	}
 
 	function tearDown()
 	{
-		$this->class = null;
+		$this->instance = null;
 	}
 
     function testJObject()
     {
         $this->assertIsA( new JObject, 'JObject');
-        $this->assertIsA( $this->class, 'TestJObject');
+        $this->assertIsA( $this->instance, 'TestJObject');
     }
 
     function test__construct()
@@ -52,31 +59,31 @@ class TestOfJObject extends UnitTestCase
 
     function testSet()
     {
-    	$old = $this->class->set( 'test', 'data' );
+    	$old = $this->instance->set( 'test', 'data' );
         $this->assertNull( $old );
     }
 
     function testGet()
     {
-    	$this->class->set( 'test', 'data' );
+    	$this->instance->set( 'test', 'data' );
 
-    	$compare = $this->class->get( 'test' );
+    	$compare = $this->instance->get( 'test' );
         $this->assertEqual( $compare, 'data' );
 
-    	$compare = $this->class->get( 'text', 'string' );
+    	$compare = $this->instance->get( 'text', 'string' );
         $this->assertEqual( $compare, 'string' );
     }
 
     function testGetPublicProperties()
     {
-        $properties = $this->class->getPublicProperties();
+        $properties = $this->instance->getPublicProperties();
 
         $this->assertEqual( $properties[0], 'publicVar' );
     }
 
     function testGetPublicProperties_assoc()
     {
-        $properties = $this->class->getPublicProperties(true);
+        $properties = $this->instance->getPublicProperties(true);
 
         $this->assertTrue( isset($properties['publicVar']) );
         $this->assertEqual( $properties['publicVar'], 'Public' );
@@ -85,7 +92,7 @@ class TestOfJObject extends UnitTestCase
 
     function testToString()
     {
-    	$string = $this->class->toString();
+    	$string = $this->instance->toString();
     	if ((int)PHP_VERSION >= 5) {
 	        $this->assertEqual( $string, 'TestJObject' );
     	} else {
@@ -113,7 +120,7 @@ class TestJObject extends JObject
 }
 
 /**
- * Class to test static useage of JObjects
+ * Class to test static usage of JObject
  */
 class TestJObjectStatics
 {
@@ -151,6 +158,33 @@ var $data = array();
 			}
 		}
 		return $cache[$assoc ? 1 : 0];
+	}
+}
+
+/* this is only a test of the UnitTest Observer feature.
+ * A new testcase observer can be added using $testcase->tell(&$observer).
+ * One can have multiple observers. They must implement the
+ * atTestEnd($method, &$test_case) method, so an observer can be as
+ * simple as this one -- but hopefully not as dumb.
+ * Observers DO NOT PERSIST and are destroyed and recreated between each
+ * test method.
+ */
+class JObjectTestObserver
+{
+	/* called from Simpletest */
+	function atTestEnd($method, &$test_case) {
+		$context  = &SimpleTest::getContext();
+		$reporter = &$context->getReporter();
+		$reporter->paintMessage("did and done $method");
+	}
+
+	/* get the instance of JObjectTestObserver */
+	function &getAlan() {
+		static $alan;
+		if ($alan === null) {
+			$alan = & new JObjectTestObserver();
+		}
+		return $alan;
 	}
 }
 

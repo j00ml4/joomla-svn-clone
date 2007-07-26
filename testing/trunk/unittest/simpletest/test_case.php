@@ -358,7 +358,7 @@
          *    @deprecated
          */
         function sendMessage($message) {
-            $this->_reporter->PaintMessage($message);
+            $this->_reporter->paintMessage($message);
         }
 
         /**
