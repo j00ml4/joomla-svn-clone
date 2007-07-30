@@ -3,9 +3,47 @@
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getBrowser]] |
 
 Retrieve the current browser.
+
 ===== Syntax =====
-string getBrowser ()
+string getBrowser()
 
 ===== Examples =====
+<code php|Example 1>
+jimport('joomla.environment.browser');
+$browser =& JBrowser::getInstance();
+$name    = $browser->getBrowser();
 
+switch ($name) {
+  case 'konqueror':
+    echo 'This browser is based on WebKit: ';
+    break;
+  case 'mozilla':
+    echo 'This browser is based on Gecko: ';
+    break;
+  case 'msie':
+    echo '- Good luck with Trident/Tasman: ';
+    break;
+  case 'opera':
+    echo 'This browser is based on Presto: ';
+    break;
+  default:
+    echo 'This is a Handheld, mobile phone, or text based browser: ' . ucwords($name);
+}
+echo PHP_EOL, $browser->getAgentString();
+</code>
 
+This may produce (using Firefox 2.0.0.5 on WinXP):
+<code>
+This browser is based on Gecko: 
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.5) Gecko/20070713 Firefox/2.0.0.5
+</code>
+
+getBrowser() currently returns the following browser "names".
+ - opera, msie, konqueror*), mozilla
+ - avantgo, blackberry, ericsson, fresco, hotjava, imode, links, lynx, mml, motorola, nokia, palm, palmscape, wap, xiino
+
+The Safari web browser is reported as 'konqueror' since they both share the same HTML rendering engine.
+
+Keep in mind that any kind of server-side client-sniffing is error prone, as the /assumptions/ made of the current browser are exclusively based on the User-Agent string which is not reliable.
+
+If you use this information to serve specific javascript files, you should still implement some client-side [[http://www.quirksmode.org/js/support.html|object detection]] to prevent your scripts from failing (users who fake the User-Agent string of their browser should expect such things to happen.)

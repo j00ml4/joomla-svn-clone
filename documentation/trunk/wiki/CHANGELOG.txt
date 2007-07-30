@@ -15,6 +15,11 @@ Legend:
 > -> Moved
 ! -> Note
 ---------
+
+30.07.2007 René Serradeil
+ ^	JSimpleXML - clean up of html contained in phpDoc; examples
+ +	JBrowser::getBrowser()
+
 18.07.2007 René Serradeil
  -	old references/CHANGELOG.txt
  #	joomla.framework.txt: JOutputFilter/JInputFilter renamed to JFilterInput/JFilterOutput
