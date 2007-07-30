@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="howto.tooltips">
+  <articleinfo>
+    <firstname>Aikidoka</firstname>
+
+    <surname />
+
+    <date>June 28, 2007</date>
+  </articleinfo>
+
+  <title>HOWTO: Using Tooltips in Extensions</title>
+
+  <sect1 id="howto.tooltips.activating">
+    <title>Activating Tooltip Behaviour</title>
+
+    <para>Before you add tooltips to your extensions, you must activate the
+    tooltip behaviour. This is done using the JHTMLBehavior class. The
+    following code is used to do this:<programlisting>JHTML::_('behavior.tooltip');</programlisting></para>
+  </sect1>
+
+  <sect1 id="howto.tooltips.builtin">
+    <title>The Built-in Joomla! Method</title>
+
+    <para>The easiest way to create a tooltip is using the JHTML::tooltip
+    method.. The api docs should be here:<ulink
+    url="http://api.joomla.org/Joomla-Framework/HTML/JHTML.html#tooltip">http://api.joomla.org/Joomla-Framework/HTML/JHTML.html#tooltip</ulink>
+    However here is the method definition. For those unfamiliar with method
+    definitions, the brackets mean the parameter is optional. The equals
+    specifies the default if you do not pass that parameter.<programlisting>void tooltip (string $tooltip, [string $title = ''], [string $image = 'tooltip.png'], [string $text = ''], [string $href = ''], [boolean $link = 1])</programlisting>The
+    following is a basic tooltip. Keep in mind that the image variable must be
+    in reference to ‘includes/js/ThemeOffice’. Use the prefix ‘../../../’ to
+    reference from the root of the Joomla installation.<programlisting>JHTML::tooltip(‘This is the tooltip text’, ‘Tooltip title’, ‘tooltip.png’, ‘’, ‘http://www.joomla.org’);</programlisting>The
+    above will make a tooltip on the tooltip.png image. Clicking the image
+    will take you to <ulink url="???">www.joomla.org</ulink>.<programlisting>JHTML::tooltip(‘This is the tooltip text’, ‘Tooltip title’, ‘tooltip.png’, ‘’, ‘’, false);</programlisting>The
+    above is almost the same except the image will not be a link.</para>
+
+    <para>NOTE: Specifying the $text parameter will override any image you
+    have passed to tooltip!</para>
+  </sect1>
+
+  <sect1 id="howto.tooltips.classname">
+    <title>Creating a Tooltip by Class Name</title>
+
+    <para>That is the easy way to do it. You can also apply the “hasTip” class
+    to something to make it a tool tip. This will make it possible to easily
+    do your own custom tips later. I’ve adapted information here from the
+    <ulink url="http://demos.mootools.net/">mootools demo</ulink>.</para>
+
+    <para><programlisting>&lt;span class="hasTip" title="My Tooltip Title :: Here is my tip\’s text"&gt;Mootools.net&lt;/span&gt;</programlisting>This
+    produces a tool tip on the span. The title attribute specifies what is in
+    the tool tip. The format is “Tip Title::Tip Text”.</para>
+  </sect1>
+
+  <sect1 id="howto.tooltips.designing">
+    <title>Designing the Tooltip</title>
+
+    <para>The default toottips, whether using the JHTML::tooltip method or
+    class method, use the following three CSS classes: .tool-tip .tool-title
+    .tool-text </para>
+
+    <para>Here are the default styles.<programlisting>/* Tooltips */
+.tool-tip {
+    float: left;
+    background: #ffc;
+    border: 1px solid #D4D5AA;
+    padding: 5px;
+    max-width: 200px;
+}
+
+.tool-title {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    font-weight: bold;
+    margin-top: -15px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    background: url(../images/selector-arrow.png) no-repeat;
+}
+
+.tool-text {
+    font-size: 100%;
+    margin: 0;
+}</programlisting>Dump this into your custom CSS file if you have one and
+    alter it to your liking.</para>
+  </sect1>
+
+  <sect1 id="howto.tooltips.customizing">
+    <title>Customizing your Tooltips</title>
+
+    <para>Ok, time to get down and dirty. This is based on the <ulink
+    url="http://demos.mootools.com/">mootools demo</ulink>. Don’t want anybody
+    to think I discovered it on my own! Now we are going to make our own tip
+    definitions that include a very cool fade in and out. First create a
+    JavaScript file or simply put this code directly into your code. Pick a
+    name for the class to use. I used “zoomTip” as I was playing with Zoom
+    Gallery while learning this.</para>
+
+    <para><programlisting>window.addEvent('domready', function(){
+    //do your tips stuff in here...
+    var zoomTip = new Tips($$('.zoomTip'), {
+        className: 'custom', //this is the prefix for the CSS class
+        initialize:function(){
+            this.fx = new Fx.Style(this.toolTip, 'opacity', {duration: 500, wait: false}).set(0);
+        },
+        onShow: function(toolTip) {
+            this.fx.start(1);
+        },
+        onHide: function(toolTip) {
+            this.fx.start(0);
+        }
+    });
+});</programlisting>I’m only going to cover one line of that code here. Please
+    look over the mootools library for more information. I read in their forum
+    that their slider library is not compatible with the tooltips. The 4th
+    line is the prefix for the CSS classes that will be used. In this example
+    the classes will be the following: .custom-tip .custom-title
+    .custom-text</para>
+
+    <para>Here is some example CSS straight from the <ulink url="???">mootools
+    demo</ulink>.<programlisting>.custom-tip {
+    color: #000;
+    width: 130px;
+    z-index: 13000;
+}
+ 
+.custom-title {
+    font-weight: bold;
+    font-size: 11px;
+    margin: 0;
+    color: #3E4F14;
+    padding: 8px 8px 4px;
+    background: #C3DF7D;
+    border-bottom: 1px solid #B5CF74;
+}
+ 
+.custom-text {
+    font-size: 11px;
+    padding: 4px 8px 8px;
+    background: #CFDFA7;
+}</programlisting></para>
+
+    <para>Notice that .custom-title does not have a background property. This
+    tool tip will be a box without the neat little arrow pointing at the
+    mouse. If you wanted to change the colors in the box and use the arrows
+    you would have to alter the image to have the color you want and add that
+    property into your .custom-title CSS. Now you must create the items using
+    the class method and not using JHTML::tooltip. JHTML::tooltip applies the
+    classes “editlinktip” and “hasTip”. I have not seen any way to easily
+    alter that. The code below will create a tip using this new js
+    code.<programlisting>&lt;span class="zoomTip" title="My Tooltip Title :: Here is my tip\’s text"&gt;Mootools.net&lt;/span&gt;</programlisting>Notice
+    the only difference from the previous example using a span is the class
+    name.</para>
+  </sect1>
+</article>
