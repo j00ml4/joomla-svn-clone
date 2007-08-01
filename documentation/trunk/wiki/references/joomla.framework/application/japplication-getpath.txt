@@ -2,7 +2,9 @@
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getPath]] | never | Work in progress |
 
-Retrieves the path to the specified file. This method is deprecated in Joomla! 1.5 (JApplicationHelper->getPath should be used instead). See the [[references:joomla.framework:application:JApplicationHelper:getPath|JApplicationHelper->getPath]] for a detailed description of this method.
+Retrieves the path to the specified file. 
+**This method is deprecated in Joomla! 1.5 (JApplicationHelper::getPath should be used instead).** 
+See the [[JApplicationHelper-getPath|JApplicationHelper::getPath]] for a detailed description of this method.
 
 ===== Syntax =====
 void getPath ( **$varname**, **$user_option** )

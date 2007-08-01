@@ -1,23 +1,32 @@
 ====== JSimpleXMLElement ======
 {#JAPI Joomla.Framework Utilities JSimpleXMLElement #}
 
-SimpleXML Element<p>This object stores all of the direct children of itself in the $children array.  They are also stored by type as arrays. So, if, for example, this tag had 2 &lt;font&gt;  tags as children, there would be a class member called $font created as an array.  $font[0] would be the first font tag, and $font[1] would be the second.</p><p>To loop through all of the direct children of this object, the $children member   should be used.</p><p>To loop through all of the direct children of a specific tag for this object, it  is probably easier to use the arrays of the specific tag names, as explained above.</p>
+SimpleXML Element.
+
+This object stores all of the direct children of itself in the ''$children'' array.
+They are also stored by type as arrays. So, if, for example, this tag had two ''<font>'' tags as children, there would be a class member called ''$font'' created as an array.
+''$font[0]'' would be the first font tag, and ''$font[1]'' would be the second.
+
+To loop through all of the direct children of this object, the $children member should be used.
+
+To loop through all of the direct children of a specific tag for this object, it is probably easier to use the arrays of the specific tag names, as explained above.
+
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JSimpleXMLElement-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-__construct|__construct]] | Constructor, sets up all the default values |
-| [[JSimpleXMLElement-addAttribute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-addAttribute|addAttribute]] | Adds an attribute to the element |
-| [[JSimpleXMLElement-addChild|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-addChild|addChild]] | Adds a direct child to the element |
-| [[JSimpleXMLElement-attributes|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-attributes|attributes]] | Get the an attribute of the element |
-| [[JSimpleXMLElement-children|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-children|children]] | Get the children of the element |
-| [[JSimpleXMLElement-data|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-data|data]] | Get the data of the element |
-| [[JSimpleXMLElement-getElementByPath|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-getElementByPath|getElementByPath]] | Get an element in the document by / separated path |
-| [[JSimpleXMLElement-level|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-level|level]] | Get the level of the element |
-| [[JSimpleXMLElement-map|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-map|map]] | traverses the tree calling the $callback( JSimpleXMLElement  $this, mixed $args=array() ) function with each JSimpleXMLElement. |
-| [[JSimpleXMLElement-name|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-name|name]] | Get the name of the element |
-| [[JSimpleXMLElement-removeAttribute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-removeAttribute|removeAttribute]] | Removes an attribute from the element |
-| [[JSimpleXMLElement-removeChild|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-removeChild|removeChild]] |  |
-| [[JSimpleXMLElement-setData|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-setData|setData]] | Set the data of the element |
-| [[JSimpleXMLElement-toString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleXMLElement-toString|toString]] | Return a well-formed XML string based on SimpleXML element |
+| {{references:Constructor.png?nolink}} [[JSimpleXMLElement-__construct|__construct]] | Constructor, sets up all the default values |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-addAttribute|addAttribute]] | Adds an attribute to the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-addChild|addChild]] | Adds a direct child to the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-attributes|attributes]] | Get the an attribute of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-children|children]] | Get the children of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-data|data]] | Get the data of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-getElementByPath|getElementByPath]] | Get an element in the document by / separated path |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-level|level]] | Get the level of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-map|map]] | traverses the tree using a callback function |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-name|name]] | Get the name of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-removeAttribute|removeAttribute]] | Removes an attribute from the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-removeChild|removeChild]] |  |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-setData|setData]] | Set the data of the element |
+| {{references:Method.png?nolink}} [[JSimpleXMLElement-toString|toString]] | Return a well-formed XML string based on SimpleXML element |
 
 ----
 
