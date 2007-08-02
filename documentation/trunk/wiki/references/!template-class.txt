@@ -1,14 +1,14 @@
 ====== ClassName ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html|ClassName]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{references:package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html|ClassName]] | never | Work in progress |
 
 Class description.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[__constructor|__constructor]] | Description |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method1|Method1]] | Description |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[Method2|Method2]] | Description |
+| {{references:Constructor.png?nolink}} [[__constructor|__constructor]] | Description |
+| {{references:Method.png?nolink}} [[Method1|Method1]] | Description |
+| {{references:Method.png?nolink}} [[Method2|Method2]] | Description |
 
 ----
 

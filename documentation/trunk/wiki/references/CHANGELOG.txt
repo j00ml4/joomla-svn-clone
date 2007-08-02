@@ -16,6 +16,11 @@ Legend:
 ! -> Note
 ---------
 
+03.08.2007 René Serradeil
+ -	"testfiles"
+ ^	template files to use {{references:image.php}} shortcut instead 
+	external URL (api.joomla.org/media/images/image.php)
+
 02.07.2007 Ian MacLennan
  ^	Changed links to _construct files to __construct (after I updated wiki configuration to support __)
 

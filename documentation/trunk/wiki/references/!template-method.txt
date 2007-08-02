@@ -1,6 +1,6 @@
 ====== methodName ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[ClassName]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html#methodName|ClassName->methodName]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{references:package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | {{references:Class.png?nolink}} [[ClassName]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html#methodName|ClassName->methodName]] | never | Work in progress |
 
 Method description.
 
