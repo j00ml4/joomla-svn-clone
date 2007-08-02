@@ -6,7 +6,7 @@ JDocumentPDF class, provides an easy interface to parse and display a PDF docume
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentPDF-_construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-_construct|__construct]] | JDocumentPDF class constructor. |
+| [[JDocumentPDF-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-__construct|__construct]] | JDocumentPDF class constructor. |
 | [[JDocumentPDF-getHeader|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-getHeader|getHeader]] | Returns the document header string. |
 | [[JDocumentPDF-getName|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-getName|getName]] | Returns the document name. |
 | [[JDocumentPDF-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentPDF-render|render]] | Renders the document. |

@@ -8,7 +8,7 @@ The model represents the data and business logic for a component written using t
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JModel-_construct|__construct]] | Constructor  |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JModel-__construct|__construct]] | Constructor  |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JModel-addIncludePath|addIncludePath]] | Adds a directory where JModel should search for models. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JModel-addTablePath|addTablePath]] | Adds to the stack of model table paths in LIFO order. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JModel-getDBO|getDBO]] | Gets the database connector object. |

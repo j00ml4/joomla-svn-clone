@@ -6,7 +6,7 @@ JDocumentRenderer is an abstract base class for renderers.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRenderer-_construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRenderer-_construct|__construct]] | Constructor for JDocumentRenderer. |
+| [[JDocumentRenderer-__construct|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRenderer-__construct|__construct]] | Constructor for JDocumentRenderer. |
 | [[JDocumentRenderer-getContentType|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRenderer-getContentType|getContentType]] | Returns the content type of the renderer. |
 | [[JDocumentRenderer-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRenderer-render|render]] | Renders a script and returns the result as a string. |
 

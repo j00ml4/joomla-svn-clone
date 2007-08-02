@@ -8,7 +8,7 @@ The controller controls the execution for a component written using the MVC desi
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-_construct|__construct]] | Class constructor. |
+| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-__construct|__construct]] | Class constructor. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-addModelPath|addModelPath]] | Adds to the stack of controller model paths in LIFO order. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-addViewPath|addViewPath]] | Add one or more view paths to the controller's stack, in LIFO order. |
 | {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-authorize|authorize]] | Checks if a user is authorized to perform the specified task.  |
