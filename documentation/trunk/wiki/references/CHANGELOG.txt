@@ -16,6 +16,9 @@ Legend:
 ! -> Note
 ---------
 
+02.07.2007 Ian MacLennan
+ ^	Changed links to _construct files to __construct (after I updated wiki configuration to support __)
+
 30.07.2007 René Serradeil
  ^	JSimpleXML - clean up of html contained in phpDoc; examples
  +	JBrowser::getBrowser()
