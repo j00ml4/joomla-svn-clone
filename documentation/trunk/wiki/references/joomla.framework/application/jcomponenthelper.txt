@@ -2,9 +2,9 @@
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html|JComponentHelper]] | never | Work in progress |
 
-Component helper class.
+The JComponentHelper class contains utility functions to assist in common functions required for components.
 
-This class contains utility functions to assist in common functions required for components.  This is a static class.
+This is a static class.
 
 ===== Methods =====
 ^ Method ^ Description ^
