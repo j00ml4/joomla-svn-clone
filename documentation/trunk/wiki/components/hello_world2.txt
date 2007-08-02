@@ -12,6 +12,7 @@ Our plan is to create a page where we can choose which name to display. Therefor
 defined( '_JEXEC' ) or die( 'Restricted access' );
  
 // require the html view class
+jimport( 'joomla.application.helper' );
 require_once( JApplicationHelper::getPath( 'front_html', 'com_hello' ) );
  
 $task = JRequest::getVar( 'task' );
