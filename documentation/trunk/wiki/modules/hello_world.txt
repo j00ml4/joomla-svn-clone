@@ -12,18 +12,16 @@ This tutorial will explain how to go about creating a simple Hello World module.
 There are four basic files that are used in the standard pattern of module development: *
 mod_helloworld.php - This file is the main entry point for the module. It will perform any necessary initialization routines, call helper routines to collect any necessary data, and include the template which will display the module output.
 
-  *
-mod_helloworld.xml - This file contains information about the module. It defines the files that need to be installed by the Joomla! installer and specifies configuration parameters for the module.
-
-  *
-helper.php - This file contains the helper class which is used to do the actual work in retrieving the information to be displayed in the module (usually from the database or some other source).
-
-  *
-tmpl/default.php - This is the module template. This file will take the data collected by mod_helloworld.php and generate the HTML to be displayed on the page.
+  * mod_helloworld.xml - This file contains information about the module. It defines the files that need to be installed by the Joomla! installer and specifies configuration parameters for the module.
+  * helper.php - This file contains the helper class which is used to do the actual work in retrieving the information to be displayed in the module (usually from the database or some other source).
+  * tmpl/default.php - This is the module template. This file will take the data collected by mod_helloworld.php and generate the HTML to be displayed on the page.
 
 ===== Creating mod_helloworld.php =====
 
-The mod_helloworld.php file will perform three tasks: <itemizedlist mark="bullet"> *include the helper.php file which contains the class to be used to collect the necessary data *invoke the appropriate helper class method to retrieve the data *include the template to display the output.
+The mod_helloworld.php file will perform three tasks:
+  * include the helper.php file which contains the class to be used to collect the necessary data
+  * invoke the appropriate helper class method to retrieve the data
+  * include the template to display the output.
 
 The helper class is defined in our helper.php file. This file is included with a require_once statement:
 
