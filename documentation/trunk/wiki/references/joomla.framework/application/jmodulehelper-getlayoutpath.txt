@@ -4,14 +4,35 @@
 Get the path to a layout for a module
 
 ===== Syntax =====
-string getLayoutPath	( **$module**, **$layout** )
+string getLayoutPath ( **$module**, **$layout** = 'default' )
 
 | **$module** | string | The name of the module |
 | **$layout** | string | The name of the module layout |
 
 ===== Examples =====
-<code php|Example>
+<code php|Example 1>
+$path = JModuleHelper::getLayoutPath('mod_newsflash', 'horiz');
+echo path;
+</code>
+Might create:
+<code>
+/htdocs/joomla15/modules/mod_newsflash/tmpl/horiz.php
+</code>
 
+If a template override for the requested module exists, the path will point to the layout file in the template directory, i.e:
+<code>
+/htdocs/joomla15/templates/beez/html/mod_newsflash/horiz.php
+</code>
+
+**Note:** The function only tests whether a template override layout file exists and will return the default modules path instead.
+If you misspell the module name, or accidently ommit the 'mod_' prefix, the resulting path may point to a non-existing file:
+<code php|Example 1>
+$path = JModuleHelper::getLayoutPath('newsflash', 'horiz');
+echo path;
+</code>
+Might create:
+<code>
+/htdocs/joomla15/modules/newsflash/tmpl/horiz.php
 </code>
 
 

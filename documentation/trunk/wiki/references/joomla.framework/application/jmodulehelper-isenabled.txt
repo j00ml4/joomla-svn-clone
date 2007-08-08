@@ -1,0 +1,23 @@
+====== isEnabled ======
+{#JAPI Joomla.Framework Application JModuleHelper::isEnabled #}
+
+Checks if a module is enabled
+
+===== Syntax =====
+object &isEnabled ( **$module** )
+
+| **$module** | string | The module name |
+
+===== Examples =====
+<code php|Example>
+if ( JModuleHelper::isEnabled('banners') ) {
+    $module = &JModuleHelper::getModule('banners');
+    echo JModuleHelper::renderModule($module);
+}
+</code>
+
+The above example would only render the content of the Banners module (mod_banners) if it is enabled or the user has sufficient rights to see it.
+
+----
+
+~~DISCUSSION~~
