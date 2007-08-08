@@ -1,18 +1,30 @@
 ====== getModule ======
 {#JAPI Joomla.Framework Application JModuleHelper::getModule #}
 
-Get module by name
+Get a module by name
 
 ===== Syntax =====
-object The &getModule	( **$name** )
+object &getModule ( **$name** )
 
-| **$name** | string | The name of the module |
+| **$name** | string | The name of the module w/o the 'mod_' prefix |
 
 ===== Examples =====
 <code php|Example>
-
+$module = &JModuleHelper::getModule('banners');
+echo JModuleHelper::renderModule($module);
 </code>
 
+The example might render the following HTML snippet:
+<code html|Example output>
+  <div class="bannergroup">
+    <div class="banneritem">
+      custom banner text
+    <div class="clr"></div>
+    </div>
+  </div>
+</code>
+
+This is essentially the same as using %%<jdoc:include type="module" name="banners" style="none" />%%  in the site template.
 
 ----
 

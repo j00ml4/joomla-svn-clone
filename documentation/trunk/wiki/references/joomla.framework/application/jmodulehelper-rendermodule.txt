@@ -1,19 +1,26 @@
 ====== renderModule ======
 {#JAPI Joomla.Framework Application JModuleHelper::renderModule #}
 
-
+Renders a module and returns its output.
 
 ===== Syntax =====
-void renderModule	( **$module**, **$attribs** )
+void renderModule ( **$module**, **$attribs** = array() )
 
-| **$module** |  |  |
-| **$attribs** |  |  |
+| **$module** | object | The module object |
+| **$attribs** | array | Optional attributes, i.e. 'style' |
+
+If no $attribs are provided, the default output style applied is 'none'.
 
 ===== Examples =====
 <code php|Example>
 
 </code>
 
+A template designer may provide custom "chrome" styles by adding %%html/modules.php%% to the currently active template directory. 
+Each "chrome" is rendered "on top" if the style attribute in the template is given as a space separated list:
+<code html|Example>
+<jdoc:include type="modules" name="right" style="mystyle otherstyle" />
+</code>
 
 ----
 

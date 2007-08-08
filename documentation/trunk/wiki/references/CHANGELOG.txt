@@ -16,6 +16,10 @@ Legend:
 ! -> Note
 ---------
 
+08.08.2007 René Serradeil
+ +	JModuleHelper::isEnabled
+ ^	JModuleHelper::* descriptions and examples
+
 03.08.2007 René Serradeil
  -	"testfiles"
  ^	template files to use {{references:image.php}} shortcut instead 

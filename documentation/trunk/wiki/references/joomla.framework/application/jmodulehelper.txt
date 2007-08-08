@@ -2,27 +2,18 @@
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
 | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JModuleHelper.html|JModuleHelper]] | never | Work in progress |
 
-Module helper class
+Module helper class.
+
+This class provides some handy routines to manage module content and rendering.
 
 ===== Methods =====
+^ Method ^ Description ^
+| {{references:Constructor.png?nolink}} [[JModuleHelper-getLayoutPath|getLayoutPath]] | Get the path to a layout for a module |
+| {{references:Method.png?nolink}} [[JModuleHelper-getModule|getModule]] | Get a module by name (e.g. 'Breadcrumbs') |
+| {{references:Method.png?nolink}} [[JModuleHelper-getModules|getModules]] | Get modules by template position |
+| {{references:Method.png?nolink}} [[JModuleHelper-isEnabled|isEnabled]] | Checks if a module is enabled |
+| {{references:Method.png?nolink}} [[JModuleHelper-renderModule|renderModule]] | Renders a modules |
 
-==== getModule ====
-Get module by name
-=== Syntax ===
-object The &getModule	( string $name )
+----
 
-$name
-  * The name of the module
-
-=== Examples ===
-
-==== getModules ====
-Get modules by position
-=== Syntax ===
-array &getModules	( string $position )
-
-$position
-  * The position of the module
-
-=== Examples ===
-
+~~DISCUSSION~~
