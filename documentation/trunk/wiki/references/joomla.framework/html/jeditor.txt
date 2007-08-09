@@ -4,7 +4,7 @@
 JEditor class to handle WYSIWYG editors
 ===== Methods =====
 ^ Method ^ Description ^
-| {{references:Method.png?nolink}} [[JEditor-__construct|__construct]] | constructor |
+| {{references:Method.png?nolink }} [[JEditor-__construct|__construct]] | constructor |
 | [[JEditor-display|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-display|display]] | Present a text area |
 | [[JEditor-getButtons|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-getButtons|getButtons]] | Get the editor buttons |
 | [[JEditor-getContent|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEditor-getContent|getContent]] | Get the editor contents |
