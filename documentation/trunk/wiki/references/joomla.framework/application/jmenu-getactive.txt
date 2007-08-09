@@ -1,17 +1,28 @@
 ====== getActive ======
 {#JAPI Joomla.Framework Application JMenu::getActive #}
 
-Get menu item by id
+Gets the active menu item.
+
+The active menu reflects the link of the current page, provided there's a link to it in one of the visible menus.
 
 ===== Syntax =====
 object The &getActive ()
 
-
 ===== Examples =====
 <code php|Example>
+// get the Singleton instance
+$menu   = &JMenu::getInstance();
 
+// get the active menu item
+$active = &$menu->getActive();
+echo '<a href="', $active->link , '">', $active->name ,'</a>';
 </code>
-
+Might create:
+<code html>
+  <a href="index.php?option=com_content&view=article&id=25">
+    About Joomla!
+  </a>
+</code>
 
 ----
 

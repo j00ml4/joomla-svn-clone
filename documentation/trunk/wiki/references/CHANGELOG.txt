@@ -16,6 +16,9 @@ Legend:
 ! -> Note
 ---------
 
+02.08.2007 René Serradeil
+ ^	remarks for (some) Singleton objects; examples for JMenu
+
 08.08.2007 René Serradeil
  +	JModuleHelper::isEnabled
  ^	JModuleHelper::* descriptions and examples

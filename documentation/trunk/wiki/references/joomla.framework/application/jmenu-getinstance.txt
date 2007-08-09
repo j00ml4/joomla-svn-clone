@@ -1,17 +1,37 @@
 ====== getInstance ======
 {#JAPI Joomla.Framework Application JMenu::getInstance #}
 
-Returns a reference to the global JMenu object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $menu = &JMenu::getInstance();</pre></p>
+Returns a reference to the global JMenu object, only creating it if it doesn't already exist.
+
+JMenu is implemented as a Singleton object, that is only one instance of this object exists.
+Do not use the new operator to "create" a new menu; the JMenu instance provides you with all the mainmenu modules.
 
 ===== Syntax =====
-<a href="../../Joomla-Framework/Application/JMenu.html">JMenu</a> &getInstance ()
+JMenu &getInstance ( )
 
 
 ===== Examples =====
+
 <code php|Example>
+jimport( 'joomla.application.menu' );
+
+// get the Singleton instance
+$menu   = &JMenu::getInstance();
+
+// get the active menu
+$active = &$menu->getActive();
+echo 'Active: ', $active->name;
+
+// get the default menu
+$active = &$menu->getDefault();
+echo 'Default: ', $active->name;
 
 </code>
-
+Might produce:
+<code>
+Active: FAQ
+Default: Home
+</code>
 
 ----
 
