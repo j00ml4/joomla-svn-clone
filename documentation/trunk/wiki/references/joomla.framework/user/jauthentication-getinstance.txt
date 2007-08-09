@@ -1,8 +1,10 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JAuthentication|JAuthentication]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthentication.html|JAuthentication->getInstance]] | 19 September 2006 | Published |
+{#JAPI Joomla.Framework User JAuthentication::getInstance #}
 
 Returns a reference to a global authentication object, only creating it if it doesn't already exist.  Note that you must include the '&' when invoking this method.
+
+JAuthentication is implemented as a Singleton object, that is only one instance of this object exists.
+Do not use the new operator to "create" a new authentication instance, i.e. to authenticate a user against a different target.
 
 ===== Syntax =====
 JAuthentication &getInstance ()
