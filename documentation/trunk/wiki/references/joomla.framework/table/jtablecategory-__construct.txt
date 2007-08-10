@@ -13,7 +13,7 @@ JTableCategory __construct ( **&$db** )
 The JTableCategory class should be instantiated in the following way:
 <code php|Example>
 $db =& JFactory::getDBO();
-$category =& JTable::getInstance('category', $db );
+$category =& JTable::getInstance( 'category' );
 </code>
 The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 

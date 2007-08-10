@@ -11,8 +11,7 @@ mixed purge	( **$age** )
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$session =& JTable::getInstance('session', $db );
+$session =& JTable::getInstance( 'session' );
 
 $session->purge( 900 );
 </code>

@@ -14,8 +14,7 @@ boolean check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$user =& JTable::getInstance('user', $db );
+$user =& JTable::getInstance( 'user' );
 
 $user->name = 'John Smith';
 $user->username = 'John > Smith';

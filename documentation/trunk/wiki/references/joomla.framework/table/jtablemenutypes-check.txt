@@ -10,8 +10,7 @@ boolean check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$menutype =& JTable::getInstance('menutypes', $db );
+$menutype =& JTable::getInstance( 'menutypes' );
 $menutype->menutype = 'custommen\'u';
 $menutype->title = "     ";
 $menutype->description = "This is a description of a custom menu.";

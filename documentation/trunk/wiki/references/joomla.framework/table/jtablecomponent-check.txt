@@ -10,7 +10,7 @@ void check ()
 ===== Examples =====
 <code php|Example>
 $db =& JFactory::getDBO();
-$component =& JTable::getInstance('component', $db );
+$component =& JTable::getInstance('component' );
 $component->loadByOption( 'com_document' );
 $component->ordering = '5test';
 echo "Data Integrity Check " . ($component->check() ? "Passed" : "Failed") . "<br />";

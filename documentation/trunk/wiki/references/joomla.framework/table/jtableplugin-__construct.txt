@@ -12,8 +12,7 @@ JTablePlugin __construct ( **&$db** )
 ===== Examples =====
 The JTablePlugin class should be instantiated in the following way:
 <code php|Example>
-$db =& JFactory::getDBO();
-$plugin =& JTable::getInstance('plugin', $db );
+$plugin =& JTable::getInstance( 'plugin' );
 </code>
 The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 </code>

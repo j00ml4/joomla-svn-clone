@@ -10,7 +10,7 @@ void check ()
 ===== Examples =====
 <code php|Example>
 $db =& JFactory::getDBO();
-$content =& JTable::getInstance('content', $db );
+$content =& JTable::getInstance( 'content' );
 $content->load( 6 );
 $content->fulltext = "       &nbsp;&nbsp;  &nbsp;    \n\r";
 echo "The value of fulltext is: '$content->fulltext' <br />";
