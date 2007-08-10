@@ -9,7 +9,6 @@ void check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
 $content =& JTable::getInstance( 'content' );
 $content->load( 6 );
 $content->fulltext = "       &nbsp;&nbsp;  &nbsp;    \n\r";
