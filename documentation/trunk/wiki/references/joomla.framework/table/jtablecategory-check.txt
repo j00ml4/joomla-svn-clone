@@ -10,7 +10,7 @@ void check ()
 ===== Examples =====
 <code php|Example>
 $db =& JFactory::getDBO();
-$category =& JTable::getInstance('category', $db );
+$category =& JTable::getInstance('category' );
 $category->load( 4 );
 $category->name = '';   // an empty category name
 echo "Data Integrity Check " . ($category->check() ? "Passed" : "Failed") . "<br />";

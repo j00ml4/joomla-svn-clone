@@ -11,8 +11,7 @@ void delete	( **$oid** )
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$user =& JTable::getInstance('user', $db );
+$user =& JTable::getInstance( 'user' );
 
 $user->load( 63 );
 

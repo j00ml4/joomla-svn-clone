@@ -9,8 +9,7 @@ void check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$section =& JTable::getInstance('section', $db );
+$section =& JTable::getInstance( 'section' );
 $section->load( 2 );
 $section->name = '';   // an empty section name
 echo "Data Integrity Check " . ($section->check() ? "Passed" : "Failed") . "<br />";

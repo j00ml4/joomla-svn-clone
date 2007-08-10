@@ -9,8 +9,7 @@ array getUserList ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$user =& JTable::getInstance('user', $db );
+$user =& JTable::getInstance( 'user' );
 
 print_r( $user->getUserList() );
 </code>

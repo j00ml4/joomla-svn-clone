@@ -5,15 +5,14 @@
 Updates the last visit time of user.
 
 ===== Syntax =====
-boolean setLastVisit	( **$timeStamp**, **$id** )
+boolean setLastVisit ( **$timeStamp**, **$id** )
 
 | **$timeStamp** | integer | is an integer containing the timestamp to assign to the last visit field. This parameter is optional and if omitted defaults to the current timestamp. |
 | **$id** | integer | is an integer containing the ID of the user to update. |
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$user =& JTable::getInstance('user', $db );
+$user =& JTable::getInstance( 'user' );
 
 $user->setLastVisit( mktime() - 900, 62 );
 </code>

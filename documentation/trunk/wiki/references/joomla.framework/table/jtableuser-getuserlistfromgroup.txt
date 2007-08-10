@@ -14,8 +14,7 @@ array getUserListFromGroup	( **$value**, **$name**, **$recurse**, **$order** )
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$user =& JTable::getInstance('user', $db );
+$user =& JTable::getInstance( 'user' );
 
 print_r( $user->getUserListFromGroup( 2, 'Manager', 'RECURSE' ) );
 </code>

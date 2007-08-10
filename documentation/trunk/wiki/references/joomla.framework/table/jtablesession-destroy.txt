@@ -9,8 +9,7 @@ void destroy ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$session =& JTable::getInstance('session', $db );
+$session =& JTable::getInstance( 'session' );
 $session->load( 'd799af5e42df6fba1aa3068406b6aa82' );
 
 $session->destroy();

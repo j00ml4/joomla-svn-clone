@@ -12,8 +12,7 @@ JTableMenu __construct	( **&$db** )
 ===== Examples =====
 The JTableMenu class should be instantiated in the following way:
 <code php|Example>
-$db =& JFactory::getDBO();
-$menu =& JTable::getInstance('menu', $db );
+$menu =& JTable::getInstance( 'menu' );
 </code>
 The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 

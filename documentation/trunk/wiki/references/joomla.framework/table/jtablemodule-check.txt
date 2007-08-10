@@ -10,8 +10,7 @@ boolean check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
-$menutype =& JTable::getInstance('module', $db );
+$menutype =& JTable::getInstance( 'module' );
 $menutype->title = "     ";
 
 echo "Data Integrity Check " . ($menutype->check() ? "Passed" : "Failed -". $menutype->getError() . "<br />");

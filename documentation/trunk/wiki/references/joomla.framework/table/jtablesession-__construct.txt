@@ -12,8 +12,7 @@ JTableSession __construct ( **&$db** )
 ===== Examples =====
 The JTableSession class should be instantiated in the following way:
 <code php|Example>
-$db =& JFactory::getDBO();
-$session =& JTable::getInstance('session', $db );
+$session =& JTable::getInstance( 'session' );
 </code>
 The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
 
