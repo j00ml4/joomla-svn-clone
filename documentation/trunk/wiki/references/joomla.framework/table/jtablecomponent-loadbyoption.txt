@@ -11,7 +11,6 @@ boolean loadByOption ( **$option** )
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
 $component =& JTable::getInstance( 'component' );
 $component->loadByOption( 'com_document' );
 echo "The component name is " . $component->name . ".";

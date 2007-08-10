@@ -12,7 +12,6 @@ string bind	( **$array**, **$ignore** )
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
 $row =& JTable::getInstance( 'component' );
 $row->loadByOption( 'com_document' );
 $parameters = JArrayHelper::fromObject( $row );

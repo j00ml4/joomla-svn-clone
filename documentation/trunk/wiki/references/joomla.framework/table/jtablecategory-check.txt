@@ -9,7 +9,6 @@ void check ()
 
 ===== Examples =====
 <code php|Example>
-$db =& JFactory::getDBO();
 $category =& JTable::getInstance('category' );
 $category->load( 4 );
 $category->name = '';   // an empty category name

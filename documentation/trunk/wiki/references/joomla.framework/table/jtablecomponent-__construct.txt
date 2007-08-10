@@ -12,7 +12,6 @@ JTableComponent __construct	( **&$db** )
 ===== Examples =====
 The JTableComponent class should be instantiated in the following way:
 <code php|Example>
-$db =& JFactory::getDBO();
 $component =& JTable::getInstance('component' );
 </code>
 The [[JTable-getInstance|JTable::getInstance]] method will load the file containing the class definition and instantiate the object with the specified database connector object.
