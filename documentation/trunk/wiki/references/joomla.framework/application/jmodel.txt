@@ -1,6 +1,5 @@
 ====== JModel ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html|JModel]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JModel #}
 
 JModel is the base class for a Joomla! model.
 

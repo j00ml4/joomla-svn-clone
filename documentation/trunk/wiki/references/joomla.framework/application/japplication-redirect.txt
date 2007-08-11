@@ -1,6 +1,5 @@
 ====== redirect ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->redirect]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::redirect #}
 
 Redirects to another URL, optionally enqueueing a message in the system message queue (which will be displayed the next time a page is loaded) using the [[JApplication-enqueueMessage|enqueueMessage]] method. If the headers have not been sent, the redirect will be accomplished using a '301 Moved Permanently' code in the header pointing to a new location. If the headers have already been sent, this will be accomplished using a JavaScript statement.
 Redirect to another URL

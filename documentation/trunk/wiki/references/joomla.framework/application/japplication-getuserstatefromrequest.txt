@@ -1,6 +1,5 @@
 ====== getUserStateFromRequest ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getUserStateFromRequest]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getUserStateFromRequest #}
 
 Gets the value of the user state variable. The method will first check the specified variable in the request to see if a new value has been specified. If it has been, then the value of the state variable is updated and the new value is returned. If it has not, then the stored value is returned. If there is no value specified in the request and no existing session value, then the specified default value is returned. User state variables are stored with the session and are persistent between requests.
 

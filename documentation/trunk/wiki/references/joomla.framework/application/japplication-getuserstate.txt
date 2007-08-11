@@ -1,6 +1,5 @@
 ====== getUserState ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getUserState]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getUserState #}
 
 Gets the value of the user state variable. User state variables are stored with the session and are persistent between requests.
 

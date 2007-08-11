@@ -1,6 +1,5 @@
 ====== JApplication ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication #}
 
 JApplication is the base class for a Joomla! application. It provides many basic API functions relating to the application itself.
 

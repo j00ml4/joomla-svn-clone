@@ -1,6 +1,5 @@
 ====== isEnabled ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JComponentHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html#isEnabled|JComponentHelper->isEnabled]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JComponentHelper::isEnabled #}
 
 Checks if the component is enabled.
 

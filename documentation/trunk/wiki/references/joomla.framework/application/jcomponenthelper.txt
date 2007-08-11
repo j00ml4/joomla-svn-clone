@@ -1,6 +1,5 @@
 ====== JComponentHelper ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[http://api.joomla.org/Joomla-Framework/Application/JComponentHelper.html|JComponentHelper]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JComponentHelper #}
 
 The JComponentHelper class contains utility functions to assist in common functions required for components.
 

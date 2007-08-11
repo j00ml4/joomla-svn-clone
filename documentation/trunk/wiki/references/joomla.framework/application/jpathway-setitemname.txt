@@ -1,6 +1,5 @@
 ====== setItemName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->setItemName]] |
+{#JAPI Joomla.Framework Application JPathWay::setItemName #}
 
 Sets the name of the specified item.
 ===== Syntax =====

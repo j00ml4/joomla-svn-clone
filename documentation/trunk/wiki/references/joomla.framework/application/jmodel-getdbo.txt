@@ -1,6 +1,5 @@
 ====== getDBO ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#getDBO|JModel->getDBO]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JModel::getDBO #}
 
 Returns a reference to the database connector object used by the model.
 

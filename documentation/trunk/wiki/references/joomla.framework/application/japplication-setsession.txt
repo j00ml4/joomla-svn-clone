@@ -1,6 +1,5 @@
 ====== setSession ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->setSession]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::setSession #}
 
 Creates the user session. Old sessions are flushed based on the configuration value for the cookie lifetime. If there is an existing session, then the last access time is updated. If it is a new session, then the session id is generated and a record is created in the #__sessions table. This method is called by the Joomla! core and should not need to be invoked by extensions.
 

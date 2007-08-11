@@ -1,6 +1,5 @@
 ====== getDocument ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getDocument]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getDocument #}
 
 Return a reference to the JDocument object. This method is the means by which extensions should obtain access to the Joomla! document object, which can be used to set and retrieve information about the current document. See the [[references:joomla.framework:document:jdocument|JDocument]] class for more information.
 

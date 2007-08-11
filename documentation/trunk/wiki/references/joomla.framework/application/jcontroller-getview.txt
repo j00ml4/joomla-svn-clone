@@ -1,6 +1,5 @@
 ====== getView ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#getView|JController->getView]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JController::getView #}
 
 Method to get a view object, loading it if required.
 

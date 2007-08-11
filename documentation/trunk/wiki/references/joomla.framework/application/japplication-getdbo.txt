@@ -1,6 +1,5 @@
 ====== getDBO ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getDBO]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getDBO #}
 
 Return a reference to a JDatabase object instance. This method is the means by which extensions should obtain access to the Joomla! database object.
 
