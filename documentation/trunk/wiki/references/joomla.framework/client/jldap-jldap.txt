@@ -1,7 +1,8 @@
 ====== JLDAP ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP->JLDAP]] | never | Work in progress |
+{#JAPI Joomla.Framework Client JLDAP::JLDAP #}
+
 Constructor
+
 ===== Syntax =====
 JLDAP JLDAP	( **$configObj** )
 

@@ -1,6 +1,5 @@
 ====== getPrefix ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getPrefix]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::getPrefix #}
 
 Returns the current database table prefix code.  By default this will be 'mos_' but this may have been overridden during Joomla! installation.
 

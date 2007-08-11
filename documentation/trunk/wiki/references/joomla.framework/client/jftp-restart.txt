@@ -1,6 +1,5 @@
 ====== restart ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->restart]] |
+{#JAPI Joomla.Framework Client JFTP::restart #}
 
 This method restarts data transfer at the specified byte. This method returns true if successful, false otherwise.
 ===== Syntax =====

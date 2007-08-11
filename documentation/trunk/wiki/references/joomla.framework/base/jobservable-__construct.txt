@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework/Base/JObservable.html|JObservable->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObservable::__construct #}
 
 This is the class contructor. It initiates the list of observers to an empty array.
 

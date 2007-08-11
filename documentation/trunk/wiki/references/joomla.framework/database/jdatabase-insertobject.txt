@@ -1,6 +1,5 @@
 ====== insertObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->insertObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::insertObject #}
 
 Inserts a new database table row using data from an object.  Returns true if the insertion was successful; false otherwise.
 

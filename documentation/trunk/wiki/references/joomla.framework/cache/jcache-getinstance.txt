@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Cache|Cache]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#getInstance|JCache->getInstance]] | Never | Public review |
+{#JAPI Joomla.Framework Cache JCache::getInstance #}
 
 Returns a reference to the global cache object, only creating it if it doesn't already exist.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== loadRowList ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadRowList]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::loadRowList #}
 
 Returns an array of database rows with numeric column indexing.  Returns null if the query fails.
 

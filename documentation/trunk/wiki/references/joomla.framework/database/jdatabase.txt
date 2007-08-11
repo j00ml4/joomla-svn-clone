@@ -1,6 +1,5 @@
 ====== JDatabase ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase #}
 
 Generic database connector class.
 

@@ -1,6 +1,5 @@
 ====== addQuoted ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->addQuoted]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::addQuoted #}
 
 Adds a field or array of field names to the list that are to be quoted. Field names that are added to this list will have the name and value quoted. Field names or values normally need to be quoted if they contain quote characters (eg. John's should be quoted because it has a "'").
 

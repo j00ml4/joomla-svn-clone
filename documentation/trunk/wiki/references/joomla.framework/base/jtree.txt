@@ -1,6 +1,5 @@
 ====== JTree [WIP] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | [[http://api.joomla.org/Joomla-Framework/Base/JTree.html|JTree]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JTree #}
 
 Abstract Tree Node Class.
 

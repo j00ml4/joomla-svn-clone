@@ -1,6 +1,5 @@
 ====== pwd ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->pwd]] |
+{#JAPI Joomla.Framework Client JFTP::pwd #}
 
 Method to retrieve the current working directory on the FTP server. This function returns a string containing the current working directory.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== setQuery ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setQuery]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::setQuery #}
 
 Sets the SQL query string for later execution.  This function also replaces all occurrences within the query string of a given string identifier with the current database table prefix code.  Note that this function does not cause the SQL query to be executed.
 

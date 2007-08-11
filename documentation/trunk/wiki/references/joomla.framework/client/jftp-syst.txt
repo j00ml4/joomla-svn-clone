@@ -1,6 +1,5 @@
 ====== syst ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->syst]] |
+{#JAPI Joomla.Framework Client JFTP::syst #}
 
 Method to retrieve the system string from the FTP server. This is either 'WIN', 'MAC' or 'UNIX'. This method uses the syst command which may not be implemented on all FTP servers.
 ===== Syntax =====

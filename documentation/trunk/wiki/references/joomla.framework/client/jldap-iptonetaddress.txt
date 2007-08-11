@@ -1,7 +1,8 @@
 ====== ipToNetAddress ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLDAP|JLDAP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JLDAP.html|JLDAP->ipToNetAddress]] | never | Work in progress |
+{#JAPI Joomla.Framework Client JLDAP::ipToNetAddress #}
+
 Converts a dot notation IP address to net address (e.g. for Netware, etc)
+
 ===== Syntax =====
 string ipToNetAddress	( **$ip** )
 

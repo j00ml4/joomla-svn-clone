@@ -1,6 +1,5 @@
 ====== Base [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/Base/JObject.html|JObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Base #}
 
 ===== Classes =====
   * [[JNode]]

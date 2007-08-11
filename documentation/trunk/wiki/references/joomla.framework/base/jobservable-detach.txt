@@ -1,6 +1,5 @@
 ====== detach ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework/Base/JObservable.html|JObservable->detach]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObservable::detach #}
 
 This member is used to detach an observer object.
 

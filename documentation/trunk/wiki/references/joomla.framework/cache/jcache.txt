@@ -1,7 +1,5 @@
-
 ====== JCache ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Cache|Cache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html|JCache]] | Never | Public review |
+{#JAPI Joomla.Framework Cache JCache #}
 
 This abstract class for caching handlers is an implementation of the [[http://pear.php.net/package/Cache_Lite/|Cache_Lite]] cache system.
 ===== Methods =====

@@ -1,6 +1,5 @@
 ====== getTableList ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getTableList]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::getTableList #}
 
 Returns a list of all the tables in the database.  This method returns a list of all the tables in the current database and so will include the names of tables that are not part of Joomla! or its components if other packages are sharing the database.
 

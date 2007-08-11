@@ -1,6 +1,5 @@
 ====== setUTF ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->setUTF]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::setUTF #}
 
 Manually sets UTF support for the database. Note that this method may be used to attempt to enable UTF support even if it does not exist for the specified database. The implementation of this method depends on the specific driver.
 
