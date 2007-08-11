@@ -1,6 +1,5 @@
 ====== setConfiguration ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->setConfiguration]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::setConfiguration #}
 
 Sets up the configuration registry. This method will include the specified file, which should specify a class definition for the JConfig class with the appropriate default values for the system configuration parameters. A registry will then be created and the configuration values will be loaded into the registry.
 

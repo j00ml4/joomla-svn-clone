@@ -1,6 +1,5 @@
 ====== getTemplate ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getTemplate]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getTemplate #}
 
 Gets the name of the current template. The value returned by the JApplication class itself is '_system'. The $mainframe object is actually an instance of the JSite class, which extends JApplication and overrides this method to return a string containing the name of the current template.
 

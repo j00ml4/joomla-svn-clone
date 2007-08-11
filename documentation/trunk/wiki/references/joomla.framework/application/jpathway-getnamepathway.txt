@@ -1,6 +1,5 @@
 ====== getNamePathWay ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->getNamePathWay]] |
+{#JAPI Joomla.Framework Application JPathWay::getNamePathWay #}
 
 Create and return an array of the pathway names. This is useful for things like SEF URLs.
 

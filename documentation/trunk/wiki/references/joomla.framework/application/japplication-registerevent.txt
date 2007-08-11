@@ -1,6 +1,5 @@
 ====== registerEvent ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->registerEvent]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::registerEvent #}
 
 Registers a handler to a particular event group. This method is used to attach an event handler object or function to a particular event.
 

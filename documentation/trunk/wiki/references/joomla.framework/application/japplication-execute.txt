@@ -1,6 +1,5 @@
 ====== execute ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->execute]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::execute #}
 
 Executes the application. This is an abstract method that is used to execute the current application. This method is implemented in the JSite and JAdministrator classes and performs the necessary operations to render the output. In most cases, this method does not need to be invoked as it is called by the Joomla! entry points.
 

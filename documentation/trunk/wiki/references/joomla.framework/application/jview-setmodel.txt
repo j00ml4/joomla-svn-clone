@@ -1,5 +1,4 @@
-====== setModel ======
-{#JAPI Joomla.Framework Application JView::setModel #}
+====== setModel ======{#JAPI Joomla.Framework Application JView::setModel #}
 
 Adds a model to the view.  The system supports a multiple model single view system by which models are referenced by classname.  A caveat to the  classname referencing is that any classname prepended by JModel will be referenced by the name without JModel, eg. JModelCategory is just Category.
 

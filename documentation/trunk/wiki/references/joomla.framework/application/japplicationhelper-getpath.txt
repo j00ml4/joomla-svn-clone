@@ -1,6 +1,5 @@
 ====== getPath ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getPath]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplicationHelper::getPath #}
 
 Gets a path to the specified extension file. This is a utility method that can be used to locate various files belonging to an extension.
 

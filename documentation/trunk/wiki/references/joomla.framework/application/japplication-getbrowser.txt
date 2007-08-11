@@ -1,6 +1,5 @@
 ====== getBrowser ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getBrowser]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getBrowser #}
 
 Returns a reference to the [[references:joomla.framework:environment:jbrowser|JBrowser]] object. This method allows Joomla! extensions to access information about the client browser.
 

@@ -1,6 +1,5 @@
 ====== login ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->login]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::login #}
 
 Checks a users login credentials and logs in if possible. The Username and encoded password are passed to the onLoginUser event which is responsible for the user validation. A successful validation updates the current session record with the  users details. The Username and Password are sent as credentials (along with other possibilities) to each observer (JAuthenticatePlugin) for user validation. 
 

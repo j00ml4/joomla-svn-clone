@@ -1,6 +1,5 @@
 ====== getHead ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->getHead]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::getHead #}
 
 Returns the head block of the current document. This method is deprecated in Joomla! 1.5 (JDocument->renderHead should be used instead).
 

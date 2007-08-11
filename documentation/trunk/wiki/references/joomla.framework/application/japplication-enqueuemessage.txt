@@ -1,6 +1,5 @@
 ====== enqueueMessage ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html|JApplication->enqueueMessage]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::enqueueMessage #}
 
 Enqueues a message into the system message queue. The system messages are displayed when the page is rendered. The messages are rendered using <dt> and <dd> tags. The $type parameter is applied to the class of these tags. The messages are included in the template using <jdoc:include type="message" />.
 

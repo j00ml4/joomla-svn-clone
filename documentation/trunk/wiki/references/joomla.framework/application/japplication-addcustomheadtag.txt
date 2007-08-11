@@ -1,6 +1,5 @@
 ====== addCustomHeadTag ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplication|JApplication]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplication.html#addCustomHeadTag|JApplication->addCustomHeadTag]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplication::addCustomHeadTag #}
 
 Adds a custom HTML string to the head block of the current page being processed. This method is deprecated in Joomla! 1.5 ([[references:joomla.framework:document:jdocumenthtml-addcustomtag|JDocumentHTML->addCustomTag]] should be used instead).
 

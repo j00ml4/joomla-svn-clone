@@ -1,6 +1,5 @@
 ====== _setPath ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JController]] | [[http://api.joomla.org/Joomla-Framework/Application/JController.html#_setPath|JController->_setPath]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JController::_setPath #}
 
 Sets an entire array of search paths for resources.
 

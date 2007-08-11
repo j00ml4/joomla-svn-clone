@@ -1,6 +1,5 @@
 ====== getClientInfo ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getClientInfo]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplicationHelper::getClientInfo #}
 
 Gets information on a specific client id. A client is either the site, the adminstrator, or installation. Currently these are generally in static locations in reference to each other. There are plans for future versions such that these can be moved independently of each other. These locations will be stored in a database. This method will be of greater use in these future versions.
 

@@ -1,6 +1,5 @@
 ====== addItem ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | [[JPathWay|JPathWay]] | [[http://api.joomla.org/Joomla-Framework/Application/JPathWay.html|JPathWay->addItem]] |
+{#JAPI Joomla.Framework Application JPathWay::addItem #}
 
 Create and add an item to the pathway. The new item is appended to the end of the pathway. Links do not appear on the last item in the pathway as it is assumed that this points to the current page.
 

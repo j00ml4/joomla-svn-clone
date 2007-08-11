@@ -1,6 +1,5 @@
 ====== getTable ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JModel]] | [[http://api.joomla.org/Joomla-Framework/Application/JModel.html#getTable|JModel->getTable]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JModel::getTable #}
 
 Creates an instance of the specified table class and returns a reference to it.
 

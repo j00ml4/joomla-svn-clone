@@ -1,6 +1,5 @@
 ====== getItemid ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Application|Application]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JApplicationHelper|JApplicationHelper]] | [[http://api.joomla.org/Joomla-Framework/Application/JApplicationHelper.html|JApplicationHelper->getItemid]] | never | Work in progress |
+{#JAPI Joomla.Framework Application JApplicationHelper::getItemid #}
 
 The concept of an item id in Joomla! is rather complex. It has come to be used in a multiplicity of ways which makes its use difficult to understand in some situations. The essence of the problem seems to be that there are itemids associated with menu items, and there are also itemids that are associated with content items. This method is intended to resolve a general itemid into a menu itemid.
 
