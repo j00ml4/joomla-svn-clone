@@ -1,6 +1,5 @@
 ====== setCaching ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Cache|Cache]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JCache|JCache]] | [[http://api.joomla.org/Joomla-Framework/Cache/JCache.html#setCaching|JCache->setCaching]] | Never | Public review |
+{#JAPI Joomla.Framework Cache JCache::setCaching #}
 
 Enables and disables caching.
 ===== Syntax =====

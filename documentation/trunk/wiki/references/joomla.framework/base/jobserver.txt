@@ -1,6 +1,5 @@
 ====== JObserver [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | [[http://api.joomla.org/Joomla-Framework/Base/JObserver.html|JObserver]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObserver #}
 
 This is an abstract observer class to implement the observer design pattern. This allows objects to observe other objects and trigger events based on the actions of other objects. An example of a subclass of JObserver is the [[references:joomla.framework:application:jplugin|JPlugin]] class.
 ===== Methods =====

@@ -1,6 +1,5 @@
 ====== JObject [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | [[http://api.joomla.org/Joomla-Framework/Base/JObject.html|JObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObject #}
 
 This is the Joomla! base Object class. It allows <nowiki>__construct</nowiki> and <nowiki>__destruct</nowiki> to be used in PHP4. It is the base class of most of the classes in the Joomla! API. This is an abstract class and defines an interface rather than functionality. As an example, see the [[references:joomla.framework:application:japplication|JApplication]] class which is a subclass of this class.
 

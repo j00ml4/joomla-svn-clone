@@ -1,6 +1,5 @@
 ====== mkdir ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->mkdir]] |
+{#JAPI Joomla.Framework Client JFTP::mkdir #}
 
 This method creates a folder on the FTP server. If the operation is successful, it returns true. Otherwise, it returns false.
 

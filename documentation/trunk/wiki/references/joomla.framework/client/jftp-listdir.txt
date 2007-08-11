@@ -1,6 +1,5 @@
 ====== listDir ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->listDir]] |
+{#JAPI Joomla.Framework Client JFTP::listDir #}
 
 This method lists the contents of a folder on the FTP server. It returns either an array containing the listing of files that are in the specified folder, or if **$type** is 'raw' it returns a string containing the folder listing. See the example below for more information on the returned array format.
 

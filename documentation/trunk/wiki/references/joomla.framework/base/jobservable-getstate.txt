@@ -1,6 +1,5 @@
 ====== getState ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObservable|JObservable]] | [[http://api.joomla.org/Joomla-Framework/Base/JObservable.html|JObservable->getState]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObservable::getState #}
 
 Get the state of the JObservable object. This function returns the state of the JObservable object. The value returned is the _state property. This is a private property that can be utilised by child classes to communicate information about the state of the observable class in a standard way.
 

@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JObject|JObject]] | [[http://api.joomla.org/Joomla-Framework/Base/JObject.html|JObject->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObject::__construct #}
 
 This is the Class constructor, overridden in descendant classes. It is empty.
 

@@ -1,6 +1,5 @@
 ====== getUTFSupport ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->getUTFSupport]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::getURFSupport #}
 
 Determines whether or not the database has UTF support. Returns true if the database does support UTF, or false otherwise.
 

@@ -1,6 +1,5 @@
 ====== JNode [WIP] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | [[http://api.joomla.org/Joomla-Framework/Base/JNode.html|JNode]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JNode #}
 
 Abstract Tree Node Class.
 

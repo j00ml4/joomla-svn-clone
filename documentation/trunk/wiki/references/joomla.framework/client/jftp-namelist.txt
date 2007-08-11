@@ -1,6 +1,5 @@
 ====== nameList ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->nameList]] |
+{#JAPI Joomla.Framework Client JFTP::nameList #}
 
 Method to list the file/folder names of the contents of a directory on the FTP server. This method returns an array of strings containing the listing of files in the specified directory.
 ===== Syntax =====

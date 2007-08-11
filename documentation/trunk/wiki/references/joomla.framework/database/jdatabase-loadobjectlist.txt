@@ -1,6 +1,5 @@
 ====== loadObjectList ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->loadObjectList]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::loadObjectList #}
 
 Returns an array of database objects using the current SQL query.  Returns false if the query fails. If the $key parameter is set, the array is indexed using the values of the field specified by key. Otherwise, the array is indexed sequentially.
 

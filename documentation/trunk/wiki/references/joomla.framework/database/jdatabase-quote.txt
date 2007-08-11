@@ -1,6 +1,5 @@
 ====== Quote ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Database|Database]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JDatabase|JDatabase]] | [[http://api.joomla.org/Joomla-Framework/Database/JDatabase.html|JDatabase->Quote]] | never | Work in progress |
+{#JAPI Joomla.Framework Database JDatabase::Quote #}
 
 ADODB Compatibility function. See [[http://phplens.com/adodb/reference.functions.quote.html]] for more information. Returns a quoted string with all characters that have special meaning for the database escaped.  This function is the same as database->getEscaped except that the string returned is surrounded by single quotes.
 

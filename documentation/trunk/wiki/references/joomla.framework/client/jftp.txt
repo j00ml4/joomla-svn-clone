@@ -1,6 +1,5 @@
 ====== JFTP [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP]] |
+{#JAPI Joomla.Framework Client JFTP #}
 
 This is an FTP client class. It is used, among other things, to enable proper operation in safe mode.
 

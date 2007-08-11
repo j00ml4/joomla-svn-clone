@@ -1,6 +1,5 @@
 ====== update ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[Base]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JObserver]] | [[http://api.joomla.org/Joomla-Framework/Base/JObserver.html|JObserver->update]] | never | Work in progress |
+{#JAPI Joomla.Framework Base JObserver::update #}
 
 Method to update the state of observable objects. 
 The default implementation of this method does nothing, but will raise an [[references:joomla.framework:Utilites|JError|error]] if called directly.

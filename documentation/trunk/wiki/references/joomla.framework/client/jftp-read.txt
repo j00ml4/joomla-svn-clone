@@ -1,6 +1,5 @@
 ====== read ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->read]] |
+{#JAPI Joomla.Framework Client JFTP::read #}
 
 This method reads a file from the FTP server's contents into the specified buffer. This method returns true if successful, false otherwise.
 ===== Syntax =====

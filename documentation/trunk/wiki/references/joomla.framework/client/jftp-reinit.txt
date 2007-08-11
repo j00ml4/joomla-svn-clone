@@ -1,6 +1,5 @@
 ====== reinit ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Connector|Connector]] | [[JFTP|JFTP]] | [[http://api.joomla.org/Joomla-Framework/Connector/JFTP.html|JFTP->reinit]] |
+{#JAPI Joomla.Framework Client JFTP::reinit #}
 
 This method reinitializes the server. This method would be used if login had to be done again.
 NOTE: This command not available on all servers. The function returns true if successful, false otherwise.
