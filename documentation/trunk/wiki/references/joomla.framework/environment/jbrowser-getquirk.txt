@@ -1,6 +1,5 @@
 ====== getQuirk ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getQuirk]] |
+{#JAPI Joomla.Framework Environment JBrowser::getQuirk #}
 
 Retrieve unique behavior for the current browser.
 ===== Syntax =====

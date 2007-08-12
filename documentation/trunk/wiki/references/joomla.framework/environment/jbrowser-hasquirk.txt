@@ -1,6 +1,5 @@
 ====== hasQuirk ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->hasQuirk]] |
+{#JAPI Joomla.Framework Environment JBrowser::hasQuirk #}
 
 Check unique behavior for the current browser.
 ===== Syntax =====

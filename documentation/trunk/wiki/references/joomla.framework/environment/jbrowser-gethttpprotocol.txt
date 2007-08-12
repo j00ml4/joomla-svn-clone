@@ -1,6 +1,5 @@
 ====== getHTTPProtocol ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getHTTPProtocol]] |
+{#JAPI Joomla.Framework Environment JBrowser::getHTTPProtocol #}
 
 Returns the server protocol in use on the current server.
 ===== Syntax =====

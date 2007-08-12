@@ -1,6 +1,5 @@
 ====== toString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->toString]] |
+{#JAPI Joomla.Framework Environment JURI::toString #}
 
 Returns the URI as a string.
 ===== Syntax =====

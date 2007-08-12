@@ -1,6 +1,5 @@
 ====== getAgentString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->getAgentString]] | never | Work in progress |
+{#JAPI Joomla.Framework Environment JBrowser::getAgentString #}
 
 Return the full browser agent string.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== getHost ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->getHost]] |
+{#JAPI Joomla.Framework Environment JURI::getHost #}
 
 Gets the URI host. This function returns the hostname/ip, or null if no hostname/ip was specified.
 

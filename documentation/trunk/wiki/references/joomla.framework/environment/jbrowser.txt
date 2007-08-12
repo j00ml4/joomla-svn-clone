@@ -1,6 +1,5 @@
 ====== JBrowser [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser]] |
+{#JAPI Joomla.Framework Environment JBrowser #}
 
 Browser class, provides capability information about the current web client.\\ Browser identification is performed by examining the HTTP_USER_AGENT  environment variable provided by the web server.\\ This module has many influences from the lib/Browser.php code in  version 3 of Horde.\\ 
 

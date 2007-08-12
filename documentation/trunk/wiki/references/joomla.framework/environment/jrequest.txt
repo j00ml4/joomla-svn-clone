@@ -1,6 +1,5 @@
 ====== JRequest ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[http://api.joomla.org/Joomla.Framework/Environment/JRequest.html|JRequest]] | never | Internal review |
+{#JAPI Joomla.Framework Environment JRequest #}
 
 This class serves to provide the Joomla! Framework with a common interface to access request variables. This includes $_POST, $_GET, and naturally $_REQUEST. Variables can be passed through an input filter to avoid injection, or they can be returned raw. The concept and implementation of this class is inspired by the binary cloud environment package (http://www.binarycloud.com).
 

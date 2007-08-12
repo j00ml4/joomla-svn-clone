@@ -1,6 +1,5 @@
 ====== setVar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->setVar]] |
+{#JAPI Joomla.Framework Environment JURI::setVar #}
 
 Adds a query variable and value, replacing the value if it already exists and returning the old value.
 ===== Syntax =====
