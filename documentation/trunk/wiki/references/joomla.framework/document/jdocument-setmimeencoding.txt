@@ -1,6 +1,5 @@
 ====== setMimeEncoding ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setMimeEncoding]] |
+{#JAPI Joomla.Framework Document JDocument::setMimeEncoding #}
 
 Sets the document MIME encoding that is sent to the browser.
 This usually will be text/html because most browsers cannot yet  accept the proper mime settings for XHTML: application/xhtml+xml, and to a lesser extent application/xml and text/xml. See the W3C note (http://www.w3.org/TR/xhtml-media-types/) for more details.

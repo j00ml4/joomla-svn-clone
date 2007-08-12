@@ -1,6 +1,5 @@
 ====== setCharset ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setCharset]] |
+{#JAPI Joomla.Framework Document JDocument::setCharset #}
 
 Sets the character set of the current document.
 ===== Syntax =====

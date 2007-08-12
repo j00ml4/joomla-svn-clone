@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRAW|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRAW|JDocumentRAW]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRAW.html|JDocumentRAW->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRAW::__construct #}
 
 JDocumentRAW class constructor.
 

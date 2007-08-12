@@ -1,6 +1,5 @@
 ====== setMetaContentType ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->setMetaContentType]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::setMetaContentType #}
 
 Sets an http-equiv Content-Type meta tag. In the Joomla! 1.5 core, this method is called by the initDocument() function which is invoked in the index.php file. Therefore, it does not need to be called.
 ===== Syntax =====

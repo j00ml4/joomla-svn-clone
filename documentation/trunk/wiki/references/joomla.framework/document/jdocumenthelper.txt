@@ -1,6 +1,5 @@
 ====== JDocumentHelper [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHelper.html|JDocumentHelper]] |
+{#JAPI Joomla.Framework Document JDocumentHelper #}
 
 A static JDocumentHelper class containing document helper functions.
 ===== Methods =====

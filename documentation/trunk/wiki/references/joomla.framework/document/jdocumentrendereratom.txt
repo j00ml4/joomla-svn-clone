@@ -1,6 +1,5 @@
 ====== JDocumentRendererAtom ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererAtom.html|JDocumentRendererAtom]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererAtom #}
 
 JDocumentRendererAtom is a feed that implements the atom specification.
 

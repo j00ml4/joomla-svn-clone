@@ -1,6 +1,5 @@
 ====== fetchBody ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->fetchBody]] |
+{#JAPI Joomla.Framework Document JDocument::fetchBody #}
 
 This function is used to return the document body. It is an abstract function and can be overriden by a subclass to provide this functionality.
 ===== Syntax =====

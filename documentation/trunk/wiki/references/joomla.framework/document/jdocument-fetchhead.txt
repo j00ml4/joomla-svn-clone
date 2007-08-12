@@ -1,6 +1,5 @@
 ====== fetchHead ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->fetchHead]] |
+{#JAPI Joomla.Framework Document JDocument::fetchHead #}
 
 This function is used to return the document head. It is an abstract function and can be overriden by a subclass to provide this functionality.
 ===== Syntax =====

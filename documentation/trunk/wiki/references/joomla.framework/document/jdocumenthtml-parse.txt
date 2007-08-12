@@ -1,6 +1,5 @@
 ====== parse ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->parse]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::parse #}
 
 Parse a document template. This method will read and parse the specified document template file. By default, it will parse the index.php file located in the $template subdirectory in 'templates'.
 ===== Syntax =====

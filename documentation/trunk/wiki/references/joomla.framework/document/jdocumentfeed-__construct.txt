@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentFeed|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentFeed|JDocumentFeed]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentFeed.html|JDocumentFeed->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentFeed::__construct #}
 
 JDocumentFeed class constructor.
 

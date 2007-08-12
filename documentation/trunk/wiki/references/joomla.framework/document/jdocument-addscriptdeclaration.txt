@@ -1,6 +1,5 @@
 ====== addScriptDeclaration ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->addScriptDeclaration]] |
+{#JAPI Joomla.Framework Document JDocument::addScriptDeclaration #}
 
 Adds a script into the head block of the current page.
 ===== Syntax =====

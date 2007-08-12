@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->__construct]] |
+{#JAPI Joomla.Framework Document JDocument::__construct #}
 
 This is the constructor for the class. It sets up the line end parameter, the character set, the language and the tab delimeter for the document if these parameters are passed. The constructor also sets up the name space and adds the module directories for the Function, OutputFilter and Renderer. The $type parameter is passed to the JTemplate constructor.
 

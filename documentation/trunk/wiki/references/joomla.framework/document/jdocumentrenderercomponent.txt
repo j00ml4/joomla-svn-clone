@@ -1,6 +1,5 @@
 ====== JDocumentRendererComponent ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererComponent.html|JDocumentRendererComponent]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererAtom #}
 
 Component rendering class.  Returns the output untouched.
 

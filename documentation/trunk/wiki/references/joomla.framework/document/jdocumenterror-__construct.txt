@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentError|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentError|JDocumentError]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentError.html|JDocumentError->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentError::__construct #}
 
 Constructor for JDocumentError class.
 

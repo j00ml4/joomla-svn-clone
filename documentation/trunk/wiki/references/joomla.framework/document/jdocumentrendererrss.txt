@@ -1,6 +1,5 @@
 ====== JDocumentRendererRSS ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererRSS.html|JDocumentRendererRSS]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererRSS #}
 
 JDocumentRendererRSS is a feed that implements RSS 2.0 Specification.
 
