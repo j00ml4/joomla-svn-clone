@@ -1,6 +1,5 @@
 ====== isOwner ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#isOwner|JPath->isOwner]] | 27 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JPath::isOwner #}
 
 This method determines if the current script owns the path.
 ===== Syntax =====

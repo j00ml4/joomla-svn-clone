@@ -1,6 +1,5 @@
 ====== JPath ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html|JPath]] | 27 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JPath #}
 
 This is a path handling class. It provides various path related utility functions. This is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 

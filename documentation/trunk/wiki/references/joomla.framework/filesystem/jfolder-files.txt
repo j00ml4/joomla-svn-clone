@@ -1,6 +1,5 @@
 ====== files ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#files|JFolder->files]] | 26 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFolder::files #}
 
 Utility function to read the files in a folder. This function uses FTP if enabled, otherwise, it will use the built in PHP functions. An array containing the files in the folder is returned.
 

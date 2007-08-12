@@ -1,6 +1,5 @@
 ====== write ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#write|JFile->write]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::write #}
 
 Write a string to a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/file-put-contents|file_put_contents]] function. Otherwise, the function will use FTP (if enabled) to write the file. The function returns true if the write operation was successful.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:utilities:JError|JError]] class.
 

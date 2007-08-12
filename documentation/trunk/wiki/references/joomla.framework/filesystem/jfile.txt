@@ -1,6 +1,5 @@
 ====== JFile ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html|JFile]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile #}
 
 JFile is a file handling class which provides an interface to the file system.  This is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 

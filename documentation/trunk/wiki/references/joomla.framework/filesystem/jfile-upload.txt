@@ -1,6 +1,5 @@
 ====== upload ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#upload|JFile->upload]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::upload #}
 
 Moves an uploaded file to a destination folder.
 

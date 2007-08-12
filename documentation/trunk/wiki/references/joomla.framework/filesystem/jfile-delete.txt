@@ -1,6 +1,5 @@
 ====== delete ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#delete|JFile->delete]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::delete #}
 
 Delete a file or array of files. If FTP is enabled and safe mode is on or the file(s) are unwritable by the web server user, then the function will use FTP to delete the file(s). Otherwise, the function will use the PHP [[http://www.php.net/unlink|unlink]] function. The function returns true if all files were deleted. Otherwise, it returns false.
 

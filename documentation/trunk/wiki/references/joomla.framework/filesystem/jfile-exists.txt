@@ -1,6 +1,5 @@
 ====== exists ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#exists|JFile->exists]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::exists #}
 
 This function is a wrapper for the standard PHP [[http://www.php.net/file-exists|file_exists]] function. If the file exists, the function returns true. Otherwise, it returns false.
 
