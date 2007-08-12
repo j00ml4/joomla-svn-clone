@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Event|Event]] | [[JEventDispatcher|JEventDispatcher]] | [[http://api.joomla.org/Joomla-Framework/Event/JEventDispatcher.html|JEventDispatcher->getInstance]] |
+{#JAPI Joomla.Framework Event JEventDispatcher::getInstance #}
 
 Returns a reference to the global Language object, only creating it if it doesn't already exist.
 
