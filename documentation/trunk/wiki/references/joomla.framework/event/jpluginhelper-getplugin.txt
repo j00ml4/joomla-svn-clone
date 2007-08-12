@@ -1,6 +1,5 @@
 ====== getPlugin ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Event|Event]] | [[JPluginHelper|JPluginHelper]] | [[http://api.joomla.org/Joomla-Framework/Event/JPluginHelper.html|JPluginHelper->getPlugin]] |
+{#JAPI Joomla.Framework Event JPluginHelper::getPlugin #}
 
 Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned
 ===== Syntax =====

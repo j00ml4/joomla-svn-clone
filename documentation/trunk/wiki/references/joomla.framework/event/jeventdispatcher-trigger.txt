@@ -1,6 +1,5 @@
 ====== trigger ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Event|Event]] | [[JEventDispatcher|JEventDispatcher]] | [[http://api.joomla.org/Joomla-Framework/Event/JEventDispatcher.html|JEventDispatcher->trigger]] |
+{#JAPI Joomla.Framework Event JEventDispatcher::trigger #}
 
 Triggers an event by dispatching arguments to all observers that handle  the event and returning their return values.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== JPlugin [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Event|Event]] | [[http://api.joomla.org/Joomla-Framework/Event/JPlugin.html|JPlugin]] |
+{#JAPI Joomla.Framework Event JPlugin #}
 
 JPlugin Class
 ===== Methods =====
