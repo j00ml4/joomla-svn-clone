@@ -1,6 +1,5 @@
 ====== getVar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Environment/JEnvironment.html#getvar|JRequest->getVar]] | never | Internal review |
+{#JAPI Joomla.Framework Environment JRequest::getVar #}
 
 Fetches and returns a given variable. The default behaviour is fetching variables depending on the  current request method: GET and HEAD will result in returning an entry from $_GET, POST and PUT will result in returning an  entry from $_POST.
 You can force the source by setting the $hash parameter:

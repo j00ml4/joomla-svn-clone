@@ -1,6 +1,5 @@
 ====== cleanVar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRequest|JRequest]] | [[http://api.joomla.org/Joomla.Framework/Environment/JRequest.html#cleanvar|JRequest->cleanVar]] | never | Internal review |
+{#JAPI Joomla.Framework Environment JRequest::cleanVar #}
 
 Utility method to clean a string variable using input filters. This function operates on strings. If an array is passed, the function recursively calls itself to traverse each element of the array. It will return raw variables which are not strings.
 

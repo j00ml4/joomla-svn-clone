@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->getInstance]] |
+{#JAPI Joomla.Framework Environment JURI::getInstance #}
 
 Returns a reference to a global JURI object, only creating it if it doesn't already exist.
 This method must be invoked as:

@@ -1,6 +1,5 @@
 ====== match ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JBrowser|JBrowser]] | [[http://api.joomla.org/Joomla.Framework/Environment/JBrowser.html|JBrowser->match]] |
+{#JAPI Joomla.Framework Environment JBrowser::match #}
 
 Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser.
 ===== Syntax =====

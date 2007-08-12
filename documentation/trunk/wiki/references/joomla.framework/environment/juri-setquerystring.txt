@@ -1,6 +1,5 @@
 ====== setQueryString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[JURI|JURI]] | [[http://api.joomla.org/Joomla.Framework/Environment/JURI.html|JURI->setQueryString]] |
+{#JAPI Joomla.Framework Environment JURI::setQueryString #}
 
 Sets the query string.
 ===== Syntax =====
