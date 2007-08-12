@@ -1,6 +1,5 @@
 ====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRenderer|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRenderer|JDocumentRenderer]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer->render]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRenderer::render #}
 
 Renders a script and returns the results as a string.  This is an abstract method and must be implemented in the child class.
 

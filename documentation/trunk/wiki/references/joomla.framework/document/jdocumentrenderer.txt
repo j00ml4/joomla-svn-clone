@@ -1,6 +1,5 @@
 ====== JDocumentRenderer ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRenderer.html|JDocumentRenderer]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRenderer #}
 
 JDocumentRenderer is an abstract base class for renderers.
 

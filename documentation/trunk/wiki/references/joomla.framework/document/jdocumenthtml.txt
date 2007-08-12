@@ -1,6 +1,5 @@
 ====== JDocumentHTML [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML]] |
+{#JAPI Joomla.Framework Document JDocumentHTML #}
 
 The JDocumentHTML class provides an easy interface to parse and display an HTML document. It extends the JDocument class. This class is instantiated when the JDocument::getInstance() method is called with 'html' as the type parameter.
 ===== Methods =====

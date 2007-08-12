@@ -1,6 +1,5 @@
 ====== setTab ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->setTab]] |
+{#JAPI Joomla.Framework Document JDocument::setTab #}
 
 Sets the string used to indent HTML.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererComponent|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererComponent|JDocumentRendererComponent]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererComponent.html|JDocumentRendererComponent->render]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererComponent::render #}
 
 Renders a component script and returns the results as a string.
 

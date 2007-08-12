@@ -1,6 +1,5 @@
 ====== addCustomTag ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addCustomTag]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::addCustomTag #}
 
 Adds a custom HTML string to the head block.
 ===== Syntax =====

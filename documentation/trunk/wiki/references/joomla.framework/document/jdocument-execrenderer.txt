@@ -1,6 +1,5 @@
 ====== execRenderer ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocument|JDocument]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocument.html|JDocument->execRenderer]] |
+{#JAPI Joomla.Framework Document JDocument::execRenderer #}
 
 This function executes a renderer. It is called by the [[jdocument#display|display]] function to render the document and display it. It returns the output of the renderer.
 ===== Syntax =====

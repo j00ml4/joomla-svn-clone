@@ -1,6 +1,5 @@
 ====== JDocumentRendererModule ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererModule.html|JDocumentRendererModule]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererModule #}
 
 Class to render modules for the HTML document.
 

@@ -1,6 +1,5 @@
 ====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:joomla.framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#Document|Document]] | [[JDocumentRendererMessage|{{http://api.joomla.org/media/images/Class.png }}]][[JDocumentRendererMessage|JDocumentRendererMessage]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentRendererMessage.html|JDocumentRendererMessage->render]] | never | Work in progress |
+{#JAPI Joomla.Framework Document JDocumentRendererMessage::render #}
 
 Renders the message stack and returns the results as a string.
 

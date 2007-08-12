@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->__construct]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::__construct #}
 
 This is the class constructor. It passes the attributes to the [[jdocument#__construct|parent class]] and in addition, sets the base attribute. It also sets the MIME type to 'text/html' and defines a renderer sequences.
 

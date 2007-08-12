@@ -1,6 +1,5 @@
 ====== addHeadLink ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addHeadLink]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::addHeadLink #}
 
 Adds <link> tags to the head of the document. $relType defaults to 'rel' as it is the most common relation type used. 'rev' refers to reverse relation. 'rel' indicates normal, forward relation. Typical tag: <link href="index.php" rel="Start">.
 ===== Syntax =====

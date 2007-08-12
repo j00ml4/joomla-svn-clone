@@ -1,6 +1,5 @@
 ====== addFavicon ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Document|Document]] | [[JDocumentHTML|JDocumentHTML]] | [[http://api.joomla.org/Joomla-Framework/Document/JDocumentHTML.html|JDocumentHTML->addFavicon]] |
+{#JAPI Joomla.Framework Document JDocumentHTML::addFavicon #}
 
 Adds a shortcut icon (favicon). This adds a link to the icon shown in the favorites list or on  the left of the url in the address bar. Some browsers display it on the tab, as well.
 ===== Syntax =====
