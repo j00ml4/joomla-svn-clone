@@ -1,6 +1,5 @@
 ====== delete ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#delete|JFolder->delete]] | 26 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFolder::delete #}
 
 Deletes a folder. If files or sub-folders exist within the folder, they are deleted as well. If safe mode is enabled, FTP will be used to delete the folder (if it is enabled).
 This function returns true if the operation is successful, false otherwise.

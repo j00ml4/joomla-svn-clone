@@ -1,6 +1,5 @@
 ====== clean ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPath|JPath]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JPath.html#clean|JPath->clean]] | 27 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JPath::clean #}
 
 This method strips additional / or \ in a path name. It can also add a trailing slash if desired. It will also change the slashes to the system appropriate folder separator (eg. \ on Microsoft Windows systems, but / on Unix systems).
 ===== Syntax =====

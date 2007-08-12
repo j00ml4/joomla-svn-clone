@@ -1,6 +1,5 @@
 ====== JArchive ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JArchive.html|JArchive]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JArchive #}
 
 This is an archive handling class.  In this context an archive is a file that contains other files which may or may not be compressed.  Examples are "tar" (uncompressed), "gz" (compressed) and "bz2" (best compression).  JArchive is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 

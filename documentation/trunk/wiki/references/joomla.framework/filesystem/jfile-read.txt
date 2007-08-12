@@ -1,6 +1,5 @@
 ====== read ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#read|JFile->read]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::read #}
 
 Reads the contents of a file. If the current user has permission and safe mode is turned off, or the protocol is HTTP (i.e. the file name starts with http://) then this function will use the PHP [[http://www.php.net/fopen|fopen]] function. Otherwise, the function will use ftp (if enabled) to read the file. The function returns a string containing the contents of the file if successful.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:utilities:JError|JError]] class.
 

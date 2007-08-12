@@ -1,6 +1,5 @@
 ====== listFolderTree ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFolder|JFolder]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html#listFolderTree|JFolder->listFolderTree]] | 26 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFolder::listFolderTree #}
 
 Lists folders in a format suitable for tree display. An array containing the folders is returned with appropriate information to relate the various folders in a tree structure.
 

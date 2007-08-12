@@ -1,6 +1,5 @@
 ====== JFolder ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFolder.html|JFolder]] | 26 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFolder #}
 
 This is a folder handling class. It provides an interface to the file system to perform various folder related functions. This is a [[http://php.net/manual/language.oop5.static.php|static class]] and so its methods are available without needing an instantiation of the class.
 

@@ -1,6 +1,5 @@
 ====== getExt ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#getExt|JFile->getExt]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::getExt #}
 
 Gets the extension of a file name. The function returns all the characters after the last '. ' in the string.
 

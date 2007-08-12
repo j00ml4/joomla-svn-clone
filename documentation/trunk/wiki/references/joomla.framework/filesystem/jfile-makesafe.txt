@@ -1,6 +1,5 @@
 ====== makeSafe ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#FileSystem|FileSystem]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JFile|JFile]] | [[http://api.joomla.org/Joomla-Framework/FileSystem/JFile.html#makeSafe|JFile->makeSafe]] | 11 Apr 2006 | Published |
+{#JAPI Joomla.Framework FileSystem JFile::makeSafe #}
 
 Makes file name safe to use. This function filters out unsafe character sequences from the given file name. The [[http://php.net/manual/reference.pcre.pattern.syntax.php|regular expression]] used is: #\.\.[^A-Za-z0-9\.\_\- ]#. This will take out the combination of two dots (..) followed by anything that is not a letter, a number, a dot (.), an underscore (_), a hyphen (-) or a space ( ).
 
