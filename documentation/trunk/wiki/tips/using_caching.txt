@@ -2,8 +2,6 @@
 
 Typically in web environments, the same content is displayed over and over to everyone who visits your site.  Caching can speed this up by storing some or all of the information your code generates in a file and returning it when needed. There are different ways to do this, but this tutorial only deals with functions.  The good news is that in Joomla! 1.5 it's dead simple.
 
-[[|{{http://help.joomla.org/images/stories/Images_1.0x/1.0x_hs_icons/warning_711_small.png}}]] **Warning**: The Joomla! 1.5 cache API is currently being refactored and you should not rely on the information contained in this tutorial remaining true.  Further information may be found in this [[http://forum.joomla.org/index.php/topic,128252.0.html|forum thread]].
-
 ======1. Using the Profiler======
 
 When using cached functions you need to be sure the cached function really is faster than using the function without caching. We'll use the Joomla! profiler ([[reference:joomla.framework:utilities:jprofiler|JProfiler]]) to test this.
