@@ -4,8 +4,8 @@
 JEventHandler Class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JEventHandler-JEventHandler|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEventHandler-JEventHandler|JEventHandler]] | Constructor<p>For php4 compatability we must not use the __constructor as a constructor for plugins  because func_get_args ( void ) returns a copy of all passed arguments NOT references.  This causes problems with cross-referencing necessary for the observer design pattern.</p> |
-| [[JEventHandler-update|{{http://dev.joomla.org/media/images/Method.png }}]] [[JEventHandler-update|update]] | Method to trigger events |
+| {{references:Method.png?nolink}} [[JEventHandler-JEventHandler|JEventHandler]] | Constructor<p>For php4 compatability we must not use the __constructor as a constructor for plugins  because func_get_args ( void ) returns a copy of all passed arguments NOT references.  This causes problems with cross-referencing necessary for the observer design pattern.</p> |
+| {{references:Method.png?nolink}} [[JEventHandler-update|update]] | Method to trigger events |
 
 ----
 

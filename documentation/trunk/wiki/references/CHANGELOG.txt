@@ -16,6 +16,13 @@ Legend:
 ! -> Note
 ---------
 
+14.08.2007 René Serradeil
+ +	JPlugin::loadLanguage
+ -	JPlugin::update
+
+14.08.2007 Ian MacLennan
+ ^	bulk update: ???
+
 02.08.2007 René Serradeil
  ^	remarks for (some) Singleton objects; examples for JMenu
 
