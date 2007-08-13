@@ -1,6 +1,5 @@
 ====== methodName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{references:package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | {{references:Class.png?nolink}} [[ClassName]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html#methodName|ClassName->methodName]] | never | Work in progress |
+{#JAPI Joomla.Framework Subpackage ClassName::methodName #}
 
 Method description.
 
