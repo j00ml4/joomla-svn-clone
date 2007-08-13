@@ -1,7 +1,5 @@
 ====== JSession [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Environment|Environment]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession]] | never | Work in progress |
-
+{#JAPI Joomla.Framework Session JSession #}
 
 Class for managing HTTP sessions.
 
@@ -13,23 +11,23 @@ Provides access to session-state values as well as session-level settings and li
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JSession-__construct|__construct]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-clear|clear]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-close|close]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-destroy|destroy]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-fork|fork]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-get|get]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getExpire|getExpire]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getHandlers|getHandlers]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getId|getId]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getName|getName]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getState|getState]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-getToken|getToken]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-has|has]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-hasToken|hasToken]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-isNew|isNew]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-restart|restart]] |  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JSession-set|set]] |  |
+| {{references:Constructor.png?nolink}} [[JSession-__construct|__construct]] |  |
+| {{references:Method.png?nolink}} [[JSession-clear|clear]] |  |
+| {{references:Method.png?nolink}} [[JSession-close|close]] |  |
+| {{references:Method.png?nolink}} [[JSession-destroy|destroy]] |  |
+| {{references:Method.png?nolink}} [[JSession-fork|fork]] |  |
+| {{references:Method.png?nolink}} [[JSession-get|get]] |  |
+| {{references:Method.png?nolink}} [[JSession-getExpire|getExpire]] |  |
+| {{references:Method.png?nolink}} [[JSession-getHandlers|getHandlers]] |  |
+| {{references:Method.png?nolink}} [[JSession-getId|getId]] |  |
+| {{references:Method.png?nolink}} [[JSession-getName|getName]] |  |
+| {{references:Method.png?nolink}} [[JSession-getState|getState]] |  |
+| {{references:Method.png?nolink}} [[JSession-getToken|getToken]] |  |
+| {{references:Method.png?nolink}} [[JSession-has|has]] |  |
+| {{references:Method.png?nolink}} [[JSession-hasToken|hasToken]] |  |
+| {{references:Method.png?nolink}} [[JSession-isNew|isNew]] |  |
+| {{references:Method.png?nolink}} [[JSession-restart|restart]] |  |
+| {{references:Method.png?nolink}} [[JSession-set|set]] |  |
 
 ----
 

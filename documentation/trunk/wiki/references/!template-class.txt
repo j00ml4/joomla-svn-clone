@@ -1,6 +1,5 @@
 ====== ClassName ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:Joomla.Factory|Joomla.Factory]] | {{references:package.png?nolink}} [[references:Joomla.Factory/#Package|Package]] | [[http://api.joomla.org/Joomla-Framework/Package/ClassName.html|ClassName]] | never | Work in progress |
+{#JAPI Joomla.Framework Subpackage ClassName #}
 
 Class description.
 
