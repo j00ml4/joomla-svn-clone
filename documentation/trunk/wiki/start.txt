@@ -16,7 +16,6 @@ Many of these standards are in development and are still being improved. But mak
 
 ====2. Tutorials ====
 
-  * [[tutorials:jbeginners:introduction|Joomla! Development for Beginners]]
   * [[tutorials:components|Components]]
   * [[tutorials:modules|Modules]]
   * [[tutorials:plugins|Plugins]]
@@ -24,7 +23,11 @@ Many of these standards are in development and are still being improved. But mak
   * [[tutorials:languages|Languages]]
   * [[tutorials:framework|Framework]]
 
-==== 3. Specifications ====
+==== 3. Joomla! Development for Beginners ====
+
+  * [[jbeginners:introduction|Joomla! Development for Beginners]]
+
+==== 4. Specifications ====
 
   * [[guidelines:Application|Application Architecture]]
   * [[guidelines:i18n|Internationalization and UTF-8]]
@@ -34,14 +37,14 @@ Many of these standards are in development and are still being improved. But mak
   * [[guidelines:jsimplexml|XML Parsing]]
   * [[guidelines:database|Database schema]]  
 
-==== 4. API References ====
+==== 5. API References ====
 
   * [[references:joomla.framework|Joomla! Framework]]
   * [[references:joomla.legacy|Joomla! Legacy Code]]
   * [[references:xml_parameters|XML Parameters]]
   * [[references:3pd-libraries|Third-party Libraries included with Joomla!]]
 
-==== 5. Joomla! 1.5 ====
+==== 6. Joomla! 1.5 ====
 
   * Additions
     * [[new:functions|Functions]]
@@ -56,7 +59,7 @@ Many of these standards are in development and are still being improved. But mak
     * [[migration:table_changes|Table Changes]]
     * [[migration:changed_param_map|Change Parameters Map]]
 
-==== 6. Tips and Tricks ====
+==== 7. Tips and Tricks ====
 
   * [[tips:make_your_extensions_fit|Make your extensions fit for Joomla! 1.5]]
   * [[tips:implementing_existing_scripts|Implementing existing scripts into Joomla!]]
@@ -67,7 +70,7 @@ Many of these standards are in development and are still being improved. But mak
   * [[tips:using_caching|Using caching to speed up your code]]
   * [[tips:dontusedie|Don't use die() to debug]]
 
-==== 7. FAQ ====
+==== 8. FAQ ====
 
   * [[faq:ajax|Ajax in Joomla!]]
   * [[faq:path_constants|Path constants]]
