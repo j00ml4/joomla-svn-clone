@@ -1,0 +1,26 @@
+<code>
+<jdoc:include type="component" />
+<jdoc:include type="head" />
+<jdoc:include type="installation" />
+<jdoc:include type="message" />
+<jdoc:include type="module" name="breadcrumbs" />
+<jdoc:include type="module" name="menu" />
+<jdoc:include type="module" name="submenu" style="rounded" id="submenu-box" />
+<jdoc:include type="modules" name="debug" />
+<jdoc:include type="modules" name="icon" />
+<jdoc:include type="modules" name="left" style="rounded" />
+<jdoc:include type="modules" name="left" style="xhtml" />
+<jdoc:include type="modules" name="right" style="xhtml" />
+<jdoc:include type="modules" name="status"  />
+<jdoc:include type="modules" name="syndicate" />
+<jdoc:include type="modules" name="title" />
+<jdoc:include type="modules" name="toolbar" />
+<jdoc:include type="modules" name="top" />
+<jdoc:include type="modules" name="top" style="xhtml" />
+<jdoc:include type="modules" name="user1" style="xhtml" />
+<jdoc:include type="modules" name="user2" style="xhtml" />
+<jdoc:include type="modules" name="user3" />
+<jdoc:include type="modules" name="user4" />
+</code>
+
+(Not sure why type="module" is singular in some places, and plural in others.)
