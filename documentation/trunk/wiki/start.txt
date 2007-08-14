@@ -16,6 +16,7 @@ Many of these standards are in development and are still being improved. But mak
 
 ====2. Tutorials ====
 
+  * [[tutorials:jbeginners:introduction|Joomla! Development for Beginners]]
   * [[tutorials:components|Components]]
   * [[tutorials:modules|Modules]]
   * [[tutorials:plugins|Plugins]]
