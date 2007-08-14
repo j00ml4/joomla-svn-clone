@@ -8,4 +8,4 @@ A template is an extension that puts a certain look and feel on your site. With 
   * [[templates:xml_installfile|XML-Installation file]]
 
 ===== 3. Useful Lists =====
-   * [[templates:jdoc|jdoc Statements]]
+   * [[jdoc_statements|jdoc Statements]]
