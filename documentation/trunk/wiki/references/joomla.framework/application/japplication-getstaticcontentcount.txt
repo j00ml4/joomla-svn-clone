@@ -1,7 +1,12 @@
 ====== getStaticContentCount ======
-{#JAPI Joomla.Framework Application JApplication::getStaticContentCount #}
+{#JAPI Joomla.Framework Application JApplication::getGlobalBlogSectionCount - IR #}
 
-Returns the number of items in the menu that are of type 'static content'. This method is deprecated in Joomla! 1.5 (JApplicationHelper->getItemCount should be used instead).
+Returns the number of items in the menu that are of type 'static content'.
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JMenu-getItems|JMenu-getItems]] instead.
+
+The term 'static content' was used in earlier versions of Joomla! for what is called 'uncategorized content' as of Joomla! 1.5
 
 ===== Syntax =====
 void getStaticContentCount ()

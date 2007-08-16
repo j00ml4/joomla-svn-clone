@@ -1,15 +1,20 @@
 ====== addMetaTag ======
-{#JAPI Joomla.Framework Application JApplication::addMetaTag #}
+{#JAPI Joomla.Framework Application JApplication::addMetaTag - IR #}
 
-Adds a meta tag to the head block of the current document. This method is deprecated in Joomla! 1.5 (JDocument->setMetaData should be used instead). The **$prepend** and **$append** parameters have no effect in Joomla! 1.5.
+Adds a meta tag to the head block of the current document. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[references:joomla.framework:document:JDocument-setMetaData|JDocument::setMetaData]] instead. 
+
+The **$prepend** and **$append** parameters have no effect in Joomla! 1.5.
 
 ===== Syntax =====
 void addMetaTag	( **$name**, **$content**, **$prepend**, **$append** )
 
-| **$name** | string | is a string containing the name of the meta tag to add to the document. |
-| **$content** | string | is a string containing the content to add to the meta tag. |
-| **$prepend** | string | is not used in Joomla! 1.5. |
-| **$append** | string | is not used in Joomla! 1.5. |
+| **$name** | string | the name of the meta tag to add to the document. |
+| **$content** | string | the content to add to the meta tag. |
+| **$prepend** | string | not used as of Joomla! 1.5. |
+| **$append** | string | not used as of Joomla! 1.5. |
 
 ===== Examples =====
 <code php|Example>

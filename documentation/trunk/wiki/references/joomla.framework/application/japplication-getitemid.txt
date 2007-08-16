@@ -1,15 +1,16 @@
 ====== getItemid ======
-{#JAPI Joomla.Framework Application JApplication::getItemid #}
+{#JAPI Joomla.Framework Application JApplication::getItemid - IR #}
 
-The getItemid method accepts as its parameter an article id number and finds a menu item that the the article falls under.
+The getItemid method accepts as its parameter an article id number and finds a menu item that the article falls under.
 
-The itemid that is used in Joomla! is (or at least should be) used only for menu items. The getItemid method serves as a bridge between articles and the menu.
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JApplicationHelper-getItemid|JApplicationHelper::getItemid]] instead.
+
+The Itemid that is used in Joomla! is (or at least should be) used only for menu items. The getItemid method serves as a bridge between articles and the menu.
 
 This is a legacy function. It will be noted that there are six parameters documented here. In Joomla! 1.5, only the first one is used.
 
-This method returns the itemid of the specified article.
-
-This method is deprecated in Joomla! 1.5 ([[japplicationhelper-getitemid|JApplicationHelper→getItemid]] should be used instead).
+This method returns the Itemid of the specified article.
 
 ===== Syntax =====
 void getItemid	( **$id**, **$typed**, **$link**, **$bs**, **$bc**, **$gbs** )
@@ -30,11 +31,9 @@ echo $mainframe->getItemid( 6 );
 </code>
 might output
 <code php|Result>
-3
+50
 </code>
-The parameter 6 that is passed to the getItemid method is the id of an article. In the sample data, the article with id 6 is the article titled, "Example News Item 1". The itemid for this number would be three because the first menu item from which this article can be accessed from is the 'News' menu item, which has itemid of 3.
-
-This is not the case. Instead, it outputs 9999, indicating that it is unable to locate a proper itemid value. My hypothesis or assumption was that it would lookup the 6, find that this is a content item that can be accessed from the blog link on the menu, and return the itemid of this menu item, which is 3. This may be a bug or an intended behaviour.
+The parameter 6 that is passed to the getItemid method is the id of an article. In the sample data provided with Joomla! 1.5, the article with id 6 is the article titled, "We are Volunteers". The Itemid for this article would be 50 because the //first menu item// from which this article can be accessed from is the 'The News' menu item, which has the Itemid 50.
 
 ----
 

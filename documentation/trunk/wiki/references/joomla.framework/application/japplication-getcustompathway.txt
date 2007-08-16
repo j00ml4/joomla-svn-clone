@@ -1,7 +1,10 @@
 ====== getCustomPathWay ======
-{#JAPI Joomla.Framework Application JApplication::getCustomPathWay #}
+{#JAPI Joomla.Framework Application JApplication::getCustomPathWay - IR #}
 
-Returns an array of names of pathway items. This method is deprecated in Joomla! 1.5 (JPathWay->getNamePathWay should be used instead).
+Returns an array of names of pathway items. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JPathWay-getNamePathWay|JPathWay::getNamePathWay]] instead.
 
 ===== Syntax =====
 void getCustomPathWay ()

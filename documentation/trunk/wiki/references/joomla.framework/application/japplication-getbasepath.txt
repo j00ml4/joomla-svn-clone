@@ -1,25 +1,49 @@
 ====== getBasePath ======
-{#JAPI Joomla.Framework Application JApplication::getBasePath #}
+{#JAPI Joomla.Framework Application JApplication::getBasePath - IR #}
 
-Returns the base path of the current application. This method has been deprecated in Joomla! 1.5. Use the [[references:joomla.framework:environment:JURI-base|JURI::base()]] method instead.
+Returns the base path of the current application.
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[references:joomla.framework:environment:JURI-base|JURI::base]] instead.
 
 ===== Syntax =====
 string getBasePath ( **$client**, **$addTrailingSlash** )
 
-| **$client** | integer | is an integer specifying which client to return the path for (0 - site, 1 - administrator, 2 - installation). This parameter is optional and if omitted defaults to 0 (site). |
-| **$addTrailingSlash** | boolean | is a boolean value specifiying whether or not a trailing slash should be added to the end of the path. |
+| **$client** | integer | which client to return the path for (0 - site, 1 - administrator, 2 - installation). This parameter is ignored as of Joomla! 1.5 |
+| **$addTrailingSlash** | boolean | whether or not a trailing slash should be added to the end of the path. This parameter is ignored as of Joomla! 1.5 |
 
 ===== Examples =====
-<code php|Example>
+The following examples are pure academic because both parameters are ignored as of Joomla! 1.5 and always return the base path of the active application including the trailing slash.
+
+<code php|Example: JSite>
+global $mainframe;
+
+echo $mainframe->getBasePath( 0, true )
+</code>
+might display the following:
+<code php|Result>
+http://www.example.com/joomla15/
+</code>
+
+<code php|Example: JAdministrator>
 global $mainframe;
 
 echo $mainframe->getBasePath( 1, true )
 </code>
 might display the following:
 <code php|Result>
-http://127.0.0.1/joomla15/
+http://www.example.com/joomla15/administrator/
 </code>
 
+<code php|Example: JInstaller>
+global $mainframe;
+
+echo $mainframe->getBasePath( 2, true )
+</code>
+might display the following:
+<code php|Result>
+http://www.example.com/joomla15/installation/
+</code>
 
 ----
 

@@ -1,13 +1,16 @@
 ====== appendPathWay ======
-{#JAPI Joomla.Framework Application JApplication::appendPathWay #}
+{#JAPI Joomla.Framework Application JApplication::appendPathWay - IR #}
 
-Appends an item to the pathway of the current document. A link can be associated with this item which will be displayed unless the item is the last item in the pathway. This method is deprecated in Joomla! 1.5 (JDocument->setMetaData should be used instead).
+Appends an item to the pathway of the current document. A link can be associated with this item which will be displayed unless the item is the last item in the pathway. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[references:joomla.framework:document:JDocument-setMetaData|JDocument::setMetaData]] instead.
 
 ===== Syntax =====
 void appendPathWay	( **$name**, **$link** )
 
-| **$name** | string | is a string containing the item to add to the pathway. |
-| **$link** | string | is a string containing a URL which the item should reference. This parameter is optional, and if omitted the item will not be linked. |
+| **$name** | string | the item to add to the pathway. |
+| **$link** | string | a URL which the item should reference. This parameter is optional, and if omitted the item will not be linked. |
 
 ===== Examples =====
 <code php|Example 1>

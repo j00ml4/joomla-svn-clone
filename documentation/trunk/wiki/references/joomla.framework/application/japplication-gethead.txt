@@ -1,7 +1,10 @@
 ====== getHead ======
-{#JAPI Joomla.Framework Application JApplication::getHead #}
+{#JAPI Joomla.Framework Application JApplication::getHead - IR #}
 
-Returns the head block of the current document. This method is deprecated in Joomla! 1.5 (JDocument->renderHead should be used instead).
+Returns the head block of the current document. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[references:joomla.framework:document:JDocument-renderHead|JDocument::renderHead]] instead.
 
 ===== Syntax =====
 void getHead ()
