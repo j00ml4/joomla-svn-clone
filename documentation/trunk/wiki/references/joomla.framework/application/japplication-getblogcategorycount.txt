@@ -1,7 +1,10 @@
 ====== getBlogCategoryCount ======
-{#JAPI Joomla.Framework Application JApplication::getBlogCategoryCount #}
+{#JAPI Joomla.Framework Application JApplication::getBlogCategoryCount - IR #}
 
-Returns the number of items in the menu that are of type 'blog category'.  This method is deprecated in Joomla! 1.5 (JApplicationHelper->getItemCount should be used instead).
+Returns the number of items in the menu that are of type 'blog category'. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JMenu-getItems|JMenu-getItems]] instead.
 
 ===== Syntax =====
 void getBlogCategoryCount ()

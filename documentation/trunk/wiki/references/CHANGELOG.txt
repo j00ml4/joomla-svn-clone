@@ -17,6 +17,9 @@ Legend:
 ---------
 
 14.08.2007 René Serradeil
+ ^	JApplication, deprecated methods
+
+14.08.2007 René Serradeil
  +	JPlugin::loadLanguage
  -	JPlugin::update
 

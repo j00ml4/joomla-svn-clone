@@ -1,7 +1,10 @@
 ====== getGlobalBlogSectionCount ======
-{#JAPI Joomla.Framework Application JApplication::getGlobalBlogSectionCount #}
+{#JAPI Joomla.Framework Application JApplication::getGlobalBlogSectionCount - IR #}
 
-Returns the number of items in the menu that are of type 'global blog section'. This method is deprecated in Joomla! 1.5 (JApplicationHelper->getItemCount should be used instead).
+Returns the number of items in the menu that are of type 'global blog section'. 
+
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JMenu-getItems|JMenu-getItems]] instead.
 
 ===== Syntax =====
 void getGlobalBlogSectionCount ()

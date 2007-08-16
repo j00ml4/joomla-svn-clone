@@ -1,5 +1,5 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Application JApplication::__construct #}
+{#JAPI Joomla.Framework Application JApplication:: - IR #}
 
 Constructor for the JApplication class. The client ID and request time (current time) is stored.
 

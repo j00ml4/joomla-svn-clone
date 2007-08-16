@@ -6,8 +6,8 @@ Enqueues a message into the system message queue. The system messages are displa
 ===== Syntax =====
 void enqueueMessage	( **$msg**, **$type** )
 
-| **$msg** | string | is a string containing the message to enqueue. |
-| **$type** | string | is a string containing the message type. This parameter is optional and if omitted defaults to 'message'. |
+| **$msg** | string | the message to enqueue. |
+| **$type** | string | the message type. This parameter is optional and if omitted defaults to 'message'. |
 
 ===== Examples =====
 <code php|Example>
