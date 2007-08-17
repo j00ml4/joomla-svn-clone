@@ -1,6 +1,5 @@
 ====== _ ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JText|JText]] | [[http://api.joomla.org/Joomla-Framework/I18N/JText.html|JText->_]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JText::_ #}
 
 Translates a string into the current language. This method passes the specified string to the current [[references:joomla.framework:i18n:jlanguage|JLanguage]] object which will use the string as a key to look for a corresponding value in the current language. If no string exists in the current language, then the string that is passed to the method is returned.
 

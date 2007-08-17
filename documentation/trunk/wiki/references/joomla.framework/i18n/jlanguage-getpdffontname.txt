@@ -1,6 +1,5 @@
 ====== getPdfFontName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getPdfFontName]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguage::getPdfFontName #}
 
 Gets the PDF font name to use for the language. This is used to properly render text in a PDF file to ensure that the proper font set is used.
 

@@ -1,6 +1,5 @@
 ====== sprintf ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JText|JText]] | [[http://api.joomla.org/Joomla-Framework/I18N/JText.html|JText->sprintf]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JText::sprintf #}
 
 Wrapper for the [[http://php.net/manual/function.sprintf.php|sprintf]] method. Similar to [[http://php.net/manual/function.sprintf.php|sprintf]], this method takes multiple parameters. See the [[http://php.net/manual/function.sprintf.php|PHP documentation] for information on parameters for this method. The first parameter given is the format string. This string is passed through the [[JText-_|JText::_]] method for translation before being passed on to [[http://php.net/manual/function.sprintf.php|sprintf]].
 

@@ -1,6 +1,5 @@
 ====== createSiteList ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[JHelp|JHelp]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp->createSiteList]] |
+{#JAPI Joomla.Framework I18N JHelp::createSiteList #}
 
 This method builds a list of the help sites which can be used in a select option. The method returns an array of arrays that can be used to build the select options.
 ===== Syntax =====

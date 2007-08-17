@@ -1,6 +1,5 @@
 ====== JLanguage ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguage #}
 
 Languages/translation handler class. This class provides an interface to installed Joomla! languages. The Joomla! core will instantiate this class with the default system language. It is possible to create a second instance of the class with the same language, but it should be noted that any given language file will only be loaded once. Therefore, if the default system language is English, and the JLanguage class is instantiated again for the English language, the extension instantiated object will not be able to load any files that have already been loaded by the core.
 

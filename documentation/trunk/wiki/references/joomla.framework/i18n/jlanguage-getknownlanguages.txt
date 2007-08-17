@@ -1,6 +1,5 @@
 ====== getKnownLanguages ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->getKnownLanguages]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguage::getKnownLanguages #}
 
 Returns a list of known languages in a specified folder. The method will search in the language folder of the specified path for a list of languages installed in that location (i.e. if the specified path is /var/www/joomla/installation, the method will look for XML files in the subfolders of the /var/www/joomla/installation/language folder). 
 
