@@ -1,6 +1,5 @@
 ====== JRegistryFormat ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormat #}
 
 This is an abstract format class for [[JRegistry|JRegistry]]. This class defines an interface for registry formats. Its methods are defined in child classes.
 

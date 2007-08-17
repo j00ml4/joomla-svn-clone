@@ -1,6 +1,5 @@
 ====== stringToObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->stringToObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatINI::stringToObject #}
 
 Converts an INI string into an object. This method is based on the phpDocumentor_parse_ini_file function.
 

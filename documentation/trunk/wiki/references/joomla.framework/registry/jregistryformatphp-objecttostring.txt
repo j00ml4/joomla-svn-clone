@@ -1,6 +1,5 @@
 ====== objectToString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->objectToString]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatPHP::objectToString #}
 
 Converts an object into a php class string. It should be noted that only one depth in the object is supported. If two levels are required, INI format or XML format should be used. If more than two levels are required, XML format should be used.
 

@@ -1,6 +1,5 @@
 ====== JRegistryFormatXML ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatXML #}
 
 This is an implementation of the JRegistryFormat interface. This class provides functionality to convert an object into an XML string. The XML format is the only format that supports more than two levels of depth, so if this is required, this class should be used.
 

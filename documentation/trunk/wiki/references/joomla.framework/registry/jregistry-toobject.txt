@@ -1,6 +1,5 @@
 ====== toObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->toObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistry::toObject #}
 
 Transforms a namespace to an object. If the namespace is not specified, the default namespace is used.
 

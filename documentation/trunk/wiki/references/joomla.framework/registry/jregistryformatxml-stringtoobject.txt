@@ -1,6 +1,5 @@
 ====== stringToObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormatXML|JRegistryFormatXML]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatXML.html|JRegistryFormatXML->stringToObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatXML::stringToObject #}
 
 Converts an XML formatted string into an object. This method has not yet been implemented and currently will always returns true.
 

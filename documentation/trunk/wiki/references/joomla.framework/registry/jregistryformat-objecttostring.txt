@@ -1,6 +1,5 @@
 ====== objectToString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->objectToString]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormat::objectToString #}
 
 Converts an object into a formatted string. The format will depend on the current JRegistryFormat class. The parameters in $params depends on the implementation in the child class.
 
