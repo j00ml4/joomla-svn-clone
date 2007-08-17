@@ -1,6 +1,5 @@
 ====== orderUpIcon2 ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderUpIcon2]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::orderUpIcon2 #}
 
 Returns the icon to move an item up. Unlike the orderUpIcon method, the orderUpIcon2 method is designed to be used with an $id field rather than a row index. Therefore, this method is appropriate when not being used within an indexed list. If $order is 0, a disabled arrow icon will be shown. If $order is less than 0, a red arrow will be shown. Otherwise, a normal arrow will be shown. The method will return code for an icon that will call the Javascript function 'listItemTask' with the first parameter being 'cb' concatenated with $id and the second parameter being $task.
 

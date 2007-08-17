@@ -1,6 +1,5 @@
 ====== JButtonHelp ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonHelp.html|JButtonHelp]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonHelp #}
 
 Renders a help button. This is an implimentation of the abstract [[JButton|JButton]] class. It provides the ability to create a standard help button. The class will calculate the appropriate help system URL for the given parameters.
 

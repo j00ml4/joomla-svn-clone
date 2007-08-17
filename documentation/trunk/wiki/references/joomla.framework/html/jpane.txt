@@ -1,6 +1,5 @@
 ====== JPane ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPane.html|JPane]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPane #}
 
 JPane is an abstract base class that provides an interface for panes. The term pane refers to the container and the term panel refers to the individual 'pages' inside the pane.
 

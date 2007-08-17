@@ -1,6 +1,5 @@
 ====== administrator ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLImage|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLImage|JHTMLImage]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLImage.html|JHTMLImage->administrator]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLImage::administrator #}
 
 Generates image tags for images contained in the administrator application directory.
 

@@ -1,6 +1,5 @@
 ====== JButtonSeparator ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonSeparator.html|JButtonSeparator]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonSeparator #}
 
 Renders a button separator. This is an implementation of the abstract [[JButton|JButton]] class. It is used to create a separater or spacer between two buttons.
 

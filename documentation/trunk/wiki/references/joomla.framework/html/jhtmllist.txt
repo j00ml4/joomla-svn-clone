@@ -1,6 +1,5 @@
 ====== JHTMLList ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLList.html|JHTMLList]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLList #}
 
 JHTMLList is a drawing utility class that facilities the use of various select lists.
 

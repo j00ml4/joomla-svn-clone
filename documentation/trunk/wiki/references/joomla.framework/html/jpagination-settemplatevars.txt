@@ -1,6 +1,5 @@
 ====== setTemplateVars ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->setTemplateVars]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::setTemplateVars #}
 
 Sets the variables for the page navigation template. This method will add three variables to the specified template: 'PAGE_LINKS', 'PAGE_LIST_OPTIONS' and 'PAGE_COUNTER'. 'PAGE_LINKS' will be assigned the result of $this->getPagesLinks( $link ). 'PAGE_LIST_OPTIONS' will be assigned the result of $this->getLimitBox( $link ). 'PAGE_COUNTER' will be assigned the result of $this->getPagesCounter().
 

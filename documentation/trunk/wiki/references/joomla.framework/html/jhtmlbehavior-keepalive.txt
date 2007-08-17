@@ -1,6 +1,5 @@
 ====== keepalive ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->keepalive]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLBehavior::keepalive #}
 
 Adds the necessary Javascript and outputs the necessary code to keep the session alive, for example, while editing or creating an article.
 

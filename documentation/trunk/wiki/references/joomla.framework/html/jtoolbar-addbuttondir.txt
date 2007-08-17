@@ -1,6 +1,5 @@
 ====== addButtonDir ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->addButtonDir]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::addButtonDir #}
 
 Adds a directory where JToolBar should search for button types. You may either pass a string or an array of directories. JToolBar will be searching directories for a button type in the same order you added them. If the button type cannot be found in the custom folders, it will look in the toolbar/button folder. This can be used to add custom toolbar classes.
 

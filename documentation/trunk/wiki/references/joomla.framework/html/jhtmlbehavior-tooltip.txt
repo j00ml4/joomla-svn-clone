@@ -1,6 +1,5 @@
 ====== tooltip ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->tooltip]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLBehavior::tooltip #}
 
 Injects the necessary Javascript into the page to display tooltips (help messages that appear when the user moves the mouse over an image or text). Tooltips can then be created using the JHTML::_( 'tooltip' ) command.
 

@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPane|JPane]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPane.html|JPane->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPane::__construct #}
 
 Performs any necessary operations to construct the pane (this method in the abstract class does not do anything).
 

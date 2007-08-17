@@ -1,6 +1,5 @@
 ====== JPagination ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination #}
 
 The JPagination class provides a common interface for content pagination in the Joomla! Framework.
 

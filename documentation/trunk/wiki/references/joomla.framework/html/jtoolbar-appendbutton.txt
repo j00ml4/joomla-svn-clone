@@ -1,6 +1,5 @@
 ====== appendButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->appendButton]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::appendButton #}
 
 Appends a button to the end of the toolbar. The first parameter to this method is the button type.  The rest of the parameters are contingent on the parameters of the particular button's render method (the parameters passed to the appendButton method are passed to the button's render method, which in turn passes them to the fetchId and fetchButton methods).
 

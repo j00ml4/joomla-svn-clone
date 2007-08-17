@@ -1,6 +1,5 @@
 ====== writeLimitBox ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->writeLimitBox]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::writeLimitBox #}
 
 Writes (echoes) the output of [[JPagination-getLimitBox|getLimitBox]]. This method has been deprecated as of Joomla! 1.5. Use [[JPagination-getLimitBox|getLimitBox]] instead.
 

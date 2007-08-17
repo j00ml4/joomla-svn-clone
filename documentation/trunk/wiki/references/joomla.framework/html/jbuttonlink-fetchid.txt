@@ -1,6 +1,5 @@
 ====== fetchId ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButtonLink|JButtonLink]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonLink.html#fetchid|JButtonLink->fetchId]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonLink::fetchId #}
 
 Gets the button's CSS ID. The value returned is a concatenation of the parent's name property and the specified name.
 

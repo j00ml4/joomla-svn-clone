@@ -1,6 +1,5 @@
 ====== fetchButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButtonCustom|JButtonCustom]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonCustom.html#fetchbutton|JButtonCustom->fetchButton]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonCustom::fetchButton #}
 
 Returns the HTML code for the button. The output is actually directly copied from the $html parameter. Therefore the HTML produced by the custom button can be easily modified.
 

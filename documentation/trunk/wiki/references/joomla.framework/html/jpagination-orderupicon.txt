@@ -1,6 +1,5 @@
 ====== orderUpIcon ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->orderUpIcon]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::orderDownIcon #}
 
 Returns the icon to move an item up. The icon will be shown if it is not the first item in the list (i.e. $i > 0 or $i + $limitstart > 0) and if $condition is true. If the icon is shown and $enabled is true, the method will return code for an icon that will call the Javascript function 'listItemTask' with the first parameter being 'cb' concatenated with $i and the second parameter being $task. If the icon is shown and $enabled is false, then a disabled button will be displayed.
 

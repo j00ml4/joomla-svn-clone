@@ -1,6 +1,5 @@
 ====== cloak ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLEmail|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLEmail|JHTMLEmail]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLEmail.html|JHTMLEmail->cloak]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLEmail::cloak #}
 
 Simple Javascript email cloaking method.
 

@@ -1,6 +1,5 @@
 ====== calendar ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLBehavior|##http://api.joomla.org/media/images/Class.png qq]][[JHTMLBehavior|JHTMLBehavior]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior->calendar]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLBehavior::calendar #}
 
 Includes the necessary Javascript in the page to use the date selector widget.
 

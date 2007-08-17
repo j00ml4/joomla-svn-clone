@@ -1,6 +1,5 @@
 ====== JHTMLGrid ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLGrid #}
 
 JHTMLGrid is a utility drawing class for creating HTML Grids.
 

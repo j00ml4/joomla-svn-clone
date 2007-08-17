@@ -1,6 +1,5 @@
 ====== fetchButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButtonLink|JButtonLink]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonLink.html#fetchbutton|JButtonLink->fetchButton]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonLink::fetchButton #}
 
 Returns the HTML code for the button. The created button will open the specified URL when it is clicked. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with 'back' as its parameter. This class is defined in the standard administrator template. If this class is used in the frontend, this class should be defined and any images used should be included. The standard button appears with a 'back' icon.
 
