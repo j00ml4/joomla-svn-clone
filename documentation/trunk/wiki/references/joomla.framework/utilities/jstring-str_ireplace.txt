@@ -1,6 +1,5 @@
 ====== str_ireplace ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->str_ireplace]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::str_ireplace #}
 
 Replaces one string with another in a case insensitive manner. See [[http://php.net/manual/function.str_ireplace.php|str_ireplace]] for more information.
 

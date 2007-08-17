@@ -1,6 +1,5 @@
 ====== isEmailAddress ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Mail|Mail]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JMailHelper|JMailHelper]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMailHelper.html|JMailHelper->isEmailAddress]] | Never | Work in progress | 
+{#JAPI Joomla.Framework Utilities JMail::isEmailAddress #}
 
 Allows to verify that an e-mail address is in proper format.\\ 
 Examples of valid E-mail formats: sam@host.com, example@new.co.uk, user@univdepart.univname.edu.\\ 

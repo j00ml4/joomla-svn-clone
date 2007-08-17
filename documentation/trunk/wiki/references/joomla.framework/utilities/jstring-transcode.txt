@@ -1,6 +1,5 @@
 ====== transcode ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->transcode]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::transcode #}
 
 Transcode a string from one character encoding to another.
 

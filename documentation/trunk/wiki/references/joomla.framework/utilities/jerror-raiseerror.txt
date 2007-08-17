@@ -1,6 +1,5 @@
 ====== raiseError ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Ut ilities/JError.html|JError->raiseError]] |
+{#JAPI Joomla.Framework Utilities JError::raiseError #}
 
 This is a wrapper for the [[#raise|raise]] method that passes E_ERROR as the error level. A patError object will be returned.
 ===== Syntax =====

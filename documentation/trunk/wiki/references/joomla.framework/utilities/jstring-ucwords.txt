@@ -1,6 +1,5 @@
 ====== ucwords ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->ucwords]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::ucwords #}
 
 Makes a each word in the string's first character uppercase. See [[http://php.net/manual/function.ucwords.php|ucwords]] for more information.
 

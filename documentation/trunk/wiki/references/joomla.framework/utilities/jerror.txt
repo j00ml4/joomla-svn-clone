@@ -1,6 +1,5 @@
 ====== JError [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError]] |
+{#JAPI Joomla.Framework Utilities JError #}
 
 Error Handling Class. This class extends the patErrorManager class and is an interface to the patError class.
 

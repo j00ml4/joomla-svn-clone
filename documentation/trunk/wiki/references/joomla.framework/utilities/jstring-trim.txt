@@ -1,6 +1,5 @@
 ====== trim ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->trim]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::trim #}
 
 Strip whitespace (or other characters) from the beginning and end of a string. Note: you only need to use this if you are supplying the optional charlist argument and it contains UTF-8 characters. Otherwise trim will work normally on a UTF-8 string. See [[http://php.net/manual/function.trim.php|trim]] for more information.
 

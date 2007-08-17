@@ -1,6 +1,5 @@
 ====== getValue ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#getvalue|JArrayHelper->getValue]] | never | Internal review |
+{#JAPI Joomla.Framework Utilities JArrayHelper::getValue #}
 
 Returns a value from an associative (named) array or a specified default value if the key is not set. This method also provides for type restrictions, so that values can be forced to be a certain type. Supported types are: INT, INTEGER, FLOAT, DOUBLE, BOOL, BOOLEAN, ARRAY, STRING, WORD, NONE.
 

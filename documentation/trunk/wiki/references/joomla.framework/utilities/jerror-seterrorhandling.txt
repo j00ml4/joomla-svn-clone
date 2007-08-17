@@ -1,6 +1,5 @@
 ====== setErrorHandling ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->setErrorHandling]] |
+{#JAPI Joomla.Framework Utilities JError::raiseErrorHandling #}
 
 This sets the way that patErrorManager will handle the different error levels. Use this method if you wish to override the default settings.
 Error handling modes:

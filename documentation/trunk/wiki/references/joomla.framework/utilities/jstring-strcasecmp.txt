@@ -1,6 +1,5 @@
 ====== strcasecmp ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strcasecmp]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::strcasecmp #}
 
 Compares two strings in a case-insensitive manner. This method takes into account different collations that various character sets might have. See [[http://php.net/manual/function.strcasecmp.php|strcasecmp]] for more information.
 
