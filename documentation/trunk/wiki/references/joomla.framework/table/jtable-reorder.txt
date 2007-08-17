@@ -1,6 +1,5 @@
 ====== reorder ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#reorder|JTable->reorder]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTable::reorder #}
 
 Compacts the ordering sequence of the selected records.
 

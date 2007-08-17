@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableComp|JTableComponent]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableComponent::check #}
 
 Performs data integrity verification on the data. Namely, it converts the parent and ordering properties to integers, if they are not already (this is done using the intval method).
 

@@ -1,6 +1,5 @@
 ====== JTableMenu ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenu.html|JTableMenu]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableMenu #}
 
 The JTableMenu class is an implementation of the JTable interface which provides access to the menu table. This implementation provides a custom bind method which handles the parameters for the control and params fields.
 

@@ -1,6 +1,5 @@
 ====== JTableUser ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableUser #}
 
 The JTableUser class is an implementation of the JTable interface which provides access to the users table. This implement provides methods to handle parameters, data verification, user deletion, updating last visit information and storing a user. It also provides a method of obtaining a complete user list or a user list for a specific group.
 

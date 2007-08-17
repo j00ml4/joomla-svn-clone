@@ -1,6 +1,5 @@
 ====== JTableContent ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableContent.html|JTableContent]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableContent #}
 
 The JTableContent class is an implementation of the JTable class to provide access to the content table. This implementation provides data verification functionality via the check() method. It also includes a method to convert an article to XML (i.e. the toXML method).
 

@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableMenuTypes|JTableMenuTypes]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenuTypes.html|JTableMenuTypes->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableMenutypes::check #}
 
 Performs data integrity verification on the data. The method rejects any instances of "\'" character in the menutype field. If the title contains only whitespace then the value of the menutype field is assigned to it.
 

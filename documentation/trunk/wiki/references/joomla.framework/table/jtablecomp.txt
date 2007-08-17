@@ -1,6 +1,5 @@
 ====== JTableComponent ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableComponent.html|JTableComponent]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableComponent #}
 
 The JTableComponent class is an implementation of the JTable class to provide access to the components table. This implementation provides data verification functionality via the check() method, the ability to load a row by its option field via the loadByOption() method and defines the class variables to provide an interface to the database table. It also implements a specialized bind() method to facilitate component configuration parameters.
 

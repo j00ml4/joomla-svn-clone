@@ -1,6 +1,5 @@
 ====== store ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}} [[JTable]] | [[http://api.joomla.org/Joomla-Framework/Table/JTable.html#store|JTable->store]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTable::store #}
 
 Inserts a new row if id is zero or updates an existing row in the database table.
 

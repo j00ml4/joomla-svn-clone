@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableModule|JTableModule]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableModule.html|JTableModule->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableModule::check #}
 
 Performs data integrity verification on the data. It ensures that the module has a valid title.
 

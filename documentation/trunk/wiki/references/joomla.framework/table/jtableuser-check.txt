@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableUser|JTableUser]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableUser.html|JTableUser->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableUser::check #}
 
 Performs data integrity verification on the data. It ensures that:
   * the user has a name and username set
