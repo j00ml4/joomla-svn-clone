@@ -1,0 +1,1 @@
+Migration ETL Plugins are at the core of the Joomla! Migration Component. ETL plugins define the tables that are to be exported from the site into the SQL file. Plugins can be very simple and can be composed of only a few lines of code but they can also be more advanced allowing transformation of data and fields.
