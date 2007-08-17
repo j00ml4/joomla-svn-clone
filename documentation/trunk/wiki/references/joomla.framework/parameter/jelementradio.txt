@@ -1,6 +1,5 @@
 ====== JElementRadio ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementRadio.html|JElementRadio]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementRadio #}
 
 This class implements the JElement interface and is used to render a radio list element. The JElementRadio class can be used to render a radio list that contains the options specified in the XML file.
 

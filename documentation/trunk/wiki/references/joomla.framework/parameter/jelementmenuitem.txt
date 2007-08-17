@@ -1,6 +1,5 @@
 ====== JElementMenuItem ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementMenuItem.html|JElementMenuItem]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementMenuItem #}
 
 This class implements the JElement interface and is used to render a menu item element. The JElementMenuItem class can be used to render a select list that will list items in the menu.
 

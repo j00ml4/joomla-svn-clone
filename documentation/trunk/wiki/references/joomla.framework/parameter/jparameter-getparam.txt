@@ -1,6 +1,5 @@
 ====== getParam ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->getParam]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter::getParam #}
 
 Renders a parameter into HTML. The method returns the results of the element's [[JElement-render|render]] method. See the [[JElement|JElement]] classes for more information on the XML schema for each element type.
 

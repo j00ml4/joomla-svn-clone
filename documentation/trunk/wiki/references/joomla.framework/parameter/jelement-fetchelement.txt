@@ -1,6 +1,5 @@
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement.html|JElement->fetchElement]] |
+{#JAPI Joomla.Framework Parameter JElement::fetchElement #}
 
 This is an empty function. It is overriden by child classes to perform an element fetch. The base class function does not return a value.
 

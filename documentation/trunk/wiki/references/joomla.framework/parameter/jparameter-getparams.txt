@@ -1,6 +1,5 @@
 ====== getParams ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->getParams]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter::getParams #}
 
 Renders each parameter and returns the results in an array. If no setup file was found, then the parameters are rendered as a TEXTAREA control containing the raw INI data.
 

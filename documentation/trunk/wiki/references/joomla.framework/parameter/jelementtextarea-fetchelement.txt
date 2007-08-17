@@ -1,6 +1,5 @@
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElementTextarea|JElementTextarea]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementTextarea.html|JElementTextarea->fetchElement]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementTextarea::fetchElement #}
 
 Renders the HTML code for a textarea. The resulting form element will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
 

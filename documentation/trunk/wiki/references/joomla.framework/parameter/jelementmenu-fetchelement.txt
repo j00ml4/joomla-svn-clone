@@ -1,6 +1,5 @@
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElementMenu|JElementMenu]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementMenu.html|JElementMenu->fetchElement]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementMenu::fetchElement #}
 
 Renders the HTML code for a selection list containing a list of the menus. The resulting selection list will have the name $control_name[$name] and will have $value selected (this groups elements into an array with the specified control name).
 

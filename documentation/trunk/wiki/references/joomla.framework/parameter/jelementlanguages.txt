@@ -1,6 +1,5 @@
 ====== JElementLanguages ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementLanguages.html|JElementLanguages]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementLanguages #}
 
 This class implements the JElement interface and is used to render a language element. The JElementLanguages class can be used to render a select list that will list the available languages.
 

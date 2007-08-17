@@ -1,6 +1,5 @@
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElementSpacer|JElementSpacer]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementSpacer.html|JElementSpacer->fetchElement]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementSpacer::fetchElement #}
 
 Renders the HTML code for a spacer. If the **$value** parameter evaluates to a true value, this method will return **$value**. Otherwise, the method will return '<hr />'.
 
