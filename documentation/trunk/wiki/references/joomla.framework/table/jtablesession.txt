@@ -1,6 +1,5 @@
 ====== JTableSession ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession #}
 
 The JTableSession class is an implementation of the JTable interface which provides access to the session table. This implement provides methods ti insert sessions, purge old sessions and to update sessions.
 

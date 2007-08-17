@@ -1,6 +1,5 @@
 ====== destroy ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->destroy]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession::destroy #}
 
 Destroys the pesisting session. Removes the record for the session from the table.
 

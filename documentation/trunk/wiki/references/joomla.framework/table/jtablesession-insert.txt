@@ -1,6 +1,5 @@
 ====== insert ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->insert]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession::insert #}
 
 Inserts a session record into the table. The session ID can be retrieved from the [[references:joomla.framework:environment:JSession-id|JSession::id()]] method. The client ID can be retrieved using [[references:joomla.framework:application:JApplication-getClientId|JApplication::getClientId()]].
 

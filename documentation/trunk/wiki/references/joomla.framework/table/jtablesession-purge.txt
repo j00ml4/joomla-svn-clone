@@ -1,6 +1,5 @@
 ====== purge ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->purge]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession::purge #}
 
 This method is used to purge old sessions. All records are deleted that have a time value that is less than the current time minus age. To clear all sessions, a value of 0 can be used for age. The results of the query are returned.
 

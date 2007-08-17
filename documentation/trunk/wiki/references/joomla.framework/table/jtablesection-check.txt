@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSection|JTableSection]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSection::check #}
 
 Performs data integrity verification on the data. Namely, it ensures that the section has both a title and a name, and that a section with the given name does not already exist in the section.
 

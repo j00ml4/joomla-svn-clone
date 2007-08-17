@@ -1,6 +1,5 @@
 ====== JTableSection ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSection.html|JTableSection]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSection #}
 
 The JTableSection class is an implementation of the JTable interface which provides access to the sections table. This implementation provides a data verification method to check the integrity of the data.
 

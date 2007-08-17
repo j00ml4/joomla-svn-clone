@@ -1,6 +1,5 @@
 ====== bind ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableMenu|JTableMenu]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableMenu.html|JTableMenu->bind]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableMenu::bind #}
 
 This is a customized bind method that handles the retrieval of parameters from the form data and merges these with any additional parameters specified in the $array parameter. Parameters from the control element are stored in the control field and parameters from the params element are stored in the params field.
 

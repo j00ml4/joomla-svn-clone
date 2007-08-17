@@ -1,6 +1,5 @@
 ====== check ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableCategory|JTableCategory]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableCategory.html|JTableCategory->check]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableCategory::check #}
 
 Performs data integrity verification on the data. Namely, it ensures that the category has both a title and a name, and that a category with the given name does not already exist in the section.
 

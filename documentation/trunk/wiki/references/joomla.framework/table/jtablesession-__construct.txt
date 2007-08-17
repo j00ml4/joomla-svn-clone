@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession::__construct #}
 
 The class constructor calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. This method initializes the guest property to 1, the username to an empty string and the gid to 0.
 

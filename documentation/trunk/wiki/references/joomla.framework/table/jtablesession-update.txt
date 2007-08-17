@@ -1,6 +1,5 @@
 ====== update ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JTableSession|JTableSession]] | [[http://api.joomla.org/Joomla-Framework/Model/JTableSession.html|JTableSession->update]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTableSession::update #}
 
 Updates the time of the current session. This will set the time field of the session to the current time. The $updateNulls parameter currently has no effect.
 

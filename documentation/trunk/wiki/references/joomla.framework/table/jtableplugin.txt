@@ -1,6 +1,5 @@
 ====== JTablePlugin ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Table|Table]] | [[http://api.joomla.org/Joomla-Framework/Model/JTablePlugin.html|JTablePlugin]] | never | Work in progress |
+{#JAPI Joomla.Framework Session JTablePlugin #}
 
 The JTableMenu class is an implementation of the JTable interface which provides access to the modules table. This implementation provides a customized bind method to handle parameters for the params field.
 
