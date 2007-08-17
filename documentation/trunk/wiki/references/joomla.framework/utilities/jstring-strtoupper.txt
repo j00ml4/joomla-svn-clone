@@ -1,6 +1,5 @@
 ====== strtoupper ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->strtoupper]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::strtoupper #}
 
 Makes a string uppercase. Note: The concept of a characters "case" only exists in some alphabets such as Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does  not exist in the Chinese alphabet, for example. See [[http://www.unicode.org/reports/tr21/tr21-5.html|Unicode Standard Annex #21: Case Mappings]]. See [[http://php.net/manual/function.strtoupper.php|strtoupper]] for more information.
 

@@ -1,6 +1,5 @@
 ====== toString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#tostring|JArrayHelper->toString]] | never | Internal review |
+{#JAPI Joomla.Framework Utilities JArrayHelper::toString #}
 
 Converts an associative array into HTML attribute format.
 

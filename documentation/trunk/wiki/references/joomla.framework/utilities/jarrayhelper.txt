@@ -1,6 +1,5 @@
 ====== JArrayHelper ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-|{{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html|JArrayHelper]] | never | Internal review |
+{#JAPI Joomla.Framework Utilities JArrayHelper #}
 
 JArrayHelper is an array utility class for performing various operations to work with arrays.
 

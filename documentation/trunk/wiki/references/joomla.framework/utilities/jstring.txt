@@ -1,6 +1,5 @@
 ====== JString ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString #}
 
 This class handles strings that contain UTF-8 data.  It is a wrapper for the PHPUTF8 library.  All functions assume the validitry of the UTF-8 strings that are being operated on.
 

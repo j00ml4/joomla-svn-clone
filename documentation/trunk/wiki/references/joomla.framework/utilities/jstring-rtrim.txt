@@ -1,6 +1,5 @@
 ====== rtrim ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JString|JString]] | [[http://api.joomla.org/Joomla-Framework/I18N/JString.html|JString->rtrim]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JString::rtrim #}
 
 Strips whitespace (or other characters) from the end of the string. This method is only necessary if the optional character list argument is supplied and contains UTF-8 characters. Otherwise, the standard function will work on a UTF-8 string. See [[http://php.net/manual/function.rtrim.php|rtrim]] for more information.
 

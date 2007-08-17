@@ -1,6 +1,5 @@
 ====== raiseNotice ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[JError|JError]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JError.html|JError->raiseNotice]] |
+{#JAPI Joomla.Framework Utilities JError::raiseNotice #}
 
 This is a wrapper for the [[#raise|raise]] method that passes E_NOTICE as the error level. A patError object will be returned.
 ===== Syntax =====

@@ -1,6 +1,5 @@
 ====== toInteger ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JArrayHelper|JArrayHelper]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JArrayHelper.html#tointeger|JArrayHelper->toInteger]] | never | Internal review |
+{#JAPI Joomla.Framework Utilities JArrayHelper::toInteger #}
 
 Converts an array to integer values. This method only works on numbered arrays. Any named values will be untouched.
 

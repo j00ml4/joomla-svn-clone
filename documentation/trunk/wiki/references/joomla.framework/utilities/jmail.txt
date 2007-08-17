@@ -1,6 +1,5 @@
 ====== JMail ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Mail|Mail]] | [[http://api.joomla.org/Joomla-Framework/Mail/JMail.html|JMail]] | Never | Work in progress |
+{#JAPI Joomla.Framework Utilities JMail #}
 
 This is a mail handling class that extends the PHPMailer library that is included in the Joomla! distribution.
 

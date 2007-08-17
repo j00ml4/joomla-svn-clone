@@ -1,6 +1,5 @@
 ====== JProfiler ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/JProfiler.html|JProfiler]] | never | Work in progress |
+{#JAPI Joomla.Framework Utilities JProfiler #}
 
 Utility class to assist in the process of benchmarking the execution of sections of code to understand where time is being spent.
 
