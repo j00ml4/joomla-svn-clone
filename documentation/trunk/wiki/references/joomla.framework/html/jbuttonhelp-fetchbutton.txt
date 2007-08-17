@@ -1,6 +1,5 @@
 ====== fetchButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JButtonHelp|JButtonHelp]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonHelp.html#fetchbutton|JButtonHelp->fetchButton]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonHelp::fetchButton #}
 
 Returns the HTML code for the button. The created button will include code to open up a popup window with the specified help screen when it is clicked. For more information on how the $ref and $com parameters function (they are used to derive the URL of the target help file), see the [[references:joomla.framework:i18n:jhelp-createurl|JHelp::createURL]] method. The button will include a <div> cell whose class is determined by the [[JButton-fetchIconClass|fetchIconClass]] method called with 'help' as its parameter. This class is defined in the standard administrator template. If this class is used in the frontend, this class should be defined and any images used should be included.
 

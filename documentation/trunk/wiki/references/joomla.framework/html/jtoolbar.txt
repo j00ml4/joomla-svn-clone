@@ -1,6 +1,5 @@
 ====== JToolBar ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar #}
 
 The JToolBar class is used to create and render toolbars.  The administrator backend components use this class to render their toolbars.  This class is tightly coupled to the [[JButton|JButton]] class and its descendants.  This class is designed specifically to work in the administrator backend.  The HTML that this class produces depends on style sheet and button images that are included in an administrator template.  They can still be used in the front end, but the styles and images have to be included with the extension.
 

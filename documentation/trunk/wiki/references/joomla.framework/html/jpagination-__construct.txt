@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::__construct #}
 
 Constructs the JPagination object by initializing its properties to the specified values, making any necessary adjustments to ensure the validity of the properties. The $total parameter will be converted to an integer value. The $limitstart parameter will be set to 0 if it is negative. The $limit parameter will be set to 1 if it is less than 1. If $limit is more than the total number of records, $limitstart will be set to 0 (since all records will be displayed). 
 

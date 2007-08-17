@@ -1,6 +1,5 @@
 ====== render ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->render]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::render #}
 
 Renders the toolbar. This method returns the HTML code for the current buttons that have been added to the tool bar.
 

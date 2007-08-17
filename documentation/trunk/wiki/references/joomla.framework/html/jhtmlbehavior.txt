@@ -1,6 +1,5 @@
 ====== JHTMLBehavior ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework|Joomla-Framework]] | [[|##http://api.joomla.org/media/images/package.png qq]] [[references:joomla.framework#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLBehavior.html|JHTMLBehavior]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLBehavior #}
 
 The JHTMLBehavior class is a utility class for Javascript behaviors.
 

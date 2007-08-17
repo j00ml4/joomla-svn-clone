@@ -1,6 +1,5 @@
 ====== JButtonCustom ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonCustom.html|JButtonCustom]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonCustom #}
 
 Renders a custom button. This is an implimentation of the abstract [[JButton|JButton]] class. It provides the ability to create a fully customizable button. The HTML returned by its [[JButtonCustom-fetchButton|fetchButton]] method is supplied via a parameter.
 

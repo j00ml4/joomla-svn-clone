@@ -1,6 +1,5 @@
 ====== prependButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->prependButton]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::prependButton #}
 
 Prepends a button to the beginning of the toolbar. The first parameter to this method is the button type.  The rest of the parameters are contingent on the parameters of the particular button's render method (the parameters passed to the prependButton method are passed to the button's render method, which in turn passes them to the fetchId and fetchButton methods).
 

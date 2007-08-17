@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->getInstance]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::getInstance #}
 
 Returns a reference to a global JToolBar object, only creating it if it doesn't already exist. This method must be invoked as:
 <code php>$toolbar = &JToolBar::getInstance([$name]);</code>

@@ -1,6 +1,5 @@
 ====== order ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| [[references:Joomla.Framework|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework|Joomla-Framework]] | [[|{{http://api.joomla.org/media/images/package.png }}]] [[references:joomla.framework#HTML|HTML]] | [[JHTMLGrid|{{http://api.joomla.org/media/images/Class.png }}]][[JHTMLGrid|JHTMLGrid]] | [[http://api.joomla.org/Joomla-Framework/HTML/JHTMLGrid.html|JHTMLGrid->order]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JHTMLGrid::order #}
 
 Generates the HTML code for a save order icon to be used in the grid header.
 

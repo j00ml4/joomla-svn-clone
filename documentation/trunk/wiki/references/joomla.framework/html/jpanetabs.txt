@@ -1,6 +1,5 @@
 ====== JPaneTabs ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneTabs.html|JPaneTabs]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPaneTabs #}
 
 JPaneTabs is a class used to draw parameter panes. This child class implements the JPane interface and produces a set of pages that can be changed using tabsthat appear at the top of the pane. JPaneTabs look like:{{:references:joomla.framework:html:jpanetabs.png|:references:joomla.framework:html:jpanetabs.png}}
 

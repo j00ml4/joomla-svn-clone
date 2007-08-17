@@ -1,6 +1,5 @@
 ====== renderButton ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JToolBar|JToolBar]] | [[http://api.joomla.org/Joomla-Framework/HTML/JToolBar.html|JToolBar->renderButton]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JToolBar::renderButton #}
 
 Renders a button and returns the HTML code. If the button type cannot be loaded, the method returns false. The first element in the passed array must be the button type. The other elements of the array should correspond to how they are handled by the button class (the node is passed to the [[JButton-render|render]] method).
 

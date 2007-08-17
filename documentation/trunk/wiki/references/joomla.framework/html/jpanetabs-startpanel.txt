@@ -1,6 +1,5 @@
 ====== startPanel ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPaneTabs|JPaneTabs]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPaneTabs.html|JPaneTabs->startPanel]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPaneTabs::startPanel #}
 
 Outputs the necessary HTML code and JavaScript to create a tab panel with the title text and start the panel.
 

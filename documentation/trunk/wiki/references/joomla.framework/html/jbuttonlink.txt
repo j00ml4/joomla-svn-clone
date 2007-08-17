@@ -1,6 +1,5 @@
 ====== JButtonLink ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | [[http://api.joomla.org/Joomla-Framework/HTML/JButtonLink.html|JButtonLink]] | never | Internal review |
+{#JAPI Joomla.Framework HTML JButtonLink #}
 
 
 Renders a link button. This is an implimentation of the abstract [[JButton|JButton]] class. It provides the ability to create a button that links to a specified URL. This button type uses a back arrow as its icon.

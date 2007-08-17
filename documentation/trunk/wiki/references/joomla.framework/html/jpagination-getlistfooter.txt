@@ -1,6 +1,5 @@
 ====== getListFooter ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#HTML|HTML]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JPagination|JPagination]] | [[http://api.joomla.org/Joomla-Framework/HTML/JPagination.html|JPagination->getListFooter]] | never | Work in progress |
+{#JAPI Joomla.Framework HTML JPagination::getListFooter #}
 
 Creates the pagination footer. This will call getLimitBox, getPagesLinks and getPagesCounter and return the results. $link should be the URL to your component (i.e. the Joomla! Base URL with the option value appended to the query string, along with any other variables to get to the appropriate function such as a task if necessary). $link is optional and if omitted defaults to null. It is required for proper function if this is called from outside the admin panel. If called from the admin panel, it is not used.
 
