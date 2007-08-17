@@ -1,6 +1,5 @@
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerComponent|JInstallerComponent]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerComponent.html|JInstallerComponent->uninstall]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerComponent::uninstall #}
 
 Custom uninstall method for components. The uninstall method performs the following actions:
   * finds and loads the XML install file for the component

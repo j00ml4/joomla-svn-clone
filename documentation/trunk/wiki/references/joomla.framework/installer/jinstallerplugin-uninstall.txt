@@ -1,6 +1,5 @@
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerPlugin|JInstallerPlugin]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerPlugin.html|JInstallerPlugin->uninstall]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerPlugin::uninstall #}
 
 Custom uninstall method for plugins. The uninstall method performs the following actions:
   * determines the plugin directory

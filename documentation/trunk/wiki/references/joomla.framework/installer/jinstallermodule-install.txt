@@ -1,6 +1,5 @@
 ====== install ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->install]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerModule::install #}
 
 Custom install method for modules. The install method performs the following actions:
   * finds and checks the installation file and verifies that it is the proper installation type

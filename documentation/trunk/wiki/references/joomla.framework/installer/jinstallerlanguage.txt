@@ -1,6 +1,5 @@
 ====== JInstallerLanguage ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerLanguage.html|JInstallerLanguage]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerLanguage #}
 
 The JInstallerLanguage class is an extension of the abstract JInstaller class which implements the necessary methods for the installation of a language pack. This class is not intended for use by third party developers but is used within the core installer.
 

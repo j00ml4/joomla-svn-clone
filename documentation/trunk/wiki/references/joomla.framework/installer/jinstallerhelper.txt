@@ -1,6 +1,5 @@
 ====== JInstallerHelper ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerHelper #}
 
 Installer helper class. This class contains utility functions that are used by the JInstaller class.
 

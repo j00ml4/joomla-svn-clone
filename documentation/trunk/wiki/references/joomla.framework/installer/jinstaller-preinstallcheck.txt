@@ -1,6 +1,6 @@
 ====== preInstallCheck ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->preInstallCheck]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstaller::preInstallCheck #}
+
 This method prepares for installation. It sets the installation directory, finds and checks the installation file and verifies the installation type. The installation directory is stored in the object's internal property and the method ensures that the install file is stored with the object. If it is not, it attempts to find an install file. If it is unsuccessful, it raises a warning and returns false.  It then attempts to read the install file. If it cannot, it raises a warning and returns false. It then checks to make sure that the type that was retrieved in the package file matches the type specified in the parameter. If it is not, a warning is raised and the method returns false. If all of these checks are successful, then the method returns true.
 
 ===== Syntax =====
