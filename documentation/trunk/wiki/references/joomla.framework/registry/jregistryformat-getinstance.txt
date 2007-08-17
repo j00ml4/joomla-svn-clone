@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormat|JRegistryFormat]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormat.html|JRegistryFormat->getInstance]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormat::getInstance #}
 
 Returns a reference to a JRegistryFormat object, only creating it if it doesn't already exist. This method will return a reference to an object of type JRegistryFormat$format. For example, if $format is 'XML', a reference to a JRegistryFormatXML object will be returned. The class definition must be in a file called $format.php in the libraries/joomla/registry/format folder.
 

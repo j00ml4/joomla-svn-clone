@@ -1,6 +1,5 @@
 ====== stringToObject ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormatPHP|JRegistryFormatPHP]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP->stringToObject]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatPHP::stringToObject #}
 
 This is only a place holder method. The JRegistryFormatPHP class does not support conversion from a string to an object. This method always returns true.
 

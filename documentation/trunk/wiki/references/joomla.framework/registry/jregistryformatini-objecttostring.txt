@@ -1,6 +1,5 @@
 ====== objectToString ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistryFormatINI|JRegistryFormatINI]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatINI.html|JRegistryFormatINI->objectToString]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatINI::objectToString #}
 
 Converts an object into an INI formatted string. Unfortunately, there is no way to have INI values nested further than two levels deep. Therefore only go through the first two levels of the object will be converted.
 ===== Syntax =====

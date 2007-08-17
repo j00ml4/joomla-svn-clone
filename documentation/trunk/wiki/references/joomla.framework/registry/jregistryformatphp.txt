@@ -1,6 +1,5 @@
 ====== JRegistryFormatPHP ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistryFormatPHP.html|JRegistryFormatPHP]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistryFormatPHP #}
 
 This is an implementation of the JRegistryFormat interface. This class provides functionality to convert an object into a PHP class string. It should be noted that only one depth level in the object is supported. If two levels are required, INI format or XML format should be used. If more than two levels are required, XML format should be used.
 

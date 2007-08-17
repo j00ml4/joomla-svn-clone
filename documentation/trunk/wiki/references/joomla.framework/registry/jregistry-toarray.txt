@@ -1,6 +1,5 @@
 ====== toArray ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->toArray]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistry::toArray #}
 
 Transforms a namespace to an array. If the namespace is not specified, the method operates on the default namespace.
 

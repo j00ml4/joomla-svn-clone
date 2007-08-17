@@ -1,6 +1,5 @@
 ====== JRegistry ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistry #}
 
 The JRegistry class provides methods that assist in storing and retrieving name-value pairs. It provides built-in handling for a number of methods of storing these pairs, including arrays, files, INI strings, objects and XML.
 

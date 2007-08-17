@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->getInstance]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistry::toInstance #}
 
 Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. This method will check to see if a registry has been created with the specified ID. If this registry has been created, a reference to it will be returned. Otherwise, a new registry will be created and a reference to the new registry will be returned.
 

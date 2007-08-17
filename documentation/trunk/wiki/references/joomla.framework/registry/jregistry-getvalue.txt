@@ -1,6 +1,5 @@
 ====== getValue ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Registry|Registry]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JRegistry|JRegistry]] | [[http://api.joomla.org/Joomla-Framework/Registry/JRegistry.html|JRegistry->getValue]] | never | Work in progress |
+{#JAPI Joomla.Framework Registry JRegistry::getValue #}
 
 Gets a registry value. The registry values are stored in a tree based structure. Levels of the tree are separated by a '.'. 
 
