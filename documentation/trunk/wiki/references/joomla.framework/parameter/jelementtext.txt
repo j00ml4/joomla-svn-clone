@@ -1,6 +1,5 @@
 ====== JElementText ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementText.html|JElementText]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementText #}
 
 This class implements the JElement interface and is used to render a text element. The JElementText class can be used to render an HTML form text field.
 

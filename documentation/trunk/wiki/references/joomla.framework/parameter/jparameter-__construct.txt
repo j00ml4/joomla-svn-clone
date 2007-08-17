@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter::__construct #}
 
 Constructs the class. The constructor will load the data specified in the $data parameter (this should be in INI format). Then it will load the setup file (if one was specified). If the JPARAMETER_INCLUDE_PATH constant has not yet been defined, it will do so. This path will be set to libraries/joomla/presentation/parameter/element.
 

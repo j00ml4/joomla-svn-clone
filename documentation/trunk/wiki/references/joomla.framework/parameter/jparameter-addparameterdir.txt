@@ -1,6 +1,5 @@
 ====== addParameterDir ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->addParameterDir]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter::addParameterDir #}
 
 Adds a directory where JParameter should search for element types. You may either pass a string or an array of directories. JParameter will search directories for an element type in the same order you added them. If the parameter type cannot be found in  the custom folders, it will look in the libraries/joomla/presentation/parameter/element folder.
 

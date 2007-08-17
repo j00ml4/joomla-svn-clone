@@ -1,6 +1,5 @@
 ====== JElementTextarea ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementTextarea.html|JElementTextarea]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementTextarea #}
 
 This class implements the JElement interface and is used to render a text area element. The JElementTextarea class can be used to render an HTML form text area.
 

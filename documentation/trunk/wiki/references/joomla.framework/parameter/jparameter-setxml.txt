@@ -1,6 +1,5 @@
 ====== setXML ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JParameter|JParameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter->setXML]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter::setXML #}
 
 Sets the XML object from a provided XML object. This object should match the interface of [[JSimpleXMLElement|JSimpleXMLElement]].
 

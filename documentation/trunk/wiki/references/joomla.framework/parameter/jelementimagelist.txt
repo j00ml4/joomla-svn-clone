@@ -1,6 +1,5 @@
 ====== JElementImageList ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementImageList.html|JElementImageList]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementImageList #}
 
 This class implements the JElement interface and is used to render an image list element. The JElementImageList class can be used to render a select list that will list the image files in the specified folder. This class uses the [[JElementFileList|JElementFileList]] class with special values for the filter parameter. The filter used is '\.png$|\.gif$|\.jpg$|\.bmp$|\.ico$'.
 

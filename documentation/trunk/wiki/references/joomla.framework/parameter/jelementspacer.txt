@@ -1,6 +1,5 @@
 ====== JElementSpacer ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementSpacer.html|JElementSpacer]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementSpacer #}
 
 This class implements the JElement interface and is used to render a spacer element. The JElementSpacer class can be used to render a custom HTML spacer tag.
 

@@ -1,6 +1,5 @@
 ====== getName ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[JElement|JElement]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElement.html|JElement->getName]] |
+{#JAPI Joomla.Framework Parameter JElement::getName #}
 
 Gets the element name. Returns the value of the element's name property.
 

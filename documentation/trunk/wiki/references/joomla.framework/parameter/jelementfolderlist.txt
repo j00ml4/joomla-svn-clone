@@ -1,6 +1,5 @@
 ====== JElementFolderList ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementFolderList.html|JElementFolderList]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementFolderlist #}
 
 This class implements the JElement interface and is used to render a folder list element. The JElementFolderList class can be used to render a select list that will list the folders in the specified folder.
 

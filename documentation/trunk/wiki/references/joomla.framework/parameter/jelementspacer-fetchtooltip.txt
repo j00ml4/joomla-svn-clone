@@ -1,6 +1,5 @@
 ====== fetchTooltip ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElementSpacer|JElementSpacer]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementSpacer.html|JElementSpacer->fetchTooltip]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementSpacer::fetchTooltip #}
 
 Redefines the fetchTooltip method if the JElement class. This method returns &nbsp;
 

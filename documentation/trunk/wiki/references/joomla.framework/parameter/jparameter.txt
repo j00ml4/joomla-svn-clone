@@ -1,6 +1,5 @@
 ====== JParameter ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JParameter.html|JParameter]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JParameter #}
 
 The JParameter class is an extension of the JRegistry class that is used to render parameters into HTML. 
 

@@ -1,6 +1,5 @@
 ====== fetchElement ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Parameter|Parameter]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JElementHidden|JElementHidden]] | [[http://api.joomla.org/Joomla-Framework/Parameter/JElementHidden.html|JElementHidden->fetchElement]] | never | Work in progress |
+{#JAPI Joomla.Framework Parameter JElementHidden::fetchElement #}
 
 Renders the HTML code for a hidden element. The resulting form element will have the name $control_name[$name] and will have the value $value (this groups elements into an array with the specified control name).
 
