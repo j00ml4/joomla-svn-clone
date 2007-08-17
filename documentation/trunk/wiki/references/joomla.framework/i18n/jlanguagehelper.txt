@@ -1,6 +1,5 @@
 ====== JLanguageHelper ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguageHelper.html|JLanguageHelper]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguageHelper #}
 
 This is a language helper class. It contains utility functions that are specifically related to the JLanguage class but do not belong in the class itself.
 

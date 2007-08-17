@@ -1,6 +1,5 @@
 ====== _ ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->_]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguage::_ #}
 
 Translates a string. This method mimics the php gettext (alias _) function. The method looks the specified string up in its language array. If the string exists, the method will return the translated value. If it does not, it will return the original string. If the debug property is set, the method will append '&bull;' to the beginning and end of strings that exist, '!!' to the beginning and end of strings that are only defined as constants, and '??' to the beginning and end of strings that do not exist. If the $jsSafe parameter is true, the PHP [[http://www.php.net/addslashes|addslashes]] function will be invoked on the string.
 

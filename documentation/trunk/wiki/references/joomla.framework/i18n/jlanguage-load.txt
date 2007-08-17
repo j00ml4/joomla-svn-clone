@@ -1,6 +1,5 @@
 ====== load ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->load]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguageHelper::load #}
 
 Loads a single language file and appends the results to the existing strings. This method will not load the same language file a second time. This will cause problems if you instantiate two objects using the same language pack. This method returns true on success, false otherwise.
 

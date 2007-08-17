@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JLanguage|JLanguage]] | [[http://api.joomla.org/Joomla-Framework/I18N/JLanguage.html|JLanguage->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework I18N JLanguage::__construct #}
 
 Activates the default information for the language. This method will initialize the strings array (which holds the keys and translations), will set the language property, load the metadata, set the locale and invoke the [[JLanguage-load|load]] method.
 

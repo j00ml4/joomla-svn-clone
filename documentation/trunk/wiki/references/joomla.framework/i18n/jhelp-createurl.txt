@@ -1,6 +1,5 @@
 ====== createURL ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#I18N|I18N]] | [[JHelp|JHelp]] | [[http://api.joomla.org/Joomla-Framework/I18N/JHelp.html|JHelp->createURL]] |
+{#JAPI Joomla.Framework I18N JHelp::createURL #}
 
 Creates a URL for a given help file reference. The URL returned from this method is dependent on a number of variables. The help URL can be set as a global configuration variable. In addition, a user specific help url can also be specified in the user manager. This allows a user's help site to be managed based on their specific language or locale.
 
