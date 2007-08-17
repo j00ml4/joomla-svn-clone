@@ -1,6 +1,5 @@
 ====== JInstallerTemplate ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerTemplate.html|JInstallerTemplate]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerTemplate #}
 
 The JInstallerTemplate class is an extension of the abstract JInstaller class which implements the necessary methods for the installation of a template. This class is not intended for use by third party developers but is used within the core installer.
 

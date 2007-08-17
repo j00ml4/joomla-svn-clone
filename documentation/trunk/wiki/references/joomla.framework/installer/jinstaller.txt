@@ -1,6 +1,5 @@
 ====== JInstaller ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstaller #}
 
 This is the abstract Joomla! base installer class. It provides various utilities and functionality that is used mainly by the installer component. In the 1.5 core, there are five child classes which implement functionality for specific types of extensions (components, languages, modules, plugins and templates).
 

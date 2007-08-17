@@ -1,6 +1,5 @@
 ====== unpack ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->unpack]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerHelper::unpack #}
 
 Unpacks a file and verifies it as a Joomla! element package. The extraction directory, install directory and extension type are returned in an associative array (with elements 'extractdir', 'dir' and 'type'. The method returns an array if the package is a Joomla! package, false otherwise.
 

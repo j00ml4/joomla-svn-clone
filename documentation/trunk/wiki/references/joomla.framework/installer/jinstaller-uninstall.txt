@@ -1,6 +1,5 @@
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->uninstall]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstaller::uninstall #}
 
 This is an abstract uninstall method which must be overriden in the child class. If the function of the base class is called, the die function will be specifying that the method is not available. In child classes, this method is responsible for removing files and directories that were created for the extension, modifying the database to reflect the uninstallation of the component, executing any uninstall scripts associated with the extension, and perform any other actions that are required for uninstalling the extension.
 

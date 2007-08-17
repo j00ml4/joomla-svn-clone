@@ -1,6 +1,5 @@
 ====== getInstance ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->getInstance]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstaller::getInstance #}
 
 Returns a reference to the global Installer object, only creating it if it doesn't already exist.
 

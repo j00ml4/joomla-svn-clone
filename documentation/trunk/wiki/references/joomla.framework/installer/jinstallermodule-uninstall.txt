@@ -1,6 +1,5 @@
 ====== uninstall ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerModule|JInstallerModule]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerModule.html|JInstallerModule->uninstall]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerModule::uninstall #}
 
 Custom uninstall method for modules. The uninstall method performs the following actions:
   * finds and loads the XML install file for the module

@@ -1,6 +1,5 @@
 ====== JInstallerComponent ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerComponent.html|JInstallerComponent]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerComponent #}
 
 The JInstallerComponent class is an extension of the abstract JInstaller class which implements the necessary methods for the installation of a component. This class is not intended for use by third party developers but is used within the core installer.
 

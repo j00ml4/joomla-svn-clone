@@ -1,6 +1,5 @@
 ====== __construct ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstaller|JInstaller]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstaller.html|JInstaller->__construct]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstaller::__construct #}
 
 Constructor for the JInstaller class. Stores a reference to a database object (usually the Joomla! global database object).
 

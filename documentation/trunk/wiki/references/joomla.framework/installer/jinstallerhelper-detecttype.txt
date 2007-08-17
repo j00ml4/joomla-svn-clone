@@ -1,6 +1,5 @@
 ====== detectType ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#Installer|Installer]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JInstallerHelper|JInstallerHelper]] | [[http://api.joomla.org/Joomla-Framework/Installer/JInstallerHelper.html|JInstallerHelper->detectType]] | never | Work in progress |
+{#JAPI Joomla.Framework Installer JInstallerHelper::detectType #}
 
 Detects the extension type from a package directory. This method returns a string containing the extension type if successful, false otherwise.
 
