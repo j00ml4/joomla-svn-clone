@@ -1,6 +1,7 @@
 ====3.1.1 Hello World (WIP)====
 So, you want to learn how to create your own component. That's great and we hope you succede and later give back to the community. This How-To should guide you on your first steps. Please give us feedback in the forum, wether you have a question or a comment or just want to say how great Joomla! is.
 
+
 This guide is designed for a frontend component and describes a few coding standards in Joomla! that have been established. It gives you a good starting point for your own component. If you look for things like a database-connection or a breadcrumb-system, look at [[components:hello_world2|Hello World 2]]. Here we also discuss how to create our own installation package. In [[components:hello_world3|Hello World 3]] we take a look at the specialities of an administrative interface in a backend-component. An indepth view on the XML-installation file can be found [[components:xml_installfile|here]].
 
 ===3.1.1.1 The filestructure===
