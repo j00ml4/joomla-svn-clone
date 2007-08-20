@@ -1,0 +1,202 @@
+====== Integrated Development Environment - Windows ======
+
+These instructions were adapted from Malibu's "[[http://malibugarage.blogspot.com/2007/07/last-week-i-got-xamppeclipse-pdtxdebug.html|Local workstation xampp/Elipse PDT/xdebug on WinXP from start to end]]" article. 
+
+
+
+===== Install and configure the test server =====
+
+==== Step 1: Download XAMPP ====
+
+
+You can download xampp for Windows here:
+[[http://www.apachefriends.org/download.php?xampp-win32-1.6.3a-installer.exe|XAMPP 1.3.6a for Windows]]
+
+
+==== Step 2: Install XAMPP ====
+
+
+Run the installer.  I will refer to the xampp home directory as <xamppHome> from here on.
+
+
+==== Step 3: Start XAMPP and test ====
+
+
+Double-click on XAMPP Control Panel shortcut on your desktop.  At a minimum, you should see the Apache and MySQL services running.  It's also a good idea to check the "run as service" box to have these start up when windows starts.
+
+Swing a browser on your xampp machine to 'http://localhost' to test the installation. You should see a flashy splash screen.
+
+You might also want to put a file called phpinfo.php in your htdocs directory. You'll want it to have the following contents:
+
+<php><?php 
+phpinfo();
+?></php>
+
+Hit the page 'http://localhost/phpinfo.php' and you've just executed a php script that tells you all about your php installation.
+
+
+==== Step 4: Download xdebug server, install it and configure php.ini ====
+[[http://www.xdebug.org/link.php?url=xdebug200-522-win|Download Xdebug server.]]
+
+Copy the .dll file into the directories <xamppHome>/php/ext and <xamppHome>/php/extensions.
+
+In both <xamppHome>/apache/bin/php.ini and <xamppHome>/php/php.ini, make the following configuration changes:
+
+- set 'implicit_flush = On'
+
+- Comment out (type ; at beginning of the line) ALL the lines under [zend]
+
+- Add the following:
+<php>
+[xdebug]
+xdebug.remote_enable=1
+xdebug.remote_host="localhost"
+xdebug.remote_port=9000
+xdebug.remote_handler="dbgp"
+zend_extension_ts="<xamppHome>/php/ext/php_xdebug-2.0.0rc4-5.2.1.dll"
+</php>
+
+==== Step 5: Restart xampp and test xdebug ====
+
+
+Double click C:/xampp/restart_xampp
+
+Now browse to http://localhost/phpinfo.php. You should see a section for xdebug. This means that the xdebug extension is running properly.
+
+===== Install and configure the IDE =====
+
+==== Step 6: Download Eclipse PDT ====
+
+
+Eclipse PDT is a version of Eclipse that is bundled specifically for PHP developers. It's a good place to start.
+
+[[http://www.eclipse.org/downloads/download.php?file=/tools/pdt/downloads/drops/S20070815-M2/all-in-one/pdt-all-in-one-incubation-S20070815_M2-win32.zip&url=http://www.gtlib.gatech.edu/pub/eclipse/tools/pdt/downloads/drops/S20070815-M2/all-in-one/pdt-all-in-one-incubation-S20070815_M2-win32.zip&mirror_id=337|I recommend the latest integrated test version.]] 
+
+It is the 'all-in-one' package for your platform. It's Java, so at it's heart it is platform independent, but it uses widgets that are platform specific.
+
+A note about Java:  It is very important to have the latest vm installed before trying to use Eclipse PDT.  You can verify that you have the latest shiny version of Java by going to [[http://www.java.com|their web site]].
+
+
+==== Step 7: Install Eclipse PDT ====
+
+Uncompress the file you just downloaded. Somewhere inside there you will find a directory called 'eclipse'. Move that one into your xampp install directory.
+
+
+==== Step 8: Download Eclipse xdebug plugin ====
+
+[[https://bugs.eclipse.org/bugs/attachment.cgi?id=74296|You want the 'Prebuilt Binary V0.2.3']].
+
+This is the plugin that will allow us to configure Eclipse to use XDebug.
+
+Extract the file and move the two jar files within into the <xamppHome>/eclipse/plugins directory.  It's also a good idea to print out the pdf and read through it.  There is a lot of good information there.
+
+
+==== Step 9: Point Apache into the Eclipse workspace ====
+
+This is an optional step but it makes for an easier experience.  If this is to be purely an Eclipse/xdebug workstation, it's best to change the xampp Apache DocumentRoot so that it will look to the Eclipse workspace for any web page that you open. Edit <xamppHome>/apache/conf/httpd.conf and change the following:
+
+From:
+DocumentRoot /xampp/htdocs
+To:
+DocumentRoot <xamppHome>/eclipse/workspace
+
+Also,
+From:
+<Directory "/xampp/htdocs">
+To:
+<Directory "<xamppHome>/eclipse/workspace">
+
+Because you have changed httpd.conf, you should restart xampp now.
+
+
+
+==== Step 10: xdebug configuration within Eclipse ====
+
+Fire up Eclipse by executing the appropriate binary in <xamppHome>/eclipse. When it asks you about the workspace, change it to <xamppHome>/eclipse/workspace. You can check the "Don't ask me later" mark; it's really easy to change again later.
+
+When Eclipse starts, go to Window->Preferences.. PHP->debug. The pane should look like this.
+ 
+{{http://members.shaw.ca/geneh/blog/eclipse-xdebug/ss-debug-prefs.jpg}}
+
+(Notice the xdebug section). I didn't actually have to change anything here, as it's all in the php.ini.
+
+
+===== Create a test project =====
+
+
+==== Step 11: Create a PHP Project ====
+
+
+You're finally ready to debug a web-based PHP script. Without further ado, within Eclipse select File->New->Project.. Now PHP->PHP Project.
+
+For 'Project Name', enter 'debugtest' and then select 'Finish'. You will see the project pop up in the PHP Navigator. Highlight the project. Select File->New->PHP File and name it phpinfo.php (ok I'm not feeling very original here).
+
+In the editing pane, make sure the file contents are:
+
+<php>
+<?php 
+phpinfo();
+?>
+</php>
+
+Note: Newlines get ignored.
+
+Save the file.
+
+Navigate to http://localhost/debugtest/phpinfophp. You should see the same info you saw before.
+
+
+
+
+==== Step 12: Configure your debug profile ====
+
+
+You must now go into Eclipse and tell the xdebug plugin how to start a debug session so that you can catch a breakpoint in your new script. Select Run->Open debug dialog.. and double-click on 'PHP Web Page with Xdebug'.
+
+NOTE: There must be menu items 'PHP Exe script with XDebug' and 'PHP Web Script with XDebug'. If these aren't there then something has gone wrong with the plugin installation.
+
+You will come to a dialog screen that looks like this:
+
+{{http://members.shaw.ca/geneh/blog/eclipse-xdebug/ss-debug-pane.jpg}}
+
+
+
+Under Script and Server, browse to the file phpinfo.php in project debugtest.
+
+Make sure the url field has http://localhost/debugtest/phpinfo.php. If it doesn't, uncheck the box and edit it manually. This is important because it is the site that Eclipse will go to when you start your debug session.
+
+ 
+
+
+**//It's important to note//** that the configuration you just created is exclusively for the debugtest project.  You will have to repeat this procedure and create a new debug profile for every new project you start.  These configurations are unique to each project so it makes sense to name them accordingly.
+
+
+Select 'Apply' and 'Debug'.
+
+You should have seen your phpinfo output come up in the external browser.  Now select the tab for phpinfo.php and right-click on the vertical bar between your phpinfo.php line numbers and the edge of the edit pane and select 'Toggle Breakpoints'. You will see a blue circle appear, indicating that there is a debug breakpoint at that location.
+
+Click on the down-arrow next to the bug in the top toolbar and select the debug test session that you just created.
+
+You should now have caught your first breakpoint.
+
+ 
+
+===== Install additional plugins =====
+
+
+==== Step 13: Install the Subclipse plugin. ====
+
+
+ 
+
+Within Eclipse, select Help->Software Updates->Find and Install..
+
+Select 'Search for New Features to Install'. Hit 'Next'.
+
+Select 'New Remote Site..'
+Name: Subversion
+Url: http://subclipse.tigris.org/update_1.2.x
+
+Now on the main screen ensure Subclipse is checked. Hit 'Finish' and follow the instructions to install Subclipse.
+
+When you are done, you will have a 'SVN Repository Exploring'. You can use it to connect to your repository and do all the operations you need to.

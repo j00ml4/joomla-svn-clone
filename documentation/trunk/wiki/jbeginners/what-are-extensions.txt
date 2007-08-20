@@ -1,0 +1,60 @@
+===== What Are Extensions? =====
+
+There are five types of extensions that can be written for a Joomla! website:
+  * Templates
+  * Modules
+  * Plug-ins ("mambots" in Joomla! 1.0.x)
+  * Components
+  * Languages
+
+Each type of extension is unique in what it does.
+
+==== Templates ====
+
+A template is a collection of at least two files consisting primarily of a main PHP script and a cascaded style sheet (CSS). The PHP script mainly defines the layout of the site, which can be made to vary depending on what is selected from the site's menus. PHP is interlaced with HTML in this file with the HTML providing the raw elements that define what goes where and the PHP defining the logic that can make the content different based on the menu item selected as well as invoking core Joomla! methods to insert articles, modules, and other content at desired places within the HTML elements. The CSS file defines text and background colors, graphics, and other attributes of the various elements that can appear on any given page rendered by the template. The objective of using a CSS file to define "styles" is to give the site a consistent look and behavior. [[http://htmlhelp.com/reference/css/|You can read about cascaded style sheets here]].
+
+==== Modules ====
+
+A module is the simplest type of extension. It's purpose is to provide a very specific type of information that can be inserted into your site template and appear on your pages wherever your template supports inserting content. Modules can be instantiated, often multiple times each, and each instance can be placed at a specific position on the page as defined in the template. Positions are defined in the site administrator back end and allow modules to appear only when certain menu items are selected (this is specified on a per-module basis). Some example modules are login, online users, visit counter, and Newsflash.
+
+[[modules:hello_world|Click here for an example of a very basic module called "Hello World"]].
+
+==== Plug-Ins ====
+
+There are four different types of plug-ins:
+  * Content
+  * Search
+  * Editors
+  * Editor Extensions
+
+A content plug-in, for instance, gets called by the core code when articles are displayed and searches for special text strings processed specifically by that plug-in, replacing them with other text (which can include HTML, Javascript, etc.). For example, a plugin might process the string **{avatar}** and insert the avatar uploaded or selected by a user on a site equipped with the popular Community Builder component or replace **{video=path-to-video}** with streamed video content. A search plug-in can extend the site search capability to include content in non-native components. An editor plug-in can completely define or extend an existing content text editor (e.g., JCE).
+
+==== Components ====
+
+A component is the most elaborate and complex type of Joomla! extension. It can have both a front end (user) and back end (admin) interface, and can be made to do many different things. Components can have one or more ways to have features inserted as items in site menus, and the admin interface can be as elaborate as the author chooses it to be. Some examples include photo galleries, discussion forums, and guest books.
+
+==== Languages ====
+
+A language is a collection of one or more files that define elements of a specific language that your extension can support.
+
+==== Common Attributes ====
+
+All Joomla! extensions include source code files and an XML file at a minimum. For all extension types, the XML file acts as an installation script. For some extension types, it also provides a specification for the administrator interface.
+
+The admin interface for modules and plug-ins is completely coded in XML, so there is no dynamic element to it and no real way to customize the look and feel of the parameter input part. That part is handled by the Joomla! core. The XML file also describes the extension (name, date, version, description, etc.) and how it should be installed.
+
+  * [[modules:xml_installfile|Click here for an example XML file for a module]]
+  * [[plugins:create_plugin|Click here for an example XML file for a plugin]]
+  * [[languages:xml_installfile|Click here for an example XML file for a language pack]]
+
+This is in contrast to the admin interface for a component, whose XML file is used only for installation and to define the component's administrator menu. A component is typically coded entirely in PHP and HTML by its author. There are distinct parts to a component and they are divided between the user and admin interfaces. The admin portion includes a menu, action handler, and visual components which can include forms and other input elements. The user portion has no menu component, but is otherwise very similar to the admin portion.
+
+  * [[components:xml_installfile|Click here for an example XML file for a component]].
+
+==== Summary ====
+
+  * Templates - define the look, feel, and navigation capabilities of your site
+  * Modules - data already exists and you just want a new way to present it on your site
+  * Plug-ins - data, content, or custom functions replace information in articles or functions extend core features
+  * Components - add custom functions to your site that can be selected from menus
+  * Languages - define additional languages for your site
