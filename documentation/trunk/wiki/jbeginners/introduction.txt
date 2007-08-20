@@ -1,0 +1,192 @@
+**DRAFT OUTLINE**
+====== Joomla! Beginning Developer Course ======
+
+**Prerequisites** – solid understanding of how to install and configure Joomla! core and third party extensions; basic understanding of website administration, including how to install and configure PHP, Apache, and MySQL and how to backup and restore a Joomla! database and website; working knowledge of XHTML and CSS; either some programming background or a willingness to work harder to learn the basics. Other than that, the Joomla! Beginner Developer Course assumes you come ready to learn with nothing more than basic computing and Joomla! knowledge.
+
+**Costs** - There is no cost for the course. All recommended tools are freely available. Students are expected to have a computer with Internet access. Work will be performed on the student’s computer or using Joomla! org resources (at no charge).
+
+**Overview** – The six week course will offered to a group with no more than 10 participants. Each student will work independently on course reading assignments and exercises. The group will proceed together, meeting frequently using Skype and Joomla! forum postings, helping one another learn and answer each other’s questions. It is hoped that each group will improve the curriculum and documentation for the community.
+
+**Sign up** - xxx
+
+
+
+===== Week 1 – Communication, IDE, MySQL and PHP Basics =====
+
+Welcome to **Week 1 – Communication, IDE, MySQL and PHP Basics**, a six week [[jbeginners:introduction|Joomla! Development for Beginners]] course. During the first week of the course, you will install and configure an IDE and communication tools needed. In addition, if you have not learned PHP or MySQL, or if you wish to brush up on your skills, there are guides available for that purpose.
+
+
+==== Communication ====
+The group will use the Joomla! forums and Skype for communication.
+
+=== Joomla! Forums ===
+
+Make certain to register for a [[http://forum.joomla.org/index.php?action=register|Joomla! Forum ID]], if you do not already have one. Also, familiarize yourself with the [[http://forum.joomla.org/index.php/topic,65.0.html|forum rules]]. The [[http://forum.joomla.org/index.php/board,452.0.html|Joomla! Coding 101]] forum area is a place to discuss this curriculum and other beginning Joomla! developer topics. 
+
+
+
+
+=== Skype ===
+If you have not used Skype before, read the [[http://www.skype.com/help/guides/howtoskype/|Getting Started]] instructions. Note: You do not need to purchase any Skype resources, only those capabilities offered free of charge are needed. 
+
+Once you have Skype installed and configured, connect to the J!101 Coding 101 Chat Room:
+  * Not Linux, click [[http://www.skype.com/go/joinpublicchat?skypename=ttmillard&topic=J!101-General&blob=n4VK_TXQMqIKh_oHaGQ_-lekifG1cbrCqzdPtqBkZrTTweRqwoySdYPww4p6rZI7UQd90N9YH8AAMzg6Q4Dxi4sfb1ufNHsA5JxS3F13hP7fDj_pFQ|this link]].
+  * Linux: [[http://forum.joomla.org/index.php?action=dlattach;topic=199704.0;attach=36537|download this file]] and follow these instructions from **ianmac**:
+<code|For Linux, only:>.rename it to j101.py
+chmod +x j101.py
+start skype
+at the shell, do: ./j101.py</code>
+
+
+
+
+==== Integrated Developer Environment ====
+
+An [[http://en.wikipedia.org/wiki/Integrated_development_environment|Integrated Developer Environment (IDE)]] is a collection of tools designed to help a developer. Typically, an IDE includes a source code editor, a compiler and/or interpreter, a debugger and a version control system. 
+
+Select the appropriate choice for your operating system:
+  * [[jbeginners:ide|Windows Integrated Developer Environment]]
+  * [[jbeginners:linux-ide|Linux Integrated Developer Environment]]
+
+
+==== MySQL Fundamentals ====
+Joomla! uses [[http://en.wikipedia.org/wiki/MySQL|MySQL]] as the underlying [[http://en.wikipedia.org/wiki/Database_management_system| database management system]]. If you have little or no experience working with MySQL or SQL in general, work through the [[http://www.w3schools.com/sql/default.asp|SQL Tutorial from W3Schools]]. There are interactive opportunities for you to practice your learning using their database and website.
+
+
+
+
+==== PHP Fundamentals ====
+Joomla! is an application developed using [[http://en.wikipedia.org/wiki/PHP|PHP]]. PHP is a server side scripting language well suited for web site development. If you have little or no experience working with PHP, take time to work through both these excellent tutorials:
+  * [[http://www.w3schools.com/php/default.asp|PHP Tutorial from W3Schools (Basic, Advanced, Database sections)]]
+  * [[http://devzone.zend.com/node/view/id/627|PHP 101: PHP For the Absolute Beginner]].
+
+
+
+
+===== Week 2 - Object Oriented Programming =====
+Welcome to **Week 2 - Object Oriented Programming**, a six week [[jbeginners:introduction|Joomla! Development for Beginners]] course. Joomla! is built using object oriented programming techniques. If you are unfamiliar with OOP, this week focuses exclusively on that topic. 
+
+
+==== Fundamental concepts ====
+Object oriented programming has a language and terminology that is important to understand. Read the [[http://en.wikipedia.org/wiki/Object-oriented_programming|Fundamental concepts]] section of this Wikipedia article to begin learning terms like class, object, method, message passing, inheritance, encapsulation, abstraction and polymorphism.
+
+
+
+==== Getting Started with OOPs ====
+Use this easy to follow [[Getting Started with OOPs]] guide on object oriented programming language using real world examples that make it easier to understand these advanced concepts. Work through his guide and carefully consider the examples.
+
+
+
+
+==== Object Oriented PHP ====
+If you are new to object oriented programming approaches, or have not used these approaches with PHP, or if you want to refresh your skills, NefariousDesigns has an excellent five part curriculum entitled **Object-Oriented Concepts** and a four part curriculum on **Object-Oriented PHP** that will help you understand these programming approaches.
+    * [[http://nefariousdesigns.co.uk/archive/2006/05/object-oriented-concepts/|Object-Oriented Concepts]]
+    * [[http://nefariousdesigns.co.uk/archive/2006/08/object-oriented-php-part-1-definition/|Object-Oriented PHP Part 1: Definition]]
+    * [[http://nefariousdesigns.co.uk/archive/2006/08/object-oriented-php-part-2-relationships/|Object-Oriented PHP Part 2: Relationships]]
+    * [[http://nefariousdesigns.co.uk/archive/2006/08/object-oriented-php-part-3-taking-relationships-further/|Object-Oriented PHP Part 3: Taking Relationships Further]]
+    * [[http://nefariousdesigns.co.uk/archive/2006/08/object-oriented-php-part-4-php5%e2%80%99s-improved-features/|Object-Oriented PHP Part 4: PHP5’s Improved Features]]
+
+===== Week 3 - Joomla! Developer Basics =====
+Welcome to **Week 3 - Joomla! Developer Basics**, a six week [[jbeginners:introduction|Joomla! Development for Beginners]] course. This week, you will learn to program a simple module, component and plugin. Then, you will begin exploring Joomla!'s framework and classes. 
+
+
+==== Definitions ====
+Before learning to build modules, components and plugins, it helps to understand how these are different and when you might use each of these items. [[What are Extensions?]]
+
+
+==== Module ====
+A module is an extension used for to display simple information. Latest News is an example of a module. Complete this module tutorial to learn how to create a [[modules:hello_world/|Hello World module]]. 
+
+
+
+
+==== Component ====
+A component is the most complex extension type. Every Joomla! page has a component that renders the main part of the page. com_content is the primary component that is used to display article and blog information.  Walk through these component tutorials:
+  * [[components:hello_world|Hello World]]
+  * [[components:hello_world2|Database and Breadcrumb]]
+  * [[components:hello_world5|Adding MooTools Javascript]]
+
+**Chris and Ian - there are two more that need completion. Should we work on these?**
+
+
+
+==== Plugins and events ====
+A plugin is typically the simplest type of extension. Follow this [[plugins:create_plugin|Plugin Tutorial]] to learn how to build a Joomla! v 1.5 Plugin.
+
+
+
+
+
+
+===== Week 4 - MVC Component and Custom URLS =====
+Welcome to **Week 4 - MVC Component and Custom URLS**, a six week [[jbeginners:introduction|Joomla! Development for Beginners]] course. This week, you explore Joomla!'s MVC application architecture and you will learn to implement a router for your component.
+
+==== Model-View-Controller ====
+Finally, the model-view-controller (MVC) architecture. You will learn to separate your component into these three pieces: the data (model), the user interface (view) and the controller.
+
+There are four different tutorials to help you build these skills:
+ 
+    * [[components:hello_world_mvc1|Frame]]
+    * [[components:hello_world_mvc2|Model]]
+    * [[components:hello_world_mvc3|Database]]
+    * [[components:hello_world_mvc4|Admin Interface]]
+
+==== Creating Custom URLS ====
+In Joomla! v 1.5 the URL was completely refactored. Joomla! is now capable of creating and parsing URLs in any format, including human readable URL's. Learn to use JRouter to [[framework:router_part1|Create Custom URLS]] for your component.
+
+==== Creating an Installation File ====
+One of the final steps to building a component is learning to package it into an easy to use installation file for end users. [[components:xml_installfile|Create an Install File]] 
+
+**Ian and Chris - should we work on this?**
+
+===== Week 5/6 Learning Project =====
+
+==== Secure Extensions ====
+
+Before creating extensions, make certain to review [[tips:make_secure|recommended security tips]].
+
+
+
+==== Learning Project ====
+Now that you have basic skills, work individually or as small teams and build something. You can [[http://forum.joomla.org/index.php/topic,199162.msg938061.html#msg938061|pick an extension idea]] and use it to create a Joomla! extension. Or, you can invent your own idea. Try to keep it simple for your first couple of extensions. The more you practice these skills, the better you will become. Don't be afraid to ask questions, either. 
+
+==== JoomlaCode ====
+
+    * [[http://joomlacode.org/gf/account/?action=UserAdd|Get an ID on JoomlaCode]] 
+    * [[http://dev.joomla.org/content/view/2333/98/|Review Rules and Guidelines]]
+    * [[http://forum.joomla.org/index.php/topic,150087.0.html|Read FAQ]]
+    * [[http://dev.joomla.org/content/view/1092/73/|Create a new test project for class]]
+    * [[http://forum.joomla.org/index.php/board,406.0.html|Ask Questions on JoomlaCode here]]
+
+==== Joomla! Extension Directory ====
+
+
+    * [[http://extensions.joomla.org/component/option,com_registration/task,register/|Get an ID on JED]]
+    * [[http://extensions.joomla.org/content/view/12/36/|Read and follow rules]]
+    * [[http://extensions.joomla.org/content/view/15/63/|Read the Instructions for using the site]]
+    * [[http://forum.joomla.org/index.php/board,262.0.html|Ask questions about JED]]
+
+===== Graduation! =====
+
+After completing the six-week course, you will have only started your journey. Once a week, we will schedule an hour for a mini-lesson that a growing group of Joomla! developers can take turns teaching. 
+
+During this weekly get together, ideas and questions can be shared to help engage and strengthen the developer network. Perhaps the core developers might take turns sitting in and share status information or helpful hints.
+
+==== Framework and Classes ====
+Is the following BEYOND this class?
+
+Joomla! has a complex and powerful [[http://dev.joomla.org/content/view/1137/80/|application framework]]. 
+    * Overview and Packages http://dev.joomla.org/content/view/1137/80/
+    * Study the packages and classes by looking at your Joomla! v 1.5 installation (Question – do these need to be updated?)
+
+    * JObject by jbruni - http://forum.joomla.org/index.php/topic,200185
+    * JApplication - http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,guidelines:application/
+    * JError - http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,guidelines:jerror/
+    * Using the 1.5 Database Libraries - http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,framework:database_part1/
+    * Now, review other Joomla! API classes in the reference Wiki http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,references:joomla.framework/
+    * Element list (classes, methods and properties) for Joomla! Framework (Ian provided – Question – can we have a couple of examples of how it would be used by a developer?) http://api.joomla.org/elementindex_Joomla-Framework.html
+
+
+    * Using database classes in your script http://dev.joomla.org/component/option,com_jd-wiki/Itemid,/id,tips:using_database_class/
+
+

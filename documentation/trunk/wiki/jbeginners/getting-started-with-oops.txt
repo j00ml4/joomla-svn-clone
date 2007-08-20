@@ -1,0 +1,228 @@
+====== Getting Started With OOPs ======
+As we venture into object oriented programming, it is important to note that it is called 'object' oriented for a reason. 
+
+Before object oriented programming (OOP), everything was based on **functions** and **variables**.  So, you might have three variables: $height and $weight and $name. These variables would be used to store a person's name, height and weight. You might then have a function called calculateBMI(), which would accept as parameters $height and $weight.  
+
+This would look something like:
+
+<code php|calculateBMI>
+function calculateBMI( $height, $weight ) {
+    return $weight / $height;
+}</code>
+
+But it is very easy to lose track of all these variables...  so **the idea behind objects is to encapsulate this data and the functions to manipulate it into one package**.  The definition of this package is called a **class**.  
+
+So we might have:
+
+<code php|person>
+class person
+{
+    var $name;
+    var $height;
+    var $weight;
+
+    function getBMI() {
+        return $this->weight / $this->height;
+    }
+}
+}</code>
+Then, if you want to create an object which represents a person, you would do:
+<code php|Instantiating the class>
+
+$person = new person();
+</code>
+
+This is called **instantiating the class**, because it creates an object (or **instance**) of the class.
+
+Now, you can modify the variables (which are called **properties**), using:
+<code php|Properties>
+
+$person->height = 2;
+$person->weight = 50;
+</code>
+
+Then you can invoke its functions (which are called **methods**) using:
+
+<code php|Methods>
+
+$bmi = $person->getBMI();
+</code>
+
+Now, if we were to make person a child class of JObject, then we would **inherit** the capabilities of the JObject class.  We would then change the definition to something like:
+
+<code php|person is a class of JObject>
+
+class person extends JObject
+{
+    var $name;
+    var $height;
+    var $weight;
+
+    function getBMI() {
+        return $this->weight / $this->height;
+    }
+}
+</code>
+
+Then we could **manipulate** our person using the get() and set() methods:
+<code php|Manipulate with methods>
+
+$person->set( 'name', 'Bob' );
+$person->set( 'height', 2 );
+$person->set( 'weight', 50 );
+$person->get( 'weight' );
+echo $person->getBMI();
+</code>
+
+You will notice the use of **$this** inside classes a lot. __$this is a reference to the current object.__  So if I am inside a class, and I use say $this->height = 2;, then that means I am setting the property 'height' of the current object to 2.  When we use $this->height, we aren't talking about any height, but we're talking about the current object height.
+
+
+**More on Objects**
+
+As I said, Objects are called Objects for a reason.  If you have a real life object, say a photocopier, there is an external interface (say, a paper tray, the copier glass, the keypad, etc.).  Objects in OOP are designed to approximate that setup.
+
+So, I might have a class called copier.  Now, what operations do I generally need to do with a copier?  Well, the basic functionality I need is copy functionality.  So I need a method called 'copy':
+
+<code php|Copier class>
+class Copier
+{
+    function copy() {
+        echo 'One copy made';
+    }
+}
+</code>
+
+Now, this is a very basic copier.  What if I wanted to extend the functionality of my Copier?  Well, to extend the functionality, I create a child class.  **A child class will inherit all the functionality of the parent class.**
+
+Let's suppose we wanted to create a copier that would keep track of the number of copies it had made.  So, we would need to add a property which would keep track of this number, and then we need to somehow adjust this number each time we make a copy.
+
+So here is our child class:
+<code php|CopierWithCounter Child Class>
+class CopierWithCounter extends Copier
+{
+    var $counter;
+
+    function copy() {
+        $this->counter++;
+        parent::copy();
+    }
+}
+</code>
+
+So we now have a property called $counter that keeps track of the number of copies made.  Notice that the method we defined has the same name as the method in the Copier class.  What this means is that we don't need to learn anything new to use the copier - it behaves in the same way as our old copier, but it just keep track of the number of copies.
+
+You will see that inside of the copy() method there is a line: **parent::copy()**.  The parent keyword references the parent class, which is in this case Copier.  So this line will invoke the copy() method of the Copier class.  In this way, we don't have to rewrite the functionality to make a copy - we have already done that in the Copier class.
+
+So we have the exact same functionality as the Copier class, except that anytime a copy is made it will increment the $copies property by 1.  Just as in real life, the addition of the counter doesn't change the way that I use the copier - I don't need to know anything about the counter to just make a simple copy.
+
+Now, the question arises: what value does $copies have to start with?  We know that it increases by one every time a copy is made, but that is all we know.
+
+This value needs to be **initialized** to a certain value.
+
+**Initializing values is generally done by what is called a constructor.**  A constructor does just that - it constructs the object.  In PHP4, constructors were functions that always had the same name as the class.  In PHP5, constructors are functions with the name '__construct'.  We will use __construct here.
+
+So our class now becomes:
+<code php|CopierWithCounter Class with Constructor>
+class CopierWithCounter extends Copier
+{
+    var $counter;
+
+    function __construct() {
+        $this->counter = 0;
+    }
+
+    function copy() {
+        $this->counter++;
+        parent::copy();
+    }
+}
+</code>
+
+Now suppose we wanted to create an even more advanced copier.  We can do that by creating another child class.  Let's create a copier that is able to do multiple copies.  In order to do this, we need a way to specify how many copies we want and a way to remember this number.  We will add a method called 'setCopies()':
+
+<code php|Add setCopies() Method>
+class CopierMultipleCopies extends CopierWithCounter
+{
+    var $copies;
+
+    function setCopies( $copies ) {
+        $this->copies = $copies;
+    }
+}
+</code>
+We now have a way to specify how many copies we want to make.
+
+Now, it is appropriate here to say a word about scope.  When we talk about scope, we talk about where a certain variable can be seen.  You will notice that in our class, we have a property called $copies.  But we also have a parameter called $copies in our method setCopies.  How do you tell them apart?
+
+Well, the rules of scope tell us which variable we are talking about.  If a method takes a parameter, say $copies (as above), then if I use $copies inside that method, I am referring to that parameter.  There may be other variables called $copies that are defined in other places, but I don't care about those - I only care about the one inside of my function.  If I want to refer to a property of the current object, I use the $this keyword.  So, if I use $this->copies, then I am talking about the $copies property that belongs to my current object.
+
+So that aside, our setCopies() method will allow us to set the number of copies that we want to make using our copier.  The method takes one parameter - $copies, and stores it in the object.
+
+You will notice that our current class definition for CopierMultipleCopies doesn't define a copy() method or a constructor.  But, because it extends CopierWithCounter, it inherits the copy() method from CopierWithCounter, and also inherits the properties.  So, without doing any extra work, we already have a Copier with a counter.
+
+But we still want to extend the functionality of the copy() method so that it actually makes the multiple copies.  So, we add a method definition to our class.  We will also add a constructor that will add the functionality of initializing the number of copies to 1.
+
+<code php|Add Method Definition to Class>
+class CopierMultipleCopies extends CopierWithCounter
+{
+    var $copies;
+
+    function __construct() {
+        $this->copies = 1;
+        parent::__construct();
+    }
+
+    function setCopies( $copies ) {
+        $this->copies = $copies;
+    }
+
+    function copy() {
+        for ($i = 0; $i < $this->copies; $i++) {
+            parent::copy();
+        }
+    }
+}
+</code>
+
+So what have we done here?  Well, first, in our constructor we initialized the $copies variable to 1.  Thus, if we don't tell our copier otherwise, it will make one copy when the copy() method is invoked.  Note that we don't have to rewrite the code to initialize the counter - we just call **parent:: construct()** and our parent constructor will handle that.
+
+Then, we **overrode** the copy() method. Inside of our copy() method we have what is called a **[[http://en.wikipedia.org/wiki/For_loop|for loop]]**.  
+
+In the first line of the //for loop//, you will see three parts divided by semicolons.  
+
+The first part is the __counter initialization__.  We will use $i as a counter variable, and we will start it at 0.  $i will essentially keep track of the number of copies we have made out of the total number that we have to do.  
+
+The second part is the __condition__.  At the beginning of each run of the for loop, this condition is checked to determine if it is true or not.  If the condition is true, we execute the stuff inside of the braces.  If it is not, then we are done the loop.  
+
+The last part is the __incrementor__.  This is code that gets executed after every pass through the loop.  
+
+So it will run something like:
+  - take our variable i and set it to 0.
+  - Check if our variable i is less than the number of copies that we have to make
+  - if it is, then we will make a copy
+  - we will increment i by 1 and go back to step 2
+
+You can have much more complex for loops than this, but this is the basic idea.
+
+So that is our copier.  Now to use our copier, we can add something like this to our code:
+<code php|Copier>
+$copier = new CopierMultipleCopies();
+$copier->copy();
+$copier->copy();
+$copier->setCopies( 10 );
+$copier->copy();
+</code>
+
+So notice a couple of things:
+
+First, as we made our copier more and more complex, we didn't have to duplicate code.  That is, in our most complex copier, we didn't have to worry about creating code to make the actual copy.  We just used the method that came with our original copier.  Also, in our final copier we didn't have to re-implement the counter - we again just used the method that had already been defined to do this.
+
+Second, our new copier can serve as a drop in replacement for our old copier.  Yes, each copier was more advanced than the previous one, but it was still possible with the most advanced one to just create it and invoke the copy() method, and it would create a copy.  
+
+If I want to use the more advanced functionality, such as reading the counter or changing the number of copies to be made, I need to know about these features, but I can still ignorantly use the copier as if it was the original Copier. (i.e. the original Copier class had a certain interface that was standard.)  
+
+The advanced copiers added more features, but this was separate from the original interface.  (just as a car with cruise control has the same basic interface as a car without cruise control, but to take advantage of the cruise control you need to know how to set it).  
+
+This idea is an important part of the design of Joomla!
+
+//**ianmac** put together this OOPs overview for the community; [[http://forum.joomla.org/index.php/topic,200185.msg943596.html#msg943596|Post #1]] and [[http://forum.joomla.org/index.php/topic,200694.msg944114.html#msg944114|Post #2]]//
