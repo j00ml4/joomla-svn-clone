@@ -35,6 +35,7 @@ phpinfo();
 Hit the page 'http://localhost/phpinfo.php' and you've just executed a php script that tells you all about your php installation.
 
 
+
 ==== Step 4: Download xdebug server, install it and configure php.ini ====
 [[http://www.xdebug.org/link.php?url=xdebug200-522-win|Download Xdebug server.]]
 
@@ -53,7 +54,7 @@ xdebug.remote_enable=1
 xdebug.remote_host="localhost"
 xdebug.remote_port=9000
 xdebug.remote_handler="dbgp"
-zend_extension_ts="<xamppHome>/php/ext/php_xdebug-2.0.0rc4-5.2.1.dll"
+zend_extension_ts="<xamppHome>/php/ext/php_xdebug-2.0.0-5.2.2.dll"
 </php>
 
 ==== Step 5: Restart xampp and test xdebug ====
