@@ -171,16 +171,17 @@ $ sudo /opt/lampp/lampp restart
 
 
 
+
 ==== Step 10: xdebug configuration within Eclipse ====
 
 Fire up Eclipse by executing the appropriate binary in /home/<your_username>/eclipse. When it asks you about the workspace, change it to /home/<your_username>/eclipse/workspace. You can check the "Don't ask me later" mark; it's really easy to change again later.
 
 When Eclipse starts, go to Window->Preferences.. PHP->debug. The pane should look like this.
  
-{{http://www.bluejacketsoftware.com/index.php?option=com_docman&task=doc_download&gid=13&mode=view}}
 
 (Notice the xdebug section). I didn't actually have to change anything here, as it's all in the php.ini.
 
+{{http://www.bluejacketsoftware.com/images//screenshot-preferences%20.png}}
 
 ===== Create a test project =====
 
