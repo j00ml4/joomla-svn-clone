@@ -13,11 +13,13 @@ Each type of extension is unique in what it does.
 
 A template is a collection of at least two files consisting primarily of a main PHP script and a cascaded style sheet (CSS). The PHP script mainly defines the layout of the site, which can be made to vary depending on what is selected from the site's menus. PHP is interlaced with HTML in this file with the HTML providing the raw elements that define what goes where and the PHP defining the logic that can make the content different based on the menu item selected as well as invoking core Joomla! methods to insert articles, modules, and other content at desired places within the HTML elements. The CSS file defines text and background colors, graphics, and other attributes of the various elements that can appear on any given page rendered by the template. The objective of using a CSS file to define "styles" is to give the site a consistent look and behavior. [[http://htmlhelp.com/reference/css/|You can read about cascaded style sheets here]].
 
+
 ==== Modules ====
 
-A module is the simplest type of extension. It's purpose is to provide a very specific type of information that can be inserted into your site template and appear on your pages wherever your template supports inserting content. Modules can be instantiated, often multiple times each, and each instance can be placed at a specific position on the page as defined in the template. Positions are defined in the site administrator back end and allow modules to appear only when certain menu items are selected (this is specified on a per-module basis). Some example modules are login, online users, visit counter, and Newsflash.
+A module is the simplest type of extension. It's purpose is to provide a very specific type of information that can be inserted into your site template and appear on your pages wherever your template supports inserting content. Modules can be instantiated, often multiple times each, and each instance can be placed at a specific position on the page as defined in the template. Positions are defined in the site template's XML file and allow modules to appear only when certain menu items are selected (this is specified on a per-module basis). Some example modules are login, online users, visit counter, and Newsflash.
 
 [[modules:hello_world|Click here for an example of a very basic module called "Hello World"]].
+
 
 ==== Plug-Ins ====
 
@@ -27,7 +29,7 @@ There are four different types of plug-ins:
   * Editors
   * Editor Extensions
 
-A content plug-in, for instance, gets called by the core code when articles are displayed and searches for special text strings processed specifically by that plug-in, replacing them with other text (which can include HTML, Javascript, etc.). For example, a plugin might process the string **{avatar}** and insert the avatar uploaded or selected by a user on a site equipped with the popular Community Builder component or replace **{video=path-to-video}** with streamed video content. A search plug-in can extend the site search capability to include content in non-native components. An editor plug-in can completely define or extend an existing content text editor (e.g., JCE).
+A content plug-in, for instance, gets called by the core code when articles are displayed and searches for special text strings processed specifically by that plug-in, replacing them with other text (which can include HTML, Javascript, etc.). For example, a plugin might process the string **{avatar}** and insert a reference to the avatar uploaded or selected by a user on a site equipped with the popular Community Builder component or replace **{video=path-to-video}** with javascript that streams video content to the user's browser. A search plug-in can extend the site search capability to include content in non-native components. An editor plug-in can completely define or extend an existing content text editor (e.g., JCE).
 
 ==== Components ====
 
