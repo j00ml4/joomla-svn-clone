@@ -14,11 +14,14 @@ But in Joomla! 1.5.x the com_frontpage component is no longer present.  This is 
 
 <code php|Determine if user is viewing the front page in Joomla! 1.5.x>
 <?php
-if (JRequest::getVar('view') === 'frontpage') {
+$menu = &JMenu::getInstance();
+if ($menu->getActive() == $menu->getDefault()) {
 	echo 'This is the front page';
 }
 ?>
 </code>
+
+This works by checking to see if the current active menu item is the default one.
 
 ----
 
