@@ -211,6 +211,7 @@ Navigate to http://localhost/debugtest/phpinfophp. You should see the same info 
 
 
 
+
 ==== Step 12: Configure your debug profile ====
 
 
@@ -220,7 +221,7 @@ NOTE: There must be menu items 'PHP Exe script with XDebug' and 'PHP Web Script 
 
 You will come to a dialog screen that looks like this:
 
-{{http://members.shaw.ca/geneh/blog/eclipse-xdebug/ss-debug-pane.jpg}}
+{{http://www.bluejacketsoftware.com/images//narrow%20preferences%20.png}}
 
 
 
