@@ -26,7 +26,8 @@ Make certain to register for a [[http://forum.joomla.org/index.php?action=regist
 
 
 
-=== Skype ===
+
+=== Skype Chat Room for Joomla! Developers ===
 If you have not used Skype before, read the [[http://www.skype.com/help/guides/howtoskype/|Getting Started]] instructions. Note: You do not need to purchase any Skype resources, only those capabilities offered free of charge are needed. 
 
 Once you have Skype installed and configured, connect to the J!101 Coding 101 Chat Room:
