@@ -98,7 +98,7 @@ class modHelloWorldHelper
      * @param array $params An object containing the module parameters
      * @access public
      */    
-    function getHello( >$params )
+    function getHello( $params )
     {
         return 'Hello, World!';
     }
