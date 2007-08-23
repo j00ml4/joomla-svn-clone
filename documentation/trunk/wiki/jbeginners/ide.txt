@@ -19,8 +19,10 @@ You can download xampp for Windows here:
 Run the installer.  I will refer to the xampp home directory as <xamppHome> from here on.
 
 
-==== Step 3: Start XAMPP and test ====
 
+==== Step 3: Start XAMPP and test ====
+**
+Important Note:** Apache uses Port 80, as does Skype as an alternative for incoming connections. If you use Skype, go into the Tools-Options-Advanced-Connection panel and deselect the Use 80 and 443 as alternatives for incoming connections option. If Apache starts as a service, it will take 80 before Skype starts and you will not see a problem. But, to be safe, disable the option in Skype.
 
 Double-click on XAMPP Control Panel shortcut on your desktop.  At a minimum, you should see the Apache and MySQL services running.  It's also a good idea to check the "run as service" box to have these start up when windows starts.
 
