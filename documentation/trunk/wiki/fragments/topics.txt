@@ -1,0 +1,12 @@
+====== Topics ======
+
+Topics are documentation fragments that are essentially textual.  Each such topic answers a basic question: who? what? when? where? why? how?  As a rule, each topic answers one question only.  These are primary fragments that can be included directly in the documentation.
+
+  * [[fragments:topic-WhatIsATemplate|What is a template?]]
+  * [[fragments:topic-WhatIsTemplateDetailsXML|What is the purpose of the templateDetails.xml file?]]
+  * [[fragments:topic-WhatIsIndexPHP|What is the purpose of the index.php file?]]
+  * [[fragments:topic-WhichDocTypeHeaderToUse|Which DocType header to use]]
+  * [[fragments:topic-HowToUpgradeTo15|How to upgrade a Joomla! 1.0.x template to Joomla! 1.5?]]
+  * [[fragments:topic-HowToChooseLicense|How to choose a suitable licence]]
+  * [[fragments:topic-DefiningModuleLocations|Defining a module location in a template]]
+  * [[fragments:topic-HowToOverrideOutputFromCore|How to override the output from the Joomla! core]]
