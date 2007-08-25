@@ -9,3 +9,21 @@ A template is an extension that puts a certain look and feel on your site. With 
 
 ===== 3. Useful Lists =====
    * [[jdoc_statements|jdoc Statements]]
+
+===== Template Tutorial Fragments =====
+The links below are not intended to be read as a tutorial.  Rather they are links to pages which form a repository of "fragments" of documentation that can be used to assemble such things as tutorials, presentations, and so on.  This technique is known as "modular documentation" (not to be confused with Joomla! modules).
+
+==== Primary fragments ====
+  * [[fragments:definition lists|Definition lists]]
+  * [[fragments:glossaries|Glossaries]]
+  * [[fragments:procedures|Procedures]]
+  * [[fragments:processes|Processes]]
+  * [[fragments:topics|Topics]]
+  * [[fragments:troubleshooting-scenarios|Troubleshooting scenarios]]
+
+==== Secondary fragments ====
+  * [[fragments:examples|Examples]]
+  * [[fragments:figures|Figures]]
+  * [[fragments:itemised-lists|Itemised lists]]
+  * [[fragments:notes|Notes]]
+  * [[fragments:tables|Tables]]
