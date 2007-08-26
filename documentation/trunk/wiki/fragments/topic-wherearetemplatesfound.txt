@@ -1,5 +1,5 @@
 ===== Where are templates found in the Joomla! directory tree? =====
 
-All site templates, that is, templates that handle the public front-end of your website, are to be found in the templates directory.  For example, if your template is called "mytemplate", then it would be placed in the folder "[path-to-Joomla!]/templates/mytemplate".
+All site templates, that is, templates that handle the public Front-end of your website, are to be found in the templates directory.  For example, if your template is called "mytemplate", then it would be placed in the folder "[path-to-Joomla!]/templates/mytemplate".
 
-All administrator templates, that is, templates that handle the private back-end of your website, are to be found in the administrator/templates directory.  For example, if your administrator template is called "myadmintemplate", then it would be placed in the folder "[path-to-Joomla!]/administrator/templates/myadmintemplate".
+All administrator templates, that is, templates that handle the private Back-end of your website, are to be found in the administrator/templates directory.  For example, if your administrator template is called "myadmintemplate", then it would be placed in the folder "[path-to-Joomla!]/administrator/templates/myadmintemplate".
