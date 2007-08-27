@@ -8,7 +8,10 @@ Please keep this list in alphabetical order.
 
   * CSS
   * HTML
+  * module positions
   * PHP
+  * template parameters
   * W3C
   * XHTML
   * XML
+  * XML install file
