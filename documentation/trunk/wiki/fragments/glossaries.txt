@@ -10,6 +10,7 @@ Please keep this list in alphabetical order.
   * HTML
   * module positions
   * PHP
+  * quirks mode
   * template parameters
   * W3C
   * XHTML
