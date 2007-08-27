@@ -1,0 +1,14 @@
+====== Glossaries ======
+
+Glossaries are lists of technical terms and their explanations.  We may have multiple glossaries because we might select a subset of the terms available in the "master" glossary for a specific output document.  For now we'll just list all the terms that need defining here.
+
+There is also a [[http://help.joomla.org/content/view/1607/214/|User Documentation Glossary]] available.
+
+Please keep this list in alphabetical order.
+
+  * CSS
+  * HTML
+  * PHP
+  * W3C
+  * XHTML
+  * XML
