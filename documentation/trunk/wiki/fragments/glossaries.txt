@@ -11,6 +11,7 @@ Please keep this list in alphabetical order.
   * module positions
   * PHP
   * quirks mode
+  * source ordering
   * template parameters
   * W3C
   * XHTML
