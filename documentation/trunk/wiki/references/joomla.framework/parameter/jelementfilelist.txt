@@ -5,8 +5,8 @@ This class implements the JElement interface and is used to render a file list e
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementFileList-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the files in the specified folder. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementFileList-fetchTooltip|fetchTooltip]] | Renders the HTML code for a tool tip for the element. |
+| {{references:Method.png?nolink}} [[JElementFileList-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the files in the specified folder. |
+| {{references:Method.png?nolink}} [[JElementFileList-fetchTooltip|fetchTooltip]] | Renders the HTML code for a tool tip for the element. |
 
 ----
 

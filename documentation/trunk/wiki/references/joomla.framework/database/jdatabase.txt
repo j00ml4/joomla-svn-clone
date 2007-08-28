@@ -11,58 +11,58 @@ This class is an abstract class and its methods are implemented in the adapter c
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-__construct|__construct]] | Constructor for the database class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-addQuoted|addQuoted]] | Adds a field or array of field names to the list that are to be quoted. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-BeginTrans|BeginTrans]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-CommitTrans|CommitTrans]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-debug|debug]] | Sets the debug level on or off. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-ErrorMsg|ErrorMsg]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-ErrorNo|ErrorNo]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-Execute|Execute]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-explain|explain]] | Performs an SQL EXPLAIN on the current SQL query string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-GenID|GenID]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getAffectedRows|getAffectedRows]] | Returns the number of rows affected by the most recent query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-GetCol|GetCol]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getCollation|getCollation]] | Returnss the database collation. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getErrorMsg|getErrorMsg]] | Returns the most recent database error message. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getErrorNum|getErrorNum]] | Returns the most recent database error code. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getEscaped|getEscaped]] | Returns the string in database escaped form. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getInstance|getInstance]] | Returns a reference to the global Database object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getNullDate|getNullDate]] | Returns the string to be used to represent a null date. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getNumRows|getNumRows]] | Returns the number of rows returned by a database query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-GetOne|GetOne]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getPrefix|getPrefix]] | Returns the current database table prefix code. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getQuery|getQuery]] | Returns the current value of the internal SQL query string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-GetRow|GetRow]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getTableCreate|getTableCreate]] | Creates one or more tables in the database. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getTableFields|getTableFields]] | Returns a list of fields given a list of tables. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getTableList|getTableList]] | Returns a list of all the tables in the database. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getUTFSupport|getUTFSupport]] | Determines if the database supports UTF. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-getVersion|getVersion]] | Returns the version of the database connector. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-hasUTF|hasUTF]] | Determines if the database supports UTF. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-insertid|insertid]] | Returns the unique record number of the last record to be inserted into a database table. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-insertObject|insertObject]] | Inserts an object into a database table. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-isQuoted|isQuoted]] | Checks if the field name needs to be quoted. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadAssoc|loadAssoc]] | Fetches a result row as an associative array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadAssocList|loadAssocList]] | Loads an associative list of database rows. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadObject|loadObject]] | Loads an object with fields from the first row returned by the current SQL query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadObjectList|loadObjectList]] | Returns an array of database objects using the current SQL query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadResult|loadResult]] | Returns the first field of the first row returned by the database query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadResultArray|loadResultArray]] | Returns an array containing a single field from all the rows returned by the database query. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadRow|loadRow]] | Returns the first row of the current query as an array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-loadRowList|loadRowList]] | Returns an array of database rows with numeric column indexing. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-nameQuote|nameQuote]] | Quotes an identifier such as a database table name, field name, etc., using database-specific quote marks. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-PageExecute|PageExecute]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-query|query]] | Executes the current SQL query string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-queryBatch|queryBatch]] | Executes the current SQL query string as a single transaction. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-Quote|Quote]] | Returns a quoted string with characters escaped. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-replacePrefix|replacePrefix]] | This function replaces a string identifier $prefix with the string held in the _table_prefix class variable. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-RollbackTrans|RollbackTrans]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-SelectLimit|SelectLimit]] | ADODB compatability function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-setQuery|setQuery]] | Sets the SQL query string for later execution. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-setUTF|setUTF]] | Sets resource as having UTF support. This method is database dependent. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-stderr|stderr]] | Returns the last database error message in a standard format. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDatabase-updateObject|updateObject]] | Updates a database table row using data contained in an object. |
+| {{references:Method.png?nolink}} [[JDatabase-__construct|__construct]] | Constructor for the database class. |
+| {{references:Method.png?nolink}} [[JDatabase-addQuoted|addQuoted]] | Adds a field or array of field names to the list that are to be quoted. |
+| {{references:Method.png?nolink}} [[JDatabase-BeginTrans|BeginTrans]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-CommitTrans|CommitTrans]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-debug|debug]] | Sets the debug level on or off. |
+| {{references:Method.png?nolink}} [[JDatabase-ErrorMsg|ErrorMsg]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-ErrorNo|ErrorNo]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-Execute|Execute]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-explain|explain]] | Performs an SQL EXPLAIN on the current SQL query string. |
+| {{references:Method.png?nolink}} [[JDatabase-GenID|GenID]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-getAffectedRows|getAffectedRows]] | Returns the number of rows affected by the most recent query. |
+| {{references:Method.png?nolink}} [[JDatabase-GetCol|GetCol]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-getCollation|getCollation]] | Returnss the database collation. |
+| {{references:Method.png?nolink}} [[JDatabase-getErrorMsg|getErrorMsg]] | Returns the most recent database error message. |
+| {{references:Method.png?nolink}} [[JDatabase-getErrorNum|getErrorNum]] | Returns the most recent database error code. |
+| {{references:Method.png?nolink}} [[JDatabase-getEscaped|getEscaped]] | Returns the string in database escaped form. |
+| {{references:Method.png?nolink}} [[JDatabase-getInstance|getInstance]] | Returns a reference to the global Database object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JDatabase-getNullDate|getNullDate]] | Returns the string to be used to represent a null date. |
+| {{references:Method.png?nolink}} [[JDatabase-getNumRows|getNumRows]] | Returns the number of rows returned by a database query. |
+| {{references:Method.png?nolink}} [[JDatabase-GetOne|GetOne]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-getPrefix|getPrefix]] | Returns the current database table prefix code. |
+| {{references:Method.png?nolink}} [[JDatabase-getQuery|getQuery]] | Returns the current value of the internal SQL query string. |
+| {{references:Method.png?nolink}} [[JDatabase-GetRow|GetRow]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-getTableCreate|getTableCreate]] | Creates one or more tables in the database. |
+| {{references:Method.png?nolink}} [[JDatabase-getTableFields|getTableFields]] | Returns a list of fields given a list of tables. |
+| {{references:Method.png?nolink}} [[JDatabase-getTableList|getTableList]] | Returns a list of all the tables in the database. |
+| {{references:Method.png?nolink}} [[JDatabase-getUTFSupport|getUTFSupport]] | Determines if the database supports UTF. |
+| {{references:Method.png?nolink}} [[JDatabase-getVersion|getVersion]] | Returns the version of the database connector. |
+| {{references:Method.png?nolink}} [[JDatabase-hasUTF|hasUTF]] | Determines if the database supports UTF. |
+| {{references:Method.png?nolink}} [[JDatabase-insertid|insertid]] | Returns the unique record number of the last record to be inserted into a database table. |
+| {{references:Method.png?nolink}} [[JDatabase-insertObject|insertObject]] | Inserts an object into a database table. |
+| {{references:Method.png?nolink}} [[JDatabase-isQuoted|isQuoted]] | Checks if the field name needs to be quoted. |
+| {{references:Method.png?nolink}} [[JDatabase-loadAssoc|loadAssoc]] | Fetches a result row as an associative array. |
+| {{references:Method.png?nolink}} [[JDatabase-loadAssocList|loadAssocList]] | Loads an associative list of database rows. |
+| {{references:Method.png?nolink}} [[JDatabase-loadObject|loadObject]] | Loads an object with fields from the first row returned by the current SQL query. |
+| {{references:Method.png?nolink}} [[JDatabase-loadObjectList|loadObjectList]] | Returns an array of database objects using the current SQL query. |
+| {{references:Method.png?nolink}} [[JDatabase-loadResult|loadResult]] | Returns the first field of the first row returned by the database query. |
+| {{references:Method.png?nolink}} [[JDatabase-loadResultArray|loadResultArray]] | Returns an array containing a single field from all the rows returned by the database query. |
+| {{references:Method.png?nolink}} [[JDatabase-loadRow|loadRow]] | Returns the first row of the current query as an array. |
+| {{references:Method.png?nolink}} [[JDatabase-loadRowList|loadRowList]] | Returns an array of database rows with numeric column indexing. |
+| {{references:Method.png?nolink}} [[JDatabase-nameQuote|nameQuote]] | Quotes an identifier such as a database table name, field name, etc., using database-specific quote marks. |
+| {{references:Method.png?nolink}} [[JDatabase-PageExecute|PageExecute]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-query|query]] | Executes the current SQL query string. |
+| {{references:Method.png?nolink}} [[JDatabase-queryBatch|queryBatch]] | Executes the current SQL query string as a single transaction. |
+| {{references:Method.png?nolink}} [[JDatabase-Quote|Quote]] | Returns a quoted string with characters escaped. |
+| {{references:Method.png?nolink}} [[JDatabase-replacePrefix|replacePrefix]] | This function replaces a string identifier $prefix with the string held in the _table_prefix class variable. |
+| {{references:Method.png?nolink}} [[JDatabase-RollbackTrans|RollbackTrans]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-SelectLimit|SelectLimit]] | ADODB compatability function. |
+| {{references:Method.png?nolink}} [[JDatabase-setQuery|setQuery]] | Sets the SQL query string for later execution. |
+| {{references:Method.png?nolink}} [[JDatabase-setUTF|setUTF]] | Sets resource as having UTF support. This method is database dependent. |
+| {{references:Method.png?nolink}} [[JDatabase-stderr|stderr]] | Returns the last database error message in a standard format. |
+| {{references:Method.png?nolink}} [[JDatabase-updateObject|updateObject]] | Updates a database table row using data contained in an object. |
 
 ----
 

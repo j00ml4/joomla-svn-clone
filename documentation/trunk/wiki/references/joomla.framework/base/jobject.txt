@@ -5,12 +5,12 @@ This is the Joomla! base Object class. It allows <nowiki>__construct</nowiki> an
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-get|get]] | Gets the value of an object's property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-set|set]] | Sets the value of an object's property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObject-toString|toString]] | Object-to-string conversion. |
+| {{references:Constructor.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
+| {{references:Method.png?nolink}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
+| {{references:Method.png?nolink}} [[JObject-get|get]] | Gets the value of an object's property. |
+| {{references:Method.png?nolink}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |
+| {{references:Method.png?nolink}} [[JObject-set|set]] | Sets the value of an object's property. |
+| {{references:Method.png?nolink}} [[JObject-toString|toString]] | Object-to-string conversion. |
 
 ----
 

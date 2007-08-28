@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a language el
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementLanguages-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available languages. |
+| {{references:Method.png?nolink}} [[JElementLanguages-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available languages. |
 
 ----
 

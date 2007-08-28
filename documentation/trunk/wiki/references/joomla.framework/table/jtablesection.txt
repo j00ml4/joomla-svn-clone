@@ -5,8 +5,8 @@ The JTableSection class is an implementation of the JTable interface which provi
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableSection-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableSection-check|check]] | verifies that the current data is structurally sound. |
+| {{references:Constructor.png?nolink}} [[JTableSection-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{references:Method.png?nolink}} [[JTableSection-check|check]] | verifies that the current data is structurally sound. |
 
 ===== Properties =====
 ^ Property ^ Description ^

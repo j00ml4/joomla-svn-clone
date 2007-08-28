@@ -5,8 +5,8 @@ This is an implementation of the JRegistryFormat interface. This class provides 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatINI-stringToObject|stringToObject]] | Converts an INI string into an object. |
+| {{references:Method.png?nolink}} [[JRegistryFormatINI-objectToString|objectToString]] | Converts an object into an INI formatted string. |
+| {{references:Method.png?nolink}} [[JRegistryFormatINI-stringToObject|stringToObject]] | Converts an INI string into an object. |
 
 ----
 

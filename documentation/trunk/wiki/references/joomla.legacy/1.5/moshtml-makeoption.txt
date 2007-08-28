@@ -1,6 +1,6 @@
 ====== makeOption ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{http://api.joomla.org/media/images/Class.png }}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->makeOption ]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{references:Class.png }}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->makeOption ]] | never | Work in progress |
 
 This method returns an object that can be passed in an array to another list handling method such as mosHTML::selectList.  The method takes two arguments, one for the value of the option tag and optionally one for the text to display.  If the text is omitted the single string is used for both the option value and the text.
 From Joomla! 1.0 onwards it is also optionally possible to override the default attribute names ('value' and 'text').

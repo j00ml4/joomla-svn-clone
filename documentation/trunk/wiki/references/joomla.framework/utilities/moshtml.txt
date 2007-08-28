@@ -1,5 +1,6 @@
 ====== mosHTML ======
-{#JAPI Joomla.Framework Utilities JString::ucfirst #}
+^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
+|{{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML]] |
 
 This file contains **deprecated** legacy code and is scheduled to be removed.
 Use [[references:joomla.framework:html:jhtml|JHTML]] instead.

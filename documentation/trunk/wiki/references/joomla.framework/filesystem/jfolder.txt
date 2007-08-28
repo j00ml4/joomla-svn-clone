@@ -5,13 +5,13 @@ This is a folder handling class. It provides an interface to the file system to 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-create|create]] | Create a folder -- and all necessary parent folders. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-delete|delete]] | Delete a folder. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-exists|exists]] | Wrapper for the standard file_exists function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-files|files]] | Utility function to read the files in a folder. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-folders|folders]] | Utility function to read the folders in a folder. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-listFolderTree|listFolderTree]] | Lists folder in format suitable for tree display. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFolder-move|move]] | Moves a folder. |
+| {{references:Method.png?nolink}} [[JFolder-create|create]] | Create a folder -- and all necessary parent folders. |
+| {{references:Method.png?nolink}} [[JFolder-delete|delete]] | Delete a folder. |
+| {{references:Method.png?nolink}} [[JFolder-exists|exists]] | Wrapper for the standard file_exists function. |
+| {{references:Method.png?nolink}} [[JFolder-files|files]] | Utility function to read the files in a folder. |
+| {{references:Method.png?nolink}} [[JFolder-folders|folders]] | Utility function to read the folders in a folder. |
+| {{references:Method.png?nolink}} [[JFolder-listFolderTree|listFolderTree]] | Lists folder in format suitable for tree display. |
+| {{references:Method.png?nolink}} [[JFolder-move|move]] | Moves a folder. |
 
 ----
 

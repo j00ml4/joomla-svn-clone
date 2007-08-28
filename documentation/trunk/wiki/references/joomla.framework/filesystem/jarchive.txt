@@ -5,7 +5,7 @@ This is an archive handling class.  In this context an archive is a file that co
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArchive-create|create]] | Creates an archive. |
+| {{references:Method.png?nolink}} [[JArchive-create|create]] | Creates an archive. |
 
 ----
 

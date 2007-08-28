@@ -5,9 +5,9 @@ JText is a text handling class. Its primary use is to translate into the current
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JText-printf|printf]] | Wrapper for the [[http://php.net/manual/function.printf.php|printf]] method. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JText-sprintf|sprintf]] | Wrapper for the [[http://php.net/manual/function.sprintf.php|sprintf]] method. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JText-_text|_]] | Translates a string into the current language. |
+| {{references:Method.png?nolink}} [[JText-printf|printf]] | Wrapper for the [[http://php.net/manual/function.printf.php|printf]] method. |
+| {{references:Method.png?nolink}} [[JText-sprintf|sprintf]] | Wrapper for the [[http://php.net/manual/function.sprintf.php|sprintf]] method. |
+| {{references:Method.png?nolink}} [[JText-_text|_]] | Translates a string into the current language. |
 
 ----
 

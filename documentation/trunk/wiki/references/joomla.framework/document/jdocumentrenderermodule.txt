@@ -5,7 +5,7 @@ Class to render modules for the HTML document.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererModule-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererModule-render|render]] | Renders a module script and returns the results as a string. |
+| [[JDocumentRendererModule-render|{{references:Method.png }}]] [[JDocumentRendererModule-render|render]] | Renders a module script and returns the results as a string. |
 
 ----
 

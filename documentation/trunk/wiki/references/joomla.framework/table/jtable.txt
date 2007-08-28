@@ -7,32 +7,32 @@ This is the parent class to all table classes and is used to provide database in
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-__construct|__construct]] | Object constructor to set table and key field. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-addIncludePath|addIncludePath]] | Adds a directory where JTable should search for table types. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-bind|bind]] | Binds a named array/hash to this object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-canDelete|canDelete]] | Generic check for whether dependancies exist for this object in the database schema. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-check|check]] | Generic check method to ensure the data in object is safe to be stored. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-checkin|checkin]] | Checks in a row. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-checkout|checkout]] | Checks out a row.  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-delete|delete]] | Default delete method. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getDBO|getDBO]] | Get the internal database object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getErrorNum|getErrorNum]] | Returns the error number. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getInstance|getInstance]] | Returns a reference to the a Table object, always creating it. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getKeyName|getKeyName]] | Gets the internal primary key name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getNextOrder|getNextOrder]] | Returns the ordering value to place a new item last in its group. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-getTableName|getTableName]] | Gets the internal table name for the object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-hit|hit]] | Increments the hit column of the row. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-isCheckedOut|isCheckedOut]] | Checks if an item is checked out. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-load|load]] | Loads a row from the database and binds the fields to the object properties. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-move|move]] | Updates the ordering field of the row. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-publish|publish]] | Generic Publish/Unpublish function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-reorder|reorder]] | Compacts the ordering sequence of the selected records. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-reset|reset]] | Resets the default properties. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-save|save]] | Generic save function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-setDBO|setDBO]] | Set the internal database object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-setErrorNum|setErrorNum]] | Sets the internal error number. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-store|store]] | Inserts a new row if id is zero or updates an existing row in the database table. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTable-toXML|toXML]] | Export item list to XML. |
+| {{references:Method.png?nolink}} [[JTable-__construct|__construct]] | Object constructor to set table and key field. |
+| {{references:Method.png?nolink}} [[JTable-addIncludePath|addIncludePath]] | Adds a directory where JTable should search for table types. |
+| {{references:Method.png?nolink}} [[JTable-bind|bind]] | Binds a named array/hash to this object. |
+| {{references:Method.png?nolink}} [[JTable-canDelete|canDelete]] | Generic check for whether dependancies exist for this object in the database schema. |
+| {{references:Method.png?nolink}} [[JTable-check|check]] | Generic check method to ensure the data in object is safe to be stored. |
+| {{references:Method.png?nolink}} [[JTable-checkin|checkin]] | Checks in a row. |
+| {{references:Method.png?nolink}} [[JTable-checkout|checkout]] | Checks out a row.  |
+| {{references:Method.png?nolink}} [[JTable-delete|delete]] | Default delete method. |
+| {{references:Method.png?nolink}} [[JTable-getDBO|getDBO]] | Get the internal database object. |
+| {{references:Method.png?nolink}} [[JTable-getErrorNum|getErrorNum]] | Returns the error number. |
+| {{references:Method.png?nolink}} [[JTable-getInstance|getInstance]] | Returns a reference to the a Table object, always creating it. |
+| {{references:Method.png?nolink}} [[JTable-getKeyName|getKeyName]] | Gets the internal primary key name. |
+| {{references:Method.png?nolink}} [[JTable-getNextOrder|getNextOrder]] | Returns the ordering value to place a new item last in its group. |
+| {{references:Method.png?nolink}} [[JTable-getTableName|getTableName]] | Gets the internal table name for the object. |
+| {{references:Method.png?nolink}} [[JTable-hit|hit]] | Increments the hit column of the row. |
+| {{references:Method.png?nolink}} [[JTable-isCheckedOut|isCheckedOut]] | Checks if an item is checked out. |
+| {{references:Method.png?nolink}} [[JTable-load|load]] | Loads a row from the database and binds the fields to the object properties. |
+| {{references:Method.png?nolink}} [[JTable-move|move]] | Updates the ordering field of the row. |
+| {{references:Method.png?nolink}} [[JTable-publish|publish]] | Generic Publish/Unpublish function. |
+| {{references:Method.png?nolink}} [[JTable-reorder|reorder]] | Compacts the ordering sequence of the selected records. |
+| {{references:Method.png?nolink}} [[JTable-reset|reset]] | Resets the default properties. |
+| {{references:Method.png?nolink}} [[JTable-save|save]] | Generic save function. |
+| {{references:Method.png?nolink}} [[JTable-setDBO|setDBO]] | Set the internal database object. |
+| {{references:Method.png?nolink}} [[JTable-setErrorNum|setErrorNum]] | Sets the internal error number. |
+| {{references:Method.png?nolink}} [[JTable-store|store]] | Inserts a new row if id is zero or updates an existing row in the database table. |
+| {{references:Method.png?nolink}} [[JTable-toXML|toXML]] | Export item list to XML. |
 
 
 ----

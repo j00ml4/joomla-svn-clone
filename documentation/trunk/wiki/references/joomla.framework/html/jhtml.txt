@@ -5,13 +5,13 @@ The JHTML class is an interface class to all the HTML drawing classes. It provid
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTML-addIncludePath|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-addIncludePath|addIncludePath]] | Adds a directory where JHTML should search for helpers. |
-| [[JHTML-date|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-date|date]] | Returns formated date according to the current locale and adds time offset. |
-| [[JHTML-iframe|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-iframe|iframe]] | Returns an &lt;iframe&gt; element. |
-| [[JHTML-image|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-image|image]] | Returns an &lt;img&gt; element. |
-| [[JHTML-link|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-link|link]] | Returns a link element. |
-| [[JHTML-tooltip|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-tooltip|tooltip]] | Creates a tooltip with an image as its button. |
-| [[JHTML-_|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTML-_|_]] | Creates an HTML element using one of the HTML object classes. |
+| [[JHTML-addIncludePath|{{references:Method.png }}]] [[JHTML-addIncludePath|addIncludePath]] | Adds a directory where JHTML should search for helpers. |
+| [[JHTML-date|{{references:Method.png }}]] [[JHTML-date|date]] | Returns formated date according to the current locale and adds time offset. |
+| [[JHTML-iframe|{{references:Method.png }}]] [[JHTML-iframe|iframe]] | Returns an &lt;iframe&gt; element. |
+| [[JHTML-image|{{references:Method.png }}]] [[JHTML-image|image]] | Returns an &lt;img&gt; element. |
+| [[JHTML-link|{{references:Method.png }}]] [[JHTML-link|link]] | Returns a link element. |
+| [[JHTML-tooltip|{{references:Method.png }}]] [[JHTML-tooltip|tooltip]] | Creates a tooltip with an image as its button. |
+| [[JHTML-_|{{references:Method.png }}]] [[JHTML-_|_]] | Creates an HTML element using one of the HTML object classes. |
 
 ===== Related Classes =====
 

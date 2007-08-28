@@ -7,10 +7,10 @@ This is a static class.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-getInfo|getInfo]] | Gets information about a component. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-getParams|getParams]] | Gets the parameter object for the component. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-isEnabled|isEnabled]] | Checks if the component is enabled. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JComponentHelper-renderComponent|renderComponent]] | Renders the component. |
+| {{references:Method.png?nolink}} [[JComponentHelper-getInfo|getInfo]] | Gets information about a component. |
+| {{references:Method.png?nolink}} [[JComponentHelper-getParams|getParams]] | Gets the parameter object for the component. |
+| {{references:Method.png?nolink}} [[JComponentHelper-isEnabled|isEnabled]] | Checks if the component is enabled. |
+| {{references:Method.png?nolink}} [[JComponentHelper-renderComponent|renderComponent]] | Renders the component. |
 
 ----
 

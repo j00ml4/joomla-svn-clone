@@ -5,14 +5,14 @@ The JTableUser class is an implementation of the JTable interface which provides
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-getUserList|getUserList]] | returns a complete user list. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | returns a user list for a specific group. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-setLastVisit|setLastVisit]] | updates the last visit time for the user. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableUser-store|store]] | stores a user record and synchronizes related records. |
+| {{references:Constructor.png?nolink}} [[JTableUser-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{references:Method.png?nolink}} [[JTableUser-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{references:Method.png?nolink}} [[JTableUser-check|check]] | verifies that the current data is structurally sound. |
+| {{references:Method.png?nolink}} [[JTableUser-delete|delete]] | deletes a user record and all records that refer to it. |
+| {{references:Method.png?nolink}} [[JTableUser-getUserList|getUserList]] | returns a complete user list. |
+| {{references:Method.png?nolink}} [[JTableUser-getUserListFromGroup|getUserListFromGroup]] | returns a user list for a specific group. |
+| {{references:Method.png?nolink}} [[JTableUser-setLastVisit|setLastVisit]] | updates the last visit time for the user. |
+| {{references:Method.png?nolink}} [[JTableUser-store|store]] | stores a user record and synchronizes related records. |
 
 ===== Properties =====
 ^ Property ^ Description ^

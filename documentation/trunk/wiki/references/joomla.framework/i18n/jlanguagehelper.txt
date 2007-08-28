@@ -5,8 +5,8 @@ This is a language helper class. It contains utility functions that are specific
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguageHelper-createLanguageList|createLanguageList]] | Builds a list of the system languages which can be used in a select option. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguageHelper-detectLanguage|detectLanguage]] | Tries to detect the language. |
+| {{references:Method.png?nolink}} [[JLanguageHelper-createLanguageList|createLanguageList]] | Builds a list of the system languages which can be used in a select option. |
+| {{references:Method.png?nolink}} [[JLanguageHelper-detectLanguage|detectLanguage]] | Tries to detect the language. |
 
 ----
 

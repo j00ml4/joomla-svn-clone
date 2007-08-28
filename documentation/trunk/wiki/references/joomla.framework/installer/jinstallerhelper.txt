@@ -5,12 +5,12 @@ Installer helper class. This class contains utility functions that are used by t
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-cleanupInstall|cleanupInstall]] | Clean up temporary uploaded package and unpacked extension. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-detectType|detectType]] | Method to detect the extension type from a package directory. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-downloadPackage|downloadPackage]] | Downloads a package. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-getFilenameFromURL|getFilenameFromURL]] | Gets a file name out of a URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-splitSql|splitSql]] | Splits contents of an SQL file into an array of discreet queries. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerHelper-unpack|unpack]] | Unpacks a file and verifies it as a Joomla! element package. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-cleanupInstall|cleanupInstall]] | Clean up temporary uploaded package and unpacked extension. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-detectType|detectType]] | Method to detect the extension type from a package directory. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-downloadPackage|downloadPackage]] | Downloads a package. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-getFilenameFromURL|getFilenameFromURL]] | Gets a file name out of a URL. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-splitSql|splitSql]] | Splits contents of an SQL file into an array of discreet queries. |
+| {{references:Method.png?nolink}} [[JInstallerHelper-unpack|unpack]] | Unpacks a file and verifies it as a Joomla! element package. |
 
 ----
 

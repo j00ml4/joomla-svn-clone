@@ -5,8 +5,8 @@ The JInstallerComponent class is an extension of the abstract JInstaller class w
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerComponent-install|install]] | Custom install method for components. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerComponent-uninstall|uninstall]] | Custom uninstall method for components. |
+| {{references:Method.png?nolink}} [[JInstallerComponent-install|install]] | Custom install method for components. |
+| {{references:Method.png?nolink}} [[JInstallerComponent-uninstall|uninstall]] | Custom uninstall method for components. |
 
 ----
 

@@ -7,9 +7,9 @@ The content table is used to store all the articles in the system.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableContent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableContent-check|check]] | verifies that the current data is structurally sound. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableContent-toXML|toXML]] | converts a record to XML. |
+| {{references:Constructor.png?nolink}} [[JTableContent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{references:Method.png?nolink}} [[JTableContent-check|check]] | verifies that the current data is structurally sound. |
+| {{references:Method.png?nolink}} [[JTableContent-toXML|toXML]] | converts a record to XML. |
 
 ===== Properties =====
 ^ Property ^ Description ^

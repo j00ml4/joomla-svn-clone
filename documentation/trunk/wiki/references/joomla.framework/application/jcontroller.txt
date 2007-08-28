@@ -7,26 +7,26 @@ The controller controls the execution for a component written using the MVC desi
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-addModelPath|addModelPath]] | Adds to the stack of controller model paths in LIFO order. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-addViewPath|addViewPath]] | Add one or more view paths to the controller's stack, in LIFO order. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-authorize|authorize]] | Checks if a user is authorized to perform the specified task.  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-display|display]] | Typical view method for MVC based architecture. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-execute|execute]] | Execute a task by triggering a method in the derived class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-getError|getError]] | Get the error message. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-getModel|getModel]] | Method to get a model object, loading the class definition if required. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-getTask|getTask]] | Get the last task that is or was to be performed. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-getTasks|getTasks]] | Gets the available tasks in the controller. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-getView|getView]] | Method to get a reference to the current view and load it if necessary.  |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-redirect|redirect]] | Redirects the browser or returns false if no redirect is set. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-registerDefaultTask|registerDefaultTask]] | Register the default task to perform if a mapping is not found. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-registerTask|registerTask]] | Register (map) a task to a method in the class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-setAccessControl|setAccessControl]] | Sets the access control levels. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-setError|setError]] | Set the error message. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-setMessage|setMessage]] | Sets the internal message that is passed with a redirect. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-setRedirect|setRedirect]] | Set a URL for browser redirection. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-_addPath|_addPath]] | Adds a directory to the search path for templates and resources. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JController-_setPath|_setPath]] | Sets an entire array of search paths for resources. |
+| {{references:Method.png?nolink}} [[JController-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JController-addModelPath|addModelPath]] | Adds to the stack of controller model paths in LIFO order. |
+| {{references:Method.png?nolink}} [[JController-addViewPath|addViewPath]] | Add one or more view paths to the controller's stack, in LIFO order. |
+| {{references:Method.png?nolink}} [[JController-authorize|authorize]] | Checks if a user is authorized to perform the specified task.  |
+| {{references:Method.png?nolink}} [[JController-display|display]] | Typical view method for MVC based architecture. |
+| {{references:Method.png?nolink}} [[JController-execute|execute]] | Execute a task by triggering a method in the derived class. |
+| {{references:Method.png?nolink}} [[JController-getError|getError]] | Get the error message. |
+| {{references:Method.png?nolink}} [[JController-getModel|getModel]] | Method to get a model object, loading the class definition if required. |
+| {{references:Method.png?nolink}} [[JController-getTask|getTask]] | Get the last task that is or was to be performed. |
+| {{references:Method.png?nolink}} [[JController-getTasks|getTasks]] | Gets the available tasks in the controller. |
+| {{references:Method.png?nolink}} [[JController-getView|getView]] | Method to get a reference to the current view and load it if necessary.  |
+| {{references:Method.png?nolink}} [[JController-redirect|redirect]] | Redirects the browser or returns false if no redirect is set. |
+| {{references:Method.png?nolink}} [[JController-registerDefaultTask|registerDefaultTask]] | Register the default task to perform if a mapping is not found. |
+| {{references:Method.png?nolink}} [[JController-registerTask|registerTask]] | Register (map) a task to a method in the class. |
+| {{references:Method.png?nolink}} [[JController-setAccessControl|setAccessControl]] | Sets the access control levels. |
+| {{references:Method.png?nolink}} [[JController-setError|setError]] | Set the error message. |
+| {{references:Method.png?nolink}} [[JController-setMessage|setMessage]] | Sets the internal message that is passed with a redirect. |
+| {{references:Method.png?nolink}} [[JController-setRedirect|setRedirect]] | Set a URL for browser redirection. |
+| {{references:Method.png?nolink}} [[JController-_addPath|_addPath]] | Adds a directory to the search path for templates and resources. |
+| {{references:Method.png?nolink}} [[JController-_setPath|_setPath]] | Sets an entire array of search paths for resources. |
 
 ----
 

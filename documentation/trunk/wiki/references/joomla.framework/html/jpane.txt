@@ -5,12 +5,12 @@ JPane is an abstract base class that provides an interface for panes. The term p
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-__construct|__construct]] | Performs any necessary operations to construct the pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-endPane|endPane]] | Outputs the necessary HTML code to end the pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-endPanel|endPanel]] | Outputs the necessary HTML code to end a panel. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-getInstance|getInstance]] | Returns a reference to a JPane object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start the pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPane-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a panel with the title text and start the panel. |
+| {{references:Method.png?nolink}} [[JPane-__construct|__construct]] | Performs any necessary operations to construct the pane. |
+| {{references:Method.png?nolink}} [[JPane-endPane|endPane]] | Outputs the necessary HTML code to end the pane. |
+| {{references:Method.png?nolink}} [[JPane-endPanel|endPanel]] | Outputs the necessary HTML code to end a panel. |
+| {{references:Method.png?nolink}} [[JPane-getInstance|getInstance]] | Returns a reference to a JPane object. |
+| {{references:Method.png?nolink}} [[JPane-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start the pane. |
+| {{references:Method.png?nolink}} [[JPane-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a panel with the title text and start the panel. |
 
 ----
 

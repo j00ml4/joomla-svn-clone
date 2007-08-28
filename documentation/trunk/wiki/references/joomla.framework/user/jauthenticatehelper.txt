@@ -1,16 +1,16 @@
 ====== JAuthenticateHelper ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper]] | 19 September 2006 | Published |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthenticateHelper.html|JAuthenticateHelper]] | 19 September 2006 | Published |
 
 An authorisation helper class which provides static methods to perform various tasks relevant to the Joomla! authorisation routines.
 This class has influences and some method logic from the [[http://www.horde.org|Horde]] Auth package.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticateHelper-genRandomPassword|genRandomPassword]] | Generates a random password |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticateHelper-getCryptedPassword|getCryptedPassword]] | Formats a password using the current encryption. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticateHelper-getSalt|getSalt]] | Returns a salt for the appropriate kind of password encryption. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JAuthenticateHelper-isAuthenticated|isAuthenticated]] | Determines whether there is an authenticated user in the current session. |
+| {{references:Method.png?nolink}} [[JAuthenticateHelper-genRandomPassword|genRandomPassword]] | Generates a random password |
+| {{references:Method.png?nolink}} [[JAuthenticateHelper-getCryptedPassword|getCryptedPassword]] | Formats a password using the current encryption. |
+| {{references:Method.png?nolink}} [[JAuthenticateHelper-getSalt|getSalt]] | Returns a salt for the appropriate kind of password encryption. |
+| {{references:Method.png?nolink}} [[JAuthenticateHelper-isAuthenticated|isAuthenticated]] | Determines whether there is an authenticated user in the current session. |
 
 ----
 

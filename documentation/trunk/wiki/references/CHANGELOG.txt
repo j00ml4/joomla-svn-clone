@@ -16,6 +16,9 @@ Legend:
 ! -> Note
 ---------
 
+28.08.2007 René Serradeil
+ ^	bulk update icons to use media {{reference:xx}} namespace
+
 14.08.2007 René Serradeil
  ^	JApplication, deprecated methods
 

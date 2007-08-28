@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a folder list
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementFolderList-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the folders in the specified folder. |
+| {{references:Method.png?nolink}} [[JElementFolderList-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the folders in the specified folder. |
 
 ----
 

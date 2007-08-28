@@ -1,6 +1,6 @@
 ====== JVersion ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion]] | never | Work in progress |
 
 Provides version information of Joomla!
 
@@ -8,14 +8,14 @@ Provides version information of Joomla!
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JVersion-getHelpVersion|getHelpVersion]] | Returns a version suffix for help files. This method is used internally by the Back-end help system. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JVersion-getLongVersion|getLongVersion]] | Returns the long format Joomla! version. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JVersion-getShortVersion|getShortVersion]] | Returns the short format Joomla! version. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JVersion-isCompatible|isCompatible]] | Compares a "PHP standardized" version number against the current Joomla! version. |
+| {{references:Method.png?nolink}} [[JVersion-getHelpVersion|getHelpVersion]] | Returns a version suffix for help files. This method is used internally by the Back-end help system. |
+| {{references:Method.png?nolink}} [[JVersion-getLongVersion|getLongVersion]] | Returns the long format Joomla! version. |
+| {{references:Method.png?nolink}} [[JVersion-getShortVersion|getShortVersion]] | Returns the short format Joomla! version. |
+| {{references:Method.png?nolink}} [[JVersion-isCompatible|isCompatible]] | Compares a "PHP standardized" version number against the current Joomla! version. |
 
 ===== Constants =====
 ^ Constant ^ Description ^
-| {{http://api.joomla.org/media/images/Constant.png?nolink}} **JVERSION** | A constant containing the Joomla! short version. |
+| {{references:Constant.png?nolink}} **JVERSION** | A constant containing the Joomla! short version. |
 
 ----
 

@@ -1,6 +1,6 @@
 ====== set ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->set]] |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->set]] |
 
 Overridden set method to pass properties on to the user table
 ===== Syntax =====

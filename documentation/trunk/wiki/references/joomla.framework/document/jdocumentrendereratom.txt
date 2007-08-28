@@ -9,7 +9,7 @@ This class uses the mime type 'application/atom+xml'.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererAtom-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererAtom-render|render]] | Renders the feed. |
+| [[JDocumentRendererAtom-render|{{references:Method.png }}]] [[JDocumentRendererAtom-render|render]] | Renders the feed. |
 
 ----
 

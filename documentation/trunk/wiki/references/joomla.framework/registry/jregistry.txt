@@ -5,19 +5,19 @@ The JRegistry class provides methods that assist in storing and retrieving name-
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JRegistry-__construct|__construct]] | Constructs the object by creating and setting the default namespace. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-getInstance|getInstance]] | Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-getValue|getValue]] | Gets a registry value. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadArray|loadArray]] | Loads an associative array of values into the registry. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadFile|loadFile]] | Loads the contents of a file into the registry. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadINI|loadINI]] | Loads an INI string into the registry. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadObject|loadObject]] | Loads the public variables of the object into registry. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-loadXML|loadXML]] | Loads an XML string into the registry. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-makeNameSpace|makeNameSpace]] | Creates a namespace. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-setValue|setValue]] | Sets a registry value. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-toArray|toArray]] | Transforms a namespace to an array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-toObject|toObject]] | Transforms a namespace to an object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistry-toString|toString]] | Transforms a namespace to the given string format. |
+| {{references:Constructor.png?nolink}} [[JRegistry-__construct|__construct]] | Constructs the object by creating and setting the default namespace. |
+| {{references:Method.png?nolink}} [[JRegistry-getInstance|getInstance]] | Returns a reference to a global JRegistry object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JRegistry-getValue|getValue]] | Gets a registry value. |
+| {{references:Method.png?nolink}} [[JRegistry-loadArray|loadArray]] | Loads an associative array of values into the registry. |
+| {{references:Method.png?nolink}} [[JRegistry-loadFile|loadFile]] | Loads the contents of a file into the registry. |
+| {{references:Method.png?nolink}} [[JRegistry-loadINI|loadINI]] | Loads an INI string into the registry. |
+| {{references:Method.png?nolink}} [[JRegistry-loadObject|loadObject]] | Loads the public variables of the object into registry. |
+| {{references:Method.png?nolink}} [[JRegistry-loadXML|loadXML]] | Loads an XML string into the registry. |
+| {{references:Method.png?nolink}} [[JRegistry-makeNameSpace|makeNameSpace]] | Creates a namespace. |
+| {{references:Method.png?nolink}} [[JRegistry-setValue|setValue]] | Sets a registry value. |
+| {{references:Method.png?nolink}} [[JRegistry-toArray|toArray]] | Transforms a namespace to an array. |
+| {{references:Method.png?nolink}} [[JRegistry-toObject|toObject]] | Transforms a namespace to an object. |
+| {{references:Method.png?nolink}} [[JRegistry-toString|toString]] | Transforms a namespace to the given string format. |
 
 ----
 

@@ -4,8 +4,8 @@
 This is an abstract observer class to implement the observer design pattern. This allows objects to observe other objects and trigger events based on the actions of other objects. An example of a subclass of JObserver is the [[references:joomla.framework:application:jplugin|JPlugin]] class.
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JObserver-__construct|__construct]] | Class constructor |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObserver-update|update]] | Method to update the state of observable objects. |
+| {{references:Constructor.png?nolink}} [[JObserver-__construct|__construct]] | Class constructor |
+| {{references:Method.png?nolink}} [[JObserver-update|update]] | Method to update the state of observable objects. |
 
 ----
 

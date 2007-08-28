@@ -5,22 +5,22 @@ The JPagination class provides a common interface for content pagination in the 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-__construct|__construct]] | Constructs the class by initializing its variables. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-getLimitBox|getLimitBox]] | Creates and returns a dropdown box for selecting how many records to show per page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-getListFooter|getListFooter]] | Creates and returns the pagination footer. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-getPagesCounter|getPagesCounter]] | Creates and returns the pagination counter string, i.e. Results 1-10 of 42. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-getPagesLinks|getPagesLinks]] | Creates and returns the pagination page list string, i.e. Previous, Next, 1 2 3 ... x. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-getPagesList|getPagesList]] | Creates and returns the pagination page list array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-orderDownIcon|orderDownIcon]] | Returns the icon to move an item DOWN. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-orderDownIcon2|orderDownIcon2]] | Returns the icon to move an item DOWN. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-orderUpIcon|orderUpIcon]] | Returns the icon to move an item UP. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-orderUpIcon2|orderUpIcon2]] | Returns the icon to move an item UP. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-rowNumber|rowNumber]] | Returns the row number. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-setTemplateVars|setTemplateVars]] | Sets the variables for the page navigation template. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-writeLeafsCounter|writeLeafsCounter]] | Writes the html for the leafs counter, eg, Page 1 of x. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-writeLimitBox|writeLimitBox]] | Writes the dropdown select list for number of rows to show per page. This method is deprecated. Use [[JPagination-getLimitBox|getLimitBox]] instead. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-writePagesCounter|writePagesCounter]] | Writes the counter string. This method is deprecated. Use [[JPagination-getPagesCounter|getPagesCounter]] instead. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPagination-writePagesLinks|writePagesLinks]] | Writes the page list string. This method is deprecated. Use [[JPagination-getPagesLinks|getPagesLinks]] instead. |
+| {{references:Method.png?nolink}} [[JPagination-__construct|__construct]] | Constructs the class by initializing its variables. |
+| {{references:Method.png?nolink}} [[JPagination-getLimitBox|getLimitBox]] | Creates and returns a dropdown box for selecting how many records to show per page. |
+| {{references:Method.png?nolink}} [[JPagination-getListFooter|getListFooter]] | Creates and returns the pagination footer. |
+| {{references:Method.png?nolink}} [[JPagination-getPagesCounter|getPagesCounter]] | Creates and returns the pagination counter string, i.e. Results 1-10 of 42. |
+| {{references:Method.png?nolink}} [[JPagination-getPagesLinks|getPagesLinks]] | Creates and returns the pagination page list string, i.e. Previous, Next, 1 2 3 ... x. |
+| {{references:Method.png?nolink}} [[JPagination-getPagesList|getPagesList]] | Creates and returns the pagination page list array. |
+| {{references:Method.png?nolink}} [[JPagination-orderDownIcon|orderDownIcon]] | Returns the icon to move an item DOWN. |
+| {{references:Method.png?nolink}} [[JPagination-orderDownIcon2|orderDownIcon2]] | Returns the icon to move an item DOWN. |
+| {{references:Method.png?nolink}} [[JPagination-orderUpIcon|orderUpIcon]] | Returns the icon to move an item UP. |
+| {{references:Method.png?nolink}} [[JPagination-orderUpIcon2|orderUpIcon2]] | Returns the icon to move an item UP. |
+| {{references:Method.png?nolink}} [[JPagination-rowNumber|rowNumber]] | Returns the row number. |
+| {{references:Method.png?nolink}} [[JPagination-setTemplateVars|setTemplateVars]] | Sets the variables for the page navigation template. |
+| {{references:Method.png?nolink}} [[JPagination-writeLeafsCounter|writeLeafsCounter]] | Writes the html for the leafs counter, eg, Page 1 of x. |
+| {{references:Method.png?nolink}} [[JPagination-writeLimitBox|writeLimitBox]] | Writes the dropdown select list for number of rows to show per page. This method is deprecated. Use [[JPagination-getLimitBox|getLimitBox]] instead. |
+| {{references:Method.png?nolink}} [[JPagination-writePagesCounter|writePagesCounter]] | Writes the counter string. This method is deprecated. Use [[JPagination-getPagesCounter|getPagesCounter]] instead. |
+| {{references:Method.png?nolink}} [[JPagination-writePagesLinks|writePagesLinks]] | Writes the page list string. This method is deprecated. Use [[JPagination-getPagesLinks|getPagesLinks]] instead. |
 
 ----
 

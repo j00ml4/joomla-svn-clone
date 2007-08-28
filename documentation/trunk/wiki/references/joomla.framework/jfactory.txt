@@ -1,24 +1,24 @@
 ====== JFactory [Review] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JFactory.html|JFactory]] | never | Internal review |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[http://api.joomla.org/Joomla-Framework/JFactory.html|JFactory]] | never | Internal review |
 
 Joomla! Framework Factory class. This class is used to create various Joomla! framework classes.  It facilitates lazy loading, which means that instead of manually including the appropriate library file for a given class, a call to the designated JFactory class method will automatically load the correct library and return an instance of an object of the appropriate type. The object will only be created if it doesn't already exist.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getACL|getACL]] | Returns a reference to the global JAuthorization object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getCache|getCache]] | Returns a reference to the global JCache object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getConfig|getConfig]] | Returns a reference to the global JRegistry configuration object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getDBO|getDBO]] | Returns a reference to the global JDatabase object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getDocument|getDocument]] | Returns a reference to the global JDocument object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getEditor|getEditor]] | Get an editor object, depending on the editor plugins that are installed. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getLanguage|getLanguage]] | Returns a reference to the global JLanguage object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getMailer|getMailer]] | Returns a reference to the global JMail object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getSession|getSession]] | Returns a reference to the global JSession object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getTemplate|getTemplate]] | Returns a reference to the global JTemplate object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getURI|getURI]] | Return a reference to the JURI object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getUser|getUser]] | Returns a reference to the global JUser object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFactory-getXMLParser|getXMLParser]] | Get an a XML document parser (incl. RSS/Atom/DOM) |
+| {{references:Method.png?nolink}} [[JFactory-getACL|getACL]] | Returns a reference to the global JAuthorization object. |
+| {{references:Method.png?nolink}} [[JFactory-getCache|getCache]] | Returns a reference to the global JCache object. |
+| {{references:Method.png?nolink}} [[JFactory-getConfig|getConfig]] | Returns a reference to the global JRegistry configuration object. |
+| {{references:Method.png?nolink}} [[JFactory-getDBO|getDBO]] | Returns a reference to the global JDatabase object. |
+| {{references:Method.png?nolink}} [[JFactory-getDocument|getDocument]] | Returns a reference to the global JDocument object. |
+| {{references:Method.png?nolink}} [[JFactory-getEditor|getEditor]] | Get an editor object, depending on the editor plugins that are installed. |
+| {{references:Method.png?nolink}} [[JFactory-getLanguage|getLanguage]] | Returns a reference to the global JLanguage object. |
+| {{references:Method.png?nolink}} [[JFactory-getMailer|getMailer]] | Returns a reference to the global JMail object. |
+| {{references:Method.png?nolink}} [[JFactory-getSession|getSession]] | Returns a reference to the global JSession object. |
+| {{references:Method.png?nolink}} [[JFactory-getTemplate|getTemplate]] | Returns a reference to the global JTemplate object. |
+| {{references:Method.png?nolink}} [[JFactory-getURI|getURI]] | Return a reference to the JURI object. |
+| {{references:Method.png?nolink}} [[JFactory-getUser|getUser]] | Returns a reference to the global JUser object. |
+| {{references:Method.png?nolink}} [[JFactory-getXMLParser|getXMLParser]] | Get an a XML document parser (incl. RSS/Atom/DOM) |
 
 ----
 

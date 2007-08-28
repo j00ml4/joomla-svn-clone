@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a radio list 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementRadio-fetchElement|fetchElement]] | Renders the HTML code for a radio list containing the entries specified in the XML file. |
+| {{references:Method.png?nolink}} [[JElementRadio-fetchElement|fetchElement]] | Renders the HTML code for a radio list containing the entries specified in the XML file. |
 
 ----
 

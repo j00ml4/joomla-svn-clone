@@ -1,6 +1,6 @@
 ====== mosMambotHandler ======
 ^ API ^ Package ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Legacy|Joomla.Legacy]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Legacy#|Legacy]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:Joomla.Legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:Joomla.Legacy#|Legacy]] | never | Work in progress |
 
 This class contains **deprecated** legacy code and is scheduled to be removed.  It is provided only for backward compatibility.
 
@@ -11,10 +11,10 @@ The functionality of mosMambotHandler was broken down into distinct classes to s
 
 ===== Methods =====
 ^ Method ^ Joomla! 1.5 ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png }} **call** | [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]]::[[references:joomla.framework:Application:JEventDispatcher-trigger|trigger()]] | Call the handler function associated with a specific event. |
-| {{http://api.joomla.org/media/images/Method.png }} **loadBot** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::getPlugin|getPlugin()]] | Loads a plugin (mambot) file |
-| {{http://api.joomla.org/media/images/Method.png }} **loadBotGroup** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::importPlugin|importPlugin()]] | Loads all the plugin (mambot) files for a particular group |
-| {{http://api.joomla.org/media/images/Method.png }} **registerFunction** | [[references:joomla.framework:JApplication-registerEvent|JApplication]]::[[references:joomla.framework:JApplication-registerEvent|registerEvent()]] | Registers a handler to a particular event group |
+| {{references:Method.png }} **call** | [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]]::[[references:joomla.framework:Application:JEventDispatcher-trigger|trigger()]] | Call the handler function associated with a specific event. |
+| {{references:Method.png }} **loadBot** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::getPlugin|getPlugin()]] | Loads a plugin (mambot) file |
+| {{references:Method.png }} **loadBotGroup** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::importPlugin|importPlugin()]] | Loads all the plugin (mambot) files for a particular group |
+| {{references:Method.png }} **registerFunction** | [[references:joomla.framework:JApplication-registerEvent|JApplication]]::[[references:joomla.framework:JApplication-registerEvent|registerEvent()]] | Registers a handler to a particular event group |
 
 ----
 

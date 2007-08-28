@@ -5,8 +5,8 @@ Renders a popup button. This is an implimentation of the abstract [[JButton|JBut
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButtonPopup-fetchButton|fetchButton]] | Returns the HTML code for the button. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButtonPopup-fetchId|fetchId]] | Gets the button's CSS ID. |
+| {{references:Method.png?nolink}} [[JButtonPopup-fetchButton|fetchButton]] | Returns the HTML code for the button. |
+| {{references:Method.png?nolink}} [[JButtonPopup-fetchId|fetchId]] | Gets the button's CSS ID. |
 
 ----
 

@@ -5,8 +5,8 @@ The JTableMenu class is an implementation of the JTable interface which provides
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableMenu-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableMenu-bind|bind]] | overloaded bind method that provides parameter handling for the control and params fields. |
+| {{references:Constructor.png?nolink}} [[JTableMenu-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{references:Method.png?nolink}} [[JTableMenu-bind|bind]] | overloaded bind method that provides parameter handling for the control and params fields. |
 
 
 ===== Properties =====

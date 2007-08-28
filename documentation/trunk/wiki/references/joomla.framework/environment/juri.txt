@@ -6,30 +6,30 @@ The concept and implementation of this class is drawn heavily from the binary cl
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JURI-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getAnchor|getAnchor]] | Get the URI archor string everything after the '#'. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getHost|getHost]] | Get URI host returns the hostname/ip, or null if no hostname/ip was specified. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getInstance|getInstance]] | Returns a reference to a global JURI object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getPassword|getPassword]] | Get URI password. Returns the password, or null if no password was specified. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getPath|getPath]] | Gets the URI path string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getPort|getPort]] | Get URI port. Returns the port number, or null if no port was specified. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getQueryString|getQueryString]] | Returns flat query string from (array) $_vars hash. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getScheme|getScheme]] | Get URI scheme (protocol) ie. http, https, ftp, etc... |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getUsername|getUsername]] | Get URI username. Returns the username, or null if no username was specified. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-getVars|getVars]] | Returns an array with all of the query variables. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-isSSL|isSSL]] | Checks whether the current URI is using HTTPS. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-parse|parse]] | Parse a given URI and populate the class fields. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setAnchor|setAnchor]] | Set the URI anchor string everything after the '#'. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setHost|setHost]] | Set URI host. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setPassword|setPassword]] | Set URI password. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setPath|setPath]] | Set the URI path string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setPort|setPort]] | Set URI port. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setQueryString|setQueryString]] | Sets the query to a supplied string in format: foo=bar&x=y. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setScheme|setScheme]] | Set URI scheme (protocol) ie. http, https, ftp, etc... |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setUsername|setUsername]] | Set URI username. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-setVar|setVar]] | Adds a query variable and value, replacing the value if it already exists and returning the old value. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JURI-toString|toString]] | Returns full URI string. |
+| {{references:Constructor.png?nolink}} [[JURI-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists. |
+| {{references:Method.png?nolink}} [[JURI-getAnchor|getAnchor]] | Get the URI archor string everything after the '#'. |
+| {{references:Method.png?nolink}} [[JURI-getHost|getHost]] | Get URI host returns the hostname/ip, or null if no hostname/ip was specified. |
+| {{references:Method.png?nolink}} [[JURI-getInstance|getInstance]] | Returns a reference to a global JURI object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JURI-getPassword|getPassword]] | Get URI password. Returns the password, or null if no password was specified. |
+| {{references:Method.png?nolink}} [[JURI-getPath|getPath]] | Gets the URI path string. |
+| {{references:Method.png?nolink}} [[JURI-getPort|getPort]] | Get URI port. Returns the port number, or null if no port was specified. |
+| {{references:Method.png?nolink}} [[JURI-getQueryString|getQueryString]] | Returns flat query string from (array) $_vars hash. |
+| {{references:Method.png?nolink}} [[JURI-getScheme|getScheme]] | Get URI scheme (protocol) ie. http, https, ftp, etc... |
+| {{references:Method.png?nolink}} [[JURI-getUsername|getUsername]] | Get URI username. Returns the username, or null if no username was specified. |
+| {{references:Method.png?nolink}} [[JURI-getVars|getVars]] | Returns an array with all of the query variables. |
+| {{references:Method.png?nolink}} [[JURI-isSSL|isSSL]] | Checks whether the current URI is using HTTPS. |
+| {{references:Method.png?nolink}} [[JURI-parse|parse]] | Parse a given URI and populate the class fields. |
+| {{references:Method.png?nolink}} [[JURI-setAnchor|setAnchor]] | Set the URI anchor string everything after the '#'. |
+| {{references:Method.png?nolink}} [[JURI-setHost|setHost]] | Set URI host. |
+| {{references:Method.png?nolink}} [[JURI-setPassword|setPassword]] | Set URI password. |
+| {{references:Method.png?nolink}} [[JURI-setPath|setPath]] | Set the URI path string. |
+| {{references:Method.png?nolink}} [[JURI-setPort|setPort]] | Set URI port. |
+| {{references:Method.png?nolink}} [[JURI-setQueryString|setQueryString]] | Sets the query to a supplied string in format: foo=bar&x=y. |
+| {{references:Method.png?nolink}} [[JURI-setScheme|setScheme]] | Set URI scheme (protocol) ie. http, https, ftp, etc... |
+| {{references:Method.png?nolink}} [[JURI-setUsername|setUsername]] | Set URI username. |
+| {{references:Method.png?nolink}} [[JURI-setVar|setVar]] | Adds a query variable and value, replacing the value if it already exists and returning the old value. |
+| {{references:Method.png?nolink}} [[JURI-toString|toString]] | Returns full URI string. |
 
 ----
 

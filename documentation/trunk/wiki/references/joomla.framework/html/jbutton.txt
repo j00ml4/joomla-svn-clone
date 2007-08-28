@@ -5,12 +5,12 @@ This is an abstract button class. It is the base class for all other JButton cla
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JButton-__construct|__construct]] | Button constructor. Stores a reference to the instantiating object (parent). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-fetchButton|fetchButton]] | Returns the HTML for the button. This method is defined in the final button class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-fetchIconClass|fetchIconClass]] | Gets the CSS class name for an icon identifier. This can be redefined in the final button class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-fetchId|fetchId]] | Gets the button id. This can be redefined in the final button class. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-getName|getName]] | Gets the button name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButton-render|render]] | Renders the button. |
+| {{references:Constructor.png?nolink}} [[JButton-__construct|__construct]] | Button constructor. Stores a reference to the instantiating object (parent). |
+| {{references:Method.png?nolink}} [[JButton-fetchButton|fetchButton]] | Returns the HTML for the button. This method is defined in the final button class. |
+| {{references:Method.png?nolink}} [[JButton-fetchIconClass|fetchIconClass]] | Gets the CSS class name for an icon identifier. This can be redefined in the final button class. |
+| {{references:Method.png?nolink}} [[JButton-fetchId|fetchId]] | Gets the button id. This can be redefined in the final button class. |
+| {{references:Method.png?nolink}} [[JButton-getName|getName]] | Gets the button name. |
+| {{references:Method.png?nolink}} [[JButton-render|render]] | Renders the button. |
 
 ===== Child Classes =====
 | [[JButtonCustom|Custom]] |

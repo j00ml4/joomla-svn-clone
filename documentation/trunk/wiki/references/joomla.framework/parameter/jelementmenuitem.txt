@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a menu item e
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementMenuItem-fetchElement|fetchElement]] | Renders the HTML code for a select list containing a list of items in a menu. |
+| {{references:Method.png?nolink}} [[JElementMenuItem-fetchElement|fetchElement]] | Renders the HTML code for a select list containing a list of items in a menu. |
 
 ----
 

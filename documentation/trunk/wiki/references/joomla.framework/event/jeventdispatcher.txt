@@ -5,10 +5,10 @@ Class to handle dispatching [[JEventDispatcher/#Events|events]].
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JEventDispatcher-__construct|__construct]] | Constructor |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JEventDispatcher-getInstance|getInstance]] | Returns a reference to the global Event Dispatcher object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JEventDispatcher-register|register]] | Registers an event handler to the event dispatcher |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JEventDispatcher-trigger|trigger]] | Triggers an event by dispatching arguments to all observers that handle  the event and returning their return values. |
+| {{references:Constructor.png?nolink}} [[JEventDispatcher-__construct|__construct]] | Constructor |
+| {{references:Method.png?nolink}} [[JEventDispatcher-getInstance|getInstance]] | Returns a reference to the global Event Dispatcher object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JEventDispatcher-register|register]] | Registers an event handler to the event dispatcher |
+| {{references:Method.png?nolink}} [[JEventDispatcher-trigger|trigger]] | Triggers an event by dispatching arguments to all observers that handle  the event and returning their return values. |
 
 
 ==== Events ====
