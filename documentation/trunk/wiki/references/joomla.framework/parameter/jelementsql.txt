@@ -4,7 +4,7 @@
 Renders a SQL element
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JElementSQL-fetchElement|{{http://dev.joomla.org/media/images/Method.png }}]] [[JElementSQL-fetchElement|fetchElement]] |  |
+| [[JElementSQL-fetchElement|{{references:Method.png?nolink}}]] [[JElementSQL-fetchElement|fetchElement]] |  |
 
 ----
 

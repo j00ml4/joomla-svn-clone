@@ -4,35 +4,35 @@
 MySQLi database driver
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDatabaseMySQLi-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-__construct|__construct]] | Database object constructor |
-| [[JDatabaseMySQLi-__destruct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-__destruct|__destruct]] | Database object destructor |
-| [[JDatabaseMySQLi-connected|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-connected|connected]] | Determines if the connection to the server is active. |
-| [[JDatabaseMySQLi-explain|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-explain|explain]] | Diagnostic function |
-| [[JDatabaseMySQLi-getAffectedRows|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getAffectedRows|getAffectedRows]] |  |
-| [[JDatabaseMySQLi-getCollation|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getCollation|getCollation]] | Assumes database collation in use by sampling one text field in one table |
-| [[JDatabaseMySQLi-getEscaped|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getEscaped|getEscaped]] | Get a database escaped string |
-| [[JDatabaseMySQLi-getNumRows|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getNumRows|getNumRows]] |  |
-| [[JDatabaseMySQLi-getTableCreate|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getTableCreate|getTableCreate]] |  |
-| [[JDatabaseMySQLi-getTableFields|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getTableFields|getTableFields]] |  |
-| [[JDatabaseMySQLi-getTableList|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getTableList|getTableList]] |  |
-| [[JDatabaseMySQLi-getVersion|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-getVersion|getVersion]] |  |
-| [[JDatabaseMySQLi-hasUTF|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-hasUTF|hasUTF]] | Determines UTF support |
-| [[JDatabaseMySQLi-insertid|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-insertid|insertid]] |  |
-| [[JDatabaseMySQLi-insertObject|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-insertObject|insertObject]] | Inserts a row into a table based on an objects properties |
-| [[JDatabaseMySQLi-loadAssoc|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadAssoc|loadAssoc]] | Fetch a result row as an associative array<p>return array</p> |
-| [[JDatabaseMySQLi-loadAssocList|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadAssocList|loadAssocList]] | Load a assoc list of database rows |
-| [[JDatabaseMySQLi-loadObject|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadObject|loadObject]] | This global function loads the first row of a query into an object<p>return object</p> |
-| [[JDatabaseMySQLi-loadObjectList|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadObjectList|loadObjectList]] | Load a list of database objects |
-| [[JDatabaseMySQLi-loadResult|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadResult|loadResult]] | This method loads the first field of the first row returned by the query. |
-| [[JDatabaseMySQLi-loadResultArray|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadResultArray|loadResultArray]] | Load an array of single field results into an array |
-| [[JDatabaseMySQLi-loadRow|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadRow|loadRow]] |  |
-| [[JDatabaseMySQLi-loadRowList|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-loadRowList|loadRowList]] | Load a list of database rows (numeric column indexing) |
-| [[JDatabaseMySQLi-query|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-query|query]] | Execute the query |
-| [[JDatabaseMySQLi-queryBatch|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-queryBatch|queryBatch]] | Execute a batch query |
-| [[JDatabaseMySQLi-select|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-select|select]] | Select a database for use |
-| [[JDatabaseMySQLi-setUTF|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-setUTF|setUTF]] | Custom settings for UTF support |
-| [[JDatabaseMySQLi-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-test|test]] | Test to see if the MySQLi connector is available |
-| [[JDatabaseMySQLi-updateObject|{{http://dev.joomla.org/media/images/Method.png }}]] [[JDatabaseMySQLi-updateObject|updateObject]] | Document::db_updateObject() |
+| [[JDatabaseMySQLi-__construct|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-__construct|__construct]] | Database object constructor |
+| [[JDatabaseMySQLi-__destruct|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-__destruct|__destruct]] | Database object destructor |
+| [[JDatabaseMySQLi-connected|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-connected|connected]] | Determines if the connection to the server is active. |
+| [[JDatabaseMySQLi-explain|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-explain|explain]] | Diagnostic function |
+| [[JDatabaseMySQLi-getAffectedRows|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getAffectedRows|getAffectedRows]] |  |
+| [[JDatabaseMySQLi-getCollation|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getCollation|getCollation]] | Assumes database collation in use by sampling one text field in one table |
+| [[JDatabaseMySQLi-getEscaped|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getEscaped|getEscaped]] | Get a database escaped string |
+| [[JDatabaseMySQLi-getNumRows|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getNumRows|getNumRows]] |  |
+| [[JDatabaseMySQLi-getTableCreate|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getTableCreate|getTableCreate]] |  |
+| [[JDatabaseMySQLi-getTableFields|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getTableFields|getTableFields]] |  |
+| [[JDatabaseMySQLi-getTableList|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getTableList|getTableList]] |  |
+| [[JDatabaseMySQLi-getVersion|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-getVersion|getVersion]] |  |
+| [[JDatabaseMySQLi-hasUTF|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-hasUTF|hasUTF]] | Determines UTF support |
+| [[JDatabaseMySQLi-insertid|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-insertid|insertid]] |  |
+| [[JDatabaseMySQLi-insertObject|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-insertObject|insertObject]] | Inserts a row into a table based on an objects properties |
+| [[JDatabaseMySQLi-loadAssoc|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadAssoc|loadAssoc]] | Fetch a result row as an associative array<p>return array</p> |
+| [[JDatabaseMySQLi-loadAssocList|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadAssocList|loadAssocList]] | Load a assoc list of database rows |
+| [[JDatabaseMySQLi-loadObject|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadObject|loadObject]] | This global function loads the first row of a query into an object<p>return object</p> |
+| [[JDatabaseMySQLi-loadObjectList|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadObjectList|loadObjectList]] | Load a list of database objects |
+| [[JDatabaseMySQLi-loadResult|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadResult|loadResult]] | This method loads the first field of the first row returned by the query. |
+| [[JDatabaseMySQLi-loadResultArray|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadResultArray|loadResultArray]] | Load an array of single field results into an array |
+| [[JDatabaseMySQLi-loadRow|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadRow|loadRow]] |  |
+| [[JDatabaseMySQLi-loadRowList|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-loadRowList|loadRowList]] | Load a list of database rows (numeric column indexing) |
+| [[JDatabaseMySQLi-query|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-query|query]] | Execute the query |
+| [[JDatabaseMySQLi-queryBatch|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-queryBatch|queryBatch]] | Execute a batch query |
+| [[JDatabaseMySQLi-select|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-select|select]] | Select a database for use |
+| [[JDatabaseMySQLi-setUTF|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-setUTF|setUTF]] | Custom settings for UTF support |
+| [[JDatabaseMySQLi-test|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-test|test]] | Test to see if the MySQLi connector is available |
+| [[JDatabaseMySQLi-updateObject|{{references:Method.png?nolink}}]] [[JDatabaseMySQLi-updateObject|updateObject]] | Document::db_updateObject() |
 
 ----
 

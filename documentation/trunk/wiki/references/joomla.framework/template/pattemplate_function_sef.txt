@@ -4,7 +4,7 @@
 JTemplate SEF function
 ===== Methods =====
 ^ Method ^ Description ^
-| [[patTemplate_Function_Sef-call|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Function_Sef-call|call]] | call the function |
+| [[patTemplate_Function_Sef-call|{{references:Method.png?nolink}}]] [[patTemplate_Function_Sef-call|call]] | call the function |
 
 ----
 

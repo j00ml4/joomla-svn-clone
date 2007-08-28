@@ -5,9 +5,9 @@ JDocumentRenderer is an abstract base class for renderers.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRenderer-__construct|{{references:Method.png }}]] [[JDocumentRenderer-__construct|__construct]] | Constructor for JDocumentRenderer. |
-| [[JDocumentRenderer-getContentType|{{references:Method.png }}]] [[JDocumentRenderer-getContentType|getContentType]] | Returns the content type of the renderer. |
-| [[JDocumentRenderer-render|{{references:Method.png }}]] [[JDocumentRenderer-render|render]] | Renders a script and returns the result as a string. |
+| [[JDocumentRenderer-__construct|{{references:Method.png?nolink}}]] [[JDocumentRenderer-__construct|__construct]] | Constructor for JDocumentRenderer. |
+| [[JDocumentRenderer-getContentType|{{references:Method.png?nolink}}]] [[JDocumentRenderer-getContentType|getContentType]] | Returns the content type of the renderer. |
+| [[JDocumentRenderer-render|{{references:Method.png?nolink}}]] [[JDocumentRenderer-render|render]] | Renders a script and returns the result as a string. |
 
 ----
 

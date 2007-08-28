@@ -5,13 +5,13 @@ Utility drawing class for creating HTML select lists.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTMLSelect-booleanlist|{{references:Method.png }}]] [[JHTMLSelect-booleanlist|booleanlist]] | Generates a yes/no radio list. |
-| [[JHTMLSelect-genericlist|{{references:Method.png }}]] [[JHTMLSelect-genericlist|genericlist]] | Generates an HTML select list. |
-| [[JHTMLSelect-integerlist|{{references:Method.png }}]] [[JHTMLSelect-integerlist|integerlist]] | Generates a select list of integers. |
-| [[JHTMLSelect-option|{{references:Method.png }}]] [[JHTMLSelect-option|option]] | Generates an option group object for an HTML select list. |
-| [[JHTMLSelect-option|{{references:Method.png }}]] [[JHTMLSelect-option|option]] | Generates an option value object for an HTML select list. |
-| [[JHTMLSelect-options|{{references:Method.png }}]] [[JHTMLSelect-options|options]] | Generates the option tags for an HTML select list. |
-| [[JHTMLSelect-radiolist|{{references:Method.png }}]] [[JHTMLSelect-radiolist|radiolist]] | Generates an HTML radio list. |
+| [[JHTMLSelect-booleanlist|{{references:Method.png?nolink}}]] [[JHTMLSelect-booleanlist|booleanlist]] | Generates a yes/no radio list. |
+| [[JHTMLSelect-genericlist|{{references:Method.png?nolink}}]] [[JHTMLSelect-genericlist|genericlist]] | Generates an HTML select list. |
+| [[JHTMLSelect-integerlist|{{references:Method.png?nolink}}]] [[JHTMLSelect-integerlist|integerlist]] | Generates a select list of integers. |
+| [[JHTMLSelect-option|{{references:Method.png?nolink}}]] [[JHTMLSelect-option|option]] | Generates an option group object for an HTML select list. |
+| [[JHTMLSelect-option|{{references:Method.png?nolink}}]] [[JHTMLSelect-option|option]] | Generates an option value object for an HTML select list. |
+| [[JHTMLSelect-options|{{references:Method.png?nolink}}]] [[JHTMLSelect-options|options]] | Generates the option tags for an HTML select list. |
+| [[JHTMLSelect-radiolist|{{references:Method.png?nolink}}]] [[JHTMLSelect-radiolist|radiolist]] | Generates an HTML radio list. |
 
 ----
 

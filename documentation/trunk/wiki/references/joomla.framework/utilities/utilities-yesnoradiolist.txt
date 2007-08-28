@@ -1,6 +1,6 @@
 ====== yesnoRadioList ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{references:Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->yesnoRadioList]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{references:Class.png?nolink}}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->yesnoRadioList]] | never | Work in progress |
 
 A convenient method of building an HTML radio list consisting of just a 'yes' button and a 'no' button. The words for 'yes' and 'no' are taken from the current language settings.  The HTML field will return a '0' is the user selects 'no' or '1' if the user selects 'yes'.
 

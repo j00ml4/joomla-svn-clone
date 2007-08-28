@@ -4,15 +4,15 @@
 JSimpleCrypt is a very simple encryption algorithm for encyrpting/decrypting strings
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JSimpleCrypt-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-__construct|__construct]] | Object Constructor takes an optional key to be used for encryption/decryption.  If no key is given then the  secret word from the configuration object is used. |
-| [[JSimpleCrypt-decrypt|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-decrypt|decrypt]] |  |
-| [[JSimpleCrypt-encrypt|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-encrypt|encrypt]] |  |
-| [[JSimpleCrypt-_charToInt|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_charToInt|_charToInt]] |  |
-| [[JSimpleCrypt-_hexToInt|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_hexToInt|_hexToInt]] |  |
-| [[JSimpleCrypt-_hexToIntArray|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_hexToIntArray|_hexToIntArray]] |  |
-| [[JSimpleCrypt-_intToHex|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_intToHex|_intToHex]] |  |
-| [[JSimpleCrypt-_xorCharString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_xorCharString|_xorCharString]] |  |
-| [[JSimpleCrypt-_xorString|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSimpleCrypt-_xorString|_xorString]] |  |
+| [[JSimpleCrypt-__construct|{{references:Method.png?nolink}}]] [[JSimpleCrypt-__construct|__construct]] | Object Constructor takes an optional key to be used for encryption/decryption.  If no key is given then the  secret word from the configuration object is used. |
+| [[JSimpleCrypt-decrypt|{{references:Method.png?nolink}}]] [[JSimpleCrypt-decrypt|decrypt]] |  |
+| [[JSimpleCrypt-encrypt|{{references:Method.png?nolink}}]] [[JSimpleCrypt-encrypt|encrypt]] |  |
+| [[JSimpleCrypt-_charToInt|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_charToInt|_charToInt]] |  |
+| [[JSimpleCrypt-_hexToInt|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_hexToInt|_hexToInt]] |  |
+| [[JSimpleCrypt-_hexToIntArray|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_hexToIntArray|_hexToIntArray]] |  |
+| [[JSimpleCrypt-_intToHex|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_intToHex|_intToHex]] |  |
+| [[JSimpleCrypt-_xorCharString|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_xorCharString|_xorCharString]] |  |
+| [[JSimpleCrypt-_xorString|{{references:Method.png?nolink}}]] [[JSimpleCrypt-_xorString|_xorString]] |  |
 
 ----
 

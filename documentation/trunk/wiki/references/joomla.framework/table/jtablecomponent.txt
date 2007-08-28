@@ -4,10 +4,10 @@
 Component table
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableComponent-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-__construct|__construct]] |  |
-| [[JTableComponent-bind|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-bind|bind]] | Overloaded bind function |
-| [[JTableComponent-check|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-check|check]] | Validate and filter fields |
-| [[JTableComponent-loadByOption|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableComponent-loadByOption|loadByOption]] | Loads a data row by option |
+| [[JTableComponent-__construct|{{references:Method.png?nolink}}]] [[JTableComponent-__construct|__construct]] |  |
+| [[JTableComponent-bind|{{references:Method.png?nolink}}]] [[JTableComponent-bind|bind]] | Overloaded bind function |
+| [[JTableComponent-check|{{references:Method.png?nolink}}]] [[JTableComponent-check|check]] | Validate and filter fields |
+| [[JTableComponent-loadByOption|{{references:Method.png?nolink}}]] [[JTableComponent-loadByOption|loadByOption]] | Loads a data row by option |
 
 ----
 

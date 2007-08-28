@@ -1,6 +1,6 @@
 ====== CloseButton ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{references:Class.png }}[[Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Database/mosHTML.html|mosHTML->CloseButton]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] | {{references:Class.png?nolink}}[[Utilities|Utilities]] | [[http://api.joomla.org/Joomla-Framework/Database/mosHTML.html|mosHTML->CloseButton]] | never | Work in progress |
 
 Adds columns to the list of columns to select from.
 

@@ -1,6 +1,6 @@
 ====== useCookies ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{references:package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->useCookies]] |
+| [[|{{references:package.png?nolink}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png?nolink}}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->useCookies]] |
 
 If optional parameter is specified it indicates  whether the module will use cookies to store  the session id on the client side<p>It returns the previous value of this property</p>
 ===== Syntax =====

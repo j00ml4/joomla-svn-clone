@@ -4,10 +4,10 @@
 ZIP format adapter for the JArchive class<p>The ZIP compression code is partially based on code from:    Eric Mueller &lt;eric@themepark.com&gt;    http://www.zend.com/codex.php?id=535&amp;single=1</p><p>Deins125 &lt;webmaster@atlant.ru&gt;    http://www.zend.com/codex.php?id=470&amp;single=1</p><p>The ZIP compression date code is partially based on code from    Peter Listiak &lt;mlady@users.sourceforge.net&gt;</p><p>This class is inspired from and draws heavily in code and concept from the Compress package of  The Horde Project &lt;http://www.horde.org&gt;</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JArchiveZip-checkZipData|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveZip-checkZipData|checkZipData]] | Checks to see if the data is a valid ZIP file. |
-| [[JArchiveZip-create|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveZip-create|create]] | Create a ZIP compressed file from an array of file data. |
-| [[JArchiveZip-extract|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveZip-extract|extract]] | Extract a ZIP compressed file to a given path |
-| [[JArchiveZip-hasNativeSupport|{{http://dev.joomla.org/media/images/Method.png }}]] [[JArchiveZip-hasNativeSupport|hasNativeSupport]] | Method to determine if the server has native zip support for faster handling |
+| [[JArchiveZip-checkZipData|{{references:Method.png?nolink}}]] [[JArchiveZip-checkZipData|checkZipData]] | Checks to see if the data is a valid ZIP file. |
+| [[JArchiveZip-create|{{references:Method.png?nolink}}]] [[JArchiveZip-create|create]] | Create a ZIP compressed file from an array of file data. |
+| [[JArchiveZip-extract|{{references:Method.png?nolink}}]] [[JArchiveZip-extract|extract]] | Extract a ZIP compressed file to a given path |
+| [[JArchiveZip-hasNativeSupport|{{references:Method.png?nolink}}]] [[JArchiveZip-hasNativeSupport|hasNativeSupport]] | Method to determine if the server has native zip support for faster handling |
 
 ----
 

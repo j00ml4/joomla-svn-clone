@@ -5,12 +5,12 @@ JDocumentPDF class, provides an easy interface to parse and display a PDF docume
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentPDF-__construct|{{references:Method.png }}]] [[JDocumentPDF-__construct|__construct]] | JDocumentPDF class constructor. |
-| [[JDocumentPDF-getHeader|{{references:Method.png }}]] [[JDocumentPDF-getHeader|getHeader]] | Returns the document header string. |
-| [[JDocumentPDF-getName|{{references:Method.png }}]] [[JDocumentPDF-getName|getName]] | Returns the document name. |
-| [[JDocumentPDF-render|{{references:Method.png }}]] [[JDocumentPDF-render|render]] | Renders the document. |
-| [[JDocumentPDF-setHeader|{{references:Method.png }}]] [[JDocumentPDF-setHeader|setHeader]] | Sets the document header string. |
-| [[JDocumentPDF-setName|{{references:Method.png }}]] [[JDocumentPDF-setName|setName]] | Sets the document name. |
+| [[JDocumentPDF-__construct|{{references:Method.png?nolink}}]] [[JDocumentPDF-__construct|__construct]] | JDocumentPDF class constructor. |
+| [[JDocumentPDF-getHeader|{{references:Method.png?nolink}}]] [[JDocumentPDF-getHeader|getHeader]] | Returns the document header string. |
+| [[JDocumentPDF-getName|{{references:Method.png?nolink}}]] [[JDocumentPDF-getName|getName]] | Returns the document name. |
+| [[JDocumentPDF-render|{{references:Method.png?nolink}}]] [[JDocumentPDF-render|render]] | Renders the document. |
+| [[JDocumentPDF-setHeader|{{references:Method.png?nolink}}]] [[JDocumentPDF-setHeader|setHeader]] | Sets the document header string. |
+| [[JDocumentPDF-setName|{{references:Method.png?nolink}}]] [[JDocumentPDF-setName|setName]] | Sets the document name. |
 
 ----
 

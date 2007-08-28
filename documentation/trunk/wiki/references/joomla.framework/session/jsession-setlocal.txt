@@ -1,6 +1,6 @@
 ====== setLocal ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{references:package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->setLocal]] |
+| [[|{{references:package.png?nolink}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png?nolink}}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->setLocal]] |
 
 Sets local variable of a script.<p>Two scripts can have local variables with the same names.</p>
 ===== Syntax =====

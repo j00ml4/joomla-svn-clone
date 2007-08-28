@@ -1,6 +1,6 @@
 ====== PrintIcon ====== 
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->PrintIcon ]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png?nolink}}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->PrintIcon ]] | never | Work in progress |
 
 Displays a standard print icon. The alternative text for the icon will be taken from the current language settings. This function has been deprecated in the conversion to patTemplate in Joomla! 1.5.  It is no longer used by the Joomla! Core but is being kept for compatibility with third-party software.
 

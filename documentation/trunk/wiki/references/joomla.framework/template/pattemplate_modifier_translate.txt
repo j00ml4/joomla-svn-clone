@@ -4,7 +4,7 @@
 JTemplate SEF modifier
 ===== Methods =====
 ^ Method ^ Description ^
-| [[patTemplate_Modifier_Translate-modify|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Modifier_Translate-modify|modify]] | modify the value |
+| [[patTemplate_Modifier_Translate-modify|{{references:Method.png?nolink}}]] [[patTemplate_Modifier_Translate-modify|modify]] | modify the value |
 
 ----
 
