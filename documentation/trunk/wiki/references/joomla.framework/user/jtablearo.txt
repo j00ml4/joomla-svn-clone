@@ -4,7 +4,7 @@
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JTableARO-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JTableARO-__construct|__construct]] |  |
+| [[JTableARO-__construct|{{references:Method.png?nolink}}]] [[JTableARO-__construct|__construct]] |  |
 
 ----
 

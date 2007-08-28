@@ -4,13 +4,13 @@
 Memcache cache storage handler
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCacheStorageMemcache-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-__construct|__construct]] | Constructor |
-| [[JCacheStorageMemcache-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
-| [[JCacheStorageMemcache-gc|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-gc|gc]] | Garbage collect expired cache data |
-| [[JCacheStorageMemcache-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-get|get]] | Get cached data from memcache by id and group |
-| [[JCacheStorageMemcache-remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-remove|remove]] | Remove a cached data entry by id and group |
-| [[JCacheStorageMemcache-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-store|store]] | Store the data to memcache by id and group |
-| [[JCacheStorageMemcache-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageMemcache-test|test]] | Test to see if the cache storage is available. |
+| [[JCacheStorageMemcache-__construct|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-__construct|__construct]] | Constructor |
+| [[JCacheStorageMemcache-clean|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
+| [[JCacheStorageMemcache-gc|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-gc|gc]] | Garbage collect expired cache data |
+| [[JCacheStorageMemcache-get|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-get|get]] | Get cached data from memcache by id and group |
+| [[JCacheStorageMemcache-remove|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-remove|remove]] | Remove a cached data entry by id and group |
+| [[JCacheStorageMemcache-store|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-store|store]] | Store the data to memcache by id and group |
+| [[JCacheStorageMemcache-test|{{references:Method.png?nolink}}]] [[JCacheStorageMemcache-test|test]] | Test to see if the cache storage is available. |
 
 ----
 

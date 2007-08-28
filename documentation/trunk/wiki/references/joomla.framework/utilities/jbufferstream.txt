@@ -4,12 +4,12 @@
 Generic Buffer stream handler<p>This class provides a generic buffer stream.  It can be used to store/retrieve/manipulate string buffers with the standard  PHP filesystem I/O methods.</p>
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JBufferStream-stream_eof|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_eof|stream_eof]] |  |
-| [[JBufferStream-stream_open|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_open|stream_open]] |  |
-| [[JBufferStream-stream_read|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_read|stream_read]] |  |
-| [[JBufferStream-stream_seek|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_seek|stream_seek]] |  |
-| [[JBufferStream-stream_tell|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_tell|stream_tell]] |  |
-| [[JBufferStream-stream_write|{{http://dev.joomla.org/media/images/Method.png }}]] [[JBufferStream-stream_write|stream_write]] |  |
+| [[JBufferStream-stream_eof|{{references:Method.png?nolink}}]] [[JBufferStream-stream_eof|stream_eof]] |  |
+| [[JBufferStream-stream_open|{{references:Method.png?nolink}}]] [[JBufferStream-stream_open|stream_open]] |  |
+| [[JBufferStream-stream_read|{{references:Method.png?nolink}}]] [[JBufferStream-stream_read|stream_read]] |  |
+| [[JBufferStream-stream_seek|{{references:Method.png?nolink}}]] [[JBufferStream-stream_seek|stream_seek]] |  |
+| [[JBufferStream-stream_tell|{{references:Method.png?nolink}}]] [[JBufferStream-stream_tell|stream_tell]] |  |
+| [[JBufferStream-stream_write|{{references:Method.png?nolink}}]] [[JBufferStream-stream_write|stream_write]] |  |
 
 ----
 

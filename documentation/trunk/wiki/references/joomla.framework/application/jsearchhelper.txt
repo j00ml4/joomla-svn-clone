@@ -5,8 +5,8 @@ JSearchHelper contains utility functions that can be used to perform various act
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JSearchHelper-getPluginParams|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-getPluginParams|getPluginParams]] | Retrieves a [[references:joomla.framework:parameter:jparameter|JParameter]] object containing the parameters for the plugin. |
-| [[JSearchHelper-inArea|{{http://dev.joomla.org/media/images/Method.png }}]] [[JSearchHelper-inArea|inArea]] | Determines whether or not the the specified areas intersect with the areas that the search plugin handles. |
+| [[JSearchHelper-getPluginParams|{{references:Method.png?nolink}}]] [[JSearchHelper-getPluginParams|getPluginParams]] | Retrieves a [[references:joomla.framework:parameter:jparameter|JParameter]] object containing the parameters for the plugin. |
+| [[JSearchHelper-inArea|{{references:Method.png?nolink}}]] [[JSearchHelper-inArea|inArea]] | Determines whether or not the the specified areas intersect with the areas that the search plugin handles. |
 
 ----
 

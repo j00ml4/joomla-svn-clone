@@ -1,6 +1,6 @@
 ====== integerSelectList ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{references:Class.png }}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->integerSelectList ]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{references:Class.png?nolink}}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->integerSelectList ]] | never | Work in progress |
 
 This method builds a list of numbers from $start to $end with an increment of $inc. The optional $format argument allows you to apply a printf sytle format to the numbers.
 

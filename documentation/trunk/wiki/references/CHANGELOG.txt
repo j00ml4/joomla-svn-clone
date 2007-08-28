@@ -18,6 +18,8 @@ Legend:
 
 28.08.2007 René Serradeil
  ^	bulk update icons to use media {{reference:xx}} namespace
+ ^	dead http://dev.joomla.org/media/images/ => {{reference:xx}}
+ ^	*.png => *.png?nolink
 
 14.08.2007 René Serradeil
  ^	JApplication, deprecated methods

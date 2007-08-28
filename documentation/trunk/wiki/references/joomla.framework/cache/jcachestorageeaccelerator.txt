@@ -4,13 +4,13 @@
 eAccelerator cache storage handler
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCacheStorageEaccelerator-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-__construct|__construct]] | Constructor |
-| [[JCacheStorageEaccelerator-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
-| [[JCacheStorageEaccelerator-gc|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-gc|gc]] | Garbage collect expired cache data |
-| [[JCacheStorageEaccelerator-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-get|get]] | Get cached data from eAccelerator by id and group |
-| [[JCacheStorageEaccelerator-remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-remove|remove]] | Remove a cached data entry by id and group |
-| [[JCacheStorageEaccelerator-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-store|store]] | Store the data to eAccelerator by id and group |
-| [[JCacheStorageEaccelerator-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageEaccelerator-test|test]] | Test to see if the cache storage is available. |
+| [[JCacheStorageEaccelerator-__construct|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-__construct|__construct]] | Constructor |
+| [[JCacheStorageEaccelerator-clean|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
+| [[JCacheStorageEaccelerator-gc|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-gc|gc]] | Garbage collect expired cache data |
+| [[JCacheStorageEaccelerator-get|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-get|get]] | Get cached data from eAccelerator by id and group |
+| [[JCacheStorageEaccelerator-remove|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-remove|remove]] | Remove a cached data entry by id and group |
+| [[JCacheStorageEaccelerator-store|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-store|store]] | Store the data to eAccelerator by id and group |
+| [[JCacheStorageEaccelerator-test|{{references:Method.png?nolink}}]] [[JCacheStorageEaccelerator-test|test]] | Test to see if the cache storage is available. |
 
 ----
 

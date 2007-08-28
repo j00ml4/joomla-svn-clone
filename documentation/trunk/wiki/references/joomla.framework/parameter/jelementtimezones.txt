@@ -4,7 +4,7 @@
 Renders a timezones element
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JElementTimezones-fetchElement|{{http://dev.joomla.org/media/images/Method.png }}]] [[JElementTimezones-fetchElement|fetchElement]] |  |
+| [[JElementTimezones-fetchElement|{{references:Method.png?nolink}}]] [[JElementTimezones-fetchElement|fetchElement]] |  |
 
 ----
 

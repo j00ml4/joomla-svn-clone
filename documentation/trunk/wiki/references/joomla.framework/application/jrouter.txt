@@ -4,16 +4,16 @@
 Class to create and parse routes
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRouter-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-__construct|__construct]] | Class constructor |
-| [[JRouter-build|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-build|build]] | Function to convert an internal URI to a route |
-| [[JRouter-getInstance|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-getInstance|getInstance]] | Returns a reference to the global Router object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $router = &JRouter::getInstance();</pre></p> |
-| [[JRouter-parse|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-parse|parse]] | Route a request |
-| [[JRouter-_buildApplicationRoute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_buildApplicationRoute|_buildApplicationRoute]] | Build the application specific route |
-| [[JRouter-_buildComponentRoute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_buildComponentRoute|_buildComponentRoute]] | Build the component specific route |
-| [[JRouter-_decodeSegments|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_decodeSegments|_decodeSegments]] |  |
-| [[JRouter-_encodeSegments|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_encodeSegments|_encodeSegments]] |  |
-| [[JRouter-_parseApplicationRoute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_parseApplicationRoute|_parseApplicationRoute]] | Parse a application specific route |
-| [[JRouter-_parseComponentRoute|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRouter-_parseComponentRoute|_parseComponentRoute]] | Parse a component specific route |
+| [[JRouter-__construct|{{references:Method.png?nolink}}]] [[JRouter-__construct|__construct]] | Class constructor |
+| [[JRouter-build|{{references:Method.png?nolink}}]] [[JRouter-build|build]] | Function to convert an internal URI to a route |
+| [[JRouter-getInstance|{{references:Method.png?nolink}}]] [[JRouter-getInstance|getInstance]] | Returns a reference to the global Router object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $router = &JRouter::getInstance();</pre></p> |
+| [[JRouter-parse|{{references:Method.png?nolink}}]] [[JRouter-parse|parse]] | Route a request |
+| [[JRouter-_buildApplicationRoute|{{references:Method.png?nolink}}]] [[JRouter-_buildApplicationRoute|_buildApplicationRoute]] | Build the application specific route |
+| [[JRouter-_buildComponentRoute|{{references:Method.png?nolink}}]] [[JRouter-_buildComponentRoute|_buildComponentRoute]] | Build the component specific route |
+| [[JRouter-_decodeSegments|{{references:Method.png?nolink}}]] [[JRouter-_decodeSegments|_decodeSegments]] |  |
+| [[JRouter-_encodeSegments|{{references:Method.png?nolink}}]] [[JRouter-_encodeSegments|_encodeSegments]] |  |
+| [[JRouter-_parseApplicationRoute|{{references:Method.png?nolink}}]] [[JRouter-_parseApplicationRoute|_parseApplicationRoute]] | Parse a application specific route |
+| [[JRouter-_parseComponentRoute|{{references:Method.png?nolink}}]] [[JRouter-_parseComponentRoute|_parseComponentRoute]] | Parse a component specific route |
 
 ----
 

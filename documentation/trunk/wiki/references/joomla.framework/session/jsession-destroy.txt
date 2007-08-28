@@ -1,6 +1,6 @@
 ====== destroy ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{references:package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->destroy]] |
+| [[|{{references:package.png?nolink}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png?nolink}}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->destroy]] |
 
 Frees all session variables and destroys all data  registered to a session<p>This method resets the $_SESSION variable and  destroys all of the data associated  with the current session in its storage (file or DB).  It forces new session to be started after this method  is called. It does not unset the session cookie.</p>
 ===== Syntax =====

@@ -1,6 +1,6 @@
 ====== selectList ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->selectList]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png?nolink}}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->selectList]] | never | Work in progress |
 
 Builds an HTML <select> form field with <options> built from an array of values.  Both single Item selects and multiple item selects are supported.
 

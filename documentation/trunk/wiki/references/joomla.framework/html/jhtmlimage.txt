@@ -5,8 +5,8 @@ HTML utility drawing class for creating HTML image tags.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTMLImage-administrator|{{references:Method.png }}]] [[JHTMLImage-administrator|administrator]] | Generates image tags for images contained in the administrator application directory. |
-| [[JHTMLImage-site|{{references:Method.png }}]] [[JHTMLImage-site|site]] | Generates image tags for images contained in the site application directory. |
+| [[JHTMLImage-administrator|{{references:Method.png?nolink}}]] [[JHTMLImage-administrator|administrator]] | Generates image tags for images contained in the administrator application directory. |
+| [[JHTMLImage-site|{{references:Method.png?nolink}}]] [[JHTMLImage-site|site]] | Generates image tags for images contained in the site application directory. |
 
 ----
 

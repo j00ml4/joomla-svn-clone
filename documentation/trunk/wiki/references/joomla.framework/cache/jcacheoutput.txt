@@ -4,8 +4,8 @@
 Joomla! Cache output type object
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCacheOutput-end|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheOutput-end|end]] | Stop the cache buffer and store the cached data |
-| [[JCacheOutput-start|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheOutput-start|start]] | Start the cache |
+| [[JCacheOutput-end|{{references:Method.png?nolink}}]] [[JCacheOutput-end|end]] | Stop the cache buffer and store the cached data |
+| [[JCacheOutput-start|{{references:Method.png?nolink}}]] [[JCacheOutput-start|start]] | Start the cache |
 
 ----
 

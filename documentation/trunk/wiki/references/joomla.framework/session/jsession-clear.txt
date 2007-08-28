@@ -1,6 +1,6 @@
 ====== clear ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^
-| [[|{{references:package.png }}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png }}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->clear]] |
+| [[|{{references:package.png?nolink}}]] [[references:Joomla.Framework|Joomla.Framework]] | [[|{{references:package.png?nolink}}]] [[references:joomla.framework#Environment|Environment]] | [[JSession|JSession]] | [[http://api.joomla.org/Joomla.Framework/Environment/JSession.html|JSession->clear]] |
 
 Free all session variables
 ===== Syntax =====

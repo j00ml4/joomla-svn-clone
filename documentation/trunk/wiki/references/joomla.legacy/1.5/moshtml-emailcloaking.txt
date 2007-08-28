@@ -1,6 +1,6 @@
 ====== emailCloaking======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{references:Class.png }}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->emailCloaking]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] |{{references:Class.png?nolink}}[[mosHTML]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML->emailCloaking]] | never | Work in progress |
 
 A simple method for cloaking email addresses. Returns JavaScript that replaces the email address with a mailto link with the address cloaked.
 

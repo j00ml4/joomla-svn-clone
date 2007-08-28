@@ -4,7 +4,7 @@
 Joomla! Cache view type object
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCacheView-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheView-get|get]] | Get the cached view data |
+| [[JCacheView-get|{{references:Method.png?nolink}}]] [[JCacheView-get|get]] | Get the cached view data |
 
 ----
 

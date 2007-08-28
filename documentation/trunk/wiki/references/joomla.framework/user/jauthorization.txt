@@ -4,19 +4,19 @@
 Class that handles all access authorization
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JAuthorization-JAuthorization|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-JAuthorization|JAuthorization]] | Constructor |
-| [[JAuthorization-acl_check|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-acl_check|acl_check]] | Wraps the actual acl_query() function.<p>It is simply here to return TRUE/FALSE accordingly.</p> |
-| [[JAuthorization-addACL|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-addACL|addACL]] | This is a temporary function to allow 3PD's to add basic ACL checks for their  modules and components.  NOTE: this information will be compiled in the db  in future versions |
-| [[JAuthorization-getAroGroup|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-getAroGroup|getAroGroup]] |  |
-| [[JAuthorization-getCheckMode|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-getCheckMode|getCheckMode]] | Gets the chec mode |
-| [[JAuthorization-get_group_children_tree|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-get_group_children_tree|get_group_children_tree]] |  |
-| [[JAuthorization-get_group_name|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-get_group_name|get_group_name]] | Gets the 'name' of a group |
-| [[JAuthorization-get_group_parents|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-get_group_parents|get_group_parents]] |  |
-| [[JAuthorization-is_group_child_of|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-is_group_child_of|is_group_child_of]] |  |
-| [[JAuthorization-setCheckMode|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-setCheckMode|setCheckMode]] | Sets the check mode.<p>Only used if the full implementation of the phpGACL library is installed and configured</p> |
-| [[JAuthorization-_getBelow|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-_getBelow|_getBelow]] |  |
-| [[JAuthorization-_getGroup|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-_getGroup|_getGroup]] |  |
-| [[JAuthorization-_mos_add_acl|{{http://dev.joomla.org/media/images/Method.png }}]] [[JAuthorization-_mos_add_acl|_mos_add_acl]] | Deprecated, use JAuthorisation::addACL() instead. |
+| [[JAuthorization-JAuthorization|{{references:Method.png?nolink}}]] [[JAuthorization-JAuthorization|JAuthorization]] | Constructor |
+| [[JAuthorization-acl_check|{{references:Method.png?nolink}}]] [[JAuthorization-acl_check|acl_check]] | Wraps the actual acl_query() function.<p>It is simply here to return TRUE/FALSE accordingly.</p> |
+| [[JAuthorization-addACL|{{references:Method.png?nolink}}]] [[JAuthorization-addACL|addACL]] | This is a temporary function to allow 3PD's to add basic ACL checks for their  modules and components.  NOTE: this information will be compiled in the db  in future versions |
+| [[JAuthorization-getAroGroup|{{references:Method.png?nolink}}]] [[JAuthorization-getAroGroup|getAroGroup]] |  |
+| [[JAuthorization-getCheckMode|{{references:Method.png?nolink}}]] [[JAuthorization-getCheckMode|getCheckMode]] | Gets the chec mode |
+| [[JAuthorization-get_group_children_tree|{{references:Method.png?nolink}}]] [[JAuthorization-get_group_children_tree|get_group_children_tree]] |  |
+| [[JAuthorization-get_group_name|{{references:Method.png?nolink}}]] [[JAuthorization-get_group_name|get_group_name]] | Gets the 'name' of a group |
+| [[JAuthorization-get_group_parents|{{references:Method.png?nolink}}]] [[JAuthorization-get_group_parents|get_group_parents]] |  |
+| [[JAuthorization-is_group_child_of|{{references:Method.png?nolink}}]] [[JAuthorization-is_group_child_of|is_group_child_of]] |  |
+| [[JAuthorization-setCheckMode|{{references:Method.png?nolink}}]] [[JAuthorization-setCheckMode|setCheckMode]] | Sets the check mode.<p>Only used if the full implementation of the phpGACL library is installed and configured</p> |
+| [[JAuthorization-_getBelow|{{references:Method.png?nolink}}]] [[JAuthorization-_getBelow|_getBelow]] |  |
+| [[JAuthorization-_getGroup|{{references:Method.png?nolink}}]] [[JAuthorization-_getGroup|_getGroup]] |  |
+| [[JAuthorization-_mos_add_acl|{{references:Method.png?nolink}}]] [[JAuthorization-_mos_add_acl|_mos_add_acl]] | Deprecated, use JAuthorisation::addACL() instead. |
 
 ----
 

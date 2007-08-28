@@ -11,10 +11,10 @@ The functionality of mosMambotHandler was broken down into distinct classes to s
 
 ===== Methods =====
 ^ Method ^ Joomla! 1.5 ^ Description ^
-| {{references:Method.png }} **call** | [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]]::[[references:joomla.framework:Application:JEventDispatcher-trigger|trigger()]] | Call the handler function associated with a specific event. |
-| {{references:Method.png }} **loadBot** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::getPlugin|getPlugin()]] | Loads a plugin (mambot) file |
-| {{references:Method.png }} **loadBotGroup** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::importPlugin|importPlugin()]] | Loads all the plugin (mambot) files for a particular group |
-| {{references:Method.png }} **registerFunction** | [[references:joomla.framework:JApplication-registerEvent|JApplication]]::[[references:joomla.framework:JApplication-registerEvent|registerEvent()]] | Registers a handler to a particular event group |
+| {{references:Method.png?nolink}} **call** | [[references:joomla.framework:Application:JEventDispatcher|JEventDispatcher]]::[[references:joomla.framework:Application:JEventDispatcher-trigger|trigger()]] | Call the handler function associated with a specific event. |
+| {{references:Method.png?nolink}} **loadBot** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::getPlugin|getPlugin()]] | Loads a plugin (mambot) file |
+| {{references:Method.png?nolink}} **loadBotGroup** | [[references:joomla.framework:JPluginHelper|JPluginHelper]]::[[references:joomla.framework:JPluginHelper::importPlugin|importPlugin()]] | Loads all the plugin (mambot) files for a particular group |
+| {{references:Method.png?nolink}} **registerFunction** | [[references:joomla.framework:JApplication-registerEvent|JApplication]]::[[references:joomla.framework:JApplication-registerEvent|registerEvent()]] | Registers a handler to a particular event group |
 
 ----
 

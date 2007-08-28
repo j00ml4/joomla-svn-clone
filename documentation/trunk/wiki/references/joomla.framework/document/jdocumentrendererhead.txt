@@ -5,8 +5,8 @@ Renderer class to render the document head of an HTML document.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererHead-fetchHead|{{references:Method.png }}]] [[JDocumentRendererHead-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
-| [[JDocumentRendererHead-render|{{references:Method.png }}]] [[JDocumentRendererHead-render|render]] | Renders the document head and returns the results as a string. |
+| [[JDocumentRendererHead-fetchHead|{{references:Method.png?nolink}}]] [[JDocumentRendererHead-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
+| [[JDocumentRendererHead-render|{{references:Method.png?nolink}}]] [[JDocumentRendererHead-render|render]] | Renders the document head and returns the results as a string. |
 
 ----
 

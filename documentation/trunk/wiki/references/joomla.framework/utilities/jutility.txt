@@ -4,13 +4,13 @@
 JUtility is a utility functions class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JUtility-dump|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-dump|dump]] | Method to dump the structure of a variable for debugging purposes |
-| [[JUtility-getHash|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-getHash|getHash]] | Provides a secure hash based on a seed |
-| [[JUtility-getToken|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-getToken|getToken]] | Method to determine a hash for anti-spoofing variable names |
-| [[JUtility-isWinOS|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-isWinOS|isWinOS]] | Method to determine if the host OS is  Windows |
-| [[JUtility-parseAttributes|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-parseAttributes|parseAttributes]] | Method to extract key/value pairs out of a string with xml style attributes |
-| [[JUtility-sendAdminMail|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-sendAdminMail|sendAdminMail]] | Sends mail to administrator for approval of a user submission |
-| [[JUtility-sendMail|{{http://dev.joomla.org/media/images/Method.png }}]] [[JUtility-sendMail|sendMail]] | Mail function (uses phpMailer) |
+| [[JUtility-dump|{{references:Method.png?nolink}}]] [[JUtility-dump|dump]] | Method to dump the structure of a variable for debugging purposes |
+| [[JUtility-getHash|{{references:Method.png?nolink}}]] [[JUtility-getHash|getHash]] | Provides a secure hash based on a seed |
+| [[JUtility-getToken|{{references:Method.png?nolink}}]] [[JUtility-getToken|getToken]] | Method to determine a hash for anti-spoofing variable names |
+| [[JUtility-isWinOS|{{references:Method.png?nolink}}]] [[JUtility-isWinOS|isWinOS]] | Method to determine if the host OS is  Windows |
+| [[JUtility-parseAttributes|{{references:Method.png?nolink}}]] [[JUtility-parseAttributes|parseAttributes]] | Method to extract key/value pairs out of a string with xml style attributes |
+| [[JUtility-sendAdminMail|{{references:Method.png?nolink}}]] [[JUtility-sendAdminMail|sendAdminMail]] | Sends mail to administrator for approval of a user submission |
+| [[JUtility-sendMail|{{references:Method.png?nolink}}]] [[JUtility-sendMail|sendMail]] | Mail function (uses phpMailer) |
 
 ----
 

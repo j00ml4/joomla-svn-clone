@@ -4,7 +4,7 @@
 JTemplate Translate function
 ===== Methods =====
 ^ Method ^ Description ^
-| [[patTemplate_Function_Translate-call|{{http://dev.joomla.org/media/images/Method.png }}]] [[patTemplate_Function_Translate-call|call]] | call the function |
+| [[patTemplate_Function_Translate-call|{{references:Method.png?nolink}}]] [[patTemplate_Function_Translate-call|call]] | call the function |
 
 ----
 

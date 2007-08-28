@@ -4,13 +4,13 @@
 File cache storage handler
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JCacheStorageFile-__construct|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-__construct|__construct]] | Constructor |
-| [[JCacheStorageFile-clean|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
-| [[JCacheStorageFile-gc|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-gc|gc]] | Garbage collect expired cache data |
-| [[JCacheStorageFile-get|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-get|get]] | Get cached data from a file by id and group |
-| [[JCacheStorageFile-remove|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-remove|remove]] | Remove a cached data file by id and group |
-| [[JCacheStorageFile-store|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-store|store]] | Store the data to a file by id and group |
-| [[JCacheStorageFile-test|{{http://dev.joomla.org/media/images/Method.png }}]] [[JCacheStorageFile-test|test]] | Test to see if the cache storage is available. |
+| [[JCacheStorageFile-__construct|{{references:Method.png?nolink}}]] [[JCacheStorageFile-__construct|__construct]] | Constructor |
+| [[JCacheStorageFile-clean|{{references:Method.png?nolink}}]] [[JCacheStorageFile-clean|clean]] | Clean cache for a group given a mode.<p>group mode		: cleans all cache in the group  notgroup mode	: cleans all cache not in the group</p> |
+| [[JCacheStorageFile-gc|{{references:Method.png?nolink}}]] [[JCacheStorageFile-gc|gc]] | Garbage collect expired cache data |
+| [[JCacheStorageFile-get|{{references:Method.png?nolink}}]] [[JCacheStorageFile-get|get]] | Get cached data from a file by id and group |
+| [[JCacheStorageFile-remove|{{references:Method.png?nolink}}]] [[JCacheStorageFile-remove|remove]] | Remove a cached data file by id and group |
+| [[JCacheStorageFile-store|{{references:Method.png?nolink}}]] [[JCacheStorageFile-store|store]] | Store the data to a file by id and group |
+| [[JCacheStorageFile-test|{{references:Method.png?nolink}}]] [[JCacheStorageFile-test|test]] | Test to see if the cache storage is available. |
 
 ----
 

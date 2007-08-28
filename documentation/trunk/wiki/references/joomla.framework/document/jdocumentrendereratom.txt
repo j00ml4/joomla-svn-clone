@@ -9,7 +9,7 @@ This class uses the mime type 'application/atom+xml'.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererAtom-render|{{references:Method.png }}]] [[JDocumentRendererAtom-render|render]] | Renders the feed. |
+| [[JDocumentRendererAtom-render|{{references:Method.png?nolink}}]] [[JDocumentRendererAtom-render|render]] | Renders the feed. |
 
 ----
 

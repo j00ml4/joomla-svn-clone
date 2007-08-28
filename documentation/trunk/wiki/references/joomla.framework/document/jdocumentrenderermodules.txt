@@ -5,7 +5,7 @@ Class to render modules for the HTML document.  This class will render a group o
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererModules-render|{{references:Method.png }}]] [[JDocumentRendererModules-render|render]] | Renders module scripts for the specified position and returns the results as a string. |
+| [[JDocumentRendererModules-render|{{references:Method.png?nolink}}]] [[JDocumentRendererModules-render|render]] | Renders module scripts for the specified position and returns the results as a string. |
 
 ----
 

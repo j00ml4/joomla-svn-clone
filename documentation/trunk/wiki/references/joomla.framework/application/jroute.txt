@@ -4,7 +4,7 @@
 Route handling class
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JRoute-_|{{http://dev.joomla.org/media/images/Method.png }}]] [[JRoute-_|_]] | Translates an internal Joomla URL to a humanly readible URL. |
+| [[JRoute-_|{{references:Method.png?nolink}}]] [[JRoute-_|_]] | Translates an internal Joomla URL to a humanly readible URL. |
 
 ----
 

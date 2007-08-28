@@ -1,6 +1,6 @@
 ====== monthSelectList ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png }}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->monthSelectList ]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#Utilities|Utilities]] |{{references:Class.png?nolink}}[[mosHTML|mosHTML]] | [[http://api.joomla.org/Joomla-Framework/Utilities/mosHTML.html|mosHTML->monthSelectList ]] | never | Work in progress |
 
 A convenient method for producing a list of months in an HTML form field using the current language settings.
 

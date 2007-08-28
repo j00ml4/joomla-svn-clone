@@ -5,9 +5,9 @@ Drawing utility class for building HTML elements for menus and related lists.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTMLMenu-linkoptions|{{references:Method.png }}]] [[JHTMLMenu-linkoptions|linkoptions]] | Builds the multiple select list options for menu links/pages. |
-| [[JHTMLMenu-ordering|{{references:Method.png }}]] [[JHTMLMenu-ordering|ordering]] | Builds the select list for menu ordering. |
-| [[JHTMLMenu-treerecurse|{{references:Method.png }}]] [[JHTMLMenu-treerecurse|treerecurse]] | Creates an indented tree structured list of menu items. |
+| [[JHTMLMenu-linkoptions|{{references:Method.png?nolink}}]] [[JHTMLMenu-linkoptions|linkoptions]] | Builds the multiple select list options for menu links/pages. |
+| [[JHTMLMenu-ordering|{{references:Method.png?nolink}}]] [[JHTMLMenu-ordering|ordering]] | Builds the select list for menu ordering. |
+| [[JHTMLMenu-treerecurse|{{references:Method.png?nolink}}]] [[JHTMLMenu-treerecurse|treerecurse]] | Creates an indented tree structured list of menu items. |
 
 ----
 
