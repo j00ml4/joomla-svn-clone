@@ -5,13 +5,13 @@ JArrayHelper is an array utility class for performing various operations to work
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-fromObject|fromObject]] | Maps an object to an array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-getColumn|getColumn]] | Extracts a column from an array of arrays or objects. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-getValue|getValue]] | Returns a value from a named array or a specified default. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-sortObjects|sortObjects]] | Sorts an array of objects on a given field. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toInteger|toInteger]] | Converts an array to integer values. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toObject|toObject]] | Maps an array to an stdClass object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JArrayHelper-toString|toString]] | Converts an associative array into HTML attribute format. |
+| {{references:Method.png?nolink}} [[JArrayHelper-fromObject|fromObject]] | Maps an object to an array. |
+| {{references:Method.png?nolink}} [[JArrayHelper-getColumn|getColumn]] | Extracts a column from an array of arrays or objects. |
+| {{references:Method.png?nolink}} [[JArrayHelper-getValue|getValue]] | Returns a value from a named array or a specified default. |
+| {{references:Method.png?nolink}} [[JArrayHelper-sortObjects|sortObjects]] | Sorts an array of objects on a given field. |
+| {{references:Method.png?nolink}} [[JArrayHelper-toInteger|toInteger]] | Converts an array to integer values. |
+| {{references:Method.png?nolink}} [[JArrayHelper-toObject|toObject]] | Maps an array to an stdClass object. |
+| {{references:Method.png?nolink}} [[JArrayHelper-toString|toString]] | Converts an associative array into HTML attribute format. |
 
 ----
 

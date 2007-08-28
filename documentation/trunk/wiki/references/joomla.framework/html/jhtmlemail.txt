@@ -5,7 +5,7 @@ JHTMLEmail is a utility class that provides functionality for displaying email a
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTMLEmail-cloak|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLEmail-cloak|cloak]] | Simple Javascript cloaking method. |
+| [[JHTMLEmail-cloak|{{references:Method.png }}]] [[JHTMLEmail-cloak|cloak]] | Simple Javascript cloaking method. |
 
 ----
 

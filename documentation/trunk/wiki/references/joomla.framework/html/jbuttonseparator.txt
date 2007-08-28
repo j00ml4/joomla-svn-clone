@@ -5,7 +5,7 @@ Renders a button separator. This is an implementation of the abstract [[JButton|
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButtonSeparator-render|render]] | Returns the HTML code for the button. |
+| {{references:Method.png?nolink}} [[JButtonSeparator-render|render]] | Returns the HTML code for the button. |
 
 ----
 

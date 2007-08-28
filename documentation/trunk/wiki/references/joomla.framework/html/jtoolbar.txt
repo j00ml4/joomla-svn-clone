@@ -5,15 +5,15 @@ The JToolBar class is used to create and render toolbars.  The administrator bac
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-__construct|__construct]] | Constructs the toolbar, and defines the JBUTTON_INCLUDE_PATH constant. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-addButtonDir|addButtonDir]] | Adds a directory where JToolBar should search for button types. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-appendButton|appendButton]] | Adds a button to the end of the toolbar. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-getIncludePath|getIncludePath]] | Returns the value of the include path. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-getInstance|getInstance]] | Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-loadButtonType|loadButtonType]] | Loads the class for the specified button type. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-prependButton|prependButton]] | Adds a button to the beginning of the toolbar. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-render|render]] | Renders the toolbar. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JToolBar-renderButton|renderButton]] | Renders a toolbar button. |
+| {{references:Method.png?nolink}} [[JToolBar-__construct|__construct]] | Constructs the toolbar, and defines the JBUTTON_INCLUDE_PATH constant. |
+| {{references:Method.png?nolink}} [[JToolBar-addButtonDir|addButtonDir]] | Adds a directory where JToolBar should search for button types. |
+| {{references:Method.png?nolink}} [[JToolBar-appendButton|appendButton]] | Adds a button to the end of the toolbar. |
+| {{references:Method.png?nolink}} [[JToolBar-getIncludePath|getIncludePath]] | Returns the value of the include path. |
+| {{references:Method.png?nolink}} [[JToolBar-getInstance|getInstance]] | Returns a reference to a global JToolBar object, only creating it if it  doesn't already exist. |
+| {{references:Method.png?nolink}} [[JToolBar-loadButtonType|loadButtonType]] | Loads the class for the specified button type. |
+| {{references:Method.png?nolink}} [[JToolBar-prependButton|prependButton]] | Adds a button to the beginning of the toolbar. |
+| {{references:Method.png?nolink}} [[JToolBar-render|render]] | Renders the toolbar. |
+| {{references:Method.png?nolink}} [[JToolBar-renderButton|renderButton]] | Renders a toolbar button. |
 
 ===== Examples =====
 A brief example showing the operation of the class:

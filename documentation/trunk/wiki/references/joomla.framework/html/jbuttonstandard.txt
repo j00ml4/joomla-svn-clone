@@ -6,8 +6,8 @@ Renders a standard button. This is an implementation of the abstract [[JButton|J
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButtonStandard-fetchButton|fetchButton]] | Returns the HTML code for the button. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JButtonStandard-fetchId|fetchId]] | Gets the button's CSS ID. |
+| {{references:Method.png?nolink}} [[JButtonStandard-fetchButton|fetchButton]] | Returns the HTML code for the button. |
+| {{references:Method.png?nolink}} [[JButtonStandard-fetchId|fetchId]] | Gets the button's CSS ID. |
 
 ----
 

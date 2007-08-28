@@ -5,7 +5,7 @@ Class to render system messages into the HTML document.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererMessage-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererMessage-render|render]] | Renders the message stack and returns the results as a string. |
+| [[JDocumentRendererMessage-render|{{references:Method.png }}]] [[JDocumentRendererMessage-render|render]] | Renders the message stack and returns the results as a string. |
 
 ----
 

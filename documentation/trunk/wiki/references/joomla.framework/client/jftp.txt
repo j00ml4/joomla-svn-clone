@@ -5,28 +5,28 @@ This is an FTP client class. It is used, among other things, to enable proper op
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-chdir|chdir]] | Method to change the current working directory on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-chmod|chmod]] | Method to change mode for a path on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-connect|connect]] | Method to connect to a FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-create|create]] | Method to create an empty file on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-delete|delete]] | Method to delete a path [file/folder] on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-get|get]] | Method to get a file from the FTP server and save it to a local file. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-getInstance|getInstance]] | Returns a reference to the global FTP connector object, only creating it  if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-listDir|listDir]] | Method to list the contents of a directory on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-login|login]] | Method to login to a server once connected. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-mkdir|mkdir]] | Method to create a directory on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-nameList|nameList]] | Method to list the file/folder names of the contents of a directory on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-pwd|pwd]] | Method to retrieve the current working directory on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-quit|quit]] | Method to quit and close the connection. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-read|read]] | Method to read a file from the FTP server's contents into a buffer. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-reinit|reinit]] | Method to reinitialize the server, i.e. need to login again. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-rename|rename]] | Method to rename a file/folder on the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-restart|restart]] | Method to restart data transfer at a given byte. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-setOptions|setOptions]] | Set client options. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-store|store]] | Method to store a file to the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-syst|syst]] | Method to system string from the FTP server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFTP-write|write]] | Method to write a string to the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JFTP-chdir|chdir]] | Method to change the current working directory on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-chmod|chmod]] | Method to change mode for a path on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-connect|connect]] | Method to connect to a FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-create|create]] | Method to create an empty file on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-delete|delete]] | Method to delete a path [file/folder] on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-get|get]] | Method to get a file from the FTP server and save it to a local file. |
+| {{references:Method.png?nolink}} [[JFTP-getInstance|getInstance]] | Returns a reference to the global FTP connector object, only creating it  if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JFTP-listDir|listDir]] | Method to list the contents of a directory on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-login|login]] | Method to login to a server once connected. |
+| {{references:Method.png?nolink}} [[JFTP-mkdir|mkdir]] | Method to create a directory on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-nameList|nameList]] | Method to list the file/folder names of the contents of a directory on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-pwd|pwd]] | Method to retrieve the current working directory on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-quit|quit]] | Method to quit and close the connection. |
+| {{references:Method.png?nolink}} [[JFTP-read|read]] | Method to read a file from the FTP server's contents into a buffer. |
+| {{references:Method.png?nolink}} [[JFTP-reinit|reinit]] | Method to reinitialize the server, i.e. need to login again. |
+| {{references:Method.png?nolink}} [[JFTP-rename|rename]] | Method to rename a file/folder on the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-restart|restart]] | Method to restart data transfer at a given byte. |
+| {{references:Method.png?nolink}} [[JFTP-setOptions|setOptions]] | Set client options. |
+| {{references:Method.png?nolink}} [[JFTP-store|store]] | Method to store a file to the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-syst|syst]] | Method to system string from the FTP server. |
+| {{references:Method.png?nolink}} [[JFTP-write|write]] | Method to write a string to the FTP server. |
 
 ----
 

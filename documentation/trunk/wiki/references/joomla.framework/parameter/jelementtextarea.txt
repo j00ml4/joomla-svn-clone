@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a text area e
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementTextarea-fetchElement|fetchElement]] | Renders the HTML code for a textarea. |
+| {{references:Method.png?nolink}} [[JElementTextarea-fetchElement|fetchElement]] | Renders the HTML code for a textarea. |
 
 ----
 

@@ -1,6 +1,6 @@
 ====== mosAbstractTasker ======
 ^ API ^ Package ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Legacy|Joomla.Legacy]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:Joomla.Legacy#|Legacy]] | never | Work in progress |
+| {{references:package.png?nolink}} [[references:Joomla.Legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:Joomla.Legacy#|Legacy]] | never | Work in progress |
 
 This class contains **deprecated** legacy code and is scheduled to be removed.  It is provided only for backward compatibility.
 

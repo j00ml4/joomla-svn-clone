@@ -7,11 +7,11 @@ JPaneSliders are based on the mooFX library which Joomla! provides built-in supp
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneSliders-__construct|__construct]] | Constructs the JPaneSliders class, adding the necessary CSS and JS to the current document. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneSliders-endPane|endPane]] | Outputs the necessary HTML code to end a slider pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneSliders-endPanel|endPanel]] | Outputs the necessary HTML code to end a slider panel. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneSliders-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start a slider pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneSliders-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a slider panel with the title text and start the panel. |
+| {{references:Method.png?nolink}} [[JPaneSliders-__construct|__construct]] | Constructs the JPaneSliders class, adding the necessary CSS and JS to the current document. |
+| {{references:Method.png?nolink}} [[JPaneSliders-endPane|endPane]] | Outputs the necessary HTML code to end a slider pane. |
+| {{references:Method.png?nolink}} [[JPaneSliders-endPanel|endPanel]] | Outputs the necessary HTML code to end a slider panel. |
+| {{references:Method.png?nolink}} [[JPaneSliders-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start a slider pane. |
+| {{references:Method.png?nolink}} [[JPaneSliders-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a slider panel with the title text and start the panel. |
 
 ----
 

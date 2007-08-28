@@ -8,11 +8,11 @@ The Observer design pattern provides the possibility of having observable object
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JObservable-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-attach|attach]] | Attach an Observer object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-detach|detach]] | Detach an Observer object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-getState|getState]] | Get the state of the Observable object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JObservable-notify|notify]] | [[JObserver-update.txt|Update]] each attached Observer and return an array of their return values. |
+| {{references:Constructor.png?nolink}} [[JObservable-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JObservable-attach|attach]] | Attach an Observer object. |
+| {{references:Method.png?nolink}} [[JObservable-detach|detach]] | Detach an Observer object. |
+| {{references:Method.png?nolink}} [[JObservable-getState|getState]] | Get the state of the Observable object. |
+| {{references:Method.png?nolink}} [[JObservable-notify|notify]] | [[JObserver-update.txt|Update]] each attached Observer and return an array of their return values. |
 
 ----
 

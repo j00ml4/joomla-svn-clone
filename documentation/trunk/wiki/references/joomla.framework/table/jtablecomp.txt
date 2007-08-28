@@ -7,10 +7,10 @@ The components table is used to manage the components that are installed in the 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JTableComponent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-bind|bind]] | overloaded bind method that provides parameter handling. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-check|check]] | verifies that the current data is structurally sound. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JTableComponent-loadByOption|loadByOption]] | loads a data row using the specified option. |
+| {{references:Constructor.png?nolink}} [[JTableComponent-__construct|__construct]] | calls the parent constructor to attach a JDatabase object to itself and to define its table name and primary key. |
+| {{references:Method.png?nolink}} [[JTableComponent-bind|bind]] | overloaded bind method that provides parameter handling. |
+| {{references:Method.png?nolink}} [[JTableComponent-check|check]] | verifies that the current data is structurally sound. |
+| {{references:Method.png?nolink}} [[JTableComponent-loadByOption|loadByOption]] | loads a data row using the specified option. |
 
 ===== Properties =====
 ^ Property ^ Description ^

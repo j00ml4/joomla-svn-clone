@@ -5,8 +5,8 @@ The JInstallerLanguage class is an extension of the abstract JInstaller class wh
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerLanguage-install|install]] | Custom install method for language packs. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method for language packs. |
+| {{references:Method.png?nolink}} [[JInstallerLanguage-install|install]] | Custom install method for language packs. |
+| {{references:Method.png?nolink}} [[JInstallerLanguage-uninstall|uninstall]] | Custom uninstall method for language packs. |
 
 ----
 

@@ -8,11 +8,11 @@ JPaneTabs are based on the mooFX library which Joomla! provides built-in support
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneTabs-__construct|__construct]] | Constructs the JPaneTabs class, adding the necessary CSS and JS to the current document. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneTabs-endPane|endPane]] | Outputs the necessary HTML code to end a tab pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneTabs-endPanel|endPanel]] | Outputs the necessary HTML code to end a tab panel. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneTabs-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start a tab pane. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPaneTabs-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a tab panel with the title text and start the panel. |
+| {{references:Method.png?nolink}} [[JPaneTabs-__construct|__construct]] | Constructs the JPaneTabs class, adding the necessary CSS and JS to the current document. |
+| {{references:Method.png?nolink}} [[JPaneTabs-endPane|endPane]] | Outputs the necessary HTML code to end a tab pane. |
+| {{references:Method.png?nolink}} [[JPaneTabs-endPanel|endPanel]] | Outputs the necessary HTML code to end a tab panel. |
+| {{references:Method.png?nolink}} [[JPaneTabs-startPane|startPane]] | Outputs the necessary HTML code and JavaScript to start a tab pane. |
+| {{references:Method.png?nolink}} [[JPaneTabs-startPanel|startPanel]] | Outputs the necessary HTML code and JavaScript to create a tab panel with the title text and start the panel. |
 
 ----
 

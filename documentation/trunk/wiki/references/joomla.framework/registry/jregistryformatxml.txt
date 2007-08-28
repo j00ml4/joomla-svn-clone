@@ -5,8 +5,8 @@ This is an implementation of the JRegistryFormat interface. This class provides 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatXML-objectToString|objectToString]] | Converts an object into an XML formatted string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatXML-stringToObject|stringToObject]] | Converts an XML formatted string into an object. |
+| {{references:Method.png?nolink}} [[JRegistryFormatXML-objectToString|objectToString]] | Converts an object into an XML formatted string. |
+| {{references:Method.png?nolink}} [[JRegistryFormatXML-stringToObject|stringToObject]] | Converts an XML formatted string into an object. |
 
 ----
 

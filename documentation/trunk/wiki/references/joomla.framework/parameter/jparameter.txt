@@ -6,19 +6,19 @@ The JParameter class is an extension of the JRegistry class that is used to rend
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JParameter-__construct|__construct]] | Constructs the object by loading the specified data and setup file (if given). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-addParameterDir|addParameterDir]] | Adds a directory where JParameter should search for element types. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-def|def]] | Sets a default value if not alreay assigned. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-get|get]] | Gets a value. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-getIncludePath|getIncludePath]] | Gets the include path. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-getParam|getParam]] | Renders a parameter. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-getParams|getParams]] | Render all parameters. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-loadElement|loadElement]] | Loads an element type. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-loadSetupFile|loadSetupFile]] | Loads an xml setup file and parses it. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-render|render]] | Renders the parameters. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-renderToArray|renderToArray]] | Renders all the parameters to an array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-set|set]] | Sets a value. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JParameter-setXML|setXML]] | Sets the XML object from custom xml files. |
+| {{references:Constructor.png?nolink}} [[JParameter-__construct|__construct]] | Constructs the object by loading the specified data and setup file (if given). |
+| {{references:Method.png?nolink}} [[JParameter-addParameterDir|addParameterDir]] | Adds a directory where JParameter should search for element types. |
+| {{references:Method.png?nolink}} [[JParameter-def|def]] | Sets a default value if not alreay assigned. |
+| {{references:Method.png?nolink}} [[JParameter-get|get]] | Gets a value. |
+| {{references:Method.png?nolink}} [[JParameter-getIncludePath|getIncludePath]] | Gets the include path. |
+| {{references:Method.png?nolink}} [[JParameter-getParam|getParam]] | Renders a parameter. |
+| {{references:Method.png?nolink}} [[JParameter-getParams|getParams]] | Render all parameters. |
+| {{references:Method.png?nolink}} [[JParameter-loadElement|loadElement]] | Loads an element type. |
+| {{references:Method.png?nolink}} [[JParameter-loadSetupFile|loadSetupFile]] | Loads an xml setup file and parses it. |
+| {{references:Method.png?nolink}} [[JParameter-render|render]] | Renders the parameters. |
+| {{references:Method.png?nolink}} [[JParameter-renderToArray|renderToArray]] | Renders all the parameters to an array. |
+| {{references:Method.png?nolink}} [[JParameter-set|set]] | Sets a value. |
+| {{references:Method.png?nolink}} [[JParameter-setXML|setXML]] | Sets the XML object from custom xml files. |
 
 ----
 

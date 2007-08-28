@@ -1,22 +1,22 @@
 ====== JUser [Review] ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser]] |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser]] |
 
 User class.  Handles all application interaction with a user
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JUser-__construct|__construct]] | Constructor activating the default information of the language |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-authorize|authorize]] | Method to check JUser object authorization against an access control  object and optionally an access extension object |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-defParam|defParam]] | Method to set a default parameter if it does not exist |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-get|get]] | Overridden get method to get properties from the user table |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-getError|getError]] | Method to get JUser error message |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-getInstance|getInstance]] | Returns a reference to the global User object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $user = JUser::getInstance($id);</pre></p> |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-getParam|getParam]] | Method to get a parameter value |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-getParameters|getParameters]] | Method to get the user parameters |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-set|set]] | Overridden set method to pass properties on to the user table |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-setLastVisit|setLastVisit]] | Pass through method to the table for setting the last visit date |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-setParam|setParam]] | Method to set a parameter |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JUser-setParameters|setParameters]] | Method to set the user parameters |
+| {{references:Constructor.png?nolink}} [[JUser-__construct|__construct]] | Constructor activating the default information of the language |
+| {{references:Method.png?nolink}} [[JUser-authorize|authorize]] | Method to check JUser object authorization against an access control  object and optionally an access extension object |
+| {{references:Method.png?nolink}} [[JUser-defParam|defParam]] | Method to set a default parameter if it does not exist |
+| {{references:Method.png?nolink}} [[JUser-get|get]] | Overridden get method to get properties from the user table |
+| {{references:Method.png?nolink}} [[JUser-getError|getError]] | Method to get JUser error message |
+| {{references:Method.png?nolink}} [[JUser-getInstance|getInstance]] | Returns a reference to the global User object, only creating it if it  doesn't already exist.<p>This method must be invoked as:  		<pre>  $user = JUser::getInstance($id);</pre></p> |
+| {{references:Method.png?nolink}} [[JUser-getParam|getParam]] | Method to get a parameter value |
+| {{references:Method.png?nolink}} [[JUser-getParameters|getParameters]] | Method to get the user parameters |
+| {{references:Method.png?nolink}} [[JUser-set|set]] | Overridden set method to pass properties on to the user table |
+| {{references:Method.png?nolink}} [[JUser-setLastVisit|setLastVisit]] | Pass through method to the table for setting the last visit date |
+| {{references:Method.png?nolink}} [[JUser-setParam|setParam]] | Method to set a parameter |
+| {{references:Method.png?nolink}} [[JUser-setParameters|setParameters]] | Method to set the user parameters |
 
 ----
 

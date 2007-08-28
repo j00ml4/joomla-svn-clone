@@ -5,11 +5,11 @@ The JElement class is an abstract parameter class. The child classes are used to
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement-fetchElement|fetchElement]] | Fetches a rendered element. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement-fetchTooltip|fetchTooltip]] | Fetches a rendered tool tip. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement-getName|getName]] | Gets the element name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElement-render|render]] | Renders the element. |
+| {{references:Method.png?nolink}} [[JElement-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JElement-fetchElement|fetchElement]] | Fetches a rendered element. |
+| {{references:Method.png?nolink}} [[JElement-fetchTooltip|fetchTooltip]] | Fetches a rendered tool tip. |
+| {{references:Method.png?nolink}} [[JElement-getName|getName]] | Gets the element name. |
+| {{references:Method.png?nolink}} [[JElement-render|render]] | Renders the element. |
 
 ----
 

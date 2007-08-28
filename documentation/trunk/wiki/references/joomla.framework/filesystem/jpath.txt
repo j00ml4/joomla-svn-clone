@@ -5,12 +5,12 @@ This is a path handling class. It provides various path related utility function
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-canChmod|canChmod]] | Checks if a path's permissions can be changed. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-check|check]] | Checks for snooping outside of the file system root. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-clean|clean]] | Strips additional / or \ in a path name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-getPermissions|getPermissions]] | Get the permissions of the file or folder at a given path. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-isOwner|isOwner]] | Method to determine if the current script owns a given path. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPath-setPermissions|setPermissions]] | Changes permissions on files and directories recursively to given permissions. |
+| {{references:Method.png?nolink}} [[JPath-canChmod|canChmod]] | Checks if a path's permissions can be changed. |
+| {{references:Method.png?nolink}} [[JPath-check|check]] | Checks for snooping outside of the file system root. |
+| {{references:Method.png?nolink}} [[JPath-clean|clean]] | Strips additional / or \ in a path name. |
+| {{references:Method.png?nolink}} [[JPath-getPermissions|getPermissions]] | Get the permissions of the file or folder at a given path. |
+| {{references:Method.png?nolink}} [[JPath-isOwner|isOwner]] | Method to determine if the current script owns a given path. |
+| {{references:Method.png?nolink}} [[JPath-setPermissions|setPermissions]] | Changes permissions on files and directories recursively to given permissions. |
 
 ----
 

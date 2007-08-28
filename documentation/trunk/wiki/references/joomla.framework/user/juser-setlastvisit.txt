@@ -1,6 +1,6 @@
 ====== setLastVisit ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->setLastVisit]] |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->setLastVisit]] |
 
 Pass through method to the table for setting the last visit date
 ===== Syntax =====

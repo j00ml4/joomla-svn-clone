@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a helpsite el
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementHelpsites-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available help sites. |
+| {{references:Method.png?nolink}} [[JElementHelpsites-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available help sites. |
 
 ----
 

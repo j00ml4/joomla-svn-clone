@@ -5,8 +5,8 @@ This is an implementation of the JRegistryFormat interface. This class provides 
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a PHP class string. NOTE: Only one depth level is supported. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method (this format does not support the conversion from a string into an object. |
+| {{references:Method.png?nolink}} [[JRegistryFormatPHP-objectToString|objectToString]] | Converts an object into a PHP class string. NOTE: Only one depth level is supported. |
+| {{references:Method.png?nolink}} [[JRegistryFormatPHP-stringToObject|stringToObject]] | Placeholder method (this format does not support the conversion from a string into an object. |
 
 ----
 

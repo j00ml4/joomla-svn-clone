@@ -5,18 +5,18 @@ This is a mail handling class that extends the PHPMailer library that is include
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JMail-JMail|JMail]] | Constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-addAttachment|addAttachment]] | Add file attachments to the email. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-addBCC|addBCC]] | Add blind carbon copy recipients to the email. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-addCC|addCC]] | Add carbon copy recipients to the email. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-addRecipient|addRecipient]] |Add recipients to the email. | 
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-addReplyTo|addReplyTo]] |Add Reply to e-mail address(es) to the e-mail. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-getInstance|getInstance]] |Returns a reference to a global e-mail object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-setBody|setBody]] |Set the E-Mail body. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-setSender|setSender]] |Set the E-Mail sender. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-setSubject|setSubject]] |Set the E-Mail subject. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-useSendmail|useSendmail]] |Use sendmail for sending the e-mail. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JMail-useSMTP|useSMTP]] |Use SMTP for sending the e-mail. |
+| {{references:Constructor.png?nolink}} [[JMail-JMail|JMail]] | Constructor. |
+| {{references:Method.png?nolink}} [[JMail-addAttachment|addAttachment]] | Add file attachments to the email. |
+| {{references:Method.png?nolink}} [[JMail-addBCC|addBCC]] | Add blind carbon copy recipients to the email. |
+| {{references:Method.png?nolink}} [[JMail-addCC|addCC]] | Add carbon copy recipients to the email. |
+| {{references:Method.png?nolink}} [[JMail-addRecipient|addRecipient]] |Add recipients to the email. | 
+| {{references:Method.png?nolink}} [[JMail-addReplyTo|addReplyTo]] |Add Reply to e-mail address(es) to the e-mail. |
+| {{references:Method.png?nolink}} [[JMail-getInstance|getInstance]] |Returns a reference to a global e-mail object. |
+| {{references:Method.png?nolink}} [[JMail-setBody|setBody]] |Set the E-Mail body. |
+| {{references:Method.png?nolink}} [[JMail-setSender|setSender]] |Set the E-Mail sender. |
+| {{references:Method.png?nolink}} [[JMail-setSubject|setSubject]] |Set the E-Mail subject. |
+| {{references:Method.png?nolink}} [[JMail-useSendmail|useSendmail]] |Use sendmail for sending the e-mail. |
+| {{references:Method.png?nolink}} [[JMail-useSMTP|useSMTP]] |Use SMTP for sending the e-mail. |
 
 ----
 

@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render a section ele
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementSection-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available content sections. |
+| {{references:Method.png?nolink}} [[JElementSection-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available content sections. |
 
 ----
 

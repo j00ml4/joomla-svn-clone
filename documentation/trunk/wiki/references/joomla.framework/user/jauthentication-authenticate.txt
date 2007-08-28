@@ -1,6 +1,6 @@
 ====== authenticate ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework/#User|User]] | {{http://api.joomla.org/media/images/Class.png?nolink}}[[JAuthentication|JAuthentication]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthentication.html|JAuthentication->authenticate]] | 19 September 2006 | Published |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | {{references:Class.png?nolink}}[[JAuthentication|JAuthentication]] | [[http://api.joomla.org/Joomla.Framework/Application/JAuthentication.html|JAuthentication->authenticate]] | 19 September 2006 | Published |
 
 Finds out if a set of login credentials are valid by asking all observing objects to run their respective authentication routines. If authentication is successful, the function returns the userid of the authenticated user. If it fails, the function returns false.
 

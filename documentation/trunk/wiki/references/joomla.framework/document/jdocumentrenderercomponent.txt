@@ -5,7 +5,7 @@ Component rendering class.  Returns the output untouched.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererComponent-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererComponent-render|render]] | Renders a component script and returns the results as a string. |
+| [[JDocumentRendererComponent-render|{{references:Method.png }}]] [[JDocumentRendererComponent-render|render]] | Renders a component script and returns the results as a string. |
 
 ----
 

@@ -5,12 +5,12 @@ JApplicationHelper is a static class that provides utility functions for working
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-getClientInfo|getClientInfo]] | Gets information on a specific client id.  This method will be useful in  future versions when applications are mapped in the database. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-getItemCount|getItemCount]] | Count the items in the menu for a certain type of menu item. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-getItemid|getItemid]] | Get the menu Itemid for a content item. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-getPath|getPath]] | Get a path for a specified file related to an extension. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-parseXMLInstallFile|parseXMLInstallFile]] | Parse an XML install file. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JApplicationHelper-parseXMLLangMetaFile|parseXMLLangMetaFile]] | Parse an XML language meta file. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-getClientInfo|getClientInfo]] | Gets information on a specific client id.  This method will be useful in  future versions when applications are mapped in the database. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-getItemCount|getItemCount]] | Count the items in the menu for a certain type of menu item. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-getItemid|getItemid]] | Get the menu Itemid for a content item. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-getPath|getPath]] | Get a path for a specified file related to an extension. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-parseXMLInstallFile|parseXMLInstallFile]] | Parse an XML install file. |
+| {{references:Method.png?nolink}} [[JApplicationHelper-parseXMLLangMetaFile|parseXMLLangMetaFile]] | Parse an XML language meta file. |
 
 ----
 

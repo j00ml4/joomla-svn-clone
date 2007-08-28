@@ -5,11 +5,11 @@ Class to maintain a pathway. Main example of use so far is the mod_breadcrumbs m
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JPathWay-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPathWay-addItem|addItem]] | Create and add an item to the pathway. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPathWay-getNamePathWay|getNamePathWay]] | Create and return an array of the pathway names.  Useful for things like SEF URLs. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPathWay-getPathWay|getPathWay]] | Return the JPathWay items array. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JPathWay-setItemName|setItemName]] | Set item name. |
+| {{references:Constructor.png?nolink}} [[JPathWay-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JPathWay-addItem|addItem]] | Create and add an item to the pathway. |
+| {{references:Method.png?nolink}} [[JPathWay-getNamePathWay|getNamePathWay]] | Create and return an array of the pathway names.  Useful for things like SEF URLs. |
+| {{references:Method.png?nolink}} [[JPathWay-getPathWay|getPathWay]] | Return the JPathWay items array. |
+| {{references:Method.png?nolink}} [[JPathWay-setItemName|setItemName]] | Set item name. |
 
 ----
 

@@ -5,24 +5,24 @@ Languages/translation handler class. This class provides an interface to install
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-__construct|__construct]] | Activites the default information for the language (metadata and locale). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-get|get]] | Gets a metadata language property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getBackwardLang|getBackwardLang]] | Gets backward compatible language name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getDebug|getDebug]] | Gets the Debug property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getInstance|getInstance]] | Returns a reference to a language object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getKnownLanguages|getKnownLanguages]] | Returns a list of known languages for an area. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getLanguagePath|getLanguagePath]] | Gets the path to a language. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getLocale|getLocale]] | Gets locale property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getMetadata|getMetadata]] | Returns an associative array holding the metadata. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getName|getName]] | Gets the official name of the language. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getPdfFontName|getPdfFontName]] | Gets the PDF font name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getTag|getTag]] | Gets the language tag (as defined in RFC 3066). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-getWinCP|getWinCP]] | Gets the Windows locale code page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-hasKey|hasKey]] | Determines if a key exists. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-isRTL|isRTL]] | Gets the RTL property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-load|load]] | Loads a single language file and appends the results to the existing strings. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-setDebug|setDebug]] | Sets the Debug property. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JLanguage-_getText|_getText]] | Translates a string. |
+| {{references:Method.png?nolink}} [[JLanguage-__construct|__construct]] | Activites the default information for the language (metadata and locale). |
+| {{references:Method.png?nolink}} [[JLanguage-get|get]] | Gets a metadata language property. |
+| {{references:Method.png?nolink}} [[JLanguage-getBackwardLang|getBackwardLang]] | Gets backward compatible language name. |
+| {{references:Method.png?nolink}} [[JLanguage-getDebug|getDebug]] | Gets the Debug property. |
+| {{references:Method.png?nolink}} [[JLanguage-getInstance|getInstance]] | Returns a reference to a language object. |
+| {{references:Method.png?nolink}} [[JLanguage-getKnownLanguages|getKnownLanguages]] | Returns a list of known languages for an area. |
+| {{references:Method.png?nolink}} [[JLanguage-getLanguagePath|getLanguagePath]] | Gets the path to a language. |
+| {{references:Method.png?nolink}} [[JLanguage-getLocale|getLocale]] | Gets locale property. |
+| {{references:Method.png?nolink}} [[JLanguage-getMetadata|getMetadata]] | Returns an associative array holding the metadata. |
+| {{references:Method.png?nolink}} [[JLanguage-getName|getName]] | Gets the official name of the language. |
+| {{references:Method.png?nolink}} [[JLanguage-getPdfFontName|getPdfFontName]] | Gets the PDF font name. |
+| {{references:Method.png?nolink}} [[JLanguage-getTag|getTag]] | Gets the language tag (as defined in RFC 3066). |
+| {{references:Method.png?nolink}} [[JLanguage-getWinCP|getWinCP]] | Gets the Windows locale code page. |
+| {{references:Method.png?nolink}} [[JLanguage-hasKey|hasKey]] | Determines if a key exists. |
+| {{references:Method.png?nolink}} [[JLanguage-isRTL|isRTL]] | Gets the RTL property. |
+| {{references:Method.png?nolink}} [[JLanguage-load|load]] | Loads a single language file and appends the results to the existing strings. |
+| {{references:Method.png?nolink}} [[JLanguage-setDebug|setDebug]] | Sets the Debug property. |
+| {{references:Method.png?nolink}} [[JLanguage-_getText|_getText]] | Translates a string. |
 
 ----
 

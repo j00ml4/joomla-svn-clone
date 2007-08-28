@@ -5,14 +5,14 @@ Error Handling Class. This class extends the patErrorManager class and is an int
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-getErrors|getErrors]] | Method for for retrieving the errors that are stored. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-hasErrors|hasErrors]] | Method to check if any errors have been storeds. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-isError|isError]] | Method for checking whether the return value of a pat application method is a patError object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-raise|raise]] | Creates a new patError object given the specified information. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-raiseError|raiseError]] | This is a wrapper for the [[#raise|raise]] method that passes E_ERROR as the error level. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-raiseNotice|raiseNotice]] | This is a wrapper for the [[#raise|raise]] method that passes E_NOTICE as the error level. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-raiseWarning|raiseWarning]] | This is a wrapper for the [[#raise|raise]] method that passes E_WARNING as the error level. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JError-setErrorHandling|setErrorHandling]] |This sets the way that patErrorManager will handle the different error levels. |
+| {{references:Method.png?nolink}} [[JError-getErrors|getErrors]] | Method for for retrieving the errors that are stored. |
+| {{references:Method.png?nolink}} [[JError-hasErrors|hasErrors]] | Method to check if any errors have been storeds. |
+| {{references:Method.png?nolink}} [[JError-isError|isError]] | Method for checking whether the return value of a pat application method is a patError object. |
+| {{references:Method.png?nolink}} [[JError-raise|raise]] | Creates a new patError object given the specified information. |
+| {{references:Method.png?nolink}} [[JError-raiseError|raiseError]] | This is a wrapper for the [[#raise|raise]] method that passes E_ERROR as the error level. |
+| {{references:Method.png?nolink}} [[JError-raiseNotice|raiseNotice]] | This is a wrapper for the [[#raise|raise]] method that passes E_NOTICE as the error level. |
+| {{references:Method.png?nolink}} [[JError-raiseWarning|raiseWarning]] | This is a wrapper for the [[#raise|raise]] method that passes E_WARNING as the error level. |
+| {{references:Method.png?nolink}} [[JError-setErrorHandling|setErrorHandling]] |This sets the way that patErrorManager will handle the different error levels. |
 
 ----
 

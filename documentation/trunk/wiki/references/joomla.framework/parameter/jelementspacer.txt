@@ -5,8 +5,8 @@ This class implements the JElement interface and is used to render a spacer elem
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementSpacer-fetchElement|fetchElement]] | Renders the HTML code for a spacer. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementSpacer-fetchTooltip|fetchTooltip]] | Renders the tooltip for the spacer. This method will always return '&nbsp;'. |
+| {{references:Method.png?nolink}} [[JElementSpacer-fetchElement|fetchElement]] | Renders the HTML code for a spacer. |
+| {{references:Method.png?nolink}} [[JElementSpacer-fetchTooltip|fetchTooltip]] | Renders the tooltip for the spacer. This method will always return '&nbsp;'. |
 
 ----
 

@@ -5,27 +5,27 @@ This is the Document class. It provides an easy interface to parse and display a
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JDocument-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addScript|addScript]] | Adds a linked script to the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-addStyleSheet|addStyleSheet]] | Adds a linked stylesheet to the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-display|display]] | Outputs the template to the browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-execRenderer|execRenderer]] | Execute a renderer. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-fetchBody|fetchBody]] | Return the document body. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-fetchHead|fetchHead]] | Return the document head. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-getCharset|getCharset]] | Returns the document charset encoding. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-getInstance|getInstance]] | Returns a reference to the global JDocument object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-getLang|getLang]] | Returns the document language. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-getTitle|getTitle]] | Return the title of the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-parse|parse]] | Parse a file and create an internal patTemplate object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setCharset|setCharset]] | Sets the document charset. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setLang|setLang]] | Sets the global document language declaration. Default is English. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setLineEnd|setLineEnd]] | Sets the line end style to Windows, Mac, Unix or a custom string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setTab|setTab]] | Sets the string used to indent HTML. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-setTitle|setTitle]] | Sets the title of the page. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocument-_addRenderer|_addRenderer]] | Adds a renderer to be called. |
+| {{references:Constructor.png?nolink}} [[JDocument-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JDocument-addScript|addScript]] | Adds a linked script to the page. |
+| {{references:Method.png?nolink}} [[JDocument-addScriptDeclaration|addScriptDeclaration]] | Adds a script to the page. |
+| {{references:Method.png?nolink}} [[JDocument-addStyleDeclaration|addStyleDeclaration]] | Adds a stylesheet declaration to the page. |
+| {{references:Method.png?nolink}} [[JDocument-addStyleSheet|addStyleSheet]] | Adds a linked stylesheet to the page. |
+| {{references:Method.png?nolink}} [[JDocument-display|display]] | Outputs the template to the browser. |
+| {{references:Method.png?nolink}} [[JDocument-execRenderer|execRenderer]] | Execute a renderer. |
+| {{references:Method.png?nolink}} [[JDocument-fetchBody|fetchBody]] | Return the document body. |
+| {{references:Method.png?nolink}} [[JDocument-fetchHead|fetchHead]] | Return the document head. |
+| {{references:Method.png?nolink}} [[JDocument-getCharset|getCharset]] | Returns the document charset encoding. |
+| {{references:Method.png?nolink}} [[JDocument-getInstance|getInstance]] | Returns a reference to the global JDocument object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JDocument-getLang|getLang]] | Returns the document language. |
+| {{references:Method.png?nolink}} [[JDocument-getTitle|getTitle]] | Return the title of the page. |
+| {{references:Method.png?nolink}} [[JDocument-parse|parse]] | Parse a file and create an internal patTemplate object. |
+| {{references:Method.png?nolink}} [[JDocument-setCharset|setCharset]] | Sets the document charset. |
+| {{references:Method.png?nolink}} [[JDocument-setLang|setLang]] | Sets the global document language declaration. Default is English. |
+| {{references:Method.png?nolink}} [[JDocument-setLineEnd|setLineEnd]] | Sets the line end style to Windows, Mac, Unix or a custom string. |
+| {{references:Method.png?nolink}} [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser. |
+| {{references:Method.png?nolink}} [[JDocument-setTab|setTab]] | Sets the string used to indent HTML. |
+| {{references:Method.png?nolink}} [[JDocument-setTitle|setTitle]] | Sets the title of the page. |
+| {{references:Method.png?nolink}} [[JDocument-_addRenderer|_addRenderer]] | Adds a renderer to be called. |
 
 ----
 

@@ -7,7 +7,7 @@ This class uses the mime type 'application/rss+xml'.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JDocumentRendererRSS-render|{{http://api.joomla.org/media/images/Method.png }}]] [[JDocumentRendererRSS-render|render]] | Renders the feed. |
+| [[JDocumentRendererRSS-render|{{references:Method.png }}]] [[JDocumentRendererRSS-render|render]] | Renders the feed. |
 
 ----
 

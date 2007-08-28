@@ -5,8 +5,8 @@ The JInstallerTemplate class is an extension of the abstract JInstaller class wh
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerTemplate-install|install]] | Custom install method for templates. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerTemplate-uninstall|uninstall]] | Custom uninstall method for templates. |
+| {{references:Method.png?nolink}} [[JInstallerTemplate-install|install]] | Custom install method for templates. |
+| {{references:Method.png?nolink}} [[JInstallerTemplate-uninstall|uninstall]] | Custom uninstall method for templates. |
 
 ----
 

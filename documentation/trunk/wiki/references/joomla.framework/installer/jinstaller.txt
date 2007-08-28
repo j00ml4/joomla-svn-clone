@@ -5,12 +5,12 @@ This is the abstract Joomla! base installer class. It provides various utilities
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-__construct|__construct]] | Constructor for the JInstaller class. Stores a reference to a database object. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-getInstance|getInstance]] | Returns a reference to the global Installer object, only creating it if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-install|install]] | Abstract install method. This method should be overridden in child classes. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-preInstallCheck|preInstallCheck]] | Prepare for installation: this method sets the installation directory, finds and checks the installation file and verifies the installation type. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-uninstall|uninstall]] | Abstract uninstall method. This method should be overridden in child classes. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstaller-update|update]] | Abstract update method. This method should be overridden in child classes. |
+| {{references:Method.png?nolink}} [[JInstaller-__construct|__construct]] | Constructor for the JInstaller class. Stores a reference to a database object. |
+| {{references:Method.png?nolink}} [[JInstaller-getInstance|getInstance]] | Returns a reference to the global Installer object, only creating it if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JInstaller-install|install]] | Abstract install method. This method should be overridden in child classes. |
+| {{references:Method.png?nolink}} [[JInstaller-preInstallCheck|preInstallCheck]] | Prepare for installation: this method sets the installation directory, finds and checks the installation file and verifies the installation type. |
+| {{references:Method.png?nolink}} [[JInstaller-uninstall|uninstall]] | Abstract uninstall method. This method should be overridden in child classes. |
+| {{references:Method.png?nolink}} [[JInstaller-update|update]] | Abstract update method. This method should be overridden in child classes. |
 
 ----
 

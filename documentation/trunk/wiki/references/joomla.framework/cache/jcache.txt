@@ -4,14 +4,14 @@
 This abstract class for caching handlers is an implementation of the [[http://pear.php.net/package/Cache_Lite/|Cache_Lite]] cache system.
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-JCache|JCache]] | This class constructor calls the [[JCache-__construct|__construct]] method. |
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JCache-__construct|__construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-cleanCache|cleanCache]] | Cleans the cache. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-generateId|generateId]] | Make a control key with the string containing data. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-getCache|getCache]] | This method is deprecated, use [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] instead. This method calls the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-getInstance|getInstance]] | Returns a reference to the global cache object, only creating it  if it doesn't already exist. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-setCacheValidation|setCacheValidation]] | Enable/disable cache validation. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JCache-setCaching|setCaching]] | Enables and disables caching. |
+| {{references:Constructor.png?nolink}} [[JCache-JCache|JCache]] | This class constructor calls the [[JCache-__construct|__construct]] method. |
+| {{references:Constructor.png?nolink}} [[JCache-__construct|__construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
+| {{references:Method.png?nolink}} [[JCache-cleanCache|cleanCache]] | Cleans the cache. |
+| {{references:Method.png?nolink}} [[JCache-generateId|generateId]] | Make a control key with the string containing data. |
+| {{references:Method.png?nolink}} [[JCache-getCache|getCache]] | This method is deprecated, use [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] instead. This method calls the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method. |
+| {{references:Method.png?nolink}} [[JCache-getInstance|getInstance]] | Returns a reference to the global cache object, only creating it  if it doesn't already exist. |
+| {{references:Method.png?nolink}} [[JCache-setCacheValidation|setCacheValidation]] | Enable/disable cache validation. |
+| {{references:Method.png?nolink}} [[JCache-setCaching|setCaching]] | Enables and disables caching. |
 
 ----
 

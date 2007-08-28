@@ -1,6 +1,6 @@
 ====== getCache ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getCache]] |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getCache]] |
 
 This method creates a [[references:joomla.framework:cache:jcache|JCache]] child class object. When the method is called, an object of the appropriate child class is instantianted and returned. See the [[references:joomla.framework/#Cache|Cache]] package for more information.
 

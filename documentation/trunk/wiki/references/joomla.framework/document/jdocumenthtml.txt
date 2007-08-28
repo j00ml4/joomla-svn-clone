@@ -4,16 +4,16 @@
 The JDocumentHTML class provides an easy interface to parse and display an HTML document. It extends the JDocument class. This class is instantiated when the JDocument::getInstance() method is called with 'html' as the type parameter.
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JDocumentHTML-__construct|__construct]] | Class constructor. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds <link> tags to the head of the document. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-getBase|getBase]] | Returns the document base URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-parse|parse]] | Parse a document template. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setBase|setBase]] | Sets the document base URL tag. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setMetaContentType|setMetaContentType]] | Sets an http-equiv Content-Type meta tag. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JDocumentHTML-setMetaData|setMetaData]] | Sets or alters a meta tag. |
+| {{references:Constructor.png?nolink}} [[JDocumentHTML-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-addCustomTag|addCustomTag]] | Adds a custom html string to the head block. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-addFavicon|addFavicon]] | Adds a shortcut icon (favicon). |
+| {{references:Method.png?nolink}} [[JDocumentHTML-addHeadLink|addHeadLink]] | Adds <link> tags to the head of the document. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-fetchHead|fetchHead]] | Generates the head HTML and return the results as a string. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-getBase|getBase]] | Returns the document base URL. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-parse|parse]] | Parse a document template. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-setBase|setBase]] | Sets the document base URL tag. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-setMetaContentType|setMetaContentType]] | Sets an http-equiv Content-Type meta tag. |
+| {{references:Method.png?nolink}} [[JDocumentHTML-setMetaData|setMetaData]] | Sets or alters a meta tag. |
 
 ----
 

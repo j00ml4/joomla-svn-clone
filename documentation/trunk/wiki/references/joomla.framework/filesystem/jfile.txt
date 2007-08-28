@@ -5,17 +5,17 @@ JFile is a file handling class which provides an interface to the file system.  
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-copy|copy]] | Copies a file. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-delete|delete]] | Delete a file or array of files. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-exists|exists]] | Wrapper for the standard file_exists function. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-getExt|getExt]] | Gets the extension of a file name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-getName|getName]] | Returns filename component of path. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-makeSafe|makeSafe]] | Makes file name safe to use. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-move|move]] | Moves a file. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-read|read]] | Read the contents of a file. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-stripExt|stripExt]] | Strips the last extension off a file name. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-upload|upload]] | Moves an uploaded file to a destination folder. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JFile-write|write]] | Write contents to a file. |
+| {{references:Method.png?nolink}} [[JFile-copy|copy]] | Copies a file. |
+| {{references:Method.png?nolink}} [[JFile-delete|delete]] | Delete a file or array of files. |
+| {{references:Method.png?nolink}} [[JFile-exists|exists]] | Wrapper for the standard file_exists function. |
+| {{references:Method.png?nolink}} [[JFile-getExt|getExt]] | Gets the extension of a file name. |
+| {{references:Method.png?nolink}} [[JFile-getName|getName]] | Returns filename component of path. |
+| {{references:Method.png?nolink}} [[JFile-makeSafe|makeSafe]] | Makes file name safe to use. |
+| {{references:Method.png?nolink}} [[JFile-move|move]] | Moves a file. |
+| {{references:Method.png?nolink}} [[JFile-read|read]] | Read the contents of a file. |
+| {{references:Method.png?nolink}} [[JFile-stripExt|stripExt]] | Strips the last extension off a file name. |
+| {{references:Method.png?nolink}} [[JFile-upload|upload]] | Moves an uploaded file to a destination folder. |
+| {{references:Method.png?nolink}} [[JFile-write|write]] | Write contents to a file. |
 
 ----
 

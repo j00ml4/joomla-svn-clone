@@ -5,27 +5,27 @@ Browser class, provides capability information about the current web client.\\ B
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Constructor.png?nolink}} [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getAgentString|getAgentString]] | Return the full browser agent string. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getBrowser|getBrowser]] | Retrieve the current browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getFeature|getFeature]] | Retrieve the current browser capability. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getHTTPProtocol|getHTTPProtocol]] | Returns the server protocol in use on the current server. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getInstance|getInstance]] | Returns a reference to the global Browser object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JBrowser::getInstance([$userAgent[, $accept]]);</pre></p> |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getMajor|getMajor]] | Retrieve the current browser's major version. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getMinor|getMinor]] | Retrieve the current browser's minor version. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getPlatform|getPlatform]] | Return the currently matched platform. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getQuirk|getQuirk]] | Retrieve unique behavior for the current browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-getVersion|getVersion]] | Retrieve the current browser's version. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-hasFeature|hasFeature]] | Check the current browser capabilities. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-hasQuirk|hasQuirk]] | Check unique behavior for the current browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-isBrowser|isBrowser]] | Determine if the given browser is the same as the current. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-isRobot|isRobot]] | Determines if the browser is a robot or not. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-isSSLConnection|isSSLConnection]] | Determine if we are using a secure (SSL) connection. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-isViewable|isViewable]] | Determines if a browser can display a given MIME type. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-match|match]] | Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-setBrowser|setBrowser]] | Sets the current browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-setFeature|setFeature]] | Set capabilities for the current browser. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JBrowser-setQuirk|setQuirk]] | Set unique behavior for the current browser. |
+| {{references:Constructor.png?nolink}} [[JBrowser-__construct|__construct]] | Create a browser instance (Constructor). |
+| {{references:Method.png?nolink}} [[JBrowser-getAgentString|getAgentString]] | Return the full browser agent string. |
+| {{references:Method.png?nolink}} [[JBrowser-getBrowser|getBrowser]] | Retrieve the current browser. |
+| {{references:Method.png?nolink}} [[JBrowser-getFeature|getFeature]] | Retrieve the current browser capability. |
+| {{references:Method.png?nolink}} [[JBrowser-getHTTPProtocol|getHTTPProtocol]] | Returns the server protocol in use on the current server. |
+| {{references:Method.png?nolink}} [[JBrowser-getInstance|getInstance]] | Returns a reference to the global Browser object, only creating it  if it doesn't already exist.<p>This method must be invoked as:  		<pre>  $browser = &JBrowser::getInstance([$userAgent[, $accept]]);</pre></p> |
+| {{references:Method.png?nolink}} [[JBrowser-getMajor|getMajor]] | Retrieve the current browser's major version. |
+| {{references:Method.png?nolink}} [[JBrowser-getMinor|getMinor]] | Retrieve the current browser's minor version. |
+| {{references:Method.png?nolink}} [[JBrowser-getPlatform|getPlatform]] | Return the currently matched platform. |
+| {{references:Method.png?nolink}} [[JBrowser-getQuirk|getQuirk]] | Retrieve unique behavior for the current browser. |
+| {{references:Method.png?nolink}} [[JBrowser-getVersion|getVersion]] | Retrieve the current browser's version. |
+| {{references:Method.png?nolink}} [[JBrowser-hasFeature|hasFeature]] | Check the current browser capabilities. |
+| {{references:Method.png?nolink}} [[JBrowser-hasQuirk|hasQuirk]] | Check unique behavior for the current browser. |
+| {{references:Method.png?nolink}} [[JBrowser-isBrowser|isBrowser]] | Determine if the given browser is the same as the current. |
+| {{references:Method.png?nolink}} [[JBrowser-isRobot|isRobot]] | Determines if the browser is a robot or not. |
+| {{references:Method.png?nolink}} [[JBrowser-isSSLConnection|isSSLConnection]] | Determine if we are using a secure (SSL) connection. |
+| {{references:Method.png?nolink}} [[JBrowser-isViewable|isViewable]] | Determines if a browser can display a given MIME type. |
+| {{references:Method.png?nolink}} [[JBrowser-match|match]] | Parses the user agent string and inititializes the object with  all the known features and quirks for the given browser. |
+| {{references:Method.png?nolink}} [[JBrowser-setBrowser|setBrowser]] | Sets the current browser. |
+| {{references:Method.png?nolink}} [[JBrowser-setFeature|setFeature]] | Set capabilities for the current browser. |
+| {{references:Method.png?nolink}} [[JBrowser-setQuirk|setQuirk]] | Set unique behavior for the current browser. |
 
 ----
 

@@ -5,13 +5,13 @@ JHTMLGrid is a utility drawing class for creating HTML Grids.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| [[JHTMLGrid-access|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-access|access]] | Generates the HTML code for an access level selector link. |
-| [[JHTMLGrid-checkedOut|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-checkedOut|checkedOut]] | Generates the HTML code for a checked out indicator/checkbox. |
-| [[JHTMLGrid-id|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-id|id]] | Generates the HTML code for an ID box. |
-| [[JHTMLGrid-order|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-order|order]] | Generates the HTML code for a save order icon to be used in the grid header. |
-| [[JHTMLGrid-published|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-published|published]] | Generates the HTML code for a clickable published icon. |
-| [[JHTMLGrid-sort|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-sort|sort]] | Generates the HTML code for a clickable sort icon to be used in the grid header. |
-| [[JHTMLGrid-state|{{http://api.joomla.org/media/images/Method.png }}]] [[JHTMLGrid-state|state]] | Generates the HTML code for a state selection dropdown for use in filtering lists. |
+| [[JHTMLGrid-access|{{references:Method.png }}]] [[JHTMLGrid-access|access]] | Generates the HTML code for an access level selector link. |
+| [[JHTMLGrid-checkedOut|{{references:Method.png }}]] [[JHTMLGrid-checkedOut|checkedOut]] | Generates the HTML code for a checked out indicator/checkbox. |
+| [[JHTMLGrid-id|{{references:Method.png }}]] [[JHTMLGrid-id|id]] | Generates the HTML code for an ID box. |
+| [[JHTMLGrid-order|{{references:Method.png }}]] [[JHTMLGrid-order|order]] | Generates the HTML code for a save order icon to be used in the grid header. |
+| [[JHTMLGrid-published|{{references:Method.png }}]] [[JHTMLGrid-published|published]] | Generates the HTML code for a clickable published icon. |
+| [[JHTMLGrid-sort|{{references:Method.png }}]] [[JHTMLGrid-sort|sort]] | Generates the HTML code for a clickable sort icon to be used in the grid header. |
+| [[JHTMLGrid-state|{{references:Method.png }}]] [[JHTMLGrid-state|state]] | Generates the HTML code for a state selection dropdown for use in filtering lists. |
 
 ----
 

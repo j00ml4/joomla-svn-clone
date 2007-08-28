@@ -5,7 +5,7 @@ This class implements the JElement interface and is used to render an editor ele
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JElementEditors-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available editors. |
+| {{references:Method.png?nolink}} [[JElementEditors-fetchElement|fetchElement]] | Renders the HTML code for a select list containing the available editors. |
 
 ----
 

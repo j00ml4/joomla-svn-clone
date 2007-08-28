@@ -5,8 +5,8 @@ The JInstallerModule class is an extension of the abstract JInstaller class whic
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerModule-install|install]] | Custom install method for modules. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[JInstallerModule-uninstall|uninstall]] | Custom uninstall method for modules. |
+| {{references:Method.png?nolink}} [[JInstallerModule-install|install]] | Custom install method for modules. |
+| {{references:Method.png?nolink}} [[JInstallerModule-uninstall|uninstall]] | Custom uninstall method for modules. |
 
 ----
 

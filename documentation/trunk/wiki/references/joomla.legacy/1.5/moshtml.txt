@@ -1,6 +1,6 @@
 ====== mosHTML ======
 ^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-|{{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML]] | never | Work in progress |
+|{{references:package.png?nolink}} [[references:joomla.legacy|Joomla.Legacy]] | {{references:package.png?nolink}} [[references:joomla.legacy:1.5|1.5]] | [[http://api.joomla.org/Joomla-Legacy/1-5/mosHTML.html|mosHTML]] | never | Work in progress |
 
 This class contains **deprecated** legacy code and is scheduled to be removed.  It is provided only for backward compatibility.
 
@@ -10,24 +10,24 @@ mosHTML is a helper class for rendering HTML controls.
 
 ===== Methods =====
 ^ Method ^ Description ^
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-BackButton|BackButton ]] | Displays a standard back button. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-cleanText|cleanText ]] | Cleans text of all formating and scripting code. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-CloseButton|CloseButton]] | Displays a standard close button for a pop-up window. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-emailCloaking|emailCloaking]] | A simple method for cloaking email addresses. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-idBox|idBox]] | Builds the HTML code for a standard selectable checkbox for use on a Database list-select screen. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-Iframe|Iframe]] | Builds a HTML iFrame for the specified URL. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-Image|Image]] | - |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-integerSelectList|integerSelectList]] | Builds a selectlist of numbers from $start to $end with an increment of $inc. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-Link|Link]] | - |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-makeOption|makeOption]] | Returns an object that can be passed in an array to another list handling method such as mosHTML::selectList. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-monthSelectList|monthSelectList]] | A convenient method for producing a list of months in an HTML form field using the current language settings. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-PrintIcon|PrintIcon]] | Displays a standard print icon. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-radioList|radioList]] | Produces a list of HTML radio buttons. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-Script|Script]] | - |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-selectList|selectList]] | Builds the HTML code for displaying a standard select list. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-sortIcon|sortIcon]] | Builds the HTML code for displaying a standard clickable sort icon. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-treeSelectList|treeSelectList]] | Generates an HTML select list from a tree based query list. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-WarningIcon|WarningIcon]] | - |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-writableCell|writableCell]] | Displays a folder name and whether it's writabe or not. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-yesnoRadioList|yesnoRadioList]] | Builds a HTML Radio list consisting of just a ‘No’ and a ‘Yes’ option. |
-| {{http://api.joomla.org/media/images/Method.png?nolink}} [[mosHTML-yesnoSelectList|yesnoSelectList]] | Builds a HTML select list consisting of just a ‘No’ and a ‘Yes’ option. |
+| {{references:Method.png?nolink}} [[mosHTML-BackButton|BackButton ]] | Displays a standard back button. |
+| {{references:Method.png?nolink}} [[mosHTML-cleanText|cleanText ]] | Cleans text of all formating and scripting code. |
+| {{references:Method.png?nolink}} [[mosHTML-CloseButton|CloseButton]] | Displays a standard close button for a pop-up window. |
+| {{references:Method.png?nolink}} [[mosHTML-emailCloaking|emailCloaking]] | A simple method for cloaking email addresses. |
+| {{references:Method.png?nolink}} [[mosHTML-idBox|idBox]] | Builds the HTML code for a standard selectable checkbox for use on a Database list-select screen. |
+| {{references:Method.png?nolink}} [[mosHTML-Iframe|Iframe]] | Builds a HTML iFrame for the specified URL. |
+| {{references:Method.png?nolink}} [[mosHTML-Image|Image]] | - |
+| {{references:Method.png?nolink}} [[mosHTML-integerSelectList|integerSelectList]] | Builds a selectlist of numbers from $start to $end with an increment of $inc. |
+| {{references:Method.png?nolink}} [[mosHTML-Link|Link]] | - |
+| {{references:Method.png?nolink}} [[mosHTML-makeOption|makeOption]] | Returns an object that can be passed in an array to another list handling method such as mosHTML::selectList. |
+| {{references:Method.png?nolink}} [[mosHTML-monthSelectList|monthSelectList]] | A convenient method for producing a list of months in an HTML form field using the current language settings. |
+| {{references:Method.png?nolink}} [[mosHTML-PrintIcon|PrintIcon]] | Displays a standard print icon. |
+| {{references:Method.png?nolink}} [[mosHTML-radioList|radioList]] | Produces a list of HTML radio buttons. |
+| {{references:Method.png?nolink}} [[mosHTML-Script|Script]] | - |
+| {{references:Method.png?nolink}} [[mosHTML-selectList|selectList]] | Builds the HTML code for displaying a standard select list. |
+| {{references:Method.png?nolink}} [[mosHTML-sortIcon|sortIcon]] | Builds the HTML code for displaying a standard clickable sort icon. |
+| {{references:Method.png?nolink}} [[mosHTML-treeSelectList|treeSelectList]] | Generates an HTML select list from a tree based query list. |
+| {{references:Method.png?nolink}} [[mosHTML-WarningIcon|WarningIcon]] | - |
+| {{references:Method.png?nolink}} [[mosHTML-writableCell|writableCell]] | Displays a folder name and whether it's writabe or not. |
+| {{references:Method.png?nolink}} [[mosHTML-yesnoRadioList|yesnoRadioList]] | Builds a HTML Radio list consisting of just a ‘No’ and a ‘Yes’ option. |
+| {{references:Method.png?nolink}} [[mosHTML-yesnoSelectList|yesnoSelectList]] | Builds a HTML select list consisting of just a ‘No’ and a ‘Yes’ option. |

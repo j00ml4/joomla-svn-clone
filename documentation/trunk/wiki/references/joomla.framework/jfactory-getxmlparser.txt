@@ -1,6 +1,6 @@
 ====== getXMLParser ======
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{http://api.joomla.org/media/images/package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getXMLParser]] |
+| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getXMLParser]] |
 
 This method creates an XML document. It will instantiate an object depending on the specified type.
 ===== Syntax =====
