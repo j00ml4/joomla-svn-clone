@@ -18,12 +18,19 @@ For example, to determine if the 'user1' position and the 'user2' position both 
 $this->countModules( 'user1 and user2' );
 </code>
 
-Careful: A common mistake is to try something like $this->countModules( 'user1' + 'user2' );  This is pretty much guaranteed to always return false regardless of the number of Modules enabled in either position, so check what you are passing to countModules carefully.
+Careful: A common mistake is to try something like this
+<code php|Example: This will NOT work as expected>
+$this->countModules( 'user1' and 'user2' );
+</code>
+
+This is pretty much guaranteed to always return false regardless of the number of Modules enabled in either position, so check what you are passing to countModules carefully.
+
+You must have exactly one space character separating each item in the string.  For example, 'user1+user2' will not produce the desired result as there must be a space character either side of the '+' sign.  Also, 'user1  +  user2' will produce a PHP error message as there is more than one space separating each element.
 
 Example: The user1 and user2 Module positions are to be displayed in the region, but you want the region to not appear at all if no Modules are enabled in either position.
 
 <code php|Example: Conditional region with two Module positions>
-<?php if($this->countModules( 'user1 or user2' )) : ?>
+<?php if ($this->countModules( 'user1 or user2' )) : ?>
 	<div class="rightcolumn">
 		<jdoc:include type="modules" name="user1" style="xhtml" />
 		<jdoc:include type="modules" name="user2" style="xhtml" />
@@ -34,18 +41,18 @@ Example: The user1 and user2 Module positions are to be displayed in the region,
 Example: The user1 and user2 Module positions are to be displayed side-by-side with a separator between them.  However, if only one of the Module positions has any Modules enabled then the separator is not needed.  Furthermore, if neither user1 or user2 has any Modules enabled then nothing is output.
 
 <code php|Example: Two Modules with separator>
-<?php if($this->countModules( 'user1 or user2' )) : ?>
+<?php if ($this->countModules( 'user1 or user2' )) : ?>
 	<div class="user1user2">
 
-		<?php if($this->countModules( 'user1' )) : ?>
+		<?php if ($this->countModules( 'user1' )) : ?>
 			<jdoc:include type="modules" name="user1" style="xhtml" />
 		<?php endif; ?>
 
-		<?php if($this->countModules( 'user1 and user2' )) : ?>
+		<?php if ($this->countModules( 'user1 and user2' )) : ?>
 			<div class="greyline" />
 		<?php endif; ?>
 
-		<?php if($this->countModules( 'user2' )) : ?>
+		<?php if ($this->countModules( 'user2' )) : ?>
 			<jdoc:include type="modules" name="user2" style="xhtml" />
 		<?php endif; ?>
 
