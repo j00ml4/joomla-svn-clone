@@ -13,12 +13,16 @@ Topics are documentation fragments that are essentially textual.  Each such topi
   * [[fragments:topic-WhatIsTemplateDetailsXML|What is the purpose of the templateDetails.xml file?]]
   * [[fragments:topic-WhatIsIndexPHP|What is the purpose of the index.php file?]]
   * [[fragments:topic-WhichDocTypeHeaderToUse|Which DocType header to use]]
-  * [[fragments:topic-DefiningModuleLocations|Defining a module location in a template]]
+  * [[fragments:topic-DefiningModulePositions|Defining a Module position in a template]]
   * [[fragments:topic-WhatIsTypicalXmlInstallFile|What is the typical XML install file structure?]]
+  * [[fragments:topic-FindingModulePositions|Finding Module positions on any given page]]
 
 ===== Intermediate =====
   * [[fragments:topic-HowToUpgradeTo15|How to upgrade a Joomla! 1.0.x template to Joomla! 1.5?]]
   * [[fragments:topic-HowToChooseLicense|How to choose a suitable licence]]
+  * [[fragments:topic-CustomisingErrorPages|Customising the default 403 and 404 error pages]]
+  * [[fragments:topic-CountingModules|Counting Modules in a given position]]
+  * [[fragments:topic-CointingModulesInMultiplePositions|Counting Modules in multiple positions]]
 
 ===== Advanced =====
   * [[fragments:topic-HowToOverrideOutputFromCore|How to override the output from the Joomla! core]]
