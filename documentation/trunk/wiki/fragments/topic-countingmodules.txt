@@ -1,0 +1,14 @@
+===== Counting Modules in a given Module position =====
+
+The countModules function can be used within a template to determine the number of Modules enabled in a given Module position.  This is commonly used to include Modules in a certain position only if at least one Module is enabled for that position.  This prevents empty regions from being defined in the template output.
+
+For example, the following code includes Modules in the 'user1' position only if at least one Module is enabled for that position.
+
+<code php|Example: Conditionally including a Module position>
+<?php if($this->countModules( 'user1' )) : ?>
+
+	<jdoc:include type="modules" name="user1" style="rounded" />
+
+<?php endif; ?>
+
+</code>
