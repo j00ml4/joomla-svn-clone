@@ -2,6 +2,7 @@
 
 These are step-by-step instructions that explain how to perform tasks.  These are primary fragments that can be included directly in the documentation.
 
+  * [[fragments:procedure-FindingModulePositions|Finding Module positions on any given page]]
   * [[fragments:procedure-HowToProduceRoundedCorners|How to produce rounded corners]]
   * [[fragments:procedure-HowToCreateTemplateInstallFile|How to create a template package installation file]]
   * [[fragments:procedure-ChangingSiteFavicon|Changing the site favicon]]
