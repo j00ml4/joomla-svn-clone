@@ -1,0 +1,56 @@
+===== Counting Modules in multiple Module positions =====
+
+The countModules function can be used to determine the number of Modules in more than one Module position.  More advanced calculations can also be performed.
+
+The argument to the countModules function is normally just the name of a single Module position.  The function will return the number of Modules currently enabled for that Module position.  But you can also do simple logical and arithmetic operations on two or more Module positions.
+
+For example, to determine the total number of Modules enabled in the 'user1' and 'user2' positions together, you can use the function call
+
+<code php|Example: Total number of Modules in two Module positions>
+$this->countModules( 'user1 + user2' );
+</code>
+
+Although the usual arithmetic operators, +. -. *, / will work as expected, these are not as useful as the logical operators 'and' and 'or'.
+
+For example, to determine if the 'user1' position and the 'user2' position both have at least one Module enabled, you can use the function call
+
+<code php|Example: Are there Modules enabled in both Module positions?>
+$this->countModules( 'user1 and user2' );
+</code>
+
+Careful: A common mistake is to try something like $this->countModules( 'user1' + 'user2' );  This is pretty much guaranteed to always return false regardless of the number of Modules enabled in either position, so check what you are passing to countModules carefully.
+
+Example: The user1 and user2 Module positions are to be displayed in the region, but you want the region to not appear at all if no Modules are enabled in either position.
+
+<code php|Example: Conditional region with two Module positions>
+<?php if($this->countModules( 'user1 or user2' )) : ?>
+	<div class="rightcolumn">
+		<jdoc:include type="modules" name="user1" style="xhtml" />
+		<jdoc:include type="modules" name="user2" style="xhtml" />
+	</div>
+<?php endif; ?>
+</code>
+
+Example: The user1 and user2 Module positions are to be displayed side-by-side with a separator between them.  However, if only one of the Module positions has any Modules enabled then the separator is not needed.  Furthermore, if neither user1 or user2 has any Modules enabled then nothing is output.
+
+<code php|Example: Two Modules with separator>
+<?php if($this->countModules( 'user1 or user2' )) : ?>
+	<div class="user1user2">
+
+		<?php if($this->countModules( 'user1' )) : ?>
+			<jdoc:include type="modules" name="user1" style="xhtml" />
+		<?php endif; ?>
+
+		<?php if($this->countModules( 'user1 and user2' )) : ?>
+			<div class="greyline" />
+		<?php endif; ?>
+
+		<?php if($this->countModules( 'user2' )) : ?>
+			<jdoc:include type="modules" name="user2" style="xhtml" />
+		<?php endif; ?>
+
+	</div>
+<?php endif; ?>
+</code>
+
+Notice how the first countModules call determines if there any Modules to display at all.  The second determines if there are any in the 'user1' position and if there are it displays them.  The third call determines if both user1 and user2 positions have any Modules enabled and if they do then if provides a separator between them.  Finally, the fourth call determines if there are any enabled Modules in the 'user2' position and displays them if there are any.
