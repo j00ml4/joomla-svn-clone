@@ -1,0 +1,19 @@
+===== Declaring Module positions =====
+
+In order for Module positions to be available for selection in the Module Manager they must be declared in the templateDetails.xml file for your template.  The <positions> element in this file contains sub-elements for each Module position that is supported by the template.
+
+For example, here is a typical <positions> element in the templateDetails.xml file for a typical template.
+
+<code xml|Example Module positions element in a templateDetails.xml file>
+<positions>
+	<position>left</position>
+	<position>right</position>
+	<position>top</position>
+	<position>user1</position>
+	<position>user2</position>
+	<position>user3</position>
+	<position>user4</position>
+</positions>
+</code>
+
+You can add and define new Module positions and give them any name you like, but it is recommended that you support at least those shown in the example above.  This is so that some level of consistency is maintained when switching Templates or using multiple Templates on a single site.
