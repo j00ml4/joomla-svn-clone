@@ -3,5 +3,7 @@
 This page lists the definition lists which can be used as "fragments" in the documentation.  Definition lists are most commonly used to list components, so for example, we might create a definition list which lists the names of the principal files contained within a template and introduce the purpose of each.  These are primary fragments that can be included directly in the documentation.
 
   * [[fragments:deflist-WhatJdocElementsAreAvailable|What jdoc elements are available?]]
-  * [[fragments:deflist-FilesInATypicalTemplate|Files that make up a typical template]]
-  * [[fragments:deflist-AvailableModuleStyles|What are the available module styles?]]
+  * [[fragments:deflist-FilesInATypicalTemplate|Files that make up a typical Template]]
+  * [[fragments:deflist-StandardModuleStyles|Standard Module styles]]
+  * [[fragments:deflist-DefaultCSSClasses|What are the default CSS classes?]]
+  * [[fragments:deflist-DeprecatedConfigVariables|Configuration variables deprecated in Joomla! 1.5]]
