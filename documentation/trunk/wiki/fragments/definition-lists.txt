@@ -7,3 +7,5 @@ This page lists the definition lists which can be used as "fragments" in the doc
   * [[fragments:deflist-StandardModuleStyles|Standard Module styles]]
   * [[fragments:deflist-DefaultCSSClasses|What are the default CSS classes?]]
   * [[fragments:deflist-DeprecatedConfigVariables|Configuration variables deprecated in Joomla! 1.5]]
+  * [[fragments:deflist-LearnAboutHTML|Where can I learn about HTML?]]
+  * [[fragments:deflist-LearnAboutCSS|Where can I learn about CSS?]]
