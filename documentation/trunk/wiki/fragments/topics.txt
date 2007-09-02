@@ -13,7 +13,7 @@ Topics are documentation fragments that are essentially textual.  Each such topi
   * [[fragments:topic-WhatIsTemplateDetailsXML|What is the purpose of the templateDetails.xml file?]]
   * [[fragments:topic-WhatIsIndexPHP|What is the purpose of the index.php file?]]
   * [[fragments:topic-WhichDocTypeHeaderToUse|Which DocType header to use]]
-  * [[fragments:topic-DefiningModulePositions|Defining a Module position in a template]]
+  * [[fragments:topic-DeclaringModulePositions|Declaring Module positions]]
   * [[fragments:topic-WhatIsTypicalXmlInstallFile|What is the typical XML install file structure?]]
 
 ===== Intermediate =====
