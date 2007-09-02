@@ -1,0 +1,13 @@
+===== Finding Module positions on any given page =====
+
+To get a visual indication of all module positions used on a page you can follow this procedure:-
+
+  * navigate to the page in your web browser.
+  * click into the URL field in your browser.
+  * look for any "parameters" at the end of the URL.  These are separated from the main part of the URL by a question mark (for example, in the URL "http://mydomain.com/index.php?id=17", the "id=17" is a parameter.
+  * if there are no parameters, append "?tp=1" to the URL and press RETURN (for example, "http://mydomain.com/index.php?tp=1").
+  * if there are already parameters in the URL, append "&tp=1" to the URL and press RETURN (for example, "http://mydomain.com/index.php?id=17&tp=1").
+  * the Module positions will be outlined in red.
+
+Note that in some circumstances there may be Module positions available that are not outlined in red.  This can happen when a Template defines those Module positions as conditional on there being Modules enabled in that position.  If there are no Modules enabled in that position then the Template may adapt and the position will not be visible.
+
