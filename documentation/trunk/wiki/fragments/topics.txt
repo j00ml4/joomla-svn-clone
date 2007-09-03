@@ -24,4 +24,6 @@ Topics are documentation fragments that are essentially textual.  Each such topi
   * [[fragments:topic-CountingModulesInMultiplePositions|Counting Modules in multiple Module positions]]
 
 ===== Advanced =====
+  * [[fragments:topic-WhatIsModuleChrome|What is Module chrome?]]
+  * [[fragments:topic-ApplyingCustomModuleChrome|Applying custom Module chrome]]
   * [[fragments:topic-HowToOverrideOutputFromCore|How to override the output from the Joomla! core]]

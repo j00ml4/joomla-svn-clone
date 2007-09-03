@@ -1,0 +1,3 @@
+===== What is Module chrome? =====
+
+The output from Modules can be wrapped in a number of predefined standard ways, or it can be wrapped in a template-dependent custom manner.  This wrapping is known as Module chrome.  CSS styling can then be applied to the wrappers to give the template designer a great deal of flexibility in styling the module output.
