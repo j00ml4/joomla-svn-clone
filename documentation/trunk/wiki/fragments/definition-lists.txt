@@ -10,3 +10,4 @@ This page lists the definition lists which can be used as "fragments" in the doc
   * [[fragments:deflist-LearnAboutHTML|Where can I learn about HTML?]]
   * [[fragments:deflist-LearnAboutCSS|Where can I learn about CSS?]]
   * [[fragments:deflist-StandardModuleChromes|What are the standard Module chromes?]]
+  * [[fragments:deflist-countModulesOperators|Operators for use with the countModules function]]
