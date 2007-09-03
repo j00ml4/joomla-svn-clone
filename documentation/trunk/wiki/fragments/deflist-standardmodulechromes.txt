@@ -1,0 +1,11 @@
+===== Standard Module chromes =====
+
+The following standard Module chromes are available:
+
+  * none.  Output the raw Module content with no wrapping.
+  * table.  Output the module in a table.
+  * horz.  Output the module as a table inside an outer table.
+  * xhtml.  Output the module wrapped in div tags.
+  * rounded.  Output the module wrapped in nested div tags to support rounded corners.
+  * outline.  Output the module wrapped with a preview border.
+

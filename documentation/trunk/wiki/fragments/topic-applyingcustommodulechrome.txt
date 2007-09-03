@@ -1,0 +1,11 @@
+===== Applying custom Module chrome =====
+
+To define custom Module chrome in your template you need to create a file called modules.php in your template html directory.  For example, this might be [path-to-Joomla!]/templates/my_template/html/modules.php.
+
+In this file you should define a function called modChrome_style where "style" is the name of your custom Module chrome.  This function will take three arguments:
+
+  * the module object;
+  * a reference to the Module parameters array;
+  * a reference to the Module attribute array.
+
+The function should echo the $module->content, wrapped in whatever chrome is required.  To see how this is done look at the code for the standard Module chromes in [path-to-Joomla!]/templates/system/html/modules.php.
