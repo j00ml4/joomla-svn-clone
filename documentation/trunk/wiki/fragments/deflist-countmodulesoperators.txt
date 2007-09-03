@@ -1,0 +1,32 @@
+===== Operators for use with the countModules function =====
+
+The following logical, comparison and arithmetic operators are available:-
+
+  * + Total number of Modules in user1 and user2 positions.  For example, 'user1 + user2'.
+  * - The number of Modules in the user1 position minus the number in the user2 position.  For example, 'user1 - user2'.
+  * * The number of Modules in the user1 position multiplied by the number in the user2 position.  For example, 'user1 * user2'.
+  * / The number of Modules in the user1 position divided by the number in the user2 position.  For example, 'user1 / user2'.
+  * and Returns true if user1 and user2 both have at least 1 enabled Module; otherwise returns false.  For example, 'user1 and user2'.
+  * or Returns true if user1 or user2 or both have at least 1 enabled Module; otherwise returns false.  For example, 'user1 or user2'.
+  * xor Returns true if user1 or user2 but not both have at least 1 enabled Module; otherwise returns false.  For example, 'user1 xor user2'.
+  * == Returns true if user1 and user2 have the same number of Modules enabled; otherwise returns false.  For example, 'user1 == user2'.
+  * != Returns true if user1 and user2 do not have the same number of Modules enabled; otherwise returns false.  For example, 'user1 != user2'.
+  * <> Same as ==.  For example, 'user1 <> user2'.
+  * < Returns true if user1 has strictly fewer Modules enabled than user2; otherwise returns false.  For example, 'user1 < user2'.
+  * > Returns true if user2 has strictly fewer Modules enabled than user1; otherwise returns false.  For example, 'user1 > user2'.
+  * <= Returns true if user1 has the same or fewer Modules enabled than user2; otherwise returns false.  For example, 'user1 <= user2'.
+  * >= Returns true if user2 has the same or fewer Modules enabled than user1; otherwise returns false.  For example, 'user1 >= user2'.
+
+Note that if countModules returns any non-zero number it is equivalent to true; whereas zero is equivalent to false.
+
+More than two Module positions can be included in an expression.  Evaluation of the expression is performed from left to right subject to operator precedence.
+
+The following table lists the precedence of operators with the highest-precedence operators listed at the top of the table. Operators on the same line have equal precedence, in which case they are evaluated from left to right.  The use of brackets to override precedence is not supported.
+
+  * * /  Arithmetic operators
+  * + -  Arithmetic operators
+  * < <= > >=  Comparison operators
+  * == !=  Comparison operators
+  * and  Logical operator
+  * xor  Logical operator
+  * or  Logical operator
