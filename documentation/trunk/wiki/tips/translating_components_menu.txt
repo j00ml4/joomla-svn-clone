@@ -1,0 +1,16 @@
+=== Translating entries on the Components menu ===
+
+Entries on the Components menu and its sub-menus may be translated using a mechanism that allows translators to include translations for third-party developer extension entries.
+
+A language INI file in the administrator/languages/<lang> directory, called <lang>.<component>.menu.ini will be loaded when the administrator menus are built and should contain language replacement strings for the menu item and its sub-menus.
+
+For example, the Banners component, com_banners, has a menu translation file in administrator/languages/en-GB called en-GB.com_banners.menu.ini in which you will find:-
+
+<code>
+COM_BANNERS=Banner
+COM_BANNERS.BANNERS=Banners
+COM_BANNERS.CLIENTS=Clients
+COM_BANNERS.CATEGORIES=Categories
+</code>
+
+The first of these strings replaces the menu item in the Components menu.  The other three replace sub-menu items within the Banner entry in the Components menu.

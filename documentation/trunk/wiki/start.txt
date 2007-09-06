@@ -44,7 +44,6 @@ Many of these standards are in development and are still being improved. But mak
   * [[references:xml_parameters|XML Parameters]]
   * [[references:3pd-libraries|Third-party Libraries included with Joomla!]]
 
-
 ==== 6. Joomla! 1.5 ====
 
   * Additions
@@ -71,6 +70,7 @@ Many of these standards are in development and are still being improved. But mak
   * [[tips:determine_front_page|How to determine if the user is viewing the front page]]
   * [[tips:using_caching|Using caching to speed up your code]]
   * [[tips:dontusedie|Don't use die() to debug]]
+  * [[tips:translating_components_menu|Translating entries on the Components menu]]
 
 ==== 8. FAQ ====
 
