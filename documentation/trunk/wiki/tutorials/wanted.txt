@@ -1,0 +1,22 @@
+====== Wanted Tutorials ======
+
+If you would like to contribute a tutorial to the Joomla! documentation so that others can benefit from your knowledge, we welcome all submissions!  Below is a list of suggested tutorial topics.  If you are interested in contributing a tutorial, please post a message in the [[http://forum.joomla.org/index.php/board,287.0.html|Developer Documentation Submit]] forum.  If you would like to suggest a topic, please post a message in the [[http://forum.joomla.org/index.php/board,60.0.html|Developer Documentation]] forum.
+
+===== Suggested Topics =====
+  * Creating custom XML Parameter Types
+  * Creating component preferences
+  * Adding JavaScript and CSS to the page
+  * Accessing the current user object
+  * Adding AJAX to your component
+  * Using JPagination in your component
+  * Creating a toolbar for your component
+  * Adding configuration objects to modules and plugins
+  * Storing data in the session between page loads
+  * Using the caching system in your component
+  * Creating a file uploader in your component
+  * Suppressing output of extra HTML
+  * Supporting plugins in your component
+  * Adding Multi-language support
+  * Retrieving data from the GET and POST requests - the Joomla! way
+  * Adding view layout configuration parameters
+  * Using the installer API to support package installation
