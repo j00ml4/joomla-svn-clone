@@ -14,6 +14,7 @@ Joomla! follows some common standards (Zend and phpDocumentor) for coding.  To m
 Many of these standards are in development and are still being improved. But make sure that your extensions use at least the minimal standards as it will improve the quality of your extensions and thus the Joomla! framework as a whole.	 
 
 
+
 ====2. Tutorials ====
 
   * [[tutorials:components|Components]]
@@ -22,6 +23,7 @@ Many of these standards are in development and are still being improved. But mak
   * [[tutorials:templates|Templates]]
   * [[tutorials:languages|Languages]]
   * [[tutorials:framework|Framework]]
+  * [[tutorials:wanted|Tutorial Submissions Wanted]]
 
 ==== 3. Joomla! Development for Beginners ====
 
