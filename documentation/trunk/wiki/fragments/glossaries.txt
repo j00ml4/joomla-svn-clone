@@ -13,7 +13,10 @@ Please keep this list in alphabetical order.
   * quirks mode
   * source ordering
   * template parameters
+  * Unicode
+  * UTF-8
   * W3C
+  * WGAC
   * XHTML
   * XML
   * XML install file
