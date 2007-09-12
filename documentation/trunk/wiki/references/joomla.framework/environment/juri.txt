@@ -7,6 +7,7 @@ The concept and implementation of this class is drawn heavily from the binary cl
 ===== Methods =====
 ^ Method ^ Description ^
 | {{references:Constructor.png?nolink}} [[JURI-__construct|__construct]] | Class constructor. |
+| {{references:Method.png?nolink}} [[JURI-buildQuery|buildQuery]] | Build a query from a array. |
 | {{references:Method.png?nolink}} [[JURI-delVar|delVar]] | Removes an item from the query string variables if it exists. |
 | {{references:Method.png?nolink}} [[JURI-getAnchor|getAnchor]] | Get the URI archor string everything after the '#'. |
 | {{references:Method.png?nolink}} [[JURI-getHost|getHost]] | Get URI host returns the hostname/ip, or null if no hostname/ip was specified. |
