@@ -1,0 +1,108 @@
+====== setProperties ======
+{#JAPI Joomla.Framework Base JObject::setProperties #}
+
+This method allows bulk assignment of an object's properties.
+
+===== Syntax =====
+bool setProperties ($properties)
+
+| **$properties** | mixed | Either an associative array or another object |
+$properties it always cast to an array. See [[http://www.php.net/manual/en/language.types.type-juggling.php|Type casting]] in the PHP manual.
+
+See also:
+ * [[JObject-set|JObject::set]]
+ * [[JObject-get|JObject::get]]
+ * [[JObject-getProperties|JObject::getProperties]]
+
+===== Examples =====
+<code php|Example 1>
+$person = new JObject();
+// declare some values
+$props  = array(
+            'name'    =>'Anonymous', 
+            '_secret' => '4711'
+          );
+// bulk assignment
+$person->setProperties( $props );
+
+echo 'Hello, ', $person->name;
+</code>
+will produce:
+<code php|Result 1>
+Hello, Anonymous
+</code>
+
+<code php|Example 2>
+$details = new JObject();
+// set some properties
+$details->set( 'name', 'Jane Doe' ); 
+$details->set( 'gender', 'f' ); 
+
+// assign to $person object from Example 1
+$person->setProperties( $details );
+
+switch ($person->gender) {
+case 'f':
+    $greeting = 'Hello, Mrs.';
+    break;
+case 'm':
+    $greeting = 'Hello, Mr.';
+    break;
+default:
+    $greeting = 'Hello,';
+    break;
+}
+echo $greeting, ' ',  $person->name;
+</code>
+will produce:
+<code php|Result 2>
+echo Hello, Mrs. Jane Doe';
+</code>
+
+===== Caveats =====
+You can't use this method to [[http://php.net/manual/function.unset.php|unset()]] (remove) an existing property, but only assign it a '''NULL''' value.
+If you want a property to cease from existence you must call %%unset($object->property)%%, otherwise it will still be listed in [[JObject-getProperties|JObject::getProperties]] or PHP's own [[http://php.net/manual/function.get-object-vars.php|get_object_vars()]].
+<code php|Example 3>
+$override = array( 'gender' => null );
+$person->setProperties( $override );
+
+print_r( $person );
+echo PHP_EOL, 'type: ', gettype( $person->gender );
+echo PHP_EOL, 'gender: ', isset( $person->gender ) ? $person->gender : 'neuter';
+
+unset( $person->gender );
+unset( $person->_secret );
+print_r( $person );
+
+</code>
+will produce:
+<code php|Result 2>
+JObject Object
+(
+    [_errors] => Array
+        (
+        )
+    [name] => Jane Doe
+    [_secret] => 4711
+    [gender] =>
+)
+
+type: NULL
+gender: neuter
+
+JObject Object
+(
+    [_errors] => Array
+        (
+        )
+
+    [name] => Jane Doe
+)
+
+</code>
+
+===== Caveats =====
+
+----
+
+~~DISCUSSION~~

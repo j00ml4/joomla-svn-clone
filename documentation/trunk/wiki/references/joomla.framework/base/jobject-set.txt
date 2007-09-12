@@ -8,6 +8,11 @@ void set ( **$property**, **$value** )
 | **$property** | string | is a string containing the name of the property to set. |
 | **$value**    | mixed  | is a variable containing the value to assign to the property. |
 
+See also:
+ * [[JObject-get|JObject::get]]
+ * [[JObject-setProperties|JObject::setProperties]]
+ * [[JObject-getProperties|JObject::getProperties]]
+
 ===== Examples =====
 This example uses the JBrowser class, which is a subclass of JObject.
 <code php|Example>
