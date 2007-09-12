@@ -16,6 +16,11 @@ Legend:
 ! -> Note
 ---------
 
+12.09.2007 René Serradeil
+ -	JObject example using JSite
+ +	JObject::getProperties(), setProperties(), new examples
+ +	JURI::buildQuery()
+
 28.08.2007 René Serradeil
  ^	bulk update icons to use media {{reference:xx}} namespace
  ^	dead http://dev.joomla.org/media/images/ => {{reference:xx}}

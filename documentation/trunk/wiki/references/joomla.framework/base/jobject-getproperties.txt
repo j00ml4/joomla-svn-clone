@@ -1,0 +1,59 @@
+====== getProperties ======
+{#JAPI Joomla.Framework Base JObject::getProperties #}
+
+This function returns an array of property names.
+
+===== Syntax =====
+array getProperties ($public = true)
+| **$public** | boolean | whether to include private properties in the result |
+
+See also:
+ * [[JObject-set|JObject::set]]
+ * [[JObject-get|JObject::get]]
+ * [[JObject-setProperties|JObject::setProperties]]
+
+===== Examples =====
+The method is designed to only return the ''public properties'' of an object.
+Since the concept of public, protected, and private properties is only available as of PHP5, the underscore character is used as a prefix to mark properties ''visually'' as private.
+This is common practice in PHP land and not specific to Joomla!
+<code php|Example 1>
+$myobj = new JObject();
+
+// set some properties
+$myobj->set('name', 'Anonymous');
+$myobj->set('version', '1.0');
+$myobj->set('_secret', '4711');
+
+print_r( $myobj->getProperties() );
+</code>
+will produce:
+<code php|Result 1>
+Array
+(
+    [name] => Anonymous
+    [version] => 1.0
+)
+</code>
+
+In order to retrieve all properties from an object, you must provide ''false'' for the '''$public''' argument.
+
+<code php|Example 2>
+print_r( $myobj->getProperties(false) );
+</code>
+will produce:
+<code php|Result 1>
+Array
+(
+    [_errors] => Array 
+                 (
+                 )
+    [name] => Anonymous
+    [version] => 1.0
+    [_secret] => 4711
+)
+</code>
+The '''_errors''' property shown in this output is declared in the JObject class.
+
+----
+
+~~DISCUSSION~~

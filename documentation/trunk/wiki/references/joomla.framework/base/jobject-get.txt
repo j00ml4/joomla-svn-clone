@@ -8,6 +8,11 @@ mixed get	( **$property**, **$default** )
 | **$property** | string | is a string containing the name of the property to get. |
 | **$default**  | mixed  | is the default value to return in the event that the specified property is not set. This parameter is optional and if omitted defaults to null. |
 
+See also:
+ * [[JObject-set|JObject::set]]
+ * [[JObject-setProperties|JObject::setProperties]]
+ * [[JObject-getProperties|JObject::getProperties]]
+
 ===== Examples =====
 This example uses the JBrowser class, which is a subclass of JObject.
 <code php|Example>

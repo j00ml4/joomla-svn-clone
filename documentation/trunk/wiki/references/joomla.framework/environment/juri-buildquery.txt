@@ -1,0 +1,82 @@
+====== buildQuery ======
+{#JAPI Joomla.Framework Environment JURI::buildQuery #}
+
+Build a query from a array (''not quite'' the reverse of the PHP [[http://php.net/manual/function.parse-str.php|parse_str()]] function)
+
+===== Syntax =====
+string function buildQuery ($params, $akey = null)
+
+| **$params** | array | key-value pairs to turn into a URL query |
+| **$akey** | string | reserved for internal use |
+
+The current implementation is not capable to handle complex, nested arrays.
+
+The ampersand character (&) is used as the argument separator. The value of the **arg_separator.output** directive of PHP.INI is ignored.
+
+Only array values are urlencode()d, array keys remain unchanged.
+
+===== Examples =====
+<code php|Example 1: simple array>
+$params = array('foo'=>'bar', 'name'=>'Jane Doe');
+$str = JURI::buildQuery( $params );
+echo $str;
+</code>
+will produce:
+<code php|Result 2>
+foo=bar&name=Jane+Doe
+</code>
+
+<code php|Example 2: complex array>
+// a weired looking, but valid URL
+$url = "foo=bar&bar[baz][bat]=hello&one[]=1&one[]=2";
+
+// parse to array using PHP
+$params = array();
+parse_str( $url, $params );
+
+// recreate URL from $params
+$str = JURI::buildQuery( $params );
+parse_str( $str, $params );
+
+echo 'Original: ', $url, PHP_EOL, print_r($arr, 1);
+echo 'rebuilt : ', $str, PHP_EOL, print_r($params, 1);
+
+</code>
+will produce:
+<code php|Result 2>
+Original: foo=bar&bar[baz][bat]=hello&one[]=1&one[]=2
+Array
+(
+  [foo] => bar
+  [bar] => Array
+      (
+       [baz] => Array
+           (
+            [bat] => hello
+           )
+      )
+  [one] => Array
+      (
+       [0] => 1
+       [1] => 2
+      )
+)
+
+rebuilt: foo=bar&baz[]=hello&one[]=1&one[]=2
+Array
+(
+  [foo] => bar
+  [bar] => Array
+      (
+       [0] => hello
+      )
+  [one] => Array
+      (
+       [0] => 1
+       [1] => 2
+      )
+)
+
+----
+
+~~DISCUSSION~~
