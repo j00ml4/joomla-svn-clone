@@ -8,8 +8,9 @@ This is the Joomla! base Object class. It allows <nowiki>__construct</nowiki> an
 | {{references:Constructor.png?nolink}} [[JObject-__construct|__construct]] | Class constructor, overridden in descendant classes. |
 | {{references:Method.png?nolink}} [[JObject-JObject|JObject]] | A hack to support __construct() on PHP 4. |
 | {{references:Method.png?nolink}} [[JObject-get|get]] | Gets the value of an object's property. |
-| {{references:Method.png?nolink}} [[JObject-getPublicProperties|getPublicProperties]] | Returns an array of public properties. |
+| {{references:Method.png?nolink}} [[JObject-getProperties|getProperties]] | Returns an array of object properties. |
 | {{references:Method.png?nolink}} [[JObject-set|set]] | Sets the value of an object's property. |
+| {{references:Method.png?nolink}} [[JObject-setProperties|setProperties]] | Sets multiple object properties using an array or object |
 | {{references:Method.png?nolink}} [[JObject-toString|toString]] | Object-to-string conversion. |
 
 ----
