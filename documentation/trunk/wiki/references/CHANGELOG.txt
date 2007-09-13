@@ -17,9 +17,13 @@ Legend:
 ---------
 
 12.09.2007 René Serradeil
+ #	post-RC2 interface change: JMenu::getInstance()
+ #	JApplicationHelper::getClientInfo
+
+12.09.2007 René Serradeil
  -	JObject example using JSite
- +	JObject::getProperties(), setProperties(), new examples
- +	JURI::buildQuery()
+ #	post-RC2 interface change: JObject::getProperties(), setProperties(), new examples
+ +	post-RC2 interface change: JURI::buildQuery()
 
 28.08.2007 René Serradeil
  ^	bulk update icons to use media {{reference:xx}} namespace
