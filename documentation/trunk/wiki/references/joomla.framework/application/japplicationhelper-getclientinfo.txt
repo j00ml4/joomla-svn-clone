@@ -1,27 +1,79 @@
 ====== getClientInfo ======
 {#JAPI Joomla.Framework Application JApplicationHelper::getClientInfo #}
 
-Gets information on a specific client id. A client is either the site, the adminstrator, or installation. Currently these are generally in static locations in reference to each other. There are plans for future versions such that these can be moved independently of each other. These locations will be stored in a database. This method will be of greater use in these future versions.
+Gets information on a specific Joomla! client application. A client is either the site, the adminstrator, or installation. Currently these are generally in static locations in reference to each other. There are plans for future versions such that these can be moved independently of each other. This method will be of greater use in these future versions.
 
-The client can be referenced either by an id, such as the id returned by the JApplication->getClientId method, or by name, such as 'site', 'administrator', or 'installation'.
-
-This method returns an object which describes the client, or false if the client is unknown.
+The client can be referenced either by an id, such as the id returned by the JApplication::getClientId method, or by name, such as 'site', 'administrator', or 'installation'. If no arguments are provided, the method returns an array describing all known clients.
 
 ===== Syntax =====
-mixed getClientInfo	( **$id**, **$byName** )
+mixed getClientInfo	( **$id** = null, **$byName** = false)
 
-| **$id** | integer | is an integer containing the client identifier (this can be either 0, 1, or 2). |
-| **$byName** | string | is a string containing the name of the client. This parameter is optional and if omitted defaults to false, and the client will be referenced by the id specified in the $id parameter. |
+| **$id** | mixed | If NULL (default) returns all clients, an integer (0, 1, 2), or a string ('site', 'administrator', 'installation') identifying the client |
+| **$byName** | bool | Optional, defaults to FALSE. Must be TRUE if $id is a string identifying the client. |
 
 ===== Examples =====
 Invoking the getClientInfo method as follows:
-<code php|Example>
+<code php|Example 1: client id>
+jimport( 'joomla.application.helper' );
+
 $client = JApplicationHelper::getClientInfo( 1 );
 print_r( $client );
 </code>
 might output
-<code php|Result>
-stdClass Object ( [id] => 1 [name] => administrator [path] => C:/Program Files/xampp/htdocs/joomla11/administrator )
+<code php|Result 1>
+stdClass Object
+(
+  [id] => 1
+  [name] => administrator
+  [path] => C:\Apache\htdocs\joomla\administrator
+)
+</code>
+
+<code php|Example 2: client name>
+jimport( 'joomla.application.helper' );
+
+$client = JApplicationHelper::getClientInfo( 'site', false );
+print_r( $client );
+</code>
+might output
+<code php|Result 1>
+stdClass Object
+(
+  [id] => 0
+  [name] => site
+  [path] => C:\Apache\htdocs\joomla
+)
+</code>
+
+<code php|Example 2: all clients>
+jimport( 'joomla.application.helper' );
+
+$client = JApplicationHelper::getClientInfo( );
+print_r( $client );
+</code>
+might output
+<code php|Result 1>
+Array
+(
+  [0] => stdClass Object
+    (
+     [id] => 0
+     [name] => site
+     [path] => C:\Apache\htdocs\joomla
+    )
+  [1] => stdClass Object
+    (
+     [id] => 1
+     [name] => administrator
+     [path] => C:\Apache\htdocs\joomla\administrator
+    )
+  [2] => stdClass Object
+    (
+     [id] => 2
+     [name] => installation
+     [path] => C:\Apache\htdocs\joomla\installation
+    )
+)
 </code>
 
 ----
