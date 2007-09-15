@@ -14,14 +14,14 @@ But what if you want to connect to a completely different database from the one 
 
 <code php|Connecting to an external database>
 <?php
-$driver = 'mysql';		// Database driver name
-$host   = 'db.myhost.com';	// Database host name
-$user   = 'fredbloggs';		// User for database authentication
-$pass   = 's9(39s£h[%dkFd';	// Password for database authentication
-$dbase  = 'bigdatabase';	// Database name
-$prefix = 'abc_';		// Database prefix (may be empty)
+$option['driver']   = 'mysql';            // Database driver name
+$option['host']     = 'db.myhost.com';    // Database host name
+$option['user']     = 'fredbloggs';       // User for database authentication
+$option['password'] = 's9(39s£h[%dkFd';  // Password for database authentication
+$option['database'] = 'bigdatabase';      // Database name
+$option['prefix']   = 'abc_';             // Database prefix (may be empty)
 
-$db = & JDatabase::getInstance( $driver, $host, $user, $pass, $dbase, $prefix );
+$db = & JDatabase::getInstance( $option );
 ?>
 </code>
 
