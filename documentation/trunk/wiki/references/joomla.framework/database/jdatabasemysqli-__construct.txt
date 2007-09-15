@@ -1,18 +1,35 @@
 ====== __construct ======
 {#JAPI Joomla.Framework Database JDatabaseMySQLi::__construct #}
 
-Database object constructor
+Database object constructor.
 
 ===== Syntax =====
-JDatabaseMySQLi __construct	( **$options** )
+JDatabaseMySQLi __construct ( **$options** )
 
 | **$options** | array | List of options used to configure the connection |
 
+The following parameters may be used in the **$option** array:-
+| **driver** | string | contains the name of the database driver. This parameter will always be 'mysqli' for the MySQLi driver. |
+| **host** | string | contains the name of the database host. This parameter is optional and if omitted defaults to 'localhost'. |
+| **user** | string | contains the user name to use to access the database. |
+| **password** | string | ontains the password that corresponds to the specified user. |
+| **database** | string | contains the name of the database to open. This parameter is optional and if omitted defaults to ''. |
+| **prefix** | string | contains the table prefix. This parameter is optional and if omitted default to 'jos_'. |
+| **select** | boolean | should be **true** if the database needs to be selected; **false** otherwise.  This parameter is optional and if omitted defaults to **true**. |
+
 ===== Examples =====
-<code php|Example>
+<code php|Connecting to an external MySQL database.>
+<?php
+$option['driver']   = 'mysqli';         // Database driver name
+$option['host']     = 'db.myhost.com';  // Database host name
+$option['user']     = 'fredbloggs';     // User for database authentication
+$option['password'] = 's9(39s£h[%dkFd'; // Password for database authentication
+$option['database'] = 'bigdatabase';    // Database name
+$option['prefix']   = 'abc_';           // Database prefix (may be empty)
 
+$db = & JDatabase::getInstance( $option );
+?>
 </code>
-
 
 ----
 
