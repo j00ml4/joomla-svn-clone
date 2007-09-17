@@ -4,7 +4,7 @@ In Joomla! 1.0.x it was possible to determine if the user was viewing the front 
 
 <code php|Determine if user is viewing the front page in Joomla! 1.0.x>
 <?php
-if ($option == 'com_frontpage') {
+if ($option == 'com_frontpage' || $option == '') {
 	echo 'This is the front page';
 }
 ?>
@@ -14,7 +14,7 @@ But in Joomla! 1.5.x the com_frontpage component is no longer present.  This is 
 
 <code php|Determine if user is viewing the front page in Joomla! 1.5.x>
 <?php
-$menu = &JMenu::getInstance();
+$menu = & JMenu::getInstance();
 if ($menu->getActive() == $menu->getDefault()) {
 	echo 'This is the front page';
 }
