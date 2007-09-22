@@ -2,10 +2,17 @@
 ^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
 | {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[JUser|JUser]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser->getParameters]] |
 
-Method to get the user parameters
+Method to get the user parameters.
+
+This function tries to load an xml file based on the users usertype. The filename of the xml file is the same as the usertype. 
+The functional has a static variable to store the [[references:Joomla.Framework:Parameter:JParameter|parameters]] setup file base path. 
+You can call this function statically to set the base path if needed.
+
 ===== Syntax =====
-object The getParameters ()
+JParameter getParameters ( **$loadsetupfile** = false, **$path** = null )
+
+| **$loadsetupfile** | bool | If true, loads the parameters setup file. Default is false. |
+| **$path** | string | Set the parameters setup file base path to be used to load the user parameters. |
 
 ===== Examples =====
-
 

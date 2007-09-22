@@ -16,6 +16,12 @@ Legend:
 ! -> Note
 ---------
 
+22.09.2007 René Serradeil
+ + Added JRequest::getMethod and example
+ + Added JRouter::attachBuildRule and attachParseRule. req. example
+ # JUser::getParameters
+ # JHTMLImage::site, parameter names and description.
+
 12.09.2007 René Serradeil
  #	post-RC2 interface change: JMenu::getInstance()
  #	JApplicationHelper::getClientInfo
