@@ -3,29 +3,26 @@
 
 Generates image tags for images contained in the site application directory.
 
-The method first checks to see if the specified image is a parameter image (i.e. $param evaluates to true).  If it is, then the image path is returned as $param_directory . $param.
+The method first checks to see if the specified image is a parameter image (i.e. $altFile is not empty).  If it is, then the image path is returned as $altFolder . $altFile.
 
-If $param is -1, then an empty string is used as the image path.
+If the image is not a parameter image, the method will search for specified $file in the current template images directory.  If this file exists, then this image is used for the image tag.
 
-If the image is not a parameter image, the method will search for specified file in the current template images directory.  If this file exists, then this image is used for the image tag.
-
-If none of these conditions are met, the path $directory . $file is used for the image tag.
+If none of these conditions are met, the path $folder . $file is used for the image tag.
 
 An initial slash at the beginning of the path will be removed in an attempt to make the path relative.
 
-The method returns a string containing the path to the image (if $type is false), or the HTML code for an image tag for the specified image.
+The method returns a string containing the path to the image (if $asTag is true), or the HTML code for an image tag for the specified image.
 
 ===== Syntax =====
-void site	( **$file**, **$directory**, **$param**, **$param_directory**, **$alt**, **$name**, **$type**, **$align** )
+void site ( **$file**, **$folder** = '/images/M_images/', **$altFile** = NULL , **$altFolder** = '/images/M_images/', **$alt** = NULL, **$attribs** = null, **$asTag** = 1)
 
-| **$file** | string | is a string containing the filename of the specified image. |
-| **$directory** | string | is a string containing the directory of the specified image.  This parameter is optional and if omitted defaults to '/images/M_images/'.  Note that this parameter should have a trailing slash. |
-| **$param** | string | is a string containing the name of a param image.  This parameter is optional and if omitted defaults to null, which will result in the method assuming the specified image is not a parameter image. |
-| **$param_directory** | string | is a string containing the parameter image directory. This parameter is optional and if omitted defaults to '/images/M_images/'. |
-| **$alt** | string | is a string containing the alt tage of the image.  This parameter is optional and if omitted defaults to a null. |
-| **$name** | string | is a string containing the name of the image.  This parameter is optional and is currently not used. |
-| **$type** | boolean | is a boolean value specifying whether the method should return an image tag or a path.  This parameter is optional and if omitted defaults to true, resulting in the method returning the HTML code for an image tag. |
-| **$align** | string | is a string containing the alignment value to be used for the image.  This parameter is optional and if omitted defaults to top. |
+| $file			| string | the image filename |
+| $folder		| string | the image folder location (URL) |
+| $altFile		| mixed  | alternative filename or -1 if part of a parameter select list |
+| $altFolder	| string | the image folder location of the alternative filename (URL) |
+| $alt			| string | text for the alt attribute  | 
+| $attribs		| array  | assocative array for the HTML attributes of the img element |
+| $asTag		| string | whether to return the IMG element (1) or it's src attribute only (0) |
 
 ===== Examples =====
 <code php|Example>

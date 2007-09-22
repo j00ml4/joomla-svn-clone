@@ -1,0 +1,19 @@
+====== attachBuildRule ======
+{#JAPI Joomla.Framework Application JRouter::attachBuildRule #}
+
+Function to convert an internal URI to a route
+
+===== Syntax =====
+string attachBuildRule( **$callback** )
+
+| **$callback** | mixed | A valid PHP callback for use with the event dispatcher |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
