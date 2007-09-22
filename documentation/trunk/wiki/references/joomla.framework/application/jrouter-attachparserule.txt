@@ -1,0 +1,19 @@
+====== attachParseRule ======
+{#JAPI Joomla.Framework Application JRouter::attachParseRule #}
+
+Function to convert an internal URI to a route
+
+===== Syntax =====
+string attachParseRule( **$callback** )
+
+| **$callback** | mixed | A valid PHP callback for use with the event dispatcher |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~
