@@ -1,5 +1,5 @@
 ====== Joomla Application Specification ======
-From version 1.1 onwards, Joomla! uses a special system to differentiate between frontend, backend and installation. The basis for this system is the class JApplication, which has three sub-classes, JSite, JAdministration and JInstallation. These sub-classes provide an environment specific to the current working area.
+From version 1.5 onwards, Joomla! uses a special system to differentiate between frontend, backend and installation. The basis for this system is the class JApplication, which has three sub-classes, JSite, JAdministration and JInstallation. These sub-classes provide an environment specific to the current working area.
 
 =====1. JSite=====
 JSite provides the functions commonly available in the frontend.
