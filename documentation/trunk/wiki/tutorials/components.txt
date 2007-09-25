@@ -7,17 +7,19 @@ This chapter serves to provide you with a number of useful examples that help yo
 While we have gone to great lengths to make Joomla easy for content providers to use, we have equally spent a lot of time developing a flexible framework for developers to extend the capabilities of Joomla without having to touch the Core code.
 
 
+
 ===== 1. How-To's=====
+  * [[components:hello_world_mvc1|Hello World MVC 1 Component]] - The frame
+  * [[components:hello_world_mvc2|Hello World MVC 2 Component]] - The model
+  * [[components:hello_world_mvc3|Hello World MVC 3 Component]] - The table
+  * [[components:hello_world_mvc4|Hello World MVC 4 Component]] - The admin interface
+
+The tutorials below document the old approach to component development.  While it is still possible to develop components using this approach, we recommend using the MVC framework because it fits in better with the Joomla! framework.  The tutorials below are currently unsupported.
   * [[components:hello_world|Hello World 1 Component]] - The beginning
   * [[components:hello_world2|Hello World 2 Component]] - Database and breadcrumb
   * [[components:hello_world3|Hello World 3 Component]] - Specialities of an administrative interface
   * [[components:hello_world4|Hello World 4 Component]] - Internationlisation
   * [[components:hello_world5|Hello World 5 Component]] - Adding and using javascript (moo.fx example)
-
-  * [[components:hello_world_mvc1|Hello World MVC 1 Component]] - The frame
-  * [[components:hello_world_mvc2|Hello World MVC 2 Component]] - The model
-  * [[components:hello_world_mvc3|Hello World MVC 3 Component]] - The table
-  * [[components:hello_world_mvc4|Hello World MVC 4 Component]] - The admin interface
 
 ==== 1.1 Administrator====
   * [[components:menubarTitleImage|Using a custom image in the Menu Bar title]]
