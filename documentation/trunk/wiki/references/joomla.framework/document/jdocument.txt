@@ -3,6 +3,7 @@
 
 This is the Document class. It provides an easy interface to parse and display a document. This class is instantiated through the getInstance method. The getInstance method returns an object of the appropriate child class depending on the document type. This is a child class of the JTemplate class.
 
+
 ===== Methods =====
 ^ Method ^ Description ^
 | {{references:Constructor.png?nolink}} [[JDocument-__construct|__construct]] | Class constructor. |
@@ -25,6 +26,7 @@ This is the Document class. It provides an easy interface to parse and display a
 | {{references:Method.png?nolink}} [[JDocument-setMimeEncoding|setMimeEncoding]] | Sets the document MIME encoding that is sent to the browser. |
 | {{references:Method.png?nolink}} [[JDocument-setTab|setTab]] | Sets the string used to indent HTML. |
 | {{references:Method.png?nolink}} [[JDocument-setTitle|setTitle]] | Sets the title of the page. |
+| {{references:Method.png?nolink}} [[JDocument-setType|setType]] | Sets the document type of the page. |
 | {{references:Method.png?nolink}} [[JDocument-_addRenderer|_addRenderer]] | Adds a renderer to be called. |
 
 ----
