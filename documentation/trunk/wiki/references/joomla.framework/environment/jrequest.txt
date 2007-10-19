@@ -3,6 +3,7 @@
 
 This class serves to provide the Joomla! Framework with a common interface to access request variables. This includes $_POST, $_GET, and naturally $_REQUEST. Variables can be passed through an input filter to avoid injection, or they can be returned raw. The concept and implementation of this class is inspired by the binary cloud environment package (http://www.binarycloud.com).
 
+
 ===== Methods =====
 
 ^ Method ^ Description ^
@@ -11,6 +12,7 @@ This class serves to provide the Joomla! Framework with a common interface to ac
 | {{references:Method.png?nolink}} [[JRequest-get|get]] | Fetches and returns a request array. |
 | {{references:Method.png?nolink}} [[JRequest-getVar|getVar]] | Fetches and returns a given variable. |
 | {{references:Method.png?nolink}} [[JRequest-getURI|getURI]] | Gets the full request path. |
+| {{references:Method.png?nolink}} [[JRequest-setVar|setVar]] | Sets a variable in one of the specified request hashes. |
 
 ----
 

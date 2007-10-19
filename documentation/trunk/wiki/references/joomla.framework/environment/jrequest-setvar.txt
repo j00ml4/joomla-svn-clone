@@ -3,13 +3,14 @@
 
 Set a variabe in on of the request variables
 
+
 ===== Syntax =====
 string setVar	( **$name**, **$value**, **$hash**, **$overwrite** )
 
-| **$name** | string | Name |
-| **$value** | string | Value |
-| **$hash** | string | Hash |
-| **$overwrite** | boolean | Boolean |
+| **$name** | string | the name of the variable to set |
+| **$value** | string | the value to be inserted for the specified variable |
+| **$hash** | string | the hast to insert into (post, get, ...) |
+| **$overwrite** | boolean | true to overwrite any existing variable with the same name, false to set only if not already set |
 
 ===== Examples =====
 <code php|Example>
@@ -18,5 +19,8 @@ string setVar	( **$name**, **$value**, **$hash**, **$overwrite** )
 
 
 ----
+
+~~DISCUSSION~~
+
 
 ~~DISCUSSION~~
