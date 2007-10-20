@@ -35,9 +35,10 @@ A content plug-in, for instance, gets called by the core code when articles are 
 
 A component is the most elaborate and complex type of Joomla! extension. It can have both a front end (user) and back end (admin) interface, and can be made to do many different things. Components can have one or more ways to have features inserted as items in site menus, and the admin interface can be as elaborate as the author chooses it to be. Some examples include photo galleries, discussion forums, and guest books.
 
+
 ==== Languages ====
 
-A language is a collection of one or more files that define elements of a specific language that your extension can support.
+A language is a collection of one or more files that define elements of a specific language that your extension supports.
 
 ==== Common Attributes ====
 

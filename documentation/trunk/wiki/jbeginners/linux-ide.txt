@@ -66,6 +66,7 @@ Hit the page 'http://localhost/phpinfo.php' and you've just executed a php scrip
 
 
 
+
 ==== Step 4: Download xdebug server, install it and configure php.ini ====
 [[http://www.xdebug.org/link.php?url=xdebug200|Download Xdebug server.]]
 
@@ -95,7 +96,7 @@ xdebug.remote_enable=1
 xdebug.remote_host="localhost"
 xdebug.remote_port=9000
 xdebug.remote_handler="dbgp"
-zend_extension="opt/lampp/lib/php/extensions/xdebug.so"
+zend_extension="/opt/lampp/lib/php/extensions/xdebug.so"
 </php>
 
 
