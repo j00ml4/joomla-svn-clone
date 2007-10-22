@@ -3,9 +3,11 @@
 
 The JHTML class is an interface class to all the HTML drawing classes. It provides an extensible framework for using and creating HTML elements.
 
+
 ===== Methods =====
 ^ Method ^ Description ^
 | [[JHTML-addIncludePath|{{references:Method.png?nolink}}]] [[JHTML-addIncludePath|addIncludePath]] | Adds a directory where JHTML should search for helpers. |
+| [[JHTML-calendar|{{references:Method.png?nolink}}]] [[JHTML-calendar|calendar]] | Returns a text field linked to a DHTML date picker. |
 | [[JHTML-date|{{references:Method.png?nolink}}]] [[JHTML-date|date]] | Returns formated date according to the current locale and adds time offset. |
 | [[JHTML-iframe|{{references:Method.png?nolink}}]] [[JHTML-iframe|iframe]] | Returns an &lt;iframe&gt; element. |
 | [[JHTML-image|{{references:Method.png?nolink}}]] [[JHTML-image|image]] | Returns an &lt;img&gt; element. |

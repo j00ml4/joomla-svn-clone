@@ -1,7 +1,7 @@
 ====== calendar ======
 {#JAPI Joomla.Framework HTML JHTML::calendar #}
 
-
+Returns the HTML for a text field linked to a DHTML date picker.
 
 ===== Syntax =====
 void calendar	( **$value**, **$name**, **$id**, **$format**, **$attribs** )
@@ -19,5 +19,8 @@ void calendar	( **$value**, **$name**, **$id**, **$format**, **$attribs** )
 
 
 ----
+
+~~DISCUSSION~~
+
 
 ~~DISCUSSION~~
