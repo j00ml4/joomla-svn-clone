@@ -3,14 +3,15 @@
 
 Returns the HTML for a text field linked to a DHTML date picker.
 
-===== Syntax =====
-void calendar	( **$value**, **$name**, **$id**, **$format**, **$attribs** )
 
-| **$value** |  |  |
-| **$name** |  |  |
-| **$id** |  |  |
-| **$format** |  |  |
-| **$attribs** |  |  |
+===== Syntax =====
+string calendar	( **$value**, **$name**, **$id**, **$format** = '%Y-%m-%d', **$attribs** = null )
+
+| **$value** | string | the value to be filled into the text box by default |
+| **$name** | string | the HTML input name for the text box |
+| **$id** | string | the HTML id for the text box |
+| **$format** | string | a format string for the display of the selected date |
+| **$attribs** | string | the HTML attributes to be appended to the HTML input element |
 
 ===== Examples =====
 <code php|Example>
