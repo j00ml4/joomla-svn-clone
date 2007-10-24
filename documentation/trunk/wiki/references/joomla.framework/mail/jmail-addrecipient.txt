@@ -1,0 +1,14 @@
+====== addRecipient ======
+{#JAPI Joomla.Framework Mail JMail::addRecipient #}
+
+Use this class if you want to add one or more recepients these will be added to the (**To:** header field) for more information on header fields look up [[http://www.ietf.org/rfc/rfc2822.txt|RFC2822 - Internet Message Format]].
+
+===== Syntax =====
+void addRecipient( **$recipient** )  
+
+| **$recipient** | mixed | Either a string or array of strings [recipients].|
+
+===== Examples =====
+TODO
+
+~~DISCUSSION~~

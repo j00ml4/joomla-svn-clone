@@ -8,7 +8,7 @@ void attach	( **$observer** )
 | **$observer** | object | is an object that is a child class of the [[references:joomla.framework:observer|JObserver]] class. There is no strict typing, but the class must have a member function called 'update'. See the [[references:joomla.framework:observer|JObserver]] class for more information about the update function. |
 
 ===== Examples =====
-The [[references:joomla.framework:application:jeventdispatcher#register|JEventDispatcher::register]] member function calls this method to attach event handlers to itself. It is called as follows:
+The [[references:joomla.framework:application:JDispatcher#register|JDispatcher::register]] member function calls this method to attach event handlers to itself. It is called as follows:
 <code php|Example>
 $this->attach(new $handler($this));
 </code>

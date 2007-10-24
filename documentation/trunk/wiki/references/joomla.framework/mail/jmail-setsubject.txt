@@ -1,0 +1,19 @@
+====== setSubject ======
+{#JAPI Joomla.Framework Mail JMail::setSubject #}
+
+Set the E-Mail subject
+
+===== Syntax =====
+void setSubject	( **$subject** )
+
+| **$subject** | string | Subject of the e-mail |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

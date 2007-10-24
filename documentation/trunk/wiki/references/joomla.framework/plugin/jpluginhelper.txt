@@ -1,0 +1,14 @@
+====== JPluginHelper [Review] ======
+{#JAPI Joomla.Framework Plugin JPluginHelper #}
+
+Plugin helper class
+===== Methods =====
+^ Method ^ Description ^
+| {{references:Method.png?nolink}} [[JPluginHelper-getPlugin|getPlugin]] | Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned |
+| {{references:Method.png?nolink}} [[JPluginHelper-importPlugin|importPlugin]] | Loads all the plugin files for a particular group if no specific plugin is specified  otherwise only the specific pugin is loaded. |
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,28 @@
+====== isEmailAddress ======
+{#JAPI Joomla.Framework Mail JMail::isEmailAddress #}
+
+Allows to verify that an e-mail address is in proper format.\\ 
+Examples of valid E-mail formats: sam@host.com, example@new.co.uk, user@univdepart.univname.edu.\\ 
+Non Valid E-Mail formats: non@valid, mynon@@notvalid.com\\ 
+
+\\ The regex used to determine validaty is:
+/[\w\.\-]+@\w+[\w\.\-]*?\.\w{1,4}/ 
+you can test a similar regex at the [[http://regexlib.com/RETester.aspx?regexp_id=21|regex Library]]
+
+===== Syntax =====
+boolean isEmailAddress  ($email)
+| $email | mixed | is a string that will be tested as a valid email adress.|
+
+===== Examples =====
+Example: This example verifies that an email is in a valid format (not tested)
+<code php|Example>
+$email = "test@user.com";
+
+if (JMailHelper::isEmailAddress($email)) {
+    echo "<h3>Is a Valid E-Mail.</h3>";
+} else {
+    echo "<h3>Is not Valid E-Mail format.</h3>";
+}
+</code>
+
+~~DISCUSSION~~

@@ -1,0 +1,14 @@
+====== useSendmail ======
+{#JAPI Joomla.Framework Mail JMail::useSendmail #}
+
+Use this class if you want to use the [[http://en.wikipedia.org/wiki/Sendmail|Sendmail]] MTA (Mail Transfer Agent), to send emails. 
+
+===== Syntax =====
+boolean useSendmail(**$sendmailpath**)  
+
+| **$sendmailpath** | string | Path to sendmail MTA, Optional, if not present will use Global sendmail path.|
+
+===== Examples =====
+TODO
+
+~~DISCUSSION~~

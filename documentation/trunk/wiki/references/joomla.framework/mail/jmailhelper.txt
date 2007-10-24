@@ -1,0 +1,15 @@
+====== JMailHelper ======
+{#JAPI Joomla.Framework Mail JMailHelper #}
+
+This is an E-Mail helper class, provides static methods to perform various tasks relevant to the Joomla! e-mail routines. Like security methods to prevent [[http://www.securephpwiki.com/index.php/Email_Injection|Email Injection Attacks]]and validate that an email address is properly formated.
+
+===== Methods =====
+^ Method ^ Description ^
+| {{references:Method.png?nolink}} [[JMailHelper-cleanAddress|cleanAddress]] | Verify that an e-mail address does not have any extra headers.|
+| {{references:Method.png?nolink}} [[JMailHelper-cleanBodycleanBody|cleanBody]] | Clean any injected headers from the E-Mail body.|
+| {{references:Method.png?nolink}} [[JMailHelper-cleanSubject|cleanSubject]] | Clean any injected headers from the subject string.|
+| {{references:Method.png?nolink}} [[JMailHelper-isEmailAddress|isEmailAddress]] | Verify that the email adress is in valid format.|
+
+----
+
+~~DISCUSSION~~

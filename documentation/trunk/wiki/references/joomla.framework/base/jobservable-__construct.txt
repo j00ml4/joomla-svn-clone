@@ -7,7 +7,7 @@ This is the class contructor. It initiates the list of observers to an empty arr
 JObservable <nowiki>__construct</nowiki> ()
 
 ===== Examples =====
-The [[references:joomla.framework:application:jeventdispatcher#getInstance|JEventDispatcher::getInstance]] member instantiates its class. The following code is used:
+The [[references:joomla.framework:application:JDispatcher#getInstance|JDispatcher::getInstance]] member instantiates its class. The following code is used:
 <code php|Example>
-$instances[0] = new JEventDispatcher();
+$instances[0] = new JDispatcher();
 </code>

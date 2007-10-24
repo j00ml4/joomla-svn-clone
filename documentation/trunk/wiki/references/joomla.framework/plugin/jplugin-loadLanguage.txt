@@ -1,0 +1,13 @@
+====== loadLanguage ======
+{#JAPI Joomla.Framework Plugin JPlugin::loadLanguage #}
+
+Loads the plugin's language file.
+
+===== Syntax =====
+bool loadLanguage ( **$extension**, **$basePath** )
+| **$extension** | string | The plugin for which a language file should be loaded, defaults to the current plugin instance |
+| **$basePath** | string | (reserved for future use) |
+
+Returns boolean True, if the file was successfully loaded.
+
+===== Examples =====

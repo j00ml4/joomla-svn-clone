@@ -1,0 +1,19 @@
+====== cleanLine ======
+{#JAPI Joomla.Framework Mail JMailHelper::cleanLine #}
+
+Cleans single line inputs.
+
+===== Syntax =====
+string cleanLine	( **$value** )
+
+| **$value** | string | String to be cleaned. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

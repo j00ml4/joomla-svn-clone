@@ -10,4 +10,4 @@ Subclasses should reimplement this method if they provide dispatching capabiliti
 
   * [[JRoute]]
   * [[JRouter]]
-  * [[JEventDispatcher]]
+  * [[references:joomla.framework:application:JDispatcher|JDispatcher]]

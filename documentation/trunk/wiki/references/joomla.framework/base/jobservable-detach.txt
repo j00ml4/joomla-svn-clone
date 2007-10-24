@@ -10,6 +10,6 @@ boolean detach	( **$observer** )
 ===== Examples =====
 If a handler $handler was previously attached, it could be detached in the following way:
 <code php|Example>
-$dispatcher =& JEventDispatcher::getInstance();
+$dispatcher =& JDispatcher::getInstance();
 $dispatcher->detach( $handler );
 </code>

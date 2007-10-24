@@ -1,0 +1,15 @@
+====== JPlugin ======
+{#JAPI Joomla.Framework Plugin JPlugin::JPlugin #}
+
+Constructor
+
+For PHP4 compatability we must not use the %%__constructor%% method as a constructor for plugins because [[http://php.net/manual/function.func-get-args.php|func_get_args()]] returns a copy of all passed arguments NOT references.
+This causes problems with cross-referencing necessary for the [[http://en.wikipedia.org/wiki/Observer_pattern|Observer design pattern]].
+
+===== Syntax =====
+JPlugin JPlugin	( **&$subject** )
+| **** | object |  |
+
+===== Examples =====
+
+

@@ -1,0 +1,33 @@
+====== getMethod ======
+{#JAPI Joomla.Framework Environment JRequest::getMethod #}
+
+Gets the request method.
+
+===== Syntax =====
+bool getMethod ( )
+
+
+===== Examples =====
+Provided the request originates from an HTML FORM using method="post":
+<code php|Example>
+jimport('joomla.environment.request');
+
+if (JRequest::getMethod() == 'POST') {
+   echo 'FORM sucessfully submitted.';
+} else {
+   echo 'Invalid request method!';
+}
+</code>
+might produce:
+<code php|Results>
+FORM sucessfully submitted
+</code>
+If the page was however requested via it's URI:
+<code php|Results>
+Invalid request method!
+</code>
+
+
+----
+
+~~DISCUSSION~~

@@ -1,9 +1,9 @@
 ====== JObservable [Review] ======
 {#JAPI Joomla.Framework Base JObservable #}
 
-This is an abstract observable class to implement the [[http://en.wikipedia.org/wiki/Observer_design_pattern|Observer design pattern]]. It is extended by [[references:joomla.framework:application:jeventdispatcher|JEventDispatcher]] which is instantiated by [[references:joomla.framework:application:japplication|JApplication]].  JObservable is a subclass of [[references:joomla.framework:object|JObject]]. 
+This is an abstract observable class to implement the [[http://en.wikipedia.org/wiki/Observer_design_pattern|Observer design pattern]]. It is extended by [[references:joomla.framework:application:JDispatcher|JDispatcher]] which is instantiated by [[references:joomla.framework:application:japplication|JApplication]].  JObservable is a subclass of [[references:joomla.framework:object|JObject]]. 
 
-The Observer design pattern provides the possibility of having observable objects raising events triggered through the [[references:joomla.framework:application:jeventdispatcher|Event Dispatcher]]. 
+The Observer design pattern provides the possibility of having observable objects raising events triggered through the [[references:joomla.framework:application:JDispatcher|Event Dispatcher]]. 
 [[JObserver||Observers]] can be attached to an instance of an Observable so that they can be notified when specific events occur during the life-cycle of this particular object.
 
 ===== Methods =====
