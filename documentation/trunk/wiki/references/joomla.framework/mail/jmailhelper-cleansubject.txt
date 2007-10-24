@@ -1,0 +1,19 @@
+====== cleanSubject ======
+{#JAPI Joomla.Framework Mail JMailHelper::cleanSubject #}
+
+Cleans any injected headers from the subject string.
+
+===== Syntax =====
+string cleanSubject	( **$subject** )
+
+| **$subject** | string | E-Mail subject string. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

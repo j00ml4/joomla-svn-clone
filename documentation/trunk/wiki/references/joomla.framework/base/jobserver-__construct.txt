@@ -9,7 +9,7 @@ JObserver __construct	( **&$subject** )
 | **$subject** | string | is an object whose class is a child class of the JObservable class. |
 
 ===== Examples =====
-The JEventDispatcher::register function instantiates a JObserver class (or subclass) by passing itself to the JObserver constructor:
+The JDispatcher::register function instantiates a JObserver class (or subclass) by passing itself to the JObserver constructor:
 <code php|Example>
 $this->attach(new $handler($this));
 </code>

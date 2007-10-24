@@ -9,6 +9,6 @@ mixed getState ()
 ===== Examples =====
 The _state property is a private property and must be set by the child class.
 <code php|Example>
-$dispatcher =& JEventDispatcher::getInstance();
+$dispatcher =& JDispatcher::getInstance();
 echo "State: ". $dispatcher->getState();
 </code>

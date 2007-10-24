@@ -1,0 +1,12 @@
+====== register ======
+{#JAPI Joomla.Framework Event JDispatcher::register #}
+
+Registers an event handler to the event dispatcher
+===== Syntax =====
+void register	( **$event**, **$handler** )
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

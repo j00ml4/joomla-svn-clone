@@ -86,10 +86,8 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
 
 ==== Event ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.event_detail.png|UML Diagram]]
-  * [[references:joomla.framework:Event:JEventDispatcher|JEventDispatcher]]
-  * [[references:joomla.framework:Event:JEventHandler|JEventHandler]]
-  * [[references:joomla.framework:Event:JPlugin|JPlugin]]
-  * [[references:joomla.framework:Event:JPluginHelper|JPluginHelper]]
+  * [[references:joomla.framework:Event:JEvent|JEvent]]
+  * [[references:joomla.framework:Event:JDispatcher|JDispatcher]]
 
 ==== FileSystem ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.filesystem_detail.png|UML Diagram]]
@@ -133,13 +131,6 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:HTML:JPaneTabs|JPaneTabs]]
   * [[references:joomla.framework:HTML:JToolBar|JToolBar]]
 
-==== I18N ====
-[[http://dev.joomla.org/images/stories/UML/joomla.framework.i18n_detail.png|UML Diagram]]
-  * [[references:joomla.framework:I18N:JHelp|JHelp]]
-  * [[references:joomla.framework:I18N:JLanguage|JLanguage]]
-  * [[references:joomla.framework:I18N:JLanguageHelper|JLanguageHelper]]
-  * [[references:joomla.framework:I18N:JText|JText]]
-
 ==== Installer ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.installer_detail.png|UML Diagram]]
   * [[references:joomla.framework:Installer:JInstaller|JInstaller]]
@@ -149,6 +140,13 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:Installer:JInstallerModule|JInstallerModule]]
   * [[references:joomla.framework:Installer:JInstallerPlugin|JInstallerPlugin]]
   * [[references:joomla.framework:Installer:JInstallerTemplate|JInstallerTemplate]]
+
+==== Language ====
+[[http://dev.joomla.org/images/stories/UML/joomla.framework.i18n_detail.png|UML Diagram]]
+  * [[references:joomla.framework:Language:JHelp|JHelp]]
+  * [[references:joomla.framework:Language:JLanguage|JLanguage]]
+  * [[references:joomla.framework:Language:JLanguageHelper|JLanguageHelper]]
+  * [[references:joomla.framework:Language:JText|JText]]
 
 ==== Parameter ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.parameter_detail.png|UML Diagram]]
@@ -173,6 +171,10 @@ See also [[http://dev.joomla.org/content/view/1137/80/|Framework overview]]
   * [[references:joomla.framework:Parameter:JElementTextarea|JElementTextarea]]
   * [[references:joomla.framework:Parameter:JElementTimezones|JElementTimezones]]
   * [[references:joomla.framework:Parameter:JParameter|JParameter]]
+
+==== Plugin ====
+  * [[references:joomla.framework:Plugin:JPlugin|JPlugin]]
+  * [[references:joomla.framework:Plugin:JPluginHelper|JPluginHelper]]
 
 ==== Registry ====
 [[http://dev.joomla.org/images/stories/UML/joomla.framework.registry_detail.png|UML Diagram]]

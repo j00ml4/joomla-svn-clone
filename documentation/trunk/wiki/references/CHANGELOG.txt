@@ -16,6 +16,12 @@ Legend:
 ! -> Note
 ---------
 
+24.10.2007 René Serradeil
+ > utilities/jmail*.*  mail/*.*
+ > event/jplugin*.*    plugin/*.*
+ ^ JAPI: Utilities JMail > Mail JMail, Event JPlugin > Plugin JPlugin
+ ^ occurances of: JEventDispatcher > JDispatcher, JEventHandler > JEvent
+
 22.09.2007 René Serradeil
  + Added JRequest::getMethod and example
  + Added JRouter::attachBuildRule and attachParseRule. req. example

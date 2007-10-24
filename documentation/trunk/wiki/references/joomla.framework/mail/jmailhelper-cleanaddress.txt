@@ -1,0 +1,19 @@
+====== cleanAddress ======
+{#JAPI Joomla.Framework Mail JMailHelper::cleanAddress #}
+
+Verifies that an e-mail address does not have any extra headers injected into it.
+
+===== Syntax =====
+string|false cleanAddress	( **$address** )
+
+| **$address** | string | E-Mail address. |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

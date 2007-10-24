@@ -1,0 +1,19 @@
+====== setSender ======
+{#JAPI Joomla.Framework Mail JMail::setSender #}
+
+Set the E-Mail sender
+
+===== Syntax =====
+void setSender	( **$from** )
+
+| **$from** | array | E-Mail address and Name of sender          <pre>             array( [0] => E-Mail Address [1] => Name )</pre> |
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

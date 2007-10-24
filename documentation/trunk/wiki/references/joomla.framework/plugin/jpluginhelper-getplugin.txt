@@ -1,0 +1,12 @@
+====== getPlugin ======
+{#JAPI Joomla.Framework Plugin JPluginHelper::getPlugin #}
+
+Get the plugin data of a group if no specific plugin is specified  otherwise only the specific plugin data is returned
+===== Syntax =====
+mixed &getPlugin	( **$group**, **$plugin** )
+| **** | string |  |
+| **** | string |  |
+
+===== Examples =====
+
+

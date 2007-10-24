@@ -1,0 +1,18 @@
+====== Send ======
+{#JAPI Joomla.Framework Mail JMail::Send #}
+
+
+
+===== Syntax =====
+mixed &Send ()
+
+
+===== Examples =====
+<code php|Example>
+
+</code>
+
+
+----
+
+~~DISCUSSION~~

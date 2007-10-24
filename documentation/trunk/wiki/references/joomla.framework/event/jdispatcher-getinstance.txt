@@ -1,0 +1,22 @@
+====== getInstance ======
+{#JAPI Joomla.Framework Event JDispatcher::getInstance #}
+
+Returns a reference to the global Language object, only creating it if it doesn't already exist.
+
+JDispatcher is implemented as a Singleton object, that is only one instance of this object exists.
+Do not use the new operator to "create" a new dispatcher instance.
+
+===== Syntax =====
+&getInstance()
+
+===== Examples =====
+
+<code php|Example>
+$dispatcher = &JDispatcher::getInstance();
+</code>
+
+----
+
+~~DISCUSSION~~
+
+

@@ -1,0 +1,14 @@
+====== addBCC ======
+{#JAPI Joomla.Framework Mail JMail::addBCC #}
+
+Use this class if you want to add one or more BCC ([[http://en.wikipedia.org/wiki/Blind_Carbon_Copy|Blind Carbon Copy]]) recepients to the e-mail.
+
+===== Syntax =====
+void addBCC( **$bcc** ) 
+
+| **$bcc** | mixed | Either a string or array of strings [recipients].|
+
+===== Examples =====
+TODO
+
+~~DISCUSSION~~

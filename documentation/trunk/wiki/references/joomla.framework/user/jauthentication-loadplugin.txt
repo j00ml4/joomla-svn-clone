@@ -15,7 +15,7 @@ boolean loadPlugin	( **$plugin**, **&$subject** )
 ===== Examples =====
 This function is called by class constructor. The class constructor attaches itself to the event dispatcher.
 <code php|Example>
-$dispatcher =& JEventDispatcher::getInstance();
+$dispatcher =& JDispatcher::getInstance();
 
 $plugins = JPluginHelper::getPlugin( 'authentication' );
 		

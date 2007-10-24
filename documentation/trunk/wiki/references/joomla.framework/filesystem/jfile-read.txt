@@ -1,15 +1,24 @@
 ====== read ======
 {#JAPI Joomla.Framework FileSystem JFile::read #}
 
-Reads the contents of a file. If the current user has permission and safe mode is turned off, or the protocol is HTTP (i.e. the file name starts with http://) then this function will use the PHP [[http://www.php.net/fopen|fopen]] function. Otherwise, the function will use ftp (if enabled) to read the file. The function returns a string containing the contents of the file if successful.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:utilities:JError|JError]] class.
+Reads (parts of) the contents of a file. The current user (typically the web-server process) must have permission to read the file using the PHP [[http://php.net/manual/function.fopen.php|fopen]] function. The function may fail if PHP runs in "safe mode".
+
+The function is binary-safe and returns the contents of the file if successful or false on error. It will raise a warning on failure using the [[references:Joomla.Framework:Utilities:JError|JError]] class.
 
 ===== Syntax =====
-string read	( **$filename**, **$incpath** )
-| **$filename** | string | is a string containing the full file path. |
-| **$incpath** | boolean | is a flag that specifies whether or not to use the include path (only applicable if the file can be opened using the PHP [[http://www.php.net/fopen|fopen]] function). |
+string|bool read ( **$filename**, **$incpath** = false, **$amount** = 0, **$chunksize** = 8192)
+
+| **$filename** | string | The full file path. |
+| **$incpath** | boolean | Specifies whether or not to use the include path (only applicable if the file can be opened using the PHP [[http://php.net/manual/function.fopen.php|fopen]] function). |
+| **$amount** | integer | Amount of data to read in bytes from the file's beginning, defaults to the filesize ($amount = 0) |
+| **$chunksize** | integer | Size of data chunks to read in bytes. Only applies if $amount > 0 |
+
+The $amount argument determines how many bytes the function should return, always starting at the beginning of the file. For example you can't use this function to only read the last n bytes from a file or any arbitrary position within a file and start from there.
+
+The $chunksize argument controls how much data is read from the target file to collect the requested $amount. If the $amount is smaller than the $chunksize it's adjusted to match the amount in order to read the file in one step. The $chunksize default size is 8192 bytes (8kB) which is fine to read files stored on the server's file system. However, reading from a remote resource such as http, a limited network connection, or some slow device (dial up or floppy drives, anyone?), you may need to lower this "byte rate" to avoid timeouts in case the data does not arrive in time (in which case a standard PHP error occurs.)
 
 ===== Examples =====
-Example: This example reads the robot.txt file.
+Example: This example reads the robots.txt file.
 <code php|Example>
 echo JFile::read( 'robots.txt' );
 </code>
@@ -19,17 +28,24 @@ User-agent: *
 Disallow: /administrator/
 Disallow: /cache/
 Disallow: /components/
-Disallow: /editor/
-Disallow: /help/
 Disallow: /images/
 Disallow: /includes/
+Disallow: /installation/
 Disallow: /language/
-Disallow: /mambots/
+Disallow: /libraries/
+Disallow: /logs/
 Disallow: /media/
 Disallow: /modules/
+Disallow: /plugins/
 Disallow: /templates/
-Disallow: /installation/
+Disallow: /tmp/
+Disallow: /xmlrpc/
 </code>
+
+If you just want to get the contents of a file into a string, use [[http://php.net/manual/function.file_get_contents.php|file_get_contents()]] (available as of PHP 4.3.0) as it has much better performance.
+
+Even with safe mode off, you must have allow_url_fopen enabled in php.ini, in order to use HTTP and FTP URLs with this function. This restriction is imposed by PHP as explained in [[http://php.net/manual/ref.filesystem.php | Chapter XLI. Filesystem Functions]] of the PHP manual. 
+Instead of using FTP URLs with this function you might consider using its counterpart from the [[references:Joomla.Framework:client:JFTP-read|JFTP]] class.
 
 ----
 
