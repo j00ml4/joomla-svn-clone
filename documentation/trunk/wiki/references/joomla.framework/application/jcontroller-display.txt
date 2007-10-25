@@ -23,7 +23,3 @@ function display() {
 This will result in the view specified in the request being rendered.
 
 ----
-
-~~DISCUSSION~~
-
-
