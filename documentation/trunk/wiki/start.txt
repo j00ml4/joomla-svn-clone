@@ -60,7 +60,7 @@ Many of these standards are in development and are still being improved. But mak
     * [[migration:quick_reference|Quick Reference]]
     * [[migration:table_changes|Table Changes]]
     * [[migration:changed_param_map|Change Parameters Map]]
-    * [[migration:migration-component|1.0 to 1.5 Migration Component]]
+    * [[migration:migration|1.0 to 1.5 Migration Component]]
 
 ==== 7. Tips and Tricks ====
 

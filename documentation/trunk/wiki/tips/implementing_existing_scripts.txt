@@ -1,4 +1,4 @@
-======Implementing existing scripts into Joomla (WIP)======
+======Implementing existing scripts into Joomla! 1.0 (WIP)======
 So you decided to go Joomla, but have older PHP scripts you need to rescue over to your new site. This guide should help you to take the first steps.
 
 =====1. What do I want?=====
@@ -14,11 +14,11 @@ Now, Joomla has a few rules we should pay attention to. First, there is the nami
 echo "hello world.";
 ?>
 </code>
-Now we can call this component with "www.testsite.com/index.php?option=com_hello" and we get a nice page with "hello world." printed in the area normally occupied by our content.
+Now we can call this component with "www.example.com/index.php?option=com_hello" and we get a nice page with "hello world." printed in the area normally occupied by our content.
 
-=====4. More rules...=====
+=====4. More rules=====
 The following is not entirely necessary, but it will give your code more structure (hopefully) and make it easier for people (and yourself) to get through even big code blocks.
-Joomla has established splitting the code from the logic quite some time ago and we encourage you to follow our example. At the moment there are two ways to achieve this. Either use patTemplate, which is brand new and would be the way to go in the future, or create your .html.php-file, like it has been done up till now. patTemplate has the advantage of a more clean division between logic and output and it is easier adjustable for the end-user, but the author of this text has some problems at learning the new commands to use it, so we stick with the old way, the .html.php-file, which means in our com_hello-example, we create the file "hello.html.php":
+Joomla has established splitting the code from the logic quite some time ago and we encourage you to follow our example. At the moment there are two ways to achieve this. This means in our com_hello-example, we create the file "hello.html.php":
 <code php|hello.html.php>
 <?php
 class hello_HTML {
