@@ -5,8 +5,8 @@ It is **not recommended** to utilize any of the following classes for extensions
 
 ===== Summary =====
 
-The Joomla! 1.5 legacy classes are located in the following folder of your Joomla! installation:
-  /libraries/joomla/common/legacy
+The Joomla! 1.5 legacy classes and functions are located in the following folder of your Joomla! installation:
+  /plugins/system/legacy
 
 The following list is provided as an entry point to the new MVC (Model View Controller) design patter used throughout Joomla! 1.5 and later.
 
@@ -32,6 +32,63 @@ For a full documentation of the legacy interface please refer to **Chapter 11. A
   * [[references:Joomla.Legacy:1.5:mosUser|mosUser]]
 
 ===== Functions =====
+  * ampReplace
+  * deldir
+  * doGzip
+  * editorArea
+  * getEditorContents
+  * initEditor
+  * initGzip
+  * josGetArrayInts
+  * josSpoofCheck
+  * josSpoofValue
+  * loadOverlib
+  * sefRelToAbs
+  * SortArrayObjects
+
+  * mosArrayToInts
+  * mosBackTrace
+  * mosBindArrayToObject
+  * mosChmod
+  * mosChmodRecursive
+  * mosCountAdminModules
+  * mosCountModules
+  * mosCreateMail
+  * mosCurrentDate
+  * mosErrorAlert
+  * mosFormatDate
+  * mosGetBrowser
+  * mosGetOrderingList
+  * mosGetOS
+  * mosGetParam
+  * mosHash
+  * mosIsChmodable
+  * mosLoadAdminModule
+  * mosLoadAdminModules
+  * mosLoadComponent
+  * mosLoadModule
+  * mosLoadModules
+  * mosMail
+  * mosMainBody
+  * mosMainBody_Admin
+  * mosMakeHtmlSafe
+  * mosMakePassword
+  * mosMakePath
+  * mosMenuCheck
+  * mosNotAuth
+  * mosObjectToArray
+  * mosParseParams
+  * mosPathName
+  * mosPathWay
+  * mosReadDirectory
+  * mosRedirect
+  * mosSendAdminMail
+  * mosShowHead
+  * mosShowHead_Admin
+  * mosShowSource
+  * mosStripslashes
+  * mosTreeRecurse
+  * mosWarning
 
 ----
 
