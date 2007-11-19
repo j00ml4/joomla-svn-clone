@@ -1106,22 +1106,7 @@ class TestOfJFTP extends UnitTestCase
 	 */
 	function handleErrorTrigger($error)
 	{
-		switch($error->get('level')) {
-			case E_ERROR:
-				$level = E_USER_ERROR;
-				break;
-			case E_WARNING:
-				$level = E_USER_WARNING;
-				break;
-			case E_NOTICE:
-				$level = E_USER_NOTICE;
-				break;
-			default:
-				$level = E_USER_ERROR;
-				break;
-		}
-
-		trigger_error($error->get('message'), $level);
+		trigger_error($error->get('message'), E_USER_ERROR);
 		return $error;
 	}
 }
