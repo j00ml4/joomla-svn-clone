@@ -19,16 +19,8 @@ class TestOfJFTP extends UnitTestCase
 
 		/** @TODO this should be included in a JoomlaTestCase which extends the UnitTestCase */
 		jimport('joomla.utilities.error');
-		JError::setErrorHandling(E_NOTICE, 'trigger');
-		JError::setErrorHandling(E_WARNING, 'trigger');
-		JError::setErrorHandling(E_ERROR, 'trigger');
-
-		/** @TODO: Fix this in JFTP!!! */
-		/*
-		 * temporary workaround!!!! otherwise the destructor test will fail,
-		 * as there is a reference to the object laying around in the unit tester's error handler
-		 */
-		!defined('JPATH_ISWIN') && define('JPATH_ISWIN', true);
+		$options = array('TestOfJFTP', 'handleErrorTrigger');
+		JError::setErrorHandling(E_ALL, 'callback', $options);
 
 		if (!class_exists('JFTP')) {
 			jimport('joomla.client.ftp');
@@ -1107,6 +1099,31 @@ class TestOfJFTP extends UnitTestCase
 		$this->assertTrue( false );
 	}
 */
+
+	/**
+	 * Error handling function for errors thrown through the use of JError. Errors will be forwarded
+	 * to PHP by calling trigger_error, so that they can be caught by PHPUnit's error handler
+	 */
+	function handleErrorTrigger($error)
+	{
+		switch($error->get('level')) {
+			case E_ERROR:
+				$level = E_USER_ERROR;
+				break;
+			case E_WARNING:
+				$level = E_USER_WARNING;
+				break;
+			case E_NOTICE:
+				$level = E_USER_NOTICE;
+				break;
+			default:
+				$level = E_USER_ERROR;
+				break;
+		}
+
+		trigger_error($error->get('message'), $level);
+		return $error;
+	}
 }
 
 /** @TODO: Move to appropriate place */
