@@ -19,7 +19,7 @@ void createURL	( **$ref**, **$com** )
 ===== Examples =====
 Use the help file which is located in the component directory:
 <code php|Example 1>
-jimport( 'joomla.i18n.help' );
+jimport( 'joomla.language.help' );
 echo JHelp::createURL( 'screen.config', true );
 </code>
 might produce:
@@ -29,7 +29,7 @@ http://127.0.0.1/joomla11/administrator/components/com_testing/help/screen.confi
 
 When it is defined, the method will use the user help URL (found in $user->getParam( 'helpsite' ) ):
 <code php|Example 2>
-jimport( 'joomla.i18n.help' );
+jimport( 'joomla.language.help' );
 echo JHelp::createURL( 'screen.config' );
 </code>
 might produce:
@@ -40,7 +40,7 @@ if the user is set to use the Bulgarian help site.
 
 If the user does not have a help site URL defined, it will check for a global help url (using $mainframe->getCfg( 'helpurl' )):
 <code php|Example 3>
-jimport( 'joomla.i18n.help' );
+jimport( 'joomla.language.help' );
 echo JHelp::createURL( 'screen.config' );
 </code>
 might produce:
@@ -51,7 +51,7 @@ if the user does not have a selected help site (or the user is not logged in).
 
 If none of the above conditions are met:
 <code php|Example 4>
-jimport( 'joomla.i18n.help' );
+jimport( 'joomla.language.help' );
 echo JHelp::createURL( 'screen.config' );
 </code>
 might produce:

@@ -1,5 +1,5 @@
 ====== handleTrigger ======
-{#JAPI Joomla.Framework Utilities JError::handleTrigger #}
+{#JAPI Joomla.Framework Error JError::handleTrigger #}
 
 Trigger error handler <ul><li>Triggers a PHP native error with the error message</li></ul>
 

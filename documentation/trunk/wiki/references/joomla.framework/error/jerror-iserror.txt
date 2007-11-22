@@ -1,5 +1,5 @@
 ====== isError ======
-{#JAPI Joomla.Framework Utilities JError::isError #}
+{#JAPI Joomla.Framework Error JError::isError #}
 
 Determines whether the return value of a pat application method (i.e. patTemplate method) is a patError object. If it is, the funtion returns true. Otherwise, it returns false.
 ===== Syntax =====

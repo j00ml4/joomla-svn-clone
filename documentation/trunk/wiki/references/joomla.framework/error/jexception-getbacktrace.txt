@@ -1,5 +1,5 @@
 ====== getBacktrace ======
-{#JAPI Joomla.Framework Utilities JException::getBacktrace #}
+{#JAPI Joomla.Framework Error JException::getBacktrace #}
 
 Method to get the backtrace information for an exception object
 

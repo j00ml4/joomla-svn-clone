@@ -2,7 +2,7 @@
 {#JAPI Joomla.Framework Base JObserver::update #}
 
 Method to update the state of observable objects. 
-The default implementation of this method does nothing, but will raise an [[references:joomla.framework:Utilites|JError|error]] if called directly.
+The default implementation of this method does nothing, but will raise an [[references:joomla.framework:Error|JError|error]] if called directly.
 
 Event distribution is handled by the [[references:joomla.framework:Application:JDispatcher|JDispatcher]] class which is instantiated by [[references:joomla.framework:application:japplication|JApplication]]. When an event is [[references:joomla.framework:application:japplication#triggerEvent|triggered]], all registered Observers are checked to see if they provided a valid ***callback method*** to handle the event. If the callback exists in the Observer class, then the update function is called with an array passed as its parameter. The update function should return the results of the function call.
 

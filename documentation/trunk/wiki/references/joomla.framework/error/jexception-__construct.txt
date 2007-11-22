@@ -1,5 +1,5 @@
 ====== __construct ======
-{#JAPI Joomla.Framework Utilities JException::__construct #}
+{#JAPI Joomla.Framework Error JException::__construct #}
 
 Constructor <ul><li>used to set up the error with all needed error details.</li></ul>
 

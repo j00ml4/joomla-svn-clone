@@ -1,5 +1,5 @@
 ====== raiseWarning ======
-{#JAPI Joomla.Framework Utilities JError::raiseWarning #}
+{#JAPI Joomla.Framework Error JError::raiseWarning #}
 
 This is a wrapper for the [[#raise|raise]] method that passes E_WARNING as the error level. A patError object will be returned.
 

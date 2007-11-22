@@ -1,19 +1,19 @@
-====== raise ======
-{#JAPI Joomla.Framework Utilities JError::raise #}
+====== raiseError ======
+{#JAPI Joomla.Framework Error JError::raiseError #}
 
-Creates a new patError object given the specified information.
+This is a wrapper for the [[#raise|raise]] method that passes E_ERROR as the error level. A patError object will be returned.
 ===== Syntax =====
-mixed &raise	( **$level**, **$code**, **$msg**, **$info** )
-| **$level** | int | is an integer containing the error level. Use any of PHP's own error levels for this: E_ERROR, E_WARNING, E_NOTICE, E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE. |
+object &raiseError	( **$code**, **$msg**, **$info** )
 | **$code** | string | is a string containing the application-internal error code for this error. |
 | **$msg** | string | is a string containing the error message, which may also be shown the user if need be. |
 | **$info** | mixed | is a variable containing additional error information. This should usually only be developer-relevant information that the user should not see (i.e. a database DSN). This parameter is optional and if omitted defaults to null. |
 
 ===== Examples =====
 <code php|Example>
-JError::raise( E_NOTICE, '6000', 'File access error!' );
+JError::setErrorHandling( E_ALL, 'echo' );
+JError::raiseError( '6000', 'File access error!' );
 </code>
 might produce:
 <code php|Result>
-jos-Notice: File access error!
+jos-Error: File access error!
 </code>

@@ -1,5 +1,5 @@
 ====== getErrorHandling ======
-{#JAPI Joomla.Framework Utilities JError::getErrorHandling #}
+{#JAPI Joomla.Framework Error JError::getErrorHandling #}
 
 Method to get the current error handler settings for a specified error level.
 

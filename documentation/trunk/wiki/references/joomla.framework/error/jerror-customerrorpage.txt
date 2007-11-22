@@ -1,5 +1,5 @@
 ====== customErrorPage ======
-{#JAPI Joomla.Framework Utilities JError::customErrorPage #}
+{#JAPI Joomla.Framework Error JError::customErrorPage #}
 
 Display a custom error page and exit gracefully
 

@@ -1,5 +1,5 @@
 ====== hasErrors ======
-{#JAPI Joomla.Framework Utilities JError::hasErrors #}
+{#JAPI Joomla.Framework Error JError::hasErrors #}
 
 Checks to see if any errors have been stored.
 ===== Syntax =====

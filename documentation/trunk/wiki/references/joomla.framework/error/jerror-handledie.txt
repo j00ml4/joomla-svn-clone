@@ -1,10 +1,10 @@
-====== handleLog ======
-{#JAPI Joomla.Framework Utilities JError::handleLog #}
+====== handleDie ======
+{#JAPI Joomla.Framework Error JError::handleDie #}
 
-Log error handler <ul><li>Logs the error message to a system log file</li></ul>
+Die error handler <ul><li>Echos the error message to output and then dies</li></ul>
 
 ===== Syntax =====
-object The &handleLog	( **&$error**, **$options**, **$error** )
+object The &handleDie	( **&$error**, **$options**, **$error** )
 
 | **$error** | object | Exception object to handle |
 | **$options** | array | Handler options |

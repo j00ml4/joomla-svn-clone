@@ -3,7 +3,7 @@
 
 Reads (parts of) the contents of a file. The current user (typically the web-server process) must have permission to read the file using the PHP [[http://php.net/manual/function.fopen.php|fopen]] function. The function may fail if PHP runs in "safe mode".
 
-The function is binary-safe and returns the contents of the file if successful or false on error. It will raise a warning on failure using the [[references:Joomla.Framework:Utilities:JError|JError]] class.
+The function is binary-safe and returns the contents of the file if successful or false on error. It will raise a warning on failure using the [[references:Joomla.Framework:Error:JError|JError]] class.
 
 ===== Syntax =====
 string|bool read ( **$filename**, **$incpath** = false, **$amount** = 0, **$chunksize** = 8192)

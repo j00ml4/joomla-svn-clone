@@ -1,5 +1,5 @@
 ====== getError ======
-{#JAPI Joomla.Framework Utilities JError::getError #}
+{#JAPI Joomla.Framework Error JError::getError #}
 
 Method for retrieving the last exception object in the error stack
 
