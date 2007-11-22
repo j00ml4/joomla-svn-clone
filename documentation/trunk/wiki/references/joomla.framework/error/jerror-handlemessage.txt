@@ -1,5 +1,5 @@
 ====== handleMessage ======
-{#JAPI Joomla.Framework Utilities JError::handleMessage #}
+{#JAPI Joomla.Framework Error JError::handleMessage #}
 
 Message error handler <ul><li>Enqueues the error message into the system queue</li></ul>
 

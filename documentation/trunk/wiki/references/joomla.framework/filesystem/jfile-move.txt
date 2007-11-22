@@ -1,7 +1,7 @@
 ====== move ======
 {#JAPI Joomla.Framework FileSystem JFile::move #}
 
-Moves a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/rename|rename]] function. Otherwise, the function will use FTP (if enabled) to move the file. The function returns true if the file was successfully moved.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:utilities:JError|JError]] class.
+Moves a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/rename|rename]] function. Otherwise, the function will use FTP (if enabled) to move the file. The function returns true if the file was successfully moved.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:Error:JError|JError]] class.
 
 ===== Syntax =====
 boolean move	( **$src**, **$dest**, **$path** )

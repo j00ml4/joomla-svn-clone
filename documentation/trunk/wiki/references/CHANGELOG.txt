@@ -15,6 +15,10 @@ Legend:
 > -> Moved
 ! -> Note
 ---------
+22.11.2007 René Serradeil
+ + error Package
+ > JError, JException, JLog, JProfiler
+ # "l10n" package name in code examples and links
 
 24.10.2007 René Serradeil
  > utilities/jmail*.*  mail/*.*

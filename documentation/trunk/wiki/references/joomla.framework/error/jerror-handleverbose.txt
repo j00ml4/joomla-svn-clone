@@ -1,5 +1,5 @@
 ====== handleVerbose ======
-{#JAPI Joomla.Framework Utilities JError::handleVerbose #}
+{#JAPI Joomla.Framework Error JError::handleVerbose #}
 
 Verbose error handler <ul><li>Echos the error message to output as well as related info</li></ul>
 

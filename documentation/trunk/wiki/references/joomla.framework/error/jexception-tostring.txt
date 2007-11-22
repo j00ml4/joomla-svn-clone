@@ -1,5 +1,5 @@
 ====== toString ======
-{#JAPI Joomla.Framework Utilities JException::toString #}
+{#JAPI Joomla.Framework Error JException::toString #}
 
 Returns to error message
 

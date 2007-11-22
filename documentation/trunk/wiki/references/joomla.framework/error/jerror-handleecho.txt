@@ -1,5 +1,5 @@
 ====== handleEcho ======
-{#JAPI Joomla.Framework Utilities JError::handleEcho #}
+{#JAPI Joomla.Framework Error JError::handleEcho #}
 
 Echo error handler <ul><li>Echos the error message to output</li></ul>
 

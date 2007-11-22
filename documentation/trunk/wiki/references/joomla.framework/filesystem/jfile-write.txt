@@ -1,7 +1,7 @@
 ====== write ======
 {#JAPI Joomla.Framework FileSystem JFile::write #}
 
-Write a string to a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/file-put-contents|file_put_contents]] function. Otherwise, the function will use FTP (if enabled) to write the file. The function returns true if the write operation was successful.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:utilities:JError|JError]] class.
+Write a string to a file. If the current user has permission and safe mode is turned off, then this function will use the PHP [[http://www.php.net/file-put-contents|file_put_contents]] function. Otherwise, the function will use FTP (if enabled) to write the file. The function returns true if the write operation was successful.  Otherwise, the function returns false and may raise a warning using the [[references:joomla.framework:Error:JError|JError]] class.
 
 ===== Syntax =====
 boolean write ( **$file**, **$buffer** )

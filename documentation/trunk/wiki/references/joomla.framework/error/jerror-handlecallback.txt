@@ -1,5 +1,5 @@
 ====== handleCallback ======
-{#JAPI Joomla.Framework Utilities JError::handleCallback #}
+{#JAPI Joomla.Framework Error JError::handleCallback #}
 
 Callback error handler <ul><li>Send the error object to a callback method for error handling</li></ul>
 

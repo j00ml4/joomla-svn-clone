@@ -1,5 +1,5 @@
 ====== registerErrorLevel ======
-{#JAPI Joomla.Framework Utilities JError::registerErrorLevel #}
+{#JAPI Joomla.Framework Error JError::registerErrorLevel #}
 
 Method to register a new error level for handling errors<p>This allows you to add custom error levels to the built-in <ul><li>E_NOTICE</li><li>E_WARNING</li><li>E_NOTICE</li></ul></p>
 

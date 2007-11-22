@@ -29,7 +29,7 @@ $template = $mainframe->getTemplate();
 $document->setError($error);
 
 @ob_end_clean();
-jimport('joomla.i18n.language');
+jimport('joomla.language.language');
 $document->setTitle(JText::_('Error').': '.$error->code);
 $data = $document->render(false, array (
 	'template' => $template,

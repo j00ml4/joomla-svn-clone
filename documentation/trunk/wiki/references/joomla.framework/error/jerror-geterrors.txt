@@ -1,5 +1,5 @@
 ====== getErrors ======
-{#JAPI Joomla.Framework Utilities JError::getErrors #}
+{#JAPI Joomla.Framework Error JError::getErrors #}
 
 Retrieves the errors that are stored. This function returns a chronological array of errors that have been stored during script execution. Storing errors is one of multiple methods. See the [[#seterrorhandling|setErrorHandling]] method for more information.
 

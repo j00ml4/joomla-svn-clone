@@ -9,7 +9,7 @@ array createSiteList ( **$pathToXml**, **$selected** )
 
 ===== Examples =====
 <code php|Example>
-jimport( 'joomla.i18n.help' );
+jimport( 'joomla.language.help' );
 
 $helpsites	= array ();
 $helpsites 	= JHelp::createSiteList('http://help.joomla.org/helpsites-11.xml', $row->helpurl);

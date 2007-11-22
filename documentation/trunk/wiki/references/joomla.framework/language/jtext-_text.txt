@@ -1,7 +1,7 @@
 ====== _ ======
 {#JAPI Joomla.Framework I18N JText::_ #}
 
-Translates a string into the current language. This method passes the specified string to the current [[references:joomla.framework:i18n:jlanguage|JLanguage]] object which will use the string as a key to look for a corresponding value in the current language. If no string exists in the current language, then the string that is passed to the method is returned.
+Translates a string into the current language. This method passes the specified string to the current [[references:joomla.framework:Language:jlanguage|JLanguage]] object which will use the string as a key to look for a corresponding value in the current language. If no string exists in the current language, then the string that is passed to the method is returned.
 
 If the **$jsSafe** parameter is true, then the resulting string will be processed with the [[http://php.net/manual/function.addslashes.php|addslashes]] function before being returned.
 

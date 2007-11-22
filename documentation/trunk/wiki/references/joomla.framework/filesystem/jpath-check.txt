@@ -1,7 +1,7 @@
 ====== check ======
 {#JAPI Joomla.Framework FileSystem JPath::check #}
 
-Checks for snooping outside of the file system root. This prevents paths being used which either use .. to move up the folder tree or paths which do not start at JPATH_ROOT. This method does not return a value but will raise an error using the [[references:joomla.framework:utilities:JError|JError]] class if there is a problem with the path.
+Checks for snooping outside of the file system root. This prevents paths being used which either use .. to move up the folder tree or paths which do not start at JPATH_ROOT. This method does not return a value but will raise an error using the [[references:joomla.framework:Error:JError|JError]] class if there is a problem with the path.
 
 ===== Syntax =====
 void check	( **$path** )
