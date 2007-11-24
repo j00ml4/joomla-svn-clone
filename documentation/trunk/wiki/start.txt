@@ -46,6 +46,7 @@ Many of these standards are in development and are still being improved. But mak
   * [[references:xml_parameters|XML Parameters]]
   * [[references:3pd-libraries|Third-party Libraries included with Joomla!]]
 
+
 ==== 6. Joomla! 1.5 ====
 
   * Additions
@@ -60,7 +61,10 @@ Many of these standards are in development and are still being improved. But mak
     * [[migration:quick_reference|Quick Reference]]
     * [[migration:table_changes|Table Changes]]
     * [[migration:changed_param_map|Change Parameters Map]]
-    * [[migration:migration|1.0 to 1.5 Migration Component]]
+    * [[migration:migration-component|1.0 to 1.5 Migration Component]]
+
+  * Testing
+    * [[testing:overview|Overview]]
 
 ==== 7. Tips and Tricks ====
 
