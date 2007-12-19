@@ -1,0 +1,36 @@
+
+factory.php
+===========
+1	testGetXMLParser_feeds()
+	# FIX in framework class:
+	JFactory::getXMLParser('RSS') and JFactory::getXMLParser('Atom')
+	called with empty $options array
+		"Undefined index: rssUrl" factory.php line 265
+
+	to avoid E_NOTICE, change line 265 to:
+		if ( isset($options['rssUrl']) && (null !== $options['rssUrl']) )
+
+2	testGetXMLParser_feeds_live()
+
+3	testGetDBO()
+	=> check workflow in getDBO() and see if MockObjects can help
+	JFactory::getDBO() has many prerequisites which currently can't be
+	(easily) satisfied in a *simple* test case, i.e.
+	- 	JFactory::_createDBO() [the workhorse] expects JError to be available,
+		which THIS test case is not in charge to take care of.
+	- 	loading JError doesn't help since in this context
+		-	will call customErrorPage()
+		 ->	depends on $mainframe aka JSite's getTemplate()
+		 ->	which will call JFactory::getDBO() for the template ...
+
+4	JFactory::_createMailer() call to useSendmail()
+	is not working correctly.
+	-> testGetMailer_sendmail()
+
+5	JFilterInput not preloaded by factory although used
+
+version.php
+===========
+1	testIsCompatible_minor()
+	How do you define compatibility?
+	Will 1.5.1 really be incompatible with 1.5.0 ?

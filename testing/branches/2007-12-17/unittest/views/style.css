@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+
+html {
+    font: normal small 'trebuchet ms',verdana,arial,helvetica,sans-serif;
+}
+
+body {
+    font-size: 100.1%;
+    color: #596F80;
+    padding: 1.0em;
+}
+
+h1.header {
+	background-image: url(images/logo.png);
+	background-repeat: no-repeat;
+	padding: 0 0 0 130px;
+	margin-top:0;
+	height: 80px;
+	cursor: pointer;
+	font-size: 1.5em;
+	margin-right: 15em;
+}
+
+h1.header span {
+	line-height:2em;
+}
+
+#userconfig {
+	position: absolute;
+	top: 1.5em;
+	right: 1.5em;
+	width: 18.5em;
+	font: inherit;
+	font-size: 0.9em;
+	border: 1px solid #ccc;
+}
+#userconfig strong { color: #578AD6; }
+#userconfig span   { color: #EBAD14; }
+
+a { color: inherit; }
+a:link { color: #578AD6; }
+a:visited { color: #61BF1A; }
+
+.testsuite {
+    font: bold 1.3em arial,helvetica,sans-serif;
+    padding: 0.2ex 1ex;
+    margin-top: 1ex;
+    margin-bottom: 0;
+    border-bottom: 3px solid #aaa;
+    background: #eee;
+}
+.testsuite small {
+	font-size: 0.6em;
+	padding-left:1em;
+}
+.testcase {
+	display: inline;
+    padding: 0 0 0 1em;
+}
+.docs {
+	font: 0.85em 'lucida console','courier new',courier,monospace;
+}
+
+
+.footer_fail, .footer_pass {
+	color: white;
+	padding: 1.0em;
+	margin-top: 0.5em;
+	background: green;
+}
+
+.footer_fail {
+	background: red;
+}
+
+.footer_footer {
+	margin-top: 0.5em;
+}
+
+.pass, .fail, .exception, .message {
+	color: white;
+    border-bottom: 1px solid;
+	text-decoration: none;
+    padding: 0.2em;
+}
+
+.pass      { background: #61BF1A; } /* Joomla-green   */
+.fail      { background: #ED2E38; } /* Joomla-red   */
+.exception { background: #EBAD14; } /* Joomla-orange */
+.message   { background: #578AD6; } /* Joomla-blue   */
+
+.tpass      { color: #61BF1A !important; background: inherit; } /* Joomla-green   */
+.tfail      { color: #ED2E38 !important; background: inherit; } /* Joomla-red   */
+.texception { color: #EBAD14 !important; background: inherit; } /* Joomla-orange */
+.tmessage   { color: #578AD6 !important; background: inherit; } /* Joomla-blue   */
+

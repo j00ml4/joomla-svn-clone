@@ -1,0 +1,185 @@
+
+Some general examples for UnitTestHelper
+./_files/libs/helper.php
+
+Content
+=======
+ * Methods
+ * The Info Object
+ * Static Properties
+
+
+Methods (excerpts)
+==================
+In no particular order:
+
+(object) getInfoObject($path)
+you need the returning object as an input argument for several other get-methods.
+$path is the location of a Framework file, a Testcase, or a Testsuite
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	$helper  = UnitTestHelper::getTestHelper();
+	require_once( $helper['location'] );
+
+-------------------------------------------------
+(bool) isTestEnabled($infoobj)
+whether the test identified by $infoobj is enabled, read: can/will run
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	if ( !UnitTestHelper::isTestEnabled($infoobj) ) {
+		UnitTestHelper::setTestEnabled($this, false);
+	}
+
+-------------------------------------------------
+(string) getTestConfigVar($infoobj)
+returns the name of a configuration directive the test identified by $infoobj
+
+	Example:
+	$infoobj = UnitTestHelper::getInfoObject('/libraries/joomla/factory.php');
+	$setting = UnitTestHelper::getTestConfigVar( $infoobj );
+	if ( constant($setting) !== true ) {
+		UnitTestHelper::setTestEnabled($this, false);
+	}
+
+-------------------------------------------------
+(mixed) getProperty($namespace, $prop, $forcetype = null, $destroy = false)
+A poor man's registry. Use this to mimic a "static class" variable w/o poluting
+the global variable namespace ($GLOBALS).
+See section 'Static Properties' for a list of static properties used in the JUT.
+
+	Example:
+	// initialize
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	$somedata = expensive_operation();
+	...
+	// retrieve
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	echo $somedata->foobar;
+
+-------------------------------------------------
+(void) unsetProperty($namespace, $prop)
+the counterpart of getProperty() will destroy the "property"
+
+	Example:
+    $somedata =& UnitTestHelper::getProperty('MyNamespace', 'fatObject');
+	// do stuff with $somedata
+	...
+	// release
+	UnitTestHelper::unsetProperty('MyNamespace', 'fatObject');
+
+-------------------------------------------------
+(JConfig|stdClass) makeCfg($value, $merge = false, $asArray = false)
+Parse URI schemes and DSN into various JConfig compliant properties.
+Useful to pimp a generic JConfig object with user provided credentials
+from `TestConfiguration.php`
+
+	Examples:
+	// ie. 'mysql://user:pass@localhost/testdb1?dbprefix=jos_';
+	$options = UnitTestHelper::makeCfg(JUNITTEST_DATABASE_MYSQL4, false, true);
+	$db      =& JDatabase::getInstance( $options );
+
+	// ie. 'ftp://unit:test@localhost/root/path/?ftp_sys=WIN';
+	$cfg = UnitTestHelper::makeCfg(JUT_FTP_CREDENTIALS);
+	$FTP =& JFTP::getInstance($cfg->host, $cfg->port);
+	$FTP->login($cfg->user, $cfg->pass);
+
+-------------------------------------------------
+(array) parseDSN($dsn)
+This is taken from PEAR::DB to parse user credentials from a 'Data Source Name'.
+Although accessible as a public method, you should use makeCfg() if the DSN
+items are supposed to be used in a JConfig class.
+
+The format of the supplied DSN is in its fullest form:
+  scheme(dbsyntax)://user:pass@protocol+host:port/target?option=8&another=true
+
+Most variations are allowed:
+  scheme://user:pass@prot+host:110//usr/db_file.db?mode=0644
+  scheme://user:pass@host/database_name
+  scheme://user:pass@host
+  scheme://user@host
+  scheme://host/database
+  scheme://host
+  scheme(dbsyntax)
+  scheme
+
+-------------------------------------------------
+(bool) log($label, $testfile, $message = '')
+A WIP vanilla proxy to error_log()
+Inout is sent to PHP's system logger, using the Operating System's
+system logging mechanism or a file, depending on what the error_log
+configuration directive is set to.
+
+	Examples:
+	UnitTestHelper::log('Jwhatever', __FILE__, 'something�s fishy');
+	// in PHP's error log the user will find:
+	Jwhatever (/foobar/JWhateverTest.php) something�s fishy
+
+
+The "Info Object"
+=================
+
+Array key      Example value
+-------------------------------------------------------------------------------
+[path]      => libraries/joomla/foobar/JWhateverTest.php
+[dirname]   => libraries/joomla/foobar/
+[filename]  => JWhateverTest.php
+[basename]  => JWhateverTest
+[classname] => JWhatever
+[config]    => JUT_FOOBAR_JWHATVER
+[testclass] => TestOfJWhatever
+[package]   => Foobar
+[is_test]   => JUNITTEST_IS_TESTCASE
+[helper]    => Array
+  (
+	[dirname]   => libraries/joomla/foobar/_files/
+	[filename]  => JWhatever_helper.php
+	[classname] => JWhateverTestHelper
+	[script]    => libraries/joomla/foobar/JWhateverTest.php
+	[location]  => libraries/joomla/foobar/_files/JWhatever_helper.php
+  )
+[docs]      => Array
+  (
+    [0]     => /abs/path/to/libraries/joomla/foobar/_files/JWhatever_readme.txt
+    [1]     => /abs/path/to/libraries/joomla/foobar/_files/JWhatever_todo.txt
+  )
+
+Possible values for the $is_test property:
+value  constant                 applied for
+  0    JUNITTEST_IS_FRAMEWORK   whatever.php
+  1    JUNITTEST_IS_TESTCASE    JWhateverTest.php
+  2    JUNITTEST_IS_TESTSUITE   AllTests.php
+
+
+Static Properties
+=================
+A brief overview of the static properties used by the UnitTest Controller
+
+(object) UnitTestHelper::getProperty('Controller', 'Input');
+- init in: UnitTestHelper::getReporter()
+- deassembled input arguments and the current reporter class
+
+(array) UnitTestHelper::getProperty('Helper', '<classname>');
+- init in: UnitTestHelper::getTestHelper()
+- dirname, filename, classname, script, location
+
+(array) UnitTestHelper::getProperty('Controller', 'Tests');
+- init in: UnitTestController::getUnitTestsList()
+- full list of all tests and their helper classes (if avail)
+
+(array) UnitTestHelper::getProperty('Controller', 'Disabled');
+- init in: UnitTestController::getUnitTestsList()
+- reference subset of Controller::Tests of disabled tests only
+
+(array) UnitTestHelper::getProperty('Controller', 'Enabled');
+- init in: UnitTestController::getUnitTestsList()
+- reference subset of Controller::Tests of enabled tests only
+
+(object) UnitTestHelper::getProperty('Reporter', 'UnitTests')
+
+
+Status of this document
+-----------------------
+Last review: 2007-07-20
+Status     : WIP

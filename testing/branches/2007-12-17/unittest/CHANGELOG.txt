@@ -1,0 +1,210 @@
+
+Changelog
+-------------------------------------------------
+This is a non-exhaustive (but still near complete) changelog
+for the Joomla! 1.5 Framework Unit-testing Platform.
+
+-------------------------------------------------
+Legend:
+# -> Bug Fix
++ -> Addition
+^ -> Change
+- -> Removed
+> -> Moved
+! -> Note
+X -> tests fail
+-------------------------------------------------
+TestCase coverage:  of  175
+
+Tests failing / issues:
+ X	JFactory: testgetmailer_sendmail()
+ X	JFactory: JFilterInput not preloaded by factory although used
+ 	! temporary fix by adding it to the TestCase
+
+ X	JFTP: testChdirSuccess() - should use alternative set of credentials
+ X	JFTP: testCreate(): [Integer: 17] fails with [Integer: 16]
+ 	! WinXP Home SP2, FileZilla 0.9.21
+
+-------------------------------------------------
+2007-07-27 CirTap
+ ^	removed output buffering from Simpletest dumper
+ +	added skip/error/exception handler + counter to custom renderer
+ +	example of using testcase observers in JObjectTest.php (source only)
+ +	UnitTestHelper::toggleHostUrl() for renderes to create a link of
+ 	the 2nd PHP environment (if enabled)
+ !	README.txt
+
+2007-07-23 Enno Klasing
+ #  JFTP: testSyst() now correctly catches the configuration setting
+ ^  Improved documentation for TestOfJFTP
+
+2007-07-22 CirTap
+ -	old skeletons in /application/, JRouteTest.php, JRouterTest.php
+ +	TestOfJFrameworkConfig, enabled: JUT_JOOMLA_JFRAMEWORKCONFIG = true
+ +	uloader.php; EXPERIMENTAL
+ +	prepend.php: added Mockup for jimport() using include_path
+ ^	JFTPTest / JFTP_helper: sendMessage() to paintMessage() since
+ 	formed is deprecated;
+ >	JFTPTest local helper methods to JFTP_helper
+
+2007-07-21 CirTap
+
+ !	TestConfiguration directives changed
+ 		settings that belong to a class-test have changed from
+ 		JUT_<filename>_FOOBAR to JUT_<classname>_FOOBAR
+ ^	JUT_FACTORY_*       >> JUT_JFACTORY_*
+ ^	JUT_FTP_CREDENTIALS >> JUT_JFTP_CREDENTIALS
+ 	JUT_FTP_NATIVE      >> JUT_JFTP_NATIVE
+ ^	JUT_DATABASE_MYSQL* >> JUT_JDATABASE_MYSQL*
+ ^	JUT_FILTER_JINPUTFILTER  >> JUT_FILTER_JFILTERINPUT
+	JUT_FILTER_JOUTPUTFILTER >> JUT_FILTER_JFILTEROUTPUT
+ ^	JUT_LANGUAGE_*      >> JUT_JLANGUAGE_*
+ !	updated JFTP_readme.txt
+ ^	JFTP_helper.php, JFactory_helper.php
+ ^	JoomlaHtml.php XHTML compliant, minor improvements
+ #	JoomlaHtml::setMissingTestCase()
+ #	TestOfJVersion before/setUp/tearDown
+
+2007-07-21 CirTap
+ +	template for text list mode
+ +	some stats in html, text render
+ #	missing call to addTestFile() in controller %-/
+ !	signature change: UnitTestHelper::getReporter()
+ ^	*::main() methods in TestCases
+ #	prepend.php using wrong input path, failed to load test-helper
+
+2007-07-20 CirTap
+ !	Simpletest 1.0.1beta2
+
+2007-07-17 CirTap
+ !	upd. README.txt
+ ^	UnitTestHelper methods now use "info object" as their parameter
+ 	instead of a file path
+ +	UnitTestHelper::getTestDocs()
+ #  UnitTestHelper::getTestConfigVar()
+ ^	libs/suite.php, prepend.php using getInfoObject()
+ ^	TestConfiguration-dist.php, reordered items, fixed wrong
+ 	constant names
+ ^	getUnitTestsList() to handle all file retrieval and test status
+ +	3 new static properties containing all testcase information:
+ 	('Controller', 'Tests'), ('Controller', 'Disabled'), ('Controller', 'Enabled')
+ ^	better handling of enabled/disabled tests in index.php for
+ 	list-mode output
+ ^	views/default.html
+ +	experimental: ability to disable AllTests.php for a complete
+ 	package/subtree using optional JUT_<PACKAGENAME>_ALL directive
+ !	JUT_*_ALL directives are not listed in TestConfiguration-dist.php
+
+2007-07-10 CirTap
+ #	UnitTestHelper::getTestHelper(), wrong paths returned
+ +	1 new static property: ('Helper', $infoobj->classname)
+
+2007-07-07 CirTap
+ !	upd. README.txt
+ +	UnitTestHelper::getInfoObject()
+
+2007-05-23 CirTap
+ ^	upd. JFTPTest with changes from /tags
+ ^	constants in TestConfiguration-dist.php to match
+	present class/file structure
+ ^	minor typos in README.txt
+
+2007-03-11 CirTap
+ #	issue with UnitTestReport::getTestcaseHelper()
+ #	several missing require_once() for the framework classes
+ 	! This is likely to have "side effects" with framework
+ 	  code that uses jimport() for the same files.
+ ^	AllTests.php using addTestFile() instead of addTestClass() to add
+ 	a single test case
+ +	new JoomlaTestSuite in /views/libs/suite.php to be used in AllTests
+ ^	Skeleton templates
+
+2007-03-03 CirTap
+ ^	code cleanup, docbloc
+ # 	main() and self() methods in PHP4
+
+2007-02-28 CirTap
+ ^	Skeleton templates using main()/self()
+ +	AllTests.tpl
+
+2007-02-26 CirTap
+ ^	improved _getClassFromFile(), makeUnitTestFile to use all classes
+ 	defined in a file and create a Skeleton for each
+ ^	improved Skeleton.php and tpls to incl. arguments and optional stub code
+ !	Testcase filenames now take the name of the class to test and the
+ 	prefix 'Test': JFactory => JFactoryTest.php
+ +	TestConfiguration.php, setting JUNITTEST_ADD_STUBS (bool)
+
+2007-02-24 CirTap
+ ^	UnitTestHelper:
+ 	+ loadClass(), loadFile(), isReadable(); alternate file/class loader
+ 		to be used within TestCases where jimport() is not an option.
+ 	+ makeCfg(); create/merge JConfig compliant objects with temp. credentials
+		using URI notation.
+ ^	Joomla*.php renderers to support "skip test" facility
+
+2007-02-22 CirTap
+ +	FactoryTestHelper, FtpTestHelper
+ ^	test files to run both standalone or as part of a TestGroup
+
+2007-02-21 CirTap
+ +	PHPUnit's Skeleton builder for new testcase files for -path (PHP5 only)
+ !	recommended to use PHP5 CLI to ceate new test Skeltons
+ +	UnitTestHelper class with a few utility routines
+ +	ability to autoload "Helper" classes to a TestCase to do the dirty
+ 	work and keep TestCases clean from setup/config routines
+
+2007-02-20 CirTap
+ ^	references of moved framework files
+ ^	UnitTestController no longer extends TestSuite but creates distinct
+ 	suites for the tests
+ ^	calls to UnitTestController methods are now static
+
+2007-02-14 CirTap
+ !	readme.txt
+ +	client/_files/ftp_preload.php, ftp_config.php
+ >	microtime_float() from ftp.php to ftp_preload.php
+ >	ftp.php JError setup/reset to ftp_preload.php
+ +  TestConfiguration.php-dist -- inspired by ZF
+ +	/unittest/[svn:ignore] TestConfiguration.php
+ !	index.php/default.html honors disabled tests of TestConfiguration.php
+	for the non-text renderers
+
+2007-02-13 CirTap
+ ^	"hardened" factory.php
+ ^	object.php using setUp()/tearDown() instead constructor to reinit
+ 		$this->class properly for the subsequent tests
+ ^	UnitTestController constructor now has the ability to load a "prepend"
+ 		file from _files/. This should solve the "ftp.conf" issue
+ !	see /libraries/README
+ ^	parameter tests for getMailer(), getXMLParser()
+ x	factory.php testGetDBO()
+ 		too many prerequisites, see code comments
+ x	factory.php testGetMailer_sendmail()
+ 		JFactory::_createMailer()'s call of useSendmail() lacks $sendmail
+ 		argument => JMail::useSendmail() always defaults to IsMail()
+ +	added "my" HTML renderer as an alternative to JoomlHtml -- open for discussion :)
+	! simple condition in index.php to toggle renderer based on hostname
+
+2007-02-12 CirTap
+ +	this CHANGELOG :)
+ ^	SVN $Id$ tag to all .php files
+ +	setUp(), tearDown() to UnitTestController::getUnitTestTemplate()
+ ^	use of json_encode() in JoomlaJson.php if the JSON extension is
+ 	installed (available by default in PHP 5.1)
+ ^	factory.php
+ 	^ assertTrue(get_class()) to assertIsA() (PHP4/5 case sensitive class names)
+ 	+ "hardened" inheritance checks of JFactored instances
+ 	# testGetCache() should expect 'JCacheCallback'
+ 	^ static calls JFactory::getXxx() instead using instance
+ +	version.php: testJVERSION(), testIsCompatible_minor()
+ ^	object.php
+ 	^ assertTrue(get_class()) to assertIsA() (PHP4/5 case sensitive class names)
+ 	# testToString() condition for PHP4/5 and case sensitive class names
+ !	updated Simpletest library to 1.0.1 beta (better support for PHP5)
+ 	see /simpletest/HELP_MY_TESTS_DONT_WORK_ANYMORE for a changelog
+ +	new /_files/ subfolder(s) to put example data, Mock object (-> README)
+ ^	UnitTestController::_files() to ignore names starting with '_'
+ ^	JoomlaHtml.php header clickable to return to /unittest/ index
+
+
