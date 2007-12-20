@@ -12,19 +12,15 @@ Legend:
 - -> Removed
 > -> Moved
 ! -> Note
-X -> tests fail
+
 -------------------------------------------------
-TestCase coverage:  of  175
-
-Tests failing / issues:
- X	JFactory: testgetmailer_sendmail()
- X	JFactory: JFilterInput not preloaded by factory although used
- 	! temporary fix by adding it to the TestCase
-
- X	JFTP: testChdirSuccess() - should use alternative set of credentials
- X	JFTP: testCreate(): [Integer: 17] fails with [Integer: 16]
- 	! WinXP Home SP2, FileZilla 0.9.21
-
+2007-12-20 Alan Langford
+ !  Created branch 2007-12-17
+ ^  svn:ignore now includes  .* at project root
+ -  Removed test status from changelog
+ -  Removed Simpletest
+ +  Added PHPUnit 1.3.2
+ !  Haven't dealt with resulting breakage
 -------------------------------------------------
 2007-07-27 CirTap
  ^	removed output buffering from Simpletest dumper
