@@ -16,7 +16,7 @@ error_reporting(E_ALL);
 
 // glob() and GLOB_ONLYDIR used in: UnitTestController::_files()
 if ( version_compare(PHP_VERSION, '4.3.3') < 0 ) {
-	die('Sorry. PHP 4.3.3 or later required.');
+	die('Sorry. Requires PHP 4.3.3 or later.');
 }
 
 define('JUNITTEST_MAIN_METHOD', '-stub-');

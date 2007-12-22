@@ -2,7 +2,8 @@
 Joomla! v1.5 Unit-Test Platform
 ===============================
 
-The Joomla Unit-testing platform is built using SimpleTest for PHP and provides a easy solution for testing Class level code within the Joomla framework.
+The Joomla Unit-testing platform is built using PHPUnit for PHP and provides an
+easy solution for testing Class level code within the Joomla framework.
 
  * How does it work?
  * Locations of the Framework and UnitTest Platform
@@ -30,26 +31,36 @@ The Joomla Unit-testing platform is built using SimpleTest for PHP and provides 
 
 How does it work?
 =================
-For it's basic usage, simply place the unpacked './unittest' folder into the root of the Joomla! installation you wish to test. 
-From your browser go to http://your.joomla.dlt/unittest/. You will be presented with a list of tests that can be run. The list is hierarchy based therefore if you click on the 'libraries' link all tests located in the 'libraries' folder will be run (Note: with a full set of tests this could take some time). 
-To run a subset of the available tests click on the appropriate subfolder or file name.
-All tests may also run via the command-line, see 'Command-line Use' below.
+For it's basic usage, simply place the unpacked './unittest' folder into the root of
+the Joomla! installation you wish to test. From your browser go to
+http://your.joomla.tld/unittest/. You will be presented with a list of tests that
+can be run. The list is hierarchy based therefore if you click on the 'libraries'
+link all tests located in the 'libraries' folder will be run (Note: with a full set
+of tests this could take some time). To run a subset of the available tests click on
+the appropriate subfolder or file name. All tests may also run via the command-line,
+see 'Command-line Use' below.
 
 
 Test Configuration
 ==================
-The Joomla! Framework provides access to a variety of resources such as database tables, FTP files, LDAP directories, or RSS feeds. As a procaution, several Testcases have been disabled via the default configuration file if they require some additional configuration, user credentials, or data in order to perform as intended. If your environment is technically capable to run these Tests, i.e. access to a FTP server, you need to enable them explicitly.
+The Joomla! Framework provides access to a variety of resources such as database
+tables, FTP files, LDAP directories, or RSS feeds. As a procaution, several
+test cases have been disabled via the default configuration file if they require
+some additional configuration, user credentials, or data in order to perform as
+intended. If your environment is technically capable to run these Tests, i.e.
+access to a FTP server, you need to enable them explicitly.
 
-First of all you need to copy(!) 
-	`TestConfiguration-dist.php` 
-as 
+First of all you need to copy(!)
+	`TestConfiguration-dist.php`
+to
 	`TestConfiguration.php`
 
-DO NOT modify the distribution file TestConfiguration-dist.php! 
-All your personal and local environment settings belong *exclusively* to the copy you've created.
+DO NOT modify the distribution file TestConfiguration-dist.php!
+All your personal and local environment settings belong *exclusively* to the
+copy you've created.
 
 	NOTE for Testcase developers:
-	`TestConfiguration-dist.php` is under version control whereas 
+	`TestConfiguration-dist.php` is under version control whereas
 	`TestConfiguration.php` is explicitely 'ignored' and will NOT
 	be committed by your SVN client if you happen to make changes
 	to the UnitTest Framework.
@@ -57,7 +68,8 @@ All your personal and local environment settings belong *exclusively* to the cop
 
 Locations of the Framework and UnitTest Platform
 ================================================
-You're not required to have the './unittest' folder located in your Joomla! installation path. You may drop this folder wherever PHP will be able to find it.
+You're not required to have the './unittest' folder located in your Joomla!
+installation path. You may drop this folder wherever PHP will be able to find it.
 
 Every Testcase and the UnitTest Controller will load library files using either the
 	JPATH_BASE
@@ -76,13 +88,13 @@ If you run a UnitTest you may control the output format.
 ?path=
 This identifies the test to be run.
 
-Single Tests: The value of `path` should be a relative path of the file you wish to test. The name is derived from that Class followed by the word 'Test'. Each file contains the Testcase for one Framework class only. 
+Single Tests: The value of `path` should be a relative path of the file you wish to test. The name is derived from that Class followed by the word 'Test'. Each file contains the Testcase for one Framework class only.
 
 	Example: to test the class "JVersion" located in "libraries/joomla/version.php" use the URL:
 	http://your.joomla.dlt/unittest/?path=libraries/joomla/JVersionTest.php
 
 &output=
-The Joomla Unit-testing platform supports several output formats; HTML, XML, Serialized PHP, JSON and TEXT. The default is HTML when tests run through the browser, and TEXT when run from the command-line (CLI). 
+The Joomla Unit-testing platform supports several output formats; HTML, XML, Serialized PHP, JSON and TEXT. The default is HTML when tests run through the browser, and TEXT when run from the command-line (CLI).
 To change the output type append &output=[html,xml,php,json,text] to the end of a test's url (keywords are case insensitive).
 
 	Example: to output the above example in XML you would use this URL;
@@ -116,7 +128,7 @@ All tests can be run from the command-line using the following options:
 -path   path of a testcase, group test, or library file
 -output [text,html,xml,php,json], defaults to 'text', written to `stdout`
 
-The -list option prints out test cases one per line, this is the same list seen from the default HTML view. 
+The -list option prints out test cases one per line, this is the same list seen from the default HTML view.
 If no arguments are provided, "list mode" is automatically enabled.
 
 	Example: to view all available tests:
@@ -138,7 +150,7 @@ In CLI mode -path is expected to locate a *Test.php file in the JUNITTEST_BASE d
  OR
 	>php index.php -path libraries/joomla/application/
 
-If you're using PHP5 from the command-line, and the UnitTest controller is unable to locate the test case, -path is assumed to point to a file in the Joomla! Framework directory (JPATH_BASE) in order to create a new Skeletal Testcase for any class therein. 
+If you're using PHP5 from the command-line, and the UnitTest controller is unable to locate the test case, -path is assumed to point to a file in the Joomla! Framework directory (JPATH_BASE) in order to create a new Skeletal Testcase for any class therein.
 With PHP4 this feature is not available and you'll receive an error message that the given "Testcase" does not exist.
 
 
@@ -179,14 +191,14 @@ The nature of a test
 	 Use mock objects or stubs to test in isolation."
 		- Gunja Doshi
 
-You may now think of something like: "but Joomla! uses a database and connects to a network and it's reading files." 
+You may now think of something like: "but Joomla! uses a database and connects to a network and it's reading files."
 Yes, Joomla! the CMS, but not the enire Framework.
 There are in fact only very few classes in the Joomla! Framework that actually do such nasty things, and these are the only ones that form a partial exception to the statement above.
 
-Example 1: 
+Example 1:
 A database' connect() method must be able to connect to a physical database server to handle it's return values, connection errores etc. Some internal "SQL builder" or data formatter methods must not. They deals with result sets, strings, or any other arbitrary data, usually provided as arrays or objects. There's no need to have a database server anywhere near, up and running to test these methods.
 
-Example 2: 
+Example 2:
 A function that "believes" it writes some data to a file using some other "file class" must only know about the interface of that very class. Whether the file is actually created or not is neither the problem not in the scope of the function using the "file writer". It can safely assume that, should the write operation fail, the writer class would have returned an error code. And it's that error code only that the tested class needs to deal with.
 
 The second example denotes a typical case when a "Mock Object" should be used instead of the real file-writer (or anything alike.) Any possible errors that may occure when creating and writing a file or data stream must *not* be handled by the testcase of a class that simply interacts and uses an external file class. If it does, it is not a valid testcase.
@@ -196,7 +208,7 @@ You can read more about Mock Objects below.
 Adding a new Testcase
 ---------------------
 Let's assume you want to write a Testcase for the 'JRoute' class.
-This class is located in 
+This class is located in
 	libraries/joomla/application/route.php
 
 To trigger the Skeleton builder go to the command-line and execute:
@@ -206,7 +218,7 @@ Because there's no 'route.php' file present in the tests folder, the controller 
 
 In necessary the UnitTest Framework will update the folder structure in the ./tests directory  (JUNITTEST_BASE) to match the given filepath
 	./tests/libraries/joomla/application
-and create a Testcase skeletal file for EVERY CLASS found in the source file you provided. 
+and create a Testcase skeletal file for EVERY CLASS found in the source file you provided.
 In case of `route.php` you'll find the following files in the target directory for each of the two classes declared (JRouter, JRoute):
 	JRouterTest.php
 	JRouteTest.php
@@ -242,9 +254,9 @@ The README files should be simple textfiles w/o any markup to allow viewing them
 
 Retain independence
 -------------------
-This is serious! 
+This is serious!
 DON'T ever use any other class from the J! Framwork that's not in the scope of your Testcase unless it's totally unavoidable or their usage is implied by design, i.e. JFactory or JConfig.
-If your Testcase MUST use another Joomla class (JSession, JRegistry), "ask" the UnitTestHelper FIRST whether its Testcase is enabled, (bool)TRUE. If the Controller returns (bool)FALSE cancel your test, and tell the UnitTestHelper in return to mark your test "disabled" as well. This is to allow subsequent Testcases to do the same should they rely on your tested class. 
+If your Testcase MUST use another Joomla class (JSession, JRegistry), "ask" the UnitTestHelper FIRST whether its Testcase is enabled, (bool)TRUE. If the Controller returns (bool)FALSE cancel your test, and tell the UnitTestHelper in return to mark your test "disabled" as well. This is to allow subsequent Testcases to do the same should they rely on your tested class.
 
 For example, it doesn't make sense to rely on JDocument & Co. if there's no Testcase that prooves this class would perform as intended. The user may also have disabled a certain class from beeing tested on purpose, i.e. JFTP or JLDAP. You tests would fail anyway if the user can't or won't provide an environment for these "other classes" to work.
 
@@ -259,13 +271,13 @@ DON'T try to write a Testcase that covers a gazillion different user settings pe
 
 Logging and messages
 --------------------
-Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, or var_dump. If at all, use $this->_reporter->paintMessage(). 
-A Test either works or fails. Period. 
+Avoid to have your Testcase spit out any notification messages or status information to the user's screen via echo, print, or var_dump. If at all, use $this->_reporter->paintMessage().
+A Test either works or fails. Period.
 A test's internals and statistics are of no particular interest for the user. If a Test fails, it fails, thus use the $message argument of the assert-function to provide a brief reason why it failed.
 The output of a Testcase is "captured" by the UnitTest Controller and its renderes attempting to create different output formats such as clean HTML, XML, TEXT, PHP arrays or JSON data. If your code starts to yell inbetween you're likely to screw up and invalidate the output format and prevent subsequent analyzing or postprocessing of the results (think of cron jobs!)
 
-If you can't resist to create elaborous status messages to tell the user about all the vivid things your Testcase performed, write them *INTO A DEDICATED LOG FILE* using the plain file I/O functions of PHP (fopen, fputs, etc.) or the UnitTestHelper::log() function. 
-DON'T use any J! Framework classes to perform file loggin: these classes might be broken or disabled at the time the user runs your test. 
+If you can't resist to create elaborous status messages to tell the user about all the vivid things your Testcase performed, write them *INTO A DEDICATED LOG FILE* using the plain file I/O functions of PHP (fopen, fputs, etc.) or the UnitTestHelper::log() function.
+DON'T use any J! Framework classes to perform file loggin: these classes might be broken or disabled at the time the user runs your test.
 Just K.I.S.S!
 
 A vanilla logger is available via:
@@ -318,16 +330,16 @@ Folder and file layout in the unit test folder /tests/libraries/joomla/:
 Except for [1], the actual Testcase, other entries are optional.
 
 [1] JWhateverTest.php -- The Testcase of class JWhatever
-               from: /libraries/joomla/foobar/whatever.php
-     implemented as: class TestOfJWhatever extends UnitTestCase
+			   from: /libraries/joomla/foobar/whatever.php
+	 implemented as: class TestOfJWhatever extends UnitTestCase
 
-[2] TODO.txt -- Optional notes with "things to do" about ANY of the Testcases in the ./foobar package. 
+[2] TODO.txt -- Optional notes with "things to do" about ANY of the Testcases in the ./foobar package.
 	Each entry should have a unique number so others can refer to it as "see: #23" in the file itself or "Foobar todo 23" in other areas of communication (forum, tracker, mail, IRC ...)
 	Comments and reasons about Tests failing should go into this file in prose and be simply referenced in the test file's sources via "@todo number [other package]".
 
 [3] JWhatever_helper.php -- Optional helper class for JWhateverTest.
 	The name of this class name MUST follow this convention:
-	     JoomlaClassname + 'TestHelper'
+		 JoomlaClassname + 'TestHelper'
 	i.e. JWhateverTestHelper
 	The filename derives from the Joomla class + the '_helper' prefix
 		JoomlaClass + _helper.php
@@ -359,10 +371,10 @@ UnitTest API [WIP]
 Hey, you don't really expect to find any extensive documentation here, do you?
 Feel free to provide some: this is "open source" ;)
 
-For a starter, look at 
-	<JUNITTEST_ROOT>/_files/UnitTestHelper_examples.txt 
-and of course 
-	<JUNITTEST_ROOT>/_files/libs/helper.php 
+For a starter, look at
+	<JUNITTEST_ROOT>/_files/UnitTestHelper_examples.txt
+and of course
+	<JUNITTEST_ROOT>/_files/libs/helper.php
 for the various methods provided by the UnitTestHelper class.
 
 
@@ -379,8 +391,8 @@ The following things are missing or do not [yet] work as intended:
 
  * scoring is not yet implemented
 
- * "list mode" might be broken/imcomplete for some renderers; 
-	you can however run each testcase directly via CLI or browser, 
+ * "list mode" might be broken/imcomplete for some renderers;
+	you can however run each testcase directly via CLI or browser,
 	i.e. http://localhost/unittest/tests/libraries/JLoaderTest.php
 
  * testhelper classes fail to load if run via "AllTests.php"
@@ -393,9 +405,9 @@ The following things are missing or do not [yet] work as intended:
 	http://sourceforge.net/forum/forum.php?forum_id=646018
 	(has been reported to be 'Fixed in CVS')
 
- * only 1 AllTests.php per package allowed, this prevents creating Suites 
+ * only 1 AllTests.php per package allowed, this prevents creating Suites
 	for complex/large/long tests that'd better be done in individual parts
-	"per feature", i.e. for JFTP, JLDAP, JDatabase (per mysql, msqli). 
+	"per feature", i.e. for JFTP, JLDAP, JDatabase (per mysql, msqli).
 	Need support for "JWhatever_AllTests.php"
 
  * YouTestCaseHelper::tearDownTestCase() not called
@@ -404,7 +416,7 @@ The following things are missing or do not [yet] work as intended:
 
 Updates
 =======
-The Joomla! Unit-testing Framework is still under development. New Tests will be added and others revised should classes of the Joomla! Framework change, move, or even disappear. 
+The Joomla! Unit-testing Framework is still under development. New Tests will be added and others revised should classes of the Joomla! Framework change, move, or even disappear.
 Since every change to the UnitTests may also imply a change in the configuration file, you should have an eye on `TestConfiguration-dist.php`, and update/synchronize your local copy of `TestConfiguration.php` whenever there's a change to the distribution file.
 
 Substatial modifications will be denoted in the CHANGELOG.txt -- at least, that's the plan ;)
