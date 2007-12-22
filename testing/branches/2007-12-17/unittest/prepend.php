@@ -25,10 +25,6 @@ error_reporting(E_ALL);
  */
 function jutdump($data, $rem='')
 {
-	list($po,$pc,$lf) = (JUNITTEST_CLI)
-					? array(PHP_EOL, PHP_EOL, PHP_EOL)
-					: array('<xmp style="border:1px solid;padding:1ex;">', PHP_EOL.'</xmp>', PHP_EOL);
-
 	if (!empty($rem)) {
 		$rem = preg_replace('/(?:[\.\-\:]?)(\d+)$/', ' (\1)', $rem);
 	} else {
@@ -37,7 +33,14 @@ function jutdump($data, $rem='')
 			$rem = $trace['file'].' ('.$trace['line']. ')';
 		}
 	}
-	echo $po, 'DEBUG: ', $rem, $lf, print_r($data, true), $pc;
+	echo PHP_EOL, 'DEBUG: ';
+	if (JUNITTEST_CLI) {
+		echo $rem, PHP_EOL, print_r($data, true);
+	} else {
+		echo htmlentities($rem), PHP_EOL,
+			'<pre>', htmlentities(print_r($data, true)), '</pre>';
+	}
+	echo PHP_EOL;
 }
 
 /* if included by a testcase */
@@ -49,15 +52,16 @@ unset($JUNITTEST_ROOT);
 define('JUNITTEST_PREFIX', 'JUT_');
 define('JUNITTEST_CLI', ( PHP_SAPI == 'cli') ); // SimpleReporter::inCli()
 
-/* Read in user-defined test configuration if available;
- * otherwise, read default test configuration.
+/*
+ * Read in user-defined test configuration if available; otherwise, read default
+ * test configuration.
  */
 if (is_readable(dirname(__FILE__) . '/TestConfiguration.php') ) {
-    require_once dirname(__FILE__) . '/TestConfiguration.php';
-    define('JUNITTEST_USERCONFIG', true);
+	require_once dirname(__FILE__) . '/TestConfiguration.php';
+	define('JUNITTEST_USERCONFIG', true);
 } else {
-    require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
-    define('JUNITTEST_USERCONFIG', false);
+	require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
+	define('JUNITTEST_USERCONFIG', false);
 }
 
 /* TestCases are main files */
@@ -78,8 +82,17 @@ set_include_path( '.' .
 	PATH_SEPARATOR. get_include_path()
 	);
 
-if ((int)PHP_VERSION >= 5) {
-	require_once( JUNITTEST_LIBS . '/overload5.php' );
+function jimport( $path )
+{
+	static $btdt = false;
+	if (! $btdt) {
+		echo 'this is the overridden jimport.' . PHP_EOL;
+		$btdt = true;
+	}
+	return JLoader::import($path);
+	$filepath = JPATH_BASE . 'libraries' . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $path);
+	require_once($filepath);
+	return true;
 }
 
 require_once( JUNITTEST_LIBS . '/helper.php' );
@@ -88,9 +101,9 @@ require_once( JUNITTEST_LIBS . '/helper.php' );
 if ( !is_dir(JPATH_BASE . '/libraries/joomla') ) {
    $EOL = (JUNITTEST_CLI) ? PHP_EOL : '<br />';
    echo $EOL, ' JPATH_BASE does not point to a valid Joomla! installation:',
-	    $EOL, ' - ', JPATH_BASE,
-	    $EOL, ' Please modify your copy of "TestConfiguration.php"',
-	    $EOL;
+		$EOL, ' - ', JPATH_BASE,
+		$EOL, ' Please modify your copy of "TestConfiguration.php"',
+		$EOL;
    exit(0);
 }
 
@@ -146,7 +159,7 @@ else if ( count($_SERVER['argv']) > 1 )
 }
 
 if (preg_match('#[^a-z0-9\-_./]#i', $input->path)) {
-    trigger_error('Security check: Illegal character in filepath', E_USER_ERROR);
+	trigger_error('Security check: Illegal character in filepath', E_USER_ERROR);
 }
 $input->reporter = UnitTestHelper::getReporterInfo();
 
@@ -195,9 +208,7 @@ if ($input->info->is_test !== JUNITTEST_IS_FRAMEWORK && !function_exists('jimpor
 	require_once( JUNITTEST_LIBS . '/uloader.php' );
 }
 
-if (!function_exists('jimport')) {
-	require_once( 'libraries/loader.php' );
-}
+require_once( 'libraries/loader.php' );
 
 require_once( 'includes/defines.php' );
 require_once( 'libraries/joomla/base/object.php' ); // JObject
