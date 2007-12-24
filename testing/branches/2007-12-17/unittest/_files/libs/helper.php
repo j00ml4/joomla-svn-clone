@@ -2,7 +2,7 @@
 /**
  * Joomla! v1.5 UnitTest Platform Helper class.
  *
- * @version $Id: $
+ * @version $Id$
  * @package Joomla
  * @subpackage UnitTest
  * @copyright     Copyright (C) 2007 Rene Serradeil. All rights reserved.

@@ -4,7 +4,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 class JoomlaText extends TextReporter {

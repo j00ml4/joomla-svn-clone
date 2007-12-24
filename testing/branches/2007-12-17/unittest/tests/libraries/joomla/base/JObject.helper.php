@@ -6,7 +6,7 @@
  * @subpackage UnitTest
  * @copyright 2007 Open Source Matters, Inc.
  * @license GPL v2
- * @version $Id: $
+ * @version $Id$
  * @author Alan Langford <instance1@gmail.com>
  * @author Rene Serradeil
  */

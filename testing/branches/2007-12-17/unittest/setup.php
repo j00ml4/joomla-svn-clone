@@ -2,45 +2,18 @@
 /**
  * Joomla! Unit Test Facility.
  *
- * Setup file for UnitTestController and TestCases.
+ * Setup file for UnitTestController and TestCases. This file is included by the
+ * first executable file. It ensures that the testing environment is set up,
+ * supported, and ready to run.
  *
  * @package Joomla
  * @subpackage UnitTest
- * @copyright Copyright (C) 2007 Rene Serradeil. All rights reserved.
+ * @copyright Copyright (C) 2007 Open Source Matters, Inc. All rights reserved.
  * @license GNU/GPL
- * @version $Id: $
+ * @version $Id$
  */
 
 error_reporting(E_ALL);
-
-/**
- * Simple variable dumper.
- *
- * recommended usage: jutdump($data, 'hint '.__FILE__.__LINE__)
- *
- * For anthing but JUNIT_CLI, output in wrapped in <pre>.
- *
- * @ignore
- */
-function jutdump($data, $rem='')
-{
-	if (!empty($rem)) {
-		$rem = preg_replace('/(?:[\.\-\:]?)(\d+)$/', ' (\1)', $rem);
-	} else {
-		if (function_exists('debug_backtrace')) {
-			$trace = array_shift(debug_backtrace());
-			$rem = $trace['file'].' ('.$trace['line']. ')';
-		}
-	}
-	echo PHP_EOL, 'DEBUG: ';
-	if (JUNIT_CLI) {
-		echo $rem, PHP_EOL, print_r($data, true);
-	} else {
-		echo htmlentities($rem), PHP_EOL,
-			'<pre>', htmlentities(print_r($data, true)), '</pre>';
-	}
-	echo PHP_EOL;
-}
 
 /* if included by a testcase */
 unset($JUNIT_ROOT);

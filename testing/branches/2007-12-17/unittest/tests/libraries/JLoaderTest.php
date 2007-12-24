@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @author         Rene Serradeil <serradeil@webmechanic.biz>
- * @version $Id: $
+ * @version $Id$
  */
 
 // Call TestOfJLoader::main() if this source file is executed directly.

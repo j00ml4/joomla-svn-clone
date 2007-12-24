@@ -13,7 +13,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 /**

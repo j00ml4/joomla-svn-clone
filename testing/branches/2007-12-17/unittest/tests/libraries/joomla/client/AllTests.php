@@ -4,7 +4,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 // Call JUnit_Client_AllTests::main() if this source file is executed directly.

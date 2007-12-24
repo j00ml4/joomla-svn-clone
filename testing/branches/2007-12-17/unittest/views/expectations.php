@@ -25,7 +25,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @author         CirTap <cirtap-joomla@webmechanic.biz>
- * @version $Id: $
+ * @version $Id$
  */
 
 // $Id$

@@ -4,7 +4,7 @@
  * @subpackage UnitTest
  * @copyright    Copyright (C) 2005 - 2007 Open Source Matters, Inc.
  * @license        GNU/GPL, see LICENSE.php
- * @version $Id: $
+ * @version $Id$
 
  *  * Joomla! is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or

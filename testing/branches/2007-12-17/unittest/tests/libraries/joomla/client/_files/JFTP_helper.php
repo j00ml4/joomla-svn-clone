@@ -4,7 +4,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 !defined('FTP_NATIVE') && define('FTP_NATIVE', JUT_JFTP_NATIVE);
