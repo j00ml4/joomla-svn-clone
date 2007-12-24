@@ -2,16 +2,16 @@
 /**
  * Test class for JFrameworkConfig.
  *
- * @package 	Joomla.Framework
- * @subpackage 	UnitTest
- * @version 	$Id$
+ * @package Joomla
+ * @subpackage UnitTest
+ * @version $Id: $
  */
 
 // Call TestOfJFrameworkConfig::main() if this source file is executed directly.
-if (!defined('JUNITTEST_MAIN_METHOD')) {
-    define('JUNITTEST_MAIN_METHOD', 'TestOfJFrameworkConfig::main');
-    $JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
+if (!defined('JUNIT_MAIN_METHOD')) {
+	define('JUNIT_MAIN_METHOD', 'TestOfJFrameworkConfig::main');
+	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
 /* class to test */
@@ -65,17 +65,17 @@ var $proto = array(
 	 */
 	function main() {
 		$self = new TestOfJFrameworkConfig;
-		$self->run( UnitTestHelper::getReporter() );
+		$self->run(UnitTestHelper::getReporter());
 	}
 
-    function setUp() {
+	function setUp() {
 		$this->instance = new JFrameworkConfig();
-    }
+	}
 
-    function tearDown() {
-    	$this->instance = null;
-    	unset($this->instance);
-    }
+	function tearDown() {
+		$this->instance = null;
+		unset($this->instance);
+	}
 
 	function test_inheritance() {
 		$this->sendMessage("There isn't much this TestCase can actually test. However, let´s try...");
@@ -90,7 +90,7 @@ var $proto = array(
 	function test_property_names() {
 		$compare = (array) $this->instance;
 		foreach (array_keys($this->proto) as $expect) {
-			$this->assertTrue( array_key_exists($expect, $compare), "{$expect} not found");
+			$this->assertTrue(array_key_exists($expect, $compare), "{$expect} not found");
 		}
 	}
 
@@ -104,6 +104,6 @@ var $proto = array(
 }
 
 // Call TestOfJFrameworkConfig::main() if this source file is executed directly.
-if (JUNITTEST_MAIN_METHOD == "TestOfJFrameworkConfig::main") {
-    TestOfJFrameworkConfig::main();
+if (JUNIT_MAIN_METHOD == "TestOfJFrameworkConfig::main") {
+	TestOfJFrameworkConfig::main();
 }

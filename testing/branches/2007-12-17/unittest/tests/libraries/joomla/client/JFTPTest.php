@@ -3,16 +3,16 @@
  * Test class for JFTP
  * Handcrafted by friesengeist ;)
  *
- * @version	$Id$
- * @package 	Joomla.Framework
- * @subpackage 	UnitTest
+ * @version $Id: $
+ * @package Joomla
+ * @subpackage UnitTest
  */
 
 // Call TestOfJFTP::main() if this source file is executed directly.
-if (!defined('JUNITTEST_MAIN_METHOD')) {
-	define('JUNITTEST_MAIN_METHOD', 'TestOfJFTP::main');
-	$JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
+if (!defined('JUNIT_MAIN_METHOD')) {
+	define('JUNIT_MAIN_METHOD', 'TestOfJFTP::main');
+	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
 require_once('libraries/joomla/client/ftp.php');
@@ -30,13 +30,13 @@ var $conf = null;
 	 */
 	function main() {
 		$self = new TestOfJFTP;
-		$self->run( UnitTestHelper::getReporter() );
+		$self->run(UnitTestHelper::getReporter());
 		JFTPTestHelper::tearDownTestCase();
 	}
 
-    function setUp() {
+	function setUp() {
 		$this->conf = JFTPTestHelper::getCredentials();
-    }
+	}
 
 	function tearDown()
 	{
@@ -47,7 +47,7 @@ var $conf = null;
 	{
 		// we must as least use an empty array or PHP will throw
 		// E_WARNING: Missing argument 1 for JFTP::__construct()
-		$ftp = new JFTP( array() );
+		$ftp = new JFTP(array());
 		$this->assertIsA($ftp, 'JFTP');
 	}
 
@@ -55,9 +55,9 @@ var $conf = null;
 	{
 		$ftp = new JFTP(array('timeout'=>1));
 
-		$before	= JFTPTestHelper::microtime_float();
-		$return	= $ftp->connect('127.0.0.1', '1');
-		$after	= JFTPTestHelper::microtime_float();
+		$before    = JFTPTestHelper::microtime_float();
+		$return    = $ftp->connect('127.0.0.1', '1');
+		$after    = JFTPTestHelper::microtime_float();
 
 		$this->assertIdenticalFalse($return);
 		$this->assertIdenticalTrue(($after - $before) < 1.5, '%s - Connect timeout?');
@@ -269,7 +269,7 @@ var $conf = null;
 		$this->assertIdentical($return3, $this->conf['root']);
 		$this->assertIdentical($return9, '/');
 		$this->assertNotIdentical($return1, $return3, '%s - Please make sure to run this test'
-			.' in a subdirectory of your FTP account' );
+			.' in a subdirectory of your FTP account');
 		$this->assertIdenticalTrue($return2);
 		$this->assertIdenticalTrue($return4);
 		$this->assertIdenticalTrue($return6);
@@ -824,8 +824,8 @@ var $conf = null;
 		$this->assertError('JFTP::get: Bad response');
 		$this->assertIdenticalFalse($return5);
 
-//		 * In native mode, the destination file gets deleted if it does not exist on the server
-//		 * It is accepted behaviour that the compatibility layer does not do so, therefore the @
+//         * In native mode, the destination file gets deleted if it does not exist on the server
+//         * It is accepted behaviour that the compatibility layer does not do so, therefore the @
 		@unlink($returnedFile);
 		$ftp->delete($this->conf['root'].'/testfile.bin');
 		$ftp->quit();
@@ -833,7 +833,7 @@ var $conf = null;
 
 	function disabledTestGetStoreModes()
 	{
-		$this->assertTrue( false );
+		$this->assertTrue(false);
 	}
 
 	function test_findMode()
@@ -923,7 +923,7 @@ var $conf = null;
 		$read = array(
 			'WIN' => array(
 				'WIN' => null,
-//				'UNIX' => array("\n", "\r\n"),
+//                'UNIX' => array("\n", "\r\n"),
 				'UNIX' => array(array("\r\n", "\n"), array("\n", "\r\n")),
 				'MAC' => null //???
 			),
@@ -943,7 +943,7 @@ var $conf = null;
 		$write = array(
 			'WIN' => array(
 				'WIN' => array("\n", "\r\n"),
-//				'UNIX' => array("\r", ''),
+//                'UNIX' => array("\r", ''),
 				'UNIX' => null,
 				'MAC' => null //???
 			),
@@ -1031,6 +1031,6 @@ var $conf = null;
 }
 
 // Call TestOfJFTP::main() if this source file is executed directly.
-if (JUNITTEST_MAIN_METHOD == "TestOfJFTP::main") {
+if (JUNIT_MAIN_METHOD == "TestOfJFTP::main") {
 	TestOfJFTP::main();
 }

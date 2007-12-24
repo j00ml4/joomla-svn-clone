@@ -3,91 +3,91 @@
  $Id$
 
  PHP Simletest assertion code templates for Eclipse 3.2
-	PDT:		Window > Preferences > PHP > Templates > Import
-	PHPeclipse:	Window > Preferences > PHPeclipse Web Development > PHP > Templates > Import
+    PDT:        Window > Preferences > PHP > Templates > Import
+    PHPeclipse:    Window > Preferences > PHPeclipse Web Development > PHP > Templates > Import
 
 -->
 <templates>
-	<template name="assertClone"
-		description="SimpleTest: Will trigger a pass if both parameters refer to different objects. Fail otherwise. The objects have to be identical though."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertClone($${first}, $${second});</template>
-	<template name="assertEqual"
-		description="SimpleTest: Will trigger a pass if the two parameters have the same value only. Otherwise a fail."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertEqual($$first, $$second);</template>
-	<template name="assertFalse"
-		description="SimpleTest: Will be true on false and vice versa. False is the PHP definition of false, so that null, empty strings, zero and an empty array all count as false."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertFalse($${condition});</template>
-	<template name="assertIdentical"
-		description="SimpleTest: Will trigger a pass if the two parameters have the same value and same type. Otherwise a fail."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertIdentical($$first, $$second);</template>
-	<template name="assertIsA"
-		description="SimpleTest: Type and class test. Will pass if class matches the type name or is a subclass or if not an object, but the type is correct."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertIsA($$object, '${type}');</template>
-	<template name="assertNoPattern"
-		description="SimpleTest: Will trigger a pass if the perl regex pattern is not present in subject. Fail if found."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoPattern($$pattern, $$subject);</template>
-	<template name="assertNotA"
-		description="SimpleTest: Type and class mismatch test. Will pass if class name or underling type does not match the one specified."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotA($$object, '$${type}');</template>
-	<template name="assertNotEqual"
-		description="SimpleTest: Will trigger a pass if the two parameters have a different value. Otherwise a fail."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotEqual($$first, $$second);</template>
-	<template name="assertNotIdentical"
-		description="SimpleTest: Will trigger a pass if the two parameters have the different value or different type."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotIdentical($$first, $$second);</template>
-	<template name="assertNotNull"
-		description="SimpleTest: Will be true if the value is set."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotNull($$object);</template>
-	<template name="assertNull"
-		description="SimpleTest: Will be true if the value is null."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNull($$object);</template>
-	<template name="assertOutsideMargin"
-		description="SimpleTest: Will trigger a pass if the two parameters differ by more than the margin."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertOutsideMargin($$first, $$second, $$margin);</template>
-	<template name="assertPattern"
-		description="SimpleTest: Will trigger a pass if the Perl regex pattern is found in the subject. Fail otherwise."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertPattern($$pattern, $$subject);</template>
-	<template name="assertReference"
-		description="SimpleTest: Will trigger a pass if both parameters refer to the same object. Fail otherwise."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertReference($$first, $$second);</template>
-	<template name="assertTrue"
-		description="SimpleTest: Called from within the test methods to register passes and failures."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertTrue($${condition});</template>
-	<template name="assertWithinMargin"
-		description="SimpleTest: Will trigger a pass if the if the first parameter is near enough to the second by the margin."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertWithinMargin($$first, $$second, $$margin);</template>
+    <template name="assertClone"
+        description="SimpleTest: Will trigger a pass if both parameters refer to different objects. Fail otherwise. The objects have to be identical though."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertClone($${first}, $${second});</template>
+    <template name="assertEqual"
+        description="SimpleTest: Will trigger a pass if the two parameters have the same value only. Otherwise a fail."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertEqual($$first, $$second);</template>
+    <template name="assertFalse"
+        description="SimpleTest: Will be true on false and vice versa. False is the PHP definition of false, so that null, empty strings, zero and an empty array all count as false."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertFalse($${condition});</template>
+    <template name="assertIdentical"
+        description="SimpleTest: Will trigger a pass if the two parameters have the same value and same type. Otherwise a fail."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertIdentical($$first, $$second);</template>
+    <template name="assertIsA"
+        description="SimpleTest: Type and class test. Will pass if class matches the type name or is a subclass or if not an object, but the type is correct."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertIsA($$object, '${type}');</template>
+    <template name="assertNoPattern"
+        description="SimpleTest: Will trigger a pass if the perl regex pattern is not present in subject. Fail if found."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoPattern($$pattern, $$subject);</template>
+    <template name="assertNotA"
+        description="SimpleTest: Type and class mismatch test. Will pass if class name or underling type does not match the one specified."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotA($$object, '$${type}');</template>
+    <template name="assertNotEqual"
+        description="SimpleTest: Will trigger a pass if the two parameters have a different value. Otherwise a fail."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotEqual($$first, $$second);</template>
+    <template name="assertNotIdentical"
+        description="SimpleTest: Will trigger a pass if the two parameters have the different value or different type."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotIdentical($$first, $$second);</template>
+    <template name="assertNotNull"
+        description="SimpleTest: Will be true if the value is set."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNotNull($$object);</template>
+    <template name="assertNull"
+        description="SimpleTest: Will be true if the value is null."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNull($$object);</template>
+    <template name="assertOutsideMargin"
+        description="SimpleTest: Will trigger a pass if the two parameters differ by more than the margin."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertOutsideMargin($$first, $$second, $$margin);</template>
+    <template name="assertPattern"
+        description="SimpleTest: Will trigger a pass if the Perl regex pattern is found in the subject. Fail otherwise."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertPattern($$pattern, $$subject);</template>
+    <template name="assertReference"
+        description="SimpleTest: Will trigger a pass if both parameters refer to the same object. Fail otherwise."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertReference($$first, $$second);</template>
+    <template name="assertTrue"
+        description="SimpleTest: Called from within the test methods to register passes and failures."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertTrue($${condition});</template>
+    <template name="assertWithinMargin"
+        description="SimpleTest: Will trigger a pass if the if the first parameter is near enough to the second by the margin."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertWithinMargin($$first, $$second, $$margin);</template>
 
-	<template name="expectError"
-		description="SimpleTest: Prepares for an error. If the error mismatches it passes through, otherwise it is swallowed. Any left over errors trigger failures."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;expectError($$ExpectationOrString);</template>
-	<template name="expectException"
-		description="SimpleTest: Prepares for an exception. If the error mismatches it passes through, otherwise it is swallowed. Any left over errors trigger failures."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;expectException($$ExpectationOrException);</template>
+    <template name="expectError"
+        description="SimpleTest: Prepares for an error. If the error mismatches it passes through, otherwise it is swallowed. Any left over errors trigger failures."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;expectError($$ExpectationOrString);</template>
+    <template name="expectException"
+        description="SimpleTest: Prepares for an exception. If the error mismatches it passes through, otherwise it is swallowed. Any left over errors trigger failures."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;expectException($$ExpectationOrException);</template>
 
-	<template name="skip"
-		description="SimpleTest: This is a placeholder for skipping tests. In this method you place skipIf() and skipUnless() calls to set the skipping state."
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;skip();</template>
+    <template name="skip"
+        description="SimpleTest: This is a placeholder for skipping tests. In this method you place skipIf() and skipUnless() calls to set the skipping state."
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;skip();</template>
 
-	<template name="assertCopy"
-		description="SimpleTest: deprecated as of 1.0, use assertClone()"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertCopy($${first}, $${second});</template>
-	<template name="assertError"
-		description="SimpleTest: deprecated as of 1.0"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertError($${expected_false});</template>
-	<template name="assertErrorPattern"
-		description="SimpleTest: deprecated as of 1.0"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertErrorPattern($$pattern);</template>
-	<template name="assertExpectation"
-		description="SimpleTest: deprecated as of 1.0, use assert(AnyExpectation)"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertExpectation(new $${expectation}, $${compare});</template>
-	<template name="assertNoErrors"
-		description="SimpleTest: deprecated as of 1.0"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoErrors('$${message}');</template>
-	<template name="assertNoUnwantedPattern"
-		description="SimpleTest: deprecated as of 1.0, use assertNoPatter(PatternExpectation)"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoUnwantedPattern($$pattern, $$subject);</template>
-	<template name="assertWantedPattern"
-		description="SimpleTest: deprecated as of 1.0, use assertPatter(PatternExpectation)"
-		context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertWantedPattern($$pattern, $$subject);</template>
+    <template name="assertCopy"
+        description="SimpleTest: deprecated as of 1.0, use assertClone()"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertCopy($${first}, $${second});</template>
+    <template name="assertError"
+        description="SimpleTest: deprecated as of 1.0"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertError($${expected_false});</template>
+    <template name="assertErrorPattern"
+        description="SimpleTest: deprecated as of 1.0"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertErrorPattern($$pattern);</template>
+    <template name="assertExpectation"
+        description="SimpleTest: deprecated as of 1.0, use assert(AnyExpectation)"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertExpectation(new $${expectation}, $${compare});</template>
+    <template name="assertNoErrors"
+        description="SimpleTest: deprecated as of 1.0"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoErrors('$${message}');</template>
+    <template name="assertNoUnwantedPattern"
+        description="SimpleTest: deprecated as of 1.0, use assertNoPatter(PatternExpectation)"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertNoUnwantedPattern($$pattern, $$subject);</template>
+    <template name="assertWantedPattern"
+        description="SimpleTest: deprecated as of 1.0, use assertPatter(PatternExpectation)"
+        context="php" enabled="true" deleted="false" autoinsert="true">$$this-&gt;assertWantedPattern($$pattern, $$subject);</template>
 
 </templates>

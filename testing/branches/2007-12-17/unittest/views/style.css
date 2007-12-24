@@ -11,28 +11,28 @@ body {
 }
 
 h1.header {
-	background-image: url(images/logo.png);
-	background-repeat: no-repeat;
-	padding: 0 0 0 130px;
-	margin-top:0;
-	height: 80px;
-	cursor: pointer;
-	font-size: 1.5em;
-	margin-right: 15em;
+    background-image: url(images/logo.png);
+    background-repeat: no-repeat;
+    padding: 0 0 0 130px;
+    margin-top:0;
+    height: 80px;
+    cursor: pointer;
+    font-size: 1.5em;
+    margin-right: 15em;
 }
 
 h1.header span {
-	line-height:2em;
+    line-height:2em;
 }
 
 #userconfig {
-	position: absolute;
-	top: 1.5em;
-	right: 1.5em;
-	width: 18.5em;
-	font: inherit;
-	font-size: 0.9em;
-	border: 1px solid #ccc;
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    width: 18.5em;
+    font: inherit;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
 }
 #userconfig strong { color: #578AD6; }
 #userconfig span   { color: #EBAD14; }
@@ -50,37 +50,37 @@ a:visited { color: #61BF1A; }
     background: #eee;
 }
 .testsuite small {
-	font-size: 0.6em;
-	padding-left:1em;
+    font-size: 0.6em;
+    padding-left:1em;
 }
 .testcase {
-	display: inline;
+    display: inline;
     padding: 0 0 0 1em;
 }
 .docs {
-	font: 0.85em 'lucida console','courier new',courier,monospace;
+    font: 0.85em 'lucida console','courier new',courier,monospace;
 }
 
 
 .footer_fail, .footer_pass {
-	color: white;
-	padding: 1.0em;
-	margin-top: 0.5em;
-	background: green;
+    color: white;
+    padding: 1.0em;
+    margin-top: 0.5em;
+    background: green;
 }
 
 .footer_fail {
-	background: red;
+    background: red;
 }
 
 .footer_footer {
-	margin-top: 0.5em;
+    margin-top: 0.5em;
 }
 
 .pass, .fail, .exception, .message {
-	color: white;
+    color: white;
     border-bottom: 1px solid;
-	text-decoration: none;
+    text-decoration: none;
     padding: 0.2em;
 }
 

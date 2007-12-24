@@ -22,21 +22,21 @@
  */
 class JObjectTestObserver
 {
-	/* called from Simpletest */
-	function atTestEnd($method, &$test_case) {
-		$context  = &SimpleTest::getContext();
-		$reporter = &$context->getReporter();
-		$reporter->paintMessage('did and done ' . $method);
-	}
+    /* called from Simpletest */
+    function atTestEnd($method, &$test_case) {
+        $context  = &SimpleTest::getContext();
+        $reporter = &$context->getReporter();
+        $reporter->paintMessage('did and done ' . $method);
+    }
 
-	/* get the instance of JObjectTestObserver */
-	function &getInstance() {
-		static $instance;
-		if ($instance === null) {
-			$instance = & new JObjectTestObserver();
-		}
-		return $instance;
-	}
+    /* get the instance of JObjectTestObserver */
+    function &getInstance() {
+        static $instance;
+        if ($instance === null) {
+            $instance = & new JObjectTestObserver();
+        }
+        return $instance;
+    }
 }
 
 /**
@@ -44,16 +44,16 @@ class JObjectTestObserver
  */
 class TestJObject extends JObject
 {
-	var $_privateVar = 'Private';
-	var $publicVar = 'Public';
-	var $constructVar;
+    var $_privateVar = 'Private';
+    var $publicVar = 'Public';
+    var $constructVar;
 
-	function __construct($args = array()) {
-		if ( isset($args['construcVar']))
-			$this->construcVar = $args['construcVar'];
-		else
-			$this->constructVar = 'Constructor';
-	}
+    function __construct($args = array()) {
+        if (isset($args['construcVar']))
+            $this->construcVar = $args['construcVar'];
+        else
+            $this->constructVar = 'Constructor';
+    }
 }
 
 /**
@@ -61,28 +61,28 @@ class TestJObject extends JObject
  */
 class TestJObjectStatics
 {
-	var $data = array();
+    var $data = array();
 
-	/**
-	 * Stores an object.
-	 */
-	function set($name, &$data) {
-		$this->data[$name] =& $data;
-	}
+    /**
+     * Stores an object.
+     */
+    function set($name, &$data) {
+        $this->data[$name] =& $data;
+    }
 
-	/**
-	 * Retrieves an object.
-	 */
-	function &get($name) {
-		return $this->data[$name];
-	}
+    /**
+     * Retrieves an object.
+     */
+    function &get($name) {
+        return $this->data[$name];
+    }
 
-	/**
-	 * JObject::getPublicProperties()
-	 */
-	function getArray($name) {
-		return $this->data[$name]->getPublicProperties(true);
-	}
+    /**
+     * JObject::getPublicProperties()
+     */
+    function getArray($name) {
+        return $this->data[$name]->getPublicProperties(true);
+    }
 
 }
 

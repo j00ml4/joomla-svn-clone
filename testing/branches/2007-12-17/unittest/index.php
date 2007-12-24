@@ -4,9 +4,9 @@
  *
  * Bootstrap file, see README.txt for usage examples.
  *
- * @version	$Id$
- * @package 	Joomla
- * @subpackage 	UnitTest
+ * @version $Id: $
+ * @package Joomla
+ * @subpackage UnitTest
  */
 
 /**
@@ -14,17 +14,23 @@
  */
 error_reporting(E_ALL);
 
-// glob() and GLOB_ONLYDIR used in: UnitTestController::_files()
-if ( version_compare(PHP_VERSION, '4.3.3') < 0 ) {
-	die('Sorry. Requires PHP 4.3.3 or later.');
-}
+define('PHP_VERSION_MINIMUM', '5.2.0');
+define('JUNIT_VERSION_MINIMUM', '3.2.0');
 
-define('JUNITTEST_MAIN_METHOD', '-stub-');
+if (version_compare(PHP_VERSION, PHP_VERSION_MINIMUM) < 0) {
+	die('Sorry. Requires PHP ' . PHP_VERSION_MINIMUM . ' or later.');
+}
+if (version_compare(JUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
+	die('Found JUnit version ' . JUnit_Runner_Version::id()
+		. '. Requires ' . JUNIT_VERSION_MINIMUM
+		. ' (this is probably a PEAR related configuration problem).'
+	);
+}
 
 /**
  * Controller class.
  */
-require_once( dirname(__FILE__) . '/UnitTestController.php' );
+require_once(dirname(__FILE__) . '/UnitTestController.php');
 
 /**
  * If a path is provided, run the test,
@@ -32,22 +38,18 @@ require_once( dirname(__FILE__) . '/UnitTestController.php' );
  */
 $input =& UnitTestHelper::getProperty('Controller', 'Input');
 
-//die(jutdump($input,__FILE__.__LINE__));
 
-if ( !empty($input->info->testclass) )
-{
-	return UnitTestController::main( $input->info );
-}
-else
-{
+if (! empty($input->info->testclass)) {
+	return UnitTestController::main($input->info);
+} else {
 	UnitTestController::getUnitTestsList();
 
 	$tests =& UnitTestHelper::getProperty('Controller', 'Tests');
 
-	if ( file_exists(JUNITTEST_VIEWS.'/default_'.$input->output.'.php') ) {
-		include( JUNITTEST_VIEWS.'/default_'.$input->output.'.php' );
+	if (file_exists(JUNIT_VIEWS.'/default_'.$input->output.'.php')) {
+		include(JUNIT_VIEWS.'/default_'.$input->output.'.php');
 	} else {
-		include( JUNITTEST_VIEWS.'/default.html' );
+		include(JUNIT_VIEWS.'/default.html');
 	}
 }
 

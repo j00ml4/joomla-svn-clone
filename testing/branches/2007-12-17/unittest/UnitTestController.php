@@ -1,18 +1,18 @@
 <?php
 /**
- * Joomla! v1.5 UnitTest Platform.
+ * Joomla! Unit Test Facility.
  *
- * @version	$Id$
- * @package 	Joomla
- * @subpackage 	UnitTest
+ * @version $Id: $
+ * @package Joomla
+ * @subpackage UnitTest
  */
 
-!defined('JUNITTEST_MAIN_METHOD') && define('JUNITTEST_MAIN_METHOD', 'UnitTestController::main');
+!defined('JUNIT_MAIN_METHOD') && define('JUNIT_MAIN_METHOD', 'UnitTestController::main');
 
-require_once (dirname(__FILE__) . '/prepend.php');
+require_once (dirname(__FILE__) . '/setup.php');
 
 /* called from a TestCase */
-if (JUNITTEST_MAIN_METHOD !== 'UnitTestController::main') {
+if (JUNIT_MAIN_METHOD !== 'UnitTestController::main') {
 	return 1;
 }
 
@@ -27,26 +27,26 @@ class UnitTestController {
 	function main($fileinfo, $label='') {
 
 		if (is_string($fileinfo)) {
-			$fileinfo = UnitTestHelper::getInfoObject( $fileinfo );
+			$fileinfo = UnitTestHelper::getInfoObject($fileinfo);
 		}
 
 		/* create Skeleton(s), CLI + PHP5 only! */
-		if ( JUNITTEST_CLI ) {
+		if (JUNIT_CLI) {
 			die(jutdump('Sorry! Skeleton builder is currently disabled.'));
-//			$files = UnitTestController::makeUnitTestFiles($source);
-//			return UnitTestController::main( $path, $label );
+//            $files = UnitTestController::makeUnitTestFiles($source);
+//            return UnitTestController::main($path, $label);
 		}
 
 		$suite = new TestSuite(!empty($label) ? $label : $fileinfo->package .': '.$fileinfo->basename);
 
-		$suite->addTestFile(JUNITTEST_ROOT .'/'. JUNITTEST_BASE .'/'. $fileinfo->path);
+		$suite->addTestFile(JUNIT_ROOT .'/'. JUNIT_BASE .'/'. $fileinfo->path);
 
 /*
-require_once( SIMPLE_TEST.'collector.php' );
+require_once(TEST_LIBRARY.'collector.php');
 $collector = &new SimplePatternCollector('/Test\.php$/');
 $suite->collect($path, &$collector)
 */
-		return $suite->run( UnitTestHelper::getReporter() );
+		return $suite->run(UnitTestHelper::getReporter());
 
 	}
 
@@ -84,7 +84,7 @@ $suite->collect($path, &$collector)
 		// Create the dir if not found
 		$dir = dirname($target);
 
-echo "<br>makeUnitTestFile( $sourceFile )<br>";
+echo "<br>makeUnitTestFile($sourceFile)<br>";
 print_r(array($sourceFile,$target,$dir));
 if (1) return array ();
 
@@ -120,7 +120,7 @@ if (1) return array ();
 			return;
 		}
 		if (!class_exists('PHPUnit_Util_Skeleton', false)) {
-			UnitTestHelper::loadFile('Skeleton.php', JUNITTEST_LIBS . '/Util', true);
+			UnitTestHelper::loadFile('Skeleton.php', JUNIT_LIBS . '/Util', true);
 		}
 		$Skeleton = new PHPUnit_Util_Skeleton($class, $file);
 		return $Skeleton->generate(false);
@@ -139,17 +139,17 @@ if (1) return array ();
 	 */
 	function &getUnitTestsList()
 	{
-		$path  = JUNITTEST_ROOT .'/'. JUNITTEST_BASE;
+		$path  = JUNIT_ROOT .'/'. JUNIT_BASE;
 		$files = UnitTestController::_files($path, true);
 
 		$tests    =& UnitTestHelper::getProperty('Controller', 'Tests', 'array');
 		$disabled =& UnitTestHelper::getProperty('Controller', 'Disabled', 'array');
 		$enabled  =& UnitTestHelper::getProperty('Controller', 'Enabled', 'array');
 
-		foreach( $files as $path ) {
+		foreach($files as $path) {
 			$info = UnitTestHelper::getInfoObject($path);
 			$tests[$path] = $info;
-			if ( $info->enabled ) {
+			if ($info->enabled) {
 				$enabled[$path]  = &$tests[$path];
 			} else {
 				$disabled[$path] = &$tests[$path];
@@ -177,7 +177,7 @@ if (1) return array ();
 		}
 
 		// First get Files from the Dir
-		$l = strlen(JUNITTEST_ROOT .'/'. JUNITTEST_BASE) + 1;
+		$l = strlen(JUNIT_ROOT .'/'. JUNIT_BASE) + 1;
 		foreach (glob($path .'/*.php') as $filename) {
 			if (substr(basename($filename), 0, 1) != '_') {
 				$files[] = substr($filename, $l);
@@ -218,7 +218,7 @@ if (1) return array ();
 	}
 }
 
-if (JUNITTEST_MAIN_METHOD == 'UnitTestController::main') {
-	UnitTestController::main(JUNITTEST_BASE, JUNITTEST_REPORTER);
+if (JUNIT_MAIN_METHOD == 'UnitTestController::main') {
+	UnitTestController::main(JUNIT_BASE, JUNIT_REPORTER);
 }
 

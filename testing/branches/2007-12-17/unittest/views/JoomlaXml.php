@@ -2,12 +2,12 @@
 /**
  * Joomla! v1.5 UnitTest Platform
  *
- * @version 	$Id$
- * @package 	Joomla
- * @subpackage 	UnitTest
+ * @version $Id: $
+ * @package Joomla
+ * @subpackage UnitTest
  */
 
-require_once( SIMPLE_TEST.'xml.php' );
+require_once TEST_LIBRARY.'xml.php';
 
 class JoomlaXml extends XmlReporter
 {
@@ -28,7 +28,7 @@ var $_indent = '    ';
 	}
 
 	function sendNoCacheHeaders() {
-		if (! SimpleReporter::inCli() && ! headers_sent() ) {
+		if (! SimpleReporter::inCli() && ! headers_sent()) {
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 			header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -44,7 +44,7 @@ var $_indent = '    ';
 		$xmlns = ($this->_namespace)
 				? ' xmlns:'. rtrim($this->_namespace, ':') .'="http://www.joomla.org/unittests"'
 				: '';
-		echo	'<?xml version="1.0" encoding="utf-8"', '?>',
+		echo    '<?xml version="1.0" encoding="utf-8"', '?>',
 				PHP_EOL,
 				'<', $this->_namespace, 'run', $xmlns, '>', PHP_EOL;
 	}
@@ -55,7 +55,7 @@ var $_indent = '    ';
 
 	function toParsedXml($text) {
 		$text = parent::toParsedXml($text);
-		return str_replace( array('['.JUNITTEST_ROOT.'/', '['.JUNITTEST_ROOT.'\\'), '[', $text);
+		return str_replace(array('['.JUNIT_ROOT.'/', '['.JUNIT_ROOT.'\\'), '[', $text);
 	}
 }
 

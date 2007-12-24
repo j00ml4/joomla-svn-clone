@@ -1,38 +1,38 @@
 <?php
 /**
- * Joomla! v1.5 UnitTest Platform.
+ * Joomla! Unit Test Facility.
  *
- * @version    $Id$
- * @package    Joomla.Framework
+ * @package Joomla
  * @subpackage UnitTest
+ * @version $Id: $
  */
 
-// Call Joomla_Client_AllTests::main() if this source file is executed directly.
-if (!defined('JUNITTEST_MAIN_METHOD')) {
-    define('JUNITTEST_MAIN_METHOD', 'Joomla_Client_AllTests::main');
-    $JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
+// Call JUnit_Client_AllTests::main() if this source file is executed directly.
+if (!defined('JUNIT_MAIN_METHOD')) {
+    define('JUNIT_MAIN_METHOD', 'JUnit_Client_AllTests::main');
+    $JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+    require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
-class Joomla_Client_AllTests
+class JUnit_Client_AllTests
 {
     function main()
     {
-		$self =& new Joomla_Client_AllTests;
-		$suite =& $self->suite();
-		$suite->run( UnitTestHelper::getReporter() );
+        $self =& new JUnit_Client_AllTests;
+        $suite =& $self->suite();
+        $suite->run(UnitTestHelper::getReporter());
     }
 
     function &suite()
     {
-        $suite =& new JoomlaTestSuite( 'Joomla! Framework' );
-		# see TODO 2
-        $suite->addTestFile( 'libraries/joomla/client/JFTPTest.php' );
+        $suite =& new JoomlaTestSuite('Joomla! Framework');
+        # see TODO 2
+        $suite->addTestFile('libraries/joomla/client/JFTPTest.php');
 
         return $suite;
     }
 }
 
-if (JUNITTEST_MAIN_METHOD == 'Joomla_Client_AllTests::main') {
-    Joomla_Client_AllTests::main();
+if (JUNIT_MAIN_METHOD == 'JUnit_Client_AllTests::main') {
+    JUnit_Client_AllTests::main();
 }

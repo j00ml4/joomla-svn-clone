@@ -2,9 +2,9 @@
 /**
  * Joomla! v1.5 UnitTest Platform
  *
- * @version	$Id$
- * @package 	Joomla
- * @subpackage 	UnitTest
+ * @package Joomla
+ * @subpackage UnitTest
+ * @version $Id: $
  */
 
 class JoomlaText extends TextReporter {
