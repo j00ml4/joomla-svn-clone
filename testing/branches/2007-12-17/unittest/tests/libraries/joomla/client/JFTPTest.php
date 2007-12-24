@@ -3,7 +3,7 @@
  * Test class for JFTP
  * Handcrafted by friesengeist ;)
  *
- * @version $Id: $
+ * @version $Id$
  * @package Joomla
  * @subpackage UnitTest
  */

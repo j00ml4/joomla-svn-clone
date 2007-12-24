@@ -2,7 +2,7 @@
 /**
  * Joomla! Unit Test Facility.
  *
- * @version $Id: $
+ * @version $Id$
  * @package Joomla
  * @subpackage UnitTest
  */

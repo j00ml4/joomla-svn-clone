@@ -5,7 +5,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 // Call TestOfJArrayHelper::main() if this source file is executed directly.

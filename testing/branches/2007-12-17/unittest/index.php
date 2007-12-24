@@ -4,7 +4,7 @@
  *
  * Bootstrap file, see README.txt for usage examples.
  *
- * @version $Id: $
+ * @version $Id$
  * @package Joomla
  * @subpackage UnitTest
  */

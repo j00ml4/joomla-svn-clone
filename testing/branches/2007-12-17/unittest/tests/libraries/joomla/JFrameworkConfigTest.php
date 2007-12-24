@@ -4,7 +4,7 @@
  *
  * @package Joomla
  * @subpackage UnitTest
- * @version $Id: $
+ * @version $Id$
  */
 
 // Call TestOfJFrameworkConfig::main() if this source file is executed directly.

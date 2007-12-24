@@ -7,7 +7,7 @@
  * @author         Rene Serradeil <serradeil@webmechanic.biz>
  * @copyright     Copyright (c)2007, media++|webmechanic.biz
  * @license     http://creativecommons.org/licenses/by-nd/2.5/ Creative Commons
- * @version $Id: $
+ * @version $Id$
  * @filesource
  */
 

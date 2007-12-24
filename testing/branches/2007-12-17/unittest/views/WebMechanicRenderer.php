@@ -6,7 +6,7 @@
  * @subpackage UnitTest
  * @author  Rene Serradeil <serradeil@webmechanic.biz>
  * @copyright Copyright (c)2006-2007, media++|webmechanic.biz
- * @version $Id: $
+ * @version $Id$
  * @filesource
  */
 
@@ -586,7 +586,7 @@ class WebMechanicObserver
 {
 
 	function atTestEnd($method, &$test_case) {
-jutdump($method);
+        jutdump($method);
 	}
 }
 
