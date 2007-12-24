@@ -16,16 +16,16 @@
  * methods make sense, wite a new Expectation class to teach Simpletest
  * a new assertion.
  * - <var>__constructor()</var> should usually accept the expected result
- * 								as it's first and only argument.
+ *                                 as it's first and only argument.
  * - <var>test()</var> must return true/false.
  * - <var>testMessage()</var> formats a nice Fehlermeldung
  *
  * More information {@link http://www.simpletest.org/} and the Simpletest sources.
  *
- * @package 	Joomla
- * @subpackage 	UnitTests
- * @author 		CirTap <cirtap-joomla@webmechanic.biz>
- * @version 	$Rev$ $Date$
+ * @package Joomla
+ * @subpackage UnitTest
+ * @author         CirTap <cirtap-joomla@webmechanic.biz>
+ * @version $Id: $
  */
 
 // $Id$
@@ -80,7 +80,7 @@ private $_value_items = array();
 		} else {
 			$message = 'JError failure ' . $this->describeValue($compare);
 		}
-		if ( strpos($this->_message, '%s') ) {
+		if (strpos($this->_message, '%s')) {
 			$message = sprintf($this->_message, $message);
 		}
 		return $message;
@@ -91,7 +91,7 @@ private $_value_items = array();
 		foreach ($error as $item => $value) {
 			$message .= "$item => $value, ";
 		}
-		if ( count($this->_failures) ) {
+		if (count($this->_failures)) {
 			$message .= implode('; ', $this->_failures);
 		}
 		return rtrim($message, ',;');
@@ -112,7 +112,7 @@ private $_value_items = array('level','code');
 		// required elements of the error
 		$c = 0;
 		foreach ($this->_has_items as $item) {
-			if ( !isset($compare[$item]) ) {
+			if (!isset($compare[$item])) {
 				$this->_failures[] = "missing '$item'";
 				$c++;
 			}
@@ -123,7 +123,7 @@ private $_value_items = array('level','code');
 	private function _wrongValues(&$compare) {
 		$c = 0;
 		foreach ($this->_value_items as $item) {
-			if (  $compare[$item] != $this->_value[$item] ) {
+			if ( $compare[$item] != $this->_value[$item]) {
 				$this->_failures[] = sprintf('expected %s [%s] not [%s]',
 								$item, $this->_value[$item], $compare[$item]);
 				$c++;

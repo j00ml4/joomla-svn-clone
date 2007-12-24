@@ -2,23 +2,23 @@
 /**
  * WebMechanicRenderer für UnitTests
  *
- * @package 	ScriptBase
- * @subpackage 	UnitTests
- * @author 		Rene Serradeil <serradeil@webmechanic.biz>
- * @copyright 	Copyright (c)2006-2007, media++|webmechanic.biz
- * @version 	0.5.0 $Id$
+ * @package Joomla
+ * @subpackage UnitTest
+ * @author  Rene Serradeil <serradeil@webmechanic.biz>
+ * @copyright Copyright (c)2006-2007, media++|webmechanic.biz
+ * @version $Id: $
  * @filesource
  */
 
-require_once( SIMPLE_TEST.'reporter.php' );
+require_once(TEST_LIBRARY.'reporter.php');
 
 /**
  * Ein gegenüber HtmlReporter() übersichtlicherer Renderer.
  * Auf die Instanz kann in den TestCases via <var>$this->_reporter</var>
  * zugegriffen werden.
  *
- * @package 	ScriptBase
- * @subpackage 	UnitTests
+ * @package Joomla
+ * @subpackage UnitTest
  */
 class WebMechanicRenderer extends SimpleReporter
 {
@@ -60,7 +60,7 @@ var $_env = '';
 
 	function sendNoCacheHeaders()
 	{
-		if (! headers_sent() ) {
+		if (! headers_sent()) {
 			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 			header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -71,7 +71,7 @@ var $_env = '';
 		}
 		ob_start();
 
-//	jutdump(get_class_methods($this));
+//    jutdump(get_class_methods($this));
 
 	}
 
@@ -94,7 +94,7 @@ var $_env = '';
 				'end'    => false
 				);
 
-		if ( !UnitTestHelper::shouldInvoke($this, $class_name) ) {
+		if (!UnitTestHelper::shouldInvoke($this, $class_name)) {
 			// store for possible serialization
 			$this->_missing_tests[] = $this->method_name;
 			$this->_methods[$this->method_name]['skip']   = 1;
@@ -116,27 +116,27 @@ var $_env = '';
 	{
 		$this->test_name = $test_name;
 
-		$verbose = (JUNITTEST_REPORTER_RENDER_PASSED)
-				 ? '<small title="Also displays messages of passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
-				 : '<small title="Only displays messages of failed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
-		$home_url = JUNITTEST_HOME_URL;
+		$verbose = (JUNIT_REPORTER_RENDER_PASSED)
+				 ? '<small title="Also displays messages of passed tests (JUNIT_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
+				 : '<small title="Only displays messages of failed tests (JUNIT_REPORTER_RENDER_PASSED = false)">(compact)</small>';
+		$home_url = JUNIT_HOME_URL;
 		$title = <<<HTML
 	<h1 onclick="location.href='{$home_url}'">
 	<span>{$test_name}</span> <span style="cursor:help">{$verbose}</span>
 	</h1>
 HTML;
 		list($php, $url) = UnitTestHelper::toggleHostUrl();
-		if ( !empty($url) ) {
-			if (strpos(JUNITTEST_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
+		if (!empty($url)) {
+			if (strpos(JUNIT_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
 				$php = '<b class="tpass" title="toggle environment">PHP4</b>';
 			}
-			if (strpos(JUNITTEST_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
+			if (strpos(JUNIT_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
 				$php = '<b class="tpass" title="toggle environment">PHP5</b>';
 			}
 			$this->_env .= " &bull; Switch to: <span><a href=\"{$url}\">{$php}</a></span>";
 		}
 
-		if ( headers_sent() ) {
+		if (headers_sent()) {
 			echo '<div class="Header">', $title, '</div>',PHP_EOL, $this->_env;
 			return;
 		}
@@ -159,7 +159,7 @@ HTML;
 <div id="Content" class="MainContent">
 
 HTML;
-//		 echo $this->testgroup->generateMenu();
+//         echo $this->testgroup->generateMenu();
 
 	}
 
@@ -228,7 +228,7 @@ HTML;
 
 		/* create the list of testcases and the optional tooltip for skipped tests */
 		foreach ($this->_methods as $method_name => $stats) {
-			if ( in_array($method_name, $this->_missing_tests) || $stats['skip']) {
+			if (in_array($method_name, $this->_missing_tests) || $stats['skip']) {
 				$reason = ($this->_methods[$method_name]['reason'])
 						? ' style="cursor:help" title="'.$this->_methods[$method_name]['reason'].'"'
 						: '' ;
@@ -247,7 +247,7 @@ HTML;
 
 		echo PHP_EOL, '<tbody class="methods-summary"><tr><td colspan="2">';
 		if (count($mpass)) {
-			echo PHP_EOL,'	<span class="pass">&nbsp;</span> <strong>passed: </strong> <tt>'
+			echo PHP_EOL,'    <span class="pass">&nbsp;</span> <strong>passed: </strong> <tt>'
 				, $passed ,' &nbsp;</tt>';
 		}
 		if (count($mfail)) {
@@ -312,7 +312,7 @@ HTML;
 				 : '';
 
 		// leerer UnitTestCase Klasse (keine test_xx Methoden) ?
-		if ( ($pc+$fc+$ec) == 0) {
+		if (($pc+$fc+$ec) == 0) {
 			$css = 'fail';
 		} else {
 			if ($sc) $css = 'exception';
@@ -398,7 +398,7 @@ HTML;
 		parent::paintPass($message);
 		$this->_methods[$this->method_name]['pass']++;
 
-		if (JUNITTEST_REPORTER_RENDER_PASSED == false) {
+		if (JUNIT_REPORTER_RENDER_PASSED == false) {
 			return;
 		}
 		list($expected, $file) = explode('at [', $message);
@@ -440,7 +440,7 @@ HTML;
 		@list ($title, $file, $test_class) = $breadcrumb;
 		// original error message with some filename
 		//.. at [filepath line nnn]
-		if ( strpos($message, $file) !== false ) {
+		if (strpos($message, $file) !== false) {
 			list($realfile, $filepath) = $this->_filepath($file);
 			$message  = str_replace(
 							"at [$realfile",
@@ -504,7 +504,7 @@ HTML;
 		$ec = get_class($exception);
 		$em = $exception->getMessage();
 		$ef = $exception->getFile();
-		$ef = substr($ef, strlen(JUNITTEST_ROOT)+1);
+		$ef = substr($ef, strlen(JUNIT_ROOT)+1);
 		$el = $exception->getLine();
 		$message = $this->_htmlEntities($message);
 
@@ -526,8 +526,8 @@ HTML;
 	 * @param string $type    Event type as text.
 	 * @param mixed  $payload Message or object.
 	 */
-//	function paintSignal($type, $payload) {
-//	}
+//    function paintSignal($type, $payload) {
+//    }
 
 	/* Paints a formatted ASCII message such as a variable dump. */
 	function dumpCode($data, $label='')
@@ -539,7 +539,7 @@ HTML;
 		echo str_replace(array('{%click%}','{%rem%}'), array($click,gettype($data).' '.$label), $title);
 		echo "\n<textarea class='DbgPrint' title='' style='display:none;position:relative;font-family:monospace;font-size:95%;line-height:normal;width:100%;height:{$lines}em;background:white;color:black;border:1px solid gray;margin:0px;padding:0px 4px;'>";
 
-		if ( is_scalar($data) ) {
+		if (is_scalar($data)) {
 			echo htmlentities($data, ENT_COMPAT, $this->_character_set);
 		} else {
 			print_r($data);
@@ -552,7 +552,7 @@ HTML;
 	function _filepath($file)
 	{
 		static $case_nr, $files;
-		if ( ($c = $this->getTestCaseProgress()) > $case_nr) {
+		if (($c = $this->getTestCaseProgress()) > $case_nr) {
 			$files = array();
 			$case_nr = $c;
 		}
@@ -561,7 +561,7 @@ HTML;
 		}
 
 		$files[$file][0] = realpath($file);
-		$files[$file][1] = substr($files[$file][0], strlen(JUNITTEST_ROOT)+1);
+		$files[$file][1] = substr($files[$file][0], strlen(JUNIT_ROOT)+1);
 		return $files[$file];
 	}
 

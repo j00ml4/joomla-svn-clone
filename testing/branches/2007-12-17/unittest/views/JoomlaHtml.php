@@ -2,9 +2,9 @@
 /**
  * Joomla! v1.5 UnitTest Platform
  *
- * @version	$Id$
- * @package 	Joomla
- * @subpackage 	UnitTest
+ * @version $Id: $
+ * @package Joomla
+ * @subpackage UnitTest
  */
 
 class JoomlaHtml extends SimpleReporter
@@ -30,7 +30,7 @@ var $_env = '';
 	}
 
 	function sendNoCacheHeaders() {
-		if (! SimpleReporter::inCli() && ! headers_sent() ) {
+		if (! SimpleReporter::inCli() && ! headers_sent()) {
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 			header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -42,27 +42,28 @@ var $_env = '';
 		ob_start();
 	}
 
-    /**
-     * Paints the top of the web page setting the
-     * title to the name of the starting test.
-     * @param string $test_name      Name class of test.
-     */
-    function paintHeader( $test_name )
-    {
-    	$this->test_name = $test_name;
-		$verbose = (JUNITTEST_REPORTER_RENDER_PASSED)
-				 ? '<small title="Also displays messages of passed tests (JUNITTEST_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
-				 : '<small title="Only displays messages of failed tests (JUNITTEST_REPORTER_RENDER_PASSED = false)">(compact)</small>';
-		$home_url = JUNITTEST_HOME_URL;
+	/**
+	 * Paints the top of the web page setting the title to the name of the
+	 * starting test.
+	 *
+	 * @param string Name class of test.
+	 */
+	function paintHeader($test_name)
+	{
+		$this->test_name = $test_name;
+		$verbose = (JUNIT_REPORTER_RENDER_PASSED)
+				 ? '<small title="Also displays messages of passed tests (JUNIT_REPORTER_RENDER_PASSED = true)">(verbose)</small>'
+				 : '<small title="Only displays messages of failed tests (JUNIT_REPORTER_RENDER_PASSED = false)">(compact)</small>';
+		$home_url = JUNIT_HOME_URL;
 
-    	$title = <<<HTML
+		$title = <<<HTML
 	<h1 class="header" onclick="location.href='{$home_url}';">
 	Testcase: {$test_name}
 	<small><span style="cursor:help">{$verbose}</span></small>
 	</h1>
 HTML;
 
-		if ( headers_sent() ) {
+		if (headers_sent()) {
 			echo $title;
 			return;
 		}
@@ -86,9 +87,9 @@ HTML;
 	/**
 	 * Paints the end of the test with a summary of
 	 * the passes and failures.
-	 * @param string $test_name        Name class of test.
+	 * @param string Name class of test.
 	 */
-	function paintFooter( $test_name )
+	function paintFooter($test_name)
 	{
 		$state = ($this->getFailCount() + $this->getExceptionCount() > 0 ? "fail" : "pass");
 
@@ -101,109 +102,109 @@ HTML;
 			, '</div>', PHP_EOL
 			, '<div class="footer_footer"><!-- statistics anyone? --></div>', PHP_EOL
 			, '</body>', PHP_EOL, '</html>';
-    }
+	}
 
-    function paintPass( $message )
-    {
-    	// increment global counter
+	function paintPass($message)
+	{
+		// increment global counter
 		parent::paintPass($message);
 
-		if (JUNITTEST_REPORTER_RENDER_PASSED == false) {
+		if (JUNIT_REPORTER_RENDER_PASSED == false) {
 			return;
 		}
 
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
+		$breadcrumb = $this->getTestList();
+		array_shift($breadcrumb);
 
-        $this->_paintHelper('pass', $breadcrumb, $message);
-    }
+		$this->_paintHelper('pass', $breadcrumb, $message);
+	}
 
-    /**
-     * Paints the test failure with a breadcrumbs trail of the nesting
-     * test suites below the top level test.
-     *
-     * @param string $message    Failure message displayed in
-     *                              the context of the other tests.
-     */
-    function paintFail( $message )
-    {
-    	// increment global counter
-        parent::paintFail( $message );
+	/**
+	 * Paints the test failure with a breadcrumbs trail of the nesting
+	 * test suites below the top level test.
+	 *
+	 * @param string Failure message displayed in the context of the other
+	 * tests.
+	 */
+	function paintFail($message)
+	{
+		// increment global counter
+		parent::paintFail($message);
 
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
+		$breadcrumb = $this->getTestList();
+		array_shift($breadcrumb);
 
-        $this->_paintHelper('fail', $breadcrumb, $message);
-    }
+		$this->_paintHelper('fail', $breadcrumb, $message);
+	}
 
-    function paintSkip( $message )
-    {
-    	// increment global counter
-        parent::paintSkip( $message );
+	function paintSkip($message)
+	{
+		// increment global counter
+		parent::paintSkip($message);
 
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
+		$breadcrumb = $this->getTestList();
+		array_shift($breadcrumb);
 
-        $this->_paintHelper('skip', $breadcrumb, $message);
-    }
+		$this->_paintHelper('skip', $breadcrumb, $message);
+	}
 
-    /**
-     * Paints a PHP error or exception.
-     *
-     * @param string $message Message is ignored.
-     */
-    function paintException( $message )
-    {
-        parent::paintException( $message );
+	/**
+	 * Paints a PHP error or exception.
+	 *
+	 * @param string Message is ignored.
+	 */
+	function paintException($message)
+	{
+		parent::paintException($message);
 
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
+		$breadcrumb = $this->getTestList();
+		array_shift($breadcrumb);
 
-        $this->_paintHelper('exception', $breadcrumb, $message);
-    }
+		$this->_paintHelper('exception', $breadcrumb, $message);
+	}
 
-    /**
-     * Paints a simple supplementary message.
-     * @param string $message        Text to display.
-     * @access public
-     */
-    function paintMessage( $message )
-    {
-        parent::paintMessage( $message );
+	/**
+	 * Paints a simple supplementary message.
+	 * @param string Text to display.
+	 * @access public
+	 */
+	function paintMessage($message)
+	{
+		parent::paintMessage($message);
 
-        $breadcrumb = $this->getTestList();
-        array_shift( $breadcrumb );
+		$breadcrumb = $this->getTestList();
+		array_shift($breadcrumb);
 
 		$this->_paintHelper('message', $breadcrumb, $message);
-    }
+	}
 
-    /**
-     *  Paints formatted text such as dumped variables.
-     * @param string $message        Text to show.
-     */
-    function paintFormattedMessage( $message )
-    {
-        echo '<pre class="message">', $this->_htmlEntities( $message ), '</pre>';
-    }
+	/**
+	 *  Paints formatted text such as dumped variables.
+	 * @param string Text to show.
+	 */
+	function paintFormattedMessage($message)
+	{
+		echo '<pre class="message">', $this->_htmlEntities($message), '</pre>';
+	}
 
 	function _paintHelper($type, $breadcrumb, $message)
 	{
-        echo '<div class="', $type, '">'
-        	, implode(' -&gt; ', $breadcrumb )
-        	, ' -&gt; ', $this->_htmlEntities( $message )
-        	, '</div>', PHP_EOL;
+		echo '<div class="', $type, '">'
+			, implode(' -&gt; ', $breadcrumb)
+			, ' -&gt; ', $this->_htmlEntities($message)
+			, '</div>', PHP_EOL;
 	}
 
-    /**
-     * Character set adjusted entity conversion.
-     * @param string $message    Plain text or Unicode message.
-     * @return string            Browser readable message.
-     * @access protected
-     */
-    function _htmlEntities( $message )
-    {
-        return htmlentities( $message, ENT_COMPAT, 'UTF-8' );
-    }
+	/**
+	 * Character set adjusted entity conversion.
+	 * @param string Plain text or Unicode message.
+	 * @return string Browser readable message.
+	 * @access protected
+	 */
+	function _htmlEntities($message)
+	{
+		return htmlentities($message, ENT_COMPAT, 'UTF-8');
+	}
 
 	/**
 	 * Called at the start of each test method.
@@ -214,13 +215,13 @@ HTML;
 	{
 		$this->method_name = $method_name;
 		$this->_methods[$method_name] = array(
-				'start'  => true,
-				'pass'   => 0,
-				'fail'   => 0,
-				'skip'   => 0,
-				'miss'   => false,
+				'start' => true,
+				'pass' => 0,
+				'fail' => 0,
+				'skip' => 0,
+				'miss' => false,
 				'reason' => false,
-				'end'    => false
+				'end' => false
 				);
 
 		return ! $this->_is_dry_run;

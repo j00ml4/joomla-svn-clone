@@ -2,12 +2,12 @@
 /**
  * Joomla! v1.5 UnitTest Platform basic list mode view.
  *
- * @package 	Joomla Unittest
- * @subpackage 	Views
- * @author 		Rene Serradeil <serradeil@webmechanic.biz>
- * @copyright 	Copyright (c)2007, media++|webmechanic.biz
- * @license 	http://creativecommons.org/licenses/by-nd/2.5/ Creative Commons
- * @version 	$Id$
+ * @package Joomla
+ * @subpackage UnitTest
+ * @author         Rene Serradeil <serradeil@webmechanic.biz>
+ * @copyright     Copyright (c)2007, media++|webmechanic.biz
+ * @license     http://creativecommons.org/licenses/by-nd/2.5/ Creative Commons
+ * @version $Id: $
  * @filesource
  */
 

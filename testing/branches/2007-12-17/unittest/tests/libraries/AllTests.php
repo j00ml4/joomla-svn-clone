@@ -1,20 +1,20 @@
 <?php
 /**
- * Joomla! v1.5 UnitTest Platform.
+ * Joomla! Unit Test Facility.
  *
- * @version    $Id$
- * @package    Joomla.Framework
+ * @version $Id: $
+ * @package Joomla
  * @subpackage UnitTest
  */
 
-// Call Joomla_AllTests::main() if this source file is executed directly.
-if (!defined('JUNITTEST_MAIN_METHOD')) {
-	define('JUNITTEST_MAIN_METHOD', 'Joomla_AllTests::main');
-	$JUNITTEST_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNITTEST_ROOT.'/unittest/prepend.php');
+// Call JUnit_AllTests::main() if this source file is executed directly.
+if (!defined('JUNIT_MAIN_METHOD')) {
+	define('JUNIT_MAIN_METHOD', 'JUnit_AllTests::main');
+	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
-require_once JUNITTEST_BASE .'/libraries/joomla/AllTests.php';
+require_once JUNIT_BASE .'/libraries/joomla/AllTests.php';
 
 class Libraries_AllTests
 {
@@ -22,20 +22,20 @@ class Libraries_AllTests
 	{
 		$self  =& new Libraries_AllTests;
 		$suite =& $self->suite();
-		$suite->run( UnitTestHelper::getReporter() );
+		$suite->run(UnitTestHelper::getReporter());
 	}
 
 	function &suite()
 	{
-		$suite =& new JoomlaTestSuite( 'Joomla! Framework' );
+		$suite =& new JoomlaTestSuite('Joomla! Framework');
 
-		$suite->addClassTest( 'libraries/JLoaderTest.php' );
-		$suite->addTestCase( Joomla_Libraries_AllTests::suite() );
+		$suite->addClassTest('libraries/JLoaderTest.php');
+		$suite->addTestCase(JUnit_Libraries_AllTests::suite());
 
 		return $suite;
 	}
 }
 
-if (JUNITTEST_MAIN_METHOD == 'Joomla_AllTests::main') {
-	Joomla_AllTests::main();
+if (JUNIT_MAIN_METHOD == 'JUnit_AllTests::main') {
+	JUnit_AllTests::main();
 }
