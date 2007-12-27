@@ -11,7 +11,7 @@ if (!defined('JUNIT_MAIN_METHOD')) {
 
 require_once('libraries/joomla/base/object.php');
 
-class JObjectTest extends JUnit_Framework_TestCase
+class JObjectTest extends PHPUnit_Framework_TestCase
 {
     var $instance = null;
 
@@ -35,7 +35,7 @@ class JObjectTest extends JUnit_Framework_TestCase
 */
     function setUp()
     {
-        $this->instance = new TestJObject;
+        $this->instance = new JObjectExtend;
     }
 
     function tearDown()
@@ -46,12 +46,12 @@ class JObjectTest extends JUnit_Framework_TestCase
     function testJObject()
     {
         $this->assertIsA(new JObject, 'JObject');
-        $this->assertIsA($this->instance, 'TestJObject');
+        $this->assertIsA($this->instance, 'JObjectExtend');
     }
 
     function test__construct()
     {
-        $obj = new TestJObject(array('construcVar'=>'tested'));
+        $obj = new JObjectExtend(array('construcVar'=>'tested'));
         // $publicVar, $construcVar
         $this->assertEqual($obj->construcVar, 'tested');
         $this->assertEqual($obj->get('construcVar'), 'tested');
@@ -100,9 +100,9 @@ class JObjectTest extends JUnit_Framework_TestCase
     {
         $string = $this->instance->toString();
         if ((int)PHP_VERSION >= 5) {
-            $this->assertEqual($string, 'TestJObject');
+            $this->assertEqual($string, 'JObjectExtend');
         } else {
-            $this->assertEqual($string, strtolower('TestJObject'));
+            $this->assertEqual($string, strtolower('JObjectExtend'));
         }
     }
 

@@ -7,18 +7,18 @@
  * @version $Id$
  */
 
-// Call JUnit_Client_AllTests::main() if this source file is executed directly.
+// Call PHPUnit_Client_AllTests::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
-    define('JUNIT_MAIN_METHOD', 'JUnit_Client_AllTests::main');
+    define('JUNIT_MAIN_METHOD', 'PHPUnit_Client_AllTests::main');
     $JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
     require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
-class JUnit_Client_AllTests
+class PHPUnit_Client_AllTests
 {
     function main()
     {
-        $self =& new JUnit_Client_AllTests;
+        $self =& new PHPUnit_Client_AllTests;
         $suite =& $self->suite();
         $suite->run(UnitTestHelper::getReporter());
     }
@@ -33,6 +33,6 @@ class JUnit_Client_AllTests
     }
 }
 
-if (JUNIT_MAIN_METHOD == 'JUnit_Client_AllTests::main') {
-    JUnit_Client_AllTests::main();
+if (JUNIT_MAIN_METHOD == 'PHPUnit_Client_AllTests::main') {
+    PHPUnit_Client_AllTests::main();
 }

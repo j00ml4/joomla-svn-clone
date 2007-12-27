@@ -5,8 +5,8 @@
  * @version $Id$
  * @package Joomla
  * @subpackage UnitTest
- * @copyright     Copyright (C) 2007 Rene Serradeil. All rights reserved.
- * @license        GNU/GPL
+ * @copyright Copyright (C) 2007 Rene Serradeil. All rights reserved.
+ * @license GNU/GPL
  */
 
 /**
@@ -19,200 +19,39 @@ define('JUNIT_IS_FRAMEWORK', 4);
 
 class UnitTestHelper
 {
-	/**
-	 * Returns the Singleton instance of the active UnitTest Renderer for $output.
-	 *
-	 * @param string $output any of html,xml,php,json,text, custom
-	 * @return object Instance of JoomlaXXX view or the 'custom' renderer.
-	 */
-	function &getReporter($output = null)
-	{
-		static $instance;
-
-		if ($instance !== null) {
-			return $instance;
-		}
-
-		if ($output == null) {
-			$input  =& UnitTestHelper::getProperty('Controller', 'Input');
-			$output = $input->reporter['output'];
-		}
-
-		switch(strtolower($output))
-		{
-		case 'xml':
-		case 'php':
-		case 'json':
-		case 'text':
-			$renderer = 'Joomla'.ucfirst($output);
-			require_once JUNIT_VIEWS.'/'.$renderer.'.php';
-			break;
-		case 'html':
-			# fall thru to default case
-			$renderer = 'Joomla'.ucfirst($output);
-		default:
-			if ($output == 'html') {
-				require_once JUNIT_VIEWS.'/'.$renderer.'.php';
-			} else {
-				require_once JUNIT_REPORTER_CUSTOM_PATH;
-				$renderer = JUNIT_REPORTER_CUSTOM_CLASS;
-			}
-
-			break;
-		}
-
-		$instance =& new $renderer();
-		return $instance;
-	}
+	static $properties = array();
 
 	/**
-	 * Returns class name and output format of the current reporter.
+	 * Attempt to include() the file.
 	 *
-	 * If JUNIT_REPORTER is 'custom' and JUNIT_REPORTER_CUSTOM_FORMAT
-	 * is not provided, $output defaults to 'text'
+	 * include() is not prefixed with the @ operator because if
+	 * the file is loaded and contains a parse error, execution
+	 * will halt silently and this is difficult to debug.
 	 *
-	 * @return array ('class'=>$name, 'format'=>$output)
-	 * @see getReporter()
-	 * @uses JUNIT_REPORTER, JUNIT_REPORTER_CUSTOM_CLASS, JUNIT_REPORTER_CUSTOM_FORMAT
+	 * @param  string  $filespec
+	 * @param  boolean $once
+	 * @return boolean
+	 * @internal borrowed from Zend_Loader
 	 */
-	function getReporterInfo()
+	function _includeFile($filespec, $once = false)
 	{
-		$input =& UnitTestHelper::getProperty('Controller', 'Input');
-		if (isset($input->output)) {
-			$output = $input->output;
+		if ($once) {
+			return (bool)(@include_once $filespec);
 		} else {
-			$output = (JUNIT_CLI)
-					? strtolower(JUNIT_REPORTER_CLI)
-					: strtolower(JUNIT_REPORTER);
+			return (bool)(@include $filespec);
 		}
-
-		if ($output == 'custom') {
-			$format = JUNIT_REPORTER_CUSTOM_FORMAT;
-			if (strstr(' html xml text php json ', $format) === false) {
-				$format = 'text';
-				$name   = 'Joomla'.ucfirst($format);
-			} else {
-				$name   = JUNIT_REPORTER_CUSTOM_CLASS;
-			}
-		} else {
-			$format = $output;
-			$name   = 'Joomla'.ucfirst($output);
-		}
-		return array('class'=>$name, 'format'=>$format, 'output'=>$output);
 	}
-
-	/**
-	 * Tells whether the provided test is enabled via its config setting.
-	 *
-	 * Testsuites (AllTests.php) are enabled by default unless explicitly
-	 * disabled using their *_ALL directive in `TestConfiguration.php`.
-	 *
-	 * @param  object $infoobj as returned from {@link getInfoObject()}
-	 * @return int 0 = disabled, 1 = enabled
-	 */
-	function isTestEnabled($infoobj)
-	{
-		$constant   = UnitTestHelper::getTestConfigVar($infoobj);
-		if ($infoobj->is_test == JUNIT_IS_TESTSUITE) {
-			// mark AllTest enabled by default
-			$configured = true;
-			if (defined($constant)) {
-				$configured = (bool)@constant($constant);
-			} else {
-				$available = true;
-			}
-		} else {
-			$available  = defined($constant);
-			$configured = (bool)@constant($constant);
-		}
-
-		return (int)($available && $configured);
-	}
-
-	/**
-	 * Allows a Reporter class to query testcase configuration.
-	 *
-	 * @param  SimpleReporter $reporter
-	 * @return bool true if a testcase is enabled
-	 */
-	function shouldInvoke(&$reporter, $class_name)
-	{
-		$UnitTests =& UnitTestHelper::getProperty('Reporter', 'UnitTests');
-		$class_name = strtolower($class_name);
-		if (isset($UnitTests[$class_name])) {
-			$invoke = (bool)$UnitTests[$class_name]->enabled;
-		} else {
-			$invoke = false;
-		}
-
-		return $invoke;
-	}
-
-	/**
-	 * @param  object $infoobj as returned from {@link getInfoObject()}
-	 * @return string name of the configuration
-	 */
-	function getTestConfigVar(&$infoobj)
-	{
-		switch ($infoobj->is_test) {
-		case JUNIT_IS_TESTSUITE:
-			switch (trim($infoobj->dirname,'\\/')) {
-			case '':
-				$constant = JUNIT_PREFIX . 'FRAMEWORK';
-				break;
-			case 'libraries':
-				$constant = JUNIT_PREFIX . 'LIBRARIES';
-				break;
-			default:
-				$constant = JUNIT_PREFIX . $infoobj->package;
-			}
-
-			$constant .= '_ALL';
-			break;
-
-		case JUNIT_IS_TESTCASE:
-			$constant = JUNIT_PREFIX . $infoobj->package .'_'. $infoobj->classname;
-			break;
-
-		default:
-			$constant = '';
-		}
-
-		/* allow hook function to fix nameing scheme violations */
-		if (!defined($constant)) {
-			$infoobj->violation = true;
-			# TODO: implement hook for config variables
-			// someHackishConstantsHook(&$out)
-		}
-
-		return strtoupper($constant);
-	}
-
-	/**
-	 * Returns the line number of a configuration directive (constant) in
-	 * `TestConfiguration.php`
-	 */
-	function getConfigLine($directive, $source='TestConfiguration.php') {
-		$lines = file($source, true);
-		$line  = preg_grep('#'. strtoupper($directive) .'#', $lines);
-		return key($line) + 1;
-	}
-
-	/**
-	 * Returns the estimated amount of possible testcases based on the
-	 * predefined configuration settings.
-	 */
 
 	/**
 	 * Plucks $path into pieces and returns a standard object with all kind
 	 * of stuff in it. The value of $path is the "path" input argument
 	 * provided via $_REQUEST (browser mode) or the command-line (CLI Mode).
 	 *
-	 * See UnitTestHelper_examples.txt for more information about this array and it's drawbacks.
+	 * See UnitTestHelper_examples.txt for more information about this array and
+	 * it's drawbacks.
 	 *
 	 * @param  string $path relative of a framework or testcase file/dir
 	 * @return array
-	 * @uses getTestConfigVar(), isTestEnabled(), getTestDocs(), getTestHelper()
 	 */
 	function getInfoObject($path)
 	{
@@ -268,61 +107,11 @@ class UnitTestHelper
 			}
 		}
 
-		/* let's have a first peak of what this might be */
-		$file = ' '.strtolower($out->filename);
-		if (strpos($file, 'alltests.php') !== false) {
-			$out->is_test   = JUNIT_IS_TESTSUITE;
-			$out->classname = false;
-			$out->config    = UnitTestHelper::getTestConfigVar($out);
-		} elseif (strpos($file, 'test.php') !== false) {
-			$out->is_test   = JUNIT_IS_TESTCASE;
-			$out->classname = basename($sbase, 'Test');
-			$out->config    = UnitTestHelper::getTestConfigVar($out);
-		}
-		if ($out->package == 'Framework') {
-			$out->is_test   = $out->is_test | JUNIT_IS_FRAMEWORK;
-			$out->basename = $sbase;
-		}
-
-		unset($file);
-
-		/* allow hook function to fix naming scheme violations */
-		if (isset($out->config) && !defined($out->config)) {
-			$out->violation = true;
-			# TODO: implement hook for path+class+whatever variables
-			// someHackishNamesHook(&$out)
-		}
-
-		if (!is_dir(JPATH_BASE .'/'. $out->dirname)) {
-			$out->enabled = false;
-			$out->task    = 'error';
-			$out->error   = sprintf('Directory does not exist in JPATH_BASE: "%1$s"', $out->dirname);
-			return $out;
-		}
-
-		$out->enabled = UnitTestHelper::isTestEnabled($out);
-
-		switch ($out->is_test) {
-		case JUNIT_IS_TESTSUITE:
-			$out->testclass = $out->package .'_'. $sbase;
-			break;
-		case JUNIT_IS_TESTCASE:
-			$out->testclass = 'TestOf'.basename($sbase, 'Test');
-			break;
-		case JUNIT_IS_FRAMEWORK:
-			$out->testclass = $sbase;
-			break;
-		}
-
-		if ($out->is_test != JUNIT_IS_FRAMEWORK) {
-			$out->docs = UnitTestHelper::getTestDocs($out);
-		}
-
 		if ($out->enabled == false) {
 			return $out;
 		}
 
-		if (is_dir(JUNIT_ROOT .'/'. JUNIT_BASE .'/'. $out->dirname .'_files')) {
+		if (is_dir(JUNIT_ROOT . '/' . JUNIT_BASE . '/' . $out->dirname . '_files')) {
 			if ($out->is_test === JUNIT_IS_TESTCASE) {
 				$out->helper = UnitTestHelper::getTestHelper($out);
 			}
@@ -334,6 +123,155 @@ class UnitTestHelper
 		// JUNIT_CLI
 
 		return $out;
+	}
+
+	/**
+	 * Simple registry to prevent clutter of the global variable namespace.
+	 * <code>
+	 * function foo() {
+	 *    // initialize property
+	 *    $stuff =&UnitTestController::getProperty('my', 'stuff');
+	 *    $stuff = new JConfig;
+	 * }
+	 *
+	 * function bar() {
+	 *     // retrieve property
+	 *    $stuff =& UnitTestController::getProperty ('my', 'stuff');
+	 *    echo $stuff- >language;
+	 * }
+	 * </code>
+	 *
+	 * @param string Used to prevent clashes, usually a class name.
+	 * @param string Name of the "virtual" property.
+	 * @param string PHP type name, i.e. 'array'.
+	 * @see unsetProperty()
+	 */
+	function &getProperty($namespace, $prop, $forcetype = null, $destroy = false)
+	{
+
+		if ($destroy === true) {
+			unset(self::$properties[$namespace][$prop]);
+			return $destroy;
+		}
+		if (! isset(self::$properties[$namespace])) {
+			self::$properties[$namespace] = array();
+		}
+		elseif (null === $prop) {
+			foreach (array_keys(self::$properties[$namespace]) as $p) {
+				unset(self::$properties[$namespace][$p]);
+			}
+			return $namespace;
+		}
+		if (!isset(self::$properties[$namespace][$prop]) && $forcetype !== null) {
+			@settype(self::$properties[$namespace][$prop], $forcetype);
+		}
+		return self::$properties[$namespace][$prop];
+	}
+
+	/**
+	 * Returns the Singleton instance of the active UnitTest Renderer for $output.
+	 *
+	 * @param string Any of html, xml, php, json, text, custom.
+	 * @return object Instance of JoomlaXXX view or the 'custom' renderer.
+	 */
+	function &getReporter($output = null)
+	{
+		static $instance;
+
+		if ($instance !== null) {
+			return $instance;
+		}
+
+		if ($output == null) {
+			$input  =& UnitTestHelper::getProperty('Controller', 'Input');
+			$output = $input->reporter['output'];
+		}
+
+		switch(strtolower($output))
+		{
+		case 'xml':
+		case 'php':
+		case 'json':
+		case 'text':
+			$renderer = 'Joomla'.ucfirst($output);
+			require_once JUNIT_VIEWS.'/'.$renderer.'.php';
+			break;
+		case 'html':
+			# fall thru to default case
+			$renderer = 'Joomla'.ucfirst($output);
+		default:
+			if ($output == 'html') {
+				require_once JUNIT_VIEWS.'/'.$renderer.'.php';
+			} else {
+				require_once JUNIT_REPORTER_CUSTOM_PATH;
+				$renderer = JUNIT_REPORTER_CUSTOM_CLASS;
+			}
+
+			break;
+		}
+
+		$instance =& new $renderer();
+		return $instance;
+	}
+
+	/**
+	 * @param  object $infoobj as returned from {@link getInfoObject()}
+	 * @return string name of the configuration
+	 */
+	function getTestConfigVar(&$infoobj)
+	{
+		switch ($infoobj->is_test) {
+		case JUNIT_IS_TESTSUITE:
+			switch (trim($infoobj->dirname,'\\/')) {
+			case '':
+				$constant = JUNIT_PREFIX . 'FRAMEWORK';
+				break;
+			case 'libraries':
+				$constant = JUNIT_PREFIX . 'LIBRARIES';
+				break;
+			default:
+				$constant = JUNIT_PREFIX . $infoobj->package;
+			}
+
+			$constant .= '_ALL';
+			break;
+
+		case JUNIT_IS_TESTCASE:
+			$constant = JUNIT_PREFIX . $infoobj->package .'_'. $infoobj->classname;
+			break;
+
+		default:
+			$constant = '';
+		}
+
+		/* allow hook function to fix nameing scheme violations */
+		if (!defined($constant)) {
+			$infoobj->violation = true;
+			# TODO: implement hook for config variables
+			// someHackishConstantsHook(&$out)
+		}
+
+		return strtoupper($constant);
+	}
+
+	/**
+	 * @ignore
+	 * @return array
+	 */
+	function &getTestDocs($infoobj)
+	{
+		$docs = glob(JUNIT_ROOT .'/'.
+					JUNIT_BASE .'/'.
+					$infoobj->dirname .'_files/'.
+					$infoobj->classname.'_*.txt');
+
+		if (count($docs) > 0) {
+			$l = strlen(JUNIT_ROOT .'/'. JUNIT_BASE .'/');
+			foreach (array_keys($docs) as $i) {
+				$docs[$i] = substr($docs[$i], $l);
+			}
+		}
+		return $docs;
 	}
 
 	/**
@@ -358,89 +296,180 @@ class UnitTestHelper
 		return $helper;
 	}
 
-	/**
-	 * @ignore
-	 * @return array
-	 */
-	function &getTestDocs($infoobj)
-	{
-		$docs = glob(JUNIT_ROOT .'/'.
-					JUNIT_BASE .'/'.
-					$infoobj->dirname .'_files/'.
-					$infoobj->classname.'_*.txt');
-
-		if (count($docs) > 0) {
-			$l = strlen(JUNIT_ROOT .'/'. JUNIT_BASE .'/');
-			foreach (array_keys($docs) as $i) {
-				$docs[$i] = substr($docs[$i], $l);
-			}
-		}
-		return $docs;
+	function globMatch($glob, $against, $case_sensitive = true) {
+		return preg_match('/' . UnitTestHelper::globToPcre($glob) . ($case_sensitive ? '/' : '/i'),
+						  $against);
 	}
 
 	/**
-	 * poor man's registry to prevent clutter of the global variable namespace.
-	 * <code>
-	 * function foo() {
-	 *   // initialize property
-	 *   $stuff =& UnitTestController::getProperty('my', 'stuff');
-	 *   $stuff =  new JConfig;
-	 * }
-	 *
-	 * function bar() {
-	 *   // retrieve property
-	 *   $stuff =& UnitTestController::getProperty('my', 'stuff');
-	 *   echo $stuff->language;
-	 * }
-	 * </code>
-	 *
-	 * @param string $namespace   used to prevent clashes, usually a class name
-	 * @param string $prop        name of the "virtual" property
-	 * @param string [$forcetype] PHP typename, i.e. 'array'
-	 * @see unsetProperty()
+	 * Convert fileglob to regex style:
+	 * Convert some wildcards to pcre style, escape the rest
+	 * Escape . \\ + * ? [ ^ ] $ () { } = ! < > | : /
 	 */
-	function &getProperty($namespace, $prop, $forcetype = null, $destroy = false)
-	{
-		static $properties = array();
-		if ($destroy === true) {
-			unset($properties[$namespace][$prop]);
-			return $destroy;
+	function globToPcre($glob) {
+		// check simple case: no need to escape
+		$escape = '\[](){}=!<>|:/';
+		if (strcspn($glob, $escape . ".+*?^$") == strlen($glob)) {
+			return $glob;
 		}
-		if (!isset($properties[$namespace])) {
-			$properties[$namespace] = array();
+		// preg_replace cannot handle "\\\\\\2" so convert \\ to \xff
+		$glob = strtr($glob, "\\", "\xff");
+		$glob = str_replace("/", '\/', $glob);
+		// first convert some unescaped expressions to pcre style: . => \.
+		$special = ".^$";
+		$re = preg_replace('/([^\xff])?(['.preg_quote($special).'])/',
+						   "\\1\xff\\2", $glob);
+
+		// * => .*, ? => .
+		$re = preg_replace('/([^\xff])?\*/', '$1.*', $re);
+		$re = preg_replace('/([^\xff])?\?/', '$1.', $re);
+		if (!preg_match('/^[\?\*]/', $glob)) {
+			$re = '^' . $re;
 		}
-		else if (null === $prop) {
-			foreach (array_keys($properties[$namespace]) as $p) {
-				unset($properties[$namespace][$p]);
-			}
-			return $namespace;
+		if (!preg_match('/[\?\*]$/', $glob)) {
+			$re = $re . '$';
 		}
-		if (!isset($properties[$namespace][$prop]) && $forcetype !== null) {
-			@settype($properties[$namespace][$prop], $forcetype);
-		}
-		return $properties[$namespace][$prop];
+
+		// .*? handled above, now escape the rest
+		//while (strcspn($re, $escape) != strlen($re)) // loop strangely needed
+		$re = preg_replace('/([^\xff])(['.preg_quote($escape, "/").'])/',
+						   "\\1\xff\\2", $re);
+		return strtr($re, "\xff", "\\");
 	}
 
-	function unsetProperty($namespace, $prop)
+	/**
+	 * Returns true if the $filename is readable, or FALSE otherwise.
+	 * This function uses the PHP include_path, where PHP's is_readable()
+	 * does not.
+	 *
+	 * @param string   $filename
+	 * @return boolean
+	 * @internal borrowed from Zend_Loader
+	 */
+	function isReadable($filename)
 	{
-		UnitTestHelper::getProperty($namespace, $prop, null, true);
+		if (@is_readable($filename)) {
+			return true;
+		}
+
+		$path = get_include_path();
+		$dirs = explode(PATH_SEPARATOR, $path);
+
+		foreach ($dirs as $dir) {
+			// No need to check against current dir -- already checked
+			if ('.' == $dir) {
+				continue;
+			}
+
+			if (@is_readable($dir . DIRECTORY_SEPARATOR . $filename)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
-	function toggleHostUrl()
+	/**
+	 * Tells whether the provided test is enabled via its config setting.
+	 *
+	 * Testsuites (AllTests.php) are enabled by default unless explicitly
+	 * disabled using their *_ALL directive in `TestConfiguration.php`.
+	 *
+	 * @param  object $infoobj as returned from {@link getInfoObject()}
+	 * @return int 0 = disabled, 1 = enabled
+	 */
+	function isTestEnabled($infoobj)
 	{
-		if (JUNIT_HOME_PHP4 != JUNIT_HOME_PHP5) {
-			if (strpos(JUNIT_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
-				$php = 'PHP4';
-				$url = JUNIT_HOME_PHP4;
-			}
-			if (strpos(JUNIT_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
-				$php = 'PHP5';
-				$url = JUNIT_HOME_PHP5;
+		$constant   = UnitTestHelper::getTestConfigVar($infoobj);
+		if ($infoobj->is_test == JUNIT_IS_TESTSUITE) {
+			// mark AllTest enabled by default
+			$configured = true;
+			if (defined($constant)) {
+				$configured = (bool)@constant($constant);
+			} else {
+				$available = true;
 			}
 		} else {
-			$php = $url = $output = '';
+			$available  = defined($constant);
+			$configured = (bool)@constant($constant);
 		}
-		return array($php, $url);
+
+		return (int)($available && $configured);
+	}
+
+	/**
+	 * Loads a PHP file.  This is a wrapper for PHP's include() function.
+	 *
+	 * $filename must be the complete filename, including any extension such
+	 * as ".php".  Note that a security check is performed that does not permit
+	 * extended characters in the filename.  This method is intended for
+	 * loading Mock Object for the UnitTest files.
+	 *
+	 * If $dirs is a string or an array, it will search the directories in the
+	 * order supplied, and attempt to load the first matching file.
+	 *
+	 * If the file was not found in the $dirs, or if no $dirs were specified,
+	 * it will attempt to load it from PHP's include_path.
+	 *
+	 * If $once is true, it will use include_once() instead of include().
+	 *
+	 * @param  string        $filename
+	 * @param  string|array  $dirs - OPTIONAL either a path or array of paths
+	 *                       to search.
+	 * @param  boolean       $once
+	 * @return boolean
+	 * @throws E_USER_ERROR on illegal filename
+	 * @throws E_USER_ERROR file was not found
+	 * @uses isReadable(), _includeFile()
+	 * @internal borrowed and adapted to PHP4 from Zend_Loader
+	 */
+	function loadFile($filename, $dirs = null, $once = false)
+	{
+		/**
+		 * Security check
+		 */
+		if (preg_match('/[^a-z0-9\-_.]/i', $filename)) {
+			trigger_error('Security check: Illegal character in filename', E_USER_ERROR);
+		}
+
+		/**
+		 * Search for the file in each of the dirs named in $dirs.
+		 */
+		if (empty($dirs)) {
+			$dirs = array();
+		} elseif (is_string($dirs))  {
+			$dirs = explode(PATH_SEPARATOR, $dirs);
+		}
+		foreach ($dirs as $dir) {
+			$filespec = rtrim($dir, '\\/') . DIRECTORY_SEPARATOR . $filename;
+			if (UnitTestHelper::isReadable($filespec)) {
+				return UnitTestHelper::_includeFile($filespec, $once);
+			}
+		}
+
+		/**
+		 * The file was not found in the $dirs specified.
+		 * Try finding for the plain filename in the include_path.
+		 */
+		if (UnitTestHelper::isReadable($filename)) {
+			return UnitTestHelper::_includeFile($filename, $once);
+		}
+
+		/**
+		 * The file was not located anywhere.
+		 */
+jutdump(debug_backtrace());
+		trigger_error("File \"$filename\" was not found", E_USER_ERROR);
+	}
+
+	/**
+	 * @TODO: add optional file logging
+	 * @see JUNIT_PHP_ERRORLOG
+	 */
+	function log($label, $testfile, $message = '')
+	{
+		$logfile = ini_get('error_log');
+		return error_log($label . '(', $testfile, ') '. $message. PHP_EOL, 0);
 	}
 
 	/**
@@ -541,103 +570,6 @@ class UnitTestHelper
 
 		return $asArray ? $cache[$hash]['a'] : $cache[$hash]['o'];
 
-	}
-
-	/**
-	 * Loads a PHP file.  This is a wrapper for PHP's include() function.
-	 *
-	 * $filename must be the complete filename, including any extension such
-	 * as ".php".  Note that a security check is performed that does not permit
-	 * extended characters in the filename.  This method is intended for
-	 * loading Mock Object for the UnitTest files.
-	 *
-	 * If $dirs is a string or an array, it will search the directories in the
-	 * order supplied, and attempt to load the first matching file.
-	 *
-	 * If the file was not found in the $dirs, or if no $dirs were specified,
-	 * it will attempt to load it from PHP's include_path.
-	 *
-	 * If $once is true, it will use include_once() instead of include().
-	 *
-	 * @param  string        $filename
-	 * @param  string|array  $dirs - OPTIONAL either a path or array of paths
-	 *                       to search.
-	 * @param  boolean       $once
-	 * @return boolean
-	 * @throws E_USER_ERROR on illegal filename
-	 * @throws E_USER_ERROR file was not found
-	 * @uses isReadable(), _includeFile()
-	 * @internal borrowed and adapted to PHP4 from Zend_Loader
-	 */
-	function loadFile($filename, $dirs = null, $once = false)
-	{
-		/**
-		 * Security check
-		 */
-		if (preg_match('/[^a-z0-9\-_.]/i', $filename)) {
-			trigger_error('Security check: Illegal character in filename', E_USER_ERROR);
-		}
-
-		/**
-		 * Search for the file in each of the dirs named in $dirs.
-		 */
-		if (empty($dirs)) {
-			$dirs = array();
-		} elseif (is_string($dirs))  {
-			$dirs = explode(PATH_SEPARATOR, $dirs);
-		}
-		foreach ($dirs as $dir) {
-			$filespec = rtrim($dir, '\\/') . DIRECTORY_SEPARATOR . $filename;
-			if (UnitTestHelper::isReadable($filespec)) {
-				return UnitTestHelper::_includeFile($filespec, $once);
-			}
-		}
-
-		/**
-		 * The file was not found in the $dirs specified.
-		 * Try finding for the plain filename in the include_path.
-		 */
-		if (UnitTestHelper::isReadable($filename)) {
-			return UnitTestHelper::_includeFile($filename, $once);
-		}
-
-		/**
-		 * The file was not located anywhere.
-		 */
-jutdump(debug_backtrace());
-		trigger_error("File \"$filename\" was not found", E_USER_ERROR);
-	}
-
-	/**
-	 * Returns true if the $filename is readable, or FALSE otherwise.
-	 * This function uses the PHP include_path, where PHP's is_readable()
-	 * does not.
-	 *
-	 * @param string   $filename
-	 * @return boolean
-	 * @internal borrowed from Zend_Loader
-	 */
-	function isReadable($filename)
-	{
-		if (@is_readable($filename)) {
-			return true;
-		}
-
-		$path = get_include_path();
-		$dirs = explode(PATH_SEPARATOR, $path);
-
-		foreach ($dirs as $dir) {
-			// No need to check against current dir -- already checked
-			if ('.' == $dir) {
-				continue;
-			}
-
-			if (@is_readable($dir . DIRECTORY_SEPARATOR . $filename)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -777,91 +709,44 @@ jutdump(debug_backtrace());
 	}
 
 	/**
-	 * @TODO: add optional file logging
-	 * @see JUNIT_PHP_ERRORLOG
+	 * Allows a Reporter class to query testcase configuration.
+	 *
+	 * @param  SimpleReporter $reporter
+	 * @return bool true if a testcase is enabled
 	 */
-	function log($label, $testfile, $message = '')
+	function shouldInvoke(&$reporter, $class_name)
 	{
-		$logfile = ini_get('error_log');
-		return error_log($label . '(', $testfile, ') '. $message. PHP_EOL, 0);
-	}
-
-	/**#@+
-	 * Shamelessly borrowed from PhpWiki stdlib.php, slightly
-	 * modified to suite code-style
-	 *
-	 * stdlib.php,v 1.260 2007/02/17 14:15:21 rurban
-	 * Licence: GPL
-	 */
-
-	/**
-	 * Convert fileglob to regex style:
-	 * Convert some wildcards to pcre style, escape the rest
-	 * Escape . \\ + * ? [ ^ ] $ () { } = ! < > | : /
-	 */
-	function globToPcre($glob) {
-		// check simple case: no need to escape
-		$escape = '\[](){}=!<>|:/';
-		if (strcspn($glob, $escape . ".+*?^$") == strlen($glob)) {
-			return $glob;
-		}
-		// preg_replace cannot handle "\\\\\\2" so convert \\ to \xff
-		$glob = strtr($glob, "\\", "\xff");
-		$glob = str_replace("/", '\/', $glob);
-		// first convert some unescaped expressions to pcre style: . => \.
-		$special = ".^$";
-		$re = preg_replace('/([^\xff])?(['.preg_quote($special).'])/',
-						   "\\1\xff\\2", $glob);
-
-		// * => .*, ? => .
-		$re = preg_replace('/([^\xff])?\*/', '$1.*', $re);
-		$re = preg_replace('/([^\xff])?\?/', '$1.', $re);
-		if (!preg_match('/^[\?\*]/', $glob)) {
-			$re = '^' . $re;
-		}
-		if (!preg_match('/[\?\*]$/', $glob)) {
-			$re = $re . '$';
-		}
-
-		// .*? handled above, now escape the rest
-		//while (strcspn($re, $escape) != strlen($re)) // loop strangely needed
-		$re = preg_replace('/([^\xff])(['.preg_quote($escape, "/").'])/',
-						   "\\1\xff\\2", $re);
-		return strtr($re, "\xff", "\\");
-	}
-
-	function globMatch($glob, $against, $case_sensitive = true) {
-		return preg_match('/' . UnitTestHelper::globToPcre($glob) . ($case_sensitive ? '/' : '/i'),
-						  $against);
-	}
-
-	/**#@- */
-
-	/**#@+
-	 * @access private
-	 * @ignore
-	 */
-
-	/**
-	 * Attempt to include() the file.
-	 *
-	 * include() is not prefixed with the @ operator because if
-	 * the file is loaded and contains a parse error, execution
-	 * will halt silently and this is difficult to debug.
-	 *
-	 * @param  string  $filespec
-	 * @param  boolean $once
-	 * @return boolean
-	 * @internal borrowed from Zend_Loader
-	 */
-	function _includeFile($filespec, $once = false)
-	{
-		if ($once) {
-			return (bool)(@include_once $filespec);
+		$UnitTests =& UnitTestHelper::getProperty('Reporter', 'UnitTests');
+		$class_name = strtolower($class_name);
+		if (isset($UnitTests[$class_name])) {
+			$invoke = (bool)$UnitTests[$class_name]->enabled;
 		} else {
-			return (bool)(@include $filespec);
+			$invoke = false;
 		}
+
+		return $invoke;
 	}
 
-	/**#@- */
+	/**
+	 * Returns the estimated amount of possible testcases based on the
+	 * predefined configuration settings.
+	 */
+	function toggleHostUrl()
+	{
+		if (JUNIT_HOME_PHP4 != JUNIT_HOME_PHP5) {
+			if (strpos(JUNIT_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
+				$php = 'PHP5';
+				$url = JUNIT_HOME_PHP5;
+			}
+		} else {
+			$php = $url = $output = '';
+		}
+		return array($php, $url);
+	}
+
+	function unsetProperty($namespace, $prop)
+	{
+		unset(self::$properties[$namespace][$prop]);
+	}
+
 }

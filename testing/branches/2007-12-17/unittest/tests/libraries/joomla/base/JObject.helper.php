@@ -42,7 +42,7 @@ class JObjectTestObserver
 /**
  * Class to test getPublicProperties()
  */
-class TestJObject extends JObject
+class JObjectExtend extends JObject
 {
     var $_privateVar = 'Private';
     var $publicVar = 'Public';
@@ -59,7 +59,7 @@ class TestJObject extends JObject
 /**
  * Class to test static usage of JObject
  */
-class TestJObjectStatics
+class JObjectExtendStatics
 {
     var $data = array();
 

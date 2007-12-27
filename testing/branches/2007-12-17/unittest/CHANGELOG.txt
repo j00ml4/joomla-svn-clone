@@ -184,7 +184,7 @@ Legend:
 
 2007-02-12 CirTap
  +	this CHANGELOG :)
- ^	SVN $Id$ tag to all .php files
+ ^	Added Id tag to all .php files
  +	setUp(), tearDown() to UnitTestController::getUnitTestTemplate()
  ^	use of json_encode() in JoomlaJson.php if the JSON extension is
  	installed (available by default in PHP 5.1)
