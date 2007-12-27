@@ -20,8 +20,8 @@ define('JUNIT_VERSION_MINIMUM', '3.2.0');
 if (version_compare(PHP_VERSION, PHP_VERSION_MINIMUM) < 0) {
 	die('Sorry. Requires PHP ' . PHP_VERSION_MINIMUM . ' or later.');
 }
-if (version_compare(JUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
-	die('Found JUnit version ' . JUnit_Runner_Version::id()
+if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
+	die('Found PHPUnit version ' . PHPUnit_Runner_Version::id()
 		. '. Requires ' . JUNIT_VERSION_MINIMUM
 		. ' (this is probably a PEAR related configuration problem).'
 	);

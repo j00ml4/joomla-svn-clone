@@ -13,7 +13,7 @@
 
 // $Id$
 
-class JUnit_Framework_TestSuite extends PHPUnit_Framework_TestSuite
+class PHPUnit_Framework_TestSuite extends PHPUnit_Framework_TestSuite
 {
 
 	function addClassTest($test_file)

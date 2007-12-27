@@ -29,7 +29,7 @@ class UnitTests_AllTests
 	{
 		$suite =& new JoomlaTestSuite('Joomla! Framework');
 
-		$suite->addTestCase(JUnit_AllTests::suite());
+		$suite->addTestCase(PHPUnit_AllTests::suite());
 
 		return $suite;
 	}

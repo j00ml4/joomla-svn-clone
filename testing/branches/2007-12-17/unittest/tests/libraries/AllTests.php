@@ -7,9 +7,9 @@
  * @subpackage UnitTest
  */
 
-// Call JUnit_AllTests::main() if this source file is executed directly.
+// Call PHPUnit_AllTests::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JUnit_AllTests::main');
+	define('JUNIT_MAIN_METHOD', 'PHPUnit_AllTests::main');
 	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
 	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
@@ -30,12 +30,12 @@ class Libraries_AllTests
 		$suite =& new JoomlaTestSuite('Joomla! Framework');
 
 		$suite->addClassTest('libraries/JLoaderTest.php');
-		$suite->addTestCase(JUnit_Libraries_AllTests::suite());
+		$suite->addTestCase(PHPUnit_Libraries_AllTests::suite());
 
 		return $suite;
 	}
 }
 
-if (JUNIT_MAIN_METHOD == 'JUnit_AllTests::main') {
-	JUnit_AllTests::main();
+if (JUNIT_MAIN_METHOD == 'PHPUnit_AllTests::main') {
+	PHPUnit_AllTests::main();
 }
