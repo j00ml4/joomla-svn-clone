@@ -32,9 +32,8 @@ class JUnit_Config {
 	public $configDir = 'config';
 
 	/**
-	 * Location of libraries, both external and the PHPUnit test library. Relative
-	 * to the root unit test directory, or start with a slash for an absolute
-	 * path.
+	 * Location of libraries. Relative to the root unit test directory, or start
+	 * with a slash for an absolute path.
 	 *
 	 * @var string
 	 */
@@ -47,6 +46,14 @@ class JUnit_Config {
 	 * @var string
 	 */
 	public $logDir = '';
+
+    /**
+     * Location of PEAR libraries, including PHPUnit. Relative to the root unit
+     * test directory, or start with a slash for an absolute path.
+     *
+     * @var string
+     */
+    public $pearDir = 'libraries/pear';
 
 	/**
 	 * Location of the unit test files. Relative to the root unit test

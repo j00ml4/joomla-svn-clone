@@ -27,7 +27,7 @@ class UnitTestController {
 	function main($fileinfo, $label='') {
 
 		if (is_string($fileinfo)) {
-			$fileinfo = UnitTestHelper::getInfoObject($fileinfo);
+			$fileinfo = JUnit_Setup::getInfoObject($fileinfo);
 		}
 
 		/* create Skeleton(s), CLI + PHP5 only! */
@@ -46,7 +46,7 @@ require_once(TEST_LIBRARY.'collector.php');
 $collector = &new SimplePatternCollector('/Test\.php$/');
 $suite->collect($path, &$collector)
 */
-		return $suite->run(UnitTestHelper::getReporter());
+		return $suite->run(JUnit_Setup::getReporter());
 
 	}
 
@@ -120,7 +120,7 @@ if (1) return array ();
 			return;
 		}
 		if (!class_exists('PHPUnit_Util_Skeleton', false)) {
-			UnitTestHelper::loadFile('Skeleton.php', JUNIT_LIBS . '/Util', true);
+			JUnit_Setup::loadFile('Skeleton.php', JUNIT_LIBS . '/Util', true);
 		}
 		$Skeleton = new PHPUnit_Util_Skeleton($class, $file);
 		return $Skeleton->generate(false);
@@ -134,7 +134,7 @@ if (1) return array ();
 	 * - 'Controller', 'Disabled'
 	 * - 'Controller', 'Enabled'
 	 *
-	 * @uses UnitTestHelper::getProperty()
+	 * @uses JUnit_Setup::getProperty()
 	 * @return array all tests
 	 */
 	function &getUnitTestsList()
@@ -142,12 +142,12 @@ if (1) return array ();
 		$path  = JUNIT_ROOT .'/'. JUNIT_BASE;
 		$files = UnitTestController::_files($path, true);
 
-		$tests    =& UnitTestHelper::getProperty('Controller', 'Tests', 'array');
-		$disabled =& UnitTestHelper::getProperty('Controller', 'Disabled', 'array');
-		$enabled  =& UnitTestHelper::getProperty('Controller', 'Enabled', 'array');
+		$tests    =& JUnit_Setup::getProperty('Controller', 'Tests', 'array');
+		$disabled =& JUnit_Setup::getProperty('Controller', 'Disabled', 'array');
+		$enabled  =& JUnit_Setup::getProperty('Controller', 'Enabled', 'array');
 
 		foreach($files as $path) {
-			$info = UnitTestHelper::getInfoObject($path);
+			$info = JUnit_Setup::getInfoObject($path);
 			$tests[$path] = $info;
 			if ($info->enabled) {
 				$enabled[$path]  = &$tests[$path];

@@ -30,7 +30,7 @@ var $conf = null;
 	 */
 	function main() {
 		$self = new TestOfJFTP;
-		$self->run(UnitTestHelper::getReporter());
+		$self->run(JUnit_Setup::getReporter());
 		JFTPTestHelper::tearDownTestCase();
 	}
 

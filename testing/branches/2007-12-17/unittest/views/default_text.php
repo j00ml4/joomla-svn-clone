@@ -43,7 +43,7 @@ if (JUNIT_LISTMODE_FOOTER) {
 
 if (JUNIT_LISTMODE_STATS) {
 	$tpos = count(preg_grep('/^JUT\_*/', array_keys(get_defined_constants())));
-	$skip = &UnitTestHelper::getProperty('Controller', 'Disabled');
+	$skip = &JUnit_Setup::getProperty('Controller', 'Disabled');
 	$s    = count($skip);
 	if ($i != $s) {
 		echo PHP_EOL, str_pad($i,    3, ' ', STR_PAD_LEFT), ' of ', $tpos, ' possible tests available.',

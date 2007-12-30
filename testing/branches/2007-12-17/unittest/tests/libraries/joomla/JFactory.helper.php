@@ -29,8 +29,8 @@ class JFactoryTestHelper
 
         // get credentials form TestConfiguration.php
         $cfg = ($auth == false)
-             ? UnitTestHelper::makeCfg(JUT_JFACTORY_SMTP_NOAUTH, false, true)
-             : UnitTestHelper::makeCfg(JUT_JFACTORY_SMTP_AUTH,   false, true);
+             ? JUnit_Setup::makeCfg(JUT_JFACTORY_SMTP_NOAUTH, false, true)
+             : JUnit_Setup::makeCfg(JUT_JFACTORY_SMTP_AUTH,   false, true);
 
         $config->setValue('config.smtpuser', $cfg['user']);
         $config->setValue('config.smtppass', $cfg['pass']);
@@ -47,7 +47,7 @@ class JFactoryTestHelper
     function GetDBO()
     {
         $config =& JFactory::getConfig();
-        $config = UnitTestHelper::makeCfg(JUNIT_DATABASE_MYSQL4, true);
+        $config = JUnit_Setup::makeCfg(JUNIT_DATABASE_MYSQL4, true);
 
 //        SimpleTest::getContext()
 //                    ->getReporter()

@@ -15,6 +15,30 @@
 
 error_reporting(E_ALL);
 
+/**
+ * Map relative paths to JUnit directory, leaving absolute paths alone.
+ *
+ * @param string Directory path. If the leading character is a directory
+ * separator then the path is taken as absolute.
+ * @param string Optional subpath or file to append to directory
+ * @return string Absolute path or path relative to the unit test root.
+ */
+function junit_path($path, $more = '')
+{
+	if ($path && ($path[0] == '/' || $path[0] == '\\')) {
+		$jpath = $path;
+	} else {
+		$jpath = JUNIT_ROOT . DIRECTORY_SEPARATOR . $path;
+	}
+	if ($more !== '') {
+		$jpath .= DIRECTORY_SEPARATOR . $more;
+	}
+	$jpath = preg_replace('![\\/]+!', DIRECTORY_SEPARATOR, $jpath);
+	return $jpath;
+}
+
+define('JUNIT_CLI', (PHP_SAPI == 'cli'));
+
 /*
  * Read in user-defined test configuration if available; otherwise, read default
  * test configuration.
@@ -26,82 +50,45 @@ if (is_readable(dirname(__FILE__) . '/TestConfiguration.php')) {
 	require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
 	define('JUNIT_USERCONFIG', false);
 }
-
-define('JUNIT_CLI', (PHP_SAPI == 'cli')); // SimpleReporter::inCli()
-
 /*
  *  Sanity check: Verify /libraries/joomla exists in JPATH_BASE.
  */
 if (! is_dir(JPATH_BASE . '/libraries/joomla')) {
-	$EOL = (JUNIT_CLI) ? PHP_EOL : '<br />';
-	echo $EOL, ' JPATH_BASE does not point to a valid Joomla! installation:', $EOL,
-		'JPATH_BASE = ', JPATH_BASE, $EOL,
-		' Please modify your copy of "TestConfiguration.php"', $EOL;
+	$eol = (JUNIT_CLI) ? PHP_EOL : '<br/>';
+	echo $eol, ' JPATH_BASE does not point to a valid Joomla! installation:', $eol,
+		'JPATH_BASE = ', JPATH_BASE, $eol,
+		' Please modify your copy of "TestConfiguration.php"', $eol;
 	exit(0);
 }
 
-/* TestCases are main files */
-define('_JEXEC', 1);
+$JUnit_config = new JUnit_Config();
 
-// Make sure our tests only find one Joomla! framework
+/*
+ * Make sure our tests only find the target "Joomla!" framework and PHPUnit.
+ */
 set_include_path(
-	'.' . PATH_SEPARATOR 
-	. JUNIT_ROOT . PATH_SEPARATOR 
-	. JPATH_BASE . PATH_SEPARATOR 
+	'.' . PATH_SEPARATOR
+	. JUNIT_ROOT . PATH_SEPARATOR
+	. JPATH_BASE . PATH_SEPARATOR
+	. junit_path($JUnit_config -> libDir) . PATH_SEPARATOR
+	. junit_path($JUnit_config -> pearDir) . PATH_SEPARATOR
 	. get_include_path()
 );
 
-require_once(JUNIT_LIBS . '/helper.php');
-
-define('TEST_LIBRARY', dirname(__FILE__) . '/libraries/pear/');
-require_once TEST_LIBRARY . 'PHPUnit.php';
-require_once  JUNIT_LIBS . '/suite.php';
-
-/**
- * If run through browser use $_REQUEST, from the command line use $argv path:
- * file to test; output: renderer output; list: list mode; renderer: reporter
- * class.
+/*
+ * Extract configuration overrides from command line or request variables.
  */
-
-$input         = &UnitTestHelper::getProperty('Controller', 'Input');
-$input         = new stdClass;
-$input->path   = '';
-$input->output = '';
-$input->list   = false;
-
-if (! JUNIT_CLI) {
-	$input->path   = @$_REQUEST['path'];
-	$input->output = @$_REQUEST['output'];
-	if (get_magic_quotes_gpc()) {
-		$input->path = stripslashes($input->path);
-	}
-	unset($_REQUEST['path'], $_GET['path']);
-	unset($_REQUEST['output'], $_GET['output']);
-} elseif (count($_SERVER['argv']) > 1) {
-	// kick scriptname
-	array_shift($_SERVER['argv']);
-
-	while ($token = array_shift($_SERVER['argv'])) {
-		switch ($token) {
-		case '-path':
-			$input->path   = trim(array_shift($_SERVER['argv']));
-			break;
-		case '-output':
-			$input->output = trim(array_shift($_SERVER['argv']));
-			break;
-		case '-list':
-			$input->list   = true;
-			break;
-		}
-	}
-	unset($token, $_SERVER['argv'], $_SERVER['args']);
+if (JUNIT_CLI) {
+	/*
+	 * Parse command line arguments
+	 */
+} else {
+	/*
+	 * Extract settings from request
+	 */
 }
 
-if (preg_match('#[^a-z0-9\-_./]#i', $input->path)) {
-	trigger_error('Security check: Illegal character in filepath', E_USER_ERROR);
-}
-
-/**
+/*
  * Set PHP error reporting level and output directives
  */
 ini_set('display_errors'         , 'On');
@@ -111,16 +98,22 @@ ini_set('html_errors'            , 'Off');
 ini_set('log_errors'             , 'Off');
 ini_set('log_errors_max_len'     , 512);
 
-if (is_writable(dirname(JUNIT_PHP_ERRORLOG))) {
-	ini_set('error_log' , JUNIT_PHP_ERRORLOG);    // -> TestConfiguration.php
+if (is_writable(junit_path($JUnit_config -> logDir))) {
+	ini_set('error_log' , junit_path($JUnit_config -> logDir, 'php_errors.log'));
 }
 
 /* and of course ... */
 ini_set('register_globals', 'Off');
 
+/*
+ * TestCases are main files
+ */
+define('_JEXEC', 1);
 
+/*
 require_once 'libraries/loader.php';
 
 require_once 'includes/defines.php';
 require_once 'libraries/joomla/base/object.php'; // JObject
-
+*/
+unset($JUnit_config);

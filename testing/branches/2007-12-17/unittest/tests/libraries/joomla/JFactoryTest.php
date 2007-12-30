@@ -32,7 +32,7 @@ var $have_db = false;
      */
     function main() {
         $self = new TestOfJFactory;
-        return $self->run(UnitTestHelper::getReporter());
+        return $self->run(JUnit_Setup::getReporter());
     }
 
     function tearDown()

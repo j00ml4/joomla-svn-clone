@@ -16,7 +16,7 @@ class JFTPTestHelper
     {
         require_once 'libraries/joomla/utilities/error.php';
 
-        $handler =& UnitTestHelper::getProperty('TestOfJFTP', 'errorhandler');
+        $handler =& JUnit_Setup::getProperty('TestOfJFTP', 'errorhandler');
 
         // backup
         $handler[E_NOTICE]  = JError::getErrorHandling(E_NOTICE);
@@ -39,7 +39,7 @@ class JFTPTestHelper
 
     function tearDownTestCase()
     {
-        $handler =& UnitTestHelper::getProperty('TestOfJFTP', 'errorhandler');
+        $handler =& JUnit_Setup::getProperty('TestOfJFTP', 'errorhandler');
         // restore
         JError::setErrorHandling(E_NOTICE,  $handler[E_NOTICE]['mode']);
         JError::setErrorHandling(E_WARNING, $handler[E_WARNING]['mode']);
@@ -49,7 +49,7 @@ class JFTPTestHelper
     // Not a real test. Only used to display some general information
     function credentialsAvailable()
     {
-        $reporter = &UnitTestHelper::getReporter();
+        $reporter = &JUnit_Setup::getReporter();
 
         if (($conf = JFTPTestHelper::getCredentials()) === false)
         {
@@ -70,13 +70,13 @@ class JFTPTestHelper
 
     function getCredentials()
     {
-        $credentials = &UnitTestHelper::getProperty('TestOfJFTP', 'credentials');
+        $credentials = &JUnit_Setup::getProperty('TestOfJFTP', 'credentials');
 
         if ($credentials !== null) {
             return $credentials;
         }
 
-        $config = UnitTestHelper::makeCfg(JUT_JFTP_CREDENTIALS, false, true);
+        $config = JUnit_Setup::makeCfg(JUT_JFTP_CREDENTIALS, false, true);
 
         // Credentials valid?
         if (!($config['host'] && $config['port'] && $config['user'] && $config['pass'])) {
@@ -91,9 +91,9 @@ class JFTPTestHelper
 
     function invalidateCredentials()
     {
-        $reporter = &UnitTestHelper::getReporter();
+        $reporter = &JUnit_Setup::getReporter();
         $reporter->paintMessage('Invalidating Credentials due to previous error');
-        $credentials = &UnitTestHelper::getProperty('TestOfJFTP', 'credentials');
+        $credentials = &JUnit_Setup::getProperty('TestOfJFTP', 'credentials');
         $credentials = null;
     }
 

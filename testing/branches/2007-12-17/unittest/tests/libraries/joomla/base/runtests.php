@@ -2,7 +2,7 @@
 /**
  * Joomla! Unit Test Facility.
  *
- * Invoke the default CLI test runner.
+ * Invoke the default test runner.
  *
  * @version $Id$
  * @package Joomla
@@ -21,5 +21,9 @@ $JUnit_start = substr(
 	strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
 );
 
+/*
+ * Now that the context is set up, the runtests.php in the unit test root does
+ * all the work.
+ */
 require_once $JUnit_root . DIRECTORY_SEPARATOR . basename(__FILE__);
 ?>

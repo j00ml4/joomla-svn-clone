@@ -9,7 +9,7 @@
 <body>
 <?php
 
-$input =& UnitTestHelper::getProperty('Controller', 'Input');
+$input =& JUnit_Setup::getProperty('Controller', 'Input');
 
 /* link decorator */
 function testLink($infoobj) {
@@ -85,7 +85,7 @@ function todoLink($infoobj) {
     <strong>PHP:</strong> <span style="cursor:help" title="<?php echo PHP_SAPI .' on '. PHP_OS; ?>"><?php echo PHP_VERSION; ?></span>
         &nbsp; Switch to:
 <?php
-    list($php, $url) = UnitTestHelper::toggleHostUrl();
+    list($php, $url) = JUnit_Setup::toggleHostUrl();
     if (!empty($url)) {
         if (strpos(JUNIT_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
             $php = '<b class="tmessage" title="toggle environment">PHP4</b>';
@@ -123,7 +123,7 @@ function todoLink($infoobj) {
 
 if (JUNIT_LISTMODE_STATS) {
     $tpos = count(preg_grep("/^JUT\_*/", array_keys(get_defined_constants())));
-    $skip = &UnitTestHelper::getProperty('Controller', 'Disabled');
+    $skip = &JUnit_Setup::getProperty('Controller', 'Disabled');
 }
 ?>
 
