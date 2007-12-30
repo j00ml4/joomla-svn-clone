@@ -65,6 +65,6 @@ class TestOfJLoader extends UnitTestCase
 }
 
 // Call TestOfJLoader::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == "TestOfJLoader::main") {
+if (JUNIT_MAIN_METHOD == 'TestOfJLoader::main') {
 	TestOfJLoader::main();
 }

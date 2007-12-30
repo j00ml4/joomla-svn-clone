@@ -32,7 +32,7 @@ foreach($tests as $unittest)
 		$docs[] = $doc;
 	}
 	if (count($docs)) {
-		echo PHP_EOL, "\t", '(', implode(', ', $docs), ')';
+		echo PHP_EOL, chr(9), '(', implode(', ', $docs), ')';
 	}
 
 }

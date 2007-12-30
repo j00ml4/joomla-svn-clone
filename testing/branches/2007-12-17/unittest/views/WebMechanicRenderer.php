@@ -125,17 +125,6 @@ var $_env = '';
 	<span>{$test_name}</span> <span style="cursor:help">{$verbose}</span>
 	</h1>
 HTML;
-		list($php, $url) = JUnit_Setup::toggleHostUrl();
-		if (!empty($url)) {
-			if (strpos(JUNIT_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
-				$php = '<b class="tpass" title="toggle environment">PHP4</b>';
-			}
-			if (strpos(JUNIT_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
-				$php = '<b class="tpass" title="toggle environment">PHP5</b>';
-			}
-			$this->_env .= " &bull; Switch to: <span><a href=\"{$url}\">{$php}</a></span>";
-		}
-
 		if (headers_sent()) {
 			echo '<div class="Header">', $title, '</div>',PHP_EOL, $this->_env;
 			return;
@@ -201,7 +190,7 @@ HTML;
 HTML;
 		echo '</body></html>';
 
-		while (@ob_flush());
+		@ob_flush();
 	}
 
 	/**
@@ -443,8 +432,8 @@ HTML;
 		if (strpos($message, $file) !== false) {
 			list($realfile, $filepath) = $this->_filepath($file);
 			$message  = str_replace(
-							"at [$realfile",
-							"<br />in <tt>$filepath</tt>",
+							'at [' . $realfile,
+							'<br />in <tt>' . $filepath . '</tt>',
 							$message);
 			$message  = str_replace(
 							array('[', ']', '</tt> line '),
@@ -586,7 +575,7 @@ class WebMechanicObserver
 {
 
 	function atTestEnd($method, &$test_case) {
-        jutdump($method);
+		jutdump($method);
 	}
 }
 

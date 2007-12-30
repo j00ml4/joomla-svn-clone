@@ -33,6 +33,21 @@ class JUnit_Setup
 	static protected $_properties = array();
 
 	/**
+	 * Regex to determine which class files to process. If empty, no filtering
+	 * is done.
+	 *
+	 * @var string
+	 */
+	public $classFilter = '';
+
+	/**
+	 * Base directory for considering tests
+	 *
+	 * @var string
+	 */
+	protected $_startDir;
+
+	/**
 	 * Attempt to include() the file.
 	 *
 	 * include() is not prefixed with the @ operator because if
@@ -134,26 +149,26 @@ class JUnit_Setup
 	 * Get a property from the setup regisrty
 	 *
 	 * @param string Used to prevent clashes, usually a class name.
-	 * @param string Name of the "virtual" property.
+	 * @param string Name of the property.
 	 * @param string PHP type name, i.e. 'array'.
 	 * @see unsetProperty()
 	 */
-	function getProperty($namespace, $prop, $forcetype = null)
+	static function getProperty($namespace, $prop, $forcetype = null)
 	{
-
+		if ($namespace == '') {
+			$namespace = __CLASS__;
+		}
 		if (! isset(self::$_properties[$namespace])) {
-			self::$_properties[$namespace] = array();
+			return null;
 		}
-		elseif (null === $prop) {
-			foreach (array_keys(self::$_properties[$namespace]) as $p) {
-				unset(self::$_properties[$namespace][$p]);
-			}
-			return $namespace;
+		if (! isset(self::$_properties[$namespace][$prop])) {
+			return null;
 		}
-		if (!isset(self::$_properties[$namespace][$prop]) && $forcetype !== null) {
-			@settype(self::$_properties[$namespace][$prop], $forcetype);
+		$result = self::$_properties[$namespace][$prop];
+		if (! is_null($forcetype)) {
+			@settype($result, $forcetype);
 		}
-		return self::$_properties[$namespace][$prop];
+		return $result;
 	}
 
 	/**
@@ -165,7 +180,7 @@ class JUnit_Setup
 	function &getReporter($output = null)
 	{
 		static $instance;
-
+throw new Exception('foo');
 		if ($instance !== null) {
 			return $instance;
 		}
@@ -235,16 +250,16 @@ class JUnit_Setup
 	function globToPcre($glob) {
 		// check simple case: no need to escape
 		$escape = '\[](){}=!<>|:/';
-		if (strcspn($glob, $escape . ".+*?^$") == strlen($glob)) {
+		if (strcspn($glob, $escape . '.+*?^$') == strlen($glob)) {
 			return $glob;
 		}
-		// preg_replace cannot handle "\\\\\\2" so convert \\ to \xff
-		$glob = strtr($glob, "\\", "\xff");
-		$glob = str_replace("/", '\/', $glob);
+		// preg_replace cannot handle \\\\\\2 so convert \\ to \xff
+		$glob = strtr($glob, '\\', '\xff');
+		$glob = str_replace('/', '\/', $glob);
 		// first convert some unescaped expressions to pcre style: . => \.
-		$special = ".^$";
+		$special = '.^$';
 		$re = preg_replace('/([^\xff])?(['.preg_quote($special).'])/',
-						   "\\1\xff\\2", $glob);
+						   '\\1\xff\\2', $glob);
 
 		// * => .*, ? => .
 		$re = preg_replace('/([^\xff])?\*/', '$1.*', $re);
@@ -258,9 +273,9 @@ class JUnit_Setup
 
 		// .*? handled above, now escape the rest
 		//while (strcspn($re, $escape) != strlen($re)) // loop strangely needed
-		$re = preg_replace('/([^\xff])(['.preg_quote($escape, "/").'])/',
-						   "\\1\xff\\2", $re);
-		return strtr($re, "\xff", "\\");
+		$re = preg_replace('/([^\xff])(['.preg_quote($escape, '/').'])/',
+						   '\\1\xff\\2', $re);
+		return strtr($re, '\xff', '\\');
 	}
 
 	/**
@@ -299,7 +314,7 @@ class JUnit_Setup
 	 * Loads a PHP file.  This is a wrapper for PHP's include() function.
 	 *
 	 * $filename must be the complete filename, including any extension such
-	 * as ".php".  Note that a security check is performed that does not permit
+	 * as '.php'.  Note that a security check is performed that does not permit
 	 * extended characters in the filename.  This method is intended for
 	 * loading Mock Object for the UnitTest files.
 	 *
@@ -357,7 +372,7 @@ class JUnit_Setup
 		 * The file was not located anywhere.
 		 */
 jutdump(debug_backtrace());
-		trigger_error("File \"$filename\" was not found", E_USER_ERROR);
+		trigger_error('File "' . $filename . '" was not found', E_USER_ERROR);
 	}
 
 	/**
@@ -605,12 +620,96 @@ jutdump(debug_backtrace());
 
 		return $parsed;
 	}
-    
-    /*
-     * Assemble a list of tests and run them. 
-     */
-    static function run() {
-    }
+
+	function _dirWalk(&$fileList, $dir) {
+		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
+			$dir .= '/';
+		}
+		$path = $this -> _startDir . $dir;
+		if (! @is_dir($path)) {
+			throw new Exception('Update error. ' . $path . ' is not a directory.', 1);
+		}
+		if(! ($dh = @opendir($path))) {
+			throw new Exception('Update error. Unable to open ' . $path, 2);
+		}
+		/*
+		 * Walk through the directory collecting files and subdirectories Then
+		 * we sort them to get the correct sequence.
+		 */
+		$list = array();
+		$subList = array();
+		while (($fileName = readdir($dh)) !== false) {
+			$fid = $path . $fileName;
+			switch (filetype($fid)) {
+				case 'dir': {
+					if ($fileName != '.' && $fileName != '..') {
+						$subList[] = $fileName;
+					}
+				} break;
+
+				case 'file': {
+					if (substr($fileName, -8) == 'test.php') {
+						/*
+						 * If there is an object match, add this file to the
+						 * list of tests.
+						 */
+						if ($this -> classFilter) {
+							$parts = explode('-', $fileName);
+							if (! preg_match($this -> classFilter, $parts[0])) {
+								continue;
+							}
+						}
+						$list[] = $fileName;
+					} elseif (substr($fileName, -10) == 'helper.php') {
+						/*
+						 * Load helper classes for matching objects
+						 */
+						if ($this -> classFilter) {
+							$parts = explode('-', $fileName);
+							if (! preg_match($this -> classFilter, $parts[0])) {
+								continue;
+							}
+						}
+						include_once $fid;
+					}
+				} break;
+			}
+		}
+		sort($list);
+
+		foreach ($list as $fileName) {
+			$fileList[] = $dir . $fileName;
+		}
+		sort($subList);
+		foreach ($subList as $subDir) {
+			$this -> _dirWalk($fileList, $dir . $subDir);
+		}
+	}
+
+	/*
+	 * Assemble a list of tests and run them.
+	 */
+	function run() {
+		// This will change when we have more than CLI support
+		require_once 'PHPUnit/TextUI/TestRunner.php';
+		/*
+		 * Find all the matching files
+		 */
+		if ($this -> _startDir) {
+			$dir = $this -> _startDir;
+		} else {
+			$dir = '';
+		}
+		// TODO: get startdir to point at test directory
+		$dir = $this -> _startDir;
+		echo 'Discovering files in ' . $dir . PHP_EOL;
+		$testFiles = array();
+		$this -> _dirWalk($testFiles, '');
+		print_r($testFiles);
+		$suite  = new PHPUnit_Framework_TestSuite();
+		$suite -> addTestFiles($testFiles);
+		$result = PHPUnit_TextUI_TestRunner::run($suite);
+	}
 
 	/**
 	 * Set a property in the setup regisrty.
@@ -619,14 +718,24 @@ jutdump(debug_backtrace());
 	 * @param string Name of the virtual property.
 	 * @param mixed The value to save.
 	 */
-	function setProperty($namespace, $prop, $value)
+	static function setProperty($namespace, $prop, $value)
 	{
-		if (null === $prop) {
+		if ($namespace == '') {
+			$namespace = __CLASS__;
+		}
+		if (is_null($prop)) {
 			unset(self::$_properties[$namespace]);
 		} elseif (! isset(self::$_properties[$namespace])) {
 			self::$_properties[$namespace] = array();
 		}
 		self::$_properties[$namespace][$prop] = $value;
+	}
+
+	function setStartDir($dir) {
+		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
+			$dir .= '/';
+		}
+		$this -> _startDir = $dir;
 	}
 
 	/**
@@ -637,7 +746,7 @@ jutdump(debug_backtrace());
 	 */
 	function shouldInvoke(&$reporter, $class_name)
 	{
-		$UnitTests =& JUnit_Setup::getProperty('Reporter', 'UnitTests');
+		$UnitTests = &JUnit_Setup::getProperty('Reporter', 'UnitTests');
 		$class_name = strtolower($class_name);
 		if (isset($UnitTests[$class_name])) {
 			$invoke = (bool)$UnitTests[$class_name]->enabled;
@@ -648,25 +757,11 @@ jutdump(debug_backtrace());
 		return $invoke;
 	}
 
-	/**
-	 * Returns the estimated amount of possible testcases based on the
-	 * predefined configuration settings.
-	 */
-	function toggleHostUrl()
+	static function unsetProperty($namespace, $prop)
 	{
-		if (JUNIT_HOME_PHP4 != JUNIT_HOME_PHP5) {
-			if (strpos(JUNIT_HOME_PHP5, $_SERVER['HTTP_HOST']) === false) {
-				$php = 'PHP5';
-				$url = JUNIT_HOME_PHP5;
-			}
-		} else {
-			$php = $url = $output = '';
+		if ($namespace == '') {
+			$namespace = __CLASS__;
 		}
-		return array($php, $url);
-	}
-
-	function unsetProperty($namespace, $prop)
-	{
 		unset(self::$_properties[$namespace][$prop]);
 	}
 

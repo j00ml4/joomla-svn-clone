@@ -8,19 +8,19 @@
  * @subpackage UnitTest
  */
 
-// Call TestOfJFTP::main() if this source file is executed directly.
+// Call JFTPTest::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'TestOfJFTP::main');
+	define('JUNIT_MAIN_METHOD', 'JFTPTest::main');
 	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
 	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
 require_once('libraries/joomla/client/ftp.php');
 
-class TestOfJFTP extends UnitTestCase
+class JFTPTest extends PHPUnit_Framework_TestCase
 {
 
-var $conf = null;
+	var $conf = null;
 
 	/**
 	 * Runs the test methods of this class.
@@ -29,8 +29,8 @@ var $conf = null;
 	 * @static
 	 */
 	function main() {
-		$self = new TestOfJFTP;
-		$self->run(JUnit_Setup::getReporter());
+		$self = new JFTPTest;
+		$self->run();
 		JFTPTestHelper::tearDownTestCase();
 	}
 
@@ -185,7 +185,7 @@ var $conf = null;
 		$this->assertIdenticalFalse(is_resource($ftp->_conn));
 	}
 
-	/** @see TODO 6 SYST "emulated" */
+	/** @see TODO 6 SYST 'emulated' */
 	function testSyst()
 	{
 		if ($this->conf === null) {
@@ -200,8 +200,9 @@ var $conf = null;
 		if (isset($this->conf['ftp_sys'])) {
 			$this->assertIdentical($return, $this->conf['ftp_sys']);
 		} else {
-			$this->paintMessage("SYST command returned [$return], please evaluate manually if this"
-				.' is correct! You may also set a value for \'ftp_sys\' in your configuration.'
+			$this->paintMessage('SYST command returned [' . $return
+				. '], please evaluate manually if this'
+				. ' is correct! You may also set a value for \'ftp_sys\' in your configuration.'
 			);
 		}
 		$this->assertIdenticalTrue($return=='UNIX' || $return=='WIN' || $return=='MAC');
@@ -276,7 +277,7 @@ var $conf = null;
 		$this->assertIdenticalTrue($return8);
 		// Although not limited as per RFC959, we report all servers which send '\' instead of '/'
 		$this->assertIdenticalFalse(strpos($return3, '\\'), 'Dirname contains wrong'
-			." DIRECTORY_SEPARATOR? [$return3]"
+			. ' DIRECTORY_SEPARATOR? [' . $return3 . ']'
 		);
 
 		if ($return1 !== $return9) {
@@ -325,8 +326,10 @@ var $conf = null;
 				break;
 			}
 		}
-		$this->assertIdenticalTrue($test, "Filename contains wrong DIRECTORY_SEPARATOR? [$file]");
-
+		$this->assertIdenticalTrue(
+			$test,
+			'Filename contains wrong DIRECTORY_SEPARATOR? [' . $file . ']'
+		);
 		// ** FTP servers behave differently. No failing test for now, maybe for J! 1.6
 		//$return3 = $ftp->listNames($this->conf['root'].'/blablabla');
 
@@ -367,9 +370,12 @@ var $conf = null;
 			$test2 &= !($file['name'] == '.');
 			$test3 &= !($file['name'] == '..');
 		}
-		$this->assertIdenticalTrue($test1, "Filename contains wrong DIRECTORY_SEPARATOR? [$filename]");
-		$this->assertTrue($test2, "Directory listing contains [.]?");
-		$this->assertTrue($test3, "Directory listing contains [..]?");
+		$this->assertIdenticalTrue(
+			$test1,
+			'Filename contains wrong DIRECTORY_SEPARATOR? [' . $filename . ']'
+		);
+		$this->assertTrue($test2, 'Directory listing contains [.]?');
+		$this->assertTrue($test3, 'Directory listing contains [..]?');
 
 		// ** FTP servers behave differently. No failing test for now, maybe for J! 1.6
 		//$return3 = $ftp->listDetails($this->conf['root'].'/blablabla');
@@ -461,9 +467,11 @@ var $conf = null;
 			$test2 &= !($file['name'] == '.');
 			$test3 &= !($file['name'] == '..');
 		}
-		$this->assertIdenticalTrue($test1, "Filename contains wrong DIRECTORY_SEPARATOR? [$filename]");
-		$this->assertTrue($test2, "Directory listing contains [.]?");
-		$this->assertTrue($test3, "Directory listing contains [..]?");
+		$this->assertIdenticalTrue(
+			$test1,
+			'Filename contains wrong DIRECTORY_SEPARATOR? [' . $filename . ']');
+		$this->assertTrue($test2, 'Directory listing contains [.]?');
+		$this->assertTrue($test3, 'Directory listing contains [..]?');
 
 		$ftp->quit();
 	}
@@ -1030,7 +1038,7 @@ var $conf = null;
 
 }
 
-// Call TestOfJFTP::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == "TestOfJFTP::main") {
-	TestOfJFTP::main();
+// Call JFTPTest::main() if this source file is executed directly.
+if (JUNIT_MAIN_METHOD == 'JFTPTest::main') {
+	JFTPTest::main();
 }

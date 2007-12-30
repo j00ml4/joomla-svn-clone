@@ -78,7 +78,7 @@ var $proto = array(
 	}
 
 	function test_inheritance() {
-		$this->sendMessage("There isn't much this TestCase can actually test. However, let´s try...");
+		$this->sendMessage('There isn\'t much this TestCase can actually test. However, let\'s try...');
 
 		// it should not inherit from anything
 		$parent = get_parent_class($this->instance);
@@ -90,7 +90,7 @@ var $proto = array(
 	function test_property_names() {
 		$compare = (array) $this->instance;
 		foreach (array_keys($this->proto) as $expect) {
-			$this->assertTrue(array_key_exists($expect, $compare), "{$expect} not found");
+			$this->assertTrue(array_key_exists($expect, $compare), $expect . ' not found.');
 		}
 	}
 
@@ -104,6 +104,6 @@ var $proto = array(
 }
 
 // Call TestOfJFrameworkConfig::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == "TestOfJFrameworkConfig::main") {
+if (JUNIT_MAIN_METHOD == 'TestOfJFrameworkConfig::main') {
 	TestOfJFrameworkConfig::main();
 }
