@@ -39,7 +39,7 @@ class JErrorAnyExpectation extends SimpleExpectation
 /* EXPECTED JError taken from the constructor for compare */
 private $_value = null;
 
-/* list of "failures" */
+/* list of 'failures' */
 private $_failures = array();
 
 /* expected error items for strict expectations */
@@ -89,7 +89,7 @@ private $_value_items = array();
 	function describeValue(&$error) {
 		$message = '';
 		foreach ($error as $item => $value) {
-			$message .= "$item => $value, ";
+			$message .= $item . ' => ' . $value . ', ';
 		}
 		if (count($this->_failures)) {
 			$message .= implode('; ', $this->_failures);
@@ -113,7 +113,7 @@ private $_value_items = array('level','code');
 		$c = 0;
 		foreach ($this->_has_items as $item) {
 			if (!isset($compare[$item])) {
-				$this->_failures[] = "missing '$item'";
+				$this->_failures[] = 'missing \'' . $item . '\'';
 				$c++;
 			}
 		}

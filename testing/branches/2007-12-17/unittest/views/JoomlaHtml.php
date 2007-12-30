@@ -71,7 +71,7 @@ HTML;
 		echo <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset={$this->_character_set}" />
 	<title>Testcase: {$test_name} </title>
@@ -91,7 +91,7 @@ HTML;
 	 */
 	function paintFooter($test_name)
 	{
-		$state = ($this->getFailCount() + $this->getExceptionCount() > 0 ? "fail" : "pass");
+		$state = ($this->getFailCount() + $this->getExceptionCount() > 0 ? 'fail' : 'pass');
 
 		echo '<div class="footer_', $state, '">'
 			, $this->getTestCaseProgress(), '/', $this->getTestCaseCount()

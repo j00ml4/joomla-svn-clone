@@ -27,4 +27,12 @@ if (! isset($JUnit_root)) {
 }
 
 require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
+// This should autoload but force it for now...
+require_once $JUnit_root . '/libraries/junit/setup.php';
+
+$JUnit_setup = new JUnit_Setup();
+$JUnit_setup -> setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
+unset($JUnit_start);
+define('JUNIT_MAIN_METHOD', '');
+$JUnit_setup -> run();
 ?>

@@ -15,7 +15,7 @@ class JoomlaText extends TextReporter {
 
 		flush();
 
-		echo "Testcase: $test_name\n";
+		echo 'Testcase: ' . $test_name . PHP_EOL;
 	}
 
 	/**
@@ -45,7 +45,7 @@ class JoomlaText extends TextReporter {
 		$this->_missing_tests[]= $this->method_name;
 		$this->_methods[$this->method_name]['miss']= true;
 		// flag as failed
-		$this->assertTrue(false, "$method_name needs implementation. " . $reason);
+		$this->assertTrue(false, $method_name . ' needs implementation. ' . $reason);
 	}
 
 }

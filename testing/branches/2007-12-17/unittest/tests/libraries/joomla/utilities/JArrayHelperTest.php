@@ -53,7 +53,7 @@ class TestOfJArrayHelper extends UnitTestCase {
 	 */
 	function testToInteger()
 	{
-		$array   = array("1","2","3");
+		$array   = array('1','2','3');
 		$compare = array(1 , 2 , 3);
 		JArrayHelper::toInteger($array);
 		$this->assertEqual($array, $compare);
@@ -122,6 +122,6 @@ class TestOfJArrayHelper extends UnitTestCase {
 }
 
 // Call TestOfJArrayHelper::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == "TestOfJArrayHelper::main") {
+if (JUNIT_MAIN_METHOD == 'TestOfJArrayHelper::main') {
 	TestOfJArrayHelper::main();
 }
