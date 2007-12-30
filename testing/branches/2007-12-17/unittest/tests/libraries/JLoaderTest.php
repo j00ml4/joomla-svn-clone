@@ -25,7 +25,7 @@ class TestOfJLoader extends UnitTestCase
 	 */
 	function main() {
 		$self = new TestOfJLoader;
-		$self->run(UnitTestHelper::getReporter());
+		$self->run(JUnit_Setup::getReporter());
 	}
 
 	/** function import($filePath, $base = null, $key = null) */

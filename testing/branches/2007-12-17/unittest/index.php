@@ -36,7 +36,7 @@ require_once(dirname(__FILE__) . '/UnitTestController.php');
  * If a path is provided, run the test,
  * otherwise show a fancy default start page
  */
-$input =& UnitTestHelper::getProperty('Controller', 'Input');
+$input =& JUnit_Setup::getProperty('Controller', 'Input');
 
 
 if (! empty($input->info->testclass)) {
@@ -44,7 +44,7 @@ if (! empty($input->info->testclass)) {
 } else {
 	UnitTestController::getUnitTestsList();
 
-	$tests =& UnitTestHelper::getProperty('Controller', 'Tests');
+	$tests =& JUnit_Setup::getProperty('Controller', 'Tests');
 
 	if (file_exists(JUNIT_VIEWS.'/default_'.$input->output.'.php')) {
 		include(JUNIT_VIEWS.'/default_'.$input->output.'.php');

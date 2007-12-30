@@ -2,10 +2,9 @@
 /**
  * Joomla! Unit Test Facility.
  *
- * This is a default CLI test runner. If started from a subdirectory, it expects
- * the global variable $JUnit_root to reference the base unittest directory,
- * and $JUnit_start to be set to the relative directory where tests are to be
- * run.
+ * This is a default test runner. If started from a subdirectory, it expects the
+ * global variable $JUnit_root to reference the base unittest directory, and
+ * $JUnit_start to be set to the relative directory where tests are to be run.
  *
  * @package Joomla
  * @subpackage UnitTest

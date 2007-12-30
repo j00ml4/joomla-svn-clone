@@ -20,7 +20,7 @@ class PHPUnit_Utilities_AllTests
 	{
 		$self =& new PHPUnit_Utilities_AllTests;
 		$suite =& $self->suite();
-		$suite->run(UnitTestHelper::getReporter());
+		$suite->run(JUnit_Setup::getReporter());
 	}
 
 	function &suite()

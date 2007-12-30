@@ -77,7 +77,7 @@ var $_env = '';
 
 	/**
 	 * Called at the start of each test method.
-	 * Queries UnitTestHelper for the test configuration of the testclass.
+	 * Queries JUnit_Setup for the test configuration of the testclass.
 	 *
 	 * @todo implement, see SimpleReporterDecorator
 	 */
@@ -94,7 +94,7 @@ var $_env = '';
 				'end'    => false
 				);
 
-		if (!UnitTestHelper::shouldInvoke($this, $class_name)) {
+		if (!JUnit_Setup::shouldInvoke($this, $class_name)) {
 			// store for possible serialization
 			$this->_missing_tests[] = $this->method_name;
 			$this->_methods[$this->method_name]['skip']   = 1;
@@ -125,7 +125,7 @@ var $_env = '';
 	<span>{$test_name}</span> <span style="cursor:help">{$verbose}</span>
 	</h1>
 HTML;
-		list($php, $url) = UnitTestHelper::toggleHostUrl();
+		list($php, $url) = JUnit_Setup::toggleHostUrl();
 		if (!empty($url)) {
 			if (strpos(JUNIT_HOME_PHP4, $_SERVER['HTTP_HOST']) === false) {
 				$php = '<b class="tpass" title="toggle environment">PHP4</b>';

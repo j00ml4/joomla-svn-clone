@@ -65,7 +65,7 @@ var $proto = array(
 	 */
 	function main() {
 		$self = new TestOfJFrameworkConfig;
-		$self->run(UnitTestHelper::getReporter());
+		$self->run(JUnit_Setup::getReporter());
 	}
 
 	function setUp() {

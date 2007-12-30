@@ -23,7 +23,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase
      */
     function main() {
         $self = new JObjectTest;
-        $self->run(UnitTestHelper::getReporter());
+        $self->run(JUnit_Setup::getReporter());
     }
 /*
     function before($method)

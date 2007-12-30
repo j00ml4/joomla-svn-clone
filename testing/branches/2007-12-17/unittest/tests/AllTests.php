@@ -22,7 +22,7 @@ class UnitTests_AllTests
 	{
 		$self =& new UnitTests_AllTests;
 		$suite =& $self->suite();
-		$suite->run(UnitTestHelper::getReporter());
+		$suite->run(JUnit_Setup::getReporter());
 	}
 
 	function &suite()
