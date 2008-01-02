@@ -10,8 +10,8 @@
 // Call Framework_AllTests::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'Framework_AllTests::main');
-	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNIT_ROOT.'/unittest/setup.php');
+	$JUnit_root = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
+	require_once($JUnit_root.'/unittest/setup.php');
 }
 
 require_once JUNIT_BASE .'/libraries/AllTests.php';

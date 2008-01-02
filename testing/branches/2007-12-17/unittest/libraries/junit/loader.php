@@ -12,113 +12,9 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
-return;
+
 if (! defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
-}
-
-class JUnit_Loader
-{
-	 /**
-	  * Loads a class from specified directories.
-	  *
-	  * @param string The class name to look for (dot notation).
-	  * @param string Search this directory for the class.
-	  * @param string String used as a prefix to denote the full path of the
-	  * file (dot notation).
-	  * @return boolean True if the requested class has been successfully
-	  * included.
-	  * @since 1.5
-	  */
-	function import($filePath, $base = null, $key = null)
-	{
-		if ($key) {
-			$keyPath = $key . $filePath;
-		} else {
-			$keyPath = $filePath;
-		}
-
-		$trs = 1;
-		$parts = explode('.', $filePath);
-
-		if (! $base) {
-			$base = 'libraries';
-		}
-
-		if (array_pop($parts) == '*') {
-			$path = $base . DS . implode(DS, $parts);
-			$rs   = 0;
-			foreach ($files = glob($base . DS . $path . '/*.php') as $file) {
-//echo '<br> * ',$file;
-//                $rs += JUnit_Setup::loadFile(basename($file), null, true);
-				$rs += (require_once $file);
-			}
-			$trs = (int)(bool)$rs;
-		} else {
-			$path = str_replace('.', DS, $filePath);
-			$path .= '.php';
-//echo '<br> - ',$path;
-//            $trs = JUnit_Setup::loadFile(basename($path), null, true);
-			$trs = (require_once $base . DS . $path);
-		}
-
-		return $trs;
-	}
-
-	/**
-	 * Load the file for a class
-	 *
-	 * @param   string The class that will be loaded
-	 * @return  boolean True on success
-	 * @since   1.5
-	 */
-	function load($class)
-	{
-		$class = strtolower($class); //force to lower case
-
-		if (class_exists($class)) {
-			  return;
-		}
-
-		$classes = JUnit_Loader::register();
-		if(array_key_exists(strtolower($class), $classes)) {
-			include($classes[$class]);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Add a class to autoload
-	 *
-	 * @param   string $classname   The class name
-	 * @param   string $file        Full path to the file that holds the class
-	 * @return  array|boolean       Array of classes
-	 * @since   1.5
-	 */
-	function & register ($class = null, $file = null)
-	{
-		static $classes;
-
-		if(!isset($classes)) {
-			$classes    = array();
-		}
-
-		if($class && is_file($file))
-		{
-			$class = strtolower($class); //force to lower case
-			$classes[$class] = $file;
-
-			// In php4 we load the class immediately
-			if((version_compare( phpversion(), '5.0' ) < 0)) {
-				JUnit_Loader::load($class);
-			}
-
-		}
-
-		return $classes;
-	}
-
 }
 
 /**
@@ -131,8 +27,26 @@ class JUnit_Loader
  */
 function __autoload($class)
 {
-	if (JUnit_Loader::load($class)) {
-		return true;
+	$parts = explode('_', $class);
+	switch (strtolower($parts[0])) {
+		case 'junit': {
+			require_once 'libraries' . DS . strtolower(implode(DS, $parts)) . '.php';
+			return true;
+		}
+		break;
+
+		case 'phpunit': {
+			require_once implode(DS, $parts) . '.php';
+			return true;
+		}
+		break;
+
+		default: {
+			if (JLoader::load($class)) {
+				return true;
+			}
+		}
+		break;
 	}
 
 	return false;
@@ -145,10 +59,12 @@ function __autoload($class)
  */
 function jimport($path)
 {
-	return JUnit_Loader::import($path);
+	return JLoader::import($path);
+	/*
 	$filepath = JPATH_BASE . 'libraries' . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $path);
 	require_once($filepath);
 	return true;
+	*/
 }
 
 

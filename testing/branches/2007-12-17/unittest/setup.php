@@ -18,6 +18,10 @@ error_reporting(E_ALL);
 define('PHP_VERSION_MINIMUM', '5.2.0');
 define('JUNIT_VERSION_MINIMUM', '3.2.0');
 
+if (! defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
+}
+
 /**
  * Map relative paths to JUnit directory, leaving absolute paths alone.
  *
@@ -31,18 +35,30 @@ function junit_path($path, $more = '')
 	if ($path && ($path[0] == '/' || $path[0] == '\\')) {
 		$jpath = $path;
 	} else {
-		$jpath = JUNIT_ROOT . DIRECTORY_SEPARATOR . $path;
+		$jpath = JUNIT_ROOT . DS . $path;
 	}
 	if ($more !== '') {
-		$jpath .= DIRECTORY_SEPARATOR . $more;
+		$jpath .= DS . $more;
 	}
-	$jpath = preg_replace('![\\/]+!', DIRECTORY_SEPARATOR, $jpath);
+	$jpath = preg_replace('![\\/]+!', DS, $jpath);
 	return $jpath;
 }
 
 if (version_compare(PHP_VERSION, PHP_VERSION_MINIMUM) < 0) {
 	die('Sorry. Requires PHP ' . PHP_VERSION_MINIMUM . ' or later.');
 }
+
+/*
+ * Set PHP error reporting level and output directives
+ */
+ini_set('display_errors'         , 'On');
+ini_set('ignore_repeated_errors' , 'Off');
+ini_set('ignore_repeated_source' , 'Off');
+ini_set('html_errors'            , 'Off');
+ini_set('log_errors'             , 'Off');
+ini_set('log_errors_max_len'     , 512);
+/* and of course ... */
+ini_set('register_globals', 'Off');
 
 define('JUNIT_CLI', (PHP_SAPI == 'cli'));
 
@@ -82,58 +98,59 @@ set_include_path(
 	. get_include_path()
 );
 
-require_once 'PHPUnit/Runner/Version.php';
+// Use our autoloader and jimport
+require_once 'libraries/junit/loader.php';
+
 if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
 	die('Found PHPUnit version ' . PHPUnit_Runner_Version::id()
 		. '. Requires ' . JUNIT_VERSION_MINIMUM
 		. ' (this is probably a PEAR related configuration problem).'
 	);
 }
+$JUnit_setup = new JUnit_Setup();
+$JUnit_setup -> setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
+
 /*
  * Extract configuration overrides from command line or request variables.
  */
-$JUnit_options = array('class-filter' => '', 'test-filter' => '');
 if (JUNIT_CLI) {
 	/*
 	 * Parse command line arguments
 	 */
-	require_once 'PHPUnit/Util/Getopt.php';
 	list($options, $junk) = PHPUnit_Util_Getopt::getopt(
 		$argv,
 		array(),
-		array('class-filter=', 'test-filter=')
+		JUnit_Setup::getCliOptionDefs()
 	);
 	foreach ($options as $pair) {
 		$opt = substr($pair[0], 2);
-		$JUnit_options[$opt] = $pair[1];
+		$JUnit_setup -> setOption($opt, $pair[1]);
 	}
 } else {
+	JUnit_Setup::$eol = '<br/>' . PHP_EOL;
 	/*
 	 * Extract settings from request
 	 */
-	if (isset($_REQUEST['class-filter'])) {
-		$JUnit_options['class-filter'] = $_REQUEST['class-filter'];
-	}
-	if (isset($_REQUEST['test-filter'])) {
-		$JUnit_options['test-filter'] = $_REQUEST['test-filter'];
+	foreach (JUnit_Setup::getOptionDefs() as $opt => $info) {
+		if ($info[1]) {
+			if (isset($_REQUEST[$opt])) {
+				$JUnit_setup -> setOption($opt, $_REQUEST[$opt]);
+			}
+		} else {
+			$JUnit_setup -> setOption($opt, isset($_REQUEST['debug']));
+		}
 	}
 }
-
-/*
- * Set PHP error reporting level and output directives
- */
-ini_set('display_errors'         , 'On');
-ini_set('ignore_repeated_errors' , 'Off');
-ini_set('ignore_repeated_source' , 'Off');
-ini_set('html_errors'            , 'Off');
-ini_set('log_errors'             , 'Off');
-ini_set('log_errors_max_len'     , 512);
 
 if (is_writable(junit_path($JUnit_config -> logDir))) {
 	ini_set('error_log' , junit_path($JUnit_config -> logDir, 'php_errors.log'));
 }
+JUnit_Setup::setProperty('JUnit_Setup', 'setup', $JUnit_setup);
 
-/* and of course ... */
-ini_set('register_globals', 'Off');
-
-unset($JUnit_config);
+/*
+ * Now load the Joomla environment
+ */
+define('_JEXEC', 1);
+require_once JPATH_BASE . '/includes/defines.php';
+require_once JPATH_LIBRARIES . '/loader.php';
+require_once JPATH_LIBRARIES . '/joomla/import.php';
