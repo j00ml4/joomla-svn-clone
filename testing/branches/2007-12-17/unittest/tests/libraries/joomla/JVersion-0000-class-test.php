@@ -9,11 +9,11 @@ if (!defined('JUNIT_MAIN_METHOD')) {
 	require_once($JUNIT_ROOT.'/unittest/setup.php');
 }
 
-require_once('libraries/joomla/version.php');
+require_once JPATH_LIBRARIES . '/joomla/version.php';
 
 class JVersionTest extends PHPUnit_Framework_TestCase
 {
-	var $class = null;
+	var $instance = null;
 
 	/**
 	 * Runs the test methods of this class.
@@ -30,54 +30,57 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 
 	function setUp()
 	{
-		$this->class = new JVersion();
+		$this->instance = new JVersion();
 	}
 
 	function tearDown()
 	{
-		$this->class = null;
-		unset($this->class);
+		$this->instance = null;
+		unset($this->instance);
 	}
 
 	function testJVERSION()
 	{
-		$this->assertEqual(JVERSION, $this->class->RELEASE . '.' . $this->class->DEV_LEVEL);
+		$this->assertEquals(
+			JVERSION,
+			$this->instance->RELEASE . '.' . $this->instance->DEV_LEVEL
+		);
 	}
 
 	function testGetLongVersion()
 	{
-		$version = $this->class->PRODUCT
-			. ' ' . $this->class->RELEASE
-			. '.' . $this->class->DEV_LEVEL
-			. ' ' . $this->class->DEV_STATUS
-			. ' [ ' . $this->class->CODENAME . ' ]'
-			. ' ' . $this->class->RELDATE
-			. ' ' . $this->class->RELTIME
-			. ' ' . $this->class->RELTZ;
-		$this->assertEquals($this->class->getLongVersion(), $version);
+		$version = $this->instance->PRODUCT
+			. ' ' . $this->instance->RELEASE
+			. '.' . $this->instance->DEV_LEVEL
+			. ' ' . $this->instance->DEV_STATUS
+			. ' [ ' . $this->instance->CODENAME . ' ]'
+			. ' ' . $this->instance->RELDATE
+			. ' ' . $this->instance->RELTIME
+			. ' ' . $this->instance->RELTZ;
+		$this->assertEquals($this->instance->getLongVersion(), $version);
 	}
 
 	function testGetShortVersion()
 	{
 		$this->assertEquals(
-			$this->class->getShortVersion(),
-			$this->class->RELEASE . '.' . $this->class->DEV_LEVEL
+			$this->instance->getShortVersion(),
+			$this->instance->RELEASE . '.' . $this->instance->DEV_LEVEL
 		);
 	}
 
 	function testGetHelpVersion()
 	{
 		$this->assertEquals(
-			$this->class->getHelpVersion(),
-			'.' . str_replace('.', '', $this->class->RELEASE)
+			$this->instance->getHelpVersion(),
+			'.' . str_replace('.', '', $this->instance->RELEASE)
 		);
 	}
 
 	function testIsCompatible()
 	{
 		$this->assertTrue(
-			$this->class->isCompatible(
-				$this->class->RELEASE . '.' . $this->class->DEV_LEVEL
+			$this->instance->isCompatible(
+				$this->instance->RELEASE . '.' . $this->instance->DEV_LEVEL
 			)
 		);
 	}
@@ -88,11 +91,18 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 */
 	function testIsCompatible_minor()
 	{
-		$minor = $this->class->RELEASE . '.' . ($this->class->DEV_LEVEL + 1);
+		$minor = $this->instance->RELEASE . '.' . ($this->instance->DEV_LEVEL + 1);
 		$this->assertTrue(
-			$this->class->isCompatible($minor),
+			! $this->instance->isCompatible($minor),
 			$minor . ' not compatible to ' . JVERSION . chr(10) . ' %s'
 		);
+		if ($this->instance->DEV_LEVEL) {
+			$minor = $this->instance->RELEASE . '.' . ($this->instance->DEV_LEVEL - 1);
+			$this->assertTrue(
+				$this->instance->isCompatible($minor),
+				$minor . ' not compatible to ' . JVERSION . chr(10) . ' %s'
+			);
+		}
 	}
 
 }

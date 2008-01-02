@@ -2,7 +2,7 @@
 Changelog
 -------------------------------------------------
 This is a non-exhaustive (but still near complete) changelog
-for the Joomla! 1.5 Framework Unit-testing Platform.
+for the Joomla! 1.5 Framework Unit Test Facility.
 
 -------------------------------------------------
 Legend:
@@ -19,7 +19,7 @@ Legend:
  ^  svn:ignore now includes  .* at project root
  -  Removed test status from changelog
  -  Removed Simpletest
- +  Added PHPUnit 1.3.2
+ +  Added PHPUnit 3.2.6
  !  Haven't dealt with resulting breakage
 -------------------------------------------------
 2007-07-27 CirTap
