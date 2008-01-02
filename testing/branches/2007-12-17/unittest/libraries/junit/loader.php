@@ -12,7 +12,7 @@
  * other free or open source software licenses.
  * See COPYRIGHT.php for copyright notices and details.
  */
-
+return;
 if (! defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
@@ -80,12 +80,43 @@ class JUnit_Loader
 			  return;
 		}
 
-		$classes = JLoader::register();
+		$classes = JUnit_Loader::register();
 		if(array_key_exists(strtolower($class), $classes)) {
 			include($classes[$class]);
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Add a class to autoload
+	 *
+	 * @param   string $classname   The class name
+	 * @param   string $file        Full path to the file that holds the class
+	 * @return  array|boolean       Array of classes
+	 * @since   1.5
+	 */
+	function & register ($class = null, $file = null)
+	{
+		static $classes;
+
+		if(!isset($classes)) {
+			$classes    = array();
+		}
+
+		if($class && is_file($file))
+		{
+			$class = strtolower($class); //force to lower case
+			$classes[$class] = $file;
+
+			// In php4 we load the class immediately
+			if((version_compare( phpversion(), '5.0' ) < 0)) {
+				JUnit_Loader::load($class);
+			}
+
+		}
+
+		return $classes;
 	}
 
 }
@@ -114,11 +145,6 @@ function __autoload($class)
  */
 function jimport($path)
 {
-	static $btdt = false;
-	if (! $btdt) {
-		echo 'this is the overridden jimport.' . PHP_EOL;
-		$btdt = true;
-	}
 	return JUnit_Loader::import($path);
 	$filepath = JPATH_BASE . 'libraries' . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $path);
 	require_once($filepath);

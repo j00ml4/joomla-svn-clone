@@ -33,6 +33,13 @@ class JUnit_Setup
 	static protected $_properties = array();
 
 	/**
+	 * Base directory for considering tests
+	 *
+	 * @var string
+	 */
+	protected $_startDir;
+
+	/**
 	 * Regex to determine which class files to process. If empty, no filtering
 	 * is done.
 	 *
@@ -41,11 +48,72 @@ class JUnit_Setup
 	public $classFilter = '';
 
 	/**
-	 * Base directory for considering tests
+	 * Regex to determine which test names to process. If empty, no filtering is
+	 * done.
 	 *
 	 * @var string
 	 */
-	protected $_startDir;
+	public $testFilter = '';
+
+	function _dirWalk(&$fileList, $dir) {
+		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
+			$dir .= '/';
+		}
+		$path = $this -> _startDir . $dir;
+		if (! @is_dir($path)) {
+			throw new Exception('Update error. ' . $path . ' is not a directory.', 1);
+		}
+		if(! ($dh = @opendir($path))) {
+			throw new Exception('Update error. Unable to open ' . $path, 2);
+		}
+		/*
+		 * Walk through the directory collecting files and subdirectories Then
+		 * we sort them to get the correct sequence.
+		 */
+		$list = array();
+		$subList = array();
+		while (($fileName = readdir($dh)) !== false) {
+			$fid = $path . $fileName;
+			switch (filetype($fid)) {
+				case 'dir': {
+					if ($fileName != '.' && $fileName != '..') {
+						$subList[] = $fileName;
+					}
+				} break;
+
+				case 'file': {
+					echo $fileName . PHP_EOL;
+					if (substr($fileName, -9) == '-test.php') {
+						/*
+						 * If there is an object match, add this file to the
+						 * list of tests.
+						 */
+						if ($this -> _isFiltered($fileName)) {
+							continue;
+						}
+						$list[] = $fileName;
+					} elseif (substr($fileName, -11) == '-helper.php') {
+						/*
+						 * Load helper classes for matching objects
+						 */
+						if ($this -> _isFiltered($fileName)) {
+							continue;
+						}
+						include_once $fid;
+					}
+				} break;
+			}
+		}
+		sort($list);
+
+		foreach ($list as $fileName) {
+			$fileList[] = $dir . $fileName;
+		}
+		sort($subList);
+		foreach ($subList as $subDir) {
+			$this -> _dirWalk($fileList, $dir . $subDir);
+		}
+	}
 
 	/**
 	 * Attempt to include() the file.
@@ -66,6 +134,21 @@ class JUnit_Setup
 		} else {
 			return (bool)(@include $filespec);
 		}
+	}
+
+	function _isFiltered($fileName) {
+		$parts = explode('-', $fileName);
+		if ($this -> classFilter) {
+			if (! preg_match($this -> classFilter, $parts[0])) {
+				return true;
+			}
+		}
+		if ($this -> testFilter) {
+			if (! preg_match($this -> testFilter, $parts[2])) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -619,71 +702,6 @@ jutdump(debug_backtrace());
 		}
 
 		return $parsed;
-	}
-
-	function _dirWalk(&$fileList, $dir) {
-		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
-			$dir .= '/';
-		}
-		$path = $this -> _startDir . $dir;
-		if (! @is_dir($path)) {
-			throw new Exception('Update error. ' . $path . ' is not a directory.', 1);
-		}
-		if(! ($dh = @opendir($path))) {
-			throw new Exception('Update error. Unable to open ' . $path, 2);
-		}
-		/*
-		 * Walk through the directory collecting files and subdirectories Then
-		 * we sort them to get the correct sequence.
-		 */
-		$list = array();
-		$subList = array();
-		while (($fileName = readdir($dh)) !== false) {
-			$fid = $path . $fileName;
-			switch (filetype($fid)) {
-				case 'dir': {
-					if ($fileName != '.' && $fileName != '..') {
-						$subList[] = $fileName;
-					}
-				} break;
-
-				case 'file': {
-					if (substr($fileName, -8) == 'test.php') {
-						/*
-						 * If there is an object match, add this file to the
-						 * list of tests.
-						 */
-						if ($this -> classFilter) {
-							$parts = explode('-', $fileName);
-							if (! preg_match($this -> classFilter, $parts[0])) {
-								continue;
-							}
-						}
-						$list[] = $fileName;
-					} elseif (substr($fileName, -10) == 'helper.php') {
-						/*
-						 * Load helper classes for matching objects
-						 */
-						if ($this -> classFilter) {
-							$parts = explode('-', $fileName);
-							if (! preg_match($this -> classFilter, $parts[0])) {
-								continue;
-							}
-						}
-						include_once $fid;
-					}
-				} break;
-			}
-		}
-		sort($list);
-
-		foreach ($list as $fileName) {
-			$fileList[] = $dir . $fileName;
-		}
-		sort($subList);
-		foreach ($subList as $subDir) {
-			$this -> _dirWalk($fileList, $dir . $subDir);
-		}
 	}
 
 	/*

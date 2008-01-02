@@ -15,6 +15,9 @@
 
 error_reporting(E_ALL);
 
+define('PHP_VERSION_MINIMUM', '5.2.0');
+define('JUNIT_VERSION_MINIMUM', '3.2.0');
+
 /**
  * Map relative paths to JUnit directory, leaving absolute paths alone.
  *
@@ -35,6 +38,10 @@ function junit_path($path, $more = '')
 	}
 	$jpath = preg_replace('![\\/]+!', DIRECTORY_SEPARATOR, $jpath);
 	return $jpath;
+}
+
+if (version_compare(PHP_VERSION, PHP_VERSION_MINIMUM) < 0) {
+	die('Sorry. Requires PHP ' . PHP_VERSION_MINIMUM . ' or later.');
 }
 
 define('JUNIT_CLI', (PHP_SAPI == 'cli'));
@@ -75,17 +82,41 @@ set_include_path(
 	. get_include_path()
 );
 
+require_once 'PHPUnit/Runner/Version.php';
+if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
+	die('Found PHPUnit version ' . PHPUnit_Runner_Version::id()
+		. '. Requires ' . JUNIT_VERSION_MINIMUM
+		. ' (this is probably a PEAR related configuration problem).'
+	);
+}
 /*
  * Extract configuration overrides from command line or request variables.
  */
+$JUnit_options = array('class-filter' => '', 'test-filter' => '');
 if (JUNIT_CLI) {
 	/*
 	 * Parse command line arguments
 	 */
+	require_once 'PHPUnit/Util/Getopt.php';
+	list($options, $junk) = PHPUnit_Util_Getopt::getopt(
+		$argv,
+		array(),
+		array('class-filter=', 'test-filter=')
+	);
+	foreach ($options as $pair) {
+		$opt = substr($pair[0], 2);
+		$JUnit_options[$opt] = $pair[1];
+	}
 } else {
 	/*
 	 * Extract settings from request
 	 */
+	if (isset($_REQUEST['class-filter'])) {
+		$JUnit_options['class-filter'] = $_REQUEST['class-filter'];
+	}
+	if (isset($_REQUEST['test-filter'])) {
+		$JUnit_options['test-filter'] = $_REQUEST['test-filter'];
+	}
 }
 
 /*
@@ -105,15 +136,4 @@ if (is_writable(junit_path($JUnit_config -> logDir))) {
 /* and of course ... */
 ini_set('register_globals', 'Off');
 
-/*
- * TestCases are main files
- */
-define('_JEXEC', 1);
-
-/*
-require_once 'libraries/loader.php';
-
-require_once 'includes/defines.php';
-require_once 'libraries/joomla/base/object.php'; // JObject
-*/
 unset($JUnit_config);
