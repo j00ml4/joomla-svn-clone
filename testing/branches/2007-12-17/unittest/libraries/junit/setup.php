@@ -26,11 +26,47 @@ define('JUNIT_IS_FRAMEWORK', 4);
 class JUnit_Setup
 {
 	/**
+	 * Regex to determine which class files to process. If empty, no filtering
+	 * is done.
+	 *
+	 * @var string
+	 */
+	protected $_classFilter = '';
+
+	/**
+	 * Option definitions are (default_value, value_required, help)
+	 *
+	 * @var array
+	 */
+	protected static $_optionDefs = array(
+		'class-filter' => array('', true, 'Regular expression to select tests by class name.'),
+		'debug' => array(false, false, 'Dump unit test diagnostics.'),
+		'help' => array(false, false, 'Dump this help message.'),
+		'sequence-filter' => array('', true, 'Regular expression to select tests by sequence ID.'),
+		'test-filter' => array('', true, 'Regular expression to select tests by test name.'),
+	);
+
+	/**
+	 * Option settings.
+	 *
+	 * @var array
+	 */
+	protected $_options;
+
+	/**
 	 * Repository for unit test operational data.
 	 *
 	 * @var array
 	 */
 	static protected $_properties = array();
+
+	/**
+	 * Regex to determine which test sequences to process. If empty, no
+	 * filtering is done.
+	 *
+	 * @var string
+	 */
+	protected  $_sequenceFilter = '';
 
 	/**
 	 * Base directory for considering tests
@@ -40,22 +76,28 @@ class JUnit_Setup
 	protected $_startDir;
 
 	/**
-	 * Regex to determine which class files to process. If empty, no filtering
-	 * is done.
-	 *
-	 * @var string
-	 */
-	public $classFilter = '';
-
-	/**
 	 * Regex to determine which test names to process. If empty, no filtering is
 	 * done.
 	 *
 	 * @var string
 	 */
-	public $testFilter = '';
+	protected $_testFilter = '';
 
-	function _dirWalk(&$fileList, $dir) {
+	/**
+	 * Line terminator.
+	 *
+	 * @var string
+	 */
+	static $eol = PHP_EOL;
+
+	function __construct() {
+		$this -> _options = array();
+		foreach (self::$_optionDefs as $opt => $info) {
+			$this -> _options[$opt] = $info[0];
+		}
+	}
+
+	protected function _dirWalk(&$fileList, $dir) {
 		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
 			$dir .= '/';
 		}
@@ -65,6 +107,9 @@ class JUnit_Setup
 		}
 		if(! ($dh = @opendir($path))) {
 			throw new Exception('Update error. Unable to open ' . $path, 2);
+		}
+		if ($this -> _options['debug']) {
+			echo 'Processing directory "' . $dir . '"' . self::$eol;
 		}
 		/*
 		 * Walk through the directory collecting files and subdirectories Then
@@ -82,24 +127,19 @@ class JUnit_Setup
 				} break;
 
 				case 'file': {
-					echo $fileName . PHP_EOL;
+					//echo $fileName . PHP_EOL;
 					if (substr($fileName, -9) == '-test.php') {
 						/*
 						 * If there is an object match, add this file to the
 						 * list of tests.
 						 */
 						if ($this -> _isFiltered($fileName)) {
+							if ($this -> _options['debug']) {
+								echo 'Filtered: ' . $fileName . self::$eol;
+							}
 							continue;
 						}
 						$list[] = $fileName;
-					} elseif (substr($fileName, -11) == '-helper.php') {
-						/*
-						 * Load helper classes for matching objects
-						 */
-						if ($this -> _isFiltered($fileName)) {
-							continue;
-						}
-						include_once $fid;
 					}
 				} break;
 			}
@@ -107,12 +147,20 @@ class JUnit_Setup
 		sort($list);
 
 		foreach ($list as $fileName) {
-			$fileList[] = $dir . $fileName;
+			$fileList[] = $path . $fileName;
 		}
 		sort($subList);
 		foreach ($subList as $subDir) {
 			$this -> _dirWalk($fileList, $dir . $subDir);
 		}
+	}
+
+	protected function _doHelp() {
+		echo 'Joomla Unit Test Runner options:' . self::$eol . self::$eol;
+		foreach (self::$_optionDefs as $opt => $info) {
+			echo $opt . ' ' . $info[2] . self::$eol;
+		}
+		echo self::$eol . self::$eol;
 	}
 
 	/**
@@ -127,7 +175,7 @@ class JUnit_Setup
 	 * @return boolean
 	 * @internal borrowed from Zend_Loader
 	 */
-	function _includeFile($filespec, $once = false)
+	protected function _includeFile($filespec, $once = false)
 	{
 		if ($once) {
 			return (bool)(@include_once $filespec);
@@ -136,15 +184,29 @@ class JUnit_Setup
 		}
 	}
 
-	function _isFiltered($fileName) {
+	/**
+	 * Determine if a file is excluded by a filter.
+	 *
+	 * This function applies any filters set for class name, sequence, and test
+	 * name.
+	 *
+	 * @param string The candidate test file name.
+	 * @return boolean True if the file is excluded by filters.
+	 */
+	protected function _isFiltered($fileName) {
 		$parts = explode('-', $fileName);
-		if ($this -> classFilter) {
-			if (! preg_match($this -> classFilter, $parts[0])) {
+		if ($this -> _classFilter) {
+			if (! preg_match($this -> _classFilter, $parts[0])) {
 				return true;
 			}
 		}
-		if ($this -> testFilter) {
-			if (! preg_match($this -> testFilter, $parts[2])) {
+		if ($this -> _sequenceFilter) {
+			if (! preg_match($this -> _sequenceFilter, $parts[1])) {
+				return true;
+			}
+		}
+		if ($this -> _testFilter) {
+			if (! preg_match($this -> _testFilter, $parts[2])) {
 				return true;
 			}
 		}
@@ -152,9 +214,23 @@ class JUnit_Setup
 	}
 
 	/**
-	 * Plucks $path into pieces and returns a standard object with all kind
-	 * of stuff in it. The value of $path is the "path" input argument
-	 * provided via $_REQUEST (browser mode) or the command-line (CLI Mode).
+	 * Return an option definitons array that is compatible with PHPUnit's
+	 * getopt() function.
+	 *
+	 * @return array Long options, appended with = if a value is expected.
+	 */
+	static function getCliOptionDefs() {
+		$defs = array();
+		foreach (self::$_optionDefs as $opt => $info) {
+			$defs[] = $opt . ($info[1] ? '=' : '');
+		}
+		return $defs;
+	}
+
+	/**
+	 * Parses $path and returns a standard object with all kind of stuff in it.
+	 * The value of $path is the "path" input argument provided via $_REQUEST
+	 * (browser mode) or the command-line (CLI Mode).
 	 *
 	 * See JUnit_Setup_examples.txt for more information about this array and
 	 * it's drawbacks.
@@ -229,6 +305,15 @@ class JUnit_Setup
 	}
 
 	/**
+	 * Return a copy of the option definitions
+	 *
+	 * @return array Option definitions.
+	 */
+	static function getOptionDefs() {
+		return self::$_optionDefs;
+	}
+
+	/**
 	 * Get a property from the setup regisrty
 	 *
 	 * @param string Used to prevent clashes, usually a class name.
@@ -252,113 +337,6 @@ class JUnit_Setup
 			@settype($result, $forcetype);
 		}
 		return $result;
-	}
-
-	/**
-	 * Returns the Singleton instance of the active UnitTest Renderer for $output.
-	 *
-	 * @param string Any of html, xml, php, json, text, custom.
-	 * @return object Instance of JoomlaXXX view or the 'custom' renderer.
-	 */
-	function &getReporter($output = null)
-	{
-		static $instance;
-throw new Exception('foo');
-		if ($instance !== null) {
-			return $instance;
-		}
-
-		if ($output == null) {
-			$input  =& JUnit_Setup::getProperty('Controller', 'Input');
-			$output = $input->reporter['output'];
-		}
-
-		switch(strtolower($output))
-		{
-		case 'xml':
-		case 'php':
-		case 'json':
-		case 'text':
-			$renderer = 'Joomla'.ucfirst($output);
-			require_once JUNIT_VIEWS.'/'.$renderer.'.php';
-			break;
-		case 'html':
-			# fall thru to default case
-			$renderer = 'Joomla'.ucfirst($output);
-		default:
-			if ($output == 'html') {
-				require_once JUNIT_VIEWS.'/'.$renderer.'.php';
-			} else {
-				require_once JUNIT_REPORTER_CUSTOM_PATH;
-				$renderer = JUNIT_REPORTER_CUSTOM_CLASS;
-			}
-
-			break;
-		}
-
-		$instance =& new $renderer();
-		return $instance;
-	}
-
-	/**
-	 * @ignore
-	 * @return array
-	 */
-	function &getTestDocs($infoobj)
-	{
-		$docs = glob(JUNIT_ROOT .'/'.
-					JUNIT_BASE .'/'.
-					$infoobj->dirname .'_files/'.
-					$infoobj->classname.'_*.txt');
-
-		if (count($docs) > 0) {
-			$l = strlen(JUNIT_ROOT .'/'. JUNIT_BASE .'/');
-			foreach (array_keys($docs) as $i) {
-				$docs[$i] = substr($docs[$i], $l);
-			}
-		}
-		return $docs;
-	}
-
-	function globMatch($glob, $against, $case_sensitive = true) {
-		return preg_match('/' . JUnit_Setup::globToPcre($glob) . ($case_sensitive ? '/' : '/i'),
-						  $against);
-	}
-
-	/**
-	 * Convert fileglob to regex style:
-	 * Convert some wildcards to pcre style, escape the rest
-	 * Escape . \\ + * ? [ ^ ] $ () { } = ! < > | : /
-	 */
-	function globToPcre($glob) {
-		// check simple case: no need to escape
-		$escape = '\[](){}=!<>|:/';
-		if (strcspn($glob, $escape . '.+*?^$') == strlen($glob)) {
-			return $glob;
-		}
-		// preg_replace cannot handle \\\\\\2 so convert \\ to \xff
-		$glob = strtr($glob, '\\', '\xff');
-		$glob = str_replace('/', '\/', $glob);
-		// first convert some unescaped expressions to pcre style: . => \.
-		$special = '.^$';
-		$re = preg_replace('/([^\xff])?(['.preg_quote($special).'])/',
-						   '\\1\xff\\2', $glob);
-
-		// * => .*, ? => .
-		$re = preg_replace('/([^\xff])?\*/', '$1.*', $re);
-		$re = preg_replace('/([^\xff])?\?/', '$1.', $re);
-		if (!preg_match('/^[\?\*]/', $glob)) {
-			$re = '^' . $re;
-		}
-		if (!preg_match('/[\?\*]$/', $glob)) {
-			$re = $re . '$';
-		}
-
-		// .*? handled above, now escape the rest
-		//while (strcspn($re, $escape) != strlen($re)) // loop strangely needed
-		$re = preg_replace('/([^\xff])(['.preg_quote($escape, '/').'])/',
-						   '\\1\xff\\2', $re);
-		return strtr($re, '\xff', '\\');
 	}
 
 	/**
@@ -708,8 +686,10 @@ jutdump(debug_backtrace());
 	 * Assemble a list of tests and run them.
 	 */
 	function run() {
-		// This will change when we have more than CLI support
-		require_once 'PHPUnit/TextUI/TestRunner.php';
+		if ($this -> _options['help']) {
+			$this -> _doHelp();
+			return;
+		}
 		/*
 		 * Find all the matching files
 		 */
@@ -718,14 +698,20 @@ jutdump(debug_backtrace());
 		} else {
 			$dir = '';
 		}
-		// TODO: get startdir to point at test directory
-		$dir = $this -> _startDir;
-		echo 'Discovering files in ' . $dir . PHP_EOL;
+		if ($this -> _options['debug']) {
+			echo 'Discovering files in ' . $this -> _startDir . self::$eol;
+		}
 		$testFiles = array();
 		$this -> _dirWalk($testFiles, '');
-		print_r($testFiles);
+		if ($this -> _options['debug']) {
+			echo 'Running ' . count($testFiles) . ' test files:' . self::$eol;
+			foreach ($testFiles as $fid) {
+				echo $fid . self::$eol;
+			}
+		}
 		$suite  = new PHPUnit_Framework_TestSuite();
 		$suite -> addTestFiles($testFiles);
+		// This will change when we have more than CLI support
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
@@ -747,6 +733,36 @@ jutdump(debug_backtrace());
 			self::$_properties[$namespace] = array();
 		}
 		self::$_properties[$namespace][$prop] = $value;
+	}
+
+	function setOption($opt, $value) {
+		if (isset($this -> _options[$opt])) {
+			$info = self::$_optionDefs[$opt];
+			if ($info[1]) {
+				$this -> _options[$opt] = $value;
+			} else {
+				$this -> _options[$opt] = true;
+			}
+			switch ($opt) {
+				case 'class-filter': {
+					$this -> _classFilter = $value;
+				}
+				break;
+
+				case 'sequence-filter': {
+					$this -> _sequenceFilter = $value;
+				}
+				break;
+
+				case 'test-filter': {
+					$this -> _testFilter = $value;
+				}
+				break;
+
+			}
+			return true;
+		}
+		return false;
 	}
 
 	function setStartDir($dir) {

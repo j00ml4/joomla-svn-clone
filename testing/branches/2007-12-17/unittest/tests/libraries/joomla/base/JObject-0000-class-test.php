@@ -5,9 +5,21 @@
 // Call JObjectTest::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'JObjectTest::main');
-	$JUNIT_ROOT = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUNIT_ROOT.'/unittest/setup.php');
+	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
+	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
+		die('Unable to find ' . $JUnit_home . ' in path.');
+	}
+	$JUnit_posn += strlen($JUnit_home) - 1;
+	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
+	$JUnit_start = substr(
+		__FILE__,
+		$JUnit_posn + 1,
+		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
+	);
+	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
+
+require_once 'JObject-helper.php';
 
 class JObjectTest extends PHPUnit_Framework_TestCase
 {
@@ -20,8 +32,6 @@ class JObjectTest extends PHPUnit_Framework_TestCase
 	 * @static
 	 */
 	function main() {
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
 		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}

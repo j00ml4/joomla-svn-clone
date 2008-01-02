@@ -21,6 +21,8 @@ $JUnit_start = substr(
 	strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
 );
 
+echo 'Root: ' . $JUnit_root . PHP_EOL . 'Start: ' . $JUnit_start . PHP_EOL;
+
 /*
  * Now that the context is set up, the runtests.php in the unit test root does
  * all the work.
