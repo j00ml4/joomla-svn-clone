@@ -9,8 +9,8 @@ WIP
     <author>Joomla! Project</author>
     <authorEmail>admin@joomla.org</authorEmail>
     <authorUrl>www.joomla.org</authorUrl>
-    <copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
-    <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <copyright>(C) 2005 - 2008 Open Source Matters. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <description>United Kingdom English language pack for the site application</description>
     <tag>eng-GB</tag>
     <files>
@@ -49,9 +49,9 @@ WIP
         <filename file="meta">eng-GB.xml</filename>
     </files>
     <fonts>
-        <filename>Vera.php</filename>
-        <filename>Vera.z</filename>
-        <filename>Vera.ctg.z</filename>
+        <filename>freesans.php</filename>
+        <filename>freesans.z</filename>
+        <filename>freesans.ctg.z</filename>
     </fonts>
 </install>
 </code>
@@ -65,8 +65,8 @@ WIP
     <author>Joomla! Project</author>
     <authorEmail>admin@joomla.org</authorEmail>
     <authorUrl>www.joomla.org</authorUrl>
-    <copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
-    <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <copyright>(C) 2005 - 2008 Open Source Matters. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <description>United Kingdom English language pack for com_test component</description>
     <tag>eng-GB</tag>
     <files>
