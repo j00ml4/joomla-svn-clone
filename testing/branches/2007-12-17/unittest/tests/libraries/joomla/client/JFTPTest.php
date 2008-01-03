@@ -12,10 +12,10 @@
 if (!defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'JFTPTest::main');
 	$JUnit_root = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUnit_root.'/unittest/setup.php');
+	require_once $JUnit_root.'/unittest/setup.php';
 }
 
-require_once('libraries/joomla/client/ftp.php');
+require_once 'libraries/joomla/client/ftp.php';
 
 class JFTPTest extends PHPUnit_Framework_TestCase
 {

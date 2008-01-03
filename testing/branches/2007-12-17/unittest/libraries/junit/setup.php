@@ -385,7 +385,7 @@ class JUnit_Setup
 	 * If the file was not found in the $dirs, or if no $dirs were specified,
 	 * it will attempt to load it from PHP's include_path.
 	 *
-	 * If $once is true, it will use include_once() instead of include().
+	 * If $once is true, it will use include_once instead of include.
 	 *
 	 * @param  string        $filename
 	 * @param  string|array  $dirs - OPTIONAL either a path or array of paths

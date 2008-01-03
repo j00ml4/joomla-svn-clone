@@ -11,11 +11,11 @@
 if (!defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'TestOfJFrameworkConfig::main');
 	$JUnit_root = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUnit_root.'/unittest/setup.php');
+	require_once $JUnit_root . '/unittest/setup.php';
 }
 
 /* class to test */
-require_once('libraries/joomla/config.php');
+require_once 'libraries/joomla/config.php';
 
 /**
  * Test class for JFrameworkConfig.
