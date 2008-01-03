@@ -30,7 +30,7 @@ if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
 /**
  * Controller class.
  */
-require_once(dirname(__FILE__) . '/UnitTestController.php');
+require_once dirname(__FILE__) . '/UnitTestController.php';
 
 /**
  * If a path is provided, run the test,

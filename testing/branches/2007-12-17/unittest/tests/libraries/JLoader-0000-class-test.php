@@ -8,44 +8,51 @@
  * @version $Id$
  */
 
-// Call TestOfJLoader::main() if this source file is executed directly.
+// Call JLoaderTest::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'TestOfJLoader::main');
-	$JUnit_root = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
-	require_once($JUnit_root.'/unittest/setup.php');
+	define('JUNIT_MAIN_METHOD', 'JLoaderTest::main');
+	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
+	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
+		die('Unable to find ' . $JUnit_home . ' in path.');
+	}
+	$JUnit_posn += strlen($JUnit_home) - 1;
+	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
+	$JUnit_start = substr(
+		__FILE__,
+		$JUnit_posn + 1,
+		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
+	);
+	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
 
-class TestOfJLoader extends UnitTestCase
+class JLoaderTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
 	 */
-	function main() {
-		$self = new TestOfJLoader;
-		$self->run(JUnit_Setup::getReporter());
+	static function main() {
+		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
 	/** function import($filePath, $base = null, $key = null) */
 	function test_import()
 	{
 		$r = JLoader::import('joomla.factory');
-		$this->assertEqual($r, 1, '%s');
+		$this->assertEquals($r, 1, '%s');
 	}
 
 	/** function import($filePath, $base = null, $key = null) */
 	function test_import_base()
 	{
 		$r = JLoader::import('_files.loader', dirname(__FILE__));
-		if ($this->assertEqual($r, 1, '%s')) {
+		if ($this->assertEquals($r, 1, '%s')) {
 			$this->assertTrue(defined('JLOADER_TEST_IMPORT_BASE'), '%s');
 		}
 
 		// retry
 		$r = JLoader::import('_files.loader', dirname(__FILE__));
-		$this->assertEqual($r, 1, '%s');
+		$this->assertEquals($r, 1, '%s');
 	}
 
 	/** function import($filePath, $base = null, $key = null) */
@@ -64,7 +71,7 @@ class TestOfJLoader extends UnitTestCase
 
 }
 
-// Call TestOfJLoader::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'TestOfJLoader::main') {
-	TestOfJLoader::main();
+// Call JLoaderTest::main() if this source file is executed directly.
+if (JUNIT_MAIN_METHOD == 'JLoaderTest::main') {
+	JLoaderTest::main();
 }

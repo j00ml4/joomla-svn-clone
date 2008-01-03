@@ -11,7 +11,7 @@
  * @author Rene Serradeil
  */
 
-require_once('libraries/joomla/base/object.php');
+require_once 'libraries/joomla/base/object.php';
 
 /**
  * Test UnitTest Observer feature.
