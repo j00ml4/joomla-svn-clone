@@ -55,22 +55,3 @@ WIP
     </fonts>
 </install>
 </code>
-
-<code xml|Extension Pack Installation File>
-<?xml version="1.0" encoding="iso-8859-1"?>
-<install version="1.1" client="site" type="language">
-    <name>English(United Kingdom)</name>
-    <version>1.1.0</version>
-    <creationDate>2005-10-30</creationDate>
-    <author>Joomla! Project</author>
-    <authorEmail>admin@joomla.org</authorEmail>
-    <authorUrl>www.joomla.org</authorUrl>
-    <copyright>(C) 2005 - 2008 Open Source Matters. All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <description>United Kingdom English language pack for com_test component</description>
-    <tag>eng-GB</tag>
-    <files>
-        <filename>eng-GB.com_test.ini</filename>
-    </files>
-</install>
-</code>
