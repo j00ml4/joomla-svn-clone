@@ -37,6 +37,23 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
+	function testConstruct() {
+		$tests = array(
+			array('garbage', null),
+			array('Mon, 15 Zok 2007 00:00:00 -0100', null),
+			array('Mon, 01 Jan 1970 00:00:00 -0000', 0),
+		);
+		foreach ($tests as $dataSet) {
+			$jd = new JDate($dataSet[0]);
+			$this -> assertEquals(
+				$jd -> toUnix(),
+				$dataSet[1],
+				'Passed "' . $dataSet[0] . '" expected ' . $dataSet[1]
+				. ' got ' . (is_null($jd -> toUnix()) ? 'null' : $jd -> toUnix())
+			);
+		}
+	}
+
 	function testConstructNow() {
 		/*
 		 * Allow one tick in difference just in case the second rolls over mid-
@@ -46,11 +63,6 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 		$this -> assertTrue(abs(gmdate('U') - $jd -> toUnix()) < 1);
 		$jd = new JDate('now', 1);
 		$this -> assertTrue(abs(gmdate('U') - $jd -> toUnix()) < 1);
-	}
-
-	function testConstructInvalid() {
-		$jd = new JDate('garbage');
-		$this -> assertEquals($jd -> toUnix(), false);
 	}
 
 }
