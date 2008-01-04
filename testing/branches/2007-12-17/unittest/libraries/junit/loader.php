@@ -16,6 +16,7 @@
 if (! defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
+
 /**
  * Unit test autoloader.
  *
@@ -30,7 +31,6 @@ if (! defined('DS')) {
  * @param string|array when passed as a string, the class name to load. When
  * passed as an array, the first element of the array is the callback function
  * to use.
- */
 function __autoload($class)
 {
 	static $autoloader = 'junit_autoload';
@@ -41,6 +41,7 @@ function __autoload($class)
 	}
 	return call_user_func($autoloader, $class);
 }
+ */
 
 /**
  * Unit test intelligent file importer.
@@ -97,3 +98,4 @@ function junit_autoload($class)
 
 	return false;
 }
+

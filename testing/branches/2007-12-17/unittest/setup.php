@@ -100,6 +100,7 @@ set_include_path(
 
 // Use our autoloader and jimport
 require_once 'libraries/junit/loader.php';
+spl_autoload_register('junit_autoload');
 
 if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
 	die('Found PHPUnit version ' . PHPUnit_Runner_Version::id()
@@ -154,12 +155,16 @@ define('_JEXEC', 1);
 require_once JPATH_BASE . '/includes/defines.php';
 require_once JPATH_LIBRARIES . '/loader.php';
 /*
- * We interrupt the load process to install our own handlers. Get the mock-aware
- * unit test autoload and jimport functionality and update the callbacks by
- * pasing new handlers as arrays.
+ * We interrupt the load process to install our own handlers. For the
+ * autoloader, we remove our autoloader, add the Joomla autoloader, then put
+ * ours back, ensuring ours gets called first. Then we install the mock-aware
+ * unit test jimport functionality by pasing a new callback handlers as an
+ * array.
  */
 require_once 'libraries/junit/loader2.php';
-__autoload(array('junit_mockload'));
+spl_autoload_unregister('junit_autoload');
+spl_autoload_register('__autoload');
+spl_autoload_register('junit_autoload');
 jimport(array('junit_mockimport'));
 /*
  * We now return to our regularly scheduled environment.
