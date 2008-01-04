@@ -9,7 +9,7 @@
  */
 
 // Call JLoaderTest::main() if this source file is executed directly.
-if (!defined('JUNIT_MAIN_METHOD')) {
+if (! defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'JLoaderTest::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
@@ -39,7 +39,7 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
 	function test_import()
 	{
 		$r = JLoader::import('joomla.factory');
-		$this->assertEquals($r, 1, '%s');
+		$this->assertEquals($r, true, '%s');
 	}
 
 	/** function import($filePath, $base = null, $key = null) */
