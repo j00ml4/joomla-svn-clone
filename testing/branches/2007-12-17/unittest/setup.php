@@ -153,4 +153,15 @@ JUnit_Setup::setProperty('JUnit_Setup', 'setup', $JUnit_setup);
 define('_JEXEC', 1);
 require_once JPATH_BASE . '/includes/defines.php';
 require_once JPATH_LIBRARIES . '/loader.php';
+/*
+ * We interrupt the load process to install our own handlers. Get the mock-aware
+ * unit test autoload and jimport functionality and update the callbacks by
+ * pasing new handlers as arrays.
+ */
+require_once 'libraries/junit/loader2.php';
+__autoload(array('junit_mockload'));
+jimport(array('junit_mockimport'));
+/*
+ * We now return to our regularly scheduled environment.
+ */
 require_once JPATH_LIBRARIES . '/joomla/import.php';
