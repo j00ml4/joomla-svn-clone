@@ -10,7 +10,7 @@
 
 // Call JDateTest::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JDateTest::main');
+	define('JUNIT_MAIN_METHOD', 'JDateTest_SetDate::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -30,75 +30,58 @@ jimport('joomla.utilities.date');
 
 require_once 'JDate-helper-dataset.php';
 
-class JDateTest_SetDate implements PHPUnit_Framework_Test
+class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 {
-	public function count() {
-		$tests = 0;
+	static public function linearizeDataSet() {
+		$cases = array();
 		foreach (JDateTest_DataSet::$tests as $dataSet) {
-			$tests += is_null($dataSet['utc']) ? 1 : count($dataSet['utc']);
-		}
-		return 1;
-	}
-
-	/**
-	 * Runs this test.
-	 */
-	static function main() {
-		$suite = new PHPUnit_Framework_TestSuite('JDate SetDate');
-		$kludge = __CLASS__;
-		$test  = new $kludge;
-		$suite -> addTest($test);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-	public function run(PHPUnit_Framework_TestResult $result = null) {
-		if ($result === null) {
-			$result = new PHPUnit_Framework_TestResult;
-		}
-		foreach (JDateTest_DataSet::$tests as $dataSet) {
+			/*
+			 * Make an entry to each type in the results.
+			 */
 			if (is_null($dataSet['utc'])) {
-				/*
-				 * If a null result is expected, just verify that the Unix timestamp
-				 * is null. Verifying that null is returned by the other formats
-				 * should be another test that runs once.
-				 */
-				$result -> startTest($this);
-				PHPUnit_Util_Timer::start();
-				try {
-					$jd = new JDate(
-						$dataSet['src'],
-						isset($dataSet['srcOffset']) ? $dataSet['srcOffset'] : 0
-					);
-					PHPUnit_Framework_Assert::assertTrue(
-						is_null($jd -> toUnix()),
-						JDateTest_DataSet::message($jd, 'utc', 'ts', $dataSet, $jd -> toUnix())
-					);
-				}
-				catch (PHPUnit_Framework_AssertionFailedError $e) {
-					$result -> addFailure($this, $e, PHPUnit_Util_Timer::stop());
-				}
-				catch (Exception $e) {
-					$result -> addError($this, $e, PHPUnit_Util_Timer::stop());
-				}
-				$result -> endTest($this, PHPUnit_Util_Timer::stop());
-			} else {
-				/*
-				 * Check each type in the results.
-				 */
-				foreach ($dataSet['utc'] as $type => $expect) {
-					$result = $this -> subTest($result, $dataSet, false, $type);
-				}
-				if (isset($dataSet['local'])) {
-					foreach ($dataSet['local'] as $type => $expect) {
-						$result = $this -> subTest($result, $dataSet, true, $type);
-					}
+				$cases[] = array($dataSet, false, 'utc');
+				continue;
+			}
+			foreach ($dataSet['utc'] as $type => $expect) {
+				$cases[] = array($dataSet, false, $type);
+			}
+			if (isset($dataSet['local'])) {
+				foreach ($dataSet['local'] as $type => $expect) {
+					$cases[] = array($dataSet, true, $type);
 				}
 			}
 		}
-		return $result;
+		return $cases;
 	}
 
-	function subTest($result, $dataSet, $local, $type) {
+	/**
+	 * Runs the test methods of this class.
+	 */
+	static function main() {
+		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+		$result = PHPUnit_TextUI_TestRunner::run($suite);
+	}
+
+	/**
+	 * @dataProvider linearizeDataSet
+	 */
+	function testSetDate($dataSet, $local, $type) {
+		$jd = new JDate(
+			$dataSet['src'],
+			isset($dataSet['srcOffset']) ? $dataSet['srcOffset'] : 0
+		);
+		if (is_null($dataSet['utc'])) {
+			/*
+			 * If a null result is expected, just verify that the Unix timestamp
+			 * is null. Verifying that null is returned by the other formats
+			 * should be another test that runs once.
+			 */
+			$this -> assertTrue(
+				is_null($jd -> toUnix()),
+				JDateTest_DataSet::message($jd, 'utc', 'ts', $dataSet, $jd -> toUnix())
+			);
+			return;
+		}
 		if ($local) {
 			$subset = 'local';
 			$offset = $dataSet['localOffset'];
@@ -106,60 +89,45 @@ class JDateTest_SetDate implements PHPUnit_Framework_Test
 			$subset = 'utc';
 			$offset = 0;
 		}
-		$result -> startTest($this);
-		PHPUnit_Util_Timer::start();
-		try {
-			$expect = $dataSet[$subset][$type];
-			$jd = new JDate(
-				$dataSet['src'],
-				isset($dataSet['srcOffset']) ? $dataSet['srcOffset'] : 0
-			);
-			switch ($type) {
-				case 'ts': {
-					$actual = $jd -> toUnix($offset);
-				}
-				break;
-
-				case 'Format': {
-					$actual = $jd -> toFormat('', $offset);
-				}
-				break;
-
-				case 'ISO8601': {
-					$actual = $jd -> toISO8601($offset);
-				}
-				break;
-
-				case 'MySql': {
-					$actual = $jd -> toMySql($offset);
-				}
-				break;
-
-				case 'RFC822': {
-					$actual = $jd -> toRFC822($offset);
-				}
-				break;
+		$expect = $dataSet[$subset][$type];
+		switch ($type) {
+			case 'ts': {
+				$actual = $jd -> toUnix($offset);
 			}
-			PHPUnit_Framework_Assert::assertEquals(
-				$expect,
-				$actual,
-				JDateTest_DataSet::message($jd, $subset, $type, $dataSet, $actual)
-			);
+			break;
+
+			case 'Format': {
+				$actual = $jd -> toFormat('', $offset);
+			}
+			break;
+
+			case 'ISO8601': {
+				$actual = $jd -> toISO8601($offset);
+			}
+			break;
+
+			case 'MySql': {
+				$actual = $jd -> toMySql($offset);
+			}
+			break;
+
+			case 'RFC822': {
+				$actual = $jd -> toRFC822($offset);
+			}
+			break;
 		}
-		catch (PHPUnit_Framework_AssertionFailedError $e) {
-			$result -> addFailure($this, $e, PHPUnit_Util_Timer::stop());
-		}
-		catch (Exception $e) {
-			$result -> addError($this, $e, PHPUnit_Util_Timer::stop());
-		}
-		$result -> endTest($this, PHPUnit_Util_Timer::stop());
-		return $result;
+		$this -> assertEquals(
+			$expect,
+			$actual,
+			JDateTest_DataSet::message($jd, $subset, $type, $dataSet, $actual)
+		);
 	}
+
 
 }
 
 // Call JDateTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JDateTest::main') {
+if (JUNIT_MAIN_METHOD == 'JDateTest_SetDate::main') {
 	JDateTest_SetDate::main();
 }
 
