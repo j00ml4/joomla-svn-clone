@@ -4,15 +4,16 @@
 Present a text area
 
 ===== Syntax =====
-void display	( **$name**, **$html**, **$width**, **$height**, **$col**, **$row**, **$buttons** )
+void display	( **$name**, **$html**, **$width**, **$height**, **$col**, **$row**, **$buttons**, **$params** )
 
-| **$name** |  |  |
-| **$html** |  |  |
-| **$width** |  |  |
-| **$height** |  |  |
-| **$col** |  |  |
-| **$row** |  |  |
-| **$buttons** |  |  |
+| **$name** | string | The control name |
+| **$html** | string | The contents of the text area |
+| **$width** | string | The width of the text area (px or %) |
+| **$height** | string | The height of the text area (px or %) |
+| **$col** | int | The number of columns for the textarea |
+| **$row** | int | The number of rows for the textarea |
+| **$buttons** | bool | True and the editor buttons will be displayed |
+| **$params** | array | Associative array of editor parameters |
 
 ===== Examples =====
 <code php|Example>
