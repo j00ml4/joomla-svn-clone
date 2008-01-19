@@ -1,4 +1,4 @@
-====== JError [Review] ======
+====== JError ======
 {#JAPI Joomla.Framework Error JError #}
 
 Error Handling Class. This class extends the patErrorManager class and is an interface to the patError class.

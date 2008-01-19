@@ -1,4 +1,4 @@
-====== JFTP [Review] ======
+====== JFTP ======
 {#JAPI Joomla.Framework Client JFTP #}
 
 This is an FTP client class. It is used, among other things, to enable proper operation in safe mode.

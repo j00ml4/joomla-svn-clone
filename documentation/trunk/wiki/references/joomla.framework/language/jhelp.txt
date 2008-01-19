@@ -1,4 +1,4 @@
-====== JHelp [Review] ======
+====== JHelp ======
 {#JAPI Joomla.Framework I18N JHelp #}
 
 This is a static help system class which provides utility functions 

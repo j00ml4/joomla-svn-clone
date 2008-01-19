@@ -1,4 +1,4 @@
-====== JObservable [Review] ======
+====== JObservable ======
 {#JAPI Joomla.Framework Base JObservable #}
 
 This is an abstract observable class to implement the [[http://en.wikipedia.org/wiki/Observer_design_pattern|Observer design pattern]]. It is extended by [[references:joomla.framework:application:JDispatcher|JDispatcher]] which is instantiated by [[references:joomla.framework:application:japplication|JApplication]].  JObservable is a subclass of [[references:joomla.framework:object|JObject]]. 

@@ -1,4 +1,4 @@
-====== JDocument [Review] ======
+====== JDocument ======
 {#JAPI Joomla.Framework Document JDocument #}
 
 This is the Document class. It provides an easy interface to parse and display a document. This class is instantiated through the getInstance method. The getInstance method returns an object of the appropriate child class depending on the document type. This is a child class of the JTemplate class.

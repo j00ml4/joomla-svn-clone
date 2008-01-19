@@ -1,4 +1,4 @@
-====== JObserver [Review] ======
+====== JObserver ======
 {#JAPI Joomla.Framework Base JObserver #}
 
 This is an abstract observer class to implement the observer design pattern. This allows objects to observe other objects and trigger events based on the actions of other objects. An example of a subclass of JObserver is the [[references:joomla.framework:application:jplugin|JPlugin]] class.

@@ -1,4 +1,4 @@
-====== JSession [Review] ======
+====== JSession ======
 {#JAPI Joomla.Framework Session JSession #}
 
 Class for managing HTTP sessions.

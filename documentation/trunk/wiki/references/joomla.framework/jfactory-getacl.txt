@@ -1,6 +1,5 @@
 ====== getACL ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | [[JFactory|JFactory]] | [[http://api.joomla.org/Joomla-Framework//JFactory.html|JFactory->getACL]] |
+{#JAPI Joomla.Framework Joomla JFactory::getACL #}
 
 This method returns a reference to the global [[references:joomla.framework:application:jauthorization|JAuthorization]] object, only creating it if it doesn't already exist.
 ===== Syntax =====

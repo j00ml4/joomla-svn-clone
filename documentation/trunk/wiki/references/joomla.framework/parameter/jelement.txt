@@ -1,4 +1,4 @@
-====== JElement [Review] ======
+====== JElement ======
 {#JAPI Joomla.Framework Parameter JElement #}
 
 The JElement class is an abstract parameter class. The child classes are used to render the parameter elements appropriately.  The child classes are instantiated by the JParameter::loadElement() method. This class also provides an interface which third party extensions (primarily components) can implement to allow items from custom extensions to be used as parameters.

@@ -1,4 +1,4 @@
-====== JPlugin [Review] ======
+====== JPlugin ======
 {#JAPI Joomla.Framework Plugin JPlugin #}
 
 JPlugin Class

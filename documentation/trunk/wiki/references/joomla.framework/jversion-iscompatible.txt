@@ -1,6 +1,6 @@
 ====== isCompatible ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:Class.png?nolink}}[[JVersion|JVersion]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion::isCompatible]] | never | Work in progress |
+{#JAPI Joomla.Framework Joomla JVersion::isCompatible #}
+
 Compares a "PHP standardized" version number against the current Joomla! version. This is useful if you would like to write extensions working only on some specific version of Joomla! 
 
 This method can be called statically.
