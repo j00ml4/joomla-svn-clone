@@ -1,4 +1,4 @@
-====== JPluginHelper [Review] ======
+====== JPluginHelper ======
 {#JAPI Joomla.Framework Plugin JPluginHelper #}
 
 Plugin helper class

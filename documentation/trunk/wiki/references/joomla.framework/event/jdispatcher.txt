@@ -1,4 +1,4 @@
-====== JDispatcher [Review] ======
+====== JDispatcher ======
 {#JAPI Joomla.Framework Event JDispatcher #}
 
 Class to handle dispatching [[JDispatcher/#Events|events]].

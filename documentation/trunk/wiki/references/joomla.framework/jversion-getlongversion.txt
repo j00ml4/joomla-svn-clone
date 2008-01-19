@@ -1,6 +1,5 @@
 ====== getLongVersion ======
-^ API ^ Package ^ Class ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:Class.png?nolink}}[[JVersion|JVersion]] | [[http://api.joomla.org/Joomla-Framework/JVersion.html|JVersion->getLongVersion]] | never | Work in progress |
+{#JAPI Joomla.Framework Joomla JVersion::getLongVersion #}
 
 ===== Syntax =====
 string getLongVersion()

@@ -1,6 +1,5 @@
-====== JUser [Review] ======
-^ API ^ Package ^ phpDocumentor ^ Last reviewed ^ Doc status ^
-| {{references:package.png?nolink}} [[references:joomla.framework|Joomla.Framework]] | {{references:package.png?nolink}} [[references:joomla.framework/#User|User]] | [[http://api.joomla.org/Joomla.Framework/Application/JUser.html|JUser]] |
+====== JUser ======
+{#JAPI Joomla.Framework User JUser #}
 
 User class.  Handles all application interaction with a user
 ===== Methods =====

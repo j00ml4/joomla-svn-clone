@@ -1,4 +1,4 @@
-====== JDocumentHelper [Review] ======
+====== JDocumentHelper ======
 {#JAPI Joomla.Framework Document JDocumentHelper #}
 
 A static JDocumentHelper class containing document helper functions.

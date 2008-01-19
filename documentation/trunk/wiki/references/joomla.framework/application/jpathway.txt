@@ -1,4 +1,4 @@
-====== JPathWay [Review] ======
+====== JPathWay ======
 {#JAPI Joomla.Framework Application JPathWay #}
 
 Class to maintain a pathway. Main example of use so far is the mod_breadcrumbs module that keeps track of the user's navigated path within the Joomla! application. A pathway object is created in the index.php file and a reference to it is stored in the $mainframe object. A reference to the PathWay object for the page can be retrieved by calling $mainframe->getPathWay( ).
