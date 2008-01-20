@@ -8,7 +8,6 @@ This abstract class for caching handlers is an implementation of the [[http://pe
 | {{references:Constructor.png?nolink}} [[JCache-__construct|__construct]] | This is the class constructor. The constructor sets up the default group to use for function caching and builds the cache directory. |
 | {{references:Method.png?nolink}} [[JCache-cleanCache|cleanCache]] | Cleans the cache. |
 | {{references:Method.png?nolink}} [[JCache-generateId|generateId]] | Make a control key with the string containing data. |
-| {{references:Method.png?nolink}} [[JCache-getCache|getCache]] | This method is deprecated, use [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] instead. This method calls the [[references:joomla.framework:jfactory-getCache|JFactory::getCache]] method. |
 | {{references:Method.png?nolink}} [[JCache-getInstance|getInstance]] | Returns a reference to the global cache object, only creating it  if it doesn't already exist. |
 | {{references:Method.png?nolink}} [[JCache-setCacheValidation|setCacheValidation]] | Enable/disable cache validation. |
 | {{references:Method.png?nolink}} [[JCache-setCaching|setCaching]] | Enables and disables caching. |

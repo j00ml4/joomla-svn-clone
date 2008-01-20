@@ -1,9 +1,10 @@
 ====== getPath ======
 {#JAPI Joomla.Framework Application JApplication::getPath #}
 
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JApplicationHelper-getPath|JApplicationHelper::getPath]] instead.
+
 Retrieves the path to the specified file. 
-**This method is deprecated in Joomla! 1.5 (JApplicationHelper::getPath should be used instead).** 
-See the [[JApplicationHelper-getPath|JApplicationHelper::getPath]] for a detailed description of this method.
 
 ===== Syntax =====
 void getPath ( **$varname**, **$user_option** )

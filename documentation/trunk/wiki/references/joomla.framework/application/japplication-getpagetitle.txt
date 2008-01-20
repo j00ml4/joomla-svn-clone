@@ -1,7 +1,8 @@
 ====== getPageTitle ======
 {#JAPI Joomla.Framework Application JApplication::getPageTitle #}
 
-Deprecated, use JDocument::getTitle instead.
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JDocument-getTitle|JDocument::getTitle ]] instead.
 
 ===== Syntax =====
 void getPageTitle ()
