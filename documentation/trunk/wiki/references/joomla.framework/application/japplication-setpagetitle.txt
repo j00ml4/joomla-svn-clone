@@ -1,7 +1,8 @@
 ====== setPageTitle ======
 {#JAPI Joomla.Framework Application JApplication::setPageTitle #}
 
-Deprecated, use JDocument::setTitle instead.
+**The method is deprecated** and provided for backwards compatibility with Joomla! 1.0. It is scheduled to be removed in future versions.
+Use [[JDocument-setTitle|JDocument::setTitle]] instead.
 
 ===== Syntax =====
 void setPageTitle	( **$title** )
