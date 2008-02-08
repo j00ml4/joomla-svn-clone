@@ -71,7 +71,7 @@ An array of [[references:joomla.framework:user:jauthenticateresponse|JAuthentica
 ==5.3.4.5 Examples==
   *plugins/authentication/example.php
 
-===5.3.5 onAuthenticateFailure===
+===5.3.5 onLoginFailure===
 ==5.3.5.1 Description==
 This event is triggered whenever a user authentication request is failed by any plugin.
 ==5.3.5.2 Parameters==
