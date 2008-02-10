@@ -9,7 +9,7 @@
 
 // Call JFrameworkConfigTest::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JLoaderTest::main');
+	define('JUNIT_MAIN_METHOD', 'JFrameworkConfigTest::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -25,7 +25,7 @@ if (! defined('JUNIT_MAIN_METHOD')) {
 }
 
 /* class to test */
-require_once 'libraries/joomla/config.php';
+require_once JPATH_LIBRARIES . DS . 'joomla' . DS . 'config.php';
 
 /**
  * Test class for JFrameworkConfig.
@@ -33,7 +33,7 @@ require_once 'libraries/joomla/config.php';
  */
 class JFrameworkConfigTest extends PHPUnit_Framework_TestCase {
 
-	var $instance;
+	var $fixture;
 	var $proto = array(
 		'dbtype'=>'mysql',
 		'host'=>'localhost',
@@ -76,33 +76,31 @@ class JFrameworkConfigTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function setUp() {
-		$this->instance = new JFrameworkConfig();
+		$this->fixture = new JFrameworkConfig();
 	}
 
 	function tearDown() {
-		$this->instance = null;
-		unset($this->instance);
+		$this->fixture = null;
+		unset($this->fixture);
 	}
 
 	function test_inheritance() {
 		// it should not inherit from anything
-		$parent = get_parent_class($this->instance);
-		$this->assertIsA($this->instance, 'JFrameworkConfig');
-
-		$this->assertFalse(is_subclass_of($this->instance, 'JObject'));
+		$this->assertTrue($this->fixture instanceof JFrameworkConfig);
+		$this->assertFalse(get_parent_class($this->fixture));
 	}
 
 	function test_property_names() {
-		$compare = (array) $this->instance;
+		$compare = (array) $this->fixture;
 		foreach (array_keys($this->proto) as $expect) {
 			$this->assertTrue(array_key_exists($expect, $compare), $expect . ' not found.');
 		}
 	}
 
 	function test_property_defaults() {
-		$compare = (array) $this->instance;
+		$compare = (array) $this->fixture;
 		foreach ($this->proto as $prop => $expect) {
-			$this->assertEquals($expect, $compare[$prop], $prop.' %s');
+			$this->assertEquals($expect, $compare[$prop]);
 		}
 	}
 

@@ -10,7 +10,7 @@
 
 // Call JLoaderTest::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JLoaderTest::main');
+	define('JUNIT_MAIN_METHOD', 'JLoaderTest_Class::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -25,7 +25,7 @@ if (! defined('JUNIT_MAIN_METHOD')) {
 	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
 
-class JLoaderTest extends PHPUnit_Framework_TestCase
+class JLoaderTest_Class extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test methods of this class.
@@ -39,34 +39,36 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
 	function test_import()
 	{
 		$r = JLoader::import('joomla.factory');
-		$this->assertEquals($r, true, '%s');
+		$this -> assertTrue($r);
 	}
 
-	/** function import($filePath, $base = null, $key = null) */
+	/** function import($filePath, $base = test dir, $key = null) */
 	function test_import_base()
 	{
-		$r = JLoader::import('_files.loader', dirname(__FILE__));
-		if ($this->assertEquals($r, 1, '%s')) {
-			$this->assertTrue(defined('JLOADER_TEST_IMPORT_BASE'), '%s');
+		$testLib = 'joomla._testdata.loader-data';
+		$this -> assertFalse(defined('JUNIT_DATA_JLOADER'), 'Test set up failure.');
+		$r = JLoader::import($testLib, dirname(__FILE__));
+		if ($this -> assertTrue($r)) {
+			$this -> assertTrue(defined('JUNIT_DATA_JLOADER'));
 		}
 
 		// retry
-		$r = JLoader::import('_files.loader', dirname(__FILE__));
-		$this->assertEquals($r, 1, '%s');
+		$r = JLoader::import($testLib, dirname(__FILE__));
+		$this->assertTrue($r);
 	}
 
 	/** function import($filePath, $base = null, $key = null) */
 	function test_import_key()
 	{
 		// Remove the following line when you implement this test.
-		return $this->_reporter->setMissingTestCase();
+		return $this -> markTestSkipped();
 	}
 
 	/** function &factory($class, $options=null) */
 	function test_factory()
 	{
 		// Remove the following line when you implement this test.
-		return $this->_reporter->setMissingTestCase();
+		return $this -> markTestSkipped();
 	}
 
 }

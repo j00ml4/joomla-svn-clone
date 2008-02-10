@@ -767,7 +767,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase
 			$buffer .= chr($i);
 		}
 		$buffer .= $buffer;
-		$sendFile = dirname(__FILE__).DS.'_files'.DS.'testfile.bin';
+		$sendFile = dirname(__FILE__).DS.'_testdata'.DS.'testfile.bin';
 		$bufferTest = file_get_contents($sendFile);
 		if ($buffer !== $bufferTest) {
 			$this->fail('The file '.$sendFile.' does not contain the expected content.'
