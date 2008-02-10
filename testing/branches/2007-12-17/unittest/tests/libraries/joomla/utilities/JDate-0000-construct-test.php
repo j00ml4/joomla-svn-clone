@@ -10,7 +10,7 @@
 
 // Call JDateTest::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JDateTest::main');
+	define('JUNIT_MAIN_METHOD', 'JDateTest_Construct::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
