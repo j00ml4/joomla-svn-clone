@@ -148,13 +148,3 @@ if (is_writable(junit_path($JUnit_config -> logDir))) {
 	ini_set('error_log' , junit_path($JUnit_config -> logDir, 'php_errors.log'));
 }
 JUnit_Setup::setProperty('JUnit_Setup', 'setup', $JUnit_setup);
-
-/*
- * Now load the Joomla environment
- */
-define('_JEXEC', 1);
-require_once JPATH_BASE . '/includes/defines.php';
-/*
- * We now return to our regularly scheduled environment.
- */
-require_once JPATH_LIBRARIES . '/joomla/import.php';
