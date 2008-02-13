@@ -15,6 +15,22 @@ if (!defined('JUNIT_MAIN_METHOD')) {
 	require_once $JUnit_root . '/unittest/setup.php';
 }
 
+/*
+ * Now load the Joomla environment
+ */
+if (! defined('_JEXEC')) {
+	define('_JEXEC', 1);
+}
+require_once JPATH_BASE . '/includes/defines.php';
+/*
+ * Mock classes
+ */
+// Include mocks here
+/*
+ * We now return to our regularly scheduled environment.
+ */
+require_once JPATH_LIBRARIES . '/joomla/import.php';
+
 require_once 'libraries/joomla/utilities/array.php';
 
 class TestOfJArrayHelper extends UnitTestCase {

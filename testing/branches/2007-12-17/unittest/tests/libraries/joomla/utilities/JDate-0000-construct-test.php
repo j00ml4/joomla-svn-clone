@@ -25,6 +25,22 @@ if (! defined('JUNIT_MAIN_METHOD')) {
 	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
 
+/*
+ * Now load the Joomla environment
+ */
+if (! defined('_JEXEC')) {
+	define('_JEXEC', 1);
+}
+require_once JPATH_BASE . '/includes/defines.php';
+/*
+ * Mock classes
+ */
+// Include mocks here
+/*
+ * We now return to our regularly scheduled environment.
+ */
+require_once JPATH_LIBRARIES . '/joomla/import.php';
+
 jimport('joomla.utilities.date');
 
 class JDateTest_Construct extends PHPUnit_Framework_TestCase
@@ -37,7 +53,18 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
+	function setUp() {
+		if (version_compare('1.6.0', JVERSION) > 0) {
+			$this -> markTestSkipped('These tests are designed for J1.6+');
+			return;
+		}
+	}
+
 	function testConstruct() {
+		if (version_compare('1.6.0', JVERSION) > 0) {
+			$this -> markTestSkipped('These tests are designed for J1.6+');
+			return;
+		}
 		/*
 		 * Allow one tick in difference just in case the second rolls over mid-
 		 * test.

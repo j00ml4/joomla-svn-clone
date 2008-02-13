@@ -2,7 +2,7 @@
 /**
  * @package Joomla
  * @subpackage UnitTest
- * @copyright    Copyright (C) 2005 - 2007 Open Source Matters, Inc.
+ * @copyright    Copyright (C) 2005 - 2008 Open Source Matters, Inc.
  * @license        GNU/GPL, see LICENSE.php
  * @version $Id: loader.php 9743 2007-12-24 04:18:48Z instance $
  *
@@ -18,6 +18,41 @@
  */
 class JLoader
 {
+	static protected $_paths = array();
+
+	function injectMock($mockPath, $filePath, $base = null, $key = 'libraries.' ) {
+		$keyPath = $key ? $key . $filePath : $filePath;
+		if ( ! $base ) {
+			$base =  JPATH_LIBRARIES;
+		}
+
+		$parts = explode( '.', $filePath );
+
+		$classname = array_pop( $parts );
+		switch($classname)
+		{
+			case 'helper' :
+				$classname = ucfirst(array_pop( $parts )).ucfirst($classname);
+				break;
+
+			default :
+				$classname = ucfirst($classname);
+				break;
+		}
+
+		if (strpos($filePath, 'joomla') === 0)
+		{
+			/*
+			 * If we are loading a joomla class prepend the classname with a
+			 * capital J.
+			 */
+			$classname  = 'J'.$classname;
+			$classes    = JLoader::register($classname, $mockPath);
+			$rs         = isset($classes[strtolower($classname)]);
+			JLoader::$_paths[$keyPath] = $rs;
+		}
+	}
+
 	 /**
 	 * Loads a class from specified directories.
 	 *
@@ -29,15 +64,9 @@ class JLoader
 	 */
 	function import( $filePath, $base = null, $key = 'libraries.' )
 	{
-		static $paths;
-
-		if (!isset($paths)) {
-			$paths = array();
-		}
-
 		$keyPath = $key ? $key . $filePath : $filePath;
 
-		if (!isset($paths[$keyPath]))
+		if (! isset(JLoader::$_paths[$keyPath]))
 		{
 			if ( ! $base ) {
 				$base =  JPATH_LIBRARIES;
@@ -78,10 +107,10 @@ class JLoader
 				$rs   = include($base.DS.$path.'.php');
 			}
 
-			$paths[$keyPath] = $rs;
+			JLoader::$_paths[$keyPath] = $rs;
 		}
 
-		return $paths[$keyPath];
+		return JLoader::$_paths[$keyPath];
 	}
 
 	/**
@@ -97,7 +126,7 @@ class JLoader
 		static $classes;
 
 		if(!isset($classes)) {
-			$classes    = array();
+			$classes = array();
 		}
 
 		if($class && is_file($file))
@@ -175,44 +204,22 @@ function __autoload($class)
 	return JLoader::load($class);
 }
 
+/**
+ * Global exit
+ */
+function jexit($message = 0) {
+	//exit($message);
+	throw new Exception('Application called jexit with message"' . $message . '"');
+}
 
 /**
- * Unit test intelligent file importer.
+ * Intelligent file importer
  *
- * This function intercepts the one defined in the framework to allow for the
- * injection of mock classes. There is a two-phase "boot" process. This function
- * is defined before the JLoader class is defined, which overrides the
- * __autoload() function in the Joomla framework. The initial callback is empty.
- * Once JLoader has been defined, the test facility changes the callback
- * function to {@see junit_mockimport()} by passing the new callback as an array
- * element.
- *
- * @param string|array When passed as a string, a dot syntax path. When passed
- * as an array, the first element of the array is the callback function to use.
+ * @access public
+ * @param string $path A dot syntax path
+ * @since 1.5
  */
 function jimport($path)
 {
-	static $jimporter;
-
-	if (is_array($path)) {
-		$jimporter = reset($path);
-		return;
-	}
-	if ($jimporter) {
-		return call_user_func($jimporter, $path);
-	}
 	return JLoader::import($path);
 }
-
-/**
- * Unit test autoloader.
- *
- * This function intercepts the one defined in the framework to allow for the
- * injection of mock classes.
- *
- * @param string The class name to load
- */
-function junit_autoload($class)
-{
-}
-

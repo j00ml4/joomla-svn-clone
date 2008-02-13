@@ -2,7 +2,7 @@
 
 // $Id$
 
-// Call JVersionTest::main() if this source file is executed directly.
+// Call main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'JVersionTest::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
@@ -18,6 +18,22 @@ if (!defined('JUNIT_MAIN_METHOD')) {
 	);
 	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
+
+/*
+ * Now load the Joomla environment
+ */
+if (! defined('_JEXEC')) {
+	define('_JEXEC', 1);
+}
+require_once JPATH_BASE . '/includes/defines.php';
+/*
+ * Mock classes
+ */
+// Include mocks here
+/*
+ * We now return to our regularly scheduled environment.
+ */
+require_once JPATH_LIBRARIES . '/joomla/import.php';
 
 require_once JPATH_LIBRARIES . '/joomla/version.php';
 

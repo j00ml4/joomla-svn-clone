@@ -8,7 +8,6 @@
  * @author Alan Langford <instance1@gmail.com>
  */
 
-// Call JDateTest::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
 	define('JUNIT_MAIN_METHOD', 'JDateTest_SetDate::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
@@ -25,6 +24,22 @@ if (! defined('JUNIT_MAIN_METHOD')) {
 	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
 }
 
+/*
+ * Now load the Joomla environment
+ */
+if (! defined('_JEXEC')) {
+	define('_JEXEC', 1);
+}
+require_once JPATH_BASE . '/includes/defines.php';
+/*
+ * Mock classes
+ */
+// Include mocks here
+/*
+ * We now return to our regularly scheduled environment.
+ */
+require_once JPATH_LIBRARIES . '/joomla/import.php';
+
 jimport('joomla.utilities.utility');
 jimport('joomla.utilities.date');
 
@@ -35,6 +50,19 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 	static public function linearizeDataSet() {
 		$cases = array();
 		foreach (JDateTest_DataSet::$tests as $dataSet) {
+			/*
+			 * Check versions
+			 */
+			if (isset($dataSet['since'])
+				&& version_compare($dataSet['since'], JVERSION) < 0
+			) {
+				continue;
+			}
+			if (isset($dataSet['deprecated'])
+				&& version_compare($dataSet['deprecated'], JVERSION) >= 0
+			) {
+				continue;
+			}
 			/*
 			 * Make an entry to each type in the results.
 			 */
@@ -60,6 +88,13 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 	static function main() {
 		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
+	}
+
+	function setUp() {
+		if (version_compare('1.6.0', JVERSION) > 0) {
+			$this -> markTestSkipped('These tests are designed for J1.6+');
+			return;
+		}
 	}
 
 	/**
