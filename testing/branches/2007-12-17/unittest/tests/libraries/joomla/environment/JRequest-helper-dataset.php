@@ -1,12 +1,12 @@
 <?php
 /**
- * Title_here
+ * Joomla! v1.5 Unit Test Facility
  *
- * full_description_here
- *
- * @package package_name
+ * @package Joomla
+ * @subpackage UnitTest
+ * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
  * @version $Id: $
- * @author Alan Langford <addr>
+ *
  */
 
 class JRequestTest_DataSet {
@@ -141,7 +141,7 @@ class JRequestTest_DataSet {
 			'REQUEST_METHOD' => 'POST',
 		);
 		/**
-		 * Not sure what merge order PHP uses, so this may be a problem.
+		 * Merge get and post into request.
 		 */
 		$_REQUEST = array_merge($_GET, $_POST);
 		$_REQUEST['tag'] = 'from _REQUEST';

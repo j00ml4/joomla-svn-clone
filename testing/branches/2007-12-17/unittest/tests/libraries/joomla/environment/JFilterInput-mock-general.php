@@ -1,12 +1,12 @@
 <?php
 /**
- * Title_here
+ * Joomla! v1.5 Unit Test Facility
  *
- * full_description_here
- *
- * @package package_name
+ * @package Joomla
+ * @subpackage UnitTest
+ * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
  * @version $Id: $
- * @author Alan Langford <addr>
+ *
  */
 
 /**

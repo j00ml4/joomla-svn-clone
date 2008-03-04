@@ -8,8 +8,8 @@
  *
  * @package Joomla
  * @subpackage UnitTest
+ * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
  * @version $Id: $
- * @author Alan Langford <addr>
  */
 
 if (! defined('DS')) {
@@ -23,11 +23,15 @@ if (! isset($JUnit_root)) {
 	}
 	$JUnit_posn += strlen($JUnit_home) - 1;
 	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
+	$keep = strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2;
 	$JUnit_start = substr(
 		__FILE__,
 		$JUnit_posn + 1,
-		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
+		$keep > 0 ? $keep : 0
 	) . DS . 'tests';
+	echo 'file=', __FILE__, PHP_EOL,
+		'posn=', $JUnit_posn, PHP_EOL,
+		'base=', basename(__FILE__), PHP_EOL;
 }
 
 require_once $JUnit_root . DS . 'setup.php';

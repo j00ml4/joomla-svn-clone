@@ -1,13 +1,16 @@
 <?php
 /**
+ * Joomla! v1.5 Unit Test Facility
+ *
  * Temporary place for jutdump until we figure out if/where it belongs
  *
- * full_description_here
- *
- * @package package_name
+ * @package Joomla
+ * @subpackage UnitTest
+ * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
  * @version $Id: $
- * @author Alan Langford <addr>
+ *
  */
+
 
 /**
  * Simple variable dumper.

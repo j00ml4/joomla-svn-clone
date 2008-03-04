@@ -43,6 +43,8 @@ require_once JPATH_LIBRARIES . '/joomla/import.php';
 
 jimport('joomla.utilities.date');
 
+require_once 'JDate-helper-dataset.php';
+
 class JDateTest_Construct extends PHPUnit_Framework_TestCase
 {
 	/**
@@ -54,14 +56,18 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 	}
 
 	function setUp() {
-		if (version_compare('1.6.0', JVERSION) > 0) {
+		if (JDateTest_DataSet::$useVersionCheck
+			&& version_compare('1.6.0', JVERSION) > 0
+		) {
 			$this -> markTestSkipped('These tests are designed for J1.6+');
 			return;
 		}
 	}
 
 	function testConstruct() {
-		if (version_compare('1.6.0', JVERSION) > 0) {
+		if (JDateTest_DataSet::$useVersionCheck
+			&& version_compare('1.6.0', JVERSION) > 0
+		) {
 			$this -> markTestSkipped('These tests are designed for J1.6+');
 			return;
 		}
