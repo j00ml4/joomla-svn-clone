@@ -17,19 +17,19 @@ class JDateTest_DataSet
 	 */
 	static public $tests = array(
 		array(
-			// Handle invalid data
+			'desc' => 'Invalid data',
 			'src' => 'garbage',
 			'utc' => null,
 			'local' => null,
 		),
 		array(
-			// Handle some subtly invalid data
+			'desc' => 'Invalid data -- bad month',
 			'src' => 'Mon, 15 Zok 2007 00:00:00 -0100',
 			'utc' => null,
 			'local' => null,
 		),
 		array(
-			// Unix epoch, negative offset
+			'desc' => 'Unix epoch with negative offset',
 			'src' => 'Mon, 01 Jan 1970 00:00:00 -0000',
 			'localOffset' => -2,
 			'utc' => array(
@@ -48,7 +48,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
-			// Unix epoch (lowercase), positive offset
+			'desc' => 'Unix epoch, lowercase with positive offset',
 			'src' => 'mon, 01 jan 1970 00:00:00 -0000',
 			'localOffset' => 2,
 			'utc' => array(
@@ -67,7 +67,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
-			// Unix epoch (uppercase), fractional negative offset
+			'desc' => 'Unix epoch, uppercase with fractional negative offset',
 			'src' => 'MON, 01 JAN 1970 00:00:00 -0000',
 			'localOffset' => -0.5,
 			'utc' => array(
@@ -87,6 +87,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// February, fractional positive offset
+			'desc' => 'February, fractional positive offset',
 			'src' => 'Foo, 27 feb 1971 00:00:00 -0000',
 			'localOffset' => 0.5,
 			'utc' => array(
@@ -109,6 +110,7 @@ class JDateTest_DataSet
 		 * first. When sign is relevant, that is iterated as well.
 		 */
 		array(
+			'desc' => 'RFC822 1am',
 			'src' => 'Foo, 27 Mar 1972 01:00:00 -0000',
 			'utc' => array(
 				'ts' => 70506000,
@@ -119,6 +121,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 12:01am',
 			'src' => 'Foo, 27 Apr 1973 00:01:00 -0000',
 			'utc' => array(
 				'ts' => 104716860,
@@ -129,6 +132,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 12:00:01am',
 			'src' => 'Foo, 27 May 1974 00:00:01 -0000',
 			'utc' => array(
 				'ts' => 138844801,
@@ -139,6 +143,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight +10:00',
 			'src' => 'Foo, 27 Jun 1975 00:00:00 +1000',
 			'utc' => array(
 				'ts' => 173023200,
@@ -149,6 +154,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight -10:00',
 			'src' => 'Foo, 27 Jun 1975 00:00:00 -1000',
 			'utc' => array(
 				'ts' => 173095200,
@@ -159,6 +165,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight -1:00',
 			'src' => 'Foo, 27 Jul 1976 00:00:00 -0100',
 			'utc' => array(
 				'ts' => 207277200,
@@ -169,6 +176,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight +00:10',
 			'src' => 'Foo, 27 Aug 1977 00:00:00 +0010',
 			'utc' => array(
 				'ts' => 241487400,
@@ -179,6 +187,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight -00:10',
 			'src' => 'Foo, 27 Aug 1977 00:00:00 -0010',
 			'utc' => array(
 				'ts' => 241488600,
@@ -189,6 +198,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'RFC822 midnight -00:01',
 			'src' => 'Foo, 27 Sep 1978 00:00:00 -0001',
 			'utc' => array(
 				'ts' => 275702460,
@@ -200,6 +210,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// See how we handle out of range values
+			'desc' => 'RFC822 range check +35:00',
 			'src' => 'Foo, 35 Oct 1971 00:71:99 +3500',
 			'utc' => array(
 				'ts' => 57939159,
@@ -213,6 +224,7 @@ class JDateTest_DataSet
 		 * ISO tests
 		 */
 		array(
+			'desc' => 'ISO8601 Unix epoch, local offset -2',
 			'src' => '1970-01-01T00:00:00-0000',
 			'localOffset' => -2,
 			'utc' => array(
@@ -231,6 +243,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, local offset +2',
 			'src' => '1971-02-27T00:00:00+0000',
 			'localOffset' => 2,
 			'utc' => array(
@@ -249,6 +262,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, local offset -0.5',
 			'src' => '1972-03-27T01:00:00+0000',
 			'localOffset' => -0.5,
 			'utc' => array(
@@ -267,6 +281,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, local offset +0.5',
 			'src' => '1975-06-27T00:00:00+1000',
 			'localOffset' => 0.5,
 			'utc' => array(
@@ -285,6 +300,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset -10:00',
 			'src' => '1975-06-27T00:00:00-1000',
 			'utc' => array(
 				'ts' => 173095200,
@@ -295,6 +311,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset -01:00',
 			'src' => '1976-07-27T00:00:00-0100',
 			'utc' => array(
 				'ts' => 207277200,
@@ -305,6 +322,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset -00:10',
 			'src' => '1977-08-27T00:00:00-0010',
 			'utc' => array(
 				'ts' => 241488600,
@@ -315,6 +333,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset -00:01',
 			'src' => '1978-09-27T00:00:00-0001',
 			'utc' => array(
 				'ts' => 275702460,
@@ -325,6 +344,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset +35:00',
 			'src' => '1971-10-35T00:71:99+3500',
 			'utc' => array(
 				'ts' => 57939159,
@@ -335,6 +355,7 @@ class JDateTest_DataSet
 			),
 		),
 		array(
+			'desc' => 'ISO8601, internal offset +00:10',
 			'src' => '1977-08-27T00:00:00+0010',
 			'utc' => array(
 				'ts' => 241487400,
@@ -346,6 +367,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// RFC-like dates with separate offsets
+			'desc' => 'RFC822, source -2, local -2',
 			'src' => '01 Jan 1970 00:00:00',
 			'srcOffset' => -2,
 			'localOffset' => -2,
@@ -366,6 +388,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// RFC-like dates with separate offsets
+			'desc' => 'RFC822, source +2, local -2',
 			'src' => '01 Jan 1970 00:00:00',
 			'srcOffset' => 2,
 			'localOffset' => -2,
@@ -386,6 +409,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// RFC-like dates with separate offsets
+			'desc' => 'RFC822, source -0.5, local -2',
 			'src' => '01 Jan 1970 00:00:00',
 			'srcOffset' => -0.5,
 			'localOffset' => -2,
@@ -406,6 +430,7 @@ class JDateTest_DataSet
 		),
 		array(
 			// RFC-like dates with separate offsets
+			'desc' => 'RFC822, source +0.5, local -2',
 			'src' => '01 Jan 1970 00:00:00',
 			'srcOffset' => 0.5,
 			'localOffset' => -2,
@@ -426,8 +451,11 @@ class JDateTest_DataSet
 		),
 	);
 
+	static public $useVersionCheck = false;
+
 	function message($jd, $subSet, $key, $dataSet, $actual) {
-		$msg = 'Value "' . $dataSet['src'] . '" as ' . $key . ' ' . $subSet;
+		$msg = isset($dataSet['desc']) ? $dataSet['desc'] . ' ' : '';
+		$msg .= 'Value "' . $dataSet['src'] . '" as ' . $key . ' ' . $subSet;
 		$list = $dataSet[$subSet];
 		if (! is_null($list) && isset($list[$key])) {
 			$expect = $list[$key];

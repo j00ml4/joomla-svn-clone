@@ -416,10 +416,10 @@ class JFTPTest extends PHPUnit_Framework_TestCase
 		$return2 = $ftp->create($this->conf['root'].'/testfile');
 		$return3 = $ftp->listNames($this->conf['root']);
 
-		$this->assertIdenticalTrue($return2);
-		$this->assertIdenticalFalse(in_array('testfile', $return1));
-		$this->assertIdenticalTrue(in_array('testfile', $return3));
-		$this->assertIdentical(count($return1), count($return3)-1);
+		$this->assertTrue($return2);
+		$this->assertFalse(in_array('testfile', $return1));
+		$this->assertTrue(in_array('testfile', $return3));
+		$this->assertEquals(count($return1), count($return3)-1);
 		$this->assertNoErrors();
 
 		@$ftp->delete($this->conf['root'].'/testfile');

@@ -103,10 +103,10 @@ class JUnit_Setup
 		}
 		$path = $this -> _startDir . $dir;
 		if (! @is_dir($path)) {
-			throw new Exception('Update error. ' . $path . ' is not a directory.', 1);
+			throw new Exception('Scan error. ' . $path . ' is not a directory.', 1);
 		}
 		if(! ($dh = @opendir($path))) {
-			throw new Exception('Update error. Unable to open ' . $path, 2);
+			throw new Exception('Scan error. Unable to open ' . $path, 2);
 		}
 		if ($this -> _options['debug']) {
 			echo 'Processing directory "' . $dir . '"' . self::$eol;

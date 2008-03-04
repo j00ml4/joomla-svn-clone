@@ -2,8 +2,6 @@
 /**
  * Joomla! v1.5 Unit Test Facility
  *
- * Template for a basic unit test
- *
  * @package Joomla
  * @subpackage UnitTest
  * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
@@ -12,7 +10,7 @@
  */
 
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JRequestTest_GetVar::main');
+	define('JUNIT_MAIN_METHOD', 'JRequestTest_GetMethod::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -50,9 +48,9 @@ require_once JPATH_LIBRARIES . '/joomla/import.php';
 jimport( 'joomla.environment.request' );
 
 /**
- * A unit test class for SubjectClass
+ * A unit test class for JRequest
  */
-class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
+class JRequestTest_GetMethod extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Runs the test methods of this class.
@@ -84,6 +82,6 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 }
 
 // Call main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JRequestTest_GetVar::main') {
-	JRequestTest_GetVar::main();
+if (JUNIT_MAIN_METHOD == 'JRequestTest_GetMethod::main') {
+	JRequestTest_GetMethod::main();
 }

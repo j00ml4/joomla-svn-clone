@@ -125,7 +125,7 @@ class JLoader
 	{
 		static $classes;
 
-		if(!isset($classes)) {
+		if(! isset($classes)) {
 			$classes = array();
 		}
 
@@ -163,7 +163,8 @@ class JLoader
 		}
 
 		$classes = JLoader::register();
-		if(array_key_exists( strtolower($class), $classes)) {
+		$class = strtolower($class);
+		if (array_key_exists($class, $classes)) {
 			include($classes[$class]);
 			return true;
 		}
