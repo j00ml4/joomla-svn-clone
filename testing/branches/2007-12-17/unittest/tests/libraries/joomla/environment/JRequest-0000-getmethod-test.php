@@ -35,10 +35,7 @@ require_once JPATH_BASE . '/includes/defines.php';
 /*
  * Mock classes
  */
-JLoader::injectMock(
-	dirname(__FILE__) . DS . 'JFilterInput-mock-general.php',
-	'joomla.filter.filterinput'
-);
+// (no mocks for this test)
 
 /*
  * We now return to our regularly scheduled environment.
@@ -64,7 +61,7 @@ class JRequestTest_GetMethod extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Define some sample data
+	 * Clear the cache
 	 */
 	function setUp() {
 		// Make sure the request hash is clean.
