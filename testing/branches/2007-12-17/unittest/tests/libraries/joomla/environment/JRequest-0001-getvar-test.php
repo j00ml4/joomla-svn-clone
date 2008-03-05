@@ -12,7 +12,7 @@
  */
 
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JRequestTest_GetMethod::main');
+	define('JUNIT_MAIN_METHOD', 'JRequestTest_GetVar::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -54,7 +54,7 @@ jimport( 'joomla.environment.request' );
 /**
  * A unit test class for SubjectClass
  */
-class JRequestTest_GetMethod extends PHPUnit_Framework_TestCase
+class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 {
 	static public function getVarData() {
 		return JRequestTest_DataSet::$getVarTests;
@@ -117,6 +117,6 @@ class JRequestTest_GetMethod extends PHPUnit_Framework_TestCase
 }
 
 // Call main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JRequestTest_GetMethod::main') {
-	JRequestTest_GetMethod::main();
+if (JUNIT_MAIN_METHOD == 'JRequestTest_GetVar::main') {
+	JRequestTest_GetVar::main();
 }
