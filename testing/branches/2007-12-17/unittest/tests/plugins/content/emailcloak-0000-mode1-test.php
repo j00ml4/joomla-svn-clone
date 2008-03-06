@@ -106,20 +106,32 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 				'mail is joe@example.com text.',
 				'mail is [mail=joe at example.com mailto=1 text= email=1] text.',
 			),
-			// Note this case is wrong (trailing period is not part of addy)
+			// Note this case has been fixed (trailing period is not part of addy)
 			'simple trail dot' => array(
 				'mail is joe@example.com.',
-				'mail is [mail=joe at example.com. mailto=1 text= email=1]',
+				'mail is [mail=joe at example.com mailto=1 text= email=1].',
 			),
-			// Note this case is wrong (trailing period is not part of addy)
+			// Note this case has been fixed (trailing period is not part of addy)
 			'compound trail dot' => array(
 				'mail is to-joe.example@sub.example.com.',
-				'mail is [mail=to-joe.example at sub.example.com. mailto=1 text= email=1]',
+				'mail is [mail=to-joe.example at sub.example.com mailto=1 text= email=1].',
 			),
-			// The leading mailto outside HTML is not recognized
+			'multiline lead' => array(
+				"line1\njoe@example.com text.\nline3",
+				"line1\n[mail=joe at example.com mailto=1 text= email=1] text.\nline3",
+			),
+			'multiline trail' => array(
+				"line1\nmail is joe@example.com\nline3",
+				"line1\nmail is [mail=joe at example.com mailto=1 text= email=1]\nline3",
+			),
+			'multiline embed' => array(
+				"line1\nmail is joe@example.com text.\nline3",
+				"line1\nmail is [mail=joe at example.com mailto=1 text= email=1] text.\nline3",
+			),
+			// The leading mailto outside HTML is (correctly) not recognized
 			'mailto' => array(
 				'mail is mailto:joe@example.com.',
-				'mail is mailto:[mail=joe at example.com. mailto=1 text= email=1]',
+				'mail is mailto:[mail=joe at example.com mailto=1 text= email=1].',
 			),
 			'simple mailto same' => array(
 				'mail is <a href="mailto:joe@example.com">joe@example.com</a>.',
@@ -140,6 +152,18 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 			'compound mailto different' => array(
 				'mail is <a href="mailto:joe@sub.example.com">Joe Example</a>.',
 				'mail is [mail=joe at sub.example.com mailto=1 text=Joe Example email=0].',
+			),
+			'compound mailto different embedded' => array(
+				'mail is <a href="mailto:joe@sub.example.com">Joe Example</a> test.',
+				'mail is [mail=joe at sub.example.com mailto=1 text=Joe Example email=0] test.',
+			),
+			'compound mailto different w/subject,body' => array(
+				'mail is <a href="mailto:joe@sub.example.com?Subject=test&body=good &amp; special">Joe Example</a>.',
+				'mail is [mail=joe at sub.example.com?Subject=test&body=good & special mailto=1 text=Joe Example email=0].',
+			),
+			'compound mailto different w/subject,body,quotes' => array(
+				'mail is <a href="mailto:joe@sub.example.com?Subject=\'test\'&body=good &amp; special">Joe Example</a>.',
+				'mail is [mail=joe at sub.example.com?Subject=\'test\'&body=good & special mailto=1 text=Joe Example email=0].',
 			),
 			'disabled compound mailto same' => array(
 				'mail {emailcloak=off}is <a href="mailto:joe@sub.example.com">joe@sub.example.com</a>.',
