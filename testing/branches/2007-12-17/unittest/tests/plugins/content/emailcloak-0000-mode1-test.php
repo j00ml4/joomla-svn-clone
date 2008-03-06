@@ -98,13 +98,61 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 				'joe@example.com text.',
 				'[mail=joe at example.com mailto=1 text= email=1] text.',
 			),
+			'simple embed lead tld1' => array(
+				'joe@example.x text.',
+				'joe@example.x text.',
+			),
+			'simple embed lead tld2' => array(
+				'joe@example.ca text.',
+				'[mail=joe at example.ca mailto=1 text= email=1] text.',
+			),
+			'simple embed lead tld4' => array(
+				'joe@example.name text.',
+				'[mail=joe at example.name mailto=1 text= email=1] text.',
+			),
+			'simple embed lead tld5' => array(
+				'joe@example.isbad text.',
+				'joe@example.isbad text.',
+			),
 			'simple trail' => array(
 				'mail is joe@example.com',
 				'mail is [mail=joe at example.com mailto=1 text= email=1]',
 			),
+			'simple embed trail tld1' => array(
+				'mail is joe@example.x',
+				'mail is joe@example.x',
+			),
+			'simple embed trail tld2' => array(
+				'mail is joe@example.ca',
+				'mail is [mail=joe at example.ca mailto=1 text= email=1]',
+			),
+			'simple embed trail tld4' => array(
+				'mail is joe@example.name',
+				'mail is [mail=joe at example.name mailto=1 text= email=1]',
+			),
+			'simple embed trail tld5' => array(
+				'mail is joe@example.isbad',
+				'mail is joe@example.isbad',
+			),
 			'simple embed' => array(
 				'mail is joe@example.com text.',
 				'mail is [mail=joe at example.com mailto=1 text= email=1] text.',
+			),
+			'simple embed tld1' => array(
+				'mail is joe@example.x text.',
+				'mail is joe@example.x text.',
+			),
+			'simple embed tld2' => array(
+				'mail is joe@example.ca text.',
+				'mail is [mail=joe at example.ca mailto=1 text= email=1] text.',
+			),
+			'simple embed tld4' => array(
+				'mail is joe@example.name text.',
+				'mail is [mail=joe at example.name mailto=1 text= email=1] text.',
+			),
+			'simple embed tld5' => array(
+				'mail is joe@example.isbad text.',
+				'mail is joe@example.isbad text.',
 			),
 			// Note this case has been fixed (trailing period is not part of addy)
 			'simple trail dot' => array(
@@ -140,6 +188,14 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 			'simple mailto different' => array(
 				'mail is <a href="mailto:joe@example.com">Joe Example</a>.',
 				'mail is [mail=joe at example.com mailto=1 text=Joe Example email=0].',
+			),
+			'simple mailto different tld1' => array(
+				'mail is <a href="mailto:joe@example.c">Joe Example</a>.',
+				'mail is <a href="mailto:joe@example.c">Joe Example</a>.',
+			),
+			'simple mailto different tld5' => array(
+				'mail is <a href="mailto:joe@example.isbad">Joe Example</a>.',
+				'mail is <a href="mailto:joe@example.isbad">Joe Example</a>.',
 			),
 			'simple mailto w/subject,body' => array(
 				'mail is <a href="mailto:joe@example.com?Subject=test&body=good &amp; special">joe@example.com</a>.',
