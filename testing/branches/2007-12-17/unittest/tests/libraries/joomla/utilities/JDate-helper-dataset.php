@@ -451,7 +451,7 @@ class JDateTest_DataSet
 		),
 	);
 
-	static public $useVersionCheck = false;
+	static public $useVersionCheck = true;
 
 	function message($jd, $subSet, $key, $dataSet, $actual) {
 		$msg = isset($dataSet['desc']) ? $dataSet['desc'] . ' ' : '';
