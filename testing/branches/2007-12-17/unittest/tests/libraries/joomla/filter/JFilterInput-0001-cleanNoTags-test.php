@@ -8,9 +8,9 @@
  * @author Jui-Yu Tsai <raytsai@gmail.com>
  */
 
-// Call JFilterInputTest_Clean::main() if this source file is executed directly.
+// Call JFilterInputTest_CleanNoTags::main() if this source file is executed directly.
 if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JFilterInputTest_Clean::main');
+	define('JUNIT_MAIN_METHOD', 'JFilterInputTest_CleanNoTags::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -43,7 +43,7 @@ require_once JPATH_LIBRARIES . '/joomla/import.php';
 
 jimport( 'joomla.filter.filterinput' );
 
-class JFilterInputTest_Clean extends PHPUnit_Framework_TestCase {
+class JFilterInputTest_CleanNoTags extends PHPUnit_Framework_TestCase {
 	/**
 	 * Runs the test methods of this class.
 	 */
@@ -260,6 +260,11 @@ class JFilterInputTest_Clean extends PHPUnit_Framework_TestCase {
 				$input,
 				'+/0123456789=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 			),
+			'tracker9725' => array(
+				'string',
+				'<h2><img class="one two" /></h2>',
+				'',
+			),
 		);
 		$tests = $cases;
 
@@ -267,7 +272,7 @@ class JFilterInputTest_Clean extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Execute a test case on clean().
+	 * Execute a test case with clean() set to strip tags.
 	 *
 	 * The test framework calls this function once for each element in the array
 	 * returned by the named data provider.
@@ -278,12 +283,13 @@ class JFilterInputTest_Clean extends PHPUnit_Framework_TestCase {
 	 * @param string The expected result for this test.
 	 */
 	function testClean($type, $data, $expect) {
-		$this->assertEquals($expect, JFilterInput::clean($data, $type));
+		$filter = JFilterInput::getInstance(null, null, 1, 1);
+		$this->assertEquals($expect, $filter -> clean($data, $type));
 	}
 
 }
 
 // Call JFilterInputTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JFilterInputTest_Clean::main') {
-	JFilterInputTest_Clean::main();
+if (JUNIT_MAIN_METHOD == 'JFilterInputTest_CleanNoTags::main') {
+	JFilterInputTest_CleanNoTags::main();
 }
