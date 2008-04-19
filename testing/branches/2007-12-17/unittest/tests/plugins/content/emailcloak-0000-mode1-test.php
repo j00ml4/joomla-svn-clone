@@ -230,6 +230,13 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 				'mail valid@first1.net and unchanged@2nd.one.org.',
 			),
 		);
+		/*
+		 * Note: need to develop additional test cases based on
+		 * http://www.linuxjournal.com/article/9585, however contents of that
+		 * article are copyright, so reimplementation is required :(
+		 *
+		 * coming soon...
+		 */
 		$tests = array();
 		foreach ($cases as $key => $testCase) {
 			$test = new stdClass;
