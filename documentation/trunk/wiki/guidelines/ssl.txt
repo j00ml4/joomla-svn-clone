@@ -92,7 +92,7 @@ function josURL( $url, $ssl=0, $sef=1 ) {
 
 
 ==== 2.1.1 Description ====
-The josURL() function is a new global function which is used in lieu of the sefToRelAbs() function and adds functionality to transform an internal URL to a secured internal URL to be served from the SSL secured server.
+The josURL() function is a new global function which is used in lieu of the sefRelToAbs() function and adds functionality to transform an internal URL to a secured internal URL to be served from the SSL secured server.
 
 ===== 3. Third Party Developer Usage =====
 The only aspect of this implementation which is needed by the third party developers is the global josURL() function.  The function takes three parameters: $url, $ssl, and $sef. The only mandatory parameter is $url as the other two parameters have default values set.
