@@ -171,25 +171,6 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		unset($cache);
 	}
 
-	/**
-	 * @dataProvider provider
-	 */
-	function testCacheClearNoGroup($store) {
-		$id = 'randomTestID';
-		$group = 'testing';
-		$data = 'testData';
-		$cache =& JCache::getInstance('raw', array('storage'=>$store));
-		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
-		unset($cache);
-		$cache =& JCache::getInstance('raw', array('storage'=>$store));
-		$this->assertTrue($cache->clean(), 'Clean Failed');
-		unset($cache);
-		$cache =& JCache::getInstance('raw', array('storage'=>$store));
-		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === false), 'Expected: false Actual: '.((string) $new));
-		unset($cache);
-	}
-
 }
 
 // Call JCacheTest_Construct::main() if this source file is executed directly.
