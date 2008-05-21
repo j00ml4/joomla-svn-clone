@@ -8,13 +8,14 @@
  * @version $Id: $
  *
  */
+JLoader::register('JCacheStorage', JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage.php');
 
 /**
  * Mock of JCacheStorage Backend Class.  Used for testing of cache handlers. 
  */
 class JCacheStorageMock extends JCacheStorage
 {
-	private var $_storage = array();
+	private $_storage = array();
 
 	/**
 	 * Constructor
@@ -77,7 +78,7 @@ class JCacheStorageMock extends JCacheStorage
 	function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		return unset($this->_storage[$id]);
+		unset($this->_storage[$id]);
 	}
 
 	/**
