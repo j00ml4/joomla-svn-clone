@@ -55,7 +55,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
-	public function provider() {
+	public static function provider() {
 		static $ret = array();
 		if(empty($ret)) {
 			$names = JCache::getStores();
@@ -69,7 +69,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider provider
 	 */
-	function testCacheGet($store) {
+	function testCacheHit($store) {
 		$id = 'randomTestID';
 		$group = 'testing';
 		$data = 'testData';
@@ -85,6 +85,19 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider provider
 	 */
+	function testCacheMiss($store) {
+		$id = 'randomTestID2423423';
+		$group = 'testing';
+		$data = 'testData';
+		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$new = $cache->get($id, $group);
+		$this->assertTrue(($new === false), 'Expected: false Actual: '.$new);
+		unset($cache);
+	}
+
+	/**
+	 * @dataProvider provider
+	 */
 	function testCacheTimeout($store) {
 		$id = 'randomTestID';
 		$group = 'testing';
@@ -93,7 +106,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$cache->setLifeTime(2);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
-		sleep(3);
+		sleep(5);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$cache->setLifeTime(2);
 		$new = $cache->get($id, $group);
