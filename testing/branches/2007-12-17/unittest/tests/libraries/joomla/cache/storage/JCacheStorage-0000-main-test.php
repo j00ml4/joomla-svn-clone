@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @version $Id: $
- * @author Anthony Ferrara 
+ * @author Anthony Ferrara
  */
 
 // Call JDateTest::main() if this source file is executed directly.
@@ -78,7 +78,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === $data), 'Expected: '.$data.' Actual: '.$new);
+		$this->assertSame($new, $data, 'Expected: '.$data.' Actual: '.$new);
 		unset($cache);
 	}
 
@@ -91,7 +91,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === false), 'Expected: false Actual: '.$new);
+		$this->assertFalse($new, 'Expected: false Actual: '.$new);
 		unset($cache);
 	}
 
@@ -110,7 +110,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$cache->setLifeTime(2);
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === false), 'Expected: false Actual: '.((string) $new));
+		$this->assertFalse($new, 'Expected: false Actual: '.((string) $new));
 		unset($cache);
 	}
 
@@ -129,7 +129,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === false), 'Expected: false Actual: '.((string) $new));
+		$this->assertFalse($new, 'Expected: false Actual: '.((string) $new));
 		unset($cache);
 	}
 
@@ -148,7 +148,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === false), 'Expected: false Actual: '.((string) $new));
+		$this->assertFalse($new, 'Expected: false Actual: '.((string) $new));
 		unset($cache);
 	}
 
@@ -167,7 +167,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);
-		$this->assertTrue(($new === $data), 'Expected: '.$data.' Actual: '.((string) $new));
+		$this->assertSame($new, $data, 'Expected: '.$data.' Actual: '.((string) $new));
 		unset($cache);
 	}
 
