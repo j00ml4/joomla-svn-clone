@@ -99,6 +99,9 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	 * @dataProvider provider
 	 */
 	function testCacheTimeout($store) {
+		if($store == 'xcache') {
+			$this->markTestSkipped('Due to an xcache "bug/feature", this test will not function as expected, skipped');
+		}
 		$id = 'randomTestID';
 		$group = 'testing';
 		$data = 'testData';
@@ -137,6 +140,9 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	 * @dataProvider provider
 	 */
 	function testCacheClearGroup($store) {
+		if($store == 'xcache') {
+			$this->markTestSkipped('XCache does not support clearing of the cache');
+		}
 		$id = 'randomTestID';
 		$group = 'testing';
 		$data = 'testData';
@@ -156,6 +162,10 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	 * @dataProvider provider
 	 */
 	function testCacheClearNotGroup($store) {
+		if($store == 'xcache') {
+			$this->markTestSkipped('XCache does not support clearing of the cache');
+		}
+
 		$id = 'randomTestID';
 		$group = 'testing';
 		$data = 'testData';
