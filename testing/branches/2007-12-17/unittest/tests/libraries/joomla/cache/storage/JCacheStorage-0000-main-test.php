@@ -140,7 +140,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 	 * @dataProvider provider
 	 */
 	function testCacheClearGroup($store) {
-		if($store == 'xcache') {
+		if($store == 'xcache' || $store == 'eaccelerator' || $store == 'apc' || $store == 'memcache') {
 			$this->markTestSkipped('XCache does not support clearing of the cache');
 		}
 		$id = 'randomTestID';
