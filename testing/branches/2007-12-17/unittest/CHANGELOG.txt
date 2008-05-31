@@ -14,6 +14,11 @@ Legend:
 ! -> Note
 
 -------------------------------------------------
+2008-05-31 Anthony Ferrara
+ +  Multiple fixes for the JCache tests.  Added skipping of clear test for all
+ memory storage types
+
+-------------------------------------------------
 2007-12-20 Alan Langford
  !  Created branch 2007-12-17
  ^  svn:ignore now includes  .* at project root
