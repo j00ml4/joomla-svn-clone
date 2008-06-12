@@ -84,7 +84,7 @@ class JQueryBuilderTest extends PHPUnit_Framework_TestCase
         return $cases;
     }
 
-    
+
     /**
      * @dataProvider queryData
      */
@@ -95,14 +95,14 @@ class JQueryBuilderTest extends PHPUnit_Framework_TestCase
         $sql_array = $qb->getSQL();
         $this->assertEquals($sql, trim($sql_array[0]));
     }
-    
-    
-    
+
+
+
 }
 
 // Call main() if this source file is executed directly.
 if (JUNIT_MAIN_METHOD == 'JQueryBuilderTest::main') {
-    FirstTest::main();
+    JQueryBuilderTest::main();
 }
-  
+
 ?>
