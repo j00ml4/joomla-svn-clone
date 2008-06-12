@@ -78,8 +78,8 @@ class JQueryBuilderTest extends PHPUnit_Framework_TestCase
 
     static public function queryData() {
         $cases = array(
-            array('mysql', 'table1', "SELECT  * FROM table1"),
-            array('pgsql', 'table2', "SELECT  * FROM table2"),
+            array('mysql', '#__table1', "SELECT  * FROM jos_table1"),
+            array('pgsql', '#__table2', "SELECT  * FROM jos_table2"),
         );
         return $cases;
     }
