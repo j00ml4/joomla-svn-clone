@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Node.php 2048 2008-01-08 15:53:36Z sb $
+ * @version    SVN: $Id: Node.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -59,7 +59,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -67,19 +67,16 @@ abstract class PHPUnit_Util_Report_Node
 {
     /**
      * @var    array
-     * @access protected
      */
     protected $cache = array();
 
     /**
      * @var    string
-     * @access protected
      */
     protected $name;
 
     /**
      * @var    PHPUnit_Util_Report_Node
-     * @access protected
      */
     protected $parent;
 
@@ -88,7 +85,6 @@ abstract class PHPUnit_Util_Report_Node
      *
      * @param  string                   $name
      * @param  PHPUnit_Util_Report_Node $parent
-     * @access public
      */
     public function __construct($name, PHPUnit_Util_Report_Node $parent = NULL)
     {
@@ -101,7 +97,6 @@ abstract class PHPUnit_Util_Report_Node
      * has been called at least once..
      *
      * @return integer
-     * @access public
      */
     public function getCalledClassesPercent()
     {
@@ -115,7 +110,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the percentage of methods that has been called at least once.
      *
      * @return integer
-     * @access public
      */
     public function getCalledMethodsPercent()
     {
@@ -129,7 +123,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the percentage of executed lines.
      *
      * @return integer
-     * @access public
      */
     public function getLineExecutedPercent()
     {
@@ -143,9 +136,9 @@ abstract class PHPUnit_Util_Report_Node
      * Returns this node's ID.
      *
      * @return string
-     * @access public
      */
-    public function getId() {
+    public function getId()
+    {
         if (!isset($this->cache['id'])) {
             if ($this->parent === NULL) {
                 $this->cache['id'] = 'index';
@@ -168,7 +161,6 @@ abstract class PHPUnit_Util_Report_Node
      *
      * @param  boolean $includeParent
      * @return string
-     * @access public
      */
     public function getName($includeParent = FALSE, $includeCommonPath = FALSE)
     {
@@ -193,9 +185,9 @@ abstract class PHPUnit_Util_Report_Node
      *
      * @param  boolean $full
      * @return string
-     * @access public
      */
-    public function getLink($full) {
+    public function getLink($full)
+    {
         if (substr($this->name, -1) == DIRECTORY_SEPARATOR) {
             $name = substr($this->name, 0, -1);
         } else {
@@ -230,9 +222,9 @@ abstract class PHPUnit_Util_Report_Node
      * Returns this node's path.
      *
      * @return string
-     * @access public
      */
-    public function getPath() {
+    public function getPath()
+    {
         if (!isset($this->cache['path'])) {
             if ($this->parent === NULL) {
                 $this->cache['path'] = $this->getName(FALSE, TRUE);
@@ -263,7 +255,6 @@ abstract class PHPUnit_Util_Report_Node
      * @param  integer $a
      * @param  integer $b
      * @return float   ($a / $b) * 100
-     * @access protected
      */
     protected function calculatePercent($a, $b)
     {
@@ -279,11 +270,12 @@ abstract class PHPUnit_Util_Report_Node
         );
     }
 
-    protected function doRenderItemObject(PHPUnit_Util_Report_Node $item, $lowUpperBound, $highLowerBound, $link = NULL)
+    protected function doRenderItemObject(PHPUnit_Util_Report_Node $item, $lowUpperBound, $highLowerBound, $link = NULL, $itemClass = 'coverItem')
     {
         return $this->doRenderItem(
           array(
             'name'                 => $link != NULL ? $link : $item->getLink(FALSE),
+            'itemClass'            => $itemClass,
             'numClasses'           => $item->getNumClasses(),
             'numCalledClasses'     => $item->getNumCalledClasses(),
             'calledClassesPercent' => $item->getCalledClassesPercent(),
@@ -320,6 +312,7 @@ abstract class PHPUnit_Util_Report_Node
         $itemTemplate->setVar(
           array(
             'name'                     => $data['name'],
+            'itemClass'                => isset($data['itemClass']) ? $data['itemClass'] : 'coverItem',
             'classes_color'            => $classesColor,
             'classes_level'            => $classesLevel,
             'classes_called_width'     => floor($data['calledClassesPercent']),
@@ -386,9 +379,8 @@ abstract class PHPUnit_Util_Report_Node
      * @param  PHPUnit_Util_Template $template
      * @param  string                $title
      * @param  string                $charset
-     * @access public
      */
-   protected function setTemplateVars(PHPUnit_Util_Template $template, $title, $charset)
+    protected function setTemplateVars(PHPUnit_Util_Template $template, $title, $charset)
     {
         $template->setVar(
           array(
@@ -409,8 +401,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the classes of this node.
      *
      * @return array
-     * @access public
-     * @abstract
      */
     abstract public function getClasses();
 
@@ -418,8 +408,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the number of executable lines.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumExecutableLines();
 
@@ -427,8 +415,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the number of executed lines.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumExecutedLines();
 
@@ -436,8 +422,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the number of classes.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumClasses();
 
@@ -446,8 +430,6 @@ abstract class PHPUnit_Util_Report_Node
      * has been called at least once.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumCalledClasses();
 
@@ -455,8 +437,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the number of methods.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumMethods();
 
@@ -464,8 +444,6 @@ abstract class PHPUnit_Util_Report_Node
      * Returns the number of methods that has been called at least once.
      *
      * @return integer
-     * @access public
-     * @abstract
      */
     abstract public function getNumCalledMethods();
 
@@ -475,12 +453,9 @@ abstract class PHPUnit_Util_Report_Node
      * @param string  $target
      * @param string  $title
      * @param string  $charset
-     * @param boolean $highlight
      * @param integer $lowUpperBound
      * @param integer $highLowerBound
-     * @access public
-     * @abstract
      */
-    abstract public function render($target, $title, $charset = 'ISO-8859-1', $highlight = FALSE, $lowUpperBound = 35, $highLowerBound = 70);
+    abstract public function render($target, $title, $charset = 'ISO-8859-1', $lowUpperBound = 35, $highLowerBound = 70);
 }
 ?>

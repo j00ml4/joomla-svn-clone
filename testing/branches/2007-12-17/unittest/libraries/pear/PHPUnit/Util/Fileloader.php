@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Fileloader.php 2092 2008-01-14 16:40:53Z sb $
+ * @version    SVN: $Id: Fileloader.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.3.0
  */
@@ -56,7 +56,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.3.0
  */
@@ -66,8 +66,6 @@ class PHPUnit_Util_Fileloader
      * Path to the PHP interpreter that is to be used.
      *
      * @var    string $phpBinary
-     * @access public
-     * @static
      */
     public static $phpBinary = NULL;
 
@@ -79,8 +77,6 @@ class PHPUnit_Util_Fileloader
      * @param  string  $filename
      * @param  boolean $syntaxCheck
      * @throws RuntimeException
-     * @access public
-     * @static
      */
     public static function checkAndLoad($filename, $syntaxCheck = TRUE)
     {
@@ -108,35 +104,21 @@ class PHPUnit_Util_Fileloader
     /**
      * Loads a PHP sourcefile.
      *
-     * When the Xdebug extension is loaded and its "xdebug.collect_vars"
-     * configuration directive is enabled, all global variables declared
-     * in the loaded PHP sourcefile will be added to $GLOBALS.
-     *
      * @param  string $filename
-     * @access protected
-     * @static
      * @since  Method available since Release 3.0.0
      */
     protected static function load($filename)
     {
-        $xdebugLoaded      = extension_loaded('xdebug');
-        $xdebugCollectVars = $xdebugLoaded && ini_get('xdebug.collect_vars') == '1';
-
-        if ($xdebugCollectVars) {
-            $variables = xdebug_get_declared_vars();
-        }
+        $oldVariableNames = array_keys(get_defined_vars());
 
         include_once $filename;
 
-        if ($xdebugCollectVars) {
-            $variables = array_values(
-              array_diff(xdebug_get_declared_vars(), $variables)
-            );
+        $newVariables     = get_defined_vars();
+        $newVariableNames = array_diff(array_keys($newVariables), $oldVariableNames);
 
-            foreach ($variables as $variable) {
-                if (isset($$variable)) {
-                    $GLOBALS[$variable] = $$variable;
-                }
+        foreach ($newVariableNames as $variableName) {
+            if ($variableName != 'oldVariableNames') {
+                $GLOBALS[$variableName] = $newVariables[$variableName];
             }
         }
     }
@@ -168,8 +150,6 @@ class PHPUnit_Util_Fileloader
      *
      * @param  string $filename
      * @throws RuntimeException
-     * @access protected
-     * @static
      * @since  Method available since Release 3.0.0
      */
     protected static function syntaxCheck($filename)

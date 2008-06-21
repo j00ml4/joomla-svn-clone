@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: File.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: File.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -59,7 +59,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -67,79 +67,66 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
 {
     /**
      * @var    array
-     * @access protected
      */
     protected $codeLines;
 
     /**
      * @var    array
-     * @access protected
      */
     protected $codeLinesFillup = array();
 
     /**
      * @var    array
-     * @access protected
      */
     protected $executedLines;
 
     /**
      * @var    boolean
-     * @access protected
      */
     protected $yui = TRUE;
 
     /**
      * @var    boolean
-     * @access protected
      */
     protected $highlight = FALSE;
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numExecutableLines = 0;
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numExecutedLines = 0;
 
     /**
      * @var    array
-     * @access protected
      */
     protected $classes = array();
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numClasses = 0;
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numCalledClasses = 0;
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numMethods = 0;
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $numCalledMethods = 0;
 
     /**
      * @var    string
-     * @access protected
      */
     protected $yuiPanelJS = '';
 
@@ -152,7 +139,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * @param  boolean                  $yui
      * @param  boolean                  $highlight
      * @throws RuntimeException
-     * @access public
      */
     public function __construct($name, PHPUnit_Util_Report_Node $parent = NULL, array $executedLines, $yui = TRUE, $highlight = FALSE)
     {
@@ -176,7 +162,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the classes of this node.
      *
      * @return array
-     * @access public
      */
     public function getClasses()
     {
@@ -187,7 +172,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the number of executable lines.
      *
      * @return integer
-     * @access public
      */
     public function getNumExecutableLines()
     {
@@ -198,7 +182,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the number of executed lines.
      *
      * @return integer
-     * @access public
      */
     public function getNumExecutedLines()
     {
@@ -209,7 +192,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the number of classes.
      *
      * @return integer
-     * @access public
      */
     public function getNumClasses()
     {
@@ -221,7 +203,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * has been called at least once.
      *
      * @return integer
-     * @access public
      */
     public function getNumCalledClasses()
     {
@@ -232,7 +213,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the number of methods.
      *
      * @return integer
-     * @access public
      */
     public function getNumMethods()
     {
@@ -243,7 +223,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * Returns the number of methods that has been called at least once.
      *
      * @return integer
-     * @access public
      */
     public function getNumCalledMethods()
     {
@@ -256,12 +235,10 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * @param string  $target
      * @param string  $title
      * @param string  $charset
-     * @param boolean $highlight
      * @param integer $lowUpperBound
      * @param integer $highLowerBound
-     * @access public
      */
-    public function render($target, $title, $charset = 'ISO-8859-1', $highlight = FALSE, $lowUpperBound = 35, $highLowerBound = 70)
+    public function render($target, $title, $charset = 'ISO-8859-1', $lowUpperBound = 35, $highLowerBound = 70)
     {
         if ($this->yui) {
             $template = new PHPUnit_Util_Template(
@@ -510,7 +487,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
     /**
      * Calculates coverage statistics for the file.
      *
-     * @access protected
      */
     protected function calculateStatistics()
     {
@@ -577,7 +553,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
 
             if (strpos($line, '@codeCoverageIgnore') !== FALSE) {
                 if (strpos($line, '@codeCoverageIgnoreStart') !== FALSE) {
-                    $ignoreStart = $line;
+                    $ignoreStart = $lineNumber;
                 }
 
                 else if (strpos($line, '@codeCoverageIgnoreEnd') !== FALSE) {
@@ -614,7 +590,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
 
                     $this->numExecutableLines++;
 
-                    if ($ignoreStart != -1 && $line > $ignoreStart) {
+                    if ($ignoreStart != -1 && $lineNumber > $ignoreStart) {
                         if (isset($currentClass)) {
                             $currentClass['executedLines']++;
                         }
@@ -661,7 +637,6 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
      * @author Sebastian Bergmann <sb@sebastian-bergmann.de>
      * @param  string  $file
      * @return array
-     * @access protected
      */
     protected function loadFile($file)
     {
@@ -681,6 +656,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
         }
 
         if (!$this->highlight) {
+            unset($lines[count($lines)-1]);
             return $lines;
         }
 
@@ -698,7 +674,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
                       htmlspecialchars($token)
                     );
 
-                    $stringFlag = !$stringFlag;   
+                    $stringFlag = !$stringFlag;
                 } else {
                     $result[$i] .= sprintf(
                       '<span class="keyword">%s</span>',
@@ -721,7 +697,7 @@ class PHPUnit_Util_Report_Node_File extends PHPUnit_Util_Report_Node
             if ($value === "\n") {
                 $result[++$i] = '';
             } else {
-                $lines = explode("\n", $value);              
+                $lines = explode("\n", $value);
 
                 foreach ($lines as $jj => $line) {
                     $line = trim($line);

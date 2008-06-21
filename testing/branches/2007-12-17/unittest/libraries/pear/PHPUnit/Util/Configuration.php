@@ -11,7 +11,7 @@
  *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in
  *     the documentation and/or other materials provided with the
@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Configuration.php 2111 2008-01-15 09:55:15Z sb $
+ * @version    SVN: $Id: Configuration.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -57,7 +57,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * <code>
  * <?xml version="1.0" encoding="utf-8" ?>
  *
- * <phpunit>
+ * <phpunit convertErrorsToExceptions="true" convertNoticesToExceptions="true" stopOnFailure="false">
  *   <testsuite name="My Test Suite">
  *     <directory suffix="Test.php">/path/to/files</directory>
  *     <file>/path/to/MyTest.php</file>
@@ -105,7 +105,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *     <log type="test-xml" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
  *     <log type="testdox-html" target="/tmp/testdox.html"/>
  *     <log type="testdox-text" target="/tmp/testdox.txt"/>
- * 
+ *
  *     <pmd>
  *       <rule class="PHPUnit_Util_Log_PMD_Rule_Project_CRAP"
  *             threshold="5,30" priority="1"/>
@@ -150,7 +150,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -163,7 +163,6 @@ class PHPUnit_Util_Configuration
      * Loads a PHPUnit configuration file.
      *
      * @param  string $filename
-     * @access public
      */
     public function __construct($filename)
     {
@@ -175,7 +174,6 @@ class PHPUnit_Util_Configuration
      * Returns the configuration for SUT filtering.
      *
      * @return array
-     * @access public
      * @since  Method available since Release 3.2.1
      */
     public function getFilterConfiguration()
@@ -237,7 +235,6 @@ class PHPUnit_Util_Configuration
      * Returns the configuration for groups.
      *
      * @return array
-     * @access public
      * @since  Method available since Release 3.2.1
      */
     public function getGroupConfiguration()
@@ -262,7 +259,6 @@ class PHPUnit_Util_Configuration
      * Returns the logging configuration.
      *
      * @return array
-     * @access public
      */
     public function getLoggingConfiguration()
     {
@@ -329,7 +325,6 @@ class PHPUnit_Util_Configuration
      * Returns the PHP configuration.
      *
      * @return array
-     * @access public
      * @since  Method available since Release 3.2.1
      */
     public function getPHPConfiguration()
@@ -365,10 +360,61 @@ class PHPUnit_Util_Configuration
     }
 
     /**
+     * Handles the PHP configuration.
+     *
+     * @since  Method available since Release 3.2.20
+     */
+    public function handlePHPConfiguration()
+    {
+        $configuration = $this->getPHPConfiguration();
+
+        foreach ($configuration['ini'] as $name => $value) {
+            ini_set($name, $value);
+        }
+
+        foreach ($configuration['var'] as $name => $value) {
+            $GLOBALS[$name] = $value;
+        }
+    }
+
+    /**
+     * Returns the PHPUnit configuration.
+     *
+     * @return array
+     * @since  Method available since Release 3.2.14
+     */
+    public function getPHPUnitConfiguration()
+    {
+        $result = array();
+
+        if ($this->document->documentElement->hasAttribute('convertErrorsToExceptions')) {
+            $result['convertErrorsToExceptions'] = $this->getBoolean(
+              (string)$this->document->documentElement->getAttribute('convertErrorsToExceptions'),
+              TRUE
+            );
+        }
+
+        if ($this->document->documentElement->hasAttribute('convertNoticesToExceptions')) {
+            $result['convertNoticesToExceptions'] = $this->getBoolean(
+              (string)$this->document->documentElement->getAttribute('convertNoticesToExceptions'),
+              TRUE
+            );
+        }
+
+        if ($this->document->documentElement->hasAttribute('stopOnFailure')) {
+            $result['stopOnFailure'] = $this->getBoolean(
+              (string)$this->document->documentElement->getAttribute('stopOnFailure'),
+              FALSE
+            );
+        }
+
+        return $result;
+    }
+
+    /**
      * Returns the configuration for PMD rules.
      *
      * @return array
-     * @access public
      */
     public function getPMDConfiguration()
     {
@@ -399,7 +445,6 @@ class PHPUnit_Util_Configuration
      * Returns the SeleniumTestCase browser configuration.
      *
      * @return array
-     * @access public
      * @since  Method available since Release 3.2.9
      */
     public function getSeleniumBrowserConfiguration()
@@ -444,7 +489,6 @@ class PHPUnit_Util_Configuration
      * Returns the test suite configuration.
      *
      * @return PHPUnit_Framework_TestSuite
-     * @access public
      * @since  Method available since Release 3.2.1
      */
     public function getTestSuiteConfiguration()
@@ -489,7 +533,6 @@ class PHPUnit_Util_Configuration
      * @param  string  $value
      * @param  boolean $default
      * @return boolean
-     * @access protected
      * @since  Method available since Release 3.2.3
      */
     protected function getBoolean($value, $default)
@@ -508,7 +551,6 @@ class PHPUnit_Util_Configuration
     /**
      * @param  string $query
      * @return array
-     * @access protected
      * @since  Method available since Release 3.2.3
      */
     protected function readFilterDirectories($query)
@@ -534,7 +576,6 @@ class PHPUnit_Util_Configuration
     /**
      * @param  string $query
      * @return array
-     * @access protected
      * @since  Method available since Release 3.2.3
      */
     protected function readFilterFiles($query)

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Command.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: Command.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -56,6 +56,10 @@ require_once 'PHPUnit/Util/TestDox/ResultPrinter/Text.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main');
+}
+
 /**
  * A TestRunner for the Command Line Interface (CLI)
  * PHP SAPI Module.
@@ -65,15 +69,13 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
 class PHPUnit_TextUI_Command
 {
     /**
-     * @access public
-     * @static
      */
     public static function main()
     {
@@ -122,7 +124,7 @@ class PHPUnit_TextUI_Command
             exit(PHPUnit_TextUI_TestRunner::SUCCESS_EXIT);
         }
 
-        else if($result->errorCount() > 0) {
+        else if ($result->errorCount() > 0) {
             exit(PHPUnit_TextUI_TestRunner::EXCEPTION_EXIT);
         }
 
@@ -132,8 +134,6 @@ class PHPUnit_TextUI_Command
     }
 
     /**
-     * @access protected
-     * @static
      */
     protected static function handleArguments()
     {
@@ -162,7 +162,7 @@ class PHPUnit_TextUI_Command
           'wait'
         );
 
-        if (class_exists('Image_GraphViz', FALSE)) {
+        if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('Image/GraphViz.php')) {
             $longOptions[] = 'log-graphviz=';
         }
 
@@ -173,7 +173,7 @@ class PHPUnit_TextUI_Command
             $longOptions[] = 'test-db-log-info=';
         }
 
-        if (extension_loaded('xdebug')) {
+        if (extension_loaded('tokenizer') && extension_loaded('xdebug')) {
             $longOptions[] = 'coverage-html=';
             $longOptions[] = 'coverage-xml=';
             $longOptions[] = 'log-metrics=';
@@ -382,6 +382,7 @@ class PHPUnit_TextUI_Command
               $arguments['configuration']
             );
 
+            $configuration->handlePHPConfiguration();
             $testSuite = $configuration->getTestSuiteConfiguration();
 
             if ($testSuite !== NULL) {
@@ -401,8 +402,6 @@ class PHPUnit_TextUI_Command
     /**
      * @param  string  $test
      * @param  string  $testFile
-     * @access protected
-     * @static
      */
     protected static function doSkeleton($test, $testFile)
     {
@@ -438,8 +437,6 @@ class PHPUnit_TextUI_Command
 
     /**
      * @param  string  $loaderName
-     * @access protected
-     * @static
      */
     protected static function handleLoader($loaderName)
     {
@@ -472,8 +469,6 @@ class PHPUnit_TextUI_Command
     }
 
     /**
-     * @access public
-     * @static
      */
     public static function showHelp()
     {
@@ -481,7 +476,7 @@ class PHPUnit_TextUI_Command
 
         print "Usage: phpunit [switches] UnitTest [UnitTest.php]\n\n";
 
-        if (class_exists('Image_GraphViz', FALSE)) {
+        if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('Image/GraphViz.php')) {
             print "  --log-graphviz <file>  Log test execution in GraphViz markup.\n";
         }
 
@@ -489,7 +484,7 @@ class PHPUnit_TextUI_Command
               "  --log-tap <file>       Log test execution in TAP format to file.\n" .
               "  --log-xml <file>       Log test execution in XML format to file.\n";
 
-        if (extension_loaded('xdebug')) {
+        if (extension_loaded('tokenizer') && extension_loaded('xdebug')) {
             print "  --log-metrics <file>   Write metrics report in XML format.\n" .
                   "  --log-pmd <file>       Write violations report in PMD XML format.\n\n" .
                   "  --coverage-html <dir>  Generate code coverage report in HTML format.\n" .
@@ -524,6 +519,7 @@ class PHPUnit_TextUI_Command
     }
 }
 
-define('PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main');
-PHPUnit_TextUI_Command::main();
+if (PHPUnit_MAIN_METHOD == 'PHPUnit_TextUI_Command::main') {
+    PHPUnit_TextUI_Command::main();
+}
 ?>

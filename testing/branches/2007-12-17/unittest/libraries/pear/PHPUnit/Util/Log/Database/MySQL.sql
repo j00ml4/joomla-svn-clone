@@ -1,7 +1,7 @@
 #
 # PHPUnit
 #
-# Copyright (c) 2002-2007, Sebastian Bergmann <sb@sebastian-bergmann.de>.
+# Copyright (c) 2002-2008, Sebastian Bergmann <sb@sebastian-bergmann.de>.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -33,14 +33,15 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# $Id: MySQL.sql 2102 2008-01-15 07:35:10Z sb $
+# $Id: MySQL.sql 2782 2008-04-11 09:49:25Z sb $
 #
 
 CREATE TABLE IF NOT EXISTS run(
   run_id      INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   timestamp   INTEGER UNSIGNED NOT NULL,
   revision    INTEGER UNSIGNED NOT NULL,
-  information TEXT             NOT NULL
+  information TEXT             NOT NULL,
+  completed   BOOLEAN          NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS test(
@@ -107,7 +108,7 @@ CREATE TABLE IF NOT EXISTS code_line(
   code_line_id      INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   code_line_number  INTEGER UNSIGNED NOT NULL,
   code_line         TEXT,
-  code_line_covered TINYINT UNSIGNED NOT NULL,
+  code_line_covered TINYINT          NOT NULL,
 
   INDEX (code_file_id)
 ) ENGINE=InnoDB;

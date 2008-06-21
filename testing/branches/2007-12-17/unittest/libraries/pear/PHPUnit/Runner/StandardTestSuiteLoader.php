@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: StandardTestSuiteLoader.php 2085 2008-01-14 16:03:31Z sb $
+ * @version    SVN: $Id: StandardTestSuiteLoader.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -58,7 +58,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
@@ -70,7 +70,6 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
      * @param  boolean $syntaxCheck
      * @return ReflectionClass
      * @throws RuntimeException
-     * @access public
      */
     public function load($suiteClassName, $suiteClassFile = '', $syntaxCheck = TRUE)
     {
@@ -81,7 +80,7 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
         }
 
         if (!class_exists($suiteClassName, FALSE)) {
-            if(!file_exists($suiteClassFile)) {
+            if (!file_exists($suiteClassFile)) {
                 $includePaths = explode(PATH_SEPARATOR, get_include_path());
 
                 foreach ($includePaths as $includePath) {
@@ -114,7 +113,6 @@ class PHPUnit_Runner_StandardTestSuiteLoader implements PHPUnit_Runner_TestSuite
     /**
      * @param  ReflectionClass  $aClass
      * @return ReflectionClass
-     * @access public
      */
     public function reload(ReflectionClass $aClass)
     {

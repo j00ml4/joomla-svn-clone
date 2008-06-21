@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestSetup.php 2154 2008-01-17 11:19:53Z sb $
+ * @version    SVN: $Id: TestSetup.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -66,7 +66,7 @@ trigger_error(
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
@@ -79,7 +79,6 @@ class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
      * @param  PHPUnit_Framework_TestResult $result
      * @return PHPUnit_Framework_TestResult
      * @throws InvalidArgumentException
-     * @access public
      */
     public function run(PHPUnit_Framework_TestResult $result = NULL)
     {
@@ -98,7 +97,6 @@ class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
     /**
      * Copies the fixture set up by setUp() to the test.
      *
-     * @access private
      * @since  Method available since Release 2.3.0
      */
     private function copyFixtureToTest()
@@ -115,7 +113,6 @@ class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
     }
 
     /**
-     * @access private
      * @since  Method available since Release 2.3.0
      */
     private function doCopyFixtureToTest($object, $name, &$value)
@@ -133,7 +130,6 @@ class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
      * Sets up the fixture. Override to set up additional fixture
      * state.
      *
-     * @access protected
      */
     protected function setUp()
     {
@@ -143,7 +139,6 @@ class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
      * Tears down the fixture. Override to tear down the additional
      * fixture state.
      *
-     * @access protected
      */
     protected function tearDown()
     {

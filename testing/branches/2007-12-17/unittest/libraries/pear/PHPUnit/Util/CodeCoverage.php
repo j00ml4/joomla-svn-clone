@@ -11,7 +11,7 @@
  *
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in
  *     the documentation and/or other materials provided with the
@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: CodeCoverage.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: CodeCoverage.php 3217 2008-06-16 06:02:00Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -56,7 +56,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.1.0
  * @abstract
@@ -71,8 +71,6 @@ abstract class PHPUnit_Util_CodeCoverage
      *
      * @param  array $data
      * @return array
-     * @access public
-     * @static
      */
     public static function getCoveredFiles(array &$data)
     {
@@ -99,8 +97,6 @@ abstract class PHPUnit_Util_CodeCoverage
      * @param  string  $line
      * @param  boolean $clear
      * @return array
-     * @access public
-     * @static
      */
     public static function getCoveringTests(array &$data, $file, $line, $clear = FALSE)
     {
@@ -143,8 +139,6 @@ abstract class PHPUnit_Util_CodeCoverage
      * @param  array $data
      * @param  boolean $clear
      * @return array
-     * @access public
-     * @static
      */
     public static function getSummary(array &$data, $clear = FALSE)
     {
@@ -197,11 +191,10 @@ abstract class PHPUnit_Util_CodeCoverage
      * @param  integer $startLine
      * @param  integer $endLine
      * @return array
-     * @access public
-     * @static
      * @since  Method available since Release 3.2.0
      */
-    public static function getStatistics(array &$data, $filename, $startLine = 1, $endLine = FALSE) {
+    public static function getStatistics(array &$data, $filename, $startLine = 1, $endLine = FALSE)
+    {
         $coverage      = 0;
         $locExecutable = 0;
         $locExecuted   = 0;
@@ -212,12 +205,12 @@ abstract class PHPUnit_Util_CodeCoverage
             }
 
             foreach ($data[$filename] as $line => $_data) {
-                if ($line >= $startLine && $line <= $endLine) {
+                if ($line >= $startLine && $line < $endLine) {
                     if (is_array($_data)) {
                         $locExecutable++;
                         $locExecuted++;
                     }
-                    
+
                     else if ($_data == -1) {
                         $locExecutable++;
                     }
@@ -226,6 +219,8 @@ abstract class PHPUnit_Util_CodeCoverage
 
             if ($locExecutable > 0) {
                 $coverage = ($locExecuted / $locExecutable) * 100;
+            } else {
+                $coverage = 100;
             }
         }
 
@@ -240,8 +235,6 @@ abstract class PHPUnit_Util_CodeCoverage
     /**
      * @param  string $file
      * @return boolean
-     * @access protected
-     * @static
      */
     protected static function isFile($file)
     {

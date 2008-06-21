@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: ErrorHandler.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: ErrorHandler.php 2439 2008-02-14 08:18:31Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.3.0
  */
@@ -60,7 +60,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 function PHPUnit_Util_ErrorHandler($errno, $errstr, $errfile, $errline)
 {
     if (!($errno & error_reporting())) {
-        return;
+        return FALSE;
     }
 
     $trace = debug_backtrace();
@@ -68,13 +68,13 @@ function PHPUnit_Util_ErrorHandler($errno, $errstr, $errfile, $errline)
 
     foreach ($trace as $frame) {
         if ($frame['function'] == '__toString') {
-            return;
+            return FALSE;
         }
     }
 
     if ($errno == E_NOTICE || $errno == E_STRICT) {
         if (PHPUnit_Framework_Notice::$enabled !== TRUE) {
-            return;
+            return FALSE;
         }
 
         $exception = 'PHPUnit_Framework_Notice';

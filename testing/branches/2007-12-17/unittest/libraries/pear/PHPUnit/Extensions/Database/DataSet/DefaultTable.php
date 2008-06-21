@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: DefaultTable.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: DefaultTable.php 3147 2008-06-08 08:00:19Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -59,7 +59,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -85,7 +85,7 @@ class PHPUnit_Extensions_Database_DataSet_DefaultTable extends PHPUnit_Extension
     public function addRow($values = array())
     {
         $columnNames = $this->getTableMetaData()->getColumns();
-        $this->data[] = array_merge(array_fill_keys($columnNames, null), $values);
+        $this->data[] = array_merge(array_fill_keys($columnNames, NULL), $values);
     }
 
     /**

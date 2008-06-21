@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsEqual.php 1985 2007-12-26 18:11:55Z sb $
+ * @version    SVN: $Id: IsEqual.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -66,7 +66,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
@@ -139,7 +139,6 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
      * Returns a string representation of the constraint.
      *
      * @return string
-     * @access public
      */
     public function toString()
     {
@@ -175,7 +174,7 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
 
     /**
      * Perform the actual recursive comparision of two values
-     * 
+     *
      * @param mixed $a First value
      * @param mixed $b Second value
      * @param int $depth Depth
@@ -203,12 +202,28 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
             return FALSE;
         }
 
-        if ($a instanceof DOMDocument) {
-            $a = $this->domToText($a);
-        }
+        if ($a instanceof DOMDocument || $b instanceof DOMDocument) {
+            if (!$a instanceof DOMDocument) {
+                $_a = new DOMDocument;
+                $_a->preserveWhiteSpace = FALSE;
+                $_a->loadXML($a);
+                $a = $_a;
+                unset($_a);
+            }
 
-        if ($b instanceof DOMDocument) {
-            $b = $this->domToText($b);
+            if (!$b instanceof DOMDocument) {
+                $_b = new DOMDocument;
+                $_b->preserveWhiteSpace = FALSE;
+                $_b->loadXML($b);
+                $b = $_b;
+                unset($_b);
+            }
+
+            if (version_compare(phpversion(), '5.2.0RC1', '>=')) {
+                return ($a->C14N() == $b->C14N());
+            } else {
+                return ($a->saveXML() == $b->saveXML());
+            }
         }
 
         if (is_object($a) && is_object($b) &&
@@ -256,10 +271,10 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
     }
 
     /**
-     * Compares two numeric values - use delta if applieable
-     * 
-     * @param mixed $a First value
-     * @param mixed $b Second value
+     * Compares two numeric values - use delta if applicable.
+     *
+     * @param mixed $a
+     * @param mixed $b
      * @return bool
      */
     protected function numericComparison($a, $b)
@@ -274,14 +289,13 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
     /**
      * Returns the normalized, whitespace-cleaned, and indented textual
      * representation of a DOMDocument.
-     * 
+     *
      * @param DOMDocument $document
      * @return string
      */
     protected function domToText(DOMDocument $document)
     {
-        $document->formatOutput = true;
-        $document->preserveWhiteSpace = false;
+        $document->formatOutput = TRUE;
         $document->normalizeDocument();
 
         return $document->saveXML();

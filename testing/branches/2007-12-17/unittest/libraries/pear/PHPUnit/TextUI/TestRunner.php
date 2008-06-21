@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestRunner.php 2144 2008-01-17 10:53:25Z sb $
+ * @version    SVN: $Id: TestRunner.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -78,7 +78,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
@@ -90,21 +90,16 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @var    PHPUnit_Runner_TestSuiteLoader
-     * @access protected
-     * @static
      */
     protected static $loader = NULL;
 
     /**
      * @var    PHPUnit_TextUI_ResultPrinter
-     * @access protected
      */
     protected $printer = NULL;
 
     /**
      * @var    boolean
-     * @access protected
-     * @static
      */
     protected static $versionStringPrinted = FALSE;
 
@@ -112,8 +107,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * @param  mixed $test
      * @param  array $arguments
      * @throws InvalidArgumentException
-     * @access public
-     * @static
      */
     public static function run($test, array $arguments = array())
     {
@@ -139,8 +132,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * Runs a single test and waits until the user types RETURN.
      *
      * @param  PHPUnit_Framework_Test $suite
-     * @access public
-     * @static
      */
     public static function runAndWait(PHPUnit_Framework_Test $suite)
     {
@@ -157,7 +148,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @return PHPUnit_Framework_TestResult
-     * @access protected
      */
     protected function createTestResult()
     {
@@ -168,7 +158,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * @param  PHPUnit_Framework_Test $suite
      * @param  array                  $arguments
      * @return PHPUnit_Framework_TestResult
-     * @access public
      */
     public function doRun(PHPUnit_Framework_Test $suite, array $arguments = array())
     {
@@ -185,6 +174,14 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
         }
 
         $result = $this->createTestResult();
+
+        if (!$arguments['convertErrorsToExceptions']) {
+            $result->convertErrorsToExceptions(FALSE);
+        }
+
+        if (!$arguments['convertNoticesToExceptions']) {
+            PHPUnit_Framework_Notice::$enabled = FALSE;
+        }
 
         if ($arguments['stopOnFailure']) {
             $result->stopOnFailure(TRUE);
@@ -228,7 +225,7 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
         }
 
         if (isset($arguments['graphvizLogfile'])) {
-            if (class_exists('Image_GraphViz', FALSE)) {
+            if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('Image/GraphViz.php')) {
                 $result->addListener(
                   new PHPUnit_Util_Log_GraphViz($arguments['graphvizLogfile'])
                 );
@@ -388,7 +385,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @param  boolean $wait
-     * @access protected
      */
     protected function pause($wait)
     {
@@ -405,7 +401,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @param  PHPUnit_TextUI_ResultPrinter $resultPrinter
-     * @access public
      */
     public function setPrinter(PHPUnit_TextUI_ResultPrinter $resultPrinter)
     {
@@ -416,7 +411,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * A test started.
      *
      * @param  string  $testName
-     * @access public
      */
     public function testStarted($testName)
     {
@@ -426,7 +420,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * A test ended.
      *
      * @param  string  $testName
-     * @access public
      */
     public function testEnded($testName)
     {
@@ -438,7 +431,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * @param  integer                                 $status
      * @param  PHPUnit_Framework_Test                 $test
      * @param  PHPUnit_Framework_AssertionFailedError $e
-     * @access public
      */
     public function testFailed($status, PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e)
     {
@@ -449,7 +441,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * a test suite.
      *
      * @param  string  $message
-     * @access protected
      */
     protected function runFailed($message)
     {
@@ -462,7 +453,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * @param  string $directory
      * @return string
      * @throws RuntimeException
-     * @access protected
      * @since  Method available since Release 3.0.0
      */
     protected function getDirectory($directory)
@@ -485,7 +475,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @param  string $buffer
-     * @access protected
      * @since  Method available since Release 3.1.0
      */
     protected static function write($buffer)
@@ -501,7 +490,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * Returns the loader to be used.
      *
      * @return PHPUnit_Runner_TestSuiteLoader
-     * @access public
      * @since  Method available since Release 2.2.0
      */
     public function getLoader()
@@ -517,8 +505,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * Sets the loader to be used.
      *
      * @param PHPUnit_Runner_TestSuiteLoader $loader
-     * @access public
-     * @static
      * @since  Method available since Release 3.0.0
      */
     public static function setLoader(PHPUnit_Runner_TestSuiteLoader $loader)
@@ -527,7 +513,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
     }
 
     /**
-     * @access public
      */
     public static function showError($message)
     {
@@ -539,8 +524,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
 
     /**
-     * @access public
-     * @static
      */
     public static function printVersionString()
     {
@@ -552,7 +535,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
     /**
      * @param  array $arguments
-     * @access protected
      * @since  Method available since Release 3.2.1
      */
     protected function handleConfiguration(array &$arguments)
@@ -570,12 +552,13 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
         $arguments['filter']             = isset($arguments['filter'])             ? $arguments['filter']             : FALSE;
         $arguments['listeners']          = isset($arguments['listeners'])          ? $arguments['listeners']          : array();
         $arguments['repeat']             = isset($arguments['repeat'])             ? $arguments['repeat']             : FALSE;
-        $arguments['stopOnFailure']      = isset($arguments['stopOnFailure'])      ? $arguments['stopOnFailure']      : FALSE;
         $arguments['testDatabasePrefix'] = isset($arguments['testDatabasePrefix']) ? $arguments['testDatabasePrefix'] : '';
         $arguments['verbose']            = isset($arguments['verbose'])            ? $arguments['verbose']            : FALSE;
         $arguments['wait']               = isset($arguments['wait'])               ? $arguments['wait']               : FALSE;
 
         if (isset($arguments['configuration'])) {
+            $arguments['configuration']->handlePHPConfiguration();
+
             $filterConfiguration = $arguments['configuration']->getFilterConfiguration();
 
             PHPUnit_Util_Filter::$addUncoveredFilesFromWhitelist = $filterConfiguration['whitelist']['addUncoveredFilesFromWhitelist'];
@@ -620,14 +603,18 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
                 PHPUnit_Util_Filter::removeFileFromWhitelist($file);
             }
 
-            $phpConfiguration = $arguments['configuration']->getPHPConfiguration();
+            $phpunitConfiguration = $arguments['configuration']->getPHPUnitConfiguration();
 
-            foreach ($phpConfiguration['ini'] as $name => $value) {
-                ini_set($name, $value);
+            if (isset($phpunitConfiguration['convertErrorsToExceptions']) && !isset($arguments['convertErrorsToExceptions'])) {
+                $arguments['convertErrorsToExceptions'] = $phpunitConfiguration['convertErrorsToExceptions'];
             }
 
-            foreach ($phpConfiguration['var'] as $name => $value) {
-                $GLOBALS[$name] = $value;
+            if (isset($phpunitConfiguration['convertNoticesToExceptions']) && !isset($arguments['convertNoticesToExceptions'])) {
+                $arguments['convertNoticesToExceptions'] = $phpunitConfiguration['convertNoticesToExceptions'];
+            }
+
+            if (isset($phpunitConfiguration['stopOnFailure']) && !isset($arguments['stopOnFailure'])) {
+                $arguments['stopOnFailure'] = $phpunitConfiguration['stopOnFailure'];
             }
 
             $groupConfiguration = $arguments['configuration']->getGroupConfiguration();
@@ -726,16 +713,19 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
             }
         }
 
-        $arguments['cpdMinLines']          = isset($arguments['cpdMinLines'])          ? $arguments['cpdMinLines']          : 5;
-        $arguments['cpdMinMatches']        = isset($arguments['cpdMinMatches'])        ? $arguments['cpdMinMatches']        : 70;
-        $arguments['groups']               = isset($arguments['groups'])               ? $arguments['groups']               : array();
-        $arguments['excludeGroups']        = isset($arguments['excludeGroups'])        ? $arguments['excludeGroups']        : array();
-        $arguments['logIncompleteSkipped'] = isset($arguments['logIncompleteSkipped']) ? $arguments['logIncompleteSkipped'] : FALSE;
-        $arguments['reportCharset']        = isset($arguments['reportCharset'])        ? $arguments['reportCharset']        : 'ISO-8859-1';
-        $arguments['reportYUI']            = isset($arguments['reportYUI'])            ? $arguments['reportYUI']            : TRUE;
-        $arguments['reportHighlight']      = isset($arguments['reportHighlight'])      ? $arguments['reportHighlight']      : FALSE;
-        $arguments['reportLowUpperBound']  = isset($arguments['reportLowUpperBound'])  ? $arguments['reportLowUpperBound']  : 35;
-        $arguments['reportHighLowerBound'] = isset($arguments['reportHighLowerBound']) ? $arguments['reportHighLowerBound'] : 70;
+        $arguments['cpdMinLines']                = isset($arguments['cpdMinLines'])                ? $arguments['cpdMinLines']                : 5;
+        $arguments['cpdMinMatches']              = isset($arguments['cpdMinMatches'])              ? $arguments['cpdMinMatches']              : 70;
+        $arguments['convertErrorsToExceptions']  = isset($arguments['convertErrorsToExceptions'])  ? $arguments['convertErrorsToExceptions']  : TRUE;
+        $arguments['convertNoticesToExceptions'] = isset($arguments['convertNoticesToExceptions']) ? $arguments['convertNoticesToExceptions'] : TRUE;
+        $arguments['excludeGroups']              = isset($arguments['excludeGroups'])              ? $arguments['excludeGroups']              : array();
+        $arguments['groups']                     = isset($arguments['groups'])                     ? $arguments['groups']                     : array();
+        $arguments['logIncompleteSkipped']       = isset($arguments['logIncompleteSkipped'])       ? $arguments['logIncompleteSkipped']       : FALSE;
+        $arguments['reportCharset']              = isset($arguments['reportCharset'])              ? $arguments['reportCharset']              : 'ISO-8859-1';
+        $arguments['reportHighlight']            = isset($arguments['reportHighlight'])            ? $arguments['reportHighlight']            : FALSE;
+        $arguments['reportHighLowerBound']       = isset($arguments['reportHighLowerBound'])       ? $arguments['reportHighLowerBound']       : 70;
+        $arguments['reportLowUpperBound']        = isset($arguments['reportLowUpperBound'])        ? $arguments['reportLowUpperBound']        : 35;
+        $arguments['reportYUI']                  = isset($arguments['reportYUI'])                  ? $arguments['reportYUI']                  : TRUE;
+        $arguments['stopOnFailure']              = isset($arguments['stopOnFailure'])              ? $arguments['stopOnFailure']              : FALSE;
 
         if (isset($arguments['reportDirectory'])) {
             $arguments['reportDirectory'] = $this->getDirectory($arguments['reportDirectory']);
