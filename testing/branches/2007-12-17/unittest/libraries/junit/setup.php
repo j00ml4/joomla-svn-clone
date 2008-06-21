@@ -26,6 +26,14 @@ define('JUNIT_IS_FRAMEWORK', 4);
 class JUnit_Setup
 {
 	/**
+	 * Regex to determine which class files to skip. If empty, no filtering is
+	 * done.
+	 *
+	 * @var string
+	 */
+	protected $_classExclude = '';
+
+	/**
 	 * Regex to determine which class files to process. If empty, no filtering
 	 * is done.
 	 *
@@ -39,10 +47,13 @@ class JUnit_Setup
 	 * @var array
 	 */
 	protected static $_optionDefs = array(
+		'class-exclude' => array('', true, 'Regular expression to exclude tests by class name.'),
 		'class-filter' => array('', true, 'Regular expression to select tests by class name.'),
 		'debug' => array(false, false, 'Dump unit test diagnostics.'),
 		'help' => array(false, false, 'Dump this help message.'),
+		'sequence-exclude' => array('', true, 'Regular expression to exclude tests by sequence ID.'),
 		'sequence-filter' => array('', true, 'Regular expression to select tests by sequence ID.'),
+		'test-exclude' => array('', true, 'Regular expression to exclude tests by test name.'),
 		'test-filter' => array('', true, 'Regular expression to select tests by test name.'),
 	);
 
@@ -61,6 +72,14 @@ class JUnit_Setup
 	static protected $_properties = array();
 
 	/**
+	 * Regex to determine which test sequences to skip. If empty, no filtering
+	 * is done.
+	 *
+	 * @var string
+	 */
+	protected  $_sequenceExclude = '';
+
+	/**
 	 * Regex to determine which test sequences to process. If empty, no
 	 * filtering is done.
 	 *
@@ -74,6 +93,14 @@ class JUnit_Setup
 	 * @var string
 	 */
 	protected $_startDir;
+
+	/**
+	 * Regex to determine which test names to skip. If empty, no filtering is
+	 * done.
+	 *
+	 * @var string
+	 */
+	protected $_testExclude = '';
 
 	/**
 	 * Regex to determine which test names to process. If empty, no filtering is
@@ -195,13 +222,28 @@ class JUnit_Setup
 	 */
 	protected function _isFiltered($fileName) {
 		$parts = explode('-', $fileName);
+		if ($this -> _classExclude) {
+			if (preg_match($this -> _classExclude, $parts[0])) {
+				return true;
+			}
+		}
 		if ($this -> _classFilter) {
 			if (! preg_match($this -> _classFilter, $parts[0])) {
 				return true;
 			}
 		}
+		if ($this -> _sequenceExclude) {
+			if (preg_match($this -> _sequenceExclude, $parts[1])) {
+				return true;
+			}
+		}
 		if ($this -> _sequenceFilter) {
 			if (! preg_match($this -> _sequenceFilter, $parts[1])) {
+				return true;
+			}
+		}
+		if ($this -> _testExclude) {
+			if (preg_match($this -> _testExclude, $parts[2])) {
 				return true;
 			}
 		}
@@ -744,13 +786,28 @@ jutdump(debug_backtrace());
 				$this -> _options[$opt] = true;
 			}
 			switch ($opt) {
+				case 'class-exclude': {
+					$this -> _classExclude = $value;
+				}
+				break;
+
 				case 'class-filter': {
 					$this -> _classFilter = $value;
 				}
 				break;
 
+				case 'sequence-exclude': {
+					$this -> _sequenceExclude = $value;
+				}
+				break;
+
 				case 'sequence-filter': {
 					$this -> _sequenceFilter = $value;
+				}
+				break;
+
+				case 'test-exclude': {
+					$this -> _testExclude = $value;
 				}
 				break;
 
