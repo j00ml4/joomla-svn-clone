@@ -61,7 +61,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -105,27 +105,27 @@ class PHPUnit_Extensions_Database_DB_DataSet extends PHPUnit_Extensions_Database
             echo $e->getTraceAsString();
             throw $e;
         }
-        
+
         $columnList = implode(', ', $tableMetaData->getColumns());
-        
+
         $primaryKeys = $tableMetaData->getPrimaryKeys();
         if (count($primaryKeys)) {
             $orderBy = 'ORDER BY ' . implode(' ASC, ', $primaryKeys) . ' ASC';
         } else {
             $orderBy = '';
         }
-        
+
         return "SELECT {$columnList} FROM {$tableMetaData->getTableName()} {$orderBy}";
     }
 
     /**
-     * Creates an iterator over the tables in the data set. If $reverse is 
+     * Creates an iterator over the tables in the data set. If $reverse is
      * true a reverse iterator will be returned.
      *
      * @param bool $reverse
      * @return PHPUnit_Extensions_Database_DB_TableIterator
      */
-    protected function createIterator($reverse = false)
+    protected function createIterator($reverse = FALSE)
     {
         return new PHPUnit_Extensions_Database_DB_TableIterator($this->getTableNames(), $this, $reverse);
     }
@@ -141,11 +141,11 @@ class PHPUnit_Extensions_Database_DB_DataSet extends PHPUnit_Extensions_Database
         if (!in_array($tableName, $this->getTableNames())) {
             throw new InvalidArgumentException("$tableName is not a table in the current database.");
         }
-        
+
         if (empty($this->tables[$tableName])) {
             $this->tables[$tableName] = new PHPUnit_Extensions_Database_DB_Table($this->getTableMetaData($tableName), $this->databaseConnection);
         }
-        
+
         return $this->tables[$tableName];
     }
 
@@ -162,7 +162,7 @@ class PHPUnit_Extensions_Database_DB_DataSet extends PHPUnit_Extensions_Database
 
     /**
      * Returns a list of table names for the database
-     * 
+     *
      * @return Array
      */
     public function getTableNames()

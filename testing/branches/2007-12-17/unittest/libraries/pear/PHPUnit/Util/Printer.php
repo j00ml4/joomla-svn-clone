@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Printer.php 2141 2008-01-17 10:49:39Z sb $
+ * @version    SVN: $Id: Printer.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -56,7 +56,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  * @abstract
@@ -65,19 +65,16 @@ abstract class PHPUnit_Util_Printer
 {
     /**
      * @var    resource
-     * @access protected
      */
     protected $out;
 
     /**
      * @var    string
-     * @access protected
      */
     protected $outTarget;
 
     /**
      * @var    boolean
-     * @access protected
      */
     protected $printsHTML = FALSE;
 
@@ -86,7 +83,6 @@ abstract class PHPUnit_Util_Printer
      *
      * @param  mixed $out
      * @throws InvalidArgumentException
-     * @access public
      */
     public function __construct($out = NULL)
     {
@@ -97,7 +93,7 @@ abstract class PHPUnit_Util_Printer
 
                     if (sizeof($out) != 2) {
                         throw new InvalidArgumentException;
-                    }                    
+                    }
 
                     $this->out = fsockopen($out[0], $out[1]);
                 } else {
@@ -114,7 +110,6 @@ abstract class PHPUnit_Util_Printer
     /**
      * Flush buffer, optionally tidy up HTML, and close output.
      *
-     * @access public
      */
     public function flush()
     {
@@ -131,7 +126,6 @@ abstract class PHPUnit_Util_Printer
 
     /**
      * @param  string $buffer
-     * @access public
      */
     public function write($buffer)
     {

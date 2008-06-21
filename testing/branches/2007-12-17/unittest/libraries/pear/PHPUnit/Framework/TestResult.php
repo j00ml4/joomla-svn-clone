@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestResult.php 2126 2008-01-16 06:21:19Z sb $
+ * @version    SVN: $Id: TestResult.php 3165 2008-06-08 12:23:59Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -63,7 +63,7 @@ if (!class_exists('PHPUnit_Framework_TestResult', FALSE)) {
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.11
+ * @version    Release: 3.2.21
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
@@ -74,49 +74,41 @@ class PHPUnit_Framework_TestResult implements Countable
 
     /**
      * @var    array
-     * @access protected
      */
     protected $errors = array();
 
     /**
      * @var    array
-     * @access protected
      */
     protected $failures = array();
 
     /**
      * @var    array
-     * @access protected
      */
     protected $notImplemented = array();
 
     /**
      * @var    array
-     * @access protected
      */
     protected $skipped = array();
 
     /**
      * @var    array
-     * @access protected
      */
     protected $listeners = array();
 
     /**
      * @var    integer
-     * @access protected
      */
     protected $runTests = 0;
 
     /**
      * @var    float
-     * @access protected
      */
     protected $time = 0;
 
     /**
      * @var    PHPUnit_Framework_TestSuite
-     * @access protected
      */
     protected $topTestSuite = NULL;
 
@@ -124,25 +116,26 @@ class PHPUnit_Framework_TestResult implements Countable
      * Code Coverage information provided by Xdebug.
      *
      * @var    array
-     * @access protected
      */
     protected $codeCoverageInformation = array();
 
     /**
      * @var    boolean
-     * @access protected
      */
     protected $collectCodeCoverageInformation = FALSE;
 
     /**
      * @var    boolean
-     * @access protected
+     */
+    protected $convertErrorsToExceptions = TRUE;
+
+    /**
+     * @var    boolean
      */
     protected $stop = FALSE;
 
     /**
      * @var    boolean
-     * @access protected
      */
     protected $stopOnFailure = FALSE;
 
@@ -150,7 +143,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Registers a TestListener.
      *
      * @param  PHPUnit_Framework_TestListener
-     * @access public
      */
     public function addListener(PHPUnit_Framework_TestListener $listener)
     {
@@ -161,7 +153,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Unregisters a TestListener.
      *
      * @param  PHPUnit_Framework_TestListener $listener
-     * @access public
      */
     public function removeListener(PHPUnit_Framework_TestListener $listener)
     {
@@ -175,7 +166,6 @@ class PHPUnit_Framework_TestResult implements Countable
     /**
      * Flushes all flushable TestListeners.
      *
-     * @access public
      * @since  Method available since Release 3.0.0
      */
     public function flushListeners()
@@ -194,7 +184,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * @param  PHPUnit_Framework_Test $test
      * @param  Exception              $e
      * @param  float                  $time
-     * @access public
      */
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
@@ -229,7 +218,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * @param  PHPUnit_Framework_Test                 $test
      * @param  PHPUnit_Framework_AssertionFailedError $e
      * @param  float                                  $time
-     * @access public
      */
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
@@ -261,7 +249,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Informs the result that a testsuite will be started.
      *
      * @param  PHPUnit_Framework_TestSuite $suite
-     * @access public
      * @since  Method available since Release 2.2.0
      */
     public function startTestSuite(PHPUnit_Framework_TestSuite $suite)
@@ -279,7 +266,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Informs the result that a testsuite was completed.
      *
      * @param  PHPUnit_Framework_TestSuite $suite
-     * @access public
      * @since  Method available since Release 2.2.0
      */
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
@@ -293,7 +279,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Informs the result that a test will be started.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @access public
      */
     public function startTest(PHPUnit_Framework_Test $test)
     {
@@ -309,7 +294,6 @@ class PHPUnit_Framework_TestResult implements Countable
      *
      * @param  PHPUnit_Framework_Test $test
      * @param  float                  $time
-     * @access public
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {
@@ -322,7 +306,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns TRUE if no incomplete test occured.
      *
      * @return boolean
-     * @access public
      */
     public function allCompletlyImplemented()
     {
@@ -333,7 +316,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Gets the number of incomplete tests.
      *
      * @return integer
-     * @access public
      */
     public function notImplementedCount()
     {
@@ -344,7 +326,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns an Enumeration for the incomplete tests.
      *
      * @return array
-     * @access public
      */
     public function notImplemented()
     {
@@ -355,7 +336,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns TRUE if no test has been skipped.
      *
      * @return boolean
-     * @access public
      * @since  Method available since Release 3.0.0
      */
     public function noneSkipped()
@@ -367,7 +347,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Gets the number of skipped tests.
      *
      * @return integer
-     * @access public
      * @since  Method available since Release 3.0.0
      */
     public function skippedCount()
@@ -379,7 +358,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns an Enumeration for the skipped tests.
      *
      * @return array
-     * @access public
      * @since  Method available since Release 3.0.0
      */
     public function skipped()
@@ -391,7 +369,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Gets the number of detected errors.
      *
      * @return integer
-     * @access public
      */
     public function errorCount()
     {
@@ -402,7 +379,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns an Enumeration for the errors.
      *
      * @return array
-     * @access public
      */
     public function errors()
     {
@@ -413,7 +389,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Gets the number of detected failures.
      *
      * @return integer
-     * @access public
      */
     public function failureCount()
     {
@@ -424,7 +399,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns an Enumeration for the failures.
      *
      * @return array
-     * @access public
      */
     public function failures()
     {
@@ -435,7 +409,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns the (top) test suite.
      *
      * @return PHPUnit_Framework_TestSuite
-     * @access public
      * @since  Method available since Release 3.0.0
      */
     public function topTestSuite()
@@ -448,7 +421,6 @@ class PHPUnit_Framework_TestResult implements Countable
      *
      * @param  boolean $flag
      * @throws InvalidArgumentException
-     * @access public
      * @since  Method available since Release 2.3.0
      */
     public function collectCodeCoverageInformation($flag)
@@ -533,7 +505,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * @param  boolean $filterTests
      * @param  boolean $filterPHPUnit
      * @return array
-     * @access public
      */
     public function getCodeCoverageInformation($filterTests = TRUE, $filterPHPUnit = TRUE)
     {
@@ -549,7 +520,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns data in the same form as getCodeCoverageInformation().
      *
      * @return array
-     * @access public
      */
     public function getUncoveredWhitelistFiles()
     {
@@ -557,14 +527,13 @@ class PHPUnit_Framework_TestResult implements Countable
           $this->codeCoverageInformation
         );
 
-        return($missing);  
+        return($missing);
     }
 
     /**
      * Runs a TestCase.
      *
      * @param  PHPUnit_Framework_Test $test
-     * @access public
      */
     public function run(PHPUnit_Framework_Test $test)
     {
@@ -575,23 +544,16 @@ class PHPUnit_Framework_TestResult implements Countable
 
         $errorHandlerSet = FALSE;
 
-        $oldErrorHandler = set_error_handler(
-          'PHPUnit_Util_ErrorHandler', E_ALL | E_STRICT
-        );
+        if ($this->convertErrorsToExceptions) {
+            $oldErrorHandler = set_error_handler(
+              'PHPUnit_Util_ErrorHandler', E_ALL | E_STRICT
+            );
 
-        if ($oldErrorHandler === NULL) {
-            $errorHandlerSet = TRUE;
-        } else {
-            restore_error_handler();
-        }
-        $oldErrorHandler = set_error_handler(
-          'PHPUnit_Util_ErrorHandler', E_ALL | E_STRICT
-        );
-
-        if ($oldErrorHandler === NULL) {
-            $errorHandlerSet = TRUE;
-        } else {
-            restore_error_handler();
+            if ($oldErrorHandler === NULL) {
+                $errorHandlerSet = TRUE;
+            } else {
+                restore_error_handler();
+            }
         }
 
         if (self::$xdebugLoaded === NULL) {
@@ -651,7 +613,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Gets the number of run tests.
      *
      * @return integer
-     * @access public
      */
     public function count()
     {
@@ -662,7 +623,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Checks whether the test run should stop.
      *
      * @return boolean
-     * @access public
      */
     public function shouldStop()
     {
@@ -672,7 +632,6 @@ class PHPUnit_Framework_TestResult implements Countable
     /**
      * Marks that the test run should stop.
      *
-     * @access public
      */
     public function stop()
     {
@@ -680,11 +639,26 @@ class PHPUnit_Framework_TestResult implements Countable
     }
 
     /**
+     * Enables or disables the error-to-exception conversion.
+     *
+     * @param  boolean $flag
+     * @throws InvalidArgumentException
+     * @since  Method available since Release 3.2.14
+     */
+    public function convertErrorsToExceptions($flag)
+    {
+        if (is_bool($flag)) {
+            $this->convertErrorsToExceptions = $flag;
+        } else {
+            throw new InvalidArgumentException;
+        }
+    }
+
+    /**
      * Enables or disables the stopping when a failure or error occurs.
      *
      * @param  boolean $flag
      * @throws InvalidArgumentException
-     * @access public
      * @since  Method available since Release 3.1.0
      */
     public function stopOnFailure($flag)
@@ -700,7 +674,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns the time spent running the tests.
      *
      * @return float
-     * @access public
      */
     public function time()
     {
@@ -711,7 +684,6 @@ class PHPUnit_Framework_TestResult implements Countable
      * Returns whether the entire test was successful or not.
      *
      * @return boolean
-     * @access public
      */
     public function wasSuccessful()
     {
