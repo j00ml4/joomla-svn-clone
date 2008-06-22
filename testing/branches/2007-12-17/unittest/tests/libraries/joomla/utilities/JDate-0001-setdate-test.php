@@ -53,16 +53,7 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 			/*
 			 * Check versions
 			 */
-			if (isset($dataSet['since'])
-				&& JDateTest_DataSet::$useVersionCheck
-				&& version_compare($dataSet['since'], JVERSION) < 0
-			) {
-				continue;
-			}
-			if (isset($dataSet['deprecated'])
-				&& JDateTest_DataSet::$useVersionCheck
-				&& version_compare($dataSet['deprecated'], JVERSION) >= 0
-			) {
+            if (!JUnit_Setup::isTestEnabled(JVERSION, $dataSet)) {
 				continue;
 			}
 			/*
@@ -93,12 +84,6 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 	}
 
 	function setUp() {
-		if (JDateTest_DataSet::$useVersionCheck
-			&& version_compare('1.6.0', JVERSION) > 0
-		) {
-			$this -> markTestSkipped('These tests are designed for J1.6+');
-			return;
-		}
 	}
 
 	/**

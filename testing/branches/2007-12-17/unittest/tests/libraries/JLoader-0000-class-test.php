@@ -90,6 +90,6 @@ class JLoaderTest_Class extends PHPUnit_Framework_TestCase
 }
 
 // Call JLoaderTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JLoaderTest::main') {
-	JLoaderTest::main();
+if (JUNIT_MAIN_METHOD == 'JLoaderTest_Class::main') {
+	JLoaderTest_Class::main();
 }

@@ -29,9 +29,6 @@ if (! isset($JUnit_root)) {
 		$JUnit_posn + 1,
 		$keep > 0 ? $keep : 0
 	) . DS . 'tests';
-	echo 'file=', __FILE__, PHP_EOL,
-		'posn=', $JUnit_posn, PHP_EOL,
-		'base=', basename(__FILE__), PHP_EOL;
 }
 
 require_once $JUnit_root . DS . 'setup.php';
