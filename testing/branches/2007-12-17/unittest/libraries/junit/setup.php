@@ -10,14 +10,6 @@
  */
 
 /**
- * constants for $is_test property of the info object
- * @see JUnit_Setup::getInfoObject()
- */
-define('JUNIT_IS_TESTSUITE', 1);
-define('JUNIT_IS_TESTCASE',  2);
-define('JUNIT_IS_FRAMEWORK', 4);
-
-/**
  * Unit Test Setup
  *
  * The setup class provides a registry for information that would otherwise
@@ -280,8 +272,7 @@ class JUnit_Setup
 	 * @param  string $path relative of a framework or testcase file/dir
 	 * @return array
 	 */
-	function getInfoObject($path)
-	{
+	function getInfoObject($path) {
 
 		if (strrpos(basename($path), '.') === false) {
 			if (strrpos($path, '/') < strlen($path)-1) {
@@ -379,6 +370,40 @@ class JUnit_Setup
 			@settype($result, $forcetype);
 		}
 		return $result;
+	}
+
+	/**
+	 * Returns true if the current version is in the specified range.
+	 *
+     * @param string Version to test against. The JVERSION constant should be
+     * passed in. If JUnit_Config::$versionOverride is set, then it is used no
+     * matter what is passed in.
+	 * @param array Range specification, can contain any combination of
+	 * "jver_min", "jver_max", "jver_below". The jver_min entry specifies the
+	 * minimum version of Joomla that is required for this test to be valid;
+	 * jver_max specifies the maximum version; jver_below specifies the version
+	 * must be less than the provided value.
+	 */
+	static function isTestEnabled($version, $range) {
+        if (isset(JUnit_Config::$versionOverride) && JUnit_Config::$versionOverride != '') {
+            $version = JUnit_Config::$versionOverride;
+        }
+		if (isset($range['jver_min'])
+			&& version_compare($version, $range['jver_min']) < 0
+		) {
+			return false;
+		}
+        if (isset($range['jver_max'])
+            && version_compare($version, $range['jver_max']) > 0
+        ) {
+            return false;
+        }
+        if (isset($range['jver_below'])
+            && version_compare($version, $range['jver_below']) >= 0
+        ) {
+            return false;
+        }
+		return true;
 	}
 
 	/**

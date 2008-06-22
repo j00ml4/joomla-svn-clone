@@ -2,7 +2,9 @@
 Changelog
 -------------------------------------------------
 This is a non-exhaustive (but still near complete) changelog
-for the Joomla! 1.5 Framework Unit Test Facility.
+for the Joomla! 1.5 Framework Unit Test Facility. See the SVN commit
+log for specifics, or the Unit_Testing page on the documentation
+wiki for a high-level view.
 
 -------------------------------------------------
 Legend:
@@ -13,6 +15,17 @@ Legend:
 > -> Moved
 ! -> Note
 
+-------------------------------------------------
+2008-06-22 Alan Langford
+ + Added teststatus.php. A utility to evaluate how many test files have been
+   created for each class.
+ ^ Broke some configuration out into configure.php, to reduce duplication between
+   running tests and utilities like teststatus.
+ + Introduced new setup variable to allow test environment to override Joomla version.
+ + Defined pattern for specifying a version range for tests. Added
+   JUnit_Setup::isTestEnabled() to standardize testing.
+ + Added version specifiers to JDate data set.
+ - Removed the SimpleTest based JFTP tests.
 -------------------------------------------------
 2008-05-31 Anthony Ferrara
  +  Multiple fixes for the JCache tests.  Added skipping of clear test for all

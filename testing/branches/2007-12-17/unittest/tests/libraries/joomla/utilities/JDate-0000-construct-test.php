@@ -56,18 +56,10 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 	}
 
 	function setUp() {
-		if (JDateTest_DataSet::$useVersionCheck
-			&& version_compare('1.6.0', JVERSION) > 0
-		) {
-			$this -> markTestSkipped('These tests are designed for J1.6+');
-			return;
-		}
 	}
 
 	function testConstruct() {
-		if (JDateTest_DataSet::$useVersionCheck
-			&& version_compare('1.6.0', JVERSION) > 0
-		) {
+        if (!JUnit_Setup::isTestEnabled(JVERSION, array('jver_min' => '1.6.0'))) {
 			$this -> markTestSkipped('These tests are designed for J1.6+');
 			return;
 		}

@@ -29,7 +29,7 @@ class JUnit_Config {
 	 *
 	 * @var string
 	 */
-	public $configDir = 'config';
+	static static public $configDir = 'config';
 
 	/**
 	 * Location of libraries. Relative to the root unit test directory, or start
@@ -37,7 +37,7 @@ class JUnit_Config {
 	 *
 	 * @var string
 	 */
-	public $libDir = 'libraries';
+	static public $libDir = 'libraries';
 
 	/**
 	 * Location of test logs. Must be writiable. Relative to the root unit test
@@ -45,7 +45,7 @@ class JUnit_Config {
 	 *
 	 * @var string
 	 */
-	public $logDir = '';
+	static public $logDir = '';
 
     /**
      * Location of PEAR libraries, including PHPUnit. Relative to the root unit
@@ -53,7 +53,7 @@ class JUnit_Config {
      *
      * @var string
      */
-    public $pearDir = 'libraries/pear';
+    static public $pearDir = 'libraries/pear';
 
 	/**
 	 * Location of the unit test files. Relative to the root unit test
@@ -61,13 +61,20 @@ class JUnit_Config {
 	 *
 	 * @var string
 	 */
-	public $testDir = 'tests';
+	static public $testDir = 'tests';
+    
+    /**
+     * Version override. If set, this version is used as the Joomla version.
+     * 
+     * @var string
+     */
+    static public $versionOverride = '';
 
 	/**
 	 * Default output format for command line. Standard Joomla reporters are:
 	 * html, xml, php, json, text.
 	 */
-	public $viewCli = 'text';
+	static public $viewCli = 'text';
 
 	/**
 	 * Location of views. Relative to the root unit test directory, or start
@@ -75,12 +82,12 @@ class JUnit_Config {
 	 *
 	 * @var string
 	 */
-	public $viewDir = 'views';
+	static public $viewDir = 'views';
 
 	/**
 	 * Default output format for HTTP requests. Standard Joomla reporters are:
 	 * html, xml, php, json, text.
 	 */
-	public $viewHttp = 'html';
+	static public $viewHttp = 'html';
 
 }
