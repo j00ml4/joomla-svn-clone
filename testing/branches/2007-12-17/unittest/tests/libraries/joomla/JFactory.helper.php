@@ -15,7 +15,7 @@ class JFactoryTestHelper
 {
 
 	function tearDownTestCase() {
-		jutdump(JFactory::getConfig());
+		
 	}
 
 	/**

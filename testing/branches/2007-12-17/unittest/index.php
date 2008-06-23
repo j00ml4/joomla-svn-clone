@@ -17,6 +17,9 @@ error_reporting(E_ALL);
 define('PHP_VERSION_MINIMUM', '5.2.0');
 define('JUNIT_VERSION_MINIMUM', '3.2.0');
 
+echo 'Sorry, no web interface yet.';
+exit(1);
+
 if (version_compare(PHP_VERSION, PHP_VERSION_MINIMUM) < 0) {
 	die('Sorry. Requires PHP ' . PHP_VERSION_MINIMUM . ' or later.');
 }
