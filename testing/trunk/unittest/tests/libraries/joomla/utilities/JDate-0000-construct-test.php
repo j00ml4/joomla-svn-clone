@@ -59,7 +59,7 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 	}
 
 	function testConstruct() {
-        if (!JUnit_Setup::isTestEnabled(JVERSION, array('jver_min' => '1.6.0'))) {
+		if (!JUnit_Setup::isTestEnabled(JVERSION, array('jver_min' => '1.6.0'))) {
 			$this -> markTestSkipped('These tests are designed for J1.6+');
 			return;
 		}
@@ -84,7 +84,7 @@ class JDateTest_Construct extends PHPUnit_Framework_TestCase
 }
 
 // Call JDateTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JDateTest::main') {
-	JDateTest::main();
+if (JUNIT_MAIN_METHOD == 'JDateTest_Construct::main') {
+	JDateTest_Construct::main();
 }
 

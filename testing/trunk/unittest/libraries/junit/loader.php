@@ -22,17 +22,17 @@ class JLoader
 
 	function injectMock($mockPath, $filePath, $base = null, $key = 'libraries.' ) {
 		$keyPath = $key ? $key . $filePath : $filePath;
-		if ( ! $base ) {
+		if (! $base) {
 			$base =  JPATH_LIBRARIES;
 		}
 
-		$parts = explode( '.', $filePath );
+		$parts = explode('.', $filePath);
 
-		$classname = array_pop( $parts );
-		switch($classname)
+		$classname = array_pop($parts);
+		switch ($classname)
 		{
 			case 'helper' :
-				$classname = ucfirst(array_pop( $parts )).ucfirst($classname);
+				$classname = ucfirst(array_pop($parts)).ucfirst($classname);
 				break;
 
 			default :
@@ -121,22 +121,22 @@ class JLoader
 	 * @return  array|boolean       Array of classes
 	 * @since   1.5
 	 */
-	function & register ($class = null, $file = null)
+	function &register($class = null, $file = null)
 	{
 		static $classes;
 
-		if(! isset($classes)) {
+		if (! isset($classes)) {
 			$classes = array();
 		}
 
-		if($class && is_file($file))
+		if ($class && is_file($file) && ! isset($classes[$class]))
 		{
 			// Force to lower case.
 			$class = strtolower($class);
 			$classes[$class] = $file;
 
 			// In php4 we load the class immediately.
-			if((version_compare( phpversion(), '5.0' ) < 0)) {
+			if ((version_compare( phpversion(), '5.0' ) < 0)) {
 				JLoader::load($class);
 			}
 
