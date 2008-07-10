@@ -1,0 +1,1 @@
+CREATE TABLE #__alpha_utf8_install ( fielda int(10) )
