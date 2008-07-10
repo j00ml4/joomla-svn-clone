@@ -1,0 +1,1 @@
+CREATE TABLE #__alpha_nonutf8_update ( fielda int(10) )
