@@ -18,5 +18,5 @@
  */
  
 function com_uninstall() {
-	echo '<p>Legacy Uninstallation Script Run</p>'; 
+	echo '<p>'. JText::_('Legacy Uninstallation Script Run') .'</p>'; 
 }

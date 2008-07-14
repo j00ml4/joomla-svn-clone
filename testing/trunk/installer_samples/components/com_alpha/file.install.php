@@ -18,6 +18,6 @@
  */
  
 function com_install() {
-	echo '<p>Legacy Installation Script Run</p>'; 
+	echo '<p>'. JText::_('Legacy Installation Script Run') .'</p>'; 
 }
 
