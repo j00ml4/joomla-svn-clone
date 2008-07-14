@@ -6,7 +6,7 @@
  * 
  * PHP4/5
  *  
- * Created on Jul 8, 2008
+ * Created on Jul 14, 2008
  * 
  * @package package_name
  * @author Your Name <author@toowoombarc.qld.gov.au>
@@ -17,4 +17,5 @@
  * @see http://joomlacode.org/gf/project/   JoomlaCode Project:    
  */
  
-echo '<p>'. JText::_('Alpha Testing Component Backend') .'</p>';
+echo '<p>'. JText::_('Alpha Demonstration Administrator Module') .'</p>'; 
+?>

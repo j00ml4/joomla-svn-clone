@@ -20,22 +20,22 @@
 class AlphaInstallerScript {
 	
 	function install($parent) {
-		echo "<p>1.6 Custom install script</p>";
+		echo '<p>'. JText::_('1.6 Custom install script') . '</p>';
 	}
 	
 	function uninstall($parent) {
-		echo "<p>1.6 Custom uninstall script</p>";
+		echo '<p>'. JText::_('1.6 Custom uninstall script') .'</p>';
 	}
 	
 	function update($parent) {
-		echo "<p>1.6 Custom update script</p>";
+		echo '<p>'. JText::_('1.6 Custom update script') .'</p>';
 	}
 	
 	function preflight($type, $parent) {
-		echo "<p>1.6 Preflight for $type</p>";
+		echo '<p>'. JText::sprintf('1.6 Preflight for %s', $type) .'</p>';
 	}
 	
 	function postflight($type, $parent) {
-		echo "<p>1.6 Postflight for $type</p>";
+		echo '<p>'. JText::sprintf('1.6 Postflight for %s', $type) .'</p>';
 	}
 }

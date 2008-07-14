@@ -17,5 +17,4 @@
  * @see http://joomlacode.org/gf/project/   JoomlaCode Project:    
  */
  
- 
-?><p>Alpha Testing Component</p>
+ echo '<p>'. JText::_('Alpha Testing Component') .'</p>';

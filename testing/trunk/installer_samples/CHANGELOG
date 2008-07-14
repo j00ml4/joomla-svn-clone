@@ -1,0 +1,23 @@
+Changelog
+------------
+This is a non-exhaustive (but still near complete) changelog for
+the installer samples.
+
+
+Legend:
+
+* -> Security Fix
+# -> Bug Fix
+$ -> Language fix or change
++ -> Addition
+^ -> Change
+- -> Removed
+! -> Note
+
+
+
+14-July-2008 Sam Moffatt
+ + Started work on admin modules
+ ^ Improved com_alpha to support new language support in installer
+ ^ Changed SQL files to be more tolerant
+ + Added CHANGELOG
