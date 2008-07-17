@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" version="1.6" client="administrator" method="upgrade">
         <name>Admin Alpha</name>
+        <creationDate>July 2008</creationDate>
 		<author>John Doe</author>
 		<authorEmail>john.doe@example.org</authorEmail>
 		<authorUrl>http://www.example.org</authorUrl>

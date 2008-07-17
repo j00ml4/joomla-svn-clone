@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin"  group="system">
+	<name>System - Alpha</name>
+	<creationDate>July 2008</creationDate>
+	<author>John Doe</author>
+	<authorEmail>john.doe@example.org</authorEmail>
+	<authorUrl>http://www.example.org</authorUrl>
+	<copyright>(C) 2008 Copyright Info</copyright>
+	<license>License Info</license>
+	<version>1.6</version>	
+	<description>Alpha Plugin</description>
+	<files>
+		<filename plugin="alpha">alpha.php</filename>
+	</files>
+	<params>
+		<param name="demo" type="text" default="" label="Demo Param" description="DEMOPARAMDESC" />
+	</params>
+	<languages folder="language">
+		<language client="administrator" tag="en-GB">admin/en-GB.plg_system_alpha.ini</language>
+		<language client="site" tag="en-GB">site/en-GB.plg_system_alpha.ini</language>
+	</languages>
+</extension>

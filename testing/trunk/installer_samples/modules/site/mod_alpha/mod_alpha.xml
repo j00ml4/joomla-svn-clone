@@ -2,6 +2,7 @@
 <extension type="module" version="1.6" client="site" method="upgrade">
 		<!-- Note: Site is the default if client is not specified -->
         <name>Site Alpha</name>
+        <creationDate>July 2008</creationDate>
 		<author>John Doe</author>
 		<authorEmail>john.doe@example.org</authorEmail>
 		<authorUrl>http://www.example.org</authorUrl>
