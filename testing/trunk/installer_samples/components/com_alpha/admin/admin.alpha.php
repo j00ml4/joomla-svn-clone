@@ -16,5 +16,6 @@
  * @version SVN: $Id:$
  * @see http://joomlacode.org/gf/project/   JoomlaCode Project:    
  */
- 
+
+JToolBarHelper::Title(JText::_('Alpha Testing Component Backend'));
 echo '<p>'. JText::_('Alpha Testing Component Backend') .'</p>';

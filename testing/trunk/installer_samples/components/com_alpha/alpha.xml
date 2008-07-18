@@ -56,6 +56,10 @@
 	<administration>
 		<!-- Administrator Menu -->
 		<menu img="components/com_alpha/applications-internet-16.png">Alpha</menu>
+		<submenu>
+			<menu link="option=com_installer">Installer</menu>
+			<menu link="option=com_users">Users</menu>
+		</submenu>
 		<!-- Administrator file and language specification;
 			Note: administrator doesn't have media -->
 		<files folder="admin">
