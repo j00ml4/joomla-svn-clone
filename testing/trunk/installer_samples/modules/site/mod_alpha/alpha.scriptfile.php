@@ -6,7 +6,7 @@
  * 
  * PHP4/5
  *  
- * Created on Jul 7, 2008
+ * Created on Jul 21, 2008
  * 
  * @package package_name
  * @author Your Name <author@toowoombarc.qld.gov.au>
@@ -17,7 +17,7 @@
  * @see http://joomlacode.org/gf/project/   JoomlaCode Project:    
  */
  
-class Com_AlphaInstallerScript {
+class Mod_AlphaInstallerScript {
 	
 	function install($parent) {
 		echo '<p>'. JText::_('1.6 Custom install script') . '</p>';
