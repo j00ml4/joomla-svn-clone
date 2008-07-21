@@ -10,6 +10,7 @@
 		<license>License Info</license>
 		<version>1.6</version>	
 		<description>Site Alpha</description>
+		<scriptfile>alpha.scriptfile.php</scriptfile>
         <files>
                 <filename module="mod_alpha">mod_alpha.php</filename>
         </files>
