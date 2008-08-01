@@ -46,11 +46,17 @@
 	<files folder="site">
 		<filename>alpha.php</filename>
 	</files>
+	<!-- This is the <1.5.6 preferred method.
+		With 1.5.6 or greater (incl 1.6) it is preferred to
+		include the languages in the extension
+	--> 
+	<!--
 	<languages folder="site">
 		<language tag="en-GB">en-GB.com_alpha.ini</language>
 	</languages>
+	-->
 	
-	<media destination="com_alpha">
+	<media destination="com_alpha" folder="admin">
 		<filename>com_alpha.jpg</filename>
 	</media>
 	
@@ -71,15 +77,22 @@
 			<folder>sql</folder>
 		</files>
 		
-		<languages folder="admin">
+		<!-- This is the <1.5.6 preferred method.
+			With 1.5.6 or greater (incl 1.6) it is preferred to
+			include the languages in the extension.
+			For 1.5 extension developers need to support this
+			themselves in components and modules with the down
+			side that component and module 
+		-->
+		<!--<languages folder="admin">
 			<language tag="en-GB">en-GB.com_alpha.ini</language>
-		</languages>
+		</languages>-->
 	</administration>
 	
 	<!-- Extension Update Specification -->
 	<update>
 		<server type="extension">http://update.example.com/update/alpha.xml</server> <!-- useful for single extensions -->
-		<server type="collection">http://update.example.com/update/list.xml</server><!-- useful for collections of extensions -->
+		<server type="collection">http://update.example.com/update/list.xml</server><!-- useful for smaller collections of extensions -->
 		<server type="xmlrpc">http://update.extensions.joomla.org</server><!-- useful for large collections -->
 	</update>
 	
