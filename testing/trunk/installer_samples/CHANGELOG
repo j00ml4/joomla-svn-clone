@@ -14,6 +14,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+01-Aug-2008 Sam Moffatt
+ $ Added extra strings to component sample for when looking at the menu entry
+
 23-Jul-2008 Sam Moffatt
  + Added sample SQL files and custom triggers for the system plugin sample
  + Added sample template
