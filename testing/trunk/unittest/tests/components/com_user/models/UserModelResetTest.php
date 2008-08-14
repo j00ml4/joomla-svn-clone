@@ -73,8 +73,45 @@ class UserModelResetClass extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @todo	Implement RequestReset() test(s).
+	 * @group	com_user
+	 */
+	public function testRequestReset()
+	{
+		// Remove the following line when you implement this method.
+		$this->markTestIncomplete(
+			'This test for RequestReset has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo	Implement CompleteReset() test(s).
+	 * @group	com_user
+	 */
+	public function testCompleteReset()
+	{
+		// Remove the following line when you implement this method.
+		$this->markTestIncomplete(
+			'This test for CompleteReset has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo	Implement _sendConfirmationMail() test(s).
+	 * @group	com_user
+	 */
+	public function test_sendConfirmationMail()
+	{
+		// Remove the following line when you implement this method.
+		$this->markTestIncomplete(
+			'This test for _sendConfirmationMail has not been implemented yet.'
+		);
+	}
+
+	/**
 	 * @param	string	The token to confirm reset
 	 * @param	mixed	The expected result
+	 * @group	com_user
 	 */
 	function testConfirmresetWithEmptyTokenFails()
 	{
@@ -88,6 +125,7 @@ class UserModelResetClass extends PHPUnit_Framework_TestCase
 	/**
 	 * @param	string	The token to confirm reset
 	 * @param	mixed	The expected result
+	 * @group	com_user
 	 */
 	function testConfirmresetWithBogusAuthenicationKeyFails()
 	{
@@ -103,6 +141,7 @@ class UserModelResetClass extends PHPUnit_Framework_TestCase
 	/**
 	 * @param	string	The token to confirm reset
 	 * @param	mixed	The expected result
+	 * @group	com_user
 	 */
 	function testConfirmresetWithValidAuthenicationKeyButBlockedUserFails()
 	{
@@ -118,6 +157,7 @@ class UserModelResetClass extends PHPUnit_Framework_TestCase
 	/**
 	 * @param	string	The token to confirm reset
 	 * @param	mixed	The expected result
+	 * @group	com_user
 	 */
 	function testConfirmresetWithValidAuthenicationKeyPasses()
 	{
