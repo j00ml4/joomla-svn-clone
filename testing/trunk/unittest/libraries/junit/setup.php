@@ -42,12 +42,14 @@ class JUnit_Setup
 		'class-exclude' => array('', true, 'Regular expression to exclude tests by class name.'),
 		'class-filter' => array('', true, 'Regular expression to select tests by class name.'),
 		'debug' => array(false, false, 'Dump unit test diagnostics.'),
+		'group' => array('', true, 'Only runs tests from the specified group(s) (multiple groups comma separated, no spaces). A test can be tagged as belonging to a group using the @group annotation.'),
+		'exclude-group' => array('', true, 'Exclude tests from the specified group(s) (multiple groups comma separated, no spaces). A test can be tagged as belonging to a group using the @group annotation.'),
 		'help' => array(false, false, 'Dump this help message.'),
 		'sequence-exclude' => array('', true, 'Regular expression to exclude tests by sequence ID.'),
 		'sequence-filter' => array('', true, 'Regular expression to select tests by sequence ID.'),
 		'test-exclude' => array('', true, 'Regular expression to exclude tests by test name.'),
 		'test-filter' => array('', true, 'Regular expression to select tests by test name.'),
-		'testdox' => array('', false, ''),
+		'testdox' => array('', false, 'Reports the test progress as agile documentation.'),
 	);
 
 	/**
@@ -636,6 +638,15 @@ class JUnit_Setup
 		if ($this->_options['testdox']) {
 			$arguments['printer'] = new PHPUnit_Util_TestDox_ResultPrinter_Text;
 		}
+
+		if ($this->_options['group']) {
+			$arguments['groups'] = explode( ',', $this->_options['group'] );
+		}
+
+		if ($this->_options['exclude-group']) {
+			$arguments['excludeGroups'] = explode( ',', $this->_options['exclude-group'] );
+		}
+
 		/*
 		 * Find all the matching files
 		 */

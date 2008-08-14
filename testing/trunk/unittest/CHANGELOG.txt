@@ -15,6 +15,11 @@ Legend:
 > -> Moved
 ! -> Note
 
+2008-08-15 Andrew Eddie
+ + Added support for --group and --exclude-group options to test runnner
+ + Added UserModelReset to com_user group
+ + Added incomplete tests to UserModelReset
+
 2008-08-14 Andrew Eddie
  + Added support for --testdox to test runnner
  ^ Renamed many tests to conform with phpUnit naming convention
