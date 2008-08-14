@@ -52,17 +52,6 @@ class {{{testclass}}} extends PHPUnit_Framework_TestCase
 {
 	var $fixture = null;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
 	function setUp()
 	{
 		// initiialize fixture if required
@@ -79,9 +68,4 @@ class {{{testclass}}} extends PHPUnit_Framework_TestCase
 		$this->markTestIncomplete('Replace this with your test code.');
 	}
 
-}
-
-// Call main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == '{{{testclass}}}::main') {
-	{{{testclass}}}::main();
 }

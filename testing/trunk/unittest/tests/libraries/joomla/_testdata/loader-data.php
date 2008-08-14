@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: defines.php 9743 2007-12-24 04:18:48Z instance $
+ * @version $Id$
  *
  */
 define('JUNIT_DATA_JLOADER', true);

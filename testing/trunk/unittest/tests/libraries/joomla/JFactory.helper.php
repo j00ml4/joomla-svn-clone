@@ -1,13 +1,11 @@
 <?php
 /**
- * Helper class for /joomla/factory.php
- *
- * @package Joomla
- * @subpackage UnitTest
- * @version    $Id: JFactory_helper.php 9743 2007-12-24 04:18:48Z instance $
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
-/* class to test */
 require_once 'libraries/joomla/factory.php';
 require_once 'libraries/joomla/registry/registry.php';
 
@@ -15,7 +13,7 @@ class JFactoryTestHelper
 {
 
 	function tearDownTestCase() {
-		
+
 	}
 
 	/**

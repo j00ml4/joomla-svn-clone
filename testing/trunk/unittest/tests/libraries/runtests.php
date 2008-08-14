@@ -1,12 +1,9 @@
 <?php
 /**
- * Joomla! Unit Test Facility.
- *
- * Invoke the default test runner.
- *
- * @version $Id: runtests.php 9762 2007-12-30 00:56:45Z instance $
- * @package Joomla
- * @subpackage UnitTest
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 $JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;

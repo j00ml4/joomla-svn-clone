@@ -47,6 +47,7 @@ class JUnit_Setup
 		'sequence-filter' => array('', true, 'Regular expression to select tests by sequence ID.'),
 		'test-exclude' => array('', true, 'Regular expression to exclude tests by test name.'),
 		'test-filter' => array('', true, 'Regular expression to select tests by test name.'),
+		'testdox' => array('', false, ''),
 	);
 
 	/**
@@ -109,25 +110,27 @@ class JUnit_Setup
 	 */
 	static $eol = PHP_EOL;
 
-	function __construct() {
-		$this -> _options = array();
+	function __construct()
+	{
+		$this->_options = array();
 		foreach (self::$_optionDefs as $opt => $info) {
-			$this -> _options[$opt] = $info[0];
+			$this->_options[$opt] = $info[0];
 		}
 	}
 
-	protected function _dirWalk(&$fileList, $dir) {
+	protected function _dirWalk(&$fileList, $dir)
+	{
 		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
 			$dir .= '/';
 		}
-		$path = $this -> _startDir . $dir;
+		$path = $this->_startDir . $dir;
 		if (! @is_dir($path)) {
 			throw new Exception('Scan error. ' . $path . ' is not a directory.', 1);
 		}
 		if(! ($dh = @opendir($path))) {
 			throw new Exception('Scan error. Unable to open ' . $path, 2);
 		}
-		if ($this -> _options['debug']) {
+		if ($this->_options['debug']) {
 			echo 'Processing directory "' . $dir . '"' . self::$eol;
 		}
 		/*
@@ -147,16 +150,17 @@ class JUnit_Setup
 
 				case 'file': {
 					//echo $fileName . PHP_EOL;
-					if (substr($fileName, -9) == '-test.php') {
-						/*
-						 * If there is an object match, add this file to the
-						 * list of tests.
-						 */
-						if ($this -> _isFiltered($fileName)) {
-							if ($this -> _options['debug']) {
+					if (substr(strtolower($fileName), -8) == 'test.php') {
+						// If there is an object match, add this file to the
+						// list of tests.
+						if ($this->_isFiltered($fileName)) {
+							if ($this->_options['debug']) {
 								echo 'Filtered: ' . $fileName . self::$eol;
 							}
 							continue;
+						}
+						if ($this->_options['debug']) {
+							echo 'Added: ' . $fileName . self::$eol;
 						}
 						$list[] = $fileName;
 					}
@@ -170,11 +174,14 @@ class JUnit_Setup
 		}
 		sort($subList);
 		foreach ($subList as $subDir) {
-			$this -> _dirWalk($fileList, $dir . $subDir);
+			if ($subDir != '.svn') {
+				$this->_dirWalk($fileList, $dir . $subDir);
+			}
 		}
 	}
 
-	protected function _doHelp() {
+	protected function _doHelp()
+	{
 		echo 'Joomla Unit Test Runner options:' . self::$eol . self::$eol;
 		foreach (self::$_optionDefs as $opt => $info) {
 			echo $opt . ' ' . $info[2] . self::$eol;
@@ -198,7 +205,8 @@ class JUnit_Setup
 	{
 		if ($once) {
 			return (bool)(@include_once $filespec);
-		} else {
+		}
+		else {
 			return (bool)(@include $filespec);
 		}
 	}
@@ -212,35 +220,36 @@ class JUnit_Setup
 	 * @param string The candidate test file name.
 	 * @return boolean True if the file is excluded by filters.
 	 */
-	protected function _isFiltered($fileName) {
+	protected function _isFiltered($fileName)
+	{
 		$parts = explode('-', $fileName);
-		if ($this -> _classExclude) {
-			if (preg_match($this -> _classExclude, $parts[0])) {
+		if ($this->_classExclude) {
+			if (preg_match($this->_classExclude, $parts[0])) {
 				return true;
 			}
 		}
-		if ($this -> _classFilter) {
-			if (! preg_match($this -> _classFilter, $parts[0])) {
+		if ($this->_classFilter) {
+			if (! preg_match($this->_classFilter, $parts[0])) {
 				return true;
 			}
 		}
-		if ($this -> _sequenceExclude) {
-			if (preg_match($this -> _sequenceExclude, $parts[1])) {
+		if ($this->_sequenceExclude) {
+			if (preg_match($this->_sequenceExclude, $parts[1])) {
 				return true;
 			}
 		}
-		if ($this -> _sequenceFilter) {
-			if (! preg_match($this -> _sequenceFilter, $parts[1])) {
+		if ($this->_sequenceFilter) {
+			if (! preg_match($this->_sequenceFilter, $parts[1])) {
 				return true;
 			}
 		}
-		if ($this -> _testExclude) {
-			if (preg_match($this -> _testExclude, $parts[2])) {
+		if ($this->_testExclude) {
+			if (preg_match($this->_testExclude, $parts[2])) {
 				return true;
 			}
 		}
-		if ($this -> _testFilter) {
-			if (! preg_match($this -> _testFilter, $parts[2])) {
+		if ($this->_testFilter) {
+			if (! preg_match($this->_testFilter, $parts[2])) {
 				return true;
 			}
 		}
@@ -253,7 +262,8 @@ class JUnit_Setup
 	 *
 	 * @return array Long options, appended with = if a value is expected.
 	 */
-	static function getCliOptionDefs() {
+	static function getCliOptionDefs()
+	{
 		$defs = array();
 		foreach (self::$_optionDefs as $opt => $info) {
 			$defs[] = $opt . ($info[1] ? '=' : '');
@@ -272,7 +282,8 @@ class JUnit_Setup
 	 * @param  string $path relative of a framework or testcase file/dir
 	 * @return array
 	 */
-	function getInfoObject($path) {
+	function getInfoObject($path)
+	{
 
 		if (strrpos(basename($path), '.') === false) {
 			if (strrpos($path, '/') < strlen($path)-1) {
@@ -342,7 +353,8 @@ class JUnit_Setup
 	 *
 	 * @return array Option definitions.
 	 */
-	static function getOptionDefs() {
+	static function getOptionDefs()
+	{
 		return self::$_optionDefs;
 	}
 
@@ -384,7 +396,8 @@ class JUnit_Setup
 	 * jver_max specifies the maximum version; jver_below specifies the version
 	 * must be less than the provided value.
 	 */
-	static function isTestEnabled($version, $range) {
+	static function isTestEnabled($version, $range)
+	{
         if (isset(JUnit_Config::$versionOverride) && JUnit_Config::$versionOverride != '') {
             $version = JUnit_Config::$versionOverride;
         }
@@ -468,7 +481,8 @@ class JUnit_Setup
 	 * @throws E_USER_NOTICE  if scheme is not supported
 	 * @uses parseDSN(), loadFile(), JConfig
 	 */
-	function makeCfg($value, $merge = false, $asArray = false) {
+	function makeCfg($value, $merge = false, $asArray = false)
+	{
 	}
 
 	/**
@@ -610,34 +624,41 @@ class JUnit_Setup
 	/*
 	 * Assemble a list of tests and run them.
 	 */
-	function run() {
-		if ($this -> _options['help']) {
-			$this -> _doHelp();
+	function run()
+	{
+		$arguments = array();
+
+		if ($this->_options['help']) {
+			$this->_doHelp();
 			return;
+		}
+
+		if ($this->_options['testdox']) {
+			$arguments['printer'] = new PHPUnit_Util_TestDox_ResultPrinter_Text;
 		}
 		/*
 		 * Find all the matching files
 		 */
-		if ($this -> _startDir) {
-			$dir = $this -> _startDir;
+		if ($this->_startDir) {
+			$dir = $this->_startDir;
 		} else {
 			$dir = '';
 		}
-		if ($this -> _options['debug']) {
-			echo 'Discovering files in ' . $this -> _startDir . self::$eol;
+		if ($this->_options['debug']) {
+			echo 'Discovering files in ' . $this->_startDir . self::$eol;
 		}
 		$testFiles = array();
-		$this -> _dirWalk($testFiles, '');
-		if ($this -> _options['debug']) {
+		$this->_dirWalk($testFiles, '');
+		if ($this->_options['debug']) {
 			echo 'Running ' . count($testFiles) . ' test files:' . self::$eol;
 			foreach ($testFiles as $fid) {
 				echo $fid . self::$eol;
 			}
 		}
 		$suite  = new PHPUnit_Framework_TestSuite();
-		$suite -> addTestFiles($testFiles);
+		$suite->addTestFiles($testFiles);
 		// This will change when we have more than CLI support
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
+		$result = PHPUnit_TextUI_TestRunner::run($suite, $arguments);
 	}
 
 	/**
@@ -660,42 +681,43 @@ class JUnit_Setup
 		self::$_properties[$namespace][$prop] = $value;
 	}
 
-	function setOption($opt, $value) {
-		if (isset($this -> _options[$opt])) {
+	function setOption($opt, $value)
+	{
+		if (isset($this->_options[$opt])) {
 			$info = self::$_optionDefs[$opt];
 			if ($info[1]) {
-				$this -> _options[$opt] = $value;
+				$this->_options[$opt] = $value;
 			} else {
-				$this -> _options[$opt] = true;
+				$this->_options[$opt] = true;
 			}
 			switch ($opt) {
 				case 'class-exclude': {
-					$this -> _classExclude = $value;
+					$this->_classExclude = $value;
 				}
 				break;
 
 				case 'class-filter': {
-					$this -> _classFilter = $value;
+					$this->_classFilter = $value;
 				}
 				break;
 
 				case 'sequence-exclude': {
-					$this -> _sequenceExclude = $value;
+					$this->_sequenceExclude = $value;
 				}
 				break;
 
 				case 'sequence-filter': {
-					$this -> _sequenceFilter = $value;
+					$this->_sequenceFilter = $value;
 				}
 				break;
 
 				case 'test-exclude': {
-					$this -> _testExclude = $value;
+					$this->_testExclude = $value;
 				}
 				break;
 
 				case 'test-filter': {
-					$this -> _testFilter = $value;
+					$this->_testFilter = $value;
 				}
 				break;
 
@@ -705,11 +727,12 @@ class JUnit_Setup
 		return false;
 	}
 
-	function setStartDir($dir) {
+	function setStartDir($dir)
+	{
 		if (strlen($dir) && ($dir[strlen($dir) - 1] != '/')) {
 			$dir .= '/';
 		}
-		$this -> _startDir = $dir;
+		$this->_startDir = $dir;
 	}
 
 	/**
@@ -738,5 +761,4 @@ class JUnit_Setup
 		}
 		unset(self::$_properties[$namespace][$prop]);
 	}
-
 }

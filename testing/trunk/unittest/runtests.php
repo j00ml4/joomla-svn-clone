@@ -6,10 +6,10 @@
  * global variable $JUnit_root to reference the base unittest directory, and
  * $JUnit_start to be set to the relative directory where tests are to be run.
  *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 if (! defined('DS')) {
@@ -34,5 +34,4 @@ if (! isset($JUnit_root)) {
 require_once $JUnit_root . DS . 'setup.php';
 
 define('JUNIT_MAIN_METHOD', '');
-JUnit_Setup::getProperty('JUnit_Setup', 'setup') -> run();
-?>
+JUnit_Setup::getProperty('JUnit_Setup', 'setup')->run();

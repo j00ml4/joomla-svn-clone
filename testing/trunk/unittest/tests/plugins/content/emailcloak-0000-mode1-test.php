@@ -1,18 +1,12 @@
 <?php
 /**
- * Joomla! v1.5 Unit Test Facility
- *
- * Template for a basic unit test
- *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
- *
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'EmailcloakTest_Mode1::main');
 	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
 	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
 		die('Unable to find ' . $JUnit_home . ' in path.');
@@ -240,19 +234,11 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 		$tests = array();
 		foreach ($cases as $key => $testCase) {
 			$test = new stdClass;
-			$test -> text = $testCase[0];
+			$test->text = $testCase[0];
 			$testCase[0] = $test;
 			$tests[$key] = $testCase;
 		}
 		return $tests;
-	}
-
-	/**
-	 * Runs the test methods of this class.
-	 */
-	function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
 	}
 
 	/**
@@ -266,32 +252,28 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 		 */
 		JPluginHelper::mockReset();
 		$plugin = new stdClass;
-		$plugin -> params = 'mode=1' . chr(10) . chr(10);
+		$plugin->params = 'mode=1' . chr(10) . chr(10);
 		JPluginHelper::mockSetUp('content', 'emailcloak', $plugin, null);
 	}
 
 	/**
 	 * Execute a cloaking test case.
 	 *
-	 * The test framework calls this function once for each element in the array
-	 * returned by the named data provider.
-	 *
-	 * @dataProvider dataSet
 	 * @param object A seleton of an article object with the text property set.
 	 * @param string The expected result for this test.
+	 *
+	 * @dataProvider dataSet
 	 */
 	function testCloak($article, $expect)
 	{
 		$params = array();
 		$result = plgContentEmailCloak($article, $params);
 		// TODO: uncomment this line once function always returns true.
-		//$this -> assertTrue($result);
-		$this -> assertEquals($expect, $article -> text);
+		//$this->assertTrue($result);
+		$this->assertThat(
+			$expect,
+			$this->equalTo( $article->text )
+		);
 	}
 
-}
-
-// Call main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'EmailcloakTest_Mode1::main') {
-	EmailcloakTest_Mode1::main();
 }

@@ -1,11 +1,9 @@
 <?php
 /**
- * JDate constructor tests
- *
- * @package Joomla
- * @subpackage UnitTest
- * @version $Id: $
- * @author Anthony Ferrara 
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 class testCallbackHandler {

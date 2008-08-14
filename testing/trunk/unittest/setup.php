@@ -6,11 +6,10 @@
  * file. It ensures that the testing environment is set up, supported, and ready
  * to run.
  *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2007 Open Source Matters, Inc. All rights reserved.
- * @license GNU/GPL
- * @version $Id$
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 require_once 'configure.php';
@@ -36,9 +35,9 @@ ini_set('log_errors_max_len'     , 512);
 /* and of course ... */
 ini_set('register_globals', 'Off');
 
-/*
- * Use our JLoader, autoloader and jimport.
- */
+//
+// Use our JLoader, autoloader and jimport.
+//
 require_once 'libraries/junit/loader.php';
 
 if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
@@ -49,7 +48,7 @@ if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
 }
 
 $JUnit_setup = new JUnit_Setup();
-$JUnit_setup -> setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
+$JUnit_setup->setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
 
 /*
  * Extract configuration overrides from command line or request variables.
@@ -59,13 +58,13 @@ if (JUNIT_CLI) {
 	 * Parse command line arguments
 	 */
 	list($options, $junk) = PHPUnit_Util_Getopt::getopt(
-		$argv,
+		$GLOBALS['argv'],
 		array(),
 		JUnit_Setup::getCliOptionDefs()
 	);
 	foreach ($options as $pair) {
 		$opt = substr($pair[0], 2);
-		$JUnit_setup -> setOption($opt, $pair[1]);
+		$JUnit_setup->setOption($opt, $pair[1]);
 	}
 } else {
 	JUnit_Setup::$eol = '<br/>' . PHP_EOL;
@@ -75,10 +74,10 @@ if (JUNIT_CLI) {
 	foreach (JUnit_Setup::getOptionDefs() as $opt => $info) {
 		if ($info[1]) {
 			if (isset($_REQUEST[$opt])) {
-				$JUnit_setup -> setOption($opt, $_REQUEST[$opt]);
+				$JUnit_setup->setOption($opt, $_REQUEST[$opt]);
 			}
 		} else {
-			$JUnit_setup -> setOption($opt, isset($_REQUEST['debug']));
+			$JUnit_setup->setOption($opt, isset($_REQUEST['debug']));
 		}
 	}
 }
@@ -87,3 +86,5 @@ if (is_writable(junit_path(JUnit_Config::$logDir))) {
 	ini_set('error_log' , junit_path(JUnit_Config::$logDir, 'php_errors.log'));
 }
 JUnit_Setup::setProperty('JUnit_Setup', 'setup', $JUnit_setup);
+
+define( 'PATH_MOCKS', dirname( __FILE__ ).DS.'mocks' );
