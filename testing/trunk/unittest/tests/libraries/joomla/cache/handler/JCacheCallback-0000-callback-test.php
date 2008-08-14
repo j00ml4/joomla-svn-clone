@@ -1,29 +1,12 @@
 <?php
 /**
- * JDate constructor tests
- *
- * @package Joomla
- * @subpackage UnitTest
- * @version $Id: $
- * @author Anthony Ferrara 
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
-// Call JDateTest::main() if this source file is executed directly.
-if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JCacheCallbackTest_Callback::main');
-	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
-	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
-		die('Unable to find ' . $JUnit_home . ' in path.');
-	}
-	$JUnit_posn += strlen($JUnit_home) - 1;
-	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
-	$JUnit_start = substr(
-		__FILE__,
-		$JUnit_posn + 1,
-		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
-	);
-	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
-}
+require 'j.php';
 
 /*
  * Now load the Joomla environment
@@ -49,14 +32,6 @@ require_once(dirname(__FILE__).DS.'JCacheCallback.helper.php');
 
 class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 {
-	/**
-	 * Runs the test methods of this class.
-	 */
-	static function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
 	public function testCallbackFunction() {
 		$cache =& JCache::getInstance('callback', array('storage'=>'mock'));
 		$arg1 = 'e1';
@@ -65,7 +40,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		$this->expectOutputString('e1e1e1e1e1');
 		for($i = 0; $i < 5; $i++) {
 			$result = $cache->get($callback, array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 		}
@@ -79,7 +54,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		$this->expectOutputString('e1e1e1e1e1');
 		for($i = 0; $i < 5; $i++) {
 			$result = $cache->get($callback, array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 		}
@@ -93,7 +68,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		for($i = 0; $i < 5; $i++) {
 			$instance = new testCallbackHandler();
 			$result = $cache->get(array($instance, 'instanceCallback'), array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 			unset($instance);
@@ -102,9 +77,3 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 
 
 }
-
-// Call JCacheTest_Construct::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JCacheCallbackTest_Callback::main') {
-	JCacheCallbackTest_Callback::main();
-}
-

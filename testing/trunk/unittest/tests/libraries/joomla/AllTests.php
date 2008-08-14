@@ -1,15 +1,12 @@
 <?php
 /**
- * Joomla! Unit Test Facility.
- *
- * @version $Id$
- * @package Joomla
- * @subpackage UnitTest
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
-// Call PHPUnit_AllTests::main() if this source file is executed directly.
 if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'PHPUnit_AllTests::main');
 	$JUnit_root = substr(__FILE__, 0, strpos(__FILE__, DIRECTORY_SEPARATOR.'unittest'));
 	require_once $JUnit_root . '/unittest/setup.php';
 }
@@ -37,13 +34,6 @@ require_once JUNIT_BASE .'/libraries/joomla/application/AllTests.php';
 
 class PHPUnit_AllTests
 {
-	function main()
-	{
-		$self =& new PHPUnit_AllTests;
-		$suite =& $self->suite();
-		$suite->run(JUnit_Setup::getReporter());
-	}
-
 	function &suite()
 	{
 		$suite =& new JoomlaTestSuite('Joomla! Libraries');
@@ -59,8 +49,4 @@ class PHPUnit_AllTests
 
 		return $suite;
 	}
-}
-
-if (JUNIT_MAIN_METHOD == 'PHPUnit_AllTests::main') {
-	PHPUnit_AllTests::main();
 }

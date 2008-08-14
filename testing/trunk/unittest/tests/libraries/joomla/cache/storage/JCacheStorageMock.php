@@ -1,17 +1,15 @@
 <?php
 /**
- * Joomla! v1.5 Unit Test Facility
- *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
- *
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
+
 JLoader::register('JCacheStorage', JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage.php');
 
 /**
- * Mock of JCacheStorage Backend Class.  Used for testing of cache handlers. 
+ * Mock of JCacheStorage Backend Class.  Used for testing of cache handlers.
  */
 class JCacheStorageMock extends JCacheStorage
 {
@@ -124,5 +122,5 @@ class JCacheStorageMock extends JCacheStorage
 		$name	= md5($this->_application.'-'.$id.'-'.$this->_hash.'-'.$this->_language);
 		return 'cache_'.$group.'-'.$name;
 	}
-	
+
 }

@@ -15,7 +15,13 @@ Legend:
 > -> Moved
 ! -> Note
 
--------------------------------------------------
+2008-08-14 Andrew Eddie
+ + Added support for --testdox to test runnner
+ ^ Renamed many tests to conform with phpUnit naming convention
+ + Added test for UserModelReset
+ ^ Changed many assert methods to Hamcrest format
+ + Added ignore to Joda test when code required class not available
+
 2008-06-22 Alan Langford
  + Added teststatus.php. A utility to evaluate how many test files have been
    created for each class.
@@ -26,7 +32,7 @@ Legend:
    JUnit_Setup::isTestEnabled() to standardize testing.
  + Added version specifiers to JDate data set.
  - Removed the SimpleTest based JFTP tests.
--------------------------------------------------
+
 2008-05-31 Anthony Ferrara
  +  Multiple fixes for the JCache tests.  Added skipping of clear test for all
  memory storage types
@@ -39,7 +45,7 @@ Legend:
  -  Removed Simpletest
  +  Added PHPUnit 3.2.6
  !  Haven't dealt with resulting breakage
--------------------------------------------------
+
 2007-07-27 CirTap
  ^	removed output buffering from Simpletest dumper
  +	added skip/error/exception handler + counter to custom renderer
@@ -220,5 +226,3 @@ Legend:
  +	new /_files/ subfolder(s) to put example data, Mock object (-> README)
  ^	UnitTestController::_files() to ignore names starting with '_'
  ^	JoomlaHtml.php header clickable to return to /unittest/ index
-
-

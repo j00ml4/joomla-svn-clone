@@ -1,13 +1,10 @@
 <?php
 /**
- * JDate constructor tests
- *
- * @package Joomla
- * @subpackage UnitTest
- * @version $Id: $
- * @author Alan Langford <instance1@gmail.com>
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
-
 
 class JDateTest_DataSet
 {
@@ -505,9 +502,9 @@ class JDateTest_DataSet
 		$msg .= (is_null($actual) ? 'null' : $actual);
 		if ($key != 'ts') {
 			$msg .= ' (' . (
-				is_null($jd -> toUnix())
+				is_null($jd->toUnix())
 				? 'null'
-				: $jd -> toUnix()
+				: $jd->toUnix()
 			) . ')';
 		}
 		return $msg;

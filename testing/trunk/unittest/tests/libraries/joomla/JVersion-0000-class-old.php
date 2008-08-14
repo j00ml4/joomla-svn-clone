@@ -1,23 +1,12 @@
 <?php
+/**
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
+ */
 
-// $Id$
-
-// Call main() if this source file is executed directly.
-if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JVersionTest::main');
-	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
-	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
-		die('Unable to find ' . $JUnit_home . ' in path.');
-	}
-	$JUnit_posn += strlen($JUnit_home) - 1;
-	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
-	$JUnit_start = substr(
-		__FILE__,
-		$JUnit_posn + 1,
-		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
-	);
-	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
-}
+require 'j.php';
 
 /*
  * Now load the Joomla environment
@@ -40,17 +29,6 @@ require_once JPATH_LIBRARIES . '/joomla/version.php';
 class JVersionTest extends PHPUnit_Framework_TestCase
 {
 	var $instance = null;
-
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
 
 	function setUp()
 	{
@@ -129,9 +107,4 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
-}
-
-// Call JVersionTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JVersionTest::main') {
-	JVersionTest::main();
 }

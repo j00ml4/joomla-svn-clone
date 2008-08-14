@@ -2,12 +2,14 @@
 /**
  * Joomla! v1.5 UnitTest Platform Configuration.
  *
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
+ *
  * Edit TestConfiguration.php, not TestConfiguration-dist.php. Never commit
  * plaintext passwords to the source code repository!
  *
- * @package Joomla
- * @subpackage UnitTest
- * @version $Id$
  */
 
 /**
@@ -62,10 +64,10 @@ class JUnit_Config {
 	 * @var string
 	 */
 	static public $testDir = 'tests';
-    
+
     /**
      * Version override. If set, this version is used as the Joomla version.
-     * 
+     *
      * @var string
      */
     static public $versionOverride = '';
@@ -89,5 +91,4 @@ class JUnit_Config {
 	 * html, xml, php, json, text.
 	 */
 	static public $viewHttp = 'html';
-
 }

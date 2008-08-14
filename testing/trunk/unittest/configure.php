@@ -5,10 +5,10 @@
  * Loads the testing configuration. This is useful for utilites that need to use
  * the test environment but not run tests.
  *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 if (! defined('DS')) {
@@ -61,9 +61,9 @@ if (! is_dir(JPATH_BASE . '/libraries/joomla')) {
     exit(0);
 }
 
-/*
- * Make sure our tests only find the target "Joomla!" framework and PHPUnit.
- */
+//
+// Make sure our tests only find the target "Joomla!" framework and PHPUnit.
+//
 set_include_path(
     '.' . PATH_SEPARATOR
     . JUNIT_ROOT . PATH_SEPARATOR
@@ -72,4 +72,6 @@ set_include_path(
     . junit_path(JUnit_Config::$pearDir) . PATH_SEPARATOR
     . get_include_path()
 );
+
+require dirname( __FILE__ ).DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'defines.php';
 

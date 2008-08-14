@@ -1,28 +1,12 @@
 <?php
 /**
- * JDate constructor tests
- *
- * @package Joomla
- * @subpackage UnitTest
- * @version $Id: $
- * @author Alan Langford <instance1@gmail.com>
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
-if (! defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JDateTest_SetDate::main');
-	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
-	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
-		die('Unable to find ' . $JUnit_home . ' in path.');
-	}
-	$JUnit_posn += strlen($JUnit_home) - 1;
-	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
-	$JUnit_start = substr(
-		__FILE__,
-		$JUnit_posn + 1,
-		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
-	);
-	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
-}
+require 'j.php';
 
 /*
  * Now load the Joomla environment
@@ -75,14 +59,6 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 		return $cases;
 	}
 
-	/**
-	 * Runs the test methods of this class.
-	 */
-	static function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
 	function setUp() {
 	}
 
@@ -100,9 +76,9 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 			 * is null. Verifying that null is returned by the other formats
 			 * should be another test that runs once.
 			 */
-			$this -> assertTrue(
-				is_null($jd -> toUnix()),
-				JDateTest_DataSet::message($jd, 'utc', 'ts', $dataSet, $jd -> toUnix())
+			$this->assertTrue(
+				is_null($jd->toUnix()),
+				JDateTest_DataSet::message($jd, 'utc', 'ts', $dataSet, $jd->toUnix())
 			);
 			return;
 		}
@@ -116,31 +92,31 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 		$expect = $dataSet[$subset][$type];
 		switch ($type) {
 			case 'ts': {
-				$actual = $jd -> toUnix($offset);
+				$actual = $jd->toUnix($offset);
 			}
 			break;
 
 			case 'Format': {
-				$actual = $jd -> toFormat('', $offset);
+				$actual = $jd->toFormat('', $offset);
 			}
 			break;
 
 			case 'ISO8601': {
-				$actual = $jd -> toISO8601($offset);
+				$actual = $jd->toISO8601($offset);
 			}
 			break;
 
 			case 'MySql': {
-				$actual = $jd -> toMySql($offset);
+				$actual = $jd->toMySql($offset);
 			}
 			break;
 
 			case 'RFC822': {
-				$actual = $jd -> toRFC822($offset);
+				$actual = $jd->toRFC822($offset);
 			}
 			break;
 		}
-		$this -> assertEquals(
+		$this->assertEquals(
 			$expect,
 			$actual,
 			JDateTest_DataSet::message($jd, $subset, $type, $dataSet, $actual)
@@ -149,9 +125,3 @@ class JDateTest_SetDate extends PHPUnit_Framework_TestCase
 
 
 }
-
-// Call JDateTest::main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JDateTest_SetDate::main') {
-	JDateTest_SetDate::main();
-}
-

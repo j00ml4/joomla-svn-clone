@@ -1,12 +1,9 @@
 <?php
 /**
- * Joomla! v1.5 Unit Test Facility
- *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
- *
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 class JRequestTest_DataSet {
@@ -23,104 +20,64 @@ class JRequestTest_DataSet {
 	 * @var array
 	 */
 	static public $getVarTests = array(
-		/*
-		 * Default values tests
-		 */
+		//
+		// Default values tests
+		//
 		array(
 			'missing',    null,       'default',  'none', 0, null, array(),
 		),
 		array(
 			'missing',    'absent',   'default',  'none', 0, 'absent',
-			array(
-				// Note count is 2 because default values are not cached.
-				array('absent', 'NONE', 'absent', 2),
-			),
 		),
 		/*
 		 * Data source tests
 		 */
 		array(
 			'tag',  null,       'default',  'none', 0, 'from _REQUEST',
-			array(
-				array('from _REQUEST', 'NONE', 'from _REQUEST', 1),
-			),
 		),
 		array(
 			'tag',  null,       'post',     'none', 0, 'from _POST',
-			array(
-				array('from _POST', 'NONE', 'from _POST', 1),
-			),
 		),
 		array(
 			'tag',  null,       'method',   'none', 0, 'from _POST',
-			array(
-				array('from _POST', 'NONE', 'from _POST', 1),
-			),
 		),
 		array(
 			'tag',  null,       'request',  'none', 0, 'from _REQUEST',
-			array(
-				array('from _REQUEST', 'NONE', 'from _REQUEST', 1),
-			),
 		),
 		array(
 			'tag',  null,       'invalid',  'none', 0, 'from _REQUEST',
-			array(
-				array('from _REQUEST', 'NONE', 'from _REQUEST', 1),
-			),
 		),
 		array(
 			'tag',  null,       'cookie',   'none', 0, 'from _COOKIE',
-			array(
-				array('from _COOKIE', 'NONE', 'from _COOKIE', 1),
-			),
 		),
 		array(
 			'tag',  null,       'files',    'none', 0, 'from _FILES',
-			array(
-				array('from _FILES', 'NONE', 'from _FILES', 1),
-			),
 		),
 		array(
 			'tag',  null,       'env',      'none', 0, 'from _ENV',
-			array(
-				array('from _ENV', 'NONE', 'from _ENV', 1),
-			),
 		),
 		array(
 			'tag',  null,       'server',   'none', 0, 'from _SERVER',
-			array(
-				array('from _SERVER', 'NONE', 'from _SERVER', 1),
-			),
 		),
 		/*
 		 * Test flags
 		 */
 		array(
 			'trim_test',  null,       'default',  'none', 0, 'has  whitespace',
-			array(
-				array('has  whitespace', 'NONE', 'has  whitespace', 1),
-			),
 		),
 		array(
 			'trim_test',  null,       'default',  'none', JREQUEST_NOTRIM, ' has  whitespace ',
-			array(
-				array(' has  whitespace ', 'NONE', ' has  whitespace ', 1),
-			),
 		),
 		array(
 			'raw_test',  null,       'default',  'none', JREQUEST_ALLOWRAW, '<body>stuff</body>',
-			array(),
 		),
 		array(
-			'raw_test',  null,       'default',  'none', JREQUEST_ALLOWHTML, '<body>stuff</body>',
-			array(
-				array('<body>stuff</body>', 'NONE', '<body>stuff</body>', 1),
-			),
+			'html_test',  null,       'default',  'none', JREQUEST_ALLOWHTML, '/* Script Code */<h1>stuff</h1>',
 		),
 	);
 
-	static function initSuperGlobals() {
+	static function initSuperGlobals()
+	{
 		$_GET = array(
 			'tag' => 'from _GET',
 		);
@@ -146,8 +103,7 @@ class JRequestTest_DataSet {
 		$_REQUEST = array_merge($_GET, $_POST);
 		$_REQUEST['tag'] = 'from _REQUEST';
 		$_REQUEST['raw_test'] = '<body>stuff</body>';
+		$_REQUEST['html_test'] = '<script>/* Script Code */</script><h1 onclick="alert(document.cookie);">stuff</h1>';
 		$_REQUEST['trim_test'] = ' has  whitespace ';
 	}
-
 }
-?>

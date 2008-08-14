@@ -1,31 +1,12 @@
 <?php
 /**
- * Joomla! v1.5 Unit Test Facility
- *
- * Template for a basic unit test
- *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
- * @version $Id: $
- *
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
-if (!defined('JUNIT_MAIN_METHOD')) {
-	define('JUNIT_MAIN_METHOD', 'JRequestTest_GetVar::main');
-	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
-	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
-		die('Unable to find ' . $JUnit_home . ' in path.');
-	}
-	$JUnit_posn += strlen($JUnit_home) - 1;
-	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
-	$JUnit_start = substr(
-		__FILE__,
-		$JUnit_posn + 1,
-		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
-	);
-	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
-}
+require 'j.php';
 
 /*
  * Now load the Joomla environment
@@ -61,17 +42,6 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	function main() {
-		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-		$result = PHPUnit_TextUI_TestRunner::run($suite);
-	}
-
-	/**
 	 * Define some sample data
 	 */
 	function setUp() {
@@ -87,10 +57,10 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 		$name, $default, $hash, $type, $mask, $expect, $filterCalls
 	) {
 		$filter = JFilterInput::getInstance();
-		$filter -> mockReset();
+		$filter->mockReset();
 		if (count($filterCalls)) {
 			foreach ($filterCalls as $info) {
-				$filter -> mockSetUp(
+				$filter->mockSetUp(
 					$info[0], $info[1], $info[2], $info[3]
 				);
 			}
@@ -99,24 +69,19 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 		 * Get the variable and check the value.
 		 */
 		$actual = JRequest::getVar($name, $default, $hash, $type, $mask);
-		$this -> assertEquals($expect, $actual, 'Non-cached getVar');
+		$this->assertEquals($expect, $actual, 'Non-cached getVar');
 		/*
 		 * Repeat the process to check caching (the JFilterInput mock should not
 		 * get called unless the default is being used).
 		 */
 		$actual = JRequest::getVar($name, $default, $hash, $type, $mask);
-		$this -> assertEquals($expect, $actual, 'Cached getVar');
-		if (($filterOK = $filter -> mockTearDown()) !== true) {
-			$this -> fail(
+		$this->assertEquals($expect, $actual, 'Cached getVar');
+		if (($filterOK = $filter->mockTearDown()) !== true) {
+			$this->fail(
 				'JFilterInput not called as expected:'
 				. print_r($filterOK, true)
 			);
 		}
 	}
 
-}
-
-// Call main() if this source file is executed directly.
-if (JUNIT_MAIN_METHOD == 'JRequestTest_GetVar::main') {
-	JRequestTest_GetVar::main();
 }

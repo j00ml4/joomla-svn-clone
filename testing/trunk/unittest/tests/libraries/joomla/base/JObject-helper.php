@@ -1,14 +1,9 @@
 <?php
 /**
- * Supporting classes for JObject tests
- *
- * @package Joomla
- * @subpackage UnitTest
- * @copyright 2007 Open Source Matters, Inc.
- * @license GPL v2
- * @version $Id$
- * @author Alan Langford <instance1@gmail.com>
- * @author Rene Serradeil
+ * @version		$Id$
+ * @package		Joomla.UnitTest
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU General Public License
  */
 
 require_once 'libraries/joomla/base/object.php';
@@ -42,9 +37,9 @@ class JObjectTestObserver
 }
 
 /**
- * Class to test getPublicProperties()
+ * Testing a derived JObject class
  */
-class JObjectExtend extends JObject
+class DerivedFromJObject extends JObject
 {
 	var $_privateVar = 'Private';
 	var $publicVar = 'Public';
@@ -87,5 +82,3 @@ class JObjectExtendStatics
 	}
 
 }
-
-?>
