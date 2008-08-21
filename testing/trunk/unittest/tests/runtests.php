@@ -23,4 +23,3 @@ $JUnit_start = substr(
  * all the work.
  */
 require_once $JUnit_root . DIRECTORY_SEPARATOR . basename(__FILE__);
-?>
