@@ -19,7 +19,7 @@ if (! defined('_JEXEC')) {
  * @package		Joomla.UnitTest
  * @subpackage	com_user
  */
-class UserModelResetClass extends PHPUnit_Framework_TestCase
+class UserModelResetTest extends PHPUnit_Framework_TestCase
 {
 	function setUp()
 	{

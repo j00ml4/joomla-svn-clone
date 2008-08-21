@@ -37,7 +37,7 @@ class Zend_Json_Encoder
 {
     /**
      * Whether or not to check for possible cycling
-     * 
+     *
      * @var boolean
      */
     protected $_cycleCheck;

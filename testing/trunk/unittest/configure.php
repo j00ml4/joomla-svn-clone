@@ -74,4 +74,3 @@ set_include_path(
 );
 
 require dirname( __FILE__ ).DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'defines.php';
-

@@ -15,6 +15,11 @@ Legend:
 > -> Moved
 ! -> Note
 
+2008-08-21 Andrew Eddie
+ + Added test for JMailHelper::cleanLine
+ + Added test for JMailHelper::cleanText
+ + Added test for JMailHelper::cleanBody
+
 2008-08-15 Andrew Eddie
  + Added support for --group and --exclude-group options to test runnner
  + Added UserModelReset to com_user group
