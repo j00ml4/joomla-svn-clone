@@ -10,7 +10,7 @@
  */
 
 /**
- * Interface to JCache methods.  Used for testing of cache storage. 
+ * Interface to JCache methods.  Used for testing of cache storage.
  */
 class JCacheRaw extends JCache
 {
