@@ -6,15 +6,6 @@
  * @license		GNU General Public License
  */
 
-require 'j.php';
-
-/*
- * Now load the Joomla environment
- */
-if (! defined('_JEXEC')) {
-	define('_JEXEC', 1);
-}
-
 /**
  * @package		Joomla.UnitTest
  * @subpackage	com_user
@@ -24,6 +15,9 @@ class UserModelResetTest extends PHPUnit_Framework_TestCase
 	function setUp()
 	{
 		// Set up minimalist Joomla framework
+		if (! defined('_JEXEC')) {
+			define('_JEXEC', 1);
+		}
 		require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
 		require_once JPATH_LIBRARIES.DS.'joomla'.DS.'import.php';
 		require_once JPATH_CONFIGURATION.DS.'configuration.php';
