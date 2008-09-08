@@ -18,22 +18,9 @@
  */
 class JLoader
 {
-    /**
-     * Map a loadabe class name to a file.
-     * 
-     * @var array
-     */
-    static $_classFiles = array();
 	static protected $_paths = array();
 
-	/**
-	 * @param	string	The mock import path
-	 * @param	string	The file to load in lieu of the real libraries file
-	 * @param
-	 * @param
-	 */
-	public static function injectMock($mockPath, $filePath, $base = null, $key = 'libraries.' )
-	{
+	function injectMock($mockPath, $filePath, $base = null, $key = 'libraries.' ) {
 		$keyPath = $key ? $key . $filePath : $filePath;
 		if (! $base) {
 			$base =  JPATH_LIBRARIES;
@@ -53,7 +40,8 @@ class JLoader
 				break;
 		}
 
-		if (strpos($filePath, 'joomla') === 0) {
+		if (strpos($filePath, 'joomla') === 0)
+		{
 			/*
 			 * If we are loading a joomla class prepend the classname with a
 			 * capital J.
@@ -78,7 +66,8 @@ class JLoader
 	{
 		$keyPath = $key ? $key . $filePath : $filePath;
 
-		if (! isset(JLoader::$_paths[$keyPath])) {
+		if (! isset(JLoader::$_paths[$keyPath]))
+		{
 			if ( ! $base ) {
 				$base =  JPATH_LIBRARIES;
 			}
@@ -99,7 +88,8 @@ class JLoader
 
 			$path  = str_replace( '.', DS, $filePath );
 
-			if (strpos($filePath, 'joomla') === 0) {
+			if (strpos($filePath, 'joomla') === 0)
+			{
 				/*
 				 * If we are loading a joomla class prepend the classname with a
 				 * capital J.
@@ -107,7 +97,9 @@ class JLoader
 				$classname  = 'J'.$classname;
 				$classes    = JLoader::register($classname, $base.DS.$path.'.php');
 				$rs         = isset($classes[strtolower($classname)]);
-			} else {
+			}
+			else
+			{
 				/*
 				 * If it is not in the joomla namespace then we have no idea if
 				 * it uses our pattern for class names/files so just include.
@@ -137,14 +129,20 @@ class JLoader
 			$classes = array();
 		}
 
-		if (self::$_classFiles && is_file($file) && ! isset(self::$_classFiles[$class]))
+		if ($class && is_file($file) && ! isset($classes[$class]))
 		{
 			// Force to lower case.
 			$class = strtolower($class);
-			self::$_classFiles[$class] = $file;
+			$classes[$class] = $file;
+
+			// In php4 we load the class immediately.
+			if ((version_compare( phpversion(), '5.0' ) < 0)) {
+				JLoader::load($class);
+			}
+
 		}
 
-		return self::$_classFiles;
+		return $classes;
 	}
 
 
