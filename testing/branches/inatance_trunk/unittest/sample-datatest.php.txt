@@ -1,0 +1,106 @@
+<?php
+/**
+ * Joomla! v1.5 Unit Test Facility
+ *
+ * Template for a basic unit test
+ *
+ * @package Joomla
+ * @subpackage UnitTest
+ * @copyright Copyright (C) 2005 - 2008 Open Source Matters, Inc.
+ * @version $Id: $
+ *
+ */
+
+if (!defined('JUNIT_MAIN_METHOD')) {
+	define('JUNIT_MAIN_METHOD', '{{{testclass}}}::main');
+	$JUnit_home = DIRECTORY_SEPARATOR . 'unittest' . DIRECTORY_SEPARATOR;
+	if (($JUnit_posn = strpos(__FILE__, $JUnit_home)) === false) {
+		die('Unable to find ' . $JUnit_home . ' in path.');
+	}
+	$JUnit_posn += strlen($JUnit_home) - 1;
+	$JUnit_root = substr(__FILE__, 0, $JUnit_posn);
+	$JUnit_start = substr(
+		__FILE__,
+		$JUnit_posn + 1,
+		strlen(__FILE__) - strlen(basename(__FILE__)) - $JUnit_posn - 2
+	);
+	require_once $JUnit_root . DIRECTORY_SEPARATOR . 'setup.php';
+}
+
+/*
+ * Now load the Joomla environment
+ */
+if (! defined('_JEXEC')) {
+	define('_JEXEC', 1);
+}
+require_once JPATH_BASE . '/includes/defines.php';
+/*
+ * Mock classes
+ */
+// Include mocks here
+/*
+ * We now return to our regularly scheduled environment.
+ */
+require_once JPATH_LIBRARIES . '/joomla/import.php';
+
+// Include subject class here
+
+/**
+ * A unit test class for SubjectClass
+ */
+class {{{testclass}}} extends PHPUnit_Framework_TestCase
+{
+	var $fixture = null;
+
+	/**
+	 * Return an array of test case parameters.
+	 *
+	 * @return array Each entry in the array is an array of parameters to be
+	 * passed to the test that references this with the dataProvider
+	 * instruction.
+	 */
+	static public function dataSet() {
+		// replace this with your own data set
+		$cases = array(
+			array('case1_arg0', 'case1_arg1'),
+			array('case2_arg0', 'case2_arg1'),
+		);
+		return $cases;
+	}
+
+	/**
+	 * Runs the test methods of this class.
+	 *
+	 * @access public
+	 * @static
+	 */
+	function main() {
+		$suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
+		$result = PHPUnit_TextUI_TestRunner::run($suite);
+	}
+
+	function setUp()
+	{
+		// initialize fixture if required
+	}
+
+	function tearDown()
+	{
+		$this->instance = null;
+		unset($this->instance);
+	}
+
+	/**
+	 * @dataProvider dataSet
+	 */
+	function testTakesTwoArguments($arg0, $arg1)
+	{
+		$this->markTestIncomplete('Replace this with your test code.');
+	}
+
+}
+
+// Call main() if this source file is executed directly.
+if (JUNIT_MAIN_METHOD == '{{{testclass}}}::main') {
+	{{{testclass}}}::main();
+}
