@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS #__alpha_utf8_update ( fielda int(10) )
