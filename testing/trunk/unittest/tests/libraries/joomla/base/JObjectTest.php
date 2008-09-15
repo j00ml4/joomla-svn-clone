@@ -6,9 +6,6 @@
  * @license		GNU General Public License
  */
 
-require 'j.php';
-
-
 class JObjectTest extends PHPUnit_Framework_TestCase
 {
 	var $instance = null;
