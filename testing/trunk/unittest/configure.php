@@ -43,13 +43,16 @@ function junit_path($path, $more = '')
  * Read in user-defined test configuration if available; otherwise, read default
  * test configuration.
  */
-if (is_readable(dirname(__FILE__) . '/TestConfiguration.php')) {
-    require_once dirname(__FILE__) . '/TestConfiguration.php';
-    define('JUNIT_USERCONFIG', true);
-} else {
-    require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
-    define('JUNIT_USERCONFIG', false);
+if (!class_exists( 'JUnit_Config' )) {
+	if (is_readable(dirname(__FILE__) . '/TestConfiguration.php')) {
+	    require_once dirname(__FILE__) . '/TestConfiguration.php';
+	    define('JUNIT_USERCONFIG', true);
+	} else {
+	    require_once dirname(__FILE__) . '/TestConfiguration-dist.php';
+	    define('JUNIT_USERCONFIG', false);
+	}
 }
+
 /*
  *  Sanity check: Verify /libraries/joomla exists in JPATH_BASE.
  */

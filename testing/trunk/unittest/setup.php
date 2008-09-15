@@ -48,7 +48,12 @@ if (version_compare(PHPUnit_Runner_Version::id(), JUNIT_VERSION_MINIMUM) < 0) {
 }
 
 $JUnit_setup = new JUnit_Setup();
-$JUnit_setup->setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
+if ($JUnit_start[0] == DIRECTORY_SEPARATOR) {
+	$JUnit_setup->setStartDir($JUnit_start);
+}
+else {
+	$JUnit_setup->setStartDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . $JUnit_start);
+}
 
 /*
  * Extract configuration overrides from command line or request variables.

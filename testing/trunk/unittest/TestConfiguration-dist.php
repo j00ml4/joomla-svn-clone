@@ -12,19 +12,24 @@
  *
  */
 
-/**
+/*
  * Fullly qualified path of your Joomla! installation. Defaults to the parent
  * folder of this file. DO NOT INCLUDE A TRAILING SLASH.
  */
-define('JPATH_BASE', dirname(dirname(__FILE__)));
+if (!defined( 'JPATH_BASE' )) {
+	define('JPATH_BASE', dirname(dirname(__FILE__)));
+}
 
-/**
+/*
  * Fullly qualified path of your UnitTest installation. DO NOT INCLUDE A
  * TRAILING SLASH.
  */
-define('JUNIT_ROOT', dirname(__FILE__));
+if (!defined( 'JUNIT_ROOT' )) {
+	define('JUNIT_ROOT', dirname(__FILE__));
+}
 
-class JUnit_Config {
+class JUnit_Config
+{
 	/**
 	 * Location of test configuration. Must be writiable. Relative to the root
 	 * unit test directory, or start with a slash for an absolute path.
