@@ -6,8 +6,6 @@
  * @license		GNU General Public License
  */
 
-require 'j.php';
-
 /*
  * Now load the Joomla environment
  */

@@ -6,8 +6,6 @@
  * @license		GNU General Public License
  */
 
-require 'j.php';
-
 // Now load the Joomla environment
 if (! defined('_JEXEC')) {
 	define('_JEXEC', 1);
@@ -38,12 +36,18 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		$GLOBALS['_JREQUEST'] = array();
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testGetMethodIsPost()
 	{
 		$_SERVER['REQUEST_METHOD'] = 'post';
 		$this->assertEquals('POST', JRequest::getMethod());
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testGetMethodIsGet()
 	{
 		$_SERVER['REQUEST_METHOD'] = 'get';
@@ -52,6 +56,7 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @dataProvider getVarData
+	 * @group jrequest
 	 */
 	function testGetVarFromDataSet( $name, $default, $hash, $type, $mask, $expect )
 	{
@@ -67,6 +72,9 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expect, $actual, 'Cached getVar');
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testRequestClean()
 	{
 		$expect = count($_POST);
@@ -74,6 +82,9 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expect, count($_POST), '_POST[0] was modified.');
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testRequestCleanWithBanned()
 	{
 		try {
@@ -89,6 +100,9 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testRequestCleanWithNumeric()
 	{
 		try {
@@ -104,6 +118,9 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
+	/**
+	 * @group jrequest
+	 */
 	function testRequestCleanWithNumericString()
 	{
 		try {
@@ -117,5 +134,24 @@ class JRequestTest extends PHPUnit_Framework_TestCase
 		if (! $passed) {
 			$this->fail('JRequest::clean() didn\'t die on a banned variable.');
 		}
+	}
+
+	/**
+	 * Test if an initial JRequest::setVar call, by a plugin or router,
+	 * then honours casting from get method
+	 *
+	 * @group jrequest
+	 */
+	function testSetVarThenGetVarCastsToInt()
+	{
+		$value = '616:test';
+		$expected = 616;
+		JRequest::setVar( 'id', $value );
+
+		$this->assertThat(
+			JRequest::getInt( 'id' ),
+			$this->equalTo( $expected )
+		);
+		// @todo Should think about using ->identicalTo
 	}
 }
