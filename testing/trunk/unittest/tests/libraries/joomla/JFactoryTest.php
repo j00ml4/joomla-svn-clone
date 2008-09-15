@@ -6,8 +6,6 @@
  * @license		GNU General Public License
  */
 
-require dirname( __FILE__ ).DIRECTORY_SEPARATOR.'j.php';
-
 /*
  * Now load the Joomla environment
  */
