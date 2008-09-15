@@ -15,6 +15,9 @@ Legend:
 > -> Moved
 ! -> Note
 
+2008-15-15 Andrew Eddie
+ ! Moved example code into /examples/
+
 2008-09-03 Andrew Eddie
  + Added testSetVarThenGetVarCastsToInt in JRequest test suite
  - Removed stand alone test include for com_user tests (not necessary with group support)
