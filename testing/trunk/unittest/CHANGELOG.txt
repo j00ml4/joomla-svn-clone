@@ -15,6 +15,18 @@ Legend:
 > -> Moved
 ! -> Note
 
+2008-09-16 Andrew Eddie
+ - Remove j.php standalone runner code (use runtests.php with filters from folder instead)
+ + Added wrappers to improve 3rd party test overrides (allows tests to happen anywhere better)
+ ^ $JUnit_start can now be an absolute path
+
+2008-09-03 Andrew Eddie
+ + Added testSetVarThenGetVarCastsToInt in JRequest test suite
+ - Removed stand alone test include for com_user tests (not necessary with group support)
+ - Removed stand alone test include for jrequest tests (not necessary with group support)
+ + Added group for jrequest tests
+ - Removed legacy format JRequest tests
+
 2008-08-21 Andrew Eddie
  + Added test for JMailHelper::cleanLine
  + Added test for JMailHelper::cleanText
