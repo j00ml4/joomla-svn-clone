@@ -134,6 +134,7 @@ class JURITest_IsInternal extends PHPUnit_Framework_TestCase {
 		);
 		$dataSet = array();
 		foreach ($liveSites as $site) {
+			$dataSet[] = array($site, null, false);
 			foreach ($base as $def) {
 				switch($def[1]) {
 					case 0: {
@@ -165,7 +166,7 @@ class JURITest_IsInternal extends PHPUnit_Framework_TestCase {
 					$start = 'http://' . $site;
 				}
 				foreach ($requests as $req) {
-					$dataSet[] = array($site, $def[0] . $req, $expect);
+					$dataSet[] = array($start, $def[0] . $req, $expect);
 				}
 			}
 		}
