@@ -1,1 +1,1 @@
-CREATE TABLE IF NOT EXISTS #__alpha_nonutf8_install ( fielda int(10) )
+CREATE TABLE IF NOT EXISTS #__alpha_install ( fielda int(10) )
