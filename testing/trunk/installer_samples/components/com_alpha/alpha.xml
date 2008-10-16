@@ -41,6 +41,9 @@
 			<file driver="mysql">sql/update.mysql.nonutf8.sql</file>
 		</sql>
 	</update>
+	<tables>
+		<table>#__alpha_update</table>
+	</tables>
 	
 	<!-- Front end file, media and language specification -->
 	<files folder="site">
@@ -95,7 +98,6 @@
 	<update>
 		<server type="extension">http://update.example.com/update/alpha.xml</server> <!-- useful for single extensions -->
 		<server type="collection">http://update.example.com/update/list.xml</server><!-- useful for smaller collections of extensions -->
-		<server type="xmlrpc">http://update.extensions.joomla.org</server><!-- useful for large collections -->
 	</update>
 	
 	<!-- Extension Params -->
