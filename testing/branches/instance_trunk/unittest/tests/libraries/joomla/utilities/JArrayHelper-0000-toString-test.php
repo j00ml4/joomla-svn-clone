@@ -95,6 +95,12 @@ class JArrayHelperToStringTest_Construct extends PHPUnit_Framework_TestCase
 		 * false for 1.5 mode), result.
 		 */
 		$fullSet = array(
+			'empty' => array(
+				self::$version15up,
+				array(),
+				false,
+				''
+			),
 			'simple_1.5' => array(
 				self::$version15up,
 				$simple,
@@ -111,14 +117,14 @@ class JArrayHelperToStringTest_Construct extends PHPUnit_Framework_TestCase
 					. ' quote1=>"that\'s it"'
 					. ' quote2=>"&quot;trouble&quot;" linefeed=>"line1' . chr(10) . 'line2"'
 			),
-            'simple_outerGlue' => array(
-                self::$version16up,
-                $simple,
-                array('outerGlue' => ', '),
-                'key1="value1", html="this&lt;that", html2="±",'
-                    . ' quote1="that\'s it",'
-                    . ' quote2="&quot;trouble&quot;", linefeed="line1' . chr(10) . 'line2"'
-            ),
+			'simple_outerGlue' => array(
+				self::$version16up,
+				$simple,
+				array('outerGlue' => ', '),
+				'key1="value1", html="this&lt;that", html2="±",'
+					. ' quote1="that\'s it",'
+					. ' quote2="&quot;trouble&quot;", linefeed="line1' . chr(10) . 'line2"'
+			),
 			'simple_quote1' => array(
 				self::$version16up,
 				$simple,
@@ -168,20 +174,20 @@ class JArrayHelperToStringTest_Construct extends PHPUnit_Framework_TestCase
 				false,
 				'pre="first" inner1="one" inner2="two" post="last"'
 			),
-            'nested_keepOuterKey' => array(
-                self::$version15up,
-                $nested,
-                array('keepOuterKey' => true),
-                'pre="first" nest inner1="one" inner2="two" post="last"'
-            ),
-            'nested_nestMode' => array(
-                self::$version15up,
-                $nested,
-                array(
-                    'nestMode' => true, 'nestOpen' => '{', 'nestClose' => '}'
-                ),
-                'pre="first" nest={inner1="one" inner2="two"} post="last"'
-            ),
+			'nested_keepOuterKey' => array(
+				self::$version15up,
+				$nested,
+				array('keepOuterKey' => true),
+				'pre="first" nest inner1="one" inner2="two" post="last"'
+			),
+			'nested_nestMode' => array(
+				self::$version15up,
+				$nested,
+				array(
+					'nestMode' => true, 'nestOpen' => '{', 'nestClose' => '}'
+				),
+				'pre="first" nest={inner1="one" inner2="two"} post="last"'
+			),
 		);
 		$selected = array();
 		foreach ($fullSet as $id => $data) {
