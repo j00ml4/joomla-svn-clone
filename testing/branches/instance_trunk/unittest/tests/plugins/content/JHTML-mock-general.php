@@ -10,9 +10,9 @@
  */
 
 /**
- * Mock of JHTML for testing the mail cloaking plugin.
+ * Mock of JHtml for testing the mail cloaking plugin.
  */
-class JHTML {
+class JHtml {
 	/**
 	 * Simple stub for email.cloak.
 	 *

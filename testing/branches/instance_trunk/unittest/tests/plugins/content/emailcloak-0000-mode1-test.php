@@ -48,10 +48,10 @@ JLoader::injectMock(
 	dirname(__FILE__) . '/JApplication-mock-general.php',
 	'joomla.application.application'
 );
-// Our JHTML mock provides a stub for the "email.cloak" function.
+// Our JHtml mock provides a stub for the "email.cloak" function.
 // This dramatically simplifies the test results.
 JLoader::injectMock(
-	dirname(__FILE__) . '/JHTML-mock-general.php',
+	dirname(__FILE__) . '/JHtml-mock-general.php',
 	'joomla.html.html'
 );
 
@@ -84,7 +84,7 @@ class EmailcloakTest_Mode1 extends PHPUnit_Framework_TestCase
 	 */
 	static function dataSet() {
 		/*
-		 * Our mock for JHTML::_('email.cloak', ...) simply returns the
+		 * Our mock for JHtml::_('email.cloak', ...) simply returns the
 		 * parameters it was passed, enclosed in square brackets and with all
 		 * cases of "@" converted to " at " (the replacement prevents
 		 * unterminated loops).
