@@ -41,9 +41,9 @@ JLoader::injectMock(
 );
 
 /**
- * Dummy JHTML class inline
+ * Dummy JHtml class inline
  */
-class JHTML {
+class JHtml {
 	function _() {
 		return '';
 	}
