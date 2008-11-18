@@ -39,15 +39,20 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: PhptTestCase.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: PhptTestCase.php 3454 2008-07-14 21:37:16Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.4
  */
 
 if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('PEAR/RunTest.php')) {
     $currentErrorReporting = error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    PHPUnit_Util_Filesystem::collectStart();
     require_once 'PEAR/RunTest.php';
     error_reporting($currentErrorReporting);
+
+    foreach (PHPUnit_Util_Filesystem::collectEnd() as $blacklistedFile) {
+        PHPUnit_Util_Filter::addFileToFilter($blacklistedFile, 'PHPUNIT');
+    }
 }
 
 require_once 'PHPUnit/Framework.php';
@@ -64,7 +69,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.1.4
  */
@@ -196,9 +201,7 @@ class PHPUnit_Extensions_PhptTestCase implements PHPUnit_Framework_Test, PHPUnit
               $this,
               PHPUnit_Framework_ComparisonFailure::diffEqual(
                 file_get_contents($expFile),
-                file_get_contents($outFile),
-                FALSE,
-                $this->getName()
+                file_get_contents($outFile)
               ),
               $time
             );

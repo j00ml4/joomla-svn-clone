@@ -39,109 +39,50 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestSetup.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: IsFalse.php 3164 2008-06-08 12:22:29Z sb $
  * @link       http://www.phpunit.de/
- * @since      File available since Release 2.0.0
+ * @since      File available since Release 3.3.0
  */
 
 require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Extensions/TestDecorator.php';
 require_once 'PHPUnit/Util/Filter.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
-trigger_error(
-  "Class PHPUnit_Extensions_TestSetup is deprecated. ".
-  "It will be removed in PHPUnit 3.3. ".
-  "Please use the new functionality in PHPUnit_Framework_TestSuite instead."
-);
-
 /**
- * A Decorator to set up and tear down additional fixture state.
- * Subclass TestSetup and insert it into your tests when you want
- * to set up additional state once before the tests are run.
+ * Constraint that accepts FALSE.
  *
  * @category   Testing
  * @package    PHPUnit
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
- * @since      Class available since Release 2.0.0
+ * @since      Class available since Release 3.3.0
  */
-class PHPUnit_Extensions_TestSetup extends PHPUnit_Extensions_TestDecorator
+class PHPUnit_Framework_Constraint_IsFalse extends PHPUnit_Framework_Constraint
 {
     /**
-     * Runs the decorated test and collects the
-     * result in a TestResult.
+     * Evaluates the constraint for parameter $other. Returns TRUE if the
+     * constraint is met, FALSE otherwise.
      *
-     * @param  PHPUnit_Framework_TestResult $result
-     * @return PHPUnit_Framework_TestResult
-     * @throws InvalidArgumentException
+     * @param mixed $other Value or object to evaluate.
+     * @return bool
      */
-    public function run(PHPUnit_Framework_TestResult $result = NULL)
+    public function evaluate($other)
     {
-        if ($result === NULL) {
-            $result = $this->createResult();
-        }
-
-        $this->setUp();
-        $this->copyFixtureToTest();
-        $this->basicRun($result);
-        $this->tearDown();
-
-        return $result;
+        return $other === FALSE;
     }
 
     /**
-     * Copies the fixture set up by setUp() to the test.
+     * Returns a string representation of the constraint.
      *
-     * @since  Method available since Release 2.3.0
+     * @return string
      */
-    private function copyFixtureToTest()
+    public function toString()
     {
-        $object = new ReflectionClass($this);
-
-        foreach ($object->getProperties() as $attribute) {
-            $name = $attribute->getName();
-
-            if ($name != 'test') {
-                $this->doCopyFixtureToTest($this->test, $name, $this->$name);
-            }
-        }
-    }
-
-    /**
-     * @since  Method available since Release 2.3.0
-     */
-    private function doCopyFixtureToTest($object, $name, &$value)
-    {
-        if ($object instanceof PHPUnit_Framework_TestSuite) {
-            foreach ($object->tests() as $test) {
-                $this->doCopyFixtureToTest($test, $name, $value);
-            }
-        } else {
-            $object->$name =& $value;
-        }
-    }
-
-    /**
-     * Sets up the fixture. Override to set up additional fixture
-     * state.
-     *
-     */
-    protected function setUp()
-    {
-    }
-
-    /**
-     * Tears down the fixture. Override to tear down the additional
-     * fixture state.
-     *
-     */
-    protected function tearDown()
-    {
+        return 'is false';
     }
 }
 ?>

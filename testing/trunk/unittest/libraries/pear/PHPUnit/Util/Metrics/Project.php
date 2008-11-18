@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Project.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: Project.php 3404 2008-07-09 22:08:08Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -57,7 +57,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -424,13 +424,18 @@ class PHPUnit_Util_Metrics_Project extends PHPUnit_Util_Metrics
                         }
                     } else {
                         if ($found) {
-                            if ($line + 1 - $firstLine > $minLines) {
+                            $fileA      = $this->cpdHashes[$firstHash][0];
+                            $firstLineA = $this->cpdHashes[$firstHash][1];
+
+                            if ($line + 1 - $firstLine > $minLines &&
+                                ($fileA->getPath() != $file->getPath() ||
+                                 $firstLineA       != $firstLine)) {
                                 $this->cpdDuplicates[] = array(
-                                  'fileA'      => $this->cpdHashes[$firstHash][0],
-                                  'firstLineA' => $this->cpdHashes[$firstHash][1],
+                                  'fileA'      => $fileA,
+                                  'firstLineA' => $firstLineA,
                                   'fileB'      => $file,
                                   'firstLineB' => $firstLine,
-                                  'numLines'   => $line + 1 - $firstLine,
+                                  'numLines'   => $line    + 1 - $firstLine,
                                   'numTokens'  => $tokenNr + 1 - $firstToken
                                 );
                             }
@@ -448,13 +453,18 @@ class PHPUnit_Util_Metrics_Project extends PHPUnit_Util_Metrics
             }
 
             if ($found) {
-                if ($line + 1 - $firstLine > $minLines) {
+                $fileA      = $this->cpdHashes[$firstHash][0];
+                $firstLineA = $this->cpdHashes[$firstHash][1];
+
+                if ($line + 1 - $firstLine > $minLines &&
+                    ($fileA->getPath() != $file->getPath() ||
+                     $firstLineA       != $firstLine)) {
                     $this->cpdDuplicates[] = array(
-                      'fileA'      => $this->cpdHashes[$firstHash][0],
-                      'firstLineA' => $this->cpdHashes[$firstHash][1],
+                      'fileA'      => $fileA,
+                      'firstLineA' => $firstLineA,
                       'fileB'      => $file,
                       'firstLineB' => $firstLine,
-                      'numLines'   => $line + 1 - $firstLine,
+                      'numLines'   => $line    + 1 - $firstLine,
                       'numTokens'  => $tokenNr + 1 - $firstToken
                     );
                 }

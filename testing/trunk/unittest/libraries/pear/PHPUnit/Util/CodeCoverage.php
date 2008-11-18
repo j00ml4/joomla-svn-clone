@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: CodeCoverage.php 3217 2008-06-16 06:02:00Z sb $
+ * @version    SVN: $Id: CodeCoverage.php 3662 2008-08-30 09:32:34Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.1.0
  */
@@ -56,7 +56,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.1.0
  * @abstract
@@ -146,6 +146,32 @@ abstract class PHPUnit_Util_CodeCoverage
             $isFileCache = array();
 
             foreach ($data as $test) {
+                if (isset($test['dead'])) {
+                    $deadCode       = self::bitStringToCodeCoverage($test['dead'], -2);
+                    $executableCode = self::bitStringToCodeCoverage($test['executable'], -1);
+                    $executedCode   = self::bitStringToCodeCoverage($test['files'], 1);
+                    $keys           = array_merge(array_keys($deadCode), array_keys($executableCode), array_keys($executedCode));
+                    $tmp            = array();
+
+                    foreach ($keys as $file) {
+                        $tmp[$file] = array();
+
+                        if (isset($executedCode[$file])) {
+                            $tmp[$file] += $executedCode[$file];
+                        }
+
+                        if (isset($executableCode[$file])) {
+                            $tmp[$file] += $executableCode[$file];
+                        }
+
+                        if (isset($deadCode[$file])) {
+                            $tmp[$file] += $deadCode[$file];
+                        }
+                    }
+
+                    $test['files'] = $tmp;
+                }
+
                 foreach ($test['files'] as $file => $lines) {
                     if (!isset($isFileCache[$file])) {
                         $isFileCache[$file] = self::isFile($file);
@@ -236,13 +262,100 @@ abstract class PHPUnit_Util_CodeCoverage
      * @param  string $file
      * @return boolean
      */
-    protected static function isFile($file)
+    public static function isFile($file)
     {
-        if (strpos($file, 'eval()\'d code') || strpos($file, 'runtime-created function') || strpos($file, 'assert code')) {
+        if (strpos($file, 'eval()\'d code') ||
+            strpos($file, 'runtime-created function') ||
+            strpos($file, 'assert code') ||
+            strpos($file, 'regexp code')) {
             return FALSE;
         }
 
         return TRUE;
+    }
+
+    /**
+     *
+     *
+     * @since  Method available since Release 3.3.0
+     */
+    public static function clearSummary()
+    {
+        self::$summary = array();
+    }
+
+    /**
+     *
+     *
+     * @param  array $data
+     * @param  array $requiredStatus
+     * @return array
+     * @since  Method available since Release 3.3.0
+     */
+    public static function codeCoverageToBitString(array $data, array $requiredStatus)
+    {
+        $result = array();
+
+        foreach ($data as $file => $coverage) {
+            end($coverage);
+            $maxLine = key($coverage);
+
+            if ($maxLine == 0) {
+                $bitArray = array();
+            } else {
+                $bitArray = array_fill(0, ceil($maxLine / 8), 0);
+            }
+
+            foreach ($coverage as $line => $status) {
+                if (!in_array($status, $requiredStatus)) {
+                    continue;
+                }
+
+                $line--;
+
+                $i             = ($line - ($line % 8)) / 8;
+                $bitArray[$i] |= 0x01 << ($line % 8);
+            }
+
+            if (isset($line)) {
+                $result[$file] = implode('', array_map('chr', $bitArray));
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     *
+     *
+     * @since  Method available since Release 3.3.0
+     */
+    public static function bitStringToCodeCoverage($strings, $status)
+    {
+        $result = array();
+
+        foreach ($strings as $file => $string) {
+            if (is_array($string)) {
+                return $strings;
+            }
+
+            $data   = array();
+            $length = strlen($string);
+
+            for ($i = 0; $i < $length; $i++) {
+                $ord = ord($string{$i});
+
+                for ($j = 0; $j < 8; $j++) {
+                    if ($ord & (0x01 << $j)) {
+                        $data[$i * 8 + $j + 1] = $status;
+                    }
+                }
+            }
+
+            $result[$file] = $data;
+        }
+
+        return $result;
     }
 }
 ?>

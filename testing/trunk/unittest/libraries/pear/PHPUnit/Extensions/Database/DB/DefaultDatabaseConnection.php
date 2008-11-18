@@ -63,7 +63,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -157,8 +157,7 @@ class PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection implements PHPUni
      */
     public function createQueryTable($resultName, $sql)
     {
-        $statement = $this->connection->query($sql);
-        return new PHPUnit_Extensions_Database_DB_ResultSetTable($resultName, $statement);
+        return new PHPUnit_Extensions_Database_DataSet_QueryTable($resultName, $sql, $this);
     }
 
     /**

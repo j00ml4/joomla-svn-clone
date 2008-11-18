@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: IsEqual.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: IsEqual.php 3164 2008-06-08 12:22:29Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -66,7 +66,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
@@ -75,12 +75,14 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
     protected $value;
     protected $delta = 0;
     protected $maxDepth = 10;
+    protected $canonicalizeEol = FALSE;
 
-    public function __construct($value, $delta = 0, $maxDepth = 10)
+    public function __construct($value, $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
     {
-        $this->value    = $value;
-        $this->delta    = $delta;
-        $this->maxDepth = $maxDepth;
+        $this->value           = $value;
+        $this->delta           = $delta;
+        $this->maxDepth        = $maxDepth;
+        $this->canonicalizeEol = $canonicalizeEol;
     }
 
     /**
@@ -237,14 +239,20 @@ class PHPUnit_Framework_Constraint_IsEqual extends PHPUnit_Framework_Constraint
             if (is_numeric($a) && is_numeric($b)) {
                 // Optionally apply delta on numeric values.
                 return $this->numericComparison($a, $b);
-            } else {
-                return ($a == $b);
             }
+
+            if ($this->canonicalizeEol && PHP_EOL != "\n" &&
+                is_string($a) && is_string($b)) {
+                $a = str_replace(PHP_EOL, "\n", $a);
+                $b = str_replace(PHP_EOL, "\n", $b);
+            }
+
+            return ($a == $b);
         }
 
         if (is_object($a)) {
-            $a = (array) $a;
-            $b = (array) $b;
+            $a = (array)$a;
+            $b = (array)$b;
         }
 
         foreach ($a as $key => $v) {

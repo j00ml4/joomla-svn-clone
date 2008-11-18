@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestCase.php 2851 2008-04-24 08:33:22Z sb $
+ * @version    SVN: $Id: TestCase.php 3620 2008-08-25 05:22:20Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -64,7 +64,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -215,6 +215,12 @@ abstract class PHPUnit_Extensions_Database_TestCase extends PHPUnit_Framework_Te
         $this->getDatabaseTester()->setTearDownOperation($this->getTearDownOperation());
         $this->getDatabaseTester()->setDataSet($this->getDataSet());
         $this->getDatabaseTester()->onTearDown();
+
+        /**
+         * Destroy the tester after the test is run to keep DB connections
+         * from piling up.
+         */
+        $this->databaseTester = NULL;
     }
 
     /**

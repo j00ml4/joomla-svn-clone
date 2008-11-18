@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Configuration.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: Configuration.php 3611 2008-08-24 06:47:10Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -57,7 +57,12 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * <code>
  * <?xml version="1.0" encoding="utf-8" ?>
  *
- * <phpunit convertErrorsToExceptions="true" convertNoticesToExceptions="true" stopOnFailure="false">
+ * <phpunit ansi="false"
+ *          bootstrap="/path/to/bootstrap.php"
+ *          convertErrorsToExceptions="true"
+ *          convertNoticesToExceptions="true"
+ *          convertWarningsToExceptions="true"
+ *          stopOnFailure="false">
  *   <testsuite name="My Test Suite">
  *     <directory suffix="Test.php">/path/to/files</directory>
  *     <file>/path/to/MyTest.php</file>
@@ -95,7 +100,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *     <log type="coverage-html" target="/tmp/report" charset="UTF-8"
  *          yui="true" highlight="false"
  *          lowUpperBound="35" highLowerBound="70"/>
- *     <log type="coverage-xml" target="/tmp/coverage.xml"/>
+ *     <log type="coverage-clover" target="/tmp/clover.xml"/>
+ *     <log type="coverage-source" target="/tmp/coverage"/>
  *     <log type="graphviz" target="/tmp/logfile.dot"/>
  *     <log type="json" target="/tmp/logfile.json"/>
  *     <log type="metrics-xml" target="/tmp/metrics.xml"/>
@@ -103,6 +109,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *     <log type="pmd-xml" target="/tmp/pmd.xml" cpdMinLines="5" cpdMinMatches="70"/>
  *     <log type="tap" target="/tmp/logfile.tap"/>
  *     <log type="test-xml" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
+ *     <log type="story-html" target="/tmp/story.html"/>
+ *     <log type="story-text" target="/tmp/story.txt"/>
  *     <log type="testdox-html" target="/tmp/testdox.html"/>
  *     <log type="testdox-text" target="/tmp/testdox.txt"/>
  *
@@ -140,7 +148,11 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  *   </php>
  *
  *   <selenium>
- *     <browser name="" browser="" host="" port="" timeout="">
+ *     <browser name="Firefox on Linux"
+ *              browser="*firefox /usr/lib/firefox/firefox-bin"
+ *              host="my.linux.box"
+ *              port="4444"
+ *              timeout="30000"/>
  *   </selenium>
  * </phpunit>
  * </code>
@@ -150,7 +162,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -166,7 +178,7 @@ class PHPUnit_Util_Configuration
      */
     public function __construct($filename)
     {
-        $this->document = PHPUnit_Util_XML::load($filename);
+        $this->document = PHPUnit_Util_XML::loadFile($filename);
         $this->xpath    = new DOMXPath($this->document);
     }
 
@@ -387,6 +399,17 @@ class PHPUnit_Util_Configuration
     {
         $result = array();
 
+        if ($this->document->documentElement->hasAttribute('ansi')) {
+            $result['ansi'] = $this->getBoolean(
+              (string)$this->document->documentElement->getAttribute('ansi'),
+              FALSE
+            );
+        }
+
+        if ($this->document->documentElement->hasAttribute('bootstrap')) {
+            $result['bootstrap'] = (string)$this->document->documentElement->getAttribute('bootstrap');
+        }
+
         if ($this->document->documentElement->hasAttribute('convertErrorsToExceptions')) {
             $result['convertErrorsToExceptions'] = $this->getBoolean(
               (string)$this->document->documentElement->getAttribute('convertErrorsToExceptions'),
@@ -397,6 +420,13 @@ class PHPUnit_Util_Configuration
         if ($this->document->documentElement->hasAttribute('convertNoticesToExceptions')) {
             $result['convertNoticesToExceptions'] = $this->getBoolean(
               (string)$this->document->documentElement->getAttribute('convertNoticesToExceptions'),
+              TRUE
+            );
+        }
+
+        if ($this->document->documentElement->hasAttribute('convertWarningsToExceptions')) {
+            $result['convertWarningsToExceptions'] = $this->getBoolean(
+              (string)$this->document->documentElement->getAttribute('convertWarningsToExceptions'),
               TRUE
             );
         }
@@ -462,15 +492,15 @@ class PHPUnit_Util_Configuration
             }
 
             if ($config->hasAttribute('port')) {
-                $host = (int)$config->getAttribute('port');
+                $port = (int)$config->getAttribute('port');
             } else {
-                $host = 4444;
+                $port = 4444;
             }
 
             if ($config->hasAttribute('timeout')) {
-                $host = (int)$config->getAttribute('timeout');
+                $timeout = (int)$config->getAttribute('timeout');
             } else {
-                $host = 30000;
+                $timeout = 30000;
             }
 
             $result[] = array(

@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: GraphViz.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: GraphViz.php 3284 2008-06-28 10:09:12Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -61,7 +61,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
@@ -105,22 +105,27 @@ class PHPUnit_Util_Log_GraphViz extends PHPUnit_Util_Printer implements PHPUnit_
     public function __construct($out = NULL)
     {
         if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('Image/GraphViz.php')) {
+            PHPUnit_Util_Filesystem::collectStart();
             require_once 'Image/GraphViz.php';
+
+            $this->graph = new Image_GraphViz(
+              TRUE,
+              array(
+                'overlap'  => 'scale',
+                'splines'  => 'true',
+                'sep'      => '.1',
+                'fontsize' => '8'
+              )
+            );
+
+            parent::__construct($out);
+
+            foreach (PHPUnit_Util_Filesystem::collectEnd() as $blacklistedFile) {
+                PHPUnit_Util_Filter::addFileToFilter($blacklistedFile, 'PHPUNIT');
+            }
         } else {
             throw new RuntimeException('Image_GraphViz is not available.');
         }
-
-        $this->graph = new Image_GraphViz(
-          TRUE,
-          array(
-            'overlap'  => 'scale',
-            'splines'  => 'true',
-            'sep'      => '.1',
-            'fontsize' => '8'
-          )
-        );
-
-        parent::__construct($out);
     }
 
     /**

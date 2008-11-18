@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: TestSuite.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: TestSuite.php 3646 2008-08-27 06:46:53Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -89,12 +89,19 @@ if (!class_exists('PHPUnit_Framework_TestSuite', FALSE)) {
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
 class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Framework_SelfDescribing, IteratorAggregate
 {
+    /**
+     * Enable or disable the backup and restoration of the $GLOBALS array.
+     *
+     * @var    boolean
+     */
+    protected $backupGlobals = NULL;
+
     /**
      * Fixture that is shared between the tests of this test suite.
      *
@@ -180,10 +187,11 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             throw new InvalidArgumentException;
         }
 
-        PHPUnit_Util_Filter::addFileToFilter(
-          realpath($theClass->getFilename()),
-          'TESTS'
-        );
+        $filename = $theClass->getFilename();
+
+        if (strpos($filename, 'eval()') === FALSE) {
+            PHPUnit_Util_Filter::addFileToFilter(realpath($filename), 'TESTS');
+        }
 
         if ($name != '') {
             $this->setName($name);
@@ -503,9 +511,9 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                 $groups = PHPUnit_Util_Test::getGroups($method, $classGroups);
 
                 if (is_array($data) || $data instanceof Iterator) {
-                     $test = new PHPUnit_Framework_TestSuite(
-                       $className . '::' . $name
-                     );
+                    $test = new PHPUnit_Framework_TestSuite(
+                      $className . '::' . $name
+                    );
 
                     foreach ($data as $_dataName => $_data) {
                         $_test = new $className($name, $_data, $_dataName);
@@ -605,22 +613,14 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
         $result->startTestSuite($this);
 
-        $tests = array();
-
-        if (empty($excludeGroups)) {
-            if (empty($groups)) {
-                $tests = $this->tests;
-            } else {
-                foreach ($groups as $group) {
-                    if (isset($this->groups[$group])) {
-                        $tests = array_merge($tests, $this->groups[$group]);
-                    }
-                }
-            }
+        if (empty($groups)) {
+            $tests = $this->tests;
         } else {
-            foreach ($this->groups as $_group => $_tests) {
-                if (!in_array($_group, $excludeGroups)) {
-                    $tests = array_merge($tests, $_tests);
+            $tests = array();
+
+            foreach ($groups as $group) {
+                if (isset($this->groups[$group])) {
+                    $tests = array_merge($tests, $this->groups[$group]);
                 }
             }
         }
@@ -631,21 +631,42 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             }
 
             if ($test instanceof PHPUnit_Framework_TestSuite) {
+                $test->setBackupGlobals($this->backupGlobals);
                 $test->setSharedFixture($this->sharedFixture);
                 $test->run($result, $filter, $groups, $excludeGroups);
             } else {
                 $runTest = TRUE;
 
                 if ($filter !== FALSE ) {
-                    $name = $test->getName();
+                    $tmp = PHPUnit_Util_Test::describe($test, FALSE);
 
-                    if ($name !== NULL && preg_match($filter, $name) == 0) {
+                    if ($tmp[0] != '') {
+                        $name = join('::', $tmp);
+                    } else {
+                        $name = $tmp[1];
+                    }
+
+                    if (preg_match($filter, $name) == 0) {
                         $runTest = FALSE;
+                    }
+                }
+
+                if ($runTest && !empty($excludeGroups)) {
+                    foreach ($this->groups as $_group => $_tests) {
+                        if (in_array($_group, $excludeGroups)) {
+                            foreach ($_tests as $_test) {
+                                if ($test === $_test) {
+                                    $runTest = FALSE;
+                                    break 2;
+                                }
+                            }
+                        }
                     }
                 }
 
                 if ($runTest) {
                     if ($test instanceof PHPUnit_Framework_TestCase) {
+                        $test->setBackupGlobals($this->backupGlobals);
                         $test->setSharedFixture($this->sharedFixture);
                     }
 
@@ -780,7 +801,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
         // @scenario on TestCase::testMethod()
         // @test     on TestCase::testMethod()
         return strpos($method->getDocComment(), '@test')     !== FALSE ||
-               strpos($method->getDocComment(), '@scenario') !== FALSE;
+                strpos($method->getDocComment(), '@scenario') !== FALSE;
     }
 
     /**
@@ -790,6 +811,17 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     protected static function warning($message)
     {
         return new PHPUnit_Framework_Warning($message);
+    }
+
+    /**
+     * @param  boolean $backupGlobals
+     * @since  Method available since Release 3.3.0
+     */
+    public function setBackupGlobals($backupGlobals)
+    {
+        if (is_null($this->backupGlobals) && is_bool($backupGlobals)) {
+            $this->backupGlobals = $backupGlobals;
+        }
     }
 
     /**

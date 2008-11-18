@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: append.php 2206 2008-01-18 17:00:39Z sb $
+ * @version    SVN: $Id: append.php 3662 2008-08-30 09:32:34Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.10
  */
@@ -56,12 +56,9 @@ if ( isset($_COOKIE['PHPUNIT_SELENIUM_TEST_ID']) &&
         unset($data[$file]);
     }
 
-    foreach ($data as $filename => $linecoverage) {
-        $data[$filename]['md5'] = md5_file($filename);
-    }
-
     file_put_contents(
-      $_SERVER['SCRIPT_FILENAME'] . '.phpunit_' .
+      $_SERVER['SCRIPT_FILENAME'] . '.' .
+      md5(uniqid(rand(), TRUE)) . '.' .
       $_COOKIE['PHPUNIT_SELENIUM_TEST_ID'],
       serialize($data)
     );

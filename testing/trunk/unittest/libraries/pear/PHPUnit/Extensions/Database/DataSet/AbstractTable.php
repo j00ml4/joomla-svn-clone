@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: AbstractTable.php 3147 2008-06-08 08:00:19Z sb $
+ * @version    SVN: $Id: AbstractTable.php 3675 2008-08-31 07:11:10Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -59,7 +59,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -82,6 +82,7 @@ class PHPUnit_Extensions_Database_DataSet_AbstractTable implements PHPUnit_Exten
      * Sets the metadata for this table.
      *
      * @param PHPUnit_Extensions_Database_DataSet_ITableMetaData $tableMetaData
+     * @deprecated
      */
     protected function setTableMetaData(PHPUnit_Extensions_Database_DataSet_ITableMetaData $tableMetaData)
     {
@@ -122,6 +123,25 @@ class PHPUnit_Extensions_Database_DataSet_AbstractTable implements PHPUnit_Exten
         } else {
             if (!in_array($column, $this->getTableMetaData()->getColumns()) || $this->getRowCount() <= $row) {
                 throw new InvalidArgumentException("The given row ({$row}) and column ({$column}) do not exist in table {$this->getTableMetaData()->getTableName()}");
+            } else {
+                return NULL;
+            }
+        }
+    }
+
+    /**
+     * Returns the an associative array keyed by columns for the given row.
+     *
+     * @param int $row
+     * @return array
+     */
+    public function getRow($row)
+    {
+        if (isset($this->data[$row])) {
+            return $this->data[$row];
+        } else {
+            if ($this->getRowCount() <= $row) {
+                throw new InvalidArgumentException("The given row ({$row}) does not exist in table {$this->getTableMetaData()->getTableName()}");
             } else {
                 return NULL;
             }

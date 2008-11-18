@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: ResultPrinter.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: ResultPrinter.php 3592 2008-08-23 03:39:29Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -58,7 +58,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
@@ -97,19 +97,36 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
     /**
      * @var    boolean
      */
+    protected $ansi = FALSE;
+
+    /**
+     * @var    boolean
+     */
     protected $verbose = FALSE;
+
+    /**
+     * @var    integer
+     */
+    protected $numAssertions = 0;
 
     /**
      * Constructor.
      *
      * @param  mixed   $out
      * @param  boolean $verbose
+     * @param  boolean $ansi
      * @throws InvalidArgumentException
      * @since  Method available since Release 3.0.0
      */
-    public function __construct($out = NULL, $verbose = FALSE)
+    public function __construct($out = NULL, $verbose = FALSE, $ansi = FALSE)
     {
         parent::__construct($out);
+
+        if (is_bool($ansi)) {
+            $this->ansi = $ansi;
+        } else {
+            throw new InvalidArgumentException;
+        }
 
         if (is_bool($verbose)) {
             $this->verbose = $verbose;
@@ -284,14 +301,24 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
         if ($result->wasSuccessful() &&
             $result->allCompletlyImplemented() &&
             $result->noneSkipped()) {
+            if ($this->ansi) {
+                $this->write("\x1b[30;42m\x1b[2K");
+            }
+
             $this->write(
               sprintf(
-                "\nOK (%d test%s)\n",
+                "OK (%d test%s, %d assertion%s)\n",
 
                 count($result),
-                (count($result) == 1) ? '' : 's'
+                (count($result) == 1) ? '' : 's',
+                $this->numAssertions,
+                ($this->numAssertions == 1) ? '' : 's'
               )
             );
+
+            if ($this->ansi) {
+                $this->write("\x1b[0m\x1b[2K");
+            }
         }
 
         else if ((!$result->allCompletlyImplemented() ||
@@ -299,10 +326,11 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
                  $result->wasSuccessful()) {
             $this->write(
               sprintf(
-                "\nOK, but incomplete or skipped tests!\n" .
-                "Tests: %d%s%s.\n",
+                "OK, but incomplete or skipped tests!\n" .
+                "Tests: %d, Assertions: %d%s%s.\n",
 
                 count($result),
+                $this->numAssertions,
                 $this->getCountString($result->notImplementedCount(), 'Incomplete'),
                 $this->getCountString($result->skippedCount(), 'Skipped')
               )
@@ -310,18 +338,30 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
         }
 
         else {
+            $this->write("\n");
+
+            if ($this->ansi) {
+                $this->write("\x1b[37;41m\x1b[2KFAILURES!\n\x1b[0m\x1b[37;41m\x1b[2K");
+            } else {
+                $this->write("FAILURES!\n");
+            }
+
             $this->write(
               sprintf(
-                "\nFAILURES!\n" .
-                "Tests: %d%s%s%s%s.\n",
+                "Tests: %d, Assertions: %s%s%s%s.\n",
 
                 count($result),
+                $this->numAssertions,
                 $this->getCountString($result->failureCount(), 'Failures'),
                 $this->getCountString($result->errorCount(), 'Errors'),
                 $this->getCountString($result->notImplementedCount(), 'Incomplete'),
                 $this->getCountString($result->skippedCount(), 'Skipped')
               )
             );
+
+            if ($this->ansi) {
+                $this->write("\x1b[0m\x1b[2K");
+            }
         }
     }
 
@@ -431,12 +471,9 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
                 $name
               )
             );
-
-            array_push($this->numberOfTests, 0);
-            array_push($this->testSuiteSize, count($suite));
         }
 
-        else if (empty($this->numberOfTests)) {
+        if ($this->verbose || empty($this->numberOfTests)) {
             array_push($this->numberOfTests, 0);
             array_push($this->testSuiteSize, count($suite));
         }
@@ -500,7 +537,11 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
             $this->writeProgress('.');
         }
 
-        $this->lastEvent = self::EVENT_TEST_END;
+        if ($test instanceof PHPUnit_Framework_TestCase) {
+            $this->numAssertions += $test->getNumAssertions();
+        }
+
+        $this->lastEvent      = self::EVENT_TEST_END;
         $this->lastTestFailed = FALSE;
     }
 
