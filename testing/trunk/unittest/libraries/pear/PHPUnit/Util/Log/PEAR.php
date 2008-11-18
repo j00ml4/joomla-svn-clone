@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: PEAR.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: PEAR.php 3284 2008-06-28 10:09:12Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.3.0
  */
@@ -57,7 +57,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.1.0
  */
@@ -86,12 +86,16 @@ class PHPUnit_Util_Log_PEAR implements PHPUnit_Framework_TestListener
     public function __construct($type, $name = '', $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
     {
         if (PHPUnit_Util_Filesystem::fileExistsInIncludePath('Log.php')) {
+            PHPUnit_Util_Filesystem::collectStart();
             require_once 'Log.php';
+            $this->log = Log::factory($type, $name, $ident, $conf, $maxLevel);
+
+            foreach (PHPUnit_Util_Filesystem::collectEnd() as $blacklistedFile) {
+                PHPUnit_Util_Filter::addFileToFilter($blacklistedFile, 'PHPUNIT');
+            }
         } else {
             throw new RuntimeException('Log is not available.');
         }
-
-        $this->log = Log::factory($type, $name, $ident, $conf, $maxLevel);
     }
 
     /**

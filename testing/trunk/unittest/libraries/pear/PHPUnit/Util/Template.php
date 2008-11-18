@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Template.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: Template.php 3733 2008-09-04 11:13:45Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -56,7 +56,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
@@ -96,9 +96,17 @@ class PHPUnit_Util_Template
      */
     public function setFile($file)
     {
-        if ($file != '' && file_exists($file)) {
+        $distFile = $file . '.dist';
+
+        if (file_exists($file)) {
             $this->template = file_get_contents($file);
-        } else {
+        }
+
+        else if (file_exists($distFile)) {
+            $this->template = file_get_contents($distFile);
+        }
+
+        else {
             throw new InvalidArgumentException(
               'Template file could not be loaded.'
             );

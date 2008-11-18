@@ -39,7 +39,7 @@
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: XmlDataSet.php 3147 2008-06-08 08:00:19Z sb $
+ * @version    SVN: $Id: XmlDataSet.php 3312 2008-06-30 04:52:51Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.2.0
  */
@@ -48,6 +48,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Util/Filter.php';
 
 require_once 'PHPUnit/Extensions/Database/DataSet/AbstractXmlDataSet.php';
+require_once 'PHPUnit/Extensions/Database/DataSet/Persistors/Xml.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
@@ -59,7 +60,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Mike Lively <m@digitalsandwich.com>
  * @copyright  2008 Mike Lively <m@digitalsandwich.com>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.2.0
  */
@@ -125,5 +126,16 @@ class PHPUnit_Extensions_Database_DataSet_XmlDataSet extends PHPUnit_Extensions_
         }
     }
 
+    public static function write(PHPUnit_Extensions_Database_DataSet_IDataSet $dataset, $filename)
+    {
+        $pers = new PHPUnit_Extensions_Database_DataSet_Persistors_Xml();
+        $pers->setFileName($filename);
+
+        try {
+            $pers->write($dataset);
+        } catch (RuntimeException $e) {
+            throw new RuntimeException(__METHOD__ . ' called with an unwritable file.');
+        }
+    }
 }
 ?>

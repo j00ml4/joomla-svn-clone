@@ -15,6 +15,9 @@ Legend:
 > -> Moved
 ! -> Note
 
+2008-11-18 Andrew Eddie
+ ^ Upgrade to PHPUnit 3.3
+
 2008-09-16 Andrew Eddie
  - Remove j.php standalone runner code (use runtests.php with filters from folder instead)
  + Added wrappers to improve 3rd party test overrides (allows tests to happen anywhere better)

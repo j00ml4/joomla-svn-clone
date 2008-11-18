@@ -12,6 +12,10 @@
  * @license		GNU General Public License
  */
 
+// Wrap the test runnner in an output buffer
+// so that any sessions can be properly started
+ob_start();
+
 if (! defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }

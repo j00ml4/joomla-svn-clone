@@ -40,7 +40,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Mock.php 2851 2008-04-24 08:33:22Z sb $
+ * @version    SVN: $Id: Mock.php 3516 2008-08-04 21:08:57Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 3.0.0
  */
@@ -84,7 +84,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
@@ -98,8 +98,9 @@ class PHPUnit_Framework_MockObject_Mock
     protected $callOriginalConstructor;
     protected $callOriginalClone;
     protected $callAutoload;
+    protected static $cache = array();
 
-    public function __construct($className, array $methods = array(), $mockClassName = '', $callOriginalConstructor = TRUE, $callOriginalClone = TRUE, $callAutoload = TRUE)
+    public function __construct($className, $methods = array(), $mockClassName = '', $callOriginalConstructor = TRUE, $callOriginalClone = TRUE, $callAutoload = TRUE)
     {
         $classNameParts = explode('::', $className);
 
@@ -131,7 +132,7 @@ class PHPUnit_Framework_MockObject_Mock
         $isClass     = class_exists($className, $callAutoload);
         $isInterface = interface_exists($className, $callAutoload);
 
-        if (empty($methods) && ($isClass || $isInterface)) {
+        if (is_array($methods) && empty($methods) && ($isClass || $isInterface)) {
             $methods = get_class_methods($className);
         }
 
@@ -148,7 +149,41 @@ class PHPUnit_Framework_MockObject_Mock
         $this->callAutoload            = $callAutoload;
     }
 
-    public static function generate($className, array $methods = array(), $mockClassName = '', $callOriginalConstructor = TRUE, $callOriginalClone = TRUE, $callAutoload = TRUE)
+    public static function generate($className, $methods = array(), $mockClassName = '', $callOriginalConstructor = TRUE, $callOriginalClone = TRUE, $callAutoload = TRUE)
+    {
+        if ($mockClassName == '') {
+            $key = md5(
+              $className .
+              serialize($methods) .
+              serialize($callOriginalConstructor) .
+              serialize($callOriginalClone)
+            );
+
+            if (!isset(self::$cache[$key])) {
+                self::$cache[$key] = self::generateMock(
+                  $className,
+                  $methods,
+                  $mockClassName,
+                  $callOriginalConstructor,
+                  $callOriginalClone,
+                  $callAutoload
+                );
+            }
+
+            return self::$cache[$key];
+        }
+
+        return self::generateMock(
+          $className,
+          $methods,
+          $mockClassName,
+          $callOriginalConstructor,
+          $callOriginalClone,
+          $callAutoload
+        );
+    }
+
+    protected static function generateMock($className, $methods, $mockClassName, $callOriginalConstructor, $callOriginalClone, $callAutoload)
     {
         $mock = new PHPUnit_Framework_MockObject_Mock(
           $className,
@@ -211,14 +246,14 @@ class PHPUnit_Framework_MockObject_Mock
 
         if ($class->isInterface()) {
             $code .= sprintf(
-              "%s implements %s%s, PHPUnit_Framework_MockObject_MockObject {\n",
+              "%s implements %s%s {\n",
               $this->mockClassName,
               !empty($this->namespaceName) ? $this->namespaceName . '::' : '',
               $this->className
             );
         } else {
             $code .= sprintf(
-              "%s extends %s%s implements PHPUnit_Framework_MockObject_MockObject {\n",
+              "%s extends %s%s {\n",
               $this->mockClassName,
               !empty($this->namespaceName) ? $this->namespaceName . '::' : '',
               $this->className
@@ -227,17 +262,19 @@ class PHPUnit_Framework_MockObject_Mock
 
         $code .= $this->generateMockApi($class);
 
-        foreach ($this->methods as $methodName) {
-            try {
-                $method = $class->getMethod($methodName);
+        if (is_array($this->methods)) {
+            foreach ($this->methods as $methodName) {
+                try {
+                    $method = $class->getMethod($methodName);
 
-                if ($this->canMockMethod($method)) {
-                    $code .= $this->generateMethodDefinitionFromExisting($method);
+                    if ($this->canMockMethod($method)) {
+                        $code .= $this->generateMethodDefinitionFromExisting($method);
+                    }
                 }
-            }
 
-            catch (ReflectionException $e) {
-                $code .= $this->generateMethodDefinition($class->getName(), $methodName, 'public');
+                catch (ReflectionException $e) {
+                    $code .= $this->generateMethodDefinition($class->getName(), $methodName, 'public');
+                }
             }
         }
 
@@ -331,13 +368,13 @@ class PHPUnit_Framework_MockObject_Mock
           "    private \$invocationMocker;\n\n" .
           "%s" .
           "%s" .
-          "    public function getInvocationMocker() {\n" .
-          "        return \$this->invocationMocker;\n" .
-          "    }\n\n" .
           "    public function expects(PHPUnit_Framework_MockObject_Matcher_Invocation \$matcher) {\n" .
           "        return \$this->invocationMocker->expects(\$matcher);\n" .
           "    }\n\n" .
-          "    public function verify() {\n" .
+          "    public function __phpunit_getInvocationMocker() {\n" .
+          "        return \$this->invocationMocker;\n" .
+          "    }\n\n" .
+          "    public function __phpunit_verify() {\n" .
           "        \$this->invocationMocker->verify();\n" .
           "    }\n",
 

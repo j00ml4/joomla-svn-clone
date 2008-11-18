@@ -39,7 +39,7 @@
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    SVN: $Id: Assert.php 3165 2008-06-08 12:23:59Z sb $
+ * @version    SVN: $Id: Assert.php 3743 2008-09-04 14:12:32Z sb $
  * @link       http://www.phpunit.de/
  * @since      File available since Release 2.0.0
  */
@@ -47,6 +47,7 @@
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Util/Filter.php';
 require_once 'PHPUnit/Util/Type.php';
+require_once 'PHPUnit/Util/XML.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
@@ -60,7 +61,7 @@ if (!class_exists('PHPUnit_Framework_Assert', FALSE)) {
  * @author     Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright  2002-2008 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license    http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version    Release: 3.2.21
+ * @version    Release: 3.3.0
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  * @abstract
@@ -311,13 +312,12 @@ abstract class PHPUnit_Framework_Assert
      * @param  string  $message
      * @param  float   $delta
      * @param  integer $maxDepth
+     * @param  boolean $canonicalizeEol
      */
-    public static function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10)
+    public static function assertEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
     {
         $constraint = new PHPUnit_Framework_Constraint_IsEqual(
-          $expected,
-          $delta,
-          $maxDepth
+          $expected, $delta, $maxDepth, $canonicalizeEol
         );
 
         self::assertThat($actual, $constraint, $message);
@@ -332,15 +332,17 @@ abstract class PHPUnit_Framework_Assert
      * @param  string  $message
      * @param  float   $delta
      * @param  integer $maxDepth
+     * @param  boolean $canonicalizeEol
      */
-    public static function assertAttributeEquals($expected, $actualAttributeName, $actualClassOrObject, $message = '', $delta = 0, $maxDepth = 10)
+    public static function assertAttributeEquals($expected, $actualAttributeName, $actualClassOrObject, $message = '', $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
     {
         self::assertEquals(
           $expected,
           self::readAttribute($actualClassOrObject, $actualAttributeName),
           $message,
           $delta,
-          $maxDepth
+          $maxDepth,
+          $canonicalizeEol
         );
     }
 
@@ -352,15 +354,14 @@ abstract class PHPUnit_Framework_Assert
      * @param  string  $message
      * @param  float   $delta
      * @param  integer $maxDepth
+     * @param  boolean $canonicalizeEol
      * @since  Method available since Release 2.3.0
      */
-    public static function assertNotEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10)
+    public static function assertNotEquals($expected, $actual, $message = '', $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
     {
         $constraint = new PHPUnit_Framework_Constraint_Not(
           new PHPUnit_Framework_Constraint_IsEqual(
-            $expected,
-            $delta,
-            $maxDepth
+            $expected, $delta, $maxDepth, $canonicalizeEol
           )
         );
 
@@ -376,15 +377,17 @@ abstract class PHPUnit_Framework_Assert
      * @param  string  $message
      * @param  float   $delta
      * @param  integer $maxDepth
+     * @param  boolean $canonicalizeEol
      */
-    public static function assertAttributeNotEquals($expected, $actualAttributeName, $actualClassOrObject, $message = '', $delta = 0, $maxDepth = 10)
+    public static function assertAttributeNotEquals($expected, $actualAttributeName, $actualClassOrObject, $message = '', $delta = 0, $maxDepth = 10, $canonicalizeEol = FALSE)
     {
         self::assertNotEquals(
           $expected,
           self::readAttribute($actualClassOrObject, $actualAttributeName),
           $message,
           $delta,
-          $maxDepth
+          $maxDepth,
+          $canonicalizeEol
         );
     }
 
@@ -516,18 +519,24 @@ abstract class PHPUnit_Framework_Assert
      * Asserts that the contents of one file is equal to the contents of another
      * file.
      *
-     * @param  string $expected
-     * @param  string $actual
-     * @param  string $message
+     * @param  string  $expected
+     * @param  string  $actual
+     * @param  string  $message
+     * @param  boolean $canonicalizeEol
      * @since  Method available since Release 3.2.14
      */
-    public static function assertFileEquals($expected, $actual, $message = '')
+    public static function assertFileEquals($expected, $actual, $message = '', $canonicalizeEol = FALSE)
     {
         self::assertFileExists($expected, $message);
         self::assertFileExists($actual, $message);
 
         self::assertEquals(
-          file_get_contents($expected), file_get_contents($actual), $message
+          file_get_contents($expected),
+          file_get_contents($actual),
+          $message,
+          0,
+          10,
+          $canonicalizeEol
         );
     }
 
@@ -535,18 +544,72 @@ abstract class PHPUnit_Framework_Assert
      * Asserts that the contents of one file is not equal to the contents of
      * another file.
      *
-     * @param  string $expected
-     * @param  string $actual
-     * @param  string $message
+     * @param  string  $expected
+     * @param  string  $actual
+     * @param  string  $message
+     * @param  boolean $canonicalizeEol
      * @since  Method available since Release 3.2.14
      */
-    public static function assertFileNotEquals($expected, $actual, $message = '')
+    public static function assertFileNotEquals($expected, $actual, $message = '', $canonicalizeEol = FALSE)
     {
         self::assertFileExists($expected, $message);
         self::assertFileExists($actual, $message);
 
         self::assertNotEquals(
-          file_get_contents($expected), file_get_contents($actual), $message
+          file_get_contents($expected),
+          file_get_contents($actual),
+          $message,
+          0,
+          10,
+          $canonicalizeEol
+        );
+    }
+
+    /**
+     * Asserts that the contents of a string is equal
+     * to the contents of a file.
+     *
+     * @param  string  $expectedFile
+     * @param  string  $actualString
+     * @param  string  $message
+     * @param  boolean $canonicalizeEol
+     * @since  Method available since Release 3.3.0
+     */
+    public static function assertStringEqualsFile($expectedFile, $actualString, $message = '', $canonicalizeEol = FALSE)
+    {
+        self::assertFileExists($expectedFile, $message);
+
+        self::assertEquals(
+          file_get_contents($expectedFile),
+          $actualString,
+          $message,
+          0,
+          10,
+          $canonicalizeEol
+        );
+    }
+
+    /**
+     * Asserts that the contents of a string is not equal
+     * to the contents of a file.
+     *
+     * @param  string  $expected
+     * @param  string  $actual
+     * @param  string  $message
+     * @param  boolean $canonicalizeEol
+     * @since  Method available since Release 3.2.14
+     */
+    public static function assertStringNotEqualsFile($expected, $actual, $message = '', $canonicalizeEol = FALSE)
+    {
+        self::assertFileExists($expectedFile, $message);
+
+        self::assertNotEquals(
+          file_get_contents($expectedFile),
+          $actualString,
+          $message,
+          0,
+          10,
+          $canonicalizeEol
         );
     }
 
@@ -597,17 +660,7 @@ abstract class PHPUnit_Framework_Assert
      */
     public static function assertTrue($condition, $message = '')
     {
-        if ($condition !== TRUE) {
-            throw new PHPUnit_Framework_ExpectationFailedException(
-              sprintf(
-                'Failed asserting that %s is true.',
-
-                PHPUnit_Util_Type::toString($condition)
-              ),
-              NULL,
-              $message
-            );
-        }
+        self::assertThat($condition, self::isTrue(), $message);
     }
 
     /**
@@ -619,17 +672,7 @@ abstract class PHPUnit_Framework_Assert
      */
     public static function assertFalse($condition, $message = '')
     {
-        if ($condition !== FALSE) {
-            throw new PHPUnit_Framework_ExpectationFailedException(
-              sprintf(
-                'Failed asserting that %s is false.',
-
-                PHPUnit_Util_Type::toString($condition)
-              ),
-              NULL,
-              $message
-            );
-        }
+        self::assertThat($condition, self::isFalse(), $message);
     }
 
     /**
@@ -640,11 +683,7 @@ abstract class PHPUnit_Framework_Assert
      */
     public static function assertNotNull($actual, $message = '')
     {
-        $constraint = new PHPUnit_Framework_Constraint_Not(
-          new PHPUnit_Framework_Constraint_IsIdentical(NULL)
-        );
-
-        self::assertThat($actual, $constraint, $message);
+        self::assertThat($actual, self::logicalNot(self::isNull()), $message);
     }
 
     /**
@@ -655,9 +694,7 @@ abstract class PHPUnit_Framework_Assert
      */
     public static function assertNull($actual, $message = '')
     {
-        $constraint = new PHPUnit_Framework_Constraint_IsIdentical(NULL);
-
-        self::assertThat($actual, $constraint, $message);
+        self::assertThat($actual, self::isNull(), $message);
     }
 
     /**
@@ -1011,6 +1048,52 @@ abstract class PHPUnit_Framework_Assert
     /**
      * Asserts that two XML documents are equal.
      *
+     * @param  string $expectedFile
+     * @param  string $actualXml
+     * @param  string $message
+     * @since  Method available since Release 3.3.0
+     */
+    public static function assertXmlStringEqualsXmlFile($expectedFile, $actualXml, $message = '')
+    {
+        self::assertFileExists($expectedFile);
+
+        $expected = new DOMDocument;
+        $expected->preserveWhiteSpace = FALSE;
+        $expected->load($expectedFile);
+
+        $actual = new DOMDocument;
+        $actual->preserveWhiteSpace = FALSE;
+        $actual->loadXML($actualXml);
+
+        self::assertEquals($expected, $actual, $message);
+    }
+
+    /**
+     * Asserts that two XML documents are not equal.
+     *
+     * @param  string $expectedFile
+     * @param  string $actualXml
+     * @param  string $message
+     * @since  Method available since Release 3.3.0
+     */
+    public static function assertXmlStringNotEqualsXmlFile($expectedFile, $actualXml, $message = '')
+    {
+        self::assertFileExists($expectedFile);
+
+        $expected = new DOMDocument;
+        $expected->preserveWhiteSpace = FALSE;
+        $expected->load($expectedFile);
+
+        $actual = new DOMDocument;
+        $actual->preserveWhiteSpace = FALSE;
+        $actual->loadXML($actualXml);
+
+        self::assertNotEquals($expected, $actual, $message);
+    }
+
+    /**
+     * Asserts that two XML documents are equal.
+     *
      * @param  string $expectedXml
      * @param  string $actualXml
      * @param  string $message
@@ -1051,6 +1134,336 @@ abstract class PHPUnit_Framework_Assert
     }
 
     /**
+     * Asserts that a hierarchy of DOMNodes matches.
+     *
+     * @param DOMNode $expectedNode
+     * @param DOMNode $actualNode
+     * @param boolean $checkAttributes
+     * @param string  $message
+     * @author Mattis Stordalen Flister <mattis@xait.no>
+     * @since  Method available since Release 3.3.0
+     */
+    public static function assertEqualXMLStructure(DOMNode $expectedNode, DOMNode $actualNode, $checkAttributes = FALSE, $message = '')
+    {
+        self::assertEquals(
+          $expectedNode->tagName,
+          $actualNode->tagName,
+          $message
+        );
+
+        if ($checkAttributes) {
+            self::assertEquals(
+              $expectedNode->attributes->length,
+              $actualNode->attributes->length,
+              sprintf(
+                '%s%sNumber of attributes on node "%s" does not match',
+                $message,
+                !empty($message) ? "\n" : '',
+                $expectedNode->tagName
+              )
+            );
+
+            for ($i = 0 ; $i < $expectedNode->attributes->length; $i++) {
+                $expectedAttribute = $expectedNode->attributes->item($i);
+                $actualAttribute   = $actualNode->attributes->getNamedItem($expectedAttribute->name);
+
+                if (!$actualAttribute) {
+                    self::fail(
+                      sprintf(
+                        '%s%sCould not find attribute "%s" on node "%s"',
+                        $message,
+                        !empty($message) ? "\n" : '',
+                        $expectedAttribute->name,
+                        $expectedNode->tagName
+                      )
+                    );
+                }
+            }
+        }
+
+        PHPUnit_Util_XML::removeCharacterDataNodes($expectedNode);
+        PHPUnit_Util_XML::removeCharacterDataNodes($actualNode);
+
+        self::assertEquals(
+          $expectedNode->childNodes->length,
+          $actualNode->childNodes->length,
+          sprintf(
+            '%s%sNumber of child nodes of "%s" differs',
+            $message,
+            !empty($message) ? "\n" : '',
+            $expectedNode->tagName
+          )
+        );
+
+        for ($i = 0; $i < $expectedNode->childNodes->length; $i++) {
+            self::assertEqualXMLStructure(
+              $expectedNode->childNodes->item($i),
+              $actualNode->childNodes->item($i),
+              $checkAttributes,
+              $message
+            );
+        }
+    }
+
+    /**
+     * Assert the presence, absense, or count of elements in a document matching
+     * the CSS $selector, regardless of the contents of those elements.
+     *
+     * The first argument, $selector, is the CSS selector used to match
+     * the elements in the $actual document.
+     *
+     * The second argument, $count, can be either boolean or numeric.  When boolean,
+     * it asserts for presence of elements matching the selector (TRUE) or absense
+     * of elements (FALSE).  When numeric, it asserts the count of elements
+     *
+     * assertSelectCount("#binder", true, $xml);  // any?
+     * assertSelectCount(".binder", 3, $xml);     // exactly 3?
+     *
+     * @param  array   $selector
+     * @param  integer $count
+     * @param  mixed   $actual
+     * @param  string  $message
+     * @param  boolean $isHtml
+     * @since  Method available since Release 3.3.0
+     * @author Mike Naberezny <mike@maintainable.com>
+     * @author Derek DeVries <derek@maintainable.com>
+     */
+    public static function assertSelectCount($selector, $count, $actual, $message = '', $isHtml = TRUE)
+    {
+        self::assertSelectEquals($selector, TRUE, $count, $actual, $message, $isHtml);
+    }
+
+    /**
+     * assertSelectRegExp("#binder .name", "/Mike|Derek/", true, $xml); // any?
+     * assertSelectRegExp("#binder .name", "/Mike|Derek/", 3, $xml);    // exactly 3?
+     *
+     * @param  array   $selector
+     * @param  string  $pattern
+     * @param  integer $count
+     * @param  mixed   $actual
+     * @param  string  $message
+     * @param  boolean $isHtml
+     * @since  Method available since Release 3.3.0
+     * @author Mike Naberezny <mike@maintainable.com>
+     * @author Derek DeVries <derek@maintainable.com>
+     */
+    public static function assertSelectRegExp($selector, $pattern, $count, $actual, $message = '', $isHtml = TRUE)
+    {
+        self::assertSelectEquals($selector, "regexp:$pattern", $count, $actual, $message, $isHtml);
+    }
+
+    /**
+     * assertSelectEquals("#binder .name", "Chuck", true,  $xml);  // any?
+     * assertSelectEquals("#binder .name", "Chuck", false, $xml);  // none?
+     *
+     * @param  array   $selector
+     * @param  string  $content
+     * @param  integer $count
+     * @param  mixed   $actual
+     * @param  string  $message
+     * @param  boolean $isHtml
+     * @since  Method available since Release 3.3.0
+     * @author Mike Naberezny <mike@maintainable.com>
+     * @author Derek DeVries <derek@maintainable.com>
+     */
+    public static function assertSelectEquals($selector, $content, $count, $actual, $message = '', $isHtml = TRUE)
+    {
+        $tags = PHPUnit_Util_XML::cssSelect($selector, $content, $actual, $isHtml);
+
+        // assert specific number of elements
+        if (is_numeric($count)) {
+            $counted = $tags ? count($tags) : 0;
+            self::assertEquals($count, $counted);
+
+        // assert any elements exist if true, assert no elements exist if false
+        } else if (is_bool($count)) {
+            $any = count($tags) > 0 && $tags[0] instanceof DOMNode;
+
+            if ($count) {
+                self::assertTrue($any, $message);
+            } else {
+                self::assertFalse($any, $message);
+            }
+
+        // check for range number of elements
+        } else if (is_array($count) && (isset($count['>']) || isset($count['<']) ||
+                isset($count['>=']) || isset($count['<=']))) {
+            $counted = $tags ? count($tags) : 0;
+
+            if (isset($count['>'])) {
+                self::assertTrue($counted > $count['>'], $message);
+            }
+
+            if (isset($count['>='])) {
+                self::assertTrue($counted >= $count['>='], $message);
+            }
+
+            if (isset($count['<'])) {
+                self::assertTrue($counted < $count['<'], $message);
+            }
+
+            if (isset($count['<='])) {
+                self::assertTrue($counted <= $count['<='], $message);
+            }
+
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    /**
+     * Evaluate an HTML or XML string and assert its structure and/or contents.
+     *
+     * The first argument ($matcher) is an associative array that specifies the
+     * match criteria for the assertion:
+     *
+     *  - `id`           : the node with the given id attribute must match the corresponsing value.
+     *  - `tag`          : the node type must match the corresponding value.
+     *  - `attributes`   : a hash. The node's attributres must match the corresponsing values in the hash.
+     *  - `content`      : The text content must match the given value.
+     *  - `parent`       : a hash. The node's parent must match the corresponsing hash.
+     *  - `child`        : a hash. At least one of the node's immediate children must meet the criteria described by the hash.
+     *  - `ancestor`     : a hash. At least one of the node's ancestors must meet the criteria described by the hash.
+     *  - `descendant`   : a hash. At least one of the node's descendants must meet the criteria described by the hash.
+     *  - `children`     : a hash, for counting children of a node. Accepts the keys:
+     *    - `count`        : a number which must equal the number of children that match
+     *    - `less_than`    : the number of matching children must be greater than this number
+     *    - `greater_than` : the number of matching children must be less than this number
+     *    - `only`         : another hash consisting of the keys to use to match on the children, and only matching children will be counted
+     *
+     * <code>
+     * // Matcher that asserts that there is an element with an id="my_id".
+     * $matcher = array('id' => 'my_id');
+     *
+     * // Matcher that asserts that there is a "span" tag.
+     * $matcher = array('tag' => 'span');
+     *
+     * // Matcher that asserts that there is a "span" tag with the content
+     * // "Hello World".
+     * $matcher = array('tag' => 'span', 'content' => 'Hello World');
+     *
+     * // Matcher that asserts that there is a "span" tag with content matching the
+     * // regular expression pattern.
+     * $matcher = array('tag' => 'span', 'content' => '/Try P(HP|ython)/');
+     *
+     * // Matcher that asserts that there is a "span" with an "list" class attribute.
+     * $matcher = array(
+     *   'tag'        => 'span',
+     *   'attributes' => array('class' => 'list')
+     * );
+     *
+     * // Matcher that asserts that there is a "span" inside of a "div".
+     * $matcher = array(
+     *   'tag'    => 'span',
+     *   'parent' => array('tag' => 'div')
+     * );
+     *
+     * // Matcher that asserts that there is a "span" somewhere inside a "table".
+     * $matcher = array(
+     *   'tag'      => 'span',
+     *   'ascestor' => array('tag' => 'table')
+     * );
+     *
+     * // Matcher that asserts that there is a "span" with at least one "em" child.
+     * $matcher = array(
+     *   'tag'   => 'span',
+     *   'child' => array('tag' => 'em')
+     * );
+     *
+     * // Matcher that asserts that there is a "span" containing a (possibly nested)
+     * // "strong" tag.
+     * $matcher = array(
+     *   'tag'        => 'span',
+     *   'descendant' => array('tag' => 'strong')
+     * );
+     *
+     * // Matcher that asserts that there is a "span" containing 5-10 "em" tags as
+     * // immediate children.
+     * $matcher = array(
+     *   'tag'      => 'span',
+     *   'children' => array(
+     *     'less_than'    => 11,
+     *     'greater_than' => 4,
+     *     'only'         => array('tag' => 'em')
+     *   )
+     * );
+     *
+     * // Matcher that asserts that there is a "div", with an "ul" ancestor and a "li"
+     * // parent (with class="enum"), and containing a "span" descendant that contains
+     * // an element with id="my_test" and the text "Hello World".
+     * $matcher = array(
+     *   'tag'        => 'div',
+     *   'ancestor'   => array('tag' => 'ul'),
+     *   'parent'     => array(
+     *     'tag'        => 'li',
+     *     'attributes' => array('class' => 'enum')
+     *   ),
+     *   'descendant' => array(
+     *     'tag'   => 'span',
+     *     'child' => array(
+     *       'id'      => 'my_test',
+     *       'content' => 'Hello World'
+     *     )
+     *   )
+     * );
+     *
+     * // Use assertTag() to apply a $matcher to a piece of $html.
+     * $this->assertTag($matcher, $html);
+     *
+     * // Use assertTag() to apply a $matcher to a piece of $xml.
+     * $this->assertTag($matcher, $xml, '', FALSE);
+     * </code>
+     *
+     * The second argument ($actual) is a string containing either HTML or
+     * XML text to be tested.
+     *
+     * The third argument ($message) is an optional message that will be
+     * used if the assertion fails.
+     *
+     * The fourth argument ($html) is an optional flag specifying whether
+     * to load the $actual string into a DOMDocument using the HTML or
+     * XML load strategy.  It is TRUE by default, which assumes the HTML
+     * load strategy.  In many cases, this will be acceptable for XML as well.
+     *
+     * @param  array   $matcher
+     * @param  string  $actual
+     * @param  string  $message
+     * @param  boolean $isHtml
+     * @since  Method available since Release 3.3.0
+     * @author Mike Naberezny <mike@maintainable.com>
+     * @author Derek DeVries <derek@maintainable.com>
+     */
+    public static function assertTag($matcher, $actual, $message = '', $isHtml = TRUE)
+    {
+        $dom     = PHPUnit_Util_XML::load($actual, $isHtml);
+        $tags    = PHPUnit_Util_XML::findNodes($dom, $matcher);
+        $matched = count($tags) > 0 && $tags[0] instanceof DOMNode;
+
+        self::assertTrue($matched, $message);
+    }
+
+    /**
+     * This assertion is the exact opposite of assertTag().  Rather than asserting
+     * that $matcher results in a match, it asserts that $matcher does not match.
+     *
+     * @param  array   $matcher
+     * @param  string  $actual
+     * @param  string  $message
+     * @param  boolean $isHtml
+     * @since  Method available since Release 3.3.0
+     * @author Mike Naberezny <mike@maintainable.com>
+     * @author Derek DeVries <derek@maintainable.com>
+     */
+    public static function assertNotTag($matcher, $actual, $message = '', $isHtml = TRUE)
+    {
+        $dom     = PHPUnit_Util_XML::load($actual, $isHtml);
+        $tags    = PHPUnit_Util_XML::findNodes($dom, $matcher);
+        $matched = count($tags) > 0 && $tags[0] instanceof DOMNode;
+
+        self::assertFalse($matched, $message);
+    }
+
+    /**
      *
      *
      * @param  mixed                        $value
@@ -1060,6 +1473,16 @@ abstract class PHPUnit_Framework_Assert
      */
     public static function assertThat($value, PHPUnit_Framework_Constraint $constraint, $message = '')
     {
+        $stack = debug_backtrace();
+
+        foreach (debug_backtrace() as $step) {
+            if (isset($step['object']) &&
+                $step['object'] instanceof PHPUnit_Framework_TestCase) {
+                $step['object']->incrementAssertionCounter();
+                break;
+            }
+        }
+
         if (!$constraint->evaluate($value)) {
             $constraint->fail($value, $message);
         }
@@ -1134,6 +1557,39 @@ abstract class PHPUnit_Framework_Assert
     public static function anything()
     {
         return new PHPUnit_Framework_Constraint_IsAnything;
+    }
+
+    /**
+     *
+     *
+     * @return PHPUnit_Framework_Constraint_IsTrue
+     * @since  Method available since Release 3.3.0
+     */
+    public static function isTrue()
+    {
+        return new PHPUnit_Framework_Constraint_IsTrue;
+    }
+
+    /**
+     *
+     *
+     * @return PHPUnit_Framework_Constraint_IsFalse
+     * @since  Method available since Release 3.3.0
+     */
+    public static function isFalse()
+    {
+        return new PHPUnit_Framework_Constraint_IsFalse;
+    }
+
+    /**
+     *
+     *
+     * @return PHPUnit_Framework_Constraint_IsNull
+     * @since  Method available since Release 3.3.0
+     */
+    public static function isNull()
+    {
+        return new PHPUnit_Framework_Constraint_IsNull;
     }
 
     /**
@@ -1505,11 +1961,12 @@ abstract class PHPUnit_Framework_Assert
         }
 
         self::assertObjectHasAttribute($attributeName, $object);
+        $attribute = new ReflectionProperty($object, $attributeName);
 
-        if (property_exists($object, $attributeName)) {
+        if ($attribute->isPublic()) {
             return $object->$attributeName;
         } else {
-            $array         = (array) $object;
+            $array         = (array)$object;
             $protectedName = "\0*\0" . $attributeName;
 
             if (array_key_exists($protectedName, $array)) {
@@ -1564,6 +2021,7 @@ abstract class PHPUnit_Framework_Assert
     {
         throw new PHPUnit_Framework_SkippedTestError($message);
     }
+
 }
 
 }
