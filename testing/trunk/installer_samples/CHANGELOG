@@ -14,6 +14,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Oct-2008 Sam Moffatt
+ + Added 'files' test install
+ - Removed XML-RPC update service from sample component
+
 01-Aug-2008 Sam Moffatt
  $ Added extra strings to component sample for when looking at the menu entry
 
