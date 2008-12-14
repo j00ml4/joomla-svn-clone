@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="authentication">
+	<name>Authentication - JFooBar Joomla Email</name>
+	<author>Ian MacLennan</author>
+	<creationDate>December 2008</creationDate>
+	<copyright>Copyright (C) 2008 Ian MacLennan, Large portions Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>jfoobar@gmail.com</authorEmail>
+	<authorUrl>www.jfoobar.org</authorUrl>
+	<version>1.5</version>
+	<description>Handles user authentication using default method except using email instead of username</description>
+	<languages>
+		<language tag="en-GB">en-GB.plg_authentication_jfoobar_joomlaemail.ini</language>
+	</languages>
+	<files>
+		<filename plugin="jfoobar_joomlaemail">jfoobar_joomlaemail.php</filename>
+	</files>
+	<params/>
+</install>
