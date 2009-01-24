@@ -12,7 +12,7 @@
 	<authorUrl>http://www.example.org</authorUrl>
 	<copyright>(C) 2008 Copyright Info</copyright>
 	<license>License Info</license>
-	<version>1.6</version>
+	<version>1.2</version>
 	<creationDate>March 2006</creationDate>
 	<description>Extension Description</description>
 	
@@ -41,22 +41,17 @@
 			<file driver="mysql">sql/update.mysql.nonutf8.sql</file>
 		</sql>
 	</update>
-	<tables>
-		<table>#__alpha_update</table>
-	</tables>
 	
 	<!-- Front end file, media and language specification -->
 	<files folder="site">
 		<filename>alpha.php</filename>
-		<folder>language</folder>
 	</files>
-	<!-- This is the <1.5.6 preferred method.
-		With 1.5.6 or greater (incl 1.6) it is preferred to
-		include the languages in the extension
-	--> 
-	<!--
+	
+	<!--  Legacy 1.5 Language Support -->
+	<!-- Note: Replace this with the actual path to the language file -->
+	<!-- 
 	<languages folder="site">
-		<language tag="en-GB">en-GB.com_alpha.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.com_alpha.ini</language>
 	</languages>
 	-->
 	
@@ -79,25 +74,23 @@
 			<filename>applications-internet.png</filename>
 			<filename>applications-internet-16.png</filename>
 			<folder>sql</folder>
-			<folder>language</folder>
 		</files>
 		
-		<!-- This is the <1.5.6 preferred method.
-			With 1.5.6 or greater (incl 1.6) it is preferred to
-			include the languages in the extension.
-			For 1.5 extension developers need to support this
-			themselves in components and modules with the down
-			side that component and module 
-		-->
-		<!--<languages folder="admin">
-			<language tag="en-GB">en-GB.com_alpha.ini</language>
-		</languages>-->
+		<!-- Legacy 1.5 Language Support -->
+		<!-- Note: Replace this with the actual path to the language file -->
+		<!-- 
+ 		<languages folder="admin/language">
+			<language tag="en-GB">language/en-GB.com_alpha.ini</language>
+		</languages>
+		 -->
 	</administration>
 	
 	<!-- Extension Update Specification -->
 	<update>
-		<server type="extension">http://update.example.com/update/alpha.xml</server> <!-- useful for single extensions -->
-		<server type="collection">http://update.example.com/update/list.xml</server><!-- useful for smaller collections of extensions -->
+		<server type="extension" priority="1" name="Primary Update Server">http://update.example.com/update/alpha.xml</server> <!-- useful for single extensions -->
+		<server type="extension" priority="2" name="Secondary Update Server">http://update2.example.com/update/alpha.xml</server> <!--  as above, backup server -->
+		<server type="collection" priority="3" name="Update Collection">http://update.example.com/update/list.xml</server><!-- useful for collections of extensions -->
+		<server type="xmlrpc" priority="4" name="Joomla! Extensions Directory">http://update.extensions.joomla.org</server><!-- useful for large collections -->
 	</update>
 	
 	<!-- Extension Params -->
