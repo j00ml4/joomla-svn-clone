@@ -14,6 +14,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+25-Jan-2008 Sam Moffatt
+ ^ Commented out language lines of sample component file
+
 06-Oct-2008 Sam Moffatt
  + Added 'files' test install
  - Removed XML-RPC update service from sample component
