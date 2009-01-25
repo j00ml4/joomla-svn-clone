@@ -37,6 +37,7 @@
                 <filename module="mod_alpha">mod_alpha.php</filename>
 				<folder>sql</folder>
         </files>
+
 		<languages>
 			<language tag="en-GB">en-GB.mod_alpha.ini</language>
 		</languages>

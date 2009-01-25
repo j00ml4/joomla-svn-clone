@@ -9,14 +9,14 @@
  * Created on Jul 7, 2008
  * 
  * @package package_name
- * @author Your Name <author@toowoombarc.qld.gov.au>
- * @author Toowoomba Regional Council Information Management Branch
+ * @author Your Name <author@example.com>
+ * @author Author Name
  * @license GNU/GPL http://www.gnu.org/licenses/gpl.html
- * @copyright 2008 Toowoomba Regional Council/Developer Name 
- * @version SVN: $Id:$
- * @see http://joomlacode.org/gf/project/   JoomlaCode Project:    
+ * @copyright 2009 Developer Name 
+ * @version SVN: $Id:$    
  */
  
+
 function com_install() {
 	echo '<p>'. JText::_('Legacy Installation Script Run') .'</p>'; 
 }

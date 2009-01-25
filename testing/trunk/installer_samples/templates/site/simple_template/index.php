@@ -8,23 +8,24 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 <jdoc:include type="head" />
 </head>
 <body>
-<table border="1" width="100%">
+<table border="1">
 	<tr><td colspan="2"><h1>Simple Template</h1></td></tr>
-	<?php if($this->countModules('top')) : ?>
+	<?php if($this->countModules('top')) { ?>
 	<tr><td colspan="2"><jdoc:include type="modules" name="top" /></td></tr>
-	<?php endif; ?>
+	<?php } ?>
 	<tr>
 		<td><jdoc:include type="modules" name="left" /></td>
 		<td>
 			<p><jdoc:include type="message" /></p>
 			<jdoc:include type="component" />
+			
 		</td>
 	</tr>
-	<?php if($this->countModules('footer')) : ?>
+	<?php if($this->countModules('footer')) { ?>
 	<tr>
 		<td colspan="2"><jdoc:include type="modules" name="footer" style="xhtml"/></td>
 	</tr>
-	<?php endif; ?>
+	<?php } ?>
 </table>
 <jdoc:include type="modules" name="debug" />
 </body>
