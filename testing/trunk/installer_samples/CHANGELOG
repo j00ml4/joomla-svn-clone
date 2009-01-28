@@ -14,6 +14,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+28-Jan-2009 Sam Moffatt
+ ^ Changed language files to be more verbose style
+
 25-Jan-2008 Sam Moffatt
  ^ More fun updating files and testing items
  ^ Commented out language lines of sample component file
