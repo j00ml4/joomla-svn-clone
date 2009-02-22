@@ -15,7 +15,9 @@ $ -> Language fix or change
 ! -> Note
 
 22-Feb-2009 Sam Moffatt
- + Added admin language pack samples
+ + Added admin language pack sample
+ + Added site language pack sample
+ + Added basic dependency for components 
 
 28-Jan-2009 Sam Moffatt
  ^ Changed language files to be more verbose style
