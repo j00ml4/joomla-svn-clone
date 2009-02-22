@@ -97,4 +97,16 @@
 	<params>
 		<param name="example" type="text" default="" label="Example Param" description="EXAMPLEPARAMDESC" />
 	</params>
+	
+	<!-- Tables -->
+	<!-- These are used for backups to determine which tables to backup; ones marked optional are only backed up if they exist -->
+	<tables>
+		<table>#__alpha_install</table>
+		<table type="optional">#__alpha_update</table>
+	</tables>
+	
+	<!--  Dependencies -->
+	<dependencies>
+		<dependency type="platform" name="joomla" operator="=" version="1.5" />
+	</dependencies>
 </extension>
