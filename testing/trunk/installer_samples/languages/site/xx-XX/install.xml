@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install version="1.6" client="site" type="language">
+<install version="1.6" client="site" method="upgrade"  type="language">
 	<name>Examplish (Example)</name>
 	<tag>xx-XX</tag>
 	<version>1.6</version>
@@ -9,7 +9,7 @@
 	<authorUrl>www.joomla.org</authorUrl>
 	<copyright>Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<description>Examplian Language Pack for Joomla! 1.6 Administrator</description>
+	<description>Examplian Language Pack for Joomla! 1.6 Site</description>
 	<files>
 		<filename>index.html</filename>
 		<filename>xx-XX.ini</filename>
