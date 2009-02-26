@@ -14,6 +14,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+26-Feb-2009 Sam Moffatt
+ # Fixed incorrect client name for admin language
+ + Added upgrade method to admin language
+ # Fixed incorrect description for site language
+
 22-Feb-2009 Sam Moffatt
  + Added admin language pack sample
  + Added site language pack sample
