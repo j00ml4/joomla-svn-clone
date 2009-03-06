@@ -14,6 +14,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Mar-2009 Sam Moffatt
+ ^ Minor change to use fileset, multiple files can be used within a fileset
+
 26-Feb-2009 Sam Moffatt
  # Fixed incorrect client name for admin language
  + Added upgrade method to admin language
