@@ -147,7 +147,7 @@ class JUnit_Setup
 
 				case 'file': {
 					//echo $fileName . PHP_EOL;
-					if (substr($fileName, -9) == '-test.php') {
+					if (strcasecmp(substr($fileName, -9), '-test.php') == 0) {
 						/*
 						 * If there is an object match, add this file to the
 						 * list of tests.
@@ -375,9 +375,9 @@ class JUnit_Setup
 	/**
 	 * Returns true if the current version is in the specified range.
 	 *
-     * @param string Version to test against. The JVERSION constant should be
-     * passed in. If JUnit_Config::$versionOverride is set, then it is used no
-     * matter what is passed in.
+	 * @param string Version to test against. The JVERSION constant should be
+	 * passed in. If JUnit_Config::$versionOverride is set, then it is used no
+	 * matter what is passed in.
 	 * @param array Range specification, can contain any combination of
 	 * "jver_min", "jver_max", "jver_below". The jver_min entry specifies the
 	 * minimum version of Joomla that is required for this test to be valid;
@@ -385,24 +385,24 @@ class JUnit_Setup
 	 * must be less than the provided value.
 	 */
 	static function isTestEnabled($version, $range) {
-        if (isset(JUnit_Config::$versionOverride) && JUnit_Config::$versionOverride != '') {
-            $version = JUnit_Config::$versionOverride;
-        }
+		if (isset(JUnit_Config::$versionOverride) && JUnit_Config::$versionOverride != '') {
+			$version = JUnit_Config::$versionOverride;
+		}
 		if (isset($range['jver_min'])
 			&& version_compare($version, $range['jver_min']) < 0
 		) {
 			return false;
 		}
-        if (isset($range['jver_max'])
-            && version_compare($version, $range['jver_max']) > 0
-        ) {
-            return false;
-        }
-        if (isset($range['jver_below'])
-            && version_compare($version, $range['jver_below']) >= 0
-        ) {
-            return false;
-        }
+		if (isset($range['jver_max'])
+			&& version_compare($version, $range['jver_max']) > 0
+		) {
+			return false;
+		}
+		if (isset($range['jver_below'])
+			&& version_compare($version, $range['jver_below']) >= 0
+		) {
+			return false;
+		}
 		return true;
 	}
 
