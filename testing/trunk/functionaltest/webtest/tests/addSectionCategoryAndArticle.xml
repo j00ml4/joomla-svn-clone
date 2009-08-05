@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<project name="addSectionCategoryAndArticle" default="test">
+	<target name="test">
+		<webtest name="System Tests - Add Section, Category and Article">
+
+	  		<invoke url="${url}" description="Joomla! Administration Test"/>
+	
+	  		<setInputField name="username" value="${username}" />
+	  		<setInputField name="passwd" value="${passwd}" />
+	  		<clickButton label="Login" />
+	  		
+	  		<verifyTitle regex="true" text=".*Administration" />
+	
+			<echo message="Add Section, Category and Article" />	
+			
+			<!-- Get the timestamp to create unique namings -->
+			<tstamp prefix="test">
+				<format property="TODAY" pattern="dd MMMM yyyy HH:mm:ss" />
+			</tstamp>
+
+			<!-- Define the names for the section, category and the article -->
+			<property name="section" value="TestSection ${test.TODAY}"/>
+			<property name="category" value="TestCategory ${test.TODAY}"/>
+			<property name="article" value="TestArticle ${test.TODAY}"/>
+
+			<!-- Create the section, the category and the article -->
+			<addSection name="${section}" />		
+			<addCategory name="${category}" section="${section}" />
+			<addArticle name="${article}" section="${section}" category="${category}" />
+			
+		</webtest>		
+	</target>
+</project>
