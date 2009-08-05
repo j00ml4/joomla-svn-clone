@@ -2,6 +2,12 @@
 
 <project default="test">
 	<target name="test" description="runs all the tests">
-		<ant antfile="smokeTests.xml"/>
+		
+		<!-- Smoke Tests -->
+		<ant antfile="smokeTests.xml" />
+
+		<!-- Functional Tests -->
+		<ant antfile="addSectionCategoryAndArticle.xml" />
+
 	</target>
 </project>
