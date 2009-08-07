@@ -12,7 +12,7 @@
 	  		
 	  		<verifyTitle regex="true" text=".*Administration" />
 	
-			<dataDriven tableContainer="smokeTestsData.xls">
+			<dataDriven tableContainer="smoke/smokeTestsData.xls">
 				<group description="${Menu} > ${MenuItem}">
 					<clickLink label="${MenuItem}" />
 					<verifyText text="${PageTitle}" />
