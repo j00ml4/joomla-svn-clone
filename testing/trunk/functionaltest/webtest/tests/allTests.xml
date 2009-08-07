@@ -6,7 +6,7 @@
 		<!-- Smoke Tests -->
 		<ant antfile="smoke/smokeTests.xml" />
 
-		<!-- Functional Tests -->
+		<!-- Regression Tests -->
 		<ant antfile="regression/addSectionCategoryAndArticle.xml" />
 
 	</target>

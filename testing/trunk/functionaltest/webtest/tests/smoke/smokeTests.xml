@@ -4,20 +4,29 @@
 	<target name="test">
 		<webtest name="Smoke Tests - Administration Page">
 
-	  		<invoke url="${url}" description="Joomla! Administration Test"/>
-	
-	  		<setInputField name="username" value="${username}" />
-	  		<setInputField name="passwd" value="${passwd}" />
-	  		<clickButton label="Login" />
-	  		
-	  		<verifyTitle regex="true" text=".*Administration" />
-	
-			<dataDriven tableContainer="smoke/smokeTestsData.xls">
-				<group description="${Menu} > ${MenuItem}">
-					<clickLink label="${MenuItem}" />
-					<verifyText text="${PageTitle}" />
-				</group>
-			</dataDriven>
+			<group description="Login">
+				<loginAdministration username="${username}" password="${passwd}" url="${url}" />
+			</group>
+
+			<group description="Set Up">
+			</group>
+			
+			<group description="Test">
+				<!-- Iterate through all the pages on the administration page -->
+				<dataDriven tableContainer="smoke/smokeTestsData.xls">
+					<group description="${Menu} > ${MenuItem}">
+						<clickLink label="${MenuItem}" />
+						<verifyText text="${PageTitle}" />
+					</group>
+				</dataDriven>
+			</group>
+			
+			<group description="Tear Down">
+			</group>
+			
+			<group description="Logout">
+				<logout />
+			</group>
 			
 		</webtest>		
 	</target>
