@@ -4,10 +4,10 @@
 	<target name="test" description="runs all the tests">
 		
 		<!-- Smoke Tests -->
-		<ant antfile="smokeTests.xml" />
+		<ant antfile="smoke/smokeTests.xml" />
 
 		<!-- Functional Tests -->
-		<ant antfile="addSectionCategoryAndArticle.xml" />
+		<ant antfile="regression/addSectionCategoryAndArticle.xml" />
 
 	</target>
 </project>
