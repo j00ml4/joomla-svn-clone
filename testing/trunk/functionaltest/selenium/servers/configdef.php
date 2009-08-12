@@ -2,8 +2,9 @@
 
 class SeleniumConfig
 {
-	var $host = 'http://127.0.0.1';
-	var $path = '/selsampledata/';
+	var $host = 'http://localhost';
+	var $path = '/j1513test/';
 	var $username = 'admin';
-	var $password = 'admin';
+	var $password = 'password';
+	var $browser = '*chrome';
 }
