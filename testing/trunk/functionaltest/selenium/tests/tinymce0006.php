@@ -36,18 +36,23 @@ class TinyMCE0006 extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("//a[@id='text_bold']/span");
     $this->typeKeys("tinymce", "This is bold");
     $this->click("//a[@id='text_bold']/span");
+    $this->keyPress("tinymce", "32");
+    
     $this->keyPress("tinymce", "13");
     $this->click("//a[@id='text_italic']/span");
     $this->typeKeys("tinymce", "This is italic");
     $this->click("//a[@id='text_italic']/span");
+    $this->keyPress("tinymce", "32");
     $this->keyPress("tinymce", "13");
     $this->click("//a[@id='text_underline']/span");
     $this->typeKeys("tinymce", "This is underlined");
     $this->click("//a[@id='text_underline']/span");
+    $this->keyPress("tinymce", "32");
     $this->keyPress("tinymce", "13");
     $this->click("//a[@id='text_strikethrough']/span");
     $this->typeKeys("tinymce", "This is strikethrough");
     $this->click("//a[@id='text_strikethrough']/span");
+    $this->keyPress("tinymce", "32");
     $this->keyPress("tinymce", "13");
     $this->click("//a[@id='text_justifyleft']/span");
     $this->typeKeys("tinymce", "This is left justified");
