@@ -4,10 +4,12 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
+	var $cfg; // configuration so tests can get at the fields
 
 	function setUp()
 	{
 		$cfg = new SeleniumConfig();
+		$this->cfg = $cfg; // save current configuration 
 		$this->setBrowser($cfg->browser);
 		$this->setBrowserUrl($cfg->host.$cfg->path);
 		echo 'Starting '.get_class($this).".\n";
