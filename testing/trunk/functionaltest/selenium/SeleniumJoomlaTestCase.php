@@ -26,6 +26,13 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->click("link=Login");
 		$this->waitForPageToLoad("30000");
 	}
+	
+	function doAdminLogout() 
+	{
+		$this->gotoAdmin();
+		echo "Logging out of back end.\n";
+		$this->click("link=Logout");
+	}
 
 	function gotoAdmin()
 	{
@@ -39,6 +46,24 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		echo "Browsing to site.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
+	}
+	
+	function doFrontEndLogin() 
+	{
+		$this->gotoSite();
+		echo "Logging into front end of site.\n";
+		$this->type("modlgn_username", "admin");
+    	$this->type("modlgn_passwd", "password");
+    	$this->click("Submit");
+    	$this->waitForPageToLoad("30000");
+	}
+	
+	function doFrontEndLogout() 
+	{
+		$this->gotoSite();
+		echo "Logging out of front end of site.\n";
+		$this->click("Submit");
+    	$this->waitForPageToLoad("30000");
 	}
 
 }

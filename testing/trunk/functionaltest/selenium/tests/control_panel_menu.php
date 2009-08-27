@@ -10,6 +10,9 @@ class ControlPanelMenu extends SeleniumJoomlaTestCase
   	$this->setUp();
 	$this->doAdminLogin();
 	$this->gotoAdmin();
+	$this->doFrontEndLogin();
+	$this->doFrontEndLogout();
+	$this->gotoAdmin();
     print("Check that Control Panel icons are present." . "\n");
     $this->assertTrue($this->isElementPresent("//img[@alt='Add New Article']"));
     $this->assertTrue($this->isElementPresent("//img[@alt='Article Manager']"));
@@ -59,6 +62,7 @@ class ControlPanelMenu extends SeleniumJoomlaTestCase
     $this->assertTrue($this->isTextPresent("Path to Temp-folder"));
     $this->click("link=Control Panel");
     $this->waitForPageToLoad("30000");
+    $this->doAdminLogout();
     print("Finish control_panel_menu.php." . "\n");
   }
 }
