@@ -1,27 +1,15 @@
 <?php
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+require_once '../SeleniumJoomlaTestCase.php';
 
-class ControlPanelMenu extends PHPUnit_Extensions_SeleniumTestCase
+class ControlPanelMenu extends SeleniumJoomlaTestCase
 {
-  function setUp()
-  {
-  	$cfg = new SeleniumConfig();
-    $this->setBrowser($cfg->browser);
-    $this->setBrowserUrl($cfg->host.$cfg->path);
-  }
 
   function testMyTestCase()
   {
-  	print("Running control_panel_menu.php" . "\n");
-  	$cfg = new SeleniumConfig();
-    $this->open($cfg->path .'administrator/');
-    print("Login to back end." . "\n");
-    $this->waitForPageToLoad("30000");
-    $this->type("modlgn_username", $cfg->username);
-    $this->type("modlgn_passwd", $cfg->password);
-    $this->click("link=Login");
-    $this->waitForPageToLoad("30000");
+  	$this->setUp();
+	$this->doAdminLogin();
+	$this->gotoAdmin();
     print("Check that Control Panel icons are present." . "\n");
     $this->assertTrue($this->isElementPresent("//img[@alt='Add New Article']"));
     $this->assertTrue($this->isElementPresent("//img[@alt='Article Manager']"));
