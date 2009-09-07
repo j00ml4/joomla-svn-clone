@@ -4,7 +4,7 @@
  */
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-class ComMenu0001 extends PHPUnit_Extensions_SeleniumTestCase
+class ComMenu0001 extends SeleniumJoomlaTestCase
 {
   function testCreateRemoveMenuTypesItems()
   {
