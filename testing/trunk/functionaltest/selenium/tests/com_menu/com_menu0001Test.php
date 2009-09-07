@@ -3,6 +3,7 @@
  * Verifies the functionality of creating and removing a menu item
  */
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+require_once 'SeleniumJoomlaTestCase.php';
 
 class ComMenu0001 extends SeleniumJoomlaTestCase
 {
