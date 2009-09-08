@@ -262,7 +262,7 @@ class ComMenu0001 extends SeleniumJoomlaTestCase
     $this->type("search", "TestMenuItem".$salt2);
     $this->click("//button[@onclick='this.form.submit();']");
     $this->waitForPageToLoad("30000");
-    $this->click("cb0");
+    $this->click("cb10");
     $this->click("link=exact:Delete");
     $this->waitForPageToLoad("30000");
     $this->click("link=exact:Delete");
