@@ -228,6 +228,13 @@ class ComMenu0001 extends SeleniumJoomlaTestCase
     $this->click("link=Article Layout");
     $this->waitForPageToLoad("30000");
     $this->click("link=Select");
+    for ($second = 0; ; $second++) {
+        if ($second >= 60) $this->fail("timeout");
+        try {
+            if ($this->isElementPresent("search")) break;
+        } catch (Exception $e) {}
+        sleep(1);
+    }
     $this->type("search", "menutestarticle".$salt1);
     $this->click("//button[@onclick='this.form.submit();']");
     $this->waitForPageToLoad("30000");
