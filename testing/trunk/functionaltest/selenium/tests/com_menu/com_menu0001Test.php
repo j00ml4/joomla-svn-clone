@@ -204,5 +204,54 @@ class ComMenu0001 extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     print("Finished com_menu0001.php" . "\n");
   }
+  
+  function testArticleMenuItem()
+  {
+    $salt1 = mt_rand();
+    $salt2 = mt_rand();
+    $this->doAdminLogin();
+    $this->click("link=Article Manager");
+    $this->waitForPageToLoad("30000");
+    $this->click("//td[@id='toolbar-new']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->type("title", "menutestarticle".$salt1);
+    $this->select("sectionid", "label=Uncategorised");
+    $this->setTinyText("This is sample content.");
+    $this->click("//td[@id='toolbar-save']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=exact:Main Menu *");
+    $this->waitForPageToLoad("30000");
+    $this->click("//td[@id='toolbar-new']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->click("content");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Article Layout");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=Select");
+    $this->type("search", "menutestarticle".$salt1);
+    $this->click("//button[@onclick='this.form.submit();']");
+    $this->waitForPageToLoad("30000");
+    $this->click("link=menutestarticle".$salt1);
+    $this->type("name", "TestMenuItem".$salt2);
+    $this->click("//td[@id='toolbar-save']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->gotoSite();
+    //$this->click("//div[@id='leftcolumn']/div[1]/div/div/div/ul/li[9]/a/span");
+    $this->click("link=exact:TestMenuItem".$salt2);
+    $this->waitForPageToLoad("30000");
+    $this->assertTrue($this->isTextPresent("TestMenuItem".$salt2));
+    $this->assertEquals("menutestarticle".$salt1, $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/table[1]/tbody/tr/td[1]"));
+    $this->assertEquals("This is sample content.", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/table[2]/tbody/tr[3]/td/p"));
+    $this->gotoAdmin();
+    $this->click("link=exact:Main Menu *");
+    $this->waitForPageToLoad("30000");
+    $this->type("search", "TestMenuItem".$salt2);
+    $this->click("//button[@onclick='this.form.submit();']");
+    $this->waitForPageToLoad("30000");
+    $this->click("cb0");
+    $this->click("//td[@id='toolbar-trash']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->doAdminLogout();
+  }  
 }
 ?>
