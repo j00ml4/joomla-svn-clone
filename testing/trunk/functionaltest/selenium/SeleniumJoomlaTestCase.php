@@ -53,10 +53,17 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->gotoSite();
 		echo "Logging into front end of site.\n";
 		$this->type("modlgn_username", "admin");
-    	$this->type("modlgn_passwd", "password");
-    	$this->click("Submit");
-    	$this->waitForPageToLoad("30000");
+    $this->type("modlgn_passwd", "password");
+    $this->click("Submit");
+    $this->waitForPageToLoad("30000");
 	}
+
+  function setTinyText($text)
+  {
+    $this->selectFrame("text_ifr");
+    $this->type("tinymce", $text);
+    $this->selectFrame("relative=top");
+  }
 	
 	function doFrontEndLogout() 
 	{
