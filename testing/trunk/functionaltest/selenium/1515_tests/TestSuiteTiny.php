@@ -1,4 +1,7 @@
 <?php
+/**
+ * Suite for testing 1.5.15 patches
+ */
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'TestSuite::main');
 }
@@ -8,6 +11,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once 'tinymce0007.php';
 require_once 'tinymce0008.php';
+require_once 'frontend_edit.php';
  
 class TestSuiteTiny
 {
@@ -21,7 +25,7 @@ class TestSuiteTiny
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
         $suite->addTestSuite('TinyMCE0007');
         $suite->addTestSuite('TinyMCE0008');
-
+        $suite->addTestSuite('FrontendEdit');
         return $suite;
     }
 }
