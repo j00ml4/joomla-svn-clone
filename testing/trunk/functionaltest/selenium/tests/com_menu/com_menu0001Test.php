@@ -104,6 +104,9 @@ class ComMenu0001 extends SeleniumJoomlaTestCase
     $this->click("link=Select");
     sleep(3);
     print("Select Support and Documentation article" . "\n");
+    $this->type("search", "Support and Documentation");
+    $this->click("//button[@onclick='this.form.submit();']");
+    $this->waitForPageToLoad("30000");    
     $this->click("link=Support and Documentation");
     print("Set menu item name = Support" . "\n");
     $this->type("name", "Support");
