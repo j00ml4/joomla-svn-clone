@@ -31,7 +31,7 @@ class ComMedia0001 extends PHPUnit_Extensions_SeleniumTestCase
     $this->waitForPageToLoad("30000");
     print("Click Image button and wait 3 seconds" . "\n");
     $this->click("link=Image");
-    sleep(3);
+    sleep(5);
     print("Check that food and fruit folders are present" . "\n");
     $this->assertTrue($this->isElementPresent("//img[@alt='food']"));
     $this->assertTrue($this->isElementPresent("//img[@alt='fruit']"));
