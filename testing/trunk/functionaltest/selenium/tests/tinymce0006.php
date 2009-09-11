@@ -33,6 +33,7 @@ class TinyMCE0006 extends PHPUnit_Extensions_SeleniumTestCase
     $this->click("frontpage1");
     $this->focus("tinymce");
     print("Enter some text into the article using typeKeys command" . "\n");
+    $this->keyPress("tinymce", "32");
     $this->click("//a[@id='text_bold']/span");
     $this->typeKeys("tinymce", "This is bold");
     $this->click("//a[@id='text_bold']/span");
@@ -74,10 +75,11 @@ class TinyMCE0006 extends PHPUnit_Extensions_SeleniumTestCase
     $this->waitForPageToLoad("30000");
     print("Navigate to frontpage and check that article is there" . "\n");
     $this->open("index.php");
+    $this->waitForPageToLoad("30000");
     $this->assertEquals("Welcome to the Frontpage", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/div[1]"));
     $this->assertEquals("Test Tiny Typing", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[1]/tbody/tr/td[1]"));
-    $this->assertEquals("This is italic", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[2]/em"));
     $this->assertEquals("This is bold", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[1]/strong"));
+    $this->assertEquals("This is italic", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[2]/em"));
     $this->assertEquals("This is underlined", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[3]/span"));
     $this->assertEquals("This is strikethrough", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[4]/span"));
     $this->assertEquals("This is left justified", $this->getText("//div[@id='maincolumn']/table[2]/tbody/tr/td[1]/table/tbody/tr[1]/td/div/table[2]/tbody/tr[3]/td/p[5]"));

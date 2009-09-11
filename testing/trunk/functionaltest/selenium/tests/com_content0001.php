@@ -40,6 +40,8 @@ class ComContent0001 extends PHPUnit_Extensions_SeleniumTestCase
     $this->waitForPageToLoad("30000");
     $this->click("//div[@id='element-box']/div[2]/form/table[2]/tbody/tr[15]/td[5]/a/img");
     $this->waitForPageToLoad("30000");
+    $this->click("//div[@id='element-box']/div[2]/form/table[2]/tbody/tr[15]/td[5]/a/img");
+    $this->waitForPageToLoad("30000");
     $this->click("link=Logout");
     $this->waitForPageToLoad("30000");
     print("Finished com_content0001.php." . "\n");

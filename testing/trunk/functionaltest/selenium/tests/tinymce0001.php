@@ -30,7 +30,7 @@ class TinyMCE0001 extends PHPUnit_Extensions_SeleniumTestCase
     $this->waitForPageToLoad("30000");
     print("Select editor frame" . "\n");
     $this->selectFrame("text_ifr");
-    print("Starting tinymce0001.php" . "\n");
+    print("Enter some text" . "\n");
     $this->typeKeys("tinymce", "This text is normal text");
     print("Select top frame to run JS script" . "\n");
     $this->selectFrame("relative=top");
