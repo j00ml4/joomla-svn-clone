@@ -1,4 +1,10 @@
 <?php
+/**
+ * @version		$Id$
+ * @package		Joomla.FunctionalTest
+ * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
@@ -23,7 +29,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->type("modlgn_username", $cfg->username);
 		$this->type("modlgn_passwd", $cfg->password);
-		$this->click("link=Login");
+		$this->click("link=Log in");
 		$this->waitForPageToLoad("30000");
 	}
 	
