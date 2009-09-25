@@ -11,11 +11,22 @@
  * @link		http://www.phpunit.de/manual/current/en/installation.html
  */
 
+// Load the custom initialisation file if it exists.
+if (file_exists('config.php')) {
+	include 'config.php';
+}
+
 // Define expected Joomla constants.
 
 define('DS',			DIRECTORY_SEPARATOR);
 define('_JEXEC',		1);
-define('JPATH_BASE',	dirname(dirname(__FILE__)));
+if (!defined('JPATH_BASE'))
+{
+	// JPATH_BASE can be defined in init.php
+	// This gets around problems with soft linking the unittest folder into a Joomla tree,
+	// or using the unittest framework from a central location.
+	define('JPATH_BASE',	dirname(dirname(__FILE__)));
+}
 
 // Fix magic quotes.
 
