@@ -30,6 +30,7 @@ $ -> Language fix or change
 25-Sep-2009 Andrew Eddie
  ^ bootstrap.php can include optional config.php to set custom variables (such as JPATH_BASE).
  + Added example test.
+ + Added tests for JActions and JAction.
 
 24-Sep-2009 Andrew Eddie
  + Added 1.6 unittest scaffolding.
