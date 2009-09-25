@@ -4,11 +4,12 @@
  * @package		Joomla.FunctionalTest
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * checks that all menu choices are shown in back end
  */
 
 require_once '../SeleniumJoomlaTestCase.php';
 
-class ControlPanelMenu extends SeleniumJoomlaTestCase
+class ControlPanel001 extends SeleniumJoomlaTestCase
 {
 
   function testMyTestCase()
@@ -96,7 +97,7 @@ class ControlPanelMenu extends SeleniumJoomlaTestCase
     $this->assertTrue($this->isElementPresent("//img[@alt='Module Manager']"));
     $this->assertTrue($this->isElementPresent("//img[@alt='Extension Manager']"));
     $this->doAdminLogout();
-    print("Finish control_panel_menu.php." . "\n");
+    print("Finish control_panel001.php." . "\n");
   }
 }
 ?>

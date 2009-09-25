@@ -13,7 +13,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . './PEAR/');
  
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
-require_once 'control_panel_menu.php';
+require_once 'control_panel001.php';
+require_once 'control_panel002.php';
 //require_once 'com_content0001.php';
 //require_once 'com_content0002.php';
 //require_once 'com_content0003.php';
@@ -45,7 +46,8 @@ class TestSuite
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
-        $suite->addTestSuite('ControlPanelMenu');
+        $suite->addTestSuite('ControlPanel001');
+        $suite->addTestSuite('ControlPanel002');
 //        $suite->addTestSuite('ComContent0001');
 //        $suite->addTestSuite('ComContent0002');
 //        $suite->addTestSuite('ComContent0003');
