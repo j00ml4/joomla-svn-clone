@@ -17,11 +17,13 @@ class ComContent0001 extends SeleniumJoomlaTestCase
   {
   	$this->setUp();
   	$this->doAdminLogin();
-    
-  	print("Load article manager." . "\n");
+    $this->click("link=Control Panel");
+    $this->waitForPageToLoad("30000");
+    print("Load article manager." . "\n");
     $this->click("link=Article Manager");
+    $this->waitForPageToLoad("30000");
 
-    $this->open("/joomla_development/Joomla_1.6_20090922/administrator/index.php?option=com_content");
+
     $this->click("//li[@id='toolbar-new']/a/span");
     $this->waitForPageToLoad("30000");
     
