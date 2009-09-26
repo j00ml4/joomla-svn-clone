@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: control_panel002.php 12833 2009-09-24 03:33:18Z dextercowley $
+ * @version		$Id$
  * @package		Joomla.FunctionalTest
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -9,7 +9,7 @@
 
 require_once '../SeleniumJoomlaTestCase.php';
 
-class ControlPanel002 extends SeleniumJoomlaTestCase
+class ControlPanel0002 extends SeleniumJoomlaTestCase
 {
 
 	function testMyTestCase()
@@ -294,7 +294,7 @@ class ControlPanel002 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("//li[@id='toolbar-help']/a/span"));
 		$this->gotoAdmin();
 		$this->doAdminLogout();
-		print("Finish control_panel002.php." . "\n");
+		print("Finish control_panel0002Test.php." . "\n");
 	}
 }
 ?>

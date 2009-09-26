@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: control_panel001.php 12842 2009-09-25 03:22:02Z dextercowley $
+ * @version		$Id$
  * @package		Joomla.FunctionalTest
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -9,7 +9,7 @@
 
 require_once '../SeleniumJoomlaTestCase.php';
 
-class ControlPanel001 extends SeleniumJoomlaTestCase
+class ControlPanel0001 extends SeleniumJoomlaTestCase
 {
 
   function testMyTestCase()
@@ -97,7 +97,7 @@ class ControlPanel001 extends SeleniumJoomlaTestCase
     $this->assertTrue($this->isElementPresent("//img[@alt='Module Manager']"));
     $this->assertTrue($this->isElementPresent("//img[@alt='Extension Manager']"));
     $this->doAdminLogout();
-    print("Finish control_panel001.php." . "\n");
+    print("Finish control_panel0001Test.php." . "\n");
   }
 }
 ?>
