@@ -175,22 +175,41 @@ class JActionsTest extends PHPUnit_Framework_TestCase
 				-42	=> 1
 			),
 			'delete' => array(
-				-42	=> 0
+				-42	=> 0,
+				2	=> 1
 			)
 		);
 
 		$actions = new JActions($array1);
 
+		// Explicit allow.
 		$this->assertTrue(
 			$actions->allow('edit', -42)
 		);
 
+		// Check string or int works.
 		$this->assertTrue(
 			$actions->allow('edit', '-42')
 		);
 
+		// Implicit deny
+		$this->assertFalse(
+			$actions->allow('edit', 999)
+		);
+
+		// Explicit deny
 		$this->assertFalse(
 			$actions->allow('delete', -42)
+		);
+
+		// This should be true, implicit deny does not win.
+		$this->assertTrue(
+			$actions->allow('edit', array(-42, 999))
+		);
+
+		// This should be false, explicit deny wins.
+		$this->assertFalse(
+			$actions->allow('delete', array(-42, 2))
 		);
 	}
 }

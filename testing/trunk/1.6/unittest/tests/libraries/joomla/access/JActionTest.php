@@ -126,5 +126,10 @@ class JActionTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(
 			$action->allow(2)
 		);
+
+		// This one should be denied.
+		$this->assertFalse(
+			$action->allow(array(-42, 2))
+		);
 	}
 }
