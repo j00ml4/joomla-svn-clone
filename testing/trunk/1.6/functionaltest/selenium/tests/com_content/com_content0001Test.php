@@ -1,47 +1,57 @@
 <?php
-/* com_content
- * 
- * 
+/**
+ * @version		$Id$
+ * @package		Joomla.FunctionalTest
+ * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * that you can add, edit, and delete article from article manager
  */
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-class ComContent0001 extends PHPUnit_Extensions_SeleniumTestCase
+class ComContent0001 extends SeleniumJoomlaTestCase
 {
 
-  function setUp()
-  {
-    $cfg = new SeleniumConfig();
-    $this->setBrowser($cfg->browser);
-    $this->setBrowserUrl($cfg->host.$cfg->path);
-  }
-
+ 
   function testMyTestCase()
   {
-  	print("Starting com_content0001.php" . "\n");
-    $cfg = new SeleniumConfig();
-  	print("Log into back end." . "\n");
+  	$this->setUp();
+  	$this->doAdminLogin();
     
-    $this->open($cfg->path . "administrator");
-    $this->waitForPageToLoad("30000");
-    $this->type("modlgn_username", $cfg->username);
-    $this->type("modlgn_passwd", $cfg->password);
-    $this->click("link=Login");
-    $this->waitForPageToLoad("30000");
   	print("Load article manager." . "\n");
     $this->click("link=Article Manager");
+
+    $this->open("/joomla_development/Joomla_1.6_20090922/administrator/index.php?option=com_content");
+    $this->click("//li[@id='toolbar-new']/a/span");
     $this->waitForPageToLoad("30000");
-    print("Page down" . "\n");
-    $this->click("link=Next");
+    
+    print("Enter article title" . "\n");
+    $this->type("jform_title", "Com_Content001 Test Article");
+    
+    print("Enter some text" . "\n");
+    $this->typeKeys("tinymce", "This is test text for an article");
+    print("Save the article" . "\n");
+    $this->click("//li[@id='toolbar-save']/a/span");
     $this->waitForPageToLoad("30000");
-    $this->open($cfg->path . "administrator");
+    print("Check that article title is listed in Article Manager" . "\n");
+    $this->assertEquals("Com_Content001 Test Article", $this->getText("link=Com_Content001 Test Article"));
+    print("Open Article for editing" . "\n");
+    $this->click("link=Com_Content001 Test Article");
     $this->waitForPageToLoad("30000");
-    $this->click("link=Article Manager");
+    print("Check that title and text are correct" . "\n");
+    $this->assertEquals("This is test text for an article", $this->getText("//body[@id='tinymce']/p"));
+    $this->assertEquals("Com_Content001 Test Article", $this->getValue("jform_title"));
+    print("Cancel edit" . "\n");
+    $this->click("//li[@id='toolbar-cancel']/a/span");
     $this->waitForPageToLoad("30000");
-    $this->click("//div[@id='element-box']/div[2]/form/table[2]/tbody/tr[15]/td[5]/a/img");
+    print("Send article to trash" . "\n");
+    $this->click("cb0");
+    $this->click("//li[@id='toolbar-trash']/a/span");
     $this->waitForPageToLoad("30000");
-    $this->click("link=Logout");
-    $this->waitForPageToLoad("30000");
+    print("Check that article is no longer shown in article manager" . "\n");
+    $this->assertFalse($this->isTextPresent("Com_Content001 Test Article"));
+    $this->doAdminLogout();
+    
     print("Finished com_content0001.php." . "\n");
     
   }

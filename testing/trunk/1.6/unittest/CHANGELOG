@@ -27,6 +27,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+25-Sep-2009
+^ Move control panel functional tests to folder
+^ Add article basic functional test
+
 25-Sep-2009 Andrew Eddie
  ^ bootstrap.php can include optional config.php to set custom variables (such as JPATH_BASE).
  + Added example test.
@@ -34,3 +38,6 @@ $ -> Language fix or change
 
 24-Sep-2009 Andrew Eddie
  + Added 1.6 unittest scaffolding.
+ 
+24-Sep-2009 Mark Dexter
+ ^ Added basic functional tests to test admin menu choices
