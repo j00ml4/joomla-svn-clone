@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+25-Sep-2009 Andrew Eddie
++ Added test for JComponentForm constructor.
+
 25-Sep-2009
 ^ Move control panel functional tests to folder
 ^ Add article basic functional test
