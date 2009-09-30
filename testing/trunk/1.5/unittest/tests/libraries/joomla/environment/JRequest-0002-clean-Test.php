@@ -21,6 +21,7 @@ require_once 'JRequest-helper-dataset.php';
 /**
  * A unit test class for SubjectClass
  * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
  */
 class JRequestTest_Clean extends PHPUnit_Framework_TestCase
 {

@@ -25,6 +25,7 @@ require_once 'PHPUnit/Extensions/OutputTestCase.php';
 /**
  * A unit test class for SubjectClass
  * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
  */
 class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 {
