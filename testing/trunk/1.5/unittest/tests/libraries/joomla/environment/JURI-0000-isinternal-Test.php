@@ -115,7 +115,7 @@ class JURITest_IsInternal extends PHPUnit_Framework_TestCase {
 	 *
 	 * @dataProvider isInternalData
 	 * @runInSeparateProcess
-	 * @preserveGlobalState
+	 * @preserveGlobalState disabled
 	 */
 	function testIsInternal($site, $url, $expect) {
                 require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/bootstrap.php');
