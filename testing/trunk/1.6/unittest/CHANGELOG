@@ -31,6 +31,7 @@ $ -> Language fix or change
 + Added cache tests from 1.5 unit tests
 + Added environment tests from 1.5 unit tests
 + Added filesystem tests from 1.5 unit tests
++ Added filter tests from 1.5 unit tests
 
 25-Sep-2009 Andrew Eddie
 + Added test for JComponentForm constructor.
