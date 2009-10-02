@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+02-Oct-2009 Ian MacLennan
++ Added cache tests from 1.5 unit tests
+
 25-Sep-2009 Andrew Eddie
 + Added test for JComponentForm constructor.
 
