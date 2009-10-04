@@ -8,24 +8,53 @@
 
 class JURITest extends PHPUnit_Framework_TestCase
 {
+	public $instance;
+	
 	/**
 	 * Clear the cache and load sample data
 	 */
 	public function setUp()
 	{
 		jimport( 'joomla.environment.uri' );
+		$this->instance = new JURI();
+	}
+
+	public function provider() {
+		return array(
+			array(
+				'http://www.joomla.org/',
+				array(
+					'shouldParse' => true,
+					'scheme' => 'http',
+					'host' => 'www.joomla.org',
+					'user' => null,
+					'pass' => null,
+					'port' => null,
+					'path' => '/',
+					'query' => null,
+					'fragment' => null
+				)
+			)
+		);
+	
 	}
 
 	/**
-	 * @group juri
+	 * @dataProvider provider
 	 */
-	public function testIsInternalFailsWithExternalAddress()
+	public function testParse($url, $parsedURL)
 	{
-		//$uri = JURI::getInstance();
-		//$this->assertThat(
-			//JURI::isInternal( 'http://www.foobar.com' ),
-			//$this->identicalTo( false )
-		//);
+		$result = $this->instance->parse($url);
+		// assert that we succeed if we should be able to parse the url, or that we fail if we shouldn't
+		$this->assertEquals($result, $parsedURL['shouldParse']);
+		$this->assertEquals($this->instance->getScheme(), $parsedURL['scheme']);
+		$this->assertEquals($this->instance->getHost(), $parsedURL['host']);
+		$this->assertEquals($this->instance->getUser(), $parsedURL['user']);
+		$this->assertEquals($this->instance->getPass(), $parsedURL['pass']);
+		$this->assertEquals($this->instance->getPort(), $parsedURL['port']);
+		$this->assertEquals($this->instance->getPath(), $parsedURL['path']);
+		$this->assertEquals($this->instance->getQuery(), $parsedURL['query']);
+		$this->assertEquals($this->instance->getFragment(), $parsedURL['fragment']);
 	}
-
+	
 }
