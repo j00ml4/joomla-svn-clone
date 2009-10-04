@@ -21,7 +21,7 @@ class ComContent0010 extends PHPUnit_Extensions_SeleniumTestCase
     $this->open($cfg->path."administrator/index.php");
     $this->type("modlgn_username", $cfg->username);
     $this->type("modlgn_passwd", $cfg->password);
-    $this->click("//input[@value='Login']");
+    $this->click("//input[@value='Log in']");
     $this->waitForPageToLoad("30000");
     print("Load Article Manager" . "\n");
     $this->click("link=Article Manager");
