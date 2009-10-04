@@ -9,6 +9,9 @@
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
+/**
+ * @group ControlPanel
+ */
 class ControlPanel0004 extends SeleniumJoomlaTestCase
 {
 
