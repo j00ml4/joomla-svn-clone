@@ -7,7 +7,7 @@
  * loads each menu choice in back end
  */
 
-require_once '../SeleniumJoomlaTestCase.php';
+require_once 'SeleniumJoomlaTestCase.php';
 
 /**
  * @group ControlPanel
