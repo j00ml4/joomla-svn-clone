@@ -9,6 +9,9 @@
 
 require_once '../SeleniumJoomlaTestCase.php';
 
+/**
+ * @group ControlPanel
+ */
 class ControlPanel0001 extends SeleniumJoomlaTestCase
 {
 
