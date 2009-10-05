@@ -26,6 +26,7 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		echo "Navigate to Global Config.\n";
 		$this->click("link=Global Configuration");
 		$this->waitForPageToLoad("30000");
+		$this->click("site");
 		$this->assertTrue($this->isTextPresent("Site Settings"));
 		$this->click("system");
 		$this->assertTrue($this->isTextPresent("System Settings"));
@@ -91,13 +92,13 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		$this->click("//li[@id='toolbar-cancel']/a/span");
 		$this->waitForPageToLoad("30000");
 		echo "Navigate to Mass Mail.\n";
-		$this->click("link=Mod menu Mass Mail Users");
+		$this->click("link=Mass Mail Users");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Mass Mail Users"));
 		$this->click("//li[@id='toolbar-cancel']/a/span");
 		$this->waitForPageToLoad("30000");
 		echo "Navigate to Read Private Messages.\n";
-		$this->click("link=Mod menu Read Private Messages");
+		$this->click("link=Read Private Messages");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Read Private Messages"));
 		echo "Navigate to New Private Message.\n";

@@ -7,7 +7,7 @@
  * that you can add, edit, and delete article from article manager
  */
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+require_once 'SeleniumJoomlaTestCase.php';
 
 /**
  * @group ControlPanel
@@ -50,14 +50,17 @@ class ControlPanel0003 extends SeleniumJoomlaTestCase
     $this->click("//li[@id='toolbar-cancel']/a/span");
     $this->waitForPageToLoad("30000");
     print("Send article to trash" . "\n");
-    $this->click("cb0");
-    $this->click("//li[@id='toolbar-trash']/a/span");
+    $this->click("link=Com_Content001 Test Article");
+    $this->waitForPageToLoad("30000");
+    $this->select("jform_state", "label=Trashed");
+    $this->click("//option[@value='-2']");
+    $this->click("//li[@id='toolbar-save']/a/span");
     $this->waitForPageToLoad("30000");
     print("Check that article is no longer shown in article manager" . "\n");
     $this->assertFalse($this->isTextPresent("Com_Content001 Test Article"));
     $this->doAdminLogout();
     
-    print("Finished control_panel0002Test.php." . "\n");
+    print("Finished control_panel0003Test.php." . "\n");
     
   }
 }
