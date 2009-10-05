@@ -14,7 +14,7 @@ class ComMenu0001 extends SeleniumJoomlaTestCase
     $this->open($cfg->path."administrator/index.php");
     $this->type("modlgn_username", $cfg->username);
     $this->type("modlgn_passwd", $cfg->password);
-    $this->click("//input[@value='Login']");
+    $this->click("//input[@value='Log in']");
     $this->waitForPageToLoad("30000");
     print("Load menu manager" . "\n");
     $this->click("link=Menu Manager");
