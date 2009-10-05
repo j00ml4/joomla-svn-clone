@@ -17,25 +17,6 @@ require_once 'control_panel/control_panel0001Test.php';
 require_once 'control_panel/control_panel0002Test.php';
 require_once 'control_panel/control_panel0003Test.php';
 require_once 'control_panel/control_panel0004Test.php';
-//require_once 'com_content0002.php';
-//require_once 'com_content0003.php';
-//require_once 'com_content0004.php';
-//require_once 'com_content0005.php';
-//require_once 'com_content0006.php';
-//require_once 'com_content0007.php';
-//require_once 'com_content0008.php';
-//require_once 'com_content0009.php';
-//require_once 'com_content0010.php';
-//require_once 'com_media0001.php';
-//require_once 'com_menu0001.php';
-//require_once 'com_menu0002.php';
-//require_once 'com_menu0003.php';
-//require_once 'tinymce0001.php';
-//require_once 'tinymce0002.php';
-//require_once 'tinymce0003.php';
-//require_once 'tinymce0004.php';
-//require_once 'tinymce0005.php';
-//require_once 'tinymce0006.php';
  
 class TestSuite
 {
@@ -51,25 +32,6 @@ class TestSuite
         $suite->addTestSuite('ControlPanel0002');
         $suite->addTestSuite('ControlPanel0003');
         $suite->addTestSuite('ControlPanel0004');
-//        $suite->addTestSuite('ComContent0002');
-//        $suite->addTestSuite('ComContent0003');
-//        $suite->addTestSuite('ComContent0004');
-//        $suite->addTestSuite('ComContent0005');
-//        $suite->addTestSuite('ComContent0006');
-//        $suite->addTestSuite('ComContent0007');
-//        $suite->addTestSuite('ComContent0008');
-//        $suite->addTestSuite('ComContent0009');
-//        $suite->addTestSuite('ComContent0010');
-//        $suite->addTestSuite('ComMedia0001');
-//        $suite->addTestSuite('ComMenu0001');
-//        $suite->addTestSuite('ComMenu0002');
-//        $suite->addTestSuite('ComMenu0003');
-//        $suite->addTestSuite('TinyMCE0001');
-//        $suite->addTestSuite('TinyMCE0002');
-//        $suite->addTestSuite('TinyMCE0003');
-//        $suite->addTestSuite('TinyMCE0004');
-//        $suite->addTestSuite('TinyMCE0005');
-//        $suite->addTestSuite('TinyMCE0006');
 
         return $suite;
     }
@@ -85,7 +47,7 @@ if (PHPUnit_MAIN_METHOD == 'Framework_AllTests::main') {
 // as a PHP Script, the SeleniumConfig class doesn't exist so you must import it
 // and you must also run the TestSuite::main() method.
 if (!class_exists('SeleniumConfig')) {
-	require_once '../servers/configdef.php';
+	require_once 'servers/configdef.php';
 	TestSuite::main();
 }
 

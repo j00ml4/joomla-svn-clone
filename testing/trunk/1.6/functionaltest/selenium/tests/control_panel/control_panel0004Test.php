@@ -7,7 +7,7 @@
  * Basic test of add, edit, and delete Content Category from back end.
  */
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+require_once 'SeleniumJoomlaTestCase.php';
 
 /**
  * @group ControlPanel
@@ -49,9 +49,10 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
     $this->click("//li[@id='toolbar-cancel']/a/span");
     $this->waitForPageToLoad("30000");
     print("Send new category to Trash." . "\n");
-    // Careful: this position will change depending on sample data!
-    $this->click("cb1");
-    $this->click("//li[@id='toolbar-trash']/a/span");
+    $this->click("link=Functional Test Category");
+    $this->waitForPageToLoad("30000");
+    $this->select("jform_published", "label=Trashed");
+    $this->click("//li[@id='toolbar-save']/a/span");
     $this->waitForPageToLoad("30000");
     print("Check that new category is not shown." . "\n");
     $this->assertFalse($this->isTextPresent("Functional Test Category"));

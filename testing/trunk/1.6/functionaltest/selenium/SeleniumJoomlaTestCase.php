@@ -15,25 +15,25 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	function setUp()
 	{
 		$cfg = new SeleniumConfig();
-		$this->cfg = $cfg; // save current configuration 
+		$this->cfg = $cfg; // save current configuration
 		$this->setBrowser($cfg->browser);
 		$this->setBrowserUrl($cfg->host.$cfg->path);
 		echo 'Starting '.get_class($this).".\n";
 	}
-		
+
 	function doAdminLogin()
 	{
 		echo "Logging in to admin.\n";
 		$cfg = new SeleniumConfig();
-		$this->open($cfg->path . "administrator");
+		$this->open($cfg->path . "administrator/index.php?option=com_login");
 		$this->waitForPageToLoad("30000");
 		$this->type("modlgn_username", $cfg->username);
 		$this->type("modlgn_passwd", $cfg->password);
 		$this->click("link=Log in");
 		$this->waitForPageToLoad("30000");
 	}
-	
-	function doAdminLogout() 
+
+	function doAdminLogout()
 	{
 		$this->gotoAdmin();
 		echo "Logging out of back end.\n";
@@ -53,30 +53,30 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
 	}
-	
-	function doFrontEndLogin() 
+
+	function doFrontEndLogin()
 	{
 		$this->gotoSite();
 		echo "Logging into front end of site.\n";
 		$this->type("modlgn_username", "admin");
-    $this->type("modlgn_passwd", "password");
-    $this->click("Submit");
-    $this->waitForPageToLoad("30000");
+		$this->type("modlgn_passwd", "password");
+		$this->click("Submit");
+		$this->waitForPageToLoad("30000");
 	}
 
-  function setTinyText($text)
-  {
-    $this->selectFrame("text_ifr");
-    $this->type("tinymce", $text);
-    $this->selectFrame("relative=top");
-  }
-	
-	function doFrontEndLogout() 
+	function setTinyText($text)
+	{
+		$this->selectFrame("text_ifr");
+		$this->type("tinymce", $text);
+		$this->selectFrame("relative=top");
+	}
+
+	function doFrontEndLogout()
 	{
 		$this->gotoSite();
 		echo "Logging out of front end of site.\n";
 		$this->click("Submit");
-    	$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad("30000");
 	}
 
 }
