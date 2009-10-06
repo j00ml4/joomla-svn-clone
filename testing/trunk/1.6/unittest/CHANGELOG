@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Oct-2009 Andrew Eddie
+^ Update JActions, JAction name changes to JRules, JRule
+
 02-Oct-2009 Ian MacLennan
 + Added cache tests from 1.5 unit tests
 + Added environment tests from 1.5 unit tests
