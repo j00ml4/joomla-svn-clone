@@ -33,16 +33,16 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 
 		// Test input as string.
 		$rules	= new JRules($string);
-		$this->assertEquals(
-			$string,
-			(string) $rules
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo($string)
 		);
 
 		// Test input as array.
 		$rules	= new JRules($array);
-		$this->assertEquals(
-			$string,
-			(string) $rules
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo($string)
 		);
 	}
 
@@ -66,9 +66,9 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 		$rules = new JRules('');
 		$rules->mergeAction('edit', $identities);
 
-		$this->assertEquals(
-			json_encode($result),
-			(string) $rules
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo(json_encode($result))
 		);
 
 		// Merge a new set, flipping some bits.
@@ -91,9 +91,9 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 
 		$rules->mergeAction('edit', $identities);
 
-		$this->assertEquals(
-			json_encode($result),
-			(string) $rules
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo(json_encode($result))
 		);
 	}
 
@@ -138,32 +138,32 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 
 		// Test construction by string
 		$rules1 = new JRules($string1);
-		$this->assertEquals(
-			$string1,
-			(string) $rules1
+		$this->assertThat(
+			(string) $rules1,
+			$this->equalTo($string1)
 		);
 
 		// Test construction by array.
 		$rules1 = new JRules($array1);
-		$this->assertEquals(
-			$string1,
-			(string) $rules1
+		$this->assertThat(
+			(string) $rules1,
+			$this->equalTo($string1)
 		);
 
 		// Test merge by JRules.
 		$rules1 = new JRules($array1);
 		$rules2 = new JRules('');
 		$rules2->merge($rules1);
-		$this->assertEquals(
-			$string1,
-			(string) $rules2
+		$this->assertThat(
+			(string) $rules2,
+			$this->equalTo($string1)
 		);
 
 		$rules1 = new JRules($array1);
 		$rules1->merge($array2);
-		$this->assertEquals(
-			json_encode($result2),
-			(string) $rules1
+		$this->assertThat(
+			(string) $rules1,
+			$this->equalTo(json_encode($result2))
 		);
 
 	}
@@ -210,6 +210,34 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 		// This should be false, explicit deny wins.
 		$this->assertFalse(
 			$rules->allow('delete', array(-42, 2))
+		);
+	}
+
+	function testGetAllowed()
+	{
+		$array1 = array(
+			'create' => array(
+				-42	=> 1
+			),
+			'edit' => array(
+				-42	=> 1
+			),
+			'delete' => array(
+				-42	=> 0,
+				2	=> 1
+			)
+		);
+
+		$result = new JObject;
+		$result->set('create', true);
+		$result->set('edit', true);
+
+		$rules		= new JRules($array1);
+		$allowed	= $rules->getAllowed(-42);
+
+		$this->assertThat(
+			$result,
+			$this->equalTo($allowed)
 		);
 	}
 }
