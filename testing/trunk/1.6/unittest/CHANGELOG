@@ -29,6 +29,8 @@ $ -> Language fix or change
 
 06-Oct-2009 Andrew Eddie
 ^ Update JActions, JAction name changes to JRules, JRule
++ Added test for JRules::getAllowed.
+^ Changed some JRules tests to Hamcrest format.
 
 02-Oct-2009 Ian MacLennan
 + Added cache tests from 1.5 unit tests
