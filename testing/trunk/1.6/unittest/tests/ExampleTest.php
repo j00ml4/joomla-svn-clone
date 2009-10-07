@@ -35,9 +35,13 @@ class ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testExample()
 	{
+		// Use Hamcrest style where appropriate.
 		$this->assertThat(
 			true,
 			$this->isTrue()
 		);
+
+		// Example of how to mark a test incomplete.
+		// $this->markTestIncomplete();
 	}
 }
