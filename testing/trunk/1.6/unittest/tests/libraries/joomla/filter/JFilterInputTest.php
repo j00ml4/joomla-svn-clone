@@ -6,24 +6,15 @@
  * @license		GNU General Public License
  */
 
-/*
- * Mock classes
- */
-
-/*
- * We now return to our regularly scheduled environment.
- */
-
-
 class JFilterInputTest extends PHPUnit_Framework_TestCase
 {
-	function setUp() {
-		jimport( 'joomla.filter.filterinput' );
-
+	function setUp()
+	{
+		jimport('joomla.filter.filterinput');
 	}
 
-
-	static function dataSet0() {
+	static function dataSet0()
+	{
 	    $cases = array(
 			'case_1' => array(
 				'',
@@ -33,7 +24,6 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 				'<script>alert(\'hi!\');</script>',
 				''
 			),
-
 		);
 		$tests = $cases;
 
@@ -52,7 +42,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertThat(
 			$expect,
-			$this->equalTo( JFilterOutput::cleanText( $data ) )
+			$this->equalTo(JFilterOutput::cleanText($data))
 		);
 	}
 
@@ -276,11 +266,11 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @dataProvider dataSet1
 	 */
-	function testClean( $type, $data, $expect )
+	function testClean($type, $data, $expect)
 	{
 		$this->assertThat(
-			$expect,
-			$this->equalTo( JFilterInput::clean( $data, $type ) )
+			JFilterInput::clean($data, $type),
+			$this->equalTo($expect)
 		);
 	}
 
@@ -514,8 +504,8 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	{
 		$filter = JFilterInput::getInstance(null, null, 1, 1);
 		$this->assertThat(
-			$expect,
-			$this->equalTo( $filter->clean($data, $type) )
+			$filter->clean($data, $type),
+			$this->equalTo($expect)
 		);
 	}
 }
