@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-Oct-2009 Andrew Eddie
++ Added JForm tests.
+
 06-Oct-2009 Andrew Eddie
 ^ Update JActions, JAction name changes to JRules, JRule
 + Added test for JRules::getAllowed.
