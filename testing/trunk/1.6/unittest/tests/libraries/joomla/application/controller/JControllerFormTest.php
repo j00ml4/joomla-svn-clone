@@ -48,27 +48,33 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		if ($structure = $this->getStructure($object))
 		{
 			// Check the _option variable was created properly.
-			$this->assertEquals(
-				'com_minces',
-				$structure['_option']
+			$this->assertThat(
+				$structure['_option'],
+				$this->equalTo('com_minces')
 			);
 
 			// Check the _context variable was created properly.
-			$this->assertEquals(
-				'mince',
-				$structure['_context']
+			$this->assertThat(
+				$structure['_context'],
+				$this->equalTo('mince')
 			);
 
 			// Check the _view_item variable was created properly.
-			$this->assertEquals(
-				'mince',
-				$structure['_view_item']
+			$this->assertThat(
+				$structure['_view_item'],
+				$this->equalTo('mince')
 			);
 
 			// Check the _view_list variable was created properly.
-			$this->assertEquals(
-				'minces',
-				$structure['_view_list']
+			$this->assertThat(
+				$structure['_view_list'],
+				$this->equalTo('minces')
+			);
+
+			// Check the _view_list variable was created properly.
+			$this->assertThat(
+				$structure['_asset_name'],
+				$this->equalTo('com_minces.mince.%d')
 			);
 		}
 		else {
@@ -88,9 +94,9 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		if ($structure = $this->getStructure($object))
 		{
 			// Check the _view_list variable was created properly.
-			$this->assertEquals(
-				'minies',
-				$structure['_view_list']
+			$this->assertThat(
+				$structure['_view_list'],
+				$this->equalTo('minies')
 			);
 		}
 		else {
@@ -106,9 +112,9 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		if ($structure = $this->getStructure($object))
 		{
 			// Check the _view_list variable was created properly.
-			$this->assertEquals(
-				'mints',
-				$structure['_view_list']
+			$this->assertThat(
+				$structure['_view_list'],
+				$this->equalTo('mints')
 			);
 		}
 		else {
