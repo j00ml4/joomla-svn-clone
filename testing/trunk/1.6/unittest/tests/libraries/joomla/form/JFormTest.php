@@ -110,6 +110,14 @@ class JFormTest extends PHPUnit_Framework_TestCase
 
 	public function testFilter()
 	{
+		// Adjust the timezone offset to a known value.
+		$config = JFactory::getConfig();
+		$config->setValue('config.offset', 10);
+
+		// TODO: Mock JFactory and JUser
+		//$user = JFactory::getUser();
+		//$user->setParam('timezone', 5);
+
 		$form = new JForm;
 		$form->load('example');
 
@@ -118,7 +126,8 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			'f_text' => $text,
 			'f_safe_text' => $text,
 			'f_raw_text' => $text,
-			'f_date' => '2009-01-01 00:00:00',
+			'f_svr_date' => '2009-01-01 00:00:00',
+			'f_usr_date' => '2009-01-01 00:00:00',
 			'f_unset' => 1
 		);
 
@@ -141,7 +150,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			isset($result['f_date']),
+			isset($result['f_svr_date']),
 			$this->isTrue()
 		);
 
@@ -150,7 +159,25 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			$this->isFalse()
 		);
 
+		// Check the date filters.
+		$this->assertThat(
+			$result['f_svr_date'],
+			$this->equalTo('2008-12-31 14:00:00')
+		);
+
+		/*
+		$this->assertThat(
+			$result['f_usr_date'],
+			$this->equalTo('2009-01-01 05:00:00')
+		);
+		*/
+
 		// Check that text filtering worked.
+		$this->assertThat(
+			$result['f_raw_text'],
+			$this->equalTo($text)
+		);
+
 		$this->assertThat(
 			$result['f_text'],
 			$this->equalTo('alert(); Some text')
@@ -159,11 +186,6 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->assertThat(
 			$result['f_safe_text'],
 			$this->equalTo('alert(); <p>Some text</p>')
-		);
-
-		$this->assertThat(
-			$result['f_raw_text'],
-			$this->equalTo($text)
 		);
 
 		$this->markTestIncomplete();
