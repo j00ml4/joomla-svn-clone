@@ -27,6 +27,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Oct-2009 Andrew Eddie
+^ Added checks for new UTC date filters in testFilter test.
+^ Changed JControllerForm tests to Hamcrest style.
+
 07-Oct-2009 Andrew Eddie
 + Added JForm tests.
 
