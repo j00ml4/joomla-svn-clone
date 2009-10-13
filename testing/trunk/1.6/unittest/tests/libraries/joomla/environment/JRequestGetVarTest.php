@@ -37,7 +37,7 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider getVarData
 	 * @runInSeparateProcess
-     * @preserveGlobalState disabled
+	 * @preserveGlobalState disabled
 	 */
 	public function testGetVarFromDataSet(
 		$name, $default, $hash, $type, $mask, $expect, $filterCalls

@@ -9,86 +9,81 @@ require_once 'PHPUnit/Framework.php';
  */
 class JVersionTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var    JVersion
-     * @access protected
-     */
-    protected $object;
+	/**
+	 * @var	JVersion
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     *
-     * @access protected
-     */
-    protected function setUp()
-    {
-        //$this->object = new JVersion;
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		//$this->object = new JVersion;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @access protected
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @todo Implement testGetLongVersion().
-     */
-    public function testGetLongVersion()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testGetLongVersion().
+	 */
+	public function testGetLongVersion()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testGetShortVersion().
-     */
-    public function testGetShortVersion()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testGetShortVersion().
+	 */
+	public function testGetShortVersion()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testGetHelpVersion().
-     */
-    public function testGetHelpVersion()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testGetHelpVersion().
+	 */
+	public function testGetHelpVersion()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testIsCompatible().
-     */
-    public function testIsCompatible()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testIsCompatible().
+	 */
+	public function testIsCompatible()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testGetUserAgent().
-     */
-    public function testGetUserAgent()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testGetUserAgent().
+	 */
+	public function testGetUserAgent()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 }
 
