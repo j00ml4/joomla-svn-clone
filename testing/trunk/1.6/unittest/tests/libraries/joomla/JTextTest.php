@@ -9,75 +9,70 @@ require_once 'PHPUnit/Framework.php';
  */
 class JTextTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var    JText
-     * @access protected
-     */
-    protected $object;
+	/**
+	 * @var	JText
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     *
-     * @access protected
-     */
-    protected function setUp()
-    {
-        //$this->object = new JText;
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		//$this->object = new JText;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @access protected
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @todo Implement test_().
-     */
-    public function test_()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement test_().
+	 */
+	public function test_()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testSprintf().
-     */
-    public function testSprintf()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testSprintf().
+	 */
+	public function testSprintf()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testPrintf().
-     */
-    public function testPrintf()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testPrintf().
+	 */
+	public function testPrintf()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @todo Implement testScript().
-     */
-    public function testScript()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @todo Implement testScript().
+	 */
+	public function testScript()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 }
 

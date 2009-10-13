@@ -39,12 +39,9 @@ class JFilterInput
 	/**
 	 * Stub for the clean method.
 	 *
-	 * @access  public
 	 * @param   mixed   Input string/array-of-string to be 'cleaned'
-	 * @param   string  Return type for the variable (INT, FLOAT, BOOLEAN, WORD,
-	 * ALNUM, CMD, BASE64, STRING, ARRAY, PATH, NONE)
+	 * @param   string  Return type for the variable (INT, FLOAT, BOOLEAN, WORD, ALNUM, CMD, BASE64, STRING, ARRAY, PATH, NONE)
 	 * @return  mixed   Canned response based on table lookup.
-	 * @static
 	 */
 	function clean($source, $type='string')
 	{

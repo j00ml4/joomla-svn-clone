@@ -3,23 +3,26 @@
 /*
  * Mock classes
  */
-class JRegistry {
+class JRegistry
+{
+	static $liveSite;
 
-        static $liveSite;
-
-        function getValue($regpath, $default = null) {
-                if ($regpath == 'config.live_site') {
-                        return self::$liveSite;
-                }
-                return $default;
-        }
+	function getValue($regpath, $default = null)
+	{
+		if ($regpath == 'config.live_site') {
+			return self::$liveSite;
+		}
+		return $default;
+	}
 
 }
 
-class JFactory {
-        function &getConfig($file = null, $type = 'PHP') {
-                $config = new JRegistry();
-                return $config;
-        }
+class JFactory
+{
+	function &getConfig($file = null, $type = 'PHP')
+	{
+		$config = new JRegistry();
+		return $config;
+	}
 }
 

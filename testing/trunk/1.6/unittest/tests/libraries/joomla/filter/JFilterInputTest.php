@@ -15,7 +15,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 
 	static function dataSet0()
 	{
-	    $cases = array(
+		$cases = array(
 			'case_1' => array(
 				'',
 				''
@@ -30,7 +30,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 		return $tests;
 	}
 
-    /**
+	/**
 	 * Execute a cleanText test case.
 	 *
 	 * @param string The original output
