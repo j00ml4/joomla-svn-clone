@@ -27,8 +27,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator/index.php?option=com_login");
 		$this->waitForPageToLoad("30000");
-		$this->type("modlgn_username", $cfg->username);
-		$this->type("modlgn_passwd", $cfg->password);
+		$this->type("mod-login-username", $cfg->username);
+		$this->type("mod-login-password", $cfg->password);
 		$this->click("link=Log in");
 		$this->waitForPageToLoad("30000");
 	}

@@ -104,8 +104,12 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		echo "Navigate to New Private Message.\n";
 		$this->click("link=New Private Message");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("New Private Message"));
-		$this->click("//li[@id='toolbar-cancel']/a/span");
+		try {
+			$this->assertTrue($this->isTextPresent("New Private Message"));
+		} catch (PHPUnit_Framework_AssertionFailedError $e) {
+			array_push($this->verificationErrors, $e->toString());
+		}
+
 		$this->waitForPageToLoad("30000");
 		echo "Navigate to Menu Manager.\n";
 		$this->click("link=Menu Manager");
