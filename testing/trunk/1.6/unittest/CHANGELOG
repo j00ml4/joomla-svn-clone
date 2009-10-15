@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+15-Oct-2009 Ian MacLennan
++ Added JPaginationTest and JPaginationTestHelper - at this point only the constructor is done
+
 09-Oct-2009 Ian MacLennan
 + Added test skeletons for JFactory, JFrameworkConfig, JRoute, JText and JVersion
 
