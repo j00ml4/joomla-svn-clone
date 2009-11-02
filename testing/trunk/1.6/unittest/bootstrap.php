@@ -20,6 +20,7 @@ if (file_exists('config.php')) {
 
 define('DS',			DIRECTORY_SEPARATOR);
 define('_JEXEC',		1);
+define('JPATH_BASE', '/home/estaffor/src/php/Workspace/trunk');
 if (!defined('JPATH_BASE'))
 {
 	// JPATH_BASE can be defined in init.php
