@@ -28,7 +28,7 @@ $ -> Language fix or change
 ! -> Note
 
 02-Nov-2009 Ed Stafford
-+ Added all library/cache, library/client, and library/database skeletons
++ Added all library/cache, library/client, library/document, and library/database skeletons
 
 28-Oct-2009 Ed Stafford
 + Added all library/application, library/access skeletons
