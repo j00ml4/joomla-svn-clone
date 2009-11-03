@@ -25,7 +25,7 @@ class JCacheCallbackTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JCacheCallback;
+		//$this->object = new JCacheCallback;
 	}
 	
 	/**

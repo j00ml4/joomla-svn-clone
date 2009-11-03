@@ -25,7 +25,7 @@ class JTableAssetTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JTableAsset;
+		//$this->object = new JTableAsset;
 	}
 	
 	/**

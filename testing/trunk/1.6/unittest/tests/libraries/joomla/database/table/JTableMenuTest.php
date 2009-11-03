@@ -25,7 +25,7 @@ class JTableMenuTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JTableMenu;
+		//$this->object = new JTableMenu;
 	}
 	
 	/**

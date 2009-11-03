@@ -24,7 +24,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JController;
+		//$this->object = new JController;
 	}
 
 	/**

@@ -25,7 +25,7 @@ class JDatabaseMySQLTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JDatabaseMySQL;
+		//$this->object = new JDatabaseMySQL;
 	}
 	
 	/**

@@ -24,7 +24,7 @@ class JAdapterTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JAdapter;
+		//$this->object = new JAdapter;
 	}
 	
 	/**
