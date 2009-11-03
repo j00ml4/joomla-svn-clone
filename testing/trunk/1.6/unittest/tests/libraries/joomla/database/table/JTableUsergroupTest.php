@@ -25,7 +25,7 @@ class JTableUsergroupTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JTableUsergroup;
+		//$this->object = new JTableUsergroup;
 	}
 	
 	/**

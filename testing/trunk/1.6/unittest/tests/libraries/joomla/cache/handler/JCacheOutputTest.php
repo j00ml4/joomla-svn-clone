@@ -25,7 +25,7 @@ class JCacheOutputTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JCacheOutput;
+		//$this->object = new JCacheOutput;
 	}
 	
 	/**

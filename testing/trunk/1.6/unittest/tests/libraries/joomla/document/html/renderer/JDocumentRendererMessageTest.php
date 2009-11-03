@@ -25,7 +25,7 @@ class JDocumentRendererMessageTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JDocumentRendererMessage;
+		//$this->object = new JDocumentRendererMessage;
 	}
 	
 	/**

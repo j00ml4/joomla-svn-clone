@@ -30,7 +30,7 @@ class JControllerFormTest2 extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JControllerForm;
+		//$this->object = new JControllerForm;
 	}
 
 	/**

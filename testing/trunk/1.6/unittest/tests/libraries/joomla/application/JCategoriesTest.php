@@ -24,7 +24,7 @@ class JCategoriesTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JCategories;
+		//$this->object = new JCategories;
 	}
 
 	/**

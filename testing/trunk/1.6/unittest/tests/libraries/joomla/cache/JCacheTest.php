@@ -25,7 +25,7 @@ class JCacheTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JCache;
+		//$this->object = new JCache;
 	}
 	
 	/**

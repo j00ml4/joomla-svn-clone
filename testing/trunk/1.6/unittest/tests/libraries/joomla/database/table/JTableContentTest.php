@@ -25,7 +25,7 @@ class JTableContentTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JTableContent;
+		//$this->object = new JTableContent;
 	}
 	
 	/**

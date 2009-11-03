@@ -25,7 +25,7 @@ class JDocumentRendererModulesTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JDocumentRendererModules;
+		//$this->object = new JDocumentRendererModules;
 	}
 	
 	/**
