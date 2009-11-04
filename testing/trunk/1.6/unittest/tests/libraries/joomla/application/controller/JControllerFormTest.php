@@ -73,6 +73,11 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 
 			// Check the _view_list variable was created properly.
 			$this->assertThat(
+				$structure,
+				$this->arrayHasKey('_asset_name'),
+				'_asset_name has not been defined for structure'
+			);
+			$this->assertThat(
 				$structure['_asset_name'],
 				$this->equalTo('com_minces.mince.%d')
 			);
