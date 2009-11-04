@@ -24,7 +24,7 @@ class JAdapterInstanceTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		$this->object = new JAdapterInstance;
+//		$this->object = new JAdapterInstance;
 	}
 	
 	/**
@@ -34,6 +34,14 @@ class JAdapterInstanceTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function tearDown() {
+	}
+	
+	/**
+	 * @todo Decide how to Implement.
+	 */
+	public function testDummy() {
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }
 ?>

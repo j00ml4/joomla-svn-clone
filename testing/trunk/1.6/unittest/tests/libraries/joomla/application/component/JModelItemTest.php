@@ -39,5 +39,13 @@ class JModelItemTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
+	
+	/**
+	 * @todo Decide how to Implement.
+	 */
+	public function testDummy() {
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
 }
 ?>
