@@ -100,7 +100,7 @@ class JSimpleCryptTest extends PHPUnit_Framework_TestCase
     	$this->object = new JSimpleCrypt($key);
     	
     	$this->assertThat(
-    		$fred,
+    		$this->object->decrypt($text),
     		$this->equalTo($expected)
     	);
     }
