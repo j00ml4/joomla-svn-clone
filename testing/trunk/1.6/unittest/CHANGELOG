@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+05-Nov-2009 Ed Stafford
++ Added all library/event, library/environment skeletons in unittest.
+
 02-Nov-2009 Ed Stafford
 + Added all library/cache, library/client, library/document, and library/database skeletons
 
