@@ -20,7 +20,7 @@ require_once JPATH_BASE . '/libraries/joomla/utilities/date.php';
 class JDateTest extends PHPUnit_Framework_TestCase
 {
 	protected $object;
-	
+
 	/**
 	 *	tearDown
 	 *
@@ -70,13 +70,13 @@ class JDateTest extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
-	
+
 	/**
 	 *	Testing the Constructor
 	 *
-	 * @param string $date         What time should be set?
-	 * @param mixed  $tz           Which time zone? (can be string or numeric
-	 * @param string $expectedTime What should the resulting time string look like?
+	 * @param string What time should be set?
+	 * @param mixed  Which time zone? (can be string or numeric
+	 * @param string What should the resulting time string look like?
 	 *
 	 * @return void
 	 * @dataProvider casesConstruct
@@ -84,7 +84,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 	public function testConstruct( $date, $tz, $expectedTime )
 	{
 		$jdate = new JDate($date, $tz);
-		
+
 		$this->assertThat(
 			$expectedTime,
 			$this->equalTo(date_format($jdate, 'D m/d/Y H:i'))
@@ -117,7 +117,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
-	
+
 	/**
 	 *	Testing toString
 	 *
@@ -132,7 +132,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		if( !is_null($format) )
 		{
 			JDate::$format = $format;
-		}	
+		}
 
 		$this->assertThat(
 			$this->object->__toString(),
@@ -226,7 +226,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$testJDate = new JDate($setTime, $tz);
 		}
-		
+
 		if( is_null($hours) )
 		{
 			$offset = $testJDate->getOffsetFromGMT();
@@ -235,7 +235,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$offset = $testJDate->getOffsetFromGMT($hours);
 		}
-		
+
 		$this->assertThat($offset, $this->equalTo($expected));
 	}
 
@@ -294,7 +294,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
-	
+
 	/**
 	 *	Testing format
 	 *
@@ -315,7 +315,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$formatted = $this->object->format($format, $local);
 		}
-		
+
 		$this->assertThat($formatted, $this->equalTo($expected));
 	}
 
@@ -405,7 +405,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$testJDate = new JDate($setTime, $tz);
 		}
-		
+
 		$this->assertThat(
 			$testJDate->toRFC822($local),
 			$this->equalTo($expected)
@@ -498,7 +498,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$testJDate = new JDate($setTime, $tz);
 		}
-		
+
 		$this->assertThat(
 			$testJDate->toISO8601($local),
 			$this->equalTo($expected)
@@ -591,7 +591,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$testJDate = new JDate($setTime, $tz);
 		}
-		
+
 		$this->assertThat(
 			$testJDate->toMySQL($local),
 			$this->equalTo($expected)
@@ -674,7 +674,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$testJDate = new JDate($setTime, $tz);
 		}
-		
+
 		$this->assertThat(
 			$testJDate->toUnix(),
 			$this->equalTo($expected)
@@ -841,7 +841,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
-	
+
 	/**
 	 *	Testing toFormat
 	 *
@@ -854,7 +854,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testToFormat( $format, $local, $expected )
 	{
-		if( is_null($local) )
+		if ( is_null($local) )
 		{
 			$formatted = $this->object->toFormat($format);
 		}
@@ -862,7 +862,7 @@ class JDateTest extends PHPUnit_Framework_TestCase
 		{
 			$formatted = $this->object->toFormat($format, $local);
 		}
-		
+
 		$this->assertThat($formatted, $this->equalTo($expected));
 	}
 }
