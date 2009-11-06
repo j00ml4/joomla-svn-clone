@@ -27,17 +27,20 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Nov-2009 Ed Stafford
++ Added library/joomla/error skeletons in unittest
+
 05-Nov-2009 Ed Stafford
-+ Added all library/event, library/environment skeletons in unittest.
++ Added all library/joomla/event, library/joomla/environment skeletons in unittest.
 
 02-Nov-2009 Ed Stafford
-+ Added all library/cache, library/client, library/document, and library/database skeletons
++ Added all library/joomla/cache, library/joomla/client, library/joomla/document, and library/joomla/database skeletons
 
 28-Oct-2009 Ed Stafford
-+ Added all library/application, library/access skeletons
++ Added all library/joomla/application, library/joomla/access skeletons
 
 27-Oct-2009 Ed Stafford
-+ Added all library/base skeletons
++ Added all library/joomla/base skeletons
 
 15-Oct-2009 Ian MacLennan
 + Added JPaginationTest and JPaginationTestHelper - at this point only the constructor is done
