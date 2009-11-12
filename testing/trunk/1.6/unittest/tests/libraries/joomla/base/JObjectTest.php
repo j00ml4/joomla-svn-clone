@@ -16,7 +16,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -26,7 +26,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->o = new JObject;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -35,14 +35,14 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement test__toString().
 	 */
 	public function test__toString() {
 		$this->assertEquals("JObject", $this->o->__toString());
 	}
-	
+
 	/**
 	 * @todo Implement testDef().
 	 */
@@ -54,7 +54,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("paint", $this->o->def("check"));
 		$this->assertNotEquals("forced", $this->o->def("check"));
 	}
-	
+
 	/**
 	 * @todo Implement testGet().
 	 */
@@ -62,7 +62,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("onaplane", $this->o->get("foo", "onaplane"));
 		$this->assertNotEquals(null, $this->o->get("foo", "onaplane"));
 	}
-	
+
 	/**
 	 * @todo Implement testGetProperties().
 	 */
@@ -70,7 +70,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetError().
 	 */
@@ -78,7 +78,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetErrors().
 	 */
@@ -86,7 +86,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSet().
 	 */
@@ -95,7 +95,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("imintheair", $this->o->set("foo", "nojibberjabber"));
 		$this->assertEquals("nojibberjabber", $this->o->foo);
 	}
-	
+
 	/**
 	 * @todo Implement testSetProperties().
 	 */
@@ -105,7 +105,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("ghost", $this->o->foo);
 		$this->assertEquals("stewie", $this->o->knife);
 	}
-	
+
 	/**
 	 * @todo Implement testSetError().
 	 */
@@ -113,7 +113,7 @@ class JObjectTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testToString().
 	 */

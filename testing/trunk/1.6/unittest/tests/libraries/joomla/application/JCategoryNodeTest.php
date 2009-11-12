@@ -4,7 +4,7 @@
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 require_once JPATH_BASE.'/libraries/joomla/application/categories.php';
 /**
  * Test class for JCategoryNode.

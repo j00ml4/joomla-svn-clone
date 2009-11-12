@@ -26,7 +26,7 @@ class JModelFormTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		/* Need to build Mock class for database access
 		 * as this causes errors currently:
-		 * 
+		 *
 		 * $this->object = new JModelForm;
 		 */
 	}

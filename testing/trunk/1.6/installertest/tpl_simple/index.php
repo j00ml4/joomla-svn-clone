@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<td>
 			<p><jdoc:include type="message" /></p>
 			<jdoc:include type="component" />
-			
+
 		</td>
 	</tr>
 	<?php if($this->countModules('footer')) { ?>

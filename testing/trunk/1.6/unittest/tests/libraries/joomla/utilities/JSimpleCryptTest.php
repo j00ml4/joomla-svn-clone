@@ -98,7 +98,7 @@ class JSimpleCryptTest extends PHPUnit_Framework_TestCase
     public function testDecrypt( $expected, $key, $text )
     {
     	$this->object = new JSimpleCrypt($key);
-    	
+
     	$this->assertThat(
     		$this->object->decrypt($text),
     		$this->equalTo($expected)
@@ -118,7 +118,7 @@ class JSimpleCryptTest extends PHPUnit_Framework_TestCase
     public function testEncrypt( $text, $key, $expected )
     {
     	$this->object = new JSimpleCrypt($key);
-    	
+
     	$this->assertThat(
     		$this->object->encrypt($text),
     		$this->equalTo($expected)

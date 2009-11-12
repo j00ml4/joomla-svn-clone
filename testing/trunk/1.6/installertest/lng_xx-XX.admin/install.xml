@@ -13,7 +13,7 @@
 	<files>
 		<filename>index.html</filename>
 		<filename>xx-XX.ini</filename>
-		<filename file="meta">xx-XX.xml</filename>    
+		<filename file="meta">xx-XX.xml</filename>
 	</files>
 	<params />
 </install>

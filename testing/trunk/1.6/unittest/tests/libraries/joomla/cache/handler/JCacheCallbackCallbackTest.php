@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @version $Id: $
- * @author Anthony Ferrara 
+ * @author Anthony Ferrara
  */
 
 
@@ -39,7 +39,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		$this->expectOutputString('e1e1e1e1e1');
 		for($i = 0; $i < 5; $i++) {
 			$result = $cache->get($callback, array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 		}
@@ -53,7 +53,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		$this->expectOutputString('e1e1e1e1e1');
 		for($i = 0; $i < 5; $i++) {
 			$result = $cache->get($callback, array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 		}
@@ -67,7 +67,7 @@ class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 		for($i = 0; $i < 5; $i++) {
 			$instance = new testCallbackHandler();
 			$result = $cache->get(array($instance, 'instanceCallback'), array($arg1, $arg2));
-			$this->assertTrue($arg2 === $result, 
+			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
 			);
 			unset($instance);

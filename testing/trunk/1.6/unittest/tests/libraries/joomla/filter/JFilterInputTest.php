@@ -23,7 +23,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -468,13 +468,13 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 			$this->equalTo(JFilterOutput::cleanText($data))
 		);
 	}
-	
+
 	/**
 	 * Produces the array of test cases for plain Whitelist test run.
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -603,7 +603,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -711,7 +711,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -819,7 +819,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -927,7 +927,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -968,7 +968,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array
@@ -1058,7 +1058,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return array Two dimensional array of test cases. Each row consists of three values
 	 *				 The first is the type of input data, the second is the actual input data,
-	 *				 the third is the expected result of filtering, and the fourth is 
+	 *				 the third is the expected result of filtering, and the fourth is
 	 *				 the failure message identifying the source of the data.
 	 *
 	 * @return array

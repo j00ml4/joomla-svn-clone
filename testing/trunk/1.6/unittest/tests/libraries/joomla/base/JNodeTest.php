@@ -26,7 +26,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->object = new JNode;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -35,7 +35,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testAddChild().
 	 */
@@ -43,7 +43,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetParent().
 	 */
@@ -51,7 +51,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetParent().
 	 */
@@ -59,7 +59,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testHasChildren().
 	 */
@@ -67,7 +67,7 @@ class JNodeTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetChildren().
 	 */

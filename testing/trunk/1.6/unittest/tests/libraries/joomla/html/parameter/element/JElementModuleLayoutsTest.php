@@ -30,7 +30,7 @@ class JElementModuleLayoutsTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
     }
-	
+
 	/**
 	 * @todo Decide how to Implement.
 	 */

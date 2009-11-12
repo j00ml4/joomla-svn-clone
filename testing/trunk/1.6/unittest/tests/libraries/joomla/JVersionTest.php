@@ -116,7 +116,7 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 			'Should get an empty Help version',
 	 		),
 	 	);
-	 		
+
 	}
 
 	/**
@@ -137,14 +137,14 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 			$this->object->RELEASE 	= '1.0';
 			$output = $this->object->getHelpVersion();
 		}
-		
+
 		$this->assertEquals(
 			$expect,
 			$output,
 			$message
 		);
 	}
-	
+
 	/**
 	 * Compatibility test cases
 	 *
@@ -174,7 +174,7 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 			'Should be compatible with itself',
 	 		),
 		);
-	 		
+
 	}
 
 	/**
@@ -293,7 +293,7 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 			false
 	 		),
 	 	);
-	 		
+
 	}
 
 	/**
@@ -309,7 +309,7 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 * @return void
 	 * @dataProvider casesUserAgent
 	 */
-	public function testSettingCorrectUserAgentString( $component, $mask, $addVersion, 
+	public function testSettingCorrectUserAgentString( $component, $mask, $addVersion,
 	$expect, $message, $useDefaults ) {
     	if ( $useDefaults ) {
 	    	$output = $this->object->getUserAgent();
@@ -320,7 +320,7 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	    } else {
 	    	$output = $this->object->getUserAgent($component, $mask, $addVersion);
 	    }
-	    
+
 		$this->assertEquals(
 			$expect,
 			$output,

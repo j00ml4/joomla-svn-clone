@@ -18,7 +18,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -28,7 +28,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->object = new JCacheStorageEaccelerator;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -37,7 +37,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testGet().
 	 */
@@ -45,7 +45,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testStore().
 	 */
@@ -53,7 +53,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRemove().
 	 */
@@ -61,7 +61,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testClean().
 	 */
@@ -69,7 +69,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGc().
 	 */
@@ -77,7 +77,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testTest().
 	 */
@@ -85,7 +85,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_setExpire().
 	 */
@@ -93,7 +93,7 @@ class JCacheStorageEacceleratorTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_getCacheId().
 	 */
