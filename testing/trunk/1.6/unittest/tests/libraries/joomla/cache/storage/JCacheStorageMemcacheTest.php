@@ -18,7 +18,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -31,7 +31,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		 * $this->object = new JCacheStorageMemcache;
 		 */
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -40,7 +40,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testGetConnection().
 	 */
@@ -48,7 +48,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetConfig().
 	 */
@@ -56,7 +56,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGet().
 	 */
@@ -64,7 +64,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testStore().
 	 */
@@ -72,7 +72,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRemove().
 	 */
@@ -80,7 +80,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testClean().
 	 */
@@ -88,7 +88,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGc().
 	 */
@@ -96,7 +96,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testTest().
 	 */
@@ -104,7 +104,7 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_getCacheId().
 	 */

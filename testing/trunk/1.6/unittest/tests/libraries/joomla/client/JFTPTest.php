@@ -17,7 +17,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -27,7 +27,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->object = new JFTP;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -36,7 +36,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement test__destruct().
 	 */
@@ -44,7 +44,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetInstance().
 	 */
@@ -52,7 +52,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetOptions().
 	 */
@@ -60,7 +60,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testConnect().
 	 */
@@ -68,7 +68,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testIsConnected().
 	 */
@@ -76,7 +76,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testLogin().
 	 */
@@ -84,7 +84,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testQuit().
 	 */
@@ -92,7 +92,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testPwd().
 	 */
@@ -100,7 +100,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSyst().
 	 */
@@ -108,7 +108,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testChdir().
 	 */
@@ -116,7 +116,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testReinit().
 	 */
@@ -124,7 +124,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRename().
 	 */
@@ -132,7 +132,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testChmod().
 	 */
@@ -140,7 +140,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testDelete().
 	 */
@@ -148,7 +148,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testMkdir().
 	 */
@@ -156,7 +156,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRestart().
 	 */
@@ -164,7 +164,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testCreate().
 	 */
@@ -172,7 +172,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRead().
 	 */
@@ -180,7 +180,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGet().
 	 */
@@ -188,7 +188,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testStore().
 	 */
@@ -196,7 +196,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testWrite().
 	 */
@@ -204,7 +204,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testListNames().
 	 */
@@ -212,7 +212,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testListDetails().
 	 */
@@ -220,7 +220,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_putCmd().
 	 */
@@ -228,7 +228,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_verifyResponse().
 	 */
@@ -236,7 +236,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_passive().
 	 */
@@ -244,7 +244,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_findMode().
 	 */
@@ -252,7 +252,7 @@ class JFTPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_mode().
 	 */

@@ -137,7 +137,7 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
     	} else {
     		$output = JLoader::import($filePath, $base, $libraries);
     	}
-    	
+
     	$this->assertThat(
     		$expect,
     		$this->equalTo($output),
@@ -146,7 +146,7 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * The success of this test depends on the bogusload object being present in the 
+     * The success of this test depends on the bogusload object being present in the
      * unittest/objects tree
      *
 	 * @group   JLoader
@@ -176,7 +176,7 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
 	 * @return void
      */
     public function testFailsToRegisterABadClass()
-    {    	
+    {
     	$badClassList = JLoader::register("fred", "fred.php");
     	$this->assertArrayNotHasKey(
     		'fred',

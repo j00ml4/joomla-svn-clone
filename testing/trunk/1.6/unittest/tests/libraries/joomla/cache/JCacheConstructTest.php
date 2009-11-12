@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @version $Id: $
- * @author Anthony Ferrara 
+ * @author Anthony Ferrara
  */
 
 
@@ -18,9 +18,9 @@ class JCacheTest_Construct extends PHPUnit_Framework_TestCase
 
 	public static function provider() {
 		return array(
-				array('callback'), 
-				array('output'), 
-				array('page'), 
+				array('callback'),
+				array('output'),
+				array('page'),
 				array('view')
 				);
 	}
@@ -31,9 +31,9 @@ class JCacheTest_Construct extends PHPUnit_Framework_TestCase
 	function testConstruct($type) {
 		$class = 'JCache'.ucfirst($type);
 		$cache =& JCache::getInstance($type);
-		$this -> assertTrue(($cache instanceof $class), 
+		$this -> assertTrue(($cache instanceof $class),
 			'Expecting= '.$class.' Returned= '.get_class($cache)
-		); 
+		);
 		$cache2 =& JCache::getInstance($type);
 		$this -> assertTrue(($cache !== $cache2),
 			'Type: '.$type.' Recieved the same instance twice'

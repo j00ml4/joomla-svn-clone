@@ -17,7 +17,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -27,7 +27,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->object = new JLDAP;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -36,7 +36,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testConnect().
 	 */
@@ -44,7 +44,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testClose().
 	 */
@@ -52,7 +52,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetDN().
 	 */
@@ -60,7 +60,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetDN().
 	 */
@@ -68,7 +68,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAnonymous_bind().
 	 */
@@ -76,7 +76,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testBind().
 	 */
@@ -84,7 +84,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSimple_search().
 	 */
@@ -92,7 +92,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSearch().
 	 */
@@ -100,7 +100,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testReplace().
 	 */
@@ -108,7 +108,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testModify().
 	 */
@@ -116,7 +116,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRemove().
 	 */
@@ -124,7 +124,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testCompare().
 	 */
@@ -132,7 +132,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRead().
 	 */
@@ -140,7 +140,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testDelete().
 	 */
@@ -148,7 +148,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testCreate().
 	 */
@@ -156,7 +156,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAdd().
 	 */
@@ -164,7 +164,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRename().
 	 */
@@ -172,7 +172,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetErrorMsg().
 	 */
@@ -180,7 +180,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testIpToNetAddress().
 	 */
@@ -188,7 +188,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testLDAPNetAddr().
 	 */
@@ -196,7 +196,7 @@ class JLDAPTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGeneratePassword().
 	 */

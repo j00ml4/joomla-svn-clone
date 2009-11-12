@@ -7,7 +7,7 @@
 		<authorUrl>http://www.example.org</authorUrl>
 		<copyright>(C) 2008 Copyright Info</copyright>
 		<license>License Info</license>
-		<version>1.6</version>	
+		<version>1.6</version>
 		<description>Admin Alpha</description>
         <files>
                 <filename module="mod_adminalpha">mod_adminalpha.php</filename>

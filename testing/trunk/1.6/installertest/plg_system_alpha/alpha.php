@@ -1,19 +1,19 @@
 <?php
 /**
  * Sample System Plugin
- * 
- * Primitive system plugin 
- * 
+ *
+ * Primitive system plugin
+ *
  * PHP5
- *  
+ *
  * Created on Jul 16, 2008
- * 
+ *
  * @package installer_samples
  * @license GNU/GPL http://www.gnu.org/licenses/gpl.html
- * @copyright 2008 OpenSourceMatters 
- * @version SVN: $Id:$    
+ * @copyright 2008 OpenSourceMatters
+ * @version SVN: $Id:$
  */
- 
+
 
 class plgSystemAlpha extends JPlugin {
 	/**
@@ -28,5 +28,5 @@ class plgSystemAlpha extends JPlugin {
 	 */
 	function plgSystemAlpha(& $subject) {
 		parent :: __construct($subject);
-	}	
+	}
 }

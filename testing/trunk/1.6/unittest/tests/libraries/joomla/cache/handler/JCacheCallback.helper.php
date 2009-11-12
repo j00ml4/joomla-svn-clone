@@ -5,7 +5,7 @@
  * @package Joomla
  * @subpackage UnitTest
  * @version $Id: $
- * @author Anthony Ferrara 
+ * @author Anthony Ferrara
  */
 
 class testCallbackHandler {

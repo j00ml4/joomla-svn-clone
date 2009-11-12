@@ -17,7 +17,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -30,7 +30,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		 * $this->object = new JDatabase;
 		 */
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -39,7 +39,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testGetInstance().
 	 */
@@ -47,7 +47,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test__destruct().
 	 */
@@ -55,7 +55,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetConnectors().
 	 */
@@ -63,7 +63,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAddQuoted().
 	 */
@@ -71,7 +71,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSplitSql().
 	 */
@@ -79,7 +79,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testIsQuoted().
 	 */
@@ -87,7 +87,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testDebug().
 	 */
@@ -95,7 +95,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetUTFSupport().
 	 */
@@ -103,7 +103,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetErrorNum().
 	 */
@@ -111,7 +111,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetErrorMsg().
 	 */
@@ -119,7 +119,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetLog().
 	 */
@@ -127,7 +127,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetTicker().
 	 */
@@ -135,7 +135,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testNameQuote().
 	 */
@@ -143,7 +143,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetPrefix().
 	 */
@@ -151,7 +151,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetNullDate().
 	 */
@@ -159,7 +159,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetQuery().
 	 */
@@ -167,7 +167,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testReplacePrefix().
 	 */
@@ -175,7 +175,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetQuery().
 	 */
@@ -183,7 +183,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testStderr().
 	 */
@@ -191,7 +191,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetVersion().
 	 */
@@ -199,7 +199,7 @@ class JDatabaseTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testQuote().
 	 */

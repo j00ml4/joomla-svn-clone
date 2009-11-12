@@ -18,7 +18,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -28,7 +28,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$this->object = new JDocumentHTML;
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -37,7 +37,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testGetHeadData().
 	 */
@@ -45,7 +45,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetHeadData().
 	 */
@@ -53,7 +53,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAddHeadLink().
 	 */
@@ -61,7 +61,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAddFavicon().
 	 */
@@ -69,7 +69,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testAddCustomTag().
 	 */
@@ -77,7 +77,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testGetBuffer().
 	 */
@@ -85,7 +85,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testSetBuffer().
 	 */
@@ -93,7 +93,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testParse().
 	 */
@@ -101,7 +101,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testRender().
 	 */
@@ -109,7 +109,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testCountModules().
 	 */
@@ -117,7 +117,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement testCountMenuChildren().
 	 */
@@ -125,7 +125,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_loadTemplate().
 	 */
@@ -133,7 +133,7 @@ class JDocumentHTMLTest extends PHPUnit_Framework_TestCase {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	
+
 	/**
 	 * @todo Implement test_parseTemplate().
 	 */

@@ -17,7 +17,7 @@ class JEventTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected $object;
-	
+
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
@@ -28,9 +28,9 @@ class JEventTest extends PHPUnit_Framework_TestCase {
 		/**
 		 * Abstract class
 		 * $this->object = new JEvent;
-		 */ 
+		 */
 	}
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -39,7 +39,7 @@ class JEventTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 	}
-	
+
 	/**
 	 * @todo Implement testUpdate().
 	 */

@@ -8,10 +8,10 @@
 		<authorUrl>http://www.example.org</authorUrl>
 		<copyright>(C) 2008 Copyright Info</copyright>
 		<license>License Info</license>
-		<version>1.6</version>	
+		<version>1.6</version>
 		<description>Site Alpha</description>
 		<scriptfile>alpha.scriptfile.php</scriptfile> <!-- New for 1.6 -->
-		
+
 		<!-- SQL Files -->
 		<!-- Note: SQL Support added in 1.6 for modules and plugins -->
 		<install> <!-- Runs on install -->
@@ -32,7 +32,7 @@
 				<file driver="mysql">sql/update.mysql.nonutf8.sql</file>
 			</sql>
 		</update>
-		
+
         <files>
                 <filename module="mod_alpha">mod_alpha.php</filename>
 				<folder>sql</folder>

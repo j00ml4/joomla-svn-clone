@@ -24,7 +24,7 @@ class FilterTestObject
 	public $string1;
 	public $string2;
 	public $string3;
-	
+
     /**
      * Sets up a dummy object for the output filter to be tested against
      *
@@ -134,7 +134,7 @@ class JFilterOutputTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests replacing single ampersands with the entity, but leaving double ampersands 
+     * Tests replacing single ampersands with the entity, but leaving double ampersands
      * and ampsersand-octothorpe combinations intact.
      *
      * @return void
@@ -147,7 +147,7 @@ class JFilterOutputTest extends PHPUnit_Framework_TestCase
     		'Should replace single ampersands with HTML entity'
     	);
     }
-    
+
 	/**
 	 * dataSet for Clean text
 	 *

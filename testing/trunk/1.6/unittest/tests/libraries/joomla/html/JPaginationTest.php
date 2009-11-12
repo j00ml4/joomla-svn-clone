@@ -24,7 +24,7 @@ class JPaginationTest extends PHPUnit_Framework_TestCase
 	 *
 	 * This is a basic data driven test.  It takes the data passed, runs the constructor
 	 * and make sure the appropriate values get setup.
-	 * 
+	 *
 	 * @dataProvider constructorProvider
 	 */
 	public function testConstructor($total, $limitstart, $limit, $expected)
@@ -38,7 +38,7 @@ class JPaginationTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected['pages.current'], $pagination->get('pages.current'), 'Wrong Current Page');
 		$this->assertEquals($expected['pages.start'], $pagination->get('pages.start'), 'Wrong Start Page');
 		$this->assertEquals($expected['pages.stop'], $pagination->get('pages.stop'), 'Wrong Stop Page');
-		unset($pagination);		
+		unset($pagination);
 	}
 
 

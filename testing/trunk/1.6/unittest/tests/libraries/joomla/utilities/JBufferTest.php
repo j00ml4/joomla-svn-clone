@@ -62,7 +62,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
 			),
 		);
 	}
-	
+
     /**
      * testing stream_open().
      *
@@ -75,7 +75,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
      * @return void
      * @dataProvider casesOpen
      */
-    public function testStreamOpen( $path, $mode, $options, $opened_path, $expected ) 
+    public function testStreamOpen( $path, $mode, $options, $opened_path, $expected )
     {
     	$this->object->stream_open($path, $mode, $options, $opened_path);
     	$this->assertThat(
@@ -119,7 +119,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
     	$this->object->name = $name;
     	$this->object->position = $position;
     	$this->object->_buffers[$name] = $buffer;
-    	
+
         $this->assertThat(
         	$expected,
         	$this->equalTo($this->object->stream_read($count))
@@ -162,7 +162,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
     	$this->object->position = $position;
     	$this->object->_buffers[$name] = $buffer;
     	$output = $this->object->stream_write($write);
-    	
+
         $this->assertThat(
         	$expected,
         	$this->equalTo($this->object->_buffers[$name])
@@ -178,7 +178,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
     {
     	$pos = 10;
     	$this->object->position = $pos;
-    	
+
     	$this->assertThat(
     		$pos,
     		$this->equalTo($this->object->stream_tell())
@@ -224,7 +224,7 @@ class JBufferTest extends PHPUnit_Framework_TestCase
     	$this->object->name = $name;
     	$this->object->position = $position;
     	$this->object->_buffers[$name] = $buffer;
-    	
+
         $this->assertThat(
         	$expected,
         	$this->equalTo($this->object->stream_eof())
@@ -328,12 +328,12 @@ class JBufferTest extends PHPUnit_Framework_TestCase
      * @return void
      * @dataProvider casesSeek
      */
-    public function testStreamSeek( $buffer, $name, $position, $offset, $whence, 
+    public function testStreamSeek( $buffer, $name, $position, $offset, $whence,
     $expected, $expectedPos ) {
     	$this->object->name = $name;
     	$this->object->position = $position;
     	$this->object->_buffers[$name] = $buffer;
-    	
+
         $this->assertThat(
         	$expected,
         	$this->equalTo($this->object->stream_seek($offset, $whence))

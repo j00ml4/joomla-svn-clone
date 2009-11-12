@@ -26,7 +26,7 @@ class JModuleHelperTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		/* Need to build Mock class for abstract inherit
 		 * as this causes errors currently:
-		 * 
+		 *
 		 * $this->object = new JModuleHelper;
 		 */
 	}
