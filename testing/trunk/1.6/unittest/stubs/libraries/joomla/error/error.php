@@ -44,6 +44,12 @@ abstract class JError
 	}
 	public static function & raiseError($code, $msg, $info = null)
 	{
+		JError::$exception = array (
+			'code' => $code,
+			'msg' => $msg,
+			'info' => $info
+		);
+		return JError::$exception;
 	}
 	public static function & raiseWarning($code, $msg, $info = null)
 	{
