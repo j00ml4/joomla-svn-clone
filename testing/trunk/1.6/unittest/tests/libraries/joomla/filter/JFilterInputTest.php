@@ -397,7 +397,7 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 			),
 			'Bad Attribute Name' => array(
 				'',
-				'<br 300 />',
+				'<br 3bb />',
 				'<br />',
 				'From generic cases',
 			),
