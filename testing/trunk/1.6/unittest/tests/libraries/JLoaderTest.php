@@ -139,8 +139,8 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
     	}
 
     	$this->assertThat(
-    		$expect,
-    		$this->equalTo($output),
+    		$output,
+    		$this->equalTo($expect),
     		$message
     	);
     }
