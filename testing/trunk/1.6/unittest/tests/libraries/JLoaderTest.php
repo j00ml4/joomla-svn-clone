@@ -203,11 +203,6 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
 				true,
 				'ArrayObject should exist',
 			),
-			'BogusLoad' => array(
-				'BogusLoad',
-				true,
-				'BogusLoad should load properly',
-			),
 			'Fred' => array(
 				'Fred',
 				false,
@@ -231,8 +226,8 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
     public function testLoad( $object, $expect, $message )
     {
     	$this->assertThat(
-    		$expect,
-    		$this->equalTo(JLoader::load($object)),
+    		JLoader::load($object),
+    		$this->equalTo($expect),
     		$message
     	);
     }
