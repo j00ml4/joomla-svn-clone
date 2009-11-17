@@ -2,6 +2,7 @@
 /**
  * Inspector classes for the forms library.
  */
+require_once JPATH_BASE.'/libraries/joomla/form/form.php';
 
 class JFormInspector extends JForm
 {
