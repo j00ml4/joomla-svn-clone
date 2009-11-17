@@ -1,8 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework.php';
-
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'plugin' . DS . 'helper.php';
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'user' . DS . 'authentication.php';
+require_once JPATH_BASE . '/libraries/joomla/user/authentication.php';
 
 /**
  * Test class for JAuthentication.
@@ -21,7 +19,7 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-//        $this->object = new JAuthentication;
+        //$this->object = new JAuthentication;
     }
 
     /**
@@ -33,14 +31,28 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Implement testGetInstance().
+     * Testing GetInstance().
+     *
+     * @return void
      */
     public function testGetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+    	$instance1 = JAuthentication::getInstance();
+    	$this->assertThat(
+    		JError::getError(),
+    		$this->equalTo(null)
+    	);
+
+    	$instance2 = JAuthentication::getInstance();
+    	$this->assertThat(
+    		JError::getError(),
+    		$this->equalTo(null)
+    	);
+
+		$this->assertThat(
+			$instance1,
+			$this->equalTo($instance2)
+		);
     }
 
     /**
