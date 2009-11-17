@@ -3,11 +3,11 @@
 defined('JPATH_BASE') or die;
 
 // Error Definition: Illegal Options
-define('JERROR_ILLEGAL_OPTIONS', 1);
+defined('JERROR_ILLEGAL_OPTIONS') or define('JERROR_ILLEGAL_OPTIONS', 1);
 // Error Definition: Callback does not exist
-define('JERROR_CALLBACK_NOT_CALLABLE', 2);
+defined('JERROR_CALLBACK_NOT_CALLABLE') or define('JERROR_CALLBACK_NOT_CALLABLE', 2);
 // Error Definition: Illegal Handler
-define('JERROR_ILLEGAL_MODE', 3);
+defined('JERROR_ILLEGAL_MODE') or define('JERROR_ILLEGAL_MODE', 3);
 
 
 abstract class JError
