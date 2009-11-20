@@ -54,7 +54,15 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
+    	include_once JPATH_BASE . '/libraries/joomla/plugin/helper.php';
+    	include_once JPATH_BASE . '/libraries/joomla/user/user.php';
+    	
+		$user = new JUser;
+		
     	$mockSession = $this->getMock('JSession');
+    	$mockSession->expects($this->any())->method('get')->with($this->equalTo('user'))->will(
+    		$this->returnValue($user)
+    	);
     	JFactory::$session = $mockSession;
 
     	$instance1 = JAuthentication::getInstance();
@@ -88,6 +96,21 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
         	'This test has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Testing the response creation
+     *
+     * @return void
+     */
+    public function testAuthenticationResponse()
+    {
+    	$response = new JAuthenticationResponse;
+    	
+        $this->assertThat(
+        	$response,
+        	$this->isInstanceOf('JAuthenticationResponse')
         );
     }
 }
