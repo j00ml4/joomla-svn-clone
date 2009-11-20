@@ -8,6 +8,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 require_once 'PHPUnit/Framework.php';
+require_once JPATH_BASE . '/libraries/joomla/application/application.php';
 require_once JPATH_BASE . '/libraries/joomla/utilities/utility.php';
 /**
  * Test class for JUtility.
@@ -15,7 +16,7 @@ require_once JPATH_BASE . '/libraries/joomla/utilities/utility.php';
  *
  * @package    Joomla.UnitTest
  * @subpackage Utilities
- * @runTestsInSeparateProcesses
+ *
  */
 class JUtilityTest extends PHPUnit_Framework_TestCase
 {
@@ -325,7 +326,7 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testGetToken( $data, $expResult )
     {
-    	$mockSession = $this->getMock('JSession', array('getFormToken'));
+    	$mockSession = $this->getMock('JSession');
     	$mockSession->expects($this->once())->method('getFormToken')->will(
     		$this->returnValue($expResult)
     	);
