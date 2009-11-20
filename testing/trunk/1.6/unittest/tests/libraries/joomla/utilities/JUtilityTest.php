@@ -254,8 +254,8 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testSendAdminMail( $args, $expectedArgs, $expResult )
     {
-    	$mockMailer = $this->getMock('JMail', array('sendMail'));
-    	$mockMailer->expects($this->once())->method('sendMail')->with(
+    	$mockMailer = $this->getMock('JMail', array('sendAdminMail'));
+    	$mockMailer->expects($this->once())->method('sendAdminMail')->with(
     		$this->equalTo($expectedArgs['adminName']), $this->equalTo($expectedArgs['adminEmail']),
 			$this->equalTo($expectedArgs['email']), $this->equalTo($expectedArgs['type']),
     	    $this->equalTo($expectedArgs['title']), $this->equalTo($expectedArgs['author']),
@@ -264,7 +264,7 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
     	JFactory::$mailer = $mockMailer;
 
 		$this->assertThat(
-			JUtility::sendMail(
+			JUtility::sendAdminMail(
 				$args['adminName'], $args['adminEmail'], $args['email'],
 				$args['type'], $args['title'], $args['author'], $args['url']
 			),
@@ -326,7 +326,7 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testGetToken( $data, $expResult )
     {
-    	$mockSession = $this->getMock('JSession');
+    	$mockSession = $this->getMock('JSession', array('__construct', 'getFormToken'));
     	$mockSession->expects($this->once())->method('getFormToken')->will(
     		$this->returnValue($expResult)
     	);
@@ -338,19 +338,40 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
     	);
     }
 
+	/**
+	 * Test cases for parseAttributes
+	 *
+	 * @return array
+	 */
+	function casesParseAttributes()
+	{
+		return array(
+			'jdoc' => array(
+				'<jdoc style="fred" />',
+				array( 'style' => 'fred' )
+			),
+			'xml' => array(
+				"<img hear=\"something\" there=\"somethingelse\" />",
+				array( 'hear' => 'something', 'there' => 'somethingelse' )
+			),
+		);
+	}
     /**
      * Test parseAttributes
      *
+     * @param	string	tag to be parsed
+     * @param	array	resulting array of attribute values
+     *
      * @return void
      *
-     * @todo Implement testParseAttributes().
+     * @dataProvider casesParseAttributes
      */
-    public function testParseAttributes()
+    public function testParseAttributes( $tag, $expected )
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-        	'This test has not been implemented yet.'
-        );
+    	$this->assertThat(
+    		JUtility::parseAttributes($tag),
+    		$this->equalTo($expected)
+    	);
     }
 
 	/**
@@ -393,18 +414,51 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
     	);
     }
 
+	/**
+	 *	Test cases for isWinOS
+	 *
+	 * @return array
+	 */
+	function casesDump()
+	{
+		return array(
+			'false' => array(
+				array(
+					'fred' => 12,
+					'blue' => 2,
+					'banana' => 1,
+				),
+				false,
+				"<pre>array (\n  'fred' => 12,\n  'blue' => 2,\n  'banana' => 1,\n)</pre>"
+			),
+			'true' => array(
+				array(
+					'fred' => 12,
+					'blue' => 2,
+					'banana' => 1,
+				),
+				true,
+				"<pre>array (\n  'fred' =&gt; 12,\n  'blue' =&gt; 2,\n  'banana' =&gt; 1,\n)</pre>"
+			),
+		);
+	}
+
     /**
      * Test dump
      *
+     * @param	mixed	variable to be dumped
+     * @param	bool	Should text be htmlsafe
+     * @param	string	expected result
+     *
      * @return void
-     * @todo Implement testDump().
+     * @dataProvider casesDump
      */
-    public function testDump()
+    public function testDump( $value, $htmlsafe, $expected )
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestSkipped(
-        	'This function is deprecated.'
-        );
+    	$this->assertThat(
+    		JUtility::dump($value, $htmlsafe),
+    		$this->equalTo($expected)
+    	);
     }
 
     /**
@@ -415,24 +469,58 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testArrayUnshiftRef()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestSkipped(
-        	'This function is deprecated.'
-        );
+    	$input = array( 3, 5, 7 );
+    	$expected = array( "fred", 3, 5, 7 );
+    	$value = "fred";
+    	
+    	$this->assertThat(
+    		JUtility::array_unshift_ref($input, $value),
+    		$this->equalTo(4)
+    	);
+    	$this->assertThat(
+    		$input,
+    		$this->equalTo($expected)
+    	);
     }
 
+	/**
+	 * Test cases for return_bytes
+	 *
+	 * @return array
+	 */
+	function casesReturnBytes()
+	{
+		return array(
+			'G' => array(
+				'100G',
+				107374182400,
+			),
+			'M' => array(
+				'10M',
+				10485760,
+			),
+			'K' => array(
+				'100K',
+				102400,
+			),
+		);
+	}
+	
     /**
      * Test return_bytes
      *
+     * @param	string	Descirption of size in multiples of 1024
+     * @param	int		Size in bytes
+     *
      * @return void
-     * @todo Implement testReturn_bytes().
+     * @dataProvider casesReturnBytes
      */
-    public function testReturnBytes()
+    public function testReturnBytes( $bytes, $expected )
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestSkipped(
-        	'This function is deprecated.'
-        );
+    	$this->assertThat(
+    		JUtility::return_bytes($bytes),
+    		$this->equalTo($expected)
+    	);
     }
 }
 ?>
