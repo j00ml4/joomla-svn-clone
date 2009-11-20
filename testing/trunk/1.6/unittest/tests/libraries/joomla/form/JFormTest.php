@@ -1,29 +1,83 @@
 <?php
 /**
+ * JFormTest.php -- unit testing file for JForm
+ *
  * @version		$Id$
+ * @package    Joomla.UnitTest
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 /**
- * Example test case.
+ * Test class for JForm.
+ *
+ * @package    Joomla.UnitTest
+ * @subpackage Utilities
+ *
  */
 class JFormTest extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * Saves the Factory pointers
+	 *
+	 * @return void
+	 */
+	protected function saveFactoryState()
+	{
+		$this->factoryState['application'] = JFactory::$application;
+		$this->factoryState['config'] = JFactory::$config;
+		$this->factoryState['session'] = JFactory::$session;
+		$this->factoryState['language'] = JFactory::$language;
+		$this->factoryState['document'] = JFactory::$document;
+		$this->factoryState['acl'] = JFactory::$acl;
+		$this->factoryState['database'] = JFactory::$database;
+		$this->factoryState['mailer'] = JFactory::$mailer;
+	}
+
+	/**
+	 * Saves the Factory pointers
+	 *
+	 * @return void
+	 */
+	protected function restoreFactoryState()
+	{
+		JFactory::$application = $this->factoryState['application'];
+		JFactory::$config = $this->factoryState['config'];
+		JFactory::$session = $this->factoryState['session'];
+		JFactory::$language = $this->factoryState['language'];
+		JFactory::$document = $this->factoryState['document'];
+		JFactory::$acl = $this->factoryState['acl'];
+		JFactory::$database = $this->factoryState['database'];
+		JFactory::$mailer = $this->factoryState['mailer'];
+	}
+
+	/**
+	 * set up for testing
+	 *
+	 * @return void
+	 */
 	public function setUp()
 	{
+		$this->saveFactoryState();
 		jimport('joomla.form.form');
-		require_once 'inspectors.php';
+		include_once 'inspectors.php';
 	}
 
+	/**
+	 * Tear down test
+	 *
+	 * @return void
+	 */
 	function tearDown()
 	{
+		$this->restoreFactoryState();
 	}
 
-	//
-	// Test the static methods.
-	//
-
+	/**
+	 * Testing the static methods.
+	 *
+	 * @return void
+	 */
 	public function testAddFormPath()
 	{
 		// Check the default behaviour.
@@ -52,15 +106,23 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Testing getInstance
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getInstance tests
+	 */
 	public function testGetInstance()
 	{
 		//$form = JFormInspector::getInstance
 	}
 
-	//
-	// Test methods used by the instantiated object.
-	//
-
+	/**
+	 * Testing methods used by the instantiated object.
+	 *
+	 * @return void
+	 */
 	public function testConstruct()
 	{
 		// Check the empty contructor for basic errors.
@@ -93,23 +155,51 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Testing addField
+	 *
+	 * @return void
+	 *
+	 * @TODO implement addField tests
+	 */
 	public function testAddField()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing addFields
+	 *
+	 * @return void
+	 *
+	 * @TODO implement addFields tests
+	 */
 	public function testAddFields()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing bind
+	 *
+	 * @return void
+	 *
+	 * @TODO implement bind tests
+	 */
 	public function testBind()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing filter
+	 *
+	 * @return void
+	 */
 	public function testFilter()
 	{
+    	$mockSession = $this->getMock('JSession');
+    	JFactory::$session = $mockSession;
 		// Adjust the timezone offset to a known value.
 		$config = JFactory::getConfig();
 		$config->setValue('config.offset', 10);
@@ -191,41 +281,97 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getField
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getField tests
+	 */
 	public function testGetField()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getFieldAttributes
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getFieldAttributes tests
+	 */
 	public function testGetFieldAttributes()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getFields
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getFields tests
+	 */
 	public function testGetFields()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getFieldSets
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getFieldSets tests
+	 */
 	public function testGetFieldsets()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getGroups
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getGroups tests
+	 */
 	public function testGetGroups()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getInput
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getInput tests
+	 */
 	public function testGetInput()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getLabel
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getLabel tests
+	 */
 	public function testGetLabel()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing getNameSetName
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getNameSetName tests
+	 */
 	public function testGetNameSetName()
 	{
 		$form = new JForm;
@@ -241,11 +387,25 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Testing getValue
+	 *
+	 * @return void
+	 *
+	 * @TODO implement getValue tests
+	 */
 	public function testGetValue()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing load
+	 *
+	 * @return void
+	 *
+	 * @TODO implement load tests
+	 */
 	public function testLoad()
 	{
 		$form = new JFormInspector;
@@ -313,41 +473,95 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Testing loadFieldsXML
+	 *
+	 * @return void
+	 *
+	 * @TODO implement loadFieldsXML tests
+	 */
 	public function testLoadFieldsXML()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing loadFieldType
+	 *
+	 * @return void
+	 *
+	 * @TODO implement loadFieldType tests
+	 */
 	public function testLoadFieldType()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing loadFolder
+	 *
+	 * @return void
+	 *
+	 * @TODO implement loadFolder tests
+	 */
 	public function testLoadFolder()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing removeField
+	 *
+	 * @return void
+	 *
+	 * @TODO implement removeField tests
+	 */
 	public function testRemoveField()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing removeGroup
+	 *
+	 * @return void
+	 *
+	 * @TODO implement removeGroup tests
+	 */
 	public function testRemoveGroup()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing setField
+	 *
+	 * @return void
+	 *
+	 * @TODO implement setField tests
+	 */
 	public function testSetField()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing setFieldAttribute
+	 *
+	 * @return void
+	 *
+	 * @TODO implement setFieldAttribute tests
+	 */
 	public function testSetFieldAttribute()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing setFields
+	 *
+	 * @return void
+	 */
 	public function testSetFields()
 	{
 		jimport('joomla.utilities.simplexml');
@@ -382,11 +596,25 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Testing setValue
+	 *
+	 * @return void
+	 *
+	 * @TODO implement setValue tests
+	 */
 	public function testSetValue()
 	{
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Testing validate
+	 *
+	 * @return void
+	 *
+	 * @TODO implement validate tests
+	 */
 	public function testValidate()
 	{
 		$this->markTestIncomplete();
