@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Nov-2009 Ian MacLennan
+# Added @runTestsInSeparateProcesses annotations to JUtilityTest and JAuthenticationTest so that test suite would run.
+
 06-Nov-2009 Ed Stafford
 + Added library/joomla/error skeletons in unittest
 

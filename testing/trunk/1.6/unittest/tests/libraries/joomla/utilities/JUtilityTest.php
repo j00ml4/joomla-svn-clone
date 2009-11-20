@@ -15,6 +15,7 @@ require_once JPATH_BASE . '/libraries/joomla/utilities/utility.php';
  *
  * @package    Joomla.UnitTest
  * @subpackage Utilities
+ * @runTestsInSeparateProcesses
  */
 class JUtilityTest extends PHPUnit_Framework_TestCase
 {
