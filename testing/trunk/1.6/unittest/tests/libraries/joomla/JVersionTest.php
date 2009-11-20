@@ -131,9 +131,12 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetHelpVersion( $release, $expect, $message )
 	{
-		if (is_null($release)) {
+		if (is_null($release))
+		{
 			$output = $this->object->getHelpVersion();
-		} else {
+		}
+		else
+		{
 			$this->object->RELEASE 	= '1.0';
 			$output = $this->object->getHelpVersion();
 		}
@@ -311,21 +314,65 @@ class JVersionTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testSettingCorrectUserAgentString( $component, $mask, $addVersion,
 	$expect, $message, $useDefaults ) {
-    	if ( $useDefaults ) {
-	    	$output = $this->object->getUserAgent();
-	    } else if (is_null($mask)) {
-	    	$output = $this->object->getUserAgent($component);
-	    } else if (is_null($addVersion)) {
-	    	$output = $this->object->getUserAgent($component, $mask);
-	    } else {
-	    	$output = $this->object->getUserAgent($component, $mask, $addVersion);
-	    }
-
+		if ( $useDefaults )
+		{
+			$output = $this->object->getUserAgent();
+		}
+		else if (is_null($mask))
+		{ 
+			$output = $this->object->getUserAgent($component);
+		}
+		else if (is_null($addVersion))
+		{
+			$output = $this->object->getUserAgent($component, $mask);
+		}
+		else
+		{
+			$output = $this->object->getUserAgent($component, $mask, $addVersion);
+		} 
 		$this->assertEquals(
 			$expect,
 			$output,
 			$message
 		);
+	}
+
+	/**
+	 * This checks for correct operation of the __set_state() magic function, if it exists.
+	 *
+	 * @return void
+	 */
+	public function testSetState()
+	{
+		if (method_exists('JVersion', '__set_state'))
+		{
+			$testData = array(
+				'PRODUCT' => 'Joomla!',
+				'RELEASE' => '1.6',
+				'DEV_STATUS' => 'Alpha',
+				'DEV_LEVEL' => '0',
+				'BUILD' => '',
+				'CODENAME' => 'Hope',
+				'RELDATE' => '22-June-2009',
+				'RELTIME' => '23:00',
+				'RELTZ' => 'GMT',
+				'COPYRIGHT' => 'Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.',
+				'URL' => '<a href="http://www.joomla.org">Joomla!</a> is Free Software released under the GNU General Public License.'
+			);
+			
+			$testInstance = $this->object->__set_state($testData);
+			foreach ($testData as $key => $value)
+			{
+				$this->assertThat(
+					$testInstance->$key,
+					$this->equalTo($value)
+				);
+			}
+			$this->assertThat(
+				$testInstance,
+				$this->isInstanceOf('JVersion')
+			);
+		}
 	}
 }
 
