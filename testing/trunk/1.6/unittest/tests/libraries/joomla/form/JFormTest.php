@@ -198,7 +198,13 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testFilter()
 	{
-    	$mockSession = $this->getMock('JSession');
+		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
+		
+		$user = new JUser;
+    	$mockSession = $this->getMock('JSession', array('__construct', 'get'));
+    	$mockSession->expects($this->once())->method('get')->will(
+    		$this->returnValue($user)
+    	);
     	JFactory::$session = $mockSession;
 		// Adjust the timezone offset to a known value.
 		$config = JFactory::getConfig();
