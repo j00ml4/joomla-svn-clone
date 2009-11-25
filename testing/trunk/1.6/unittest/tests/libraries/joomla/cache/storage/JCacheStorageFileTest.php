@@ -5,8 +5,6 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-require_once JPATH_BASE.'/libraries/joomla/cache/storage.php';
-require_once JPATH_BASE.'/libraries/joomla/cache/storage/file.php';
 
 /**
  * Test class for JCacheStorageFile.
@@ -26,7 +24,10 @@ class JCacheStorageFileTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
-		//$this->object = new JCacheStorageFile;
+		include_once JPATH_BASE.'/libraries/joomla/cache/storage.php';
+		include_once JPATH_BASE.'/libraries/joomla/cache/storage/file.php';
+		
+		$this->object = JCacheStorage::getInstance('file');
 	}
 
 	/**
@@ -39,51 +40,138 @@ class JCacheStorageFileTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @todo Implement testGet().
+	 * Test Cases for get() / store()
+	 *
+	 * @return array
 	 */
-	public function testGet() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+	function casesStore()
+	{
+		return array(
+			'souls' => array(
+				42,
+				'testing',
+				'And this is the cache that tries men\'s souls',
+				true,
+				false,
+			),
+			'again' => array(
+				43,
+				'testing',
+				'The summer coder and the sunshine developer.',
+				true,
+				false,
+			),
+		);
 	}
 
 	/**
-	 * @todo Implement testStore().
+	 * Testing store() and get()
+	 *
+	 * @param	string	cache element ID
+	 * @param	string	cache group
+	 * @param	string	data to be cached
+	 * @param	string	expected return
+	 *
+	 * @return void
+	 * @dataProvider casesStore
 	 */
-	public function testStore() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+	public function testStoreAndGet( $id, $group, $data, $checktime, $expected )
+	{
+		$this->assertThat(
+			$this->object->store($id, $group, $data),
+			$this->isTrue(),
+			'Should store the data properly'
+		);
+
+		$this->assertThat(
+			$this->object->get($id, $group, $checktime),
+			$this->equalTo($data),
+			'Should retrieve the data properly'
+		);
 	}
 
 	/**
 	 * @todo Implement testRemove().
 	 */
 	public function testRemove() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->object->store(42, 'testing', 'And this is the cache that tries men\'s souls');
+		
+		$this->assertThat(
+			$this->object->get(42, 'testing', true),
+			$this->equalTo('And this is the cache that tries men\'s souls')
+		);
+		$this->assertThat(
+			$this->object->remove(42, 'testing'),
+			$this->isTrue()
+		);
+		$this->assertThat(
+			$this->object->get(42, 'testing', true),
+			$this->isFalse()
+		);
 	}
 
 	/**
 	 * @todo Implement testClean().
 	 */
 	public function testClean() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->object->store(42, 'testing', 'And this is the cache that tries men\'s souls');
+		$this->object->store(43, 'testing', 'The summer coder and the sunshine developer.');
+		$this->object->store(44, 'nottesting', 'Now is the time for all good developers to cry');
+		$this->object->store(45, 'testing', 'Do not go gentle into that good night');
+		
+		$this->assertThat(
+			$this->object->get(42, 'testing', true),
+			$this->equalTo('And this is the cache that tries men\'s souls')
+		);
+		$this->assertThat(
+			$this->object->clean('testing', 'group'),
+			$this->isTrue()
+		);
+		$this->assertThat(
+			$this->object->get(42, 'testing', true),
+			$this->isFalse()
+		);
+		$this->assertThat(
+			$this->object->get(43, 'testing', true),
+			$this->isFalse()
+		);
+		$this->assertThat(
+			$this->object->get(44, 'nottesting', true),
+			$this->equalTo('Now is the time for all good developers to cry')
+		);
+		$this->assertThat(
+			$this->object->get(45, 'testing', true),
+			$this->isFalse()
+		);
+		$this->assertThat(
+			$this->object->clean('testing', 'notgroup'),
+			$this->equalTo(true)
+		);
+		$this->assertThat(
+			$this->object->get(44, 'nottesting', true),
+			$this->isFalse()
+		);
 	}
 
 	/**
 	 * @todo Implement testGc().
 	 */
 	public function testGc() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->assertThat(
+			$this->object->gc(),
+			$this->isTrue()
+		);
 	}
 
 	/**
-	 * @todo Implement testTest().
+	 * Testing test().
 	 */
 	public function testTest() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->assertThat(
+			$this->object->test(),
+			$this->isTrue(),
+			'Claims File is not loaded.'
+		);
 	}
 
 	/**
