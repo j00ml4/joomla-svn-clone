@@ -51,6 +51,7 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
      * Testing GetInstance().
      *
      * @return void
+     * @group breaks     
      */
     public function testGetInstance()
     {
