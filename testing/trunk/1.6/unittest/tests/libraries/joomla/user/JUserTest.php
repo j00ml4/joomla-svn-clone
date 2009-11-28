@@ -222,6 +222,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider casesGetInstance
+     * @group breaks     
      */
     public function testGetInstance( $userid, $expected, $error )
     {
@@ -242,6 +243,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      * Testing individual parameter control.
      *
      * @return void
+     * @group breaks     
      */
     public function testParameters()
     {
@@ -302,6 +304,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider casesAuthorize
+     * @group breaks     
      */
     public function testAuthorize( $action, $asset, $expected )
     {
@@ -328,6 +331,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider casesAuthorize
+     * @group breaks     
      */
     public function testAuthorise( $action, $asset, $expected )
     {
@@ -376,6 +380,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider	casesAuthorizedLevels
+     * @group breaks     
      */
     public function testAuthorisedLevels( $user, $expected )
     {
@@ -399,6 +404,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      * Testing setLastVisit().
      *
      * @return void
+     * @group breaks     
      */
     public function testSetLastVisit()
     {
@@ -417,6 +423,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @todo Implement testGetParameters().
+     * @group breaks     
      */
     public function testGetParameters()
     {
@@ -431,6 +438,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @todo Implement testSetParameters().
+     * @group breaks     
      */
     public function testSetParameters()
     {
@@ -486,6 +494,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider casesGetTable
+     * @group breaks     
      */
     public function testGetTable( $type, $prefix, $expClass, $expName )
     {
@@ -511,6 +520,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @todo Implement testBind().
+     * @group breaks     
      */
     public function testBind()
     {
@@ -524,6 +534,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      * Testing creation and deletion of users
      *
      * @return void
+     * @group breaks     
      */
     public function testCreateDeleteUser()
     {
@@ -633,6 +644,7 @@ class JUserTest extends PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider casesLoad
+     * @group breaks     
      */
     public function testLoad( $id, $expected )
     {
@@ -644,4 +656,4 @@ class JUserTest extends PHPUnit_Framework_TestCase
     	);
     }
 }
-?>
+
