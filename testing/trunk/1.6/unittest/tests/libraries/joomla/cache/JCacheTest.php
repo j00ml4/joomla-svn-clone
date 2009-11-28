@@ -112,7 +112,7 @@ class JCacheTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return void
 	 * @dataProvider casesGetInstance
-	 * @groups breaks
+	 * @group breaks
 	 */
 	public function testGetInstance( $handler, $options, $expClass)
 	{
