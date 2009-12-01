@@ -3,8 +3,13 @@
  * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package		JoomlaFramework
  */
-
+ 
+ 
+/**
+ * @package		JoomlaFramework
+ */
 class JRulesTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp()

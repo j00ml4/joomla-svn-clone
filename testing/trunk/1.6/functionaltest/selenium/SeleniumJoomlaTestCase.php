@@ -12,7 +12,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
 	var $cfg; // configuration so tests can get at the fields
 
-	function setUp()
+	public function setUp()
 	{
 		$cfg = new SeleniumConfig();
 		$this->cfg = $cfg; // save current configuration
@@ -23,6 +23,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogin()
 	{
+		$this->setUp();
 		echo "Logging in to admin.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator/index.php?option=com_login");
