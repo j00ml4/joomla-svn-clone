@@ -18,12 +18,15 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->cfg = $cfg; // save current configuration
 		$this->setBrowser($cfg->browser);
 		$this->setBrowserUrl($cfg->host.$cfg->path);
+		if(isset($cfg->selhost)) {
+			$this->setHost($cfg->selhost);
+		}
 		echo 'Starting '.get_class($this).".\n";
 	}
 
 	function doAdminLogin()
 	{
-		$this->setUp();
+		//$this->setUp();
 		echo "Logging in to admin.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator/index.php?option=com_login");
