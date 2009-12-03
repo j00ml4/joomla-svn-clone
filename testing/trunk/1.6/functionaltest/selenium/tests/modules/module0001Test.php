@@ -37,7 +37,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
-		$this->type("filter_search", "Login Form");
+		$this->type("search", "Login Form");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("//img[@alt='Unpublished']");
@@ -52,7 +52,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
-		$this->type("filter_search", "Login Form");
+		$this->type("search", "Login Form");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("//img[@alt='Published']");
@@ -65,7 +65,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
-		$this->type("filter_search", "Login Form");
+		$this->type("search", "Login Form");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("//img[@alt='Unpublished']");
