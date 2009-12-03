@@ -64,7 +64,7 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		$this->click("//ul[@id='submenu']/li[2]/a");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("User Manager: Groups"));
-		$this->click("link=Levels");
+		$this->click("link=Access Levels");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("User Manager: Access Levels"));
 		$this->click("link=Groups");
