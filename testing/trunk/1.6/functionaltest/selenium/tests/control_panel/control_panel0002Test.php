@@ -110,7 +110,6 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 			array_push($this->verificationErrors, $e->toString());
 		}
 
-		$this->waitForPageToLoad("30000");
 		echo "Navigate to Menu Manager.\n";
 		$this->click("link=Menu Manager");
 		$this->waitForPageToLoad("30000");
