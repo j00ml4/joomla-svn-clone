@@ -16,7 +16,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 {
 
  
-  function testMyTestCase()
+  function testCreateRemoveCategory()
   {
   	$this->setUp();
   	$this->doAdminLogin();

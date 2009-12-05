@@ -15,7 +15,7 @@ require_once 'SeleniumJoomlaTestCase.php';
 class ControlPanel0002 extends SeleniumJoomlaTestCase
 {
 
-	function testMyTestCase()
+	function testMenuCheck()
 	{
 		$this->setUp();
 		$this->doAdminLogin();
