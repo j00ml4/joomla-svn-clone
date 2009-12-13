@@ -98,11 +98,11 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		$this->click("//li[@id='toolbar-cancel']/a/span");
 		$this->waitForPageToLoad("30000");
 		echo "Navigate to Read Private Messages.\n";
-		$this->click("link=Read Private Messages");
+		$this->click("link=0 Messages");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Read Private Messages"));
+		$this->assertTrue($this->isTextPresent("Private Messages"));
 		echo "Navigate to New Private Message.\n";
-		$this->click("link=New Private Message");
+		$this->click("link=New private message");
 		$this->waitForPageToLoad("30000");
 		try {
 			$this->assertTrue($this->isTextPresent("New Private Message"));
