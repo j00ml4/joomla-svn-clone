@@ -9,7 +9,7 @@
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'TestSuite::main');
 }
-set_include_path(get_include_path() . PATH_SEPARATOR . './PEAR/');
+set_include_path(get_include_path() . PATH_SEPARATOR . './PEAR/' . PATH_SEPARATOR . '../');
  
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
@@ -17,6 +17,9 @@ require_once 'control_panel/control_panel0001Test.php';
 require_once 'control_panel/control_panel0002Test.php';
 require_once 'control_panel/control_panel0003Test.php';
 require_once 'control_panel/control_panel0004Test.php';
+require_once 'articles/article0001Test.php';
+require_once 'com_users/user0001Test.php';
+require_once 'modules/module0001Test.php';
  
 class TestSuite
 {
@@ -32,6 +35,9 @@ class TestSuite
         $suite->addTestSuite('ControlPanel0002');
         $suite->addTestSuite('ControlPanel0003');
         $suite->addTestSuite('ControlPanel0004');
+        $suite->addTestSuite('Article0001');
+        $suite->addTestSuite('User0001Test');
+        $suite->addTestSuite('Module0001');
 
         return $suite;
     }
