@@ -2,6 +2,7 @@
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'utilities' . DS . 'string.php';
+require_once 'JString-helper-dataset.php';
 
 /**
  * Test class for JString.
@@ -31,70 +32,83 @@ class JStringTest extends PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @todo Implement testStrpos().
-     */
-    public function testStrpos()
+	static public function strposData() {
+		return JStringTest_DataSet::$strposTests;
+	}
+
+	static public function strrposData() {
+		return JStringTest_DataSet::$strrposTests;
+	}
+
+	static public function substrData() {
+		return JStringTest_DataSet::$substrTests;
+	}
+
+	static public function strtolowerData() {
+		return JStringTest_DataSet::$strtolowerTests;
+	}
+
+	static public function strtoupperData() {
+		return JStringTest_DataSet::$strtoupperTests;
+	}
+
+	static public function strlenData() {
+		return JStringTest_DataSet::$strlenTests;
+	}
+
+	/**
+	 * @dataProvider strposData
+	 */
+    public function testStrpos($haystack, $needle, $offset = 0, $expect)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+		$actual = JString::strpos($haystack, $needle, $offset);
+		$this->assertEquals($expect, $actual);
+    }
+
+	/**
+	 * @dataProvider strrposData
+	 */
+    public function testStrrpos($haystack, $needle, $offset = 0, $expect)
+    {
+		$actual = JString::strrpos($haystack, $needle, $offset);
+		$this->assertEquals($expect, $actual);
+    }
+
+
+	/**
+	 * @dataProvider substrData
+	 */
+    public function testSubstr($string, $start, $length = false, $expect)
+    {
+		$actual = JString::substr($string, $start, $length);
+		$this->assertEquals($expect, $actual);
+    }
+
+	/**
+	 * @dataProvider strtolowerData
+	 */
+    public function testStrtolower($string, $expect)
+    {
+		$actual = JString::strtolower($string);
+		$this->assertEquals($expect, $actual);
     }
 
     /**
-     * @todo Implement testStrrpos().
+	 * @dataProvider strtoupperData
      */
-    public function testStrrpos()
+    public function testStrtoupper($string, $expect)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+		$actual = JString::strtoupper($string);
+		$this->assertEquals($expect, $actual);
     }
 
-    /**
-     * @todo Implement testSubstr().
-     */
-    public function testSubstr()
+	/**
+	 * @dataProvider strlenData
+	 */
+    public function testStrlen($string, $expect)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testStrtolower().
-     */
-    public function testStrtolower()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testStrtoupper().
-     */
-    public function testStrtoupper()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testStrlen().
-     */
-    public function testStrlen()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+		$actual = JString::strlen($string);
+		$this->assertEquals($expect, $actual);
     }
 
     /**
