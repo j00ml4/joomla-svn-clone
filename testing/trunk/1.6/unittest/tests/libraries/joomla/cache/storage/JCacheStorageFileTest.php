@@ -27,7 +27,7 @@ class JCacheStorageFileTest extends PHPUnit_Framework_TestCase {
 		include_once JPATH_BASE.'/libraries/joomla/cache/storage.php';
 		include_once JPATH_BASE.'/libraries/joomla/cache/storage/file.php';
 		
-		$this->object = JCacheStorage::getInstance('file');
+		$this->object = JCacheStorage::getInstance('file', array('cachebase' => JPATH_BASE.'/cache'));
 	}
 
 	/**
@@ -144,7 +144,7 @@ class JCacheStorageFileTest extends PHPUnit_Framework_TestCase {
 			$this->isFalse()
 		);
 		$this->assertThat(
-			$this->object->clean('testing', 'notgroup'),
+			(bool)$this->object->clean('testing', 'notgroup'),
 			$this->equalTo(true)
 		);
 		$this->assertThat(
@@ -158,7 +158,7 @@ class JCacheStorageFileTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGc() {
 		$this->assertThat(
-			$this->object->gc(),
+			(bool)$this->object->gc(),
 			$this->isTrue()
 		);
 	}

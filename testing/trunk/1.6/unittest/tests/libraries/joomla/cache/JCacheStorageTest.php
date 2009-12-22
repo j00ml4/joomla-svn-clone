@@ -84,6 +84,7 @@ class JCacheStorageTest extends PHPUnit_Framework_TestCase
 					'language'		=> 'en-GB',
 					'locking'		=> true,
 					'lifetime'		=> null,
+					'cachebase'		=> JPATH_BASE.'/cache',
 					'now'		=> time(),
 				),
 				'JCacheStorageFile',
@@ -144,11 +145,11 @@ class JCacheStorageTest extends PHPUnit_Framework_TestCase
 		);
 		$this->assertThat(
 			$this->object->_lifetime,
-			$this->equalTo($options['lifetime'])
+			$this->equalTo(empty($options['lifetime']) ? 60 : $options['lifetime'])
 		);
-		$this->assertThat(
-			$this->object->_now,
-			$this->equalTo($options['now'])
+		$this->assertLessThan(
+			15,
+			abs($this->object->_now - time())
 		);
 	}
 

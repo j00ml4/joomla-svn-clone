@@ -168,15 +168,21 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testSendMail( $args, $expectedArgs, $expResult )
     {
-    	$mockMailer = $this->getMock('JMail', array('sendMail'));
-    	$mockMailer->expects($this->once())->method('sendMail')->with(
-    		$this->equalTo($expectedArgs['from']), $this->equalTo($expectedArgs['fromname']),
-    	    $this->equalTo($expectedArgs['recipient']), $this->equalTo($expectedArgs['subject']),
-    	    $this->equalTo($expectedArgs['body']), $this->equalTo($expectedArgs['mode']),
-    	    $this->equalTo($expectedArgs['cc']), $this->equalTo($expectedArgs['bcc']),
-    	    $this->equalTo($expectedArgs['attachment']), $this->equalTo($expectedArgs['replyto']),
-    	    $this->equalTo($expectedArgs['replytoname'])
-    	)->will($this->returnValue($expResult));
+    	$mockMailer = $this->getMock('JMail', array('Send', 'setSender', 'setSubject', 'setBody', 'IsHTML', 'addRecipient', 'addCC', 'addBCC', 'addAttachment', 'addReplyTo'));
+    	$mockMailer->expects($this->once())->method('Send')->with()->will($this->returnValue($expResult));
+		$mockMailer->expects($this->once())->method('setSender')
+											->with(array($expectedArgs['from'], $expectedArgs['fromname']));
+		$mockMailer->expects($this->once())->method('setSubject')->with($expectedArgs['subject']);
+		$mockMailer->expects($this->once())->method('setBody')->with($expectedArgs['body']);
+		if($expectedArgs['mode']) {
+			$mockMailer->expects($this->once())->method('IsHTML')->with(true);
+		}
+		$mockMailer->expects($this->once())->method('addRecipient')->with($expectedArgs['recipient']);
+		$mockMailer->expects($this->once())->method('addCC')->with($expectedArgs['cc']);
+		$mockMailer->expects($this->once())->method('addBCC')->with($expectedArgs['bcc']);
+		$mockMailer->expects($this->once())->method('addAttachment')->with($expectedArgs['attachment']);
+		$mockMailer->expects($this->exactly(count($expectedArgs['replyto'])))->method('addReplyTo');
+		$mockMailer->expects($this->once())->method('Send')->with()->will($this->returnValue($expResult));
     	JFactory::$mailer = $mockMailer;
 
 		$this->assertThat(
