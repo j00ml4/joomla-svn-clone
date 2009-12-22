@@ -201,7 +201,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
 		
 		$user = new JUser;
-    	$mockSession = $this->getMock('JSession', array('__construct', 'get'));
+    	$mockSession = $this->getMock('JSession', array('_start', 'get'));
     	$mockSession->expects($this->once())->method('get')->will(
     		$this->returnValue($user)
     	);
