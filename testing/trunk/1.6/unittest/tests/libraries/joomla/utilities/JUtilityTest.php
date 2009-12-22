@@ -217,8 +217,22 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
 					'adminName' => "test",
 					'adminEmail' => 'Test Name',
 					'email' => 'Test Recip',
-					'type' => 'Test Subject',
-					'title' => "This is the body of the message",
+					'subject' => 'User Submitted \'Test Subject\'',
+					'body' => "Hello test,
+
+
+A User submitted Test Subject:
+ [ This is the body of the message ]
+has been just submitted by User:
+ [ Test Mode ]
+for Test CC.
+
+
+
+Please go to Test CC/administrator to view and approve this Test Subject.
+
+Please do not respond to this message as it is automatically generated and is for information purposes only.
+",
 					'author' => 'Test Mode',
 					'url' => 'Test CC',
 				),
@@ -238,8 +252,22 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
 					'adminName' => "test",
 					'adminEmail' => 'Test Name',
 					'email' => 'Test Recip',
-					'type' => 'Test Subject',
-					'title' => "This is the body of the message",
+					'subject' => 'User Submitted \'Test Subject\'',
+					'body' => "Hello test,
+
+
+A User submitted Test Subject:
+ [ This is the body of the message ]
+has been just submitted by User:
+ [ Test Mode ]
+for Test CC.
+
+
+
+Please go to Test CC/administrator to view and approve this Test Subject.
+
+Please do not respond to this message as it is automatically generated and is for information purposes only.
+",
 					'author' => 'Test Mode',
 					'url' => 'Test CC',
 				),
@@ -262,13 +290,12 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testSendAdminMail( $args, $expectedArgs, $expResult )
     {
-    	$mockMailer = $this->getMock('JMail', array('sendAdminMail'));
-    	$mockMailer->expects($this->once())->method('sendAdminMail')->with(
-    		$this->equalTo($expectedArgs['adminName']), $this->equalTo($expectedArgs['adminEmail']),
-			$this->equalTo($expectedArgs['email']), $this->equalTo($expectedArgs['type']),
-    	    $this->equalTo($expectedArgs['title']), $this->equalTo($expectedArgs['author']),
-    	    $this->equalTo($expectedArgs['url'])
-    	)->will($this->returnValue($expResult));
+    	$mockMailer = $this->getMock('JMail', array('Send', 'setSubject', 'setBody', 'addRecipient'));
+    	$mockMailer->expects($this->once())->method('Send')->with()->will($this->returnValue($expResult));
+		$mockMailer->expects($this->once())->method('setSubject')->with($expectedArgs['subject']);
+		$mockMailer->expects($this->once())->method('setBody')->with($expectedArgs['body']);
+		$mockMailer->expects($this->once())->method('addRecipient')->with($expectedArgs['adminEmail']);
+		$mockMailer->expects($this->once())->method('Send')->with()->will($this->returnValue($expResult));
     	JFactory::$mailer = $mockMailer;
 
 		$this->assertThat(
