@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+22-Dec-2009 Ian MacLennan
+# Modified mock expect calls
+
 20-Nov-2009 Ian MacLennan
 # Added @runTestsInSeparateProcesses annotations to JUtilityTest and JAuthenticationTest so that test suite would run.
 

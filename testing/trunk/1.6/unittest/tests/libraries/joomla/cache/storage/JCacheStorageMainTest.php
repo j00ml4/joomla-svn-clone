@@ -144,7 +144,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
-		$this->assertTrue($cache->clean($group, 'notgroup'), 'Clean Failed');
+		$this->assertTrue((bool)$cache->clean($group, 'notgroup'), 'Clean Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
 		$new = $cache->get($id, $group);

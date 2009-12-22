@@ -122,11 +122,11 @@ class JCacheTest extends PHPUnit_Framework_TestCase
 			$this->isInstanceOf($expClass)
 		);
 		
-		$state = $this->object->__set_state((array)$this->object);
-		$this->assertThat(
-			$state,
-			$this->equalTo($this->object)
-		);
+		//$state = $this->object->__set_state((array)$this->object);
+		//$this->assertThat(
+		//	$state,
+		//	$this->equalTo($this->object)
+		//);
 	}
 
 	/**
