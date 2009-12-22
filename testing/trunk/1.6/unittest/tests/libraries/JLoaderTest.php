@@ -86,14 +86,6 @@ class JLoaderTest extends PHPUnit_Framework_TestCase
 				'fred.factory does not exist',
 				true,
 			),
-			'bitfolge' => array(
-				'bitfolge.vcard',
-				null,
-				null,
-				true,
-				'factory should load properly',
-				true,
-			),
 			'bogus' => array(
 				'bogusload',
 				JPATH_BASE.DS.'unittest/objects',
