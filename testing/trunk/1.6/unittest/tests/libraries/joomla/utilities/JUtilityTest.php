@@ -328,7 +328,7 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      */
     public function testGetToken( $data, $expResult )
     {
-    	$mockSession = $this->getMock('JSession', array('__construct', 'getFormToken'));
+    	$mockSession = $this->getMock('JSession', array('_start', 'getFormToken'));
     	$mockSession->expects($this->once())->method('getFormToken')->will(
     		$this->returnValue($expResult)
     	);
