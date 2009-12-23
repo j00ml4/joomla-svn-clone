@@ -164,7 +164,6 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      * @dataProvider casesSendMail
-     * @group breaks
      */
     public function testSendMail( $args, $expectedArgs, $expResult )
     {
@@ -252,7 +251,6 @@ class JUtilityTest extends PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider casesSendAdminMail
-     * @group breaks
      */
     public function testSendAdminMail( $args, $expectedArgs, $expResult )
     {
