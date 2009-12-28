@@ -17,7 +17,6 @@ require_once JPATH_BASE . '/libraries/joomla/user/authentication.php';
  *
  * @package    Joomla.UnitTest
  * @subpackage User
- * @group breaks
  */
 class JAuthenticationTest extends PHPUnit_Framework_TestCase
 {
@@ -51,7 +50,6 @@ class JAuthenticationTest extends PHPUnit_Framework_TestCase
      * Testing GetInstance().
      *
      * @return void
-     * @group breaks     
      */
     public function testGetInstance()
     {
