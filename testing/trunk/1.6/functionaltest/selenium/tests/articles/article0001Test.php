@@ -19,7 +19,7 @@ class Article0001 extends SeleniumJoomlaTestCase
 	{
 		$this->doAdminLogin();
 		$this->gotoSite();
-		$this->assertElementContainsText("//div[@id='maincolumn']/table/tbody/tr/td/div/ul/li/h3", 'Welcome to Joomla!');
+		$this->assertEquals("Welcome to Joomla!", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/div/div/div/h2"));
 		$this->gotoAdmin();
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
@@ -65,7 +65,7 @@ class Article0001 extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->gotoSite();
-		$this->assertElementContainsText("//div[@id='maincolumn']/table/tbody/tr/td/div/ul/li/h3", 'Welcome to Joomla!');
+		$this->assertEquals("Welcome to Joomla!", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/div/div/div/h2"));
 
 		$this->doAdminLogout();
 	}	
