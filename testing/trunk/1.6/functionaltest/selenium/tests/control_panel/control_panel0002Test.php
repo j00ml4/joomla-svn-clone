@@ -107,8 +107,9 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		$this->click("//li[@id='toolbar-cancel']/a/span");
 		$this->waitForPageToLoad("30000");
 		$this->click("//li[@id='toolbar-popup-Popup']/a/span");
+		sleep(2);
 		$this->click("//button[@type='button' and @onclick='window.parent.SqueezeBox.close();']");	
-
+		sleep(2);
 		echo "Navigate to Menu Manager.\n";
 		$this->click("link=Menu Manager");
 		$this->waitForPageToLoad("30000");
