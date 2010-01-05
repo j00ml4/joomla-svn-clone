@@ -190,23 +190,28 @@ class JLanguage extends JObject
 	function _($string, $jsSafe = false)
 	{
 		//$key = str_replace(' ', '_', strtoupper(trim($string)));echo '<br />'.$key;
-		$key = strtoupper($string);
+		@list($extension, $key) = explode('.', strtoupper($string), 2);
+		if(!isset($key))
+		{
+			$key = $extension;
+			$extension = 'J';
+		}
 		$key = substr($key, 0, 1) == '_' ? substr($key, 1) : $key;
 
-		if (isset ($this->_strings[$key]))
+		if (isset ($this->_strings[$extension][$key]))
 		{
-			$string = $this->_debug ? '**'.$this->_strings[$key].'**' : $this->_strings[$key];
+			$string = $this->_debug ? '**'.$this->_strings[$extension][$key].'**' : $this->_strings[$extension][$key];
 
 			// Store debug information
 			if ($this->_debug)
 			{
 				$caller = $this->_getCallerInfo();
 
-				if (! array_key_exists($key, $this->_used)) {
-					$this->_used[$key] = array();
+				if (! array_key_exists($extension.'.'.$key, $this->_used)) {
+					$this->_used[$extension.'.'.$key] = array();
 				}
 
-				$this->_used[$key][] = $caller;
+				$this->_used[$extension.'.'.$key][] = $caller;
 			}
 
 		} else {
@@ -215,11 +220,11 @@ class JLanguage extends JObject
 				$caller = $this->_getCallerInfo();
 				$caller['string'] = $string;
 
-				if (! array_key_exists($key, $this->_orphans)) {
-					$this->_orphans[$key] = array();
+				if (! array_key_exists($extension.'.'.$key, $this->_orphans)) {
+					$this->_orphans[$extension.'.'.$key] = array();
 				}
 
-				$this->_orphans[$key][] = $caller;
+				$this->_orphans[$extension.'.'.$key][] = $caller;
 
 				$string = '??'.$string.'??';
 			}
@@ -384,26 +389,24 @@ class JLanguage extends JObject
 
 		$result	= false;
 
-		if ($content = @file_get_contents($filename))
+		if ($strings = @parse_ini_file($filename, true))
 		{
-
-			//Take off BOM if present in the ini file
-			if ($content[0] == "\xEF" && $content[1] == "\xBB" && $content[2] == "\xBF")
+			foreach($strings as $ext => $textstrings)
 			{
-				$content = substr($content, 3);
+				if(is_array($textstrings))
+				{
+					if(isset($this->_strings[$ext]))
+					{
+						$this->_strings[$ext] = array_merge($this->_strings[$ext], $textstrings);
+					} else {
+						$this->_strings[$ext] = $textstrings;
+					}
+				} else {
+					$this->_strings['J'][$ext] = $textstrings;
+				}
 			}
-
-			$registry	= new JRegistry();
-			$registry->loadINI($content);
-			$newStrings	= $registry->toArray();
-
-			if (is_array($newStrings))
+			if(is_array($strings) && count($strings))
 			{
-				$this->_strings = $overwrite ? array_merge($this->_strings, $newStrings)
-				: array_merge($newStrings, $this->_strings);
-
-				$this->_strings = array_merge( $this->_strings, $this->_override); // add overrides
-
 				$result = true;
 			}
 		}
