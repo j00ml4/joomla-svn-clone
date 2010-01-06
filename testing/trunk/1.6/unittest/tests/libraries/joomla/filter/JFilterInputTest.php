@@ -556,27 +556,6 @@ class JFilterInputTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Execute a test case on clean() called as static with default filter settings (whitelist - no html).
-	 *
-	 * @param string $type    The type of input
-	 * @param string $data    The input
-	 * @param string $expect  The expected result for this test.
-	 * @param string $message The failure message identifying the source of the test case.
-	 *
-	 * @return void
-	 *
-	 * @dataProvider whitelist
-	 */
-	function testCleanByCallingStatic( $type, $data, $expect, $message )
-	{
-		$this->assertThat(
-			JFilterInput::clean($data, $type),
-			$this->equalTo($expect),
-			$message
-		);
-	}
-
-	/**
 	 * Execute a test case on clean() called as member with default filter settings (whitelist - no html).
 	 *
 	 * @param string $type    The type of input
