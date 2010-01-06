@@ -17,6 +17,7 @@ class Article0001 extends SeleniumJoomlaTestCase
 {
 	function testUnpublishArticle()
 	{
+		echo "Starting testUnpublishArticle.\n";
 		$this->doAdminLogin();
 		$this->gotoSite();
 		$this->assertEquals("Welcome to Joomla!", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/div/div/div/h2"));
@@ -43,6 +44,7 @@ class Article0001 extends SeleniumJoomlaTestCase
 
 	function testPublishArticle()
 	{
+		echo "Starting testPublishArticle.\n";
 		$this->doAdminLogin();
 
 		$this->gotoAdmin();

@@ -58,7 +58,6 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
     $this->assertTrue($this->isElementPresent("link=Add New Category"));
     echo "Check that Component menu options are visible\n";
     $this->assertTrue($this->isElementPresent("link=Banner"));
-    $this->assertTrue($this->isElementPresent("link=Banners"));
     $this->assertTrue($this->isElementPresent("link=Clients"));
     $this->assertTrue($this->isElementPresent("link=Categories"));
     $this->assertTrue($this->isElementPresent("link=Contacts"));
