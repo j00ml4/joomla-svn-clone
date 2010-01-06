@@ -176,7 +176,7 @@ class ControlPanel0002 extends SeleniumJoomlaTestCase
 		echo "Navigate to Control Panel.\n";
 		$this->gotoAdmin();
 		echo "Navigate to Banner Manager.\n";
-		$this->click("link=Banners");
+		$this->click("link=Banner");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Banners manager: Banners"));
 		$this->assertTrue($this->isElementPresent("//li[@id='toolbar-new']/a/span"));
