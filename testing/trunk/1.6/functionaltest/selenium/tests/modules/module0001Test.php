@@ -17,10 +17,13 @@ class Module0001 extends SeleniumJoomlaTestCase
 {
 	function testUnpublishModule()
 	{
+		echo ("testUnpublishModule"."\n");
 		$this->doAdminLogin();
 		$this->gotoSite();
-		$this->assertTrue($this->isElementPresent("//div[@id='leftcolumn']/div[2]/div/div/div/h3"));
+		echo ("Check that login form is present"."\n");
+		$this->assertTrue($this->isTextPresent("Login Form"));
 		$this->gotoAdmin();
+		echo ("Goto module manager and disable login module"."\n");
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
@@ -30,9 +33,11 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->click("//img[@alt='Published']");
 		$this->waitForPageToLoad("30000");
 
+		echo ("Go back to front end and check that login is not shown"."\n");
 		$this->gotoSite();
-		$this->assertFalse($this->isElementPresent("//div[@id='leftcolumn']/div[2]/div/div/div/h3"));
+		$this->assertFalse($this->isTextPresent("Login Form"));
 
+		echo ("Go back to module manager and enable login module"."\n");
 		$this->gotoAdmin();
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
@@ -47,11 +52,13 @@ class Module0001 extends SeleniumJoomlaTestCase
 
 	function testPublishModule()
 	{
+		echo ("testPublishModule"."\n");
 		$this->doAdminLogin();
 		$this->gotoAdmin();
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
+		echo ("Go to back end and disable login module"."\n");
 		$this->type("filter_search", "Login Form");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
@@ -59,8 +66,10 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->gotoSite();
-		$this->assertFalse($this->isElementPresent("//div[@id='leftcolumn']/div[2]/div/div/div/h3"));
+		echo ("Go to front and check that login form is not shown"."\n");
+		$this->assertFalse($this->isTextPresent("Login Form"));
 
+		echo ("Go to module manager and enable login module"."\n");
 		$this->gotoAdmin();
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
@@ -71,8 +80,9 @@ class Module0001 extends SeleniumJoomlaTestCase
 		$this->click("//img[@alt='Unpublished']");
 		$this->waitForPageToLoad("30000");
 
+		echo ("Go to front end and check that login form is present"."\n");
 		$this->gotoSite();
-		$this->assertTrue($this->isElementPresent("//div[@id='leftcolumn']/div[2]/div/div/div/h3"));
+		$this->assertTrue($this->isTextPresent("Login Form"));
 
 		$this->doAdminLogout();
 	}	
