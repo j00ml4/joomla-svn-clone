@@ -19,20 +19,26 @@ class Article0001 extends SeleniumJoomlaTestCase
 	{
 		echo "Starting testUnpublishArticle.\n";
 		$this->doAdminLogin();
+		
+		echo "Go to front end and check that Joomla! Beginners is shown"."\n";
 		$this->gotoSite();
-		$this->assertEquals("Welcome to Joomla!", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/div/div/div/h2"));
+		$this->assertTrue($this->isTextPresent("Joomla! Beginners"));
+		
+		echo "Go to back end and unpublish Joomla! Beginners is shown"."\n";
 		$this->gotoAdmin();
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
-		$this->type("filter_search", "Welcome to Joomla!");
+		$this->type("filter_search", "Joomla! Beginners");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("//img[@alt='Published']");
 		$this->waitForPageToLoad("30000");
 
+		echo "Go to front end and check that Joomla! Beginners is not shown"."\n";
 		$this->gotoSite();
-		$this->assertElementNotPresent("//div[@id='maincolumn']/table/tbody/tr/td/div/ul/li/h3");
+		$this->assertFalse($this->isTextPresent("Joomla! Beginners"));
 
+		echo "Go to back end and publish Joomla! Beginners"."\n";
 		$this->gotoAdmin();
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
@@ -47,18 +53,21 @@ class Article0001 extends SeleniumJoomlaTestCase
 		echo "Starting testPublishArticle.\n";
 		$this->doAdminLogin();
 
+		echo "Go to back end and unpublish Joomla! Beginners"."\n";
 		$this->gotoAdmin();
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
-		$this->type("filter_search", "Welcome to Joomla!");
+		$this->type("filter_search", "Joomla! Beginners");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("//img[@alt='Published']");
 		$this->waitForPageToLoad("30000");
 
+		echo "Go to front end and check that Joomla! Beginners is not shown"."\n";
 		$this->gotoSite();
-		$this->assertElementNotPresent("//div[@id='maincolumn']/table/tbody/tr/td/div/ul/li/h3");
+		$this->assertFalse($this->isTextPresent("Joomla! Beginners"));
 
+		echo "Go to back end and publish Joomla! Beginners"."\n";
 		$this->gotoAdmin();
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
@@ -66,8 +75,9 @@ class Article0001 extends SeleniumJoomlaTestCase
 		$this->click("//img[@alt='Unpublished']");
 		$this->waitForPageToLoad("30000");
 
+		echo "Go to front end and check that Joomla! Beginners is shown"."\n";
 		$this->gotoSite();
-		$this->assertEquals("Welcome to Joomla!", $this->getText("//div[@id='maincolumn']/table/tbody/tr/td/div/div/div/h2"));
+		$this->assertTrue($this->isTextPresent("Joomla! Beginners"));
 
 		$this->doAdminLogout();
 	}	
