@@ -135,7 +135,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 
 		// Test that the default options sets array to false.
 		$options = $form->getOptions();
-		$valid = array('array' => false);
+		$valid = array('array' => false, 'prefix' => '%__');
 
 		$this->assertThat(
 			$options,
