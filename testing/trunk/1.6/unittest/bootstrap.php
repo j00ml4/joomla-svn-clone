@@ -38,8 +38,10 @@ if (!defined('JPATH_BASE'))
 @ini_set('zend.ze1_compatibility_mode', '0');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 
 // Include relative constants, JLoader and the jimport and jexit functions.
 
 require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
 require_once JPATH_LIBRARIES.DS.'joomla'.DS.'import.php';
+require_once JPATH_BASE . '/libraries/joomla/session/session.php';
