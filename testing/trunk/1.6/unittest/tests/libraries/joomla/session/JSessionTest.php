@@ -1,7 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'session' . DS . 'session.php';
 
 /**
  * Test class for JSession.
@@ -20,7 +19,8 @@ class JSessionTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-//        $this->object = new JSession;
+		include_once JPATH_BASE . '/libraries/joomla/session/session.php';
+		//$this->object = new JSession;
     }
 
     /**

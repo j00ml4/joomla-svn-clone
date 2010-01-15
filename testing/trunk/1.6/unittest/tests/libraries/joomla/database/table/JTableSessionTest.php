@@ -5,7 +5,6 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-require_once JPATH_BASE.'/libraries/joomla/database/table/session.php';
 
 /**
  * Test class for JTableSession.
@@ -25,6 +24,8 @@ class JTableSessionTest extends PHPUnit_Framework_TestCase {
 	 * @access protected
 	 */
 	protected function setUp() {
+		include_once JPATH_BASE.'/libraries/joomla/database/table.php';
+		include_once JPATH_BASE.'/libraries/joomla/database/table/session.php';
 		//$this->object = new JTableSession;
 	}
 
