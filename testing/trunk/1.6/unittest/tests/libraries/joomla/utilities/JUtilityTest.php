@@ -287,12 +287,16 @@ class JUtilityTest extends JoomlaTestCase
      */
     public function testGetToken( $data, $expResult )
     {
+		include_once JPATH_BASE . '/libraries/joomla/application/application.php';
+
     	$mockSession = $this->getMock('JSession', array('_start', 'getFormToken'));
-    	$mockSession->expects($this->once())->method('getFormToken')->will(
-    		$this->returnValue($expResult)
+    	$mockSession->expects(
+    		$this->once())->method('getFormToken')->with($this->equalTo($expResult))->will(
+    			$this->returnValue($expResult
+    		)
     	);
     	JFactory::$session = $mockSession;
-
+    	
     	$this->assertThat(
     		is_null($data)?JUtility::getToken():JUtility::getToken($data),
     		$this->equalTo($expResult)
