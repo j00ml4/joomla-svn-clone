@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+19-Jan-2009
+ ^ Completed tests for INI, JSON, XML and PHP registry formatters.
+
 22-Dec-2009 Ian MacLennan
 # Modified mock expect calls
 

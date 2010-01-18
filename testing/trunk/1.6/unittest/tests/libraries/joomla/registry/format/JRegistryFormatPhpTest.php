@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS . 'format' . DS . 'php.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format/php.php';
 
 /**
  * Test class for JRegistryFormatPHP.
@@ -9,48 +9,71 @@ require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS
  */
 class JRegistryFormatPHPTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var JRegistryFormatPHP
-     */
-    protected $object;
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	function setUp()
+	{
+		$this->instance = new JRegistryFormatPHP;
+	}
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new JRegistryFormatPHP;
-    }
+	/**
+	 * Convert an array into an object.
+	 *
+	 * @param	array
+	 * @return	object
+	 */
+	private static function _objectFactory($properties)
+	{
+		$obj = new stdClass();
+		foreach ($properties AS $k => $v) {
+			$obj->{$k} = $v;
+		}
+		return $obj;
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Get the objects to run tests on.
+	 */
+	public function getObjects()
+	{
+		$tests = array(
+			'Regular Object' => array(
+				self::_objectFactory(array('test1' => 'value1', 'test2' => 'value2')),
+				array('class' => 'myClass'),
+				'<?php'."\n".'class myClass {'."\n\t".'public $test1 = \'value1\';'."\n\t".'public $test2 = \'value2\';'."\n}\n".'?>'
+			),
+			'Object with Double Quote' => array(
+				self::_objectFactory(array('test1' => 'value1"', 'test2' => 'value2')),
+				array('class' => 'myClass'),
+				'<?php'."\n".'class myClass {'."\n\t".'public $test1 = \'value1"\';'."\n\t".'public $test2 = \'value2\';'."\n}\n".'?>'
+			)
 
-    /**
-     * @todo Implement testObjectToString().
-     */
-    public function testObjectToString()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+		);
 
-    /**
-     * @todo Implement testStringToObject().
-     */
-    public function testStringToObject()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+		return $tests;
+	}
+
+	/**
+	 * Test the JRegistryFormatPHP::objectToString method.
+	 *
+	 * @dataProvider getObjects
+	 *
+	 * @param string The type of input
+	 * @param string The input
+	 * @param string The expected result for this test.
+	 */
+	function testObjectToString($object, $params, $expect)
+	{
+		$this->assertEquals($expect, $this->instance->objectToString($object, $params));
+	}
+
+	/**
+	 * Test the JRegistryFormatPHP::stringToObject method.
+	 */
+	public function testStringToObject()
+	{
+		// This method is not implemented in the class.
+	}
 }
-?>

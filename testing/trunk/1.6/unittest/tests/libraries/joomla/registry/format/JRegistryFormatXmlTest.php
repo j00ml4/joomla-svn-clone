@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS . 'format' . DS . 'xml.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format/xml.php';
 
 /**
  * Test class for JRegistryFormatXML.
@@ -9,48 +9,30 @@ require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS
  */
 class JRegistryFormatXMLTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var JRegistryFormatXML
-     */
-    protected $object;
+	/**
+	 * Test the JRegistryFormatXML::objectToString method.
+	 */
+	public function testObjectToString()
+	{
+		$class = new JRegistryFormatXML;
+		$options = null;
+		$object = new stdClass;
+		$object->foo = 'bar';
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new JRegistryFormatXML;
-    }
+		// Test basic object to string.
+		$string = $class->objectToString($object, $options);
+		$this->assertThat(
+			$string,
+			$this->equalTo("<?xml version=\"1.0\" ?>\n<config>\n	<entry name=\"foo\">bar</entry>\n</config>")
+		);
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Test the JRegistryFormatXML::stringToObject method.
+	 */
+	public function testStringToObject()
+	{
+		// This method is not implemented in the class.
+	}
 
-    /**
-     * @todo Implement testStringToObject().
-     */
-    public function testStringToObject()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testObjectToString().
-     */
-    public function testObjectToString()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
 }
-?>
