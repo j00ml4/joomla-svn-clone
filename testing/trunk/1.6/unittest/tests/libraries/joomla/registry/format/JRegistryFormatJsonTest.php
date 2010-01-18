@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS . 'format' . DS . 'json.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format/json.php';
 
 /**
  * Test class for JRegistryFormatJSON.
@@ -9,48 +9,64 @@ require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS
  */
 class JRegistryFormatJSONTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var JRegistryFormatJSON
-     */
-    protected $object;
+	/**
+	 * @var JRegistryFormatJSON
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new JRegistryFormatJSON;
-    }
+	/**
+	 * Test the JRegistryFormatJSON::objectToString method.
+	 */
+	public function testObjectToString()
+	{
+		$class = new JRegistryFormatJSON;
+		$options = null;
+		$object = new stdClass;
+		$object->foo = 'bar';
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+		// Test basic object to string.
+		$string = $class->objectToString($object, $options);
+		$this->assertThat(
+			$string,
+			$this->equalTo('{"foo":"bar"}')
+		);
+	}
 
-    /**
-     * @todo Implement testObjectToString().
-     */
-    public function testObjectToString()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * Test the JRegistryFormatJSON::stringToObject method.
+	 */
+	public function testStringToObject()
+	{
+		$class = new JRegistryFormatJSON;
 
-    /**
-     * @todo Implement testStringToObject().
-     */
-    public function testStringToObject()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+		$string1 = '{"foo":"bar"}';
+		$string2 = "[section]\nfoo=bar";
+
+		$object1 = new stdClass;
+		$object1->foo = 'bar';
+
+		$object2 = new stdClass;
+		$object2->section = $object1;
+
+		// Test basic JSON string to object.
+		$object = $class->stringToObject($string1, false);
+		$this->assertThat(
+			$object,
+			$this->equalTo($object1)
+		);
+
+		// Test INI format string without sections.
+		$object = $class->stringToObject($string2, false);
+		$this->assertThat(
+			$object,
+			$this->equalTo($object1)
+		);
+
+		// Test INI format string with sections.
+		$object = $class->stringToObject($string2, true);
+		$this->assertThat(
+			$object,
+			$this->equalTo($object2)
+		);
+	}
 }
-?>

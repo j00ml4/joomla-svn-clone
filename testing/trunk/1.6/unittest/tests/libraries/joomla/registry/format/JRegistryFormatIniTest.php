@@ -1,8 +1,8 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS . 'format.php';
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS . 'format' . DS . 'ini.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format/ini.php';
 
 /**
  * Test class for JRegistryFormatINI.
@@ -10,48 +10,51 @@ require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'registry' . DS
  */
 class JRegistryFormatINITest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var JRegistryFormatINI
-     */
-    protected $object;
+	/**
+	 * Test the JRegistryFormatINI::objectToString method.
+	 */
+	public function testObjectToString()
+	{
+		$class = new JRegistryFormatINI;
+		$options = null;
+		$object = new stdClass;
+		$object->foo = 'bar';
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new JRegistryFormatINI;
-    }
+		// Test basic object to string.
+		$string = $class->objectToString($object, $options);
+		$this->assertThat(
+			trim($string),
+			$this->equalTo('foo=bar')
+		);
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Test the JRegistryFormatINI::stringToObject method.
+	 */
+	public function testStringToObject()
+	{
+		$class = new JRegistryFormatINI;
 
-    /**
-     * @todo Implement testObjectToString().
-     */
-    public function testObjectToString()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+		$string2 = "[section]\nfoo=bar";
 
-    /**
-     * @todo Implement testStringToObject().
-     */
-    public function testStringToObject()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+		$object1 = new stdClass;
+		$object1->foo = 'bar';
+
+		$object2 = new stdClass;
+		$object2->section = $object1;
+
+		// Test INI format string without sections.
+		$object = $class->stringToObject($string2, false);
+		$this->assertThat(
+			$object,
+			$this->equalTo($object1)
+		);
+
+		// Test INI format string with sections.
+		$object = $class->stringToObject($string2, true);
+		$this->assertThat(
+			$object,
+			$this->equalTo($object2)
+		);
+	}
 }
-?>
