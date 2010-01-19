@@ -10,28 +10,6 @@ require_once JPATH_BASE.'/libraries/joomla/registry/registry.php';
 class JRegistryTest extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var JRegistry
-	 */
-	protected $object;
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
-	protected function setUp()
-	{
-		$this->object = new JRegistry;
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
 	 * @todo Implement test__clone().
 	 */
 	public function test__clone()
@@ -54,90 +32,159 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGetInstance().
+	 * @todo Implement testDef().
+	 */
+	public function testDef()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGet().
+	 */
+	public function testGet()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+	/**
 	 */
 	public function testGetInstance()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
+		// Test INI format.
+		$a = JRegistry::getInstance('a');
+		$b = JRegistry::getInstance('a');
+		$c = JRegistry::getInstance('c');
+
+		// Check the object type.
+		$this->assertThat(
+			$a instanceof JRegistry,
+			$this->isTrue()
+		);
+
+		// Check cache handling for same registry id.
+		$this->assertThat(
+			$a,
+			$this->identicalTo($b)
+		);
+
+		// Check cache handling for different registry id.
+		$this->assertThat(
+			$a,
+			$this->logicalNot($this->identicalTo($c))
 		);
 	}
 
 	/**
-	 * @todo Implement testMakeNameSpace().
-	 */
-	public function testMakeNameSpace()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetNameSpaces().
-	 */
-	public function testGetNameSpaces()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetValue().
-	 */
-	public function testGetValue()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testSetValue().
-	 */
-	public function testSetValue()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadArray().
 	 */
 	public function testLoadArray()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
+		$array = array(
+			'foo' => 'bar'
+		);
+		$registry = JRegistry::getInstance('test');
+		$result = $registry->loadArray($array);
+
+		// Result is always true, no error checking in method.
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * @todo Implement testLoadObject().
-	 */
-	public function testLoadObject()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadFile().
 	 */
 	public function testLoadFile()
 	{
-		// Remove the following lines when you implement this test.
+		$registry = JRegistry::getInstance('test');
+
+		// Result is always true, no error checking in method.
+
+		// JSON.
+		$result = $registry->loadFile(dirname(__FILE__).'/jregistry.json');
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
+		);
+
+		// INI.
+		$result = $registry->loadFile(dirname(__FILE__).'/jregistry.ini', 'ini');
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
+		);
+
+		// XML and PHP versions do not support stringToObject.
+
 		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
+			'Need to test for a file that does not exist.'
+		);
+	}
+
+	/**
+	 */
+	public function testLoadINI()
+	{
+		$string = "[section]\nfoo=\"bar\"";
+
+		$registry = JRegistry::getInstance('test');
+		$result = $registry->loadIni($string);
+
+		// Result is always true, no error checking in method.
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
+		);
+	}
+
+	/**
+	 */
+	public function testLoadJSON()
+	{
+		$string = '{"foo":"bar"}';
+
+		$registry = JRegistry::getInstance('test');
+		$result = $registry->loadJson($string);
+
+		// Result is always true, no error checking in method.
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
+		);
+	}
+
+	/**
+	 */
+	public function testLoadObject()
+	{
+		$object = new stdClass;
+		$object->foo = 'bar';
+
+		$registry = JRegistry::getInstance('test');
+		$result = $registry->loadObject($object);
+
+		// Result is always true, no error checking in method.
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
@@ -146,38 +193,50 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoadXML()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadINI().
-	 */
-	public function testLoadINI()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadJSON().
-	 */
-	public function testLoadJSON()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
+		// Mega file since stringToObject is not implemented yet.
 	}
 
 	/**
 	 * @todo Implement testMerge().
 	 */
 	public function testMerge()
+	{
+		$array1 = array(
+			'foo' => 'bar',
+			'hoo' => 'hum',
+			'dum' => array(
+				'dee' => 'dum'
+			)
+		);
+
+		$array2 = array(
+			'foo' => 'soap',
+			'dum' => 'huh'
+		);
+		$registry1 = JRegistry::getInstance('test1');
+		$registry1->loadArray($array1);
+
+		$registry2 = JRegistry::getInstance('test2');
+		$registry2->loadArray($array2);
+
+		$registry1->merge($registry2);
+
+		// Test getting a known value.
+		$this->assertThat(
+			$registry1->getValue('foo'),
+			$this->equalTo('soap')
+		);
+
+		$this->assertThat(
+			$registry1->getValue('dum'),
+			$this->equalTo('huh')
+		);
+	}
+
+	/**
+	 * @todo Implement testSet().
+	 */
+	public function testSet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -217,4 +276,55 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		  'This test has not been implemented yet.'
 		);
 	}
+
+	//
+	// The following methods are deprecated in 1.6
+	//
+
+	/**
+	 * @todo Implement testGetNameSpaces().
+	 */
+	public function testGetNameSpaces()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGetValue().
+	 */
+	public function testGetValue()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testMakeNameSpace().
+	 */
+	public function testMakeNameSpace()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testSetValue().
+	 */
+	public function testSetValue()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		  'This test has not been implemented yet.'
+		);
+	}
+
+
+
 }
