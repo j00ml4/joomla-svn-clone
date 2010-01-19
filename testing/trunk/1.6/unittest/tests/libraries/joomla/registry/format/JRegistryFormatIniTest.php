@@ -56,5 +56,9 @@ class JRegistryFormatINITest extends PHPUnit_Framework_TestCase
 			$object,
 			$this->equalTo($object2)
 		);
+
+		$this->markTestIncomplete(
+			'Need to test for bad input.'
+		);
 	}
 }
