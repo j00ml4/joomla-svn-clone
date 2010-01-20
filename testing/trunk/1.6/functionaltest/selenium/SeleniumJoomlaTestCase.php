@@ -21,7 +21,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		if(isset($cfg->selhost)) {
 			$this->setHost($cfg->selhost);
 		}
-		echo 'Starting '.get_class($this).".\n";
+		echo ".\n".'Starting '.get_class($this).".\n";
 	}
 
 	function doAdminLogin()
