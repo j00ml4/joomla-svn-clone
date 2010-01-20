@@ -38,6 +38,10 @@ class ControlPanel0003 extends SeleniumJoomlaTestCase
     print("Save the article" . "\n");
     $this->click("//li[@id='toolbar-save']/a/span");
     $this->waitForPageToLoad("30000");
+    print("Filter on new article" . "\n");
+    $this->type("filter_search", "Com_Content001");
+    $this->click("//button[@type='submit']");
+    $this->waitForPageToLoad("30000");
     print("Check that article title is listed in Article Manager" . "\n");
     $this->assertEquals("Com_Content001 Test Article", $this->getText("link=Com_Content001 Test Article"));
     print("Open Article for editing" . "\n");
@@ -58,6 +62,19 @@ class ControlPanel0003 extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     print("Check that article is no longer shown in article manager" . "\n");
     $this->assertFalse($this->isTextPresent("Com_Content001 Test Article"));
+    
+    print("Delete article from trash" . "\n");
+    $this->select("filter_published", "label=Trash");
+    $this->waitForPageToLoad("30000");
+    $this->click("toggle");
+    $this->click("//li[@id='toolbar-delete']/a/span");
+    $this->waitForPageToLoad("30000");
+    $this->select("filter_published", "label=- Select State -");
+    $this->waitForPageToLoad("30000");
+    
+    print("Clear Article manager filter" . "\n");    
+    $this->click("//button[@type='button']");
+    $this->waitForPageToLoad("30000");
     $this->doAdminLogout();
     
     print("Finished control_panel0003Test.php." . "\n");

@@ -17,6 +17,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 {
 	function testUnpublishModule()
 	{
+		$this->setUp();
 		echo ("testUnpublishModule"."\n");
 		$this->doAdminLogin();
 		$this->gotoSite();
@@ -52,6 +53,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 
 	function testPublishModule()
 	{
+		$this->setUp();
 		echo ("testPublishModule"."\n");
 		$this->doAdminLogin();
 		$this->gotoAdmin();

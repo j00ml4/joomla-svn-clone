@@ -4,16 +4,14 @@ require_once 'SeleniumJoomlaTestCase.php';
 
 class User0001Test extends SeleniumJoomlaTestCase
 {
-  function setUp()
-  {
-    $this->setBrowser("*chrome");
-    $this->setBrowserUrl("http://127.0.0.1/");
-  }
 
   function testCreateUser()
   {
+  	print("Starting testCreateUser" . "\n");
+  	$this->setUp();
   	$this->doAdminLogin();
   	$this->gotoAdmin();
+  	print("Add new user" . "\n");
     $this->click("link=Add New User");
     $this->waitForPageToLoad("30000");
     $this->type("jform_name", "username1");
@@ -32,6 +30,7 @@ class User0001Test extends SeleniumJoomlaTestCase
     $this->click("1group_1");
     $this->click("//li[@id='toolbar-save']/a/span");
     $this->waitForPageToLoad("30000");
+    print("Save and check that it exists" . "\n");
     $this->type("search", "username1");
     $this->click("//button[@type='submit']");
     $this->waitForPageToLoad("30000");
@@ -39,9 +38,13 @@ class User0001Test extends SeleniumJoomlaTestCase
     $this->assertEquals("loginname1", $this->getText("//div[@id='element-box']/div[2]/form/table/tbody/tr/td[3]"));
     $this->assertEquals("Public", $this->getText("//div[@id='element-box']/div[2]/form/table/tbody/tr/td[6]"));
     $this->assertEquals("email@example.com", $this->getText("//div[@id='element-box']/div[2]/form/table/tbody/tr/td[7]"));
+	print("Delete the user" . "\n");
     $this->click("cb0");
     $this->click("//li[@id='toolbar-delete']/a/span");
     $this->waitForPageToLoad("30000");
+    print("Check that user does not exist" . "\n");
+    $this->assertFalse($this->isElementPresent("link=username1"));
+    print("Finished user0001Test.php" . "\n");
   }
 }
 
