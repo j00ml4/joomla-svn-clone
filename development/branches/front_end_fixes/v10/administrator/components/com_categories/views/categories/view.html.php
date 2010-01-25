@@ -81,13 +81,13 @@ class CategoriesViewCategories extends JView
 		JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 		if ($state->get('filter.published') != -1) {
 			JToolBarHelper::divider();
-			JToolBarHelper::archiveList('categories.archive',JTOOLBAR_ARCHIVE);
+			JToolBarHelper::archiveList('categories.archive','JTOOLBAR_ARCHIVE');
 		}
 		if ($state->get('filter.published') == -2) {
-			JToolBarHelper::deleteList('', 'categories.delete',JTOOLBAR_EMPTY_TRASH);
+			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else {
-			JToolBarHelper::trash('categories.trash',JTOOLBAR_TRASH);
+			JToolBarHelper::trash('categories.trash','JTOOLBAR_TRASH');
 		}
 		JToolBarHelper::divider();
 		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
