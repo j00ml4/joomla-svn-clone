@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
+
+	<fields
+		group="params"
+		array="true"
+	/>
+
+	<fields
+		group="metadata"
+		array="true"
+	/>
+
 	<fields>
 		<field
 			name="id"

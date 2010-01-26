@@ -168,7 +168,6 @@ class CategoriesModelCategory extends JModelForm
 
 		// Check the session for previously entered form data.
 		$data = $app->getUserState('com_categories.edit.category.data', array());
-		$id = isset($data['id'])?$data['id']:0;
 
 		// Get the form.
 		jimport('joomla.form.form');
@@ -200,16 +199,16 @@ class CategoriesModelCategory extends JModelForm
 		
 		// Try to find the component helper.
 		$eName	= str_replace('com_', '', $component);
-		$path	= JPath::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/$eName.php");
+		$path	= JPath::clean(JPATH_ADMINISTRATOR."/components/$component/helpers/category.php");
 		if (file_exists($path))
 		{
 			require_once $path;
-			$prefix	= ucfirst($eName);
-			$cName	= $prefix.'Helper';
-			if (class_exists($cName) && is_callable(array($cName, 'onPrepareCategoryForm')))
+			$prefix	= ucfirst($eName).ucfirst($section);
+			$cName	= $prefix.'HelperCategory';
+			if (class_exists($cName) && is_callable(array($cName, 'onPrepareForm')))
 			{
 				$lang->load($component);
-				call_user_func_array(array($cName, 'onPrepareCategoryForm'), array($section, $id, &$form));
+				call_user_func_array(array($cName, 'onPrepareForm'), array($section, &$form));
 
 				// Check for an error.
 				if (JError::isError($form)) {

@@ -19,6 +19,8 @@ jimport('joomla.application.module.helper');
  * @since		1.5
  */
 
+jimport('joomla.document.document');
+
 class JDocumentHTML extends JDocument
 {
 	 /**
@@ -260,7 +262,8 @@ class JDocumentHTML extends JDocument
 	{
 		$result = '';
 
-		$words = explode(' ', $condition);
+        $operators = '(\+|\-|\*|\/|==|\!=|\<\>|\<|\>|\<\=|\>\=|and|or|xor) ';
+		$words = preg_split('# '.$operators.' #', $condition, null, PREG_SPLIT_DELIM_CAPTURE);
 		for ($i = 0, $n = count($words); $i < $n; $i+=2)
 		{
 			// odd parts (modules)
@@ -370,7 +373,7 @@ class JDocumentHTML extends JDocument
 		// Assign the variables
 		$this->template = $template;
 		$this->baseurl  = JURI::base(true);
-		$this->params   = new JParameter(isset($params['params']) ? $params['params'] : null);
+		$this->params   = isset($params['params']) ? $params['params'] : new JParameter;
 
 		// load
 		$this->_template = $this->_loadTemplate($directory.DS.$template, $file);

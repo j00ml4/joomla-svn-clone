@@ -9,6 +9,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.base.node');
+
 /**
  * JCategories Class.
  *
@@ -67,6 +68,14 @@ class JCategories
 	 */
 	protected $_options = null;
 
+	/**
+	 * Save the information, if a tree is loaded 
+	 * 
+	 * @var boolean
+	 */
+	protected $_treeloaded = false;	
+	
+	
 	/**
 	 * Class constructor
 	 *
@@ -191,7 +200,7 @@ class JCategories
 		$query->select('c.*');
 		$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
 		$query->rightJoin('#__categories as c ON c.id=a.catid');
-		$query->where('(c.extension='.$db->Quote($extension).($id=='root'?' OR c.extension='.$db->Quote('system'):'').')');
+		$query->where('(c.extension='.$db->Quote($extension).' OR c.extension='.$db->Quote('system').')');
 		$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');		
 		$query->order('c.lft');
 
@@ -224,7 +233,7 @@ class JCategories
 
 		// Get the results
 		$db->setQuery($query);
-		$results = $db->loadObjectList();
+		$results = $db->loadObjectList('id');
 		
 		if (count($results))
 		{
