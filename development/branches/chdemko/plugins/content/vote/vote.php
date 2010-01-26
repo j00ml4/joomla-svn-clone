@@ -20,7 +20,6 @@ class plgContentVote extends JPlugin
 {
 	public function __construct(&$subject, $options = array()) {
 		parent::__construct($subject, $options);
-		$this->loadLanguage();
 	}
 
 	public function onBeforeDisplayContent(&$row, &$params, $page=0)
@@ -36,8 +35,8 @@ class plgContentVote extends JPlugin
 			$img = '';
 
 			// Look for images in template if available.
-			$starImageOn = JHtml::_('image.site', 'rating_star.png', '/images/system/');
-			$starImageOff = JHtml::_('image.site', 'rating_star_blank.png', '/images/system/');
+			$starImageOn = JHtml::_('image', 'system/rating_star.png', NULL, NULL, true);
+			$starImageOff = JHtml::_('image', 'system/rating_star_blank.png', NULL, NULL, true);
 			for ($i=0; $i < $row->rating; $i++) {
 				$img .= $starImageOn;
 			}

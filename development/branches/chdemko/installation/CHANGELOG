@@ -27,10 +27,72 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-21-jan-2010 Christophe Demko
+27-jan-2010 Christophe Demko
+# Correcting bugs in JForm
+
+26-Jan-2010 Mark Dexter
+^ Add sprintf, alternative readmore to com_content, newsflash views (Angie Radtke)
+# Fix bug so you can load a category (Robert Deutz)
+# Bug fixes in com_search, newsflash (Angi Radtke)
+^ Work on com_contact layouts (Elin Waring)
+# Language strings work (Elin Waring)
+# Make view and config labels consistent (Elin Waring)
+# Fix bug in Save & New for non-article categories
+^ Work on com_contact component and model
+# Fix menu assignments in sample data (Elin Waring)
+# Fix routing for subcategories in com_content (Elin Waring)
+# Fix problems saving data in Contact Edit form
+^ Allow for hierarchical params in com_contact
+# Fix default value of published state in contacts and banners
+^ Improvements to sample data (Elin Waring)
+# Make toolbars consistent (Elin Waring)
+
+26-Jan-2010 Louis Landry
+ # [#19552] [patch] Error loading xml from string in JFactory::getXML (Thanks to Christopher Garvis)
+ # [#19542] Wrong field name in libraries/joomla/html/parameter/element/menuitem.php (Thanks to Jeff Channell)
+ # [#19286] [patch] ContentModelForm has problems with error reporting (Thanks to Christopher Garvis)
+ ^ [#19509] JDocumentHTML::countModules supports position names with spaces, other characters (Thanks to Jeff Fendley)
+ ^ [#19453] Files tags in XML files of FO/BO modules (Thanks to Nabyl Sadki)
+ # [#18611] JDate occasionally returns wrong date format (Thanks to Arlen Walker)
+
+26-Jan-2010 Christophe Demko
+ ^ Readding the possibility of setting the array parameter for a group different from true and false
+ # Correcting bugs in installer adapters
+ # Loading JDocument class in inherited classes
+
+26-Jan-2010 Hannes Papenberg
+ # Improved performance of JPluginHelper - Thanks Omar!
+
+25-Jan-2010 Louis Landry
+ ^ Moved testing infrastructure from the /testing/ folder into the trunk.
+
+25-Jan-2010 Jean-Marie Simonet 
+^ Refactored TinyMCE ini keys
+
+24-Jan-2010 Hannes Papenberg
+# changed com_contacts parameters to not use arrays in the XML
++ Added subgroup support for JForm forms
++ Added ability to extend user edit screen with parameters and additional fields
+
+23-Jan-2010 Christophe Demko & Jean-Marie Simonet 
+^ Refactored plugins language load
+
+23-Jan-2010 Hannes Papenberg
+^ Little performance improvement for JDocument::getTemplate()
+
+22-Jan-2010 Hannes Papenberg
+^ refactored search plugins to new plugin format
+# Fixed XML manifest of profile plugin
+- Removed JHTMLImage::system()
+^ Deprecated JHTMLImage::site() and JHTMLImage::administrator()
+^ Changed JHTML::image() to support relative paths to images
+^ Changed all system images to be overrideable 
+^ moved system images from /images /media/system and from components to /media/images folder
+
+21-Jan-2010 Christophe Demko
 ^ Rename language loading in the extension folder
 
-20-jan-2010 Christophe Demko
+20-Jan-2010 Christophe Demko
 # Correcting bugs in JForm
 # Correcting bad display in module and plugin edit
 ^ Give priority to language file located in joomla folder versus those located in extension folder
