@@ -1,4 +1,15 @@
-<?php defined('_JEXEC') or die; ?>
+<?php
+/**
+ * @version		$Id$
+ * @package		Joomla.Site
+ * @subpackage	com_search
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+// no direct access
+defined('_JEXEC') or die;
+?>
 
 <dl class="search_results<?php echo $this->params->get('pageclass_sfx'); ?>">
 
@@ -11,6 +22,11 @@
 						if ($result->browsernav == 1) : ?>
 								<?php echo $this->pagination->limitstart + $result->count.'. ';?>
 							<a href="<?php echo JRoute::_($result->href); ?>" target="_blank">
+<<<<<<< .working
+=======
+							<?php echo $this->escape($result->title); ?>
+							</a>
+>>>>>>> .merge-right.r14383
 						<?php else : ?>
 							<a href="<?php echo JRoute::_($result->href); ?>">
 
@@ -20,11 +36,18 @@
 
 						if ($result->href) : ?>
 							</a>
+<<<<<<< .working
 							</dt>
 						<?php endif;
 						if ($result->section) : ?>
 						<dd class="result-category">
 
+=======
+						<?php endif;?>
+
+						<?php if ($result->section) : ?>
+							<br />
+>>>>>>> .merge-right.r14383
 							<span class="small<?php echo $this->params->get('pageclass_sfx'); ?>">
 								(<?php echo $this->escape($result->section); ?>)
 							</span>
