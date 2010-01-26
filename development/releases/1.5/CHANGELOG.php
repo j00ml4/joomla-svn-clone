@@ -2,7 +2,7 @@
 /**
 * @version		$Id$
 * @package		Joomla
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * Joomla! is free software. This version may have been modified pursuant
 * to the GNU General Public License, and as distributed it includes or
@@ -36,6 +36,9 @@ $ -> Language fix or change
 ^ -> Change
 - -> Removed
 ! -> Note
+
+26-Jan-2010 Louis Landry
+ ^ Updated copyright notices for 2010
 
 -------------------- 1.5.15 Stable Release [05-November-2009] ------------------
 
@@ -100,7 +103,7 @@ $ -> Language fix or change
  # [#17559] Change to Beez Template to make it more generic
  # [#17231] mod_newsflash doesn't honour alternative read more text
  # [#17215] Missing <blockquote> button in TinyMCE 3
- 
+
 25-Sept-2009 Ian MacLennan
  # [#16484] Password field changed in configuration.php by Administration > Global Configuration
  # [#16804] Linked image in Beez template jumps in IE8
@@ -167,7 +170,7 @@ $ -> Language fix or change
  $ [#16950] Lots of missing language strings in TinyMCE v3
  # [#16593] JFile::upload() uses chmod 777 in FTP mode
  # [#15673] Different time create date and start publishing in beez
- # [#16601] Section filter on article manager showing non content sections as well 
+ # [#16601] Section filter on article manager showing non content sections as well
  # [#16607] Mod Newsflash read more link broken with Beez template
  # [#16719] JHTML::tooltip quote problem
  # [#16753] CSS file is not updated when you edit the joomla
