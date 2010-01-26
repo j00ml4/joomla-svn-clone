@@ -39,6 +39,7 @@ $ -> Language fix or change
 
 26-Jan-2010 Louis Landry
  ^ Updated copyright notices for 2010
+ ^ Moved testing infrastructure from the /testing/ folder into the tree.
 
 -------------------- 1.5.15 Stable Release [05-November-2009] ------------------
 
