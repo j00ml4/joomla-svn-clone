@@ -118,7 +118,7 @@ class CategoriesModelCategory extends JModelForm
 		$table->metadata = $registry->toArray();
 
 		// Convert the result to a JObject
-		$result = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+		$result = JArrayHelper::toObject($table->getProperties(1), 'StdClass');
 		
 		// Load category attributes
 		$query = new JQuery;
@@ -203,12 +203,13 @@ class CategoriesModelCategory extends JModelForm
 		if (file_exists($path))
 		{
 			require_once $path;
-			$prefix	= ucfirst($eName).ucfirst($section);
-			$cName	= $prefix.'HelperCategory';
+			$prefix	= ucfirst($eName);
+			$suffix = ucfirst($section);
+			$cName	= $prefix.'CategoryHelper'.$suffix;
 			if (class_exists($cName) && is_callable(array($cName, 'onPrepareForm')))
 			{
 				$lang->load($component);
-				call_user_func_array(array($cName, 'onPrepareForm'), array($section, &$form));
+				call_user_func_array(array($cName, 'onPrepareForm'), array(&$form));
 
 				// Check for an error.
 				if (JError::isError($form)) {
