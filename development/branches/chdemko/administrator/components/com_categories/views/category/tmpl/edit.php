@@ -63,16 +63,19 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('description'); ?>
 			<div class="clr"></div>
 			<?php echo $this->form->getInput('description'); ?>
-			<?php foreach ($this->form->getFieldsets() as $name => $fieldSet) :?>
-				<?php if (!in_array($name, array('params','metadata','_default')) && $name[0]=='_' && (!isset($fieldSet['hidden']) || !$fieldSet['hidden'])) :?>
-					<?php foreach ($this->form->getFields($name) as $field) :?>
-						<?php if (!$field->hidden):?>
-							<?php echo $field->label; ?>
-						<?php endif;?>
-						<?php echo $field->input; ?>
-					<?php endforeach;?>
-				<?php endif;?>
-			<?php endforeach;?>
+		</fieldset>
+		<?php foreach ($this->form->getFieldsets() as $name => $fieldSet) :?>
+			<?php if (!in_array($name, array('params','metadata','_default')) && $name[0]=='_' && (!isset($fieldSet['hidden']) || !$fieldSet['hidden'])) :?>
+		<fieldset class="adminform">
+			<legend><?php echo JText::_(isset($fieldSet['label']) ? $fieldSet['label'] : 'Config_'.$name);?></legend>
+				<?php foreach ($this->form->getFields($name) as $field) :?>
+					<?php if (!$field->hidden):?>
+						<?php echo $field->label; ?>
+					<?php endif;?>
+					<?php echo $field->input; ?>
+				<?php endforeach;?>
+			<?php endif;?>
+		<?php endforeach;?>
 		</fieldset>
 	</div>
 
