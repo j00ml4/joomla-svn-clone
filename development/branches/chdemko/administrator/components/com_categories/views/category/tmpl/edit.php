@@ -68,6 +68,9 @@ JHtml::_('behavior.formvalidation');
 			<?php if (!in_array($name, array('params','metadata','_default')) && $name[0]=='_' && (!isset($fieldSet['hidden']) || !$fieldSet['hidden'])) :?>
 		<fieldset class="adminform">
 			<legend><?php echo JText::_(isset($fieldSet['label']) ? $fieldSet['label'] : str_replace('.','_',$this->item->extension).'_Config_'.$name);?></legend>
+				<?php if (isset($fieldSet['description'])) :?>
+					<p class="tip"><?php echo JText::_($fieldSet['description']);?></p>
+				<?php endif;?>
 				<?php foreach ($this->form->getFields($name) as $field) :?>
 					<?php if (!$field->hidden):?>
 						<?php echo $field->label; ?>
