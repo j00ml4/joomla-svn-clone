@@ -9,41 +9,42 @@
 
 // no direct access
 defined('_JEXEC') or die;
+
+JHtml::core();
+
+$n = count($this->items);
 ?>
-<script language="javascript" type="text/javascript">
-	function tableOrdering(order, dir, task) {
-	var form = document.adminForm;
 
-	form.filter_order.value 	= order;
-	form.filter_order_Dir.value	= dir;
-	document.adminForm.submit(task);
-}
-</script>
-
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()); ?>" method="post" name="adminForm">
-
-		<div class="limit-box">
-			<?php echo JText::_('DISPLAY_NUM') .'&nbsp;'; ?>
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
+	<fieldset class="filters">
+	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
+	<?php if ($this->params->get('show_pagination_limit')) : ?>
+		<div class="display-limit">
+			<?php echo JText::_('Display_Num'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
+	<?php endif; ?>
+	</fieldset>
 
 		<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
 		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
 </form>
 
-	<table class="jlist-table">
+	<table class="category">
 		<?php if ($this->params->def('show_headings', 1)) : ?>
 		<thead>
 			<tr>
-
-				<th class="item-num">
-					<?php echo JText::_('Num'); ?>
-				</th>
-
+				
+				<?php if ($this->params->get('show_name')) : ?>
 				<th class="item-title">
-					<?php echo JHtml::_('grid.sort',  'News Feed', 'title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  JText::_('Feed Name'), 'title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-
+				<?php endif; ?>
+				<?php if ($this->params->get('show_articles')) : ?>
+				<th class="item-article">
+					<?php echo JHtml::_('grid.sort',  JText::_('Num Articles'), 'title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				</th>
+				<?php endif; ?>
 			</tr>
 		</thead>
 		<?php endif; ?>
@@ -52,20 +53,6 @@ defined('_JEXEC') or die;
 			<?php foreach ($this->items as $i => $item) : ?>
 				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
 
-					<?php if ($this->params->get('show_name')) : ?>
-						<td class="item-title">
-							<?php echo JText::_('Feed Name'); ?>
-						</td>
-					<?php endif; ?>
-
-					<?php  if ($this->params->get('show_articles')) : ?>
-						<td class="item-num-art">
-							<?php echo JText::_('Num Articles'); ?>
-						</td>
-					<?php  endif; ?>
-				</tr>
-
-				<tr>
 					<td class="item-title">
 						<a href="<?php echo $item->link; ?>">
 							<?php echo $item->name; ?></a>
