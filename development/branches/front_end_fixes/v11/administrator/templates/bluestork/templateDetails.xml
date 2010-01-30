@@ -4,7 +4,7 @@
 	type="template"
 	version="1.6"
 	client="administrator">
-	<name>BlueStork</name>
+	<name>TEMPLATE_BLUESTORK</name>
 	<creationDate>07/02/09</creationDate>
 	<author>Ron Severdia</author>
 	<authorEmail>contact@kontentdesign.com</authorEmail>
@@ -12,7 +12,7 @@
 	<copyright>2009 - 2010</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<version>0.6</version>
-	<description>BLUESTORK_DESC</description>
+	<description>TEMPLATE_BLUESTORK_DESC</description>
 	<files>
 		<filename>index.php</filename>
 		<filename>login.php</filename>
@@ -44,8 +44,8 @@
 			name="useRoundedCorners"
 			type="list"
 			default="1"
-			label="Use_Rounded_Corners"
-			description="Enable/Disable_Rounded_Corner_Effect">
+			label="TEMPLATE_BLUESTORK_ROUNDED_LABEL"
+			description="TEMPLATE_BLUESTORK_ROUNDED_DESC">
 			<option
 				value="0">JDISABLED</option>
 			<option
@@ -55,8 +55,8 @@
 			name="showSiteName"
 			type="list"
 			default="0"
-			label="Show_Site_Name"
-			description="Show_Site_Name_Desc">
+			label="TEMPLATE_BLUESTORK_SHOW_SITE_NAME_LABEL"
+			description="TEMPLATE_BLUESTORK_SHOW_SITE_NAME_DESC">
 			<option
 				value="0">JDISABLED</option>
 			<option
@@ -67,8 +67,8 @@
 			name="textBig"
 			type="list"
 			default="0"
-			label="Bigger_Text"
-			description="BIGGER_TEXT_DESC">
+			label="TEMPLATE_BLUESTORK_BIGGER_TEXT_LABEL"
+			description="TEMPLATE_BLUESTORK_BIGGER_TEXT_DESC">
 			<option
 				value="0">JDISABLED</option>
 			<option
@@ -79,8 +79,8 @@
 			name="highContrast"
 			type="list"
 			default="0"
-			label="High_Contrast"
-			description="High_Contrast_Desc">
+			label="TEMPLATE_BLUESTORK_HIGH CONTRAST_LABEL"
+			description="TEMPLATE_BLUESTORK_HIGH_CONTRAST_DESC">
 			<option
 				value="0">JDISABLED</option>
 			<option
