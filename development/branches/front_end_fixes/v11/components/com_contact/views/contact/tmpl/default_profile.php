@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 		<?php foreach ($this->contact->profile as $profile) :	?>
 			<li>
 
-				<?php echo $profile->text = htmlspecialchars($profile->profile); ?>
+				<?php echo $profile->text = htmlspecialchars($profile->profile_value); ?>
 				
 			</li>
 		<?php endforeach; ?>

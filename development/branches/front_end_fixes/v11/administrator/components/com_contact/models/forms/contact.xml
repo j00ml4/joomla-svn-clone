@@ -99,7 +99,7 @@
 			name="sortname2"
 			type="text"
 			label="Contact_sortName2_Label"
-			description="Contact_sortName3_Desc"
+			description="Contact_sortName2_Desc"
 			class="inputbox"
 			size="30"
 			required="" />
