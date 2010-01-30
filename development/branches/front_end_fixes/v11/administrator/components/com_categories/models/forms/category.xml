@@ -199,8 +199,8 @@
 			/>
 		<field
 			name="image"
-			type="imagelist"
-			directory="/images"
+			type="mediamanager"
+			
 			hide_default="1"
 			default=""
 			label="Image"

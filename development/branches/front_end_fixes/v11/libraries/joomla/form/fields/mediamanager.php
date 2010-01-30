@@ -23,29 +23,36 @@ class JFormFieldMediamanager extends JFormField
 	 *
 	 * @var		string
 	 */
-	protected $type = 'Mediamanager';
+
 	protected function _getInput()
 	{	
+		$type = 'Mediamanager';
 		static $init = false;
 		$html = '';		
 
 		// Initialise variables.
 		$onchange	= (string)$this->_element->attributes()->onchange ? $this->_replacePrefix((string)$this->_element->attributes()->onchange) : '';
-		if (!$init) {
-			JHtml::_('behavior.modal');
-			$js = "
-			function jInsertFieldValue(value,id) {
-				var old_id = document.getElementById(id).value;
-				if (old_id != id)
-				{
-					document.getElementById(id).value = value;
-					".$onchange."
-				}
-			}";
+		$document	= JFactory::getDocument();
+		// Load the modal behavior.
+		JHtml::_('behavior.modal', 'a.modal_'.$this->inputId);
+
+		// Add the JavaScript select function to the document head.
+		$document->addScriptDeclaration(
+		"function jSelectMedia_".$this->inputId."(id, name, el) {
+			var old_id = document.getElementById('".$this->inputId."_id').value;
+			if (old_id != id)
+			{
+			document.getElementById('".$this->inputId."_id').value = id;
+				document.getElementById('".$this->inputId."_name').value = name;
+				".$onchange."
+			}
+			SqueezeBox.close();
+		}"
+		);	
 			$doc = &JFactory::getDocument();
 			$doc->addScriptDeclaration($js);
 			$init = true;
-		}
+		
 	
 
 		// Setup variables for display.
