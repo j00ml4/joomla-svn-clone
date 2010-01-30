@@ -49,11 +49,6 @@ class JFormFieldMediamanager extends JFormField
 			SqueezeBox.close();
 		}"
 		);	
-			$doc = &JFactory::getDocument();
-			$doc->addScriptDeclaration($js);
-			$init = true;
-		
-	
 
 		// Setup variables for display.
 		$html = array();
