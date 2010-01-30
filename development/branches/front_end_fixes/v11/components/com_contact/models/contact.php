@@ -128,17 +128,16 @@ class ContactModelContact extends JModel
 				' ORDER BY state DESC, created DESC' ;
 			$this->_db->setQuery($query, 0, 10);
 			$articles = $this->_db->loadObjectList();
-			$contact->articles=$articles;
+			$result->articles = $articles;
 
 			//get the profile information for the linked user
-						$query = 'SELECT user_id, profile_key, profile_value, ordering' .
+			$query = 'SELECT user_id, profile_key, profile_value, ordering' .
 				' FROM #__user_profiles' .
 				' WHERE user_id = '.(int)$result->user_id .
-
 				' ORDER BY ordering ASC' ;
 			$this->_db->setQuery($query, 0, 10);
 			$profile = $this->_db->loadObjectList();
-			$contact->profile=$profile;
+			$result->profile = $profile;
 			
 		}
 		return $result;
