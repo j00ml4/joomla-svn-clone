@@ -151,6 +151,21 @@
 				<option value="0">JCommon_Hide</option>
 				<option value="1">JCommon_Show</option>
 		</field>
+		
+			<field
+				name="show_pagination_results"
+				type="list"
+				default=""
+				label="Pagination Results"
+				description="fieldPAGINATIONRESULTS">
+				<option 
+					value="">JCOMMON_USE_GLOBAL</option>
+				<option
+					value="0">Hide</option>
+				<option
+					value="1">Show</option>
+			</field>
+		
 	</fields>
 	
 	<fields
