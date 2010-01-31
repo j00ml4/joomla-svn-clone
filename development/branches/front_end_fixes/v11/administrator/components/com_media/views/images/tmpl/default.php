@@ -16,7 +16,7 @@ echo $params->get('image_path', 'images');?>/';
 </script>
 <form action="index.php" id="imageForm" method="post" enctype="multipart/form-data">
 	<div id="messages" style="display: none;">
-		<span id="message"></span><img src="<?php echo JURI::base() ?>media/media/images/dots.gif" width="22" height="12" alt="..." />
+		<span id="message"></span><?php echo JHTML::_('image', 'media/dots.gif', '...', array('width' =>22, 'height' => 12), true)?>
 	</div>
 	<fieldset>
 		<div class="fltlft">
@@ -25,7 +25,7 @@ echo $params->get('image_path', 'images');?>/';
 			<button type="button" id="upbutton" title="<?php echo JText::_('DIRECTORY_UP') ?>"><?php echo JText::_('Up') ?></button>
 		</div>
 		<div class="fltrt">
-			<button type="button" onclick="ImageManager.onok();window.parent.SqueezeBox.close();"><?php echo JText::_('Insert') ?></button>
+			<button type="button" onclick="ImageManager.onok();window.parent.document.getElementById('sbox-window').close();"><?php echo JText::_('Insert') ?></button>
 			<button type="button" onclick="window.parent.SqueezeBox.close();"><?php echo JText::_('Cancel') ?></button>
 		</div>
 	</fieldset>
