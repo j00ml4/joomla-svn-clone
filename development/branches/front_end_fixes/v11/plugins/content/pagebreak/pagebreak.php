@@ -157,7 +157,7 @@ class plgContentPagebreak extends JPlugin
 		<table cellpadding="0" cellspacing="0" class="contenttoc" align="right">
 		<tr>
 			<th>'
-			. JText::_('PLG_CONTENT_PAGEBREAK_ARTICLE_INDEX') .
+			. JText::_('Article Index') .
 			'</th>
 		</tr>
 		';
@@ -215,7 +215,7 @@ class plgContentPagebreak extends JPlugin
 			<tr>
 				<td>
 					<a href="'. $link .'" class="toclink">'
-					. JText::_('PLG_CONTENT_PAGEBREAK_ALL_PAGES') .
+					. JText::_('All Pages') .
 					'</a>
 				</td>
 			</tr>
@@ -227,7 +227,7 @@ class plgContentPagebreak extends JPlugin
 	protected function _createNavigation(&$row, $page, $n)
 	{
 		$pnSpace = "";
-		if (JText::_('JCOMMON_LT') || JText::_('JCOMMON_LT')) $pnSpace = " ";
+		if (JText::_('LT') || JText::_('GT')) $pnSpace = " ";
 
 		if ($page < $n-1)
 		{
@@ -235,10 +235,10 @@ class plgContentPagebreak extends JPlugin
 
 			$link_next = JRoute::_('&limitstart='. ($page_next));
 			// Next >>
-			$next = '<a href="'. $link_next .'">' . JText::_('JNEXT') . $pnSpace . JText::_('JCOMMON_GT') . JText::_('JCOMMON_GT') .'</a>';
+			$next = '<a href="'. $link_next .'">' . JText::_('Next') . $pnSpace . JText::_('JCOMMON_GT') . JText::_('JCOMMON_GT') .'</a>';
 		}
 		else {
-			$next = JText::_('JNEXT');
+			$next = JText::_('Next');
 		}
 
 		if ($page > 0)
