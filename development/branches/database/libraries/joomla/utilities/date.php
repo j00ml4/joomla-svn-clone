@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Utilities
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -189,10 +189,10 @@ class JDate extends DateTime
 	public function format($format, $local = true)
 	{
 		// Do string replacements for date format options that can be translated.
-		$format = preg_replace('/[^\\\]D/', self::DAY_ABBR, $format);
-		$format = preg_replace('/[^\\\]l/', self::DAY_NAME, $format);
-		$format = preg_replace('/[^\\\]F/', self::MONTH_ABBR, $format);
-		$format = preg_replace('/[^\\\]M/', self::MONTH_NAME, $format);
+		$format = preg_replace('/(^|[^\\\])D/', "\\1".self::DAY_ABBR, $format);
+		$format = preg_replace('/(^|[^\\\])l/', "\\1".self::DAY_NAME, $format);
+		$format = preg_replace('/(^|[^\\\])M/', "\\1".self::MONTH_ABBR, $format);
+		$format = preg_replace('/(^|[^\\\])F/', "\\1".self::MONTH_NAME, $format);
 
 		// If the returned time should not be local use GMT.
 		if (!$local) {

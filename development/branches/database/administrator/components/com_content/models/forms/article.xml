@@ -100,7 +100,7 @@
 		<field
 			id="created_by"
 			name="created_by"
-			type="text"
+			type="user"
 			label="Content_Created_by_Label"
 			description="Content_Created_by_Desc" />
 
@@ -248,6 +248,19 @@
 			default="">
 			<option value="">JOption_Default_Language</option>
 		</field>
+		<field
+			id="featured"
+			name="featured"
+			type="radio"
+			label="Content_Featured_Label"
+			description="Content_Featured_Desc"
+			default="0">
+			<option
+				value="0">JOFF</option>
+			<option
+				value="1">JON</option>
+		</field>
+			
 
 		<field
 			id="xreference"
@@ -283,7 +296,7 @@
 			label="Content_Attribs_Show_Title_Label"
 			description="Content_Attribs_Show_Title_Desc">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -297,7 +310,7 @@
 			description="Content_Attribs_Linked_Titles_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -310,7 +323,7 @@
 			description="Content_Attribs_Show_Intro_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -324,7 +337,7 @@
 			description="Content_Attribs_Show_Category_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -338,7 +351,7 @@
 			description="Content_Attribs_Link_Category_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -352,7 +365,7 @@
 			description="Content_Attribs_Show_Author_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -366,7 +379,7 @@
 			description="Content_Attribs_Show_Create_Date_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -380,7 +393,7 @@
 			description="Content_Attribs_Show_Modify_Date_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -408,12 +421,12 @@
 			description="Content_Attribs_Show_Readmore_Desc"
 			default="" >
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
-		</field>	
+		</field>
 
 		<field
 			name="show_print_icon"
@@ -422,7 +435,7 @@
 			description="Content_Attribs_Show_Print_Icon_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -436,7 +449,7 @@
 			description="Content_Attribs_Show_Email_Icon_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -450,7 +463,15 @@
 			description="JField_Alt_Page_title_Desc"
 			size="25"
 			default="" />
-
+		<field
+			id="alternative_readmore"
+			name="alternative_readmore"
+			type="inputbox"
+			label="JField_Readmore_Label"
+			description="JField_Readmore_Desc"
+			class="inputbox"
+			size="25"
+			default="" />
 		<field
 			name="layout"
 			type="componentlayout"
@@ -466,7 +487,7 @@
 			description="Content_Attribs_Allow_Ratings_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -480,7 +501,7 @@
 			description="Content_Attribs_Allow_Comments_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -501,7 +522,7 @@
 			description="JField_Metadata_Robots_Desc"
 			default="">
 			<option
-				value="">Use Global</option>
+				value="">USE_GLOBAL</option>
 			<option
 				value="0">index, follow</option>
 			<option

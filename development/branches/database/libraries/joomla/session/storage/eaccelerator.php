@@ -3,7 +3,7 @@
  * @version		$Id:eaccelerator.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Session
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +29,7 @@ class JSessionStorageEaccelerator extends JSessionStorage
 	function __construct($options = array())
 	{
 		if (!$this->test()) {
-            return JError::raiseError(404, "The eaccelerator extension is not available");
+            return JError::raiseError(404, "THE_EACCELERATOR_EXTENSION_IS_NOT_AVAILABLE");
         }
 
 		parent::__construct($options);

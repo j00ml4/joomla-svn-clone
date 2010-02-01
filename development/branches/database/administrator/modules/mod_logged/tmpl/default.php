@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	mod_logged
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -43,7 +43,7 @@ defined('_JEXEC') or die;
 			$auth = $user->authorize('core.manage', 'com_users');
 			if ($auth) :
 				$link 	= 'index.php?option=com_users&amp;task=edit&amp;cid[]='. $row->userid;
-				$name 	= '<a href="'. $link .'" title="'. JText::_('Edit User') .'">'. $row->username .'</a>';
+				$name 	= '<a href="'. $link .'" title="'. JText::_('EDIT_USER') .'">'. $row->username .'</a>';
 			else :
 				$name 	= $row->username;
 			endif;

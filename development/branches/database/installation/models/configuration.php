@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Installation
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -200,7 +200,7 @@ class JInstallationModelConfiguration extends JModel
 
 		// Check for errors.
 		if (JError::isError($db)) {
-			$this->setError(JText::sprintf('WARNNOTCONNECTDB', $db->toString()));
+			$this->setError(JText::sprintf('WARNNOTCONNECTDB', (string)$db));
 			return false;
 		}
 

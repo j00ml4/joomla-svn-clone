@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -60,7 +60,7 @@ class ContactViewCategory extends JView
 		{
 			// strip html from feed item title
 			$title = $this->escape($row->title);
-			$title = html_entity_decode($title);
+			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
 			// url link to article
 			$link = JRoute::_('index.php?option=com_contact&view=contact&id='. $row->slug .'&catid='.$row->catslug);

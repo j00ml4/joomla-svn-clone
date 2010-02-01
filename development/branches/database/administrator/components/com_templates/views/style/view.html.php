@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -41,7 +41,7 @@ class TemplatesViewStyle extends JView
 
 		// Bind the record to the form.
 		$itemForm->bind($item);
-		$paramsForm->$item->params;
+		$paramsForm->bind($item->params);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('item',		$item);
@@ -73,8 +73,8 @@ class TemplatesViewStyle extends JView
 		// If not checked out, can save the item.
 		if ($canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('style.apply');
-			JToolBarHelper::save('style.save');
+			JToolBarHelper::apply('style.apply','JTOOLBAR_APPLY');
+			JToolBarHelper::save('style.save','JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('style.save2new', 'JToolbar_Save_and_new');
 		}
 
@@ -84,12 +84,12 @@ class TemplatesViewStyle extends JView
 		}
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('style.cancel');
+			JToolBarHelper::cancel('style.cancel','JTOOLBAR_CANCEL');
 		}
 		else {
 			JToolBarHelper::cancel('style.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.style.edit');
+		JToolBarHelper::help('screen.style.edit','JTOOLBAR_HELP');
 	}
 }

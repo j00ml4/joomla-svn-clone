@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_login
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -54,8 +54,8 @@ endif; ?>
 	</p>
 	<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
 	<p id="form-login-remember">
-		<label for="modlgn_remember"><?php echo JText::_('Remember me') ?></label>
-		<input id="modlgn_remember" type="checkbox" name="remember" class="inputbox" value="yes" alt="Remember Me" />
+		<label for="modlgn_remember"><?php echo JText::_('REMEMBER_ME') ?></label>
+		<input id="modlgn_remember" type="checkbox" name="remember" class="inputbox" value="yes" alt="<?php echo JText::_('REMEMBER_ME') ?>" />
 	</p>
 	<?php endif; ?>
 	<input type="submit" name="Submit" class="button" value="<?php echo JText::_('LOGIN') ?>" />

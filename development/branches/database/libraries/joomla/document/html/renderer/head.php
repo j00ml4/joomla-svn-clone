@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -69,7 +69,7 @@ class JDocumentRendererHead extends JDocumentRenderer
 
 		$buffer .= $tab.'<meta name="description" content="'.$document->getDescription().'" />'.$lnEnd;
 		$buffer .= $tab.'<meta name="generator" content="'.$document->getGenerator().'" />'.$lnEnd;
-		$buffer .= $tab.'<title>'.htmlspecialchars($document->getTitle()).'</title>'.$lnEnd;
+		$buffer .= $tab.'<title>'.htmlspecialchars($document->getTitle(), ENT_COMPAT, 'UTF-8').'</title>'.$lnEnd;
 
 		// Generate link declarations
 		foreach ($document->_links as $link) {

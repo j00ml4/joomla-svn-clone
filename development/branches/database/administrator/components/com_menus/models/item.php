@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -155,6 +155,7 @@ class MenusModelItem extends JModelForm
 				if (isset($args['option'])) {
 					// Load the language file for the component.
 					$lang = &JFactory::getLanguage();
+					$lang->load($args['option'],JPATH_ADMINISTRATOR.'/components/'.$args['option']);
 					$lang->load($args['option']);
 
 					// Determine the component id.
@@ -723,7 +724,7 @@ class MenusModelItem extends JModelForm
 		foreach ($items as &$item) {
 			$registry = new JRegistry;
 			$registry->loadJSON($item->params);
-			$params = $registry->toString();
+			$params = (string)$registry;
 
 			$this->_db->setQuery(
 				'UPDATE #__menu' .

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Content
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -55,7 +55,7 @@ class SearchController extends JController
 		if ($areas) {
 			foreach($areas as $area)
 			{
-				$post['areas'][] = JFilterInput::clean($area, 'cmd');
+				$post['areas'][] = JFilterInput::getInstance()->clean($area, 'cmd');
 			}
 		}
 

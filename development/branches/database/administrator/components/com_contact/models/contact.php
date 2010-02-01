@@ -1,7 +1,7 @@
 <?php
 /**
  * @version
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -165,6 +165,12 @@ class ContactModelContact extends JModelForm
 		}
 
 		// Bind the data.
+		// Load email_form params into params array
+		foreach ($data['email_form'] as $key => $value) {
+			$data['params'][$key] = $value;
+		}
+		$data['email_form'] = array();
+
 		if (!$table->bind($data)) {
 			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
 			return false;

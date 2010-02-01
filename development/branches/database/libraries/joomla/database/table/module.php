@@ -3,7 +3,7 @@
 
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -43,7 +43,7 @@ class JTableModule extends JTable
 		// check for valid name
 		if (trim($this->title) == '')
 		{
-			$this->setError(JText::sprintf('must contain a title', JText::_('Module')));
+			$this->setError(JText::sprintf('MUST_CONTAIN_A_TITLE', JText::_('Module')));
 			return false;
 		}
 
@@ -64,7 +64,7 @@ class JTableModule extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);

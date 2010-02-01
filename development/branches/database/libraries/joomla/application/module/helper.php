@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -148,10 +148,10 @@ abstract class JModuleHelper
 		if (!$module->user && file_exists($path))
 		{
 			$lang = &JFactory::getLanguage();
-			// 1.5 or Core
-			$lang->load($module->module);
 			// 1.6 3PD
 			$lang->load($module->module, dirname($path));
+			// 1.5 or Core
+			$lang->load($module->module);
 
 			$content = '';
 			ob_start();
@@ -265,7 +265,7 @@ abstract class JModuleHelper
 
 		if (null === ($modules = $db->loadObjectList()))
 		{
-			JError::raiseWarning('SOME_ERROR_CODE', JText::_('Error Loading Modules') . $db->getErrorMsg());
+			JError::raiseWarning('SOME_ERROR_CODE', JText::_('ERROR_LOADING_MODULES') . $db->getErrorMsg());
 			return false;
 		}
 

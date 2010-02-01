@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,9 +27,9 @@ class InstallerViewDiscover extends InstallerViewDefault
 		 */
 		JToolBarHelper::custom('discover.install', 'config', 'config', 'Install', true, false);
 		JToolBarHelper::custom('discover.refresh', 'refresh', 'refresh','Discover',false,false);
-		JToolBarHelper::custom('discover.purge', 'purge', 'purge', 'Purge Cache', false,false);
+		JToolBarHelper::custom('discover.purge', 'purge', 'purge', 'PURGE_CACHE', false,false);
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.installer');
+		JToolBarHelper::help('screen.installer','JTOOLBAR_HELP');
 
 		// Get data from the model
 		$state		= &$this->get('State');

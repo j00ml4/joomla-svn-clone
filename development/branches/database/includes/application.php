@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -223,14 +223,14 @@ final class JSite extends JApplication
 			{
 				// Redirect to login
 				$uri		= JFactory::getURI();
-				$return		= $uri->toString();
+				$return		= (string)$uri;
 
 				$this->setUserState('users.login.form.data',array( 'return' => $return ) );
 
 				$url	= 'index.php?option=com_users&view=login';
 				$url	= JRoute::_($url, false);
 
-				$this->redirect($url, JText::_('You must login first'));
+				$this->redirect($url, JText::_('YOU_MUST_LOGIN_FIRST'));
 			}
 			else {
 				JError::raiseError(403, JText::_('ALERTNOTAUTH'));
@@ -342,13 +342,15 @@ final class JSite extends JApplication
 
 		// Allows for overriding the active template from the request
 		$template->template = JRequest::getCmd('template', $template->template);
-		$template->template = JFilterInput::clean($template->template, 'cmd'); // need to filter the default value as well
+		$template->template = JFilterInput::getInstance()->clean($template->template, 'cmd'); // need to filter the default value as well
 
 		// Fallback template
 		if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php')) {
 			$template->template = 'rhuk_milkyway';
 		}
 
+		$template->params = new JParameter($template->params);
+		
 		// Cache the result
 		$this->template = $template;
 		if ($params) {

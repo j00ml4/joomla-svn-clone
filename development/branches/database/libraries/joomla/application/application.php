@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -650,8 +650,14 @@ class JApplication extends JObject
 	 *
 	 * @return	string
 	 */
-	public function getTemplate()
+	public function getTemplate($params = false)
 	{
+		if($params)
+		{
+			$template = new stdClass();
+			$template->template = 'system';
+			$template->params = new JParameter();
+		}
 		return 'system';
 	}
 

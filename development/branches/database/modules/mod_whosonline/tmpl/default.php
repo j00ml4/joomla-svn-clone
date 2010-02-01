@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_whosonline
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -42,7 +42,7 @@ if (($showmode > 0) && count($names)) : ?>
 
 	    <li>
 	    <?php if ($linknames==1) { ?>     
-	    <a href="index.php?option=com_users&view=profile&id=<?php echo $name->userid; ?> ">
+	    <a href="index.php?option=com_users&view=profile&member_id=<?php echo (int) $name->userid; ?>">
 	   <?php } ?>
 	    <?php echo $name->username; ?>
 	       <?php if ($linknames==1) : ?> 

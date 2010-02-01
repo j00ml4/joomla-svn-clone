@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -54,7 +54,7 @@ class ContentControllerArticle extends JController
 			$return = JRequest::getVar('return', base64_encode(JURI::base()));
 		}
 
-		$return = JFilterInput::clean($return, 'base64');
+		$return = JFilterInput::getInstance()->clean($return, 'base64');
 		$return = base64_decode($return);
 
 		if (!JURI::isInternal($return)) {

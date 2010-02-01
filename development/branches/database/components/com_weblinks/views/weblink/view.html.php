@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -161,7 +161,7 @@ class WeblinksViewWeblink extends JView
 
 		JFilterOutput::objectHTMLSafe($weblink, ENT_QUOTES, 'description');
 
-		$this->assign('action', 	$uri->toString());
+		$this->assign('action', 	$uri);
 
 		$this->assignRef('lists'   , $lists);
 		$this->assignRef('weblink' , $weblink);

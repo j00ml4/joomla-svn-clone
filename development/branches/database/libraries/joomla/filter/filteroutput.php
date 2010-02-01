@@ -3,7 +3,7 @@
  * @version		$Id:output.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Filter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -173,7 +173,7 @@ class JFilterOutput
 		$text = preg_replace('/&amp;/', ' ', $text);
 		$text = preg_replace('/&quot;/', ' ', $text);
 		$text = strip_tags($text);
-		$text = htmlspecialchars($text);
+		$text = htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
 		return $text;
 	}
 }

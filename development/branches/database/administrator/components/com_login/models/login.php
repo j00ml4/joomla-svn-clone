@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
@@ -34,5 +34,8 @@ class LoginModelLogin extends JModel
 		$credentials['username'] = JRequest::getVar('username', '', 'method', 'username');
 		$credentials['password'] = JRequest::getVar('passwd', '', 'post', 'string', JREQUEST_ALLOWRAW);
 		$this->setState('credentials',$credentials);
+		
+		$return = base64_decode(JRequest::getString('return', 'index.php'));
+		$this->setState('return', $return);
 	}
 }

@@ -2,24 +2,20 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-$db			= &JFactory::getDbo();
-$session		= &JFactory::getSession();
+// Include the mod_online functions only once.
+require_once dirname(__FILE__).'/helper.php';
 
-$session_id = $session->getId();
+// Get layout data.
+$count = modOnlineHelper::getOnlineCount();
 
-// Get no. of users online not including current session
-$query = 'SELECT COUNT(session_id)'
-. ' FROM #__session'
-. ' WHERE session_id <> '.$db->Quote($session_id)
-;
-$db->setQuery($query);
-$online_num = intval($db->loadResult());
-
-echo $online_num . ' <img src="images/users.png" alt="'. JText::_('Users Online') .'" />';
+if ($count !== false) {
+	// Render the module.
+	require JModuleHelper::getLayoutPath('mod_online', $params->get('layout', 'default'));
+}

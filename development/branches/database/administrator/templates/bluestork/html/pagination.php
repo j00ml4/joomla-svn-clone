@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	templates.bluestork
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -69,7 +69,7 @@ function pagination_list_footer($list)
 	$lang = &JFactory::getLanguage();
 	$html = "<del class=\"container\"><div class=\"pagination\">\n";
 
-	$html .= "\n<div class=\"limit\">".JText::_('Display Num').$list['limitfield']."</div>";
+	$html .= "\n<div class=\"limit\">".JText::_('DISPLAY_NUM').$list['limitfield']."</div>";
 	$html .= $list['pageslinks'];
 	$html .= "\n<div class=\"limit\">".$list['pagescounter']."</div>";
 

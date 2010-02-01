@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install type="module" version="1.5.0" client="administrator">
+<install
+	type="module"
+	version="1.6.0"
+	client="administrator">
 	<name>Admin Menu</name>
 	<author>Joomla! Project</author>
 	<creationDate>March 2006</creationDate>
-	<copyright>Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
@@ -12,6 +15,9 @@
 	<files>
 		<filename module="mod_menu">mod_menu.php</filename>
 		<filename>menu.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
 	</files>
 	<fields
 		group="advanced">

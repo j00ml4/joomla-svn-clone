@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Search
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -196,7 +196,10 @@ class SearchModelSearch extends JModel
 			$searchareas = $dispatcher->trigger('onSearchAreas');
 
 			foreach ($searchareas as $area) {
-				$areas = array_merge($areas, $area);
+				if(is_array($area))
+				{
+					$areas = array_merge($areas, $area);
+				}
 			}
 
 			$this->_areas['search'] = $areas;

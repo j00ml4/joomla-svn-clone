@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -125,7 +125,7 @@ class JTableUser extends JTable
 		if (key_exists('params', $array) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		// Attempt to bind the data.
@@ -172,12 +172,12 @@ class JTableUser extends JTable
 
 		// Validate user information
 		if (trim($this->name) == '') {
-			$this->setError(JText::_('Please enter your name.'));
+			$this->setError(JText::_('PLEASE_ENTER_YOUR_NAME'));
 			return false;
 		}
 
 		if (trim($this->username) == '') {
-			$this->setError(JText::_('Please enter a user name.'));
+			$this->setError(JText::_('PLEASE_ENTER_A_USER_NAME'));
 			return false;
 		}
 

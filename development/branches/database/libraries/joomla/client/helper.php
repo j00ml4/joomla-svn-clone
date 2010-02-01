@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Client
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -227,7 +227,7 @@ class JClientHelper
 			if (JClientHelper::setCredentials($client, $user, $pass)) {
 				$return = false;
 			} else {
-				$return = &JError::raiseWarning('SOME_ERROR_CODE', 'JClientHelper::setCredentialsFromRequest failed');
+				$return = &JError::raiseWarning('SOME_ERROR_CODE', 'JClientHelper_setCredentialsFromRequest_failed');
 			}
 		}
 		else

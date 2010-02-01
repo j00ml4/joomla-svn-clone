@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id:observer.php 6961 2007-03-15 16:06:53Z tcp $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -135,7 +135,7 @@ class JObject
 
 		// Check if only the string is requested
 		if (JError::isError($error) && $toString) {
-			return $error->toString();
+			return (string)$error;
 		}
 
 		return $error;

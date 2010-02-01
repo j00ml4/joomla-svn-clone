@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
   * @package		Joomla
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
  defined('_JEXEC') or die;
@@ -165,7 +165,7 @@ function ContentBuildRoute(&$query)
 
 	if (isset($query['catid'])) {
 		// if we are routing an article or category where the category id matches the menu catid, don't include the category segment
-		if ((($view == 'article') and ($mView != 'category') and ($mView != 'article') and ($mCatid != intval($query['catid'])))) {
+		if ((isset($view) && ($view == 'article') and ($mView != 'category') and ($mView != 'article') and ($mCatid != intval($query['catid'])))) {
 			$segments[] = $query['catid'];
 		}
 		unset($query['catid']);

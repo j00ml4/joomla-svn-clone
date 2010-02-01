@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,7 +44,7 @@ class JElementEditors extends JElement
 		$db->setQuery($query);
 		$editors = $db->loadObjectList();
 
-		array_unshift($editors, JHtml::_('select.option',  '', '- '. JText::_('Select Editor') .' -'));
+		array_unshift($editors, JHtml::_('select.option',  '', '- '. JText::_('SELECT_EDITOR') .' -'));
 
 		return JHtml::_('select.genericlist', $editors, $control_name .'['. $name .']',
 			array(

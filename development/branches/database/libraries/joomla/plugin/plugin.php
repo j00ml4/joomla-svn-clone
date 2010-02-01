@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Plugin
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -76,9 +76,20 @@ abstract class JPlugin extends JEvent
 		if (isset($config['type'])) {
 			$this->_type = $config['type'];
 		}
+		$events = get_class_methods($this);
+		foreach($events as $event)
+		{
+			$method = array('event' => $event, 'handler' => array($this, 'onFireEvent'));
+			$subject->attach($method);
+		}
 		parent::__construct($subject);
 	}
 
+	public function onFireEvent()
+	{
+		$this->loadLanguage(null, JPATH_ADMINISTRATOR);
+	}
+	
 	/**
 	 * Loads the plugin language file
 	 *
@@ -88,13 +99,13 @@ abstract class JPlugin extends JEvent
 	 * @return	boolean	True, if the file has successfully loaded.
 	 * @since	1.5
 	 */
-	public function loadLanguage($extension = '', $basePath = JPATH_BASE)
+	public function loadLanguage($extension = '', $basePath = JPATH_ADMINISTRATOR)
 	{
 		if (empty($extension)) {
 			$extension = 'plg_'.$this->_type.'_'.$this->_name;
 		}
 
 		$lang = &JFactory::getLanguage();
-		return $lang->load(strtolower($extension), $basePath) || $lang->load (strtolower($extension), $basePath.DS.'plugins'.DS.$this->_type.DS.$this->_name);
+		return $lang->load (strtolower($extension), JPATH_ROOT .DS.'plugins'.DS.$this->_type.DS.$this->_name) || $lang->load(strtolower($extension), $basePath);
 	}
 }

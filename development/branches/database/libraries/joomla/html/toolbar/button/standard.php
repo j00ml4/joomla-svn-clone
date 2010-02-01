@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +34,7 @@ class JButtonStandard extends JButton
 		$doTask	= $this->_getCommand($text, $task, $list);
 
 		$html	= "<a href=\"#\" onclick=\"$doTask\" class=\"toolbar\">\n";
-		$html .= "<span class=\"$class\" title=\"$i18n_text\">\n";
+		$html .= "<span class=\"$class\">\n";
 		$html .= "</span>\n";
 		$html	.= "$i18n_text\n";
 		$html	.= "</a>\n";
@@ -67,7 +67,7 @@ class JButtonStandard extends JButton
 	protected function _getCommand($name, $task, $list)
 	{
 		$todo		= JString::strtolower(JText::_($name));
-		$message	= JText::sprintf('Please make a selection from the list to', $todo);
+		$message	= JText::sprintf('PLEASE_MAKE_A_SELECTION_FROM_THE_LIST_TO', $todo);
 		$message	= addslashes($message);
 
 		if ($list) {

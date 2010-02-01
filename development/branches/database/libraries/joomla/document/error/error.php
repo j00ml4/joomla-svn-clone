@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Document
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -17,6 +17,9 @@ defined('JPATH_BASE') or die;
  * @subpackage	Document
  * @since		1.5
  */
+
+jimport('joomla.document.document');
+
 class JDocumentError extends JDocument
 {
 	/**
@@ -81,7 +84,7 @@ class JDocumentError extends JDocument
 
 		// check template
 		$directory	= isset($params['directory']) ? $params['directory'] : 'templates';
-		$template	= isset($params['template']) ? JFilterInput::clean($params['template'], 'cmd') : 'system';
+		$template	= isset($params['template']) ? JFilterInput::getInstance()->clean($params['template'], 'cmd') : 'system';
 
 		if (!file_exists($directory.DS.$template.DS.$file)) {
 			$template = 'system';

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -105,7 +105,7 @@ class ContentModelArticles extends JModelList
 
 		// Join over the users for the author.
 		$query->select("CASE WHEN a.created_by_alias > ' ' THEN a.created_by_alias ELSE ua.name END AS author_name");
-		
+
 		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
 
 		// Filter by access level.
@@ -164,7 +164,7 @@ class ContentModelArticles extends JModelList
 
 		$query->where('(a.publish_up = '.$nullDate.' OR a.publish_up <= '.$nowDate.')');
 		$query->where('(a.publish_down = '.$nullDate.' OR a.publish_down >= '.$nowDate.')');
-		
+
 		// process the filter for list views with user-entered filters
 		$params = $this->getState('params');
 		if ((is_object($params)) && ($params->get('filter_field') != 'hide') && ($filter = $this->getState('list.filter')))
@@ -217,23 +217,27 @@ class ContentModelArticles extends JModelList
 		foreach ($items as &$item)
 		{
 			$registry = new JRegistry;
+			/*
+			 *  TODO: investigate if it is better to sync the namespace usage in JRegistry and JParameter, if we let it unsync the we need to know what namespace are the Objects are using before we merge
+			 */
+			//$registry->loadJSON($item->attribs,'_default');
 			$registry->loadJSON($item->attribs);
 			$item->params = clone $this->getState('params');
 			$item->params->merge($registry);
-			
+
 			// get display date
 			switch ($item->params->get('show_date'))
 			{
 				case 'modified':
 					$item->displayDate = $item->modified;
 					break;
-				
+
 				case 'published':
 					$item->displayDate = ($item->publish_up == 0) ? $item->created : $item->publish_up;
 					break;
-				
+
 				default:
-				case 'created': 
+				case 'created':
 					$item->displayDate = $item->created;
 					break;
 			}

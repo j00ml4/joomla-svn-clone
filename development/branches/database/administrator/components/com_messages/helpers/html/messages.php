@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,7 +30,7 @@ class JHtmlMessages extends JController
 			0	=> array('publish_x.png',	'messages.publish',		'Messages_Option_unRead',	'Messages_Publish_Item')
 		);
 		$state	= JArrayHelper::getValue($states, (int) $value, $states[0]);
-		$html	= JHtml::_('image.administrator', $state[0], '/templates/bluestork/images/admin/', null, '/templates/bluestork/images/admin/', JText::_($state[2]));
+		$html	= JHtml::_('image', 'admin/'.$state[0], JText::_($state[2]), NULL, true);
 		if ($canChange) {
 			$html = '<a href="javascript:void(0);" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" title="'.JText::_($state[3]).'">'
 					.$html.'</a>';

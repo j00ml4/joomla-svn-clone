@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -131,10 +131,10 @@ class ModulesModelSelect extends JModelList
 				$item->xml = null;
 			}
 
+			// 1.6 3PD Extension Support
+			$lang->load($item->module, $client->path.'/modules/'.$item->module);
 			// 1.5 Format; Core files or language packs
 			$lang->load($item->module, $client->path);
-			// 1.6 3PD Extension Support
-			$lang->load('joomla', $client->path.'/modules/'.$item->module);
 		}
 
 		// TODO: Use the cached XML from the extensions table?

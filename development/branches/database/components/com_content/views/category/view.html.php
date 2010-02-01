@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -143,7 +143,7 @@ class ContentViewCategory extends JView
 			$child->description	= JHtml::_('content.prepare', $child->description);
 		}
 
-		$this->assign('action', 	str_replace('&', '&amp;', $uri->toString()));
+		$this->assign('action', 	str_replace('&', '&amp;', $uri));
 		
 		$this->assignRef('params',		$params);
 		$this->assignRef('item',		$item);
@@ -206,13 +206,13 @@ class ContentViewCategory extends JView
 
 			if ($view != 'category' || ($view == 'category' && $id != $this->item->id))
 			{
-				foreach($this->parents as $parent)
-				{
-					$pathway->addItem(
-						$parent->title,
-						ContentRoute::category($parent->slug)
-					);
-				}
+				// foreach($this->parents as $parent)
+				// {
+					// $pathway->addItem(
+					//	$parent->title,
+					//	ContentRoute::category($parent->slug)
+					// );
+				//}
 				$pathway->addItem($this->item->title);
 			}
 		}

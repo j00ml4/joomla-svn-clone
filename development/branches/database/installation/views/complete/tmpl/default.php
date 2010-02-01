@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Installation
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -97,7 +97,7 @@ JHtml::_('behavior.formvalidation');
 								<tr>
 									<td align="center">
 										<h3>
-										<?php echo JText::_('Administration Login Details'); ?>
+										<?php echo JText::_('ADMINISTRATION_LOGIN_DETAILS'); ?>
 										</h3>
 									</td>
 								</tr>

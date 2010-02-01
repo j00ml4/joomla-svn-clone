@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -38,7 +38,7 @@ class UsersControllerRegistration extends UsersController
 
 		// If user registration or account activation is disabled, throw a 403.
 		if ($uParams->get('useractivation', 1) == 0 || $uParams->get('allowUserRegistration', 1) == 0) {
-			JError::raiseError(403, JText::_('ACCESS FORBIDDEN'));
+			JError::raiseError(403, JText::_('ACCESS_FORBIDDEN'));
 			return false;
 		}
 

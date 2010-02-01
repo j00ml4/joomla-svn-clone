@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -40,12 +40,12 @@ class JFormFieldEditor extends JFormField
 	 */
 	protected function _getInput()
 	{
-		$rows		= $this->_element->attributes('rows');
-		$cols		= $this->_element->attributes('cols');
-		$height		= ($this->_element->attributes('height')) ? $this->_element->attributes('height') : '250';
-		$width		= ($this->_element->attributes('width')) ? $this->_element->attributes('width') : '100%';
-		$class		= ($this->_element->attributes('class') ? 'class="'.$this->_element->attributes('class').'"' : 'class="text_area"');
-		$buttons	= $this->_element->attributes('buttons');
+		$rows		= (string)$this->_element->attributes()->rows;
+		$cols		= (string)$this->_element->attributes()->cols;
+		$height		= ((string)$this->_element->attributes()->height) ? (string)$this->_element->attributes()->height : '250';
+		$width		= ((string)$this->_element->attributes()->width) ? (string)$this->_element->attributes->width : '100%';
+		$class		= ((string)$this->_element->attributes()->class ? 'class="'.$this->_element->attributes()->class.'"' : 'class="text_area"');
+		$buttons	= (string)$this->_element->attributes()->buttons;
 
 		if ($buttons == 'true' || $buttons == 'yes' || $buttons == 1) {
 			$buttons = true;
@@ -57,7 +57,7 @@ class JFormFieldEditor extends JFormField
 
 		$editor = $this->_getEditor();
 
-		return $editor->display($this->inputName, htmlspecialchars($this->value), $width, $height, $cols, $rows, $buttons, $this->inputId);
+		return $editor->display($this->inputName, htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8'), $width, $height, $cols, $rows, $buttons, $this->inputId);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class JFormFieldEditor extends JFormField
 		if (empty($this->_editor)) {
 			// editor attribute can be in the form of:
 			// editor="desired|alternative"
-			if ($editorName = trim($this->_element->attributes('editor'))) {
+			if ($editorName = trim((string)$this->_element->attributes()->editor)) {
 				$parts	= explode('|', $editorName);
 				$db		= &JFactory::getDbo();
 				$query	= 'SELECT element' .
@@ -86,7 +86,8 @@ class JFormFieldEditor extends JFormField
 				} else {
 					$editorName	= '';
 				}
-				$this->_element->addAttribute('editor', $editorName);
+
+				$this->_element->attributes()->editor = $editorName;
 			}
 			$this->_editor = JFactory::getEditor($editorName ? $editorName : null);
 		}
