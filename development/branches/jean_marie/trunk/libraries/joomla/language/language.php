@@ -128,24 +128,33 @@ class JLanguage extends JObject
 		$this->setLanguage($lang);
 
 		$filename = JPATH_BASE.DS.'language'.DS.'overrides'.DS.$lang.'.override.ini';
-		if ($contents = @parse_ini_file($filename)) {
+		if (file_exists($filename) && $contents = $this->_parse($filename)) {
 			if (is_array($contents)) {
 				$this->_override = $contents;
 			}
 			unset($contents);
 		}
 
-		// Look for a special transliterate function for this language
+	// Look for a special transliterate function for this language
 		$function = str_replace('-', '', $lang.'Transliterate');
 		if (function_exists($function)) {
 			$this->_transliterator = $function;
 		} else {
-			// Function does not exist. Try to find it
-			$transFile = JPATH_ROOT.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
+			// Function does not exist. Try to find it in the Site language folder
+			$transFile = JPATH_SITE.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
 			if (file_exists($transFile)) {
 				require_once $transFile;
 				if (function_exists($function)) {
 					$this->_transliterator = $function;
+				}
+			} else {
+			// Function does not exist. Try to find it in the Administrator language folder
+				$transFile = JPATH_ADMINISTRATOR.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
+				if (file_exists($transFile)) {
+					require_once $transFile;
+					if (function_exists($function)) {
+						$this->_transliterator = $function;
+					}
 				}
 			}
 		}
@@ -363,12 +372,7 @@ class JLanguage extends JObject
 
 		$strings = false;
 		if (file_exists($filename)) {
-			ini_set('track_errors', '1');
-			$strings = @parse_ini_file($filename);
-			if (!empty($php_errormsg)) {
-				JError::raiseWarning(500, $php_errormsg);
-			}
-			ini_restore('track_errors');
+			$strings = $this->_parse($filename);
 		}
 
 		if ($strings) {
@@ -389,6 +393,38 @@ class JLanguage extends JObject
 		$this->_paths[$extension][$filename] = $result;
 
 		return $result;
+	}
+
+	/**
+	 * Parses a language file
+	 *
+	 * @param	string The name of the file
+	 * @since	1.6
+	 */
+	protected function _parse($filename)
+	{
+		ini_set('track_errors', '1');
+		$version = phpversion();
+		if($version >= "5.3.1") {
+			$contents = file_get_contents($filename);
+			$contents = str_replace(array('"_QQ_"','_QQ_"','"_QQ_'),array('\"','"\"','\""'),$contents);
+			$strings = @parse_ini_string($contents);
+			if (!empty($php_errormsg)) {
+				JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
+			}
+		} else {
+			$strings = @parse_ini_file($filename);
+			if ($version == "5.3.0") {
+				foreach($strings as $key => $string) {
+					$strings[$key]=str_replace('_QQ_','"',$string);
+				}
+			}
+			if (!empty($php_errormsg)) {
+				JError::raiseWarning(500, $php_errormsg);
+			}
+		}
+		ini_restore('track_errors');
+		return $strings;
 	}
 
 	/**

@@ -27,7 +27,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
 			if ($hasContent) :
-				echo $this->form->getField('articletext')->save();
+				echo $this->form->getField('content')->save();
 			endif;
 			?>
 			submitform(task);
@@ -80,7 +80,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 					<label>
 						<?php echo JText::_('Modules_Module_Description'); ?>
 					</label>
-					<?php echo $this->escape(JText::_($text)); ?>
+					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
 				<?php echo JText::_('Modules_XML_data_not_available'); ?>

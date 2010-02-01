@@ -36,7 +36,7 @@ class BannersTableBanner extends JTable
 	/** @var string */
 	var $clickurl			= '';
 	/** @var int */
-	var $state				= 0;
+	var $state				= null;
 	/** @var int */
 	var $catid				= null;
 	/** @var string */
@@ -153,7 +153,7 @@ class BannersTableBanner extends JTable
 			}
 			// encode params to JSON
 			$parameter->loadArray($params);
-			$array['params'] = $parameter->toString();
+			$array['params'] = (string)$parameter;
 		}
 		return parent::bind($array, $ignore);
 	}

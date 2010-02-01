@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
 
 
 
- <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
+ <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()); ?>" method="post" name="adminForm">
  <div class="filter">
          <?php echo JText::_('Display Num'); ?>
          <?php echo $this->pagination->getLimitBox(); ?>
@@ -61,7 +61,7 @@ defined('_JEXEC') or die;
                                 <td class="title">
                                 <p>
                                         <?php if ($this->params->get('link_icons') <> -1) : ?>
-                                                <?php echo JHtml::_('image.site',  $this->params->get('link_icons', 'weblink.png'), '/images/system/', $this->params->get('weblink_icons'), '/images/system/', 'Link');?>
+                                                <?php echo JHtml::_('image',  'system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('Link'), NULL, true);?>
                                         <?php endif; ?>
 
                                         <?php
@@ -86,7 +86,7 @@ defined('_JEXEC') or die;
                                                                 // TODO: open in a modal window
                                                                 JHtml::_('behavior.modal', 'a.modal'); ?>
 
-                                                                <a class="modal" title="<?php  echo $this->escape($item->title) ?> " href="<?php echo $link;?>"  rel="{handler: 'iframe', size: {x: 500, y: 506}}\">
+                                                                <a class="modal" title="<?php  echo $this->escape($item->title) ?> " href="<?php echo $link;?>"  rel="{handler: 'iframe', size: {x: 500, y: 506}}\"></a>
                                                                 <?php echo        $this->escape($item->title). ' </a>' ;
                                                                          break;
 
@@ -116,15 +116,13 @@ defined('_JEXEC') or die;
                         <?php endforeach; ?>
                </tbody>
                   </table>
-                  <? if($this->pagination->get('pages.total')>1): ?>
-               <div class="pagination">
-
-                                        <p><?php echo $this->pagination->getPagesCounter(); ?></p>
-
-
-                                <?php echo $this->pagination->getPagesLinks(); ?>
-
-                </div>
+                  <?php if($this->pagination->get('pages.total')>1): ?>
+			               <div class="pagination">
+			
+			                                <p><?php echo $this->pagination->getPagesCounter(); ?></p>		
+			                                <?php echo $this->pagination->getPagesLinks(); ?>
+			
+			                </div>
                   <?php endif; ?>
 
 

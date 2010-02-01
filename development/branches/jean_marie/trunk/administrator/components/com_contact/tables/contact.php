@@ -50,7 +50,7 @@ class ContactTableContact extends JTable
 	/** @var int */
 	public $default_con 		= null;
 	/** @var int */
-	public $published 			= 0;
+	public $published 			= null;
 	/** @var int */
 	public $checked_out 		= 0;
 	/** @var datetime */
@@ -102,7 +102,7 @@ class ContactTableContact extends JTable
 		if (is_array($this->params)) {
 			$registry = new JRegistry();
 			$registry->loadArray($this->params);
-			$this->params = $registry->toString();
+			$this->params = (string)$registry;
 		}
 
 		// Attempt to store the data.

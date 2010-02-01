@@ -155,8 +155,8 @@ class MenusModelItem extends JModelForm
 				if (isset($args['option'])) {
 					// Load the language file for the component.
 					$lang = &JFactory::getLanguage();
-					$lang->load($args['option']);
 					$lang->load($args['option'],JPATH_ADMINISTRATOR.'/components/'.$args['option']);
+					$lang->load($args['option']);
 
 					// Determine the component id.
 					$component = JComponentHelper::getComponent($args['option']);
@@ -724,7 +724,7 @@ class MenusModelItem extends JModelForm
 		foreach ($items as &$item) {
 			$registry = new JRegistry;
 			$registry->loadJSON($item->params);
-			$params = $registry->toString();
+			$params = (string)$registry;
 
 			$this->_db->setQuery(
 				'UPDATE #__menu' .
