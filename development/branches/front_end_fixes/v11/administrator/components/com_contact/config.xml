@@ -5,6 +5,19 @@
 		group="contact"
 		label="Contact_Config_Individual_Contact_Display">
 		<field
+			name="show_contact_category"
+			type="list"
+			default="hide"
+			label="Com_Contact_Contact_Contact_Show_Category_Label"
+			description="Com_Contact_Contact_Contact_Show_Category_Desc">
+			<option
+				value="hide">JHide</option>
+			<option
+				value="show_no_link">COM_CONTACT_SHOW_CATEGORY_NO_LINK</option>
+			<option
+				value="show_with_link">COM_CONTACT_SHOW_CATEGORY_WITH_LINK</option>
+		</field>
+		<field
 			name="show_contact_list"
 			type="radio"
 			default="0"
@@ -14,7 +27,7 @@
 				value="0">JHide</option>
 			<option
 				value="1">JShow</option>
-		</field>		
+		</field>
 		<field
 			name="show_name"
 			type="radio"

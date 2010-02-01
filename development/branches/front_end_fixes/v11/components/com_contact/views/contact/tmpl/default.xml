@@ -75,6 +75,22 @@
 		group="params"
 		label="Contact_Contact_Settings_Label"
 		description="">
+
+		<field
+			name="show_contact_category"
+			type="list"
+			default=""
+			label="Com_Contact_Contact_Contact_Show_Category_Label"
+			description="Com_Contact_Contact_Contact_Show_Category_Desc">
+			<option 
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="hide">JHide</option>
+			<option
+				value="show_no_link">COM_CONTACT_SHOW_CATEGORY_NO_LINK</option>
+			<option
+				value="show_with_link">COM_CONTACT_SHOW_CATEGORY_WITH_LINK</option>
+		</field>
 		
 		<field
 			name="show_contact_list"
