@@ -391,6 +391,22 @@
 		label="Contact_Parameters">
 
 		<field
+			name="show_contact_category"
+			type="list"
+			default=""
+			label="COM_CONTACT_CONTACT_CONTACT_SHOW_CATEGORY_LABEL"
+			description="COM_CONTACT_CONTACT_CONTACT_SHOW_CATEGORY_DESC">
+			<option 
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="hide">JHide</option>
+			<option
+				value="show_no_link">COM_CONTACT_SHOW_CATEGORY_NO_LINK</option>
+			<option
+				value="show_with_link">COM_CONTACT_SHOW_CATEGORY_WITH_LINK</option>
+		</field>
+
+		<field
 			name="show_name"
 			type="list"
 			default=""
@@ -403,7 +419,7 @@
 			<option
 				value="1">Jcommon_Show</option>
 		</field>
-
+		
 		<field
 			name="show_position"
 			type="list"
