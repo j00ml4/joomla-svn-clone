@@ -186,7 +186,7 @@ abstract class JHtml
 			$debug = JFactory::getConfig()->getValue('config.debug');
 		}
 
-		// TODO NOTE: Here we are checking for Konqueror - If they fix thier issue with compressed, we will need to update this
+		// TODO NOTE: Here we are checking for Konqueror - If they fix their issue with compressed, we will need to update this
 		$konkcheck		= strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "konqueror");
 		$uncompressed	= ($debug || $konkcheck) ? '-uncompressed' : '';
 
@@ -219,17 +219,31 @@ abstract class JHtml
 	 * @param	string 	The relative or absolute URL to use for the src attribute
 	 * @param	string	The target attribute to use
 	 * @param	array	An associative array of attributes to add
+	 * @param	boolean	If set to true, it tries to find an override for the file in the template
 	 * @since	1.5
 	 */
-	public static function image($url, $alt, $attribs = null)
+	public static function image($url, $alt, $attribs = null, $relative = false, $path_only = false)
 	{
 		if (is_array($attribs)) {
 			$attribs = JArrayHelper::toString($attribs);
 		}
 
-		if (strpos($url, 'http') !== 0) {
+		if($relative)
+		{
+			$app = JFactory::getApplication();
+			$cur_template = $app->getTemplate();
+			if (file_exists(JPATH_THEMES .'/'. $cur_template .'/images/'. $url)) {
+				$url = JURI::base(true).'/templates/'. $cur_template .'/images/'. $url;
+			} else {
+				$url = JURI::root(true).'/media/images/'.$url;
+			}
+			if($path_only)
+			{
+				return $url;
+			}
+		} elseif (strpos($url, 'http') !== 0) {
 			$url = JURI::root(true).'/'.$url;
-		};
+		}
 
 		return '<img src="'.$url.'" alt="'.$alt.'" '.$attribs.' />';
 	}
@@ -390,8 +404,8 @@ abstract class JHtml
 		$tooltip, $title = '', $image = 'tooltip.png', $text = '', $href = '', $link = 1
 	)
 	{
-		$tooltip	= addslashes(htmlspecialchars($tooltip));
-		$title		= addslashes(htmlspecialchars($title));
+		$tooltip	= addslashes(htmlspecialchars($tooltip, ENT_COMPAT, 'UTF-8'));
+		$title		= addslashes(htmlspecialchars($title, ENT_COMPAT, 'UTF-8'));
 
 		if (!$text) {
 			$image 	= JURI::root(true).'/includes/js/ThemeOffice/'. $image;
@@ -458,7 +472,7 @@ abstract class JHtml
 		}
 
 		return '<input type="text" name="'.$name.'" id="'.$id.'" value="'.htmlspecialchars($value, ENT_COMPAT, 'UTF-8').'" '.$attribs.' />'.
-				 '<img class="calendar" src="'.JURI::root(true).'/administrator/templates/bluestork/images/system/calendar.png" alt="calendar" id="'.$id.'_img" />';
+				 JHTML::_('image', 'system/calendar.png', JText::_('calendar'), array( 'class' => 'calendar', 'id' => $id.'_img'), true);
 	}
 
 	/**

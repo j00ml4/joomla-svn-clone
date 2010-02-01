@@ -100,7 +100,7 @@
 		<field
 			id="created_by"
 			name="created_by"
-			type="text"
+			type="user"
 			label="Content_Created_by_Label"
 			description="Content_Created_by_Desc" />
 
@@ -243,11 +243,24 @@
 			name="language"
 			type="contentlanguage"
 			label="JField_Language_Label"
-			description="JField_Article_Language_Desc"
+			description="JField_Language_Desc"
 			class="inputbox"
 			default="">
 			<option value="">JOption_Default_Language</option>
 		</field>
+		<field
+			id="featured"
+			name="featured"
+			type="radio"
+			label="Content_Featured_Label"
+			description="Content_Featured_Desc"
+			default="0">
+			<option
+				value="0">JOFF</option>
+			<option
+				value="1">JON</option>
+		</field>
+			
 
 		<field
 			id="xreference"

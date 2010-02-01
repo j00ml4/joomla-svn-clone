@@ -32,6 +32,7 @@ abstract class JHtmlImage
 	 * @param	string	$alt		Alternative text.
 	 * @param	array	$attribs	An associative array of attributes to add.
 	 * @param	bool	$asTag		True (default) to display full tag, false to return just the path.
+	 * @deprecated since 1.6
 	 */
 	public static function site($file, $folder = '/images/system/', $altFile = null, $altFolder = '/images/system/', $alt = null, $attribs = null, $asTag = true)
 	{
@@ -49,7 +50,7 @@ abstract class JHtmlImage
 		$cur_template = $app->getTemplate();
 
 		// Strip HTML.
-		$alt = html_entity_decode($alt);
+		$alt = html_entity_decode($alt, ENT_COMPAT, 'UTF-8');
 
 		if ($altFile) {
 			$src = $altFolder . $altFile;
@@ -83,7 +84,7 @@ abstract class JHtmlImage
 
 		// Outputs actual html <img> tag.
 		if ($asTag) {
-			return '<img src="'. $src .'" alt="'. html_entity_decode($alt) .'" '.$attribs.' />';
+			return '<img src="'. $src .'" alt="'. html_entity_decode($alt, ENT_COMPAT, 'UTF-8') .'" '.$attribs.' />';
 		}
 
 		return $src;
@@ -102,6 +103,7 @@ abstract class JHtmlImage
 	 * @param	string	$alt		Alternative text.
 	 * @param	array	$attribs	An associative array of attributes to add.
 	 * @param	bool	$asTag		True (default) to display full tag, false to return just the path.
+	 * @deprecated since 1.6
 	 */
 	public static function administrator($file, $folder = '/images/', $altFile = null, $altFolder = '/images/', $alt = null, $attribs = null, $asTag = true)
 	{
@@ -114,7 +116,7 @@ abstract class JHtmlImage
 		$cur_template = $app->getTemplate();
 
 		// Strip HTML.
-		$alt = html_entity_decode($alt);
+		$alt = html_entity_decode($alt, ENT_COMPAT, 'UTF-8');
 
 		if ($altFile) {
 			$image = $altFolder . $altFile;

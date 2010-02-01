@@ -27,7 +27,7 @@
 			type="menu"
 			default=""
 			label="Menu Name"
-			description="The name of the menu (default is mainmenu)" />
+			description="The name of the menu default is mainmenu" />
 		<field
 			name="startLevel"
 			type="text"
@@ -45,7 +45,10 @@
 			description="fieldSTOPLEVEL" />
 
 		<field
-			type="spacer" />
+			name="spacer1"
+			type="spacer"
+			hr="true" 
+			/>
 
 		<field
 			name="showAllChildren"
@@ -91,7 +94,10 @@
 			description="fieldTARGETPOSITION" />
 
 		<field
-			type="spacer" />
+			name="spacer2"
+			type="spacer"
+			hr="true" 
+			/>
 
 		<field
 			name="layout"

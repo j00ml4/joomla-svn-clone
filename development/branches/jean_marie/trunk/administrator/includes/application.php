@@ -90,7 +90,7 @@ class JAdministrator extends JApplication
 		{
 			//forward to https
 			$uri->setScheme('https');
-			$this->redirect($uri->toString());
+			$this->redirect((string)$uri);
 		}
 
 		// Trigger the onAfterRoute event.
@@ -238,7 +238,9 @@ class JAdministrator extends JApplication
 			if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php'))
 			{
 				$template->template = 'bluestork';
-				$template->params = '{}';
+				$template->params = new JParameter();
+			} else {
+				$template->params = new JParameter($template->params);
 			}
 		}
 		if ($params) {

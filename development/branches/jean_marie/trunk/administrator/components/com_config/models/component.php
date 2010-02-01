@@ -83,8 +83,8 @@ class ConfigModelComponent extends JModelForm
 
 		// Load common and local language files.
 		$lang = &JFactory::getLanguage();
-		$lang->load($option);
 		$lang->load($option, JPATH_COMPONENT);
+		$lang->load($option);
 
 		$result = JComponentHelper::getComponent($option);
 
@@ -116,7 +116,9 @@ class ConfigModelComponent extends JModelForm
 					$this->setError($asset->getError());
 					return false;
 				}
-				unset($data['option']);// We don't need this anymore
+				// We don't need this anymore
+					unset($data['option']);
+					unset($data['params']['rules']);
 			}
 			else
 			{
