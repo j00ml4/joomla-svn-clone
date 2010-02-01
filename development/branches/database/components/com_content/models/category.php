@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -62,7 +62,10 @@ class ContentModelCategory extends JModelItem
 
 		// Load the parameters. Merge Global and Menu Item params
 		$params	= $app->getParams();
-		$menuParams = new JParameter(JSite::getMenu()->getActive()->params);
+		$menuParams = new JParameter();
+			if (JSite::getMenu()->getActive()) {
+			$menuParams = new JParameter(JSite::getMenu()->getActive()->params);
+		}
 		$mergedParams = clone $menuParams;
 		$mergedParams->merge($params);
 		$this->setState('params', $mergedParams);

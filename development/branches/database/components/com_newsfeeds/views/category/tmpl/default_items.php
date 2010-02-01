@@ -1,5 +1,15 @@
-<?php // no direct access
-defined('_JEXEC') or die; ?>
+<?php
+/**
+ * @version		$Id$
+ * @package		Joomla.Site
+ * @subpackage	com_newsfeeds
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+// no direct access
+defined('_JEXEC') or die;
+?>
 <script language="javascript" type="text/javascript">
 	function tableOrdering(order, dir, task) {
 	var form = document.adminForm;
@@ -10,10 +20,10 @@ defined('_JEXEC') or die; ?>
 }
 </script>
 
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()); ?>" method="post" name="adminForm">
 
 		<div class="limit-box">
-			<?php echo JText::_('Display Num') .'&nbsp;'; ?>
+			<?php echo JText::_('DISPLAY_NUM') .'&nbsp;'; ?>
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 

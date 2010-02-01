@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -41,16 +41,11 @@ class ConfigViewApplication extends JView
 			$form->bind($data);
 		}
 
-		// Get other component parameters.
-		$table = JTable::getInstance('component');
-
 		// Get the params for com_users.
-		$table->loadByOption('com_users');
-		$usersParams = new JParameter($table->params, JPATH_ADMINISTRATOR.'/components/com_users/config.xml');
+		$usersParams = JComponentHelper::getParams('com_users');
 
 		// Get the params for com_media.
-		$table->loadByOption('com_media');
-		$mediaParams = new JParameter($table->params, JPATH_ADMINISTRATOR.'/components/com_media/config.xml');
+		$mediaParams = JComponentHelper::getParams('com_media');
 
 		// Load settings for the FTP layer.
 		jimport('joomla.client.helper');
@@ -71,18 +66,12 @@ class ConfigViewApplication extends JView
 	 */
 	protected function _setToolbar()
 	{
-		JToolBarHelper::title(JText::_('Global Configuration'), 'config.png');
-		JToolBarHelper::apply('application.apply');
-		JToolBarHelper::save('application.save');
+		JToolBarHelper::title(JText::_('GLOBAL_CONFIGURATION'), 'config.png');
+		JToolBarHelper::apply('application.apply', 'JToolbar_Apply');
+		JToolBarHelper::save('application.save', 'JToolbar_Save');
 		JToolBarHelper::divider();
-		JToolBarHelper::cancel('application.cancel', 'Close');
+		JToolBarHelper::cancel('application.cancel', 'JToolbar_Cancel');
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.config');
-	}
-
-	protected function warningIcon()
-	{
-		$tip = '<img src="'.JURI::root().'includes/js/ThemeOffice/warning.png" border="0"  alt="" />';
-		return $tip;
 	}
 }

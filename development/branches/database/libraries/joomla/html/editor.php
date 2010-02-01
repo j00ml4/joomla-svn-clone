@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -271,7 +271,7 @@ class JEditor extends JObservable
 		jimport('joomla.filesystem.file');
 
 		// Build the path to the needed editor plugin
-		$name = JFilterInput::clean($this->_name, 'cmd');
+		$name = JFilterInput::getInstance()->clean($this->_name, 'cmd');
 		$path = JPATH_SITE.DS.'plugins/editors/'.$name.'.php';
 
 		if (!JFile::exists($path)) {

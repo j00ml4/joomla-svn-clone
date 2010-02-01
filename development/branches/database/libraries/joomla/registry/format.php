@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Registry
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,9 +24,8 @@ abstract class JRegistryFormat extends JObject
 	 * Returns a Format object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param	string	$format	The format to load
+	 * @param	string	The format to load
 	 * @return	object	Registry format handler
-	 * @since	1.5
 	 */
 	public static function getInstance($format)
 	{
@@ -36,7 +35,7 @@ abstract class JRegistryFormat extends JObject
 			$instances = array ();
 		}
 
-		$format = strtolower(JFilterInput::clean($format, 'word'));
+		$format = strtolower(JFilterInput::getInstance()->clean($format, 'word'));
 		if (empty ($instances[$format]))
 		{
 			$class = 'JRegistryFormat'.$format;
@@ -71,5 +70,5 @@ abstract class JRegistryFormat extends JObject
 	 * @return	string	Formatted string
 	 * @since	1.5
 	 */
-	abstract public function objectToString(&$object, $params);
+	abstract public function objectToString($object, $params);
 }

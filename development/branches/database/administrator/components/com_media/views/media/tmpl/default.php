@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_media
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -50,7 +50,7 @@ defined('_JEXEC') or die;
                         <input class="inputbox" type="text" id="folderpath" readonly="readonly" />/
                         <input class="inputbox" type="text" id="foldername" name="foldername"  />
                         <input class="update-folder" type="hidden" name="folderbase" id="folderbase" value="<?php echo $this->state->folder; ?>" />
-                        <button type="submit"><?php echo JText::_('Create Folder'); ?></button>
+                        <button type="submit"><?php echo JText::_('CREATE_FOLDER'); ?></button>
                     </div>
 
                 </fieldset>
@@ -69,16 +69,16 @@ defined('_JEXEC') or die;
                     </fieldset>
                     <div id="upload-flash" class="hide">
 						<ul>
-							<li><a href="#" id="upload-browse">Browse Files</a></li>
+							<li><a href="#" id="upload-browse"><?php echo JText::_('BROWSE_FILES'); ?></a></li>
 							<li><a href="#" id="upload-clear">Clear List</a></li>
 							<li><a href="#" id="upload-start">Start Upload</a></li>
 						</ul>
 						<div class="clr"> </div>
 						<p class="overall-title"></p>
-						<img src="../media/media/images/bar.gif" alt="<?php echo JText::_('OVERALL_PROGRESS'); ?>" class="progress overall-progress" />
+						<?php echo JHTML::_('image', 'media/bar.gif', JText::_('OVERALL_PROGRESS'), array('class' => 'progress overall-progress'), true); ?>
 						<div class="clr"> </div>
 						<p class="current-title"></p>
-						<img src="../media/media/images/bar.gif" alt="<?php echo JText::_('CURRENT_PROGRESS'); ?>" class="progress current-progress" />
+						<?php echo JHTML::_('image', 'media/bar.gif', JText::_('CURRENT_PROGRESS'), array('class' => 'progress current-progress'), true); ?>
 						<p class="current-text"></p>
 					</div>
                     <ul class="upload-queue" id="upload-queue">

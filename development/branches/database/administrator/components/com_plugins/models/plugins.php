@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: controller.php 12685 2009-09-10 14:14:04Z pentacle $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -45,7 +45,7 @@ class PluginsModelPlugins extends JModelList
 		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
-		$folder = $app->getUserStateFromRequest($this->_context.'.filter.folder', 'filter_folder', null, 'alnum');
+		$folder = $app->getUserStateFromRequest($this->_context.'.filter.folder', 'filter_folder', null, 'cmd');
 		$this->setState('filter.folder', $folder);
 
 		// Load the parameters.

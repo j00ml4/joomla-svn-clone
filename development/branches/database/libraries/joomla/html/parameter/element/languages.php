@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +34,7 @@ class JElementLanguages extends JElement
 
 		jimport('joomla.language.helper');
 		$languages = JLanguageHelper::createLanguageList($value, constant('JPATH_'.strtoupper($client)), true);
-		array_unshift($languages, JHtml::_('select.option', '', '- '.JText::_('Select Language').' -'));
+		array_unshift($languages, JHtml::_('select.option', '', '- '.JText::_('SELECT_LANGUAGE').' -'));
 
 		return JHtml::_('select.genericlist', $languages, $control_name .'['. $name .']',
 			array(

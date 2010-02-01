@@ -3,7 +3,7 @@
  * version $Id$
  * @package		Joomla
  * @subpackage	Newsfeeds
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  *
  */
@@ -30,7 +30,7 @@ class NewsfeedsViewNewsfeed extends JView
 		// check if cache directory is writeable
 		$cacheDir = JPATH_BASE.DS.'cache'.DS;
 		if (!is_writable($cacheDir)) {
-			echo JText::_('Cache Directory Unwritable');
+			echo JText::_('CACHE_DIRECTORY_UNWRITABLE');
 			return;
 		}
 

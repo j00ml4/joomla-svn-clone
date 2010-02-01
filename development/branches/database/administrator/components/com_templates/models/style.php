@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -57,7 +57,7 @@ class TemplatesModelStyle extends JModelForm
 	 * @param	array	$options Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
-	public function &getTable($type = 'Style', $prefix = 'TemplatesTable', $config = array())
+	public function getTable($type = 'Style', $prefix = 'TemplatesTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -162,9 +162,9 @@ class TemplatesModelStyle extends JModelForm
 		$formFile		= JPath::clean($client->path.'/templates/'.$template.'/templateDetails.xml');
 
 		// Load the core and/or local language file(s).
+		$lang->load('tpl_'.$template, $client->path.DS.'templates'.DS.$template);
 		$lang->load('tpl_'.$template, JPATH_SITE);
 		$lang->load('tpl_'.$template, JPATH_ADMINISTRATOR);
-		$lang->load('joomla', $client->path.DS.'templates'.DS.$template);
 
 		if (file_exists($formFile))
 		{

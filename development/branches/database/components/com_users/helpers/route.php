@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -89,13 +89,15 @@ class UsersHelperRoute
 		$itemid	= null;
 
 		// Search for a suitable menu id.
-		foreach ($items as $item) {
+		//Menu link can only go to users own profile.
+
+		foreach ($items as $item) { 
 			if (isset($item->query['view']) && $item->query['view'] === 'profile') {
 				$itemid = $item->id;
 				break;
 			}
+		
 		}
-
 		return $itemid;
 	}
 

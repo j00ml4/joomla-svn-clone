@@ -3,14 +3,14 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_newsflash
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
+require_once JPATH_SITE.'/components/com_content/router.php';
 
 class modNewsFlashHelper
 {
@@ -19,7 +19,7 @@ class modNewsFlashHelper
 		$app	= &JFactory::getApplication();
 		$user 	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
-		$groups	= implode(',', $groups);
+		// $groups	= implode(',', $groups);
 
 		$item->text		= $item->introtext;
 		$item->groups	= '';

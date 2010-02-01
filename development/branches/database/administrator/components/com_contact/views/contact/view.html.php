@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: view.html.php 11952 2009-06-01 03:21:19Z robs $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -37,6 +37,13 @@ class ContactViewContact extends JView
 		}
 
 		// Bind the label to the form.
+		// First, unpack the email_form options from the params
+		$item->set('email_form', new JObject());
+		foreach ($form->getFields('email_form') as $thisField) {
+			$item->email_form->set($thisField->name, $item->params->get($thisField->name));
+			$item->params->set($thisField->name, null);
+		}
+		
 		$form->bind($item);
 
 		$this->assignRef('state',	$state);
@@ -61,8 +68,8 @@ class ContactViewContact extends JView
 		JRequest::setVar('hidemainmenu', 1);
 
 		JToolBarHelper::title(JText::_('Contact_Manager_Contact'));
-		JToolBarHelper::apply('contact.apply');
-		JToolBarHelper::save('contact.save');
+		JToolBarHelper::apply('contact.apply','JToolbar_Apply');
+		JToolBarHelper::save('contact.save','JToolbar_Save');
 		JToolBarHelper::addNew('contact.save2new', 'JToolbar_Save_and_new');
 				// If an existing item, can save to a copy.
 		if (!$isNew) {
@@ -70,7 +77,7 @@ class ContactViewContact extends JView
 		}
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('contact.cancel'.'JToolbar_Cancel');
+			JToolBarHelper::cancel('contact.cancel','JToolbar_Cancel');
 		}
 		else {
 			JToolBarHelper::cancel('contact.cancel', 'JToolbar_Close');

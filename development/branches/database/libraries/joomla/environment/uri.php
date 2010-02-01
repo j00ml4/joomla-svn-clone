@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Environment
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -395,17 +395,15 @@ class JURI extends JObject
 	 */
 	public function setQuery($query)
 	{
-		if (!is_array($query))
+		if (is_array($query))
 		{
+			$this->_vars = $query;
+		} else {
 			if (strpos($query, '&amp;') !== false)
 			{
-			   $query = str_replace('&amp;','&',$query);
+				$query = str_replace('&amp;','&',$query);
 			}
 			parse_str($query, $this->_vars);
-		}
-
-		if (is_array($query)) {
-			$this->_vars = $query;
 		}
 
 		//empty the query

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Utilities
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -154,7 +154,7 @@ class JUtility
 	function dump(&$var, $htmlSafe = true)
 	{
 		$result = var_export($var, true);
-		return '<pre>'.($htmlSafe ? htmlspecialchars($result) : $result).'</pre>';
+		return '<pre>'.($htmlSafe ? htmlspecialchars($result, ENT_COMPAT, 'UTF-8') : $result).'</pre>';
 	}
 
 	/**

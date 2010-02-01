@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -89,7 +89,6 @@ class ModulesControllerModule extends JControllerForm
 		{
 			$app->setUserState('com_modules.add.module.extension_id', null);
 		}
-
-		return result;
+		return $result;
 	}
 }

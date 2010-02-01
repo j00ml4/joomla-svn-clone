@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -199,7 +199,7 @@ abstract class JDatabase extends JObject
 				require_once $path;
 			} else {
 				JError::setErrorHandling(E_ERROR, 'die'); //force error type to die
-				return JError::raiseError(500, JTEXT::_('Unable to load Database Driver:') .$driver);
+				return JError::raiseError(500, JTEXT::_('UNABLE_TO_LOAD_DATABASE_DRIVER:') .$driver);
 			}
 
 			$adapter	= 'JDatabase'.$driver;
@@ -207,7 +207,7 @@ abstract class JDatabase extends JObject
 
 			if ($error = $instance->getErrorMsg()) {
 				JError::setErrorHandling(E_ERROR, 'ignore'); //force error type to die
-				return JError::raiseError(500, JTEXT::_('Unable to connect to the database:') .$error);
+				return JError::raiseError(500, JTEXT::_('UNABLE_TO_CONNECT_TO_THE_DATABASE') .$error);
 			}
 
 			$instances[$signature] = & $instance;
@@ -658,9 +658,10 @@ abstract class JDatabase extends JObject
 	 * Load a associactive list of database rows
 	 *
 	 * @param	string	The field name of a primary key
+	 * @param	string	An optional column name. Instead of the whole row, only this column value will be in the return array.
 	 * @return	array	If key is empty as sequential list of returned records.
 	 */
-	abstract public function loadAssocList($key='');
+	abstract public function loadAssocList($key = null, $column = null);
 
 	/**
 	 * This global function loads the first row of a query into an object

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -114,7 +114,7 @@ class JTableCategory extends JTableNested
 	{
 		// Check for a title.
 		if (trim($this->title) == '') {
-			$this->setError(JText::sprintf('must contain a title', JText::_('Category')));
+			$this->setError(JText::sprintf('MUST_CONTAIN_A_TITLE', JText::_('Category')));
 			return false;
 		}
 
@@ -143,14 +143,14 @@ class JTableCategory extends JTableNested
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		if (isset($array['metadata']) && is_array($array['metadata']))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['metadata']);
-			$array['metadata'] = $registry->toString();
+			$array['metadata'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);

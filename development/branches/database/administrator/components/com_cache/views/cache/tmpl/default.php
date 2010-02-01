@@ -1,4 +1,15 @@
-<?php defined('_JEXEC') or die; ?>
+<?php
+/**
+ * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_cache
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+// no direct access
+defined('_JEXEC') or die;
+?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_cache'); ?>" method="post" name="adminForm" id="adminForm">
 <table class="adminlist">
@@ -11,10 +22,10 @@
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->data);?>);" />
 			</th>
 			<th class="title" nowrap="nowrap">
-				<?php echo JText::_('Cache Group'); ?>
+				<?php echo JText::_('CACHE_GROUP'); ?>
 			</th>
 			<th width="5%" align="center" nowrap="nowrap">
-				<?php echo JText::_('Number of Files'); ?>
+				<?php echo JText::_('NUMBER_OF_FILES'); ?>
 			</th>
 			<th width="10%" align="center">
 				<?php echo JText::_('Size'); ?>

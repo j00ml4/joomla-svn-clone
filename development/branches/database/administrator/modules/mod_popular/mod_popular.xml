@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install type="module">
+<install
+	type="module"
+	version="1.6.0"
+	client="administrator">
 	<name>Popular Items</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2004</creationDate>
-	<copyright>Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
@@ -11,6 +14,9 @@
 	<description>DESCPOPULARITEMS</description>
 	<files>
 		<filename module="mod_popular">mod_popular.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
 	</files>
 	<fields
 		group="advanced">
@@ -19,6 +25,13 @@
 			type="modulelayout"
 			label="JField_Alt_Layout_Label"
 			description="JField_Alt_Module_Layout_Desc" />
+
+		<field
+			name="limit"
+			type="text"
+			default="10"
+			label="Module_Field_Limit_Label"
+			description="Module_Field_Limit_Desc" />
 
 		<field
 			name="moduleclass_sfx"

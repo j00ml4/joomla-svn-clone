@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,7 +27,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
 			if ($hasContent) :
-				echo $this->form->getField('articletext')->save();
+				echo $this->form->getField('content')->save();
 			endif;
 			?>
 			submitform(task);
@@ -80,7 +80,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 					<label>
 						<?php echo JText::_('Modules_Module_Description'); ?>
 					</label>
-					<?php echo $this->escape($text); ?>
+					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
 				<?php echo JText::_('Modules_XML_data_not_available'); ?>

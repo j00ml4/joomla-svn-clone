@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -42,12 +42,12 @@ class JFormFieldComponentLayout extends JFormFieldList
 		$db->setQuery($query);
 		$template	= $db->loadResult();
 
-		$extn = $this->_element->attributes('extension');
+		$extn = (string)$this->_element->attributes()->extension;
 		if (empty($extn)) {
 			$extn = $this->_form->getValue('extension');
 		}
 
-		if (($view = $this->_element->attributes('view')) && $extn) {
+		if (($view = (string)$this->_element->attributes()->view) && $extn) {
 			$view	= preg_replace('#\W#', '', $view);
 			$extn	= preg_replace('#\W#', '', $extn);
 			$path1	= JPATH_SITE.DS.'components'.DS.$extn.DS.'views'.DS.$view.DS.'tmpl';

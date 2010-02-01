@@ -1,5 +1,15 @@
-<?php // no direct access
+<?php
+/**
+ * @version		$Id$
+ * @package		Joomla.Site
+ * @subpackage	com_newsfeeds
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+// no direct access
 defined('_JEXEC') or die;
+
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
@@ -24,7 +34,7 @@ TODO fix images in com_categories ?>
 		$attribs['hspace']	= 6;
 
 		// Use the static HTML library to build the image tag
-		echo JHtml::_('image', 'images/'.$this->category->image, JText::_('News Feeds'), $attribs);
+		echo JHtml::_('image', 'images/'.$this->category->image, JText::_('NEWS_FEEDS'), $attribs);
 	?>
 <?php endif; ?>
 <?php  **/ ?>

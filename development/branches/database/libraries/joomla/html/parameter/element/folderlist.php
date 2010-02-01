@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -51,11 +51,11 @@ class JElementFolderlist extends JElement
 		}
 
 		if (!$node->attributes('hide_none')) {
-			array_unshift($options, JHtml::_('select.option', '-1', '- '.JText::_('Do not use').' -'));
+			array_unshift($options, JHtml::_('select.option', '-1', '- '.JText::_('DO_NOT_USE').' -'));
 		}
 
 		if (!$node->attributes('hide_default')) {
-			array_unshift($options, JHtml::_('select.option', '', '- '.JText::_('Use default').' -'));
+			array_unshift($options, JHtml::_('select.option', '', '- '.JText::_('USE_DEFAULT').' -'));
 		}
 
 		return JHtml::_('select.genericlist', $options, $control_name .'['. $name .']',

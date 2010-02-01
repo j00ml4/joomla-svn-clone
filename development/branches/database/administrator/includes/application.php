@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -90,7 +90,7 @@ class JAdministrator extends JApplication
 		{
 			//forward to https
 			$uri->setScheme('https');
-			$this->redirect($uri->toString());
+			$this->redirect((string)$uri);
 		}
 
 		// Trigger the onAfterRoute event.
@@ -233,12 +233,14 @@ class JAdministrator extends JApplication
 			$db->setQuery($query);
 			$template = $db->loadObject();
 
-			$template->template = JFilterInput::clean($template->template, 'cmd');
+			$template->template = JFilterInput::getInstance()->clean($template->template, 'cmd');
 
 			if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php'))
 			{
 				$template->template = 'bluestork';
-				$template->params = '{}';
+				$template->params = new JParameter();
+			} else {
+				$template->params = new JParameter($template->params);
 			}
 		}
 		if ($params) {

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,5 +24,7 @@ defined('_JEXEC') or die;
 
 <?php echo $this->loadTemplate('custom'); ?>
 
-<a href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&member_id='.$this->data->id);?>">
+<?php 		if (JFactory::getUser()->id == $this->data->id) {?>
+<a href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&member_id='.(int) $this->data->id);?>">
 	<?php echo JText::_('Users_Edit_Profile'); ?></a>
+<?php  }	?>

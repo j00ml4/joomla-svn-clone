@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Mail
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -366,7 +366,7 @@ class JMail extends PHPMailer
  	 */
 	public function sendAdminMail($adminName, $adminEmail, $email, $type, $title, $author, $url = null)
 	{
-		$subject = JText::_('User Submitted') ." '". $type ."'";
+		$subject = JText::_('USER_SUBMITTED') ." '". $type ."'";
 
 		$message = sprintf (JText::_('MAIL_MSG_ADMIN'), $adminName, $type, $title, $author,
 			$url, $url, 'administrator', $type);

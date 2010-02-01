@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -232,6 +232,8 @@ class ContentModelArticle extends JModelForm
 			return false;
 		}
 
+		$this->featured($table->id, $data['featured']);
+		
 		// Clean the cache.
 		$cache = JFactory::getCache('com_content');
 		$cache->clean();

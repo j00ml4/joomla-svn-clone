@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -84,7 +84,8 @@ class ConfigControllerComponent extends JController
 		// Attempt to save the configuration.
 		$data	= array(
 					'params'	=> $return,
-					'id'		=> $id
+					'id'		=> $id,
+					'option' 	=> $option
 					);
 		$return = $model->save($data);
 

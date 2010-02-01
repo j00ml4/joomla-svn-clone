@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -74,7 +74,7 @@ $lists = $this->lists;
 		</tbody>
 	</table>
 	<?php else : ?>
-		<p class="nowarning"><?php echo JText::_('There are no extensions installed matching your query'); ?></p>
+		<p class="nowarning"><?php echo JText::_('There_are_no_extensions_installed_matching_your_query'); ?></p>
 	<?php endif; ?>
 
 	<input type="hidden" name="view" value="manage" />

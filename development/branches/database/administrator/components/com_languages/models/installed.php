@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -244,19 +244,23 @@ class LanguagesModelInstalled extends JModelList
 	 *
 	 * return boolean
 	 */
-	public function publish()
+	public function publish($cid)
 	{
-		$cid = $this->getState('cid');
-		if (count($cid)>0) {
+		if ($cid) {
 			$client	= & $this->getClient();
 
 			$params = & JComponentHelper::getParams('com_languages');
-			$params->set($client->name, $cid[0]);
+			$params->set($client->name, $cid);
 
-			$table = & JTable::getInstance('component');
-			$table->loadByOption('com_languages');
+			$table = & JTable::getInstance('extension');
+			$id = $table->find(array('element' => 'com_languages'));
 
-			$table->params = $params->toString();
+			// Load
+			if (!$table->load($id)) {
+				$this->setError($table->getError());
+				return false;
+			}
+			$table->params = (string)$params;
 			// pre-save checks
 			if (!$table->check()) {
 				$this->setError($table->getError());

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -136,7 +136,12 @@ class CategoriesModelCategory extends JModelForm
 			$this->setError($form->getMessage());
 			return false;
 		}
-
+		
+		if(file_exists(JPATH_ADMINISTRATOR.'/components/'.$this->getState('category.extension').'/category.xml'))
+		{
+			$form->load(JPATH_ADMINISTRATOR.'/components/'.$this->getState('category.extension').'/category.xml', true, false);
+		}
+		
 		// Set the access control rules field compoennt value.
 		$form->setFieldAttribute('rules', 'component', $this->getState('category.extension'));
 

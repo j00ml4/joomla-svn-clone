@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Document
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,6 +18,8 @@ jimport('joomla.application.module.helper');
  * @subpackage	Document
  * @since		1.5
  */
+
+jimport('joomla.document.document');
 
 class JDocumentHTML extends JDocument
 {
@@ -260,7 +262,8 @@ class JDocumentHTML extends JDocument
 	{
 		$result = '';
 
-		$words = explode(' ', $condition);
+        $operators = '(\+|\-|\*|\/|==|\!=|\<\>|\<|\>|\<\=|\>\=|and|or|xor) ';
+		$words = preg_split('# '.$operators.' #', $condition, null, PREG_SPLIT_DELIM_CAPTURE);
 		for ($i = 0, $n = count($words); $i < $n; $i+=2)
 		{
 			// odd parts (modules)
@@ -352,8 +355,9 @@ class JDocumentHTML extends JDocument
 	 {
 		// check
 		$directory	= isset($params['directory']) ? $params['directory'] : 'templates';
-		$template	= JFilterInput::clean($params['template'], 'cmd');
-		$file		= JFilterInput::clean($params['file'], 'cmd');
+		$filter		= JFilterInput::getInstance();
+		$template	= $filter->clean($params['template'], 'cmd');
+		$file		= $filter->clean($params['file'], 'cmd');
 
 		if (!file_exists($directory.DS.$template.DS.$file)) {
 			$template = 'system';
@@ -361,15 +365,15 @@ class JDocumentHTML extends JDocument
 
 		// Load the language file for the template
 		$lang = &JFactory::getLanguage();
-		// 1.5 or core
-		$lang->load('tpl_'.$template);
 		// 1.6
 		$lang->load('tpl_'.$template, $directory.DS.$template);
+		// 1.5 or core
+		$lang->load('tpl_'.$template);
 
 		// Assign the variables
 		$this->template = $template;
 		$this->baseurl  = JURI::base(true);
-		$this->params   = new JParameter(isset($params['params']) ? $params['params'] : null);
+		$this->params   = isset($params['params']) ? $params['params'] : new JParameter;
 
 		// load
 		$this->_template = $this->_loadTemplate($directory.DS.$template, $file);

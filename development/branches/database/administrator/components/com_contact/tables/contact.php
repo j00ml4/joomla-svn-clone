@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -50,7 +50,7 @@ class ContactTableContact extends JTable
 	/** @var int */
 	public $default_con 		= null;
 	/** @var int */
-	public $published 			= 0;
+	public $published 			= null;
 	/** @var int */
 	public $checked_out 		= 0;
 	/** @var datetime */
@@ -69,6 +69,14 @@ class ContactTableContact extends JTable
 	public $mobile 				= null;
 	/** @var string */
 	public $webpage 			= null;
+	/** @var string */
+	public $sortname1 			= null;	
+	/** @var string */
+	public $sortname2 			= null;
+	/** @var string */
+	public $sortname3 			= null;
+	/** @var string */
+	public $language 			= null;	
 	/**
 	 * Constructor
 	 *
@@ -94,7 +102,7 @@ class ContactTableContact extends JTable
 		if (is_array($this->params)) {
 			$registry = new JRegistry();
 			$registry->loadArray($this->params);
-			$this->params = $registry->toString();
+			$this->params = (string)$registry;
 		}
 
 		// Attempt to store the data.
@@ -143,7 +151,7 @@ class ContactTableContact extends JTable
 		}
 
 		if (empty($this->alias)) {
-			$this->alias = $this->title;
+			$this->alias = $this->name;
 		}
 		$this->alias = JApplication::stringURLSafe($this->alias);
 		if (trim(str_replace('-','',$this->alias)) == '') {

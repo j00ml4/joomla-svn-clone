@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		Joomla.Framework
 * @subpackage	Document
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 * @license		GNU General Public License, see LICENSE.php
 */
 
@@ -17,6 +17,9 @@ defined('JPATH_BASE') or die();
  * @subpackage	Document
  * @since		1.6
  */
+
+jimport('joomla.document.document');
+
 class JDocumentJSON extends JDocument
 {
 	/**

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_login
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 // Require the base controller
 jimport('joomla.application.component.controller');
 
-// Might be cool at some point to cache this input URL and redirect there after successful login.
 $task = JRequest::getCmd('task');
 if ($task != 'login' && $task != 'logout')
 {

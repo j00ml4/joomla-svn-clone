@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -53,13 +53,13 @@ class CacheViewCache extends JView
 		JSubMenuHelper::addEntry(JText::_('Site'), 'index.php?option=com_cache&client=0', $condition);
 		JSubMenuHelper::addEntry(JText::_('Administrator'), 'index.php?option=com_cache&client=1', !$condition);
 
-		JToolBarHelper::title(JText::_('Cache Manager - Clear Cache Admin'), 'clear.png');
-		JToolBarHelper::custom('delete', 'delete.png', 'delete_f2.png', 'Delete', true);
+		JToolBarHelper::title(JText::_('CACHE_MANAGER').' - '.JText::_('CLEAR_CACHE_ADMIN'), 'clear.png');
+		JToolBarHelper::custom('delete', 'delete.png', 'delete_f2.png', 'JTOOLBAR_TRASH', true);
 		JToolBarHelper::divider();
 		if (JFactory::getUser()->authorise('core.admin', 'com_cache')) {
 			JToolBarHelper::preferences('com_cache');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.cache');
+		JToolBarHelper::help('screen.cache','JTOOLBAR_HELP');
 	}
 }

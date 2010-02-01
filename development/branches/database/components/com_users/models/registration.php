@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -249,7 +249,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check for a valid user id.
 		if (!$userId) {
-			$this->setError(JText::_('USERS ACTIVATION TOKEN NOT FOUND'));
+			$this->setError(JText::_('USERS_ACTIVATION_TOKEN_NOT_FOUND'));
 			return false;
 		}
 

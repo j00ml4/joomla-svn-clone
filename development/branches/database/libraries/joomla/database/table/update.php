@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		Joomla.Framework
 * @subpackage	Table
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 * @license		GNU General Public License, see LICENSE.php
 */
 
@@ -41,7 +41,7 @@ class JTableUpdate extends JTable
 	{
 		// check for valid name
 		if (trim( $this->name ) == '' || trim( $this->element ) == '') {
-			$this->setError(JText::sprintf( 'must contain a title', JText::_( 'Extension') ));
+			$this->setError(JText::sprintf( 'MUST_CONTAIN_A_TITLE', JText::_( 'Extension') ));
 			return false;
 		}
 		return true;
@@ -62,14 +62,14 @@ class JTableUpdate extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		if (isset( $array['control'] ) && is_array( $array['control'] ))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['control']);
-			$array['control'] = $registry->toString();
+			$array['control'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);

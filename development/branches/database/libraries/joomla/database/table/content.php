@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -129,14 +129,14 @@ class JTableContent extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['attribs']);
-			$array['attribs'] = $registry->toString();
+			$array['attribs'] = (string)$registry;
 		}
 
 		if (isset($array['metadata']) && is_array($array['metadata']))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['metadata']);
-			$array['metadata'] = $registry->toString();
+			$array['metadata'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);
@@ -151,14 +151,6 @@ class JTableContent extends JTable
 	 */
 	public function check()
 	{
-		/*
-		TODO: This filter is too rigorous,need to implement more configurable solution
-		// specific filters
-		$filter = & JFilterInput::getInstance(null, null, 1, 1);
-		$this->introtext = trim($filter->clean($this->introtext));
-		$this->fulltext =  trim($filter->clean($this->fulltext));
-		*/
-
 		if (empty($this->title)) {
 			$this->setError(JText::_('Article must have a title'));
 			return false;

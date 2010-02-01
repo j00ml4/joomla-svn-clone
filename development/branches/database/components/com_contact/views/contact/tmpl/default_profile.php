@@ -3,27 +3,25 @@
  * @version
  * @package		Joomla.Site
  * @subpackage	Contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 ?>
-<?php jimport('components.com_users.models.profile'); ?>
-<fieldset id="users-profile-custom">
+<?php if ($this->params->get('show_profile')) : ?>
+<div class="jcontact-profile">
+	<h4>
+		<?php echo JText::_('Com_Contact_Profile_Heading'); ?>
+	</h4>
+	<ol>
+		<?php foreach ($this->contact->profile as $profile) :	?>
+			<li>
 
-	<dl>
-	<?php
-//	foreach($this->form->getFields('profile') as $field):
-	//	if (!$field->hidden) :
-	?>
-		<dt><?php echo $field->label; ?></dt>
-		<dd>
-			<?php echo isset($this->profile[$field->name]) ? $this->profile[$field->name] : JText::_('Users_Profile_Value_Not_Found'); ?>
-		</dd>
-	<?php
-	//	endif;
-	//endforeach;
-	?>
-	</dl>
-</fieldset>
+				<?php echo $profile->text = htmlspecialchars($profile->profile, ENT_COMPAT, 'UTF-8'); ?>
+				
+			</li>
+		<?php endforeach; ?>
+	</ol>
+</div>
+<?php endif; ?>
