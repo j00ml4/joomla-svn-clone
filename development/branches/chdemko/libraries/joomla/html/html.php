@@ -186,7 +186,7 @@ abstract class JHtml
 			$debug = JFactory::getConfig()->getValue('config.debug');
 		}
 
-		// TODO NOTE: Here we are checking for Konqueror - If they fix thier issue with compressed, we will need to update this
+		// TODO NOTE: Here we are checking for Konqueror - If they fix their issue with compressed, we will need to update this
 		$konkcheck		= strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "konqueror");
 		$uncompressed	= ($debug || $konkcheck) ? '-uncompressed' : '';
 
@@ -222,7 +222,7 @@ abstract class JHtml
 	 * @param	boolean	If set to true, it tries to find an override for the file in the template
 	 * @since	1.5
 	 */
-	public static function image($url, $alt, $attribs = null, $relative = false)
+	public static function image($url, $alt, $attribs = null, $relative = false, $path_only = false)
 	{
 		if (is_array($attribs)) {
 			$attribs = JArrayHelper::toString($attribs);
@@ -237,8 +237,12 @@ abstract class JHtml
 			} else {
 				$url = JURI::root(true).'/media/images/'.$url;
 			}
+			if($path_only)
+			{
+				return $url;
+			}
 		} elseif (strpos($url, 'http') !== 0) {
-			$url = JURI::base(true).'/'.$url;
+			$url = JURI::root(true).'/'.$url;
 		}
 
 		return '<img src="'.$url.'" alt="'.$alt.'" '.$attribs.' />';
@@ -400,8 +404,8 @@ abstract class JHtml
 		$tooltip, $title = '', $image = 'tooltip.png', $text = '', $href = '', $link = 1
 	)
 	{
-		$tooltip	= addslashes(htmlspecialchars($tooltip));
-		$title		= addslashes(htmlspecialchars($title));
+		$tooltip	= addslashes(htmlspecialchars($tooltip, ENT_COMPAT, 'UTF-8'));
+		$title		= addslashes(htmlspecialchars($title, ENT_COMPAT, 'UTF-8'));
 
 		if (!$text) {
 			$image 	= JURI::root(true).'/includes/js/ThemeOffice/'. $image;
