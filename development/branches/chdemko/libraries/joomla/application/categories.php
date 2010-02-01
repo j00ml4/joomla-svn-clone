@@ -133,6 +133,8 @@ class JCategories
 	 *   'siblings' to get its siblings
 	 *   'ascendants' to get its ascendants
 	 *   'descentants' to get its descendants
+	 *   'level-min' to get nodes from this level
+	 *   'level-max' to get nodes until this level 
 	 * @return JCategoryNode|null
 	 */
 	public function get($id='root',$options=array())
@@ -222,6 +224,16 @@ class JCategories
 			
 			$query->leftJoin('#__categories AS s ON ' . $test);
 			$query->where('s.id='.(int)$id);
+		}
+		
+		// Deal with level min and max
+		if (isset($options['level-min']))
+		{
+			$query->where('s.level >='.(int)$options['level-min']);
+		}
+		if (isset($options['level-max']))
+		{
+			$query->where('s.level <='.(int)$options['level-max']);
 		}
 
 		// i for item

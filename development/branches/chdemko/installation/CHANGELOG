@@ -27,6 +27,25 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+31-Jan-2010 Hannes Papenberg
+# Fixed group bug in JParameter - Thanks James Kennard
+- Removing unused images from administrator, including the /images folder
+# Fixing routing of JHTML::image()
+# Fixed notice in com_content router
++ Added $path_only option to JHTML::image()
+# Fixed bug in how com_languages saves the configuration options - Thanks Jonnathan!
+# When module were renamed, the translation files weren't renamed, too.
+# Fixed frontend translation files for modules
+# Fixed plugin translation files
+# Fixed custom module handling in module manager
+# Fixed entries in #__extensions. This fixes a few bugs like the selection list for new modules in the module manager
+
+30-Jan-2010 Hannes Papenberg
+# Fixed translation of parameter labels in com_users
++ Added ability to add a category.xml file to a component to add parameters to com_categories
++ Added mod_weblinks Weblink Module - Thanks Amy Stephen!
+# Finished making images overrideable
+
 29-jan-2010 Jean-Marie Simonet
 # Fixed Form field Spacer display
 
@@ -259,7 +278,7 @@ $ Change the language string JOption_Access_Show_All_Sections to JOption_Access_
 
 
 05-Jan-2010 Hannes Papenberg
- ^ Removed #__components and moved the admin menu information to #__menu. Thanks jonnsl!
+ ^ Removed #__components and moved the admin menu information to #__menu. Thanks Jonnathan!
 
 >>>>>>> .r14052
 05-Jan-2010 Andrew Eddie

@@ -180,7 +180,7 @@ class CategoriesModelCategory extends JModelForm
 			$this->setError($form->getMessage());
 			return false;
 		}
-
+		
 		// Get the component form if it exists
 		jimport('joomla.filesystem.path');
 		$name = 'category' . ($section ? ('.'.$section):'');
