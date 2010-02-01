@@ -27,6 +27,17 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+01-Feb-2010 Christophe Demko
+# Corrected a bug in installation joomla.sql file
+# Corrected parse_ini_file for php version >= 5.3.0 (does not deal correctly with _QQ_ defined constant)
+
+01-Feb-2010 Hannes Papenberg
+# Fixed com_search router and model
+
+1-Feb-2010 Jean-Marie Simonet 
+^ Refactored com_plugins ini keys + some
+^ Refactored (again ;) ) tinymce ini keys to standard
+
 31-Jan-2010 Hannes Papenberg
 # Fixed group bug in JParameter - Thanks James Kennard
 - Removing unused images from administrator, including the /images folder
