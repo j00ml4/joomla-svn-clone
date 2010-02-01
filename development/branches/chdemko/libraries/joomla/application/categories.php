@@ -229,11 +229,11 @@ class JCategories
 		// Deal with level min and max
 		if (isset($options['level-min']))
 		{
-			$query->where('s.level >='.(int)$options['level-min']);
+			$query->where('c.level >='.(int)$options['level-min']);
 		}
 		if (isset($options['level-max']))
 		{
-			$query->where('s.level <='.(int)$options['level-max']);
+			$query->where('c.level <='.(int)$options['level-max']);
 		}
 
 		// i for item
