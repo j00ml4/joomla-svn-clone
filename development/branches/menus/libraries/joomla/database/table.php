@@ -725,57 +725,130 @@ abstract class JTable extends JObject
 	 * than the one who checked the row out should be held until the row is checked
 	 * in again.
 	 *
-	 * @param	integer	The Id of the user checking out the row.
+	 * Since 1.6 a new behavior is present when a 'checked_out_session' field is
+	 * available for the table object.  The row will be marked with the current user
+	 * and their current session id so that the checked out state will only last for
+	 * the length of the current session.
+	 *
+	 * @param	integer	The Id of the user checking out the row.  If not set the Id
+	 * 					for the current user is used.
 	 * @param	mixed	An optional primary key value to check out.  If not set
 	 * 					the instance property value is used.
 	 * @return	boolean	True on success.
 	 * @since	1.0
 	 * @link	http://docs.joomla.org/JTable/checkOut
 	 */
-	public function checkOut($userId, $pk = null)
+	public function checkOut($userId = null, $pk = null)
 	{
-		// If there is no checked_out or checked_out_time field, just return true.
-		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time')) {
+		// If the necessary fields are not present just return true.
+		if (!property_exists($this, 'checked_out')
+			|| (!property_exists($this, 'checked_out_time') && !property_exists($this, 'checked_out_session'))) {
 			return true;
 		}
 
-		// Initialise variables.
+		// Setup the primary key value to check out.
 		$k = $this->_tbl_key;
-		$pk = (is_null($pk)) ? $this->$k : $pk;
+		if ($pk !== null) {
+			$this->$k = $pk;
+		}
 
-		// If no primary key is given, return false.
-		if ($pk === null) {
+		// Cannot check out a row that doesn't exist.
+		if ($this->$k == null) {
 			return false;
 		}
 
-		// Get the current time in MySQL format.
-		$time = JFactory::getDate()->toMysql();
+		// Setup the user id to check out.
+		if ($userId === null) {
+			$user = JFactory::getUser();
+			$userId = $user->id;
+		}
 
-		// Check the row out by primary key.
-		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `checked_out` = '.(int) $userId.',' .
-			'	  `checked_out_time` = '.$this->_db->quote($time) .
-			' WHERE `'.$this->_tbl_key.'` = '.$this->_db->quote($pk)
-		);
-		$this->_db->query();
-
-		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
-			$this->setError($this->_db->getErrorMsg());
+		// Check to see if the row is checked out by someone else.
+		if (!$this->canEdit($this->$k)) {
 			return false;
 		}
 
-		// Set table values in the object.
-		$this->checked_out = (int) $userId;
-		$this->checked_out_time = $time;
+		// If the checked_out_session field is not present assume legacy behavior.
+		if (!property_exists($this, 'checked_out_session')) {
 
-		return true;
+			// Get the current time in MySQL format.
+			$time = JFactory::getDate()->toMysql();
+
+			// Check the row out by primary key.
+			$this->_db->setQuery(
+				'UPDATE '.$this->_db->nameQuote($this->_tbl) .
+				' SET checked_out = '.(int) $userId.', checked_out_time = '.$this->_db->quote($time) .
+				' WHERE '.$this->_tbl_key.' = '.(int) ($this->$k)
+			);
+			$this->_db->query();
+
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+
+			// Set table values in the object.
+			$this->checked_out = (int) $userId;
+			$this->checked_out_time = $time;
+
+			return true;
+		}
+		// The checked_out_session field exists, use the new session based checkout behavior.
+		else {
+
+			// Get the session object.
+			$session = JFactory::getSession();
+
+			// Execute the query to check out the row.
+			$this->_db->setQuery(
+				'UPDATE '.$this->_db->nameQuote($this->_tbl) .
+				' SET checked_out = '.(int) $userId.', checked_out_session = '.$this->_db->quote($session->getId()) .
+				' WHERE '.$this->_tbl_key.' = '.(int) ($this->$k) .
+				' AND (checked_out = '.(int) $userId.' OR checked_out = 0)'
+			);
+			$this->_db->query();
+
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+
+			// Prepare the query to verify the item was checked-out.
+			$this->_db->setQuery(
+				'SELECT '.$this->_db->nameQuote($this->_tbl_key) .
+				' FROM '.$this->_db->nameQuote($this->_tbl) .
+				' WHERE '.$this->_db->nameQuote($this->_tbl_key).' = '.(int) ($this->$k) .
+				' AND checked_out = '.(int) $userId
+			);
+			$return = (int) $this->_db->loadResult();
+
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+
+			// Set the checked out fields in the object.
+			$this->checked_out = $userId;
+			$this->checked_out_session = $session->getId();
+
+			// Verify the checked out status.
+			if ($return === $this->$k) {
+				return true;
+			} else {
+				return null;
+			}
+		}
+
 	}
 
 	/**
-	 * Method to check a row in if the necessary properties/fields exist.  Checking
-	 * a row in will allow other users the ability to edit the row.
+	 * Method to check a row in for editing so that other users can have an opportunity
+	 * to make changes.  While checked out no other users are allowed to make changes to
+	 * the row except the user who has checked it out.  Checking the row in signifies that
+	 * the current user has finished editing the row.
 	 *
 	 * @param	mixed	An optional primary key value to check out.  If not set
 	 * 					the instance property value is used.
@@ -785,40 +858,74 @@ abstract class JTable extends JObject
 	 */
 	public function checkIn($pk = null)
 	{
-		// If there is no checked_out or checked_out_time field, just return true.
-		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time')) {
+		// If the necessary fields are not present just return true.
+		if (!property_exists($this, 'checked_out')
+			|| (!property_exists($this, 'checked_out_time') && !property_exists($this, 'checked_out_session'))) {
 			return true;
 		}
 
-		// Initialise variables.
+		// Setup the primary key value to check out.
 		$k = $this->_tbl_key;
-		$pk = (is_null($pk)) ? $this->$k : $pk;
+		if ($pk !== null) {
+			$this->$k = $pk;
+		}
 
-		// If no primary key is given, return false.
-		if ($pk === null) {
+		// Cannot check in a row that doesn't exist.
+		if ($this->$k == null) {
 			return false;
 		}
 
-		// Check the row in by primary key.
-		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `checked_out` = 0,' .
-			'	  `checked_out_time` = '.$this->_db->quote($this->_db->getNullDate()) .
-			' WHERE `'.$this->_tbl_key.'` = '.$this->_db->quote($pk)
-		);
-		$this->_db->query();
+		// Get the user object.
+		$user = JFactory::getUser();
 
-		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
-			$this->setError($this->_db->getErrorMsg());
-			return false;
+
+		// If the checked_out_session field is not present assume legacy behavior.
+		if (!property_exists($this, 'checked_out_session')) {
+
+			// Check the row in by primary key.
+			$this->_db->setQuery(
+				'UPDATE `'.$this->_tbl.'`' .
+				' SET `checked_out` = 0,' .
+				'	  `checked_out_time` = '.$this->_db->quote($this->_db->getNullDate()) .
+				' WHERE `'.$this->_tbl_key.'` = '.$this->_db->quote($pk)
+			);
+			$this->_db->query();
+
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+
+			// Set table values in the object.
+			$this->checked_out = 0;
+			$this->checked_out_time = '';
+
+			return true;
 		}
+		// The checked_out_session field exists, use the new session based checkout behavior.
+		else {
 
-		// Set table values in the object.
-		$this->checked_out = 0;
-		$this->checked_out_time = '';
+			// Prepare the query to check in the row.
+			$this->_db->setQuery(
+				'UPDATE '.$this->_db->nameQuote($this->_tbl) .
+				' SET checked_out = 0, checked_out_session = ""' .
+				' WHERE '.$this->_tbl_key.' = '.(int) ($this->$k) .
+				' AND (checked_out = '.(int) $user->id.' OR checked_out = 0)'
+			);
+			$this->_db->query();
 
-		return true;
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+
+			$this->checked_out = 0;
+			$this->checked_out_session = '';
+
+			return true;
+		}
 	}
 
 	/**
@@ -867,42 +974,61 @@ abstract class JTable extends JObject
 	}
 
 	/**
-	 * TODO: This either needs to be static or not.
+	 * Method to determine if the current user can edit a row based on if the row is checked out
+	 * or not.  Also taken into account is whether or not the row is checked out by another person
+	 * and if their session is still active -- meaning it is still being worked on.
 	 *
-	 * Method to determine if a row is checked out and therefore uneditable by
-	 * a user.  If the row is checked out by the same user, then it is considered
-	 * not checked out -- as the user can still edit it.
+	 * @param	mixed	The primary key of the row for which to check edit rights.
 	 *
-	 * @param	integer	The userid to preform the match with, if an item is checked
-	 * 					out by this user the function will return false.
-	 * @param	integer	The userid to perform the match against when the function
-	 * 					is used as a static function.
-	 * @return	boolean	True if checked out.
-	 * @since	1.0
-	 * @link	http://docs.joomla.org/JTable/isCheckedOut
+	 * @return	boolean	True if the current user can edit the row.
+	 *
+	 * @since	1.6
 	 */
-	public function isCheckedOut($with = 0, $against = null)
+	public function canEdit($pk = null)
 	{
-		// Handle the non-static case.
-		if (isset($this) && ($this instanceof JTable) && is_null($against)) {
-			$against = $this->get('checked_out');
+		// If there is no checked_out_session field, just return true.
+		if (!property_exists($this, 'checked_out_session')) {
+			return true;
 		}
 
-		// The item is not checked out or is checked out by the same user.
-		if (!$against || ($against == $with)) {
+		// Setup the primary key value to check.
+		$k = $this->_tbl_key;
+		if ($pk !== null) {
+			$this->$k = $pk;
+		}
+
+		// Cannot edit a row that doesn't exist.
+		if ($this->$k == null) {
 			return false;
 		}
 
-		$db = JFactory::getDBO();
-		$db->setQuery(
-			'SELECT COUNT(userid)' .
-			' FROM `#__session`' .
-			' WHERE `userid` = '.(int) $against
-		);
-		$checkedOut = (boolean) $db->loadResult();
+		// Get the user and session objects.
+		$user = JFactory::getUser();
+		$session = JFactory::getSession();
 
-		// If a session exists for the user then it is checked out.
-		return $checkedOut;
+		// Check to see if the row is checked out by someone else.
+		$this->_db->setQuery(
+			'SELECT a.'.$this->_db->nameQuote($this->_tbl_key) .
+			' FROM '.$this->_db->nameQuote($this->_tbl).' AS a' .
+			' INNER JOIN #__session AS s ON a.checked_out_session = s.session_id' .
+			' WHERE a.'.$this->_db->nameQuote($this->_tbl_key).' = '.(int) ($this->$k) .
+			' AND a.checked_out <> '.(int) $user->id
+		);
+		$checkedOut = (int) $this->_db->loadResult();
+
+		// Check for a database error.
+		if ($this->_db->getErrorNum()) {
+			$this->setError($this->_db->getErrorMsg());
+			return false;
+		}
+
+		// Set an error and return false if the row is checked out by someone else.
+		if ($checkedOut) {
+			$this->setError(JText::_('LIB_JTABLE_CHECKED_OUT_ALREADY'));
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -1204,16 +1330,56 @@ abstract class JTable extends JObject
 	}
 
 	/**
+	 * TODO: This either needs to be static or not.
+	 *
+	 * Method to determine if a row is checked out and therefore uneditable by
+	 * a user.  If the row is checked out by the same user, then it is considered
+	 * not checked out -- as the user can still edit it.
+	 *
+	 * @param	integer	The userid to preform the match with, if an item is checked
+	 * 					out by this user the function will return false.
+	 * @param	integer	The userid to perform the match against when the function
+	 * 					is used as a static function.
+	 * @return	boolean	True if checked out.
+	 * @deprecated
+	 * @since	1.0
+	 * @link	http://docs.joomla.org/JTable/isCheckedOut
+	 */
+	public function isCheckedOut($with = 0, $against = null)
+	{
+		// Handle the non-static case.
+		if (isset($this) && ($this instanceof JTable) && is_null($against)) {
+			$against = $this->get('checked_out');
+		}
+
+		// The item is not checked out or is checked out by the same user.
+		if (!$against || ($against == $with)) {
+			return false;
+		}
+
+		$db = JFactory::getDBO();
+		$db->setQuery(
+			'SELECT COUNT(userid)' .
+			' FROM `#__session`' .
+			' WHERE `userid` = '.(int) $against
+		);
+		$checkedOut = (boolean) $db->loadResult();
+
+		// If a session exists for the user then it is checked out.
+		return $checkedOut;
+	}
+
+	/**
 	 * Generic check for whether dependancies exist for this object in the database schema
 	 *
 	 * Can be overloaded/supplemented by the child class
 	 *
-	 * @deprecated
 	 * @param	mixed	An optional primary key value check the row for.  If not
 	 * 					set the instance property value is used.
 	 * @param	array	An optional array to compiles standard joins formatted like:
 	 * 					[label => 'Label', name => 'table name' , idfield => 'field', joinfield => 'field']
 	 * @return	boolean	True on success.
+	 * @deprecated
 	 * @since	1.0
 	 * @link	http://docs.joomla.org/JTable/canDelete
 	 */
@@ -1283,9 +1449,10 @@ abstract class JTable extends JObject
 	/**
 	 * Method to export the JTable instance properties to an XML string.
 	 *
-	 * @deprecated
 	 * @param	boolean	True to map foreign keys to text values.
+	 *
 	 * @return	string	XML string representation of the instance.
+	 * @deprecated
 	 * @since	1.0
 	 * @link	http://docs.joomla.org/JTable/toXML
 	 */
