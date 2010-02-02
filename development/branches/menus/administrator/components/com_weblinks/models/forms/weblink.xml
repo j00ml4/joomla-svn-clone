@@ -98,7 +98,9 @@
 			<option
 				value="0">JOption_Unpublished</option>
 			<option
-				value="-1">Weblinks_Reported</option>
+				value="2">JOption_Archived</option>
+			<option
+				value="3">Weblinks_Reported</option>
 			<option
 				value="-2">JOption_Trash</option>
 		</field>

@@ -60,7 +60,7 @@
 			<option
 				value="0">JOption_Unpublished</option>
 			<option
-				value="-1">JOption_Archived</option>
+				value="2">JOption_Archived</option>
 			<option
 				value="-2">JOption_Trash</option>
 		</field>

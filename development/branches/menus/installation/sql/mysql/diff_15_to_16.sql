@@ -308,7 +308,9 @@ UPDATE `jos_content` AS a
  	FROM `jos_content_frontpage` AS f
  );
 
- ALTER TABLE `jos_content` CHANGE `attribs` `attribs` VARCHAR( 5120 ) NOT NULL;
+ALTER TABLE `jos_content` CHANGE `attribs` `attribs` VARCHAR( 5120 ) NOT NULL;
+
+UPDATE `jos_content` SET `state` = 2 WHERE `state` = -1;
 
 -- ----------------------------------------------------------------
 -- jos_extensions (new) and migration

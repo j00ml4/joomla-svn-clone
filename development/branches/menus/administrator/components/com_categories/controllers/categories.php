@@ -109,7 +109,16 @@ class CategoriesControllerCategories extends JController
 
 			// Publish the items.
 			if ($model->publish($pks, $value)) {
-				$this->setMessage($value ? JText::_('JSuccess_N_items_published') : JText::_('JSuccess_N_items_unpublished'));
+				if ($value == 1) {
+					$text = 'JSuccess_N_Items_published';
+				}
+				else if ($value == 0) {
+					$text = 'JSuccess_N_Items_unpublished';
+				}
+				else {
+					$text = 'JSuccess_N_Items_trashed';
+				}
+				$this->setMessage(JText::sprintf($text, count($pks)));
 			}
 			else {
 				$this->setMessage($model->getError());
