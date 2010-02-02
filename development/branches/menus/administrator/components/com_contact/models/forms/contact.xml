@@ -55,13 +55,13 @@
 				value="0">
 				JOption_UnPublished</option>
 			<option
-				value="-1">
+				value="2">
 				JOption_Archived</option>
 			<option
 				value="-2">
 				JOption_Trashed</option>
 			<option
-				value="-3">
+				value="3">
 				JOption_Reported</option>
 		</field>
 

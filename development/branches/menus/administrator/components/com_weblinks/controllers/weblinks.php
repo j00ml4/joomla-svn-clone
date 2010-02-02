@@ -31,6 +31,7 @@ class WeblinksControllerWeblinks extends JController
 
 		$this->registerTask('unpublish',	'publish');
 		$this->registerTask('archive',		'publish');
+		$this->registerTask('report',		'publish');
 		$this->registerTask('trash',		'publish');
 		$this->registerTask('orderup',		'reorder');
 		$this->registerTask('orderdown',	'reorder');
@@ -94,7 +95,7 @@ class WeblinksControllerWeblinks extends JController
 		// Initialise variables.
 		$user	= JFactory::getUser();
 		$ids	= JRequest::getVar('cid', array(), '', 'array');
-		$values	= array('publish' => 1, 'unpublish' => 0, 'archive' => -1, 'trash' => -2);
+		$values	= array('report' => 3, 'archive' => 2, 'publish' => 1, 'unpublish' => 0, 'trash' => -2);
 		$task	= $this->getTask();
 		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
 
@@ -118,8 +119,11 @@ class WeblinksControllerWeblinks extends JController
 				else if ($value == 0) {
 					$text = 'JSuccess_N_Items_unpublished';
 				}
-				else if ($value == -1) {
+				else if ($value == 2) {
 					$text = 'JSuccess_N_Items_archived';
+				}
+				else if ($value == 3) {
+					$text = 'JSuccess_N_Items_reported';
 				}
 				else {
 					$text = 'JSuccess_N_Items_trashed';

@@ -142,7 +142,7 @@ class ModulesControllerModules extends JController
 				else if ($value == 0) {
 					$text = 'JSuccess_N_Items_unpublished';
 				}
-				else if ($value == -1) {
+				else if ($value == 2) {
 					$text = 'JSuccess_N_Items_archived';
 				}
 				else {

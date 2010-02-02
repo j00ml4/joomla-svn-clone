@@ -25,7 +25,7 @@ class ContactControllerContacts extends JController
 		$this->registerTask('archive',		'publish');
 		$this->registerTask('unpublish',	'publish');
 		$this->registerTask('trash',		'publish');
-		//$this->registerTask('report',       'publish');
+		$this->registerTask('report',       'publish');
 		$this->registerTask('orderup',		'ordering');
 		$this->registerTask('orderdown',	'ordering');
 		$this->registerTask('unfeatured',	'featured');
@@ -87,7 +87,7 @@ class ContactControllerContacts extends JController
 
 		// Get items to publish from the request.
 		$ids	= JRequest::getVar('cid', array(), '', 'array');
-		$values	= array('publish' => 1, 'unpublish' => 0, 'archive' => -1, 'trash' => -2, 'report' => -3);
+		$values	= array('report' => 3, 'archive' => 2, 'publish' => 1, 'unpublish' => 0, 'trash' => -2);
 		$task	= $this->getTask();
 		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
 		if (empty($ids)) {
@@ -102,8 +102,27 @@ class ContactControllerContacts extends JController
 			if (!$model->publish($ids, $value)) {
 				JError::raiseWarning(500, $model->getError());
 			}
+			else
+			{
+				if ($value == 1) {
+					$text = 'JSuccess_N_Items_published';
+				}
+				else if ($value == 0) {
+					$text = 'JSuccess_N_Items_unpublished';
+				}
+				else if ($value == 2) {
+					$text = 'JSuccess_N_Items_archived';
+				}
+				else if ($value == 3) {
+					$text = 'JSuccess_N_Items_reported';
+				}
+				else {
+					$text = 'JSuccess_N_Items_trashed';
+				}
+				$this->setMessage(JText::sprintf($text, count($ids)));
+			}
 		}
-				$this->setRedirect('index.php?option=com_contact&view=contacts');
+			$this->setRedirect('index.php?option=com_contact&view=contacts');
 	}
 		function featured()
 	{
