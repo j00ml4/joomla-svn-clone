@@ -188,7 +188,6 @@ class JFormFieldMenuType extends JFormFieldList
 
 						if (isset($option->request['option'])) {
 							$lang->load($option->request['option'].'.menu');
-							$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option']);
 						}
 					}
 				}

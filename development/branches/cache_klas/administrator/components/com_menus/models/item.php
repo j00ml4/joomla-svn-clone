@@ -156,7 +156,6 @@ class MenusModelItem extends JModelForm
 					// Load the language file for the component.
 					$lang = &JFactory::getLanguage();
 					$lang->load($args['option']);
-					$lang->load($args['option'],JPATH_ADMINISTRATOR.'/components/'.$args['option']);
 
 					// Determine the component id.
 					$component = JComponentHelper::getComponent($args['option']);

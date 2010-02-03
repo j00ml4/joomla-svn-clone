@@ -10,12 +10,10 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-
-<? print_r ($this); ?>
 <?php if (empty($this->siblings)) : ?>
-<p><?php  echo JText::_('JContent_No_Siblings'); ?></p>
+	no siblings
 <?php else : ?>
-	<h3><?php  echo JText::_('JContent_Siblings'); ?></h3>
+	<h5>Siblings</h5>
 	<ul>
 		<?php foreach ($this->siblings as &$item) : ?>
 		<li>
