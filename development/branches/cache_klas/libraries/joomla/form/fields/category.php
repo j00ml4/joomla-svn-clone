@@ -35,20 +35,19 @@ class JFormFieldCategory extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function _getOptions() 
 	{
 		$db = JFactory::getDbo();
-		$extension = (string)$this->_element->attributes()->extension;
-		$extension = ((string)$this->_element->attributes()->extension) ? (string)$this->_element->attributes()->extension : (string)$this->_element->attributes()->scope;
-		$published = (string)$this->_element->attributes()->published;
+		$extension = $this->_element->attributes('extension') ? $this->_element->attributes('extension') : $this->_element->attributes('scope');
+		$published = $this->_element->attributes('published');
 		$options = array();
-
-		if ($published === '') {
+		if ($published === '') 
+		{
 			$published = null;
 		}
-		if (!empty($extension))
+		if (!empty($extension)) 
 		{
-			if ($published)
+			if ($published) 
 			{
 				$options = JHtml::_('category.options', $extension, array('filter.published' => implode(',', $published)));
 			}
@@ -58,16 +57,16 @@ class JFormFieldCategory extends JFormFieldList
 			}
 
 			// Verify permissions.  If the action attribute is set, then we scan the options.
-			if ($action	= (string)$this->_element->attributes()->action)
+			if ($action = $this->_element->attributes('action')) 
 			{
 				$user = JFactory::getUser();
 
 				// TODO: Add a preload method to JAccess so that we can get all the asset rules in one query and cache them.
 				// eg JAccess::preload('core.create', 'com_content.category')
 
-				foreach($options as $i => $option)
+				foreach($options as $i => $option) 
 				{
-					if (!$user->authorise($action, $extension . '.category.' . $option->value))
+					if (!$user->authorise($action, $extension . '.category.' . $option->value)) 
 					{
 						unset($options[$i]);
 					}

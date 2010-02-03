@@ -37,6 +37,7 @@ class JFormFieldCalendar extends JFormFieldText
 		$filter = (string)$this->_element->attributes()->filter;
 		$time = (string)$this->_element->attributes()->time;
 		$onchange = (string)$this->_element->attributes()->onchange ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
+		$onchange	= $this->_element->attributes('onchange') ? ' onchange="'.$this->_replacePrefix($this->_element->attributes('onchange')).'"' : '';
 
 		if ($this->value == 'now') {
 			$this->value = strftime($format);
