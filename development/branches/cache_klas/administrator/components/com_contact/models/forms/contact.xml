@@ -275,14 +275,14 @@
 			default="" />
 
 		<field
+			id="language"
 			name="language"
-			type="contentlanguage"
+			type="text"
 			label="JField_Language_Label"
-			description="JField_Contact_Language_Desc"
+			description="JField_Language_Desc"
 			class="inputbox"
-			default="">
-			<option value="">JOption_Default_Language</option>
-		</field>
+			size="10"
+			 />
 
 		<field
 			name="show_email_form"
@@ -367,8 +367,8 @@
 
 		<field
 			name="icon_address"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			label="Contact_Icons_Address_Label"
@@ -376,8 +376,8 @@
 
 		<field
 			name="icon_email"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			label="Contact_Icons_Email_Label"
@@ -385,8 +385,8 @@
 
 		<field
 			name="icon_telephone"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			abel="Contact_Icons_Telephone_Label"
@@ -394,8 +394,8 @@
 
 		<field
 			name="icon_mobile"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			label="Contact_Icons_Mobile_Label"
@@ -403,8 +403,8 @@
 
 		<field
 			name="icon_fax"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			label="Contact_Icons_Fax_Label"
@@ -412,8 +412,8 @@
 
 		<field
 			name="icon_misc"
-			type="imagelist"
-			directory="/images"
+			type="media"
+			directory="/images/joomla"
 			hide_none="1"
 			default=""
 			label="Contact_Icons_Misc_Label"

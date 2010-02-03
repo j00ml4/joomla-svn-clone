@@ -163,13 +163,10 @@
 
 		<field
 			name="language"
-			type="contentlanguage"
+			type="language"
 			label="JField_Language_Label"
-			description="JField_Category_Language_Desc"
-			class="inputbox"
-			default="">
-			<option value="">JOption_Default_Language</option>
-		</field>
+			description="JField_Language_Desc"
+			class="inputbox"/>
 
 		<field
 			id="rules"

@@ -11,9 +11,9 @@
 defined('_JEXEC') or die;
 ?>
 <?php if (empty($this->parents)) : ?>
-<p><?php  echo JText::_('JContent_No_Parents'); ?></p>
+	no parents
 <?php else : ?>
-	<h3><?php  echo JText::_('JContent_Parents'); ?></h3>
+	<h5>Parents</h5>
 	<ul>
 		<?php foreach ($this->parents as &$item) : ?>
 		<li>

@@ -49,17 +49,16 @@ JHtml::_('behavior.formvalidation');
 
 			<?php echo $this->form->getLabel('ordering'); ?>
 			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
-			
-			<?php echo $this->form->getLabel('access'); ?>
-			<?php echo $this->form->getInput('access'); ?>
-
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
 
 			<?php echo $this->form->getLabel('description'); ?>
 			<div class="clr"></div>
 			<?php echo $this->form->getInput('description'); ?>
 
+			<?php echo $this->form->getLabel('access'); ?>
+			<?php echo $this->form->getInput('access'); ?>
+
+			<?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?>
 	</fieldset>
 </div>
 <div class="width-30 fltrt">
