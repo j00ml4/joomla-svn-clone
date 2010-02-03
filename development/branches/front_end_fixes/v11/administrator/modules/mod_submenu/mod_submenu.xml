@@ -40,7 +40,7 @@
 			label="Module_Field_Caching_Label"
 			description="Module_Field_Caching_Desc">
 			<option
-				value="0">No caching</option>
+				value="0">MODULE_FIELD_CACHING_VALUE</option>
 		</field>
 	</fields>
 </install>
