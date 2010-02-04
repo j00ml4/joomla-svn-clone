@@ -7,6 +7,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+// No direct access.
 defined('JPATH_BASE') or die;
 
 jimport('joomla.utilities.simplexml');
@@ -74,16 +75,12 @@ abstract class JFormField extends JObject
 		$this->validate		= (string)$xml->attributes()->validate;
 
 		// Add the required class if the field is required.
-		if ($this->required)
-		{
-			if($xml->attributes()->class)
-			{
+		if ($this->required) {
+			if($xml->attributes()->class) {
 				if (strpos((string)$xml->attributes()->class, 'required') === false) {
 					$xml->attributes()->class = $xml->attributes()->class.' required';
 				}
-			}
-			else
-			{
+			} else {
 				$xml->addAttribute('class', 'required');
 			}
 		}
@@ -149,14 +146,11 @@ abstract class JFormField extends JObject
 	{
 		$formName = $this->formName;
 
-		// No form, just use the field name.
-		if ($formName === false)
-		{
+		if ($formName === false) {
+			// No form, just use the field name.
 			return str_replace($this->prefix, '', $javascript);
-		}
-		// Use the form name
-		else
-		{
+		} else {
+			// Use the form name
 			return str_replace($this->prefix, preg_replace('#\W#', '_',$formName).'_', $javascript);
 		}
 	}
@@ -179,20 +173,17 @@ abstract class JFormField extends JObject
 	 */
 	protected function _getInputName($fieldName, $formName = false, $groupName = false, $multiple = false)
 	{
-		// No form or group, just use the field name.
 		if ($formName === false && $groupName === false) {
+			// No form or group, just use the field name.
 			$return = $fieldName;
-		}
-		// No group, use the form and field name.
-		elseif ($formName !== false && $groupName === false) {
+		} elseif ($formName !== false && $groupName === false) {
+			// No group, use the form and field name.
 			$return = $formName.'['.$fieldName.']';
-		}
-		// No form, use the group and field name.
-		elseif ($formName === false && $groupName !== false) {
+		} elseif ($formName === false && $groupName !== false) {
+			// No form, use the group and field name.
 			$return = $groupName.'['.$fieldName.']';
-		}
-		// Use the form, group, and field name.
-		else {
+		} else {
+			// Use the form, group, and field name.
 			$return = $formName.'['.$groupName.']['.$fieldName.']';
 		}
 
@@ -220,20 +211,17 @@ abstract class JFormField extends JObject
 			$fieldId = $fieldName;
 		}
 
-		// No form or group, just use the field name.
 		if ($formName === false && $groupName === false) {
+			// No form or group, just use the field name.
 			$return = $fieldId;
-		}
-		// No group, use the form and field name.
-		elseif ($formName !== false && $groupName === false) {
+		} elseif ($formName !== false && $groupName === false) {
+			// No group, use the form and field name.
 			$return = $formName.'_'.$fieldId;
-		}
-		// No form, use the group and field name.
-		elseif ($formName === false && $groupName !== false) {
+		} elseif ($formName === false && $groupName !== false) {
+			// No form, use the group and field name.
 			$return = $groupName.'_'.$fieldId;
-		}
-		// Use the form, group, and field name.
-		else {
+		} else {
+			// Use the form, group, and field name.
 			$return = $formName.'_'.$groupName.'_'.$fieldId;
 		}
 
