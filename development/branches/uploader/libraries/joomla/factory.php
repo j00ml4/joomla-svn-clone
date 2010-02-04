@@ -392,6 +392,26 @@ abstract class JFactory
 
 		return JEditor::getInstance($editor);
 	}
+	
+	/**
+	 * Get an uploader object
+	 *
+	 * @param string $uploader The uploader to load, depends on the uploader plugins that are installed
+	 * @return object JUploader
+	 */
+	public static function getUploader($uploader = null)
+	{
+		jimport('joomla.html.uploader');
+
+		//get the editor configuration setting
+		if (is_null($uploader))
+		{
+			$conf = &JFactory::getConfig();
+			$uploader = $conf->getValue('config.uploader');
+		}
+
+		return JUploader::getInstance($uploader);
+	}
 
 	/**
 	 * Return a reference to the {@link JURI} object

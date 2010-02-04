@@ -58,6 +58,9 @@ defined('_JEXEC') or die;
 			</form>
 
 			<!-- File Upload Form -->
+			<?php echo $this->uploader->display('upload'); ?>
+
+			<!-- File Upload Form -->
 			<form action="<?php echo JURI::base(); ?>index.php?option=com_media&amp;task=file.upload&amp;tmpl=component&amp;<?php echo $this->session->getName().'='.$this->session->getId(); ?>&amp;<?php echo JUtility::getToken();?>=1" id="uploadForm" method="post" enctype="multipart/form-data">
 				<fieldset id="uploadform">
 					<legend><?php echo JText::_('UPLOAD_FILE'); ?> (<?php echo JText::_('MAXIMUM_SIZE'); ?>:&nbsp;<?php echo ($this->config->get('upload_maxsize') / 1000000); ?>MB)</legend>
