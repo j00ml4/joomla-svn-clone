@@ -11,6 +11,7 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.filesystem.path');
 jimport('joomla.form.formfield');
+JLoader::register('JFormFieldList', dirname(__FILE__).'/fields/list.php');
 
 /**
  * Form Class for the Joomla Framework.
@@ -57,6 +58,14 @@ class JForm
 	 * @since	1.6
 	 */
 	protected $options = array();
+
+	/**
+	 * Static array of JFormField objects for re-use.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $fields = array();
 
 	/**
 	 * Search arrays of paths for loading JForm and JFormField class files.
@@ -232,6 +241,67 @@ class JForm
 		$fields = $this->xml->xpath('//fieldset[@name="'.$name.'"]//field | //field[@fieldset="'.$name.'"]');
 
 		return $fields;
+	}
+
+	/**
+	 * Method to load a form field object given a type.
+	 *
+	 * @param	string	$type	The field type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	JFormField object on success, false otherwise.
+	 */
+	protected function loadFieldType($type, $new = true)
+	{
+		// Initialize variables.
+		$key	= md5($type);
+		$class	= 'JFormField'.ucfirst($type);
+
+		// Return the JFormField object if it already exists and we don't need a new one.
+		if (isset(self::$fields[$key]) && $new === false) {
+			return self::$fields[$key];
+		}
+
+		// Attempt to import the JFormField class file if it isn't already imported.
+		if (!class_exists($class)) {
+
+			// Get the field search path array.
+			$paths = self::addFieldPath();
+
+			// If the type is complex, add the base type to the paths.
+			if ($pos = strpos($type, '_')) {
+				// Add the complex type prefix to the paths.
+				for ($i = 0, $n = count($paths); $i < $n; $i++) {
+					// Derive the new path.
+					$path = $paths[$i].DS.strtolower(substr($type, 0, $pos));
+
+					// If the path does not exist, add it.
+					if (!in_array($path, $paths)) {
+						array_unshift($paths, $path);
+					}
+				}
+
+				// Break off the end of the complex type.
+				$type = substr($type, $pos+1);
+			}
+
+			// Try to find the field file.
+			if ($file = JPath::find($paths, strtolower($type).'.php')) {
+				require_once $file;
+			} else {
+				return false;
+			}
+
+			// Check once and for all if the class exists.
+			if (!class_exists($class)) {
+				return false;
+			}
+		}
+
+		// Instantiate a new field object.
+		self::$fields[$key] = new $class($this);
+
+		return self::$fields[$key];
 	}
 
 	/**
