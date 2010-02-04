@@ -39,4 +39,3 @@ class JFormFieldContentLanguagesTest extends PHPUnit_Framework_TestCase {
 		$this->markTestSkipped('This test does nothing at all.');
 	}
 }
-?>
