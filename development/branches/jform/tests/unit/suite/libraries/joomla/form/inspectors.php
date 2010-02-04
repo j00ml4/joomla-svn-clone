@@ -21,4 +21,14 @@ class JFormInspector extends JForm
 	{
 		return $this->xml;
 	}
+
+	public function getFieldsByGroup($name)
+	{
+		return parent::getFieldsByGroup($name);
+	}
+
+	public function getFieldsByFieldset($name)
+	{
+		return parent::getFieldsByFieldset($name);
+	}
 }
