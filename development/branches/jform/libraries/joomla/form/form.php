@@ -59,6 +59,15 @@ class JForm
 	protected $options = array();
 
 	/**
+	 * Search arrays of paths for loading JForm and JFormField class files.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $paths = array('forms' => array(), 'fields' => array());
+
+
+	/**
 	 * Object constructor.
 	 *
 	 * @param	array	$options	An array of form options.
@@ -152,5 +161,61 @@ class JForm
 		$xml = JFactory::getXML($file, true);
 
 		return $this->load($xml);
+	}
+
+	/**
+	 * Method to add a path to the list of form include paths.
+	 *
+	 * @param	mixed	$new	A path or array of paths to add.
+	 *
+	 * @return	array	The list of paths that have been added.
+	 * @since	1.6
+	 */
+	public static function addFormPath($new = null)
+	{
+		// Add the default form search path if not set.
+		if (empty(self::$paths['forms'])) {
+			self::$paths['forms'][] = dirname(__FILE__).'/forms';
+		}
+
+		// Force the new path(s) to an array.
+		settype($new, 'array');
+
+		// Add the new paths to the stack if not already there.
+		foreach ($new as $path) {
+			if (!in_array($path, self::$paths['forms'])) {
+				array_unshift(self::$paths['forms'], trim($path));
+			}
+		}
+
+		return self::$paths['forms'];
+	}
+
+	/**
+	 * Method to add a path to the list of field include paths.
+	 *
+	 * @param	mixed	$new	A path or array of paths to add.
+	 *
+	 * @return	array	The list of paths that have been added.
+	 * @since	1.6
+	 */
+	public static function addFieldPath($new = null)
+	{
+		// Add the default form search path if not set.
+		if (empty(self::$paths['fields'])) {
+			self::$paths['fields'][] = dirname(__FILE__).'/fields';
+		}
+
+		// Force the new path(s) to an array.
+		settype($new, 'array');
+
+		// Add the new paths to the stack if not already there.
+		foreach ($new as $path) {
+			if (!in_array($path, self::$paths['fields'])) {
+				array_unshift(self::$paths['fields'], trim($path));
+			}
+		}
+
+		return self::$paths['fields'];
 	}
 }
