@@ -294,8 +294,11 @@ class JFormTest extends PHPUnit_Framework_TestCase
 				name="show_title" />
 			<field
 				name="show_abstract" />
-			<field
-				name="show_author" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" />
+			</fieldset>
 		</fields>
 	</fields>
 </form>
