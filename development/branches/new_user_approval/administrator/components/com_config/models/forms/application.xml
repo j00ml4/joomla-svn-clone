@@ -663,6 +663,7 @@
 			<option
 				value="site">Config_Option_Site_Email</option>
 		</field>
+		
 		<field
 			name="admin_approval"
 			type="radio"
