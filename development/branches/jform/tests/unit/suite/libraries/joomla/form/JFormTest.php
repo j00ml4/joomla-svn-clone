@@ -126,6 +126,62 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the JForm::addFormPath method.
+	 *
+	 * This method is used to add additional lookup paths for form XML files.
+	 */
+	public function testAddFormPath()
+	{
+		// Check the default behaviour.
+		$paths = JForm::addFormPath();
+
+		// The default path is the class file folder/forms
+		$valid = JPATH_LIBRARIES.'/joomla/form/forms';
+
+		$this->assertThat(
+			in_array($valid, $paths),
+			$this->isTrue()
+		);
+
+		// Test adding a custom folder.
+		JForm::addFormPath(dirname(__FILE__));
+		$paths = JForm::addFormPath();
+
+		$this->assertThat(
+			in_array(dirname(__FILE__), $paths),
+			$this->isTrue()
+		);
+	}
+
+	/**
+	 * Tests the JForm::addFieldPath method.
+	 *
+	 * This method is used to add additional lookup paths for field helpers.
+	 */
+	public function testAddFieldPath()
+	{
+		// Check the default behaviour.
+		$paths = JForm::addFieldPath();
+
+		// The default path is the class file folder/forms
+		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
+
+		$this->assertThat(
+			in_array($valid, $paths),
+			$this->isTrue()
+		);
+
+		// Test adding a custom folder.
+		JForm::addFieldPath(dirname(__FILE__));
+		$paths = JForm::addFieldPath();
+
+		$this->assertThat(
+			in_array(dirname(__FILE__), $paths),
+			$this->isTrue()
+		);
+	}
+
+	/**
 	 * Test the JForm::load method.
 	 *
 	 * This method can load an XML data object, or parse an XML string.
@@ -211,114 +267,141 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetFieldsByGroup()
 	{
-		$form = new JForm('form1');
+		// Prepare the form.
+		$form = new JFormInspector('form1');
 
-		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".
-					'<form>' .
-					'	<fields>' .
-					'		<field name="f1" />' .
-					'		<fields name="g1">' .
-					'			<field name="f2" />' .
-					'			<field name="f3" />' .
-					'		</fields>' .
-					'		<fields name="g2">' .
-					'			<fieldset name="advanced">' .
-					'				<field name="f4" />' .
-					'				<field name="f5" />' .
-					'			</fieldset>' .
-					'		</fields>' .
-					'		<field name="f6" fieldset="advanced" />' .
-					'	</fields>' .
-					'</form>', true);
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->getFieldsByGroup('foo'),
+			$this->isFalse()
+		);
 
-		$f = $form->getFieldsByGroup('g2');
-		//var_dump($f);
+		$xml = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="show_title" />
+			<field
+				name="show_abstract" />
+			<field
+				name="show_author" />
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$fields = $form->getFieldsByGroup('foo');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		$fields = $form->getFieldsByGroup('details');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(2)
+		);
+
+		$fields = $form->getFieldsByGroup('params');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(3)
+		);
 	}
 
 	/**
-	 * Test the JForm::getFieldsByFieldset method.
+	 * Tests the JForm::getFieldsByFieldset method.
 	 */
 	public function testGetFieldsByFieldset()
 	{
-		$form = new JForm('form1');
+		// Prepare the form.
+		$form = new JFormInspector('form1');
 
-		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".
-					'<form>' .
-					'	<fields>' .
-					'		<field name="f1" />' .
-					'		<fields name="g1">' .
-					'			<field name="f2" />' .
-					'			<field name="f3" />' .
-					'		</fields>' .
-					'		<fields name="g2">' .
-					'			<fieldset name="advanced">' .
-					'				<field name="f4" />' .
-					'				<field name="f5" />' .
-					'			</fieldset>' .
-					'		</fields>' .
-					'		<field name="f6" fieldset="advanced" />' .
-					'	</fields>' .
-					'</form>', true);
-
-		$f = $form->getFieldsByFieldset('advanced');
-		//var_dump($f);
-	}
-
-	/**
-	 * Tests the JForm::addFormPath method.
-	 *
-	 * This method is used to add additional lookup paths for form XML files.
-	 */
-	public function testAddFormPath()
-	{
-		// Check the default behaviour.
-		$paths = JForm::addFormPath();
-
-		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/forms';
-
+		// Check the test data loads ok.
 		$this->assertThat(
-			in_array($valid, $paths),
+			$form->getFieldsByGroup('foo'),
+			$this->isFalse()
+		);
+
+		$xml = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="outlier" />
+			<fieldset
+				name="params-basic">
+				<field
+					name="show_title" />
+				<field
+					name="show_abstract" />
+				<field
+					name="show_author" />
+			</fieldset>
+			<fieldset
+				name="params-advanced">
+				<field
+					name="module_prefix" />
+				<field
+					name="caching" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
 			$this->isTrue()
 		);
 
-		// Test adding a custom folder.
-		JForm::addFormPath(dirname(__FILE__));
-		$paths = JForm::addFormPath();
-
+		// Check that a non-existant group returns nothing.
+		$fields = $form->getFieldsByFieldset('foo');
 		$this->assertThat(
-			in_array(dirname(__FILE__), $paths),
-			$this->isTrue()
-		);
-	}
-
-	/**
-	 * Tests the JForm::addFieldPath method.
-	 *
-	 * This method is used to add additional lookup paths for field helpers.
-	 */
-	public function testAddFieldPath()
-	{
-		// Check the default behaviour.
-		$paths = JForm::addFieldPath();
-
-		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
-
-		$this->assertThat(
-			in_array($valid, $paths),
+			empty($fields),
 			$this->isTrue()
 		);
 
-		// Test adding a custom folder.
-		JForm::addFieldPath(dirname(__FILE__));
-		$paths = JForm::addFieldPath();
-
+		$fields = $form->getFieldsByFieldset('params-basic');
 		$this->assertThat(
-			in_array(dirname(__FILE__), $paths),
-			$this->isTrue()
+			count($fields),
+			$this->equalTo(3)
+		);
+
+		$fields = $form->getFieldsByFieldset('params-advanced');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(2)
 		);
 	}
+
 	/**
 	 * Tests the JForm::bind method.
 	 *
