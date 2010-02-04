@@ -131,8 +131,7 @@ class JForm
 			if ($fields = $this->xml->xpath('//field[@name="'.$name.'"]')) {
 
 				// We have a field of that name and value.
-				//$this->data[$name] = $value;
-				$fields[0]->addAttribute('value', $value);
+				$this->data[$name] = $value;
 
 			} else if ($this->xml->xpath('//fields[@name="'.$name.'"]') && is_array($value)) {
 
@@ -141,8 +140,7 @@ class JForm
 
 					// Validate the subfield name.
 					if ($fields = $this->xml->xpath('//field[@name="'.$subName.'"]')) {
-						//$this->data[$name][$subName] = $subValue;
-						$fields[0]->addAttribute('value', $subValue);
+						$this->data[$name][$subName] = $subValue;
 					}
 				}
 			}
