@@ -17,8 +17,7 @@ $db = &JFactory::getDbo();
 $lang = &JFactory::getLanguage();
 
 // Get the number of unread messages in your inbox.
-$query = new JQuery;
-
+$query	= $db->getQuery(true);
 $query->select('COUNT(*)');
 $query->from('#__messages');
 $query->where('state = 0 AND user_id_to = '.(int) $user->get('id'));
@@ -41,8 +40,7 @@ if ($unread) {
 }
 
 // Get the number of logged in users.
-$query = new JQuery;
-
+$query->clear();
 $query->select('COUNT(session_id)');
 $query->from('#__session');
 $query->where('guest <> 1');
@@ -53,7 +51,7 @@ $online_num = (int) $db->loadResult();
 // Set the logout link.
 $task = JRequest::getCmd('task');
 if ($task == 'edit' || $task == 'editA' || JRequest::getInt('hidemainmenu')) {
-	 $logoutLink = '';
+	$logoutLink = '';
 } else {
 	$logoutLink = JRoute::_('index.php?option=com_login&task=logout');
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,7 +9,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
-jimport('joomla.database.query');
 
 /**
  * Item Model for Contacts.
@@ -25,17 +24,16 @@ class ContactModelContact extends JModelForm
 	 *
 	 * @var		string
 	 */
-	 protected $_context		= 'com_contact.item';
+	protected $_context		= 'com_contact.item';
 
 	/**
 	 * Returns a Table object, always creating it
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
-	*/
-
+	 */
 	public function getTable($type = 'Contact', $prefix = 'ContactTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);

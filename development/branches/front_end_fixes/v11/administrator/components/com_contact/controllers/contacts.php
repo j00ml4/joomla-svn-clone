@@ -25,7 +25,7 @@ class ContactControllerContacts extends JController
 		$this->registerTask('archive',		'publish');
 		$this->registerTask('unpublish',	'publish');
 		$this->registerTask('trash',		'publish');
-		//$this->registerTask('report',       'publish');
+		//$this->registerTask('report',		'publish');
 		$this->registerTask('orderup',		'ordering');
 		$this->registerTask('orderdown',	'ordering');
 		$this->registerTask('unfeatured',	'featured');
@@ -74,7 +74,7 @@ class ContactControllerContacts extends JController
 	}
 
 	/**
-	 *   Method to publish a list of contacts
+	 * Method to publish a list of contacts
 	 *
 	 * @return	void
 	 * @since	1.0
