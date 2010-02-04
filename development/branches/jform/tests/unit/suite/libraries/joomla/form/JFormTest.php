@@ -316,6 +316,7 @@ XML;
 			$this->isTrue()
 		);
 
+		// Check the valid groups.
 		$fields = $form->getFieldsByGroup('details');
 		$this->assertThat(
 			count($fields),
@@ -392,6 +393,7 @@ XML;
 			$this->isTrue()
 		);
 
+		// Check the valid fieldsets.
 		$fields = $form->getFieldsByFieldset('params-basic');
 		$this->assertThat(
 			count($fields),
