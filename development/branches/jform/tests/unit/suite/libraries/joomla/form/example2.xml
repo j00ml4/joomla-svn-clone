@@ -10,7 +10,6 @@
 
 		<fields
 			name="params"
-			array="true"
 			label="Parameters">
 
 			<fieldset
@@ -27,21 +26,25 @@
 				label="Params Fieldset 2">
 
 				<field
-					name="f_option1"
+					name="f_option2"
 					type="text"
 					label="Params Option 1"
 					default="" />
 			</fieldset>
 
 		</fields>
-	</fields>
+		
+		<fieldset
+			name="fieldset_2"
+			label="Another fieldset">
 
-	<fields
-		name="group1">
-		<field
-			name="f_text2"
-			type="text"
-			label="Text Field"
-			default="" />
+			<field
+				name="f_text2"
+				type="text"
+				label="Text Field"
+				default="" />
+			
+		</fieldset>
+		
 	</fields>
 </form>
