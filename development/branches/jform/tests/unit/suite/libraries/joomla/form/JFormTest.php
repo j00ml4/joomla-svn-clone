@@ -88,6 +88,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			$this->isTrue()
 		);
 
+		// Check the integrity of the options.
 		$options = $form->getOptions();
 		$this->assertThat(
 			isset($options['control']),
@@ -131,8 +132,24 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoad()
 	{
+		jimport('joomla.utilities.xmlelement');
+
 		$form = new JForm('form1');
-		$this->markTestIncomplete();
+
+		// Test a non-string input.
+		$this->assertThat(
+			$form->load(123),
+			$this->isFalse()
+		);
+
+		// Test an invalid string input.
+		$this->assertThat(
+			$form->load('junk'),
+			$this->isFalse()
+		);
+
+		$element = new JXMLElement;
+
 	}
 
 	/**
@@ -146,6 +163,71 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->markTestIncomplete();
 	}
 
+	/**
+	 * Tests the JForm::addFormPath method.
+	 *
+	 * This method is used to add additional lookup paths for form XML files.
+	 */
+	public function testAddFormPath()
+	{
+		// Check the default behaviour.
+		$paths = JForm::addFormPath();
+
+		// The default path is the class file folder/forms
+		$valid = array(
+			JPATH_LIBRARIES.'/joomla/form/forms'
+		);
+
+		$this->assertThat(
+			$paths,
+			$this->equalTo($valid)
+		);
+
+		// Test adding a custom folder.
+		JForm::addFormPath(dirname(__FILE__));
+		$paths = JForm::addFormPath();
+
+		// The valid will be added to the start of the stack.
+		array_unshift($valid, dirname(__FILE__));
+
+		$this->assertThat(
+			$paths,
+			$this->equalTo($valid)
+		);
+	}
+
+	/**
+	 * Tests the JForm::addFieldPath method.
+	 *
+	 * This method is used to add additional lookup paths for field helpers.
+	 */
+	public function testAddFieldPath()
+	{
+		// Check the default behaviour.
+		$paths = JForm::addFieldPath();
+
+		// The default path is the class file folder/forms
+		$valid = array(
+			JPATH_LIBRARIES.'/joomla/form/fields'
+		);
+
+		$this->assertThat(
+			$paths,
+			$this->equalTo($valid)
+		);
+
+		// Test adding a custom folder.
+		JForm::addFieldPath(dirname(__FILE__));
+		$paths = JForm::addFieldPath();
+
+		// The valid will be added to the start of the stack.
+		array_unshift($valid, dirname(__FILE__));
+
+		$this->assertThat(
+			$paths,
+			$this->equalTo($valid)
+		);
+	}
 	/**
 	 * Tests the JForm::bind method.
 	 *
