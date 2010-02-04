@@ -298,14 +298,12 @@ abstract class JFactory
 	{
 		$doc = null;
 
-		switch (strtolower($type))
-		{
+		switch (strtolower($type)) {
 			case 'rss' :
 			case 'atom' :
-				{
-					$cache_time = isset($options['cache_time']) ? $options['cache_time'] : 0;
-					$doc = JFactory::getFeedParser($options['rssUrl'], $cache_time);
-				}	break;
+				$cache_time = isset($options['cache_time']) ? $options['cache_time'] : 0;
+				$doc = JFactory::getFeedParser($options['rssUrl'], $cache_time);
+				break;
 
 			case 'simple':
 				// JError::raiseWarning('SOME_ERROR_CODE', 'JSimpleXML is deprecated. Use JFactory::getXML instead');
@@ -318,7 +316,6 @@ abstract class JFactory
 				$doc = null;
 				break;
 
-				throw new JException('DommitDocument is deprecated.  Use DomDocument instead');
 			default :
 				$doc = null;
 		}
@@ -343,29 +340,23 @@ abstract class JFactory
 		// Disable libxml errors and allow to fetch error information as needed
 		libxml_use_internal_errors(true);
 
-		if($isFile)
-		{
+		if ($isFile) {
 			// Try to load the xml file
 			$xml = simplexml_load_file($data, 'JXMLElement');
-		}
-		else
-		{
+		} else {
 			// Try to load the xml string
 			$xml = simplexml_load_string($data, 'JXMLElement');
 		}
 
-		if( ! $xml)
-		{
+		if (empty($xml)) {
 			// There was an error
 			JError::raiseWarning(100, JText::_('Failed loading XML file'));
 
-			if($isFile)
-			{
+			if ($isFile) {
 				JError::raiseWarning(100, $data);
 			}
 
-			foreach(libxml_get_errors() as $error)
-			{
+			foreach (libxml_get_errors() as $error) {
 				JError::raiseWarning(100, 'XML: '.$error->message);
 			}
 		}
@@ -384,8 +375,7 @@ abstract class JFactory
 		jimport('joomla.html.editor');
 
 		//get the editor configuration setting
-		if (is_null($editor))
-		{
+		if (is_null($editor)) {
 			$conf = &JFactory::getConfig();
 			$editor = $conf->getValue('config.editor');
 		}
@@ -580,8 +570,7 @@ abstract class JFactory
 		$mail->setSender(array ($mailfrom, $fromname));
 
 		// Default mailer is to use PHP's mail function
-		switch ($mailer)
-		{
+		switch ($mailer) {
 			case 'smtp' :
 				$mail->useSMTP($smtpauth, $smtphost, $smtpuser, $smtppass, $smtpsecure, $smtpport);
 				break;
@@ -648,7 +637,8 @@ abstract class JFactory
 	 * @param string UA User agent to use
 	 * @param boolean User agent masking (prefix Mozilla)
 	 */
-	function getStream($use_prefix=true, $use_network=true,$ua=null, $uamask=false) {
+	function getStream($use_prefix=true, $use_network=true,$ua=null, $uamask=false)
+	{
 		jimport('joomla.filesystem.stream');
 		// Setup the context; Joomla! UA and overwrite
 		$context = Array();
@@ -656,7 +646,8 @@ abstract class JFactory
 		// set the UA for HTTP and overwrite for FTP
 		$context['http']['user_agent'] = $version->getUserAgent($ua, $uamask);
 		$context['ftp']['overwrite'] = true;
-		if($use_prefix) {
+
+		if ($use_prefix) {
 			jimport('joomla.client.helper');
 			$FTPOptions = JClientHelper::getCredentials('ftp');
 			$SCPOptions = JClientHelper::getCredentials('scp');
@@ -664,7 +655,7 @@ abstract class JFactory
 				$prefix = 'ftp://'. $FTPOptions['user'] .':'. $FTPOptions['pass'] .'@'. $FTPOptions['host'];
 				$prefix .= $FTPOptions['port'] ? ':'. $FTPOptions['port'] : '';
 				$prefix .= $FTPOptions['root'];
-			} else if($SCPOptions['enabled'] == 1 && $use_network) {
+			} else if ($SCPOptions['enabled'] == 1 && $use_network) {
 				$prefix = 'ssh2.sftp://'. $SCPOptions['user'] .':'. $SCPOptions['pass'] .'@'. $SCPOptions['host'];
 				$prefix .= $SCPOptions['port'] ? ':'. $SCPOptions['port'] : '';
 				$prefix .= $SCPOptions['root'];
