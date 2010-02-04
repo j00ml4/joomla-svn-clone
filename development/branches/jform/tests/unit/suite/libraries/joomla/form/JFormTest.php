@@ -228,7 +228,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 					'	</fields>' .
 					'</form>', true);
 
-		var_dump($form->getFieldsByGroup('g2'));
+		$form->getFieldsByGroup('g2');
 	}
 
 	/**

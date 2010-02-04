@@ -174,7 +174,15 @@ class JForm
 
 	public function getFieldsByGroup($group)
 	{
-		$fields = $this->xml->xpath('descendant::fields[@name="'.$group.'"]/field');
+		$fields = $this->xml->xpath('//fields[@name="'.$group.'"]/field');
+
+//		foreach ($fields as $field) {
+//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
+//			var_dump((string) $field['name']);
+//			foreach ($attrs as $attr) {
+//				var_dump((string)$attr);
+//			}
+//		}
 
 		return $fields;
 	}
