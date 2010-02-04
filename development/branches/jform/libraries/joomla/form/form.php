@@ -93,6 +93,65 @@ class JForm
 	}
 
 	/**
+	 * Method to bind data to the form.
+	 *
+	 * @param	mixed	An array or object of data to bind to the form.
+	 *
+	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
+	 * @since	1.6
+	 */
+	public function bind($data)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		// The data must be an object or array.
+		if (!is_object($data) && !is_array($data)) {
+			return false;
+		}
+
+		// Convert objects to arrays.
+		if (is_object($data)) {
+			if ($data instanceof JRegistry) {
+				// Handle a JRegistry/JParameter object.
+				$data = $data->toArray();
+			} else if ($data instanceof JObject) {
+				// Handle a JObject.
+				$data = $data->getProperties();
+			} else {
+				// Handle other types of objects.
+				$data = (array) $data;
+			}
+		}
+
+		foreach ($data as $name => $value) {
+
+			if ($fields = $this->xml->xpath('//field[@name="'.$name.'"]')) {
+
+				// We have a field of that name and value.
+				//$this->data[$name] = $value;
+				$fields[0]->addAttribute('value', $value);
+
+			} else if ($this->xml->xpath('//fields[@name="'.$name.'"]') && is_array($value)) {
+
+				// We have a fields of that name and the data value is also an array
+				foreach ($value as $subName => $subValue) {
+
+					// Validate the subfield name.
+					if ($fields = $this->xml->xpath('//field[@name="'.$subName.'"]')) {
+						//$this->data[$name][$subName] = $subValue;
+						$fields[0]->addAttribute('value', $subValue);
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Method to get the form name.
 	 *
 	 * @return	string	The name of the form.
