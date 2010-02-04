@@ -116,12 +116,21 @@ class JForm
 
 		// Attempt to load the XML if a string.
 		if (is_string($data)) {
-			$data = JFactory::getXML($data);
+			$data = JFactory::getXML($data, false);
 
 			// Make sure the XML loaded correctly.
 			if (!$data) {
 				return false;
 			}
+		}
+
+		// Verify that the XML document is designed for JForm.
+		if ($data->getName() != 'form') {
+			return false;
+		}
+
+		if (count($data->fields) !== 1) {
+			return false;
 		}
 
 		$this->xml = $data;
