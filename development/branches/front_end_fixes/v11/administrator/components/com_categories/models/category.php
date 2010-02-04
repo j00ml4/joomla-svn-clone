@@ -24,14 +24,14 @@ class CategoriesModelCategory extends JModelForm
 	 *
 	 * @var		string
 	 */
-	 protected $_context		= 'com_categories.item';
+	protected $_context		= 'com_categories.item';
 
 	/**
 	 * Returns a Table object, always creating it
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Category', $prefix = 'JTable', $config = array())
@@ -136,12 +136,12 @@ class CategoriesModelCategory extends JModelForm
 			$this->setError($form->getMessage());
 			return false;
 		}
-		
+
 		if(file_exists(JPATH_ADMINISTRATOR.'/components/'.$this->getState('category.extension').'/category.xml'))
 		{
 			$form->load(JPATH_ADMINISTRATOR.'/components/'.$this->getState('category.extension').'/category.xml', true, false);
 		}
-		
+
 		// Set the access control rules field compoennt value.
 		$form->setFieldAttribute('rules', 'component', $this->getState('category.extension'));
 

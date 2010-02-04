@@ -85,12 +85,12 @@ final class JSite extends JApplication
 	 *
 	 */
 	public function route()
- 	{
- 		parent::route();
+	{
+		parent::route();
 
- 		$Itemid = JRequest::getInt('Itemid');
+		$Itemid = JRequest::getInt('Itemid');
 		$this->authorize($Itemid);
- 	}
+	}
 
 	/**
 	 * Dispatch the application
@@ -106,8 +106,8 @@ final class JSite extends JApplication
 
 		$document	= &JFactory::getDocument();
 		$user		= &JFactory::getUser();
-		$router     = &$this->getRouter();
-		$params     = &$this->getParams();
+		$router		= &$this->getRouter();
+		$params		= &$this->getParams();
 
 		switch($document->getType())
 		{
@@ -141,8 +141,8 @@ final class JSite extends JApplication
 	 */
 	public function render()
 	{
-		$document = &JFactory::getDocument();
-		$user     = &JFactory::getUser();
+		$document	= &JFactory::getDocument();
+		$user		= &JFactory::getUser();
 
 		// get the format to render
 		$format = $document->getType();
@@ -156,7 +156,7 @@ final class JSite extends JApplication
 			case 'html':
 			default:
 				$template	= $this->getTemplate(true);
-				$file 		= JRequest::getCmd('tmpl', 'index');
+				$file		= JRequest::getCmd('tmpl', 'index');
 
 				if ($this->getCfg('offline') && $user->get('gid') < '23') {
 					$file = 'offline';
@@ -165,13 +165,13 @@ final class JSite extends JApplication
 					$file = 'component';
 				}
 				$params = array(
-					'template' 	=> $template->template,
+					'template'	=> $template->template,
 					'file'		=> $file.'.php',
 					'directory'	=> JPATH_THEMES,
 					'params'	=> $template->params
 				);
 				break;
- 		}
+		}
 
 		// Parse the document.
 		$document = &JFactory::getDocument();
@@ -191,8 +191,8 @@ final class JSite extends JApplication
 	/**
 	 * Login authentication function
 	 *
-	 * @param	array 	Array('username' => string, 'password' => string)
-	 * @param	array 	Array('remember' => boolean)
+	 * @param	array	Array('username' => string, 'password' => string)
+	 * @param	array	Array('remember' => boolean)
 	 *
 	 * @see JApplication::login
 	 */
@@ -265,7 +265,7 @@ final class JSite extends JApplication
 			$menus	= &JSite::getMenu();
 			$menu	= $menus->getActive();
 
-			$title       = htmlspecialchars_decode($this->getCfg('sitename'));
+			$title = htmlspecialchars_decode($this->getCfg('sitename'));
 			$description = $this->getCfg('MetaDesc');
 
 			// Lets cascade the parameters if we have menu item parameters
@@ -275,7 +275,7 @@ final class JSite extends JApplication
 				$title = $menu->title;
 			}
 
-			$params[$hash]->def('page_title'      , $title);
+			$params[$hash]->def('page_title', $title);
 			$params[$hash]->def('page_description', $description);
 		}
 
@@ -350,7 +350,7 @@ final class JSite extends JApplication
 		}
 
 		$template->params = new JParameter($template->params);
-		
+
 		// Cache the result
 		$this->template = $template;
 		if ($params) {

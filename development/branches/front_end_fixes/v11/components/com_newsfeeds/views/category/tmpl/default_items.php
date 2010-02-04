@@ -16,7 +16,7 @@ $n = count($this->items);
 ?>
 
 <?php if (empty($this->items)) : ?>
-	<p> <?php echo JText::_('Newsfeed_No_Articles'); ?>     </p>
+	<p> <?php echo JText::_('Newsfeed_No_Articles'); ?>	 </p>
 <?php else : ?>
 
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
@@ -84,9 +84,9 @@ $n = count($this->items);
 	<?php if ($this->params->get('show_pagination')) : ?>
 	 <div class="pagination">
 	<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-                        <p class="counter">
-                            <?php echo $this->pagination->getPagesCounter(); ?>
-                        </p>
+						<p class="counter">
+							<?php echo $this->pagination->getPagesCounter(); ?>
+						</p>
    <?php endif; ?>
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>

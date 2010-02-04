@@ -47,7 +47,7 @@ class ConfigModelComponent extends JModelForm
 	public function getForm()
 	{
 		$option = $this->getState('component.option');
-		$path 	= $this->getState('component.path', '');
+		$path	= $this->getState('component.path', '');
 		jimport('joomla.form.form');
 
 		if ($path){
@@ -100,7 +100,7 @@ class ConfigModelComponent extends JModelForm
 	 */
 	public function save($data)
 	{
-		$table 	= &JTable::getInstance('extension');
+		$table	= &JTable::getInstance('extension');
 
 		// Save the rules.
 		if (isset($data['params']) && isset($data['params']['rules']))
@@ -133,8 +133,8 @@ class ConfigModelComponent extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
-		unset($data['id']);		
-		
+		unset($data['id']);
+
 		// Bind the data.
 		if (!$table->bind($data))
 		{
