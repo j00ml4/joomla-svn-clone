@@ -9,6 +9,7 @@
 
 defined('JPATH_BASE') or die;
 
+jimport('joomla.filesystem.path');
 jimport('joomla.form.formfield');
 
 /**
@@ -99,6 +100,24 @@ class JForm
 	 */
 	public function load($data, $reset = true)
 	{
+		// If the data to load isn't already an XML element or string return false.
+		if ((!$data instanceof JXMLElement) && (!is_string($data))) {
+			return false;
+		}
+
+		// Attempt to load the XML if a string.
+		if (is_string($data)) {
+			$data = JFactory::getXML($data);
+
+			// Make sure the XML loaded correctly.
+			if (!$data) {
+				return false;
+			}
+		}
+
+		$this->xml = $data;
+
+		return true;
 	}
 
 	/**
@@ -109,13 +128,29 @@ class JForm
 	 * fields in the new XML file unless the $reset parameter has been set
 	 * to false.
 	 *
-	 * @param	string	$path	The filesystem path of an XML file.
+	 * @param	string	$file	The filesystem path of an XML file.
 	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
 	 *
 	 * @return	boolean	True on success, false otherwise.
 	 * @since	1.6
 	 */
-	public function loadFile($path, $reset = true)
+	public function loadFile($file, $reset = true)
 	{
+		// Check to see if the path is an absolute path.
+		if (!is_file($file)) {
+
+			// Not an absolute path so let's attempt to find one using JPath.
+			$file = JPath::find(self::addFormPath(), strtolower($file).'.xml');
+
+			// If unable to find the file return false.
+			if (!$file) {
+				return false;
+			}
+		}
+
+		// Attempt to load the XML file.
+		$xml = JFactory::getXML($file, true);
+
+		return $this->load($xml);
 	}
 }
