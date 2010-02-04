@@ -207,7 +207,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test the JForm::getName method.
+	 * Test the JForm::getFieldsByGroup method.
 	 */
 	public function testGetFieldsByGroup()
 	{
@@ -222,13 +222,46 @@ class JFormTest extends PHPUnit_Framework_TestCase
 					'			<field name="f3" />' .
 					'		</fields>' .
 					'		<fields name="g2">' .
-					'			<field name="f4" />' .
-					'			<field name="f5" />' .
+					'			<fieldset name="advanced">' .
+					'				<field name="f4" />' .
+					'				<field name="f5" />' .
+					'			</fieldset>' .
 					'		</fields>' .
+					'		<field name="f6" fieldset="advanced" />' .
 					'	</fields>' .
 					'</form>', true);
 
-		$form->getFieldsByGroup('g2');
+		$f = $form->getFieldsByGroup('g2');
+		//var_dump($f);
+	}
+
+	/**
+	 * Test the JForm::getFieldsByFieldset method.
+	 */
+	public function testGetFieldsByFieldset()
+	{
+		$form = new JForm('form1');
+
+		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".
+					'<form>' .
+					'	<fields>' .
+					'		<field name="f1" />' .
+					'		<fields name="g1">' .
+					'			<field name="f2" />' .
+					'			<field name="f3" />' .
+					'		</fields>' .
+					'		<fields name="g2">' .
+					'			<fieldset name="advanced">' .
+					'				<field name="f4" />' .
+					'				<field name="f5" />' .
+					'			</fieldset>' .
+					'		</fields>' .
+					'		<field name="f6" fieldset="advanced" />' .
+					'	</fields>' .
+					'</form>', true);
+
+		$f = $form->getFieldsByFieldset('advanced');
+		//var_dump($f);
 	}
 
 	/**

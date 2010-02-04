@@ -172,9 +172,24 @@ class JForm
 		return $this->load($xml);
 	}
 
-	public function getFieldsByGroup($group)
+	public function getFieldsByGroup($name)
 	{
-		$fields = $this->xml->xpath('//fields[@name="'.$group.'"]/field');
+		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+
+//		foreach ($fields as $field) {
+//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
+//			var_dump((string) $field['name']);
+//			foreach ($attrs as $attr) {
+//				var_dump((string)$attr);
+//			}
+//		}
+
+		return $fields;
+	}
+
+	public function getFieldsByFieldset($name)
+	{
+		$fields = $this->xml->xpath('//fieldset[@name="'.$name.'"]//field | //field[@fieldset="'.$name.'"]');
 
 //		foreach ($fields as $field) {
 //			$attrs = $field->xpath('ancestor::fields[@name]/@name');
