@@ -415,6 +415,52 @@ XML;
 	public function testBind()
 	{
 		$form = new JForm('form1');
-		$this->markTestIncomplete();
+
+		$xml = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="show_title" />
+			<field
+				name="show_abstract" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		$data = array(
+			'title'		=> 'Joomla Framework',
+			'author'	=> 'Should not bind',
+			'params'	=> array(
+				'show_title'	=> 1,
+				'show_abstract'	=> 0,
+				'show_author'	=> 1,
+			)
+		);
+
+		$form->bind($data);
+
+
 	}
 }
