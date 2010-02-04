@@ -172,10 +172,8 @@ class JForm
 		return $this->load($xml);
 	}
 
-	public function getFieldsByGroup($name)
+	public function getGroup($name)
 	{
-		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
-
 //		foreach ($fields as $field) {
 //			$attrs = $field->xpath('ancestor::fields[@name]/@name');
 //			var_dump((string) $field['name']);
@@ -183,21 +181,55 @@ class JForm
 //				var_dump((string)$attr);
 //			}
 //		}
+	}
+
+	/**
+	 * Method to get an array of <field /> elements from the form XML document which are
+	 * in a control group by name.
+	 *
+	 * @param	string	$name	The name of the control group.
+	 *
+	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
+	 * @since	1.6
+	 */
+	protected function getFieldsByGroup($name)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		/*
+		 * Get an array of <field /> elements that are underneath a <fields /> element
+		 * with the appropriate name attribute.
+		 */
+		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
 
 		return $fields;
 	}
 
-	public function getFieldsByFieldset($name)
+	/**
+	 * Method to get an array of <field /> elements from the form XML document which are
+	 * in a specified fieldset by name.
+	 *
+	 * @param	string	$name	The name of the fieldset.
+	 *
+	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
+	 * @since	1.6
+	 */
+	protected function getFieldsByFieldset($name)
 	{
-		$fields = $this->xml->xpath('//fieldset[@name="'.$name.'"]//field | //field[@fieldset="'.$name.'"]');
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
 
-//		foreach ($fields as $field) {
-//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
-//			var_dump((string) $field['name']);
-//			foreach ($attrs as $attr) {
-//				var_dump((string)$attr);
-//			}
-//		}
+		/*
+		 * Get an array of <field /> elements that are underneath a <fieldset /> element
+		 * with the appropriate name attribute, and also any <field /> elements with
+		 * the appropriate fieldset attribute.
+		 */
+		$fields = $this->xml->xpath('//fieldset[@name="'.$name.'"]//field | //field[@fieldset="'.$name.'"]');
 
 		return $fields;
 	}
