@@ -132,9 +132,9 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoad()
 	{
-		jimport('joomla.utilities.xmlelement');
+		//jimport('joomla.utilities.xmlelement');
 
-		$form = new JForm('form1');
+		$form = new JFormInspector('form1');
 
 		// Test a non-string input.
 		$this->assertThat(
@@ -148,8 +148,34 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			$this->isFalse()
 		);
 
-		$element = new JXMLElement;
+		// Test an XML string.
+		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /></form>');
+		$data1 = clone $form->getXML();
 
+		$this->assertThat(
+			($data1 instanceof JXMLElement),
+			$this->isTrue()
+		);
+
+		// Test reset.
+		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields><field /><fields></form>', true);
+		$data2 = clone $form->getXML();
+
+		$this->assertThat(
+			$data1,
+			$this->logicalNot($this->identicalTo($data2))
+		);
+
+		// Test bad structure.
+		$this->assertThat(
+			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<foobar />', true),
+			$this->isFalse()
+		);
+
+		$this->assertThat(
+			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /><fields /></form>', true),
+			$this->isFalse()
+		);
 	}
 
 	/**

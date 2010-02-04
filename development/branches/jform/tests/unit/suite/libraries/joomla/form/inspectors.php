@@ -17,8 +17,8 @@ class JFormInspector extends JForm
 	/**
 	 * @return	array	Return the protected data object.
 	 */
-	public function getData()
+	public function getXML()
 	{
-		return $this->options;
+		return $this->xml;
 	}
 }
