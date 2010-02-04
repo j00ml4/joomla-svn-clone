@@ -172,6 +172,13 @@ class JForm
 		return $this->load($xml);
 	}
 
+	public function getFieldsByGroup($group)
+	{
+		$fields = $this->xml->xpath('descendant::fields[@name="'.$group.'"]/field');
+
+		return $fields;
+	}
+
 	/**
 	 * Method to add a path to the list of form include paths.
 	 *

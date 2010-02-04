@@ -207,6 +207,31 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JForm::getName method.
+	 */
+	public function testGetFieldsByGroup()
+	{
+		$form = new JForm('form1');
+
+		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".
+					'<form>' .
+					'	<fields>' .
+					'		<field name="f1" />' .
+					'		<fields name="g1">' .
+					'			<field name="f2" />' .
+					'			<field name="f3" />' .
+					'		</fields>' .
+					'		<fields name="g2">' .
+					'			<field name="f4" />' .
+					'			<field name="f5" />' .
+					'		</fields>' .
+					'	</fields>' .
+					'</form>', true);
+
+		var_dump($form->getFieldsByGroup('g2'));
+	}
+
+	/**
 	 * Tests the JForm::addFormPath method.
 	 *
 	 * This method is used to add additional lookup paths for form XML files.
