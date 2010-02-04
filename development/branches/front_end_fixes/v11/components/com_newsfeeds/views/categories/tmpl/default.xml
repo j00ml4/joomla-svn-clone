@@ -13,7 +13,7 @@
 		description="">
 
 		<field
-			name="Category"
+			name="category"
 			type="category"
 			label="Choose_Category_Label"
 			description="Choose_Category_Desc"
