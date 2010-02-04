@@ -60,7 +60,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	{
 		$this->saveFactoryState();
 		jimport('joomla.form.form');
-		//include_once 'inspectors.php';
+		include_once 'inspectors.php';
 	}
 
 	/**
@@ -73,4 +73,87 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->restoreFactoryState();
 	}
 
+	/**
+	 * Testing methods used by the instantiated object.
+	 *
+	 * @return void
+	 */
+	public function testConstruct()
+	{
+		// Check the empty contructor for basic errors.
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			($form instanceof JForm),
+			$this->isTrue()
+		);
+
+		$options = $form->getOptions();
+		$this->assertThat(
+			isset($options['control']),
+			$this->isTrue()
+		);
+
+		$options = $form->getOptions();
+		$this->assertThat(
+			$options['control'],
+			$this->isFalse()
+		);
+
+		// Test setting the control value.
+		$form = new JFormInspector('form1', array('control' => 'jform'));
+
+		$options = $form->getOptions();
+
+		$this->assertThat(
+			$options['control'],
+			$this->equalTo('jform')
+		);
+	}
+
+	/**
+	 * Test the JForm::getName method.
+	 */
+	public function testGetName()
+	{
+		$form = new JForm('form1');
+
+		$this->assertThat(
+			$form->getName(),
+			$this->equalTo('form1')
+		);
+	}
+
+	/**
+	 * Test the JForm::load method.
+	 *
+	 * This method can load an XML data object, or parse an XML string.
+	 */
+	public function testLoad()
+	{
+		$form = new JForm('form1');
+		$this->markTestIncomplete();
+	}
+
+	/**
+	 * Test the JForm::loadFile method.
+	 *
+	 * This method loads a file and passes the string to the JForm::load method.
+	 */
+	public function testLoadFile()
+	{
+		$form = new JForm('form1');
+		$this->markTestIncomplete();
+	}
+
+	/**
+	 * Tests the JForm::bind method.
+	 *
+	 * This method is used to load data into the JForm object.
+	 */
+	public function testBind()
+	{
+		$form = new JForm('form1');
+		$this->markTestIncomplete();
+	}
 }
