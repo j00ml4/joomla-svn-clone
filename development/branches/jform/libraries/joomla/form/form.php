@@ -65,7 +65,7 @@ class JForm
 	 * @return	void
 	 * @since	1.6
 	 */
-	public function __construct($name, $options = array())
+	public function __construct($name, array $options = array())
 	{
 		// Set the name for the form.
 		$this->name = $name;
