@@ -12,8 +12,8 @@ defined('_JEXEC') or die;
 
 // Include HTML helpers.
 JHTML::addIncludePath(JPATH_COMPONENT.'/helpers/html');
-JHTML::stylesheet('default.css', 'administrator/components/com_comments/media/css/');
-JHTML::script('checkall.js', 'administrator/components/com_catalog/media/js/');
+JHTML::stylesheet('comments/default.css', array(), true);
+JHTML::script('comments/checkall.js', false, true);
 JHTML::_('behavior.tooltip');
 
 $lDirection = $this->state->get('list.direction');
@@ -22,23 +22,23 @@ $lOrdering	= $this->state->get('list.ordering');
 
 <form action="<?php echo JRoute::_('index.php?option=com_comments&view=threads');?>" method="post" name="adminForm">
 
- 	<div class="form-filter" style="float: left;">
- 		<label for="search"><?php echo JText::_('COMMENTS_SEARCH_LABEL'); ?></label>
- 		<input type="text" name="filter_search" id="search" value="<?php echo $this->state->get('filter.search'); ?>" class="text_area" onchange="document.adminForm.submit();" title="<?php echo JText::_('COMMENTS_SEARCH_TITLE');?>"/>
- 		<button onclick="this.form.submit();"><?php echo JText::_('COMMENTS_SEARCH_GO'); ?></button>
- 		<button onclick="document.getElementById('search').value='';document.getElementById('published').value='0';this.form.submit();"><?php echo JText::_('COMMENTS_SEARCH_RESET'); ?></button>
- 	</div>
+	<div class="form-filter" style="float: left;">
+		<label for="search"><?php echo JText::_('COMMENTS_SEARCH_LABEL'); ?></label>
+		<input type="text" name="filter_search" id="search" value="<?php echo $this->state->get('filter.search'); ?>" class="text_area" onchange="document.adminForm.submit();" title="<?php echo JText::_('COMMENTS_SEARCH_TITLE');?>"/>
+		<button onclick="this.form.submit();"><?php echo JText::_('COMMENTS_SEARCH_GO'); ?></button>
+		<button onclick="document.getElementById('search').value='';document.getElementById('published').value='0';this.form.submit();"><?php echo JText::_('COMMENTS_SEARCH_RESET'); ?></button>
+	</div>
 
- 	<div class="form-filter" style="float: right;">
+	<div class="form-filter" style="float: right;">
 		<select name="filter_context" id="filter_context" class="inputbox" onchange="this.form.submit()">
 			<option value=""><?php echo JText::_('Comments_All_Contexts');?></option>
 			<?php echo JHtml::_('select.options', CommentsHelper::getContextOptions(), 'value', 'text', $this->state->get('filter.context'));?>
 		</select>
- 	</div>
+	</div>
 
 	<table class="adminlist" style="clear: both;">
-	  	<thead>
-	  		<tr>
+		<thead>
+			<tr>
 				<th width="20">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this,'cid')" />
 				</th>

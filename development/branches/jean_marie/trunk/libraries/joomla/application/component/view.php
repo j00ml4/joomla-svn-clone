@@ -42,7 +42,7 @@ class JView extends JObject
 	 * The base path of the view
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_basePath = null;
 
@@ -58,7 +58,7 @@ class JView extends JObject
 	 * Layout name
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_layout = 'default';
 
@@ -66,7 +66,7 @@ class JView extends JObject
 	 * Layout extension
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_layoutExt = 'php';
 
@@ -98,20 +98,20 @@ class JView extends JObject
 	var $_output = null;
 
 	/**
-     * Callback for escaping.
-     *
-     * @var string
-     * @access private
-     */
-    var $_escape = 'htmlspecialchars';
+	 * Callback for escaping.
+	 *
+	 * @var string
+	 * @access private
+	 */
+	var $_escape = 'htmlspecialchars';
 
-	 /**
-     * Charset to use in escaping mechanisms; defaults to urf8 (UTF-8)
-     *
-     * @var string
-     * @access private
-     */
-    var $_charset = 'UTF-8';
+	/**
+	 * Charset to use in escaping mechanisms; defaults to urf8 (UTF-8)
+	 *
+	 * @var string
+	 * @access private
+	 */
+	var $_charset = 'UTF-8';
 
 	/**
 	 * Constructor
@@ -130,15 +130,15 @@ class JView extends JObject
 			}
 		}
 
-		 // set the charset (used by the variable escaping functions)
-        if (array_key_exists('charset', $config)) {
-            $this->_charset = $config['charset'];
-        }
+		// set the charset (used by the variable escaping functions)
+		if (array_key_exists('charset', $config)) {
+			$this->_charset = $config['charset'];
+		}
 
-		 // user-defined escaping callback
-        if (array_key_exists('escape', $config)) {
-            $this->setEscape($config['escape']);
-        }
+		// user-defined escaping callback
+		if (array_key_exists('escape', $config)) {
+			$this->setEscape($config['escape']);
+		}
 
 		// Set a base path for use by the view
 		if (array_key_exists('base_path', $config)) {
@@ -311,22 +311,22 @@ class JView extends JObject
 	}
 
 	/**
-     * Escapes a value for output in a view script.
-     *
-     * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
-     * {@link $_encoding} setting.
-     *
-     * @param  mixed $var The output to escape.
-     * @return mixed The escaped value.
-     */
-    function escape($var)
-    {
-        if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
-            return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_charset);
-        }
+	 * Escapes a value for output in a view script.
+	 *
+	 * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
+	 * {@link $_encoding} setting.
+	 *
+	 * @param  mixed $var The output to escape.
+	 * @return mixed The escaped value.
+	 */
+	function escape($var)
+	{
+		if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
+			return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_charset);
+		}
 
-        return call_user_func($this->_escape, $var);
-    }
+		return call_user_func($this->_escape, $var);
+	}
 
 	/**
 	 * Method to get data from a registered model or a property of the view
@@ -355,8 +355,8 @@ class JView extends JObject
 			if (method_exists($this->_models[$model], $method))
 			{
 				// The method exists, lets call it and return what we get
-                $result = $this->_models[$model]->$method();
-                return $result;
+				$result = $this->_models[$model]->$method();
+				return $result;
 			}
 
 		}
@@ -482,15 +482,15 @@ class JView extends JObject
 		return $previous;
 	}
 
-	 /**
-     * Sets the _escape() callback.
-     *
-     * @param mixed $spec The callback for _escape() to use.
-     */
-    function setEscape($spec)
-    {
-        $this->_escape = $spec;
-    }
+	/**
+	 * Sets the _escape() callback.
+	 *
+	 * @param mixed $spec The callback for _escape() to use.
+	 */
+	function setEscape($spec)
+	{
+		$this->_escape = $spec;
+	}
 
 	/**
 	 * Adds to the stack of view script paths in LIFO order.
@@ -658,9 +658,9 @@ class JView extends JObject
 	 * Create the filename for a resource
 	 *
 	 * @access private
-	 * @param string 	$type  The resource type to create the filename for
-	 * @param array 	$parts An associative array of filename information
-	 * @return string The filename
+	 * @param string	The resource type to create the filename for
+	 * @param array		An associative array of filename information
+	 * @return string	The filename
 	 * @since 1.5
 	 */
 	function _createFileName($type, $parts = array())
