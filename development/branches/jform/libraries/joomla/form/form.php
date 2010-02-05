@@ -355,12 +355,13 @@ class JForm
 	 * @param	mixed		$value			The optional value to render as the default for the field.
 	 * @return	object		Rendered Form Field object
 	 */
-	public function getField($name, $group = '_default', $formControl = '_default', $groupControl = '_default', $value = null)
+	public function getField($name, $group = null, $value = null)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
 			return false;
 		}
+
 
 		// Get the XML node.
 		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
@@ -519,7 +520,7 @@ class JForm
 		}
 
 		// Instantiate a new field object.
-		self::$fields[$key] = new $class($this);
+		self::$fields[$key] = new $class();
 
 		return self::$fields[$key];
 	}
