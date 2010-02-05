@@ -362,11 +362,21 @@ class JForm
 			return false;
 		}
 
+		if ($group) {
+
+			/*
+			 * Get an array of <field /> elements that are underneath a <fields /> element
+			 * with the appropriate name attributes.
+			 */
+			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
+
+		}
+
 		/*
 		 * Get an array of <field /> elements that are underneath a <fields /> element
 		 * with the appropriate name attribute.
 		 */
-		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+		$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
 
 		// Get the XML node.
 		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
