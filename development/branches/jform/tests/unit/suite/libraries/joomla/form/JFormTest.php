@@ -188,8 +188,6 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoad()
 	{
-		//jimport('joomla.utilities.xmlelement');
-
 		$form = new JFormInspector('form1');
 
 		// Test a non-string input.
@@ -213,26 +211,62 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			$this->isTrue()
 		);
 
-		// Test reset.
-		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields><field /><fields></form>', true);
+		// Test implied reset.
+		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields><field /><fields></form>');
 		$data2 = clone $form->getXML();
 
 		$this->assertThat(
 			$data1,
 			$this->logicalNot($this->identicalTo($data2))
 		);
-		$this->markTestIncomplete('JForm::load with reset option not implemented in JForm yet.');
 
 		// Test bad structure.
 		$this->assertThat(
-			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<foobar />', true),
+			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<foobar />'),
 			$this->isFalse()
 		);
 
 		$this->assertThat(
-			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /><fields /></form>', true),
+			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /><fields /></form>'),
 			$this->isFalse()
 		);
+
+		// Test merging.
+		$form = new JFormInspector('form1');
+
+		$xml1 = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<field
+			name="title" />
+		<field
+			name="abstract" />
+	</fields>
+</form>
+XML;
+
+		$form->load($xml1);
+
+		$xml2 = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<field
+			name="published"
+			type="list">
+			<option
+				value="1">JYes</option>
+			<option
+				value="0">JNo</option>
+		</field>
+	</fields>
+</form>
+XML;
+		// Merge in the second batch of data.
+		$form->load($xml2, false);
+		print_r($form->getXML());
+		echo $form->getXml()->asXML();
 	}
 
 	/**
@@ -462,8 +496,22 @@ XML;
 			)
 		);
 
-		$form->bind($data);
+		// Bind the data.
+		$this->assertThat(
+			$form->bind($data),
+			$this->isTrue()
+		);
+
+		// Get the data to inspect it.
 		$data = $form->getData();
-		print_r($data);
+		$this->assertThat(
+			isset($data['title']) && $data['title'] = 'Joomla Framework',
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($data['author']),
+			$this->isFalse()
+		);
 	}
 }
