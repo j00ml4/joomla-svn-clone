@@ -414,22 +414,25 @@ XML;
 	 */
 	public function testBind()
 	{
-		$form = new JForm('form1');
+		$form = new JFormInspector('form1');
 
 		$xml = <<<XML
 <?xml version="1.0" encoding="utf-8" ?>
 <form>
-	<fields>
+	<fields
+		description="All the fields">
 		<!-- Set up a group of fields called details. -->
 		<fields
-			name="details">
+			name="details"
+			description="The Details Group">
 			<field
 				name="title" />
 			<field
 				name="abstract" />
 		</fields>
 		<fields
-			name="params">
+			name="params"
+			description="Optional Settings">
 			<field
 				name="show_title" />
 			<field
@@ -460,7 +463,7 @@ XML;
 		);
 
 		$form->bind($data);
-
-
+		$data = $form->getData();
+		print_r($data);
 	}
 }
