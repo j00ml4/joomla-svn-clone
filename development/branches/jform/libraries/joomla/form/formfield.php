@@ -21,87 +21,12 @@ jimport('joomla.utilities.simplexml');
 abstract class JFormField
 {
 	/**
-	 * The document id for the form field.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $id;
-
-	/**
-	 * The name of the form field.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $name;
-
-	/**
-	 * The value of the form field.
-	 *
-	 * @var		mixed
-	 * @since	1.6
-	 */
-	protected $value;
-
-	/**
-	 * The label for the form field.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $label;
-
-	/**
-	 * The input for the form field.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $input;
-
-	/**
 	 * The description text for the form field.  Usually used in tooltips.
 	 *
 	 * @var		string
 	 * @since	1.6
 	 */
 	protected $description;
-
-	/**
-	 * The required state for the form field.  If true then there must be a value for the field to
-	 * be considered valid.
-	 *
-	 * @var		boolean
-	 * @since	1.6
-	 */
-	protected $required = false;
-
-	/**
-	 * The validation method for the form field.  This value will determine which method is used
-	 * to validate the value for a field.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $validate;
-
-	/**
-	 * The multiple state for the form field.  If true then multiple values are allowed for the
-	 * field.  Most often used for list field types.
-	 *
-	 * @var		boolean
-	 * @since	1.6
-	 */
-	protected $multiple = false;
-
-	/**
-	 * The form field type.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $type;
 
 	/**
 	 * The JXMLElement object of the <field /> XML element that describes the form field.
@@ -126,6 +51,81 @@ abstract class JFormField
 	 * @since	1.6
 	 */
 	protected $formControl;
+
+	/**
+	 * The document id for the form field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $id;
+
+	/**
+	 * The input for the form field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $input;
+
+	/**
+	 * The label for the form field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $label;
+
+	/**
+	 * The multiple state for the form field.  If true then multiple values are allowed for the
+	 * field.  Most often used for list field types.
+	 *
+	 * @var		boolean
+	 * @since	1.6
+	 */
+	protected $multiple = false;
+
+	/**
+	 * The name of the form field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $name;
+
+	/**
+	 * The required state for the form field.  If true then there must be a value for the field to
+	 * be considered valid.
+	 *
+	 * @var		boolean
+	 * @since	1.6
+	 */
+	protected $required = false;
+
+	/**
+	 * The form field type.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $type;
+
+	/**
+	 * The validation method for the form field.  This value will determine which method is used
+	 * to validate the value for a field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $validate;
+
+	/**
+	 * The value of the form field.
+	 *
+	 * @var		mixed
+	 * @since	1.6
+	 */
+	protected $value;
 
 	/**
 	 * Method to instantiate the form field object.
@@ -215,19 +215,12 @@ abstract class JFormField
     }
 
 	/**
-	 * Method to get the form field type.
+	 * Method to attach a JForm object to the field.
 	 *
-	 * @return	string		The field type.
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
-
-	/**
-	 * Method to get the form field type.
+	 * @param	object	$form	The JForm object to attach to the form field.
 	 *
-	 * @return	string		The field type.
+	 * @return	object	The form field object so that the method can be used in a chain.
+	 * @since	1.6
 	 */
 	public function setForm(JForm $form)
 	{
@@ -238,11 +231,20 @@ abstract class JFormField
 	}
 
 	/**
-	 * Method to get the form field type.
+	 * Method to attach a JForm object to the field.
 	 *
-	 * @return	string		The field type.
+	 * @param	object	$element	The JXMLElement object representing the <field /> tag for the
+	 * 								form field object.
+	 * @param	mixed	$value		The form field default value for display.
+	 * @param	string	$control	The field name group control value. This acts as as an array
+	 * 								container for the field. For example if the field has name="foo"
+	 * 								and the control value is set to "bar" then the full field name
+	 * 								would end up being "bar[foo]".
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
 	 */
-	public function setup(&$element, $value, $control)
+	public function setup($element, $value, $control = null)
 	{
 		// Make sure there is a valid JFormField XML element.
 		if ((!$element instanceof JXMLElement) && ((string) $element->getName() == 'field')) {
@@ -263,11 +265,7 @@ abstract class JFormField
 		$name		= (string) $element['name'];
 		$required	= (string) $element['required'];
 
-		// Set the label and description text.
-		$this->labelText	= (string) $element['label'] ? (string) $element['label'] : $this->name;
-		$this->description	= (string) $element['description'];
-
-		// Set the required and validate options.
+		// Set the required and validation options.
 		$this->required		= ($required == 'true' || $required == 'required');
 		$this->validate		= (string) $element['validate'];
 
@@ -282,22 +280,23 @@ abstract class JFormField
 			}
 		}
 
-		// Set the visibility.
-		$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
-
 		// Set the multiple values option.
 		$this->multiple = ($multiple == 'true' || $multiple == 'multiple');
 
-		// Set the id, name, and value.
-		// Set the input name and id.
+		// Set the field description text.
+		$this->description	= (string) $element['description'];
+
+		// Set the visibility.
+		//$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
+
+		// Set the field name and id.
 		$this->name	= $this->_getInputName($name, $this->formControl, $control, $this->multiple);
 		$this->id	= $this->_getInputId($id, $name, $this->formControl, $control);
 
-		$this->value	= $value;
+		// Set the field default value.
+		$this->value = $value;
 
-		/*
-		 * RESET INTERNAL DATA
-		 */
+		 return true;
 	}
 
 	/**
@@ -308,17 +307,18 @@ abstract class JFormField
 	protected function _getLabel()
 	{
 		// Set the class for the label.
-		$class = !empty($this->descText) ? 'hasTip' : '';
+		$labelText = (string) $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
+		$class = !empty($this->description) ? 'hasTip' : '';
 		$class = $this->required == true ? $class.' required' : $class;
 
 		// If a description is specified, use it to build a tooltip.
-		if (!empty($this->descText)) {
-			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($this->labelText), ':').'::'.JText::_($this->descText), ENT_COMPAT, 'UTF-8').'">';
+		if (!empty($this->description)) {
+			$label = '<label id="'.$this->id.'-lbl" for="'.$this->id.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($labelText), ':').'::'.JText::_($this->description), ENT_COMPAT, 'UTF-8').'">';
 		} else {
-			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'">';
+			$label = '<label id="'.$this->id.'-lbl" for="'.$this->id.'" class="'.$class.'">';
 		}
 
-		$label .= JText::_($this->labelText);
+		$label .= JText::_($labelText);
 		$label .= '</label>';
 
 		return $label;
