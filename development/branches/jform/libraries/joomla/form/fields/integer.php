@@ -31,7 +31,7 @@ class JFormFieldInteger extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		$first		= (int)$this->_element->attributes()->first;
 		$last		= (int)$this->_element->attributes()->last;
@@ -43,7 +43,7 @@ class JFormFieldInteger extends JFormFieldList
 		}
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::_getOptions(), $options);
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

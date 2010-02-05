@@ -31,7 +31,7 @@ class JFormFieldRadio extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		// Get the options for the radio list.
 		$readonly = (string)$this->_element->attributes()->readonly == 'true';

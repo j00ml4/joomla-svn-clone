@@ -31,7 +31,7 @@ class JFormFieldContentLanguage extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
@@ -51,7 +51,7 @@ class JFormFieldContentLanguage extends JFormFieldList
 		}
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::_getOptions(), $options);
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

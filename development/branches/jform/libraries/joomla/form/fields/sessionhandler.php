@@ -31,7 +31,7 @@ class JFormFieldSessionHandler extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		// Get the session handlers.
 		jimport('joomla.session.session');
@@ -45,7 +45,7 @@ class JFormFieldSessionHandler extends JFormFieldList
 
 		// Merge the options together.
 		$options	= array_merge(
-						parent::_getOptions(),
+						parent::getOptions(),
 						$options
 					);
 

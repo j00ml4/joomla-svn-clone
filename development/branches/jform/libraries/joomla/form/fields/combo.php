@@ -31,7 +31,7 @@ class JFormFieldCombo extends JFormField
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		$options = array();
 
@@ -49,13 +49,13 @@ class JFormFieldCombo extends JFormField
 	 * @return	string		The field input.
 	 * @since	1.6
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$size		= (string)$this->_element->attributes()->size ? ' size="'.$this->_element->attributes()->size.'"' : '';
 		$readonly	= (string)$this->_element->attributes()->readonly == 'true' ? ' readonly="readonly"' : '';
 		$onchange	= (string)$this->_element->attributes()->onchange ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
 		$class		= (string)$this->_element->attributes()->class ? ' class="'.$this->_element->attributes()->class.'"' : ' class="combobox"';
-		$options	= $this->_getOptions();
+		$options	= $this->getOptions();
 		$return		= null;
 
 		JHtml::_('behavior.combobox');

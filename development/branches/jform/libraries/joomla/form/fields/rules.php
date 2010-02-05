@@ -31,7 +31,7 @@ class JFormFieldRules extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		// TODO: Add access check.
 

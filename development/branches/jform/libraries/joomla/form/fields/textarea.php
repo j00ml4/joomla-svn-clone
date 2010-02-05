@@ -30,7 +30,7 @@ class JFormFieldTextarea extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$class = ((string)$this->_element->attributes()->class) ? ' class="'.$this->_element->attributes()->class.'"' : ' class="text_area"';
 		$readonly = (string)$this->_element->attributes()->readonly == 'true' ? ' readonly="readonly"' : '';

@@ -31,7 +31,7 @@ class JFormFieldCalendar extends JFormFieldText
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$format = ((string)$this->_element->attributes()->format) ? (string)$this->_element->attributes()->format : '%Y-%m-%d';
 		$filter = (string)$this->_element->attributes()->filter;

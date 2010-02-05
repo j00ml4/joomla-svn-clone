@@ -30,7 +30,7 @@ class JFormFieldSpacer extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		return ' ';
 	}

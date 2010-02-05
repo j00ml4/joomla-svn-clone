@@ -30,7 +30,7 @@ class JFormFieldMedia extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		static $init = false;
 		$html = '';
