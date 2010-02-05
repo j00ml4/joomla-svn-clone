@@ -26,7 +26,7 @@ abstract class JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $id;
+	protected $id;
 
 	/**
 	 * The name of the form field.
@@ -34,7 +34,7 @@ abstract class JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $name;
+	protected $name;
 
 	/**
 	 * The value of the form field.
@@ -42,15 +42,23 @@ abstract class JFormField
 	 * @var		mixed
 	 * @since	1.6
 	 */
-	public $value;
+	protected $value;
 
 	/**
-	 * The label text for the form field.
+	 * The label for the form field.
 	 *
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $label;
+	protected $label;
+
+	/**
+	 * The input for the form field.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $input;
 
 	/**
 	 * The description text for the form field.  Usually used in tooltips.
@@ -58,7 +66,7 @@ abstract class JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $description;
+	protected $description;
 
 	/**
 	 * The required state for the form field.  If true then there must be a value for the field to
@@ -67,7 +75,7 @@ abstract class JFormField
 	 * @var		boolean
 	 * @since	1.6
 	 */
-	public $required;
+	protected $required = false;
 
 	/**
 	 * The validation method for the form field.  This value will determine which method is used
@@ -76,7 +84,7 @@ abstract class JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $validate;
+	protected $validate;
 
 	/**
 	 * The multiple state for the form field.  If true then multiple values are allowed for the
@@ -85,24 +93,18 @@ abstract class JFormField
 	 * @var		boolean
 	 * @since	1.6
 	 */
-	public $multiple;
-
-	public $hidden;
-
-	public $decorator;
-
-	protected $formNamePrefix;
-	public $prefix;
+	protected $multiple = false;
 
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	protected $type;
 
 	/**
-	 * The XML node
+	 * The JXMLElement object of the <field /> XML element that describes the form field.
 	 *
 	 * @var		object
 	 * @since	1.6
@@ -110,30 +112,71 @@ abstract class JFormField
 	protected $element;
 
 	/**
-	 * The field type.
+	 * The JForm object of the form attached to the form field.
+	 *
+	 * @var		object
+	 * @since	1.6
+	 */
+	protected $form;
+
+	/**
+	 * The form control prefix for field names from the JForm object attached to the form field.
 	 *
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $control;
+	protected $formControl;
 
 	/**
-	 * A reference to the form object that the field belongs to.
+	 * Method to instantiate the form field object.
 	 *
-	 * @var		object
-	 */
-	protected $_form;
-
-	/**
-	 * Method to instantiate the form field.
+	 * @param	object	$form	The form to attach to the form field object.
 	 *
-	 * @param	object		$form		A reference to the form that the field belongs to.
 	 * @return	void
+	 * @since	1.6
 	 */
 	public function __construct($form = null)
 	{
-		$this->_form = $form;
+		// If there is a form passed into the constructor set the form and form control properties.
+		if ($form instanceof JForm) {
+			$this->form = $form;
+			$this->formControl = $form->getFormControl();
+		}
 	}
+
+	/**
+	 * Method to get certain otherwise inaccessible properties from the form field object.
+	 *
+	 * @param	string	$name	The property name for which to the the value.
+	 *
+	 * @return	mixed	The property value or null.
+	 * @since	1.6
+	 */
+	public function __get($name)
+	{
+		switch ($name)
+		{
+			case 'input':
+				// If the input hasn't yet been generated, generate it.
+				if (empty($this->input)) {
+					$this->input = $this->_getInput();
+				}
+
+				return $this->input;
+				break;
+
+			case 'label':
+				// If the label hasn't yet been generated, generate it.
+				if (empty($this->label)) {
+					$this->label = $this->_getLabel();
+				}
+
+				return $this->label;
+				break;
+		}
+
+		return null;
+    }
 
 	/**
 	 * Method to get the form field type.
@@ -150,68 +193,75 @@ abstract class JFormField
 	 *
 	 * @return	string		The field type.
 	 */
-	public function setControlData(&$xml, $value, $formName, $groupName, $prefix)
+	public function setForm(JForm $form)
 	{
-		// Set the xml element object.
-		$this->element = $xml;
+		$this->form = $form;
+		$this->formControl = $form->getFormControl();
 
-		// Set the id, name, and value.
-		$this->id		= (string) $xml['id'];
-		$this->name		= (string) $xml['name'];
-		$this->value	= $value;
+		return $this;
+	}
+
+	/**
+	 * Method to get the form field type.
+	 *
+	 * @return	string		The field type.
+	 */
+	public function setup(&$element, $value, $control)
+	{
+		// Make sure there is a valid JFormField XML element.
+		if ((!$element instanceof JXMLElement) && ((string) $element->getName() == 'field')) {
+			return false;
+		}
+
+		// Reset the input and label values.
+		$this->input = null;
+		$this->label = null;
+
+		// Set the xml element object.
+		$this->element = $element;
+
+		// Get some important attributes from the form field element.
+		$class		= (string) $element['class'];
+		$id			= (string) $element['id'];
+		$multiple	= (string) $element['multiple'];
+		$name		= (string) $element['name'];
+		$required	= (string) $element['required'];
 
 		// Set the label and description text.
-		$this->labelText	= (string) $xml['label'] ? (string) $xml['label'] : $this->name;
-		$this->descText		= (string) $xml['description'];
+		$this->labelText	= (string) $element['label'] ? (string) $element['label'] : $this->name;
+		$this->description	= (string) $element['description'];
 
 		// Set the required and validate options.
-		$this->required		= ((string) $xml['required'] == 'true' || (string) $xml['required'] == 'required');
-		$this->validate		= (string) $xml['validate'];
+		$this->required		= ($required == 'true' || $required == 'required');
+		$this->validate		= (string) $element['validate'];
 
 		// Add the required class if the field is required.
 		if ($this->required) {
-			if((string) $xml['class']) {
-				if (strpos((string) $xml['class'], 'required') === false) {
-					$xml['class'] = (string) $xml['class'].' required';
+			if($class) {
+				if (strpos($class, 'required') === false) {
+					$this->element['class'] = $class.' required';
 				}
 			} else {
-				$xml->addAttribute('class', 'required');
+				$this->element->addAttribute('class', 'required');
 			}
 		}
 
-		// Set the field decorator.
-		$this->decorator = (string) $xml['decorator'];
-
 		// Set the visibility.
-		$this->hidden = ((string) $xml['type'] == 'hidden' || (string) $xml['hidden']);
+		$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
 
 		// Set the multiple values option.
-		$this->multiple = ((string) $xml['multiple'] == 'true' || (string) $xml['multiple'] == 'multiple');
+		$this->multiple = ($multiple == 'true' || $multiple == 'multiple');
 
-		// Set the form and group names.
-		$this->formName		= $formName;
-		$this->groupName	= $groupName;
+		// Set the id, name, and value.
+		// Set the input name and id.
+		$this->name	= $this->_getInputName($name, $this->formControl, $control, $this->multiple);
+		$this->id	= $this->_getInputId($id, $name, $this->formControl, $control);
 
-		// Set the prefix
-		$this->prefix = $prefix;
+		$this->value	= $value;
 
 		/*
 		 * RESET INTERNAL DATA
 		 */
-	}
-
-	public function render(&$xml, $value, $formName, $groupName, $prefix)
-	{
-
-		// Set the input name and id.
-		$this->inputName	= $this->_getInputName($this->name, $formName, $groupName, $this->multiple);
-		$this->inputId		= $this->_getInputId($this->id, $this->name, $formName, $groupName);
-
-		// Set the actual label and input.
-		$this->label		= $this->_getLabel();
-		$this->input		= $this->_getInput();
-
-		return $this;
 	}
 
 	/**

@@ -77,9 +77,11 @@ class JForm
 
 
 	/**
-	 * Object constructor.
+	 * Method to instantiate the form object.
 	 *
+	 * @param	string	$name		The name of the form.
 	 * @param	array	$options	An array of form options.
+	 *
 	 * @return	void
 	 * @since	1.6
 	 */
@@ -89,7 +91,7 @@ class JForm
 		$this->name = $name;
 
 		// Set the options if specified.
-		$this->options['control']  = isset($options['control']) ? $options['control'] : false;
+		$this->options['control']  = isset($options['control']) ? $options['control'] : '';
 	}
 
 	/**
@@ -236,6 +238,11 @@ class JForm
 		$xml = JFactory::getXML($file, true);
 
 		return $this->load($xml);
+	}
+
+	public function getFormControl()
+	{
+		return $this->options['control'];
 	}
 
 	public function getGroup($name)
