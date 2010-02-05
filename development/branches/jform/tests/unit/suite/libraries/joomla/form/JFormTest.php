@@ -242,13 +242,24 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			name="title" />
 		<field
 			name="abstract" />
-		<field
-			name="access" />
+
+		<fields
+			name="params">
+			<field
+				name="show_title"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+		</fields>
 	</fields>
 </form>
 XML;
-
-		$form->load($xml1);
+		// Load the data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml1),
+			$this->isTrue()
+		);
 
 		$xml2 = <<<XML
 <?xml version="1.0" encoding="utf-8" ?>
@@ -266,14 +277,37 @@ XML;
 			name="abstract"
 			label="Abstract" />
 
+		<fields
+			label="A general group">
+			<field
+				name="access" />
+			<field
+				name="ordering" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="show_abstract"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+		</fields>
 	</fields>
 </form>
 XML;
-		// Merge in the second batch of data.
-		$form->load($xml2, false);
-		print_r($form->getXML());
-		echo $form->getXml()->asXML();
-		die;
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml2, false),
+			$this->isTrue()
+		);
+
+		$dom = new DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($form->getXml()->asXML());
+		echo $dom->saveXML();
+
 	}
 
 	/**
