@@ -90,10 +90,8 @@ class MediaViewMedia extends JView
 		$ftp = !JClientHelper::hasCredentials('ftp');
 		
 		$uploader = JFactory::getUploader();
-
 		$uploader->setOptions(array('onComplete' => 'function(){ MediaManager.refreshFrame(); }',
-					'targetURL' => '\\$(\'uploadForm\').action',
-					'typeFilter' => $typeString));
+					'targetURL' => '\\$(\'uploadForm\').action'));
 		
 		$this->assignRef('session', JFactory::getSession());
 		$this->assignRef('config', $config);
