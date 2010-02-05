@@ -236,15 +236,15 @@ abstract class JFormField
 	 * @param	object	$element	The JXMLElement object representing the <field /> tag for the
 	 * 								form field object.
 	 * @param	mixed	$value		The form field default value for display.
-	 * @param	string	$control	The field name group control value. This acts as as an array
+	 * @param	string	$group		The field name group control value. This acts as as an array
 	 * 								container for the field. For example if the field has name="foo"
-	 * 								and the control value is set to "bar" then the full field name
+	 * 								and the group value is set to "bar" then the full field name
 	 * 								would end up being "bar[foo]".
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
-	public function setup($element, $value, $control = null)
+	public function setup($element, $value, $group = null)
 	{
 		// Make sure there is a valid JFormField XML element.
 		if ((!$element instanceof JXMLElement) && ((string) $element->getName() == 'field')) {
@@ -290,8 +290,8 @@ abstract class JFormField
 		//$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
 
 		// Set the field name and id.
-		$this->name	= $this->getName($name, $control);
-		$this->id	= $this->getId($id, $name, $control);
+		$this->name	= $this->getName($name, $group);
+		$this->id	= $this->getId($id, $name, $group);
 
 		// Set the field default value.
 		$this->value = $value;
