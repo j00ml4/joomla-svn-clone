@@ -45,7 +45,7 @@ class JHTMLIcon
 
 		$status = 'width=400,height=350,menubar=yes,resizable=yes';
 
-		if ($params->get('show_icons')) 	{
+		if ($params->get('show_icons')) {
 			$text = JHtml::_('image', 'system/emailButton.png', JText::_('Email'), NULL, true);
 		} else {
 			$text = '&nbsp;'.JText::_('Email');
@@ -118,7 +118,7 @@ class JHTMLIcon
 
 		$attribs['title']	= JText::_('Print');
 		$attribs['onclick'] = "window.open(this.href,'win2','".$status."'); return false;";
-		$attribs['rel']     = 'nofollow';
+		$attribs['rel']		= 'nofollow';
 
 		return JHtml::_('link', JRoute::_($url), $text, $attribs);
 	}

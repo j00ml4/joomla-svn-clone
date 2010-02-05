@@ -29,15 +29,15 @@ class SearchViewSearch extends JView
 		// Initialise some variables
 		$app	= &JFactory::getApplication();
 		$pathway  = &$app->getPathway();
-		$uri      = &JFactory::getURI();
+		$uri	= &JFactory::getURI();
 
 		$error	= '';
 		$rows	= null;
 		$total	= 0;
 
 		// Get some data from the model
-		$areas      = &$this->get('areas');
-		$state 		= &$this->get('state');
+		$areas	= &$this->get('areas');
+		$state		= &$this->get('state');
 		$searchword = $state->get('keyword');
 
 		$params = &$app->getParams();
@@ -71,12 +71,12 @@ class SearchViewSearch extends JView
 		$orders[] = JHtml::_('select.option',  'category', JText::_('Section/Category'));
 
 		$lists = array();
-		$lists['ordering'] = JHtml::_('select.genericlist',   $orders, 'ordering', 'class="inputbox"', 'value', 'text', $state->get('ordering'));
+		$lists['ordering'] = JHtml::_('select.genericlist', $orders, 'ordering', 'class="inputbox"', 'value', 'text', $state->get('ordering'));
 
-		$searchphrases 		= array();
-		$searchphrases[] 	= JHtml::_('select.option',  'all', JText::_('All words'));
-		$searchphrases[] 	= JHtml::_('select.option',  'any', JText::_('Any words'));
-		$searchphrases[] 	= JHtml::_('select.option',  'exact', JText::_('Exact phrase'));
+		$searchphrases		= array();
+		$searchphrases[]	= JHtml::_('select.option',  'all', JText::_('All words'));
+		$searchphrases[]	= JHtml::_('select.option',  'any', JText::_('Any words'));
+		$searchphrases[]	= JHtml::_('select.option',  'exact', JText::_('Exact phrase'));
 		$lists['searchphrase' ]= JHtml::_('select.radiolist',  $searchphrases, 'searchphrase', '', 'value', 'text', $state->get('match'));
 
 		// log the search
@@ -139,15 +139,15 @@ class SearchViewSearch extends JView
 				$row = preg_replace($searchRegex, '<span class="highlight">\0</span>', $row);
 
 				$result = &$results[$i];
-			    if ($result->created) {
-				    $created = JHtml::date($result->created);
-			    }
-			    else {
-				    $created = '';
-			    }
+				if ($result->created) {
+					$created = JHtml::date($result->created);
+				}
+				else {
+					$created = '';
+				}
 
-			    $result->created	= $created;
-			    $result->count		= $i + 1;
+				$result->created	= $created;
+				$result->count		= $i + 1;
 			}
 		}
 
@@ -165,7 +165,7 @@ class SearchViewSearch extends JView
 
 		$this->assign('total',			$total);
 		$this->assign('error',			$error);
-		$this->assign('action', 	    $uri);
+		$this->assign('action',			$uri);
 
 		parent::display($tpl);
 	}

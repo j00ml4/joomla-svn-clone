@@ -20,22 +20,22 @@ class ContactViewContact extends JView
 {
 	protected $state = null;
 	protected $contact = null;
-	
+
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
 		$user		= &JFactory::getUser();
 		$pathway	= &$app->getPathway();
 		$document	= & JFactory::getDocument();
-		$state 		= $this->get('State');
-		$contact 	= $this->get('Contact');
-		
+		$state		= $this->get('State');
+		$contact	= $this->get('Contact');
+
 		// report any errors and exit if they exist
 		$this->reportErrors($this->get('Errors'));
-		
+
 		// Get the parameters of the active menu item
 		$menus	= &JSite::getMenu();
-		$menu    = $menus->getActive();
+		$menu	= $menus->getActive();
 
 		$pparams = $this->getModel('contact')->getState()->params;
 
@@ -94,29 +94,29 @@ class ContactViewContact extends JView
 			$pparams->set('address_check', 0);
 		}
 
-		 // Manage the display mode for contact detail groups
+		// Manage the display mode for contact detail groups
 		switch ($pparams->get('contact_icons'))
 		{
 			case 1 :
 				// text
-				$pparams->set('marker_address', 	JText::_('Address').": ");
-				$pparams->set('marker_email', 		JText::_('Email').": ");
-				$pparams->set('marker_telephone', 	JText::_('Telephone').": ");
-				$pparams->set('marker_fax', 		JText::_('Fax').": ");
+				$pparams->set('marker_address',	JText::_('Address').": ");
+				$pparams->set('marker_email',		JText::_('Email').": ");
+				$pparams->set('marker_telephone',	JText::_('Telephone').": ");
+				$pparams->set('marker_fax',		JText::_('Fax').": ");
 				$pparams->set('marker_mobile',		JText::_('Mobile').": ");
-				$pparams->set('marker_misc', 		JText::_('Information').": ");
-				$pparams->set('marker_class', 		'jicons-text');
+				$pparams->set('marker_misc',		JText::_('Information').": ");
+				$pparams->set('marker_class',		'jicons-text');
 				break;
 
 			case 2 :
 				// none
-				$pparams->set('marker_address', 	'');
-				$pparams->set('marker_email', 		'');
-				$pparams->set('marker_telephone', 	'');
-				$pparams->set('marker_mobile', 	'');
-				$pparams->set('marker_fax', 		'');
-				$pparams->set('marker_misc', 		'');
-				$pparams->set('marker_class', 		'jicons-none');
+				$pparams->set('marker_address',	'');
+				$pparams->set('marker_email',		'');
+				$pparams->set('marker_telephone',	'');
+				$pparams->set('marker_mobile',	'');
+				$pparams->set('marker_fax',		'');
+				$pparams->set('marker_misc',		'');
+				$pparams->set('marker_class',		'jicons-none');
 				break;
 
 			default :
@@ -128,16 +128,16 @@ class ContactViewContact extends JView
 				$image5 = JHtml::_('image', 'contacts/'.$pparams->get('icon_misc','con_info.png'), JText::_('Information').": ", NULL, true);
 				$image6 = JHtml::_('image', 'contacts/'.$pparams->get('icon_mobile','con_mobile.png'), JText::_('Mobile').": ", NULL, true);
 
-				$pparams->set('marker_address', 	$image1);
-				$pparams->set('marker_email', 		$image2);
-				$pparams->set('marker_telephone', 	$image3);
-				$pparams->set('marker_fax', 		$image4);
+				$pparams->set('marker_address',	$image1);
+				$pparams->set('marker_email',		$image2);
+				$pparams->set('marker_telephone',	$image3);
+				$pparams->set('marker_fax',		$image4);
 				$pparams->set('marker_misc',		$image5);
-				$pparams->set('marker_mobile', 		$image6);
-				$pparams->set('marker_class', 		'jicons-icons');
+				$pparams->set('marker_mobile',		$image6);
+				$pparams->set('marker_class',		'jicons-icons');
 				break;
 		}
-		
+
 		// Use link labels from contact if blank in params
 		$loopArray = array('a','b','c','d','e');
 		foreach ($loopArray as $letter) {
@@ -151,7 +151,7 @@ class ContactViewContact extends JView
 				}
 			}
 		}
-		
+
 		JHtml::_('behavior.formvalidation');
 
 		$this->assignRef('contact',		$contact);
@@ -195,4 +195,4 @@ class ContactViewContact extends JView
 
 	}
 }
-		
+
