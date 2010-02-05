@@ -17,7 +17,7 @@ class modNewsFlashHelper
 	function renderItem(&$item, &$params, &$access)
 	{
 		$app	= &JFactory::getApplication();
-		$user 	= &JFactory::getUser();
+		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		// $groups	= implode(',', $groups);
 
@@ -25,8 +25,8 @@ class modNewsFlashHelper
 		$item->groups	= '';
 		$item->readmore = (trim($item->fulltext) != '');
 		$item->metadesc = '';
-		$item->metakey 	= '';
-		$item->created 	= '';
+		$item->metakey	= '';
+		$item->created	= '';
 		$item->modified = '';
 
 		if ($params->get('readmore') || $params->get('link_titles'))
@@ -60,37 +60,36 @@ class modNewsFlashHelper
 
 	function getList(&$params, &$access)
 	{
-		$db 	= &JFactory::getDbo();
-		$user 	= &JFactory::getUser();
+		$db	= JFactory::getDbo();
+		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
-		$catid 	= (int) $params->get('catid', 0);
-		$items 	= (int) $params->get('items', 0);
+		$catid	= (int) $params->get('catid', 0);
+		$items	= (int) $params->get('items', 0);
 
 		$contentConfig	= &JComponentHelper::getParams('com_content');
 		$noauth			= !$contentConfig->get('show_noauth');
-		$date = &JFactory::getDate();
+		$date = JFactory::getDate();
 		$now = $date->toMySQL();
 
 		$nullDate = $db->getNullDate();
 
-		// query to determine article count      
-        $query = new JQuery();
-        
-        $query->select('a.*');
-        $query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
-        $query->select('CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
-        $query->from('#__content as a');
-        $query->innerJoin('#__categories AS cc ON cc.id = a.catid');
-        $query->where('a.state = 1');
-        $query->where($noauth ? 'a.access IN ('.$groups.')' : '');
-        $query->where($noauth ? 'cc.access IN ('.$groups.')' : '');
-        $query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
-        $query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
-        $query->where('cc.id = '. (int) $catid);
-        $query->where('cc.published = 1');
-        $query->order('a.ordering');
-        
+		// query to determine article count
+		$query	= $db->getQuery(true);
+		$query->select('a.*');
+		$query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
+		$query->select('CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
+		$query->from('#__content as a');
+		$query->innerJoin('#__categories AS cc ON cc.id = a.catid');
+		$query->where('a.state = 1');
+		$query->where($noauth ? 'a.access IN ('.$groups.')' : '');
+		$query->where($noauth ? 'cc.access IN ('.$groups.')' : '');
+		$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
+		$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
+		$query->where('cc.id = '. (int) $catid);
+		$query->where('cc.published = 1');
+		$query->order('a.ordering');
+
 		$db->setQuery($query, 0, $items);
 		$rows = $db->loadObjectList();
 

@@ -161,7 +161,7 @@ class JApplicationHelper
 		}
 
 		$result = null;
-		$name 	= substr($user_option, 4);
+		$name	= substr($user_option, 4);
 
 		switch ($varname) {
 			case 'front':
@@ -189,7 +189,7 @@ class JApplicationHelper
 				break;
 
 			case 'admin':
-				$path 	= DS.'components'.DS. $user_option .DS.'admin.'. $name .'.php';
+				$path	= DS.'components'.DS. $user_option .DS.'admin.'. $name .'.php';
 				$result = self::_checkPath($path, -1);
 				if ($result == null) {
 					$path = DS.'components'.DS. $user_option .DS. $name .'.php';
@@ -219,7 +219,7 @@ class JApplicationHelper
 				break;
 
 			case 'com_xml':
-				$path 	= DS.'components'.DS. $user_option .DS. $name .'.xml';
+				$path	= DS.'components'.DS. $user_option .DS. $name .'.xml';
 				$result = self::_checkPath($path, 1);
 				break;
 
@@ -236,9 +236,9 @@ class JApplicationHelper
 
 			case 'plg_xml':
 				// Site plugins
-				$j15path 	= DS.'plugins'.DS. $user_option .'.xml';
+				$j15path	= DS.'plugins'.DS. $user_option .'.xml';
 				$parts = explode(DS, $user_option);
-				$j16path   = DS.'plugins'.DS. $user_option.DS.$parts[1].'.xml';
+				$j16path = DS.'plugins'.DS. $user_option.DS.$parts[1].'.xml';
 				$j15 = self::_checkPath($j15path, 0);
 				$j16 = self::_checkPath( $j16path, 0);
 				// return 1.6 if working otherwise default to whatever 1.5 gives us
@@ -246,7 +246,7 @@ class JApplicationHelper
 				break;
 
 			case 'menu_xml':
-				$path 	= DS.'components'.DS.'com_menus'.DS. $user_option .DS. $user_option .'.xml';
+				$path	= DS.'components'.DS.'com_menus'.DS. $user_option .DS. $user_option .'.xml';
 				$result = self::_checkPath($path, -1);
 				break;
 		}
@@ -304,15 +304,15 @@ class JApplicationHelper
 		return $data;
 	}
 
-    public static function parseXMLLangMetaFile($path)
+	public static function parseXMLLangMetaFile($path)
 	{
 		// Read the file to see if it's a valid component XML file
-        $xml = JFactory::getXML($path);
+		$xml = JFactory::getXML($path);
 
-        if( ! $xml)
-        {
-            return false;
-        }
+		if( ! $xml)
+		{
+			return false;
+		}
 
 		/*
 		 * Check for a valid XML root tag.
@@ -326,27 +326,27 @@ class JApplicationHelper
 
 		$data = array();
 
-        $data['name'] = (string)$xml->name;
+		$data['name'] = (string)$xml->name;
 		$data['type'] = $xml->attributes()->type;
 
-        $data['creationDate'] =((string)$xml->creationDate) ? (string)$xml->creationDate : JText::_('Unknown');
-        $data['author'] =((string)$xml->author) ? (string)$xml->author : JText::_('Unknown');
+		$data['creationDate'] =((string)$xml->creationDate) ? (string)$xml->creationDate : JText::_('Unknown');
+		$data['author'] =((string)$xml->author) ? (string)$xml->author : JText::_('Unknown');
 
-        $data['copyright'] = (string)$xml->copyright;
-        $data['authorEmail'] = (string)$xml->authorEmail;
-        $data['authorUrl'] = (string)$xml->authorUrl;
-        $data['version'] = (string)$xml->version;
-        $data['description'] = (string)$xml->description;
-        $data['group'] = (string)$xml->group;
+		$data['copyright'] = (string)$xml->copyright;
+		$data['authorEmail'] = (string)$xml->authorEmail;
+		$data['authorUrl'] = (string)$xml->authorUrl;
+		$data['version'] = (string)$xml->version;
+		$data['description'] = (string)$xml->description;
+		$data['group'] = (string)$xml->group;
 
-        return $data;
+		return $data;
 	}
 
 	/**
 	 * Tries to find a file in the administrator or site areas
 	 *
-	 * @param string 	$parth			A file name
-	 * @param integer 	$checkAdmin		0 to check site only, 1 to check site and admin, -1 to check admin only
+	 * @param string	A file name
+	 * @param integer	0 to check site only, 1 to check site and admin, -1 to check admin only
 	 * @since 1.5
 	 */
 	protected static function _checkPath($path, $checkAdmin=1)

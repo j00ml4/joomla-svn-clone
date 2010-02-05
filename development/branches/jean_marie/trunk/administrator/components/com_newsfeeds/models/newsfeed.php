@@ -40,9 +40,9 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	/**
 	 * Returns a Table object, always creating it.
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Newsfeed', $prefix = 'NewsfeedsTable', $config = array())
@@ -117,7 +117,7 @@ class NewsfeedsModelNewsfeed extends JModelForm
 		$registry = new JRegistry;
 		$registry->loadJSON($table->params);
 		$value->params = $registry->toArray();
-		
+
 		return $value;
 	}
 

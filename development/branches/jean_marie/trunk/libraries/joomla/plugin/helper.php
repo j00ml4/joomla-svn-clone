@@ -24,9 +24,9 @@ abstract class JPluginHelper
 	 * otherwise only the specific plugin data is returned.
 	 *
 	 * @access	public
-	 * @param	string 		$type		The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string 		$plugin		The plugin name.
-	 * @return	mixed 		An array of plugin data objects, or a plugin data object.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
+	 * @return	mixed		An array of plugin data objects, or a plugin data object.
 	 */
 	public static function getPlugin($type, $plugin = null)
 	{
@@ -61,8 +61,8 @@ abstract class JPluginHelper
 	 * Checks if a plugin is enabled.
 	 *
 	 * @access	public
-	 * @param	string 		$type	 	The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string	 	$plugin		The plugin name.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
 	 * @return	boolean
 	 */
 	public static function isEnabled($type, $plugin = null)
@@ -76,8 +76,8 @@ abstract class JPluginHelper
 	 * otherwise only the specific pugin is loaded.
 	 *
 	 * @access	public
-	 * @param	string 		$type 		The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string 		$plugin		The plugin name.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
 	 * @return	boolean		True if success
 	 */
 	public static function importPlugin($type, $plugin = null, $autocreate = true, $dispatcher = null)
@@ -116,15 +116,15 @@ abstract class JPluginHelper
 
 		if (!isset( $paths[$path] ) || !isset($paths[$legacypath]))
 		{
-            $pathExists = file_exists($path);
+			$pathExists = file_exists($path);
 			if ($pathExists || file_exists($legacypath))
 			{
 				$path = $pathExists ? $path : $legacypath;
 
-				jimport('joomla.plugin.plugin');  
+				jimport('joomla.plugin.plugin');
 				if (!isset($paths[$path])) {
-                    require_once $path;    
-                }
+					require_once $path;
+				}
 				$paths[$path] = true;
 
 				if ($autocreate)
@@ -141,7 +141,7 @@ abstract class JPluginHelper
 						$plugin = &self::getPlugin($plugin->type, $plugin->name);
 
 						// Instantiate and register the plugin.
-                        new $className($dispatcher, (array)($plugin));
+						new $className($dispatcher, (array)($plugin));
 					}
 				}
 			}

@@ -17,7 +17,7 @@ require_once JPATH_SITE.DS.'libraries'.DS.'joomla'.DS.'base'.DS.'tree.php';
 /**
  * JCategories Class.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Application
  * @since		1.6
  */
@@ -59,13 +59,13 @@ class JCategories
 	protected $_options = null;
 
 	/**
-	 * Save the information, if a tree is loaded 
-	 * 
+	 * Save the information, if a tree is loaded
+	 *
 	 * @var boolean
 	 */
-	protected $_treeloaded = false;	
-	
-	
+	protected $_treeloaded = false;
+
+
 	/**
 	 * Class constructor
 	 *
@@ -74,7 +74,7 @@ class JCategories
 	 */
 	public function __construct($options)
 	{
-		$this->_extension 	= $options['extension'];
+		$this->_extension	= $options['extension'];
 		$this->_table		= $options['table'];
 		$this->_treeloaded  = false;
 		$this->_options		= $options;
@@ -151,7 +151,7 @@ class JCategories
 			' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug'.
 			' FROM #__categories AS c' .
 			' LEFT JOIN '.$this->_table.' AS b ON b.catid = c.id AND b.access IN ('.implode(',', $user->authorisedLevels()).')'.
-		    ' WHERE c.id IN  ('.
+			' WHERE c.id IN  ('.
 					'SELECT distinct n.id' .
 					' FROM `#__categories` AS n, `#__categories` AS p' .
 					' WHERE n.lft BETWEEN p.lft AND p.rgt' .
@@ -172,10 +172,10 @@ class JCategories
 		} else {
 			$this->_nodes[$id] = false;
 		}
-						
+
 		$this->_treeloaded = true;
 	}
-	
+
 }
 
 /**
