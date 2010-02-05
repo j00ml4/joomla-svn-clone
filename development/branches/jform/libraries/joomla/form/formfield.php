@@ -195,7 +195,7 @@ abstract class JFormField
 			case 'input':
 				// If the input hasn't yet been generated, generate it.
 				if (empty($this->input)) {
-					$this->input = $this->_getInput();
+					$this->input = $this->getInput();
 				}
 
 				return $this->input;
@@ -204,7 +204,7 @@ abstract class JFormField
 			case 'label':
 				// If the label hasn't yet been generated, generate it.
 				if (empty($this->label)) {
-					$this->label = $this->_getLabel();
+					$this->label = $this->getLabel();
 				}
 
 				return $this->label;
@@ -290,8 +290,8 @@ abstract class JFormField
 		//$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
 
 		// Set the field name and id.
-		$this->name	= $this->_getInputName($name, $this->formControl, $control, $this->multiple);
-		$this->id	= $this->_getInputId($id, $name, $this->formControl, $control);
+		$this->name	= $this->getName($name, $control);
+		$this->id	= $this->getId($id, $name, $control);
 
 		// Set the field default value.
 		$this->value = $value;
@@ -300,11 +300,65 @@ abstract class JFormField
 	}
 
 	/**
+	 * Method to get the id used for the field input tag.
+	 *
+	 * @param	string	$fieldId	The field element id.
+	 * @param	string	$fieldName	The field element name.
+	 * @param	string	$group		The optional name of the group that the field element is a
+	 * 								member of.
+	 *
+	 * @return	string	The id to be used for the field input tag.
+	 * @since	1.6
+	 */
+	protected function getId($fieldId, $fieldName, $group = null)
+	{
+		// Initialize variables.
+		$id = '';
+
+		// If there is a form control set for the attached form add it first.
+		if ($this->formControl) {
+			$id .= $this->formControl;
+		}
+
+		// If the field is in a group add the group control to the field id.
+		if ($group) {
+			// If we already have an id segment add the group control as another level.
+			if ($id) {
+				$id .= '_'.$group;
+			}
+			else {
+				$id .= $group;
+			}
+		}
+
+		// If we already have an id segment add the field id/name as another level.
+		if ($id) {
+			$id .= '_'.($fieldId ? $fieldId : $fieldName);
+		}
+		else {
+			$id .= ($fieldId ? $fieldId : $fieldName);
+		}
+
+		// Clean up any invalid characters.
+		$id = preg_replace('#\W#', '_', $id);
+
+		return $id;
+	}
+
+	/**
+	 * Method to get the field input tag.
+	 *
+	 * @return	string	The field input tag.
+	 * @since	1.6
+	 */
+	abstract protected function getInput();
+
+	/**
 	 * Method to get the field label.
 	 *
 	 * @return	string		The field label.
 	 */
-	protected function _getLabel()
+	protected function getLabel()
 	{
 		// Set the class for the label.
 		$labelText = (string) $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
@@ -323,99 +377,51 @@ abstract class JFormField
 
 		return $label;
 	}
+
 	/**
-	 * This function replaces the string identifier prefix with the
-	 * string held is the <var>formName</var> class variable.
+	 * Method to get the name used for the field input tag.
 	 *
-	 * @param	string	The javascript code
-	 * @return	string	The replaced javascript code
+	 * @param	string	$fieldName	The field element name.
+	 * @param	string	$group		The optional name of the group that the field element is a
+	 * 								member of.
+	 *
+	 * @return	string	The name to be used for the field input tag.
+	 * @since	1.6
 	 */
-	protected function _replacePrefix($javascript)
+	protected function getName($fieldName, $group = null)
 	{
-		$formName = $this->formName;
+		// Initialize variables.
+		$name = '';
 
-		if ($formName === false) {
-			// No form, just use the field name.
-			return str_replace($this->prefix, '', $javascript);
-		} else {
-			// Use the form name
-			return str_replace($this->prefix, preg_replace('#\W#', '_',$formName).'_', $javascript);
-		}
-	}
-
-	/**
-	 * Method to get the field input.
-	 *
-	 * @return	string		The field input.
-	 */
-	abstract protected function _getInput();
-
-	/**
-	 * Method to get the name of the input field.
-	 *
-	 * @param	string		$fieldName		The field name.
-	 * @param	string		$formName		The form name.
-	 * @param	string		$groupName		The group name.
-	 * @param	boolean		$multiple		Whether the input should support multiple values.
-	 * @return	string		The input field id.
-	 */
-	protected function _getInputName($fieldName, $formName = false, $groupName = false, $multiple = false)
-	{
-		if ($formName === false && $groupName === false) {
-			// No form or group, just use the field name.
-			$return = $fieldName;
-		} elseif ($formName !== false && $groupName === false) {
-			// No group, use the form and field name.
-			$return = $formName.'['.$fieldName.']';
-		} elseif ($formName === false && $groupName !== false) {
-			// No form, use the group and field name.
-			$return = $groupName.'['.$fieldName.']';
-		} else {
-			// Use the form, group, and field name.
-			$return = $formName.'['.$groupName.']['.$fieldName.']';
+		// If there is a form control set for the attached form add it first.
+		if ($this->formControl) {
+			$name .= $this->formControl;
 		}
 
-		// Check if the field should support multiple values.
-		if ($multiple) {
-			$return .= '[]';
+		// If the field is in a group add the group control to the field name.
+		if ($group) {
+			// If we already have a name segment add the group control as another level.
+			if ($name) {
+				$name .= '['.$group.']';
+			}
+			else {
+				$name .= $group;
+			}
 		}
 
-		return $return;
-	}
-
-	/**
-	 * Method to get the id of the input field.
-	 *
-	 * @param	string		$fieldId		The field id.
-	 * @param	string		$fieldName		The field name.
-	 * @param	string		$formName		The form name.
-	 * @param	string		$groupName		The group name.
-	 * @return	string		The input field id.
-	 */
-	protected function _getInputId($fieldId, $fieldName, $formName = false, $groupName = false)
-	{
-		// Use the field name if no id is set.
-		if (empty($fieldId)) {
-			$fieldId = $fieldName;
+		// If we already have a name segment add the field name as another level.
+		if ($name) {
+			$name .= '['.$fieldName.']';
+		}
+		else {
+			$name .= $fieldName;
 		}
 
-		if ($formName === false && $groupName === false) {
-			// No form or group, just use the field name.
-			$return = $fieldId;
-		} elseif ($formName !== false && $groupName === false) {
-			// No group, use the form and field name.
-			$return = $formName.'_'.$fieldId;
-		} elseif ($formName === false && $groupName !== false) {
-			// No form, use the group and field name.
-			$return = $groupName.'_'.$fieldId;
-		} else {
-			// Use the form, group, and field name.
-			$return = $formName.'_'.$groupName.'_'.$fieldId;
+		// If the field should support multiple values add the final array segment.
+		if ($this->multiple) {
+			$name .= '[]';
 		}
 
-		// Clean up any invalid characters.
-		$return = preg_replace('#\W#', '_', $return);
-
-		return $return;
+		return $name;
 	}
 }
