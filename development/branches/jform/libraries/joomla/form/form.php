@@ -362,6 +362,11 @@ class JForm
 			return false;
 		}
 
+		/*
+		 * Get an array of <field /> elements that are underneath a <fields /> element
+		 * with the appropriate name attribute.
+		 */
+		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
 
 		// Get the XML node.
 		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
