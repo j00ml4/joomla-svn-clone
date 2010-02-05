@@ -293,6 +293,11 @@ XML;
 				<option value="0">JNo</option>
 			</field>
 		</fields>
+		<fieldset>
+			<field
+				name="language"
+				type="text"/>
+		</fieldset>
 	</fields>
 </form>
 XML;
