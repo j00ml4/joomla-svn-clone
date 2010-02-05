@@ -201,9 +201,88 @@ class JForm
 			return false;
 		}
 
-		$this->xml = $data;
+		// Handle the easy cases first.
+		if (empty($this->xml) || $reset) {
+			$this->xml = $data;
+			return true;
+		}
+
+		// Merge the new fields into the existing XML document.
+		self::mergeFields($this->xml->fields, $data->fields);
 
 		return true;
+	}
+
+	/**
+	 * Merges new elements into a source <fields> element.
+	 *
+	 * @param	SimpleXMLElement	The source element.
+	 * @param	SimpleXMLElement	The new element to merge.
+	 */
+	protected static function mergeFields(SimpleXMLElement $source, SimpleXMLElement $new)
+	{
+		// The assumption is that the inputs are at the same relative level.
+		// So we just have to scan the children and deal with them.
+
+		foreach ($new->children() as $child) {
+			$type = $child->getName();
+			$name = $child['name'];
+
+			// Does this node exist?
+			$fields = $source->xpath($type.'[@name="'.$name.'"]');
+
+			if (empty($fields)) {
+				// This node does not exist, so add it.
+				self::addNode($source, $child);
+			} else {
+				// This node does exist.
+				switch ($type) {
+					case 'field':
+						self::mergeField($fields[0], $child);
+						break;
+
+					case 'fields':
+						self::mergeFields($fields[0], $child);
+						break;
+
+					case 'fieldset':
+						self::mergeFieldset($fields[0], $child);
+						break;
+				}
+			}
+		}
+	}
+
+	protected static function mergeField()
+	{
+
+	}
+
+	protected static function mergeFieldset()
+	{
+
+	}
+
+	/**
+	 * Adds a new child SimpleXMLElement node to the source.
+	 *
+	 * @param	SimpleXMLElement	The source element on which to append.
+	 * @param	SimpleXMLElement	The new element to append.
+	 */
+	protected static function addNode(SimpleXMLElement $source, SimpleXMLElement $new)
+	{
+		// Add the new child node.
+		$node = $source->addChild($new->getName(), trim($new));
+
+		// Add the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			$node->addAttribute($name, $value);
+		}
+
+		// Add any children of the new node.
+		foreach ($new->children() as $child) {
+			self::addNode($node, $child);
+		}
 	}
 
 	/**
