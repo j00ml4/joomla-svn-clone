@@ -208,7 +208,7 @@ class JForm
 		}
 
 		// Merge the new fields into the existing XML document.
-		self::mergeFields($this->xml->fields, $data->fields);
+		self::mergeNodes($this->xml->fields, $data->fields);
 
 		return true;
 	}
@@ -219,10 +219,19 @@ class JForm
 	 * @param	SimpleXMLElement	The source element.
 	 * @param	SimpleXMLElement	The new element to merge.
 	 */
-	protected static function mergeFields(SimpleXMLElement $source, SimpleXMLElement $new)
+	protected static function mergeNodes(SimpleXMLElement $source, SimpleXMLElement $new)
 	{
 		// The assumption is that the inputs are at the same relative level.
 		// So we just have to scan the children and deal with them.
+
+		// Update the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			if (isset($source[$name])) {
+				$source[$name] = (string) $value;
+			} else {
+				$source->addAttribute($name, $value);
+			}
+		}
 
 		foreach ($new->children() as $child) {
 			$type = $child->getName();
@@ -238,29 +247,29 @@ class JForm
 				// This node does exist.
 				switch ($type) {
 					case 'field':
-						self::mergeField($fields[0], $child);
+						self::mergeNode($fields[0], $child);
 						break;
 
-					case 'fields':
-						self::mergeFields($fields[0], $child);
-						break;
-
-					case 'fieldset':
-						self::mergeFieldset($fields[0], $child);
+					default:
+						self::mergeNodes($fields[0], $child);
 						break;
 				}
 			}
 		}
 	}
 
-	protected static function mergeField()
+	protected static function mergeNode(SimpleXMLElement $source, SimpleXMLElement $new)
 	{
+		// Update the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			if (isset($source[$name])) {
+				$source[$name] = (string) $value;
+			} else {
+				$source->addAttribute($name, $value);
+			}
+		}
 
-	}
-
-	protected static function mergeFieldset()
-	{
-
+		// What to do with child elements?
 	}
 
 	/**
