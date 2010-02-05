@@ -71,7 +71,7 @@ class JFormFieldGroupedList extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$disabled = (string)$this->_element->attributes()->readonly == 'true' ? true : false;
 		$attributes = '';

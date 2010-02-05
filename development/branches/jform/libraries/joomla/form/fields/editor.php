@@ -38,7 +38,7 @@ class JFormFieldEditor extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$rows		= (string)$this->_element->attributes()->rows;
 		$cols		= (string)$this->_element->attributes()->cols;

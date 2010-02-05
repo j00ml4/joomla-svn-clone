@@ -31,7 +31,7 @@ class JFormFieldEditors extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		// compile list of the editors
 		$query	= 'SELECT element AS value, name AS text'
@@ -47,7 +47,7 @@ class JFormFieldEditors extends JFormFieldList
 		// @todo: Check for an error msg.
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::_getOptions(), $options);
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

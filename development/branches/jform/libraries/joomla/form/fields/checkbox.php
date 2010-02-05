@@ -31,7 +31,7 @@ class JFormFieldCheckbox extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$value =((string)$this->_element->attributes()->value !== null) ? (string)$this->_element->attributes()->value : '';
 		$readonly =((string)$this->_element->attributes()->readonly == 'true') ? ' disabled="disabled"' : '';

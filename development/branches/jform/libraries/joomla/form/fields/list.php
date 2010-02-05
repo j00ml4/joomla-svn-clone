@@ -31,7 +31,7 @@ class JFormFieldList extends JFormField
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		$options = array();
 
@@ -48,7 +48,7 @@ class JFormFieldList extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$disabled	= (string)$this->_element->attributes()->disabled == 'true' ? true : false;
 		$readonly	= (string)$this->_element->attributes()->readonly == 'true' ? true : false;
@@ -72,7 +72,7 @@ class JFormFieldList extends JFormField
 		if ($disabled || $readonly) {
 			$attributes .= ' disabled="disabled"';
 		}
-		$options	= (array)$this->_getOptions();
+		$options	= (array)$this->getOptions();
 		$return		= null;
 
 		if ($disabled) {

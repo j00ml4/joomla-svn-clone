@@ -35,7 +35,7 @@ class JFormFieldMenu extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		require_once realpath(JPATH_ADMINISTRATOR . '/components/com_menus/helpers/menus.php');
 		$menuTypes = MenusHelper::getMenuTypes();
@@ -54,7 +54,7 @@ class JFormFieldMenu extends JFormFieldList
 			$options[] = JHtml::_('select.option', $menutype, $menutype);
 		}
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::_getOptions(), $options);
+		$options = array_merge(parent::getOptions(), $options);
 		return $options;
 	}
 }

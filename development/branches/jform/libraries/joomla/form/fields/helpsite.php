@@ -31,11 +31,11 @@ class JFormFieldHelpsite extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		jimport('joomla.language.help');
 		$options	= array_merge(
-						parent::_getOptions(),
+						parent::getOptions(),
 						JHelp::createSiteList(JPATH_ADMINISTRATOR.DS.'help'.DS.'helpsites-15.xml', $this->value)
 					);
 

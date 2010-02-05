@@ -28,7 +28,7 @@ class JFormFieldModuleLayout extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		// Initialise variables.
 		$options	= array();
@@ -82,7 +82,7 @@ class JFormFieldModuleLayout extends JFormFieldList
 		}
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::_getOptions(), $options);
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

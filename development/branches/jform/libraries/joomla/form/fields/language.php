@@ -31,12 +31,12 @@ class JFormFieldLanguage extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
 		jimport('joomla.language.helper');
 		$client		= (string)$this->_element->attributes()->client;
 		$options	= array_merge(
-						parent::_getOptions(),
+						parent::getOptions(),
 						JLanguageHelper::createLanguageList($this->value, constant('JPATH_'.strtoupper($client)), true)
 					);
 

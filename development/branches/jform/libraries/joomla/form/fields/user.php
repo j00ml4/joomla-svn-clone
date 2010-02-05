@@ -30,7 +30,7 @@ class JFormFieldUser extends JFormField
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		// Initialise variables.
 		$onchange	= (string)$this->_element->attributes()->onchange ? $this->_replacePrefix((string)$this->_element->attributes()->onchange) : '';

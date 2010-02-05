@@ -31,7 +31,7 @@ class JFormFieldAccessLevel extends JFormField
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		$attribs	= '';
 
