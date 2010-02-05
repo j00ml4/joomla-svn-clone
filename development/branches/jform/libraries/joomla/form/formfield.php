@@ -354,26 +354,34 @@ abstract class JFormField
 	abstract protected function getInput();
 
 	/**
-	 * Method to get the field label.
+	 * Method to get the field label tag.
 	 *
-	 * @return	string		The field label.
+	 * @return	string	The field label tag.
+	 * @since	1.6
 	 */
 	protected function getLabel()
 	{
-		// Set the class for the label.
-		$labelText = (string) $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
+		// Initialize variables.
+		$label = '';
+
+		// Get the label text from the XML element, defaulting to the element name.
+		$text = $this->element['label'] ? (string) $this->element['label'] : (string) $this->element['name'];
+
+		// Build the class for the label.
 		$class = !empty($this->description) ? 'hasTip' : '';
 		$class = $this->required == true ? $class.' required' : $class;
 
+		// Add the opening label tag and main attributes attributes.
+		$label .= '<label id="'.$this->id.'-lbl" for="'.$this->id.'" class="'.$class.'"';
+
 		// If a description is specified, use it to build a tooltip.
 		if (!empty($this->description)) {
-			$label = '<label id="'.$this->id.'-lbl" for="'.$this->id.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($labelText), ':').'::'.JText::_($this->description), ENT_COMPAT, 'UTF-8').'">';
-		} else {
-			$label = '<label id="'.$this->id.'-lbl" for="'.$this->id.'" class="'.$class.'">';
+			$label .= ' title="'.htmlspecialchars(trim(JText::_($text), ':').'::' .
+						JText::_($this->description), ENT_COMPAT, 'UTF-8').'"';
 		}
 
-		$label .= JText::_($labelText);
-		$label .= '</label>';
+		// Add the label text and closing tag.
+		$label .= '>'.JText::_($text).'</label>';
 
 		return $label;
 	}
