@@ -242,6 +242,8 @@ class JFormTest extends PHPUnit_Framework_TestCase
 			name="title" />
 		<field
 			name="abstract" />
+		<field
+			name="access" />
 	</fields>
 </form>
 XML;
@@ -260,6 +262,10 @@ XML;
 			<option
 				value="0">JNo</option>
 		</field>
+		<field
+			name="abstract"
+			label="Abstract" />
+
 	</fields>
 </form>
 XML;
@@ -267,6 +273,7 @@ XML;
 		$form->load($xml2, false);
 		print_r($form->getXML());
 		echo $form->getXml()->asXML();
+		die;
 	}
 
 	/**
