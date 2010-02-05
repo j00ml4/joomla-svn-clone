@@ -91,7 +91,7 @@ class JForm
 		$this->name = $name;
 
 		// Set the options if specified.
-		$this->options['control']  = isset($options['control']) ? $options['control'] : '';
+		$this->options['control']  = isset($options['control']) ? $options['control'] : false;
 	}
 
 	/**
@@ -321,7 +321,7 @@ class JForm
 
 	public function getFormControl()
 	{
-		return $this->options['control'];
+		return (string) $this->options['control'];
 	}
 
 	public function getGroup($name)
