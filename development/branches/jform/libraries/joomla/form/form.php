@@ -139,7 +139,7 @@ class JForm
 				foreach ($value as $subName => $subValue) {
 
 					// Validate the subfield name.
-					if ($fields = $this->xml->xpath('//field[@name="'.$subName.'"]')) {
+					if ($fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field[@name="'.$subName.'"]')) {
 						$this->data[$name][$subName] = $subValue;
 					}
 				}
@@ -249,29 +249,66 @@ class JForm
 //		}
 	}
 
+
 	/**
-	 * Method to get an array of <field /> elements from the form XML document which are
-	 * in a control group by name.
+	 * Method to get a form field.
 	 *
-	 * @param	string	$name	The name of the control group.
-	 *
-	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
-	 * @since	1.6
+	 * @param	string		$name			The name of the form field.
+	 * @param	string		$group			The group the field is in.
+	 * @param	mixed		$formControl	The optional form control. Set to false to disable.
+	 * @param	mixed		$groupControl	The optional group control. Set to false to disable.
+	 * @param	mixed		$value			The optional value to render as the default for the field.
+	 * @return	object		Rendered Form Field object
 	 */
-	protected function getFieldsByGroup($name)
+	public function getField($name, $group = '_default', $formControl = '_default', $groupControl = '_default', $value = null)
 	{
-		// Make sure there is a valid JForm XML document.
-		if (!$this->xml instanceof JXMLElement) {
+		// Get the XML node.
+		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
+
+		// If there is no XML node for the given field name, return false.
+		if (empty($node)) {
 			return false;
 		}
 
-		/*
-		 * Get an array of <field /> elements that are underneath a <fields /> element
-		 * with the appropriate name attribute.
-		 */
-		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+		// Load the field type.
+		$type	= $node->attributes()->type;
+		$field	= & $this->loadFieldType($type);
 
-		return $fields;
+		// If the field could not be loaded, get a text field.
+		if ($field === false) {
+			$field = & $this->loadFieldType('text');
+		}
+
+		// Get the value for the form field.
+		if ($value === null) {
+			$value = (array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : (string)$node->attributes()->default;
+		}
+
+		// Check the form control.
+		if ($formControl == '_default') {
+			$formControl = $this->_options['array'];
+		}
+
+
+		// Check the group control.
+		if ($groupControl == '_default'&& isset($this->_fieldsets[$group])) {
+			$array = $this->_fieldsets[$group]['array'];
+			if ($array === true) {
+				if(isset($this->_fieldsets[$group]['parent'])) {
+					$groupControl = $this->_fieldsets[$group]['parent'];
+				} else {
+					$groupControl = $group;
+				}
+			} else {
+				$groupControl = $array;
+			}
+		}
+
+		// Set the prefix
+		$prefix = $this->_options['prefix'];
+
+		// Render the field.
+		return $field->render($node, $value, $formControl, $groupControl, $prefix);
 	}
 
 	/**
@@ -301,12 +338,38 @@ class JForm
 	}
 
 	/**
+	 * Method to get an array of <field /> elements from the form XML document which are
+	 * in a control group by name.
+	 *
+	 * @param	string	$name	The name of the control group.
+	 *
+	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
+	 * @since	1.6
+	 */
+	protected function getFieldsByGroup($name)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		/*
+		 * Get an array of <field /> elements that are underneath a <fields /> element
+		 * with the appropriate name attribute.
+		 */
+		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+
+		return $fields;
+	}
+
+	/**
 	 * Method to load a form field object given a type.
 	 *
 	 * @param	string	$type	The field type.
 	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
 	 *
 	 * @return	mixed	JFormField object on success, false otherwise.
+	 * @since	1.6
 	 */
 	protected function loadFieldType($type, $new = true)
 	{
@@ -362,34 +425,6 @@ class JForm
 	}
 
 	/**
-	 * Method to add a path to the list of form include paths.
-	 *
-	 * @param	mixed	$new	A path or array of paths to add.
-	 *
-	 * @return	array	The list of paths that have been added.
-	 * @since	1.6
-	 */
-	public static function addFormPath($new = null)
-	{
-		// Add the default form search path if not set.
-		if (empty(self::$paths['forms'])) {
-			self::$paths['forms'][] = dirname(__FILE__).'/forms';
-		}
-
-		// Force the new path(s) to an array.
-		settype($new, 'array');
-
-		// Add the new paths to the stack if not already there.
-		foreach ($new as $path) {
-			if (!in_array($path, self::$paths['forms'])) {
-				array_unshift(self::$paths['forms'], trim($path));
-			}
-		}
-
-		return self::$paths['forms'];
-	}
-
-	/**
 	 * Method to add a path to the list of field include paths.
 	 *
 	 * @param	mixed	$new	A path or array of paths to add.
@@ -415,5 +450,33 @@ class JForm
 		}
 
 		return self::$paths['fields'];
+	}
+
+	/**
+	 * Method to add a path to the list of form include paths.
+	 *
+	 * @param	mixed	$new	A path or array of paths to add.
+	 *
+	 * @return	array	The list of paths that have been added.
+	 * @since	1.6
+	 */
+	public static function addFormPath($new = null)
+	{
+		// Add the default form search path if not set.
+		if (empty(self::$paths['forms'])) {
+			self::$paths['forms'][] = dirname(__FILE__).'/forms';
+		}
+
+		// Force the new path(s) to an array.
+		settype($new, 'array');
+
+		// Add the new paths to the stack if not already there.
+		foreach ($new as $path) {
+			if (!in_array($path, self::$paths['forms'])) {
+				array_unshift(self::$paths['forms'], trim($path));
+			}
+		}
+
+		return self::$paths['forms'];
 	}
 }
