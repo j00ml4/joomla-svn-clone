@@ -31,4 +31,9 @@ class JFormInspector extends JForm
 	{
 		return parent::getFieldsByFieldset($name);
 	}
+
+	public function getData()
+	{
+		return $this->data;
+	}
 }
