@@ -262,6 +262,11 @@ class JForm
 	 */
 	public function getField($name, $group = '_default', $formControl = '_default', $groupControl = '_default', $value = null)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
 		// Get the XML node.
 		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
 
