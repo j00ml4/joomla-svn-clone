@@ -156,6 +156,42 @@ abstract class JFormField
 	{
 		switch ($name)
 		{
+			case 'id':
+				return $this->id;
+				break;
+
+			case 'name':
+				return $this->name;
+				break;
+
+			case 'value':
+				return $this->value;
+				break;
+
+			case 'description':
+				return $this->description;
+				break;
+
+			case 'required':
+				return $this->required;
+				break;
+
+			case 'validate':
+				return $this->validate;
+				break;
+
+			case 'multiple':
+				return $this->multiple;
+				break;
+
+			case 'type':
+				return $this->type;
+				break;
+
+			case 'formControl':
+				return $this->formControl;
+				break;
+
 			case 'input':
 				// If the input hasn't yet been generated, generate it.
 				if (empty($this->input)) {
