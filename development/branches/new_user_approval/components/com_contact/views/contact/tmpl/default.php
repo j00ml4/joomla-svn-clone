@@ -54,7 +54,7 @@ $cparams = JComponentHelper::getParams ('com_media');
 
 
 
-	<?php if ($this->params->get('allow_vcard')) : 	//TODO either reimplement vcard or delete this.?>
+	<?php if ($this->params->get('allow_vcard')) :	//TODO either reimplement vcard or delete this.?>
 		<?php echo JText::_('Download information as a');?>
 			<a href="<?php echo JURI::base(); ?>index.php?option=com_contact&amp;task=vcard&amp;contact_id=<?php echo $this->contact->id; ?>&amp;format=raw&amp;tmpl=component">
 				<?php echo JText::_('VCard');?></a>
@@ -65,16 +65,16 @@ $cparams = JComponentHelper::getParams ('com_media');
 			<?php echo $this->loadTemplate('form');  ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_links')) : ?>
-	<?php echo $this->loadTemplate('links'); ?>			
+	<?php echo $this->loadTemplate('links'); ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_articles') &&  $this->contact->user_id) : ?>
 	<?php echo JHtml::_('sliders.panel', JText::_('Contact_Articles'), 'display-articles'); ?>
 		<?php echo $this->loadTemplate('articles'); ?>
 	<?php endif; ?>
-	<?php if ($this->params->get('show_profile') &&  $this->contact->user_id) : ?>	
+	<?php if ($this->params->get('show_profile') &&  $this->contact->user_id) : ?>
 	<?php echo JHtml::_('sliders.panel', JText::_('Contact_Profile'), 'display-profile'); ?>
 		<?php echo $this->loadTemplate('profile'); ?>
-	<?php endif; ?>	
+	<?php endif; ?>
 	<?php if ($this->contact->misc && $this->params->get('show_misc')) : ?>
 			<?php echo JHtml::_('sliders.panel', JText::_('Contact_Other_Information'), 'display-misc'); ?>
 				<div class="jcontact-miscinfo">
@@ -87,5 +87,5 @@ $cparams = JComponentHelper::getParams ('com_media');
 				</div>
 	<?php endif; ?>
 
-			<?php echo 	 JHtml::_('sliders.end'); ?>	
+			<?php echo JHtml::_('sliders.end'); ?>
 </div>

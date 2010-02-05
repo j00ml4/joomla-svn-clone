@@ -1,6 +1,6 @@
 <?php
 /**
- * @version
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -33,7 +33,7 @@ class JFormFieldModal_Contacts extends JFormField
 	protected function _getInput()
 	{
 		$db			=& JFactory::getDBO();
-		$doc 		=& JFactory::getDocument();
+		$doc		=& JFactory::getDocument();
 		// Load the javascript and css
 		JHtml::_('behavior.framework');
 		JHtml::script('system/modal.js', false, true);
