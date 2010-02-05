@@ -407,7 +407,7 @@ abstract class JFactory
 		if (is_null($uploader))
 		{
 			$conf = &JFactory::getConfig();
-			$uploader = $conf->getValue('config.uploader');
+			$uploader = $conf->getValue('config.uploader', 'none');
 		}
 
 		return JUploader::getInstance($uploader);
