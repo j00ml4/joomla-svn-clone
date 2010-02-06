@@ -57,4 +57,8 @@ class JFormInspector extends JForm
 		return parent::loadFieldType($type, $new);
 	}
 
+	public function findField($name, $group)
+	{
+		return parent::findField($name, $group);
+	}
 }
