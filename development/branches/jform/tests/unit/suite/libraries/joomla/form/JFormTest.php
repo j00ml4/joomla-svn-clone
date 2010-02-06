@@ -763,6 +763,53 @@ XML;
 	 */
 	public function testGetField()
 	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<field
+			name="title"
+			type="text" />
+		<fields
+			name="params">
+			<field
+				name="show_title"
+				type="text"
+				default="1" />
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		$field = $form->getField('show_title', 'params');
+		$this->assertThat(
+			$field->value,
+			$this->equalTo(1)
+		);
+
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::getValue method.
+	 */
+	public function testGetValue()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::setValue method.
+	 */
+	public function testSetValue()
+	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
