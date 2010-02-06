@@ -692,11 +692,10 @@ XML;
 	<fields>
 		<field
 			name="title" type="text" place="root" />
-		<fields
-			label="Details">
+		<fieldset>
 			<field
-				name="published" type="list" />
-		</fields>
+				name="alias" type="text" />
+		</fieldset>
 		<fields
 			name="params">
 			<field
@@ -747,6 +746,13 @@ XML;
 		$this->assertThat(
 			(string) $field['place'],
 			$this->equalTo('child')
+		);
+
+		// Check for a field in a fieldset.
+		$field = $form->findField('alias', null);
+		$this->assertThat(
+			(string) $field['name'],
+			$this->equalTo('alias')
 		);
 
 		$this->markTestIncomplete('This test has not been implemented yet.');
