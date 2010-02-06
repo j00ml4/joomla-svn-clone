@@ -32,12 +32,12 @@ class JFormFieldText extends JFormField
 	 */
 	protected function getInput()
 	{
-		$size =((string)$this->_element->attributes()->size) ? ' size="'.$this->_element->attributes()->size.'"' : '';
-		$class =((string)$this->_element->attributes()->class) ? ' class="'.$this->_element->attributes()->class.'"' : ' class="text_area"';
-		$readonly =((string)$this->_element->attributes()->readonly == 'true') ? ' readonly="readonly"' : '';
-		$onchange =((string)$this->_element->attributes()->onchange) ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
-		$maxLength =((string)$this->_element->attributes()->maxlength) ? ' maxlength="'.$this->_element->attributes()->maxlength.'"' : '';
+		$size =((string)$this->element->attributes()->size) ? ' size="'.$this->element->attributes()->size.'"' : '';
+		$class =((string)$this->element->attributes()->class) ? ' class="'.$this->element->attributes()->class.'"' : '';
+		$readonly =((string)$this->element->attributes()->readonly == 'true') ? ' readonly="readonly"' : '';
+		$onchange =((string)$this->element->attributes()->onchange) ? ' onchange="'.$this->_replacePrefix((string)$this->element->attributes()->onchange).'"' : '';
+		$maxLength =((string)$this->element->attributes()->maxlength) ? ' maxlength="'.$this->element->attributes()->maxlength.'"' : '';
 
-		return '<input type="text" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$class.$size.$readonly.$onchange.$maxLength.' />';
+		return '<input type="text" name="'.$this->name.'" id="'.$this->id.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$class.$size.$readonly.$onchange.$maxLength.'/>';
 	}
 }
