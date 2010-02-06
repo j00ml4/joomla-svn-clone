@@ -680,9 +680,9 @@ XML;
 	}
 
 	/**
-	 * Test the JForm::getField method.
+	 * Test the JForm::findField method.
 	 */
-	public function testGetField()
+	public function testFindField()
 	{
 		// Prepare the form.
 		$form = new JFormInspector('form1');
@@ -695,7 +695,7 @@ XML;
 		<fields
 			label="Details">
 			<field
-				name="published" />
+				name="published" type="list" />
 		</fields>
 		<fields
 			name="params">
@@ -721,10 +721,42 @@ XML;
 			$this->isTrue()
 		);
 
-		// Check that a non-existant group returns nothing.
-		$field = $form->getField('title', 'params');
+		// Check that a non-existant field returns nothing.
+		$field = $form->findField('foo', null);
+		$this->assertThat(
+			$field,
+			$this->isFalse()
+		);
 
-var_dump($field->input);
+		// Check that a non-existant group returns nothing.
+		$field = $form->findField('title', 'foo');
+		$this->assertThat(
+			$field,
+			$this->isFalse()
+		);
+
+		// Check for a groupless field.
+		$field = $form->findField('title', null);
+		$this->assertThat(
+			(string) $field['place'],
+			$this->equalTo('root')
+		);
+
+		// Check for a grouped field.
+		$field = $form->findField('title', 'params');
+		$this->assertThat(
+			(string) $field['place'],
+			$this->equalTo('child')
+		);
+
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test the JForm::getField method.
+	 */
+	public function testGetField()
+	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
