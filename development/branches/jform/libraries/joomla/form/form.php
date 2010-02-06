@@ -344,18 +344,40 @@ class JForm
 //		}
 	}
 
+	protected function loadField($element, $group, $value)
+	{
+		// Make sure there is a valid JXMLElement.
+		if (!$element instanceof JXMLElement) {
+			return false;
+		}
 
-	/**
-	 * Method to get a form field.
-	 *
-	 * @param	string		$name			The name of the form field.
-	 * @param	string		$group			The group the field is in.
-	 * @param	mixed		$formControl	The optional form control. Set to false to disable.
-	 * @param	mixed		$groupControl	The optional group control. Set to false to disable.
-	 * @param	mixed		$value			The optional value to render as the default for the field.
-	 * @return	object		Rendered Form Field object
-	 */
-	public function getField($name, $group = null, $value = null)
+		// Get the field type.
+		$type = $element['type'] ? (string) $element['type'] : 'text';
+
+		// Load the JFormField object for the field.
+		$field = $this->loadFieldType($type);
+
+		// If the object could not be loaded, get a text field object.
+		if ($field === false) {
+			$field = $this->loadFieldType('text');
+		}
+
+		// Get the value for the form field.
+//		if ($value === null) {
+//		}
+
+		// Setup the JFormField object.
+		$field->setForm($this);
+
+		if ($field->setup($element, $value, $group)) {
+			return $field;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected function findField($name, $group)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -363,7 +385,7 @@ class JForm
 		}
 
 		// Initialize variables.
-		$element = null;
+		$element = false;
 
 		// Let's get the appropriate field element based on the method arguments.
 		if ($group) {
@@ -401,38 +423,35 @@ class JForm
 			}
 		}
 
+		return $element;
+	}
+
+	/**
+	 * Method to get a form field.
+	 *
+	 * @param	string		$name			The name of the form field.
+	 * @param	string		$group			The group the field is in.
+	 * @param	mixed		$formControl	The optional form control. Set to false to disable.
+	 * @param	mixed		$groupControl	The optional group control. Set to false to disable.
+	 * @param	mixed		$value			The optional value to render as the default for the field.
+	 * @return	object		Rendered Form Field object
+	 */
+	public function getField($name, $group = null, $value = null)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		// Attempt to find the field by name and group.
+		$element = $this->findField($name, $group);
+
 		// If the field element was not found return false.
 		if (!$element) {
 			return false;
 		}
 
-		// Get the field type and verify it exists.
-		$type = (string) $element['type'];
-		if (!$type) {
-			return false;
-		}
-
-		// Load the JFormField object for the field.
-		$field = $this->loadFieldType($type);
-
-		// If the object could not be loaded, get a text field object.
-		if ($field === false) {
-			$field = $this->loadFieldType('text');
-		}
-
-		// Get the value for the form field.
-//		if ($value === null) {
-//		}
-
-		// Setup the JFormField object.
-		$field->setForm($this);
-
-		if ($field->setup($element, $value, $group)) {
-			return $field;
-		}
-		else {
-			return false;
-		}
+		return $this->loadField($element, $group, $value);
 	}
 
 	/**
