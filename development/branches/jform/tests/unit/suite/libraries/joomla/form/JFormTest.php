@@ -814,6 +814,134 @@ XML;
 	}
 
 	/**
+	 * Test for JForm::getFieldset method.
+	 */
+	public function testGetFieldset()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		// Check the test data loads ok.
+		$fields = $form->getFieldset('params-advanced');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" fieldset="params-basic" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="outlier" />
+			<fieldset
+				name="params-basic">
+				<field
+					name="show_title" />
+				<field
+					name="show_abstract" />
+				<field
+					name="show_author" />
+			</fieldset>
+			<fieldset
+				name="params-advanced">
+				<field
+					name="module_prefix" />
+				<field
+					name="caching" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+
+		$fields = $form->getFieldset('params-basic');
+		$this->assertThat(
+			count($fields) == 4,
+			$this->isTrue()
+		);
+	}
+
+	/**
+	 * Test for JForm::getFieldsets method.
+	 */
+	public function testGetFieldsets()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		// Check the test data loads ok.
+		$fields = $form->getFieldset('params-advanced');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" fieldset="params-legacy" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="outlier" fieldset="params-legacy" />
+			<fieldset
+				name="params-basic">
+				<field
+					name="show_title" />
+				<field
+					name="show_abstract" />
+				<field
+					name="show_author" />
+			</fieldset>
+			<fieldset
+				name="params-advanced">
+				<field
+					name="module_prefix" />
+				<field
+					name="caching" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+
+		$sets = $form->getFieldsets('details');
+		$this->assertThat(
+			count($sets) == 1,
+			$this->isTrue()
+		);
+	}
+
+	/**
 	 * Testing filter
 	 *
 	 * @return void
