@@ -403,48 +403,175 @@ class JForm
 		return true;
 	}
 
-	public function getFieldset($name)
+	/**
+	 * Method to get an array of fieldset objects optionally filtered over a given field group.
+	 *
+	 * @param	string	$name	The optional name of a field group on which to filter fieldsets.
+	 *
+	 * @return	array	The array of fieldset objects.
+	 * @since	1.6
+	 */
+	public function getFieldsets($group = null)
 	{
 		// Initialize variables.
-		$fields = array();
+		$fieldsets = array();
 
-		// Get all of the field elements in the fieldset.
-		$elements = $this->getFieldsByFieldset($name);
-
-		// If no field elements were found return empty.
-		if (empty($elements)) {
-			return $fields;
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return $fieldsets;
 		}
 
-//		foreach ($fields as $field) {
-//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
-//			var_dump((string) $field['name']);
-//			foreach ($attrs as $attr) {
-//				var_dump((string)$attr);
-//			}
-//		}
+		if ($group) {
+			/*
+			 * Get an array of <field /> elements that are underneath a <fieldset /> element
+			 * with the appropriate name attribute, and also any <field /> elements with
+			 * the appropriate fieldset attribute.
+			 */
+			$sets = $this->xml->xpath(
+				'//fields[@name="'.$group.'"]//fieldset[@name] ' .
+				'| //fields[@name="'.$group.'"]//field[@fieldset]/@fieldset'
+			);
+		}
+		else {
+			/*
+			 * Get an array of <field /> elements that are underneath a <fieldset /> element
+			 * with the appropriate name attribute, and also any <field /> elements with
+			 * the appropriate fieldset attribute.
+			 */
+			$sets = $this->xml->xpath('//fieldset[@name] | //field[@fieldset]/@fieldset');
+		}
+
+		// If no fieldsets are found return empty.
+		if (empty($sets)) {
+			return $fieldsets;
+		}
+
+		// Process each found fieldset.
+		foreach ($sets as $set) {
+
+			// Are we dealing with a fieldset element?
+			if ((string) $set['name']) {
+
+				// Only create it if it doesn't already exist.
+				if (empty($fieldsets[(string) $set['name']])) {
+
+					// Build the fieldset object.
+					$fieldset = (object) array('name' => '', 'label' => '', 'description' => '');
+					foreach ($set->attributes() as $name => $value) {
+						$fieldset->$name = (string) $value;
+					}
+
+					// Add the fieldset object to the list.
+					$fieldsets[$fieldset->name] = $fieldset;
+				}
+			}
+			// Must be dealing with a fieldset attribute.
+			else {
+
+				// Only create it if it doesn't already exist.
+				if (empty($fieldsets[(string) $set])) {
+
+					// Attempt to get the fieldset element for data (throughout the entire form document).
+					$tmp = $this->xml->xpath('//fieldset[@name="'.(string) $set.'"]');
+
+					// If no element was found, build a very simple fieldset object.
+					if (empty($tmp)) {
+						$fieldset = (object) array('name' => (string) $set, 'label' => '', 'description' => '');
+					}
+					// Build the fieldset object from the element.
+					else {
+						$fieldset = (object) array('name' => '', 'label' => '', 'description' => '');
+						foreach ($tmp[0]->attributes() as $name => $value) {
+							$fieldset->$name = (string) $value;
+						}
+					}
+
+					// Add the fieldset object to the list.
+					$fieldsets[$fieldset->name] = $fieldset;
+				}
+			}
+		}
+
+		return $fieldsets;
 	}
 
-	public function getGroup($name)
+	/**
+	 * Method to get an array of JFormField objects in a given fieldset by name.
+	 *
+	 * @param	string	$set	The name of the fieldset.
+	 *
+	 * @return	array	The array of JFormField objects in the fieldset.
+	 * @since	1.6
+	 */
+	public function getFieldset($set)
 	{
 		// Initialize variables.
 		$fields = array();
 
 		// Get all of the field elements in the fieldset.
-		$elements = $this->getFieldsByGroup($name);
+		$elements = $this->getFieldsByFieldset($set);
 
 		// If no field elements were found return empty.
 		if (empty($elements)) {
 			return $fields;
 		}
 
-//		foreach ($fields as $field) {
-//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
-//			var_dump((string) $field['name']);
-//			foreach ($attrs as $attr) {
-//				var_dump((string)$attr);
-//			}
-//		}
+		// Build the result array from the found field elements.
+		foreach ($elements as $element) {
+			// Initialize variables.
+			$groups = array();
+			$group = null;
+
+			// Get the field groups for the element.
+			$names = $element->xpath('ancestor::fields[@name]/@name');
+
+			// Build the group for the element.
+			foreach ($names as $name) {
+				$groups[] = (string) $name;
+			}
+
+			// Use only one level of group depth for now.
+			$group = $groups[0];
+
+			// If the field is successfully loaded add it to the result array.
+			if ($field = $this->loadField($element, $group)) {
+				$fields[] = $field;
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Method to get an array of JFormField objects in a given field group by name.
+	 *
+	 * @param	string	$name	The name of the field group.
+	 *
+	 * @return	array	The array of JFormField objects in the field group.
+	 * @since	1.6
+	 */
+	public function getGroup($group)
+	{
+		// Initialize variables.
+		$fields = array();
+
+		// Get all of the field elements in the fieldset.
+		$elements = $this->getFieldsByGroup($group);
+
+		// If no field elements were found return empty.
+		if (empty($elements)) {
+			return $fields;
+		}
+
+		// Build the result array from the found field elements.
+		foreach ($elements as $element) {
+			// If the field is successfully loaded add it to the result array.
+			if ($field = $this->loadField($element, $group)) {
+				$fields[] = $field;
+			}
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -484,7 +611,7 @@ class JForm
 	 * @return	mixed	The XML element object for the field or boolean false on error.
 	 * @since	1.6
 	 */
-	protected function findField($name, $group)
+	protected function findField($name, $group = null)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -594,7 +721,7 @@ class JForm
 	 * @return	mixed	The JFormField object for the field or boolean false on error.
 	 * @since	1.6
 	 */
-	protected function loadField($element, $group, $value)
+	protected function loadField($element, $group = null, $value = null)
 	{
 		// Make sure there is a valid JXMLElement.
 		if (!$element instanceof JXMLElement) {
