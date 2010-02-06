@@ -233,6 +233,9 @@ class JForm
 	 *
 	 * @param	SimpleXMLElement	The source element.
 	 * @param	SimpleXMLElement	The new element to merge.
+	 *
+	 * @return	void
+	 * @since	1.6
 	 */
 	protected static function mergeNodes(SimpleXMLElement $source, SimpleXMLElement $new)
 	{
