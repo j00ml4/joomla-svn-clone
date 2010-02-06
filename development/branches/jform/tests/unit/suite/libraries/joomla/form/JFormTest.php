@@ -691,7 +691,7 @@ XML;
 <form>
 	<fields>
 		<field
-			name="title" place="root" />
+			name="title" type="text" place="root" />
 		<fields
 			label="Details">
 			<field

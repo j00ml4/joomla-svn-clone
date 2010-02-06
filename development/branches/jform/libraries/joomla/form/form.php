@@ -365,6 +365,7 @@ class JForm
 		// Initialize variables.
 		$element = null;
 
+		// Let's get the appropriate field element based on the method arguments.
 		if ($group) {
 			//Get an array of fields with the correct name in a group with the correct name.
 			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
@@ -400,50 +401,38 @@ class JForm
 			}
 		}
 
-var_dump($element->asXML());
-die;
-
-		// Get the XML node.
-		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
-
-		// If there is no XML node for the given field name, return false.
-		if (empty($node)) {
+		// If the field element was not found return false.
+		if (!$element) {
 			return false;
 		}
 
-		// Load the field type.
-		$type	= $node->attributes()->type;
-		$field	= & $this->loadFieldType($type);
+		// Get the field type and verify it exists.
+		$type = (string) $element['type'];
+		if (!$type) {
+			return false;
+		}
 
-		// If the field could not be loaded, get a text field.
+		// Load the JFormField object for the field.
+		$field = $this->loadFieldType($type);
+
+		// If the object could not be loaded, get a text field object.
 		if ($field === false) {
-			$field = & $this->loadFieldType('text');
+			$field = $this->loadFieldType('text');
 		}
 
 		// Get the value for the form field.
-		if ($value === null) {
-			$value = (array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : (string)$node->attributes()->default;
+//		if ($value === null) {
+//		}
+
+		// Setup the JFormField object.
+		$field->setForm($this);
+
+		if ($field->setup($element, $value, $group)) {
+			return $field;
 		}
-
-		// Check the group control.
-		if ($groupControl == '_default'&& isset($this->_fieldsets[$group])) {
-			$array = $this->_fieldsets[$group]['array'];
-			if ($array === true) {
-				if(isset($this->_fieldsets[$group]['parent'])) {
-					$groupControl = $this->_fieldsets[$group]['parent'];
-				} else {
-					$groupControl = $group;
-				}
-			} else {
-				$groupControl = $array;
-			}
+		else {
+			return false;
 		}
-
-		// Set the prefix
-		$prefix = $this->_options['prefix'];
-
-		// Render the field.
-		return $field->render($node, $value, $formControl, $groupControl, $prefix);
 	}
 
 	/**
