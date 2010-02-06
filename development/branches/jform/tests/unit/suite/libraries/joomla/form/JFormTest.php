@@ -182,6 +182,84 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JForm::addNode method.
+	 */
+	public function testAddNode()
+	{
+		// The source data.
+		$xml1 = simplexml_load_string('<form><fields /></form>');
+
+		// The new data for adding the field.
+		$xml2 = simplexml_load_string('<form><field name="foo" /></form>');
+
+		if ($xml1 === false || $xml2 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		JFormInspector::addNode($xml1->fields, $xml2->field);
+
+		$fields = $xml1->xpath('fields/field[@name="foo"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+	}
+
+	/**
+	 * Test the JForm::mergeNode method.
+	 */
+	public function testMergeNode()
+	{
+		// The source data.
+		$xml1 = simplexml_load_string('<form><field name="foo" /></form>');
+
+		// The new data for adding the field.
+		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>');
+
+		if ($xml1 === false || $xml2 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		JFormInspector::mergeNode($xml1->field, $xml2->field);
+
+		$fields = $xml1->xpath('field[@name="foo"] | field[@type="text"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+	}
+
+	/**
+	 * Test the JForm::mergeNode method.
+	 */
+	public function testMergeNodes()
+	{
+		// The source data.
+		$xml1 = simplexml_load_string('<form><fields><field name="foo" /></fields></form>');
+
+		// The new data for adding the field.
+		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>');
+
+		if ($xml1 === false || $xml2 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		JFormInspector::mergeNodes($xml1->fields, $xml2->fields);
+
+		$fields = $xml1->xpath('fields/field[@name="foo"] | fields/field[@type="text"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+
+		$fields = $xml1->xpath('fields/field[@name="soap"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+	}
+
+	/**
 	 * Test the JForm::load method.
 	 *
 	 * This method can load an XML data object, or parse an XML string.
@@ -307,11 +385,11 @@ XML;
 			$this->isTrue()
 		);
 
-		$dom = new DOMDocument('1.0');
+		/*$dom = new DOMDocument('1.0');
 		$dom->preserveWhiteSpace = false;
 		$dom->formatOutput = true;
 		$dom->loadXML($form->getXml()->asXML());
-		echo $dom->saveXML();
+		echo $dom->saveXML();*/
 
 	}
 
@@ -560,4 +638,161 @@ XML;
 			$this->isFalse()
 		);
 	}
+
+	/**
+	 * Test the JForm::getField method.
+	 */
+	public function testLoadFieldType()
+	{
+		$field = JFormInspector::loadFieldType('list');
+		$this->assertThat(
+			($field instanceof JFormFieldList),
+			$this->isTrue()
+		);
+
+		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
+		$field = JFormInspector::loadFieldType('test');
+		$this->assertThat(
+			($field instanceof JFormFieldTest),
+			$this->isTrue()
+		);
+
+		$field = JFormInspector::loadFieldType('bogus');
+		$this->assertThat(
+			$field,
+			$this->isFalse()
+		);
+	}
+
+	/**
+	 * Test the JForm::getField method.
+	 */
+	public function testGetField()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test the JForm::getFormControl method.
+	 */
+	public function testGetFormControl()
+	{
+		$form = new JForm('form8ion');
+
+		$this->assertThat(
+			$form->getFormControl(),
+			$this->equalTo('')
+		);
+
+		$form = new JForm('form8ion', array('control' => 'jform'));
+
+		$this->assertThat(
+			$form->getFormControl(),
+			$this->equalTo('jform')
+		);
+	}
+
+	/**
+	 * Test the JForm::getGroup method.
+	 */
+	public function testGetGroup()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Testing filter
+	 *
+	 * @return void
+	 */
+	/*
+	public function testFilter()
+	{
+		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
+
+		$user = new JUser;
+		$mockSession = $this->getMock('JSession', array('_start', 'get'));
+		$mockSession->expects($this->once())->method('get')->will(
+			$this->returnValue($user)
+		);
+		JFactory::$session = $mockSession;
+		// Adjust the timezone offset to a known value.
+		$config = JFactory::getConfig();
+		$config->setValue('config.offset', 10);
+
+		// TODO: Mock JFactory and JUser
+		//$user = JFactory::getUser();
+		//$user->setParam('timezone', 5);
+
+		$form = new JForm;
+		$form->load('example');
+
+		$text = '<script>alert();</script> <p>Some text</p>';
+		$data = array(
+			'f_text' => $text,
+			'f_safe_text' => $text,
+			'f_raw_text' => $text,
+			'f_svr_date' => '2009-01-01 00:00:00',
+			'f_usr_date' => '2009-01-01 00:00:00',
+			'f_unset' => 1
+		);
+
+		$result = $form->filter($data);
+
+		// Check that the unset filter worked.
+		$this->assertThat(
+			isset($result['f_text']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_safe_text']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_raw_text']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_svr_date']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_unset']),
+			$this->isFalse()
+		);
+
+		// Check the date filters.
+		$this->assertThat(
+			$result['f_svr_date'],
+			$this->equalTo('2008-12-31 14:00:00')
+		);
+
+		//$this->assertThat(
+		//	$result['f_usr_date'],
+		//	$this->equalTo('2009-01-01 05:00:00')
+		//);
+
+		// Check that text filtering worked.
+		$this->assertThat(
+			$result['f_raw_text'],
+			$this->equalTo($text)
+		);
+
+		$this->assertThat(
+			$result['f_text'],
+			$this->equalTo('alert(); Some text')
+		);
+
+		$this->assertThat(
+			$result['f_safe_text'],
+			$this->equalTo('alert(); <p>Some text</p>')
+		);
+
+		$this->markTestIncomplete();
+	}
+	*/
 }
