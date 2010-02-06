@@ -17,7 +17,7 @@ jimport('joomla.form.formfield');
  * @subpackage	Form
  * @since		1.6
  */
-class JFormFieldList extends JFormField
+class JFormFieldCheckboxes extends JFormField
 {
 	/**
 	 * The form field type.
@@ -25,7 +25,15 @@ class JFormFieldList extends JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $type = 'List';
+	protected $type = 'Checkboxes';
+
+	/**
+	 * Flag to tell the field to always be in multiple values mode.
+	 *
+	 * @var		boolean
+	 * @since	1.6
+	 */
+	protected $forceMultiple = true;
 
 	/**
 	 * Method to get the field input markup.
@@ -37,29 +45,36 @@ class JFormFieldList extends JFormField
 	{
 		// Initialize variables.
 		$html = array();
-		$attr = '';
 
 		// Initialize some field attributes.
-		$attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
-		$attr .= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
-		$attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
-		$attr .= $this->multiple ? ' multiple="multiple"' : '';
+		$class = $this->element['class'] ? ' class="checkboxes '.(string) $this->element['class'].'"' : ' class="checkboxes"';
 
-		// Initialize JavaScript field attributes.
-		$attr .= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
+		// Start the radio field output.
+		$html[] = '<fieldset id="'.$this->id.'"'.$class.'>';
 
 		// Get the field options.
 		$options = $this->getOptions();
 
-		// Create a read-only list (no name) with a hidden input to store the value.
-		if ((string) $this->element['readonly'] == 'true') {
-			$html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
-			$html[] = '<input type="hidden" name="'.$this->name.'" value="'.$this->value.'"/>';
+		// Build the radio field output.
+		foreach ($options as $i => $option) {
+
+			// Initialize some option attributes.
+			$checked	= ((string) $option->value == (string) $this->value) ? ' checked="checked"' : '';
+			$class		= !empty($option->class) ? ' class="'.$option->class.'"' : '';
+			$disabled	= !empty($option->disable) ? ' disabled="disabled"' : '';
+
+			// Initialize some JavaScript option attributes.
+			$onclick	= !empty($option->onclick) ? ' onclick="'.$option->onclick.'"' : '';
+
+			$html[] = '<input type="checkbox" id="'.$this->id.$i.'" name="'.$this->name.'"' .
+					' value="'.htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8').'"'
+					.$checked.$class.$onclick.$disabled.'/>';
+
+			$html[] = '<label for="'.$this->id.$i.'"'.$class.'>'.JText::_($option->text).'</label>';
 		}
-		// Create a regular list.
-		else {
-			$html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $this->value, $this->id);
-		}
+
+		// End the radio field output.
+		$html[] = '</fieldset>';
 
 		return implode($html);
 	}

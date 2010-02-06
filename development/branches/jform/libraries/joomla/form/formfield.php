@@ -283,6 +283,11 @@ abstract class JFormField
 		// Set the multiple values option.
 		$this->multiple = ($multiple == 'true' || $multiple == 'multiple');
 
+		// Allow for field classes to force the multiple values option.
+		if (isset($this->forceMultiple)) {
+			$this->multiple = (bool) $this->forceMultiple;
+		}
+
 		// Set the field description text.
 		$this->description	= (string) $element['description'];
 
@@ -346,17 +351,17 @@ abstract class JFormField
 	}
 
 	/**
-	 * Method to get the field input tag.
+	 * Method to get the field input markup.
 	 *
-	 * @return	string	The field input tag.
+	 * @return	string	The field input markup.
 	 * @since	1.6
 	 */
 	abstract protected function getInput();
 
 	/**
-	 * Method to get the field label tag.
+	 * Method to get the field label markup.
 	 *
-	 * @return	string	The field label tag.
+	 * @return	string	The field label markup.
 	 * @since	1.6
 	 */
 	protected function getLabel()

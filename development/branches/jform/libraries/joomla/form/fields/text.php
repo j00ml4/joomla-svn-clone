@@ -19,25 +19,33 @@ jimport('joomla.form.formfield');
 class JFormFieldText extends JFormField
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	protected $type = 'Text';
 
 	/**
-	 * Method to get the field input.
+	 * Method to get the field input markup.
 	 *
-	 * @return	string		The field input.
+	 * @return	string	The field input markup.
+	 * @since	1.6
 	 */
 	protected function getInput()
 	{
-		$size =((string)$this->element->attributes()->size) ? ' size="'.$this->element->attributes()->size.'"' : '';
-		$class =((string)$this->element->attributes()->class) ? ' class="'.$this->element->attributes()->class.'"' : '';
-		$readonly =((string)$this->element->attributes()->readonly == 'true') ? ' readonly="readonly"' : '';
-		$onchange =((string)$this->element->attributes()->onchange) ? ' onchange="'.$this->_replacePrefix((string)$this->element->attributes()->onchange).'"' : '';
-		$maxLength =((string)$this->element->attributes()->maxlength) ? ' maxlength="'.$this->element->attributes()->maxlength.'"' : '';
+		// Initialize some field attributes.
+		$size		= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
+		$maxLength	= $this->element['maxlength'] ? ' maxlength="'.(int) $this->element['maxlength'].'"' : '';
+		$class		= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
+		$readonly	= ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
+		$disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 
-		return '<input type="text" name="'.$this->name.'" id="'.$this->id.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$class.$size.$readonly.$onchange.$maxLength.'/>';
+		// Initialize JavaScript field attributes.
+		$onchange	= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
+
+		return '<input type="text" name="'.$this->name.'" id="'.$this->id.'"' .
+				' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' .
+				$class.$size.$disabled.$readonly.$onchange.$maxLength.'/>';
 	}
 }
