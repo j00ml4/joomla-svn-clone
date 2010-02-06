@@ -28,22 +28,6 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/fields/list.php');
 class JForm
 {
 	/**
-	 * The name of the form instance.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $name;
-
-	/**
-	 * The form XML definition.
-	 *
-	 * @var		object
-	 * @since	1.6
-	 */
-	protected $xml;
-
-	/**
 	 * The data store for form fields during display.
 	 *
 	 * @var		array
@@ -52,12 +36,28 @@ class JForm
 	protected $data = array();
 
 	/**
+	 * The name of the form instance.
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $name;
+
+	/**
 	 * The form object options for use in rendering and validation.
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
 	protected $options = array();
+
+	/**
+	 * The form XML definition.
+	 *
+	 * @var		object
+	 * @since	1.6
+	 */
+	protected $xml;
 
 	/**
 	 * Static array of JFormField objects for re-use.
@@ -149,6 +149,21 @@ class JForm
 		}
 
 		return true;
+	}
+
+	/**
+	 * Method to get the form control. This string serves as a container for all form fields. For
+	 * example, if there is a field named 'foo' and a field named 'bar' and the form control is
+	 * empty the fields will be rendered like: <input name="foo" /> and <input name="bar" />.  If
+	 * the form control is set to 'joomla' however, the fields would be rendered like:
+	 * <input name="joomla[foo]" /> and <input name="joomla[bar]" />.
+	 *
+	 * @return	string	The form control string.
+	 * @since	1.6
+	 */
+	public function getFormControl()
+	{
+		return (string) $this->options['control'];
 	}
 
 	/**
@@ -328,9 +343,64 @@ class JForm
 		return $this->load($xml);
 	}
 
-	public function getFormControl()
+	/**
+	 * Method to get the value of a field.
+	 *
+	 * @param	string	$name		The name of the field for which to get the value.
+	 * @param	string	$group		The group the field is in if any.
+	 * @param	mixed	$default	The optional default value of the field value is empty.
+	 *
+	 * @return	mixed	The value of the field or the default value if empty.
+	 * @since	1.6
+	 */
+	public function getValue($name, $group = null, $default = null)
 	{
-		return (string) $this->options['control'];
+		// Initialize the return value to the default.
+		$return = $default;
+
+		if ($group) {
+			// If the value exists for the field name in the group use it.
+			if (isset($this->data[$group][$name])) {
+				$return = $this->data[$group][$name];
+			}
+		}
+		else {
+			// If the value exists for the field name use it.
+			if (isset($this->data[$name])) {
+				$return = $this->data[$name];
+			}
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Method to set the value of a field. If the field does not exist in the form then the method
+	 * will return false.
+	 *
+	 * @param	string	$name		The name of the field for which to set the value.
+	 * @param	string	$group		The group the field is in if any.
+	 * @param	mixed	$value		The value to set for the field.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function setValue($name, $group = null, $value = null)
+	{
+		// If the field does not exist return false.
+		if (!$this->findField($name, $group)) {
+			return false;
+		}
+
+		// If a group is set use it.
+		if ($group) {
+			$this->data[$group][$name] = $value;
+		}
+		else {
+			$this->data[$name] = $value;
+		}
+
+		return true;
 	}
 
 	public function getGroup($name)
@@ -344,39 +414,43 @@ class JForm
 //		}
 	}
 
-	protected function loadField($element, $group, $value)
+	/**
+	 * Method to get a form field represented as a JFormField object.
+	 *
+	 * @param	string	$name	The name of the form field.
+	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$value	The optional value to use as the default for the field.
+	 *
+	 * @return	mixed	The JFormField object for the field or boolean false on error.
+	 * @since	1.6
+	 */
+	public function getField($name, $group = null, $value = null)
 	{
-		// Make sure there is a valid JXMLElement.
-		if (!$element instanceof JXMLElement) {
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
 			return false;
 		}
 
-		// Get the field type.
-		$type = $element['type'] ? (string) $element['type'] : 'text';
+		// Attempt to find the field by name and group.
+		$element = $this->findField($name, $group);
 
-		// Load the JFormField object for the field.
-		$field = $this->loadFieldType($type);
-
-		// If the object could not be loaded, get a text field object.
-		if ($field === false) {
-			$field = $this->loadFieldType('text');
-		}
-
-		// Get the value for the form field.
-//		if ($value === null) {
-//		}
-
-		// Setup the JFormField object.
-		$field->setForm($this);
-
-		if ($field->setup($element, $value, $group)) {
-			return $field;
-		}
-		else {
+		// If the field element was not found return false.
+		if (!$element) {
 			return false;
 		}
+
+		return $this->loadField($element, $group, $value);
 	}
 
+	/**
+	 * Method to get a form field represented as an XML element object.
+	 *
+	 * @param	string	$name	The name of the form field.
+	 * @param	string	$group	The optional form field group in which to find the field.
+	 *
+	 * @return	mixed	The XML element object for the field or boolean false on error.
+	 * @since	1.6
+	 */
 	protected function findField($name, $group)
 	{
 		// Make sure there is a valid JForm XML document.
@@ -424,34 +498,6 @@ class JForm
 		}
 
 		return $element;
-	}
-
-	/**
-	 * Method to get a form field.
-	 *
-	 * @param	string		$name			The name of the form field.
-	 * @param	string		$group			The group the field is in.
-	 * @param	mixed		$formControl	The optional form control. Set to false to disable.
-	 * @param	mixed		$groupControl	The optional group control. Set to false to disable.
-	 * @param	mixed		$value			The optional value to render as the default for the field.
-	 * @return	object		Rendered Form Field object
-	 */
-	public function getField($name, $group = null, $value = null)
-	{
-		// Make sure there is a valid JForm XML document.
-		if (!$this->xml instanceof JXMLElement) {
-			return false;
-		}
-
-		// Attempt to find the field by name and group.
-		$element = $this->findField($name, $group);
-
-		// If the field element was not found return false.
-		if (!$element) {
-			return false;
-		}
-
-		return $this->loadField($element, $group, $value);
 	}
 
 	/**
@@ -503,6 +549,50 @@ class JForm
 		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
 
 		return $fields;
+	}
+
+	/**
+	 * Method to load, setup and return a JFormField object based on field data.
+	 *
+	 * @param	string	$element	The XML element object representation of the form field.
+	 * @param	string	$group		The optional form field group in which to find the field.
+	 * @param	mixed	$value		The optional value to use as the default for the field.
+	 *
+	 * @return	mixed	The JFormField object for the field or boolean false on error.
+	 * @since	1.6
+	 */
+	protected function loadField($element, $group, $value)
+	{
+		// Make sure there is a valid JXMLElement.
+		if (!$element instanceof JXMLElement) {
+			return false;
+		}
+
+		// Get the field type.
+		$type = $element['type'] ? (string) $element['type'] : 'text';
+
+		// Load the JFormField object for the field.
+		$field = $this->loadFieldType($type);
+
+		// If the object could not be loaded, get a text field object.
+		if ($field === false) {
+			$field = $this->loadFieldType('text');
+		}
+
+		// Get the value for the form field if not set. Default to the 'default' attribute for the field.
+		if ($value === null) {
+			$value = $this->getValue((string) $element['name'], $group, (string) $element['default']);
+		}
+
+		// Setup the JFormField object.
+		$field->setForm($this);
+
+		if ($field->setup($element, $value, $group)) {
+			return $field;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
