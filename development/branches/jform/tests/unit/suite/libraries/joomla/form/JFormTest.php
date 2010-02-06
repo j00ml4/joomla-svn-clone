@@ -666,10 +666,46 @@ XML;
 
 	/**
 	 * Test the JForm::getField method.
+	 *
+	 * This method can load an XML data object, or parse an XML string.
 	 */
 	public function testGetField()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$xml = <<<XML
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<field
+			name="title" place="root" />
+		<field
+			name="abstract" />
+		<fields
+			name="params">
+			<field
+				name="title" place="child" />
+			<field
+				name="show_abstract" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$field = $form->getField('title');
 	}
 
 	/**
