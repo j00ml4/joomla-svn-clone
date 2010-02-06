@@ -378,9 +378,9 @@ class JForm
 	 * Method to set the value of a field. If the field does not exist in the form then the method
 	 * will return false.
 	 *
-	 * @param	string	$name		The name of the field for which to set the value.
-	 * @param	string	$group		The group the field is in if any.
-	 * @param	mixed	$value		The value to set for the field.
+	 * @param	string	$name	The name of the field for which to set the value.
+	 * @param	string	$group	The group the field is in if any.
+	 * @param	mixed	$value	The value to set for the field.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -530,7 +530,7 @@ class JForm
 
 			// If the field is successfully loaded add it to the result array.
 			if ($field = $this->loadField($element, $group)) {
-				$fields[] = $field;
+				$fields[$field->id] = $field;
 			}
 		}
 
@@ -562,11 +562,50 @@ class JForm
 		foreach ($elements as $element) {
 			// If the field is successfully loaded add it to the result array.
 			if ($field = $this->loadField($element, $group)) {
-				$fields[] = $field;
+				$fields[$field->id] = $field;
 			}
 		}
 
 		return $fields;
+	}
+
+	/**
+	 * Method to get a form field markup for the field input.
+	 *
+	 * @param	string	$name	The name of the form field.
+	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$value	The optional value to use as the default for the field.
+	 *
+	 * @return	string	The form field markup.
+	 * @since	1.6
+	 */
+	public function getInput($name, $group = null, $value = null)
+	{
+		// Attempt to get the form field.
+		if ($field = $this->getField($name, $group, $value)) {
+			return $field->input;
+		}
+
+		return '';
+	}
+
+	/**
+	 * Method to get a form field markup for the field input.
+	 *
+	 * @param	string	$name	The name of the form field.
+	 * @param	string	$group	The optional form field group in which to find the field.
+	 *
+	 * @return	string	The form field markup.
+	 * @since	1.6
+	 */
+	public function getLabel($name, $group = null)
+	{
+		// Attempt to get the form field.
+		if ($field = $this->getField($name, $group)) {
+			return $field->label;
+		}
+
+		return '';
 	}
 
 	/**
@@ -778,6 +817,7 @@ class JForm
 
 			// If the type is complex, add the base type to the paths.
 			if ($pos = strpos($type, '_')) {
+
 				// Add the complex type prefix to the paths.
 				for ($i = 0, $n = count($paths); $i < $n; $i++) {
 					// Derive the new path.
