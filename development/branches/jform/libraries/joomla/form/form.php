@@ -362,21 +362,46 @@ class JForm
 			return false;
 		}
 
-		if ($group) {
+		// Initialize variables.
+		$element = null;
 
-			/*
-			 * Get an array of <field /> elements that are underneath a <fields /> element
-			 * with the appropriate name attributes.
-			 */
+		if ($group) {
+			//Get an array of fields with the correct name in a group with the correct name.
 			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
 
+			// Make sure something was found.
+			if (!$fields) {
+				return false;
+			}
+
+			// Assume the first one is the right one.
+			$element = $fields[0];
+		}
+		else {
+			// Get an array of fields with the correct name.
+			$fields = $this->xml->xpath('//field[@name="'.$name.'"]');
+
+			// Make sure something was found.
+			if (!$fields) {
+				return false;
+			}
+
+			// Search through the fields for the right one.
+			foreach ($fields as $field) {
+				// If we find an anscestor fields element with a group name then it isn't what we want.
+				if ($field->xpath('ancestor::fields[@name]')) {
+					continue;
+				}
+				// Found it!
+				else {
+					$element = $field;
+					break;
+				}
+			}
 		}
 
-		/*
-		 * Get an array of <field /> elements that are underneath a <fields /> element
-		 * with the appropriate name attribute.
-		 */
-		$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
+var_dump($element->asXML());
+die;
 
 		// Get the XML node.
 		$node = isset($this->_groups[$group][$name]) ? $this->_groups[$group][$name] : null;
@@ -399,12 +424,6 @@ class JForm
 		if ($value === null) {
 			$value = (array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : (string)$node->attributes()->default;
 		}
-
-		// Check the form control.
-		if ($formControl == '_default') {
-			$formControl = $this->_options['array'];
-		}
-
 
 		// Check the group control.
 		if ($groupControl == '_default'&& isset($this->_fieldsets[$group])) {
