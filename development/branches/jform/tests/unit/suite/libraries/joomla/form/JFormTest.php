@@ -281,7 +281,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 
 		// Test an XML string.
-		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /></form>');
+		$form->load('<form><fields /></form>');
 		$data1 = clone $form->getXML();
 
 		$this->assertThat(
@@ -290,7 +290,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 
 		// Test implied reset.
-		$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields><field /><fields></form>');
+		$form->load('<form><fields><field /><fields></form>');
 		$data2 = clone $form->getXML();
 
 		$this->assertThat(
@@ -300,12 +300,12 @@ class JFormTest extends PHPUnit_Framework_TestCase
 
 		// Test bad structure.
 		$this->assertThat(
-			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<foobar />'),
+			$form->load('<foobar />'),
 			$this->isFalse()
 		);
 
 		$this->assertThat(
-			$form->load('<?xml version="1.0" encoding="utf-8" ?>'."\n".'<form><fields /><fields /></form>'),
+			$form->load('<form><fields /><fields /></form>'),
 			$this->isFalse()
 		);
 
@@ -313,7 +313,6 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$form = new JFormInspector('form1');
 
 		$xml1 = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
 <form>
 	<fields>
 		<field
@@ -340,7 +339,6 @@ XML;
 		);
 
 		$xml2 = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
 <form>
 	<fields>
 		<field
@@ -435,7 +433,6 @@ XML;
 		);
 
 		$xml = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
 <form>
 	<fields>
 		<!-- Set up a group of fields called details. -->
@@ -503,7 +500,6 @@ XML;
 		);
 
 		$xml = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
 <form>
 	<fields>
 		<!-- Set up a group of fields called details. -->
@@ -575,7 +571,6 @@ XML;
 		$form = new JFormInspector('form1');
 
 		$xml = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
 <form>
 	<fields
 		description="All the fields">
@@ -665,50 +660,6 @@ XML;
 	}
 
 	/**
-	 * Test the JForm::getField method.
-	 *
-	 * This method can load an XML data object, or parse an XML string.
-	 */
-	public function testGetField()
-	{
-		// Prepare the form.
-		$form = new JFormInspector('form1');
-
-		$xml = <<<XML
-<?xml version="1.0" encoding="utf-8" ?>
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<field
-			name="title" place="root" />
-		<field
-			name="abstract" />
-		<fields
-			name="params">
-			<field
-				name="title" place="child" />
-			<field
-				name="show_abstract" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
-		);
-
-		// Check that a non-existant group returns nothing.
-		$field = $form->getField('title');
-	}
-
-	/**
 	 * Test the JForm::getFormControl method.
 	 */
 	public function testGetFormControl()
@@ -729,10 +680,50 @@ XML;
 	}
 
 	/**
-	 * Test the JForm::getGroup method.
+	 * Test the JForm::getField method.
 	 */
-	public function testGetGroup()
+	public function testGetField()
 	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<field
+			name="title" place="root" />
+		<fields
+			label="Details">
+			<field
+				name="published" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="title" place="child" />
+			<fieldset
+				label="Basic">
+				<field
+					name="show_title" />
+			</fieldset>
+			<fieldset
+				label="Advanced">
+				<field
+					name="caching" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$field = $form->getField('title');
+
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
