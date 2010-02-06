@@ -403,8 +403,41 @@ class JForm
 		return true;
 	}
 
+	public function getFieldset($name)
+	{
+		// Initialize variables.
+		$fields = array();
+
+		// Get all of the field elements in the fieldset.
+		$elements = $this->getFieldsByFieldset($name);
+
+		// If no field elements were found return empty.
+		if (empty($elements)) {
+			return $fields;
+		}
+
+//		foreach ($fields as $field) {
+//			$attrs = $field->xpath('ancestor::fields[@name]/@name');
+//			var_dump((string) $field['name']);
+//			foreach ($attrs as $attr) {
+//				var_dump((string)$attr);
+//			}
+//		}
+	}
+
 	public function getGroup($name)
 	{
+		// Initialize variables.
+		$fields = array();
+
+		// Get all of the field elements in the fieldset.
+		$elements = $this->getFieldsByGroup($name);
+
+		// If no field elements were found return empty.
+		if (empty($elements)) {
+			return $fields;
+		}
+
 //		foreach ($fields as $field) {
 //			$attrs = $field->xpath('ancestor::fields[@name]/@name');
 //			var_dump((string) $field['name']);
