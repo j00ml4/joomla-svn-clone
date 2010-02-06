@@ -423,9 +423,8 @@ class JForm
 
 		if ($group) {
 			/*
-			 * Get an array of <field /> elements that are underneath a <fieldset /> element
-			 * with the appropriate name attribute, and also any <field /> elements with
-			 * the appropriate fieldset attribute.
+			 * Get an array of <fieldset /> elements and fieldset attributes that are underneath a
+			 * <fields /> element with the appropriate name attribute.
 			 */
 			$sets = $this->xml->xpath(
 				'//fields[@name="'.$group.'"]//fieldset[@name] ' .
@@ -433,11 +432,7 @@ class JForm
 			);
 		}
 		else {
-			/*
-			 * Get an array of <field /> elements that are underneath a <fieldset /> element
-			 * with the appropriate name attribute, and also any <field /> elements with
-			 * the appropriate fieldset attribute.
-			 */
+			// Get an array of <fieldset /> elements and fieldset attributes.
 			$sets = $this->xml->xpath('//fieldset[@name] | //field[@fieldset]/@fieldset');
 		}
 
