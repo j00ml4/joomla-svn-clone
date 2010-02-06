@@ -32,10 +32,10 @@ class JFormFieldPassword extends JFormField
 	 */
 	protected function getInput()
 	{
-		$size = (string)$this->_element->attributes()->size ? ' size="'.$this->_element->attributes()->size.'"' : '';
-		$class = (string)$this->_element->attributes()->class ? ' class="'.$this->_element->attributes()->class.'"' : ' class="text_area"';
-		$auto = (string)$this->_element->attributes()->autocomplete == 'off' ? 'autocomplete="off"' : '';
+		$size = (string)$this->element->attributes()->size ? ' size="'.$this->element->attributes()->size.'"' : '';
+		$class = (string)$this->element->attributes()->class ? ' class="'.$this->element->attributes()->class.'"' : '';
+		$auto = (string)$this->element->attributes()->autocomplete == 'off' ? 'autocomplete="off"' : '';
 
-		return '<input type="password" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$auto.$class.$size.'/>';
+		return '<input type="password" name="'.$this->name.'" id="'.$this->id.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$auto.$class.$size.'/>';
 	}
 }

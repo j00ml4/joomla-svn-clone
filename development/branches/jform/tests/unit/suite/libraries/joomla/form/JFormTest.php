@@ -700,7 +700,7 @@ XML;
 		<fields
 			name="params">
 			<field
-				name="title" place="child" />
+				name="title" place="child" type="password" />
 			<fieldset
 				label="Basic">
 				<field
@@ -722,8 +722,9 @@ XML;
 		);
 
 		// Check that a non-existant group returns nothing.
-		$field = $form->getField('title');
+		$field = $form->getField('title', 'params');
 
+var_dump($field->input);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
