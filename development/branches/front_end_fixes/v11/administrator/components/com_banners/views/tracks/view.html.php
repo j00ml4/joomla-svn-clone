@@ -60,7 +60,7 @@ class BannersViewTracks extends JView
 		JToolBarHelper::title(JText::_('Banners_Manager_Tracks'), 'generic.png');
 
 		$bar = &JToolBar::getInstance('toolbar');
-		$bar->appendButton('Popup', 'export', 'Banners_Tracks_Export', 'index.php?option=com_banners&view=download&tmpl=component',600,250);
+		$bar->appendButton('Popup', 'export', 'JTOOLBAR_EXPORT', 'index.php?option=com_banners&view=download&tmpl=component',600,250);
 
 		$document = &JFactory::getDocument();
 		$app = &JFactory::getApplication();
