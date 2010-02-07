@@ -109,4 +109,3 @@ class JEditorTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

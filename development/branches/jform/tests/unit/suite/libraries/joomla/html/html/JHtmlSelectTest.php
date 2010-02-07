@@ -119,4 +119,3 @@ class JHtmlSelectTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

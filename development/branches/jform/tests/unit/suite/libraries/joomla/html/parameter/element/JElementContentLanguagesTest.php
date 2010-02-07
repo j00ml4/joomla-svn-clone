@@ -39,4 +39,3 @@ class JElementContentLanguagesTest extends PHPUnit_Framework_TestCase
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }
-?>

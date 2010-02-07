@@ -64,4 +64,3 @@ class JHtmlJGridTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

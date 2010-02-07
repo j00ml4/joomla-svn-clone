@@ -163,4 +163,3 @@ class JHtmlBehaviorTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

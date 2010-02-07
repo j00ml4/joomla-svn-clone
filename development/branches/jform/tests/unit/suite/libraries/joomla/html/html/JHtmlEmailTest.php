@@ -42,4 +42,3 @@ class JHtmlEmailTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

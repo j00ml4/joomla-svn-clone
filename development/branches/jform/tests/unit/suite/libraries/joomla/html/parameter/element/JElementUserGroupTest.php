@@ -42,4 +42,3 @@ class JElementUserGroupTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'html' . DS . 'parameter.php';
+require_once JPATH_BASE.'/libraries/joomla/html/parameter.php';
 
 /**
  * Test class for JParameter.
@@ -32,9 +32,9 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testSet().
+	 * @todo Implement testAddElementPath().
 	 */
-	public function testSet()
+	public function testAddElementPath()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -43,9 +43,9 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGet().
+	 * @todo Implement testBind().
 	 */
-	public function testGet()
+	public function testBind()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -65,9 +65,9 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testSetXML().
+	 * @todo Implement testGet().
 	 */
-	public function testSetXML()
+	public function testGet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -76,9 +76,64 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testBind().
+	 * @todo Implement testGetGroups().
 	 */
-	public function testBind()
+	public function testGetGroups()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGetNumParams().
+	 */
+	public function testGetNumParams()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGetParam().
+	 */
+	public function testGetParam()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGetParams().
+	 */
+	public function testGetParams()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testLoadElement().
+	 */
+	public function testLoadElement()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testLoadSetupFile().
+	 */
+	public function testLoadSetupFile()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -109,9 +164,9 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGetNumParams().
+	 * @todo Implement testSet().
 	 */
-	public function testGetNumParams()
+	public function testSet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -120,64 +175,9 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGetGroups().
+	 * @todo Implement testSetXML().
 	 */
-	public function testGetGroups()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetParams().
-	 */
-	public function testGetParams()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testGetParam().
-	 */
-	public function testGetParam()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadSetupFile().
-	 */
-	public function testLoadSetupFile()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testLoadElement().
-	 */
-	public function testLoadElement()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testAddElementPath().
-	 */
-	public function testAddElementPath()
+	public function testSetXML()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
@@ -185,4 +185,3 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

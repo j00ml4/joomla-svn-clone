@@ -42,4 +42,3 @@ class JElementPasswordTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

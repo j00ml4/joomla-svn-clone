@@ -42,4 +42,3 @@ class JElementCategoryTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

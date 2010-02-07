@@ -42,4 +42,3 @@ class JHtmlFormTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>
