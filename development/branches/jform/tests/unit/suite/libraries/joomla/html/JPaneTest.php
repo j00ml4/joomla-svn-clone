@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'html' . DS . 'pane.php';
+require_once JPATH_BASE.'/libraries/joomla/html/pane.php';
 
 /**
  * Test class for JPane.
