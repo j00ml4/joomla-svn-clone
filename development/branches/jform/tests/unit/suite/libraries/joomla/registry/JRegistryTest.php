@@ -15,7 +15,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function test__clone()
 	{
 		$a = JRegistry::getInstance('a');
-		$a->setValue('_default.foo', 'bar');
+		$a->setValue('foo', 'bar');
 		$b = clone $a;
 
 		$this->assertThat(
@@ -58,13 +58,13 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	/**
 	 * @todo Implement testGet().
 	 */
-	public function testGet()
+	/*public function testGet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}
+	}*/
 
 	/**
 	 * Test the JRegistry::getInstance method.
@@ -92,6 +92,48 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		$this->assertThat(
 			$a,
 			$this->logicalNot($this->identicalTo($c))
+		);
+	}
+
+	/**
+	 * Test the JRegistry::getNamespaces method.
+	 */
+	public function testGetNameSpaces()
+	{
+		$a = new JRegistry;
+		$a->setValue('foo', 'bar1');
+		$a->setValue('config.foo', 'bar2');
+
+		$this->assertThat(
+			$a->getNameSpaces(),
+			$this->identicalTo(array('_default', 'config'))
+		);
+	}
+
+	/**
+	 * Test the JRegistry::getValue method.
+	 * @deprecated	1.6
+	 */
+	public function testGetValue()
+	{
+		$a = new JRegistry;
+		$a->setValue('foo', 'bar1');
+		$a->setValue('config.foo', 'bar2');
+		$a->setValue('deep.level.foo', 'bar3');
+
+		$this->assertThat(
+			$a->getValue('foo'),
+			$this->equalTo('bar1')
+		);
+
+		$this->assertThat(
+			$a->getValue('config.foo'),
+			$this->equalTo('bar2')
+		);
+
+		$this->assertThat(
+			$a->getValue('deep.level.foo'),
+			$this->equalTo('bar3')
 		);
 	}
 
@@ -143,10 +185,6 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		);
 
 		// XML and PHP versions do not support stringToObject.
-
-		$this->markTestIncomplete(
-			'Need to test for a file that does not exist.'
-		);
 	}
 
 	/**
@@ -216,6 +254,20 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::makeNamespace method.
+	 */
+	public function testMakeNameSpace()
+	{
+		$a = new JRegistry;
+		$a->makeNameSpace('foo');
+
+		$this->assertThat(
+			in_array('foo', $a->getNameSpaces()),
+			$this->isTrue()
+		);
+	}
+
+	/**
 	 * Test the JRegistry::merge method.
 	 */
 	public function testMerge()
@@ -264,14 +316,12 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}*/
 
 	/**
-	 * Test the JRegistry::toString method.
+	 * Test the JRegistry::setValue method.
+	 * @deprecated	1.6
 	 */
-	public function testToString()
+	public function testSetValue()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
+		// Test is not required because it's the same as testGetValue.
 	}
 
 	/**
@@ -279,9 +329,28 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testToArray()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$a = new JRegistry;
+		$a->setValue('foo1', 'bar1');
+		$a->setValue('foo2', 'bar2');
+		$a->setValue('config.foo3', 'bar3');
+
+		$expected = array(
+			'foo1' => 'bar1',
+			'foo2' => 'bar2'
+		);
+
+		$this->assertThat(
+			$a->toArray(),
+			$this->equalTo($expected)
+		);
+
+		$expected = array(
+			'foo3' => 'bar3'
+		);
+
+		$this->assertThat(
+			$a->toArray('config'),
+			$this->equalTo($expected)
 		);
 	}
 
@@ -290,57 +359,62 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testToObject()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$a = new JRegistry;
+		$a->setValue('foo1', 'bar1');
+		$a->setValue('foo2', 'bar2');
+		$a->setValue('config.foo3', 'bar3');
+
+		$expected = new stdClass;
+		$expected->foo1 = 'bar1';
+		$expected->foo2 = 'bar2';
+
+		$this->assertThat(
+			$a->toObject(),
+			$this->equalTo(
+				$expected
+			)
 		);
-	}
 
-	//
-	// The following methods are deprecated in 1.6
-	//
+		$expected = new stdClass;
+		$expected->foo3 = 'bar3';
 
-	/**
-	 * Test the JRegistry::getNamespaces method.
-	 */
-	public function testGetNameSpaces()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::getValue method.
-	 */
-	public function testGetValue()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$this->assertThat(
+			$a->toObject('config'),
+			$this->equalTo(
+				$expected
+			)
 		);
 	}
 
 	/**
-	 * Test the JRegistry::makeNamespace method.
+	 * Test the JRegistry::toString method.
 	 */
-	public function testMakeNameSpace()
+	public function testToString()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
-		);
-	}
+		$a = new JRegistry;
+		$a->setValue('foo1', 'bar1');
+		$a->setValue('foo2', 'bar2');
+		$a->setValue('config.foo3', 'bar3');
 
-	/**
-	 * Test the JRegistry::setValue method.
-	 */
-	public function testSetValue()
-	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$this->assertThat(
+			trim($a->toString('JSON')),
+			$this->equalTo(
+				'{"foo1":"bar1","foo2":"bar2"}'
+			)
+		);
+
+		$this->assertThat(
+			trim($a->toString('INI')),
+			$this->equalTo(
+				"foo1=bar1\nfoo2=bar2"
+			)
+		);
+
+		$this->assertThat(
+			trim($a->toString('INI')),
+			$this->equalTo(
+				"foo1=bar1\nfoo2=bar2"
+			)
 		);
 	}
 }
