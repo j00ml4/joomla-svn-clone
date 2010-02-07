@@ -326,7 +326,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$a->setValue('foo', 'bar2'),
-			$this->equalTo('bar1')
+			$this->equalTo('bar2')
 		);
 	}
 
