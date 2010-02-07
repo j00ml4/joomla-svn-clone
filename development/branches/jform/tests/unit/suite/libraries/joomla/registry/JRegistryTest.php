@@ -10,37 +10,50 @@ require_once JPATH_BASE.'/libraries/joomla/registry/registry.php';
 class JRegistryTest extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * @todo Implement test__clone().
+	 * Test the JRegistry::__clone method.
 	 */
 	public function test__clone()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$a = JRegistry::getInstance('a');
+		$a->setValue('_default.foo', 'bar');
+		$b = clone $a;
+
+		$this->assertThat(
+			serialize($a),
+			$this->equalTo(serialize($b))
+		);
+
+		$this->assertThat(
+			$a,
+			$this->logicalNot($this->identicalTo($b))
 		);
 	}
 
 	/**
-	 * @todo Implement test__toString().
+	 * Test the JRegistry::__toString method.
 	 */
 	public function test__toString()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$a = JRegistry::getInstance('a');
+		$a->setValue('_default.foo', 'bar');
+
+		// __toString only allows for a JSON value.
+		$this->assertThat(
+			(string) $a,
+			$this->equalTo('{"foo":"bar"}')
 		);
 	}
 
 	/**
 	 * @todo Implement testDef().
 	 */
-	public function testDef()
+	/*public function testDef()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}
+	}*/
 
 	/**
 	 * @todo Implement testGet().
@@ -54,6 +67,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::getInstance method.
 	 */
 	public function testGetInstance()
 	{
@@ -82,6 +96,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::loadArray method.
 	 */
 	public function testLoadArray()
 	{
@@ -101,6 +116,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::loadFile method.
 	 */
 	public function testLoadFile()
 	{
@@ -134,6 +150,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::loadIni method.
 	 */
 	public function testLoadINI()
 	{
@@ -152,6 +169,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::loadJson method.
 	 */
 	public function testLoadJSON()
 	{
@@ -170,6 +188,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test the JRegistry::loadObject method.
 	 */
 	public function testLoadObject()
 	{
@@ -189,15 +208,15 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testLoadXML().
+	 * Test the JRegistry::loadXML method.
 	 */
 	public function testLoadXML()
 	{
-		// Mega file since stringToObject is not implemented yet.
+		// Cannot test since stringToObject is not implemented yet.
 	}
 
 	/**
-	 * @todo Implement testMerge().
+	 * Test the JRegistry::merge method.
 	 */
 	public function testMerge()
 	{
@@ -234,18 +253,18 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testSet().
+	 * Test the JRegistry::set method.
 	 */
-	public function testSet()
+	/*public function testSet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}
+	}*/
 
 	/**
-	 * @todo Implement testToString().
+	 * Test the JRegistry::toString method.
 	 */
 	public function testToString()
 	{
@@ -256,7 +275,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testToArray().
+	 * Test the JRegistry::toArray method.
 	 */
 	public function testToArray()
 	{
@@ -267,7 +286,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testToObject().
+	 * Test the JRegistry::toObject method.
 	 */
 	public function testToObject()
 	{
@@ -282,7 +301,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	//
 
 	/**
-	 * @todo Implement testGetNameSpaces().
+	 * Test the JRegistry::getNamespaces method.
 	 */
 	public function testGetNameSpaces()
 	{
@@ -293,7 +312,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGetValue().
+	 * Test the JRegistry::getValue method.
 	 */
 	public function testGetValue()
 	{
@@ -304,7 +323,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testMakeNameSpace().
+	 * Test the JRegistry::makeNamespace method.
 	 */
 	public function testMakeNameSpace()
 	{
@@ -315,7 +334,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testSetValue().
+	 * Test the JRegistry::setValue method.
 	 */
 	public function testSetValue()
 	{
@@ -324,7 +343,4 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		'This test has not been implemented yet.'
 		);
 	}
-
-
-
 }
