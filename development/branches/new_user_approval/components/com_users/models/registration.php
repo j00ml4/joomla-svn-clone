@@ -173,7 +173,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Bind the data.
 		if (!$user->bind($data)) {
-			$this->setError(JText::sprintf('USERS REGISTRATION BIND FAILED', $user->getError()));
+			$this->setError(JText::sprintf('USERS_REGISTRATION_BIND_FAILED', $user->getError()));
 			return false;
 		}
 
@@ -201,7 +201,16 @@ class UsersModelRegistration extends JModelForm
 			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$data['activation'], false);
 
 			// Get the registration activation e-mail.
-			$message = 'com_users.registration.activate';
+			if ($config->getValue('admin_approval'))
+			{
+				// Get the account verification e-mail.
+				$message = 'com_users.registration.verify';
+			}
+			else
+			{
+				// Get the registration activation e-mail.
+				$message = 'com_users.registration.activate';
+			}
 		}
 		else
 		{
@@ -219,7 +228,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check for an error.
 		if ($return !== true) {
-			$this->setError(JText::_('USERS REGISTRATION SEND MAIL FAILED'));
+			$this->setError(JText::_('USERS_REGISTRATION_SEND_MAIL_FAILED'));
 			return false;
 		}
 
@@ -231,12 +240,15 @@ class UsersModelRegistration extends JModelForm
 	 *
 	 * @access	public
 	 * @param	string		$token		The activation token.
+	 * @param	integer		$block		Value for the block field in the users table. Default = 0
+	 * @param	boolean		$isAdmin	True if an admin must approve the registration. Default = false
 	 * @return	boolean		True on success, false on failure.
 	 * @since	1.0
 	 */
-	function activate($token)
+	function activate($token, $block=0, $isAdmin=false)
 	{
 		$config = &JFactory::getConfig();
+		$params = &JComponentHelper::getParams('com_users');
 
 		// Get the user id based on the token.
 		$this->_db->setQuery(
@@ -258,8 +270,25 @@ class UsersModelRegistration extends JModelForm
 
 		// Activate the user.
 		$user = &JFactory::getUser($userId);
-		$user->set('activation', '');
-		$user->set('block', '0');
+		$user->set('block', $block);
+
+		if ($config->getValue('admin_approval'))
+		{
+			if ($isAdmin === false)
+			{
+				$token = JUtility::getHash(JUserHelper::genRandomPassword());
+				$user->set('activation', $this->_db->Quote($token));
+				$user->setParam('admin_approval', 1);
+			}
+			else
+			{
+				$user->set('activation', '');
+			}
+		}
+		else
+		{
+			$user->set('activation', '');
+		}
 
 		// Store the user object.
 		if (!$user->save()) {
@@ -273,9 +302,20 @@ class UsersModelRegistration extends JModelForm
 		$data['mailfrom'] = $config->getValue('mailfrom');
 		$data['sitename'] = $config->getValue('sitename');
 
+		if ($isAdmin === false)
+		{
+			// Get the admin registration activation e-mail.
+			$message = 'com_users.registration.admin.activate';
+		}
+		else
+		{
+			// Get the registration confirmation e-mail.
+			$message = 'com_users.registration.confirm';
+		}
+
 		// Load the message template and bind the data.
 		jimport('joomla.utilities.simpletemplate');
-		$template = JxSimpleTemplate::getInstance('com_users.registration.confirm');
+		$template = JxSimpleTemplate::getInstance();
 		$template->bind($data);
 
 		// Send the registration e-mail.
@@ -283,7 +323,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check for an error.
 		if ($return !== true) {
-			$this->setError(JText::_('USERS ACTIVATION SEND MAIL FAILED'));
+			$this->setError(JText::_('USERS_ACTIVATION_SEND_MAIL_FAILED'));
 			return false;
 		}
 
