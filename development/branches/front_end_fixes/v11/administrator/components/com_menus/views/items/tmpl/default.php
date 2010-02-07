@@ -33,7 +33,7 @@ $userId	= $user->get('id');
 
 			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
+				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.all'), true);?>
 			</select>
 
 			<select name="menutype" class="inputbox" onchange="this.form.submit()">
@@ -45,10 +45,6 @@ $userId	= $user->get('id');
 				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 			</select>
 
-			<select name="filter_menutype" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JMenu_Option_Select_Menutype');?></option>
-				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
-			</select>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
