@@ -27,6 +27,31 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-Feb-2010 Hannes Papenberg
+^ Consolidated a few translation strings in en-GB.ini and removed the en-GB.ini.old.ini in frontend
+# Fixed required fields in profile plugin - Thanks Matrikular!
+# Fixed backend menu translation - JLanguage::hasKey() was broken. - Thanks Matrikular!
+
+07-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_feed site and admin modules ini/keys. Enabled desc translation in com_modules select.
+^ Refactored mod_latest ini/keys
+^ Refactored mod_logged ini/keys + added some
+^ Refactored mod_login (admin) ini/keys. Prevented it from being unpublished.
+^ Completed refactoring of mod_menu (admin) ini/keys.
+
+06-Feb-2010 Mark Dexter
++ Test Commit (remove later)
+
+06-Feb-2010 Jean-Marie Simonet
+^ Refactored com_modules inis/keys
+^ Refactored globally modules cache and cache-time keys
+
+06-Feb-2010 Hannes Papenberg
+# Partially fixed the login when site is offline
+
+05-Feb-2010 Mark Dexter
+^ Improve documentation for SeleniumConfig sample file
+
 05-Feb-2010 Mark Dexter
 # Revert revision 14595 (caused errors in user and menu item edit)
 
@@ -351,7 +376,6 @@ $ Change the language string JOption_Access_Show_All_Sections to JOption_Access_
 05-Jan-2010 Hannes Papenberg
  ^ Removed #__components and moved the admin menu information to #__menu. Thanks Jonnathan!
 
->>>>>>> .r14052
 05-Jan-2010 Andrew Eddie
  ^ Accepted [#19268] Refactoring mod_popular in the BackEnd.
  ^ Added support for layout and modal forms in JControllerForm::edit method.
