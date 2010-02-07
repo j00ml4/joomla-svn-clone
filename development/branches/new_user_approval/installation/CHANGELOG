@@ -27,6 +27,30 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-Feb-2010 Hannes Papenberg
+^ Consolidated a few translation strings in en-GB.ini and removed the en-GB.ini.old.ini in frontend
+# Fixed required fields in profile plugin - Thanks Matrikular!
+# Fixed backend menu translation - JLanguage::hasKey() was broken. - Thanks Matrikular!
+# Fixed bug in discover function. When two plugins have the same name, but are in different folders, they were not discovered
+
+07-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_feed site and admin modules ini/keys. Enabled desc translation in com_modules select.
+^ Refactored mod_latest ini/keys
+^ Refactored mod_logged ini/keys + added some
+^ Refactored mod_login (admin) ini/keys. Prevented it from being unpublished.
+^ Completed refactoring of mod_menu (admin) ini/keys.
+^ Refactored mod_online ini/keys + bug
+
+06-Feb-2010 Mark Dexter
++ Test Commit (remove later)
+
+06-Feb-2010 Jean-Marie Simonet
+^ Refactored com_modules inis/keys
+^ Refactored globally modules cache and cache-time keys
+
+06-Feb-2010 Hannes Papenberg
+# Partially fixed the login when site is offline
+
 05-Feb-2010 Mark Dexter
 ^ Improve documentation for SeleniumConfig sample file
 
