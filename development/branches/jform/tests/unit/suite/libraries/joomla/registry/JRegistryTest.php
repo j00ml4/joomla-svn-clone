@@ -321,7 +321,13 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testSetValue()
 	{
-		// Test is not required because it's the same as testGetValue.
+		$a = new JRegistry;
+		$a->setValue('foo', 'bar1');
+
+		$this->assertThat(
+			$a->setValue('foo', 'bar2'),
+			$this->equalTo('bar1')
+		);
 	}
 
 	/**
