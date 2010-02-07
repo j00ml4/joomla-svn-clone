@@ -53,4 +53,3 @@ class JElementSpacerTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

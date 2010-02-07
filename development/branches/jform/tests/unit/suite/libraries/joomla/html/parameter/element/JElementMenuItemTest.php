@@ -42,4 +42,3 @@ class JElementMenuItemTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

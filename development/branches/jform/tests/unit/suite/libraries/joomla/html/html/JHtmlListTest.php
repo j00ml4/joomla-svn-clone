@@ -119,4 +119,3 @@ class JHtmlListTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

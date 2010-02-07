@@ -42,4 +42,3 @@ class JElementImageListTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>

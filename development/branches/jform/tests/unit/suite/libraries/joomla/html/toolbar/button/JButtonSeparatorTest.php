@@ -54,4 +54,3 @@ class JButtonSeparatorTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
-?>
