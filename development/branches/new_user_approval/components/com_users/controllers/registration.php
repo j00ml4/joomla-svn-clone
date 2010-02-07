@@ -29,6 +29,7 @@ class UsersControllerRegistration extends UsersController
 	{
 		$user		= &JFactory::getUser();
 		$uParams	= &JComponentHelper::getParams('com_users');
+		$config		= &JFactory::getConfig();
 
 		// If the user is logged in, return them back to the homepage.
 		if ($user->get('id')) {
@@ -47,25 +48,46 @@ class UsersControllerRegistration extends UsersController
 
 		// Check that the token is in a valid format.
 		if ($token === null || strlen($token) !== 32) {
-			JError::raiseError(403, JText::_('USERS ACTIVATION INVALID TOKEN'));
+			JError::raiseError(403, JText::_('USERS_ACTIVATION_INVALID_TOKEN'));
 			return false;
 		}
 
 		// Attempt to activate the user.
-		$return = $model->activate($token);
+		$need_approval = ($config->getValue('admin_approval') === 1) ? true : false;
+
+		if ($need_approval === false)
+		{
+			$return = $model->activate($token);
+		}
+		else
+		{
+			$isAdmin= ($user->getParam('admin_approval','0') === 1) ? true : false;
+			$return = $model->activate($token, ($isAdmin === true) ? 0 : 1, $isAdmin);
+		}
 
 		// Check for errors.
 		if ($return === false)
 		{
 			// Redirect back to the homepage.
-			$this->setMessage(JText::sprintf('USERS ACTIVATION SAVE FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('USERS_ACTIVATION_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect('index.php');
 			return false;
 		}
 
-		// Redirect to the login screen.
-		$this->setMessage(JText::_('USERS ACTIVATION SAVE SUCCESS'));
-		$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		if ($need_approval === false)
+		{
+			// Redirect to the login screen.
+			$this->setMessage(JText::_('USERS_ACTIVATION_SAVE_SUCCESS'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		}
+		else
+		{
+			$message = ($isAdmin === false) ? 'USERS_ACTIVATION_NEED_APPROVE' : 'USERS_ACTIVATION_ADMIN_SAVE_SUCCESS';
+
+			// Redirect back to the homepage.
+			$this->setMessage(JText::sprintf($message));
+			$this->setRedirect('index.php');
+		}
 		return true;
 	}
 
@@ -131,7 +153,7 @@ class UsersControllerRegistration extends UsersController
 			$app->setUserState('com_users.registration.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('USERS REGISTRATION SAVE FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('USERS_REGISTRATION_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration', false));
 			return false;
 		}
@@ -140,7 +162,7 @@ class UsersControllerRegistration extends UsersController
 		$app->setUserState('com_users.registration.data', null);
 
 		// Redirect to the profile screen.
-		$this->setMessage(JText::_('USERS REGISTRATION SAVE SUCCESS'));
+		$this->setMessage(JText::_('USERS_REGISTRATION_SAVE_SUCCESS'));
 		$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
 
 		return true;
