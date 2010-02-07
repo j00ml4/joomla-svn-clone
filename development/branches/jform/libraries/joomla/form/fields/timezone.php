@@ -1,15 +1,17 @@
 <?php
-
 /**
  * @version		$Id$
+ * @package		Joomla.Framework
+ * @subpackage	Form
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-defined('JPATH_BASE') or die;
-jimport('joomla.html.html');
 
-// Import joomla field list class
-require_once dirname(__FILE__) . DS . 'groupedlist.php';
+defined('JPATH_BASE') or die;
+
+jimport('joomla.html.html');
+jimport('joomla.form.formfield');
+JLoader::register('JFormFieldGroupedList', dirname(__FILE__).'/groupedlist.php');
 
 /**
  * Form Field class for the Joomla Framework.

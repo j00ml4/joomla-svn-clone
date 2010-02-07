@@ -1,13 +1,17 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Framework
+ * @subpackage	Form
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_BASE') or die;
 
-require_once dirname(__FILE__).DS.'list.php';
+jimport('joomla.html.html');
+jimport('joomla.form.formfield');
+JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
 /**
  * Form Field to display a list of the layouts for a component view from the extension or default template overrides.
@@ -19,14 +23,18 @@ require_once dirname(__FILE__).DS.'list.php';
 class JFormFieldComponentLayout extends JFormFieldList
 {
 	/**
+	 * The form field type.
+	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_name = 'ComponentLayout';
+	protected $type = 'ComponentLayout';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
