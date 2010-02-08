@@ -34,7 +34,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testAddElementPath().
+	 * Test the JParameter::addElementPath method.
 	 */
 	public function testAddElementPath()
 	{
@@ -54,7 +54,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testBind().
+	 * Test the JParameter::bind method.
 	 */
 	public function testBind()
 	{
@@ -94,7 +94,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testDef().
+	 * Test the JParameter::def method
 	 */
 	public function testDef()
 	{
@@ -114,40 +114,71 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGet().
+	 * Test the JParameter::get method.
 	 */
 	public function testGet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$p = new JParameter('{"foo":"bar"}');
+
+		$this->assertThat(
+			$p->get('foo'),
+			$this->equalTo('bar')
+		);
+
+		$this->assertThat(
+			$p->get('foo2'),
+			$this->equalTo(null)
+		);
+
+		$this->assertThat(
+			$p->get('foo2', 'bar2'),
+			$this->equalTo('bar2')
 		);
 	}
 
 	/**
-	 * @todo Implement testGetGroups().
+	 * Test the JParameter::getGroups method.
 	 */
 	public function testGetGroups()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$p = new JParameter('{"foo":"bar"}', dirname(__FILE__).'/jparameter.xml');
+
+		$this->assertThat(
+			$p->getGroups(),
+			$this->equalTo(
+				array(
+					'basic' => 1,
+					'advanced' => 2,
+				)
+			)
 		);
 	}
 
 	/**
-	 * @todo Implement testGetNumParams().
+	 * Test the JParameter::getNumParams() method.
 	 */
 	public function testGetNumParams()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$p = new JParameter('{"foo":"bar"}', dirname(__FILE__).'/jparameter.xml');
+
+		$this->assertThat(
+			$p->getNumParams('unknown'),
+			$this->isFalse()
+		);
+
+		$this->assertThat(
+			$p->getNumParams('basic'),
+			$this->equalTo(1)
+		);
+
+		$this->assertThat(
+			$p->getNumParams('advanced'),
+			$this->equalTo(2)
 		);
 	}
 
 	/**
-	 * @todo Implement testGetParam().
+	 * Test the JParameter::getParam method.
 	 */
 	public function testGetParam()
 	{
@@ -158,7 +189,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testGetParams().
+	 * Test the JParameter::getParams method.
 	 */
 	public function testGetParams()
 	{
@@ -169,7 +200,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testLoadElement().
+	 * Test the JParameter::loadElement method.
 	 */
 	public function testLoadElement()
 	{
@@ -180,7 +211,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testLoadSetupFile().
+	 * Test the JParameter::loadSetupFile method.
 	 */
 	public function testLoadSetupFile()
 	{
@@ -191,7 +222,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testRender().
+	 * Test the JParameter::render method.
 	 */
 	public function testRender()
 	{
@@ -202,7 +233,7 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testRenderToArray().
+	 * Test the JParameter::renderToArray method.
 	 */
 	public function testRenderToArray()
 	{
@@ -213,18 +244,25 @@ class JParameterTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @todo Implement testSet().
+	 * Test the JParameter::set method.
 	 */
 	public function testSet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		$p = new JParameter('');
+
+		$this->assertThat(
+			$p->set('foo', 'bar'),
+			$this->equalTo('bar')
+		);
+
+		$this->assertThat(
+			$p->get('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * @todo Implement testSetXML().
+	 * Test the JParameter::setXML method.
 	 */
 	public function testSetXML()
 	{
