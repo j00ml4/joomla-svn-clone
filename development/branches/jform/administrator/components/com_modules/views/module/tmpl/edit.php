@@ -54,10 +54,12 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 			<?php echo $this->form->getLabel('showtitle'); ?>
 			<?php echo $this->form->getInput('showtitle'); ?>
-
+			
+			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<?php echo $this->form->getLabel('published'); ?>
 			<?php echo $this->form->getInput('published'); ?>
-
+			<?php endif; ?>
+			
 			<?php echo $this->form->getLabel('position'); ?>
 			<?php echo $this->form->getInput('position'); ?>
 
@@ -78,12 +80,12 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = (string) $this->item->xml->description) : ?>
 					<label>
-						<?php echo JText::_('Modules_Module_Description'); ?>
+						<?php echo JText::_('MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
 					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo JText::_('Modules_XML_data_not_available'); ?>
+				<?php echo JText::_('MODULES_ERR_XML'); ?>
 			<?php endif; ?>
 		</fieldset>
 	</div>
@@ -107,7 +109,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="clr"></div>
 	<?php if ($hasContent) : ?>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Custom Output'); ?></legend>
+			<legend><?php echo JText::_('MODULES_CUSTOM_OUTPUT'); ?></legend>
 
 			<?php echo $this->form->getLabel('content'); ?>
 			<?php echo $this->form->getInput('content'); ?>
