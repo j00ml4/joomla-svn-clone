@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,7 +47,7 @@ class ConfigModelComponent extends JModelForm
 	public function getForm()
 	{
 		$option = $this->getState('component.option');
-		$path 	= $this->getState('component.path', '');
+		$path	= $this->getState('component.path', '');
 		jimport('joomla.form.form');
 
 		if ($path){
@@ -83,8 +83,8 @@ class ConfigModelComponent extends JModelForm
 
 		// Load common and local language files.
 		$lang = &JFactory::getLanguage();
-		$lang->load($option);
 		$lang->load($option, JPATH_COMPONENT);
+		$lang->load($option);
 
 		$result = JComponentHelper::getComponent($option);
 
@@ -100,7 +100,7 @@ class ConfigModelComponent extends JModelForm
 	 */
 	public function save($data)
 	{
-		$table 	= &JTable::getInstance('extension');
+		$table	= &JTable::getInstance('extension');
 
 		// Save the rules.
 		if (isset($data['params']) && isset($data['params']['rules']))
@@ -116,7 +116,9 @@ class ConfigModelComponent extends JModelForm
 					$this->setError($asset->getError());
 					return false;
 				}
-				unset($data['option']);// We don't need this anymore
+				// We don't need this anymore
+					unset($data['option']);
+					unset($data['params']['rules']);
 			}
 			else
 			{
@@ -131,8 +133,8 @@ class ConfigModelComponent extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
-		unset($data['id']);		
-		
+		unset($data['id']);
+
 		// Bind the data.
 		if (!$table->bind($data))
 		{

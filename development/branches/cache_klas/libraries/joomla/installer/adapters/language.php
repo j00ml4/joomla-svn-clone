@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -39,7 +39,7 @@ class JInstallerLanguage extends JAdapterInstance
 	public function install()
 	{
 		$this->manifest = $this->parent->getManifest();
-		$root = &$manifest->document;
+		$root = &$this->manifest->document;
 
 		// Get the client application target
 		if ((string)$this->manifest->attributes()->client == 'both')
@@ -307,7 +307,7 @@ class JInstallerLanguage extends JAdapterInstance
 		}
 
 		// Copy all the necessary files
-		if ($this->parent->parseFiles($element) === false)
+		if ($this->parent->parseFiles($xml->files) === false)
 		{
 			// Install failed, rollback changes
 			$this->parent->abort();

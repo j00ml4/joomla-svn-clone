@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -242,8 +242,8 @@ class JCacheStorageFile extends JCacheStorage
 	 *
 	 * @access private
 	 *
-	 * @param string  $id   Cache key to expire.
-	 * @param string  $group The cache data group.
+	 * @param string  $id		Cache key to expire.
+	 * @param string  $group	The cache data group.
 	 */
 	function _setExpire($id, $group)
 	{
@@ -280,7 +280,7 @@ class JCacheStorageFile extends JCacheStorage
 		if (!is_dir($dir)) {
 
 			// Make sure the index file is there
-			$indexFile      = $dir . DS . 'index.html';
+			$indexFile = $dir.'/index.html';
 			@ mkdir($dir) && file_put_contents($indexFile, '<html><body bgcolor="#FFFFFF"></body></html>');
 		}
 

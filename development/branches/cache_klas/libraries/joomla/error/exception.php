@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Error
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
   */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die();
 /**
  * Joomla! Exception object.
  *
- * @package 	Joomla.Framework
+ * @package	Joomla.Framework
  * @subpackage	Error
  * @since		1.5
  */
@@ -88,7 +88,7 @@ class JException extends Exception
 
 	/**
 	 * Constructor
-	 * 	- used to set up the error with all needed error details.
+	 *	- used to set up the error with all needed error details.
 	 *
 	 * @access	protected
 	 * @param	string	$msg		The error message
@@ -149,11 +149,24 @@ class JException extends Exception
 	 *
 	 * @access	public
 	 * @return	string Error message
+	 * @since	1.6
+	 */
+	public function __toString()
+	{
+		return $this->message;
+	}
+
+	/**
+	 * Returns to error message
+	 *
+	 * @access	public
+	 * @deprecated
+	 * @return	string Error message
 	 * @since	1.5
 	 */
 	public function toString()
 	{
-		return $this->message;
+		return (string)$this;
 	}
 
 	/**
@@ -165,7 +178,7 @@ class JException extends Exception
 	 * @return	mixed The value of the property
 	 * @see		getProperties()
 	 * @since	1.5
- 	 */
+	 */
 	public function get($property, $default=null)
 	{
 		if (isset($this->$property)) {
@@ -182,7 +195,7 @@ class JException extends Exception
 	 * @return	array
 	 * @see		get()
 	 * @since	1.5
- 	 */
+	 */
 	public function getProperties($public = true)
 	{
 		$vars  = get_object_vars($this);
@@ -225,7 +238,7 @@ class JException extends Exception
 
 		// Check if only the string is requested
 		if (JError::isError($error) && $toString) {
-			return $error->toString();
+			return (string)$error;
 		}
 
 		return $error;

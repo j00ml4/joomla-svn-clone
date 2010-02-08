@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -55,14 +55,14 @@ class ModulesViewModules extends JView
 		$state	= $this->get('State');
 		$canDo	= ModulesHelper::getActions();
 
-		JToolBarHelper::title(JText::_('Modules_Manager_Modules'), 'module.png');
+		JToolBarHelper::title(JText::_('COM_MODULES_MANAGER_MODULES'), 'module.png');
 		if ($canDo->get('core.create')) {
 			//JToolBarHelper::addNew('module.add');
 			$bar = &JToolBar::getInstance('toolbar');
 			$bar->appendButton('Popup', 'new', 'New', 'index.php?option=com_modules&amp;view=select&amp;tmpl=component', 850, 400);
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('module.edit');
+			JToolBarHelper::editList('module.edit','JTOOLBAR_EDIT');
 		}
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::custom('modules.duplicate', 'copy.png', 'copy_f2.png', 'JToolbar_Duplicate', true);
@@ -72,15 +72,15 @@ class ModulesViewModules extends JView
 			JToolBarHelper::custom('modules.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JToolbar_Disable', true);
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'modules.delete');
+			JToolBarHelper::deleteList('', 'modules.delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::trash('modules.trash');
+			JToolBarHelper::trash('modules.trash','JTOOLBAR_TRASH');
 		}
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_modules');
 		}
-		JToolBarHelper::help('screen.module');
+		JToolBarHelper::help('screen.module','JTOOLBAR_HELP');
 	}
 }

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -17,7 +17,7 @@ defined('JPATH_BASE') or die;
  * the user's navigated path within the Joomla application.
  *
  * @abstract
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Application
  * @since		1.5
  */
@@ -48,9 +48,9 @@ class JPathway extends JObject
 	 * Returns a JPathway object
 	 *
 	 * @access	public
-	 * @param   string  $client  The name of the client
-	 * @param array     $options An associative array of options
-	 * @return JPathway 	A pathway object.
+	 * @param	string		$client  The name of the client
+	 * @param	array		$options An associative array of options
+	 * @return	JPathway	A pathway object.
 	 * @since	1.5
 	 */
 	static function getInstance($client, $options = array())
@@ -198,7 +198,7 @@ class JPathway extends JObject
 	function _makeItem($name, $link)
 	{
 		$item = new stdClass();
-		$item->name = html_entity_decode($name);
+		$item->name = html_entity_decode($name, ENT_COMPAT, 'UTF-8');
 		$item->link = $link;
 
 		return $item;

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	templates.bluestork
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -69,7 +69,7 @@ $app = JFactory::getApplication();
 		<div class="border">
 			<div class="padding">
 				<div id="toolbar-box">
-   			<div class="t">
+				<div class="t">
 				<div class="t">
 					<div class="t"></div>
 				</div>
@@ -84,17 +84,17 @@ $app = JFactory::getApplication();
 					<div class="b"></div>
 				</div>
 			</div>
-  		</div>
-   		<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
 		<?php if (!JRequest::getInt('hidemainmenu')): ?>
 		<jdoc:include type="modules" name="submenu" style="rounded" id="submenu-box" />
 		<?php endif; ?>
 		<jdoc:include type="message" />
 		<div id="element-box">
 			<div class="t">
-		 		<div class="t">
+				<div class="t">
 					<div class="t"></div>
-		 		</div>
+				</div>
 			</div>
 			<div class="m">
 				<jdoc:include type="component" />
@@ -105,7 +105,7 @@ $app = JFactory::getApplication();
 					<div class="b"></div>
 				</div>
 			</div>
-   		</div>
+		</div>
 		<noscript>
 			<?php echo  JText::_('WARNJAVASCRIPT') ?>
 		</noscript>

@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Renders a newsfeed selection element
  *
- * @package 	Newsfeeds
+ * @package		Newsfeeds
  * @subpackage	Parameter
  * @since		1.5
  */

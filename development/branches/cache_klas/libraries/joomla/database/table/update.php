@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		Joomla.Framework
 * @subpackage	Table
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 * @license		GNU General Public License, see LICENSE.php
 */
 
@@ -14,9 +14,9 @@ defined('JPATH_BASE') or die();
  * Update table
  * Stores updates temporarily
  *
- * @package 	Joomla.Framework
- * @subpackage		Table
- * @since	1.6
+ * @package		Joomla.Framework
+ * @subpackage	Table
+ * @since		1.6
  */
 class JTableUpdate extends JTable
 {
@@ -62,14 +62,14 @@ class JTableUpdate extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		if (isset( $array['control'] ) && is_array( $array['control'] ))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['control']);
-			$array['control'] = $registry->toString();
+			$array['control'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);

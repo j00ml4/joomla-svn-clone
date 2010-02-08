@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -64,15 +64,15 @@ class UsersViewUsers extends JView
 
 		if ($canDo->get('core.create'))
 		{
-			JToolBarHelper::custom('user.add', 'new.png', 'new_f2.png', 'New', false);
+			JToolBarHelper::custom('user.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
 		}
 		if ($canDo->get('core.edit'))
 		{
-			JToolBarHelper::custom('user.edit', 'edit.png', 'edit_f2.png', 'Edit', true);
+			JToolBarHelper::custom('user.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 		}
 		if ($canDo->get('core.delete'))
 		{
-			JToolBarHelper::deleteList('', 'users.delete');
+			JToolBarHelper::deleteList('', 'users.delete','JTOOLBAR_TRASH');
 		}
 
 		JToolBarHelper::divider();
@@ -82,6 +82,6 @@ class UsersViewUsers extends JView
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.users');
+		JToolBarHelper::help('screen.users.users','JTOOLBAR_HELP');
 	}
 }

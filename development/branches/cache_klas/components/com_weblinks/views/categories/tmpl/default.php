@@ -3,7 +3,7 @@
  * @version		$Id: default.php 12812 2009-09-22 03:58:25Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_weblinks
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,7 +22,7 @@ $difLevel = 0;
 
 <?php if ($this->params->get('show_page_title', 1)) : ?>
 <h1>
-        <?php echo $this->escape($this->params->get('page_title')); ?>
+		<?php echo $this->escape($this->params->get('page_title')); ?>
 </h1>
 <?php endif; ?>
 
@@ -57,14 +57,14 @@ $difLevel = 0;
 			echo "<li>";
 		}
 ?>
-  	    <span class="jitem-title"><a href="<?php echo WeblinksRoute::category($this->escape($item->slug));?>">
-        	<?php echo $this->escape($item->title); ?></a>
-        </span>
-        <?php if ($item->description) : ?>
-        	<div class="jdescription">
-            	<?php echo $item->description; ?>
-            </div>
-        <?php endif; ?>
+		<span class="jitem-title"><a href="<?php echo WeblinksRoute::category($this->escape($item->slug));?>">
+			<?php echo $this->escape($item->title); ?></a>
+		</span>
+		<?php if ($item->description) : ?>
+			<div class="jdescription">
+				<?php echo $item->description; ?>
+			</div>
+		<?php endif; ?>
 
 <?php
 		// The next item is deeper.

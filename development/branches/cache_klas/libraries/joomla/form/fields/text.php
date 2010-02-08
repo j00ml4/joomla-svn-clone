@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -38,6 +38,6 @@ class JFormFieldText extends JFormField
 		$onchange =((string)$this->_element->attributes()->onchange) ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
 		$maxLength =((string)$this->_element->attributes()->maxlength) ? ' maxlength="'.$this->_element->attributes()->maxlength.'"' : '';
 
-		return '<input type="text" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value).'"'.$class.$size.$readonly.$onchange.$maxLength.' />';
+		return '<input type="text" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"'.$class.$size.$readonly.$onchange.$maxLength.' />';
 	}
 }

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     $Id$
- * @package     Joomla.Framework
+ * @version		$Id$
+ * @package		Joomla.Framework
  * @subpackage  Utilities
- * @copyright   Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
@@ -13,9 +13,9 @@ defined('JPATH_BASE') or die;
 /**
  * Wrapper class for php SimpleXMLElement.
  *
- * @package     Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage  Utilities
- * @since       1.6
+ * @since		1.6
  */
 class JXMLElement extends SimpleXMLElement
 {
@@ -77,7 +77,7 @@ class JXMLElement extends SimpleXMLElement
 
 		//-- For each attribute, add attr="value"
 		foreach($this->attributes() as $attr) {
-			$out .= ' '.$attr->getName().'="'.htmlspecialchars((string)$attr).'"';
+			$out .= ' '.$attr->getName().'="'.htmlspecialchars((string)$attr, ENT_COMPAT, 'UTF-8').'"';
 		}
 
 		//-- If there are no children and it contains no data, end it off with a />
@@ -110,7 +110,7 @@ class JXMLElement extends SimpleXMLElement
 			elseif((string)$this)
 			{
 				//-- If there is data, close off the start tag and add the data
-				$out .= '>'.htmlspecialchars((string)$this);
+				$out .= '>'.htmlspecialchars((string)$this, ENT_COMPAT, 'UTF-8');
 			}
 
 			//-- Add the end tag

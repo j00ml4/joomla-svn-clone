@@ -3,7 +3,7 @@
  * @version		$Id:tar.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	FileSystem
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -19,7 +19,7 @@ defined('JPATH_BASE') or die;
  * @contributor  Michael Slusarz <slusarz@horde.org>
  * @contributor  Michael Cochrane <mike@graftonhall.co.nz>
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	FileSystem
  * @since		1.5
  */
@@ -124,15 +124,15 @@ class JArchiveTar extends JObject
 
 					$mode = hexdec(substr($info['mode'], 4, 3));
 					$file['attr'] = (($info['typeflag'] == 0x35) ? 'd' : '-') .
-					 (($mode & 0x400) ? 'r' : '-') .
-					 (($mode & 0x200) ? 'w' : '-') .
-					 (($mode & 0x100) ? 'x' : '-') .
-					 (($mode & 0x040) ? 'r' : '-') .
-					 (($mode & 0x020) ? 'w' : '-') .
-					 (($mode & 0x010) ? 'x' : '-') .
-					 (($mode & 0x004) ? 'r' : '-') .
-					 (($mode & 0x002) ? 'w' : '-') .
-					 (($mode & 0x001) ? 'x' : '-');
+					(($mode & 0x400) ? 'r' : '-') .
+					(($mode & 0x200) ? 'w' : '-') .
+					(($mode & 0x100) ? 'x' : '-') .
+					(($mode & 0x040) ? 'r' : '-') .
+					(($mode & 0x020) ? 'w' : '-') .
+					(($mode & 0x010) ? 'x' : '-') .
+					(($mode & 0x004) ? 'r' : '-') .
+					(($mode & 0x002) ? 'w' : '-') .
+					(($mode & 0x001) ? 'x' : '-');
 				} else {
 					/* Some other type. */
 				}

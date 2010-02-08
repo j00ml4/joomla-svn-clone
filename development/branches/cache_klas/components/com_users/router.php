@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -199,7 +199,7 @@ function UsersParseRoute($segments)
 	if ($memberId)
 	{
 		// Set the package id.
-		$vars['member_id'] = (int)$memberId; 
+		$vars['member_id'] = (int)$memberId;
 
 		// Set the view to package if not already set.
 		if (empty($vars['view'])) {

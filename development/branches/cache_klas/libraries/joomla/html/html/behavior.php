@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,7 +11,7 @@
  * Utility class for javascript behaviors
  *
  * @static
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	HTML
  * @version		1.5
  */
@@ -56,7 +56,7 @@ abstract class JHtmlBehavior
 			self::framework(false);
 		}
 
-		JHtml::script('mootools-'.$type.$uncompressed.'.js', 'media/system/js/', false);
+		JHtml::script('system/mootools-'.$type.$uncompressed.'.js', false, true);
 		$loaded[$type] = true;
 		return;
 	}
@@ -76,27 +76,27 @@ abstract class JHtmlBehavior
 
 	public static function caption()
 	{
-		JHtml::script('caption.js');
+		JHtml::script('system/caption.js', false, true);
 	}
 
 	public static function formvalidation()
 	{
-		JHtml::script('validate.js');
+		JHtml::script('system/validate.js', false, true);
 	}
 
 	public static function switcher()
 	{
 		JHtml::_('behavior.framework');
-		JHtml::script('switcher.js' );
+		JHtml::script('system/switcher.js', false, true);
 
 		$script = "
 			document.switcher = null;
 			window.addEvent('domready', function(){
-			 	toggler = document.id('submenu')
-			  	element = document.id('config-document')
-			  	if(element) {
-			  		document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
-			  	}
+				toggler = document.id('submenu')
+				element = document.id('config-document')
+				if(element) {
+					document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
+				}
 			});";
 
 		JFactory::getDocument()->addScriptDeclaration($script);
@@ -104,7 +104,7 @@ abstract class JHtmlBehavior
 
 	public static function combobox()
 	{
-		JHtml::script('combobox.js');
+		JHtml::script('system/combobox.js', false, true);
 	}
 
 	public static function tooltip($selector='.hasTip', $params = array())
@@ -167,8 +167,8 @@ abstract class JHtmlBehavior
 		if (!isset($included)) {
 			// Load the javascript and css
 			JHtml::_('behavior.framework');
-			JHtml::script('modal.js');
-			JHtml::stylesheet('modal.css');
+			JHtml::script('system/modal.js', false, true);
+			JHtml::stylesheet('system/modal.css', array(), true);
 
 			$included = true;
 		}
@@ -213,9 +213,9 @@ abstract class JHtmlBehavior
 
 	public static function uploader($id='file-upload', $params = array(), $upload_queue='upload-queue')
 	{
-		JHtml::script('swf.js');
-		JHtml::script('progressbar.js');
-		JHtml::script('uploader.js');
+		JHtml::script('system/swf.js', false, true);
+		JHtml::script('system/progressbar.js', false, true);
+		JHtml::script('system/uploader.js', false, true);
 
 		static $uploaders;
 
@@ -321,8 +321,8 @@ abstract class JHtmlBehavior
 
 		// Include mootools framework
 		JHtml::_('behavior.framework');
-		JHtml::script('mootree.js');
-		JHtml::stylesheet('mootree.css');
+		JHtml::script('system/mootree.js', false, true);
+		JHtml::stylesheet('system/mootree.css', array(), true);
 
 		if (isset($trees[$id]) && ($trees[$id])) {
 			return;
@@ -332,7 +332,7 @@ abstract class JHtmlBehavior
 		$opt['div']		= (array_key_exists('div', $params)) ? $params['div'] : $id.'_tree';
 		$opt['mode']	= (array_key_exists('mode', $params)) ? $params['mode'] : 'folders';
 		$opt['grid']	= (array_key_exists('grid', $params)) ? '\\'.$params['grid'] : '\\true';
-		$opt['theme']	= (array_key_exists('theme', $params)) ? $params['theme'] : JURI::root(true).'/media/system/images/mootree.gif';
+		$opt['theme']	= (array_key_exists('theme', $params)) ? $params['theme'] : JHTML::_('image', 'system/mootree.gif', '', array(), true, true);
 
 		// Event handlers
 		$opt['onExpand']	= (array_key_exists('onExpand', $params)) ? '\\'.$params['onExpand'] : null;
@@ -368,9 +368,9 @@ abstract class JHtmlBehavior
 	public static function calendar()
 	{
 		$document = &JFactory::getDocument();
-		JHtml::stylesheet('calendar-jos.css', 'media/system/css/', array(' title' => JText::_('green') ,' media' => 'all'));
-		JHtml::script('calendar.js', 'media/system/js/');
-		JHtml::script('calendar-setup.js', 'media/system/js/');
+		JHtml::stylesheet('system/calendar-jos.css', array(' title' => JText::_('green') ,' media' => 'all'), true);
+		JHtml::script('system/calendar.js', false, true);
+		JHtml::script('system/calendar-setup.js', false, true);
 
 		$translation = JHtmlBehavior::_calendartranslation();
 		if ($translation) {
@@ -386,8 +386,8 @@ abstract class JHtmlBehavior
 		// Include mootools framework
 		JHtmlBehavior::mootools();
 
-		$config 	 = &JFactory::getConfig();
-		$lifetime 	 = ($config->getValue('lifetime') * 60000);
+		$config	= &JFactory::getConfig();
+		$lifetime	= ($config->getValue('lifetime') * 60000);
 		$refreshTime =  ($lifetime <= 60000) ? 30000 : $lifetime - 60000;
 		//refresh time is 1 minute less than the liftime assined in the configuration.php file
 
@@ -396,8 +396,8 @@ abstract class JHtmlBehavior
 		$script .= 'function keepAlive() {';
 		$script .=  '	var myAjax = new Ajax("index.php", { method: "get" }).request();';
 		$script .=  '}';
-		$script .= 	' window.addEvent("domready", function()';
-		$script .= 	'{ keepAlive.periodical('.$refreshTime.'); }';
+		$script .=	' window.addEvent("domready", function()';
+		$script .=	'{ keepAlive.periodical('.$refreshTime.'); }';
 		$script .=  ');';
 
 		$document->addScriptDeclaration($script);
@@ -454,7 +454,7 @@ abstract class JHtmlBehavior
 		if ($jsscript == 0)
 		{
 			$return = 'Calendar._DN = new Array ("'.JText::_('Sunday').'", "'.JText::_('Monday').'", "'.JText::_('Tuesday').'", "'.JText::_('Wednesday').'", "'.JText::_('Thursday').'", "'.JText::_('Friday').'", "'.JText::_('Saturday').'", "'.JText::_('Sunday').'");Calendar._SDN = new Array ("'.JText::_('Sun').'", "'.JText::_('Mon').'", "'.JText::_('Tue').'", "'.JText::_('Wed').'", "'.JText::_('Thu').'", "'.JText::_('Fri').'", "'.JText::_('Sat').'", "'.JText::_('Sun').'"); Calendar._FD = 0;	Calendar._MN = new Array ("'.JText::_('January').'", "'.JText::_('February').'", "'.JText::_('March').'", "'.JText::_('April').'", "'.JText::_('May').'", "'.JText::_('June').'", "'.JText::_('July').'", "'.JText::_('August').'", "'.JText::_('September').'", "'.JText::_('October').'", "'.JText::_('November').'", "'.JText::_('December').'");	Calendar._SMN = new Array ("'.JText::_('January_short').'", "'.JText::_('February_short').'", "'.JText::_('March_short').'", "'.JText::_('April_short').'", "'.JText::_('May_short').'", "'.JText::_('June_short').'", "'.JText::_('July_short').'", "'.JText::_('August_short').'", "'.JText::_('September_short').'", "'.JText::_('October_short').'", "'.JText::_('November_short').'", "'.JText::_('December_short').'");Calendar._TT = {};Calendar._TT["INFO"] = "'.JText::_('ABOUT_THE_CALENDAR').'";
- 		Calendar._TT["ABOUT"] =
+		Calendar._TT["ABOUT"] =
  "DHTML Date/Time Selector\n" +
  "(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
 "For latest version visit: http://www.dynarch.com/projects/calendar/\n" +

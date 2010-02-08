@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -9,7 +9,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
-jimport('joomla.database.query');
 
 /**
  * Methods supporting a list of newsfeed records.
@@ -86,7 +85,8 @@ class NewsfeedsModelNewsfeeds extends JModelList
 	protected function _getListQuery()
 	{
 		// Create a new query object.
-		$query = new JQuery;
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -140,13 +140,13 @@ class NewsfeedsModelNewsfeeds extends JModelList
 			}
 			else
 			{
-				$search = $this->_db->Quote('%'.$this->_db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('a.name LIKE '.$search.' OR a.alias LIKE '.$search);
 			}
 		}
 
 		// Add the list ordering clause.
-		$query->order($this->_db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

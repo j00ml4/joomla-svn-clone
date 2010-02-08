@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,8 +13,8 @@ defined('JPATH_BASE') or die;
 /**
  * Renders a custom button
  *
- * @package 	Joomla.Framework
- * @subpackage	 HTML
+ * @package		Joomla.Framework
+ * @subpackage	HTML
  * @since		1.5
  */
 class JButtonCustom extends JButton

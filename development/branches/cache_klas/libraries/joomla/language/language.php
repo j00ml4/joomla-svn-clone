@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Language
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,7 +18,7 @@ define('_QQ_', '"');
 /**
  * Languages/translation handler class
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Language
  * @since		1.5
  */
@@ -128,24 +128,33 @@ class JLanguage extends JObject
 		$this->setLanguage($lang);
 
 		$filename = JPATH_BASE.DS.'language'.DS.'overrides'.DS.$lang.'.override.ini';
-		if ($contents = @parse_ini_file($filename)) {
+		if (file_exists($filename) && $contents = $this->_parse($filename)) {
 			if (is_array($contents)) {
 				$this->_override = $contents;
 			}
 			unset($contents);
 		}
 
-		// Look for a special transliterate function for this language
+	// Look for a special transliterate function for this language
 		$function = str_replace('-', '', $lang.'Transliterate');
 		if (function_exists($function)) {
 			$this->_transliterator = $function;
 		} else {
-			// Function does not exist. Try to find it
-			$transFile = JPATH_ROOT.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
+			// Function does not exist. Try to find it in the Site language folder
+			$transFile = JPATH_SITE.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
 			if (file_exists($transFile)) {
 				require_once $transFile;
 				if (function_exists($function)) {
 					$this->_transliterator = $function;
+				}
+			} else {
+			// Function does not exist. Try to find it in the Administrator language folder
+				$transFile = JPATH_ADMINISTRATOR.DS.'language'.DS.$lang.DS.$lang.'.transliterate.php';
+				if (file_exists($transFile)) {
+					require_once $transFile;
+					if (function_exists($function)) {
+						$this->_transliterator = $function;
+					}
 				}
 			}
 		}
@@ -168,7 +177,7 @@ class JLanguage extends JObject
 	/**
 	 * Translate function, mimics the php gettext (alias _) function
 	 *
-	 * @param	string		$string 	The string to translate
+	 * @param	string		$string	The string to translate
 	 * @param	boolean	$jsSafe		Make the result javascript safe
 	 * @return	string	The translation of the string
 	 * @since	1.5
@@ -218,28 +227,28 @@ class JLanguage extends JObject
 	 * This method processes a string and replaces all accented UTF-8 characters by unaccented
 	 * ASCII-7 "equivalents"
 	 *
-	 * @param	string	$string 	The string to transliterate
+	 * @param	string	$string	The string to transliterate
 	 * @return	string	The transliteration of the string
 	 * @since	1.5
 	 */
 	public function transliterate($string)
 	{
 		include_once (JPATH_SITE.DS.'libraries'.DS.'phputf8'.DS.'utils'.DS.'ascii.php');
-		
+
 		if ($this->_transliterator !== null) {
 			return call_user_func($this->_transliterator, $string);
 		}
 
-		$string = utf8_accents_to_ascii($string); 
+		$string = utf8_accents_to_ascii($string);
 		$string = JString::strtolower($string);
 		return $string;
-	} 
+	}
 
 	/**
 	 * Getter for transliteration function
 	 *
 	 * @return	string|function Function name or the actual function for PHP 5.3
-	 * @since 	1.6
+	 * @since	1.6
 	 */
 	public function getTransliterator()
 	{
@@ -250,7 +259,7 @@ class JLanguage extends JObject
 	 * Set the transliteration function
 	 *
 	 * @return	string|function Function name or the actual function for PHP 5.3
-	 * @since 	1.6
+	 * @since	1.6
 	 */
 	public function setTransliterator($function)
 	{
@@ -297,8 +306,8 @@ class JLanguage extends JObject
 	/**
 	 * Loads a single language file and appends the results to the existing strings
 	 *
-	 * @param	string 	$extension 	The extension for which a language file should be loaded
-	 * @param	string 	$basePath  	The basepath to use
+	 * @param	string	$extension	The extension for which a language file should be loaded
+	 * @param	string	$basePath	The basepath to use
 	 * @param	string	$lang		The language to load, default null for the current language
 	 * @param	boolean $reload		Flag that will force a language to be reloaded if set to true
 	 * @return	boolean	True, if the file has successfully loaded.
@@ -363,12 +372,7 @@ class JLanguage extends JObject
 
 		$strings = false;
 		if (file_exists($filename)) {
-			ini_set('track_errors', '1');
-			$strings = @parse_ini_file($filename);
-			if (!empty($php_errormsg)) {
-				JError::raiseWarning(500, $php_errormsg);
-			}
-			ini_restore('track_errors');
+			$strings = $this->_parse($filename);
 		}
 
 		if ($strings) {
@@ -389,6 +393,38 @@ class JLanguage extends JObject
 		$this->_paths[$extension][$filename] = $result;
 
 		return $result;
+	}
+
+	/**
+	 * Parses a language file
+	 *
+	 * @param	string The name of the file
+	 * @since	1.6
+	 */
+	protected function _parse($filename)
+	{
+		ini_set('track_errors', '1');
+		$version = phpversion();
+		if($version >= "5.3.1") {
+			$contents = file_get_contents($filename);
+			$contents = str_replace(array('"_QQ_"','_QQ_"','"_QQ_'),array('\"','"\"','\""'),$contents);
+			$strings = @parse_ini_string($contents);
+			if (!empty($php_errormsg)) {
+				JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
+			}
+		} else {
+			$strings = @parse_ini_file($filename);
+			if ($version == "5.3.0") {
+				foreach($strings as $key => $string) {
+					$strings[$key]=str_replace('_QQ_','"',$string);
+				}
+			}
+			if (!empty($php_errormsg)) {
+				JError::raiseWarning(500, $php_errormsg);
+			}
+		}
+		ini_restore('track_errors');
+		return $strings;
 	}
 
 	/**
@@ -591,7 +627,7 @@ class JLanguage extends JObject
 	 *
 	 * @param	string	The name of the language
 	 * @return	mixed	If $lang exists return key/value pair with the language metadata,
-	 *  				otherwise return NULL
+	 *				otherwise return NULL
 	 * @since	1.5
 	 */
 	public static function getMetadata($lang)
@@ -610,7 +646,7 @@ class JLanguage extends JObject
 	/**
 	 * Returns a list of known languages for an area
 	 *
-	 * @param	string	$basePath 	The basepath to use
+	 * @param	string	$basePath	The basepath to use
 	 * @return	array	key/value pair with the language file and real name
 	 * @since	1.5
 	 */
@@ -660,7 +696,7 @@ class JLanguage extends JObject
 	/**
 	 * Searches for language directories within a certain base dir
 	 *
-	 * @param	string 	$dir 	directory of files
+	 * @param	string	$dir	directory of files
 	 * @return	array	Array holding the found languages as filename => real name pairs
 	 * @since	1.5
 	 */
@@ -682,7 +718,7 @@ class JLanguage extends JObject
 	/**
 	 * Parses XML files for language information
 	 *
-	 * @param	string	$dir	 Directory of files
+	 * @param	string	$dir	Directory of files
 	 * @return	array	Array holding the found languages as filename => metadata array
 	 * @since	1.5
 	 */
@@ -709,7 +745,7 @@ class JLanguage extends JObject
 	/**
 	 * Parse XML file for language information.
 	 *
-	 * @param	string	$path	 Path to the xml files
+	 * @param	string	$path	Path to the xml files
 	 * @return	array	Array holding the found metadata as a key => value pair
 	 * @since	1.5
 	 */

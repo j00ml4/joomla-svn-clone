@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,7 +27,7 @@ class plgSystemCache extends JPlugin
 	 *
 	 * @access	protected
 	 * @param	object	$subject The object to observe
-	 * @param 	array   $config  An array that holds the plugin configuration
+	 * @param	array	$config  An array that holds the plugin configuration
 	 * @since	1.0
 	 */
 	function __construct(& $subject, $config)
@@ -37,9 +37,9 @@ class plgSystemCache extends JPlugin
 		//Set the language in the class
 		$config = &JFactory::getConfig();
 		$options = array(
-			'cachebase' 	=> JPATH_BASE.DS.'cache',
-			'defaultgroup' 	=> 'page',
-			'lifetime' 		=> $this->params->get('cachetime', 15) * 60,
+			'cachebase'	=> JPATH_BASE.DS.'cache',
+			'defaultgroup'	=> 'page',
+			'lifetime'		=> $this->params->get('cachetime', 15) * 60,
 			'browsercache'	=> $this->params->get('browsercache', false),
 			'caching'		=> false,
 			'language'		=> $config->getValue('config.language', 'en-GB')

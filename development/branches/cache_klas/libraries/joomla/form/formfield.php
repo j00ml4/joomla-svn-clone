@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -100,7 +100,7 @@ abstract class JFormField extends JObject
 		// Set the form and group names.
 		$this->formName		= $formName;
 		$this->groupName	= $groupName;
-		
+
 		// Set the prefix
 		$this->prefix		= $prefix;
 
@@ -128,7 +128,7 @@ abstract class JFormField extends JObject
 
 		// If a description is specified, use it to build a tooltip.
 		if (!empty($this->descText)) {
-			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($this->labelText), ':').'::'.JText::_($this->descText)).'">';
+			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($this->labelText), ':').'::'.JText::_($this->descText), ENT_COMPAT, 'UTF-8').'">';
 		} else {
 			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'">';
 		}
@@ -143,12 +143,12 @@ abstract class JFormField extends JObject
 	 * string held is the <var>formName</var> class variable.
 	 *
 	 * @param	string	The javascript code
-	 * @return 	string	The replaced javascript code
+	 * @return	string	The replaced javascript code
 	 */
 	protected function _replacePrefix($javascript)
 	{
 		$formName = $this->formName;
-		
+
 		// No form, just use the field name.
 		if ($formName === false)
 		{
@@ -160,7 +160,7 @@ abstract class JFormField extends JObject
 			return str_replace($this->prefix, preg_replace('#\W#', '_',$formName).'_', $javascript);
 		}
 	}
-	
+
 	/**
 	 * Method to get the field input.
 	 *

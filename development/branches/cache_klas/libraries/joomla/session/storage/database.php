@@ -3,7 +3,7 @@
  * @version		$Id:database.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Session
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,13 +44,13 @@ class JSessionStorageDatabase extends JSessionStorage
 		return true;
 	}
 
- 	/**
- 	 * Read the data for a particular session identifier from the
- 	 * SessionHandler backend.
- 	 *
- 	 * @param	string	The session identifier.
- 	 * @return	string	The session data.
- 	 */
+	/**
+	 * Read the data for a particular session identifier from the
+	 * SessionHandler backend.
+	 *
+	 * @param	string	The session identifier.
+	 * @return	string	The session data.
+	 */
 	public function read($id)
 	{
 		// Get the database connection object and verify its connected.
@@ -96,7 +96,7 @@ class JSessionStorageDatabase extends JSessionStorage
 			$db->setQuery(
 				'UPDATE `#__session`' .
 				' SET `data` = '.$db->quote($data).',' .
-				'	  `time` = '.(int) time() .
+				'	`time` = '.(int) time() .
 				' WHERE `session_id` = '.$db->quote($id)
 			);
 		}

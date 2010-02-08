@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -188,7 +188,7 @@ abstract class JDatabase extends JObject
 		$signature = serialize($options);
 
 		if (empty($instances[$signature])) {
-			$driver		= array_key_exists('driver', $options) 		? $options['driver']	: 'mysql';
+			$driver		= array_key_exists('driver', $options)		? $options['driver']	: 'mysql';
 			$select		= array_key_exists('select', $options)		? $options['select']	: true;
 			$database	= array_key_exists('database', $options)	? $options['database']	: null;
 
@@ -492,19 +492,19 @@ abstract class JDatabase extends JObject
 	/**
 	 * Sets the SQL query string for later execution.
 	 *
-	 * This function replaces a string identifier <var>$prefix</var> with the
+	 * This function replaces a string identifier <code>#__</code> with the
 	 * string held is the <var>_table_prefix</var> class variable.
 	 *
-	 * @param	string	The SQL query
-	 * @param	string	The offset to start selection
-	 * @param	string	The number of results to return
-	 * @param	string	The common table prefix
+	 * @param	string	The SQL query.
+	 * @param	string	The offset to start selection.
+	 * @param	string	The number of results to return.
+	 * @param	string	The common table prefix (not available in Joomla 1.6).
 	 *
 	 * @return	object	This object to support chaining.
 	 */
-	public function setQuery($sql, $offset = 0, $limit = 0, $prefix='#__')
+	public function setQuery($query, $offset = 0, $limit = 0)
 	{
-		$this->_sql		= $this->replacePrefix((string)$sql, $prefix);
+		$this->_sql		= $query;
 		$this->_limit	= (int) $limit;
 		$this->_offset	= (int) $offset;
 
@@ -593,13 +593,19 @@ abstract class JDatabase extends JObject
 	}
 
 	/**
-	 * Get the active query
+	 * Get the current or query, or new JDatabaseQuery object.
 	 *
+	 * @param	boolean	False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
 	 * @return	string	The current value of the internal SQL vairable
 	 */
-	public function getQuery()
+	public function getQuery($new = false)
 	{
-		return $this->_sql;
+		if ($new) {
+			jimport('joomla.database.databasequery');
+			return new JDatabaseQuery;
+		} else {
+			return $this->_sql;
+		}
 	}
 
 	/**
@@ -784,15 +790,15 @@ abstract class JDatabase extends JObject
 	/**
 	 * Shows the CREATE TABLE statement that creates the given tables
 	 *
-	 * @param 	array|string 	A table name or a list of table names
-	 * @return 	array A list the create SQL for the tables
+	 * @param	array|string	A table name or a list of table names
+	 * @return	array A list the create SQL for the tables
 	 */
 	abstract public function getTableCreate($tables);
 
 	/**
 	 * Retrieves information about the given tables
 	 *
-	 * @param 	array|string 	A table name or a list of table names
+	 * @param	array|string	A table name or a list of table names
 	 * @param	boolean			Only return field types, default true
 	 * @return	array An array of fields by table
 	 */

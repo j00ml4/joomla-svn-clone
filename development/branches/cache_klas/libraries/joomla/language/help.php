@@ -3,14 +3,14 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Language
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 /**
  * Help system class
  *
- * @package 		Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Language
  * @since		1.5
  */
@@ -29,7 +29,7 @@ class JHelp
 		$app			= &JFactory::getApplication();
 		$user			= &JFactory::getUser();
 		$userHelpUrl	= $user->getParam('helpsite');
-		$globalHelpUrl 	= $app->getCfg('helpurl');
+		$globalHelpUrl	= $app->getCfg('helpurl');
 		$lang			= &JFactory::getLanguage();
 
 		if ($useComponent) {

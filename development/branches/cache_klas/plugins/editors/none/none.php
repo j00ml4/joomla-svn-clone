@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -65,7 +65,7 @@ class plgEditorNone extends JPlugin
 	/**
 	 * Get the editor content.
 	 *
-	 * @param	string 	The id of the editor field.
+	 * @param	string	The id of the editor field.
 	 */
 	function onGetContent($id)
 	{
@@ -75,7 +75,7 @@ class plgEditorNone extends JPlugin
 	/**
 	 * Set the editor content.
 	 *
-	 * @param	string 	The id of the editor field.
+	 * @param	string	The id of the editor field.
 	 * @param	string	The content to set.
 	 */
 	function onSetContent($id, $html)

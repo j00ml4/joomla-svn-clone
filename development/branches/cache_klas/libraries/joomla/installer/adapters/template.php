@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -139,7 +139,7 @@ class JInstallerTemplate extends JAdapterInstance
 		$this->parent->parseLanguages($xml->administration->languages, 1);
 
 		// Get the template description
-		$this->parent->set('message', (string)$xml->description);
+		$this->parent->set('message', JText::_((string)$xml->description));
 
 		// Lastly, we will copy the manifest file to its appropriate place.
 		if (!$this->parent->copyManifest(-1))

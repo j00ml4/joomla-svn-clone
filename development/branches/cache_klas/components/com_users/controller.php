@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,9 +33,9 @@ class UsersController extends JController
 		$document = & JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
-		$vName	 = JRequest::getWord('view', 'login');
-		$vFormat = $document->getType();
-		$lName	 = JRequest::getWord('layout', 'default');
+		$vName		= JRequest::getWord('view', 'login');
+		$vFormat	= $document->getType();
+		$lName		= JRequest::getWord('layout', 'default');
 
 		if ($view = & $this->getView($vName, $vFormat))
 		{
@@ -65,7 +65,7 @@ class UsersController extends JController
 				case 'reset':
 				case 'remind':
 				case 'resend':
-				case 'profile':					
+				case 'profile':
 				default:
 					$model = &$this->getModel('User');
 					break;

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id:observer.php 6961 2007-03-15 16:06:53Z tcp $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -74,7 +74,7 @@ class JObject
 	 * @return	mixed	The value of the property.
 	 * @see		getProperties()
 	 * @since	1.5
- 	 */
+	 */
 	public function get($property, $default=null)
 	{
 		if (isset($this->$property)) {
@@ -91,11 +91,11 @@ class JObject
 	 * @return	array
 	 * @see		get()
 	 * @since	1.5
- 	 */
+	 */
 	public function getProperties($public = true)
 	{
 		$vars  = get_object_vars($this);
-        if ($public)
+		if ($public)
 		{
 			foreach ($vars as $key => $value)
 			{
@@ -105,7 +105,7 @@ class JObject
 			}
 		}
 
-        return $vars;
+		return $vars;
 	}
 
 	/**
@@ -135,7 +135,7 @@ class JObject
 
 		// Check if only the string is requested
 		if (JError::isError($error) && $toString) {
-			return $error->toString();
+			return (string)$error;
 		}
 
 		return $error;
@@ -205,7 +205,7 @@ class JObject
 	/**
 	 * @deprecated 1.6 - Jun 24, 2009
 	 * @see __toString()
- 	 */
+	 */
 	function toString()
 	{
 		return __toString();

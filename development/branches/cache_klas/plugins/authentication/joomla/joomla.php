@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla
  * @subpackage	JFramework
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -25,9 +25,9 @@ class plgAuthenticationJoomla extends JPlugin
 	 * This method should handle any authentication and report back to the subject
 	 *
 	 * @access	public
-	 * @param   array 	$credentials Array holding the user credentials
-	 * @param 	array   $options     Array of extra options
-	 * @param	object	$response	 Authentication response object
+	 * @param	array	Array holding the user credentials
+	 * @param	array	Array of extra options
+	 * @param	object	Authentication response object
 	 * @return	boolean
 	 * @since 1.5
 	 */
@@ -37,8 +37,7 @@ class plgAuthenticationJoomla extends JPlugin
 
 		$response->type = 'Joomla';
 		// Joomla does not like blank passwords
-		if (empty($credentials['password']))
-		{
+		if (empty($credentials['password'])) {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
 			$response->error_message = 'Empty password not allowed';
 			return false;
@@ -48,18 +47,17 @@ class plgAuthenticationJoomla extends JPlugin
 		$conditions = '';
 
 		// Get a database object
-		$db = &JFactory::getDbo();
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 
-		$query = 'SELECT `id`, `password`'
-			. ' FROM `#__users`'
-			. ' WHERE username=' . $db->Quote($credentials['username'])
-			;
+		$query->select('id, password');
+		$query->from('#__users');
+		$query->where('username=' . $db->Quote($credentials['username']));
+
 		$db->setQuery($query);
 		$result = $db->loadObject();
 
-
-		if ($result)
-		{
+		if ($result) {
 			$parts	= explode(':', $result->password);
 			$crypt	= $parts[0];
 			$salt	= @$parts[1];
@@ -75,9 +73,7 @@ class plgAuthenticationJoomla extends JPlugin
 				$response->status = JAUTHENTICATE_STATUS_FAILURE;
 				$response->error_message = 'Invalid password';
 			}
-		}
-		else
-		{
+		} else {
 			$response->status = JAUTHENTICATE_STATUS_FAILURE;
 			$response->error_message = 'User does not exist';
 		}

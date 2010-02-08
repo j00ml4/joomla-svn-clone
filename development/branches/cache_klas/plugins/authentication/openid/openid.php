@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla
  * @subpackage	JFramework
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -26,8 +26,8 @@ class plgAuthenticationOpenID extends JPlugin
 	 * This method should handle any authentication and report back to the subject
 	 *
 	 * @access	public
-	 * @param   array 	$credentials Array holding the user credentials
-	 * @param 	array   $options     Array of extra options (return, entry_url)
+	 * @param   array	$credentials Array holding the user credentials
+	 * @param	array   $options     Array of extra options (return, entry_url)
 	 * @param	object	$response	Authentication response object
 	 * @return	boolean
 	 * @since 1.5
@@ -119,7 +119,7 @@ class plgAuthenticationOpenID extends JPlugin
 			$options['return'] = isset($options['return']) ? base64_encode($options['return']) : base64_encode(JURI::base());
 			$options[JUtility::getToken()] = 1;
 
-			$process_url  = sprintf($entry_url->toString()."?option=com_users&task=user.login&username=%s", $credentials['username']);
+			$process_url  = sprintf($entry_url."?option=com_users&task=user.login&username=%s", $credentials['username']);
 			$process_url .= '&'.JURI::buildQuery($options);
 
 			$session->set('return_url', $process_url);
@@ -166,11 +166,10 @@ class plgAuthenticationOpenID extends JPlugin
 		$result = $consumer->complete($session->get('return_url'));
 		switch ($result->status) {
 			case Auth_OpenID_SUCCESS :
-				{
-				        $sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($result);
+				$sreg_resp = Auth_OpenID_SRegResponse::fromSuccessResponse($result);
 
-        				$sreg = $sreg_resp->contents();
-					$usermode = $this->params->get('usermode', 2);
+				$sreg = $sreg_resp->contents();
+				$usermode = $this->params->get('usermode', 2);
 /* in the following code, we deal with the transition from the old openid version to the new openid version
    In the old version, the username was always taken straight from the login form.  In the new version, we get a
    username back from the openid provider.  This is necessary for a number of reasons.  First, providers such as
@@ -185,70 +184,75 @@ class plgAuthenticationOpenID extends JPlugin
    We had talked about a third option, which would be to always used the old way, but that seems insecure in the case of somebody using
    a yahoo.com ID.
  */
-					if ($usermode && $usermode == 1) {
+				if ($usermode && $usermode == 1) {
+					$response->username = $result->getDisplayIdentifier();
+				} else {
+					// first, check if the provider provided username exists in the database
+					$db = &JFactory::getDbo();
+					$query	= $db->getQuery(true);
+
+					$query->select('username');
+					$query->from('#__users');
+					$query->where('username=' . $db->Quote($result->getDisplayIdentifier()) . 'AND password=\'\'');
+
+					$db->setQuery($query);
+					$dbresult = $db->loadObject();
+
+					if ($dbresult) {
+						// if so, we set our username value to the provided value
 						$response->username = $result->getDisplayIdentifier();
 					} else {
-						// first, check if the provider provided username exists in the database
-						$db = &JFactory::getDbo();
-						$query = 'SELECT username FROM #__users'.
-							' WHERE username='.$db->Quote($result->getDisplayIdentifier()).
-							' AND password=\'\'';
+						// if it doesn't, we check if the username from the from exists in the database
+						$query->clear();
+						$query->select('username');
+						$query->from('#__users');
+						$query->where('username=' . $db->Quote($credentials['username']) . 'AND password=\'\'');
+
 						$db->setQuery($query);
 						$dbresult = $db->loadObject();
 						if ($dbresult) {
-							// if so, we set our username value to the provided value
-							$response->username = $result->getDisplayIdentifier();
-						} else {
-							// if it doesn't, we check if the username from the from exists in the database
-							$query = 'SELECT username FROM #__users'.
-								' WHERE username='.$db->Quote($credentials['username']).
-								' AND password=\'\'';
+							// if it does, we update the database
+							$query->clear();
+							$query->update('#__users');
+							$query->set('username=' . $db->Quote($result->getDisplayIdentifier()));
+							$query->where('username=' . $db->Quote($credentials['username']));
+
 							$db->setQuery($query);
-							$dbresult = $db->loadObject();
-							if ($dbresult) {
-								// if it does, we update the database
-								$query = 'UPDATE #__users SET username='.$db->Quote($result->getDisplayIdentifier()).
-									' WHERE username='.$db->Quote($credentials['username']);
-								$db->setQuery($query);
-								$db->query();
-								if (!$db->query()) {
-									$response->status = JAUTHENTICATE_STATUS_FAILURE;
-									$response->error_message = $db->getErrorMsg();
-									//break out of the switch if we hit an error with our query
-									break;
-								}
+							//$db->query();
+
+							if (!$db->query()) {
+								$response->status = JAUTHENTICATE_STATUS_FAILURE;
+								$response->error_message = $db->getErrorMsg();
+								//break out of the switch if we hit an error with our query
+								break;
 							}
-							$response->username = $result->getDisplayIdentifier();
-							// we return the username provided by the openid provider
 						}
+						$response->username = $result->getDisplayIdentifier();
+						// we return the username provided by the openid provider
 					}
-					$response->status = JAUTHENTICATE_STATUS_SUCCESS;
-					$response->error_message = '';
-					if (!isset($sreg['email'])) {
-						$response->email = str_replace(array('http://', 'https://'), '', $response->username);
-						$response->email = str_replace('/', '-', $response->email);
-						$response->email .= '@openid.';
-					} else {
-						$response->email = $sreg['email'];
-					}
-					$response->fullname = isset ($sreg['fullname']) ? $sreg['fullname'] : $response->username;
-					$response->language = isset ($sreg['language']) ? $sreg['language'] : '';
-					$response->timezone = isset ($sreg['timezone']) ? $sreg['timezone'] : '';
 				}
+				$response->status = JAUTHENTICATE_STATUS_SUCCESS;
+				$response->error_message = '';
+				if (!isset($sreg['email'])) {
+					$response->email = str_replace(array('http://', 'https://'), '', $response->username);
+					$response->email = str_replace('/', '-', $response->email);
+					$response->email .= '@openid.';
+				} else {
+					$response->email = $sreg['email'];
+				}
+				$response->fullname = isset ($sreg['fullname']) ? $sreg['fullname'] : $response->username;
+				$response->language = isset ($sreg['language']) ? $sreg['language'] : '';
+				$response->timezone = isset ($sreg['timezone']) ? $sreg['timezone'] : '';
 				break;
 
 			case Auth_OpenID_CANCEL :
-				{
-					$response->status = JAUTHENTICATE_STATUS_CANCEL;
-					$response->error_message = 'Authentication cancelled';
-				}
+				$response->status = JAUTHENTICATE_STATUS_CANCEL;
+				$response->error_message = 'Authentication cancelled';
 				break;
 
 			case Auth_OpenID_FAILURE :
-				{
-					$response->status = JAUTHENTICATE_STATUS_FAILURE;
-					$response->error_message = 'Authentication failed';
-				}
+				$response->status = JAUTHENTICATE_STATUS_FAILURE;
+				$response->error_message = 'Authentication failed';
 				break;
 		}
 	}

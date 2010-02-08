@@ -3,7 +3,7 @@
  * @version		$Id:plugin.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		JLibMan
  * @subpackage	Installer
- * @copyright 	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
@@ -88,7 +88,7 @@ class JInstallerFile extends JAdapterInstance
 
 				if (!$created = JFolder::create($folder))
 				{
-					JError::raiseWarning(1, JText::_('Files').' '.JText::_('Install').': '.JText::_('Failed to find source directory').': "'.$sourceFolder.'"');
+					JError::raiseWarning(1, JText::_('Files').' '.JText::_('Install').': '.JText::_('Failed to find source directory').': "'.$folder.'"');
 					// if installation fails, rollback
 					$this->parent->abort();
 					return false;

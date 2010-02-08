@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,8 +24,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<?php endif; ?>
 	</h1>
 	<?php endif; ?>
-	
-<form id="jForm" action="<?php JRoute::_('index.php')?>" method="post">	
+
+<form id="jForm" action="<?php JRoute::_('index.php')?>" method="post">
 	<fieldset class="filters">
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
 	<div class="filter-search">

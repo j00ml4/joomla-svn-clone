@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -46,7 +46,7 @@ class JInstallerPackage extends JAdapterInstance
 		// Get the component description
 		$description = (string)$this->manifest->description;
 		if ($description) {
-			$this->parent->set('message', $description);
+			$this->parent->set('message', JText::_($description));
 		}
 		else {
 			$this->parent->set('message', '');

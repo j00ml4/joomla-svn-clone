@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -223,8 +223,8 @@ class JEditor extends JObservable
 	 * @param	mixed	$buttons Can be boolean or array, if boolean defines if the buttons are displayed, if array defines a list of buttons not to show.
 	 * @since 1.5
 	 */
-	 public function getButtons($editor, $buttons = true)
-	 {
+	public function getButtons($editor, $buttons = true)
+	{
 		$result = array();
 
 		if (is_bool($buttons) && !$buttons) {
@@ -244,6 +244,7 @@ class JEditor extends JObservable
 
 			if (class_exists($className)) {
 				$plugin = new $className($this, (array)$plugin);
+				$plugin->loadLanguage();
 			}
 
 			// Try to authenticate
@@ -253,7 +254,7 @@ class JEditor extends JObservable
 		}
 
 		return $result;
-	 }
+	}
 
 	/**
 	 * Load the editor
@@ -287,8 +288,14 @@ class JEditor extends JObservable
 		require_once $path;
 
 		// Get the plugin
-		$plugin   = &JPluginHelper::getPlugin('editors', $this->_name);
-		$params   = new JParameter($plugin->params);
+		$plugin = &JPluginHelper::getPlugin('editors', $this->_name);
+		$className = 'plgEditor'.$plugin->name;
+		if (class_exists($className)) {
+			$plugin = new $className($this, (array)$plugin);
+			$plugin->loadLanguage();
+		}
+		
+		$params = new JParameter($plugin->params);
 		$params->loadArray($config);
 		$plugin->params = $params;
 

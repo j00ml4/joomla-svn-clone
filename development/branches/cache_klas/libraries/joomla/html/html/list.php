@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage		HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * Utility class for creating different select lists
  *
  * @static
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	HTML
  * @since		1.5
  */
@@ -65,12 +65,12 @@ abstract class JHtmlList
 	/**
 	 * Returns an array of options
 	 *
- 	 * @param	string $sql		SQL with ordering As value and 'name field' AS text
- 	 * @param	integer	$chop	The length of the truncated headline
- 	 *
- 	 * @return	array	An array of objects formatted for JHtml list processing
- 	 * @since	1.5
- 	 */
+	 * @param	string $sql		SQL with ordering As value and 'name field' AS text
+	 * @param	integer	$chop	The length of the truncated headline
+	 *
+	 * @return	array	An array of objects formatted for JHtml list processing
+	 * @since	1.5
+	 */
 	public static function genericordering($sql, $chop = '30')
 	{
 		$db = &JFactory::getDbo();

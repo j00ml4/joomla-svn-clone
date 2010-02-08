@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_menus
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,7 +16,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 
 $uri	= &JFactory::getUri();
-$return	= base64_encode($uri->toString());
+$return	= base64_encode($uri);
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_menus&view=menus');?>" method="post" name="adminForm">
 	<table class="adminlist">
@@ -67,8 +67,8 @@ $return	= base64_encode($uri->toString());
 					<a href="<?php echo JRoute::_('index.php?option=com_menus&view=items&menutype='.$item->menutype) ?> ">
 						<?php echo $this->escape($item->title); ?></a>
 					<p class="smallsub">(<span><?php echo JText::_('MENUS_MENU_MENUTYPE_LABEL') ?>:</span>
-						<?php echo '<a href="'. JRoute::_('index.php?option=com_menus&task=menu.edit&cid[]='.$item->id).' title='.   $this->escape($item->description).'">'.
-						 $this->escape($item->menutype).'</a>'; ?>)</p>
+						<?php echo '<a href="'. JRoute::_('index.php?option=com_menus&task=menu.edit&cid[]='.$item->id).' title='.$this->escape($item->description).'">'.
+						$this->escape($item->menutype).'</a>'; ?>)</p>
 				</td>
 				<td class="center btns">
 					<a href="<?php echo JRoute::_('index.php?option=com_menus&view=items&menutype='.$item->menutype.'&filter_published=1');?>">

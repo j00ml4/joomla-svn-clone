@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,11 +22,11 @@ $menuTypes = MenusHelper::getMenuLinks();
 				</select>
 
 				<div class="clr"></div>
-			
+
 				<button type="button" class="button2" onclick="$$('.chk-menulink').each(function(el) { el.checked = !el.checked; });">
 					<?php echo JText::_('JCheckInvert'); ?>
 				</button>
-				
+
 				<div id="menu-assignment" style="height: 300px; overflow: auto;">
 
 				<?php foreach ($menuTypes as &$type) : ?>

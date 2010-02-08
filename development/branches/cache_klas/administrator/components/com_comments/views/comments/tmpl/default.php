@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_comments
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +29,7 @@ JHtml::_('behavior.tooltip');
 			</select>
 
 			<select name="filter_context" id="context" class="inputbox" onchange="this.form.submit()">
- 				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
+				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
 			</select>
 		</div>
 	</fieldset>

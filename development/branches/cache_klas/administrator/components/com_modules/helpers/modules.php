@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -72,18 +72,17 @@ class ModulesHelper
 	{
 		// Build the filter options.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '0', JText::_('Modules_Option_Site'));
-		$options[]	= JHtml::_('select.option', '1', JText::_('Modules_Option_Administrator'));
+		$options[]	= JHtml::_('select.option', '0', JText::_('COM_MODULES_OPTION_SITE'));
+		$options[]	= JHtml::_('select.option', '1', JText::_('COM_MODULES_OPTION_ADMINISTRATOR'));
 		return $options;
 	}
 
 	static function getPositions($clientId)
 	{
 		jimport('joomla.filesystem.folder');
-		jimport('joomla.database.query');
 
-		$db = JFactory::getDbo();
-		$query = new JQuery;
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 
 		$query->select('DISTINCT(position)');
 		$query->from('#__modules');
@@ -94,8 +93,7 @@ class ModulesHelper
 		$positions = $db->loadResultArray();
 		$positions = (is_array($positions)) ? $positions : array();
 
-		if ($error = $db->getErrorMsg())
-		{
+		if ($error = $db->getErrorMsg()) {
 			JError::raiseWarning(500, $error);
 			return;
 		}
@@ -117,10 +115,8 @@ class ModulesHelper
 	 */
 	public static function getModules($clientId)
 	{
-		jimport('joomla.database.query');
-
 		$db		= JFactory::getDbo();
-		$query	= new JQuery;
+		$query	= $db->getQuery(true);
 
 		$query->select('DISTINCT(module) AS value, module AS text');
 		$query->from('#__modules');
@@ -145,8 +141,7 @@ class ModulesHelper
 		$options[] = JHtml::_('select.option', '0', 'Modules_Option_Menu_All');
 		$options[] = JHtml::_('select.option', '-', 'Modules_Option_Menu_None');
 
-		if ($clientId == 0)
-		{
+		if ($clientId == 0) {
 			$options[] = JHtml::_('select.option', '1', 'Modules_Option_Menu_Include');
 			$options[] = JHtml::_('select.option', '-1', 'Modules_Option_Menu_Exclude');
 		}

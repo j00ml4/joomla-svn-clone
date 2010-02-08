@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -25,8 +25,8 @@ abstract class JModuleHelper
 	/**
 	 * Get module by name (real, eg 'Breadcrumbs' or folder, eg 'mod_breadcrumbs')
 	 *
-	 * @param	string 	$name	The name of the module
-	 * @param	string	$title	The title of the module, optional
+	 * @param	string	The name of the module
+	 * @param	string	The title of the module, optional
 	 *
 	 * @return	object	The Module object
 	 */
@@ -70,7 +70,7 @@ abstract class JModuleHelper
 	/**
 	 * Get modules by position
 	 *
-	 * @param string 	$position	The position of the module
+	 * @param string	$position	The position of the module
 	 *
 	 * @return array	An array of module objects
 	 */
@@ -106,7 +106,7 @@ abstract class JModuleHelper
 	/**
 	 * Checks if a module is enabled
 	 *
-	 * @param   string 	$module	The module name
+	 * @param	string	The module name
 	 *
 	 * @return	boolean
 	 */
@@ -148,10 +148,10 @@ abstract class JModuleHelper
 		if (!$module->user && file_exists($path))
 		{
 			$lang = &JFactory::getLanguage();
-			// 1.5 or Core
-			$lang->load($module->module);
 			// 1.6 3PD
 			$lang->load($module->module, dirname($path));
+			// 1.5 or Core
+			$lang->load($module->module);
 
 			$content = '';
 			ob_start();

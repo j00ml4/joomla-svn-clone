@@ -3,14 +3,14 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 /**
  * Utility class to fire onPrepareContent for non-article based content.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	HTML
  * @since		1.5
  */

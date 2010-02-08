@@ -3,7 +3,7 @@
  * @version		$Id:buffer.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Utilities
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,7 +16,7 @@ defined('JPATH_BASE') or die;
  * This class provides a generic buffer stream.  It can be used to store/retrieve/manipulate
  * string buffers with the standard PHP filesystem I/O methods.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Utilities
  * @since		1.5
  */

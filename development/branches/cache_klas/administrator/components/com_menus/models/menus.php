@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -9,7 +9,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
-jimport('joomla.database.query');
 
 /**
  * Menu List Model for Menus.
@@ -35,7 +34,8 @@ class MenusModelMenus extends JModelList
 	protected function _getListQuery()
 	{
 		// Create a new query object.
-		$query = new JQuery;
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		// Select all fields from the table.
 		$query->select($this->getState('list.select', 'a.*'));
@@ -56,9 +56,9 @@ class MenusModelMenus extends JModelList
 		$query->group('a.id');
 
 		// Add the list ordering clause.
-		$query->order($this->_db->getEscaped($this->getState('list.ordering', 'a.id')).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.id')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
-		//echo nl2br(str_replace('#__','jos_',$query->toString())).'<hr/>';
+		//echo nl2br(str_replace('#__','jos_',(string)$query)).'<hr/>';
 		return $query;
 	}
 
