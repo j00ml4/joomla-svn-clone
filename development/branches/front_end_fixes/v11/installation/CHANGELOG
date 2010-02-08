@@ -27,10 +27,22 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_popular ini/keys
+^ Refactored mod_quickicon ini/keys. Added Language manager icon.
+^ Refactored mod_status ini/keys. Added logged back-end users to status.
+^ Refactored mod_submenu ini/keys.
+^ Refactored mod_title ini/keys
+^ Refactored mod_unread ini/keys. Updated sql.
+
+08-Feb-2010 Andrew Eddie
+ # Fix bug in JRegistry::setValue - documented as returning the old value, however, the behaviour is to return the set value. Changing this kills JParameter::def.
+ 
 07-Feb-2010 Hannes Papenberg
 ^ Consolidated a few translation strings in en-GB.ini and removed the en-GB.ini.old.ini in frontend
 # Fixed required fields in profile plugin - Thanks Matrikular!
 # Fixed backend menu translation - JLanguage::hasKey() was broken. - Thanks Matrikular!
+# Fixed bug in discover function. When two plugins have the same name, but are in different folders, they were not discovered
 
 07-Feb-2010 Jean-Marie Simonet
 ^ Refactored mod_feed site and admin modules ini/keys. Enabled desc translation in com_modules select.
@@ -38,6 +50,7 @@ $ -> Language fix or change
 ^ Refactored mod_logged ini/keys + added some
 ^ Refactored mod_login (admin) ini/keys. Prevented it from being unpublished.
 ^ Completed refactoring of mod_menu (admin) ini/keys.
+^ Refactored mod_online ini/keys + bug
 
 06-Feb-2010 Mark Dexter
 + Test Commit (remove later)
@@ -376,6 +389,7 @@ $ Change the language string JOption_Access_Show_All_Sections to JOption_Access_
 05-Jan-2010 Hannes Papenberg
  ^ Removed #__components and moved the admin menu information to #__menu. Thanks Jonnathan!
 
+>>>>>>> .r14052
 05-Jan-2010 Andrew Eddie
  ^ Accepted [#19268] Refactoring mod_popular in the BackEnd.
  ^ Added support for layout and modal forms in JControllerForm::edit method.
