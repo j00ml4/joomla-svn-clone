@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -37,6 +37,12 @@ class CategoriesModelCategories extends JModelList
 
 		$extension = $app->getUserStateFromRequest($this->_context.'.filter.extension', 'extension');
 		$this->setState('filter.extension', $extension);
+		$parts = explode('.',$extension);
+		// extract the component name
+		$this->setState('filter.component', $parts[0]);
+		// extract the optional section name
+		$this->setState('filter.section', (count($parts)>1)?$parts[1]:null);
+
 		if (!empty($extension)) $this->_context.=".$extension";
 
 		$search = $app->getUserStateFromRequest($this->_context.'.search', 'filter_search');
@@ -45,7 +51,7 @@ class CategoriesModelCategories extends JModelList
 		$access = $app->getUserStateFromRequest($this->_context.'.filter.access', 'filter_access', 0, 'int');
 		$this->setState('filter.access', $access);
 
-		$published 	= $app->getUserStateFromRequest($this->_context.'.published', 'filter_published', '');
+		$published = $app->getUserStateFromRequest($this->_context.'.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
 		// List state information.
@@ -81,7 +87,8 @@ class CategoriesModelCategories extends JModelList
 	function _getListQuery($resolveFKs = true)
 	{
 		// Create a new query object.
-		$query = new JQuery;
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -108,7 +115,7 @@ class CategoriesModelCategories extends JModelList
 
 		// Filter by extension
 		if ($extension = $this->getState('filter.extension')) {
-			$query->where('a.extension = '.$this->_db->quote($extension));
+			$query->where('a.extension = '.$db->quote($extension));
 		}
 
 		// Filter by access level.
@@ -120,8 +127,7 @@ class CategoriesModelCategories extends JModelList
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.published = ' . (int) $published);
-		}
-		else if ($published === '') {
+		} else if ($published === '') {
 			$query->where('(a.published IN (0, 1))');
 		}
 
@@ -130,21 +136,17 @@ class CategoriesModelCategories extends JModelList
 		if (!empty($search)) {
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
-			}
-			else if (stripos($search, 'author:') === 0)
-			{
-				$search = $this->_db->Quote('%'.$this->_db->getEscaped(substr($search, 7), true).'%');
+			} else if (stripos($search, 'author:') === 0) {
+				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
 				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
-			}
-			else
-			{
-				$search = $this->_db->Quote('%'.$this->_db->getEscaped($search, true).'%');
+			} else {
+				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
 
 		// Add the list ordering clause.
-		$query->order($this->_db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

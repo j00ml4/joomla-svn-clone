@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,10 +29,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<?php echo $this->escape($this->item->title); ?>
 	</h2>
 	<?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
-		<div class="category_desc">
+		<div class="category-desc">
 			<!-- @TODO Verify image path defaults/overrides/positions -->
 			<?php if ($this->params->get('show_description_image') && $this->item->category_params->get('image')) : ?>
-				<img src="<?php echo $this->item->category_params->get('image'); ?>"/>
+				<img src="<?php echo $this->item->category_params->get('image'); ?>" />
 			<?php endif; ?>
 			<?php if ($this->params->get('show_description') && $this->item->description) : ?>
 				<?php echo $this->item->description; ?>

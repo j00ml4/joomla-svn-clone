@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,7 +31,7 @@ class NewsfeedsViewNewsfeed extends JView
 		$app	= JFactory::getApplication();
 		$state	= $this->get('State');
 		$item	= $this->get('Item');
-		$form 	= $this->get('Form');
+		$form	= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -81,13 +81,13 @@ class NewsfeedsViewNewsfeed extends JView
 
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('newsfeed.cancel');
+			JToolBarHelper::cancel('newsfeed.cancel','JTOOLBAR_CANCEL');
 		}
 		else {
 			JToolBarHelper::cancel('newsfeed.cancel', 'JToolbar_Close');
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.newsfeed.edit');
+		JToolBarHelper::help('screen.newsfeed.edit','JTOOLBAR_HELP');
 	}
 }

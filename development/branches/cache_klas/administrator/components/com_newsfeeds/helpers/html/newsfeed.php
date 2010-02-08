@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
  * Utility class for creating HTML Grids
  *
  * @static
- * @package 	Joomla.Administrator
+ * @package		Joomla.Administrator
  * @subpackage	com_newsfeeds
  * @since		1.5
  */
@@ -31,7 +31,7 @@ class JHtmlNewsfeed
 		);
 		$state	= JArrayHelper::getValue($states, (int) $value, $states[0]);
 		$html	= '<a href="javascript:void(0);" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" title="'.JText::_($state[3]).'">'
-				. JHtml::_('image.administrator', $state[0], '/templates/bluestork/admin/images/', null, '/templates/bluestork/admin/images/', JText::_($state[2])).'</a>';
+				. JHtml::_('image', 'admin/'.$state[0], JText::_($state[2]), NULL, true).'</a>';
 
 		return $html;
 	}

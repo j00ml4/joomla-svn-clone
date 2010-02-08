@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_feed
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
 if ($feed != false)
 {
 	//image handling
-	$iUrl 	= isset($feed->image->url)   ? $feed->image->url   : null;
+	$iUrl	= isset($feed->image->url)	? $feed->image->url	: null;
 	$iTitle = isset($feed->image->title) ? $feed->image->title : null;
 	?>
 	<div style="direction: <?php echo $rssrtl ? 'rtl' :'ltr'; ?>; text-align: <?php echo $rssrtl ? 'right' :'left'; ?> ! important"  class="feed<?php echo $params->get('moduleclass_sfx'); ?>">
@@ -49,7 +49,7 @@ if ($feed != false)
 	}
 
 	$actualItems = count($feed->items);
-	$setItems    = $params->get('rssitems', 5);
+	$setItems	= $params->get('rssitems', 5);
 
 	if ($setItems > $actualItems) {
 		$totalItems = $actualItems;
@@ -68,24 +68,24 @@ if ($feed != false)
 				?>
 				<li class="newsfeed-item">
 					<?php	if (!is_null($currItem->get_link())) {
-				    ?>
-			    <?php if (!is_null($feed->title) && $params->get('rsstitle', 1))
+					?>
+				<?php if (!is_null($feed->title) && $params->get('rsstitle', 1))
 
-			    	{ echo '<h5 class="feed-link">';}
-			    else
-			    {
-			    echo '<h4 class="feed-link">';
-			    }
-			     ?>
+					{ echo '<h5 class="feed-link">';}
+				else
+				{
+				echo '<h4 class="feed-link">';
+				}
+				?>
 
 				<a href="<?php echo $currItem->get_link(); ?>" target="_blank">
 					<?php echo $currItem->get_title(); ?></a>
 					<?php if (!is_null($feed->title) && $params->get('rsstitle', 1))
 
-			    	{ echo '</h5>';}
-			   		 else
-			   		{ echo '</h4>';}
-			     ?>
+					{ echo '</h5>';}
+						else
+						{ echo '</h4>';}
+				?>
 				<?php
 				}
 
@@ -95,7 +95,7 @@ if ($feed != false)
 					// item description
 					$text = $currItem->get_description();
 					$text = str_replace('&apos;', "'", $text);
-                    $text=strip_tags($text);
+					$text=strip_tags($text);
 					// word limit check
 					if ($words)
 					{

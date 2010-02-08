@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Site
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -49,7 +49,7 @@ $app = &JFactory::getApplication();
 		<input type="submit" name="Submit" class="button" value="<?php echo JText::_('LOGIN') ?>" />
 	</fieldset>
 	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="login" />
+	<input type="hidden" name="task" value="user.login" />
 	<input type="hidden" name="return" value="<?php echo base64_encode(JURI::base()) ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 	</form>

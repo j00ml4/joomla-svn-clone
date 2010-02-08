@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -39,12 +39,12 @@ jimport('joomla.user.helper');
 			<?php echo JText::_('Users_Profile_Last_Visited_Date_Label'); ?>
 		</dt>
 		<dd>
-		<?php if ($this->data->lastvisitDate != '0000-00-00 00:00:00'){?>		
+		<?php if ($this->data->lastvisitDate != '0000-00-00 00:00:00'){?>
 			<?php echo JHtml::date($this->data->lastvisitDate); ?>
-		<?php }	
-		 else {		
+		<?php }
+		else {
 			echo JText::_('Users_Profile_Never_Visited');
-			 } ?>	
+		} ?>
 		</dd>
 	</dl>
 </fieldset>

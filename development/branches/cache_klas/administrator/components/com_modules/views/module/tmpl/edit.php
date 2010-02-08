@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,7 +27,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
 			if ($hasContent) :
-				echo $this->form->getField('articletext')->save();
+				echo $this->form->getField('content')->save();
 			endif;
 			?>
 			submitform(task);
@@ -78,12 +78,12 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = (string) $this->item->xml->description) : ?>
 					<label>
-						<?php echo JText::_('Modules_Module_Description'); ?>
+						<?php echo JText::_('MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
-					<?php echo $this->escape(JText::_($text)); ?>
+					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo JText::_('Modules_XML_data_not_available'); ?>
+				<?php echo JText::_('MODULES_ERR_XML'); ?>
 			<?php endif; ?>
 		</fieldset>
 	</div>
@@ -107,7 +107,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="clr"></div>
 	<?php if ($hasContent) : ?>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Custom Output'); ?></legend>
+			<legend><?php echo JText::_('MODULES_CUSTOM_OUTPUT'); ?></legend>
 
 			<?php echo $this->form->getLabel('content'); ?>
 			<?php echo $this->form->getInput('content'); ?>

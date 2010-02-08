@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -66,8 +66,8 @@ class UsersViewGroup extends JView
 
 		if ($canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('group.apply');
-			JToolBarHelper::save('group.save');
+			JToolBarHelper::apply('group.apply','JTOOLBAR_APPLY');
+			JToolBarHelper::save('group.save','JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('group.save2new', 'JToolbar_Save_and_new');
 		}
 		// If an existing item, can save to a copy.
@@ -83,6 +83,6 @@ class UsersViewGroup extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.group');
+		JToolBarHelper::help('screen.users.group','JTOOLBAR_HELP');
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,12 +22,11 @@ abstract class modOnlineHelper
 	 */
 	public static function getOnlineCount()
 	{
-		jimport('joomla.database.query');
 		$db			= JFactory::getDbo();
-		$session    = JFactory::getSession();
+		$session	= JFactory::getSession();
 		$sessionId	= $session->getId();
 
-		$query = new JQuery;
+		$query	= $db->getQuery(true);
 		$query->select('COUNT(a.session_id)');
 		$query->from('#__session AS a');
 		$query->where('a.session_id <> '.$db->Quote($sessionId));

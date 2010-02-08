@@ -2,7 +2,7 @@
 /**
  * @version $Id$
  * @package		Joomla.Framework
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -97,8 +97,8 @@ abstract class JLoader
 	 *
 	 * @param	string			The class name
 	 * @param	string			Full path to the file that holds the class
-	 * @return	array|boolean  	Array of classes
-	 * @since 	1.5
+	 * @return	array|boolean	Array of classes
+	 * @since	1.5
 	 */
 	public static function &register($class = null, $file = null)
 	{
@@ -127,7 +127,7 @@ abstract class JLoader
 			return true;
 		}
 
-		if (array_key_exists(strtolower($class), JLoader::$classes))
+		if (array_key_exists($class, JLoader::$classes))
 		{
 			include JLoader::$classes[$class];
 			return true;

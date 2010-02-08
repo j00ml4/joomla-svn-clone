@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Plugin
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,14 +24,14 @@ abstract class JPluginHelper
 	 * otherwise only the specific plugin data is returned.
 	 *
 	 * @access	public
-	 * @param	string 		$type		The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string 		$plugin		The plugin name.
-	 * @return	mixed 		An array of plugin data objects, or a plugin data object.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
+	 * @return	mixed		An array of plugin data objects, or a plugin data object.
 	 */
 	public static function getPlugin($type, $plugin = null)
 	{
 		$result		= array();
-		$plugins	= JPluginHelper::_load();
+		$plugins	= self::_load();
 
 		// Find the correct plugin(s) to return.
 		for ($i = 0, $t = count($plugins); $i < $t; $i++)
@@ -61,13 +61,13 @@ abstract class JPluginHelper
 	 * Checks if a plugin is enabled.
 	 *
 	 * @access	public
-	 * @param	string 		$type	 	The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string	 	$plugin		The plugin name.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
 	 * @return	boolean
 	 */
 	public static function isEnabled($type, $plugin = null)
 	{
-		$result = &JPluginHelper::getPlugin($type, $plugin);
+		$result = &self::getPlugin($type, $plugin);
 		return (!empty($result));
 	}
 
@@ -76,8 +76,8 @@ abstract class JPluginHelper
 	 * otherwise only the specific pugin is loaded.
 	 *
 	 * @access	public
-	 * @param	string 		$type 		The plugin type, relates to the sub-directory in the plugins directory.
-	 * @param	string 		$plugin		The plugin name.
+	 * @param	string		$type		The plugin type, relates to the sub-directory in the plugins directory.
+	 * @param	string		$plugin		The plugin name.
 	 * @return	boolean		True if success
 	 */
 	public static function importPlugin($type, $plugin = null, $autocreate = true, $dispatcher = null)
@@ -85,12 +85,12 @@ abstract class JPluginHelper
 		$results = null;
 
 		// Load the plugins from the database.
-		$plugins = JPluginHelper::_load();
+		$plugins = self::_load();
 
 		// Get the specified plugin(s).
 		for ($i = 0, $t = count($plugins); $i < $t; $i++) {
 			if ($plugins[$i]->type == $type && ($plugins[$i]->name == $plugin ||  $plugin === null)) {
-				JPluginHelper::_import($plugins[$i], $autocreate, $dispatcher);
+				self::_import($plugins[$i], $autocreate, $dispatcher);
 				$results = true;
 			}
 		}
@@ -106,11 +106,7 @@ abstract class JPluginHelper
 	 */
 	protected static function _import(&$plugin, $autocreate = true, $dispatcher = null)
 	{
-		static $paths;
-
-		if (!$paths) {
-			$paths = array();
-		}
+		static $paths = array();
 
 		$plugin->type = preg_replace('/[^A-Z0-9_\.-]/i', '', $plugin->type);
 		$plugin->name = preg_replace('/[^A-Z0-9_\.-]/i', '', $plugin->name);
@@ -120,12 +116,15 @@ abstract class JPluginHelper
 
 		if (!isset( $paths[$path] ) || !isset($paths[$legacypath]))
 		{
-			if (file_exists( $path ) || file_exists($legacypath))
+			$pathExists = file_exists($path);
+			if ($pathExists || file_exists($legacypath))
 			{
-				$path = file_exists($path) ? $path : $legacypath;
+				$path = $pathExists ? $path : $legacypath;
 
 				jimport('joomla.plugin.plugin');
-				require_once $path;
+				if (!isset($paths[$path])) {
+					require_once $path;
+				}
 				$paths[$path] = true;
 
 				if ($autocreate)
@@ -139,10 +138,10 @@ abstract class JPluginHelper
 					if (class_exists($className))
 					{
 						// Load the plugin from the database.
-						$plugin = &JPluginHelper::getPlugin($plugin->type, $plugin->name);
+						$plugin = &self::getPlugin($plugin->type, $plugin->name);
 
 						// Instantiate and register the plugin.
-						$instance = new $className($dispatcher, (array)($plugin));
+						new $className($dispatcher, (array)($plugin));
 					}
 				}
 			}

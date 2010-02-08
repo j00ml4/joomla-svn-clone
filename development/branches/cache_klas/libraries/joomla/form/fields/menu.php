@@ -2,7 +2,7 @@
 
 /**
  * @version		$Id: category.php 13825 2009-12-23 01:03:06Z eddieajau $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('JPATH_BASE') or die;
@@ -35,7 +35,7 @@ class JFormFieldMenu extends JFormFieldList
 	 *
 	 * @return	array		An array of JHtml options.
 	 */
-	protected function _getOptions() 
+	protected function _getOptions()
 	{
 		require_once realpath(JPATH_ADMINISTRATOR . '/components/com_menus/helpers/menus.php');
 		$menuTypes = MenusHelper::getMenuTypes();
@@ -49,7 +49,7 @@ class JFormFieldMenu extends JFormFieldList
 		$options[] = JHtml::_('select.option', '', JText::_('JOption_Select_Menu'));
 
 		// Iterate over menus
-		foreach($menuTypes as $menutype) 
+		foreach($menuTypes as $menutype)
 		{
 			$options[] = JHtml::_('select.option', $menutype, $menutype);
 		}

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Database
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -185,7 +185,7 @@ class JDatabaseMySQL extends JDatabase
 		}
 
 		// Take a local copy so that we don't modify the original query and cause issues later
-		$sql = $this->_sql;
+		$sql = $this->replacePrefix((string) $this->_sql);
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			$sql .= ' LIMIT '.$this->_offset.', '.$this->_limit;
 		}
@@ -225,22 +225,23 @@ class JDatabaseMySQL extends JDatabase
 	 */
 	public function queryBatch($abort_on_error=true, $p_transaction_safe = false)
 	{
+		$sql = $this->replacePrefix((string) $this->_sql);
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 
 		if ($p_transaction_safe) {
-			$this->_sql = rtrim($this->_sql, "; \t\r\n\0");
+			$sql = rtrim($sql, "; \t\r\n\0");
 			$si = $this->getVersion();
 			preg_match_all("/(\d+)\.(\d+)\.(\d+)/i", $si, $m);
 			if ($m[1] >= 4) {
-				$this->_sql = 'START TRANSACTION;' . $this->_sql . '; COMMIT;';
+				$sql = 'START TRANSACTION;' . $sql . '; COMMIT;';
 			} else if ($m[2] >= 23 && $m[3] >= 19) {
-				$this->_sql = 'BEGIN WORK;' . $this->_sql . '; COMMIT;';
+				$sql = 'BEGIN WORK;' . $sql . '; COMMIT;';
 			} else if ($m[2] >= 23 && $m[3] >= 17) {
-				$this->_sql = 'BEGIN;' . $this->_sql . '; COMMIT;';
+				$sql = 'BEGIN;' . $sql . '; COMMIT;';
 			}
 		}
-		$query_split = $this->splitSql($this->_sql);
+		$query_split = $this->splitSql($sql);
 		$error = 0;
 		foreach ($query_split as $command_line) {
 			$command_line = trim($command_line);
@@ -395,7 +396,7 @@ class JDatabaseMySQL extends JDatabase
 	 *
 	 * @param	string	The name of the class to return (stdClass by default).
 	 *
-	 * @return 	object
+	 * @return	object
 	 */
 	public function loadObject($className = 'stdClass')
 	{
@@ -648,8 +649,8 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Shows the CREATE TABLE statement that creates the given tables
 	 *
-	 * @param 	array|string 	A table name or a list of table names
-	 * @return 	array	A list the create SQL for the tables
+	 * @param	array|string	A table name or a list of table names
+	 * @return	array	A list the create SQL for the tables
 	 */
 	public function getTableCreate($tables)
 	{
@@ -670,7 +671,7 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Retrieves information about the given tables
 	 *
-	 * @param 	array|string 	A table name or a list of table names
+	 * @param	array|string	A table name or a list of table names
 	 * @param	boolean			Only return field types, default true
 	 * @return	array	An array of fields by table
 	 */

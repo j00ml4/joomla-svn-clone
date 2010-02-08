@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		Joomla.Framework
 * @subpackage	Table
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 * @license		GNU General Public License, see LICENSE.php
 */
 
@@ -14,7 +14,7 @@ defined('JPATH_BASE') or die();
  * Extension table
  * Replaces plugins table
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage		Table
  * @since	1.6
  */
@@ -62,14 +62,14 @@ class JTableExtension extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		if (isset($array['control']) && is_array($array['control']))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['control']);
-			$array['control'] = $registry->toString();
+			$array['control'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);
@@ -93,7 +93,7 @@ class JTableExtension extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.

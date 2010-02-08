@@ -2,7 +2,7 @@
 
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('JPATH_BASE') or die;
@@ -35,8 +35,8 @@ class JFormFieldTemplateStyle extends JFormFieldGroupedList
 	{
 		$client = $this->_element->attributes('client');
 		$client_id = ($client == 'administrator') ? 1 : 0;
-		$db = JFactory::getDBO();
-		$query = new JQuery;
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
 		$query->select($db->nameQuote('id'));
 		$query->select($db->nameQuote('title'));
 		$query->select($db->nameQuote('template'));
@@ -50,10 +50,8 @@ class JFormFieldTemplateStyle extends JFormFieldGroupedList
 		// Pre-process into groups.
 		$last = null;
 		$groups = array();
-		foreach($styles as $style)
-		{
-			if ($style->template != $last)
-			{
+		foreach($styles as $style) {
+			if ($style->template != $last) {
 				$last = $style->template;
 				$groups[$last] = array();
 			}
@@ -65,4 +63,3 @@ class JFormFieldTemplateStyle extends JFormFieldGroupedList
 		return $groups;
 	}
 }
-

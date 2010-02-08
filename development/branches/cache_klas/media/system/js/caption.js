@@ -1,6 +1,6 @@
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,15 +11,15 @@
  *
  * @package		Joomla
  * @since		1.5
- * @version     1.0
+ * @version	 1.0
  */
 (function() {
-	var _createCaption = function(element, selector) {
-		var caption   = document.createTextNode(element.title);
-		var container = document.createElement("div");
-		var text      = document.createElement("p");
-		var width     = element.getAttribute("width");
-		var align     = element.getAttribute("align");
+	var _createCaption	= function(element, selector) {
+		var caption		= document.createTextNode(element.title);
+		var container	= document.createElement("div");
+		var text		= document.createElement("p");
+		var width		= element.getAttribute("width");
+		var align		= element.getAttribute("align");
 
 		if(!width) {
 			width = element.width;

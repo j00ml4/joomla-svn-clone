@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		Joomla.Framework
 * @subpackage	Document
-* @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 * @license		GNU General Public License, see LICENSE.php
 */
 
@@ -17,12 +17,15 @@ defined('JPATH_BASE') or die();
  * @subpackage	Document
  * @since		1.6
  */
+
+jimport('joomla.document.document');
+
 class JDocumentJSON extends JDocument
 {
 	/**
 	 * Document name
 	 *
-	 * @var	 string
+	 * @var		string
 	 * @access  protected
 	 */
 	protected $_name = 'joomla';
@@ -48,9 +51,9 @@ class JDocumentJSON extends JDocument
 	 * Render the document.
 	 *
 	 * @access public
-	 * @param boolean 	$cache		If true, cache the output
+	 * @param boolean	$cache		If true, cache the output
 	 * @param array	$params		Associative array of attributes
-	 * @return 	The rendered data
+	 * @return	The rendered data
 	 */
 	public function render($cache = false, $params = array())
 	{
@@ -95,7 +98,7 @@ class JDocumentJSON extends JDocument
 	/**
 	 * Sets the document name
 	 *
-	 * @param   string   $name	Document name
+	 * @param	string	$name	Document name
 	 * @access  public
 	 * @return  void
 	 */

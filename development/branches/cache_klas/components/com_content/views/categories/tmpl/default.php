@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -39,6 +39,7 @@ $difLevel = 0;
 		$item->deeper		= (isset($this->items[$i+1]) && ($item->level < $this->items[$i+1]->level));
 		$item->shallower	= (isset($this->items[$i+1]) && ($item->level > $this->items[$i+1]->level));
 		$item->level_diff	= (isset($this->items[$i+1])) ? ($item->level - $this->items[$i+1]->level) : 0;
+
 	endfor;
 	echo '<ul>';
 	for ($i=0;$i<$itemcount;$i++) :
@@ -62,7 +63,7 @@ $difLevel = 0;
 			echo "<li>";
 		}
 ?>
-  	    <span class="item-title"><a href="<?php echo ContentRoute::category('index.php?option=com_content&view=category&id='.$this->escape($item->slug));?>">
+		<span class="item-title"><a href="<?php echo ContentRoute::category('index.php?option=com_content&view=category&id='.$this->escape($item->slug));?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
 		<?php if ($item->description) : ?>

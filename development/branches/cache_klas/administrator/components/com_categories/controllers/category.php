@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -147,6 +147,7 @@ class CategoriesControllerCategory extends JController
 
 		// Clear the row edit information from the session.
 		$app->setUserState('com_categories.edit.category.id',	null);
+		$app->setUserState('com_categories.edit.category.extension',	null);
 		$app->setUserState('com_categories.edit.category.data',	null);
 		$app->setUserState('com_categories.edit.category.type',	null);
 	}
@@ -251,6 +252,7 @@ class CategoriesControllerCategory extends JController
 			case 'apply':
 				// Set the row data in the session.
 				$app->setUserState('com_categories.edit.category.id',	$model->getState('category.id'));
+				$app->setUserState('com_categories.edit.category.extension', $data['extension']);
 				$app->setUserState('com_categories.edit.category.data',	null);
 				$app->setUserState('com_categories.edit.category.type',	null);
 
@@ -261,16 +263,19 @@ class CategoriesControllerCategory extends JController
 			case 'save2new':
 				// Clear the row id and data in the session.
 				$app->setUserState('com_categories.edit.category.id',	null);
+				$app->setUserState('com_categories.edit.category.extension', $data['extension']);
 				$app->setUserState('com_categories.edit.category.data',	null);
 				$app->setUserState('com_categories.edit.category.type',	null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option=com_categories&view=category&layout=edit', false));
+				$extension = JRequest::getString('extension');
+				$this->setRedirect(JRoute::_('index.php?option=com_categories&view=category&layout=edit&extension='.$extension, false));
 				break;
 
 			default:
 				// Clear the row id and data in the session.
-				$app->setUserState('com_categories.`.id',	null);
+				$app->setUserState('categories.edit.category.id',	null);
+				$app->setUserState('com_categories.edit.category.extension', null);
 				$app->setUserState('com_categories.edit.category.data',	null);
 				$app->setUserState('com_categories.edit.category.type',	null);
 

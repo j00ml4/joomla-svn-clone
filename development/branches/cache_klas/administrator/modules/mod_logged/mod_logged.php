@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright		Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.
+ * @copyright		Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,7 +16,7 @@ $user	= &JFactory::getUser();
 $app	= &JFactory::getApplication();
 
 // TODO -  pagination needs to be completed in module
-$limit 		= $app->getUserStateFromRequest('limit', 'limit', $app->getCfg('list_limit'), 'int');
+$limit		= $app->getUserStateFromRequest('limit', 'limit', $app->getCfg('list_limit'), 'int');
 $limitstart = $app->getUserStateFromRequest('mod_logged.limitstart', 'limitstart', 0, 'int');
 
 // hides Administrator or Super Administrator from list depending on usertype

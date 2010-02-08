@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,8 +44,8 @@ class plgButtonImage extends JPlugin
 		if (!$user->authorize('com_media.popup')) {
 			//return;
 		}
-		$doc 		= &JFactory::getDocument();
-		$template 	= $app->getTemplate();
+		$doc		= &JFactory::getDocument();
+		$template	= $app->getTemplate();
 
 		$link = 'index.php?option=com_media&amp;view=images&amp;tmpl=component&amp;e_name='.$name;
 
@@ -54,7 +54,7 @@ class plgButtonImage extends JPlugin
 		$button = new JObject;
 		$button->set('modal', true);
 		$button->set('link', $link);
-		$button->set('text', JText::_('Image'));
+		$button->set('text', JText::_('PLG_IMAGE_BUTTON_IMAGE'));
 		$button->set('name', 'image');
 		$button->set('options', "{handler: 'iframe', size: {x: 570, y: 400}}");
 

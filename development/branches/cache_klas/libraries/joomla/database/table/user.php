@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -10,7 +10,7 @@ defined('JPATH_BASE') or die;
 /**
  * Users table
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Table
  * @since		1.0
  */
@@ -32,8 +32,8 @@ class JTableUser extends JTable
 	{
 		parent::__construct('#__users', 'id', $db);
 
-		//initialise
-		$this->id        = 0;
+		// Initialise.
+		$this->id = 0;
 		$this->sendEmail = 0;
 	}
 
@@ -125,7 +125,7 @@ class JTableUser extends JTable
 		if (key_exists('params', $array) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
 		// Attempt to bind the data.

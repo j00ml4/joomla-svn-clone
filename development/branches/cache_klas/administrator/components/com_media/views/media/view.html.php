@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -39,8 +39,8 @@ class MediaViewMedia extends JView
 			document.preview = SqueezeBox;
 		});");
 
-		JHtml::script('mootree.js');
-		JHtml::stylesheet('mootree.css');
+		JHtml::script('system/mootree.js', false, true);
+		JHtml::stylesheet('system/mootree.css', array(), true);
 
 		if ($config->get('enable_flash', 1)) {
 			$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
@@ -120,7 +120,7 @@ class MediaViewMedia extends JView
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_media');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.mediamanager');
+		JToolBarHelper::help('screen.mediamanager','JTOOLBAR_HELP');
 	}
 
 	function getFolderLevel($folder)

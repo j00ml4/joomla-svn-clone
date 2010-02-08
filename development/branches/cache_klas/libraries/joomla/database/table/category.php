@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ jimport('joomla.database.tablenested');
 /**
  * Category table
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Table
  * @since		1.0
  */
@@ -62,34 +62,33 @@ class JTableCategory extends JTableNested
 	{
 		// Initialise variables.
 		$assetId = null;
+		$db		= $this->getDbo();
 
 		// This is a category under a category.
-		if ($this->parent_id > 1)
-		{
+		if ($this->parent_id > 1) {
 			// Build the query to get the asset id for the parent category.
-			$query = new JQuery;
+			$query	= $db->getQuery(true);
 			$query->select('asset_id');
 			$query->from('#__categories');
 			$query->where('id = '.(int) $this->parent_id);
 
 			// Get the asset id from the database.
-			$this->_db->setQuery($query);
-			if ($result = $this->_db->loadResult()) {
+			$db->setQuery($query);
+			if ($result = $db->loadResult()) {
 				$assetId = (int) $result;
 			}
 		}
 		// This is a category that needs to parent with the extension.
-		elseif ($assetId === null)
-		{
+		elseif ($assetId === null) {
 			// Build the query to get the asset id for the parent category.
-			$query = new JQuery;
+			$query	= $db->getQuery(true);
 			$query->select('id');
 			$query->from('#__assets');
-			$query->where('name = '.$this->_db->quote($this->extension));
+			$query->where('name = '.$db->quote($this->extension));
 
 			// Get the asset id from the database.
-			$this->_db->setQuery($query);
-			if ($result = $this->_db->loadResult()) {
+			$db->setQuery($query);
+			if ($result = $db->loadResult()) {
 				$assetId = (int) $result;
 			}
 		}
@@ -97,8 +96,7 @@ class JTableCategory extends JTableNested
 		// Return the asset id.
 		if ($assetId) {
 			return $assetId;
-		}
-		else {
+		} else {
 			return parent::_getAssetParentId();
 		}
 	}
@@ -139,18 +137,16 @@ class JTableCategory extends JTableNested
 	 */
 	public function bind($array, $ignore = '')
 	{
-		if (isset($array['params']) && is_array($array['params']))
-		{
+		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = $registry->toString();
+			$array['params'] = (string)$registry;
 		}
 
-		if (isset($array['metadata']) && is_array($array['metadata']))
-		{
+		if (isset($array['metadata']) && is_array($array['metadata'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['metadata']);
-			$array['metadata'] = $registry->toString();
+			$array['metadata'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);

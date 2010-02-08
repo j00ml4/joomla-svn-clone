@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -28,7 +28,7 @@ class InstallerViewUpdate extends InstallerViewDefault
 		JToolBarHelper::custom('update.find', 'refresh', 'refresh','FIND_UPDATES',false,false);
 		JToolBarHelper::custom('update.purge', 'purge', 'purge', 'PURGE_CACHE', false,false);
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.installer');
+		JToolBarHelper::help('screen.installer','JTOOLBAR_HELP');
 
 		// Get data from the model
 		$state		= &$this->get('State');

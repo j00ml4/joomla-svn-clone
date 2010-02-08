@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Checkin
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -23,15 +23,15 @@ class CheckinModelCheckin extends JModel
 	/**
 	 * Checks in requested tables
 	 *
-	 * @param  	array	An array of table names. Optional.
+	 * @param	array	An array of table names. Optional.
 	 * @return	array	Checked in table names as keys and checked in item count as values
 	 * @since	1.6
 	 */
 	public function checkin($tables = null)
 	{
-		$app 		= &JFactory::getApplication();
-		$db 		= &$this->_db;
-		$nullDate 	= $db->getNullDate();
+		$app		= &JFactory::getApplication();
+		$db		= &$this->_db;
+		$nullDate	= $db->getNullDate();
 
 		if (!is_array($tables)) {
 			$tables = $db->getTableList();

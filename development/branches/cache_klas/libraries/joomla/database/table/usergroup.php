@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -107,7 +107,7 @@ class JTableUsergroup extends JTable
 	 *
 	 * @access	public
 	 * @param	boolean		If false, null object variables are not updated
-	 * @return	boolean 	True successful, false otherwise and an internal error message is set`
+	 * @return	boolean		True successful, false otherwise and an internal error message is set`
 	 */
 	function store($updateNulls = false)
 	{

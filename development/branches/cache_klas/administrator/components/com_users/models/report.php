@@ -1,14 +1,13 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
-jimport('joomla.database.query');
 
 /**
  * @package		Joomla.Administrator
@@ -22,7 +21,7 @@ class UsersModelReport extends JModel
 	 *
 	 * @var		string
 	 */
-	 protected $_context = 'users.report';
+	protected $_context = 'users.report';
 
 	/**
 	 * Method to auto-populate the model state.
@@ -57,8 +56,7 @@ class UsersModelReport extends JModel
 
 	public function getData()
 	{
-		switch ($this->getState('report.type'))
-		{
+		switch ($this->getState('report.type')) {
 			case 'rules':
 				$data = $this->_getRulesData();
 				break;
@@ -82,7 +80,7 @@ class UsersModelReport extends JModel
 		$identities = $db->loadResultArray();
 
 		// Get list of extensions.
-		$query = new JQuery;
+		$query	= $db->getQuery(true);
 		$query->select('name, element');
 		$query->from('#__extensions');
 		$query->where('type = '.$db->quote('component'));
@@ -91,13 +89,11 @@ class UsersModelReport extends JModel
 		$extensions = $db->loadObjectList();
 		$actions = $this->getActions();
 
-		foreach ($extensions as &$extension)
-		{
+		foreach ($extensions as &$extension) {
 			$extension->actions = array();
 
 			$rules = JAccess::getAssetRules($extension->element, true);
-			foreach ($actions as $action => $name)
-			{
+			foreach ($actions as $action => $name) {
 				$extension->actions[$action] = $rules->allow($action, $identities);
 			}
 		}

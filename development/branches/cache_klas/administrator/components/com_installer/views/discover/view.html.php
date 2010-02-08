@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +29,7 @@ class InstallerViewDiscover extends InstallerViewDefault
 		JToolBarHelper::custom('discover.refresh', 'refresh', 'refresh','Discover',false,false);
 		JToolBarHelper::custom('discover.purge', 'purge', 'purge', 'PURGE_CACHE', false,false);
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.installer');
+		JToolBarHelper::help('screen.installer','JTOOLBAR_HELP');
 
 		// Get data from the model
 		$state		= &$this->get('State');
@@ -47,8 +47,8 @@ class InstallerViewDiscover extends InstallerViewDefault
 		$item =& $this->items[$index];
 		$item->index	= $index;
 		$item->img		= $item->enabled ? 'tick.png' : 'publish_x.png';
-		$item->task 	= $item->enabled ? 'disable' : 'enable';
-		$item->alt 		= $item->enabled ? JText::_('Enabled') : JText::_('Disabled');
+		$item->task		= $item->enabled ? 'disable' : 'enable';
+		$item->alt		= $item->enabled ? JText::_('Enabled') : JText::_('Disabled');
 		$item->action	= $item->enabled ? JText::_('disable') : JText::_('enable');
 
 		if ($item->protected) {
