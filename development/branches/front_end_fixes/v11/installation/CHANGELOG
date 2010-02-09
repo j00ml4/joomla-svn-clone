@@ -27,6 +27,20 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+09-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_articles_archived ini/keys. Updated sql.
+^ Refactored mod_articles_latest ini/keys.
+^ Refactored mod_popular ini/keys.
+-> Deleted admin mod_stats and mod_footer in files
+
+09-Feb-2010 Christophe Demko
++ Adding a frontend language switcher module
+# Loading the user parameters when he changes them (llow the admin to change its own language for example)
+# Removing unused keys in tpl_bluestork.ini which contains the NO keyword
+# Adding the manifest files directory
+^ Changing the way languages are loaded at install and update phase
+^ Correcting revision 14595 (caused errors in user and menu item edit)
+
 08-Feb-2010 Jean-Marie Simonet
 ^ Refactored mod_popular ini/keys
 ^ Refactored mod_quickicon ini/keys. Added Language manager icon.
