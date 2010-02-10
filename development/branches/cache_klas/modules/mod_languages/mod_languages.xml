@@ -4,34 +4,45 @@
 	version="1.6.0"
 	client="site"
 	method="upgrade">
-	<name>Archived Articles</name>
+	<name>mod_languages</name>
 	<author>Joomla! Project</author>
-	<creationDate>July 2006</creationDate>
+	<creationDate>February 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.6.0</version>
-	<description>MOD_ARTICLES_ARCHIVE_XML_DESCRIPTION</description>
+	<description>mod_languages_Desc</description>
 	<files>
 		<filename
-			module="mod_articles_archive">mod_articles_archive.php</filename>
+			module="mod_languages">mod_languages.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
-		<filename>mod_articles_archive.xml</filename>
+		<filename>index.html</filename>
+		<filename>mod_languages.xml</filename>
 	</files>
 	<languages>
-		<language
-			tag="en-GB">en-GB.mod_archive.ini</language>
+		<language tag="en-GB">en-GB.mod_languages.ini</language>
 	</languages>
 	<fields>
+
 		<field
-			name="count"
-			type="text"
-			default="10"
-			label="MOD_ARTICLES_ARCHIVE_FIELD_COUNT_LABEL"
-			description="MOD_ARTICLES_ARCHIVE_FIELD_COUNT_DESC" />
+			name="header_text"
+			type="textarea"
+			rows="3"
+			cols="40"
+			default=""
+			label="mod_languages_Header_Label"
+			description="mod_languages_Header_Desc" />
+
+		<field
+			name="footer_text"
+			type="textarea"
+			rows="3"
+			cols="40"
+			default=""
+			label="mod_languages_Footer_Label"
+			description="mod_languages_Header_Desc" />
 	</fields>
 	<fields
 		group="advanced">
@@ -40,29 +51,13 @@
 			type="modulelayout"
 			label="JFIELD_ALT_LAYOUT_LABEL"
 			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
 		<field
 			name="moduleclass_sfx"
 			type="text"
 			default=""
 			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
 			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
-		<field
-			name="cache"
-			type="list"
-			default="1"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
-			<option
-				value="1">USE_GLOBAL</option>
-			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
-		</field>
 
-		<field
-			name="cache_time"
-			type="text"
-			default="900"
-			label="MODULES_FIELD_CACHE_TIME_LABEL"
-			description="MODULES_FIELD_CACHE_TIME_DESC" />
 	</fields>
 </extension>
