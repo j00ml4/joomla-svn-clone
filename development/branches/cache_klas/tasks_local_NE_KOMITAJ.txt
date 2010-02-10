@@ -1,4 +1,0 @@
-SAFEURL patch v 1.6.
-Namesto url spremenljivke naj bo trigger POST
-
-Tabela cache fajlov - v array? Da pri gc ni potrebno preledati vsakega fajla!
