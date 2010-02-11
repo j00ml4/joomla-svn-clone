@@ -45,13 +45,17 @@ class JCache extends JObject
 	 * @param	array	$options	options
 	 */
 	function __construct($options)
-	{
+	{	
+		$conf = &JFactory::getConfig();
+
 		$this->_options = array(
-			'language'=>'en-GB',
-			'cachebase'=>JPATH_ROOT.DS.'cache',
+			'cachebase'		=> $conf->getValue('config.cache_path',JPATH_ROOT.DS.'cache'),
+			'lifetime'		=> $conf->getValue('config.cachetime') * 60,	// minutes to seconds
+			'language'		=> $conf->getValue('config.language','en-GB'),
+			'storage'		=> $conf->getValue('config.cache_handler', 'file'),
 			'defaultgroup'=>'default',
-			'caching'=>true,
-			'storage'=>'file');
+			'caching'=>true
+		);
 
 		// Overwrite default options with given options
 		//$this->_options = array_merge($this->_options,$options);
@@ -64,9 +68,10 @@ class JCache extends JObject
 		}
 		
 		// Fix to detect if template positions are enabled...
-		if (JRequest::getCMD('tpl',0)) {
+		//@todo remove, moved to safeuri parameters, no need to disable cache
+		/*if (JRequest::getCMD('tpl',0)) {
 			$this->_options['caching'] = false;
-		}
+		}*/
 	}
 
 	/**
@@ -176,7 +181,7 @@ class JCache extends JObject
 	}
 	
 	/**
-	 * Get all cached data
+	 * Get a list of all cached data
 	 *
 	 * @abstract
 	 * @access	public

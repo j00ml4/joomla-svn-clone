@@ -4,6 +4,7 @@
  * @package		Joomla.Framework
  * @subpackage	Application
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -331,10 +332,11 @@ class JController extends JObject
 	 * This function is provide as a default implementation, in most cases
 	 * you will need to override it in your own controllers.
 	 *
-	 * @param	string	$cachable	If true, the view output will be cached
+	 * @param	boolean	$cachable	If true, the view output will be cached
+	 * @param	array	$urlparams	An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
 	 * @since	1.5
 	 */
-	public function display($cachable = false)
+	public function display($cachable=false,$urlparams=false)
 	{
 		$document = &JFactory::getDocument();
 
@@ -358,6 +360,19 @@ class JController extends JObject
 			global $option;
 			$cache = &JFactory::getCache($option, 'view');
 			$cache->get($view, 'display');
+			if (is_array($urlparams)) {
+				$uri = & JRequest::get();
+				$safeuri=new stdClass();
+				foreach ($urlparams AS $key => $value) {
+					// use int filter for id/catid to clean out spamy slugs
+					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
+				}
+				$secureid = md5(serialize(array($safeuri, get_class($view), 'display')));
+				$cache->get($view, 'display',$secureid);} 
+			
+			else $cache->get($view, 'display');
+			
+			
 		} else {
 			$view->display();
 		}

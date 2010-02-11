@@ -44,10 +44,26 @@ class JCacheStorage extends JObject
 		} else {
 			$this->_threshold = $this->_now - $this->_lifetime;
 		}
+		
+		$app = & JFactory::getApplication();
+		$registeredurlparams = $app->get('registeredurlparams');
+		
+		$safeuriaddon=new stdClass();
+		$safeuriaddon->option='WORD';
+		$safeuriaddon->view='WORD';
+		$safeuriaddon->layout='WORD';
+		$safeuriaddon->tpl='CMD';
+		
+		if (isset($registeredurlparams)) {
+				foreach ($registeredurlparams AS $key => $value) {
+					$safeuriaddon->$key = JRequest::getVar($key, null,'default',$value);
+				}
+		}
+		$this->_safeuriaddon = serialize($safeuriaddon);
 	}
 
 	/**
-	 * Returns a cache storage hanlder object, only creating it
+	 * Returns a cache storage handler object, only creating it
 	 * if it doesn't already exist.
 	 *
 	 * @static
@@ -188,5 +204,20 @@ class JCacheStorage extends JObject
 	function test()
 	{
 		return true;
+	}
+	
+	/**
+	 * Get a cache_id string from an id/group pair
+	 *
+	 * @access	private
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	string	The cache_id string
+	 * @since	1.6
+	 */
+	function _getCacheId($id, $group)
+	{	
+		$name	= md5($this->_application.'-'.$id.'-'.$this->_language.'-'.$this->_safeuriaddon);
+		return $this->_hash.'-cache-'.$group.'-'.$name;
 	}
 }
