@@ -4,7 +4,7 @@ INITIAL TASKS
 
 SMALLER TASKS
 - DONE: Add standalone script with gc() call (to be used with crontab) 
-- DONE: move _getCacheId method from drivers to storage
+- DONE: move _getCacheId method from drivers to storage for components
 - DONE: replace getURI as cacheid base with safer cacheid creation methods
 - DONE: set default cache options respecting configuration in JCache and remove from JFactory::getCache
 - DONE: remove duplicate options from cache plugin (use cachetime, handler etc., set in global configuration)
