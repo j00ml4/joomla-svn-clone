@@ -179,18 +179,13 @@ abstract class JFactory
 		$handler = ($handler == 'function') ? 'callback' : $handler;
 
 		$conf = &JFactory::getConfig();
-
-		if (!isset($storage)) {
-			$storage = $conf->getValue('config.cache_handler', 'file');
+		
+		
+		$options = array('defaultgroup'	=> $group );
+		
+		if (isset($storage)) {
+			$options[] = array('storage' => $storage);
 		}
-
-		$options = array(
-			'defaultgroup'	=> $group,
-			'cachebase'		=> $conf->getValue('config.cache_path'),
-			'lifetime'		=> $conf->getValue('config.cachetime') * 60,	// minutes to seconds
-			'language'		=> $conf->getValue('config.language'),
-			'storage'		=> $storage
-		);
 
 		jimport('joomla.cache.cache');
 

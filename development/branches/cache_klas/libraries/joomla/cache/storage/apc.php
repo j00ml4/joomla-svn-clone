@@ -201,19 +201,4 @@ class JCacheStorageApc extends JCacheStorage
 			apc_store($key.'-expire',  time());
 		}
 	}
-
-	/**
-	 * Get a cache_id string from an id/group pair
-	 *
-	 * @access	private
-	 * @param	string	$id		The cache data id
-	 * @param	string	$group	The cache data group
-	 * @return	string	The cache_id string
-	 * @since	1.5
-	 */
-	function _getCacheId($id, $group)
-	{	
-		$name	= md5($this->_application.'-'.$id.'-'.$this->_language);
-		return $this->_hash.'-cache-'.$group.'-'.$name;
-	}
 }

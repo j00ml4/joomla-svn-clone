@@ -1,8 +1,8 @@
 <?php
 /**
-* @copyright	Klas Berlič
-* @license		GNU/GPL
-*/
+ * @copyright	Copyright (C) 2010 Klas Berlič
+ * @license		GNU/GPL
+ */
 
 // BEFORE USING RENAME THIS FILE TO SOMETHING UNIQUE !!!
 
