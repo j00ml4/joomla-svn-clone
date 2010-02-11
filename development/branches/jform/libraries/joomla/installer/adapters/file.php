@@ -25,6 +25,28 @@ class JInstallerFile extends JAdapterInstance
 	private $route = 'install';
 
 	/**
+	 * Custom loadLanguage method
+	 *
+	 * @access	public
+	 * @param	string	$path the path where to find language files
+	 * @since	1.6
+	 */
+	public function loadLanguage($path)
+	{
+		$this->manifest = &$this->parent->getManifest();
+		$extension = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
+		$lang =& JFactory::getLanguage();
+		$source = $path;
+			$lang->load($extension . '.manage', $source, null, false, false)
+		||	$lang->load($extension, $source, null, false, false)
+		||	$lang->load($extension . '.manage', JPATH_SITE, null, false, false)
+		||	$lang->load($extension , JPATH_SITE, null, false, false)
+		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.manage', JPATH_SITE, $lang->getDefault(), false, false)
+		||	$lang->load($extension , JPATH_SITE, $lang->getDefault(), false, false);
+	}
+	/**
 	 * Custom install method
 	 *
 	 * @access	public
@@ -56,7 +78,7 @@ class JInstallerFile extends JAdapterInstance
 		// Get the component description
 		$description = (string)$this->manifest->description;
 		if ($description) {
-			$this->parent->set('message', $description);
+			$this->parent->set('message', JText::_($description));
 		} else {
 			$this->parent->set('message', '');
 		}
@@ -108,7 +130,8 @@ class JInstallerFile extends JAdapterInstance
 		//Now that we have file list , lets start copying them
 		$this->parent->copyFiles($this->fileList);
 
-
+		// Parse optional tags
+		$this->parent->parseLanguages($this->manifest->languages);
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
@@ -277,6 +300,8 @@ class JInstallerFile extends JAdapterInstance
 			$row->delete();
 			return false;
 		}
+
+		$this->parent->removeFiles($xml->languages);
 
 		$row->delete();
 

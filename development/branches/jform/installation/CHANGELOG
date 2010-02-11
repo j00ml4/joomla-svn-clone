@@ -27,6 +27,47 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+11-Feb-2010 jean-Marie Simonet
+^ Refactored mod_related_items ini/keys
+^ Translating Menu Items Titles in Select view
+
+11-Feb-2010 Christophe Demko
+^ Use $db->getNullDate for calendar fields which are empty
+^ Recommit patch 14775
+
+10-Feb-2010 Christophe Demko
++ Adding publish_up and publish_down for modules
+
+10-Feb-2010 Hannes Papenberg
+# Fixed bug in JFilterInput
+
+09-Feb-2010 Christophe Demko
++ Adding language files facility to package, files and library
+
+10-Feb-2010 Jean-Marie Simonet
++ Added strings for the featured tagging
++ Translated components admin submenus
+^ Refactored mod_banners ini/keys
+^ Refactored mod_breadcrumbs ini/keys
+^ Refactored mod_footer ini/keys
+^ Refactored mod_languages ini/keys
+^ Refactored mod_login (site) ini/keys + bug
+^ Refactored mod_newsflash ini/keys
+^ Refactored mod_random_image ini/keys
+
+09-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_articles_archived ini/keys. Updated sql.
+^ Refactored mod_articles_latest ini/keys.
+^ Refactored mod_articles_popular ini/keys.
+- Deleted admin mod_stats and mod_footer in files
+
+09-Feb-2010 Christophe Demko
+# Loading the user parameters when he changes them (llow the admin to change its own language for example)
+# Removing unused keys in tpl_bluestork.ini which contains the NO keyword
+# Adding the manifest files directory
+^ Changing the way languages are loaded at install and update phase
+^ Correcting revision 14595 (caused errors in user and menu item edit)
+
 08-Feb-2010 Jean-Marie Simonet
 ^ Refactored mod_popular ini/keys
 ^ Refactored mod_quickicon ini/keys. Added Language manager icon.
