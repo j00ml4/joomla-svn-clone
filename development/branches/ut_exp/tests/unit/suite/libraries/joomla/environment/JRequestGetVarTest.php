@@ -16,10 +16,11 @@ require_once 'JRequest-helper-dataset.php';
 
 /**
  * A unit test class for SubjectClass
- * @runTestsInSeparateProcesses enabled
  */
 class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 {
+	public static $filter;
+
 	public function getVarData() {
 		return JRequestTest_DataSet::$getVarTests;
 	}
@@ -27,25 +28,38 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 	/**
 	 * Define some sample data
 	 */
-	function setUp() {
+	public function setUp() {
 		JRequestTest_DataSet::initSuperGlobals();
 		// Make sure the request hash is clean.
 		$GLOBALS['_JREQUEST'] = array();
 	}
 
+	public static function setUpBeforeClass() {
+		require_once dirname(__FILE__).DS.'JFilterInput-mock-general.php';
+		$filter = &JFilterInput::getInstance();
+		self::$filter = JFilterInput::getInstance();
+		$filter = new JFilterInputJRequest;
+	}
+
+	public static function tearDownAfterClass() {
+		$filter = &JFilterInput::getInstance();
+		$filter = self::$filter;
+	}
+
 	/**
 	 * @dataProvider getVarData
-	 * @runInSeparateProcess
 	 */
 	public function testGetVarFromDataSet($name, $default, $hash, $type, $mask, $expect, $filterCalls)
 	{
 
-		require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/bootstrap.php');
-		require_once dirname(__FILE__).DS.'JFilterInput-mock-general.php';
 
 		jimport( 'joomla.environment.request' );
 
-		$filter = JFilterInput::getInstance();
+		//$store_filter = JFilterInput::getInstance();
+		$filter = &JFilterInput::getInstance();
+		$store_filter = clone($filter);
+
+		$filter = new JFilterInputJRequest;
 		$filter -> mockReset();
 		if (count($filterCalls)) {
 			foreach ($filterCalls as $info) {
@@ -71,6 +85,10 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 				. print_r($filterOK, true)
 			);
 		}
+		$filter_old = &JFilterInput::getInstance();
+		$filter_old = $store_filter;
+		$filter_diff = JFilterInput::getInstance();
+		
 	}
 
 }
