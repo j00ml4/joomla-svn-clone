@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -67,8 +67,8 @@ class MenusViewItem extends JView
 		if ($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'))
 		{
 
-			JToolBarHelper::save('item.save');
-			JToolBarHelper::apply('item.apply');
+			JToolBarHelper::apply('item.apply','JTOOLBAR_APPLY');
+			JToolBarHelper::save('item.save','JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('item.save2new', 'JToolbar_Save_and_new');
 		}
 		// If an existing item, can save to a copy.
@@ -82,6 +82,6 @@ class MenusViewItem extends JView
 			JToolBarHelper::cancel('item.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.menus.item');
+		JToolBarHelper::help('screen.menus.item','JTOOLBAR_HELP');
 	}
 }

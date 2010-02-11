@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Language
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,7 +11,7 @@
 defined('JPATH_BASE') or die;
 
 /**
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Language
  * @static
  * @since 1.5
@@ -49,11 +49,11 @@ class JLanguageHelper
 	}
 
 	/**
- 	 * Tries to detect the language.
- 	 *
- 	 * @return	string locale
- 	 * @since	1.5
- 	 */
+	 * Tries to detect the language.
+	 *
+	 * @return	string locale
+	 * @since	1.5
+	 */
 	public static function detectLanguage()
 	{
 		if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
@@ -69,11 +69,17 @@ class JLanguageHelper
 
 				foreach($systemLangs as $systemLang => $metadata)
 				{
-					if (strtolower($browserLang) == strtolower(substr($metadata['tag'], 0, strlen($browserLang)))) {
-						return $systemLang;
-					}
-					else if ($primary_browserLang == substr($metadata['tag'], 0, 2)) {
-						$primaryDetectedLang = $systemLang;
+				// take off 3 letters iso code languages as they can't match browsers' languages and default them to en
+					$Jinstall_lang = $metadata['tag'];
+
+					if (strlen($Jinstall_lang) < 6)
+					{
+						if (strtolower($browserLang) == strtolower(substr($metadata['tag'], 0, strlen($browserLang)))) {
+							return $systemLang;
+						}
+						else if ($primary_browserLang == substr($metadata['tag'], 0, 2)) {
+							$primaryDetectedLang = $systemLang;
+						}
 					}
 				}
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -32,10 +32,10 @@ class JFormFieldFile extends JFormField
 	 */
 	protected function _getInput()
 	{
-		$size		= $this->_element->attributes('size') ? ' size="'.$this->_element->attributes('size').'"' : '';
-		$class		= $this->_element->attributes('class') ? 'class="'.$this->_element->attributes('class').'"' : 'class="text_area"';
-		$onchange	= $this->_element->attributes('onchange') ? ' onchange="'.$this->_element->attributes('onchange').'"' : '';
+		$size		= (string)$this->_element->attributes()->size ? ' size="'.$this->_element->attributes()->size.'"' : '';
+		$class		= (string)$this->_element->attributes()->class ? ' class="'.$this->_element->attributes()->class.'"' : ' class="text_area"';
+		$onchange	= (string)$this->_element->attributes()->onchange ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
 
-		return '<input type="file" name="'.$this->inputName.'" id="'.$this->inputId.'" value="" '.$class.$size.$onchange.' />';
+		return '<input type="file" name="'.$this->inputName.'" id="'.$this->inputId.'" value=""'.$class.$size.$onchange.' />';
 	}
 }

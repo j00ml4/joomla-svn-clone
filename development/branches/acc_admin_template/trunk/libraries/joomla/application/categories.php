@@ -1,20 +1,19 @@
 <?php
 /**
- * @version		$Id:categorytree.php 6961 2007-03-15 16:06:53Z tcp $
- * @package		Joomla.Framework
- * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @version		$Id$
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('JPATH_BASE') or die;
 
-jimport('joomla.base.tree');
+jimport('joomla.base.node');
+
 /**
  * JCategories Class.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Application
  * @since		1.6
  */
@@ -49,11 +48,33 @@ class JCategories
 	protected $_table = null;
 
 	/**
+	 * Name of the category field
+	 *
+	 * @var string
+	 */
+	protected $_field = null;
+
+	/**
+	 * Name of the key field
+	 *
+	 * @var string
+	 */
+	protected $_key = null;
+
+	/**
 	 * Array of options
 	 *
 	 * @var array
 	 */
 	protected $_options = null;
+
+	/**
+	 * Save the information, if a tree is loaded
+	 *
+	 * @var boolean
+	 */
+	protected $_treeloaded = false;
+
 
 	/**
 	 * Class constructor
@@ -63,8 +84,10 @@ class JCategories
 	 */
 	public function __construct($options)
 	{
-		$this->_extension 	= $options['extension'];
+		$this->_extension	= $options['extension'];
 		$this->_table		= $options['table'];
+		$this->_field		= (isset($options['field'])&&$options['field'])?$options['field']:'catid';
+		$this->_key			= (isset($options['key'])&&$options['key'])?$options['key']:'id';
 		$this->_options		= $options;
 		return true;
 	}
@@ -82,10 +105,13 @@ class JCategories
 		{
 			return self::$instances[$extension];
 		}
-		$classname = ucfirst(substr($extension,4)).'Categories';
+		$parts = explode('.',$extension);
+		$component = $parts[0];
+		$section = (count($parts)>1)?$parts[1]:'';
+		$classname = ucfirst(substr($component,4)).ucfirst($section).'Categories';
 		if (!class_exists($classname))
 		{
-			$path = JPATH_SITE.DS.'components'.DS.$extension.DS.'helpers'.DS.'category.php';
+			$path = JPATH_SITE.DS.'components'.DS.$component.DS.'helpers'.DS.'category.php';
 			if (is_file($path))
 			{
 				require_once $path;
@@ -99,61 +125,169 @@ class JCategories
 
 	/**
 	 * Loads a specific category and all its children in a JCategoryNode object
-	 * @param $id
-	 * @return JCategoryNode
+	 * @param an optional id integer or equal to 'root'
+	 * @param an optional array of boolean options (all set to true by default).
+	 *   'load' to force loading
+	 *   'children' to get its direct children,
+	 *   'parent' to get its direct parent,
+	 *   'siblings' to get its siblings
+	 *   'ascendants' to get its ascendants
+	 *   'descentants' to get its descendants
+	 *   'level-min' to get nodes from this level
+	 *   'level-max' to get nodes until this level 
+	 * @return JCategoryNode|null
 	 */
-	public function get($id)
+	public function get($id='root',$options=array())
 	{
-		$id = (int) $id;
-		if ($id == 0)
+		if ($id != 'root')
 		{
-			return false;
+			$id = (int) $id;
+			if ($id == 0)
+			{
+				return null;
+			}
 		}
-		if (!isset($this->_nodes[$id]))
+		if (!isset($this->_nodes[$id]) || !isset($options['load']) || $options['load'])
 		{
-			$this->_load($id);
+			$this->_load($id,$options);
 		}
-		if ($this->_nodes[$id] instanceof JCategoryNode)
+		
+		return $this->node($id);
+	}
+	/**
+	 * Return a node
+	 * @param an optional id
+	 * @return JCategoryNode|null
+	 */
+	public function node($id='root')
+	{
+		if (isset($this->_nodes[$id]) && $this->_nodes[$id] instanceof JCategoryNode)
 		{
 			return $this->_nodes[$id];
-		} else {
-			throw new JException('Unable to load category: '.$id, 0000, E_ERROR, $info, true);
+		}
+		else
+		{
+			return null;
 		}
 	}
-
-	protected function _load($id)
+	/**
+	 * Return the root or null
+	 *
+	 * @return JCategoryNode|null
+	 */
+	public function root()
 	{
-		$db	= &JFactory::getDbo();
-		$user = &JFactory::getUser();
-		$subquery = 'SELECT c.id, c.lft, c.rgt'.
-			' FROM #__categories AS c'.
-			' JOIN #__categories AS cp ON cp.lft >= c.lft AND c.rgt >= cp.rgt'.
-			' WHERE c.extension = '.$db->Quote($this->_extension).
-			' AND cp.id = '.$id.' AND c.parent_id = 0';
+		return $this->node('root');
+	}
 
-		$query = 'SELECT c.*, COUNT(b.id) AS numitems, ' .
-			' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug'.
-			' FROM #__categories AS c' .
-			' LEFT JOIN '.$this->_table.' AS b ON b.catid = c.id ';
-		if ($id != 0)
+	protected function _load($id,$options)
+	{
+		$db	= JFactory::getDbo();
+		$user = JFactory::getUser();
+		$extension = $this->_extension;
+		
+		$children		= !isset($options['children'])		|| $options['children'];
+		$parent			= !isset($options['parent'])		|| $options['parent'];
+		$siblings		= !isset($options['siblings'])		|| $options['siblings'];
+		$ascendants		= !isset($options['ascendants'])	|| $options['ascendants'];
+		$descendants	= !isset($options['descendants'])	|| $options['descendants'];
+		
+		$query = new JDatabaseQuery;
+		
+		// right join with c for category
+		$query->select('c.*');
+		$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
+		$query->from('#__categories as c');
+		$query->where('(c.extension='.$db->Quote($extension).' OR c.extension='.$db->Quote('system').')');
+		$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');		
+		$query->order('c.lft');
+
+		// s for selected id
+		if ($id!='root')
 		{
-			$query .= ' JOIN ('.$subquery.') AS cp ON c.lft >= cp.lft AND c.rgt <= cp.rgt';
+			// Get the selected category
+			$test = 					'(s.lft = c.lft AND s.rgt = c.rgt)';
+			// Get the parent
+			$test.=$parent?			' OR (s.parent_id = c.id)':''; 
+			// Get the children
+			$test.=$children ?		' OR (c.parent_id = s.id)':'';
+			// Get the siblings
+			$test.=$siblings ?		' OR (s.parent_id = c.parent_id)':'';
+			// Get the ascendants
+			$test.=$ascendants?		' OR (s.lft <= c.lft AND s.rgt >= c.rgt)':''; 
+			// Get the descendants
+			$test.=$descendants ?	' OR (s.lft >= c.lft AND s.rgt <= c.rgt)':'';
+			
+			$query->leftJoin('#__categories AS s ON ' . $test);
+			$query->where('s.id='.(int)$id);
 		}
-		$query .= ' WHERE c.extension = '.$db->Quote($this->_extension).
-			' AND c.access IN ('.implode(',', $user->authorisedLevels()).')'.
-			' GROUP BY c.id'.
-			' ORDER BY c.lft';
-		$db->setQuery($query);
-		$results = $db->loadObjectList();
+		
+		// Deal with level min and max
+		if (isset($options['level-min']))
+		{
+			$query->where('c.level >='.(int)$options['level-min']);
+		}
+		if (isset($options['level-max']))
+		{
+			$query->where('c.level <='.(int)$options['level-max']);
+		}
 
+		// i for item
+		$query->leftJoin($db->nameQuote($this->_table).' AS i ON i.'.$db->nameQuote($this->_field).' = c.id ');
+		$query->select('COUNT(i.'.$db->nameQuote($this->_key).') AS numitems');
+		
+		// Group by
+		$query->group('c.id');
+
+		// Get the results
+		$db->setQuery($query);
+		$results = $db->loadObjectList('id');
+		
 		if (count($results))
 		{
+			// foreach categories
 			foreach($results as $result)
 			{
-				$this->_nodes[$result->id] = new JCategoryNode($result);
+				// Deal with parent_id
+				if (empty($result->parent_id))
+				{
+					$result->id = 'root';
+				}
+				elseif($result->parent_id == 1)
+				{
+					$result->parent_id = 'root';
+				}
+				
+				// Create the node
+				if (!isset($this->_nodes[$result->id]))
+				{
+					// Convert the params field to an array.
+					$registry = new JRegistry();
+					$registry->loadJSON($result->params);
+					$result->params = $registry->toArray();
+
+					// Convert the metadata field to an array.
+					$registry = new JRegistry();
+					$registry->loadJSON($result->metadata);
+					$result->metadata = $registry->toArray();
+					
+					// Create the JCategoryNode
+					$this->_nodes[$result->id] = new JCategoryNode($result);
+				}
+				
+				// Compute relationship between node and its parent
+				if (!$this->_nodes[$result->id]->hasParent())
+				{
+					if (isset($this->_nodes[$result->parent_id]))
+					{
+						$this->_nodes[$result->id]->setParent($this->_nodes[$result->parent_id]);
+					}
+				}
 			}
-		} else {
-			$this->_nodes[$id] = false;
+		}
+		else
+		{
+			$this->_nodes[$id] = null;
 		}
 	}
 }
@@ -163,7 +297,7 @@ class JCategories
  * @author Hannes
  * @since 1.6
  */
-class JCategoryNode extends JObject
+class JCategoryNode extends JNode
 {
 	/** @var int Primary key */
 	public $id					= null;
@@ -173,7 +307,7 @@ class JCategoryNode extends JObject
 	public $parent_id			= null;
 	/** @var int */
 	public $extension			= null;
-	public $lang					= null;
+	public $lang				= null;
 	/** @var string The menu title for the category (a short name)*/
 	public $title				= null;
 	/** @var string The the alias for the category*/
@@ -185,19 +319,15 @@ class JCategoryNode extends JObject
 	/** @var boolean */
 	public $checked_out			= 0;
 	/** @var time */
-	public $checked_out_time		= 0;
+	public $checked_out_time	= 0;
 	/** @var int */
 	public $access				= null;
 	/** @var string */
 	public $params				= null;
 	/** @var int */
-	public $numitems				= null;
+	public $numitems			= null;
 	/** @var string */
-	public $slug					= null;
-
-	protected $_parent				= null;
-
-	protected $_children			= array();
+	public $slug				= null;
 
 	/**
 	 * Class constructor
@@ -209,62 +339,17 @@ class JCategoryNode extends JObject
 		if ($category)
 		{
 			$this->setProperties($category);
-			if ($this->parent_id > 0)
-			{
-				$categoryTree = JCategories::getInstance($this->extension);
-				$parentNode = &$categoryTree->get($this->parent_id);
-				$parentNode->addChild($this);
-			}
 			return true;
 		}
 		return false;
 	}
-
 	/**
-	 * Adds a child to the current element of the Categorytree
-	 * @param $node
-	 * @return void
+	 * Test if this node is the system node
+	 *
+	 * @return bool
 	 */
-	public function addChild(&$node)
+	public function isSystem()
 	{
-		$node->setParent($this);
-		$this->_children[] = & $node;
-	}
-
-	/**
-	 * Returns the parent category of the current category
-	 * @return JCategoryNode
-	 */
-	public function getParent()
-	{
-		return $this->_parent;
-	}
-
-	/**
-	 * Sets the parent for the current category
-	 * @param $node
-	 * @return void
-	 */
-	public function setParent(&$node)
-	{
-		$this->_parent = & $node;
-	}
-
-	/**
-	 * Returns true if the category has children
-	 * @return boolean
-	 */
-	public function hasChildren()
-	{
-		return count($this->_children);
-	}
-
-	/**
-	 * Returns the children of the Category
-	 * @return array
-	 */
-	public function getChildren()
-	{
-		return $this->_children;
+		return $this->id=='root';
 	}
 }

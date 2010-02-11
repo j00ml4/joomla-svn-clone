@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -47,14 +47,14 @@ class ContentControllerArticle extends JController
 
 	protected function _getReturnPage()
 	{
-		$app 		= &JFactory::getApplication();
+		$app		= &JFactory::getApplication();
 		$context	= $this->_context.'.';
 
 		if (!($return = $app->getUserState($context.'.return'))) {
 			$return = JRequest::getVar('return', base64_encode(JURI::base()));
 		}
 
-		$return = JFilterInput::clean($return, 'base64');
+		$return = JFilterInput::getInstance()->clean($return, 'base64');
 		$return = base64_decode($return);
 
 		if (!JURI::isInternal($return)) {
@@ -66,7 +66,7 @@ class ContentControllerArticle extends JController
 
 	protected function _setReturnPage()
 	{
-		$app 		= &JFactory::getApplication();
+		$app		= &JFactory::getApplication();
 		$context	= $this->_context.'.';
 
 		$return = JRequest::getVar('return', null, 'default', 'base64');
@@ -172,8 +172,8 @@ class ContentControllerArticle extends JController
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		// Initialise variables.
-		$app 		= &JFactory::getApplication();
-		$context 	= $this->_context.'.';
+		$app		= &JFactory::getApplication();
+		$context	= $this->_context.'.';
 
 		// Get the previous menu item id (if any) and the current menu item id.
 		$previousId	= (int) $app->getUserState($context.'id');
@@ -209,7 +209,7 @@ class ContentControllerArticle extends JController
 
 		// Initialise variables.
 		$app		= &JFactory::getApplication();
-		$context 	= $this->_context.'.';
+		$context	= $this->_context.'.';
 		$model		= &$this->getModel();
 		$task		= $this->getTask();
 
@@ -220,8 +220,8 @@ class ContentControllerArticle extends JController
 		$data['id'] = (int) $app->getUserState($context.'id');
 
 		// Split introtext and fulltext
-		$pattern 	= '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-		$text 		= $data['text'];
+		$pattern	= '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
+		$text		= $data['text'];
 		$tagPos		= preg_match($pattern, $text);
 
 		if ($tagPos == 0) {

@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +20,7 @@ $cacheDir = JPATH_BASE.'/cache';
 if (!is_writable($cacheDir))
 {
 	echo '<div>';
-	echo JText::_('Please make cache directory writable.');
+	echo JText::_('MOD_FEED_ERR_CACHE');
 	echo '</div>';
 	return;
 }
@@ -29,7 +29,7 @@ if (!is_writable($cacheDir))
 if (empty ($rssurl))
 {
 	echo '<div>';
-	echo JText::_('No feed URL specified.');
+	echo JText::_('MOD_FEED_ERR_NO_URL');
 	echo '</div>';
 	return;
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,7 +30,7 @@ class BannersViewClient extends JView
 	{
 		$state	= $this->get('State');
 		$item	= $this->get('Item');
-		$form 	= $this->get('Form');
+		$form	= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -69,14 +69,14 @@ class BannersViewClient extends JView
 		if (!$checkedOut && $canDo->get('core.edit'))
 		{
 			JToolBarHelper::apply('client.apply', 'JToolbar_Apply');
-			JToolBarHelper::save('client.save', 'JToolbar_Save');			
+			JToolBarHelper::save('client.save', 'JToolbar_Save');
 			JToolBarHelper::addNew('client.save2new', 'JToolbar_Save_and_new');
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
 			JToolBarHelper::custom('client.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JToolbar_Save_as_Copy', false);
 		}
-		
+
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('client.cancel');
 		}

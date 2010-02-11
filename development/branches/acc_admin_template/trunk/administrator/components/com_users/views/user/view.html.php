@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -67,16 +67,16 @@ class UsersViewUser extends JView
 
 		$isNew	= ($this->item->id == 0);
 		JToolBarHelper::title(JText::_($isNew ? 'Users_View_New_User_Title' : 'Users_View_Edit_User_Title'), 'user-add');
-		JToolBarHelper::apply('user.apply');
-		JToolBarHelper::save('user.save');
+		JToolBarHelper::apply('user.apply','JTOOLBAR_APPLY');
+		JToolBarHelper::save('user.save','JTOOLBAR_SAVE');
 		JToolBarHelper::addNew('user.save2new', 'JToolbar_Save_and_new');
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('user.cancel');
+			JToolBarHelper::cancel('user.cancel','JTOOLBAR_CANCEL');
 		}
 		else {
 			JToolBarHelper::cancel('user.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.user');
+		JToolBarHelper::help('screen.users.user','JTOOLBAR_HELP');
 	}
 }

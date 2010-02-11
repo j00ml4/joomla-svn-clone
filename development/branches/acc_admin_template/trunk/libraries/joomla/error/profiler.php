@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Error
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,7 +14,7 @@ defined('JPATH_BASE') or die;
  * Utility class to assist in the process of benchmarking the execution
  * of sections of code to understand where time is being spent.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Error
  * @since		1.0
  */

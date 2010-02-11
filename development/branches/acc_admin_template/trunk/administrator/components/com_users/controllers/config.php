@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_users
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -79,19 +79,19 @@ class UsersControllerConfig extends JController
 		// Get the component configuration values.
 		$app	= JFactory::getApplication();
 		$config = &JComponentHelper::getParams('com_users');
-		$string	= $config->toString();
+		$string	= (string)$config;
 
 		// Send file headers.
 		header('Content-type: application/force-download');
-	    header('Content-Transfer-Encoding: Binary');
-	    header('Content-length: '.strlen($string));
-	    header('Content-disposition: attachment; filename="users.config.ini"');
+		header('Content-Transfer-Encoding: Binary');
+		header('Content-length: '.strlen($string));
+		header('Content-disposition: attachment; filename="users.config.ini"');
 		header('Pragma: no-cache');
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Expires: 0');
 
 		// Print the configuration values.
-	    echo $string;
+		echo $string;
 
 		$app->close();
 	}

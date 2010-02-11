@@ -62,7 +62,7 @@
 <div align="center">
 	<div style="float: right;">
 		<label for="limit">
-			<?php echo JText::_( 'Display Num' ); ?>
+			<?php echo JText::_( 'DISPLAY_NUM' ); ?>
 		</label>
 		<?php echo $this->pagination->getLimitBox( ); ?>
 	</div>
@@ -72,5 +72,5 @@
 </div>
 <?php endif; ?>
 
-<input type="hidden" name="task"   value="search" />
+<input type="hidden" name="task" value="search" />
 </form>

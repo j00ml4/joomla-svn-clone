@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 /**
  * Renders a filelist element
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage		Parameter
  * @since		1.5
  */
@@ -44,12 +44,12 @@ class JElementFilelist extends JElement
 
 		if (!$node->attributes('hide_none'))
 		{
-			$options[] = JHtml::_('select.option', '-1', '- '.JText::_('Do not use').' -');
+			$options[] = JHtml::_('select.option', '-1', '- '.JText::_('DO_NOT_USE').' -');
 		}
 
 		if (!$node->attributes('hide_default'))
 		{
-			$options[] = JHtml::_('select.option', '', '- '.JText::_('Use default').' -');
+			$options[] = JHtml::_('select.option', '', '- '.JText::_('USE_DEFAULT').' -');
 		}
 
 		if (is_array($files))

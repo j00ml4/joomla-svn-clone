@@ -3,7 +3,7 @@
  * @version		$Id: default_children.php 12812 2009-09-22 03:58:25Z dextercowley $
  * @package		Joomla.Site
  * @subpackage	com_weblinks
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -11,9 +11,9 @@
 defined('_JEXEC') or die;
 ?>
 <?php if (empty($this->children)) : ?>
-
+<p><?php  echo JText::_('JContent_No_Children'); ?></p>
 <?php else : ?>
-	<h5>Sub Categories</h5>
+	<h3><?php  echo JText::_('JContent_Children'); ?></h3>
 <?php
 	// Initialise the starting level
 	// starting level is the parent level coming in

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -21,7 +21,7 @@ class ContentControllerArticle extends JControllerForm
 	 *
 	 * @param	array	An array of input data.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowAdd($data = array())
 	{
@@ -51,7 +51,7 @@ class ContentControllerArticle extends JControllerForm
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowEdit($data = array(), $key = 'id')
 	{

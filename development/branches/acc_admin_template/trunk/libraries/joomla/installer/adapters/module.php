@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,6 +30,52 @@ class JInstallerModule extends JAdapterInstance
 	protected $scriptElement = null;
 
 	/**
+	 * Custom loadLanguage method
+	 *
+	 * @access	public
+	 * @param	string	$path the path where to find language files
+	 * @since	1.6
+	 */
+	public function loadLanguage($path)
+	{
+		$this->manifest = &$this->parent->getManifest();
+		if ($this->manifest->files)
+		{
+			$element = $this->manifest->files;
+			$extension = '';
+			if (count($element->children()))
+			{
+				foreach ($element->children() as $file)
+				{
+					if ((string)$file->attributes()->module)
+					{
+						$extension = strtolower((string)$file->attributes()->module);
+						break;
+					}
+				}
+			}
+			if ($extension)
+			{
+				$lang =& JFactory::getLanguage();
+				$source = $path;
+				$folder = (string)$element->attributes()->folder;
+				if ($folder && file_exists("$path/$folder"))
+				{
+					$source = "$path/$folder";
+				}
+				$client = (string)$this->manifest->attributes()->client;
+					$lang->load($extension . '.manage', $source, null, false, false)
+				||	$lang->load($extension, $source, null, false, false)
+				||	$lang->load($extension . '.manage', constant('JPATH_' . strtoupper($client)), null, false, false)
+				||	$lang->load($extension, constant('JPATH_' . strtoupper($client)), null, false, false)
+				||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+				||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+				||	$lang->load($extension . '.manage', constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false)
+				||	$lang->load($extension, constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false);
+			}
+		}
+	}
+	/**
 	 * Custom install method
 	 *
 	 * @access	public
@@ -47,8 +93,7 @@ class JInstallerModule extends JAdapterInstance
 		$db = &$this->parent->getDbo();
 
 		// Get the extension manifest object
-		$manifest = &$this->parent->getManifest();
-		$this->manifest = &$manifest->document;
+		$this->manifest = $this->parent->getManifest();
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
@@ -57,14 +102,14 @@ class JInstallerModule extends JAdapterInstance
 		 */
 
 		// Set the extensions name
-		$name = &$this->manifest->getElementByPath('name');
-		$name = JFilterInput::clean($name->data(), 'string');
+		$name = (string)$this->manifest->name;
+		$name = JFilterInput::getInstance()->clean($name, 'string');
 		$this->set('name', $name);
 
 		// Get the component description
-		$description = & $this->manifest->getElementByPath('description');
-		if ($description INSTANCEOF JSimpleXMLElement) {
-			$this->parent->set('message', $description->data());
+		$description = (string)$this->manifest->description;
+		if ($description) {
+			$this->parent->set('message', JText::_($description));
 		}
 		else {
 			$this->parent->set('message', '');
@@ -76,7 +121,7 @@ class JInstallerModule extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 		// Get the target application
-		if ($cname = $this->manifest->attributes('client'))
+		if ($cname = (string)$this->manifest->attributes()->client)
 		{
 			// Attempt to map the client to a base path
 			jimport('joomla.application.helper');
@@ -99,15 +144,13 @@ class JInstallerModule extends JAdapterInstance
 
 		// Set the installation path
 		$element = '';
-		$module_files = &$this->manifest->getElementByPath('files');
-		if ($module_files INSTANCEOF JSimpleXMLElement && count($module_files->children()))
+		if (count($this->manifest->files->children()))
 		{
-			$files = &$module_files->children();
-			foreach ($files as $file)
+			foreach ($this->manifest->files->children() as $file)
 			{
-				if ($file->attributes('module'))
+				if ((string)$file->attributes()->module)
 				{
-					$element = $file->attributes('module');
+					$element = (string)$file->attributes()->module;
 					$this->set('element',$element);
 					break;
 				}
@@ -151,11 +194,11 @@ class JInstallerModule extends JAdapterInstance
 		if (file_exists($this->parent->getPath('extension_root')) && (!$this->parent->getOverwrite() || $this->parent->getUpgrade()))
 		{
 			// look for an update function or update tag
-			$updateElement = $this->manifest->getElementByPath('update');
+			$updateElement = $this->manifest->update;
 			// upgrade manually set
 			// update function available
 			// update tag detected
-			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'update')) || is_a($updateElement, 'JSimpleXMLElement'))
+			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'update')) || is_a($updateElement, 'JXMLElement'))
 			{
 				// force these one
 				$this->parent->setOverwrite(true);
@@ -179,10 +222,10 @@ class JInstallerModule extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
-		$this->scriptElement = &$this->manifest->getElementByPath('scriptfile');
-		if (is_a($this->scriptElement, 'JSimpleXMLElement'))
+		$this->scriptElement = $this->manifest->scriptfile;
+		$manifestScript = (string)$this->manifest->scriptfile;
+		if ($manifestScript)
 		{
-			$manifestScript = $this->scriptElement->data();
 			$manifestScriptFile = $this->parent->getPath('source').DS.$manifestScript;
 			if (is_file($manifestScriptFile))
 			{
@@ -222,7 +265,7 @@ class JInstallerModule extends JAdapterInstance
 		{
 			if (!$created = JFolder::create($this->parent->getPath('extension_root')))
 			{
-				$this->parent->abort(JText::_('Module').' '.JText::_($this->route).': '.JText::_('Failed to create directory').': "'.$this->parent->getPath('extension_root').'"');
+				$this->parent->abort(JText::_('Module').' '.JText::_($this->route).': '.JText::_('FAILED_TO_CREATE_DIRECTORY').': "'.$this->parent->getPath('extension_root').'"');
 				return false;
 			}
 		}
@@ -237,7 +280,7 @@ class JInstallerModule extends JAdapterInstance
 		}
 
 		// Copy all necessary files
-		if ($this->parent->parseFiles($module_files, -1) === false)
+		if ($this->parent->parseFiles($this->manifest->files, -1) === false)
 		{
 			// Install failed, roll back changes
 			$this->parent->abort();
@@ -245,11 +288,11 @@ class JInstallerModule extends JAdapterInstance
 		}
 
 		// Parse optional tags
-		$this->parent->parseMedia($this->manifest->getElementByPath('media'), $clientId);
-		$this->parent->parseLanguages($this->manifest->getElementByPath('languages'), $clientId);
+		$this->parent->parseMedia($this->manifest->media, $clientId);
+		$this->parent->parseLanguages($this->manifest->languages, $clientId);
 
 		// Parse deprecated tags
-		$this->parent->parseFiles($this->manifest->getElementByPath('images'), -1);
+		$this->parent->parseFiles($this->manifest->images, -1);
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
@@ -305,7 +348,7 @@ class JInstallerModule extends JAdapterInstance
 		 */
 		// try for Joomla 1.5 type queries
 		// second argument is the utf compatible version attribute
-		$utfresult = $this->parent->parseSQLFiles($this->manifest->getElementByPath(strtolower($this->route).'/sql'));
+		$utfresult = $this->parent->parseSQLFiles($this->manifest->{strtolower($this->route)}->sql);
 		if ($utfresult === false)
 		{
 			// Install failed, rollback changes
@@ -330,7 +373,7 @@ class JInstallerModule extends JAdapterInstance
 		if (!$this->parent->copyManifest(-1))
 		{
 			// Install failed, rollback changes
-			$this->parent->abort(JText::_('Module').' '.JText::_($this->route).': '.JText::_('Could not copy setup file'));
+			$this->parent->abort(JText::_('Module').' '.JText::_($this->route).': '.JText::_('COULD_NOT_COPY_SETUP_FILE'));
 			return false;
 		}
 
@@ -499,16 +542,16 @@ class JInstallerModule extends JAdapterInstance
 		}
 		$this->parent->setPath('extension_root', $client->path.DS.'modules'.DS.$element);
 
-		// Get the package manifest objecct
 		$this->parent->setPath('source', $this->parent->getPath('extension_root'));
-		$manifest = &$this->parent->getManifest();
-		$this->manifest = &$manifest->document;
+
+		// Get the package manifest objecct
+		$this->manifest = $this->parent->getManifest();
 
 		// If there is an manifest class file, lets load it
-		$this->scriptElement = &$this->manifest->getElementByPath('scriptfile');
-		if (is_a($this->scriptElement, 'JSimpleXMLElement'))
+		$this->scriptElement = $this->manifest->scriptfile;
+		$manifestScript = (string)$this->manifest->scriptfile;
+		if ($manifestScript)
 		{
-			$manifestScript = $this->scriptElement->data();
 			$manifestScriptFile = $this->parent->getPath('extension_root').DS.$manifestScript;
 			if (is_file($manifestScriptFile))
 			{
@@ -537,7 +580,7 @@ class JInstallerModule extends JAdapterInstance
 		$msg = ob_get_contents();
 		ob_end_clean();
 
-		if (!$manifest INSTANCEOF JSimpleXML)
+		if (!$this->manifest INSTANCEOF JXMLElement)
 		{
 			// Make sure we delete the folders
 			JFolder::delete($this->parent->getPath('extension_root'));
@@ -552,7 +595,7 @@ class JInstallerModule extends JAdapterInstance
 		 */
 		// try for Joomla 1.5 type queries
 		// second argument is the utf compatible version attribute
-		$utfresult = $this->parent->parseSQLFiles($this->manifest->getElementByPath('uninstall/sql'));
+		$utfresult = $this->parent->parseSQLFiles($this->manifest->uninstall->sql);
 		if ($utfresult === false)
 		{
 			// Install failed, rollback changes
@@ -561,9 +604,8 @@ class JInstallerModule extends JAdapterInstance
 		}
 
 		// Remove other files
-		$root = &$manifest->document;
-		$this->parent->removeFiles($root->getElementByPath('media'));
-		$this->parent->removeFiles($root->getElementByPath('languages'), $row->client_id);
+		$this->parent->removeFiles($this->manifest->media);
+		$this->parent->removeFiles($this->manifest->languages, $row->client_id);
 
 		// Lets delete all the module copies for the type we are uninstalling
 		$query = 'SELECT `id`' .
@@ -639,7 +681,7 @@ class JInstallerModule extends JAdapterInstance
 
 	/**
 	 * Custom rollback method
-	 * 	- Roll back the menu item
+	 *	- Roll back the menu item
 	 *
 	 * @access	public
 	 * @param	array	$arg	Installation step to rollback
@@ -666,7 +708,7 @@ class JInstallerModule extends JAdapterInstance
 
 	/**
 	 * Custom rollback method
-	 * 	- Roll back the module item
+	 *	- Roll back the module item
 	 *
 	 * @access	public
 	 * @param	array	$arg	Installation step to rollback

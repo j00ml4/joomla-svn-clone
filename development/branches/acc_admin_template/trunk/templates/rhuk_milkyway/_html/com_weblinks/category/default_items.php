@@ -3,7 +3,7 @@
 	function tableOrdering( order, dir, task ) {
 	var form = document.adminForm;
 
-	form.filter_order.value 	= order;
+	form.filter_order.value = order;
 	form.filter_order_Dir.value	= dir;
 	document.adminForm.submit( task );
 }
@@ -14,7 +14,7 @@
 <tr>
 	<td align="right" colspan="4">
 	<?php
-		echo JText::_('Display Num') .'&nbsp;';
+		echo JText::_('DISPLAY_NUM') .'&nbsp;';
 		echo $this->pagination->getLimitBox();
 	?>
 	</td>

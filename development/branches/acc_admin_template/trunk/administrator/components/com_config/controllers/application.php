@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -151,11 +151,11 @@ class ConfigControllerApplication extends JController
 		JClientHelper::setCredentialsFromRequest('ftp');
 
 		if (($data = file_get_contents('http://help.joomla.org/helpsites-15.xml')) === false) {
-			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH ERROR FETCH'), 'error');
+			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH_ERROR_FETCH'), 'error');
 		} else if (!JFile::write(JPATH_BASE.DS.'help'.DS.'helpsites-15.xml', $data)) {
-			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH ERROR STORE'), 'error');
+			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH_ERROR_STORE'), 'error');
 		} else {
-			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH SUCCESS'));
+			$this->setRedirect('index.php?option=com_config', JText::_('HELPREFRESH_SUCCESS'));
 		}
 	}
 }

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -46,7 +46,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	function __construct($options = array())
 	{
 		if (!$this->test()) {
-			return JError::raiseError(404, "The memcache extension is not available");
+			return JError::raiseError(404, "THE_MEMCACHE_EXTENSION_IS_NOT_AVAILABLE");
 		}
 		parent::__construct($options);
 

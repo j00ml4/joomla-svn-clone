@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -40,7 +40,7 @@ class ConfigViewComponent extends JView
 		$this->assignRef('form',		$form);
 		$this->assignRef('component',	$component);
 
-		$this->document->setTitle(JText::_('Edit Preferences'));
+		$this->document->setTitle(JText::_('EDIT_PREFERENCES'));
 
 		parent::display();
 		JRequest::setVar('hidemainmenu', true);

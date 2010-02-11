@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_config
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 <div class="width-100">
 
 <fieldset class="adminform">
-	<legend><?php echo JText::_('Cache Settings'); ?></legend>
+	<legend><?php echo JText::_('CACHE_SETTINGS'); ?></legend>
 			<?php
 			foreach ($this->form->getFields('cache') as $field):
 			?>
@@ -24,16 +24,16 @@ defined('_JEXEC') or die;
 			?>
 		<?php if ($this->data['cache_handler'] == 'memcache' || $this->data['session_handler'] == 'memcache') : ?>
 
-				<?php echo JText::_('Memcache Persistent'); ?>
+				<?php echo JText::_('MEMCACHE_PERSISTENT'); ?>
 
 				<?php echo $lists['memcache_persist']; ?>
 
-				<?php echo JText::_('Memcache Compression'); ?>
+				<?php echo JText::_('MEMCACHE_COMPRESSION'); ?>
 
 				<?php echo $lists['memcache_compress']; ?>
 
 
-				<?php echo JText::_('Memcache Server'); ?>
+				<?php echo JText::_('MEMCACHE_SERVER'); ?>
 
 				<?php echo JText::_('Host'); ?>:
 				<input class="text_area" type="text" name="memcache_settings[servers][0][host]" size="25" value="<?php echo @$this->data->memcache_settings['servers'][0]['host']; ?>" />

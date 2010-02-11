@@ -1,19 +1,30 @@
-<?php defined('_JEXEC') or die; ?>
+<?php
+/**
+ * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_cache
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+// no direct access
+defined('_JEXEC') or die;
+?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_cache'); ?>" method="post" name="adminForm" id="adminForm">
 <table class="adminlist">
 	<thead>
 		<tr>
 			<th>
-				<?php echo JText::_('Purge expired items'); ?>
+				<?php echo JText::_('PURGE_EXPIRED_ITEMS'); ?>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>
-			<p class="mod-purge-instruct"><?php echo JText::_('Click on the Purge expired icon in the toolbar to delete all expired cache files. Note: Cache files that are still current will not be deleted.'); ?></p>
-			<p class="warning"><?php echo JText::_('WARNING: This can be resource intensive on sites with large number of items!'); ?></p>
+			<p class="mod-purge-instruct"><?php echo JText::_('CACHE_PURGE_INSTRUCTIONS'); ?></p>
+			<p class="warning"><?php echo JText::_('CACHE_RESOURCE_INTENSIVE_WARNING'); ?></p>
 			</td>
 		</tr>
 	</tbody>

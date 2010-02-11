@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,10 +24,10 @@ class InstallerViewManage extends InstallerViewDefault
 		/*
 		 * Set toolbar items for the page
 		 */
-		JToolBarHelper::custom('manage.refresh', 'refresh', 'refresh','Refresh Cache',false,false);
+		JToolBarHelper::custom('manage.refresh', 'refresh', 'refresh','REFRESH_CACHE',false,false);
 		JToolBarHelper::deleteList('', 'manage.remove', 'Uninstall');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.installer2');
+		JToolBarHelper::help('screen.installer2','JTOOLBAR_HELP');
 
 		$dbo =& JFactory::getDBO();
 
@@ -70,8 +70,8 @@ class InstallerViewManage extends InstallerViewDefault
 		$item =& $this->items[$index];
 		$item->index	= $index;
 		$item->img		= $item->enabled ? 'tick.png' : 'publish_x.png';
-		$item->task 	= $item->enabled ? 'disable' : 'enable';
-		$item->alt 		= $item->enabled ? JText::_('Enabled') : JText::_('Disabled');
+		$item->task		= $item->enabled ? 'disable' : 'enable';
+		$item->alt		= $item->enabled ? JText::_('Enabled') : JText::_('Disabled');
 		$item->action	= $item->enabled ? JText::_('disable') : JText::_('enable');
 
 		if ($item->protected) {

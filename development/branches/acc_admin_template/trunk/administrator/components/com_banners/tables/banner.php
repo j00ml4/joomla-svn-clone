@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -36,7 +36,7 @@ class BannersTableBanner extends JTable
 	/** @var string */
 	var $clickurl			= '';
 	/** @var int */
-	var $state				= 0;
+	var $state				= null;
 	/** @var int */
 	var $catid				= null;
 	/** @var string */
@@ -153,7 +153,7 @@ class BannersTableBanner extends JTable
 			}
 			// encode params to JSON
 			$parameter->loadArray($params);
-			$array['params'] = $parameter->toString();
+			$array['params'] = (string)$parameter;
 		}
 		return parent::bind($array, $ignore);
 	}
@@ -252,7 +252,7 @@ class BannersTableBanner extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published, -1=archived, -2=trashed]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.
@@ -317,7 +317,7 @@ class BannersTableBanner extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The sticky state. eg. [0 = unsticked, 1 = sticked]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.

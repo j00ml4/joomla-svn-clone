@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -110,7 +110,7 @@ class WeblinksViewCategory extends JView
 				$this->document->setTitle($title);
 			}
 			else {
-				$this->document->setTitle(JText::_('Web Links'));
+				$this->document->setTitle(JText::_('WEB_LINKS'));
 			}
 
 			// Set breadcrumbs.
@@ -119,7 +119,7 @@ class WeblinksViewCategory extends JView
 			}
 		}
 		else {
-			$this->document->setTitle(JText::_('Web Links'));
+			$this->document->setTitle(JText::_('WEB_LINKS'));
 		}
 
 		// Add alternate feed link

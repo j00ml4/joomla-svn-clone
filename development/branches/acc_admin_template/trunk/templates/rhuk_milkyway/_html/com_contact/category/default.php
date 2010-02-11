@@ -27,7 +27,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 	function tableOrdering( order, dir, task ) {
 	var form = document.adminForm;
 
-	form.filter_order.value 	= order;
+	form.filter_order.value = order;
 	form.filter_order_Dir.value	= dir;
 	document.adminForm.submit( task );
 }
@@ -38,7 +38,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 		<tr>
 			<td align="right" colspan="6">
 			<?php if ($this->params->get('show_limit')) :
-				echo JText::_('Display Num') .'&nbsp;';
+				echo JText::_('DISPLAY_NUM') .'&nbsp;';
 				echo $this->pagination->getLimitBox();
 			endif; ?>
 			</td>

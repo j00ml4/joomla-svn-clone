@@ -3,18 +3,16 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Articles
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
-jimport('joomla.database.query');
-
 /**
  * Renders a author element
  *
- * @package 	Joomla
+ * @package		Joomla
  * @subpackage	Articles
  * @since		1.5
  */
@@ -45,7 +43,8 @@ class JElementAuthor extends JElement
 		$groups = implode(',', $groups);
 
 		// Build the query to get the users.
-		$query = new JQuery();
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
 		$query->select('u.id AS value');
 		$query->select('u.name AS text');
 		$query->from('#__users AS u');
@@ -54,7 +53,6 @@ class JElementAuthor extends JElement
 		$query->where('m.group_id IN ('.$groups.')');
 
 		// Get the users.
-		$db = JFactory::getDbo();
 		$db->setQuery((string) $query);
 		$users = $db->loadObjectList();
 

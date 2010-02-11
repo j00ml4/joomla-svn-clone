@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,7 +34,7 @@ class JFormFieldLanguage extends JFormFieldList
 	protected function _getOptions()
 	{
 		jimport('joomla.language.helper');
-		$client		= $this->_element->attributes('client');
+		$client		= (string)$this->_element->attributes()->client;
 		$options	= array_merge(
 						parent::_getOptions(),
 						JLanguageHelper::createLanguageList($this->value, constant('JPATH_'.strtoupper($client)), true)

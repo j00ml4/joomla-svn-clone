@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,9 +33,9 @@ class JFormFieldInteger extends JFormFieldList
 	 */
 	protected function _getOptions()
 	{
-		$first		= (int)$this->_element->attributes('first');
-		$last		= (int)$this->_element->attributes('last');
-		$step		= (int)max(1, $this->_element->attributes('step'));
+		$first		= (int)$this->_element->attributes()->first;
+		$last		= (int)$this->_element->attributes()->last;
+		$step		= (int)max(1, $this->_element->attributes()->step);
 		$options	= array();
 
 		for ($i = $first; $i <= $last; $i += $step) {

@@ -3,7 +3,7 @@
  * @version		$Id: edit.php 12295 2009-06-22 11:10:18Z eddieajau $
  * @package		Joomla.Administrator
  * @subpackage	com_contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -52,19 +52,19 @@ JHtml::_('behavior.formvalidation');
 
 					<?php echo $this->form->getLabel('ordering'); ?>
 					<?php echo $this->form->getInput('ordering'); ?>
-					
+
 					<?php echo $this->form->getLabel('sortname1'); ?>
 					<?php echo $this->form->getInput('sortname1'); ?>
-					
+
 					<?php echo $this->form->getLabel('sortname2'); ?>
 					<?php echo $this->form->getInput('sortname2'); ?>
-					
+
 					<?php echo $this->form->getLabel('sortname3'); ?>
 					<?php echo $this->form->getInput('sortname3'); ?>
 
 					<?php echo $this->form->getLabel('language'); ?>
 					<?php echo $this->form->getInput('language'); ?>
-				
+
 					<div class="clr"> </div>
 					<?php echo $this->form->getLabel('misc'); ?>
 					<div class="clr"> </div>
@@ -126,28 +126,18 @@ JHtml::_('behavior.formvalidation');
 
 			<?php echo JHtml::_('sliders.panel',JText::_('Contact_Fieldset_Contact_Form'), 'email-options'); ?>
 				<fieldset class="panelform">
-
-						<?php echo $this->form->getLabel('show_email_form'); ?>
-						<?php echo $this->form->getInput('show_email_form'); ?>
-
-						<?php echo $this->form->getLabel('email_description'); ?>
-						<?php echo $this->form->getInput('email_description'); ?>
-
-						<?php echo $this->form->getLabel('show_email_copy'); ?>
-						<?php echo $this->form->getInput('show_email_copy'); ?>
-
-						<?php echo $this->form->getLabel('banned_email'); ?>
-						<?php echo $this->form->getInput('banned_email'); ?>
-
-						<?php echo $this->form->getLabel('banned_subject'); ?>
-						<?php echo $this->form->getInput('banned_subject'); ?>
-
-						<?php echo $this->form->getLabel('banned_text'); ?>
-						<?php echo $this->form->getInput('banned_text'); ?>
+				<p><?php echo JText::_('Contact_Email_Form_Details'); ?></p>
+					<?php foreach($this->form->getFields('email_form') as $field): ?>
+						<?php if ($field->hidden): ?>
+							<?php echo $field->input; ?>
+						<?php else: ?>
+							<?php echo $field->label; ?>
+							<?php echo $field->input; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
 				</fieldset>
 
-
-			<?php echo 	 JHtml::_('sliders.end'); ?>
+			<?php echo JHtml::_('sliders.end'); ?>
 </div>
 
 	<input type="hidden" name="task" value="" />

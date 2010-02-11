@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_content
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -51,6 +51,12 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo $this->form->getLabel('access'); ?>
 		<?php echo $this->form->getInput('access'); ?>
+
+		<?php echo $this->form->getLabel('language'); ?>
+		<?php echo $this->form->getInput('language'); ?>
+
+		<?php echo $this->form->getLabel('featured'); ?>
+		<?php echo $this->form->getInput('featured'); ?>
 
 		<div class="clr"></div>
 		<?php echo $this->form->getLabel('articletext'); ?>
@@ -123,9 +129,6 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
 			<?php endforeach; ?>
-
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
 
 			<?php echo $this->form->getLabel('xreference'); ?>
 			<?php echo $this->form->getInput('xreference'); ?>

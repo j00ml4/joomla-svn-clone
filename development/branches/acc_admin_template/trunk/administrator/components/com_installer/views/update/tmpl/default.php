@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -25,12 +25,12 @@ defined('_JEXEC') or die;
 			<tr>
 				<th width="10"><?php echo JText::_('Num'); ?></th>
 				<th class="nowrap"><?php echo JText::_('Extension'); ?></th>
-				<th><?php echo JText::_('Install Type') ?></th>
-				<th><?php echo JText::_('Extension Type') ?></th>
+				<th><?php echo JText::_('INSTALL_TYPE') ?></th>
+				<th><?php echo JText::_('EXTENSION_TYPE') ?></th>
 				<th width="10%" class="center"><?php echo JText::_('Version'); ?></th>
 				<th><?php echo JText::_('Folder') ?></th>
-				<th><?php echo JText::_('Client') ?></th>
-				<th width="25%"><?php echo JText::_('Details URL'); ?></th>
+				<th><?php echo JText::_('JClient') ?></th>
+				<th width="25%"><?php echo JText::_('DETAILS_URL'); ?></th>
 			</tr>
 		</thead>
 		<tfoot>

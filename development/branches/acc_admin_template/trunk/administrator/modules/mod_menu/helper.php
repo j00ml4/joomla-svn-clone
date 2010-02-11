@@ -1,15 +1,12 @@
 <?php
 /**
  * @version		$Id:mod_menu.php 2463 2006-02-18 06:05:38Z webImagery $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
-
-// Include dependancies.
-jimport('joomla.database.query');
 
 /**
  * @package		Joomla.Administrator
@@ -25,7 +22,7 @@ abstract class ModMenuHelper
 	public static function getMenus()
 	{
 		$db		= &JFactory::getDbo();
-		$query	= new JQuery;
+		$query	= $db->getQuery(true);
 
 		$query->select('a.*, SUM(b.home) AS home');
 		$query->from('#__menu_types AS a');
@@ -50,10 +47,10 @@ abstract class ModMenuHelper
 	function getComponents($authCheck = true)
 	{
 		// Initialise variables.
-		$lang	= &JFactory::getLanguage();
-		$user	= &JFactory::getUser();
-		$db		= &JFactory::getDbo();
-		$query	= new JQuery;
+		$lang	= JFactory::getLanguage();
+		$user	= JFactory::getUser();
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 		$result	= array();
 		$langs	= array();
 
@@ -73,16 +70,13 @@ abstract class ModMenuHelper
 		$db->setQuery($query);
 		$components	= $db->loadObjectList(); // component list
 		// Parse the list of extensions.
-		foreach ($components as &$component)
-		{
+		foreach ($components as &$component) {
 			// Trim the menu link.
 			$component->link = trim($component->link);
 
-			if ($component->parent_id == 1)
-			{
+			if ($component->parent_id == 1) {
 				// Only add this top level if it is authorised and enabled.
-				if ($authCheck == false || ($authCheck && $user->authorize('core.manage', $component->element)))
-				{
+				if ($authCheck == false || ($authCheck && $user->authorize('core.manage', $component->element))) {
 					// Root level.
 					$result[$component->id] = $component;
 					if (!isset($result[$component->id]->submenu)) {
@@ -98,29 +92,26 @@ abstract class ModMenuHelper
 						$langs[$component->element.'.menu'] = true;
 					}
 				}
-			}
-			else
-			{
+			} else {
 				// Sub-menu level.
-				if (isset($result[$component->parent_id]))
-				{
+				if (isset($result[$component->parent_id])) {
 					// Add the submenu link if it is defined.
 					if (isset($result[$component->parent_id]->submenu) && !empty($component->link)) {
 						$result[$component->parent_id]->submenu[] = &$component;
 					}
 				}
 			}
-
 		}
 
 		// Load additional language files.
 		foreach (array_keys($langs) as $langName)
 		{
-			// Load the core file.
-			$lang->load($langName);
-
+			// Load the core file then
 			// Load extension-local file.
-			$lang->load('menu', JPATH_ADMINISTRATOR.'/components/'.str_replace('.menu', '', $langName));
+				$lang->load($langName, JPATH_BASE, null, false, false)
+			||	$lang->load($langName, JPATH_ADMINISTRATOR.'/components/'.str_replace('.menu', '', $langName), null, false, false)
+			||	$lang->load($langName, JPATH_BASE, $lang->getDefault(), false, false)
+			||	$lang->load($langName, JPATH_ADMINISTRATOR.'/components/'.str_replace('.menu', '', $langName), $lang->getDefault(), false, false);
 		}
 
 		return $result;

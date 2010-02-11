@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -78,7 +78,8 @@ class ModulesModelSelect extends JModelList
 	protected function _getListQuery()
 	{
 		// Create a new query object.
-		$query = new JQuery;
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -90,14 +91,14 @@ class ModulesModelSelect extends JModelList
 		$query->from('`#__extensions` AS a');
 
 		// Filter by module
-		$query->where('a.type = '.$this->_db->Quote('module'));
+		$query->where('a.type = '.$db->Quote('module'));
 
 		// Filter by client.
 		$clientId = $this->getState('filter.client_id');
 		$query->where('a.client_id = '.(int) $clientId);
 
 		// Add the list ordering clause.
-		$query->order($this->_db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
@@ -119,29 +120,24 @@ class ModulesModelSelect extends JModelList
 
 		// Loop through the results to add the XML metadata,
 		// and load language support.
-		foreach ($items as &$item)
-		{
+		foreach ($items as &$item) {
 			$path = JPath::clean($client->path.'/modules/'.$item->module.'/'.$item->module.'.xml');
-			if (file_exists($path))
-			{
+			if (file_exists($path)) {
 				$item->xml = simplexml_load_file($path);
-			}
-			else
-			{
+			} else {
 				$item->xml = null;
 			}
 
-			// 1.5 Format; Core files or language packs
-			$lang->load($item->module, $client->path);
+			// 1.5 Format; Core files or language packs then
 			// 1.6 3PD Extension Support
-			$lang->load('joomla', $client->path.'/modules/'.$item->module);
+				$lang->load($item->module, $client->path, null, false, false)
+			||	$lang->load($item->module, $client->path.'/modules/'.$item->module, null, false, false)
+			||	$lang->load($item->module, $client->path, $lang->getDefault(), false, false)
+			||	$lang->load($item->module, $client->path.'/modules/'.$item->module, $lang->getDefault(), false, false);
 		}
 
 		// TODO: Use the cached XML from the extensions table?
 
 		return $items;
 	}
-
-
-
 }

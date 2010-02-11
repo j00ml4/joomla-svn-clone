@@ -1,15 +1,14 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
-jimport('joomla.database.query');
-require_once dirname(__FILE__).DS.'list.php';
+require_once dirname(__FILE__).'/list.php';
 
 /**
  * Form Field class for the Joomla Framework.
@@ -34,8 +33,8 @@ class JFormFieldContentLanguage extends JFormFieldList
 	 */
 	protected function _getOptions()
 	{
-		$db		= &JFactory::getDbo();
-		$query	= new JQuery;
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 
 		$query->select('a.lang_code AS value, a.title AS text, a.title_native');
 		$query->from('#__languages AS a');

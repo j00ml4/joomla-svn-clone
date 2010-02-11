@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -31,9 +31,9 @@ class ContactViewCategory extends JView
 		$document->editor = $fromName;
 		$document->editorEmail = $siteEmail;
 
-		$limit 		= JRequest::getVar('limit', $app->getCfg('feed_limit'), '', 'int');
+		$limit		= JRequest::getVar('limit', $app->getCfg('feed_limit'), '', 'int');
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
-		$catid  	= JRequest::getVar('catid', 0, '', 'int');
+		$catid		= JRequest::getVar('catid', 0, '', 'int');
 
 		$where		= ' WHERE a.published = 1';
 
@@ -60,7 +60,7 @@ class ContactViewCategory extends JView
 		{
 			// strip html from feed item title
 			$title = $this->escape($row->title);
-			$title = html_entity_decode($title);
+			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
 			// url link to article
 			$link = JRoute::_('index.php?option=com_contact&view=contact&id='. $row->slug .'&catid='.$row->catslug);
@@ -71,11 +71,11 @@ class ContactViewCategory extends JView
 
 			// load individual item creator class
 			$item = new JFeedItem();
-			$item->title 		= $title;
-			$item->link 		= $link;
-			$item->description 	= $description;
+			$item->title		= $title;
+			$item->link			= $link;
+			$item->description	= $description;
 			$item->date			= $date;
-			$item->category   	= $row->category;
+			$item->category		= $row->category;
 
 			// loads item info into rss array
 			$document->addItem($item);

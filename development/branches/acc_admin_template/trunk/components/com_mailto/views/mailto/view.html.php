@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	MailTo
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -34,16 +34,16 @@ class MailtoViewMailto extends JView
 		$data->link = urldecode(JRequest::getVar('link', '', 'method', 'base64'));
 
 		if ($data->link == '') {
-			JError::raiseError(403, 'Link is missing');
+			JError::raiseError(403, 'LINK_IS_MISSING');
 			$false = false;
 			return $false;
 		}
 
 		// Load with previous data, if it exists
-		$mailto				= JRequest::getString('mailto', '', 'post');
-		$sender 			= JRequest::getString('sender', '', 'post');
-		$from 				= JRequest::getString('from', '', 'post');
-		$subject 			= JRequest::getString('subject', '', 'post');
+		$mailto		= JRequest::getString('mailto', '', 'post');
+		$sender		= JRequest::getString('sender', '', 'post');
+		$from		= JRequest::getString('from', '', 'post');
+		$subject	= JRequest::getString('subject', '', 'post');
 
 		if ($user->get('id') > 0) {
 			$data->sender	= $user->get('name');

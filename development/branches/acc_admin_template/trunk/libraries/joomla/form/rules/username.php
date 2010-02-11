@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,8 +30,8 @@ class JFormRuleUsername extends JFormRule
 	public function test(&$field, &$values)
 	{
 		$return = false;
-		$name	= $field->attributes('name');
-		$key	= $field->attributes('field');
+		$name	= (string)$field->attributes()->name;
+		$key	= (string)$field->attributes()->field;
 		$value	= isset($values[$key]) ? $values[$key] : 0;
 
 		// Check the rule.

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -59,7 +59,7 @@ class JMenu extends JObject
 	/**
 	 * Returns a JMenu object
 	 *
-	 * @param   string	The name of the client
+	 * @param	string	The name of the client
 	 * @param	array	An associative array of options
 	 * @return	JMenu	A menu object.
 	 * @since	1.5
@@ -175,9 +175,9 @@ class JMenu extends JObject
 	/**
 	 * Gets menu items by attribute
 	 *
-	 * @param	string 		The field name
-	 * @param	string 		The value of the field
-	 * @param	boolean 	If true, only returns the first item found
+	 * @param	string	The field name
+	 * @param	string	The value of the field
+	 * @param	boolean	If true, only returns the first item found
 	 *
 	 * @return	array
 	 */

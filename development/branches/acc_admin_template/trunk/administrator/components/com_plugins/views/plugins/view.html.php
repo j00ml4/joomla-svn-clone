@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -55,7 +55,7 @@ class PluginsViewPlugins extends JView
 		$state	= $this->get('State');
 		$canDo	= PluginsHelper::getActions();
 
-		JToolBarHelper::title(JText::_('Plugn_Manager_Plugins'), 'plugin');
+		JToolBarHelper::title(JText::_('COM_PLUGINS_MANAGER_PLUGINS'), 'plugin');
 
 		if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::custom('plugins.publish', 'publish.png', 'publish_f2.png', 'JToolbar_Enable', true);
@@ -63,8 +63,8 @@ class PluginsViewPlugins extends JView
 		}
 
 		/**
-	 	* Don't think we need an Edit button if names are clickable.
-	 	*/
+		* Don't think we need an Edit button if names are clickable.
+		*/
 		//if ($canDo->get('core.edit')) {
 		//	JToolBarHelper::editList('plugin.edit');
 		// }
@@ -72,6 +72,6 @@ class PluginsViewPlugins extends JView
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_plugins');
 		}
-		JToolBarHelper::help('screen.plugins');
+		JToolBarHelper::help('screen.plugins','JTOOLBAR_HELP');
 	}
 }

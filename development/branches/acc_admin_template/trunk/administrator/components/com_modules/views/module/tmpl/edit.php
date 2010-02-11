@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,7 +27,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
 			if ($hasContent) :
-				echo $this->form->getField('articletext')->save();
+				echo $this->form->getField('content')->save();
 			endif;
 			?>
 			submitform(task);
@@ -54,10 +54,16 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 			<?php echo $this->form->getLabel('showtitle'); ?>
 			<?php echo $this->form->getInput('showtitle'); ?>
-
+			
+			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<?php echo $this->form->getLabel('published'); ?>
 			<?php echo $this->form->getInput('published'); ?>
-
+			<?php echo $this->form->getLabel('publish_up'); ?>
+			<?php echo $this->form->getInput('publish_up'); ?>
+			<?php echo $this->form->getLabel('publish_down'); ?>
+			<?php echo $this->form->getInput('publish_down'); ?>
+			<?php endif; ?>
+			
 			<?php echo $this->form->getLabel('position'); ?>
 			<?php echo $this->form->getInput('position'); ?>
 
@@ -78,12 +84,12 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = (string) $this->item->xml->description) : ?>
 					<label>
-						<?php echo JText::_('Modules_Module_Description'); ?>
+						<?php echo JText::_('MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
-					<?php echo $this->escape(JText::_($text)); ?>
+					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo JText::_('Modules_XML_data_not_available'); ?>
+				<?php echo JText::_('MODULES_ERR_XML'); ?>
 			<?php endif; ?>
 		</fieldset>
 	</div>
@@ -107,7 +113,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="clr"></div>
 	<?php if ($hasContent) : ?>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Custom Output'); ?></legend>
+			<legend><?php echo JText::_('MODULES_CUSTOM_OUTPUT'); ?></legend>
 
 			<?php echo $this->form->getLabel('content'); ?>
 			<?php echo $this->form->getInput('content'); ?>

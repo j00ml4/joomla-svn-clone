@@ -3,7 +3,7 @@
  * @version		$Id:storage.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -62,7 +62,7 @@ class JCacheStorage extends JObject
 		$options['now'] = $now;
 		//We can't cache this since options may change...
 		$handler = strtolower(preg_replace('/[^A-Z0-9_\.-]/i', '', $handler));
-		$class   = 'JCacheStorage'.ucfirst($handler);
+		$class = 'JCacheStorage'.ucfirst($handler);
 		if (!class_exists($class))
 		{
 			$path = dirname(__FILE__).DS.'storage'.DS.$handler.'.php';

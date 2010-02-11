@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: view.html.php 11952 2009-06-01 03:21:19Z robs $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -63,21 +63,21 @@ class ContactViewContacts extends JView
 		JToolBarHelper::addNew('contact.edit', 'JToolbar_New');
 		JToolBarHelper::editList('contact.edit','JToolbar_Edit');
 		JToolBarHelper::divider();
-		JToolBarHelper::publish('contacts.publish');
-		JToolBarHelper::unpublish('contacts.unpublish');
+		JToolBarHelper::publish('contacts.publish','JTOOLBAR_PUBLISH');
+		JToolBarHelper::unpublish('contacts.unpublish','JTOOLBAR_UNPUBLISH');
 		JToolBarHelper::divider();
 		JToolBarHelper::archiveList('contacts.archive','JToolbar_Archive');
 		if ($state->get('filter.published') == -2) {
-			JToolBarHelper::deleteList('', 'contacts.delete');
+			JToolBarHelper::deleteList('', 'contacts.delete','JTOOLBAR_TRASH');
 		}
 		else {
-			JToolBarHelper::trash('contacts.trash');
+			JToolBarHelper::trash('contacts.trash','JTOOLBAR_EMPTY_TRASH');
 		}
 		JToolBarHelper::divider();
 
 		JToolBarHelper::preferences('com_contact');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.contact');
+		JToolBarHelper::help('screen.contact','JTOOLBAR_HELP');
 	}
 }
 

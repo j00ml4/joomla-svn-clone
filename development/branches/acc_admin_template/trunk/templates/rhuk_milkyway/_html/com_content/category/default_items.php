@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	{
 		var form = document.adminForm;
 
-		form.filter_order.value 	= order;
+		form.filter_order.value = order;
 		form.filter_order_Dir.value	= dir;
 		document.adminForm.submit( task );
 	}
@@ -27,7 +27,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<?php if ($this->params->get('show_pagination_limit')) : ?>
 			<td align="right" width="40%" nowrap="nowrap">
 			<?php
-				echo '&nbsp;&nbsp;&nbsp;'.JText::_('Display Num').'&nbsp;';
+				echo '&nbsp;&nbsp;&nbsp;'.JText::_('DISPLAY_NUM').'&nbsp;';
 				echo $this->pagination->getLimitBox();
 			?>
 			</td>
@@ -43,8 +43,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		<?php echo JText::_('Num'); ?>
 	</td>
 	<?php if ($this->params->get('show_title')) : ?>
- 	<td class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" width="45%">
-		<?php echo JHTML::_('grid.sort',  'Item Title', 'a.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+	<td class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" width="45%">
+		<?php echo JHTML::_('grid.sort',  'ITEM_TITLE', 'a.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 	</td>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_date')) : ?>
@@ -84,9 +84,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug, $item->sectionid), false);
 			$fullURL = new JURI($link);
 			$fullURL->setVar('return', base64_encode($returnURL));
-			$link = $fullURL->toString();
 		?>
-		<a href="<?php echo $link; ?>">
+		<a href="<?php echo $fullURL; ?>">
 			<?php echo JText::_( 'Register to read more...' ); ?></a>
 	</td>
 	<?php endif; ?>

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	FileSystem
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,7 +16,7 @@ jimport('joomla.filesystem.path');
  * A File handling class
  *
  * @static
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	FileSystem
  * @since		1.5
  */
@@ -112,7 +112,7 @@ class JFile
 			$ret = true;
 		} else {
 			if (!@ copy($src, $dest)) {
-				JError::raiseWarning(21, JText::_('Copy failed'));
+				JError::raiseWarning(21, JText::_('COPY_FAILED'));
 				return false;
 			}
 			$ret = true;
@@ -195,7 +195,7 @@ class JFile
 
 		//Check src path
 		if (!is_readable($src)) { // && !is_writable($src)) { // file may not be writable by php if via ftp!
-			return JText::_('Cannot find source file');
+			return JText::_('CANNOT_FIND_SOURCE_FILE');
 		}
 
 		if($use_streams) {

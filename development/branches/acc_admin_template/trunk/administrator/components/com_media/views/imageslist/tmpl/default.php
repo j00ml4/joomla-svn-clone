@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_media
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -26,6 +26,6 @@ defined('_JEXEC') or die;
 </div>
 <?php } else { ?>
 	<div id="media-noimages">
-		<p><?php echo JText::_('No Images Found'); ?></p>
+		<p><?php echo JText::_('No_Images_Found'); ?></p>
 	</div>
 <?php } ?>

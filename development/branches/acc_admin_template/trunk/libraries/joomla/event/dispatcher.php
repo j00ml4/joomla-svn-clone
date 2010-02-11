@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Event
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -17,7 +17,7 @@ jimport('joomla.base.observable');
  * This is the Observable part of the Observer design pattern
  * for the event architecture.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Event
  * @since		1.5
  * @see			JPlugin
@@ -64,7 +64,7 @@ class JDispatcher extends JObservable
 		}
 		elseif (class_exists($handler))
 		{
-			 // Ok, class type event handler... lets instantiate and attach it.
+			// Ok, class type event handler... lets instantiate and attach it.
 			$this->attach(new $handler($this));
 		}
 		else

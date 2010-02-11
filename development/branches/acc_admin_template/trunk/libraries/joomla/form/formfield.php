@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,11 +27,11 @@ abstract class JFormField extends JObject
 	 */
 	protected $type;
 
-   /**
-	* A reference to the form object that the field belongs to.
-	*
-	* @var		object
-	*/
+	/**
+	 * A reference to the form object that the field belongs to.
+	 *
+	 * @var		object
+	 */
 	protected $_form;
 
 	/**
@@ -45,53 +45,64 @@ abstract class JFormField extends JObject
 		$this->_form = $form;
 	}
 
-   /**
-	* Method to get the form field type.
-	*
-	* @return	string		The field type.
-	*/
+	/**
+	 * Method to get the form field type.
+	 *
+	 * @return	string		The field type.
+	 */
 	public function getType()
 	{
 		return $this->type;
 	}
 
-	public function render(&$xml, $value, $formName, $groupName)
+	public function render(&$xml, $value, $formName, $groupName, $prefix)
 	{
 		// Set the xml element object.
 		$this->_element		= $xml;
 
 		// Set the id, name, and value.
-		$this->id			= $xml->attributes('id');
-		$this->name			= $xml->attributes('name');
+		$this->id			= (string)$xml->attributes()->id;
+		$this->name			= (string)$xml->attributes()->name;
 		$this->value		= $value;
 
 		// Set the label and description text.
-		$this->labelText	= $xml->attributes('label') ? $xml->attributes('label') : $this->name;
-		$this->descText		= $xml->attributes('description');
+		$this->labelText	= (string)$xml->attributes()->label ? (string)$xml->attributes()->label : $this->name;
+		$this->descText		= (string)$xml->attributes()->description;
 
 		// Set the required and validate options.
-		$this->required		= ($xml->attributes('required') == 'true' || $xml->attributes('required') == 'required');
-		$this->validate		= $xml->attributes('validate');
+		$this->required		= ((string)$xml->attributes()->required == 'true' || (string)$xml->attributes()->required == 'required');
+		$this->validate		= (string)$xml->attributes()->validate;
 
 		// Add the required class if the field is required.
-		if ($this->required) {
-			if (strpos($xml->attributes('class'), 'required') === false) {
-				$xml->addAttribute('class', $xml->attributes('class').' required');
+		if ($this->required)
+		{
+			if($xml->attributes()->class)
+			{
+				if (strpos((string)$xml->attributes()->class, 'required') === false) {
+					$xml->attributes()->class = $xml->attributes()->class.' required';
+				}
+			}
+			else
+			{
+				$xml->addAttribute('class', 'required');
 			}
 		}
 
 		// Set the field decorator.
-		$this->decorator	= $xml->attributes('decorator');
+		$this->decorator	= (string)$xml->attributes()->decorator;
 
 		// Set the visibility.
-		$this->hidden		= ($xml->attributes('type') == 'hidden' || $xml->attributes('hidden'));
+		$this->hidden		= ((string)$xml->attributes()->type == 'hidden' || (string)$xml->attributes()->hidden);
 
 		// Set the multiple values option.
-		$this->multiple		= ($xml->attributes('multiple') == 'true' || $xml->attributes('multiple') == 'multiple');
+		$this->multiple		= ((string)$xml->attributes()->multiple == 'true' || (string)$xml->attributes()->multiple == 'multiple');
 
 		// Set the form and group names.
 		$this->formName		= $formName;
 		$this->groupName	= $groupName;
+
+		// Set the prefix
+		$this->prefix		= $prefix;
 
 		// Set the input name and id.
 		$this->inputName	= $this->_getInputName($this->name, $formName, $groupName, $this->multiple);
@@ -117,7 +128,7 @@ abstract class JFormField extends JObject
 
 		// If a description is specified, use it to build a tooltip.
 		if (!empty($this->descText)) {
-			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'" title="'.trim(JText::_($this->labelText, true), ':').'::'.JText::_($this->descText, true).'">';
+			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'" title="'.htmlspecialchars(trim(JText::_($this->labelText), ':').'::'.JText::_($this->descText), ENT_COMPAT, 'UTF-8').'">';
 		} else {
 			$label = '<label id="'.$this->inputId.'-lbl" for="'.$this->inputId.'" class="'.$class.'">';
 		}
@@ -126,6 +137,28 @@ abstract class JFormField extends JObject
 		$label .= '</label>';
 
 		return $label;
+	}
+	/**
+	 * This function replaces the string identifier prefix with the
+	 * string held is the <var>formName</var> class variable.
+	 *
+	 * @param	string	The javascript code
+	 * @return	string	The replaced javascript code
+	 */
+	protected function _replacePrefix($javascript)
+	{
+		$formName = $this->formName;
+
+		// No form, just use the field name.
+		if ($formName === false)
+		{
+			return str_replace($this->prefix, '', $javascript);
+		}
+		// Use the form name
+		else
+		{
+			return str_replace($this->prefix, preg_replace('#\W#', '_',$formName).'_', $javascript);
+		}
 	}
 
 	/**

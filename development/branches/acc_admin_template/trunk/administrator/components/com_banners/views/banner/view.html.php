@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,7 +30,7 @@ class BannersViewBanner extends JView
 	{
 		$state	= $this->get('State');
 		$item	= $this->get('Item');
-		$form 	= $this->get('Form');
+		$form	= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

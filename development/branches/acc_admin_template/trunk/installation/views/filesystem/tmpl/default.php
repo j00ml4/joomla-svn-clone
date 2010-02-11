@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Installation
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,7 +33,7 @@ JHtml::_('behavior.formvalidation');
 	<div class="m">
 		<?php echo JHtml::_('installation.stepbar', 5); ?>
 		<div class="box"></div>
-  	</div>
+	</div>
 	<div class="b">
 		<div class="b">
 			<div class="b"></div>
@@ -60,7 +60,7 @@ JHtml::_('behavior.formvalidation');
 					<div class="button1-left"><div class="next"><a href="index.php?view=database" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('FTP Configuration'); ?></span>
+				<span class="step"><?php echo JText::_('FTP_CONFIGURATION'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -76,7 +76,7 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			<div class="m">
 				<h2>
-					<?php echo JText::_('FTP Configuration'); ?>:
+					<?php echo JText::_('FTP_CONFIGURATION'); ?>:
 				</h2>
 				<div class="install-text">
 					<?php echo JText::_('
@@ -102,7 +102,7 @@ JHtml::_('behavior.formvalidation');
 					</div>
 					<div class="m">
 						<h3 class="title-smenu" title="<?php echo JText::_('Basic'); ?>">
-							<?php echo JText::_('Basic Settings'); ?>
+							<?php echo JText::_('BASIC_SETTINGS'); ?>
 						</h3>
 						<div class="section-smenu">
 							<table class="content2">
@@ -140,13 +140,13 @@ JHtml::_('behavior.formvalidation');
 								</tr>
 							</table>
 
-							<input type="button" id="findbutton" class="button" value="<?php echo JText::_('Autofind FTP Path'); ?>" onclick="Install.detectFtpRoot(this);" />
-							<input type="button" id="verifybutton" class="button" value="<?php echo JText::_('Verify FTP Settings'); ?>" onclick="Install.verifyFtpSettings(this);" />
+							<input type="button" id="findbutton" class="button" value="<?php echo JText::_('AUTOFIND_FTP_PATH'); ?>" onclick="Install.detectFtpRoot(this);" />
+							<input type="button" id="verifybutton" class="button" value="<?php echo JText::_('VERIFY_FTP_SETTINGS'); ?>" onclick="Install.verifyFtpSettings(this);" />
 							<br /><br />
 						</div>
 
 						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('Advanced'); ?>">
-							<?php echo JText::_('Advanced settings'); ?>
+							<?php echo JText::_('ADVANCED_SETTINGS'); ?>
 						</h3>
 						<div class="section-smenu moofx-slider">
 							<table class="content2">

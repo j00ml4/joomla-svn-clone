@@ -4,7 +4,7 @@
  * @version		/** $Id: default_form.php 11845 2009-05-27 23:28:59Z robs
  * @package		Joomla.Site
  * @subpackage	Contact
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
@@ -65,7 +65,7 @@ defined('_JEXEC') or die;
 				<textarea cols="50" rows="10" name="text" id="contact_text" class="inputbox required"></textarea>
 			</div>
 
-			<?php if ($this->contact->params->get('show_email_copy')) : ?>
+			<?php if ($this->params->get('show_email_copy')) : ?>
 			<div>
 				<input type="checkbox" name="email_copy" id="contact_email_copy" value="1"  />
 				<label for="contact_email_copy">

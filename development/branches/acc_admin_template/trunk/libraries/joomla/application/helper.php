@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -157,11 +157,11 @@ class JApplicationHelper
 		if (!$user_option && !$check) {
 			$user_option = JRequest::getCmd('option');
 		} else {
-			$user_option = JFilterInput::clean($user_option, 'path');
+			$user_option = JFilterInput::getInstance()->clean($user_option, 'path');
 		}
 
 		$result = null;
-		$name 	= substr($user_option, 4);
+		$name	= substr($user_option, 4);
 
 		switch ($varname) {
 			case 'front':
@@ -189,7 +189,7 @@ class JApplicationHelper
 				break;
 
 			case 'admin':
-				$path 	= DS.'components'.DS. $user_option .DS.'admin.'. $name .'.php';
+				$path	= DS.'components'.DS. $user_option .DS.'admin.'. $name .'.php';
 				$result = self::_checkPath($path, -1);
 				if ($result == null) {
 					$path = DS.'components'.DS. $user_option .DS. $name .'.php';
@@ -219,7 +219,7 @@ class JApplicationHelper
 				break;
 
 			case 'com_xml':
-				$path 	= DS.'components'.DS. $user_option .DS. $name .'.xml';
+				$path	= DS.'components'.DS. $user_option .DS. $name .'.xml';
 				$result = self::_checkPath($path, 1);
 				break;
 
@@ -236,9 +236,9 @@ class JApplicationHelper
 
 			case 'plg_xml':
 				// Site plugins
-				$j15path 	= DS.'plugins'.DS. $user_option .'.xml';
+				$j15path	= DS.'plugins'.DS. $user_option .'.xml';
 				$parts = explode(DS, $user_option);
-				$j16path   = DS.'plugins'.DS. $user_option.DS.$parts[1].'.xml';
+				$j16path = DS.'plugins'.DS. $user_option.DS.$parts[1].'.xml';
 				$j15 = self::_checkPath($j15path, 0);
 				$j16 = self::_checkPath( $j16path, 0);
 				// return 1.6 if working otherwise default to whatever 1.5 gives us
@@ -246,7 +246,7 @@ class JApplicationHelper
 				break;
 
 			case 'menu_xml':
-				$path 	= DS.'components'.DS.'com_menus'.DS. $user_option .DS. $user_option .'.xml';
+				$path	= DS.'components'.DS.'com_menus'.DS. $user_option .DS. $user_option .'.xml';
 				$result = self::_checkPath($path, -1);
 				break;
 		}
@@ -254,13 +254,17 @@ class JApplicationHelper
 		return $result;
 	}
 
+	/**
+	 * Parse a XML install manifest file.
+	 *
+	 * @param string $path Full path to xml file.
+	 * @return array XML metadata.
+	 */
 	public static function parseXMLInstallFile($path)
 	{
 		// Read the file to see if it's a valid component XML file
-		$xml = & JFactory::getXMLParser('Simple');
-
-		if (!$xml->loadFile($path)) {
-			unset($xml);
+		if( ! $xml = JFactory::getXML($path))
+		{
 			return false;
 		}
 
@@ -270,42 +274,32 @@ class JApplicationHelper
 		 * Should be 'install', but for backward compatability we will accept 'extension'.
 		 * Languages are annoying and use 'metafile' instead
 		 */
-		if (!is_object($xml->document) || ($xml->document->name() != 'install' && $xml->document->name() != 'extension' && $xml->document->name() != 'metafile')) {
+		if($xml->getName() != 'install'
+		&& $xml->getName() != 'extension'
+		&& $xml->getName() != 'metafile')
+		{
 			unset($xml);
 			return false;
 		}
 
 		$data = array();
-		$data['legacy'] = ($xml->document->name() == 'mosinstall' || $xml->document->name() == 'install');
 
-		$element = & $xml->document->name[0];
-		$data['name'] = $element ? $element->data() : '';
+		$data['legacy'] = ($xml->getName() == 'mosinstall' || $xml->getName() == 'install');
+
+		$data['name'] = (string)$xml->name;
+
 		// check if we're a language if so use that
-		$data['type'] = $xml->document->name() == 'metafile' ? 'language' : ($element ? $xml->document->attributes("type") : '');
+		$data['type'] = $xml->getName() == 'metafile' ? 'language' : (string)$xml->attributes()->type;
 
-		$element = & $xml->document->creationDate[0];
-		$data['creationdate'] = $element ? $element->data() : JText::_('Unknown');
+		$data['creationDate'] =((string)$xml->creationDate) ? (string)$xml->creationDate : JText::_('Unknown');
+		$data['author'] =((string)$xml->author) ? (string)$xml->author : JText::_('Unknown');
 
-		$element = & $xml->document->author[0];
-		$data['author'] = $element ? $element->data() : JText::_('Unknown');
-
-		$element = & $xml->document->copyright[0];
-		$data['copyright'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->authorEmail[0];
-		$data['authorEmail'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->authorUrl[0];
-		$data['authorUrl'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->version[0];
-		$data['version'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->description[0];
-		$data['description'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->group[0];
-		$data['group'] = $element ? $element->data() : '';
+		$data['copyright'] = (string)$xml->copyright;
+		$data['authorEmail'] = (string)$xml->authorEmail;
+		$data['authorUrl'] = (string)$xml->authorUrl;
+		$data['version'] = (string)$xml->version;
+		$data['description'] = (string)$xml->description;
+		$data['group'] = (string)$xml->group;
 
 		return $data;
 	}
@@ -313,10 +307,10 @@ class JApplicationHelper
 	public static function parseXMLLangMetaFile($path)
 	{
 		// Read the file to see if it's a valid component XML file
-		$xml = & JFactory::getXMLParser('Simple');
+		$xml = JFactory::getXML($path);
 
-		if (!$xml->loadFile($path)) {
-			unset($xml);
+		if( ! $xml)
+		{
 			return false;
 		}
 
@@ -325,49 +319,34 @@ class JApplicationHelper
 		 *
 		 * Should be 'langMetaData'.
 		 */
-		if ($xml->document->name() != 'metafile') {
+		if ($xml->getName() != 'metafile') {
 			unset($xml);
 			return false;
 		}
 
 		$data = array();
 
-		$element = & $xml->document->name[0];
-		$data['name'] = $element ? $element->data() : '';
-		$data['type'] = $element ? $xml->document->attributes("type") : '';
+		$data['name'] = (string)$xml->name;
+		$data['type'] = $xml->attributes()->type;
 
-		$element = & $xml->document->creationDate[0];
-		$data['creationdate'] = $element ? $element->data() : JText::_('Unknown');
+		$data['creationDate'] =((string)$xml->creationDate) ? (string)$xml->creationDate : JText::_('Unknown');
+		$data['author'] =((string)$xml->author) ? (string)$xml->author : JText::_('Unknown');
 
-		$element = & $xml->document->author[0];
+		$data['copyright'] = (string)$xml->copyright;
+		$data['authorEmail'] = (string)$xml->authorEmail;
+		$data['authorUrl'] = (string)$xml->authorUrl;
+		$data['version'] = (string)$xml->version;
+		$data['description'] = (string)$xml->description;
+		$data['group'] = (string)$xml->group;
 
-		$data['author'] = $element ? $element->data() : JText::_('Unknown');
-
-		$element = & $xml->document->copyright[0];
-		$data['copyright'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->authorEmail[0];
-		$data['authorEmail'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->authorUrl[0];
-		$data['authorUrl'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->version[0];
-		$data['version'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->description[0];
-		$data['description'] = $element ? $element->data() : '';
-
-		$element = & $xml->document->group[0];
-		$data['group'] = $element ? $element->group() : '';
 		return $data;
 	}
 
 	/**
 	 * Tries to find a file in the administrator or site areas
 	 *
-	 * @param string 	$parth			A file name
-	 * @param integer 	$checkAdmin		0 to check site only, 1 to check site and admin, -1 to check admin only
+	 * @param string	A file name
+	 * @param integer	0 to check site only, 1 to check site and admin, -1 to check admin only
 	 * @since 1.5
 	 */
 	protected static function _checkPath($path, $checkAdmin=1)

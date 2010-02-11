@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -75,7 +75,7 @@ class CacheController extends JController
 		$model = $this->getModel('cache');
 		$ret = $model->purge();
 
-		$msg = JText::_('Expired items have been purged');
+		$msg = JText::_('EXPIRED_ITEMS_HAVE_BEEN_PURGED');
 		$msgType = 'message';
 
 		if ($ret === false) {
