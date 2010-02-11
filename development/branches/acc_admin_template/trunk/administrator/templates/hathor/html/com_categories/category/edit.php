@@ -61,8 +61,10 @@ JHtml::_('behavior.formvalidation');
 					<?php echo $this->form->getLabel('access'); ?>
 					<?php echo $this->form->getInput('access'); ?>
 				</div>
-
-					<?php echo $this->loadTemplate('options'); ?>
+				<div>
+					<?php echo $this->form->getLabel('language'); ?>
+					<?php echo $this->form->getInput('language'); ?>
+				</div>	
 
 					<div class="clr"></div>
 					<?php echo $this->form->getLabel('description'); ?>
@@ -73,14 +75,35 @@ JHtml::_('behavior.formvalidation');
 	</div>
 
 	<div class="col options-section">
-	<?php echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php // echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+<!--  new stuff here -->
+	<?php if (in_array('params', $this->form->getGroups())) : ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('Categories_Fieldset_Rules'), 'access-rules'); ?>
-		<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('Categories_Fieldset_Rules');?></legend>
-				<?php // echo $this->form->getLabel('rules'); ?>
-				<?php echo $this->form->getInput('rules'); ?>
-		</fieldset>
+			<?php echo JHTML::_('sliders.start'); ?>
+			
+			<?php $groups = $this->form->getGroups('params');
+			$fieldsets = $this->form->getFieldsets();
+			array_unshift($groups, 'params'); ?>
+			
+			<?php foreach($groups as $group) : ?>
+				<?php echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group); ?>
+				
+				<fieldset class="panelform">
+				
+				<?php foreach($this->form->getFields($group) as $field) : 
+					if ($field->hidden) : 
+						echo $field->input; 
+					else : 
+						echo $field->label; 
+						echo $field->input; 
+					endif; 
+				endforeach; ?>
+				
+				</fieldset>
+				
+			<?php endforeach; ?>
+			<?php echo JHTML::_('sliders.end'); ?>
+		<?php endif; ?>
 		
 		<?php echo JHtml::_('sliders.panel',JText::_('Categories_Fieldset_Metadata'), 'meta-options'); ?>
 		<fieldset class="panelform">
