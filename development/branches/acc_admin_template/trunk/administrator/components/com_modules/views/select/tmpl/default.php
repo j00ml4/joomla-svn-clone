@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,14 +22,14 @@ JHtml::_('behavior.tooltip');
 		// Prepare variables for the link.
 
 		$link	= 'index.php?option=com_modules&task=module.add&eid='. $item->extension_id;
-		$name 	= $this->escape(JText::_($item->name));
-		$desc	= $this->escape(JText::_('Modules_No_description_available'));
+		$name	= $this->escape(JText::_($item->name));
+		$desc	= $this->escape(JText::_('COM_MODULES_NODESCRIPTION'));
 
 		if (isset($item->xml))
 		{
 			if ($text = (string) $item->xml->description)
 			{
-				$desc = $this->escape($text);
+				$desc = $this->escape(JText::_($text));
 			}
 		}
 		?>

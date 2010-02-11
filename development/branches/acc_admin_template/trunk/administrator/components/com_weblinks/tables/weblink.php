@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -133,7 +133,7 @@ class WeblinksTableWeblink extends JTable
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($this->params);
-			$this->params = $registry->toString();
+			$this->params = (string)$registry;
 		}
 
 		// Attempt to store the user data.
@@ -193,7 +193,7 @@ class WeblinksTableWeblink extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.

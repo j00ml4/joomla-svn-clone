@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_templates
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -100,14 +100,14 @@ $user = JFactory::getUser();
 				</td>
 				<td class="center">
 					<?php if ($item->home == 1) : ?>
-							<img src="templates/bluestork/images/menu/icon-16-default.png" alt="<?php echo JText::_('Default'); ?>" />
+							<?php echo JHTML::_('image', 'menu/icon-16-default.png', JText::_('Default'), NULL, true); ?>
 					<?php else  : ?>
 							&nbsp;
 					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php if ($item->assigned == 1) : ?>
-							<img src="templates/bluestork/admin/images/tick.png" alt="<?php echo JText::_('Assigned'); ?>" />
+							<?php echo JHTML::_('image', 'admin/tick.png', JText::_('Assigned'), NULL, true); ?>
 					<?php else : ?>
 							&nbsp;
 					<?php endif; ?>

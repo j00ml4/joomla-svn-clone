@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 /**
  * Class to create and parse routes
  *
- * @package 	Joomla
+ * @package		Joomla
  * @since		1.5
  */
 class JRouterAdministrator extends JRouter
@@ -29,7 +29,7 @@ class JRouterAdministrator extends JRouter
 	/**
 	 * Function to convert an internal URI to a route
 	 *
-	 * @param	string	$string	The internal URL
+	 * @param	string	The internal URL
 	 * @return	string	The absolute search engine friendly URL
 	 * @since	1.5
 	 */

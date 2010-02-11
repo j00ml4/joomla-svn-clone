@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Framework
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
  * Route handling class
  *
  * @static
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @since		1.5
  */
 class JRoute
@@ -21,12 +21,12 @@ class JRoute
 	/**
 	 * Translates an internal Joomla URL to a humanly readible URL.
 	 *
-	 * @param 	string 	 $url 	Absolute or Relative URI to Joomla resource.
-	 * @param 	boolean  $xhtml Replace & by &amp; for xml compilance.
-	 * @param	int		 $ssl	Secure state for the resolved URI.
-	 * 		 1: Make URI secure using global secure site URI.
-	 * 		 0: Leave URI in the same secure state as it was passed to the function.
-	 * 		-1: Make URI unsecure using the global unsecure site URI.
+	 * @param	string	$url	Absolute or Relative URI to Joomla resource.
+	 * @param	boolean  $xhtml Replace & by &amp; for xml compilance.
+	 * @param	int		$ssl	Secure state for the resolved URI.
+	 *		1: Make URI secure using global secure site URI.
+	 *		0: Leave URI in the same secure state as it was passed to the function.
+	 *		-1: Make URI unsecure using the global unsecure site URI.
 	 * @return	The translated humanly readible URL.
 	 */
 	public static function _($url, $xhtml = true, $ssl = null)
@@ -41,8 +41,8 @@ class JRoute
 		}
 
 		if ((strpos($url, '&') !== 0) && (strpos($url, 'index.php') !== 0)) {
-            return $url;
- 		}
+			return $url;
+		}
 
 		// Build route.
 		$uri = &$router->build($url);
@@ -93,7 +93,7 @@ class JRoute
  * Text  handling class.
  *
  * @static
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Language
  * @since		1.5
  */

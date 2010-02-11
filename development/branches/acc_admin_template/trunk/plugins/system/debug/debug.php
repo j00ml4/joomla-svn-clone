@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,15 +24,13 @@ class plgSystemDebug extends JPlugin
 	 *
 	 * @access	protected
 	 * @param	object $subject The object to observe
-	 * @param 	array  $config  An array that holds the plugin configuration
+	 * @param	array  $config  An array that holds the plugin configuration
 	 * @since	1.0
 	 */
 	function __construct(&$subject, $config)
 	{
 		parent::__construct($subject, $config);
 
-		//load the translation
-		$this->loadLanguage();
 	}
 
 	/**
@@ -65,9 +63,6 @@ class plgSystemDebug extends JPlugin
 			}
 		}
 
-		$lang = &JFactory::getLanguage();
-		$lang->load('plg_system_debug', JPATH_SITE);
-
 		$profiler	= &$_PROFILER;
 
 		ob_start();
@@ -81,14 +76,14 @@ class plgSystemDebug extends JPlugin
 			echo '</ol>';
 		}
 		if ($this->params->get('profile', 1)) {
-			echo '<h4>'.JText::_('Debug_Profile_Information').'</h4>';
+			echo '<h4>'.JText::_('PLG_DEBUG_PROFILE_INFORMATION').'</h4>';
 			foreach ($profiler->getBuffer() as $mark) {
 				echo '<div>'.$mark.'</div>';
 			}
 		}
 
 		if ($this->params->get('memory', 1)) {
-			echo '<h4>'.JText::_('Debug_Memory_Usage').'</h4>';
+			echo '<h4>'.JText::_('PLG_DEBUG_MEMORY_USAGE').'</h4>';
 			echo number_format($profiler->getMemory());
 		}
 
@@ -97,7 +92,7 @@ class plgSystemDebug extends JPlugin
 
 			$db	= &JFactory::getDbo();
 
-			echo '<h4>'.JText::sprintf('Debug_Queries_logged',  $db->getTicker()).'</h4>';
+			echo '<h4>'.JText::sprintf('PLG_DEBUG_QUERIES_LOGGED',  $db->getTicker()).'</h4>';
 
 			if ($log = $db->getLog()) {
 				echo '<ol>';
@@ -112,7 +107,7 @@ class plgSystemDebug extends JPlugin
 		$lang = &JFactory::getLanguage();
 		if ($this->params->get('language_files', 1))
 		{
-			echo '<h4>'.JText::_('Debug_Language_Files_Loaded').'</h4>';
+			echo '<h4>'.JText::_('PLG_DEBUG_LANGUAGE_FILES_LOADED').'</h4>';
 			echo '<ul>';
 			$extensions	= $lang->getPaths();
 			foreach ($extensions as $extension => $files)
@@ -131,7 +126,7 @@ class plgSystemDebug extends JPlugin
 			$stripPref	= $this->params->get('strip-prefix');
 			$stripSuff	= $this->params->get('strip-suffix');
 
-			echo '<h4>'.JText::_('Debug_Untranslated_Strings').'</h4>';
+			echo '<h4>'.JText::_('PLG_DEBUG_UNTRANSLATED_STRINGS').'</h4>';
 			echo '<pre>';
 			$orphans = $lang->getOrphans();
 			if (count($orphans))
@@ -191,12 +186,12 @@ class plgSystemDebug extends JPlugin
 				}
 				foreach ($guesses as $file => $keys)
 				{
-					echo "\n\n# ".($file ? $file : JText::_('Debug_Unknown_file'))."\n\n";
+					echo "\n\n# ".($file ? $file : JText::_('PLG_DEBUG_UNKNOWN_FILE'))."\n\n";
 					echo implode("\n", $keys);
 				}
 			}
 			else {
-				echo JText::_('None');
+				echo JText::_('JNone');
 			}
 			echo '</pre>';
 		}

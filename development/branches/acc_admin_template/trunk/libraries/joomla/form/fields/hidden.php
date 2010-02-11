@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -32,8 +32,8 @@ class JFormFieldHidden extends JFormField
 	 */
 	protected function _getInput()
 	{
-		$class	= $this->_element->attributes('class') ? 'class="'.$this->_element->attributes('class').'"' : '';
+		$class	= (string)$this->_element->attributes()->class ? 'class="'.$this->_element->attributes()->class.'"' : '';
 
-		return '<input type="hidden" name="'.$this->inputName.'" value="'.htmlspecialchars($this->value).'" '.$class.' />';
+		return '<input type="hidden" name="'.$this->inputName.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'" '.$class.' />';
 	}
 }

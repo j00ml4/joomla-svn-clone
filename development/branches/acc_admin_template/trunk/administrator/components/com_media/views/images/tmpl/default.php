@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_media
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,17 +16,17 @@ echo $params->get('image_path', 'images');?>/';
 </script>
 <form action="index.php" id="imageForm" method="post" enctype="multipart/form-data">
 	<div id="messages" style="display: none;">
-		<span id="message"></span><img src="<?php echo JURI::base() ?>media/media/images/dots.gif" width="22" height="12" alt="..." />
+		<span id="message"></span><?php echo JHTML::_('image', 'media/dots.gif', '...', array('width' =>22, 'height' => 12), true)?>
 	</div>
 	<fieldset>
 		<div class="fltlft">
 			<label for="folder"><?php echo JText::_('Directory') ?></label>
 			<?php echo $this->folderList; ?>
-			<button type="button" id="upbutton" title="<?php echo JText::_('Directory Up') ?>"><?php echo JText::_('Up') ?></button>
+			<button type="button" id="upbutton" title="<?php echo JText::_('DIRECTORY_UP') ?>"><?php echo JText::_('Up') ?></button>
 		</div>
 		<div class="fltrt">
 			<button type="button" onclick="ImageManager.onok();window.parent.document.getElementById('sbox-window').close();"><?php echo JText::_('Insert') ?></button>
-			<button type="button" onclick="window.parent.document.getElementById('sbox-window').close();"><?php echo JText::_('Cancel') ?></button>
+			<button type="button" onclick="window.parent.SqueezeBox.close();"><?php echo JText::_('Cancel') ?></button>
 		</div>
 	</fieldset>
 	<iframe id="imageframe" name="imageframe" src="index.php?option=com_media&amp;view=imagesList&amp;tmpl=component&amp;folder=<?php echo $this->state->folder?>"></iframe>
@@ -34,19 +34,19 @@ echo $params->get('image_path', 'images');?>/';
 	<fieldset>
 		<table class="properties">
 			<tr>
-				<td><label for="f_url"><?php echo JText::_('Image URL') ?></label></td>
+				<td><label for="f_url"><?php echo JText::_('IMAGE_URL') ?></label></td>
 				<td><input type="text" id="f_url" value="" /></td>
 				<td><label for="f_align"><?php echo JText::_('Align') ?></label></td>
 				<td>
 					<select size="1" id="f_align" title="Positioning of this image">
-						<option value="" selected="selected"><?php echo JText::_('Not Set') ?></option>
+						<option value="" selected="selected"><?php echo JText::_('NOT_SET') ?></option>
 						<option value="left"><?php echo JText::_('Left') ?></option>
 						<option value="right"><?php echo JText::_('Right') ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td><label for="f_alt"><?php echo JText::_('Image description') ?></label></td>
+				<td><label for="f_alt"><?php echo JText::_('IMAGE_DESCRIPTION') ?></label></td>
 				<td><input type="text" id="f_alt" value="" /></td>
 			</tr>
 			<tr>

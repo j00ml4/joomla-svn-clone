@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -62,7 +62,7 @@ class SearchHelper
 			include $ignoreFile;
 		}
 
-	 	// check for words to ignore
+		// check for words to ignore
 		$aterms = explode(' ', JString::strtolower($searchword));
 
 		// first case is single ignored word
@@ -92,14 +92,14 @@ class SearchHelper
 
 		// limit searchword to 20 characters
 		if (JString::strlen($searchword) > 20) {
-			$searchword 	= JString::substr($searchword, 0, 19);
-			$restriction 	= true;
+			$searchword		= JString::substr($searchword, 0, 19);
+			$restriction	= true;
 		}
 
 		// searchword must contain a minimum of 3 characters
 		if ($searchword && JString::strlen($searchword) < 3) {
-			$searchword 	= '';
-			$restriction 	= true;
+			$searchword		= '';
+			$restriction	= true;
 		}
 
 		return $restriction;

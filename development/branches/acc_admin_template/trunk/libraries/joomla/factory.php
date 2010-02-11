@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Framework
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -33,8 +33,8 @@ abstract class JFactory
 	 * Returns the global {@link JApplication} object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param	mixed	$id 		A client identifier or name.
-	 * @param	array	$config 	An optional associative array of configuration settings.
+	 * @param	mixed	$id		A client identifier or name.
+	 * @param	array	$config	An optional associative array of configuration settings.
 	 * @return object JApplication
 	 */
 	public static function getApplication($id = null, $config = array(), $prefix='J')
@@ -141,7 +141,7 @@ abstract class JFactory
 	 * Returns the global {@link JUser} object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param 	int 	$id 	The user to load - Can be an integer or string - If string, it is converted to ID automatically.
+	 * @param	int	$id	The user to load - Can be an integer or string - If string, it is converted to ID automatically.
 	 *
 	 * @return object JUser
 	 */
@@ -278,7 +278,7 @@ abstract class JFactory
 		if ($simplepie->init()) {
 			return $simplepie;
 		} else {
-			JError::raiseWarning('SOME_ERROR_CODE', JText::_('ERROR LOADING FEED DATA'));
+			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_LOADING_FEED_DATA'));
 		}
 
 		return false;
@@ -289,25 +289,26 @@ abstract class JFactory
 	 *
 	 * @param string The type of xml parser needed 'DOM', 'RSS' or 'Simple'
 	 * @param array:
-	 * 		string  ['rssUrl'] the rss url to parse when using "RSS"
-	 * 		string	['cache_time'] with 'RSS' - feed cache time. If not defined defaults to 3600 sec
+	 *		string  ['rssUrl'] the rss url to parse when using "RSS"
+	 *		string	['cache_time'] with 'RSS' - feed cache time. If not defined defaults to 3600 sec
 	 * @return object Parsed XML document object
 	 * @deprecated
 	 */
 	public static function getXMLParser($type = '', $options = array())
-	 {
+	{
 		$doc = null;
 
 		switch (strtolower($type))
 		{
 			case 'rss' :
 			case 'atom' :
-			{
-				$cache_time = isset($options['cache_time']) ? $options['cache_time'] : 0;
-				$doc = JFactory::getFeedParser($options['rssUrl'], $cache_time);
-			}	break;
+				{
+					$cache_time = isset($options['cache_time']) ? $options['cache_time'] : 0;
+					$doc = JFactory::getFeedParser($options['rssUrl'], $cache_time);
+				}	break;
 
 			case 'simple':
+				// JError::raiseWarning('SOME_ERROR_CODE', 'JSimpleXML is deprecated. Use JFactory::getXML instead');
 				jimport('joomla.utilities.simplexml');
 				$doc = new JSimpleXML();
 				break;
@@ -326,11 +327,58 @@ abstract class JFactory
 	}
 
 	/**
-	* Get an editor object
-	*
-	* @param string $editor The editor to load, depends on the editor plugins that are installed
-	* @return object JEditor
-	*/
+	 * Reads a XML file.
+	 *
+	 * @todo This may go in a separate class - error reporting may be improved.
+	 *
+	 * @param string $data Full path and file name.
+	 * @param boolean $isFile true to load a file | false to load a string.
+	 *
+	 * @return mixed JXMLElement on success | false on error.
+	 */
+	public static function getXML($data, $isFile = true)
+	{
+		jimport('joomla.utilities.xmlelement');
+
+		// Disable libxml errors and allow to fetch error information as needed
+		libxml_use_internal_errors(true);
+
+		if($isFile)
+		{
+			// Try to load the xml file
+			$xml = simplexml_load_file($data, 'JXMLElement');
+		}
+		else
+		{
+			// Try to load the xml string
+			$xml = simplexml_load_string($data, 'JXMLElement');
+		}
+
+		if( ! $xml)
+		{
+			// There was an error
+			JError::raiseWarning(100, JText::_('Failed loading XML file'));
+
+			if($isFile)
+			{
+				JError::raiseWarning(100, $data);
+			}
+
+			foreach(libxml_get_errors() as $error)
+			{
+				JError::raiseWarning(100, 'XML: '.$error->message);
+			}
+		}
+
+		return $xml ;
+	}
+
+	/**
+	 * Get an editor object
+	 *
+	 * @param string $editor The editor to load, depends on the editor plugins that are installed
+	 * @return object JEditor
+	 */
 	public static function getEditor($editor = null)
 	{
 		jimport('joomla.html.editor');
@@ -398,15 +446,15 @@ abstract class JFactory
 		}
 		$key = $time . '-' . $tzOffset;
 
-//		if (!isset($instances[$classname][$key])) {
-			$tmp = new $classname($time, $tzOffset);
-			//We need to serialize to break the reference
-//			$instances[$classname][$key] = serialize($tmp);
-//			unset($tmp);
-//		}
+		//		if (!isset($instances[$classname][$key])) {
+		$tmp = new $classname($time, $tzOffset);
+		//We need to serialize to break the reference
+		//			$instances[$classname][$key] = serialize($tmp);
+		//			unset($tmp);
+		//		}
 
-//		$date = unserialize($instances[$classname][$key]);
-//		return $date;
+		//		$date = unserialize($instances[$classname][$key]);
+		//		return $date;
 		return $tmp;
 	}
 
@@ -477,20 +525,20 @@ abstract class JFactory
 
 		$conf = &JFactory::getConfig();
 
-		$host 		= $conf->getValue('config.host');
-		$user 		= $conf->getValue('config.user');
-		$password 	= $conf->getValue('config.password');
+		$host		= $conf->getValue('config.host');
+		$user		= $conf->getValue('config.user');
+		$password	= $conf->getValue('config.password');
 		$database	= $conf->getValue('config.db');
-		$prefix 	= $conf->getValue('config.dbprefix');
-		$driver 	= $conf->getValue('config.dbtype');
-		$debug 		= $conf->getValue('config.debug');
+		$prefix	= $conf->getValue('config.dbprefix');
+		$driver	= $conf->getValue('config.dbtype');
+		$debug		= $conf->getValue('config.debug');
 
 		$options	= array ('driver' => $driver, 'host' => $host, 'user' => $user, 'password' => $password, 'database' => $database, 'prefix' => $prefix);
 
 		$db = &JDatabase::getInstance($options);
 
 		if (JError::isError($db)) {
-			jexit('Database Error: ' . $db->toString());
+			jexit('Database Error: ' . (string)$db);
 		}
 
 		if ($db->getErrorNum() > 0) {
@@ -514,19 +562,19 @@ abstract class JFactory
 
 		$conf	= &JFactory::getConfig();
 
-		$sendmail 	= $conf->getValue('config.sendmail');
-		$smtpauth 	= $conf->getValue('config.smtpauth');
-		$smtpuser 	= $conf->getValue('config.smtpuser');
-		$smtppass  	= $conf->getValue('config.smtppass');
-		$smtphost 	= $conf->getValue('config.smtphost');
+		$sendmail	= $conf->getValue('config.sendmail');
+		$smtpauth	= $conf->getValue('config.smtpauth');
+		$smtpuser	= $conf->getValue('config.smtpuser');
+		$smtppass	= $conf->getValue('config.smtppass');
+		$smtphost	= $conf->getValue('config.smtphost');
 		$smtpsecure	= $conf->getValue('config.smtpsecure');
 		$smtpport	= $conf->getValue('config.smtpport');
-		$mailfrom 	= $conf->getValue('config.mailfrom');
-		$fromname 	= $conf->getValue('config.fromname');
-		$mailer 	= $conf->getValue('config.mailer');
+		$mailfrom	= $conf->getValue('config.mailfrom');
+		$fromname	= $conf->getValue('config.fromname');
+		$mailer		= $conf->getValue('config.mailer');
 
 		// Create a JMail object
-		$mail 		= &JMail::getInstance();
+		$mail		= &JMail::getInstance();
 
 		// Set default sender
 		$mail->setSender(array ($mailfrom, $fromname));

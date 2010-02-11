@@ -3,7 +3,7 @@
  * @version		$Id:eaccelerator.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Session
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -52,8 +52,8 @@ class JSessionStorageMemcache extends JSessionStorage
 	function __construct($options = array())
 	{
 		if (!$this->test()) {
-            return JError::raiseError(404, "The memcache extension isn't available");
-        }
+			return JError::raiseError(404, "The memcache extension isn't available");
+		}
 
 		parent::__construct($options);
 
@@ -80,7 +80,7 @@ class JSessionStorageMemcache extends JSessionStorage
 	 * Open the SessionHandler backend.
 	 *
 	 * @access public
-	 * @param string $save_path     The path to the session object.
+	 * @param string $save_path	The path to the session object.
 	 * @param string $session_name  The name of the session.
 	 * @return boolean  True on success, false otherwise.
 	 */
@@ -106,14 +106,14 @@ class JSessionStorageMemcache extends JSessionStorage
 		return $this->_db->close();
 	}
 
- 	/**
- 	 * Read the data for a particular session identifier from the
- 	 * SessionHandler backend.
- 	 *
- 	 * @access public
- 	 * @param string $id  The session identifier.
- 	 * @return string  The session data.
- 	 */
+	/**
+	 * Read the data for a particular session identifier from the
+	 * SessionHandler backend.
+	 *
+	 * @access public
+	 * @param string $id  The session identifier.
+	 * @return string  The session data.
+	 */
 	function read($id)
 	{
 		$sess_id = 'sess_'.$id;
@@ -125,7 +125,7 @@ class JSessionStorageMemcache extends JSessionStorage
 	 * Write session data to the SessionHandler backend.
 	 *
 	 * @access public
-	 * @param string $id            The session identifier.
+	 * @param string $id			The session identifier.
 	 * @param string $session_data  The session data.
 	 * @return boolean  True on success, false otherwise.
 	 */
@@ -146,13 +146,13 @@ class JSessionStorageMemcache extends JSessionStorage
 	}
 
 	/**
-	  * Destroy the data for a particular session identifier in the
-	  * SessionHandler backend.
-	  *
-	  * @access public
-	  * @param string $id  The session identifier.
-	  * @return boolean  True on success, false otherwise.
-	  */
+	 * Destroy the data for a particular session identifier in the
+	 * SessionHandler backend.
+	 *
+	 * @access public
+	 * @param string $id  The session identifier.
+	 * @return boolean  True on success, false otherwise.
+	 */
 	function destroy($id)
 	{
 		$sess_id = 'sess_'.$id;
@@ -191,7 +191,7 @@ class JSessionStorageMemcache extends JSessionStorage
 	 *
 	 * @access private
 	 *
-	 * @param string  $key   Cache key to expire.
+	 * @param string  $key		Cache key to expire.
 	 * @param integer $lifetime  Lifetime of the data in seconds.
 	 */
 	function _setExpire($key)

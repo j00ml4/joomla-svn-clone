@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -15,7 +15,7 @@ require_once dirname(__FILE__).DS.'list.php';
 /**
  * Renders a select list of Asset Groups
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Parameter
  * @since		1.6
  */
@@ -37,8 +37,8 @@ class JElementContentLanguages extends JElementList
 	 */
 	protected function _getOptions(&$node)
 	{
-		$db		= &JFactory::getDbo();
-		$query	= new JQuery;
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 
 		$query->select('a.lang_code AS value, a.title AS text, a.title_native');
 		$query->from('#__languages AS a');

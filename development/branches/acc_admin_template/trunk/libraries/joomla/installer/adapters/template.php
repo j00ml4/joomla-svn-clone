@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,6 +24,30 @@ class JInstallerTemplate extends JAdapterInstance
 	protected $element = null;
 
 	/**
+	 * Custom loadLanguage method
+	 *
+	 * @access	public
+	 * @param	string	$path the path where to find language files
+	 * @since	1.6
+	 */
+	public function loadLanguage($path)
+	{
+		$this->manifest = &$this->parent->getManifest();
+		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
+		$client = (string)$xml->attributes()->client;
+		$extension = "tpl_$name";
+		$lang =& JFactory::getLanguage();
+		$source = $path;
+			$lang->load($extension . '.manage', $source, null, false, false)
+		||	$lang->load($extension, $source, null, false, false)
+		||	$lang->load($extension . '.manage', constant('JPATH_'.strtoupper($client)), null, false, false)
+		||	$lang->load($extension, constant('JPATH_'.strtoupper($client)), null, false, false)
+		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.manage', constant('JPATH_'.strtoupper($client)), $lang->getDefault(), false, false)
+		||	$lang->load($extension, constant('JPATH_'.strtoupper($client)), $lang->getDefault(), false, false);
+	}
+	/**
 	 * Custom install method
 	 *
 	 * @access	public
@@ -32,11 +56,10 @@ class JInstallerTemplate extends JAdapterInstance
 	 */
 	public function install()
 	{
-		$manifest = &$this->parent->getManifest();
-		$root = &$manifest->document;
+		$xml = $this->parent->getManifest();
 
 		// Get the client application target
-		if ($cname = $root->attributes('client'))
+		if ($cname = (string)$xml->attributes()->client)
 		{
 			// Attempt to map the client to a base path
 			jimport('joomla.application.helper');
@@ -57,8 +80,7 @@ class JInstallerTemplate extends JAdapterInstance
 		}
 
 		// Set the extensions name
-		$name = &$root->getElementByPath('name');
-		$name = JFilterInput::clean($name->data(), 'cmd');
+		$name = JFilterInput::getInstance()->clean((string)$xml->name, 'cmd');
 
 		$element = strtolower(str_replace(" ", "_", $name));
 		$this->set('name', $name);
@@ -80,7 +102,7 @@ class JInstallerTemplate extends JAdapterInstance
 			else
 			{
 				// abort the install, no upgrade possible
-				$this->parent->abort(JText::_('Template').' '. JText::_('Install').': '.JText::_('Template already installed'));
+				$this->parent->abort(JText::_('Template').' '.JText::_('Install').': '.JText::_('Template already installed'));
 				return false;
 			}
 		}
@@ -94,7 +116,7 @@ class JInstallerTemplate extends JAdapterInstance
 		 */
 		if (file_exists($this->parent->getPath('extension_root')) && !$this->parent->getOverwrite())
 		{
-			JError::raiseWarning(100, JText::_('Template').' '.JText::_('Install').': '.JText::_('Another template is already using directory').': "'.$this->parent->getPath('extension_root').'"');
+			JError::raiseWarning(100, JText::_('Template').' '.JText::_('Install').': '.JText::_('ANOTHER_TEMPLATE_IS_ALREADY_USING_DIRECTORY').': "'.$this->parent->getPath('extension_root').'"');
 			return false;
 		}
 
@@ -104,7 +126,7 @@ class JInstallerTemplate extends JAdapterInstance
 		{
 			if (!$created = JFolder::create($this->parent->getPath('extension_root')))
 			{
-				$this->parent->abort(JText::_('Template').' '.JText::_('Install').': '.JText::_('Failed to create directory').' "'.$this->parent->getPath('extension_root').'"');
+				$this->parent->abort(JText::_('Template').' '.JText::_('Install').': '.JText::_('FAILED_TO_CREATE_DIRECTORY').' "'.$this->parent->getPath('extension_root').'"');
 				return false;
 			}
 		}
@@ -116,19 +138,19 @@ class JInstallerTemplate extends JAdapterInstance
 		}
 
 		// Copy all the necessary files
-		if ($this->parent->parseFiles($root->getElementByPath('files'), -1) === false)
+		if ($this->parent->parseFiles($xml->files, -1) === false)
 		{
 			// Install failed, rollback changes
 			$this->parent->abort();
 			return false;
 		}
-		if ($this->parent->parseFiles($root->getElementByPath('images'), -1) === false)
+		if ($this->parent->parseFiles($xml->images, -1) === false)
 		{
 			// Install failed, rollback changes
 			$this->parent->abort();
 			return false;
 		}
-		if ($this->parent->parseFiles($root->getElementByPath('css'), -1) === false)
+		if ($this->parent->parseFiles($xml->css, -1) === false)
 		{
 			// Install failed, rollback changes
 			$this->parent->abort();
@@ -136,24 +158,17 @@ class JInstallerTemplate extends JAdapterInstance
 		}
 
 		// Parse optional tags
-		$this->parent->parseFiles($root->getElementByPath('media'), $clientId);
-		$this->parent->parseLanguages($root->getElementByPath('languages'));
-		$this->parent->parseLanguages($root->getElementByPath('administration/languages'), 1);
+		$this->parent->parseFiles($xml->media, $clientId);
+		$this->parent->parseLanguages($xml->languages, $clientId);
 
 		// Get the template description
-		$description = & $root->getElementByPath('description');
-		if ($description INSTANCEOF JSimpleXMLElement) {
-			$this->parent->set('message', $description->data());
-		}
-		else {
-			$this->parent->set('message', '');
-		}
+		$this->parent->set('message', JText::_((string)$xml->description));
 
 		// Lastly, we will copy the manifest file to its appropriate place.
 		if (!$this->parent->copyManifest(-1))
 		{
 			// Install failed, rollback changes
-			$this->parent->abort(JText::_('Template').' '.JText::_('Install').': '.JText::_('Could not copy setup file'));
+			$this->parent->abort(JText::_('Template').' '.JText::_('Install').': '.JText::_('COULD_NOT_COPY_SETUP_FILE'));
 			return false;
 		}
 
@@ -185,9 +200,9 @@ class JInstallerTemplate extends JAdapterInstance
 		$query = 'INSERT INTO #__template_styles'.
 				' (template,client_id,home,title,params)'.
 				' VALUE ('.$db->Quote($row->name).','.
-				$db->Quote($clientId).',0,'.
-				$db->Quote(JText::_('Default')).','.
-				$db->Quote($row->params).
+		$db->Quote($clientId).',0,'.
+		$db->Quote(JText::_('Default')).','.
+		$db->Quote($row->params).
 				')';
 		$db->setQuery($query);
 		$db->query();
@@ -257,7 +272,7 @@ class JInstallerTemplate extends JAdapterInstance
 		$this->parent->setPath('source', $this->parent->getPath('extension_root'));
 
 		$manifest = &$this->parent->getManifest();
-		if (!$manifest INSTANCEOF JSimpleXML)
+		if (!$manifest INSTANCEOF JXMLElement)
 		{
 			// kill the extension entry
 			$row->delete($row->extension_id);
@@ -267,12 +282,11 @@ class JInstallerTemplate extends JAdapterInstance
 			JError::raiseWarning(100, JTEXT::_('Template').' '.JTEXT::_('Uninstall').': '.JTEXT::_('Package manifest file invalid or not found'));
 			return false;
 		}
-		$root = &$manifest->document;
+		$xml = &$manifest->document;
 
 		// Remove files
-		$this->parent->removeFiles($root->getElementByPath('media'), $clientId);
-		$this->parent->removeFiles($root->getElementByPath('languages'));
-		$this->parent->removeFiles($root->getElementByPath('administration/languages'), 1);
+		$this->parent->removeFiles($xml->media, $clientId);
+		$this->parent->removeFiles($xml->languages, $clientId);
 
 		// Delete the template directory
 		if (JFolder::exists($this->parent->getPath('extension_root'))) {
@@ -355,7 +369,7 @@ class JInstallerTemplate extends JAdapterInstance
 		// Templates are one of the easiest
 		// If its not in the extensions table we just add it
 		$client = JApplicationHelper::getClientInfo($this->parent->extension->client_id);
-		$manifestPath = $client->path . DS . 'templates'. DS . $this->parent->extension->element . DS . 'templateDetails.xml';
+		$manifestPath = $client->path.DS.'templates'.DS.$this->parent->extension->element.DS.'templateDetails.xml';
 		$this->parent->manifest = $this->parent->isManifest($manifestPath);
 		$this->parent->setPath('manifest', $manifestPath);
 		$manifest_details = JApplicationHelper::parseXMLInstallFile($this->parent->getPath('manifest'));

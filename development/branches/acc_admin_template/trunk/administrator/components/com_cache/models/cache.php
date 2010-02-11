@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -186,9 +186,9 @@ class CacheModelCache extends JModel
  */
 class CacheItem
 {
-	public $group 	= '';
-	public $size 	= 0;
-	public $count 	= 0;
+	public $group = '';
+	public $size = 0;
+	public $count = 0;
 
 	public function __construct($group)
 	{

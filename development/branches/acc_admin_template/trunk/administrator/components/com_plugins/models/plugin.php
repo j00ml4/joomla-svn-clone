@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: controller.php 12685 2009-09-10 14:14:04Z pentacle $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -52,9 +52,9 @@ class PluginsModelPlugin extends JModelForm
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Extension', $prefix = 'JTable', $config = array())
@@ -127,6 +127,16 @@ class PluginsModelPlugin extends JModelForm
 			$registry = new JRegistry;
 			$registry->loadJSON($table->params);
 			$this->_cache[$pk]->params = $registry->toArray();
+
+			// Get the plugin XML.
+			$client	= JApplicationHelper::getClientInfo($table->client_id);
+			$path	= JPath::clean($client->path.'/plugins/'.$table->folder.'/'.$table->element.'/'.$table->element.'.xml');
+
+			if (file_exists($path)) {
+				$this->_cache[$pk]->xml = &JFactory::getXML($path);
+			} else {
+				$this->_cache[$pk]->xml = null;
+			}
 		}
 
 		return $this->_cache[$pk];
@@ -203,9 +213,11 @@ class PluginsModelPlugin extends JModelForm
 		}
 
 		// Load the core and/or local language file(s).
-		$lang->load('plg_'.$folder.'_'.$element, JPATH_SITE);
-		$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR);
-		$lang->load('joomla', $client->path.'/plugins/'.$folder.'/'.$element);
+			$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, $lang->getDefault(), false, false);
+		//$lang->load('plg_'.$folder.'_'.$element, JPATH_SITE);
 
 		// If an XML file was found in the component, load it first.
 		// We need to qualify the full path to avoid collisions with component file names.

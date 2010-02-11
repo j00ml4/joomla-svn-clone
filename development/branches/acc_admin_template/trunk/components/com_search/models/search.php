@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Search
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -82,8 +82,8 @@ class SearchModelSearch extends JModel
 	 *
 	 * @access	public
 	 * @param string search string
- 	 * @param string mathcing option, exact|any|all
- 	 * @param string ordering option, newest|oldest|popular|alpha|category
+	 * @param string mathcing option, exact|any|all
+	 * @param string ordering option, newest|oldest|popular|alpha|category
 	 */
 	function setSearch($keyword, $match = 'all', $ordering = 'newest')
 	{
@@ -141,7 +141,7 @@ class SearchModelSearch extends JModel
 
 			$this->_total	= count($rows);
 			if ($this->getState('limit') > 0) {
-				$this->_data    = array_splice($rows, $this->getState('limitstart'), $this->getState('limit'));
+				$this->_data	= array_splice($rows, $this->getState('limitstart'), $this->getState('limit'));
 			} else {
 				$this->_data = $rows;
 			}
@@ -196,7 +196,10 @@ class SearchModelSearch extends JModel
 			$searchareas = $dispatcher->trigger('onSearchAreas');
 
 			foreach ($searchareas as $area) {
-				$areas = array_merge($areas, $area);
+				if(is_array($area))
+				{
+					$areas = array_merge($areas, $area);
+				}
 			}
 
 			$this->_areas['search'] = $areas;

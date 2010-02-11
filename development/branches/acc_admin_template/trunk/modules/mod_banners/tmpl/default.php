@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_banners
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -30,7 +30,7 @@ $baseurl = JURI::base();
 				<?php // Image based banner ?>
 				<?php $alt = $item->params->alt->alt;?>
 				<?php $alt = $alt ? $alt : $item->name ;?>
-				<?php $alt = $alt ? $alt : JText::_('mod_banners_Banner') ;?>
+				<?php $alt = $alt ? $alt : JText::_('MOD_BANNERS_BANNER') ;?>
 				<?php if ($item->clickurl) :?>
 					<?php // Wrap the banner in a link?>
 					<?php $target = $params->get('target', 1);?>
@@ -47,8 +47,8 @@ $baseurl = JURI::base();
 						<?php // open in a popup window?>
 						<a
 							href="javascript:void window.open('<?php echo $link;?>', '',
-							      'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550');
-							      return false"
+								'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=550');
+								return false"
 							title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
 							<img
 								src="<?php echo $baseurl;?>images/banners/<?php echo $imageurl;?>"
@@ -58,7 +58,7 @@ $baseurl = JURI::base();
 						<?php // open in parent window?>
 						<a
 							href="<?php echo $link;?>"
-					 		title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
+							title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
 							<img
 								src="<?php echo $baseurl;?>images/banners/<?php echo $imageurl;?>"
 								alt="<?php echo $alt;?>" />
@@ -96,7 +96,7 @@ $baseurl = JURI::base();
 
 <?php if ($footerText) : ?>
 	<div class="bannerfooter">
-		 <?php echo $footerText; ?>
+		<?php echo $footerText; ?>
 	</div>
 <?php endif; ?>
 </div>

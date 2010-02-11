@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -22,8 +22,8 @@ class JElementArticle extends JElement
 	{
 		$app		= JFactory::getApplication();
 		$db			= JFactory::getDbo();
-		$doc 		= JFactory::getDocument();
-		$template 	= $app->getTemplate();
+		$doc		= JFactory::getDocument();
+		$template	= $app->getTemplate();
 		$fieldName	= $control_name.'['.$name.']';
 		$article = &JTable::getInstance('content');
 		if ($value) {

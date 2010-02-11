@@ -2,7 +2,7 @@
 <?php if(JPluginHelper::isEnabled('authentication', 'openid')) :
 		$lang = &JFactory::getLanguage();
 		$lang->load( 'plg_authentication_openid', JPATH_ADMINISTRATOR );
-		$langScript = 	'var JLanguage = {};'.
+		$langScript = 'var JLanguage = {};'.
 						' JLanguage.WHAT_IS_OPENID = \''.JText::_( 'WHAT_IS_OPENID' ).'\';'.
 						' JLanguage.LOGIN_WITH_OPENID = \''.JText::_( 'LOGIN_WITH_OPENID' ).'\';'.
 						' JLanguage.NORMAL_LOGIN = \''.JText::_( 'NORMAL_LOGIN' ).'\';'.
@@ -42,8 +42,8 @@ endif; ?>
 	</p>
 	<?php if(JPluginHelper::isEnabled('system', 'remember')) : ?>
 	<p id="com-form-login-remember">
-		<label for="remember"><?php echo JText::_('Remember me') ?></label>
-		<input type="checkbox" id="remember" name="remember" class="inputbox" value="yes" alt="Remember Me" />
+		<label for="remember"><?php echo JText::_('REMEMBER_ME') ?></label>
+		<input type="checkbox" id="remember" name="remember" class="inputbox" value="yes" alt="<?php echo JText::_('REMEMBER_ME') ?>" />
 	</p>
 	<?php endif; ?>
 	<input type="submit" name="Submit" class="button" value="<?php echo JText::_('LOGIN') ?>" />

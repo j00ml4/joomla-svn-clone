@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -107,6 +107,7 @@ class JForm extends JObject
 	{
 		// Set the options if specified.
 		$this->_options['array'] = array_key_exists('array', $options) ? $options['array'] : false;
+		$this->_options['prefix'] = array_key_exists('prefix', $options) ? $options['prefix'] : '%__';
 	}
 
 	/**
@@ -162,16 +163,39 @@ class JForm extends JObject
 
 		// Iterate through the groups.
 		foreach ($this->_groups as $group => $fields) {
+			$array = $this->_fieldsets[$group]['array'];
+			if ($array === true) {
+				if(isset($this->_fieldsets[$group]['parent'])) {
+					$groupControl = $this->_fieldsets[$group]['parent'];
+				} else {
+					$groupControl = $group;
+				}
+			} else {
+				$groupControl = $array;
+			}
 			// Bind if no group is specified or if the group matches the current group.
 			if ($limit === null || ($limit !== null && $group === $limit)) {
 				// Iterate through the values.
 				foreach ($data as $k => $v) {
 					// If the field name matches the name of the group and the value is not scalar, recurse.
-					if ($k == $group && !is_scalar($v) && !is_resource($v)) {
-						$this->bind($v, $group);
+					if ($k == $groupControl && !is_scalar($v) && !is_resource($v)) {
+						if(isset($this->_fieldsets[$group]['children']))
+						{
+							$childgroups = $this->_fieldsets[$group]['children'];
+							array_unshift($childgroups, $group);
+							foreach($childgroups as $cgroup)
+							{
+								$this->bind($v, $cgroup);
+							}
+						} else {
+							$this->bind($v, $group);
+						}
 					} else {
 						// Bind the value to the field if it exists.
 						if (isset($this->_groups[$group][$k]) && is_object($this->_groups[$group][$k])) {
+							$this->_data[$group][$k] = $v;
+						}
+						if (isset($this->_fieldsets[$group]['parent']) && isset($this->_groups[$this->_fieldsets[$group]['parent']][$k]) && is_object($this->_groups[$this->_fieldsets[$group]['parent']][$k])) {
 							$this->_data[$group][$k] = $v;
 						}
 					}
@@ -200,41 +224,39 @@ class JForm extends JObject
 		$return = false;
 
 		// Make sure we have data.
-		if (!empty($data))
-		{
-			// Get the XML parser and load the data.
-			$parser	= &JFactory::getXMLParser('Simple');
-
+		if (!empty($data)) {
 			// If the data is a file, load the XML from the file.
 			if ($file) {
 				// If we were not given the absolute path of a form file, attempt to find one.
 				if (!is_file($data)) {
 					jimport('joomla.filesystem.path');
-					$data = JPath::find(JForm::addFormPath(), strtolower($data).'.xml');
+					$data = JPath::find(self::addFormPath(), strtolower($data).'.xml');
+					if (!$data) {
+						return false;
+					}
 				}
 
 				// Attempt to load the XML file.
-				$loaded = $parser->loadFile($data);
+				$xml = JFactory::getXML($data);
 			}
 			// Load the data as a string.
 			else {
-				$loaded	= $parser->loadString($data);
+				$xml = JFactory::getXML($data, false);
 			}
 			// Make sure the XML was loaded.
-			if ($loaded) {
+			if ($xml) {
 				// Check if any groups exist.
-				if (isset($parser->document->fields)) {
+				if (isset($xml->fields)) {
 					// Load the form groups.
-					foreach ($parser->document->fields as $group)
-					{
+					foreach ($xml->fields as $group) {
 						$this->loadFieldsXML($group, $reset);
 						$return = true;
 					}
 				}
 
 				// Check if a name is set.
-				if ($parser->document->attributes('name') && $reset) {
-					$this->setName($parser->document->attributes('name'));
+				if ((string)$xml->attributes()->name && $reset) {
+					$this->setName((string)$xml->attributes()->name);
 				}
 			}
 		}
@@ -257,7 +279,12 @@ class JForm extends JObject
 		$return = false;
 
 		jimport('joomla.filesystem.folder');
-		$files = JFolder::files($this->addFormPath(), $name, false, true);
+		$files = array();
+		foreach($this->addFormPath() as $path)
+		{
+			$temp_files = JFolder::files($path, $name, false, true);
+			if(is_array($temp_files)) $files = array_merge($temp_files, $files);
+		}
 		if (count($files)) {
 			foreach($files as $file) {
 				$result = $this->load($file, true, true);
@@ -320,26 +347,47 @@ class JForm extends JObject
 			$noHtmlFilter = &JFilterInput::getInstance(/* $tags, $attr, $tag_method, $attr_method, $xss_auto */);
 		}
 
+		foreach($this->_fieldsets as $group => $fieldset)
+		{
+			if(isset($fieldset['parent']))
+			{
+				$this->_groups[$fieldset['parent']] = array_merge($this->_groups[$fieldset['parent']], $this->_groups[$group]);
+			}
+		}
+
 		// Iterate through the groups.
 		foreach ($this->_groups as $group => $fields) {
+			$array = $this->_fieldsets[$group]['array'];
+			if ($array === true) {
+				if(isset($this->_fieldsets[$group]['parent'])) {
+					$groupControl = $this->_fieldsets[$group]['parent'];
+				} else {
+					$groupControl = $group;
+				}
+			} else {
+				$groupControl = $array;
+			}
 			// Filter if no group is specified or if the group matches the current group.
 			if ($limit === null || ($limit !== null && $group === $limit)) {
 				// If the group name matches the name of a group in the data and the value is not scalar, recurse.
-				if (isset($data[$group]) && !is_scalar($data[$group]) && !is_resource($data[$group]))
+				if (isset($data[$groupControl]) && !is_scalar($data[$groupControl]) && !is_resource($data[$groupControl]))
 				{
-					$return[$group] = $this->filter($data[$group], $group);
+					if (isset($return[$groupControl])) {
+						$return[$groupControl] = array_merge($return[$groupControl], $this->filter($data[$groupControl], $group));
+					} else {
+						$return[$groupControl] = $this->filter($data[$groupControl], $group);
+					}
 				} else {
 					// Filter the fields.
 					foreach ($fields as $name => $field)
 					{
 						// Get the field information.
-						$filter	= $field->attributes('filter');
+						$filter	= (string)$field->attributes()->filter;
 
 						// Check for a value to filter.
 						if (isset($data[$name])) {
 							// Handle the different filter options.
-							switch (strtoupper($filter))
-							{
+							switch (strtoupper($filter)) {
 								case 'RULES':
 									$return[$name] = array();
 									foreach ((array) $data[$name] as $action => $ids) {
@@ -374,6 +422,9 @@ class JForm extends JObject
 
 										$date	= JFactory::getDate($data[$name], $offset);
 										$return[$name] = $date->toMySQL();
+									} else {
+										$db = &JFactory::getDbo();
+										$return[$name]= $db->getNullDate();
 									}
 									break;
 
@@ -382,7 +433,7 @@ class JForm extends JObject
 									if (intval($data[$name])) {
 										$offset	= $user->getParam('timezone', $config->getValue('config.offset'));
 
-										$date   = JFactory::getDate($data[$name], $offset);
+										$date = JFactory::getDate($data[$name], $offset);
 										$return[$name] = $date->toMySQL();
 									}
 									break;
@@ -478,7 +529,7 @@ class JForm extends JObject
 	public function addField(&$field, $group = '_default')
 	{
 		// Add the field to the group.
-		$this->_groups[$group][$field->attributes('name')] = &$field;
+		$this->_groups[$group][(string)$field->attributes()->name] = &$field;
 	}
 
 	/**
@@ -492,7 +543,7 @@ class JForm extends JObject
 	{
 		// Add the fields to the group.
 		foreach ($fields as $field) {
-			$this->_groups[$group][$field->attributes('name')] = $field;
+			$this->_groups[$group][(string)$field->attributes()->name] = $field;
 		}
 	}
 
@@ -517,7 +568,7 @@ class JForm extends JObject
 		}
 
 		// Load the field type.
-		$type	= $node->attributes('type');
+		$type	= $node->attributes()->type;
 		$field	= & $this->loadFieldType($type);
 
 		// If the field could not be loaded, get a text field.
@@ -527,27 +578,34 @@ class JForm extends JObject
 
 		// Get the value for the form field.
 		if ($value === null) {
-			$value = (array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : $node->attributes('default');
+			$value = (array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : (string)$node->attributes()->default;
 		}
 
 		// Check the form control.
-		if ($formControl == '_default' && $this->_options['array'] == false) {
-			$formControl = false;
-		} elseif ($formControl == '_default' && $this->_options['array'] == true) {
+		if ($formControl == '_default') {
 			$formControl = $this->_options['array'];
 		}
 
+
 		// Check the group control.
-		if ($groupControl == '_default' && $this->_fieldsets[$group]['array'] == false) {
-			$groupControl = false;
-		} elseif ($groupControl == '_default' && $group !== '_default' && $this->_fieldsets[$group]['array'] == true) {
-			$groupControl = $group;
-		} elseif ($groupControl == '_default' && $group !== '_default' && is_string($this->_fieldsets[$group]['array']) && strlen($this->_fieldsets[$group]['array'])) {
-			$groupControl = $this->_fieldsets[$group]['array'];
+		if ($groupControl == '_default'&& isset($this->_fieldsets[$group])) {
+			$array = $this->_fieldsets[$group]['array'];
+			if ($array === true) {
+				if(isset($this->_fieldsets[$group]['parent'])) {
+					$groupControl = $this->_fieldsets[$group]['parent'];
+				} else {
+					$groupControl = $group;
+				}
+			} else {
+				$groupControl = $array;
+			}
 		}
 
+		// Set the prefix
+		$prefix = $this->_options['prefix'];
+
 		// Render the field.
-		return $field->render($node, $value, $formControl, $groupControl);
+		return $field->render($node, $value, $formControl, $groupControl, $prefix);
 	}
 
 	/**
@@ -565,7 +623,7 @@ class JForm extends JObject
 
 		// Get the field attribute if it exists.
 		if (isset($this->_groups[$group][$field])) {
-			$return = $this->_groups[$group][$field]->attributes($attribute);
+			$return = (string)$this->_groups[$group][$field]->attributes()->$attribute;
 		}
 
 		return $return !== null ? $return : $default;
@@ -583,8 +641,8 @@ class JForm extends JObject
 		$return = false;
 
 		// Add the fields to the group if it exists.
-		if (isset($this->_groups[$group][$field->attributes('name')])) {
-			$this->_groups[$group][$field->attributes('name')] = $field;
+		if (isset($this->_groups[$group][$field->attributes()->name])) {
+			$this->_groups[$group][(string)$field->attributes()->name] = $field;
 			$return = true;
 		}
 
@@ -618,7 +676,11 @@ class JForm extends JObject
 
 		// Set the field attribute if it exists.
 		if (isset($this->_groups[$group][$field])) {
-			$this->_groups[$group][$field]->addAttribute($attribute, $value);
+			if(isset($this->_groups[$group][$field]->attributes()->$attribute)) {
+				$this->_groups[$group][$field]->attributes()->$attribute = $value;
+			} else {
+				$this->_groups[$group][$field]->addAttribute($attribute,$value);
+			}
 			$return = true;
 		}
 
@@ -638,28 +700,35 @@ class JForm extends JObject
 		$results = array();
 
 		// Check the form control.
-		if ($formControl == '_default' && $this->_options['array'] == false) {
-			$formControl = false;
-		} elseif ($formControl == '_default' && $this->_options['array'] == true) {
+		if ($formControl == '_default') {
 			$formControl = $this->_options['array'];
 		}
 
+
 		// Check the group control.
-		if ($groupControl == '_default' && (empty($this->_fieldsets[$group]) || $this->_fieldsets[$group]['array'] == false)) {
-			$groupControl = false;
-		} elseif ($groupControl == '_default' && $group !== '_default' && isset($this->_fieldsets[$group]) && $this->_fieldsets[$group]['array'] == true) {
-			$groupControl = $group;
-		} elseif ($groupControl == '_default' && $group !== '_default' && isset($this->_fieldsets[$group]) && is_string($this->_fieldsets[$group]['array']) && strlen($this->_fieldsets[$group]['array'])) {
-			$groupControl = $this->_fieldsets[$group]['array'];
+		if ($groupControl == '_default'&& isset($this->_fieldsets[$group])) {
+			$array = $this->_fieldsets[$group]['array'];
+			if ($array === true) {
+				if(isset($this->_fieldsets[$group]['parent'])) {
+					$groupControl = $this->_fieldsets[$group]['parent'];
+				} else {
+					$groupControl = $group;
+				}
+			} else {
+				$groupControl = $array;
+			}
 		}
+
+		// Set the prefix
+		$prefix = $this->_options['prefix'];
 
 		// Check if the group exists.
 		if (isset($this->_groups[$group])) {
 			// Get the fields in the group.
 			foreach ($this->_groups[$group] as $name => $node) {
 				// Get the field info.
-				$type	= $node->attributes('type');
-				$value	= (isset($this->_data[$group]) && array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : $node->attributes('default');
+				$type	= (string)$node->attributes()->type;
+				$value	= (isset($this->_data[$group]) && array_key_exists($name, $this->_data[$group]) && ($this->_data[$group][$name] !== null)) ? $this->_data[$group][$name] : $node->attributes()->default;
 
 				// Load the field.
 				$field = &$this->loadFieldType($type);
@@ -670,7 +739,7 @@ class JForm extends JObject
 				}
 
 				// Render the field.
-				$results[$name] = $field->render($node, $value, $formControl, $groupControl);
+				$results[$name] = $field->render($node, $value, $formControl, $groupControl, $prefix);
 			}
 		}
 
@@ -691,7 +760,7 @@ class JForm extends JObject
 
 		// Add the fields to the group.
 		foreach ($fields as $field) {
-			$this->_groups[$group][$field->attributes('name')] = $field;
+			$this->_groups[$group][(string)$field->attributes()->name] = $field;
 		}
 	}
 
@@ -705,8 +774,12 @@ class JForm extends JObject
 	 *
 	 * @return	array	An array of groups.
 	 */
-	public function getGroups()
+	public function getGroups($parent = null)
 	{
+		if($parent != null)
+		{
+			return isset($this->_fieldsets[$parent]['children']) ? $this->_fieldsets[$parent]['children'] : array();
+		}
 		return array_keys($this->_groups);
 	}
 
@@ -803,7 +876,7 @@ class JForm extends JObject
 	 * @param	boolean		$reset		Flag to toggle whether the form groups should be reset.
 	 * @return	boolean		True on success, false otherwise.
 	 */
-	public function loadFieldsXML(&$xml, $reset = true)
+	public function loadFieldsXML(&$xml, $reset = true, $parent = null)
 	{
 		// Check for an XML object.
 		if (!is_object($xml)) {
@@ -811,15 +884,7 @@ class JForm extends JObject
 		}
 
 		// Get the group name.
-		$group = ($xml->attributes('group')) ? $xml->attributes('group') : '_default';
-
-		if ($reset) {
-			// Reset the field group.
-			$this->setFields($xml->children(), $group);
-		} else {
-			// Add to the field group.
-			$this->addFields($xml->children(), $group);
-		}
+		$group = ((string)$xml->attributes()->group) ? (string)$xml->attributes()->group : '_default';
 
 		// Initialise the data group.
 		if ($reset) {
@@ -830,52 +895,79 @@ class JForm extends JObject
 			}
 		}
 
-		// Get the fieldset attributes.
-		$this->_fieldsets[$group] = array();
+		if(!isset($this->_fieldsets[$group]))
+		{
+			// Get the fieldset attributes.
+			$this->_fieldsets[$group] = array();
+		}
+
+		if($parent && $value = (string) $xml->attributes()->group) {
+			$this->_fieldsets[$parent]['children'][] = $value;
+			$this->_fieldsets[$group]['parent'] = $parent;
+		}
 
 		// Get the fieldset label.
-		if ($value = $xml->attributes('label')) {
+		if ($value = (string)$xml->attributes()->label) {
 			$this->_fieldsets[$group]['label'] = $value;
 		}
 
 		// Get the fieldset description.
-		if ($value = $xml->attributes('description')) {
+		if ($value = (string)$xml->attributes()->description) {
 			$this->_fieldsets[$group]['description'] = $value;
 		}
 
 		// Get an optional hidden setting (at the discretion of the renderer to honour).
-		if ($value = $xml->attributes('hidden')) {
+		if ($value = (string)$xml->attributes()->hidden) {
 			$this->_fieldsets[$group]['hidden'] = ($value == 'true' || $value == 1) ? true : false;
 		}
 
 		// Get the fieldset array option.
-		switch ($xml->attributes('array'))
-		{
-			case 'true':
-				$this->_fieldsets[$group]['array'] = true;
-				break;
-
-			case 'false':
-			case '':
-				$this->_fieldsets[$group]['array'] = false;
-				break;
-
-			default:
-				$this->_fieldsets[$group]['array'] = $xml->attributes('array');
-				break;
+		$array = (string)$xml->attributes()->array;
+		if ($array=='true') {
+			$this->_fieldsets[$group]['array'] = true;
+		} elseif($array=='false' || empty($array)) {
+			$this->_fieldsets[$group]['array'] = false;
+		} else {
+			$this->_fieldsets[$group]['array'] = $array;
 		}
 
 		// Check if there is a field path to handle.
-		if ($xml->attributes('addfieldpath')) {
+		if ((string)$xml->attributes()->addfieldpath) {
 			jimport('joomla.filesystem.folder');
 			jimport('joomla.filesystem.path');
-			$path = JPath::clean(JPATH_ROOT.DS.$xml->attributes('addfieldpath'));
+			$path = JPath::clean(JPATH_ROOT.DS.$xml->attributes()->addfieldpath);
 
 			// Add the field path to the list if it exists.
 			if (JFolder::exists($path)) {
-				JForm::addFieldPath($path);
+				self::addFieldPath($path);
 			}
 		}
+
+		if ($reset) {
+			// Reset the field group.
+			$this->_groups[$group] = array();
+
+			if($xml->fields)
+			{
+				$this->loadFieldsXML($xml->fields, $reset, $group);
+			}
+
+			// Add the fields to the group.
+			foreach ($xml->field as $field) {
+				$this->_groups[$group][(string)$field->attributes()->name] = $field;
+			}
+		} else {
+			if($xml->fields)
+			{
+				$this->loadFieldsXML($xml->fields, $reset, $group);
+			}
+
+			// Add to the field group.
+			foreach ($xml->field as $field) {
+				$this->_groups[$group][(string)$field->attributes()->name] = $field;
+			}
+		}
+
 
 		return true;
 	}
@@ -906,7 +998,7 @@ class JForm extends JObject
 		}
 
 		if (!class_exists($class)) {
-			$paths = JForm::addFieldPath();
+			$paths = self::addFieldPath();
 
 			// If the type is complex, add the base type to the paths.
 			if ($pos = strpos($type, '_')) {

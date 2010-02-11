@@ -1,14 +1,13 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
-jimport('joomla.database.query');
 
 /**
  * Menu Item List Model for Menus.
@@ -91,7 +90,8 @@ class MenusModelItems extends JModelList
 	protected function _getListQuery()
 	{
 		// Create a new query object.
-		$query = new JQuery;
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		// Select all fields from the table.
 		$query->select($this->getState('list.select', 'a.*'));
@@ -126,11 +126,11 @@ class MenusModelItems extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else if (stripos($search, 'link:') === 0) {
 				if ($search = substr($search, 5)) {
-					$search = $this->_db->Quote('%'.$this->_db->getEscaped($search, true).'%');
+					$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 					$query->where('a.link LIKE '.$search);
 				}
 			} else {
-				$search = $this->_db->Quote('%'.$this->_db->getEscaped($search, true).'%');
+				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('a.title LIKE '.$search.' OR a.alias LIKE '.$search);
 			}
 		}
@@ -150,7 +150,7 @@ class MenusModelItems extends JModelList
 		// Filter the items over the menu id if set.
 		$menuType = $this->getState('filter.menutype');
 		if (!empty($menuType)) {
-			$query->where('a.menutype = '.$this->_db->quote($menuType));
+			$query->where('a.menutype = '.$db->quote($menuType));
 		}
 
 		// Filter on the access level.
@@ -164,9 +164,9 @@ class MenusModelItems extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($this->_db->getEscaped($this->getState('list.ordering', 'a.lft')).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.lft')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
-		//echo nl2br(str_replace('#__','jos_',$query->toString())).'<hr/>';
+		//echo nl2br(str_replace('#__','jos_',(string)$query)).'<hr/>';
 		return $query;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -29,7 +29,7 @@ abstract class modFeedHelper
 
 		//  get RSS parsed object
 		$options = array();
-		$options['rssUrl'] 		= $rssurl;
+		$options['rssUrl']		= $rssurl;
 		if ($params->get('cache')) {
 			$options['cache_time']  = $params->get('cache_time', 15) ;
 			$options['cache_time']	*= 60;
@@ -51,7 +51,7 @@ abstract class modFeedHelper
 			$image['title'] = $rssDoc->get_image_title();
 
 			//image handling
-			$iUrl 	= isset($image['url']) ? $image['url'] : null;
+			$iUrl	= isset($image['url']) ? $image['url'] : null;
 			$iTitle = isset($image['title']) ? $image['title'] : null;
 
 			// items
@@ -129,7 +129,7 @@ abstract class modFeedHelper
 					if ($rssitemdesc)
 					{
 						// item description
-						$text = html_entity_decode($currItem->get_description());
+						$text = html_entity_decode($currItem->get_description(), ENT_COMPAT, 'UTF-8');
 						$text = str_replace('&apos;', "'", $text);
 
 						// word limit check

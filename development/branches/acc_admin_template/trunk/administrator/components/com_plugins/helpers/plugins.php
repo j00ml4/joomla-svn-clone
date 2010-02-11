@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: controller.php 12685 2009-09-10 14:14:04Z pentacle $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -73,10 +73,8 @@ class PluginsHelper
 	 */
 	public static function folderOptions()
 	{
-		jimport('joomla.database.query');
-
-		$db = JFactory::getDbo();
-		$query = new JQuery;
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
 
 		$query->select('DISTINCT(folder) AS value, folder AS text');
 		$query->from('#__extensions');
@@ -86,8 +84,7 @@ class PluginsHelper
 		$db->setQuery($query);
 		$options = $db->loadObjectList();
 
-		if ($error = $db->getErrorMsg())
-		{
+		if ($error = $db->getErrorMsg()) {
 			JError::raiseWarning(500, $error);
 		}
 
@@ -99,8 +96,7 @@ class PluginsHelper
 
 		// Check of the xml file exists
 		$filePath = JPath::clean($templateBaseDir.'/templates/'.$templateDir.'/templateDetails.xml');
-		if (is_file($filePath))
-		{
+		if (is_file($filePath)) {
 			$xml = JApplicationHelper::parseXMLInstallFile($filePath);
 
 			if ($xml['type'] != 'template') {

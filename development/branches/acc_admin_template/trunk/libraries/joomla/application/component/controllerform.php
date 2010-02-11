@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -76,23 +76,23 @@ class JControllerForm extends JController
 
 			// Simple pluralisation based on public domain snippet by Paul Osman
 			// For more complex types, just manually set the variable in your class.
-	        $plural = array(
-			    array( '/(x|ch|ss|sh)$/i',         "$1es"    ),
-			    array( '/([^aeiouy]|qu)y$/i',      "$1ies"   ),
-			    array( '/([^aeiouy]|qu)ies$/i',    "$1y"     ),
-	            array( '/(bu)s$/i',                "$1ses"   ),
-	    	    array( '/s$/i',                    "s"       ),
-	    	    array( '/$/',                      "s"       )
-	        );
+			$plural = array(
+				array( '/(x|ch|ss|sh)$/i',		"$1es"),
+				array( '/([^aeiouy]|qu)y$/i',	"$1ies"),
+				array( '/([^aeiouy]|qu)ies$/i',	"$1y"),
+				array( '/(bu)s$/i',				"$1ses"),
+				array( '/s$/i',					"s"),
+				array( '/$/',					"s")
+			);
 
-		    // check for matches using regular expressions
-		    foreach ($plural as $pattern)
-		    {
-		    	if (preg_match($pattern[0], $this->_view_item)) {
+			// check for matches using regular expressions
+			foreach ($plural as $pattern)
+			{
+				if (preg_match($pattern[0], $this->_view_item)) {
 					$this->_view_list = preg_replace( $pattern[0], $pattern[1], $this->_view_item);
 					break;
-		    	}
-		    }
+				}
+			}
 		}
 
 		// Apply, Save & New, and Save As copy should be standard on forms.
@@ -134,7 +134,7 @@ class JControllerForm extends JController
 	 *
 	 * @param	array	An array of input data.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowAdd($data = array())
 	{
@@ -173,7 +173,7 @@ class JControllerForm extends JController
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowEdit($data = array(), $key = 'id')
 	{
@@ -206,7 +206,7 @@ class JControllerForm extends JController
 		// Get the previous record id (if any) and the current record id.
 		$previousId	= (int) $app->getUserState($context.'.id');
 		$recordId	= (int) (count($cid) ? $cid[0] : JRequest::getInt('id'));
-		$checkin	= method_exists($model, 'checkin');
+		$checkin	= property_exists($table, 'checked_out');
 
 		// Access check.
 		$key		= $table->getKeyName();
@@ -231,7 +231,7 @@ class JControllerForm extends JController
 		{
 			// Check-out failed, go back to the list and display a notice.
 			$message = JText::sprintf('JError_Checkout_failed', $model->getError());
-			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&id='.$recordId, $message, 'error');
+			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append.'&id='.$recordId, $message, 'error');
 			return false;
 		}
 		else
@@ -254,7 +254,8 @@ class JControllerForm extends JController
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$model		= &$this->getModel();
-		$checkin	= method_exists($model, 'checkin');
+		$table		= $model->getTable();
+		$checkin	= property_exists($table, 'checked_out');
 		$context	= "$this->_option.edit.$this->_context";
 
 		// Get the record id.
@@ -263,7 +264,7 @@ class JControllerForm extends JController
 		// Attempt to check-in the current record.
 		if ($checkin && $recordId)
 		{
-			if (!$model->checkin($recordId))
+			if(!$model->checkin($recordId))
 			{
 				// Check-in failed, go back to the record and display a notice.
 				$message = JText::sprintf('JError_Checkin_failed', $model->getError());
@@ -286,7 +287,7 @@ class JControllerForm extends JController
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowSave($data, $key = 'id')
 	{
@@ -314,7 +315,7 @@ class JControllerForm extends JController
 		$model		= $this->getModel();
 		$table		= $model->getTable();
 		$data		= JRequest::getVar('jform', array(), 'post', 'array');
-		$checkin	= method_exists($model, 'checkin');
+		$checkin	= property_exists($table, 'checked_out');
 		$context	= "$this->_option.edit.$this->_context";
 		$task		= $this->getTask();
 		$recordId	= (int) $app->getUserState($context.'.id');
@@ -327,7 +328,7 @@ class JControllerForm extends JController
 		if ($task == 'save2copy')
 		{
 			// Check-in the original row.
-			if (!$model->checkin($data[$key]))
+			if ($checkin  && !$model->checkin($data[$key]))
 			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JError_Checkin_saved', $model->getError());
@@ -339,7 +340,7 @@ class JControllerForm extends JController
 			$data['id']	= 0;
 			$task		= 'apply';
 		}
-		
+
 		// Access check.
 		if (!$this->_allowSave($data)) {
 			return JError::raiseWarning(403, 'JError_Save_not_permitted');
@@ -392,7 +393,7 @@ class JControllerForm extends JController
 		}
 
 		// Save succeeded, check-in the record.
-		if ($checkin && !$model->checkin())
+		if ($checkin && !$model->checkin($data[$key]))
 		{
 			// Check-in failed, go back to the record and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());

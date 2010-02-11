@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_related_items
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,8 +20,7 @@ class modRelatedItemsHelper
 		$user		= &JFactory::getUser();
 		$userId		= (int) $user->get('id');
 		$count		= intval($params->get('count', 5));
-		$groups		= $user->authorisedLevels();
-		$groups	= implode(',', $groups);
+		$groups		= implode(',', $user->authorisedLevels());
 		$date		= &JFactory::getDate();
 
 		$option		= JRequest::getCmd('option');
@@ -35,14 +34,15 @@ class modRelatedItemsHelper
 		$nullDate	= $db->getNullDate();
 		$now		= $date->toMySQL();
 		$related	= array();
+		$query		= $db->getQuery(true);
 
 		if ($option == 'com_content' && $view == 'article' && $id)
 		{
-
 			// select the meta keywords from the item
-			$query = 'SELECT metakey' .
-					' FROM #__content' .
-					' WHERE id = '.(int) $id;
+
+			$query->select('metakey');
+			$query->from('#__content');
+			$query->where('id = ' . (int) $id);
 			$db->setQuery($query);
 
 			if ($metakey = trim($db->loadResult()))
@@ -63,18 +63,25 @@ class modRelatedItemsHelper
 				if (count($likes))
 				{
 					// select other items based on the metakey field 'like' the keys found
-					$query = 'SELECT a.id, a.title, DATE_FORMAT(a.created, "%Y-%m-%d") AS created, a.catid, cc.access AS cat_access, cc.published AS cat_state,' .
-							' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug,'.
-							' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug'.
-							' FROM #__content AS a' .
-							' LEFT JOIN #__content_frontpage AS f ON f.content_id = a.id' .
-							' LEFT JOIN #__categories AS cc ON cc.id = a.catid' .
-							' WHERE a.id != '.(int) $id .
-							' AND a.state = 1' .
-							' AND a.access IN ('.implode(',', $groups).')' .
-							' AND (CONCAT(",", REPLACE(a.metakey,", ",","),",") LIKE "%'.implode('%" OR CONCAT(",", REPLACE(a.metakey,", ",","),",") LIKE "%', $likes).'%")' . //remove single space after commas in keywords
-							' AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')' .
-							' AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')';
+					$query->clear();
+					$query->select('a.id');
+					$query->select('a.title');
+					$query->select('DATE_FORMAT(a.created, "%Y-%m-%d") as created');
+					$query->select('a.catid');
+					$query->select('cc.access AS cat_access');
+					$query->select('cc.published AS cat_state');
+					$query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
+					$query->select('CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
+					$query->from('#__content AS a');
+					$query->leftJoin('#__content_frontpage AS f ON f.content_id = a.id');
+					$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
+					$query->where('a.id != ' . (int) $id);
+					$query->where('a.state = 1');
+					$query->where('a.access IN (' . $groups . ')');
+					$query->where('(CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%'.implode('%" OR CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
+					$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
+					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
+
 					$db->setQuery($query);
 					$temp = $db->loadObjectList();
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -32,12 +32,12 @@ class ContentViewFrontpage extends JView
 
 		// Get some data from the model
 		JRequest::setVar('limit', $app->getCfg('feed_limit'));
-		$rows 		= & $this->get('Data');
+		$rows		= & $this->get('Data');
 		foreach ($rows as $row)
 		{
 			// strip html from feed item title
 			$title = $this->escape($row->title);
-			$title = html_entity_decode($title);
+			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
 			// url link to article
 			$link = JRoute::_(ContentRoute::article($row->slug, $row->catslug, $row->sectionid));
@@ -49,11 +49,11 @@ class ContentViewFrontpage extends JView
 
 			// load individual item creator class
 			$item = new JFeedItem();
-			$item->title 		= $title;
-			$item->link 		= $link;
-			$item->description 	= $description;
+			$item->title		= $title;
+			$item->link			= $link;
+			$item->description	= $description;
 			$item->date			= $row->created;
-			$item->category   	= 'frontpage';
+			$item->category		= 'frontpage';
 			$item->author		= $author;
 			if ($feedEmail == 'site') {
 				$item->authorEmail = $siteEmail;

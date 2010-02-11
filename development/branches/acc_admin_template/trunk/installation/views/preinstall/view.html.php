@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Installation
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -37,10 +37,10 @@ class JInstallationViewPreinstall extends JView
 			return false;
 		}
 
-		$this->assignRef('state',	 $state);
-		$this->assignRef('settings', $settings);
-		$this->assignRef('options',	 $options);
-		$this->assignRef('version',  $version);
+		$this->assignRef('state',		$state);
+		$this->assignRef('settings',	$settings);
+		$this->assignRef('options',		$options);
+		$this->assignRef('version',		$version);
 
 		parent::display($tpl);
 	}

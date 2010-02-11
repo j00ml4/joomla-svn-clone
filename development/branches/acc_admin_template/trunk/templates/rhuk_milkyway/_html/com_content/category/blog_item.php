@@ -1,6 +1,6 @@
 <?php // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<?php $canEdit   = ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)); ?>
+<?php $canEdit	= ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)); ?>
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
 <?php endif; ?>
@@ -36,11 +36,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<?php echo JHTML::_('icon.email', $this->item, $this->item->params, $this->access); ?>
 	</td>
 	<?php endif; ?>
-	   <?php if ($canEdit) : ?>
-	   <td align="right" width="100%" class="buttonheading">
-	   <?php echo JHTML::_('icon.edit', $this->item, $this->item->params, $this->access); ?>
-	   </td>
-   <?php endif; ?>
+		<?php if ($canEdit) : ?>
+		<td align="right" width="100%" class="buttonheading">
+		<?php echo JHTML::_('icon.edit', $this->item, $this->item->params, $this->access); ?>
+		</td>
+	<?php endif; ?>
 </tr>
 </table>
 <?php endif; ?>
@@ -85,7 +85,7 @@ endif; ?>
 <tr>
 	<td width="70%"  valign="top" colspan="2">
 		<span class="small">
-			<?php JText::printf( 'Written by', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
+			<?php JText::printf( 'WRITTEN_BY', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
 		</span>
 		&nbsp;&nbsp;
 	</td>
@@ -135,7 +135,7 @@ endif; ?>
 			elseif ($readmore = $this->item->params->get('readmore')) :
 				echo $readmore;
 			else :
-				echo JText::sprintf('Read more...');
+				echo JText::sprintf('READ_MORE');
 			endif; ?></a>
 	</td>
 </tr>

@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -26,9 +26,9 @@ class JCacheCallback extends JCache
 	 * as long as the first argument passed is the callback definition.
 	 *
 	 * The callback definition can be in several forms:
-	 * 	- Standard PHP Callback array <http://php.net/callback> [recommended]
-	 * 	- Function name as a string eg. 'foo' for function foo()
-	 * 	- Static method name as a string eg. 'MyClass::myMethod' for method myMethod() of class MyClass
+	 *	- Standard PHP Callback array <http://php.net/callback> [recommended]
+	 *	- Function name as a string eg. 'foo' for function foo()
+	 *	- Static method name as a string eg. 'MyClass::myMethod' for method myMethod() of class MyClass
 	 *
 	 * @access	public
 	 * @return	mixed	Result of the callback

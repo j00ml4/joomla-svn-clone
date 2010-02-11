@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 /**
  * Renders a standard button
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage		HTML
  * @since		1.5
  */
@@ -67,7 +67,7 @@ class JButtonStandard extends JButton
 	protected function _getCommand($name, $task, $list)
 	{
 		$todo		= JString::strtolower(JText::_($name));
-		$message	= JText::sprintf('Please make a selection from the list to', $todo);
+		$message	= JText::sprintf('PLEASE_MAKE_A_SELECTION_FROM_THE_LIST_TO', $todo);
 		$message	= addslashes($message);
 
 		if ($list) {

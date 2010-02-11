@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 		</span>
 	</td>
 	<td class="center">
-		<?php echo $this->item->extension_id ? JText::_('Update') : JText::_('New install') ?>
+		<?php echo $this->item->extension_id ? JText::_('Update') : JText::_('NEW_INSTALL') ?>
 	</td>
 	<td>
 		<?php echo JText::_($this->item->type) ?>

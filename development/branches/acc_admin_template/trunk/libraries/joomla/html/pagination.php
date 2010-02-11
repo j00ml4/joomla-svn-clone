@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	HTML
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,7 +14,7 @@ defined('JPATH_BASE') or die;
  * Pagination Class.  Provides a common interface for content pagination for the
  * Joomla! Framework.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	HTML
  * @since		1.5
  */
@@ -94,8 +94,8 @@ class JPagination extends JObject
 		 * If limitstart is greater than total (i.e. we are asked to display records that don't exist)
 		 * then set limitstart to display the last natural page of results
 		 */
-		if ($this->limitstart > $this->total) {
-			$this->limitstart = (int)(ceil($this->total / $this->limit) - 1) * $this->limit;
+		if ($this->limitstart > $this->total - $this->limit) {
+			$this->limitstart = max(0, (int)(ceil($this->total / $this->limit) - 1) * $this->limit);
 		}
 
 		// Set the total pages and current page values.
@@ -230,11 +230,11 @@ class JPagination extends JObject
 
 		// If there are results found.
 		if ($this->total > 0) {
-			$msg = JText::sprintf('Results of', $fromResult, $toResult, $this->total);
+			$msg = JText::sprintf('RESULTS_OF', $fromResult, $toResult, $this->total);
 			$html .= "\n".$msg;
 		}
 		else {
-			$html .= "\n".JText::_('No records found');
+			$html .= "\n".JText::_('No_records_found');
 		}
 
 		return $html;
@@ -416,11 +416,11 @@ class JPagination extends JObject
 		{
 			if ($enabled) {
 				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= '   <img src="templates/bluestork/images/admin/uparrow.png" width="16" height="16" border="0" alt="'.$alt.'" />';
+				$html	.= JHTML::_('image', 'admin/uparrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 				$html	.= '</a>';
 			}
 			else {
-				$html	= '<img src="templates/bluestork/images/admin/uparrow0.png" width="16" height="16" border="0" alt="'.$alt.'" />';
+				$html	= JHTML::_('image', 'admin/uparrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 			}
 		}
 
@@ -447,10 +447,10 @@ class JPagination extends JObject
 		{
 			if ($enabled) {
 				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= '  <img src="templates/bluestork/images/admin/downarrow.png" width="16" height="16" border="0" alt="'.$alt.'" />';
+				$html	.= JHTML::_('image', 'admin/downarrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' =>0), true);
 				$html	.= '</a>';
 			} else {
-				$html	= '<img src="templates/bluestork/images/admin/downarrow0.png" width="16" height="16" border="0" alt="'.$alt.'" />';
+				$html	= JHTML::_('image', 'admin/downarrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 			}
 		}
 
@@ -461,7 +461,7 @@ class JPagination extends JObject
 	{
 		$html = "<div class=\"list-footer\">\n";
 
-		$html .= "\n<div class=\"limit\">".JText::_('Display Num').$list['limitfield']."</div>";
+		$html .= "\n<div class=\"limit\">".JText::_('DISPLAY_NUM').$list['limitfield']."</div>";
 		$html .= $list['pageslinks'];
 		$html .= "\n<div class=\"counter\">".$list['pagescounter']."</div>";
 
@@ -538,7 +538,7 @@ class JPagination extends JObject
 			}
 		}
 
-		$data->all = new JPaginationObject(JText::_('View All'), $this->prefix);
+		$data->all = new JPaginationObject(JText::_('VIEW_ALL'), $this->prefix);
 		if (!$this->_viewall) {
 			$data->all->base	= '0';
 			$data->all->link	= JRoute::_($params.'&'.$this->prefix.'limitstart=');
@@ -552,10 +552,10 @@ class JPagination extends JObject
 		{
 			$page = ($this->get('pages.current') -2) * $this->limit;
 
-			$page = $page == 0 ? '' : $page; //set the empty for removal from route
+			//$page = $page == 0 ? '' : $page; //set the empty for removal from route
 
 			$data->start->base	= '0';
-			$data->start->link	= JRoute::_($params.'&'.$this->prefix.'limitstart=');
+			$data->start->link	= JRoute::_($params.'&'.$this->prefix.'limitstart=0');
 			$data->previous->base	= $page;
 			$data->previous->link	= JRoute::_($params.'&'.$this->prefix.'limitstart='.$page);
 		}
@@ -581,7 +581,7 @@ class JPagination extends JObject
 		{
 			$offset = ($i -1) * $this->limit;
 
-			$offset = $offset == 0 ? '' : $offset;  //set the empty for removal from route
+			//$offset = $offset == 0 ? '' : $offset;  //set the empty for removal from route
 
 			$data->pages[$i] = new JPaginationObject($i, $this->prefix);
 			if ($i != $this->get('pages.current') || $this->_viewall)
@@ -597,7 +597,7 @@ class JPagination extends JObject
 /**
  * Pagination object representing a particular item in the pagination lists.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	HTML
  * @since		1.5
  */

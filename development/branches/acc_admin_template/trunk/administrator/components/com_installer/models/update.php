@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -93,12 +93,12 @@ class InstallerModelUpdate extends InstallerModel
 		$db->setQuery('TRUNCATE TABLE #__updates');
 		if ($db->Query())
 		{
-			$this->_message = JText::_('Purged updates');
+			$this->_message = JText::_('PURGED_UPDATES');
 			return true;
 		}
 		else
 		{
-			$this->_message = JText::_('Failed to purge updates');
+			$this->_message = JText::_('FAILED_TO_PURGE_UPDATES');
 			return false;
 		}
 	}
@@ -153,7 +153,7 @@ class InstallerModelUpdate extends InstallerModel
 		}
 
 		$config =& JFactory::getConfig();
-		$tmp_dest 	= $config->getValue('config.tmp_path');
+		$tmp_dest	= $config->getValue('config.tmp_path');
 
 		// Unpack the downloaded package file
 		$package = JInstallerHelper::unpack($tmp_dest.DS.$p_file);

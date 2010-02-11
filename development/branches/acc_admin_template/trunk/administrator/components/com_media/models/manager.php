@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -59,15 +59,15 @@ class MediaModelManager extends JModel
 		$lang->load(JRequest::getCmd('option'), JPATH_ADMINISTRATOR);
 
 		$document = &JFactory::getDocument();
-		$document->setTitle(JText::_('Insert Image'));
+		$document->setTitle(JText::_('INSERT_IMAGE'));
 
 		// Build the array of select options for the folder list
 		$options[] = JHtml::_('select.option', "","/");
 		foreach ($folders as $folder) {
-			$folder 	= str_replace(COM_MEDIA_BASE, "", $folder);
+			$folder		= str_replace(COM_MEDIA_BASE, "", $folder);
 			$value		= substr($folder, 1);
-			$text	 	= str_replace(DS, "/", $folder);
-			$options[] 	= JHtml::_('select.option', $value, $text);
+			$text		= str_replace(DS, "/", $folder);
+			$options[]	= JHtml::_('select.option', $value, $text);
 		}
 
 		// Sort the folder list array

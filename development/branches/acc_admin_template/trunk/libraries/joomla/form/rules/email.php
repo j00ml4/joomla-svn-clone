@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Form
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -38,11 +38,11 @@ class JFormRuleEmail extends JFormRule
 	public function test(&$field, &$values)
 	{
 		$return = false;
-		$name	= $field->attributes('name');
-		$check	= ($field->attributes('unique') == 'true' || $field->attributes('unique') == 'unique');
+		$name	= (string)$field->attributes()->name;
+		$check	= ((string)$field->attributes()->unique == 'true' || (string)$field->attributes()->unique == 'unique');
 
 		// If the field is empty and not required, the field is valid.
-		if ($field->attributes('required') != 'true') {
+		if ((string)$field->attributes()->required != 'true') {
 			// Get the data for the field.
 			$value = array_key_exists($name, $values) ? $values[$name] : null;
 
@@ -54,7 +54,7 @@ class JFormRuleEmail extends JFormRule
 
 		// Check if we should test for uniqueness.
 		if ($check) {
-			$key	= $field->attributes('field');
+			$key	= (string)$field->attributes()->field;
 			$value	= isset($values[$key]) ? $values[$key] : 0;
 
 			// Check the rule.

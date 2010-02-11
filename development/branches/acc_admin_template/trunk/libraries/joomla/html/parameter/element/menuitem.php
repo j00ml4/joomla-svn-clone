@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 /**
  * Renders a menu item element
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Parameter
  * @since		1.5
  */
@@ -53,10 +53,10 @@ class JElementMenuItem extends JElement
 
 		// load the list of menu items
 		// TODO: move query to model
-		$query = 'SELECT id, parent, name, menutype, type' .
+		$query = 'SELECT id, parent_id, name, menutype, type' .
 				' FROM #__menu' .
 				$where .
-				' ORDER BY menutype, parent, ordering'
+				' ORDER BY menutype, parent_id, ordering'
 				;
 
 		$db->setQuery($query);
@@ -71,8 +71,8 @@ class JElementMenuItem extends JElement
 			// first pass - collect children
 			foreach ($menuItems as $v)
 			{
-				$pt 	= $v->parent;
-				$list 	= @$children[$pt] ? $children[$pt] : array();
+				$pt	= $v->parent_id;
+				$list	= @$children[$pt] ? $children[$pt] : array();
 				array_push($list, $v);
 				$children[$pt] = $list;
 			}
@@ -89,8 +89,8 @@ class JElementMenuItem extends JElement
 		}
 
 		// assemble menu items to the array
-		$options 	= array();
-		$options[]	= JHtml::_('select.option', '', '- '.JText::_('Select Item').' -');
+		$options	= array();
+		$options[]	= JHtml::_('select.option', '', '- '.JText::_('SELECT_ITEM').' -');
 
 		foreach ($menuTypes as $type)
 		{

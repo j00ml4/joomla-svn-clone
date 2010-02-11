@@ -7,12 +7,12 @@
 	<name>Banners</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2006</creationDate>
-	<copyright>Copyright (C) 2005 - 2009 Open Source Matters. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.6.0</version>
-	<description>mod_banners_Desc</description>
+	<description>MOD_BANNERS_XML_DESCRIPTION</description>
 	<files>
 		<filename
 			module="mod_banners">mod_banners.php</filename>
@@ -31,47 +31,50 @@
 			name="target"
 			type="list"
 			default="1"
-			label="mod_banners_Target_Label"
-			description="mod_banners_Target_Desc">
+			label="MOD_BANNERS_FIELD_TARGET_LABEL"
+			description="MOD_BANNERS_FIELD_TARGET_DESC">
 			<option
-				value="0">mod_banners_Parent</option>
+				value="0">MOD_BANNERS_VALUE_PARENT</option>
 			<option
-				value="1">mod_banners_NewWindowWithBrowserNavigation</option>
+				value="1">MOD_BANNERS_VALUE_NEWWINDOWWITHBROWSERNAVIGATION</option>
 			<option
-				value="2">mod_banners_NewWindowWithoutBrowserNavigation</option>
+				value="2">MOD_BANNERS_VALUE_NEWWINDOWWITHOUTBROWSERNAVIGATION</option>
 		</field>
 
 		<field
-			type="spacer" />
+			name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
 
 		<field
 			name="count"
 			type="text"
 			default="1"
-			label="mod_banners_Count_Label"
-			description="mod_banners_Count_Desc" />
+			label="MOD_BANNERS_FIELD_COUNT_LABEL"
+			description="MOD_BANNERS_FIELD_COUNT_DESC" />
 
 		<field
 			name="cid"
 			type="bannerclient"
 			default=""
-			label="mod_banners_BannerClient_Label"
-			description="mod_banners_BannerClient_Label" />
+			label="MOD_BANNERS_FIELD_BANNERCLIENT_LABEL"
+			description="MOD_BANNERS_FIELD_BANNERCLIENT_DESC" />
 
 		<field
 			name="catid"
 			type="category"
 			extension="com_banners"
 			default=""
-			label="mod_banners_Category_Label"
-			description="mod_banners_Category_Desc" />
+			label="MOD_BANNERS_FIELD_CATEGORY_LABEL"
+			description="MOD_BANNERS_FIELD_CATEGORY_DESC" />
 
 		<field
 			name="tag_search"
 			type="radio"
 			default="0"
-			label="mod_banners_Tag_Label"
-			description="mod_banners_Tag_Desc">
+			label="MOD_BANNERS_FIELD_TAG_LABEL"
+			description="MOD_BANNERS_FIELD_TAG_DESC">
 			<option
 				value="0">JNo</option>
 			<option
@@ -81,16 +84,19 @@
 			name="ordering"
 			type="list"
 			default="0"
-			label="mod_banners_Randomise_Label"
-			description="mod_banners_Randomise_Desc">
+			label="MOD_BANNERS_FIELD_RANDOMISE_LABEL"
+			description="MOD_BANNERS_FIELD_RANDOMISE_DESC">
 			<option
-				value="0">mod_banners_StickyOrdering</option>
+				value="0">MOD_BANNERS_VALUE_STICKYORDERING</option>
 			<option
-				value="random">mod_banners_StickyRandomise</option>
+				value="random">MOD_BANNERS_VALUE_STICKYRANDOMISE</option>
 		</field>
 
 		<field
-			type="spacer" />
+			name="spacer2"
+			type="spacer"
+			hr="true"
+			/>
 
 		<field
 			name="header_text"
@@ -98,8 +104,8 @@
 			rows="3"
 			cols="40"
 			default=""
-			label="mod_banners_Header_Label"
-			description="mod_banners_Header_Desc" />
+			label="MOD_BANNERS_FIELD_HEADER_LABEL"
+			description="MOD_BANNERS_FIELD_HEADER_DESC" />
 
 		<field
 			name="footer_text"
@@ -107,41 +113,41 @@
 			rows="3"
 			cols="40"
 			default=""
-			label="mod_banners_Footer_Label"
-			description="mod_banners_Header_Desc" />
+			label="MOD_BANNERS_FIELD_FOOTER_LABEL"
+			description="MOD_BANNERS_FIELD_HEADER_DESC" />
 	</fields>
 	<fields
 		group="advanced">
 		<field
 			name="layout"
 			type="modulelayout"
-			label="JField_Alt_Layout_Label"
-			description="JField_Alt_Module_Layout_Desc" />
+			label="JFIELD_ALT_LAYOUT_LABEL"
+			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 
 		<field
 			name="moduleclass_sfx"
 			type="text"
 			default=""
-			label="Module_Field_Moduleclass_sfx_Label"
-			description="Module_Field_Moduleclass_sfx_Desc" />
+			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
 
 		<field
 			name="cache"
 			type="list"
 			default="1"
-			label="Module_Field_Caching_Label"
-			description="Module_Field_Caching_Desc">
+			label="MODULES_FIELD_CACHING_LABEL"
+			description="MODULES_FIELD_CACHING_DESC">
 			<option
-				value="1">Use global</option>
+				value="1">USE_GLOBAL</option>
 			<option
-				value="0">No caching</option>
+				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
 		</field>
 
 		<field
 			name="cache_time"
 			type="text"
 			default="900"
-			label="mod_banners_CacheTime_Label"
-			description="mod_banners_CacheTime_Desc" />
+			label="MODULES_FIELD_CACHE_TIME_LABEL"
+			description="MODULES_FIELD_CACHE_TIME_DESC" />
 	</fields>
-</install>
+</extension>

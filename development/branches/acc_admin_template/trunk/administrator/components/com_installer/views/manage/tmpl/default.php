@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -54,7 +54,7 @@ $lists = $this->lists;
 				<th width="10%" class="center"><?php echo JText::_('Version'); ?></th>
 				<th width="10%"><?php echo JText::_('Date'); ?></th>
 				<th><?php echo JText::_('Folder') ?></th>
-				<th><?php echo JText::_('Client') ?></th>
+				<th><?php echo JText::_('JClient') ?></th>
 				<th width="15%"><?php echo JText::_('Author'); ?></th>
 				<th width="10"><?php echo JText::_('Id') ?></th>
 			</tr>
@@ -74,7 +74,7 @@ $lists = $this->lists;
 		</tbody>
 	</table>
 	<?php else : ?>
-		<p class="nowarning"><?php echo JText::_('There are no extensions installed matching your query'); ?></p>
+		<p class="nowarning"><?php echo JText::_('There_are_no_extensions_installed_matching_your_query'); ?></p>
 	<?php endif; ?>
 
 	<input type="hidden" name="view" value="manage" />

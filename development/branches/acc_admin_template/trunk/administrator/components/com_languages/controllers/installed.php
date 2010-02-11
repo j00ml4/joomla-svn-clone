@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -24,8 +24,9 @@ class LanguagesControllerInstalled extends JController
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		$cid = JRequest::getCmd('cid', '');
 		$model = & $this->getModel('installed');
-		if ($model->publish())
+		if ($model->publish($cid))
 		{
 			$msg = JText::_('Langs_Default_Language_Saved');
 			$type = 'message';

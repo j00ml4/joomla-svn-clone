@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 /**
  * Renders a editors element
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage		Parameter
  * @since		1.5
  */
@@ -26,7 +26,7 @@ class JElementUserGroup extends JElement
 	* @access	protected
 	* @var		string
 	*/
-	protected $_name = 'Editors';
+	protected $_name = 'UserGroup';
 
 	public function fetchElement($name, $value, &$node, $control_name)
 	{
@@ -47,7 +47,7 @@ class JElementUserGroup extends JElement
 			$ctrl		.= '[]';
 			//$value		= implode('|',)
 		}
-		//array_unshift($editors, JHtml::_('select.option',  '', '- '. JText::_('Select Editor') .' -'));
+		//array_unshift($editors, JHtml::_('select.option',  '', '- '. JText::_('SELECT_EDITOR') .' -'));
 
 		return JHtml::_('access.usergroup', $ctrl, $value, $attribs, false);
 	}

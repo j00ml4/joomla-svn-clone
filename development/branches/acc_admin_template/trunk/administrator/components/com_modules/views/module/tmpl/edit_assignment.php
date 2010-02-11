@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_modules
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -25,7 +25,7 @@ $menuTypes = MenusHelper::getMenuLinks();
 
 				</fieldset>
 
-				<label id="jform_menuselect-lbl" class="hasTip" for="jform_menuselect"><?php echo JText::_('Menu Selection'); ?>:</label>
+				<label id="jform_menuselect-lbl" class="hasTip" for="jform_menuselect"><?php echo JText::_('MENU_SELECTION'); ?>:</label>
 
 				<div class="clr"></div>
 

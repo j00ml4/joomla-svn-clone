@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -32,11 +32,20 @@ class JFormFieldTextarea extends JFormField
 	 */
 	protected function _getInput()
 	{
-		$rows	= $this->_element->attributes('rows');
-		$cols	= $this->_element->attributes('cols');
-		$class	= $this->_element->attributes('class') ? 'class="'.$this->_element->attributes('class').'"' : 'class="text_area"';
-		$readonly	= $this->_element->attributes('readonly') == 'true' ? ' readonly="readonly"' : '';
+		$class = ((string)$this->_element->attributes()->class) ? ' class="'.$this->_element->attributes()->class.'"' : ' class="text_area"';
+		$readonly = (string)$this->_element->attributes()->readonly == 'true' ? ' readonly="readonly"' : '';
+		$onchange = ((string)$this->_element->attributes()->onchange) ? ' onchange="'.$this->_replacePrefix((string)$this->_element->attributes()->onchange).'"' : '';
 
-		return '<textarea name="'.$this->inputName.'" cols="'.$cols.'" rows="'.$rows.'" '.$class.$readonly.' id="'.$this->inputId.'" >'.htmlspecialchars($this->value).'</textarea>';
+		return '<textarea'
+		. ' name="'.$this->inputName.'"'
+		. ' id="'.$this->inputId.'"'
+		. ' cols="'.$this->_element->attributes()->cols.'"'
+		. ' rows="'.$this->_element->attributes()->rows.'"'
+		. $class
+		. $readonly
+		. $onchange
+		.' >'
+		. htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8')
+		. '</textarea>';
 	}
 }

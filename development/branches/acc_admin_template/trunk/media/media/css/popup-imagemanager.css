@@ -1,6 +1,6 @@
 /**
  * @version		$Id: popup-imagemanager.css 11952 2009-06-01 03:21:19Z robs $
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -57,7 +57,7 @@ a:hover { border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighligh
 }
 
 .upload-queue li {
-	background: url(upload.png) no-repeat 0 5px;
+	background: url(../images/upload.png) no-repeat 0 5px;
 	padding: 5px 0 5px 5px;
 }
 
@@ -93,7 +93,7 @@ a:hover { border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighligh
 .upload-queue .input-delete {
 	width: 16px;
 	height: 16px;
-	background: url(delete.png) no-repeat 0 0;
+	background: url(../images/delete.png) no-repeat 0 0;
 	text-decoration: none;
 	border: none;
 	float: right;
