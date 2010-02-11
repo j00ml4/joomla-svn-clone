@@ -28,6 +28,49 @@ class JInstallerComponent extends JAdapterInstance
 	protected $install_script = null;
 
 	/**
+	 * Custom loadLanguage method
+	 *
+	 * @access	public
+	 * @param	string	$path the path where to find language files
+	 * @since	1.6
+	 */
+	public function loadLanguage($path)
+	{
+		$this->manifest = &$this->parent->getManifest();
+		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
+		$extension = "com_$name";
+		$lang =& JFactory::getLanguage();
+		$source = $path;
+		if($this->manifest->administration->files)
+		{
+			$element = $this->manifest->administration->files;
+		}
+		elseif ($this->manifest->files)
+		{
+			$element = $this->manifest->files;
+		}
+		else
+		{
+			$element = null;
+		}
+		if ($element)
+		{
+			$folder = (string)$element->attributes()->folder;
+			if ($folder && file_exists("$path/$folder"))
+			{
+				$source = "$path/$folder";
+			}
+		}
+			$lang->load($extension . '.manage', $source, null, false, false)
+		||	$lang->load($extension, $source, null, false, false)
+		||	$lang->load($extension . '.manage', JPATH_ADMINISTRATOR, null, false, false)
+		||	$lang->load($extension, JPATH_ADMINISTRATOR, null, false, false)
+		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.manage', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+		||	$lang->load($extension, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false);
+	}
+	/**
 	 * Custom install method for components
 	 *
 	 * @access	public
@@ -1089,6 +1132,7 @@ class JInstallerComponent extends JAdapterInstance
 		if ( ! $this->manifest->administration->submenu) {
 			return true;
 		}
+		$parent_id = $table->id;;
 
 		foreach ($this->manifest->administration->submenu->menu as $child) {
 			$data = array();
