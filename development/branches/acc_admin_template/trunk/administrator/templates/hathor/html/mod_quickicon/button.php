@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 <div class="icon-wrapper">
 	<div class="icon">
 		<a href="<?php echo $button['link']; ?>">
-			<?php echo JHtml::_('image.site', $button['image'], $button['imagePath'], NULL, NULL, NULL); ?>
+			<?php echo JHtml::_('image', 'header/'.$button['image'], $button['text'], NULL, NULL, true); ?>
 			<span><?php echo $button['text']; ?></span></a>
 	</div>
 </div>

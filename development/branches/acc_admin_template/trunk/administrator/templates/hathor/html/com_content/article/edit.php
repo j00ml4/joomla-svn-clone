@@ -55,7 +55,18 @@ JHtml::_('behavior.formvalidation');
 	<div>
 		<?php echo $this->form->getLabel('state'); ?>
 		<?php echo $this->form->getInput('state'); ?>
-	</div>			
+	</div>
+	
+		<?php echo $this->form->getLabel('access'); ?>
+		<?php echo $this->form->getInput('access'); ?>
+
+		<?php echo $this->form->getLabel('language'); ?>
+		<?php echo $this->form->getInput('language'); ?>
+
+		<?php echo $this->form->getLabel('featured'); ?>
+		<?php echo $this->form->getInput('featured'); ?>
+	
+				
 		<div class="clr"></div>
 		<?php echo $this->form->getLabel('articletext'); ?>
 		<div class="clr"></div>
@@ -79,10 +90,6 @@ JHtml::_('behavior.formvalidation');
 			<div>
 				<?php echo $this->form->getLabel('created_by_alias'); ?>
 				<?php echo $this->form->getInput('created_by_alias'); ?>
-			</div>
-			<div>
-				<?php echo $this->form->getLabel('access'); ?>
-				<?php echo $this->form->getInput('access'); ?>
 			</div>
 			<div>
 				<?php echo $this->form->getLabel('created'); ?>
@@ -148,10 +155,6 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			<?php endforeach; ?>
 			
-		<div>
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
-		</div>
 		<div>
 			<?php echo $this->form->getLabel('xreference'); ?>
 			<?php echo $this->form->getInput('xreference'); ?>
