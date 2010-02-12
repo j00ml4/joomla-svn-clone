@@ -51,7 +51,7 @@ class JFormFieldList extends JFormField
 		$attr .= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
 
 		// Get the field options.
-		$options = $this->getOptions();
+		$options = (array) $this->getOptions();
 
 		// Create a read-only list (no name) with a hidden input to store the value.
 		if ((string) $this->element['readonly'] == 'true') {

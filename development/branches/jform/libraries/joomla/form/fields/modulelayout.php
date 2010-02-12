@@ -10,6 +10,8 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
+jimport('joomla.filesystem.file');
+jimport('joomla.filesystem.folder');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
@@ -23,62 +25,79 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldModuleLayout extends JFormFieldList
 {
 	/**
+	 * The form field type.
+	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_name = 'ModuleLayout';
+	protected $type = 'ModuleLayout';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		// Initialise variables.
+		// Initialize variables.
 		$options	= array();
 		$path1		= null;
 		$path2		= null;
 
-		$module = (string)$this->_element->attributes()->module;
-		if (empty($module)) {
-			$module = $this->_form->get('module');
+		// Get the client id.
+		$clientId = (int) $this->element['client_id'];
+		if (empty($clientId) && (!$this->form instanceof JForm)) {
+			$clientId = (int) $this->form->getValue('client_id');
+		}
+		$client	= JApplicationHelper::getClientInfo($clientId);
+
+		// Get the database object and a new query object.
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
+
+		// Build the query.
+		$query->select('template');
+		$query->from('#__template_styles');
+		$query->where('client_id = '.(int) $clientId);
+		$query->where('home = 1');
+
+		// Set the query and load the template.
+		$db->setQuery($query, 0, 1);
+		$template = $db->loadResult();
+
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 
-		$clientId = (string)$this->_element->attributes()->client_id;
-		if (empty($clientId)) {
-			$clientId = $this->_form->get('client_id');
+		// Get the module.
+		$module = (string) $this->element['module'];
+		if (empty($module) && (!$this->form instanceof JForm)) {
+			$module = $this->form->getValue('module');
 		}
+		$module = preg_replace('#\W#', '', $module);
 
-		// Load template entries for each menuid
-		$db			= JFactory::getDBO();
-		$query		= 'SELECT template'
-			. ' FROM #__template_styles'
-			. ' WHERE client_id = '.(int) $clientId.' AND home = 1';
-		$db->setQuery($query);
-		$template	= $db->loadResult();
+		// If a template, extension and view are present build the options.
+		if ($template && $module && $client) {
 
-		if ($module) {
-			$module	= preg_replace('#\W#', '', $module);
-			$client	= JApplicationHelper::getClientInfo($clientId);
-			$path1	= $client->path.'/modules/'.$module.'/tmpl';
-			$path2	= $client->path.'/templates/'.$template.'/html/'.$module;
-			$options[]	= JHTML::_('select.option', '', '');
-		}
+			// Build the search paths for layouts.
+			$path1 = JPath::clean($client->path.'/modules/'.$module.'/tmpl');
+			$path2 = JPath::clean($client->path.'/templates/'.$template.'/html/'.$module);
 
-		if ($path1 && $path2) {
-			jimport('joomla.filesystem.file');
-			$path1 = JPath::clean($path1);
-			$path2 = JPath::clean($path2);
+			// Add the default option.
+			$options[]	= JHTML::_('select.option', '', JText::_('JOption_Use_Default_Module_Setting'));
 
-			if (is_dir($path1)) {
-				$files	= JFolder::files($path1, '^[^_]*\.php$');
+			// Add the layout options from the first path.
+			if (is_dir($path1) && ($files = JFolder::files($path1, '^[^_]*\.php$'))) {
 				foreach ($files as $file) {
 					$options[]	= JHTML::_('select.option', JFile::stripExt($file));
 				}
 			}
 
-			if (is_dir($path2) && $files = JFolder::files($path2, '^[^_]*\.php$')) {
-				$options[]	= JHTML::_('select.optgroup', JText::_('JOption_From_Default'));
+			// Add the layout options from the second path.
+			if (is_dir($path2) && ($files = JFolder::files($path2, '^[^_]*\.php$'))) {
+				$options[]	= JHTML::_('select.optgroup', JText::_('JOption_From_Default_Template'));
 				foreach ($files as $file) {
 					$options[]	= JHTML::_('select.option', JFile::stripExt($file));
 				}

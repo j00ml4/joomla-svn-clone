@@ -23,28 +23,32 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldContentLanguage extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'ContentLanguage';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		$db		= JFactory::getDbo();
+		// Get the database object and a new query object.
+		$db		= JFactory::getDBO();
 		$query	= $db->getQuery(true);
 
+		// Build the query.
 		$query->select('a.lang_code AS value, a.title AS text, a.title_native');
 		$query->from('#__languages AS a');
 		$query->where('a.published >= 0');
 		$query->order('a.title');
 
-		// Get the options.
+		// Set the query and load the options.
 		$db->setQuery($query);
 		$options = $db->loadObjectList();
 

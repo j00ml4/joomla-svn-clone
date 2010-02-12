@@ -21,54 +21,75 @@ jimport('joomla.form.formfield');
 class JFormFieldMedia extends JFormField
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	protected $type = 'Media';
 
 	/**
-	 * Method to get the field input.
+	 * The initialised state of the document object.
 	 *
-	 * @return	string		The field input.
+	 * @var		boolean
+	 * @since	1.6
+	 */
+	protected static $initialised = false;
+
+	/**
+	 * Method to get the field input markup.
+	 *
+	 * @return	string	The field input markup.
+	 * @since	1.6
 	 */
 	protected function getInput()
 	{
-		static $init = false;
-		$html = '';
+		if (!self::$initialised) {
 
-		$onchange = (string)$this->_element->attributes()->onchange ? $this->_replacePrefix((string)$this->_element->attributes()->onchange) : '';
-		$readonly = (string)$this->_element->attributes()->readonly == 'true';
-		if (!$init) {
+			// Load the modal behavior script.
 			JHtml::_('behavior.modal');
-			$js = "
-			function jInsertFieldValue(value,id) {
-				var old_id = document.getElementById(id).value;
-				if (old_id != id)
-				{
-					document.getElementById(id).value = value;
-					".$onchange."
-				}
-			}";
-			$doc = &JFactory::getDocument();
-			$doc->addScriptDeclaration($js);
-			$init = true;
+
+			// Build the script.
+			$script = array();
+			$script[] = '	function jInsertFieldValue(value,id) {';
+			$script[] = '		var old_id = document.getElementById(id).value;';
+			$script[] = '		if (old_id != id) {';
+			$script[] = '			document.getElementById(id).value = value;';
+			$script[] = '		}';
+			$script[] = '	}';
+
+			// Add the script to the document head.
+			JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+
+			self::$initialised = true;
 		}
 
-		$link	= (string)$this->_element->attributes()->link.$this->inputId;
-		$size	= (string)$this->_element->attributes()->size ? ' size="'.$this->_element->attributes()->size.'"' : '';
-		$class	= (string)$this->_element->attributes()->class ? ' class="'.$this->_element->attributes()->class.'"' : '';
+		// Initialize variables.
+		$html = array();
 
-		$html .= '<div style="float: left;">';
-		$html .= '<input type="text" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'" disabled="disabled"'.$class.$size.' />';
-		$html .= '</div>';
-		$html .= '<div class="button2-left">';
-		$html .= '<div class="blank">';
-		$html .= '<a class="modal" title="'.JText::_('SELECT').'" href="'.($readonly?'':$link).'" rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
-		$html .= JText::_('SELECT');
-		$html .= '</a>';
-		$html .= '</div>';
-		$html .= '</div>';
+		// Initialize some field attributes.
+		$attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
+		$attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
+
+		// Initialize JavaScript field attributes.
+		$attr .= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
+
+		// The text field.
+		$html[] = '<div style="float:left;">';
+		$html[] = '	<input type="text" name="'.$this->name.'" id="'.$this->id.'"' .
+					' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' .
+					' disabled="disabled"'.$attr.' />';
+		$html[] = '</div>';
+
+		// The button.
+		$html[] = '<div class="button2-left">';
+		$html[] = '	<div class="blank">';
+		$html[] = '		<a class="modal" title="'.JText::_('SELECT').'"' .
+					' href="'.($this->element['readonly'] ? '' : (string) $this->element['link'].$this->id).'"' .
+					' rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
+		$html[] = '			'.JText::_('SELECT').'</a>';
+		$html[] = '	</div>';
+		$html[] = '</div>';
 
 		return $html;
 	}
