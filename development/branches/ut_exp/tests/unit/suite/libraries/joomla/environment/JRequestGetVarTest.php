@@ -51,8 +51,6 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetVarFromDataSet($name, $default, $hash, $type, $mask, $expect, $filterCalls)
 	{
-
-
 		jimport( 'joomla.environment.request' );
 
 		//$store_filter = JFilterInput::getInstance();
@@ -68,11 +66,15 @@ class JRequestTest_GetVar extends PHPUnit_Framework_TestCase
 				);
 			}
 		}
+
+		
 		/*
 		 * Get the variable and check the value.
 		 */
 		$actual = JRequest::getVar($name, $default, $hash, $type, $mask);
 		$this -> assertEquals($expect, $actual, 'Non-cached getVar');
+
+
 		/*
 		 * Repeat the process to check caching (the JFilterInput mock should not
 		 * get called unless the default is being used).
