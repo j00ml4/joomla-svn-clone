@@ -10,6 +10,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
+jimport('joomla.filesystem.folder');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
@@ -22,59 +23,66 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
  */
 class JFormFieldFolderList extends JFormFieldList
 {
-
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'FolderList';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		jimport('joomla.filesystem.folder');
-
-		// path to folders directory
-		$path = JPATH_ROOT . '/' . $this->_element->attributes()->directory;
-		$filter = (string)$this->_element->attributes()->filter;
-		$exclude = (string)$this->_element->attributes()->exclude;
-		$folders = JFolder::folders($path, $filter);
-
-		// Prepare return value
+		// Initialize variables.
 		$options = array();
 
-		// Add basic options
-		if (!(string)$this->_element->attributes()->hide_none)
-		{
+		// Initialize some field attributes.
+		$filter			= (string) $this->element['filter'];
+		$exclude		= (string) $this->element['exclude'];
+		$hideNone		= (string) $this->element['hide_none'];
+		$hideDefault	= (string) $this->element['hide_default'];
+
+		// Get the path in which to search for file options.
+		$path = (string) $this->element['directory'];
+		if (!is_dir($path)) {
+			$path = JPATH_ROOT.'/'.$path;
+		}
+
+		// Prepend some default options based on field attributes.
+		if (!$hideNone) {
 			$options[] = JHtml::_('select.option', '-1', JText::_('JOption_Do_Not_Use'));
 		}
-		if (!(string)$this->_element->attributes()->hide_default)
-		{
+		if (!$hideDefault) {
 			$options[] = JHtml::_('select.option', '', JText::_('JOption_Use_Default'));
 		}
 
-		// Iterate over folders
-		if (is_array($folders))
-		{
-			foreach($folders as $folder)
-			{
-				if ($exclude)
-				{
-					if (preg_match(chr(1) . $exclude . chr(1), $folder))
-					{
+		// Get a list of folders in the search path with the given filter.
+		$folders = JFolder::folders($path, $filter);
+
+		// Build the options list from the list of folders.
+		if (is_array($folders)) {
+			foreach($folders as $folder) {
+
+				// Check to see if the file is in the exclude mask.
+				if ($exclude) {
+					if (preg_match(chr(1).$exclude.chr(1), $folder)) {
 						continue;
 					}
 				}
+
 				$options[] = JHtml::_('select.option', $folder, $folder);
 			}
 		}
+
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);
+
 		return $options;
 	}
 }

@@ -23,24 +23,30 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldInteger extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	protected $type = 'Integer';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		$first		= (int)$this->_element->attributes()->first;
-		$last		= (int)$this->_element->attributes()->last;
-		$step		= (int)max(1, $this->_element->attributes()->step);
-		$options	= array();
+		// Initialize variables.
+		$options = array();
 
+		// Initialize some field attributes.
+		$first	= (int) $this->element['first'];
+		$last	= (int) $this->element['last'];
+		$step	= (int) $this->element['step'];
+
+		// Build the options array.
 		for ($i = $first; $i <= $last; $i += $step) {
 			$options[] = JHtml::_('select.option', $i);
 		}

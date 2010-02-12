@@ -10,6 +10,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
+jimport('joomla.language.help');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
@@ -23,24 +24,26 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldHelpsite extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'Helpsite';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		jimport('joomla.language.help');
-		$options	= array_merge(
-						parent::getOptions(),
-						JHelp::createSiteList(JPATH_ADMINISTRATOR.DS.'help'.DS.'helpsites-15.xml', $this->value)
-					);
+		// Merge any additional options in the XML definition.
+		$options = array_merge(
+			parent::getOptions(),
+			JHelp::createSiteList(JPATH_ADMINISTRATOR.'/help/helpsites-15.xml', $this->value)
+		);
 
 		return $options;
 	}

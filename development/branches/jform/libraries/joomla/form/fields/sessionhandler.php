@@ -10,6 +10,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
+jimport('joomla.session.session');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
@@ -23,34 +24,32 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldSessionHandler extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'SessionHandler';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		// Get the session handlers.
-		jimport('joomla.session.session');
-		$stores		= JSession::getStores();
+		// Initialize variables.
 		$options	= array();
 
-		// Convert to name => name array.
+		// Get the session handlers and build the options array.
+		$stores = JSession::getStores();
 		foreach ($stores as $store) {
 			$options[$store] = $store;
 		}
 
-		// Merge the options together.
-		$options	= array_merge(
-						parent::getOptions(),
-						$options
-					);
+		// Merge any additional options in the XML definition.
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

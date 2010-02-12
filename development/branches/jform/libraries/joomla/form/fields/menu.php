@@ -13,6 +13,9 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
+// Import the com_menus helper.
+require_once realpath(JPATH_ADMINISTRATOR.'/components/com_menus/helpers/menus.php');
+
 /**
  * Supports an HTML select list of menu
  *
@@ -22,40 +25,37 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
  */
 class JFormFieldMenu extends JFormFieldList
 {
-
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'Menu';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		require_once realpath(JPATH_ADMINISTRATOR . '/components/com_menus/helpers/menus.php');
-		$menuTypes = MenusHelper::getMenuTypes();
-
-		// Prepare return value
+		// Initialize variables.
 		$options = array();
 
-		// Add basic option
-		// TODO: would be better to put this basic option in the xml file ?
-
+		// TODO: would be better to put this basic option in the xml file.
 		$options[] = JHtml::_('select.option', '', JText::_('JOption_Select_Menu'));
 
-		// Iterate over menus
-		foreach($menuTypes as $menutype)
-		{
+		// Build the menu options.
+		$menuTypes = MenusHelper::getMenuTypes();
+		foreach($menuTypes as $menutype) {
 			$options[] = JHtml::_('select.option', $menutype, $menutype);
 		}
+
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);
+
 		return $options;
 	}
 }
-

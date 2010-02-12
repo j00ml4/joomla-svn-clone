@@ -22,55 +22,74 @@ JLoader::register('JFormFieldGroupedList', dirname(__FILE__).'/groupedlist.php')
  */
 class JFormFieldTimezone extends JFormFieldGroupedList
 {
-
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	protected $type = 'Timezone';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * The list of available timezone groups to use.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @var		array
+	 * @since	1.6
 	 */
-	protected function _getGroups()
+	protected static $zones = array(
+		'Africa', 'America', 'Antarctica', 'Arctic', 'Asia',
+		'Atlantic', 'Australia', 'Europe', 'Indian', 'Pacific'
+	);
+
+	/**
+	 * Method to get the field option groups.
+	 *
+	 * @return	array	The field option objects as a nested array in groups.
+	 * @since	1.6
+	 */
+	protected function getGroups()
 	{
-		if (strlen($this->value) == 0)
-		{
-			$conf = & JFactory::getConfig();
-			$value = $conf->getValue('config.offset');
+		// Initialize variables.
+		$groups = array();
+
+		// If the timezone is not set use the server setting.
+		if (strlen($this->value) == 0) {
+			$value = JFactory::getConfig()->getValue('config.offset');
 		}
+
+		// Get the list of time zones from the server.
 		$zones = DateTimeZone::listIdentifiers();
-		foreach($zones as $zone)
-		{
 
-			// 0 => Continent, 1 => City
-			$zone = explode('/', $zone);
+		// Build the group lists.
+		foreach ($zones as $zone) {
 
-			// Only use "friendly" continent names
-			if ($zone[0] == 'Africa' || $zone[0] == 'America' || $zone[0] == 'Antarctica' || $zone[0] == 'Arctic' || $zone[0] == 'Asia' || $zone[0] == 'Atlantic' || $zone[0] == 'Australia' || $zone[0] == 'Europe' || $zone[0] == 'Indian' || $zone[0] == 'Pacific')
-			{
-				if (isset($zone[1]) != '')
-				{
+			// Get the group/locale from the timezone.
+			list ($group, $locale) = explode('/', $zone, 2);
 
-					// Creates array(DateTimeZone => 'Friendly name')
-					$groups[$zone[0]][$zone[0] . '/' . $zone[1]] = str_replace('_', ' ', $zone[1]);
+			// Only use known groups.
+			if (in_array($group, self::$zones)) {
+
+				// Initialize the group if necessary.
+				if (!isset($groups[$group])) {
+					$groups[$group] = array();
+				}
+
+				// Only add options where a locale exists.
+				if (!empty($locale)) {
+					$groups[$group][$zone] = str_replace('_', ' ', $locale);
 				}
 			}
 		}
 
-		// Sort the arrays
+		// Sort the group lists.
 		ksort($groups);
-		foreach($groups as $zone => $location)
-		{
+		foreach($groups as $zone => & $location) {
 			sort($location);
 		}
 
-		// Merge any additional options in the XML definition.
-		$groups = array_merge(parent::_getGroups(), $groups);
+		// Merge any additional groups in the XML definition.
+		$groups = array_merge(parent::getGroups(), $groups);
+
 		return $groups;
 	}
 }
-

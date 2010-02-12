@@ -23,31 +23,40 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 class JFormFieldEditors extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'Editors';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		// compile list of the editors
-		$query	= 'SELECT element AS value, name AS text'
-				. ' FROM #__extensions'
-				. ' WHERE folder = "editors"'
-				. ' AND enabled = 1'
-				. ' ORDER BY ordering, name';
-		$db = & JFactory::getDbo();
-		$db->setQuery($query);
+		// Get the database object and a new query object.
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
 
+		// Build the query.
+		$query->select('element AS value, name AS text');
+		$query->from('#__extensions');
+		$query->where('folder = '.$db->quote('editors'));
+		$query->where('enabled = 1');
+		$query->order('ordering, name');
+
+		// Set the query and load the options.
+		$db->setQuery($query);
 		$options = $db->loadObjectList();
 
-		// @todo: Check for an error msg.
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
 
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);

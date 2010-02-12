@@ -22,24 +22,29 @@ JLoader::register('JFormFieldFileList', dirname(__FILE__).'/filelist.php');
  */
 class JFormFieldImageList extends JFormFieldFileList
 {
-
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
 	public $type = 'ImageList';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
-		$filter = '\.png$|\.gif$|\.jpg$|\.bmp$|\.ico$';
-		$this->_element->addAttribute('filter', $filter);
+		// Define the image file type filter.
+		$filter = '\.png$|\.gif$|\.jpg$|\.bmp$|\.ico$|\.jpeg$|\.psd$|\.eps$';
+
+		// Set the form field element attribute for file type filter.
+		$this->element->addAttribute('filter', $filter);
+
+		// Get the field options.
 		return parent::getOptions();
 	}
 }
-
