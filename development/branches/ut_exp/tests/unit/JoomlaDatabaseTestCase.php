@@ -56,7 +56,7 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 		jimport('joomla.database.table');
 
 		if(!is_object(self::$dbo)) {
-			$options	= array ('driver' => 'mysql', 'host' => 'localhost', 'user' => 'utuser', 'password' => 'ut1234', 'database' => 'joomla_ut', 'prefix' => 'jos_');
+			$options	= array ('driver' => 'mysql', 'host' => '127.0.0.1', 'user' => 'utuser', 'password' => 'ut1234', 'database' => 'joomla_ut', 'prefix' => 'jos_');
 
 			self::$dbo = &JDatabase::getInstance($options);
 
@@ -180,7 +180,7 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 */
 	protected function getConnection()
 	{
-		$pdo = new PDO('mysql:host=localhost;dbname=joomla_ut', 'utuser', 'ut1234');
+		$pdo = new PDO('mysql:host=127.0.0.1;dbname=joomla_ut', 'utuser', 'ut1234');
 		return $this->createDefaultDBConnection($pdo, 'joomla_ut');
 	}
 	/**
