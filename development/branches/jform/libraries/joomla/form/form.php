@@ -926,6 +926,7 @@ class JForm
 	protected function & loadFieldType($type, $new = true)
 	{
 		// Initialize variables.
+		$false	= false;
 		$key	= md5($type);
 		$class	= 'JFormField'.ucfirst($type);
 
@@ -962,12 +963,12 @@ class JForm
 			if ($file = JPath::find($paths, strtolower($type).'.php')) {
 				require_once $file;
 			} else {
-				return false;
+				return $false;
 			}
 
 			// Check once and for all if the class exists.
 			if (!class_exists($class)) {
-				return false;
+				return $false;
 			}
 		}
 
@@ -989,6 +990,7 @@ class JForm
 	protected function & loadRuleType($type, $new = true)
 	{
 		// Initialize variables.
+		$false	= false;
 		$key	= md5($type);
 		$class	= 'JFormRule'.ucfirst($type);
 
@@ -1025,12 +1027,12 @@ class JForm
 			if ($file = JPath::find($paths, strtolower($type).'.php')) {
 				require_once $file;
 			} else {
-				return false;
+				return $false;
 			}
 
 			// Check once and for all if the class exists.
 			if (!class_exists($class)) {
-				return false;
+				return $false;
 			}
 		}
 
