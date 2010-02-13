@@ -27,6 +27,19 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+13-Feb-2010 Jean-Marie Simonet
+^ Refactoring mod_wrapper ini/keys
+^ Refactoring mod_weblinks ini/keys
+
+13-Feb-2010 Ian MacLennan
+# Eliminating errors in unit tests
+# Fixed some doc blocks
+# Changed JTableUser to use preg_match instead of eregi
+
+12-Feb-2010 Mark Dexter
++ New system test for create user - thanks Matt Thomas!
++ New method for create user in system test
+
 12-Feb-2010 Jean-Marie Simonet
 ^ Refactored mod_search ini/keys
 ^ Refactored mod_stats ini/keys + bugs
