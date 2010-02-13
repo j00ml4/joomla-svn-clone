@@ -63,10 +63,10 @@ class BannersViewBanners extends JView
 
 		JToolBarHelper::title(JText::_('Banners_Manager_Banners'), 'generic.png');
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::addNew('banner.add');
+			JToolBarHelper::addNew('banner.add','JTOOLBAR_NEW');
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('banner.edit');
+			JToolBarHelper::editList('banner.edit','JTOOLBAR_EDIT');
 		}
 		JToolBarHelper::divider();
 		if ($canDo->get('core.edit.state')) {
