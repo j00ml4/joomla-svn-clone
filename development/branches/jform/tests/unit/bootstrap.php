@@ -41,9 +41,12 @@ session_start();
 
 // Include relative constants, JLoader and the jimport and jexit functions.
 
-require_once JPATH_BASE.DS.'includes'.DS.'defines.php';
-require_once JPATH_LIBRARIES.DS.'joomla'.DS.'import.php';
-require_once JPATH_BASE . '/libraries/joomla/session/session.php';
+require_once JPATH_BASE.'/includes/defines.php';
+require_once JPATH_LIBRARIES.'/joomla/import.php';
+require_once JPATH_BASE.'/libraries/joomla/session/session.php';
+
+// Exclude all of the tests from code coverage reports
+PHPUnit_Util_Filter::addDirectoryToFilter(JPATH_BASE . '/tests');
 
 // Set error handling.
 JError::setErrorHandling(E_NOTICE, 'ignore');
