@@ -21,28 +21,33 @@ jimport('joomla.form.formrule');
 class JFormRuleEmail extends JFormRule
 {
 	/**
-	 * The regular expression.
+	 * The regular expression to use in testing a form field value.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_regex = '[\w\.\-]+@\w+[\w\.\-]*?\.\w{1,4}';
+	protected $regex = '[\w\.\-]+@\w+[\w\.\-]*?\.\w{1,4}';
 
 	/**
 	 * Method to test if an e-mail address is unique.
 	 *
-	 * @param	object		$field		A reference to the form field.
-	 * @param	mixed		$values		The values to test for validiaty.
-	 * @return	mixed		JException on invalid rule, true if the value is valid, false otherwise.
+	 * @param	object	$field	A reference to the form field.
+	 * @param	mixed	$values	The values to test for validity.
+	 *
+	 * @return	boolean	True if the value is valid, false otherwise.
 	 * @since	1.6
+	 * @throws	JException on invalid rule.
 	 */
-	public function test(&$field, &$values)
+	public function test(& $field, & $values)
 	{
-		$return = false;
-		$name	= (string)$field->attributes()->name;
-		$check	= ((string)$field->attributes()->unique == 'true' || (string)$field->attributes()->unique == 'unique');
+		// Initialize variables.
+		$name		= (string) $field['name'];
+		$key		= (string) $field['field'];
+		$unique		= ((string) $field['unique'] == 'true' || (string) $field['unique'] == 'unique');
+		$required	= ((string) $field['required'] == 'true' || (string) $field['required'] == 'required');
 
 		// If the field is empty and not required, the field is valid.
-		if ((string)$field->attributes()->required != 'true') {
+		if ($required) {
 			// Get the data for the field.
 			$value = array_key_exists($name, $values) ? $values[$name] : null;
 
@@ -53,8 +58,7 @@ class JFormRuleEmail extends JFormRule
 		}
 
 		// Check if we should test for uniqueness.
-		if ($check) {
-			$key	= (string)$field->attributes()->field;
+		if ($unique) {
 			$value	= isset($values[$key]) ? $values[$key] : 0;
 
 			// Check the rule.
@@ -78,15 +82,15 @@ class JFormRuleEmail extends JFormRule
 
 			// Test the value against the regular expression.
 			if (parent::test($field, $values) && !$duplicate) {
-				$return = true;
+				return true;
 			}
 		} else {
 			// Test the value against the regular expression.
 			if (parent::test($field, $values)) {
-				$return = true;
+				return true;
 			}
 		}
 
-		return $return;
+		return false;
 	}
 }
