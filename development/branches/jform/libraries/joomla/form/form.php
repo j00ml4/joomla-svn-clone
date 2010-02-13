@@ -22,7 +22,7 @@ JLoader::register('JFormFieldList', dirname(__FILE__).'/fields/list.php');
  * to render and validate the form.
  *
  * @package		Joomla.Framework
- * @subpackage	Forms
+ * @subpackage	Form
  * @since		1.6
  */
 class JForm
@@ -34,6 +34,14 @@ class JForm
 	 * @since	1.6
 	 */
 	protected $data = array();
+
+	/**
+	 * The form object errors array.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected $errors = array();
 
 	/**
 	 * The name of the form instance.
@@ -68,12 +76,20 @@ class JForm
 	protected static $fields = array();
 
 	/**
-	 * Search arrays of paths for loading JForm and JFormField class files.
+	 * Static array of JFormRule objects for re-use.
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
-	protected static $paths = array('forms' => array(), 'fields' => array());
+	protected static $rules = array();
+
+	/**
+	 * Search arrays of paths for loading JForm, JFormField, and JFormRule class files.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $paths = array('fields' => array(), 'forms' => array(), 'rules' => array());
 
 
 	/**
@@ -149,6 +165,17 @@ class JForm
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return all errors, if any.
+	 *
+	 * @return	array	Array of error messages or JException objects.
+	 * @since	1.6
+	 */
+	public function getErrors()
+	{
+		return $this->errors;
 	}
 
 	/**
@@ -640,6 +667,101 @@ class JForm
 	}
 
 	/**
+	 * Method to validate form data.
+	 *
+	 * Validation warnings will be pushed into JForm::errors and should be
+	 * retrieved with JForm::getErrors() when validate returns boolean false.
+	 *
+	 * @param	array	$data	An array of field values to validate.
+	 * @param	string	$group	The optional name of a field group on which to filter fields to validate.
+	 *
+	 * @return	mixed	boolean	True on sucess.
+	 * @since	1.6
+	 */
+	public function validate($data, $group = null)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		// Initialize variables.
+		$data	= (array) $data;
+		$return	= true;
+
+		// Filter the fields to validate over a group?
+		if ($group) {
+			// The group that was supposed to be filtered does not exist.
+			if ($this->xml->xpath('//fields[@name="'.$group.'"]')) {
+				JError::raiseWarning(0, JText::sprintf('LIB_FORM_VALIDATE_GROUP_NOT_FOUND', $group));
+				return false;
+			}
+
+			// Get an array of all the <field /> elements in the given group.
+			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field');
+		}
+		else {
+			// Get an array of all the <field /> elements.
+			$fields = $this->xml->xpath('//field');
+		}
+
+		// Validate the fields.
+		foreach ($fields as $field) {
+
+			// Initialize variables.
+			$groups		= array();
+			$groupName	= null;
+			$value		= null;
+			$fieldName	= (string) $field['name'];
+
+			// Get the field groups for the element.
+			$names = $field->xpath('ancestor::fields[@name]/@name');
+
+			// Build the group for the element.
+			foreach ($names as $name) {
+				$groups[] = (string) $name;
+			}
+
+			// Use only one level of group depth for now.
+			$groupName = $groups[0];
+
+			// Get the field value from the data input.
+			if ($groupName) {
+				// If the value exists for the field name in the group use it.
+				if (isset($data[$groupName][$fieldName])) {
+					$value = $data[$groupName][$fieldName];
+				}
+			}
+			else {
+				// If the value exists for the field name use it.
+				if (isset($data[$fieldName])) {
+					$value = $data[$fieldName];
+				}
+			}
+
+			// Validate the field.
+			$valid = $this->validateField($field, $group, $value);
+
+			// Check for an error.
+			if (JError::isError($valid)) {
+				switch ($valid->get('level'))
+				{
+					case E_ERROR:
+						JError::raiseWarning(0, $valid->getMessage());
+						return false;
+						break;
+					default:
+						array_push($this->errors, $valid);
+						$return = false;
+						break;
+				}
+			}
+		}
+
+		return $return;
+	}
+
+	/**
 	 * Method to get a form field represented as an XML element object.
 	 *
 	 * @param	string	$name	The name of the form field.
@@ -801,7 +923,7 @@ class JForm
 	 * @return	mixed	JFormField object on success, false otherwise.
 	 * @since	1.6
 	 */
-	protected function loadFieldType($type, $new = true)
+	protected function & loadFieldType($type, $new = true)
 	{
 		// Initialize variables.
 		$key	= md5($type);
@@ -853,6 +975,138 @@ class JForm
 		self::$fields[$key] = new $class();
 
 		return self::$fields[$key];
+	}
+
+	/**
+	 * Method to load a form rule object given a type.
+	 *
+	 * @param	string	$type	The rule type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	JFormRule object on success, false otherwise.
+	 * @since	1.6
+	 */
+	protected function & loadRuleType($type, $new = true)
+	{
+		// Initialize variables.
+		$key	= md5($type);
+		$class	= 'JFormRule'.ucfirst($type);
+
+		// Return the JFormRule object if it already exists and we don't need a new one.
+		if (isset(self::$rules[$key]) && $new === false) {
+			return self::$rules[$key];
+		}
+
+		// Attempt to import the JFormRule class file if it isn't already imported.
+		if (!class_exists($class)) {
+
+			// Get the field search path array.
+			$paths = self::addRulePath();
+
+			// If the type is complex, add the base type to the paths.
+			if ($pos = strpos($type, '_')) {
+
+				// Add the complex type prefix to the paths.
+				for ($i = 0, $n = count($paths); $i < $n; $i++) {
+					// Derive the new path.
+					$path = $paths[$i].DS.strtolower(substr($type, 0, $pos));
+
+					// If the path does not exist, add it.
+					if (!in_array($path, $paths)) {
+						array_unshift($paths, $path);
+					}
+				}
+
+				// Break off the end of the complex type.
+				$type = substr($type, $pos+1);
+			}
+
+			// Try to find the field file.
+			if ($file = JPath::find($paths, strtolower($type).'.php')) {
+				require_once $file;
+			} else {
+				return false;
+			}
+
+			// Check once and for all if the class exists.
+			if (!class_exists($class)) {
+				return false;
+			}
+		}
+
+		// Instantiate a new field object.
+		self::$rules[$key] = new $class();
+
+		return self::$rules[$key];
+	}
+
+	/**
+	 * Method to validate a JFormField object based on field data.
+	 *
+	 * @param	string	$element	The XML element object representation of the form field.
+	 * @param	string	$group		The optional form field group in which to find the field.
+	 * @param	mixed	$value		The optional value to use as the default for the field.
+	 *
+	 * @return	mixed	Boolean true if field value is valid, JException on failure.
+	 * @since	1.6
+	 */
+	protected function validateField($element, $group = null, $value = null)
+	{
+		// Make sure there is a valid JXMLElement.
+		if (!$element instanceof JXMLElement) {
+			return new JException(JText::_('LIB_FORM_VALIDATE_FIELD_ERROR'), 0, E_ERROR);
+		}
+
+		// Check if the field is required.
+		$required = ((string) $element['required'] == 'true' || (string) $element['required'] == 'required');
+		if ($required) {
+
+			// If the field is required and the value is empty return an error message.
+			if (($value === '') || ($value === null)) {
+
+				// Does the field have a defined error message?
+				$message = (string) $element['message'];
+				if ($message) {
+					return new JException(JText::_($message), 0, E_WARNING);
+				} else {
+					return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_REQUIRED', JText::_((string) $element['name'])), 0, E_WARNING);
+				}
+			}
+		}
+
+		// Get the field validation rule.
+		$type = (string) $element['validate'];
+		if ($type) {
+			// Load the JFormRule object for the field.
+			$rule = $this->loadRuleType($type);
+
+			// If the object could not be loaded return an error message.
+			if ($rule === false) {
+				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_RULE_MISSING', $rule), 0, E_ERROR);
+			}
+		}
+
+		// Run the field validation rule test.
+		$valid = $rule->test($element, $group, $value, $this);
+
+		// Check for an error in the validation test.
+		if (JError::isError($valid)) {
+			return $valid;
+		}
+
+		// Check if the field is valid.
+		if ($valid === false) {
+
+			// Does the field have a defined error message?
+			$message = (string) $element['message'];
+			if ($message) {
+				return new JException(JText::_($message), 0, E_WARNING);
+			} else {
+				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_INVALID', JText::_((string) $element['name'])), 0, E_WARNING);
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -909,5 +1163,33 @@ class JForm
 		}
 
 		return self::$paths['forms'];
+	}
+
+	/**
+	 * Method to add a path to the list of rule include paths.
+	 *
+	 * @param	mixed	$new	A path or array of paths to add.
+	 *
+	 * @return	array	The list of paths that have been added.
+	 * @since	1.6
+	 */
+	public static function addRulePath($new = null)
+	{
+		// Add the default form search path if not set.
+		if (empty(self::$paths['rules'])) {
+			self::$paths['rules'][] = dirname(__FILE__).'/rules';
+		}
+
+		// Force the new path(s) to an array.
+		settype($new, 'array');
+
+		// Add the new paths to the stack if not already there.
+		foreach ($new as $path) {
+			if (!in_array($path, self::$paths['rules'])) {
+				array_unshift(self::$paths['rules'], trim($path));
+			}
+		}
+
+		return self::$paths['rules'];
 	}
 }
