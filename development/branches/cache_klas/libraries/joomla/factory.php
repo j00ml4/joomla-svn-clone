@@ -223,6 +223,7 @@ abstract class JFactory
 	 */
 	public static function getDbo()
 	{
+	
 		if (!is_object(self::$database))
 		{
 			//get the debug configuration setting
@@ -232,7 +233,6 @@ abstract class JFactory
 			self::$database = self::_createDbo();
 			self::$database->debug($debug);
 		}
-
 		return self::$database;
 	}
 
