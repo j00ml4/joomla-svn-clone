@@ -4,7 +4,7 @@
 	version="1.6"
 	type="plugin"
 	group="content">
-	<name>PLG_CONTENT_EMAILCLOAK_NAME</name>
+	<name>plg_content_emailcloak</name>
 	<author>Joomla! Project</author>
 	<creationDate>November 2005</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -12,7 +12,7 @@
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.6</version>
-	<description>PLG_CONTENT_EMAILCLOAK_XML_DESCCRIPTION</description>
+	<description>PLG_CONTENT_EMAILCLOAK_XML_DESCRIPTION</description>
 	<files>
 		<filename
 			plugin="emailcloak">emailcloak.php</filename>
