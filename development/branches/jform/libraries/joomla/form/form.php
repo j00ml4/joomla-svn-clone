@@ -1089,7 +1089,7 @@ class JForm
 		}
 
 		// Run the field validation rule test.
-		$valid = $rule->test($element, $group, $value, $this);
+		$valid = $rule->test($element, $value, $group, $this);
 
 		// Check for an error in the validation test.
 		if (JError::isError($valid)) {

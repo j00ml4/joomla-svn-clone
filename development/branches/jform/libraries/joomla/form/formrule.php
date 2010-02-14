@@ -42,17 +42,23 @@ class JFormRule
 	/**
 	 * Method to test the value.
 	 *
-	 * @param	object	$field	A reference to the form field.
-	 * @param	mixed	$values	The values to test for validity.
+	 * @param	object	$element	The JXMLElement object representing the <field /> tag for the
+	 * 								form field object.
+	 * @param	mixed	$value		The form field value to validate.
+	 * @param	string	$group		The field name group control value. This acts as as an array
+	 * 								container for the field. For example if the field has name="foo"
+	 * 								and the group value is set to "bar" then the full field name
+	 * 								would end up being "bar[foo]".
+	 * @param	object	$form		The optional form object for which the field is being tested.
 	 *
 	 * @return	boolean	True if the value is valid, false otherwise.
 	 * @since	1.6
 	 * @throws	JException on invalid rule.
 	 */
-	public function test(& $field, & $values)
+	public function test(& $element, $value, $group = null, & $form = null)
 	{
 		// Initialize variables.
-		$name = (string) $field['name'];
+		$name = (string) $element['name'];
 
 		// Check for a valid regex.
 		if (empty($this->regex)) {
@@ -65,7 +71,7 @@ class JFormRule
 		}
 
 		// Test the value against the regular expression.
-		if (preg_match(chr(1).$this->regex.chr(1).$this->modifiers, $values[$name])) {
+		if (preg_match(chr(1).$this->regex.chr(1).$this->modifiers, $value)) {
 			return true;
 		}
 

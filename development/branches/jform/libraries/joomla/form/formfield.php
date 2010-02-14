@@ -244,7 +244,7 @@ abstract class JFormField
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
-	public function setup($element, $value, $group = null)
+	public function setup(& $element, $value, $group = null)
 	{
 		// Make sure there is a valid JFormField XML element.
 		if ((!$element instanceof JXMLElement) && ((string) $element->getName() == 'field')) {
