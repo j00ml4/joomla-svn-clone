@@ -359,7 +359,6 @@ class JController extends JObject
 		if ($cachable && $viewType != 'feed') {
 			global $option;
 			$cache = &JFactory::getCache($option, 'view');
-			$cache->get($view, 'display');
 			if (is_array($urlparams)) {
 				$uri = & JRequest::get();
 				$safeuri=new stdClass();
