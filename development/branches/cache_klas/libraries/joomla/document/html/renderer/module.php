@@ -2,6 +2,7 @@
 /**
  * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -53,7 +54,7 @@ class JDocumentRendererModule extends JDocumentRenderer
 		}
 
 		// get the user and configuration object
-		$user = &JFactory::getUser();
+		//$user = &JFactory::getUser();
 		$conf = &JFactory::getConfig();
 
 		// set the module content
@@ -65,15 +66,15 @@ class JDocumentRendererModule extends JDocumentRenderer
 		$mod_params = new JParameter($module->params);
 
 		$contents = '';
-		if ($mod_params->get('cache', 0) && $conf->getValue('config.caching'))
+		/**if ($mod_params->get('cache', 0) && $conf->getValue('config.caching'))
 		{
 			$cache = &JFactory::getCache($module->module);
 			$cache->setLifeTime($mod_params->get('cache_time', $conf->getValue('config.cachetime') * 60));
 			$contents =  $cache->get(array('JModuleHelper', 'renderModule'), array($module, $params), $module->id. $user->get('aid', 0).md5(JRequest::getURI()));
 		}
-		else {
+		else {*/
 			$contents = JModuleHelper::renderModule($module, $params);
-		}
+		//}
 
 		return $contents;
 	}

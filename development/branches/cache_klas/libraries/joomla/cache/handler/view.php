@@ -4,6 +4,7 @@
  * @package		Joomla.Framework
  * @subpackage	Cache
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -57,6 +58,7 @@ class JCacheView extends JCache
 				$pathway->setPathway($data['pathway']);
 			}
 
+			// @todo chech if the following is needed, seems like it should be in page cache
 			// If a module buffer is set in the cache data, get it.
 			if (isset($data['module']) && is_array($data['module']))
 			{
@@ -111,11 +113,12 @@ class JCacheView extends JCache
 			$pathway			= &$app->getPathWay();
 			$cached['pathway']	= $pathway->getPathway();
 
+			// @todo chech if the following is needed, seems like it should be in page cache
 			// Get the module buffer after component execution.
 			$buffer2 = $document->getBuffer();
-
+			
 			// Make sure the module buffer is an array.
-			if (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
+			f (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
 				$buffer2['module'] = array();
 			}
 
