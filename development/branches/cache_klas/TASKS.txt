@@ -13,7 +13,7 @@ SMALLER TASKS
 
 COMPLEX TASKS
 - Re-conceptualize view cache (and review/change other handlers if needed)
-- Re-conceptualize module cache (move cache call to within the module, add module handler)
+- GENERALY WORKING, PROBABLY NEEDS FINETUNING: Re-conceptualize module cache (move cache call to within the module, add module handler)
 
 - Implement changed caching in core components and modules
 - Test and cleanup changed files

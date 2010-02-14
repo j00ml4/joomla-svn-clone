@@ -335,4 +335,49 @@ abstract class JModuleHelper
 
 		return $clean;
 	}
+	
+	/**
+	* Get the path to a layout for a module
+	*
+	* @static
+	* @param	string	$module	The name of the module
+	* @param	string	$mhelper name of module helper
+	* @param	string	$method method in helper beeing called
+	* @param	object	$moduleparams module parameters
+	* @param	string	$mode cache creation mode: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 'safeurl' - id created from $urlparameters array.
+	* @param	array	$urlparams an array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	* 
+	* @since	1.6
+	*/
+	public static function cache ($module,$mhelper,$method,$moduleparams,$mode='static',$urlparams=null) {
+		global $option;
+		$user = &JFactory::getUser();
+		$cache = &JFactory::getCache($module,'module');
+		
+				//$cache->get($view, 'display',$secureid);} $module->id. $user->get('aid', 0).md5(JRequest::getURI())
+		
+		switch ($mode) {
+
+			case 'itemid':
+				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'));
+				break;
+			case 'safeuri':
+				$secureid=null;
+				if (is_array($urlparams)) {
+				$uri = & JRequest::get();
+				$safeuri=new stdClass();
+				foreach ($urlparams AS $key => $value) {
+					// use int filter for id/catid to clean out spamy slugs
+					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
+				} }
+				$secureid = md5(serialize(array($safeuri, $method, $moduleparams)));
+				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).$secureid);
+				break;
+			case 'static':
+			default:
+				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0));
+				break;
+		}
+	return $ret;
+	}
 }

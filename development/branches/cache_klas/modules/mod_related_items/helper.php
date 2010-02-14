@@ -4,6 +4,7 @@
  * @package		Joomla.Site
  * @subpackage	mod_related_items
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -20,7 +21,8 @@ class modRelatedItemsHelper
 		$user		= &JFactory::getUser();
 		$userId		= (int) $user->get('id');
 		$count		= intval($params->get('count', 5));
-		$groups		= implode(',', $user->authorisedLevels());
+		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
+		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		$date		= &JFactory::getDate();
 
 		$option		= JRequest::getCmd('option');
@@ -77,7 +79,7 @@ class modRelatedItemsHelper
 					$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
 					$query->where('a.id != ' . (int) $id);
 					$query->where('a.state = 1');
-					$query->where('a.access IN (' . $groups . ')');
+					//$query->where('a.access IN (' . $authorised . ')');
 					$query->where('(CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%'.implode('%" OR CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
 					$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
 					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
@@ -89,10 +91,17 @@ class modRelatedItemsHelper
 					{
 						foreach ($temp as $row)
 						{
-							if (($row->cat_state == 1 || $row->cat_state == '') && ($row->sec_state == 1 || $row->sec_state == '') && (in_array($row->cat_access, $groups) || $row->cat_access == '') && (in_array($row->sec_access, $groups) || $row->sec_access == ''))
+								
+							if ($row->cat_state == 1 || $row->cat_state == '') {
+								
+							 if ($access || in_array($item->access, $authorised))
 							{
-								$row->route = JRoute::_(ContentRoute::article($row->slug, $row->catslug, $row->sectionid));
-								$related[] = $row;
+								$row->route = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catslug));
+							}
+							else {
+								$row->route  = JRoute::_('index.php?option=com_user&view=login');
+							}
+							$related[] = $row;
 							}
 						}
 					}
