@@ -11,7 +11,6 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.filesystem.path');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/fields/list.php');
 
 /**
  * Form Class for the Joomla Framework.
@@ -76,20 +75,20 @@ class JForm
 	protected static $fields = array();
 
 	/**
-	 * Static array of JFormRule objects for re-use.
-	 *
-	 * @var		array
-	 * @since	1.6
-	 */
-	protected static $rules = array();
-
-	/**
 	 * Search arrays of paths for loading JForm, JFormField, and JFormRule class files.
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
 	protected static $paths = array('fields' => array(), 'forms' => array(), 'rules' => array());
+
+	/**
+	 * Static array of JFormRule objects for re-use.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $rules = array();
 
 
 	/**
@@ -165,6 +164,70 @@ class JForm
 		}
 
 		return true;
+	}
+
+	/**
+	 * Method to filter the form data.
+	 *
+	 * @param	array	$data	An array of field values to filter.
+	 * @param	string	$group	The optional name of a field group for which to filter fields.
+	 *
+	 * @return	mixed	boolean	True on sucess.
+	 * @since	1.6
+	 */
+	public function filter($data, $group = null)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		// Initialize variables.
+		$raw		= (array) $data;
+		$filtered	= array();
+
+		// Get the fields for which to filter the data.
+		$fields = $this->getFieldsByGroup($group);
+		if (!$fields) {
+			// PANIC!
+			return false;
+		}
+
+		// Filter the fields.
+		foreach ($fields as $field) {
+
+			// Initialize variables.
+			$groups		= array();
+			$groupName	= null;
+			$fieldName	= (string) $field['name'];
+
+			// Get the field groups for the element.
+			$names = $field->xpath('ancestor::fields[@name]/@name');
+
+			// Build the group for the element.
+			foreach ($names as $name) {
+				$groups[] = (string) $name;
+			}
+
+			// Use only one level of group depth for now.
+			$groupName = $groups[0];
+
+			// Get the field value from the data input.
+			if ($groupName) {
+				// Filter the value if it exists.
+				if (isset($raw[$groupName][$fieldName])) {
+					$filtered[$groupName][$fieldName] = $this->filterField($field, $raw[$groupName][$fieldName]);
+				}
+			}
+			else {
+				// Filter the value if it exists.
+				if (isset($raw[$fieldName])) {
+					$filtered[$fieldName] = $this->filterField($field, $raw[$fieldName]);
+				}
+			}
+		}
+
+		return $filtered;
 	}
 
 	/**
@@ -521,20 +584,27 @@ class JForm
 	}
 
 	/**
-	 * Method to get an array of JFormField objects in a given fieldset by name.
+	 * Method to get an array of JFormField objects in a given fieldset by name.  If no name is
+	 * given then all fields are returned.
 	 *
-	 * @param	string	$set	The name of the fieldset.
+	 * @param	string	$set	The optional name of the fieldset.
 	 *
 	 * @return	array	The array of JFormField objects in the fieldset.
 	 * @since	1.6
 	 */
-	public function getFieldset($set)
+	public function getFieldset($set = null)
 	{
 		// Initialize variables.
 		$fields = array();
 
 		// Get all of the field elements in the fieldset.
-		$elements = $this->getFieldsByFieldset($set);
+		if ($set) {
+			$elements = $this->getFieldsByFieldset($set);
+		}
+		// Get all fields.
+		else {
+			$elements = $this->getFieldsByGroup();
+		}
 
 		// If no field elements were found return empty.
 		if (empty($elements)) {
@@ -689,20 +759,11 @@ class JForm
 		$data	= (array) $data;
 		$return	= true;
 
-		// Filter the fields to validate over a group?
-		if ($group) {
-			// The group that was supposed to be filtered does not exist.
-			if ($this->xml->xpath('//fields[@name="'.$group.'"]')) {
-				JError::raiseWarning(0, JText::sprintf('LIB_FORM_VALIDATE_GROUP_NOT_FOUND', $group));
-				return false;
-			}
-
-			// Get an array of all the <field /> elements in the given group.
-			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field');
-		}
-		else {
-			// Get an array of all the <field /> elements.
-			$fields = $this->xml->xpath('//field');
+		// Get the fields for which to validate the data.
+		$fields = $this->getFieldsByGroup($group);
+		if (!$fields) {
+			// PANIC!
+			return false;
 		}
 
 		// Validate the fields.
@@ -756,6 +817,103 @@ class JForm
 						break;
 				}
 			}
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Method to apply an input filter to a value based on field data.
+	 *
+	 * @param	string	$element	The XML element object representation of the form field.
+	 * @param	mixed	$value		The value to filter for the field.
+	 *
+	 * @return	mixed	The filtered value.
+	 * @since	1.6
+	 */
+	protected function filterField($element, $value)
+	{
+		// Make sure there is a valid JXMLElement.
+		if (!$element instanceof JXMLElement) {
+			return false;
+		}
+
+		// Get the field filter type.
+		$filter = (string) $element['filter'];
+
+		// If no filter is set return the raw value.
+		if (!$filter) {
+			return $value;
+		}
+
+		// Process the input value based on the filter.
+		$return = null;
+		switch (strtoupper($filter))
+		{
+			// Access Control Rules.
+			case 'RULES':
+				$return = array();
+				foreach ((array) $value as $action => $ids) {
+					// Build the rules array.
+					$return[$action] = array();
+					foreach ($ids as $id => $p) {
+						if ($p !== '') {
+							$return[$action][$id] = ($p == '1' || $p == 'true') ? true : false;
+						}
+					}
+				}
+				break;
+
+			// Do nothing, thus leaving the return value as null.
+			case 'UNSET':
+				break;
+
+			// No Filter.
+			case 'RAW':
+				$return = $value;
+				break;
+
+			// Filter safe HTML.
+			case 'SAFEHTML':
+				$return = JFilterInput::getInstance(null, null, 1, 1)->clean($value, 'string');
+				break;
+
+			// Convert a date to UTC based on the server timezone offset.
+			case 'SERVER_UTC':
+				if (intval($value)) {
+					// Get the server timezone setting.
+					$offset	= $config->getValue('config.offset');
+
+					// Return a MySQL formatted datetime string in UTC.
+					$return = JFactory::getDate($value, $offset)->toMySQL();
+				}
+				break;
+
+			// Convert a date to UTC based on the user timezone offset.
+			case 'USER_UTC':
+				if (intval($value)) {
+					// Get the user timezone setting defaulting to the server timezone setting.
+					$offset	= $user->getParam('timezone', $config->getValue('config.offset'));
+
+					// Return a MySQL formatted datetime string in UTC.
+					$return = JFactory::getDate($value, $offset)->toMySQL();
+				}
+				break;
+
+			default:
+				// Check for a callback filter.
+				if (strpos($filter, '::') !== false && is_callable(explode('::', $filter))) {
+					$return = call_user_func(explode('::', $filter), $value);
+				}
+				// Filter using a callback function if specified.
+				else if (function_exists($filter)) {
+					$return = call_user_func($filter, $value);
+				}
+				// Filter using JFilterInput. All HTML code is filtered by default.
+				else {
+					$return = JFilterInput::getInstance()->clean($value, $filter);
+				}
+				break;
 		}
 
 		return $return;
@@ -849,23 +1007,36 @@ class JForm
 	 * Method to get an array of <field /> elements from the form XML document which are
 	 * in a control group by name.
 	 *
-	 * @param	string	$name	The name of the control group.
+	 * @param	string	$name	The optional name of the control group.
 	 *
 	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
 	 * @since	1.6
 	 */
-	protected function getFieldsByGroup($name)
+	protected function getFieldsByGroup($name = null)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
 			return false;
 		}
 
-		/*
-		 * Get an array of <field /> elements that are underneath a <fields /> element
-		 * with the appropriate name attribute.
-		 */
-		$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+		// Get only fields in a specific group?
+		if ($name) {
+			// Check to see if the group does not exist.
+			if ($this->xml->xpath('//fields[@name="'.$name.'"]')) {
+				JError::raiseWarning(0, JText::sprintf('LIB_FORM_VALIDATE_GROUP_NOT_FOUND', $name));
+				return false;
+			}
+
+			/*
+			 * Get an array of <field /> elements that are underneath a <fields /> element
+			 * with the appropriate name attribute.
+			 */
+			$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+		}
+		else {
+			// Get an array of all the <field /> elements.
+			$fields = $this->xml->xpath('//field');
+		}
 
 		return $fields;
 	}
