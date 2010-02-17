@@ -20,18 +20,13 @@ $userId	= $user->get('id');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm">
-	<fieldset class="filter-bar">
+	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
 		<div class="filter-search">
-			<label for="filter_search">
-				<?php echo JText::_('JSearch_Filter_Label'); ?>
-			</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" size="35" title="<?php echo JText::_('Weblinks_Search_in_title'); ?>" />
-
-			<button type="submit">
-				<?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('search').value='';this.form.submit();">
-				<?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?></label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Weblinks_Search_in_title'); ?>" />
+			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
+			<button type="button" onclick="document.id('search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_access">
@@ -63,10 +58,14 @@ $userId	= $user->get('id');
 			
 		</div>
 	</fieldset>
+	<div class="clr"> </div>
 
 	<table class="adminlist">
 		<thead>
 			<tr>
+				<th class="row-number-col">
+					<?php echo JText::_('JGrid_Heading_Row_Number'); ?>
+				</th>
 				<th class="checkmark-col">
 					<input type="checkbox" name="toggle" id="toggle" value="" title="<?php echo JText::_('Checkmark_All'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
@@ -110,8 +109,11 @@ $userId	= $user->get('id');
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<th>
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php echo $this->pagination->getRowOffset($i); ?>
 				</th>
+				<td>
+					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+				</td>
 				<td>
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
