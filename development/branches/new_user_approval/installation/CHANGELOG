@@ -27,6 +27,48 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-Feb-2010 Jean-Marie Simonet
+^ Refactored tpl_bluestork ini/keys
+^ Shortening code in mod_whosonline. Thanks Dennis.
+# Correcting bug in template installer adapter
+^ Refactored com_languages ini/keys
+
+16-Feb-2010 Mark Dexter
+^ New system tests for groups, ACL
+
+16-Feb-2010 Jean-Marie Simonet
+^ Refactoring com_checkin inis/keys. $ sprintf. Thanks Omar.
+^ Refactoring com_cache ini/keys
+
+15-Feb-2010
+# Allow Groups to be deleted correctly
+
+15-Feb-2010 Jean-Marie Simonet
+$ Translating Menu Item Type in Menu Manager: Menu items.
+^ Updated en-GB.xml back
+
+14-Feb-2010 Jean-Marie Simonet
+^ $ Refactored extensions names in sql extension table and xmls to fit INI standards. Updated ini keys. 
+^ Changing editors-xtd name. Updating more ini keys. Loading translation in Manage View.
++ Adding xx-XX frontend language for testing purposes.
+
+13-Feb-2010 Mark Dexter
+^ Change "Apply" to "Save" in back end edit screens
+
+13-Feb-2010 Jean-Marie Simonet
+^ Refactoring mod_wrapper ini/keys
+^ Refactoring mod_weblinks ini/keys
+^ Refactoring mod_whosonline
+
+13-Feb-2010 Ian MacLennan
+# Eliminating errors in unit tests
+# Fixed some doc blocks
+# Changed JTableUser to use preg_match instead of eregi
+
+12-Feb-2010 Mark Dexter
++ New system test for create user - thanks Matt Thomas!
++ New method for create user in system test
+
 12-Feb-2010 Jean-Marie Simonet
 ^ Refactored mod_search ini/keys
 ^ Refactored mod_stats ini/keys + bugs

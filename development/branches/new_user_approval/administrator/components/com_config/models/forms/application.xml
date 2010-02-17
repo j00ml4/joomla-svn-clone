@@ -677,6 +677,19 @@
 			<option
 				value="0">JNo</option>
 		</field>
+		<field
+			name="admin_approval_who"
+			type="radio"
+			default="0"
+			label="Config_admin_approval_who_Label"
+			description="Config_admin_approval_who_Desc"
+			required="true"
+			filter="integer">
+			<option
+				value="0">Config_option_all_admins</option>
+			<option
+				value="1">Config_option_only_superadmins</option>
+		</field>
 	</fields>
 
 	<fields
