@@ -306,8 +306,9 @@ class UsersModelRegistration extends JModelForm
 		{
 			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$token, false);
 
-			//get all administrators. If only superadmin approval is desired, take off the 24 below
-			$gid = Array(25, 24);
+			//get all administrators.
+			$gid = ($config->getValue('admin_approval_who') == 0) ? array(25, 24) : array(25);
+
 			$query = 'SELECT name, email, sendEmail' .
 						' FROM #__users' .
 						' WHERE gid IN ('. implode(',', $gid) .')' .
