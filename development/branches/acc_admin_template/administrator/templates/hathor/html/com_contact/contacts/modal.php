@@ -16,9 +16,9 @@ JHtml::_('behavior.tooltip');
 $function = JRequest::getVar('function', 'jSelectContact');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_contact&view=contacts');?>" method="post" name="adminForm">
-	<fieldset class="filter clearfix">
-		<div class="left">
-			<label for="search">
+	<fieldset id="filter-bar">
+		<div class="filter-search">
+			<label for="filter-search">
 				<?php echo JText::_('JSearch_Filter_Label'); ?>
 			</label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" size="30" title="<?php echo JText::_('Content_Filter_Search_Desc'); ?>" />
@@ -29,54 +29,62 @@ $function = JRequest::getVar('function', 'jSelectContact');
 				<?php echo JText::_('JSearch_Filter_Clear'); ?></button>
 		</div>
 
-		<div class="right">
-			<select name="filter_access" class="inputbox" onchange="this.form.submit()">
+		<div class="filter-select">
+			<label class="selectlabel" for="filter_access">
+				<?php echo JText::_('Filter_Access'); ?>
+			</label>
+			<select name="filter_access" id="filter_access" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Access');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
-
-			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
+			
+			<label class="selectlabel" for="filter_published">
+				<?php echo JText::_('Filter_State'); ?>
+			</label> 
+			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
-
-			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
+			
+			<label class="selectlabel" for="filter_category_id">
+				<?php echo JText::_('Filter_Category'); ?>
+			</label>
+			<select name="filter_category_id" id="filter_category_id" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Category');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
+			
+			<button type="button" id="filter-go" onclick="this.form.submit();">
+				<?php echo JText::_('Go'); ?></button>
+			
 		</div>
 	</fieldset>
+	<div class="clr"> </div>
 
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20">
+				<th class="checkmark-col">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Title', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-				<th width="5%">
+				<th class="title category-col">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Category', 'a.catid', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-				<th width="10%">
+				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Access', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-				<th width="5%">
+				<th class="width-5">
 					<?php echo JHtml::_('grid.sort',  'Content_Heading_Date', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-				<th width="1%" nowrap="nowrap">
+				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="15">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
-			</tr>
-		</tfoot>
+		
 		<tbody>
 		<?php foreach ($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
@@ -103,6 +111,8 @@ $function = JRequest::getVar('function', 'jSelectContact');
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	
+	<?php echo $this->pagination->getListFooter(); ?>
 
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />

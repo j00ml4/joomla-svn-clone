@@ -30,21 +30,21 @@ $userId	= $user->get('id');
 			<label class="selectlabel" for="filter_access">
 				<?php echo JText::_('Filter_Access'); ?>
 			</label>
-			<select name="filter_access" id="filter_access" class="inputbox" onclick="this.form.submit()">
+			<select name="filter_access" id="filter_access" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Access');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('Filter_State'); ?>
 			</label> 
-			<select name="filter_published" id="filter_published" class="inputbox" onclick="this.form.submit()">
+			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
 			<label class="selectlabel" for="filter_category_id">
 				<?php echo JText::_('Filter_Category'); ?>
 			</label>
-			<select name="filter_category_id" id="filter_category_id" class="inputbox" onclick="this.form.submit()">
+			<select name="filter_category_id" id="filter_category_id" class="inputbox"">
 				<option value=""><?php echo JText::_('JOption_Select_Category');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_contact'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
@@ -63,7 +63,7 @@ $userId	= $user->get('id');
 					<?php echo JText::_('JGrid_Heading_Row_Number'); ?>
 				</th>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
+					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('Checkmark_All'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'Contact_Title_Heading', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>

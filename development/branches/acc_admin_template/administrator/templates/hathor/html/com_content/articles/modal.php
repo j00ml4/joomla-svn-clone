@@ -17,7 +17,7 @@ JHtml::_('behavior.tooltip');
 $function = JRequest::getVar('function', 'jSelectArticle');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=articles');?>" method="post" name="adminForm">
-	<fieldset class="filter clearfix">
+	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
 		<div class="filter-search">
 			<label for="filter_search">
