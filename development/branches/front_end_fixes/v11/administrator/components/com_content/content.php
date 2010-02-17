@@ -19,5 +19,5 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_content')) {
 jimport('joomla.application.component.controller');
 
 $controller = JController::getInstance('Content');
-$controller->execute(JRequest::getVar('task'));
+$controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
