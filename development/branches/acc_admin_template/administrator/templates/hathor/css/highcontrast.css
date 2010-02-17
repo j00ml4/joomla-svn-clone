@@ -429,6 +429,10 @@ table.adminlist {
 	color: #fcff20;
 }
 
+table.adminlist a {
+	color: #ffffff;
+}
+
 table.adminlist thead th {
 	background: #163365;
 	color: #fcff20;

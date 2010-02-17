@@ -82,7 +82,7 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Ordering', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'weblinks.saveorder'); ?>
 				</th>
-				<th class="title access-col" >
+				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Access', 'a.access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="hits-col">

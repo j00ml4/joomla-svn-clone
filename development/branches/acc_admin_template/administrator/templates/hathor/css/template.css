@@ -591,7 +591,7 @@ p.tab-description {
  */
 #login-page form .inputbox {
 	width: 120px;
-	margin-left: 10px;
+	margin-left: 5px;
 	margin-bottom: 15px;
 }
 #login-page input.inputbox, #login-page select.inputbox {
@@ -1014,6 +1014,11 @@ label {
 	font-size: 1.1em;
 }
 
+span.faux-label {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
 label.selectlabel {
 	position: absolute;
 	left: -1000em;
@@ -1184,8 +1189,28 @@ th.width-10 {
 	width: 10%;
 }
 
+th.width-12 {
+	width: 12%;
+}
+
+th.width-15 {
+	width: 15%;
+}
+
 th.width-20 {
 	width: 20%;
+}
+
+th.width-25 {
+	width: 25%;
+}
+
+th.width-30 {
+	width: 30%;
+}
+
+th.width-40 {
+	width: 40%;
 }
 
 	/* Table header layout classes */
@@ -1249,6 +1274,10 @@ table.adminlist {
 	border-spacing: 1px;
 	background-color: #ffffff;
 	color: #2c2c2c;
+}
+
+table.adminlist a {
+	color: #054993;
 }
 
 table.adminlist td, table.adminlist th {
@@ -1372,6 +1401,15 @@ table.adminlist td.indent-109 	{ padding-left:109px; }
 table.adminlist td.indent-124 	{ padding-left:124px; }
 table.adminlist td.indent-139 	{ padding-left:139px; }
 
+/**
+ * Modal Modules styles
+ */
+ul#new-modules-list {
+	margin-left: 50px;
+	list-style-type: bullet;
+	font-size: 1.4em;
+	line-height: 1.8em;
+}
 
 /**
  * Pagination styles
@@ -2363,6 +2401,10 @@ dl.menu_type dd ul li {
 /* dl.menu_type dd ul {
 	margin-left: -40px;
 } */
+
+body.contentpane #filter-bar {
+	font-size: 80%;
+}
 
 
 /**
