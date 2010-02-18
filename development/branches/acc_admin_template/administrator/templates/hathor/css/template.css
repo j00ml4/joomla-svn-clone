@@ -2505,12 +2505,28 @@ fieldset.adminform label, fieldset.panelform label {
 	margin-left: 10px;
 }
 
+
 fieldset.adminform input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img, 
 fieldset.panelform input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img {
 	float:left;
 	margin:5px 5px 5px 0;
 	width:auto;
-	
+}
+
+fieldset.batch label {
+	line-height: 2em;
+	float:left;
+	margin-right: 10px;
+}
+
+fieldset.batch input, fieldset.batch textarea, fieldset.batch select, fieldset.batch img {
+	float:left;
+	margin:5px 25px 5px 0;
+	width:auto;
+}
+
+fieldset.batch input[type="radio"] {
+	margin-right: 5px;
 }
 
 div#jform_ordering {

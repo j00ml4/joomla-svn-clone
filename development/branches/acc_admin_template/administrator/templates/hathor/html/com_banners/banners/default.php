@@ -15,40 +15,45 @@ JHtml::_('behavior.tooltip');
 JHtml::_('script', 'multiselect.js');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
+
+// Get additional language strings prefixed with TPL_HATHOR
+$lang =& JFactory::getLanguage();
+$lang->load('tpl_hathor', JPATH_ADMINISTRATOR); 
+
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=banners'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?>:</label>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Banners_Search_in_title'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
 			
 			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('Filter_State'); ?>
+				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label>
 			<select name="filter_state" id="filter_state" class="inputbox">
-				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true);?>
 			</select>
 			
 			<label class="selectlabel" for="filter_category_id">
-				<?php echo JText::_('Filter_Category'); ?>
+				<?php echo JText::_('JOPTION_SELECT_CATEGORY'); ?>
 			</label>
 			<select name="filter_category_id" id="filter_category_id" class="inputbox">
-				<option value=""><?php echo JText::_('JOption_Select_Category');?></option>
-				<option value="0"><?php echo JText::_('JOption_No_Category');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
+				<option value="0"><?php echo JText::_('JOPTION_NO_CATEGORY');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_banners'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 			
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('Banners_Select_Client'); ?>
+				<?php echo JText::_('BANNERS_SELECT_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value=""><?php echo JText::_('Banners_Select_Client');?></option>
+				<option value=""><?php echo JText::_('BANNERS_SELECT_CLIENT');?></option>
 				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 			
@@ -66,40 +71,40 @@ $userId	= $user->get('id');
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'Banners_Heading_Name', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'Banners_Heading_Client', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap state-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Published', 'state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_PUBLISHED', 'state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap title category-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Category', 'category_title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap ordering-col">
-					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Ordering', 'ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php if ($this->state->get('list.ordering')=='ordering'): ?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'banners.saveorder'); ?>
 					<?php endif;?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort', 'Banners_Heading_Sticky', 'sticky', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_STICKY', 'sticky', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort', 'Banners_Heading_Impressions', 'impmade', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_IMPRESSIONS', 'impmade', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'Banners_Heading_Clicks', 'clicks', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLICKS', 'clicks', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JText::_('Banners_Heading_MetaKeywords'); ?>
+					<?php echo JText::_('BANNERS_HEADING_METAKEYWORDS'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('Banners_Heading_PurchaseType'); ?>
+					<?php echo JText::_('BANNERS_HEADING_PURCHASETYPE'); ?>
 				</th>
 				<th class="nowrap id-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -154,7 +159,7 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('jgrid.published', $item->sticky, $i, 'banners.sticky_', $canChange);?>
 				</td>
 				<td class="center">
-					<?php echo JText::sprintf('Banners_Impressions', $item->impmade, $item->imptotal ? $item->imptotal : JText::_('Banners_Unlimited'));?>
+					<?php echo JText::sprintf('BANNERS_IMPRESSIONS', $item->impmade, $item->imptotal ? $item->imptotal : JText::_('BANNERS_UNLIMITED'));?>
 				</td>
 				<td class="center">
 					<?php echo $item->clicks;?> -
@@ -165,9 +170,9 @@ $userId	= $user->get('id');
 				</td>
 				<td class="center">
 					<?php if ($item->purchase_type<0):?>
-						<?php echo JText::sprintf('Banners_Default',($item->client_purchase_type>0) ? JText::_('Banners_'.$item->client_purchase_type) : JText::_('Banners_'.$this->params->get('purchase_type')));?>
+						<?php echo JText::sprintf('BANNERS_DEFAULT',($item->client_purchase_type>0) ? JText::_('BANNERS_'.$item->client_purchase_type) : JText::_('BANNERS_'.$this->params->get('purchase_type')));?>
 					<?php else:?>
-						<?php echo JText::_('Banners_'.$item->purchase_type);?>
+						<?php echo JText::_('BANNERS_'.$item->purchase_type);?>
 					<?php endif;?>
 				</td>
 				<td class="center">

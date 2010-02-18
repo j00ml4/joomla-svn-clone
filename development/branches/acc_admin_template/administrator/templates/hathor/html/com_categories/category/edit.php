@@ -36,7 +36,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="col main-section">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Categories_Fieldset_Details');?></legend>
+			<legend><?php echo JText::_('CATEGORIES_FIELDSET_DETAILS');?></legend>
 				<div>
 					<?php echo $this->form->getLabel('title'); ?>
 					<?php echo $this->form->getInput('title'); ?>
@@ -75,17 +75,17 @@ JHtml::_('behavior.formvalidation');
 	</div>
 
 	<div class="col options-section">
-	<?php // echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-<!--  new stuff here -->
-	<?php if (in_array('params', $this->form->getGroups())) : ?>
 
-			<?php echo JHTML::_('sliders.start'); ?>
-			
+		<?php echo JHTML::_('sliders.start'); ?>
+		
+	<?php if(in_array('params', $this->form->getGroups())) : ?>
+		
 			<?php $groups = $this->form->getGroups('params');
 			$fieldsets = $this->form->getFieldsets();
 			array_unshift($groups, 'params'); ?>
 			
 			<?php foreach($groups as $group) : ?>
+			
 				<?php echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group); ?>
 				
 				<fieldset class="panelform">
@@ -102,13 +102,20 @@ JHtml::_('behavior.formvalidation');
 				</fieldset>
 				
 			<?php endforeach; ?>
-			<?php echo JHTML::_('sliders.end'); ?>
+			
 		<?php endif; ?>
 		
-		<?php echo JHtml::_('sliders.panel',JText::_('Categories_Fieldset_Metadata'), 'meta-options'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
 		<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('Categories_Fieldset_Metadata'); ?></legend>
+			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
 			<?php echo $this->loadTemplate('metadata'); ?>
+		</fieldset>
+		
+		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'access-rules'); ?>
+		<fieldset class="panelform">
+			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
+			<?php // echo $this->form->getLabel('rules'); ?>
+			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 		
 		<?php echo JHtml::_('sliders.end'); ?>	
