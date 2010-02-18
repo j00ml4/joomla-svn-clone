@@ -46,7 +46,7 @@ $user	= JFactory::getUser();
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('Checkmark_All'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
+					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'Messages_Heading_Subject', 'a.subject', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>

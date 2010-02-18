@@ -80,8 +80,8 @@ $app	= &JFactory::getApplication();
 		
 		<!-- Site Title and Skip to Content -->
 		<div class="title-ua">		
-			<h1 class="title"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename'). " " . JText::_('Administration') : JText::_('Administration') ; ?></h1>
-			<div id="skiplinkholder"><p><a id="skiplink" href="#skiptarget"><?php echo JText::_('Skip_to_Main_Content'); ?></a></p></div>
+			<h1 class="title"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename'). " " . JText::_('ADMINISTRATION') : JText::_('ADMINISTRATION') ; ?></h1>
+			<div id="skiplinkholder"><p><a id="skiplink" href="#skiptarget"><?php echo JText::_('TPL_HATHOR_SKIP_TO_MAIN_CONTENT'); ?></a></p></div>
 		</div>
 		
 		<!-- Status Module -->	
@@ -94,7 +94,7 @@ $app	= &JFactory::getApplication();
 	<!-- Main Menu Navigation -->
 	<div id="nav">
 		<div id="module-menu">
-			<h2 class="element-invisible"><?php echo JText::_('Main_Menu'); ?></h2>
+			<h2 class="element-invisible"><?php echo JText::_('TPL_HATHOR_MAIN_MENU'); ?></h2>
 			<jdoc:include type="modules" name="menu"/>
 		</div>
 		<div class="clr"></div>
@@ -112,7 +112,7 @@ $app	= &JFactory::getApplication();
 		<!-- Sub Menu Navigation -->		
 		<div class="subheader">
 			<?php if (!JRequest::getInt('hidemainmenu')): ?>
-				<h3 class="element-invisible"><?php echo JText::_('Sub_Menu'); ?></h3>
+				<h3 class="element-invisible"><?php echo JText::_('TPL_HATHOR_SUB_MENU'); ?></h3>
 				<jdoc:include type="modules" name="submenu" style="xhtmlid" id="submenu-box" />
 			<?php echo " " ?>
 			<?php else : ?>
@@ -152,7 +152,7 @@ $app	= &JFactory::getApplication();
 	<p class="copyright">
 		<a href="http://www.joomla.org" target="_blank">Joomla!</a>
 		<?php echo  JText::_('ISFREESOFTWARE') ?>
-		<span class="version"><?php echo  JText::_('Version') ?> <?php echo  JVERSION; ?></span>
+		<span class="version"><?php echo  JText::_('VERSION') ?> <?php echo  JVERSION; ?></span>
 	</p>
 </div>
 	

@@ -1402,6 +1402,23 @@ table.adminlist td.indent-124 	{ padding-left:124px; }
 table.adminlist td.indent-139 	{ padding-left:139px; }
 
 /**
+ * Adminlist buttons
+ */
+table.adminlist tr td.btns a {
+	border: 1px solid #c7c8b2;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: #ffffff;
+	color: #2c2c2c;
+	padding: 3px 20px;
+}
+
+table.adminlist tr td.btns a:hover, table.adminlist tr td.btns a:active, table.adminlist tr td.btns a:focus {
+	background-color: #f9fade; 
+	text-decoration: none;
+}
+
+/**
  * Modal Modules styles
  */
 ul#new-modules-list {

@@ -63,7 +63,7 @@ $userId	= $user->get('id');
 					<?php echo JText::_('JGrid_Heading_Row_Number'); ?>
 				</th>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('Checkmark_All'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
+					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'Contact_Title_Heading', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
