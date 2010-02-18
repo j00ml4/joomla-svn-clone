@@ -495,6 +495,24 @@ table.adminlist tfoot td,table.adminlist tfoot th {
 }
 
 /**
+ * Adminlist buttons
+ */
+table.adminlist tr td.btns a {
+	background-color: #1b3f7c;
+	border: 1px solid #10254a;
+	color: #fcff20; 
+}
+
+table.adminlist tr td.btns a:hover, table.adminlist tr td.btns a:active, table.adminlist tr td.btns a:focus {
+	background-color: #163365;
+	border-top: 1px solid #000000;
+	border-right: 1px solid #1b3f7c;
+	border-bottom: 1px solid #1b3f7c;
+	border-left: 1px solid #000000;
+	color: #fcff20; 
+}
+
+/**
  * Pagination styles
  */
 
