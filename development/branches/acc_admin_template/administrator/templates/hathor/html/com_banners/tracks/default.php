@@ -32,7 +32,7 @@ $userId	= $user->get('id');
 			<label class="selectlabel" for="filter_type">
 				<?php echo JText::_('Filter_Category'); ?>
 			</label>
-			<select name="filter_type" id="filter_type" class="inputbox" 
+			<select name="filter_type" id="filter_type" class="inputbox">
 				<?php echo JHtml::_('select.options', array(JHtml::_('select.option', '0', JText::_('Banners_Select_Type')), JHtml::_('select.option', 1, JText::_('Banners_Impression')), JHtml::_('select.option', 2, JText::_('Banners_Click'))), 'value', 'text', $this->state->get('filter.type'));?>
 			</select>
 
