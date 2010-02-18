@@ -172,7 +172,7 @@ class JForm
 		// Convert objects to arrays.
 		if (is_object($data)) {
 			if ($data instanceof JRegistry) {
-				// Handle a JRegistry/JParameter object.
+				// Handle a JRegistry object.
 				$data = $data->toArray();
 			} else if ($data instanceof JObject) {
 				// Handle a JObject.
