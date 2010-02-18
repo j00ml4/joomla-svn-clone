@@ -17,30 +17,30 @@ JHtml::_('behavior.tooltip');
 
 <form action="<?php echo JRoute::_('index.php?option=com_comments&view=comments');?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?></label>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Comments_Search_in_name'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('Filter_State'); ?>
+				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label> 
 			<select name="filter_state" id="filter_state" class="inputbox">
 				<?php echo JHtml::_('comments.commentStateOptions', $this->state->get('filter.state')); ?>
 			</select>
 			
 			<label class="selectlabel" for="filter_context">
-				<?php echo JText::_('Filter_Context'); ?>
+				<?php echo JText::_('FILTER_CONTEXT'); ?>
 			</label>
 			<select name="filter_context" id="filter_context" class="inputbox">
 				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
 			</select>
 			
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('Go'); ?></button>
+				<?php echo JText::_('GO'); ?></button>
 			
 		</div>
 	</fieldset>

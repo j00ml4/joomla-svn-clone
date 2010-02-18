@@ -10,20 +10,20 @@
 defined('_JEXEC') or die;
 ?>
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('Langs_Desc_FTP_Title'); ?></legend>
+		<legend><?php echo JText::_('COM_LANGS_FTP_TITLE'); ?></legend>
 
-		<?php echo JText::_('Langs_Desc_FTP'); ?>
+		<?php echo JText::_('COM_LANGS_FTP_DESC'); ?>
 
 		<?php if (JError::isError($ftp)): ?>
 			<p class="warning"><?php echo JText::_($ftp->message); ?></p>
 		<?php endif; ?>
 		
 		<div>
-			<label for="username"><?php echo JText::_('Langs_Username'); ?>:</label>
+			<label for="username"><?php echo JText::_('COM_LANGS_USERNAME'); ?>:</label>
 			<input type="text" id="username" name="username" class="inputbox" value="" />
 		</div>
 		<div>
-			<label for="password"><?php echo JText::_('Langs_Password'); ?>:</label>
+			<label for="password"><?php echo JText::_('COM_LANGS_PASSWORD'); ?>:</label>
 			<input type="password" id="password" name="password" class="inputbox" value="" />
 		</div>
 	</fieldset>
