@@ -109,6 +109,46 @@ class JForm
 		$this->options['control']  = isset($options['control']) ? $options['control'] : false;
 	}
 
+	public function addField()
+	{
+
+	}
+
+	public function addFields()
+	{
+
+	}
+
+	public function getFieldAttribute()
+	{
+
+	}
+
+	public function setField()
+	{
+
+	}
+
+	public function setFields()
+	{
+
+	}
+
+	public function setFieldAttribute()
+	{
+
+	}
+
+	public function removeGroup()
+	{
+
+	}
+
+	public function removeField()
+	{
+
+	}
+
 	/**
 	 * Method to bind data to the form.
 	 *
@@ -242,258 +282,85 @@ class JForm
 	}
 
 	/**
-	 * Method to get the form control. This string serves as a container for all form fields. For
-	 * example, if there is a field named 'foo' and a field named 'bar' and the form control is
-	 * empty the fields will be rendered like: <input name="foo" /> and <input name="bar" />.  If
-	 * the form control is set to 'joomla' however, the fields would be rendered like:
-	 * <input name="joomla[foo]" /> and <input name="joomla[bar]" />.
+	 * Method to get a form field represented as a JFormField object.
 	 *
-	 * @return	string	The form control string.
+	 * @param	string	$name	The name of the form field.
+	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$value	The optional value to use as the default for the field.
+	 *
+	 * @return	mixed	The JFormField object for the field or boolean false on error.
 	 * @since	1.6
 	 */
-	public function getFormControl()
+	public function getField($name, $group = null, $value = null)
 	{
-		return (string) $this->options['control'];
-	}
-
-	/**
-	 * Method to get the form name.
-	 *
-	 * @return	string	The name of the form.
-	 * @since	1.6
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	/**
-	 * Method to load the form description from an XML string or object.
-	 *
-	 * The reset option works on a group basis. If the XML references groups
-	 * that have already been created they will be replaced with the fields
-	 * in the new XML unless the $reset parameter has been set to false.
-	 *
-	 * @param	string	$data	The name of an XML string or object.
-	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
-	 *
-	 * @return	boolean	True on success, false otherwise.
-	 * @since	1.6
-	 */
-	public function load($data, $reset = true)
-	{
-		// If the data to load isn't already an XML element or string return false.
-		if ((!$data instanceof JXMLElement) && (!is_string($data))) {
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
 			return false;
 		}
 
-		// Attempt to load the XML if a string.
-		if (is_string($data)) {
-			$data = JFactory::getXML($data, false);
+		// Attempt to find the field by name and group.
+		$element = $this->findField($name, $group);
 
-			// Make sure the XML loaded correctly.
-			if (!$data) {
-				return false;
-			}
-		}
-
-		// Verify that the XML document is designed for JForm.
-		if ($data->getName() != 'form') {
+		// If the field element was not found return false.
+		if (!$element) {
 			return false;
 		}
 
-		if (count($data->fields) !== 1) {
-			return false;
-		}
-
-		// Handle the easy cases first.
-		if (empty($this->xml) || $reset) {
-			$this->xml = $data;
-			return true;
-		}
-
-		// Merge the new fields into the existing XML document.
-		self::mergeNodes($this->xml->fields, $data->fields);
-
-		return true;
+		return $this->loadField($element, $group, $value);
 	}
 
 	/**
-	 * Merges new elements into a source <fields> element.
+	 * Method to get an array of JFormField objects in a given fieldset by name.  If no name is
+	 * given then all fields are returned.
 	 *
-	 * @param	SimpleXMLElement	The source element.
-	 * @param	SimpleXMLElement	The new element to merge.
+	 * @param	string	$set	The optional name of the fieldset.
 	 *
-	 * @return	void
+	 * @return	array	The array of JFormField objects in the fieldset.
 	 * @since	1.6
 	 */
-	protected static function mergeNodes(SimpleXMLElement $source, SimpleXMLElement $new)
+	public function getFieldset($set = null)
 	{
-		// The assumption is that the inputs are at the same relative level.
-		// So we just have to scan the children and deal with them.
+		// Initialize variables.
+		$fields = array();
 
-		// Update the attributes of the child node.
-		foreach ($new->attributes() as $name => $value) {
-			if (isset($source[$name])) {
-				$source[$name] = (string) $value;
-			} else {
-				$source->addAttribute($name, $value);
-			}
+		// Get all of the field elements in the fieldset.
+		if ($set) {
+			$elements = $this->getFieldsByFieldset($set);
 		}
-
-		foreach ($new->children() as $child) {
-			$type = $child->getName();
-			$name = $child['name'];
-
-			// Does this node exist?
-			$fields = $source->xpath($type.'[@name="'.$name.'"]');
-
-			if (empty($fields)) {
-				// This node does not exist, so add it.
-				self::addNode($source, $child);
-			} else {
-				// This node does exist.
-				switch ($type) {
-					case 'field':
-						self::mergeNode($fields[0], $child);
-						break;
-
-					default:
-						self::mergeNodes($fields[0], $child);
-						break;
-				}
-			}
-		}
-	}
-
-	protected static function mergeNode(SimpleXMLElement $source, SimpleXMLElement $new)
-	{
-		// Update the attributes of the child node.
-		foreach ($new->attributes() as $name => $value) {
-			if (isset($source[$name])) {
-				$source[$name] = (string) $value;
-			} else {
-				$source->addAttribute($name, $value);
-			}
-		}
-
-		// What to do with child elements?
-	}
-
-	/**
-	 * Adds a new child SimpleXMLElement node to the source.
-	 *
-	 * @param	SimpleXMLElement	The source element on which to append.
-	 * @param	SimpleXMLElement	The new element to append.
-	 */
-	protected static function addNode(SimpleXMLElement $source, SimpleXMLElement $new)
-	{
-		// Add the new child node.
-		$node = $source->addChild($new->getName(), trim($new));
-
-		// Add the attributes of the child node.
-		foreach ($new->attributes() as $name => $value) {
-			$node->addAttribute($name, $value);
-		}
-
-		// Add any children of the new node.
-		foreach ($new->children() as $child) {
-			self::addNode($node, $child);
-		}
-	}
-
-	/**
-	 * Method to load the form description from an XML file.
-	 *
-	 * The reset option works on a group basis. If the XML file references
-	 * groups that have already been created they will be replaced with the
-	 * fields in the new XML file unless the $reset parameter has been set
-	 * to false.
-	 *
-	 * @param	string	$file	The filesystem path of an XML file.
-	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
-	 *
-	 * @return	boolean	True on success, false otherwise.
-	 * @since	1.6
-	 */
-	public function loadFile($file, $reset = true)
-	{
-		// Check to see if the path is an absolute path.
-		if (!is_file($file)) {
-
-			// Not an absolute path so let's attempt to find one using JPath.
-			$file = JPath::find(self::addFormPath(), strtolower($file).'.xml');
-
-			// If unable to find the file return false.
-			if (!$file) {
-				return false;
-			}
-		}
-
-		// Attempt to load the XML file.
-		$xml = JFactory::getXML($file, true);
-
-		return $this->load($xml);
-	}
-
-	/**
-	 * Method to get the value of a field.
-	 *
-	 * @param	string	$name		The name of the field for which to get the value.
-	 * @param	string	$group		The group the field is in if any.
-	 * @param	mixed	$default	The optional default value of the field value is empty.
-	 *
-	 * @return	mixed	The value of the field or the default value if empty.
-	 * @since	1.6
-	 */
-	public function getValue($name, $group = null, $default = null)
-	{
-		// Initialize the return value to the default.
-		$return = $default;
-
-		if ($group) {
-			// If the value exists for the field name in the group use it.
-			if (isset($this->data[$group][$name])) {
-				$return = $this->data[$group][$name];
-			}
-		}
+		// Get all fields.
 		else {
-			// If the value exists for the field name use it.
-			if (isset($this->data[$name])) {
-				$return = $this->data[$name];
+			$elements = $this->getFieldsByGroup();
+		}
+
+		// If no field elements were found return empty.
+		if (empty($elements)) {
+			return $fields;
+		}
+
+		// Build the result array from the found field elements.
+		foreach ($elements as $element) {
+			// Initialize variables.
+			$groups = array();
+			$group = null;
+
+			// Get the field groups for the element.
+			$names = $element->xpath('ancestor::fields[@name]/@name');
+
+			// Build the group for the element.
+			foreach ($names as $name) {
+				$groups[] = (string) $name;
+			}
+
+			// Use only one level of group depth for now.
+			$group = $groups[0];
+
+			// If the field is successfully loaded add it to the result array.
+			if ($field = $this->loadField($element, $group)) {
+				$fields[$field->id] = $field;
 			}
 		}
 
-		return $return;
-	}
-
-	/**
-	 * Method to set the value of a field. If the field does not exist in the form then the method
-	 * will return false.
-	 *
-	 * @param	string	$name	The name of the field for which to set the value.
-	 * @param	string	$group	The group the field is in if any.
-	 * @param	mixed	$value	The value to set for the field.
-	 *
-	 * @return	boolean	True on success.
-	 * @since	1.6
-	 */
-	public function setValue($name, $group = null, $value = null)
-	{
-		// If the field does not exist return false.
-		if (!$this->findField($name, $group)) {
-			return false;
-		}
-
-		// If a group is set use it.
-		if ($group) {
-			$this->data[$group][$name] = $value;
-		}
-		else {
-			$this->data[$name] = $value;
-		}
-
-		return true;
+		return $fields;
 	}
 
 	/**
@@ -584,57 +451,18 @@ class JForm
 	}
 
 	/**
-	 * Method to get an array of JFormField objects in a given fieldset by name.  If no name is
-	 * given then all fields are returned.
+	 * Method to get the form control. This string serves as a container for all form fields. For
+	 * example, if there is a field named 'foo' and a field named 'bar' and the form control is
+	 * empty the fields will be rendered like: <input name="foo" /> and <input name="bar" />.  If
+	 * the form control is set to 'joomla' however, the fields would be rendered like:
+	 * <input name="joomla[foo]" /> and <input name="joomla[bar]" />.
 	 *
-	 * @param	string	$set	The optional name of the fieldset.
-	 *
-	 * @return	array	The array of JFormField objects in the fieldset.
+	 * @return	string	The form control string.
 	 * @since	1.6
 	 */
-	public function getFieldset($set = null)
+	public function getFormControl()
 	{
-		// Initialize variables.
-		$fields = array();
-
-		// Get all of the field elements in the fieldset.
-		if ($set) {
-			$elements = $this->getFieldsByFieldset($set);
-		}
-		// Get all fields.
-		else {
-			$elements = $this->getFieldsByGroup();
-		}
-
-		// If no field elements were found return empty.
-		if (empty($elements)) {
-			return $fields;
-		}
-
-		// Build the result array from the found field elements.
-		foreach ($elements as $element) {
-			// Initialize variables.
-			$groups = array();
-			$group = null;
-
-			// Get the field groups for the element.
-			$names = $element->xpath('ancestor::fields[@name]/@name');
-
-			// Build the group for the element.
-			foreach ($names as $name) {
-				$groups[] = (string) $name;
-			}
-
-			// Use only one level of group depth for now.
-			$group = $groups[0];
-
-			// If the field is successfully loaded add it to the result array.
-			if ($field = $this->loadField($element, $group)) {
-				$fields[$field->id] = $field;
-			}
-		}
-
-		return $fields;
+		return (string) $this->options['control'];
 	}
 
 	/**
@@ -709,31 +537,159 @@ class JForm
 	}
 
 	/**
-	 * Method to get a form field represented as a JFormField object.
+	 * Method to get the form name.
 	 *
-	 * @param	string	$name	The name of the form field.
-	 * @param	string	$group	The optional form field group in which to find the field.
-	 * @param	mixed	$value	The optional value to use as the default for the field.
-	 *
-	 * @return	mixed	The JFormField object for the field or boolean false on error.
+	 * @return	string	The name of the form.
 	 * @since	1.6
 	 */
-	public function getField($name, $group = null, $value = null)
+	public function getName()
 	{
-		// Make sure there is a valid JForm XML document.
-		if (!$this->xml instanceof JXMLElement) {
+		return $this->name;
+	}
+
+	/**
+	 * Method to get the value of a field.
+	 *
+	 * @param	string	$name		The name of the field for which to get the value.
+	 * @param	string	$group		The group the field is in if any.
+	 * @param	mixed	$default	The optional default value of the field value is empty.
+	 *
+	 * @return	mixed	The value of the field or the default value if empty.
+	 * @since	1.6
+	 */
+	public function getValue($name, $group = null, $default = null)
+	{
+		// Initialize the return value to the default.
+		$return = $default;
+
+		if ($group) {
+			// If the value exists for the field name in the group use it.
+			if (isset($this->data[$group][$name])) {
+				$return = $this->data[$group][$name];
+			}
+		}
+		else {
+			// If the value exists for the field name use it.
+			if (isset($this->data[$name])) {
+				$return = $this->data[$name];
+			}
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Method to load the form description from an XML string or object.
+	 *
+	 * The reset option works on a group basis. If the XML references groups
+	 * that have already been created they will be replaced with the fields
+	 * in the new XML unless the $reset parameter has been set to false.
+	 *
+	 * @param	string	$data	The name of an XML string or object.
+	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
+	 *
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	1.6
+	 */
+	public function load($data, $reset = true)
+	{
+		// If the data to load isn't already an XML element or string return false.
+		if ((!$data instanceof JXMLElement) && (!is_string($data))) {
 			return false;
 		}
 
-		// Attempt to find the field by name and group.
-		$element = $this->findField($name, $group);
+		// Attempt to load the XML if a string.
+		if (is_string($data)) {
+			$data = JFactory::getXML($data, false);
 
-		// If the field element was not found return false.
-		if (!$element) {
+			// Make sure the XML loaded correctly.
+			if (!$data) {
+				return false;
+			}
+		}
+
+		// Verify that the XML document is designed for JForm.
+		if ($data->getName() != 'form') {
 			return false;
 		}
 
-		return $this->loadField($element, $group, $value);
+		if (count($data->fields) !== 1) {
+			return false;
+		}
+
+		// Handle the easy cases first.
+		if (empty($this->xml) || $reset) {
+			$this->xml = $data;
+			return true;
+		}
+
+		// Merge the new fields into the existing XML document.
+		self::mergeNodes($this->xml->fields, $data->fields);
+
+		return true;
+	}
+
+	/**
+	 * Method to load the form description from an XML file.
+	 *
+	 * The reset option works on a group basis. If the XML file references
+	 * groups that have already been created they will be replaced with the
+	 * fields in the new XML file unless the $reset parameter has been set
+	 * to false.
+	 *
+	 * @param	string	$file	The filesystem path of an XML file.
+	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
+	 *
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	1.6
+	 */
+	public function loadFile($file, $reset = true)
+	{
+		// Check to see if the path is an absolute path.
+		if (!is_file($file)) {
+
+			// Not an absolute path so let's attempt to find one using JPath.
+			$file = JPath::find(self::addFormPath(), strtolower($file).'.xml');
+
+			// If unable to find the file return false.
+			if (!$file) {
+				return false;
+			}
+		}
+
+		// Attempt to load the XML file.
+		$xml = JFactory::getXML($file, true);
+
+		return $this->load($xml);
+	}
+
+	/**
+	 * Method to set the value of a field. If the field does not exist in the form then the method
+	 * will return false.
+	 *
+	 * @param	string	$name	The name of the field for which to set the value.
+	 * @param	string	$group	The group the field is in if any.
+	 * @param	mixed	$value	The value to set for the field.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function setValue($name, $group = null, $value = null)
+	{
+		// If the field does not exist return false.
+		if (!$this->findField($name, $group)) {
+			return false;
+		}
+
+		// If a group is set use it.
+		if ($group) {
+			$this->data[$group][$name] = $value;
+		}
+		else {
+			$this->data[$name] = $value;
+		}
+
+		return true;
 	}
 
 	/**
@@ -1364,5 +1320,89 @@ class JForm
 		}
 
 		return self::$paths['rules'];
+	}
+
+	/**
+	 * Adds a new child SimpleXMLElement node to the source.
+	 *
+	 * @param	SimpleXMLElement	The source element on which to append.
+	 * @param	SimpleXMLElement	The new element to append.
+	 */
+	protected static function addNode(SimpleXMLElement $source, SimpleXMLElement $new)
+	{
+		// Add the new child node.
+		$node = $source->addChild($new->getName(), trim($new));
+
+		// Add the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			$node->addAttribute($name, $value);
+		}
+
+		// Add any children of the new node.
+		foreach ($new->children() as $child) {
+			self::addNode($node, $child);
+		}
+	}
+
+	protected static function mergeNode(SimpleXMLElement $source, SimpleXMLElement $new)
+	{
+		// Update the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			if (isset($source[$name])) {
+				$source[$name] = (string) $value;
+			} else {
+				$source->addAttribute($name, $value);
+			}
+		}
+
+		// What to do with child elements?
+	}
+
+	/**
+	 * Merges new elements into a source <fields> element.
+	 *
+	 * @param	SimpleXMLElement	The source element.
+	 * @param	SimpleXMLElement	The new element to merge.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected static function mergeNodes(SimpleXMLElement $source, SimpleXMLElement $new)
+	{
+		// The assumption is that the inputs are at the same relative level.
+		// So we just have to scan the children and deal with them.
+
+		// Update the attributes of the child node.
+		foreach ($new->attributes() as $name => $value) {
+			if (isset($source[$name])) {
+				$source[$name] = (string) $value;
+			} else {
+				$source->addAttribute($name, $value);
+			}
+		}
+
+		foreach ($new->children() as $child) {
+			$type = $child->getName();
+			$name = $child['name'];
+
+			// Does this node exist?
+			$fields = $source->xpath($type.'[@name="'.$name.'"]');
+
+			if (empty($fields)) {
+				// This node does not exist, so add it.
+				self::addNode($source, $child);
+			} else {
+				// This node does exist.
+				switch ($type) {
+					case 'field':
+						self::mergeNode($fields[0], $child);
+						break;
+
+					default:
+						self::mergeNodes($fields[0], $child);
+						break;
+				}
+			}
+		}
 	}
 }
