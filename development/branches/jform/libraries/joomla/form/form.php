@@ -227,7 +227,7 @@ class JForm
 		$filtered	= array();
 
 		// Get the fields for which to filter the data.
-		$fields = $this->getFieldsByGroup($group);
+		$fields = $this->findFieldsByGroup($group);
 		if (!$fields) {
 			// PANIC!
 			return false;
@@ -325,11 +325,11 @@ class JForm
 
 		// Get all of the field elements in the fieldset.
 		if ($set) {
-			$elements = $this->getFieldsByFieldset($set);
+			$elements = $this->findFieldsByFieldset($set);
 		}
 		// Get all fields.
 		else {
-			$elements = $this->getFieldsByGroup();
+			$elements = $this->findFieldsByGroup();
 		}
 
 		// If no field elements were found return empty.
@@ -479,7 +479,7 @@ class JForm
 		$fields = array();
 
 		// Get all of the field elements in the fieldset.
-		$elements = $this->getFieldsByGroup($group);
+		$elements = $this->findFieldsByGroup($group);
 
 		// If no field elements were found return empty.
 		if (empty($elements)) {
@@ -716,7 +716,7 @@ class JForm
 		$return	= true;
 
 		// Get the fields for which to validate the data.
-		$fields = $this->getFieldsByGroup($group);
+		$fields = $this->findFieldsByGroup($group);
 		if (!$fields) {
 			// PANIC!
 			return false;
@@ -942,7 +942,7 @@ class JForm
 	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
 	 * @since	1.6
 	 */
-	protected function getFieldsByFieldset($name)
+	protected function findFieldsByFieldset($name)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -968,7 +968,7 @@ class JForm
 	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
 	 * @since	1.6
 	 */
-	protected function getFieldsByGroup($name = null)
+	protected function findFieldsByGroup($name = null)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
