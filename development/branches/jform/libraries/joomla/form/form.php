@@ -15,10 +15,9 @@ jimport('joomla.form.formfield');
 /**
  * Form Class for the Joomla Framework.
  *
- * This class implements a robust API for constructing, populating,
- * filtering, and validating forms. It uses XML definitions to
- * construct form fields and a variety of field and rule classes
- * to render and validate the form.
+ * This class implements a robust API for constructing, populating, filtering, and validating forms.
+ * It uses XML definitions to construct form fields and a variety of field and rule classes to
+ * render and validate the form.
  *
  * @package		Joomla.Framework
  * @subpackage	Form
@@ -109,43 +108,145 @@ class JForm
 		$this->options['control']  = isset($options['control']) ? $options['control'] : false;
 	}
 
-	public function addField()
+	/**
+	 * Method to get an attribute value from a field XML element.  If the attribute doesn't exist or
+	 * is null then the optional default value will be used.
+	 *
+	 * @param	string	$name		The name of the form field for which to get the attribute value.
+	 * @param	string	$attribute	The name of the attribute for which to get a value.
+	 * @param	mixed	$default	The default value to use if no attribute value exists.
+	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
+	 * 								(array) of group names in order under which to find the field.
+	 *
+	 * @return	mixed	The attribute value for the field.
+	 * @since	1.6
+	 */
+	public function getFieldAttribute($name, $attribute, $default = null, $group = null)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
 
 	}
 
-	public function addFields()
+	/**
+	 * Method to set a field XML element to the form definition.  If the replace flag is set then
+	 * the field will be set whether it already exists or not.  If it isn't set, then the field
+	 * will not be replaced if it already exists.
+	 *
+	 * @param	object	$element	The XML element object representation of the form field.
+	 * @param	mixed	$group		The (string) name of the group for which to set the field or an
+	 * 								(array) of group names in order under which to set the field.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function setField(& $element, $group = null, $replace = true)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
+
+		// Make sure the element to set is valid.
+		if (!$element instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
 
 	}
 
-	public function getFieldAttribute()
+	/**
+	 * Method to set an attribute value for a field XML element.
+	 *
+	 * @param	string	$name		The name of the form field for which to set the attribute value.
+	 * @param	string	$attribute	The name of the attribute for which to set a value.
+	 * @param	mixed	$value		The value to set for the attribute.
+	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
+	 * 								(array) of group names in order under which to find the field.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function setFieldAttribute($name, $attribute, $value, $group = null)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
 
 	}
 
-	public function setField()
+	/**
+	 * Method to set some field XML elements to the form definition.  If the replace flag is set then
+	 * the fields will be set whether they already exists or not.  If it isn't set, then the fields
+	 * will not be replaced if they already exist.
+	 *
+	 * @param	object	$elements	The array of XML element object representations of the form fields.
+	 * @param	mixed	$group		The (string) name of the group for which to set the fields or an
+	 * 								(array) of group names in order under which to set the fields.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function setFields(& $elements, $group = null)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
+
+		// Make sure the elements to set are valid.
+		foreach ($elements as $element) {
+			if (!$element instanceof JXMLElement) {
+				// TODO: throw exception.
+				return false;
+			}
+		}
 
 	}
 
-	public function setFields()
+	/**
+	 * Method to remove a field from the form definition.
+	 *
+	 * @param	string	$name		The name of the form field for which remove.
+	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
+	 * 								(array) of group names in order under which to find the field.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function removeField($name, $group = null)
 	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
 
 	}
 
-	public function setFieldAttribute()
+	/**
+	 * Method to remove a group from the form definition.
+	 *
+	 * @param	mixed	$group	The (string) name of the group for which to remove or an (array) of
+	 * 							group names in order under which to remove.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function removeGroup($group)
 	{
-
-	}
-
-	public function removeGroup()
-	{
-
-	}
-
-	public function removeField()
-	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			// TODO: throw exception.
+			return false;
+		}
 
 	}
 
