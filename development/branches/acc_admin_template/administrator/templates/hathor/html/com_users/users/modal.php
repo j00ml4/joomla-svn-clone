@@ -20,7 +20,7 @@ $function = 'jSelectUser_'.JRequest::getVar('field');
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter'); ?>:</label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Users_Search_in_name'); ?>" />
 			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label for="filter_group_id">
