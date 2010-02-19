@@ -78,7 +78,7 @@ class JFormFieldCalendar extends JFormField
 				if (intval($this->value)) {
 					// Get a date object based on the correct timezone.
 					$date = JFactory::getDate($this->value, 'UTC');
-					$date->setOffset($config->getValue('config.offset'));
+					$date->setOffset($config->get('offset'));
 
 					// Transform the date string.
 					$this->value = $date->toMySQL(true);
@@ -90,7 +90,7 @@ class JFormFieldCalendar extends JFormField
 				if (intval($this->value)) {
 					// Get a date object based on the correct timezone.
 					$date = JFactory::getDate($this->value, 'UTC');
-					$date->setOffset($user->getParam('timezone', $config->getValue('config.offset')));
+					$date->setOffset($user->getParam('timezone', $config->get('offset')));
 
 					// Transform the date string.
 					$this->value = $date->toMySQL(true);
