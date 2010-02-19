@@ -1028,13 +1028,14 @@ class JForm
 	 */
 	protected function & findField($name, $group = null)
 	{
+		// Initialize variables.
+		$false		= false;
+		$element	= false;
+
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
-			return false;
+			return $false;
 		}
-
-		// Initialize variables.
-		$element = false;
 
 		// Let's get the appropriate field element based on the method arguments.
 		if ($group) {
@@ -1043,7 +1044,7 @@ class JForm
 
 			// Make sure something was found.
 			if (!$fields) {
-				return false;
+				return $false;
 			}
 
 			// Assume the first one is the right one.
@@ -1055,7 +1056,7 @@ class JForm
 
 			// Make sure something was found.
 			if (!$fields) {
-				return false;
+				return $false;
 			}
 
 			// Search through the fields for the right one.
@@ -1086,9 +1087,12 @@ class JForm
 	 */
 	protected function & findFieldsByFieldset($name)
 	{
+		// Initialize variables.
+		$false = false;
+
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
-			return false;
+			return $false;
 		}
 
 		/*
@@ -1112,9 +1116,12 @@ class JForm
 	 */
 	protected function & findFieldsByGroup($name = null)
 	{
+		// Initialize variables.
+		$false = false;
+
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
-			return false;
+			return $false;
 		}
 
 		// Get only fields in a specific group?
@@ -1122,7 +1129,7 @@ class JForm
 			// Check to see if the group does not exist.
 			if ($this->xml->xpath('//fields[@name="'.$name.'"]')) {
 				JError::raiseWarning(0, JText::sprintf('LIB_FORM_VALIDATE_GROUP_NOT_FOUND', $name));
-				return false;
+				return $false;
 			}
 
 			/*
@@ -1150,9 +1157,17 @@ class JForm
 	 */
 	protected function & findGroup($group)
 	{
+		// Initialize variables.
+		$false = false;
+
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
-			return false;
+			return $false;
+		}
+
+
+		// Check to see if the group does not exist.
+		if ($this->xml->xpath('//fields[@name="'.$name.'"]')) {
 		}
 
 	}
