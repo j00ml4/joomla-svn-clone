@@ -1140,6 +1140,24 @@ class JForm
 	}
 
 	/**
+	 * Method to get a form field group represented as an XML element object.
+	 *
+	 * @param	mixed	$group	The (string) name of the group to find or an (array) of group names
+	 * 							in order from the root node to find the group.
+	 *
+	 * @return	mixed	The XML element object for the group or boolean false on error.
+	 * @since	1.6
+	 */
+	protected function & findGroup($group)
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+	}
+
+	/**
 	 * Method to load, setup and return a JFormField object based on field data.
 	 *
 	 * @param	string	$element	The XML element object representation of the form field.
