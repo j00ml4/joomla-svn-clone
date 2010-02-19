@@ -160,12 +160,12 @@ class ConfigModelApplication extends JModelForm
 
 		// Overwrite the old FTP credentials with the new ones.
 		$temp = JFactory::getConfig();
-		$temp->setValue('config.ftp_enable', $data['ftp_enable']);
-		$temp->setValue('config.ftp_host', $data['ftp_host']);
-		$temp->setValue('config.ftp_port', $data['ftp_port']);
-		$temp->setValue('config.ftp_user', $data['ftp_user']);
-		$temp->setValue('config.ftp_pass', $data['ftp_pass']);
-		$temp->setValue('config.ftp_root', $data['ftp_root']);
+		$temp->set('ftp_enable', $data['ftp_enable']);
+		$temp->set('ftp_host', $data['ftp_host']);
+		$temp->set('ftp_port', $data['ftp_port']);
+		$temp->set('ftp_user', $data['ftp_user']);
+		$temp->set('ftp_pass', $data['ftp_pass']);
+		$temp->set('ftp_root', $data['ftp_root']);
 
 		// Get the new FTP credentials.
 		$ftp = JClientHelper::getCredentials('ftp', true);
