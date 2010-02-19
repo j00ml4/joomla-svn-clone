@@ -228,9 +228,9 @@ class UsersModelUser extends JModelForm
 		}
 
 		$user = &JFactory::getUser();
-		if ($user->id == $table->id)
-		{
-			$registry = new JParameter($table->params);
+		if ($user->id == $table->id) {
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
 			$user->setParameters($registry);
 		}
 		// Trigger the onAftereStoreUser event
