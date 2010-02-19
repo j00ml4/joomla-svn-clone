@@ -61,9 +61,9 @@ class ContentModelCategory extends JModelItem
 
 		// Load the parameters. Merge Global and Menu Item params
 		$params	= $app->getParams();
-		$menuParams = new JParameter();
+		$menuParams = new JRegistry;
 			if (JSite::getMenu()->getActive()) {
-			$menuParams = new JParameter(JSite::getMenu()->getActive()->params);
+			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
 		}
 		$mergedParams = clone $menuParams;
 		$mergedParams->merge($params);
@@ -176,7 +176,8 @@ class ContentModelCategory extends JModelItem
 				$registry->loadJSON($data->metadata);
 				$data->metadata = $registry;
 
-				$cat_params = new JParameter($data->category_params);
+				$cat_params = new JRegistry;
+				$cat_params->loadJSON($data->category_params);
 				$data->category_params = $cat_params;
 
 				// Compute access permissions.

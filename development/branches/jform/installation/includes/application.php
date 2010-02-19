@@ -147,8 +147,8 @@ class JInstallation extends JApplication
 
 		// Set the language in the class
 		$conf = &JFactory::getConfig();
-		$conf->set('config.language', $options['language']);
-		$conf->set('config.debug_lang', $forced['debug']);
+		$conf->set('language', $options['language']);
+		$conf->set('debug_lang', $forced['debug']);
 	}
 
 	/**
