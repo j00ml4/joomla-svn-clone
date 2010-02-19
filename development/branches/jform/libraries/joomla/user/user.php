@@ -148,7 +148,7 @@ class JUser extends JObject
 	function __construct($identifier = 0)
 	{
 		// Create the user parameters object
-		$this->_params = new JParameter('');
+		$this->_params = new JRegistry;
 
 		// Load the user if it exists
 		if (!empty($identifier)) {
@@ -559,7 +559,8 @@ class JUser extends JObject
 
 		if ($my->id == $table->id)
 		{
-			$registry = new JParameter($table->params);
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
 			$my->setParameters($registry);
 		}
 		// Fire the onAftereStoreUser event

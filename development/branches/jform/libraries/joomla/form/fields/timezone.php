@@ -54,7 +54,7 @@ class JFormFieldTimezone extends JFormFieldGroupedList
 
 		// If the timezone is not set use the server setting.
 		if (strlen($this->value) == 0) {
-			$value = JFactory::getConfig()->getValue('config.offset');
+			$value = JFactory::getConfig()->get('offset');
 		}
 
 		// Get the list of time zones from the server.

@@ -838,7 +838,7 @@ class JForm
 			case 'SERVER_UTC':
 				if (intval($value)) {
 					// Get the server timezone setting.
-					$offset	= $config->getValue('config.offset');
+					$offset	= $config->get('offset');
 
 					// Return a MySQL formatted datetime string in UTC.
 					$return = JFactory::getDate($value, $offset)->toMySQL();
@@ -849,7 +849,7 @@ class JForm
 			case 'USER_UTC':
 				if (intval($value)) {
 					// Get the user timezone setting defaulting to the server timezone setting.
-					$offset	= $user->getParam('timezone', $config->getValue('config.offset'));
+					$offset	= $user->getParam('timezone', $config->get('offset'));
 
 					// Return a MySQL formatted datetime string in UTC.
 					$return = JFactory::getDate($value, $offset)->toMySQL();
