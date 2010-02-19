@@ -74,54 +74,30 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Testing methods used by the instantiated object.
+	 * Tests the JForm::addFieldPath method.
 	 *
-	 * @return void
+	 * This method is used to add additional lookup paths for field helpers.
 	 */
-	public function testConstruct()
+	public function testAddFieldPath()
 	{
-		// Check the empty contructor for basic errors.
-		$form = new JFormInspector('form1');
+		// Check the default behaviour.
+		$paths = JForm::addFieldPath();
+
+		// The default path is the class file folder/forms
+		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
 
 		$this->assertThat(
-			($form instanceof JForm),
+			in_array($valid, $paths),
 			$this->isTrue()
 		);
 
-		// Check the integrity of the options.
-		$options = $form->getOptions();
+		// Test adding a custom folder.
+		JForm::addFieldPath(dirname(__FILE__));
+		$paths = JForm::addFieldPath();
+
 		$this->assertThat(
-			isset($options['control']),
+			in_array(dirname(__FILE__), $paths),
 			$this->isTrue()
-		);
-
-		$options = $form->getOptions();
-		$this->assertThat(
-			$options['control'],
-			$this->isFalse()
-		);
-
-		// Test setting the control value.
-		$form = new JFormInspector('form1', array('control' => 'jform'));
-
-		$options = $form->getOptions();
-
-		$this->assertThat(
-			$options['control'],
-			$this->equalTo('jform')
-		);
-	}
-
-	/**
-	 * Test the JForm::getName method.
-	 */
-	public function testGetName()
-	{
-		$form = new JForm('form1');
-
-		$this->assertThat(
-			$form->getName(),
-			$this->equalTo('form1')
 		);
 	}
 
@@ -154,17 +130,17 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the JForm::addFieldPath method.
+	 * Tests the JForm::addRulePath method.
 	 *
-	 * This method is used to add additional lookup paths for field helpers.
+	 * This method is used to add additional lookup paths for form XML files.
 	 */
-	public function testAddFieldPath()
+	public function testAddRulePath()
 	{
 		// Check the default behaviour.
-		$paths = JForm::addFieldPath();
+		$paths = JForm::addRulePath();
 
 		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
+		$valid = JPATH_LIBRARIES.'/joomla/form/forms';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -172,8 +148,8 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		);
 
 		// Test adding a custom folder.
-		JForm::addFieldPath(dirname(__FILE__));
-		$paths = JForm::addFieldPath();
+		JForm::addRulePath(dirname(__FILE__));
+		$paths = JForm::addRulePath();
 
 		$this->assertThat(
 			in_array(dirname(__FILE__), $paths),
@@ -202,362 +178,6 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->assertThat(
 			count($fields),
 			$this->equalTo(1)
-		);
-	}
-
-	/**
-	 * Test the JForm::mergeNode method.
-	 */
-	public function testMergeNode()
-	{
-		// The source data.
-		$xml1 = simplexml_load_string('<form><field name="foo" /></form>');
-
-		// The new data for adding the field.
-		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>');
-
-		if ($xml1 === false || $xml2 === false) {
-			$this->fail('Error in text XML data');
-		}
-
-		JFormInspector::mergeNode($xml1->field, $xml2->field);
-
-		$fields = $xml1->xpath('field[@name="foo"] | field[@type="text"]');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(1)
-		);
-	}
-
-	/**
-	 * Test the JForm::mergeNode method.
-	 */
-	public function testMergeNodes()
-	{
-		// The source data.
-		$xml1 = simplexml_load_string('<form><fields><field name="foo" /></fields></form>');
-
-		// The new data for adding the field.
-		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>');
-
-		if ($xml1 === false || $xml2 === false) {
-			$this->fail('Error in text XML data');
-		}
-
-		JFormInspector::mergeNodes($xml1->fields, $xml2->fields);
-
-		$fields = $xml1->xpath('fields/field[@name="foo"] | fields/field[@type="text"]');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(1)
-		);
-
-		$fields = $xml1->xpath('fields/field[@name="soap"]');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(1)
-		);
-	}
-
-	/**
-	 * Test the JForm::load method.
-	 *
-	 * This method can load an XML data object, or parse an XML string.
-	 */
-	public function testLoad()
-	{
-		$form = new JFormInspector('form1');
-
-		// Test a non-string input.
-		$this->assertThat(
-			$form->load(123),
-			$this->isFalse()
-		);
-
-		// Test an invalid string input.
-		$this->assertThat(
-			$form->load('junk'),
-			$this->isFalse()
-		);
-
-		// Test an XML string.
-		$form->load('<form><fields /></form>');
-		$data1 = clone $form->getXML();
-
-		$this->assertThat(
-			($data1 instanceof JXMLElement),
-			$this->isTrue()
-		);
-
-		// Test implied reset.
-		$form->load('<form><fields><field /><fields></form>');
-		$data2 = clone $form->getXML();
-
-		$this->assertThat(
-			$data1,
-			$this->logicalNot($this->identicalTo($data2))
-		);
-
-		// Test bad structure.
-		$this->assertThat(
-			$form->load('<foobar />'),
-			$this->isFalse()
-		);
-
-		$this->assertThat(
-			$form->load('<form><fields /><fields /></form>'),
-			$this->isFalse()
-		);
-
-		// Test merging.
-		$form = new JFormInspector('form1');
-
-		$xml1 = <<<XML
-<form>
-	<fields>
-		<field
-			name="title" />
-		<field
-			name="abstract" />
-
-		<fields
-			name="params">
-			<field
-				name="show_title"
-				type="radio">
-				<option value="1">JYes</option>
-				<option value="0">JNo</option>
-			</field>
-		</fields>
-	</fields>
-</form>
-XML;
-		// Load the data (checking it was ok).
-		$this->assertThat(
-			$form->load($xml1),
-			$this->isTrue()
-		);
-
-		$xml2 = <<<XML
-<form>
-	<fields>
-		<field
-			name="published"
-			type="list">
-			<option
-				value="1">JYes</option>
-			<option
-				value="0">JNo</option>
-		</field>
-		<field
-			name="abstract"
-			label="Abstract" />
-
-		<fields
-			label="A general group">
-			<field
-				name="access" />
-			<field
-				name="ordering" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="show_abstract"
-				type="radio">
-				<option value="1">JYes</option>
-				<option value="0">JNo</option>
-			</field>
-		</fields>
-		<fieldset>
-			<field
-				name="language"
-				type="text"/>
-		</fieldset>
-	</fields>
-</form>
-XML;
-		// Merge in the second batch of data (checking it was ok).
-		$this->assertThat(
-			$form->load($xml2, false),
-			$this->isTrue()
-		);
-
-		/*$dom = new DOMDocument('1.0');
-		$dom->preserveWhiteSpace = false;
-		$dom->formatOutput = true;
-		$dom->loadXML($form->getXml()->asXML());
-		echo $dom->saveXML();*/
-
-	}
-
-	/**
-	 * Test the JForm::loadFile method.
-	 *
-	 * This method loads a file and passes the string to the JForm::load method.
-	 */
-	public function testLoadFile()
-	{
-		$form = new JFormInspector('form1');
-
-		// Check that this file won't be found.
-		$this->assertThat(
-			$form->load('example.xml'),
-			$this->isFalse()
-		);
-
-		// Add the local path and check the file loads.
-		JForm::addFormPath(dirname(__FILE__));
-
-		$form->load('example.xml');
-		$data1 = $form->getXML();
-
-		$this->assertThat(
-			($data1 instanceof JXMLElement),
-			$this->isFalse()
-		);
-	}
-
-	/**
-	 * Test the JForm::getFieldsByGroup method.
-	 */
-	public function testGetFieldsByGroup()
-	{
-		// Prepare the form.
-		$form = new JFormInspector('form1');
-
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->getFieldsByGroup('foo'),
-			$this->isFalse()
-		);
-
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="show_title" />
-			<field
-				name="show_abstract" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
-		);
-
-		// Check that a non-existant group returns nothing.
-		$fields = $form->getFieldsByGroup('foo');
-		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
-		);
-
-		// Check the valid groups.
-		$fields = $form->getFieldsByGroup('details');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(2)
-		);
-
-		$fields = $form->getFieldsByGroup('params');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(3)
-		);
-	}
-
-	/**
-	 * Tests the JForm::getFieldsByFieldset method.
-	 */
-	public function testGetFieldsByFieldset()
-	{
-		// Prepare the form.
-		$form = new JFormInspector('form1');
-
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->getFieldsByGroup('foo'),
-			$this->isFalse()
-		);
-
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="outlier" />
-			<fieldset
-				name="params-basic">
-				<field
-					name="show_title" />
-				<field
-					name="show_abstract" />
-				<field
-					name="show_author" />
-			</fieldset>
-			<fieldset
-				name="params-advanced">
-				<field
-					name="module_prefix" />
-				<field
-					name="caching" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
-		);
-
-		// Check that a non-existant group returns nothing.
-		$fields = $form->getFieldsByFieldset('foo');
-		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
-		);
-
-		// Check the valid fieldsets.
-		$fields = $form->getFieldsByFieldset('params-basic');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(3)
-		);
-
-		$fields = $form->getFieldsByFieldset('params-advanced');
-		$this->assertThat(
-			count($fields),
-			$this->equalTo(2)
 		);
 	}
 
@@ -635,48 +255,147 @@ XML;
 	}
 
 	/**
-	 * Test the JForm::getField method.
+	 * Testing methods used by the instantiated object.
+	 *
+	 * @return void
 	 */
-	public function testLoadFieldType()
+	public function testConstruct()
 	{
-		$field = JFormInspector::loadFieldType('list');
+		// Check the empty contructor for basic errors.
+		$form = new JFormInspector('form1');
+
 		$this->assertThat(
-			($field instanceof JFormFieldList),
+			($form instanceof JForm),
 			$this->isTrue()
 		);
 
-		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
-		$field = JFormInspector::loadFieldType('test');
+		// Check the integrity of the options.
+		$options = $form->getOptions();
 		$this->assertThat(
-			($field instanceof JFormFieldTest),
+			isset($options['control']),
 			$this->isTrue()
 		);
 
-		$field = JFormInspector::loadFieldType('bogus');
+		$options = $form->getOptions();
 		$this->assertThat(
-			$field,
+			$options['control'],
 			$this->isFalse()
+		);
+
+		// Test setting the control value.
+		$form = new JFormInspector('form1', array('control' => 'jform'));
+
+		$options = $form->getOptions();
+
+		$this->assertThat(
+			$options['control'],
+			$this->equalTo('jform')
 		);
 	}
 
 	/**
-	 * Test the JForm::getFormControl method.
+	 * Test for JForm::filter method.
+	 *
+	 * @return void
 	 */
-	public function testGetFormControl()
+	public function testFilter()
 	{
-		$form = new JForm('form8ion');
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	/*
+		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
 
-		$this->assertThat(
-			$form->getFormControl(),
-			$this->equalTo('')
+		$user = new JUser;
+		$mockSession = $this->getMock('JSession', array('_start', 'get'));
+		$mockSession->expects($this->once())->method('get')->will(
+			$this->returnValue($user)
+		);
+		JFactory::$session = $mockSession;
+		// Adjust the timezone offset to a known value.
+		$config = JFactory::getConfig();
+		$config->setValue('config.offset', 10);
+
+		// TODO: Mock JFactory and JUser
+		//$user = JFactory::getUser();
+		//$user->setParam('timezone', 5);
+
+		$form = new JForm;
+		$form->load('example');
+
+		$text = '<script>alert();</script> <p>Some text</p>';
+		$data = array(
+			'f_text' => $text,
+			'f_safe_text' => $text,
+			'f_raw_text' => $text,
+			'f_svr_date' => '2009-01-01 00:00:00',
+			'f_usr_date' => '2009-01-01 00:00:00',
+			'f_unset' => 1
 		);
 
-		$form = new JForm('form8ion', array('control' => 'jform'));
+		$result = $form->filter($data);
+
+		// Check that the unset filter worked.
+		$this->assertThat(
+			isset($result['f_text']),
+			$this->isTrue()
+		);
 
 		$this->assertThat(
-			$form->getFormControl(),
-			$this->equalTo('jform')
+			isset($result['f_safe_text']),
+			$this->isTrue()
 		);
+
+		$this->assertThat(
+			isset($result['f_raw_text']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_svr_date']),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			isset($result['f_unset']),
+			$this->isFalse()
+		);
+
+		// Check the date filters.
+		$this->assertThat(
+			$result['f_svr_date'],
+			$this->equalTo('2008-12-31 14:00:00')
+		);
+
+		//$this->assertThat(
+		//	$result['f_usr_date'],
+		//	$this->equalTo('2009-01-01 05:00:00')
+		//);
+
+		// Check that text filtering worked.
+		$this->assertThat(
+			$result['f_raw_text'],
+			$this->equalTo($text)
+		);
+
+		$this->assertThat(
+			$result['f_text'],
+			$this->equalTo('alert(); Some text')
+		);
+
+		$this->assertThat(
+			$result['f_safe_text'],
+			$this->equalTo('alert(); <p>Some text</p>')
+		);
+
+		$this->markTestIncomplete();
+	*/
+	}
+
+	/**
+	 * Test for JForm::filterField method.
+	 */
+	public function testFilterField()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
@@ -759,6 +478,157 @@ XML;
 	}
 
 	/**
+	 * Tests the JForm::findFieldsByFieldset method.
+	 */
+	public function testFindFieldsByFieldset()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->findFieldsByFieldset('foo'),
+			$this->isFalse()
+		);
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="outlier" />
+			<fieldset
+				name="params-basic">
+				<field
+					name="show_title" />
+				<field
+					name="show_abstract" />
+				<field
+					name="show_author" />
+			</fieldset>
+			<fieldset
+				name="params-advanced">
+				<field
+					name="module_prefix" />
+				<field
+					name="caching" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$fields = $form->findFieldsByFieldset('foo');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		// Check the valid fieldsets.
+		$fields = $form->findFieldsByFieldset('params-basic');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(3)
+		);
+
+		$fields = $form->findFieldsByFieldset('params-advanced');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(2)
+		);
+	}
+
+	/**
+	 * Test the JForm::findFieldsByGroup method.
+	 */
+	public function testFindFieldsByGroup()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->findFieldsByGroup('foo'),
+			$this->isFalse()
+		);
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<!-- Set up a group of fields called details. -->
+		<fields
+			name="details">
+			<field
+				name="title" />
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="show_title" />
+			<field
+				name="show_abstract" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$fields = $form->findFieldsByGroup('foo');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		// Check the valid groups.
+		$fields = $form->findFieldsByGroup('details');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(2)
+		);
+
+		$fields = $form->findFieldsByGroup('params');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(3)
+		);
+	}
+
+	/**
+	 * Test for JForm::getErrors method.
+	 */
+	public function testGetErrors()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
 	 * Test the JForm::getField method.
 	 */
 	public function testGetField()
@@ -798,17 +668,74 @@ XML;
 	}
 
 	/**
-	 * Test for JForm::getValue method.
+	 * Test for JForm::getFieldAttribute method.
 	 */
-	public function testGetValue()
+	public function testGetFieldAttribute()
 	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
-	 * Test for JForm::setValue method.
+	 * Test the JForm::getFormControl method.
 	 */
-	public function testSetValue()
+	public function testGetFormControl()
+	{
+		$form = new JForm('form8ion');
+
+		$this->assertThat(
+			$form->getFormControl(),
+			$this->equalTo('')
+		);
+
+		$form = new JForm('form8ion', array('control' => 'jform'));
+
+		$this->assertThat(
+			$form->getFormControl(),
+			$this->equalTo('jform')
+		);
+	}
+
+	/**
+	 * Test for JForm::getLabel method.
+	 */
+	public function testGetGroup()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::getInput method.
+	 */
+	public function testGetInput()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::getLabel method.
+	 */
+	public function testGetLabel()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test the JForm::getName method.
+	 */
+	public function testGetName()
+	{
+		$form = new JForm('form1');
+
+		$this->assertThat(
+			$form->getName(),
+			$this->equalTo('form1')
+		);
+	}
+
+	/**
+	 * Test for JForm::getValue method.
+	 */
+	public function testGetValue()
 	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
@@ -942,98 +869,319 @@ XML;
 	}
 
 	/**
-	 * Testing filter
+	 * Test the JForm::load method.
 	 *
-	 * @return void
+	 * This method can load an XML data object, or parse an XML string.
 	 */
-	/*
-	public function testFilter()
+	public function testLoad()
 	{
-		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
+		$form = new JFormInspector('form1');
 
-		$user = new JUser;
-		$mockSession = $this->getMock('JSession', array('_start', 'get'));
-		$mockSession->expects($this->once())->method('get')->will(
-			$this->returnValue($user)
-		);
-		JFactory::$session = $mockSession;
-		// Adjust the timezone offset to a known value.
-		$config = JFactory::getConfig();
-		$config->setValue('config.offset', 10);
-
-		// TODO: Mock JFactory and JUser
-		//$user = JFactory::getUser();
-		//$user->setParam('timezone', 5);
-
-		$form = new JForm;
-		$form->load('example');
-
-		$text = '<script>alert();</script> <p>Some text</p>';
-		$data = array(
-			'f_text' => $text,
-			'f_safe_text' => $text,
-			'f_raw_text' => $text,
-			'f_svr_date' => '2009-01-01 00:00:00',
-			'f_usr_date' => '2009-01-01 00:00:00',
-			'f_unset' => 1
-		);
-
-		$result = $form->filter($data);
-
-		// Check that the unset filter worked.
+		// Test a non-string input.
 		$this->assertThat(
-			isset($result['f_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_safe_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_raw_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_svr_date']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_unset']),
+			$form->load(123),
 			$this->isFalse()
 		);
 
-		// Check the date filters.
+		// Test an invalid string input.
 		$this->assertThat(
-			$result['f_svr_date'],
-			$this->equalTo('2008-12-31 14:00:00')
+			$form->load('junk'),
+			$this->isFalse()
 		);
 
-		//$this->assertThat(
-		//	$result['f_usr_date'],
-		//	$this->equalTo('2009-01-01 05:00:00')
-		//);
+		// Test an XML string.
+		$form->load('<form><fields /></form>');
+		$data1 = clone $form->getXML();
 
-		// Check that text filtering worked.
 		$this->assertThat(
-			$result['f_raw_text'],
-			$this->equalTo($text)
+			($data1 instanceof JXMLElement),
+			$this->isTrue()
+		);
+
+		// Test implied reset.
+		$form->load('<form><fields><field /><fields></form>');
+		$data2 = clone $form->getXML();
+
+		$this->assertThat(
+			$data1,
+			$this->logicalNot($this->identicalTo($data2))
+		);
+
+		// Test bad structure.
+		$this->assertThat(
+			$form->load('<foobar />'),
+			$this->isFalse()
 		);
 
 		$this->assertThat(
-			$result['f_text'],
-			$this->equalTo('alert(); Some text')
+			$form->load('<form><fields /><fields /></form>'),
+			$this->isFalse()
 		);
 
+		// Test merging.
+		$form = new JFormInspector('form1');
+
+		$xml1 = <<<XML
+<form>
+	<fields>
+		<field
+			name="title" />
+		<field
+			name="abstract" />
+
+		<fields
+			name="params">
+			<field
+				name="show_title"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Load the data (checking it was ok).
 		$this->assertThat(
-			$result['f_safe_text'],
-			$this->equalTo('alert(); <p>Some text</p>')
+			$form->load($xml1),
+			$this->isTrue()
 		);
 
-		$this->markTestIncomplete();
+		$xml2 = <<<XML
+<form>
+	<fields>
+		<field
+			name="published"
+			type="list">
+			<option
+				value="1">JYes</option>
+			<option
+				value="0">JNo</option>
+		</field>
+		<field
+			name="abstract"
+			label="Abstract" />
+
+		<fields
+			label="A general group">
+			<field
+				name="access" />
+			<field
+				name="ordering" />
+		</fields>
+		<fields
+			name="params">
+			<field
+				name="show_abstract"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+		</fields>
+		<fieldset>
+			<field
+				name="language"
+				type="text"/>
+		</fieldset>
+	</fields>
+</form>
+XML;
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml2, false),
+			$this->isTrue()
+		);
+
+		/*$dom = new DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($form->getXml()->asXML());
+		echo $dom->saveXML();*/
 	}
-	*/
+
+	/**
+	 * Test for JForm::loadField method.
+	 */
+	public function testLoadField()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test the JForm::getField method.
+	 */
+	public function testLoadFieldType()
+	{
+		$field = JFormInspector::loadFieldType('list');
+		$this->assertThat(
+			($field instanceof JFormFieldList),
+			$this->isTrue()
+		);
+
+		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
+		$field = JFormInspector::loadFieldType('test');
+		$this->assertThat(
+			($field instanceof JFormFieldTest),
+			$this->isTrue()
+		);
+
+		$field = JFormInspector::loadFieldType('bogus');
+		$this->assertThat(
+			$field,
+			$this->isFalse()
+		);
+	}
+
+	/**
+	 * Test the JForm::loadFile method.
+	 *
+	 * This method loads a file and passes the string to the JForm::load method.
+	 */
+	public function testLoadFile()
+	{
+		$form = new JFormInspector('form1');
+
+		// Check that this file won't be found.
+		$this->assertThat(
+			$form->load('example.xml'),
+			$this->isFalse()
+		);
+
+		// Add the local path and check the file loads.
+		JForm::addFormPath(dirname(__FILE__));
+
+		$form->load('example.xml');
+		$data1 = $form->getXML();
+
+		$this->assertThat(
+			($data1 instanceof JXMLElement),
+			$this->isFalse()
+		);
+	}
+
+	/**
+	 * Test for JForm::loadRuleType method.
+	 */
+	public function testLoadRuleType()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test the JForm::mergeNode method.
+	 */
+	public function testMergeNode()
+	{
+		// The source data.
+		$xml1 = simplexml_load_string('<form><field name="foo" /></form>');
+
+		// The new data for adding the field.
+		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>');
+
+		if ($xml1 === false || $xml2 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		JFormInspector::mergeNode($xml1->field, $xml2->field);
+
+		$fields = $xml1->xpath('field[@name="foo"] | field[@type="text"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+	}
+
+	/**
+	 * Test the JForm::mergeNode method.
+	 */
+	public function testMergeNodes()
+	{
+		// The source data.
+		$xml1 = simplexml_load_string('<form><fields><field name="foo" /></fields></form>');
+
+		// The new data for adding the field.
+		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>');
+
+		if ($xml1 === false || $xml2 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		JFormInspector::mergeNodes($xml1->fields, $xml2->fields);
+
+		$fields = $xml1->xpath('fields/field[@name="foo"] | fields/field[@type="text"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+
+		$fields = $xml1->xpath('fields/field[@name="soap"]');
+		$this->assertThat(
+			count($fields),
+			$this->equalTo(1)
+		);
+	}
+
+	/**
+	 * Test for JForm::removeField method.
+	 */
+	public function testRemoveField()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::removeGroup method.
+	 */
+	public function testRemoveGroup()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::setField method.
+	 */
+	public function testSetField()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::setFieldAttribute method.
+	 */
+	public function testSetFieldAttribute()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::setFields method.
+	 */
+	public function testSetFields()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::setValue method.
+	 */
+	public function testSetValue()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::validate method.
+	 */
+	public function testValidate()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
+	 * Test for JForm::validateFields method.
+	 */
+	public function testValidateFields()
+	{
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
 }
