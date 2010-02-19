@@ -2,6 +2,7 @@
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE.'/libraries/joomla/registry/registry.php';
+require_once JPATH_BASE.'/libraries/joomla/registry/format.php';
 
 /**
  * Test class for JRegistry.
@@ -14,8 +15,8 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function test__clone()
 	{
-		$a = JRegistry::getInstance('a');
-		$a->setValue('foo', 'bar');
+		$a = new JRegistry;
+		$a->set('foo', 'bar');
 		$b = clone $a;
 
 		$this->assertThat(
@@ -34,8 +35,8 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function test__toString()
 	{
-		$a = JRegistry::getInstance('a');
-		$a->setValue('_default.foo', 'bar');
+		$a = new JRegistry;
+		$a->set('foo', 'bar');
 
 		// __toString only allows for a JSON value.
 		$this->assertThat(
@@ -101,12 +102,13 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testGetNameSpaces()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo', 'bar1');
-		$a->setValue('config.foo', 'bar2');
+		$a->set('foo', 'bar1');
+		$a->set('config.foo', 'bar2');
 
 		$this->assertThat(
 			$a->getNameSpaces(),
-			$this->identicalTo(array('_default', 'config'))
+			//$this->identicalTo(array('_default', 'config'))
+			$this->identicalTo(array())
 		);
 	}
 
@@ -117,23 +119,37 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testGetValue()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo', 'bar1');
-		$a->setValue('config.foo', 'bar2');
-		$a->setValue('deep.level.foo', 'bar3');
+		$a->set('foo', 'bar1');
+		$a->set('config.foo', 'bar2');
+		$a->set('deep.level.foo', 'bar3');
 
 		$this->assertThat(
-			$a->getValue('foo'),
+			$a->get('foo'),
 			$this->equalTo('bar1')
 		);
 
 		$this->assertThat(
-			$a->getValue('config.foo'),
+			$a->get('foo'),
 			$this->equalTo('bar2')
 		);
 
 		$this->assertThat(
-			$a->getValue('deep.level.foo'),
+			$a->get('deep.level.foo'),
 			$this->equalTo('bar3')
+		);
+
+		// Check for a null value, the default is used.
+		$a->set('null', null);
+		$this->assertThat(
+			$a->get('null', 'null'),
+			$this->equalTo('null')
+		);
+
+		// Check for an empty string, the default is used.
+		$a->set('empty', '');
+		$this->assertThat(
+			$a->get('empty', 'empty'),
+			$this->equalTo('empty')
 		);
 	}
 
@@ -145,14 +161,14 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		$array = array(
 			'foo' => 'bar'
 		);
-		$registry = JRegistry::getInstance('test');
+		$registry = new JRegistry;
 		$result = $registry->loadArray($array);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
+			$registry->get('foo'),
 			$this->equalTo('bar')
 		);
 	}
@@ -162,7 +178,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoadFile()
 	{
-		$registry = JRegistry::getInstance('test');
+		$registry = new JRegistry;
 
 		// Result is always true, no error checking in method.
 
@@ -171,7 +187,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
+			$registry->get('foo'),
 			$this->equalTo('bar')
 		);
 
@@ -180,7 +196,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
+			$registry->get('foo'),
 			$this->equalTo('bar')
 		);
 
@@ -192,17 +208,31 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoadINI()
 	{
-		$string = "[section]\nfoo=\"bar\"";
+		//$string = "[section]\nfoo=\"testloadini\"";
 
-		$registry = JRegistry::getInstance('test');
-		$result = $registry->loadIni($string);
+		$registry = new JRegistry;
+		$result = $registry->loadIni("foo=\"testloadini1\"");
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
-			$this->equalTo('bar')
+			$registry->get('foo'),
+			$this->equalTo('testloadini1')
+		);
+
+		$result = $registry->loadIni("[section]\nfoo=\"testloadini2\"");
+		// Test getting a known value.
+		$this->assertThat(
+			$registry->get('foo'),
+			$this->equalTo('testloadini2')
+		);
+
+		$result = $registry->loadIni("[section]\nfoo=\"testloadini3\"", null, true);
+		// Test getting a known value after processing sections.
+		$this->assertThat(
+			$registry->get('section.foo'),
+			$this->equalTo('testloadini3')
 		);
 	}
 
@@ -211,17 +241,17 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testLoadJSON()
 	{
-		$string = '{"foo":"bar"}';
+		$string = '{"foo":"testloadjson"}';
 
-		$registry = JRegistry::getInstance('test');
+		$registry = new JRegistry;
 		$result = $registry->loadJson($string);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
-			$this->equalTo('bar')
+			$registry->get('foo'),
+			$this->equalTo('testloadjson')
 		);
 	}
 
@@ -231,17 +261,17 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testLoadObject()
 	{
 		$object = new stdClass;
-		$object->foo = 'bar';
+		$object->foo = 'testloadobject';
 
-		$registry = JRegistry::getInstance('test');
+		$registry = new JRegistry;
 		$result = $registry->loadObject($object);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->getValue('foo'),
-			$this->equalTo('bar')
+			$registry->get('foo'),
+			$this->equalTo('testloadobject')
 		);
 	}
 
@@ -262,8 +292,10 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		$a->makeNameSpace('foo');
 
 		$this->assertThat(
-			in_array('foo', $a->getNameSpaces()),
-			$this->isTrue()
+			//in_array('foo', $a->getNameSpaces()),
+			//$this->isTrue()
+			$a->getNameSpaces(),
+			$this->equalTo(array())
 		);
 	}
 
@@ -284,22 +316,22 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 			'foo' => 'soap',
 			'dum' => 'huh'
 		);
-		$registry1 = JRegistry::getInstance('test1');
+		$registry1 = new JRegistry;
 		$registry1->loadArray($array1);
 
-		$registry2 = JRegistry::getInstance('test2');
+		$registry2 = new JRegistry;
 		$registry2->loadArray($array2);
 
 		$registry1->merge($registry2);
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry1->getValue('foo'),
+			$registry1->get('foo'),
 			$this->equalTo('soap')
 		);
 
 		$this->assertThat(
-			$registry1->getValue('dum'),
+			$registry1->get('dum'),
 			$this->equalTo('huh')
 		);
 	}
@@ -316,17 +348,17 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}*/
 
 	/**
-	 * Test the JRegistry::setValue method.
+	 * Test the JRegistry::set method.
 	 * @deprecated	1.6
 	 */
-	public function testSetValue()
+	public function testSet()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo', 'bar1');
+		$a->set('foo', 'testsetvalue1');
 
 		$this->assertThat(
-			$a->setValue('foo', 'bar2'),
-			$this->equalTo('bar2')
+			$a->set('foo', 'testsetvalue2'),
+			$this->equalTo('testsetvalue2')
 		);
 	}
 
@@ -336,26 +368,19 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testToArray()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo1', 'bar1');
-		$a->setValue('foo2', 'bar2');
-		$a->setValue('config.foo3', 'bar3');
+		$a->set('foo1', 'testtoarray1');
+		$a->set('foo2', 'testtoarray2');
+		$a->set('config.foo3', 'testtoarray3');
 
 		$expected = array(
-			'foo1' => 'bar1',
-			'foo2' => 'bar2'
+			'foo1' => 'testtoarray1',
+			'foo2' => 'testtoarray2',
+			'config' => new stdClass
 		);
+		$expected['config']->foo3 = 'testtoarray3';
 
 		$this->assertThat(
 			$a->toArray(),
-			$this->equalTo($expected)
-		);
-
-		$expected = array(
-			'foo3' => 'bar3'
-		);
-
-		$this->assertThat(
-			$a->toArray('config'),
 			$this->equalTo($expected)
 		);
 	}
@@ -366,26 +391,18 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testToObject()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo1', 'bar1');
-		$a->setValue('foo2', 'bar2');
-		$a->setValue('config.foo3', 'bar3');
+		$a->set('foo1', 'testtoobject1');
+		$a->set('foo2', 'testtoobject2');
+		$a->set('config.foo3', 'testtoobject3');
 
 		$expected = new stdClass;
-		$expected->foo1 = 'bar1';
-		$expected->foo2 = 'bar2';
+		$expected->foo1 = 'testtoobject1';
+		$expected->foo2 = 'testtoobject2';
+		$expected->config = new StdClass;
+		$expected->config->foo3 = 'testtoobject3';
 
 		$this->assertThat(
 			$a->toObject(),
-			$this->equalTo(
-				$expected
-			)
-		);
-
-		$expected = new stdClass;
-		$expected->foo3 = 'bar3';
-
-		$this->assertThat(
-			$a->toObject('config'),
 			$this->equalTo(
 				$expected
 			)
@@ -398,28 +415,21 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	public function testToString()
 	{
 		$a = new JRegistry;
-		$a->setValue('foo1', 'bar1');
-		$a->setValue('foo2', 'bar2');
-		$a->setValue('config.foo3', 'bar3');
+		$a->set('foo1', 'testtostring1');
+		$a->set('foo2', 'testtostring2');
+		$a->set('config.foo3', 'testtostring3');
 
 		$this->assertThat(
 			trim($a->toString('JSON')),
 			$this->equalTo(
-				'{"foo1":"bar1","foo2":"bar2"}'
+				'{"foo1":"testtostring1","foo2":"testtostring2","config":{"foo3":"testtostring3"}}'
 			)
 		);
 
 		$this->assertThat(
 			trim($a->toString('INI')),
 			$this->equalTo(
-				"foo1=bar1\nfoo2=bar2"
-			)
-		);
-
-		$this->assertThat(
-			trim($a->toString('INI')),
-			$this->equalTo(
-				"foo1=bar1\nfoo2=bar2"
+				"foo1=\"testtostring1\"\nfoo2=\"testtostring2\"\n\n[config]\nfoo3=\"testtostring3\""
 			)
 		);
 	}
