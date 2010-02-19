@@ -58,14 +58,10 @@ class plgSearchContent extends JPlugin
 			}
 		}
 
-		// load plugin params info
-		$plugin			= &JPluginHelper::getPlugin('search', 'content');
-		$pluginParams	= new JParameter($plugin->params);
-
-		$sContent		= $pluginParams->get('search_content',		1);
-		$sUncategorised = $pluginParams->get('search_uncategorised',	1);
-		$sArchived		= $pluginParams->get('search_archived',		1);
-		$limit			= $pluginParams->def('search_limit',		50);
+		$sContent		= $this->params->get('search_content',		1);
+		$sUncategorised = $this->params->get('search_uncategorised',	1);
+		$sArchived		= $this->params->get('search_archived',		1);
+		$limit			= $this->params->def('search_limit',		50);
 
 		$nullDate		= $db->getNullDate();
 		$date = &JFactory::getDate();

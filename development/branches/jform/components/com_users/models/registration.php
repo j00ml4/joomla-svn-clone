@@ -188,9 +188,9 @@ class UsersModelRegistration extends JModelForm
 
 		// Compile the notification mail values.
 		$data = $user->getProperties();
-		$data['fromname'] = $config->getValue('fromname');
-		$data['mailfrom'] = $config->getValue('mailfrom');
-		$data['sitename'] = $config->getValue('sitename');
+		$data['fromname'] = $config->get('fromname');
+		$data['mailfrom'] = $config->get('mailfrom');
+		$data['sitename'] = $config->get('sitename');
 
 		// Handle account activation/confirmation e-mails.
 		if ($params->get('useractivation'))
@@ -269,9 +269,9 @@ class UsersModelRegistration extends JModelForm
 
 		// Compile the notification mail values.
 		$data = $user->getProperties();
-		$data['fromname'] = $config->getValue('fromname');
-		$data['mailfrom'] = $config->getValue('mailfrom');
-		$data['sitename'] = $config->getValue('sitename');
+		$data['fromname'] = $config->get('fromname');
+		$data['mailfrom'] = $config->get('mailfrom');
+		$data['sitename'] = $config->get('sitename');
 
 		// Load the message template and bind the data.
 		jimport('joomla.utilities.simpletemplate');

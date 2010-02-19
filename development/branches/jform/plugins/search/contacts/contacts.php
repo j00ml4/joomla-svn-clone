@@ -52,11 +52,7 @@ class plgSearchContacts extends JPlugin
 			}
 		}
 
-		// load plugin params info
-		$plugin = &JPluginHelper::getPlugin('search', 'contacts');
-		$pluginParams = new JParameter($plugin->params);
-
-		$limit = $pluginParams->def('search_limit', 50);
+		$limit = $this->params->def('search_limit', 50);
 
 		$text = trim($text);
 		if ($text == '') {
