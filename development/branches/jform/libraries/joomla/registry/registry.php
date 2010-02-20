@@ -10,7 +10,7 @@
 // No direct access
 defined('JPATH_BASE') or die;
 
-require_once dirname(__FILE__).'/format.php';
+JLoader::register('JRegistryFormat', dirname(__FILE__).'/format.php');
 
 /**
  * JRegistry class
