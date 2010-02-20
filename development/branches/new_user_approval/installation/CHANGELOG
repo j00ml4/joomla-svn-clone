@@ -27,6 +27,30 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+19-Feb-2010 Christophe Demko
+# Correcting a bug in the codemirror plugin
++$ Adding a language string
++ Adding an background icon in bluestork css
+
+19-Feb-2010 Jean-Marie Simonet
+$^ Refactored display of content Category:title to cope with various languages
+^ Refactored com_weblinks admin ini/keys + some
+^ Revert name changes for templates
+
+18-Feb-2010 Mark Dexter
+^ Remove redundant alt attributes for Control Panel icons (Andrea Tarr)
+
+18-Feb-2010 Hannes Papenberg
+^ Adding mod_articles_category module - Thanks Omar Ramos!
+
+18-Feb-2010 Christophe Demko
+# Correcting some inis
+# Correcting bugs in file adapter installer
+
+18-Feb-2010 Jean-Marie Simonet
+# Correcting some inis
+^ Refactoring com_wrapper ini/keys + some
+
 17-Feb-2010 Mark Dexter
 # Fix tests to work with hathor accessible admin template
 + New system test to install Joomla. Thanks Matt Thomas.
