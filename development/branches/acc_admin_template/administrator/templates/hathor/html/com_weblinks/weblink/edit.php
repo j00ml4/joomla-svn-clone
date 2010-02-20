@@ -31,7 +31,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="weblink-form" class="form-validate">
 <div class="col main-section">
 	<fieldset class="adminform">
-		<legend><?php echo empty($this->item->id) ? JText::_('Weblinks_New_Weblink') : JText::sprintf('Weblinks_Edit_Weblink', $this->item->id); ?></legend>
+		<legend><?php echo empty($this->item->id) ? JText::_('COM_WEBLINKS_NEW_WEBLINK') : JText::sprintf('COM_WEBLINKS_EDIT_WEBLINK', $this->item->id); ?></legend>
 		<div>
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
@@ -75,9 +75,9 @@ JHtml::_('behavior.formvalidation');
 <div class="col options-section">
 	<?php echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('Weblinks_Options'), 'basic-options'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('COM_WEBLINKS_OPTIONS'), 'basic-options'); ?>
 	<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('Weblinks_Options'); ?></legend>
+		<legend class="element-invisible"><?php echo JText::_('COM_WEBLINKS_OPTIONS'); ?></legend>
 
 		<?php foreach($this->form->getFields('params') as $field): ?>
 			<?php if ($field->hidden): ?>
