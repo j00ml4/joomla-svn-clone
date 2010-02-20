@@ -1114,10 +1114,11 @@ class JForm
 	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
 	 * @since	1.6
 	 */
-	protected function & findFieldsByGroup($name = null)
+	protected function & findFieldsByGroup($group = null)
 	{
 		// Initialize variables.
 		$false = false;
+		$fields = array();
 
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -1125,18 +1126,18 @@ class JForm
 		}
 
 		// Get only fields in a specific group?
-		if ($name) {
-			// Check to see if the group does not exist.
-			if ($this->xml->xpath('//fields[@name="'.$name.'"]')) {
-				JError::raiseWarning(0, JText::sprintf('LIB_FORM_VALIDATE_GROUP_NOT_FOUND', $name));
-				return $false;
-			}
+		if ($group) {
 
-			/*
-			 * Get an array of <field /> elements that are underneath a <fields /> element
-			 * with the appropriate name attribute.
-			 */
-			$fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field');
+			// Get the fields elements for a given group.
+			$elements = & $this->findGroup($group);
+
+			// Get all of the field elements for the fields elements.
+			foreach ($elements as $element) {
+				// If there are field elements add them to the return result.
+				if ($tmp = $element->xpath('descendant::field')) {
+					$fields = array_merge($fields, $tmp);
+				}
+			}
 		}
 		else {
 			// Get an array of all the <field /> elements.
