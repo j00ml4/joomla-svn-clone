@@ -169,7 +169,8 @@ class JForm
 	 * Method to filter the form data.
 	 *
 	 * @param	array	$data	An array of field values to filter.
-	 * @param	string	$group	The optional name of a field group for which to filter fields.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node on which to filter the fields.
 	 *
 	 * @return	mixed	boolean	True on sucess.
 	 * @since	1.6
@@ -244,7 +245,8 @@ class JForm
 	 * Method to get a form field represented as a JFormField object.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node on which to find the field.
 	 * @param	mixed	$value	The optional value to use as the default for the field.
 	 *
 	 * @return	mixed	The JFormField object for the field or boolean false on error.
@@ -359,7 +361,8 @@ class JForm
 	/**
 	 * Method to get an array of fieldset objects optionally filtered over a given field group.
 	 *
-	 * @param	string	$name	The optional name of a field group on which to filter fieldsets.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node on which to filter the fieldsets.
 	 *
 	 * @return	array	The array of fieldset objects.
 	 * @since	1.6
@@ -461,18 +464,21 @@ class JForm
 	/**
 	 * Method to get an array of JFormField objects in a given field group by name.
 	 *
-	 * @param	string	$name	The name of the field group.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node for which to get form fields.
+	 * @param	boolean	$nested	True to also include fields in nested groups that are inside of the
+	 * 							group for which to find fields.
 	 *
 	 * @return	array	The array of JFormField objects in the field group.
 	 * @since	1.6
 	 */
-	public function getGroup($group)
+	public function getGroup($group, $nested = false)
 	{
 		// Initialize variables.
 		$fields = array();
 
-		// Get all of the field elements in the fieldset.
-		$elements = $this->findFieldsByGroup($group);
+		// Get all of the field elements in the field group.
+		$elements = $this->findFieldsByGroup($group, $nested);
 
 		// If no field elements were found return empty.
 		if (empty($elements)) {
@@ -494,7 +500,8 @@ class JForm
 	 * Method to get a form field markup for the field input.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node on which to find the field.
 	 * @param	mixed	$value	The optional value to use as the default for the field.
 	 *
 	 * @return	string	The form field markup.
@@ -514,7 +521,8 @@ class JForm
 	 * Method to get a form field markup for the field input.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
+	 * 							from the root node on which to find the field.
 	 *
 	 * @return	string	The form field markup.
 	 * @since	1.6
@@ -544,7 +552,8 @@ class JForm
 	 * Method to get the value of a field.
 	 *
 	 * @param	string	$name		The name of the field for which to get the value.
-	 * @param	string	$group		The group the field is in if any.
+	 * @param	mixed	$group		The (string) name of the group or an (array) of group names in
+	 * 								order from the root node on which to get the value.
 	 * @param	mixed	$default	The optional default value of the field value is empty.
 	 *
 	 * @return	mixed	The value of the field or the default value if empty.
@@ -702,6 +711,13 @@ class JForm
 			return false;
 		}
 
+		// Get the fields elements for a given group.
+		$elements = & $this->findGroup($group);
+		foreach ($elements as & $element) {
+			unset($element);
+		}
+
+		return true;
 	}
 
 	/**
@@ -1031,6 +1047,7 @@ class JForm
 		// Initialize variables.
 		$false		= false;
 		$element	= false;
+		$fields		= array();
 
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -1039,16 +1056,36 @@ class JForm
 
 		// Let's get the appropriate field element based on the method arguments.
 		if ($group) {
-			//Get an array of fields with the correct name in a group with the correct name.
-			$fields = $this->xml->xpath('//fields[@name="'.$group.'"]//field[@name="'.$name.'"]');
+
+			// Get the fields elements for a given group.
+			$elements = & $this->findGroup($group);
+
+			// Get all of the field elements with the correct name for the fields elements.
+			foreach ($elements as $element) {
+				// If there are matching field elements add them to the fields array.
+				if ($tmp = $element->xpath('descendant::field[@name="'.$name.'"]')) {
+					$fields = array_merge($fields, $tmp);
+				}
+			}
 
 			// Make sure something was found.
 			if (!$fields) {
 				return $false;
 			}
 
-			// Assume the first one is the right one.
-			$element = $fields[0];
+			// Use the first correct match in the given group.
+			foreach ($fields as $field) {
+
+				// Get the group names as strings for anscestor fields elements.
+				$attrs = $field->xpath('ancestor::fields[@name]/@name');
+				$names = array_map('strval', $attrs);
+
+				// If the field is in the exact group use it and break out of the loop.
+				if ($names == (array) $group) {
+					$element = $field;
+					break;
+				}
+			}
 		}
 		else {
 			// Get an array of fields with the correct name.
@@ -1109,12 +1146,14 @@ class JForm
 	 * Method to get an array of <field /> elements from the form XML document which are
 	 * in a control group by name.
 	 *
-	 * @param	string	$name	The optional name of the control group.
+	 * @param	string	$group	The optional name of the control group.
+	 * @param	boolean	$nested	True to also include fields in nested groups that are inside of the
+	 * 							group for which to find fields.
 	 *
 	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
 	 * @since	1.6
 	 */
-	protected function & findFieldsByGroup($group = null)
+	protected function & findFieldsByGroup($group = null, $nested = false)
 	{
 		// Initialize variables.
 		$false = false;
@@ -1133,9 +1172,27 @@ class JForm
 
 			// Get all of the field elements for the fields elements.
 			foreach ($elements as $element) {
+
 				// If there are field elements add them to the return result.
 				if ($tmp = $element->xpath('descendant::field')) {
-					$fields = array_merge($fields, $tmp);
+
+					// If we also want fields in nested groups then just merge the arrays.
+					if ($nested) {
+						$fields = array_merge($fields, $tmp);
+					}
+					// If we want to exclude nested groups then we need to check each field.
+					else {
+						foreach ($tmp as $field) {
+							// Get the names of the groups that the field is in.
+							$attrs = $field->xpath('ancestor::fields[@name]/@name');
+							$names = array_map('strval', $attrs);
+
+							// If the field is in the specific group then add it to the return list.
+							if ($names == (array) $group) {
+								$fields = array_merge($fields, array($field));
+							}
+						}
+					}
 				}
 			}
 		}
