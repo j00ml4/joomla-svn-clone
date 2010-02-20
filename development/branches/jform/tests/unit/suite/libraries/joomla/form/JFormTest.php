@@ -478,6 +478,83 @@ XML;
 	}
 
 	/**
+	 * Test the JForm::findGroup method.
+	 */
+	public function testFindGroup()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$xml = <<<XML
+<form>
+	<fields>
+		<field
+			name="title" type="text" place="root" />
+		<fieldset>
+			<field
+				name="alias" type="text" />
+		</fieldset>
+		<fields
+			name="params">
+			<field
+				name="title" place="child" type="password" />
+			<fieldset
+				label="Basic">
+				<field
+					name="show_title" />
+			</fieldset>
+			<fieldset
+				label="Advanced">
+				<fields
+					name="cache">
+					<field
+						name="enabled" />
+					<field
+						name="lifetime" />
+				</fields>
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		// Check that a non-existant group returns nothing.
+		$fields = $form->findGroup('foo');
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		// Check that an existant field returns something.
+		$fields = $form->findGroup('params');
+		$this->assertThat(
+			empty($fields),
+			$this->isFalse()
+		);
+
+		// Check that a non-existant field returns nothing.
+		$fields = $form->findGroup(array('cache', 'params'));
+		$this->assertThat(
+			empty($fields),
+			$this->isTrue()
+		);
+
+		// Check that an existant field returns something.
+		$fields = $form->findGroup(array('params', 'cache'));
+		$this->assertThat(
+			empty($fields),
+			$this->isFalse()
+		);
+
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	/**
 	 * Tests the JForm::findFieldsByFieldset method.
 	 */
 	public function testFindFieldsByFieldset()
