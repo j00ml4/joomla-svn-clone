@@ -1152,24 +1152,74 @@ class JForm
 	 * @param	mixed	$group	The (string) name of the group to find or an (array) of group names
 	 * 							in order from the root node to find the group.
 	 *
-	 * @return	mixed	The XML element object for the group or boolean false on error.
+	 * @return	mixed	An array of XML element objects for the group or boolean false on error.
 	 * @since	1.6
 	 */
 	protected function & findGroup($group)
 	{
 		// Initialize variables.
+		$group = (array) $group;
 		$false = false;
+		$groups = array();
+		$tmp = array();
 
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
 			return $false;
 		}
 
+		// Make sure there is actually a group to find.
+		if (!empty($group)) {
 
-		// Check to see if the group does not exist.
-		if ($this->xml->xpath('//fields[@name="'.$name.'"]')) {
+			// Get any fields elements with the correct group name.
+			$elements = $this->xml->xpath('//fields[@name="'.(string) $group[0].'"]');
+
+			// Check to make sure that there are no parent groups for each element.
+			foreach ($elements as $element) {
+				if (!$element->xpath('ancestor::fields[@name]')) {
+					$tmp[] = $element;
+				}
+			}
+
+			// Iterate through the nested groups to find any matching form field groups.
+			for ($i = 1, $n = count($group); $i < $n; $i++) {
+
+				// Initialize some loop variables.
+				$validNames = array_slice($group, 0, $i+1);
+				$current = $tmp;
+				$tmp = array();
+
+				// Check to make sure that there are no parent groups for each element.
+				foreach ($current as $element) {
+
+					// Get any fields elements with the correct group name.
+					$children = $element->xpath('descendant::fields[@name="'.(string) $group[$i].'"]');
+
+					// For the found fields elements validate that they are in the correct groups.
+					foreach ($children as $fields) {
+
+						// Get the group names as strings for anscestor fields elements.
+						$attrs = $fields->xpath('ancestor-or-self::fields[@name]/@name');
+						$names = array_map('strval', $attrs);
+
+						// If the group names for the fields element match the valid names at this
+						// level add the fields element.
+						if ($validNames == $names) {
+							$tmp[] = $fields;
+						}
+					}
+				}
+			}
+
+			// Only include valid XML objects.
+			foreach ($tmp as $element) {
+				if ($element instanceof JXMLElement) {
+					$groups[] = $element;
+				}
+			}
 		}
 
+		return $groups;
 	}
 
 	/**
