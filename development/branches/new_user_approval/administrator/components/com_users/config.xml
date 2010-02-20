@@ -5,7 +5,7 @@
 			name="allowUserRegistration"
 			type="radio"
 			default="1"
-			label="Allow User Registration"
+			label="ALLOW_USER_REGISTRATION"
 			description="TIPALLOWUSERREG">
 			<option
 				value="0">JNo</option>
@@ -17,7 +17,7 @@
 			name="new_usertype"
 			type="usergroup"
 			default="2"
-			label="New User Registration Type"
+			label="NEW_USER_REGISTRATION_TYPE"
 			description="TIPNEWUSERTYPE">
 		</field>
 
@@ -25,8 +25,20 @@
 			name="useractivation"
 			type="radio"
 			default="1"
-			label="New User Account Activation"
+			label="NEW_USER_ACCOUNT_ACTIVATION"
 			description="TIPIFYESUSERMAILEDLINK">
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+
+		<field
+			name="useradminactivation"
+			type="radio"
+			default="0"
+			label="NEW_USER_ACTIVATION_BY_ADMIN"
+			description="TIPIFYESADMINMAILEDLINK">
 			<option
 				value="0">JNo</option>
 			<option
@@ -37,7 +49,7 @@
 			name="frontend_userparams"
 			type="radio"
 			default="1"
-			label="Front-end User Params"
+			label="FRONT_END_USER_PARAMS"
 			description="TIPFRONTENDUSERPARAMS">
 			<option
 				value="0">Hide</option>

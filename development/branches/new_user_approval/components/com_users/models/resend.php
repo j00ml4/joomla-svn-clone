@@ -11,16 +11,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.event.dispatcher');
-
 /**
- * Remind model class for Users.
+ * Resend model class for Users.
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.0
+ * @version		1.6
  */
-
-class UsersModelRemind extends JModelForm
+class UsersModelResend extends JModelForm
 {
 	protected function _populateState()
 	{
@@ -31,17 +29,18 @@ class UsersModelRemind extends JModelForm
 		// Load the parameters.
 		$this->setState('params', $params);
 	}
-		/**
-	 * Method to get the username remind request form.
+
+	/**
+	 * Method to get the activation link resend request form.
 	 *
 	 * @access	public
 	 * @return	object	JForm object on success, JException on failure.
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function &getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('remind', 'com_users.remind', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('resend', 'com_users.resend', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -54,7 +53,7 @@ class UsersModelRemind extends JModelForm
 		JPluginHelper::importPlugin('users');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUserRemindForm', array(&$form));
+		$results = $dispatcher->trigger('onPrepareUserResendRequestForm', array(&$form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
@@ -64,11 +63,19 @@ class UsersModelRemind extends JModelForm
 
 		return $form;
 
-	}
-	function processRemindRequest($data)
+	/**
+	 * Method to start the activation link resend process
+	 *
+	 * @access	public
+	 * @return
+	 * @since	1.6
+	 */
+	function processResendRequest($data)
 	{
+		$params	= &$app->getParams('com_users');
+
 		// Get the form.
-		$form = &$this->getRemindForm();
+		$form = &$this->getResendForm();
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -105,27 +112,31 @@ class UsersModelRemind extends JModelForm
 			return false;
 		}
 
-		// Make sure the user isn't blocked.
-		if ($user->block) {
-			$this->setError(JText::_('USERS_USER_BLOCKED'));
+		// Make sure the user isn't already activated
+		if ($user->get('activate') == null) {
+			$this-setError(JText::_('USERS_USER_ALREADY_ACTIVATED'));
+			return false;
+		}
+
+		// Make sure the user isn't awaiting administrator's approval
+		if ($params->get('useradminactivation') && $user->getParam('emailVerified')) {
+			$this-setError(JText::_('USERS_USER_AWAITING_ACTIVATION'));
 			return false;
 		}
 
 		$config	= &JFactory::getConfig();
 
-		// Assemble the login link.
-		$itemid = UsersHelperRoute::getLoginRoute();
-		$itemid = $itemid !== null ? '&Itemid='.$itemid : '';
-		$link	= 'index.php?option=com_users&view=login'.$itemid;
-		$mode	= $config->getValue('force_ssl', 0) == 2 ? 1 : -1;
+		// Assemble the activation link.
+		$link	= 'index.php?option=com_users&task=registration.activate&token='.$user->get('activate');
 
 		// Put together the e-mail template data.
 		$data = JArrayHelper::fromObject($user);
 		$data['fromname']	= $config->getValue('fromname');
 		$data['mailfrom']	= $config->getValue('mailfrom');
 		$data['sitename']	= $config->getValue('sitename');
-		$data['link_text']	= JRoute::_($link, false, $mode);
-		$data['link_html']	= JRoute::_($link, true, $mode);
+		$data['link_text']	= JRoute::_($link, false);
+		$data['link_html']	= JRoute::_($link, true);
+
 
 		// Load the mail template.
 		jimport('joomla.utilities.simpletemplate');
@@ -153,6 +164,3 @@ class UsersModelRemind extends JModelForm
 
 		return true;
 	}
-
-
-}
