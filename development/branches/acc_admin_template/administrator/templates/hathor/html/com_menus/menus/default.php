@@ -29,10 +29,10 @@ $return	= base64_encode($uri);
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Title', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-30" colspan="3">
-					<?php echo JText::_('JMenus_Heading_Number_menu_items'); ?>
+					<?php echo JText::_('Menus_Heading_Number_menu_items'); ?>
 				</th>
 				<th class="width-20" rowspan="2">
-					<?php echo JText::_('JMenus_Heading_Linked_modules'); ?>
+					<?php echo JText::_('Menus_Heading_Linked_modules'); ?>
 				</th>
 				<th class="nowrap id-col" rowspan="2">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -40,13 +40,13 @@ $return	= base64_encode($uri);
 			</tr>
 			<tr>
 				<th class="width-10">
-					<?php echo JText::_('JMenus_Heading_Published_Items'); ?>
+					<?php echo JText::_('Menus_Heading_Published_Items'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('JMenus_Heading_UnPublished_Items'); ?>
+					<?php echo JText::_('Menus_Heading_UnPublished_Items'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('JMenus_Heading_Trashed_Items'); ?>
+					<?php echo JText::_('Menus_Heading_Trashed_Items'); ?>
 				</th>
 			</tr>
 		</thead>
