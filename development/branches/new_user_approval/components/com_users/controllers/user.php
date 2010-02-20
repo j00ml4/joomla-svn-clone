@@ -153,7 +153,7 @@ class UsersControllerUser extends UsersController
 	}
 
 	/**
-	 * Method to login a user.
+	 * Method to remind a user's username.
 	 *
 	 * @access	public
 	 * @since	1.0
@@ -164,7 +164,7 @@ class UsersControllerUser extends UsersController
 		JRequest::checkToken('post') or jexit(JText::_('JInvalid_Token'));
 
 		$app	= &JFactory::getApplication();
-		$model	= &$this->getModel('User', 'UsersModel');
+		$model	= &$this->getModel('Remind', 'UsersModel');
 		$data	= JRequest::getVar('jform', array(), 'post', 'array');
 
 		// Submit the username remind request.
@@ -218,14 +218,66 @@ class UsersControllerUser extends UsersController
 	}
 
 	/**
-	 * Method to login a user.
+	 * Method to resend the user's activation link.
 	 *
 	 * @access	public
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function resend()
 	{
 		// Check for request forgeries
 		JRequest::checkToken('post') or jexit(JText::_('JInvalid_Token'));
+		$app	= &JFactory::getApplication();
+		$model	= &$this->getModel('Resend', 'UsersModel');
+		$data	= JRequest::getVar('jform', array(), 'post', 'array');
+
+		// Submit the username remind request.
+		$return	= $model->processResendRequest($data);
+
+		// Check for a hard error.
+		if (JError::isError($return))
+		{
+			// Get the error message to display.
+			if ($app->getCfg('error_reporting')) {
+				$message = $return->getMessage();
+			} else {
+				$message = JText::_('USERS_RESEND_REQUEST_ERROR');
+			}
+
+			// Get the route to the next page.
+			$itemid = UsersHelperRoute::getResendRoute();
+			$itemid = $itemid !== null ? '&Itemid='.$itemid : '';
+			$route	= 'index.php?option=com_users&view=profile'.$itemid;
+
+			// Go back to the profile form.
+			$this->setRedirect(JRoute::_($route, false), $message, 'error');
+			return false;
+		}
+		// Complete failed.
+		elseif ($return === false)
+		{
+			// Get the route to the next page.
+			$itemid = UsersHelperRoute::getResendRoute();
+			$itemid = $itemid !== null ? '&Itemid='.$itemid : '';
+			$route	= 'index.php?option=com_users&view=profile'.$itemid;
+
+			// Go back to the profile form.
+			$message = JText::sprintf('USERS_RESEND_REQUEST_FAILED', $model->getError());
+			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
+			return false;
+		}
+		// Complete succeeded.
+		else
+		{
+			// Get the route to the next page.
+			$itemid = UsersHelperRoute::getLoginRoute();
+			$itemid = $itemid !== null ? '&Itemid='.$itemid : '';
+			$route	= 'index.php?option=com_users&view=profile'.$itemid;
+
+			// Proceed to the profile form.
+			$message = JText::_('USERS_RESEND_REQUEST_SUCCESS');
+			$this->setRedirect(JRoute::_($route, false), $message);
+			return true;
+		}
 	}
 }

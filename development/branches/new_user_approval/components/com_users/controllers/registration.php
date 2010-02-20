@@ -52,21 +52,42 @@ class UsersControllerRegistration extends UsersController
 		}
 
 		// Attempt to activate the user.
-		$return = $model->activate($token);
+		$need_approval = ($user->getParam('useradminactivation') === 1) ? true : false;
+
+		if ($need_approval === false)
+		{
+			$return = $model->activate($token);
+		}
+		else
+		{
+			$emailVerified= ($user->getParam('emailVerified','0') === 1) ? true : false;
+			$return = $model->activate($token, ($emailVerified === true) ? 0 : 1, $emailVerified);
+		}
 
 		// Check for errors.
 		if ($return === false)
 		{
 			// Redirect back to the homepage.
-			$this->setMessage(JText::sprintf('USERS_REGISTRATION_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('USERS_ACTIVATION_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect('index.php');
 			return false;
 		}
 
-		// Redirect to the login screen.
-		$this->setMessage(JText::_('USERS_REGISTRATION_SAVE_SUCCESS'));
-		$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
-		return true;
+		if ($need_approval === false)
+		{
+			// Redirect to the login screen.
+			$this->setMessage(JText::_('USERS_ACTIVATION_SAVE_SUCCESS'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		}
+		else
+		{
+			$message = ($isAdmin === false) ? 'USERS_ACTIVATION_NEED_APPROVE' : 'USERS_ACTIVATION_ADMIN_SAVE_SUCCESS';
+
+			// Redirect back to the homepage.
+			$this->setMessage(JText::sprintf($message));
+			$this->setRedirect('index.php');
+		}
+				return true;
 	}
 
 	/**

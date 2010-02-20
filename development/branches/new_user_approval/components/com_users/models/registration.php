@@ -169,6 +169,9 @@ class UsersModelRegistration extends JModelForm
 			jimport('joomla.user.helper');
 			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
 			$data['block'] = 1;
+			if ($params->get('useradminactivation')) {
+				$data['emailVerified'] = 0;
+			{
 		}
 
 		// Bind the data.
@@ -201,6 +204,17 @@ class UsersModelRegistration extends JModelForm
 			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$data['activation'], false);
 
 			// Get the registration activation e-mail.
+			if ($params->get('useradminactivation'))
+			{
+				// Get the account verification e-mail.
+				$message = 'com_users.registration.verify';
+			}
+			else
+			{
+				// Get the registration activation e-mail.
+				$message = 'com_users.registration.activate';
+			}
+
 			$message = 'com_users.registration.activate';
 		}
 		else
@@ -237,6 +251,7 @@ class UsersModelRegistration extends JModelForm
 	function activate($token)
 	{
 		$config = &JFactory::getConfig();
+		$params = &JComponentHelper::getParams('com_users');
 
 		// Get the user id based on the token.
 		$this->_db->setQuery(
@@ -258,8 +273,26 @@ class UsersModelRegistration extends JModelForm
 
 		// Activate the user.
 		$user = &JFactory::getUser($userId);
-		$user->set('activation', '');
 		$user->set('block', '0');
+
+		if ($params->get('useradminapproval'))
+		{
+			if ($isAdmin === false)
+			{
+				$token = JUtility::getHash(JUserHelper::genRandomPassword());
+				$user->set('activation', $this->_db->Quote($token));
+				$user->setParam('emailVerified', 1);
+				$user->set('block', '1');
+			}
+			else
+			{
+				$user->set('activation', '');
+			}
+		}
+		else
+		{
+			$user->set('activation', '');
+		}
 
 		// Store the user object.
 		if (!$user->save()) {
@@ -272,6 +305,38 @@ class UsersModelRegistration extends JModelForm
 		$data['fromname'] = $config->getValue('fromname');
 		$data['mailfrom'] = $config->getValue('mailfrom');
 		$data['sitename'] = $config->getValue('sitename');
+
+		if ($isAdmin === false)
+		{
+			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$token, false);
+
+			//get all administrators.
+			$query = 'SELECT name, email, sendEmail' .
+						' FROM #__users' .
+						' WHERE sendEmail=1';
+
+			$db->setQuery( $query );
+			$rows = $db->loadObjectList();
+
+			// Set data for all administrators
+			$count = 0;
+			$data['email'] = '';
+			foreach( $rows as $row )
+			{
+				$data['email'] .= $row->email;
+				$count++;
+				if ($count < count($rows))
+					$data['email'] .= ';';
+			}
+
+			// Get the admin registration activation e-mail.
+			$message = 'com_users.registration.admin.activate';
+		}
+		else
+		{
+			// Get the registration confirmation e-mail.
+			$message = 'com_users.registration.confirm';
+		}
 
 		// Load the message template and bind the data.
 		jimport('joomla.utilities.simpletemplate');
