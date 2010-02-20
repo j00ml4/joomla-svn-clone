@@ -20,7 +20,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 
 	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
-		<div class="filter-search">
+		<div class="filter-select">
 			<label class="filter-search-lbl" for="filter_client_id">
 				<?php echo JText::_('COM_LANGS_FILTER_CLIENT_LABEL'); ?>
 			</label>

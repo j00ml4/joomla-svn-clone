@@ -66,7 +66,7 @@ JHtml::_('behavior.tooltip');
 					,
 					<?php echo JText::_('COMMENTS_BODY'); ?>
 				</th>
-				<th nowrap="nowrap width-12">
+				<th class="nowrap width-12">
 					<?php echo JText::_('COMMENTS_ACTION'); ?>
 				</th>
 				<th class="nowrap id-col">
