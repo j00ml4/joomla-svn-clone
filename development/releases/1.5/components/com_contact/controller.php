@@ -78,9 +78,29 @@ class ContactController extends JController
 		if ($user->get('id') || ($viewnow == 'category' && $viewcache == 0)) {
 			$view->display();
 		} else {
+
+			// Workaround for token caching
+			if ($viewName == 'contact')
+			{
+				ob_start();
+			}
+			
 			$option = JRequest::getCmd('option');
 			$cache =& JFactory::getCache($option, 'view');
 			$cache->get($view, 'display');
+			
+			// Workaround for token caching
+			if ($viewName == 'contact')
+			{
+				$contents = ob_get_contents();
+				ob_end_clean();
+				
+				$token			= JUtility::getToken();
+				$search 		= '#<input type="hidden" name="[0-9a-f]{32}" value="1" />#';
+				$replacement 	= '<input type="hidden" name="'.$token.'" value="1" />';
+
+				echo preg_replace($search, $replacement, $contents);
+			}
 		}
 	}
 

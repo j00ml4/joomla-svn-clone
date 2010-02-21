@@ -34,7 +34,10 @@ var JCaption = new Class({
 		var text      = document.createElement("p");
 		var width     = element.getAttribute("width");
 		var align     = element.getAttribute("align");
-		var docMode = document.documentMode;
+
+		if(!width) {
+			width = element.width;
+		}
 
 		//Windows fix
 		if (!align)
@@ -42,29 +45,23 @@ var JCaption = new Class({
 		if (!align) // IE DOM Fix
 			align = element.style.styleFloat;
 
+		if (align=="") {
+			align="none";
+		}
+
 		text.appendChild(caption);
 		text.className = this.selector.replace('.', '_');
 
-		if (align=="none") {
-			if (element.title != "") {
-				element.parentNode.replaceChild(text, element);
-				text.parentNode.insertBefore(element, text);
-			}
-		} else {
-			element.parentNode.insertBefore(container, element);
-			container.appendChild(element);
-			if ( element.title != "" ) {
-				container.appendChild(text);
-			}
-			container.className   = this.selector.replace('.', '_');
-			container.className   = container.className + " " + align;
-			container.setAttribute("style","float:"+align);
-
-			//IE8 fix
-			if (!docMode|| docMode < 8) {
-				container.style.width = width + "px";
-			}
+		element.parentNode.insertBefore(container, element);
+		container.appendChild(element);
+		if ( element.title != "" ) {
+			container.appendChild(text);
 		}
+		container.className   = this.selector.replace('.', '_');
+		container.className   = container.className + " " + align;
+		container.setAttribute("style","float:"+align);
+
+		container.style.width = width + "px";
 
 	}
 });
