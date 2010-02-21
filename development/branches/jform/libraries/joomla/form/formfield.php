@@ -9,8 +9,6 @@
 
 defined('JPATH_BASE') or die;
 
-jimport('joomla.utilities.simplexml');
-
 /**
  * Abstract Form Field class for the Joomla Framework.
  *
