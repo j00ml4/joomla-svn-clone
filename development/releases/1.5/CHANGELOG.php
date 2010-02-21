@@ -43,6 +43,8 @@ $ -> Language fix or change
  $ [#19604] Missing ini string in installation
  # [#19435] New caching of com_contact in 1.5.15 results in "Invalid Token"
  # [#19405] Improvements to caption
+ # [#18987] Minor bug in module updater code
+
 
 26-Jan-2010 Louis Landry
  ^ Updated copyright notices for 2010
