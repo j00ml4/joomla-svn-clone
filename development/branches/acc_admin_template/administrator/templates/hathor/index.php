@@ -144,7 +144,7 @@ $app	= &JFactory::getApplication();
 		
 	</div><!-- end of content -->
 
-	<div class="clearfooter"></div>
+	<div class="clr"></div>
 </div><!-- end of containerwrap -->
 
 <!-- Footer -->

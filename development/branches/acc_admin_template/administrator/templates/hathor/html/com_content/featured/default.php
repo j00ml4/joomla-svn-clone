@@ -21,7 +21,8 @@ $n = count($this->items);
 
 // Get additional language strings prefixed with TPL_HATHOR
 $lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR); 
+$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
+|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=featured');?>" method="post" name="adminForm">
