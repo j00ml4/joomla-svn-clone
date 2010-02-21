@@ -27,9 +27,32 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+21-Feb-2010 Mark Dexter
+^ Make filter HTML consistent for back-end screens (Andrea Tarr)
+^ Fix system tests to reflect HTML changes
+
+21-Feb-2010 Jean-Marie Simonet
+^$ Refactored com_weblinks ini/keys + some
+
+21-Feb-2010 Christophe Demko
+# Correcting a bug in component update
+# Enabling ftp for installation extension
++ Adding administrator/manifests/files/index.html
+
+20-Feb-2010 Jean-Marie Simonet
+^ Changed path to transliteration ascii.php. Thanks Wojtek.
+$ Made com_comments.ini back-end parse ini compatible
+# Correcting bug in installer template adpater uninstall
+
+19-Feb-2010 Christophe Demko
+# Correcting a bug in the codemirror plugin
++$ Adding a language string
++ Adding an background icon in bluestork css
+
 19-Feb-2010 Jean-Marie Simonet
 $^ Refactored display of content Category:title to cope with various languages
 ^ Refactored com_weblinks admin ini/keys + some
+^ Revert name changes for templates
 
 18-Feb-2010 Mark Dexter
 ^ Remove redundant alt attributes for Control Panel icons (Andrea Tarr)
