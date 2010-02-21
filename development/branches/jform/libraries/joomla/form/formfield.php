@@ -329,10 +329,10 @@ abstract class JFormField
 		if ($group) {
 			// If we already have an id segment add the group control as another level.
 			if ($id) {
-				$id .= '_'.$group;
+				$id .= '_'.str_replace('.', '_', $group);
 			}
 			else {
-				$id .= $group;
+				$id .= str_replace('.', '_', $group);
 			}
 		}
 
@@ -414,11 +414,17 @@ abstract class JFormField
 		// If the field is in a group add the group control to the field name.
 		if ($group) {
 			// If we already have a name segment add the group control as another level.
+			$groups = explode('.', $group);
 			if ($name) {
-				$name .= '['.$group.']';
+				foreach ($groups as $group) {
+					$name .= '['.$group.']';
+				}
 			}
 			else {
-				$name .= $group;
+				$name .= array_shift($groups);
+				foreach ($groups as $group) {
+					$name .= '['.$group.']';
+				}
 			}
 		}
 
