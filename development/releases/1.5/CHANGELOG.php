@@ -40,6 +40,7 @@ $ -> Language fix or change
 21-Feb-2010 Ian MacLennan
  $ [#19715] Adding Phnom-Penh to UTC strings
  $ [#19627] Add sr-YU in installation
+ $ [#19604] Missing ini string in installation
 
 26-Jan-2010 Louis Landry
  ^ Updated copyright notices for 2010
