@@ -186,8 +186,10 @@ class JInstallerModule extends JObject
 		// been stopped by the above. Otherwise the files weren't there
 		// (e.g. migration) or its an upgrade (files overwritten)
 		// So all we need to do is create an entry when we can't find one
-		if (!$id) {
-			$row = & JTable::getInstance('module');
+		$row = & JTable::getInstance('module');
+		if ($id) {
+			$row->load($id);
+		} else {
 			$row->title = JText::_($this->get('name'));
 			$row->ordering = $row->getNextOrder( "position='left'" );
 			$row->position = 'left';
