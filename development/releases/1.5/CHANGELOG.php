@@ -41,6 +41,7 @@ $ -> Language fix or change
  $ [#19715] Adding Phnom-Penh to UTC strings
  $ [#19627] Add sr-YU in installation
  $ [#19604] Missing ini string in installation
+ # [#19435] New caching of com_contact in 1.5.15 results in "Invalid Token"
 
 26-Jan-2010 Louis Landry
  ^ Updated copyright notices for 2010
