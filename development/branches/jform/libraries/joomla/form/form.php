@@ -11,6 +11,7 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.filesystem.path');
 jimport('joomla.form.formfield');
+jimport('joomla.registry.registry');
 
 /**
  * Form Class for the Joomla Framework.
@@ -26,12 +27,12 @@ jimport('joomla.form.formfield');
 class JForm
 {
 	/**
-	 * The data store for form fields during display.
+	 * The JRegistry data store for form fields during display.
 	 *
-	 * @var		array
+	 * @var		object
 	 * @since	1.6
 	 */
-	protected $data = array();
+	protected $data;
 
 	/**
 	 * The form object errors array.
@@ -104,6 +105,9 @@ class JForm
 		// Set the name for the form.
 		$this->name = $name;
 
+		// Initialize the JRegistry data.
+		$this->data = new JRegistry();
+
 		// Set the options if specified.
 		$this->options['control']  = isset($options['control']) ? $options['control'] : false;
 	}
@@ -111,9 +115,9 @@ class JForm
 	/**
 	 * Method to bind data to the form.
 	 *
-	 * @param	mixed	An array or object of data to bind to the form.
+	 * @param	mixed	$data	An array or object of data to bind to the form.
 	 *
-	 * @return	mixed	Boolean false on error or array of JXMLElement objects.
+	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
 	public function bind($data)
@@ -128,10 +132,10 @@ class JForm
 			return false;
 		}
 
-		// Convert objects to arrays.
+		// Convert the input to an array.
 		if (is_object($data)) {
 			if ($data instanceof JRegistry) {
-				// Handle a JRegistry object.
+				// Handle a JRegistry.
 				$data = $data->toArray();
 			} else if ($data instanceof JObject) {
 				// Handle a JObject.
@@ -142,23 +146,20 @@ class JForm
 			}
 		}
 
-		foreach ($data as $name => $value) {
+		// Process the input data.
+		foreach ($data as $k => $v) {
 
-			if ($fields = $this->xml->xpath('//field[@name="'.$name.'"]')) {
+			// If the value is a scalar just process it.
+			if (is_scalar($v)) {
 
-				// We have a field of that name and value.
-				$this->data[$name] = $value;
-
-			} else if ($this->xml->xpath('//fields[@name="'.$name.'"]') && is_array($value)) {
-
-				// We have a fields of that name and the data value is also an array
-				foreach ($value as $subName => $subValue) {
-
-					// Validate the subfield name.
-					if ($fields = $this->xml->xpath('//fields[@name="'.$name.'"]//field[@name="'.$subName.'"]')) {
-						$this->data[$name][$subName] = $subValue;
-					}
+				// If the field exists set the value.
+				if ($this->findField($k)) {
+					$this->data->set($k, $v);
 				}
+			}
+			// If the value is not a scalar hand it off to the recursive bind level method.
+			else {
+				$this->bindLevel($k, $v);
 			}
 		}
 
@@ -169,8 +170,7 @@ class JForm
 	 * Method to filter the form data.
 	 *
 	 * @param	array	$data	An array of field values to filter.
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node on which to filter the fields.
+	 * @param	string	$group	The dot-separated form group path on which to filter the fields.
 	 *
 	 * @return	mixed	boolean	True on sucess.
 	 * @since	1.6
@@ -183,8 +183,8 @@ class JForm
 		}
 
 		// Initialize variables.
-		$raw		= (array) $data;
-		$filtered	= array();
+		$input	= new JRegistry($data);
+		$output	= new JRegistry();
 
 		// Get the fields for which to filter the data.
 		$fields = $this->findFieldsByGroup($group);
@@ -197,37 +197,30 @@ class JForm
 		foreach ($fields as $field) {
 
 			// Initialize variables.
-			$groups		= array();
-			$groupName	= null;
-			$fieldName	= (string) $field['name'];
+			$name = (string) $field['name'];
 
 			// Get the field groups for the element.
-			$names = $field->xpath('ancestor::fields[@name]/@name');
-
-			// Build the group for the element.
-			foreach ($names as $name) {
-				$groups[] = (string) $name;
-			}
-
-			// Use only one level of group depth for now.
-			$groupName = $groups[0];
+			$attrs	= $field->xpath('ancestor::fields[@name]/@name');
+			$groups	= array_map('strval', (array) $attrs);
+			$group	= implode('.', $groups);
 
 			// Get the field value from the data input.
-			if ($groupName) {
+			if ($group) {
+
 				// Filter the value if it exists.
-				if (isset($raw[$groupName][$fieldName])) {
-					$filtered[$groupName][$fieldName] = $this->filterField($field, $raw[$groupName][$fieldName]);
+				if ($input->get($group.'.'.$name) !== null) {
+					$output->set($group.'.'.$name, $this->filterField($field, $input->get($group.'.'.$name)));
 				}
 			}
 			else {
 				// Filter the value if it exists.
-				if (isset($raw[$fieldName])) {
-					$filtered[$fieldName] = $this->filterField($field, $raw[$fieldName]);
+				if ($input->get($name) !== null) {
+					$output->set($name, $this->filterField($field, $input->get($name)));
 				}
 			}
 		}
 
-		return $filtered;
+		return $output->toArray();
 	}
 
 	/**
@@ -245,8 +238,7 @@ class JForm
 	 * Method to get a form field represented as a JFormField object.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node on which to find the field.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value	The optional value to use as the default for the field.
 	 *
 	 * @return	mixed	The JFormField object for the field or boolean false on error.
@@ -276,9 +268,8 @@ class JForm
 	 *
 	 * @param	string	$name		The name of the form field for which to get the attribute value.
 	 * @param	string	$attribute	The name of the attribute for which to get a value.
-	 * @param	mixed	$default	The default value to use if no attribute value exists.
-	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
-	 * 								(array) of group names in order under which to find the field.
+	 * @param	mixed	$default	The optional default value to use if no attribute value exists.
+	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 *
 	 * @return	mixed	The attribute value for the field.
 	 * @since	1.6
@@ -334,20 +325,11 @@ class JForm
 
 		// Build the result array from the found field elements.
 		foreach ($elements as $element) {
-			// Initialize variables.
-			$groups = array();
-			$group = null;
 
 			// Get the field groups for the element.
-			$names = $element->xpath('ancestor::fields[@name]/@name');
-
-			// Build the group for the element.
-			foreach ($names as $name) {
-				$groups[] = (string) $name;
-			}
-
-			// Use only one level of group depth for now.
-			$group = $groups[0];
+			$attrs	= $element->xpath('ancestor::fields[@name]/@name');
+			$groups	= array_map('strval', $attrs);
+			$group	= implode('.', $groups);
 
 			// If the field is successfully loaded add it to the result array.
 			if ($field = $this->loadField($element, $group)) {
@@ -361,8 +343,7 @@ class JForm
 	/**
 	 * Method to get an array of fieldset objects optionally filtered over a given field group.
 	 *
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node on which to filter the fieldsets.
+	 * @param	string	$group	The dot-separated form group path on which to filter the fieldsets.
 	 *
 	 * @return	array	The array of fieldset objects.
 	 * @since	1.6
@@ -464,8 +445,7 @@ class JForm
 	/**
 	 * Method to get an array of JFormField objects in a given field group by name.
 	 *
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node for which to get form fields.
+	 * @param	string	$group	The dot-separated form group path for which to get the form fields.
 	 * @param	boolean	$nested	True to also include fields in nested groups that are inside of the
 	 * 							group for which to find fields.
 	 *
@@ -500,8 +480,7 @@ class JForm
 	 * Method to get a form field markup for the field input.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node on which to find the field.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value	The optional value to use as the default for the field.
 	 *
 	 * @return	string	The form field markup.
@@ -521,8 +500,7 @@ class JForm
 	 * Method to get a form field markup for the field input.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	mixed	$group	The (string) name of the group or an (array) of group names in order
-	 * 							from the root node on which to find the field.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the field.
 	 *
 	 * @return	string	The form field markup.
 	 * @since	1.6
@@ -552,8 +530,7 @@ class JForm
 	 * Method to get the value of a field.
 	 *
 	 * @param	string	$name		The name of the field for which to get the value.
-	 * @param	mixed	$group		The (string) name of the group or an (array) of group names in
-	 * 								order from the root node on which to get the value.
+	 * @param	string	$group		The optional dot-separated form group path on which to get the value.
 	 * @param	mixed	$default	The optional default value of the field value is empty.
 	 *
 	 * @return	mixed	The value of the field or the default value if empty.
@@ -561,20 +538,12 @@ class JForm
 	 */
 	public function getValue($name, $group = null, $default = null)
 	{
-		// Initialize the return value to the default.
-		$return = $default;
-
+		// If a group is set use it.
 		if ($group) {
-			// If the value exists for the field name in the group use it.
-			if (isset($this->data[$group][$name])) {
-				$return = $this->data[$group][$name];
-			}
+			$return = $this->data->get($group.'.'.$name, $default);
 		}
 		else {
-			// If the value exists for the field name use it.
-			if (isset($this->data[$name])) {
-				$return = $this->data[$name];
-			}
+			$return = $this->data->get($name, $default);
 		}
 
 		return $return;
@@ -669,8 +638,7 @@ class JForm
 	 * Method to remove a field from the form definition.
 	 *
 	 * @param	string	$name		The name of the form field for which remove.
-	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
-	 * 								(array) of group names in order under which to find the field.
+	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -697,8 +665,7 @@ class JForm
 	/**
 	 * Method to remove a group from the form definition.
 	 *
-	 * @param	mixed	$group	The (string) name of the group for which to remove or an (array) of
-	 * 							group names in order under which to remove.
+	 * @param	string	$group	The dot-separated form group path for the group to remove.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -726,8 +693,8 @@ class JForm
 	 * will not be replaced if it already exists.
 	 *
 	 * @param	object	$element	The XML element object representation of the form field.
-	 * @param	mixed	$group		The (string) name of the group for which to set the field or an
-	 * 								(array) of group names in order under which to set the field.
+	 * @param	string	$group		The optional dot-separated form group path on which to set the field.
+	 * @param	boolean	$replace	True to replace an existing field if one already exists.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -763,8 +730,7 @@ class JForm
 	 * @param	string	$name		The name of the form field for which to set the attribute value.
 	 * @param	string	$attribute	The name of the attribute for which to set a value.
 	 * @param	mixed	$value		The value to set for the attribute.
-	 * @param	mixed	$group		The (string) name of the group for which to find the field or an
-	 * 								(array) of group names in order under which to find the field.
+	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -797,8 +763,7 @@ class JForm
 	 * will not be replaced if they already exist.
 	 *
 	 * @param	object	$elements	The array of XML element object representations of the form fields.
-	 * @param	mixed	$group		The (string) name of the group for which to set the fields or an
-	 * 								(array) of group names in order under which to set the fields.
+	 * @param	string	$group		The optional dot-separated form group path on which to set the fields.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
@@ -826,7 +791,7 @@ class JForm
 	 * will return false.
 	 *
 	 * @param	string	$name	The name of the field for which to set the value.
-	 * @param	string	$group	The group the field is in if any.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value	The value to set for the field.
 	 *
 	 * @return	boolean	True on success.
@@ -841,10 +806,10 @@ class JForm
 
 		// If a group is set use it.
 		if ($group) {
-			$this->data[$group][$name] = $value;
+			$this->data->set($group.'.'.$name, $value);
 		}
 		else {
-			$this->data[$name] = $value;
+			$this->data->set($name, $value);
 		}
 
 		return true;
@@ -857,7 +822,8 @@ class JForm
 	 * retrieved with JForm::getErrors() when validate returns boolean false.
 	 *
 	 * @param	array	$data	An array of field values to validate.
-	 * @param	string	$group	The optional name of a field group on which to filter fields to validate.
+	 * @param	string	$group	The optional dot-separated form group path on which to filter the
+	 * 							fields to be validated.
 	 *
 	 * @return	mixed	boolean	True on sucess.
 	 * @since	1.6
@@ -870,8 +836,10 @@ class JForm
 		}
 
 		// Initialize variables.
-		$data	= (array) $data;
 		$return	= true;
+
+		// Create an input registry object from the data to validate.
+		$input = new JRegistry($data);
 
 		// Get the fields for which to validate the data.
 		$fields = $this->findFieldsByGroup($group);
@@ -884,34 +852,20 @@ class JForm
 		foreach ($fields as $field) {
 
 			// Initialize variables.
-			$groups		= array();
-			$groupName	= null;
-			$value		= null;
-			$fieldName	= (string) $field['name'];
+			$value	= null;
+			$name	= (string) $field['name'];
 
-			// Get the field groups for the element.
-			$names = $field->xpath('ancestor::fields[@name]/@name');
+			// Get the group names as strings for anscestor fields elements.
+			$attrs	= $field->xpath('ancestor::fields[@name]/@name');
+			$groups	= array_map('strval', $attrs);
+			$group	= implode('.', $groups);
 
-			// Build the group for the element.
-			foreach ($names as $name) {
-				$groups[] = (string) $name;
-			}
-
-			// Use only one level of group depth for now.
-			$groupName = $groups[0];
-
-			// Get the field value from the data input.
-			if ($groupName) {
-				// If the value exists for the field name in the group use it.
-				if (isset($data[$groupName][$fieldName])) {
-					$value = $data[$groupName][$fieldName];
-				}
+			// Get the value from the input data.
+			if ($group) {
+				$value = $input->get($group.'.'.$name);
 			}
 			else {
-				// If the value exists for the field name use it.
-				if (isset($data[$fieldName])) {
-					$value = $data[$fieldName];
-				}
+				$value = $input->get($name);
 			}
 
 			// Validate the field.
@@ -934,6 +888,38 @@ class JForm
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Method to bind data to the form for the group level.
+	 *
+	 * @param	string	$group	The dot-separated form group path on which to bind the data.
+	 * @param	mixed	$data	An array or object of data to bind to the form for the group level.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function bindLevel($group, $data)
+	{
+		// Ensure the input data is an array.
+		$data = (array) $data;
+
+		// Process the input data.
+		foreach ($data as $k => $v) {
+
+			// If the value is a scalar just process it.
+			if (is_scalar($v)) {
+
+				// If the field exists set the value.
+				if ($this->findField($k, $group)) {
+					$this->data->set($group.'.'.$k, $v);
+				}
+			}
+			// If the value is not a scalar hand it off to the recursive bind level method.
+			else {
+				$this->bindLevel($group.'.'.$k, $v);
+			}
+		}
 	}
 
 	/**
@@ -1037,7 +1023,7 @@ class JForm
 	 * Method to get a form field represented as an XML element object.
 	 *
 	 * @param	string	$name	The name of the form field.
-	 * @param	string	$group	The optional form field group in which to find the field.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the field.
 	 *
 	 * @return	mixed	The XML element object for the field or boolean false on error.
 	 * @since	1.6
@@ -1074,6 +1060,7 @@ class JForm
 			}
 
 			// Use the first correct match in the given group.
+			$groupNames = explode('.', $group);
 			foreach ($fields as $field) {
 
 				// Get the group names as strings for anscestor fields elements.
@@ -1081,7 +1068,7 @@ class JForm
 				$names = array_map('strval', $attrs);
 
 				// If the field is in the exact group use it and break out of the loop.
-				if ($names == (array) $group) {
+				if ($names == (array) $groupNames) {
 					$element = $field;
 					break;
 				}
@@ -1146,7 +1133,7 @@ class JForm
 	 * Method to get an array of <field /> elements from the form XML document which are
 	 * in a control group by name.
 	 *
-	 * @param	string	$group	The optional name of the control group.
+	 * @param	string	$group	The optional dot-separated form group path on which to find the fields.
 	 * @param	boolean	$nested	True to also include fields in nested groups that are inside of the
 	 * 							group for which to find fields.
 	 *
@@ -1182,13 +1169,14 @@ class JForm
 					}
 					// If we want to exclude nested groups then we need to check each field.
 					else {
+						$groupNames = explode('.', $group);
 						foreach ($tmp as $field) {
 							// Get the names of the groups that the field is in.
 							$attrs = $field->xpath('ancestor::fields[@name]/@name');
 							$names = array_map('strval', $attrs);
 
 							// If the field is in the specific group then add it to the return list.
-							if ($names == (array) $group) {
+							if ($names == (array) $groupNames) {
 								$fields = array_merge($fields, array($field));
 							}
 						}
@@ -1207,8 +1195,7 @@ class JForm
 	/**
 	 * Method to get a form field group represented as an XML element object.
 	 *
-	 * @param	mixed	$group	The (string) name of the group to find or an (array) of group names
-	 * 							in order from the root node to find the group.
+	 * @param	string	$group	The dot-separated form group path on which to find the group.
 	 *
 	 * @return	mixed	An array of XML element objects for the group or boolean false on error.
 	 * @since	1.6
@@ -1216,7 +1203,6 @@ class JForm
 	protected function & findGroup($group)
 	{
 		// Initialize variables.
-		$group = (array) $group;
 		$false = false;
 		$groups = array();
 		$tmp = array();
@@ -1227,6 +1213,7 @@ class JForm
 		}
 
 		// Make sure there is actually a group to find.
+		$group = explode('.', $group);
 		if (!empty($group)) {
 
 			// Get any fields elements with the correct group name.
@@ -1284,7 +1271,7 @@ class JForm
 	 * Method to load, setup and return a JFormField object based on field data.
 	 *
 	 * @param	string	$element	The XML element object representation of the form field.
-	 * @param	string	$group		The optional form field group in which to find the field.
+	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value		The optional value to use as the default for the field.
 	 *
 	 * @return	mixed	The JFormField object for the field or boolean false on error.
@@ -1456,7 +1443,7 @@ class JForm
 	 * Method to validate a JFormField object based on field data.
 	 *
 	 * @param	string	$element	The XML element object representation of the form field.
-	 * @param	string	$group		The optional form field group in which to find the field.
+	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value		The optional value to use as the default for the field.
 	 *
 	 * @return	mixed	Boolean true if field value is valid, JException on failure.

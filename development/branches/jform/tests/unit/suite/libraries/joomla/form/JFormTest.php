@@ -195,11 +195,11 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	<fields
 		description="All the fields">
 		<!-- Set up a group of fields called details. -->
+		<field
+			name="title" />
 		<fields
 			name="details"
 			description="The Details Group">
-			<field
-				name="title" />
 			<field
 				name="abstract" />
 		</fields>
@@ -244,12 +244,12 @@ XML;
 		// Get the data to inspect it.
 		$data = $form->getData();
 		$this->assertThat(
-			isset($data['title']) && $data['title'] = 'Joomla Framework',
+			($data->get('title') == 'Joomla Framework'),
 			$this->isTrue()
 		);
 
 		$this->assertThat(
-			isset($data['author']),
+			((bool) $data->get('author')),
 			$this->isFalse()
 		);
 	}
@@ -300,6 +300,83 @@ XML;
 	 */
 	public function testFilter()
 	{
+		$form = new JFormInspector('form1');
+
+		$xml = <<<XML
+<form>
+	<fields
+		description="All the fields">
+		<!-- Set up a group of fields called details. -->
+		<field
+			name="title" filter="word" />
+		<fields
+			name="details"
+			description="The Details Group">
+			<field
+				name="abstract" />
+		</fields>
+		<fields
+			name="params"
+			description="Optional Settings">
+			<field
+				name="show_title" filter="int" />
+			<field
+				name="show_abstract" filter="int" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" filter="int" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>
+XML;
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load($xml),
+			$this->isTrue()
+		);
+
+		$data = array(
+			'title'		=> 'Joomla Framework',
+			'author'	=> 'Should not bind',
+			'params'	=> array(
+				'show_title'	=> 1,
+				'show_abstract'	=> false,
+				'show_author'	=> '1',
+			)
+		);
+
+		$filtered = $form->filter($data);
+
+		// Filter the data.
+		$this->assertThat(
+			(bool)$filtered,
+			$this->isTrue()
+		);
+
+		// Bind the data.
+		$this->assertThat(
+			($filtered['title'] === 'JoomlaFramework'),
+			$this->isTrue()
+		);
+
+		// Bind the data.
+		$this->assertThat(
+			(!isset($filtered['author'])),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			($filtered['params']['show_author'] === 1),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			($filtered['params']['show_abstract'] === 0),
+			$this->isTrue()
+		);
+
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	/*
 		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
@@ -538,14 +615,14 @@ XML;
 		);
 
 		// Check that a non-existant field returns nothing.
-		$fields = $form->findGroup(array('cache', 'params'));
+		$fields = $form->findGroup('cache.params');
 		$this->assertThat(
 			empty($fields),
 			$this->isTrue()
 		);
 
 		// Check that an existant field returns something.
-		$fields = $form->findGroup(array('params', 'cache'));
+		$fields = $form->findGroup('params.cache');
 		$this->assertThat(
 			empty($fields),
 			$this->isFalse()

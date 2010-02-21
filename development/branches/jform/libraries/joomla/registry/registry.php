@@ -26,7 +26,7 @@ class JRegistry
 	 *
 	 * @var object
 	 */
-	protected $_data;
+	protected $data;
 
 	/**
 	 * Constructor
@@ -37,7 +37,7 @@ class JRegistry
 	public function __construct($data = null)
 	{
 		// Instantiate the internal data object.
-		$this->_data = new stdClass;
+		$this->data = new stdClass();
 
 		// Optionally load supplied data.
 		if (is_array($data)) {
@@ -56,7 +56,7 @@ class JRegistry
 	 */
 	public function __clone()
 	{
-		$this->_data = unserialize(serialize($this->_data));
+		$this->data = unserialize(serialize($this->data));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class JRegistry
 		// Explode the registry path into an array
 		if ($nodes = explode('.', $path)) {
 			// Initialize the current node to be the registry root.
-			$node = $this->_data;
+			$node = $this->data;
 
 			// Traverse the registry to find the correct node for the result.
 			for ($i = 0,$n = count($nodes); $i < $n; $i++) {
@@ -158,7 +158,13 @@ class JRegistry
 	{
 		// Load the variables into the registry's data object.
 		foreach ($array as $k => $v) {
-			$this->_data->$k = $v;
+			if (!is_scalar($v)) {
+				$this->data->$k = new stdClass();
+				$this->bindData($this->data->$k, $v);
+			}
+			else {
+				$this->data->$k = $v;
+			}
 		}
 
 		return true;
@@ -177,7 +183,13 @@ class JRegistry
 		if (is_object($object)) {
 			foreach (get_object_vars($object) as $k => $v) {
 				if (substr($k, 0,1) != '_' || $k == '_name') {
-					$this->_data->$k = $v;
+					if (!is_scalar($v)) {
+						$this->data->$k = new stdClass();
+						$this->bindData($this->data->$k, $v);
+					}
+					else {
+						$this->data->$k = $v;
+					}
 				}
 			}
 		}
@@ -279,7 +291,7 @@ class JRegistry
 			// Load the variables into the registry's default namespace.
 			foreach ($source->toArray() as $k => $v) {
 				if ($v != null) {
-					$this->_data->$k = $v;
+					$this->data->$k = $v;
 				}
 			}
 			return true;
@@ -302,7 +314,7 @@ class JRegistry
 		// Explode the registry path into an array
 		if ($nodes = explode('.', $path)) {
 			// Initialize the current node to be the registry root.
-			$node = $this->_data;
+			$node = $this->data;
 
 			// Traverse the registry to find the correct node for the result.
 			for ($i = 0, $n = count($nodes) - 1; $i < $n; $i++) {
@@ -328,12 +340,7 @@ class JRegistry
 	 */
 	public function toArray()
 	{
-		$array = array();
-		foreach (get_object_vars($this->_data) as $k => $v) {
-			$array[$k] = $v;
-		}
-
-		return $array;
+		return (array) $this->asArray($this->data);
 	}
 
 	/**
@@ -345,7 +352,7 @@ class JRegistry
 	 */
 	public function toObject()
 	{
-		return $this->_data;
+		return $this->data;
 	}
 
 	/**
@@ -362,7 +369,60 @@ class JRegistry
 		// Return a namespace in a given format
 		$handler = JRegistryFormat::getInstance($format);
 
-		return $handler->objectToString($this->_data, $params);
+		return $handler->objectToString($this->data, $params);
+	}
+
+	/**
+	 * Method to recursively bind data to a parent object.
+	 *
+	 * @param	object	$parent	The parent object on which to attach the data values.
+	 * @param	mixed	$data	An array or object of data to bind to the parent object.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function bindData(& $parent, $data)
+	{
+		// Ensure the input data is an array.
+		$data = (array) $data;
+
+		foreach ($data as $k => $v) {
+			if ($k[0] != '_') {
+				if (!is_scalar($v)) {
+					$parent->$k = new stdClass();
+					$this->bindData($parent->$k, $v);
+				}
+				else {
+					$parent->$k = $v;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Method to recursively convert an object of data to an array.
+	 *
+	 * @param	object	$data	An object of data to return as an array.
+	 *
+	 * @return	array	Array representation of the input object.
+	 * @since	1.6
+	 */
+	protected function asArray($data)
+	{
+		$array = array();
+
+		foreach (get_object_vars($data) as $k => $v) {
+			if ($k[0] != '_') {
+				if (!is_scalar($v)) {
+					$array[$k] = $this->asArray($v);
+				}
+				else {
+					$array[$k] = $v;
+				}
+			}
+		}
+
+		return $array;
 	}
 
 	//

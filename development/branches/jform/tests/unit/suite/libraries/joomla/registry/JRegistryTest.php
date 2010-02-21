@@ -129,7 +129,7 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			$a->get('foo'),
+			$a->get('config.foo'),
 			$this->equalTo('bar2')
 		);
 
@@ -375,9 +375,8 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		$expected = array(
 			'foo1' => 'testtoarray1',
 			'foo2' => 'testtoarray2',
-			'config' => new stdClass
+			'config' => array('foo3' => 'testtoarray3')
 		);
-		$expected['config']->foo3 = 'testtoarray3';
 
 		$this->assertThat(
 			$a->toArray(),

@@ -21,7 +21,7 @@ class JFormInspector extends JForm
 		return parent::mergeNodes($source, $new);
 	}
 
-	public function findField($name, $group)
+	public function findField($name, $group = null)
 	{
 		return parent::findField($name, $group);
 	}
