@@ -2,13 +2,13 @@
 <!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
 <install type="template" version="1.6" client="administrator">
 	<name>hathor</name>
-	<creationDate>02/19/10</creationDate>
+	<creationDate>02/21/10</creationDate>
 	<author>Andrea Tarr</author>
 	<authorEmail>hathor@tarrconsulting.com</authorEmail>
 	<authorUrl>http://www.tarrconsulting.com</authorUrl>
 	<copyright></copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>1.24</version>
+	<version>1.25</version>
 	<description>TPL_HATHOR_XML_DESCRIPTION</description>
 	<files>
 		<filename>component.php</filename>
@@ -28,10 +28,6 @@
 		<folder>language</folder>
 	</files>
 	
-	<languages>
-        <language tag="en-GB">language/en-GB/en-GB.tpl_hathor.ini</language>
-    </languages>
-
 	<positions>
 		<position>menu</position>
 		<position>submenu</position>

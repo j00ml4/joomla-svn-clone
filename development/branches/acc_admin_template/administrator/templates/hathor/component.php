@@ -12,6 +12,15 @@
 
 // no direct access
 defined('_JEXEC') or die;
+
+// Get additional language strings prefixed with TPL_HATHOR
+$lang =& JFactory::getLanguage();
+$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
+|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor/language');
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo  $this->language; ?>" lang="<?php echo  $this->language; ?>" dir="<?php echo  $this->direction; ?>" >

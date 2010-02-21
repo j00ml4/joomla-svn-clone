@@ -18,7 +18,9 @@ $userId	= $user->get('id');
 
 // Get additional language strings prefixed with TPL_HATHOR
 $lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR); 
+$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
+|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
+
 
 ?>
 

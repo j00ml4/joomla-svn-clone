@@ -144,15 +144,9 @@ p.error 	{ color: #a20000; font-weight: bold; }
 } 
  
 #containerwrap {
-	min-height: 100%;
-	margin-bottom: -32px;
 	position: relative;
 }
 
-.clearfooter {
-	height: 32px; /* match to containerwrap & footer */
-	clear: both;
-}
 
 #header {
 	background: #ffffff url(../images/j_logo.png) no-repeat;
@@ -169,7 +163,7 @@ p.error 	{ color: #a20000; font-weight: bold; }
 }
 
 #footer {
-	line-height: 32px;
+	padding: 10px 20px;
 	background: #ffffff;
 	border: 1px solid #c7c8b2;
 }
