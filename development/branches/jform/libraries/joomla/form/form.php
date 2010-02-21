@@ -75,6 +75,14 @@ class JForm
 	protected static $fields = array();
 
 	/**
+	 * Static array of JForm objects for re-use.
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $forms = array();
+
+	/**
 	 * Search arrays of paths for loading JForm, JFormField, and JFormRule class files.
 	 *
 	 * @var		array
@@ -89,7 +97,6 @@ class JForm
 	 * @since	1.6
 	 */
 	protected static $rules = array();
-
 
 	/**
 	 * Method to instantiate the form object.
@@ -352,6 +359,7 @@ class JForm
 	{
 		// Initialize variables.
 		$fieldsets = array();
+		$sets = array();
 
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -359,14 +367,16 @@ class JForm
 		}
 
 		if ($group) {
-			/*
-			 * Get an array of <fieldset /> elements and fieldset attributes that are underneath a
-			 * <fields /> element with the appropriate name attribute.
-			 */
-			$sets = $this->xml->xpath(
-				'//fields[@name="'.$group.'"]//fieldset[@name] ' .
-				'| //fields[@name="'.$group.'"]//field[@fieldset]/@fieldset'
-			);
+
+			// Get the fields elements for a given group.
+			$elements = & $this->findGroup($group);
+			foreach ($elements as & $element) {
+
+				// Get an array of <fieldset /> elements and fieldset attributes within the fields element.
+				if ($tmp = $element->xpath('descendant::fieldset[@name] | descendant::field[@fieldset]/@fieldset')) {
+					$sets = array_merge($sets, (array) $tmp);
+				}
+			}
 		}
 		else {
 			// Get an array of <fieldset /> elements and fieldset attributes.
@@ -714,14 +724,34 @@ class JForm
 		}
 
 		// Find the form field element from the definition.
-		$old = $this->findField((string) $element['name'], $group);
+		$old = & $this->findField((string) $element['name'], $group);
 
-		// If the replace flag is not set don't overwrite the existing field.
-		if ($replace) {
+		// If an existing field is found and replace flag is true replace the field.
+		if ($replace && !empty($old)) {
+			$old = & $element;
+		}
+		// If an existing field is found and replace flag is false do nothing.
+		else if (!$replace && !empty($old)) {
+			// Do not replace the field.
+		}
+		// If no existing field is found find a group element and add the field as a child of it.
+		else {
+			if ($group) {
+				// Get the fields elements for a given group.
+				$fields = & $this->findGroup($group);
+			}
+			else {
+				// Get the master fields element.
+				$fields = & $this->xml->fields;
+			}
 
+			// If an appropriate fields element was found for hte group, add the element.
+			if (isset($fields[0]) && ($fields[0] instanceof JXMLElement)) {
+				self::addNode($fields[0], $element);
+			}
 		}
 
-
+		return true;
 	}
 
 	/**
@@ -764,11 +794,12 @@ class JForm
 	 *
 	 * @param	object	$elements	The array of XML element object representations of the form fields.
 	 * @param	string	$group		The optional dot-separated form group path on which to set the fields.
+	 * @param	boolean	$replace	True to replace existing fields if they already exist.
 	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
-	public function setFields(& $elements, $group = null)
+	public function setFields(& $elements, $group = null, $replace = true)
 	{
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
@@ -784,6 +815,15 @@ class JForm
 			}
 		}
 
+		// Set the fields.
+		$return = true;
+		foreach ($elements as $element) {
+			if (!$this->setField($element, $group, $replace)) {
+				$return = false;
+			}
+		}
+
+		return $return;
 	}
 
 	/**
@@ -902,7 +942,7 @@ class JForm
 	protected function bindLevel($group, $data)
 	{
 		// Ensure the input data is an array.
-		$data = (array) $data;
+		settype($data, 'array');
 
 		// Process the input data.
 		foreach ($data as $k => $v) {
@@ -1590,6 +1630,36 @@ class JForm
 		}
 
 		return self::$paths['rules'];
+	}
+
+	/**
+	 * Method to get an instance of a form.
+	 *
+	 * @param	string	$data		The name of an XML file or string to load as the form definition.
+	 * @param	string	$name		The name of the form.
+	 * @param	string	$file		Flag to toggle whether the $data is a file path or a string.
+	 * @param	array	$options	An array of form options.
+	 *
+	 * @return	object	JForm instance.
+	 * @since	1.6
+	 */
+	public static function getInstance($data, $name = 'form', $file = true, $options = array())
+	{
+		// Only instantiate the form if it does not already exist.
+		if (!isset(self::$forms[$name])) {
+
+			// Instantiate the form.
+			self::$forms[$name] = new JForm($name, $options);
+
+			// Load the data.
+			if ($file) {
+				self::$forms[$name]->loadFile($data);
+			} else {
+				self::$forms[$name]->load($data);
+			}
+		}
+
+		return self::$forms[$name];
 	}
 
 	/**
