@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 <div class="width-100">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('Permission Settings'); ?></legend>
-		<?php foreach ($this->form->getFields('permissions') as $field): ?>
+		<?php foreach ($this->form->getFieldset('permissions') as $field): ?>
 			<?php echo $field->label; ?>
 			<div class="clr"> </div>
 			<?php echo $field->input; ?>

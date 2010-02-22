@@ -76,7 +76,9 @@ class JFormFieldTimezone extends JFormFieldGroupedList
 
 				// Only add options where a locale exists.
 				if (!empty($locale)) {
-					$groups[$group][$zone] = str_replace('_', ' ', $locale);
+					$groups[$group][$zone] = JHtml::_('select.option',
+						$zone,
+						str_replace('_', ' ', $locale), 'value', 'text', false);
 				}
 			}
 		}

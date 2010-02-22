@@ -340,6 +340,7 @@ class JRegistry
 	 */
 	public function toArray()
 	{
+//		var_dump($this->data);die;
 		return (array) $this->asArray($this->data);
 	}
 
@@ -411,9 +412,9 @@ class JRegistry
 	{
 		$array = array();
 
-		foreach (get_object_vars($data) as $k => $v) {
+		foreach (get_object_vars((object) $data) as $k => $v) {
 			if ($k[0] != '_') {
-				if (!is_scalar($v)) {
+				if (is_object($v)) {
 					$array[$k] = $this->asArray($v);
 				}
 				else {
