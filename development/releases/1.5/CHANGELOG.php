@@ -42,6 +42,7 @@ $ -> Language fix or change
  # [#18614] Incorrect bracketing in templates/system/component.php
  # [#18617] Disabled components still show in the "menu type" tree of com_menus
  # [#18612] Pathway error when using php4
+ # [#17986] A bug causes a space to appear after email links
 
 21-Feb-2010 Ian MacLennan
  $ [#19715] Adding Phnom-Penh to UTC strings
