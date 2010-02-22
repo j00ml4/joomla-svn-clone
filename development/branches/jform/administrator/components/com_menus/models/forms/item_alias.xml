@@ -1,50 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+<!-- $Id$ -->
 <form>
-	<fields
-		label="Menus_Required_Fields_Label"
-		description="Menus_Required_Fields_Desc"
-		group="request">
+	<fieldset name="request" label="Menus_Required_Fields_Label" description="Menus_Required_Fields_Desc">
 
-		<field
-			id="aliasoptions"
-			name="aliasoptions"
-			type="menuitem"
-			label="JMenu_Alias_Menu_Label"
+		<field name="aliasoptions" type="menuitem"
 			description="JMenu_Alias_Menu_Desc"
+			label="JMenu_Alias_Menu_Label"
 			required="true"
 		/>
 
-	</fields>
+	</fieldset>
 
-	<fields
-		label="Menus_Linktype_Options_Label"
-		description="">
+	<fieldset name="options" label="Menus_Linktype_Options_Label" description="">
 
-		<field
-			id="menu-anchor_title"
-			name="menu-anchor_title"
-			type="text"
-			label="Menus_Item_Anchor_Title_Label"
+		<field name="menu-anchor_title" type="text"
 			description="Menus_item_Anchor_Title_Desc"
-			default=""/>
+			label="Menus_Item_Anchor_Title_Label"
+		/>
 
-		<field
-			id="menu-anchor_css"
-			name="menu-anchor_css"
-			type="text"
-			label="Menus_Item_Anchor_CSS_Label"
+		<field name="menu-anchor_css" type="text"
 			description="Menus_item_Anchor_CSS_Desc"
-			default=""/>
+			label="Menus_Item_Anchor_CSS_Label"
+		/>
 
-		<field
-			id="menu_image"
-			name="menu_image"
-			type="text"
-			label="Menus_Item_Menu_Image_Label"
+		<field name="menu_image" type="text"
 			description="Menus_Item_Menu_Image_Desc"
-			default=""/>
+			label="Menus_Item_Menu_Image_Label"
+		/>
 
-	</fields>
-
+	</fieldset>
 </form>

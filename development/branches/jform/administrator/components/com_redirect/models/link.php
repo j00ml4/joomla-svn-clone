@@ -127,7 +127,7 @@ class RedirectModelLink extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('link', 'com_redirect.link', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('link', 'com_redirect.link', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

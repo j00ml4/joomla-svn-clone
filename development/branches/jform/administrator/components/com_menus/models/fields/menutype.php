@@ -8,6 +8,8 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
+jimport('joomla.form.formfield');
+JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -19,11 +21,12 @@ jimport('joomla.html.html');
 class JFormFieldMenuType extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	public $type = 'MenuType';
+	protected $type = 'MenuType';
 
 	/**
 	 * A reverse lookup of the base link URL to Title
@@ -33,11 +36,12 @@ class JFormFieldMenuType extends JFormFieldList
 	protected $_rlu = array();
 
 	/**
-	 * Method to get the field input.
+	 * Method to get the field input markup.
 	 *
-	 * @return	string		The field input.
+	 * @return	string	The field input markup.
+	 * @since	1.6
 	 */
-	protected function _getInput()
+	protected function getInput()
 	{
 		// Initialise variables.
 		$html = array();

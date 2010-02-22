@@ -153,7 +153,7 @@ class PluginsModelPlugin extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('plugin', 'com_plugins.plugin', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('plugin', 'com_plugins.plugin', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -189,7 +189,7 @@ class PluginsModelPlugin extends JModelForm
 		$lang			= JFactory::getLanguage();
 		$form			= null;
 		$formName		= 'com_plugins.plugin.params';
-		$formOptions	= array('array' => 'jformparams', 'event' => 'onPrepareForm');
+		$formOptions	= array('control' => 'jformparams', 'event' => 'onPrepareForm');
 
 		if (empty($folder) && empty($element))
 		{

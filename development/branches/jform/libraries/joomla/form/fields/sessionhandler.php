@@ -29,7 +29,7 @@ class JFormFieldSessionHandler extends JFormFieldList
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $type = 'SessionHandler';
+	protected $type = 'SessionHandler';
 
 	/**
 	 * Method to get the field options.
@@ -40,7 +40,7 @@ class JFormFieldSessionHandler extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
-		$options	= array();
+		$options = array();
 
 		// Get the session handlers and build the options array.
 		$stores = JSession::getStores();

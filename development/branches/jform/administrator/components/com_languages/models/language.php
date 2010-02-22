@@ -99,7 +99,7 @@ class LanguagesModelLanguage extends JModelForm
 		$app	= &JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('language', 'com_languages.language', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('language', 'com_languages.language', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

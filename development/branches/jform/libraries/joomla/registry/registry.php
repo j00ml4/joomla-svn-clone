@@ -340,7 +340,6 @@ class JRegistry
 	 */
 	public function toArray()
 	{
-//		var_dump($this->data);die;
 		return (array) $this->asArray($this->data);
 	}
 
