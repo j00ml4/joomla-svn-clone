@@ -54,7 +54,7 @@ class MenusHelper
 		$db = &JFactory::getDBO();
 		$query = 'SELECT c.id, c.name, c.link, c.option' .
 				' FROM #__components AS c' .
-				' WHERE c.link <> "" AND parent = 0' .
+				' WHERE c.link <> "" AND parent = 0 AND enabled = 1' .
 				' ORDER BY c.name';
 		$db->setQuery( $query );
 		$result = $db->loadObjectList( );
@@ -150,19 +150,19 @@ class MenusHelper
 		$published = JHTML::_('select.radiolist',  $put, 'published', '', 'value', 'text', $row->published );
 		return $published;
 	}
-	
+
 	/**
 	* clean system cache
-	*/ 
+	*/
 	function cleanCache()
 	{
 		global $mainframe;
-		
+
 		if ($mainframe->getCfg('caching')) {
 			// clean system cache
 			$cache =& JFactory::getCache('_system');
 			$cache->clean();
-			
+
 			// clean mod_mainmenu cache
 			$cache2 =& JFactory::getCache('mod_mainmenu');
 			$cache2->clean();

@@ -40,6 +40,7 @@ $ -> Language fix or change
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method
  # [#18614] Incorrect bracketing in templates/system/component.php
+ # [#18617] Disabled components still show in the "menu type" tree of com_menus
 
 21-Feb-2010 Ian MacLennan
  $ [#19715] Adding Phnom-Penh to UTC strings
