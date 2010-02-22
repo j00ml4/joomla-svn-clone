@@ -71,63 +71,61 @@
 			name="groups"
 			type="hidden"
 		/>
-	</fields>
 
-	<fields
-		group="params"
-		array="true"
-		label="User_Profile">
-
-		<field
-			name="admin_language"
-			type="language"
-			client="administrator"
-			default=""
-			label="Users_Option_Backend_Language_Label"
-			description="Users_Option_Backend_Language_Desc">
-			<option
-				value="">JOption_Use_Default</option>
-		</field>
-
-		<field
-			name="language"
-			type="language"
-			client="site"
-			default=""
-			label="Users_Option_Frontend_Language_Label"
-			description="Users_Option_Frontend_Language_Desc">
-			<option
-				value="">JOption_Use_Default</option>
-		</field>
-
-		<field
-			name="editor"
-			type="editors"
-			default=""
-			label="Users_Option_Editor_Label"
-			description="Users_Option_Editor_Desc">
-			<option
-				value="">JOption_Use_Default</option>
-		</field>
-
-		<field
-			name="helpsite"
-			type="helpsite"
-			default=""
-			label="Users_Option_Helpsite_Label"
-			description="Users_Option_Helpsite_Desc">
-			<option
-				value="">JOption_Use_Default</option>
-		</field>
-
-		<field
-			name="timezone"
-			type="timezone"
-			default=""
-			label="Users_Option_Timezone_Label"
-			description="Users_Option_Timezone_Desc">
-			<option
-				value="">JOption_Use_Default</option>
-		</field>
+		<fields name="params">
+			<fieldset name="settings" label="User_Profile" description="">
+				<field
+					name="admin_language"
+					type="language"
+					client="administrator"
+					default=""
+					label="Users_Option_Backend_Language_Label"
+					description="Users_Option_Backend_Language_Desc">
+					<option
+						value="">JOption_Use_Default</option>
+				</field>
+		
+				<field
+					name="language"
+					type="language"
+					client="site"
+					default=""
+					label="Users_Option_Frontend_Language_Label"
+					description="Users_Option_Frontend_Language_Desc">
+					<option
+						value="">JOption_Use_Default</option>
+				</field>
+		
+				<field
+					name="editor"
+					type="editors"
+					default=""
+					label="Users_Option_Editor_Label"
+					description="Users_Option_Editor_Desc">
+					<option
+						value="">JOption_Use_Default</option>
+				</field>
+		
+				<field
+					name="helpsite"
+					type="helpsite"
+					default=""
+					label="Users_Option_Helpsite_Label"
+					description="Users_Option_Helpsite_Desc">
+					<option
+						value="">JOption_Use_Default</option>
+				</field>
+		
+				<field
+					name="timezone"
+					type="timezone"
+					default=""
+					label="Users_Option_Timezone_Label"
+					description="Users_Option_Timezone_Desc">
+					<option
+						value="">JOption_Use_Default</option>
+				</field>
+			</fieldset>
+		</fields>
 	</fields>
 </form>

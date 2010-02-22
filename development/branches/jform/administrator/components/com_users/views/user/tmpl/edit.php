@@ -16,6 +16,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 
+// Get the form fieldsets.
+$fieldsets = $this->form->getFieldsets();
 ?>
 
 <script type="text/javascript">
@@ -50,16 +52,14 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 
 		<?php
-		$groups = $this->form->getGroups();
-		$fieldsets = $this->form->getFieldsets();
-		foreach($groups as $group)
+		foreach($fieldsets as $fieldset)
 		{
-			if($group != 'params' && $group != '_default' && !isset($fieldsets[$group]['parent']))
+			if($fieldset->name == 'settings')
 			{
 				?>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_($fieldsets[$group]['label']); ?></legend>
-			<?php foreach($this->form->getFields($group) as $field): ?>
+			<legend><?php echo JText::_($fieldset->label); ?></legend>
+			<?php foreach($this->form->getFieldset($fieldset->name) as $field): ?>
 				<?php if ($field->hidden): ?>
 					<?php echo $field->input; ?>
 				<?php else: ?>
@@ -76,13 +76,13 @@ JHtml::_('behavior.formvalidation');
 
 	<div class="width-40 fltrt">
 			<?php echo JHTML::_('sliders.start');
-			$groups = $this->form->getGroups('params');
-			$fieldsets = $this->form->getFieldsets();
-			array_unshift($groups, 'params');
-			foreach($groups as $group) {
-				echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group);
+		foreach($fieldsets as $fieldset)
+		{
+			if($fieldset->name != 'settings')
+			{
+				echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
 				?><fieldset class="panelform"><?php
-				foreach($this->form->getFields($group) as $field): ?>
+				foreach($this->form->getFieldset($fieldset->name) as $field): ?>
 				<?php if ($field->hidden): ?>
 					<?php echo $field->input; ?>
 				<?php else: ?>
@@ -91,7 +91,8 @@ JHtml::_('behavior.formvalidation');
 				<?php endif; ?>
 			<?php endforeach; ?>
 			</fieldset>
-			<?php } ?>
+			<?php }
+		} ?>
 			<?php echo JHTML::_('sliders.end'); ?>
 
 		<fieldset id="user-groups">

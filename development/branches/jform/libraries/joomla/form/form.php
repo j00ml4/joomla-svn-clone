@@ -641,7 +641,7 @@ class JForm
 		// Attempt to load the XML file.
 		$xml = JFactory::getXML($file, true);
 
-		return $this->load($xml);
+		return $this->load($xml, $reset);
 	}
 
 	/**
