@@ -180,13 +180,16 @@ class JInstallerModule extends JObject
 			return false;
 		}
 		$id = $db->loadResult();
-
+ 		
+ 		// load module instance
+ 		$row =& JTable::getInstance('module');
+ 		
 		// Was there a module already installed with the same name?
 		// If there was then we wouldn't be here because it would have
 		// been stopped by the above. Otherwise the files weren't there
 		// (e.g. migration) or its an upgrade (files overwritten)
 		// So all we need to do is create an entry when we can't find one
-		$row = & JTable::getInstance('module');
+
 		if ($id) {
 			$row->load($id);
 		} else {
