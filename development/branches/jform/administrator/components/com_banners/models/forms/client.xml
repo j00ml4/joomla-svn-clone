@@ -1,174 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
-		addfieldpath="/administrator/components/com_banners/models/fields"
-	>
-		<field
-			id="id"
-			name="id"
-			type="hidden"
+	<fields addfieldpath="/administrator/components/com_banners/models/fields">
+
+		<field name="id" type="hidden"
 			default="0"
+			readonly="true"
 			required="true"
-			readonly="true"/>
+		/>
 
-		<field
-			id="name"
-			name="name"
-			type="text"
-			class="inputbox"
-			default=""
-			size="40"
-			label="Banners_Name_Label"
+		<field name="name" type="text"
 			description="Banners_Name_Desc"
-			required="true"/>
-
-		<field
-			id="contact"
-			name="contact"
-			type="text"
-			class="inputbox"
-			default=""
+			label="Banners_Name_Label"
+			required="true"
 			size="40"
-			label="Banners_Contact_Label"
+		/>
+
+		<field name="contact" type="text"
 			description="Banners_Contact_Desc"
-			required="true"/>
-
-		<field
-			id="email"
-			name="email"
-			type="text"
-			class="inputbox validate-email"
-			default=""
+			label="Banners_Contact_Label"
+			required="true"
 			size="40"
-			label="Banners_Email_Label"
+		/>
+
+		<field name="email" type="text"
+			class="inputbox validate-email"
 			description="Banners_Email_Desc"
+			label="Banners_Email_Label"
+			required="true"
+			size="40"
 			validate="email"
-			required="true"/>
+		/>
 
-		<field
-			id="state"
-			name="state"
-			type="list"
-			label="Banners_State_Label"
+		<field name="state" type="list"
+			default="1"
 			description="Banners_State_Desc"
-			class="inputbox"
+			label="Banners_State_Label"
 			size="1"
-			default="1">
-			<option
-				value="1">JOption_Published</option>
-			<option
-				value="0">JOption_Unpublished</option>
-			<option
-				value="-1">JOption_Archived</option>
-			<option
-				value="-2">JOption_Trash</option>
+		>
+			<option value="1">JOption_Published</option>
+			<option value="0">JOption_Unpublished</option>
+			<option value="-1">JOption_Archived</option>
+			<option value="-2">JOption_Trash</option>
 		</field>
 
-		<field
-			id="purchase_type"
-			name="purchase_type"
-			type="list"
-			label="Banners_PurchaseType_Label"
+		<field name="purchase_type" type="list"
+			default="0"
 			description="Banners_PurchaseType_Desc"
-			default="0"
-			class="inputbox">
-			<option
-				value="-1">Banners_UseComponentDefault</option>
-			<option
-				value="1">Banners_1</option>
-			<option
-				value="2">Banners_2</option>
-			<option
-				value="3">Banners_3</option>
-			<option
-				value="4">Banners_4</option>
-			<option
-				value="5">Banners_5</option>
+			label="Banners_PurchaseType_Label"
+		>
+			<option value="-1">Banners_UseComponentDefault</option>
+			<option value="1">Banners_1</option>
+			<option value="2">Banners_2</option>
+			<option value="3">Banners_3</option>
+			<option value="4">Banners_4</option>
+			<option value="5">Banners_5</option>
 		</field>
 
-		<field
-			name="track_impressions"
-			type="list"
+		<field name="track_impressions" type="list"
 			default="0"
+			description="Banners_TrackImpression_Desc"
 			label="Banners_TrackImpression_Label"
-			description="Banners_TrackImpression_Desc">
-			<option
-				value="-1">Banners_UseComponentDefault</option>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
+		>
+			<option value="-1">Banners_UseComponentDefault</option>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
 		</field>
 
-		<field
-			name="track_clicks"
-			type="list"
+		<field name="track_clicks" type="list"
 			default="0"
+			description="Banners_TrackClick_Desc"
 			label="Banners_TrackClick_Label"
-			description="Banners_TrackClick_Desc">
-			<option
-				value="-1">Banners_UseComponentDefault</option>
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
+		>
+			<option value="-1">Banners_UseComponentDefault</option>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
 		</field>
 
-	</fields>
+		<fieldset name="metadata" label="Banners_Metadata_Options">
+	
+			<field name="metakey" type="textarea"
+				cols="30"
+				description="Banners_MetaKeywords_Desc"
+				label="JField_Meta_Keywords_Label"
+				rows="3"
+			/>
+	
+			<field name="own_prefix" type="radio"
+				default="0"
+				description="Banners_ClientOwnPrefix_Desc"
+				label="Banners_ClientOwnPrefix_Label"
+			>
+				<option value="0">Jno</option>
+				<option value="1">JYes</option>
+			</field>
+	
+			<field name="metakey_prefix" type="text"
+				description="Banners_MetaKeywordPrefix_Desc"
+				label="Banners_MetaKeywordPrefix_Label"
+			/>
+	
+		</fieldset>
 
-	<fields
-		group="metadata"
-		label="Banners_Metadata_Options">
-
-		<field
-			id="metakey"
-			name="metakey"
-			type="textarea"
-			class="inputbox"
-			default=""
-			rows="3"
-			cols="30"
-			label="JField_Meta_Keywords_Label"
-			description="Banners_MetaKeywords_Desc"/>
-
-		<field
-			id="own_prefix"
-			name="own_prefix"
-			type="radio"
-			label="Banners_ClientOwnPrefix_Label"
-			description="Banners_ClientOwnPrefix_Desc"
-			default="0"
-			class="inputbox">
-			<option
-				value="0">Jno</option>
-			<option
-				value="1">JYes</option>
-		</field>
-
-		<field
-			name="metakey_prefix"
-			type="text"
-			default=""
-			label="Banners_MetaKeywordPrefix_Label"
-			description="Banners_MetaKeywordPrefix_Desc" />
-
-	</fields>
-
-	<fields
-		group="extra"
-		label="Banners_Extra">
-
-		<field
-			id="extrainfo"
-			name="extrainfo"
-			type="textarea"
-			class="inputbox"
-			default=""
-			rows="10"
-			cols="40"
-			label="Banners_ExtraInfo_Label"
-			description="Banners_ExtraInfo_Desc"/>
-
+		<fieldset name="extra" label="Banners_Extra">
+	
+			<field name="extrainfo" type="textarea"
+				cols="40"
+				description="Banners_ExtraInfo_Desc"
+				label="Banners_ExtraInfo_Label"
+				rows="10"
+			/>
+	
+		</fieldset>
 	</fields>
 </form>

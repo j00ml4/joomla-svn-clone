@@ -124,7 +124,7 @@ class BannersModelBanner extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('banner', 'com_banners.banner', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('banner', 'com_banners.banner', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
