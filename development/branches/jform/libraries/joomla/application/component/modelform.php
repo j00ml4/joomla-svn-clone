@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
+jimport('joomla.form.form');
 
 /**
  * Prototype form model.
@@ -114,7 +115,7 @@ class JModelForm extends JModel
 	function getForm($xml, $name = 'form', $options = array(), $clear = false)
 	{
 		// Handle the optional arguments.
-		$options['array']	= array_key_exists('array',	$options) ? $options['array'] : false;
+		$options['control']	= array_key_exists('control',	$options) ? $options['control'] : false;
 		$options['file']	= array_key_exists('file',	$options) ? $options['file']  : true;
 		$options['event']	= array_key_exists('event',	$options) ? $options['event'] : null;
 		$options['group']	= array_key_exists('group',	$options) ? $options['group'] : null;
@@ -128,10 +129,9 @@ class JModelForm extends JModel
 		}
 
 		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT.DS.'models'.DS.'forms');
+		JForm::addFormPath(JPATH_COMPONENT.'/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT.'/models/fields');
-		$form = &JForm::getInstance($xml, $name, $options['file'], $options);
+		$form = & JForm::getInstance($xml, $name, $options['file'], $options);
 
 		// Check for an error.
 		if (JError::isError($form))
