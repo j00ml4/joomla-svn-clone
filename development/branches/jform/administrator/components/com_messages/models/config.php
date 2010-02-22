@@ -78,7 +78,7 @@ class MessagesModelConfig extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('config', 'com_messages.config', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('config', 'com_messages.config', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

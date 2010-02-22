@@ -139,7 +139,7 @@ class ContentModelArticle extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('article', 'com_content.article', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('article', 'com_content.article', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

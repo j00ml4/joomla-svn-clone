@@ -114,7 +114,7 @@ class TemplatesModelStyle extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('style', 'com_templates.style', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('style', 'com_templates.style', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -150,7 +150,7 @@ class TemplatesModelStyle extends JModelForm
 		$lang			= JFactory::getLanguage();
 		$form			= null;
 		$formName		= 'com_templates.style.params';
-		$formOptions	= array('array' => 'jformparams', 'event' => 'onPrepareForm');
+		$formOptions	= array('control' => 'jformparams', 'event' => 'onPrepareForm');
 
 		if (empty($template) && is_null($clientId))
 		{

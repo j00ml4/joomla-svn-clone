@@ -219,7 +219,7 @@ class MenusModelItem extends JModelForm
 		$app	= &JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('item', 'com_menus.item', array('array' => 'jform', 'event' => 'onPrepareForm'), true);
+		$form = parent::getForm('item', 'com_menus.item', array('control' => 'jform', 'event' => 'onPrepareForm'), true);
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -262,7 +262,7 @@ class MenusModelItem extends JModelForm
 		$form			= null;
 		$formFile		= null;
 		$formName		= 'com_menus.item.params';
-		$formOptions	= array('array' => 'jformparams', 'event' => 'onPrepareForm');
+		$formOptions	= array('control' => 'jformparams', 'event' => 'onPrepareForm');
 
 		// Determine the link type.
 		if (empty($type)) {

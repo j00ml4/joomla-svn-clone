@@ -8,7 +8,8 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
-require_once JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'fields'.DS.'list.php';
+jimport('joomla.form.formfield');
+JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -20,19 +21,24 @@ require_once JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'fields'.DS.'list.php';
 class JFormFieldMenuParent extends JFormFieldList
 {
 	/**
-	 * The field type.
+	 * The form field type.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	public $type = 'MenuParent';
+	protected $type = 'MenuParent';
 
 	/**
-	 * Method to get a list of options for a list input.
+	 * Method to get the field options.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return	array	The field option objects.
+	 * @since	1.6
 	 */
-	protected function _getOptions()
+	protected function getOptions()
 	{
+		// Initialize variables.
+		$options = array();
+
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
@@ -63,10 +69,8 @@ class JFormFieldMenuParent extends JFormFieldList
 			$options[$i]->text = str_repeat('- ',$options[$i]->level).$options[$i]->text;
 		}
 
-		$options = array_merge(
-			parent::_getOptions(),
-			$options
-		);
+		// Merge any additional options in the XML definition.
+		$options = array_merge(parent::getOptions(), $options);
 
 		return $options;
 	}

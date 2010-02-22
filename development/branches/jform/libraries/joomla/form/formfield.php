@@ -51,6 +51,14 @@ abstract class JFormField
 	protected $formControl;
 
 	/**
+	 * The hidden state for the form field.
+	 *
+	 * @var		boolean
+	 * @since	1.6
+	 */
+	protected $hidden;
+
+	/**
 	 * The document id for the form field.
 	 *
 	 * @var		string
@@ -182,6 +190,10 @@ abstract class JFormField
 				return $this->multiple;
 				break;
 
+			case 'hidden':
+				return $this->hidden;
+				break;
+
 			case 'type':
 				return $this->type;
 				break;
@@ -290,7 +302,7 @@ abstract class JFormField
 		$this->description	= (string) $element['description'];
 
 		// Set the visibility.
-		//$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden']);
+		$this->hidden = ((string) $element['type'] == 'hidden' || (string) $element['hidden'] == 'true');
 
 		// Set the field name and id.
 		$this->name	= $this->getName($name, $group);

@@ -1,203 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+<!-- $Id$ -->
 <form>
 	<fields>
-		<field
-			name="id"
-			type="hidden"
+		<field name="id" type="hidden"
 			default="0"
 			filter="int"
+			readonly="true"
 			required="true"
-			readonly="true"/>
+		/>
 
-		<field
-			name="title"
-			type="text"
-			label="MENUS_ITEM_TITLE_LABEL"
+		<field name="title" type="text"
+			class="inputbox"
 			description="MENUS_ITEM_TITLE_DESC"
-			class="inputbox"
+			label="MENUS_ITEM_TITLE_LABEL"
+			required="true"
 			size="40"
-			required="true"/>
+		/>
 
-		<field
-			name="alias"
-			type="alias"
-			label="JFIELD_ALIAS_LABEL"
+		<field name="alias" type="alias"
+			class="inputbox"
 			description="MENUS_ITEM_ALIAS_DESC"
-			default=""
-			class="inputbox"
-			size="40"/>
+			label="JFIELD_ALIAS_LABEL"
+			size="40"
+		/>
 
-		<field
-			name="note"
-			type="text"
-			label="JFIELD_NOTE_LABEL"
+		<field name="note" type="text"
+			class="inputbox"
 			description="MENUS_ITEM_NOTE_DESC"
-			default=""
-			class="inputbox"
-			size="40"/>
+			label="JFIELD_NOTE_LABEL"
+			size="40"
+		/>
 
-		<field
-			name="link"
-			type="link"
-			label="MENUS_ITEM_LINK_LABEL"
+		<field name="link" type="link"
+			class="inputbox"
 			description="MENUS_ITEM_LINK_DESC"
-			default=""
-			class="inputbox"
-			size="50"/>
+			label="MENUS_ITEM_LINK_LABEL"
+			size="50"
+		/>
 
-		<field
-			name="menutype"
-			type="menu"
-			label="MENUS_MENU_ASSIGNED_LABEL"
+		<field name="menutype" type="menu"
+			class="inputbox"
 			description="MENUS_MENU_ASSIGNED_DESC"
-			class="inputbox"
-			default=""
+			label="MENUS_MENU_ASSIGNED_LABEL"
 			required="true"
-			size="1" />
-		<field
-			name="type"
-			type="menutype"
-			label="MENUS_ITEM_TYPE_LABEL"
-			description="MENUS_ITEM_TYPE_DESC"
-			default=""
-			class="inputbox"
-			required="true"
-			size="40" />
-
-		<field
-			name="published"
-			type="list"
-			id="published"
-			class="inputbox"
-			label="JFIELD_PUBLISHED_LABEL"
-			description="JFIELD_PUBLISHED_DESC"
 			size="1"
-			default="1"
-			filter="integer">
-			<option
-				value="1">
-				JOPTION_PUBLISHED</option>
-			<option
-				value="0">
-				JOPTION_UNPUBLISHED</option>
+		/>
 
-			<option
-				value="-2">
-				JOPTION_TRASHED</option>
+		<field name="type" type="menutype"
+			class="inputbox"
+			description="MENUS_ITEM_TYPE_DESC"
+			label="MENUS_ITEM_TYPE_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field name="published" type="list"
+			class="inputbox"
+			default="1"
+			description="JFIELD_PUBLISHED_DESC"
+			filter="integer"
+			label="JFIELD_PUBLISHED_LABEL"
+			size="1"
+		>
+			<option value="1">JOPTION_PUBLISHED</option>
+			<option value="0">JOPTION_UNPUBLISHED</option>
+			<option value="-2">JOPTION_TRASHED</option>
 		</field>
 
-		<field
-			name="parent_id"
-			type="menuparent"
-			label="MENUS_ITEM_PARENT_LABEL"
-			description="MENUS_ITEM_PARENT_DESC"
+		<field name="parent_id" type="menuparent"
+			class="inputbox"
 			default="MENU_ITEM_ROOT"
+			description="MENUS_ITEM_PARENT_DESC"
 			filter="int"
+			label="MENUS_ITEM_PARENT_LABEL"
+			size="1"
+		/>
+
+		<field name="component_id" type="hidden"
+			filter="int"
+		/>
+
+		<field name="ordering" type="ordering"
 			class="inputbox"
-			size="1"/>
-
-		<field
-			name="component_id"
-			type="hidden"
-			filter="int" />
-
-		<field
-			name="ordering"
-			type="ordering"
-			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC"
-			default=""
 			filter="int"
-			class="inputbox"/>
+			label="JFIELD_ORDERING_LABEL"
+		/>
 
-		<field
-			name="browserNav"
-			type="list"
-			label="MENUS_ITEM_BROWSERNAV_LABEL"
-			description="MENUS_ITEM_BROWSERNAV_DESC"
-			default="Parent"
-			filter="int"
-			class="inputbox">
-				<option value="0">MENUS_BROWSERNAV_OPTION_PARENT</option>
-				<option value="1">MENUS_BROWSERNAV_OPTION_NEW_WITH_NAV</option>
-				<option value="2">MENUS_BROWSERNAV_OPTION_NEW_WITHOUT_NAV</option>
-			</field>
-
-		<field
-			name="access"
-			type="accesslevel"
-			id="access"
+		<field name="browserNav" type="list"
 			class="inputbox"
-			label="JFIELD_ACCESS_LABEL"
-			description="JFIELD_ACCESS_DESC"
-			default="1"
-			filter="integer"/>
-
-
-		<field
-			name="template_style_id"
-			type="templatestyle"
-			label="MENUS_ITEM_TEMPLATE_LABEL"
-			description="MENUS_ITEM_TEMPLATE_DESC"
-			default=""
+			default="0"
+			description="MENUS_ITEM_BROWSERNAV_DESC"
 			filter="int"
-			class="inputbox">
+			label="MENUS_ITEM_BROWSERNAV_LABEL"
+		>
+			<option value="0">MENUS_BROWSERNAV_OPTION_PARENT</option>
+			<option value="1">MENUS_BROWSERNAV_OPTION_NEW_WITH_NAV</option>
+			<option value="2">MENUS_BROWSERNAV_OPTION_NEW_WITHOUT_NAV</option>
+		</field>
+
+		<field name="access" type="accesslevel"
+			class="inputbox"
+			default="1"
+			description="JFIELD_ACCESS_DESC"
+			label="JFIELD_ACCESS_LABEL"
+			filter="integer"
+		/>
+
+		<field name="template_style_id" type="templatestyle"
+			class="inputbox"
+			description="MENUS_ITEM_TEMPLATE_DESC"
+			filter="int"
+			label="MENUS_ITEM_TEMPLATE_LABEL"
+		>
 			<option value="0">JOPTION_USE_DEFAULT</option>
 		</field>
 
-		<field
-			name="params"
-			type="textarea"
-			label="JCOMMON_PARAMS_LABEL"
-			description="MENUS_ITEM_PARAMS_DESC"
-			default=""
-			rows="3"
-			cols="60"
-			class="inputbox"/>
-
-		<field
-			name="home"
-			type="radio"
-			label="MENUS_ITEM_HOME_LABEL"
-			description="MENUS_ITEM_HOME_DESC"
-			default="0"
+		<field name="params" type="textarea"
 			class="inputbox"
-			filter="integer">
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
+			cols="60"
+			description="MENUS_ITEM_PARAMS_DESC"
+			label="JCOMMON_PARAMS_LABEL"
+			rows="3"
+		/>
+
+		<field name="home" type="radio"
+			class="inputbox"
+			default="0"
+			description="MENUS_ITEM_HOME_DESC"
+			filter="integer"
+			label="MENUS_ITEM_HOME_LABEL"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
 		</field>
 
-		<field
-			name="path"
-			type="hidden"
-			filter="unset"/>
+		<field name="path" type="hidden"
+			filter="unset"
+		/>
 
-		<field
-			name="level"
-			type="hidden"
-			filter="unset"/>
+		<field name="level" type="hidden"
+			filter="unset"
+		/>
 
-		<field
-			name="checked_out"
-			type="hidden"
-			filter="unset"/>
+		<field name="checked_out" type="hidden"
+			filter="unset"
+		/>
 
-		<field
-			name="checked_out_time"
-			type="hidden"
-			filter="unset"/>
+		<field name="checked_out_time" type="hidden"
+			filter="unset"
+		/>
 
-		<field
-			name="lft"
-			type="hidden"
-			filter="unset"/>
+		<field name="lft" type="hidden"
+			filter="unset"
+		/>
 
-		<field
-			name="rgt"
-			type="hidden"
-			filter="unset"/>
+		<field name="rgt" type="hidden"
+			filter="unset"
+		/>
 	</fields>
 </form>

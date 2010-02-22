@@ -2,60 +2,49 @@
 	<!-- $Id$ -->
 <form>
 	<fields>
-		<field
-			name="id"
-			type="hidden"
+		<field name="id" type="hidden"
 			default="0"
-			required="true"
-			readonly="true" />
-
-		<field
-			name="template"
-			type="text"
-			label="Templates_Field_Template_Label"
-			description="Templates_Field_Template_Desc"
-			class="readonly"
-			size="30"
 			readonly="true"
-			filter="unset" />
+			required="true"
+		/>
 
-		<field
-			name="client_id"
-			type="client"
-			label="Templates_Field_Client_Label"
-			description="Templates_Field_Client_Desc"
+		<field name="template" type="text"
+			class="readonly"
+			description="Templates_Field_Template_Desc"
+			filter="unset"
+			label="Templates_Field_Template_Label"
+			readonly="true"
+			size="30"
+		/>
+
+		<field name="client_id" type="client"
 			class="readonly"
 			default="0"
-			readonly="true" />
+			description="Templates_Field_Client_Desc"
+			label="Templates_Field_Client_Label"
+			readonly="true"
+		/>
 
-		<field
-			name="home"
-			type="list"
-			label="Templates_Field_Home_Label"
-			description="Templates_Field_Home_Desc"
+		<field name="home" type="list"
 			class="inputbox"
 			default="0"
-			readonly="true">
-			<option
-				value="1">
-				JYes</option>
-			<option
-				value="0">
-				JNo</option>
+			description="Templates_Field_Home_Desc"
+			label="Templates_Field_Home_Label"
+			readonly="true"
+		>
+			<option value="1">JYes</option>
+			<option value="0">JNo</option>
 		</field>
 
-		<field
-			name="title"
-			type="text"
+		<field name="title" type="text"
 			class="inputbox"
 			default=""
-			size="50"
-			label="Templates_Field_Title_Label"
 			description="Templates_Field_Title_Desc"
-			required="true" />
+			label="Templates_Field_Title_Label"
+			required="true"
+			size="50"
+		/>
 
-		<field
-			name="params"
-			type="hidden" />
+		<field name="params" type="hidden" />
 	</fields>
 </form>

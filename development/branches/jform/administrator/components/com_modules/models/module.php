@@ -239,7 +239,7 @@ class ModulesModelModule extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('module', 'com_modules.module', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('module', 'com_modules.module', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -275,7 +275,7 @@ class ModulesModelModule extends JModelForm
 		$lang			= JFactory::getLanguage();
 		$form			= null;
 		$formName		= 'com_modules.module.params';
-		$formOptions	= array('array' => 'jformparams', 'event' => 'onPrepareForm');
+		$formOptions	= array('control' => 'jformparams', 'event' => 'onPrepareForm');
 
 		if (empty($module) && is_null($clientId))
 		{
