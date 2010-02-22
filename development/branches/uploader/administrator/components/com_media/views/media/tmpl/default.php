@@ -58,7 +58,7 @@ defined('_JEXEC') or die;
 			</form>
 
 			<!-- File Upload Form -->
-			<?php echo $this->uploader->display('upload'); ?>
+			<?php echo $this->uploader->display('upload', 'index.php?option=com_media&task=file.upload', 'index.php?option=com_media'); ?>
 		</td>
 	</tr>
 </table>
