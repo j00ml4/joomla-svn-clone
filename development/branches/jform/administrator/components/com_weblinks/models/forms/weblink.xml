@@ -169,28 +169,25 @@
 				value="1">JYES</option>
 		</field>
 
-	</fields>
-
-	<fields
-		group="params"
-		array="true"
-		label="COM_WEBLINKS_OPTIONS">
-
-		<field
-			id="target"
-			name="target"
-			type="List"
-			default="0"
-			label="COM_WEBLINKS_FIELD_TARGET_LABEL"
-			description="COM_WEBLINKS_FIELD_TARGET_DESC">
-			<option
-				value="0">JBrowserTarget_Parent</option>
-			<option
-				value="1">JBrowserTarget_New</option>
-			<option
-				value="2">JBrowserTarget_Popup</option>
-			<option
-				value="3">JBrowserTarget_Modal</option>
-		</field>
+		<fields name="params">
+			<fieldset name="params" label="COM_WEBLINKS_OPTIONS">
+				<field
+					id="target"
+					name="target"
+					type="List"
+					default="0"
+					label="COM_WEBLINKS_FIELD_TARGET_LABEL"
+					description="COM_WEBLINKS_FIELD_TARGET_DESC">
+					<option
+						value="0">JBrowserTarget_Parent</option>
+					<option
+						value="1">JBrowserTarget_New</option>
+					<option
+						value="2">JBrowserTarget_Popup</option>
+					<option
+						value="3">JBrowserTarget_Modal</option>
+				</field>
+			</fieldset>	
+		</fields>
 	</fields>
 </form>

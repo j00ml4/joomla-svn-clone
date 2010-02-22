@@ -133,7 +133,7 @@ class WeblinksModelWeblink extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('weblink', 'com_weblinks.weblink', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('weblink', 'com_weblinks.weblink', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
