@@ -208,7 +208,7 @@ class JForm
 
 			// Get the field groups for the element.
 			$attrs	= $field->xpath('ancestor::fields[@name]/@name');
-			$groups	= array_map('strval', (array) $attrs);
+			$groups	= array_map('strval', $attrs ? $attrs : array());
 			$group	= implode('.', $groups);
 
 			// Get the field value from the data input.
@@ -335,7 +335,7 @@ class JForm
 
 			// Get the field groups for the element.
 			$attrs	= $element->xpath('ancestor::fields[@name]/@name');
-			$groups	= array_map('strval', $attrs);
+			$groups	= array_map('strval', $attrs ? $attrs : array());
 			$group	= implode('.', $groups);
 
 			// If the field is successfully loaded add it to the result array.
@@ -897,7 +897,7 @@ class JForm
 
 			// Get the group names as strings for anscestor fields elements.
 			$attrs	= $field->xpath('ancestor::fields[@name]/@name');
-			$groups	= array_map('strval', $attrs);
+			$groups	= array_map('strval', $attrs ? $attrs : array());
 			$group	= implode('.', $groups);
 
 			// Get the value from the input data.
@@ -909,7 +909,7 @@ class JForm
 			}
 
 			// Validate the field.
-			$valid = $this->validateField($field, $group, $value);
+			$valid = $this->validateField($field, $group, $value, $input);
 
 			// Check for an error.
 			if (JError::isError($valid)) {
@@ -1105,7 +1105,7 @@ class JForm
 
 				// Get the group names as strings for anscestor fields elements.
 				$attrs = $field->xpath('ancestor::fields[@name]/@name');
-				$names = array_map('strval', $attrs);
+				$names	= array_map('strval', $attrs ? $attrs : array());
 
 				// If the field is in the exact group use it and break out of the loop.
 				if ($names == (array) $groupNames) {
@@ -1213,7 +1213,7 @@ class JForm
 						foreach ($tmp as $field) {
 							// Get the names of the groups that the field is in.
 							$attrs = $field->xpath('ancestor::fields[@name]/@name');
-							$names = array_map('strval', $attrs);
+							$names = array_map('strval', $attrs ? $attrs : array());
 
 							// If the field is in the specific group then add it to the return list.
 							if ($names == (array) $groupNames) {
@@ -1285,7 +1285,7 @@ class JForm
 
 						// Get the group names as strings for anscestor fields elements.
 						$attrs = $fields->xpath('ancestor-or-self::fields[@name]/@name');
-						$names = array_map('strval', $attrs);
+						$names = array_map('strval', $attrs ? $attrs : array());
 
 						// If the group names for the fields element match the valid names at this
 						// level add the fields element.
@@ -1485,16 +1485,21 @@ class JForm
 	 * @param	string	$element	The XML element object representation of the form field.
 	 * @param	string	$group		The optional dot-separated form group path on which to find the field.
 	 * @param	mixed	$value		The optional value to use as the default for the field.
+	 * @param	object	$input		An optional JRegistry object with the entire data set to validate
+	 * 								against the entire form.
 	 *
 	 * @return	mixed	Boolean true if field value is valid, JException on failure.
 	 * @since	1.6
 	 */
-	protected function validateField($element, $group = null, $value = null)
+	protected function validateField($element, $group = null, $value = null, $input = null)
 	{
 		// Make sure there is a valid JXMLElement.
 		if (!$element instanceof JXMLElement) {
 			return new JException(JText::_('LIB_FORM_VALIDATE_FIELD_ERROR'), 0, E_ERROR);
 		}
+
+		// Initialize variables.
+		$valid = true;
 
 		// Check if the field is required.
 		$required = ((string) $element['required'] == 'true' || (string) $element['required'] == 'required');
@@ -1514,8 +1519,7 @@ class JForm
 		}
 
 		// Get the field validation rule.
-		$type = (string) $element['validate'];
-		if ($type) {
+		if ($type = (string) $element['validate']) {
 			// Load the JFormRule object for the field.
 			$rule = $this->loadRuleType($type);
 
@@ -1523,14 +1527,14 @@ class JForm
 			if ($rule === false) {
 				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_RULE_MISSING', $rule), 0, E_ERROR);
 			}
-		}
 
-		// Run the field validation rule test.
-		$valid = $rule->test($element, $value, $group, $this);
+			// Run the field validation rule test.
+			$valid = $rule->test($element, $value, $group, $input, $this);
 
-		// Check for an error in the validation test.
-		if (JError::isError($valid)) {
-			return $valid;
+			// Check for an error in the validation test.
+			if (JError::isError($valid)) {
+				return $valid;
+			}
 		}
 
 		// Check if the field is valid.

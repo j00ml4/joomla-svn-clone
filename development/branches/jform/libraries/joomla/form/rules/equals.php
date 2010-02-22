@@ -32,13 +32,15 @@ class JFormRuleEquals extends JFormRule
 	 * 								container for the field. For example if the field has name="foo"
 	 * 								and the group value is set to "bar" then the full field name
 	 * 								would end up being "bar[foo]".
+	 * @param	object	$input		An optional JRegistry object with the entire data set to validate
+	 * 								against the entire form.
 	 * @param	object	$form		The form object for which the field is being tested.
 	 *
 	 * @return	boolean	True if the value is valid, false otherwise.
 	 * @since	1.6
 	 * @throws	JException on invalid rule.
 	 */
-	public function test(& $element, $value, $group = null, & $form = null)
+	public function test(& $element, $value, $group = null, & $input = null, & $form = null)
 	{
 		// Initialize variables.
 		$field	= (string) $element['field'];
@@ -54,7 +56,7 @@ class JFormRuleEquals extends JFormRule
 		}
 
 		// Test the two values against each other.
-		if ($value == $form->getValue($field)) {
+		if ($value == $input->get($field)) {
 			return true;
 		}
 

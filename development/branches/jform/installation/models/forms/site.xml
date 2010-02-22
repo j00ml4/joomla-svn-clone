@@ -9,17 +9,17 @@
 			required="true"
 		/>
 
-		<field name="admin_user" type="text" id="admin_user" class="inputbox"
-			label="Instl_Admin_User_Label"
-			description="Instl_Admin_User_Desc"
-			default="admin"
-			required="true"
-		/>
 		<field name="admin_email" type="text" id="admin_email" class="inputbox"
 			label="Instl_Admin_Email_Label"
 			description="Instl_Admin_Email_Desc"
 			default=""
 			validate="email"
+			required="true"
+		/>
+		<field name="admin_user" type="text" id="admin_user" class="inputbox"
+			label="Instl_Admin_User_Label"
+			description="Instl_Admin_User_Desc"
+			default="admin"
 			required="true"
 		/>
 		<field name="admin_password" type="password" id="admin_password" class="inputbox"
