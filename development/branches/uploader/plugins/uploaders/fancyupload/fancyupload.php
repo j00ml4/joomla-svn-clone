@@ -32,71 +32,60 @@ class plgEditorFancyUpload extends JPlugin
 	 * @param	boolean	True and the editor buttons will be displayed.
 	 * @param	string	An optional ID for the textarea (note: since 1.6). If not supplied the name is used.
 	 */
-	function onDisplayUploaderForm($name, $content, $width, $height, $col, $row, $buttons = true, $id = null)
+	function onDisplayUploaderForm($name, $id = null)
 	{
 		if (empty($id)) {
 			$id = $name;
 		}
-
-			if ($config->get('enable_flash', 1)) {
-			$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
-			$types = explode(',', $fileTypes);
-			$displayTypes = '';		// this is what the user sees
-			$filterTypes = '';		// this is what controls the logic
-			$firstType = true;
-			foreach($types AS $type) {
-				if(!$firstType) {
-					$displayTypes .= ', ';
-					$filterTypes .= '; ';
-				} else {
-					$firstType = false;
-				}
-				$displayTypes .= '*.'.$type;
-				$filterTypes .= '*.'.$type;
+		$config = JComponentHelper::getParams('com_media');
+		$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
+		$types = explode(',', $fileTypes);
+		$displayTypes = '';		// this is what the user sees
+		$filterTypes = '';		// this is what controls the logic
+		$firstType = true;
+		foreach($types AS $type) {
+			if(!$firstType) {
+				$displayTypes .= ', ';
+				$filterTypes .= '; ';
+			} else {
+				$firstType = false;
 			}
-			$typeString = '{ \'Images ('.$displayTypes.')\': \''.$filterTypes.'\' }';
-
-			JHtml::_('behavior.uploader', 'upload-flash',
-				array(
-					'onComplete' => 'function(){ MediaManager.refreshFrame(); }',
-					'targetURL' => '\\$(\'uploadForm\').action',
-					'typeFilter' => $typeString
-				)
-			);
+			$displayTypes .= '*.'.$type;
+			$filterTypes .= '*.'.$type;
 		}
-		$buttons = $this->_displayButtons($id, $buttons);
-		$editor  = "<textarea name=\"$name\" id=\"$id\" cols=\"$col\" rows=\"$row\" style=\"width: $width; height: $height;\">$content</textarea>" . $buttons;
+		$typeString = '{ \'Images ('.$displayTypes.')\': \''.$filterTypes.'\' }';
 
+		JHtml::_('behavior.uploader', 'upload-flash',
+			array(
+				'onComplete' => 'function(){ MediaManager.refreshFrame(); }',
+				'targetURL' => '\\$(\'uploadForm\').action',
+				'typeFilter' => $typeString
+			)
+		);
+		?>
 		<form action="<?php echo JURI::base(); ?>index.php?option=com_media&amp;task=file.upload&amp;tmpl=component&amp;<?php echo $this->session->getName().'='.$this->session->getId(); ?>&amp;<?php echo JUtility::getToken();?>=1" id="uploadForm" method="post" enctype="multipart/form-data">
-				<fieldset id="uploadform">
-					<legend><?php echo JText::_('UPLOAD_FILE'); ?> (<?php echo JText::_('MAXIMUM_SIZE'); ?>:&nbsp;<?php echo ($this->config->get('upload_maxsize') / 1000000); ?>MB)</legend>
-					<fieldset id="upload-noflash" class="actions">
-						<label for="upload-file" class="hidelabeltxt"><?php echo JText::_('UPLOAD_FILE'); ?></label>
-						<input type="file" id="upload-file" name="Filedata" />
-						<label for="upload-submit" class="hidelabeltxt"><?php echo JText::_('START_UPLOAD'); ?></label>
-						<input type="submit" id="upload-submit" value="<?php echo JText::_('START_UPLOAD'); ?>"/>
-					</fieldset>
-					<div id="upload-flash" class="hide">
-						<ul>
-							<li><a href="#" id="upload-browse"><?php echo JText::_('BROWSE_FILES'); ?></a></li>
-							<li><a href="#" id="upload-clear">Clear List</a></li>
-							<li><a href="#" id="upload-start">Start Upload</a></li>
-						</ul>
-						<div class="clr"> </div>
-						<p class="overall-title"></p>
-						<?php echo JHTML::_('image', 'media/bar.gif', JText::_('OVERALL_PROGRESS'), array('class' => 'progress overall-progress'), true); ?>
-						<div class="clr"> </div>
-						<p class="current-title"></p>
-						<?php echo JHTML::_('image', 'media/bar.gif', JText::_('CURRENT_PROGRESS'), array('class' => 'progress current-progress'), true); ?>
-						<p class="current-text"></p>
-					</div>
-					<ul class="upload-queue" id="upload-queue">
-						<li style="display:none;" />
+			<fieldset id="uploadform">
+				<legend><?php echo JText::_('UPLOAD_FILE'); ?> (<?php echo JText::_('MAXIMUM_SIZE'); ?>:&nbsp;<?php echo ($this->config->get('upload_maxsize') / 1000000); ?>MB)</legend>
+				<div id="upload-flash" class="hide">
+					<ul>
+						<li><a href="#" id="upload-browse"><?php echo JText::_('BROWSE_FILES'); ?></a></li>
+						<li><a href="#" id="upload-clear">Clear List</a></li>
+						<li><a href="#" id="upload-start">Start Upload</a></li>
 					</ul>
-				</fieldset>
-				<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media'); ?>" />
-			</form>
-		
-		return $editor;
+					<div class="clr"> </div>
+					<p class="overall-title"></p>
+					<?php echo JHTML::_('image', 'media/bar.gif', JText::_('OVERALL_PROGRESS'), array('class' => 'progress overall-progress'), true); ?>
+					<div class="clr"> </div>
+					<p class="current-title"></p>
+					<?php echo JHTML::_('image', 'media/bar.gif', JText::_('CURRENT_PROGRESS'), array('class' => 'progress current-progress'), true); ?>
+					<p class="current-text"></p>
+				</div>
+				<ul class="upload-queue" id="upload-queue">
+					<li style="display:none;" />
+				</ul>
+			</fieldset>
+			<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media'); ?>" />
+		</form>
+		<?php
 	}
 }
