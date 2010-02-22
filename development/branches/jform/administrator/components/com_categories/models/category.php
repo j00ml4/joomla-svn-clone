@@ -145,7 +145,7 @@ class CategoriesModelCategory extends JModelForm
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_ADMINISTRATOR.'/components/com_categories/models/forms');
 		JForm::addFieldPath(JPATH_ADMINISTRATOR.'/components/com_categories/models/fields');
-		$form = &JForm::getInstance('category', "com_categories.category.$extension", true, array('array'=>'jform'));
+		$form = &JForm::getInstance('category', "com_categories.category.$extension", true, array('control'=>'jform'));
 		// Check for an error.
 		if (JError::isError($form))
 		{
@@ -161,7 +161,7 @@ class CategoriesModelCategory extends JModelForm
 		{
 			$lang->load($component, JPATH_BASE, null, false, false);
 			$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
-			$form->load($path, true, false);
+			$form->loadFile($path, false);
 
 			// Check for an error.
 			if (JError::isError($form)) {
@@ -210,7 +210,7 @@ class CategoriesModelCategory extends JModelForm
 			if (!JError::isError($error)) {
 				$error = new JException($error, 500);
 			}
-			
+
 			$this->setError($error);
 			return false;
 		}
@@ -381,7 +381,7 @@ class CategoriesModelCategory extends JModelForm
 			{
 				$this->setError($table->getError());
 				return false;
-			}			
+			}
 		}
 
 		return true;

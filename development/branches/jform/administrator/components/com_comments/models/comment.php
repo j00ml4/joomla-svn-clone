@@ -108,7 +108,7 @@ class CommentsModelComment extends JModelForm
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('comment', 'com_comments.comment', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('comment', 'com_comments.comment', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

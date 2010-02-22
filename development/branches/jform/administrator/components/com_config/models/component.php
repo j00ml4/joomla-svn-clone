@@ -59,7 +59,7 @@ class ConfigModelComponent extends JModelForm
 		}
 
 		// Get the form.
-		$form = parent::getForm('config', 'com_config.component', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('config', 'com_config.component', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -83,7 +83,7 @@ class ConfigModelComponent extends JModelForm
 
 		// Load common and local language files.
 		$lang = &JFactory::getLanguage();
-		
+
 			$lang->load($option, JPATH_BASE, null, false, false)
 		||	$lang->load($option, JPATH_COMPONENT, null, false, false)
 		||	$lang->load($option, JPATH_BASE, $lang->getDefault(), false, false)

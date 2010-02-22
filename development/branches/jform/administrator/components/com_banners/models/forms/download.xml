@@ -2,30 +2,19 @@
 	<!-- $Id$ -->
 <form>
 	<fields>
-
-		<field
-			id="compressed"
-			name="compressed"
-			type="radio"
-			label="Banners_Compressed_Label"
+		<field name="compressed" type="radio"
+			default="0"
 			description="Banners_Compressed_Desc"
-			class="inputbox"
-			default="0">
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
+			label="Banners_Compressed_Label"
+		>
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
 		</field>
 
-		<field
-			id="basename"
-			name="basename"
-			type="text"
-			class="inputbox"
-			default=""
-			size="40"
+		<field name="basename" type="text"
+			description="Banners_BaseName_Desc"
 			label="Banners_BaseName_Label"
-			description="Banners_BaseName_Desc"/>
-
+			size="40"
+		/>
 	</fields>
 </form>
