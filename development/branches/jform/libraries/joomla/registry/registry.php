@@ -158,7 +158,7 @@ class JRegistry
 	{
 		// Load the variables into the registry's data object.
 		foreach ($array as $k => $v) {
-			if (!is_scalar($v)) {
+			if (!is_scalar($v) && !is_null($v)) {
 				$this->data->$k = new stdClass();
 				$this->bindData($this->data->$k, $v);
 			}
@@ -183,7 +183,7 @@ class JRegistry
 		if (is_object($object)) {
 			foreach (get_object_vars($object) as $k => $v) {
 				if (substr($k, 0,1) != '_' || $k == '_name') {
-					if (!is_scalar($v)) {
+					if (!is_scalar($v) && !is_null($v)) {
 						$this->data->$k = new stdClass();
 						$this->bindData($this->data->$k, $v);
 					}
@@ -388,7 +388,7 @@ class JRegistry
 
 		foreach ($data as $k => $v) {
 			if ($k[0] != '_') {
-				if (!is_scalar($v)) {
+				if (!is_scalar($v) && !is_null($v)) {
 					$parent->$k = new stdClass();
 					$this->bindData($parent->$k, $v);
 				}
