@@ -206,7 +206,11 @@ class JPathway extends JObject
 	function _makeItem($name, $link)
 	{
 		$item = new stdClass();
-		$item->name = html_entity_decode($name, ENT_COMPAT, 'UTF-8');
+		if((version_compare( phpversion(), '5.0' ) < 0)) {
+			$item->name = html_entity_decode($name);
+		} else {
+			$item->name = html_entity_decode($name, ENT_COMPAT, 'UTF-8');
+		}
 		$item->link = $link;
 
 		return $item;
