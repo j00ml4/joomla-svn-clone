@@ -105,6 +105,7 @@ class WeblinksModelCategory extends JModelList
 
 		return $query;
 	}
+	
 
 	/**
 	 * Method to auto-populate the model state.
@@ -171,6 +172,7 @@ class WeblinksModelCategory extends JModelList
 			if ($db->getErrorNum()) {
 				$this->setError($db->getErrorMsg());
 			}
+			
 		}
 
 		return $this->_category;
