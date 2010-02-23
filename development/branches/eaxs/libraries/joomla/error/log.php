@@ -16,7 +16,7 @@ defined('JPATH_BASE') or die;
  * This class is designed to build log files based on the
  * W3C specification at: http://www.w3.org/TR/WD-logfile.html
  *
- * @package 	Joomla.Framework
+ * @package	Joomla.Framework
  * @subpackage	Error
  * @since		1.5
  */
@@ -33,6 +33,18 @@ class JLog extends JObject
 	 * @var	string
 	 */
 	var $_path;
+	
+	/**
+	 * Storage method
+	 * @var string	 
+	 */     	
+	var $_storage;
+	
+	/**
+	 * Current log entries
+	 * @var array
+	 */ 
+	var $_entries;
 
 	/**
 	 * Log Format
@@ -51,8 +63,11 @@ class JLog extends JObject
 	function __construct($path, $options)
 	{
 		// Set default values
-		$this->_path = $path;
+		$this->_path    = $path;
+		$this->_entries = array();
 		$this->setOptions($options);
+		
+		register_shutdown_function(array(&$this,'_store'));
 	}
 
 	/**
@@ -98,16 +113,55 @@ class JLog extends JObject
 	 * @return	boolean				True if successful
 	 * @since	1.5
 	 */
-	function setOptions($options) {
-
-		if (isset ($options['format'])) {
-			$this->_format = $options['format'];
-		}
+	function setOptions($options) 
+    {
+        if(!is_array($options)) return false;
+        
+		if (isset ($options['format'])) $this->_format = $options['format'];
+		if (isset ($options['storage'])) $this->_storage = $options['storage'];
+		
 		return true;
 	}
+	
+	/**
+	 * Clears the current log
+	 *
+	 * @access	public
+	 * @return	boolean true
+	 * @since	1.6
+	 */
+	function clear()
+	{
+        $this->_entries = array();
+        
+        return true;
+    }
 
+    /**
+	 * Returns all log entries
+	 *
+	 * @access	public
+	 * @return	array   $_entries        The current log entries
+	 * @since	1.6
+	 */
+    function getEntries()
+    {
+         return $this->_entries;
+    }
+    
+    /**
+	 * Adds an entry to the log
+	 *
+	 * @access	public
+	 * @param	array	$entry    	Associative array of options to set
+	 * @return	boolean				True if successful
+	 * @since	1.5
+	 */
 	function addEntry($entry)
 	{
+	    // Make sure we have an array
+	    if(!is_array($entry)) return false;
+	    
 		// Set some default field values if not already set.
 		$date = &JFactory::getDate();
 		if (!isset ($entry['date'])) {
@@ -121,49 +175,124 @@ class JLog extends JObject
 		if (!isset ($entry['c-ip'])) {
 			$entry['c-ip'] = $_SERVER['REMOTE_ADDR'];
 		}
-
-		// Ensure that the log entry keys are all uppercase
+		
+		// Format the entry and save it
+        $this->_entries[] = $this->_format($entry);
+		
+		return true;
+	}
+	
+	/**
+	 * Formats an entry according to $_format
+	 *
+	 * @access	public
+	 * @param   array    $entry    	 The original entry
+	 * @return	string               The formatted entry
+	 * @since	1.6
+	 */
+	function _format($entry)
+	{
+        static $fields;
+        
+        // Ensure that the log entry keys are all uppercase
 		$entry = array_change_key_case($entry, CASE_UPPER);
-
-		// Find all fields in the format string
-		$fields = array ();
-		$regex = "/{(.*?)}/i";
-		preg_match_all($regex, $this->_format, $fields);
-
-		// Fill in the field data
+		
+        // Find all fields in the format string
+        if(!is_array($fields)) {
+		    $fields = array ();
+		    $regex  = "/{(.*?)}/i";
+		    preg_match_all($regex, $this->_format, $fields);
+        }
+        
+        // Fill in the field data
 		$line = $this->_format;
 		for ($i = 0; $i < count($fields[0]); $i++)
 		{
 			$line = str_replace($fields[0][$i], (isset ($entry[$fields[1][$i]])) ? $entry[$fields[1][$i]] : "-", $line);
 		}
-
-		// Write the log entry line
-		if ($this->_openLog())
-		{
-			if (!fputs($this->_file, "\n" . $line)) {
-				return false;
-			}
-		} else {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Open the log file pointer and create the file if it doesn't exist
+		
+		return $line;
+    }
+    
+    /**
+	 * Stores the current log entries
 	 *
-	 * @access 	public
-	 * @return 	boolean	True on success
-	 * @since	1.5
+	 * @access	public
+	 * @param   string    $storage   The storage method
+	 * @return	boolean              True if successful
+	 * @since	1.6
 	 */
-	function _openLog()
-	{
-		// Only open if not already opened...
-		if (is_resource($this->_file)) {
-			return true;
-		}
+    function _store($storage = NULL)
+    {
+        if($storage) $this->_storage = $storage;
+        
+        switch($this->_storage)
+        {
+             case 'database':
+                  $result = $this->_toDB();
+                  break;
+                  
+             case 'email':
+                 $result = $this->_toEmail();
+                 break;
+                      
+             case 'file':
+             default:
+                  $result = $this->_toFile();
+                  break;
+        }
+        
+        return $result;
+    }
 
-		if (!file_exists($this->_path))
+    /**
+	 * Saves the log in the database
+	 *
+	 * @access	public
+	 * @return	boolean       True if successful
+	 * @since	1.6
+	 */
+    function _toDB()
+    {
+        $db   = &JFactory::getDBO();
+        $user = &JFactory::getUser();
+        
+        $uid   = $db->Quote($user->get('id'));
+        $lines = $db->Quote(implode("\n",$this->_entries));
+        
+        $query = "INSERT INTO #__core_log VALUES (NULL, $uid, TIME(),$lines)";
+               $db->setQuery($query);
+               $db->query();
+               
+        if($db->getErrorNum()) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+	 * Sends the log to an email address
+	 *
+	 * @access	public
+	 * @return	boolean       True if successful
+	 * @since	1.6
+	 */
+    function _toEmail()
+    {
+        // TODO
+    }
+    
+    /**
+	 * Writes the log entries to a flat file
+	 *
+	 * @access	public
+	 * @return	boolean       True if successful
+	 * @since	1.6
+	 */
+    function _toFile()
+    {
+        if (!file_exists($this->_path))
 		{
 			jimport("joomla.filesystem.folder");
 			if (!JFolder :: create(dirname($this->_path))) {
@@ -187,34 +316,29 @@ class JLog extends JObject
 		} else {
 			$head = false;
 		}
-
+		
+		// Open the log file
 		if (!$this->_file = fopen($this->_path, "a")) {
 			return false;
 		}
-		if ($head)
-		{
+		
+		// Write log header
+		if ($head) {
 			if (!fputs($this->_file, $head)) {
 				return false;
 			}
 		}
-
-		// If we opened the file lets make sure we close it
-		register_shutdown_function(array(&$this,'_closeLog'));
-		return true;
-	}
-
-	/**
-	 * Close the log file pointer
-	 *
-	 * @access 	public
-	 * @return 	boolean	True on success
-	 * @since	1.5
-	 */
-	function _closeLog()
-	{
+		
+		// Write log entries
+		$lines = implode("\n", $this->_entries);
+		if (!fputs($this->_file, $lines)) {
+				return false;
+		}
+		
 		if (is_resource($this->_file)) {
 			fclose($this->_file);
 		}
+		
 		return true;
-	}
+    }
 }
