@@ -303,6 +303,21 @@ CREATE TABLE `#__content_rating` (
 # -------------------------------------------------------
 
 #
+# Table structure for table `#__core_log`
+#
+
+CREATE TABLE IF NOT EXISTS `#__core_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `entries` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`created`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+# -------------------------------------------------------
+
+#
 # Table structure for table `#__core_log_searches`
 #
 
@@ -404,8 +419,7 @@ INSERT INTO `#__extensions` VALUES
 (82, 'mod_submenu', 'module', 'mod_submenu', '', 1, 1, 0, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (83, 'mod_title', 'module', 'mod_title', '', 1, 1, 0, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (84, 'mod_toolbar', 'module', 'mod_toolbar', '', 1, 1, 0, 1, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(85, 'mod_unread', 'module', 'mod_unread', '', 1, 1, 0, 1, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(86, 'mod_ualog', 'module', 'mod_ualog', '', 1, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(85, 'mod_unread', 'module', 'mod_unread', '', 1, 1, 0, 1, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 ## Site
 INSERT INTO `#__extensions` VALUES
@@ -461,8 +475,7 @@ INSERT INTO `#__extensions` VALUES
 (177, 'System - SEF', 'plugin', 'sef', 'system', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 1, 0),
 (178, 'Editor - TinyMCE 3.2', 'plugin', 'tinymce', 'editors', 0, 1, 1, 0, '', '{"mode":"1","skin":"0","compressed":"0","cleanup_startup":"0","cleanup_save":"2","entity_encoding":"raw","lang_mode":"0","lang_code":"en","text_direction":"ltr","content_css":"1","content_css_custom":"","relative_urls":"1","newlines":"0","invalid_elements":"script,applet,iframe","extended_elements":"","toolbar":"top","toolbar_align":"left","html_height":"550","html_width":"750","element_path":"1","fonts":"1","paste":"1","searchreplace":"1","insertdate":"1","format_date":"%Y-%m-%d","inserttime":"1","format_time":"%H:%M:%S","colors":"1","table":"1","smilies":"1","media":"1","hr":"1","directionality":"1","fullscreen":"1","style":"1","layer":"1","xhtmlxtras":"1","visualchars":"1","nonbreaking":"1","template":"1","blockquote":"1","wordcount":"1","advimage":"1","advlink":"1","autosave":"1","contextmenu":"1","inlinepopups":"1","safari":"0","custom_plugin":"","custom_button":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (179, 'Content - Rating', 'plugin', 'vote', 'content', 0, 1, 1, 1, '', '', '', '', 0, '0000-00-00 00:00:00', 4, 0),
-(180, 'Search - Weblinks', 'plugin', 'weblinks', 'search', 0, 1, 1, 0, '', '{"search_limit":"50"}', '', '', 0, '0000-00-00 00:00:00', 2, 0),
-(181, 'System - Activity Log', 'plugin', 'ualog', 'system', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 8, 0);
+(180, 'Search - Weblinks', 'plugin', 'weblinks', 'search', 0, 1, 1, 0, '', '{"search_limit":"50"}', '', '', 0, '0000-00-00 00:00:00', 2, 0);
 
 # Templates
 
@@ -645,8 +658,7 @@ INSERT INTO `#__modules` VALUES
 (16, 'User Menu', '', 4, 'left', 0, '0000-00-00 00:00:00', 1, 'mod_menu', 2, 1, 'menutype=usermenu\nmoduleclass_sfx=_menu\ncache=1', 0, ''),
 (17, 'Login Form', '', 8, 'left', 0, '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, 'greeting=1\nname=0', 0, ''),
 (18, 'Breadcrumbs', '', 1, 'breadcrumb', 0, '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, 'moduleclass_sfx=\ncache=0\nshowHome=1\nhomeText=Home\nshowComponent=1\nseparator=\n\n', 0, ''),
-(19, 'Banners', '', 1, 'bottom', 0, '0000-00-00 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":"27","tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"0"}', 0, ''),
-(20, 'Admin Activity', '', 4, 'cpanel', 0, '0000-00-00 00:00:00', 1, 'mod_ualog', 3, 1, '', 1, '');
+(19, 'Banners', '', 1, 'bottom', 0, '0000-00-00 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":"27","tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"0"}', 0, '');
 
 # -------------------------------------------------------
 
@@ -683,8 +695,7 @@ INSERT INTO `#__modules_menu` VALUES
 (16,0),
 (17,0),
 (18,0),
-(19,0),
-(20,0);
+(19,0);
 
 # -------------------------------------------------------
 
@@ -1006,27 +1017,6 @@ CREATE TABLE `#__users` (
   KEY `idx_block` (`block`),
   KEY `username` (`username`),
   KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-# -------------------------------------------------------
-
-#
-# Table structure for table `#__user_log`
-#
-
-CREATE TABLE `#__user_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(50) NOT NULL,
-  `task` varchar(50) NOT NULL,
-  `task_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `item` text NOT NULL,
-  `link` text NOT NULL,
-  `msg` text NOT NULL,
-  `cdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `option` (`option`),
-  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 # -------------------------------------------------------
