@@ -351,9 +351,9 @@ class ContentModelCategory extends JModelItem
 			$orderby .= $filter_order .' '. $filter_order_Dir.', ';
 		}
 
-		$articleOrderby	= $params->get('article_orderby', 'rdate');
+		$articleOrderby	= $params->get('orderby_sec', 'rdate');
 		$articleOrderDate = $params->get('order_date');
-		$categoryOrderby	= $params->def('category_orderby', '');
+		$categoryOrderby	= $params->def('orderby_pri', '');
 		$secondary		= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate).', ';
 		$primary		= ContentHelperQuery::orderbyPrimary($categoryOrderby);
 
