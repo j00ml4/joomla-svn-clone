@@ -46,7 +46,7 @@ class JUpdate extends JObject
 	 */
 	protected function _getStackLocation()
 	{
-			return implode('->', $this->_stack);
+		return implode('->', $this->_stack);
 	}
 
 	/**
@@ -138,21 +138,30 @@ class JUpdate extends JObject
 		}
 	}
 
+
 	/**
-	 * Character Parser Function
-	 * Note: This is public because its called externally
+	 * Callback for receiving character data
+	 * Note: This is public because it is called externally
+	 * @param object parser object
+	 * @param string character data received from buffer
 	 */
 	public function _characterData($parser, $data) {
 		$tag = $this->_getLastTag();
-		//if(!isset($this->$tag->_data)) $this->$tag->_data = '';
-		//$this->$tag->_data .= $data;
+
 		// Throw the data for this item together
+		// We append the data to the data we already have for the current tag.
 		$tag = strtolower($tag);
 		$this->_current_update->$tag->_data .= $data;
 	}
 
+
+	/* Method too load XML update data from a URL
+	 * @param string URL path to XML file.
+	 * @return boolean True on success, false on failure
+	 */
 	public function loadFromXML($url)
 	{
+		// we try and open the file up from the URL.
 		if (!($fp = @fopen($url, "r")))
 		{
 			// TODO: Add a 'mark bad' setting here somehow
@@ -162,14 +171,17 @@ class JUpdate extends JObject
 
 		$this->xml_parser = xml_parser_create('');
 		xml_set_object($this->xml_parser, $this);
+
+		// we register our callbacks to handle the incoming data
 		xml_set_element_handler($this->xml_parser, '_startElement', '_endElement');
 		xml_set_character_data_handler($this->xml_parser, '_characterData');
+
 
 		while ($data = fread($fp, 8192))
 		{
 			if (!xml_parse($this->xml_parser, $data, feof($fp)))
 			{
-				die(sprintf("XML error: %s at line %d",
+				jexit(sprintf("XML error: %s at line %d",
 							xml_error_string(xml_get_error_code($this->xml_parser)),
 							xml_get_current_line_number($this->xml_parser)));
 			}
