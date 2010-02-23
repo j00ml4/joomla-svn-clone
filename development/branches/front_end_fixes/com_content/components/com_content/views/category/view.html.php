@@ -44,9 +44,7 @@ class ContentViewCategory extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$articles	= $this->get('Articles');
-//		$siblings	= $this->get('Siblings');
 		$children	= $this->get('Children');
-//		$parents	= $this->get('Parents');
 		$pagination	= $this->get('Pagination');
 
 
