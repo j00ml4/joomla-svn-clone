@@ -47,12 +47,12 @@ class JFormFieldCategoryParent extends JFormFieldList
 		$query->join('LEFT', '`#__categories` AS b ON a.lft > b.lft AND a.rgt < b.rgt');
 
 		// Filter by the type
-		if ($extension = $this->_form->getValue('extension')) {
+		if ($extension = $this->form->getValue('extension')) {
 			$query->where('(a.extension = '.$db->quote($extension).' OR a.parent_id = 0)');
 		}
 
 		// Prevent parenting to children of this item.
-		if ($id = $this->_form->getValue('id')) {
+		if ($id = $this->form->getValue('id')) {
 			$query->join('LEFT', '`#__categories` AS p ON p.id = '.(int) $id);
 			$query->where('NOT(a.lft >= p.lft AND a.rgt <= p.rgt)');
 		}

@@ -172,14 +172,6 @@
 			size="6"
 		/>
 
-		<field name="metadata" type="textarea"
-			class="inputbox"
-			cols="30"
-			description="Content_Metadata_Desc"
-			label="Content_Metadata_Label"
-			rows="3"
-		/>
-
 		<field name="language" type="contentlanguage"
 			class="inputbox"
 			description="JField_Language_Desc"

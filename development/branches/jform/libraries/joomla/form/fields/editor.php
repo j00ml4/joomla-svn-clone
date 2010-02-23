@@ -126,6 +126,6 @@ class JFormFieldEditor extends JFormField
 	 */
 	public function save()
 	{
-		return $this->editor->save($this->id);
+		return $this->getEditor()->save($this->id);
 	}
 }
