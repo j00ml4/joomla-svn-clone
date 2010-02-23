@@ -156,6 +156,18 @@
 			<option
 				value="order">JGLOBAL_Ordering</option>
 		</field>
+
+		<field
+			name="order_date"
+			type="list"
+			default=""
+			label="JGLOBAL_Ordering_Date_Label"
+			description="JGLOBAL_Ordering_Date_Desc">
+				<option value="">JCOMMON_USE_GLOBAL</option>
+				<option value="created">JGLOBAL_Created</option>
+				<option value="modified">JGLOBAL_Modified</option>
+				<option value="published">JGLOBAL_Published</option>
+		</field>
 		
 		<field
 			name="multi_column_order"
