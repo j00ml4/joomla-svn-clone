@@ -79,7 +79,7 @@ class JLog extends JObject
 	 * @return	object	The JLog object.
 	 * @since	1.5
 	 */
-	static function getInstance($file = 'error.php', $options = null, $path = null)
+	static function getInstance($file = 'log.php', $options = null, $path = null)
 	{
 		static $instances;
 
@@ -260,7 +260,7 @@ class JLog extends JObject
         $uid   = $db->Quote($user->get('id'));
         $lines = $db->Quote(implode("\n",$this->_entries));
         
-        $query = "INSERT INTO #__core_log VALUES (NULL, $uid, TIME(),$lines)";
+        $query = "INSERT INTO #__core_log VALUES (NULL, $uid, NOW(),$lines)";
                $db->setQuery($query);
                $db->query();
                
@@ -298,7 +298,7 @@ class JLog extends JObject
 			if (!JFolder :: create(dirname($this->_path))) {
 				return false;
 			}
-			$header[] = "#<?php die('Direct Access To Log Files Not Permitted'); ?>";
+			$header[] = "<?php die('Direct Access To Log Files Not Permitted'); ?>";
 			$header[] = "#Version: 1.0";
 			$header[] = "#Date: " . JFactory::getDate()->toMySQL();
 
@@ -331,7 +331,7 @@ class JLog extends JObject
 		
 		// Write log entries
 		$lines = implode("\n", $this->_entries);
-		if (!fputs($this->_file, $lines)) {
+		if (!fputs($this->_file, "\n".$lines)) {
 				return false;
 		}
 		
