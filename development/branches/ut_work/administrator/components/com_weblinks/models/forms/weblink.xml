@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id$ -->
+<form>
+	<fields>
+		<field
+			id="id"
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>
+
+		<field
+			id="title"
+			name="title"
+			type="text"
+			class="inputbox"
+			default=""
+			size="40"
+			label="COM_WEBLINKS_FIELD_TITLE_LABEL"
+			description="COM_WEBLINKS_FIELD_TITLE_DESC"
+			required="true"/>
+
+		<field
+			id="alias"
+			name="alias"
+			type="text"
+			class="inputbox"
+			default=""
+			size="40"
+			label="COM_WEBLINKS_FIELD_ALIAS_LABEL"
+			description="COM_WEBLINKS_FIELD_ALIAS_DESC"/>
+
+		<field
+			id="catid"
+			name="catid"
+			type="category"
+			extension="com_weblinks"
+			label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
+			description="COM_WEBLINKS_FIELD_CATEGORY_DESC"
+			class="inputbox">
+			<option>JOPTION_NO_CATEGORY</option>
+		</field>
+
+		<field
+			id="url"
+			name="url"
+			type="text"
+			class="inputbox"
+			default=""
+			size="40"
+			label="COM_WEBLINKS_FIELD_URL_LABEL"
+			description="COM_WEBLINKS_FIELD_URL_DESC"/>
+
+		<field
+			id="description"
+			name="description"
+			type="editor"
+			buttons="readmore,pagebreak"
+			class="inputbox"
+			default=""
+			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL"
+			description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC"/>
+
+		<field
+			id="date"
+			name="date"
+			type="Date"
+			class="inputbox"
+			default=""
+			label="Weblinks_Date_Label"
+			description="Weblinks_Date_Desc"
+			filter="safehtml"/>
+
+		<field
+			id="hits"
+			name="hits"
+			type="Text"
+			class="inputbox"
+			default=""
+			size="6"
+			label="Weblinks_Hits_Label"
+			description="Weblinks_HITS_Desc"
+			readonly="true"
+			filter="unset"/>
+
+		<field
+			id="state"
+			name="state"
+			type="list"
+			label="COM_WEBLINKS_FIELD_STATE_LABEL"
+			description="COM_WEBLINKS_FIELD_STATE_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option
+				value="1">JOPTION_PUBLISHED</option>
+			<option
+				value="0">JOPTION_UNPUBLISHED</option>
+			<option
+				value="-1">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
+			<option
+				value="-2">JOPTION_TRASH</option>
+		</field>
+
+		<field
+			id="checked_out"
+			name="checked_out"
+			type="Text"
+			class="inputbox"
+			default=""
+			size="6"
+			label="Weblinks_Checkedout_Label"
+			description="Weblinks_Checkedout_Desc"
+			readonly="true"
+			filter="unset"/>
+
+		<field
+			id="checked_out_time"
+			name="checked_out_time"
+			type="Text"
+			class="inputbox"
+			default=""
+			size="6"
+			label="Weblinks_Checkedout_Time_Label"
+			description="Weblinks_Checkedout_Time_Desc"
+			readonly="true"
+			filter="unset"/>
+
+		<field
+			id="ordering"
+			name="ordering"
+			type="Ordering"
+			class="inputbox"
+			default=""
+			label="COM_WEBLINKS_FIELD_ORDERING_LABEL"
+			description="COM_WEBLINKS_FIELD_ORDERING_DESC"/>
+
+			<field
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			class="inputbox"
+			size="1"
+			default="" />
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC"
+			class="inputbox"
+			default="">
+			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		</field>
+
+		<field
+			id="approved"
+			name="approved"
+			type="radio"
+			class="inputbox"
+			default=""
+			label="WEBLINKS_APPROVED_LABEL"
+			description="Weblinks_Approved_Desc">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+
+	</fields>
+
+	<fields
+		group="params"
+		array="true"
+		label="COM_WEBLINKS_OPTIONS">
+
+		<field
+			id="target"
+			name="target"
+			type="List"
+			default="0"
+			label="COM_WEBLINKS_FIELD_TARGET_LABEL"
+			description="COM_WEBLINKS_FIELD_TARGET_DESC">
+			<option
+				value="0">JBrowserTarget_Parent</option>
+			<option
+				value="1">JBrowserTarget_New</option>
+			<option
+				value="2">JBrowserTarget_Popup</option>
+			<option
+				value="3">JBrowserTarget_Modal</option>
+		</field>
+	</fields>
+</form>
