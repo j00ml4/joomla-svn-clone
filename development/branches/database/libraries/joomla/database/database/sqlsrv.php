@@ -307,8 +307,46 @@ class JDatabaseSQLSrv extends JDatabase
 	 */
 	function explain()
 	{
-		// TODO: Work out if MSSQL supports this but it looks like it doesn't
-		return '';
+		$temp = $this->_sql;
+
+		// SET SHOWPLAN_ALL ON - will make sqlsrv to show some explain of query instead of run it
+		// see also: http://msdn.microsoft.com/en-us/library/aa259203%28SQL.80%29.aspx
+		$this->setQuery("SET SHOWPLAN_ALL ON");
+		$this->query();
+
+		$this->setQuery($temp);
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$first = true;
+
+		$buffer = '<table id="explain-sql">';
+		$buffer .= '<thead><tr><td colspan="99">'.$this->getQuery().'</td></tr>';
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
+			if ($first) {
+				$buffer .= '<tr>';
+				foreach ($row as $k=>$v) {
+					$buffer .= '<th>'.$k.'</th>';
+				}
+				$buffer .= '</tr></thead>';
+				$first = false;
+			}
+			$buffer .= '<tbody><tr>';
+			foreach ($row as $k=>$v) {
+				$buffer .= '<td>'.$v.'</td>';
+			}
+			$buffer .= '</tr>';
+		}
+		$buffer .= '</tbody></table>';
+		sqlsrv_free_stmt( $cur );
+
+		// remove the explain status
+		$this->setQuery("SET SHOWPLAN_ALL OFF");
+		$this->query();
+		
+		$this->setQuery($temp);
+
+		return $buffer;
 	}
 
 	/**
@@ -493,6 +531,56 @@ class JDatabaseSQLSrv extends JDatabase
 		return $array;
 	}
 
+        /**
+         * Load the next row returned by the query.
+         *
+         * @return      mixed   The result of the query as an array, false if there are no more rows, or null on an error.
+         *
+         * @since       1.6.0
+         */
+        public function loadNextRow()
+        {
+                static $cur;
+
+                if (!($cur = $this->query())) {
+                        return $this->_errorNum ? null : false;
+                }
+
+                if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+                        return $row;
+                }
+
+                sqlsrv_free_stmt($cur);
+                $cur = null;
+
+                return false;
+        }
+
+        /**
+         * Load the next row returned by the query.
+         *
+         * @return      mixed   The result of the query as an object, false if there are no more rows, or null on an error.
+         *
+         * @since       1.6.0
+         */
+        public function loadNextObject()
+        {
+                static $cur;
+
+                if (!($cur = $this->query())) {
+                        return $this->_errorNum ? null : false;
+                }
+
+                if ($row =  sqlsrv_fetch_object( $cur )) {
+                        return $row;
+                }
+
+                sqlsrv_free_stmt($cur);
+                $cur = null;
+
+                return false;
+        }
+
 	/**
 	 * Inserts a row into a table based on an objects properties
 	 *
@@ -603,8 +691,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 */
 	function getTableList()
 	{
-		// TODO: Translate to T-SQL
-		$this->setQuery( 'SHOW TABLES' );
+		$this->setQuery( 'SELECT name from sysobjects WHERE xtype = \'U\';' );
 		return $this->loadResultArray();
 	}
 
