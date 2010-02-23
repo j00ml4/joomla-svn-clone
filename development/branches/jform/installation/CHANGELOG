@@ -27,7 +27,23 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+21-Feb-2010 Jean-Marie Simonet
+$ Small corrections for mod_article_news
+
+23-Feb-2010 Hannes Papenberg
+^ refactored mod_newsflash to mod_articles_news - Thanks Rob Clayburn!
++ Added option to enable/disable the weblink click-tracking - Thanks Rob Clayburn!
+# Made usage of JHTML functions consistent - Thanks Jonnathan Lima!
+
+23-Feb-2010 Christophe Demko
+^ Changing call JHtmlSelect::* to self::* in JHtmlSelect class
+
+23-Feb-2010 Sam Moffatt
+# Fix for minor HTML bug in mysql and mysqli drivers
+
 22-Feb-2010 Christophe Demko
+# Reverting patch 14969 (introduce a bug). Change the way to load the template language ini
+^ Changing call JLanguage::* to self::* in JLanguage class
 # Adding the ability to specify a layout and a tmpl in the JControllerForm
 
 21-Feb-2010 Mark Dexter
@@ -38,7 +54,6 @@ $ -> Language fix or change
 ^$ Refactored com_weblinks ini/keys + some
 
 21-Feb-2010 Christophe Demko
-# Loading language template at application init
 # Correcting a bug in component update
 # Enabling ftp for installation extension
 + Adding administrator/manifests/files/index.html

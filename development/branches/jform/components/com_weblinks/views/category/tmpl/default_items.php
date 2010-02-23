@@ -59,14 +59,14 @@ defined('_JEXEC') or die;
 						<td class="title">
 						<p>
 								<?php if ($this->params->get('link_icons') <> -1) : ?>
-										<?php echo JHtml::_('image',  'system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
+										<?php echo JHtml::image('system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
 								<?php endif; ?>
 
 								<?php
 										// Compute the correct link
 
 										$menuclass = 'category'.$this->params->get('pageclass_sfx');
-										$link		= JRoute::_('index.php?task=weblink.go&&id='. $item->id);
+										$link = $item->link;
 										switch ($item->params->get('target', $this->params->get('target')))
 										{
 												case 1:
@@ -90,7 +90,7 @@ defined('_JEXEC') or die;
 
 												default:
 														// open in parent window
-																echo '<a href="'.  $link . '\" class="'. $menuclass .'" rel="nofollow">'.
+																echo '<a href="'.  $link . '" class="'. $menuclass .'" rel="nofollow">'.
 																		$this->escape($item->title) . ' </a>';
 														break;
 										}
