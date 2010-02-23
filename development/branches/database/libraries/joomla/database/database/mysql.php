@@ -286,10 +286,10 @@ class JDatabaseMySQL extends JDatabase
 				foreach ($row as $k=>$v) {
 					$buffer .= '<th>'.$k.'</th>';
 				}
-				$buffer .= '</tr>';
+				$buffer .= '</tr></thead><tbody>';
 				$first = false;
 			}
-			$buffer .= '</thead><tbody><tr>';
+			$buffer .= '<tr>';
 			foreach ($row as $k=>$v) {
 				$buffer .= '<td>'.$v.'</td>';
 			}
