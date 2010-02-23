@@ -782,7 +782,7 @@ class JForm
 		}
 		// Otherwise set the attribute and return true.
 		else {
-			$element->addAttribute($attribute, $value);
+			$element[$attribute] = $value;
 			return true;
 		}
 	}

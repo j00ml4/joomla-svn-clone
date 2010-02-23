@@ -100,7 +100,7 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Options'), 'basic-options'); ?>
 		<fieldset class="panelform">
-		<?php foreach($this->form->getFields('attribs') as $field): ?>
+		<?php foreach($this->form->getFieldset('options') as $field): ?>
 			<?php if ($field->hidden): ?>
 				<?php echo $field->input; ?>
 			<?php else: ?>
@@ -125,7 +125,7 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('metakey'); ?>
 			<?php echo $this->form->getInput('metakey'); ?>
 
-			<?php foreach($this->form->getFields('metadata') as $field): ?>
+			<?php foreach($this->form->getFieldset('metadata') as $field): ?>
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
 			<?php endforeach; ?>

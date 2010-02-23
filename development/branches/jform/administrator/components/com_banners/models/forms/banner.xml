@@ -3,70 +3,74 @@
 <form>
 	<fields addfieldpath="/administrator/components/com_banners/models/fields">
 
-		<field name="id" type="hidden"
-			default="0"
-			readonly="true"
-			required="true"
-		/>
+		<fieldset name="details">
 
-		<field name="name" type="text"
-			description="Banners_Name_Desc"
-			label="Banners_Name_Label"
-			required="true"
-			size="40"
-		/>
+			<field name="id" type="hidden"
+				default="0"
+				readonly="true"
+				required="true"
+			/>
+	
+			<field name="name" type="text"
+				description="Banners_Name_Desc"
+				label="Banners_Name_Label"
+				required="true"
+				size="40"
+			/>
+	
+			<field name="alias" type="text"
+				description="Banners_Alias_Desc"
+				label="Banners_Alias_Label"
+				size="40"
+			/>
+	
+			<field name="catid" type="category"
+				description="Banners_Category_Desc"
+				extension="com_banners"
+				label="Banners_Category_Label"
+			>
+				<option>JOption_No_Category</option>
+			</field>
+	
+			<field name="state" type="list"
+				default="1"
+				description="Banners_State_Desc"
+				label="Banners_State_Label"
+				size="1"
+			>
+				<option value="1">JOption_Published</option>
+				<option value="0">JOption_Unpublished</option>
+				<option value="-1">JOption_Archived</option>
+				<option value="-2">JOption_Trash</option>
+			</field>
+	
+			<field name="cid" type="bannerclient"
+				description="Banners_Client_Desc"
+				label="Banners_Client_Label"
+			/>
+	
+			<field name="description" type="textarea"
+				cols="30"
+				description="Banners_Description_Desc"
+				label="Banners_Description_Label"
+				rows="3"
+			/>
+	
+			<field name="clickurl" type="text"
+				description="Banners_ClickURL_Desc"
+				label="Banners_ClickURL_Label"
+			/>
+	
+			<field name="type" type="radio"
+				default="0"
+				description="Banners_Type_Desc"
+				label="Banners_Type_Label"
+			>
+				<option value="0">Banners_Option_Image</option>
+				<option value="1">Banners_Option_Custom</option>
+			</field>
 
-		<field name="alias" type="text"
-			description="Banners_Alias_Desc"
-			label="Banners_Alias_Label"
-			size="40"
-		/>
-
-		<field name="catid" type="category"
-			description="Banners_Category_Desc"
-			extension="com_banners"
-			label="Banners_Category_Label"
-		>
-			<option>JOption_No_Category</option>
-		</field>
-
-		<field name="state" type="list"
-			default="1"
-			description="Banners_State_Desc"
-			label="Banners_State_Label"
-			size="1"
-		>
-			<option value="1">JOption_Published</option>
-			<option value="0">JOption_Unpublished</option>
-			<option value="-1">JOption_Archived</option>
-			<option value="-2">JOption_Trash</option>
-		</field>
-
-		<field name="cid" type="bannerclient"
-			description="Banners_Client_Desc"
-			label="Banners_Client_Label"
-		/>
-
-		<field name="description" type="textarea"
-			cols="30"
-			description="Banners_Description_Desc"
-			label="Banners_Description_Label"
-			rows="3"
-		/>
-
-		<field name="clickurl" type="text"
-			description="Banners_ClickURL_Desc"
-			label="Banners_ClickURL_Label"
-		/>
-
-		<field name="type" type="radio"
-			default="0"
-			description="Banners_Type_Desc"
-			label="Banners_Type_Label"
-		>
-			<option value="0">Banners_Option_Image</option>
-			<option value="1">Banners_Option_Custom</option>
-		</field>
+		</fieldset>
 
 		<fieldset name="publish" label="Banners_Publishing_Details">
 	

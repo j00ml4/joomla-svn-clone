@@ -34,7 +34,7 @@ class JFormFieldBannerClient extends JFormFieldList
 	 * @return	array	The field option objects.
 	 * @since	1.6
 	 */
-	protected function getOptions()
+	public function getOptions()
 	{
 		// Initialize variables.
 		$options = array();
@@ -57,7 +57,7 @@ class JFormFieldBannerClient extends JFormFieldList
 		}
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), $options);
+		//$options = array_merge(parent::getOptions(), $options);
 
 		array_unshift($options, JHtml::_('select.option', '0', JText::_('Banners_No_Client')));
 

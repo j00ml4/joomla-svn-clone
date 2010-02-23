@@ -18,6 +18,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+
+$fieldsets = $this->form->getFieldsets();
 ?>
 
 <script type="text/javascript">
@@ -69,16 +71,13 @@ JHtml::_('behavior.formvalidation');
 
 	<div class="width-40 fltrt">
 	<?php
-		if(in_array('params', $this->form->getGroups()))
+		if($fieldsets = $this->form->getFieldsets('params'))
 		{
 			echo JHTML::_('sliders.start');
-			$groups = $this->form->getGroups('params');
-			$fieldsets = $this->form->getFieldsets();
-			array_unshift($groups, 'params');
-			foreach($groups as $group) {
-				echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group);
+			foreach($fieldsets as $fieldset) {
+				echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
 				echo '<fieldset class="panelform">';
-				foreach($this->form->getFields($group) as $field)
+				foreach($this->form->getFieldset($fieldset->name) as $field)
 				{
 					if ($field->hidden)
 					{

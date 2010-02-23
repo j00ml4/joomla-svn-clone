@@ -3,79 +3,83 @@
 <form>
 	<fields addfieldpath="/administrator/components/com_banners/models/fields">
 
-		<field name="id" type="hidden"
-			default="0"
-			readonly="true"
-			required="true"
-		/>
+		<fieldset name="details">
 
-		<field name="name" type="text"
-			description="Banners_Name_Desc"
-			label="Banners_Name_Label"
-			required="true"
-			size="40"
-		/>
+			<field name="id" type="hidden"
+				default="0"
+				readonly="true"
+				required="true"
+			/>
+	
+			<field name="name" type="text"
+				description="Banners_Name_Desc"
+				label="Banners_Name_Label"
+				required="true"
+				size="40"
+			/>
+	
+			<field name="contact" type="text"
+				description="Banners_Contact_Desc"
+				label="Banners_Contact_Label"
+				required="true"
+				size="40"
+			/>
+	
+			<field name="email" type="text"
+				class="inputbox validate-email"
+				description="Banners_Email_Desc"
+				label="Banners_Email_Label"
+				required="true"
+				size="40"
+				validate="email"
+			/>
+	
+			<field name="state" type="list"
+				default="1"
+				description="Banners_State_Desc"
+				label="Banners_State_Label"
+				size="1"
+			>
+				<option value="1">JOption_Published</option>
+				<option value="0">JOption_Unpublished</option>
+				<option value="-1">JOption_Archived</option>
+				<option value="-2">JOption_Trash</option>
+			</field>
+	
+			<field name="purchase_type" type="list"
+				default="0"
+				description="Banners_PurchaseType_Desc"
+				label="Banners_PurchaseType_Label"
+			>
+				<option value="-1">Banners_UseComponentDefault</option>
+				<option value="1">Banners_1</option>
+				<option value="2">Banners_2</option>
+				<option value="3">Banners_3</option>
+				<option value="4">Banners_4</option>
+				<option value="5">Banners_5</option>
+			</field>
+	
+			<field name="track_impressions" type="list"
+				default="0"
+				description="Banners_TrackImpression_Desc"
+				label="Banners_TrackImpression_Label"
+			>
+				<option value="-1">Banners_UseComponentDefault</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+	
+			<field name="track_clicks" type="list"
+				default="0"
+				description="Banners_TrackClick_Desc"
+				label="Banners_TrackClick_Label"
+			>
+				<option value="-1">Banners_UseComponentDefault</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
 
-		<field name="contact" type="text"
-			description="Banners_Contact_Desc"
-			label="Banners_Contact_Label"
-			required="true"
-			size="40"
-		/>
-
-		<field name="email" type="text"
-			class="inputbox validate-email"
-			description="Banners_Email_Desc"
-			label="Banners_Email_Label"
-			required="true"
-			size="40"
-			validate="email"
-		/>
-
-		<field name="state" type="list"
-			default="1"
-			description="Banners_State_Desc"
-			label="Banners_State_Label"
-			size="1"
-		>
-			<option value="1">JOption_Published</option>
-			<option value="0">JOption_Unpublished</option>
-			<option value="-1">JOption_Archived</option>
-			<option value="-2">JOption_Trash</option>
-		</field>
-
-		<field name="purchase_type" type="list"
-			default="0"
-			description="Banners_PurchaseType_Desc"
-			label="Banners_PurchaseType_Label"
-		>
-			<option value="-1">Banners_UseComponentDefault</option>
-			<option value="1">Banners_1</option>
-			<option value="2">Banners_2</option>
-			<option value="3">Banners_3</option>
-			<option value="4">Banners_4</option>
-			<option value="5">Banners_5</option>
-		</field>
-
-		<field name="track_impressions" type="list"
-			default="0"
-			description="Banners_TrackImpression_Desc"
-			label="Banners_TrackImpression_Label"
-		>
-			<option value="-1">Banners_UseComponentDefault</option>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
-
-		<field name="track_clicks" type="list"
-			default="0"
-			description="Banners_TrackClick_Desc"
-			label="Banners_TrackClick_Label"
-		>
-			<option value="-1">Banners_UseComponentDefault</option>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field>
+		</fieldset>
 
 		<fieldset name="metadata" label="Banners_Metadata_Options">
 	
