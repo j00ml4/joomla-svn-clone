@@ -16,11 +16,16 @@ class JUpdateAdapter extends JAdapterInstance {
 	 *
 	 * @return object
 	 */
-	private function _getStackLocation()
+	protected function _getStackLocation()
 	{
-			return implode('->', $this->_stack);
+		return implode('->', $this->_stack);
 	}
 
+	/**
+	 * Gets the last XML tag that was processed.
+	 *
+	 * @return object
+	 */
 	function _getLastTag() {
 		return $this->_stack[count($this->_stack) - 1];
 	}

@@ -9,18 +9,23 @@ class JUpdaterExtension extends JUpdateAdapter
 	protected function _startElement($parser, $name, $attrs = Array()) {
 		array_push($this->_stack, $name);
 		$tag = $this->_getStackLocation();
+
 		// reset the data
 		eval('$this->'. $tag .'->_data = "";');
-		//echo 'Opened: '; print_r($this->_stack); echo '<br />';
-		//print_r($attrs); echo '<br />';
+
 		switch($name) {
+			// the top two cases handle the top level tags
 			case 'UPDATE':
 				$this->current_update =& JTable::getInstance('update');
 				$this->current_update->update_site_id = $this->_update_site_id;
 				$this->current_update->detailsurl = $this->_url;
 				break;
+
 			case 'UPDATES': // don't do anything
 				break;
+
+			// the default case handles the tags inside the document.
+			// We look for tags that are in our list of approvaed tags.
 			default:
 				if(in_array($name, $this->_updatecols)) {
 					$name = strtolower($name);
