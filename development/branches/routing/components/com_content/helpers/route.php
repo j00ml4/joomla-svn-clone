@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 // Component Helper
 jimport('joomla.application.component.helper');
-jimport('joomla.application.categorytree');
+jimport('joomla.application.categories');
 
 /**
  * Content Component Route Helper
@@ -31,7 +31,6 @@ abstract class ContentHelperRoute
 	{
 		if ($catid)
 		{
-			jimport('joomla.application.categories');
 			$categoryTree = JCategories::getInstance('com_content');
 			$category = $categoryTree->get($catid);
 			$catids = array();
@@ -66,7 +65,6 @@ abstract class ContentHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		jimport('joomla.application.categories');
 		$categoryTree = JCategories::getInstance('com_content');
 		$category = $categoryTree->get($catid);
 		$catids = array();
