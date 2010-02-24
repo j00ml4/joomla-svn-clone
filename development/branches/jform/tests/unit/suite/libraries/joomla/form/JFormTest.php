@@ -1069,7 +1069,7 @@ XML;
 
 		$this->assertThat(
 			$form->load('<form><fields /><fields /></form>'),
-			$this->isFalse()
+			$this->isTrue()
 		);
 
 		// Test merging.
