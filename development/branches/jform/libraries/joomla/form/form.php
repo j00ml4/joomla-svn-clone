@@ -572,7 +572,7 @@ class JForm
 	 * @return	boolean	True on success, false otherwise.
 	 * @since	1.6
 	 */
-	public function load($data, $reset = true)
+	public function load($data, $reset = true, $xpath = false)
 	{
 		// If the data to load isn't already an XML element or string return false.
 		if ((!$data instanceof JXMLElement) && (!is_string($data))) {
@@ -589,23 +589,85 @@ class JForm
 			}
 		}
 
-		// Verify that the XML document is designed for JForm.
-		if ($data->getName() != 'form') {
-			return false;
+		// If we have no XML definition at this point let's make sure we get one.
+		if (empty($this->xml)) {
+			// If no XPath query is set to search for fields, and we have a <form />, set it and return.
+			if (!$xpath && ($data->getName() == 'form')) {
+				$this->xml = $data;
+				return true;
+			}
+			// Create a root element for the form.
+			else {
+				$this->xml = new JXMLElement('<form></form>');
+			}
 		}
 
-		if (count($data->fields) !== 1) {
-			return false;
+		// If an XPath query is set only load elements that result from the XPath query.
+		if ($xpath && ($elements = $data->xpath($xpath))) {
+			foreach ($elements as $element) {
+
+				// If the reset flag is set, find all of the groups present in the document to load
+				// and unset them in the current document if they exist.
+				if ($reset) {
+
+					if ($groups = $element->xpath('descendant::fields[@name]/@name')) {
+						$groups = array_map('strval', $groups ? $groups : array());
+
+						foreach ($groups as $group) {
+							$unsets = (array) $this->xml->xpath('//fields[@name="'.$group.'"]');
+							foreach ($unsets as & $unset) {
+								unset($unset);
+							}
+						}
+					}
+
+					// If there are fields not in a group in the incoming document, remove all
+					// non-grouped fields from the current document.
+					if ($element->xpath('descendant::fields[not(@name)]/field')) {
+						$unsets = (array) $this->xml->xpath('//fields[not(@name)]/field');
+						foreach($unsets as $unset) {
+							unset($unset);
+						}
+					}
+				}
+
+				// Merge the new field data into the existing XML document.
+				self::mergeNodes($this->xml, $element);
+			}
 		}
 
-		// Handle the easy cases first.
-		if (empty($this->xml) || $reset) {
-			$this->xml = $data;
-			return true;
+		// No XPath query is set so use the root element for merging.
+		else {
+
+			// If the reset flag is set, find all of the groups present in the document to load and
+			// unset them in the current document if they exist.
+			if ($reset) {
+
+				if ($groups = $data->xpath('descendant::fields[@name]/@name')) {
+					$groups = array_map('strval', $groups ? $groups : array());
+
+					foreach ($groups as $group) {
+						$unsets = (array) $this->xml->xpath('//fields[@name="'.$group.'"]');
+						foreach ($unsets as & $unset) {
+							unset($unset);
+						}
+					}
+				}
+
+				// If there are fields not in a group in the incoming document, remove all non-grouped
+				// fields from the current document.
+				if ($data->xpath('descendant::fields[not(@name)]/field')) {
+					$unsets = (array) $this->xml->xpath('//fields[not(@name)]/field');
+					foreach($unsets as $unset) {
+						unset($unset);
+					}
+				}
+			}
+
+			// Merge the new field data into the existing XML document.
+			self::mergeNodes($this->xml, $data);
 		}
 
-		// Merge the new fields into the existing XML document.
-		self::mergeNodes($this->xml->fields, $data->fields);
 
 		return true;
 	}
