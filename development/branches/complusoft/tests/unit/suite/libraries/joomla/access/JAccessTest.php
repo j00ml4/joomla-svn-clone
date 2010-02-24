@@ -54,14 +54,43 @@ class JAccessTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheck() {
             $access = new JAccess();
-            $userId = 1;
-            $action = 1;
-            $asset  = 1;
+            $access2 = new JAccess();
+           /* $GroupUser42 = array(
+			0	=> 1,
+			1	=> 2,
+			2	=> 6,
+			3	=> 7,
+                        4	=> 8
+		);*/
+            //"core.login.site":{"6":1,"2":1}
+            //"core.login.admin":{"6":1}
+            //"core.admin":{"8":1,"7":1}
+            //"core.manage":{"7":1,"10":1,"6":1},
+            //"core.create":{"6":1}
+            //"core.delete":{"6":1}
+            //"core.edit":{"6":1}
+            //"core.edit.state":{"6":1}}';
+            //$this->assertTrue($access2->check('78',4,234));
+            $this->assertThat(
+			Null,
+			$this->equalTo($access->check('58','core.login.site',3))
+		);
+            $this->assertThat(
+			Null,
+			$this->equalTo($access->check('42','complusoft',3))
+		);
+            $this->assertThat(
+			Null,
+			$this->equalTo($access->check('42','core.login.site',345))
+		);
+            $this->assertTrue($access->check('42','core.login.site',3));
+            $this->assertTrue($access->check('42','core.login.admin',3));
             $this->assertTrue($access->check('42','core.admin',3));
-           // var_dump($access->getUsersByGroup(7,True));
-            //var_dump($access->getAuthorisedViewLevels('42'));
-            //var_dump($access->getActions('com_banners','component'));
-            //var_dump($access->getAssetRules(3, True));
+            $this->assertTrue($access->check('42','core.manage',3));
+            $this->assertTrue($access->check('42','core.create',3));
+            $this->assertTrue($access->check('42','core.delete',3));
+            $this->assertTrue($access->check('42','core.edit',3));
+            $this->assertTrue($access->check('42','core.edit.state',3));    
         }
 
 
@@ -69,8 +98,28 @@ class JAccessTest extends PHPUnit_Framework_TestCase {
 	 * @todo Implement testGetAssetRules().
 	 */
 	public function testGetAssetRules() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$access = new JAccess();
+                $ObjArrayJrules = $access->getAssetRules(3, True);
+                $string1 = '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1,"7":1},"core.manage":{"7":1,"10":1,"6":1},"core.create":{"6":1},"core.delete":{"6":1},"core.edit":{"6":1},"core.edit.state":{"6":1}}';
+                $this->assertThat(
+			$string1,
+			$this->equalTo((string)$ObjArrayJrules)
+		);
+
+                $ObjArrayJrules = $access->getAssetRules(3, False);
+                $string1 = '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}';
+                $this->assertThat(
+			$string1,
+			$this->equalTo((string)$ObjArrayJrules)
+		);
+
+                $ObjArrayJrules = $access->getAssetRules(1550, False);
+                $string1 = '[]';
+                $this->assertThat(
+			$string1,
+			$this->equalTo((string)$ObjArrayJrules)
+		);
+        
 	}
 
         public function testGetUsersByGroup() {
@@ -154,8 +203,79 @@ class JAccessTest extends PHPUnit_Framework_TestCase {
 	 * @todo Implement testGetActions().
 	 */
 	public function testGetActions() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
+		$access = new JAccess();
+                $array1 = array(
+			'name'	      => "core.admin",
+                        'title'       => "JAction_Admin",
+                        'description' => "JAction_Admin_Component_Desc"
+		);
+                $array2 = array(
+			'name'	      => "core.manage",
+                        'title'       => "JAction_Manage",
+                        'description' => "JAction_Manage_Component_Desc"
+		);
+                $array3 = array(
+			'name'	      => "core.create",
+                        'title'       => "JAction_Create",
+                        'description' => "JAction_Create_Component_Desc"
+		);
+                $array4 = array(
+			'name'	      => "core.delete",
+                        'title'       => "JAction_Delete",
+                        'description' => "JAction_Delete_Component_Desc"
+		);
+                $array5 = array(
+			'name'	      => "core.edit",
+                        'title'       => "JAction_Edit",
+                        'description' => "JAction_Edit_Component_Desc"
+		);
+                 $array6 = array(
+			'name'	      => "core.edit.state",
+                        'title'       => "JAction_Edit_State",
+                        'description' => "JAction_Edit_State_Component_Desc"
+		);
+               
+                
+               
+
+		$obj= $access->getActions('com_banners', 'component');
+                $arraystdClass =  (array)$obj[0];
+                $this->assertThat(
+			$array1,
+			$this->equalTo($arraystdClass)
+		);
+                $arraystdClass =  (array)$obj[1];
+                $this->assertThat(
+			$array2,
+			$this->equalTo($arraystdClass)
+		);
+                $arraystdClass =  (array)$obj[2];
+                $this->assertThat(
+			$array3,
+			$this->equalTo($arraystdClass)
+		);
+                $arraystdClass =  (array)$obj[3];
+                $this->assertThat(
+			$array4,
+			$this->equalTo($arraystdClass)
+		);
+                $arraystdClass =  (array)$obj[4];
+                $this->assertThat(
+			$array5,
+			$this->equalTo($arraystdClass)
+		);
+                $arraystdClass =  (array)$obj[5];
+                $this->assertThat(
+			$array6,
+			$this->equalTo($arraystdClass)
+		);
+
+                
+                $this->assertThat(
+			$array7 = array(),
+			$this->equalTo($access->getActions('com_complusoft', 'component'))
+		);
+               
+        }
 }
 ?>
