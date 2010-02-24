@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout
+		title="com_weblinks_category_view_default_title">
+		<message>
+			<![CDATA[com_weblinks_category_view_default_desc]]>
+		</message>
+	</layout>
+
+	<fields
+		group="request"
+		array="true"
+		label="MENUS_LAYOUT_REQUEST_VARIABLES_LABEL"
+		description="MENUS_LAYOUT_REQUEST_VARIABLES_DESC">
+		<field
+			name="id"
+			type="category"
+			extension="com_weblinks"
+			default="0"
+			label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
+			required="true"
+			description="COM_WEBLINKS_FIELD_CATEGORYCHOOSE_DESC" />
+	</fields>
+
+	<fields
+		group="basic"
+		label="MENUS_LAYOUT_BASIC_OPTIONS_LABEL"
+		description="">
+
+		<field
+			name="show_feed_link"
+			type="radio"
+			default="1"
+			label="COM_MENUS_FIELD_FEEDLINK_LABEL"
+			description="COM_MENUS_FIELD_FEEDLINK_DESC">
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+		<field
+			name="image"
+			type="imagelist"
+			directory="/images"
+			hide_default="1"
+			default=""
+			label="JFIELD_CATEGORY_IMAGE_LABEL"
+			description="JFIELD_CATEGORY_IMAGE_DESC" />
+	</fields>
+</metadata>
