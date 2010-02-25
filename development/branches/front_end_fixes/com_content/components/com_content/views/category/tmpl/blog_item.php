@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Create a shortcut for params.
-$params = &$this->params;
+$params = &$this->item->params;
 ?>
 
 <?php if ($this->item->state == 0) : ?>
