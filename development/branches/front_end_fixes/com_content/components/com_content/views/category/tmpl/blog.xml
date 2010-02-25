@@ -303,6 +303,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -316,6 +318,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -331,6 +335,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -344,6 +350,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -359,6 +367,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">JCOMMON_HIDE</option>
 			<option
 				value="1">JCOMMON_SHOW</option>
@@ -372,6 +382,8 @@
 			description="JGLOBAL_Linked_Titles_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -401,6 +413,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -414,6 +428,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -429,6 +445,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -442,6 +460,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -471,6 +491,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">JCommon_Hide</option>
 			<option
 				value="1">JCommon_Show</option>
@@ -484,6 +506,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -499,6 +523,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -513,6 +539,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
 				value="0">Hide</option>
 			<option
 				value="1">Show</option>
@@ -526,6 +554,8 @@
 			default="">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
