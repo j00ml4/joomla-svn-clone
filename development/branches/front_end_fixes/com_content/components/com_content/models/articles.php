@@ -122,6 +122,10 @@ class ContentModelArticles extends JModelList
 		$query->select("CASE WHEN a.created_by_alias > ' ' THEN a.created_by_alias ELSE ua.name END AS author_name");
 
 		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
+		
+		// Join over the categories to get parent category titles
+		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
+		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
 		// Filter by access level.
 		if ($access = $this->getState('filter.access')) {
@@ -280,7 +284,6 @@ class ContentModelArticles extends JModelList
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')) .' ' . $this->getState('list.direction', 'ASC'));
 
-		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
 
