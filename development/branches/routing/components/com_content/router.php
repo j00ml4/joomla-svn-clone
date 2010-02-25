@@ -158,7 +158,16 @@ function ContentBuildRoute(&$query)
 
 	if (isset($view) and $view == 'category') {
 		if ($mId != intval($query['id']) || $mView != $view) {
-			$segments[] = $query['id'];
+			$categoryTree = JCategories::getInstance('com_content');
+			$category = $categoryTree->get($query['id']);
+			$path = array();
+			while((int)$category->id != (int)$mId)
+			{
+				$path[] = $category->slug;
+				$category = $category->getParent();	
+			}
+			$path = array_reverse($path);
+			$segments = array_merge($segments, $path);
 		}
 		unset($query['id']);
 	}
