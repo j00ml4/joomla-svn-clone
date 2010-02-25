@@ -89,7 +89,14 @@ class ContentModelCategory extends JModelItem
 		$this->setState('list.direction',$app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd'));
 
 		$this->setState('list.start', JRequest::getVar('limitstart', 0, '', 'int'));
-		$limit = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.limit', 'limit', $mergedParams->get('display_num'));
+		
+		// set limit for query. If list, use parameter. If blog, add blog parameters for limit.
+		if (JRequest::getString('layout') == 'blog') {
+			$limit = $mergedParams->get('num_leading_articles') + $mergedParams->get('num_intro_articles') + $mergedParams->get('num_links');
+		}
+		else {
+			$limit = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.limit', 'limit', $mergedParams->get('display_num'));
+		}
 		$this->setState('list.limit', $limit);
 }
 
