@@ -164,7 +164,11 @@ function ContentBuildRoute(&$query)
 			while((int)$category->id != (int)$mId)
 			{
 				$path[] = $category->slug;
-				$category = $category->getParent();	
+				$category = $category->getParent();
+				if(!is_object($category))
+				{
+					break;
+				}
 			}
 			$path = array_reverse($path);
 			$segments = array_merge($segments, $path);
