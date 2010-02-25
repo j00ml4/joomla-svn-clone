@@ -63,7 +63,7 @@ $difLevel = 0;
 			echo "<li>";
 		}
 ?>
-		<span class="item-title"><a href="<?php echo ContentHelperRoute::getCategoryRoute($item->slug);?>">
+		<span class="item-title"><a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($item->slug));?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
 		<?php if ($item->description) : ?>
