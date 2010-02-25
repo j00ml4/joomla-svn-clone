@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Create a shortcut for params.
-$params = &$this->item->params;
+$params = &$this->params;
 ?>
 
 <?php if ($this->item->state == 0) : ?>
@@ -58,16 +58,27 @@ $params = &$this->item->params;
 
 <?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))) : ?>
  <dl class="article-info">
- <dt class="article-info-term"><?php  echo JText::_('JContent_Article_Infos'); ?></dt>
+ <dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
+<?php endif; ?>
+<?php if ($params->get('show_parent_category')) : ?>
+		<dd class="parent-category-name">
+			<?php 	$title = $this->escape($this->item->parent_title);
+					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->parent_slug)).'">'.$title.'</a>';?>
+			<?php if ($params->get('link_parent_category')) : ?>
+				<?php echo JText::sprintf('CONTENT_PARENT', $url); ?>
+				<?php else : ?>
+				<?php echo JText::sprintf('CONTENT_PARENT', $title); ?>
+			<?php endif; ?>
+		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_category')) : ?>
 		<dd class="category-name">
 			<?php 	$title = $this->escape($this->item->category_title);
 					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->catslug)).'">'.$title.'</a>';?>
 			<?php if ($params->get('link_category')) : ?>
-				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', $url); ?>
+				<?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
 				<?php else : ?>
-				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', $title); ?>
+				<?php echo JText::sprintf('CONTENT_CATEGORY', $title); ?>
 			<?php endif; ?>
 		</dd>
 <?php endif; ?>
