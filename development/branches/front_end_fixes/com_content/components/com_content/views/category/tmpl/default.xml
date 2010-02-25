@@ -118,7 +118,7 @@
 		description="">
 
 		<field
-			name="article_orderby"
+			name="orderby_sec"
 			type="list"
 			default=""
 			label="JGLOBAL_Article_Order_Label"
