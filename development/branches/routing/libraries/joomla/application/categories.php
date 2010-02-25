@@ -147,7 +147,7 @@ class JCategories
 				return null;
 			}
 		}
-		if (!isset($this->_nodes[$id]) || !isset($options['load']) || $options['load'])
+		if (!isset($this->_nodes[$id]))
 		{
 			$this->_load($id,$options);
 		}
@@ -206,8 +206,8 @@ class JCategories
 		if ($id!='root')
 		{
 			// Get the selected category
-			$test = 					'(s.lft = c.lft AND s.rgt = c.rgt)';
-			// Get the parent
+			$test = 					'(s.lft <= c.lft AND s.rgt >= c.rgt)';
+/**			// Get the parent
 			$test.=$parent?			' OR (s.parent_id = c.id)':''; 
 			// Get the children
 			$test.=$children ?		' OR (c.parent_id = s.id)':'';
@@ -217,7 +217,7 @@ class JCategories
 			$test.=$ascendants?		' OR (s.lft <= c.lft AND s.rgt >= c.rgt)':''; 
 			// Get the descendants
 			$test.=$descendants ?	' OR (s.lft >= c.lft AND s.rgt <= c.rgt)':'';
-			
+**/			
 			$query->leftJoin('#__categories AS s ON ' . $test);
 			$query->where('s.id='.(int)$id);
 		}
