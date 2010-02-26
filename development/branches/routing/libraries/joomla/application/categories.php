@@ -105,13 +105,10 @@ class JCategories
 		{
 			return self::$instances[$extension];
 		}
-		$parts = explode('.',$extension);
-		$component = $parts[0];
-		$section = (count($parts)>1)?$parts[1]:'';
-		$classname = ucfirst(substr($component,4)).ucfirst($section).'Categories';
+		$classname = ucfirst(substr($extension,4)).'Categories';
 		if (!class_exists($classname))
 		{
-			$path = JPATH_SITE.DS.'components'.DS.$component.DS.'helpers'.DS.'category.php';
+			$path = JPATH_SITE.DS.'components'.DS.$extension.DS.'helpers'.DS.'category.php';
 			if (is_file($path))
 			{
 				require_once $path;
@@ -137,7 +134,7 @@ class JCategories
 	 *   'level-max' to get nodes until this level 
 	 * @return JCategoryNode|null
 	 */
-	public function get($id='root',$options=array())
+	public function get($id='root')
 	{
 		if ($id != 'root')
 		{
@@ -149,27 +146,12 @@ class JCategories
 		}
 		if (!isset($this->_nodes[$id]))
 		{
-			$this->_load($id,$options);
+			$this->_load($id);
 		}
 		
-		return $this->node($id);
+		return $this->_nodes[$id];
 	}
-	/**
-	 * Return a node
-	 * @param an optional id
-	 * @return JCategoryNode|null
-	 */
-	public function node($id='root')
-	{
-		if (isset($this->_nodes[$id]) && $this->_nodes[$id] instanceof JCategoryNode)
-		{
-			return $this->_nodes[$id];
-		}
-		else
-		{
-			return null;
-		}
-	}
+
 	/**
 	 * Return the root or null
 	 *
@@ -180,24 +162,20 @@ class JCategories
 		return $this->node('root');
 	}
 
-	protected function _load($id,$options)
+	protected function _load($id)
 	{
 		$db	= JFactory::getDbo();
 		$user = JFactory::getUser();
 		$extension = $this->_extension;
-		
-		$children		= !isset($options['children'])		|| $options['children'];
-		$parent			= !isset($options['parent'])		|| $options['parent'];
-		$siblings		= !isset($options['siblings'])		|| $options['siblings'];
-		$ascendants		= !isset($options['ascendants'])	|| $options['ascendants'];
-		$descendants	= !isset($options['descendants'])	|| $options['descendants'];
-		
+	
 		$query = new JDatabaseQuery;
 		
 		// right join with c for category
 		$query->select('c.*');
 		$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
+		$query->select('a.rules');
 		$query->from('#__categories as c');
+		$query->leftJoin('#__assets AS a ON a.id = c.asset_id');
 		$query->where('(c.extension='.$db->Quote($extension).' OR c.extension='.$db->Quote('system').')');
 		$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');		
 		$query->order('c.lft');
@@ -206,32 +184,10 @@ class JCategories
 		if ($id!='root')
 		{
 			// Get the selected category
-			$test = 					'(s.lft <= c.lft AND s.rgt >= c.rgt)';
-/**			// Get the parent
-			$test.=$parent?			' OR (s.parent_id = c.id)':''; 
-			// Get the children
-			$test.=$children ?		' OR (c.parent_id = s.id)':'';
-			// Get the siblings
-			$test.=$siblings ?		' OR (s.parent_id = c.parent_id)':'';
-			// Get the ascendants
-			$test.=$ascendants?		' OR (s.lft <= c.lft AND s.rgt >= c.rgt)':''; 
-			// Get the descendants
-			$test.=$descendants ?	' OR (s.lft >= c.lft AND s.rgt <= c.rgt)':'';
-**/			
-			$query->leftJoin('#__categories AS s ON ' . $test);
+			$query->leftJoin('#__categories AS s ON s.lft <= c.lft AND s.rgt >= c.rgt OR s.lft > c.lft AND s.rgt < c.rgt');
 			$query->where('s.id='.(int)$id);
 		}
 		
-		// Deal with level min and max
-		if (isset($options['level-min']))
-		{
-			$query->where('c.level >='.(int)$options['level-min']);
-		}
-		if (isset($options['level-max']))
-		{
-			$query->where('c.level <='.(int)$options['level-max']);
-		}
-
 		// i for item
 		$query->leftJoin($db->nameQuote($this->_table).' AS i ON i.'.$db->nameQuote($this->_field).' = c.id ');
 		$query->select('COUNT(i.'.$db->nameQuote($this->_key).') AS numitems');
@@ -247,7 +203,7 @@ class JCategories
 		{
 			// foreach categories
 			foreach($results as $result)
-			{
+			{			
 				// Deal with parent_id
 				if (empty($result->parent_id))
 				{
@@ -256,13 +212,12 @@ class JCategories
 				elseif($result->parent_id == 1)
 				{
 					$result->parent_id = 'root';
-				}
-				
+				}	
 				// Create the node
 				if (!isset($this->_nodes[$result->id]))
 				{
 					// Convert the params field to an array.
-					$registry = new JRegistry();
+/**					$registry = new JRegistry();
 					$registry->loadJSON($result->params);
 					$result->params = $registry->toArray();
 
@@ -270,18 +225,22 @@ class JCategories
 					$registry = new JRegistry();
 					$registry->loadJSON($result->metadata);
 					$result->metadata = $registry->toArray();
-					
+	**/				
 					// Create the JCategoryNode
 					$this->_nodes[$result->id] = new JCategoryNode($result);
 				}
 				
 				// Compute relationship between node and its parent
-				if (!$this->_nodes[$result->id]->hasParent())
+				if ($this->_nodes[$result->id]->parent_id != 'root')
 				{
 					if (isset($this->_nodes[$result->parent_id]))
 					{
 						$this->_nodes[$result->id]->setParent($this->_nodes[$result->parent_id]);
+						$this->_nodes[$result->id]->_path = $this->_nodes[$result->parent_id]->_path;
+						$this->_nodes[$result->id]->_path[] = $result->parent_id; 
 					}
+				} else {
+					$this->_nodes[$result->id]->_path = array();
 				}
 			}
 		}
