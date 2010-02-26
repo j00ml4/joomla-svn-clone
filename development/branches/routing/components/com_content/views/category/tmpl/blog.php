@@ -44,7 +44,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php if ($this->children): ?>
 	<ul class="subcategories">
 		<?php foreach($this->children as $child) : ?>
-				<li><a href="<?php /*TODO  Needs a class */  echo ContentRoute::category($child->id); ?>">
+				<li><a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($child->id)); ?>">
 					<?php echo $child->title; ?></a> <?php /* echo @TODO numitems not loaded $child->numitems; */?></li>
 		<?php endforeach; ?>
 	</ul>

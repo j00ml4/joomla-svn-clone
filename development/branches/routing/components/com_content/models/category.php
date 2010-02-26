@@ -121,6 +121,23 @@ class ContentModelCategory extends JModelItem
 		// Initialise variables.
 		$pk = (!empty($pk)) ? $pk : (int) $this->getState('category.id');
 
+		$category = JCategories::getInstance('com_content')->get($pk);
+
+		// Convert parameter fields to objects.
+		$registry = new JRegistry;
+		$registry->loadJSON($category->params);
+		$category->params = clone $this->getState('params');
+		$category->params->merge($registry);
+
+		$registry = new JRegistry;
+		$registry->loadJSON($category->metadata);
+		$category->metadata = $registry;
+
+		$cat_params = new JParameter($category->params);
+		$category->category_params = $cat_params;
+		return $category;
+		
+		
 		if ($this->_item === null) {
 			$this->_item = array();
 		}
@@ -312,6 +329,7 @@ class ContentModelCategory extends JModelItem
 		// Initialise variables.
 		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
 
+		return $this->getItem($this->getItem($categoryId)->parent);
 		if ($this->_parents === null) {
 			$model = &JModel::getInstance('Categories', 'ContentModel', array('ignore_request' => true));
 			$model->setState('params',				JFactory::getApplication()->getParams());
