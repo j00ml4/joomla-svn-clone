@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Create a shortcut for params.
-$params = &$this->params;
+$params = &$this->item->params;
 ?>
 
 <?php if ($this->item->state == 0) : ?>
@@ -103,8 +103,14 @@ $params = &$this->params;
 	<?php echo JText::sprintf('Written_by', $author); ?>
 		</dd>
 	<?php endif; ?>
-<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))) : ?>
- </dl>
+<?php if ($params->get('show_hits')) : ?>
+		<dd class="hits">
+		<?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $this->item->hits); ?>
+		</dd>
+<?php endif; ?>
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) 
+			or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))) : ?>
+ 	</dl>
 <?php endif; ?>
 
 <?php echo $this->item->introtext; ?>
