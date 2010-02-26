@@ -295,70 +295,6 @@
 		description="">
 
 		<field
-			name="show_category"
-			type="list"
-			label="JGLOBAL_Show_Category_Label"
-			description="JGLOBAL_Show_Category_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
-		</field>
-
-		<field
-			name="link_category"
-			type="list"
-			label="JGLOBAL_Link_Category_Label"
-			description="JGLOBAL_Link_Category_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
-		
-		<field
-			name="show_parent_category"
-			type="list"
-			label="JGLOBAL_Show_Parent_Category_Label"
-			description="JGLOBAL_Show_Parent_Category_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
-		</field>
-
-		<field
-			name="link_parent_category"
-			type="list"
-			label="JGLOBAL_Link_Parent_Category_Label"
-			description="JGLOBAL_Link_Parent_Category_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
-
-		<field
 			name="show_title"
 			type="list"
 			default=""
@@ -367,7 +303,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JCOMMON_HIDE</option>
 			<option
@@ -383,7 +319,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JNo</option>
 			<option
@@ -405,6 +341,70 @@
 		</field>
 
 		<field
+			name="show_category"
+			type="list"
+			label="JGLOBAL_Show_Category_Label"
+			description="JGLOBAL_Show_Category_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
+				value="0">Hide</option>
+			<option
+				value="1">Show</option>
+		</field>
+
+		<field
+			name="link_category"
+			type="list"
+			label="JGLOBAL_Link_Category_Label"
+			description="JGLOBAL_Link_Category_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+		
+		<field
+			name="show_parent_category"
+			type="list"
+			label="JGLOBAL_Show_Parent_Category_Label"
+			description="JGLOBAL_Show_Parent_Category_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
+				value="0">Hide</option>
+			<option
+				value="1">Show</option>
+		</field>
+
+		<field
+			name="link_parent_category"
+			type="list"
+			label="JGLOBAL_Link_Parent_Category_Label"
+			description="JGLOBAL_Link_Parent_Category_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+
+		<field
 			name="show_author"
 			type="list"
 			label="JGLOBAL_Show_Author_Label"
@@ -413,7 +413,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -429,7 +429,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -445,7 +445,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -461,7 +461,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -491,7 +491,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">JCommon_Hide</option>
 			<option
@@ -507,7 +507,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -523,7 +523,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -539,7 +539,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
@@ -555,7 +555,7 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="article">CONTENT_BLOG_USE_ARTICLE</option>
+				value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
 			<option
 				value="0">Hide</option>
 			<option
