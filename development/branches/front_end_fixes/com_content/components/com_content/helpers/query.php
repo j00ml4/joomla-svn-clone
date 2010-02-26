@@ -48,8 +48,8 @@ class ContentHelperQuery
 	{
 		switch ($orderDate)
 		{
-			case 'modifed' :
-				$queryDate = ' a.modified ';
+			case 'modified' :
+				$queryDate = ' CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END';
 				break;
 
 			// use created if publish_up is not set
