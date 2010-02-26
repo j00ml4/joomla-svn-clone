@@ -298,9 +298,9 @@
 			<option
 				value="">USE_GLOBAL</option>
 			<option
-				value="0">JNo</option>
+				value="0">JHide</option>
 			<option
-				value="1">JYes</option>
+				value="1">JShow</option>
 		</field>
 
 		<field
