@@ -195,13 +195,6 @@ class ContentViewCategory extends JView
 
 			if ($view != 'category' || ($view == 'category' && $id != $this->item->id))
 			{
-				// foreach($this->parents as $parent)
-				// {
-					// $pathway->addItem(
-					//	$parent->title,
-					//	ContentRoute::category($parent->slug)
-					// );
-				//}
 				$pathway->addItem($this->item->title);
 			}
 		}
