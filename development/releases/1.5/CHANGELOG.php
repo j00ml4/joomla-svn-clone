@@ -44,6 +44,7 @@ $ -> Language fix or change
  # [#19655] Poll component save task missing successful results message
  # [#19555] Timezone code setting incorrect for 6:30 (Yagoon) and 11:30 (Norfolk) in Global Configuration
  # [#19055] Tinymce bug prevents adding the valid id extended element for the anchor tag
+ # [#19009] Author Alias not properly escaped in Article Manager
 
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method
