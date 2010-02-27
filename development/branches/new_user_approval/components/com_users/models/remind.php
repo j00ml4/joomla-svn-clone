@@ -96,18 +96,18 @@ class UsersModelRemind extends JModelForm
 
 		// Check for an error.
 		if ($db->getErrorNum()) {
-			return new JException(JText::sprintf('USERS_DATABASE_ERROR', $db->getErrorMsg()), 500);
+			return new JException(JText::sprintf('COM_USERS_DATABASE_ERROR', $db->getErrorMsg()), 500);
 		}
 
 		// Check for a user.
 		if (empty($user)) {
-			$this->setError(JText::_('USERS_USER_NOT_FOUND'));
+			$this->setError(JText::_('COM_USERS_USER_NOT_FOUND'));
 			return false;
 		}
 
 		// Make sure the user isn't blocked.
 		if ($user->block) {
-			$this->setError(JText::_('USERS_USER_BLOCKED'));
+			$this->setError(JText::_('COM_USERS_USER_BLOCKED'));
 			return false;
 		}
 
@@ -126,13 +126,16 @@ class UsersModelRemind extends JModelForm
 		$data['sitename']	= $config->getValue('sitename');
 		$data['link_text']	= JRoute::_($link, false, $mode);
 		$data['link_html']	= JRoute::_($link, true, $mode);
-
+		$data['email']		= $user->email;
+		$data['subject']	= JText::sprintf('COM_USERS_USERNAME_REMIND_MAIL_SUBJECT', $data['sitename']);
+		$data['text']		= JText::sprintf('COM_USERS_USERNAME_REMIND_MAIL_TEXT', $data['sitename'], $data['username'], $data['link_text']);
+/*
 		// Load the mail template.
 		jimport('joomla.utilities.simpletemplate');
 		$template = new JSimpleTemplate();
 
 		if (!$template->load('users.username.remind.request')) {
-			return new JException(JText::_('USERS_REMIND_MAIL_TEMPLATE_NOT_FOUND'), 500);
+			return new JException(JText::_('COM_USERS_REMIND_MAIL_TEMPLATE_NOT_FOUND'), 500);
 		}
 
 		// Push in the email template variables.
@@ -142,17 +145,15 @@ class UsersModelRemind extends JModelForm
 		$toEmail	= $user->email;
 		$subject	= $template->getTitle();
 		$message	= $template->getHtml();
-
+*/
 		// Send the password reset request e-mail.
-		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $toEmail, $subject, $message);
+		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $$data['email'], $data['subject'], $data['text']);
 
 		// Check for an error.
 		if ($return !== true) {
-			return new JException(JText::_('USERS_MAIL_FAILED'), 500);
+			return new JException(JText::_('COM_USERS_USERNAME_REMIND_SENDMAIL_FAILED'), 500);
 		}
 
 		return true;
 	}
-
-
 }

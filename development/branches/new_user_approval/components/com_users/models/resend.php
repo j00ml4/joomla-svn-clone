@@ -62,6 +62,7 @@ class UsersModelResend extends JModelForm
 		}
 
 		return $form;
+	}
 
 	/**
 	 * Method to start the activation link resend process
@@ -103,24 +104,24 @@ class UsersModelResend extends JModelForm
 
 		// Check for an error.
 		if ($db->getErrorNum()) {
-			return new JException(JText::sprintf('USERS_DATABASE_ERROR', $db->getErrorMsg()), 500);
+			return new JException(JText::sprintf('COM_USERS_DATABASE_ERROR', $db->getErrorMsg()), 500);
 		}
 
 		// Check for a user.
 		if (empty($user)) {
-			$this->setError(JText::_('USERS_USER_NOT_FOUND'));
+			$this->setError(JText::_('COM_USERS_USER_NOT_FOUND'));
 			return false;
 		}
 
 		// Make sure the user isn't already activated
 		if ($user->get('activate') == null) {
-			$this-setError(JText::_('USERS_USER_ALREADY_ACTIVATED'));
+			$this-setError(JText::_('COM_USERS_USER_ACTIVATION_ALREADY_ACTIVATED'));
 			return false;
 		}
 
 		// Make sure the user isn't awaiting administrator's approval
 		if ($params->get('useradminactivation') && $user->getParam('emailVerified')) {
-			$this-setError(JText::_('USERS_USER_AWAITING_ACTIVATION'));
+			$this-setError(JText::_('COM_USERS_USER_ACTIVATION_AWAITING_ADMINISTRATOR'));
 			return false;
 		}
 
@@ -136,8 +137,9 @@ class UsersModelResend extends JModelForm
 		$data['sitename']	= $config->getValue('sitename');
 		$data['link_text']	= JRoute::_($link, false);
 		$data['link_html']	= JRoute::_($link, true);
-
-
+		$data['subject']	= JText::sprintf('COM_USERS.ACTIVATION_LINK_RESEND.MAIL.SUBJECT', $data['sitename']);
+		$data['text']		= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND.MAIL.TEXT', $data['sitename'], $data['name'], $data['username'], $data['link_text']);
+/*
 		// Load the mail template.
 		jimport('joomla.utilities.simpletemplate');
 		$template = new JSimpleTemplate();
@@ -153,14 +155,14 @@ class UsersModelResend extends JModelForm
 		$toEmail	= $user->email;
 		$subject	= $template->getTitle();
 		$message	= $template->getHtml();
-
+*/
 		// Send the password reset request e-mail.
-		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $toEmail, $subject, $message);
-
-		// Check for an error.
+		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $data['subject'], $data['text']);
+			// Check for an error.
 		if ($return !== true) {
-			return new JException(JText::_('USERS_MAIL_FAILED'), 500);
+			return new JException(JText::_('COM_USERS_ACTIVATION_LINK_RESEND_SENDMAIL_FAILED'), 500);
 		}
 
 		return true;
 	}
+}

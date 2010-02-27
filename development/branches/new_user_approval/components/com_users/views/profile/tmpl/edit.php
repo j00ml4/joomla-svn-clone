@@ -40,7 +40,7 @@ JHtml::_('behavior.formvalidation');
 				<dt>
 					<?php echo $field->label; ?>
 					<?php if (!$field->required): ?>
-					<span class="optional"><?php echo JText::_('USERS OPTIONAL'); ?></span>
+					<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL'); ?></span>
 					<?php endif; ?>
 				</dt>
 				<dd>

@@ -68,7 +68,7 @@ class UsersControllerRegistration extends UsersController
 		if ($return === false)
 		{
 			// Redirect back to the homepage.
-			$this->setMessage(JText::sprintf('USERS_ACTIVATION_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('COM_USERS_USER_ACTIVATION_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect('index.php');
 			return false;
 		}
@@ -76,12 +76,12 @@ class UsersControllerRegistration extends UsersController
 		if ($need_approval === false)
 		{
 			// Redirect to the login screen.
-			$this->setMessage(JText::_('USERS_ACTIVATION_SAVE_SUCCESS'));
+			$this->setMessage(JText::_('COM_USERS_USER_ACTIVATION_SAVE_SUCCESS'));
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
 		}
 		else
 		{
-			$message = ($isAdmin === false) ? 'USERS_ACTIVATION_NEED_APPROVE' : 'USERS_ACTIVATION_ADMIN_SAVE_SUCCESS';
+			$message = ($isAdmin === false) ? 'COM_USERS_USER_ACTIVATION_NEED_APPROVAL' : 'COM_USERS_USER_ACTIVATION_ADMIN_SAVE_SUCCESS';
 
 			// Redirect back to the homepage.
 			$this->setMessage(JText::sprintf($message));
@@ -152,7 +152,7 @@ class UsersControllerRegistration extends UsersController
 			$app->setUserState('com_users.registration.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('USERS_REGISTRATION_SAVE_SUCCESS', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('COM_USERS_USER_REGISTRATION_SAVE_SUCCESS', $model->getError()), 'notice');
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration', false));
 			return false;
 		}
@@ -161,7 +161,7 @@ class UsersControllerRegistration extends UsersController
 		$app->setUserState('com_users.registration.data', null);
 
 		// Redirect to the profile screen.
-		$this->setMessage(JText::_('USERS_REGISTRATION_SAVE_SUCCESS'));
+		$this->setMessage(JText::_('COM_USERS_USER_REGISTRATION_SAVE_SUCCESS'));
 		$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
 
 		return true;
