@@ -725,9 +725,11 @@ class MenusController extends JController
 		foreach( $mids as $mid )
 		{
 			$original->load( $mid );
+			$parent = $original->parent;
+			$id = $original->id;
 			$copy 			= $original;
 			$copy->id 		= NULL;
-			$copy->parent 	= $a_ids[$original->parent];
+			$copy->parent 	= $a_ids[$parent];
 			$copy->menutype = $menu_name;
 			$copy->home 	= 0;
 
@@ -741,7 +743,7 @@ class MenusController extends JController
 				$this->setRedirect( 'index.php?option=com_menus' );
 				return;
 			}
-			$a_ids[$original->id] = $copy->id;
+			$a_ids[$id] = $copy->id;
 		}
 
 		// create the module copy
