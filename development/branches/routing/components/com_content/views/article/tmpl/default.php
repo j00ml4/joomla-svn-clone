@@ -78,7 +78,7 @@ $params = $this->state->get('params');
  <dl class="article-info">
  <dt class="article-info-term"><?php  echo JText::_('JContent_Article_Infos'); ?></dt>
 <?php endif; ?>
-<?php if ($params->get('show_category')) : ?>
+<?php if ($params->get('show_category') && (int) $this->item->catid > 0) : ?>
 		<dd class="category-name">
 			<?php 	$title = $this->escape($this->item->category_title);
 					$url = '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)).'">'.$title.'</a>';?>

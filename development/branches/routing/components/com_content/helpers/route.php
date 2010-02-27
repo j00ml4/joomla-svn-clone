@@ -36,11 +36,11 @@ abstract class ContentHelperRoute
 		//Create the link
 		$link = 'index.php?option=com_content&view=article&id='. $id;
 		
-		if ($catid)
+		if ($catid > 1)
 		{
 			$categories = JCategories::getInstance('com_content');
 			$category = $categories->get($catid);
-			$needles['category'] = array_reverse($category->_path);
+			$needles['category'] = array_reverse($category->getPath());
 			$link .= '&catid='.$catid;
 		}
 

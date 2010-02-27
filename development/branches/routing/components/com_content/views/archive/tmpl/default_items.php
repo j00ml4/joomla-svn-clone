@@ -17,7 +17,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 	<li class="row<?php echo $i % 2; ?>">
 
 		<h2>
-			<a href="<?php echo JRoute::_(ContentRoute::article($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug)); ?>">
 
 				<?php echo $this->escape($item->title); ?></a>
 		</h2>
