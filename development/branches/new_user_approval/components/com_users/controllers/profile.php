@@ -134,7 +134,7 @@ class UsersControllerProfile extends UsersController
 
 			// Redirect back to the edit screen.
 			$memberId = (int)$app->getUserState('com_users.edit.profile.id');
-			$this->setMessage(JText::sprintf('USERS PROFILE SAVE FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('COM_USERS_USER_PROFILE_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile&layout=edit&member_id='.$memberId, false));
 			return false;
 		}
@@ -148,7 +148,7 @@ class UsersControllerProfile extends UsersController
 				$model->checkout($return);
 
 				// Redirect back to the edit screen.
-				$this->setMessage(JText::_('USERS PROFILE SAVE SUCCESS'));
+				$this->setMessage(JText::_('COM_USERS_USER_PROFILE_SAVE_SUCCESS'));
 				$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile&layout=edit&hidemainmenu=1', false));
 				break;
 
@@ -163,7 +163,7 @@ class UsersControllerProfile extends UsersController
 				$app->setUserState('com_users.edit.profile.id', null);
 
 				// Redirect to the list screen.
-				$this->setMessage(JText::_('USERS PROFILE SAVE SUCCESS'));
+				$this->setMessage(JText::_('COM_USERS_USER_PROFILE_SAVE_SUCCESS'));
 				$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile&member_id='.$return, false));
 				break;
 		}

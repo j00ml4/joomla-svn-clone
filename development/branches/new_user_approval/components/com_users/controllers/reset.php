@@ -43,7 +43,7 @@ class UsersControllerReset extends UsersController
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
 			} else {
-				$message = JText::_('USERS_RESET_REQUEST_ERROR');
+				$message = JText::_('COM_USERS_PASSWORD_RESET_REQUEST_ERROR');
 			}
 
 			// Get the route to the next page.
@@ -64,7 +64,7 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=reset'.$itemid;
 
 			// Go back to the request form.
-			$message = JText::sprintf('USERS_RESET_REQUEST_FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_PASSWORD_RESET_REQUEST_FAILED', $model->getError());
 			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
 			return false;
 		}
@@ -77,7 +77,7 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=reset&layout=confirm'.$itemid;
 
 			// Proceed to step two.
-			$message = JText::_('USERS_RESET_REQUEST_SUCCESS');
+			$message = JText::_('COM_USERS_PASSWORD_RESET_REQUEST_SUCCESS');
 			$this->setRedirect(JRoute::_($route, false), $message);
 			return true;
 		}
@@ -108,7 +108,7 @@ class UsersControllerReset extends UsersController
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
 			} else {
-				$message = JText::_('USERS_RESET_CONFIRM_ERROR');
+				$message = JText::_('COM_USERS_PASSWORD_RESET_CONFIRM_ERROR');
 			}
 
 			// Get the route to the next page.
@@ -129,7 +129,7 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=reset&layout=confirm'.$itemid;
 
 			// Go back to the confirm form.
-			$message = JText::sprintf('USERS_RESET_CONFIRM_FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_PASSWORD_RESET_CONFIRM_FAILED', $model->getError());
 			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
 			return false;
 		}
@@ -172,7 +172,7 @@ class UsersControllerReset extends UsersController
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
 			} else {
-				$message = JText::_('USERS_RESET_COMPLETE_ERROR');
+				$message = JText::_('COM_USERS_PASSWORD_RESET_COMPLETE_ERROR');
 			}
 
 			// Get the route to the next page.
@@ -193,7 +193,7 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=reset&layout=complete'.$itemid;
 
 			// Go back to the complete form.
-			$message = JText::sprintf('USERS_RESET_COMPLETE_FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_PASSWORD_RESET_COMPLETE_FAILED', $model->getError());
 			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
 			return false;
 		}
@@ -206,7 +206,7 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=login'.$itemid;
 
 			// Proceed to the login form.
-			$message = JText::_('USERS_RESET_COMPLETE_SUCCESS');
+			$message = JText::_('COM_USERS_PASSWORD_RESET_COMPLETE_SUCCESS');
 			$this->setRedirect(JRoute::_($route, false), $message);
 			return true;
 		}

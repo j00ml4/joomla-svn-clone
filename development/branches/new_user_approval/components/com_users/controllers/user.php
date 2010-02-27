@@ -141,7 +141,7 @@ class UsersControllerUser extends UsersController
 			$app->setUserState('users.registration.form.data', $data);
 
 			// Redirect back to the registration form.
-			$message = JText::sprintf('USERS REGISTRATION FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_USER_REGISTRATION_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_users&view=registration', $message, 'error');
 			return false;
 		}
@@ -177,7 +177,7 @@ class UsersControllerUser extends UsersController
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
 			} else {
-				$message = JText::_('USERS_REMIND_REQUEST_ERROR');
+				$message = JText::_('COM_USERS_USERNAME_REMIND_REQUEST_ERROR');
 			}
 
 			// Get the route to the next page.
@@ -198,7 +198,7 @@ class UsersControllerUser extends UsersController
 			$route	= 'index.php?option=com_users&view=remind'.$itemid;
 
 			// Go back to the complete form.
-			$message = JText::sprintf('USERS_REMIND_REQUEST_FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_USERNAME_REMIND_REQUEST_FAILED', $model->getError());
 			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
 			return false;
 		}
@@ -211,7 +211,7 @@ class UsersControllerUser extends UsersController
 			$route	= 'index.php?option=com_users&view=login'.$itemid;
 
 			// Proceed to the login form.
-			$message = JText::_('USERS_REMIND_REQUEST_SUCCESS');
+			$message = JText::_('COM_USERS_USERNAME_REMIND_REQUEST_SUCCESS');
 			$this->setRedirect(JRoute::_($route, false), $message);
 			return true;
 		}
@@ -241,7 +241,7 @@ class UsersControllerUser extends UsersController
 			if ($app->getCfg('error_reporting')) {
 				$message = $return->getMessage();
 			} else {
-				$message = JText::_('USERS_RESEND_REQUEST_ERROR');
+				$message = JText::_('COM_USERS_ACTIVATION_LINK_RESEND_REQUEST_ERROR');
 			}
 
 			// Get the route to the next page.
@@ -262,7 +262,7 @@ class UsersControllerUser extends UsersController
 			$route	= 'index.php?option=com_users&view=profile'.$itemid;
 
 			// Go back to the profile form.
-			$message = JText::sprintf('USERS_RESEND_REQUEST_FAILED', $model->getError());
+			$message = JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND_REQUEST_FAILED', $model->getError());
 			$this->setRedirect(JRoute::_($route, false), $message, 'notice');
 			return false;
 		}
@@ -275,7 +275,7 @@ class UsersControllerUser extends UsersController
 			$route	= 'index.php?option=com_users&view=profile'.$itemid;
 
 			// Proceed to the profile form.
-			$message = JText::_('USERS_RESEND_REQUEST_SUCCESS');
+			$message = JText::_('COM_USERS_ACTIVATION_LINK_RESEND_REQUEST_SUCCESS');
 			$this->setRedirect(JRoute::_($route, false), $message);
 			return true;
 		}

@@ -56,12 +56,12 @@ class UsersViewLogin extends JView
 
 			// If a page title has not been set, set one.
 			if (!$mparams->get('page_title')) {
-				$params->set('page_title', $login ? JText::_('Users_Login_Pathway_Login') : JText::_('Users_Login_Pathway_Logout'));
+				$params->set('page_title', $login ? JText::_('Com_Users_Login_Pathway_Login') : JText::_('Com_Users_Login_Pathway_Logout'));
 			}
 		}
 		else
 		{
-			$params->set('page_title', $login ? JText::_('Users_Login_Pathway_Login') : JText::_('Users_Login_Pathway_Logout'));
+			$params->set('page_title', $login ? JText::_('Com_Users_Login_Pathway_Login') : JText::_('Com_Users_Login_Pathway_Logout'));
 		}
 
 		// Set the document title.
