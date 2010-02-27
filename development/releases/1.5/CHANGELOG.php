@@ -40,6 +40,8 @@ $ -> Language fix or change
 27-Feb-2010 Ian MacLennan
  # [#19816] Adding a missing string in many installation ini, added helpfile listing
  # [#19763] _JEXEC check missing from joomla file
+ # [#19681] Copying menus does not maintain parent child relationship
+ # [#19655] Poll component save task missing successful results message
 
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method

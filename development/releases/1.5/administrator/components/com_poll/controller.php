@@ -135,7 +135,7 @@ class PollController extends JController
 				break;
 		}
 
-		$this->setRedirect($link);
+		$this->setRedirect($link, $msg);
 	}
 
 	function remove()
