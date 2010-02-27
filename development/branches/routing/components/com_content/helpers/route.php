@@ -54,13 +54,14 @@ abstract class ContentHelperRoute
 	public static function getCategoryRoute($catid)
 	{
 		$categories = JCategories::getInstance('com_content');
-		$category = $categories->get($catid);
+		$category = $categories->get((int)$catid);
 		$catids = array_reverse($category->getPath());
 		$needles = array(
-			'category' => $catids
+			'category' => $catids,
+			'categories' => $catids
 		);
 		//Create the link
-		$link = 'index.php?option=com_content&view=category&id='.$category->id;
+		$link = 'index.php?option=com_content&view=category&id='.(int)$catid;
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
 			$link .= '&Itemid='.$item;
@@ -109,4 +110,3 @@ abstract class ContentHelperRoute
 		return null;
 	}
 }
-?>
