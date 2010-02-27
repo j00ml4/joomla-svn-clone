@@ -20,7 +20,7 @@ $params = &$this->item->params;
 <?php if ($params->get('show_title')) : ?>
 	<h2>
 		<?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
-			<a href="<?php echo JRoute::_(ContentRoute::article($this->item->slug, $this->item->catslug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catslug)); ?>">
 			<?php echo $this->escape($this->item->title); ?></a>
 		<?php else : ?>
 			<?php echo $this->escape($this->item->title); ?>
@@ -100,7 +100,7 @@ $params = &$this->item->params;
 
 <?php if ($params->get('show_readmore')  && $this->item->readmore) :
 	if ($params->get('access-view')) :
-		$link = JRoute::_(ContentRoute::article($this->item->slug, $this->item->catslug));
+		$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catslug));
 	else :
 		$link = JRoute::_("index.php?option=com_users&view=login");
 	endif;

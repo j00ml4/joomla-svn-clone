@@ -24,7 +24,7 @@ class JHTMLIcon
 	{
 		$uri = &JFactory::getURI();
 
-		$url = 'index.php?option=com_contenttask=article.add&return='.base64_encode($uri).'&id=0&sectionid='.$article->sectionid;
+		$url = 'index.php?option=com_content&task=article.add&return='.base64_encode($uri).'&id=0&sectionid='.$article->sectionid;
 
 		if ($params->get('show_icons')) {
 			$text = JHtml::image('system/new.png', JText::_('New'), NULL, true);
@@ -40,7 +40,7 @@ class JHTMLIcon
 	{
 		$uri	= &JURI::getInstance();
 		$base	= $uri->toString(array('scheme', 'host', 'port'));
-		$link	= $base.JRoute::_(ContentRoute::article($article->slug, $article->catslug) , false);
+		$link	= $base.JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catslug) , false);
 		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($link);
 
 		$status = 'width=400,height=350,menubar=yes,resizable=yes';

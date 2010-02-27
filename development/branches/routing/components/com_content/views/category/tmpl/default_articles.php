@@ -72,7 +72,7 @@ $n = count($this->articles);
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
 				<td class="list-title">
-					<a href="<?php echo JRoute::_(ContentRoute::article($article->slug, $article->catslug)); ?>">
+					<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catslug)); ?>">
 					<?php echo $this->escape($article->title); ?></a>
 				</td>
 				<?php if ($this->params->get('show_date') != 'hide') : ?>
@@ -99,7 +99,7 @@ $n = count($this->articles);
 						$active		= $menu->getActive();
 						$itemId		= $active->id;
 						$link = JRoute::_('index.php?option=com_users&view=login&&Itemid='.$itemId);
-						$returnURL = JRoute::_(ContentRoute::article($article->slug));
+						$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
 						$fullURL = new JURI($link);
 						$fullURL->setVar('return', base64_encode($returnURL));
 					?>

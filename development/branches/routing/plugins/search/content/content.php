@@ -162,7 +162,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list as $key => $item)
 				{
-					$list[$key]->href = ContentRoute::article($item->slug, $item->catslug);
+					$list[$key]->href = ContentHelperRoute::getArticleRoute($item->slug, $item->catslug);
 				}
 			}
 			$rows[] = $list;
@@ -189,7 +189,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list2 as $key => $item)
 				{
-					$list2[$key]->href = ContentRoute::article($item->id);
+					$list2[$key]->href = ContentHelperRoute::getArticleRoute($item->id);
 				}
 			}
 
@@ -223,7 +223,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list3 as $key => $item)
 				{
-					$list3[$key]->href = ContentRoute::article($item->slug, $item->catslug);
+					$list3[$key]->href = ContentHelperRoute::getArticleRoute($item->slug, $item->catslug);
 				}
 			}
 
