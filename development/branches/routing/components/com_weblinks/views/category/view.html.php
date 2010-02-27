@@ -28,7 +28,7 @@ class WeblinksViewCategory extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
+		$params		= &$app->getParams('com_weblinks');
 
 		// Get some data from the models
 		$state		= &$this->get('State');
@@ -73,7 +73,7 @@ class WeblinksViewCategory extends JView
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
-				$item->link = JRoute::_('index.php?task=weblink.go&&id='. $item->id);
+				$item->link = JRoute::_(WeblinksHelperRoute::getWeblinkRoute($item->slug, $item->catid));
 			} else {
 				$item->link = $item->url;
 			}

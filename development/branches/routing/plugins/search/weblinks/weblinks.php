@@ -135,7 +135,7 @@ class plgSearchWeblinks extends JPlugin
 		$rows = $db->loadObjectList();
 
 		foreach($rows as $key => $row) {
-			$rows[$key]->href = WeblinksRoute::weblink($row->slug, $row->catslug);
+			$rows[$key]->href = WeblinksHelperRoute::getWeblinkRoute($row->slug, $row->catslug);
 		}
 
 		$return = array();
