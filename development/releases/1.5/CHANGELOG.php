@@ -37,6 +37,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-Feb-2010 Ian MacLennan
+ # [#19816] Adding a missing string in many installation ini, added helpfile listing
+
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method
  # [#18614] Incorrect bracketing in templates/system/component.php
