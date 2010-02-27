@@ -99,7 +99,7 @@ class plgSearchCategories extends JPlugin
 
 		$count = count($rows);
 		for ($i = 0; $i < $count; $i++) {
-			$rows[$i]->href = ContentRoute::category($rows[$i]->slug);
+			$rows[$i]->href = ContentHelperRoute::getCategoryRoute($rows[$i]->slug);
 			$rows[$i]->section	= JText::_('PLG_SEARCH_CATEGORIES_CATEGORY');
 		}
 

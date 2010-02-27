@@ -181,7 +181,7 @@ abstract class modArticlesCategoryHelper
 			}
 
 			if ($item->catid) {
-				$item->displayCategoryLink = JRoute::_(ContentRoute::category($item->catid));
+				$item->displayCategoryLink = JRoute::_(ContentHelperRoute::getCategoryRoute($item->catid));
 				$item->displayCategoryTitle = $show_category ? '('.'<a href="'.$item->displayCategoryLink.'">'.$item->category_title.'</a>'.')' : '';
 			} else {
 				$item->displayCategoryTitle = $show_category ? '('.$item->category_title.')' : '';

@@ -63,9 +63,6 @@ abstract class ContentHelperRoute
 		$link = 'index.php?option=com_content&view=category&id='.$category->id;
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
-			/**if (isset($item->query['layout'])) {
-				$link .= '&layout='.$item->query['layout'];
-			}**/
 			$link .= '&Itemid='.$item;
 		};
 
@@ -82,7 +79,6 @@ abstract class ContentHelperRoute
 			$component	= &JComponentHelper::getComponent('com_content');
 			$menus		= &JApplication::getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
-
 			foreach ($items as $item)
 			{
 				if (isset($item->query) && isset($item->query['view']))
@@ -97,15 +93,14 @@ abstract class ContentHelperRoute
 				}
 			}
 		}
-
-		foreach ($needles as $view => $id)
+		foreach ($needles as $view => $ids)
 		{
 			if (isset(self::$lookup[$view]))
 			{
-				foreach($id as $tempid)
+				foreach($ids as $id)
 				{
-					if (isset(self::$lookup[$view][$tempid])) {
-						return self::$lookup[$view][$tempid];
+					if (isset(self::$lookup[$view][(int)$id])) {
+						return self::$lookup[$view][(int)$id];
 					}
 				}
 			}
