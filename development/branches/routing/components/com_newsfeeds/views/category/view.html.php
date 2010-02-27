@@ -77,13 +77,6 @@ class NewsfeedsViewCategory extends JView
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 		}
 
-		// Compute the categories (list) slug.
-		for ($i = 0, $n = count($categories); $i < $n; $i++)
-		{
-			$item		= &$categories[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-		}
-
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
