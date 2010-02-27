@@ -356,8 +356,11 @@ class JCategoryNode extends JObject
 				$parent->_children[$this->id] = & $this;
 			}
 			$this->_parent = & $parent;
-			$this->_path = $parent->getPath();
-			$this->_path[] = $parent->id; 
+			if($this->_parent->id != 'root')
+			{
+				$this->_path = $parent->getPath();
+				$this->_path[] = $parent->id.':'.$parent->alias;
+			} 
 			
 			if(count($parent->getChildren()) > 1)
 			{

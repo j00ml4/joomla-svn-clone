@@ -210,7 +210,7 @@ class ContentViewCategory extends JView
 				// {
 					// $pathway->addItem(
 					//	$parent->title,
-					//	ContentRoute::category($parent->slug)
+					//	ContentHelperRoute::getCategoryRoute($parent->slug)
 					// );
 				//}
 				$pathway->addItem($this->item->title);
