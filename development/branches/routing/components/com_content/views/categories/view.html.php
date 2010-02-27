@@ -36,9 +36,11 @@ class ContentViewCategories extends JView
 		$app		= &JFactory::getApplication();
 
 		$state		= $this->get('State');
-		$items		= $this->get('Items');
+		$categories = JCategories::getInstance('com_content');
+		$parentId = JRequest::getInt('id');
+		$items		= clone($categories->get($parentId > 0 ? $parentId : 'root'));
 		$pagination	= $this->get('Pagination');
-
+//var_dump($items);die;
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
@@ -50,11 +52,11 @@ class ContentViewCategories extends JView
 		// PREPARE THE DATA
 
 		// Compute the content slug and prepare description (runs content plugins).
-		foreach ($items as $i => &$item)
+		/**foreach ($items as $i => &$item)
 		{
 			$item->slug			= $item->id;
-			$item->description	= JHtml::_('content.prepare', $item->description);
-		}
+			//$item->description	= JHtml::_('content.prepare', $item->description);
+		}**/
 
 		$this->assignRef('params',		$params);
 		$this->assignRef('items',		$items);

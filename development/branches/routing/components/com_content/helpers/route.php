@@ -31,7 +31,7 @@ abstract class ContentHelperRoute
 	public static function getArticleRoute($id, $catid)
 	{
 		$needles = array(
-			'article'  => (int) $id,
+			'article'  => array((int) $id)
 		);
 		//Create the link
 		$link = 'index.php?option=com_content&view=article&id='. $id;
@@ -55,8 +55,7 @@ abstract class ContentHelperRoute
 	{
 		$categories = JCategories::getInstance('com_content');
 		$category = $categories->get($catid);
-		
-		$catids = array_reverse($category->_path);
+		$catids = array_reverse($category->getPath());
 		$needles = array(
 			'category' => $catids
 		);
@@ -103,10 +102,6 @@ abstract class ContentHelperRoute
 		{
 			if (isset(self::$lookup[$view]))
 			{
-				if (!is_array($id))
-				{
-					$id = (array) $id;
-				}
 				foreach($id as $tempid)
 				{
 					if (isset(self::$lookup[$view][$tempid])) {
