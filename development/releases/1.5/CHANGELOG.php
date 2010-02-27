@@ -39,6 +39,7 @@ $ -> Language fix or change
 
 27-Feb-2010 Ian MacLennan
  # [#19816] Adding a missing string in many installation ini, added helpfile listing
+ # [#19763] _JEXEC check missing from joomla file
 
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method
