@@ -27,6 +27,24 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-Feb-2010 Hannes Papenberg
+# Fixing JDate::toFormat() - Thanks Edgars Piruška!
+# Missed some files when uploading the new mod_articles_news
+# Fixed bug in loading user in JUser
+
+26-Feb-2010 Mark Dexter
+# Add CSS for multi-column blog display (Angie Radtke)
+^ Fix up ordering and other parameters for category blog menu item 
+^ Make global, menu item, and article parameters consistent in content
+^ Fix up language tags for parameters
+# Fix multi-column bug in frontpage blog
+
+26-Feb-2010 Jean-Marie Simonet
+^ Integrating default latin transliteration in framework
+
+25-Feb-2010 Christophe Demko
+# Correcting integrity of #__asset table
+
 24-Feb-2010 Jean-Marie Simonet
 $ Allowing translation of plugin names in Plugin Manager
 
