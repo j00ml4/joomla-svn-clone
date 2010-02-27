@@ -42,6 +42,7 @@ $ -> Language fix or change
  # [#19763] _JEXEC check missing from joomla file
  # [#19681] Copying menus does not maintain parent child relationship
  # [#19655] Poll component save task missing successful results message
+ # [#19555] Timezone code setting incorrect for 6:30 (Yagoon) and 11:30 (Norfolk) in Global Configuration
 
 22-Feb-2010 Ian MacLennan
  # [#17878] Installing modules with upgrade method
