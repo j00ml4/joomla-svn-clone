@@ -36,7 +36,10 @@ class WeblinksViewCategories extends JView
 		$app		= &JFactory::getApplication();
 
 		$state		= $this->get('State');
-		$items		= $this->get('Items');
+		//$items		= $this->get('Items');
+		$categories = JCategories::getInstance('com_weblinks');
+		$parentId = JRequest::getInt('id');
+		$items		= clone($categories->get($parentId > 0 ? $parentId : 'root'));
 		$pagination	= $this->get('Pagination');
 
 		// Check for errors.
@@ -52,8 +55,8 @@ class WeblinksViewCategories extends JView
 		// Compute the weblink slug and prepare description (runs content plugins).
 		foreach ($items as $i => &$item)
 		{
-			$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
-			$item->description	= JHtml::_('content.prepare', $item->description);
+			//$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
+			//$item->description	= JHtml::_('content.prepare', $item->description);
 		}
 
 		$this->assignRef('params',		$params);

@@ -13,7 +13,7 @@
 		description="">
 
 		<field
-			name="Category"
+			name="id"
 			type="category"
 			label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
 			description="COM_WEBLINKS_FIELD_CATEGORYCHOOSE_DESC"
