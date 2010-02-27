@@ -50,7 +50,7 @@ defined('JPATH_BASE') or die();
 	{
 		$now	=& JFactory::getDate();
 		$data	=& $this->_doc;
-		
+
 		$uri =& JFactory::getURI();
 		$url = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
 		$syndicationURL =& JRoute::_('&format=feed&type=atom');
@@ -100,8 +100,8 @@ defined('JPATH_BASE') or die();
 				$feed.= "		</author>\n";
 			}
 			if ($data->items[$i]->description!="") {
-				$feed.= "		<summary type=\"html\">".htmlspecialchars($data->items[$i]->description, ENT_COMPAT, 'UTF-8')."</summary>\n";
-				$feed.= "		<content type=\"html\">".htmlspecialchars($data->items[$i]->description, ENT_COMPAT, 'UTF-8')."</content>\n";
+				$feed.= "		<summary type=\"html\">".htmlspecialchars($this->_relToAbs($data->items[$i]->description))."</summary>\n";
+				$feed.= "		<content type=\"html\">".htmlspecialchars($this->_relToAbs($data->items[$i]->description))."</content>\n";
 			}
 			if ($data->items[$i]->enclosure != NULL) {
 			$feed.="		<link rel=\"enclosure\" href=\"". $data->items[$i]->enclosure->url ."\" type=\"". $data->items[$i]->enclosure->type."\"  length=\"". $data->items[$i]->enclosure->length . "\" />\n";
@@ -110,5 +110,13 @@ defined('JPATH_BASE') or die();
 		}
 		$feed.= "</feed>\n";
 		return $feed;
+	}
+
+	function _relToAbs($text)
+	{
+		$base = JURI::base();
+  		$text = preg_replace("/(href|src)=\"(?!http|ftp|https|mailto)([^\"]*)\"/", "$1=\"$base\$2\"", $text);
+
+		return $text;
 	}
 }
