@@ -15,41 +15,8 @@
  * @subpackage Utilities
  *
  */
-class JFormTest extends PHPUnit_Framework_TestCase
+class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 {
-	/**
-	 * Saves the Factory pointers
-	 *
-	 * @return void
-	 */
-	protected function saveFactoryState()
-	{
-		$this->factoryState['application'] = JFactory::$application;
-		$this->factoryState['config'] = JFactory::$config;
-		$this->factoryState['session'] = JFactory::$session;
-		$this->factoryState['language'] = JFactory::$language;
-		$this->factoryState['document'] = JFactory::$document;
-		$this->factoryState['acl'] = JFactory::$acl;
-		$this->factoryState['database'] = JFactory::$database;
-		$this->factoryState['mailer'] = JFactory::$mailer;
-	}
-
-	/**
-	 * Saves the Factory pointers
-	 *
-	 * @return void
-	 */
-	protected function restoreFactoryState()
-	{
-		JFactory::$application = $this->factoryState['application'];
-		JFactory::$config = $this->factoryState['config'];
-		JFactory::$session = $this->factoryState['session'];
-		JFactory::$language = $this->factoryState['language'];
-		JFactory::$document = $this->factoryState['document'];
-		JFactory::$acl = $this->factoryState['acl'];
-		JFactory::$database = $this->factoryState['database'];
-		JFactory::$mailer = $this->factoryState['mailer'];
-	}
 
 	/**
 	 * set up for testing
@@ -61,6 +28,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$this->saveFactoryState();
 		jimport('joomla.form.form');
 		include_once 'inspectors.php';
+		include_once 'JFormDataHelper.php';
 	}
 
 	/**
@@ -190,35 +158,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	{
 		$form = new JFormInspector('form1');
 
-		$xml = <<<XML
-<form>
-	<fields
-		description="All the fields">
-		<!-- Set up a group of fields called details. -->
-		<field
-			name="title" />
-		<fields
-			name="details"
-			description="The Details Group">
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params"
-			description="Optional Settings">
-			<field
-				name="show_title" />
-			<field
-				name="show_abstract" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$bindDocument;
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -302,35 +242,8 @@ XML;
 	{
 		$form = new JFormInspector('form1');
 
-		$xml = <<<XML
-<form>
-	<fields
-		description="All the fields">
-		<!-- Set up a group of fields called details. -->
-		<field
-			name="title" filter="word" />
-		<fields
-			name="details"
-			description="The Details Group">
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params"
-			description="Optional Settings">
-			<field
-				name="show_title" filter="int" />
-			<field
-				name="show_abstract" filter="int" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" filter="int" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$filterDocument;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -483,33 +396,8 @@ XML;
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<field
-			name="title" type="text" place="root" />
-		<fieldset>
-			<field
-				name="alias" type="text" />
-		</fieldset>
-		<fields
-			name="params">
-			<field
-				name="title" place="child" type="password" />
-			<fieldset
-				label="Basic">
-				<field
-					name="show_title" />
-			</fieldset>
-			<fieldset
-				label="Advanced">
-				<field
-					name="caching" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$findFieldDocument;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -562,38 +450,9 @@ XML;
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<field
-			name="title" type="text" place="root" />
-		<fieldset>
-			<field
-				name="alias" type="text" />
-		</fieldset>
-		<fields
-			name="params">
-			<field
-				name="title" place="child" type="password" />
-			<fieldset
-				label="Basic">
-				<field
-					name="show_title" />
-			</fieldset>
-			<fieldset
-				label="Advanced">
-				<fields
-					name="cache">
-					<field
-						name="enabled" />
-					<field
-						name="lifetime" />
-				</fields>
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$findGroupDocument;
+
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -645,41 +504,8 @@ XML;
 			$this->isFalse()
 		);
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="outlier" />
-			<fieldset
-				name="params-basic">
-				<field
-					name="show_title" />
-				<field
-					name="show_abstract" />
-				<field
-					name="show_author" />
-			</fieldset>
-			<fieldset
-				name="params-advanced">
-				<field
-					name="module_prefix" />
-				<field
-					name="caching" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$findFieldsByFieldsetDocument;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -721,32 +547,8 @@ XML;
 			$this->isFalse()
 		);
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="show_title" />
-			<field
-				name="show_abstract" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$findFieldsByGroupDocument;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -790,22 +592,8 @@ XML;
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<field
-			name="title"
-			type="text" />
-		<fields
-			name="params">
-			<field
-				name="show_title"
-				type="text"
-				default="1" />
-		</fields>
-	</fields>
-</form>
-XML;
+		$xml = JFormDataHelper::$getFieldDocument;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -944,6 +732,7 @@ XML;
 	</fields>
 </form>
 XML;
+
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
@@ -1146,12 +935,85 @@ XML;
 			$this->isTrue()
 		);
 
+		$this->assertThat(
+			$form->getXml()->getName(),
+			$this->equalTo('form')
+		);
 		/*$dom = new DOMDocument('1.0');
 		$dom->preserveWhiteSpace = false;
 		$dom->formatOutput = true;
 		$dom->loadXML($form->getXml()->asXML());
 		echo $dom->saveXML();*/
 	}
+
+	/**
+	 * Test for JForm::load method where an XML string is passed that is not a form.
+	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 */
+	public function testLoadStringNotForm()
+	{
+		$form = new JFormInspector('form1');
+
+		$xml = '<notform><test /></notform>';
+
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml, false),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			$form->getXml()->getName(),
+			$this->equalTo('form')
+		);
+	}
+
+	/**
+	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
+	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 */
+	public function testLoadObjectNotForm()
+	{
+		$form = new JFormInspector('form1');
+
+		$xml = JFactory::getXml('<notform><test /></notform>', false);
+
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml, false),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			$form->getXml()->getName(),
+			$this->equalTo('form')
+		);
+	}
+
+	/**
+	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
+	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 */
+	public function testLoadXPath()
+	{
+		$form = new JFormInspector('form1');
+
+		//$xml = JFactory::getXml('<notform><test /></notform>', false);
+		$xml = JFormDataHelper::$loadXPathDocument;
+
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load($xml, false),
+			$this->isTrue()
+		);
+
+		$this->assertThat(
+			$form->getXml()->getName(),
+			$this->equalTo('form')
+		);
+	}
+
+
 
 	/**
 	 * Test for JForm::loadField method.
