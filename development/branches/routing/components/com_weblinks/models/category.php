@@ -161,23 +161,9 @@ class WeblinksModelCategory extends JModelList
 		if (empty($id)) {
 			$id = $this->getState('category.id');
 		}
-
-		if (empty($this->_category)) {
-			$db = $this->getDbo();
-			$db->setQuery(
-				'SELECT a.*' .
-				' FROM #__categories AS a' .
-				' WHERE id = '.(int) $id .
-				'  AND a.published = '.$this->getState('filter.published').
-				'  AND a.extension = '.$db->quote('com_weblinks')
-			);
-			$this->_category = $db->loadObject();
-
-			if ($db->getErrorNum()) {
-				$this->setError($db->getErrorMsg());
-			}
-		}
-
+		
+		$categories = JCategories::getInstance('com_weblinks');
+		$this->_category = $categories->get($id);
 		return $this->_category;
 	}
 

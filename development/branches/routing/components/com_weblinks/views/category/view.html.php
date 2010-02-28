@@ -35,7 +35,6 @@ class WeblinksViewCategory extends JView
 
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
-		$categories	= &$this->get('Categories');
 		$pagination	= &$this->get('Pagination');
 
 		// Check for errors.
@@ -79,16 +78,10 @@ class WeblinksViewCategory extends JView
 			}
 		}
 
-		// Compute the categories (list) slug.
-		for ($i = 0, $n = count($categories); $i < $n; $i++)
-		{
-			$item		= &$categories[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-		}
-
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
+		$this->assignRef('parent',		$category->getParent());
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
 		$this->assignRef('pagination',	$pagination);
