@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 ?>
 
-<? print_r ($this); ?>
 <?php if (empty($this->siblings)) : ?>
 <p><?php  echo JText::_('JContent_No_Siblings'); ?></p>
 <?php else : ?>
@@ -20,7 +19,7 @@ defined('_JEXEC') or die;
 		<?php foreach ($this->siblings as &$item) : ?>
 		<li>
 			<?php if ($item->id != $this->item->id) : ?>
-			<a href="<?php echo JRoute::_(WeblinksRoute::category($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->slug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 			<?php else : ?>
 				<?php echo $this->escape($item->title); ?>

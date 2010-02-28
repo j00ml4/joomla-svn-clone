@@ -9,7 +9,8 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+$categories = JCategories::getInstance('com_weblinks');
+$category = $categories->get($this->category->id);
 // If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
@@ -56,7 +57,7 @@ TODO fix images in com_categories ?>
 </div>
 
 <div class="jcat-parents">
-<?php /* echo $this->loadTemplate('parents'); */ ?>
+<?php echo $this->loadTemplate('parents'); ?>
 </div>
 
 
