@@ -82,6 +82,7 @@ class WeblinksViewCategory extends JView
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
 		$this->assignRef('parent',		$category->getParent());
+		$this->assignRef('children',	$category->getChildren());
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
 		$this->assignRef('pagination',	$pagination);

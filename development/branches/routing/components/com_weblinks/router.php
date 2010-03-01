@@ -31,7 +31,8 @@ function WeblinksBuildRoute(&$query)
 	// get a menu item based on Itemid or currently active
 	$menu = &JSite::getMenu();
 	$params = JComponentHelper::getParams('com_weblinks');
-
+	$advanced = $params->get('sef_advanced_link', 0);
+	
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
 	}
@@ -81,7 +82,7 @@ function WeblinksBuildRoute(&$query)
 				{
 					break;
 				}
-				if($params->get('sef_advanced_link', 0))
+				if($advanced)
 				{
 					list($tmp, $id) = explode(':', $id, 2);
 				}
@@ -90,7 +91,7 @@ function WeblinksBuildRoute(&$query)
 			$segments = array_merge($segments, array_reverse($array));
 			if($view == 'weblink')
 			{
-				if($params->get('sef_advanced_link', 0))
+				if($advanced)
 				{
 					list($tmp, $id) = explode(':', $query['id'], 2);
 				}
@@ -135,6 +136,7 @@ function WeblinksParseRoute($segments)
 	$menu = &JSite::getMenu();
 	$item = &$menu->getActive();
 	$params = JComponentHelper::getParams('com_weblinks');
+	$advanced = $params->get('sef_advanced_link', 0);
 
 	// Count route segments
 	$count = count($segments);
@@ -157,7 +159,7 @@ function WeblinksParseRoute($segments)
 	{
 		foreach($categories as $category)
 		{
-			if (($category->slug == $segment) || ($params->get('sef_advanced_link', 0) && $category->alias == str_replace(':', '-',$segment)))
+			if (($category->slug == $segment) || ($advanced && $category->alias == str_replace(':', '-',$segment)))
 			{
 				$vars['id'] = $category->id;
 				$vars['view'] = 'category';
@@ -168,7 +170,7 @@ function WeblinksParseRoute($segments)
 		}
 		if ($found == 0)
 		{
-			if($params->get('sef_advanced_link',0))
+			if($advanced)
 			{
 				$db = JFactory::getDBO();
 				$query = 'SELECT id FROM #__weblinks WHERE catid = '.$vars['id'].' AND alias = '.$db->Quote(str_replace(':', '-',$segment));
@@ -183,6 +185,6 @@ function WeblinksParseRoute($segments)
 		}
 		$found = 0;
 	}
-	return $vars;
 
+	return $vars;
 }
