@@ -16,7 +16,7 @@ if(count($this->itemsLevel[$this->parent->level + 1]) > 0)
 	foreach($this->itemsLevel[$this->parent->level + 1] as $item)
 	{ ?>
 		<li>
-		<span class="jitem-title"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->id));?>">
+		<span class="jitem-title"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->id.':'.$item->alias));?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
 		<?php if ($item->description) : ?>
