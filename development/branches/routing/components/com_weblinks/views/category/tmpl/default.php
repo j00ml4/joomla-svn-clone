@@ -9,8 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-$categories = JCategories::getInstance('com_weblinks');
-$category = $categories->get($this->category->id);
+
 // If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>

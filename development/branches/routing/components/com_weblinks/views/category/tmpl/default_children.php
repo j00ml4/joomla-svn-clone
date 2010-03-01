@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 <?php
 	// Initialise the starting level
 	// starting level is the parent level coming in
-	$curLevel = $this->item->level;
+	$curLevel = $this->category->level;
 	$difLevel = 0;
 
 	// Loop through each of the children
@@ -40,7 +40,7 @@ defined('_JEXEC') or die;
 ?>
 
 		<li>
-			<a href="<?php echo JRoute::_(WeblinkRoute::category($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->slug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 		</li>
 		<?php endforeach; ?>
