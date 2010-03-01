@@ -175,6 +175,9 @@ class NewsfeedsModelCategory extends JModelList
 			$id = $this->getState('category.id');
 		}
 
+		$categories = JCategories::getInstance('com_newsfeeds');
+		$this->_category = $categories->get($id);
+		return $this->_category;
 		if (empty($this->_category)) {
 			$db = $this->getDbo();
 			$db->setQuery(

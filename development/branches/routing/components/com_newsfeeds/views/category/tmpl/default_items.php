@@ -60,7 +60,7 @@ $n = count($this->items);
 				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
 
 					<td class="item-title">
-						<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getNewsfeedRoute($item->slug, $item->catid)); ?>">
+						<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getNewsfeedRoute($item->id.':'.$item->alias, $item->catid)); ?>">
 							<?php echo $item->name; ?></a>
 					</td>
 

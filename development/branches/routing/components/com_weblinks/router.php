@@ -57,6 +57,7 @@ function WeblinksBuildRoute(&$query)
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
+		return $segments;
 	}
 
 	if (isset($view) and ($view == 'category' or $view == 'weblink')) {
@@ -94,6 +95,8 @@ function WeblinksBuildRoute(&$query)
 				if($advanced)
 				{
 					list($tmp, $id) = explode(':', $query['id'], 2);
+				} else {
+					$id = $query['id'];
 				}
 				$segments[] = $id;
 			}

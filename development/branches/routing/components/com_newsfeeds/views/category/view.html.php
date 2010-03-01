@@ -69,6 +69,8 @@ class NewsfeedsViewCategory extends JView
 		// Prepare category description (runs content plugins)
 		// TODO: only use if the description is displayed
 		$category->description = JHtml::_('content.prepare', $category->description);
+		
+		$category->params = new JParameter($category->params);
 
 		// Compute the newsfeed slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
