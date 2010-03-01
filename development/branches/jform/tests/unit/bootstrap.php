@@ -29,6 +29,11 @@ if (!defined('JPATH_BASE'))
 	define('JPATH_BASE', dirname(dirname(dirname(__FILE__))));
 }
 
+if (!defined('JPATH_TESTS'))
+{
+	define('JPATH_TESTS', dirname(__FILE__));
+}
+
 // Fix magic quotes.
 @set_magic_quotes_runtime(0);
 
