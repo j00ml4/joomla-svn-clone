@@ -50,20 +50,18 @@ defined('_JEXEC') or die;
 		</tr>
 	</thead>
 	<?php endif; ?>
-	<tbody>
-	<?php foreach ($this->items as $i => $item) : ?>
-		<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
-			<td class="num">
-				<?php echo $this->pagination->getRowOffset($i); ?>
-			</td>
-			<td class="title">
-				<p>
-					<?php if ($this->params->get('link_icons') <> -1) : ?>
-					<?php echo JHtml::image('system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
-					<?php endif; ?>
-					<?php
-						// Compute the correct link
-
+			<tbody>
+				<?php foreach ($this->items as $i => $item) : ?>
+				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
+						<td class="num">
+								<?php echo $this->pagination->getRowOffset($i); ?>
+						</td>
+						<td class="title">
+						<p>
+								<?php if ($this->params->get('link_icons') <> -1) : ?>
+										<?php echo JHTML::_('image','system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
+								<?php endif; ?>
+								<?php
 										$menuclass = 'category'.$this->params->get('pageclass_sfx');
 										$link = $item->link;
 										switch ($item->params->get('target', $this->params->get('target')))
