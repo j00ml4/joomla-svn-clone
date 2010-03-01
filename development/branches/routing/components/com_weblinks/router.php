@@ -30,6 +30,7 @@ function WeblinksBuildRoute(&$query)
 
 	// get a menu item based on Itemid or currently active
 	$menu = &JSite::getMenu();
+	$params = JComponentHelper::getParams('com_weblinks');
 
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
@@ -57,10 +58,18 @@ function WeblinksBuildRoute(&$query)
 		unset($query['id']);
 	}
 
-	if (isset($view) and $view == 'category') {
+	if (isset($view) and ($view == 'category' or $view == 'weblink')) {
 		if ($mId != intval($query['id']) || $mView != $view) {
+			if($view == 'weblink' && isset($query['catid']))
+			{
+				$catid = $query['catid'];
+				$menuCatid = $mCatid;
+			} elseif(isset($query['id'])) {
+				$catid = $query['id'];
+				$menuCatid = $mId;
+			}
 			$categories = JCategories::getInstance('com_weblinks');
-			$category = $categories->get($query['id']);
+			$category = $categories->get($catid);
 			$path = $category->getPath();
 			$path[] = $category->id.':'.$category->alias;
 			$path = array_reverse($path);
@@ -68,56 +77,29 @@ function WeblinksBuildRoute(&$query)
 			$array = array();
 			foreach($path as $id)
 			{
-				if((int) $id == (int)$mId)
+				if((int) $id == (int)$menuCatid)
 				{
 					break;
+				}
+				if($params->get('sef_advanced_link', 0))
+				{
+					list($tmp, $id) = explode(':', $id, 2);
 				}
 				$array[] = $id;
 			}
 			$segments = array_merge($segments, array_reverse($array));
+			if($view == 'weblink')
+			{
+				if($params->get('sef_advanced_link', 0))
+				{
+					list($tmp, $id) = explode(':', $query['id'], 2);
+				}
+				$segments[] = $id;
+			}
 			unset($query['id']);
-		}
-	}
-	
-	if (isset($view) and $view == 'weblink') {
-		if ($mId != intval($query['catid']) || $mView != $view) {
-			$categories = JCategories::getInstance('com_weblinks');
-			$category = $categories->get($query['catid']);
-			$path = $category->getPath();
-			$path[] = $category->id.':'.$category->alias;
-			$path = array_reverse($path);
-			
-			$array = array();
-			foreach($path as $id)
-			{
-				if((int) $id == (int)$mId)
-				{
-					break;
-				}
-				$array[] = $id;
-			}
-			$segments = array_merge($segments, array_reverse($array));
 			unset($query['catid']);
-			$segments[] = $query['id'];
-			unset($query['id']);
 		}
 	}
-
-	if (isset($query['year']))
-	{
-		if (!empty($query['Itemid'])) {
-			$segments[] = $query['year'];
-			unset($query['year']);
-		}
-	};
-
-	if (isset($query['month']))
-	{
-		if (!empty($query['Itemid'])) {
-			$segments[] = $query['month'];
-			unset($query['month']);
-		}
-	};
 
 	if (isset($query['layout']))
 	{
@@ -152,6 +134,7 @@ function WeblinksParseRoute($segments)
 	//Get the active menu item.
 	$menu = &JSite::getMenu();
 	$item = &$menu->getActive();
+	$params = JComponentHelper::getParams('com_weblinks');
 
 	// Count route segments
 	$count = count($segments);
@@ -164,42 +147,42 @@ function WeblinksParseRoute($segments)
 		return $vars;
 	}
 
-	// Handle View and Identifier.
-	switch ($item->query['view'])
-	{
-		case 'categories':
-		case 'category':
-			// From the categories view, we can only jump to a category.
-			//$categories = JCategories::getInstance('com_weblinks');
-			$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-			$category = JCategories::getInstance('com_weblinks')->get($id);
+	// From the categories view, we can only jump to a category.
+	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
+	$category = JCategories::getInstance('com_weblinks')->get($id);
 			
-			$categories = $category->getChildren();
-			$found = 0;
-			foreach($segments as $segment)
+	$categories = $category->getChildren();
+	$found = 0;
+	foreach($segments as $segment)
+	{
+		foreach($categories as $category)
+		{
+			if (($category->slug == $segment) || ($params->get('sef_advanced_link', 0) && $category->alias == str_replace(':', '-',$segment)))
 			{
-				foreach($categories as $category)
-				{
-					if ($category->slug == $segment)
-					{
-						$vars['id'] = $segment;
-						$vars['view'] = 'category';
-						$categories = $category->getChildren();
-						$found = 1;
-						break;
-					}
-				}
-				if ($found == 0)
-				{
-					$vars['id'] = $segment;
-					$vars['view'] = 'weblink';
-					break;
-				}
-				$found = 0;
+				$vars['id'] = $category->id;
+				$vars['view'] = 'category';
+				$categories = $category->getChildren();
+				$found = 1;
+				break;
 			}
-
-
+		}
+		if ($found == 0)
+		{
+			if($params->get('sef_advanced_link',0))
+			{
+				$db = JFactory::getDBO();
+				$query = 'SELECT id FROM #__weblinks WHERE catid = '.$vars['id'].' AND alias = '.$db->Quote(str_replace(':', '-',$segment));
+				$db->setQuery($query);
+				$id = $db->loadResult();
+			} else {
+				$id = $segment;
+			}
+			$vars['id'] = $id;
+			$vars['view'] = 'weblink';
+			break;
+		}
+		$found = 0;
 	}
-		return $vars;
+	return $vars;
 
 }
