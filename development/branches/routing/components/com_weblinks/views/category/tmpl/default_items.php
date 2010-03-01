@@ -50,20 +50,19 @@ defined('_JEXEC') or die;
 		</tr>
 	</thead>
 	<?php endif; ?>
-			<tbody>
-				<?php foreach ($this->items as $i => $item) : ?>
-				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
-						<td class="num">
-								<?php echo $this->pagination->getRowOffset($i); ?>
-						</td>
-						<td class="title">
-						<p>
-								<?php if ($this->params->get('link_icons') <> -1) : ?>
-										<?php echo JHtml::image('system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
-								<?php endif; ?>
-
-								<?php
-										// Compute the correct link
+	<tbody>
+	<?php foreach ($this->items as $i => $item) : ?>
+		<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
+			<td class="num">
+				<?php echo $this->pagination->getRowOffset($i); ?>
+			</td>
+			<td class="title">
+				<p>
+					<?php if ($this->params->get('link_icons') <> -1) : ?>
+					<?php echo JHtml::image('system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
+					<?php endif; ?>
+					<?php
+						// Compute the correct link
 
 										$menuclass = 'category'.$this->params->get('pageclass_sfx');
 										$link = $item->link;
@@ -115,13 +114,9 @@ defined('_JEXEC') or die;
 				</tbody>
 				</table>
 				<?php if($this->pagination->get('pages.total')>1): ?>
-							<div class="pagination">
+					<div class="pagination">
+						<p><?php echo $this->pagination->getPagesCounter(); ?></p>
+						<?php echo $this->pagination->getPagesLinks(); ?>
 
-											<p><?php echo $this->pagination->getPagesCounter(); ?></p>
-											<?php echo $this->pagination->getPagesLinks(); ?>
-
-							</div>
+					</div>
 				<?php endif; ?>
-
-
-
