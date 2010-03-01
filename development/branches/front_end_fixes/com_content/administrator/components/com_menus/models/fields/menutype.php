@@ -68,8 +68,8 @@ class JFormFieldMenuType extends JFormFieldList
 		}
 		// Load the javascript and css
 		JHtml::_('behavior.framework');
-		JHtml::script('system/modal.js', false, true);
-		JHtml::stylesheet('system/modal.css', array(), true);
+		JHTML::_('script','system/modal.js', false, true);
+		JHTML::_('stylesheet','system/modal.css', array(), true);
 
 		// Attach modal behavior to document
 		$document = JFactory::getDocument();
