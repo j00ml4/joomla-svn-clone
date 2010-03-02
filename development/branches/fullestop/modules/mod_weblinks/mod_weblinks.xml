@@ -15,10 +15,10 @@
 	<description>MOD_WEBLINKS_XML_DESCRIPTION</description>
 	<files>
 	<filename module="mod_weblinks">mod_weblinks.php</filename>
-	<folder>tmpl</folder>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_wrapper.xml</filename>
+	<folder>tmpl</folder>
 	</files>
 	<languages>
 		<language
