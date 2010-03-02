@@ -18,7 +18,7 @@ $function = JRequest::getVar('function', 'jSelectArticle');
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=articles');?>" method="post" name="adminForm">
 	<fieldset class="filter clearfix">
 		<div class="left">
-			<label for="search">
+			<label for="filter_search">
 				<?php echo JText::_('JSearch_Filter_Label'); ?>
 			</label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" size="30" title="<?php echo JText::_('Content_Filter_Search_Desc'); ?>" />
@@ -94,7 +94,7 @@ $function = JRequest::getVar('function', 'jSelectArticle');
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::date($item->created, '%Y.%m.%d'); ?>
+					<?php echo JHTML::_('date',$item->created, '%Y.%m.%d'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

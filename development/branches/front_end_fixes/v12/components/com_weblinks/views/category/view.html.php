@@ -32,6 +32,7 @@ class WeblinksViewCategory extends JView
 
 		// Get some data from the models
 		$state		= &$this->get('State');
+
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
 		$categories	= &$this->get('Categories');
@@ -47,14 +48,14 @@ class WeblinksViewCategory extends JView
 
 		// Make sure the category was found.
 		if (empty($category)) {
-			return JError::raiseWarning(404, JText::_('Weblinks_Error_Category_not_found'));
+			return JError::raiseWarning(404, JText::_('COM_WEBLINKS_ERROR_CATEGORY_NOT_FOUND'));
 		}
 
 		// Check whether category access level allows access.
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		if (!in_array($category->access, $groups)) {
-			return JError::raiseError(403, JText::_("ALERTNOTAUTH"));
+			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
 		}
 
 		// Prepare the data.
@@ -66,11 +67,16 @@ class WeblinksViewCategory extends JView
 		// TODO: only use if the description is displayed
 		$category->description = JHtml::_('content.prepare', $category->description);
 
-		// Compute the weblink slug.
+		// Compute the weblink slug & link url.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
+			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
+				$item->link = JRoute::_('index.php?task=weblink.go&&id='. $item->id);
+			} else {
+				$item->link = $item->url;
+			}
 		}
 
 		// Compute the categories (list) slug.
@@ -86,6 +92,7 @@ class WeblinksViewCategory extends JView
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
 		$this->assignRef('pagination',	$pagination);
+
 
 		$this->_prepareDocument();
 
@@ -110,7 +117,7 @@ class WeblinksViewCategory extends JView
 				$this->document->setTitle($title);
 			}
 			else {
-				$this->document->setTitle(JText::_('WEB_LINKS'));
+				$this->document->setTitle(JText::_('COM_WEBLINKS_WEB_LINKS'));
 			}
 
 			// Set breadcrumbs.
@@ -119,7 +126,7 @@ class WeblinksViewCategory extends JView
 			}
 		}
 		else {
-			$this->document->setTitle(JText::_('WEB_LINKS'));
+			$this->document->setTitle(JText::_('COM_WEBLINKS_WEB_LINKS'));
 		}
 	
 			

@@ -24,4 +24,46 @@
 			description="JFIELD_CATEGORY_IMAGE_DESC" />
 	</fields>
 
+	<fields
+		group="metadata"
+		array="true">
+
+		<field
+			name="page_title"
+			type="text"
+			label="JField_Alt_Page_title_Label"
+			description="JField_Alt_Page_title_Desc"
+			size="30"
+			default=""/>
+
+		<field
+			name="author"
+			type="text"
+			label="JField_Metadata_Author_Label"
+			description="JField_Metadata_Author_Desc"
+			size="30"
+			default=""/>
+
+		<field
+			name="robots"
+			type="list"
+			label="JField_Metadata_Robots_Label"
+			description="JField_Metadata_Robots_Desc"
+			default="">
+			<option
+				value="">USE_GLOBAL</option>
+			<option
+				value="0">JCOMMON_INDEX_FOLLOW</option>
+			<option
+				value="1">JCOMMON_NOINDEX_FOLLOW/option>
+			<option
+				value="2">JCOMMON_INDEX_NOFOLLOW</option>
+			<option
+				value="3">JCOMMON_NOINDEX_NOFOLLOW</option>
+			<option
+				value="4">JCOMMON_NO_ROBOTS_TAG</option>
+		</field>
+
+	</fields>
+
 </form>
