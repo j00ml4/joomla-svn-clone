@@ -1,7 +1,18 @@
 <?php
+/**
+ * @version	$Id: JLanguageHelperTest.php 2010-02-18 sergiois
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+ * @license	GNU General Public License version 2 or later; see LICENSE.txt
+ * @package	JoomlaFramework
+ */
+
+/**
+ * @package	JoomlaFramework - Support: joomlateam@complusoft.es
+ */
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE . '/libraries/joomla/language/helper.php';
+require_once JPATH_BASE . '/libraries/joomla/language/language.php';
 
 /**
  * Test class for JLanguageHelper.
@@ -36,9 +47,35 @@ class JLanguageHelperTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateLanguageList()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method creates a list consisting of the name and value of language
+        $actualLanguage = 'en-GB';
+        $basePath = '../../administrator/';
+        $caching = false;
+
+        $option1 = array(
+            'text' => 'English (United Kingdom)',
+            'value' => 'en-GB',
+            'selected' => 'selected="selected"'
+        );
+        $option2 = array(
+            'text' => 'XXTestLang',
+            'value' => 'xx-XX'
+        );
+        $listCompareEqual1 = array(
+            0 => $option1,
+            1 => $option2
+        );
+
+        $help = new JLanguageHelper('');
+        $list = $help->createLanguageList($actualLanguage,$basePath,$caching);
+        $this->assertThat(
+           $listCompareEqual1,
+           $this->equalTo($list)
+        );
+
+        $this->assertNotEquals(
+                $listCompareEqual1[1]['text'],
+                $list[0]['text']
         );
     }
 
@@ -47,9 +84,18 @@ class JLanguageHelperTest extends PHPUnit_Framework_TestCase
      */
     public function testDetectLanguage()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method returns the language that is active or which is by default
+        $langCompareEqual = 'en-GB';
+        $langCompareNotEqual = 'es-ES';
+        $help = new JLanguageHelper('');
+        $lang = $help->detectLanguage(); // in this case, returns default language
+        $this->assertEquals(
+                $langCompareEqual,
+                $lang
+        );
+        $this->assertNotEquals(
+                $langCompareNotEqual,
+                $lang
         );
     }
 }
