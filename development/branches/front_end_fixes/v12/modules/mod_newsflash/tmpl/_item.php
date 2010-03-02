@@ -14,14 +14,14 @@ defined('_JEXEC') or die;
 
 <?php if ($params->get('item_title')) : ?>
 
-	<h4 class="newsflash-title<?php echo $params->get('moduleclass_sfx'); ?>">
+	<<?php echo $params->get('item_heading'); ?> class="newsflash-title<?php echo $params->get('moduleclass_sfx'); ?>">
 	<?php if ($params->get('link_titles') && $item->linkOn != '') : ?>
 		<a href="<?php echo $item->linkOn;?>">
 			<?php echo $item->title;?></a>
 	<?php else : ?>
 		<?php echo $item->title; ?>
 	<?php endif; ?>
-	</h4>
+	</<?php echo $params->get('item_heading'); ?>>
 
 <?php endif; ?>
 

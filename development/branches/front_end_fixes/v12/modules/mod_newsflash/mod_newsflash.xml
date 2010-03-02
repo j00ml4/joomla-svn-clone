@@ -44,7 +44,7 @@
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
-		</field>	
+		</field>
 		<field
 			name="item_title"
 			type="list"
@@ -55,6 +55,23 @@
 				value="0">JNo</option>
 			<option
 				value="1">JYes</option>
+		</field>
+			<field
+			name="item_heading"
+			type="list"
+			default="h2"
+			label="MOD_NEWSFLASH_FIELD_TITLE_HEADING"
+			description="MOD_NEWSFLASH_FIELD_TITLE_HEADING">
+			<option
+				value="h1">h1</option>
+			<option
+				value="h2">h2</option>
+				<option
+				value="h3">h3</option>
+				<option
+				value="h4">h4</option>
+					<option
+				value="h5">h5</option>
 		</field>
 		<field
 			name="link_titles"
@@ -103,6 +120,7 @@
 		<field
 			name="layout"
 			type="modulelayout"
+			default="default"
 			label="JFIELD_ALT_LAYOUT_LABEL"
 			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 		<field
