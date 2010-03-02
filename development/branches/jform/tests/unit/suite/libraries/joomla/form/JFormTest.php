@@ -998,12 +998,11 @@ XML;
 	{
 		$form = new JFormInspector('form1');
 
-		//$xml = JFactory::getXml('<notform><test /></notform>', false);
-		$xml = JFormDataHelper::$loadXPathDocument;
+		$xml = JFactory::getXml(JFormDataHelper::$loadXPathDocument, false);
 
 		// Merge in the second batch of data (checking it was ok).
 		$this->assertThat(
-			$form->load($xml, false),
+			$form->load($xml, true, '/form/fields'),
 			$this->isTrue()
 		);
 
@@ -1011,6 +1010,14 @@ XML;
 			$form->getXml()->getName(),
 			$this->equalTo('form')
 		);
+
+		$this->assertThat(
+			count($form->getXml()->fields),
+			$this->equalTo(2)
+		);
+		$zml = $form->getXml();
+		print_r($zml);
+
 	}
 
 
