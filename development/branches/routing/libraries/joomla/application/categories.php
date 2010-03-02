@@ -105,10 +105,13 @@ class JCategories
 		{
 			return self::$instances[$extension];
 		}
-		$classname = ucfirst(substr($extension,4)).'Categories';
+		$parts = explode('.',$extension);
+		$component = $parts[0];
+		$section = count($parts) > 1 ? $parts[1] : '';
+		$classname = ucfirst(substr($component,4)).ucfirst($section).'Categories';
 		if (!class_exists($classname))
 		{
-			$path = JPATH_SITE.DS.'components'.DS.$extension.DS.'helpers'.DS.'category.php';
+			$path = JPATH_SITE.DS.'components'.DS.$component.DS.'helpers'.DS.'category.php';
 			if (is_file($path))
 			{
 				require_once $path;
