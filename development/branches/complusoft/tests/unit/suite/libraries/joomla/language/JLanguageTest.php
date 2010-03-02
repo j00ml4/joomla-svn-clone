@@ -1,7 +1,18 @@
 <?php
+/**
+ * @version	$Id: JLanguageTest.php 2010-02-18 sergiois
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+ * @license	GNU General Public License version 2 or later; see LICENSE.txt
+ * @package	JoomlaFramework
+ */
+
+/**
+ * @package	JoomlaFramework - Support: joomlateam@complusoft.es
+ */
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE . '/libraries/joomla/language/language.php';
+require_once JPATH_BASE . '/libraries/joomla/utilities/string.php';
 
 /**
  * Test class for JLanguage.
@@ -20,7 +31,7 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-//        $this->object = new JLanguage;
+        $this->object = new JLanguage;
     }
 
     /**
@@ -36,10 +47,25 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // This method returns the language in use
+        // English is the default language
+        $langEqual = 'en-GB';
+        $langNotEqual = 'es-ES';
+
+        $lang = new JLanguage('');
+
+        $listEqual = $lang->getInstance($langEqual);
+        $this->assertObjectHasAttribute('_metadata', $listEqual);
+        $this->assertObjectNotHasAttribute('name', $listEqual);
+
+        $this->assertTrue($listEqual->exists($langEqual));
+        $this->assertFalse($listEqual->exists($langNotEqual));
+
+        $listNotEqual = $lang->getInstance($langNotEqual);
+        $this->assertObjectHasAttribute('_metadata', $listNotEqual);
+        $this->assertObjectNotHasAttribute('name', $listNotEqual);
+
+        $this->assertTrue($listNotEqual->exists($langEqual));
     }
 
     /**
@@ -47,9 +73,45 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $string1 = "delete";
+        $string2 = "delete's";
+        $lang = new JLanguage('');
+
+        // string1 is strtoupper with javascript safe false
+        $this->assertEquals(
+                "Delete",
+                $lang->_($string1,false)
+        );
+        $this->assertNotEquals(
+                "delete",
+                $lang->_($string1,false)
+        );
+        // string1 is strtoupper with javascript safe true
+        $this->assertEquals(
+                "Delete",
+                $lang->_($string1,true)
+        );
+        $this->assertNotEquals(
+                "delete",
+                $lang->_($string1,true)
+        );
+        // string2 is not strtoupper with javascript safe false
+        $this->assertEquals(
+                "delete's",
+                $lang->_($string2,false)
+        );
+        $this->assertNotEquals(
+                "Delete's",
+                $lang->_($string2,false)
+        );
+        // string2 is no strtoupper with javascript safe true, but is addslashes (' => \')
+        $this->assertEquals(
+                "delete\'s",
+                $lang->_($string2,true)
+        );
+        $this->assertNotEquals(
+                "Delete\'s",
+                $lang->_($string2,true)
         );
     }
 
@@ -58,9 +120,35 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testTransliterate()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method processes a string and replaces all accented UTF-8 characters by unaccented ASCII-7 "equivalents"
+        $string1 = "Así";
+        $string2 = "EÑE";
+        $lang = new JLanguage('');
+
+        $this->assertEquals(
+                "asi",
+                $lang->transliterate($string1)
+        );
+        $this->assertNotEquals(
+                "Asi",
+                $lang->transliterate($string1)
+        );
+        $this->assertNotEquals(
+                "Así",
+                $lang->transliterate($string1)
+        );
+
+        $this->assertEquals(
+                "ene",
+                $lang->transliterate($string2)
+        );
+        $this->assertNotEquals(
+                "ENE",
+                $lang->transliterate($string2)
+        );
+        $this->assertNotEquals(
+                "EÑE",
+                $lang->transliterate($string2)
         );
     }
 
@@ -69,10 +157,11 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTransliterator()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $lang = new JLanguage('');
+
+        // The first time you run the method returns NULL
+        // Only if there is an setTranliterator, this test is wrong
+        $this->assertNull($lang->getTransliterator());
     }
 
     /**
@@ -80,9 +169,40 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetTransliterator()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $function1 = 'phpinfo';
+        $function2 = 'print';
+        $lang = new JLanguage('');
+
+        // The first time, set y get returns NULL
+        $this->assertNull($lang->getTransliterator());
+        // set -> $funtion1: set returns NULL and get returns $function1
+        $this->assertNull($lang->setTransliterator($function1));
+        $get = $lang->getTransliterator();
+        $this->assertEquals(
+                $function1,
+                $get
+        );
+        $this->assertNotEquals(
+                $function2,
+                $get
+        );
+        // set -> $function2: set returns $function1 and get retuns $function2
+        $set = $lang->setTransliterator($function2);
+        $this->assertEquals(
+                $function1,
+                $set
+        );
+        $this->assertNotEquals(
+                $function2,
+                $set
+        );
+        $this->assertEquals(
+                $function2,
+                $lang->getTransliterator()
+        );
+        $this->assertNotEquals(
+                $function1,
+                $lang->getTransliterator()
         );
     }
 
@@ -91,10 +211,15 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testExists()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // This method checks the existence of a language in a directory
+        $l1 = 'en-GB';
+        $l2 = 'es-ES';
+        $basePath = '../../administrator/';
+        $lang = new JLanguage('');
+
+        // In this case, returns TRUE with en-GB
+        $this->assertTrue($lang->exists($l1,$basePath));
+        $this->assertFalse($lang->exists($l2,$basePath));
     }
 
     /**
@@ -102,10 +227,29 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // This method loads an extension language
+        $extension1 = 'com_admin';
+        $extension2 = 'com_sobi2';
+        $basePath = '../../administrator/';
+        $l1 = 'en-GB';
+        $l2 = 'es-ES';
+        $reloaded1 = false;
+        $reloaded2 = true;
+        $lang = new JLanguage('');
+
+        // com_admin (exist), OK
+        $this->assertTrue($lang->load($extension1,$basePath,$l1,$reloaded1));
+        $this->assertTrue($lang->load($extension1,$basePath,$l2,$reloaded1));
+        // com_sobi2 (not exist), KO
+        $this->assertFalse($lang->load($extension2,$basePath,$l1,$reloaded1));
+        $this->assertFalse($lang->load($extension2,$basePath,$l2,$reloaded1));
+
+        // com_admin (exist), OK
+        $this->assertTrue($lang->load($extension1,$basePath,$l1,$reloaded2));
+        $this->assertTrue($lang->load($extension1,$basePath,$l2,$reloaded2));
+        // com_sobi2 (not exist), KO
+        $this->assertFalse($lang->load($extension2,$basePath,$l1,$reloaded2));
+        $this->assertFalse($lang->load($extension2,$basePath,$l2,$reloaded2));
     }
 
     /**
@@ -113,10 +257,7 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_load()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // protected method
     }
 
     /**
@@ -124,9 +265,34 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method get a matadata language property
+        $property1 = '';
+        $property2 = 'noExist';
+        $property3 = 'tag';
+        $property4 = 'name';
+        $default = null;
+        $lang = new JLanguage('');
+
+        // If not property or does not exist, returns null
+        $this->assertNull($lang->get($property1,$default));
+        $this->assertNull($lang->get($property2,$default));
+        // property = tag, returns en-GB (default language)
+        $this->assertEquals(
+                'en-GB',
+                $lang->get($property3,$default)
+        );
+        $this->assertNotEquals(
+                'es-ES',
+                $lang->get($property3,$default)
+        );
+        // property = name, returns English (United Kingdom) (default language)
+        $this->assertEquals(
+                'English (United Kingdom)',
+                $lang->get($property4,$default)
+        );
+        $this->assertNotEquals(
+                'Spanish (Spain)',
+                $lang->get($property4,$default)
         );
     }
 
@@ -135,10 +301,7 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_getCallerInfo()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // protected
     }
 
     /**
@@ -146,9 +309,18 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method get language name
+        $lang = new JLanguage('');
+
+        // In this case, returns English (United Kingdom) (default language)
+        // - same operation of get method with name property
+        $this->assertEquals(
+                'English (United Kingdom)',
+                $lang->getName()
+        );
+        $this->assertNotEquals(
+                'Spanish (Spain)',
+                $lang->getName()
         );
     }
 
@@ -157,10 +329,19 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPaths()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $extension1 = '';
+        $extension2 = 'com_sobi2';
+        $extension3 = 'joomla';
+        $lang = new JLanguage('');
+
+        // without extension, retuns NULL
+        $this->assertNull($lang->getPaths($extension1));
+        // extension doesn't exist, returns NULL
+        $this->assertNull($lang->getPaths($extension2));
+        // extension = joomla, returns array with language path
+        $this->assertNotNull($lang->getPaths($extension3));
+        // No call parameter, returns array with language path
+        $this->assertNotNull($lang->getPaths());
     }
 
     /**
@@ -168,9 +349,18 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTag()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method get language tag
+        $lang = new JLanguage('');
+
+        // In this case, returns en-GB (default language)
+        // - same operation of get method with tag property
+        $this->assertEquals(
+                'en-GB',
+                $lang->getTag()
+        );
+        $this->assertNotEquals(
+                'es-ES',
+                $lang->getTag()
         );
     }
 
@@ -179,10 +369,20 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testIsRTL()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method get language RTL
+        $lang = new JLanguage('');
+
+        // In this case, returns 0 (default language)
+        // - same operation of get method with RTL property
+        $this->assertEquals(
+                '0',
+                $lang->isRTL()
         );
+        $this->assertNotEquals(
+                '1',
+                $lang->isRTL()
+        );
+
     }
 
     /**
@@ -190,9 +390,41 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetDebug()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $debug1 = 'phpunit';
+        $debug2 = 'selenium';
+        $lang = new JLanguage('');
+
+        // First time, retuns FALSE
+        $this->assertFalse($lang->setDebug($debug1));
+        // set debug1, returns $debug1
+        $debug = $lang->setDebug($debug1);
+        $this->assertEquals(
+                $debug1,
+                $debug
+        );
+        $this->assertNotEquals(
+                $debug2,
+                $debug
+        );
+        // set debug2, returns debug1
+        $debug = $lang->setDebug($debug2);
+        $this->assertEquals(
+                $debug1,
+                $debug
+        );
+        $this->assertNotEquals(
+                $debug2,
+                $debug
+        );
+        // set debug2 (or debug1), returns debug2
+        $debug = $lang->setDebug($debug2);
+        $this->assertEquals(
+                $debug2,
+                $debug
+        );
+        $this->assertNotEquals(
+                $debug1,
+                $debug
         );
     }
 
@@ -201,10 +433,11 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDebug()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $lang = new JLanguage('');
+
+        // The first time you run the method returns NULL
+        // Only if there is an setDebug, this test is wrong
+        $this->assertFalse($lang->getDebug());
     }
 
     /**
@@ -212,10 +445,19 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDefault()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method returns tag language default
+        $lang = new JLanguage('');
+
+        // In this case, returns en-GB
+        $this->assertEquals(
+                'en-GB',
+                $lang->getDefault()
         );
+        $this->assertNotEquals(
+                'es-ES',
+                $lang->getDefault()
+        );
+        // Only if there is an setDefault with another language, this test is wrong
     }
 
     /**
@@ -223,9 +465,29 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetDefault()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $l1 = 'en-GB';
+        $l2 = 'es-ES';
+        $lang = new JLanguage('');
+
+        // set l2, returns en-GB (default language)
+        $l = $lang->setDefault($l2);
+        $this->assertEquals(
+                'en-GB',
+                $l
+        );
+        $this->assertNotEquals(
+                'es-ES',
+                $l
+        );
+        // set l1, retuns l2
+        $l = $lang->setDefault($l1);
+        $this->assertEquals(
+                'es-ES',
+                $l
+        );
+        $this->assertNotEquals(
+                'en-GB',
+                $l
         );
     }
 
@@ -234,9 +496,13 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetOrphans()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $orphansCompareEqual = array();
+        $lang = new JLanguage('');
+
+        // returns an empty array
+        $this->assertEquals(
+                $orphansCompareEqual,
+                $lang->getOrphans()
         );
     }
 
@@ -245,9 +511,13 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetUsed()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $usedCompareEqual = array();
+        $lang = new JLanguage('');
+
+        // returns an empty array
+        $this->assertEquals(
+                $usedCompareEqual,
+                $lang->getUsed()
         );
     }
 
@@ -256,10 +526,11 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testHasKey()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $string1 = "com_admin.key";
+        $lang = new JLanguage('');
+
+        // HasKey doesn't exist, returns FALSE
+        $this->assertFalse($lang->hasKey($string1));
     }
 
     /**
@@ -267,10 +538,32 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetMetadata()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method get language metadata
+        $l1 = "en-GB";
+        $l2 = "es-ES";
+
+        // In this case, returns array with default language
+        // - same operation of get method with metadata property
+        $option1 = array(
+            'name' => 'English (United Kingdom)',
+            'tag' => 'en-GB',
+            'rtl' => 0
         );
+        $option2 = array(
+            'name' => 'XXTestLang',
+            'tag' => 'xx-XX',
+            'rtl' => 0
+        );
+
+        $lang = new JLanguage('');
+
+        // language exists, returns array with values
+        $this->assertThat(
+           $option1,
+           $this->equalTo($lang->getMetadata($l1))
+        );
+        // language doesn't exist, retun NULL
+        $this->assertNull($lang->getMetadata($l2));
     }
 
     /**
@@ -278,9 +571,35 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetKnownLanguages()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // This method returns a list of known languages
+        $basePath = '../../administrator/';
+
+        $option1 = array(
+            'name' => 'English (United Kingdom)',
+            'tag' => 'en-GB',
+            'rtl' => 0
+        );
+        $option2 = array(
+            'name' => 'XXTestLang',
+            'tag' => 'xx-XX',
+            'rtl' => 0
+        );
+        $listCompareEqual1 = array(
+            'en-GB' => $option1,
+            'xx-XX' => $option2
+        );
+
+        $lang = new JLanguage('');
+        // for administrator directory, returns know languages (default)
+        $list = $lang->getKnownLanguages($basePath);
+        $this->assertThat(
+           $listCompareEqual1,
+           $this->equalTo($list)
+        );
+
+        $this->assertNotEquals(
+                $listCompareEqual1['xx-XX']['name'],
+                $list['en-GB']['name']
         );
     }
 
@@ -289,9 +608,28 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testGetLanguagePath()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $basePath = 'languages';
+        $language1 = null;
+        $language2 = 'en-GB';
+        $lang = new JLanguage('');
+
+        // $language = null, returns language directory
+        $this->assertEquals(
+                'languages\language',
+                $lang->getLanguagePath($basePath, $language1)
+        );
+        $this->assertNotEquals(
+                'languages\language',
+                $lang->getLanguagePath($basePath, $language2)
+        );
+        // $language = value (en-GB, for example), returns en-GB language directory
+        $this->assertEquals(
+                'languages\language\en-GB',
+                $lang->getLanguagePath($basePath, $language2)
+        );
+        $this->assertNotEquals(
+                'languages\language\en-GB',
+                $lang->getLanguagePath($basePath, $language1)
         );
     }
 
@@ -300,9 +638,29 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function testSetLanguage()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $l1 = 'en-GB';
+        $l2 = 'es-ES';
+        $lang = new JLanguage('');
+
+        // set l2, return en-GB (default language)
+        $l = $lang->setLanguage($l2);
+        $this->assertEquals(
+                'en-GB',
+                $l
+        );
+        $this->assertNotEquals(
+                'es-ES',
+                $l
+        );
+        // set l1, retuns l2
+        $l = $lang->setLanguage($l1);
+        $this->assertEquals(
+                'es-ES',
+                $l
+        );
+        $this->assertNotEquals(
+                'en-GB',
+                $l
         );
     }
 
@@ -311,10 +669,25 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_parseLanguageFiles()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $dir = '../../language/';
+
+        $option = array(
+            'name' => 'English (United Kingdom)',
+            'tag' => 'en-GB',
+            'rtl' => 0
         );
+        $language = array(
+            'en-GB' => $option
+        );
+
+        $lang = new JLanguage('');
+
+        // First time, retuns en-GB array (default language)
+        $this->assertThat(
+           $language,
+           $this->equalTo($lang->_parseLanguageFiles($dir))
+        );
+        // If we add es-ES directory, returns infinite loop. Is that correct?
     }
 
     /**
@@ -322,10 +695,34 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_parseXMLLanguageFiles()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $dir1 = null;
+        $dir2 = '../../language/';
+        $dir3 = '../../administrator';
+
+        $option = array(
+            'name' => 'English (United Kingdom)',
+            'tag' => 'en-GB',
+            'rtl' => 0
         );
+        $language = array(
+            'en-GB' => $option
+        );
+        $empty = array();
+
+        $lang = new JLanguage('');
+
+        // si dir es null, devuelve null
+        $this->assertNull($lang->_parseXMLLanguageFiles($dir1));
+        // si no encuentra fichero xml, devuelve array vacío
+        $this->assertThat(
+           $empty,
+           $this->equalTo($lang->_parseXMLLanguageFiles($dir2))
+        );
+        // si se encuentra fichero xml, devuelve array de en-GB (que es el que hay por defecto)
+        /*$this->assertThat(
+           $language,
+           $this->equalTo($lang->_parseXMLLanguageFiles($dir))
+        );*/
     }
 
     /**
@@ -333,10 +730,30 @@ class JLanguageTest extends PHPUnit_Framework_TestCase
      */
     public function test_parseXMLLanguageFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $path1 = 'file.xml';
+        $path2 = '../../language/';
+        $path3 = '../../administrator';
+
+        $option = array(
+            'name' => 'English (United Kingdom)',
+            'tag' => 'en-GB',
+            'rtl' => 0
         );
+        $language = array(
+            'en-GB' => $option
+        );
+        $empty = array();
+
+        $lang = new JLanguage('');
+
+        //var_dump($lang->_parseXMLLanguageFile($path2));
+        // si no se carga el XML, devuelve null
+        //$this->assertNull($lang->_parseXMLLanguageFile($path1));
+        // si no encuentra fichero xml, devuelve array vacío
+        /*$this->assertThat(
+           $empty,
+           $this->equalTo($lang->_parseXMLLanguageFile($dir2))
+        );*/
     }
 }
 ?>
