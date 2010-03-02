@@ -232,14 +232,15 @@ class JLanguage extends JObject
 	 */
 	public function transliterate($string)
 	{
-		include_once (JPATH_LIBRARIES.DS.'phputf8'.DS.'utils'.DS.'ascii.php');
+		include_once(dirname(__FILE__).DS.'latin_transliterate.php');
 
 		if ($this->_transliterator !== null) {
 			return call_user_func($this->_transliterator, $string);
 		}
-
-		$string = utf8_accents_to_ascii($string);
+		
+		$string = JLanguageTransliterate::utf8_latin_to_ascii($string);
 		$string = JString::strtolower($string);
+		
 		return $string;
 	}
 
@@ -319,7 +320,7 @@ class JLanguage extends JObject
 			$lang = $this->_lang;
 		}
 
-		$path = JLanguage::getLanguagePath($basePath, $lang);
+		$path = self::getLanguagePath($basePath, $lang);
 
 		$internal = $extension == 'joomla' || $extension == '';
 		$filename = $internal ? $lang : $lang . '.' . $extension;
@@ -339,7 +340,7 @@ class JLanguage extends JObject
 				$oldFilename = $filename;
 
 				// Check the standard file name
-				$path		= JLanguage::getLanguagePath($basePath, $this->_default);
+				$path		= self::getLanguagePath($basePath, $this->_default);
 				$filename = $internal ? $this->_default : $this->_default . '.' . $extension;
 				$filename	= $path.DS.$filename.'.ini';
 
@@ -628,12 +629,12 @@ class JLanguage extends JObject
 	 */
 	public static function getMetadata($lang)
 	{
-		$path = JLanguage::getLanguagePath(JPATH_BASE, $lang);
+		$path = self::getLanguagePath(JPATH_BASE, $lang);
 		$file = $lang.'.xml';
 
 		$result = null;
 		if (is_file($path.DS.$file)) {
-			$result = JLanguage::_parseXMLLanguageFile($path.DS.$file);
+			$result = self::_parseXMLLanguageFile($path.DS.$file);
 		}
 
 		return $result;
@@ -648,8 +649,8 @@ class JLanguage extends JObject
 	 */
 	public static function getKnownLanguages($basePath = JPATH_BASE)
 	{
-		$dir = JLanguage::getLanguagePath($basePath);
-		$knownLanguages = JLanguage::_parseLanguageFiles($dir);
+		$dir = self::getLanguagePath($basePath);
+		$knownLanguages = self::_parseLanguageFiles($dir);
 
 		return $knownLanguages;
 	}
@@ -704,7 +705,7 @@ class JLanguage extends JObject
 
 		$subdirs = JFolder::folders($dir);
 		foreach ($subdirs as $path) {
-			$langs = JLanguage::_parseXMLLanguageFiles($dir.DS.$path);
+			$langs = self::_parseXMLLanguageFiles($dir.DS.$path);
 			$languages = array_merge($languages, $langs);
 		}
 
@@ -729,7 +730,7 @@ class JLanguage extends JObject
 		$files = JFolder::files($dir, '^([-_A-Za-z]*)\.xml$');
 		foreach ($files as $file) {
 			if ($content = file_get_contents($dir.DS.$file)) {
-				if ($metadata = JLanguage::_parseXMLLanguageFile($dir.DS.$file)) {
+				if ($metadata = self::_parseXMLLanguageFile($dir.DS.$file)) {
 					$lang = str_replace('.xml', '', $file);
 					$languages[$lang] = $metadata;
 				}

@@ -7,8 +7,8 @@ class User0001Test extends SeleniumJoomlaTestCase
 	{
 		print("Starting testCreateUser"."\n");
 		$this->setUp();
-		$this->doAdminLogin();
 		$this->gotoAdmin();
+		$this->doAdminLogin();
 		print("Add new user"."\n");
 		$this->click("link=Add New User");
 		$this->waitForPageToLoad("30000");
@@ -29,7 +29,7 @@ class User0001Test extends SeleniumJoomlaTestCase
 		$this->click("//li[@id='toolbar-save']/a/span");
 		$this->waitForPageToLoad("60000");
 		print("Save and check that it exists"."\n");
-		$this->type("search", "username1");
+		$this->type("filter_search", "username1");
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 
@@ -55,5 +55,6 @@ class User0001Test extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertEquals("Super User", $this->getText("link=Super User"));
 		print("Finished user0001Test.php"."\n");
+		$this->doAdminLogout();
 	}
 }

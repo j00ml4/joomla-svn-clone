@@ -22,10 +22,10 @@ $canDo = UsersHelper::getActions();
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="search"><?php echo JText::sprintf('JSearch_Filter_Label', 'Users'); ?>:</label>
-			<input type="text" name="filter_search" id="search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::sprintf('JSearch_Title', 'Users'); ?>" />
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::sprintf('JSearch_Filter_Label', 'Users'); ?>:</label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::sprintf('JSearch_Title', 'Users'); ?>" />
 			<button type="submit"><?php echo JText::_('JSearch_Submit'); ?></button>
-			<button type="button" onclick="document.id('search').value='';this.form.submit();"><?php echo JText::_('JSearch_Reset'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Reset'); ?></button>
 		</div>
 		<div class="filter-select fltrt">
 			<label for="filter_state">
@@ -122,10 +122,10 @@ $canDo = UsersHelper::getActions();
 					<?php echo $this->escape($item->email); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::date($item->lastvisitDate); ?>
+					<?php echo JHTML::_('date',$item->lastvisitDate); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::date($item->registerDate); ?>
+					<?php echo JHTML::_('date',$item->registerDate); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

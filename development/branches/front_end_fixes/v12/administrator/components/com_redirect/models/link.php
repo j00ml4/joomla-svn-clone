@@ -167,7 +167,7 @@ class RedirectModelLink extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -304,7 +304,7 @@ class RedirectModelLink extends JModelForm
 		JArrayHelper::toInteger($pks);
 
 		// Populate default comment if necessary.
-		$comment = (!empty($comment)) ? $comment : JText::sprintf('Redir_Redirected_On', JHtml::date(time()));
+		$comment = (!empty($comment)) ? $comment : JText::sprintf('Redir_Redirected_On', JHTML::_('date',time()));
 
 		// Access checks.
 		if (!$user->authorise('core.edit', 'com_redirect'))
