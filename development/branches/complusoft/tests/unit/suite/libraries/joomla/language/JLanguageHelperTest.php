@@ -80,7 +80,7 @@ class JLanguageHelperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Implement testDetectLanguage().
+     * @todo Implement testDetectLanguage()..
      */
     public function testDetectLanguage()
     {
