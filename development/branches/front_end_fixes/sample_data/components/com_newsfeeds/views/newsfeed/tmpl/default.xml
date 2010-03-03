@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout
+		title="COM_NEWSFEEDS_NEWSFEED_VIEW_DEFAULT_TITLE">
+		<message>
+			<![CDATA[COM_NEWSFEEDS_NEWSFEED_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<fields
+		group="request"
+		array="true"
+		label="MENUS_LAYOUT_REQUEST_VARIABLES_LABEL"
+		description="MENUS_LAYOUT_REQUEST_VARIABLES_DESC"
+		addfieldpath="/administrator/components/com_newsfeeds/models/fields">
+		<field
+			name="id"
+			type="newsfeed"
+			default="0"
+			required="true"
+			label="COM_NEWSFEEDS_FIELD_SELECT_FEED_LABEL"
+			description="COM_NEWSFEEDS_FIELD_SELECT_FEED_DESC" />
+	</fields>
+
+	<fields
+		group="params"
+		label="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_LABEL"
+		description="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_DESC">
+
+		<field
+			id="show_feed_image"
+			name="show_feed_image"
+			type="list"
+			default=""
+			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
+			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="0">JCOMMON_HIDE</option>
+			<option
+				value="1">JCOMMON_SHOW</option>
+		</field>
+
+		<field
+			id="show_feed_description"
+			name="show_feed_description"
+			type="list"
+			default=""
+			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
+			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="0">JCOMMON_HIDE</option>
+			<option
+				value="1">JCOMMON_SHOW</option>
+		</field>
+
+		<field
+			id="show_item_description"
+			name="show_item_description"
+			type="list"
+			default=""
+			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
+			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="0">JCOMMON_HIDE</option>
+			<option
+				value="1">JCOMMON_SHOW</option>
+		</field>
+
+		<field
+			id="feed_word_count"
+			name="feed_word_count"
+			type="text"
+			size="6"
+			default="0"
+			label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
+			description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
+	</fields>
+
+</metadata>
