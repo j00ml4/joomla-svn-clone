@@ -288,8 +288,10 @@ class ModulesModelModule extends JModelForm
 		$formFile		= JPath::clean($client->path.'/modules/'.$module.'/'.$module.'.xml');
 
 		// Load the core and/or local language file(s).
-		$lang->load($module, $client->path.'/modules/'.$module);
-		$lang->load($module, $client->path);
+			$lang->load($module, $client->path, null, false, false)
+		||	$lang->load($module, $client->path.'/modules/'.$module, null, false, false)
+		||	$lang->load($module, $client->path, $lang->getDefault(), false, false)
+		||	$lang->load($module, $client->path.'/modules/'.$module, $lang->getDefault(), false, false);
 
 		if (file_exists($formFile))
 		{
@@ -334,7 +336,7 @@ class ModulesModelModule extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

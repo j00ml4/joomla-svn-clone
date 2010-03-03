@@ -34,14 +34,18 @@ class JInstallerTemplate extends JAdapterInstance
 	{
 		$this->manifest = &$this->parent->getManifest();
 		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
-		$client = (string)$xml->attributes()->client;
+		$client = (string)$this->manifest->attributes()->client;
 		$extension = "tpl_$name";
 		$lang =& JFactory::getLanguage();
 		$source = $path;
-		$lang->load($extension, constant('JPATH_'.strtoupper($client));
-		$lang->load($extension . '.manage', constant('JPATH_'.strtoupper($client));		
-		$lang->load($extension, $source);
-		$lang->load($extension . '.manage', $source);
+			$lang->load($extension . '.manage', $source, null, false, false)
+		||	$lang->load($extension, $source, null, false, false)
+		||	$lang->load($extension . '.manage', constant('JPATH_'.strtoupper($client)), null, false, false)
+		||	$lang->load($extension, constant('JPATH_'.strtoupper($client)), null, false, false)
+		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.manage', constant('JPATH_'.strtoupper($client)), $lang->getDefault(), false, false)
+		||	$lang->load($extension, constant('JPATH_'.strtoupper($client)), $lang->getDefault(), false, false);
 	}
 	/**
 	 * Custom install method
@@ -278,11 +282,10 @@ class JInstallerTemplate extends JAdapterInstance
 			JError::raiseWarning(100, JTEXT::_('Template').' '.JTEXT::_('Uninstall').': '.JTEXT::_('Package manifest file invalid or not found'));
 			return false;
 		}
-		$xml = &$manifest->document;
 
 		// Remove files
-		$this->parent->removeFiles($xml->media, $clientId);
-		$this->parent->removeFiles($xml->languages, $clientId);
+		$this->parent->removeFiles($manifest->media, $clientId);
+		$this->parent->removeFiles($manifest->languages, $clientId);
 
 		// Delete the template directory
 		if (JFolder::exists($this->parent->getPath('extension_root'))) {

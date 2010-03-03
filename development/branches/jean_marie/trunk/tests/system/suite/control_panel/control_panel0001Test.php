@@ -18,9 +18,11 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
 	function testMenuLinksPresent()
 	{
 		$this->setUp();
-		$this->doAdminLogin();
 		$this->gotoAdmin();
+		$this->doAdminLogin();
+		$this->gotoSite();
 		$this->doFrontEndLogin();
+		$this->gotoSite();		
 		$this->doFrontEndLogout();
 		$this->gotoAdmin();
 		echo "Check that top menu options are visible.\n";
@@ -57,7 +59,7 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("link=Add New Article"));
 		$this->assertTrue($this->isElementPresent("link=Add New Category"));
 		echo "Check that Component menu options are visible\n";
-		$this->assertTrue($this->isElementPresent("link=Banners"));
+		$this->assertTrue($this->isElementPresent("link=Banner"));
 		$this->assertTrue($this->isElementPresent("link=Clients"));
 		$this->assertTrue($this->isElementPresent("link=Categories"));
 		$this->assertTrue($this->isElementPresent("link=Contacts"));
@@ -68,9 +70,9 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("//ul[@id='menu-news-feeds']/li[2]/a"));
 		$this->assertTrue($this->isElementPresent("link=Redirect"));
 		$this->assertTrue($this->isElementPresent("link=Search"));
-		$this->assertTrue($this->isElementPresent("link=Weblinks"));
+		$this->assertTrue($this->isElementPresent("link=Web Links"));
 		$this->assertTrue($this->isElementPresent("link=Links"));
-		$this->assertTrue($this->isElementPresent("//ul[@id='menu-weblinks']/li[2]/a"));
+		$this->assertTrue($this->isElementPresent("//ul[@id='menu-web-links']/li[2]/a"));
 		echo "Check that Extensions menu options are visible\n";
 		$this->assertTrue($this->isElementPresent("link=Extension Manager"));
 		$this->assertTrue($this->isElementPresent("link=Module Manager"));
@@ -87,14 +89,14 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("link=Developer Resources"));
 		$this->assertTrue($this->isElementPresent("link=Joomla Shop"));
 		echo "Check that Control Panel icons are visible\n";
-		$this->assertTrue($this->isElementPresent("//img[@alt='Add New Article']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Article Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Category Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Media Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Menu Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='User Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Module Manager']"));
-		$this->assertTrue($this->isElementPresent("//img[@alt='Extension Manager']"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[1]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[2]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[3]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[4]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[5]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[6]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[7]/div/a/img"));
+		$this->assertTrue($this->isElementPresent("//div[@id='cpanel']/div[8]/div/a/img"));
 		$this->doAdminLogout();
 		print("Finish control_panel0001Test.php." . "\n");
 	}

@@ -202,6 +202,9 @@ ALTER TABLE `jos_categories`
  ADD COLUMN `path` VARCHAR(1024) NOT NULL DEFAULT '' AFTER `level`;
 
 ALTER TABLE `jos_categories`
+ ADD COLUMN `note` VARCHAR(255) NOT NULL DEFAULT '' AFTER `alias`;
+
+ALTER TABLE `jos_categories`
  ADD COLUMN `metadesc` VARCHAR(1024) NOT NULL COMMENT 'The meta description for the page.' AFTER `params`;
 
 ALTER TABLE `jos_categories`
@@ -269,13 +272,13 @@ UPDATE `jos_components` AS a
 
 -- ----------------------------------------------------------------
 -- jos_contact_details
--- ----------------------------------------------------------------  
+-- ----------------------------------------------------------------
  ALTER TABLE `#__contact_details`
   ADD COLUMN `sortname1` varchar(255) NOT NULL,
   ADD COLUMN `sortname2` varchar(255) NOT NULL,
   ADD COLUMN `sortname3` varchar(255) NOT NULL,
-  ADD COLUMN `language` varchar(10) NOT NULL;  
-  
+  ADD COLUMN `language` varchar(10) NOT NULL;
+
 -- ----------------------------------------------------------------
 -- jos_content
 -- ----------------------------------------------------------------
@@ -398,8 +401,11 @@ INSERT INTO #__extensions SELECT
      FROM #__modules			# #__extensions provides the install/uninstall control for modules
      WHERE id IN (SELECT id FROM #__modules GROUP BY module ORDER BY id)
 
+-- rename mod_newsflash to mod_articles_news
+UPDATE `#__extensions` SET `name` = 'mod_articles_news', `element` = 'mod_articles_news' WHERE `name` = 'mod_newsflash'
+
 -- New extensions
-INSERT INTO `#__extensions` VALUES(0, 'Editor - CodeMirror', 'plugin', 'codemirror', 'editors', 1, 0, 1, 1, '', 'linenumbers=0\n\n', '', '', 0, '0000-00-00 00:00:00', 7, 0);
+INSERT INTO `#__extensions` VALUES(0, 'plg_editors_codemirror', 'plugin', 'codemirror', 'editors', 1, 0, 1, 1, '', 'linenumbers=0\n\n', '', '', 0, '0000-00-00 00:00:00', 7, 0);
 
 -- ----------------------------------------------------------------
 -- jos_languages (new)
@@ -437,6 +443,9 @@ ALTER TABLE `jos_menu`
 
 ALTER TABLE `jos_menu`
  MODIFY COLUMN `alias` VARCHAR(255) NOT NULL COMMENT 'The SEF alias of the menu item.';
+
+ALTER TABLE `jos_menu`
+ ADD COLUMN `note` VARCHAR(255) NOT NULL DEFAULT '' AFTER `alias`;
 
 ALTER TABLE `jos_menu`
  MODIFY COLUMN `link` VARCHAR(1024) NOT NULL COMMENT 'The actually link the menu item refers to.';
@@ -512,7 +521,7 @@ ALTER TABLE `jos_menu_types`
 
 ALTER TABLE `jos_messages`
  CHANGE `subject` `subject` varchar(255) NOT NULL DEFAULT '';
- 
+
 ALTER TABLE `jos_messages`
  CHANGE `state` `state` tinyint(1) NOT NULL DEFAULT '0';
 
@@ -536,6 +545,9 @@ ALTER TABLE `jos_modules`
  DROP `iscore`;
 
 ALTER TABLE `jos_modules`
+ ADD COLUMN `note` VARCHAR(255) NOT NULL DEFAULT '' AFTER `title`;
+
+ALTER TABLE `jos_modules`
  ADD COLUMN `language` CHAR(7) NOT NULL AFTER `client_id`;
 
 ALTER TABLE `jos_modules`
@@ -546,6 +558,12 @@ ALTER TABLE `jos_modules`
 
 ALTER TABLE `jos_modules`
  CHANGE `params` `params` varchar(5120) NOT NULL DEFAULT '';
+
+ALTER TABLE `jos_modules`
+ ADD COLUMN `publish_up` datetime NOT NULL default '0000-00-00 00:00:00' AFTER `checked_out_time`;
+
+ALTER TABLE `jos_modules`
+ ADD COLUMN `publish_down` datetime NOT NULL default '0000-00-00 00:00:00' AFTER `publish_up`;
 
 UPDATE `#__modules`
  SET `menutype` = 'mod_menu'
@@ -578,9 +596,9 @@ ALTER TABLE `jos_newsfeeds`
 
 ALTER TABLE `jos_newsfeeds`
  ADD INDEX `idx_language` (`language`);
- 
-ALTER TABLE `jos_newsfeeds` 
-ADD `params` TEXT NOT NULL; 
+
+ALTER TABLE `jos_newsfeeds`
+ADD `params` TEXT NOT NULL;
 
 -- ----------------------------------------------------------------
 -- jos_plugins
@@ -613,7 +631,7 @@ ALTER TABLE `jos_session`
 
 ALTER TABLE `jos_session`
  MODIFY COLUMN `data` VARCHAR(20480);
- 
+
  -- ----------------------------------------------------------------
 -- Table structure for table `jos_social_comments`
 -- ----------------------------------------------------------------

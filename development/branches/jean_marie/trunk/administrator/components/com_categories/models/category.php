@@ -159,7 +159,8 @@ class CategoriesModelCategory extends JModelForm
 		$path = JPath::clean(JPATH_ADMINISTRATOR."/components/$component/$name.xml");
 		if (file_exists($path))
 		{
-			$lang->load($component);
+			$lang->load($component, JPATH_BASE, null, false, false);
+			$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
 			$form->load($path, true, false);
 
 			// Check for an error.
@@ -178,7 +179,8 @@ class CategoriesModelCategory extends JModelForm
 			$cName	= ucfirst($eName).ucfirst($section).'HelperCategory';
 			if (class_exists($cName) && is_callable(array($cName, 'onPrepareForm')))
 			{
-				$lang->load($component);
+				$lang->load($component, JPATH_BASE, null, false, false);
+				$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
 				call_user_func_array(array($cName, 'onPrepareForm'), array(&$form));
 
 				// Check for an error.
@@ -323,7 +325,7 @@ class CategoriesModelCategory extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

@@ -26,11 +26,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogin()
 	{
-		//$this->setUp();
-		echo "Logging in to admin.\n";
+		echo "Logging in to back end.\n";
 		$cfg = new SeleniumConfig();
-		$this->open($cfg->path . "administrator/index.php?option=com_login");
-		$this->waitForPageToLoad("30000");
 		$this->type("mod-login-username", $cfg->username);
 		$this->type("mod-login-password", $cfg->password);
 		$this->click("link=Log in");
@@ -39,29 +36,30 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogout()
 	{
-		$this->gotoAdmin();
 		echo "Logging out of back end.\n";
 		$this->click("link=Logout");
+		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoAdmin()
 	{
-		echo "Browsing to admin.\n";
+		echo "Browsing to back end.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator");
+		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoSite()
 	{
-		echo "Browsing to site.\n";
+		echo "Browsing to font end.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
+		$this->waitForPageToLoad("30000");		
 	}
 
 	function doFrontEndLogin()
 	{
-		$this->gotoSite();
-		echo "Logging into front end of site.\n";
+		echo "Logging in to front end.\n";
 		$this->type("modlgn_username", "admin");
 		$this->type("modlgn_passwd", "password");
 		$this->click("Submit");
@@ -77,10 +75,101 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doFrontEndLogout()
 	{
-		$this->gotoSite();
-		echo "Logging out of front end of site.\n";
+		echo "Logging out of front end.\n";
 		$this->click("Submit");
 		$this->waitForPageToLoad("30000");
+	}
+	
+	function createUser($name, $userName, $password = 'password', $email = 'testuser@test.com', $group = 'Manager') {
+		$this->click("link=User Manager");
+		$this->waitForPageToLoad("30000");
+		echo("Add new user named " . $name . " in Group=" . $group . "\n");
+		$this->click("//li[@id='toolbar-new']/a/span");
+		$this->waitForPageToLoad("30000");
+		$this->type("jform_name", $name);
+		$this->type("jform_username", $userName);
+		$this->type("jform_password", $password);
+		$this->type("jform_password2", $password);
+		$this->type("jform_email", $email);
+		
+		// Set group 
+		switch ($group)
+		{
+			case 'Manager' :
+				$this->click("1group_6");
+				break;
+
+			case 'Administrator' :
+				$this->click("1group_7");
+				break;
+
+			case 'Super Users' :
+				$this->click("1group_8");
+				break;
+
+			case 'Park Rangers' :
+				$this->click("1group_9");
+				break;
+
+			case 'Registered' :
+				$this->click("1group_2");
+				break;
+
+			case 'Author' :
+				$this->click("1group_3");
+				break;
+
+			case 'Editor' :
+				$this->click("1group_4");
+				break;
+				
+			case 'Publisher' :
+				$this->click("1group_5");
+				break;
+
+			default:
+				$this->click("1group_6");
+				break;
+		}
+		
+		$this->click("link=Save & Close");
+		$this->waitForPageToLoad("30000");
+		echo "New user created\n";
+				
+	}
+	
+	function deleteTestUsers($partialName = 'My Test User')
+	{
+		echo "Browse to User Manager.\n";
+	    $this->click("link=User Manager");
+	    $this->waitForPageToLoad("30000");
+	    
+	    echo "Filter on user name\n";
+	    $this->type("filter_search", $partialName);
+	    $this->click("//button[@type='submit']");
+	    $this->waitForPageToLoad("30000");
+	  
+	    echo "Delete all users in view.\n";
+	    $this->click("toggle");
+	    echo("Delete new user.\n");    
+	    $this->click("link=Delete");
+	    $this->waitForPageToLoad("30000");
+	    try {
+	    	$this->assertTrue($this->isTextPresent("item(s) successfully deleted."));
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	    	array_push($this->verificationErrors, $e->toString());
+	    }
+	}
+	/**
+	 * Tests for the presence of a Go button and clicks it if present.
+	 * Used for the hathor accessible template when filtering on lists in back end.
+	 *
+	 * @since	1.6
+	 */
+	function clickGo() {
+		if ($this->isElementPresent("filter-go")) {
+			$this->click("filter-go");
+		}
 	}
 
 }

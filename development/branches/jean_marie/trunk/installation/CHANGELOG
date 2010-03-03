@@ -27,7 +27,212 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+02-Mar-2010 Hannes Papenberg
+# Fixed ordering of com_content
+# Fixed ordering of com_weblinks
+# Fixed ordering of com_newsfeeds
+
+02-March-2010 Jean-Marie Simonet
+$^ Refactored com_newsfeeds ini/keys + some JCommon.
+
+28-Feb-2010 Hannes Papenberg
+# Reverting consistency commit from 23-feb-2010
+# Made all calls to functions in JHTML class consistent throughout the system. All use JHTML::_() now.
++ Implemented linked author profile in com_content
+^ Moved JS, CSS and image files of the editors to /media folder - Thanks Rob Clayburn!
+# Created correct manifest file for com_weblinks - Thanks Edgars Piru?ka!
+# Fixed usage of COM_CONTENT_CATEGORY to CONTENT_CATEGORY
+
+27-Feb-2010 Hannes Papenberg
+# Fixing JDate::toFormat() - Thanks Edgars Piru?ka!
+# Missed some files when uploading the new mod_articles_news
+# Fixed bug in loading user in JUser
+
+26-Feb-2010 Mark Dexter
+# Add CSS for multi-column blog display (Angie Radtke)
+^ Fix up ordering and other parameters for category blog menu item 
+^ Make global, menu item, and article parameters consistent in content
+^ Fix up language tags for parameters
+# Fix multi-column bug in frontpage blog
+
+26-Feb-2010 Jean-Marie Simonet
+^ Integrating default latin transliteration in framework
+
+25-Feb-2010 Christophe Demko
+# Correcting integrity of #__asset table
+
+24-Feb-2010 Jean-Marie Simonet
+$ Allowing translation of plugin names in Plugin Manager
+
+24-Feb-2010 Hannes Papenberg
+^ Changed weblinks module to use weblinks category model and allowed enable/disable click tracking - Thanks Rob Clayburn!
+
+24-Feb-2010 Christophe Demko
+# Loading correctly language in com_config component
+# Correcting some bugs in ConfigModelComponent
+# Correcting some bugs in JControllerForm
+
+21-Feb-2010 Jean-Marie Simonet
+$ Small corrections for mod_article_news
+
+23-Feb-2010 Hannes Papenberg
+^ refactored mod_newsflash to mod_articles_news - Thanks Rob Clayburn!
++ Added option to enable/disable the weblink click-tracking - Thanks Rob Clayburn!
+# Made usage of JHTML functions consistent - Thanks Jonnathan Lima!
+
+23-Feb-2010 Christophe Demko
+^ Changing call JHtmlSelect::* to self::* in JHtmlSelect class
+
+23-Feb-2010 Sam Moffatt
+# Fix for minor HTML bug in mysql and mysqli drivers
+
+22-Feb-2010 Christophe Demko
+# Reverting patch 14969 (introduce a bug). Change the way to load the template language ini
+^ Changing call JLanguage::* to self::* in JLanguage class
+# Adding the ability to specify a layout and a tmpl in the JControllerForm
+
+21-Feb-2010 Mark Dexter
+^ Make filter HTML consistent for back-end screens (Andrea Tarr)
+^ Fix system tests to reflect HTML changes
+
+21-Feb-2010 Jean-Marie Simonet
+^$ Refactored com_weblinks ini/keys + some
+
+21-Feb-2010 Christophe Demko
+# Correcting a bug in component update
+# Enabling ftp for installation extension
++ Adding administrator/manifests/files/index.html
+
+20-Feb-2010 Jean-Marie Simonet
+^ Changed path to transliteration ascii.php. Thanks Wojtek.
+$ Made com_comments.ini back-end parse ini compatible
+# Correcting bug in installer template adpater uninstall
+
+19-Feb-2010 Christophe Demko
+# Correcting a bug in the codemirror plugin
++$ Adding a language string
++ Adding an background icon in bluestork css
+
+19-Feb-2010 Jean-Marie Simonet
+$^ Refactored display of content Category:title to cope with various languages
+^ Refactored com_weblinks admin ini/keys + some
+^ Revert name changes for templates
+
+18-Feb-2010 Mark Dexter
+^ Remove redundant alt attributes for Control Panel icons (Andrea Tarr)
+
+18-Feb-2010 Hannes Papenberg
+^ Adding mod_articles_category module - Thanks Omar Ramos!
+
+18-Feb-2010 Christophe Demko
+# Correcting some inis
+# Correcting bugs in file adapter installer
+
+18-Feb-2010 Jean-Marie Simonet
+# Correcting some inis
+^ Refactoring com_wrapper ini/keys + some
+
+17-Feb-2010 Mark Dexter
+# Fix tests to work with hathor accessible admin template
++ New system test to install Joomla (Matt Thomas)
+# Fixes to sample data (Elin Waring)
+# Misc. language file fixes
+^ Newsfeed fixes (Andrea Tarr)
+^ MediaManager fixes (Elin Waring)
+^ Delete unused files and unused code (Elin Waring)
+# Misc. com_contact fixes
+# Toolbar fixes (Elin Waring)
+# Fix routing problems in com_contact (Elin Waring)
+# Admin approval language strings (Airton Torres)
+^ Refactor com_users layouts and models (Elin Waring)
+^ Added properties to contact categories for nested set output (Robert Deutz)
+^ Change JRequest::getVar to getCmd in misc. places (Elin Waring)
+
+17-Feb-2010 Jean-Marie Simonet
+^ Refactored tpl_bluestork ini/keys
+^ Shortening code in mod_whosonline. Thanks Dennis.
+# Correcting bug in template installer adapter
+^ Refactored com_languages ini/keys
+
+16-Feb-2010 Mark Dexter
+^ New system tests for groups, ACL. Thanks Matt Thomas.
+
+16-Feb-2010 Jean-Marie Simonet
+^ Refactoring com_checkin inis/keys. $ sprintf. Thanks Omar.
+^ Refactoring com_cache ini/keys
+
+15-Feb-2010 Mark Dexter
+# Allow Groups to be deleted correctly
+
+15-Feb-2010 Jean-Marie Simonet
+$ Translating Menu Item Type in Menu Manager: Menu items.
+^ Updated en-GB.xml back
+
+14-Feb-2010 Jean-Marie Simonet
+^ $ Refactored extensions names in sql extension table and xmls to fit INI standards. Updated ini keys. 
+^ Changing editors-xtd name. Updating more ini keys. Loading translation in Manage View.
++ Adding xx-XX frontend language for testing purposes.
+
+13-Feb-2010 Mark Dexter
+^ Change "Apply" to "Save" in back end edit screens (Elin Waring)
+
+13-Feb-2010 Jean-Marie Simonet
+^ Refactoring mod_wrapper ini/keys
+^ Refactoring mod_weblinks ini/keys
+^ Refactoring mod_whosonline
+
+13-Feb-2010 Ian MacLennan
+# Eliminating errors in unit tests
+# Fixed some doc blocks
+# Changed JTableUser to use preg_match instead of eregi
+
+12-Feb-2010 Mark Dexter
++ New system test for create user - thanks Matt Thomas!
++ New method for create user in system test
+
+12-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_search ini/keys
+^ Refactored mod_stats ini/keys + bugs
+^ Refactored mod_syndicate ini/keys
+^ Refactored mod_users_latest ini/keys
+
+11-Feb-2010 jean-Marie Simonet
+^ Refactored mod_related_items ini/keys
+^ Translating Menu Items Titles in Select view
+
+11-Feb-2010 Christophe Demko
+^ Use $db->getNullDate for calendar fields which are empty
+^ Recommit patch 14775
+
+10-Feb-2010 Christophe Demko
++ Adding publish_up and publish_down for modules
+
+10-Feb-2010 Hannes Papenberg
+# Fixed bug in JFilterInput
+
 09-Feb-2010 Christophe Demko
++ Adding language files facility to package, files and library
+
+10-Feb-2010 Jean-Marie Simonet
++ Added strings for the featured tagging
++ Translated components admin submenus
+^ Refactored mod_banners ini/keys
+^ Refactored mod_breadcrumbs ini/keys
+^ Refactored mod_footer ini/keys
+^ Refactored mod_languages ini/keys
+^ Refactored mod_login (site) ini/keys + bug
+^ Refactored mod_newsflash ini/keys
+^ Refactored mod_random_image ini/keys
+
+09-Feb-2010 Jean-Marie Simonet
+^ Refactored mod_articles_archived ini/keys. Updated sql.
+^ Refactored mod_articles_latest ini/keys.
+^ Refactored mod_articles_popular ini/keys.
+- Deleted admin mod_stats and mod_footer in files
+
+09-Feb-2010 Christophe Demko
+# Loading the user parameters when he changes them (llow the admin to change its own language for example)
+# Removing unused keys in tpl_bluestork.ini which contains the NO keyword
 # Adding the manifest files directory
 ^ Changing the way languages are loaded at install and update phase
 ^ Correcting revision 14595 (caused errors in user and menu item edit)

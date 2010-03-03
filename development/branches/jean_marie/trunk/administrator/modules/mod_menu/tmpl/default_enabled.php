@@ -23,7 +23,7 @@ $menu->addChild(
 $menu->addSeparator();
 
 if ($user->authorise('core.admin')) {
-	$menu->addChild(new JMenuNode(JText::_('CONFIGURATION'), 'index.php?option=com_config', 'class:config'));
+	$menu->addChild(new JMenuNode(JText::_('MOD_MENU_CONFIGURATION'), 'index.php?option=com_config', 'class:config'));
 	$menu->addSeparator();
 }
 
@@ -117,7 +117,7 @@ if ($user->authorise('core.manage', 'com_menus'))
 	{
 		$menu->addChild(
 			new JMenuNode(
-				$menuType->title.($menuType->home ? ' <span>'.JHTML::_('image', 'menu/icon-16-default.png', NULL, NULL, true).'</span>' : ''),
+				$menuType->title.($menuType->home ? ' <span>'.JHTML::_('image','menu/icon-16-default.png', NULL, NULL, true).'</span>' : ''),
 				'index.php?option=com_menus&view=items&menutype='.$menuType->menutype, 'class:menu'
 			)
 		);

@@ -150,6 +150,18 @@ class JControllerForm extends JController
 		$app		= JFactory::getApplication();
 		$context	= "$this->_option.edit.$this->_context";
 
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
+
 		// Access check.
 		if (!$this->_allowAdd())
 		{
@@ -162,7 +174,7 @@ class JControllerForm extends JController
 		$app->setUserState($context.'.data', null);
 
 		// Redirect to the edit screen.
-		$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+		$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 	}
 
 	/**
@@ -211,6 +223,7 @@ class JControllerForm extends JController
 		// Access check.
 		$key		= $table->getKeyName();
 		if (!$this->_allowEdit(array($key => $recordId), $key)) {
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
 			return JError::raiseWarning(403, 'JError_Core_Edit_not_permitted.');
 		}
 
@@ -257,6 +270,17 @@ class JControllerForm extends JController
 		$table		= $model->getTable();
 		$checkin	= property_exists($table, 'checked_out');
 		$context	= "$this->_option.edit.$this->_context";
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
 
 		// Get the record id.
 		$recordId = (int) $app->getUserState($context.'.id');
@@ -268,7 +292,7 @@ class JControllerForm extends JController
 			{
 				// Check-in failed, go back to the record and display a notice.
 				$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 				return false;
 			}
 		}
@@ -319,6 +343,17 @@ class JControllerForm extends JController
 		$context	= "$this->_option.edit.$this->_context";
 		$task		= $this->getTask();
 		$recordId	= (int) $app->getUserState($context.'.id');
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
 
 		// Populate the row id from the session.
 		$key		= $table->getKeyName();
@@ -332,7 +367,7 @@ class JControllerForm extends JController
 			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JError_Checkin_saved', $model->getError());
-				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 				return false;
 			}
 
@@ -343,6 +378,7 @@ class JControllerForm extends JController
 
 		// Access check.
 		if (!$this->_allowSave($data)) {
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
 			return JError::raiseWarning(403, 'JError_Save_not_permitted');
 		}
 
@@ -376,7 +412,7 @@ class JControllerForm extends JController
 			$app->setUserState($context.'.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 			return false;
 		}
 
@@ -388,7 +424,7 @@ class JControllerForm extends JController
 
 			// Redirect back to the edit screen.
 			$this->setMessage(JText::sprintf('JError_Save_failed', $model->getError()), 'notice');
-			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 			return false;
 		}
 
@@ -397,7 +433,7 @@ class JControllerForm extends JController
 		{
 			// Check-in failed, go back to the record and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
-			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 			return false;
 		}
 
@@ -412,7 +448,7 @@ class JControllerForm extends JController
 				$app->setUserState($context.'.data',	null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 				break;
 
 			case 'save2new':
@@ -421,7 +457,7 @@ class JControllerForm extends JController
 				$app->setUserState($context.'.data', null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 				break;
 
 			default:

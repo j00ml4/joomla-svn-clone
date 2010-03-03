@@ -17,16 +17,17 @@ class SampleData0001 extends SeleniumJoomlaTestCase
 	function testModuleOrder()
 	{
 		$this->setUp();
+		$this->gotoAdmin();		
 		$this->doAdminLogin();
 		print("Open up category manager" . "\n");
 		$this->click("link=Category Manager");
 		$this->waitForPageToLoad("30000");
 		print("Move Modules category up one" . "\n");
-		$this->click("//div[@id='element-box']/div[2]/form/table/tbody/tr[5]/td[4]/span[1]/a/img");
+		$this->click("//a[@title='Move Up' and @onclick=\"return listItemTask('cb4','categories.orderup')\"]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("JSuccess_Item_reordered"));
 		print("Move Modules category down one" . "\n");
-		$this->click("//div[@id='element-box']/div[2]/form/table/tbody/tr[4]/td[4]/span[2]/a/img");
+		$this->click("//a[@title='Move Down' and @onclick=\"return listItemTask('cb3','categories.orderdown')\"]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("JSuccess_Item_reordered"));
 		$this->doAdminLogout();
@@ -36,6 +37,7 @@ class SampleData0001 extends SeleniumJoomlaTestCase
 	function testMenuItems()
 	{
 		$this->setUp();
+		$this->gotoAdmin();		
 		$this->doAdminLogin();
 		print("Go to front end" . "\n");
 		$this->gotoSite();

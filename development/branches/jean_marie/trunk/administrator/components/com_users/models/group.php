@@ -151,7 +151,7 @@ class UsersModelGroup extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -198,6 +198,7 @@ class UsersModelGroup extends JModelForm
 	{
 		// Typecast variable.
 		$pks = (array) $pks;
+		$user	= JFactory::getUser();
 
 		// Get a row instance.
 		$table = &$this->getTable();

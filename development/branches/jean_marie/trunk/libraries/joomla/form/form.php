@@ -422,6 +422,9 @@ class JForm extends JObject
 
 										$date	= JFactory::getDate($data[$name], $offset);
 										$return[$name] = $date->toMySQL();
+									} else {
+										$db = &JFactory::getDbo();
+										$return[$name]= $db->getNullDate();
 									}
 									break;
 
