@@ -68,8 +68,8 @@ class JFormFieldMenuType extends JFormFieldList
 		}
 		// Load the javascript and css
 		JHtml::_('behavior.framework');
-		JHtml::script('system/modal.js', false, true);
-		JHtml::stylesheet('system/modal.css', array(), true);
+		JHTML::_('script','system/modal.js', false, true);
+		JHTML::_('stylesheet','system/modal.css', array(), true);
 
 		// Attach modal behavior to document
 		$document = JFactory::getDocument();
@@ -109,7 +109,7 @@ class JFormFieldMenuType extends JFormFieldList
 		{
 		$html[] = '<li>';
 		$html[] = '<dl class="menu_type">';
-		$html[] = '	<dt>'.$name.'</dt>';
+		$html[] = '	<dt>'.JText::_($name).'</dt>';
 		$html[] = '	<dd>';
 		$html[] = '		<ul>';
 			foreach ($list as $item)
@@ -187,8 +187,10 @@ class JFormFieldMenuType extends JFormFieldList
 						$this->_rlu[MenusHelper::getLinkKey($option->request)] = $option->get('title');
 
 						if (isset($option->request['option'])) {
-							$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option']);
-							$lang->load($option->request['option'].'.menu');
+								$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR, null, false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], null, false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], $lang->getDefault(), false, false);
 						}
 					}
 				}

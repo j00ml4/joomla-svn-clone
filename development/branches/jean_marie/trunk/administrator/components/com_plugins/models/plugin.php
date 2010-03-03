@@ -213,9 +213,11 @@ class PluginsModelPlugin extends JModelForm
 		}
 
 		// Load the core and/or local language file(s).
-		$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element);
+			$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, $lang->getDefault(), false, false);
 		//$lang->load('plg_'.$folder.'_'.$element, JPATH_SITE);
-		$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR);
 
 		// If an XML file was found in the component, load it first.
 		// We need to qualify the full path to avoid collisions with component file names.
@@ -256,7 +258,7 @@ class PluginsModelPlugin extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

@@ -56,7 +56,7 @@ class WeblinksModelForm extends JModelForm
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
-	public function &getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
+	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -80,11 +80,11 @@ class WeblinksModelForm extends JModelForm
 	}
 
 	/**
-	 * Method to get article data.
+	 * Method to get weblink data.
 	 *
-	 * @param	integer	The id of the article.
+	 * @param	integer	The id of the weblink.
 	 *
-	 * @return	mixed	Content item data object on success, false on failure.
+	 * @return	mixed	Weblink item data object on success, false on failure.
 	 */
 	public function getItem($itemId = null)
 	{
@@ -167,7 +167,7 @@ class WeblinksModelForm extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

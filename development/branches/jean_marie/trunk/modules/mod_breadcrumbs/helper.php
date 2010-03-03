@@ -29,7 +29,7 @@ class modBreadCrumbsHelper
 		if ($params->get('showHome', 1))
 		{
 			$item = new stdClass();
-			$item->name = $params->get('homeText', JText::_('Home'));
+			$item->name = $params->get('homeText', JText::_('MOD_BREADCRUMBS_HOME'));
 			$item->link = JURI::base();
 			array_unshift($items, $item);
 		}
@@ -53,10 +53,10 @@ class modBreadCrumbsHelper
 		// specific one first, and if that is not present we load the default separator
 		if ($custom == null) {
 			if ($lang->isRTL()){
-				$_separator = JHtml::_('image', 'system/arrow_rtl.png', NULL, NULL, true);
+				$_separator = JHTML::_('image','system/arrow_rtl.png', NULL, NULL, true);
 			}
 			else{
-				$_separator = JHtml::_('image', 'system/arrow.png', NULL, NULL, true);
+				$_separator = JHTML::_('image','system/arrow.png', NULL, NULL, true);
 			}
 		} else {
 			$_separator = $custom;

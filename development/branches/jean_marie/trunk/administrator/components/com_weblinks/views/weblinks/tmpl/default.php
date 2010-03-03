@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script', 'multiselect.js');
+JHTML::_('script','multiselect.js');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 ?>
@@ -20,8 +20,8 @@ $userId	= $user->get('id');
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks&view=weblinks'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="search"><?php echo JText::_('JSearch_Filter_Label'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Weblinks_Search_in_title'); ?>" />
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?>:</label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_WEBLINKS_SEARCH_IN_TITLE'); ?>" />
 			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
 		</div>
@@ -67,7 +67,7 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Access', 'a.access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort',  'Weblinks_Hits_Heading', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_WEBLINKS_HITS_HEADING', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Language', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -107,7 +107,7 @@ $userId	= $user->get('id');
 							<?php echo $this->escape($item->title); ?>
 					<?php endif; ?>
 					<p class="smallsub">
-						(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+						(<span><?php echo JText::_('COM_WEBLINKS_FIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->state, $i, 'weblinks.', $canChange);?>
@@ -117,8 +117,8 @@ $userId	= $user->get('id');
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo $this->pagination->orderUpIcon($i, true, 'weblinks.orderup', 'JGrid_Move_Up', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'weblinks.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), 'weblinks.orderup', 'JGrid_Move_Up', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), 'weblinks.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 					<?php else : ?>
@@ -132,7 +132,7 @@ $userId	= $user->get('id');
 					<?php echo $item->hits; ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDefault'); ?>
+					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

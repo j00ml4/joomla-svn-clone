@@ -193,7 +193,7 @@ class UsersModelUser extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -227,6 +227,12 @@ class UsersModelUser extends JModelForm
 			return false;
 		}
 
+		$user = &JFactory::getUser();
+		if ($user->id == $table->id)
+		{
+			$registry = new JParameter($table->params);
+			$user->setParameters($registry);
+		}
 		// Trigger the onAftereStoreUser event
 		$dispatcher->trigger('onAfterStoreUser', array($data, $isNew, true, null));
 
