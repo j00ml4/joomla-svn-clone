@@ -344,6 +344,7 @@ class UsersController extends JController
 			$groups 	= $acl->get_object_groups( $objectID, 'ARO' );
 			$this_group = strtolower( $acl->get_group_name( $groups[0], 'ARO' ) );
 
+			$msg = '';
 			$success = false;
 			if ( $this_group == 'super administrator' )
 			{
