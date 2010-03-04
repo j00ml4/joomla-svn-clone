@@ -111,6 +111,7 @@ class WeblinksModelCategory extends JModelList
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 		return $query;
 	}
+	
 
 	/**
 	 * Method to auto-populate the model state.
@@ -177,6 +178,7 @@ class WeblinksModelCategory extends JModelList
 			if ($db->getErrorNum()) {
 				$this->setError($db->getErrorMsg());
 			}
+			
 		}
 
 		return $this->_category;
