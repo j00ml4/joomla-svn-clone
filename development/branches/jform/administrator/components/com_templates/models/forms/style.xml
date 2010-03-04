@@ -2,49 +2,60 @@
 	<!-- $Id$ -->
 <form>
 	<fields>
-		<field name="id" type="hidden"
+		<field
+			name="id"
+			type="hidden"
 			default="0"
-			readonly="true"
 			required="true"
-		/>
+			readonly="true" />
 
-		<field name="template" type="text"
+		<field
+			name="template"
+			type="text"
+			label="COM_TEMPLATES_FIELD_TEMPLATE_LABEL"
+			description="COM_TEMPLATES_FIELD_TEMPLATE_DESC"
 			class="readonly"
-			description="Templates_Field_Template_Desc"
-			filter="unset"
-			label="Templates_Field_Template_Label"
-			readonly="true"
 			size="30"
-		/>
+			readonly="true"
+			filter="unset" />
 
-		<field name="client_id" type="client"
+		<field
+			name="client_id"
+			type="client"
+			label="COM_TEMPLATES_FIELD_CLIENT_LABEL"
+			description="COM_TEMPLATES_FIELD_CLIENT_DESC"
 			class="readonly"
 			default="0"
-			description="Templates_Field_Client_Desc"
-			label="Templates_Field_Client_Label"
-			readonly="true"
-		/>
+			readonly="true" />
 
-		<field name="home" type="list"
+		<field
+			name="home"
+			type="list"
+			label="COM_TEMPLATES_FIELD_HOME_LABEL"
+			description="COM_TEMPLATES_FIELD_HOME_DESC"
 			class="inputbox"
 			default="0"
-			description="Templates_Field_Home_Desc"
-			label="Templates_Field_Home_Label"
-			readonly="true"
-		>
-			<option value="1">JYes</option>
-			<option value="0">JNo</option>
+			readonly="true">
+			<option
+				value="1">
+				JYes</option>
+			<option
+				value="0">
+				JNo</option>
 		</field>
 
-		<field name="title" type="text"
+		<field
+			name="title"
+			type="text"
 			class="inputbox"
 			default=""
-			description="Templates_Field_Title_Desc"
-			label="Templates_Field_Title_Label"
-			required="true"
 			size="50"
-		/>
+			label="COM_TEMPLATES_FIELD_TITLE_LABEL"
+			description="COM_TEMPLATES_FIELD_TITLE_DESC"
+			required="true" />
 
-		<field name="params" type="hidden" />
+		<field
+			name="params"
+			type="hidden" />
 	</fields>
 </form>
