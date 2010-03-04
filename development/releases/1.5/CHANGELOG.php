@@ -37,6 +37,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+04-Mar-2010 Ian MacLennan
+ $ [#19836] New Arabic Unitag installation language ar_AA
+
+
 27-Feb-2010 Ian MacLennan
  # [#19816] Adding a missing string in many installation ini, added helpfile listing
  # [#19763] _JEXEC check missing from joomla file
