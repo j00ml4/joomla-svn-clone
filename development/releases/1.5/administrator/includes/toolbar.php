@@ -155,11 +155,11 @@ class JToolBarHelper
 	* @param string The sub-drectory to upload the media to
 	* @since 1.0
 	*/
-	function media_manager($directory = '', $alt = 'Upload')
+	function media_manager($folder = '', $alt = 'Upload')
 	{
 		$bar = & JToolBar::getInstance('toolbar');
 		// Add an upload button
-		$bar->appendButton( 'Popup', 'upload', $alt, "index.php?option=com_media&tmpl=component&task=popupUpload&directory=$directory", 640, 520 );
+		$bar->appendButton( 'Popup', 'upload', $alt, "index.php?option=com_media&tmpl=component&task=popupUpload&folder=$folder", 640, 520 );
 	}
 
 	/**
