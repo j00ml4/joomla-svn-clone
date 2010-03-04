@@ -130,7 +130,7 @@ class ContentViewCategory extends ContentView
 
 		jimport('joomla.html.pagination');
 		//In case we are in a blog view set the limit
-		if ($layout == 'blog') {
+		if ($layout == 'blog' && ($limit - $links != 0)) {
 			$pagination = new JPagination($total, $limitstart, $limit - $links);
 		} else {
 			$pagination = new JPagination($total, $limitstart, $limit);
