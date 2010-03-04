@@ -339,12 +339,12 @@ class ContentModelCategory extends JModelItem
 			switch ($categoryOrder)
 			{
 			case ('alpha'):
-				$stateOrder = 'a.title';
+				$stateOrder = 'a.path';
 				$stateDirection = 'ASC';
 				break;
 				
 			case ('ralpha'):
-				$stateOrder = 'a.title';
+				$stateOrder = 'a.path';
 				$stateDirection = 'DESC';
 				break;
 				

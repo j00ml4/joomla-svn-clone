@@ -33,7 +33,7 @@ class ContentHelperQuery
 				break;
 
 			case 'order' :
-				$orderby = 'c.ordering, ';
+				$orderby = 'c.lft, ';
 				break;
 
 			default :
