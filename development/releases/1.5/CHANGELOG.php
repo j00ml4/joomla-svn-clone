@@ -45,6 +45,7 @@ $ -> Language fix or change
  # [#19245] Pagination in category blog layout not shown in specific case
  # [#18848] Last module position in <select> is with space at end
  # [#18683] The "search result Itemid" fix (15780) doesn't apply to beez
+ # [#18672] Issue with some feeds in release 1.5.15
 
 27-Feb-2010 Ian MacLennan
  # [#19816] Adding a missing string in many installation ini, added helpfile listing

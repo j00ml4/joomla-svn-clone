@@ -331,6 +331,7 @@ class JFactory
 						JPATH_BASE.DS.'cache',
 						isset( $options['cache_time'] ) ? $options['cache_time'] : 0
 					);
+					$simplepie->force_feed(true);
 					$simplepie->handle_content_type();
 					if ($simplepie->init()) {
 						$doc = $simplepie;
