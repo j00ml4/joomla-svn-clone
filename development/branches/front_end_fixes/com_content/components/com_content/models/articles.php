@@ -183,12 +183,31 @@ class ContentModelArticles extends JModelList
 			$query->where('a.id ' . $type . ' (' . $articleId . ')');
 		}
 
-		// Filter by a single or group of categories.
+		// Filter by a single or group of categories
 		$categoryId = $this->getState('filter.category_id');
 		if (is_numeric($categoryId))
 		{
 			$type = $this->getState('filter.category_id.include', true) ? '= ' : '<> ';
-			$query->where('a.catid ' . $type . (int) $categoryId);
+			
+			// Add subcategory check
+			$includeSubcategories = $this->getState('filter.subcategories',false);
+			$categoryEquals = 'a.catid ' . $type . (int) $categoryId;
+			if ($includeSubcategories) {
+				$levels = (int) $this->getState('filter.max_category_levels', '1');
+				// Create a subquery for the subcategory list
+				$subQuery = $db->getQuery(true);
+				$subQuery->select('sub.id');
+				$subQuery->from('#__categories as sub');
+				$subQuery->join('INNER', '#__categories as this ON sub.lft > this.lft AND sub.rgt < this.rgt');
+				$subQuery->where('this.id = ' . (int) $categoryId);
+				$subQuery->where('sub.level <= this.level + ' . $levels);
+				
+				// Add the subquery to the main query
+				$query->where('(' . $categoryEquals . ' OR a.catid IN (' . $subQuery->__toString() . '))');
+			}
+			else {
+				$query->where($categoryEquals);
+			}
 		}
 		else if (is_array($categoryId))
 		{
