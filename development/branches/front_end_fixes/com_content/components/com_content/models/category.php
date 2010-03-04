@@ -99,6 +99,7 @@ class ContentModelCategory extends JModelItem
 		if (JRequest::getString('layout') == 'blog')
 		{
 			$limit = $mergedParams->get('num_leading_articles') + $mergedParams->get('num_intro_articles') + $mergedParams->get('num_links');
+			$this->setState('list.links', $mergedParams->get('num_links'));	
 		}
 		else
 		{
@@ -264,6 +265,7 @@ class ContentModelCategory extends JModelItem
 			// filter.subcategories indicates whether to include articles from subcategories in the list or blog
 			$model->setState('filter.subcategories', $this->getState('filter.subcategories'));
 			$model->setState('filter.max_category_levels', $this->setState('filter.max_category_levels'));
+			$model->setState('list.links', $this->getState('list.links'));
 
 			$this->_articles = $model->getItems();
 			$this->_pagination = $model->getPagination();
