@@ -108,13 +108,12 @@ class ContentModelCategory extends JModelItem
 		
 		// set the depth of the category query based on parameter
 		$showSubcategories = $mergedParams->get('show_subcategory_content', '0'); 
-		if ($showSubcategories == 'all_list') {
-			$this->setState('filter.max_category_levels', $mergedParams->get('max_levels'));
+		if ($showSubcategories) {
+			$this->setState('filter.max_category_levels', $mergedParams->get('max_levels', '1'));
 		}
-		elseif ($showSubcategories == 'next_list') {
-			$this->setState('filter.max_category_levels', '1');
+		if ($showSubcategories == 'all_articles') {
+			$this->setState('filter.subcategories', true);
 		}
-		
 		
 	}
 
@@ -262,6 +261,9 @@ class ContentModelCategory extends JModelItem
 			$model->setState('list.limit', $this->getState('list.limit'));
 			$model->setState('list.direction', $this->getState('list.direction'));
 			$model->setState('list.filter', $this->getState('list.filter'));
+			// filter.subcategories indicates whether to include articles from subcategories in the list or blog
+			$model->setState('filter.subcategories', $this->getState('filter.subcategories'));
+			$model->setState('filter.max_category_levels', $this->setState('filter.max_category_levels'));
 
 			$this->_articles = $model->getItems();
 			$this->_pagination = $model->getPagination();
