@@ -40,6 +40,7 @@ $ -> Language fix or change
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA
  # [#19831] Preventing mod_login redirect to display trashed menu items
+ # [#19798] Undefined variable notice when enabling or disabling a user in com_user
 
 27-Feb-2010 Ian MacLennan
  # [#19816] Adding a missing string in many installation ini, added helpfile listing
