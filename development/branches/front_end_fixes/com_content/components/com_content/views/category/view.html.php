@@ -190,15 +190,16 @@ class ContentViewCategory extends JView
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
 
+		$mdata = $this->item->metadata->toArray();
 		if ($app->getCfg('MetaTitle') == '1') {
-			$this->document->setMetaData('title', $this->item->title);
+			$this->document->setMetaData('title', $mdata['page_title']);
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1') {
-			$this->document->setMetaData('author', $this->item->author);
+			$this->document->setMetaData('author', $mdata['author']);
 		}
 		
-		$mdata = $this->item->metadata->toArray();
+
 		foreach ($mdata as $k => $v)
 		{
 			if ($v) {
