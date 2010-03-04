@@ -313,8 +313,7 @@ class HTML_modules
 								foreach ($positions as $position) {
 									echo '<li>'.$position.'</li>';
 								}
-							?>
-							</ul>
+							?></ul>
 							<script language="javascript" type="text/javascript">
 								window.addEvent('domready', function() { 
 									$('combobox-position-select').addEvent('change', function() {
