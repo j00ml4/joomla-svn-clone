@@ -948,7 +948,7 @@ XML;
 
 	/**
 	 * Test for JForm::load method where an XML string is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 * The method tests to ensure that the internal XML string is set to be a form.
 	 */
 	public function testLoadStringNotForm()
 	{
@@ -970,7 +970,7 @@ XML;
 
 	/**
 	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 * The method tests to ensure that the internal XML string is set to be a form.
 	 */
 	public function testLoadObjectNotForm()
 	{
@@ -992,7 +992,7 @@ XML;
 
 	/**
 	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form. 
+	 * The method tests to ensure that the internal XML string is set to be a form.
 	 */
 	public function testLoadXPath()
 	{
@@ -1016,7 +1016,7 @@ XML;
 			$this->equalTo(2)
 		);
 		$zml = $form->getXml();
-		print_r($zml);
+		//print_r($zml);
 
 	}
 
