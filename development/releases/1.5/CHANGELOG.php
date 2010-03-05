@@ -47,6 +47,7 @@ $ -> Language fix or change
  # [#17235] SEF URL for contacts gives 404 error
  # [#17000] Core related items and other modules non-functional with cache module on
  # [#16974] Checking wrong cache field in com_content _loaddata() function
+ # [#16930] live_site$ in configuration.php ignored by some JS-based functions - breaks joomla 1.5 behind reverse proxy
 
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA

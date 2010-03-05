@@ -152,6 +152,20 @@ class JURI extends JObject
 					 */
 					$theURI = 'http' . $https . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+					$app = &JFactory::getApplication();
+					$live_site = $app->getCfg('live_site');
+					if(trim($live_site) != '') {					
+						$scriptURI = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+						if(strpos($theURI, '/administrator/index.php') === false) {
+							$old_site = substr($scriptURI, 0, strrpos($scriptURI, '/index.php'));
+						} else {
+							$old_site = substr($scriptURI, 0, strrpos($scriptURI, '/administrator/index.php'));
+						}
+						$theURI = str_replace($old_site, substr($live_site, strpos($live_site, '://') + 3), $theURI);
+					}
+
+
+
 				/*
 				 * Since we do not have REQUEST_URI to work with, we will assume we are
 				 * running on IIS and will therefore need to work some magic with the SCRIPT_NAME and
