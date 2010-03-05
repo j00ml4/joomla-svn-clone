@@ -19,10 +19,20 @@ class modLoginHelper
 	function getReturnURL($params, $type)
 	{
 		if($itemid =  $params->get($type))
-		{
-			$menu =& JSite::getMenu();
-			$item = $menu->getItem($itemid);
-			$url = JRoute::_($item->link.'&Itemid='.$itemid, false);
+		{  
+			$menu =& JSite::getMenu();  
+			$item = $menu->getItem($itemid); //var_dump($menu);die;
+			if ($item)
+			{
+				$url = JRoute::_($item->link.'&Itemid='.$itemid, false);
+			}
+			else
+			{
+			// stay on the same page
+			$uri = JFactory::getURI();
+			$url = $uri->toString(array('path', 'query', 'fragment'));
+			}
+				
 		}
 		else
 		{
