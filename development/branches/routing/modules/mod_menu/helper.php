@@ -24,6 +24,7 @@ class modMenuHelper
 		$db			= JFactory::getDbo();
 		$user		= JFactory::getUser();
 		$menu		= JSite::getMenu();
+		$default	= $menu->getDefault();
 
 		// If no active menu, use default
 		$active = ($menu->getActive()) ? $menu->getActive() : $menu->getDefault();
@@ -87,7 +88,17 @@ class modMenuHelper
 					}
 					break;
 			}
-			$item->link = JRoute::_($item->link);
+			if ($item->home == 1)
+			{
+				// Correct the URL for the home page.
+				$item->link = JURI::base();
+			} elseif (strcasecmp(substr($item->link, 0, 4), 'http') && (strpos($item->link, 'index.php?') !== false)) {
+				// This is an internal Joomla web site link.
+				$item->link = JRoute::_($item->link, true, $item->params->get('secure'));
+			} else {
+				// Correct the & in the link.
+				$item->link = str_replace('&', '&amp;', $item->link);
+			}
 			
 		}
 		return $items;
