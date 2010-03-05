@@ -15,16 +15,19 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="jcategories-list<?php echo $pageClass;?>">
+<div class="categories-list<?php echo $pageClass;?>">
 
 <?php if ($this->params->get('show_page_title', 1)) : ?>
-<h1>
+<h2>
+	<?php if ($this->escape($this->params->get('page_heading'))) :?>
+		<?php echo $this->escape($this->params->get('page_heading')); ?>
+	<?php else : ?>
 	<?php if ($this->escape($this->params->get('page_heading'))) :?>
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
 	<?php else : ?>
 		<?php echo $this->escape($this->params->get('page_title')); ?>
 	<?php endif; ?>
-</h1>
+</h2>
 <?php endif; ?>
 <?php 
 $this->parent = $this->items;
