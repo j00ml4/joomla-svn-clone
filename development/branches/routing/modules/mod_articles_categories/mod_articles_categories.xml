@@ -30,7 +30,9 @@
     		name="parent"
     		type="category"
     		extension="com_content"
-    		published=""/>
+    		published=""
+    		label="MOD_ARTICLES_CATEGORIES_FIELD_PARENT_LABEL"
+    		description="MOD_ARTICLES_CATEGORY_FIELD_PARENT_DESC"/>
         <field
         	name="show_description"
         	type="radio"
@@ -81,14 +83,14 @@
             name="moduleclass_sfx"
             type="text"
             default=""
-            label="MODULE_FIELD_MODULECLASS_SFX_LABEL"
-            description="MODULE_FIELD_MODULECLASS_SFX_DESC" />
+            label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
+            description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
         <field
             name="cache"
             type="list"
             default="1"
-            label="MODULE_FIELD_CACHING_LABEL"
-            description="MODULE_FIELD_CACHING_DESC">
+            label="MODULES_FIELD_CACHING_LABEL"
+            description="MODULES_FIELD_CACHING_DESC">
             <option
                 value="1">USE_GLOBAL</option>
             <option
