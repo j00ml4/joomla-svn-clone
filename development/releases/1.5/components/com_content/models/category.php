@@ -322,7 +322,7 @@ class ContentModelCategory extends JModel
 		}
 
 		// Lets load the siblings if they don't already exist
-		if (empty($this->_content[$state]))
+		if (empty($this->_data[$state]))
 		{
 			// Get the pagination request variables
 			$limit		= JRequest::getVar('limit', 0, '', 'int');
