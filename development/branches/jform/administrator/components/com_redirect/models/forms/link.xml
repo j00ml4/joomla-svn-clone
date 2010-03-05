@@ -2,68 +2,93 @@
 	<!-- $Id$ -->
 <form>
 	<fields>
-		<field name="id" type="hidden"
+		<field
+			id="id"
+			name="id"
+			type="hidden"
 			default="0"
-			readonly="true"
 			required="true"
-		/>
+			readonly="true" />
 
-		<field name="old_url" type="text"
+		<field
+			name="old_url"
+			type="text"
 			class="inputbox"
-			description="Redir_Field_Old_URL_Desc"
-			label="Redir_Field_Old_URL_Label"
-			required="true"
+			label="COM_REDIR_FIELD_OLD_URL_LABEL"
+			description="COM_REDIR_FIELD_OLD_URL_DESC"
 			size="50"
-		/>
+			default=""
+			required="true" />
 
-		<field name="new_url" type="text"
+		<field
+			name="new_url"
+			type="text"
 			class="inputbox"
-			description="Redir_Field_New_URL_Desc"
-			label="Redir_Field_New_URL_Label"
+			label="COM_REDIR_FIELD_NEW_URL_LABEL"
+			description="COM_REDIR_FIELD_NEW_URL_DESC"
 			size="50"
-		/>
+			default="" />
 
-		<field name="comment" type="text"
+		<field
+			name="comment"
+			type="text"
 			class="inputbox"
-			description="Redir_Field_Comment_Desc"
-			label="Redir_Field_Comment_Label"
+			label="COM_REDIR_FIELD_COMMENT_LABEL"
+			description="COM_REDIR_FIELD_COMMENT_DESC"
 			size="40"
-		/>
+			default="" />
 
-		<field name="published" type="list"
+		<field
+			name="published"
+			type="list"
+			label="JFIELD_PUBLISHED_LABEL"
+			description="JFIELD_PUBLISHED_DESC"
 			class="inputbox"
-			default="1"
-			description="JField_Published_Desc"
-			label="JField_Published_Label"
-			required="true"
 			size="1"
-		>
-			<option value="1">JOption_Enabled</option>
-			<option value="0">JOption_Disabled</option>
-			<option value="2">JOption_Archived</option>
-			<option value="-2">JOption_Trashed</option>
+			required="true"
+			default="1">
+			<option
+				value="1">
+				JOPTION_ENABLED</option>
+			<option
+				value="0">
+				JOPTION_DISABLED</option>
+			<option
+				value="2">
+				JOPTION_ARCHIVED</option>
+			<option
+				value="-2">
+				JOPTION_TRASHED</option>
 		</field>
 
-		<field name="referer" type="text"
+		<field
+			name="referer"
+			type="text"
+			id="referer"
 			class="inputbox"
-			default=""
-			label="Redir_Field_REFERRER_Label"
-			readonly="true"
+			label="COM_REDIR_FIELD_REFERRER_LABEL"
 			size="50"
-		/>
+			default=""
+			readonly="true" />
 
-		<field name="created_date" type="text"
+		<field
+			name="created_date"
+			type="text"
+			id="created_date"
 			class="inputbox"
-			label="Redir_Field_CREATED_DATE_Label"
+			label="COM_REDIR_FIELD_CREATED_DATE_LABEL"
 			size="20"
-			readonly="true"
-		/>
+			default=""
+			readonly="true" />
 
-		<field name="updated_date" type="text"
+		<field
+			name="updated_date"
+			type="text"
+			id="updated_date"
 			class="inputbox"
-			label="Redir_Field_UPDATED_DATE_Label"
-			readonly="true"
+			label="COM_REDIR_FIELD_UPDATED_DATE_LABEL"
 			size="20"
-		/>
+			default=""
+			readonly="true" />
 	</fields>
 </form>
