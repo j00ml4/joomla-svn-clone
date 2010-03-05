@@ -564,8 +564,16 @@ class JFolder
 	function makeSafe($path)
 	{
 		$ds = (DS == '\\') ? '\\' . DS : DS;
-		$regex = array('#[^A-Za-z0-9:\_\-' . $ds . ' ]#');
-		return preg_replace($regex, '', $path);
+		$regex = array('#[^A-Za-z0-9:\_\-\.' . $ds . ' ]#');
+		$safepath = preg_replace($regex, '', $path);  // check if all chars are legal
+		$parts = explode('\\', $safepath);
+		$safepath = '';
+		foreach ($parts as $part) {
+		  if ( ($part !== '.') & ($part !== '..') ) {
+		    $safepath .=  '\\'. trim(str_replace('..', '.', $part),'.');
+		  }
+		}
+		return $safepath;
 	}
 
 }
