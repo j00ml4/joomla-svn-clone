@@ -26,6 +26,6 @@ defined('_JEXEC') or die;
 	<button type="submit">Submit</button>
 
 	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="registration.register" />
+	<input type="hidden" name="task" value="registration.profile" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

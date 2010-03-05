@@ -30,7 +30,10 @@ class UsersViewResend extends JView
 	function display($tpl = null)
 	{
 		// Get the view data.
-		$form = &$this->get('Form');
+		$form	= &$this->get('Form');
+		$data	= &$this->get('Data');
+		$state	= $this->get('State');
+		$params	= $state->get('params');
 
 		// Check for errors.
 		if (count($errors = &$this->get('Errors'))) {
@@ -38,10 +41,15 @@ class UsersViewResend extends JView
 			return false;
 		}
 
-		$form->setAction(JRoute::_('index.php?option=com_users&task=member.resend'));
+		// Bind the data to the form.
+		if ($form) {
+			$form->bind($data);
+		}
 
 		// Push the data into the view.
-		$this->assignRef('form', $form);
+		$this->assignRef('form',	$form);
+		$this->assignRef('data',	$data);
+		$this->assignRef('params',	$params);
 
 		parent::display($tpl);
 	}

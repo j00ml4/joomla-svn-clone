@@ -72,6 +72,15 @@ endif; ?>
 		<?php
 		$usersConfig = &JComponentHelper::getParams('com_users');
 		if ($usersConfig->get('allowUserRegistration')) : ?>
+
+		<?php if ($usersConfig->get('useractivation')) : ?>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=resend'); ?>">
+				<?php echo JText::_('MOD_LOGIN_RESEND_ACTIVATION'); ?></a>
+		</li>
+
+		<?php endif; ?>
+
 		<li>
 			<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
 				<?php echo JText::_('MOD_LOGIN_REGISTER'); ?></a>
