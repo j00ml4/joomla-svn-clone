@@ -41,6 +41,7 @@ $ -> Language fix or change
  $ [#19864] Missing string in is-IS installation ini
  # [#18648] News Feeds -> Categories can throw a SQL error when it tries to sort by section_name
  # [#18619] Validation error of mod_search
+ # [#18570] Button select article in back-end ( RTL) ie7 + modal centering
 
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA
