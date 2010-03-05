@@ -44,6 +44,7 @@ $ -> Language fix or change
  # [#18570] Button select article in back-end ( RTL) ie7 + modal centering
  # [#18403] Possible typo in mod_latestnews xml
  # [#17762] Mod_login\helper.php: Trying to get property of non-object
+ # [#17235] SEF URL for contacts gives 404 error
 
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA

@@ -79,7 +79,7 @@ function ContactBuildRoute(&$query)
 				{
 				    continue;
 				}
-				if (isset($query['view']) && $query['view'] == 'contact'
+				if (isset($query['view']) && $query['view'] == 'contact' && !isset($item->query['catid'])
 					&& isset($item->query['view']) && $item->query['view'] == 'category')
 				{
 					// Check for an undealt with contact id.
