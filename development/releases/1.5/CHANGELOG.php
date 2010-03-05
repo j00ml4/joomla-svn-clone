@@ -37,6 +37,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+05-Mar-2010 Ian MacLennan
+ $ [#19864] Missing string in is-IS installation ini
+
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA
  # [#19831] Preventing mod_login redirect to display trashed menu items
