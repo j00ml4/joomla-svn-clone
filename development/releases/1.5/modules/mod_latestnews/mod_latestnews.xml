@@ -14,7 +14,7 @@
 	</files>
 	<params>
 		<param name="count" type="text" default="5" label="Count" description="The number of items to display (default 5)" />
-		<param name="ordering" type="list" default="create_dsc" label="Ordering" description="Ordering options">
+		<param name="ordering" type="list" default="c_dsc" label="Ordering" description="Ordering options">
 			<option value="c_dsc">Recently Added First</option>
 			<option value="m_dsc">Recently Modified First</option>
 	  	</param>
