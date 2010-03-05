@@ -137,8 +137,8 @@ class UsersModelResend extends JModelForm
 		$data['sitename']	= $config->getValue('sitename');
 		$data['link_text']	= JRoute::_($link, false);
 		$data['link_html']	= JRoute::_($link, true);
-		$data['subject']	= JText::sprintf('COM_USERS.ACTIVATION_LINK_RESEND.MAIL.SUBJECT', $data['sitename']);
-		$data['text']		= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND.MAIL.TEXT', $data['sitename'], $data['name'], $data['username'], $data['link_text']);
+		$data['subject']	= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND_MAIL_SUBJECT', $data['sitename']);
+		$data['text']		= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND_MAIL_TEXT', $data['sitename'], $data['name'], $data['username'], $data['link_text']);
 /*
 		// Load the mail template.
 		jimport('joomla.utilities.simpletemplate');

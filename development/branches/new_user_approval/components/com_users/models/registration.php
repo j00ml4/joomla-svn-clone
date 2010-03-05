@@ -207,20 +207,20 @@ class UsersModelRegistration extends JModelForm
 			if ($params->get('useradminactivation'))
 			{
 				// Get the account verification e-mail.
-				$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_VERIFY_MAIL_SUBJECT', $data['name']);
+				$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_VERIFY_MAIL_SUBJECT', $data['sitename']);
 				$data['text'] = JText::sprintf('COM_USERS_USER_REGISTRATION_VERIFY_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email'], $data['activate']);
 			}
 			else
 			{
 				// Get the registration activation e-mail.
-				$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ACTIVATE_MAIL_SUBJECT', $data['name']);
+				$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ACTIVATE_MAIL_SUBJECT', $data['sitename']);
 				$data['text'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ACTIVATE_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email'], $data['activate']);
 			}
 		}
 		else
 		{
 			// Get the registration confirmation e-mail.
-			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_CONFIRM_MAIL_SUBJECT', $data['name']);
+			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_CONFIRM_MAIL_SUBJECT', $data['sitename']);
 			$data['text'] = JText::sprintf('COM_USERS_USER_REGISTRATION_CONFIRM_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email']);
 		}
 /*
@@ -235,6 +235,37 @@ class UsersModelRegistration extends JModelForm
 		// Check for an error.
 		if ($return !== true) {
 			$this->setError(JText::_('COM_USERS_USER_REGISTRATION_SENDMAIL_FAILED'));
+			return false;
+		}
+
+		//Send email to admins
+		$data['useremail'] = $data['email'];
+		$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ADMIN_MAIL_SUBJECT', $data['sitename']);
+		if ($params->get('useradminactivation'))
+		{
+			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ADMIN_MAIL_TEXT', $data['name'], $data['username'], $data['useremail']);
+		}
+		else
+		{
+			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ADMIN_APPROVAL_MAIL_TEXT', $data['name'], $data['username'], $data['useremail']);
+		}
+
+		// Set data for all administrators
+		$count = 0;
+		$data['email'] = '';
+		foreach( $rows as $row )
+		{
+			$data['email'] .= $row->email;
+			$count++;
+			if ($count < count($rows))
+				$data['email'] .= ';';
+		}
+
+		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $data['subject'], $data['text']);
+
+		// Check for an error.
+		if ($return !== true) {
+			$this->setError(JText::_('COM_USERS_USER_REGISTRATION_ADMIN_SENDMAIL_FAILED'));
 			return false;
 		}
 
@@ -331,14 +362,14 @@ class UsersModelRegistration extends JModelForm
 			}
 
 			// Get the admin activation e-mail.
-			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ADMIN_ACTIVATION_MAIL_SUBJECT', $data['name']);
-			$data['text'] = JText::sprintf('COM_USERS_USER_REGISTRATION_ADMIN_ACTIVATION_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email'], $data['activate']);
+			$data['subject'] = JText::sprintf('COM_USERS_USER_ACTIVATION_ADMIN_MAIL_SUBJECT', $data['name']);
+			$data['text'] = JText::sprintf('COM_USERS_USER_ACTIVATION_ADMIN_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email'], $data['activate']);
 		}
 		else
 		{
-			// Get the registration confirmation e-mail.
-			$data['subject'] = JText::sprintf('COM_USERS_USER_REGISTRATION_CONFIRM_MAIL_SUBJECT', $data['name']);
-			$data['text'] = JText::sprintf('COM_USERS_USER_REGISTRATION_CONFIRM_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email']);
+			// Get the activation confirmation e-mail.
+			$data['subject'] = JText::sprintf('COM_USERS_USER_ACTIVATION_CONFIRM_MAIL_SUBJECT', $data['name']);
+			$data['text'] = JText::sprintf('COM_USERS_USER_ACTIVATION_CONFIRM_MAIL_TEXT', $data['name'], $data['username'], $data['password'], $data['email']);
 		}
 /*
 		// Load the message template and bind the data.
@@ -351,7 +382,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check for an error.
 		if ($return !== true) {
-			$this->setError(JText::_('USERS ACTIVATION SEND MAIL FAILED'));
+			$this->setError(JText::_('COM_USERS_USER_ACTIVATION_SENDMAIL_FAILED'));
 			return false;
 		}
 		return true;
