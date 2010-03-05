@@ -39,6 +39,7 @@ $ -> Language fix or change
 
 05-Mar-2010 Ian MacLennan
  $ [#19864] Missing string in is-IS installation ini
+ # [#18648] News Feeds -> Categories can throw a SQL error when it tries to sort by section_name
 
 04-Mar-2010 Ian MacLennan
  $ [#19836] New Arabic Unitag installation language ar_AA
