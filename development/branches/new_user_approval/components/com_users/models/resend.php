@@ -11,13 +11,15 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
 jimport('joomla.event.dispatcher');
+
 /**
  * Resend model class for Users.
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.6
+ * @version		1.0
  */
+
 class UsersModelResend extends JModelForm
 {
 	protected function _populateState()
@@ -31,11 +33,11 @@ class UsersModelResend extends JModelForm
 	}
 
 	/**
-	 * Method to get the activation link resend request form.
+	 * Method to get the username remind request form.
 	 *
 	 * @access	public
 	 * @return	object	JForm object on success, JException on failure.
-	 * @since	1.6
+	 * @since	1.0
 	 */
 	function &getForm()
 	{
@@ -53,7 +55,7 @@ class UsersModelResend extends JModelForm
 		JPluginHelper::importPlugin('users');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUserResendRequestForm', array(&$form));
+		$results = $dispatcher->trigger('onPrepareUserResendForm', array(&$form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
@@ -62,21 +64,12 @@ class UsersModelResend extends JModelForm
 		}
 
 		return $form;
-	}
 
-	/**
-	 * Method to start the activation link resend process
-	 *
-	 * @access	public
-	 * @return
-	 * @since	1.6
-	 */
+	}
 	function processResendRequest($data)
 	{
-		$params	= &$app->getParams('com_users');
-
 		// Get the form.
-		$form = &$this->getResendForm();
+		$form = &$this->getRemindForm();
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -135,17 +128,18 @@ class UsersModelResend extends JModelForm
 		$data['fromname']	= $config->getValue('fromname');
 		$data['mailfrom']	= $config->getValue('mailfrom');
 		$data['sitename']	= $config->getValue('sitename');
-		$data['link_text']	= JRoute::_($link, false);
-		$data['link_html']	= JRoute::_($link, true);
+		$data['link_text']	= JRoute::_($link, false, $mode);
+		$data['link_html']	= JRoute::_($link, true, $mode);
+		$data['email']		= $user->email;
 		$data['subject']	= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND_MAIL_SUBJECT', $data['sitename']);
 		$data['text']		= JText::sprintf('COM_USERS_ACTIVATION_LINK_RESEND_MAIL_TEXT', $data['sitename'], $data['name'], $data['username'], $data['link_text']);
-/*
+		/*
 		// Load the mail template.
 		jimport('joomla.utilities.simpletemplate');
 		$template = new JSimpleTemplate();
 
 		if (!$template->load('users.username.remind.request')) {
-			return new JException(JText::_('USERS_REMIND_MAIL_TEMPLATE_NOT_FOUND'), 500);
+			return new JException(JText::_('COM_USERS_REMIND_MAIL_TEMPLATE_NOT_FOUND'), 500);
 		}
 
 		// Push in the email template variables.
@@ -157,8 +151,9 @@ class UsersModelResend extends JModelForm
 		$message	= $template->getHtml();
 */
 		// Send the password reset request e-mail.
-		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $data['subject'], $data['text']);
-			// Check for an error.
+		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $$data['email'], $data['subject'], $data['text']);
+
+		// Check for an error.
 		if ($return !== true) {
 			return new JException(JText::_('COM_USERS_ACTIVATION_LINK_RESEND_SENDMAIL_FAILED'), 500);
 		}
