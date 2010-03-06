@@ -49,13 +49,13 @@
 			type="list"
 			label="JField_Metadata_Robots_Label"
 			description="JField_Metadata_Robots_Desc"
-			default="">
+			default="" >
 			<option
 				value="">USE_GLOBAL</option>
 			<option
 				value="0">JCOMMON_INDEX_FOLLOW</option>
 			<option
-				value="1">JCOMMON_NOINDEX_FOLLOW/option>
+				value="1">JCOMMON_NOINDEX_FOLLOW</option>
 			<option
 				value="2">JCOMMON_INDEX_NOFOLLOW</option>
 			<option
