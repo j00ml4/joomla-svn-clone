@@ -111,7 +111,7 @@ class UsersModelReset extends JModelForm
 		$config	= &JFactory::getConfig();
 
 		// Get the form.
-		$form = &$this->getResetRequestForm();
+		$form = &$this->getForm();
 
 		// Check for an error.
 		if (JError::isError($form)) {

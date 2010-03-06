@@ -68,7 +68,7 @@ class UsersModelRemind extends JModelForm
 	function processRemindRequest($data)
 	{
 		// Get the form.
-		$form = &$this->getRemindForm();
+		$form = &$this->getForm();
 
 		// Check for an error.
 		if (JError::isError($form)) {
