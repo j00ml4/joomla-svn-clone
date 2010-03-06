@@ -14,7 +14,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 
-<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=remind.remind'); ?>" method="post" class="form-validate">
+<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=user.remind'); ?>" method="post" class="form-validate">
 
 	<?php
 	// Iterate through the form fieldsets and display each one.
@@ -33,6 +33,6 @@ JHtml::_('behavior.formvalidation');
 	<button type="submit"><?php echo JText::_('BUTTON_SUBMIT'); ?></button>
 
 	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="member.remind" />
+	<input type="hidden" name="task" value="user.remind" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
