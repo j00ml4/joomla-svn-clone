@@ -104,7 +104,13 @@ $params = &$this->item->params;
 	if ($params->get('access-view')) :
 		$link = JRoute::_(ContentRoute::article($this->item->slug, $this->item->catslug));
 	else :
-		$link = JRoute::_("index.php?option=com_users&view=login");
+		$menu = JSite::getMenu();
+		$active = $menu->getActive();
+		$itemId = $active->id;
+		$link1 = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
+		$returnURL = JRoute::_(ContentRoute::article($this->item->slug));
+		$link = new JURI($link1);
+		$link->setVar('return', base64_encode($returnURL));
 	endif;
 ?>
 		<p class="readmore">
