@@ -27,6 +27,98 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Mar-2010 Mark Dexter
+# Fix problem where JSite was changing JComponentHelper::getParams results 
+
+06-Mar-2010 Christophe Demko
+^ Enhancing the error display messages of language file parsing
+
+06-Mar-2010 Hannes Papenberg
+# Added complete manifest files to each core component - Thanks Edgars Piru�ka
+
+05-Mar-2010 Mark Dexter
+^ Added modified_by_name to articles model
+^ Implemented include subcategories parameter for Article Category List, Blog
+^ Use path for sorting categories by alpha
+# Fix bug in metadata for article category list, blog
+# Fix pagination bug in category blog
+^ Update com_content global params in joomla.sql
+^ Modify sample data for article category list, blog
+
+05-Mar-2010 Jean-Marie Simonet
+$ Loading plugin lang in plugin Manager when ini in plugin language folder
+$# Refactored com_redirect inis/keys + some
+$ Refactored com_login ini/keys + some
+
+04-Mar-2010 Christophe Demko
+^ Loading of language in JPlugin
+# Correcting bugs in JFieldCheckbox
+
+04-March-2010 Jean-Marie Simonet
+$^ Refactored com_templates ini/keys 
+$^ Refactored tpl_milkyway ini/keys
+
+03-March-2010 Mark Dexter
+^ Add properties to help with nested set output on front end (Robert Deutz)
+^ Add rights field to metadata (Elin Waring)
+^ Remove inline style from mod_random image (Angie Radtke)
+
+02-Mar-2010 Hannes Papenberg
+# Fixed ordering of com_content
+# Fixed ordering of com_weblinks
+# Fixed ordering of com_newsfeeds
+
+02-March-2010 Jean-Marie Simonet
+$^ Refactored com_newsfeeds ini/keys + some JCommon.
+
+28-Feb-2010 Hannes Papenberg
+# Reverting consistency commit from 23-feb-2010
+# Made all calls to functions in JHTML class consistent throughout the system. All use JHTML::_() now.
++ Implemented linked author profile in com_content
+^ Moved JS, CSS and image files of the editors to /media folder - Thanks Rob Clayburn!
+# Created correct manifest file for com_weblinks - Thanks Edgars Piru�ka!
+# Fixed usage of COM_CONTENT_CATEGORY to CONTENT_CATEGORY
+
+27-Feb-2010 Hannes Papenberg
+# Fixing JDate::toFormat() - Thanks Edgars Piru�ka!
+# Missed some files when uploading the new mod_articles_news
+# Fixed bug in loading user in JUser
+
+26-Feb-2010 Mark Dexter
+# Add CSS for multi-column blog display (Angie Radtke)
+^ Fix up ordering and other parameters for category blog menu item 
+^ Make global, menu item, and article parameters consistent in content
+^ Fix up language tags for parameters
+# Fix multi-column bug in frontpage blog
+
+26-Feb-2010 Jean-Marie Simonet
+^ Integrating default latin transliteration in framework
+
+25-Feb-2010 Christophe Demko
+# Correcting integrity of #__asset table
+
+24-Feb-2010 Jean-Marie Simonet
+$ Allowing translation of plugin names in Plugin Manager
+
+24-Feb-2010 Hannes Papenberg
+^ Changed weblinks module to use weblinks category model and allowed enable/disable click tracking - Thanks Rob Clayburn!
+
+24-Feb-2010 Christophe Demko
+# Loading correctly language in com_config component
+# Correcting some bugs in ConfigModelComponent
+# Correcting some bugs in JControllerForm
+
+21-Feb-2010 Jean-Marie Simonet
+$ Small corrections for mod_article_news
+
+23-Feb-2010 Hannes Papenberg
+^ refactored mod_newsflash to mod_articles_news - Thanks Rob Clayburn!
++ Added option to enable/disable the weblink click-tracking - Thanks Rob Clayburn!
+# Made usage of JHTML functions consistent - Thanks Jonnathan Lima!
+
+23-Feb-2010 Christophe Demko
+^ Changing call JHtmlSelect::* to self::* in JHtmlSelect class
+
 23-Feb-2010 Sam Moffatt
 # Fix for minor HTML bug in mysql and mysqli drivers
 
