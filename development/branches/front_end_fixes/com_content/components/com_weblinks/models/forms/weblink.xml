@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<form>
+	<fields>
+		<field
+			id="id"
+			name="id"
+			type="hidden"
+			class="inputbox"
+			label="WEBLINK_ID_LABEL"
+			size="10"
+			default="0"
+			required="true"
+			readonly="true" />
+
+		<field
+			id="title"
+			name="title"
+			type="text"
+			label="COM_WEBLINKS_FIELD_TITLE_LABEL"
+			description="COM_WEBLINKS_FIELD_TITLE_DESC"
+			class="inputbox"
+			size="30"
+			required="true" />
+
+		<field
+			id="alias"
+			name="alias"
+			type="text"
+			label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC"
+			class="inputbox"
+			size="45"
+			default=""
+			filter="unset" />
+
+		<field
+			id="description"
+			name="description"
+			type="editor"
+			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL"
+			description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC"
+			class="inputbox"
+			filter="safehtml" />
+
+		<field
+			id="state"
+			name="state"
+			type="list"
+			label="JFIELD_PUBLISHED_LABEL"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option
+				value="1">
+				JOPTION_PUBLISHED</option>
+			<option
+				value="0">
+				JOPTION_UNPUBLISHED</option>
+		</field>
+
+		<field
+			id="catid"
+			name="catid"
+			type="category"
+			extension="com_weblinks"
+			label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
+			description="COM_WEBLINKS_FIELD_CATEGORY_DESC"
+			class="inputbox"
+			required="true" />
+
+		<field
+			id="url"
+			name="url"
+			type="text"
+			label="COM_WEBLINKS_FIELD_URL_LABEL"
+			description="COM_WEBLINKS_FIELD_URL_DESC"
+			class="inputbox"
+			size="45"
+			required="true" />
+	</fields>
+</form>
