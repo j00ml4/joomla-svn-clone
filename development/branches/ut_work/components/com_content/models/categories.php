@@ -141,8 +141,9 @@ class ContentModelCategories extends JModelList
 
 		// Retrieve a sub tree or lineage.
 		if ($parentId = $this->getState('filter.parent_id')) {
-			if ($levels = $this->getState('filter.get_children')) {
-				// Optionally get all the child categories for given parent.
+			if ($this->getState('filter.get_children')) {
+				// Optionally get all the child categories for given parent down to maximum levels
+				$levels = $this->getState('filter.max_category_levels', '1');
 				$query->leftJoin('#__categories AS p ON p.id = '.(int) $parentId);
 				$query->where('a.lft > p.lft AND a.rgt < p.rgt');
 				if ((int) $levels > 0) {
@@ -195,4 +196,31 @@ class ContentModelCategories extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
+	
+	/**
+	 * redefine the function an add some properties to make the styling more easy
+	 *
+	 * @return mixed An array of data items on success, false on failure.
+	 */
+	public function getItems()
+	{
+		$items = parent::getItems();
+		if (!empty($items))
+		{
+			$itemcount = count($items);
+			for ($i=0;$i<$itemcount;$i++)
+			{
+				$item = &$items[$i];
+				$item->sclass		= ($i == 0) ? 'first' : '';
+				$item->sclass		= ($i == ($itemcount - 1)) ? 'last' : $item->sclass;
+ 				$item->deeper		= (isset($items[$i+1]) && ($item->level < $items[$i+1]->level));
+				$item->shallower	= (isset($items[$i+1]) && ($item->level > $items[$i+1]->level));
+				$item->level_diff	= (isset($items[$i+1])) ? ($item->level - $items[$i+1]->level) : 0;
+			}
+		}
+		return $items;
+	}
+	
+	
+	
 }

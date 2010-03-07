@@ -42,11 +42,11 @@ $cparams = JComponentHelper::getParams ('com_media');
 	<?php endif; ?>
 	<?php if ($this->contact->image && $this->params->get('show_image')) : ?>
 		<span class="jcontact-image">
-			<?php echo JHtml::_('image', 'images/'.$this->contact->image, JText::_('Contact'), array('align' => 'middle')); ?>
+			<?php echo JHTML::_('image','images/'.$this->contact->image, JText::_('Contact'), array('align' => 'middle')); ?>
 		</span>
 	<?php endif; ?>
 <?php echo  JHtml::_('sliders.start', 'contact-slider'); ?>
-	<?php echo JHtml::_('sliders.panel',JText::_('Contact_Details'), 'basic-detailss'); ?>
+	<?php echo JHtml::_('sliders.panel',JText::_('CONTACT_DETAILS'), 'basic-details'); ?>
 	<?php if ($this->params->get('show_contact_list') && count($this->contacts) > 1) : ?>
 		<form action="<?php echo JRoute::_('index.php') ?>" method="post" name="selectForm" id="selectForm">
 			<?php echo JText::_('CONTACT_SELECT_CONTACT'); ?>:
@@ -68,14 +68,14 @@ $cparams = JComponentHelper::getParams ('com_media');
 	<?php endif; ?>
 
 	<?php if ($this->params->get('show_email_form') && ($this->contact->email_to )) : ?>
-		<?php echo JHtml::_('sliders.panel', JText::_('Contact_Email_Form'), 'display-form'); ?>
+		<?php echo JHtml::_('sliders.panel', JText::_('CONTACT_EMAIL_FORM'), 'display-form'); ?>
 			<?php echo $this->loadTemplate('form');  ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_links')) : ?>
 	<?php echo $this->loadTemplate('links'); ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_articles') &&  $this->contact->user_id) : ?>
-	<?php echo JHtml::_('sliders.panel', JText::_('Contact_Articles'), 'display-articles'); ?>
+	<?php echo JHtml::_('sliders.panel', JText::_('CONTACT_ARTICLES'), 'display-articles'); ?>
 		<?php echo $this->loadTemplate('articles'); ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_profile') &&  $this->contact->user_id) : ?>
