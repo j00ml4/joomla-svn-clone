@@ -22,9 +22,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php if ($this->escape($this->params->get('page_heading'))) :?>
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
 	<?php else : ?>
-	<?php if ($this->escape($this->params->get('page_heading'))) :?>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	<?php else : ?>
 		<?php echo $this->escape($this->params->get('page_title')); ?>
 	<?php endif; ?>
 </h2>
