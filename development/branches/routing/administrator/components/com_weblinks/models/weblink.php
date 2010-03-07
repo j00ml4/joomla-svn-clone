@@ -371,7 +371,6 @@ class WeblinksModelWeblink extends JModelForm
 	 */
 	public function reorder($pk, $direction = 0)
 	{
-		$user = JFactory::getUser();
 		// Sanitize the id and adjustment.
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('weblink.id');
 
@@ -404,7 +403,8 @@ class WeblinksModelWeblink extends JModelForm
 		}
 
 		// Move the row.
-		$table->move($direction, 'catid = '.$table->catid);
+		// TODO: Where clause to restrict category.
+		$table->move($pk);
 
 		// Check-in the row.
 		if (!$this->checkin($pk)) {
@@ -422,7 +422,6 @@ class WeblinksModelWeblink extends JModelForm
 	 */
 	function saveorder(&$pks, $order)
 	{
-		$user = JFactory::getUser();
 		// Initialise variables.
 		$table		= $this->getTable();
 		$conditions	= array();

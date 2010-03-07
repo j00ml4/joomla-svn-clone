@@ -153,13 +153,10 @@ class ContentControllerArticles extends JController
 		// Initialise variables.
 		$user	= JFactory::getUser();
 		$ids	= JRequest::getVar('cid', null, 'post', 'array');
-		$inc	= ($this->getTask() == 'orderup') ? -1 : 1;
+		$inc	= ($this->getTask() == 'orderup') ? -1 : +1;
 
 		$model = $this->getModel();
-		foreach($ids as $id)
-		{
-			$model->reorder($id, $inc);
-		}
+		$model->reorder($ids, $inc);
 		// TODO: Add error checks.
 
 		$this->setRedirect('index.php?option=com_content&view=articles');

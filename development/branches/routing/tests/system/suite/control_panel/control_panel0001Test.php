@@ -18,11 +18,9 @@ class ControlPanel0001 extends SeleniumJoomlaTestCase
 	function testMenuLinksPresent()
 	{
 		$this->setUp();
-		$this->gotoAdmin();
 		$this->doAdminLogin();
-		$this->gotoSite();
+		$this->gotoAdmin();
 		$this->doFrontEndLogin();
-		$this->gotoSite();		
 		$this->doFrontEndLogout();
 		$this->gotoAdmin();
 		echo "Check that top menu options are visible.\n";

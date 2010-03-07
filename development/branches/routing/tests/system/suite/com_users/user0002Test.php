@@ -56,7 +56,10 @@ class User0002Test extends SeleniumJoomlaTestCase
     }
     $this->click("link=Logout");
     $this->waitForPageToLoad("30000");
-	$this->gotoAdmin();
+    $this->click("//button[@type='submit']");
+    $this->waitForPageToLoad("30000");    
+    $this->click("link=Site Administrator");
+    $this->waitForPageToLoad("30000");
 	$this->doAdminLogin();
 	
 	echo "Back to User Manager.\n";

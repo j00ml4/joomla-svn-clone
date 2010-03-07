@@ -17,8 +17,8 @@ class ControlPanel0005 extends SeleniumJoomlaTestCase
 {
 	function testMenuTopLevelPresent()
 	{
-		$this->gotoAdmin();
 		$this->doAdminLogin();
+		$this->gotoAdmin();
 		$this->assertTrue($this->isElementPresent("link=Site"));
 		$this->assertTrue($this->isElementPresent("link=Users"));
 		$this->assertTrue($this->isElementPresent("link=Menus"));

@@ -14,8 +14,8 @@
 			id="name"
 			name="name"
 			type="text"
-			label="JFIELD_TITLE_LABEL"
-			description="JFIELD_TITLE_DESC"
+			label="JField_Title_Label"
+			description="JField_Title_Desc"
 			class="inputbox"
 			size="30"
 			required="true" />
@@ -24,8 +24,8 @@
 			id="alias"
 			name="alias"
 			type="text"
-			label="JFIELD_ALIAS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_ALIAS_DESC"
+			label="JField_Alias_Label"
+			description="JField_Alias_Desc"
 			class="inputbox"
 			size="45"
 			default="" />
@@ -34,23 +34,23 @@
 			id="published"
 			name="published"
 			type="list"
-			label="JFIELD_PUBLISHED_LABEL"
-			description="JFIELD_PUBLISHED_DESC"
+			label="JField_Published_Label"
+			description="JField_Published_Desc"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option
 				value="1">
-				JOPTION_PUBLISHED</option>
+				JOption_Published</option>
 			<option
 				value="0">
-				JOPTION_UNPUBLISHED</option>
+				JOption_UnPublished</option>
 			<option
 				value="-1">
-				JOPTION_ARCHIVED</option>
+				JOption_Archived</option>
 			<option
 				value="-2">
-				JOPTION_TRASHED</option>
+				JOption_Trashed</option>
 		</field>
 
 		<field
@@ -58,12 +58,12 @@
 			name="catid"
 			type="category"
 			extension="com_newsfeeds"
-			label="COM_NEWSFEEDS_FIELD_CATEGORY_LABEL"
-			description="COM_NEWSFEEDS_FIELD_CATEGORY_DESC"
+			label="JField_Category_Label"
+			description="JField_Category_Desc"
 			class="inputbox"
 			required="true">
 			<option
-				value="0">JOPTION_NO_CATEGORY</option>
+				value="0">JOption_No_Category</option>
 		</field>
 
 		<field
@@ -73,8 +73,8 @@
 			class="inputbox"
 			default=""
 			size="60"
-			label="COM_NEWSFEEDS_FIELD_LINK_LABEL"
-			description="COM_NEWSFEEDS_FIELD_LINK_DESC"
+			label="Newsfeeds_Link_Label"
+			description="Newsfeeds_Link_Desc"
 			required="true" />
 
 		<field
@@ -84,8 +84,8 @@
 			class="inputbox"
 			default="5"
 			size="2"
-			label="COM_NEWSFEEDS_FIELD_NUMFEEDS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_NUMFEEDS_DESC"
+			label="Newsfeeds_Numarticles_Label"
+			description="Newsfeeds_Numarticles_Desc"
 			required="true" />
 
 		<field
@@ -95,8 +95,8 @@
 			class="inputbox"
 			default="3600"
 			size="4"
-			label="COM_NEWSFEEDS_FIELD_CACHETIME_LABEL"
-			description="COM_NEWSFEEDS_FIELD_CACHETIME_DESC"
+			label="Newsfeeds_Cachetime_Label"
+			description="Newsfeeds_Cachetime_Desc"
 			required="true" />
 
 		<field
@@ -105,8 +105,8 @@
 			type="Ordering"
 			class="inputbox"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_ORDERING_LABEL"
-			description="COM_NEWSFEEDS_FIELD_ORDERING_DESC" />
+			label="Newsfeeds_Ordering_Label"
+			description="Newsfeeds_Ordering_Desc" />
 
 		<field
 			id="rtl"
@@ -114,14 +114,14 @@
 			type="list"
 			class="inputbox"
 			default="1"
-			label="COM_NEWSFEEDS_FIELD_RTL_LABEL"
-			description="COM_NEWSFEEDS_FIELD_RTL_DESC">
+			label="Newsfeeds_RTL_Label"
+			description="Newsfeeds_RTL_Desc">
 			<option
-				value="0">COM_NEWSFEEDS_FIELD_VALUE_SITE</option>
+				value="0">Newsfeeds_RTL_select</option>
 			<option
-				value="1">COM_NEWSFEEDS_FIELD_VALUE_LTR</option>
+				value="1">Newsfeeds_RTL_left_to_right</option>
 			<option
-				value="1">COM_NEWSFEEDS_FIELD_VALUE_RTL</option>
+				value="1">Newsfeeds_RTL_right_to_left</option>
 		</field>
 
 
@@ -132,8 +132,8 @@
 			class="inputbox"
 			default=""
 			size="6"
-			label="NEWSFEEDS_CHECKEDOUT_LABEL"
-			description="NEWSFEEDS_CHECKEDOUT_DESC"
+			label="Newsfeeds_Checkedout_Label"
+			description="Newsfeeds_Checkedout_Desc"
 			readonly="true"
 			filter="unset" />
 
@@ -144,16 +144,16 @@
 			class="inputbox"
 			default=""
 			size="6"
-			label="NEWSFEEDS_CHECKEDOUT_TIME_LABEL"
-			description="NEWSFEEDS_CHECKEDOUT_TIME_DESC"
+			label="Newsfeeds_Checkedout_Time_Label"
+			description="Newsfeeds_Checkedout_Time_Desc"
 			readonly="true"
 			filter="unset" />
 
 		<field
 			name="access"
 			type="accesslevel"
-			label="JFIELD_ACCESS_LABEL"
-			description="JFIELD_ACCESS_DESC"
+			label="JField_Access_Label"
+			description="JField_Access_Desc"
 			class="inputbox"
 			size="1"
 			default="" />
@@ -161,11 +161,11 @@
 		<field
 			name="language"
 			type="contentlanguage"
-			label="JFIELD_LANGUAGE_LABEL"
-			description="JFIELD_NEWSFEED_LANGUAGE_DESC"
+			label="JField_Language_Label"
+			description="JField_Newsfeed_Language_Desc"
 			class="inputbox"
 			default="">
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="">JOption_Default_Language</option>
 		</field>
 
 	</fields>
@@ -173,15 +173,15 @@
 	<fields
 		group="params"
 		array="true"
-		label="COM_NEWSFEEDS_FIELD_OPTIONS">
+		label="Newsfeeds_Options">
 
 <field
 			id="show_headings"
 			name="show_headings"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC">
+			label="Newsfeeds_Table_Headings_Label"
+			description="Newsfeeds_Table_Headings_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -195,8 +195,8 @@
 			name="show_name"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_NAME_COLUMN_LABEL"
-			description="COM_NEWSFEEDS_FIELD_NAME_COLUMN_DESC">
+			label="Newsfeeds_Name_Column_Label"
+			description="Newsfeeds_Name_Column_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -210,8 +210,8 @@
 			name="show_articles"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
-			description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC">
+			label="Newsfeeds_Num_Articles_Column_Label"
+			description="Newsfeeds_Num_Articles_Column_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -225,8 +225,8 @@
 			name="show_link"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC">
+			label="Newsfeeds_Show_Links_Label"
+			description="Newsfeeds_Show_Links_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -235,19 +235,15 @@
 				value="1">JCOMMON_SHOW</option>
 		</field>
 
-		<field
-		name="spacer1" 
-		type="spacer"
-		hr="true"
-		/>
+		<!-- Spacer -->
 
 		<field
 			id="show_cat_description"
 			name="show_cat_description"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_DESC">
+			label="Newsfeeds_Show_Cat_Label"
+			description="Newsfeeds_Show_Cat_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -261,8 +257,8 @@
 			name="show_cat_items"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_DESC">
+			label="Newsfeeds_Show_Cat_Items_Label"
+			description="Newsfeeds_Show_Cat_Items_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -271,19 +267,15 @@
 				value="1">JCOMMON_SHOW</option>
 		</field>
 
-		<field
-		name="spacer2" 
-		type="spacer"
-		hr="true"
-		/>
+		<!-- Spacer -->
 
 		<field
 			id="show_feed_image"
 			name="show_feed_image"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC">
+			label="Newsfeeds_Show_Feed_Image_Label"
+			description="Newsfeeds_Show_Feed_Image_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -297,8 +289,8 @@
 			name="show_feed_description"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC">
+			label="Newsfeeds_Show_Feed_Description_Label"
+			description="Newsfeeds_Show_Feed_Description_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -312,8 +304,8 @@
 			name="show_item_description"
 			type="list"
 			default=""
-			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC">
+			label="Newsfeeds_Show_Item_Description_Label"
+			description="Newsfeeds_Show_Item_Description_Desc">
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
@@ -328,7 +320,7 @@
 			type="text"
 			size="6"
 			default="0"
-			label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
-			description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
+			label="Newsfeeds_Word_Count_Label"
+			description="Newsfeeds_Word_Count_Desc" />
 	</fields>
 </form>

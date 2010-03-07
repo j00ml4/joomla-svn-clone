@@ -19,7 +19,6 @@ class Article0001 extends SeleniumJoomlaTestCase
 	{
 		$this->setUp();
 		echo "Starting testUnpublishArticle.\n";
-		$this->gotoAdmin();
 		$this->doAdminLogin();
 
 		echo "Go to front end and check that Designers and Developers is shown"."\n";
@@ -47,7 +46,6 @@ class Article0001 extends SeleniumJoomlaTestCase
 
 		$this->click("//img[@alt='Unpublished']");
 		$this->waitForPageToLoad("30000");
-		$this->gotoAdmin();
 		$this->doAdminLogout();
 	}
 
@@ -55,7 +53,6 @@ class Article0001 extends SeleniumJoomlaTestCase
 	{
 		$this->setUp();
 		echo "Starting testPublishArticle.\n";
-		$this->gotoAdmin();
 		$this->doAdminLogin();
 
 		echo "Go to back end and unpublish Designers and Developers"."\n";
@@ -83,7 +80,7 @@ class Article0001 extends SeleniumJoomlaTestCase
 		echo "Go to front end and check that Designers and Developers is shown"."\n";
 		$this->gotoSite();
 		$this->assertTrue($this->isTextPresent("Designers and Developers"));
-		$this->gotoAdmin();
+
 		$this->doAdminLogout();
 	}
 

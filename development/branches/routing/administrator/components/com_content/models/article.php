@@ -352,7 +352,8 @@ class ContentModelArticle extends JModelForm
 		}
 
 		// Move the row.
-		$table->move($direction, 'catid = '.$table->catid);
+		// TODO: Where clause to restrict category.
+		$table->move($pk);
 
 		// Check-in the row.
 		if (!$this->checkin($pk)) {
@@ -373,7 +374,6 @@ class ContentModelArticle extends JModelForm
 		// Initialise variables.
 		$table		= $this->getTable();
 		$conditions	= array();
-		$user 		= JFactory::getUser();
 
 		if (empty($pks)) {
 			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));

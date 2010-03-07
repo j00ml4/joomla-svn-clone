@@ -19,7 +19,6 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 	function testCreateRemoveCategory()
 	{
 		$this->setUp();
-		$this->gotoAdmin();		
 		$this->doAdminLogin();
 		$this->click("link=Control Panel");
 		$this->waitForPageToLoad("30000");

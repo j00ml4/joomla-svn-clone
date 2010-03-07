@@ -19,7 +19,6 @@ class Module0001 extends SeleniumJoomlaTestCase
 	{
 		$this->setUp();
 		echo ("testUnpublishModule"."\n");
-		$this->gotoAdmin();		
 		$this->doAdminLogin();
 		$this->gotoSite();
 		echo ("Check that login form is present"."\n");
@@ -56,8 +55,8 @@ class Module0001 extends SeleniumJoomlaTestCase
 	{
 		$this->setUp();
 		echo ("testPublishModule"."\n");
-		$this->gotoAdmin();
 		$this->doAdminLogin();
+		$this->gotoAdmin();
 		$this->click("link=Module Manager");
 		$this->waitForPageToLoad("30000");
 
@@ -86,8 +85,7 @@ class Module0001 extends SeleniumJoomlaTestCase
 		echo ("Go to front end and check that login form is present"."\n");
 		$this->gotoSite();
 		$this->assertTrue($this->isTextPresent("Login Form"));
-		
-		$this->gotoAdmin();
+
 		$this->doAdminLogout();
 	}
 
