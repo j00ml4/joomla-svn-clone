@@ -25,12 +25,12 @@ class TemplatesHelper
 	public static function addSubmenu($vName)
 	{
 		JSubMenuHelper::addEntry(
-			JText::_('COM_TEMPLATES_SUBMENU_STYLES'),
+			JText::_('Templates_Submenu_Styles'),
 			'index.php?option=com_templates&view=styles',
 			$vName == 'styles'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_TEMPLATES_SUBMENU_TEMPLATES'),
+			JText::_('Templates_Submenu_Templates'),
 			'index.php?option=com_templates&view=templates',
 			$vName == 'templates'
 		);
@@ -66,8 +66,8 @@ class TemplatesHelper
 	{
 		// Build the filter options.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '0', JText::_('COM_TEMPLATES_OPTION_SITE'));
-		$options[]	= JHtml::_('select.option', '1', JText::_('COM_TEMPLATES_OPTION_ADMINISTRATOR'));
+		$options[]	= JHtml::_('select.option', '0', JText::_('Templates_Option_Site'));
+		$options[]	= JHtml::_('select.option', '1', JText::_('Templates_Option_Administrator'));
 
 		return $options;
 	}

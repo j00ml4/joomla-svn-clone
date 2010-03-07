@@ -14,8 +14,8 @@
 			name="old_url"
 			type="text"
 			class="inputbox"
-			label="COM_REDIR_FIELD_OLD_URL_LABEL"
-			description="COM_REDIR_FIELD_OLD_URL_DESC"
+			label="Redir_Field_Old_URL_Label"
+			description="Redir_Field_Old_URL_Desc"
 			size="50"
 			default=""
 			required="true" />
@@ -24,8 +24,8 @@
 			name="new_url"
 			type="text"
 			class="inputbox"
-			label="COM_REDIR_FIELD_NEW_URL_LABEL"
-			description="COM_REDIR_FIELD_NEW_URL_DESC"
+			label="Redir_Field_New_URL_Label"
+			description="Redir_Field_New_URL_Desc"
 			size="50"
 			default="" />
 
@@ -33,32 +33,32 @@
 			name="comment"
 			type="text"
 			class="inputbox"
-			label="COM_REDIR_FIELD_COMMENT_LABEL"
-			description="COM_REDIR_FIELD_COMMENT_DESC"
+			label="Redir_Field_Comment_Label"
+			description="Redir_Field_Comment_Desc"
 			size="40"
 			default="" />
 
 		<field
 			name="published"
 			type="list"
-			label="JFIELD_PUBLISHED_LABEL"
-			description="JFIELD_PUBLISHED_DESC"
+			label="JField_Published_Label"
+			description="JField_Published_Desc"
 			class="inputbox"
 			size="1"
 			required="true"
 			default="1">
 			<option
 				value="1">
-				JOPTION_ENABLED</option>
+				JOption_Enabled</option>
 			<option
 				value="0">
-				JOPTION_DISABLED</option>
+				JOption_Disabled</option>
 			<option
 				value="2">
-				JOPTION_ARCHIVED</option>
+				JOption_Archived</option>
 			<option
 				value="-2">
-				JOPTION_TRASHED</option>
+				JOption_Trashed</option>
 		</field>
 
 		<field
@@ -66,7 +66,7 @@
 			type="text"
 			id="referer"
 			class="inputbox"
-			label="COM_REDIR_FIELD_REFERRER_LABEL"
+			label="Redir_Field_REFERRER_Label"
 			size="50"
 			default=""
 			readonly="true" />
@@ -76,7 +76,7 @@
 			type="text"
 			id="created_date"
 			class="inputbox"
-			label="COM_REDIR_FIELD_CREATED_DATE_LABEL"
+			label="Redir_Field_CREATED_DATE_Label"
 			size="20"
 			default=""
 			readonly="true" />
@@ -86,7 +86,7 @@
 			type="text"
 			id="updated_date"
 			class="inputbox"
-			label="COM_REDIR_FIELD_UPDATED_DATE_LABEL"
+			label="Redir_Field_UPDATED_DATE_Label"
 			size="20"
 			default=""
 			readonly="true" />

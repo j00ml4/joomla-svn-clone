@@ -26,8 +26,11 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogin()
 	{
-		echo "Logging in to back end.\n";
+		//$this->setUp();
+		echo "Logging in to admin.\n";
 		$cfg = new SeleniumConfig();
+		$this->open($cfg->path . "administrator/index.php?option=com_login");
+		$this->waitForPageToLoad("30000");
 		$this->type("mod-login-username", $cfg->username);
 		$this->type("mod-login-password", $cfg->password);
 		$this->click("link=Log in");
@@ -36,30 +39,29 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogout()
 	{
+		$this->gotoAdmin();
 		echo "Logging out of back end.\n";
 		$this->click("link=Logout");
-		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoAdmin()
 	{
-		echo "Browsing to back end.\n";
+		echo "Browsing to admin.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator");
-		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoSite()
 	{
-		echo "Browsing to font end.\n";
+		echo "Browsing to site.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
-		$this->waitForPageToLoad("30000");		
 	}
 
 	function doFrontEndLogin()
 	{
-		echo "Logging in to front end.\n";
+		$this->gotoSite();
+		echo "Logging into front end of site.\n";
 		$this->type("modlgn_username", "admin");
 		$this->type("modlgn_passwd", "password");
 		$this->click("Submit");
@@ -75,12 +77,14 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doFrontEndLogout()
 	{
-		echo "Logging out of front end.\n";
+		$this->gotoSite();
+		echo "Logging out of front end of site.\n";
 		$this->click("Submit");
 		$this->waitForPageToLoad("30000");
 	}
 	
 	function createUser($name, $userName, $password = 'password', $email = 'testuser@test.com', $group = 'Manager') {
+		$this->gotoAdmin();
 		$this->click("link=User Manager");
 		$this->waitForPageToLoad("30000");
 		echo("Add new user named " . $name . " in Group=" . $group . "\n");
@@ -140,7 +144,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	
 	function deleteTestUsers($partialName = 'My Test User')
 	{
-		echo "Browse to User Manager.\n";
+		echo "Back to User Manager.\n";
 	    $this->click("link=User Manager");
 	    $this->waitForPageToLoad("30000");
 	    
@@ -149,7 +153,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	    $this->click("//button[@type='submit']");
 	    $this->waitForPageToLoad("30000");
 	  
-	    echo "Delete all users in view.\n";
+	    echo "Delete all users in view\n";
 	    $this->click("toggle");
 	    echo("Delete new user.\n");    
 	    $this->click("link=Delete");

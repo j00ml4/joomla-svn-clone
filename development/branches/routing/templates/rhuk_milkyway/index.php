@@ -151,12 +151,8 @@ defined('_JEXEC') or die;
 						<jdoc:include type="modules" name="syndicate" />
 					</p>
 					<p id="power_by">
-						<?php 
-						$joomla = '<a href="http://www.joomla.org">Joomla!</a>'; 
-						echo JText::sprintf('TPL_RHUK_MILKYWAY_POWERED', $joomla);
-						$XHTML = '<a href="http://validator.w3.org/check/referer">XHTML</a>'; 
-						$CSS = '<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>'; 
-						echo JText::sprintf('TPL_RHUK_MILKYWAY_VALID', $XHTML, $CSS) ?>
+						<?php echo JText::_('POWERED_BY') ?> <a href="http://www.joomla.org">Joomla!</a>.
+						<?php echo JText::_('TPL_RHUK_MILKYWAY_VALID') ?> <a href="http://validator.w3.org/check/referer">XHTML</a> <?php echo JText::_('TPL_RHUK_MILKYWAY_AND') ?> <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>.
 					</p>
 				</div>
 			</div>

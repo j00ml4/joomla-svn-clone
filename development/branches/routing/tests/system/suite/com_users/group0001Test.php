@@ -13,7 +13,6 @@ class Group0001Test extends SeleniumJoomlaTestCase
 	function testCreatDeleteGroup()
 	{
   	$this->setUp();
-	$this->gotoAdmin();  	
   	$this->doAdminLogin();
     $this->click("link=Groups");
     $this->waitForPageToLoad("30000");  	

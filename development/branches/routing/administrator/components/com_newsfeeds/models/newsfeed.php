@@ -303,7 +303,7 @@ class NewsfeedsModelNewsfeed extends JModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
 				}
 			}
 			else
@@ -347,7 +347,7 @@ class NewsfeedsModelNewsfeed extends JModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
 				}
 			}
 		}
@@ -370,7 +370,6 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	 */
 	public function reorder($pk, $direction = 0)
 	{
-		$user = JFactory::getUser();
 		// Sanitize the id and adjustment.
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
 
@@ -398,12 +397,13 @@ class NewsfeedsModelNewsfeed extends JModelForm
 
 		if (!$allow)
 		{
-			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+			$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
 			return false;
 		}
 
 		// Move the row.
-		$table->move($direction, 'catid = '.$table->catid);
+		// TODO: Where clause to restrict category.
+		$table->move($pk);
 
 		// Check-in the row.
 		if (!$this->checkin($pk)) {
@@ -421,13 +421,12 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	 */
 	function saveorder($pks, $order)
 	{
-		$user = JFactory::getUser();
 		// Initialise variables.
 		$table		= $this->getTable();
 		$conditions	= array();
 
 		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));
 		}
 
 		// update ordering values
@@ -447,7 +446,7 @@ class NewsfeedsModelNewsfeed extends JModelForm
 			{
 				// Prune items that you can't change.
 				unset($pks[$i]);
-				JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
 			}
 			else if ($table->ordering != $order[$i])
 			{

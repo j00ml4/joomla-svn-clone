@@ -86,8 +86,7 @@ $user = JFactory::getUser();
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
 			$lang = &JFactory::getLanguage();
-			$lang->load($item->name, JPATH_ADMINISTRATOR)
-			|| $lang->load ($item->name, JPATH_PLUGINS.DS.$item->folder.DS.$item->element);
+			$lang->load($item->name, JPATH_ADMINISTRATOR);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
