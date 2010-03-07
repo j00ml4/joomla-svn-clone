@@ -64,6 +64,7 @@ class ContentViewFrontpage extends JView
 		{
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 			$item->catslug = $item->category_route ? ($item->catid . ':' . $item->category_route) : $item->catid;
+			$item->parent_slug = $item->parent_route ? ($item->parent_id . ':' . $item->parent_route) : $item->parent_id;
 			$item->event = new stdClass();
 
 			$dispatcher =& JDispatcher::getInstance();
