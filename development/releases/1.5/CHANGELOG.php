@@ -37,6 +37,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-Mar-2010 Ian MacLennan
+ # [#16930] Reverting patch from #16930 because it breaks the installer
+
 05-Mar-2010 Ian MacLennan
  $ [#19864] Missing string in is-IS installation ini
  # [#18648] News Feeds -> Categories can throw a SQL error when it tries to sort by section_name
