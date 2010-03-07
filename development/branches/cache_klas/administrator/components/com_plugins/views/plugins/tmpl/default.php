@@ -85,6 +85,9 @@ $user = JFactory::getUser();
 			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
+			$lang = &JFactory::getLanguage();
+			$lang->load($item->name, JPATH_ADMINISTRATOR)
+			|| $lang->load ($item->name, JPATH_PLUGINS.DS.$item->folder.DS.$item->element);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -96,9 +99,9 @@ $user = JFactory::getUser();
 					<?php endif; ?>
 					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_plugins&task=plugin.edit&id='.(int) $item->extension_id); ?>">
-							<?php echo $this->escape($item->name); ?></a>
+							<?php echo $this->escape((JText::_($item->name))); ?></a>
 					<?php else : ?>
-							<?php echo $this->escape($item->name); ?>
+							<?php echo $this->escape((JText::_($item->name))); ?>
 					<?php endif; ?>
 				</td>
 				<td class="center">

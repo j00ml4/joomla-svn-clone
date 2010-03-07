@@ -223,7 +223,8 @@ class JControllerForm extends JController
 		// Access check.
 		$key		= $table->getKeyName();
 		if (!$this->_allowEdit(array($key => $recordId), $key)) {
-			return JError::raiseWarning(403, 'JError_Core_Edit_not_permitted.');
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
+			return JError::raiseWarning(403, 'JERROR_CORE_EDIT_NOT_PERMITTED');
 		}
 
 		// If record ids do not match, checkin previous record.
@@ -377,6 +378,7 @@ class JControllerForm extends JController
 
 		// Access check.
 		if (!$this->_allowSave($data)) {
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
 			return JError::raiseWarning(403, 'JError_Save_not_permitted');
 		}
 
