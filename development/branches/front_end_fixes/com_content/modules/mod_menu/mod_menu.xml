@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="1.6.0"
+	client="site"
+	method="upgrade">
+	<name>mod_menu</name>
+	<author>Joomla! Project</author>
+	<creationDate>July 2004</creationDate>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>1.6.0</version>
+	<description>DESCMENU</description>
+	<files>
+		<filename
+			module="mod_menu">mod_menu.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.php</filename>
+		<filename>mod_menu.xml</filename>
+	</files>
+	<fields>
+		<field
+			name="menutype"
+			type="menu"
+			default=""
+			label="Menu Name"
+			description="The name of the menu default is mainmenu" />
+		<field
+			name="startLevel"
+			type="text"
+			default="0"
+			size="5"
+			label="Start Level"
+			description="fieldSTARTLEVEL" />
+
+		<field
+			name="endLevel"
+			type="text"
+			default="0"
+			size="5"
+			label="End Level"
+			description="fieldSTOPLEVEL" />
+
+		<field
+			name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
+
+		<field
+			name="showAllChildren"
+			type="radio"
+			default="0"
+			label="Always show submenu items"
+			description="fieldSHOWSUBMENUITEMS">
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+	</fields>
+
+	<fields
+		group="advanced">
+		<field
+			name="tag_id"
+			type="text"
+			default=""
+			label="Menu Tag ID"
+			description="fieldMENUTAGID" />
+
+		<field
+			name="class_sfx"
+			type="text"
+			default=""
+			label="Menu Class Suffix"
+			description="fieldMENUCLASSSUFFIX" />
+
+		<field
+			name="maxdepth"
+			type="text"
+			default="10"
+			label="Maximum Menu Depth"
+			description="fieldMENUMAXDEPTH" />
+
+		<field
+			name="window_open"
+			type="text"
+			default=""
+			label="Target Position"
+			description="fieldTARGETPOSITION" />
+
+		<field
+			name="spacer2"
+			type="spacer"
+			hr="true"
+			/>
+
+		<field
+			name="layout"
+			type="modulelayout"
+			label="JFIELD_ALT_LAYOUT_LABEL"
+			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+		<field
+			name="moduleclass_sfx"
+			type="text"
+			default=""
+			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+		<field
+			name="cache"
+			type="list"
+			default="0"
+			label="MODULES_FIELD_CACHING_LABEL"
+			description="MODULES_FIELD_CACHING_DESC">
+			<option
+				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+		</field>
+	</fields>
+</extension>
