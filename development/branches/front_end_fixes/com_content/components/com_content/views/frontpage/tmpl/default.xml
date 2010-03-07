@@ -75,6 +75,8 @@
 			<option
 				value="">JCOMMON_USE_GLOBAL</option>
 			<option
+				value="front">COM_CONTENT_FEATURED_ORDER</option>
+			<option
 				value="rdate">JGLOBAL_Most_recent_first</option>
 			<option
 				value="date">JGLOBAL_Oldest_first</option>
