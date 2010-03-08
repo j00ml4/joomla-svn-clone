@@ -968,23 +968,25 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testLoadFieldType()
 	{
-		$field = JFormInspector::loadFieldType('list');
 		$this->assertThat(
-			($field instanceof JFormFieldList),
-			$this->isTrue()
+			JFormInspector::loadFieldType('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' loadFieldType should return false if class not found.'
 		);
 
+		$this->assertThat(
+			(JFormInspector::loadFieldType('list') instanceof JFormFieldList),
+			$this->isTrue(),
+			'Line:'.__LINE__.' loadFieldType should return the correct class.'
+		);
+
+		// Add custom path.
 		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
-		$field = JFormInspector::loadFieldType('test');
-		$this->assertThat(
-			($field instanceof JFormFieldTest),
-			$this->isTrue()
-		);
 
-		$field = JFormInspector::loadFieldType('bogus');
 		$this->assertThat(
-			$field,
-			$this->isFalse()
+			(JFormInspector::loadFieldType('test') instanceof JFormFieldTest),
+			$this->isTrue(),
+			'Line:'.__LINE__.' loadFieldType should return the correct custom class.'
 		);
 	}
 
