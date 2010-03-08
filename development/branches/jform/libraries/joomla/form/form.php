@@ -380,10 +380,7 @@ class JForm
 		}
 		else {
 			// Get an array of <fieldset /> elements and fieldset attributes.
-			$sets = array_merge(
-				$this->xml->xpath('//fieldset[@name]'),
-				$this->xml->xpath('//field[@fieldset]/@fieldset')
-			);
+			$sets = $this->xml->xpath('//fieldset[@name] | //field[@fieldset]/@fieldset');
 		}
 
 		// If no fieldsets are found return empty.
