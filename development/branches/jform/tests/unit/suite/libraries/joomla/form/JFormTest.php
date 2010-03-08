@@ -56,7 +56,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array($valid, $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The libraries fields path should be included by default.'
 		);
 
 		// Test adding a custom folder.
@@ -65,7 +66,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array(dirname(__FILE__), $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
 	}
 
@@ -84,7 +86,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array($valid, $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The libraries forms path should be included by default.'
 		);
 
 		// Test adding a custom folder.
@@ -93,7 +96,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array(dirname(__FILE__), $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
 	}
 
@@ -112,7 +116,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array($valid, $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The libraries rule path should be included by default.'
 		);
 
 		// Test adding a custom folder.
@@ -121,7 +126,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			in_array(dirname(__FILE__), $paths),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
 	}
 
@@ -697,48 +703,11 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->isTrue()
 		);
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" fieldset="params-basic" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="outlier" />
-			<fieldset
-				name="params-basic">
-				<field
-					name="show_title" />
-				<field
-					name="show_abstract" />
-				<field
-					name="show_author" />
-			</fieldset>
-			<fieldset
-				name="params-advanced">
-				<field
-					name="module_prefix" />
-				<field
-					name="caching" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
-
 		// Check the test data loads ok.
 		$this->assertThat(
-			$form->load($xml),
+			$form->load(JFormDataHelper::$getFieldsetDocument),
 			$this->isTrue()
 		);
-
 
 		$fields = $form->getFieldset('params-basic');
 		$this->assertThat(
@@ -762,44 +731,9 @@ XML;
 			$this->isTrue()
 		);
 
-		$xml = <<<XML
-<form>
-	<fields>
-		<!-- Set up a group of fields called details. -->
-		<fields
-			name="details">
-			<field
-				name="title" fieldset="params-legacy" />
-			<field
-				name="abstract" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="outlier" fieldset="params-legacy" />
-			<fieldset
-				name="params-basic">
-				<field
-					name="show_title" />
-				<field
-					name="show_abstract" />
-				<field
-					name="show_author" />
-			</fieldset>
-			<fieldset
-				name="params-advanced">
-				<field
-					name="module_prefix" />
-				<field
-					name="caching" />
-			</fieldset>
-		</fields>
-	</fields>
-</form>
-XML;
 		// Check the test data loads ok.
 		$this->assertThat(
-			$form->load($xml),
+			$form->load(JFormDataHelper::$getFieldsetsDocument),
 			$this->isTrue()
 		);
 
@@ -820,125 +754,163 @@ XML;
 	{
 		$form = new JFormInspector('form1');
 
-		// Test a non-string input.
 		$this->assertThat(
-			$form->load(123),
-			$this->isFalse()
-		);
-
-		// Test an invalid string input.
-		$this->assertThat(
-			$form->load('junk'),
-			$this->isFalse()
-		);
-
-		// Test an XML string.
-		$form->load('<form><fields /></form>');
-		$data1 = clone $form->getXML();
-
-		$this->assertThat(
-			($data1 instanceof JXMLElement),
-			$this->isTrue()
-		);
-
-		// Test implied reset.
-		$form->load('<form><fields><field /><fields></form>');
-		$data2 = clone $form->getXML();
-
-		$this->assertThat(
-			$data1,
-			$this->logicalNot($this->identicalTo($data2))
-		);
-
-		// Test bad structure.
-		$this->assertThat(
-			$form->load('<foobar />'),
-			$this->isFalse()
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
 		$this->assertThat(
-			$form->load('<form><fields /><fields /></form>'),
-			$this->isTrue()
+			($form->getXML() instanceof JXMLElement),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The internal XML should be a JXMLElement object.'
 		);
 
-		// Test merging.
+		// Test reset false.
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadMergeDocument, false),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			count($form->getXML()->xpath('/form/fields/field')),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' There is 1 new ungrouped field and one existing field should merge, resulting in 3 total.'
+		);
+
+		// Test reset true (default).
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadMergeDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			count($form->getXML()->xpath('/form/fields/field')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The XML resets to 2 ungrouped fields.'
+		);
+
+		$this->assertThat(
+			count($form->getXML()->xpath('/form/fields/fields')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The XML has 2 fields tags.'
+		);
+
+		$this->assertThat(
+			count($form->getXML()->xpath('/form/fields/fields[@name="params"]/field')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The params groups field has been replaced.'
+		);
+
+		$this->assertThat(
+			count($form->getXML()->xpath('/form/fields/fields[@name="params"]/field[@name="show_abstract"]')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The show_title in the params group has been replaced by show_abstract.'
+		);
+	}
+
+	/**
+	 * Test the JForm::load method for cases of unexpected or bad input.
+	 *
+	 * This method can load an XML data object, or parse an XML string.
+	 */
+	public function testLoad_BadInput()
+	{
 		$form = new JFormInspector('form1');
 
-		$xml1 = <<<XML
-<form>
-	<fields>
-		<field
-			name="title" />
-		<field
-			name="abstract" />
-
-		<fields
-			name="params">
-			<field
-				name="show_title"
-				type="radio">
-				<option value="1">JYes</option>
-				<option value="0">JNo</option>
-			</field>
-		</fields>
-	</fields>
-</form>
-XML;
-		// Load the data (checking it was ok).
 		$this->assertThat(
-			$form->load($xml1),
-			$this->isTrue()
+			$form->load(123),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A non-string should return false.'
 		);
 
-		$xml2 = <<<XML
-<form>
-	<fields>
-		<field
-			name="published"
-			type="list">
-			<option
-				value="1">JYes</option>
-			<option
-				value="0">JNo</option>
-		</field>
-		<field
-			name="abstract"
-			label="Abstract" />
-
-		<fields
-			label="A general group">
-			<field
-				name="access" />
-			<field
-				name="ordering" />
-		</fields>
-		<fields
-			name="params">
-			<field
-				name="show_abstract"
-				type="radio">
-				<option value="1">JYes</option>
-				<option value="0">JNo</option>
-			</field>
-		</fields>
-		<fieldset>
-			<field
-				name="language"
-				type="text"/>
-		</fieldset>
-	</fields>
-</form>
-XML;
-		// Merge in the second batch of data (checking it was ok).
 		$this->assertThat(
-			$form->load($xml2, false),
-			$this->isTrue()
+			$form->load('junk'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' An invalid string should return false.'
+		);
+
+		$this->assertThat(
+			$form->getXml(),
+			$this->isNull(),
+			'Line:'.__LINE__.' The internal XML should be false as returned from simplexml_load_string.'
+		);
+
+		$this->assertThat(
+			$form->load('<notform><test /></notform>'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Invalid root node name from string should still load.'
 		);
 
 		$this->assertThat(
 			$form->getXml()->getName(),
-			$this->equalTo('form')
+			$this->equalTo('form'),
+			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
+
+		// Test for irregular object input.
+
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFactory::getXml('<notform><test /></notform>', false)),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Invalid root node name from XML object should still load.'
+		);
+
+		$this->assertThat(
+			$form->getXml()->getName(),
+			$this->equalTo('form'),
+			'Line:'.__LINE__.' The internal XML should still be named "form".'
+		);
+	}
+
+	/**
+	 * Test the JForm::load method for merging data.
+	 *
+	 * This method can load an XML data object, or parse an XML string.
+	 */
+	public function testLoad_Merging()
+	{
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load('<form><fields><field /></fields></form>'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+		$data2 = clone $form->getXML();
+
+		$this->assertThat(
+			$form->getXML(),
+			$this->equalTo(JFactory::getXml('<form><fields><field /></fields></form>', false)),
+			'Line:'.__LINE__.' The XML data should reset after second load.'
+		);
+
+		// Test merging.
+
+		$form = new JFormInspector('form1');
+
+		// Load the data (checking it was ok).
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		// Merge in the second batch of data (checking it was ok).
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadMergeDocument, false),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->markTestIncomplete('Need to test that the merge was ok.');
+
 		/*$dom = new DOMDocument('1.0');
 		$dom->preserveWhiteSpace = false;
 		$dom->formatOutput = true;
@@ -947,80 +919,41 @@ XML;
 	}
 
 	/**
-	 * Test for JForm::load method where an XML string is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form.
+	 * Test the JForm::load method for XPath data.
+	 *
+	 * This method can load an XML data object, or parse an XML string.
 	 */
-	public function testLoadStringNotForm()
+	public function testLoad_XPath()
 	{
 		$form = new JFormInspector('form1');
 
-		$xml = '<notform><test /></notform>';
-
-		// Merge in the second batch of data (checking it was ok).
 		$this->assertThat(
-			$form->load($xml, false),
-			$this->isTrue()
+			$form->load(JFormDataHelper::$loadXPathDocument, true, '/extension/fields'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
+
+		/*$dom = new DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($form->getXml()->asXML());
+		echo $dom->saveXML();*/
+
 
 		$this->assertThat(
 			$form->getXml()->getName(),
-			$this->equalTo('form')
-		);
-	}
-
-	/**
-	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form.
-	 */
-	public function testLoadObjectNotForm()
-	{
-		$form = new JFormInspector('form1');
-
-		$xml = JFactory::getXml('<notform><test /></notform>', false);
-
-		// Merge in the second batch of data (checking it was ok).
-		$this->assertThat(
-			$form->load($xml, false),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			$form->getXml()->getName(),
-			$this->equalTo('form')
-		);
-	}
-
-	/**
-	 * Test for JForm::load method where an JXMLElement  is passed that is not a form.
-	 * The method tests to ensure that the internal XML string is set to be a form.
-	 */
-	public function testLoadXPath()
-	{
-		$form = new JFormInspector('form1');
-
-		$xml = JFactory::getXml(JFormDataHelper::$loadXPathDocument, false);
-
-		// Merge in the second batch of data (checking it was ok).
-		$this->assertThat(
-			$form->load($xml, true, '/form/fields'),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			$form->getXml()->getName(),
-			$this->equalTo('form')
+			$this->equalTo('form'),
+			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
 
 		$this->assertThat(
 			count($form->getXml()->fields),
-			$this->equalTo(2)
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The test data has 2 fields.'
 		);
 		$zml = $form->getXml();
 		//print_r($zml);
-
 	}
-
-
 
 	/**
 	 * Test for JForm::loadField method.
