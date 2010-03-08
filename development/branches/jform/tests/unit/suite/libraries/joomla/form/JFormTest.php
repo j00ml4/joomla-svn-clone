@@ -168,7 +168,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
 		$data = array(
@@ -248,16 +249,15 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	{
 		$form = new JFormInspector('form1');
 
-		$xml = JFormDataHelper::$filterDocument;
-
 		// Check the test data loads ok.
 		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
+			$form->load(JFormDataHelper::$filterDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
 		$data = array(
-			'title'		=> 'Joomla Framework',
+			'word'		=> 'Joomla! Framework',
 			'author'	=> 'Should not bind',
 			'params'	=> array(
 				'show_title'	=> 1,
@@ -268,35 +268,37 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$filtered = $form->filter($data);
 
-		// Filter the data.
 		$this->assertThat(
-			(bool)$filtered,
-			$this->isTrue()
-		);
-
-		// Bind the data.
-		$this->assertThat(
-			($filtered['title'] === 'JoomlaFramework'),
-			$this->isTrue()
-		);
-
-		// Bind the data.
-		$this->assertThat(
-			(!isset($filtered['author'])),
-			$this->isTrue()
+			is_array($filtered),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The filtered result should be an array.'
 		);
 
 		$this->assertThat(
-			($filtered['params']['show_author'] === 1),
-			$this->isTrue()
+			$filtered['word'],
+			$this->equalTo('JoomlaFramework'),
+			'Line:'.__LINE__.' The variable should be filtered by the "word" filter.'
 		);
 
 		$this->assertThat(
-			($filtered['params']['show_abstract'] === 0),
-			$this->isTrue()
+			isset($filtered['author']),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A variable in the data not present in the form should not exist.'
 		);
 
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->assertThat(
+			$filtered['params']['show_author'],
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The nested variable should be present.'
+		);
+
+		$this->assertThat(
+			$filtered['params']['show_abstract'],
+			$this->equalTo(0),
+			'Line:'.__LINE__.' The nested variable should be present.'
+		);
+
+		$this->markTestIncomplete('More test cases are required.');
 	/*
 		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
 
@@ -407,7 +409,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
 		// Check that a non-existant field returns nothing.
@@ -463,8 +466,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			count($form->findGroup('bogus')),
-			$this->equalTo(0),
+			$form->findGroup('bogus'),
+			$this->equalTo(array()),
 			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
 		);
 
@@ -475,8 +478,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			count($form->findGroup('bogus.data')),
-			$this->equalTo(0),
+			$form->findGroup('bogus.data'),
+			$this->equalTo(array()),
 			'Line:'.__LINE__.' A group path that does not exist should return an empty array.'
 		);
 
@@ -509,7 +512,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
 		// Check that a non-existant group returns nothing.
@@ -541,38 +545,48 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		// Check the test data loads ok.
 		$this->assertThat(
-			$form->findFieldsByGroup('foo'),
-			$this->isFalse()
+			$form->load(JFormDataHelper::$findFieldsByGroupDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		$xml = JFormDataHelper::$findFieldsByGroupDocument;
+		// Error handling.
 
-		// Check the test data loads ok.
 		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
+			$form->findFieldsByGroup('bogus'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
 		);
 
-		// Check that a non-existant group returns nothing.
-		$fields = $form->findFieldsByGroup('foo');
+		// Test all fields
+
 		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
+			count($form->findFieldsByGroup()),
+			$this->equalTo(9),
+			'Line:'.__LINE__.' There are 9 field elements in total.'
 		);
 
-		// Check the valid groups.
-		$fields = $form->findFieldsByGroup('details');
+		// Test ungrouped fields
+
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(2)
+			count($form->findFieldsByGroup(false)),
+			$this->equalTo(4),
+			'Line:'.__LINE__.' There are 4 ungrouped field elements.'
 		);
 
-		$fields = $form->findFieldsByGroup('params');
+		// Test grouped fields
+
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(3)
+			count($form->findFieldsByGroup('details')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The details group has 2 field elements.'
+		);
+
+		$this->assertThat(
+			count($form->findFieldsByGroup('params')),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' The params group has 3 field elements, including one nested in a fieldset.'
 		);
 	}
 
@@ -780,8 +794,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			count($form->getFieldset('bogus')),
-			$this->equalTo(0),
+			$form->getFieldset('bogus'),
+			$this->equalTo(array()),
 			'Line:'.__LINE__.' A fieldset that does not exist should return an empty array.'
 		);
 
@@ -834,8 +848,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Test loading by group.
 
 		$this->assertThat(
-			count($form->getFieldsets('bogus')),
-			$this->equalTo(0),
+			$form->getFieldsets('bogus'),
+			$this->equalTo(array()),
 			'Line:'.__LINE__.' A fieldset that in a group that does not exist should return an empty array.'
 		);
 

@@ -31,9 +31,9 @@ class JFormInspector extends JForm
 		return parent::findGroup($group);
 	}
 
-	public function findFieldsByGroup($name)
+	public function findFieldsByGroup($group = null, $nested = false)
 	{
-		return parent::findFieldsByGroup($name);
+		return parent::findFieldsByGroup($group, $nested);
 	}
 
 	public function findFieldsByFieldset($name)
