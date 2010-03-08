@@ -1235,6 +1235,8 @@ class JForm
 	 * Method to get an array of <field /> elements from the form XML document which are
 	 * in a control group by name.
 	 *
+	 * If the group is not specified, all ungrouped fields will be returned.
+	 *
 	 * @param	string	$group	The optional dot-separated form group path on which to find the fields.
 	 * @param	boolean	$nested	True to also include fields in nested groups that are inside of the
 	 * 							group for which to find fields.
@@ -1288,7 +1290,7 @@ class JForm
 		}
 		else {
 			// Get an array of all the <field /> elements.
-			$fields = $this->xml->xpath('//field');
+			$fields = $this->xml->xpath('descendant::fields[not(@name)]/field | descendant::fields[not(@name)]/fieldset/field ');
 		}
 
 		return $fields;
