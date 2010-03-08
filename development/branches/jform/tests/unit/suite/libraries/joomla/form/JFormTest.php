@@ -594,19 +594,99 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$xml = JFormDataHelper::$getFieldDocument;
 
-		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load($xml),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		$field = $form->getField('show_title', 'params');
+		// Check for errors.
+
 		$this->assertThat(
-			$field->value,
-			$this->equalTo(1)
+			$form->getField('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A field that does not exist should return false.'
 		);
 
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->assertThat(
+			$form->getField('show_title'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A field that does exists in a group, without declaring the group, should return false.'
+		);
+
+		$this->assertThat(
+			$form->getField('show_title', 'bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A field in a group that does not exist should return false.'
+		);
+
+		// Checking value defaults.
+
+		$this->assertThat(
+			$form->getField('title')->value,
+			$this->equalTo(''),
+			'Line:'.__LINE__.' Prior to binding data, the defaults in the field should be used.'
+		);
+
+		$this->assertThat(
+			$form->getField('show_title', 'params')->value,
+			$this->equalTo(1),
+			'Line:'.__LINE__.' Prior to binding data, the defaults in the field should be used.'
+		);
+
+		// Check values after binding.
+
+		$data = array(
+			'title' => 'The title',
+			'show_title' => 3,
+			'params' => array(
+				'show_title' => 2,
+			)
+		);
+
+		$this->assertThat(
+			$form->bind($data),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The input data should bind successfully.'
+		);
+
+		$this->assertThat(
+			$form->getField('title')->value,
+			$this->equalTo('The title'),
+			'Line:'.__LINE__.' Check the field value bound correctly.'
+		);
+
+		$this->assertThat(
+			$form->getField('show_title', 'params')->value,
+			$this->equalTo(2),
+			'Line:'.__LINE__.' Check the field value bound correctly.'
+		);
+
+		// Check binding with an object.
+
+		$data = new stdClass;
+		$data->title = 'The new title';
+		$data->show_title = 5;
+		$data->params = new stdClass;
+		$data->params->show_title = 4;
+
+		$this->assertThat(
+			$form->bind($data),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The input data should bind successfully.'
+		);
+
+		$this->assertThat(
+			$form->getField('title')->value,
+			$this->equalTo('The new title'),
+			'Line:'.__LINE__.' Check the field value bound correctly.'
+		);
+
+		$this->assertThat(
+			$form->getField('show_title', 'params')->value,
+			$this->equalTo(4),
+			'Line:'.__LINE__.' Check the field value bound correctly.'
+		);
 	}
 
 	/**
@@ -626,14 +706,16 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$form->getFormControl(),
-			$this->equalTo('')
+			$this->equalTo(''),
+			'Line:'.__LINE__.' A form control that has not been specified should return nothing.'
 		);
 
 		$form = new JForm('form8ion', array('control' => 'jform'));
 
 		$this->assertThat(
 			$form->getFormControl(),
-			$this->equalTo('jform')
+			$this->equalTo('jform'),
+			'Line:'.__LINE__.' The form control should agree with the options passed in the constructor.'
 		);
 	}
 
@@ -670,7 +752,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$form->getName(),
-			$this->equalTo('form1')
+			$this->equalTo('form1'),
+			'Line:'.__LINE__.' The form name should agree with the argument passed in the constructor.'
 		);
 	}
 
