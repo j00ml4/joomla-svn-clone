@@ -151,7 +151,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$fields = $xml1->xpath('fields/field[@name="foo"]');
 		$this->assertThat(
 			count($fields),
-			$this->equalTo(1)
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The field should be added, ungrouped.'
 		);
 	}
 
@@ -182,22 +183,23 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			)
 		);
 
-		// Bind the data.
 		$this->assertThat(
 			$form->bind($data),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The data should bind successfully.'
 		);
 
-		// Get the data to inspect it.
 		$data = $form->getData();
 		$this->assertThat(
-			($data->get('title') == 'Joomla Framework'),
-			$this->isTrue()
+			$data->get('title'),
+			$this->equalTo('Joomla Framework'),
+			'Line:'.__LINE__.' The data should bind to form field elements.'
 		);
 
 		$this->assertThat(
-			((bool) $data->get('author')),
-			$this->isFalse()
+			$data->get('author'),
+			$this->isNull(),
+			'Line:'.__LINE__.' The data should not bind to unknown form field elements.'
 		);
 	}
 
@@ -208,35 +210,37 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testConstruct()
 	{
-		// Check the empty contructor for basic errors.
 		$form = new JFormInspector('form1');
 
 		$this->assertThat(
 			($form instanceof JForm),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The JForm constuctor should return a JForm object.'
 		);
 
 		// Check the integrity of the options.
+
 		$options = $form->getOptions();
 		$this->assertThat(
 			isset($options['control']),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' The JForm object should contain an options array with a control setting.'
 		);
 
 		$options = $form->getOptions();
 		$this->assertThat(
 			$options['control'],
-			$this->isFalse()
+			$this->isFalse(),
+			'Line:'.__LINE__.' The control setting should be false by default.'
 		);
 
-		// Test setting the control value.
 		$form = new JFormInspector('form1', array('control' => 'jform'));
 
 		$options = $form->getOptions();
-
 		$this->assertThat(
 			$options['control'],
-			$this->equalTo('jform')
+			$this->equalTo('jform'),
+			'Line:'.__LINE__.' The control setting should be what is passed in the constructor.'
 		);
 	}
 
@@ -466,39 +470,32 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		// Check the test data loads ok.
 		$this->assertThat(
-			$form->findFieldsByFieldset('foo'),
-			$this->isFalse()
-		);
-
-		$xml = JFormDataHelper::$findFieldsByFieldsetDocument;
-
-		// Check the test data loads ok.
-		$this->assertThat(
-			$form->load($xml),
+			$form->load(JFormDataHelper::$findFieldsByFieldsetDocument),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		// Check that a non-existant group returns nothing.
-		$fields = $form->findFieldsByFieldset('foo');
+		// Error handling.
+
 		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
+			$form->findFieldsByFieldset('bogus'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' An unknown fieldset should return an empty array.'
 		);
 
-		// Check the valid fieldsets.
-		$fields = $form->findFieldsByFieldset('params-basic');
+		// Test regular usage.
+
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(3)
+			count($form->findFieldsByFieldset('params-basic')),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' The params-basic fieldset has 3 fields.'
 		);
 
-		$fields = $form->findFieldsByFieldset('params-advanced');
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(2)
+			count($form->findFieldsByFieldset('params-advanced')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The params-advanced fieldset has 2 fields.'
 		);
 	}
 
@@ -1068,7 +1065,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$dom->formatOutput = true;
 		$dom->loadXML($form->getXml()->asXML());
 		echo $dom->saveXML();*/
-
 
 		$this->assertThat(
 			$form->getXml()->getName(),
