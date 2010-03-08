@@ -690,23 +690,22 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		// Check the test data loads ok.
-		$fields = $form->getFieldset('params-advanced');
-		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
-		);
-
-		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load(JFormDataHelper::$getFieldsetDocument),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		$fields = $form->getFieldset('params-basic');
 		$this->assertThat(
-			count($fields) == 4,
-			$this->isTrue()
+			count($form->getFieldset('bogus')),
+			$this->equalTo(0),
+			'Line:'.__LINE__.' A fieldset that does not exist should return an empty array.'
+		);
+
+		$this->assertThat(
+			count($form->getFieldset('params-basic')),
+			$this->equalTo(4),
+			'Line:'.__LINE__.' There are 3 field elements in a fieldset and 1 field element marked with the fieldset attribute.'
 		);
 	}
 
@@ -718,19 +717,58 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load(JFormDataHelper::$getFieldsetsDocument),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
+		$sets = $form->getFieldsets();
+		$this->assertThat(
+			count($sets),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' The source data has 3 fieldsets in total.'
+		);
+
+		$this->assertThat(
+			$sets['params-advanced']->name,
+			$this->equalTo('params-advanced'),
+			'Line:'.__LINE__.' Ensure the fieldset name is correct.'
+		);
+
+		$this->assertThat(
+			$sets['params-advanced']->label,
+			$this->equalTo('Advanced Options'),
+			'Line:'.__LINE__.' Ensure the fieldset label is correct.'
+		);
+
+		$this->assertThat(
+			$sets['params-advanced']->description,
+			$this->equalTo('The advanced options'),
+			'Line:'.__LINE__.' Ensure the fieldset description is correct.'
+		);
+
+		// Test loading by group.
+
+		$this->assertThat(
+			count($form->getFieldsets('bogus')),
+			$this->equalTo(0),
+			'Line:'.__LINE__.' A fieldset that in a group that does not exist should return an empty array.'
+		);
+
 		$sets = $form->getFieldsets('details');
 		$this->assertThat(
 			count($sets),
 			$this->equalTo(1),
-			'Line:'.__LINE__.' .'
+			'Line:'.__LINE__.' The details group has one field marked with a fieldset'
 		);
+
+		$this->assertThat(
+			$sets['params-legacy']->name,
+			$this->equalTo('params-legacy'),
+			'Line:'.__LINE__.' Ensure the fieldset name is correct.'
+		);
+
 	}
 
 	/**
