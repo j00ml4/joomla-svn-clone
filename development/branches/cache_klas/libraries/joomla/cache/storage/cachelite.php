@@ -34,13 +34,14 @@ class JCacheStorageCachelite extends JCacheStorage
 	function __construct($options = array())
 	{
 		parent::__construct($options);
+		
 		$this->_root	= $options['cachebase'];
 
 		$cloptions = array(
 			'cacheDir' 					=> $this->_root.DS,
 			'lifeTime' 					=> $this->_lifetime,
 			'fileLocking'   			=> $this->_locking,
-			'automaticCleaningFactor'	=> 200,
+			'automaticCleaningFactor'	=> isset($options['autoclean']) ? $options['autoclean'] : 200,
 			'fileNameProtection'		=> false,
 			'hashedDirectoryLevel'		=> 0,
 			'caching' 					=> $options['caching']
@@ -217,9 +218,24 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @return boolean  True on success, false otherwise.
 	 */
 	function gc()
-	{
-		self::$CacheLiteInstance->setOption('automaticCleaningFactor ', 1);
-		$sucess = self::$CacheLiteInstance->clean(false, 'old');
+	{	$result = true;
+		self::$CacheLiteInstance->setOption('automaticCleaningFactor', 1);
+		self::$CacheLiteInstance->setOption('hashedDirectoryLevel', 1);
+		$test = self::$CacheLiteInstance;
+		$sucess1 = self::$CacheLiteInstance->_cleanDir($this->_root.DS,false, 'old');
+	    if (!($dh = opendir($this->_root.DS))) {
+            return false; // $this->raiseError('Cache_Lite : Unable to open cache directory !', -4);
+        }
+		    while ($file = readdir($dh)) {
+            if (($file != '.') && ($file != '..') && ($file != '.svn')) {
+            	$file2 = $this->_root.DS.$file;
+                    if (is_dir($file2)) {
+                        $result = ($result and (self::$CacheLiteInstance->_cleanDir($file2.DS, false, 'old')));
+                    }
+                
+            }
+		    }
+        $sucess = $sucess1 and $result;
 		return $sucess;
 	}
 
