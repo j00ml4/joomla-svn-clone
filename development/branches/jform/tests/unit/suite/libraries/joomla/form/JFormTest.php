@@ -413,42 +413,49 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		// Check that a non-existant field returns nothing.
-		$field = $form->findField('foo', null);
+		// Error handling.
+
 		$this->assertThat(
-			$field,
-			$this->isFalse()
+			$form->findField('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' An ungrouped field that does not exist should return false.'
 		);
 
-		// Check that a non-existant group returns nothing.
-		$field = $form->findField('title', 'foo');
 		$this->assertThat(
-			$field,
-			$this->isFalse()
+			$form->findField('title', 'bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' An field in a group that does not exist should return false.'
 		);
 
-		// Check for a groupless field.
+		// Test various find combinations.
+
 		$field = $form->findField('title', null);
 		$this->assertThat(
 			(string) $field['place'],
-			$this->equalTo('root')
+			$this->equalTo('root'),
+			'Line:'.__LINE__.' A known ungrouped field should load successfully.'
 		);
 
-		// Check for a grouped field.
 		$field = $form->findField('title', 'params');
 		$this->assertThat(
 			(string) $field['place'],
-			$this->equalTo('child')
+			$this->equalTo('child'),
+			'Line:'.__LINE__.' A known grouped field should load successfully.'
 		);
 
-		// Check for a field in a fieldset.
-		$field = $form->findField('alias', null);
+		$field = $form->findField('alias');
 		$this->assertThat(
 			(string) $field['name'],
-			$this->equalTo('alias')
+			$this->equalTo('alias'),
+			'Line:'.__LINE__.' A known field in a fieldset should load successfully.'
 		);
 
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$field = $form->findField('show_title', 'params');
+		$this->assertThat(
+			(string) $field['default'],
+			$this->equalTo('1'),
+			'Line:'.__LINE__.' A known field in a group fieldset should load successfully.'
+		);
 	}
 
 	/**
