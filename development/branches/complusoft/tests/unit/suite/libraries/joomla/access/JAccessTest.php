@@ -5,14 +5,8 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @package		JoomlaFramework
  */
-                // ****************************************
-                //Complusoft JoomlaTeam - Antonio Escobar
-                //                      -Pedro Vidal
-                //                      - Sergio Iglesias
-                //                      - Jonathan Bar-Magen
-                //
-                //Support: JoomlaTeam@Complusoft.es
-                //*****************************************
+                
+ //Complusoft JoomlaTeam - Support: JoomlaTeam@Complusoft.es
 require_once JPATH_BASE.'/libraries/joomla/access/access.php';
 /**
  * Test class for JAccess.
