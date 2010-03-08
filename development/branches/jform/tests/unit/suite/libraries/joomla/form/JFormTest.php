@@ -456,41 +456,35 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		$xml = JFormDataHelper::$findGroupDocument;
-
-
-		// Check the test data loads ok.
 		$this->assertThat(
-			$form->load($xml),
-			$this->isTrue()
+			$form->load(JFormDataHelper::$findGroupDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		// Check that a non-existant group returns nothing.
-		$fields = $form->findGroup('foo');
 		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
+			count($form->findGroup('bogus')),
+			$this->equalTo(0),
+			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
 		);
 
-		// Check that an existant field returns something.
-		$fields = $form->findGroup('params');
 		$this->assertThat(
-			empty($fields),
-			$this->isFalse()
+			count($form->findGroup('params')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The group should have one element.'
 		);
 
-		// Check that a non-existant field returns nothing.
-		$fields = $form->findGroup('cache.params');
 		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
+			count($form->findGroup('bogus.data')),
+			$this->equalTo(0),
+			'Line:'.__LINE__.' A group path that does not exist should return an empty array.'
 		);
 
 		// Check that an existant field returns something.
-		$fields = $form->findGroup('params.cache');
 		$this->assertThat(
-			empty($fields),
-			$this->isFalse()
+			count($form->findGroup('params.cache')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The group should have one element.'
 		);
 
 		$this->markTestIncomplete('This test has not been implemented yet.');
@@ -725,23 +719,17 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$form = new JFormInspector('form1');
 
 		// Check the test data loads ok.
-		$fields = $form->getFieldset('params-advanced');
-		$this->assertThat(
-			empty($fields),
-			$this->isTrue()
-		);
-
-		// Check the test data loads ok.
 		$this->assertThat(
 			$form->load(JFormDataHelper::$getFieldsetsDocument),
-			$this->isTrue()
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
 		);
-
 
 		$sets = $form->getFieldsets('details');
 		$this->assertThat(
-			count($sets) == 1,
-			$this->isTrue()
+			count($sets),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' .'
 		);
 	}
 
