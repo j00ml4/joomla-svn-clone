@@ -35,7 +35,7 @@ class JFormDataHelper
 		description="All the fields">
 		<!-- Set up a group of fields called details. -->
 		<field
-			name="title" filter="word" />
+			name="word" filter="word" />
 		<fields
 			name="details"
 			description="The Details Group">
@@ -120,6 +120,17 @@ class JFormDataHelper
 
 	public static $findFieldsByGroupDocument = '<form>
 	<fields>
+		<field
+			name="id" />
+
+		<fieldset
+			name="metadata">
+			<field
+				name="date_created" />
+			<field
+				name="date_modified" />
+		</fieldset>
+
 		<!-- Set up a group of fields called details. -->
 		<fields
 			name="details">
@@ -128,6 +139,7 @@ class JFormDataHelper
 			<field
 				name="abstract" />
 		</fields>
+
 		<fields
 			name="params">
 			<field
@@ -140,6 +152,9 @@ class JFormDataHelper
 					name="show_author" />
 			</fieldset>
 		</fields>
+
+		<field
+			name="language" />
 	</fields>
 </form>';
 
@@ -247,7 +262,9 @@ class JFormDataHelper
 					name="show_author" />
 			</fieldset>
 			<fieldset
-				name="params-advanced">
+				name="params-advanced"
+				label="Advanced Options"
+				description="The advanced options">
 				<field
 					name="module_prefix" />
 				<field
