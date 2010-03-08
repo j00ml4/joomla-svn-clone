@@ -452,48 +452,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test the JForm::findGroup method.
-	 */
-	public function testFindGroup()
-	{
-		// Prepare the form.
-		$form = new JFormInspector('form1');
-
-		$this->assertThat(
-			$form->load(JFormDataHelper::$findGroupDocument),
-			$this->isTrue(),
-			'Line:'.__LINE__.' XML string should load successfully.'
-		);
-
-		$this->assertThat(
-			$form->findGroup('bogus'),
-			$this->equalTo(array()),
-			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
-		);
-
-		$this->assertThat(
-			count($form->findGroup('params')),
-			$this->equalTo(1),
-			'Line:'.__LINE__.' The group should have one element.'
-		);
-
-		$this->assertThat(
-			$form->findGroup('bogus.data'),
-			$this->equalTo(array()),
-			'Line:'.__LINE__.' A group path that does not exist should return an empty array.'
-		);
-
-		// Check that an existant field returns something.
-		$this->assertThat(
-			count($form->findGroup('params.cache')),
-			$this->equalTo(1),
-			'Line:'.__LINE__.' The group should have one element.'
-		);
-
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
-	/**
 	 * Tests the JForm::findFieldsByFieldset method.
 	 */
 	public function testFindFieldsByFieldset()
@@ -588,6 +546,48 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->equalTo(3),
 			'Line:'.__LINE__.' The params group has 3 field elements, including one nested in a fieldset.'
 		);
+	}
+
+	/**
+	 * Test the JForm::findGroup method.
+	 */
+	public function testFindGroup()
+	{
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$findGroupDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->findGroup('bogus'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
+		);
+
+		$this->assertThat(
+			count($form->findGroup('params')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The group should have one element.'
+		);
+
+		$this->assertThat(
+			$form->findGroup('bogus.data'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' A group path that does not exist should return an empty array.'
+		);
+
+		// Check that an existant field returns something.
+		$this->assertThat(
+			count($form->findGroup('params.cache')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The group should have one element.'
+		);
+
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
