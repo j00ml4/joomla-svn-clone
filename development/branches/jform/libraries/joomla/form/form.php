@@ -433,7 +433,7 @@ class JForm
 				}
 			}
 		}
-print_r($fieldsets);die;
+
 		return $fieldsets;
 	}
 
