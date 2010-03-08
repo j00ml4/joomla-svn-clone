@@ -8,14 +8,10 @@
 
 /**
  * @package		JoomlaFramework
-                // ****************************************
-                //Complusoft JoomlaTeam - Antonio Escobar
-                //                      -Pedro Vidal
-                //                      - Sergio Iglesias
-                //                      - Jonathan Bar-Magen
-                //                      
-                //Support: JoomlaTeam@Complusoft.es
-                //*****************************************
+                
+//Complusoft JoomlaTeam - Support: JoomlaTeam@Complusoft.es
+                
+                             
  */
 class JRuleTest extends PHPUnit_Framework_TestCase
 {
@@ -60,6 +56,7 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 			2	=> 1,
 			3	=> 0
 		);
+                
                 $string_A          = json_encode($array_A);
                 $rule_A	= new JRule($string_A);
 		$this->assertNotEquals(
@@ -111,6 +108,7 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 			json_encode($array),
 			(string) $rule
 		);
+               
                 // Check that import equals export.
                
                 
