@@ -78,7 +78,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	{
 		$data = false;
 		self::$CacheLiteInstance->setOption('cacheDir', $this->_root.DS.$group.DS);
-		$cache_id = $this->_getCacheId($id, $group);
+		$this->_getCacheId($id, $group);
 		$data = self::$CacheLiteInstance->get($this->rawname,$group);
 		return $data;
 	}
@@ -142,7 +142,7 @@ class JCacheStorageCachelite extends JCacheStorage
 			return false;
 		}
 		self::$CacheLiteInstance->setOption('cacheDir', $this->_root.DS.$group.DS);
-		$cache_id = $this->_getCacheId($id, $group);
+		$this->_getCacheId($id, $group);
 		$sucess = self::$CacheLiteInstance->save($data,$this->rawname,$group);
 		if($sucess == true) return $sucess; else return false;
 
@@ -160,7 +160,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	function remove($id, $group)
 	{
 		self::$CacheLiteInstance->setOption('cacheDir', $this->_root.DS.$group.DS);
-		$cache_id = $this->_getCacheId($id, $group);
+		$this->_getCacheId($id, $group);
 		$sucess = self::$CacheLiteInstance->remove($this->rawname,$group);
 		if($sucess == true) return $sucess; else return false;
 	}
