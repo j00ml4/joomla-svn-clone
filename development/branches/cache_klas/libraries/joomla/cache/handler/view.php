@@ -118,7 +118,7 @@ class JCacheView extends JCache
 			$buffer2 = $document->getBuffer();
 			
 			// Make sure the module buffer is an array.
-			f (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
+			if (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
 				$buffer2['module'] = array();
 			}
 

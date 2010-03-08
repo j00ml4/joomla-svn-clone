@@ -54,6 +54,7 @@ class JCache extends JObject
 			'language'		=> $conf->getValue('config.language','en-GB'),
 			'storage'		=> $conf->getValue('config.cache_handler', 'file'),
 			'defaultgroup'=>'default',
+			'locking'=>true,
 			'caching'=>true
 		);
 
