@@ -997,21 +997,49 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	{
 		$form = new JFormInspector('form1');
 
-		// Check that this file won't be found.
+		// Test for files that don't exist.
+
 		$this->assertThat(
-			$form->load('example.xml'),
-			$this->isFalse()
+			$form->loadFile('/tmp/example.xml'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A file path that does not exist should return false.'
 		);
 
-		// Add the local path and check the file loads.
-		JForm::addFormPath(dirname(__FILE__));
+		$this->assertThat(
+			$form->loadFile('notfound'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' A file name that does not exist should return false.'
+		);
 
-		$form->load('example.xml');
-		$data1 = $form->getXML();
+		// Testing loading a file by full path.
 
 		$this->assertThat(
-			($data1 instanceof JXMLElement),
-			$this->isFalse()
+			$form->loadFile(dirname(__FILE__).'/example.xml'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML file by full path should load successfully.'
+		);
+
+		$this->assertThat(
+			($form->getXML() instanceof JXMLElement),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should parse successfully.'
+		);
+
+		// Testing loading a file by file name.
+
+		$form = new JFormInspector('form1');
+		JForm::addFormPath(dirname(__FILE__));
+
+		$this->assertThat(
+			$form->loadFile('example'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML file by name should load successfully.'
+		);
+
+		$this->assertThat(
+			($form->getXML() instanceof JXMLElement),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should parse successfully.'
 		);
 	}
 
