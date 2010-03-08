@@ -380,7 +380,10 @@ class JForm
 		}
 		else {
 			// Get an array of <fieldset /> elements and fieldset attributes.
-			$sets = $this->xml->xpath('//fieldset[@name] | //field[@fieldset]/@fieldset');
+			$sets = array_merge(
+				$this->xml->xpath('//fieldset[@name]'),
+				$this->xml->xpath('//field[@fieldset]/@fieldset')
+			);
 		}
 
 		// If no fieldsets are found return empty.
@@ -433,7 +436,7 @@ class JForm
 				}
 			}
 		}
-
+print_r($fieldsets);die;
 		return $fieldsets;
 	}
 
