@@ -272,10 +272,12 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.5
 	 */
 	function _getFilePath($id, $group)
-	{
-		$folder	= $group;
-		$name	= md5($this->_application.'-'.$id.'-'.$this->_hash.'-'.$this->_language).'.php';
-		$dir	= $this->_root.DS.$folder;
+	{	/*$name	= md5($this->_application.'-'.$id.'-'.$this->_language.'-'.$this->_safeuriaddon);
+		return $this->_hash.'-cache-'.$group.'-'.$name;
+		$folder	= $group;*/
+		//$name	= md5($this->_application.'-'.$id.'-'.$this->_hash.'-'.$this->_language).'.php';
+		$name	= $this->_getCacheId($id, $group);
+		$dir	= $this->_root.DS.$group;
 
 		// If the folder doesn't exist try to create it
 		if (!is_dir($dir)) {

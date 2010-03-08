@@ -21,6 +21,9 @@ defined('JPATH_BASE') or die;
  */
 class JCacheStorage extends JObject
 {
+	
+	public $rawname;
+	
 	/**
 	* Constructor
 	*
@@ -218,6 +221,7 @@ class JCacheStorage extends JObject
 	function _getCacheId($id, $group)
 	{	
 		$name	= md5($this->_application.'-'.$id.'-'.$this->_language.'-'.$this->_safeuriaddon);
+		$this->rawname = $this->_hash.'-'.$name;
 		return $this->_hash.'-cache-'.$group.'-'.$name;
 	}
 }

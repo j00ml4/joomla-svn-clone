@@ -62,8 +62,6 @@ class JCacheStorageApc extends JCacheStorage
 		
 		$keys = $allinfo['cache_list'];
 		
-		print_r($keys);
-		
         $secret = $this->_hash;
         $data = array();		
 
