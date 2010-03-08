@@ -73,7 +73,8 @@ class JFormDataHelper
 			<fieldset
 				label="Basic">
 				<field
-					name="show_title" />
+					name="show_title"
+					default="1" />
 			</fieldset>
 			<fieldset
 				label="Advanced">
