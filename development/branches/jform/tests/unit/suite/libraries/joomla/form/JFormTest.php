@@ -1063,7 +1063,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>');
 
 		if ($xml1 === false || $xml2 === false) {
-			$this->fail('Error in text XML data');
+			$this->fail('Line:'.__LINE__.' Error in text XML data');
 		}
 
 		JFormInspector::mergeNode($xml1->field, $xml2->field);
@@ -1071,7 +1071,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$fields = $xml1->xpath('field[@name="foo"] | field[@type="text"]');
 		$this->assertThat(
 			count($fields),
-			$this->equalTo(1)
+			$this->equalTo(1),
+			'Line:'.__LINE__.' Existing attribute "name" should merge, new attribute "type" added.'
 		);
 	}
 
@@ -1087,21 +1088,27 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>');
 
 		if ($xml1 === false || $xml2 === false) {
-			$this->fail('Error in text XML data');
+			$this->fail('Line:'.__LINE__.' Error in text XML data');
 		}
 
 		JFormInspector::mergeNodes($xml1->fields, $xml2->fields);
 
-		$fields = $xml1->xpath('fields/field[@name="foo"] | fields/field[@type="text"]');
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(1)
+			count($xml1->xpath('fields/field')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The merge should have two field tags, one existing, one new.'
 		);
 
-		$fields = $xml1->xpath('fields/field[@name="soap"]');
 		$this->assertThat(
-			count($fields),
-			$this->equalTo(1)
+			count($xml1->xpath('fields/field[@name="foo"] | fields/field[@type="text"]')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' A field of the same name should merge.'
+		);
+
+		$this->assertThat(
+			count($xml1->xpath('fields/field[@name="soap"]')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' A new field should be added.'
 		);
 	}
 
