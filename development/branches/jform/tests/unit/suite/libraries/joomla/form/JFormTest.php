@@ -520,15 +520,15 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
 		);
 
-		// Test all fields
+		// Test all fields.
 
 		$this->assertThat(
 			count($form->findFieldsByGroup()),
-			$this->equalTo(9),
+			$this->equalTo(11),
 			'Line:'.__LINE__.' There are 9 field elements in total.'
 		);
 
-		// Test ungrouped fields
+		// Test ungrouped fields.
 
 		$this->assertThat(
 			count($form->findFieldsByGroup(false)),
@@ -536,7 +536,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' There are 4 ungrouped field elements.'
 		);
 
-		// Test grouped fields
+		// Test grouped fields.
 
 		$this->assertThat(
 			count($form->findFieldsByGroup('details')),
@@ -548,6 +548,14 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			count($form->findFieldsByGroup('params')),
 			$this->equalTo(3),
 			'Line:'.__LINE__.' The params group has 3 field elements, including one nested in a fieldset.'
+		);
+
+		// Test nested fields.
+
+		$this->assertThat(
+			count($form->findFieldsByGroup('level1', true)),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' There should be 2 nested fields.'
 		);
 	}
 
@@ -769,11 +777,46 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test for JForm::getLabel method.
+	 * Test for JForm::getGroup method.
 	 */
 	public function testGetGroup()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// Prepare the form.
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$findFieldsByGroupDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		// Test error handling.
+
+		$this->assertThat(
+			$form->getGroup('bogus'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' A group that does not exist should return an empty array.'
+		);
+
+		// Test general usage.
+
+		$this->assertThat(
+			count($form->getGroup('params')),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' The params group should have 3 field elements.'
+		);
+
+		$this->assertThat(
+			count($form->getGroup('level1', true)),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The level1 group should have 2 nested field elements.'
+		);
+
+		$this->assertThat(
+			count($form->getGroup('level1.level2')),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The level2 group should have 1 field element.'
+		);
 	}
 
 	/**
