@@ -293,7 +293,7 @@ class JForm
 		$element = $this->findField($name, $group);
 
 		// If the element exists and the attribute exists for the field return the attribute value.
-		if ((!$element instanceof JXMLElement) && ((string) $element[$attribute])) {
+		if (($element instanceof JXMLElement) && ((string) $element[$attribute])) {
 			return (string) $element[$attribute];
 		}
 		// Otherwise return the given default value.
