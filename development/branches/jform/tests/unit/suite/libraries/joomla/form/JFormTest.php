@@ -609,10 +609,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		// Prepare the form.
 		$form = new JFormInspector('form1');
 
-		$xml = JFormDataHelper::$getFieldDocument;
-
 		$this->assertThat(
-			$form->load($xml),
+			$form->load(JFormDataHelper::$getFieldDocument),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
@@ -711,7 +709,41 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testGetFieldAttribute()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$getFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		// Test error handling.
+
+		$this->assertThat(
+			$form->getFieldAttribute('bogus', 'unknown', 'Help'),
+			$this->equalTo('Help'),
+			'Line:'.__LINE__.' The default value of the unknown field should be returned.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'unknown', 'Use this'),
+			$this->equalTo('Use this'),
+			'Line:'.__LINE__.' The default value of the unknown attribute should be returned.'
+		);
+
+		// Test general usage.
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'description'),
+			$this->equalTo('The title.'),
+			'Line:'.__LINE__.' The value of the attribute should be returned.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'description', 'Use this'),
+			$this->equalTo('The title.'),
+			'Line:'.__LINE__.' The value of the attribute should be returned.'
+		);
 	}
 
 	/**
