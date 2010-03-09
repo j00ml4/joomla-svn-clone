@@ -424,4 +424,26 @@ class JFormDataHelper
 		</fields>
 	</fields>
 </extension>';
+
+	public static $loadBeforeXpathResetDocument = '<form>
+	<fields>
+		<field
+			name="title" />
+
+		<field
+			name="abstract" />
+
+		<fields
+			name="params">
+			<field
+				name="show_title"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+		</fields>
+	</fields>
+</form>';
+
+
 }
