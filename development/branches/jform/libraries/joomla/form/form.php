@@ -635,7 +635,7 @@ class JForm
 
 					// If set to replace found fields remove it from the current definition.
 					if ($replace) {
-						unset ($current);
+						unset($current);
 					}
 
 					// Else remove it from the incoming definition so it isn't replaced.'
