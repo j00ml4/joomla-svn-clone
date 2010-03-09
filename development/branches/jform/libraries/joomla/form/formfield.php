@@ -160,46 +160,19 @@ abstract class JFormField
 	 */
 	public function __get($name)
 	{
-		switch ($name)
-		{
-			case 'id':
-				return $this->id;
-				break;
-
-			case 'name':
-				return $this->name;
-				break;
-
-			case 'value':
-				return $this->value;
-				break;
-
+		switch ($name) {
+			case 'class':
 			case 'description':
-				return $this->description;
-				break;
-
-			case 'required':
-				return $this->required;
-				break;
-
-			case 'validate':
-				return $this->validate;
-				break;
-
-			case 'multiple':
-				return $this->multiple;
-				break;
-
-			case 'hidden':
-				return $this->hidden;
-				break;
-
-			case 'type':
-				return $this->type;
-				break;
-
 			case 'formControl':
-				return $this->formControl;
+			case 'hidden':
+			case 'id':
+			case 'multiple':
+			case 'name':
+			case 'required':
+			case 'type':
+			case 'validate':
+			case 'value':
+				return $this->$name;
 				break;
 
 			case 'input':
@@ -257,7 +230,7 @@ abstract class JFormField
 	public function setup(& $element, $value, $group = null)
 	{
 		// Make sure there is a valid JFormField XML element.
-		if ((!$element instanceof JXMLElement) && ((string) $element->getName() == 'field')) {
+		if (!($element instanceof JXMLElement) || (string) $element->getName() != 'field') {
 			return false;
 		}
 
@@ -276,12 +249,12 @@ abstract class JFormField
 		$required	= (string) $element['required'];
 
 		// Set the required and validation options.
-		$this->required		= ($required == 'true' || $required == 'required');
-		$this->validate		= (string) $element['validate'];
+		$this->required	= ($required == 'true' || $required == 'required');
+		$this->validate	= (string) $element['validate'];
 
 		// Add the required class if the field is required.
 		if ($this->required) {
-			if($class) {
+			if ($class) {
 				if (strpos($class, 'required') === false) {
 					$this->element['class'] = $class.' required';
 				}
@@ -311,7 +284,7 @@ abstract class JFormField
 		// Set the field default value.
 		$this->value = $value;
 
-		 return true;
+		return true;
 	}
 
 	/**
