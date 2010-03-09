@@ -1088,9 +1088,9 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		//$this->_showXml($form);die;
 
 		$this->assertThat(
-			count($form->getXML()->xpath('/field | //fields[not(@name)]/field | //fields[not(@name)]/fieldset/field')),
+			count($form->findFieldsByGroup(false)),
 			$this->equalTo(6),
-			'Line:'.__LINE__.' The XML merged to 6 ungrouped fields.'
+			'Line:'.__LINE__.' There are 2 original ungrouped fields, 1 replaced and 4 new, resulting in 6 total.'
 		);
 
 		$this->assertThat(
@@ -1102,7 +1102,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		$this->assertThat(
 			count($form->getXML()->xpath('//fields[@name="params"]/field')),
 			$this->equalTo(2),
-			'Line:'.__LINE__.' The params fields have been merged ending with 2.'
+			'Line:'.__LINE__.' The params fields have been merged ending with 2 elements.'
 		);
 
 		$this->assertThat(
@@ -1189,13 +1189,12 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
 
+		$this->_showXml($form);die;
 		$this->assertThat(
 			count($form->getXml()->fields),
 			$this->equalTo(2),
 			'Line:'.__LINE__.' The test data has 2 fields.'
 		);
-		$zml = $form->getXml();
-		//print_r($zml);
 	}
 
 	/**
