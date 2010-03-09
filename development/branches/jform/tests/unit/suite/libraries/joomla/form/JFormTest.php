@@ -17,7 +17,6 @@
  */
 class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 {
-
 	/**
 	 * set up for testing
 	 *
@@ -1086,7 +1085,26 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testLoadField()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		// Error handling.
+
+		$this->assertThat(
+			$form->loadField('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' An unknown field should return false.'
+		);
+
+		// Test correct usage.
+
+		$field = $form->getField('title');
+		$field = $form->loadField($field);
 	}
 
 	/**

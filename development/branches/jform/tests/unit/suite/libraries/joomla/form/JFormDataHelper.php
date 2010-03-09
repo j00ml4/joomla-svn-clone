@@ -295,6 +295,48 @@ class JFormDataHelper
 	</fields>
 </form>';
 
+	public static $loadFieldDocument = '<form>
+	<fields>
+		<field
+			name="id"
+			type="hidden" />
+
+		<field
+			name="created_date"
+			type="text"
+			hidden="true" />
+
+		<field
+			name="title"
+			type="text"
+			id="title-id"
+			class="inputbox"
+			required="true"
+			validate="none"
+			label="Title"
+			description="The title." />
+
+		<fields
+			name="params">
+			<field
+				name="show_title"
+				type="radio">
+				<option value="1">JYes</option>
+				<option value="0">JNo</option>
+			</field>
+			<field
+				name="colours"
+				type="list"
+				multiple="true">
+				<option value="red">Red</option>
+				<option value="blue">Blue</option>
+				<option value="green">Green</option>
+				<option value="yellow">Yellow</option>
+			</field>
+		</fields>
+	</fields>
+</form>';
+
 	public static $loadMergeDocument = '<form>
 	<fields>
 		<field

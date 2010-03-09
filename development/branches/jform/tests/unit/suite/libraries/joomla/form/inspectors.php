@@ -3,6 +3,7 @@
  * Inspector classes for the forms library.
  */
 require_once JPATH_BASE.'/libraries/joomla/form/form.php';
+require_once JPATH_BASE.'/libraries/joomla/form/formfield.php';
 
 class JFormInspector extends JForm
 {
@@ -59,8 +60,36 @@ class JFormInspector extends JForm
 		return $this->xml;
 	}
 
+	public function loadField($element, $group = null, $value = null)
+	{
+		return parent::loadField($element, $group, $value);
+	}
+
 	public function loadFieldType($type, $new = true)
 	{
 		return parent::loadFieldType($type, $new);
+	}
+}
+
+class JFormFieldInspector extends JFormField
+{
+	public function getInput()
+	{
+		return null;
+	}
+
+	public function getForm()
+	{
+		return $this->form;
+	}
+
+	public function getId($fieldId, $fieldName, $group = null)
+	{
+		return parent::getId($fieldId, $fieldName, $group);
+	}
+
+	public function getLabel()
+	{
+		return parent::getLabel();
 	}
 }
