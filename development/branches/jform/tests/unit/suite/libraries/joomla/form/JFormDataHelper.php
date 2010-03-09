@@ -194,7 +194,8 @@ class JFormDataHelper
 	<fields>
 		<field
 			name="title"
-			type="text" />
+			type="text"
+			description="The title." />
 		<fields
 			name="params">
 			<field
