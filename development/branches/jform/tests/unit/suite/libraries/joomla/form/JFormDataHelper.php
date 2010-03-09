@@ -156,6 +156,17 @@ class JFormDataHelper
 
 		<field
 			name="language" />
+
+		<fields
+			name="level1">
+			<field
+				name="field1" />
+			<fields
+				name="level2">
+				<field
+					name="field2" />
+			</fields>
+		</fields>
 	</fields>
 </form>';
 
