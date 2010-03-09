@@ -1088,21 +1088,21 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		//$this->_showXml($form);die;
 
 		$this->assertThat(
-			count($form->getXML()->xpath('/form/fields/field')),
-			$this->equalTo(2),
-			'Line:'.__LINE__.' The XML resets to 2 ungrouped fields.'
+			count($form->getXML()->xpath('/field | //fields[not(@name)]/field | //fields[not(@name)]/fieldset/field')),
+			$this->equalTo(6),
+			'Line:'.__LINE__.' The XML merged to 6 ungrouped fields.'
 		);
 
 		$this->assertThat(
-			count($form->getXML()->xpath('/form/fields/fields')),
+			count($form->getXML()->xpath('//fields[@name]')),
 			$this->equalTo(2),
-			'Line:'.__LINE__.' The XML has 2 fields tags.'
+			'Line:'.__LINE__.' The XML has 2 fields tags with a name attribute.'
 		);
 
 		$this->assertThat(
-			count($form->getXML()->xpath('/form/fields/fields[@name="params"]/field')),
-			$this->equalTo(1),
-			'Line:'.__LINE__.' The params groups field has been replaced.'
+			count($form->getXML()->xpath('//fields[@name="params"]/field')),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The params fields have been merged ending with 2.'
 		);
 
 		$this->assertThat(
