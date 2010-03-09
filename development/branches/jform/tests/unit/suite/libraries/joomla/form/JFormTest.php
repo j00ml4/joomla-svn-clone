@@ -781,7 +781,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testGetGroup()
 	{
-		// Prepare the form.
 		$form = new JFormInspector('form1');
 
 		$this->assertThat(
@@ -824,7 +823,54 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testGetInput()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->getInput('title', null, 'The Title'),
+			$this->equalTo('<input type="text" name="title" id="title_id" value="The Title" class="inputbox required"/>'),
+			'Line:'.__LINE__.' The method should return a simple input text field.'
+		);
+
+		$this->assertThat(
+			$form->getInput('show_title', 'params', '0'),
+			$this->equalTo(
+				'<fieldset id="params_show_title" class="radio">' .
+					'<input type="radio" id="params_show_title0" name="params[show_title]" value="1"/>' .
+					'<label for="params_show_title0">Yes</label>' .
+					'<input type="radio" id="params_show_title1" name="params[show_title]" value="0" checked="checked"/>' .
+					'<label for="params_show_title1">No</label>' .
+				'</fieldset>'
+			),
+			'Line:'.__LINE__.' The method should return a radio list.'
+		);
+
+		$form = new JFormInspector('form1', array('control' => 'jform'));
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->getInput('colours', 'params', 'blue'),
+			$this->equalTo(
+				'<select id="jform_params_colours" name="jform[params][colours][]" multiple="multiple">' .
+				"\n".'	<option value="red">Red</option>' .
+				"\n".'	<option value="blue" selected="selected">Blue</option>' .
+				"\n".'	<option value="green">Green</option>' .
+				"\n".'	<option value="yellow">Yellow</option>' .
+				"\n".'</select>'.
+				"\n"
+			),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
 	}
 
 	/**
@@ -832,7 +878,19 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testGetLabel()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->getLabel('title'),
+			$this->equalTo('<label id="title_id-lbl" for="title_id" class="hasTip required" title="Title::The title.">Title</label>'),
+			'Line:'.__LINE__.' The method should return a simple label field.'
+		);
 	}
 
 	/**
@@ -854,7 +912,29 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testGetValue()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadFieldDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$data = array(
+			'title'		=> 'Avatar',
+		);
+
+		$this->assertThat(
+			$form->bind($data),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The data should bind successfully.'
+		);
+
+		$this->assertThat(
+			$form->getValue('title'),
+			$this->equalTo('Avatar'),
+			'Line:'.__LINE__.' The bind value should be returned.'
+		);
 	}
 
 	/**
