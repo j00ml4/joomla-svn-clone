@@ -33,22 +33,41 @@ class JFormDataHelper
 	public static $filterDocument = '<form>
 	<fields
 		description="All the fields">
-		<!-- Set up a group of fields called details. -->
+		<field
+			name="default" />
+
+		<field
+			name="function" filter="jFormDataFilter" />
+
+		<field
+			name="int" filter="int" />
+
+		<field
+			name="method" filter="JFormDataHelper::filter" />
+
+		<field
+			name="raw" filter="raw" />
+
+		<field
+			name="safehtml" filter="safehtml" />
+
+		<field
+			name="server_utc" filter="2009-01-01 00:00:00" />
+
+		<field
+			name="unset" filter="unset" />
+
+		<field
+			name="user_utc" filter="2009-01-01 00:00:00" />
+
 		<field
 			name="word" filter="word" />
-		<fields
-			name="details"
-			description="The Details Group">
-			<field
-				name="abstract" />
-		</fields>
+
 		<fields
 			name="params"
 			description="Optional Settings">
 			<field
 				name="show_title" filter="int" />
-			<field
-				name="show_abstract" filter="int" />
 			<fieldset
 				name="basic">
 				<field
@@ -445,5 +464,13 @@ class JFormDataHelper
 	</fields>
 </form>';
 
+	public function filter($value)
+	{
+		return 'method';
+	}
+}
 
+function jFormDataFilter($value)
+{
+	return 'function';
 }
