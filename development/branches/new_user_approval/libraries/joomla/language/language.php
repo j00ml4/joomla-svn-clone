@@ -422,7 +422,7 @@ class JLanguage extends JObject
 				}
 			}
 		}
-		if (!empty($php_errormsg)) {
+		if (!empty($php_errormsg) || JFactory::getApplication()->getCfg('debug')) {
 			$errors = array();
 			$lineNumber = 0;
 			$stream = new JStream();
@@ -431,13 +431,20 @@ class JLanguage extends JObject
 			{
 				$line = $stream->gets();
 				$lineNumber++;
-				if (!preg_match('/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*=(("[^"]*")|(_QQ_)|\s)*))\s*(;.*)?$/',$line))
+				if (!preg_match('/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*\s*=(\s*(("[^"]*")|(_QQ_)))+))\s*(;.*)?$/',$line))
 				{
 					$errors[] = $lineNumber;
 				}
 			}
 			$stream->close();
-			JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+			if (count($errors)) {
+				if (basename($filename)!=$this->_lang.'.ini') {
+					JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+				else {
+					JError::raiseWarning(500, sprintf('The language file %1$s was not read correctly: error in lines %2$s',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+			}
 			//JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
 		}
 		ini_restore('track_errors');
@@ -783,3 +790,4 @@ class JLanguage extends JObject
 		return $metadata;
 	}
 }
+
