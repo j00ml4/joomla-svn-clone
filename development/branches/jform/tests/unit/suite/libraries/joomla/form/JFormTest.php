@@ -17,6 +17,15 @@
  */
 class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 {
+	private function _showXml($form)
+	{
+		$dom = new DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($form->getXml()->asXML());
+		echo $dom->saveXML();
+	}
+
 	/**
 	 * set up for testing
 	 *
@@ -1047,7 +1056,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' The internal XML should be a JXMLElement object.'
 		);
 
-		// Test reset false.
+		// Test replace false.
 
 		$this->assertThat(
 			$form->load(JFormDataHelper::$loadMergeDocument, false),
@@ -1057,17 +1066,26 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			count($form->getXML()->xpath('/form/fields/field')),
-			$this->equalTo(3),
-			'Line:'.__LINE__.' There is 1 new ungrouped field and one existing field should merge, resulting in 3 total.'
+			$this->equalTo(4),
+			'Line:'.__LINE__.' There are 2 new ungrouped field and one existing field should merge, resulting in 4 total.'
 		);
 
-		// Test reset true (default).
+		// Test replace true (default).
+
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
 
 		$this->assertThat(
 			$form->load(JFormDataHelper::$loadMergeDocument),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
+		//$this->_showXml($form);die;
 
 		$this->assertThat(
 			count($form->getXML()->xpath('/form/fields/field')),
@@ -1151,55 +1169,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test the JForm::load method for merging data.
-	 *
-	 * This method can load an XML data object, or parse an XML string.
-	 */
-	public function testLoad_Merging()
-	{
-		$form = new JFormInspector('form1');
-
-		$this->assertThat(
-			$form->load('<form><fields><field /></fields></form>'),
-			$this->isTrue(),
-			'Line:'.__LINE__.' XML string should load successfully.'
-		);
-		$data2 = clone $form->getXML();
-
-		$this->assertThat(
-			$form->getXML(),
-			$this->equalTo(JFactory::getXml('<form><fields><field /></fields></form>', false)),
-			'Line:'.__LINE__.' The XML data should reset after second load.'
-		);
-
-		// Test merging.
-
-		$form = new JFormInspector('form1');
-
-		// Load the data (checking it was ok).
-		$this->assertThat(
-			$form->load(JFormDataHelper::$loadDocument),
-			$this->isTrue(),
-			'Line:'.__LINE__.' XML string should load successfully.'
-		);
-
-		// Merge in the second batch of data (checking it was ok).
-		$this->assertThat(
-			$form->load(JFormDataHelper::$loadMergeDocument, false),
-			$this->isTrue(),
-			'Line:'.__LINE__.' XML string should load successfully.'
-		);
-
-		$this->markTestIncomplete('Need to test that the merge was ok.');
-
-		/*$dom = new DOMDocument('1.0');
-		$dom->preserveWhiteSpace = false;
-		$dom->formatOutput = true;
-		$dom->loadXML($form->getXml()->asXML());
-		echo $dom->saveXML();*/
-	}
-
-	/**
 	 * Test the JForm::load method for XPath data.
 	 *
 	 * This method can load an XML data object, or parse an XML string.
@@ -1213,12 +1182,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
-
-		/*$dom = new DOMDocument('1.0');
-		$dom->preserveWhiteSpace = false;
-		$dom->formatOutput = true;
-		$dom->loadXML($form->getXml()->asXML());
-		echo $dom->saveXML();*/
 
 		$this->assertThat(
 			$form->getXml()->getName(),
