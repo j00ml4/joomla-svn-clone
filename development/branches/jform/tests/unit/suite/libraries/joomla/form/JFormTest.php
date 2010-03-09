@@ -1189,7 +1189,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
 
-		$this->_showXml($form);die;
 		$this->assertThat(
 			count($form->getXml()->fields),
 			$this->equalTo(2),
@@ -1380,7 +1379,37 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testRemoveField()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->removeField('title'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The removeField method should return true.'
+		);
+
+		$this->assertThat(
+			$form->findField('title'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' The field should be removed.'
+		);
+
+		$this->assertThat(
+			$form->removeField('show_title', 'params'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The removeField method should return true.'
+		);
+
+		$this->assertThat(
+			$form->findField('show_title', 'params'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' The field should be removed.'
+		);
 	}
 
 	/**
@@ -1388,7 +1417,25 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testRemoveGroup()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->removeGroup('params'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The removeGroup method should return true.'
+		);
+
+		$this->assertThat(
+			$form->findGroup('params'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' The group should be removed, returning an empty array.'
+		);
 	}
 
 	/**
