@@ -136,7 +136,8 @@ class JFormDataHelper
 		<fields
 			name="details">
 			<field
-				name="title" />
+				name="title"
+				label="Title" />
 			<field
 				name="abstract" />
 		</fields>

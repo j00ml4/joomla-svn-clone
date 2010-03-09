@@ -301,30 +301,5 @@ class JFormFieldTest extends JoomlaTestCase
 			$this->isTrue(),
 			'Line:'.__LINE__.' The hidden property should be set from the hidden attribute.'
 		);
-
-		// Test for custom control.
-		$form = new JFormInspector('form1', array('control' => 'jform'));
-
-		$this->assertThat(
-			$form->load(JFormDataHelper::$loadFieldDocument),
-			$this->isTrue(),
-			'Line:'.__LINE__.' XML string should load successfully.'
-		);
-
-		$xml = $form->getXML();
-		$colours = array_pop($xml->xpath('fields/fields[@name="params"]/field[@name="colours"]'));
-
-		$this->assertThat(
-			$field->setup($colours, 'red', 'params'),
-			$this->isTrue(),
-			'Line:'.__LINE__.' The setup method should return true if successful.'
-		);
-
-		$this->assertThat(
-			$field->name,
-			$this->equalTo('jform[params][colours][]'),
-			'Line:'.__LINE__.' The property should be computed from the XML.'
-		);
-
 	}
 }
