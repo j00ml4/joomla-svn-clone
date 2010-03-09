@@ -35,6 +35,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	{
 		$this->saveFactoryState();
 		jimport('joomla.form.form');
+		jimport('joomla.utilities.xmlelement');
 		include_once 'inspectors.php';
 		include_once 'JFormDataHelper.php';
 	}
@@ -145,10 +146,10 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	public function testAddNode()
 	{
 		// The source data.
-		$xml1 = simplexml_load_string('<form><fields /></form>');
+		$xml1 = simplexml_load_string('<form><fields /></form>', 'JXMLElement');
 
 		// The new data for adding the field.
-		$xml2 = simplexml_load_string('<form><field name="foo" /></form>');
+		$xml2 = simplexml_load_string('<form><field name="foo" /></form>', 'JXMLElement');
 
 		if ($xml1 === false || $xml2 === false) {
 			$this->fail('Error in text XML data');
@@ -1319,10 +1320,10 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	public function testMergeNode()
 	{
 		// The source data.
-		$xml1 = simplexml_load_string('<form><field name="foo" /></form>');
+		$xml1 = simplexml_load_string('<form><field name="foo" /></form>', 'JXMLElement');
 
 		// The new data for adding the field.
-		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>');
+		$xml2 = simplexml_load_string('<form><field name="bar" type="text" /></form>', 'JXMLElement');
 
 		if ($xml1 === false || $xml2 === false) {
 			$this->fail('Line:'.__LINE__.' Error in text XML data');
@@ -1344,10 +1345,10 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	public function testMergeNodes()
 	{
 		// The source data.
-		$xml1 = simplexml_load_string('<form><fields><field name="foo" /></fields></form>');
+		$xml1 = simplexml_load_string('<form><fields><field name="foo" /></fields></form>', 'JXMLElement');
 
 		// The new data for adding the field.
-		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>');
+		$xml2 = simplexml_load_string('<form><fields><field name="foo" type="text" /><field name="soap" /></fields></form>', 'JXMLElement');
 
 		if ($xml1 === false || $xml2 === false) {
 			$this->fail('Line:'.__LINE__.' Error in text XML data');
@@ -1528,7 +1529,47 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testSetField()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$xml1 = simplexml_load_string('<form><field name="title" required="true" /></form>', 'JXMLElement');
+
+		if ($xml1 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		// Test without replace.
+
+		$this->assertThat(
+			$form->setField($xml1->field[0], null, false),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The setField method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'required', 'default'),
+			$this->equalTo('default'),
+			'Line:'.__LINE__.' The label should contain just the field name.'
+		);
+
+		// Test with replace.
+
+		$this->assertThat(
+			$form->setField($xml1->field[0], null, true),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The setField method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'required', 'default'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The label should contain just the new label.'
+		);
 	}
 
 	/**
@@ -1536,7 +1577,37 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testSetFieldAttribute()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$this->assertThat(
+			$form->setFieldAttribute('title', 'label', 'The Title'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'label'),
+			$this->equalTo('The Title'),
+			'Line:'.__LINE__.' The new value should be set.'
+		);
+
+		$this->assertThat(
+			$form->setFieldAttribute('show_title', 'label', 'Show Title', 'params'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('show_title', 'label', 'default', 'params'),
+			$this->equalTo('Show Title'),
+			'Line:'.__LINE__.' The new value of the grouped field should be set.'
+		);
 	}
 
 	/**
@@ -1544,7 +1615,39 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testSetFields()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$xml1 = simplexml_load_string('<form><field name="title" required="true" /><field name="ordering" /></form>', 'JXMLElement');
+
+		if ($xml1 === false) {
+			$this->fail('Error in text XML data');
+		}
+
+		// Test without replace.
+
+		$this->assertThat(
+			$form->setFields($xml1->field, null, false),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The setFields method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getFieldAttribute('title', 'required', 'default'),
+			$this->equalTo('default'),
+			'Line:'.__LINE__.' The label should contain just the field name.'
+		);
+
+		$this->assertThat(
+			$form->getField('ordering'),
+			$this->logicalNot($this->isFalse()),
+			'Line:'.__LINE__.' The label should contain just the field name.'
+		);
 	}
 
 	/**
@@ -1552,7 +1655,47 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testSetValue()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		// Test error handling.
+
+		$this->assertThat(
+			$form->setValue('bogus', null, 'Unknown'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' An unknown field cannot have its value set.'
+		);
+
+		// Test regular usage.
+
+		$this->assertThat(
+			$form->setValue('title', null, 'The Title'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Should return true for a known field.'
+		);
+
+		$this->assertThat(
+			$form->getValue('title', null, 'default'),
+			$this->equalTo('The Title'),
+			'Line:'.__LINE__.' The new value should return.'
+		);
+
+		$this->assertThat(
+			$form->setValue('show_title', 'params', '3'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Should return true for a known field.'
+		);
+
+		$this->assertThat(
+			$form->getValue('show_title', 'params', 'default'),
+			$this->equalTo('3'),
+			'Line:'.__LINE__.' The new value should return.'
+		);
 	}
 
 	/**
