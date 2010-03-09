@@ -274,8 +274,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			'author'	=> 'Should not bind',
 			'params'	=> array(
 				'show_title'	=> 1,
-				'show_abstract'	=> false,
-				'show_author'	=> '1',
+				'show_author'	=> false,
 			)
 		);
 
@@ -286,6 +285,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->isTrue(),
 			'Line:'.__LINE__.' The filtered result should be an array.'
 		);
+
+		// Test that filtering is occuring (not that all filters work - done in testFilterField).
 
 		$this->assertThat(
 			$filtered['word'],
@@ -300,18 +301,84 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		);
 
 		$this->assertThat(
-			$filtered['params']['show_author'],
+			$filtered['params']['show_title'],
 			$this->equalTo(1),
 			'Line:'.__LINE__.' The nested variable should be present.'
 		);
 
 		$this->assertThat(
-			$filtered['params']['show_abstract'],
+			$filtered['params']['show_author'],
 			$this->equalTo(0),
 			'Line:'.__LINE__.' The nested variable should be present.'
 		);
+	}
 
-		$this->markTestIncomplete('More test cases are required.');
+	/**
+	 * Test for JForm::filterField method.
+	 */
+	public function testFilterField()
+	{
+		$form = new JFormInspector('form1');
+
+		// Check the test data loads ok.
+		$this->assertThat(
+			$form->load(JFormDataHelper::$filterDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$input = '<script>alert();</script> <p>Some text.</p>';
+
+		$this->assertThat(
+			$form->filterField($form->findField('function'), $input),
+			$this->equalTo('function'),
+			'Line:'.__LINE__.' The function filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('int'), 'A1B2C3'),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The "int" filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('method'), $input),
+			$this->equalTo('method'),
+			'Line:'.__LINE__.' The class method filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('raw'), $input),
+			$this->equalTo($input),
+			'Line:'.__LINE__.' "The safehtml" filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('safehtml'), $input),
+			$this->equalTo('alert(); <p>Some text.</p>'),
+			'Line:'.__LINE__.' "The safehtml" filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('unset'), $input),
+			$this->equalTo(null),
+			'Line:'.__LINE__.' The value should be unset.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('word'), $input),
+			$this->equalTo('scriptalertscriptpSometextp'),
+			'Line:'.__LINE__.' The "word" filter should be correctly applied.'
+		);
+
+		$this->assertThat(
+			$form->filterField($form->findField('default'), $input),
+			$this->equalTo('alert(); Some text.'),
+			'Line:'.__LINE__.' The default strict filter should be correctly applied.'
+		);
+
+		$this->markTestIncomplete('Need to deal with SERVER_UTC and USER_UTC filters');
+
 	/*
 		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
 
@@ -334,40 +401,8 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 
 		$text = '<script>alert();</script> <p>Some text</p>';
 		$data = array(
-			'f_text' => $text,
-			'f_safe_text' => $text,
-			'f_raw_text' => $text,
 			'f_svr_date' => '2009-01-01 00:00:00',
 			'f_usr_date' => '2009-01-01 00:00:00',
-			'f_unset' => 1
-		);
-
-		$result = $form->filter($data);
-
-		// Check that the unset filter worked.
-		$this->assertThat(
-			isset($result['f_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_safe_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_raw_text']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_svr_date']),
-			$this->isTrue()
-		);
-
-		$this->assertThat(
-			isset($result['f_unset']),
-			$this->isFalse()
 		);
 
 		// Check the date filters.
@@ -380,33 +415,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 		//	$result['f_usr_date'],
 		//	$this->equalTo('2009-01-01 05:00:00')
 		//);
-
-		// Check that text filtering worked.
-		$this->assertThat(
-			$result['f_raw_text'],
-			$this->equalTo($text)
-		);
-
-		$this->assertThat(
-			$result['f_text'],
-			$this->equalTo('alert(); Some text')
-		);
-
-		$this->assertThat(
-			$result['f_safe_text'],
-			$this->equalTo('alert(); <p>Some text</p>')
-		);
-
-		$this->markTestIncomplete();
 	*/
-	}
-
-	/**
-	 * Test for JForm::filterField method.
-	 */
-	public function testFilterField()
-	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
@@ -607,8 +616,6 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->equalTo(1),
 			'Line:'.__LINE__.' The group should have one element.'
 		);
-
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
