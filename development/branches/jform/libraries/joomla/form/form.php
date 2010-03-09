@@ -623,7 +623,7 @@ class JForm
 		foreach ($elements as $element) {
 
 			// Get an array of fields with the correct name.
-			$fields = $element->xpath('//descendant-or-self::field');
+			$fields = $element->xpath('descendant-or-self::field');
 			foreach ($fields as $field) {
 
 				// Get the group names as strings for anscestor fields elements.
@@ -635,7 +635,8 @@ class JForm
 
 					// If set to replace found fields remove it from the current definition.
 					if ($replace) {
-						unset($current);
+						$dom = dom_import_simplexml($current);
+						$dom->parentNode->removeChild($dom);
 					}
 
 					// Else remove it from the incoming definition so it isn't replaced.'
@@ -1164,7 +1165,7 @@ class JForm
 
 			// Use the first correct match in the given group.
 			$groupNames = explode('.', $group);
-			foreach ($fields as $field) {
+			foreach ($fields as & $field) {
 
 				// Get the group names as strings for anscestor fields elements.
 				$attrs = $field->xpath('ancestor::fields[@name]/@name');
@@ -1172,7 +1173,7 @@ class JForm
 
 				// If the field is in the exact group use it and break out of the loop.
 				if ($names == (array) $groupNames) {
-					$element = $field;
+					$element = & $field;
 					break;
 				}
 			}
@@ -1187,14 +1188,14 @@ class JForm
 			}
 
 			// Search through the fields for the right one.
-			foreach ($fields as $field) {
+			foreach ($fields as & $field) {
 				// If we find an anscestor fields element with a group name then it isn't what we want.
 				if ($field->xpath('ancestor::fields[@name]')) {
 					continue;
 				}
 				// Found it!
 				else {
-					$element = $field;
+					$element = & $field;
 					break;
 				}
 			}
