@@ -615,7 +615,7 @@ class JForm
 
 						foreach ($groups as $group) {
 							$unsets = (array) $this->xml->xpath('//fields[@name="'.$group.'"]');
-							foreach ($unsets as & $unset) {
+							foreach ($unsets as $unset) {
 								unset($unset);
 							}
 						}
@@ -648,7 +648,7 @@ class JForm
 
 					foreach ($groups as $group) {
 						$unsets = (array) $this->xml->xpath('//fields[@name="'.$group.'"]');
-						foreach ($unsets as & $unset) {
+						foreach ($unsets as $unset) {
 							unset($unset);
 						}
 					}
@@ -659,6 +659,7 @@ class JForm
 				if ($data->xpath('descendant::fields[not(@name)]/field')) {
 					$unsets = (array) $this->xml->xpath('//fields[not(@name)]/field');
 					foreach($unsets as $unset) {
+						print $unset['name'];
 						unset($unset);
 					}
 				}
@@ -754,6 +755,27 @@ class JForm
 		$elements = & $this->findGroup($group);
 		foreach ($elements as & $element) {
 			unset($element);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to reset the form data store and optionally the form XML definition.
+	 *
+	 * @param	boolean	$xml	True to also reset the XML form definition.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function reset($xml = false)
+	{
+		unset($this->data);
+		$this->data = new JRegistry();
+
+		if ($xml) {
+			unset($this->xml);
+			$this->xml = new JXMLElement('<form></form>');
 		}
 
 		return true;
