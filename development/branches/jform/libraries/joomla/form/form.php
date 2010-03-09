@@ -709,7 +709,8 @@ class JForm
 
 		// If the element exists remove it from the form definition.
 		if ($element instanceof JXMLElement) {
-			unset($element);
+			$dom = dom_import_simplexml($element);
+			$dom->parentNode->removeChild($dom);
 		}
 
 		return true;
@@ -734,7 +735,8 @@ class JForm
 		// Get the fields elements for a given group.
 		$elements = & $this->findGroup($group);
 		foreach ($elements as & $element) {
-			unset($element);
+			$dom = dom_import_simplexml($element);
+			$dom->parentNode->removeChild($dom);
 		}
 
 		return true;
