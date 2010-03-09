@@ -1441,6 +1441,91 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	/**
 	 * Test for JForm::setField method.
 	 */
+	public function testReset()
+	{
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$loadDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$data = array(
+			'title'		=> 'Joomla Framework',
+			'params'	=> array(
+				'show_title'	=> 2
+			)
+		);
+
+		$this->assertThat(
+			$form->bind($data),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The data should bind successfully.'
+		);
+
+		$this->assertThat(
+			$form->getValue('title'),
+			$this->equalTo('Joomla Framework'),
+			'Line:'.__LINE__.' Confirm the field value is set.'
+		);
+
+		$this->assertThat(
+			$form->getValue('show_title', 'params'),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' Confirm the field value is set.'
+		);
+
+		// Test reset on the data only.
+
+		$this->assertThat(
+			$form->reset(),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The reset method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getField('title'),
+			$this->logicalNot($this->isFalse()),
+			'Line:'.__LINE__.' The field should still exist.'
+		);
+
+		$this->assertThat(
+			$form->getValue('title'),
+			$this->equalTo(null),
+			'Line:'.__LINE__.' The field value should be reset.'
+		);
+
+		$this->assertThat(
+			$form->getValue('show_title', 'params'),
+			$this->equalTo(null),
+			'Line:'.__LINE__.' The field value should be reset.'
+		);
+
+		// Test reset of data and the internal XML.
+
+		$this->assertThat(
+			$form->reset(true),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The reset method should return true.'
+		);
+
+		$this->assertThat(
+			$form->getField('title'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' The known field should be removed.'
+		);
+
+		$this->assertThat(
+			$form->findGroup('params'),
+			$this->equalTo(array()),
+			'Line:'.__LINE__.' The known group should be removed, returning an empty array.'
+		);
+	}
+
+	/**
+	 * Test for JForm::setField method.
+	 */
 	public function testSetField()
 	{
 		$this->markTestIncomplete('This test has not been implemented yet.');
