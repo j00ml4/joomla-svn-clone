@@ -9,7 +9,7 @@
  * Test class for JForm.
  *
  * @package		Joomla.UnitTest
- * @subpackage	Utilities
+ * @subpackage	Form
  */
 class JFormFieldCategoriesTest extends JoomlaTestCase {
 	/**
