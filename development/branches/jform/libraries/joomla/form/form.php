@@ -1565,7 +1565,7 @@ class JForm
 	{
 		// Make sure there is a valid JXMLElement.
 		if (!$element instanceof JXMLElement) {
-			return new JException(JText::_('LIB_FORM_VALIDATE_FIELD_ERROR'), 0, E_ERROR);
+			return new JException(JText::_('LIB_FORM_VALIDATE_FIELD_ERROR'), -1, E_ERROR);
 		}
 
 		// Initialize variables.
@@ -1581,9 +1581,9 @@ class JForm
 				// Does the field have a defined error message?
 				$message = (string) $element['message'];
 				if ($message) {
-					return new JException(JText::_($message), 0, E_WARNING);
+					return new JException(JText::_($message), 2, E_WARNING);
 				} else {
-					return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_REQUIRED', JText::_((string) $element['name'])), 0, E_WARNING);
+					return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_REQUIRED', JText::_((string) $element['name'])), 2, E_WARNING);
 				}
 			}
 		}
@@ -1595,7 +1595,7 @@ class JForm
 
 			// If the object could not be loaded return an error message.
 			if ($rule === false) {
-				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_RULE_MISSING', $rule), 0, E_ERROR);
+				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_RULE_MISSING', $rule), -2, E_ERROR);
 			}
 
 			// Run the field validation rule test.
@@ -1613,9 +1613,9 @@ class JForm
 			// Does the field have a defined error message?
 			$message = (string) $element['message'];
 			if ($message) {
-				return new JException(JText::_($message), 0, E_WARNING);
+				return new JException(JText::_($message), 1, E_WARNING);
 			} else {
-				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_INVALID', JText::_((string) $element['name'])), 0, E_WARNING);
+				return new JException(JText::sprintf('LIB_FORM_VALIDATE_FIELD_INVALID', JText::_((string) $element['name'])), 1, E_WARNING);
 			}
 		}
 
