@@ -19,7 +19,7 @@ jimport('joomla.form.formfield');
  * @subpackage	Form
  * @since		1.6
  */
-class JFormFieldUserGroup extends JFormField
+class JFormFieldUsergroup extends JFormField
 {
 	/**
 	 * The form field type.
@@ -27,7 +27,7 @@ class JFormFieldUserGroup extends JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $type = 'UserGroup';
+	protected $type = 'Usergroup';
 
 	/**
 	 * Method to get the field input markup.
