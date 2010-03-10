@@ -622,7 +622,37 @@ class JFormTest extends JoomlaTestCase
 	 */
 	public function testGetErrors()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$validateDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$fail = array(
+			'boolean' => 'comply',
+			'required' => '',
+		);
+
+		$this->assertThat(
+			$form->validate($fail),
+			$this->isFalse(),
+			'Line:'.__LINE__.' Validating this data should fail.'
+		);
+
+		$errors = $form->getErrors($fail);
+		$this->assertThat(
+			count($errors),
+			$this->equalTo(3),
+			'Line:'.__LINE__.' This data should invoke 3 errors.'
+		);
+
+		$this->assertThat(
+			$errors[0] instanceof JException,
+			$this->isTrue(),
+			'Line:'.__LINE__.' The errors should be exception objects.'
+		);
 	}
 
 	/**
@@ -1760,7 +1790,55 @@ class JFormTest extends JoomlaTestCase
 	 */
 	public function testValidate()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$validateDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$pass = array(
+			'boolean' => 'false',
+			'optional' => 'Optional',
+			'required' => 'Supplied',
+			'group' => array(
+				'level1' => 'open'
+			)
+		);
+
+		$fail = array(
+			'boolean' => 'comply',
+			'required' => '',
+		);
+
+		// Test error conditions.
+
+		$this->assertThat(
+			$form->validate($pass, 'bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' Validating an unknown group should return false.'
+		);
+
+		$this->assertThat(
+			$form->validate($fail),
+			$this->isFalse(),
+			'Line:'.__LINE__.' Any validation failures should return false.'
+		);
+
+		// Test expected behaviour.
+
+		$this->assertThat(
+			$form->validate($pass),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Validation on this data should pass.'
+		);
+
+		$this->assertThat(
+			$form->validate($pass, 'group'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Validating an unknown group should return false.'
+		);
 	}
 
 	/**
@@ -1771,7 +1849,7 @@ class JFormTest extends JoomlaTestCase
 		$form = new JFormInspector('form1');
 
 		$this->assertThat(
-			$form->load(JFormDataHelper::$validateDocument),
+			$form->load(JFormDataHelper::$validateFieldDocument),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
