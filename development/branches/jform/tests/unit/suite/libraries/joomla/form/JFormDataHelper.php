@@ -473,20 +473,19 @@ class JFormDataHelper
 	<fields
 		description="All the fields">
 		<field
-			name="email"
-			validate="email" />
+			name="boolean"
+			validate="boolean" />
 
-		<fields
-			name="params"
-			description="Optional Settings">
-			<field
-				name="show_title" filter="int" />
-			<fieldset
-				name="basic">
-				<field
-					name="show_author" filter="int" />
-			</fieldset>
-		</fields>
+		<field
+			name="missingrule"
+			validate="missingrule" />
+
+		<field
+			name="optional" />
+
+		<field
+			name="required"
+			required="true" />
 	</fields>
 </form>';
 

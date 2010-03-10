@@ -1764,10 +1764,98 @@ class JFormTest extends JoomlaTestCase
 	}
 
 	/**
-	 * Test for JForm::validateFields method.
+	 * Test for JForm::validateField method.
 	 */
-	public function testValidateFields()
+	public function testValidateField()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$validateDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$xml = $form->getXML();
+
+		// Test error handling.
+
+		$result = $form->validateField('wrong');
+		$this->assertThat(
+			$result instanceof Exception,
+			$this->isTrue(),
+			'Line:'.__LINE__.' Passing a non-JXmlElement should return an exception.'
+		);
+
+		$this->assertThat(
+			$result->getCode(),
+			$this->equalTo(-1),
+			'Line:'.__LINE__.' The correct exception should be returned.'
+		);
+
+		$field = array_pop($xml->xpath('fields/field[@name="missingrule"]'));
+		$result = $form->validateField($field, null, 'value');
+		$this->assertThat(
+			$result instanceof Exception,
+			$this->isTrue(),
+			'Line:'.__LINE__.' Having a missing validation rule should return an exception.'
+		);
+
+		$this->assertThat(
+			$result->getCode(),
+			$this->equalTo(-2),
+			'Line:'.__LINE__.' The correct exception should be returned.'
+		);
+
+		$field = array_pop($xml->xpath('fields/field[@name="boolean"]'));
+		$result = $form->validateField($field);
+		$this->assertThat(
+			$result instanceof Exception,
+			$this->isTrue(),
+			'Line:'.__LINE__.' A failed validation should return an exception.'
+		);
+
+		$this->assertThat(
+			$result->getCode(),
+			$this->equalTo(1),
+			'Line:'.__LINE__.' The correct exception should be returned.'
+		);
+
+		$field = array_pop($xml->xpath('fields/field[@name="required"]'));
+		$result = $form->validateField($field);
+		$this->assertThat(
+			$result instanceof Exception,
+			$this->isTrue(),
+			'Line:'.__LINE__.' A required field missing a value should return an exception.'
+		);
+
+		$this->assertThat(
+			$result->getCode(),
+			$this->equalTo(2),
+			'Line:'.__LINE__.' The correct exception should be returned.'
+		);
+
+		// Test general usage.
+
+		$field = array_pop($xml->xpath('fields/field[@name="boolean"]'));
+		$this->assertThat(
+			$form->validateField($field, null, 'true'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' A field with a passing validate attribute set should return true.'
+		);
+
+		$field = array_pop($xml->xpath('fields/field[@name="optional"]'));
+		$this->assertThat(
+			$form->validateField($field),
+			$this->isTrue(),
+			'Line:'.__LINE__.' A field without required set should return true.'
+		);
+
+		$field = array_pop($xml->xpath('fields/field[@name="required"]'));
+		$this->assertThat(
+			$form->validateField($field, null, 'value'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' A required field with a value should return true.'
+		);
 	}
 }
