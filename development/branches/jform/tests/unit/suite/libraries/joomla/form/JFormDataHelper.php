@@ -477,6 +477,31 @@ class JFormDataHelper
 			validate="boolean" />
 
 		<field
+			name="optional" />
+
+		<field
+			name="required"
+			required="true" />
+
+		<fields
+			name="group">
+
+			<field
+				name="level1"
+				required="true" />
+
+		</fields>
+	</fields>
+</form>';
+
+	public static $validateFieldDocument = '<form>
+	<fields
+		description="All the fields">
+		<field
+			name="boolean"
+			validate="boolean" />
+
+		<field
 			name="missingrule"
 			validate="missingrule" />
 
