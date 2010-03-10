@@ -46,6 +46,18 @@ class JFormFieldInteger extends JFormFieldList
 		$last	= (int) $this->element['last'];
 		$step	= (int) $this->element['step'];
 
+		// Sanity checks.
+		if ($step == 0) {
+			// Step of 0 will create an endless loop.
+			return $options;
+		} else if ($first < $last && $step < 0) {
+			// A negative step will never reach the last number.
+			return $options;
+		} else if ($first > $last && $step > 0) {
+			// A position step will never reach the last number.
+			return $options;
+		}
+
 		// Build the options array.
 		for ($i = $first; $i <= $last; $i += $step) {
 			$options[] = JHtml::_('select.option', $i);
