@@ -1319,7 +1319,57 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 	 */
 	public function testLoadRuleType()
 	{
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$form = new JFormInspector('form1');
+
+		// Test error handling.
+
+		$this->assertThat(
+			$form->loadRuleType('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' Loading an unknown rule should return false.'
+		);
+
+		// Test loading a custom rule.
+
+		JForm::addRulePath(dirname(__FILE__).'/_testrules');
+
+		$this->assertThat(
+			($form->loadRuleType('custom') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading a known rule should return a rule object.'
+		);
+
+		// Test all the stock rules load.
+
+		$this->assertThat(
+			($form->loadRuleType('boolean') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading the boolean rule should return a rule object.'
+		);
+
+		$this->assertThat(
+			($form->loadRuleType('email') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading the email rule should return a rule object.'
+		);
+
+		$this->assertThat(
+			($form->loadRuleType('equals') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading the equals rule should return a rule object.'
+		);
+
+		$this->assertThat(
+			($form->loadRuleType('rules') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading the [access control] rules rule should return a rule object.'
+		);
+
+		$this->assertThat(
+			($form->loadRuleType('username') instanceof JFormRule),
+			$this->isTrue(),
+			'Line:'.__LINE__.' Loading the username rule should return a rule object.'
+		);
 	}
 
 	/**

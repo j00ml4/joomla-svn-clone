@@ -1500,6 +1500,7 @@ class JForm
 		$key	= md5($type);
 		$class	= 'JFormRule'.ucfirst($type);
 
+
 		// Return the JFormRule object if it already exists and we don't need a new one.
 		if (isset(self::$rules[$key]) && $new === false) {
 			return self::$rules[$key];
@@ -1517,7 +1518,7 @@ class JForm
 				// Add the complex type prefix to the paths.
 				for ($i = 0, $n = count($paths); $i < $n; $i++) {
 					// Derive the new path.
-					$path = $paths[$i].DS.strtolower(substr($type, 0, $pos));
+					$path = $paths[$i].'/'.strtolower(substr($type, 0, $pos));
 
 					// If the path does not exist, add it.
 					if (!in_array($path, $paths)) {
