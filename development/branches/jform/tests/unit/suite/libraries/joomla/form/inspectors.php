@@ -5,6 +5,10 @@
 require_once JPATH_BASE.'/libraries/joomla/form/form.php';
 require_once JPATH_BASE.'/libraries/joomla/form/formfield.php';
 
+/**
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
+ */
 class JFormInspector extends JForm
 {
 	public static function addNode(SimpleXMLElement $source, SimpleXMLElement $new)
@@ -79,8 +83,17 @@ class JFormInspector extends JForm
 	{
 		return parent::loadRuleType($type, $new);
 	}
+
+	public function validateField($element, $group = null, $value = null, $input = null)
+	{
+		return parent::validateField($element, $group, $value, $input);
+	}
 }
 
+/**
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
+ */
 class JFormFieldInspector extends JFormField
 {
 	public function getInput()

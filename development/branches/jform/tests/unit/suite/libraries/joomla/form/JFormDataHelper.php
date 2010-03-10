@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Data for JForm tests.
+ *
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
+ */
 class JFormDataHelper
 {
 	public static $bindDocument = '<form>
@@ -464,12 +469,37 @@ class JFormDataHelper
 	</fields>
 </form>';
 
+	public static $validateDocument = '<form>
+	<fields
+		description="All the fields">
+		<field
+			name="email"
+			validate="email" />
+
+		<fields
+			name="params"
+			description="Optional Settings">
+			<field
+				name="show_title" filter="int" />
+			<fieldset
+				name="basic">
+				<field
+					name="show_author" filter="int" />
+			</fieldset>
+		</fields>
+	</fields>
+</form>';
+
 	public function filter($value)
 	{
 		return 'method';
 	}
 }
 
+/**
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
+ */
 function jFormDataFilter($value)
 {
 	return 'function';
