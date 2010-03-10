@@ -1196,6 +1196,7 @@ class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
 			$this->equalTo('form'),
 			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
+		//$this->_showXml($form);die;
 
 		$this->assertThat(
 			count($form->getXml()->fields),
