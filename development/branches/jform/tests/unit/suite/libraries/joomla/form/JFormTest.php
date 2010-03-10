@@ -11,11 +11,10 @@
 /**
  * Test class for JForm.
  *
- * @package	Joomla.UnitTest
- * @subpackage Utilities
- *
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
  */
-class JFormTest extends JoomlaTestCase //PHPUnit_Framework_TestCase
+class JFormTest extends JoomlaTestCase
 {
 	private function _showXml($form)
 	{
