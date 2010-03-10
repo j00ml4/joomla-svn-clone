@@ -74,6 +74,11 @@ class JFormInspector extends JForm
 	{
 		return parent::loadFieldType($type, $new);
 	}
+
+	public function & loadRuleType($type, $new = true)
+	{
+		return parent::loadRuleType($type, $new);
+	}
 }
 
 class JFormFieldInspector extends JFormField
