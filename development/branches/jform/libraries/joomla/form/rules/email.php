@@ -55,7 +55,7 @@ class JFormRuleEmail extends JFormRule
 		}
 
 		// Test the value against the regular expression.
-		if (!parent::test($element, $value, $group, $form)) {
+		if (!parent::test($element, $value, $group, $input, $form)) {
 			return false;
 		}
 
