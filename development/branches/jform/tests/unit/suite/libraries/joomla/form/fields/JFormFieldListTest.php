@@ -19,8 +19,10 @@ class JFormFieldListTest extends JoomlaTestCase
 	 */
 	protected function setUp()
 	{
+		jimport('joomla.form.form');
 		jimport('joomla.form.formfield');
 		require_once JPATH_BASE.'/libraries/joomla/form/fields/list.php';
+		include_once dirname(dirname(__FILE__)).'/inspectors.php';
 	}
 
 	/**
@@ -28,6 +30,28 @@ class JFormFieldListTest extends JoomlaTestCase
 	 */
 	public function testGetInput()
 	{
-		$this->markTestIncomplete();
+		$form = new JFormInspector('form1');
+
+		$this->assertThat(
+			$form->load('<form><field name="list" type="list" /></form>'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$field = new JFormFieldList($form);
+
+		$this->assertThat(
+			$field->setup($form->getXml()->field, 'value'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The setup method should return true.'
+		);
+
+		$this->assertThat(
+			strlen($field->input),
+			$this->greaterThan(0),
+			'Line:'.__LINE__.' The getInput method should return something without error.'
+		);
+
+		// TODO: Should check all the attributes have come in properly.
 	}
 }
