@@ -941,7 +941,7 @@ class JForm
 			return false;
 		}
 
-		// Initialize variables.
+		// Initialise variables.
 		$return	= true;
 
 		// Create an input registry object from the data to validate.
