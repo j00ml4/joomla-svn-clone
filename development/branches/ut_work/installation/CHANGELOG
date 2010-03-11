@@ -27,6 +27,42 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+11-Mar-2010 Jean-Marie Simonet
+$^ Customized ini/keys item(s) com_newfeeds, com_templates, com_weblinks
+
+
+10-Mar-2010 Jean-Marie Simonet
+$ Refactored com_banners inis/keys customizing item(s)
+$ Refactored mod_menu (site) ini/keys
+$ Mass change key USE_GLOBAL to JCOMMON_USE_GLOBAL
+
+10-Mar-2010 Christophe Demko
+# Correction of a bug in JLanguage for php > 5.3.1
+
+09-Mar-2010 Hannes Papenberg
+# Rewrite of mod_menu in frontend. Added the classes and IDs to the menu items and reading data from JMenu and not from database.
+
+09-Mar-2010 Jean-Marie Simonet
+$ Typo in string
+$ Corrected a bunch of strings. Whitespaces, slashes and periods in Keys. Wrong or absent doublequotes in values.
+$ Standardized com_admin ini/keys
+
+09-Mar-2010 Christophe Demko
+# Correcting a bug in parse_ini_file for php >= 5.3.1
+# Correcting JHtml::script and JHtml::style and JHtml::image for allowing selection in plugins
+
+08-Mar-2010 Christophe Demko
+^ Translating cache and session handler names in the JFieldCacheHandler and JFieldSessionHandler
+^ Translating name of editors in the JFieldEditors class
+^ Enhancing language error message display
+
+08-Mar-2010 Jean-Marie Simonet
+^ Refactored com_config ini/keys
+$ Typos in some strings
+
+07-Mar-2010 Mark Dexter
+^ Implement parameters for com_content frontpage menu item
+
 07-Mar-2010 Christophe Demko
 - Reverting patch 15232 and 15221 which are buggy in php 5.2.4
 
