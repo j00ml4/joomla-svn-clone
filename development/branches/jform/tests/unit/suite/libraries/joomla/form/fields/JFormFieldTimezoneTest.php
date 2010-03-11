@@ -11,7 +11,7 @@
  * @package		Joomla.UnitTest
  * @subpackage	Form
  */
-class JFormFieldRulesTest extends JoomlaTestCase
+class JFormFieldTimezoneTest extends JoomlaTestCase
 {
 	/**
 	 * Sets up dependancies for the test.
@@ -20,7 +20,7 @@ class JFormFieldRulesTest extends JoomlaTestCase
 	{
 		jimport('joomla.form.form');
 		jimport('joomla.form.formfield');
-		require_once JPATH_BASE.'/libraries/joomla/form/fields/rules.php';
+		require_once JPATH_BASE.'/libraries/joomla/form/fields/timezone.php';
 		include_once dirname(dirname(__FILE__)).'/inspectors.php';
 	}
 
@@ -32,12 +32,12 @@ class JFormFieldRulesTest extends JoomlaTestCase
 		$form = new JFormInspector('form1');
 
 		$this->assertThat(
-			$form->load('<form><field name="rules" type="rules" /></form>'),
+			$form->load('<form><field name="timezone" type="timezone" /></form>'),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should load successfully.'
 		);
 
-		$field = new JFormFieldRules($form);
+		$field = new JFormFieldTimezone($form);
 
 		$this->assertThat(
 			$field->setup($form->getXml()->field, 'value'),
