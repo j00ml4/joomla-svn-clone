@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id$ -->
+	<!-- $Id$ -->
 <form>
 	<fields>
-		<field name="user_id_to" type="user"
+		<field
+			name="user_id_to"
+			type="user"
+			label="COM_MESSAGES_FIELD_USER_ID_TO_LABEL"
+			description="COM_MESSAGES_FIELD_USER_ID_TO_DESC"
 			default="0"
-			description="Messages_Field_User_id_to_Desc"
-			label="Messages_Field_User_id_to_Label"
-			required="true"
-		/>
+			required="true" />
 
-		<field name="subject" type="text"
-			description="Messages_Field_Subect_Desc"
-			label="Messages_Field_Subject_Label"
-			required="true"
-		/>
+		<field
+			name="subject"
+			type="text"
+			label="COM_MESSAGES_FIELD_SUBJECT_LABEL"
+			description="COM_MESSAGES_FIELD_SUBJECT_DESC"
+			required="true" />
 
-		<field name="message" type="textarea"
-			cols="80"
-			description="Messages_Field_Message_Desc"
-			label="Messages_Field_Message_Label"
-			required="true"
+		<field
+			name="message"
+			type="textarea"
 			rows="10"
-		/>
+			cols="80"
+			label="COM_MESSAGES_FIELD_MESSAGE_LABEL"
+			description="COM_MESSAGES_FIELD_SUBJECT_DESC"
+			required="true">
+		</field>
 	</fields>
 </form>
