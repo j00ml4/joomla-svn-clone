@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id$ -->
+	<!-- $Id$ -->
 <form>
 	<fields>
-		<field name="lock" type="radio"
-			default="0"
-			description="Messages_Field_Lock_Desc"
-			label="Messages_Field_Lock_Label"
-		>
-			<option value="1">JYes</option>
-			<option value="0">JNo</option>
+		<field
+			name="lock"
+			type="radio"
+			label="COM_MESSAGES_FIELD_LOCK_LABEL"
+			description="COM_MESSAGES_FIELD_LOCK_DESC"
+			default="0">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
 		</field>
 
-		<field name="mail_on_new" type="radio"
-			default="1"
-			description="Messages_Field_Mail_on_New_Desc"
-			label="Messages_Field_Mail_on_New_Label"
-		>
-			<option value="1">JYes</option>
-			<option value="0">JNo</option>
+		<field
+			name="mail_on_new"
+			type="radio"
+			label="COM_MESSAGES_FIELD_MAIL_ON_NEW_LABEL"
+			description="COM_MESSAGES_FIELD_MAIL_ON_NEW_DESC"
+			default="1">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
 		</field>
 
-		<field name="auto_purge" type="text"
+		<field
+			name="auto_purge"
+			type="text"
 			class="inputbox"
-			default="7"
-			description="Messages_Field_Auto_Purge_Desc"
-			label="Messages_Field_Auto_Purge_Label"
 			size="6"
-		/>
+			default="7"
+			label="COM_MESSAGES_FIELD_AUTO_PURGE_LABEL"
+			description="COM_MESSAGES_FIELD_AUTO_PURGE_DESC" />
 	</fields>
 </form>

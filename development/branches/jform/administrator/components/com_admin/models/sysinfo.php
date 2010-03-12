@@ -53,7 +53,8 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getPhpSettings()
 	{
-		if (is_null($this->php_settings)) {
+		if (is_null($this->php_settings))
+		{
 			$this->php_settings = array();
 			$this->php_settings['safe_mode']			= ini_get('safe_mode') == '1';
 			$this->php_settings['display_errors']		= ini_get('display_errors') == '1';
@@ -80,7 +81,8 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getConfig()
 	{
-		if (is_null($this->config)) {
+		if (is_null($this->config))
+		{
 			$registry = & JFactory::getConfig();
 			$this->config = $registry->toArray();
 			$hidden = array('host', 'user', 'password', 'ftp_user', 'ftp_pass', 'smtpuser', 'smtppass');
@@ -97,13 +99,15 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getInfo()
 	{
-		if (is_null($this->info)) {
+		if (is_null($this->info))
+		{
 			$this->info = array();
 			$version = new JVersion();
 			$db = & JFactory::getDBO();
 			if (isset($_SERVER['SERVER_SOFTWARE'])) {
 				$sf = $_SERVER['SERVER_SOFTWARE'];
-			} else {
+			}
+			else {
 				$sf = getenv('SERVER_SOFTWARE');
 			}
 			$this->info['php']			= php_uname();
@@ -124,7 +128,8 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getPHPInfo()
 	{
-		if (is_null($this->php_info)) {
+		if (is_null($this->php_info))
+		{
 			ob_start();
 			phpinfo(INFO_GENERAL | INFO_CONFIGURATION | INFO_MODULES);
 			$phpinfo = ob_get_contents();
@@ -147,7 +152,8 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getDirectory()
 	{
-		if (is_null($this->directory)) {
+		if (is_null($this->directory))
+		{
 			$registry = & JFactory::getConfig();
 			jimport('joomla.filesystem.folder');
 			$cparams = & JComponentHelper::getParams('com_media');
@@ -184,11 +190,11 @@ class AdminModelSysInfo extends JModel
 			$this->directory['plugins'.DS.'search']			= array('writable' => is_writable(JPATH_SITE.DS.'plugins'.DS.'search'), 'message' => '');
 			$this->directory['plugins'.DS.'system']			= array('writable' => is_writable(JPATH_SITE.DS.'plugins'.DS.'system'), 'message' => '');
 			$this->directory['plugins'.DS.'user']			= array('writable' => is_writable(JPATH_SITE.DS.'plugins'.DS.'user'), 'message' => '');
-			$this->directory['cache']						= array('writable' => is_writable(JPATH_SITE.DS.'cache'), 'message' => 'Admin_Cache_Directory');
-			$this->directory['administrator'.DS.'cache']	= array('writable' => is_writable(JPATH_SITE.DS.'administrator'.DS.'cache'), 'message' => 'Admin_Cache_Directory');
+			$this->directory['cache']						= array('writable' => is_writable(JPATH_SITE.DS.'cache'), 'message' => 'COM_ADMIN_CACHE_DIRECTORY');
+			$this->directory['administrator'.DS.'cache']	= array('writable' => is_writable(JPATH_SITE.DS.'administrator'.DS.'cache'), 'message' => 'COM_ADMIN_CACHE_DIRECTORY');
 
-			$this->directory[$registry->get('log_path', JPATH_ROOT.DS.'log') ] = array('writable' => is_writable($registry->get('log_path', JPATH_ROOT.DS.'log')), 'message' => 'Admin_Log_Directory');
-			$this->directory[$registry->get('tmp_path', JPATH_ROOT.DS.'log') ] = array('writable' => is_writable($registry->get('tmp_path', JPATH_ROOT.DS.'tmp')), 'message' => 'Admin_Temp_Directory');
+			$this->directory[$registry->get('log_path', JPATH_ROOT.DS.'log') ] = array('writable' => is_writable($registry->get('log_path', JPATH_ROOT.DS.'log')), 'message' => 'COM_ADMIN_LOG_DIRECTORY');
+			$this->directory[$registry->get('tmp_path', JPATH_ROOT.DS.'log') ] = array('writable' => is_writable($registry->get('tmp_path', JPATH_ROOT.DS.'tmp')), 'message' => 'COM_ADMIN_TEMP_DIRECTORY');
 		}
 		return $this->directory;
 	}
@@ -201,7 +207,8 @@ class AdminModelSysInfo extends JModel
 	 */
 	function &getEditor()
 	{
-		if (is_null($this->editor)) {
+		if (is_null($this->editor))
+		{
 			$config = &JFactory::getConfig();
 			$this->editor = $config->get('editor');
 		}

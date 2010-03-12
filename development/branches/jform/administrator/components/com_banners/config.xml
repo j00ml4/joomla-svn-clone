@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
-<form>
+<config>
 	<fields>
-		<fieldset name="basic"
-			description="BANNERS_CONFIG_BANNER_SETTINGS_DESC"
-			label="BANNERS_CONFIG_BANNER_SETTINGS_LABEL"
-		>
+		<field
+			id="purchase_type"
+			name="purchase_type"
+			type="list"
+			label="COM_BANNERS_FIELD_PURCHASETYPE_LABEL"
+			description="COM_BANNERS_FIELD_PURCHASETYPE_DESC"
+			default="0"
+			class="inputbox">
+			<option
+				value="1">COM_BANNERS_FIELD_VALUE_1</option>
+			<option
+				value="2">COM_BANNERS_FIELD_VALUE_2</option>
+			<option
+				value="3">COM_BANNERS_FIELD_VALUE_3</option>
+			<option
+				value="4">COM_BANNERS_FIELD_VALUE_4</option>
+			<option
+				value="5">COM_BANNERS_FIELD_VALUE_5</option>
+		</field>
 
-			<field name="purchase_type" type="list"
-				default="0"
-				description="Banners_PurchaseType_Desc"
-				label="Banners_PurchaseType_Label"
-			>
-				<option value="1">Banners_1</option>
-				<option value="2">Banners_2</option>
-				<option value="3">Banners_3</option>
-				<option value="4">Banners_4</option>
-				<option value="5">Banners_5</option>
-			</field>
-	
-			<field name="track_impressions" type="radio"
-				default="0"
-				description="Banners_TrackImpression_Desc"
-				label="Banners_TrackImpression_Label"
-			>
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-			</field>
-	
-			<field name="track_clicks" type="radio"
-				default="0"
-				description="Banners_TrackClick_Desc"
-				label="Banners_TrackClick_Label"
-			>
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-			</field>
-	
-			<field name="metakey_prefix" type="text"
-				description="Banners_MetaKeywordPrefix_Desc"
-				label="Banners_MetaKeywordPrefix_Label"
-			/>
+		<field
+			name="track_impressions"
+			type="radio"
+			default="0"
+			label="COM_BANNERS_FIELD_TRACKIMPRESSION_LABEL"
+			description="COM_BANNERS_FIELD_TRACKIMPRESSION_DESC">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
 
-		</fieldset>
+		<field
+			name="track_clicks"
+			type="radio"
+			default="0"
+			label="COM_BANNERS_FIELD_TRACKCLICK_LABEL"
+			description="COM_BANNERS_FIELD_TRACKCLICK_DESC">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
 
-		<fieldset name="permissions"
-			description="JConfig_Permissions_Desc"
-			label="JConfig_Permissions_Label"
-		>
-	
-			<field name="rules" type="rules"
-				class="inputbox"
-				component="com_banners"
-				filter="rules"
-				label="JConfig_Permissions_Label"
-				section="component"
-			/>
+		<field
+			name="metakey_prefix"
+			type="text"
+			default=""
+			label="COM_BANNERS_FIELD_METAKEYWORDPREFIX_LABEL"
+			description="COM_BANNERS_FIELD_METAKEYWORDPREFIX_DESC" />
 
-		</fieldset>
 	</fields>
-</form>
+
+	<fields
+		group="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+		hidden="true">
+
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			filter="rules"
+			component="com_banners"
+			section="component" />
+	</fields>
+</config>

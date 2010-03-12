@@ -59,7 +59,7 @@ class JFormFieldBannerClient extends JFormFieldList
 		// Merge any additional options in the XML definition.
 		//$options = array_merge(parent::getOptions(), $options);
 
-		array_unshift($options, JHtml::_('select.option', '0', JText::_('Banners_No_Client')));
+		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_BANNERS_NO_CLIENT')));
 
 		return $options;
 	}
