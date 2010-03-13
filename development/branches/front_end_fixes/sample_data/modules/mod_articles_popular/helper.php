@@ -57,7 +57,7 @@ abstract class modArticlesPopularHelper
 			else {
 				$item->link = JRoute::_('index.php?option=com_user&view=login');
 			}
-
+//echo 'count: '. count(debug_backtrace()) .'; ';
 			$item->introtext = JHtml::_('content.prepare', $item->introtext);
 		}
 

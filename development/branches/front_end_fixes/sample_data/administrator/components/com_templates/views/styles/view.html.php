@@ -60,14 +60,14 @@ class TemplatesViewStyles extends JView
 			JToolBarHelper::editList('style.edit','JTOOLBAR_EDIT');
 		}
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('styles.sethome', 'default.png', 'default_f2.png', 'Templates_Toolbar_Set_Home', true);
+			JToolBarHelper::custom('styles.sethome', 'default.png', 'default_f2.png', 'COM_TEMPLATES_TOOLBAR_SET_HOME', true);
 		}
-		JToolBarHelper::title(JText::_('Templates_Manager_Styles'), 'thememanager');
+		JToolBarHelper::title(JText::_('COM_TEMPLATES_MANAGER_STYLES'), 'thememanager');
 		if ($canDo->get('core.create') && $isSite) {
 			JToolBarHelper::addNew('styles.duplicate', 'JTOOLBAR_DUPLICATE');
 		}
 		if ($canDo->get('core.delete') && $isSite) {
-			JToolBarHelper::deleteList('', 'styles.delete','JTOOLBAR_TRASH');
+			JToolBarHelper::deleteList('', 'styles.delete','JTOOLBAR_DELETE');
 		}
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::divider();

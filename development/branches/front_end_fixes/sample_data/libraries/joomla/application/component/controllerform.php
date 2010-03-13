@@ -224,7 +224,7 @@ class JControllerForm extends JController
 		$key		= $table->getKeyName();
 		if (!$this->_allowEdit(array($key => $recordId), $key)) {
 			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
-			return JError::raiseWarning(403, 'JError_Core_Edit_not_permitted.');
+			return JError::raiseWarning(403, 'JERROR_CORE_EDIT_NOT_PERMITTED');
 		}
 
 		// If record ids do not match, checkin previous record.
@@ -437,7 +437,7 @@ class JControllerForm extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_('JController_Save_success'));
+		$this->setMessage(JText::_('JCONTROLLER_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)
