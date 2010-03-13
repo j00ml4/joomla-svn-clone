@@ -48,6 +48,7 @@ class ContentModelFrontpage extends ContentModelArticles
 		if (is_array($featuredCategories = $params->get('featured_categories'))) {
 			$this->setState('filter.frontpage.categories', $featuredCategories);
 		}
+	}
 		
 	/**
 	 * Method to get a store id based on model configuration state.
