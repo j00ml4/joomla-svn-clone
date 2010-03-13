@@ -27,6 +27,33 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+13-Mar-2010 Jean-Marie Simonet
+$^ Refactored com_modules ini/keys, customized item(s)
+$ Standardized mod_toolbar ini/keys
+$ Refactored com_plugins ini/keys, customized some item(s)
+$ Deleting unused com_banners.ini in front-end
+$ Refactored com_mailto ini/keys
+
+13-Mar-2010 Hannes Papenberg
+# Fixed mod_menu (Frontend) parameters
+
+12-Mar-2010 Jean-Marie Simonet
+$^# Refactored com_messages ini/keys, customized item(s)
+$ Customizing JCONTROLLER_SAVE_SUCCESS
+^ Change string in com_categories
+
+11-Mar-2010 Jean-Marie Simonet
+$^ Customized ini/keys item(s) com_newfeeds, com_templates, com_weblinks
+
+
+10-Mar-2010 Jean-Marie Simonet
+$ Refactored com_banners inis/keys customizing item(s)
+$ Refactored mod_menu (site) ini/keys
+$ Mass change key USE_GLOBAL to JCOMMON_USE_GLOBAL
+
+10-Mar-2010 Christophe Demko
+# Correction of a bug in JLanguage for php > 5.3.1
+
 09-Mar-2010 Hannes Papenberg
 # Rewrite of mod_menu in frontend. Added the classes and IDs to the menu items and reading data from JMenu and not from database.
 
