@@ -42,7 +42,7 @@ $userId	= $user->get('id');
 			</select>
 
 			<select name="filter_level" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JMenu_Option_Select_Level');?></option>
+				<option value=""><?php echo JText::_('Menus_Option_Select_Level');?></option>
 				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 			</select>
 
