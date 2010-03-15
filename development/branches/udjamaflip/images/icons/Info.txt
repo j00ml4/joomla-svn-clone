@@ -1,0 +1,13 @@
+This theme may NOT be released/redistributed/repackaged outside MacThemes without permission.
+
+Original Thread (with additional icons + updates)
+http://macthemes2.net/forum/viewtopic.php?id=16785726 
+
+IMPORTANT
+Please see the icons folder and rename the icons for the applications you wish to use. Some have multiple icons per application (ex. Camera.png, Camera1.png, etc.).
+
+CREDITS - Louie Mantia for original Agua theme - ronin2046 for requesting and pitching the idea - royale for granting ronin2046's request - Rafael Barbosa's bigger neon icons - Some symbols came from Tollboy's icons used in Glyphs
+
+---
+
+TOFFEENUT.DEVIANTART.COM
