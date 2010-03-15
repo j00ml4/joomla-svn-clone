@@ -10,8 +10,8 @@
 	<fields
 		group="request"
 		array="true"
-		label="Menus_Layout_Request_Variables_Label"
-		description="Menus_Layout_Request_Variables_Desc"
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC"
 		addfieldpath="/administrator/components/com_content/models/fields">
 
 		<field
@@ -258,7 +258,41 @@
 			<option
 				value="1">Show</option>
 		</field>
+	</fields>
+	<fields
+		group="metadata"
+		array="true">
 
+		<field
+			name="robots"
+			type="list"
+			label="JField_Metadata_Robots_Label"
+			description="JField_Metadata_Robots_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="0">index, follow</option>
+			<option
+				value="1">noindex, follow</option>
+			<option
+				value="2">index, nofollow</option>
+			<option
+				value="3">noindex, nofollow</option>
+			<option
+				value="4">Don't display robots tag</option>
+		</field>
+
+		<field
+			name="rights"
+			type="textarea"
+			default=""
+			label="JFIELD_META_RIGHTS_LABEL"
+			description="JFIELD_META_RIGHTS_DESC"
+			required=""
+			filter="string"
+			cols="30"
+			rows="2" />
 	</fields>
 
 </metadata>

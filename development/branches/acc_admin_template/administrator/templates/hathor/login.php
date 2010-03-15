@@ -66,15 +66,15 @@ $app = &JFactory::getApplication();
 
 			<!-- Beginning of Actual Content -->
 			<div id="element-box" class="login">		
-				<div class="pagetitle"><h2><?php echo JText::_('JOOMLA_ADMINISTRATION_LOGIN') ?></h2></div>
+				<div class="pagetitle"><h2><?php echo JText::_('COM_LOGIN_JOOMLA_ADMINISTRATION_LOGIN') ?></h2></div>
 					
 					<!-- System Messages -->
 					<jdoc:include type="message" />
 					
 					<div class="login-inst">
-					<p><?php echo JText::_('DESCUSEVALIDLOGIN') ?></p>
+					<p><?php echo JText::_('COM_LOGIN_VALID') ?></p>
 					<div id="lock"></div>		
-					<a href="<?php echo JURI::root(); ?>"><?php echo JText::_('RETURN_TO_SITE_HOME_PAGE') ?></a>
+					<a href="<?php echo JURI::root(); ?>"><?php echo JText::_('COM_LOGIN_RETURN_TO_SITE_HOME_PAGE') ?></a>
 					</div>
 					
 					<!-- Login Component -->
@@ -85,7 +85,7 @@ $app = &JFactory::getApplication();
 			</div><!-- end element-box -->
 		
 		<noscript>
-			<?php echo JText::_('WARNJAVASCRIPT') ?>
+			<?php echo JText::_('JCOMMON_WARNJAVASCRIPT') ?>
 		</noscript>		
 		
 		</div><!-- end content -->
@@ -95,8 +95,8 @@ $app = &JFactory::getApplication();
 	<!-- Footer -->
 	<div id="footer">
 		<p class="copyright">
-			<a href="http://www.joomla.org">Joomla!</a>
-			<?php echo JText::_('ISFREESOFTWARE') ?>
+			<?php $joomla= '<a href="http://www.joomla.org">Joomla!</a>';
+			echo JText::sprintf('JCOMMON_ISFREESOFTWARE', $joomla) ?>
 		</p>
 	</div>
 </body>

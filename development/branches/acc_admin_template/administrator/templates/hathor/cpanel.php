@@ -136,7 +136,7 @@ $app	= &JFactory::getApplication();
 		</div><!-- end element-box -->
 		
 		<noscript>
-			<?php echo  JText::_('WARNJAVASCRIPT') ?>
+			<?php echo  JText::_('JCOMMON_WARNJAVASCRIPT') ?>
 		</noscript>
 		<div class="clr"></div>
 	

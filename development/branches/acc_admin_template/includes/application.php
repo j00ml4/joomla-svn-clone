@@ -114,7 +114,7 @@ final class JSite extends JApplication
 			case 'html':
 				//set metadata
 				$document->setMetaData('keywords', $this->getCfg('MetaKeys'));
-
+				$document->setMetaData('rights', $this->getCfg('MetaRights'));
 				if ($router->getMode() == JROUTER_MODE_SEF) {
 					$document->setBase(JURI::current());
 				}
@@ -259,7 +259,8 @@ final class JSite extends JApplication
 			if (!$option) {
 				$option = JRequest::getCmd('option');
 			}
-			$params[$hash] = &JComponentHelper::getParams($option);
+			// Get new instance of component global parameters 
+			$params[$hash] = clone JComponentHelper::getParams($option);
 
 			// Get menu parameters
 			$menus	= &JSite::getMenu();
@@ -267,7 +268,7 @@ final class JSite extends JApplication
 
 			$title = htmlspecialchars_decode($this->getCfg('sitename'));
 			$description = $this->getCfg('MetaDesc');
-
+			$rights=$this->getCfg('MetaRights');
 			// Lets cascade the parameters if we have menu item parameters
 			if (is_object($menu))
 			{
@@ -277,13 +278,14 @@ final class JSite extends JApplication
 
 			$params[$hash]->def('page_title', $title);
 			$params[$hash]->def('page_description', $description);
+			$params[$hash]->def('page_rights', $rights);			
 		}
 
 		return $params[$hash];
 	}
 
 	/**
-	 * Get the appliaction parameters
+	 * Get the application parameters
 	 *
 	 * @param	string	The component option
 	 *

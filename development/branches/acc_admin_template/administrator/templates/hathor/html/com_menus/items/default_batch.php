@@ -11,22 +11,22 @@
 defined('_JEXEC') or die;
 
 $options = array(
-	JHtml::_('select.option', 'c', JText::_('MENUS_BATCH_COPY')),
-	JHtml::_('select.option', 'm', JText::_('MENUS_BATCH_MOVE'))
+	JHtml::_('select.option', 'c', JText::_('COM_MENUS_BATCH_COPY')),
+	JHtml::_('select.option', 'm', JText::_('COM_MENUS_BATCH_MOVE'))
 );
 $published = (int) $this->state->get('filter.published');
 ?>
 	<fieldset class="batch">
-		<legend><?php echo JText::_('MENUS_BATCH_OPTIONS');?></legend>
+		<legend><?php echo JText::_('COM_MENUS_BATCH_OPTIONS');?></legend>
 			
 				<label id="batch-access-lbl" for="batch-access">
-					<?php echo JText::_('MENUS_BATCH_ACCESS_LABEL'); ?>
+					<?php echo JText::_('COM_MENUS_BATCH_ACCESS_LABEL'); ?>
 				</label>
 				<?php echo JHtml::_('access.assetgrouplist', 'batch[assetgroup_id]', '', 'class="inputbox"', array('title' => '', 'id' => 'batch-access'));?>
 			
 				<?php if ($published >= 0) : ?>
 					<label id="batch-choose-action-lbl" for="batch-menu-id">
-						<?php echo JText::_('MENUS_BATCH_MENU_LABEL'); ?>
+						<?php echo JText::_('COM_MENUS_BATCH_MENU_LABEL'); ?>
 					</label>
 						<select name="batch[menu_id]" class="inputbox" id="batch-menu-id">
 							<option></option>
@@ -36,6 +36,6 @@ $published = (int) $this->state->get('filter.published');
 				<?php endif; ?>
 			
 			<button type="submit" onclick="submitbutton('item.batch');">
-				<?php echo JText::_('MENUS_BATCH_PROCESS'); ?>
+				<?php echo JText::_('COM_MENUS_BATCH_PROCESS'); ?>
 			</button>
 	</fieldset>

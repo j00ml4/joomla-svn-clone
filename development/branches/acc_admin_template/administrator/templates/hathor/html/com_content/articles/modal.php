@@ -94,7 +94,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::date($item->created, '%Y.%m.%d'); ?>
+					<?php echo JHTML::_('date',$item->createdd, '%Y.%m.%d'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

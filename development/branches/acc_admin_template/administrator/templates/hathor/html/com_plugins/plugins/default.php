@@ -18,27 +18,27 @@ $user = JFactory::getUser();
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_plugins&view=plugins'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?></label>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_PLUGINS_SEARCH_IN_TITLE'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_access">
-				<?php echo JText::_('JOption_Select_Access'); ?>
+				<?php echo JText::_('JOPTION_SELECT_ACCESS'); ?>
 			</label>
 			<select name="filter_access" id="filter_access" class="inputbox">
-				<option value=""><?php echo JText::_('JOption_Select_Access');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
 
 			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('JOption_Select_Published'); ?>
+				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label>
 			<select name="filter_state" id="filter_state" class="inputbox">
-				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', PluginsHelper::stateOptions(), 'value', 'text', $this->state->get('filter.state'), true);?>
 			</select>
 
@@ -93,6 +93,9 @@ $user = JFactory::getUser();
 			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
+			$lang = &JFactory::getLanguage();
+			$lang->load($item->name, JPATH_ADMINISTRATOR)
+			|| $lang->load ($item->name, JPATH_PLUGINS.DS.$item->folder.DS.$item->element);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">

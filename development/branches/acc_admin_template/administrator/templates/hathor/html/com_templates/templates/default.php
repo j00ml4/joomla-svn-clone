@@ -22,17 +22,17 @@ $user = & JFactory::getUser();
 	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Templates_Templates_Filter_Search_Desc'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_SEARCH_DESC'); ?>" />
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('Templates_Filter_Client'); ?>
+				<?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value="*"><?php echo JText::_('Templates_Filter_Client'); ?></option>
+				<option value="*"><?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_CLIENT'); ?></option>
 				<?php echo JHtml::_('select.options', TemplatesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 			
@@ -50,10 +50,10 @@ $user = & JFactory::getUser();
 					&nbsp;
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort', 'Templates_Heading_Template', 'a.element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JHtml::_('grid.sort', 'Templates_Heading_Type', 'a.client_id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TYPE', 'a.client_id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="center width-10">
 					<?php echo JText::_('Version'); ?>
@@ -78,7 +78,7 @@ $user = & JFactory::getUser();
 						<?php echo $item->name;?></a>
 				</td>
 				<td class="center">
-					<?php echo $item->client_id == 0 ? JText::_('Templates_Option_Site') : JText::_('Templates_Option_Administrator'); ?>
+					<?php echo $item->client_id == 0 ? JText::_('COM_TEMPLATES_OPTION_SITE') : JText::_('COM_TEMPLATES_OPTION_ADMINISTRATOR'); ?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->xmldata->get('version')); ?>
