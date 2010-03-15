@@ -19,19 +19,19 @@ $user	= JFactory::getUser();
 
 <form action="<?php echo JRoute::_('index.php?option=com_messages&view=messages'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSearch_Filter_Label'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Messages_Search_in_subject'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_MESSAGES_SEARCH_IN_SUBJECT'); ?>" />
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('Messages_Option_Select_State'); ?>
+				<?php echo JText::_('COM_MESSAGES_OPTION_SELECT_STATE'); ?>
 			</label>
 			<select name="filter_state" id="filter_state" class="inputbox">
-				<option value=""><?php echo JText::_('Messages_Option_Select_State');?></option>
+				<option value=""><?php echo JText::_('COM_MESSAGES_OPTION_SELECT_STATE');?></option>
 				<?php echo JHtml::_('select.options', MessagesHelper::getStateOptions(), 'value', 'text', $this->state->get('filter.state'));?>
 			</select>
 			
@@ -49,16 +49,16 @@ $user	= JFactory::getUser();
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'Messages_Heading_Subject', 'a.subject', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_MESSAGES_HEADING_SUBJECTt', 'a.subject', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'Messages_Heading_Read', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_MESSAGES_HEADING_READ', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-15">
-					<?php echo JHtml::_('grid.sort', 'Messages_Heading_From', 'a.user_id_from', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_MESSAGES_HEADING_FROM', 'a.user_id_from', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-20">
-					<?php echo JHtml::_('grid.sort', 'Messages_Heading_Date', 'a.date_time', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_MESSAGES_HEADING_DATE', 'a.date_time', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -82,7 +82,7 @@ $user	= JFactory::getUser();
 					<?php echo $item->user_from; ?>
 				</td>
 				<td>
-					<?php echo JHtml::_('date', $item->date_time, JText::_('DATE_FORMAT_LC2')); ?>
+					<?php echo JHtml::_('date',$item->date_time, JText::_('DATE_FORMAT_LC2')); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>

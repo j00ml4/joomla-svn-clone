@@ -28,7 +28,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('MENUS_ITEMS_SEARCH_FILTER'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_MENUS_ITEMS_SEARCH_FILTER'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
@@ -57,10 +57,10 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</select>
 			
 			<label class="selectlabel" for="filter_level">
-				<?php echo JText::_('JMENU_OPTION_SELECT_LEVEL'); ?>
+				<?php echo JText::_('COM_MENUS_OPTION_SELECT_LEVEL'); ?>
 			</label>
 			<select name="filter_level" id="filter_level" class="inputbox">
-				<option value=""><?php echo JText::_('JMENU_OPTION_SELECT_LEVEL');?></option>
+				<option value=""><?php echo JText::_('COM_MENUS_OPTION_SELECT_LEVEL');?></option>
 				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 			</select>
 			
@@ -119,7 +119,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 						<?php echo $this->escape($item->title); ?></a>
 
 					<?php if ($item->home == 1) : ?>
-						<span><?php echo JHTML::_('image', 'menu/icon-16-default.png', JText::_('DEFAULT'), array( 'title' => JText::_('DEFAULT')), true); ?></span>
+						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'title' => JText::_('JDEFAULT')), true); ?></span>
 					<?php endif; ?>
 
 					<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
@@ -129,8 +129,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'items.');?>
 				</td>
 				<td class="order">
-					<span><?php echo $this->pagination->orderUpIcon($i, $item->order_up, 'items.orderup', 'JGrid_Move_Up', $ordering); ?></span>
-					<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $item->order_dn, 'items.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderUpIcon($i, $item->order_up, 'items.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $item->order_dn, 'items.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 					<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 					<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
 				</td>

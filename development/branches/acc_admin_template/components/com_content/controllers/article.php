@@ -302,7 +302,7 @@ class ContentControllerArticle extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_('JController_Save_success'));
+		$this->setMessage(JText::_('COM_CONTENT_ARTICLE_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

@@ -33,7 +33,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form">
 <div class="col main-section">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('Menus_Menu_Details');?></legend>
+		<legend><?php echo JText::_('COM_MENUS_MENU_DETAILS');?></legend>
 			<div>
 				<?php echo $this->form->getLabel('title'); ?>
 				<?php echo $this->form->getInput('title'); ?>

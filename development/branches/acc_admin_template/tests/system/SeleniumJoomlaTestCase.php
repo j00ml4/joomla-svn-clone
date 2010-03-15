@@ -26,11 +26,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogin()
 	{
-		//$this->setUp();
-		echo "Logging in to admin.\n";
+		echo "Logging in to back end.\n";
 		$cfg = new SeleniumConfig();
-		$this->open($cfg->path . "administrator/index.php?option=com_login");
-		$this->waitForPageToLoad("30000");
 		$this->type("mod-login-username", $cfg->username);
 		$this->type("mod-login-password", $cfg->password);
 		$this->click("link=Log in");
@@ -39,29 +36,30 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doAdminLogout()
 	{
-		$this->gotoAdmin();
 		echo "Logging out of back end.\n";
 		$this->click("link=Logout");
+		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoAdmin()
 	{
-		echo "Browsing to admin.\n";
+		echo "Browsing to back end.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path . "administrator");
+		$this->waitForPageToLoad("30000");
 	}
 
 	function gotoSite()
 	{
-		echo "Browsing to site.\n";
+		echo "Browsing to font end.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
+		$this->waitForPageToLoad("30000");		
 	}
 
 	function doFrontEndLogin()
 	{
-		$this->gotoSite();
-		echo "Logging into front end of site.\n";
+		echo "Logging in to front end.\n";
 		$this->type("modlgn_username", "admin");
 		$this->type("modlgn_passwd", "password");
 		$this->click("Submit");
@@ -77,14 +75,12 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doFrontEndLogout()
 	{
-		$this->gotoSite();
-		echo "Logging out of front end of site.\n";
+		echo "Logging out of front end.\n";
 		$this->click("Submit");
 		$this->waitForPageToLoad("30000");
 	}
 	
 	function createUser($name, $userName, $password = 'password', $email = 'testuser@test.com', $group = 'Manager') {
-		$this->gotoAdmin();
 		$this->click("link=User Manager");
 		$this->waitForPageToLoad("30000");
 		echo("Add new user named " . $name . " in Group=" . $group . "\n");
@@ -144,7 +140,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	
 	function deleteTestUsers($partialName = 'My Test User')
 	{
-		echo "Back to User Manager.\n";
+		echo "Browse to User Manager.\n";
 	    $this->click("link=User Manager");
 	    $this->waitForPageToLoad("30000");
 	    
@@ -153,7 +149,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	    $this->click("//button[@type='submit']");
 	    $this->waitForPageToLoad("30000");
 	  
-	    echo "Delete all users in view\n";
+	    echo "Delete all users in view.\n";
 	    $this->click("toggle");
 	    echo("Delete new user.\n");    
 	    $this->click("link=Delete");
@@ -164,6 +160,88 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	    	array_push($this->verificationErrors, $e->toString());
 	    }
 	}
+	
+	function createGroup($groupName,$groupParent = 'Public')
+  	{	
+		$this->click("link=Groups");
+	    $this->waitForPageToLoad("30000");
+	    echo "Create new group ".$groupName.".\n";
+	    $this->click("link=New");
+	    $this->waitForPageToLoad("30000");
+	    $this->type("jform_title", $groupName);
+	    switch ($groupParent)
+		{
+			case 'Public' :
+	    	$this->select("jformparent_id", "value=1");	   
+				break;
+
+			case 'Manager' :
+	    	$this->select("jformparent_id", "value=6");	   
+				break;
+
+			case 'Administrator' :
+	    	$this->select("jformparent_id", "value=7");	   
+				break;
+
+			case 'Super Users' :
+	    	$this->select("jformparent_id", "value=8");	   
+				break;
+
+			case 'Registered' :
+	    	$this->select("jformparent_id", "value=2");	   
+				break;
+
+			case 'Author' :
+	    	$this->select("jformparent_id", "value=3");	   
+				break;
+
+			case 'Editor' :
+	    	$this->select("jformparent_id", "value=4");	   
+				break;
+				
+			case 'Publisher' :
+	    	$this->select("jformparent_id", "value=5");	   
+				break;
+
+			default:
+	    	$this->select("jformparent_id", "value=1");	   
+				break;
+		}    
+	    $this->click("link=Save & Close");
+	    $this->waitForPageToLoad("30000");
+	    try {
+	        $this->assertTrue($this->isTextPresent("Item successfully saved."));
+	        echo "Creation of ".$groupName." succeeded.\n";
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	        array_push($this->verificationErrors, $e->toString());
+    	}
+  	}
+
+	function deleteGroup($partialName = 'test')
+	{
+		echo "Browse to User Manager: Groups.\n";
+		$this->click("link=Groups");
+	    $this->waitForPageToLoad("30000");
+	    
+	    echo "Filter on ".$partialName.".\n";
+	    $this->type("filter_search", $partialName);
+	    $this->click("//button[@type='submit']");
+	    $this->waitForPageToLoad("30000");
+	  
+	    echo "Delete all users in view.\n";
+	    $this->click("toggle");
+	    echo("Delete new user.\n");    
+//	    $this->click("//li[@id='toolbar-delete']/a");
+    	$this->click("link=Trash");
+	    $this->waitForPageToLoad("30000");
+	    try {
+	    	$this->assertTrue($this->isTextPresent("item(s) successfully deleted."));
+	    	 echo "Deletion of group(s) containing ".$partialName." succeeded.\n";
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	    	array_push($this->verificationErrors, $e->toString());
+	    }
+	}
+	
 	/**
 	 * Tests for the presence of a Go button and clicks it if present.
 	 * Used for the hathor accessible template when filtering on lists in back end.

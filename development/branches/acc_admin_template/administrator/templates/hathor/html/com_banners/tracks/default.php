@@ -11,21 +11,21 @@
 defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script', 'multiselect.js');
+JHtml::_('script','multiselect.js');
 JHtml::_('behavior.modal', 'a.modal');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=tracks'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('COM_BANNERS_BEGIN_LABEL'); ?></legend>
 		<div class="filter-search">
 
-			<label class="filter-hide-lbl" for="filter_begin"><?php echo JText::_('BANNERS_BEGIN_LABEL'); ?></label>
-			<?php echo JHtml::_('calendar', $this->state->get('filter.begin'), 'filter_begin','filter_begin','%Y-%m-%d' , array('size'=>10,'onchange'=>'this.form.submit()'));?>
+			<label class="filter-hide-lbl" for="filter_begin"><?php echo JText::_('COM_BANNERS_BEGIN_LABEL'); ?></label>
+			<?php echo JHtml::_('calendar',$this->state->get('filter.begin'), 'filter_begin','filter_begin','%Y-%m-%d' , array('size'=>10,'onchange'=>'this.form.submit()'));?>
 
-			<label class="filter-hide-lbl" for="filter_end"><?php echo JText::_('BANNERS_END_LABEL'); ?></label>
-			<?php echo JHtml::_('calendar', $this->state->get('filter.end'), 'filter_end', 'filter_end','%Y-%m-%d' ,array('size'=>10,'onchange'=>'this.form.submit()'));?>
+			<label class="filter-hide-lbl" for="filter_end"><?php echo JText::_('COM_BANNERS_END_LABEL'); ?></label>
+			<?php echo JHtml::_('calendar',$this->state->get('filter.end'), 'filter_end', 'filter_end','%Y-%m-%d' ,array('size'=>10,'onchange'=>'this.form.submit()'));?>
 
 		</div>
 		<div class="filter-select">
@@ -33,7 +33,7 @@ $userId	= $user->get('id');
 				<?php echo JText::_('BANNERS_SELECT_TYPE'); ?>
 			</label>
 			<select name="filter_type" id="filter_type" class="inputbox">
-				<?php echo JHtml::_('select.options', array(JHtml::_('select.option', '0', JText::_('BANNERS_SELECT_TYPE')), JHtml::_('select.option', 1, JText::_('Banners_Impression')), JHtml::_('select.option', 2, JText::_('Banners_Click'))), 'value', 'text', $this->state->get('filter.type'));?>
+				<?php echo JHtml::_('select.options', array(JHtml::_('select.option', '0', JText::_('COM_BANNERS_SELECT_TYPE')), JHtml::_('select.option', 1, JText::_('COM_BANNERS_IMPRESSION')), JHtml::_('select.option', 2, JText::_('COM_BANNERS_CLICK'))), 'value', 'text', $this->state->get('filter.type'));?>
 			</select>
 
 			<label class="selectlabel" for="filter_category_id">
@@ -47,10 +47,10 @@ $userId	= $user->get('id');
 			</select>
 
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('BANNERS_SELECT_CLIENT'); ?>
+				<?php echo JText::_('COM_BANNERS_SELECT_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value=""><?php echo JText::_('BANNERS_SELECT_CLIENT');?></option>
+				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
 				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 			
@@ -65,22 +65,22 @@ $userId	= $user->get('id');
 		<thead>
 			<tr>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-20">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-20">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_TYPE', 'track_type', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_TYPE', 'track_type', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_COUNT', 'count', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_COUNT', 'count', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_DATE', 'track_date', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_DATE', 'track_date', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -98,7 +98,7 @@ $userId	= $user->get('id');
 					<?php echo $item->category_title;?>
 				</td>
 				<td>
-					<?php echo $item->track_type==1 ? JText::_('BANNERS_IMPRESSION'): JText::_('BANNER_CLICK');?>
+					<?php echo $item->track_type==1 ? JText::_('COM_BANNERS_IMPRESSION'): JText::_('COM_BANNER_CLICK');?>
 				</td>
 				<td>
 					<?php echo $item->count;?>

@@ -27,6 +27,138 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+15-Mar-2010 Jean-Marie Simonet
+# [19953] Corrected bug in gmail.php
+$ Normalized "Category Options" string
+
+14-Mar-2010 Ron Severdia
++ First draft of Atomic template with additions from Christian Montoya
+
+14-Mar-2010 Jean-Marie Simonet
+$ Adding string in com_plugins.ini
+$^ Refactored com_menus inis/keys, customized item(s), + some
+
+13-Mar-2010 Jean-Marie Simonet
+$^ Refactored com_modules ini/keys, customized item(s)
+$ Standardized mod_toolbar ini/keys
+$ Refactored com_plugins ini/keys, customized some item(s)
+$ Deleting unused com_banners.ini in front-end
+$ Refactored com_mailto ini/keys
+
+13-Mar-2010 Hannes Papenberg
+# Fixed mod_menu (Frontend) parameters
+
+12-Mar-2010 Jean-Marie Simonet
+$^# Refactored com_messages ini/keys, customized item(s)
+$ Customizing JCONTROLLER_SAVE_SUCCESS
+^ Change string in com_categories
+
+11-Mar-2010 Jean-Marie Simonet
+$^ Customized ini/keys item(s) com_newfeeds, com_templates, com_weblinks
+
+10-Mar-2010 Jean-Marie Simonet
+$ Refactored com_banners inis/keys customizing item(s)
+$ Refactored mod_menu (site) ini/keys
+$ Mass change key USE_GLOBAL to JCOMMON_USE_GLOBAL
+
+10-Mar-2010 Christophe Demko
+# Correction of a bug in JLanguage for php > 5.3.1
+
+09-Mar-2010 Hannes Papenberg
+# Rewrite of mod_menu in frontend. Added the classes and IDs to the menu items and reading data from JMenu and not from database.
+
+09-Mar-2010 Jean-Marie Simonet
+$ Typo in string
+$ Corrected a bunch of strings. Whitespaces, slashes and periods in Keys. Wrong or absent doublequotes in values.
+$ Standardized com_admin ini/keys
+
+09-Mar-2010 Christophe Demko
+# Correcting a bug in parse_ini_file for php >= 5.3.1
+# Correcting JHtml::script and JHtml::style and JHtml::image for allowing selection in plugins
+
+08-Mar-2010 Christophe Demko
+^ Translating cache and session handler names in the JFieldCacheHandler and JFieldSessionHandler
+^ Translating name of editors in the JFieldEditors class
+^ Enhancing language error message display
+
+08-Mar-2010 Jean-Marie Simonet
+^ Refactored com_config ini/keys
+$ Typos in some strings
+
+07-Mar-2010 Mark Dexter
+^ Implement parameters for com_content frontpage menu item
+
+07-Mar-2010 Christophe Demko
+- Reverting patch 15232 and 15221 which are buggy in php 5.2.4
+
+06-Mar-2010 Jean-Marie Simonet
+$+ Normalised banners language field + sql + sample data
+$ Finalized com_cpanel keys/inis
+
+06-Mar-2010 Mark Dexter
+# Fix problem where JSite was changing JComponentHelper::getParams results 
+
+06-Mar-2010 Hannes Papenberg
+# Added complete manifest files to each core component - Thanks Edgars Piru�ka
+
+05-Mar-2010 Mark Dexter
+^ Added modified_by_name to articles model
+^ Implemented include subcategories parameter for Article Category List, Blog
+^ Use path for sorting categories by alpha
+# Fix bug in metadata for article category list, blog
+# Fix pagination bug in category blog
+^ Update com_content global params in joomla.sql
+^ Modify sample data for article category list, blog
+
+05-Mar-2010 Jean-Marie Simonet
+$ Loading plugin lang in plugin Manager when ini in plugin language folder
+$# Refactored com_redirect inis/keys + some
+$ Refactored com_login ini/keys + some
+
+04-Mar-2010 Christophe Demko
+^ Loading of language in JPlugin
+# Correcting bugs in JFieldCheckbox
+
+04-March-2010 Jean-Marie Simonet
+$^ Refactored com_templates ini/keys 
+$^ Refactored tpl_milkyway ini/keys
+
+03-March-2010 Mark Dexter
+^ Add properties to help with nested set output on front end (Robert Deutz)
+^ Add rights field to metadata (Elin Waring)
+^ Remove inline style from mod_random image (Angie Radtke)
+
+02-Mar-2010 Hannes Papenberg
+# Fixed ordering of com_content
+# Fixed ordering of com_weblinks
+# Fixed ordering of com_newsfeeds
+
+02-March-2010 Jean-Marie Simonet
+$^ Refactored com_newsfeeds ini/keys + some JCommon.
+
+28-Feb-2010 Hannes Papenberg
+# Reverting consistency commit from 23-feb-2010
+# Made all calls to functions in JHTML class consistent throughout the system. All use JHTML::_() now.
++ Implemented linked author profile in com_content
+^ Moved JS, CSS and image files of the editors to /media folder - Thanks Rob Clayburn!
+# Created correct manifest file for com_weblinks - Thanks Edgars Piru�ka!
+# Fixed usage of COM_CONTENT_CATEGORY to CONTENT_CATEGORY
+
+27-Feb-2010 Hannes Papenberg
+# Fixing JDate::toFormat() - Thanks Edgars Piru�ka!
+# Missed some files when uploading the new mod_articles_news
+# Fixed bug in loading user in JUser
+
+26-Feb-2010 Mark Dexter
+# Add CSS for multi-column blog display (Angie Radtke)
+^ Fix up ordering and other parameters for category blog menu item 
+^ Make global, menu item, and article parameters consistent in content
+^ Fix up language tags for parameters
+# Fix multi-column bug in frontpage blog
+
+26-Feb-2010 Jean-Marie Simonet
+^ Integrating default latin transliteration in framework
+
 25-Feb-2010 Christophe Demko
 # Correcting integrity of #__asset table
 

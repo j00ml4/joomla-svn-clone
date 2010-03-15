@@ -105,17 +105,17 @@ JHtml::_('behavior.formvalidation');
 			
 		<?php endif; ?>
 		
-		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
-		<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
-			<?php echo $this->loadTemplate('metadata'); ?>
-		</fieldset>
-		
 		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'access-rules'); ?>
 		<fieldset class="panelform">
 			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
 			<?php // echo $this->form->getLabel('rules'); ?>
 			<?php echo $this->form->getInput('rules'); ?>
+		</fieldset>
+		
+		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
+		<fieldset class="panelform">
+			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
+			<?php echo $this->loadTemplate('metadata'); ?>
 		</fieldset>
 		
 		<?php echo JHtml::_('sliders.end'); ?>	

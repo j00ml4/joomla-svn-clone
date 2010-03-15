@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script', 'multiselect.js');
+JHtml::_('script','multiselect.js');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 
@@ -28,7 +28,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Banners_Search_in_title'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_BANNERS_SEARCH_IN_TITLE'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
@@ -55,22 +55,22 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLIENT', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-30">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CONTACT', 'contact', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CONTACT', 'contact', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap state-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_PUBLISHED', 'state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_ACTIVE', 'nbanners', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_ACTIVE', 'nbanners', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JText::_('BANNERS_HEADING_METAKEYWORDS'); ?>
+					<?php echo JText::_('COM_BANNERS_HEADING_METAKEYWORDS'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('BANNERS_HEADING_PURCHASETYPE'); ?>
+					<?php echo JText::_('COM_BANNERS_HEADING_PURCHASETYPE'); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -114,9 +114,9 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</td>
 				<td class="center">
 					<?php if ($item->purchase_type<0):?>
-						<?php echo JText::sprintf('BANNERS_DEFAULT',JText::_('BANNERS_'.$this->params->get('purchase_type')));?>
+						<?php echo JText::sprintf('COM_BANNERS_DEFAULT',JText::_('COM_BANNERS_FIELD_VALUE_'.$this->params->get('purchase_type')));?>
 					<?php else:?>
-						<?php echo JText::_('BANNERS_'.$item->purchase_type);?>
+						<?php echo JText::_('COM_BANNERS_FIELD_VALUE_'.$item->purchase_type);?>
 					<?php endif;?>
 				</td>
 				<td class="center">
