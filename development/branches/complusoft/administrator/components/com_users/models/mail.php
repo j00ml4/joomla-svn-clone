@@ -9,7 +9,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modelform');
-jimport('joomla.database.query');
 
 /**
  * Users mail model.
@@ -28,7 +27,7 @@ class UsersModelMail extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app 	= JFactory::getApplication();
+		$app	= JFactory::getApplication();
 
 		// Get the form.
 		$form = parent::getForm('mail', 'com_users.mail', array('array' => 'jform', 'event' => 'onPrepareForm'));
@@ -52,19 +51,18 @@ class UsersModelMail extends JModelForm
 
 	public function send()
 	{
-		$app = JFactory::getApplication();
+		// Initialise variables.
+		$data	= JRequest::getVar('jform', array(), 'post', 'array');
+		$app	= JFactory::getApplication();
+		$user	= JFactory::getUser();
+		$acl	= JFactory::getACL();
+		$db		= $this->getDbo();
 
-		$db		= JFactory::getDbo();
-		$user 	= JFactory::getUser();
-		$acl 	= JFactory::getACL();
-
-		$data = JRequest::getVar('jform', array(), 'post', 'array');
-
-		$mode = array_key_exists('mode',$data) ? intval($data['mode']) : 0;
-		$subject = array_key_exists('subject',$data) ? $data['subject'] : '';
-		$grp = array_key_exists('group',$data) ? intval($data['group']) : 0;
-		$recurse = array_key_exists('recurse',$data) ? intval($data['recurse']) : 0;
-		$bcc = array_key_exists('bcc',$data) ? intval($data['bcc']) : 0;
+		$mode		= array_key_exists('mode',$data) ? intval($data['mode']) : 0;
+		$subject	= array_key_exists('subject',$data) ? $data['subject'] : '';
+		$grp		= array_key_exists('group',$data) ? intval($data['group']) : 0;
+		$recurse	= array_key_exists('recurse',$data) ? intval($data['recurse']) : 0;
+		$bcc		= array_key_exists('bcc',$data) ? intval($data['bcc']) : 0;
 		$message_body = array_key_exists('message',$data) ? $data['message'] : '';
 
 		// automatically removes html formatting
@@ -82,7 +80,7 @@ class UsersModelMail extends JModelForm
 		$to = $acl->getUsersByGroup($grp, $recurse);
 
 		// Get all users email and group except for senders
-		$query = new JQuery;
+		$query	= $db->getQuery(true);
 		$query->select('email');
 		$query->from('#__users');
 		$query->where('id != '.(int) $user->get('id'));

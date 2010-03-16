@@ -199,7 +199,7 @@ function UsersParseRoute($segments)
 	if ($memberId)
 	{
 		// Set the package id.
-		$vars['member_id'] = (int)$memberId; 
+		$vars['member_id'] = (int)$memberId;
 
 		// Set the view to package if not already set.
 		if (empty($vars['view'])) {
@@ -207,7 +207,7 @@ function UsersParseRoute($segments)
 		}
 	}
 	else {
-		JError::raiseError(404, JText::_('Resource not found.'));
+		JError::raiseError(404, JText::_('JCOMMON_RESOURCE_NOT_FOUND'));
 	}
 
 	return $vars;

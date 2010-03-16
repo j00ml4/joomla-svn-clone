@@ -63,14 +63,14 @@ $pane = JPane::getInstance('sliders');
 					<li class="email" title="<?php echo JText::_('COMMENTS_EMAIL'); ?>"><?php echo $this->item->email; ?></li>
 
 					<li class="ip" title="<?php echo JText::_('COMMENTS_IP_ADDRESS'); ?>"><a href="http://ip-lookup.net/index.php?ip=<?php echo $this->item->address; ?>" target="_new"><?php echo $this->item->address; ?></a>
-						 <a href="index.php?option=com_comments&amp;task=config.block&amp;block=address&amp;cid[]=<?php echo $this->item->id;?>">[ <?php echo JText::_('COMMENTS_BLOCK');?> ]</a></li>
+						<a href="index.php?option=com_comments&amp;task=config.block&amp;block=address&amp;cid[]=<?php echo $this->item->id;?>">[ <?php echo JText::_('COMMENTS_BLOCK');?> ]</a></li>
 
 					<li class="url" title="<?php echo JText::_('COMMENTS_WEBSITE_URL'); ?>"><?php echo ($this->item->url) ? $this->item->url : JText::_('COMMENTS_NOT_AVAILABLE'); ?></li>
 				</ul>
 			</dd>
 
 			<dt class="date"><?php echo JText::_('COMMENTS_DATE'); ?></dt>
-			<dd class="date"><?php echo JHtml::date($this->item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+			<dd class="date"><?php echo JHTML::_('date',$this->item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 			<dt class="subject"><?php echo JText::_('COMMENTS_SUBJECT'); ?></dt>
 			<dd class="subject"><?php echo ($this->item->subject) ? $this->item->subject : JText::_('COMMENTS_NOT_AVAILABLE'); ?></dd>
@@ -97,7 +97,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('COMMENTS_DATE'); ?></dt>
-					<dd class="date"><?php echo JHtml::date($item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('COMMENTS_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('COMMENTS_NOT_AVAILABLE'); ?></dd>
@@ -125,7 +125,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('COMMENTS_DATE'); ?></dt>
-					<dd class="date"><?php echo JHtml::date($item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('COMMENTS_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('COMMENTS_NOT_AVAILABLE'); ?></dd>
@@ -153,7 +153,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('COMMENTS_DATE'); ?></dt>
-					<dd class="date"><?php echo JHtml::date($item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('COMMENTS_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('COMMENTS_NOT_AVAILABLE'); ?></dd>

@@ -27,6 +27,46 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+16-Mar-2010 Mark Dexter
+# Adjusted tests for changes in core
++ Added new method to count verification errors
+^ Improved message for verification errors to show file and line number
+
+12-Mar 2010 Mark Dexter
+^ Added new methods to SeleniumJoomlaTestCase (from Matt Thomas)
+
+03-Mar-2010 Mark Dexter
+# Fix doInstall.php to reflect SeleniumJoomlaTestCase changes
+
+01-Mar-2010 Mark Dexter
+^ Refactored SeleniumJoomlaTestCase methods and fixed test cases for new methods (from Matt Thomas)
+
+21-Feb-2010 Mark Dexter
+^ Change system tests to use filter_search
+
+19-Feb-2010 Mark Dexter
+# Fixed problems in system tests due to admin template change
+^ Change doInstall.php to delete configuration.php file
+
+17-Feb-2010 Hannes Papenberg
+# Fixed JForm::setFields() test
+
+14-Feb-2010 Ian MacLennan
++ Added tests for JEvent
++ Added tests for JDispatcher
+
+13-Feb-2010 Ian MacLennan
+^ Removing @group breaks annotation because tests no longer break the run
+
+10-Feb-2010 Hannes Papenberg
+# Fixed sampledata in JFilterInputTests
+
+08-Feb-2010 Hannes Papenberg
+# Fixed JSimpleXML tests
+
+30-Jan-2010 Ian MacLennan
+# Fixed JFormTest::testLoad to sync with changes to trunk
+
 27-Jan-2010 Mark Dexter
 # Fix bugs in functional tests. Add back TestSuite.php.
 # Add new test to test front-end sample data.

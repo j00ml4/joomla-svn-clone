@@ -58,14 +58,14 @@ class LoginController extends JController
 	public function login()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken('request') or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app = &JFactory::getApplication();
 
 		$model = &$this->getModel('login');
 		$credentials = $model->getState('credentials');
 		$return = $model->getState('return');
-		
+
 		$result = $app->login($credentials, array('action' => 'core.login.admin'));
 
 		if (!JError::isError($result)) {

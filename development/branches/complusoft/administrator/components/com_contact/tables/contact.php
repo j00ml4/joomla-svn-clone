@@ -18,65 +18,65 @@ defined('_JEXEC') or die;
 class ContactTableContact extends JTable
 {
 	/** @var int Primary key */
-	public $id 					= null;
+	public $id = null;
 	/** @var string */
-	public $name 				= null;
+	public $name = null;
 	/** @var string */
-	public $alias				= null;
+	public $alias = null;
 	/** @var string */
-	public $con_position 		= null;
+	public $con_position = null;
 	/** @var string */
-	public $address 			= null;
+	public $address = null;
 	/** @var string */
-	public $suburb 				= null;
+	public $suburb = null;
 	/** @var string */
-	public $state 				= null;
+	public $state = null;
 	/** @var string */
-	public $country 			= null;
+	public $country = null;
 	/** @var string */
-	public $postcode 			= null;
+	public $postcode = null;
 	/** @var string */
-	public $telephone 			= null;
+	public $telephone = null;
 	/** @var string */
-	public $fax 				= null;
+	public $fax = null;
 	/** @var string */
-	public $misc 				= null;
+	public $misc = null;
 	/** @var string */
-	public $image 				= null;
+	public $image = null;
 	/** @var string */
-	public $imagepos 			= null;
+	public $imagepos = null;
 	/** @var string */
-	public $email_to 			= null;
+	public $email_to = null;
 	/** @var int */
-	public $default_con 		= null;
+	public $default_con = null;
 	/** @var int */
-	public $published 			= null;
+	public $published = null;
 	/** @var int */
-	public $checked_out 		= 0;
+	public $checked_out = 0;
 	/** @var datetime */
-	public $checked_out_time 	= 0;
+	public $checked_out_time = 0;
 	/** @var int */
-	public $ordering 			= null;
+	public $ordering = null;
 	/** @var string */
-	public $params 				= null;
+	public $params = null;
 	/** @var int A link to a registered user */
-	public $user_id 			= null;
+	public $user_id = null;
 	/** @var int A link to a category */
-	public $catid 				= null;
+	public $catid = null;
 	/** @var int */
-	public $access 				= null;
+	public $access = null;
 	/** @var string Mobile phone number(s) */
-	public $mobile 				= null;
+	public $mobile = null;
 	/** @var string */
-	public $webpage 			= null;
+	public $webpage = null;
 	/** @var string */
-	public $sortname1 			= null;	
+	public $sortname1 = null;
 	/** @var string */
-	public $sortname2 			= null;
+	public $sortname2 = null;
 	/** @var string */
-	public $sortname3 			= null;
+	public $sortname3 = null;
 	/** @var string */
-	public $language 			= null;	
+	public $language = null;
 	/**
 	 * Constructor
 	 *
@@ -121,7 +121,7 @@ class ContactTableContact extends JTable
 		$this->default_con = intval($this->default_con);
 
 		if (JFilterInput::checkAttribute(array ('href', $this->webpage))) {
-			$this->setError(JText::_('CONTACT_WARNING_PROVIDE_VALID_URL'));
+			$this->setError(JText::_('COM_CONTACT_WARNING_PROVIDE_VALID_URL'));
 			return false;
 		}
 
@@ -137,7 +137,7 @@ class ContactTableContact extends JTable
 
 		/** check for valid name */
 		if (trim($this->name) == '') {
-			$this->setError(JText::_('CONTACT_WARNING_NAME'));
+			$this->setError(JText::_('COM_CONTACT_WARNING_PROVIDE_VALID_NAME'));
 			return false;
 		}
 				/** check for existing name */
@@ -146,7 +146,7 @@ class ContactTableContact extends JTable
 
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
-			$this->setError(JText::sprintf('Contact_Warning_Same_Name', JText::_('Contact')));
+			$this->setError(JText::sprintf('CONTACT_WARNING_SAME_NAME', $this->id));
 			return false;
 		}
 
@@ -159,7 +159,7 @@ class ContactTableContact extends JTable
 		}
 		/** check for valid category */
 		if (trim($this->catid) == '') {
-			$this->setError(JText::_('CONTACT_WARNING_CATEGORY'));
+			$this->setError(JText::_('COM_CONTACT_WARNING_CATEGORY'));
 			return false;
 		}
 		return true;

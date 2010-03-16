@@ -52,7 +52,7 @@ $app = JFactory::getApplication();
 		<div>
 			<div>
 				<span class="logo"><a href="http://www.joomla.org" target="_blank"><img src="templates/<?php echo  $this->template ?>/images/logo.png" alt="Joomla!" /></a></span>
-				<span class="title"><a href="index.php"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename') : JText::_('Administration'); ?></a></span>
+				<span class="title"><a href="index.php"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename') : JText::_('TPL_BLUESTORK_HEADER'); ?></a></span>
 			</div>
 		</div>
 	</div>
@@ -69,7 +69,7 @@ $app = JFactory::getApplication();
 		<div class="border">
 			<div class="padding">
 				<div id="toolbar-box">
-   			<div class="t">
+				<div class="t">
 				<div class="t">
 					<div class="t"></div>
 				</div>
@@ -84,17 +84,17 @@ $app = JFactory::getApplication();
 					<div class="b"></div>
 				</div>
 			</div>
-  		</div>
-   		<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
 		<?php if (!JRequest::getInt('hidemainmenu')): ?>
 		<jdoc:include type="modules" name="submenu" style="rounded" id="submenu-box" />
 		<?php endif; ?>
 		<jdoc:include type="message" />
 		<div id="element-box">
 			<div class="t">
-		 		<div class="t">
+				<div class="t">
 					<div class="t"></div>
-		 		</div>
+				</div>
 			</div>
 			<div class="m">
 				<jdoc:include type="component" />
@@ -105,9 +105,9 @@ $app = JFactory::getApplication();
 					<div class="b"></div>
 				</div>
 			</div>
-   		</div>
+		</div>
 		<noscript>
-			<?php echo  JText::_('WARNJAVASCRIPT') ?>
+			<?php echo  JText::_('JCOMMON_WARNJAVASCRIPT') ?>
 		</noscript>
 		<div class="clr"></div>
 	</div>

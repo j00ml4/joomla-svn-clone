@@ -3,7 +3,7 @@
  * JFormTest.php -- unit testing file for JForm
  *
  * @version		$Id$
- * @package    Joomla.UnitTest
+ * @package	Joomla.UnitTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,7 +11,7 @@
 /**
  * Test class for JForm.
  *
- * @package    Joomla.UnitTest
+ * @package	Joomla.UnitTest
  * @subpackage Utilities
  *
  */
@@ -85,7 +85,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 
 		// The default path is the class file folder/forms
 		$valid = array(
-			JPATH_LIBRARIES.'/joomla/form/forms'
+			JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'forms'
 		);
 
 		$this->assertThat(
@@ -199,13 +199,13 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	public function testFilter()
 	{
 		include_once JPATH_BASE . '/libraries/joomla/user/user.php';
-		
+
 		$user = new JUser;
-    	$mockSession = $this->getMock('JSession', array('_start', 'get'));
-    	$mockSession->expects($this->once())->method('get')->will(
-    		$this->returnValue($user)
-    	);
-    	JFactory::$session = $mockSession;
+		$mockSession = $this->getMock('JSession', array('_start', 'get'));
+		$mockSession->expects($this->once())->method('get')->will(
+			$this->returnValue($user)
+		);
+		JFactory::$session = $mockSession;
 		// Adjust the timezone offset to a known value.
 		$config = JFactory::getConfig();
 		$config->setValue('config.offset', 10);
@@ -463,7 +463,7 @@ class JFormTest extends PHPUnit_Framework_TestCase
 		$xml = '<form><fields>';
 		foreach ($groups['_default'] as $elem)
 		{
-			$xml .= $elem->toString();
+			$xml .= $elem->asXML();
 		}
 		$xml .= '</fields></form>';
 
@@ -570,14 +570,13 @@ class JFormTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testSetFields()
 	{
-		jimport('joomla.utilities.simplexml');
+		jimport('joomla.utilities.xmlelement');
 
 		// Prepare a sample XML document.
-		$xml = new JSimpleXML;
-		$xml->loadString('<fields><field name="field_name" /></fields>');
+		$xml = simplexml_load_string('<form><fields><field name="field_name" /><field name="field_name2" /></fields></form>', 'JXMLElement');
 		$form = new JFormInspector;
-
-		$fields = $xml->document->children();
+		
+		$fields = $xml->fields->field;
 
 		// Check the default group.
 		$form->setFields($fields);

@@ -27,7 +27,6 @@ class CategoriesViewCategory extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$form		= $this->get('Form');
-		$modules	= $this->get('Modules');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -63,7 +62,7 @@ class CategoriesViewCategory extends JView
 		// If not checked out, can save the item.
 		if ($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'))
 		{
-			JToolBarHelper::apply('category.apply', 'JToolbar_Apply');
+			JToolBarHelper::apply('category.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('category.save', 'JToolbar_Save');
 			JToolBarHelper::addNew('category.save2new', 'JToolbar_Save_and_new');
 		}
@@ -74,7 +73,7 @@ class CategoriesViewCategory extends JView
 		}
 
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('category.cancel');
+			JToolBarHelper::cancel('category.cancel','JTOOLBAR_CANCEL');
 		}
 		else {
 			JToolBarHelper::cancel('category.cancel', 'JToolbar_Close');

@@ -10,8 +10,7 @@ defined('_JEXEC') or die;
 
 // Include dependancies.
 jimport('joomla.application.component.modelform');
-jimport('joomla.database.query');
-require_once JPATH_COMPONENT.DS.'helpers'.DS.'menus.php';
+require_once JPATH_COMPONENT.'/helpers/menus.php';
 
 /**
  * Menu Item Model for Menus.
@@ -27,14 +26,14 @@ class MenusModelItem extends JModelForm
 	 *
 	 * @var		string
 	 */
-	 protected $_context		= 'com_menus.item';
+	protected $_context		= 'com_menus.item';
 
 	/**
 	 * Returns a Table object, always creating it
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Menu', $prefix = 'JTable', $config = array())
@@ -155,8 +154,10 @@ class MenusModelItem extends JModelForm
 				if (isset($args['option'])) {
 					// Load the language file for the component.
 					$lang = &JFactory::getLanguage();
-					$lang->load($args['option'],JPATH_ADMINISTRATOR.'/components/'.$args['option']);
-					$lang->load($args['option']);
+						$lang->load($args['option'], JPATH_ADMINISTRATOR, null, false, false)
+					||	$lang->load($args['option'], JPATH_ADMINISTRATOR.'/components/'.$args['option'], null, false, false)
+					||	$lang->load($args['option'], JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+					||	$lang->load($args['option'], JPATH_ADMINISTRATOR.'/components/'.$args['option'], $lang->getDefault(), false, false);
 
 					// Determine the component id.
 					$component = JComponentHelper::getComponent($args['option']);
@@ -389,7 +390,8 @@ class MenusModelItem extends JModelForm
 	 */
 	public function getModules()
 	{
-		$query = new JQuery;
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		$query->select('a.id, a.title, a.position, a.published');
 		$query->from('#__modules AS a');
@@ -406,10 +408,10 @@ class MenusModelItem extends JModelForm
 		$query->where('a.client_id = 0');
 		$query->order('a.position, a.ordering');
 
-		$this->_db->setQuery($query);
-		$result = $this->_db->loadObjectList();
+		$db->setQuery($query);
+		$result = $db->loadObjectList();
 
-		if ($error = $this->_db->getError()) {
+		if ($error = $db->getError()) {
 			$this->setError($error);
 			return false;
 		}
@@ -441,7 +443,7 @@ class MenusModelItem extends JModelForm
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JError_Checkin_user_mismatch'));
+				$this->setError(JText::_('JERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
 
@@ -494,11 +496,11 @@ class MenusModelItem extends JModelForm
 	 */
 	public function save($data)
 	{
+		// Initialise variables.
 		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('item.id');
 		$isNew	= true;
-
-		// Get a row instance.
-		$table = $this->getTable();
+		$db		= $this->getDbo();
+		$table	= $this->getTable();
 
 		// Load the row if saving an existing item.
 		if ($pk > 0) {
@@ -513,7 +515,7 @@ class MenusModelItem extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -576,28 +578,26 @@ class MenusModelItem extends JModelForm
 
 		// Preform the drops.
 		if (!empty($drops)) {
-			$this->_db->setQuery(
+			$db->setQuery(
 				'DELETE FROM #__modules_menu' .
 				' WHERE '.implode(' OR ', $drops)
 			);
-			if (!$this->_db->query()) {
-				$this->setError($this->_db->getErrorMsg());
+			if (!$db->query()) {
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
-			echo $this->_db->getQuery();
 		}
 
 		// Perform the inserts.
 		if (!empty($adds)) {
-			$this->_db->setQuery(
+			$db->setQuery(
 				'INSERT INTO #__modules_menu (moduleid, menuid)' .
 				' VALUES '.implode(',', $adds)
 			);
-			if (!$this->_db->query()) {
-				$this->setError($this->_db->getErrorMsg());
+			if (!$db->query()) {
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
-			echo $this->_db->getQuery();
 		}
 
 		return true;
@@ -699,7 +699,8 @@ class MenusModelItem extends JModelForm
 	 */
 	public function rebuild()
 	{
-		// Get an instance of the table obejct.
+		// Initialiase variables.
+		$db = $this->getDbo();
 		$table = &$this->getTable();
 
 		if (!$table->rebuild()) {
@@ -708,15 +709,15 @@ class MenusModelItem extends JModelForm
 		}
 
 		// Convert the parameters not in JSON format.
-		$this->_db->setQuery(
+		$db->setQuery(
 			'SELECT id, params' .
 			' FROM #__menu' .
-			' WHERE params NOT LIKE '.$this->_db->quote('{%') .
-			'  AND params <> '.$this->_db->quote('')
+			' WHERE params NOT LIKE '.$db->quote('{%') .
+			'  AND params <> '.$db->quote('')
 		);
 
-		$items = $this->_db->loadObjectList();
-		if ($error = $this->_db->getErrorMsg()) {
+		$items = $db->loadObjectList();
+		if ($error = $db->getErrorMsg()) {
 			$this->setError($error);
 			return false;
 		}
@@ -726,12 +727,12 @@ class MenusModelItem extends JModelForm
 			$registry->loadJSON($item->params);
 			$params = (string)$registry;
 
-			$this->_db->setQuery(
+			$db->setQuery(
 				'UPDATE #__menu' .
-				' SET params = '.$this->_db->quote($params).
+				' SET params = '.$db->quote($params).
 				' WHERE id = '.(int) $item->id
 			);
-			if (!$this->_db->query()) {
+			if (!$db->query()) {
 				$this->setError($error);
 				return false;
 			}
@@ -761,7 +762,7 @@ class MenusModelItem extends JModelForm
 		}
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JError_No_items_selected'));
+			$this->setError(JText::_('COM_MENUS_NO_MENUITEMS_SELECTED'));
 			return false;
 		}
 
@@ -786,7 +787,7 @@ class MenusModelItem extends JModelForm
 		}
 
 		if (!$done) {
-			$this->setError('Menus_Error_Insufficient_batch_information');
+			$this->setError('COM_MENUS_ERROR_INSUFFICIENT_BATCH_INFORMATION');
 			return false;
 		}
 
@@ -845,7 +846,7 @@ class MenusModelItem extends JModelForm
 					return false;
 				} else {
 					// Non-fatal error
-					$this->setError(JText::_('Menus_Batch_Move_parent_not_found'));
+					$this->setError(JText::_('COM_MENUS_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -864,7 +865,7 @@ class MenusModelItem extends JModelForm
 					return false;
 				} else {
 					// Not fatal error
-					$this->setError(JText::sprintf('Menus_Batch_Move_row_not_found', $pk));
+					$this->setError(JText::sprintf('COM_MENUS_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -935,8 +936,8 @@ class MenusModelItem extends JModelForm
 		$menuType	= $parts[0];
 		$parentId	= (int) JArrayHelper::getValue($parts, 1, 0);
 
-		$table	= &$this->getTable();
-		$db		= &$this->getDbo();
+		$table	= $this->getTable();
+		$db		= $this->getDbo();
 
 		// Check that the parent exists
 		if ($parentId) {
@@ -947,7 +948,7 @@ class MenusModelItem extends JModelForm
 					return false;
 				} else {
 					// Non-fatal error
-					$this->setError(JText::_('Menus_Batch_Move_parent_not_found'));
+					$this->setError(JText::_('COM_MENUS_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -956,7 +957,7 @@ class MenusModelItem extends JModelForm
 		// If the parent is 0, set it to the ID of the root item in the tree
 		if (empty($parentId)) {
 			if (!$parentId = $table->getRootId()) {
-				$this->setError($this->_db->getErrorMsg());
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
 		}
@@ -991,7 +992,7 @@ class MenusModelItem extends JModelForm
 					return false;
 				} else {
 					// Not fatal error
-					$this->setError(JText::sprintf('Menus_Batch_Move_row_not_found', $pk));
+					$this->setError(JText::sprintf('COM_MENUS_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}

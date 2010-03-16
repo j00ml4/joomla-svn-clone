@@ -27,13 +27,13 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
 			if ($hasContent) :
-				echo $this->form->getField('articletext')->save();
+				echo $this->form->getField('content')->save();
 			endif;
 			?>
 			submitform(task);
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JValidation_Form_failed'));?>');
+			alert('<?php echo $this->escape(JText::_('JVALIDATION_FORM_FAILED'));?>');
 		}
 	}
 // -->
@@ -43,21 +43,30 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<?php if ($this->item->id) : ?>
-			<legend><?php echo JText::sprintf('JRecord_Number', $this->item->id); ?></legend>
+			<legend><?php echo JText::sprintf('JRECORD_NUMBER', $this->item->id); ?></legend>
 			<?php endif; ?>
 
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
+
+			<?php echo $this->form->getLabel('note'); ?>
+			<?php echo $this->form->getInput('note'); ?>
 
 			<?php echo $this->form->getLabel('module'); ?>
 			<?php echo $this->form->getInput('module'); ?>
 
 			<?php echo $this->form->getLabel('showtitle'); ?>
 			<?php echo $this->form->getInput('showtitle'); ?>
-
+			
+			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<?php echo $this->form->getLabel('published'); ?>
 			<?php echo $this->form->getInput('published'); ?>
-
+			<?php echo $this->form->getLabel('publish_up'); ?>
+			<?php echo $this->form->getInput('publish_up'); ?>
+			<?php echo $this->form->getLabel('publish_down'); ?>
+			<?php echo $this->form->getInput('publish_down'); ?>
+			<?php endif; ?>
+			
 			<?php echo $this->form->getLabel('position'); ?>
 			<?php echo $this->form->getInput('position'); ?>
 
@@ -78,12 +87,12 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = (string) $this->item->xml->description) : ?>
 					<label>
-						<?php echo JText::_('Modules_Module_Description'); ?>
+						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
 					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo JText::_('Modules_XML_data_not_available'); ?>
+				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
 			<?php endif; ?>
 		</fieldset>
 	</div>
@@ -107,7 +116,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="clr"></div>
 	<?php if ($hasContent) : ?>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Custom Output'); ?></legend>
+			<legend><?php echo JText::_('COM_MODULES_CUSTOM_OUTPUT'); ?></legend>
 
 			<?php echo $this->form->getLabel('content'); ?>
 			<?php echo $this->form->getInput('content'); ?>

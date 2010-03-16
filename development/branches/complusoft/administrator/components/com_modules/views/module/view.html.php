@@ -72,12 +72,13 @@ class ModulesViewModule extends JView
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 		$canDo		= ModulesHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
-		$client		= $this->get('client');
+		$item		= $this->get('Item');
+		$client		= $item->client_id;
 
-		JToolBarHelper::title(JText::_('Modules_Manager_Module'));
+		JToolBarHelper::title(JText::_('COM_MODULES_MANAGER_MODULE'));
 
 		if ($this->item->module == 'mod_custom') {
-			JToolBarHelper::Preview('index.php?option=com_modules&tmpl=component&client='.$client->id.'&pollid='.$this->item->id);
+			JToolBarHelper::Preview('index.php?option=com_modules&tmpl=component&client='.$client.'&pollid='.$this->item->id);
 		}
 
 
@@ -85,19 +86,19 @@ class ModulesViewModule extends JView
 		// If not checked out, can save the item.
 		if (!$checkedOut && $canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('module.apply', 'JToolbar_Apply');
-			JToolBarHelper::save('module.save', 'JToolbar_Save');
-			JToolBarHelper::addNew('module.save2new', 'JToolbar_Save_and_new');
+			JToolBarHelper::apply('module.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('module.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::addNew('module.save2new', 'JTOOLBAR_SAVE_AND_NEW');
 		}
 			// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('module.save2copy', 'copy.png', 'copy_f2.png', 'JToolbar_Save_as_Copy', false);
+			JToolBarHelper::custom('module.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('module.cancel', 'JToolbar_Cancel');
+			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else {
-			JToolBarHelper::cancel('module.cancel', 'JToolbar_Close');
+			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 		JToolBarHelper::help('screen.module.edit','JTOOLBAR_HELP');

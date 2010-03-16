@@ -29,7 +29,7 @@ JHtml::_('behavior.tooltip');
 			</select>
 
 			<select name="filter_context" id="context" class="inputbox" onchange="this.form.submit()">
- 				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
+				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
 			</select>
 		</div>
 	</fieldset>
@@ -75,7 +75,7 @@ JHtml::_('behavior.tooltip');
 			<tr class="row<?php echo $i % 2; ?>">
 				<td align="center">
 					<a href="<?php echo JRoute::_('index.php?option=com_comments&view=comment&id='.$item->id); ?>">
-						<?php echo JText::sprintf('COMMENTS_SUBMITTED_AUTHOR_DATE', $item->name, JHtml::date($item->created_date, JText::_('DATE_FORMAT_LC2'))); ?></a>
+						<?php echo JText::sprintf('COMMENTS_SUBMITTED_AUTHOR_DATE', $item->name, JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2'))); ?></a>
 				</td>
 				<td valign="top">
 					<ul class="comment-author-data">

@@ -33,9 +33,9 @@ class UsersController extends JController
 		$document = & JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
-		$vName	 = JRequest::getWord('view', 'login');
-		$vFormat = $document->getType();
-		$lName	 = JRequest::getWord('layout', 'default');
+		$vName		= JRequest::getWord('view', 'login');
+		$vFormat	= $document->getType();
+		$lName		= JRequest::getWord('layout', 'default');
 
 		if ($view = & $this->getView($vName, $vFormat))
 		{
@@ -57,17 +57,56 @@ class UsersController extends JController
 
 				// Handle view specific models.
 				case 'profile':
+
+					// If the user is a guest, redirect to the login page.
+					$user = & JFactory::getUser();
+					if ($user->get('guest') == 1) {
+						// Redirect to login page.
+						$app = & JFactory::getApplication();
+						$app->redirect(JRoute::_('index.php?option=com_users&view=login', false));
+					}			
 					$model = & $this->getModel($vName);
 					break;
 
 				// Handle the default views.
 				case 'login':
+					$model = & $this->getModel($vName);
+					break;
+					
 				case 'reset':
+					// If the user is already logged in, redirect to the profile page.
+					$user = & JFactory::getUser();
+					if ($user->get('guest') != 1) {
+						// Redirect to profile page.
+						$app = & JFactory::getApplication();
+						$app->redirect(JRoute::_('index.php?option=com_users&view=profile', false));
+					}
+					
+					$model = & $this->getModel($vName);
+					break;
+					
 				case 'remind':
-				case 'resend':
-				case 'profile':					
+					// If the user is already logged in, redirect to the profile page.
+					$user = & JFactory::getUser();
+					if ($user->get('guest') != 1) {
+						// Redirect to profile page.
+						$app = & JFactory::getApplication();
+						$app->redirect(JRoute::_('index.php?option=com_users&view=profile', false));
+					}
+					
+					$model = & $this->getModel($vName);
+					break;
+					
+				case 'reset':
+					$model = & $this->getModel($vName);
+					break;
+					
+				case 'profile':
+					$model = & $this->getModel($vName);
+					break;
+					
 				default:
-					$model = &$this->getModel('User');
+					$model = &$this->getModel('Login');
 					break;
 			}
 

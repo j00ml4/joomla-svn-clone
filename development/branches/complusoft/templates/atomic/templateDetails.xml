@@ -3,15 +3,15 @@
 <install
 	version="1.6"
 	type="template">
-	<name>Atomic</name>
+	<name>atomic</name>
 	<creationDate>10/10/09</creationDate>
 	<author>Ron Severdia</author>
 	<authorEmail>contact@kontentdesign.com</authorEmail>
 	<authorUrl>http://www.kontentdesign.com</authorUrl>
 	<copyright></copyright>
 	<license>GPL</license>
-	<version>0.1</version>
-	<description>This simple template is just an example of how basic
+	<version>0.3</version>
+	<description>This simple template is just an example of how basic 
 		template elements look.</description>
 	<files>
 		<filename>index.php</filename>

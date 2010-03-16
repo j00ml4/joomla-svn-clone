@@ -25,7 +25,7 @@ class MessagesControllerMessage extends JControllerForm
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowSave($data, $key = 'message_id')
 	{
@@ -42,7 +42,7 @@ class MessagesControllerMessage extends JControllerForm
 		if ($replyId = JRequest::getInt('reply_id')) {
 			$this->setRedirect('index.php?option=com_messages&view=message&layout=edit&reply_id='.$replyId);
 		} else {
-			$this->setMessage(JText::_('Messages_Invalid_reply_id'));
+			$this->setMessage(JText::_('COM_MESSAGES_INVALID_REPLY_ID'));
 			$this->setRedirect('index.php?option=com_messages&view=messages');
 		}
 	}

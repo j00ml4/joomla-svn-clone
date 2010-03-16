@@ -14,16 +14,16 @@ defined('_JEXEC') or die;
 	<div class="t">
 		<div class="t">
 			<div class="t"></div>
- 		</div>
+		</div>
 	</div>
 	<div class="m">
 		<div class="submenu-box">
 			<div class="submenu-pad">
 				<ul id="submenu" class="configuration">
-					<li><a href="#" onclick="return false;" id="site" class="active"><?php echo JText::_('Site'); ?></a></li>
-					<li><a href="#" onclick="return false;" id="system"><?php echo JText::_('System'); ?></a></li>
-					<li><a href="#" onclick="return false;" id="server"><?php echo JText::_('Server'); ?></a></li>
-					<li><a href="#" onclick="return false;" id="permissions"><?php echo JText::_('Permissions'); ?></a></li>
+					<li><a href="#" onclick="return false;" id="site" class="active"><?php echo JText::_('COM_CONFIG_SITE'); ?></a></li>
+					<li><a href="#" onclick="return false;" id="system"><?php echo JText::_('COM_CONFIG_SYSTEM'); ?></a></li>
+					<li><a href="#" onclick="return false;" id="server"><?php echo JText::_('COM_CONFIG_SERVER'); ?></a></li>
+					<li><a href="#" onclick="return false;" id="permissions"><?php echo JText::_('COM_CONFIG_PERMISSIONS'); ?></a></li>
 				</ul>
 				<div class="clr"></div>
 			</div>
@@ -32,7 +32,7 @@ defined('_JEXEC') or die;
 	</div>
 	<div class="b">
 		<div class="b">
- 			<div class="b"></div>
+			<div class="b"></div>
 		</div>
 	</div>
 </div>

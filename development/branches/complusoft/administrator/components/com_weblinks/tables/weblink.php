@@ -148,13 +148,13 @@ class WeblinksTableWeblink extends JTable
 	public function check()
 	{
 		if (JFilterInput::checkAttribute(array ('href', $this->url))) {
-			$this->setError(JText::_('Please provide a valid URL'));
+			$this->setError(JText::_('COM_WEBLINKS_ERR_TABLES_PROVIDE_URL'));
 			return false;
 		}
 
 		/** check for valid name */
 		if (trim($this->title) == '') {
-			$this->setError(JText::_('Your Weblink must contain a title.'));
+			$this->setError(JText::_('COM_WEBLINKS_ERR_TABLES_TITLE'));
 			return false;
 		}
 
@@ -172,7 +172,7 @@ class WeblinksTableWeblink extends JTable
 
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
-			$this->setError(JText::sprintf('WARNNAMETRYAGAIN', JText::_('Web Link')));
+			$this->setError(JText::sprintf('WARNNAMETRYAGAIN', JText::_('COM_WEBLINKS_ERR_TABLES_NAME')));
 			return false;
 		}
 
@@ -193,7 +193,7 @@ class WeblinksTableWeblink extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.
@@ -217,7 +217,7 @@ class WeblinksTableWeblink extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('No_Rows_Selected'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

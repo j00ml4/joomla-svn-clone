@@ -1,6 +1,6 @@
 <?php
 /**
- * @version
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_contact
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script', 'multiselect.js');
+JHTML::_('script','multiselect.js');
 $user	= &JFactory::getUser();
 $userId	= $user->get('id');
 ?>
@@ -20,22 +20,22 @@ $userId	= $user->get('id');
 <form action="<?php echo JRoute::_('index.php?option=com_contact'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="search"><?php echo JText::_('Filter'); ?>:</label>
-			<input type="text" name="filter_search" id="search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('Contact_Search_in_name'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('search').value='';this.form.submit();"><?php echo JText::_('JSearch_Filter_Clear'); ?></button>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('Filter'); ?>:</label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CONTACT_SEARCH_IN_NAME'); ?>" />
+			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select fltrt">
 			<select name="filter_access" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOption_Select_Access');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
 			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
 			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOption_Select_Category');?></option>
+				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_contact'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 		</div>
@@ -46,29 +46,29 @@ $userId	= $user->get('id');
 		<thead>
 			<tr>
 				<th width="5">
-					<?php echo JText::_('JGrid_Heading_Row_Number'); ?>
+					<?php echo JText::_('JGRID_HEADING_ROW_NUMBER'); ?>
 				</th>
 				<th width="20">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'Contact_Title_Heading', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_TITLE_HEADING', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'Contact_State_Heading', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_STATE_HEADING', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'Contact_Order_Heading', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ORDER_HEADING', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order',  $this->items); ?>
 				</th>
 				<th width="10%"  class="title">
-					<?php echo JHtml::_('grid.sort',  'Contact_Category_Heading', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_CATEGORY_HEADING', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%"  class="title">
-					<?php echo JHtml::_('grid.sort',  'Contact_Access_Heading', 'access_level', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ACCESS_HEADING', 'access_level', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -86,7 +86,7 @@ $userId	= $user->get('id');
 			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
 			$checkedOut	= JTable::isCheckedOut($userId, $item->checked_out);
 
-			$item->cat_link 	= JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&cid[]='. $item->catid);
+			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&cid[]='. $item->catid);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
@@ -109,8 +109,8 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'contacts.');?>
 				</td>
 				<td class="order">
-					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contact.orderup', 'JGrid_Move_Up', $ordering); ?></span>
-					<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contact.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contact.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contact.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 					<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 					<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 				</td>

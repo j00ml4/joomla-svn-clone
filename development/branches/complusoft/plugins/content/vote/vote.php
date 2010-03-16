@@ -35,8 +35,8 @@ class plgContentVote extends JPlugin
 			$img = '';
 
 			// Look for images in template if available.
-			$starImageOn = JHtml::_('image', 'system/rating_star.png', NULL, NULL, true);
-			$starImageOff = JHtml::_('image', 'system/rating_star_blank.png', NULL, NULL, true);
+			$starImageOn = JHTML::_('image','system/rating_star.png', NULL, NULL, true);
+			$starImageOff = JHTML::_('image','system/rating_star_blank.png', NULL, NULL, true);
 			for ($i=0; $i < $row->rating; $i++) {
 				$img .= $starImageOn;
 			}
@@ -44,21 +44,21 @@ class plgContentVote extends JPlugin
 				$img .= $starImageOff;
 			}
 			$html .= '<span class="content_rating">';
-			$html .= JText::_('User Rating') .':'. $img .'&nbsp;/&nbsp;';
+			$html .= JText::_('PLG_VOTE_USER_RATING') .':'. $img .'&nbsp;/&nbsp;';
 			$html .= intval($row->rating_count);
 			$html .= "</span>\n<br />\n";
 
 			if (!$params->get('intro_only'))
 			{
 				$html .= '<span class="content_vote">';
-				$html .= JText::_('Poor');
+				$html .= JText::_('PLG_VOTE_POOR');
 				$html .= '<input type="radio" alt="vote 1 star" name="user_rating" value="1" />';
 				$html .= '<input type="radio" alt="vote 2 star" name="user_rating" value="2" />';
 				$html .= '<input type="radio" alt="vote 3 star" name="user_rating" value="3" />';
 				$html .= '<input type="radio" alt="vote 4 star" name="user_rating" value="4" />';
 				$html .= '<input type="radio" alt="vote 5 star" name="user_rating" value="5" checked="checked" />';
-				$html .= JText::_('Best');
-				$html .= '&nbsp;<input class="button" type="submit" name="submit_vote" value="'. JText::_('Rate') .'" />';
+				$html .= JText::_('PLG_VOTE_BEST');
+				$html .= '&nbsp;<input class="button" type="submit" name="submit_vote" value="'. JText::_('PLG_VOTE_RATE') .'" />';
 				$html .= '<input type="hidden" name="task" value="vote" />';
 				$html .= '<input type="hidden" name="option" value="com_content" />';
 				$html .= '<input type="hidden" name="cid" value="'. $id .'" />';

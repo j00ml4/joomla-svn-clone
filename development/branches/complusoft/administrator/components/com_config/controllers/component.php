@@ -35,7 +35,7 @@ class ConfigControllerComponent extends JController
 	function save()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('Invalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Set FTP credentials, if given.
 		jimport('joomla.client.helper');
@@ -52,7 +52,7 @@ class ConfigControllerComponent extends JController
 		// Check if the user is authorized to do this.
 		if (!JFactory::getUser()->authorize('core.admin', $option))
 		{
-			JFactory::getApplication()->redirect('index.php', JText::_('ALERTNOTAUTH'));
+			JFactory::getApplication()->redirect('index.php', JText::_('JERROR_ALERTNOAUTHOR'));
 			return;
 		}
 
@@ -85,7 +85,7 @@ class ConfigControllerComponent extends JController
 		$data	= array(
 					'params'	=> $return,
 					'id'		=> $id,
-					'option' 	=> $option
+					'option'	=> $option
 					);
 		$return = $model->save($data);
 

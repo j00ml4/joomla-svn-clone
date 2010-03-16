@@ -25,8 +25,8 @@ class plgAuthenticationGMail extends JPlugin {
 	 * This method should handle any authentication and report back to the subject
 	 *
 	 * @access	public
-	 * @param   array 	$credentials Array holding the user credentials
-	 * @param 	array   $options     Array of extra options
+	 * @param   array	$credentials Array holding the user credentials
+	 * @param	array   $options	Array of extra options
 	 * @param	object	$response	Authentication response object
 	 * @return	boolean
 	 * @since 1.5
@@ -55,7 +55,7 @@ class plgAuthenticationGMail extends JPlugin {
 				}
 				$curl = curl_init('https://mail.google.com/mail/feed/atom');
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, $params->get('verify_peer', 1));
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, $this->params->get('verify_peer', 1));
 				//curl_setopt($curl, CURLOPT_HEADER, 1);
 				curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
 				curl_setopt($curl, CURLOPT_USERPWD, $credentials['username'].':'.$credentials['password']);
@@ -64,8 +64,8 @@ class plgAuthenticationGMail extends JPlugin {
 
 					switch ($code) {
 					case 200:
-				 		$message = 'Access Granted';
-				 		$success = 1;
+						$message = 'Access Granted';
+						$success = 1;
 					break;
 					case 401:
 						$message = 'Access Denied';
@@ -86,7 +86,7 @@ class plgAuthenticationGMail extends JPlugin {
 		}
 		$response->type = 'GMail';
 		if ($success) {
-			$response->status 	     = JAUTHENTICATE_STATUS_SUCCESS;
+			$response->status		= JAUTHENTICATE_STATUS_SUCCESS;
 			$response->error_message = '';
 			if (strpos($credentials['username'], '@') === FALSE) {
 				if ($suffix) { // if there is a suffix then we want to apply it
@@ -95,13 +95,13 @@ class plgAuthenticationGMail extends JPlugin {
 					$response->email = $credentials['username'] . '@gmail.com';
 				}
 			} else { // the username looks like an email address (probably is) so use that
-			$response->email 	= $credentials['username'];
+			$response->email	= $credentials['username'];
 			}
 			// reset the username to what we ended up using
 			$response->username = $credentials['username'];
 			$response->fullname = $credentials['username'];
 		} else {
-			$response->status 		= JAUTHENTICATE_STATUS_FAILURE;
+			$response->status		= JAUTHENTICATE_STATUS_FAILURE;
 			$response->error_message	= 'Failed to authenticate: ' . $message;
 		}
 	}

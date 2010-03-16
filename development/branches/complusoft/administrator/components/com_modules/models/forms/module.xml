@@ -16,9 +16,19 @@
 			default=""
 			size="35"
 			maxlength="100"
-			label="Modules_Field_Title_Label"
-			description="Modules_Field_Title_Desc"
+			label="COM_MODULES_FIELD_TITLE_LABEL"
+			description="COM_MODULES_FIELD_TITLE_DESC"
 			required="true" />
+
+		<field
+			name="note"
+			type="text"
+			class="inputbox"
+			default=""
+			size="35"
+			maxlength="100"
+			label="COM_MODULES_FIELD_NOTE_LABEL"
+			description="COM_MODULES_FIELD_NOTE_DESC" />
 
 		<field
 			name="module"
@@ -27,54 +37,76 @@
 			readonly="readonly"
 			default=""
 			size="20"
-			label="Modules_Field_Module_Label"
-			description="Modules_Field_Module_Desc" />
+			label="COM_MODULES_FIELD_MODULE_LABEL"
+			description="COM_MODULES_FIELD_MODULE_DESC" />
 
 		<field
 			name="showtitle"
 			type="list"
-			label="Modules_Field_Showtitle_Label"
-			description="Modules_Field_Showtitle_Desc"
+			label="COM_MODULES_FIELD_SHOWTITLE_LABEL"
+			description="COM_MODULES_FIELD_TITLE_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option
-				value="1">JYes</option>
+				value="1">JSHOW</option>
 			<option
-				value="0">JNo</option>
+				value="0">JHIDE</option>
 		</field>
 
 		<field
 			name="published"
 			type="list"
-			label="JField_Enabled_Label"
-			description="JField_Enabled_Desc"
+			label="COM_MODULES_FIELD_PUBLISHED_LABEL"
+			description="COM_MODULES_FIELD_PUBLISHED_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option
 				value="1">
-				JOption_Enabled</option>
+				COM_MODULES_FIELD_VALUE_PUBLISHED</option>
 			<option
 				value="0">
-				JOption_Disabled</option>
+				COM_MODULES_FIELD_VALUE_UNPUBLISHED</option>
 		</field>
+
+		<field
+			id="publish_up"
+			name="publish_up"
+			type="calendar"
+			label="COM_MODULES_FIELD_PUBLISH_UP_LABEL"
+			description="COM_MODULES_FIELD_PUBLISH_UP_DESC"
+			class="inputbox"
+			size="16"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="server_utc" />
+
+		<field
+			id="publish_down"
+			name="publish_down"
+			type="calendar"
+			label="COM_MODULES_FIELD_PUBLISH_DOWN_LABEL"
+			description="COM_MODULES_FIELD_PUBLISH_DOWN_DESC"
+			class="inputbox"
+			size="16"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="server_utc" />
 
 		<field
 			name="client_id"
 			type="list"
-			label="Modules_Field_Client_Id_Label"
-			description="Modules_Field_Client_Id_Desc"
+			label="COM_MODULES_FIELD_CLIENT_ID_LABEL"
+			description="COM_MODULES_FIELD_CLIENT_ID_DESC"
 			class="inputbox"
 			size="1"
 			default="0"
 			readonly="true">
 			<option
 				value="0">
-				Modules_Option_Site</option>
+				COM_MODULES_OPTION_SITE</option>
 			<option
 				value="1">
-				Modules_Option_Administrator</option>
+				COM_MODULES_OPTION_ADMINISTRATOR</option>
 		</field>
 
 		<field
@@ -82,16 +114,16 @@
 			type="moduleposition"
 			maxlength="50"
 			default="left"
-			label="Modules_Field_Position_Label"
-			description="Modules_Field_Position_Desc"
+			label="COM_MODULES_FIELD_POSITION_LABEL"
+			description="COM_MODULES_FIELD_POSITION_DESC"
 			class="inputbox">
 		</field>
 
 		<field
 			name="access"
 			type="accesslevel"
-			label="JField_Access_Label"
-			description="JField_Access_Desc"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
 			size="1"
 			default="" />
@@ -101,26 +133,26 @@
 			type="moduleorder"
 			class="inputbox"
 			default=""
-			label="JField_Ordering_Label"
-			description="JField_Ordering_Desc" />
+			label="JFIELD_ORDERING_LABEL"
+			description="JFIELD_ORDERING_DESC" />
 
 		<field
 			name="content"
 			type="editor"
 			class="inputbox"
-			label="Module_Field_Content_Label"
-			description="Module_Field_Content_Desc"
+			label="MODULES_FIELD_CONTENT_LABEL"
+			description="MODULES_FIELD_CONTENT_DESC"
 			filter="safehtml"
 			buttons="true" />
 
 		<field
 			name="language"
 			type="contentlanguage"
-			label="JField_Language_Label"
-			description="JField_Module_Language_Desc"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="JFIELD_MODULE_LANGUAGE_DESC"
 			class="inputbox"
 			default="">
-			<option value="">JOption_Default_Language</option>
+			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
 
 		<field

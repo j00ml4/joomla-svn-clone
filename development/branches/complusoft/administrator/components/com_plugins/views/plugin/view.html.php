@@ -62,15 +62,15 @@ class PluginsViewPlugin extends JView
 		$user		= JFactory::getUser();
 		$canDo		= PluginsHelper::getActions();
 
-		JToolBarHelper::title(JText::_('Plugn_Manager_Plugin'), 'plugin');
+		JToolBarHelper::title(JText::_('COM_PLUGINS_MANAGER_PLUGIN'), 'plugin');
 
 		// If not checked out, can save the item.
 		if ($canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('plugin.apply', 'JToolbar_Apply');	
-			JToolBarHelper::save('plugin.save', 'JToolbar_Save');
+			JToolBarHelper::apply('plugin.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('plugin.save', 'JTOOLBAR_SAVE');
 		}
-		JToolBarHelper::cancel('plugin.cancel', 'JToolbar_Close');
+		JToolBarHelper::cancel('plugin.cancel', 'JTOOLBAR_CLOSE');
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.plugins.edit','JTOOLBAR_HELP');
 	}

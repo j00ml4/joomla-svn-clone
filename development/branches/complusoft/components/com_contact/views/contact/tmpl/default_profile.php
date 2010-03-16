@@ -1,6 +1,6 @@
 <?php
 /**
- * @version
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	Contact
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -18,8 +18,8 @@ defined('_JEXEC') or die;
 		<?php foreach ($this->contact->profile as $profile) :	?>
 			<li>
 
-				<?php echo $profile->text = htmlspecialchars($profile->profile); ?>
-				
+				<?php echo $profile->text = htmlspecialchars($profile->profile_value, ENT_COMPAT, 'UTF-8'); ?>
+
 			</li>
 		<?php endforeach; ?>
 	</ol>

@@ -43,7 +43,7 @@ class WeblinksViewCategory extends JView
 		{
 			// strip html from feed item title
 			$title = $this->escape($item->title);
-			$title = html_entity_decode($title);
+			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
 			// url link to article
 			$link = JRoute::_('index.php?option=com_weblinks&view=weblink&id='. $item->id);
@@ -54,11 +54,11 @@ class WeblinksViewCategory extends JView
 
 			// load individual item creator class
 			$feeditem = new JFeedItem();
-			$feeditem->title 		= $title;
-			$feeditem->link 		= $link;
-			$feeditem->description 	= $description;
+			$feeditem->title		= $title;
+			$feeditem->link			= $link;
+			$feeditem->description	= $description;
 			$feeditem->date			= $date;
-			$feeditem->category   	= 'Weblinks';
+			$feeditem->category		= 'Weblinks';
 
 			// loads item info into rss array
 			$document->addItem($feeditem);

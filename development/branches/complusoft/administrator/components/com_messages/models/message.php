@@ -41,9 +41,9 @@ class MessagesModelMessage extends JModelForm
 	/**
 	 * Returns a Table object, always creating it.
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Message', $prefix = 'MessagesTable', $config = array())
@@ -85,7 +85,7 @@ class MessagesModelMessage extends JModelForm
 			if ($replyId = $this->getState('reply.id')) {
 				// If replying to a message, preload some data.
 				$db		= $this->getDbo();
-				$query	= new JQuery;
+				$query	= $db->getQuery(true);
 
 				$query->select('subject, user_id_from');
 				$query->from('#__messages');
@@ -98,7 +98,7 @@ class MessagesModelMessage extends JModelForm
 				}
 
 				$value->set('user_id_to', $message->user_id_from);
-				$re = JText::_('Messages_Re');
+				$re = JText::_('COM_MESSAGES_RE');
 				if (stripos($message->subject, $re) !== 0) {
 					$value->set('subject', $re.$message->subject);
 				}
@@ -133,7 +133,7 @@ class MessagesModelMessage extends JModelForm
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_newsfeeds.edit.newsfeed.data', array());
+		$data = $app->getUserState('com_messages.edit.message.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -184,7 +184,7 @@ class MessagesModelMessage extends JModelForm
 		}
 
 		if ($config->get('locked')) {
-			$this->setError(JText::_('MESSAGE_FAILED'));
+			$this->setError(JText::_('COM_MESSAGES_ERR_SEND_FAILED'));
 			return false;
 		}
 
@@ -200,10 +200,10 @@ class MessagesModelMessage extends JModelForm
 			$toUser		= new JUser($table->user_id_to);
 
 			$siteURL	= JURI::base();
-			$sitename 	= JFactory::getApplication()->getCfg('sitename');
+			$sitename	= JFactory::getApplication()->getCfg('sitename');
 
-			$subject	= sprintf (JText::_('A new private message has arrived'), $sitename);
-			$msg		= sprintf (JText::_('Please login to read your message'), $siteURL);
+			$subject	= sprintf (JText::_('COM_MESSAGES_NEW_MESSAGE_ARRIVED'), $sitename);
+			$msg		= sprintf (JText::_('COM_MESSAGES_PLEASE_LOGIN'), $siteURL);
 
 			JUtility::sendMail($fromUser->email, $fromUser->name, $toUser->email, $subject, $msg);
 		}
@@ -214,8 +214,8 @@ class MessagesModelMessage extends JModelForm
 	/**
 	 * Method to delete messages from the database
 	 *
-	 * @param   integer  An array of numeric ids for the rows
-	 * @return  boolean  True on success / false on failure
+	 * @param	integer	An array of numeric ids for the rows
+	 * @return	boolean	True on success / false on failure
 	 */
 	public function delete($cid)
 	{
@@ -268,7 +268,7 @@ class MessagesModelMessage extends JModelForm
 				if (!$allow) {
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 				}
 			}
 		}

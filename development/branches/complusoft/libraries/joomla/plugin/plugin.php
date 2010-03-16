@@ -89,13 +89,13 @@ abstract class JPlugin extends JEvent
 	{
 		$this->loadLanguage(null, JPATH_ADMINISTRATOR);
 	}
-	
+
 	/**
 	 * Loads the plugin language file
 	 *
 	 * @access	public
-	 * @param	string 	$extension 	The extension for which a language file should be loaded
-	 * @param	string 	$basePath  	The basepath to use
+	 * @param	string	$extension	The extension for which a language file should be loaded
+	 * @param	string	$basePath	The basepath to use
 	 * @return	boolean	True, if the file has successfully loaded.
 	 * @since	1.5
 	 */
@@ -106,6 +106,10 @@ abstract class JPlugin extends JEvent
 		}
 
 		$lang = &JFactory::getLanguage();
-		return $lang->load (strtolower($extension), JPATH_ROOT .DS.'plugins'.DS.$this->_type.DS.$this->_name) || $lang->load(strtolower($extension), $basePath);
+		return
+			$lang->load(strtolower($extension), $basePath, null, false, false)
+		||	$lang->load (strtolower($extension), JPATH_PLUGINS .DS.$this->_type.DS.$this->_name, null, false, false)
+		||	$lang->load(strtolower($extension), $basePath, $lang->getDefault(), false, false)
+		||	$lang->load (strtolower($extension), JPATH_PLUGINS .DS.$this->_type.DS.$this->_name, $lang->getDefault(), false, false);
 	}
 }

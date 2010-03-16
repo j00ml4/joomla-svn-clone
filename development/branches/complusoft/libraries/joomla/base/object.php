@@ -74,7 +74,7 @@ class JObject
 	 * @return	mixed	The value of the property.
 	 * @see		getProperties()
 	 * @since	1.5
- 	 */
+	 */
 	public function get($property, $default=null)
 	{
 		if (isset($this->$property)) {
@@ -91,11 +91,11 @@ class JObject
 	 * @return	array
 	 * @see		get()
 	 * @since	1.5
- 	 */
+	 */
 	public function getProperties($public = true)
 	{
 		$vars  = get_object_vars($this);
-        if ($public)
+		if ($public)
 		{
 			foreach ($vars as $key => $value)
 			{
@@ -105,7 +105,7 @@ class JObject
 			}
 		}
 
-        return $vars;
+		return $vars;
 	}
 
 	/**
@@ -205,7 +205,7 @@ class JObject
 	/**
 	 * @deprecated 1.6 - Jun 24, 2009
 	 * @see __toString()
- 	 */
+	 */
 	function toString()
 	{
 		return __toString();
