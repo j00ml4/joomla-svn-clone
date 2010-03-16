@@ -1,6 +1,6 @@
 <?php
 /**
- * @version	 $Id$
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_categories
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -34,13 +34,16 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Categories_Fieldset_Details');?></legend>
+			<legend><?php echo JText::_('CATEGORIES_FIELDSET_DETAILS');?></legend>
 
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 
 			<?php echo $this->form->getLabel('alias'); ?>
 			<?php echo $this->form->getInput('alias'); ?>
+
+			<?php echo $this->form->getLabel('note'); ?>
+			<?php echo $this->form->getInput('note'); ?>
 
 			<?php echo $this->form->getLabel('extension'); ?>
 			<?php echo $this->form->getInput('extension'); ?>
@@ -54,8 +57,6 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('access'); ?>
 			<?php echo $this->form->getInput('access'); ?>
 
-			<?php echo $this->loadTemplate('options'); ?>
-			
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 
@@ -67,21 +68,45 @@ JHtml::_('behavior.formvalidation');
 	</div>
 
 	<div class="width-40 fltrt">
+	<?php
+		echo JHTML::_('sliders.start');
+		if(in_array('params', $this->form->getGroups()))
+		{
+		
+			$groups = $this->form->getGroups('params');
+			$fieldsets = $this->form->getFieldsets();
+			array_unshift($groups, 'params');
+			foreach($groups as $group) {
+				echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group);
+				echo '<fieldset class="panelform">';
+				foreach($this->form->getFields($group) as $field)
+				{
+					if ($field->hidden)
+					{
+						echo $field->input;
+					} else {
+						echo $field->label;
+						echo $field->input;
+					}
+				}
+				echo '</fieldset>'; 
+			}
+		} ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'meta-rules'); ?>
 		<fieldset>
-			<legend><?php echo JText::_('Categories_Fieldset_Rules');?></legend>
+
 				<?php echo $this->form->getLabel('rules'); ?>
 				<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
-	</div>
+		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
+		<fieldset class="panelform">
 
-	<div class="width-40 fltrt">
-		<fieldset class="adminform">
-			<legend><?php echo JText::_('Categories_Fieldset_Metadata'); ?></legend>
 			<?php echo $this->loadTemplate('metadata'); ?>
 		</fieldset>
-	</div>
+		
+			<?php echo JHtml::_('sliders.end'); ?>
 
+</div>
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
-<div class="clr"></div>

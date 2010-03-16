@@ -42,7 +42,7 @@ class JView extends JObject
 	 * The base path of the view
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_basePath = null;
 
@@ -58,7 +58,7 @@ class JView extends JObject
 	 * Layout name
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_layout = 'default';
 
@@ -66,7 +66,7 @@ class JView extends JObject
 	 * Layout extension
 	 *
 	 * @var		string
-	 * @access 	protected
+	 * @access	protected
 	 */
 	var $_layoutExt = 'php';
 
@@ -98,20 +98,20 @@ class JView extends JObject
 	var $_output = null;
 
 	/**
-     * Callback for escaping.
-     *
-     * @var string
-     * @access private
-     */
-    var $_escape = 'htmlspecialchars';
+	 * Callback for escaping.
+	 *
+	 * @var string
+	 * @access private
+	 */
+	var $_escape = 'htmlspecialchars';
 
-	 /**
-     * Charset to use in escaping mechanisms; defaults to urf8 (UTF-8)
-     *
-     * @var string
-     * @access private
-     */
-    var $_charset = 'UTF-8';
+	/**
+	 * Charset to use in escaping mechanisms; defaults to urf8 (UTF-8)
+	 *
+	 * @var string
+	 * @access private
+	 */
+	var $_charset = 'UTF-8';
 
 	/**
 	 * Constructor
@@ -130,15 +130,15 @@ class JView extends JObject
 			}
 		}
 
-		 // set the charset (used by the variable escaping functions)
-        if (array_key_exists('charset', $config)) {
-            $this->_charset = $config['charset'];
-        }
+		// set the charset (used by the variable escaping functions)
+		if (array_key_exists('charset', $config)) {
+			$this->_charset = $config['charset'];
+		}
 
-		 // user-defined escaping callback
-        if (array_key_exists('escape', $config)) {
-            $this->setEscape($config['escape']);
-        }
+		// user-defined escaping callback
+		if (array_key_exists('escape', $config)) {
+			$this->setEscape($config['escape']);
+		}
 
 		// Set a base path for use by the view
 		if (array_key_exists('base_path', $config)) {
@@ -176,7 +176,7 @@ class JView extends JObject
 	/**
 	* Execute and display a template script.
 	*
-	* @param string $tpl The name of the template file to parse;
+	* @param string The name of the template file to parse;
 	* automatically searches through the template paths.
 	*
 	* @throws object An JError object.
@@ -293,12 +293,11 @@ class JView extends JObject
 	*
 	* @access public
 	*
-	* @param string $key The name for the reference in the view.
-	* @param mixed &$val The referenced variable.
+	* @param string The name for the reference in the view.
+	* @param mixed The referenced variable.
 	*
 	* @return bool True on success, false on failure.
 	*/
-
 	function assignRef($key, &$val)
 	{
 		if (is_string($key) && substr($key, 0, 1) != '_')
@@ -311,22 +310,22 @@ class JView extends JObject
 	}
 
 	/**
-     * Escapes a value for output in a view script.
-     *
-     * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
-     * {@link $_encoding} setting.
-     *
-     * @param  mixed $var The output to escape.
-     * @return mixed The escaped value.
-     */
-    function escape($var)
-    {
-        if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
-            return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_charset);
-        }
+	 * Escapes a value for output in a view script.
+	 *
+	 * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
+	 * {@link $_encoding} setting.
+	 *
+	 * @param  mixed The output to escape.
+	 * @return mixed The escaped value.
+	 */
+	function escape($var)
+	{
+		if (in_array($this->_escape, array('htmlspecialchars', 'htmlentities'))) {
+			return call_user_func($this->_escape, $var, ENT_COMPAT, $this->_charset);
+		}
 
-        return call_user_func($this->_escape, $var);
-    }
+		return call_user_func($this->_escape, $var);
+	}
 
 	/**
 	 * Method to get data from a registered model or a property of the view
@@ -355,8 +354,8 @@ class JView extends JObject
 			if (method_exists($this->_models[$model], $method))
 			{
 				// The method exists, lets call it and return what we get
-                $result = $this->_models[$model]->$method();
-                return $result;
+				$result = $this->_models[$model]->$method();
+				return $result;
 			}
 
 		}
@@ -371,8 +370,8 @@ class JView extends JObject
 	 * Method to get the model object
 	 *
 	 * @access	public
-	 * @param	string	$name	The name of the model (optional)
-	 * @return	mixed			JModel object
+	 * @param	string	The name of the model (optional)
+	 * @return	mixed	JModel object
 	 */
 	function getModel($name = null)
 	{
@@ -388,7 +387,6 @@ class JView extends JObject
 	* @access public
 	* @return string The layout name
 	*/
-
 	function getLayout()
 	{
 		return $this->_layout;
@@ -434,9 +432,9 @@ class JView extends JObject
 	 * Category.
 	 *
 	 * @access	public
-	 * @param	object	$model		The model to add to the view.
-	 * @param	boolean	$default	Is this the default model?
-	 * @return	object				The added model
+	 * @param	object		The model to add to the view.
+	 * @param	boolean		Is this the default model?
+	 * @return	object		The added model
 	 */
 	function setModel(&$model, $default = false)
 	{
@@ -453,7 +451,7 @@ class JView extends JObject
 	* Sets the layout name to use
 	*
 	* @access	public
-	* @param	string $template The template name.
+	* @param	string The layout name.
 	* @return	string Previous value
 	* @since	1.5
 	*/
@@ -482,15 +480,15 @@ class JView extends JObject
 		return $previous;
 	}
 
-	 /**
-     * Sets the _escape() callback.
-     *
-     * @param mixed $spec The callback for _escape() to use.
-     */
-    function setEscape($spec)
-    {
-        $this->_escape = $spec;
-    }
+	/**
+	 * Sets the _escape() callback.
+	 *
+	 * @param mixed The callback for _escape() to use.
+	 */
+	function setEscape($spec)
+	{
+		$this->_escape = $spec;
+	}
 
 	/**
 	 * Adds to the stack of view script paths in LIFO order.
@@ -518,7 +516,7 @@ class JView extends JObject
 	 * Load a template file -- first look in the templates folder for an override
 	 *
 	 * @access	public
-	 * @param string $tpl The name of the template source file ...
+	 * @param string The name of the template source file ...
 	 * automatically searches the template paths and compiles as needed.
 	 * @return string The output of the the template script.
 	 */
@@ -532,6 +530,16 @@ class JView extends JObject
 		// clean the file name
 		$file = preg_replace('/[^A-Z0-9_\.-]/i', '', $file);
 		$tpl  = preg_replace('/[^A-Z0-9_\.-]/i', '', $tpl);
+
+		// Load the language file for the template
+		$lang = &JFactory::getLanguage();
+		$app = &JFactory::getApplication();
+		$template = $app->getTemplate();
+			$lang->load('tpl_'.$template, JPATH_BASE, null, false, false)
+		||	$lang->load('tpl_'.$template, JPATH_THEMES."/$template", null, false, false)
+		||	$lang->load('tpl_'.$template, JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load('tpl_'.$template, JPATH_THEMES."/$template", $lang->getDefault(), false, false);
+
 
 		// load the template script
 		jimport('joomla.filesystem.path');
@@ -571,7 +579,7 @@ class JView extends JObject
 	 * Load a helper file
 	 *
 	 * @access	public
-	 * @param string $tpl The name of the helper source file ...
+	 * @param string The name of the helper source file ...
 	 * automatically searches the helper paths and compiles as needed.
 	 * @return boolean Returns true if the file was loaded
 	 */
@@ -595,9 +603,8 @@ class JView extends JObject
 	* Sets an entire array of search paths for templates or resources.
 	*
 	* @access protected
-	* @param string $type The type of path to set, typically 'template'.
-	* @param string|array $path The new set of search paths.  If null or
-	* false, resets to the current directory only.
+	* @param string 		The type of path to set, typically 'template'.
+	* @param string|array	The new set of search paths.  If null or false, resets to the current directory only.
 	*/
 	function _setPath($type, $path)
 	{
@@ -630,7 +637,7 @@ class JView extends JObject
 	* Adds to the search path for templates and resources.
 	*
 	* @access protected
-	* @param string|array $path The directory or stream to search.
+	* @param string|array The directory or stream to search.
 	*/
 	function _addPath($type, $path)
 	{
@@ -658,9 +665,9 @@ class JView extends JObject
 	 * Create the filename for a resource
 	 *
 	 * @access private
-	 * @param string 	$type  The resource type to create the filename for
-	 * @param array 	$parts An associative array of filename information
-	 * @return string The filename
+	 * @param string	The resource type to create the filename for
+	 * @param array		An associative array of filename information
+	 * @return string	The filename
 	 * @since 1.5
 	 */
 	function _createFileName($type, $parts = array())

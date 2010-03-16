@@ -24,10 +24,11 @@ class LanguagesControllerInstalled extends JController
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		$cid = JRequest::getCmd('cid', '');
 		$model = & $this->getModel('installed');
-		if ($model->publish())
+		if ($model->publish($cid))
 		{
-			$msg = JText::_('Langs_Default_Language_Saved');
+			$msg = JText::_('COM_LANGS_MSG_DEFAULT_LANGUAGE_SAVED');
 			$type = 'message';
 		}
 		else

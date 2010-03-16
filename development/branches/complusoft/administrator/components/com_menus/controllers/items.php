@@ -57,14 +57,14 @@ class MenusControllerItems extends JController
 	public function delete()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get items to remove from the request.
 		$pks	= JRequest::getVar('cid', array(), 'post', 'array');
 		$n		= count($pks);
 
 		if (empty($pks)) {
-			JError::raiseWarning(500, JText::_('JError_No_items_selected'));
+			JError::raiseWarning(500, JText::_('COM_MENUS_NO_MENUITEMS_SELECTED'));
 		}
 		else
 		{
@@ -73,7 +73,7 @@ class MenusControllerItems extends JController
 
 			// Remove the items.
 			if ($model->delete($pks)) {
-				$this->setMessage(JText::sprintf('JSuccess_N_items_deleted', $n));
+				$this->setMessage(JText::sprintf((count($pks) == 1) ? 'COM_MENUS_MENU_DELETED' : 'COM_MENUS_N_MENUS_DELETED', count($pks)));
 			}
 			else {
 				$this->setMessage($model->getError());
@@ -91,7 +91,7 @@ class MenusControllerItems extends JController
 	public function publish()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
 		$pks	= JRequest::getVar('cid', array(), '', 'array');
@@ -100,25 +100,40 @@ class MenusControllerItems extends JController
 		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
 
 		if (empty($pks)) {
-			JError::raiseWarning(500, JText::_('JError_No_items_selected'));
+			JError::raiseWarning(500, JText::_('COM_MENUS_NO_MENUITEMS_SELECTED'));
 		}
 		else
 		{
 			// Get the model.
 			$model	= $this->getModel();
 
-			// Publish the items.
-			if ($model->publish($pks, $value)) {
-				$this->setMessage($value ? JText::_('JSuccess_N_items_published') : JText::_('JSuccess_N_items_unpublished'));
+					// Change the state of the records.
+			if (!$model->publish($pks, $value)) {
+				JError::raiseWarning(500, $model->getError());
 			}
-			else {
-				$this->setMessage($model->getError());
+
+			else
+			{
+				if ($value == 1) {
+					$text = 'COM_MENUS_MENU_PUBLISHED';
+					$ntext = 'COM_MENUS_N_MENUS_PUBLISHED';
+				}
+				else if ($value == 0) {
+					$text = 'COM_MENUS_MENU_UNPUBLISHED';
+					$ntext = 'COM_MENUS_N_MENUS_UNPUBLISHED';
+				}
+				else {
+					$text = 'COM_MENUS_MENU_TRASHED';
+					$ntext = 'COM_MENUS_N_MENUS_TRASHED';
+				}
+				$this->setMessage(JText::sprintf((count($pks) == 1) ? $text : $ntext, count($pks)));
 			}
 		}
 
 		$this->setRedirect('index.php?option=com_menus&view=items');
+	
 	}
-
+	
 	/**
 	 * Method to reorder selected rows.
 	 *
@@ -126,7 +141,7 @@ class MenusControllerItems extends JController
 	 */
 	public function ordering()
 	{
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$pks	= JRequest::getVar('cid', null, 'post', 'array');
@@ -137,13 +152,13 @@ class MenusControllerItems extends JController
 
 		if ($return === false) {
 			// Reorder failed.
-			$message = JText::sprintf('JError_Reorder_failed', $model->getError());
+			$message = JText::sprintf('JERROR_REORDER_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_menus&view=items', $message, 'error');
 			return false;
 		}
 		else {
 			// Reorder succeeded.
-			$message = JText::_('JSuccess_Item_reordered');
+			$message = JText::_('COM_MENUS_SUCCESS_REORDERED');
 			$this->setRedirect('index.php?option=com_menus&view=items', $message);
 			return true;
 		}

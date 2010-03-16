@@ -64,7 +64,7 @@ class LanguagesModelInstalled extends JModelList
 	 *
 	 * @var		string
 	 */
-	 protected $_context = 'com_languages.installed';
+	protected $_context = 'com_languages.installed';
 
 	/**
 	 * Method to auto-populate the model state.
@@ -172,7 +172,7 @@ class LanguagesModelInstalled extends JModelList
 				$file = $path.DS.$folder.DS.$folder.'.xml';
 				$info = & JApplicationHelper::parseXMLLangMetaFile($file);
 				$row = new JObject();
-				$row->language 	= $folder;
+				$row->language = $folder;
 
 				if (!is_array($info)) {
 					continue;
@@ -244,14 +244,13 @@ class LanguagesModelInstalled extends JModelList
 	 *
 	 * return boolean
 	 */
-	public function publish()
+	public function publish($cid)
 	{
-		$cid = $this->getState('cid');
-		if (count($cid)>0) {
+		if ($cid) {
 			$client	= & $this->getClient();
 
 			$params = & JComponentHelper::getParams('com_languages');
-			$params->set($client->name, $cid[0]);
+			$params->set($client->name, $cid);
 
 			$table = & JTable::getInstance('extension');
 			$id = $table->find(array('element' => 'com_languages'));
@@ -275,7 +274,7 @@ class LanguagesModelInstalled extends JModelList
 			}
 		}
 		else {
-			$this->setError(JText::_('Langs_No_Language_Selected'));
+			$this->setError(JText::_('COM_LANGS_ERR_NO_LANGUAGE_SELECTED'));
 			return false;
 		}
 		return true;

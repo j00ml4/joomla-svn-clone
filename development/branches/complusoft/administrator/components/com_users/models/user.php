@@ -47,9 +47,9 @@ class UsersModelUser extends JModelForm
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'User', $prefix = 'JTable', $config = array())
@@ -193,7 +193,7 @@ class UsersModelUser extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -227,6 +227,12 @@ class UsersModelUser extends JModelForm
 			return false;
 		}
 
+		$user = &JFactory::getUser();
+		if ($user->id == $table->id)
+		{
+			$registry = new JParameter($table->params);
+			$user->setParameters($registry);
+		}
 		// Trigger the onAftereStoreUser event
 		$dispatcher->trigger('onAfterStoreUser', array($data, $isNew, true, null));
 
@@ -472,8 +478,8 @@ class UsersModelUser extends JModelForm
 			switch ($groupLogic)
 			{
 				case 'set':
-					$doDelete 		= 2;
-					$doAssign 		= true;
+					$doDelete		= 2;
+					$doAssign		= true;
 					break;
 
 				case 'del':

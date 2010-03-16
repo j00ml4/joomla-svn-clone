@@ -8,7 +8,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
-jimport('joomla.database.query');
 
 /**
  * Methods supporting a list of tracks.
@@ -73,7 +72,8 @@ class BannersModelTracks extends JModelList
 		require_once JPATH_COMPONENT . '/helpers/banners.php';
 
 		// Create a new query object.
-		$query = new JQuery;
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -117,18 +117,18 @@ class BannersModelTracks extends JModelList
 
 		$begin = $this->getState('filter.begin');
 		if (!empty($begin)) {
-			$query->where('a.track_date >= '.$this->_db->Quote($begin));
+			$query->where('a.track_date >= '.$db->Quote($begin));
 		}
 
 		// Filter by end date
 		$end = $this->getState('filter.end');
 		if (!empty($end)) {
-			$query->where('a.track_date <= '.$this->_db->Quote($end));
+			$query->where('a.track_date <= '.$db->Quote($end));
 		}
 
 		// Add the list ordering clause.
 		$orderCol = $this->getState('list.ordering', 'name');
-		$query->order($this->_db->getEscaped($orderCol).' '.$this->_db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($orderCol).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		return $query;
 	}
@@ -156,7 +156,8 @@ class BannersModelTracks extends JModelList
 		if ($allow)
 		{
 			// Delete tracks from this banner
-			$query = new JQuery;
+			$db = $this->getDbo();
+			$query = $db->getQuery(true);
 			$query->delete();
 			$query->from('`#__banner_tracks`');
 
@@ -169,13 +170,13 @@ class BannersModelTracks extends JModelList
 			// Filter by begin date
 			$begin = $this->getState('filter.begin');
 			if (!empty($begin)) {
-				$query->where('track_date >= '.$this->_db->Quote($begin));
+				$query->where('track_date >= '.$db->Quote($begin));
 			}
 
 			// Filter by end date
 			$end = $this->getState('filter.end');
 			if (!empty($end)) {
-				$query->where('track_date <= '.$this->_db->Quote($end));
+				$query->where('track_date <= '.$db->Quote($end));
 			}
 
 			$where='1';
@@ -191,19 +192,19 @@ class BannersModelTracks extends JModelList
 
 			$query->where('banner_id IN (SELECT id FROM `#__banners` WHERE '.$where.')');
 
-			$this->_db->setQuery((string)$query);
+			$db->setQuery((string)$query);
 			$this->setError((string)$query);
-			$this->_db->query();
+			$db->query();
 
 			// Check for a database error.
-			if ($this->_db->getErrorNum()) {
-				$this->setError($this->_db->getErrorMsg());
+			if ($db->getErrorNum()) {
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
 		}
 		else
 		{
-			JError::raiseWarning(403, JText::_('JError_Core_Delete_not_permitted'));
+			JError::raiseWarning(403, JText::_('JERROR_CORE_DELETE_NOT_PERMITTED'));
 		}
 
 		return true;
@@ -262,7 +263,7 @@ class BannersModelTracks extends JModelList
 			if ($type > 0)
 			{
 				$basename = str_replace('__TYPE__',$type,$basename);
-				$typeName = JText::_('Banners_Type'.$type);
+				$typeName = JText::_('COM_BANNERS_TYPE'.$type);
 				$basename = str_replace('__TYPENAME__',$typeName,$basename);
 			}
 			else
@@ -300,23 +301,23 @@ class BannersModelTracks extends JModelList
 	protected function getCategoryName()
 	{
 		$categoryId = $this->getState('filter.category_id');
-		if ($categoryId)
-		{
-			$query = new JQuery;
+		if ($categoryId) {
+			$db = $this->getDbo();
+			$query = $db->getQuery(true);
 			$query->select('title');
 			$query->from('`#__categories`');
-			$query->where('`id`='.$this->_db->quote($categoryId));
-			$this->_db->setQuery((string)$query);
-			$name = $this->_db->loadResult();
-			if ($this->_db->getErrorNum())
+			$query->where('`id`='.$db->quote($categoryId));
+			$db->setQuery((string)$query);
+			$name = $db->loadResult();
+			if ($db->getErrorNum())
 			{
-				$this->setError($this->_db->getErrorMsg());
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
 		}
 		else
 		{
-			$name = JText::_('Banners_NoCategoryName');
+			$name = JText::_('COM_BANNERS_NOCATEGORYNAME');
 		}
 		return $name;
 	}
@@ -328,23 +329,20 @@ class BannersModelTracks extends JModelList
 	protected function getClientName()
 	{
 		$clientId = $this->getState('filter.client_id');
-		if ($clientId)
-		{
-			$query = new JQuery;
+		if ($clientId) {
+			$db = $this->getDbo();
+			$query = $db->getQuery(true);
 			$query->select('name');
 			$query->from('`#__banner_clients`');
-			$query->where('`id`='.$this->_db->quote($clientId));
-			$this->_db->setQuery((string)$query);
-			$name = $this->_db->loadResult();
-			if ($this->_db->getErrorNum())
-			{
-				$this->setError($this->_db->getErrorMsg());
+			$query->where('`id`='.$db->quote($clientId));
+			$db->setQuery((string)$query);
+			$name = $db->loadResult();
+			if ($db->getErrorNum()) {
+				$this->setError($db->getErrorMsg());
 				return false;
 			}
-		}
-		else
-		{
-			$name = JText::_('Banners_NoClientName');
+		} else {
+			$name = JText::_('COM_BANNERS_NOCLIENTNAME');
 		}
 		return $name;
 	}
@@ -373,28 +371,27 @@ class BannersModelTracks extends JModelList
 	 */
 	public function getContent()
 	{
-		if (!isset($this->_content))
-		{
+		if (!isset($this->_content)) {
 			$this->_content = '';
 			$this->_content.=
-			'"'.str_replace('"','""',JText::_('Banners_Heading_Name')).'","'.
-				str_replace('"','""',JText::_('Banners_Heading_Client')).'","'.
-				str_replace('"','""',JText::_('JGrid_Heading_Category')).'","'.
-				str_replace('"','""',JText::_('Banners_Heading_Type')).'","'.
-				str_replace('"','""',JText::_('Banners_Heading_Count')).'","'.
-				str_replace('"','""',JText::_('Banners_Heading_Date')).'"'."\n";
-			foreach($this->getItems() as $item)
-			{
+			'"'.str_replace('"','""',JText::_('COM_BANNERS_HEADING_NAME')).'","'.
+				str_replace('"','""',JText::_('COM_BANNERS_HEADING_CLIENT')).'","'.
+				str_replace('"','""',JText::_('JGRID_HEADING_CATEGORY')).'","'.
+				str_replace('"','""',JText::_('COM_BANNERS_HEADING_TYPE')).'","'.
+				str_replace('"','""',JText::_('COM_BANNERS_HEADING_COUNT')).'","'.
+				str_replace('"','""',JText::_('COM_BANNERS_HEADING_DATE')).'"'."\n";
+
+			foreach($this->getItems() as $item) {
 				$this->_content.=
 				'"'.str_replace('"','""',$item->name).'","'.
 					str_replace('"','""',$item->client_name).'","'.
 					str_replace('"','""',$item->category_title).'","'.
-					str_replace('"','""',($item->track_type==1 ? JText::_('Banners_Impression'): JText::_('Banners_Click'))).'","'.
+					str_replace('"','""',($item->track_type==1 ? JText::_('COM_BANNERS_IMPRESSION'): JText::_('COM_BANNERS_CLICK'))).'","'.
 					str_replace('"','""',$item->count).'","'.
 					str_replace('"','""',$item->track_date).'"'."\n";
 			}
-			if ($this->getState('compressed'))
-			{
+
+			if ($this->getState('compressed')) {
 				$files = array();
 				$files['track']=array();
 				$files['track']['name'] = $this->getBasename() . '.csv';
@@ -409,15 +406,15 @@ class BannersModelTracks extends JModelList
 				if (!empty($delete)) {
 					if (!JFile::delete($delete)) {
 						// JFile::delete throws an error
-						$this->setError(JText::_('BANNERS_ZIP_DELETE_FAILURE'));
+						$this->setError(JText::_('COM_BANNERS_ERR_ZIP_DELETE_FAILURE'));
 						return false;
 					}
 				}
 				if (!$packager = & JArchive::getAdapter('zip')) {
-					$this->setError(JText::_('BANNERS_ZIP_ADAPTER_FAILURE'));
+					$this->setError(JText::_('COM_BANNERS_ERR_ZIP_ADAPTER_FAILURE'));
 					return false;
 				} else if (!$packager->create($ziproot, $files)) {
-					$this->setError(JText::_('BANNERS_ZIP_CREATE_FAILURE'));
+					$this->setError(JText::_('COM_BANNERS_ERR_ZIP_CREATE_FAILURE'));
 					return false;
 				}
 				$this->_content = file_get_contents($ziproot);
@@ -426,4 +423,3 @@ class BannersModelTracks extends JModelList
 		return $this->_content;
 	}
 }
-

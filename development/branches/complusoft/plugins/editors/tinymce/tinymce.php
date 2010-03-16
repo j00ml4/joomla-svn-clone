@@ -20,6 +20,12 @@ jimport('joomla.plugin.plugin');
  */
 class plgEditorTinymce extends JPlugin
 {
+
+	/**
+	 * Base path for editor files
+	 */
+	protected $_basePath = 'media/editors/tinymce/jscripts/tiny_mce';
+
 	/**
 	 * Initialises the Editor.
 	 *
@@ -35,7 +41,7 @@ class plgEditorTinymce extends JPlugin
 		$theme	= array('simple','advanced','advanced');
 		$skin	= $this->params->get('skin', '0');
 		switch ($skin)
-    	{
+  	{
 			case '3':
 				$skin = "skin : \"o2k7\", skin_variant : \"black\",";
 				break;
@@ -103,12 +109,13 @@ class plgEditorTinymce extends JPlugin
 		/*
 		 * Lets get the default template for the site application
 		 */
-		$db =& JFactory::getDBO();
-		$query = 'SELECT template'
-		. ' FROM #__template_styles'
-		. ' WHERE client_id = 0'
-		. ' AND home = 1'
-		;
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
+
+		$query->select('template');
+		$query->from('#__template_styles');
+		$query->where('client_id=0 AND home=1');
+
 		$db->setQuery( $query );
 		$template = $db->loadResult();
 
@@ -127,7 +134,7 @@ class plgEditorTinymce extends JPlugin
 
 				// Issue warning notice if the file is not found (but pass name to $content_css anyway to avoid TinyMCE error
 				if (!file_exists($templates_path.DS.$template.DS.'css'.DS.$content_css_custom)) {
-					$msg = sprintf (JText::_('PLG_TINY_ERR_TEMPLATECSSFILENOTPRESENT'), $content_css_custom);
+					$msg = sprintf (JText::_('PLG_TINY_ERR_CUSTOMCSSFILENOTPRESENT'), $content_css_custom);
 					JError::raiseNotice('SOME_ERROR_CODE', $msg);
 				}
 			}
@@ -145,7 +152,7 @@ class plgEditorTinymce extends JPlugin
 					// if no editor.css file in system folder, show alert
 					if (!file_exists($templates_path.DS.'system'.DS.'css'.DS.'editor.css'))
 					{
-						JError::raiseNotice('SOME_ERROR_CODE', JText::_('TEMPLATECSSFILENOTPRESENT'));
+						JError::raiseNotice('SOME_ERROR_CODE', JText::_('PLG_TINY_ERR_EDITORCSSFILENOTPRESENT'));
 					} else {
 						$content_css = 'content_css : "' . JURI::root() .'templates/system/css/editor.css",';
 					}
@@ -174,7 +181,7 @@ class plgEditorTinymce extends JPlugin
 
 
 		// theme_advanced_* settings
-		$toolbar 			= $this->params->def('toolbar', 'top');
+		$toolbar			= $this->params->def('toolbar', 'top');
 		$toolbar_align	= $this->params->def('toolbar_align', 'left');
 		$html_height		= $this->params->def('html_height', '550');
 		$html_width			= $this->params->def('html_width', '750');
@@ -189,7 +196,7 @@ class plgEditorTinymce extends JPlugin
 		$buttons2_add_before = $buttons2_add = array();
 		$buttons3_add_before = $buttons3_add = array();
 		$buttons4 = array();
-		$plugins 	= array();
+		$plugins	= array();
 		if ($extended_elements != "") {
 			$elements	= explode(',', $extended_elements);
 		}
@@ -355,7 +362,7 @@ class plgEditorTinymce extends JPlugin
 		}
 
 		// advlink
-		$advlink 	= $this->params->def('advlink', 1);
+		$advlink	= $this->params->def('advlink', 1);
 		if ($advlink) {
 			$plugins[]	= 'advlink';
 			$elements[]	= 'a[id|class|name|href|target|title|onclick|rel|style]';
@@ -413,8 +420,8 @@ class plgEditorTinymce extends JPlugin
 			case 0: /* Simple mode*/
 				if ($compressed) {
 					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().
-							"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce_gzip.js\"></script>\n";
+							JURI::root().$this->_basePath.
+							"/tiny_mce_gzip.js\"></script>\n";
 					$load .= "\t<script type=\"text/javascript\">
 					tinyMCE_GZ.init({
 					themes : \"$theme[$mode]\",
@@ -423,8 +430,8 @@ class plgEditorTinymce extends JPlugin
 				</script>";
 				} else {
 					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().
-							"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js\"></script>\n";
+							JURI::root().$this->_basePath.
+							"/tiny_mce.js\"></script>\n";
 				}
 				$return = $load .
 				"\t<script type=\"text/javascript\">
@@ -456,8 +463,8 @@ class plgEditorTinymce extends JPlugin
 			case 1: /* Advanced mode*/
 				if ($compressed) {
 					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().
-							"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce_gzip.js\"></script>\n";
+							JURI::root().$this->_basePath.
+							"/tiny_mce_gzip.js\"></script>\n";
 					$load .= "\t<script type=\"text/javascript\">
 						tinyMCE_GZ.init({
 						themes : \"$theme[$mode]\",
@@ -466,8 +473,8 @@ class plgEditorTinymce extends JPlugin
 				</script>";
 				} else {
 					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().
-							"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js\"></script>\n";
+							JURI::root().$this->_basePath.
+							"/tiny_mce.js\"></script>\n";
 				}
 				$return = $load .
 				"\t<script type=\"text/javascript\">
@@ -507,21 +514,21 @@ class plgEditorTinymce extends JPlugin
 			case 2: /* Extended mode*/
 				if ($compressed) {
 					$load = "\t<script type=\"text/javascript\" src=\"".
-							JURI::root().
-							"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce_gzip.js\"></script>\n";
-				  	$load .= "\t<script type=\"text/javascript\">
+							JURI::root().$this->_basePath.
+							"/tiny_mce_gzip.js\"></script>\n";
+					$load .= "\t<script type=\"text/javascript\">
 				tinyMCE_GZ.init({
 					themes : \"$theme[$mode]\",
 					plugins : \"$plugins\",
 					languages : \"". $langPrefix . "\"
 				});
 				</script>";
-		  } else {
+				} else {
 				$load = "\t<script type=\"text/javascript\" src=\"".
-						JURI::root().
-						"plugins/editors/tinymce/tinymce/jscripts/tiny_mce/tiny_mce.js\"></script>\n";
-		  }
-		  $return = $load .
+						JURI::root().$this->_basePath.
+						"/tiny_mce.js\"></script>\n";
+				}
+				$return = $load .
 				"\t<script type=\"text/javascript\">
 				tinyMCE.init({
 					// General
@@ -547,7 +554,7 @@ class plgEditorTinymce extends JPlugin
 					remove_script_host : false,
 					document_base_url : \"". JURI::root() ."\",
 					//Templates
-					template_external_list_url :  \"". JURI::root() ."plugins/editors/tinymce/tinymce/templates/template_list.js\",
+					template_external_list_url :  \"". JURI::root() ."media/editors/tinymce/templates/template_list.js\",
 					// Layout
 					$content_css
 					// Advanced theme
@@ -570,7 +577,7 @@ class plgEditorTinymce extends JPlugin
 					}
 				});
 				</script>";
-		  break;
+				break;
 		}
 
 		return $return;
@@ -579,7 +586,7 @@ class plgEditorTinymce extends JPlugin
 	/**
 	 * TinyMCE WYSIWYG Editor - get the editor content
 	 *
-	 * @param string 	The name of the editor
+	 * @param string	The name of the editor
 	 */
 	function onGetContent( $editor ) {
 		return 'tinyMCE.get(\''.$editor.'\').getContent();';
@@ -588,7 +595,7 @@ class plgEditorTinymce extends JPlugin
 	/**
 	 * TinyMCE WYSIWYG Editor - set the editor content
 	 *
-	 * @param string 	The name of the editor
+	 * @param string	The name of the editor
 	 */
 	function onSetContent($editor, $html) {
 		return 'tinyMCE.get(\''.$editor.'\').setContent('.$html.');';
@@ -597,10 +604,10 @@ class plgEditorTinymce extends JPlugin
 	/**
 	 * TinyMCE WYSIWYG Editor - copy editor content to form field
 	 *
-	 * @param string 	The name of the editor
+	 * @param string	The name of the editor
 	 */
 	function onSave($editor) {
- 		return 'if (tinyMCE.get("'.$editor.'").isHidden()) {tinyMCE.get("'.$editor.'").show()}; tinyMCE.get("'.$editor.'").save();';
+		return 'if (tinyMCE.get("'.$editor.'").isHidden()) {tinyMCE.get("'.$editor.'").show()}; tinyMCE.get("'.$editor.'").save();';
 	}
 
 	function onGetInsertMethod($name)
@@ -716,7 +723,7 @@ class plgEditorTinymce extends JPlugin
 	{
 		$return  = '';
 		$return .= "\n<div class=\"toggle-editor\">\n";
-		$return .= "<div class=\"button2-left\"><div class=\"blank\"><a href=\"#\" onclick=\"javascript:tinyMCE.execCommand('mceToggleEditor', false, '$name');return false;\" title=\"Toggle editor\">Toggle editor</a></div></div>";
+		$return .= "<div class=\"button2-left\"><div class=\"blank\"><a href=\"#\" onclick=\"javascript:tinyMCE.execCommand('mceToggleEditor', false, '$name');return false;\"title=\"".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."\">".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."</a></div></div>";
 		$return .= "</div>\n";
 		return $return;
 	}

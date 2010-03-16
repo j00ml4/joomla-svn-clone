@@ -10,7 +10,7 @@ defined('JPATH_BASE') or die;
 /**
  * Users table
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Table
  * @since		1.0
  */
@@ -32,8 +32,8 @@ class JTableUser extends JTable
 	{
 		parent::__construct('#__users', 'id', $db);
 
-		//initialise
-		$this->id        = 0;
+		// Initialise.
+		$this->id = 0;
 		$this->sendEmail = 0;
 	}
 
@@ -181,8 +181,8 @@ class JTableUser extends JTable
 			return false;
 		}
 
-		if (eregi("[<>\"'%;()&]", $this->username) || strlen(utf8_decode($this->username)) < 2) {
-			$this->setError(JText::sprintf('VALID_AZ09', JText::_('Username'), 2));
+		if (preg_match( "#[<>\"'%;()&]#i", $this->username) || strlen(utf8_decode($this->username )) < 2) {
+			$this->setError( JText::sprintf( 'VALID_AZ09', JText::_( 'Username' ), 2 ) );
 			return false;
 		}
 

@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_media')) {
-	return JError::raiseWarning(404, JText::_('ALERTNOTAUTH'));
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // Include dependancies
@@ -28,7 +28,7 @@ $view = JRequest::getCmd('view',null);
 $popup_upload = JRequest::getCmd('pop_up',null);
 $path = "file_path";
 if (substr(strtolower($view),0,6) == "images" || $popup_upload == 1) $path = "image_path";
-define('COM_MEDIA_BASE',    JPATH_ROOT.DS.$params->get($path, 'images'));
+define('COM_MEDIA_BASE',	JPATH_ROOT.DS.$params->get($path, 'images'));
 define('COM_MEDIA_BASEURL', JURI::root().$params->get($path, 'images'));
 
 // Require the base controller

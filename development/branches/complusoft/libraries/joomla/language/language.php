@@ -15,10 +15,14 @@ defined('JPATH_BASE') or die;
  */
 define('_QQ_', '"');
 
+
+// import some libariries
+jimport('joomla.filesystem.stream');
+
 /**
  * Languages/translation handler class
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Language
  * @since		1.5
  */
@@ -128,7 +132,7 @@ class JLanguage extends JObject
 		$this->setLanguage($lang);
 
 		$filename = JPATH_BASE.DS.'language'.DS.'overrides'.DS.$lang.'.override.ini';
-		if ($contents = @parse_ini_file($filename)) {
+		if (file_exists($filename) && $contents = $this->_parse($filename)) {
 			if (is_array($contents)) {
 				$this->_override = $contents;
 			}
@@ -177,14 +181,13 @@ class JLanguage extends JObject
 	/**
 	 * Translate function, mimics the php gettext (alias _) function
 	 *
-	 * @param	string		$string 	The string to translate
+	 * @param	string		$string	The string to translate
 	 * @param	boolean	$jsSafe		Make the result javascript safe
 	 * @return	string	The translation of the string
 	 * @since	1.5
 	 */
 	public function _($string, $jsSafe = false)
 	{
-		//$key = str_replace(' ', '_', strtoupper(trim($string)));echo '<br />'.$key;
 		$key = strtoupper($string);
 		if (isset ($this->_strings[$key])) {
 			$string = $this->_debug ? '**'.$this->_strings[$key].'**' : $this->_strings[$key];
@@ -227,28 +230,29 @@ class JLanguage extends JObject
 	 * This method processes a string and replaces all accented UTF-8 characters by unaccented
 	 * ASCII-7 "equivalents"
 	 *
-	 * @param	string	$string 	The string to transliterate
+	 * @param	string	$string	The string to transliterate
 	 * @return	string	The transliteration of the string
 	 * @since	1.5
 	 */
 	public function transliterate($string)
 	{
-		include_once (JPATH_SITE.DS.'libraries'.DS.'phputf8'.DS.'utils'.DS.'ascii.php');
-		
+		include_once(dirname(__FILE__).DS.'latin_transliterate.php');
+
 		if ($this->_transliterator !== null) {
 			return call_user_func($this->_transliterator, $string);
 		}
-
-		$string = utf8_accents_to_ascii($string); 
+		
+		$string = JLanguageTransliterate::utf8_latin_to_ascii($string);
 		$string = JString::strtolower($string);
+		
 		return $string;
-	} 
+	}
 
 	/**
 	 * Getter for transliteration function
 	 *
 	 * @return	string|function Function name or the actual function for PHP 5.3
-	 * @since 	1.6
+	 * @since	1.6
 	 */
 	public function getTransliterator()
 	{
@@ -259,7 +263,7 @@ class JLanguage extends JObject
 	 * Set the transliteration function
 	 *
 	 * @return	string|function Function name or the actual function for PHP 5.3
-	 * @since 	1.6
+	 * @since	1.6
 	 */
 	public function setTransliterator($function)
 	{
@@ -306,20 +310,21 @@ class JLanguage extends JObject
 	/**
 	 * Loads a single language file and appends the results to the existing strings
 	 *
-	 * @param	string 	$extension 	The extension for which a language file should be loaded
-	 * @param	string 	$basePath  	The basepath to use
+	 * @param	string	$extension	The extension for which a language file should be loaded
+	 * @param	string	$basePath	The basepath to use
 	 * @param	string	$lang		The language to load, default null for the current language
 	 * @param	boolean $reload		Flag that will force a language to be reloaded if set to true
+	 * @param	boolean	$default	Flag that force the default language to be loaded if the current does not exist
 	 * @return	boolean	True, if the file has successfully loaded.
 	 * @since	1.5
 	 */
-	public function load($extension = 'joomla', $basePath = JPATH_BASE, $lang = null, $reload = false)
+	public function load($extension = 'joomla', $basePath = JPATH_BASE, $lang = null, $reload = false, $default = true)
 	{
 		if (! $lang) {
 			$lang = $this->_lang;
 		}
 
-		$path = JLanguage::getLanguagePath($basePath, $lang);
+		$path = self::getLanguagePath($basePath, $lang);
 
 		$internal = $extension == 'joomla' || $extension == '';
 		$filename = $internal ? $lang : $lang . '.' . $extension;
@@ -334,12 +339,12 @@ class JLanguage extends JObject
 			$result = $this->_load($filename, $extension);
 
 			// Check if there was a problem with loading the file
-			if ($result === false) {
+			if ($result === false && $default) {
 				// No strings, so either file doesn't exist or the file is invalid
 				$oldFilename = $filename;
 
 				// Check the standard file name
-				$path		= JLanguage::getLanguagePath($basePath, $this->_default);
+				$path		= self::getLanguagePath($basePath, $this->_default);
 				$filename = $internal ? $this->_default : $this->_default . '.' . $extension;
 				$filename	= $path.DS.$filename.'.ini';
 
@@ -372,12 +377,7 @@ class JLanguage extends JObject
 
 		$strings = false;
 		if (file_exists($filename)) {
-			ini_set('track_errors', '1');
-			$strings = @parse_ini_file($filename);
-			if (!empty($php_errormsg)) {
-				JError::raiseWarning(500, $php_errormsg);
-			}
-			ini_restore('track_errors');
+			$strings = $this->_parse($filename);
 		}
 
 		if ($strings) {
@@ -398,6 +398,57 @@ class JLanguage extends JObject
 		$this->_paths[$extension][$filename] = $result;
 
 		return $result;
+	}
+
+	/**
+	 * Parses a language file
+	 *
+	 * @param	string The name of the file
+	 * @since	1.6
+	 */
+	protected function _parse($filename)
+	{
+		ini_set('track_errors', '1');
+		$version = phpversion();
+		if($version >= "5.3.1") {
+			$contents = file_get_contents($filename);
+			$contents = str_replace('_QQ_','"\""',$contents);
+			$strings = @parse_ini_string($contents);
+		} else {
+			$strings = @parse_ini_file($filename);
+			if ($version == "5.3.0") {
+				foreach($strings as $key => $string) {
+					$strings[$key]=str_replace('_QQ_','"',$string);
+				}
+			}
+		}
+		if (!empty($php_errormsg) || JFactory::getApplication()->getCfg('debug')) {
+			$errors = array();
+			$lineNumber = 0;
+			$stream = new JStream();
+			$stream->open($filename);
+			while(!$stream->eof())
+			{
+				$line = $stream->gets();
+				$lineNumber++;
+				if (!preg_match('/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*\s*=(\s*(("[^"]*")|(_QQ_)))+))\s*(;.*)?$/',$line))
+				{
+					$errors[] = $lineNumber;
+				}
+			}
+			$stream->close();
+			if (count($errors)) {
+				if (basename($filename)!=$this->_lang.'.ini') {
+					JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+				else {
+					JError::raiseWarning(500, sprintf('The language file %1$s was not read correctly: error in lines %2$s',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+			}
+			//JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
+		}
+		ini_restore('track_errors');
+		return $strings;
 	}
 
 	/**
@@ -587,12 +638,8 @@ class JLanguage extends JObject
 	 */
 	function hasKey($string)
 	{
-		@list($extension, $key) = explode('.', strtoupper($string), 2);
-		if (!isset($key)) {
-			$key = $extension;
-			$extension = 'J';
-		}
-		return isset ($this->_strings[$extension][$key]);
+		$key = strtoupper($string);
+		return isset ($this->_strings[$key]);
 	}
 
 	/**
@@ -600,17 +647,17 @@ class JLanguage extends JObject
 	 *
 	 * @param	string	The name of the language
 	 * @return	mixed	If $lang exists return key/value pair with the language metadata,
-	 *  				otherwise return NULL
+	 *				otherwise return NULL
 	 * @since	1.5
 	 */
 	public static function getMetadata($lang)
 	{
-		$path = JLanguage::getLanguagePath(JPATH_BASE, $lang);
+		$path = self::getLanguagePath(JPATH_BASE, $lang);
 		$file = $lang.'.xml';
 
 		$result = null;
 		if (is_file($path.DS.$file)) {
-			$result = JLanguage::_parseXMLLanguageFile($path.DS.$file);
+			$result = self::_parseXMLLanguageFile($path.DS.$file);
 		}
 
 		return $result;
@@ -619,14 +666,14 @@ class JLanguage extends JObject
 	/**
 	 * Returns a list of known languages for an area
 	 *
-	 * @param	string	$basePath 	The basepath to use
+	 * @param	string	$basePath	The basepath to use
 	 * @return	array	key/value pair with the language file and real name
 	 * @since	1.5
 	 */
 	public static function getKnownLanguages($basePath = JPATH_BASE)
 	{
-		$dir = JLanguage::getLanguagePath($basePath);
-		$knownLanguages = JLanguage::_parseLanguageFiles($dir);
+		$dir = self::getLanguagePath($basePath);
+		$knownLanguages = self::_parseLanguageFiles($dir);
 
 		return $knownLanguages;
 	}
@@ -669,7 +716,7 @@ class JLanguage extends JObject
 	/**
 	 * Searches for language directories within a certain base dir
 	 *
-	 * @param	string 	$dir 	directory of files
+	 * @param	string	$dir	directory of files
 	 * @return	array	Array holding the found languages as filename => real name pairs
 	 * @since	1.5
 	 */
@@ -681,7 +728,7 @@ class JLanguage extends JObject
 
 		$subdirs = JFolder::folders($dir);
 		foreach ($subdirs as $path) {
-			$langs = JLanguage::_parseXMLLanguageFiles($dir.DS.$path);
+			$langs = self::_parseXMLLanguageFiles($dir.DS.$path);
 			$languages = array_merge($languages, $langs);
 		}
 
@@ -691,7 +738,7 @@ class JLanguage extends JObject
 	/**
 	 * Parses XML files for language information
 	 *
-	 * @param	string	$dir	 Directory of files
+	 * @param	string	$dir	Directory of files
 	 * @return	array	Array holding the found languages as filename => metadata array
 	 * @since	1.5
 	 */
@@ -706,7 +753,7 @@ class JLanguage extends JObject
 		$files = JFolder::files($dir, '^([-_A-Za-z]*)\.xml$');
 		foreach ($files as $file) {
 			if ($content = file_get_contents($dir.DS.$file)) {
-				if ($metadata = JLanguage::_parseXMLLanguageFile($dir.DS.$file)) {
+				if ($metadata = self::_parseXMLLanguageFile($dir.DS.$file)) {
 					$lang = str_replace('.xml', '', $file);
 					$languages[$lang] = $metadata;
 				}
@@ -718,7 +765,7 @@ class JLanguage extends JObject
 	/**
 	 * Parse XML file for language information.
 	 *
-	 * @param	string	$path	 Path to the xml files
+	 * @param	string	$path	Path to the xml files
 	 * @return	array	Array holding the found metadata as a key => value pair
 	 * @since	1.5
 	 */
@@ -743,3 +790,4 @@ class JLanguage extends JObject
 		return $metadata;
 	}
 }
+

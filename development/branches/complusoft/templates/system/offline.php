@@ -30,7 +30,7 @@ $app = &JFactory::getApplication();
 		<?php echo $app->getCfg('offline_message'); ?>
 	</p>
 	<?php if (JPluginHelper::isEnabled('authentication', 'openid')) : ?>
-	<?php JHtml::_('script', 'openid.js'); ?>
+	<?php JHTML::_('script','openid.js'); ?>
 <?php endif; ?>
 	<form action="index.php" method="post" name="login" id="form-login">
 	<fieldset class="input">
@@ -49,7 +49,7 @@ $app = &JFactory::getApplication();
 		<input type="submit" name="Submit" class="button" value="<?php echo JText::_('LOGIN') ?>" />
 	</fieldset>
 	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="login" />
+	<input type="hidden" name="task" value="user.login" />
 	<input type="hidden" name="return" value="<?php echo base64_encode(JURI::base()) ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 	</form>

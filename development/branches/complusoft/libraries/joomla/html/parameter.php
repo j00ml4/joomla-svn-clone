@@ -16,7 +16,7 @@ JLoader::register('JElement', dirname(__FILE__).'/parameter/element.php');
 /**
  * Parameter handler
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Parameter
  * @since		1.5
  */
@@ -217,7 +217,7 @@ class JParameter extends JRegistry
 		}
 		$results = array();
 		foreach ($this->_xml[$group]->children() as $param)  {
-			$result = $this->getParam($param, $name);
+			$result = $this->getParam($param, $name, $group);
 			$results[$result[5]] = $result;
 		}
 		return $results;
@@ -272,7 +272,7 @@ class JParameter extends JRegistry
 
 		$results = array();
 		foreach ($this->_xml[$group]->children() as $param)  {
-			$results[] = $this->getParam($param, $name);
+			$results[] = $this->getParam($param, $name, $group);
 		}
 		return $results;
 	}

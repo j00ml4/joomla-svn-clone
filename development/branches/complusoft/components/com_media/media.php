@@ -21,11 +21,11 @@ for($i = 0; $i < $params->get('allowed_media_usergroup', 3); $i++)
 $user = & JFactory::getUser();
 $app	= &JFactory::getApplication();
 if (!$user->authorize('com_media', 'popup')) {
-	$app->redirect('index.php', JText::_('ALERTNOTAUTH'));
+	$app->redirect('index.php', JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // Set the path definitions
-define('COM_MEDIA_BASE',    JPATH_ROOT.DS.$params->get('image_path', 'images'));
+define('COM_MEDIA_BASE',	JPATH_ROOT.DS.$params->get('image_path', 'images'));
 define('COM_MEDIA_BASEURL', JURI::root(true).'/'.$params->get('image_path', 'images'));
 
 // Load the admin HTML view

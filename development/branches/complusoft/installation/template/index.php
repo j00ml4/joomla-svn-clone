@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
 
 		<script type="text/javascript">
 			window.addEvent('domready', function(){ new Accordion($$('h3.moofx-toggler'), $$('div.moofx-slider'), {onActive: function(toggler, i) { toggler.addClass('moofx-toggler-down'); },onBackground: function(toggler, i) { toggler.removeClass('moofx-toggler-down'); },duration: 300,opacity: false, alwaysHide:true, show: 1}); });
-  		</script>
+		</script>
 	</head>
 	<body>
 		<div id="header1">
@@ -46,8 +46,9 @@ defined('_JEXEC') or die;
 				<div id="footer3"></div>
 			</div>
 		</div>
-		<div id="copyright"><a href="http://www.joomla.org" target="_blank">Joomla</a>
-			<?php echo JText::_('ISFREESOFTWARE') ?>
+		<div id="copyright">
+			<?php $joomla= '<a href="http://www.joomla.org">Joomla!</a>';
+			echo JText::sprintf('JCOMMON_ISFREESOFTWARE', $joomla) ?>
 		</div>
 	</body>
 </html>

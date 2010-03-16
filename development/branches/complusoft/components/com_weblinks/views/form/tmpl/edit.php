@@ -17,8 +17,7 @@ JHtml::_('behavior.formvalidation');
 
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
-	if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-		<?php //echo $this->form->fields['introtext']->editor->save('jform[introtext]'); ?>
+	if (task == 'weblink.cancel' OR document.formvalidator.isValid(document.id('adminForm'))) {
 		submitform(task);
 	}
 }
@@ -36,7 +35,7 @@ function submitbutton(task) {
 
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
-		<legend><?php echo JText::_('Weblink'); ?></legend>
+		<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 			<br />
@@ -49,17 +48,18 @@ function submitbutton(task) {
 			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink.'.$this->item->id)): ?>
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
+				<br />				
 			<?php endif; ?>
-			<br />
+
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 	</fieldset>
 	<fieldset>
 		<button type="button" onclick="submitbutton('weblink.save')">
-			<?php echo JText::_('Save') ?>
+			<?php echo JText::_('JSAVE') ?>
 		</button>
 		<button type="button" onclick="submitbutton('weblink.cancel')">
-			<?php echo JText::_('Cancel') ?>
+			<?php echo JText::_('JCANCEL') ?>
 		</button>
 	</fieldset>
 

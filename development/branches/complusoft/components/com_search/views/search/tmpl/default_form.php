@@ -23,10 +23,10 @@ defined('_JEXEC') or die;
 
 			<fieldset class="phrases">
 			<legend>
-			    <?php echo JText::_('Search_Phrase');?>:</legend>
-			    <div class="phrases-box">
+				<?php echo JText::_('Search_Phrase');?>:</legend>
+				<div class="phrases-box">
 				<?php echo $this->lists['searchphrase']; ?>
-                </div>
+				</div>
 				<div class="ordering-box">
 				<label for="ordering" class="ordering">
 					<?php echo JText::_('Search_Ordering');?>:
@@ -63,7 +63,7 @@ defined('_JEXEC') or die;
 
 	<div class="form_limit">
 		<label for="limit">
-			<?php echo JText::_('Display Num'); ?>
+			<?php echo JText::_('DISPLAY_NUM'); ?>
 		</label>
 		<?php echo $this->pagination->getLimitBox(); ?>
 	</div>
@@ -73,5 +73,5 @@ defined('_JEXEC') or die;
 
 <?php endif; ?>
 
-<input type="hidden" name="task"   value="search" />
+<input type="hidden" name="task" value="search" />
 </form>

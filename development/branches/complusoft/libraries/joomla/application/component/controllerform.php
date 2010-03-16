@@ -76,23 +76,23 @@ class JControllerForm extends JController
 
 			// Simple pluralisation based on public domain snippet by Paul Osman
 			// For more complex types, just manually set the variable in your class.
-	        $plural = array(
-			    array( '/(x|ch|ss|sh)$/i',         "$1es"    ),
-			    array( '/([^aeiouy]|qu)y$/i',      "$1ies"   ),
-			    array( '/([^aeiouy]|qu)ies$/i',    "$1y"     ),
-	            array( '/(bu)s$/i',                "$1ses"   ),
-	    	    array( '/s$/i',                    "s"       ),
-	    	    array( '/$/',                      "s"       )
-	        );
+			$plural = array(
+				array( '/(x|ch|ss|sh)$/i',		"$1es"),
+				array( '/([^aeiouy]|qu)y$/i',	"$1ies"),
+				array( '/([^aeiouy]|qu)ies$/i',	"$1y"),
+				array( '/(bu)s$/i',				"$1ses"),
+				array( '/s$/i',					"s"),
+				array( '/$/',					"s")
+			);
 
-		    // check for matches using regular expressions
-		    foreach ($plural as $pattern)
-		    {
-		    	if (preg_match($pattern[0], $this->_view_item)) {
+			// check for matches using regular expressions
+			foreach ($plural as $pattern)
+			{
+				if (preg_match($pattern[0], $this->_view_item)) {
 					$this->_view_list = preg_replace( $pattern[0], $pattern[1], $this->_view_item);
 					break;
-		    	}
-		    }
+				}
+			}
 		}
 
 		// Apply, Save & New, and Save As copy should be standard on forms.
@@ -134,7 +134,7 @@ class JControllerForm extends JController
 	 *
 	 * @param	array	An array of input data.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowAdd($data = array())
 	{
@@ -150,6 +150,18 @@ class JControllerForm extends JController
 		$app		= JFactory::getApplication();
 		$context	= "$this->_option.edit.$this->_context";
 
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
+
 		// Access check.
 		if (!$this->_allowAdd())
 		{
@@ -162,7 +174,7 @@ class JControllerForm extends JController
 		$app->setUserState($context.'.data', null);
 
 		// Redirect to the edit screen.
-		$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+		$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 	}
 
 	/**
@@ -173,7 +185,7 @@ class JControllerForm extends JController
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowEdit($data = array(), $key = 'id')
 	{
@@ -211,7 +223,8 @@ class JControllerForm extends JController
 		// Access check.
 		$key		= $table->getKeyName();
 		if (!$this->_allowEdit(array($key => $recordId), $key)) {
-			return JError::raiseWarning(403, 'JError_Core_Edit_not_permitted.');
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
+			return JError::raiseWarning(403, 'JERROR_CORE_EDIT_NOT_PERMITTED');
 		}
 
 		// If record ids do not match, checkin previous record.
@@ -257,6 +270,17 @@ class JControllerForm extends JController
 		$table		= $model->getTable();
 		$checkin	= property_exists($table, 'checked_out');
 		$context	= "$this->_option.edit.$this->_context";
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
 
 		// Get the record id.
 		$recordId = (int) $app->getUserState($context.'.id');
@@ -268,7 +292,7 @@ class JControllerForm extends JController
 			{
 				// Check-in failed, go back to the record and display a notice.
 				$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 				return false;
 			}
 		}
@@ -287,7 +311,7 @@ class JControllerForm extends JController
 	 * @param	array	An array of input data.
 	 * @param	string	The name of the key for the primary key.
 	 *
-	 * @return 	boolean
+	 * @return	boolean
 	 */
 	protected function _allowSave($data, $key = 'id')
 	{
@@ -319,6 +343,17 @@ class JControllerForm extends JController
 		$context	= "$this->_option.edit.$this->_context";
 		$task		= $this->getTask();
 		$recordId	= (int) $app->getUserState($context.'.id');
+		$tmpl		= JRequest::getString('tmpl');
+		$layout		= JRequest::getString('layout', 'edit');
+		$append		= '';
+
+		// Setup redirect info.
+		if ($tmpl) {
+			$append .= '&tmpl='.$tmpl;
+		}
+		if ($layout) {
+			$append .= '&layout='.$layout;
+		}
 
 		// Populate the row id from the session.
 		$key		= $table->getKeyName();
@@ -332,7 +367,7 @@ class JControllerForm extends JController
 			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JError_Checkin_saved', $model->getError());
-				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+				$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 				return false;
 			}
 
@@ -340,9 +375,10 @@ class JControllerForm extends JController
 			$data['id']	= 0;
 			$task		= 'apply';
 		}
-		
+
 		// Access check.
 		if (!$this->_allowSave($data)) {
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_items, false));
 			return JError::raiseWarning(403, 'JError_Save_not_permitted');
 		}
 
@@ -376,7 +412,7 @@ class JControllerForm extends JController
 			$app->setUserState($context.'.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 			return false;
 		}
 
@@ -388,7 +424,7 @@ class JControllerForm extends JController
 
 			// Redirect back to the edit screen.
 			$this->setMessage(JText::sprintf('JError_Save_failed', $model->getError()), 'notice');
-			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 			return false;
 		}
 
@@ -397,11 +433,11 @@ class JControllerForm extends JController
 		{
 			// Check-in failed, go back to the record and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
-			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', $message, 'error');
+			$this->setRedirect('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, $message, 'error');
 			return false;
 		}
 
-		$this->setMessage(JText::_('JController_Save_success'));
+		$this->setMessage(JText::_('JCONTROLLER_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)
@@ -412,7 +448,7 @@ class JControllerForm extends JController
 				$app->setUserState($context.'.data',	null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 				break;
 
 			case 'save2new':
@@ -421,7 +457,7 @@ class JControllerForm extends JController
 				$app->setUserState($context.'.data', null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.$append, false));
 				break;
 
 			default:

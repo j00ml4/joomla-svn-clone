@@ -47,7 +47,7 @@ class ConfigModelComponent extends JModelForm
 	public function getForm()
 	{
 		$option = $this->getState('component.option');
-		$path 	= $this->getState('component.path', '');
+		$path	= $this->getState('component.path', '');
 		jimport('joomla.form.form');
 
 		if ($path){
@@ -83,8 +83,10 @@ class ConfigModelComponent extends JModelForm
 
 		// Load common and local language files.
 		$lang = &JFactory::getLanguage();
-		$lang->load($option, JPATH_COMPONENT);
-		$lang->load($option);
+			$lang->load($option, JPATH_BASE, null, false, false)
+		||	$lang->load($option, JPATH_BASE . "/components/$option", null, false, false)
+		||	$lang->load($option, JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($option, JPATH_BASE . "/components/$option", $lang->getDefault(), false, false);
 
 		$result = JComponentHelper::getComponent($option);
 
@@ -100,7 +102,7 @@ class ConfigModelComponent extends JModelForm
 	 */
 	public function save($data)
 	{
-		$table 	= &JTable::getInstance('extension');
+		$table	= &JTable::getInstance('extension');
 
 		// Save the rules.
 		if (isset($data['params']) && isset($data['params']['rules']))
@@ -108,21 +110,23 @@ class ConfigModelComponent extends JModelForm
 			jimport('joomla.access.rules');
 			$rules	= new JRules($data['params']['rules']);
 			$asset	= JTable::getInstance('asset');
-			if ($asset->loadByName($data['option']))
+			if (!$asset->loadByName($data['option']))
 			{
-				$asset->rules = (string) $rules;
-				if (!$asset->check() || !$asset->store())
-				{
-					$this->setError($asset->getError());
-					return false;
-				}
-				unset($data['option']);// We don't need this anymore
+				$root	= JTable::getInstance('asset');
+				$root->loadByName('root.1');
+				$asset->name = $data['option'];
+				$asset->title = $data['option'];
+				$asset->setLocation($root->id,'last-child');
 			}
-			else
+			$asset->rules = (string) $rules;
+			if (!$asset->check() || !$asset->store())
 			{
-				$this->setError('Config_Error_Component_asset_not_found');
+				$this->setError($asset->getError());
 				return false;
 			}
+			// We don't need this anymore
+			unset($data['option']);
+			unset($data['params']['rules']);
 		}
 
 		// Load the previous Data
@@ -131,8 +135,8 @@ class ConfigModelComponent extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
-		unset($data['id']);		
-		
+		unset($data['id']);
+
 		// Bind the data.
 		if (!$table->bind($data))
 		{

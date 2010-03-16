@@ -55,16 +55,16 @@ class PluginsViewPlugins extends JView
 		$state	= $this->get('State');
 		$canDo	= PluginsHelper::getActions();
 
-		JToolBarHelper::title(JText::_('Plugn_Manager_Plugins'), 'plugin');
+		JToolBarHelper::title(JText::_('COM_PLUGINS_MANAGER_PLUGINS'), 'plugin');
 
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('plugins.publish', 'publish.png', 'publish_f2.png', 'JToolbar_Enable', true);
-			JToolBarHelper::custom('plugins.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JToolbar_Disable', true);
+			JToolBarHelper::custom('plugins.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
+			JToolBarHelper::custom('plugins.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
 		}
 
 		/**
-	 	* Don't think we need an Edit button if names are clickable.
-	 	*/
+		* Don't think we need an Edit button if names are clickable.
+		*/
 		//if ($canDo->get('core.edit')) {
 		//	JToolBarHelper::editList('plugin.edit');
 		// }

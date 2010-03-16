@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Utility class working with images.
  *
- * @package 	Joomla.Framework
+ * @package		Joomla.Framework
  * @subpackage	Html
  * @since		1.5
  */
@@ -21,7 +21,7 @@ abstract class JHtmlImage
 {
 	/**
 	 * Checks to see if an image exists in the current templates image directory.
- 	 * If it does it loads this image.  Otherwise the default image is loaded.
+	 * If it does it loads this image.  Otherwise the default image is loaded.
 	 * Also can be used in conjunction with the menulist param to create the chosen image
 	 * load the default or use no image.
 	 *
@@ -50,7 +50,7 @@ abstract class JHtmlImage
 		$cur_template = $app->getTemplate();
 
 		// Strip HTML.
-		$alt = html_entity_decode($alt);
+		$alt = html_entity_decode($alt, ENT_COMPAT, 'UTF-8');
 
 		if ($altFile) {
 			$src = $altFolder . $altFile;
@@ -84,7 +84,7 @@ abstract class JHtmlImage
 
 		// Outputs actual html <img> tag.
 		if ($asTag) {
-			return '<img src="'. $src .'" alt="'. html_entity_decode($alt) .'" '.$attribs.' />';
+			return '<img src="'. $src .'" alt="'. html_entity_decode($alt, ENT_COMPAT, 'UTF-8') .'" '.$attribs.' />';
 		}
 
 		return $src;
@@ -116,7 +116,7 @@ abstract class JHtmlImage
 		$cur_template = $app->getTemplate();
 
 		// Strip HTML.
-		$alt = html_entity_decode($alt);
+		$alt = html_entity_decode($alt, ENT_COMPAT, 'UTF-8');
 
 		if ($altFile) {
 			$image = $altFolder . $altFile;

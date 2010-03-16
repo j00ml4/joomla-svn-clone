@@ -260,7 +260,7 @@ class JForm extends JObject
 				}
 			}
 		}
-		
+
 		return $return;
 	}
 
@@ -354,7 +354,7 @@ class JForm extends JObject
 				$this->_groups[$fieldset['parent']] = array_merge($this->_groups[$fieldset['parent']], $this->_groups[$group]);
 			}
 		}
-		
+
 		// Iterate through the groups.
 		foreach ($this->_groups as $group => $fields) {
 			$array = $this->_fieldsets[$group]['array'];
@@ -422,6 +422,9 @@ class JForm extends JObject
 
 										$date	= JFactory::getDate($data[$name], $offset);
 										$return[$name] = $date->toMySQL();
+									} else {
+										$db = &JFactory::getDbo();
+										$return[$name]= $db->getNullDate();
 									}
 									break;
 
@@ -430,7 +433,7 @@ class JForm extends JObject
 									if (intval($data[$name])) {
 										$offset	= $user->getParam('timezone', $config->getValue('config.offset'));
 
-										$date   = JFactory::getDate($data[$name], $offset);
+										$date = JFactory::getDate($data[$name], $offset);
 										$return[$name] = $date->toMySQL();
 									}
 									break;
@@ -673,7 +676,11 @@ class JForm extends JObject
 
 		// Set the field attribute if it exists.
 		if (isset($this->_groups[$group][$field])) {
-			$this->_groups[$group][$field]->attributes()->$attribute = $value;
+			if(isset($this->_groups[$group][$field]->attributes()->$attribute)) {
+				$this->_groups[$group][$field]->attributes()->$attribute = $value;
+			} else {
+				$this->_groups[$group][$field]->addAttribute($attribute,$value);
+			}
 			$return = true;
 		}
 
@@ -875,7 +882,7 @@ class JForm extends JObject
 		if (!is_object($xml)) {
 			return false;
 		}
-				
+
 		// Get the group name.
 		$group = ((string)$xml->attributes()->group) ? (string)$xml->attributes()->group : '_default';
 
@@ -935,7 +942,7 @@ class JForm extends JObject
 				self::addFieldPath($path);
 			}
 		}
-		
+
 		if ($reset) {
 			// Reset the field group.
 			$this->_groups[$group] = array();
@@ -944,7 +951,7 @@ class JForm extends JObject
 			{
 				$this->loadFieldsXML($xml->fields, $reset, $group);
 			}
-			
+
 			// Add the fields to the group.
 			foreach ($xml->field as $field) {
 				$this->_groups[$group][(string)$field->attributes()->name] = $field;
@@ -954,7 +961,7 @@ class JForm extends JObject
 			{
 				$this->loadFieldsXML($xml->fields, $reset, $group);
 			}
-			
+
 			// Add to the field group.
 			foreach ($xml->field as $field) {
 				$this->_groups[$group][(string)$field->attributes()->name] = $field;

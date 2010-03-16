@@ -29,10 +29,12 @@ class ContactViewCategory extends JView
 		$pparams = &$app->getParams('com_contact');
 
 		// Selected Request vars
-		$categoryId			= JRequest::getVar('catid',				0,				'', 'int');
-		$limitstart			= JRequest::getVar('limitstart',		0,				'', 'int');
-		$filter_order		= JRequest::getVar('filter_order',		'cd.ordering',	'', 'cmd');
-		$filter_order_Dir	= JRequest::getVar('filter_order_Dir',	'ASC',			'', 'word');
+		$requestID 			= JRequest::getVar('id', 0, '', 'int');
+		$categoryId			= JRequest::getVar('catid',	0, '', 'int');
+		$categoryId			= ($categoryId == 0) ? $requestID : $categoryId;
+		$limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
+		$filter_order		= JRequest::getVar('filter_order', 'cd.ordering', '', 'cmd');
+		$filter_order_Dir	= JRequest::getVar('filter_order_Dir', 'ASC', '', 'word');
 
 		$pparams->def('display_num', $app->getCfg('list_limit'));
 		$default_limit = $pparams->def('display_num', 20);
@@ -47,7 +49,7 @@ class ContactViewCategory extends JView
 
 		$categories	= $model->getCategories($options);
 		$contacts	= $model->getContacts($options);
-		$total 		= $model->getContactCount($options);
+		$total		= $model->getContactCount($options);
 
 				// Validate the category.
 
@@ -121,6 +123,15 @@ class ContactViewCategory extends JView
 		}
 		$document->setTitle($pparams->get('page_title'));
 
+		if ($this->item->metadesc) {
+			$this->document->setDescription($this->item->metadesc);
+		}
+
+		if ($this->item->metakey) {
+			$this->document->setMetadata('keywords', $this->item->metakey);
+		}
+	
+		
 		// Prepare category description
 		$category->description = JHtml::_('content.prepare', $category->description);
 

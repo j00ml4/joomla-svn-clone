@@ -43,7 +43,7 @@ class BannersTableClient extends JTable
 	 * to checkin rows that it can after adjustments are made.
 	 *
 	 * @param	mixed	An optional array of primary key values to update.  If not
-	 * 					set the instance property value is used.
+	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
 	 * @param	integer The user id of the user performing the operation.
 	 * @return	boolean	True on success.
@@ -67,7 +67,7 @@ class BannersTableClient extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('No_Rows_Selected'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

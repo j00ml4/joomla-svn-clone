@@ -39,9 +39,9 @@ class ContentModelArticle extends JModelForm
 	/**
 	 * Returns a Table object, always creating it.
 	 *
-	 * @param	type 	$type 	 The table type to instantiate
-	 * @param	string 	$prefix	 A prefix for the table class name. Optional.
-	 * @param	array	$options Configuration array for model. Optional.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Content', $prefix = 'JTable', $config = array())
@@ -196,7 +196,7 @@ class ContentModelArticle extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -231,6 +231,8 @@ class ContentModelArticle extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+
+		$this->featured($table->id, $data['featured']);
 
 		// Clean the cache.
 		$cache = JFactory::getCache('com_content');
@@ -350,8 +352,7 @@ class ContentModelArticle extends JModelForm
 		}
 
 		// Move the row.
-		// TODO: Where clause to restrict category.
-		$table->move($pk);
+		$table->move($direction, 'catid = '.$table->catid);
 
 		// Check-in the row.
 		if (!$this->checkin($pk)) {
@@ -372,6 +373,7 @@ class ContentModelArticle extends JModelForm
 		// Initialise variables.
 		$table		= $this->getTable();
 		$conditions	= array();
+		$user 		= JFactory::getUser();
 
 		if (empty($pks)) {
 			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));

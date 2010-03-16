@@ -4,14 +4,14 @@
 	<layout
 		title="com_contact_category_view_default_title">
 		<message>
-			<![CDATA[com_contact_category_view_default_desc]]>
+			<![CDATA[COM_CONTACT_CATEGORY_VIEW_DEFAULT_DESC]]>
 		</message>
 	</layout>
 	<fields
 		group="request"
 		array="true"
-		label="Menus_Layout_Request_Variables_Label"
-		description="Menus_Layout_Request_Variables_Desc"
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC"
 		addfieldpath="/administrator/components/com_contact/models/fields">
 
 		<field
@@ -20,34 +20,25 @@
 			extension="com_contact"
 			default="0"
 			required="true"
-			label="SELECT_CATEGORY"
-			description="A contacts category" />
+			label="COM_CONTACT_FIELD_CATEGORY_LABEL"
+			description="COM_CONTACT_FIELD_CATEGORY_DESC" />
 	</fields>
 	<fields>
 		<field
 			name="display_num"
 			type="list"
 			default="20"
-			label="NUM_LINKS"
-			description="Number of Contacts to display as list.">
-			<option
-				value="5">5</option>
-			<option
-				value="10">10</option>
-			<option
-				value="15">15</option>
-			<option
-				value="20">20</option>
-			<option
-				value="25">25</option>
-			<option
-				value="30">30</option>
-			<option
-				value="50">50</option>
-			<option
-				value="100">100</option>
-			<option
-				value="0">All</option>
+			label="COM_CONTACT_FIELD_NUM_CONTACTS_LABEL"
+			description="COM_CONTACT_FIELD_NUM_CONTACTS_DESC">
+			<option value="5">J5</option>
+				<option value="10">J10</option>
+				<option value="15">J15</option>
+				<option value="20">J20</option>
+				<option value="25">J25</option>
+				<option value="30">J30</option>
+				<option value="50">J50</option>
+				<option value="100">J100</option>
+				<option value="0">JALL</option>
 		</field>
 		<field
 			name="image"
@@ -55,42 +46,45 @@
 			directory="/images"
 			hide_default="1"
 			default=""
-			label="Image"
-			description="fieldIMAGE" />
+			label="JFIELD_CATEGORY_IMAGE_LABEL"
+			description="JFIELD_CATEGORY_IMAGE_DESC" />
 		<field
 			name="image_align"
 			type="radio"
 			default="right"
-			label="Image Align"
-			description="Alignment of the image">
+			label="COM_CONTACT_FIELD_IMAGE_ALIGN_LABEL"
+			description="COM_CONTACT_FIELD_IMAGE_ALIGN_DESC">
 			<option
-				value="left">Left</option>
+				value="left">JCOMMON_LEFT</option>
 			<option
-				value="right">Right</option>
+				value="right">JCOMMON_RIGHT</option>
 		</field>
 		<field
-			type="spacer" />
+			name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
 		<field
 			name="show_limit"
 			type="radio"
 			default="0"
-			label="Limit Box"
-			description="fieldSHOWLIMIT">
+			label="COM_CONTACT_FIELD_LIMIT_BOX_LABEL"
+			description="COM_CONTACT_FIELD_LIMIT_BOX_DESC">
 			<option
-				value="0">Hide</option>
+				value="0">JHIDE</option>
 			<option
-				value="1">Show</option>
+				value="1">JSHOW</option>
 		</field>
 		<field
 			name="show_feed_link"
 			type="radio"
 			default="1"
-			label="Show a feed link"
-			description="fieldSHOWFEEDLINK">
+			label="COM_CONTACT_FIELD_FEEDLINK_LABEL"
+			description="COM_CONTACT_FIELD_FEEDLINK_DESC">
 			<option
-				value="0">JNo</option>
+				value="0">JHIDE</option>
 			<option
-				value="1">JYes</option>
+				value="1">JSHOW</option>
 		</field>
 	</fields>
 </metadata>

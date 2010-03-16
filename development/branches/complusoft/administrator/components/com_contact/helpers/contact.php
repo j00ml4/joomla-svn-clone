@@ -1,6 +1,6 @@
 <?php
 /**
- * @version
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -25,12 +25,12 @@ class ContactHelper
 	public static function addSubmenu($vName)
 	{
 		JSubMenuHelper::addEntry(
-			JText::_('Contact_Submenu_Contacts'),
+			JText::_('COM_CONTACT_SUBMENU_CONTACTS'),
 			'index.php?option=com_contact&view=contacts',
 			$vName == 'contacts'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('Contact_Submenu_Categories'),
+			JText::_('COM_CONTACT_SUBMENU_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_contact',
 			$vName == 'categories'
 		);

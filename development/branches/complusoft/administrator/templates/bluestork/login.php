@@ -49,7 +49,7 @@ $app = &JFactory::getApplication();
 	<div id="border-top" class="h_blue">
 		<div>
 			<div>
-				<span class="title"><a href="index.php"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename') : JText::_('Administration'); ?></a></span>
+				<span class="title"><a href="index.php"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename') : JText::_('TPL_BLUESTORK_HEADER'); ?></a></span>
 			</div>
 		</div>
 	</div>
@@ -63,12 +63,12 @@ $app = &JFactory::getApplication();
 				</div>
 				<div class="m wbg">
 
-					<h1><?php echo JText::_('JOOMLA_ADMINISTRATION_LOGIN') ?></h1>
+					<h1><?php echo JText::_('COM_LOGIN_JOOMLA_ADMINISTRATION_LOGIN') ?></h1>
 					<jdoc:include type="message" />
 					<jdoc:include type="component" />
-					<p><?php echo JText::_('DESCUSEVALIDLOGIN') ?></p>
+					<p><?php echo JText::_('COM_LOGIN_VALID') ?></p>
 					<p>
-						<a href="<?php echo JURI::root(); ?>"><?php echo JText::_('RETURN_TO_SITE_HOME_PAGE') ?></a>
+						<a href="<?php echo JURI::root(); ?>"><?php echo JText::_('COM_LOGIN_RETURN_TO_SITE_HOME_PAGE') ?></a>
 					</p>
 					<div id="lock"></div>
 					<div class="clr"></div>
@@ -80,7 +80,7 @@ $app = &JFactory::getApplication();
 				</div>
 			</div>
 			<noscript>
-				<?php echo JText::_('WARNJAVASCRIPT') ?>
+				<?php echo JText::_('JCOMMON_WARNJAVASCRIPT') ?>
 			</noscript>
 			<div class="clr"></div>
 		</div>
@@ -89,8 +89,8 @@ $app = &JFactory::getApplication();
 </div>
 <div id="footer">
 	<p class="copyright">
-		<a href="http://www.joomla.org">Joomla!</a>
-		<?php echo JText::_('ISFREESOFTWARE') ?>
+		<?php $joomla= '<a href="http://www.joomla.org">Joomla!</a>';
+		echo JText::sprintf('JCOMMON_ISFREESOFTWARE', $joomla) ?>
 	</p>
 </div>
 </body>

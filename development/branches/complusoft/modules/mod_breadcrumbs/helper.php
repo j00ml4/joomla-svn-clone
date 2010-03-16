@@ -22,14 +22,14 @@ class modBreadCrumbsHelper
 		$count = count($items);
 		for ($i = 0; $i < $count; $i ++)
 		{
-			$items[$i]->name = stripslashes(htmlspecialchars($items[$i]->name));
+			$items[$i]->name = stripslashes(htmlspecialchars($items[$i]->name, ENT_COMPAT, 'UTF-8'));
 			$items[$i]->link = JRoute::_($items[$i]->link);
 		}
 
 		if ($params->get('showHome', 1))
 		{
 			$item = new stdClass();
-			$item->name = $params->get('homeText', JText::_('Home'));
+			$item->name = $params->get('homeText', JText::_('MOD_BREADCRUMBS_HOME'));
 			$item->link = JURI::base();
 			array_unshift($items, $item);
 		}
@@ -38,25 +38,25 @@ class modBreadCrumbsHelper
 	}
 
 	/**
- 	 * Set the breadcrumbs separator for the breadcrumbs display.
- 	 *
- 	 * @param	string	$custom	Custom xhtml complient string to separate the
- 	 * items of the breadcrumbs
- 	 * @return	string	Separator string
- 	 * @since	1.5
- 	 */
+	 * Set the breadcrumbs separator for the breadcrumbs display.
+	 *
+	 * @param	string	$custom	Custom xhtml complient string to separate the
+	 * items of the breadcrumbs
+	 * @return	string	Separator string
+	 * @since	1.5
+	 */
 	function setSeparator($custom = null)
 	{
 		$lang = &JFactory::getLanguage();
 
 		// If a custom separator has not been provided we try to load a template
-	 	// specific one first, and if that is not present we load the default separator
+		// specific one first, and if that is not present we load the default separator
 		if ($custom == null) {
 			if ($lang->isRTL()){
-				$_separator = JHtml::_('image', 'system/arrow_rtl.png', NULL, NULL, true);
+				$_separator = JHTML::_('image','system/arrow_rtl.png', NULL, NULL, true);
 			}
 			else{
-				$_separator = JHtml::_('image', 'system/arrow.png', NULL, NULL, true);
+				$_separator = JHTML::_('image','system/arrow.png', NULL, NULL, true);
 			}
 		} else {
 			$_separator = $custom;

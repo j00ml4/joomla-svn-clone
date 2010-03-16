@@ -1,6 +1,6 @@
 <?php // no direct access
 defined('_JEXEC') or die('Restricted access'); ?>
-<?php $canEdit   = ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)); ?>
+<?php $canEdit	= ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)); ?>
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
 <?php endif; ?>
@@ -36,11 +36,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<?php echo JHTML::_('icon.email', $this->item, $this->item->params, $this->access); ?>
 	</td>
 	<?php endif; ?>
-	   <?php if ($canEdit) : ?>
-	   <td align="right" width="100%" class="buttonheading">
-	   <?php echo JHTML::_('icon.edit', $this->item, $this->item->params, $this->access); ?>
-	   </td>
-   <?php endif; ?>
+		<?php if ($canEdit) : ?>
+		<td align="right" width="100%" class="buttonheading">
+		<?php echo JHTML::_('icon.edit', $this->item, $this->item->params, $this->access); ?>
+		</td>
+	<?php endif; ?>
 </tr>
 </table>
 <?php endif; ?>
@@ -95,7 +95,7 @@ endif; ?>
 <?php if ($this->item->params->get('show_create_date')) : ?>
 <tr>
 	<td valign="top" colspan="2" class="createdate">
-		<?php echo JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC2')); ?>
+		<?php echo JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2')); ?>
 	</td>
 </tr>
 <?php endif; ?>
@@ -121,7 +121,7 @@ endif; ?>
 <?php if ( intval($this->item->modified) != 0 && $this->item->params->get('show_modify_date')) : ?>
 <tr>
 	<td colspan="2"  class="modifydate">
-		<?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date', $this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
 	</td>
 </tr>
 <?php endif; ?>
