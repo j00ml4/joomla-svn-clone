@@ -27,12 +27,36 @@ abstract class modLanguagesHelper
 		$query->order($db->nameQuote('text'));
 		$db->setQuery($query);
 		$result = $db->loadAssocList();
+		$menus= JFactory::getApplication()->getMenu();
 		foreach($result as $i=>$language) {
 			if (!JLanguage::exists($language['value'])) {
 				unset($result[$i]);
 			}
 			else {
-				$result[$i]['redirect']='http://www.google.fr';
+				$item = $menus->getDefault($language['value']);
+				switch ($item->type) {
+				case 'url':
+					if ((strpos($item->link, 'index.php?') === 0) && (strpos($item->link, 'Itemid=') === false)) {
+						// If this is an internal Joomla link, ensure the Itemid is set.
+						$item->link = $tmp->link.'&amp;Itemid='.$item->id;
+					}
+					break;
+
+				case 'alias':
+					// If this is an alias use the item id stored in the parameters to make the link.
+					$item->link = 'index.php?Itemid='.$item->params->get('aliasoptions');
+					break;
+
+				default:
+					$router = JSite::getRouter();
+					if ($router->getMode() == JROUTER_MODE_SEF) {
+						$item->link = 'index.php?Itemid='.$item->id;
+					} else {
+						$item->link .= '&Itemid='.$item->id;
+					}
+					break;
+				}
+				$result[$i]['redirect']=$item->link;
 			}
 		}
 		if ($useDefault) {
