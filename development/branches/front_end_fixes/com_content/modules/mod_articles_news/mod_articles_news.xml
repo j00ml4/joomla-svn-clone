@@ -44,7 +44,7 @@
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
-		</field>	
+		</field>
 		<field
 			name="item_title"
 			type="list"
@@ -68,6 +68,23 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
+		</field>
+		<field
+			name="item_heading"
+			type="list"
+			default="h4"
+			label="MOD_ARTICLES_NEWS_TITLE_HEADING"
+			description="MOD_ARTICLES_NEWS_TITLE_HEADING_DESCRIPTION">
+			<option
+				value="h1">h1</option>
+			<option
+				value="h2">h2</option>
+				<option
+				value="h3">h3</option>
+				<option
+				value="h4">h4</option>
+					<option
+				value="h5">h5</option>
 		</field>
 		<field
 			name="showLastSeparator"
