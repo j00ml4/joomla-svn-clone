@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script', 'multiselect.js');
+JHtml::_('script','multiselect.js');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 
@@ -51,10 +51,10 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</select>
 			
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('BANNERS_SELECT_CLIENT'); ?>
+				<?php echo JText::_('COM_BANNERS_SELECT_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value=""><?php echo JText::_('BANNERS_SELECT_CLIENT');?></option>
+				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
 				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 			
@@ -72,10 +72,10 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap state-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_PUBLISHED', 'state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -90,19 +90,19 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php endif;?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_STICKY', 'sticky', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_STICKY', 'sticky', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_IMPRESSIONS', 'impmade', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_IMPRESSIONS', 'impmade', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'BANNERS_HEADING_CLICKS', 'clicks', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLICKS', 'clicks', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JText::_('BANNERS_HEADING_METAKEYWORDS'); ?>
+					<?php echo JText::_('COM_BANNERS_HEADING_METAKEYWORDS'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('BANNERS_HEADING_PURCHASETYPE'); ?>
+					<?php echo JText::_('COM_BANNERS_HEADING_PURCHASETYPE'); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -147,8 +147,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<td class="order">
 					<?php if ($item->state >=0):?>
 						<?php if ($canChange && $this->state->get('list.ordering')=='ordering') : ?>
-							<span><?php echo $this->pagination->orderUpIcon($i, $this->state->get('list.direction')=='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderup' : 'banners.orderdown', 'JGrid_Move_Up', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $this->state->get('list.direction')!='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderdown' : 'banners.orderup', 'JGrid_Move_Down', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderUpIcon($i, $this->state->get('list.direction')=='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderup' : 'banners.orderdown', 'JGRID_MOVE_UP', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $this->state->get('list.direction')!='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderdown' : 'banners.orderup', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 							<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 							<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->name; ?> order" />
 						<?php else : ?>
@@ -160,7 +160,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('jgrid.published', $item->sticky, $i, 'banners.sticky_', $canChange);?>
 				</td>
 				<td class="center">
-					<?php echo JText::sprintf('BANNERS_IMPRESSIONS', $item->impmade, $item->imptotal ? $item->imptotal : JText::_('BANNERS_UNLIMITED'));?>
+					<?php echo JText::sprintf('COM_BANNERS_IMPRESSIONS', $item->impmade, $item->imptotal ? $item->imptotal : JText::_('COM_BANNERS_UNLIMITED'));?>
 				</td>
 				<td class="center">
 					<?php echo $item->clicks;?> -
@@ -171,9 +171,9 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</td>
 				<td class="center">
 					<?php if ($item->purchase_type<0):?>
-						<?php echo JText::sprintf('BANNERS_DEFAULT',($item->client_purchase_type>0) ? JText::_('BANNERS_'.$item->client_purchase_type) : JText::_('BANNERS_'.$this->params->get('purchase_type')));?>
+						<?php echo JText::sprintf('COM_BANNERS_DEFAULT',($item->client_purchase_type>0) ? JText::_('COM_BANNERS_FIELD_VALUE_'.$item->client_purchase_type) : JText::_('COM_BANNERS_FIELD_VALUE_'.$this->params->get('purchase_type')));?>
 					<?php else:?>
-						<?php echo JText::_('BANNERS_'.$item->purchase_type);?>
+						<?php echo JText::_('COM_BANNERS_FIELD_VALUE_'.$item->purchase_type);?>
 					<?php endif;?>
 				</td>
 				<td class="center">

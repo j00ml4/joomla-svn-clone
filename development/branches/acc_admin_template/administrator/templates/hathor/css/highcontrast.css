@@ -373,6 +373,11 @@ input:hover, select:hover, textarea:hover, option:hover
 	background: #1b3f7c;
 }
 
+span.gi {
+	color: #ffffff;
+}
+
+
 /**
  * Admintable Styles
  */

@@ -117,7 +117,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&cid[]='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name) ?></a>
 					<?php endif; ?>
-					<p class="smallsub">(<span><?php echo JText::_('COM_CONTACT_CONTACT_VIEW_ALIAS') ?>:</span>
+					<p class="smallsub">(<span><?php echo JText::_('CONTACT_CONTACT_VIEW_ALIAS') ?>:</span>
 					<?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td align="center">

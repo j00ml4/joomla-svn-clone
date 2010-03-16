@@ -68,7 +68,7 @@ $user = JFactory::getUser();
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_DEFAULT', 'a.home', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
-					<?php echo JText::_('COM_TEMPLATES_HEADING_ASSIGNEDd'); ?>
+					<?php echo JText::_('COM_TEMPLATES_HEADING_ASSIGNED'); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
