@@ -525,6 +525,8 @@ CREATE TABLE `#__menu` (
   `lft` integer NOT NULL default '0' COMMENT 'Nested set lft.',
   `rgt` integer NOT NULL default '0' COMMENT 'Nested set rgt.',
   `home` tinyint(3) unsigned NOT NULL default '0' COMMENT 'Indicates if this menu item is the home or default page.',
+  `language` char(7) NOT NULL DEFAULT '',
+  PRIMARY KEY  (`id`),
   PRIMARY KEY  (`id`),
   KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`),
   KEY `idx_menutype` (`menutype`),

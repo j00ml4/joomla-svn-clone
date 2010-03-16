@@ -31,7 +31,7 @@ class JMenu extends JObject
 	 *
 	 * @param integer
 	 */
-	protected $_default = 0;
+	protected $_default = array();
 
 	/**
 	 * Identifier of the active menu item
@@ -51,7 +51,7 @@ class JMenu extends JObject
 
 		foreach ($this->_items as $k => $item) {
 			if ($item->home) {
-				$this->_default = $item->id;
+				$this->_default[$item->language] = $item->id;
 			}
 		}
 	}
@@ -118,10 +118,10 @@ class JMenu extends JObject
 	 * @param int The item id
 	 * @return True, if succesfull
 	 */
-	public function setDefault($id)
+	public function setDefault($id, $language='')
 	{
 		if (isset($this->_items[$id])) {
-			$this->_default = $id;
+			$this->_default[$language] = $id;
 			return true;
 		}
 
@@ -135,9 +135,17 @@ class JMenu extends JObject
 	 *
 	 * @return object The item object
 	 */
-	function getDefault()
+	function getDefault($language='')
 	{
-		return $this->_items[$this->_default];
+		if (array_key_exists($language, $this->_default)) {
+			return $this->_items[$this->_default[$language]];
+		}
+		elseif (array_key_exists('', $this->_default)) {
+			return $this->_items[$this->_default['']];
+		}
+		else {
+			return 0;
+		}
 	}
 
 	/**
