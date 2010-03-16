@@ -29,7 +29,7 @@ $return	= base64_encode($uri);
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_TITLE', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-30" colspan="3">
-					<?php echo JText::_('COM_MENUS_HEADING_NUMBER_MENU_ITEMSs'); ?>
+					<?php echo JText::_('COM_MENUS_HEADING_NUMBER_MENU_ITEMS'); ?>
 				</th>
 				<th class="width-20" rowspan="2">
 					<?php echo JText::_('COM_MENUS_HEADING_LINKED_MODULES'); ?>

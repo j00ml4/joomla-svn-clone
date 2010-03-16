@@ -900,6 +900,15 @@ div#jform_ordering {
 	margin-top: 3px;
 }
 
+fieldset ul.checklist {
+	margin-left: 27px;
+}
+
+fieldset ul.checklist input,
+fieldset ul.checklist label {
+	float: none;
+}
+
 
 /* end new form fields */
 
@@ -1053,6 +1062,13 @@ label.selectlabel {
 }
 
 /* end from alpha2 */
+
+span.gi {
+	color: #c7c8b2;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
 
 /**
  * Admintable Styles
