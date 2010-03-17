@@ -888,9 +888,9 @@ class JFormTest extends JoomlaTestCase
 			$this->equalTo(
 				'<fieldset id="params_show_title" class="radio">' .
 					'<input type="radio" id="params_show_title0" name="params[show_title]" value="1"/>' .
-					'<label for="params_show_title0">Yes</label>' .
+					'<label for="params_show_title0">'.JText::_('JYes').'</label>' .
 					'<input type="radio" id="params_show_title1" name="params[show_title]" value="0" checked="checked"/>' .
-					'<label for="params_show_title1">No</label>' .
+					'<label for="params_show_title1">'.JText::_('JNo').'</label>' .
 				'</fieldset>'
 			),
 			'Line:'.__LINE__.' The method should return a radio list.'
