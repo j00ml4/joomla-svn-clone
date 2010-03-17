@@ -174,6 +174,8 @@ abstract class JHtml
 			return call_user_func_array($function, $temp);
 		}
 		else {
+			// the following code is untestable because it should never be reached
+			// It is insurance for an error that can't really happen
 			JError::raiseError(500, 'Function not supported.');
 			return false;
 		}
