@@ -42,12 +42,10 @@ class JMenuSite extends JMenu
 			$query->order('m.lft');
 
 			// Compute the menu language
-			$query->join('LEFT','#__menu as p on p.lft <= m.lft AND p.rgt >=p.rgt AND p.language!=\'\'');
-			$query->select('MIN(CONCAT(LPAD(p.lft,30," "),p.language)) as inherited_language');
-			$query->order('p.rgt');
+			$query->join('LEFT','#__menu as p on p.lft <= m.lft AND p.rgt >=m.rgt AND p.language!=\'\'');
+			$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
 			$query->group('m.id');
 			
-//			var_dump((string)$query);
 			// Set the query
 			$db->setQuery($query);
 			if (!($menus = $db->loadObjectList('id'))) {
@@ -56,6 +54,11 @@ class JMenuSite extends JMenu
 			}
 
 			foreach ($menus as &$menu) {
+				// Set the language
+				if ($menu->inherited_language) {
+					$menu->language = substr($menu->inherited_language, 30);
+				}
+
 				// Get parent information.
 				$parent_tree = array();
 				if (($parent = $menu->parent_id) && (isset($menus[$parent])) &&
