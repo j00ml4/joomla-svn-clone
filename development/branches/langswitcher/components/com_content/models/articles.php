@@ -124,7 +124,7 @@ class ContentModelArticles extends JModelList
 		// Select the required fields from the table.
 		$query->select($this->getState('list.select',
 			'a.id, a.title, a.alias, a.title_alias, a.introtext, a.state, a.catid, a.created, a.created_by, a.created_by_alias,' .
-			'a.language,' .
+			' a.language, ' .
 			// use created if modified is 0
 			'CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END as modified,' . 
 			'a.modified_by, uam.name as modified_by_name,' .
@@ -153,7 +153,7 @@ class ContentModelArticles extends JModelList
 		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
 		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
 		$query->group('a.id');
-		$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,30)='.$db->Quote($language).')');
+		$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,31)='.$db->Quote($language).')');
 		
 		// Filter by access level.
 		if ($access = $this->getState('filter.access'))
