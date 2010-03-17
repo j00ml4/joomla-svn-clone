@@ -84,34 +84,6 @@ class JParameter extends JRegistry
 	}
 
 	/**
-	 * Set a value.
-	 *
-	 * @param	string	The name of the parameter.
-	 * @param	string	An optional value of the parameter.
-	 * @return	string	An optional group for the parameter.
-	 * @since	1.5
-	 */
-	public function set($key, $value = '', $group = '_default')
-	{
-		return $this->set($group.'.'.$key, (string) $value);
-	}
-
-	/**
-	 * Get a value.
-	 *
-	 * @param	string	The name of the parameter.
-	 * @param	mixed	An optional default value if not found.
-	 * @return	string
-	 * @since	1.5
-	 */
-	public function get($key, $default = '', $group = '_default')
-	{
-		$value = $this->get($group.'.'.$key);
-		$result = (empty($value) && ($value !== 0) && ($value !== '0')) ? $default : $value;
-		return $result;
-	}
-
-	/**
 	 * Sets a default value if not alreay assigned.
 	 *
 	 * @param	string	The name of the parameter.
