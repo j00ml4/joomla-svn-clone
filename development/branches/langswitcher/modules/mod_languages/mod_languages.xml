@@ -44,7 +44,7 @@
 			label="mod_languages_Footer_Label"
 			description="mod_languages_Header_Desc" />
 			
-		<field
+<!--		<field
 			name="default"
 			type="radio"
 			default="0"
@@ -52,7 +52,7 @@
 			description="mod_languages_default_Desc" >
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
-		</field>
+		</field>-->
 			
 	</fields>
 	<fields

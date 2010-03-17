@@ -114,7 +114,7 @@ final class JSite extends JApplication
 		else {
 			$tag = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
 		}
-		if (is_null($tag)) {
+		if (is_null($tag) || $tag=='default') {
 			if($default) {
 				$tag = JFactory::getLanguage()->getTag();
 			}
