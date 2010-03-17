@@ -26,7 +26,7 @@ abstract class modLanguagesHelper
 		$query->where($db->nameQuote('published').'=1');
 		$query->order($db->nameQuote('text'));
 		$db->setQuery($query);
-		$result = $db->loadAssocList();
+		$result = $db->loadAssocList('value');
 		$menus= JFactory::getApplication()->getMenu();
 		foreach($result as $i=>$language) {
 			if (!JLanguage::exists($language['value'])) {
@@ -59,13 +59,13 @@ abstract class modLanguagesHelper
 				$result[$i]['redirect']=$item->link;
 			}
 		}
-		if ($useDefault) {
+/*		if ($useDefault) {
 			$option = array();
 			$option['text'] = JText::_('JOPTION_USE_DEFAULT');
 			$option['value'] = 'default';
 			$option['redirect']=$result[JSite::getLanguage()];
 			array_unshift($result, $option);
-		}
+		}*/
 		return $result;
 	}
 }
