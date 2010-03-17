@@ -43,7 +43,7 @@ abstract class JError
 	protected static $handlers = array(
 		E_NOTICE	=> array('mode' => 'message'),
 		E_WARNING	=> array('mode' => 'message'),
-		E_ERROR	=> array('mode' => 'callback', 'options' => array('JError','customErrorPage'))
+		E_ERROR	=> array('mode' => 'die'), //, 'options' => array('JError','customErrorPage'))
 	);
 	protected static $stack = array();
 
@@ -554,6 +554,7 @@ w
 	 */
 	public static function handleCallback(&$error, $options)
 	{
+		//echo($options[0].$options[1]);
 		return call_user_func($options, $error);
 	}
 
