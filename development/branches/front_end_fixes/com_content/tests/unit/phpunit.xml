@@ -1,0 +1,8 @@
+<phpunit
+	bootstrap="bootstrap.php"
+	colors="false"
+	stopOnFailure="false"
+	testdox="true"
+	verbose="true"
+	backupStaticAttributes="false"
+	backupGlobals="false" />
