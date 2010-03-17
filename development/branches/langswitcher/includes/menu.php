@@ -41,6 +41,14 @@ class JMenuSite extends JMenu
 			$query->where('m.parent_id > 0');
 			$query->order('m.lft');
 
+			// Compute the menu language
+			$query->join('LEFT','#__menu as p on p.lft <= m.lft AND p.rgt >=p.rgt AND p.language!=\'\'');
+			$query->select('MIN(CONCAT(LPAD(p.lft,30," "),p.language)) as inherited_language');
+			$query->order('p.rgt');
+			$query->group('m.id');
+			
+//			var_dump((string)$query);
+			// Set the query
 			$db->setQuery($query);
 			if (!($menus = $db->loadObjectList('id'))) {
 				JError::raiseWarning(500, "Error loading Menus: ".$db->getErrorMsg());

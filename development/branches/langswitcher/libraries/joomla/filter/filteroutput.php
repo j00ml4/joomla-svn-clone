@@ -85,6 +85,9 @@ class JFilterOutput
 		$lang = &JFactory::getLanguage();
 		$str = $lang->transliterate($str);
 
+		// convert certain symbols to letter representation
+		$str = str_replace(array('&', '"', '<', '>'), array('a', 'q', 'l', 'g'), $str);
+		
 		// remove any duplicate whitespace, and ensure all characters are alphanumeric
 		$str = preg_replace(array('/\s+/','/[^A-Za-z0-9\-]/'), array('-',''), $str);
 
