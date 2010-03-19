@@ -20,7 +20,7 @@
 		<field
 			name="style"
 			type="list"
-			default="none"
+			default="table"
 			label="PLG_LOADMODULE_FIELD_STYLE_LABEL"
 			description="PLG_LOADMODULE_FIELD_STYLE_DESC">
 			<option
