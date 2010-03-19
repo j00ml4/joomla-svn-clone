@@ -64,6 +64,17 @@
 		description="">
 		
 		<field
+			name="show_noauth"
+			type="list"
+			default=""
+			label="JGLOBAL_Show_Unauth_Links_Label"
+			description="JGLOBAL_Show_Unauth_Links_Desc">
+				<option value="">JCOMMON_USE_GLOBAL</option>
+				<option value="0">JNo</option>
+				<option value="1">JYes</option>
+		</field>
+
+		<field
 			name="show_title"
 			type="list"
 			default=""
