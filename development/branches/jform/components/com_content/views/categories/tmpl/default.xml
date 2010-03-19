@@ -7,7 +7,7 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="request"
 		label="Menus_Layout_Menutype_Options_Label"
 		description="">
@@ -20,5 +20,5 @@
 			extension="com_content"
 			required="true"
 			default="" />
-	</fields>
+	</fieldset>
 </metadata>

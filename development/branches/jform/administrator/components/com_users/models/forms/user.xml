@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field name="id" type="hidden"
 			default="0"
 			readonly="true"
@@ -52,7 +52,7 @@
 
 		<field name="groups" type="hidden" />
 
-		<fields name="params">
+		<fieldset name="params">
 
 			<!--  Basic user account settings. -->
 			<fieldset name="settings" label="User_Profile" description="">
@@ -95,6 +95,6 @@
 					<option value="">JOption_Use_Default</option>
 				</field>
 			</fieldset>
-		</fields>
-	</fields>
+		</fieldset>
+	</fieldset>
 </form>

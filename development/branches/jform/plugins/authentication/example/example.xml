@@ -16,27 +16,27 @@
 		<filename
 			plugin="example">example.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="field1"
 			type="text"
 			label="Example field 1"
 			description="Example field 1" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="advanced">
 		<field
 			name="field1"
 			type="text"
 			label="Example field 1"
 			description="Example field 1" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="example">
 		<field
 			name="field2"
 			type="text"
 			label="Example field 2"
 			description="Example field 2" />
-	</fields>
+	</fieldset>
 </install>

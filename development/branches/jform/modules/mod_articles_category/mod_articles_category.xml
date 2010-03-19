@@ -25,7 +25,7 @@
         <language
             tag="en-GB">en-GB.mod_articles_category.ini</language>
     </languages>
-    <fields>
+    <fieldset>
         <field
         	name="mode"
         	type="radio"
@@ -37,8 +37,8 @@
             <option
             	 value="dynamic">MOD_ARTICLES_CATEGORY_OPTION_DYNAMIC_VALUE</option>
         </field>
-    </fields>
-    <fields
+    </fieldset>
+    <fieldset
         group="dynamic" label="MOD_ARTICLES_CATEGORY_FIELD_GROUP_DYNAMIC_LABEL">
         <field
             name="show_on_article_page"
@@ -51,8 +51,8 @@
             <option
                 value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE</option>
         </field>
-    </fields>
-    <fields
+    </fieldset>
+    <fieldset
         group="filtering" label="MOD_ARTICLES_CATEGORY_FIELD_GROUP_FILTERING_LABEL">
         <field
             name="show_front"
@@ -247,8 +247,8 @@
             default="30"
             label="MOD_ARTICLES_CATEGORY_FIELD_RELATIVEDATE_LABEL"
             description="MOD_ARTICLES_CATEGORY_FIELD_RELATIVEDATE_DESC" />
-    </fields>
-    <fields
+    </fieldset>
+    <fieldset
         group="ordering" label="MOD_ARTICLES_CATEGORY_FIELD_GROUP_ORDERING_LABEL">
         <field
         	name="article_ordering"
@@ -279,8 +279,8 @@
             <option
             	value="ASC">MOD_ARTICLES_CATEGORY_OPTION_ASCENDING_VALUE</option>
         </field>
-    </fields>
-	<fields
+    </fieldset>
+	<fieldset
         group="grouping" label="MOD_ARTICLES_CATEGORY_FIELD_GROUP_GROUPING_LABEL">
         <field
         	name="article_grouping"
@@ -316,10 +316,29 @@
             default="F Y"
             label="MOD_ARTICLES_CATEGORY_FIELD_MONTHYEARFORMAT_LABEL"
             description="MOD_ARTICLES_CATEGORY_FIELD_MONTHYEARFORMAT_DESC" />
-    </fields>
-    <fields
+    </fieldset>
+    <fieldset
         group="display" label="MOD_ARTICLES_CATEGORY_FIELD_GROUP_DISPLAY_LABEL">
-        <field
+		<field
+			name="item_heading"
+			type="list"
+			default="4"
+			label="MOD_ARTICLES_CATEGORY_TITLE_HEADING"
+			description="MOD_ARTICLES_CATEGORY_TITLE_HEADING_DESCRIPTION">
+			<option
+				value="1">MOD_ARTICLES_CATEGORY_H1</option>
+			<option
+				value="2">MOD_ARTICLES_CATEGORY_H2</option>
+			<option
+				value="3">MOD_ARTICLES_CATEGORY_H3</option>
+			<option
+				value="4">MOD_ARTICLES_CATEGORY_H4</option>
+			<option
+				value="5">MOD_ARTICLES_CATEGORY_H5</option>
+			<option
+				value="6">MOD_ARTICLES_CATEGORY_H6</option>
+		</field>
+		<field
             name="show_date"
             type="radio"
             default="0"
@@ -399,8 +418,8 @@
             default="100"
             label="MOD_ARTICLES_CATEGORY_FIELD_INTROTEXTLIMIT_LABEL"
             description="MOD_ARTICLES_CATEGORY_FIELD_INTROTEXTLIMIT_DESC" />
-    </fields>
-    <fields
+    </fieldset>
+    <fieldset
         group="advanced">
         <field
             name="layout"
@@ -411,24 +430,24 @@
             name="moduleclass_sfx"
             type="text"
             default=""
-            label="MODULE_FIELD_MODULECLASS_SFX_LABEL"
-            description="MODULE_FIELD_MODULECLASS_SFX_DESC" />
+            label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+            description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
         <field
             name="cache"
             type="list"
             default="1"
-            label="MODULE_FIELD_CACHING_LABEL"
-            description="MODULE_FIELD_CACHING_DESC">
+            label="COM_MODULES_FIELD_CACHING_LABEL"
+            description="COM_MODULES_FIELD_CACHING_DESC">
             <option
                 value="1">JCOMMON_USE_GLOBAL</option>
             <option
-                value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+                value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
         </field>
         <field
             name="cache_time"
             type="text"
             default="900"
-            label="MODULES_FIELD_CACHE_TIME_LABEL"
-            description="MODULES_FIELD_CACHE_TIME_DESC" />
-    </fields>
+            label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+            description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+    </fieldset>
 </extension>

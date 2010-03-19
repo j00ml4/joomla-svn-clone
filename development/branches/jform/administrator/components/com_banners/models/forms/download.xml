@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 
 		<field
 			id="compressed"
@@ -27,5 +27,5 @@
 			label="COM_BANNERS_FIELD_BASENAME_LABEL"
 			description="COM_BANNERS_FIELD_BASENAME_DESC"/>
 
-	</fields>
+	</fieldset>
 </form>

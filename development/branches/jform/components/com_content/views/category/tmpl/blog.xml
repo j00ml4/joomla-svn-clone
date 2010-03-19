@@ -7,11 +7,11 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="request"
 		array="true"
-		label="Menus_Layout_Request_Variables_Label"
-		description="Menus_Layout_Request_Variables_Desc">
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC">
 		<field
 			name="id"
 			type="category"
@@ -19,9 +19,9 @@
 			required="true"
 			label="CHOOSE_CATEGORY_LABEL"
 			description="CHOOSE_CATEGORY_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="basic"
 		label="Menus_Layout_Basic_Options_Label"
 		description="">
@@ -91,9 +91,9 @@
 			default="4"
 			label="JGLOBAL_NUM_LINKS_LABEL"
 			description="JGLOBAL_NUM_LINKS_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="advanced"
 		label="Menus_Layout_Advanced_Options_Label"
 		description="">
@@ -255,9 +255,9 @@
 				<option value="1">JYes</option>
 		</field>
 		
-	</fields>
+	</fieldset>
 	
-	<fields
+	<fieldset
 		group="integration"
 		label="Menus_Layout_Integration_Options_Label"
 		description="">
@@ -318,9 +318,9 @@
 				value="1">JCOMMON_FULL_TEXT</option>
 		</field>
 		
-	</fields>
+	</fieldset>
 	
-	<fields
+	<fieldset
 		group="articles"
 		label="Content_Attribs_Article_Settings_Label"
 		description="">
@@ -593,6 +593,6 @@
 				value="1">Show</option>
 		</field>
 
-	</fields>	
+	</fieldset>	
 	
 </metadata>

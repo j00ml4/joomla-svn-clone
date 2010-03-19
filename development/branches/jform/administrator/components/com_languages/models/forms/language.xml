@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field name="lang_id" type="hidden"
 			default="0"
 			required="true"
@@ -61,5 +61,5 @@
 			<option value="-1">COM_LANGS_FIELD_VALUE_DISABLED</option>
 			<option value="-2">JOPTION_TRASH</option>
 		</field>
-	</fields>
+	</fieldset>
 </form>

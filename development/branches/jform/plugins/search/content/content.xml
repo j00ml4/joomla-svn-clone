@@ -16,7 +16,7 @@
 		<filename
 			plugin="content">content.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="search_limit"
 			type="text"
@@ -62,5 +62,5 @@
 			<option
 				value="1">JON</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

@@ -16,7 +16,7 @@
 		<filename
 			plugin="ldap">ldap.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="host"
 			type="text"
@@ -156,5 +156,5 @@
 			default="uid"
 			label="PLG_LDAP_FIELD_UID_LABEL"
 			description="PLG_LDAP_FIELD_UID_DESC" />
-	</fields>
+	</fieldset>
 </install>

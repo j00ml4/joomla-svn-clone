@@ -25,7 +25,7 @@
 		<language
 			tag="en-GB">en-GB.mod_articles_news.ini</language>
 	</languages>
-	<fields>
+	<fieldset>
 		<field
 			name="catid"
 			type="category"
@@ -44,7 +44,7 @@
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
-		</field>	
+		</field>
 		<field
 			name="item_title"
 			type="list"
@@ -68,6 +68,23 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
+		</field>
+		<field
+			name="item_heading"
+			type="list"
+			default="h4"
+			label="MOD_ARTICLES_NEWS_TITLE_HEADING"
+			description="MOD_ARTICLES_NEWS_TITLE_HEADING_DESCRIPTION">
+			<option
+				value="h1">MOD_ARTICLES_NEWS_H1</option>
+			<option
+				value="h2">MOD_ARTICLES_NEWS_H2</option>
+				<option
+				value="h3">MOD_ARTICLES_NEWS_H3</option>
+				<option
+				value="h4">MOD_ARTICLES_NEWS_H4</option>
+					<option
+				value="h5">MOD_ARTICLES_NEWS_H5</option>
 		</field>
 		<field
 			name="showLastSeparator"
@@ -97,8 +114,8 @@
 			default=""
 			label="MOD_ARTICLES_NEWS_FIELD_ITEMS_LABEL"
 			description="MOD_ARTICLES_NEWS_FIELD_ITEMS_DESC" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="advanced">
 		<field
 			name="layout"
@@ -109,24 +126,24 @@
 			name="moduleclass_sfx"
 			type="text"
 			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 		<field
 			name="cache"
 			type="list"
 			default="1"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
+			label="COM_MODULES_FIELD_CACHING_LABEL"
+			description="COM_MODULES_FIELD_CACHING_DESC">
 			<option
 				value="1">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+				value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 		</field>
 		<field
 			name="cache_time"
 			type="text"
 			default="900"
-			label="MODULES_FIELD_CACHE_TIME_LABEL"
-			description="MODULES_FIELD_CACHE_TIME_DESC" />
-	</fields>
+			label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+			description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+	</fieldset>
 </extension>

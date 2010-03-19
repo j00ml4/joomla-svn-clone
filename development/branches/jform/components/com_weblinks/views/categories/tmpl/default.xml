@@ -7,7 +7,7 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="request"
 		label="MENUS_LAYOUT_BASIC_OPTIONS_LABEL"
 		description="">
@@ -20,5 +20,5 @@
 			required="true"
 			extension="com_weblinks"
 			default="" />
-	</fields>
+	</fieldset>
 </metadata>

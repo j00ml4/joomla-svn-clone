@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields label="Users_Reset_Complete_Label">
+	<fieldset label="Users_Reset_Complete_Label">
 		<field
 			name="password1"
 			type="password"
@@ -30,5 +30,5 @@
 			autocomplete="off"
 			filter="raw"
 		/>
-	</fields>
+	</fieldset>
 </form>

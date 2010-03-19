@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field
 			id="id"
 			name="id"
@@ -168,9 +168,9 @@
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="params"
 		array="true"
 		label="COM_NEWSFEEDS_FIELD_OPTIONS">
@@ -330,5 +330,5 @@
 			default="0"
 			label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
 			description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
-	</fields>
+	</fieldset>
 </form>

@@ -1,80 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+	<!-- $Id: newsfeed.xml 13196 2009-10-14 07:47:07Z eddieajau $ -->
 <form>
-	<fields>
-		<field name="extension_id" type="hidden"
+	<fieldset>
+		<field
+			name="extension_id"
+			type="hidden"
 			default="0"
-			readonly="true"
 			required="true"
-		/>
+			readonly="true" />
 
-		<field name="name" type="text"
-			class="inputbox"
-			description="COM_PLUGINS_FIELD_NAME_DESC"
+		<field
+			name="name"
+			type="text"
 			label="COM_PLUGINS_FIELD_NAME_LABEL"
-			required="true"
-			size="30"
-		/>
-
-		<field name="enabled" type="list"
+			description="COM_PLUGINS_FIELD_NAME_DESC"
 			class="inputbox"
-			default="1"
-			description="COM_PLUGINS_FIELD_ENABLED_DESC"
+			size="30"
+			required="true" />
+
+		<field
+			name="enabled"
+			type="list"
 			label="COM_PLUGINS_FIELD_ENABLED_LABEL"
+			description="COM_PLUGINS_FIELD_ENABLED_DESC"
+			class="inputbox"
 			size="1"
-		>
-			<option value="1">JOption_Enabled</option>
-			<option value="0">JOption_Disabled</option>
+			default="1">
+			<option
+				value="1">
+				JOPTION_ENABLED</option>
+			<option
+				value="0">
+				JOPTION_DISABLED</option>
 		</field>
 
-		<field name="folder" type="text"
+		<field
+			name="folder"
+			type="text"
 			class="readonly"
-			description="COM_PLUGINS_FIELD_FOLDER_DESC"
+			size="20"
 			label="COM_PLUGINS_FIELD_FOLDER_LABEL"
-			readonly="true"
-			size="20"
-		/>
+			description="COM_PLUGINS_FIELD_FOLDER_DESC"
+			readonly="true" />
 
-		<field name="element" type="text"
+		<field
+			name="element"
+			type="text"
 			class="readonly"
-			description="COM_PLUGINS_FIELD_ELEMENT_DESC"
-			label="COM_PLUGINS_FIELD_ELEMENT_LABEL"
-			readonly="true"
 			size="20"
-		/>
+			label="COM_PLUGINS_FIELD_ELEMENT_LABEL"
+			description="COM_PLUGINS_FIELD_ELEMENT_DESC"
+			readonly="true" />
 
-		<field name="access" type="accesslevel"
+		<field
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
-			description="JField_Access_Desc"
-			label="JField_Access_Label"
 			size="1"
-		/>
+			default="" />
 
-		<field name="ordering" type="ordering"
+		<field
+			name="ordering"
+			type="Ordering"
 			class="inputbox"
 			default=""
-			description="JField_Ordering_Desc"
-			label="JField_Ordering_Label"
-		/>
+			label="JFIELD_ORDERING_LABEL"
+			description="JFIELD_ORDERING_DESC" />
 
-		<field name="checked_out" type="text"
-			class="inputbox"
-			description="COM_PLUGINS_Checkedout_Desc"
-			filter="unset"
-			label="COM_PLUGINS_Checkedout_Label"
-			readonly="true"
-			size="6"
-		/>
+		<field
+			name="params"
+			type="hidden" />
 
-		<field name="checked_out_time" type="text"
-			class="inputbox"
-			description="COM_PLUGINS_Checkedout_Time_Desc"
-			filter="unset"
-			label="COM_PLUGINS_Checkedout_Time_Label"
-			readonly="true"
-			size="6"
-		/>
-
-		<field name="params" type="hidden" />
-	</fields>
+	</fieldset>
 </form>

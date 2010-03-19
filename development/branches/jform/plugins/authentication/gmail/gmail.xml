@@ -16,7 +16,7 @@
 		<filename
 			plugin="gmail">gmail.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="applysuffix"
 			type="list"
@@ -58,5 +58,5 @@
 			default=""
 			label="PLG_GMAIL_FIELD_USER_BLACKLIST_LABEL"
 			description="PLG_GMAIL_FIELD_USER_BLACKLIST_DESC" />
-	</fields>
+	</fieldset>
 </extension>

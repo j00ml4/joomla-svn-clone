@@ -16,7 +16,7 @@
 		<filename
 			plugin="pagebreak">pagebreak.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="title"
 			type="radio"
@@ -52,5 +52,5 @@
 			<option
 				value="1">JCOMMON_SHOW</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

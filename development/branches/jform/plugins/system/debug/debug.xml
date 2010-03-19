@@ -16,7 +16,7 @@
 		<filename
 			plugin="debug">debug.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="filter_groups"
 			type="usergroup"
@@ -61,9 +61,9 @@
 				value="0">JNo</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="language">
 
 		<field
@@ -117,5 +117,5 @@
 			default=""
 			rows="4"
 			cols="30" />
-	</fields>
+	</fieldset>
 </install>

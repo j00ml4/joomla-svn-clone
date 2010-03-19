@@ -7,10 +7,10 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="basic"
 		label="Menus_Layout_Basic_Options_Label"
 		description="">
 
-	</fields>
+	</fieldset>
 </metadata>

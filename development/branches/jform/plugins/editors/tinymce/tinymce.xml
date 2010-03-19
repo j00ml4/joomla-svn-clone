@@ -19,7 +19,7 @@
 		<folder>tinymce</folder>
 	</files>
 
-	<fields>
+	<fieldset>
 		<field
 			name="mode"
 			type="list"
@@ -201,8 +201,8 @@
 			default=""
 			label="PLG_TINY_FIELD_ELEMENTS_LABEL"
 			description="PLG_TINY_FIELD_ELEMENTS_DESC" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="advanced"
 		label="PLG_TINY_FIELD_LABEL_ADVANCEDPARAMS">
 		<field
@@ -577,5 +577,5 @@
 			default=""
 			label="PLG_TINY_FIELD_CUSTOMBUTTON_LABEL"
 			description="PLG_TINY_FIELD_CUSTOMBUTTON_DESC" />
-	</fields>
+	</fieldset>
 </install>

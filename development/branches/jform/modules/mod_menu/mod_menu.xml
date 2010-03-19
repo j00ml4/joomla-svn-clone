@@ -21,7 +21,7 @@
 		<filename>index.php</filename>
 		<filename>mod_menu.xml</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="menutype"
 			type="menu"
@@ -61,9 +61,9 @@
 			<option
 				value="1">JYES</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="advanced">
 		<field
 			name="tag_id"
@@ -78,13 +78,6 @@
 			default=""
 			label="MOD_MENU_FIELD_CLASS_LABEL"
 			description="MOD_MENU_FIELD_CLASS_DESC" />
-
-		<field
-			name="maxdepth"
-			type="text"
-			default="10"
-			label="MOD_MENU_FIELD_MAXDEPTH_LABEL"
-			description="MOD_MENU_FIELD_MAXDEPTH_DESC" />
 
 		<field
 			name="window_open"
@@ -109,17 +102,17 @@
 			name="moduleclass_sfx"
 			type="text"
 			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 
 		<field
 			name="cache"
 			type="list"
 			default="0"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
+			label="COM_MODULES_FIELD_CACHING_LABEL"
+			description="COM_MODULES_FIELD_CACHING_DESC">
 			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+				value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 		</field>
-	</fields>
+	</fieldset>
 </extension>

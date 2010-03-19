@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field
 			id="id"
 			name="id"
@@ -284,10 +284,10 @@
 			component="com_content"
 			section="article"
 			default="" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="attribs"
+	<fieldset
+		name="attribs"
 		array="true"
 		label="Content_Options">
 		<field
@@ -552,9 +552,9 @@
 		</field>
 
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="metadata"
 		array="true">
 
@@ -593,6 +593,6 @@
 			filter="string"
 			cols="30"
 			rows="2" />
-	</fields>
+	</fieldset>
 
 </form>

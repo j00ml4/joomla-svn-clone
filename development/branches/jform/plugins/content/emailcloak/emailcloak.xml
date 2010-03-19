@@ -17,7 +17,7 @@
 		<filename
 			plugin="emailcloak">emailcloak.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="mode"
 			type="list"
@@ -29,5 +29,5 @@
 			<option
 				value="1">PLG_CONTENT_EMAILCLOAK_LINKABLE</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

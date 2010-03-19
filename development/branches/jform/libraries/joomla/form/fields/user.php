@@ -41,7 +41,7 @@ class JFormFieldUser extends JFormField
 		$link = 'index.php?option=com_users&amp;view=users&layout=modal&amp;tmpl=component&amp;field='.$this->id;
 
 		// Initialize some field attributes.
-		$attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
+		$attr = $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
 		$attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
 
 		// Initialize JavaScript field attributes.

@@ -16,7 +16,7 @@
 		<filename
 			plugin="contacts">contacts.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="search_limit"
 			type="text"
@@ -24,5 +24,5 @@
 			default="50"
 			label="PLG_SEARCH_CONTACTS_FIELD_SEARCHLIMIT_LABEL"
 			description="PLG_SEARCH_CONTACTS_FIELD_SEARCHLIMIT_DESC" />
-	</fields>
+	</fieldset>
 </install>

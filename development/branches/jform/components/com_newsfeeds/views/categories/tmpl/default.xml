@@ -7,9 +7,9 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="request"
-		label="MENUS_LAYOUT_REQUEST_VARIABLES_LABEL"
+		label="JCOMMON_REQUIRED_SETTINGS"
 		description="">
 
 		<field
@@ -20,9 +20,9 @@
 			required="true"
 			extension="com_newsfeeds"
 			default="" />
-	</fields>
+	</fieldset>
 	
-		<fields
+		<fieldset
 		group="basic"
 		label="COM_NEWSFEEDS_FIELD_CATEGORIES_OPTIONS_LABEL"
 		description="">
@@ -164,9 +164,9 @@
 					value="1">JCOMMON_SHOW</option>
 			</field>
 		
-	</fields>
+	</fieldset>
 	
-	<fields
+	<fieldset
 		group="articles"
 		label="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_LABEL"
 		description="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_DESC">
@@ -224,6 +224,6 @@
 			default="0"
 			label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
 			description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
-	</fields>
+	</fieldset>
 	
 </metadata>

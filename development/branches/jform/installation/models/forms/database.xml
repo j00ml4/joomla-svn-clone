@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<fieldset name="basic">
 			<field name="db_type" type="list" id="db_type" class="inputbox"
 				label="Instl_Database_Type_Label"
@@ -53,5 +53,5 @@
 				required="true"
 			/>
 		</fieldset>
-	</fields>
+	</fieldset>
 </form>

@@ -16,7 +16,7 @@
 		<filename
 			plugin="joomla">joomla.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="autoregister"
 			type="radio"
@@ -28,5 +28,5 @@
 			<option
 				value="1">JYes</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

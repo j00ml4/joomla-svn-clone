@@ -2,17 +2,17 @@
 	<!-- $Id$ -->
 <form>
 
-	<fields
+	<fieldset
 		group="params"
 		array="true"
 	/>
 
-	<fields
+	<fieldset
 		group="metadata"
 		array="true"
 	/>
 
-	<fields>
+	<fieldset>
 		<field
 			name="id"
 			type="hidden"
@@ -201,8 +201,8 @@
 			component="com_content"
 			section="category"
 			default=""/>
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="metadata"
 		array="true">
 
@@ -251,5 +251,5 @@
 			filter="string"
 			cols="30"
 			rows="2" />
-	</fields>
+	</fieldset>
 </form>

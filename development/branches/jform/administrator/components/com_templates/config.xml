@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fields
+	<fieldset
 		group="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
@@ -38,5 +38,5 @@
 				title="JACTION_EDIT_STATE"
 				description="JACTION_EDIT_STATE_COMPONENT_DESC" />
 		</field>
-	</fields>
+	</fieldset>
 </config>

@@ -28,7 +28,7 @@
 			tag="en-GB">language/en-GB/en-GB.plg_user_profile.ini</language>
 	</languages>
 
-	<fields>
+	<fieldset>
 		<field
 			name="register-require-user"
 			type="spacer"
@@ -247,5 +247,5 @@
 			<option
 				value="0">JOPTION_DISABLED</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

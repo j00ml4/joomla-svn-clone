@@ -100,7 +100,7 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Options'), 'basic-options'); ?>
 		<fieldset class="panelform">
-		<?php foreach($this->form->getFieldset('options') as $field): ?>
+		<?php foreach($this->form->getFieldset('attribs') as $field): ?>
 			<?php if ($field->hidden): ?>
 				<?php echo $field->input; ?>
 			<?php else: ?>

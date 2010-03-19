@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
+	<fieldset
 		group="cache"
 		label="Com_config_cache_settings_label">
 		<field
@@ -35,9 +35,9 @@
 			label="COM_CONFIG_FIELD_CACHE_HANDLER_LABEL"
 			description="COM_CONFIG_FIELD_CACHE_HANDLER_DESC"
 			filter="word" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="database"
 		label="Config_database_settings_label">
 		<field
@@ -89,9 +89,9 @@
 			filter="string"
 			size="10" />
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="debug"
 		label="Config_debug_settings_label">
 		<field
@@ -135,9 +135,9 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="ftp"
 		label="Config_ftp_settings_label">
 		<field
@@ -198,9 +198,9 @@
 			description="COM_CONFIG_FIELD_FTP_ROOT_DESC"
 			filter="string"
 			size="50" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="locale"
 		label="Config_locale_settings_label">
 		<field
@@ -210,9 +210,9 @@
 			label="COM_CONFIG_FIELD_SERVER_TIMEZONE_LABEL"
 			description="COM_CONFIG_FIELD_SERVER_TIMEZONE_DESC"
 			required="true" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="mail"
 		label="Config_mail_settings_label">
 		<field
@@ -324,11 +324,11 @@
 			description="COM_CONFIG_FIELD_MAIL_SMTP_HOST_DESC"
 			filter="string"
 			size="30" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="metadata"
-		label="Config_metadata_settings_label">
+		label="COM_CONFIG_METADATA_SETTINGS">
 		<field
 			name="MetaDesc"
 			type="textarea"
@@ -386,9 +386,9 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="seo"
 		label="Config_seo_settings_label">
 		<field
@@ -446,9 +446,9 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="server"
 		label="Config_server_settings_label">
 		<field
@@ -508,9 +508,9 @@
 			<option
 				value="2">COM_CONFIG_FIELD_VALUE_ENTIRE_SITE</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="session"
 		label="Config_session_settings_label">
 		<field
@@ -531,9 +531,9 @@
 			description="COM_CONFIG_FIELD_SESSION_HANDLER_DESC"
 			required="true"
 			filter="word" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="site"
 		label="CONFIG_SITE_SETTINGS_LABEL">
 
@@ -671,9 +671,9 @@
 			<option
 				value="site">COM_CONFIG_FIELD_VALUE_SITE_EMAIL</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="system"
 		label="Config_system_settings_label">
 		<field
@@ -717,9 +717,9 @@
 			label="COM_CONFIG_FIELD_HELP_SERVER_LABEL"
 			description="COM_CONFIG_FIELD_HELP_SERVER_DESC"
 			required="true" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="cookie"
 		label="Config_cookie_settings_label">
 		<field
@@ -741,9 +741,9 @@
 			required="false"
 			filter="string"
 			size="40" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="permissions"
 		label="Config_permission_settings_label">
 
@@ -788,11 +788,11 @@
 				description="JACTION_EDIT_STATE_DESC" />
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields>
+	<fieldset>
 		<field
 			name="asset_id"
 			type="hidden" />
-	</fields>
+	</fieldset>
 </form>

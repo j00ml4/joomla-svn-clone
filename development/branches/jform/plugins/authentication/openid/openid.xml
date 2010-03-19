@@ -16,7 +16,7 @@
 		<filename
 			plugin="openid">openid.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="usermode"
 			type="radio"
@@ -64,5 +64,5 @@
 			<option
 				value="0">JNo</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

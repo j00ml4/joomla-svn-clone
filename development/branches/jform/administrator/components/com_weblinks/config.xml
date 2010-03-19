@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fields>
+	<fieldset>
 		<field
 			name="show_comp_description"
 			type="radio"
@@ -136,9 +136,9 @@
 			default=""
 			label="COM_WEBLINKS_FIELD_CONFIG_ICON_LABEL"
 			description="COM_WEBLINKS_FIELD_CONFIG_ICON_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
@@ -151,5 +151,5 @@
 			filter="rules"
 			component="com_weblinks"
 			section="component" />
-	</fields>
+	</fieldset>
 </config>

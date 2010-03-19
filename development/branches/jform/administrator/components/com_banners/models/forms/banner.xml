@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
+	<fieldset
 		addfieldpath="/administrator/components/com_banners/models/fields"
 	>
 		<field
@@ -115,11 +115,11 @@
 				value="1">COM_BANNERS_FIELD_VALUE_CUSTOM</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
 
 
-	<fields
+	<fieldset
 		group="publish"
 		label="COM_BANNERS_GROUP_LABEL_PUBLISHING_DETAILS">
 		<field
@@ -231,9 +231,9 @@
 				value="1">JYES</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="metadata"
 		label="COM_BANNERS_GROUP_LABEL_METADATA_OPTIONS">
 
@@ -269,9 +269,9 @@
 			label="COM_BANNERS_FIELD_METAKEYWORDPREFIX_LABEL"
 			description="COM_BANNERS_FIELD_METAKEYWORDPREFIX_DESC" />
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="image"
 		array="true">
 
@@ -285,9 +285,9 @@
 			label="COM_BANNERS_FIELD_IMAGE_LABEL"
 			description="COM_BANNERS_FIELD_IMAGE_DESC" />
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="flash"
 		array="true">
 
@@ -309,9 +309,9 @@
 			label="COM_BANNERS_FIELD_HEIGHT_LABEL"
 			description="COM_BANNERS_FIELD_HEIGHT_DESC"/>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="alt"
 		array="true">
 
@@ -324,9 +324,9 @@
 			label="COM_BANNERS_FIELD_ALT_LABEL"
 			description="COM_BANNERS_FIELD_ALT_DESC"/>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="custom"
 		array="true">
 
@@ -342,6 +342,6 @@
 			label="COM_BANNERS_FIELD_CUSTOMCODE_LABEL"
 			description="COM_BANNERS_FIELD_CUSTOMCODE_DESC"/>
 
-	</fields>
+	</fieldset>
 
 </form>

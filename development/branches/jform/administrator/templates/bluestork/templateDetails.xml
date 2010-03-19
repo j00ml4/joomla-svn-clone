@@ -39,7 +39,7 @@
 		<position>footer</position>
 		<position>debug</position>
 	</positions>
-	<fields>
+	<fieldset>
 		<field
 			name="useRoundedCorners"
 			type="list"
@@ -87,5 +87,5 @@
 				value="1">JENABLED</option>
 		</field>
 
-	</fields>
+	</fieldset>
 </install>
