@@ -7,7 +7,7 @@
 		</message>
 	</layout>
 
-	<fields
+	<fieldset
 		group="basic"
 		label="Menus_Layout_Basic_Options_Label"
 		description="">
@@ -42,12 +42,21 @@
 			default="4"
 			label="JGLOBAL_NUM_LINKS_LABEL"
 			description="JGLOBAL_NUM_LINKS_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="advanced"
 		label="Menus_Layout_Advanced_Options_Label"
 		description="">
+		<field
+			name="featured_categories"
+			type="category"
+			extension="com_content"
+			required="false"
+			multiple="true"
+			size="5"
+			label="COM_CONTENT_FEATURED_CATEGORIES_LABEL"
+			description="COM_CONTENT_FEATURED_CATEGORIES_DESC" />
 		<field
 			name="orderby_pri"
 			type="list"
@@ -163,9 +172,9 @@
 				<option value="1">JYes</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="integration"
 		label="Menus_Layout_Integration_Options_Label"
 		description="">
@@ -226,9 +235,9 @@
 				value="1">JCOMMON_FULL_TEXT</option>
 		</field>
 		
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="articles"
 		label="Content_Attribs_Article_Settings_Label"
 		description="">
@@ -501,6 +510,6 @@
 				value="1">Show</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
 </metadata>

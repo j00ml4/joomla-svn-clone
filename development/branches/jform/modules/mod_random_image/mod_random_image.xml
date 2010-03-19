@@ -25,7 +25,7 @@
 		<language
 			tag="en-GB">en-GB.mod_random_image.ini</language>
 	</languages>
-	<fields>
+	<fieldset>
 		<field
 			name="type"
 			type="text"
@@ -56,8 +56,8 @@
 			default=""
 			label="MOD_RANDOMIMAGE_FIELD_HEIGHT_LABEL"
 			description="MOD_RANDOMIMAGE_FIELD_HEIGHT_DESC" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="advanced">
 		<field
 			name="layout"
@@ -68,16 +68,16 @@
 			name="moduleclass_sfx"
 			type="text"
 			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 		<field
 			name="cache"
 			type="list"
 			default="0"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
+			label="COM_MODULES_FIELD_CACHING_LABEL"
+			description="COM_MODULES_FIELD_CACHING_DESC">
 			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+				value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 		</field>
-	</fields>
+	</fieldset>
 </extension>

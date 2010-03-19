@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field name="token" type="text" id="token"
 			label="Users_Reset_Token_Label"
 			description="Users_Reset_Token_Desc"
@@ -12,5 +12,5 @@
 			filter="alnum"
 			validate="md5"
 		/>
-	</fields>
+	</fieldset>
 </form>

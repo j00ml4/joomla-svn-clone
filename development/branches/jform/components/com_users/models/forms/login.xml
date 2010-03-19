@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields label="Users_Login_Default_Label">
+	<fieldset label="Users_Login_Default_Label">
 		<field
 			name="username"
 			type="text"
@@ -26,5 +26,5 @@
 			default=""
 			filter="raw"
 		/>
-	</fields>
+	</fieldset>
 </form>

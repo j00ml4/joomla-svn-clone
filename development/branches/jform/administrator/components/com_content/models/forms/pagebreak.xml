@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fields>
+	<fieldset>
 		<field name="title" type="text"
 			class="inputbox"
 			description="CONTENT_PAGEBREAK_TITLE_DESC"			
@@ -14,5 +14,5 @@
 			label="CONTENT_PAGEBREAK_ALIAS_LABEL"
 			size="20"
 		 />			
-	</fields>		
+	</fieldset>		
 </form>

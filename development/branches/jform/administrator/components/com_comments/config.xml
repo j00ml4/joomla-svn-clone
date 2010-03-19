@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fields
+	<fieldset
 		group="blocking"
 		label="Comments_Config_Blocking_Label"
 		description="Comments_Config_Blocking_Label"
@@ -29,9 +29,9 @@
 			rows="4"
 			label="COMMENTS_BLOCKING_HOSTS"
 			description="COMMENTS_BLOCKING_HOSTS_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="bookmarking"
 		label="Comments_Config_Bookmarking_Label"
 		description="Comments_Config_Bookmarking_Label"
@@ -761,9 +761,9 @@
 			<option
 				value="1">Yes</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="comments"
 		label="Comments_Config_Comments_Label"
 		description="Comments_Config_Comments_Label"
@@ -1062,9 +1062,9 @@
 			<option
 				value="2">Anyone</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="spam"
 		label="Comments_Config_Spam_Label"
 		description="Comments_Config_Spam_Label"
@@ -1179,9 +1179,9 @@
 			default="1"
 			label="COMMENTS_COMMENT_FLOOD_TIME_WORLD"
 			description="COMMENTS_COMMENT_FLOOD_TIME_WORLD_DESC" />
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="permissions"
 		label="JConfig_Permissions_Label"
 		description="JConfig_Permissions_Desc"
@@ -1194,5 +1194,5 @@
 			filter="rules"
 			component="com_comments"
 			section="component" />
-	</fields>
+	</fieldset>
 </config>

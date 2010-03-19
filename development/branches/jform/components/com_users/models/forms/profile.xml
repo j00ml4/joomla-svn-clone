@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields label="Users_Profile_Default_Label">
+	<fieldset label="Users_Profile_Default_Label">
 		<field
 			name="id"
 			type="hidden"
@@ -94,5 +94,5 @@
 			validate="equals"
 			field="email1"
 		/>
-	</fields>
+	</fieldset>
 </form>

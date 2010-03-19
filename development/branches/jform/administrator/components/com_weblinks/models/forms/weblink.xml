@@ -1,146 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
-		<field name="id" type="hidden"
+	<fieldset>
+		<field
+			id="id"
+			name="id"
+			type="hidden"
 			default="0"
-			readonly="true"
 			required="true"
-		 />
+			readonly="true"/>
 
-		<field name="title" type="text"
+		<field
+			id="title"
+			name="title"
+			type="text"
 			class="inputbox"
-			description="COM_WEBLINKS_FIELD_TITLE_DESC"
+			default=""
+			size="40"
 			label="COM_WEBLINKS_FIELD_TITLE_LABEL"
-			required="true"
-			size="40"
-		/>
+			description="COM_WEBLINKS_FIELD_TITLE_DESC"
+			required="true"/>
 
-		<field name="alias" type="text"
+		<field
+			id="alias"
+			name="alias"
+			type="text"
 			class="inputbox"
-			description="COM_WEBLINKS_FIELD_ALIAS_DESC"
+			default=""
+			size="40"
 			label="COM_WEBLINKS_FIELD_ALIAS_LABEL"
-			size="40"
-		/>
+			description="COM_WEBLINKS_FIELD_ALIAS_DESC"/>
 
-		<field name="catid" type="category"
-			class="inputbox"
-			description="COM_WEBLINKS_FIELD_CATEGORY_DESC"
+		<field
+			id="catid"
+			name="catid"
+			type="category"
 			extension="com_weblinks"
 			label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
-		>
+			description="COM_WEBLINKS_FIELD_CATEGORY_DESC"
+			class="inputbox">
 			<option>JOPTION_NO_CATEGORY</option>
 		</field>
 
-		<field name="url" type="text"
-			class="inputbox"
-			description="COM_WEBLINKS_FIELD_URL_DESC"
-			label="COM_WEBLINKS_FIELD_URL_LABEL"
-			size="40"
-		/>
-
-		<field name="description" type="editor"
-			buttons="readmore,pagebreak"
-			class="inputbox"
-			description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC"
-			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL"
-		/>
-
-		<field name="date" type="date"
-			class="inputbox"
-			description="Weblinks_Date_Desc"
-			filter="safehtml"
-			label="Weblinks_Date_Label"
-		/>
-
-		<field name="hits" type="text"
-			class="inputbox"
-			description="Weblinks_HITS_Desc"
-			filter="unset"
-			label="Weblinks_Hits_Label"
-			readonly="true"
-			size="6"
-		/>
-
-		<field name="state" type="list"
-			class="inputbox"
-			default="1"
-			description="COM_WEBLINKS_FIELD_STATE_DESC"
-			label="COM_WEBLINKS_FIELD_STATE_LABEL"
-			size="1"
-		>
-			<option value="1">JOPTION_PUBLISHED</option>
-			<option value="0">JOPTION_UNPUBLISHED</option>
-			<option value="-1">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
-			<option value="-2">JOPTION_TRASH</option>
-		</field>
-
-		<field name="checked_out" type="text"
-			class="inputbox"
-			description="Weblinks_Checkedout_Desc"
-			filter="unset"
-			label="Weblinks_Checkedout_Label"
-			readonly="true"
-			size="6"
-		/>
-
-		<field name="checked_out_time" type="text"
-			class="inputbox"
-			description="Weblinks_Checkedout_Time_Desc"
-			filter="unset"
-			label="Weblinks_Checkedout_Time_Label"
-			readonly="true"
-			size="6"
-		/>
-
-		<field name="ordering" type="ordering"
+		<field
+			id="url"
+			name="url"
+			type="text"
 			class="inputbox"
 			default=""
-			description="COM_WEBLINKS_FIELD_ORDERING_DESC"
-			label="COM_WEBLINKS_FIELD_ORDERING_LABEL"
-		/>
+			size="40"
+			label="COM_WEBLINKS_FIELD_URL_LABEL"
+			description="COM_WEBLINKS_FIELD_URL_DESC"/>
 
-		<field name="access" type="accesslevel"
+		<field
+			id="description"
+			name="description"
+			type="editor"
+			buttons="readmore,pagebreak"
 			class="inputbox"
-			description="JFIELD_ACCESS_DESC"
-			label="JFIELD_ACCESS_LABEL"
+			default=""
+			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL"
+			description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC"/>
+
+		<field
+			id="date"
+			name="date"
+			type="Date"
+			class="inputbox"
+			default=""
+			label="Weblinks_Date_Label"
+			description="Weblinks_Date_Desc"
+			filter="safehtml"/>
+
+		<field
+			id="hits"
+			name="hits"
+			type="Text"
+			class="inputbox"
+			default=""
+			size="6"
+			label="Weblinks_Hits_Label"
+			description="Weblinks_HITS_Desc"
+			readonly="true"
+			filter="unset"/>
+
+		<field
+			id="state"
+			name="state"
+			type="list"
+			label="COM_WEBLINKS_FIELD_STATE_LABEL"
+			description="COM_WEBLINKS_FIELD_STATE_DESC"
+			class="inputbox"
 			size="1"
-		/>
+			default="1">
+			<option
+				value="1">JOPTION_PUBLISHED</option>
+			<option
+				value="0">JOPTION_UNPUBLISHED</option>
+			<option
+				value="-1">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
+			<option
+				value="-2">JOPTION_TRASH</option>
+		</field>
 
-		<field name="language" type="contentlanguage"
+		<field
+			id="ordering"
+			name="ordering"
+			type="Ordering"
 			class="inputbox"
-			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC"
+			default=""
+			label="COM_WEBLINKS_FIELD_ORDERING_LABEL"
+			description="COM_WEBLINKS_FIELD_ORDERING_DESC"/>
+
+			<field
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			class="inputbox"
+			size="1"
+			default="" />
+
+		<field
+			name="language"
+			type="contentlanguage"
 			label="JFIELD_LANGUAGE_LABEL"
-		>
+			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC"
+			class="inputbox"
+			default="">
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
 
-		<field name="approved" type="radio"
+		<field
+			id="approved"
+			name="approved"
+			type="radio"
 			class="inputbox"
-			description="Weblinks_Approved_Desc"
+			default=""
 			label="WEBLINKS_APPROVED_LABEL"
-		>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
+			description="Weblinks_Approved_Desc">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
 		</field>
 
-		<!--  The Weblink options. -->
-		<fields name="params">
+	</fieldset>
 
-			<fieldset name="params" label="COM_WEBLINKS_OPTIONS">
+	<fieldset
+		group="params"
+		array="true"
+		label="COM_WEBLINKS_OPTIONS">
 
-				<field name="target" type="list"
-					default="0"
-					description="COM_WEBLINKS_FIELD_TARGET_DESC"
-					label="COM_WEBLINKS_FIELD_TARGET_LABEL"
-				>
-					<option value="0">JBrowserTarget_Parent</option>
-					<option value="1">JBrowserTarget_New</option>
-					<option value="2">JBrowserTarget_Popup</option>
-					<option value="3">JBrowserTarget_Modal</option>
-				</field>
-			</fieldset>
-		</fields>
+		<field
+			id="target"
+			name="target"
+			type="List"
+			default="0"
+			label="COM_WEBLINKS_FIELD_TARGET_LABEL"
+			description="COM_WEBLINKS_FIELD_TARGET_DESC">
+			<option
+				value="0">JBrowserTarget_Parent</option>
+			<option
+				value="1">JBrowserTarget_New</option>
+			<option
+				value="2">JBrowserTarget_Popup</option>
+			<option
+				value="3">JBrowserTarget_Modal</option>
+		</field>
 		
 		<field
 			name="count_clicks"
@@ -155,5 +182,5 @@
 			<option
 				value="1">JYes</option>
 		</field>
-	</fields>
+	</fieldset>
 </form>

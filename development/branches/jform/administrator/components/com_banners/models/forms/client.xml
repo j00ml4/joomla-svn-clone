@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
+	<fieldset
 		addfieldpath="/administrator/components/com_banners/models/fields"
 	>
 		<field
@@ -115,9 +115,9 @@
 				value="1">JYES</option>
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="metadata"
 		label="COM_BANNERS_GROUP_LABEL_METADATA_OPTIONS">
 
@@ -153,9 +153,9 @@
 			label="COM_BANNERS_FIELD_CLIENT_METAKEYWORDPREFIX_LABEL"
 			description="COM_BANNERS_FIELD_CLIENT_METAKEYWORDPREFIX_DESC" />
 
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="extra"
 		label="Banners_Extra">
 
@@ -170,5 +170,5 @@
 			label="COM_BANNERS_FIELD_EXTRAINFO_LABEL"
 			description="COM_BANNERS_FIELD_EXTRAINFO_DESC"/>
 
-	</fields>
+	</fieldset>
 </form>

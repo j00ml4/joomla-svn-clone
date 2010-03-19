@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id: profile.xml 11567 2009-02-02 23:13:14Z eddieajau $ -->
 <form>
-	<fields>
-		<fields name="profile">
+	<fieldset>
+		<fieldset name="profile">
 			<fieldset name="profile" label="PLG_USER_PROFILE_SLIDER_LABEL">
 				<field
 					name="address1"
@@ -101,6 +101,6 @@
 					filter="string"
 				/>
 			</fieldset>
-		</fields>
-	</fields>
+		</fieldset>
+	</fieldset>
 </form>

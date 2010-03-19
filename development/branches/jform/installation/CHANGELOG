@@ -27,6 +27,60 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+18-Mar-2010 Jean-Marie Simonet
+# Reverting part of 15400. Solution to broken ini files is to correct ini files, not kill the msg. Error hard coded for now. WIP for translation.
+
+17-Mar-2010 Mark Dexter
+^ Fix up display of mod_articles_category and mod_articles_news (Angie Radtke)
+^ Add heading level param to mod_articles_category and mod_articles_news (Angie Radtke)
+^ Add category selection to frontpage menu item
+- Remove Featured Articles Single Category menu item
+# Fix category links in frontpage
+
+17-Mar-2010 Christophe Demko
+$ Fixing errors in installation/language/en-GB/en-GB.ini
+
+17-Mar-2010 Hannes Papenberg
+# Fixing bug in mod_menu in frontend
+# Fixing JFilterOutput to pass unittests - Thanks Iszak Bryan!
+# Fixing JFilterInput to pass unittests - Thanks Iszak Bryan!
+# Optimizing regular expressions - Thanks Iszak Bryan!
+# (Hopefully) Fixed bug in JLanguage that broke unittests and some broken language files
+# Fixed media manager popup - Thanks Artyom Bisyarin
+# Partially fixed bug in ordering in featured articles
+# Fixed bugs in mod_related_items
+# Prevented parenting a menu item to its own child - Thanks Jonnathan S. Lima
+# Fixed reading of parameters in accesslevel field - Thanks Christopher Garvis
+
+16-Mar-2010 Mark Dexter
+^ Update sample data to fix up module display (Elin Waring)
+# Remove section logic from mod_related_items
+
+16-Mar-2010 Jean-Marie Simonet
+$^# Refactored com_contact back-end ini/keys (Comp is WIP)
+# Correcting missing doublequotes (15370)
+
+15-Mar-2010 Jean-Marie Simonet
+# [19953] Corrected bug in gmail.php
+$ Normalized "Category Options" string
+
+14-Mar-2010 Ron Severdia
++ First draft of Atomic template with additions from Christian Montoya
+
+14-Mar-2010 Jean-Marie Simonet
+$ Adding string in com_plugins.ini
+$^ Refactored com_menus inis/keys, customized item(s), + some
+
+13-Mar-2010 Jean-Marie Simonet
+$^ Refactored com_modules ini/keys, customized item(s)
+$ Standardized mod_toolbar ini/keys
+$ Refactored com_plugins ini/keys, customized some item(s)
+$ Deleting unused com_banners.ini in front-end
+$ Refactored com_mailto ini/keys
+
+13-Mar-2010 Hannes Papenberg
+# Fixed mod_menu (Frontend) parameters
+
 12-Mar-2010 Jean-Marie Simonet
 $^# Refactored com_messages ini/keys, customized item(s)
 $ Customizing JCONTROLLER_SAVE_SUCCESS
@@ -34,7 +88,6 @@ $ Customizing JCONTROLLER_SAVE_SUCCESS
 
 11-Mar-2010 Jean-Marie Simonet
 $^ Customized ini/keys item(s) com_newfeeds, com_templates, com_weblinks
-
 
 10-Mar-2010 Jean-Marie Simonet
 $ Refactored com_banners inis/keys customizing item(s)

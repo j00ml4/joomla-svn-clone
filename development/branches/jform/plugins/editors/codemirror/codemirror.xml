@@ -16,7 +16,7 @@
 		<filename
 			plugin="codemirror">codemirror.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="linenumbers"
 			type="radio"
@@ -39,5 +39,5 @@
 			<option
 				value="shift">PLG_CODEMIRROR_FIELD_VALUE_TABMODE_SHIFT</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

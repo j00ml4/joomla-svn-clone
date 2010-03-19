@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<fieldset name="basic">
 			<field name="ftp_enable" type="list" id="ftp_enable" class="inputbox"
 				label="Instl_Ftp_Enable_Label"
@@ -53,5 +53,5 @@
 				<option value="1">JYes</option>
 			</field>
 		</fieldset>
-	</fields>
+	</fieldset>
 </form>

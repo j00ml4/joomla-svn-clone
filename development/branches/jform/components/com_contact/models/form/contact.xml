@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fields>
+	<fieldset>
 		<field name="id" type="hidden"
 			default="0"
 			label="Contact_Id_Label"
@@ -233,9 +233,9 @@
 			label="Contact_Icons_Misc_Label"
 		/>
 
-	</fields>
+	</fieldset>
 
-	<fields name="metadata">
+	<fieldset name="metadata">
 		<fieldset name="metadata" label="">
 
 			<field name="robots" type="text"
@@ -251,9 +251,9 @@
 			/>
 
 		</fieldset>
-	</fields>
+	</fieldset>
 
-	<fields name="params">
+	<fieldset name="params">
 		<fieldset name="options" label="Contact_Parameters">
 
 		<field name="show_name" type="list"
@@ -479,9 +479,9 @@
 		/>
 
 		</fieldset>
-	</fields>
+	</fieldset>
 
-	<fields  name="email_form">
+	<fieldset  name="email_form">
 		<fieldset name="email_form" label="Contact_Email_Form_Label">
 	
 		<field name="show_email_form" type="list"
@@ -554,6 +554,6 @@
 		/>	
 		
 		</fieldset>
-	</fields>
+	</fieldset>
 </form>
 	

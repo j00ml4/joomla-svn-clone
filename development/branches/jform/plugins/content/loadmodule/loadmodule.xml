@@ -16,7 +16,7 @@
 		<filename
 			plugin="loadmodule">loadmodule.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="style"
 			type="list"
@@ -34,5 +34,5 @@
 			<option
 				value="none">PLG_LOADMODULE_FIELD_VALUE_RAW</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

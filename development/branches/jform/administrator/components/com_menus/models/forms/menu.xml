@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id$ -->
+	<!-- $Id$ -->
 <form>
-	<fields>
-		<field name="id" type="hidden"
+	<fieldset>
+		<field
+			id="id"
+			name="id"
+			type="hidden"
 			default="0"
 			filter="int"
-			readonly="true"
 			required="true"
-		/>
+			readonly="true"/>
 
-		<field name="menutype" type="text"
+		<field
+			id="menutype"
+			name="menutype"
+			type="text"
+			label="COM_MENUS_MENU_MENUTYPE_LABEL"
+			description="COM_MENUS_MENU_MENUTYPE_DESC"
+			default=""
 			class="inputbox"
-			description="Menus_Menu_Menutype_Desc"
-			label="Menus_Menu_Menutype_Label"
+			size="30"
 			maxlength="24"
-			required="true"
-			size="30"
-		/>
+			required="true" />
 
-		<field name="title" type="text"
+		<field
+			id="title"
+			name="title"
+			type="text"
+			label="COM_MENUS_MENU_TITLE_LABEL"
+			description="COM_MENUS_MENU_TITLE_DESC"
+			default=""
 			class="inputbox"
-			label="Menus_Menu_Title_Label"
-			description="Menus_Menu_Title_Desc"
+			size="30"
 			maxlength="48"
-			required="true"
-			size="30"
-		/>
+			required="true" />
 
-		<field name="description" type="text"
-			class="inputbox"
-			description="Menus_Menu_Description_Desc"
+		<field
 			id="menudescription"
-			label="Menus_Menu_Description_Label"
-			maxlength="255"
+			name="description"
+			type="text"
+			label="COM_MENUS_MENU_DESCRIPTION_LABEL"
+			description="COM_MENUS_MENU_DESCRIPTION_DESC"
+			default=""
+			class="inputbox"
 			size="30"
-		/>
-	</fields>
+			maxlength="255" />
+
+	</fieldset>
 </form>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field name="username" type="text" id="username" size="30" default="" required="true"
 			class="inputbox required"
 			label="Users_Form_Username_Label"
@@ -12,5 +12,5 @@
 			label="Users_Form_Email_Label"
 			description="Users_Resend_Email_Desc"
 		/>
-	</fields>
+	</fieldset>
 </form>

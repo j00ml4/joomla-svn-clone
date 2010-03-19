@@ -16,7 +16,7 @@
 		<filename
 			plugin="pagenavigation">pagenavigation.php</filename>
 	</files>
-	<fields>
+	<fieldset>
 		<field
 			name="position"
 			type="list"
@@ -28,5 +28,5 @@
 			<option
 				value="0">PLG_PAGENAVIGATION_FIELD_VALUE_ABOVE</option>
 		</field>
-	</fields>
+	</fieldset>
 </install>

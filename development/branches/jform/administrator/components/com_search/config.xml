@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fields>
+	<fieldset>
 		<field
 			name="enabled"
 			type="radio"
@@ -24,9 +24,9 @@
 			<option
 				value="1">Show</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
+	<fieldset
 		group="permissions"
 		label="JConfig_Permissions_Label"
 		description="JConfig_Permissions_Desc"
@@ -48,5 +48,5 @@
 				title="JAction_Manage"
 				description="JAction_Manage_Component_Desc" />
 		</field>
-	</fields>
+	</fieldset>
 </config>

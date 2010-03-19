@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field name="id" type="hidden"
 			default="0"
 			readonly="true"
@@ -25,5 +25,5 @@
 		<field name="rules" type="hidden"
 			filter="json_encode"
 		/>
-	</fields>
+	</fieldset>
 </form>

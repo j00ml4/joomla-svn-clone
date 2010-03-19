@@ -25,7 +25,7 @@
 		<language
 			tag="en-GB">en-GB.mod_stats.ini</language>
 	</languages>
-	<fields>
+	<fieldset>
 		<field
 			name="serverinfo"
 			type="radio"
@@ -65,8 +65,8 @@
 			default="0"
 			label="MOD_STATS_FIELD_INCREASECOUNTER_LABEL"
 			description="MOD_STATS_FIELD_INCREASECOUNTER_DESC" />
-	</fields>
-	<fields
+	</fieldset>
+	<fieldset
 		group="advanced">
 		<field
 			name="layout"
@@ -77,24 +77,24 @@
 			name="moduleclass_sfx"
 			type="text"
 			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 		<field
 			name="cache"
 			type="list"
 			default="1"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
+			label="COM_MODULES_FIELD_CACHING_LABEL"
+			description="COM_MODULES_FIELD_CACHING_DESC">
 			<option
 				value="1">JCOMMON_USE_GLOBAL</option>
 			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+				value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 		</field>
 		<field
 			name="cache_time"
 			type="text"
 			default="900"
-			label="MODULES_FIELD_CACHE_TIME_LABEL"
-			description="MODULES_FIELD_CACHE_TIME_DESC" />
-	</fields>
+			label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+			description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+	</fieldset>
 </extension>
