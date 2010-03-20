@@ -28,14 +28,13 @@ class WeblinksViewCategory extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
+		$params		= &$app->getParams('com_weblinks');
 
 		// Get some data from the models
 		$state		= &$this->get('State');
 
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
-		$categories	= &$this->get('Categories');
 		$pagination	= &$this->get('Pagination');
 
 		// Check for errors.
@@ -73,22 +72,17 @@ class WeblinksViewCategory extends JView
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
-				$item->link = JRoute::_('index.php?task=weblink.go&&id='. $item->id);
+				$item->link = JRoute::_(WeblinksHelperRoute::getWeblinkRoute($item->slug, $item->catid));
 			} else {
 				$item->link = $item->url;
 			}
 		}
 
-		// Compute the categories (list) slug.
-		for ($i = 0, $n = count($categories); $i < $n; $i++)
-		{
-			$item		= &$categories[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-		}
-
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
+		$this->assignRef('parent',		$category->getParent());
+		$this->assignRef('children',	$category->getChildren());
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
 		$this->assignRef('pagination',	$pagination);
@@ -128,8 +122,7 @@ class WeblinksViewCategory extends JView
 		else {
 			$this->document->setTitle(JText::_('COM_WEBLINKS_WEB_LINKS'));
 		}
-	
-			
+
 		// Add alternate feed link
 		if ($this->params->get('show_feed_link', 1) == 1)
 		{

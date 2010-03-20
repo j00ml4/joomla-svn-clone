@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 <?php
 	// Initialise the starting level
 	// starting level is the parent level coming in
-	$curLevel = $this->item->level;
+	//$curLevel = $this->item->level;
 	$difLevel = 0;
 
 	// Loop through each of the children
@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 	// Create an <ul> for every level going deeper
 	// and an </ul> for every level jumping back up
 	// set current level to the new level
-		$difLevel = $item->level - $curLevel;
+		/**$difLevel = $item->level - $curLevel;
 		if ($difLevel < 0) :
 			for ($i = 0, $n = -($difLevel); $i < $n; $i++) :
 				echo "</ul>";
@@ -36,11 +36,11 @@ defined('_JEXEC') or die;
 				<ul>
 			<?php endfor;
 			$curLevel = $item->level;
-		endif;
+		endif;**/
 ?>
 
 		<li>
-			<a href="<?php echo JRoute::_(ContentRoute::category($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($item->slug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 		</li>
 		<?php endforeach; ?>

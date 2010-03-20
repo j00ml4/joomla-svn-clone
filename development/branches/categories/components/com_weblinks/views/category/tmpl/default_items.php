@@ -61,10 +61,7 @@ defined('_JEXEC') or die;
 								<?php if ($this->params->get('link_icons') <> -1) : ?>
 										<?php echo JHTML::_('image','system/'.$this->params->get('link_icons', 'weblink.png'), JText::_('COM_WEBLINKS_LINK'), NULL, true);?>
 								<?php endif; ?>
-
 								<?php
-										// Compute the correct link
-
 										$menuclass = 'category'.$this->params->get('pageclass_sfx');
 										$link = $item->link;
 										switch ($item->params->get('target', $this->params->get('target')))
@@ -115,13 +112,9 @@ defined('_JEXEC') or die;
 				</tbody>
 				</table>
 				<?php if($this->pagination->get('pages.total')>1): ?>
-							<div class="pagination">
+					<div class="pagination">
+						<p><?php echo $this->pagination->getPagesCounter(); ?></p>
+						<?php echo $this->pagination->getPagesLinks(); ?>
 
-											<p><?php echo $this->pagination->getPagesCounter(); ?></p>
-											<?php echo $this->pagination->getPagesLinks(); ?>
-
-							</div>
+					</div>
 				<?php endif; ?>
-
-
-

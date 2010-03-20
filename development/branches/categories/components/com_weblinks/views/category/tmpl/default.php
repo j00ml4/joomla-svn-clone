@@ -56,7 +56,7 @@ TODO fix images in com_categories ?>
 </div>
 
 <div class="jcat-parents">
-<?php /* echo $this->loadTemplate('parents'); */ ?>
+<?php echo $this->loadTemplate('parents'); ?>
 </div>
 
 

@@ -101,9 +101,9 @@ class ContentHelperQuery
 				$orderby = 'author_name DESC';
 				break;
 
-			case 'front' :
+			/**case 'front' :
 				$orderby = 'fp.ordering';
-				break;
+				break;**/
 
 			default :
 				$orderby = 'a.ordering';

@@ -20,7 +20,6 @@ jimport('joomla.application.component.view');
 class ContentViewCategories extends JView
 {
 	protected $state = null;
-	protected $item = null;
 	protected $items = null;
 	protected $pagination = null;
 
@@ -34,10 +33,8 @@ class ContentViewCategories extends JView
 		// Initialise variables.
 		$user		= &JFactory::getUser();
 		$app		= &JFactory::getApplication();
-
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -47,18 +44,8 @@ class ContentViewCategories extends JView
 
 		$params = &$state->params;
 
-		// PREPARE THE DATA
-
-		// Compute the content slug and prepare description (runs content plugins).
-		foreach ($items as $i => &$item)
-		{
-			$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
-			$item->description	= JHtml::_('content.prepare', $item->description);
-		}
-
 		$this->assignRef('params',		$params);
 		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('user',		$user);
 
 		$this->_prepareDocument();
