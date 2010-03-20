@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id$ -->
+<metadata>
+	<layout
+		title="com_contact_category_view_default_title">
+		<message>
+			<![CDATA[COM_CONTACT_CATEGORY_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+	<fields
+		group="request"
+		array="true"
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC"
+		addfieldpath="/administrator/components/com_contact/models/fields">
+
+		<field
+			name="catid"
+			type="category"
+			extension="com_contact"
+			default="0"
+			required="true"
+			label="COM_CONTACT_FIELD_CATEGORY_LABEL"
+			description="COM_CONTACT_FIELD_CATEGORY_DESC" />
+	</fields>
+	<fields>
+		<field
+			name="display_num"
+			type="list"
+			default="20"
+			label="COM_CONTACT_FIELD_NUM_CONTACTS_LABEL"
+			description="COM_CONTACT_FIELD_NUM_CONTACTS_DESC">
+			<option value="5">J5</option>
+				<option value="10">J10</option>
+				<option value="15">J15</option>
+				<option value="20">J20</option>
+				<option value="25">J25</option>
+				<option value="30">J30</option>
+				<option value="50">J50</option>
+				<option value="100">J100</option>
+				<option value="0">JALL</option>
+		</field>
+		<field
+			name="image"
+			type="imagelist"
+			directory="/images"
+			hide_default="1"
+			default=""
+			label="JFIELD_CATEGORY_IMAGE_LABEL"
+			description="JFIELD_CATEGORY_IMAGE_DESC" />
+		<field
+			name="image_align"
+			type="radio"
+			default="right"
+			label="COM_CONTACT_FIELD_IMAGE_ALIGN_LABEL"
+			description="COM_CONTACT_FIELD_IMAGE_ALIGN_DESC">
+			<option
+				value="left">JCOMMON_LEFT</option>
+			<option
+				value="right">JCOMMON_RIGHT</option>
+		</field>
+		<field
+			name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
+		<field
+			name="show_limit"
+			type="radio"
+			default="0"
+			label="COM_CONTACT_FIELD_LIMIT_BOX_LABEL"
+			description="COM_CONTACT_FIELD_LIMIT_BOX_DESC">
+			<option
+				value="0">JHIDE</option>
+			<option
+				value="1">JSHOW</option>
+		</field>
+		<field
+			name="show_feed_link"
+			type="radio"
+			default="1"
+			label="COM_CONTACT_FIELD_FEEDLINK_LABEL"
+			description="COM_CONTACT_FIELD_FEEDLINK_DESC">
+			<option
+				value="0">JHIDE</option>
+			<option
+				value="1">JSHOW</option>
+		</field>
+	</fields>
+</metadata>
