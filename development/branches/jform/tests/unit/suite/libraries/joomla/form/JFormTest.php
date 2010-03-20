@@ -60,7 +60,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addFieldPath();
 
 		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form/fields';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -90,7 +90,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addFormPath();
 
 		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/forms';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form/forms';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -120,7 +120,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addRulePath();
 
 		// The default path is the class file folder/rules
-		$valid = JPATH_LIBRARIES.'/joomla/form/rules';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form/rules';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -1226,9 +1226,8 @@ class JFormTest extends JoomlaTestCase
 			'Line:'.__LINE__.' The internal XML should still be named "form".'
 		);
 		//$this->_showXml($form);die;
-
 		$this->assertThat(
-			count($form->getXml()->fields),
+			count($form->getXml()->fields->fields),
 			$this->equalTo(2),
 			'Line:'.__LINE__.' The test data has 2 fields.'
 		);
