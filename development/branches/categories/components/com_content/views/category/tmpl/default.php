@@ -26,24 +26,26 @@ $pageClass = $this->params->get('pageclass_sfx');
 		</h1>
 	<?php endif; ?>
 	<h2>
-		<?php echo $this->escape($this->item->title); ?>
+		<?php echo $this->escape($this->category->title); ?>
 	</h2>
 	<?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 		<div class="category-desc">
 			<!-- @TODO Verify image path defaults/overrides/positions -->
-			<?php if ($this->params->get('show_description_image') && $this->item->category_params->get('image')) : ?>
-				<img src="<?php echo $this->item->category_params->get('image'); ?>" />
+			<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+				<img src="<?php echo $this->category->getParams()->get('image'); ?>" />
 			<?php endif; ?>
-			<?php if ($this->params->get('show_description') && $this->item->description) : ?>
-				<?php echo $this->item->description; ?>
+			<?php if ($this->params->get('show_description') && $this->category->description) : ?>
+				<?php echo $this->category->description; ?>
 			<?php endif; ?>
 			<div class="clr"></div>
 		</div>
 	<?php endif; ?>
 	
-	<?php if (is_array($this->children) && count($this->children) > 0) : ?>
+	<?php if (count($this->category->getChildren())) : ?>
 		<div class="jcat-children">
-			<?php echo $this->loadTemplate('children'); ?>
+			<?php
+			$this->children = $this->category->getChildren();
+			echo $this->loadTemplate('children');	?>
 		</div>
 	<?php endif; ?>
 	

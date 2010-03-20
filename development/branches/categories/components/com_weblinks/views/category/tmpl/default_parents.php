@@ -10,17 +10,18 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<?php if (empty($this->parents)) : ?>
+<?php if (empty($this->parent)) : ?>
 <p><?php  echo JText::_('JContent_No_Parents'); ?></p>
 <?php else : ?>
 	<h3><?php  echo JText::_('JContent_Parents'); ?></h3>
 	<ul>
-		<?php foreach ($this->parents as &$item) : ?>
+		<?php while ($this->parent->getParent()) : ?>
 		<li>
-			<a href="<?php echo JRoute::_(WeblinksRoute::category($item->slug)); ?>">
-				<?php echo $this->escape($item->title); ?></a>
+			<a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($this->parent->slug)); ?>">
+				<?php echo $this->escape($this->parent->title); ?></a>
 		</li>
-		<?php endforeach; ?>
+		<?php $this->parent = $this->parent->getParent(); ?>
+		<?php endwhile; ?>
 	</ul>
 
 <?php endif; ?>

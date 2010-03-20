@@ -12,8 +12,8 @@ defined('_JEXEC') or die;
 
 // Include dependancies
 jimport('joomla.application.component.controller');
-require_once JPATH_COMPONENT.DS.'router.php';
 require_once(JPATH_COMPONENT.DS.'helpers'.DS.'query.php');
+require_once(JPATH_COMPONENT.DS.'helpers'.DS.'route.php');
 
 $controller = JController::getInstance('Content');
 $controller->execute(JRequest::getCmd('task'));

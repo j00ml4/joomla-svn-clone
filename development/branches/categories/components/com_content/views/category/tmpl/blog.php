@@ -32,20 +32,20 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 <div class="category-desc">
-		<?php if ($this->params->get('show_description_image') && $this->item->category_params->get('image')) : ?>
-				<img src="<?php echo $this->baseurl . '/' . $cparams->get('image_path') . '/'. $this->item->category_params->get('image');?>" alt="" />
+		<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+				<img src="<?php echo $this->baseurl . '/' . $cparams->get('image_path') . '/'. $this->category->getParams()->get('image');?>" alt="" />
 		<?php endif; ?>
-		<?php if ($this->params->get('show_description') && $this->item->description) : ?>
-				<?php echo $this->item->description; ?>
+		<?php if ($this->params->get('show_description') && $this->category->description) : ?>
+				<?php echo $this->category->description; ?>
 		<?php endif; ?>
 </div>
 <?php endif; ?>
 
-<?php if ($this->children): ?>
+<?php if ($this->category->getChildren()): ?>
 	<ul class="subcategories">
-		<?php foreach($this->children as $child) : ?>
-				<li><a href="<?php /*TODO  Needs a class */  echo ContentRoute::category($child->id); ?>">
-					<?php echo $child->title; ?></a> <?php /* echo @TODO numitems not loaded $child->numitems; */?></li>
+		<?php foreach($this->category->getChildren() as $child) : ?>
+				<li><a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($child->id)); ?>">
+					<?php echo $child->title; ?></a> <?php echo $child->numitems; ?></li>
 		<?php endforeach; ?>
 	</ul>
 <?php endif;?>
@@ -78,7 +78,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		$row = $counter / $this->columns ;
 
 		if($rowcount==1) : ?>
-	<div class="items-row cols-<?php echo (int) $this->columns;?> <? echo 'row-'.$row ; ?>">
+	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
 	<?php endif; ?>
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
 		<?php

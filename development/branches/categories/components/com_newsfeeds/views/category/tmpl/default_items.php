@@ -16,7 +16,7 @@ $n = count($this->items);
 ?>
 
 <?php if (empty($this->items)) : ?>
-	<p> <?php echo JText::_('COM_NEWSFEEDS_NO_ARTICLES'); ?>	 </p>
+	<p> <?php echo JText::_('Newsfeed_No_Articles'); ?>	 </p>
 <?php else : ?>
 
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
@@ -24,7 +24,7 @@ $n = count($this->items);
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('COM_NEWSFEEDS_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('Display_Num'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	<?php endif; ?>
@@ -35,19 +35,19 @@ $n = count($this->items);
 		<thead><tr>
 				<?php if ($this->params->get('show_name')) : ?>
 				<th class="item-title" id="tableOrdering">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_NAME'), 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  JText::_('Feed_Name'), 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
 				
 				<?php if ($this->params->get('show_articles')) : ?>
 				<th class="item-num-art" id="tableOrdering2">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_NUM_ARTICLES'), 'a.numarticles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  JText::_('Num_Articles'), 'a.numarticles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
 				
 				<?php if ($this->params->get('show_link')) : ?>
 				<th class="item-link" id="tableOrdering3">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_LINK'), 'a.link', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  JText::_('Feed_Link'), 'a.link', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
 				
@@ -60,7 +60,7 @@ $n = count($this->items);
 				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
 
 					<td class="item-title">
-						<a href="<?php echo JRoute::_('index.php?option=com_newsfeeds&view=newsfeed&id='. $item->id); ?>">
+						<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getNewsfeedRoute($item->id.':'.$item->alias, $item->catid)); ?>">
 							<?php echo $item->name; ?></a>
 					</td>
 

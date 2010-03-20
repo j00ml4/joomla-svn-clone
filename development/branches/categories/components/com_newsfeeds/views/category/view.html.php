@@ -51,7 +51,7 @@ class NewsfeedsViewCategory extends JView
 		// Make sure the category was found.
 
 		if (empty($category)) {
-			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERRORS_CATEGORY_NOT_FOUND'));
+			return JError::raiseWarning(404, JText::_('Newfeeds_Error_Category_not_found'));
 		}
 
 		// Check whether category access level allows access.
@@ -69,18 +69,13 @@ class NewsfeedsViewCategory extends JView
 		// Prepare category description (runs content plugins)
 		// TODO: only use if the description is displayed
 		$category->description = JHtml::_('content.prepare', $category->description);
+		
+		$category->params = new JParameter($category->params);
 
 		// Compute the newsfeed slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
 			$item		= &$items[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-		}
-
-		// Compute the categories (list) slug.
-		for ($i = 0, $n = count($categories); $i < $n; $i++)
-		{
-			$item		= &$categories[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 		}
 
@@ -114,7 +109,7 @@ class NewsfeedsViewCategory extends JView
 				$this->document->setTitle($title);
 			}
 			else {
-				$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
+				$this->document->setTitle(JText::_('News_Feeds'));
 			}
 
 			// Set breadcrumbs.
@@ -123,7 +118,7 @@ class NewsfeedsViewCategory extends JView
 			}
 		}
 		else {
-			$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
+			$this->document->setTitle(JText::_('News_Feeds'));
 		}
 
 		// Add alternate feed link

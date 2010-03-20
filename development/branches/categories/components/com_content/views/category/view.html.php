@@ -51,7 +51,7 @@ class ContentViewCategory extends JView
 		$showSubcategories = $params->get('show_subcategory_content', '0');
 		if ($showSubcategories == 'next_list' OR $showSubcategories == 'all_list')
 		{
-			$children = $this->get('Children');
+			//$children = $this->get('Children');
 		}
 		$pagination = $this->get('Pagination');
 
@@ -68,11 +68,7 @@ class ContentViewCategory extends JView
 		$numLeading = $params->def('num_leading_articles', 1);
 		$numIntro = $params->def('num_intro_articles', 4);
 		$numLinks = $params->def('num_links', 4);
-
-		// Compute the category slug and prepare description (runs content plugins).
-		$item->slug = $item->path ? ($item->id . ':' . $item->path) : $item->id;
-		$item->description = JHtml::_('content.prepare', $item->description);
-
+		
 		// Compute the article slugs and prepare introtext (runs content plugins).
 		foreach ($articles as $i => & $article)
 		{
@@ -133,21 +129,11 @@ class ContentViewCategory extends JView
 			$this->link_items[$i] =& $articles[$i];
 		}
 
-		// Compute the children category slugs and prepare description (runs content plugins).
-		foreach ($children as $i => & $child)
-		{
-			$child->slug = $child->route ? ($child->id . ':' . $child->route) : $child->id;
-			$child->description = JHtml::_('content.prepare', $child->description);
-		}
-
 		$this->assign('action', str_replace('&', '&amp;', $uri));
 
 		$this->assignRef('params', $params);
-		$this->assignRef('item', $item);
+		$this->assignRef('category', $item);
 		$this->assignRef('articles', $articles);
-		$this->assignRef('siblings', $siblings);
-		$this->assignRef('children', $children);
-		$this->assignRef('parents', $parents);
 		$this->assignRef('pagination', $pagination);
 		$this->assignRef('user', $user);
 		$this->assignRef('state', $state);
@@ -165,7 +151,7 @@ class ContentViewCategory extends JView
 		$app =& JFactory::getApplication();
 		$menus =& JSite::getMenu();
 		$pathway =& $app->getPathway();
-		$title = $this->item->title;
+		$title = $this->category->title;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
@@ -182,15 +168,15 @@ class ContentViewCategory extends JView
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
-		if ($this->item->metadesc) {
-			$this->document->setDescription($this->item->metadesc);
+		if ($this->category->metadesc) {
+			$this->document->setDescription($this->category->metadesc);
 		}
 
-		if ($this->item->metakey) {
-			$this->document->setMetadata('keywords', $this->item->metakey);
+		if ($this->category->metakey) {
+			$this->document->setMetadata('keywords', $this->category->metakey);
 		}
 
-		$mdata = $this->item->metadata->toArray();
+		$mdata = $this->category->getMetadata()->toArray();
 		if ($app->getCfg('MetaTitle') == '1') {
 			$this->document->setMetaData('title', $mdata['page_title']);
 		}
@@ -226,9 +212,9 @@ class ContentViewCategory extends JView
 			$view = JArrayHelper::getValue($menu->query, 'view');
 			$id = JArrayHelper::getValue($menu->query, 'id');
 
-			if ($view != 'category' || ($view == 'category' && $id != $this->item->id))
+			if ($view != 'category' || ($view == 'category' && $id != $this->category->id))
 			{
-				$pathway->addItem($this->item->title);
+				$pathway->addItem($this->category->title);
 			}
 		}
 	}

@@ -38,7 +38,7 @@ class WeblinksViewWeblink extends JView
 		}
 
 		//get the weblink
-		$weblink = &$this->get('data');
+		$weblink = &$this->get('Item');
 
 		if ($weblink->url) {
 			// redirects to url if matching id found
