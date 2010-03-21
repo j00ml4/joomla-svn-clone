@@ -56,7 +56,7 @@ $params =& $this->item->params;
 
 <?php // to do not that elegant would be nice to group the params ?>
 
-<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date'))
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_parent_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date'))
 	or ($params->get('show_publish_date'))) :
 ?>
  <dl class="article-info">
