@@ -27,9 +27,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 </h1>
 <?php endif; ?>
 <?php 
-$this->parent = $this->items;
-$this->itemsLevel[$this->parent->level + 1] = $this->items->getChildren();
-$this->maxLevel = 0;
 echo $this->loadTemplate('items'); 
 ?>
 
