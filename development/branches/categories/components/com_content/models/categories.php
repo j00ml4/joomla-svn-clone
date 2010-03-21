@@ -8,7 +8,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modellist');
+jimport('joomla.application.component.model');
 
 /**
  * This models supports retrieving lists of article categories.
