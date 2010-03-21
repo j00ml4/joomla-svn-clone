@@ -67,7 +67,8 @@ class ContentViewArticle extends JView
 		// Add router helpers.
 		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 		$item->catslug = $item->category_alias ? ($item->catid . ':' . $item->category_alias) : $item->catid;
-
+		$item->parent_slug = $item->category_alias ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
+		
 		// TODO: Change based on shownoauth
 		$item->readmore_link = JRoute::_(ContentRoute::article($item->slug, $item->catslug));
 
