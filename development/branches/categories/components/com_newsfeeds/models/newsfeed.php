@@ -119,6 +119,5 @@ class NewsfeedsModelNewsfeed extends JModel
 		}
 		return true;
 	}
-
 }
 ?>

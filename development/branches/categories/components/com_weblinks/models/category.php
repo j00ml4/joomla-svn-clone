@@ -20,6 +20,15 @@ jimport('joomla.application.component.modellist');
 class WeblinksModelCategory extends JModelList
 {
 	/**
+	 * Category items data
+	 *
+	 * @var array
+	 */
+	protected $_children = null;
+
+	protected $_parents = null;
+
+	/**
 	 * Model context string.
 	 *
 	 * @access	protected
@@ -34,14 +43,6 @@ class WeblinksModelCategory extends JModelList
 	 * @var		object
 	 */
 	protected $_category = null;
-
-	/**
-	 * The list of other weblink categories.
-	 *
-	 * @access	protected
-	 * @var		array
-	 */
-	protected $_categories = null;
 
 	/**
 	 * Method to get a list of items.
@@ -156,40 +157,17 @@ class WeblinksModelCategory extends JModelList
 	 * @return	object
 	 * @since	1.5
 	 */
-	function &getCategory($id = 0)
+	function getCategory($id = 0)
 	{
-		if (empty($id)) {
-			$id = $this->getState('category.id');
-		}
-		
-		$categories = JCategories::getInstance('com_weblinks');
+		$id = (!empty($id)) ? $id : $this->getState('category.id');
+		$options = array(
+				'published', $this->getState('filter.published', 1),
+				'access', $this->getState('filter.access', true)
+				);
+
+		$categories = JCategories::getInstance($this->getState('extenstion', 'com_weblinks'), $options);
 		$this->_category = $categories->get($id);
 		return $this->_category;
-	}
-
-	/**
-	 * Get the sibling (adjacent) categories.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getSiblings()
-	{
-		if ($this->_siblings === null && $category = &$this->getItem()) {
-			$model = &JModel::getInstance('Categories', 'WeblinksModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('filter.parent_id',	$category->parent_id);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_siblings  = $model->getItems();
-
-			if ($this->_siblings === false) {
-				$this->setError($model->getError());
-			}
-		}
-
-		return $this->_siblings;
 	}
 
 	/**
@@ -199,26 +177,13 @@ class WeblinksModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getChildren($categoryId = 0)
+	function getChildren($categoryId = 0)
 	{
 		// Initialise variables.
 		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
 
-		if ($this->_children === null) {
-			$model = &JModel::getInstance('Categories', 'WeblinksModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('filter.parent_id',	$categoryId);
-			$model->setState('filter.get_children',	true);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_children  = $model->getItems();
-
-			if ($this->_children === false) {
-				$this->setError($model->getError());
-			}
-		}
+		$categories = JCategories::getInstance($this->getState('extension', 'com_weblinks'));
+		$this->_children = $categories->get($categoryId)->getChildren();
 
 		return $this->_children;
 	}
@@ -230,28 +195,13 @@ class WeblinksModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getParents($categoryId = 0)
+	function getParent($categoryId = 0)
 	{
 		// Initialise variables.
 		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
 
-		if ($this->_parents === null) {
-			$model = &JModel::getInstance('Categories', 'WeblinksModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('list.select',			'a.id, a.title, a.level, a.path AS route');
-			$model->setState('filter.parent_id',	$categoryId);
-			$model->setState('filter.get_parents',	true);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_parents  = $model->getItems();
-
-			if ($this->_parents === false) {
-				$this->setError($model->getError());
-			}
-		}
-
-		return $this->_parents;
+		$categories = JCategories::getInstance($this->getState('extension', 'com_weblinks'));
+		$this->_parent = $categories->get($categoryId)->getParent();
+		return $this->_parent;
 	}
 }
