@@ -83,7 +83,6 @@ function WeblinksBuildRoute(&$query)
 		$categories = JCategories::getInstance('com_weblinks');
 		$category = $categories->get($catid);
 		$path = $category->getPath();
-		$path[] = $category->id.':'.$category->alias;
 		$path = array_reverse($path);
 		
 		$array = array();

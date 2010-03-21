@@ -92,7 +92,6 @@ class WeblinksControllerWeblink extends JControllerForm
 		}
 
 		// Redirect to the URL
-		// TODO: Probably should check for a valid http link
 		if ($link->url)
 		{
 			$modelLink->hit($id);

@@ -10,8 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_COMPONENT.DS.'controller.php';
-require_once JPATH_COMPONENT.DS.'router.php';
+jimport('joomla.application.component.controller');
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'route.php';
 $controller	= JController::getInstance('Weblinks');
 $controller->execute(JRequest::getCmd('task'));

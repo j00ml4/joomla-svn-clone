@@ -10,11 +10,10 @@
 // no direct access
 defined('_JEXEC') or die;
 
-if(count($this->itemsLevel[$this->parent->level + 1]) > 0)
-{
-	echo '<ul>';
-	foreach($this->itemsLevel[$this->parent->level + 1] as $item)
-	{ ?>
+if(count($this->itemsLevel[$this->parent->level + 1]) > 0 && (($this->parent->level + 1) > $this->maxLevel || $this->maxLevel == 0)) : 
+?>
+	<ul>
+	<?php foreach($this->itemsLevel[$this->parent->level + 1] as $item) : ?>
 		<li>
 		<span class="jitem-title"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->id.':'.$item->alias));?>">
 			<?php echo $this->escape($item->title); ?></a>
@@ -25,17 +24,14 @@ if(count($this->itemsLevel[$this->parent->level + 1]) > 0)
 			</div>
 		<?php endif; ?>
 		<?php 
-		if(count($item->getChildren()) > 0) 
-		{
+		if(count($item->getChildren()) > 0) : 
 			$this->itemsLevel[$item->level + 1] = $item->getChildren();
-			$tmp = $this->parent;
 			$this->parent = $item;
 			echo $this->loadTemplate('items');
-			$this->parent = $tmp;
-		}
+			$this->parent = $item->getParent();
+		endif;
 		?>
 		</li>
-		<?php
-	}
-	echo '</ul>';
-}
+	<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
