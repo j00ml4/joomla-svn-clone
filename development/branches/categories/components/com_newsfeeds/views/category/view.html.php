@@ -31,13 +31,13 @@ class NewsfeedsViewCategory extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
+		$params		= &$app->getParams('com_newsfeeds');
 
 		// Get some data from the models
 		$state		= &$this->get('State');
+
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
-		$categories	= &$this->get('Categories');
 		$pagination	= &$this->get('Pagination');
 
 		// Check for errors.
@@ -49,9 +49,8 @@ class NewsfeedsViewCategory extends JView
 		// Validate the category.
 
 		// Make sure the category was found.
-
 		if (empty($category)) {
-			return JError::raiseWarning(404, JText::_('Newfeeds_Error_Category_not_found'));
+			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERROR_CATEGORY_NOT_FOUND'));
 		}
 
 		// Check whether category access level allows access.
@@ -62,15 +61,8 @@ class NewsfeedsViewCategory extends JView
 		}
 
 		// Prepare the data.
-
-		// Compute the active category slug.
-		$category->slug = $category->alias ? ($category->id.':'.$category->alias) : $category->id;
-
 		// Prepare category description (runs content plugins)
-		// TODO: only use if the description is displayed
 		$category->description = JHtml::_('content.prepare', $category->description);
-		
-		$category->params = new JParameter($category->params);
 
 		// Compute the newsfeed slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
@@ -78,13 +70,16 @@ class NewsfeedsViewCategory extends JView
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 		}
-
+		
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
+		$this->assignRef('parent',		$category->getParent());
+		$this->assignRef('children',	$category->getChildren());
 		$this->assignRef('categories',	$categories);
 		$this->assignRef('params',		$params);
 		$this->assignRef('pagination',	$pagination);
+
 
 		$this->_prepareDocument();
 

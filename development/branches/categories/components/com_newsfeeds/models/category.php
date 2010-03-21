@@ -24,12 +24,6 @@ class NewsfeedsModelCategory extends JModelList
 	 *
 	 * @var array
 	 */
-	protected $_item = null;
-
-	protected $_articles = null;
-
-	protected $_siblings = null;
-
 	protected $_children = null;
 
 	protected $_parents = null;
@@ -37,15 +31,11 @@ class NewsfeedsModelCategory extends JModelList
 	/**
 	 * Model context string.
 	 *
+	 * @access	protected
 	 * @var		string
 	 */
 	protected $_context = 'com_newfeeds.category';
 
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * @return	void
-	 */
 	/**
 	 * The category that applies.
 	 *
@@ -53,15 +43,6 @@ class NewsfeedsModelCategory extends JModelList
 	 * @var		object
 	 */
 	protected $_category = null;
-
-	/**
-	 * The list of other newfeed categories.
-	 *
-	 * @access	protected
-	 * @var		array
-	 */
-	protected $_categories = null;
-
 
 	/**
 	 * Method to get a list of items.
@@ -74,11 +55,13 @@ class NewsfeedsModelCategory extends JModelList
 		$items = &parent::getItems();
 
 		// Convert the params field into an object, saving original in _params
-		for ($i = 0, $n = count($items); $i < $n; $i++) {
+		for ($i = 0, $n = count($items); $i < $n; $i++)
+		{
 			$item = &$items[$i];
-			if (!isset($this->_params)) {
-			//	$item->_params	= $item->params;
-			//	$item->params	= new JParameter($item->_params);
+			if (!isset($this->_params))
+			{
+				$item->_params	= $item->params;
+				$item->params	= new JParameter($item->_params);
 			}
 		}
 
@@ -110,6 +93,12 @@ class NewsfeedsModelCategory extends JModelList
 			$query->where('a.catid = '.(int) $categoryId);
 			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
+
+			//Filter by published category
+			$cpublished = $this->getState('filter.c.published');
+			if (is_numeric($cpublished)) {
+				$query->where('c.published = '.(int) $cpublished);
+			}
 		}
 
 		// Filter by state
@@ -120,7 +109,6 @@ class NewsfeedsModelCategory extends JModelList
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-
 		return $query;
 	}
 
@@ -138,7 +126,7 @@ class NewsfeedsModelCategory extends JModelList
 	{
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_newsfeeds');
+		$params	= JComponentHelper::getParams('com_weblinks');
 
 		// List state information
 		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
@@ -169,57 +157,17 @@ class NewsfeedsModelCategory extends JModelList
 	 * @return	object
 	 * @since	1.5
 	 */
-	function &getCategory($id = 0)
+	function getCategory($id = 0)
 	{
-		if (empty($id)) {
-			$id = $this->getState('category.id');
-		}
+		$id = (!empty($id)) ? $id : $this->getState('category.id');
+		$options = array(
+				'published', $this->getState('filter.published', 1),
+				'access', $this->getState('filter.access', true)
+				);
 
-		$categories = JCategories::getInstance('com_newsfeeds');
+		$categories = JCategories::getInstance($this->getState('extenstion', 'com_newsfeeds'), $options);
 		$this->_category = $categories->get($id);
 		return $this->_category;
-		if (empty($this->_category)) {
-			$db = $this->getDbo();
-			$db->setQuery(
-				'SELECT a.*' .
-				' FROM #__categories AS a' .
-				' WHERE id = '.(int) $id .
-				'  AND a.published = '.$this->getState('filter.published').
-				'  AND a.extension = '.$db->quote('com_newsfeeds')
-			);
-			$this->_category = $db->loadObject();
-
-			if ($db->getErrorNum()) {
-				$this->setError($db->getErrorMsg());
-			}
-		}
-
-		return $this->_category;
-	}
-
-	/**
-	 * Get the sibling (adjacent) categories.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getSiblings()
-	{
-		if ($this->_siblings === null && $category = &$this->getItem()) {
-			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('filter.parent_id',	$category->parent_id);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_siblings  = $model->getItems();
-
-			if ($this->_siblings === false) {
-				$this->setError($model->getError());
-			}
-		}
-
-		return $this->_siblings;
 	}
 
 	/**
@@ -229,26 +177,13 @@ class NewsfeedsModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getChildren($categoryId = 0)
+	function getChildren($categoryId = 0)
 	{
 		// Initialise variables.
 		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
 
-		if ($this->_children === null) {
-			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('filter.parent_id',	$categoryId);
-			$model->setState('filter.get_children',	true);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_children  = $model->getItems();
-
-			if ($this->_children === false) {
-				$this->setError($model->getError());
-			}
-		}
+		$categories = JCategories::getInstance($this->getState('extension', 'com_newsfeeds'));
+		$this->_children = $categories->get($categoryId)->getChildren();
 
 		return $this->_children;
 	}
@@ -260,28 +195,13 @@ class NewsfeedsModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getParents($categoryId = 0)
+	function getParent($categoryId = 0)
 	{
 		// Initialise variables.
 		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
 
-		if ($this->_parents === null) {
-			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
-			$model->setState('params',				JFactory::getApplication()->getParams());
-			$model->setState('list.select',			'a.id, a.title, a.level, a.path AS route');
-			$model->setState('filter.parent_id',	$categoryId);
-			$model->setState('filter.get_parents',	true);
-			$model->setState('filter.published',	$this->getState('filter.published'));
-			$model->setState('filter.access',		$this->getState('filter.access'));
-			// TODO: Set limits
-
-			$this->_parents  = $model->getItems();
-
-			if ($this->_parents === false) {
-				$this->setError($model->getError());
-			}
-		}
-
-		return $this->_parents;
+		$categories = JCategories::getInstance($this->getState('extension', 'com_newsfeeds'));
+		$this->_parent = $categories->get($categoryId)->getParent();
+		return $this->_parent;
 	}
 }

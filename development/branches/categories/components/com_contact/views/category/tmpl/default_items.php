@@ -21,20 +21,14 @@ defined('_JEXEC') or die;
 	}
 	</script>
 
-	<form action="<?php echo $this->action; ?>" method="post" name="adminForm">
-
-		<?php if ($this->params->get('show_limit')) : ?>
-			<div class="limit-box">
-				<?php echo JText::_('DISPLAY_NUM') .'&nbsp;'; ?>
-				<?php echo $this->pagination->getLimitBox(); ?>
-			</div>
-		<?php endif; ?>
-
-		<input type="hidden" name="option" value="com_contact" />
-		<input type="hidden" name="catid" value="<?php echo $this->category->id;?>" />
-		<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="" />
-	</form>
+	<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()); ?>" method="post" name="adminForm">
+	 <div class="filter">
+		<?php echo JText::_('COM_CONTACT_DISPLAY_NUM'); ?>
+		<?php echo $this->pagination->getLimitBox(); ?>
+	 </div>
+	<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
+ </form>
 
 	<table class="jlist-table">
 		<?php if ($this->params->get('show_headings')) : ?>
@@ -45,12 +39,12 @@ defined('_JEXEC') or die;
 				</th>
 
 				<th class="item-title">
-					<?php echo JHtml::_('grid.sort',  'Name', 'cd.name', $this->lists['order_Dir'], $this->lists['order']); ?>
+					<?php echo JHtml::_('grid.sort',  'Name', 'cd.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 
 				<?php if ($this->params->get('show_position')) : ?>
 					<th class="item-position">
-						<?php echo JHtml::_('grid.sort',  'Position', 'cd.con_position', $this->lists['order_Dir'], $this->lists['order']); ?>
+						<?php echo JHtml::_('grid.sort',  'Position', 'cd.con_position', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					</th>
 				<?php endif; ?>
 
@@ -83,10 +77,10 @@ defined('_JEXEC') or die;
 		<?php endif; ?>
 
 		<tbody>
-			<?php foreach($this->items as $item) : ?>
-				<tr class="<?php echo ($item->odd) ? "even" : "odd"; ?>">
+			<?php foreach ($this->items as $i => $item) : ?>
+				<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
 					<td class="item-num">
-						<?php echo $item->count +1; ?>
+						<?php echo $i +1; ?>
 					</td>
 
 					<td class="item-title">

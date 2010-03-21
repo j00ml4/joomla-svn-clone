@@ -58,20 +58,15 @@ class WeblinksViewCategory extends JView
 		}
 
 		// Prepare the data.
-
-		// Compute the active category slug.
-		$category->slug = $category->alias ? ($category->id.':'.$category->alias) : $category->id;
-
 		// Prepare category description (runs content plugins)
-		// TODO: only use if the description is displayed
 		$category->description = JHtml::_('content.prepare', $category->description);
 
 		// Compute the weblink slug & link url.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
 			$item		= &$items[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
+				$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 				$item->link = JRoute::_(WeblinksHelperRoute::getWeblinkRoute($item->slug, $item->catid));
 			} else {
 				$item->link = $item->url;
