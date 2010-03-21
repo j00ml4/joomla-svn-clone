@@ -78,7 +78,7 @@ class ContactViewCategory extends JView
 		{
 			$contact = &$contacts[$i];
 
-			$contact->link = JRoute::_('index.php?option=com_contact&view=contact&id='.$contact->slug.'&catid='.$contact->catslug);
+			$contact->link = JRoute::_(ContactHelperRoute::getContactRoute($contact->slug, $contact->catslug));
 			if ($pparams->get('show_email', 0) == 1) {
 				$contact->email_to = trim($contact->email_to);
 				if (!empty($contact->email_to) && JMailHelper::isEmailAddress($contact->email_to)) {
@@ -153,10 +153,5 @@ class ContactViewCategory extends JView
 		$this->assign('action',		str_replace('&', '&amp;', $uri));
 
 		parent::display($tpl);
-	}
-
-	function getItems()
-	{
-
 	}
 }

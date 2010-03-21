@@ -59,9 +59,7 @@ function ContentBuildRoute(&$query)
 		}
 		$categories = JCategories::getInstance('com_content');
 		$category = $categories->get($catid);
-		$path = $category->getPath();
-		$path[] = $category->id.':'.$category->alias;
-		$path = array_reverse($path);
+		$path = array_reverse($category->getPath());
 			
 		$array = array();
 		foreach($path as $id)

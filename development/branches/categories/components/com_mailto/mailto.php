@@ -11,10 +11,9 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.helper');
+jimport('joomla.application.component.controller');
 
-require_once JPATH_COMPONENT.DS.'controller.php';
-
-$controller	= new MailtoController();
+$controller	= JController::getInstance('Mailto');
 $controller->registerDefaultTask('mailto');
 $controller->execute(JRequest::getCmd('task'));
 

@@ -73,7 +73,6 @@ function NewsfeedsBuildRoute(&$query)
 			$categories = JCategories::getInstance('com_newsfeeds');
 			$category = $categories->get($catid);
 			$path = $category->getPath();
-			$path[] = $category->id.':'.$category->alias;
 			$path = array_reverse($path);
 			
 			$array = array();
