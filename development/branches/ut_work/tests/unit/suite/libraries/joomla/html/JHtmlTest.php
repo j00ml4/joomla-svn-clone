@@ -22,6 +22,7 @@ class JHtmlTest extends JoomlaTestCase
 	protected function setUp()
 	{
 //		$this->object = new JHtml;
+		$this->saveFactoryState();
 	}
 
 	/**
@@ -30,6 +31,7 @@ class JHtmlTest extends JoomlaTestCase
 	 */
 	protected function tearDown()
 	{
+		$this->restoreFactoryState();
 	}
 
 	/**
@@ -216,10 +218,128 @@ class JHtmlTest extends JoomlaTestCase
 	 */
 	public function testImage()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		if(!is_array($_SERVER)) {
+			$_SERVER = array();
+		}
+
+		// we save the state of $_SERVER for later and set it to appropriate values
+		$http_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
+		$script_name = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : null;
+		$_SERVER['HTTP_HOST'] = 'example.com';
+		$_SERVER['SCRIPT_NAME'] = '/index.php';
+
+		// these are some paths to pass to JHtml for testing purposes
+		$urlpath = 'test1/';
+		$urlfilename = 'image1.jpg';
+
+		// we generate a random template name so that we don't collide or hit anything
+		$template = 'mytemplate'.rand(1,10000);
+
+		// we create a stub (not a mock because we don't enforce whether it is called or not)
+		// to return a value from getTemplate
+		$mock = $this->getMock('myMockObject', array('getTemplate'));
+		$mock->expects($this->any())
+			->method('getTemplate')
+			->will($this->returnValue($template));
+
+		JFactory::$application = $mock;
+
+		// we create the file that JHtml::image will look for
+		mkdir(JPATH_THEMES .'/'. $template .'/images/'. $urlpath, 0777, true);
+		file_put_contents(JPATH_THEMES .'/'. $template .'/images/'. $urlpath.$urlfilename, 'test');
+
+		// we do a test for the case that the image is in the templates directory
+		$this->assertThat(
+			JHtml::image($urlpath.$urlfilename, 'My Alt Text', null, true),
+			$this->equalTo('<img src="'.JURI::base(true).'/templates/'.$template.'/images/'.$urlpath.$urlfilename.'" alt="My Alt Text"  />'),
+			'JHtml::image failed when we should get it from the templates directory'
 		);
+
+		$this->assertThat(
+			JHtml::image($urlpath.$urlfilename, 'My Alt Text', null, true, true),
+			$this->equalTo(JURI::base(true).'/templates/'.$template.'/images/'.$urlpath.$urlfilename),
+			'JHtml::image failed in URL only mode when it should come from the templates directory'
+		);
+
+		unlink(JPATH_THEMES .'/'. $template .'/images/'. $urlpath.$urlfilename);
+		rmdir(JPATH_THEMES .'/'. $template .'/images/'. $urlpath);
+		rmdir(JPATH_THEMES .'/'. $template .'/images');
+		rmdir(JPATH_THEMES .'/'. $template);
+
+		$this->assertThat(
+			JHtml::image($urlpath.$urlfilename, 'My Alt Text', null, true),
+			$this->equalTo('<img src="'.JURI::base(true).'/media/'.$urlpath.'images/'.$urlfilename.'" alt="My Alt Text"  />'),
+			'JHtml::image failed when we should get it from the media directory'
+		);
+
+		$this->assertThat(
+			JHtml::image($urlpath.$urlfilename, 'My Alt Text', null, true, true),
+			$this->equalTo(JURI::base(true).'/media/'.$urlpath.'images/'.$urlfilename),
+			'JHtml::image failed when we should get it from the media directory in path only mode'
+		);
+
+		$extension = 'testextension';
+		$element = 'element';
+		$urlpath = 'path1/';
+		$urlfilename = 'image1.jpg';
+
+		mkdir(JPATH_ROOT .'/media/'. $extension.'/'.$element .'/images/'. $urlpath, 0777, true);
+		file_put_contents(JPATH_ROOT .'/media/'. $extension.'/'.$element .'/images/'. $urlpath.$urlfilename, 'test');
+
+		$this->assertThat(
+			JHtml::image($extension.'/'.$element.'/'.$urlpath.$urlfilename, 'My Alt Text', null, true),
+			$this->equalTo('<img src="'.JURI::base(true).'/media/'. $extension.'/'.$element .'/images/'. $urlpath.$urlfilename.'" alt="My Alt Text"  />'),
+			'JHtml::image failed when we should get it from the media directory, with the plugin fix'
+		);
+
+		$this->assertThat(
+			JHtml::image($extension.'/'.$element.'/'.$urlpath.$urlfilename, 'My Alt Text', null, true, true),
+			$this->equalTo(JURI::base(true).'/media/'. $extension.'/'.$element .'/images/'. $urlpath.$urlfilename),
+			'JHtml::image failed when we should get it from the media directory, with the plugin fix path only mode'
+		);
+		// we remove the file from the media directory
+		unlink(JPATH_ROOT .'/media/'. $extension.'/'.$element .'/images/'. $urlpath.$urlfilename);
+		rmdir(JPATH_ROOT .'/media/'. $extension.'/'.$element .'/images/'. $urlpath);
+		rmdir(JPATH_ROOT .'/media/'. $extension.'/'.$element .'/images');
+		rmdir(JPATH_ROOT .'/media/'. $extension.'/'.$element);
+		rmdir(JPATH_ROOT .'/media/'. $extension);
+
+		$this->assertThat(
+			JHtml::image($extension.'/'.$element.'/'.$urlpath.$urlfilename, 'My Alt Text', null, true),
+			$this->equalTo('<img src="'.JURI::base(true).'/media/'. $extension.'/images/'.$element.'/'. $urlpath.$urlfilename.'" alt="My Alt Text"  />')
+		);
+
+		$this->assertThat(
+			JHtml::image($extension.'/'.$element.'/'.$urlpath.$urlfilename, 'My Alt Text', null, true, true),
+			$this->equalTo(JURI::base(true).'/media/'. $extension.'/images/'.$element.'/'.$urlpath.$urlfilename)
+		);
+
+		$this->assertThat(
+			JHtml::image('http://www.example.com/test/image.jpg', 'My Alt Text',
+				array(
+					'width' => 150,
+					'height' => 150
+				)
+			),
+			$this->equalTo('<img src="http://www.example.com/test/image.jpg" alt="My Alt Text" width="150" height="150" />'),
+			'JHtml::image with an absolute path'
+		);
+
+		$this->assertThat(
+			JHtml::image('test/image.jpg', 'My Alt Text',
+				array(
+					'width' => 150,
+					'height' => 150
+				)
+			),
+			$this->equalTo('<img src="'.JURI::root(true).'/test/image.jpg" alt="My Alt Text" width="150" height="150" />'),
+			'JHtml::image with an absolute path, URL does not start with http'
+		);
+
+
+		$_SERVER['HTTP_HOST'] = $http_host;
+		$_SERVER['SCRIPT_NAME'] = $script_name;
+
 	}
 
 	public function iframeData() {
@@ -281,14 +401,130 @@ class JHtmlTest extends JoomlaTestCase
 	}
 
 	/**
-	 * @todo Implement testStylesheet().
+	 * @todo Implement testImage().
 	 */
 	public function testStylesheet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		'This test has not been implemented yet.'
+		if(!is_array($_SERVER)) {
+			$_SERVER = array();
+		}
+
+		// we save the state of $_SERVER for later and set it to appropriate values
+		$http_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
+		$script_name = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : null;
+		$_SERVER['HTTP_HOST'] = 'example.com';
+		$_SERVER['SCRIPT_NAME'] = '/index.php';
+
+		// these are some paths to pass to JHtml for testing purposes
+		$extension = 'testextension';
+		$element = 'element';
+		$cssfilename = 'stylesheet.css';
+
+
+		// we generate a random template name so that we don't collide or hit anything
+		$template = 'mytemplate'.rand(1,10000);
+
+		// we create a stub (not a mock because we don't enforce whether it is called or not)
+		// to return a value from getTemplate
+		$mock = $this->getMock('myMockObject', array('getTemplate'));
+		$mock->expects($this->any())
+			->method('getTemplate')
+			->will($this->returnValue($template));
+
+		JFactory::$application = $mock;
+
+		// we create the file that JHtml::image will look for
+		mkdir(JPATH_THEMES .'/'. $template .'/css/'.$extension, 0777, true);
+		file_put_contents(JPATH_THEMES .'/'. $template .'/css/'.$extension.'/'.$cssfilename, 'test');
+
+		$docMock1 = $this->getMock('myMockDoc1', array('addStylesheet'));
+
+		$docMock1->expects($this->once())
+			->method('addStylesheet')
+			->with(
+				JURI::base(true).'/templates/'.$template.'/css/'.$extension.'/'.$cssfilename,
+				'text/css',
+				null,
+				null
 		);
+
+		JFactory::$document = $docMock1;
+
+		// we can't directly assert anything about the return value because it doesn't return anything
+		JHtml::stylesheet($extension.'/'.$cssfilename, null, true);
+
+		$this->assertThat(
+			JHtml::stylesheet($extension.'/'.$cssfilename, null, true, true),
+			$this->equalTo(JURI::base(true).'/templates/'.$template.'/css/'.$extension.'/'.$cssfilename),
+			'Stylesheet in the template directory failed'
+		);
+
+		unlink(JPATH_THEMES .'/'. $template .'/css/'.$extension.'/'. $cssfilename);
+		rmdir(JPATH_THEMES .'/'. $template .'/css/'.$extension);
+		rmdir(JPATH_THEMES .'/'. $template .'/css');
+		rmdir(JPATH_THEMES .'/'. $template);
+
+		$docMock2 = $this->getMock('myMockDoc2', array('addStylesheet'));
+
+		$docMock2->expects($this->once())
+			->method('addStylesheet')
+			->with(
+				JURI::base(true).'/media/'.$extension.'/css/'.$cssfilename,
+				'text/css',
+				null,
+				null
+		);
+
+		JFactory::$document = $docMock2;
+
+		JHtml::stylesheet($extension.'/'.$cssfilename, null, true);
+
+		$this->assertThat(
+			JHtml::stylesheet($extension.'/'.$cssfilename, null, true, true),
+			$this->equalTo(JURI::root(true).'/media/'.$extension.'/css/'.$cssfilename),
+			'Stylesheet in the media directory failed - path only'
+		);
+
+		// we create the file that JHtml::stylesheet will look for
+		mkdir(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/css/', 0777, true);
+		file_put_contents(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/css/'.$cssfilename, 'test');
+
+		$this->assertThat(
+			JHtml::stylesheet($extension.'/'.$element.'/'.$cssfilename, null, true, true),
+			$this->equalTo(JURI::root(true).'/media/'.$extension.'/'.$element.'/css/'.$cssfilename),
+			'Stylesheet in the media directory -plugins group code - failed - path only'
+		);
+
+		unlink(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/css/'.$cssfilename);
+		rmdir(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/css/');
+		rmdir(JPATH_ROOT .'/media/'.$extension.'/'.$element);
+		rmdir(JPATH_ROOT .'/media/'.$extension);
+		
+		$this->assertThat(
+			JHtml::stylesheet($extension.'/'.$element.'/'.$cssfilename, null, true, true),
+			$this->equalTo(JURI::root(true).'/media/'.$extension.'/css/'.$element.'/'.$cssfilename),
+			'Stylesheet in the media directory -plugins group code - failed - path only'
+		);
+
+
+		$docMock3 = $this->getMock('myMockDoc3', array('addStylesheet'));
+
+		$docMock3->expects($this->once())
+			->method('addStylesheet')
+			->with(
+				JURI::root(true).'/path/to/stylesheet.css',
+				'text/css',
+				null,
+				'media="print" title="sample title"'
+		);
+
+		JFactory::$document = $docMock3;
+
+		JHtml::stylesheet('path/to/stylesheet.css', array('media' => 'print', 'title' => 'sample title'));
+
+		$_SERVER['HTTP_HOST'] = $http_host;
+		$_SERVER['SCRIPT_NAME'] = $script_name;
+
 	}
 
 	/**
