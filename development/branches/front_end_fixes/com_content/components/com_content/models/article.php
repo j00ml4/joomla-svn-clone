@@ -51,7 +51,6 @@ class ContentModelArticle extends JModelItem
 		// TODO: Tune these values based on other permissions.
 		$this->setState('filter.published',	1);
 		$this->setState('filter.archived',	-1);
-		$this->setState('filter.access',		true);
 	}
 
 	/**
@@ -93,16 +92,6 @@ class ContentModelArticle extends JModelItem
 				$archived = $this->getState('filter.archived');
 				if (is_numeric($published)) {
 					$query->where('(a.state = '.(int) $published.' OR a.state ='.(int) $archived.')');
-				}
-
-
-				// Filter by access level.
-				if ($access = $this->getState('filter.access'))
-				{
-					$user	= &JFactory::getUser();
-					$groups	= implode(',', $user->authorisedLevels());
-					$query->where('a.access IN ('.$groups.')');
-					$query->where('(c.access IS NULL OR c.access IN ('.$groups.'))');
 				}
 
 				$db->setQuery($query);
