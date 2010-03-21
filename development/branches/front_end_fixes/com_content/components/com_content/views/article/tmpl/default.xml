@@ -103,20 +103,6 @@
 		</field>
 
 		<field
-			name="show_intro"
-			type="list"
-			default=""
-			label="JGLOBAL_Show_Intro_Label"
-			description="JGLOBAL_Show_Intro_Desc">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
-		</field>
-
-		<field
 			name="show_category"
 			type="list"
 			label="JGLOBAL_Show_Category_Label"

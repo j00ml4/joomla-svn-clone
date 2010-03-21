@@ -65,12 +65,8 @@ $params = $this->state->get('params');
 		<?php endif; ?>
 		</ul>
 <?php endif; ?>
-
-	<?php  if (!$params->get('show_intro')) :
-		echo $this->item->event->afterDisplayTitle;
-	endif; ?>
-
-	<?php echo $this->item->event->beforeDisplayContent; ?>
+<?php echo $this->item->event->afterDisplayTitle; ?>
+<?php echo $this->item->event->beforeDisplayContent; ?>
 
 <?php // to do not that elegant would be nice to group the params ?>
 
