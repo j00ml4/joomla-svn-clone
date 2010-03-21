@@ -8,7 +8,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modellist');
+jimport('joomla.application.component.model');
 
 /**
  * This models supports retrieving lists of article categories.
@@ -83,7 +83,11 @@ class WeblinksModelCategories extends JModel
 	 */
 	function getItems()
 	{
-		$categories = JCategories::getInstance($this->getState('extension', 'com_weblinks'));
+		$options = array(
+				'published', $this->getState('filter.published', 1),
+				'access', $this->getState('filter.access', true)
+				);
+		$categories = JCategories::getInstance($this->getState('extension', 'com_weblinks'), $options);
 		$category = $categories->get($this->getState('parentId', 'root'));
 		return $category->getChildren();
 	}

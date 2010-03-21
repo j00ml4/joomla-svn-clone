@@ -60,6 +60,11 @@ class JCategories
 	protected $_key = null;
 
 	/**
+	 * Name of the items state field
+	 */
+	protected $_statefield = null;
+	
+	/**
 	 * Array of options
 	 *
 	 * @var array
@@ -78,6 +83,9 @@ class JCategories
 		$this->_table		= $options['table'];
 		$this->_field		= (isset($options['field'])&&$options['field'])?$options['field']:'catid';
 		$this->_key			= (isset($options['key'])&&$options['key'])?$options['key']:'id';
+		$this->_statefield 	= (isset($options['statefield'])) ? $options['statefield'] : 'state'; 
+		$options['access']	= (isset($options['access'])) ? $options['access'] : 'true';
+		$options['published']	= (isset($options['published'])) ? $options['published'] : 1;
 		$this->_options		= $options;
 		return true;
 	}
@@ -150,7 +158,14 @@ class JCategories
 		$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
 		$query->from('#__categories as c');
 		$query->where('(c.extension='.$db->Quote($extension).' OR c.extension='.$db->Quote('system').')');
-		$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');		
+		if($this->_options['access'])
+		{
+			$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');
+		}
+		if($this->_options['published'] == 1)
+		{
+			$query->where('c.published = 1');
+		}		
 		$query->order('c.lft');
 		
 		// s for selected id
@@ -162,7 +177,12 @@ class JCategories
 		}
 		
 		// i for item
-		$query->leftJoin($db->nameQuote($this->_table).' AS i ON i.'.$db->nameQuote($this->_field).' = c.id ');
+		if($this->_options['published'] == 1)
+		{
+			$query->leftJoin($db->nameQuote($this->_table).' AS i ON i.'.$db->nameQuote($this->_field).' = c.id AND i.'.$this->_statefield.' = 1');
+		} else {
+			$query->leftJoin($db->nameQuote($this->_table).' AS i ON i.'.$db->nameQuote($this->_field).' = c.id');
+		}
 		$query->select('COUNT(i.'.$db->nameQuote($this->_key).') AS numitems');
 		
 		// Group by
