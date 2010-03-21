@@ -19,124 +19,103 @@ jimport('joomla.application.component.model');
 class ContactModelContact extends JModel
 {
 	/**
-	 * Method to auto-populate the model state.
+	 * Newsfeed id
 	 *
-	 * @return	void
+	 * @var int
 	 */
-	protected function _populateState()
+	var $_id = null;
+
+	/**
+	 * Newsfeed data
+	 *
+	 * @var array
+	 */
+	var $_data = null;
+
+	/**
+	 * Constructor
+	 *
+	 * @since 1.5
+	 */
+	function __construct()
 	{
-		$app = &JFactory::getApplication('site');
+		parent::__construct();
 
-		// Load state from the request
-		$pk = JRequest::getInt('id');
-		$this->setState('contact.id',$pk);
-
-		// Load the parameters.
-		$globalParams	= $app->getParams('com_contact');
-		$this->setState('global_params', $globalParams);
-
-		$menu = JSite::getMenu()->getActive();
-		if (is_object($menu)) {
-			$menuParams = new JParameter($menu->params);
-			$this->setState('menu_params', $menuParams);
-		}
-
-		// merge the global and menu item params (menu item take priority)
-		$mergedParams = clone $globalParams;
-		$mergedParams->merge($menuParams);
-		$this->setState('params', $mergedParams);
-
+		$id = JRequest::getVar('id', 0, '', 'int');
+		$this->setId((int)$id);
 	}
 
 	/**
-	 * Builds the query to select contact items
-	 * @param array
-	 * @return string
-	 * @access protected
+	 * Method to set the newsfeed identifier
+	 *
+	 * @access	public
+	 * @param	int Newsfeed identifier
 	 */
-	function _getContactQuery($pk = null)
+	function setId($id)
 	{
-		// TODO: Cache on the fingerprint of the arguments
-		$db		= $this->getDbo();
-		$user	= JFactory::getUser();
-		$pk		= (!empty($pk)) ? $pk : (int) $this->getState('contact.id');
-
-		$query	= $db->getQuery(true);
-		if ($pk) {
-			$query->select('a.*, cc.access as category_access, cc.title as category_name, '
-			. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-			. ' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(\':\', cc.id, cc.alias) ELSE cc.id END AS catslug ');
-
-			$query->from('#__contact_details AS a');
-
-			$query->join('INNER', '#__categories AS cc on cc.id = a.catid');
-
-			$query->where('a.id = ' . (int) $pk);
-			$query->where('a.published = 1');
-			$query->where('cc.published = 1');
-			$groups		= implode(',', $user->authorisedLevels());
-			$query->where('a.access IN ('.implode(',', $user->authorisedLevels()).')');
-		}
-		return $query;
+		// Set newsfeed id and wipe data
+		$this->_id		= $id;
+		$this->_data	= null;
 	}
 
 	/**
-	 * Gets a list of contacts
-	 * @param array
-	 * @return mixed Object or null
+	 * Method to get the contact data
+	 *
+	 * @since 1.5
 	 */
-	function getContact($pk = null)
+	function &getData()
 	{
-		$db		= $this->getDbo();
-		$query	= $this->_getContactQuery($pk);
-		try {
-			$db->setQuery($query);
-			$result = $db->loadObject();
+		// Load the newsfeed data
+		if ($this->_loadData())
+		{
+			// Initialise some variables
+			$user = &JFactory::getUser();
 
-			if ($error = $db->getErrorMsg()) {
-				throw new Exception($error);
+			// Make sure the category is published
+			if (!$this->_data->published) {
+				JError::raiseError(404, JText::_("Resource Not Found"));
+				return false;
 			}
 
-			if (empty($result)) {
-				throw new Exception(JText::_('Contact_Error_Contact_not_found'), 404);
+			// Check to see if the category is published
+			if (!$this->_data->cat_pub) {
+				JError::raiseError(404, JText::_("Resource Not Found"));
+				return;
 			}
 
-			// If we are showing a contact list, then the contact parameters take priority
-			// So merge the contact parameters with the merged parameters
-			if ($this->getState('params')->get('show_contact_list')) {
-				$registry = new JRegistry;
-				$registry->loadJSON($result->params);
-				$this->getState('params')->merge($registry);
+			// Check whether category access level allows access
+			if (!in_array($this->_data->cat_access, $user->authorisedLevels())) {
+				JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+				return;
 			}
-		} catch (Exception $e) {
-			$this->setError($e);
-			return false;
+
 		}
 
-		if ($result) {
-			$user	= JFactory::getUser();
-			$groups	= implode(',', $user->authorisedLevels());
-			//get the content by the linked user
-			$query = 'SELECT id, title, state, access, created' .
-				' FROM #__content' .
-				' WHERE created_by = '.(int)$result->user_id .
-				' AND access IN ('. $groups . ')' .
-				' ORDER BY state DESC, created DESC' ;
-			$db->setQuery($query, 0, 10);
-			$articles = $db->loadObjectList();
-			$result->articles = $articles;
+		return $this->_data;
+	}
 
-			//get the profile information for the linked user
-			$query = 'SELECT user_id, profile_key, profile_value, ordering' .
-				' FROM #__user_profiles' .
-				' WHERE user_id = '.(int)$result->user_id .
-				' ORDER BY ordering ASC' ;
-
-			$db->setQuery($query, 0, 10);
-			$profile = $db->loadObjectList();
-			$result->profile = $profile;
+	/**
+	 * Method to load Contact data
+	 *
+	 * @access	private
+	 * @return	boolean	True on success
+	 * @since	1.5
+	 */
+	function _loadData()
+	{
+		// Lets load the content if it doesn't already exist
+		if (empty($this->_data))
+		{
+			$query = 'SELECT f.*, cc.title AS category,'.
+					' cc.published AS cat_pub, cc.access AS cat_access,'.
+					' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(\':\', cc.id, cc.alias) ELSE cc.id END as catslug'.
+					' FROM #__contact_details AS f' .
+					' LEFT JOIN #__categories AS cc ON cc.id = f.catid' .
+					' WHERE f.id = '.$this->_id;
+			$this->_db->setQuery($query);
+			$this->_data = $this->_db->loadObject();
+			return (boolean) $this->_data;
 		}
-
-		return $result;
+		return true;
 	}
 }
