@@ -45,7 +45,9 @@
 
 	<!-- Add fields to the metadata object for the layout. -->
 	<fields name="metadata">
-		<fieldset name="metadata" label="MENUS_LAYOUT_METADATA_LABEL" description="">
+		<fieldset name="metadata"
+			label="MENUS_LAYOUT_METADATA_LABEL"
+		>
 
 			<field name="robots" type="list"
 				description="JField_Metadata_Robots_Desc"
