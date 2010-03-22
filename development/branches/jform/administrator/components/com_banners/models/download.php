@@ -41,7 +41,7 @@ class BannersModelDownload extends JModelForm
 	public function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('download', 'com_banners.download', array('control' => 'jform'));
+		$form = parent::getForm('com_banners.download', 'download', array('control' => 'jform'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

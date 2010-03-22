@@ -40,7 +40,7 @@ class UsersModelReset extends JModelForm
 	function &getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('reset_request', 'com_users.reset_request', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_users.reset_request', 'reset_request', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

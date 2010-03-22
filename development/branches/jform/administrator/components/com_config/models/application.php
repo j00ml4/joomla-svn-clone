@@ -27,7 +27,7 @@ class ConfigModelApplication extends JModelForm
 	public function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('application', 'com_config.application', array('control' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_config.application', 'application', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

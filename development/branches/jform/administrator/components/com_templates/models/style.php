@@ -114,7 +114,7 @@ class TemplatesModelStyle extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('style', 'com_templates.style', array('control' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_templates.style', 'style', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -173,7 +173,7 @@ class TemplatesModelStyle extends JModelForm
 		{
 			// If an XML file was found in the component, load it first.
 			// We need to qualify the full path to avoid collisions with component file names.
-			$form = parent::getForm($formFile, $formName, $formOptions, true);
+			$form = parent::getForm($formName, $formFile, $formOptions, true);
 
 			// Check for an error.
 			if (JError::isError($form)) {

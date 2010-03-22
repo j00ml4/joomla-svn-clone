@@ -121,7 +121,7 @@ class ContactModelContact extends JModelForm
 		JImport('joomla.form.form');
 		JForm::addFieldPath('JPATH_ADMINISTRATOR/components/com_users/models/fields');
 		// Get the form.
-		$form = parent::getForm('contact', 'com_contact.contact', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_contact.contact', 'contact', array('array' => 'jform', 'event' => 'onPrepareForm'));
 		// Check for an error.
 		if (JError::isError($form)) {
 			$this->setError($form->getMessage());
