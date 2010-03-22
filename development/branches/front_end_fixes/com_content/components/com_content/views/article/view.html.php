@@ -78,7 +78,7 @@ class ContentViewArticle extends JView
 
 		// Check the access to the article
 		$levels = $user->authorisedLevels();
-		if ((!in_array($item->access, $levels)) OR (!in_array($item->category_access, $levels)))
+		if ((!in_array($item->access, $levels)) OR ((is_array($item->category_access)) AND (!in_array($item->category_access, $levels))))
 		{
 			// If a guest user, they may be able to log in to view the full article
 			if (($params->get('show_noauth')) AND ($user->get('guest')))

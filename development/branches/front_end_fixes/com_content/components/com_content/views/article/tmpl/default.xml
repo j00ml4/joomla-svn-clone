@@ -173,6 +173,20 @@
 		</field>
 
 		<field
+			name="link_author"
+			type="list"
+			label="JGLOBAL_Link_Author_Label"
+			description="JGLOBAL_Link_Author_Desc"
+			default="">
+			<option
+				value="">JCOMMON_USE_GLOBAL</option>
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+
+		<field
 			name="show_create_date"
 			type="list"
 			label="JGLOBAL_Show_Create_Date_Label"
