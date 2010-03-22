@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
  * @subpackage	com_content
  * @since		1.5
  */
-class ContentViewFrontpage extends JView
+class ContentViewFeatured extends JView
 {
 	protected $state = null;
 	protected $item = null;

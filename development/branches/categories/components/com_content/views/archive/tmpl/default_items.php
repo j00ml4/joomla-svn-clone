@@ -17,7 +17,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 	<li class="row<?php echo $i % 2; ?>">
 
 		<h2>
-			<a href="<?php echo JRoute::_(ContentRoute::article($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid)); ?>">
 
 				<?php echo $this->escape($item->title); ?></a>
 		</h2>
@@ -26,7 +26,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 				<?php if ($this->params->get('show_category') && $item->catid) : ?>
 					<span>
 					<?php if ($this->params->get('link_category')) : ?>
-						<?php // echo '<a href="'.JRoute::_(ContentRoute::getCategoryRoute($item->catslug, $item->sectionid)).'">'; ?>
+						<?php echo '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($item->catslug)).'">'; ?>
 					<?php endif; ?>
 					<?php echo $item->category; ?>
 					<?php if ($this->params->get('link_category')) : ?>

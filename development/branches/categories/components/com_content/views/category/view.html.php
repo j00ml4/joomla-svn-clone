@@ -36,31 +36,40 @@ class ContentViewCategory extends JView
 	 */
 	function display($tpl = null)
 	{
-		// Initialise variables.
-		$user =& JFactory::getUser();
-		$app =& JFactory::getApplication();
-		$uri =& JFactory::getURI();
+		$app		= &JFactory::getApplication();
+		$params		= &$app->getParams('com_weblinks');
 
-		$state = $this->get('State');
-		$params =& $state->params;
-		$item = $this->get('Item');
-		$articles = $this->get('Articles');
+		// Get some data from the models
+		$state		= &$this->get('State');
 
-		// Get child categories based on params
-		$children = array();
-		$showSubcategories = $params->get('show_subcategory_content', '0');
-		if ($showSubcategories == 'next_list' OR $showSubcategories == 'all_list')
-		{
-			//$children = $this->get('Children');
-		}
-		$pagination = $this->get('Pagination');
+		$articles	= &$this->get('Items');
+		$category	= &$this->get('Category');
+		$pagination	= &$this->get('Pagination');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			JError::raiseWarning(500, implode("\n", $errors));
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
+
+		// Validate the category.
+
+		// Make sure the category was found.
+		if (empty($category)) {
+			return JError::raiseWarning(404, JText::_('COM_WEBLINKS_ERROR_CATEGORY_NOT_FOUND'));
+		}
+
+		// Check whether category access level allows access.
+		$user	= &JFactory::getUser();
+		$groups	= $user->authorisedLevels();
+		if (!in_array($category->access, $groups)) {
+			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
+		}
+
+		// Prepare the data.
+		// Prepare category description (runs content plugins)
+		$category->description = JHtml::_('content.prepare', $category->description);
+		
 
 		// PREPARE THE DATA
 
@@ -73,10 +82,23 @@ class ContentViewCategory extends JView
 		foreach ($articles as $i => & $article)
 		{
 			$article->slug = $article->alias ? ($article->id . ':' . $article->alias) : $article->id;
-			$article->catslug = $article->category_alias ? ($article->catid . ':' . $article->category_alias) : $article->catid;
-			$article->parent_slug = $article->parent_alias ? ($article->parent_id . ':' . $article->parent_alias) : $article->parent_id;
 			$article->event = new stdClass();
+			// get display date
+			switch ($article->params->get('show_date'))
+			{
+			case 'modified':
+				$article->displayDate = $article->modified;
+				break;
 
+			case 'published':
+				$article->displayDate = ($article->publish_up == 0) ? $article->created : $article->publish_up;
+				break;
+
+			default:
+			case 'created':
+				$article->displayDate = $article->created;
+				break;
+			}
 			$dispatcher =& JDispatcher::getInstance();
 
 			// Ignore content plugins on links.
@@ -128,11 +150,12 @@ class ContentViewCategory extends JView
 		{
 			$this->link_items[$i] =& $articles[$i];
 		}
-
+		
+		$uri = JURI::getInstance();
 		$this->assign('action', str_replace('&', '&amp;', $uri));
 
 		$this->assignRef('params', $params);
-		$this->assignRef('category', $item);
+		$this->assignRef('category', $category);
 		$this->assignRef('articles', $articles);
 		$this->assignRef('pagination', $pagination);
 		$this->assignRef('user', $user);

@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . DS . 'articles.php';
  * @subpackage	com_content
  * @since 1.5
  */
-class ContentModelFrontpage extends ContentModelArticles
+class ContentModelFeatured extends ContentModelArticles
 {
 	/**
 	 * Model context string.
