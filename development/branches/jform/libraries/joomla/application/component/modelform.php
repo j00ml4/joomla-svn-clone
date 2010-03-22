@@ -29,9 +29,12 @@ class JModelForm extends JModel
 	/**
 	 * Method to allow derived classes to add more forms.
 	 *
+	 * @param	object	A form object.
+	 *
 	 * @return	mixed	True if successful, JError otherwise.
+	 * @since	1.6
 	 */
-	protected function addForms()
+	protected function addForms($form)
 	{
 		return true;
 	}

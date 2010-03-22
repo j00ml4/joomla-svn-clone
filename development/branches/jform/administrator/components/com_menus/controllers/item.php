@@ -326,16 +326,20 @@ class MenusControllerItem extends JControllerForm
 		if ($title != 'alias' && $title != 'separator' && $title != 'url') {
 			$title = 'component';
 		}
+
 		$app->setUserState('com_menus.edit.item.type',	$title);
-		if ($title=='component'){
+
+		if ($title=='component') {
 			if (isset($type->request)) {
 				if (isset($type->request->layout)) {
-				$app->setUserState('com_menus.edit.item.link', 'index.php?option='.  $type->request->option.'&view='.
-					$type->request->view.'&layout='.$type->request->layout);
-				}
-				else {
-			$app->setUserState('com_menus.edit.item.link', 'index.php?option='.  $type->request->option.'&view='.
-					$type->request->view);
+					$app->setUserState(
+						'com_menus.edit.item.link',
+						'index.php?option='.$type->request->option.'&view='.$type->request->view.'&layout='.$type->request->layout
+					);
+				} else {
+					$app->setUserState(
+						'com_menus.edit.item.link',
+						'index.php?option='.$type->request->option.'&view='.$type->request->view);
 				}
 				//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
 				//	$app->setUserState('com_menus.edit.item.data',	null);
@@ -343,14 +347,14 @@ class MenusControllerItem extends JControllerForm
 				//	$app->setUserState('com_menus.edit.item.link',	null);
 			}
 		}
-		//If the type is alias you just need the item id from the menu item referenced.
-		else if ($title=='alias'){
-				$app->setUserState('com_menus.edit.item.link', 'index.php?Itemid=');
+		// If the type is alias you just need the item id from the menu item referenced.
+		else if ($title=='alias') {
+			$app->setUserState('com_menus.edit.item.link', 'index.php?Itemid=');
 
-				//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
-				//	$app->setUserState('com_menus.edit.item.data',	null);
-				//$app->setUserState('com_menus.edit.item.type',	$type->type);
-				//	$app->setUserState('com_menus.edit.item.link',	null);
+			//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
+			//	$app->setUserState('com_menus.edit.item.data',	null);
+			//$app->setUserState('com_menus.edit.item.type',	$type->type);
+			//	$app->setUserState('com_menus.edit.item.link',	null);
 		}
 		//else if ($title=='url'){
 			//	$app->setUserState('com_menus.edit.item.link', null );

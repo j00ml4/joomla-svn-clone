@@ -26,7 +26,7 @@ class MenusViewItem extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$itemForm	= $this->get('Form');
-		$paramsForm	= $this->get('ParamsForm');
+		//$paramsForm	= $this->get('ParamsForm');
 		$modules	= $this->get('Modules');
 
 		// Check for errors.
@@ -36,12 +36,12 @@ class MenusViewItem extends JView
 		}
 
 		$itemForm->bind($item);
-		$paramsForm->bind($item->params);
+		//$paramsForm->bind($item->params);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('item',		$item);
 		$this->assignRef('form',		$itemForm);
-		$this->assignRef('paramsform',	$paramsForm);
+		//$this->assignRef('paramsform',	$paramsForm);
 		$this->assignRef('modules',		$modules);
 
 		parent::display($tpl);
