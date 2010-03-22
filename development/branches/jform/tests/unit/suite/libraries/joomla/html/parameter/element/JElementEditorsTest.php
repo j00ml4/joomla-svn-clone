@@ -1,6 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
+require_once JPATH_BASE.'/libraries/joomla/html/parameter/element.php';
 require_once JPATH_BASE.'/libraries/joomla/html/parameter/element/editors.php';
 
 /**
@@ -42,3 +43,4 @@ class JElementEditorsTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
+?>
