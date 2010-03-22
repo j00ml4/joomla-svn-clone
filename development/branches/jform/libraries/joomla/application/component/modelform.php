@@ -27,41 +27,12 @@ class JModelForm extends JModel
 	protected $_forms = array();
 
 	/**
-	 * Method to check-out a row for editing.
+	 * Method to allow derived classes to add more forms.
 	 *
-	 * @param	int		$pk	The numeric id of the primary key.
-	 *
-	 * @return	boolean	False on failure or error, true otherwise.
+	 * @return	mixed	True if successful, JError otherwise.
 	 */
-	public function checkout($pk = null)
+	protected function addForms()
 	{
-		// Only attempt to check the row in if it exists.
-		if ($pk)
-		{
-			$user = JFactory::getUser();
-
-			// Get an instance of the row to checkout.
-			$table = $this->getTable();
-			if (!$table->load($pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Check if this is the user having previously checked out the row.
-			if ($table->checked_out > 0 && $table->checked_out != $user->get('id'))
-			{
-				$this->setError(JText::_('JError_Checkout_user_mismatch'));
-				return false;
-			}
-
-			// Attempt to check the row out.
-			if (!$table->checkout($user->get('id'), $pk))
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
 		return true;
 	}
 
@@ -75,8 +46,7 @@ class JModelForm extends JModel
 	public function checkin($pk = null)
 	{
 		// Only attempt to check the row in if it exists.
-		if ($pk)
-		{
+		if ($pk) {
 			$user = JFactory::getUser();
 
 			// Get an instance of the row to checkin.
@@ -87,15 +57,49 @@ class JModelForm extends JModel
 			}
 
 			// Check if this is the user having previously checked out the row.
-			if ($table->checked_out > 0 && $table->checked_out != $user->get('id'))
-			{
+			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
 				$this->setError(JText::_('JError_Checkin_user_mismatch'));
 				return false;
 			}
 
 			// Attempt to check the row in.
-			if (!$table->checkin($pk))
-			{
+			if (!$table->checkin($pk)) {
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to check-out a row for editing.
+	 *
+	 * @param	int		$pk	The numeric id of the primary key.
+	 *
+	 * @return	boolean	False on failure or error, true otherwise.
+	 */
+	public function checkout($pk = null)
+	{
+		// Only attempt to check the row in if it exists.
+		if ($pk) {
+			$user = JFactory::getUser();
+
+			// Get an instance of the row to checkout.
+			$table = $this->getTable();
+			if (!$table->load($pk)) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Check if this is the user having previously checked out the row.
+			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
+				$this->setError(JText::_('JError_Checkout_user_mismatch'));
+				return false;
+			}
+
+			// Attempt to check the row out.
+			if (!$table->checkout($user->get('id'), $pk)) {
 				$this->setError($table->getError());
 				return false;
 			}
@@ -132,21 +136,21 @@ class JModelForm extends JModel
 		// Get the form.
 		JForm::addFormPath(JPATH_COMPONENT.'/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT.'/models/fields');
-		$form = & JForm::getInstance($name, $data, $options, false, $xpath);
 
-		// Check for an error.
-		if (JError::isError($form))
-		{
-			$this->setError($form->getMessage());
+		try {
+			$form = JForm::getInstance($name, $data, $options, false, $xpath);
+
+			// Allow for supplemental data to be loaded before the triggers.
+			$this->addForms($form);
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			$false = false;
-			return $form;
 		}
 
 		// Look for an event to fire.
-		if ($options['event'] !== null)
-		{
+		if ($options['event'] !== null) {
 			// Get the dispatcher.
-			$dispatcher	= &JDispatcher::getInstance();
+			$dispatcher	= JDispatcher::getInstance();
 
 			// Load an optional plugin group.
 			if ($options['group'] !== null) {
@@ -157,8 +161,7 @@ class JModelForm extends JModel
 			$results = $dispatcher->trigger($options['event'], array($form->getName(), $form));
 
 			// Check for errors encountered while preparing the form.
-			if (count($results) && in_array(false, $results, true))
-			{
+			if (count($results) && in_array(false, $results, true)) {
 				// Get the last error.
 				$error = $dispatcher->getError();
 
@@ -176,6 +179,8 @@ class JModelForm extends JModel
 
 		return $form;
 	}
+
+
 
 	/**
 	 * Method to validate the form data.
@@ -198,8 +203,7 @@ class JModelForm extends JModel
 		}
 
 		// Check the validation results.
-		if ($return === false)
-		{
+		if ($return === false) {
 			// Get the validation messages from the form.
 			foreach ($form->getErrors() as $message) {
 				$this->setError($message);

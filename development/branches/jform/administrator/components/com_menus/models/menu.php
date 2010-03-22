@@ -99,11 +99,10 @@ class MenusModelMenu extends JModelForm
 		$app = &JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('com_menus.menu', 'menu', array('control' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_menus.menu', 'menu', array('control' => 'jform', 'event' => 'onPrepareForm'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 

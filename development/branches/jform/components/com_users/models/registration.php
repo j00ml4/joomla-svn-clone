@@ -43,18 +43,16 @@ class UsersModelRegistration extends JModelForm
 	 * The base form is loaded from XML and then an event is fired
 	 * for users plugins to extend the form with extra fields.
 	 *
-	 * @access	public
 	 * @return	mixed		JForm object on success, false on failure.
 	 * @since	1.0
 	 */
-	function getForm()
+	public function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('com_users.registration', 'registration', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_users.registration', 'registration', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
