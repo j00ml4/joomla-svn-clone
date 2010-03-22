@@ -147,16 +147,6 @@
 		</field>
 
 		<field
-			name="params"
-			type="textarea"
-			label="JCOMMON_PARAMS_LABEL"
-			description="COM_MENUS_ITEM_FIELD_PARAMS_DESC"
-			default=""
-			rows="3"
-			cols="60"
-			class="inputbox"/>
-
-		<field
 			name="home"
 			type="radio"
 			label="COM_MENUS_ITEM_FIELD_HOME_LABEL"
@@ -200,4 +190,7 @@
 			type="hidden"
 			filter="unset"/>
 	</fieldset>
+	
+	<fields name="params">
+	</fields>
 </form>

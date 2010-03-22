@@ -42,11 +42,108 @@ class MenusModelItem extends JModelForm
 	}
 
 	/**
-	 * Add supplemental forms to the main form.
+	 * @param	object	A form object.
+	 *
+	 * @return	mixed	True if successful, JError otherwise.
+	 * @since	1.6
 	 */
-	protected function addForms()
+	protected function addForms($form)
 	{
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
 
+		// Initialise variables.
+		$formFile		= null;
+
+		// Determine the link type.
+		$type = $this->getState('item.type');
+
+		// Initialise form with component view params if available.
+
+		if ($type == 'component') {
+
+			if ($item = $this->getItem()) {
+				$link = htmlspecialchars_decode($item->link);
+			} else {
+				$link = $this->getState('item.link');
+			}
+
+			// Parse the link arguments.
+			$args = array();
+			parse_str(parse_url(htmlspecialchars_decode($link), PHP_URL_QUERY), $args);
+
+			// Confirm that the option is defined.
+			$option = '';
+			if (isset($args['option'])) {
+				// The option determines the base path to work with.
+				$option = $args['option'];
+				$base	= JPATH_SITE.'/components/'.$option;
+			}
+
+			// Confirm a view is defined.
+			if (isset($args['view'])) {
+				$view = $args['view'];
+
+				// Determine the layout to search for.
+				if (isset($args['layout'])) {
+					$layout = $args['layout'];
+				} else {
+					$layout = 'default';
+				}
+
+				$formFile = false;
+
+				// Check for the layout XML file. Use standard xml file if it exists.
+				$path = JPath::clean($base.'/views/'.$view.'/tmpl/'.$layout.'.xml');
+				if (JFile::exists($path)) {
+					$formFile = $path;
+				}
+
+				// if custom layout, get the xml file from the template folder
+				// TODO: only look in the template folder for the menu item's template
+				if (!$formFile) {
+					$folders = JFolder::folders(JPATH_SITE.'/templates','',false,true);
+					foreach($folders as $folder) {
+						if (JFile::exists($folder.'/html/'.$option.'/'.$view.'/'.$layout.'.xml')) {
+							$formFile = $folder.'/html/'.$option.'/'.$view.'/'.$layout.'.xml';
+							break;
+						}
+					}
+				}
+
+				// TODO: Now check for a view manifest file
+				// TODO: Now check for a component manifest file
+			}
+
+			if ($formFile) {
+				// If an XML file was found in the component, load it first.
+				// We need to qualify the full path to avoid collisions with component file names.
+
+				//$form = parent::getForm($formFile, $formName, $formOptions, true);
+
+				if ($form->loadFile($formFile, false, false) == false) {
+					$this->setError($form->getMessage());
+					return false;
+				}
+			}
+
+			// Now load the component params.
+			if ($isNew = false) {
+				$path = JPath::clean(JPATH_ADMINISTRATOR.'/components/'.$option.'/config.xml');
+			} else {
+				$path='null';
+			}
+
+			if (JFile::exists($path)) {
+				// Add the component params last of all to the existing form.
+				$form->load($path, true, '/config');
+			}
+		}
+
+		// Load the specific type file
+		$form->loadFile('item_'.$type, false, false);
+
+		return true;
 	}
 
 	/**
@@ -74,8 +171,8 @@ class MenusModelItem extends JModelForm
 		}
 		$this->setState('item.menutype', $menuType);
 
-		if ($type = $app->getUserState('com_menus.edit.item.type')){
-	//		$type = JRequest::getCmd('type', 'url');
+		if (!($type = $app->getUserState('com_menus.edit.item.type'))){
+			$type = JRequest::getCmd('type', 'url');
 		}
 		$this->setState('item.type', $type);
 
