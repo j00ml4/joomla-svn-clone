@@ -2,14 +2,12 @@
 <!-- $Id$ -->
 <form>
 	<fieldset>
-		<field name="token" type="text" id="token"
-			label="Users_Reset_Token_Label"
+		<field name="token" type="text"
 			description="Users_Reset_Token_Desc"
-			class="inputbox"
-			size="32"
-			default=""
-			required="true"
 			filter="alnum"
+			label="Users_Reset_Token_Label"
+			required="true"
+			size="32"
 			validate="md5"
 		/>
 	</fieldset>
