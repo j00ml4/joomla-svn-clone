@@ -36,12 +36,8 @@ class NewsfeedsViewCategories extends JView
 		$app		= &JFactory::getApplication();
 
 		$state		= $this->get('State');
-		//$items		= $this->get('Items');
-		$categories = JCategories::getInstance('com_newsfeeds');
-		$parentId = JRequest::getInt('id');
-		$items		= clone($categories->get($parentId > 0 ? $parentId : 'root'));
-		$pagination	= $this->get('Pagination');
-
+		$items		= $this->get('Items');
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
@@ -50,18 +46,13 @@ class NewsfeedsViewCategories extends JView
 
 		$params = &$state->params;
 
-		// PREPARE THE DATA
-
-		// Compute the newsfeed slug and prepare description (runs content plugins).
-		foreach ($items as $i => &$item)
-		{
-			//$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
-			//$item->description	= JHtml::_('content.prepare', $item->description);
-		}
-
+		$parent = reset($items)->getParent();
+		$items = array(($parent->level + 1) => $items);
+		
+		$this->assignRef('maxLevel',	$params->get('maxLevel', 0));
 		$this->assignRef('params',		$params);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('parent',		$parent);
+		$this->assignRef('itemsLevel',	$items);
 		$this->assignRef('user',		$user);
 
 		$this->_prepareDocument();
@@ -74,7 +65,7 @@ class NewsfeedsViewCategories extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app	= &JFactory::getApplication();
+			$app	= &JFactory::getApplication();
 		$menus	= &JSite::getMenu();
 		$title	= null;
 

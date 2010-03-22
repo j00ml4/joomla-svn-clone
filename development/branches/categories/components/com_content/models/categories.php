@@ -38,6 +38,11 @@ class ContentModelCategories extends JModel
 	 *
 	 * @since	1.6
 	 */
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * @since	1.6
+	 */
 	protected function _populateState()
 	{
 		$app = &JFactory::getApplication();
@@ -46,7 +51,7 @@ class ContentModelCategories extends JModel
 
 		// Get the parent id if defined.
 		$parentId = JRequest::getInt('id');
-		$this->setState('filter.parent_id', $parentId);
+		$this->setState('filter.parentId', $parentId);
 
 		$params = $app->getParams();
 		$this->setState('params', $params);
@@ -72,32 +77,23 @@ class ContentModelCategories extends JModel
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.parent_id');
 
 		return parent::_getStoreId($id);
 	}
 
 	/**
-	 * Get the categories
+	 * @param	boolean	True to join selected foreign information
 	 *
-	 * @return mixed An array of data items on success, false on failure.
+	 * @return	string
 	 */
-	public function getItems()
+	function getItems()
 	{
-		$categories = JCategories::getInstance('com_content');
-		if((int)$this->getState('filter.parent_id') > 0)
-		{
-			$temp = $categories->get($this->getState('filter.parent_id'));
-		} else {
-			$temp = $categories->get('root');
-		}
-		if($temp instanceof JCategoryNode)
-		{
-			return $temp->getChildren();
-		}
-		return false;
+		$options = array(
+				'published', $this->getState('filter.published', 1),
+				'access', $this->getState('filter.access', true)
+				);
+		$categories = JCategories::getInstance($this->getState('extension', 'com_content'), $options);
+		$category = $categories->get($this->getState('parentId', 'root'));
+		return $category->getChildren();
 	}
-	
-	
-	
 }

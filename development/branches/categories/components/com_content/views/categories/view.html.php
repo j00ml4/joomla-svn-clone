@@ -33,9 +33,10 @@ class ContentViewCategories extends JView
 		// Initialise variables.
 		$user		= &JFactory::getUser();
 		$app		= &JFactory::getApplication();
+
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
-
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
@@ -44,8 +45,13 @@ class ContentViewCategories extends JView
 
 		$params = &$state->params;
 
+		$parent = reset($items)->getParent();
+		$items = array(($parent->level + 1) => $items);
+		
+		$this->assignRef('maxLevel',	$params->get('maxLevel', 0));
 		$this->assignRef('params',		$params);
-		$this->assignRef('items',		$items);
+		$this->assignRef('parent',		$parent);
+		$this->assignRef('itemsLevel',	$items);
 		$this->assignRef('user',		$user);
 
 		$this->_prepareDocument();
@@ -58,7 +64,7 @@ class ContentViewCategories extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app	= &JFactory::getApplication();
+			$app	= &JFactory::getApplication();
 		$menus	= &JSite::getMenu();
 		$title	= null;
 

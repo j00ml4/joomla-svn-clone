@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
+// If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="jcategories-list<?php echo $pageClass;?>">
@@ -25,13 +26,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php endif; ?>
 </h1>
 <?php endif; ?>
-
-<?php
-$this->parent = reset($this->items)->getParent();
-$this->itemsLevel[$this->parent->level + 1] = $this->items;
-$this->maxLevel = 0;
+<?php 
 echo $this->loadTemplate('items'); 
-
 ?>
 
 </div>

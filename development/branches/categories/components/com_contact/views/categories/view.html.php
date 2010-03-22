@@ -46,18 +46,14 @@ class ContactViewCategories extends JView
 		}
 
 		$params = &$state->params;
-
-		// PREPARE THE DATA
-
-		// Compute the contact slug and prepare description (runs content plugins).
-		foreach ($items as $i => &$item)
-		{
-			$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
-			$item->description	= JHtml::_('content.prepare', $item->description);
-		}
-
+		
+		$parent = reset($items)->getParent();
+		$items = array(($parent->level + 1) => $items);
+		
+		$this->assignRef('maxLevel',	$params->get('maxLevel', 0));
 		$this->assignRef('params',		$params);
-		$this->assignRef('items',		$items);
+		$this->assignRef('parent',		$parent);
+		$this->assignRef('itemsLevel',	$items);
 		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('user',		$user);
 
