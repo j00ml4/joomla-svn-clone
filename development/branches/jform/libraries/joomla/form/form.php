@@ -1722,7 +1722,7 @@ class JForm
 	 * @throws	JException if no data is supplied when calling a named form.
 	 * @since	1.6
 	 */
-	public static function getInstance($name = 'form', $data = null, $options = array(), $replace = true, $xpath = false)
+	public static function getInstance($name, $data = null, $options = array(), $replace = true, $xpath = false)
 	{
 		// Only instantiate the form if it does not already exist.
 		if (!isset(self::$forms[$name])) {

@@ -74,7 +74,7 @@ class WeblinksModelForm extends JModelForm
 	{
 		$options += array('array' => 'jform', 'event' => 'onPrepareForm');
 
-		$form = parent::getForm($xml, $name, $options);
+		$form = parent::getForm($name, $xml, $options);
 
 		return $form;
 	}

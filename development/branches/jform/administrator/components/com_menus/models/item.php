@@ -219,7 +219,7 @@ class MenusModelItem extends JModelForm
 		$app	= &JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('item', 'com_menus.item', array('control' => 'jform', 'event' => 'onPrepareForm'), true);
+		$form = parent::getForm('com_menus.item', 'item', array('control' => 'jform', 'event' => 'onPrepareForm'), true);
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -368,7 +368,7 @@ class MenusModelItem extends JModelForm
 
 		// If no component file found, or not a component, create the form.
 		if (empty($form)) {
-			$form = parent::getForm('item_'.$type, $formName, $formOptions, true);
+			$form = parent::getForm($formName, 'item_'.$type, $formOptions, true);
 
 			// Check for an error.
 			if (JError::isError($form)) {

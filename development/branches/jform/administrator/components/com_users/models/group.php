@@ -105,7 +105,7 @@ class UsersModelGroup extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('group', 'com_users.group', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_users.group', 'group', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

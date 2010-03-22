@@ -107,13 +107,14 @@ class JModelForm extends JModel
 	/**
 	 * Method to get a form object.
 	 *
-	 * @param	string		$xml		The form data. Can be XML string if file flag is set to false.
+	 * @param	string		$name		The name of the form.
+	 * @param	string		$data		The form data. Can be XML string if file flag is set to false.
 	 * @param	array		$options	Optional array of parameters.
 	 * @param	boolean		$clear		Optional argument to force load a new form.
 	 * @param	string		$xpath		An optional xpath to search for the fields.
 	 * @return	mixed		JForm object on success, False on error.
 	 */
-	function getForm($xml, $name = 'form', $options = array(), $clear = false, $xpath = false)
+	function getForm($name, $data = null, $options = array(), $clear = false, $xpath = false)
 	{
 		// Handle the optional arguments.
 		$options['control']	= JArrayHelper::getValue($options, 'control', false);
@@ -121,7 +122,7 @@ class JModelForm extends JModel
 		$options['group']	= JArrayHelper::getValue($options, 'group');
 
 		// Create a signature hash.
-		$hash = md5($xml.serialize($options));
+		$hash = md5($data.serialize($options));
 
 		// Check if we can use a previously loaded form.
 		if (isset($this->_forms[$hash]) && !$clear) {
@@ -131,7 +132,7 @@ class JModelForm extends JModel
 		// Get the form.
 		JForm::addFormPath(JPATH_COMPONENT.'/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT.'/models/fields');
-		$form = & JForm::getInstance($name, $xml, $options, false, $xpath);
+		$form = & JForm::getInstance($name, $data, $options, false, $xpath);
 
 		// Check for an error.
 		if (JError::isError($form))

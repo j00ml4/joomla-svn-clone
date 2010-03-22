@@ -41,7 +41,7 @@ class UsersModelRemind extends JModelForm
 	function &getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('remind', 'com_users.remind', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_users.remind', 'remind', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

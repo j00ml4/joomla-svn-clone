@@ -58,7 +58,7 @@ class UsersModelProfile extends JModelForm
 	function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('profile', 'com_users.profile', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_users.profile', 'profile', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

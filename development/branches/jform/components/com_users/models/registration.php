@@ -50,7 +50,7 @@ class UsersModelRegistration extends JModelForm
 	function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('registration', 'com_users.registration', array('array' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_users.registration', 'registration', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

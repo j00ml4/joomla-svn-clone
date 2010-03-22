@@ -239,7 +239,7 @@ class ModulesModelModule extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('module', 'com_modules.module', array('control' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm('com_modules.module', 'module', array('control' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -297,7 +297,7 @@ class ModulesModelModule extends JModelForm
 		{
 			// If an XML file was found in the component, load it first.
 			// We need to qualify the full path to avoid collisions with component file names.
-			$form = parent::getForm($formFile, $formName, $formOptions, true);
+			$form = parent::getForm($formName, $formFile, $formOptions, true);
 
 			// Check for an error.
 			if (JError::isError($form)) {
