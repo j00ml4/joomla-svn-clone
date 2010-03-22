@@ -1719,7 +1719,7 @@ class JForm
 	 * @param	string	$xpath		An optional xpath to search for the fields.
 	 *
 	 * @return	object	JForm instance.
-	 * @throws	JException if no data is supplied when calling a named form.
+	 * @throws	Exception if an error occurs.
 	 * @since	1.6
 	 */
 	public static function getInstance($name, $data = null, $options = array(), $replace = true, $xpath = false)
@@ -1730,7 +1730,7 @@ class JForm
 			$data = trim($data);
 
 			if (empty($data)) {
-				throw new JException('JFORM_ERROR_NO_DATA');
+				throw new Exception('JFORM_ERROR_NO_DATA');
 			}
 
 			// Instantiate the form.
@@ -1738,9 +1738,15 @@ class JForm
 
 			// Load the data.
 			if (substr(trim($data), 0, 1) == '<') {
-				self::$forms[$name]->load($data, $replace, $xpath);
+				if (self::$forms[$name]->load($data, $replace, $xpath) == false) {
+					throw new Excpetion('JFORM_ERROR_XML_FILE_DID_NOT_LOAD');
+					return false;
+				}
 			} else {
-				self::$forms[$name]->loadFile($data, $replace, $xpath);
+				if (self::$forms[$name]->loadFile($data, $replace, $xpath) == false) {
+					throw new Exception('JFORM_ERROR_XML_FILE_DID_NOT_LOAD');
+					return false;
+				}
 			}
 		}
 
