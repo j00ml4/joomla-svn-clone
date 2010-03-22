@@ -55,11 +55,17 @@ class ConfigModelComponent extends JModelForm
 			JForm::addFormPath($path);
 		} else {
 			// Add the search path for the admin component config.xml file.
-			JForm::addFormPath(JPATH_ADMINISTRATOR.DS.'components'.DS.$option);
+			JForm::addFormPath(JPATH_ADMINISTRATOR.'/components/'.$option);
 		}
 
 		// Get the form.
-		$form = parent::getForm('config', 'com_config.component', array('control' => 'jform', 'event' => 'onPrepareForm'));
+		$form = parent::getForm(
+			'config',
+			'com_config.component',
+			array('control' => 'jform', 'event' => 'onPrepareForm'),
+			false,
+			'/config'
+		);
 
 		// Check for an error.
 		if (JError::isError($form)) {

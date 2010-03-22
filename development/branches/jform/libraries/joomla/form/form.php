@@ -571,6 +571,7 @@ class JForm
 	 * @param	string	$data		The name of an XML string or object.
 	 * @param	string	$replace	Flag to toggle whether form fields should be replaced if a field
 	 *								already exists with the same group/name.
+	 * @param	string	$xpath		An optional xpath to search for the fields.
 	 *
 	 * @return	boolean	True on success, false otherwise.
 	 * @since	1.6
@@ -661,13 +662,15 @@ class JForm
 	 * fields in the new XML file unless the $reset parameter has been set
 	 * to false.
 	 *
-	 * @param	string	$file	The filesystem path of an XML file.
-	 * @param	string	$reset	Flag to toggle whether the form description should be reset.
+	 * @param	string	$file		The filesystem path of an XML file.
+	 * @param	string	$replace	Flag to toggle whether form fields should be replaced if a field
+	 *								already exists with the same group/name.
+	 * @param	string	$xpath		An optional xpath to search for the fields.
 	 *
 	 * @return	boolean	True on success, false otherwise.
 	 * @since	1.6
 	 */
-	public function loadFile($file, $reset = true)
+	public function loadFile($file, $reset = true, $xpath = false)
 	{
 		// Check to see if the path is an absolute path.
 		if (!is_file($file)) {
@@ -680,11 +683,10 @@ class JForm
 				return false;
 			}
 		}
-
 		// Attempt to load the XML file.
 		$xml = JFactory::getXML($file, true);
 
-		return $this->load($xml, $reset);
+		return $this->load($xml, $reset, $xpath);
 	}
 
 	/**
@@ -1709,27 +1711,36 @@ class JForm
 	/**
 	 * Method to get an instance of a form.
 	 *
-	 * @param	string	$data		The name of an XML file or string to load as the form definition.
 	 * @param	string	$name		The name of the form.
-	 * @param	string	$file		Flag to toggle whether the $data is a file path or a string.
+	 * @param	string	$data		The name of an XML file or string to load as the form definition.
 	 * @param	array	$options	An array of form options.
+	 * @param	string	$replace	Flag to toggle whether form fields should be replaced if a field
+	 *								already exists with the same group/name.
+	 * @param	string	$xpath		An optional xpath to search for the fields.
 	 *
 	 * @return	object	JForm instance.
+	 * @throws	JException if no data is supplied when calling a named form.
 	 * @since	1.6
 	 */
-	public static function getInstance($data, $name = 'form', $file = true, $options = array())
+	public static function getInstance($name = 'form', $data = null, $options = array(), $replace = true, $xpath = false)
 	{
 		// Only instantiate the form if it does not already exist.
 		if (!isset(self::$forms[$name])) {
+
+			$data = trim($data);
+
+			if (empty($data)) {
+				throw new JException('JFORM_ERROR_NO_DATA');
+			}
 
 			// Instantiate the form.
 			self::$forms[$name] = new JForm($name, $options);
 
 			// Load the data.
-			if ($file) {
-				self::$forms[$name]->loadFile($data);
+			if (substr(trim($data), 0, 1) == '<') {
+				self::$forms[$name]->load($data, $replace, $xpath);
 			} else {
-				self::$forms[$name]->load($data);
+				self::$forms[$name]->loadFile($data, $replace, $xpath);
 			}
 		}
 
