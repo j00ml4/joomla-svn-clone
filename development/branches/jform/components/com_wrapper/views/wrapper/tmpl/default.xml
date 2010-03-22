@@ -14,6 +14,7 @@
 				description="COM_WRAPPER_FIELD_URL_DESC"
 				label="COM_WRAPPER_FIELD_URL_LABEL"
 				size="30"
+				required="true"
 			/>
 		</fieldset>
 	</fields>
@@ -22,7 +23,7 @@
 	<fields name="params">
 
 		<!-- Basic options. -->
-		<fieldset group="basic" label="COM_WRAPPER_FIELD_LABEL_SCROLLBARSPARAMS" description="">
+		<fieldset name="basic" label="COM_WRAPPER_FIELD_LABEL_SCROLLBARSPARAMS" description="">
 
 			<field name="scrolling" type="radio"
 				default="auto"
@@ -50,7 +51,7 @@
 		</fieldset>
 
 		<!-- Advanced options. -->
-		<fieldset group="advanced" label="MENUS_LAYOUT_ADVANCED_OPTIONS_LABEL" description="">
+		<fieldset name="advanced" label="MENUS_LAYOUT_ADVANCED_OPTIONS_LABEL" description="">
 
 			<field name="height_auto" type="radio"
 				default="0"
