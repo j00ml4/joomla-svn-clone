@@ -823,6 +823,14 @@ class JFormTest extends JoomlaTestCase
 	}
 
 	/**
+	 * Test for JForm::getInstance.
+	 */
+	public function testGetInstance()
+	{
+		$this->markTestIncomplete();
+	}
+
+	/**
 	 * Test for JForm::getGroup method.
 	 */
 	public function testGetGroup()
