@@ -6,8 +6,10 @@
 		</message>
 	</layout>
 
+	<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
 
+		<!-- Basic options. -->
 		<fieldset name="basic"
 			label="Menus_Layout_Basic_Options_Label"
 		>
@@ -41,6 +43,7 @@
 			/>
 		</fieldset>
 
+		<!-- Advanced options. -->
 		<fieldset name="advanced"
 			label="Menus_Layout_Advanced_Options_Label"
 		>
@@ -130,6 +133,7 @@
 			</field>
 		</fieldset>
 
+		<!-- Integration options. -->
 		<fieldset name="integration"
 			label="Menus_Layout_Integration_Options_Label"
 		>
@@ -171,6 +175,7 @@
 			</field>
 		</fieldset>
 
+		<!-- Articles options. -->
 		<fieldset name="articles"
 			label="Content_Attribs_Article_Settings_Label"
 		>

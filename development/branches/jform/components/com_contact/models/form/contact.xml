@@ -235,7 +235,7 @@
 
 	</fieldset>
 
-	<fieldset name="metadata">
+	<fields name="metadata">
 		<fieldset name="metadata" label="">
 
 			<field name="robots" type="text"
@@ -251,9 +251,9 @@
 			/>
 
 		</fieldset>
-	</fieldset>
+	</fields>
 
-	<fieldset name="params">
+	<fields name="params">
 		<fieldset name="options" label="Contact_Parameters">
 
 		<field name="show_name" type="list"
@@ -479,9 +479,9 @@
 		/>
 
 		</fieldset>
-	</fieldset>
+	</fields>
 
-	<fieldset  name="email_form">
+	<fields name="email_form">
 		<fieldset name="email_form" label="Contact_Email_Form_Label">
 	
 		<field name="show_email_form" type="list"
@@ -554,6 +554,6 @@
 		/>	
 		
 		</fieldset>
-	</fieldset>
+	</fields>
 </form>
 	
