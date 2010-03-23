@@ -73,7 +73,7 @@ class JFormFieldModuleLayout extends JFormFieldList
 
 		// Get the module.
 		$module = (string) $this->element['module'];
-		if (empty($module) && (!$this->form instanceof JForm)) {
+		if (empty($module) && ($this->form instanceof JForm)) {
 			$module = $this->form->getValue('module');
 		}
 		$module = preg_replace('#\W#', '', $module);
