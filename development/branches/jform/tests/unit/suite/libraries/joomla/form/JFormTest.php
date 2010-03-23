@@ -1671,7 +1671,7 @@ class JFormTest extends JoomlaTestCase
 
 		$this->assertThat(
 			$form->getFieldAttribute('title', 'required', 'default'),
-			$this->isTrue(),
+			$this->equalTo('true'),
 			'Line:'.__LINE__.' The label should contain just the new label.'
 		);
 	}
