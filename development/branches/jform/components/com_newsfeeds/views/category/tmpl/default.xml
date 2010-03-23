@@ -10,8 +10,6 @@
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_newsfeeds/models/fields"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		 >
 
 			<field name="id" type="category"
@@ -29,7 +27,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			label="COM_NEWSFEEDS_FEED_CATEGORY_OPTIONS_LABEL"
 		>
 
 			<field name="show_headings" type="list"

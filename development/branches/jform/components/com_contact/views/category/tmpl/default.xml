@@ -11,8 +11,6 @@
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_contact/models/fields"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		>
 
 			<field name="catid" type="category"
@@ -30,7 +28,6 @@
 	
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			label="Menus_Layout_Basic_Options_Label"
 		>
 
 			<field name="display_num" type="list"

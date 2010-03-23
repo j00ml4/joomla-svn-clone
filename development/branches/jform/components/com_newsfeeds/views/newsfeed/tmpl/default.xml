@@ -10,8 +10,6 @@
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_newsfeeds/models/fields"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		 >
 
 			<field name="id" type="newsfeed"
@@ -28,8 +26,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			description="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_DESC"
-			label="COM_NEWSFEEDS_FIELD_FEED_OPTIONS_LABEL"
 		>
 
 			<field name="show_feed_image" type="list"
