@@ -63,6 +63,11 @@ class JFormFieldTimezone extends JFormFieldGroupedList
 		// Build the group lists.
 		foreach ($zones as $zone) {
 
+			// Time zones not in a group we will ignore.
+			if (strpos($zone, '/') === false) {
+				continue;
+			}
+
 			// Get the group/locale from the timezone.
 			list ($group, $locale) = explode('/', $zone, 2);
 
