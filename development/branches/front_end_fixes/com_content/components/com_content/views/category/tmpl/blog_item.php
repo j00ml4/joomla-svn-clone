@@ -66,7 +66,7 @@ $params =& $this->item->params;
 		<dd class="parent-category-name">
 			<?php $title = $this->escape($this->item->parent_title);
 				$url = '<a href="' . JRoute::_(ContentRoute::category($this->item->parent_slug)) . '">' . $title . '</a>'; ?>
-			<?php if ($params->get('link_parent_category')) : ?>
+			<?php if (($params->get('link_parent_category')) AND ($this->item->parent_slug)) : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $url); ?>
 				<?php else : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $title); ?>
