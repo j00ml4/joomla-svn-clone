@@ -2,7 +2,7 @@
 <config>
 
 <fieldset
-		group="newsfeed"
+		name="newsfeed"
 		label="COM_NEWSFEEDS_FIELD_CONFIG_NEWSFEED_SETTINGS_LABEL"
 		description="COM_NEWSFEEDS_FIELD_CONFIG_NEWSFEED_SETTINGS_DESC">
 
@@ -59,7 +59,7 @@
 	</fieldset>
 	
 	<fieldset
-		group="category"
+		name="category"
 		label="COM_NEWSFEEDS_FIELD_CONFIG_CATEGORY_SETTINGS_LABEL"
 		description="COM_NEWSFEEDS_FIELD_CONFIG_CATEGORY_SETTINGS_DESC">
 
@@ -210,10 +210,10 @@
 	</fieldset>
 
 	<fieldset
-		group="permissions"
+		name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
-		hidden="true">
+		>
 
 		<field
 			name="rules"

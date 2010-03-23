@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset
-		group="blocking"
+		name="blocking"
 		label="Comments_Config_Blocking_Label"
 		description="Comments_Config_Blocking_Label"
-		hidden="true">
+		>
 		<field
 			name="blockusers"
 			type="textarea"
@@ -32,10 +32,10 @@
 	</fieldset>
 
 	<fieldset
-		group="bookmarking"
+		name="bookmarking"
 		label="Comments_Config_Bookmarking_Label"
 		description="Comments_Config_Bookmarking_Label"
-		hidden="true">
+		>
 		<field
 			name="sharing_style"
 			type="list"
@@ -764,10 +764,10 @@
 	</fieldset>
 
 	<fieldset
-		group="comments"
+		name="comments"
 		label="Comments_Config_Comments_Label"
 		description="Comments_Config_Comments_Label"
-		hidden="true">
+		>
 		<field
 			name="enable_comments"
 			type="radio"
@@ -1065,10 +1065,10 @@
 	</fieldset>
 
 	<fieldset
-		group="spam"
+		name="spam"
 		label="Comments_Config_Spam_Label"
 		description="Comments_Config_Spam_Label"
-		hidden="true">
+		>
 		<field
 			name="minlength"
 			type="text"
@@ -1182,10 +1182,10 @@
 	</fieldset>
 
 	<fieldset
-		group="permissions"
+		name="permissions"
 		label="JConfig_Permissions_Label"
 		description="JConfig_Permissions_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="rules"
