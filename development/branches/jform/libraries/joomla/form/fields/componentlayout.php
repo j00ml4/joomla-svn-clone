@@ -66,7 +66,7 @@ class JFormFieldComponentLayout extends JFormFieldList
 
 		// Get the extension.
 		$extn = (string) $this->element['extension'];
-		if (empty($extn) && (!$this->form instanceof JForm)) {
+		if (empty($extn) && ($this->form instanceof JForm)) {
 			$extn = $this->form->getValue('extension');
 		}
 		$extn = preg_replace('#\W#', '', $extn);
