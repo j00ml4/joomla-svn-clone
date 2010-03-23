@@ -1044,11 +1044,6 @@ class JForm
 		// Get the field filter type.
 		$filter = (string) $element['filter'];
 
-		// If no filter is set return the raw value.
-		if (!$filter) {
-			return $value;
-		}
-
 		// Process the input value based on the filter.
 		$return = null;
 		switch (strtoupper($filter))
