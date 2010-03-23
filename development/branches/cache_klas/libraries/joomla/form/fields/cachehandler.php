@@ -35,18 +35,18 @@ class JFormFieldCacheHandler extends JFormFieldList
 	protected function _getOptions()
 	{
 		jimport('joomla.cache.cache');
-		$stores		= JCache::getStores();
-		$options	= array();
+		$stores	= JCache::getStores();
+		$options = array();
 
 		// Convert to name => name array.
 		foreach ($stores as $store) {
 			$options[$store] = $store;
 		}
-		
-		$options	= array_merge(
-						parent::_getOptions(),
-						$options
-					);
+
+		$options = array_merge(
+		parent::_getOptions(),
+		$options
+		);
 
 		return $options;
 	}
