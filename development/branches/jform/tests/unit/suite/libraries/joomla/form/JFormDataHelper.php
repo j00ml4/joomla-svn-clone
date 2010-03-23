@@ -31,6 +31,8 @@ class JFormDataHelper
 				<field
 					name="show_author" />
 			</fieldset>
+			<field
+				name="categories" />
 		</fields>
 	</fields>
 </form>';

@@ -35,7 +35,7 @@ class MenusViewItem extends JView
 		}
 
 		$form->bind($item);
-die;
+
 		$this->assignRef('state',	$state);
 		$this->assignRef('item',	$item);
 		$this->assignRef('form',	$form);
