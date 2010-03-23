@@ -32,7 +32,7 @@ defined('_JEXEC') or die;
 	$fieldSets = $this->form->getFieldsets('params');
 
 	foreach ($fieldSets as $name => $fieldSet) :
-		$label = isset($fieldSet->label) ? $fieldSet->label : 'Config_'.$name;
+		$label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_MENUS_'.$name.'_FIELDSET_LABEL';
 		echo JHtml::_('sliders.panel',JText::_($label), $name.'-options');
 			if (isset($fieldSet->description) && trim($fieldSet->description)) :
 				echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
