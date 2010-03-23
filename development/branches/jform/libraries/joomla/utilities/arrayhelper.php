@@ -239,6 +239,26 @@ class JArrayHelper
 	}
 
 	/**
+	 * Method to determine if an array is an associative array.
+	 *
+	 * @param	array		An array to test.
+	 * @return	boolean		True if the array is an associative array.
+	 * @since    1.6
+	 */
+	static public function isAssociative($array)
+	{
+		if (is_array($array)) {
+			foreach (array_keys($array) as $k => $v) {
+				if ($k !== $v) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Utility function to sort an array of objects on a given field
 	 *
 	 * @static
