@@ -54,11 +54,11 @@ $params =& $this->item->params;
 
 <?php echo $this->item->event->beforeDisplayContent; ?>
 
-<?php // to do not that elegant would be nice to group the params ?>
+<?php $useDefList = (($params->get('show_author')) OR ($params->get('show_category')) OR ($params->get('show_parent_category')) 
+	OR ($params->get('show_create_date')) OR ($params->get('show_modify_date')) OR ($params->get('show_publish_date')) 
+	OR ($params->get('show_hits'))); ?>
 
-<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_parent_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date'))
-	or ($params->get('show_publish_date'))) :
-?>
+<?php if ($useDefList) : ?>
  <dl class="article-info">
  <dt class="article-info-term"><?php echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
 <?php endif; ?>
@@ -111,8 +111,7 @@ $params =& $this->item->params;
 		<?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $this->item->hits); ?>
 		</dd>
 <?php endif; ?>
-<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date'))
-			or ($params->get('show_publish_date'))) :?>
+<?php if ($useDefList) :?>
  	</dl>
 <?php endif; ?>
 
