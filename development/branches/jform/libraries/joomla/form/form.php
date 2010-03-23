@@ -821,29 +821,32 @@ class JForm
 		// Find the form field element from the definition.
 		$old = & $this->findField((string) $element['name'], $group);
 
-		// If an existing field is found and replace flag is true replace the field.
-		if ($replace && !empty($old)) {
-			$old = & $element;
+		// If an existing field is found and replace flag is false do nothing and return true.
+		if (!$replace && !empty($old)) {
+			return true;
 		}
-		// If an existing field is found and replace flag is false do nothing.
-		else if (!$replace && !empty($old)) {
-			// Do not replace the field.
-		}
-		// If no existing field is found find a group element and add the field as a child of it.
-		else {
-			if ($group) {
-				// Get the fields elements for a given group.
-				$fields = & $this->findGroup($group);
-			}
-			else {
-				// Get the master fields element.
-				$fields = & $this->xml->fields;
-			}
 
-			// If an appropriate fields element was found for hte group, add the element.
+		// If an existing field is found and replace flag is true remove the old field.
+		if ($replace && !empty($old) && ($old instanceof JXMLElement)) {
+			$dom = dom_import_simplexml($old);
+			$dom->parentNode->removeChild($dom);
+		}
+
+
+		// If no existing field is found find a group element and add the field as a child of it.
+		if ($group) {
+
+			// Get the fields elements for a given group.
+			$fields = & $this->findGroup($group);
+
+			// If an appropriate fields element was found for the group, add the element.
 			if (isset($fields[0]) && ($fields[0] instanceof JXMLElement)) {
 				self::addNode($fields[0], $element);
 			}
+		}
+		else {
+			// Set the new field to the form.
+			self::addNode($this->xml, $element);
 		}
 
 		return true;
