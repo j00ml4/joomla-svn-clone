@@ -50,6 +50,42 @@ class TemplatesModelStyle extends JModelForm
 	}
 
 	/**
+	 * @param	object	A form object.
+	 *
+	 * @return	mixed	True if successful.
+	 * @throws	Exception if there is an error loading the form.
+	 * @since	1.6
+	 */
+	protected function addForms($form)
+	{
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
+
+		// Initialise variables.
+		$clientId	= $this->getState('item.client_id');
+		$template	= $this->getState('item.template');
+		$lang		= JFactory::getLanguage();
+		$client		= JApplicationHelper::getClientInfo($clientId);
+		$formFile	= JPath::clean($client->path.'/templates/'.$template.'/templateDetails.xml');
+
+		// Load the core and/or local language file(s).
+			$lang->load('tpl_'.$template, $client->path, null, false, false)
+		||	$lang->load('tpl_'.$template, $client->path.'/templates/'.$template, null, false, false)
+		||	$lang->load('tpl_'.$template, $client->path, $lang->getDefault(), false, false)
+		||	$lang->load('tpl_'.$template, $client->path.'/templates/'.$template, $lang->getDefault(), false, false);
+
+		if (file_exists($formFile)) {
+			// Get the template form.
+			try {
+				$form->loadFile($formFile, false, '//config');
+			} catch (Exception $e) {
+				$this->setError($e->getMessage());
+				return false;
+			}
+		}
+	}
+
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -106,12 +142,28 @@ class TemplatesModelStyle extends JModelForm
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array		An optional array of source data.
+	 *
+	 * @return	mixed		JForm object on success, false on failure.
 	 */
-	public function getForm()
+	public function getForm($data = null)
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
+
+		// The folder and element vars are passed when saving the form.
+		if (empty($data)) {
+			$item		= $this->getItem();
+			$clientId	= $item->client_id;
+			$template	= $item->template;
+		} else {
+			$clientId	= JArrayHelper::getValue($data, 'client_id');
+			$template	= JArrayHelper::getValue($data, 'template');
+		}
+
+		// These variables are used to add data from the plugin XML files.
+		$this->setState('item.client_id',	$clientId);
+		$this->setState('item.template',	$template);
 
 		// Get the form.
 		try {
