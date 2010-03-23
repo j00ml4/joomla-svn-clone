@@ -188,6 +188,10 @@ class JFormTest extends JoomlaTestCase
 				'show_title'	=> 1,
 				'show_abstract'	=> 0,
 				'show_author'	=> 1,
+				'categories'	=> array(
+					1,
+					2
+				)
 			)
 		);
 
@@ -208,6 +212,12 @@ class JFormTest extends JoomlaTestCase
 			$data->get('author'),
 			$this->isNull(),
 			'Line:'.__LINE__.' The data should not bind to unknown form field elements.'
+		);
+
+		$this->assertThat(
+			is_array($data->get('params.categories')),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The categories param should be an array.'
 		);
 	}
 
