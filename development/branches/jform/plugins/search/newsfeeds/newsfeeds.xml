@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="search_limit" type="text"
 					default="50"
 					description="PLG_SEARCH_NEWSFEEDS_FIELD_SEARCHLIMIT_DESC"

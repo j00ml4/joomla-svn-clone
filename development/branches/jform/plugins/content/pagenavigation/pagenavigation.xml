@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="position" type="list"
 					default="1"
 					description="PLG_PAGENAVIGATION_FIELD_POSITION_DESC"

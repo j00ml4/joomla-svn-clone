@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="style" type="list"
 					default="none"
 					description="PLG_LOADMODULE_FIELD_STYLE_DESC"
