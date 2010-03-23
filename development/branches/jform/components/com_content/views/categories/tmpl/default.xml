@@ -9,7 +9,6 @@
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request"
-			label="Menus_Layout_Menutype_Options_Label"
 		 >
 
 			<field name="category" type="category"

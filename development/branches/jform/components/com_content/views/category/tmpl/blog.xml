@@ -9,8 +9,6 @@
 	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		 >
 
 			<field name="id" type="category"
@@ -27,7 +25,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			label="Menus_Layout_Basic_Options_Label"
 		>
 
 			<field name="show_description" type="list"
@@ -83,7 +80,6 @@
 
 		<!-- Advanced options. -->
 		<fieldset name="advanced"
-			label="Menus_Layout_Advanced_Options_Label"
 		>
 		
 			<field name="show_subcategory_content" type="list"
@@ -194,7 +190,6 @@
 
 		<!-- Integration options. -->
 		<fieldset name="integration"
-			label="Menus_Layout_Integration_Options_Label"
 		>
 
 			<field name="article-allow_ratings" type="list"

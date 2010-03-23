@@ -11,7 +11,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			label="Menus_Layout_Basic_Options_Label"
 		>
 
 			<field name="num_leading_articles" type="text"
@@ -45,7 +44,6 @@
 
 		<!-- Advanced options. -->
 		<fieldset name="advanced"
-			label="Menus_Layout_Advanced_Options_Label"
 		>
 
 			<field name="featured_categories" type="category"
@@ -135,7 +133,6 @@
 
 		<!-- Integration options. -->
 		<fieldset name="integration"
-			label="Menus_Layout_Integration_Options_Label"
 		>
 
 			<field name="article-allow_ratings" type="list"

@@ -5,7 +5,6 @@
 		description=""
 	>
 		<fieldset name="metadata"
-			label="MENUS_LAYOUT_METADATA_LABEL"
 		>
 
 			<field name="menu-anchor_title" type="text"

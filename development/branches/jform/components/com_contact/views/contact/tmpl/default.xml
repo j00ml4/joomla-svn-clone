@@ -10,8 +10,6 @@
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_contact/models/fields"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		>
 
 			<field name="id" type="modal_contacts"
@@ -27,7 +25,6 @@
 	
 		<!-- Integration options. -->
 		<fieldset name="integration"
-			label="COM_CONTACT_MENUS_LAYOUT_INTEGRATION_OPTIONS_LABEL"
 		>
 
 			<field name="show_category_crumb" type="list"
@@ -61,7 +58,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="params"
-			label="COM_CONTACT_CONTACT_SETTINGS_LABEL"
 		>
 
 			<field name="show_contact_category" type="list"
@@ -270,7 +266,6 @@
 
 		<!-- Form options. -->
 		<fieldset name="Contact_Form"
-			label="COM_CONTACT_FIELD_CONFIG_CONTACT_FORM"
 		>
 
 			<field name="show_email_form" type="list"

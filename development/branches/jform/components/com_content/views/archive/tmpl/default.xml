@@ -11,7 +11,6 @@
 
 		<!-- Basic options. -->
 		<fieldset name="basic"
-			label="MENUS_LAYOUT_BASIC_OPTIONS_LABEL"
 		>
 
 			<field name="orderby" type="list"

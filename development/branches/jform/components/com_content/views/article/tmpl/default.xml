@@ -10,8 +10,6 @@
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_content/models/fields"
-			description="JCOMMON_REQUEST_SETTINGS_DESC"
-			label="JCOMMON_REQUEST_SETTINGS"
 		>
 
 			<field name="id" type="modal_article"
@@ -28,7 +26,6 @@
 	
 		<!-- Integration options. -->
 		<fieldset name="integration"
-			label="Menus_Layout_Integration_Options_Label"
 		>
 
 			<field name="article-allow_ratings" type="list"
