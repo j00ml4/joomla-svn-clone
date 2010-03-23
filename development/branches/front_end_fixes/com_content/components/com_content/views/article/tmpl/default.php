@@ -70,7 +70,8 @@ $params = $this->state->get('params');
 
 <?php $useDefList = (($params->get('show_author')) OR ($params->get('show_category')) OR ($params->get('show_parent_category')) 
 	OR ($params->get('show_create_date')) OR ($params->get('show_modify_date')) OR ($params->get('show_publish_date')) 
-	OR ($params->get('show_hits'))) ? true : false; ?>
+	OR ($params->get('show_hits'))); ?>
+	
 <?php if ($useDefList) : ?>
  	<dl class="article-info">
  	<dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
