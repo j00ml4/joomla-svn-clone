@@ -27,20 +27,6 @@ class JModelForm extends JModel
 	protected $_forms = array();
 
 	/**
-	 * Method to allow derived classes to add more forms.
-	 *
-	 * @param	object	A form object.
-	 *
-	 * @return	mixed	True if successful.
-	 * @throws	Exception if there is an error loading the form.
-	 * @since	1.6
-	 */
-	protected function addForms($form)
-	{
-		return true;
-	}
-
-	/**
 	 * Method to checkin a row.
 	 *
 	 * @param	integer	$pk The numeric id of the primary key.
@@ -117,7 +103,7 @@ class JModelForm extends JModel
 	 *
 	 * @param	string		$name		The name of the form.
 	 * @param	string		$data		The form data. Can be XML string if file flag is set to false.
-	 * @param	array		$options	Optional array of parameters.
+	 * @param	array		$options	Optional array of options for the form creation.
 	 * @param	boolean		$clear		Optional argument to force load a new form.
 	 * @param	string		$xpath		An optional xpath to search for the fields.
 	 * @return	mixed		JForm object on success, False on error.
@@ -126,8 +112,6 @@ class JModelForm extends JModel
 	{
 		// Handle the optional arguments.
 		$options['control']	= JArrayHelper::getValue($options, 'control', false);
-		$options['event']	= JArrayHelper::getValue($options, 'event');
-		$options['group']	= JArrayHelper::getValue($options, 'group');
 
 		// Create a signature hash.
 		$hash = md5($data.serialize($options));
@@ -144,38 +128,11 @@ class JModelForm extends JModel
 		try {
 			$form = JForm::getInstance($name, $data, $options, false, $xpath);
 
-			// Allow for supplemental data to be loaded before the triggers.
-			$this->addForms($form);
+			// Allow for additional modification of the form, and events to be triggered.
+			$this->preprocessForm($form);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			$false = false;
-		}
-
-		// Look for an event to fire.
-		if ($options['event'] !== null) {
-			// Get the dispatcher.
-			$dispatcher	= JDispatcher::getInstance();
-
-			// Load an optional plugin group.
-			if ($options['group'] !== null) {
-				JPluginHelper::importPlugin($options['group']);
-			}
-
-			// Trigger the form preparation event.
-			$results = $dispatcher->trigger($options['event'], array($form->getName(), $form));
-
-			// Check for errors encountered while preparing the form.
-			if (count($results) && in_array(false, $results, true)) {
-				// Get the last error.
-				$error = $dispatcher->getError();
-
-				// Convert to a JException if necessary.
-				if (!JError::isError($error)) {
-					$error = new JException($error, 500);
-				}
-
-				return $error;
-			}
 		}
 
 		// Store the form for later.
@@ -184,7 +141,33 @@ class JModelForm extends JModel
 		return $form;
 	}
 
+	/**
+	 * Method to allow derived classes to preprocess the form.
+	 *
+	 * @param	object	A form object.
+	 *
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm($form)
+	{
+		// Get the dispatcher.
+		$dispatcher	= JDispatcher::getInstance();
 
+		// Trigger the form preparation event.
+		$results = $dispatcher->trigger('onPrepareForm', array($form->getName(), $form));
+
+		// Check for errors encountered while preparing the form.
+		if (count($results) && in_array(false, $results, true)) {
+			// Get the last error.
+			$error = $dispatcher->getError();
+
+			// Convert to a JException if necessary.
+			if (!JError::isError($error)) {
+				throw new Exception($error);
+			}
+		}
+	}
 
 	/**
 	 * Method to validate the form data.

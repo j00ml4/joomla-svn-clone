@@ -43,72 +43,6 @@ class PluginsModelPlugin extends JModelForm
 	}
 
 	/**
-	 * Prepare and sanitise the table prior to saving.
-	 */
-	protected function _prepareTable(&$table)
-	{
-	}
-
-	/**
-	 * @param	object	A form object.
-	 *
-	 * @return	mixed	True if successful.
-	 * @throws	Exception if there is an error loading the form.
-	 * @since	1.6
-	 */
-	protected function addForms($form)
-	{
-		jimport('joomla.filesystem.file');
-		jimport('joomla.filesystem.folder');
-
-		// Initialise variables.
-		$folder		= $this->getState('item.folder');
-		$element	= $this->getState('item.element');
-		$lang		= JFactory::getLanguage();
-		$client		= JApplicationHelper::getClientInfo(0);
-
-		// Try 1.6 format: /plugins/folder/element/element.xml
-		$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'/'.$element.'.xml');
-		if (!file_exists($formFile)) {
-			// Try 1.5 format: /plugins/folder/element/element.xml
-			$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'.xml');
-			if (!file_exists($formFile)) {
-				$this->setError(JText::sprintf('JError_File_not_found', $element.'.xml'));
-				return false;
-			}
-		}
-
-		// Load the core and/or local language file(s).
-			$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, null, false, false)
-		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, null, false, false)
-		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, $lang->getDefault(), false, false);
-
-		if (file_exists($formFile)) {
-			// Get the plugin form.
-			try {
-				$form->loadFile($formFile, false, '//config');
-			} catch (Exception $e) {
-				$this->setError($e->getMessage());
-				return false;
-			}
-		}
-	}
-
-	/**
-	 * Returns a reference to the a Table object, always creating it.
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	*/
-	public function getTable($type = 'Extension', $prefix = 'JTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
 	 * Method to override check-out a row for editing.
 	 *
 	 * @param	int		The ID of the primary key.
@@ -135,57 +69,6 @@ class PluginsModelPlugin extends JModelForm
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('plugin.id');
 
 		return parent::checkin($pk);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('plugin.id');
-
-		if (!isset($this->_cache[$pk]))
-		{
-			$false	= false;
-
-			// Get a row instance.
-			$table = &$this->getTable();
-
-			// Attempt to load the row.
-			$return = $table->load($pk);
-
-			// Check for a table object error.
-			if ($return === false && $table->getError())
-			{
-				$this->setError($table->getError());
-				return $false;
-			}
-
-			// Convert to the JObject before adding other data.
-			$this->_cache[$pk] = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-			// Convert the params field to an array.
-			$registry = new JRegistry;
-			$registry->loadJSON($table->params);
-			$this->_cache[$pk]->params = $registry->toArray();
-
-			// Get the plugin XML.
-			$client	= JApplicationHelper::getClientInfo($table->client_id);
-			$path	= JPath::clean($client->path.'/plugins/'.$table->folder.'/'.$table->element.'/'.$table->element.'.xml');
-
-			if (file_exists($path)) {
-				$this->_cache[$pk]->xml = &JFactory::getXML($path);
-			} else {
-				$this->_cache[$pk]->xml = null;
-			}
-		}
-
-		return $this->_cache[$pk];
 	}
 
 	/**
@@ -234,51 +117,118 @@ class PluginsModelPlugin extends JModelForm
 	}
 
 	/**
-	 * Method to save the form data.
+	 * Method to get a single record.
 	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
 	 */
-	public function save($data)
+	public function &getItem($pk = null)
 	{
 		// Initialise variables.
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('plugin.id');
-		$isNew		= true;
+		$pk = (!empty($pk)) ? $pk : (int) $this->getState('plugin.id');
 
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
+		if (!isset($this->_cache[$pk])) {
+			$false	= false;
 
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
+			// Get a row instance.
+			$table = &$this->getTable();
+
+			// Attempt to load the row.
+			$return = $table->load($pk);
+
+			// Check for a table object error.
+			if ($return === false && $table->getError()) {
+				$this->setError($table->getError());
+				return $false;
+			}
+
+			// Convert to the JObject before adding other data.
+			$this->_cache[$pk] = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
+			$this->_cache[$pk]->params = $registry->toArray();
+
+			// Get the plugin XML.
+			$client	= JApplicationHelper::getClientInfo($table->client_id);
+			$path	= JPath::clean($client->path.'/plugins/'.$table->folder.'/'.$table->element.'/'.$table->element.'.xml');
+
+			if (file_exists($path)) {
+				$this->_cache[$pk]->xml = &JFactory::getXML($path);
+			} else {
+				$this->_cache[$pk]->xml = null;
+			}
 		}
 
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
-			return false;
+		return $this->_cache[$pk];
+	}
+
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	*/
+	public function getTable($type = 'Extension', $prefix = 'JTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Prepare and sanitise the table prior to saving.
+	 */
+	protected function prepareTable(&$table)
+	{
+	}
+
+	/**
+	 * @param	object	A form object.
+	 *
+	 * @return	mixed	True if successful.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm($form)
+	{
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
+
+		// Initialise variables.
+		$folder		= $this->getState('item.folder');
+		$element	= $this->getState('item.element');
+		$lang		= JFactory::getLanguage();
+		$client		= JApplicationHelper::getClientInfo(0);
+
+		// Try 1.6 format: /plugins/folder/element/element.xml
+		$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'/'.$element.'.xml');
+		if (!file_exists($formFile)) {
+			// Try 1.5 format: /plugins/folder/element/element.xml
+			$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'.xml');
+			if (!file_exists($formFile)) {
+				throw new Exception(JText::sprintf('JError_File_not_found', $element.'.xml'));
+				return false;
+			}
 		}
 
-		// Prepare the row for saving
-		$this->_prepareTable($table);
+		// Load the core and/or local language file(s).
+			$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, null, false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+		||	$lang->load('plg_'.$folder.'_'.$element, $client->path.'/plugins/'.$folder.'/'.$element, $lang->getDefault(), false, false);
 
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
+		if (file_exists($formFile)) {
+			// Get the plugin form.
+			if (!$form->loadFile($formFile, false, '//config')) {
+				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+			}
 		}
 
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		$this->setState('plugin.id', $table->extension_id);
-
-		return true;
+		// Trigger the default form events.
+		parent::preprocessForm($form);
 	}
 
 	/**
@@ -350,6 +300,54 @@ class PluginsModelPlugin extends JModelForm
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 */
+	public function save($data)
+	{
+		// Initialise variables.
+		$table		= $this->getTable();
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('plugin.id');
+		$isNew		= true;
+
+		// Include the content plugins for the onSave events.
+		JPluginHelper::importPlugin('content');
+
+		// Load the row if saving an existing record.
+		if ($pk > 0) {
+			$table->load($pk);
+			$isNew = false;
+		}
+
+		// Bind the data.
+		if (!$table->bind($data)) {
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
+			return false;
+		}
+
+		// Prepare the row for saving
+		$this->prepareTable($table);
+
+		// Check the data.
+		if (!$table->check()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Store the data.
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		$this->setState('plugin.id', $table->extension_id);
+
+		return true;
 	}
 
 	/**
