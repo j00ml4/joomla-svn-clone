@@ -53,20 +53,13 @@ class MenusModelItem extends JModelForm
 		jimport('joomla.filesystem.folder');
 
 		// Initialise variables.
-		$formFile		= null;
-
-		// Determine the link type.
+		$link = $this->getState('item.link');
 		$type = $this->getState('item.type');
 
 		// Initialise form with component view params if available.
-
 		if ($type == 'component') {
 
-			if ($item = $this->getItem()) {
-				$link = htmlspecialchars_decode($item->link);
-			} else {
-				$link = $this->getState('item.link');
-			}
+			$link = htmlspecialchars_decode($link);
 
 			// Parse the link arguments.
 			$args = array();
@@ -315,13 +308,27 @@ class MenusModelItem extends JModelForm
 	/**
 	 * Method to get the row form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 * @since	1.6
+	 * @param	array		An optional array of source data.
+	 *
+	 * @return	mixed		JForm object on success, false on failure.
 	 */
-	public function getForm()
+	public function getForm($data = null)
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
+
+		// The folder and element vars are passed when saving the form.
+		if (empty($data)) {
+			$item		= $this->getItem();
+			$this->setState('item.link', $item->link);
+			// The type should already be set.
+		} else {
+			$this->setState('item.link', JArrayHelper::getValue($data, 'link'));
+			$this->setState('item.type', JArrayHelper::getValue($data, 'type'));
+		}
+
+		//echo $this->getState('item.link');
+		//echo '<br>'.$this->getState('item.type');die;
 
 		// Get the form.
 		try {

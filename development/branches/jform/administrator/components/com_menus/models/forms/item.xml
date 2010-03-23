@@ -55,6 +55,7 @@
 			default=""
 			required="true"
 			size="1" />
+
 		<field
 			name="type"
 			type="menutype"
