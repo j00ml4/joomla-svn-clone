@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset>
+	<fieldset name="component">
 		<field
 			name="enabled"
 			type="radio"
@@ -27,10 +27,10 @@
 	</fieldset>
 
 	<fieldset
-		group="permissions"
+		name="permissions"
 		label="JConfig_Permissions_Label"
 		description="JConfig_Permissions_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="rules"

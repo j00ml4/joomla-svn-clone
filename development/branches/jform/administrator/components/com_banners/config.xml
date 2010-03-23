@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <config>
-	<fieldset>
+	<fieldset name="component">
 		<field
 			id="purchase_type"
 			name="purchase_type"
@@ -56,10 +56,10 @@
 	</fieldset>
 
 	<fieldset
-		group="permissions"
+		name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
-		hidden="true">
+		>
 
 		<field
 			name="rules"

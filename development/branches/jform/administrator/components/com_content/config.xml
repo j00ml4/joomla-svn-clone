@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset
-		group="articles"
+		name="articles"
 		label="Content_Config_Article_Settings_Label"
 		description="Content_Config_Article_Settings_Desc">
 
@@ -236,10 +236,10 @@
 	</fieldset>
 
 	<fieldset
-		group="blog_default_parameters"
+		name="blog_default_parameters"
 		label="Content_Config_Blog_Settings_Label"
 		description="Content_Config_Blog_Settings_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="num_leading_articles"
@@ -311,10 +311,10 @@
 		</fieldset>
 
 	<fieldset
-		group="list_default_parameters"
+		name="list_default_parameters"
 		label="Content_Config_List_Settings_Label"
 		description="Content_Config_List_Settings_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="display_num"
@@ -406,10 +406,10 @@
 	</fieldset>
 
 	<fieldset
-		group="categories"
+		name="categories"
 		label="Content_Config_Category_Settings_Label"
 		description="Content_Config_Category_Settings_Desc"
-		hidden="true">
+		>
 
 	 	<field
 	 		name="show_description"
@@ -545,10 +545,10 @@
 	</fieldset>
 
 	<fieldset
-		group="integration"
+		name="integration"
 		label="Content_Config_Integration_Settings_Label"
 		description="Content_Config_Integration_Settings_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="article-allow_ratings"
@@ -599,10 +599,10 @@
 	</fieldset>
 
 	<fieldset
-		group="filters"
+		name="filters"
 		label="Content_Config_Text_Filters_Label"
 		description="Content_Config_Text_Filters_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="filter_groups"
@@ -645,10 +645,10 @@
 	</fieldset>
 
 	<fieldset
-		group="permissions"
+		name="permissions"
 		label="JConfig_Permissions_Label"
 		description="JConfig_Permissions_Desc"
-		hidden="true">
+		>
 
 		<field
 			name="rules"
