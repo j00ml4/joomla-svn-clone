@@ -31,7 +31,8 @@ class JModelForm extends JModel
 	 *
 	 * @param	object	A form object.
 	 *
-	 * @return	mixed	True if successful, JError otherwise.
+	 * @return	mixed	True if successful.
+	 * @throws	Exception if there is an error loading the form.
 	 * @since	1.6
 	 */
 	protected function addForms($form)
