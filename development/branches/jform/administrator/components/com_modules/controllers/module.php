@@ -62,6 +62,7 @@ class ModulesControllerModule extends JControllerForm
 	public function save()
 	{
 		if ($result = parent::save()) {
+			$app = JFactory::getApplication();
 			$app->setUserState('com_modules.add.module.extension_id', null);
 		}
 		return $result;
