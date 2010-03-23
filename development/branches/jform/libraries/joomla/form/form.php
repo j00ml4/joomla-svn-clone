@@ -174,6 +174,38 @@ class JForm
 	}
 
 	/**
+	 * Method to bind data to the form for the group level.
+	 *
+	 * @param	string	$group	The dot-separated form group path on which to bind the data.
+	 * @param	mixed	$data	An array or object of data to bind to the form for the group level.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function bindLevel($group, $data)
+	{
+		// Ensure the input data is an array.
+		settype($data, 'array');
+
+		// Process the input data.
+		foreach ($data as $k => $v) {
+
+			// If the value is a scalar just process it.
+			if (is_scalar($v)) {
+
+				// If the field exists set the value.
+				if ($this->findField($k, $group)) {
+					$this->data->set($group.'.'.$k, $v);
+				}
+			}
+			// If the value is not a scalar hand it off to the recursive bind level method.
+			else {
+				$this->bindLevel($group.'.'.$k, $v);
+			}
+		}
+	}
+
+	/**
 	 * Method to filter the form data.
 	 *
 	 * @param	array	$data	An array of field values to filter.
@@ -996,38 +1028,6 @@ class JForm
 		}
 
 		return $return;
-	}
-
-	/**
-	 * Method to bind data to the form for the group level.
-	 *
-	 * @param	string	$group	The dot-separated form group path on which to bind the data.
-	 * @param	mixed	$data	An array or object of data to bind to the form for the group level.
-	 *
-	 * @return	void
-	 * @since	1.6
-	 */
-	protected function bindLevel($group, $data)
-	{
-		// Ensure the input data is an array.
-		settype($data, 'array');
-
-		// Process the input data.
-		foreach ($data as $k => $v) {
-
-			// If the value is a scalar just process it.
-			if (is_scalar($v)) {
-
-				// If the field exists set the value.
-				if ($this->findField($k, $group)) {
-					$this->data->set($group.'.'.$k, $v);
-				}
-			}
-			// If the value is not a scalar hand it off to the recursive bind level method.
-			else {
-				$this->bindLevel($group.'.'.$k, $v);
-			}
-		}
 	}
 
 	/**
