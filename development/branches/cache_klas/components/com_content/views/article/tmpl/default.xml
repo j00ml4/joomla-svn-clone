@@ -10,8 +10,8 @@
 	<fields
 		group="request"
 		array="true"
-		label="Menus_Layout_Request_Variables_Label"
-		description="Menus_Layout_Request_Variables_Desc"
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC"
 		addfieldpath="/administrator/components/com_content/models/fields">
 
 		<field
@@ -270,7 +270,7 @@
 			description="JField_Metadata_Robots_Desc"
 			default="">
 			<option
-				value="">USE_GLOBAL</option>
+				value="">JCOMMON_USE_GLOBAL</option>
 			<option
 				value="0">index, follow</option>
 			<option

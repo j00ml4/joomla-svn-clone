@@ -10,8 +10,8 @@
 	<fields
 		group="request"
 		array="true"
-		label="MENUS_LAYOUT_REQUEST_VARIABLES_LABEL"
-		description="MENUS_LAYOUT_REQUEST_VARIABLES_DESC">
+		label="JCOMMON_REQUIRED_SETTINGS"
+		description="JCOMMON_REQUIRED_SETTINGS_DESC">
 		<field
 			name="id"
 			type="category"
@@ -58,7 +58,7 @@
 			description="JField_Metadata_Robots_Desc"
 			default="">
 			<option
-				value="">USE_GLOBAL</option>
+				value="">JCOMMON_USE_GLOBAL</option>
 			<option
 				value="0">index, follow</option>
 			<option

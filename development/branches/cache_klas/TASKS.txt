@@ -13,6 +13,7 @@ SMALLER TASKS
 - Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS
+- Re-do all handlers as wrappers for callback. Consolidate workarounds in callback  (#18020, #19435..) 
 - Re-conceptualize view cache (and review/change other handlers if needed)
 - GENERALY WORKING, PROBABLY NEEDS FINETUNING: Re-conceptualize module cache (move cache call to within the module, add module handler)
 

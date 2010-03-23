@@ -412,7 +412,7 @@ class JLanguage extends JObject
 		$version = phpversion();
 		if($version >= "5.3.1") {
 			$contents = file_get_contents($filename);
-			$contents = str_replace(array('"_QQ_"','_QQ_"','"_QQ_'),array('\"','"\"','\""'),$contents);
+			$contents = str_replace('_QQ_','"\""',$contents);
 			$strings = @parse_ini_string($contents);
 		} else {
 			$strings = @parse_ini_file($filename);
@@ -422,7 +422,7 @@ class JLanguage extends JObject
 				}
 			}
 		}
-		if (!empty($php_errormsg)) {
+		if (!empty($php_errormsg) || JFactory::getApplication()->getCfg('debug')) {
 			$errors = array();
 			$lineNumber = 0;
 			$stream = new JStream();
@@ -437,7 +437,14 @@ class JLanguage extends JObject
 				}
 			}
 			$stream->close();
-			JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+			if (count($errors)) {
+				if (basename($filename)!=$this->_lang.'.ini') {
+					JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+				else {
+					JError::raiseWarning(500, sprintf('The language file %1$s was not read correctly: error in lines %2$s',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
+				}
+			}
 			//JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
 		}
 		ini_restore('track_errors');
@@ -783,3 +790,4 @@ class JLanguage extends JObject
 		return $metadata;
 	}
 }
+
