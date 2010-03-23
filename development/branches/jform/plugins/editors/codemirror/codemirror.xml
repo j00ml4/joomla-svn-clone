@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="linenumbers" type="radio"
 					default="0"
 					description="PLG_CODEMIRROR_FIELD_LINENUMBERS_DESC"

@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="applysuffix" type="list"
 					default="0"
 					description="PLG_GMAIL_FIELD_APPLYSUFFIX_DESC"

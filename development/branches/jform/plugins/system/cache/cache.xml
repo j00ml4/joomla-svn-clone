@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="browsercache" type="radio"
 					default="0"
 					description="PLG_CACHE_FIELD_BROWSERCACHE_DESC"

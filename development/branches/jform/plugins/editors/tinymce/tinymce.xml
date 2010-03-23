@@ -17,7 +17,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="mode" type="list"
 					default="1"
 					description="PLG_TINY_FIELD_FUNCTIONALITY_DESC"

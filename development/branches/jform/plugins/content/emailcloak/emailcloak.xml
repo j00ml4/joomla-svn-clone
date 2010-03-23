@@ -17,7 +17,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="mode" type="list"
 					default="1"
 					description="PLG_CONTENT_EMAILCLOAK_MODE_DESC"

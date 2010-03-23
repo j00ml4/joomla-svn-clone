@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="title" type="radio"
 					default="1"
 					description="PLG_CONTENT_PAGEBREAK_SITE_TITLE_DESC"

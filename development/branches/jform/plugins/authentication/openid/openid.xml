@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="usermode" type="radio"
 					default="2"
 					description="PLG_OPENID_FIELD_USERMODE_DESC"

@@ -16,7 +16,7 @@
 	<config>
 		<fields name="params">
 
-			<fieldset>
+			<fieldset name="basic">
 				<field name="host" type="text"
 					description="PLG_LDAP_FIELD_HOST_DESC"
 					label="PLG_LDAP_FIELD_HOST_LABEL"
