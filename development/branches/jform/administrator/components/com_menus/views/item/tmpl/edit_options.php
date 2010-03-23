@@ -10,6 +10,25 @@
 defined('_JEXEC') or die;
 ?>
 <?php
+	$fieldSets = $this->form->getFieldsets('request');
+
+	if (!empty($fieldSets)) {
+		$fieldSet = array_shift($fieldSets);
+		echo JHtml::_('sliders.panel',JText::_($fieldSet->label), 'request-options');
+		if (isset($fieldSet->description) && trim($fieldSet->description)) :
+			echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
+		endif;
+		?>
+		<fieldset class="panelform">
+			<?php foreach ($this->form->getFieldset('request') as $field) : ?>
+				<?php echo $field->label; ?>
+				<?php echo $field->input; ?>
+			<?php endforeach; ?>
+		</fieldset>
+<?php
+	}
+
+
 	$fieldSets = $this->form->getFieldsets('params');
 
 	foreach ($fieldSets as $name => $fieldSet) :

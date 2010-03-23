@@ -121,7 +121,7 @@ class MenusModelItem extends JModelForm
 
 				//$form = parent::getForm($formFile, $formName, $formOptions, true);
 
-				if ($form->loadFile($formFile, false, false) == false) {
+				if ($form->loadFile($formFile, false, '/metadata') == false) {
 					$this->setError($form->getMessage());
 					return false;
 				}
