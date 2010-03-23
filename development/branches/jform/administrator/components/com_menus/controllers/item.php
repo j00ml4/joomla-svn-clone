@@ -170,7 +170,6 @@ class MenusControllerItem extends JControllerForm
 
 		// Get the posted values from the request.
 		$iData	= JRequest::getVar('jform', array(), 'post', 'array');
-		$pData	= JRequest::getVar('jformparams', array(), 'post', 'array');
 		$map	= JRequest::getVar('menuid', array(), 'post', 'array');
 
 		// Populate the row id from the session.
@@ -195,35 +194,24 @@ class MenusControllerItem extends JControllerForm
 
 		// Validate the posted data.
 		// This post is made up of two forms, one for the item and one for params.
-		$itemForm	= &$model->getForm();
+		$itemForm	= &$model->getForm($iData);
 		if (!$itemForm) {
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
 		$iData	= $model->validate($itemForm, $iData);
 
-		$paramsForm	= &$model->getParamsForm($iData['type'], $iData['link']);
-		if (!$paramsForm) {
-			JError::raiseError(500, $model->getError());
-			return false;
-		}
-		$pData	= $model->validate($paramsForm, $pData);
-
 		// Check for the special 'request' entry.
-		if ($iData['type'] == 'component' && isset($pData['request']) && is_array($pData['request']) && !empty($pData['request']))
-		{
+		if ($iData['type'] == 'component' && isset($iData['request']) && is_array($iData['request']) && !empty($iData['request'])) {
 			// Parse the submitted link arguments.
 			$args = array();
 			parse_str(parse_url($iData['link'], PHP_URL_QUERY), $args);
 
 			// Merge in the user supplied request arguments.
-			$args = array_merge($args, $pData['request']);
+			$args = array_merge($args, $iData['request']);
 			$iData['link'] = 'index.php?'.http_build_query($args,'','&');
-			unset($pData['request']);
+			unset($iData['request']);
 		}
-
-		// Params are validated so add them to the item data.
-		$iData['params'] = $pData;
 
 		// Push the menu id map back into the array
 		$iData['map'] = &$map;
