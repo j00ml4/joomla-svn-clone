@@ -284,7 +284,8 @@ class JFormTest extends JoomlaTestCase
 			'params'	=> array(
 				'show_title'	=> 1,
 				'show_author'	=> false,
-			)
+			),
+			'default'	=> ''
 		);
 
 		$filtered = $form->filter($data);

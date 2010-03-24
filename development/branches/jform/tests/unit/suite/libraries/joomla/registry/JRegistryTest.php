@@ -70,6 +70,47 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 	}*/
 
 	/**
+	 * Test the JReigstry::exists method.
+	 */
+	public function testExists()
+	{
+		$a = new JRegistry;
+		$a->set('foo', 'bar1');
+		$a->set('config.foo', 'bar2');
+		$a->set('deep.level.foo', 'bar3');
+
+		$this->assertThat(
+			$a->exists('foo'),
+			$this->isTrue(),
+			'Line: '.__LINE__.' The path should exist, returning true.'
+		);
+
+		$this->assertThat(
+			$a->exists('config.foo'),
+			$this->isTrue(),
+			'Line: '.__LINE__.' The path should exist, returning true.'
+		);
+
+		$this->assertThat(
+			$a->exists('deep.level.foo'),
+			$this->isTrue(),
+			'Line: '.__LINE__.' The path should exist, returning true.'
+		);
+
+		$this->assertThat(
+			$a->exists('deep.level.bar'),
+			$this->isFalse(),
+			'Line: '.__LINE__.' The path should not exist, returning false.'
+		);
+
+		$this->assertThat(
+			$a->exists('bar.foo'),
+			$this->isFalse(),
+			'Line: '.__LINE__.' The path should not exist, returning false.'
+		);
+	}
+
+	/**
 	 * Test the JRegistry::getInstance method.
 	 */
 	public function testGetInstance()
