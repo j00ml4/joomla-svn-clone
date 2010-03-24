@@ -147,23 +147,19 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 			'Line: '.__LINE__.'.'
 		);
 
-		// Check for a null value, the default is used.
 		$a->set('null', null);
 		$this->assertThat(
 			$a->get('null', 'null'),
 			$this->equalTo('null'),
-			'Line: '.__LINE__.'.'
+			'Line: '.__LINE__.' Where a value is null, the default should be returned.'
 		);
 
-		// Check for an empty string, the default is used.
-		/*
 		$a->set('empty', '');
 		$this->assertThat(
 			$a->get('empty', 'empty'),
-			$this->equalTo('empty'),
-			'Line: '.__LINE__.'.'
+			$this->equalTo(''),
+			'Line: '.__LINE__.' Where a value is an empty string, the default should not be used.'
 		);
-		*/
 	}
 
 	/**
