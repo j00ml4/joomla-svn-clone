@@ -219,7 +219,39 @@ class JFormFieldCalendarTest extends JoomlaTestCase
 						'onchange' => 'This is my onchange value',
 					)
 				)
+			),
+
+			/*
+			* value = 'NOW'
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'NOW',
+				array(
+					'format' => '',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => '',
+					'readonly' => '1',
+					'disabled' => 'true',
+					'onchange' => 'This is my onchange value',
+					'filter' => ''
+				),
+				array(
+					strftime('%Y-%m-%d'),
+					'myCalendarElement',
+					'myCalendarId',
+					'%Y-%m-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'disabled' => 'disabled',
+						'onchange' => 'This is my onchange value',
+					)
+				)
 			)
+
 
 
 
@@ -270,6 +302,172 @@ class JFormFieldCalendarTest extends JoomlaTestCase
 
 		$calendar->getInput();			// invoke our method
 		JHtml::unregister('calendar');	// unregister the mock
+	}
+
+	public function testGetInputServer_UTC()
+	{
+		// we create stubs for config and session/user objects
+		$config = new JObject;
+		JFactory::$config = $config;		// put the stub in place
+		$sessionMock = $this->getMock('sessionMock', array('get'));
+
+		require_once(JPATH_BASE.'/libraries/joomla/user/user.php');
+		$userObject = new JUser;
+		
+
+		$sessionMock->expects($this->any())
+					->method('get')
+					->with('user')
+					->will($this->returnValue($userObject));
+
+		JFactory::$session = $sessionMock;	// put the stub in place
+
+		$languageMock = $this->getMock('languageMock', array('getTag'));
+		$languageMock->expects($this->any())
+			->method('getTag')
+			->will($this->returnValue('en-GB'));
+
+		JFactory::$language = $languageMock;	// put the stub in place
+
+		// include our inspector which will allow us to manipulate and call protected methods and attributes
+		require_once dirname(__FILE__).'/inspectors/JFormFieldCalendar.php';
+		$calendar = new JFormFieldCalendarInspector;
+
+		// setup our values from our data set
+		$calendar->setProtectedProperty('element', 
+				array(
+					'format' => '%m-%Y-%d',
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => '',
+					'filter' => 'SERVER_UTC'
+				)
+		);
+		$calendar->setProtectedProperty('name', 'myElementName');
+		$calendar->setProtectedProperty('id', 'myElementId');
+		$calendar->setProtectedProperty('value', 1269442718);   // 1269442718
+
+		$config->set('offset', -5);
+		$userObject->setParam('timezone', -3);
+
+		// create the mock to implant into JHtml so that we can check our values
+		$mock = $this->getMock('calendarHandler', array('calendar'));
+
+		// setup the expectation with the values from the dataset
+		$mock->expects($this->once())
+			->method('calendar')
+			->with('2010-03-24 10:58:38', 'myElementName', 'myElementId', '%m-%Y-%d',
+				array(
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'readonly'
+				)
+			);
+
+		JHtml::register('calendar', array($mock, 'calendar'));		// register our mock with JHtml
+
+		$calendar->getInput();			// invoke our method
+		JHtml::unregister('calendar');	// unregister the mock	
+	}
+
+
+	public function testGetInputUser_UTC()
+	{
+		// we create stubs for config and session/user objects
+		$config = new JObject;
+		JFactory::$config = $config;		// put the stub in place
+		$sessionMock = $this->getMock('sessionMock', array('get'));
+
+		require_once(JPATH_BASE.'/libraries/joomla/user/user.php');
+		$userObject = new JUser;
+		
+
+		$sessionMock->expects($this->any())
+					->method('get')
+					->with('user')
+					->will($this->returnValue($userObject));
+
+		JFactory::$session = $sessionMock;	// put the stub in place
+
+		$languageMock = $this->getMock('languageMock', array('getTag'));
+		$languageMock->expects($this->any())
+			->method('getTag')
+			->will($this->returnValue('en-GB'));
+
+		JFactory::$language = $languageMock;	// put the stub in place
+
+		// include our inspector which will allow us to manipulate and call protected methods and attributes
+		require_once dirname(__FILE__).'/inspectors/JFormFieldCalendar.php';
+		$calendar = new JFormFieldCalendarInspector;
+
+		// setup our values from our data set
+		$calendar->setProtectedProperty('element', 
+				array(
+					'format' => '%m-%Y-%d',
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => '',
+					'filter' => 'USER_UTC'
+				)
+		);
+		$calendar->setProtectedProperty('name', 'myElementName');
+		$calendar->setProtectedProperty('id', 'myElementId');
+		$calendar->setProtectedProperty('value', 1269442718);   // 1269442718
+
+		$config->set('offset', 4);
+
+		// we don't set the user param to see if it properly falls back to the server time (as it should)
+
+		// create the mock to implant into JHtml so that we can check our values
+		$mock = $this->getMock('calendarHandler', array('calendar'));
+
+		// setup the expectation with the values from the dataset
+		$mock->expects($this->once())
+			->method('calendar')
+			->with('2010-03-24 18:58:38', 'myElementName', 'myElementId', '%m-%Y-%d',
+				array(
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'readonly'
+				)
+			);
+
+		JHtml::register('calendar', array($mock, 'calendar'));		// register our mock with JHtml
+
+		$calendar->getInput();			// invoke our method
+		JHtml::unregister('calendar');	// unregister the mock	
+
+		// create the mock to implant into JHtml so that we can check our values
+		$mock2 = $this->getMock('calendarHandler', array('calendar'));
+
+		// setup the expectation with the values from the dataset
+		$mock2->expects($this->once())
+			->method('calendar')
+			->with('2010-03-24 22:58:38', 'myElementName', 'myElementId', '%m-%Y-%d',
+				array(
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'readonly'
+				)
+			);
+
+		$config->set('offset', -5);
+		$userObject->setParam('timezone', 4);		// now we set the user param to test it out.
+
+		JHtml::register('calendar', array($mock2, 'calendar'));		// register our mock with JHtml
+
+		$calendar->getInput();			// invoke our method
+		JHtml::unregister('calendar');	// unregister the mock	
+
 	}
 
 
