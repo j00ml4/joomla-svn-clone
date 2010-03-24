@@ -1804,6 +1804,78 @@ class JFormTest extends JoomlaTestCase
 	}
 
 	/**
+	 * Test for JForm::syncPaths method.
+	 */
+	public function testSyncPaths()
+	{
+		$form = new JFormInspector('testSyncPaths');
+
+		$this->assertThat(
+			$form->load(JFormDataHelper::$syncPathsDocument),
+			$this->isTrue(),
+			'Line:'.__LINE__.' XML string should load successfully.'
+		);
+
+		$fieldPaths	= JForm::addFieldPath();
+		$formPaths	= JForm::addFormPath();
+		$rulePaths	= JForm::addRulePath();
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/field1', $fieldPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The field path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/field2', $fieldPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The field path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/field3', $fieldPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The field path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/form1', $formPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The form path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/form2', $formPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The form path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/form3', $formPaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The form path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/rule1', $rulePaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The rule path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/rule2', $rulePaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The rule path from the XML file should be present.'
+		);
+
+		$this->assertThat(
+			in_array(JPATH_ROOT.'/rule3', $rulePaths),
+			$this->isTrue(),
+			'Line:'.__LINE__.' The rule path from the XML file should be present.'
+		);
+
+	}
+	/**
 	 * Test for JForm::validate method.
 	 */
 	public function testValidate()

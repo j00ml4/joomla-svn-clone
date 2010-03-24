@@ -471,6 +471,14 @@ class JFormDataHelper
 	</fields>
 </form>';
 
+	public static $syncPathsDocument = '<form>
+	<fields name="foo" addfieldpath="/field2" addformpath="form2" addrulepath="/rule2">
+		<fieldset name="bar" addfieldpath="/field3" addformpath="/form3" addrulepath="rule3">
+			<field name="hum" addfieldpath="field1" addformpath="/form1" addrulepath="/rule1" />
+		</fieldset>
+	</fields>
+</form>';
+
 	public static $validateDocument = '<form>
 	<fields
 		description="All the fields">
