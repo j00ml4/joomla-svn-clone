@@ -677,6 +677,9 @@ class JForm
 			self::addNode($this->xml, $element);
 		}
 
+		// Synchronize any paths found in the load.
+		$this->syncPaths();
+
 		return true;
 	}
 
@@ -848,6 +851,9 @@ class JForm
 			self::addNode($this->xml, $element);
 		}
 
+		// Synchronize any paths found in the load.
+		$this->syncPaths();
+
 		return true;
 	}
 
@@ -880,6 +886,10 @@ class JForm
 		// Otherwise set the attribute and return true.
 		else {
 			$element[$attribute] = $value;
+
+			// Synchronize any paths found in the load.
+			$this->syncPaths();
+
 			return true;
 		}
 	}
@@ -919,6 +929,9 @@ class JForm
 				$return = false;
 			}
 		}
+
+		// Synchronize any paths found in the load.
+		$this->syncPaths();
 
 		return $return;
 	}
@@ -1553,6 +1566,49 @@ class JForm
 		self::$rules[$key] = new $class();
 
 		return self::$rules[$key];
+	}
+
+	/**
+	 * Method to synchronize any field, form or rule paths contained in the XML document.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	protected function syncPaths()
+	{
+		// Make sure there is a valid JForm XML document.
+		if (!$this->xml instanceof JXMLElement) {
+			return false;
+		}
+
+		// Get any addfieldpath attributes from the form definition.
+		$paths = $this->xml->xpath('//*[@addfieldpath]/@addfieldpath');
+		$paths = array_map('strval', $paths ? $paths : array());
+
+		// Add the field paths.
+		foreach ($paths as $path) {
+			JForm::addFieldPath($path);
+		}
+
+		// Get any addformpath attributes from the form definition.
+		$paths = $this->xml->xpath('//*[@addformpath]/@addformpath');
+		$paths = array_map('strval', $paths ? $paths : array());
+
+		// Add the form paths.
+		foreach ($paths as $path) {
+			JForm::addFormPath($path);
+		}
+
+		// Get any addrulepath attributes from the form definition.
+		$paths = $this->xml->xpath('//*[@addrulepath]/@addrulepath');
+		$paths = array_map('strval', $paths ? $paths : array());
+
+		// Add the rule paths.
+		foreach ($paths as $path) {
+			JForm::addRulePath($path);
+		}
+
+		return true;
 	}
 
 	/**
