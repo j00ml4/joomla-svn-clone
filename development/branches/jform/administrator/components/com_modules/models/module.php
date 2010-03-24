@@ -229,7 +229,7 @@ class ModulesModelModule extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_modules.module', 'module', array('control' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_modules.module', 'module', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

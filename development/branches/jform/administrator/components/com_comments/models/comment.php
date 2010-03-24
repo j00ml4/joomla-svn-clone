@@ -109,7 +109,7 @@ class CommentsModelComment extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_comments.comment', 'comment', array('control' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_comments.comment', 'comment', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

@@ -60,7 +60,7 @@ class ConfigModelComponent extends JModelForm
 			$form = parent::getForm(
 				'com_config.component',
 				'config',
-				array('control' => 'jform', 'event' => 'onPrepareForm'),
+				array('control' => 'jform'),
 				false,
 				'/config'
 			);
