@@ -66,6 +66,7 @@ class JFormFieldMedia extends JFormField
 
 		// Initialize variables.
 		$html = array();
+		$attr = '';
 
 		// Initialize some field attributes.
 		$attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
@@ -91,6 +92,6 @@ class JFormFieldMedia extends JFormField
 		$html[] = '	</div>';
 		$html[] = '</div>';
 
-		return $html;
+		return implode("\n", $html);
 	}
 }
