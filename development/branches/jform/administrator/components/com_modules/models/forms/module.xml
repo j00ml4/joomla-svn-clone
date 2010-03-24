@@ -97,9 +97,9 @@
 
 		<field name="content" type="editor"
 			buttons="true"
-			description="MODULES_FIELD_CONTENT_DESC"
+			description="COM_MODULES_FIELD_CONTENT_DESC"
 			filter="safehtml"
-			label="MODULES_FIELD_CONTENT_LABEL"
+			label="COM_MODULES_FIELD_CONTENT_LABEL"
 		/>
 
 		<field name="language" type="contentlanguage"
