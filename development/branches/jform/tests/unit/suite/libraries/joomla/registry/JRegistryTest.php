@@ -11,6 +11,16 @@ require_once JPATH_BASE.'/libraries/joomla/registry/format.php';
 class JRegistryTest extends PHPUnit_Framework_TestCase
 {
 	/**
+	 * Setup for testing.
+	 *
+	 * @return void
+	 */
+	public function setUp()
+	{
+		include_once 'inspectors.php';
+	}
+
+	/**
 	 * Test the JRegistry::__clone method.
 	 */
 	public function test__clone()
@@ -68,6 +78,43 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		'This test has not been implemented yet.'
 		);
 	}*/
+
+	/**
+	 * Tet the JRegistry::bindData method.
+	 */
+	public function testBindData()
+	{
+		$a		= new JRegistryInspector;
+		$parent	= new stdClass;
+
+		$a->bindData($parent, 'foo');
+		$this->assertThat(
+			$parent->{0},
+			$this->equalTo('foo'),
+			'Line: '.__LINE__.' The input value should exist in the parent object.'
+		);
+
+		$a->bindData($parent, array('foo' => 'bar'));
+		$this->assertThat(
+			$parent->{'foo'},
+			$this->equalTo('bar'),
+			'Line: '.__LINE__.' The input value should exist in the parent object.'
+		);
+
+		$a->bindData($parent, array('level1' => array('level2' => 'value2')));
+		$this->assertThat(
+			$parent->{'level1'}->{'level2'},
+			$this->equalTo('value2'),
+			'Line: '.__LINE__.' The input value should exist in the parent object.'
+		);
+
+		$a->bindData($parent, array('intarray' => array(0, 1, 2)));
+		$this->assertThat(
+			$parent->{'intarray'},
+			$this->equalTo(array(0, 1, 2)),
+			'Line: '.__LINE__.' The un-associative array should bind natively.'
+		);
+	}
 
 	/**
 	 * Test the JReigstry::exists method.
