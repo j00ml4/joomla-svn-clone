@@ -54,7 +54,7 @@ class plgSearchCategories extends JPlugin
 		require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys(plgSearchCategoryAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
 				return array();
 			}
 		}

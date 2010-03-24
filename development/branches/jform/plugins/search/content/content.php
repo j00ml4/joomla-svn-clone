@@ -53,7 +53,7 @@ class plgSearchContent extends JPlugin
 
 		$searchText = $text;
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys(plgSearchContentAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
 				return array();
 			}
 		}
