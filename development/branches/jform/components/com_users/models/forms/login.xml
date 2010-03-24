@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset label="Users_Login_Default_Label">
+	<fieldset name="credentials"
+		label="Users_Login_Default_Label"
+	>
 
 		<field name="username" type="text"
 			class="validate-username"
