@@ -138,13 +138,13 @@
 
 	</fieldset>
 
-	<fieldset
+	<fields
 		name="params"
 		>
 
 		<field
 			name="target"
-			type="List"
+			type="list"
 			default="0"
 			label="COM_WEBLINKS_FIELD_TARGET_LABEL"
 			description="COM_WEBLINKS_FIELD_TARGET_DESC">
@@ -160,7 +160,7 @@
 
 		<field
 			name="count_clicks"
-			type="List"
+			type="list"
 			default="0"
 			label="COM_WEBLINKS_FIELD_COUNTCLICKS_LABEL"
 			description="COM_WEBLINKS_FIELD_COUNTCLICKS_DESC">
@@ -171,5 +171,5 @@
 			<option
 				value="1">JYes</option>
 		</field>
-	</fieldset>
+	</fields>
 </form>
