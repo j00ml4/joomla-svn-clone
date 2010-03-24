@@ -77,7 +77,7 @@ JHtml::_('behavior.formvalidation');
 		<?php endforeach; ?>
 
 		<div id="image">
-			<?php foreach($this->form->getGroup('image') as $field): ?>
+			<?php foreach($this->form->getFieldset('image') as $field): ?>
 				<?php if (!$field->hidden): ?>
 					<?php echo $field->label; ?>
 				<?php endif; ?>
@@ -85,7 +85,7 @@ JHtml::_('behavior.formvalidation');
 			<?php endforeach; ?>
 		</div>
 		<div id="flash">
-			<?php foreach($this->form->getGroup('flash') as $field): ?>
+			<?php foreach($this->form->getFieldset('flash') as $field): ?>
 				<?php if (!$field->hidden): ?>
 					<?php echo $field->label; ?>
 				<?php endif; ?>
@@ -93,7 +93,7 @@ JHtml::_('behavior.formvalidation');
 			<?php endforeach; ?>
 		</div>
 		<div id="alt">
-			<?php foreach($this->form->getGroup('alt') as $field): ?>
+			<?php foreach($this->form->getFieldset('alt') as $field): ?>
 				<?php if (!$field->hidden): ?>
 					<?php echo $field->label; ?>
 				<?php endif; ?>
