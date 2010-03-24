@@ -45,6 +45,8 @@ class JTableViewlevel extends JTable
 				$array['rules'] = json_encode($array['rules']);
 			}
 		}
+
+		return true;
 	}
 
 	/**
