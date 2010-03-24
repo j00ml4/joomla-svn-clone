@@ -22,7 +22,256 @@ class JFormFieldCalendarTest extends JoomlaTestCase
 		jimport('joomla.form.formfield');
 		require_once JPATH_BASE.'/libraries/joomla/form/fields/calendar.php';
 		include_once dirname(dirname(__FILE__)).'/inspectors.php';
+		$this->saveFactoryState();
 	}
+
+	protected function tearDown()
+	{
+		$this->restoreFactoryState();
+	}
+
+	public function attributeData()
+	{
+
+		return array(
+			/*
+			* Test normal parameters
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '%m-%Y-%d',
+					'size' => '25',
+					'maxlength' => '45',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => '',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%m-%Y-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '45',
+						'class' => 'myClass',
+						'readonly' => 'readonly',
+					)
+				)
+			),
+
+			/*
+			* Non integer size
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '%m-%Y-%d',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => '',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%m-%Y-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'class' => 'myClass',
+						'readonly' => 'readonly',
+					)
+				)
+			),
+
+			/*
+			* No format provided
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => '',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%Y-%m-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'class' => 'myClass',
+						'readonly' => 'readonly',
+					)
+				)
+			),
+
+			/*
+			* With an onchange value
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => 'myClass',
+					'readonly' => 'true',
+					'disabled' => 'false',
+					'onchange' => 'This is my onchange value',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%Y-%m-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'class' => 'myClass',
+						'onchange' => 'This is my onchange value',
+						'readonly' => 'readonly',
+					)
+				)
+			),
+
+			/*
+			* With bad readonly value
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => 'myClass',
+					'readonly' => '1',
+					'disabled' => 'false',
+					'onchange' => 'This is my onchange value',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%Y-%m-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'class' => 'myClass',
+						'onchange' => 'This is my onchange value',
+					)
+				)
+			),
+
+			/*
+			* disabled is true, no class
+			*/
+			array(
+				'myCalendarElement',
+				'myCalendarId',
+				'myValue',
+				array(
+					'format' => '',
+					'size' => '25est',
+					'maxlength' => 'forty five',
+					'class' => '',
+					'readonly' => '1',
+					'disabled' => 'true',
+					'onchange' => 'This is my onchange value',
+					'filter' => ''
+				),
+				array(
+					'myValue',
+					'myCalendarElement',
+					'myCalendarId',
+					'%Y-%m-%d',
+					array(
+						'size' => '25',
+						'maxlength' => '0',
+						'disabled' => 'disabled',
+						'onchange' => 'This is my onchange value',
+					)
+				)
+			)
+
+
+
+		);
+	}
+
+	/**
+	 * Tests various attribute methods - this method does not handle filters
+	 * @dataProvider attributeData
+	 */
+	public function testGetInputAttributes($name, $id, $value, $element, $expectedParameters)
+	{
+
+		// we create stubs for config and session/user objects
+		$config = new stdClass;
+		JFactory::$config = $config;		// put the stub in place
+		$sessionMock = $this->getMock('sessionMock', array('get'));
+
+		require_once(JPATH_BASE.'/libraries/joomla/user/user.php');
+		$userObject = new JUser;
+
+		$sessionMock->expects($this->any())
+					->method('get')
+					->with('user')
+					->will($this->returnValue($userObject));
+
+		JFactory::$session = $sessionMock;	// put the stub in place
+
+		// include our inspector which will allow us to manipulate and call protected methods and attributes
+		require_once dirname(__FILE__).'/inspectors/JFormFieldCalendar.php';
+		$calendar = new JFormFieldCalendarInspector;
+
+		// setup our values from our data set
+		$calendar->setProtectedProperty('element', $element);
+		$calendar->setProtectedProperty('name', $name);
+		$calendar->setProtectedProperty('id', $id);
+		$calendar->setProtectedProperty('value', $value);
+
+		// create the mock to implant into JHtml so that we can check our values
+		$mock = $this->getMock('calendarHandler', array('calendar'));
+
+		// setup the expectation with the values from the dataset
+		$mock->expects($this->once())
+			->method('calendar')
+			->with($expectedParameters[0], $expectedParameters[1], $expectedParameters[2], $expectedParameters[3], $expectedParameters[4]);
+
+		JHtml::register('calendar', array($mock, 'calendar'));		// register our mock with JHtml
+
+		$calendar->getInput();			// invoke our method
+		JHtml::unregister('calendar');	// unregister the mock
+	}
+
 
 	/**
 	 * Test the getInput method.
