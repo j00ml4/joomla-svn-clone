@@ -49,51 +49,29 @@ $fieldsets = $this->form->getFieldsets();
 
 			<?php echo $this->form->getLabel('email'); ?>
 			<?php echo $this->form->getInput('email'); ?>
+
 		</fieldset>
 
-		<?php
-		foreach($fieldsets as $fieldset)
-		{
-			if($fieldset->name == 'settings')
-			{
-				?>
-		<fieldset class="adminform">
-			<legend><?php echo JText::_($fieldset->label); ?></legend>
-			<?php foreach($this->form->getFieldset($fieldset->name) as $field): ?>
-				<?php if ($field->hidden): ?>
-					<?php echo $field->input; ?>
-				<?php else: ?>
-					<?php echo $field->label; ?>
-					<?php echo $field->input; ?>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</fieldset>
-				<?php
-			}
-		}
-		?>
 	</div>
 
 	<div class="width-40 fltrt">
-			<?php echo JHTML::_('sliders.start');
-		foreach($fieldsets as $fieldset)
-		{
-			if($fieldset->name != 'settings')
-			{
-				echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
-				?><fieldset class="panelform"><?php
-				foreach($this->form->getFieldset($fieldset->name) as $field): ?>
-				<?php if ($field->hidden): ?>
-					<?php echo $field->input; ?>
-				<?php else: ?>
-					<?php echo $field->label; ?>
-					<?php echo $field->input; ?>
-				<?php endif; ?>
-			<?php endforeach; ?>
-			</fieldset>
-			<?php }
-		} ?>
-			<?php echo JHTML::_('sliders.end'); ?>
+		<?php
+		echo JHTML::_('sliders.start');
+		foreach ($fieldsets as $fieldset) :
+			echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
+		?>
+		<fieldset class="panelform">
+		<?php foreach($this->form->getFieldset($fieldset->name) as $field): ?>
+			<?php if ($field->hidden): ?>
+				<?php echo $field->input; ?>
+			<?php else: ?>
+				<?php echo $field->label; ?>
+				<?php echo $field->input; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		</fieldset>
+		<?php endforeach; ?>
+		<?php echo JHTML::_('sliders.end'); ?>
 
 		<fieldset id="user-groups">
 			<legend><?php echo JText::_('Users_Assigned_Groups'); ?></legend>
