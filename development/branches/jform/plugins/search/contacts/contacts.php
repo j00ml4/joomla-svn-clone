@@ -47,7 +47,7 @@ class plgSearchContacts extends JPlugin
 		$groups	= implode(',', $user->authorisedLevels());
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys(plgSearchContactAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
 				return array();
 			}
 		}

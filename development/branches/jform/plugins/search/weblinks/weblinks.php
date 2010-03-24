@@ -51,7 +51,7 @@ class plgSearchWeblinks extends JPlugin
 		require_once JPATH_SITE.'/components/com_weblinks/router.php';
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys(plgSearchWeblinksAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
 				return array();
 			}
 		}
