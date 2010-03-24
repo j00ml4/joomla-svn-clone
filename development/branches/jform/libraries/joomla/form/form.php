@@ -1073,6 +1073,13 @@ class JForm
 				$return = $value;
 				break;
 
+			// Filter the input as an array of integers.
+			case 'INT_ARRAY':
+				settype($value, 'array');
+				JArrayHelper::toInteger($value);
+				$return = $value;
+				break;
+
 			// Filter safe HTML.
 			case 'SAFEHTML':
 				$return = JFilterInput::getInstance(null, null, 1, 1)->clean($value, 'string');
