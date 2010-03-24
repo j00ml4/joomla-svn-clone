@@ -110,7 +110,7 @@ class JRegistry
 				}
 
 				if ($i+1 == $n) {
-					if ($node !== null) {
+					if ($node !== null && $node !== '') {
 						$result = $node;
 					}
 				}
