@@ -84,6 +84,38 @@ class JRegistry
 	}
 
 	/**
+	 * Check if a registry path exists.
+	 *
+	 * @param	string	Registry path (e.g. joomla.content.showauthor)
+	 * @param	mixed	Optional default value, returned if the internal value is null.
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	public function exists($path, $default = null)
+	{
+		// Explode the registry path into an array
+		if ($nodes = explode('.', $path)) {
+			// Initialize the current node to be the registry root.
+			$node = $this->data;
+
+			// Traverse the registry to find the correct node for the result.
+			for ($i = 0,$n = count($nodes); $i < $n; $i++) {
+				if (isset($node->$nodes[$i])) {
+					$node = $node->$nodes[$i];
+				} else {
+					break;
+				}
+
+				if ($i+1 == $n) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Get a registry value.
 	 *
 	 * @param	string	Registry path (e.g. joomla.content.showauthor)

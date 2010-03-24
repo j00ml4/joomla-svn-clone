@@ -242,12 +242,12 @@ class JForm
 			if ($group) {
 
 				// Filter the value if it exists.
-				if ($input->get($group.'.'.$name) !== null) {
+				if ($input->exists($group.'.'.$name)) {
 					$output->set($group.'.'.$name, $this->filterField($field, $input->get($group.'.'.$name)));
 				}
 			} else {
 				// Filter the value if it exists.
-				if ($input->get($name) !== null) {
+				if ($input->exists($name)) {
 					$output->set($name, $this->filterField($field, $input->get($name)));
 				}
 			}
