@@ -624,6 +624,9 @@ class JForm
 			// If no XPath query is set to search for fields, and we have a <form />, set it and return.
 			if (!$xpath && ($data->getName() == 'form')) {
 				$this->xml = $data;
+
+				// Synchronize any paths found in the load.
+				$this->syncPaths();
 				return true;
 			}
 			// Create a root element for the form.
