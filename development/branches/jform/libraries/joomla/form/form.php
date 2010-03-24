@@ -245,8 +245,7 @@ class JForm
 				if ($input->get($group.'.'.$name) !== null) {
 					$output->set($group.'.'.$name, $this->filterField($field, $input->get($group.'.'.$name)));
 				}
-			}
-			else {
+			} else {
 				// Filter the value if it exists.
 				if ($input->get($name) !== null) {
 					$output->set($name, $this->filterField($field, $input->get($name)));
@@ -1049,8 +1048,8 @@ class JForm
 
 		// Process the input value based on the filter.
 		$return = null;
-		switch (strtoupper($filter))
-		{
+
+		switch (strtoupper($filter)) {
 			// Access Control Rules.
 			case 'RULES':
 				$return = array();

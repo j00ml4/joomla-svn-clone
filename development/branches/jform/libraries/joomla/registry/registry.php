@@ -87,7 +87,7 @@ class JRegistry
 	 * Get a registry value.
 	 *
 	 * @param	string	Registry path (e.g. joomla.content.showauthor)
-	 * @param	mixed	Optional default value
+	 * @param	mixed	Optional default value, returned if the internal value is null.
 	 * @return	mixed	Value of entry or null
 	 * @since	1.6
 	 */
@@ -110,7 +110,7 @@ class JRegistry
 				}
 
 				if ($i+1 == $n) {
-					if ($node !== null && $node !== '') {
+					if ($node !== null) {
 						$result = $node;
 					}
 				}
