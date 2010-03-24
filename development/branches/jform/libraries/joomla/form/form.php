@@ -1075,7 +1075,7 @@ class JForm
 
 			// Filter the input as an array of integers.
 			case 'INT_ARRAY':
-				settype($value, 'array');
+				$value = is_array($value) ? $value : array($value);
 				JArrayHelper::toInteger($value);
 				$return = $value;
 				break;
