@@ -114,7 +114,7 @@ class JFormFieldRules extends JFormField
 				//$html[] = '			<fieldset class="access_rule">';
 
 				$html[] = '				<select name="'.$this->name.'['.$action->name.']['.$group->value.']" id="'.$this->id.'_'.$action->name.'_'.$group->value.'">';
-				$html[] = '					<option value=""'.($rules->allow($action->name, $group->value) === null ? ' selected="selected"' : '').'>'.JText::_($assetId == 1 ? 'JInherit_Unset' : 'JInherit').'</option>';
+				$html[] = '					<option value=""'.($rules->allow($action->name, $group->value) === null ? ' selected="selected"' : '').'>'.JText::_('JInherit_Unset').'</option>';
 				$html[] = '					<option value="0"'.($rules->allow($action->name, $group->value) === false ? ' selected="selected"' : '').'>'.JText::_('JDeny').'</option>';
 				$html[] = '					<option value="1"'.($rules->allow($action->name, $group->value) === true ? ' selected="selected"' : '').'>'.JText::_('JAllow').'</option>';
 				$html[] = '				</select>';
