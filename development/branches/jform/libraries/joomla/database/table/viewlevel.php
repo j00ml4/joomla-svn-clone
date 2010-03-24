@@ -40,13 +40,14 @@ class JTableViewlevel extends JTable
 	 */
 	public function bind($array, $ignore = '')
 	{
+		// Bind the rules as appropriate.
 		if (isset($array['rules'])) {
 			if (is_array($array['rules'])) {
 				$array['rules'] = json_encode($array['rules']);
 			}
 		}
 
-		return true;
+		return parent::bind($array, $ignore);
 	}
 
 	/**

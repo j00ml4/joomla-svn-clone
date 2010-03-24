@@ -23,7 +23,7 @@
 		/>
 
 		<field name="rules" type="hidden"
-			filter="json_encode"
+			filter="int_array"
 		/>
 	</fieldset>
 </form>
