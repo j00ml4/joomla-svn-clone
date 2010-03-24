@@ -157,8 +157,8 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		$a->set('empty', '');
 		$this->assertThat(
 			$a->get('empty', 'empty'),
-			$this->equalTo(''),
-			'Line: '.__LINE__.' Where a value is an empty string, the default should not be used.'
+			$this->equalTo('empty'),
+			'Line: '.__LINE__.' Where a value is an empty string, the default should be used.'
 		);
 	}
 
