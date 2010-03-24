@@ -1472,7 +1472,7 @@ class JForm
 				// Add the complex type prefix to the paths.
 				for ($i = 0, $n = count($paths); $i < $n; $i++) {
 					// Derive the new path.
-					$path = $paths[$i].DS.strtolower(substr($type, 0, $pos));
+					$path = $paths[$i].'/'.strtolower(substr($type, 0, $pos));
 
 					// If the path does not exist, add it.
 					if (!in_array($path, $paths)) {
@@ -1587,6 +1587,7 @@ class JForm
 
 		// Add the field paths.
 		foreach ($paths as $path) {
+			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
 			JForm::addFieldPath($path);
 		}
 
@@ -1596,6 +1597,7 @@ class JForm
 
 		// Add the form paths.
 		foreach ($paths as $path) {
+			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
 			JForm::addFormPath($path);
 		}
 
@@ -1605,6 +1607,7 @@ class JForm
 
 		// Add the rule paths.
 		foreach ($paths as $path) {
+			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
 			JForm::addRulePath($path);
 		}
 
