@@ -139,9 +139,8 @@
 	</fieldset>
 
 	<fieldset
-		group="params"
-		array="true"
-		label="COM_WEBLINKS_OPTIONS">
+		name="params"
+		>
 
 		<field
 			name="target"
