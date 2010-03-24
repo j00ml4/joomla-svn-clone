@@ -61,7 +61,7 @@ class TemplatesModelSource extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_templates.source', 'source', array('control' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_templates.source', 'source', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

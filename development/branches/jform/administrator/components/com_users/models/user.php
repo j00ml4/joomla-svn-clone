@@ -120,7 +120,7 @@ class UsersModelUser extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_users.user', 'user', array('array' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_users.user', 'user', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

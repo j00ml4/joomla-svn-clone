@@ -125,7 +125,7 @@ class MessagesModelMessage extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_messages.message', 'message', array('control' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_messages.message', 'message', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

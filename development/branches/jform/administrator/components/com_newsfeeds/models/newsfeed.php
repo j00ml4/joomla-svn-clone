@@ -133,7 +133,7 @@ class NewsfeedsModelNewsfeed extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('array' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

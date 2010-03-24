@@ -72,7 +72,7 @@ class ContentModelForm extends JModelForm
 	 */
 	public function &getForm($xml = 'article', $name = 'com_content.article', $options = array(), $clear = false)
 	{
-		$options += array('array' => 'jform', 'event' => 'onPrepareForm');
+		$options += array('control' => 'jform');
 
 		try {
 			$form = parent::getForm($name, $xml, $options);

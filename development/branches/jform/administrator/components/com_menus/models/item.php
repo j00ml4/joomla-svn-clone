@@ -497,7 +497,7 @@ class MenusModelItem extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_menus.item', 'item', array('control' => 'jform', 'event' => 'onPrepareForm'), true);
+			$form = parent::getForm('com_menus.item', 'item', array('control' => 'jform'), true);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

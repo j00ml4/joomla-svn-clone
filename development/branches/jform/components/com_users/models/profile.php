@@ -58,7 +58,7 @@ class UsersModelProfile extends JModelForm
 	{
 		// Get the form.
 		try {
-			$form = parent::getForm('com_users.profile', 'profile', array('array' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_users.profile', 'profile', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

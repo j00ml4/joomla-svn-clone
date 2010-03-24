@@ -7,7 +7,7 @@
 	/>
 
 	<field name="name" type="text"
-		class="inputbox required"
+		class="inputbox"
 		description="Users_User_Name_Desc"
 		label="Users_User_Name_Label"
 		required="true"
@@ -15,7 +15,7 @@
 	/>
 
 	<field name="username" type="text"
-		class="inputbox required"
+		class="inputbox"
 		description="Users_User_UserName_Desc"
 		label="Users_User_UserName_Label"
 		required="true"
@@ -41,7 +41,7 @@
 	/>
 
 	<field name="email" type="text"
-		class="inputbox required validate-email"
+		class="inputbox validate-email"
 		description="Users_User_Email_Desc"
 		label="Users_User_Email_Label"
 		required="true"
@@ -73,7 +73,6 @@
 			</field>
 	
 			<field name="editor" type="editors"
-				default=""
 				description="Users_Option_Editor_Desc"
 				label="Users_Option_Editor_Label"
 			>

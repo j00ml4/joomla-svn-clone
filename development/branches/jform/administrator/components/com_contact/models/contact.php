@@ -123,7 +123,7 @@ class ContactModelContact extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_contact.contact', 'contact', array('array' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_contact.contact', 'contact', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;

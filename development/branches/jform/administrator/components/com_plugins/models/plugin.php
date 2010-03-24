@@ -99,7 +99,7 @@ class PluginsModelPlugin extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform', 'event' => 'onPrepareForm'));
+			$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
