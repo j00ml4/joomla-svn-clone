@@ -163,7 +163,6 @@ class JCacheStorageApc extends JCacheStorage
 		$allinfo = apc_cache_info('user');
 		$keys = $allinfo['cache_list'];
 		$secret = $this->_hash;
-		$data = array();
 
 		foreach ($keys as $key) {
 			if (strpos($key['info'], $secret.'-cache-')) {
