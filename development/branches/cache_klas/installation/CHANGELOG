@@ -27,6 +27,50 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+24-Mar-2010 Ian MacLennan
+ # Fixed bug in JError
+
+22-Mar-2010 Sam Moffatt
+ + Added wincache driver for IIS, thanks to Ruslan from Microsoft
+
+20-Mar-2010 Hannes Papenberg
+# Fixed looping error in JLanguage. Not just the language files were wrong, but this code also. Please don't add this again.
+# Fixed error in JUser to properly load the user data. See unittest.
+# Fixed JSimpleXMLElement::getElementbyPath to ignore upper- and lowercase
+
+18-Mar-2010 Jean-Marie Simonet
+# Reverting part of 15400. Solution to broken ini files is to correct ini files, not kill the msg. Error hard coded for now. WIP for translation.
+
+17-Mar-2010 Mark Dexter
+^ Fix up display of mod_articles_category and mod_articles_news (Angie Radtke)
+^ Add heading level param to mod_articles_category and mod_articles_news (Angie Radtke)
+^ Add category selection to frontpage menu item
+- Remove Featured Articles Single Category menu item
+# Fix category links in frontpage
+
+17-Mar-2010 Christophe Demko
+$ Fixing errors in installation/language/en-GB/en-GB.ini
+
+17-Mar-2010 Hannes Papenberg
+# Fixing bug in mod_menu in frontend
+# Fixing JFilterOutput to pass unittests - Thanks Iszak Bryan!
+# Fixing JFilterInput to pass unittests - Thanks Iszak Bryan!
+# Optimizing regular expressions - Thanks Iszak Bryan!
+# (Hopefully) Fixed bug in JLanguage that broke unittests and some broken language files
+# Fixed media manager popup - Thanks Artyom Bisyarin
+# Partially fixed bug in ordering in featured articles
+# Fixed bugs in mod_related_items
+# Prevented parenting a menu item to its own child - Thanks Jonnathan S. Lima
+# Fixed reading of parameters in accesslevel field - Thanks Christopher Garvis
+
+16-Mar-2010 Mark Dexter
+^ Update sample data to fix up module display (Elin Waring)
+# Remove section logic from mod_related_items
+
+16-Mar-2010 Jean-Marie Simonet
+$^# Refactored com_contact back-end ini/keys (Comp is WIP)
+# Correcting missing doublequotes (15370)
+
 15-Mar-2010 Jean-Marie Simonet
 # [19953] Corrected bug in gmail.php
 $ Normalized "Category Options" string
