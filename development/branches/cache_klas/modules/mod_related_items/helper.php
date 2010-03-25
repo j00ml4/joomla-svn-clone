@@ -11,8 +11,6 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
-
 class modRelatedItemsHelper
 {
 	function getList($params)
@@ -91,12 +89,10 @@ class modRelatedItemsHelper
 					{
 						foreach ($temp as $row)
 						{
-								
-							if ($row->cat_state == 1 || $row->cat_state == '') {
-								
-							 if ($access || in_array($item->access, $authorised))
+							if ($row->cat_state == 1)
 							{
-								$row->route = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catslug));
+								$row->route = JRoute::_(ContentRoute::article($row->slug, $row->catslug));
+								$related[] = $row;
 							}
 							else {
 								$row->route  = JRoute::_('index.php?option=com_user&view=login');
