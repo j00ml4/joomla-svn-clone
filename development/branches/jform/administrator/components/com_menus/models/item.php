@@ -599,6 +599,8 @@ class MenusModelItem extends JModelForm
 					}
 				}
 
+				// Set the parsed request arguments to the object.
+				$table->request = $args;
 
 				break;
 		}
