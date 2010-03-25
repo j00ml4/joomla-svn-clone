@@ -169,7 +169,8 @@ class JCacheStorageMemcache extends JCacheStorage
 		$tmparr->size = strlen($data);
 		$index[] = $tmparr;
 		$this->_db->replace($this->_hash.'-index', serialize($index) , 0, 0);
-		$this->_db->set($cache_id, serialize($data), $this->_compress, $this->_lifetime);
+		// prevent double writes, write only if it doesn't exist else replace
+		if(!$this->_db->replace($cache_id, serialize($data), $this->_compress, $this->_lifetime)) $this->_db->set($cache_id, serialize($data), $this->_compress, $this->_lifetime);
 		
 		return;
 	}
@@ -228,16 +229,6 @@ class JCacheStorageMemcache extends JCacheStorage
 		
 	}
 
-	/**
-	 * Garbage collect expired cache data
-	 *
-	 * @access public
-	 * @return boolean  True on success, false otherwise.
-	 */
-	function gc()
-	{  //dummy, memcache has builtin garbage collector
-		return true;
-	}
 
 	/**
 	 * Test to see if the cache storage is available.

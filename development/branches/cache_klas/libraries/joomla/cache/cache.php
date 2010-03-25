@@ -45,7 +45,7 @@ class JCache extends JObject
 	 * @param	array	$options	options
 	 */
 	function __construct($options)
-	{	
+	{
 		$conf = &JFactory::getConfig();
 
 		$this->_options = array(
@@ -61,17 +61,17 @@ class JCache extends JObject
 		// Overwrite default options with given options
 		//$this->_options = array_merge($this->_options,$options);
 		//@todo:or with the ampersand here? Like "...& $options);" for speed if array_merge or this construct would make a deep copy otherwise
-		
+
 		foreach ($this->_options AS $option=>$value) {
-		if (isset($options[$option])) {
-			$this->_options[$option] = $options[$option];
-		} 
+			if (isset($options[$option])) {
+				$this->_options[$option] = $options[$option];
+			}
 		}
-		
+
 		// Fix to detect if template positions are enabled...
 		//@todo remove, moved to safeuri parameters, no need to disable cache
 		/*if (JRequest::getCMD('tpl',0)) {
-			$this->_options['caching'] = false;
+		$this->_options['caching'] = false;
 		}*/
 	}
 
@@ -180,7 +180,7 @@ class JCache extends JObject
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Get a list of all cached data
 	 *
@@ -303,4 +303,37 @@ class JCache extends JObject
 		$this->_handler = &JCacheStorage::getInstance($this->_options['storage'], $this->_options);
 		return $this->_handler;
 	}
+}
+
+/**
+ * This Class is used by CacheData to store group cache data.
+ *
+ * @package	Joomla.Framework
+ * @subpackage	Cache
+ * @since		1.5
+ */
+class CacheItem
+{
+	public $group = '';
+	public $size = 0;
+	public $count = 0;
+
+	public function __construct($group)
+	{
+		$this->group = $group;
+	}
+
+	public function updateSize($size)
+	{
+		$this->size = number_format($this->size + $size, 2);
+		$this->count++;
+	}
+	public function setSize($size) {
+		$this->size = $size;
+	}
+
+	public function setCount($count) {
+		$this->count = $count;
+	}
+
 }

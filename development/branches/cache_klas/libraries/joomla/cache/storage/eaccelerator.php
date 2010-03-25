@@ -44,7 +44,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		$this->_setExpire($cache_id);
 		$cache_content = eaccelerator_get($cache_id);
 		if ($cache_content === null)
 		{
@@ -108,7 +107,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		eaccelerator_put($cache_id.'-expire', time());
 		return eaccelerator_put($cache_id, $data, $this->_lifetime);
 	}
 
@@ -124,7 +122,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		eaccelerator_rm($cache_id.'-expire');
 		return eaccelerator_rm($cache_id);
 	}
 
@@ -178,26 +175,5 @@ class JCacheStorageEaccelerator extends JCacheStorage
 		return (extension_loaded('eaccelerator') && function_exists('eaccelerator_get'));
 	}
 
-	/**
-	 * Set expire time on each call since memcache sets it on cache creation.
-	 *
-	 * @access private
-	 *
-	 * @param string  $key		Cache key to expire.
-	 * @param integer $lifetime  Lifetime of the data in seconds.
-	 */
-	function _setExpire($key)
-	{
-		$lifetime	= $this->_lifetime;
-		$expire		= eaccelerator_get($key.'-expire');
-
-		// set prune period
-		if ($expire + $lifetime < $this->_now ) {
-			eaccelerator_rm($key);
-			eaccelerator_rm($key.'-expire');
-		} else {
-			eaccelerator_put($key.'-expire', $this->_now );
-		}
-	}
 
 }

@@ -45,11 +45,6 @@ class JCacheStorageXCache extends JCacheStorage
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 
-		//check if id exists
-		if (!xcache_isset($cache_id)){
-			return false;
-		}
-
 		return xcache_get($cache_id);
 	}
 	
