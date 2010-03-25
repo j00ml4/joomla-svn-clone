@@ -3,7 +3,6 @@
 <form>
 	<fieldset>
 		<field
-			id="id"
 			name="id"
 			type="hidden"
 			default="0"
@@ -11,7 +10,6 @@
 			readonly="true" />
 
 		<field
-			id="name"
 			name="name"
 			type="text"
 			label="JFIELD_TITLE_LABEL"
@@ -21,17 +19,15 @@
 			required="true" />
 
 		<field
-			id="alias"
 			name="alias"
 			type="text"
 			label="JFIELD_ALIAS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_ALIAS_DESC"
 			class="inputbox"
 			size="45"
-			default="" />
+			 />
 
 		<field
-			id="published"
 			name="published"
 			type="list"
 			label="JFIELD_PUBLISHED_LABEL"
@@ -54,7 +50,6 @@
 		</field>
 
 		<field
-			id="catid"
 			name="catid"
 			type="category"
 			extension="com_newsfeeds"
@@ -67,18 +62,16 @@
 		</field>
 
 		<field
-			id="link"
 			name="link"
 			type="Text"
 			class="inputbox"
-			default=""
+			
 			size="60"
 			label="COM_NEWSFEEDS_FIELD_LINK_LABEL"
 			description="COM_NEWSFEEDS_FIELD_LINK_DESC"
 			required="true" />
 
 		<field
-			id="numarticles"
 			name="numarticles"
 			type="Text"
 			class="inputbox"
@@ -89,7 +82,6 @@
 			required="true" />
 
 		<field
-			id="cache_time"
 			name="cache_time"
 			type="Text"
 			class="inputbox"
@@ -100,16 +92,14 @@
 			required="true" />
 
 		<field
-			id="ordering"
 			name="ordering"
-			type="Ordering"
+			type="ordering"
 			class="inputbox"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_ORDERING_LABEL"
 			description="COM_NEWSFEEDS_FIELD_ORDERING_DESC" />
 
 		<field
-			id="rtl"
 			name="rtl"
 			type="list"
 			class="inputbox"
@@ -126,11 +116,10 @@
 
 
 		<field
-			id="checked_out"
 			name="checked_out"
 			type="Text"
 			class="inputbox"
-			default=""
+			
 			size="6"
 			label="NEWSFEEDS_CHECKEDOUT_LABEL"
 			description="NEWSFEEDS_CHECKEDOUT_DESC"
@@ -138,11 +127,10 @@
 			filter="unset" />
 
 		<field
-			id="checked_out_time"
 			name="checked_out_time"
 			type="Text"
 			class="inputbox"
-			default=""
+			
 			size="6"
 			label="NEWSFEEDS_CHECKEDOUT_TIME_LABEL"
 			description="NEWSFEEDS_CHECKEDOUT_TIME_DESC"
@@ -156,7 +144,7 @@
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
 			size="1"
-			default="" />
+			 />
 
 		<field
 			name="language"
@@ -164,22 +152,20 @@
 			label="JFIELD_LANGUAGE_LABEL"
 			description="JFIELD_NEWSFEED_LANGUAGE_DESC"
 			class="inputbox"
-			default="">
+			>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
 
 	</fieldset>
 
 	<fieldset
-		group="params"
-		array="true"
+		name="params"
 		label="COM_NEWSFEEDS_FIELD_OPTIONS">
 
 <field
-			id="show_headings"
 			name="show_headings"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC">
 			<option
@@ -191,10 +177,9 @@
 		</field>
 
 		<field
-			id="show_name"
 			name="show_name"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_NAME_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NAME_COLUMN_DESC">
 			<option
@@ -206,10 +191,9 @@
 		</field>
 
 		<field
-			id="show_articles"
 			name="show_articles"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC">
 			<option
@@ -221,10 +205,9 @@
 		</field>
 
 		<field
-			id="show_link"
 			name="show_link"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC">
 			<option
@@ -242,10 +225,9 @@
 		/>
 
 		<field
-			id="show_cat_description"
 			name="show_cat_description"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_DESC">
 			<option
@@ -257,10 +239,9 @@
 		</field>
 
 		<field
-			id="show_cat_items"
 			name="show_cat_items"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_DESC">
 			<option
@@ -278,10 +259,9 @@
 		/>
 
 		<field
-			id="show_feed_image"
 			name="show_feed_image"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC">
 			<option
@@ -293,10 +273,9 @@
 		</field>
 
 		<field
-			id="show_feed_description"
 			name="show_feed_description"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC">
 			<option
@@ -308,10 +287,9 @@
 		</field>
 
 		<field
-			id="show_item_description"
 			name="show_item_description"
 			type="list"
-			default=""
+			
 			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC">
 			<option
@@ -323,7 +301,6 @@
 		</field>
 
 		<field
-			id="feed_word_count"
 			name="feed_word_count"
 			type="text"
 			size="6"
