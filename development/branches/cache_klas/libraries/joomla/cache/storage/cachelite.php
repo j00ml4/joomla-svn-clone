@@ -224,7 +224,7 @@ class JCacheStorageCachelite extends JCacheStorage
 		$test = self::$CacheLiteInstance;
 		$sucess1 = self::$CacheLiteInstance->_cleanDir($this->_root.DS,false, 'old');
 	    if (!($dh = opendir($this->_root.DS))) {
-            return false; // $this->raiseError('Cache_Lite : Unable to open cache directory !', -4);
+            return false; 
         }
 		    while ($file = readdir($dh)) {
             if (($file != '.') && ($file != '..') && ($file != '.svn')) {

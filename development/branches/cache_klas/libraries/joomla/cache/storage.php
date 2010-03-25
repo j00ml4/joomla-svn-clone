@@ -124,11 +124,8 @@ class JCacheStorage extends JObject
 	 *
 	 * @abstract
 	 * @access	public
-	 * @param	string	$id			The cache data id
-	 * @param	string	$group		The cache data group
-	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
 	 * @return	mixed	Boolean false on failure or a cached data string
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	function getAll()
 	{

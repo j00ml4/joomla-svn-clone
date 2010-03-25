@@ -44,56 +44,55 @@ class JCacheStorageApc extends JCacheStorage
 	function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		$this->_setExpire($cache_id);
 		return apc_fetch($cache_id);
 	}
-	
-	 /**
+
+	/**
 	 * Get all cached data
 	 *
 	 *
 	 * @access	public
 	 * @return	array data
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	function getAll()
 	{
 		$allinfo = apc_cache_info('user');
-		
+
 		$keys = $allinfo['cache_list'];
-		
-        $secret = $this->_hash;
-        $data = array();		
+
+		$secret = $this->_hash;
+		$data = array();
 
 		foreach ($keys as $key) {
-			
+				
 			$name=$key['info'];
 			$namearr=explode('-',$name);
-			
+				
 			if ($namearr !== false && $namearr[0]==$secret &&  $namearr[1]=='cache') {
-			
-			$group = $namearr[2];
-			
-			if (!isset($data[$group])) {
-			$item = new CacheItem($group);
-			} else {
-			$item = $data[$group];
-			}
+					
+				$group = $namearr[2];
+					
+				if (!isset($data[$group])) {
+					$item = new CacheItem($group);
+				} else {
+					$item = $data[$group];
+				}
 
-			$item->updateSize($key['mem_size']/1024);
-			
-			$data[$group] = $item;
-			
+				$item->updateSize($key['mem_size']/1024);
+					
+				$data[$group] = $item;
+					
 			}
 		}
-	
-					
+
+			
 		return $data;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Store the data to APC by id and group
 	 *
@@ -107,7 +106,6 @@ class JCacheStorageApc extends JCacheStorage
 	function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		apc_store($cache_id.'-expire', time());
 		return apc_store($cache_id, $data, $this->_lifetime);
 	}
 
@@ -123,7 +121,6 @@ class JCacheStorageApc extends JCacheStorage
 	function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		apc_delete($cache_id.'-expire');
 		return apc_delete($cache_id);
 	}
 
@@ -143,18 +140,18 @@ class JCacheStorageApc extends JCacheStorage
 	{
 		$allinfo = apc_cache_info('user');
 		$keys = $allinfo['cache_list'];
-		
-        $secret = $this->_hash;
-        foreach ($keys as $key) {
-		
-        if (strpos($key['info'], $secret.'-cache-'.$group.'-')===0 xor $mode != 'group')
-					apc_delete($key['info']);
-        }
+
+		$secret = $this->_hash;
+		foreach ($keys as $key) {
+
+			if (strpos($key['info'], $secret.'-cache-'.$group.'-')===0 xor $mode != 'group')
+			apc_delete($key['info']);
+		}
 		return true;
 	}
-	
+
 	/**
-	 * Garbage collect expired cache data
+	 * Force garbage collect expired cache data as items are removed only on fetch!
 	 *
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
@@ -162,8 +159,17 @@ class JCacheStorageApc extends JCacheStorage
 	 */
 	function gc()
 	{
-		// dummy, apc has builtin garbage collector controled by apc.gc_ttl
-		return true;
+		$lifetime = $this->_lifetime;
+		$allinfo = apc_cache_info('user');
+		$keys = $allinfo['cache_list'];
+		$secret = $this->_hash;
+		$data = array();
+
+		foreach ($keys as $key) {
+			if (strpos($key['info'], $secret.'-cache-')) {
+				apc_fetch($key['info']);
+			}
+		}
 	}
 
 	/**
@@ -178,25 +184,4 @@ class JCacheStorageApc extends JCacheStorage
 		return extension_loaded('apc');
 	}
 
-	/**
-	 * Set expire time on each call since memcache sets it on cache creation.
-	 *
-	 * @access private
-	 *
-	 * @param string  $key		Cache key to expire.
-	 * @param integer $lifetime  Lifetime of the data in seconds.
-	 */
-	function _setExpire($key)
-	{
-		$lifetime	= $this->_lifetime;
-		$expire		= apc_fetch($key.'-expire');
-
-		// set prune period
-		if ($expire + $lifetime < time()) {
-			apc_delete($key);
-			apc_delete($key.'-expire');
-		} else {
-			apc_store($key.'-expire',  time());
-		}
-	}
 }

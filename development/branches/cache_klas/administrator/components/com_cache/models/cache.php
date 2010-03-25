@@ -184,27 +184,3 @@ class CacheModelCache extends JModel
 	}
 }
 
- /**
-  * This Class is used by CacheData to store group cache data.
-  *
-  * @package	Joomla.Administrator
-  * @subpackage	Cache
-  * @since		1.5
- */
-class CacheItem
-{
-	public $group = '';
-	public $size = 0;
-	public $count = 0;
-
-	public function __construct($group)
-	{
-		$this->group = $group;
-	}
-
-	public function updateSize($size)
-	{
-		$this->size = number_format($this->size + $size, 2);
-		$this->count++;
-	}
-}
