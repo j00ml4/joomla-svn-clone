@@ -124,7 +124,7 @@ class MenusControllerItem extends JControllerForm
 
 		$app	= &JFactory::getApplication();
 		// Get the previous menu item id (if any) and the current menu item id.
-		$previousId	= (int) $app->getUserState('com_content.edit.item.id');
+		$previousId	= (int) $app->getUserState('com_menus.edit.item.id');
 
 		$model	= &$this->getModel('Item');
 
