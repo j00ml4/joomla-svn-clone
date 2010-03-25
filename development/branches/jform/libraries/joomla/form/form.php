@@ -629,6 +629,7 @@ class JForm
 				$this->syncPaths();
 				return true;
 			}
+
 			// Create a root element for the form.
 			else {
 				$this->xml = new JXMLElement('<form></form>');
