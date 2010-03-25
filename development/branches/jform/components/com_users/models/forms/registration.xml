@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset label="USERS REGISTRATION DEFAULT LABEL">
+	<fieldset name="default"
+		label="USERS REGISTRATION DEFAULT LABEL"
+	>
 	
 		<field name="name" type="text"
 			description="Users_Register_Name_Desc"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset>
+	<fieldset name="default">
 		<field name="username" type="text"
 			class="validate-username"
 			description="Users_Form_Username_Desc"

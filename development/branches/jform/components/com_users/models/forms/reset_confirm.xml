@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <form>
-	<fieldset>
+	<fieldset name="default">
 		<field name="token" type="text"
 			description="Users_Reset_Token_Desc"
 			filter="alnum"

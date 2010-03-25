@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset>
+	<fieldset name="default">
 		<field name="email" type="text"
 			class="validate-email"
 			description="Users_Remind_Email_Desc"
