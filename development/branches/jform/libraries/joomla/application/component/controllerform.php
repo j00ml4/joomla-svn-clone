@@ -370,7 +370,7 @@ class JControllerForm extends JController
 		}
 
 		// Validate the posted data.
-		$form = $model->getForm($data);
+		$form = $model->getForm();
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
