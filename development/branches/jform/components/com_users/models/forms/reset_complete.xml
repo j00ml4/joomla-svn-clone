@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset label="Users_Reset_Complete_Label">
+	<fieldset name="default" label="Users_Reset_Complete_Label">
+
 		<field name="password1" type="password"
 			autocomplete="off"
 			class="validate-password"
