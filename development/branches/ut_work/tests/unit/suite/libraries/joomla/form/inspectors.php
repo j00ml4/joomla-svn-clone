@@ -116,3 +116,21 @@ class JFormFieldInspector extends JFormField
 		return parent::getLabel();
 	}
 }
+
+/**
+ * @package		Joomla.UnitTest
+ * @subpackage	Form
+ */
+class JFormRuleInspector extends JFormRule
+{
+	public function setProtectedProperty($property, $value)
+	{
+		$this->{$property} = $value;
+	}
+
+	public function getProtectedProperty($property)
+	{
+		return $this->{$property};
+	}
+
+}
