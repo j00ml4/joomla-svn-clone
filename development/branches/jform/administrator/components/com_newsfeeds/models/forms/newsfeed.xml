@@ -37,7 +37,6 @@
 		</field>
 
 		<field name="link" type="Text" class="inputbox"
-
 			size="60" label="COM_NEWSFEEDS_FIELD_LINK_LABEL"
 			description="COM_NEWSFEEDS_FIELD_LINK_DESC" required="true" />
 
@@ -51,7 +50,6 @@
 			required="true" />
 
 		<field name="ordering" type="ordering" class="inputbox"
-
 			label="COM_NEWSFEEDS_FIELD_ORDERING_LABEL" description="COM_NEWSFEEDS_FIELD_ORDERING_DESC" />
 
 		<field name="rtl" type="list" class="inputbox"
@@ -68,12 +66,10 @@
 
 
 		<field name="checked_out" type="Text" class="inputbox"
-
 			size="6" label="NEWSFEEDS_CHECKEDOUT_LABEL" description="NEWSFEEDS_CHECKEDOUT_DESC"
 			readonly="true" filter="unset" />
 
 		<field name="checked_out_time" type="Text" class="inputbox"
-
 			size="6" label="NEWSFEEDS_CHECKEDOUT_TIME_LABEL"
 			description="NEWSFEEDS_CHECKEDOUT_TIME_DESC" readonly="true"
 			filter="unset" />
@@ -92,7 +88,6 @@
 	<fieldset name="params" label="COM_NEWSFEEDS_FIELD_OPTIONS">
 
 		<field name="show_headings" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC"
 		>
@@ -102,7 +97,6 @@
 		</field>
 
 		<field name="show_name" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_NAME_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NAME_COLUMN_DESC"
 		>
@@ -112,7 +106,6 @@
 		</field>
 
 		<field name="show_articles" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC"
 		>
@@ -122,7 +115,6 @@
 		</field>
 
 		<field name="show_link" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL" description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC"
 		>
 			<option value="">JCOMMON_USE_GLOBAL</option>
@@ -133,7 +125,6 @@
 		<field name="spacer1" type="spacer" hr="true" />
 
 		<field name="show_cat_description" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_DESC"
 		>
@@ -143,7 +134,6 @@
 		</field>
 
 		<field name="show_cat_items" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_DESC"
 		>
@@ -155,7 +145,6 @@
 		<field name="spacer2" type="spacer" hr="true" />
 
 		<field name="show_feed_image" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC"
 		>
@@ -165,7 +154,6 @@
 		</field>
 
 		<field name="show_feed_description" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC"
 		>
@@ -175,7 +163,6 @@
 		</field>
 
 		<field name="show_item_description" type="list"
-
 			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC"
 		>
