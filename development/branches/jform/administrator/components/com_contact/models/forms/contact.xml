@@ -52,10 +52,6 @@
 			label="COM_CONTACT_FIELD_SORTNAME3_LABEL" description="COM_CONTACT_FIELD_SORTNAME3_DESC"
 			class="inputbox" size="30" />
 
-		<field name="language" type="text" label="Contact_Language_Label"
-			description="Contact_Language_Desc" class="inputbox"
-			size="30" />
-
 		<field name="con_position" type="text"
 			label="COM_CONTACT_FIELD_INFORMATION_POSITION_LABEL"
 			description="COM_CONTACT_FIELD_INFORMATION_POSITION_DESC"
@@ -128,7 +124,7 @@
 			class="inputbox" rows="3" cols="30" />
 
 		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
-			description="JFIELD_CONTACT_LANGUAGE_DESC" class="inputbox"
+			description="COM_CONTACT_FIELD_LANGUAGE_DESC" class="inputbox"
 		>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
