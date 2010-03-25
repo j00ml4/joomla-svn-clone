@@ -64,18 +64,18 @@ class JCacheStorageWincache extends JCacheStorage
 		$secret = $this->_hash;
 		$data = array();
 
-		foreach ($keys as $key) {				
+		foreach ($keys as $key) {
 			$name=$key['key_name'];
-			$namearr=explode('-',$name);			
-			if ($namearr !== false && $namearr[0]==$secret &&  $namearr[1]=='cache') {					
-				$group = $namearr[2];				
+			$namearr=explode('-',$name);
+			if ($namearr !== false && $namearr[0]==$secret &&  $namearr[1]=='cache') {
+				$group = $namearr[2];
 				if (!isset($data[$group])) {
 					$item = new CacheItem($group);
 				} else {
 					$item = $data[$group];
 				}
-				$item->updateSize(1); // dummy, to be upgraded if WINCACHE implements item size info				
-				$data[$group] = $item;				
+				$item->updateSize(1); // dummy, to be upgraded if WINCACHE implements item size info
+				$data[$group] = $item;
 			}
 		}
 
@@ -144,7 +144,28 @@ class JCacheStorageWincache extends JCacheStorage
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Force garbage collect expired cache data as items are removed only on get/add/delete/info etc
+	 *
+	 * @access public
+	 * @return boolean  True on success, false otherwise.
+	 * * @since	1.6
+	 */
+	function gc()
+	{
+		$lifetime    = $this->_lifetime;
+		$allinfo = wincache_ucache_info();
+		$keys = $allinfo['cache_entries'];
+		$secret = $this->_hash;
+
+		foreach ($keys as $key) {
+			if (strpos($key['key_name'], $secret.'-cache-')) {
+				wincache_ucache_get($cache_id);
+			}
+		}
+	}
+
 
 	/**
 	 * Test to see if the cache storage is available.
