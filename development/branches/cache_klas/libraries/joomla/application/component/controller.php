@@ -354,10 +354,12 @@ class JController extends JObject
 
 		// Set the layout
 		$view->setLayout($viewLayout);
-
+		
+		$view->assignRef('document', $document);
+		
 		// Display the view
 		if ($cachable && $viewType != 'feed') {
-			global $option;
+			$option = JRequest::getCmd('option');
 			$cache = &JFactory::getCache($option, 'view');
 			if (is_array($urlparams)) {
 				$uri = & JRequest::get();
@@ -367,9 +369,8 @@ class JController extends JObject
 					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
 				}
 				$secureid = md5(serialize(array($safeuri, get_class($view), 'display')));
-				$cache->get($view, 'display',$secureid);} 
-			
-			else $cache->get($view, 'display');
+				$cache->get($view, 'display',$secureid);} else 
+					{$cache->get($view, 'display');}
 			
 			
 		} else {

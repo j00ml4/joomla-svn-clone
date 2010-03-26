@@ -51,16 +51,21 @@ class JCacheStorage extends JObject
 		$app = & JFactory::getApplication();
 		$registeredurlparams = $app->get('registeredurlparams');
 		
-		$safeuriaddon=new stdClass();
-		$safeuriaddon->option='WORD';
-		$safeuriaddon->view='WORD';
-		$safeuriaddon->layout='WORD';
-		$safeuriaddon->tpl='CMD';
+		if (empty($registeredurlparams)) {
+			$safeuriaddon=new stdClass();
+		}
 		
-		if (isset($registeredurlparams)) {
-				foreach ($registeredurlparams AS $key => $value) {
-					$safeuriaddon->$key = JRequest::getVar($key, null,'default',$value);
-				}
+		$registeredurlparams->protocol='WORD';
+		$registeredurlparams->option='WORD';
+		$registeredurlparams->view='WORD';
+		$registeredurlparams->layout='WORD';
+		$registeredurlparams->tpl='CMD';
+		
+		$safeuriaddon=new stdClass();
+		
+		foreach ($registeredurlparams AS $key => $value) {
+			$safeuriaddon->$key = JRequest::getVar($key, null,'default',$value);
+
 		}
 		$this->_safeuriaddon = serialize($safeuriaddon);
 	}
