@@ -25,7 +25,7 @@ class CacheModelCache extends JModel
 	 *
 	 * @var Array
 	 */
-	protected $_data = null;
+	protected $_data = array();
 
 	/**
 	 * Group total
@@ -72,33 +72,7 @@ class CacheModelCache extends JModel
 		$this->setState('list.limit', $limit);
 	}
 
-	/**
-	 * Parse $path for cache file groups
-	 *
-	 * @return	array
-	 
-	protected function _parse($path = null)
-	{
-		$path = ($path !== null ? $path : $this->getState('path'));
-
-		jimport('joomla.filesystem.folder');
-		$folders = JFolder::folders($path);
-		$data = array();
-
-		foreach ($folders as $folder) {
-			$files = array();
-			$files = JFolder::files($path.DS.$folder);
-			$item = new CacheItem($folder);
-
-			foreach ($files as $file) {
-				$item->updateSize(filesize($path.DS.$folder.DS.$file)/1024);
-			}
-			$data[$folder] = $item;
-		}
-
-		return $data;
-	}
-*/
+	
 	/**
 	 * Method to get cache data
 	 *
@@ -109,9 +83,9 @@ class CacheModelCache extends JModel
 		if (empty($this->_data)) {
 		    $conf =& JFactory::getConfig();
             $storage = $conf->getValue('config.cache_handler', 'file');
-			//$this->_data = $this->_parse();
 			$cache = &JFactory::getCache('', 'callback', $storage);
-			$this->_data = $cache->getAll();
+			$data = $cache->getAll();
+			if ($data != false) {$this->_data = $data;} else {$this->_data = array();}
 		}
 		
 		return $this->_data;
@@ -164,8 +138,7 @@ class CacheModelCache extends JModel
 	 */
 	public function clean($group = '')
 	{   $conf =& JFactory::getConfig();
-            $storage = $conf->getValue('config.cache_handler', 'file');
-		//$cache = &JFactory::getCache('', 'callback', 'file');
+        $storage = $conf->getValue('config.cache_handler', 'file');
 		$cache = &JFactory::getCache('', 'callback', $storage);
 		$cache->clean($group);
 	}
