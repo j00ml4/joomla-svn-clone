@@ -1,68 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout
-		title="com_content_article_view_default_title">
+	<layout title="com_content_article_view_default_title">
 		<message>
 			<![CDATA[com_content_article_view_default_desc]]>
 		</message>
 	</layout>
 
-	<fields
-		group="request"
-		array="true"
-		label="JCOMMON_REQUIRED_SETTINGS"
-		description="JCOMMON_REQUIRED_SETTINGS_DESC"
-		addfieldpath="/administrator/components/com_content/models/fields">
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request"
+			addfieldpath="/administrator/components/com_content/models/fields">
 
-		<field
-			name="id"
-			type="modal_article"
-			label="CHOOSE_ARTICLE_LABEL"
-			group="request"
-			required="true"
-			description="CHOOSE_ARTICLE_DESC" />
+			<field name="id" type="modal_article"
+				label="Select_Article_label"
+				required="true"
+				description="Select_article_desc"
+			/>
+		</fieldset>
 	</fields>
 
-	<fields
-		group="integration"
-		label="Menus_Layout_Integration_Options_Label"
-		description="">
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+	
+		<!-- Integration options. -->
+		<fieldset
+			name="integration" 
+			label="Menus_Layout_Integration_Options_Label">
 
-		<field
-			name="article-allow_ratings"
-			type="list"
-			label="JGLOBAL_Allow_Ratings_Label"
-			description="JGLOBAL_Allow_Ratings_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
+			<field 
+				name="article-allow_ratings" 
+				type="list"
+				description="JGLOBAL_Allow_Ratings_Desc"
+				label="JGLOBAL_Allow_Ratings_Label">
+					<option value="">JCOMMON_USE_GLOBAL</option>
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+			</field>
 
-		<field
-			name="article-allow_comments"
-			type="list"
-			label="JGLOBAL_Allow_Comments_Label"
-			description="JGLOBAL_Allow_Comments_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
+			<field 
+				name="article-allow_comments" type="list"
+				description="JGLOBAL_Allow_Comments_Desc"
+				label="JGLOBAL_Allow_Comments_Label">
+					<option value="">JCOMMON_USE_GLOBAL</option>
+					<option value="0">JNo</option>
+					<option value="1">JYes</option>
+			</field>
+		</fieldset>
 
-	</fields>
-
-	<fields
-		group="articles"
-		label="Content_Attribs_Article_Settings_Label"
-		description="">
-		
+		<!-- Basic options. -->
+		<fieldset name="basic"
+			label="Content_Attribs_Article_Settings_Label">
+	
 		<field
 			name="show_noauth"
 			type="list"
@@ -80,12 +68,9 @@
 			default=""
 			label="JGLOBAL_Show_Title_Label"
 			description="JGLOBAL_Show_Title_Desc">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JCOMMON_HIDE</option>
-			<option
-				value="1">JCOMMON_SHOW</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option value="0">JCOMMON_HIDE</option>
+			<option value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -94,12 +79,9 @@
 			default=""
 			label="JGLOBAL_Linked_Titles_Label"
 			description="JGLOBAL_Linked_Titles_Desc">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">JNo</option>
+			<option value="1">JYes</option>
 		</field>
 
 		<field
@@ -108,12 +90,9 @@
 			label="JGLOBAL_Show_Category_Label"
 			description="JGLOBAL_Show_Category_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -122,12 +101,9 @@
 			label="JGLOBAL_Link_Category_Label"
 			description="JGLOBAL_Link_Category_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">JNo</option>
+			<option	value="1">JYes</option>
 		</field>
 
 		<field
@@ -136,12 +112,9 @@
 			label="JGLOBAL_Show_Parent_Category_Label"
 			description="JGLOBAL_Show_Parent_Category_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -150,12 +123,9 @@
 			label="JGLOBAL_Link_Parent_Category_Label"
 			description="JGLOBAL_Link_Parent_Category_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">JNo</option>
+			<option	value="1">JYes</option>
 		</field>
 
 		<field
@@ -164,12 +134,9 @@
 			label="JGLOBAL_Show_Author_Label"
 			description="JGLOBAL_Show_Author_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -178,12 +145,9 @@
 			label="JGLOBAL_Link_Author_Label"
 			description="JGLOBAL_Link_Author_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">JNo</option>
+			<option	value="1">JYes</option>
 		</field>
 
 		<field
@@ -192,12 +156,9 @@
 			label="JGLOBAL_Show_Create_Date_Label"
 			description="JGLOBAL_Show_Create_Date_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -206,12 +167,9 @@
 			label="JGLOBAL_Show_Modify_Date_Label"
 			description="JGLOBAL_Show_Modify_Date_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -220,12 +178,9 @@
 			label="JGLOBAL_Show_Publish_Date_Label"
 			description="JGLOBAL_Show_Publish_Date_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -234,12 +189,9 @@
 			label="JGLOBAL_Show_Navigation_Label"
 			description="JGLOBAL_Show_Navigation_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -248,12 +200,9 @@
 			label="JGLOBAL_Show_Icons_Label"
 			description="JGLOBAL_Show_Icons_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -262,12 +211,9 @@
 			label="JGLOBAL_Show_Print_Icon_Label"
 			description="JGLOBAL_Show_Print_Icon_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -276,12 +222,9 @@
 			label="JGLOBAL_Show_Email_Icon_Label"
 			description="JGLOBAL_Show_Email_Icon_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
 		<field
@@ -290,48 +233,39 @@
 			label="JGLOBAL_Show_Hits_Label"
 			description="JGLOBAL_Show_Hits_Desc"
 			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">Hide</option>
-			<option
-				value="1">Show</option>
-		</field>
-	</fields>
-	<fields
-		group="metadata"
-		array="true">
-
-		<field
-			name="robots"
-			type="list"
-			label="JField_Metadata_Robots_Label"
-			description="JField_Metadata_Robots_Desc"
-			default="">
-			<option
-				value="">JCOMMON_USE_GLOBAL</option>
-			<option
-				value="0">index, follow</option>
-			<option
-				value="1">noindex, follow</option>
-			<option
-				value="2">index, nofollow</option>
-			<option
-				value="3">noindex, nofollow</option>
-			<option
-				value="4">Don't display robots tag</option>
+			<option	value="">JCOMMON_USE_GLOBAL</option>
+			<option	value="0">Hide</option>
+			<option	value="1">Show</option>
 		</field>
 
-		<field
-			name="rights"
-			type="textarea"
-			default=""
-			label="JFIELD_META_RIGHTS_LABEL"
-			description="JFIELD_META_RIGHTS_DESC"
-			required=""
-			filter="string"
-			cols="30"
-			rows="2" />
+		</fieldset>
 	</fields>
 
+	<!-- Add fields to the metadata object for the layout. -->
+	<fields name="params">
+	
+		<!-- Metadata options. -->
+		<fieldset name="metadata">
+
+			<field name="robots" type="list"
+				description="JField_Metadata_Robots_Desc"
+				label="JField_Metadata_Robots_Label"
+			>
+				<option value="">JCOMMON_USE_GLOBAL</option>
+				<option value="0">index, follow</option>
+				<option value="1">noindex, follow</option>
+				<option value="2">index, nofollow</option>
+				<option value="3">noindex, nofollow</option>
+				<option value="4">Don't display robots tag</option>
+			</field>
+
+			<field name="rights" type="textarea"
+				cols="30"
+				description="JFIELD_META_RIGHTS_DESC"
+				filter="string"
+				label="JFIELD_META_RIGHTS_LABEL"
+				rows="2"
+			/>
+		</fieldset>
+	</fields>
 </metadata>
