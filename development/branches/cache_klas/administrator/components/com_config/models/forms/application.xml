@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
-		group="cache"
+	<fieldset
+		name="cache"
 		label="Com_config_cache_settings_label">
 		<field
 			name="caching"
@@ -36,7 +36,7 @@
 			description="COM_CONFIG_FIELD_CACHE_HANDLER_DESC"
 			required="true"
 			filter="word" />
-	</fields>
+	</fieldset>
 		<fields
 		group="memcache"
 		label="Com_Config_Memcache_Settings_Label">
@@ -87,13 +87,12 @@
 			size="5" />
 	</fields>
 
-	<fields
-		group="database"
+	<fieldset
+		name="database"
 		label="Config_database_settings_label">
 		<field
 			name="dbtype"
 			type="list"
-			default=""
 			label="COM_CONFIG_FIELD_DATABASE_TYPE_LABEL"
 			description="COM_CONFIG_FIELD_DATABASE_TYPE_DESC"
 			filter="string">
@@ -106,7 +105,6 @@
 		<field
 			name="host"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_DATABASE_HOST_LABEL"
 			description="COM_CONFIG_FIELD_DATABASE_HOST_DESC"
 			filter="string"
@@ -115,7 +113,6 @@
 		<field
 			name="user"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_DATABASE_USERNAME_LABEL"
 			description="COM_CONFIG_FIELD_DATABASE_USERNAME_DESC"
 			filter="string"
@@ -124,7 +121,6 @@
 		<field
 			name="db"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_DATABASE_NAME_LABEL"
 			description="COM_CONFIG_FIELD_DATABASE_NAME_DESC"
 			filter="string"
@@ -139,10 +135,10 @@
 			filter="string"
 			size="10" />
 
-	</fields>
+	</fieldset>
 
-	<fields
-		group="debug"
+	<fieldset
+		name="debug"
 		label="Config_debug_settings_label">
 		<field
 			name="debug"
@@ -185,10 +181,10 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
-		group="ftp"
+	<fieldset
+		name="ftp"
 		label="Config_ftp_settings_label">
 		<field
 			name="ftp_enable"
@@ -207,7 +203,6 @@
 		<field
 			name="ftp_host"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_FTP_HOST_LABEL"
 			description="COM_CONFIG_FIELD_FTP_HOST_DESC"
 			filter="string"
@@ -216,7 +211,6 @@
 		<field
 			name="ftp_port"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_FTP_PORT_LABEL"
 			description="COM_CONFIG_FIELD_FTP_PORT_DESC"
 			filter="string"
@@ -225,7 +219,6 @@
 		<field
 			name="ftp_user"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_FTP_USERNAME_LABEL"
 			description="COM_CONFIG_FIELD_FTP_USERNAME_DESC"
 			filter="string"
@@ -234,7 +227,6 @@
 		<field
 			name="ftp_pass"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_FTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_FTP_PASSWORD_DESC"
 			filter="string"
@@ -243,27 +235,25 @@
 		<field
 			name="ftp_root"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_FTP_ROOT_LABEL"
 			description="COM_CONFIG_FIELD_FTP_ROOT_DESC"
 			filter="string"
 			size="50" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="locale"
+	<fieldset
+		name="locale"
 		label="Config_locale_settings_label">
 		<field
 			name="offset"
 			type="timezone"
-			default=""
 			label="COM_CONFIG_FIELD_SERVER_TIMEZONE_LABEL"
 			description="COM_CONFIG_FIELD_SERVER_TIMEZONE_DESC"
 			required="true" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="mail"
+	<fieldset
+		name="mail"
 		label="Config_mail_settings_label">
 		<field
 			name="mailer"
@@ -284,7 +274,6 @@
 		<field
 			name="mailfrom"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_MAIL_FROM_EMAIL_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_FROM_EMAIL_DESC"
 			filter="string"
@@ -293,7 +282,6 @@
 		<field
 			name="fromname"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_MAIL_FROM_NAME_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_FROM_NAME_DESC"
 			filter="string"
@@ -351,7 +339,6 @@
 		<field
 			name="smtpuser"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_MAIL_SMTP_USERNAME_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_USERNAME_DESC"
 			filter="string"
@@ -360,7 +347,6 @@
 		<field
 			name="smtppass"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_DESC"
 			filter="string"
@@ -374,15 +360,14 @@
 			description="COM_CONFIG_FIELD_MAIL_SMTP_HOST_DESC"
 			filter="string"
 			size="30" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="metadata"
+	<fieldset
+		name="metadata"
 		label="COM_CONFIG_METADATA_SETTINGS">
 		<field
 			name="MetaDesc"
 			type="textarea"
-			default=""
 			label="COM_CONFIG_FIELD_METADESC_LABEL"
 			description="COM_CONFIG_FIELD_METADESC_DESC"
 			required="true"
@@ -393,7 +378,6 @@
 		<field
 			name="MetaKeys"
 			type="textarea"
-			default=""
 			label="COM_CONFIG_FIELD_METAKEYS_LABEL"
 			description="COM_CONFIG_FIELD_METAKEYS_DESC"
 			required="true"
@@ -403,7 +387,6 @@
 		<field
 			name="MetaRights"
 			type="textarea"
-			default=""
 			label="JFIELD_META_RIGHTS_LABEL"
 			description="JFIELD_META_RIGHTS_DESC"
 			filter="string"
@@ -436,10 +419,10 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
-		group="seo"
+	<fieldset
+		name="seo"
 		label="Config_seo_settings_label">
 		<field
 			name="sef"
@@ -496,15 +479,14 @@
 			<option
 				value="0">JNO</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
-		group="server"
+	<fieldset
+		name="server"
 		label="Config_server_settings_label">
 		<field
 			name="tmp_path"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_TEMP_PATH_LABEL"
 			description="COM_CONFIG_FIELD_TEMP_PATH_DESC"
 			required="true"
@@ -558,10 +540,10 @@
 			<option
 				value="2">COM_CONFIG_FIELD_VALUE_ENTIRE_SITE</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
-		group="session"
+	<fieldset
+		name="session"
 		label="Config_session_settings_label">
 		<field
 			name="lifetime"
@@ -581,16 +563,15 @@
 			description="COM_CONFIG_FIELD_SESSION_HANDLER_DESC"
 			required="true"
 			filter="word" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="site"
+	<fieldset
+		name="site"
 		label="CONFIG_SITE_SETTINGS_LABEL">
 
 		<field
 			name="sitename"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_SITE_NAME_LABEL"
 			description="COM_CONFIG_FIELD_SITE_NAME_DESC"
 			required="true"
@@ -614,7 +595,6 @@
 		<field
 			name="offline_message"
 			type="textarea"
-			default=""
 			label="COM_CONFIG_FIELD_OFFLINE_MESSAGE_LABEL"
 			description="COM_CONFIG_FIELD_OFFLINE_MESSAGE_DESC"
 			required="true"
@@ -721,15 +701,14 @@
 			<option
 				value="site">COM_CONFIG_FIELD_VALUE_SITE_EMAIL</option>
 		</field>
-	</fields>
+	</fieldset>
 
-	<fields
-		group="system"
+	<fieldset
+		name="system"
 		label="Config_system_settings_label">
 		<field
 			name="secret"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_SECRET_LABEL"
 			description="COM_CONFIG_FIELD_SECRET_DESC"
 			required="true"
@@ -739,7 +718,6 @@
 		<field
 			name="log_path"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_LOG_PATH_LABEL"
 			description="COM_CONFIG_FIELD_LOG_PATH_DESC"
 			required="true"
@@ -763,19 +741,17 @@
 		<field
 			name="helpurl"
 			type="helpsite"
-			default=""
 			label="COM_CONFIG_FIELD_HELP_SERVER_LABEL"
 			description="COM_CONFIG_FIELD_HELP_SERVER_DESC"
 			required="true" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="cookie"
+	<fieldset
+		name="cookie"
 		label="Config_cookie_settings_label">
 		<field
 			name="cookie_domain"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_COOKIE_DOMAIN_LABEL"
 			description="COM_CONFIG_FIELD_COOKIE_DOMAIN_DESC"
 			required="false"
@@ -785,16 +761,15 @@
 		<field
 			name="cookie_path"
 			type="text"
-			default=""
 			label="COM_CONFIG_FIELD_COOKIE_PATH_LABEL"
 			description="COM_CONFIG_FIELD_COOKIE_PATH_DESC"
 			required="false"
 			filter="string"
 			size="40" />
-	</fields>
+	</fieldset>
 
-	<fields
-		group="permissions"
+	<fieldset
+		name="permissions"
 		label="Config_permission_settings_label">
 
 		<field
@@ -838,11 +813,11 @@
 				description="JACTION_EDIT_STATE_DESC" />
 		</field>
 
-	</fields>
+	</fieldset>
 
-	<fields>
+	<fieldset>
 		<field
 			name="asset_id"
 			type="hidden" />
-	</fields>
+	</fieldset>
 </form>
