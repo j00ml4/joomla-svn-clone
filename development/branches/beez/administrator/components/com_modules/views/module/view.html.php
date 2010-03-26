@@ -34,7 +34,6 @@ class ModulesViewModule extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$itemForm	= $this->get('Form');
-		$paramsForm	= $this->get('ParamsForm');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -44,16 +43,10 @@ class ModulesViewModule extends JView
 
 		// Bind the record to the form.
 		$itemForm->bind($item);
-		$paramsForm->bind($item->params);
-
-		// Add the module and client_id to the params form.
-		$paramsForm->set('module', $item->module);
-		$paramsForm->set('client_id', $item->client_id);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('item',		$item);
 		$this->assignRef('form',		$itemForm);
-		$this->assignRef('paramsform',	$paramsForm);
 
 		$this->_setToolbar();
 		parent::display($tpl);
@@ -86,19 +79,19 @@ class ModulesViewModule extends JView
 		// If not checked out, can save the item.
 		if (!$checkedOut && $canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('module.apply', 'JToolbar_Apply');
-			JToolBarHelper::save('module.save', 'JToolbar_Save');
-			JToolBarHelper::addNew('module.save2new', 'JToolbar_Save_and_new');
+			JToolBarHelper::apply('module.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('module.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::addNew('module.save2new', 'JTOOLBAR_SAVE_AND_NEW');
 		}
 			// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('module.save2copy', 'copy.png', 'copy_f2.png', 'JToolbar_Save_as_Copy', false);
+			JToolBarHelper::custom('module.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('module.cancel', 'JToolbar_Cancel');
+			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else {
-			JToolBarHelper::cancel('module.cancel', 'JToolbar_Close');
+			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 		JToolBarHelper::help('screen.module.edit','JTOOLBAR_HELP');
