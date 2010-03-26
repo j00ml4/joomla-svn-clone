@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
+	<fieldset>
 		<field
 			id="id"
 			name="id"
@@ -15,8 +15,8 @@
 			id="menutype"
 			name="menutype"
 			type="text"
-			label="Menus_Menu_Menutype_Label"
-			description="Menus_Menu_Menutype_Desc"
+			label="COM_MENUS_MENU_MENUTYPE_LABEL"
+			description="COM_MENUS_MENU_MENUTYPE_DESC"
 			default=""
 			class="inputbox"
 			size="30"
@@ -27,8 +27,8 @@
 			id="title"
 			name="title"
 			type="text"
-			label="Menus_Menu_Title_Label"
-			description="Menus_Menu_Title_Desc"
+			label="COM_MENUS_MENU_TITLE_LABEL"
+			description="COM_MENUS_MENU_TITLE_DESC"
 			default=""
 			class="inputbox"
 			size="30"
@@ -39,12 +39,12 @@
 			id="menudescription"
 			name="description"
 			type="text"
-			label="Menus_Menu_Description_Label"
-			description="Menus_Menu_Description_Desc"
+			label="COM_MENUS_MENU_DESCRIPTION_LABEL"
+			description="COM_MENUS_MENU_DESCRIPTION_DESC"
 			default=""
 			class="inputbox"
 			size="30"
 			maxlength="255" />
 
-	</fields>
+	</fieldset>
 </form>

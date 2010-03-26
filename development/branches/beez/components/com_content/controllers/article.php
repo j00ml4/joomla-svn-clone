@@ -220,7 +220,7 @@ class ContentControllerArticle extends JController
 		$data['id'] = (int) $app->getUserState($context.'id');
 
 		// Split introtext and fulltext
-		$pattern	= '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
+		$pattern    = '#<hr\s+id=(["\'])system-readmore\1\s*/?>#i';
 		$text		= $data['text'];
 		$tagPos		= preg_match($pattern, $text);
 
@@ -302,7 +302,7 @@ class ContentControllerArticle extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_('JCONTROLLER_SAVE_SUCCESS'));
+		$this->setMessage(JText::_('COM_CONTENT_ARTICLE_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

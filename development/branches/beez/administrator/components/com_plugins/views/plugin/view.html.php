@@ -31,7 +31,6 @@ class PluginsViewPlugin extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$itemForm	= $this->get('Form');
-		$paramsForm	= $this->get('ParamsForm');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -41,12 +40,10 @@ class PluginsViewPlugin extends JView
 
 		// Bind the record to the form.
 		$itemForm->bind($item);
-		$paramsForm->bind($item->params);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('item',		$item);
 		$this->assignRef('form',		$itemForm);
-		$this->assignRef('paramsform',	$paramsForm);
 
 		$this->_setToolbar();
 		parent::display($tpl);
@@ -67,10 +64,10 @@ class PluginsViewPlugin extends JView
 		// If not checked out, can save the item.
 		if ($canDo->get('core.edit'))
 		{
-			JToolBarHelper::apply('plugin.apply', 'JToolbar_Apply');
-			JToolBarHelper::save('plugin.save', 'JToolbar_Save');
+			JToolBarHelper::apply('plugin.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('plugin.save', 'JTOOLBAR_SAVE');
 		}
-		JToolBarHelper::cancel('plugin.cancel', 'JToolbar_Close');
+		JToolBarHelper::cancel('plugin.cancel', 'JTOOLBAR_CLOSE');
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.plugins.edit','JTOOLBAR_HELP');
 	}
