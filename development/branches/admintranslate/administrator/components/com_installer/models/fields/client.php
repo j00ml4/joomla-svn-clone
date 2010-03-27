@@ -29,20 +29,16 @@ class JFormFieldClient extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput() 
+	protected function getInput() 
 	{
-		$attributes = '';
-		if ($v = (string)$this->_element->attributes()->onchange) 
-		{
-			$attributes.= ' onchange="' . $this->_replacePrefix($v) . '"';
-		}
+		$onchange	= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
 		$options = array();
-		foreach ($this->_element->children() as $option) {
+		foreach ($this->element->children() as $option) {
 			$options[] = JHtml::_('select.option', $option->attributes('value'), JText::_(trim($option->data())));
 		}
 		$options[] = JHtml::_('select.option', '0', JText::sprintf('INSTALLER_OPTION_MANAGE_CLIENT_SITE'));
 		$options[] = JHtml::_('select.option', '1', JText::sprintf('INSTALLER_OPTION_MANAGE_CLIENT_ADMINISTRATOR'));
-		$return = JHtml::_('select.genericlist', $options, $this->inputName, $attributes, 'value', 'text', $this->value, $this->inputId);
+		$return = JHtml::_('select.genericlist', $options, $this->name, $onchange, 'value', 'text', $this->value, $this->id);
 		return $return;
 	}
 }

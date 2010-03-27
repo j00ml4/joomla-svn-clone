@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields
-		label="Menus_Linktype_Options_Label"
-		description="">
+	<fields name="params">
+		<fieldset name="menu-options" 
+			label="COM_MENUS_LINKTYPE_OPTIONS_LABEL"
+			description=""
+		>
 
-		<field
-			id="menu-anchor_title"
-			name="menu-anchor_title"
-			type="text"
-			label="Menus_Item_Anchor_Title_Label"
-			description="Menus_item_Anchor_Title_Desc"
-			default=""/>
+			<field name="menu-anchor_title"
+				type="text" label="COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_LABEL"
+				description="COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_DESC"
+				default="" />
 
-		<field
-			id="menu-anchor_css"
-			name="menu-anchor_css"
-			type="text"
-			label="Menus_Item_Anchor_CSS_Label"
-			description="Menus_item_Anchor_CSS_Desc"
-			default=""/>
+			<field name="menu-anchor_css"
+				type="text" label="COM_MENUS_ITEM_FIELD_ANCHOR_CSS_LABEL"
+				description="COM_MENUS_ITEM_FIELD_ANCHOR_CSS_DESC"
+				default="" />
 
+		</fieldset>
 	</fields>
-
 </form>

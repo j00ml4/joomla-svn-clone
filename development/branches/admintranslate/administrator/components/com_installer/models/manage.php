@@ -37,13 +37,10 @@ class InstallerModelManage extends JModelList {
 		$app->setUserState('com_installer.extension_message','');
 		$data = JRequest::getVar('filters');
 		if (empty($data)) {
-			$data = array();
-			$data['select'] = $app->getUserState('com_installer.manage.select');
-			$data['search'] = $app->getUserState('com_installer.manage.search');
+			$data = $app->getUserState('com_installer.manage.data');
 		}
 		else {
-			$app->setUserState('com_installer.manage.select', $data['select']);
-			$app->setUserState('com_installer.manage.search', $data['search']);
+			$app->setUserState('com_installer.manage.data', $data);
 		}
 		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 		$this->setState('filter.hideprotected', isset($data['search']['hideprotected']) ? $data['search']['hideprotected'] : 0);
@@ -328,7 +325,7 @@ class InstallerModelManage extends JModelList {
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance('manage', 'com_installer.manage', true, array('array' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance('com_installer.manage', 'manage', array('control' => 'filters', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -337,16 +334,7 @@ class InstallerModelManage extends JModelList {
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_installer.manage.select', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_installer.manage.search', array());
-
+		$data = $app->getUserState('com_installer.manage.data', array());
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);

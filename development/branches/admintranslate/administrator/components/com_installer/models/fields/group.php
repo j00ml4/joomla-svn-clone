@@ -29,15 +29,11 @@ class JFormFieldGroup extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput() 
+	protected function getInput() 
 	{
-		$attributes = '';
-		if ($v = (string)$this->_element->attributes()->onchange) 
-		{
-			$attributes.= ' onchange="' . $this->_replacePrefix($v) . '"';
-		}
+		$onchange	= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
 		$options = array();
-		foreach ($this->_element->children() as $option) {
+		foreach ($this->element->children() as $option) {
 			$options[] = JHtml::_('select.option', (string)$option->attributes()->value, JText::_(trim($option->data())));
 		}
 		$dbo = JFactory::getDbo();
@@ -52,7 +48,7 @@ class JFormFieldGroup extends JFormField
 		foreach($folders as $folder) {
 			$options[] = JHtml::_('select.option', $folder, $folder);
 		}
-		$return = JHtml::_('select.genericlist', $options, $this->inputName, $attributes, 'value', 'text', $this->value, $this->inputId);
+		$return = JHtml::_('select.genericlist', $options, $this->name, $onchange, 'value', 'text', $this->value, $this->id);
 		return $return;
 	}
 }

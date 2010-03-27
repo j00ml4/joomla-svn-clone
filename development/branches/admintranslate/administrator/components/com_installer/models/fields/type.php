@@ -29,15 +29,11 @@ class JFormFieldType extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput() 
+	protected function getInput() 
 	{
-		$attributes = '';
-		if ($v = (string)$this->_element->attributes()->onchange) 
-		{
-			$attributes.= ' onchange="' . $this->_replacePrefix($v) . '"';
-		}
+		$onchange	= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
 		$options = array();
-		foreach ($this->_element->children() as $option) {
+		foreach ($this->element->children() as $option) {
 			$options[] = JHtml::_('select.option', $option->attributes('value'), JText::_(trim($option->data())));
 		}
 		$options[] = JHtml::_('select.option', 'component', JText::sprintf('INSTALLER_OPTION_MANAGE_TYPE_COMPONENT'));
@@ -46,7 +42,7 @@ class JFormFieldType extends JFormField
 		$options[] = JHtml::_('select.option', 'template', JText::sprintf('INSTALLER_OPTION_MANAGE_TYPE_TEMPLATE'));
 		$options[] = JHtml::_('select.option', 'language', JText::sprintf('INSTALLER_OPTION_MANAGE_TYPE_LANGUAGE'));
 		$options[] = JHtml::_('select.option', 'library', JText::sprintf('INSTALLER_OPTION_MANAGE_TYPE_LIBRARY'));
-		$return = JHtml::_('select.genericlist', $options, $this->inputName, $attributes, 'value', 'text', $this->value, $this->inputId);
+		$return = JHtml::_('select.genericlist', $options, $this->name, $onchange, 'value', 'text', $this->value, $this->id);
 		return $return;
 	}
 }

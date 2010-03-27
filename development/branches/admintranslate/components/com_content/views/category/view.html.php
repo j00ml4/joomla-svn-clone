@@ -77,8 +77,14 @@ class ContentViewCategory extends JView
 		foreach ($articles as $i => & $article)
 		{
 			$article->slug = $article->alias ? ($article->id . ':' . $article->alias) : $article->id;
-			$article->catslug = $article->category_route ? ($article->catid . ':' . $article->category_route) : $article->catid;
-			$article->parent_slug = $article->parent_route ? ($article->parent_id . ':' . $article->parent_route) : $article->parent_id;
+			$article->catslug = $article->category_alias ? ($article->catid . ':' . $article->category_alias) : $article->catid;
+			$article->parent_slug = $article->parent_alias ? ($article->parent_id . ':' . $article->parent_alias) : $article->parent_id;
+			
+			// No link for ROOT category
+			if ($article->parent_alias == 'root') {
+				$article->parent_slug = null;
+			}
+
 			$article->event = new stdClass();
 
 			$dispatcher =& JDispatcher::getInstance();
