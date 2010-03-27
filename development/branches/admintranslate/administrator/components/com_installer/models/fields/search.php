@@ -29,12 +29,12 @@ class JFormFieldSearch extends JFormField
 	 *
 	 * @return	string		The field input.
 	 */
-	protected function _getInput() 
+	protected function getInput() 
 	{
 		$html = '';
-		$html.= '<input type="text" name="' . $this->inputName . '" id="' . $this->inputId . '" value="' . $this->value . '" title="' . JText::_('JSearch_Filter') . '" onchange="this.form.submit();" />';
+		$html.= '<input type="text" name="' . $this->name . '" id="' . $this->id . '" value="' . $this->value . '" title="' . JText::_('JSearch_Filter') . '" onchange="this.form.submit();" />';
 		$html.= '<button type="submit" class="btn">' . JText::_('JSearch_Filter_Submit') . '</button>';
-		$html.= '<button type="button" class="btn" onclick="document.id(\'' . $this->inputId . '\').value=\'\';this.form.submit();">' . JText::_('JSearch_Filter_Clear') . '</button>';
+		$html.= '<button type="button" class="btn" onclick="document.id(\'' . $this->id . '\').value=\'\';this.form.submit();">' . JText::_('JSearch_Filter_Clear') . '</button>';
 		return $html;
 	}
 }

@@ -117,19 +117,21 @@ class ContactModelContact extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
 		JImport('joomla.form.form');
 		JForm::addFieldPath('JPATH_ADMINISTRATOR/components/com_users/models/fields');
+
 		// Get the form.
-		$form = parent::getForm('contact', 'com_contact.contact', array('array' => 'jform', 'event' => 'onPrepareForm'));
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_contact.contact', 'contact', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
 		// Check the session for previously entered form data.
 		$data = $app->getUserState('com_contact.edit.contact.data', array());
+
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
@@ -319,7 +321,7 @@ class ContactModelContact extends JModelForm
 			}
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JError_Checkin_user_mismatch'));
+				$this->setError(JText::_('JERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
 
@@ -381,7 +383,7 @@ class ContactModelContact extends JModelForm
 		}
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JError_No_items_selected'));
+			$this->setError(JText::_('COM_CONTACT_NO_CONTACT_SELECTED'));
 			return false;
 		}
 
@@ -410,7 +412,7 @@ class ContactModelContact extends JModelForm
 
 		if (!$done)
 		{
-			$this->setError('Menus_Error_Insufficient_batch_information');
+			$this->setError('COM_MENUS_ERROR_INSUFFICIENT_BATCH_INFORMATION');
 			return false;
 		}
 

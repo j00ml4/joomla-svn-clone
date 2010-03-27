@@ -55,7 +55,7 @@ JHtml::_('behavior.formvalidation');
 
 			<!-- Plugin metadata -->
 			<?php if ($this->item->xml) : ?>
-				<?php if ($text = (string) $this->item->xml->description) : ?>
+				<?php if ($text = trim($this->item->xml->description)) : ?>
 					<label>
 						<?php echo JText::_('COM_PLUGINS_XML_DESCRIPTION'); ?>
 					</label>

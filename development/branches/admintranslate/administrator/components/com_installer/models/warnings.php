@@ -90,7 +90,7 @@ class InstallerModelWarnings extends JModelList
 		}
 
 		$config =& JFactory::getConfig();
-		$tmp_path = $config->getValue('tmp_path');
+		$tmp_path = $config->get('tmp_path');
 		if (!$tmp_path) {
 			$messages[] = Array('message'=>JText::_('INSTALLER_MSG_WARNINGS_JOOMLATMPNOTSET'), 'description'=>JText::_('INSTALLER_MSG_WARNINGS_JOOMLATMPNOTSETDESC'));
 		} else {
