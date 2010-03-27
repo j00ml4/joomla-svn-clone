@@ -130,13 +130,13 @@ class ModulesHelper
 			$path = $clientId ? JPATH_ADMINISTRATOR : JPATH_SITE;
 			$source = $path . "/modules/$extension";
 			$lang = JFactory::getLanguage();
-				$lang->load("$extension.manage", $path, null, false, false)
+				$lang->load("$extension.sys", $path, null, false, false)
 			||	$lang->load($extension, $path, null, false, false)
-			||	$lang->load("$extension.manage", $source, null, false, false)
+			||	$lang->load("$extension.sys", $source, null, false, false)
 			||	$lang->load($extension, $source, null, false, false)
-			||	$lang->load("$extension.manage", $path, $lang->getDefault(), false, false)
+			||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
 			||	$lang->load($extension, $path, $lang->getDefault(), false, false)
-			||	$lang->load("$extension.manage", $source, $lang->getDefault(), false, false)
+			||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false)
 			||	$lang->load($extension, $source, $lang->getDefault(), false, false);
 			$modules[$i]->text = JText::_($module->text);
 		}
