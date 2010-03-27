@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="1.6.0"
+	client="site"
+	method="upgrade">
+	<name>Wrapper</name>
+	<author>Joomla! Project</author>
+	<creationDate>October 2004</creationDate>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>1.6.0</version>
+	<description>DESCWRAPPER</description>
+	<files>
+		<filename
+			module="mod_wrapper">mod_wrapper.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.php</filename>
+		<filename>mod_wrapper.xml</filename>
+	</files>
+	<languages>
+		<language
+			tag="en-GB">en-GB.mod_wrapper.ini</language>
+	</languages>
+	<fields>
+		<field
+			name="url"
+			type="text"
+			size="30"
+			default=""
+			label="Url"
+			description="URL TO SITE/FILE YOU WISH TO DISPLAY WITHIN THE IFRAME" />
+		<field
+			name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
+		<field
+			name="scrolling"
+			type="radio"
+			default="auto"
+			label="Scroll Bars"
+			description="SHOW/HIDE HORIZONTAL AND VERTICAL SCROLL BARS.">
+			<option
+				value="no">JNo</option>
+			<option
+				value="yes">JYes</option>
+			<option
+				value="auto">Auto</option>
+		</field>
+		<field
+			name="width"
+			type="text"
+			size="5"
+			default="100%"
+			label="Width"
+			description="fieldWIDTH" />
+		<field
+			name="height"
+			type="text"
+			size="5"
+			default="200"
+			label="Height"
+			description="HEIGHT OF THE IFRAME WINDOW" />
+		<field
+			name="height_auto"
+			type="radio"
+			default="1"
+			label="Auto Height"
+			description="fieldAUTOHEIGHT">
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+		<field
+			name="spacer2"
+			type="spacer"
+			hr="true"
+			/>
+		<field
+			name="add"
+			type="radio"
+			default="1"
+			label="Auto Add"
+			description="fieldAUTOADD">
+			<option
+				value="0">JNo</option>
+			<option
+				value="1">JYes</option>
+		</field>
+		<field
+			name="target"
+			type="text"
+			size="30"
+			default=""
+			label="Target Name"
+			description="Name of the IFrame when used as Target" />
+	</fields>
+	<fields
+		group="advanced">
+		<field
+			name="layout"
+			type="modulelayout"
+			label="JFIELD_ALT_LAYOUT_LABEL"
+			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+		<field
+			name="moduleclass_sfx"
+			type="text"
+			default=""
+			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
+			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
+		<field
+			name="cache"
+			type="list"
+			default="1"
+			label="MODULES_FIELD_CACHING_LABEL"
+			description="MODULES_FIELD_CACHING_DESC">
+			<option
+				value="1">USE_GLOBAL</option>
+			<option
+				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
+		</field>
+		<field
+			name="cache_time"
+			type="text"
+			default="900"
+			label="MODULES_FIELD_CACHE_TIME_LABEL"
+			description="MODULES_FIELD_CACHE_TIME_DESC" />
+	</fields>
+</extension>
