@@ -93,14 +93,10 @@ class PluginsModelPlugins extends JModelList
 		foreach($result as $i=>$item) {
 			$source = JPATH_PLUGINS . '/' . $item->folder . '/' . $item->element;
 			$extension = 'plg_' . $item->folder . '_' . $item->element;
-				$lang->load($extension . '.manage', JPATH_ADMINISTRATOR, null, false, false)
-			||	$lang->load($extension, JPATH_ADMINISTRATOR, null, false, false)
-			||	$lang->load($extension . '.manage', $source, null, false, false)
-			||	$lang->load($extension, $source, null, false, false)
-			||	$lang->load($extension . '.manage', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-			||	$lang->load($extension, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-			||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
-			||	$lang->load($extension, $source, $lang->getDefault(), false, false);
+				$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, false)
+			||	$lang->load($extension . '.sys', $source, null, false, false)
+			||	$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+			||	$lang->load($extension . '.sys', $source, $lang->getDefault(), false, false);
 			$result[$i]->name = JText::_($item->name);
 		}
 		JArrayHelper::sortObjects($result,$this->getState('list.ordering', 'ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);

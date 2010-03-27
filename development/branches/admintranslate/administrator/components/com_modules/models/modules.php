@@ -101,14 +101,10 @@ class ModulesModelModules extends JModelList
 		foreach($result as $i=>$item) {
 			$extension = $item->module;
 			$source = constant('JPATH_' . strtoupper($client)) . "/modules/$extension";
-				$lang->load("$extension.manage", constant('JPATH_' . strtoupper($client)), null, false, false)
-			||	$lang->load($extension, constant('JPATH_' . strtoupper($client)), null, false, false)
-			||	$lang->load("$extension.manage", $source, null, false, false)
-			||	$lang->load($extension, $source, null, false, false)
-			||	$lang->load("$extension.manage", constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false)
-			||	$lang->load($extension, constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false)
-			||	$lang->load("$extension.manage", $source, $lang->getDefault(), false, false)
-			||	$lang->load($extension, $source, $lang->getDefault(), false, false);
+				$lang->load("$extension.sys", constant('JPATH_' . strtoupper($client)), null, false, false)
+			||	$lang->load("$extension.sys", $source, null, false, false)
+			||	$lang->load("$extension.sys", constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false)
+			||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 			$result[$i]->name = JText::_($item->name);
 		}
 		JArrayHelper::sortObjects($result,$this->getState('list.ordering', 'ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);

@@ -37,14 +37,10 @@ class JInstallerFile extends JAdapterInstance
 		$extension = 'fil_'. strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
 		$lang =& JFactory::getLanguage();
 		$source = $path;
-			$lang->load($extension . '.manage', $source, null, false, false)
-		||	$lang->load($extension, $source, null, false, false)
-		||	$lang->load($extension . '.manage', JPATH_SITE, null, false, false)
-		||	$lang->load($extension , JPATH_SITE, null, false, false)
-		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
-		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
-		||	$lang->load($extension . '.manage', JPATH_SITE, $lang->getDefault(), false, false)
-		||	$lang->load($extension , JPATH_SITE, $lang->getDefault(), false, false);
+			$lang->load($extension . '.sys', $source, null, false, false)
+		||	$lang->load($extension . '.sys', JPATH_SITE, null, false, false)
+		||	$lang->load($extension . '.sys', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.sys', JPATH_SITE, $lang->getDefault(), false, false);
 	}
 	/**
 	 * Custom install method
