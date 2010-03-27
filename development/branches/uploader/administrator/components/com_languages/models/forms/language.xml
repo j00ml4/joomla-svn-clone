@@ -1,86 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fields>
-		<field
-			name="lang_id"
-			type="hidden"
+	<fieldset>
+		<field name="lang_id" type="hidden"
 			default="0"
 			required="true"
-			readonly="true" />
+			readonly="true"
+		/>
 
-		<field
-			name="lang_code"
-			type="text"
+		<field name="lang_code" type="text"
 			class="inputbox"
-			default=""
-			size="10"
+			description="COM_LANGS_FIELD_LANG_CODE_DESC"
+			label="COM_LANGS_FIELD_LANG_CODE_LABEL"
 			maxlength="7"
-			label="Langs_Field_Lang_Code_Label"
-			description="Langs_Field_Lang_Code_Desc"
-			required="true" />
+			required="true"
+			size="10"
+		/>
 
-		<field
-			name="title"
-			type="text"
+		<field name="title" type="text"
 			class="inputbox"
-			default=""
-			size="40"
+			description="COM_LANGS_FIELD_TITLE_DESC"
+			label="COM_LANGS_FIELD_TITLE_LABEL"
 			maxlength="50"
-			label="Langs_Field_Title_Label"
-			description="Langs_Field_Title_Desc"
-			required="true" />
-
-		<field
-			name="title_native"
-			type="text"
-			class="inputbox"
-			default=""
+			required="true"
 			size="40"
+		/>
+
+		<field name="title_native" type="text"
+			class="inputbox"
+			description="COM_LANGS_FIELD_TITLE_NATIVE_DESC"
+			label="COM_LANGS_FIELD_TITLE_NATIVE_LABEL"
 			maxlength="50"
-			label="Langs_Field_Title_Native_Label"
-			description="Langs_Field_Title_Native_Desc" />
-
-		<field
-			name="alias"
-			type="text"
-			class="inputbox"
-			default=""
 			size="40"
-			label="Langs_Field_Alias_Label"
-			description="Langs_Field_Alias_Desc" />
+		/>
 
-		<field
-			id="description"
-			name="description"
-			type="textarea"
+		<field name="alias" type="text"
 			class="inputbox"
-			rows="5"
+			description="COM_LANGS_FIELD_ALIAS_DESC"
+			label="COM_LANGS_FIELD_ALIAS_LABEL"
+			size="40"
+		/>
+
+		<field name="description" type="textarea"
+			class="inputbox"
 			cols="80"
-			default=""
-			label="Langs_Field_Description_Label"
-			description="Langs_Field_Description_Desc" />
+			description="COM_LANGS_FIELD_DESCRIPTION_DESC"
+			label="COM_LANGS_FIELD_DESCRIPTION_LABEL"
+			rows="5"
+		/>
 
-		<field
-			name="published"
-			type="list"
-			label="Langs_Field_Published_Label"
-			description="Langs_Field_Published_Desc"
+		<field name="published" type="list"
 			class="inputbox"
+			default="1"
+			description="COM_LANGS_FIELD_PUBLISHED_DESC"
+			label="COM_LANGS_FIELD_PUBLISHED_LABEL"
 			size="1"
-			default="1">
-			<option
-				value="1">
-				JOption_Published</option>
-			<option
-				value="0">
-				JOption_UnPublished</option>
-			<option
-				value="-1">
-				Langs_Option_Disabled</option>
-			<option
-				value="-2">
-				JOption_Trash</option>
+		>
+			<option value="1">JOPTION_PUBLISHED</option>
+			<option value="0">JOPTION_UNPUBLISHED</option>
+			<option value="-1">COM_LANGS_FIELD_VALUE_DISABLED</option>
+			<option value="-2">JOPTION_TRASH</option>
 		</field>
-	</fields>
+	</fieldset>
 </form>

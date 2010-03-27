@@ -63,8 +63,9 @@ class ContactViewContact extends JView
 		// because the application sets a default page title, we need to get it
 		// right from the menu item itself
 		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'contact' && isset($menu->query['id']) && $menu->query['id'] == $contact->id) {
-			$menu_params = new JParameter($menu->params);
-			if (!$menu_params->get('page_title')) {
+			$menuParams = new JRegistry;
+			$menuParams->loadJSON($menu->params);
+			if (!$menuParams->get('page_title')) {
 				$pparams->set('page_title',	$contact->name);
 			}
 		} else {
@@ -78,7 +79,8 @@ class ContactViewContact extends JView
 		}
 
 		// Make contact parameters available to views
-		$contact->params = new JParameter($contact->params);
+		$contact->params = new JRegistry;
+		$contact->params->loadJSON($contact->params);
 
 		// Handle email cloaking
 		if ($contact->email_to && $pparams->get('show_email')) {
@@ -121,12 +123,12 @@ class ContactViewContact extends JView
 
 			default :
 				// icons
-				$image1 = JHtml::_('image', 'contacts/'.$pparams->get('icon_address','con_address.png'), JText::_('Address').": ", NULL, true);
-				$image2 = JHtml::_('image', 'contacts/'.$pparams->get('icon_email','emailButton.png'), JText::_('Email').": ", NULL, true);
-				$image3 = JHtml::_('image', 'contacts/'.$pparams->get('icon_telephone','con_tel.png'), JText::_('Telephone').": ", NULL, true);
-				$image4 = JHtml::_('image', 'contacts/'.$pparams->get('icon_fax','con_fax.png'), JText::_('Fax').": ", NULL, true);
-				$image5 = JHtml::_('image', 'contacts/'.$pparams->get('icon_misc','con_info.png'), JText::_('Information').": ", NULL, true);
-				$image6 = JHtml::_('image', 'contacts/'.$pparams->get('icon_mobile','con_mobile.png'), JText::_('Mobile').": ", NULL, true);
+				$image1 = JHTML::_('image','contacts/'.$pparams->get('icon_address','con_address.png'), JText::_('Address').": ", NULL, true);
+				$image2 = JHTML::_('image','contacts/'.$pparams->get('icon_email','emailButton.png'), JText::_('Email').": ", NULL, true);
+				$image3 = JHTML::_('image','contacts/'.$pparams->get('icon_telephone','con_tel.png'), JText::_('Telephone').": ", NULL, true);
+				$image4 = JHTML::_('image','contacts/'.$pparams->get('icon_fax','con_fax.png'), JText::_('Fax').": ", NULL, true);
+				$image5 = JHTML::_('image','contacts/'.$pparams->get('icon_misc','con_info.png'), JText::_('Information').": ", NULL, true);
+				$image6 = JHTML::_('image','contacts/'.$pparams->get('icon_mobile','con_mobile.png'), JText::_('Mobile').": ", NULL, true);
 
 				$pparams->set('marker_address',	$image1);
 				$pparams->set('marker_email',		$image2);

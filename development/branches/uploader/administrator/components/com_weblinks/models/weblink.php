@@ -133,22 +133,18 @@ class WeblinksModelWeblink extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('weblink', 'com_weblinks.weblink', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_weblinks.weblink', 'weblink', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('weblink.id'))
-		{
+		if ($this->getState('weblink.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		}
-		else
-		{
+		} else {
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
@@ -190,7 +186,7 @@ class WeblinksModelWeblink extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -304,7 +300,7 @@ class WeblinksModelWeblink extends JModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 				}
 			}
 			else
@@ -348,7 +344,7 @@ class WeblinksModelWeblink extends JModelForm
 				{
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 				}
 			}
 		}
@@ -371,6 +367,7 @@ class WeblinksModelWeblink extends JModelForm
 	 */
 	public function reorder($pk, $direction = 0)
 	{
+		$user = JFactory::getUser();
 		// Sanitize the id and adjustment.
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('weblink.id');
 
@@ -398,13 +395,12 @@ class WeblinksModelWeblink extends JModelForm
 
 		if (!$allow)
 		{
-			$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
+			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 			return false;
 		}
 
 		// Move the row.
-		// TODO: Where clause to restrict category.
-		$table->move($pk);
+		$table->move($direction, 'catid = '.$table->catid);
 
 		// Check-in the row.
 		if (!$this->checkin($pk)) {
@@ -422,12 +418,13 @@ class WeblinksModelWeblink extends JModelForm
 	 */
 	function saveorder(&$pks, $order)
 	{
+		$user = JFactory::getUser();
 		// Initialise variables.
 		$table		= $this->getTable();
 		$conditions	= array();
 
 		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));
+			return JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
 		}
 
 		// update ordering values
@@ -447,7 +444,7 @@ class WeblinksModelWeblink extends JModelForm
 			{
 				// Prune items that you can't change.
 				unset($pks[$i]);
-				JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
+				JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 			}
 			else if ($table->ordering != $order[$i])
 			{

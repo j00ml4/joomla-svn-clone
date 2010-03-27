@@ -19,6 +19,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 	function testCreateRemoveCategory()
 	{
 		$this->setUp();
+		$this->gotoAdmin();		
 		$this->doAdminLogin();
 		$this->click("link=Control Panel");
 		$this->waitForPageToLoad("30000");
@@ -63,6 +64,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertFalse($this->isTextPresent("Functional Test Category"));
 		print("Filter Trashed categories." . "\n");
 		$this->select("filter_published", "label=Trash");
+		$this->clickGo();
 		$this->waitForPageToLoad("30000");
 		print("Select all trashed categories and delete." . "\n");
 		$this->click("toggle");
@@ -72,6 +74,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertFalse($this->isTextPresent("Functional Test Category"));
 		print("Change fileter to Select State." . "\n");
 		$this->select("filter_published", "label=- Select State -");
+		$this->clickGo();
 		$this->waitForPageToLoad("30000");
 		print("Check that new category is not shown." . "\n");
 		$this->assertFalse($this->isTextPresent("Functional Test Category"));

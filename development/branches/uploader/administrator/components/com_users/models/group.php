@@ -102,14 +102,13 @@ class UsersModelGroup extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('group', 'com_users.group', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_users.group', 'group', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -151,7 +150,7 @@ class UsersModelGroup extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -198,6 +197,7 @@ class UsersModelGroup extends JModelForm
 	{
 		// Typecast variable.
 		$pks = (array) $pks;
+		$user	= JFactory::getUser();
 
 		// Get a row instance.
 		$table = &$this->getTable();

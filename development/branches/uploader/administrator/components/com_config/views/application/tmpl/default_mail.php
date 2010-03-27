@@ -12,10 +12,10 @@ defined('_JEXEC') or die;
 ?>
 <div class="width-100">
 <fieldset class="adminform">
-	<legend><?php echo JText::_('MAIL_SETTINGS'); ?></legend>
+	<legend><?php echo JText::_('COM_CONFIG_MAIL_SETTINGS'); ?></legend>
 
 			<?php
-			foreach ($this->form->getFields('mail') as $field):
+			foreach ($this->form->getFieldset('mail') as $field):
 			?>
 
 					<?php echo $field->label; ?>

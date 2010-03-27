@@ -62,7 +62,7 @@ class WeblinksViewWeblink extends JView
 		// Make sure you are logged in and have the necessary access rights
 		if ($user->authorise('com_weblinks.edit')) {
 			JResponse::setHeader('HTTP/1.0 403',true);
-			JError::raiseWarning(403, JText::_('ALERTNOTAUTH'));
+			JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 			return;
 		}
 		//get the weblink
@@ -86,12 +86,13 @@ class WeblinksViewWeblink extends JView
 			// because the application sets a default page title, we need to get it
 			// right from the menu item itself
 			if (is_object($menu)) {
-				$menu_params = new JParameter($menu->params);
+				$menu_params = new JRegistry;
+				$menu_params->loadJSON($menu->params);
 				if (!$menu_params->get('page_title')) {
-					$params->set('page_title',	JText::_('Web_Links'.' - '.JText::_('JEdit')));
+					$params->set('page_title',	JText::_('COM_WEBLINKS_WEB_LINKS'.' - '.JText::_('JEdit')));
 				}
 			} else {
-				$params->set('page_title',	JText::_('Web_Links'.' - '.JText::_('JEdit')));
+				$params->set('page_title',	JText::_('COM_WEBLINKS_WEB_LINKS'.' - '.JText::_('JEdit')));
 			}
 
 			$document->setTitle($params->get('page_title'));
@@ -131,12 +132,13 @@ class WeblinksViewWeblink extends JView
 			// because the application sets a default page title, we need to get it
 			// right from the menu item itself
 			if (is_object($menu)) {
-				$menu_params = new JParameter($menu->params);
+				$menu_params = new JRegistry;
+				$menu_params->loadJSON($menu->params);
 				if (!$menu_params->get('page_title')) {
-					$params->set('page_title', JText::_('Submit a Web Link'));
+					$params->set('page_title', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
 				}
 			} else {
-				$params->set('page_title', JText::_('Submit a Web Link'));
+				$params->set('page_title', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
 			}
 
 			$document->setTitle($params->get('page_title'));

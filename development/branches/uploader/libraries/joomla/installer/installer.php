@@ -333,8 +333,10 @@ class JInstaller extends JAdapter
 		if (is_object($this->_adapters[$type]))
 		{
 			// Add the languages from the package itself
-			$lang =& JFactory::getLanguage();
-			$lang->load('joomla',$path);
+			if (method_exists($this->_adapters[$type], 'loadLanguage'))
+			{
+				$this->_adapters[$type]->loadLanguage($path);
+			}
 
 			// Fire the onBeforeExtensionInstall event.
 			JPluginHelper::importPlugin('installer');
@@ -472,8 +474,10 @@ class JInstaller extends JAdapter
 		if (is_object($this->_adapters[$type]))
 		{
 			// Add the languages from the package itself
-			$lang =& JFactory::getLanguage();
-			$lang->load('joomla',$path);
+			if (method_exists($this->_adapters[$type], 'loadLanguage'))
+			{
+				$this->_adapters[$type]->loadLanguage($path);
+			}
 			// Fire the onBeforeExtensionUpdate event.
 			JPluginHelper::importPlugin('installer');
 			$dispatcher =& JDispatcher::getInstance();
@@ -1136,7 +1140,7 @@ class JInstaller extends JAdapter
 					// Copy the folder or file to the new location.
 					if ($filetype == 'folder')
 					{
-						if (!(JFolder::copy($filesource, $filedest, null, $overwrite,1)))
+						if (!(JFolder::copy($filesource, $filedest, null, $overwrite)))
 						{
 							JError::raiseWarning(1, 'JInstaller::install: '.JText::sprintf('Failed to copy folder to', $filesource, $filedest));
 							return false;
@@ -1146,7 +1150,7 @@ class JInstaller extends JAdapter
 					}
 					else
 					{
-						if (!(JFile::copy($filesource, $filedest,null,1)))
+						if (!(JFile::copy($filesource, $filedest,null)))
 						{
 							JError::raiseWarning(1, 'JInstaller::install: '.JText::sprintf('Failed to copy file to', $filesource, $filedest));
 							return false;

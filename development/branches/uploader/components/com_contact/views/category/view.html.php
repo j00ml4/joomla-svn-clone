@@ -29,10 +29,12 @@ class ContactViewCategory extends JView
 		$pparams = &$app->getParams('com_contact');
 
 		// Selected Request vars
-		$categoryId			= JRequest::getVar('catid',				0,				'', 'int');
-		$limitstart			= JRequest::getVar('limitstart',		0,				'', 'int');
-		$filter_order		= JRequest::getVar('filter_order',		'cd.ordering',	'', 'cmd');
-		$filter_order_Dir	= JRequest::getVar('filter_order_Dir',	'ASC',			'', 'word');
+		$requestID 			= JRequest::getVar('id', 0, '', 'int');
+		$categoryId			= JRequest::getVar('catid',	0, '', 'int');
+		$categoryId			= ($categoryId == 0) ? $requestID : $categoryId;
+		$limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
+		$filter_order		= JRequest::getVar('filter_order', 'cd.ordering', '', 'cmd');
+		$filter_order_Dir	= JRequest::getVar('filter_order_Dir', 'ASC', '', 'word');
 
 		$pparams->def('display_num', $app->getCfg('list_limit'));
 		$default_limit = $pparams->def('display_num', 20);
@@ -112,7 +114,8 @@ class ContactViewCategory extends JView
 		// because the application sets a default page title, we need to get it
 		// right from the menu item itself
 		if (is_object($menu)) {
-			$menu_params = new JParameter($menu->params);
+			$menuParams = new JRegistry;
+			$menuParams->loadJSON($menu->params);
 			if (!$menu_params->get('page_title')) {
 				$pparams->set('page_title',	$category->title);
 			}
@@ -121,6 +124,15 @@ class ContactViewCategory extends JView
 		}
 		$document->setTitle($pparams->get('page_title'));
 
+		if ($this->item->metadesc) {
+			$this->document->setDescription($this->item->metadesc);
+		}
+
+		if ($this->item->metakey) {
+			$this->document->setMetadata('keywords', $this->item->metakey);
+		}
+	
+		
 		// Prepare category description
 		$category->description = JHtml::_('content.prepare', $category->description);
 

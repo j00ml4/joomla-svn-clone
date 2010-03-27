@@ -124,22 +124,18 @@ class BannersModelBanner extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('banner', 'com_banners.banner', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('banner.id'))
-		{
+		if ($this->getState('banner.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		}
-		else
-		{
+		} else {
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
@@ -181,7 +177,7 @@ class BannersModelBanner extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -258,7 +254,7 @@ class BannersModelBanner extends JModelForm
 
 			if (!$allow)
 			{
-				$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
+				$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 				return false;
 			}
 

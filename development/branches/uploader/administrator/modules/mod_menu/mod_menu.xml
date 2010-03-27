@@ -3,7 +3,7 @@
 	type="module"
 	version="1.6.0"
 	client="administrator">
-	<name>Admin Menu</name>
+	<name>mod_menu</name>
 	<author>Joomla! Project</author>
 	<creationDate>March 2006</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -19,28 +19,31 @@
 		<filename>index.html</filename>
 		<folder>tmpl</folder>
 	</files>
-	<fields
-		group="advanced">
-		<field
-			name="layout"
-			type="modulelayout"
-			label="JFIELD_ALT_LAYOUT_LABEL"
-			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-		<field
-			name="moduleclass_sfx"
-			type="text"
-			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
-
-		<field
-			name="cache"
-			type="list"
-			default="0"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
-			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
-		</field>
-	</fields>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					default=""
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+		
+				<field
+					name="cache"
+					type="list"
+					default="0"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
 </install>

@@ -35,7 +35,7 @@ class BannersControllerTracks extends JController
 	public function delete()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the model.
 		$model = $this->getModel();
@@ -67,7 +67,7 @@ class BannersControllerTracks extends JController
 			JError::raiseWarning(500, $model->getError());
 		}
 		else {
-			$this->setMessage(JText::sprintf('JController_N_Items_deleted', $count));
+			$this->setMessage(JText::sprintf(($count == 1) ? 'COM_BANNERS_TRACK_DELETED' : 'COM_BANNERS_N_TRACKS_DELETED', $count));
 		}
 
 		$this->setRedirect('index.php?option=com_banners&view=tracks');
@@ -111,8 +111,8 @@ class BannersControllerTracks extends JController
 			$model->setState('compressed',$form['compressed']);
 
 			$config =& JFactory::getConfig();
-			$cookie_domain = $config->getValue('config.cookie_domain', '');
-			$cookie_path = $config->getValue('config.cookie_path', '/');
+			$cookie_domain = $config->get('cookie_domain', '');
+			$cookie_path = $config->get('cookie_path', '/');
 			jimport('joomla.utilities.utility');
 			setcookie(JUtility::getHash($this->_context.'.basename'), $form['basename'], time() + 365 * 86400, $cookie_path, $cookie_domain);
 			setcookie(JUtility::getHash($this->_context.'.compressed'), $form['compressed'], time() + 365 * 86400, $cookie_path, $cookie_domain);

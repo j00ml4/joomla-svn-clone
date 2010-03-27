@@ -75,14 +75,13 @@ class MessagesModelConfig extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('config', 'com_messages.config', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_messages.config', 'config', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -129,7 +128,7 @@ class MessagesModelConfig extends JModelForm
 			}
 			return true;
 		} else {
-			$this->setError('Messages_Invalid_user');
+			$this->setError('COM_MESSAGES_ERR_INVALID_USER');
 			return false;
 		}
 	}

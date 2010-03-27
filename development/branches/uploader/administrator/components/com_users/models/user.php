@@ -116,14 +116,13 @@ class UsersModelUser extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('user', 'com_users.user', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_users.user', 'user', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -193,7 +192,7 @@ class UsersModelUser extends JModelForm
 		// Bind the data.
 		if (!$table->bind($data))
 		{
-			$this->setError(JText::sprintf('JTable_Error_Bind_failed', $table->getError()));
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -227,6 +226,12 @@ class UsersModelUser extends JModelForm
 			return false;
 		}
 
+		$user = &JFactory::getUser();
+		if ($user->id == $table->id) {
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
+			$user->setParameters($registry);
+		}
 		// Trigger the onAftereStoreUser event
 		$dispatcher->trigger('onAfterStoreUser', array($data, $isNew, true, null));
 

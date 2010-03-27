@@ -35,7 +35,7 @@ JHtml::_('behavior.keepalive');
 <form action="<?php echo JRoute::_('index.php?option=com_newsfeeds'); ?>" method="post" name="adminForm" id="newsfeed-form" class="form-validate">
 <div class="width-60 fltlft">
 	<fieldset class="adminform">
-		<legend><?php echo empty($this->item->id) ? JText::_('Newsfeeds_New_Newsfeed') : JText::sprintf('Newsfeeds_Edit_Newsfeed', $this->item->id); ?></legend>
+		<legend><?php echo empty($this->item->id) ? JText::_('COM_NEWSFEEDS_NEW_NEWSFEED') : JText::sprintf('COM_NEWSFEEDS_EDIT_NEWSFEED', $this->item->id); ?></legend>
 
 			<?php echo $this->form->getLabel('name'); ?>
 			<?php echo $this->form->getInput('name'); ?>
@@ -56,7 +56,7 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->form->getInput('link'); ?>
 
 			<?php echo $this->form->getLabel('ordering'); ?>
-			<?php echo $this->form->getInput('ordering'); ?>
+			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
 
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
@@ -65,8 +65,11 @@ JHtml::_('behavior.keepalive');
 </div>
 
 <div class="width-40 fltrt">
-	<fieldset class="adminform">
-		<legend><?php echo JText::_('Newsfeeds_Options'); ?></legend>
+		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+
+		<?php echo JHtml::_('sliders.panel',JText::_('COM_NEWSFEEDS_FIELD_OPTIONS'), 'newsfeeds-options'); ?>
+
+	<fieldset class="panelform">
 
 			<?php echo $this->form->getLabel('numarticles'); ?>
 			<?php echo $this->form->getInput('numarticles'); ?>
@@ -77,7 +80,7 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->form->getLabel('rtl'); ?>
 			<?php echo $this->form->getInput('rtl'); ?>
 
-		<?php foreach($this->form->getFields('params') as $field): ?>
+		<?php foreach($this->form->getFieldset('params') as $field): ?>
 			<?php if ($field->hidden): ?>
 				<?php echo $field->input; ?>
 			<?php else: ?>
@@ -89,6 +92,8 @@ JHtml::_('behavior.keepalive');
 		<?php endforeach; ?>
 
 	</fieldset>
+	
+	<?php echo JHtml::_('sliders.end'); ?>
 </div>
 
 <div class="clr"></div>

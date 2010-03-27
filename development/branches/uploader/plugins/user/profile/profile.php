@@ -27,7 +27,7 @@ class plgUserProfile extends JPlugin
 	{
 		// Add the profile fields to the form.
 		JForm::addFormPath(dirname(__FILE__).DS.'profiles');
-		$form->load('profile', true, false);
+		$form->loadFile('profile', false);
 
 		// Toggle whether the address1 field is required.
 		if ($this->params->get('profile-require_address1', 1) > 0) {
@@ -85,6 +85,20 @@ class plgUserProfile extends JPlugin
 			$form->removeField('website', 'profile');
 		}
 
+		// Toggle whether the favoritebook field is required.
+		if ($this->params->get('profile-require_favoritebook', 1) > 0) {
+			$form->setFieldAttribute('favoritebook', 'required', $this->params->get('profile-require_favoritebook') == 2, 'profile');
+		} else {
+			$form->removeField('favoritebook', 'profile');
+		}
+
+		// Toggle whether the aboutme field is required.
+		if ($this->params->get('profile-require_aboutme', 1) > 0) {
+			$form->setFieldAttribute('aboutme', 'required', $this->params->get('profile-require_aboutme') == 2, 'profile');
+		} else {
+			$form->removeField('aboutme', 'profile');
+		}
+		
 		return true;
 	}
 

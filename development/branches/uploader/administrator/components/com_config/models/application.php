@@ -27,11 +27,10 @@ class ConfigModelApplication extends JModelForm
 	public function getForm()
 	{
 		// Get the form.
-		$form = parent::getForm('application', 'com_config.application', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_config.application', 'application', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -94,7 +93,7 @@ class ConfigModelApplication extends JModelForm
 			}
 			else
 			{
-				$this->setError('Config_Error_Root_asset_not_found');
+				$this->setError('COM_CONFIG_ERROR_ROOT_ASSET_NOT_FOUND');
 				return false;
 			}
 			unset($data['rules']);
@@ -160,30 +159,30 @@ class ConfigModelApplication extends JModelForm
 
 		// Overwrite the old FTP credentials with the new ones.
 		$temp = JFactory::getConfig();
-		$temp->setValue('config.ftp_enable', $data['ftp_enable']);
-		$temp->setValue('config.ftp_host', $data['ftp_host']);
-		$temp->setValue('config.ftp_port', $data['ftp_port']);
-		$temp->setValue('config.ftp_user', $data['ftp_user']);
-		$temp->setValue('config.ftp_pass', $data['ftp_pass']);
-		$temp->setValue('config.ftp_root', $data['ftp_root']);
+		$temp->set('ftp_enable', $data['ftp_enable']);
+		$temp->set('ftp_host', $data['ftp_host']);
+		$temp->set('ftp_port', $data['ftp_port']);
+		$temp->set('ftp_user', $data['ftp_user']);
+		$temp->set('ftp_pass', $data['ftp_pass']);
+		$temp->set('ftp_root', $data['ftp_root']);
 
 		// Get the new FTP credentials.
 		$ftp = JClientHelper::getCredentials('ftp', true);
 
 		// Attempt to make the file writeable if using FTP.
 		if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0644')) {
-			JError::raiseNotice('SOME_ERROR_CODE', JText::_('Config_File_Could_Not_Make_Writable'));
+			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_CONFIG_ERROR_CONFIGURATION_PHP_NOTWRITABLE'));
 		}
 
 		// Attempt to write the configuration file as a PHP class named JConfig.
 		if (!JFile::write($file, $config->toString('PHP', 'config', array('class' => 'JConfig', 'closingtag' => false)))) {
-			$this->setError(JText::_('Config_File_Write_Failed'));
+			$this->setError(JText::_('COM_CONFIG_ERROR_WRITE_FAILED'));
 			return false;
 		}
 
 		// Attempt to make the file unwriteable if using FTP.
 		if ($data['ftp_enable'] == 0 && !$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0444')) {
-			JError::raiseNotice('SOME_ERROR_CODE', JText::_('Config_File_Could_Not_Make_Unwritable'));
+			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_CONFIG_ERROR_CONFIGURATION_PHP_NOTUNWRITABLE'));
 		}
 
 		return true;

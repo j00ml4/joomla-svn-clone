@@ -315,10 +315,10 @@ class JDatabaseMySQLi extends JDatabase
 				foreach ($row as $k=>$v) {
 					$buffer .= '<th>'.$k.'</th>';
 				}
-				$buffer .= '</tr>';
+				$buffer .= '</tr></thead><tbody>';
 				$first = false;
 			}
-			$buffer .= '</thead><tbody><tr>';
+			$buffer .= '<tr>';
 			foreach ($row as $k=>$v) {
 				$buffer .= '<td>'.$v.'</td>';
 			}
@@ -625,6 +625,12 @@ class JDatabaseMySQLi extends JDatabase
 			}
 			$tmp[] = $this->nameQuote($k) . '=' . $val;
 		}
+
+		// Nothing to update.
+		if (empty($tmp)) {
+			return true;
+		}
+
 		$this->setQuery(sprintf($fmtsql, implode(",", $tmp) , $where));
 		return $this->query();
 	}

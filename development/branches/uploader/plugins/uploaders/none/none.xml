@@ -16,4 +16,5 @@
 		<filename
 			plugin="none">none.php</filename>
 	</files>
+	<params />
 </install>
