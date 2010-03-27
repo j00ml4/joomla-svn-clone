@@ -40,7 +40,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			?>
 		</div>
 		<?php
-			$leadingcount++;
+			$leadingcount=$leadingcount +1;
 		?>
 	<?php endforeach; ?>
 </div>
@@ -67,7 +67,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 					echo $this->loadTemplate('item');
 			?>
 		</div>
-		<?php $counter++; ?>
+		<?php $counter=$counter +1; ?>
 			<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
 				<span class="row-separator"></span>
 				</div>
@@ -82,7 +82,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 <?php endif; ?>
 
-<?php if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) : ?>
+<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">
 
 		<?php if ($this->params->def('show_pagination_results', 1)) : ?>

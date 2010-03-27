@@ -39,7 +39,7 @@ $params = $this->state->get('params');
 <?php endif; ?>
 
 
-<?php if ($params->get('access-edit') || $params->get('show_title') ||  $params->get('show_print_icon') || $params->get('show_email_icon')) : ?>
+<?php if ($params->get('access-edit') ||  $params->get('show_print_icon') || $params->get('show_email_icon')) : ?>
 		<ul class="actions">
 		<?php if (!$this->print) : ?>
 				<?php if ($params->get('show_print_icon')) : ?>
@@ -65,23 +65,25 @@ $params = $this->state->get('params');
 		<?php endif; ?>
 		</ul>
 <?php endif; ?>
-<?php echo $this->item->event->afterDisplayTitle; ?>
-<?php echo $this->item->event->beforeDisplayContent; ?>
 
-<?php $useDefList = (($params->get('show_author')) OR ($params->get('show_category')) OR ($params->get('show_parent_category')) 
-	OR ($params->get('show_create_date')) OR ($params->get('show_modify_date')) OR ($params->get('show_publish_date')) 
-	OR ($params->get('show_hits'))); ?>
-	
-<?php if ($useDefList) : ?>
- 	<dl class="article-info">
- 	<dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
+	<?php  if (!$params->get('show_intro')) :
+		echo $this->item->event->afterDisplayTitle;
+	endif; ?>
+
+	<?php echo $this->item->event->beforeDisplayContent; ?>
+
+<?php // to do not that elegant would be nice to group the params ?>
+
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_hits')) or ($params->get('show_parent_category'))) : ?>
+ <dl class="article-info">
+ <dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
 <?php endif; ?>
 <?php if ($params->get('show_parent_category')) : ?>
 		<dd class="parent-category-name">
-			<?php 	$title = $this->escape($this->item->parent_title);
-					$title = ($title) ? $title : JText::_('Uncategorised');
-					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->parent_slug)).'">'.$title.'</a>';?>
-			<?php if ($params->get('link_parent_category') AND $this->item->parent_slug) : ?>
+			<?php $title = $this->escape($this->item->parent_title);
+				$title = ($title) ? $title : JText::_('Uncategorised');
+				$url = '<a href="' . JRoute::_(ContentRoute::category($this->item->parent_slug)) . '">' . $title . '</a>'; ?>
+			<?php if ($params->get('link_parent_category') && $this->item->parent_slug) : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $url); ?>
 				<?php else : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $title); ?>
@@ -91,9 +93,8 @@ $params = $this->state->get('params');
 <?php if ($params->get('show_category')) : ?>
 		<dd class="category-name">
 			<?php 	$title = $this->escape($this->item->category_title);
-					$title = ($title) ? $title : JText::_('Uncategorised');
 					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->catslug)).'">'.$title.'</a>';?>
-			<?php if ($params->get('link_category') AND $this->item->catslug) : ?>
+			<?php if ($params->get('link_category')) : ?>
 				<?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
 				<?php else : ?>
 				<?php echo JText::sprintf('CONTENT_CATEGORY', $title); ?>
@@ -121,14 +122,14 @@ $params = $this->state->get('params');
 		<?php $author=($this->item->created_by_alias ? $this->item->created_by_alias : $author);?>
 	<?php echo JText::sprintf('Written_by', $author); ?>
 		</dd>
-	<?php endif; ?>
+<?php endif; ?>
 <?php if ($params->get('show_hits')) : ?>
 		<dd class="hits">
 		<?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $this->item->hits); ?>
 		</dd>
 <?php endif; ?>
-<?php if ($useDefList) : ?>
- 	</dl>
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_hits')) or ($params->get('show_parent_category'))) : ?>
+ </dl>
 <?php endif; ?>
 
 	<?php if (isset ($this->item->toc)) : ?>
