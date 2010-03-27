@@ -15,6 +15,10 @@ defined('JPATH_BASE') or die;
  */
 define('_QQ_', '"');
 
+
+// import some libariries
+jimport('joomla.filesystem.stream');
+
 /**
  * Languages/translation handler class
  *
@@ -75,6 +79,14 @@ class JLanguage extends JObject
 	protected $_paths = array();
 
 	/**
+	 * List of language files that are in error state
+	 *
+	 * @var		array of string
+	 * @since	1.6
+	 */
+	protected $_errorfiles = array();
+
+	/**
 	 * Translations
 	 *
 	 * @var		array
@@ -117,7 +129,7 @@ class JLanguage extends JObject
 	/**
 	 * Constructor activating the default information of the language
 	 */
-	public function __construct($lang = null)
+	public function __construct($lang = null, $debug = false)
 	{
 		$this->_strings = array ();
 
@@ -126,6 +138,7 @@ class JLanguage extends JObject
 		}
 
 		$this->setLanguage($lang);
+		$this->setDebug($debug);
 
 		$filename = JPATH_BASE.DS.'language'.DS.'overrides'.DS.$lang.'.override.ini';
 		if (file_exists($filename) && $contents = $this->_parse($filename)) {
@@ -166,12 +179,13 @@ class JLanguage extends JObject
 	 * Returns a language object
 	 *
 	 * @param	string $lang  The language to use.
+	 * @param	boolean	$debug	The debug mode
 	 * @return	JLanguage  The Language object.
 	 * @since	1.5
 	 */
-	public static function getInstance($lang)
+	public static function getInstance($lang, $debug=false)
 	{
-		return new JLanguage($lang);
+		return new JLanguage($lang, $debug);
 	}
 
 	/**
@@ -232,14 +246,15 @@ class JLanguage extends JObject
 	 */
 	public function transliterate($string)
 	{
-		include_once (JPATH_SITE.DS.'libraries'.DS.'phputf8'.DS.'utils'.DS.'ascii.php');
+		include_once(dirname(__FILE__).DS.'latin_transliterate.php');
 
 		if ($this->_transliterator !== null) {
 			return call_user_func($this->_transliterator, $string);
 		}
 
-		$string = utf8_accents_to_ascii($string);
+		$string = JLanguageTransliterate::utf8_latin_to_ascii($string);
 		$string = JString::strtolower($string);
+
 		return $string;
 	}
 
@@ -309,16 +324,17 @@ class JLanguage extends JObject
 	 * @param	string	$basePath	The basepath to use
 	 * @param	string	$lang		The language to load, default null for the current language
 	 * @param	boolean $reload		Flag that will force a language to be reloaded if set to true
+	 * @param	boolean	$default	Flag that force the default language to be loaded if the current does not exist
 	 * @return	boolean	True, if the file has successfully loaded.
 	 * @since	1.5
 	 */
-	public function load($extension = 'joomla', $basePath = JPATH_BASE, $lang = null, $reload = false)
+	public function load($extension = 'joomla', $basePath = JPATH_BASE, $lang = null, $reload = false, $default = true)
 	{
 		if (! $lang) {
 			$lang = $this->_lang;
 		}
 
-		$path = JLanguage::getLanguagePath($basePath, $lang);
+		$path = self::getLanguagePath($basePath, $lang);
 
 		$internal = $extension == 'joomla' || $extension == '';
 		$filename = $internal ? $lang : $lang . '.' . $extension;
@@ -333,12 +349,12 @@ class JLanguage extends JObject
 			$result = $this->_load($filename, $extension);
 
 			// Check if there was a problem with loading the file
-			if ($result === false) {
+			if ($result === false && $default) {
 				// No strings, so either file doesn't exist or the file is invalid
 				$oldFilename = $filename;
 
 				// Check the standard file name
-				$path		= JLanguage::getLanguagePath($basePath, $this->_default);
+				$path		= self::getLanguagePath($basePath, $this->_default);
 				$filename = $internal ? $this->_default : $this->_default . '.' . $extension;
 				$filename	= $path.DS.$filename.'.ini';
 
@@ -402,27 +418,45 @@ class JLanguage extends JObject
 	 */
 	protected function _parse($filename)
 	{
-		ini_set('track_errors', '1');
 		$version = phpversion();
 		if($version >= "5.3.1") {
 			$contents = file_get_contents($filename);
-			$contents = str_replace(array('"_QQ_"','_QQ_"','"_QQ_'),array('\"','"\"','\""'),$contents);
-			$strings = @parse_ini_string($contents);
-			if (!empty($php_errormsg)) {
-				JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
-			}
+			$contents = str_replace('_QQ_','"\""',$contents);
+			$strings = (array) @parse_ini_string($contents);
 		} else {
-			$strings = @parse_ini_file($filename);
+			$strings = (array) @parse_ini_file($filename);
 			if ($version == "5.3.0") {
 				foreach($strings as $key => $string) {
 					$strings[$key]=str_replace('_QQ_','"',$string);
 				}
 			}
-			if (!empty($php_errormsg)) {
-				JError::raiseWarning(500, $php_errormsg);
-			}
 		}
-		ini_restore('track_errors');
+		if ($this->_debug) {
+			$this->_debug = false;
+			$errors = array();
+			$lineNumber = 0;
+			$stream = new JStream();
+			$stream->open($filename);
+			while(!$stream->eof())
+			{
+				$line = $stream->gets();
+				$lineNumber++;
+				if (!preg_match('/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*\s*=(\s*(("[^"]*")|(_QQ_)))+))\s*(;.*)?$/',$line))
+				{
+					$errors[] = $lineNumber;
+				}
+			}
+			$stream->close();
+			if (count($errors)) {
+				if (basename($filename)!=$this->_lang.'.ini') {
+					$this->_errorfiles[$filename] = $filename.JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',implode(', ',$errors));
+				}
+				else {
+					$this->_errorfiles[$filename] = $filename . '&nbsp;: error(s) in line(s) ' . implode(', ',$errors);
+				}
+			}
+			$this->_debug = true;
+		}
 		return $strings;
 	}
 
@@ -509,6 +543,17 @@ class JLanguage extends JObject
 		} else {
 			return $this->_paths;
 		}
+	}
+
+	/**
+	 * Get a list of language files that are in error state
+	 *
+	 * @return	array
+	 * @since	1.6
+	 */
+	public function getErrorFiles()
+	{
+		return $this->_errorfiles;
 	}
 
 	/**
@@ -627,12 +672,12 @@ class JLanguage extends JObject
 	 */
 	public static function getMetadata($lang)
 	{
-		$path = JLanguage::getLanguagePath(JPATH_BASE, $lang);
+		$path = self::getLanguagePath(JPATH_BASE, $lang);
 		$file = $lang.'.xml';
 
 		$result = null;
 		if (is_file($path.DS.$file)) {
-			$result = JLanguage::_parseXMLLanguageFile($path.DS.$file);
+			$result = self::_parseXMLLanguageFile($path.DS.$file);
 		}
 
 		return $result;
@@ -647,8 +692,8 @@ class JLanguage extends JObject
 	 */
 	public static function getKnownLanguages($basePath = JPATH_BASE)
 	{
-		$dir = JLanguage::getLanguagePath($basePath);
-		$knownLanguages = JLanguage::_parseLanguageFiles($dir);
+		$dir = self::getLanguagePath($basePath);
+		$knownLanguages = self::_parseLanguageFiles($dir);
 
 		return $knownLanguages;
 	}
@@ -703,7 +748,7 @@ class JLanguage extends JObject
 
 		$subdirs = JFolder::folders($dir);
 		foreach ($subdirs as $path) {
-			$langs = JLanguage::_parseXMLLanguageFiles($dir.DS.$path);
+			$langs = self::_parseXMLLanguageFiles($dir.DS.$path);
 			$languages = array_merge($languages, $langs);
 		}
 
@@ -728,7 +773,7 @@ class JLanguage extends JObject
 		$files = JFolder::files($dir, '^([-_A-Za-z]*)\.xml$');
 		foreach ($files as $file) {
 			if ($content = file_get_contents($dir.DS.$file)) {
-				if ($metadata = JLanguage::_parseXMLLanguageFile($dir.DS.$file)) {
+				if ($metadata = self::_parseXMLLanguageFile($dir.DS.$file)) {
 					$lang = str_replace('.xml', '', $file);
 					$languages[$lang] = $metadata;
 				}
@@ -765,3 +810,4 @@ class JLanguage extends JObject
 		return $metadata;
 	}
 }
+

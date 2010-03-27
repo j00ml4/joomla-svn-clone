@@ -86,7 +86,7 @@ class ContentControllerArticle extends JController
 
 		// Access check
 		if (!JFactory::getUser()->authorise('core.create', 'com_content')) {
-			JError::raiseError(403, JText::_('ALERTNOTAUTH'));
+			JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 			return false;
 		}
 
@@ -119,7 +119,7 @@ class ContentControllerArticle extends JController
 
 		// Access check
 		if (!JFactory::getUser()->authorise('core.edit', 'com_content.article.'.$id)) {
-			JError::raiseError(403, JText::_('ALERTNOTAUTH'));
+			JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 			return false;
 		}
 
@@ -220,7 +220,7 @@ class ContentControllerArticle extends JController
 		$data['id'] = (int) $app->getUserState($context.'id');
 
 		// Split introtext and fulltext
-		$pattern	= '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
+		$pattern    = '#<hr\s+id=(["\'])system-readmore\1\s*/?>#i';
 		$text		= $data['text'];
 		$tagPos		= preg_match($pattern, $text);
 
@@ -302,7 +302,7 @@ class ContentControllerArticle extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_('JController_Save_success'));
+		$this->setMessage(JText::_('COM_CONTENT_ARTICLE_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

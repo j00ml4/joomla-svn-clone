@@ -101,23 +101,23 @@ class MessagesTableMessage extends JTable
 		// Check the to and from users.
 		$user = new JUser($table->user_id_from);
 		if (empty($user->id)) {
-			$this->setError('Messages_Error_Invalid_from_user');
+			$this->setError(JText::_('COM_MESSAGES_ERROR_INVALID_FROM_USER'));
 			return false;
 		}
 
 		$user = new JUser($table->user_id_to);
 		if (empty($user->id)) {
-			$this->setError('Messages_Error_Invalid_to_user');
+			$this->setError(JText::_('COM_MESSAGES_ERROR_INVALID_TO_USER'));
 			return false;
 		}
 
 		if (empty($this->subject)) {
-			$this->setError('Messages_Error_Invalid_subject');
+			$this->setError(JText::_('COM_MESSAGES_ERROR_INVALID_SUBJECT'));
 			return false;
 		}
 
 		if (empty($this->message)) {
-			$this->setError('Messages_Error_Invalid_message');
+			$this->setError(JText::_('COM_MESSAGES_ERROR_INVALID_MESSAGE'));
 			return false;
 		}
 
@@ -154,7 +154,7 @@ class MessagesTableMessage extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('No_Rows_Selected'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

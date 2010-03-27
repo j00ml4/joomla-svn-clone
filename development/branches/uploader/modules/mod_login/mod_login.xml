@@ -4,7 +4,7 @@
 	version="1.6.0"
 	client="site"
 	method="upgrade">
-	<name>Login</name>
+	<name>mod_login</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2006</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -12,7 +12,7 @@
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.6.0</version>
-	<description>DESCLOGINFORM</description>
+	<description>MOD_LOGIN_XML_DESCRIPTION</description>
 	<files>
 		<filename
 			module="mod_login">mod_login.php</filename>
@@ -25,112 +25,103 @@
 		<language
 			tag="en-GB">en-GB.mod_login.ini</language>
 	</languages>
-	<fields>
-		<field
-			name="cache"
-			type="list"
-			default="1"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
-			<option
-				value="0">Never</option>
-		</field>
-		<field
-			name="spacer1"
-			type="spacer"
-			hr="true"
-			/>
-		<field
-			name="pretext"
-			type="textarea"
-			cols="30"
-			rows="5"
-			default=""
-			label="Pre-text"
-			description="fieldPRETEXT" />
-		<field
-			name="posttext"
-			type="textarea"
-			cols="30"
-			rows="5"
-			label="Post-text"
-			description="fieldPOSTTEXT" />
-		<field
-			name="login"
-			type="menuitem"
-			default=""
-			disable="separator"
-			label="Login Redirection URL"
-			description="fieldLOGINREDIRECTURL" />
-		<field
-			name="logout"
-			type="menuitem"
-			default=""
-			disable="separator"
-			label="Logout Redirection URL"
-			description="fieldLOGOUTREDIRECTURL" />
-		<field
-			name="greeting"
-			type="radio"
-			default="1"
-			label="Greeting"
-			description="Show_Hide the simple greeting text">
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
-		<field
-			name="name"
-			type="list"
-			default="0"
-			label="Name_Username">
-			<option
-				value="0">Username</option>
-			<option
-				value="1">Name</option>
-		</field>
-		<field
-			name="usesecure"
-			type="radio"
-			default="0"
-			label="Encrypt Login Form"
-			description="SUBMIT_ENCRYPTED_LOGIN_DATA_DESC">
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
-	</fields>
-	<fields
-		group="advanced">
-		<field
-			name="layout"
-			type="modulelayout"
-			label="JFIELD_ALT_LAYOUT_LABEL"
-			description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-		<field
-			name="moduleclass_sfx"
-			type="text"
-			default=""
-			label="MODULES_FIELD_MODULECLASS_SFX_LABEL"
-			description="MODULES_FIELD_MODULECLASS_SFX_DESC" />
-		<field
-			name="cache"
-			type="list"
-			default="1"
-			label="MODULES_FIELD_CACHING_LABEL"
-			description="MODULES_FIELD_CACHING_DESC">
-			<option
-				value="1">USE_GLOBAL</option>
-			<option
-				value="0">MODULES_FIELD_VALUE_NOCACHING</option>
-		</field>
-		<field
-			name="cache_time"
-			type="text"
-			default="900"
-			label="MODULES_FIELD_CACHE_TIME_LABEL"
-			description="MODULES_FIELD_CACHE_TIME_DESC" />
-	</fields>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="pretext"
+					type="textarea"
+					cols="30"
+					rows="5"
+					default=""
+					label="MOD_LOGIN_FIELD_PRE_TEXT_LABEL"
+					description="MOD_LOGIN_FIELD_PRE_TEXT_DESC" />
+				<field
+					name="posttext"
+					type="textarea"
+					cols="30"
+					rows="5"
+					label="MOD_LOGIN_FIELD_POST_TEXT_LABEL"
+					description="MOD_LOGIN_FIELD_POST_TEXT_DESC" />
+				<field
+					name="login"
+					type="menuitem"
+					default=""
+					disable="separator"
+					label="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_LABEL"
+					description="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_DESC" />
+				<field
+					name="logout"
+					type="menuitem"
+					default=""
+					disable="separator"
+					label="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_LABEL"
+					description="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_DESC" />
+				<field
+					name="greeting"
+					type="radio"
+					default="1"
+					label="MOD_LOGIN_FIELD_GREETING_LABEL"
+					description="MOD_LOGIN_FIELD_GREETING_DESC">
+					<option
+						value="0">JNo</option>
+					<option
+						value="1">JYes</option>
+				</field>
+				<field
+					name="name"
+					type="list"
+					default="0"
+					label="MOD_LOGIN_FIELD_NAME_LABEL"
+					description="MOD_LOGIN_FIELD_NAME_DESC">
+					<option
+						value="0">MOD_LOGIN_VALUE_NAME</option>
+					<option
+						value="1">MOD_LOGIN_VALUE_USERNAME</option>
+				</field>
+				<field
+					name="usesecure"
+					type="radio"
+					default="0"
+					label="MOD_LOGIN_FIELD_USESECURE_LABEL"
+					description="MOD_LOGIN_FIELD_USESECURE_DESC">
+					<option
+						value="0">JNo</option>
+					<option
+						value="1">JYes</option>
+				</field>
+			</fieldset>
+			<fieldset
+				name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					default=""
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JCOMMON_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>
 </extension>

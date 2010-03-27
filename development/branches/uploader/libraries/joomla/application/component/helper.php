@@ -41,7 +41,7 @@ class JComponentHelper
 			} else {
 				$result				= new stdClass;
 				$result->enabled	= $strict ? false : true;
-				$result->params		= new JParameter;
+				$result->params		= new JRegistry;
 			}
 		} else {
 			$result = &self::$_components[$option];
@@ -119,8 +119,10 @@ class JComponentHelper
 
 		// Load common and local language files.
 		$lang = &JFactory::getLanguage();
-		$lang->load($option, JPATH_COMPONENT);
-		$lang->load($option);
+			$lang->load($option, JPATH_BASE, null, false, false)
+		||	$lang->load($option, JPATH_COMPONENT, null, false, false)
+		||	$lang->load($option, JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($option, JPATH_COMPONENT, $lang->getDefault(), false, false);
 
 		// Handle template preview outlining.
 		$contents = null;
@@ -171,7 +173,8 @@ class JComponentHelper
 
 		// Convert the params to an object.
 		if (is_string(self::$_components[$option]->params)) {
-			$temp = new JParameter(self::$_components[$option]->params);
+			$temp = new JRegistry;
+			$temp->loadJSON(self::$_components[$option]->params);
 			self::$_components[$option]->params = $temp;
 		}
 

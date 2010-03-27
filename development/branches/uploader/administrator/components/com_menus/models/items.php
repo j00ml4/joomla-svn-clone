@@ -34,7 +34,7 @@ class MenusModelItems extends JModelList
 	{
 		$app = JFactory::getApplication('administrator');
 
-		$search = $app->getUserStateFromRequest($this->_context.'.search', 'search');
+		$search = $app->getUserStateFromRequest($this->_context.'.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
 		$published = $app->getUserStateFromRequest($this->_context.'.published', 'filter_published', '');
@@ -85,7 +85,7 @@ class MenusModelItems extends JModelList
 	/**
 	 * Builds an SQL query to load the list data.
 	 *
-	 * @return	JQuery	A query object.
+	 * @return	JDatabaseQuery	A query object.
 	 */
 	protected function _getListQuery()
 	{
@@ -131,7 +131,7 @@ class MenusModelItems extends JModelList
 				}
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('a.title LIKE '.$search.' OR a.alias LIKE '.$search);
+				$query->where('('.'a.title LIKE '.$search.' OR a.alias LIKE '.$search.' OR a.note LIKE '.$search.')');
 			}
 		}
 

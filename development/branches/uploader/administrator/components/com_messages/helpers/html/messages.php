@@ -25,12 +25,12 @@ class JHtmlMessages extends JController
 	{
 		// Array of image, task, title, action.
 		$states	= array(
-			-2	=> array('trash.png',		'messages.unpublish',	'JState_Trash',	'Messages_UnPublish_Item'),
-			1	=> array('tick.png',		'messages.unpublish',	'Messages_Option_Read',		'Messages_UnPublish_Item'),
-			0	=> array('publish_x.png',	'messages.publish',		'Messages_Option_unRead',	'Messages_Publish_Item')
+			-2	=> array('trash.png',		'messages.unpublish',	'JOPTION_TRASHED',				'COM_MESSAGES_OPTION_UNPUBLISH'),
+			1	=> array('tick.png',		'messages.unpublish',	'COM_MESSAGES_OPTION_READ',		'COM_MESSAGES_OPTION_UNPUBLISH'),
+			0	=> array('publish_x.png',	'messages.publish',		'COM_MESSAGES_OPTION_UNREAD',	'COM_MESSAGES_OPTION_PUBLISH')
 		);
 		$state	= JArrayHelper::getValue($states, (int) $value, $states[0]);
-		$html	= JHtml::_('image', 'admin/'.$state[0], JText::_($state[2]), NULL, true);
+		$html	= JHTML::_('image','admin/'.$state[0], JText::_($state[2]), NULL, true);
 		if ($canChange) {
 			$html = '<a href="javascript:void(0);" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" title="'.JText::_($state[3]).'">'
 					.$html.'</a>';

@@ -21,6 +21,28 @@ jimport('joomla.base.adapterinstance');
 class JInstallerLibrary extends JAdapterInstance
 {
 	/**
+	 * Custom loadLanguage method
+	 *
+	 * @access	public
+	 * @param	string	$path the path where to find language files
+	 * @since	1.6
+	 */
+	public function loadLanguage($path)
+	{
+		$this->manifest = &$this->parent->getManifest();
+		$extension = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
+		$lang =& JFactory::getLanguage();
+		$source = $path;
+			$lang->load($extension . '.manage', $source, null, false, false)
+		||	$lang->load($extension, $source, null, false, false)
+		||	$lang->load($extension . '.manage', JPATH_SITE, null, false, false)
+		||	$lang->load($extension , JPATH_SITE, null, false, false)
+		||	$lang->load($extension . '.manage', $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension, $source, $lang->getDefault(), false, false)
+		||	$lang->load($extension . '.manage', JPATH_SITE, $lang->getDefault(), false, false)
+		||	$lang->load($extension , JPATH_SITE, $lang->getDefault(), false, false);
+	}
+	/**
 	 * Custom install method
 	 *
 	 * @access	public
@@ -118,6 +140,9 @@ class JInstallerLibrary extends JAdapterInstance
 			$this->parent->abort();
 			return false;
 		}
+
+		// Parse optional tags
+		$this->parent->parseLanguages($this->manifest->languages);
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
@@ -282,6 +307,8 @@ class JInstallerLibrary extends JAdapterInstance
 				}
 			}
 		}
+
+		$this->parent->removeFiles($xml->languages);
 
 		$row->delete($row->extension_id);
 		unset($row);

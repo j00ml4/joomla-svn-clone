@@ -10,7 +10,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require_once dirname(__FILE__).DS.'articles.php';
+require_once dirname(__FILE__) . DS . 'articles.php';
 
 /**
  * Frontpage Component Model
@@ -37,9 +37,19 @@ class ContentModelFrontpage extends ContentModelArticles
 	{
 		parent::_populateState();
 
+		// Add blog properties
+		$params = $this->_state->params;
+		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
+		$this->setState('list.limit', $limit);
+		$this->setState('list.links', $params->get('num_links'));
 		$this->setState('filter.frontpage', true);
+		
+		// check for category selection
+		if (is_array($featuredCategories = $params->get('featured_categories'))) {
+			$this->setState('filter.frontpage.categories', $featuredCategories);
+		}
 	}
-
+		
 	/**
 	 * Method to get a store id based on model configuration state.
 	 *
@@ -54,22 +64,39 @@ class ContentModelFrontpage extends ContentModelArticles
 	protected function _getStoreId($id = '')
 	{
 		// Compile the store id.
-		$id	.= $this->getState('filter.frontpage');
+		$id .= $this->getState('filter.frontpage');
 
 		return parent::_getStoreId($id);
 	}
 
 	/**
-	 * @return	JQuery
+	 * @return	JDatabaseQuery
 	 */
 	function _getListQuery()
 	{
+		// Set the blog ordering
+		$params = $this->_state->params;
+		$articleOrderby = $params->get('orderby_sec', 'rdate');
+		$articleOrderDate = $params->get('order_date');
+		$categoryOrderby = $params->def('orderby_pri', '');
+		$secondary = ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
+		$primary = ContentHelperQuery::orderbyPrimary($categoryOrderby);
+
+		$orderby = $primary . ' ' . $secondary . ' a.created DESC ';
+		$this->setState('list.ordering', $orderby);
+		$this->setState('list.direction', '');
 		// Create a new query object.
 		$query = parent::_getListQuery();
 
 		// Filter by frontpage.
-		if ($this->getState('filter.frontpage')) {
+		if ($this->getState('filter.frontpage'))
+		{
 			$query->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
+		}
+		
+		// Filter by categories
+		if (is_array($featuredCategories = $this->getState('filter.frontpage.categories'))) {
+			$query->where('a.catid IN (' . implode(',',$featuredCategories) . ')');
 		}
 
 		//echo nl2br(str_replace('#__','jos_',$query));

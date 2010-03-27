@@ -102,13 +102,13 @@ abstract class JTable extends JObject
 			jimport('joomla.access.rules');
 			$this->_trackAssets = true;
 			// TODO: Do we need the following line anymore?
-			//$this->access = (int) JFactory::getConfig()->getValue('access');
+			//$this->access = (int) JFactory::getConfig()->get('access');
 		}
 
 		// If the acess property exists, set the default.
 		if (property_exists($this, 'access'))
 		{
-			$this->access = (int) JFactory::getConfig()->getValue('access');
+			$this->access = (int) JFactory::getConfig()->get('access');
 		}
 	}
 
@@ -1020,7 +1020,7 @@ abstract class JTable extends JObject
 		// If the movement delta is positive move the row down.
 		elseif ($delta > 0) {
 			$query->where('`ordering` > '.(int) $this->ordering);
-			$query->order('`ordering`');
+			$query->order('`ordering` ASC');
 		}
 
 		// Add the custom WHERE clause if set.
@@ -1113,7 +1113,7 @@ abstract class JTable extends JObject
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('No_Rows_Selected'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

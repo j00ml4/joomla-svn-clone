@@ -77,6 +77,10 @@ class JTableUser extends JTable
 			return false;
 		}
 
+		if(!count($data))
+		{
+			return false;
+		}
 		// Bind the data to the table.
 		$return = $this->bind($data);
 
@@ -181,8 +185,8 @@ class JTableUser extends JTable
 			return false;
 		}
 
-		if (eregi("[<>\"'%;()&]", $this->username) || strlen(utf8_decode($this->username)) < 2) {
-			$this->setError(JText::sprintf('VALID_AZ09', JText::_('Username'), 2));
+		if (preg_match( "#[<>\"'%;()&]#i", $this->username) || strlen(utf8_decode($this->username )) < 2) {
+			$this->setError( JText::sprintf( 'VALID_AZ09', JText::_( 'Username' ), 2 ) );
 			return false;
 		}
 

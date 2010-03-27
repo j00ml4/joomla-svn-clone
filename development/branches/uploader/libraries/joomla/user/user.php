@@ -148,7 +148,7 @@ class JUser extends JObject
 	function __construct($identifier = 0)
 	{
 		// Create the user parameters object
-		$this->_params = new JParameter('');
+		$this->_params = new JRegistry;
 
 		// Load the user if it exists
 		if (!empty($identifier)) {
@@ -173,7 +173,7 @@ class JUser extends JObject
 	 * @return	JUser			The User object.
 	 * @since	1.5
 	 */
-	static function getInstance($id = 0)
+	static function getInstance($identifier = 0)
 	{
 		static $instances;
 
@@ -182,14 +182,16 @@ class JUser extends JObject
 		}
 
 		// Find the user id
-		if (!is_numeric($id))
+		if (!is_numeric($identifier))
 		{
 			jimport('joomla.user.helper');
-			if (!$id = JUserHelper::getUserId($id)) {
-				JError::raiseWarning('SOME_ERROR_CODE', 'JUser::_load: User '.$id.' does not exist');
+			if (!$id = JUserHelper::getUserId($identifier)) {
+				JError::raiseWarning('SOME_ERROR_CODE', 'JUser::_load: User '.$identifier.' does not exist');
 				$retval = false;
 				return $retval;
 			}
+		} else {
+			$id = $identifier;
 		}
 
 		if (empty($instances[$id])) {
@@ -557,6 +559,12 @@ class JUser extends JObject
 			$this->id = $table->get('id');
 		}
 
+		if ($my->id == $table->id)
+		{
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
+			$my->setParameters($registry);
+		}
 		// Fire the onAftereStoreUser event
 		$dispatcher->trigger('onAfterStoreUser', array($this->getProperties(), $isnew, $result, $this->getError()));
 

@@ -41,7 +41,7 @@ class ContentViewForm extends JView
 		}
 
 		if ($authorised !== true) {
-			JError::raiseError(403, JText::_('ALERTNOTAUTH'));
+			JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 			return false;
 		}
 
@@ -84,7 +84,8 @@ class ContentViewForm extends JView
 		{
 			if (isset($menu->query['view']) && $menu->query['view'] == 'form')
 			{
-				$menuParams = new JParameter($menu->params);
+				$menuParams = new JRegistry;
+				$menuParams->loadJSON($menu->params);
 				$title = $menuParams->get('page_title');
 			}
 		}

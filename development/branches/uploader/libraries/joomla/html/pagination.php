@@ -383,7 +383,7 @@ class JPagination extends JObject
 		}
 		$limits[] = JHtml::_('select.option', '50');
 		$limits[] = JHtml::_('select.option', '100');
-		$limits[] = JHtml::_('select.option', '0', JText::_('all'));
+		$limits[] = JHtml::_('select.option', '0', JText::_('JOPTION_ALL'));
 
 		$selected = $this->_viewall ? 0 : $this->limit;
 
@@ -416,11 +416,11 @@ class JPagination extends JObject
 		{
 			if ($enabled) {
 				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= JHTML::_('image', 'admin/uparrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
+				$html	.= JHTML::_('image','admin/uparrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 				$html	.= '</a>';
 			}
 			else {
-				$html	= JHTML::_('image', 'admin/uparrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
+				$html	= JHTML::_('image','admin/uparrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 			}
 		}
 
@@ -447,10 +447,10 @@ class JPagination extends JObject
 		{
 			if ($enabled) {
 				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= JHTML::_('image', 'admin/downarrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' =>0), true);
+				$html	.= JHTML::_('image','admin/downarrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' =>0), true);
 				$html	.= '</a>';
 			} else {
-				$html	= JHTML::_('image', 'admin/downarrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
+				$html	= JHTML::_('image','admin/downarrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
 			}
 		}
 

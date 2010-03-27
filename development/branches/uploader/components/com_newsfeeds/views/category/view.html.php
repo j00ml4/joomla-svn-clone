@@ -51,14 +51,14 @@ class NewsfeedsViewCategory extends JView
 		// Make sure the category was found.
 
 		if (empty($category)) {
-			return JError::raiseWarning(404, JText::_('Newfeeds_Error_Category_not_found'));
+			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERRORS_CATEGORY_NOT_FOUND'));
 		}
 
 		// Check whether category access level allows access.
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		if (!in_array($category->access, $groups)) {
-			return JError::raiseError(403, JText::_("ALERTNOTAUTH"));
+			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
 		}
 
 		// Prepare the data.
@@ -109,12 +109,13 @@ class NewsfeedsViewCategory extends JView
 		// we need to get it from the menu item itself
 		if ($menu = $menus->getActive())
 		{
-			$menuParams = new JParameter($menu->params);
+			$menuParams = new JRegistry;
+			$menuParams->loadJSON($menu->params);
 			if ($title = $menuParams->get('jpage_title')) {
 				$this->document->setTitle($title);
 			}
 			else {
-				$this->document->setTitle(JText::_('News_Feeds'));
+				$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
 			}
 
 			// Set breadcrumbs.
@@ -123,7 +124,7 @@ class NewsfeedsViewCategory extends JView
 			}
 		}
 		else {
-			$this->document->setTitle(JText::_('News_Feeds'));
+			$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
 		}
 
 		// Add alternate feed link

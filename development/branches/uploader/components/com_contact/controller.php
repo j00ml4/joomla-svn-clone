@@ -34,20 +34,6 @@ class ContactController extends JController
 		$vFormat	= $document->getType();
 		$lName		= JRequest::getWord('layout', 'default');
 
-		// interceptors to support legacy urls
-		switch ($this->getTask())
-		{
-			//index.php?option=com_contact&task=category&id=0&Itemid=4
-			case 'category':
-				$viewName	= 'category';
-				$layout		= 'default';
-				break;
-			case 'view':
-				$viewName	= 'contact';
-				$layout		= 'default';
-				break;
-		}
-
 			// Get and render the view.
 		if ($view = &$this->getView($vName, $vFormat))
 		{
@@ -166,15 +152,16 @@ class ContactController extends JController
 			 * If we are supposed to copy the admin, do so.
 			 */
 			// parameter check
-			$params = new JParameter($contact->params);
+			$params = new JRegistry;
+			$params->loadJSON($contact->params);
 			$emailcopyCheck = $params->get('show_email_copy', 0);
 
 			// check whether email copy function activated
 			if ($emailCopy && $emailcopyCheck)
 			{
-				$copyText		= JText::sprintf('Copy of:', $contact->name, $SiteName);
+				$copyText		= JText::sprintf('COPY_OF', $contact->name, $SiteName);
 				$copyText		.= "\r\n\r\n".$body;
-				$copySubject	= JText::_('Copy of:')." ".$subject;
+				$copySubject	= JText::_('COPY_OF')." ".$subject;
 
 				$mail = JFactory::getMailer();
 
@@ -224,7 +211,8 @@ class ContactController extends JController
 		$user = &JFactory::getUser();
 
 		// Get the contact detail parameters
-		$params = new JParameter($contact->params);
+		$params = new JRegistry;
+		$params->loadJSON($contact->params);
 
 		// Show the Vcard if contact parameter indicates (prevents direct access)
 		$groups = $user->authorisedLevels();
@@ -293,7 +281,7 @@ class ContactController extends JController
 
 			print $output;
 		} else {
-			JError::raiseWarning('SOME_ERROR_CODE', 'ContactController::vCard: '.JText::_('ALERTNOTAUTH'));
+			JError::raiseWarning('SOME_ERROR_CODE', 'ContactController::vCard: '.JText::_('JERROR_ALERTNOAUTHOR'));
 			return false;
 		}
 	}
@@ -315,7 +303,8 @@ class ContactController extends JController
 		$session = &JFactory::getSession();
 
 		// Get params and component configurations
-		$params		= new JParameter($contact->params);
+		$params = new JRegistry;
+		$params->loadJSON($contact->params);
 		$pparams	= &$app->getParams('com_contact');
 
 		// check for session cookie
@@ -323,7 +312,7 @@ class ContactController extends JController
 		$sessionName	= $session->getName();
 		if  ($sessionCheck) {
 			if (!isset($_COOKIE[$sessionName])) {
-				$this->setError(JText::_('ALERTNOTAUTH'));
+				$this->setError(JText::_('JERROR_ALERTNOAUTHOR'));
 				return false;
 			}
 		}
@@ -364,7 +353,7 @@ class ContactController extends JController
 		// test to ensure that only one email address is entered
 		$check = explode('@', $email);
 		if (strpos($email, ';') || strpos($email, ',') || strpos($email, ' ') || count($check) > 2) {
-			$this->setError(JText::_('You cannot enter more than one email address', true));
+			$this->setError(JText::_('YOU_CANNOT_ENTER_MORE_THAN_ONE_EMAIL_ADDRESS', true));
 			return false;
 		}
 
