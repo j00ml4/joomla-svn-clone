@@ -11,6 +11,7 @@
 // No direct access
 defined('JPATH_BASE') or die;
 
+
 /**
  * Abstract cache storage handler
  *
@@ -133,8 +134,11 @@ class JCacheStorage extends JObject
 	 * @since	1.6
 	 */
 	function getAll()
-	{
-		return false;
+	{	
+		if (!class_exists('JCacheStorageHelper', false)) {
+			require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'storage'.DS.'helper.php';
+		}
+		return;
 	}
 
 	/**

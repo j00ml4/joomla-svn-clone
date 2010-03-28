@@ -58,7 +58,8 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @since	1.6
 	 */
 	function getAll()
-	{
+	{	
+		parent::getAll();
 		$allinfo = wincache_ucache_info();
 		$keys = $allinfo['cache_entries'];
 		$secret = $this->_hash;
@@ -70,11 +71,11 @@ class JCacheStorageWincache extends JCacheStorage
 			if ($namearr !== false && $namearr[0]==$secret &&  $namearr[1]=='cache') {
 				$group = $namearr[2];
 				if (!isset($data[$group])) {
-					$item = new CacheItem($group);
+					$item = new JCacheStorageHelper();
 				} else {
 					$item = $data[$group];
 				}
-				$item->updateSize(1); // dummy, to be upgraded if WINCACHE implements item size info
+				$item->updateSize(1,$group); // dummy, to be upgraded if WINCACHE implements item size info
 				$data[$group] = $item;
 			}
 		}

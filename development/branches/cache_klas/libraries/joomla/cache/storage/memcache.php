@@ -117,11 +117,14 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @since	1.6
 	 */
 	function getAll()
-	{
+	{	
+		parent::getAll();
+		
 		$keys = unserialize($this->_db->get($this->_hash.'-index'));
-
         $secret = $this->_hash;
-        $data = array();		
+        
+        $data = array();	
+        	
 		if (!empty($keys)){
 		foreach ($keys as $key) {
 			if (empty($key)) continue;
@@ -132,12 +135,12 @@ class JCacheStorageMemcache extends JCacheStorage
 			$group = $namearr[2];
 			
 			if (!isset($data[$group])) {
-			$item = new CacheItem($group);
+			$item = new JCacheStorageHelper();
 			} else {
 			$item = $data[$group];
 			}
 
-			$item->updateSize($key->size/1024);
+			$item->updateSize($key->size/1024,$group);
 			
 			$data[$group] = $item;
 			
