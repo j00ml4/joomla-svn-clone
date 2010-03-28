@@ -52,8 +52,9 @@ class JCacheCallback extends JCache
 	 * @return	mixed	Result of the callback
 	 * @since	1.5
 	 */
-	function get($callback, $args, $id=false)
-	{
+	function get($callback, $args, $id=false, $wrkarounds=false)
+	{	
+		
 		// Normalize callback
 		if (is_array($callback)) {
 			// We have a standard php callback array -- do nothing
@@ -83,11 +84,15 @@ class JCacheCallback extends JCache
 
 		// Get the storage handler and get callback cache data by id and group
 		$data = parent::get($id);
+		
 		if ($data !== false) {
-			$cached = unserialize($data);
+			
+			$cached = $wrkarounds==false ? unserialize($data) : parent::getWorkarounds(unserialize($data));
 			$output = $cached['output'];
 			$result = $cached['result'];
+			
 		} else {
+			
 			ob_start();
 			ob_implicit_flush(false);
 
@@ -97,7 +102,7 @@ class JCacheCallback extends JCache
 			ob_end_clean();
 
 			$cached = array();
-			$cached['output'] = $output;
+			$cached['output'] = $wrkarounds==false ? $output : parent::setWorkarounds($output);
 			$cached['result'] = $result;
 			// Store the cache data
 			$this->store(serialize($cached), $id);

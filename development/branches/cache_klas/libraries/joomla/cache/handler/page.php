@@ -44,8 +44,9 @@ class JCachePage extends JCache
 	 * @return	boolean	True if the cache is hit (false else)
 	 * @since	1.5
 	 */
-	function get($id=false, $group='page')
-	{
+	function get($id=false, $group='page', $wrkarounds=true)
+	{	
+		
 		// Initialise variables.
 		$data = false;
 
@@ -68,7 +69,13 @@ class JCachePage extends JCache
 
 		// We got a cache hit... set the etag header and echo the page data
 		$data = parent::get($id, $group);
+		
 		if ($data !== false) {
+			
+			if ($wrkarounds === true) {
+				echo parent::getWorkarounds($data);
+			}
+			
 			$this->_setEtag($id);
 			return $data;
 		}
@@ -86,8 +93,9 @@ class JCachePage extends JCache
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
-	function store()
-	{
+	function store($wrkarounds=true)
+	{	
+		
 		// Get page data from JResponse body
 		$data = JResponse::getBody();
 
@@ -99,6 +107,7 @@ class JCachePage extends JCache
 
 		// Only attempt to store if page data exists
 		if ($data) {
+			$data = $wrkarounds==false ? $data : parent::setWorkarounds($data);
 			return parent::store($data, $id, $group);
 		}
 		return false;
@@ -113,8 +122,9 @@ class JCachePage extends JCache
 	 * @since	1.5
 	 */
 	function _makeId()
-	{
-		return md5(JRequest::getURI());
+	{	
+		//return md5(JRequest::getURI());
+		return parent::makeId();
 	}
 
 	/**

@@ -231,10 +231,10 @@ class JCacheStorageFile extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function test()
+	static function test()
 	{
-		$config	= &JFactory::getConfig();
-		return is_writable($this->_root);
+		$conf	= &JFactory::getConfig();
+		return is_writable($conf->get('cache_path',JPATH_ROOT.DS.'cache'));
 	}
 
 	/**

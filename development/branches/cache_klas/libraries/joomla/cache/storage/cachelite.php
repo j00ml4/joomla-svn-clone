@@ -247,7 +247,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function test()
+	static function test()
 	{	include_once('Cache/Lite.php');
 	if (class_exists('Cache_Lite')) return true; else return false;
 	}

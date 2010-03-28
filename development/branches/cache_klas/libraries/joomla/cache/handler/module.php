@@ -29,10 +29,9 @@ class JCacheModule extends JCache
 	 * @return	mixed	Result of the function call (either from cache or function)
 	 * @since	1.5
 	 */
-	function get($modulehelper, $methodarr, $id=false)
+	function get($modulehelper, $methodarr, $id=false, $wrkarounds=false)
 	{
 		// Initialise variables.
-		$app = &JFactory::getApplication();
 		$data = false;
 		
 		$method=$methodarr[0];
@@ -44,36 +43,19 @@ class JCacheModule extends JCache
 		}
 
 		$data = parent::get($id);
+		
 		if ($data !== false) {
-			$data		= unserialize($data);
-			$document	= &JFactory::getDocument();
-
-			// Get the document head out of the cache.
-			$document->setHeadData((isset($data['head'])) ? $data['head'] : array());
-
-			// If the pathway buffer is set in the cache data, get it.
-			if (isset($data['pathway']) && is_array($data['pathway']))
-			{
-				// Push the pathway data into the pathway object.
-				$pathway = &$app->getPathWay();
-				$pathway->setPathway($data['pathway']);
-			}
-
-
-			// Get the document body out of the cache.
-			$output = $data['output'];
-			$result = $data['result'];
-			echo $output;
-		return $result;
-		}
+		
+			$cached = $wrkarounds==false ? unserialize($data) : parent::getWorkarounds(unserialize($data));
+			
+			$output = $cached['output'];
+			$result = $cached['result'];
+		
+		} else {
 
 		/*
 		 * No hit so we have to execute the view
 		 */
-		//if (method_exists($modulehelper, $method)) {
-			$document = &JFactory::getDocument();
-
-
 
 			// Capture and echo output
 			ob_start();
@@ -81,23 +63,22 @@ class JCacheModule extends JCache
 			$result = call_user_func(array($modulehelper,$method),$args);
 			$output= ob_get_contents();
 			ob_end_clean();
-			echo $output;
 
 			/*
 			 * For a view we have a special case.  We need to cache not only the output from the view, but the state
 			 * of the document head after the view has been rendered.  This will allow us to properly cache any attached
 			 * scripts or stylesheets or links or any other modifications that the view has made to the document object
 			 */
+			
 			$cached = array();
-
-			$cached['output'] = $output;
+			$cached['output'] = $wrkarounds==false ? $output : parent::setWorkarounds($output);
 			$cached['result'] = $result;
-			// Document head data
-			$cached['head'] = $document->getHeadData();
-
+			
 			// Store the cache data
 			$this->store(serialize($cached), $id);
-		//}
+		}
+		
+		echo $output;
 		return $result;
 	}
 

@@ -4,6 +4,7 @@
  * @package		Joomla.Framework
  * @subpackage	Cache
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,7 +19,9 @@ defined('JPATH_BASE') or die;
  * @since		1.5
  */
 class JCacheOutput extends JCache
-{
+{	
+	private $_id;
+	private $_group;
 	/**
 	 * Start the cache
 	 *

@@ -31,10 +31,8 @@ class JCacheView extends JCache
 	 * @return	boolean	True if the cache is hit (false else)
 	 * @since	1.5
 	 */
-	function get(&$view, $method, $id=false)
-	{
-		// Initialise variables.
-		$app = &JFactory::getApplication();
+	function get(&$view, $method, $id=false, $wrkarounds=true)
+	{	
 		$data = false;
 
 		// If an id is not given generate it from the request
@@ -43,33 +41,17 @@ class JCacheView extends JCache
 		}
 
 		$data = parent::get($id);
+		
 		if ($data !== false) {
-			$data		= unserialize($data);
-			$document	= &JFactory::getDocument();
-
-			// Get the document head out of the cache.
-			$document->setHeadData((isset($data['head'])) ? $data['head'] : array());
-
-			// If the pathway buffer is set in the cache data, get it.
-			if (isset($data['pathway']) && is_array($data['pathway']))
-			{
-				// Push the pathway data into the pathway object.
-				$pathway = &$app->getPathWay();
-				$pathway->setPathway($data['pathway']);
+			$data		= unserialize($data);	
+			
+			if ($wrkarounds === true) {
+				echo parent::getWorkarounds($data);
 			}
-
-			// @todo chech if the following is needed, seems like it should be in page cache
-			// If a module buffer is set in the cache data, get it.
-			if (isset($data['module']) && is_array($data['module']))
-			{
-				// Iterate through the module positions and push them into the document buffer.
-				foreach ($data['module'] as $name => $contents) {
-					$document->setBuffer($contents, 'module', $name);
-				}
+			
+			else {  // no workarounds, all data is stored in one piece
+				echo (isset($data)) ? $data : null;
 			}
-
-			// Get the document body out of the cache.
-			echo (isset($data['body'])) ? $data['body'] : null;
 			return true;
 		}
 
@@ -78,15 +60,7 @@ class JCacheView extends JCache
 		 */
 		if (method_exists($view, $method))
 		{
-			$document = &JFactory::getDocument();
 
-			// Get the modules buffer before component execution.
-			$buffer1 = $document->getBuffer();
-
-			// Make sure the module buffer is an array.
-			if (!isset($buffer1['module']) || !is_array($buffer1['module'])) {
-				$buffer1['module'] = array();
-			}
 
 			// Capture and echo output
 			ob_start();
@@ -103,27 +77,7 @@ class JCacheView extends JCache
 			 */
 			$cached = array();
 
-			// View body data
-			$cached['body'] = $data;
-
-			// Document head data
-			$cached['head'] = $document->getHeadData();
-
-			// Pathway data
-			$pathway			= &$app->getPathWay();
-			$cached['pathway']	= $pathway->getPathway();
-
-			// @todo chech if the following is needed, seems like it should be in page cache
-			// Get the module buffer after component execution.
-			$buffer2 = $document->getBuffer();
-			
-			// Make sure the module buffer is an array.
-			if (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
-				$buffer2['module'] = array();
-			}
-
-			// Compare the second module buffer against the first buffer.
-			$cached['module'] = array_diff_assoc($buffer2['module'], $buffer1['module']);
+			$cached = $wrkarounds == true ? parent::setWorkarounds($data) : $data;
 
 			// Store the cache data
 			$this->store(serialize($cached), $id);
@@ -141,7 +95,7 @@ class JCacheView extends JCache
 	 * @since	1.5
 	 */
 	function _makeId(&$view, $method)
-	{
-		return md5(serialize(array(JRequest::getURI(), get_class($view), $method)));
+	{	
+		return md5(serialize(array(parent::makeId(), get_class($view), $method)));
 	}
 }

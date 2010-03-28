@@ -69,13 +69,6 @@ class plgSystemCache extends JPlugin
 
 		if ($data !== false)
 		{
-			// the following code searches for a token in the cached page and replaces it with the
-			// proper token.
-			$token	= JUtility::getToken();
-			$search = '#<input type="hidden" name="[0-9a-f]{32}" value="1" />#';
-			$replacement = '<input type="hidden" name="'.$token.'" value="1" />';
-			$data = preg_replace($search, $replacement, $data);
-
 			JResponse::setBody($data);
 
 			echo JResponse::toString($app->getCfg('gzip'));
