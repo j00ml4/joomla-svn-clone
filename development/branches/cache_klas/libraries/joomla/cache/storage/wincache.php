@@ -75,7 +75,10 @@ class JCacheStorageWincache extends JCacheStorage
 				} else {
 					$item = $data[$group];
 				}
-				$item->updateSize(1,$group); // dummy, to be upgraded if WINCACHE implements item size info
+				if (isset($key['value_size']) {
+					$item->updateSize($key['value_size']/1024,$group);} 
+				else {
+					$item->updateSize(1,$group); } // dummy, WINCACHE version is too low
 				$data[$group] = $item;
 			}
 		}

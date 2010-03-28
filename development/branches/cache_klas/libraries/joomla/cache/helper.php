@@ -21,19 +21,6 @@ defined('JPATH_BASE') or die();
 class JCacheHelper
 {
 
-	public $group = '';
-	public $size = 0;
-	public $count = 0;
-
-	public function __construct($group)
-	{
-		$this->group = $group;
-	}
-
-	public function updateSize($size)
-	{
-		$this->size = number_format($this->size + $size, 2);
-		$this->count++;
-	}
+	
 	
 }
