@@ -241,10 +241,10 @@ class JLanguage extends JObject
 		if ($this->_transliterator !== null) {
 			return call_user_func($this->_transliterator, $string);
 		}
-		
+
 		$string = JLanguageTransliterate::utf8_latin_to_ascii($string);
 		$string = JString::strtolower($string);
-		
+
 		return $string;
 	}
 
@@ -413,16 +413,16 @@ class JLanguage extends JObject
 		if($version >= "5.3.1") {
 			$contents = file_get_contents($filename);
 			$contents = str_replace('_QQ_','"\""',$contents);
-			$strings = @parse_ini_string($contents);
+			$strings = (array) @parse_ini_string($contents);
 		} else {
-			$strings = @parse_ini_file($filename);
+			$strings = (array) @parse_ini_file($filename);
 			if ($version == "5.3.0") {
 				foreach($strings as $key => $string) {
 					$strings[$key]=str_replace('_QQ_','"',$string);
 				}
 			}
 		}
-		if (!empty($php_errormsg) || JFactory::getApplication()->getCfg('debug')) {
+	if (!empty($php_errormsg)) {
 			$errors = array();
 			$lineNumber = 0;
 			$stream = new JStream();
@@ -438,14 +438,8 @@ class JLanguage extends JObject
 			}
 			$stream->close();
 			if (count($errors)) {
-				if (basename($filename)!=$this->_lang.'.ini') {
-					JError::raiseWarning(500, JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
-				}
-				else {
-					JError::raiseWarning(500, sprintf('The language file %1$s was not read correctly: error in lines %2$s',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
-				}
+				JError::raiseWarning(500, sprintf('The language file %1$s was not read correctly: error in lines %2$s',substr($filename,strlen(JPATH_ROOT)) , implode(', ',$errors)));
 			}
-			//JError::raiseWarning(500, "Error parsing ".basename($filename).": $php_errormsg");
 		}
 		ini_restore('track_errors');
 		return $strings;
