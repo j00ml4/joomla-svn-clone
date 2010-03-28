@@ -37,8 +37,8 @@
 			required="true"
 			filter="word" />
 	</fieldset>
-		<fields
-		group="memcache"
+	<fieldset
+		name="memcache"
 		label="Com_Config_Memcache_Settings_Label">
 		<field
 			name="memcache_persist"
@@ -46,7 +46,6 @@
 			default="0"
 			label="COM_CONFIG_MEMCACHE_PERSISTENT_LABEL"
 			description="COM_CONFIG_MEMCACHE_PERSISTENT_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -60,7 +59,6 @@
 			default="0"
 			label="COM_CONFIG_MEMCACHE_COMPRESSION_LABEL"
 			description="COM_CONFIG_MEMCACHE_COMPRESSION_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -85,7 +83,7 @@
 			description="COM_CONFIG_MEMCACHE_PORT_DESC"
 			filter="integer"
 			size="5" />
-	</fields>
+	</fieldset>
 
 	<fieldset
 		name="database"

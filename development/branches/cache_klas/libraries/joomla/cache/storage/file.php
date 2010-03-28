@@ -20,6 +20,8 @@ defined('JPATH_BASE') or die;
  */
 class JCacheStorageFile extends JCacheStorage
 {
+	private $_root;
+	
 	/**
 	* Constructor
 	*
@@ -72,10 +74,6 @@ class JCacheStorageFile extends JCacheStorage
 	
 	function getAll()
 	{
-		//$clientId = JRequest::getInt('client', 0);
-		//$client	= &JApplicationHelper::getClientInfo($clientId);
-		//$path = ($path !== null ? $path : $this->getState('path'));
-		//$path = $client->path.DS.'cache';
 		$path=$this->_root;
 		jimport('joomla.filesystem.folder');
 		$folders = JFolder::folders($path);
@@ -234,8 +232,7 @@ class JCacheStorageFile extends JCacheStorage
 	function test()
 	{
 		$config	= &JFactory::getConfig();
-		$root	= $config->getValue('config.cache_path', JPATH_ROOT.DS.'cache');
-		return is_writable($root);
+		return is_writable($this->_root);
 	}
 
 	/**
@@ -272,10 +269,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.5
 	 */
 	function _getFilePath($id, $group)
-	{	/*$name	= md5($this->_application.'-'.$id.'-'.$this->_language.'-'.$this->_safeuriaddon);
-		return $this->_hash.'-cache-'.$group.'-'.$name;
-		$folder	= $group;*/
-		//$name	= md5($this->_application.'-'.$id.'-'.$this->_hash.'-'.$this->_language).'.php';
+	{	
 		$name	= $this->_getCacheId($id, $group);
 		$dir	= $this->_root.DS.$group;
 

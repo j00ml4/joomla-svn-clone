@@ -26,10 +26,10 @@ defined('_JEXEC') or die;
 		<?php if ($this->data['cache_handler'] == 'memcache' || $this->data['session_handler'] == 'memcache') : ?>
 
 					<?php
-			foreach ($this->form->getFields('memcache') as $field):
+			foreach ($this->form->getFieldset('memcache') as $mfield):
 			?>
-					<?php echo $field->label; ?>
-					<?php echo $field->input; ?>
+					<?php echo $mfield->label; ?>
+					<?php echo $mfield->input; ?>
 			<?php
 			endforeach;
 			?>

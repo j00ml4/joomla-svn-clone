@@ -49,19 +49,16 @@ class JCache extends JObject
 		$conf = &JFactory::getConfig();
 
 		$this->_options = array(
-			'cachebase'		=> $conf->getValue('config.cache_path',JPATH_ROOT.DS.'cache'),
-			'lifetime'		=> $conf->getValue('config.cachetime') * 60,	// minutes to seconds
-			'language'		=> $conf->getValue('config.language','en-GB'),
-			'storage'		=> $conf->getValue('config.cache_handler', 'file'),
+			'cachebase'		=> $conf->get('cache_path',JPATH_ROOT.DS.'cache'),
+			'lifetime'		=> $conf->get('cachetime') * 60,	// minutes to seconds
+			'language'		=> $conf->get('language','en-GB'),
+			'storage'		=> $conf->get('cache_handler', 'file'),
 			'defaultgroup'=>'default',
 			'locking'=>true,
 			'caching'=>true
 		);
 
 		// Overwrite default options with given options
-		//$this->_options = array_merge($this->_options,$options);
-		//@todo:or with the ampersand here? Like "...& $options);" for speed if array_merge or this construct would make a deep copy otherwise
-
 		foreach ($this->_options AS $option=>$value) {
 			if (isset($options[$option])) {
 				$this->_options[$option] = $options[$option];
