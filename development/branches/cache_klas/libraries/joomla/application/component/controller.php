@@ -354,25 +354,32 @@ class JController extends JObject
 
 		// Set the layout
 		$view->setLayout($viewLayout);
-		
+
 		$view->assignRef('document', $document);
-		
+
 		// Display the view
 		if ($cachable && $viewType != 'feed') {
 			$option = JRequest::getCmd('option');
 			$cache = &JFactory::getCache($option, 'view');
+				
 			if (is_array($urlparams)) {
-				$uri = & JRequest::get();
-				$safeuri=new stdClass();
-				foreach ($urlparams AS $key => $value) {
-					// use int filter for id/catid to clean out spamy slugs
-					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
+				$app = & JFactory::getApplication();
+				
+				$registeredurlparams = $app->get('registeredurlparams');
+
+				if (empty($registeredurlparams)) {
+					$registeredurlparams = new stdClass();
 				}
-				$secureid = md5(serialize(array($safeuri, get_class($view), 'display')));
-				$cache->get($view, 'display',$secureid);} else 
-					{$cache->get($view, 'display');}
-			
-			
+				
+				foreach ($urlparams AS $key => $value) {
+				// add your safe url parameters with variable type as value {@see JFilterInput::clean()}.
+				$registeredurlparams->$key = $value;
+				$app->set('registeredurlparams', $registeredurlparams);
+				}
+			}
+				
+			$cache->get($view, 'display');
+				
 		} else {
 			$view->display();
 		}
@@ -525,8 +532,8 @@ class JController extends JObject
 				$views[$name] = & $view;
 			} else {
 				$result = JError::raiseError(
-					500, JText::_('View not found [name, type, prefix]:')
-						. ' ' . $name . ',' . $type . ',' . $prefix
+				500, JText::_('View not found [name, type, prefix]:')
+				. ' ' . $name . ',' . $type . ',' . $prefix
 				);
 				return $result;
 			}
@@ -679,16 +686,16 @@ class JController extends JObject
 		if (!class_exists($viewClass)) {
 			jimport('joomla.filesystem.path');
 			$path = JPath::find(
-				$this->_path['view'],
-				$this->_createFileName('view', array('name' => $viewName, 'type' => $viewType))
+			$this->_path['view'],
+			$this->_createFileName('view', array('name' => $viewName, 'type' => $viewType))
 			);
 			if ($path) {
 				require_once $path;
 
 				if (!class_exists($viewClass)) {
 					$result = JError::raiseError(
-						500, JText::_('View class not found [class, file]:')
-						. ' ' . $viewClass . ', ' . $path);
+					500, JText::_('View class not found [class, file]:')
+					. ' ' . $viewClass . ', ' . $path);
 					return null;
 				}
 			} else {
@@ -700,13 +707,13 @@ class JController extends JObject
 	}
 
 	/**
-	* Sets an entire array of search paths for resources.
-	*
-	* @access	protected
-	* @param	string	The type of path to set, typically 'view' or 'model'.
-	* @param	string|array	The new set of search paths. If null or false,
-	* resets to the current directory only.
-	*/
+	 * Sets an entire array of search paths for resources.
+	 *
+	 * @access	protected
+	 * @param	string	The type of path to set, typically 'view' or 'model'.
+	 * @param	string|array	The new set of search paths. If null or false,
+	 * resets to the current directory only.
+	 */
 	function _setPath($type, $path)
 	{
 		// clear out the prior search dirs
@@ -717,13 +724,13 @@ class JController extends JObject
 	}
 
 	/**
-	* Adds to the search path for templates and resources.
-	*
-	* @access	protected
-	* @param	string The path type (e.g. 'model', 'view'.
-	* @param	string|array The directory or stream to search.
-	* @return	void
-	*/
+	 * Adds to the search path for templates and resources.
+	 *
+	 * @access	protected
+	 * @param	string The path type (e.g. 'model', 'view'.
+	 * @param	string|array The directory or stream to search.
+	 * @return	void
+	 */
 	function _addPath($type, $path)
 	{
 		// just force path to array
@@ -773,7 +780,7 @@ class JController extends JObject
 				}
 
 				$filename = strtolower($parts['name']).DS.'view'.$parts['type'].'.php';
-			break;
+				break;
 		}
 		return $filename;
 	}

@@ -109,7 +109,7 @@ class JCache extends JObject
 	function getStores()
 	{
 		jimport('joomla.filesystem.folder');
-		$handlers = JFolder::files(dirname(__FILE__).DS.'storage', '.php$');
+		$handlers = JFolder::files(dirname(__FILE__).DS.'storage', '.php');
 
 		$names = array();
 		foreach($handlers as $handler)
@@ -300,35 +300,132 @@ class JCache extends JObject
 		$this->_handler = &JCacheStorage::getInstance($this->_options['storage'], $this->_options);
 		return $this->_handler;
 	}
-}
 
-/**
- * This Class is used by CacheData to store group cache data.
- * Depreciated: use JCacheHelper->UpdateSize instead
- * @package	Joomla.Framework
- * @subpackage	Cache
- * @since		1.5
- 
+	/**
+	 * Perform workarounds on retrieved cached data
+	 * @param	string	$data		Cached data
+	 * @return	string	$body		Body of cached data
+	 * @since	1.6
+	 */
+	static function getWorkarounds($data) {
+			
+		// Initialise variables.
+		$app 		= &JFactory::getApplication();
+		$document	= &JFactory::getDocument();
+		$body = null;
+			
+		// Get the document head out of the cache.
+		$document->setHeadData((isset($data['head'])) ? $data['head'] : array());
 
-if (!class_exists('JCacheHelper', false)) {
-	require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'helper.php';
+		// If the pathway buffer is set in the cache data, get it.
+		if (isset($data['pathway']) && is_array($data['pathway']))
+		{
+			// Push the pathway data into the pathway object.
+			$pathway = &$app->getPathWay();
+			$pathway->setPathway($data['pathway']);
+		}
+
+		// @todo chech if the following is needed, seems like it should be in page cache
+		// If a module buffer is set in the cache data, get it.
+		if (isset($data['module']) && is_array($data['module']))
+		{
+			// Iterate through the module positions and push them into the document buffer.
+			foreach ($data['module'] as $name => $contents) {
+				$document->setBuffer($contents, 'module', $name);
+			}
+		}
+			
+		if (isset($data['body'])) {
+			// the following code searches for a token in the cached page and replaces it with the
+			// proper token.
+			$token	= JUtility::getToken();
+			$search = '#<input type="hidden" name="[0-9a-f]{32}" value="1" />#';
+			$replacement = '<input type="hidden" name="'.$token.'" value="1" />';
+			$data['body'] = preg_replace($search, $replacement, $data['body']);
+			$body = $data['body'];
+		}
+			
+		// Get the document body out of the cache.
+		return $body;
 	}
-
-class CacheItem
-{
-	private $sizehelper = null;
-	public $group;
 	
-	public function __construct($group)
-	{	
-		$this->group = $group;
-		if($this->sizehelper === null) $this->sizehelper = new JCacheHelper();
-	}
+	/**
+	 * Create workarounded data to be cached
+	 * @param	string	$data		Cached data
+	 * @return	string	$cached		Data to be cached
+	 * @since	1.6
+	 */
+	
+	static function setWorkarounds($data) {
+			
+		// Initialise variables.
+		$app = &JFactory::getApplication();
+		$document	= &JFactory::getDocument();
 
-	public function updateSize($size)
-	{
-		$this->sizehelper->updateSize($size,$this->group) ;
+		// Get the modules buffer before component execution.
+		$buffer1 = $document->getBuffer();
+
+		// Make sure the module buffer is an array.
+		if (!isset($buffer1['module']) || !is_array($buffer1['module'])) {
+			$buffer1['module'] = array();
+		}
+			
+		// View body data
+		$cached['body'] = $data;
+
+		// Document head data
+		$cached['head'] = $document->getHeadData();
+
+		// Pathway data
+		$pathway			= &$app->getPathWay();
+		$cached['pathway']	= $pathway->getPathway();
+
+		// @todo chech if the following is needed, seems like it should be in page cache
+		// Get the module buffer after component execution.
+		$buffer2 = $document->getBuffer();
+			
+		// Make sure the module buffer is an array.
+		if (!isset($buffer2['module']) || !is_array($buffer2['module'])) {
+			$buffer2['module'] = array();
+		}
+
+		// Compare the second module buffer against the first buffer.
+		$cached['module'] = array_diff_assoc($buffer2['module'], $buffer1['module']);
+			
+		return $cached;
+	}
+	
+	/**
+	 * Create safe id for cached data from url parameters set by plugins and framework
+	 * @param	string	$data		Cached data
+	 * @return	string	md5 encoded cacheid
+	 * @since	1.6
+	 */
+
+	static function makeId() {
+			
+		$app = & JFactory::getApplication();
+		// get url parameters set by plugins
+		$registeredurlparams = $app->get('registeredurlparams');
+
+		if (empty($registeredurlparams)) {
+			$registeredurlparams=new stdClass();
+		}
+		// framework defaults
+		$registeredurlparams->protocol='WORD';
+		$registeredurlparams->option='WORD';
+		$registeredurlparams->view='WORD';
+		$registeredurlparams->layout='WORD';
+		$registeredurlparams->tpl='CMD';
+
+		$safeuriaddon=new stdClass();
+
+		foreach ($registeredurlparams AS $key => $value) {
+			$safeuriaddon->$key = JRequest::getVar($key, null,'default',$value);
+
+		}
+
+		return md5(serialize($safeuriaddon));
 	}
 
 }
-*/

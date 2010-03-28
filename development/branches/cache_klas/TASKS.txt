@@ -6,17 +6,18 @@ SMALLER TASKS
 - DONE: Add standalone script with gc() call (to be used with crontab) 
 - DONE: move _getCacheId method from drivers to storage for components
 - DONE: replace getURI as cacheid base with safer cacheid creation methods
-- DONE: set default cache options respecting configuration in JCache and remove from JFactory::getCache
+- DONE: set default cache options to values respecting configuration setting in JCache and remove them from JFactory::getCache
 - DONE: remove duplicate options from cache plugin (use cachetime, handler etc., set in global configuration)
 - DONE: (as sideeffect of previous 2 tasks) Fix cache plugin settings  http://joomlacode.org/gf/project/joomla/tracker/?action=TrackerItemEdit&tracker_id=32&tracker_item_id=18669
 - DONE: add cachelite driver
 - DONE: move CacheItem from admin to framework JCacheStorageHelper
 - DONE: add fixed wincache driver
+
 - Implement advanced features: NOT in the group mode to drivers as in cachelite, locking, corruption prevention 
 - Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS
-- Consolidate workarounds in helper, make them an option  (#18020, #19435, http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa ..) 
+- DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435, http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa ..) 
 - Re-conceptualize view cache (and review/change other handlers if needed)
 - GENERALY WORKING, PROBABLY NEEDS FINETUNING: Re-conceptualize module cache (move cache call to within the module, add module handler)
 

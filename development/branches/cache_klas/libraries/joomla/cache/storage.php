@@ -49,26 +49,6 @@ class JCacheStorage extends JObject
 			$this->_threshold = $this->_now - $this->_lifetime;
 		}
 		
-		$app = & JFactory::getApplication();
-		$registeredurlparams = $app->get('registeredurlparams');
-		
-		if (empty($registeredurlparams)) {
-			$registeredurlparams=new stdClass();
-		}
-		
-		$registeredurlparams->protocol='WORD';
-		$registeredurlparams->option='WORD';
-		$registeredurlparams->view='WORD';
-		$registeredurlparams->layout='WORD';
-		$registeredurlparams->tpl='CMD';
-		
-		$safeuriaddon=new stdClass();
-		
-		foreach ($registeredurlparams AS $key => $value) {
-			$safeuriaddon->$key = JRequest::getVar($key, null,'default',$value);
-
-		}
-		$this->_safeuriaddon = serialize($safeuriaddon);
 	}
 
 	/**
@@ -136,7 +116,7 @@ class JCacheStorage extends JObject
 	function getAll()
 	{	
 		if (!class_exists('JCacheStorageHelper', false)) {
-			require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'storage'.DS.'helper.php';
+			require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'storage'.DS.'helpers'.DS.'helper.php';
 		}
 		return;
 	}
@@ -210,7 +190,7 @@ class JCacheStorage extends JObject
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function test()
+	static function test()
 	{
 		return true;
 	}
@@ -226,7 +206,7 @@ class JCacheStorage extends JObject
 	 */
 	function _getCacheId($id, $group)
 	{	
-		$name	= md5($this->_application.'-'.$id.'-'.$this->_language.'-'.$this->_safeuriaddon);
+		$name	= md5($this->_application.'-'.$id.'-'.$this->_language);
 		$this->rawname = $this->_hash.'-'.$name;
 		return $this->_hash.'-cache-'.$group.'-'.$name;
 	}

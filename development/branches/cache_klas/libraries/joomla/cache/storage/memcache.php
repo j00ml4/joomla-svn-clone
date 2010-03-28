@@ -240,7 +240,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function test()
+	static function test()
 	{
 		return (extension_loaded('memcache') && class_exists('Memcache'));
 	}

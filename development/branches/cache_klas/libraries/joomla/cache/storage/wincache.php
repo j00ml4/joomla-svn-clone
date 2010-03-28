@@ -75,7 +75,7 @@ class JCacheStorageWincache extends JCacheStorage
 				} else {
 					$item = $data[$group];
 				}
-				if (isset($key['value_size']) {
+				if (isset($key['value_size'])) {
 					$item->updateSize($key['value_size']/1024,$group);} 
 				else {
 					$item->updateSize(1,$group); } // dummy, WINCACHE version is too low
@@ -178,7 +178,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function test()
+	static function test()
 	{
 		$test = extension_loaded('wincache') && function_exists('wincache_ucache_get') && !strcmp(ini_get('wincache.ucenabled'), "1");
 		return $test;
