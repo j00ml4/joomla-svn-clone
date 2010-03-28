@@ -135,7 +135,7 @@ $params = &$this->item->params;
 				<a href="<?php echo $link; ?>">
 						<?php if (!$params->get('access-view')) :
 								echo JText::_('REGISTER_TO_READ_MORE');
-						elseif ($readmore = $params->get('alternative_readmore')) :
+						elseif ($readmore = $this->item->alternative_readmore) :
 								echo $readmore;
 						else :
 								echo JText::sprintf('READ_MORE', $this->escape($this->item->title));
