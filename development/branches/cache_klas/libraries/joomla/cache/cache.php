@@ -304,33 +304,31 @@ class JCache extends JObject
 
 /**
  * This Class is used by CacheData to store group cache data.
- *
+ * Depreciated: use JCacheHelper->UpdateSize instead
  * @package	Joomla.Framework
  * @subpackage	Cache
  * @since		1.5
- */
+ 
+
+if (!class_exists('JCacheHelper', false)) {
+	require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'helper.php';
+	}
+
 class CacheItem
 {
-	public $group = '';
-	public $size = 0;
-	public $count = 0;
-
+	private $sizehelper = null;
+	public $group;
+	
 	public function __construct($group)
-	{
+	{	
 		$this->group = $group;
+		if($this->sizehelper === null) $this->sizehelper = new JCacheHelper();
 	}
 
 	public function updateSize($size)
 	{
-		$this->size = number_format($this->size + $size, 2);
-		$this->count++;
-	}
-	public function setSize($size) {
-		$this->size = $size;
-	}
-
-	public function setCount($count) {
-		$this->count = $count;
+		$this->sizehelper->updateSize($size,$this->group) ;
 	}
 
 }
+*/

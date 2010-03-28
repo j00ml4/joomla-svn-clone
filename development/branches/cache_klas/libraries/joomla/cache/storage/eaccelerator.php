@@ -61,7 +61,9 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @since	1.6
 	 */
 	function getAll()
-	{
+	{	
+		parent::getAll();
+		
 		$keys = eaccelerator_list_keys();
 
         $secret = $this->_hash;
@@ -78,12 +80,12 @@ class JCacheStorageEaccelerator extends JCacheStorage
 			$group = $namearr[2];
 			
 			if (!isset($data[$group])) {
-			$item = new CacheItem($group);
+			$item = new JCacheStorageHelper();
 			} else {
 			$item = $data[$group];
 			}
 
-			$item->updateSize($key['size']/1024);
+			$item->updateSize($key['size']/1024,$group);
 			
 			$data[$group] = $item;
 			

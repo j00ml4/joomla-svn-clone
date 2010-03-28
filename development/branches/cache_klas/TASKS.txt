@@ -10,16 +10,16 @@ SMALLER TASKS
 - DONE: remove duplicate options from cache plugin (use cachetime, handler etc., set in global configuration)
 - DONE: (as sideeffect of previous 2 tasks) Fix cache plugin settings  http://joomlacode.org/gf/project/joomla/tracker/?action=TrackerItemEdit&tracker_id=32&tracker_item_id=18669
 - DONE: add cachelite driver
-- DONE: move CacheItem from admin to framework, add setSize, setCount methods
+- DONE: move CacheItem from admin to framework JCacheStorageHelper
 - DONE: add fixed wincache driver
 - Implement advanced features: NOT in the group mode to drivers as in cachelite, locking, corruption prevention 
 - Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS
-- Re-do all handlers as wrappers for callback. Consolidate workarounds in callback  (#18020, #19435, http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa ..) 
+- Consolidate workarounds in helper, make them an option  (#18020, #19435, http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa ..) 
 - Re-conceptualize view cache (and review/change other handlers if needed)
 - GENERALY WORKING, PROBABLY NEEDS FINETUNING: Re-conceptualize module cache (move cache call to within the module, add module handler)
 
-- Implement changed caching in core components and modules
-- Test and cleanup changed files
+- IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems
+- IN PROGRESS: Test and cleanup changed files
 - Additional caching and speed optimizations of core components/modules

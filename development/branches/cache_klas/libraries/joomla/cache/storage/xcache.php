@@ -59,11 +59,13 @@ class JCacheStorageXCache extends JCacheStorage
 	 * @since	1.6
 	 */
 	function getAll()
-	{	$allinfo = xcache_list(XC_TYPE_VAR, 0);
+	{	
+		parent::getAll();
+		
+		$allinfo = xcache_list(XC_TYPE_VAR, 0);
 		$keys = $allinfo['cache_list'];
-
-
         $secret = $this->_hash;
+        
         $data = array();		
 
 		foreach ($keys as $key) {
@@ -75,12 +77,12 @@ class JCacheStorageXCache extends JCacheStorage
 			$group = $namearr[2];
 			
 			if (!isset($data[$group])) {
-			$item = new CacheItem($group);
+			$item = new JCacheStorageHelper();
 			} else {
 			$item = $data[$group];
 			}
 
-			$item->updateSize($key['size']/1024);
+			$item->updateSize($key['size']/1024,$group);
 			
 			$data[$group] = $item;
 			
