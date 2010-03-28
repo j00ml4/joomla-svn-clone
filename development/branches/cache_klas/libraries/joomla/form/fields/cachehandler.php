@@ -47,12 +47,10 @@ class JFormFieldCacheHandler extends JFormFieldList
 		// Convert to name => name array.
 		foreach ($stores as $store) {
 			$options[$store] = $store;
+			//$options[] = JHtml::_('select.option', $store, $store, 'value', 'text');
 		}
 
-		$options = array_merge(
-		parent::_getOptions(),
-		$options
-		);
+		$options = array_merge(parent::getOptions(),$options);
 
 		return $options;
 	}

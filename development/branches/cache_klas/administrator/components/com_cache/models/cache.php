@@ -82,7 +82,7 @@ class CacheModelCache extends JModel
 	{
 		if (empty($this->_data)) {
 		    $conf =& JFactory::getConfig();
-            $storage = $conf->getValue('config.cache_handler', 'file');
+            $storage = $conf->get('cache_handler', 'file');
 			$cache = &JFactory::getCache('', 'callback', $storage);
 			$data = $cache->getAll();
 			if ($data != false) {$this->_data = $data;} else {$this->_data = array();}
@@ -138,7 +138,7 @@ class CacheModelCache extends JModel
 	 */
 	public function clean($group = '')
 	{   $conf =& JFactory::getConfig();
-        $storage = $conf->getValue('config.cache_handler', 'file');
+        $storage = $conf->get('cache_handler', 'file');
 		$cache = &JFactory::getCache('', 'callback', $storage);
 		$cache->clean($group);
 	}
