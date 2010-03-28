@@ -27,6 +27,33 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+28-Mar-2010 Jean-Marie Simonet
+$ Correcting some language strings
+
+27-Mar-2010 Hannes Papenberg
+# Fixed com_mailto, com_search, com_users, com_weblinks in frontend and com_plugins in backend to properly use JController::getInstance() and not hard-include a controller
+# Fixed URL routing in categories view
+
+17-Mar-2010 Mark Dexter
+^ Sample data fixes (Elin Waring)
+^ User profile fixes (Elin Waring)
+^ Fix default style for loadposition (Elin Waring)
+
+27-Mar-2010 Christophe Demko and Jean-Marie Simonet
+#$^ Enabling parsing language files errors in debug lang mode only (new param in plugin) + corrected one string in main ini
+
+26-Mar-2010 Mark Dexter
+^ Update doc blocks from JQuery to JDatabaseQuery, thanks Jason Pettett. #19898
+# Fix confusing string (#19888)
+# Delete empty folder
+# Fix strings generating errors and a missing string for com_users
+# Delete unneccesary variable in mod_menu/helper.php. #19997 Thanks Jason Pettett.
+# Fix misc. bugs in modules (Elin Waring)
+# Fix acl in joomla.sql table (Elin Waring)
+^ Implement parameters in Single Article Menu Item
+^ Implement global category blog vs. list param in content
+^ Modify example user profile plugin (Elin Waring)
+
 25-Mar-2010 Jean-Marie Simonet
 $ Deleting unused ini files
 
