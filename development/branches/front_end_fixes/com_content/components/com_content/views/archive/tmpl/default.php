@@ -29,7 +29,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<fieldset class="filters">
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
 	<div class="filter-search">
-		<?php if ($this->params->get('filter')) : ?>
+		<?php if ($this->params->get('filter_field') != 'hide') : ?>
 		<label class="filter-search-lbl" for="filter-search"><?php echo JText::_('Content_'.$this->params->get('filter_field').'_Filter_Label').'&nbsp;'; ?></label>
 		<input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->filter); ?>" class="inputbox" onchange="document.jForm.submit();" />
 		<?php endif; ?>

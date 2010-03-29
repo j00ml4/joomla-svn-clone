@@ -26,7 +26,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 				<?php if ($this->params->get('show_category') && $item->catid) : ?>
 					<span>
 					<?php if ($this->params->get('link_category')) : ?>
-						<?php //echo '<a href="'.JRoute::_(ContentRoute::getCategoryRoute($item->catslug)).'">'; ?>
+						<?php echo '<a href="'.JRoute::_(ContentRoute::category($item->catslug)).'">'; ?>
 					<?php endif; ?>
 					<?php echo $item->category_title; ?>
 					<?php if ($this->params->get('link_category')) : ?>
