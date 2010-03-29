@@ -105,7 +105,7 @@ h1#logo
    padding:1.3em 20px 20px 10px;
    text-transform:uppercase;
    font-weight:normal;
- 
+
 
 }
 h1#logo span
@@ -174,9 +174,10 @@ h1#logo span
 .skiplinks li a.u2:active,
 .skiplinks li a.u2:focus
 {
-        background:#ffcc00 !important;
-        color:#000 !important;
+        background:#990000 !important;
+        color:#fff !important;
         border:solid 1px;
+
 }
 
 /* ++++++++++++++  fontsize  ++++++++++++++ */
