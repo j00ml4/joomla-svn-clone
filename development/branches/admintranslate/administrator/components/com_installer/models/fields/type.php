@@ -46,4 +46,3 @@ class JFormFieldType extends JFormField
 		return $return;
 	}
 }
-

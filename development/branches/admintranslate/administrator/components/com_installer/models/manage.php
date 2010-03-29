@@ -227,30 +227,44 @@ class InstallerModelManage extends JModelList {
 				case 'component':
 					$extension = $row->element;
 					$source = JPATH_ADMINISTRATOR . '/components/' . $row->name;
-					$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false) || $lang->load($extension, JPATH_ADMINISTRATOR, null, false, false) || $lang->load("$extension.sys", $source, null, false, false) || $lang->load($extension, $source, null, false, false) || $lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load($extension, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load("$extension.sys", $source, $lang->getDefault(), false, false) || $lang->load($extension, $source, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false)
+					||	$lang->load("$extension.sys", $source, null, false, false)
+					||	$lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 				break;
 				case 'library':
 					$extension = 'lib_' . $row->element;
-					$lang->load("$extension.sys", JPATH_SITE, null, false, false) || $lang->load($extension, JPATH_SITE, null, false, false) || $lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false) || $lang->load($extension, JPATH_SITE, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", JPATH_SITE, null, false, false)
+					||	$lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false);
 				break;
 				case 'module':
 					$extension = $row->element;
 					$source = $path . '/modules/' . $row->name;
-					$lang->load("$extension.sys", $path, null, false, false) || $lang->load($extension, $path, null, false, false) || $lang->load("$extension.sys", $source, null, false, false) || $lang->load($extension, $source, null, false, false) || $lang->load("$extension.sys", $path, $lang->getDefault(), false, false) || $lang->load($extension, $path, $lang->getDefault(), false, false) || $lang->load("$extension.sys", $source, $lang->getDefault(), false, false) || $lang->load($extension, $source, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", $path, null, false, false)
+					||	$lang->load("$extension.sys", $source, null, false, false)
+					||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
+					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 				break;
 				case 'package':
 					$extension = 'pkg_' . $row->element;
-					$lang->load("$extension.sys", JPATH_SITE, null, false, false) || $lang->load($extension, JPATH_SITE, null, false, false) || $lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false) || $lang->load($extension, JPATH_SITE, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", JPATH_SITE, null, false, false)
+					||	$lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false);
 				break;
 				case 'plugin':
 					$extension = 'plg_' . $row->folder . '_' . $row->element;
 					$source = JPATH_PLUGINS . '/' . $row->folder . '/' . $row->element;
-					$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false) || $lang->load($extension, JPATH_ADMINISTRATOR, null, false, false) || $lang->load("$extension.sys", $source, null, false, false) || $lang->load($extension, $source, null, false, false) || $lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load($extension, JPATH_ADMINISTRATOR, $lang->getDefault(), false, false) || $lang->load("$extension.sys", $source, $lang->getDefault(), false, false) || $lang->load($extension, $source, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false)
+					||	$lang->load("$extension.sys", $source, null, false, false)
+					||	$lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 				break;
 				case 'template':
 					$extension = 'tpl_' . $row->name;
 					$source = $path . '/templates/' . $row->name;
-					$lang->load("$extension.sys", $path, null, false, false) || $lang->load($extension, $path, null, false, false) || $lang->load("$extension.sys", $source, null, false, false) || $lang->load($extension, $source, null, false, false) || $lang->load("$extension.sys", $path, $lang->getDefault(), false, false) || $lang->load($extension, $path, $lang->getDefault(), false, false) || $lang->load("$extension.sys", $source, $lang->getDefault(), false, false) || $lang->load($extension, $source, $lang->getDefault(), false, false);
+						$lang->load("$extension.sys", $path, null, false, false)
+					||	$lang->load("$extension.sys", $source, null, false, false)
+					||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
+					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 				break;
 			}
 			$row->name = JText::_($row->name);
@@ -342,4 +356,3 @@ class InstallerModelManage extends JModelList {
 		return $form;
 	}
 }
-

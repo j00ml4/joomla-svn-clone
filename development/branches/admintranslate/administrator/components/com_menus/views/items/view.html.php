@@ -69,7 +69,7 @@ class MenusViewItems extends JView
 				case 'component':
 				default:
 					// load language
-					$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR, null, false, false)
+						$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR, null, false, false)
 					||	$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR.'/components/'.$item->componentname, null, false, false)
 					||	$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
 					||	$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR.'/components/'.$item->componentname, $lang->getDefault(), false, false);
@@ -132,7 +132,7 @@ class MenusViewItems extends JView
 	 */
 	protected function _setToolbar()
 	{
-		JToolBarHelper::title(JText::_('Menus_View_Items_Title'), 'menumgr.png');
+		JToolBarHelper::title(JText::_('COM_MENUS_VIEW_ITEMS_TITLE'), 'menumgr.png');
 		JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
 		JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 

@@ -118,7 +118,7 @@ class MenusControllerItem extends JControllerForm
 	 */
 	public function cancel()
 	{
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 
@@ -131,7 +131,7 @@ class MenusControllerItem extends JControllerForm
 		// If rows ids do not match, checkin previous row.
 		if (!$model->checkin($previousId)) {
 		// Check-in failed, go back to the menu item and display a notice.
-			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
+			$message = JText::sprintf('JERROR_CHECKIN_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_content&view=item&layout=edit', $message, 'error');
 			return false;
 
@@ -155,7 +155,7 @@ class MenusControllerItem extends JControllerForm
 	public function save()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
@@ -242,7 +242,7 @@ class MenusControllerItem extends JControllerForm
 			return false;
 		}
 
-		$this->setMessage(JText::_('JCONTROLLER_SAVE_SUCCESS'));
+		$this->setMessage(JText::_('COM_MENUS_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task) {
@@ -343,7 +343,7 @@ class MenusControllerItem extends JControllerForm
 	 */
 	function batch()
 	{
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
@@ -357,12 +357,12 @@ class MenusControllerItem extends JControllerForm
 		// Attempt to run the batch operation.
 		if ($model->batch($vars, $cid))
 		{
-			$this->setMessage(JText::_('Menus_Batch_success'));
+			$this->setMessage(JText::_('COM_MENUS_BATCH_SUCCESS'));
 			return true;
 		}
 		else
 		{
-			$this->setMessage(JText::_(JText::sprintf('Menus_Error_Batch_failed', $model->getError())));
+			$this->setMessage(JText::_(JText::sprintf('COM_MENUS_ERROR_BATCH_FAILED', $model->getError())));
 			return false;
 		}
 	}

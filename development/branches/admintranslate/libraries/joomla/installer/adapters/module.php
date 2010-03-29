@@ -558,6 +558,9 @@ class JInstallerModule extends JAdapterInstance
 		// Get the package manifest objecct
 		$this->manifest = $this->parent->getManifest();
 
+		// Attempt to load the language file; might have uninstall strings
+		$this->loadLanguage(($row->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE) . '/modules/'.$element);
+
 		// If there is an manifest class file, lets load it
 		$this->scriptElement = $this->manifest->scriptfile;
 		$manifestScript = (string)$this->manifest->scriptfile;

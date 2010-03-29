@@ -52,4 +52,3 @@ class JFormFieldGroup extends JFormField
 		return $return;
 	}
 }
-

@@ -248,7 +248,7 @@ class PluginsModelPlugin extends JModelForm
 
 		if (!$user->authorise('core.edit.state', 'com_plugins')) {
 			$pks = array();
-			$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
+			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 			return false;
 		}
 
@@ -364,12 +364,12 @@ class PluginsModelPlugin extends JModelForm
 		$conditions	= array();
 
 		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));
+			return JError::raiseWarning(500, JText::_('COM_PLUGINS_NO_PLUGINS_SELECTED'));
 		}
 
 		if (!$user->authorise('core.edit.state', 'com_plugins')) {
 			$pks = array();
-			$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
+			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
 			return false;
 		}
 
