@@ -33,7 +33,6 @@ class ContentController extends JController
 		JRequest::setVar('view', $vName);
 		
 		$user = &JFactory::getUser();
-
 		/* @Todo Check which vies & layouts need cache off
 		if ($user->get('id') ||
 			($vName == 'category' && JRequest::getVar('layout') != 'blog' && $_SERVER['REQUEST_METHOD'] == 'POST') ||
