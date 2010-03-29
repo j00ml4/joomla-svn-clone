@@ -40,7 +40,7 @@ defined('_JEXEC') or die;
 		?>
 
 		<li>
-			<a href="<?php echo JRoute::_(NewsfeedRoute::category($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(NewsFeedsHelperRoute::getCategoryRoute($item->slug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 		</li>
 		<?php endforeach; ?>

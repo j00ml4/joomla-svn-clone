@@ -80,7 +80,7 @@ $params = $this->state->get('params');
 		<dd class="parent-category-name">
 			<?php 	$title = $this->escape($this->item->parent_title);
 					$title = ($title) ? $title : JText::_('Uncategorised');
-					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->parent_slug)).'">'.$title.'</a>';?>
+					$url = '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)).'">'.$title.'</a>';?>
 			<?php if ($params->get('link_parent_category') AND $this->item->parent_slug) : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $url); ?>
 				<?php else : ?>
@@ -92,7 +92,7 @@ $params = $this->state->get('params');
 		<dd class="category-name">
 			<?php 	$title = $this->escape($this->item->category_title);
 					$title = ($title) ? $title : JText::_('Uncategorised');
-					$url = '<a href="'.JRoute::_(ContentRoute::category($this->item->catslug)).'">'.$title.'</a>';?>
+					$url = '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug)).'">'.$title.'</a>';?>
 			<?php if ($params->get('link_category') AND $this->item->catslug) : ?>
 				<?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
 				<?php else : ?>

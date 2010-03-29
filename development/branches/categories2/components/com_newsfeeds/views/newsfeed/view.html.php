@@ -55,7 +55,7 @@ class NewsfeedsViewNewsfeed extends JView
 
 		if ($rssDoc == false) {
 			$msg = JText::_('COM_NEWSFEEDS_ERRORS_FEED_NOT_RETRIEVED');
-			$app->redirect('index.php?option=com_newsfeeds&view=category&id='. $newsfeed->catslug, $msg);
+			$app->redirect(NewsFeedsHelperRoute::getCategoryRoute($newsfeed->catslug), $msg);
 			return;
 		}
 		$lists = array();
