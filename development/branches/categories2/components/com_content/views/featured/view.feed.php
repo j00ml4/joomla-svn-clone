@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
  * @subpackage	com_content
  * @since		1.5
  */
-class ContentViewFrontpage extends JView
+class ContentViewFeatured extends JView
 {
 	function display($tpl = null)
 	{
@@ -40,7 +40,7 @@ class ContentViewFrontpage extends JView
 			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
 			// url link to article
-			$link = JRoute::_(ContentRoute::article($row->slug, $row->catslug, $row->sectionid));
+			$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catslug, $row->sectionid));
 
 			// strip html from feed item description text
 			// TODO: Only pull fulltext if necessary (actually, just get the necessary fields).

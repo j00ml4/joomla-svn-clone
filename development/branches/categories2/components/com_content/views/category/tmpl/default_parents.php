@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 	<ul>
 		<?php foreach ($this->parents as &$item) : ?>
 		<li>
-			<a href="<?php echo JRoute::_(ContentRoute::category($item->slug)); ?>">
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($item->slug)); ?>">
 				<?php echo $this->escape($item->title); ?></a>
 		</li>
 		<?php endforeach; ?>

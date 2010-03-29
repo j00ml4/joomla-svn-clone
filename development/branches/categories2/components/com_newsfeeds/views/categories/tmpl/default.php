@@ -38,7 +38,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		$item = &$this->items[$i];
 	?>	
 	<li<?php echo $item->sclass != '' ? ' class="'.$item->sclass.'"' : ''?>>
-		<span class="item-title"><a href="<?php echo NewsfeedsRoute::category($item->id);?>">
+		<span class="item-title"><a href="<?php echo NewsfeedsHelperRoute::getCategoryRoute($item->id);?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
 		<?php if ($item->description) : ?>

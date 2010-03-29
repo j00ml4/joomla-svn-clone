@@ -8,108 +8,7 @@
 
 defined('_JEXEC') or die;
 
-class ContactRoute
-{
-	/**
-	 * @var	array	A cache of the menu items pertaining to com_contact
-	 */
-	protected static $lookup = null;
-
-	/**
-	 * @param	int $id			The id of the contact.
-	 * @param	int	$categoryId	An optional category id.
-	 *
-	 * @return	string	The routed link.
-	 */
-	public static function contact($id, $categoryId = null)
-	{
-		$needles = array(
-			'contact'	=> (int) $id,
-			'category' => (int) $categoryId
-		);
-
-		//Create the link
-		$link = 'index.php?option=com_contact&view=contact&id='. $id;
-
-		if ($categoryId) {
-			$link .= '&catid='.$categoryId;
-		}
-
-		if ($itemId = self::_findItemId($needles)) {
-			$link .= '&Itemid='.$itemId;
-		};
-
-		return $link;
-	}
-
-	/**
-	 * @param	int $id			The id of the contact.
-	 * @param	int	$categoryId	An optional category id.
-	 *
-	 * @return	string	The routed link.
-	 */
-	public static function category($catid, $parentId = null)
-	{
-		$needles = array(
-
-			'category' => (int) $catid
-		);
-
-		//Create the link
-		$link = 'index.php?option=com_contact&view=category&catid='.$catid;
-
-		if ($itemId = self::_findItemId($needles)) {
-			// TODO: The following should work automatically??
-			//if (isset($item->query['layout'])) {
-			//	$link .= '&layout='.$item->query['layout'];
-			//}
-			$link .= '&Itemid='.$itemId;
-		};
-
-		return $link;
-	}
-
-	protected static function _findItemId($needles)
-	{
-		// Prepare the reverse lookup array.
-		if (self::$lookup === null)
-		{
-			self::$lookup = array();
-
-			$component	= &JComponentHelper::getComponent('com_contact');
-			$menus		= &JApplication::getMenu('site', array());
-			$items		= $menus->getItems('component_id', $component->id);
-
-			foreach ($items as &$item)
-			{
-				if (isset($item->query) && isset($item->query['view']))
-				{
-					$view = $item->query['view'];
-					if (!isset(self::$lookup[$view])) {
-						self::$lookup[$view] = array();
-					}
-					if (isset($item->query['id'])) {
-						self::$lookup[$view][$item->query['id']] = $item->id;
-					}
-				}
-			}
-		}
-
-		$match = null;
-
-		foreach ($needles as $view => $id)
-		{
-			if (isset(self::$lookup[$view]))
-			{
-				if (isset(self::$lookup[$view][$id])) {
-					return self::$lookup[$view][$id];
-				}
-			}
-		}
-
-		return null;
-	}
-}
+jimport('joomla.application.categories');
 
 /**
  * Build the route for the com_contact component
@@ -119,12 +18,13 @@ class ContactRoute
  * @return	array	The URL arguments to use to assemble the subsequent URL.
  */
 function ContactBuildRoute(&$query){
-	static $items;
+	$segments = array();
 
-	$segments	= array();
 	// get a menu item based on Itemid or currently active
 	$menu = &JSite::getMenu();
-
+	$params = JComponentHelper::getParams('com_contact');
+	$advanced = $params->get('sef_advanced_link', 0);
+	
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
 	}
@@ -144,68 +44,57 @@ function ContactBuildRoute(&$query){
 		unset($query['view']);
 	};
 
-	// are we dealing with a contact that is attached to a menu item?
+	// are we dealing with an newsfeed that is attached to a menu item?
 	if (($mView == 'contact') and (isset($query['id'])) and ($mId == intval($query['id']))) {
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
+		return $segments;
 	}
 
-	if (isset($view) and $view == 'category' and JRequest::getCmd('view')=='categories') {
-		if ($mId != intval($query['catid']) || $mView != $view) {
-			$segments[] = $query['catid'];
-		}
-		unset($query['catid']);
-	}
-	if (isset($view) and $view == 'category' and JRequest::getCmd('view') !='categories' ) {
+	if (isset($view) and ($view == 'category' or $view == 'contact')) {
 		if ($mId != intval($query['id']) || $mView != $view) {
-			$segments[] = $query['id'];
-		}
-		unset($query['id']);
-	}
-	if (isset($query['catid'])) {
-		// if we are routing a contact or category where the category id matches the menu catid, don't include the category segment
-		if ((($view == 'contact') and ($mView != 'category') and ($mView != 'article') and ($mCatid != intval($query['catid'])))) {
-			$segments[] = $query['catid'];
-		}
-		unset($query['catid']);
-	};
-
-	if (isset($query['id']))
-	{
-		if (empty($query['Itemid'])) {
-			$segments[] = $query['id'];
-		}
-		else
-		{
-			if (isset($menuItem->query['id']))
+			if($view == 'contact' && isset($query['catid']))
 			{
-				if ($query['id'] != $mId) {
-					$segments[] = $query['id'];
+				$catid = $query['catid'];
+				$menuCatid = $mCatid;
+			} elseif(isset($query['id'])) {
+				$catid = $query['id'];
+				$menuCatid = $mId;
+			}
+			$categories = JCategories::getInstance('com_contact');
+			$category = $categories->get($catid);
+			$path = $category->getPath();
+			$path = array_reverse($path);
+			
+			$array = array();
+			foreach($path as $id)
+			{
+				if((int) $id == (int)$menuCatid)
+				{
+					break;
 				}
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $id, 2);
+				}
+				$array[] = $id;
 			}
-			else {
-				$segments[] = $query['id'];
+			$segments = array_merge($segments, array_reverse($array));
+			if($view == 'newsfeed')
+			{
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $query['id'], 2);
+				} else {
+					$id = $query['id'];
+				}
+				$segments[] = $id;
 			}
+			unset($query['id']);
+			unset($query['catid']);
 		}
-		unset($query['id']);
-	};
-
-	if (isset($query['year']))
-	{
-		if (!empty($query['Itemid'])) {
-			$segments[] = $query['year'];
-			unset($query['year']);
-		}
-	};
-
-	if (isset($query['month']))
-	{
-		if (!empty($query['Itemid'])) {
-			$segments[] = $query['month'];
-			unset($query['month']);
-		}
-	};
+	}
 
 	if (isset($query['layout']))
 	{
@@ -237,14 +126,16 @@ function ContactParseRoute($segments)
 {
 	$vars = array();
 
-	// Get the active menu item.
-	$menu	= &JSite::getMenu();
-	$item	= &$menu->getActive();
+	//Get the active menu item.
+	$menu = &JSite::getMenu();
+	$item = &$menu->getActive();
+	$params = JComponentHelper::getParams('com_contact');
+	$advanced = $params->get('sef_advanced_link', 0);
 
 	// Count route segments
 	$count = count($segments);
 
-	// Standard routing for contact.
+	// Standard routing for newsfeeds.
 	if (!isset($item))
 	{
 		$vars['view']	= $segments[0];
@@ -252,49 +143,43 @@ function ContactParseRoute($segments)
 		return $vars;
 	}
 
-	// Handle View and Identifier.
-	switch ($item->query['view'])
+	// From the categories view, we can only jump to a category.
+	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
+	$categories = JCategories::getInstance('com_contact')->get($id)->getChildren();
+	$vars['catid'] = $id;
+	$vars['id'] = $id;		
+	$found = 0;
+	foreach($segments as $segment)
 	{
-		case 'categories':
-			// From the categories view, we can only jump to a category.
-
-			if ($count > 1)
+		$segment = $advanced ? str_replace(':', '-',$segment) : $segment;
+		foreach($categories as $category)
+		{
+			if ($category->slug == $segment || $category->alias == $segment)
 			{
-				if (intval($segments[0]) && intval($segments[$count-1]))
-				{
-					// 123-path/to/category/456-article
-					$vars['id']		= $segments[$count-1];
-					$vars['view']	= 'contact';
-				}
-				else
-				{
-					// 123-path/to/category
-					$vars['id']		= $segments[0];
-					$vars['view']	= 'category';
-				}
+				$vars['id'] = $category->id;
+				$vars['catid'] = $category->id;
+				$vars['view'] = 'category';
+				$categories = $category->getChildren();
+				$found = 1;
+				break;
 			}
-			else
+		}
+		if ($found == 0)
+		{
+			if($advanced)
 			{
-				// 123-category
-				$vars['id']		= $segments[0];
-				$vars['view']	= 'category';
+				$db = JFactory::getDBO();
+				$query = 'SELECT id FROM #__contact_details WHERE catid = '.$vars['catid'].' AND alias = '.$db->Quote($segment);
+				$db->setQuery($query);
+				$nid = $db->loadResult();
+			} else {
+				$nid = $segment;
 			}
-			break;
-
-		case 'category':
-			$vars['id']		= $segments[$count-1];
-			$vars['view']	= 'contact';
-			break;
-
-
-
-		case 'contact':
-			$vars['id']		= $segments[$count-1];
-			$vars['view']	= 'contact';
-			break;
-
+			$vars['id'] = $nid;
+			$vars['view'] = 'contact';
+		}
+		$found = 0;
 	}
-
 	return $vars;
 }
 

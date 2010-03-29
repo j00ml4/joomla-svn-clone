@@ -70,7 +70,7 @@ class ContentViewArticle extends JView
 		$item->parent_slug = $item->category_alias ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
 		
 		// TODO: Change based on shownoauth
-		$item->readmore_link = JRoute::_(ContentRoute::article($item->slug, $item->catslug));
+		$item->readmore_link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 
 		// Create a shortcut to the paramemters.
 		$params =& $state->params;
