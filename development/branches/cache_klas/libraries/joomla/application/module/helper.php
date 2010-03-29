@@ -2,6 +2,7 @@
 /**
  * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -338,45 +339,50 @@ abstract class JModuleHelper
 	}
 	
 	/**
-	* Get the path to a layout for a module
+	* Module cache helper
 	*
 	* @static
 	* @param	string	$module	The name of the module
 	* @param	string	$mhelper name of module helper
 	* @param	string	$method method in helper beeing called
 	* @param	object	$moduleparams module parameters
-	* @param	string	$mode cache creation mode: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 'safeurl' - id created from $urlparameters array.
-	* @param	array	$urlparams an array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	* @param	string	$mode cache creation mode: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 'safeurl' - id created from $urlparameters array, 'id' - module sets own id's
+	* @param	array	$params - parameters for given mode - calculated id or an array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
 	* 
 	* @since	1.6
 	*/
-	public static function cache ($module,$mhelper,$method,$moduleparams,$mode='static',$urlparams=null) {
-		global $option;
+	public static function cache ($module,$mhelper,$method,$moduleparams,$mode='itemid',$params=null) {
+		
 		$user = &JFactory::getUser();
 		$cache = &JFactory::getCache($module,'module');
 		
-				//$cache->get($view, 'display',$secureid);} $module->id. $user->get('aid', 0).md5(JRequest::getURI())
 		
 		switch ($mode) {
-
-			case 'itemid':
-				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'));
+			
+			case 'id':
+				$ret = $cache->get($mhelper, $method,$params,true);
 				break;
+
 			case 'safeuri':
 				$secureid=null;
-				if (is_array($urlparams)) {
+				if (is_array($params)) {
 				$uri = & JRequest::get();
 				$safeuri=new stdClass();
-				foreach ($urlparams AS $key => $value) {
+				foreach ($params AS $key => $value) {
 					// use int filter for id/catid to clean out spamy slugs
 					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
 				} }
 				$secureid = md5(serialize(array($safeuri, $method, $moduleparams)));
-				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).$secureid);
+				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).$secureid,true);
 				break;
+			
 			case 'static':
+				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0),true);
+				break;
+			
+			case 'itemid':
 			default:
-				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0));
+				$ret = $cache->get($mhelper, $method,false,true);
 				break;
 		}
 	return $ret;

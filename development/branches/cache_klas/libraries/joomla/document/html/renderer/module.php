@@ -67,15 +67,24 @@ class JDocumentRendererModule extends JDocumentRenderer
 		$mod_params->loadJSON($module->params);
 
 		$contents = '';
-		/**if ($mod_params->get('cache', 0) && $conf->getValue('config.caching'))
-		{
-			$cache = &JFactory::getCache($module->module);
+		
+		// Depreciated, included only for compatibility purposes! Use JModuleHelper::cache from within the module instead!
+		// @Todo remove this in 1.7.
+		
+		if ($mod_params->get('cache', 0) && $conf->get('caching'))
+		{	
+			$user = &JFactory::getUser();
+			$cache = &JFactory::getCache($module->module,'module');
+
 			$cache->setLifeTime($mod_params->get('cache_time', $conf->get('cachetime') * 60));
-			$contents =  $cache->get(array('JModuleHelper', 'renderModule'), array($module, $params), $module->id. $user->get('aid', 0).md5(JRequest::getURI()));
+			
+			// default to itemid creating mehod and workarounds on
+			$contents =  $cache->get(array('JModuleHelper', 'renderModule'), array($module, $params), $module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
+		
 		}
-		else {*/
+		else {
 			$contents = JModuleHelper::renderModule($module, $params);
-		//}
+		}
 
 		return $contents;
 	}

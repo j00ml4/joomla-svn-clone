@@ -19,8 +19,8 @@ SMALLER TASKS
 
 COMPLEX TASKS
 - DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435) 
-- Re-conceptualize view cache (and review/change other handlers if needed)
-- GENERALY WORKING, PROBABLY NEEDS FINETUNING: Re-conceptualize module cache (move cache call to within the module, add module handler)
+- DONE: Re-conceptualize view cache (and review/change other handlers if needed)
+- DONE: Re-conceptualize module cache (move cache call to within the module, add module handler)
 
 - IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems
 - IN PROGRESS: Test and cleanup changed files

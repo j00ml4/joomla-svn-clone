@@ -181,7 +181,7 @@ abstract class JFactory
 		if (isset($storage)) {
 			$options[] = array('storage' => $storage);
 		}
-
+		
 		jimport('joomla.cache.cache');
 
 		$cache = &JCache::getInstance($handler, $options);
