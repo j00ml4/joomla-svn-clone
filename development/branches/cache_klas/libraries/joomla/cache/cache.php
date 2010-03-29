@@ -175,7 +175,7 @@ class JCache extends JObject
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
 
-		// Get the storage handler
+		// Get the storage
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['caching']) {
 			return $handler->get($id, $group, (isset($this->_options['checkTime']))? $this->_options['checkTime'] : true);
@@ -193,7 +193,7 @@ class JCache extends JObject
 	 */
 	function getAll()
 	{
-		// Get the storage handler
+		// Get the storage
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['caching']) {
 			return $handler->getAll();
@@ -216,7 +216,7 @@ class JCache extends JObject
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
 
-		// Get the storage handler and store the cached data
+		// Get the storage and store the cached data
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['caching']) {
 			return $handler->store($id, $group, $data);
@@ -239,7 +239,7 @@ class JCache extends JObject
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
 
-		// Get the storage handler
+		// Get the storage
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler)) {
 			return $handler->remove($id, $group);
@@ -402,13 +402,12 @@ class JCache extends JObject
 	
 	/**
 	 * Create safe id for cached data from url parameters set by plugins and framework
-	 * @param	string	$data		Cached data
 	 * @return	string	md5 encoded cacheid
 	 * @since	1.6
 	 */
 
 	static function makeId() {
-			
+		
 		$app = & JFactory::getApplication();
 		// get url parameters set by plugins
 		$registeredurlparams = $app->get('registeredurlparams');
@@ -422,6 +421,7 @@ class JCache extends JObject
 		$registeredurlparams->view='WORD';
 		$registeredurlparams->layout='WORD';
 		$registeredurlparams->tpl='CMD';
+		$registeredurlparams->id='INT';
 
 		$safeuriaddon=new stdClass();
 
