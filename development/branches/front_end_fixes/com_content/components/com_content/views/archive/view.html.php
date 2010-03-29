@@ -80,6 +80,7 @@ class ContentViewArchive extends JView
 		);
 		$form->limitField = $pagination->getLimitBox();
 
+		$this->assign('filter', $state->get('list.filter'));
 		$this->assignRef('form', $form);
 		$this->assignRef('items', $items);
 		$this->assignRef('params', $params);

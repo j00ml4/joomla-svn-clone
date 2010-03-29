@@ -44,10 +44,11 @@ class ContentModelArchive extends ContentModelArticles
 		$this->setState('filter.published', -1);
 		
 		// Filter on month, year
-		$month	= JRequest::getInt('month');
-		$this->setState('filter.month', $month);
-		$year	= JRequest::getInt('year');
-		$this->setState('filter.year', $year);
+		$this->setState('filter.month', JRequest::getInt('month'));
+		$this->setState('filter.year', JRequest::getInt('year'));
+		
+		// Optional filter text
+		$this->setState('list.filter', JRequest::getString('filter-search'));
 	}	
 	
 	/**

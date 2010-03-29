@@ -60,7 +60,7 @@
 				label="JGLOBAL_Filter_Field_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="hide">JGLOBAL_Hide</option>
+				<option value="hide">Hide</option>
 				<option value="title">Title</option>
 				<option value="author">Author</option>
 				<option value="hits">Hits</option>
