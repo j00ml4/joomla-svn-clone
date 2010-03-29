@@ -11,6 +11,7 @@
 // No direct access
 defined('JPATH_BASE') or die;
 
+JCacheStorage::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage');
 
 /**
  * Abstract cache storage handler
@@ -77,9 +78,12 @@ class JCacheStorage extends JObject
 		
 		$class = 'JCacheStorage'.ucfirst($handler);
 		if (!class_exists($class))
-		{
-			$path = dirname(__FILE__).DS.'storage'.DS.$handler.'.php';
-			if (file_exists($path)) {
+		{	
+			// Search for the class file in the JCacheStorage include paths.
+			jimport('joomla.filesystem.path');
+			if ($path = JPath::find(JCacheStorage::addIncludePath(), strtolower($handler).'.php')) {
+			/*$path = dirname(__FILE__).DS.'storage'.DS.$handler.'.php';
+			if (file_exists($path)) {**/
 				require_once $path;
 			} else {
 				return JError::raiseWarning(500, 'Unable to load Cache Storage: '.$handler);
@@ -209,5 +213,28 @@ class JCacheStorage extends JObject
 		$name	= md5($this->_application.'-'.$id.'-'.$this->_language);
 		$this->rawname = $this->_hash.'-'.$name;
 		return $this->_hash.'-cache-'.$group.'-'.$name;
+	}
+	
+	/**
+	 * Add a directory where JCacheStorage should search for handlers. You may
+	 * either pass a string or an array of directories.
+	 *
+	 * @param	string	A path to search.
+	 * @return	array	An array with directory elements
+	 * @since	1.6
+	 */
+	
+	public static function addIncludePath($path='')
+	{
+		static $paths;
+
+		if (!isset($paths)) {
+			$paths = array();
+		}
+		if (!empty($path) && !in_array($path, $paths)) {
+			jimport('joomla.filesystem.path');
+			array_unshift($paths, JPath::clean($path));
+		}
+		return $paths;
 	}
 }

@@ -14,6 +14,8 @@ defined('JPATH_BASE') or die;
 //Register the session storage class with the loader
 JLoader::register('JCacheStorage', dirname(__FILE__).DS.'storage.php');
 
+JCache::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'handler');
+
 /**
  * Joomla! Cache base object
  *
@@ -87,10 +89,13 @@ class JCache extends JObject
 		$class = 'JCache'.ucfirst($type);
 
 		if (!class_exists($class))
-		{
-			$path = dirname(__FILE__).DS.'handler'.DS.$type.'.php';
+		{	
+			// Search for the class file in the JCache include paths.
+			jimport('joomla.filesystem.path');
+			if ($path = JPath::find(JCache::addIncludePath(), strtolower($type).'.php')) {
+			//$path = dirname(__FILE__).DS.'handler'.DS.$type.'.php';
 
-			if (file_exists($path)) {
+			//if (file_exists($path)) {
 				require_once $path;
 			} else {
 				JError::raiseError(500, 'Unable to load Cache Handler: '.$type);
@@ -378,7 +383,7 @@ class JCache extends JObject
 
 		// Pathway data
 		$pathway			= &$app->getPathWay();
-		$cached['pathway']	= $pathway->getPathway();
+		if (isset($pathway)) {$cached['pathway'] = $pathway->getPathway();}
 
 		// @todo chech if the following is needed, seems like it should be in page cache
 		// Get the module buffer after component execution.
@@ -427,5 +432,29 @@ class JCache extends JObject
 
 		return md5(serialize($safeuriaddon));
 	}
+	
+		/**
+	 * Add a directory where JCache should search for handlers. You may
+	 * either pass a string or an array of directories.
+	 *
+	 * @param	string	A path to search.
+	 * @return	array	An array with directory elements
+	 * @since	1.6
+	 */
+	
+	public static function addIncludePath($path='')
+	{
+		static $paths;
+
+		if (!isset($paths)) {
+			$paths = array();
+		}
+		if (!empty($path) && !in_array($path, $paths)) {
+			jimport('joomla.filesystem.path');
+			array_unshift($paths, JPath::clean($path));
+		}
+		return $paths;
+	}
+	
 
 }
