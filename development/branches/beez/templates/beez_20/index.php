@@ -108,8 +108,10 @@ $lang->load('tpl_beez', JPATH_SITE); ?>
                                        <?php endif; ?>
                                 </ul>
                                 <h2 class="unseen">
-                                        <?php echo JText::_('VIEW, SEARCH AND NAVIGATION'); ?>
+                                        <?php echo JText::_('NAV_VIEW_SEARCH'); ?>
                                 </h2>
+                                <h3 class="unseen"><?php echo JText::_('NAVIGATION'); ?></h3>
+                                        <jdoc:include type="modules" name="position-2" />
                                 <div id="line">
                                         <div id="fontsize">
                                                 <script type="text/javascript">
@@ -124,8 +126,7 @@ $lang->load('tpl_beez', JPATH_SITE); ?>
                                         <h3 class="unseen"><?php echo JText::_('SEARCH'); ?></h3>
                                                 <jdoc:include type="modules" name="position-1" />
                                 </div>
-                                        <h3 class="unseen"><?php echo JText::_('NAVIGATION'); ?></h3>
-                                        <jdoc:include type="modules" name="position-2" />
+
                 <?php if(!$params->get('html5', 0)): ?>
                         </div><!-- end header -->
                 <?php else: ?>

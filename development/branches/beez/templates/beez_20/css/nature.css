@@ -85,7 +85,7 @@ fieldset
 {
         border-top:solid 1px transparent;
         color:#fff;
-
+        background:url(../images/nature/bar.jpg) repeat-x top left;
 }
 
 h1#logo
@@ -156,8 +156,9 @@ border:0
 .skiplinks li a.u2:active,
 .skiplinks li a.u2:focus
 {
-        background:#ffcc00 !important;
+        background:#eee !important;
         border:solid 1px;
+
 }
 
 /* ++++++++++++++  fontsize  ++++++++++++++ */
