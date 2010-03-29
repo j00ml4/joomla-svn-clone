@@ -314,7 +314,7 @@
 
 	<fieldset
 		name="metadata"
-		label="Config_metadata_settings_label">
+		label="COM_CONFIG_METADATA_SETTINGS">
 		<field
 			name="MetaDesc"
 			type="textarea"

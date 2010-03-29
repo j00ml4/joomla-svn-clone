@@ -481,6 +481,9 @@ class JInstallerPlugin extends JAdapterInstance
 			return false;
 		}
 
+		// Attempt to load the language file; might have uninstall strings
+		$this->loadLanguage(JPATH_PLUGINS .'/'.$row->folder.'/'.$row->element);
+
 		/**
 		 * ---------------------------------------------------------------------------------------------
 		 * Installer Trigger Loading

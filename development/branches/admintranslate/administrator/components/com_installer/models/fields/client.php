@@ -42,4 +42,3 @@ class JFormFieldClient extends JFormField
 		return $return;
 	}
 }
-

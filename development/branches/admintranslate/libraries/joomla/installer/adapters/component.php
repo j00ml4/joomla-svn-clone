@@ -72,6 +72,7 @@ class JInstallerComponent extends JAdapterInstance
 		||	$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, false)
 		||	$lang->load($extension . '.sys', $source, $lang->getDefault(), false, false)
 		||	$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false);
+		var_dump($extension);
 	}
 	/**
 	 * Custom install method for components
@@ -468,7 +469,7 @@ class JInstallerComponent extends JAdapterInstance
 		// Set the extensions name
 		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
 		$check=substr($name, 0, 4);
-		if ($check="com_") {
+		if ($check=="com_") {
 		$name = substr($name, 4); }
 		$element = strtolower('com_'.$name);
 		$this->set('name', $name);
@@ -843,13 +844,6 @@ class JInstallerComponent extends JAdapterInstance
 		$this->parent->setPath('extension_site', JPath::clean(JPATH_SITE.DS.'components'.DS.$row->element));
 		$this->parent->setPath('extension_root', $this->parent->getPath('extension_administrator')); // copy this as its used as a common base
 
-		// Attempt to load the admin language file; might have uninstall strings
-		$lang = &JFactory::getLanguage();
-		// 1.6
-		$lang->load($row->element, $this->parent->getPath('extension_administrator'));
-		// 1.5 or Core
-		$lang->load($row->element);
-
 		/**
 		 * ---------------------------------------------------------------------------------------------
 		 * Manifest Document Setup Section
@@ -877,12 +871,16 @@ class JInstallerComponent extends JAdapterInstance
 			return false;
 		}
 
+
 		// Set the extensions name
 		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
 		$check=substr($name, 0, 4);
-		if ($check="com_") {
+		if ($check=="com_") {
 		$name = substr($name, 4); }
 		$this->set('name', $name);
+
+		// Attempt to load the admin language file; might have uninstall strings
+		$this->loadLanguage(JPATH_ADMINISTRATOR . '/components/com_'.$name);
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
