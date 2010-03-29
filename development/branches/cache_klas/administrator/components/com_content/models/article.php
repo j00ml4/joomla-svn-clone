@@ -278,6 +278,10 @@ class ContentModelArticle extends JModelForm
 				return false;
 			}
 		}
+		
+		// Clean the cache.
+		$cache = JFactory::getCache('com_content');
+		$cache->clean();
 
 		return true;
 	}
@@ -313,6 +317,10 @@ class ContentModelArticle extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+		
+		// Clean the cache.
+		$cache = JFactory::getCache('com_content');
+		$cache->clean();
 
 		return true;
 	}
@@ -358,7 +366,7 @@ class ContentModelArticle extends JModelForm
 		if (!$this->checkin($pk)) {
 			return false;
 		}
-
+		
 		return true;
 	}
 
