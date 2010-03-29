@@ -13,20 +13,30 @@
 		<fieldset name="basic"
 		>
 
-			<field name="orderby" type="list"
-				description="fieldORDERBY"
-				label="ORDER_BY"
+			<field name="orderby_sec" type="list"
+				description="JGLOBAL_Article_Order_Desc"
+				label="JGLOBAL_Article_Order_Label"
 			>
-				<option value="">Default</option>
-				<option value="date">Oldest first</option>
-				<option value="rdate">Most recent first</option>
-				<option value="alpha">Title Alphabetical</option>
-				<option value="ralpha">Title Reverse-Alphabetical</option>
-				<option value="author">Author Alphabetical</option>
-				<option value="rauthor">Author Reverse-Alphabetical</option>
-				<option value="hits">Most Hits</option>
-				<option value="rhits">Least Hits</option>
-				<option value="order">Ordering</option>
+				<option value="">JCOMMON_USE_GLOBAL</option>
+				<option value="date">JGLOBAL_Oldest_first</option>
+				<option value="rdate">JGLOBAL_Most_recent_first</option>
+				<option value="alpha">JGLOBAL_Title_Alphabetical</option>
+				<option value="ralpha">JGLOBAL_Title_Reverse_Alphabetical</option>
+				<option value="author">JGLOBAL_Author_Alphabetical</option>
+				<option value="rauthor">JGLOBAL_Author_Reverse_Alphabetical</option>
+				<option value="hits">JGLOBAL_Most_Hits</option>
+				<option value="rhits">JGLOBAL_Least_Hits</option>
+				<option value="order">JGLOBAL_Article_Manager_Order</option>
+			</field>
+			
+			<field name="order_date" type="list"
+				description="JGLOBAL_Ordering_Date_Desc"
+				label="JGLOBAL_Ordering_Date_Label"
+			>
+				<option value="">JCOMMON_USE_GLOBAL</option>
+				<option value="created">JGLOBAL_Created</option>
+				<option value="modified">JGLOBAL_Modified</option>
+				<option value="published">JGLOBAL_Published</option>
 			</field>
 			
 			<field name="display_num" type="list"
