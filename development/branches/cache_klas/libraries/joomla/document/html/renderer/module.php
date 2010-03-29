@@ -74,7 +74,7 @@ class JDocumentRendererModule extends JDocumentRenderer
 		if ($mod_params->get('cache', 0) && $conf->get('caching'))
 		{	
 			$user = &JFactory::getUser();
-			$cache = &JFactory::getCache($module->module,'module');
+			$cache = &JFactory::getCache($module->module,'callback');
 
 			$cache->setLifeTime($mod_params->get('cache_time', $conf->get('cachetime') * 60));
 			
