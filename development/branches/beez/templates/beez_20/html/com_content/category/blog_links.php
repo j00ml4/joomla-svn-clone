@@ -22,7 +22,7 @@ if(!$params->get('html5', 0))
 <?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
 	$i=0;
 ?>
-
+<div class="items-more">
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
 <ol class="jlinks">
@@ -42,6 +42,7 @@ if(!$params->get('html5', 0))
         </li>
 <?php endforeach; ?>
 	</ol>
+</div>
 <?php endif ; ?>
 
 <?php } ?>
