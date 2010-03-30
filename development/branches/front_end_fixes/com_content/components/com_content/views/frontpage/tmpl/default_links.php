@@ -11,10 +11,12 @@
 defined('_JEXEC') or die;
 ?>
 
+
+
 <?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
 	$i=0;
 ?>
-
+<div class="items-more">
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
 <ol class="jlinks">
@@ -33,4 +35,5 @@ defined('_JEXEC') or die;
 	</li>
 <?php endforeach; ?>
 </ol>
+</div>
 <?php endif ; ?>
