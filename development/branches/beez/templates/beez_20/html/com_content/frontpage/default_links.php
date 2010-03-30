@@ -9,11 +9,20 @@
 
 // no direct access
 defined('_JEXEC') or die;
+$app = JFactory::getApplication();
+$params = new JParameter($app->getTemplate(true)->params);
+
+if(!$params->get('html5', 0))
+{
+	require(JPATH_BASE.'/components/com_content/views/frontpage/tmpl/default_links.php');
+	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
+} else {
 ?>
 
 <?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
 	$i=0;
 ?>
+<div class="items-more">
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 <ol class="jlinks">
 <?php
@@ -32,4 +41,6 @@ defined('_JEXEC') or die;
     </li>
 <?php endforeach; ?>
 </ol>
+</div>
 <?php endif ; ?>
+<?php } ?>

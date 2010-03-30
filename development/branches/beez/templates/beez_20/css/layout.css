@@ -763,7 +763,7 @@ dd.createdby
         padding:10px 0 10px 5px;
 }
 
-ul.pagination
+#main .pagination ul
 {
         list-style-type:none;
         margin:0;
@@ -771,14 +771,22 @@ ul.pagination
         text-align:left;
 }
 
-ul.pagination li
+#main .pagination li
 {
         display:inline;
         padding:2px 5px 0 !important;
         text-align:left;
+		border:solid 1px #eee;
+		margin:0 2px
 }
 
-ul.pagination li a
+
+#main .pagination li.pagination-start,
+#main .pagination li.pagination-next,
+#main .pagination li.pagination-end,
+#main .pagination li.pagination-prev
+{border:0}
+#main .pagination ul li a
 {
         padding:2px;
 }
