@@ -19,15 +19,7 @@ defined('_JEXEC') or die;
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
 <ol class="jlinks">
-<?php
-	foreach ($this->link_items as &$item) :
-
-
-		if ($i >= $this->params->get('num_links')) :
-  			break;
-  		endif;
-  		$i++;
-?>
+<?php foreach ($this->link_items as &$item) : ?>
 	<li>
 		<a href="<?php echo JRoute::_(ContentRoute::article($item->slug, $item->catslug)); ?>">
 			<?php echo $item->title; ?></a>
