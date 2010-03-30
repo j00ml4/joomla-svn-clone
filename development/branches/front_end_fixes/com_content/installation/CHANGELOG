@@ -27,6 +27,18 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+30-Mar-2010 Mark Dexter
+# Fix PHP undefined var notice in New Menu Item 
+
+30-Mar-2010 Sam Moffat
+ + Added wincache session handler for IIS, thanks to Ruslan from Microsoft
+
+30-Mar-2010 Jean-Marie Simonet
+$ Refactored com_media back-end ini/keys
+
+30-Mar-2010 Christophe Demko
+^ Merging the admintranslate branch back to the trunk
+
 29-Mar-2010 Jean-Marie Simonet
 $ Refactored com_search back-end front end ini/keys +some
 $ Added a string for com_module to customize "item"
