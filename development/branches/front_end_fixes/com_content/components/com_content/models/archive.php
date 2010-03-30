@@ -60,7 +60,9 @@ class ContentModelArchive extends ContentModelArticles
 		$params = $this->_state->params;
 		$articleOrderby = $params->get('orderby_sec', 'rdate');
 		$articleOrderDate = $params->get('order_date');
-		$categoryOrderby = $params->def('orderby_pri', '');
+		
+		// No category ordering
+		$categoryOrderby = '';
 		$secondary = ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
 		$primary = ContentHelperQuery::orderbyPrimary($categoryOrderby);
 

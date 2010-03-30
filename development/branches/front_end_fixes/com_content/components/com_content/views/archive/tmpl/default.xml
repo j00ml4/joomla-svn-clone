@@ -96,8 +96,8 @@
 				label="JGLOBAL_Show_Title_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JGLOBAL_HIDE</option>
-				<option value="1">JGLOBAL_SHOW</option>
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
 			</field>
 
 			<field name="link_titles" type="list"
