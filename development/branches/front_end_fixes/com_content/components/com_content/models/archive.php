@@ -49,6 +49,12 @@ class ContentModelArchive extends ContentModelArticles
 		
 		// Optional filter text
 		$this->setState('list.filter', JRequest::getString('filter-search'));
+		
+		// Get list limit
+		$app =& JFactory::getApplication();
+		$itemid = JRequest::getInt('Itemid', 0);
+		$limit = $app->getUserStateFromRequest('com_content.archive.list' . $itemid . '.limit', 'limit', $params->get('display_num'));
+		$this->setState('list.limit', $limit);
 	}	
 	
 	/**
