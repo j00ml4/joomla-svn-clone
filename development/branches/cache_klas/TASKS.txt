@@ -14,8 +14,8 @@ SMALLER TASKS
 - DONE: add fixed wincache driver
 - DONE: add addIncludepath to JCache and JCacheStorage, fix error if there is no pathway http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa
 
-- Implement advanced features: NOT in the group mode to drivers as in cachelite, locking, corruption prevention 
-- Optimize gc in file cache driver (replace checking timestamps with accounting)
+- to do: Implement advanced features: NOT in the group mode to drivers as in cachelite, locking, corruption prevention 
+- to do: Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS
 - DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435) 
