@@ -93,7 +93,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			echo $this->loadTemplate('item');
 		?>
 	</div>
-	<?php $counter=$counter +1; ?>
+	<?php $counter++; ?>
 	<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
 				<span class="row-separator"></span>
 				</div>
