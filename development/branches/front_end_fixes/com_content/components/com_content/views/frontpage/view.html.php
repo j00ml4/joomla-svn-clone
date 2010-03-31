@@ -65,12 +65,12 @@ class ContentViewFrontpage extends JView
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-			
+
 			// No link for ROOT category
 			if ($item->parent_alias == 'root') {
 				$item->parent_slug = null;
 			}
-			
+
 			$item->event = new stdClass();
 
 			$dispatcher =& JDispatcher::getInstance();
@@ -120,9 +120,16 @@ class ContentViewFrontpage extends JView
 		}
 
 		// The remainder are the links.
+   $count=1;
 		for ($i = $numLeading + $numIntro; $i < $max; $i++)
 		{
+
+
+		 if($count <= $numLinks)
+			{
 			$this->link_items[$i] =& $items[$i];
+			$count++;
+			}
 		}
 
 		$this->assignRef('params', $params);

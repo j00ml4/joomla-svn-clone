@@ -28,7 +28,7 @@
 				<option value="rhits">JGLOBAL_Least_Hits</option>
 				<option value="order">JGLOBAL_Article_Manager_Order</option>
 			</field>
-			
+
 			<field name="order_date" type="list"
 				description="JGLOBAL_Ordering_Date_Desc"
 				label="JGLOBAL_Ordering_Date_Label"
@@ -38,7 +38,7 @@
 				<option value="modified">JGLOBAL_Modified</option>
 				<option value="published">JGLOBAL_Published</option>
 			</field>
-			
+
 			<field name="display_num" type="list"
 				description="JGLOBAL_Number_Items_List_Desc"
 				label="JGLOBAL_Number_Items_List_Label"
@@ -54,7 +54,7 @@
 				<option value="100">J100</option>
 				<option value="0">JALL</option>
 			</field>
-			
+
 			<field name="filter_field" type="list"
 				description="JGLOBAL_Filter_Field_Desc"
 				label="JGLOBAL_Filter_Field_Label"
@@ -65,9 +65,9 @@
 				<option value="author">Author</option>
 				<option value="hits">Hits</option>
 			</field>
-			
+
 		</fieldset>
-		
+
 		<!-- Articles options. -->
 		<fieldset name="articles"
 			label="Content_Attribs_Article_Settings_Label"
@@ -96,8 +96,8 @@
 				label="JGLOBAL_Show_Title_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JGLOBAL_HIDE</option>
+				<option value="1">JGLOBAL_SHOW</option>
 			</field>
 
 			<field name="link_titles" type="list"
@@ -154,6 +154,7 @@
 				<option value="1">Show</option>
 			</field>
 
+
 			<field name="show_item_navigation" type="list"
 				description="JGLOBAL_Show_Navigation_Desc"
 				label="JGLOBAL_Show_Navigation_Label"
@@ -162,32 +163,14 @@
 				<option value="0">Hide</option>
 				<option value="1">Show</option>
 			</field>
-
-			<field name="show_icons" type="list"
-				description="JGLOBAL_Show_Icons_Desc"
-				label="JGLOBAL_Show_Icons_Label"
+<field name="show_readmore" type="list"
+				description="JGLOBAL_Show_Readmore_Desc"
+				label="JGLOBAL_Show_Readmore_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
-			</field>
-
-			<field name="show_print_icon" type="list"
-				description="JGLOBAL_Show_Print_Icon_Desc"
-				label="JGLOBAL_Show_Print_Icon_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
-			</field>
-
-			<field name="show_email_icon" type="list"
-				description="JGLOBAL_Show_Email_Icon_Desc"
-				label="JGLOBAL_Show_Email_Icon_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_hits" type="list"
@@ -199,6 +182,6 @@
 				<option value="1">Show</option>
 			</field>
 		</fieldset>
-		
+
 	</fields>
 </metadata>
