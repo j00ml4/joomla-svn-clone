@@ -19,9 +19,6 @@ if(!$params->get('html5', 0))
 } else {
 ?>
 
-<?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
-	$i=0;
-?>
 <div class="items-more">
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
@@ -29,12 +26,6 @@ if(!$params->get('html5', 0))
 
 <?php
 	foreach ($this->link_items as &$item) :
-
-
-		if ($i >= $this->params->get('num_links')) :
-  			break;
-  		endif;
-  		$i++;
 ?>
 		 <li>
             <a href="<?php echo JRoute::_(ContentRoute::article($item->slug, $item->catslug)); ?>">
@@ -43,6 +34,5 @@ if(!$params->get('html5', 0))
 <?php endforeach; ?>
 	</ol>
 </div>
-<?php endif ; ?>
 
 <?php } ?>

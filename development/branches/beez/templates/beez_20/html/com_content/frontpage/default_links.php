@@ -19,20 +19,12 @@ if(!$params->get('html5', 0))
 } else {
 ?>
 
-<?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
-	$i=0;
-?>
+
 <div class="items-more">
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 <ol class="jlinks">
 <?php
 	foreach ($this->link_items as &$item) :
-
-
-		if ($i >= $this->params->get('num_links')) :
-  			break;
-  		endif;
-  		$i++;
 ?>
 
 	<li>
@@ -42,5 +34,4 @@ if(!$params->get('html5', 0))
 <?php endforeach; ?>
 </ol>
 </div>
-<?php endif ; ?>
 <?php } ?>
