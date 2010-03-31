@@ -38,6 +38,12 @@ class ContentViewArchive extends JView
 
 		// Get the page/component configuration
 		$params =& $state->params;
+		
+		foreach ($items as $item) 
+		{
+			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
+			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
+		}
 
 		$form = new stdClass();
 		// Month Field

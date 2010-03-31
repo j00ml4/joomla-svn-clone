@@ -36,8 +36,9 @@ $params =& $this->params;
 <?php if ($params->get('show_category')) : ?>
         <dd class="category-name">
             <?php $title = $this->escape($item->category_title);
-                    $url = '<a href="' . JRoute::_(ContentRoute::category($this->item->catslug)) . '">' . $title . '</a>'; ?>
-            <?php if ($params->get('link_category')) : ?>
+            		$title = ($title) ? $title : JText::_('Uncategorised');
+                    $url = '<a href="' . JRoute::_(ContentRoute::category($item->catslug)) . '">' . $title . '</a>'; ?>
+            <?php if ($params->get('link_category') && $item->catslug) : ?>
                 <?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
                 <?php else : ?>
                 <?php echo JText::sprintf('CONTENT_CATEGORY', $title); ?>
@@ -46,17 +47,17 @@ $params =& $this->params;
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
         <dd class="create">
-        <?php echo JText::sprintf('CONTENT_CREATED_DATE', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+        <?php echo JText::sprintf('CONTENT_CREATED_DATE', JHTML::_('date',$item->created, JText::_('DATE_FORMAT_LC2'))); ?>
         </dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>
         <dd class="modified">
-        <?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+        <?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
         </dd>
 <?php endif; ?>
 <?php if ($params->get('show_publish_date')) : ?>
         <dd class="published">
-        <?php echo JText::sprintf('PUBLISHED_DATE', JHTML::_('date',$this->item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
+        <?php echo JText::sprintf('PUBLISHED_DATE', JHTML::_('date',$item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
         </dd>
 <?php endif; ?>
 <?php if ($params->get('show_author') && !empty($item->author_name)) : ?>
@@ -87,7 +88,7 @@ $params =& $this->params;
 		$active = $menu->getActive();
 		$itemId = $active->id;
 		$link1 = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
-		$returnURL = JRoute::_(ContentRoute::article($this->item->slug));
+		$returnURL = JRoute::_(ContentRoute::article($item->slug));
 		$link = new JURI($link1);
 		$link->setVar('return', base64_encode($returnURL));
 	endif;
