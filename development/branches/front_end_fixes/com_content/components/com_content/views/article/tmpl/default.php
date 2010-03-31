@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 // Create shortcut to parameters.
-$params = $this->state->get('params');
+$params = $this->item->params;
 ?>
 
 
