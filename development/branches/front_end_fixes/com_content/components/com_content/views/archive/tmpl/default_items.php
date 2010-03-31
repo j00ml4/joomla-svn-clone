@@ -75,11 +75,7 @@ $params =& $this->params;
      </dl>
 <?php endif; ?>
 
-
-
-
 <?php  if($params->get('show_intro')) :?>
-
 		<div class="intro">
 			<?php echo substr($item->introtext, 0, 255); echo JText::_('  ...') ?>
 		</div>
@@ -87,7 +83,6 @@ $params =& $this->params;
 	if ($item->params->get('access-view')) :
 		$link = JRoute::_(ContentRoute::article($item->slug, $item->catslug));
 	else :
-
 		$menu = JSite::getMenu();
 		$active = $menu->getActive();
 		$itemId = $active->id;
