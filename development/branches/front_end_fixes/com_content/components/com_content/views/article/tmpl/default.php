@@ -16,16 +16,17 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 $params = $this->state->get('params');
 ?>
 
+
 <div class="item-page<?php echo $params->get('pageclass_sfx')?>">
-	<?php if ($params->get('show_page_title', 1) && $params->get('page_title') != $this->item->title) : ?>
-		<h1>
-			<?php if ($this->escape($params->get('page_heading'))) :?>
-				<?php echo $this->escape($params->get('page_heading')); ?>
-			<?php else : ?>
-				<?php echo $this->escape($params->get('page_title')); ?>
-			<?php endif; ?>
-		</h1>
+	<?php if ($params->get('show_page_title')) : ?>
+<h1>
+	<?php if ($this->escape($params->get('page_heading'))) :?>
+		<?php echo $this->escape($params->get('page_heading')); ?>
+	<?php else : ?>
+		<?php echo $this->escape($params->get('page_title')); ?>
 	<?php endif; ?>
+</h1>
+<?php endif; ?>
 
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>
 		<h2>
