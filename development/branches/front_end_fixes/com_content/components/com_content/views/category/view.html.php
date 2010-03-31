@@ -79,7 +79,7 @@ class ContentViewCategory extends JView
 			$article->slug = $article->alias ? ($article->id . ':' . $article->alias) : $article->id;
 			$article->catslug = $article->category_alias ? ($article->catid . ':' . $article->category_alias) : $article->catid;
 			$article->parent_slug = $article->parent_alias ? ($article->parent_id . ':' . $article->parent_alias) : $article->parent_id;
-
+			
 			// No link for ROOT category
 			if ($article->parent_alias == 'root') {
 				$article->parent_slug = null;
@@ -134,13 +134,9 @@ class ContentViewCategory extends JView
 		}
 
 		// The remainder are the links.
-
-		$count=1;
 		for ($i = $numLeading + $numIntro; $i < $max; $i++)
-		{   if($count <= $numLinks)
-			{
+		{
 			$this->link_items[$i] =& $articles[$i];
-			}
 		}
 
 		// Compute the children category slugs and prepare description (runs content plugins).
@@ -208,7 +204,7 @@ class ContentViewCategory extends JView
 		if ($app->getCfg('MetaAuthor') == '1') {
 			$this->document->setMetaData('author', $mdata['author']);
 		}
-
+		
 
 		foreach ($mdata as $k => $v)
 		{

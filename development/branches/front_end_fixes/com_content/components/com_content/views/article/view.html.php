@@ -161,18 +161,14 @@ class ContentViewArticle extends JView
 		}
 
 	// Unify the introtext and fulltext fields and separated the fields by the {readmore} tag
-
-
-		if ($this->item->params->get('show_intro') == 1) {
-
-
+		if ($this->item->params->get('show_intro') == 1) 
+		{
 			$this->item->text = $this->item->introtext." ".$this->item->fulltext;
-		} else {
-				$this->item->text = $this->item->fulltext;
+		} 
+		else 
+		{
+			$this->item->text = $this->item->fulltext;
 		}
-
-
-
 
 		if (empty($title))
 		{
