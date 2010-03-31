@@ -10,9 +10,9 @@
 // no direct access
 defined('_JEXEC') or die;
 $app = JFactory::getApplication();
-$params = new JParameter($app->getTemplate(true)->params);
+$paramstemplate = new JParameter($app->getTemplate(true)->params);
 
-if(!$params->get('html5', 0))
+if(!$paramstemplate->get('html5', 0))
 {
 	require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
 	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
@@ -24,7 +24,7 @@ $params = $this->state->get('params');
 ?>
 
 <article class="item-page<?php echo $params->get('pageclass_sfx')?>">
-	<?php if ($params->get('show_page_title', 1) && $params->get('page_title') != $this->item->title) : ?>
+	<?php if ($params->get('show_page_title')) : ?>
 		<h1>
 			<?php if ($this->escape($params->get('page_heading'))) :?>
 				<?php echo $this->escape($params->get('page_heading')); ?>
