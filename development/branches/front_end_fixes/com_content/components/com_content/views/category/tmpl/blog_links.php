@@ -11,15 +11,18 @@
 defined('_JEXEC') or die;
 ?>
 
-<?php if (!empty($this->link_items) && $this->params->get('num_links') > 0) :
-	$i=0;
-?>
+
 <div class="items-more">
 
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
 <ol class="jlinks">
-<?php foreach ($this->link_items as &$item) : ?>
+<?php
+	foreach ($this->link_items as &$item) :
+
+
+
+?>
 	<li>
 		<a href="<?php echo JRoute::_(ContentRoute::article($item->slug, $item->catslug)); ?>">
 			<?php echo $item->title; ?></a>
@@ -27,4 +30,3 @@ defined('_JEXEC') or die;
 <?php endforeach; ?>
 </ol>
 </div>
-<?php endif ; ?>
