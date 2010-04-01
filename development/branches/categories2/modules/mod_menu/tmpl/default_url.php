@@ -23,7 +23,7 @@ switch ($item->browserNav) :
 		break;
 	case 2:
 		// window.open
-		$attribs = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,'.$this->_params->get('window_open');
+		$attribs = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,'.$item->params->get('window_open');
 ?><a href="<?php echo $item->link.'&tmpl=component'; ?>" onclick="window.open(this.href,'targetWindow','<?php echo $attribs;?>');return false;"><?php echo $item->title; ?></a><?php
 		break;
 endswitch;

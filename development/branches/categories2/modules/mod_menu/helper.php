@@ -68,7 +68,7 @@ class modMenuHelper
 				case 'url':
 					if ((strpos($item->link, 'index.php?') === 0) && (strpos($item->link, 'Itemid=') === false)) {
 						// If this is an internal Joomla link, ensure the Itemid is set.
-						$item->link = $tmp->link.'&amp;Itemid='.$item->id;
+						$item->link = $tmp->link.'&Itemid='.$item->id;
 					}
 					break;
 
