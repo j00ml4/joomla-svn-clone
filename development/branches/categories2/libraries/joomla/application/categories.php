@@ -428,12 +428,22 @@ class JCategoryNode extends JObject
 	 *
 	 * @return array the children
 	 */
-	function &getChildren() 
+	function &getChildren($recursive = false) 
 	{
 		if(!$this->_allChildrenloaded)
 		{
 			$categories = JCategories::getInstance($this->extension);
 			$categories->load($this->id, true);
+		}
+		if($recursive)
+		{
+			$items = array();
+			foreach($this->_children as $child)
+			{
+				$items[] = $child;
+				$items = array_merge($items, $child->getChildren(true));
+			}
+			return $items;
 		}
 		return $this->_children;
 	}
