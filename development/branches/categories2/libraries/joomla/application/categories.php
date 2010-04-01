@@ -148,6 +148,10 @@ class JCategories
 		{
 			return $this->_nodes[$id];
 		} else {
+			if(isset($this->_nodes['root']))
+			{
+				return $this->_nodes['root'];
+			}
 			return false;
 		}
 	}

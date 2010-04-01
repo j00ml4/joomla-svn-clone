@@ -148,7 +148,7 @@ function ContentParseRoute($segments)
 	{
 		case 'categories':
 		case 'category':
-		case 'frontpage':
+		case 'featured':
 			// From the categories view, we can only jump to a category.
 			$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
 			$categories = JCategories::getInstance('com_content')->get($id)->getChildren();
@@ -188,7 +188,7 @@ function ContentParseRoute($segments)
 			}
 			break;
 
-		case 'frontpage':
+		case 'featured':
 			$vars['id']		= $segments[$count-1];
 			$vars['view']	= 'article';
 			break;
