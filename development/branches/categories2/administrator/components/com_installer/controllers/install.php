@@ -18,7 +18,7 @@ class InstallerControllerInstall extends JController {
 	public function install()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$model	= &$this->getModel('install');
 		if ($model->install())
@@ -27,7 +27,6 @@ class InstallerControllerInstall extends JController {
 			$cache->clean();
 			// TODO: Reset the users acl here as well to kill off any missing bits
 		}
-		$model->saveState(); // Save the state because this is where our messages are stored
-		$this->setRedirect('index.php?option=com_installer&view=install');
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=install',false));
 	}
 }

@@ -394,6 +394,12 @@ class JInstaller extends JAdapter
 			{
 				if (method_exists($this->_adapters[$this->extension->type], 'discover_install'))
 				{
+					// Add the languages from the package itself
+					if (method_exists($this->_adapters[$this->extension->type], 'loadLanguage'))
+					{
+						$this->_adapters[$this->extension->type]->loadLanguage();
+					}
+
 					// Fire the onBeforeExtensionInstall event.
 					JPluginHelper::importPlugin('installer');
 					$dispatcher =& JDispatcher::getInstance();
@@ -1390,7 +1396,7 @@ class JInstaller extends JAdapter
 		else
 		{
 			// No xml files were found in the install folder
-			JError::raiseWarning(1, 'JInstaller::install: '.JText::_('ERRORXMLSETUP'));
+			JError::raiseWarning(1, 'JInstaller::install: '.JText::_('JLIB_INSTALLER_ERRORXMLSETUP'));
 			return false;
 		}
 	}

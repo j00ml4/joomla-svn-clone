@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
 <extension type="component" version="1.6.0" method="upgrade">
 	<name>com_search</name>
 	<author>Joomla! Project</author>
@@ -41,9 +40,8 @@
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB.com_search.ini
 			</language>
-			<language tag="en-GB">language/en-GB.com_search.menu.ini
+			<language tag="en-GB">language/en-GB.com_search.sys.ini
 			</language>
 		</languages>
 	</administration>
 </extension>
-
