@@ -49,7 +49,25 @@ class ContentModelFeatured extends ContentModelArticles
 			$this->setState('filter.frontpage.categories', $featuredCategories);
 		}
 	}
-		
+
+	/**
+	 * Method to get a list of articles.
+	 *
+	 * @return	mixed	An array of objects on success, false on failure.
+	 */
+	public function getItems()
+	{
+		$params = $this->_state->params;
+		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
+		if ($limit > 0)
+		{
+			$this->setState('list.limit', $limit);
+			return parent::getItems();
+		}
+		return array();
+		 
+	}
+	
 	/**
 	 * Method to get a store id based on model configuration state.
 	 *
