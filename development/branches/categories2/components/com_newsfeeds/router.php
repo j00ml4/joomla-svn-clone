@@ -53,7 +53,7 @@ function NewsfeedsBuildRoute(&$query)
 	};
 
 	// are we dealing with an newsfeed that is attached to a menu item?
-	if (($mView == 'newsfeed') and (isset($query['id'])) and ($mId == intval($query['id']))) {
+	if (isset($query['view']) && ($mView == $query['view']) and (isset($query['id'])) and ($mId == intval($query['id']))) {
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
@@ -99,9 +99,9 @@ function NewsfeedsBuildRoute(&$query)
 				}
 				$segments[] = $id;
 			}
-			unset($query['id']);
-			unset($query['catid']);
 		}
+		unset($query['id']);
+		unset($query['catid']);
 	}
 
 	if (isset($query['layout']))

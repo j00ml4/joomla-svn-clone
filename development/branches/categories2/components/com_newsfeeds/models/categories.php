@@ -87,21 +87,23 @@ class NewsfeedsModelCategories extends JModel
 	 */
 	public function getItems()
 	{
-		$app = JFactory::getApplication();
-		$menu = $app->getMenu();
-		$active = $menu->getActive();
-		$params = new JRegistry();
-		$params->loadJSON($active->params);
-		$options = array();
-		$options['countItems'] = $params->get('show_articles', 0);
-		$categories = JCategories::getInstance('com_newsfeeds', $options);
-
-		$this->_parent = $categories->get($this->getState('filter.parentId', 0));
-		if(is_object($this->_parent))
+		if(!count($this->_items))
 		{
-			$this->_items = $this->_parent->getChildren();
-		} else {
-			$this->_items = false;
+			$app = JFactory::getApplication();
+			$menu = $app->getMenu();
+			$active = $menu->getActive();
+			$params = new JRegistry();
+			$params->loadJSON($active->params);
+			$options = array();
+			$options['countItems'] = $params->get('show_articles', 0);
+			$categories = JCategories::getInstance('com_newsfeeds', $options);
+			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
+			if(is_object($this->_parent))
+			{
+				$this->_items = $this->_parent->getChildren();
+			} else {
+				$this->_items = false;
+			}
 		}
 		
 		return $this->_items;
