@@ -129,14 +129,14 @@ class JCategories
 	 * @param an optional id integer or equal to 'root'
 	 * @return JCategoryNode|null
 	 */
-	public function get($id='root')
+	public function get($id = 'root')
 	{
-		if ($id != 'root')
+		if ($id !== 'root')
 		{
 			$id = (int) $id;
 			if ($id == 0)
 			{
-				return null;
+				$id = 'root';
 			}
 		}
 		if (!isset($this->_nodes[$id]))
@@ -147,13 +147,8 @@ class JCategories
 		if(isset($this->_nodes[$id]))
 		{
 			return $this->_nodes[$id];
-		} else {
-			if(isset($this->_nodes['root']))
-			{
-				return $this->_nodes['root'];
-			}
-			return false;
 		}
+		return false;
 	}
 
 	protected function _load($id)
