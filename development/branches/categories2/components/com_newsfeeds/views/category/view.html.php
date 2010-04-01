@@ -79,6 +79,13 @@ class NewsfeedsViewCategory extends JView
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
 		}
+		
+		if($params->get('max_levels', 0) > 0)
+		{
+			$params->set('max_levels', $params->get('max_levels') + $category->level);
+		}
+
+		$children = array($category->id => $children);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);

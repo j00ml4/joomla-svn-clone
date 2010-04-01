@@ -30,8 +30,9 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 		<div class="category_desc">
 			<!-- @TODO Verify image path defaults/overrides/positions + category_params breaks display-->
-			<?php if ($this->params->get('show_description_image') && $this->category->params->get('image')) : ?>
-				<img src="<?php echo $this->category->params->get('image'); ?>"/>
+			<?php if ($this->params->get('show_description_image') 
+			&& $this->category->getParams()->get('image')) : ?>
+				<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 			<?php endif; ?>
 			<?php if ($this->params->get('show_description') && $this->category->description) : ?>
 				<?php echo $this->category->description; ?>
@@ -43,15 +44,19 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php echo $this->loadTemplate('items'); ?>
 
 <!-- <div class="cat-siblings">  -->
-<?php  // echo $this->loadTemplate('siblings');  ?>
+<?php  echo $this->loadTemplate('siblings');  ?>
 <!-- </div>  -->
 
-<!--  <div class="cat-children"> -->
-<?php // echo $this->loadTemplate('children'); ?>
-<!--  </div> -->
+<!--   -->
+<?php if (!empty($this->children)) : ?>
+<div class="cat-children">
+	<h5>Sub Categories</h5>
+	<?php echo $this->loadTemplate('children'); ?>
+</div>	
+<?php endif; ?>
 
 <!--  <div class="cat-parents"> -->
-<?php  // echo $this->loadTemplate('parents');  ?>
+<?php  echo $this->loadTemplate('parents');  ?>
 <!--  </div> -->
 
 </div>
