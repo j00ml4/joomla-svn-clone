@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Note. It is important to remove spaces between elements.
-$class = $item->params->get('menu-anchor_css', '') ? 'class="'.$item->params->get('menu-anchor_css', '').'" ' : ''; 
+$class = $item->params->get('menu-anchor_css', '') ? 'class="'.$item->params->get('menu-anchor_css', '').'" ' : '';
 switch ($item->browserNav) :
 	default:
 	case 0:
@@ -23,7 +23,7 @@ switch ($item->browserNav) :
 		break;
 	case 2:
 		// window.open
-		$attribs = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes';
-?><a <?php echo $class; ?>href="<?php echo $item->link.'&tmpl=component'; ?>" onclick="window.open(this.href,'targetWindow','<?php echo $attribs;?>');return false;"><?php echo $item->title; ?></a><?php
+?><a <?php echo $class; ?>href="<?php echo $item->link.'&amp;tmpl=component'; ?>" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;"><?php echo $item->title; ?></a>
+<?php
 		break;
 endswitch;
