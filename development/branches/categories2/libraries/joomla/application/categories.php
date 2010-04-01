@@ -144,7 +144,12 @@ class JCategories
 			$this->_load($id);
 		}
 		
-		return $this->_nodes[$id];
+		if(isset($this->_nodes[$id]))
+		{
+			return $this->_nodes[$id];
+		} else {
+			return false;
+		}
 	}
 
 	protected function _load($id)
