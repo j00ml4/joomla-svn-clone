@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: default_siblings.php 12416 2009-07-03 08:49:14Z eddieajau $
+ * @version		$Id$
  * @package		Joomla.Site
- * @subpackage	com_content
+ * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,21 +10,22 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<?php if (empty($this->siblings)) : ?>
+<?php if (!$this->category->getSibling() && !$this->category->getSibling(false)) : ?>
 	no siblings
 <?php else : ?>
 	<h5>Siblings</h5>
 	<ul>
-		<?php foreach ($this->siblings as &$item) : ?>
-		<li>
-			<?php if ($item->id != $this->item->id) : ?>
-			<a href="<?php echo JRoute::_(ContactRoute::category($item->slug)); ?>">
-				<?php echo $this->escape($item->title); ?></a>
-			<?php else : ?>
-				<?php echo $this->escape($item->title); ?>
-			<?php endif; ?>
-		</li>
-		<?php endforeach; ?>
+		<?php if($leftSibling = $this->category->getSibling(false)) : ?>
+			<li>
+			<a href="<?php echo JRoute::_(ContactHelperRoute::getCategoryRoute($leftSibling->slug)); ?>">
+				<?php echo $this->escape($leftSibling->title); ?></a>
+			</li>
+		<?php endif; ?>
+		<?php if($rightSibling = $this->category->getSibling()) : ?>
+			<li>
+			<a href="<?php echo JRoute::_(ContactHelperRoute::getCategoryRoute($rightSibling->slug)); ?>">
+				<?php echo $this->escape($rightSibling->title); ?></a>
+			</li>
+		<?php endif; ?>
 	</ul>
-
 <?php endif; ?>

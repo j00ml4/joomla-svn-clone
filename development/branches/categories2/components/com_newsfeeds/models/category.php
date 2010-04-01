@@ -42,11 +42,6 @@ class NewsfeedsModelCategory extends JModelList
 	protected $_context = 'com_newfeeds.category';
 
 	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * @return	void
-	 */
-	/**
 	 * The category that applies.
 	 *
 	 * @access	protected
@@ -61,6 +56,7 @@ class NewsfeedsModelCategory extends JModelList
 	 * @var		array
 	 */
 	protected $_categories = null;
+
 
 
 	/**
