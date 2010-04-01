@@ -16,11 +16,11 @@ class InstallerControllerUpdate extends JController {
 	function update()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$model	= &$this->getModel('update');
 
-		$uid = JRequest::getVar('uid', array(), '', 'array');
+		$uid = JRequest::getVar('cid', array(), '', 'array');
 
 		JArrayHelper::toInteger($uid, array());
 		if ($model->update($uid))
@@ -28,8 +28,7 @@ class InstallerControllerUpdate extends JController {
 			$cache = &JFactory::getCache('mod_menu');
 			$cache->clean();
 		}
-		$model->saveState(); // Save the state because this is where our messages are stored
-		$this->setRedirect('index.php?option=com_installer&view=install');
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=update',false));
 	}
 
 	/**
@@ -39,11 +38,11 @@ class InstallerControllerUpdate extends JController {
 	{
 		// Find updates
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		$model	= &$this->getModel('update');
 		$model->purge();
 		$result = $model->findUpdates();
-		$this->setRedirect('index.php?option=com_installer&view=update');
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=update',false));
 		//$view->display();
 	}
 
@@ -54,9 +53,9 @@ class InstallerControllerUpdate extends JController {
 	{
 		// Purge updates
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		$model = &$this->getModel('update');
 		$model->purge();
-		$this->setRedirect('index.php?option=com_installer&view=update', $model->_message);
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=update',false), $model->_message);
 	}
 }

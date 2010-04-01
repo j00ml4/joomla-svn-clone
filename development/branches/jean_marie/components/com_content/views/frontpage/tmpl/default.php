@@ -19,7 +19,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
 <div class="blog-featured<?php echo $pageClass;?>">
-
 <?php if ($this->params->get('show_page_title', 1)) : ?>
 <h1>
 	<?php if ($this->escape($this->params->get('page_heading'))) :?>
@@ -40,7 +39,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			?>
 		</div>
 		<?php
-			$leadingcount=$leadingcount +1;
+			$leadingcount++;
 		?>
 	<?php endforeach; ?>
 </div>
@@ -67,7 +66,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 					echo $this->loadTemplate('item');
 			?>
 		</div>
-		<?php $counter=$counter +1; ?>
+		<?php $counter++; ?>
 			<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
 				<span class="row-separator"></span>
 				</div>
@@ -77,9 +76,9 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php endif; ?>
 
 <?php if (!empty($this->link_items)) : ?>
-	<div class="items-more">
+
 	<?php echo $this->loadTemplate('links'); ?>
-	</div>
+
 <?php endif; ?>
 
 <?php if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) : ?>

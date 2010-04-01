@@ -38,13 +38,17 @@ class JInstallerLanguage extends JAdapterInstance
 	 */
 	public function install()
 	{
+		$source = $this->parent->getPath('source');
+		if (!$source) {
+			$this->parent->setPath('source', ($this->parent->extension->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE) . '/language/'.$this->parent->extension->element);
+		}
 		$this->manifest = $this->parent->getManifest();
 		$root = &$this->manifest->document;
 
 		// Get the client application target
 		if ((string)$this->manifest->attributes()->client == 'both')
 		{
-			JError::raiseWarning(42, JText::_('Instr_Error_Deprecated_format'));
+			JError::raiseWarning(42, JText::_('JLIB_INSTALLER_ERROR_DEPRECATED_FORMAT'));
 			$element = $this->manifest->site->files;
 			if (!$this->_install('site', JPATH_SITE, 0, $element)) {
 				return false;
@@ -63,7 +67,7 @@ class JInstallerLanguage extends JAdapterInstance
 			jimport('joomla.application.helper');
 			$client = &JApplicationHelper::getClientInfo($cname, true);
 			if ($client === null) {
-				$this->parent->abort(JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_Unknown_client_type', $cname)));
+				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_UNKNOWN_CLIENT_TYPE', $cname)));
 				return false;
 			}
 			$basePath = $client->path;
@@ -102,7 +106,7 @@ class JInstallerLanguage extends JAdapterInstance
 		// Check if we found the tag - if we didn't, we may be trying to install from an older language package
 		if ( ! $tag)
 		{
-			$this->parent->abort(JText::sprintf('Instr_Abort', JText::_('Instr_Error_No_Language_Tag')));
+			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::_('JLIB_INSTALLER_ERROR_NO_LANGUAGE_TAG')));
 			return false;
 		}
 
@@ -127,7 +131,7 @@ class JInstallerLanguage extends JAdapterInstance
 		if (!$this->_core)
 		{
 			if (!JFile::exists($this->parent->getPath('extension_site').DS.$this->get('tag').'.xml')) {
-				$this->parent->abort(JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_No_core_language', $this->get('tag'))));
+				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_NO_CORE_LANGUAGE', $this->get('tag'))));
 				return false;
 			}
 		}
@@ -138,7 +142,7 @@ class JInstallerLanguage extends JAdapterInstance
 		{
 			if (!$created = JFolder::create($this->parent->getPath('extension_site')))
 			{
-				$this->parent->abort(JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_Create_folder_failed', $this->parent->getPath('extension_site'))));
+				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_CREATE_FOLDER_FAILED', $this->parent->getPath('extension_site'))));
 				return false;
 			}
 		}
@@ -157,10 +161,10 @@ class JInstallerLanguage extends JAdapterInstance
 				// overwrite is set
 				// we didn't have overwrite set, find an update function or find an update tag so lets call it safe
 				if (file_exists($this->parent->getPath('extension_site'))) { // if the site exists say that
-					JError::raiseWarning(1, JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_Folder_in_use', $this->parent->getPath('extension_site'))));
+					JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_FOLDER_IN_USE', $this->parent->getPath('extension_site'))));
 				}
 				else { // if the admin exists say that
-					JError::raiseWarning(1, JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_Folder_in_use', $this->parent->getPath('extension_administrator'))));
+					JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_FOLDER_IN_USE', $this->parent->getPath('extension_administrator'))));
 				}
 				return false;
 			}
@@ -219,7 +223,7 @@ class JInstallerLanguage extends JAdapterInstance
 		if (!$row->store())
 		{
 			// Install failed, roll back changes
-			$this->parent->abort(JText::sprintf('Instr_Abort', $db->getErrorMsg()));
+			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', $db->getErrorMsg()));
 			return false;
 		}
 
@@ -255,7 +259,7 @@ class JInstallerLanguage extends JAdapterInstance
 		$client = &JApplicationHelper::getClientInfo($cname, true);
 		if ($client === null || (empty($cname) && $cname !== 0))
 		{
-			$this->parent->abort(JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_Unknown_client_type', $cname)));
+			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_UNKNOWN_CLIENT_TYPE', $cname)));
 			return false;
 		}
 		$basePath = $client->path;
@@ -273,7 +277,7 @@ class JInstallerLanguage extends JAdapterInstance
 		// Check if we found the tag - if we didn't, we may be trying to install from an older language package
 		if (!$tag)
 		{
-			$this->parent->abort(JText::sprintf('Instr_Abort', JText::_('Instr_Error_No_Language_Tag')));
+			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::_('JLIB_INSTALLER_ERROR_NO_LANGUAGE_TAG')));
 			return false;
 		}
 
@@ -301,7 +305,7 @@ class JInstallerLanguage extends JAdapterInstance
 		{
 			if (!JFile::exists($this->parent->getPath('extension_site').DS.$this->get('tag').'.xml'))
 			{
-				$this->parent->abort(JText::sprintf('Instr_Abort', JText::sprintf('Instr_Error_No_core_language', $this->get('tag'))));
+				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_NO_CORE_LANGUAGE', $this->get('tag'))));
 				return false;
 			}
 		}
@@ -368,7 +372,7 @@ class JInstallerLanguage extends JAdapterInstance
 		if (!$row->store())
 		{
 			// Install failed, roll back changes
-			$this->parent->abort(JText::sprintf('Instr_Abort', $db->getErrorMsg()));
+			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', $db->getErrorMsg()));
 			return false;
 		}
 
@@ -448,12 +452,14 @@ class JInstallerLanguage extends JAdapterInstance
 		{
 			if (file_exists(JPATH_SITE.DS.'language'.DS.$language.DS.$language.'.xml'))
 			{
+				$manifest_details = JApplicationHelper::parseXMLInstallFile(JPATH_SITE.DS.'language'.DS.$language.DS.$language.'.xml');
 				$extension = &JTable::getInstance('extension');
 				$extension->set('type', 'language');
 				$extension->set('client_id', 0);
 				$extension->set('element', $language);
 				$extension->set('name', $language);
 				$extension->set('state', -1);
+				$extension->set('manifest_cache', serialize($manifest_details));
 				$results[] = $extension;
 			}
 		}
@@ -461,12 +467,14 @@ class JInstallerLanguage extends JAdapterInstance
 		{
 			if (file_exists(JPATH_ADMINISTRATOR.DS.'language'.DS.$language.DS.$language.'.xml'))
 			{
+				$manifest_details = JApplicationHelper::parseXMLInstallFile(JPATH_ADMINISTRATOR.DS.'language'.DS.$language.DS.$language.'.xml');
 				$extension = &JTable::getInstance('extension');
 				$extension->set('type', 'language');
 				$extension->set('client_id', 1);
 				$extension->set('element', $language);
 				$extension->set('name', $language);
 				$extension->set('state', -1);
+				$extension->set('manifest_cache', serialize($manifest_details));
 				$results[] = $extension;
 			}
 		}

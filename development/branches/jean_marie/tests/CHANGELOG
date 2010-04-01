@@ -27,6 +27,15 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+31-Mar-2010 Mark Dexter
+# Minor fixes to control panel tests for changed wording on menus
+
+27-Mar-2010 Mark Dexter
+# Fix bug in doInstall.php 
+
+26-Mar-2010 Mark Dexter
+# Change menu0001Test.php to reflect new id in Module Edit
+
 16-Mar-2010 Mark Dexter
 # Adjusted tests for changes in core
 + Added new method to count verification errors
