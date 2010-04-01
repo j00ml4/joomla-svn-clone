@@ -16,7 +16,7 @@ if(count($this->items[$this->parent->id]) > 0) : ?>
 	<?php 
 	if(!isset($this->items[$this->parent->id][$id + 1]))
 	{
-		$class = 'class="last"';
+		$class = ' class="last"';
 	}
 	?>
 	<li<?php echo $class; ?>>
