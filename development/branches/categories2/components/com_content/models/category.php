@@ -52,22 +52,13 @@ class ContentModelCategory extends JModelItem
 	protected function _populateState()
 	{
 		$app =& JFactory::getApplication('site');
-
 		// Load state from the request.
 		$pk = JRequest::getInt('id');
 		$this->setState('category.id', $pk);
 
 		// TODO: Add pagination for children , siblings??
-
-		// Load the parameters. Merge Global and Menu Item params
-		$params = $app->getParams();
-		$menuParams = new JRegistry;
-		if (JSite::getMenu()->getActive())
-		{
-			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
-		}
-		$mergedParams = clone $menuParams;
-		$mergedParams->merge($params);
+		
+		$mergedParams = $this->_mergeParams();
 		$this->setState('params', $mergedParams);
 
 		// limit to published
@@ -251,8 +242,18 @@ class ContentModelCategory extends JModelItem
 	 */
 	function &getArticles()
 	{
-		if ($this->_articles === null && $category =& $this->getItem())
+		$mergedParams=$this->_mergeParams();
+		// set limit for query. If list, use parameter. If blog, add blog parameters for limit.
+		if (JRequest::getString('layout') == 'blog')
 		{
+			$limit = $mergedParams->get('num_leading_articles') + $mergedParams->get('num_intro_articles') + $mergedParams->get('num_links');
+		}
+		else
+		{
+			$limit = $this->getState('list.limit');
+		}
+		if ($this->_articles === null && $category =& $this->getItem())
+		{	
 			$model =& JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 			$model->setState('params', JFactory::getApplication()->getParams());
 			$model->setState('filter.category_id', $category->id);
@@ -260,24 +261,32 @@ class ContentModelCategory extends JModelItem
 			$model->setState('filter.access', $this->getState('filter.access'));
 			$model->setState('list.ordering', $this->_buildContentOrderBy());
 			$model->setState('list.start', $this->getState('list.start'));
-			$model->setState('list.limit', $this->getState('list.limit'));
+			$model->setState('list.limit', $limit);
 			$model->setState('list.direction', $this->getState('list.direction'));
 			$model->setState('list.filter', $this->getState('list.filter'));
 			// filter.subcategories indicates whether to include articles from subcategories in the list or blog
 			$model->setState('filter.subcategories', $this->getState('filter.subcategories'));
 			$model->setState('filter.max_category_levels', $this->setState('filter.max_category_levels'));
 			$model->setState('list.links', $this->getState('list.links'));
-
-			$this->_articles = $model->getItems();
-			$this->_pagination = $model->getPagination();
-
-			if ($this->_articles === false)
+			
+			if($limit > 0)
 			{
-				$this->setError($model->getError());
-			}
-		}
+				$this->_articles = $model->getItems();
 
+				if ($this->_articles === false)
+				{
+					$this->setError($model->getError());
+				}
+			}
+			else
+			{
+				$this->_articles=array();
+			}
+			
+			$this->_pagination = $model->getPagination();
+		}
 		return $this->_articles;
+		
 	}
 
 	/**
@@ -435,5 +444,22 @@ class ContentModelCategory extends JModelItem
 
 		$orderby .= $primary . ' ' . $secondary . ' a.created DESC ';
 		return $orderby;
+	}
+	
+	protected function _mergeParams()
+	{
+		$app =& JFactory::getApplication('site');
+
+		// Load the parameters. Merge Global and Menu Item params
+		$params = $app->getParams();
+		$menuParams = new JRegistry;
+		if (JSite::getMenu()->getActive())
+		{
+			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
+		}
+		$mergedParams = clone $menuParams;
+		$mergedParams->merge($params);
+		
+		return $mergedParams;
 	}
 }
