@@ -174,6 +174,7 @@ class JCategories
 		}		
 		$query->order('c.lft');
 		
+
 		// s for selected id
 		if ($id!='root')
 		{
