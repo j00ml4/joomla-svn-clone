@@ -54,7 +54,7 @@ class MenusModelItem extends JModelForm
 		$this->setState('item.menutype', $menuType);
 
 		if (!($type = $app->getUserState('com_menus.edit.item.type'))){
-			$type = JRequest::getCmd('type', 'url');
+			$type = JRequest::getCmd('type');
 		}
 		$this->setState('item.type', $type);
 
@@ -761,6 +761,7 @@ class MenusModelItem extends JModelForm
 			}
 
 			// Confirm a view is defined.
+			$formFile = false;
 			if (isset($args['view'])) {
 				$view = $args['view'];
 
