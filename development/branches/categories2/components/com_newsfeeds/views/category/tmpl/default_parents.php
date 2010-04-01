@@ -10,17 +10,14 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<?php if (empty($this->parents)) : ?>
-	no parents
+<?php if (true) : //$this->parent->id != 'root') : ?>
+	no parent
 <?php else : ?>
-	<h5>Parents</h5>
+	<h5>Parent</h5>
 	<ul>
-		<?php foreach ($this->parents as &$item) : ?>
 		<li>
-			<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getCategoryRoute($item->slug)); ?>">
-				<?php echo $this->escape($item->title); ?></a>
+			<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getCategoryRoute($this->parent->slug)); ?>">
+				<?php echo $this->escape($this->parent->title); ?></a>
 		</li>
-		<?php endforeach; ?>
 	</ul>
-
 <?php endif; ?>

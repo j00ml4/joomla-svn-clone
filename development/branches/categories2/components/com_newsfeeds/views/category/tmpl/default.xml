@@ -29,6 +29,33 @@
 		<fieldset name="basic"
 		>
 
+			<field name="show_children" type="list"
+				description="JGLOBAL_Show_Children_Desc"
+				label="JGLOBAL_Show_Children__Label"
+				default="0"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="max_levels" type="text"
+				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
+				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+				default="0" size="3"
+				
+			>
+			</field>
+
+			<field name="empty_categories" type="list"
+				description="JGLOBAL_Empty_Categories_Desc"
+				label="JGLOBAL_Empty_Categories_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
 			<field name="show_headings" type="list"
 				description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC"
 				label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"

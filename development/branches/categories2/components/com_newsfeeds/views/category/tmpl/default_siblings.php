@@ -10,21 +10,22 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<?php if (empty($this->siblings)) : ?>
+<?php if (!$this->category->getSibling() && !$this->category->getSibling(false)) : ?>
 	no siblings
 <?php else : ?>
 	<h5>Siblings</h5>
 	<ul>
-		<?php foreach ($this->siblings as &$item) : ?>
-		<li>
-			<?php if ($item->id != $this->item->id) : ?>
-			<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getCategoryRoute($item->slug)); ?>">
-				<?php echo $this->escape($item->title); ?></a>
-			<?php else : ?>
-				<?php echo $this->escape($item->title); ?>
-			<?php endif; ?>
-		</li>
-		<?php endforeach; ?>
+		<?php if($leftSibling = $this->category->getSibling(false)) : ?>
+			<li>
+			<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getCategoryRoute($leftSibling->slug)); ?>">
+				<?php echo $this->escape($leftSibling->title); ?></a>
+			</li>
+		<?php endif; ?>
+		<?php if($rightSibling = $this->category->getSibling()) : ?>
+			<li>
+			<a href="<?php echo JRoute::_(NewsfeedsHelperRoute::getCategoryRoute($rightSibling->slug)); ?>">
+				<?php echo $this->escape($rightSibling->title); ?></a>
+			</li>
+		<?php endif; ?>
 	</ul>
-
 <?php endif; ?>
