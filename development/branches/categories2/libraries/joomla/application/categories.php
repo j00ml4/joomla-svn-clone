@@ -222,11 +222,17 @@ class JCategories
 				{
 					// Create the JCategoryNode
 					$this->_nodes[$result->id] = new JCategoryNode($result);
-					if($result->id != 'root')
+					if($result->id != 'root' && (isset($this->_nodes[$result->parent_id]) || $result->parent_id == 0))
 					{
 						// Compute relationship between node and its parent
 						$this->_nodes[$result->id]->setParent($this->_nodes[$result->parent_id]);
 					}
+					if(!(isset($this->_nodes[$result->parent_id]) || $result->parent_id == 0))
+					{
+						unset($this->_nodes[$result->id]);
+						break;
+					}
+					
 					if($result->id == $id || $childrenLoaded)
 					{
 						$this->_nodes[$result->id]->setAllLoaded();
@@ -236,10 +242,15 @@ class JCategories
 					$temp = $this->_nodes[$result->id]->getChildren();
 					// Create the JCategoryNode
 					$this->_nodes[$result->id] = new JCategoryNode($result);
-					if($result->id != 'root')
+					if($result->id != 'root' && (isset($this->_nodes[$result->parent_id]) || $result->parent_id))
 					{
 						// Compute relationship between node and its parent
 						$this->_nodes[$result->id]->setParent($this->_nodes[$result->parent_id]);
+					}
+					if(!isset($this->_nodes[$result->parent_id]))
+					{
+						unset($this->_nodes[$result->id]);
+						break;
 					}
 					foreach($temp as $child)
 					{

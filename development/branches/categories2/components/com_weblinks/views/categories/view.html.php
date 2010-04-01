@@ -31,13 +31,10 @@ class WeblinksViewCategories extends JView
 	 */
 	function display($tpl = null)
 	{
-		// Initialise variables.
-		$user		= &JFactory::getUser();
-		$app		= &JFactory::getApplication();
-
+		// Initialise variables
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$parent		= $this->get('Parent');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -45,21 +42,24 @@ class WeblinksViewCategories extends JView
 			return false;
 		}
 
-		$params = &$state->params;
-
-		// PREPARE THE DATA
-
-		// Compute the weblink slug and prepare description (runs content plugins).
-		foreach ($items as $i => &$item)
+		if($items === false)
 		{
-			$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
-			$item->description	= JHtml::_('content.prepare', $item->description);
+			//TODO Raise error for missing category here
 		}
 
+		if($parent == false)
+		{
+			//TODO Raise error for missing parent category here
+		}
+
+		$params = &$state->params;
+
+        $items = array($parent->id => $items);
+
+		$this->assignRef('maxLevel',	$params->get('maxLevel', 0));
 		$this->assignRef('params',		$params);
+		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-		$this->assignRef('user',		$user);
 
 		$this->_prepareDocument();
 
