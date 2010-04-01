@@ -14,6 +14,8 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 
+$orders = array();
+
 $user = JFactory::getUser();
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_plugins&view=plugins'); ?>" method="post" name="adminForm" id="adminForm">
@@ -82,9 +84,10 @@ $user = JFactory::getUser();
 		</tfoot>
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
-			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
+			$ordering	= ($this->state->get('list.ordering') == 'ordering');
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
+			$orders[$item->folder] = isset($orders[$item->folder]) ? $orders[$item->folder] + 1 : 1;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -106,10 +109,10 @@ $user = JFactory::getUser();
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo JHtml::_('jgrid.orderup', $i, 'plugins.orderup', $ordering); ?></span>
-						<span><?php echo JHtml::_('jgrid.orderdown', $i, 'plugins.orderdown', $ordering); ?></span>
+						<span><?php echo JHtml::_('jgrid.orderup', $i, 'plugins.orderup', ($item->folder == @$this->items[$i-1]->folder), $ordering); ?></span>
+						<span><?php echo JHtml::_('jgrid.orderdown', $i, 'plugins.orderdown', ($item->folder == @$this->items[$i+1]->folder), $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
-						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
+						<input type="text" name="order[]" size="5" value="<?php echo $orders[$item->folder];?>" <?php echo $disabled ?> class="text-area-order" />
 					<?php else : ?>
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>
