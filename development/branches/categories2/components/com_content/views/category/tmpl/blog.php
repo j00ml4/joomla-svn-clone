@@ -44,7 +44,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php if ($this->children): ?>
 	<ul class="subcategories">
 		<?php foreach($this->children as $child) : ?>
-				<li><a class="subcategories-link" href="<?php /*TODO  Needs a class */  echo ContentRoute::category($child->id); ?>">
+				<li><a class="subcategories-link" href="<?php /*TODO  Needs a class */  echo ContentHelperRoute::getCategoryRoute($child->id); ?>">
 					<?php echo $child->title; ?></a>
 					<?php if ($this->params->get('show_description', 1))
 						  {  echo '<div class="category-desc">';
