@@ -15,7 +15,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="jcategories-list<?php echo $pageClass;?>">
+<div class="categories-list<?php echo $pageClass;?>">
 
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <h1>

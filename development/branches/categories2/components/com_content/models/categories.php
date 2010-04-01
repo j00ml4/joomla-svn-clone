@@ -8,7 +8,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modellist');
+jimport('joomla.application.component.model');
 
 /**
  * This models supports retrieving lists of article categories.
@@ -17,7 +17,7 @@ jimport('joomla.application.component.modellist');
  * @subpackage	com_content
  * @since		1.6
  */
-class ContentModelCategories extends JModelList
+class ContentModelCategories extends JModel
 {
 	/**
 	 * Model context string.
@@ -32,7 +32,11 @@ class ContentModelCategories extends JModelList
 	 * @var		string
 	 */
 	protected $_extension = 'com_content';
-
+	
+	private $_parent = null;
+	
+	private $_items = null;
+	
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -41,29 +45,11 @@ class ContentModelCategories extends JModelList
 	protected function _populateState()
 	{
 		$app = &JFactory::getApplication();
-
 		$this->setState('filter.extension', $this->_extension);
 
 		// Get the parent id if defined.
 		$parentId = JRequest::getInt('id');
 		$this->setState('filter.parentId', $parentId);
-
-		// List state information
-		//$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$limit = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
-		$this->setState('list.limit', $limit);
-
-		//$limitstart = $app->getUserStateFromRequest($this->_context.'.limitstart', 'limitstart', 0);
-		$limitstart = JRequest::getInt('limitstart', 0);
-		$this->setState('list.start', $limitstart);
-
-		//$orderCol = $app->getUserStateFromRequest($this->_context.'.ordercol', 'filter_order', 'a.lft');
-		$orderCol = JRequest::getCmd('filter_order', 'a.lft');
-		$this->setState('list.ordering', $orderCol);
-
-		//$orderDirn = $app->getUserStateFromRequest($this->_context.'.orderdirn', 'filter_order_Dir', 'asc');
-		$orderDirn = JRequest::getWord('filter_order_Dir', 'asc');
-		$this->setState('list.direction', $orderDirn);
 
 		$params = $app->getParams();
 		$this->setState('params', $params);
@@ -204,23 +190,34 @@ class ContentModelCategories extends JModelList
 	 */
 	public function getItems()
 	{
-		$items = parent::getItems();
-		if (!empty($items))
+		if(!count($this->_items))
 		{
-			$itemcount = count($items);
-			for ($i=0;$i<$itemcount;$i++)
+			$app = JFactory::getApplication();
+			$menu = $app->getMenu();
+			$active = $menu->getActive();
+			$params = new JRegistry();
+			$params->loadJSON($active->params);
+			$options = array();
+			$options['countItems'] = $params->get('show_articles', 0);
+			$categories = JCategories::getInstance('com_content', $options);
+			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
+			if(is_object($this->_parent))
 			{
-				$item = &$items[$i];
-				$item->sclass		= ($i == 0) ? 'first' : '';
-				$item->sclass		= ($i == ($itemcount - 1)) ? 'last' : $item->sclass;
- 				$item->deeper		= (isset($items[$i+1]) && ($item->level < $items[$i+1]->level));
-				$item->shallower	= (isset($items[$i+1]) && ($item->level > $items[$i+1]->level));
-				$item->level_diff	= (isset($items[$i+1])) ? ($item->level - $items[$i+1]->level) : 0;
+				$this->_items = $this->_parent->getChildren();
+			} else {
+				$this->_items = false;
 			}
 		}
-		return $items;
+		
+		return $this->_items;
 	}
 	
-	
-	
+	public function getParent()
+	{
+		if(!is_object($this->_parent))
+		{
+			$this->getItems();
+		}
+		return $this->_parent;
+	}
 }

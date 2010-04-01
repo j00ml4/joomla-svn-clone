@@ -31,7 +31,7 @@ class NewsfeedsViewCategories extends JView
 	 */
 	function display($tpl = null)
 	{
-		//Initialise variables
+		// Initialise variables
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$parent		= $this->get('Parent');
@@ -53,6 +53,7 @@ class NewsfeedsViewCategories extends JView
 		}
 
 		$params = &$state->params;
+		
 		$items = array($parent->id => $items);
 		
 		$this->assignRef('maxLevel',	$params->get('maxLevel', 0));
