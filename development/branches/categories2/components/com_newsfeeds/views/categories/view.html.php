@@ -22,7 +22,6 @@ class NewsfeedsViewCategories extends JView
 	protected $state = null;
 	protected $item = null;
 	protected $items = null;
-	protected $pagination = null;
 
 	/**
 	 * Display the view
@@ -35,6 +34,7 @@ class NewsfeedsViewCategories extends JView
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$parent		= $this->get('Parent');
+		
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
