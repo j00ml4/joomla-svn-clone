@@ -18,10 +18,30 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheOutput extends JCache
+class JCacheHandlerOutput extends JCacheHandler
 {	
 	private $_id;
 	private $_group;
+	
+	/**
+	 * Cache lock test
+	 *
+	 * @var		object
+	 * @since	1.6
+	 */
+	private $_locktest = null;
+	
+	/**
+	* Constructor
+	*
+	* @access protected
+	* @param array $options optional parameters
+	*/
+	function __construct($options = array())
+	{
+		parent::__construct($options);
+	}
+	
 	/**
 	 * Start the cache
 	 *
@@ -34,12 +54,26 @@ class JCacheOutput extends JCache
 	function start($id, $group=null)
 	{
 		// If we have data in cache use that...
-		$data = $this->get($id, $group);
+		$data = $this->cache->get($id, $group);
+		
+		$this->_locktest = new stdClass;
+		$this->_locktest->locked = null;
+		$this->_locktest->locklooped = null;
+		
+		if ($data === false) 
+		{
+			$this->_locktest = $this->cache->lock($id,null);
+			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) $data = $this->cache->get($id);
+		
+		}
+		
 		if ($data !== false) {
 			echo $data;
+			if ($this->_locktest->locked == true) $this->cache->unlock($id);
 			return true;
 		} else {
 			// Nothing in cache... lets start the output buffer and start collecting data for next time.
+			if ($this->_locktest->locked == false) $this->_locktest = $this->cache->lock($id,null);
 			ob_start();
 			ob_implicit_flush(false);
 			// Set id and group placeholders
@@ -70,6 +104,7 @@ class JCacheOutput extends JCache
 		$this->_group	= null;
 
 		// Get the storage handler and store the cached data
-		$this->store($data, $id, $group);
+		$this->cache->store($data, $id, $group);
+		if ($this->_locktest->locked == true) $this->cache->unlock($id);
 	}
 }

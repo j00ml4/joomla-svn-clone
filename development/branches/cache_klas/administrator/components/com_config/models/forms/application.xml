@@ -43,7 +43,7 @@
 		<field
 			name="memcache_persist"
 			type="radio"
-			default="0"
+			default="1"
 			label="COM_CONFIG_MEMCACHE_PERSISTENT_LABEL"
 			description="COM_CONFIG_MEMCACHE_PERSISTENT_DESC"
 			filter="integer">

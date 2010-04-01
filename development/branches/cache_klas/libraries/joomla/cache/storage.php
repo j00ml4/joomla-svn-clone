@@ -11,7 +11,6 @@
 // No direct access
 defined('JPATH_BASE') or die;
 
-JCacheStorage::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage');
 
 /**
  * Abstract cache storage handler
@@ -23,8 +22,12 @@ JCacheStorage::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage
  */
 class JCacheStorage extends JObject
 {
-	
 	public $rawname;
+	public $_lifetime;
+	public $_locking;
+	public $_language;
+	public $_application;
+	public $_hash;
 	
 	/**
 	* Constructor
@@ -62,7 +65,9 @@ class JCacheStorage extends JObject
 	 * @since	1.5
 	 */
 	function getInstance($handler, $options = array())
-	{
+	{	
+		JCacheStorage::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage');
+		
 		static $now = null;
 		if (is_null($now)) {
 			$now = time();
@@ -105,7 +110,7 @@ class JCacheStorage extends JObject
 	 * @since	1.5
 	 */
 	function get($id, $group, $checkTime)
-	{
+	{	
 		return false;
 	}
 	
@@ -119,7 +124,7 @@ class JCacheStorage extends JObject
 	 */
 	function getAll()
 	{	
-		if (!class_exists('JCacheStorageHelper', false)) {
+			if (!class_exists('JCacheStorageHelper', false)) {
 			require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'storage'.DS.'helpers'.DS.'helper.php';
 		}
 		return;
@@ -197,6 +202,39 @@ class JCacheStorage extends JObject
 	static function test()
 	{
 		return true;
+	}
+	
+	/**
+	 * Lock cached item
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function lock($id,$group,$locktime)
+	{
+		return false;
+	}
+	
+	/**
+	 * Unlock cached item
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function unlock($id,$group)
+	{
+		return false;
 	}
 	
 	/**

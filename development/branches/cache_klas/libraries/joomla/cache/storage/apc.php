@@ -183,5 +183,52 @@ class JCacheStorageApc extends JCacheStorage
 	{
 		return extension_loaded('apc');
 	}
+	
+	/**
+	 * Lock cached item - override parent as this is more efficient
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function lock($id,$group,$locktime)
+	{	
+		$returning = new stdClass();
+		$returning->locklooped = false;
+				
+		$looptime = $locktime * 10;
+		
+		$cache_id = $this->_getCacheId($id, $group);
+			
+		$data_lock = apc_add( $cache_id.'_lock', 1, $locktime );
+				
+		if ( $data_lock === FALSE ) {
+
+			$lock_counter = 0;
+
+			// loop until you find that the lock has been released.  that implies that data get from other thread has finished
+			while ( $data_lock === FALSE ) {
+
+				if ( $lock_counter > $looptime ) {
+					$returning->locked = false;
+					$returning->locklooped = true;
+					break;
+				}
+
+				usleep(100);
+				$data_lock = apc_add( $cache_id.'_lock', 1, $locktime );
+				$lock_counter++;
+			}
+			
+		}
+			$returning->locked = $data_lock;
+		return $returning;	
+		
+	}
 
 }
