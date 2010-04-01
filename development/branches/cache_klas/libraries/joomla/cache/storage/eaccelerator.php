@@ -18,14 +18,15 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
+
 class JCacheStorageEaccelerator extends JCacheStorage
 {
 	/**
-	* Constructor
-	*
-	* @access protected
-	* @param array $options optional parameters
-	*/
+	 * Constructor
+	 *
+	 * @access protected
+	 * @param array $options optional parameters
+	 */
 	function __construct($options = array())
 	{
 		parent::__construct($options);
@@ -177,5 +178,67 @@ class JCacheStorageEaccelerator extends JCacheStorage
 		return (extension_loaded('eaccelerator') && function_exists('eaccelerator_get'));
 	}
 
+	
+	/**
+	 * Lock cached item
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function lock($id,$group,$locktime)
+	{			
+		$returning = new stdClass();
+		$returning->locklooped = false;
+				
+		$looptime = $locktime * 10;
+			
+		$data_lock = eaccelerator_lock($cache_id);
+				
+		if ( $data_lock === false ) {
 
+			$lock_counter = 0;
+
+			// loop until you find that the lock has been released.  that implies that data get from other thread has finished
+			while ( $data_lock === false ) {
+
+				if ( $lock_counter > $looptime ) {
+					$returning->locked = false;
+					$returning->locklooped = true;
+					break;
+				}
+
+				usleep(100);
+				$data_lock = eaccelerator_lock($cache_id);
+				$lock_counter++;
+			}
+			
+		}
+		$returning->locked = $data_lock;
+		
+		return $returning;	
+	}
+	
+	/**
+	 * Unlock cached item
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function unlock($id,$group)
+	{
+		$cache_id = $this->_getCacheId($id, $group);
+		return eaccelerator_unlock($cache_id);
+	}
+	
 }

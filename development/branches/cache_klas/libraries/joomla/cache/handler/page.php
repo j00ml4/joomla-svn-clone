@@ -17,7 +17,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCachePage extends JCache
+class JCacheHandlerPage extends JCacheHandler 
 {
 	/**
 	 * ID property for the cache page object.
@@ -34,7 +34,25 @@ class JCachePage extends JCache
 	 * @since	1.6
 	 */
 	protected $group;
-
+	
+	/**
+	 * Cache lock test
+	 *
+	 * @var		object
+	 * @since	1.6
+	 */
+	private $_locktest = null;
+	
+	/**
+	* Constructor
+	*
+	* @access protected
+	* @param array $options optional parameters
+	*/
+	function __construct($options = array())
+	{
+		parent::__construct($options);
+	}
 	/**
 	 * Get the cached page data
 	 *
@@ -68,15 +86,27 @@ class JCachePage extends JCache
 		}
 
 		// We got a cache hit... set the etag header and echo the page data
-		$data = parent::get($id, $group);
+		$data = $this->cache->get($id, $group);
+		
+		$this->_locktest = new stdClass;
+		$this->_locktest->locked = null;
+		$this->_locktest->locklooped = null;
+		
+		if ($data === false) 
+		{
+			$this->_locktest = $this->cache->lock($id,null);
+			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) $data = $this->cache->get($id);
+		
+		}
 		
 		if ($data !== false) {
 			
 			if ($wrkarounds === true) {
-				echo parent::getWorkarounds($data);
+				echo JCache::getWorkarounds($data);
 			}
 			
 			$this->_setEtag($id);
+			if ($this->_locktest->locked == true) $this->cache->unlock($id);
 			return $data;
 		}
 
@@ -107,8 +137,11 @@ class JCachePage extends JCache
 
 		// Only attempt to store if page data exists
 		if ($data) {
-			$data = $wrkarounds==false ? $data : parent::setWorkarounds($data);
-			return parent::store($data, $id, $group);
+			
+			$data = $wrkarounds==false ? $data : JCache::setWorkarounds($data);
+			if ($this->_locktest->locked == false) $this->_locktest = $this->cache->lock($id,null);
+			return $this->cache->store($data, $id, $group);
+			if ($this->_locktest->locked == true) $this->cache->unlock($id);
 		}
 		return false;
 	}
@@ -124,7 +157,7 @@ class JCachePage extends JCache
 	function _makeId()
 	{	
 		//return md5(JRequest::getURI());
-		return parent::makeId();
+		return JCache::makeId();
 	}
 
 	/**

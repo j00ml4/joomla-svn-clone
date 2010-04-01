@@ -18,7 +18,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheStorageXCache extends JCacheStorage
+class JCacheStorageXcache extends JCacheStorage
 {
 	/**
 	* Constructor
@@ -44,8 +44,13 @@ class JCacheStorageXCache extends JCacheStorage
 	function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-
-		return xcache_get($cache_id);
+		$cache_content = xcache_get($cache_id);
+		if ($cache_content === null)
+		{
+			return false;
+		}
+		
+		return $cache_content;
 	}
 	
 	
@@ -105,7 +110,8 @@ class JCacheStorageXCache extends JCacheStorage
 	function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		return xcache_set($cache_id, $data, $this->_lifetime);
+		$store = xcache_set($cache_id, $data, $this->_lifetime);
+		return $store;
 	}
 
 	/**

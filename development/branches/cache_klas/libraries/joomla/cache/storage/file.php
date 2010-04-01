@@ -45,12 +45,15 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
-	{
+	function get($id, $group, $checkTime=true)
+	{	
+		// @Todo: make reads use joomla.filesystem.file
 		$data = false;
 
 		$path = $this->_getFilePath($id, $group);
-		$this->_setExpire($id, $group);
+		
+		if ($checkTime == false || ($checkTime == true && $this->_checkExpire($id, $group) === true)) {
+		
 		if (file_exists($path)) {
 			$data = file_get_contents($path);
 			if ($data) {
@@ -60,6 +63,10 @@ class JCacheStorageFile extends JCacheStorage
 		}
 
 		return $data;
+		
+		} else {
+			return false;
+		}
 	}
 	
 	
@@ -106,10 +113,10 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.5
 	 */
 	function store($id, $group, $data)
-	{
+	{   
+		// @Todo: make writes use joomla.filesystem.file ...will have to fix that too for locking
 		$written	= false;
 		$path		= $this->_getFilePath($id, $group);
-		$expirePath	= $path . '_expire';
 		$die		= '<?php die("Access Denied"); ?>'."\n";
 
 		// Prepend a die string
@@ -131,7 +138,6 @@ class JCacheStorageFile extends JCacheStorage
 		}
 		// Data integrity check
 		if ($written && ($data == file_get_contents($path))) {
-			@file_put_contents($expirePath, ($this->_now + $this->_lifetime));
 			return true;
 		} else {
 			return false;
@@ -148,9 +154,9 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.5
 	 */
 	function remove($id, $group)
-	{
+	{	
+		jimport('joomla.filesystem.file');
 		$path = $this->_getFilePath($id, $group);
-		@unlink($path.'_expire');
 		if (!@unlink($path)) {
 			return false;
 		}
@@ -213,12 +219,11 @@ class JCacheStorageFile extends JCacheStorage
 		jimport('joomla.filesystem.folder');
 		$result = true;
 		// files older than lifeTime get deleted from cache
-		$files = JFolder::files($this->_root, '_expire', true, true);
+		$files = JFolder::files($this->_root, '', true, true);
 		foreach($files As $file) {
-			$time = @file_get_contents($file);
-			if ($time < $this->_now) {
+			$time = @filemtime($path);
+			if (($time + $this->_lifetime) < $this->_now || empty($time)) {
 				$result |= JFile::delete($file);
-				$result |= JFile::delete(str_replace('_expire', '', $file));
 			}
 		}
 		return $result;
@@ -245,20 +250,21 @@ class JCacheStorageFile extends JCacheStorage
 	 * @param string  $id		Cache key to expire.
 	 * @param string  $group	The cache data group.
 	 */
-	function _setExpire($id, $group)
-	{
+	function _checkExpire($id, $group)
+	{	
+		jimport('joomla.filesystem.file');
 		$path = $this->_getFilePath($id, $group);
 
-		// set prune period
-		if (file_exists($path.'_expire')) {
-			$time = @file_get_contents($path.'_expire');
-			if ($time < $this->_now || empty($time)) {
-				$this->remove($id, $group);
+		// check prune period
+		if (file_exists($path)) {
+			$time = @filemtime($path);
+			if (($time + $this->_lifetime) < $this->_now || empty($time)) {
+				JFile::delete($path);
+				return false;
 			}
-		} elseif (file_exists($path)) {
-			//This means that for some reason there's no expire file, remove it
-			$this->remove($id, $group);
-		}
+			return true;
+		} 
+		return false;
 	}
 
 	/**

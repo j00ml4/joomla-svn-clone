@@ -24,7 +24,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * Resource for the current memcached connection.
 	 * @var resource
 	 */
-	 private $_db = null;
+	 private static $_db = null;
 
 	/**
 	 * Use persistent connections
@@ -33,6 +33,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	var $_persistent = false;
 	
 	var $_compress = 0;
+	
 	/**
 	 * Constructor
 	 *
@@ -41,11 +42,9 @@ class JCacheStorageMemcache extends JCacheStorage
 	 */
 	function __construct($options = array())
 	{
-		/**if (!$this->test()) {
-			return JError::raiseError(404, "THE_MEMCACHE_EXTENSION_IS_NOT_AVAILABLE");
-		}*/
+
 		parent::__construct($options);
-		if (!isset($this->_db)) $this->getConnection();
+		if (self::$_db === null) $this->getConnection();
 
 	}
 
@@ -60,7 +59,8 @@ class JCacheStorageMemcache extends JCacheStorage
 		
 			$config = &JFactory::getConfig();
 			$this->_persistent	= $config->get('memcache_persist', true);
-			$this->_compress	= $config->get('memcache_compress', true);
+			$this->_compress = $config->get('memcache_compress', false) == false ? 0 : MEMCACHE_COMPRESSED;
+			
 			// This will be an array of loveliness
 			// @todo: multiple servers
 			//$servers	= (isset($params['servers'])) ? $params['servers'] : array();
@@ -68,24 +68,24 @@ class JCacheStorageMemcache extends JCacheStorage
 			$server['host'] = $config->get('memcache_server_host', 'localhost');
 			$server['port'] = $config->get('memcache_server_port',11211);
 			// Create the memcache connection
-			$this->_db = new Memcache;
-				$this->_db->addServer($server['host'], $server['port'], $this->_persistent);
+			self::$_db = new Memcache;
+				self::$_db->addServer($server['host'], $server['port'], $this->_persistent);
 				//$db->connect($server['host'], $server['port']) or die ("Could not connect");
 			
 
-			/**if(false === $this->_db->get($this->_hash.'init-time')) {
+			/**if(false === self::$_db->get($this->_hash.'init-time')) {
 
-				$this->_db->set($this->_hash.'init-time', time(), 0, 0);
-				$this->_db->set($this->_hash.'hits',   0, 0, 0);
-				$this->_db->set($this->_hash.'misses', 0, 0, 0);
-				$this->_db->set($this->_hash.'304s', 0, 0, 0);
-				$this->_db->set($this->_hash.'count', 0, 0, 0);
-				$this->_db->set($this->_hash.'count-gzip', 0, 0, 0);
+				self::$_db->set($this->_hash.'init-time', time(), 0, 0);
+				self::$_db->set($this->_hash.'hits',   0, 0, 0);
+				self::$_db->set($this->_hash.'misses', 0, 0, 0);
+				self::$_db->set($this->_hash.'304s', 0, 0, 0);
+				self::$_db->set($this->_hash.'count', 0, 0, 0);
+				self::$_db->set($this->_hash.'count-gzip', 0, 0, 0);
 			}*/
 			// memcahed has no list keys, we do our own accounting, initalise key index
-			if($this->_db->get($this->_hash.'-index') === false) {
+			if(self::$_db->get($this->_hash.'-index') === false) {
 				$empty = array();
-				$this->_db->set($this->_hash.'-index', serialize($empty) , $this->_compress, 0);
+				self::$_db->set($this->_hash.'-index', $empty , $this->_compress, 0);
 			}
 			
 		return;
@@ -105,7 +105,8 @@ class JCacheStorageMemcache extends JCacheStorage
 	function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
-		return unserialize($this->_db->get($cache_id));
+		$back = self::$_db->get($cache_id);
+		return $back;
 	}
 
 	 /**
@@ -120,7 +121,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	{	
 		parent::getAll();
 		
-		$keys = unserialize($this->_db->get($this->_hash.'-index'));
+		$keys = self::$_db->get($this->_hash.'-index');
         $secret = $this->_hash;
         
         $data = array();	
@@ -163,19 +164,26 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @since	1.5
 	 */
 	function store($id, $group, $data)
-	{   $data = serialize($data);
+	{   
 		$cache_id = $this->_getCacheId($id, $group);
-		$index = unserialize($this->_db->get($this->_hash.'-index'));
-		if ($index === false) {$index = array();} else {$index = $index;}
+		
+		if(!$this->lockindex()) return false;
+		
+		$index = self::$_db->get($this->_hash.'-index');
+		if ($index === false) {$index = array();}
+
 		$tmparr = new stdClass;
 		$tmparr->name = $cache_id;
 		$tmparr->size = strlen($data);
 		$index[] = $tmparr;
-		$this->_db->replace($this->_hash.'-index', serialize($index) , 0, 0);
-		// prevent double writes, write only if it doesn't exist else replace
-		if(!$this->_db->replace($cache_id, serialize($data), $this->_compress, $this->_lifetime)) $this->_db->set($cache_id, serialize($data), $this->_compress, $this->_lifetime);
+		self::$_db->replace($this->_hash.'-index', $index , 0, 0);
+		$this->unlockindex();
 		
-		return;
+		// prevent double writes, write only if it doesn't exist else replace
+		if(!self::$_db->replace($cache_id, $data, $this->_compress, $this->_lifetime)) {
+					self::$_db->set($cache_id, $data, $this->_compress, $this->_lifetime);
+				}
+		return true;
 	}
 
 	/**
@@ -191,16 +199,19 @@ class JCacheStorageMemcache extends JCacheStorage
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		
-		$index = unserialize($this->_db->get($this->_hash.'-index'));
-		if ($index === false) {$index = array();} else {$index = $index;}
+		if(!$this->lockindex()) return false;
+
+		$index = self::$_db->get($this->_hash.'-index');
+		if ($index === false) {$index = array();}
 		
 		foreach ($index as $key=>$value){
 		if ($value->name == $cache_id) unset ($index[$key]);
 		break;
 		}
-		$this->_db->replace($this->_hash.'-index', serialize($index), 0, 0);
+		self::$_db->replace($this->_hash.'-index', $index, 0, 0);
+		$this->unlockindex();
 		
-		return $this->_db->delete($cache_id);
+		return self::$_db->delete($cache_id);
 	}
 
 	/**
@@ -216,18 +227,21 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @since	1.5
 	 */
 	function clean($group, $mode)
-	{
-		$index = unserialize($this->_db->get($this->_hash.'-index'));
-		if ($index === false) {$index = array();} else {$index = $index;}
+	{	
+		if(!$this->lockindex()) return false;
+		
+		$index = self::$_db->get($this->_hash.'-index');
+		if ($index === false) {$index = array();}
 		
 		$secret = $this->_hash;
         foreach ($index as $key=>$value) {
 		
         if (strpos($value->name, $secret.'-cache-'.$group.'-')===0 xor $mode != 'group')
-					$this->_db->delete($value->name);
+					self::$_db->delete($value->name,0);
 					unset ($index[$key]);
         }
-        $this->_db->replace($this->_hash.'-index', serialize($index) , 0, 0);
+        self::$_db->replace($this->_hash.'-index', $index , 0, 0);
+        $this->unlockindex();
 		return true;
 		
 	}
@@ -244,5 +258,118 @@ class JCacheStorageMemcache extends JCacheStorage
 	{
 		return (extension_loaded('memcache') && class_exists('Memcache'));
 	}
+	
+	
+	/**
+	 * Lock cached item - override parent as this is more efficient
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function lock($id,$group,$locktime)
+	{	
+		
+		$returning = new stdClass();
+		$returning->locklooped = false;		
+		
+		$looptime = $locktime * 10;
+		
+		$cache_id = $this->_getCacheId($id, $group);
+		
+		if(!$this->lockindex()) return false;
+		
+		$index = self::$_db->get($this->_hash.'-index');
+		if ($index === false) {$index = array();}
+		
+		$tmparr = new stdClass;
+		$tmparr->name = $cache_id;
+		$tmparr->size = 1;
+		$index[] = $tmparr;
+		self::$_db->replace($this->_hash.'-index', $index , 0, 0);
+		$this->unlockindex();
+			
+		$data_lock = self::$_db->add( $cache_id.'_lock', 1, false, $locktime );
+				
+		if ( $data_lock === FALSE ) {
 
+			$lock_counter = 0;
+
+			// loop until you find that the lock has been released.  that implies that data get from other thread has finished
+			while ( $data_lock === FALSE ) {
+
+				if ( $lock_counter > $looptime ) {
+						$returning->locked = false;
+						$returning->locklooped = true;
+					break;
+				}
+
+				usleep(100);
+				$data_lock = self::$_db->add( $cache_id.'_lock', 1, false, $locktime );
+				$lock_counter++;
+			}
+			
+		}
+			$returning->locked = $data_lock;
+		return $returning;	
+		
+	}
+	
+	
+	/**
+	 * Lock cache index
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	private function lockindex()
+	{	
+		$looptime = 300;
+		$data_lock = self::$_db->add( $this->_hash.'-index_lock', 1, false, 30 );
+				
+		if ( $data_lock === FALSE ) {
+
+			$lock_counter = 0;
+
+			// loop until you find that the lock has been released.  that implies that data get from other thread has finished
+			while ( $data_lock === FALSE ) {
+
+				if ( $lock_counter > $looptime ) {
+					return false;
+					break;
+				}
+
+				usleep(100);
+				$data_lock = self::$_db->add( $this->_hash.'-index_lock', 1, false, 30 );
+				$lock_counter++;
+			}
+
+		}
+			
+		return true;	
+
+	}
+	
+	/**
+	 * Unlock cache index
+	 *
+	 * @abstract
+	 * @static
+	 * @access public
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	private function unlockindex()
+	{
+		return self::$_db->delete($this->_hash.'-index_lock');
+	}
+	
 }

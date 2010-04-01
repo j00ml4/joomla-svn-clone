@@ -4,6 +4,7 @@
  * @package		Joomla.Framework
  * @subpackage	Cache
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -17,8 +18,18 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheCallback extends JCache
+class JCacheHandlerCallback extends JCacheHandler
 {
+	/**
+	* Constructor
+	*
+	* @access protected
+	* @param array $options optional parameters
+	*/
+	function __construct($options = array())
+	{
+		parent::__construct($options);
+	}
 	/**
 	 * Executes a cacheable callback if not found in cache else returns cached output and result
 	 *
@@ -83,16 +94,28 @@ class JCacheCallback extends JCache
 		}
 
 		// Get the storage handler and get callback cache data by id and group
-		$data = parent::get($id);
+		$data = $this->cache->get($id);
+		
+		$locktest = new stdClass;
+		$locktest->locked = null;
+		$locktest->locklooped = null;
+		
+		if ($data === false) 
+		{
+			$locktest = $this->cache->lock($id,null);
+			if ($locktest->locked == true && $locktest->locklooped == true) $data = $this->cache->get($id);
+		
+		}
 		
 		if ($data !== false) {
 			
-			$cached = $wrkarounds==false ? unserialize($data) : parent::getWorkarounds(unserialize($data));
+			$cached = $wrkarounds==false ? unserialize($data) : JCache::getWorkarounds(unserialize($data));
 			$output = $cached['output'];
 			$result = $cached['result'];
+			if ($locktest->locked == true) $this->cache->unlock($id);
 			
 		} else {
-			
+			if ($locktest->locked == false) $locktest = $this->cache->lock($id,null);
 			ob_start();
 			ob_implicit_flush(false);
 
@@ -102,10 +125,11 @@ class JCacheCallback extends JCache
 			ob_end_clean();
 
 			$cached = array();
-			$cached['output'] = $wrkarounds==false ? $output : parent::setWorkarounds($output);
+			$cached['output'] = $wrkarounds==false ? $output : JCache::setWorkarounds($output);
 			$cached['result'] = $result;
 			// Store the cache data
 			$this->store(serialize($cached), $id);
+			if ($locktest->locked == true) $this->cache->unlock($id);
 		}
 
 		echo $output;

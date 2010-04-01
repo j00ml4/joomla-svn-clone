@@ -13,14 +13,15 @@ SMALLER TASKS
 - DONE: move CacheItem from admin to framework JCacheStorageHelper
 - DONE: add fixed wincache driver
 - DONE: add addIncludepath to JCache and JCacheStorage, fix error if there is no pathway http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa
-
-- to do: Implement advanced features: NOT in the group mode to drivers as in cachelite, locking, corruption prevention 
+- DONE: replace separate _expire files in file driver with timestamps (cca. 40% speed gain)
 - to do: Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS
+- DONE: Implement advanced features: locking, corruption prevention NOT in the group mode to drivers
 - DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435) 
 - DONE: Re-conceptualize view cache (and review/change other handlers if needed)
 - DONE: Re-conceptualize module cache (move cache call to within the module, add module handler)
+- DONE: make cache handlers independent of JCache, add JCacheHandler as parent class
 
 - IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems
 - IN PROGRESS: Test and cleanup changed files
