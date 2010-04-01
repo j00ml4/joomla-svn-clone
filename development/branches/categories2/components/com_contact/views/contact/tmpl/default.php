@@ -10,12 +10,6 @@
 defined('_JEXEC') or die;
 
 $cparams = JComponentHelper::getParams ('com_media');
-
-echo "#<div style='text-align:left;font_size:1.2em;'><pre>";
-print_r($this);
-echo "</pre></div>#";
-
-
 ?>
 
 <?php if ($this->params->get('show_page_title', 1) && $this->params->get('page_heading') != $this->contact->name) : ?>
@@ -40,7 +34,7 @@ echo "</pre></div>#";
 		</h3>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_contact_category') == 'show_with_link') : ?>
-		<?php $contactLink = ContactRoute::category('index.php?option=com_contact&view=category&catid='.$this->escape($this->contact->catslug));?>
+		<?php $contactLink = ContactHelperRoute::getCategoryRoute($this->contact->catslug);?>
 		<h3>
 			<span class="contact-category"><a href="<?php echo $contactLink; ?>">
 				<?php echo $this->escape($this->contact->category_name); ?></a>
