@@ -48,7 +48,7 @@ function WeblinksBuildRoute(&$query)
 		$view = $query['view'];
 		unset($query['view']);
 		if (empty($query['Itemid'])) {
-			$segments[] = $query['view'];
+			$segments[] = $view;
 			if(isset($query['id']))
 			{
 				$segments[] = $query['id'];

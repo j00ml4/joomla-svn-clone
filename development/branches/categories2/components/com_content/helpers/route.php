@@ -71,6 +71,11 @@ abstract class ContentHelperRoute
 		} else {
 			$categories = JCategories::getInstance('com_content');
 			$category = $categories->get((int)$catid);
+			if(!$category)
+			{
+				die('The category is not published or does not exist');
+				//TODO Throw error that the category either not exists or is unpublished	
+			}
 			$catids = array_reverse($category->getPath());
 			$id = (int)$catid;
 		}
