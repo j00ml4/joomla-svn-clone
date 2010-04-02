@@ -105,26 +105,4 @@ class NewsfeedsViewNewsfeed extends JView
 
 		parent::display($tpl);
 	}
-
-	function limitText($text, $wordcount)
-	{
-		if (!$wordcount) {
-			return $text;
-		}
-
-		$texts = explode(' ', $text);
-		$count = count($texts);
-
-		if ($count > $wordcount)
-		{
-			$text = '';
-			for ($i=0; $i < $wordcount; $i++) {
-				$text .= ' '. $texts[$i];
-			}
-			$text .= '...';
-		}
-
-		return $text;
-	}
 }
-?>
