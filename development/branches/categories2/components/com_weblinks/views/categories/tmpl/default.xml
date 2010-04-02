@@ -24,8 +24,7 @@
 	<fields name="params">
 
 		<!-- Basic options. -->
-		<fieldset name="basic"
-		>
+		<fieldset name="advanced">
 
 			<field name="show_headings" type="list"
 				description="COM_WEBLINKS_FIELD_TABLE_HEADINGS_DESC"
@@ -80,7 +79,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-	
+
 			<field name="show_item_description" type="list"
 				description="COM_WEBLINKS_FIELD_SHOW_ITEM_DESCRIPTION_DESC"
 				label="COM_WEBLINKS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
@@ -89,7 +88,29 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-	
+			<field name="max_levels" type="text"
+				description="COM_WEBLINKS_FIELD_MAX_LEVELS_DESC"
+				label="COM_WEBLINKS_FIELD_MAX_LEVELS_LABEL"
+				default="0"
+				size="6"
+			/>
+			<field name="show_empty_categories" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_EMPTY_CATEGORIES_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_EMPTY_CATEGORIES_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+				<field name="show_item_count" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_ITEM_COUNT_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_ITEM_COUNT_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
 		</fieldset>
 	</fields>
 </metadata>

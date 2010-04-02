@@ -47,12 +47,6 @@ class ContentViewCategory extends JView
 		$articles = $this->get('Articles');
 
 		// Get child categories based on params
-		$children = array();
-		$showSubcategories = $params->get('show_subcategory_content', '0');
-		if ($showSubcategories == 'next_list' OR $showSubcategories == 'all_list')
-		{
-			$children = $this->get('Children');
-		}
 		$pagination = $this->get('Pagination');
 
 		// Check for errors.
@@ -70,7 +64,6 @@ class ContentViewCategory extends JView
 		$numLinks = $params->def('num_links', 4);
 
 		// Compute the category slug and prepare description (runs content plugins).
-		$item->slug = $item->path ? ($item->id . ':' . $item->path) : $item->id;
 		$item->description = JHtml::_('content.prepare', $item->description);
 
 		// Compute the article slugs and prepare introtext (runs content plugins).
@@ -190,7 +183,7 @@ class ContentViewCategory extends JView
 		}
 
 		if ($app->getCfg('MetaTitle') == '1') {
-			$this->document->setMetaData('title', $this->item->metadata->get('page_title'));
+			$this->document->setMetaData('title', $this->item->getMetadata()->get('page_title'));
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1') {

@@ -52,23 +52,6 @@ class WeblinksModelCategories extends JModel
 		$parentId = JRequest::getInt('id');
 		$this->setState('filter.parentId', $parentId);
 
-		// List state information
-		//$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$limit = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
-		$this->setState('list.limit', $limit);
-
-		//$limitstart = $app->getUserStateFromRequest($this->_context.'.limitstart', 'limitstart', 0);
-		$limitstart = JRequest::getInt('limitstart', 0);
-		$this->setState('list.start', $limitstart);
-
-		//$orderCol = $app->getUserStateFromRequest($this->_context.'.ordercol', 'filter_order', 'a.lft');
-		$orderCol = JRequest::getCmd('filter_order', 'a.lft');
-		$this->setState('list.ordering', $orderCol);
-
-		//$orderDirn = $app->getUserStateFromRequest($this->_context.'.orderdirn', 'filter_order_Dir', 'asc');
-		$orderDirn = JRequest::getWord('filter_order_Dir', 'asc');
-		$this->setState('list.direction', $orderDirn);
-
 		$params = $app->getParams();
 		$this->setState('params', $params);
 
@@ -112,7 +95,7 @@ class WeblinksModelCategories extends JModel
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_articles', 0);
+			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_weblinks', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))

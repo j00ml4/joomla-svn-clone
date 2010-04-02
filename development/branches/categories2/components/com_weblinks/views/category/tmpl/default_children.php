@@ -10,14 +10,16 @@
 // no direct access
 defined('_JEXEC') or die;
 $class = ' class="first"';
-if(count($this->children[$this->category->id]) > 0) : ?>
+if(count($this->children[$this->category->id])) : ?>
+
 	<ul>
 	<?php foreach($this->children[$this->category->id] as $id => $child) : ?>
+
 		<?php
 		$maxlevel = $this->params->get('max_levels',0);
 		if ($maxlevel > 0 && $child->level > $maxlevel)
 		{
-			continue;		
+			continue;
 		}
 		if(!isset($this->children[$this->category->id][$id + 1]))
 		{
@@ -25,6 +27,7 @@ if(count($this->children[$this->category->id]) > 0) : ?>
 		}
 		?>
 		<li<?php echo $class; ?>>
+
 		<?php $class = ''; ?>
 			<span class="jitem-title"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($child->id));?>">
 				<?php echo $this->escape($child->title); ?></a>
@@ -34,7 +37,7 @@ if(count($this->children[$this->category->id]) > 0) : ?>
 					<?php echo JHtml::_('content.prepare', $child->description); ?>
 				</div>
 			<?php endif; ?>
-			<?php if(count($child->getChildren()) > 0 && $this->params->get('show_children',0) == 1) :
+			<?php if(count($child->getChildren()) > 0 ) :
 				$this->children[$child->id] = $child->getChildren();
 				$this->category = $child;
 				echo $this->loadTemplate('children');
