@@ -21,8 +21,7 @@ $n = count($this->articles);
 <?php if (empty($this->articles)) : ?>
 	<p><?php echo JText::_('JContent_No_Articles'); ?></p>
 <?php else : ?>
-	<form action="<?php echo $this->action; ?>" method="post" name="adminForm">
-
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	<fieldset class="filters">
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
@@ -32,13 +31,14 @@ $n = count($this->articles);
 		</div>
 	<?php endif; ?>
 
+
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('Display_Num'); ?>&nbsp;
+			<?php echo JText::_('COM_NEWSFEEDS_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	<?php endif; ?>
-	<?php if ($this->params->get('filter_field') != 'hide') :?>
+	</fieldset>	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	</fieldset>
 	<?php endif; ?>
 

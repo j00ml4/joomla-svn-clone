@@ -32,8 +32,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 <div class="category-desc">
-		<?php if ($this->params->get('show_description_image') && $this->item->category_params->get('image')) : ?>
-				<img src="<?php echo $this->baseurl . '/' . $cparams->get('image_path') . '/'. $this->item->category_params->get('image');?>" alt="" />
+		<?php if ($this->params->get('show_description_image') && $this->item->getParams()->get('image')) : ?>
+				<img src="<?php echo $this->baseurl . '/' . $cparams->get('image_path') . '/'. $this->item->getParams()->get('image');?>" alt="" />
 		<?php endif; ?>
 		<?php if ($this->params->get('show_description') && $this->item->description) : ?>
 				<?php echo $this->item->description; ?>
@@ -44,7 +44,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php if ($this->children): ?>
 	<ul class="subcategories">
 		<?php foreach($this->children as $child) : ?>
-				<li><a class="subcategories-link" href="<?php /*TODO  Needs a class */  echo ContentHelperRoute::getCategoryRoute($child->id); ?>">
+				<li><a class="subcategories-link" href="<?php echo JRoute::_(ContentHelperRoute::getCategoryRoute($child->id)); ?>">
 					<?php echo $child->title; ?></a>
 					<?php if ($this->params->get('show_description', 1))
 						  {  echo '<div class="category-desc">';

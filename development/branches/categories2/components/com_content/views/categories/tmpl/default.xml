@@ -10,13 +10,107 @@
 	<fields name="request">
 		<fieldset name="request"
 		 >
-
-			<field name="category" type="category"
-				description="Choose_Category_Desc"
+			<field name="id" type="category"
+				description="CHOOSE_CATEGORY_DESC"
 				extension="com_content"
-				label="Choose_Category_Label"
+				label="CHOOSE_CATEGORY_LABEL"
+				show_root="true"
 				required="true"
 			/>
+		</fieldset>
+	</fields>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+
+		<!-- Basic options. -->
+		<fieldset name="basic"
+		>
+
+			<field name="show_headings" type="list"
+				description="COM_CONTENT_FIELD_TABLE_HEADINGS_DESC"
+				label="COM_CONTENT_FIELD_TABLE_HEADINGS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_name" type="list"
+				description="COM_CONTENT_FIELD_NAME_COLUMN_DESC"
+				label="COM_CONTENT_FIELD_NAME_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_articles" type="list"
+				description="COM_CONTENT_FIELD_NUM_ARTICLES_COLUMN_DESC"
+				label="COM_CONTENT_FIELD_NUM_ARTICLES_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_link" type="list"
+				description="COM_CONTENT_FIELD_SHOW_LINKS_DESC"
+				label="COM_CONTENT_FIELD_SHOW_LINKS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description" type="list"
+				description="COM_CONTENT_FIELD_SHOW_CATEGORY_DESC_DESC"
+				label="COM_CONTENT_FIELD_SHOW_CATEGORY_DESC_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description_image" type="list"
+				description="COM_CONTENT_FIELD_SHOW_CATEGORY_IMAGE_DESC"
+				label="COM_CONTENT_FIELD_SHOW_CATEGORY_IMAGE_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_children" type="list"
+				description="COM_CONTENT_FIELD_SHOW_CHILDREN_DESC"
+				label="COM_CONTENT_FIELD_SHOW_CHILDREN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field name="max_levels" type="text"
+				description="COM_CONTENT_FIELD_MAX_LEVELS_DESC"
+				label="COM_CONTENT_FIELD_MAX_LEVELS_LABEL"
+				default="0"
+				size="6"
+			/>
+			<field name="show_empty_categories" type="list"
+				description="COM_CONTENT_FIELD_SHOW_EMPTY_CATEGORIES_DESC"
+				label="COM_CONTENT_FIELD_SHOW_EMPTY_CATEGORIES_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+				<field name="show_item_count" type="list"
+				description="COM_CONTENT_FIELD_SHOW_ITEM_COUNT_DESC"
+				label="COM_CONTENT_FIELD_SHOW_ITEM_COUNT_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 		</fieldset>
 	</fields>
 </metadata>

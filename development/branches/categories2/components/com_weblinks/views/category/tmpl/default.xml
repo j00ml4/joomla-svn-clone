@@ -11,9 +11,10 @@
 		<fieldset name="request">
 
 			<field name="id" type="category"
-				description="COM_WEBLINKS_FIELD_CATEGORYCHOOSE_DESC"
+				default="0"
+				description="COM_NEWSFEEDS_FIELD_SELECT_CATEGORY_DESC"
 				extension="com_weblinks"
-				label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
+				label="COM_NEWSFEEDS_FIELD_SELECT_CATEGORY_LABEL"
 				required="true"
 			/>
 		</fieldset>
@@ -33,7 +34,126 @@
 				<option value="0">JNo</option>
 				<option value="1">JYes</option>
 			</field>
+			<field name="show_children" type="list"
+				description="JGLOBAL_SHOW_CHILDREN_DESC"
+				label="JGLOBAL_SHOW_CHILDREN_LABEL"
+				default="0"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 
+			<field name="max_levels" type="text"
+				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
+				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+				default="0" size="3"
+			>
+			</field>
+			<field name="empty_categories" type="list"
+				description="JGLOBAL_EMPTY_CATEGORIES_DESC"
+				label="JGLOBAL_EMPTY_CATEGORIES_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field name="show_headings" type="list"
+				description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC"
+				label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_name" type="list"
+				description="COM_NEWSFEEDS_FIELD_NAME_COLUMN_DESC"
+				label="COM_NEWSFEEDS_FIELD_NAME_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_articles" type="list"
+				description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC"
+				label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_link" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description_image" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_IMAGE_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_IMAGE_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="display_num" type="list"
+				description="COM_NEWSFEEDS_FIELD_NUMBER_ITEMS_LIST_DESC"
+				label="COM_NEWSFEEDS_FIELD_NUMBER_ITEMS_LIST_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="5">J5</option>
+				<option value="10">J10</option>
+				<option value="15">J15</option>
+				<option value="20">J20</option>
+				<option value="25">J25</option>
+				<option value="30">J30</option>
+				<option value="50">J50</option>
+				<option value="100">J100</option>
+				<option value="0">JALL</option>
+			</field>
+
+			<field name="show_pagination_limit" type="list"
+				description="COM_NEWSFEEDS_FIELD_DISPLAY_SELECT_DESC"
+				label="COM_NEWSFEEDS_FIELD_DISPLAY_SELECT_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_pagination" type="list"
+				description="COM_NEWSFEEDS_FIELD_PAGINATION_DESC"
+				label="COM_NEWSFEEDS_FIELD_PAGINATION_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<OPTION VALUE="1">JSHOW</OPTION>
+			</field>
+
+			<field name="show_pagination_results" type="list"
+				description="COM_NEWSFEEDS_FIELD_PAGINATION_RESULTS_DESC"
+				label="COM_NEWSFEEDS_FIELD_PAGINATION_RESULTS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 			<field name="image" type="imagelist"
 				description="JFIELD_CATEGORY_IMAGE_DESC"
 				directory="/images"
