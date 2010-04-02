@@ -93,7 +93,10 @@ class NewsfeedsModelCategories extends JModel
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
-			$params->loadJSON($active->params);
+			if($active)
+			{
+				$params->loadJSON($active->params);
+			}
 			$options = array();
 			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_newsfeeds', $options);
