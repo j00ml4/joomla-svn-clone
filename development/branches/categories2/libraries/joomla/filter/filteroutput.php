@@ -211,4 +211,12 @@ class JFilterOutput
 		}
 		return $html;
 	}
+	
+	/**
+	 * Strip img-tags from string
+	 */
+	function stripImages($string)
+	{
+		return  preg_replace('/<img(.+)>/', '', $string);
+	}
 }
