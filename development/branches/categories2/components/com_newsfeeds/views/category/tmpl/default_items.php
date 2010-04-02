@@ -29,28 +29,29 @@ $n = count($this->items);
 		</div>
 	<?php endif; ?>
 	</fieldset>
-
+<?php print_r($this->params); ?>
 	<table class="category">
-		<?php if ($this->params->get('show_headings')) : ?>
+		<?php if ($this->params->get('show_headings')==1) : ?>
+
 		<thead><tr>
 				<?php if ($this->params->get('show_name')) : ?>
 				<th class="item-title" id="tableOrdering">
 					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_NAME'), 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
-				
+
 				<?php if ($this->params->get('show_articles')) : ?>
 				<th class="item-num-art" id="tableOrdering2">
 					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_NUM_ARTICLES'), 'a.numarticles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
-				
+
 				<?php if ($this->params->get('show_link')) : ?>
 				<th class="item-link" id="tableOrdering3">
 					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_LINK'), 'a.link', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<?php endif; ?>
-				
+
 			</tr>
 		</thead>
 		<?php endif; ?>
@@ -69,7 +70,7 @@ $n = count($this->items);
 							<?php echo $item->numarticles; ?>
 						</td>
 					<?php  endif; ?>
-					
+
 					<?php  if ($this->params->get('show_link')) : ?>
 						<td class="item-link">
 							<a href="<?php echo $item->link; ?>"><?php echo $item->link; ?></a>
@@ -91,7 +92,7 @@ $n = count($this->items);
 			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
 	<?php endif; ?>
-	
+
 		<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
 		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
 </form>

@@ -15,6 +15,7 @@
 				description="CHOOSE_CATEGORY_DESC"
 				extension="com_newsfeeds"
 				label="CHOOSE_CATEGORY_LABEL"
+				show_root="true"
 				required="true"
 			/>
 		</fieldset>

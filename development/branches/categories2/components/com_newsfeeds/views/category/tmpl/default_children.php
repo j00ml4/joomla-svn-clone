@@ -31,7 +31,7 @@ if(count($this->children[$this->category->id]) > 0) : ?>
 			</span>
 			<?php if ($child->description) : ?>
 				<div class="category-desc">
-					<?php echo JHtml::_('content.prepare', $item->description); ?>
+					<?php echo JHtml::_('content.prepare', $child->description); ?>
 				</div>
 			<?php endif; ?>
 			<?php if(count($child->getChildren()) > 0 && $this->params->get('show_children',0) == 1) :

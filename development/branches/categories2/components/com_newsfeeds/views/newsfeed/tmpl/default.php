@@ -72,7 +72,7 @@ defined('_JEXEC') or die;
 			<?php if ($this->params->get('show_item_description') && $item->get_description()) : ?>
 				<div>
 				<?php $text = $item->get_description();
-				if(!$this->params->get('show_feed_image', 0))
+				if($this->params->get('show_feed_image', 0) === 0)
 				{
 					$text = JFilterOutput::stripImages($text);
 				}
