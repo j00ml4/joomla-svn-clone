@@ -22,7 +22,6 @@ class WeblinksViewCategories extends JView
 	protected $state = null;
 	protected $item = null;
 	protected $items = null;
-	protected $pagination = null;
 
 	/**
 	 * Display the view

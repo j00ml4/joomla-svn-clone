@@ -35,20 +35,26 @@ class WeblinksViewCategory extends JView
 
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
-		$categories	= &$this->get('Categories');
+		$children	= &$this->get('Children');
+		$parent 	= &$this->get('Parent');
 		$pagination	= &$this->get('Pagination');
-
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
-		// Validate the category.
+		if($category == false)
+		{
+			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERRORS_CATEGORY_NOT_FOUND'));
 
-		// Make sure the category was found.
-		if (empty($category)) {
-			return JError::raiseWarning(404, JText::_('COM_WEBLINKS_ERROR_CATEGORY_NOT_FOUND'));
+
+		}
+
+		if($parent == false)
+		{
+			//TODO Raise error for missing parent category here
 		}
 
 		// Check whether category access level allows access.
@@ -79,20 +85,15 @@ class WeblinksViewCategory extends JView
 			}
 		}
 
-		// Compute the categories (list) slug.
-		for ($i = 0, $n = count($categories); $i < $n; $i++)
-		{
-			$item		= &$categories[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-		}
+		$children = array($category->id => $children);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);
-		$this->assignRef('categories',	$categories);
+		$this->assignRef('children',	$children);
 		$this->assignRef('params',		$params);
+		$this->assignRef('parent',		$parent);
 		$this->assignRef('pagination',	$pagination);
-
 
 		$this->_prepareDocument();
 
