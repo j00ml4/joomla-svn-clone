@@ -135,7 +135,7 @@ class ContactViewCategory extends JView
 				$this->document->setTitle($title);
 			}
 			else {
-				$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
+				$this->document->setTitle(JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 			}
 
 			// Set breadcrumbs.
@@ -144,7 +144,7 @@ class ContactViewCategory extends JView
 			}
 		}
 		else {
-			$this->document->setTitle(JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
+			$this->document->setTitle(JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
 
 		// Add alternate feed link

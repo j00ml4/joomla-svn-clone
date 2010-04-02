@@ -37,7 +37,7 @@ class ContactViewContact extends JView
 		$menus	= &JSite::getMenu();
 		$menu	= $menus->getActive();
 
-		$pparams = $this->getModel('contact')->getState()->params;
+		$pparams = $state->params;
 
 		// check if access is registered/special
 		$groups	= $user->authorisedLevels();
@@ -57,7 +57,7 @@ class ContactViewContact extends JView
 		$options['category_id']	= $contact->catid;
 		$options['order by']	= 'cd.default_con DESC, cd.ordering ASC';
 
-		$contacts = &$this->getModel('Category')->getContacts($options);
+		//$contacts = &$this->getModel('Category')->getContacts($options);
 
 		// Set the document page title
 		// because the application sets a default page title, we need to get it
