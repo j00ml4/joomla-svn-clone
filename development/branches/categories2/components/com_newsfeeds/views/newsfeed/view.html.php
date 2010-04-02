@@ -45,6 +45,10 @@ class NewsfeedsViewNewsfeed extends JView
 
 		//get the newsfeed
 		$newsfeed = &$this->get('data');
+		
+		$temp = new JRegistry();
+		$temp->loadJSON($newsfeed->params);
+		$params->merge($temp);
 
 		//  get RSS parsed object
 		$options = array();
@@ -80,15 +84,7 @@ class NewsfeedsViewNewsfeed extends JView
 		$newsfeed->items = array_slice($newsfeed->items, 0, $newsfeed->numarticles);
 
 		// Set page title
-		// because the application sets a default page title, we need to get it
-		// right from the menu item itself
-		if (is_object($menu)) {
-			$menu_params = new JRegistry;
-			$menu_params->loadJSON($menu->params);
-			if (!$menu_params->get('page_title')) {
-				$params->set('page_title',	$newsfeed->name);
-			}
-		} else {
+		if (!$params->get('page_title')) {
 			$params->set('page_title',	$newsfeed->name);
 		}
 		$document->setTitle($params->get('page_title'));
