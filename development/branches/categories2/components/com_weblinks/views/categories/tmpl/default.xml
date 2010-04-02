@@ -10,12 +10,86 @@
 	<fields name="request">
 		<fieldset name="request" label="COM_MENUS_BASIC_FIELDSET_LABEL" description="">
 
-			<field name="category" type="category"
-				description="COM_WEBLINKS_FIELD_CATEGORYCHOOSE_DESC"
+			<field name="id" type="category"
+				description="CHOOSE_CATEGORY_DESC"
 				extension="com_weblinks"
-				label="COM_WEBLINKS_FIELD_CATEGORY_LABEL"
+				label="CHOOSE_CATEGORY_LABEL"
+				show_root="true"
 				required="true"
 			/>
+		</fieldset>
+	</fields>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+
+		<!-- Basic options. -->
+		<fieldset name="basic"
+		>
+
+			<field name="show_headings" type="list"
+				description="COM_WEBLINKS_FIELD_TABLE_HEADINGS_DESC"
+				label="COM_WEBLINKS_FIELD_TABLE_HEADINGS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_name" type="list"
+				description="COM_WEBLINKS_FIELD_NAME_COLUMN_DESC"
+				label="COM_WEBLINKS_FIELD_NAME_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_articles" type="list"
+				description="COM_WEBLINKS_FIELD_NUM_ARTICLES_COLUMN_DESC"
+				label="COM_WEBLINKS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_link" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_LINKS_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_LINKS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_CATEGORY_DESC_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_CATEGORY_DESC_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="show_description_image" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_CATEGORY_IMAGE_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_CATEGORY_IMAGE_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+	
+			<field name="show_item_description" type="list"
+				description="COM_WEBLINKS_FIELD_SHOW_ITEM_DESCRIPTION_DESC"
+				label="COM_WEBLINKS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+	
 		</fieldset>
 	</fields>
 </metadata>
