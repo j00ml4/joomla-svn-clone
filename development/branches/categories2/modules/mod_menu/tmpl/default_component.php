@@ -15,15 +15,15 @@ $class = $item->params->get('menu-anchor_css', '') ? 'class="'.$item->params->ge
 switch ($item->browserNav) :
 	default:
 	case 0:
-?><a <?php echo $class; ?>href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a><?php
+?><a <?php echo $class; ?>href="<?php echo $item->flink; ?>"><?php echo $item->title; ?></a><?php
 		break;
 	case 1:
 		// _blank
-?><a <?php echo $class; ?>href="<?php echo $item->link; ?>" target="_blank"><?php echo $item->title; ?></a><?php
+?><a <?php echo $class; ?>href="<?php echo $item->flink; ?>" target="_blank"><?php echo $item->title; ?></a><?php
 		break;
 	case 2:
 		// window.open
-?><a <?php echo $class; ?>href="<?php echo $item->link.'&amp;tmpl=component'; ?>" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;"><?php echo $item->title; ?></a>
+?><a <?php echo $class; ?>href="<?php echo $item->flink.'&amp;tmpl=component'; ?>" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;"><?php echo $item->title; ?></a>
 <?php
 		break;
 endswitch;

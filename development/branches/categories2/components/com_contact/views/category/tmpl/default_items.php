@@ -76,7 +76,7 @@ JHtml::core();
 					</td>
 
 					<td class="item-title">
-						<a href="<?php echo $item->link; ?>">
+						<a href="<?php echo JRoute::_(ContactHelperRoute::getContactRoute($item->slug, $item->catid)); ?>">
 							<?php echo $item->name; ?></a>
 					</td>
 
