@@ -86,7 +86,7 @@
 	</fieldset>
 
 	<fields name="params" label="COM_NEWSFEEDS_FIELD_OPTIONS">
-		<fieldset name="advanced" label="COM_CONTACT_ATTRIBS_FIELDSET_LABEL">
+		<fieldset name="advanced" label="COM_NEWSFEEDS_ATTRIBS_FIELDSET_LABEL">
 			<field name="show_headings" type="list"
 				label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
 				description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC"
