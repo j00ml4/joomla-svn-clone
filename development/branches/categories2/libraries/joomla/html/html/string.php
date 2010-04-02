@@ -48,7 +48,7 @@ class JHtmlString
 			}
 
 			//put all opened tags into an array
-			preg_match_all ( "#<([a-z]+)( .*)?(?!/)>#iU", $tmp, $result );
+			preg_match_all ( "#<([a-z][a-z0-9]?)( .*)?(?!/)>#iU", $html, $result );
 			$openedtags = $result[1];
 			$openedtags = array_diff($openedtags, array("img", "hr", "br"));
 			$openedtags = array_values($openedtags);
