@@ -65,33 +65,35 @@ JHtml::_('behavior.keepalive');
 </div>
 
 <div class="width-40 fltrt">
-		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_NEWSFEEDS_FIELD_OPTIONS'), 'newsfeeds-options'); ?>
+	<?php echo JHtml::_('sliders.panel',JText::_('COM_NEWSFEEDS_FIELD_OPTIONS'), 'newsfeeds-options'); ?>
 
 	<fieldset class="panelform">
+		<?php echo $this->form->getLabel('numarticles'); ?>
+		<?php echo $this->form->getInput('numarticles'); ?>
 
-			<?php echo $this->form->getLabel('numarticles'); ?>
-			<?php echo $this->form->getInput('numarticles'); ?>
+		<?php echo $this->form->getLabel('cache_time'); ?>
+		<?php echo $this->form->getInput('cache_time'); ?>
 
-			<?php echo $this->form->getLabel('cache_time'); ?>
-			<?php echo $this->form->getInput('cache_time'); ?>
-
-			<?php echo $this->form->getLabel('rtl'); ?>
-			<?php echo $this->form->getInput('rtl'); ?>
-
-		<?php foreach($this->form->getFieldset('params') as $field): ?>
-			<?php if ($field->hidden): ?>
-				<?php echo $field->input; ?>
-			<?php else: ?>
-			<div class="paramrow">
+		<?php echo $this->form->getLabel('rtl'); ?>
+		<?php echo $this->form->getInput('rtl'); ?>
+	</fieldset>
+	<?php
+	$fieldSets = $this->form->getFieldsets('params');
+	foreach ($fieldSets as $name => $fieldSet) :
+		echo JHtml::_('sliders.panel',JText::_($fieldSet->label), $name.'-options');
+		if (isset($fieldSet->description) && trim($fieldSet->description)) :
+			echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
+		endif;
+		?>
+		<fieldset class="panelform">
+			<?php foreach ($this->form->getFieldset($name) as $field) : ?>
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
-			</div>
-			<?php endif; ?>
-		<?php endforeach; ?>
-
-	</fieldset>
+			<?php endforeach; ?>
+		</fieldset>
+	<?php endforeach; ?>
 	
 	<?php echo JHtml::_('sliders.end'); ?>
 </div>
