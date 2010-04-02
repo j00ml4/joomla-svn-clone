@@ -81,6 +81,37 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+
+			<field name="show_children" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_CHILDREN_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_CHILDREN_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field name="max_levels" type="text"
+				description="COM_NEWSFEEDS_FIELD_MAX_LEVELS_DESC"
+				label="COM_NEWSFEEDS_FIELD_MAX_LEVELS_LABEL"
+				default="0"
+				size="6"
+			/>
+			<field name="show_empty_categories" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_EMPTY_CATEGORIES_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_EMPTY_CATEGORIES_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+				<field name="show_item_count" type="list"
+				description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_COUNT_DESC"
+				label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_COUNT_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 		</fieldset>
 
 		<!-- Feed options. -->
@@ -97,7 +128,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-	
+
 			<field name="show_feed_description" type="list"
 				description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC"
 				label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
@@ -106,7 +137,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-	
+
 			<field name="show_item_description" type="list"
 				description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC"
 				label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
@@ -115,11 +146,11 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-	
-			<field name="feed_word_count" type="text"
+
+			<field name="feed_character_count" type="text"
 				default="0"
-				description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC"
-				label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
+				description="COM_NEWSFEEDS_FIELD_CHARACTER_COUNT_DESC"
+				label="COM_NEWSFEEDS_FIELD_CHARACTER_COUNT_LABEL"
 				size="6"
 			/>
 		</fieldset>
