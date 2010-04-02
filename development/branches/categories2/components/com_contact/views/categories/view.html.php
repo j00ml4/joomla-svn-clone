@@ -77,12 +77,17 @@ class ContactViewCategories extends JView
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
 		{
-			$menuParams = new JRegistry;
-			$menuParams->loadJSON($menu->params);
-			$title = $menuParams->get('page_title');
+			if($menu)
+			{
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
+			} 
 		}
+		$title = $this->params->get('page_title');
 		if (empty($title)) {
 			$title	= htmlspecialchars_decode($app->getCfg('sitename'));
 		}
