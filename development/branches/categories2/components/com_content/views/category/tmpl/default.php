@@ -15,6 +15,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
+// angie
+
 <div class="category-list <?php echo $pageClass;?>">
 	<?php if ($this->params->get('show_page_title', 1)) : ?>
 		<h1>
@@ -40,13 +42,13 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<div class="clr"></div>
 		</div>
 	<?php endif; ?>
-	
+
 	<?php if (is_array($this->children) && count($this->children) > 0) : ?>
 		<div class="jcat-children">
 			<?php echo $this->loadTemplate('children'); ?>
 		</div>
 	<?php endif; ?>
-	
+
 	<div class="cat-items">
 		<?php echo $this->loadTemplate('articles'); ?>
 	</div>

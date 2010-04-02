@@ -143,7 +143,7 @@
 			</field>
 
 			<field name="spacer2" type="spacer" hr="true" />
-	
+
 			<field name="show_feed_image" type="list"
 				label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
 				description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC"
@@ -171,9 +171,9 @@
 				<option value="1">JSHOW</option>
 			</field>
 
-			<field name="feed_word_count" type="text" size="6"
-				default="" label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
-				description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
+			<field name="feed_character_count" type="text" size="6"
+				default="" label="COM_NEWSFEEDS_FIELD_CHARACTER_COUNT_LABEL"
+				description="COM_NEWSFEEDS_FIELD_WORD_CHARACTER_DESC" />
 		</fieldset>
 	</fields>
 </form>

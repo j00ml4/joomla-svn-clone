@@ -42,6 +42,7 @@ class ContentViewFeatured extends JView
 
 		$state = $this->get('State');
 		$items = $this->get('Items');
+
 		$pagination = $this->get('Pagination');
 
 		// Check for errors.

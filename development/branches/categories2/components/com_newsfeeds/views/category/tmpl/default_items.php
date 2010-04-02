@@ -33,6 +33,9 @@ $n = count($this->items);
 	<table class="category">
 		<?php if ($this->params->get('show_headings')==1) : ?>
 
+	<table class="category">
+		<?php if ($this->params->get('show_headings')==1) : ?>
+
 		<thead><tr>
 				<?php if ($this->params->get('show_name')) : ?>
 				<th class="item-title" id="tableOrdering">

@@ -526,8 +526,9 @@ class JCategoryNode extends JObject
 	{
 		if(!$this->params instanceof JRegistry)
 		{
-			$this->params = new JRegistry();
-			$this->params->loadJSON($this->params);
+			$temp = new JRegistry();
+			$temp->loadJSON($this->params);
+			$this->params = $temp;
 		}
 		return $this->params;
 	}
