@@ -53,7 +53,7 @@ if ($this->params->get('show_description_image') && $this->category->getParams()
 
 <?php if (!empty($this->children[$this->category->id])) : ?>
 <div class="cat-children">
-	<h3><?php echo JText::_('COM_NEWSFEED_SUB_CATEGORIES') ; ?></h3>
+	<h3><?php echo JText::_('COM_WEBLINKS_SUB_CATEGORIES') ; ?></h3>
 	<?php echo $this->loadTemplate('children'); ?>
 </div>
 <?php endif; ?>

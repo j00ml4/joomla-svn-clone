@@ -65,11 +65,10 @@ function NewsfeedsBuildRoute(&$query)
 			if($view == 'newsfeed' && isset($query['catid']))
 			{
 				$catid = $query['catid'];
-				$menuCatid = $mCatid;
 			} elseif(isset($query['id'])) {
 				$catid = $query['id'];
-				$menuCatid = $mId;
 			}
+			$menuCatid = $mId;
 			$categories = JCategories::getInstance('com_newsfeeds');
 			$category = $categories->get($catid);
 			$path = $category->getPath();
