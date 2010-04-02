@@ -29,13 +29,8 @@ $n = count($this->items);
 		</div>
 	<?php endif; ?>
 	</fieldset>
-<?php print_r($this->params); ?>
 	<table class="category">
 		<?php if ($this->params->get('show_headings')==1) : ?>
-
-	<table class="category">
-		<?php if ($this->params->get('show_headings')==1) : ?>
-
 		<thead><tr>
 				<?php if ($this->params->get('show_name')) : ?>
 				<th class="item-title" id="tableOrdering">
@@ -86,17 +81,17 @@ $n = count($this->items);
 	</table>
 
 	<?php if ($this->params->get('show_pagination')) : ?>
-	 <div class="pagination">
+	<div class="pagination">
 	<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-						<p class="counter">
-							<?php echo $this->pagination->getPagesCounter(); ?>
-						</p>
-   <?php endif; ?>
-			<?php echo $this->pagination->getPagesLinks(); ?>
-		</div>
+		<p class="counter">
+			<?php echo $this->pagination->getPagesCounter(); ?>
+		</p>
+	<?php endif; ?>
+	<?php echo $this->pagination->getPagesLinks(); ?>
+	</div>
 	<?php endif; ?>
 
-		<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
+	<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
 </form>
 <?php endif; ?>
