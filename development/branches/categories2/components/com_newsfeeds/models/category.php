@@ -176,7 +176,7 @@ class NewsfeedsModelCategory extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_articles', 0);
+			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_newsfeeds', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))

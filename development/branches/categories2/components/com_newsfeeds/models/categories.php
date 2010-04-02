@@ -95,7 +95,7 @@ class NewsfeedsModelCategories extends JModel
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_articles', 0);
+			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_newsfeeds', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))

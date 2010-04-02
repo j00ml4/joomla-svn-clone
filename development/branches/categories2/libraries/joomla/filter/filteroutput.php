@@ -185,6 +185,6 @@ class JFilterOutput
 	 */
 	function stripImages($string)
 	{
-		return  preg_replace('/<img(.+)>/', '', $string);
+		return  preg_replace('#(<[/]?img.*>)#U', '', $string);
 	}
 }

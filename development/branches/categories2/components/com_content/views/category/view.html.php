@@ -139,13 +139,6 @@ class ContentViewCategory extends JView
 			$this->link_items[$i] =& $articles[$i];
 		}
 
-		// Compute the children category slugs and prepare description (runs content plugins).
-		foreach ($children as $i => & $child)
-		{
-			$child->slug = $child->route ? ($child->id . ':' . $child->route) : $child->id;
-			$child->description = JHtml::_('content.prepare', $child->description);
-		}
-
 		$this->assign('action', str_replace('&', '&amp;', $uri));
 
 		$this->assignRef('params', $params);

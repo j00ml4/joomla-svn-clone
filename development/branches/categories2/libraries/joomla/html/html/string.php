@@ -35,7 +35,12 @@ class JHtmlString
 		{
 			// Find the first space within the allowed length.
 			$tmp = JString::substr($text, 0, $length);
-			$tmp = JString::substr($tmp, 0, JString::strrpos($tmp, ' '));
+			$offset = JString::strrpos($tmp, ' ');
+			if(JString::strrpos($tmp, '<') > JString::strrpos($tmp, '>'))
+			{
+				$offset = JString::strrpos($tmp, '<');
+			}
+			$tmp = JString::substr($tmp, 0, $offset);
 
 			// If we don't have 3 characters of room, go to the second space within the limit.
 			if (JString::strlen($tmp) >= $length - 3) {
@@ -45,6 +50,8 @@ class JHtmlString
 			//put all opened tags into an array
 			preg_match_all ( "#<([a-z]+)( .*)?(?!/)>#iU", $tmp, $result );
 			$openedtags = $result[1];
+			$openedtags = array_diff($openedtags, array("img", "hr", "br"));
+			$openedtags = array_values($openedtags);
 
 			//put all closed tags into an array
 			preg_match_all ( "#</([a-z]+)>#iU", $tmp, $result );
