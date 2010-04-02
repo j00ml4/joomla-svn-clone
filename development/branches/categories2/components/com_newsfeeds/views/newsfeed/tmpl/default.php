@@ -71,7 +71,12 @@ defined('_JEXEC') or die;
 			<?php endif; ?>
 			<?php if ($this->params->get('show_item_description') && $item->get_description()) : ?>
 				<div>
-				<?php $text = JFilterOutput::closeTags(JHTML::_('string.truncate',$item->get_description(), $this->params->get('feed_word_count')));
+				<?php $text = JHTML::_('string.truncate',$item->get_description(), $this->params->get('feed_word_count'));
+				if(!$this->params->get('show_feed_image', 0))
+				{
+					$text = JFilterOutput::stripImages($text);
+				}
+				$text = JFilterOutput::closeTags($text);
 					echo str_replace('&apos;', "'", $text);
 				?>
 				</div>
