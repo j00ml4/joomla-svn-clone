@@ -10,27 +10,6 @@
 
 defined('_JEXEC') or die;
 ?>
-
-
-
-
-<?php if ($this->params->get('show_page_title')) : ?>
-<h1>
-	<?php if ($this->escape($this->params->get('page_heading'))) :?>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	<?php endif; ?>
-
-
-</h1>
-<?php endif; ?>
-
-<?php if (trim($this->default_page_title) != '') : ?>
-<h1>
-<?php echo $this->default_page_title; ?>
-</h1>
-<?php endif; ?>
 <div class="login<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('logindescription_show')==1 || $this->params->get('login_image')!='') : ?>
 <div class="login-description">

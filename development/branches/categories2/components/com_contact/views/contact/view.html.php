@@ -163,6 +163,8 @@ class ContactViewContact extends JView
 		$this->assignRef('params',		$pparams);
 		$this->assignRef('return',		$return);
 
+		$this->_prepareDocument();		
+		
 		parent::display($tpl);
 	}
 	
@@ -179,14 +181,11 @@ class ContactViewContact extends JView
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if (!$this->params->get('page_heading'))
+		if($menu)
 		{
-			if($menu)
-			{
-				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
-			} else {
-				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
-			} 
+			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+		} else {
+			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
 		
 		$title = $this->params->get('page_title', '');

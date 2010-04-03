@@ -14,6 +14,11 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 
 ?>
+<?php if ($this->params->get('show_page_title')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
 <form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.reset_request'); ?>" method="post" class="form-validate">
 
