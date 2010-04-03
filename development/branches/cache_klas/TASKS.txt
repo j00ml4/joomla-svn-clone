@@ -14,6 +14,7 @@ SMALLER TASKS
 - DONE: add fixed wincache driver
 - DONE: add addIncludepath to JCache and JCacheStorage, fix error if there is no pathway http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/668a7088d00d66aa
 - DONE: replace separate _expire files in file driver with timestamps (cca. 40% speed gain)
+- DONE: change JFactory getFeedParser to use Joomla caching
 - to do: Optimize gc in file cache driver (replace checking timestamps with accounting)
 
 COMPLEX TASKS

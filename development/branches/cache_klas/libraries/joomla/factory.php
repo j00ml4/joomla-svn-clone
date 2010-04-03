@@ -260,11 +260,17 @@ abstract class JFactory
 	public static function getFeedParser($url, $cache_time = 0)
 	{
 		jimport('simplepie.simplepie');
-		if (!is_writable(JPATH_CACHE)) {
-			$cache_time = 0;
-		}
-		$simplepie = new SimplePie($url, JPATH_CACHE, $cache_time);
-		$simplepie->force_feed(true);
+		
+		$cache = JFactory::getCache('feed_parser','callback');
+
+		if ($cache_time > 0) $cache->setLifeTime($cache_time);
+					
+					
+		$simplepie = new SimplePie($url, JPATH_CACHE, 0);
+		
+		$contents =  $cache->get(array($simplepie, 'force_feed'), true);
+		
+
 		if ($simplepie->init()) {
 			return $simplepie;
 		} else {
