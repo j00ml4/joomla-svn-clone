@@ -164,6 +164,22 @@ class ContentViewArticle extends JView
 		}
 		$this->document->setTitle($title);
 		
+		if($menu && $menu->query['view'] != 'article')
+		{
+			$id = (int) @$menu->query['id'];
+			$path = array($this->item->title => '');
+			$category = JCategories::getInstance('com_content')->get($this->item->catid);
+			while($id != $category->id && $category->id > 1)
+			{
+				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
+			}
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
+			}
+		}
 
 	// Unify the introtext and fulltext fields and separated the fields by the {readmore} tag
 		if ($this->item->params->get('show_intro') == 1) 

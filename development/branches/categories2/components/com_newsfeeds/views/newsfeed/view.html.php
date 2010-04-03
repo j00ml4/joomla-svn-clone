@@ -83,19 +83,6 @@ class NewsfeedsViewNewsfeed extends JView
 		// feed elements
 		$newsfeed->items = array_slice($newsfeed->items, 0, $newsfeed->numarticles);
 
-		// Set page title
-		if (!$params->get('page_title')) {
-			$params->set('page_title',	$newsfeed->name);
-		}
-		$document->setTitle($params->get('page_title'));
-
-		//set breadcrumbs
-		$viewname	= JRequest::getString('view');
-		if ($viewname == 'categories') {
-			$pathway->addItem($newsfeed->category, 'index.php?view=category&id='.$newsfeed->catslug);
-		}
-		$pathway->addItem($newsfeed->name, '');
-
 		$this->assignRef('params'  , $params  );
 		$this->assignRef('newsfeed', $newsfeed);
 		
@@ -122,6 +109,22 @@ class NewsfeedsViewNewsfeed extends JView
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
 			$this->params->def('page_heading', JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE')); 
+		}
+		if($menu && $menu->query['view'] != 'newsfeed')
+		{
+			$id = (int) @$menu->query['id'];
+			$path = array($this->newsfeed->name => '');
+			$category = JCategories::getInstance('com_newsfeeds')->get($this->newsfeed->catid);
+			while($id != $category->id && $category->id > 1)
+			{
+				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
+			}
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
+			}
 		}
 		
 		$title = $this->params->get('page_title', '');

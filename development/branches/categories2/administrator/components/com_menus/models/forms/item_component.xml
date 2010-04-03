@@ -22,7 +22,7 @@
 				description="COM_MENUS_ITEM_FIELD_MENU_IMAGE_DESC"
 				default="" />
 	
-			<field name="show_page_title" type="radio"
+			<field name="show_page_heading" type="radio"
 				label="COM_MENUS_ITEM_FIELD_SHOW_PAGE_TITLE_LABEL"
 				description="COM_MENUS_ITEM_FIELD_SHOW_PAGE_TITLE_DESC"
 				default="1" filter="integer"

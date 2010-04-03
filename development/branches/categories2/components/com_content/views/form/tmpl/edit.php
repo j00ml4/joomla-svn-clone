@@ -27,7 +27,7 @@ function submitbutton(task) {
 	}
 }
 </script>
-<?php if ($params->get('show_page_title', 1)) : ?>
+<?php if ($params->get('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($params->get('page_heading')); ?>
 </h1>
