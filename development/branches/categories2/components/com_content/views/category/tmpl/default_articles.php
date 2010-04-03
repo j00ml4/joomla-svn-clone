@@ -34,7 +34,7 @@ $n = count($this->articles);
 
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('COM_NEWSFEEDS_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('COM_CONTENT_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	<?php endif; ?>
@@ -72,7 +72,7 @@ $n = count($this->articles);
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
 				<td class="list-title">
-					<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catslug)); ?>">
+					<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
 					<?php echo $this->escape($article->title); ?></a>
 				</td>
 				<?php if ($this->params->get('show_date') != 'hide') : ?>

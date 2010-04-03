@@ -46,23 +46,14 @@ function WeblinksBuildRoute(&$query)
 	if (isset($query['view']))
 	{
 		$view = $query['view'];
-		unset($query['view']);
 		if (empty($query['Itemid'])) {
-			$segments[] = $view;
-			if(isset($query['id']))
-			{
-				$segments[] = $query['id'];
-				unset($query['id']);
-			}
-			if (isset($query['layout']) && $query['layout'] == 'default') {
-				unset($query['layout']);
-			}
-			return $segments;
+			$segments[] = $query['view'];
 		}
+		unset($query['view']);
 	}
 
 	// are we dealing with an weblink that is attached to a menu item?
-	if (($mView == 'category' || $mView == 'weblink') and (isset($query['id'])) and ($mId == intval($query['id']))) {
+	if (isset($query['view']) && ($mView == $query['view']) and (isset($query['id'])) and ($mId == intval($query['id']))) {	
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
@@ -70,54 +61,60 @@ function WeblinksBuildRoute(&$query)
 	}
 
 	if (isset($view) and ($view == 'category' or $view == 'weblink')) {
-		if($view == 'weblink' && isset($query['catid']))
-		{
-			$catid = $query['catid'];
-			$menuCatid = $mCatid;
-			$wid = $query['id'];
-		} elseif(isset($query['id'])) {
-			$catid = $query['id'];
+		if ($mId != intval($query['id']) || $mView != $view) {
+			if($view == 'weblink' && isset($query['catid']))
+			{
+				$catid = $query['catid'];
+			} elseif(isset($query['id'])) {
+				$catid = $query['id'];
+			}
 			$menuCatid = $mId;
-			$wid = false;
-		}
-		$categories = JCategories::getInstance('com_weblinks');
-		$category = $categories->get($catid);
-		$path = $category->getPath();
-		$path = array_reverse($path);
+			$categories = JCategories::getInstance('com_weblinks');
+			$category = $categories->get($catid);
+			$path = $category->getPath();
+			$path = array_reverse($path);
 		
-		$array = array();
-		foreach($path as $id)
-		{
-			if((int) $id == (int)$menuCatid)
+			$array = array();
+			foreach($path as $id)
 			{
-				break;
+				if((int) $id == (int)$menuCatid)
+				{
+					break;
+				}
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $id, 2);
+				}
+				$array[] = $id;
 			}
-			if($advanced)
+			$segments = array_merge($segments, array_reverse($array));
+			if($view == 'weblink')
 			{
-				list($tmp, $id) = explode(':', $id, 2);
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $query['id'], 2);
+				} else {
+					$id = $query['id'];
+				}
+				$segments[] = $id;
 			}
-			$array[] = $id;
-		}
-		$segments = array_merge($segments, array_reverse($array));
-		if($view == 'weblink')
-		{
-			if($advanced)
-			{
-				list($tmp, $wid) = explode(':', $wid, 2);
-			}
-			$segments[] = $wid;
 		}
 		unset($query['id']);
 		unset($query['catid']);
 	}
-
-	if (isset($query['layout']) 
-	&& !empty($query['Itemid']) 
-	&& isset($menuItem->query['layout']) 
-	&& $query['layout'] == $menuItem->query['layout'])
+	if (isset($query['layout']))
 	{
-		unset($query['layout']);
-	}
+		if (!empty($query['Itemid']) && isset($menuItem->query['layout']))
+		{
+			if ($query['layout'] == $menuItem->query['layout']) {
+				unset($query['layout']);
+			}
+		} else {
+			if ($query['layout'] == 'default') {
+				unset($query['layout']);
+			}
+		}
+	};
 
 	return $segments;
 }

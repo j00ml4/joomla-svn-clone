@@ -108,29 +108,43 @@ class WeblinksViewCategory extends JView
 		$app		= &JFactory::getApplication();
 		$menus		= &JSite::getMenu();
 		$pathway	= &$app->getPathway();
+		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
 		{
-			$menuParams = new JRegistry;
-			$menuParams->loadJSON($menu->params);
-			if ($title = $menuParams->get('page_title')) {
-				$this->document->setTitle($title);
+			if($menu)
+			{
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			} 
+		}		
+		if($menu && $menu->query['view'] != 'weblink' && $menu->query['id'] != $this->category->id)
+		{
+			$this->params->set('page_subheading', $this->category->title);
+			$path = array($this->item->title => '');
+			$category = $this->item->getParent();
+			while($menu->query['id'] != $category->id)
+			{
+				$path[$category->title] = WeblinksHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
 			}
-			else {
-				$this->document->setTitle(JText::_('COM_WEBLINKS_WEB_LINKS'));
-			}
-
-			// Set breadcrumbs.
-			if ($menu->query['view'] != 'category') {
-				$pathway->addItem($this->category->title, '');
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
 			}
 		}
-		else {
-			$this->document->setTitle(JText::_('COM_WEBLINKS_WEB_LINKS'));
+		
+		$title = $this->params->get('page_title', '');
+		if (empty($title))
+		{
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
-	
+		$this->document->setTitle($title);
 			
 		// Add alternate feed link
 		if ($this->params->get('show_feed_link', 1) == 1)

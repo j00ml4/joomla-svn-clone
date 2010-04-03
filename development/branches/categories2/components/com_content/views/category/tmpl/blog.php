@@ -17,19 +17,17 @@ $cparams =& JComponentHelper::getParams('com_media');
 // It will be a separate class if the user starts it with a space
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-
-<div class="blog<?php echo $pageClass;?>">
-
 <?php if ($this->params->get('show_page_title', 1)) : ?>
 <h1>
-	<?php if ($this->escape($this->params->get('page_heading'))) :?>
+	<?php if($this->params->get('show_category_title', 1) && $this->params->get('page_subheading')) : ?>
+		<?php echo $this->escape($this->params->get('page_heading')).': '.$this->params->get('page_subheading'); ?>
+	<?php else :  ?>
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($this->params->get('page_title')); ?>
 	<?php endif; ?>
 </h1>
 <?php endif; ?>
 
+<div class="blog<?php echo $pageClass;?>">
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 <div class="category-desc">
 		<?php if ($this->params->get('show_description_image') && $this->item->getParams()->get('image')) : ?>

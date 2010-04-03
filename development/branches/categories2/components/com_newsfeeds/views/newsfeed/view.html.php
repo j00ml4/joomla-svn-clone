@@ -98,7 +98,40 @@ class NewsfeedsViewNewsfeed extends JView
 
 		$this->assignRef('params'  , $params  );
 		$this->assignRef('newsfeed', $newsfeed);
+		
+		$this->_prepareDocument();
 
 		parent::display($tpl);
+	}
+
+	/**
+	 * Prepares the document
+	 */
+	protected function _prepareDocument()
+	{
+		$app		= &JFactory::getApplication();
+		$menus		= &JSite::getMenu();
+		$pathway	= &$app->getPathway();
+		$title 		= null;
+
+		// Because the application sets a default page title,
+		// we need to get it from the menu item itself
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
+		{
+			if($menu)
+			{
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			} 
+		}
+		
+		$title = $this->params->get('page_title', '');
+		if (empty($title))
+		{
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		$this->document->setTitle($title);
 	}
 }

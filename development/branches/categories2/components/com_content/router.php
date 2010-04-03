@@ -22,6 +22,9 @@ function ContentBuildRoute(&$query)
 
 	// get a menu item based on Itemid or currently active
 	$menu = &JSite::getMenu();
+	$params = JComponentHelper::getParams('com_content');
+	$advanced = $params->get('sef_advanced_link', 0);
+	
 
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
@@ -46,44 +49,56 @@ function ContentBuildRoute(&$query)
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
+		return $segments;
 	}
 
-	if (isset($view) and (($view == 'category' && isset($query['id'])) || ($view == 'article' && isset($query['catid'])))) {
-		if($view == 'article')
-		{
-			$catid = $query['catid'];
-			unset($query['catid']);
-		} else {
-			$catid = $query['id'];
-			unset($query['id']);
-		}
-		$categories = JCategories::getInstance('com_content');
-		$category = $categories->get($catid);
-		if(!$category)
-		{
-			die('The category is not published or does not exist');
-			//TODO Throw error that the category either not exists or is unpublished	
-		}
-		$path = array_reverse($category->getPath());
-			
-		$array = array();
-		foreach($path as $id)
-		{
-			if((int) $id == (int)$mId)
+	if (isset($view) and ($view == 'category' or $view == 'article')) {
+		if ($mId != intval($query['id']) || $mView != $view) {
+			if($view == 'article' && isset($query['catid']))
 			{
-				break;
+				$catid = $query['catid'];
+			} elseif(isset($query['id'])) {
+				$catid = $query['id'];
 			}
-			$array[] = $id;
+			$menuCatid = $mId;
+			$categories = JCategories::getInstance('com_content');
+			$category = $categories->get($catid);
+			if(!$category)
+			{
+				die('The category is not published or does not exist');
+				//TODO Throw error that the category either not exists or is unpublished	
+			}
+			$path = array_reverse($category->getPath());
+			
+			$array = array();
+			foreach($path as $id)
+			{
+				if((int) $id == (int)$menuCatid)
+				{
+					break;
+				}
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $id, 2);
+				}
+				$array[] = $id;
+			}
+			$segments = array_merge($segments, array_reverse($array));
+			if($view == 'contact')
+			{
+				if($advanced)
+				{
+					list($tmp, $id) = explode(':', $query['id'], 2);
+				} else {
+					$id = $query['id'];
+				}
+				$segments[] = $id;
+			}
 		}
-		$segments = array_merge($segments, array_reverse($array));
-	}
-	
-	if(isset($view) && $view == 'article' && isset($query['id']))
-	{
-		$segments[] = $query['id'];
 		unset($query['id']);
+		unset($query['catid']);
 	}
-
+			
 	if (isset($query['year']))
 	{
 		if (!empty($query['Itemid'])) {

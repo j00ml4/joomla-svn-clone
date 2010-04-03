@@ -113,7 +113,9 @@ class ContentViewArticle extends JView
 		$results = $dispatcher->trigger('onAfterDisplayContent', array(&$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
+		$params = $state->get('params');
 		$this->assignRef('state', $state);
+		$this->assignRef('params', $params);
 		$this->assignRef('item', $item);
 		$this->assignRef('user', $user);
 		$this->assign('print', $print);
@@ -140,25 +142,31 @@ class ContentViewArticle extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app =& JFactory::getApplication();
-		$pathway =& $app->getPathway();
-		$menus =& JSite::getMenu();
-		$title = null;
+		$app		= &JFactory::getApplication();
+		$menus		= &JSite::getMenu();
+		$pathway	= &$app->getPathway();
+		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
 		{
-			if (isset($menu->query['view']) && isset($menu->query['id']))
+			if($menu)
 			{
-				if ($menu->query['view'] == 'article' && $menu->query['id'] == $this->item->id)
-				{
-					$menuParams = new JRegistry;
-					$menuParams->loadJSON($menu->params);
-					$title = $menuParams->get('page_title');
-				}
-			}
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			} 
 		}
+		
+		$title = $this->params->get('page_title', '');
+		if (empty($title))
+		{
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		$this->document->setTitle($title);
+		
 
 	// Unify the introtext and fulltext fields and separated the fields by the {readmore} tag
 		if ($this->item->params->get('show_intro') == 1) 

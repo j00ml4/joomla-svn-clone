@@ -15,18 +15,12 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // Create shortcut to parameters.
 $params = $this->item->params;
 ?>
-
-
-<div class="item-page<?php echo $params->get('pageclass_sfx')?>">
-	<?php if ($params->get('show_page_title')) : ?>
+<?php if ($this->params->get('show_page_title', 1)) : ?>
 <h1>
-	<?php if ($this->escape($params->get('page_heading'))) :?>
-		<?php echo $this->escape($params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($params->get('page_title')); ?>
-	<?php endif; ?>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
+<div class="item-page<?php echo $params->get('pageclass_sfx')?>">
 
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>
 		<h2>

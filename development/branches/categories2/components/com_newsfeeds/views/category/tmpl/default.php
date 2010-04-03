@@ -13,21 +13,17 @@ defined('_JEXEC') or die;
 
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-
-<div class="newsfeed-category<?php echo $pageClass;?>">
-
 <?php if ($this->params->def('show_page_title', 1)) : ?>
-	<h1>
-		<?php if ($this->escape($this->params->get('page_heading'))) :?>
-			<?php echo $this->escape($this->params->get('page_heading')); ?>
-		<?php else : ?>
-			<?php echo $this->escape($this->params->get('page_title')); ?>
-		<?php endif; ?>
-	</h1>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
 <?php endif; ?>
-	<h2>
-		<?php echo $this->escape($this->category->title); ?>
-	</h2>
+<div class="newsfeed-category<?php echo $pageClass;?>">
+<?php if($this->params->get('show_category_title', 1) && $this->params->get('page_subheading')) : ?>
+<h2>
+	<?php echo $this->escape($this->params->get('page_subheading')); ?>
+</h2>
+<?php endif; ?>
 
 
 	<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
