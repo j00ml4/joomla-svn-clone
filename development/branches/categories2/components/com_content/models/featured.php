@@ -39,9 +39,15 @@ class ContentModelFeatured extends ContentModelArticles
 
 		// Add blog properties
 		$params = $this->_state->params;
+
+		// List state information
+		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
+		$this->setState('list.start', $limitstart);
+		
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		$this->setState('list.limit', $limit);
 		$this->setState('list.links', $params->get('num_links'));
+		
 		$this->setState('filter.frontpage', true);
 		
 		// check for category selection

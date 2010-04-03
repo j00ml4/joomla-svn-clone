@@ -41,13 +41,11 @@ class ContentViewCategory extends JView
 		$app =& JFactory::getApplication();
 		$uri =& JFactory::getURI();
 
-		$state = $this->get('State');
-		$params =& $state->params;
-		$item = $this->get('Item');
-		$articles = $this->get('Articles');
-
-		// Get child categories based on params
-		$pagination = $this->get('Pagination');
+		$state 		= $this->get('State');
+		$params 	=& $state->params;
+		$item 		= $this->get('Item');
+		$articles 	= $this->get('Articles');
+		$pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

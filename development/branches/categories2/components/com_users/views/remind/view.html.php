@@ -33,7 +33,6 @@ class UsersViewRemind extends JView
 		$form	= &$this->get('Form');
 		$data	= &$this->get('Data');
 		$state	= $this->get('State');
-		$params	= $state->get('params');
 
 		// Check for errors.
 		if (count($errors = &$this->get('Errors'))) {
@@ -45,6 +44,8 @@ class UsersViewRemind extends JView
 		if ($form) {
 			$form->bind($data);
 		}
+		
+		$params = &$state->params;
 
 		// Push the data into the view.
 		$this->assignRef('form',	$form);

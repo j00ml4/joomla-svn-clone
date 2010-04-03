@@ -29,9 +29,9 @@ class ContentViewArchive extends JView
 		$app =& JFactory::getApplication();
 		$user		= &JFactory::getUser();
 		
-		$state = $this->get('State');
-		$items = $this->get('Items');
-		$pagination = $this->get('Pagination');
+		$state 		= $this->get('State');
+		$items 		= $this->get('Items');
+		$pagination	= $this->get('Pagination');
 		
 		$pathway	= &$app->getPathway();
 		$document	= &JFactory::getDocument();

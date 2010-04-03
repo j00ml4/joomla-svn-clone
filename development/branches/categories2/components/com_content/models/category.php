@@ -69,9 +69,7 @@ class ContentModelCategory extends JModelItem
 		// Load state from the request.
 		$pk = JRequest::getInt('id');
 		$this->setState('category.id', $pk);
-
-		// TODO: Add pagination for children , siblings??
-		
+				
 		$params = $app->getParams();
 		$this->setState('params', $params);
 

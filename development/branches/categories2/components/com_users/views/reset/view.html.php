@@ -33,7 +33,6 @@ class UsersViewReset extends JView
 		$form	= &$this->get('Form');
 		$data	= &$this->get('Data');
 		$state	= $this->get('State');
-		$params	= $state->get('params');
 
 		// Check for errors.
 		if (count($errors = &$this->get('Errors'))) {
@@ -46,6 +45,8 @@ class UsersViewReset extends JView
 			$form->bind($data);
 		}
 
+		$params = &$state->params;
+		
 		// Push the data into the view.
 		$this->assignRef('form',	$form);
 		$this->assignRef('data',	$data);
