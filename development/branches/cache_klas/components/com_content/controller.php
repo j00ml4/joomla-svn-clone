@@ -33,14 +33,9 @@ class ContentController extends JController
 		JRequest::setVar('view', $vName);
 
 		$user = &JFactory::getUser();
-		/* @Todo Check which vies & layouts need cache off
-		 if ($user->get('id') ||
-			($vName == 'category' && JRequest::getVar('layout') != 'blog' && $_SERVER['REQUEST_METHOD'] == 'POST') ||
-			$vName == 'archive' && $_SERVER['REQUEST_METHOD'] == 'POST') {
-			$cachable = false;
-			}**/
-
-		if ($user->get('id') ||$_SERVER['REQUEST_METHOD'] == 'POST') {
+		
+		if ($user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST' && 
+			(($vName = 'category' && JRequest::getVar('layout') != 'blog') || $vName = 'archive' ))) {
 			$cachable = false;
 		}
 
@@ -48,16 +43,7 @@ class ContentController extends JController
 		$safeurlparams = array('catid'=>'INT','id'=>'INT','cid'=>'ARRAY','year'=>'INT','month'=>'INT','limit'=>'INT','limitstart'=>'INT',
 			'showall'=>'INT','return'=>'BASE64','filter'=>'STRING','filter_order'=>'CMD','filter_order_Dir'=>'CMD','filter-search'=>'STRING','print'=>'BOOLEAN');
 			
-		// Create the profiler object.
-		$p = JProfiler::getInstance('Application');
-
-		$p->mark('Start');
-		for ($i=0; $i<=10; $i++) {
-			parent::display($cachable,$safeurlparams);
-		}
-		$p->mark('Stop');
-
-		print_r($p->getBuffer());
+			parent::display($cachable,$safeurlparams);		
 
 	}
 

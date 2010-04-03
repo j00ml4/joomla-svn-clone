@@ -61,7 +61,7 @@ class WeblinksModelCategory extends JModelList
 			{
 				$item->_params	= $item->params;
 				$item->params = new JRegistry;
-				$item->params->loadJSON($menu->params);
+				$item->params->loadJSON($item->params);
 			}
 		}
 
