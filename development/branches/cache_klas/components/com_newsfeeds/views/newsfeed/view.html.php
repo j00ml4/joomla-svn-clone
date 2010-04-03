@@ -27,13 +27,6 @@ class NewsfeedsViewNewsfeed extends JView
 	{
 		$app = JFactory::getApplication();
 
-		// check if cache directory is writeable
-		$cacheDir = JPATH_BASE.DS.'cache'.DS;
-		if (!is_writable($cacheDir)) {
-			echo JText::_('CACHE_DIRECTORY_UNWRITABLE');
-			return;
-		}
-
 		// Get some objects from the JApplication
 		$pathway  = &$app->getPathway();
 		$document = &JFactory::getDocument();
