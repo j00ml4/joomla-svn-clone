@@ -20,6 +20,7 @@ $params = $this->item->params;
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
+
 <div class="item-page<?php echo $params->get('pageclass_sfx')?>">
 
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>

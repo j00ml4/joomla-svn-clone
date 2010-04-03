@@ -20,8 +20,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-<div class="categories-list<?php echo $pageClass;?>">
 
+<div class="categories-list<?php echo $pageClass;?>">
 <?php
 echo $this->loadTemplate('items');
 ?>

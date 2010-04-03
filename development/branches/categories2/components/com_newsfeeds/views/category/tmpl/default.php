@@ -18,6 +18,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
+
 <div class="newsfeed-category<?php echo $pageClass;?>">
 <?php if($this->params->get('show_category_title', 1) && $this->params->get('page_subheading')) : ?>
 <h2>

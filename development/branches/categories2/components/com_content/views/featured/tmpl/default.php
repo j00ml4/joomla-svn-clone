@@ -17,18 +17,13 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // It will be a separate class if the user starts it with a space
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-
-<div class="blog-featured<?php echo $pageClass;?>">
-
 <?php if ($this->params->get('show_page_title', 1)) : ?>
 <h1>
-	<?php if ($this->escape($this->params->get('page_heading'))) :?>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	<?php endif; ?>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
+
+<div class="blog-featured<?php echo $pageClass;?>">
 <?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
 <div class="items-leading">

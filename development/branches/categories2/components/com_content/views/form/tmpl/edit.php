@@ -27,17 +27,14 @@ function submitbutton(task) {
 	}
 }
 </script>
-
-<div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 <?php if ($params->get('show_page_title', 1)) : ?>
 <h1>
-	<?php if ($this->escape($params->get('page_heading'))) :?>
-		<?php echo $this->escape($params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($params->get('page_title')); ?>
-	<?php endif; ?>
+	<?php echo $this->escape($params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
+
+<div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
+
 
 <form action="<?php echo JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>

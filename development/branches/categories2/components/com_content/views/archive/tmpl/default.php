@@ -13,18 +13,13 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
+<?php if ($this->params->get('show_page_title', 1)) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
 <div class="archive<?php echo $pageClass;?>">
-	<?php if ($this->params->get('show_page_title', 1)) : ?>
-	<h1>
-		<?php if ($this->escape($this->params->get('page_heading'))) :?>
-			<?php echo $this->escape($this->params->get('page_heading')); ?>
-		<?php else : ?>
-			<?php echo $this->escape($this->params->get('page_title')); ?>
-		<?php endif; ?>
-	</h1>
-	<?php endif; ?>
-
 <form id="jForm" action="<?php JRoute::_('index.php')?>" method="post">
 	<fieldset class="filters">
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>

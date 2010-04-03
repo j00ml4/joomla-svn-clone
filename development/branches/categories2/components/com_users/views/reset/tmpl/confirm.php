@@ -12,6 +12,11 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.mootools');
 JHtml::_('behavior.formvalidation');
 ?>
+<?php if ($this->params->get('show_page_title')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&task=reset.confirm'); ?>" method="post" class="form-validate">
 

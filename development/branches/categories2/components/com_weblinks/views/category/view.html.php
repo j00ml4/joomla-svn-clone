@@ -113,21 +113,19 @@ class WeblinksViewCategory extends JView
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if (!$this->params->get('page_heading'))
+		if($menu)
 		{
-			if($menu)
-			{
-				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
-			} else {
-				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
-			} 
-		}		
-		if($menu && $menu->query['view'] != 'weblink' && $menu->query['id'] != $this->category->id)
+			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+		} else {
+			$this->params->def('page_heading', JText::_('COM_WEBLINKS_DEFAULT_PAGE_TITLE'));
+		} 
+		$id = (int) @$menu->query['id'];
+		if($menu && $menu->query['view'] != 'weblink' && $id != $this->category->id)
 		{
 			$this->params->set('page_subheading', $this->category->title);
-			$path = array($this->item->title => '');
-			$category = $this->item->getParent();
-			while($menu->query['id'] != $category->id)
+			$path = array($this->category->title => '');
+			$category = $this->category->getParent();
+			while($id != $category->id)
 			{
 				$path[$category->title] = WeblinksHelperRoute::getCategoryRoute($category->id);
 				$category = $category->getParent();

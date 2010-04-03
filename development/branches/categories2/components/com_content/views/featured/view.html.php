@@ -141,20 +141,21 @@ class ContentViewFeatured extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app =& JFactory::getApplication();
-		$menus =& JSite::getMenu();
-		$title = null;
+		$app		= &JFactory::getApplication();
+		$menus		= &JSite::getMenu();
+		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if($menu)
 		{
-			$menuParams = new JObject(json_decode($menu->params, true));
-			if ($pageTitle = $menuParams->get('page_title'))
-			{
-				$title = $pageTitle;
-			}
+			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+		} else {
+			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE')); 
 		}
+		
+		$title = $this->params->get('page_title', '');
 		if (empty($title))
 		{
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
