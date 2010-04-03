@@ -792,15 +792,26 @@ class MenusModelItem extends JModelForm
 					}
 				}
 
-				// TODO: Now check for a view manifest file
-				// TODO: Now check for a component manifest file
+				$viewManifest = JPath::clean($base.'/views/'.$view.'/metadata.xml');
+				if(JFile::exists($viewManifest))
+				{
+					if ($form->loadFile($viewManifest, false, '/metadata') == false) {
+						throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+					}
+				}
+				
+				$componentManifest = JPath::clean($base.'/metadata.xml');
+				if(JFile::exists($componentManifest))
+				{
+					if ($form->loadFile($componentManifest, false, '/metadata') == false) {
+						throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+					}
+				}
 			}
 
 			if ($formFile) {
 				// If an XML file was found in the component, load it first.
 				// We need to qualify the full path to avoid collisions with component file names.
-
-				//$form = parent::getForm($formFile, $formName, $formOptions, true);
 
 				if ($form->loadFile($formFile, false, '/metadata') == false) {
 					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
@@ -808,15 +819,11 @@ class MenusModelItem extends JModelForm
 			}
 
 			// Now load the component params.
-			if ($isNew = false) {
-				$path = JPath::clean(JPATH_ADMINISTRATOR.'/components/'.$option.'/config.xml');
-			} else {
-				$path='null';
-			}
+			$path = JPath::clean(JPATH_ADMINISTRATOR.'/components/'.$option.'/config.xml');
 
 			if (JFile::exists($path)) {
 				// Add the component params last of all to the existing form.
-				if (!$form->load($path, true, '/config')) {
+				if (!$form->loadFile($path, true, '/config')) {
 					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
 				}
 			}

@@ -60,7 +60,7 @@ class UsersViewProfile extends JView
 		$pathway	= &$app->getPathway();
 		$menus		= &$app->getMenu();
 		$menu		= &$menus->getActive();
-
+		$this->assign('default_page_title', '');
 		// Append the current member to the breadcrumb if we came from a users view menu item.
 		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'users')
 		{
@@ -81,7 +81,7 @@ class UsersViewProfile extends JView
 		}
 		else
 		{
-			$params->set('page_title', $data->name);
+			$this->assign('default_page_title', $data->name);
 		}
 
 		// Set the document title.
