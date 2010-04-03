@@ -84,7 +84,7 @@ function ContentBuildRoute(&$query)
 				$array[] = $id;
 			}
 			$segments = array_merge($segments, array_reverse($array));
-			if($view == 'contact')
+			if($view == 'article')
 			{
 				if($advanced)
 				{

@@ -61,24 +61,6 @@ class ContactViewContact extends JView
 
 		//$contacts = &$this->getModel('Category')->getContacts($options);
 
-		// Set the document page title
-		// because the application sets a default page title, we need to get it
-		// right from the menu item itself
-		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'contact' && isset($menu->query['id']) && $menu->query['id'] == $contact->id) {
-			$menuParams = new JRegistry;
-			$menuParams->loadJSON($menu->params);
-			if (!$menuParams->get('page_title')) {
-				$pparams->set('page_title',	$contact->name);
-			}
-		} else {
-			$pparams->set('page_title',	$contact->name);
-		}
-		$document->setTitle($pparams->get('page_title'));
-
-		//set breadcrumbs
-		if (isset($menu) && isset($menu->query['view']) && $menu->query['view'] != 'contact'){
-			$pathway->addItem($contact->name, '');
-		}
 
 		// Make contact parameters available to views
 		$contact->params = new JRegistry;
@@ -186,6 +168,22 @@ class ContactViewContact extends JView
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
+		}
+		if($menu && $menu->query['view'] != 'contact')
+		{
+			$id = (int) @$menu->query['id'];
+			$path = array($this->contact->name => '');
+			$category = JCategories::getInstance('com_contact')->get($this->contact->catid);
+			while($id != $category->id && $category->id > 1)
+			{
+				$path[$category->title] = ContactHelperRoute::getCategoryRoute($this->contact->catid);
+				$category = $category->getParent();
+			}
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
+			}
 		}
 		
 		$title = $this->params->get('page_title', '');

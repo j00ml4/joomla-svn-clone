@@ -125,7 +125,7 @@ class NewsfeedsViewCategory extends JView
 			$this->params->set('page_subheading', $this->category->title);
 			$path = array($this->category->title => '');
 			$category = $this->category->getParent();
-			while($id != $category->id)
+			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);
 				$category = $category->getParent();

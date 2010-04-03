@@ -167,13 +167,14 @@ class ContentViewCategory extends JView
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
 			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE')); 
-		}		
-		if($menu && $menu->query['view'] != 'article' && $menu->query['id'] != $this->item->id)
+		}
+		$id = @$menu->query['id'];
+		if($menu && $menu->query['view'] != 'article' && $id != $this->item->id)
 		{
 			$this->params->set('page_subheading', $this->item->title);
 			$path = array($this->item->title => '');
 			$category = $this->item->getParent();
-			while($menu->query['id'] != $category->id)
+			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);
 				$category = $category->getParent();
@@ -220,10 +221,8 @@ class ContentViewCategory extends JView
 		if ($this->params->get('show_feed_link', 1))
 		{
 			$link = '&format=feed&limitstart=';
-
 			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
 			$this->document->addHeadLink(JRoute::_($link . '&type=rss'), 'alternate', 'rel', $attribs);
-
 			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
 			$this->document->addHeadLink(JRoute::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
 		}

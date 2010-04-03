@@ -112,6 +112,12 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+				<field name="categories_description" type="textarea"
+				description="COM_NEWSFEEDS_FIELD_CATEGORIES_DESC_DESC"
+				label="COM_NEWSFEEDS_FIELD_CATEGORIES_DESC_LABEL"
+				cols="25"
+				rows="5"
+			/>
 		</fieldset>
 
 		<!-- Feed options. -->

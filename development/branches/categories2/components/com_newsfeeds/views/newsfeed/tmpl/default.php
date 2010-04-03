@@ -36,7 +36,7 @@ if ($lang->isRTL() && $myrtl == 0) {
 						$direction = " redirect-rtl";
 					}
 ?>
-<?php if ($this->params->get('show_page_title', 1)) : ?>
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
 <h1 class="<?php echo $direction; ?>">
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>

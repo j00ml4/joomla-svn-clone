@@ -80,7 +80,7 @@ class ContactViewCategories extends JView
 		$menu = $menus->getActive();
 		if($menu)
 		{
-			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+			$this->params->def('page_heading', $this->params->def('page_title', $menu->title));
 		} else {
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		} 

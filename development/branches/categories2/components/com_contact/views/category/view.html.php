@@ -135,12 +135,13 @@ class ContactViewCategory extends JView
 		} else {
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE')); 
 		}		
-		if($menu && $menu->query['view'] != 'contact' && $menu->query['id'] != $this->category->id)
+		$id = (int) @$menu->query['id'];
+		if($menu && $menu->query['view'] != 'contact' && $id != $this->category->id)
 		{
 			$this->params->set('page_subheading', $this->category->title);
 			$path = array($this->category->title => '');
 			$category = $this->category->getParent();
-			while($menu->query['id'] != $category->id)
+			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = ContactHelperRoute::getCategoryRoute($category->id);
 				$category = $category->getParent();
@@ -162,7 +163,7 @@ class ContactViewCategory extends JView
 		// Add alternate feed link
 		if ($this->params->get('show_feed_link', 1) == 1)
 		{
-			$link	= '&view=category&id='.$this->category->slug.'&format=feed&limitstart=';
+			$link	= '&format=feed&limitstart=';
 			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
 			$this->document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
 			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');

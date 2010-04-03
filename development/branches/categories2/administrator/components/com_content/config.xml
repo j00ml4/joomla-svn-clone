@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+	<fields name="params">
 	<fieldset
 		name="articles"
 		label="Content_Config_Article_Settings_Label"
@@ -314,6 +315,7 @@
 		name="list_default_parameters"
 		label="Content_Config_List_Settings_Label"
 		description="Content_Config_List_Settings_Desc"
+		hidden="true"
 		>
 
 		<field
@@ -643,7 +645,7 @@
 			description="JGLOBAL_Filter_Attributes_Desc"
 			default="" />
 	</fieldset>
-
+	</fields>
 	<fieldset
 		name="permissions"
 		label="JConfig_Permissions_Label"
