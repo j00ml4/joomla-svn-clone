@@ -73,10 +73,7 @@ class ContactModelContact extends JModelItem
 				$query->select('c.title AS category_title, c.alias AS category_alias, c.access AS category_access');
 				$query->join('LEFT', '#__categories AS c on c.id = a.catid');
 
-				// Join on user table.
-				$query->select('u.name AS author');
-				$query->join('LEFT', '#__users AS u on u.id = a.created_by');
-
+				
 				// Join over the categories to get parent category titles
 				$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 				$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
@@ -102,21 +99,12 @@ class ContactModelContact extends JModelItem
 					throw new Exception(JText::_('Contact_Error_Contact_not_found'), 404);
 				}
 
-				// Check for published state if filter set.
-				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) && ($data->state != $archived))) 
-				{
-					throw new Exception(JText::_('Content_Error_Article_not_found'), 404);
-				}
 
 				// Convert parameter fields to objects.
-				/**$registry = new JRegistry;
-				$registry->loadJSON($data->attribs);
+				$registry = new JRegistry;
+				$registry->loadJSON($data->params);
 				$data->params = clone $this->getState('params');
 				$data->params->merge($registry);
-
-				$registry = new JRegistry;
-				$registry->loadJSON($data->metadata);
-				$data->metadata = $registry;
 
 				// Compute access permissions.
 				if ($access = $this->getState('filter.access')) {
@@ -135,7 +123,7 @@ class ContactModelContact extends JModelItem
 						$data->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
 					}
 				}
-**/
+
 				$this->_item[$pk] = $data;
 			}
 			catch (Exception $e)

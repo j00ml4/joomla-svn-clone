@@ -25,13 +25,15 @@ class ContactViewContact extends JView
 	{
 		$app		= &JFactory::getApplication();
 		$user		= &JFactory::getUser();
-		$pathway	= &$app->getPathway();
 		$document	= & JFactory::getDocument();
 		$state		= $this->get('State');
-		$contact	= $this->get('Contact');
+		$contact	= $this->get('Item');
 
-		// report any errors and exit if they exist
-		$this->reportErrors($this->get('Errors'));
+		// Check for errors.
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
+			return false;
+		}
 
 		// Get the parameters of the active menu item
 		$menus	= &JSite::getMenu();
@@ -50,7 +52,7 @@ class ContactViewContact extends JView
 			$url  = 'index.php?option=com_users&view=login';
 			$url .= '&return='.base64_encode($return);
 
-			$app->redirect($url, JText::_('YOU_MUST_LOGIN_FIRST'));
+			//$app->redirect($url, JText::_('YOU_MUST_LOGIN_FIRST'));
 
 		}
 
@@ -163,38 +165,13 @@ class ContactViewContact extends JView
 
 		parent::display($tpl);
 	}
+	
 	/**
-	 * Checks for errors and exits with messages if found
-	 * @param	Array of errors
-	 * @return	null
+	 * Prepares the document
 	 */
-	function reportErrors($errors)
+	protected function _prepareDocument()
 	{
-		if (!$errors || !is_array($errors)) {
-			return;
-		}
-		foreach ($errors as &$error)
-		{
-			if ($error instanceof Exception)
-			{
-				if ($error->getCode() == 404)
-				{
-					// If there is a 404, throw a hard error.
-					JError::raiseError(404, $error->getMessage());
-					return false;
-				}
-				else
-				{
-					JError::raiseError(500, $error->getMessage());
-				}
-			}
-			else
-			{
-				JError::raiseWarning(500, $error);
-			}
-		}
-		return false;
-
+		$pathway	= &$app->getPathway();
 	}
 }
 

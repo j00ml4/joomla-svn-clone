@@ -49,6 +49,7 @@ class UsersViewLogin extends JView
 		$menus		= &$app->getMenu();
 		$menu		= &$menus->getActive();
 
+		$this->assign('default_page_title', '');
 		// Set the page title if it has not been set already.
 		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'login')
 		{
@@ -56,13 +57,14 @@ class UsersViewLogin extends JView
 			$mparams->loadJSON($menu->params);
 
 			// If a page title has not been set, set one.
-			if (!$mparams->get('page_title')) {
+			if (!$mparams->get('page_title'))
+			{
 				$params->set('page_title', $login ? JText::_('Users_Login_Pathway_Login') : JText::_('Users_Login_Pathway_Logout'));
 			}
 		}
 		else
 		{
-			$params->set('page_title', $login ? JText::_('Users_Login_Pathway_Login') : JText::_('Users_Login_Pathway_Logout'));
+			$this->assign('default_page_title', $login ? JText::_('Users_Login_Pathway_Login') : JText::_('Users_Login_Pathway_Logout'));
 		}
 
 		// Set the document title.
