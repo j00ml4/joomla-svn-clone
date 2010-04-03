@@ -154,26 +154,47 @@ class ContentViewCategory extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app =& JFactory::getApplication();
-		$menus =& JSite::getMenu();
-		$pathway =& $app->getPathway();
-		$title = $this->item->title;
+		$app		= &JFactory::getApplication();
+		$menus		= &JSite::getMenu();
+		$pathway	= &$app->getPathway();
+		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
 		{
-			$menuParams = new JObject(json_decode($menu->params, true));
-			if ($pageTitle = $menuParams->get('page_title'))
+			if($menu)
 			{
-				$title = $pageTitle;
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			} 
+		}		
+		if($menu && $menu->query['view'] != 'article' && $menu->query['id'] != $this->item->id)
+		{
+			$this->params->set('page_subheading', $this->item->title);
+			$path = array($this->item->title => '');
+			$category = $this->item->getParent();
+			while($menu->query['id'] != $category->id)
+			{
+				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
+			}
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
 			}
 		}
+		
+		$title = $this->params->get('page_title', '');
 		if (empty($title))
 		{
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
+		
 		if ($this->item->metadesc) {
 			$this->document->setDescription($this->item->metadesc);
 		}
@@ -208,20 +229,6 @@ class ContentViewCategory extends JView
 
 			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
 			$this->document->addHeadLink(JRoute::_($link . '&type=atom'), 'alternate', 'rel', $attribs);
-		}
-
-		// Set the pathway.
-		$path = array();
-
-		if ($menu && isset($menu->query))
-		{
-			$view = JArrayHelper::getValue($menu->query, 'view');
-			$id = JArrayHelper::getValue($menu->query, 'id');
-
-			if ($view != 'category' || ($view == 'category' && $id != $this->item->id))
-			{
-				$pathway->addItem($this->item->title);
-			}
 		}
 	}
 }

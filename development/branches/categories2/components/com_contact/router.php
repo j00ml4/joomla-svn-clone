@@ -27,8 +27,7 @@ function ContactBuildRoute(&$query){
 	
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
-	}
-	else {
+	} else {
 		$menuItem = &$menu->getItem($query['Itemid']);
 	}
 	$mView	= (empty($menuItem->query['view'])) ? null : $menuItem->query['view'];
@@ -44,8 +43,8 @@ function ContactBuildRoute(&$query){
 		unset($query['view']);
 	};
 
-	// are we dealing with an newsfeed that is attached to a menu item?
-	if (($mView == 'contact') and (isset($query['id'])) and ($mId == intval($query['id']))) {
+	// are we dealing with a contact that is attached to a menu item?
+	if (isset($view) && ($mView == $view) and (isset($query['id'])) and ($mId == intval($query['id']))) {	
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
@@ -57,15 +56,18 @@ function ContactBuildRoute(&$query){
 			if($view == 'contact' && isset($query['catid']))
 			{
 				$catid = $query['catid'];
-				$menuCatid = $mCatid;
 			} elseif(isset($query['id'])) {
 				$catid = $query['id'];
-				$menuCatid = $mId;
 			}
+			$menuCatid = $mId;
 			$categories = JCategories::getInstance('com_contact');
 			$category = $categories->get($catid);
-			$path = $category->getPath();
-			$path = array_reverse($path);
+			if(!$category)
+			{
+				die('The category is not published or does not exist');
+				//TODO Throw error that the category either not exists or is unpublished	
+			}
+			$path = array_reverse($category->getPath());
 			
 			$array = array();
 			foreach($path as $id)
@@ -91,9 +93,9 @@ function ContactBuildRoute(&$query){
 				}
 				$segments[] = $id;
 			}
-			unset($query['id']);
-			unset($query['catid']);
 		}
+		unset($query['id']);
+		unset($query['catid']);
 	}
 
 	if (isset($query['layout']))

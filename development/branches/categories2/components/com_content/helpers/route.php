@@ -34,22 +34,14 @@ abstract class ContentHelperRoute
 		);
 		//Create the link
 		$link = 'index.php?option=com_content&view=article&id='. $id;
-		
-		if($catid instanceof JCategoryNode)
+		if ($catid > 1)
 		{
-			$needles['category'] = array_reverse($catid->getPath());
-			$link .= '&catid='.$catid->id;
-		} elseif((int) $catid > 0) {
 			$categories = JCategories::getInstance('com_content');
-			$category = $categories->get((int)$catid);
-			if(!$category)
-			{
-				die('The category is not published or does not exist');
-				//TODO Throw error that the category either not exists or is unpublished	
-			}
+			$category = $categories->get($catid);
 			$needles['category'] = array_reverse($category->getPath());
-			'&catid='.$catid;
-		} 
+			$needles['categories'] = $needles['category'];
+			$link .= '&catid='.$catid;
+		}
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
 			$link .= '&Itemid='.$item;
@@ -118,12 +110,12 @@ abstract class ContentHelperRoute
 		}
 		foreach ($needles as $view => $ids)
 		{
-			if (array_key_exists($view, self::$lookup))
+			if (isset(self::$lookup[$view]))
 			{
-				foreach($ids as $id => $alias)
+				foreach($ids as $id)
 				{
-					if (array_key_exists($id, self::$lookup[$view])) {
-						return self::$lookup[$view][$id];
+					if (isset(self::$lookup[$view][(int)$id])) {
+						return self::$lookup[$view][(int)$id];
 					}
 				}
 			}

@@ -124,28 +124,43 @@ class ContactViewCategory extends JView
 		$app		= &JFactory::getApplication();
 		$menus		= &JSite::getMenu();
 		$pathway	= &$app->getPathway();
+		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		if ($menu = $menus->getActive())
+		$menu = $menus->getActive();
+		if (!$this->params->get('page_heading'))
 		{
-			$menuParams = new JRegistry;
-			$menuParams->loadJSON($menu->params);
-			if ($title = $menuParams->get('jpage_title')) {
-				$this->document->setTitle($title);
+			if($menu)
+			{
+				$this->params->set('page_heading', $this->params->get('page_title', $menu->title));
+			} else {
+				$this->params->set('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			} 
+		}		
+		if($menu && $menu->query['view'] != 'contact' && $menu->query['id'] != $this->category->id)
+		{
+			$this->params->set('page_subheading', $this->category->title);
+			$path = array($this->category->title => '');
+			$category = $this->category->getParent();
+			while($menu->query['id'] != $category->id)
+			{
+				$path[$category->title] = ContactHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
 			}
-			else {
-				$this->document->setTitle(JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
-			}
-
-			// Set breadcrumbs.
-			if ($menu->query['view'] != 'category') {
-				$pathway->addItem($this->category->title, '');
+			$path = array_reverse($path);
+			foreach($path as $title => $link)
+			{
+				$pathway->addItem($title, $link);
 			}
 		}
-		else {
-			$this->document->setTitle(JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
+		
+		$title = $this->params->get('page_title', '');
+		if (empty($title))
+		{
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
+		$this->document->setTitle($title);
 
 		// Add alternate feed link
 		if ($this->params->get('show_feed_link', 1) == 1)
@@ -157,5 +172,4 @@ class ContactViewCategory extends JView
 			$this->document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
 		}
 	}
-
 }

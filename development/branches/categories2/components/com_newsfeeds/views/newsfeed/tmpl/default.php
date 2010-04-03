@@ -36,19 +36,12 @@ if ($lang->isRTL() && $myrtl == 0) {
 						$direction = " redirect-rtl";
 					}
 ?>
-
-<div class="newsfeed<?php echo $this->params->get('pageclass_sfx')?><?php echo $direction; ?>">
-
 <?php if ($this->params->get('show_page_title', 1)) : ?>
-	<h1 class="<?php echo $direction; ?>">
-		<?php if ($this->escape($this->params->get('page_heading'))) :?>
-			<?php echo $this->escape($this->params->get('page_heading')); ?>
-		<?php else : ?>
-			<?php echo $this->escape($this->params->get('page_title')); ?>
-		<?php endif; ?>
-	</h1>
+<h1 class="<?php echo $direction; ?>">
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
 <?php endif; ?>
-
+<div class="newsfeed<?php echo $this->params->get('pageclass_sfx')?><?php echo $direction; ?>">
 	<h2 class="<?php echo $direction; ?>">
 		<a href="<?php echo $this->newsfeed->channel['link']; ?>" target="_blank">
 			<?php echo str_replace('&apos;', "'", $this->newsfeed->channel['title']); ?></a>
