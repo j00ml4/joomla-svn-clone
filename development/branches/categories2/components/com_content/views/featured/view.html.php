@@ -40,10 +40,9 @@ class ContentViewFeatured extends JView
 		$user =& JFactory::getUser();
 		$app =& JFactory::getApplication();
 
-		$state = $this->get('State');
-		$items = $this->get('Items');
-
-		$pagination = $this->get('Pagination');
+		$state 		= $this->get('State');
+		$items 		= $this->get('Items');
+		$pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

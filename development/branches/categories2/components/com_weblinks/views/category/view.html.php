@@ -28,7 +28,6 @@ class WeblinksViewCategory extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
 
 		// Get some data from the models
 		$state		= &$this->get('State');
@@ -38,6 +37,7 @@ class WeblinksViewCategory extends JView
 		$children	= &$this->get('Children');
 		$parent 	= &$this->get('Parent');
 		$pagination	= &$this->get('Pagination');
+		$params = &$state->params;
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -48,8 +48,6 @@ class WeblinksViewCategory extends JView
 		if($category == false)
 		{
 			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERRORS_CATEGORY_NOT_FOUND'));
-
-
 		}
 
 		if($parent == false)
@@ -84,7 +82,7 @@ class WeblinksViewCategory extends JView
 				$item->link = $item->url;
 			}
 		}
-
+		
 		$children = array($category->id => $children);
 
 		$this->assignRef('state',		$state);
