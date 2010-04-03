@@ -116,7 +116,7 @@ class ContactViewCategory extends JView
 		if (is_object($menu)) {
 			$menuParams = new JRegistry;
 			$menuParams->loadJSON($menu->params);
-			if (!$menu_params->get('page_title')) {
+			if (!$menuParams->get('page_title')) {
 				$pparams->set('page_title',	$category->title);
 			}
 		} else {
@@ -124,11 +124,11 @@ class ContactViewCategory extends JView
 		}
 		$document->setTitle($pparams->get('page_title'));
 
-		if ($this->item->metadesc) {
+		if (isset($this->item->metadesc)) {
 			$this->document->setDescription($this->item->metadesc);
 		}
 
-		if ($this->item->metakey) {
+		if (isset($this->item->metakey)) {
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
 	

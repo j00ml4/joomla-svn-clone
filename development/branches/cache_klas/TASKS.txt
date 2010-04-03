@@ -23,6 +23,6 @@ COMPLEX TASKS
 - DONE: Re-conceptualize module cache (move cache call to within the module, add module handler)
 - DONE: make cache handlers independent of JCache, add JCacheHandler as parent class
 
-- IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems, com_weblinks
+- IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems, com_weblinks, com_contact
 - IN PROGRESS: Test and cleanup changed files
 - Additional caching and speed optimizations of core components/modules
