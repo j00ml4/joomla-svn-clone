@@ -269,7 +269,7 @@ abstract class JFactory
 					
 		$simplepie = new SimplePie($url, JPATH_CACHE, 0);
 		
-		$contents =  $cache->get(array($simplepie, 'force_feed'), true);
+		$contents =  $cache->get(array($simplepie, 'force_feed'), true, false, false);
 		
 
 		if ($simplepie->init()) {
