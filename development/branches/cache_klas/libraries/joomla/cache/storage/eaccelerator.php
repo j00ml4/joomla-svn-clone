@@ -197,7 +197,9 @@ class JCacheStorageEaccelerator extends JCacheStorage
 		$returning->locklooped = false;
 				
 		$looptime = $locktime * 10;
-			
+		
+		$cache_id = $this->_getCacheId($id, $group);
+		
 		$data_lock = eaccelerator_lock($cache_id);
 				
 		if ( $data_lock === false ) {
