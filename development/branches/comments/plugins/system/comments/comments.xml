@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install
+	version="1.5"
+	type="plugin"
+	group="system">
+	<name>System - Comments</name>
+	<group>system</group>
+	<version>2.0Beta1</version>
+	<creationDate>9 September 2009</creationDate>
+	<author>JXtended</author>
+	<authorEmail>info@jxtended.com</authorEmail>
+	<authorUrl>http://jxtended.com</authorUrl>
+	<copyright>2009 JXtended LLC. All rights reserved.</copyright>
+	<description>COMMENTS_SYSTEM_PLUGIN_DESC</description>
+	<files>
+		<filename
+			plugin="comments">comments.php</filename>
+	</files>
+	<params />
+</install>
