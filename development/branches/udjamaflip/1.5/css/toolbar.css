@@ -46,6 +46,7 @@
 .icon-32-trash 			{ background-image: url(../images/toolbar/tb_32_trash.png); background-repeat:no-repeat; }
 .icon-32-archive 		{ background-image: url(../images/toolbar/tb_32_archive.png); background-repeat:no-repeat; }
 .icon-32-unarchive 		{ background-image: url(../images/toolbar/tb_32_archive_out.png); background-repeat:no-repeat; }
+.icon-32-preview 		{ background-image: url(../images/toolbar/tb_32_preview.png); background-repeat:no-repeat; }
 
 
 /** container of toolbar **/
