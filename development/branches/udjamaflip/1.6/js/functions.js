@@ -70,30 +70,28 @@ function addWindow(winCount,zIndex,src,rel,title)
     if (rel != '') {
         rel = rel.split('-');
         var height = rel[1];
-        var width = rel[0];
-
-		var coordX = $.myGlobals.winPos;
-		var coordY = $.myGlobals.winPos;
-		if ($.myGlobals.winPos == 25)
-		{
-			$.myGlobals.winPos = 5;	
-		}
-		else
-		{
-			$.myGlobals.winPos = ($.myGlobals.winPos + 5);	
-		}
-        
+        var width = rel[0];        
     }
     else {
         var height = 500;
         var width = 1050;
     }
-        var contentHeight = (height - 50);
-        var contentWidth = (width - 36);
-        var rightBorder = (height - 36);
-        var leftBorder = (height - 35);
-        var bottomBorder = (width - 35);
+	var contentHeight = (height - 50);
+	var contentWidth = (width - 36);
+	var rightBorder = (height - 36);
+	var leftBorder = (height - 35);
+	var bottomBorder = (width - 35);
     
+	var coordX = jQuery.myGlobals.winPos;
+	var coordY = jQuery.myGlobals.winPos;
+	if (jQuery.myGlobals.winPos == 25)
+	{
+		jQuery.myGlobals.winPos = 5;	
+	}
+	else
+	{
+		jQuery.myGlobals.winPos = (jQuery.myGlobals.winPos + 5);	
+	}
     
     jQuery("#window-container").append('<div id="win' + winCount + '" class="window" style="z-index:' + zIndex + '; height:' + height + 'px; width:' + width + 'px; top:' + coordY + '; left:' + coordX + ';"><div class="leftBorder" style="height:' + leftBorder + 'px;"></div><div class="rightBorder" style="height:' + rightBorder + 'px;"></div><img class="bottomLeftCorner" alt="" src="templates/udjamaflip/images/window/bottomLeftCorner.png" /><img class="bottomRightCorner resizeable" alt="" src="templates/udjamaflip/images/window/bottomRightCornerExpand.png" /><div class="bottomBorder" style="width:' + bottomBorder + 'px;"></div><div class="contentWrapper"><div class="title"><img src="templates/udjamaflip/images/window/miniLogo.png" alt="" /> <span>' + title + '</span><div class="icons"><a href="#" class="refresh"><img src="templates/udjamaflip/images/refresh.png" alt="[*]" /></a><a href="#" class="minimise"><img src="templates/udjamaflip/images/minimise.png" alt="[-]" /></a><a href="#" class="toggleSize"><img src="templates/udjamaflip/images/maximise.png" alt="[O]" /></a><a href="#" class="close"><img src="templates/udjamaflip/images/close.png" alt="[X]" /></a></div></div><iframe id="content'+winCount+'" class="content" style="height:' + contentHeight + 'px; width:' + contentWidth + 'px;" src="' + src + '"></iframe></div><img class="topLeftCorner" alt="" src="templates/udjamaflip/images/window/topLeftCorner.png" /><img class="topRightCorner" alt="" src="templates/udjamaflip/images/window/topRightCorner.png" /></div>');
     

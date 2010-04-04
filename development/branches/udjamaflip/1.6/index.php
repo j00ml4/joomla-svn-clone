@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
 </head>
 <body>
 		<div id="header">		
-            <h1><jdoc:include type="modules" name="title" /></h1>
+            <jdoc:include type="modules" name="title" />
             <jdoc:include type="modules" name="toolbar" />
             <div class="clear"></div>
   		</div>

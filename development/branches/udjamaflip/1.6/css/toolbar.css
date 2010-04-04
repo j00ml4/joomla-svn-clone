@@ -46,6 +46,7 @@
 .icon-32-trash 			{ background-image: url(../images/toolbar/tb_32_trash.png); background-repeat:no-repeat; }
 .icon-32-archive 		{ background-image: url(../images/toolbar/tb_32_archive.png); background-repeat:no-repeat; }
 .icon-32-unarchive 		{ background-image: url(../images/toolbar/tb_32_archive_out.png); background-repeat:no-repeat; }
+.icon-32-refresh 		{ background-image: url(../images/toolbar/tb_32_refresh.png); background-repeat:no-repeat; }
 
 
 /** container of toolbar **/
@@ -61,26 +62,29 @@ div#header
 	height:50px;
 }
 
-div#header h1
+div#header h2
 {
 	float:left;
 	margin-top:12px;
 	margin-left:12px;
 	width:300px;
+	font-size:1.8em;
 }
 
-div.toolbar-list-list
+div.toolbar-list
 {
+	padding-top:5px;
 	float:right;
 	padding-right:5px;
 }
 	
-	div.toolbar-list-list ul
+	div.toolbar-list ul
 	{
 		list-style:none;	
+		
 	}
 	
-	div.toolbar-list-list ul li
+	div.toolbar-list ul li.button
 	{
 		display:inline-block;
 		text-align: center;
@@ -90,7 +94,7 @@ div.toolbar-list-list
 		text-align:center;
 	}
 	
-		div.toolbar-list table.toolbar td span
+		div.toolbar-list ul li.button span
 		{
 			display:block;	
 			margin:0 auto;
@@ -98,7 +102,7 @@ div.toolbar-list-list
 			height:32px;
 		}
 	
-		div.toolbar-list table.toolbar td a
+		div.toolbar-list ul li.button a
 		{
 			display:block;
 			border:none;	
@@ -106,12 +110,18 @@ div.toolbar-list-list
 			color:#CCCCCC;
 		}
 		
-			div.toolbar-list table.toolbar td a:hover
+			div.toolbar-list ul li.button a:hover
 			{
 				border:none;
 				opacity:1.0;
 				color:#FFFFFF;
 			}
+		
+		div.toolbar-list ul li.divider
+		{
+			display:inline-block;
+			width:10px;
+		}
 		
 div.border div.padding div#element-box div.m form table.adminlist thead tr th
 {
