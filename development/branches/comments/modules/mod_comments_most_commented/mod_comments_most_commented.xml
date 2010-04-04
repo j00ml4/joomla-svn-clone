@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Comments - Most Commented Items</name>
+	<version>1.2.1 Beta 1</version>
+	<creationDate>9 May 2009</creationDate>
+	<author>JXtended</author>
+	<authorEmail>info@jxtended.com</authorEmail>
+	<authorUrl>http://jxtended.com</authorUrl>
+	<copyright>Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.</copyright>
+	<license>GNU General Public License</license>
+	<description>COMMENTS_MOD_MOST_COMMENTED_DESC</description>
+	<files>
+		<filename module="mod_comments_most_commented">mod_comments_most_commented.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<params addpath="/administrator/components/com_comments/elements">
+		<param name="context" type="context" default="" label="COMMENTS_CONTEXT" description="COMMENTS_CONTEXT_DESC" />
+		<param name="limit" type="text" default="5" label="COMMENTS_LIMIT" description="COMMENTS_LIMIT_DESC" size="3" />
+		<param name="show_comment_number" type="radio" default="1" label="COMMENTS_MOST_SHOW_NUMBER" description="COMMENTS_MOST_SHOW_NUMBER_DESC">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+	</params>
+	<params group="advanced">
+		<param name="cache" type="list" default="0" label="COMMENTS_CACHING" description="COMMENTS_CACHING_DESC">
+			<option value="1">COMMENTS_USE_GLOBAL</option>
+			<option value="0">COMMENTS_NO_CACHING</option>
+		</param>
+		<param name="cache_time" type="text" default="900" label="COMMENTS_CACHE_TIME" description="COMMENTS_CACHE_TIME_DESC" />
+	</params>
+</install>
