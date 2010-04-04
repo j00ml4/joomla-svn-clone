@@ -27,57 +27,6 @@ class CommentsModelComments extends JModelList
 	protected $_context = 'com_comments.comments';
 
 	/**
-	 * Method to auto-populate the model state.
-	 */
-	protected function _populateState()
-	{
-		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
-
-		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
-
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $state);
-
-		$context = $app->getUserStateFromRequest($this->_context.'filter.branch', 'filter_context', '', 'word');
-		$this->setState('filter.context', $context);
-
-		$threadId = $app->getUserStateFromRequest($this->_context.'filter.thread_id', 'filter_thread', null, 'int');
-		$this->setState('filter.thread_id', $threadId);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_comments');
-		$this->setState('params', $params);
-
-		// List state information.
-		parent::_populateState('a.name', 'asc');
-	}
-
-	/**
-	 * Method to get a store id based on model configuration state.
-	 *
-	 * This is necessary because the model is used by the component and
-	 * different modules that might need different sets of data or different
-	 * ordering requirements.
-	 *
-	 * @param	string	A prefix for the store id.
-	 *
-	 * @return	string	A store id.
-	 */
-	protected function _getStoreId($id = '')
-	{
-		// Compile the store id.
-		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.state');
-		$id	.= ':'.$this->getState('filter.context');
-		$id	.= ':'.$this->getState('filter.thread_id');
-
-		return parent::_getStoreId($id);
-	}
-
-	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
@@ -141,12 +90,65 @@ class CommentsModelComments extends JModelList
 	}
 
 	/**
+	 * Method to get a store id based on model configuration state.
+	 *
+	 * This is necessary because the model is used by the component and
+	 * different modules that might need different sets of data or different
+	 * ordering requirements.
+	 *
+	 * @param	string	A prefix for the store id.
+	 *
+	 * @return	string	A store id.
+	 */
+	protected function _getStoreId($id = '')
+	{
+		// Compile the store id.
+		$id	.= ':'.$this->getState('filter.search');
+		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.context');
+		$id	.= ':'.$this->getState('filter.thread_id');
+
+		return parent::_getStoreId($id);
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 */
+	protected function _populateState()
+	{
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
+
+		// Load the filter state.
+		$value = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $value);
+
+		$value = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '*', 'string');
+		$this->setState('filter.state', $value);
+
+		$value = $app->getUserStateFromRequest($this->_context.'filter.branch', 'filter_context', '', 'word');
+		$this->setState('filter.context', $value);
+
+		$value = $app->getUserStateFromRequest($this->_context.'filter.thread_id', 'filter_thread', null, 'int');
+		$this->setState('filter.thread_id', $value);
+
+		// Load the parameters.
+		$value = JComponentHelper::getParams('com_comments');
+		$this->setState('params', $value);
+
+		// List state information.
+		parent::_populateState('a.name', 'asc');
+	}
+
+	/**
+	 * Get a list of all the thread contexts.
+	 *
 	 * @return	mixed	An array if successful, false otherwise and the internal error is set.
 	 */
 	function getContexts()
 	{
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		$query->select('DISTINCT(context) AS value');
 		$query->from('#__social_threads');

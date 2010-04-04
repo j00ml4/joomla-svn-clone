@@ -65,22 +65,17 @@ class CommentsViewComment extends JView
 		$this->assignRef('item',		$item);
 		$this->assignRef('thread',		$thread);
 
-		jimport('joomla.html.bbcode');
-		$parser = &JBBCode::getInstance(array(
-			'smiley_path' => JPATH_ROOT.'/media/jxtended/img/smilies/default',
-			'smiley_url' => JURI::root().'/media/jxtended/img/smilies/default'
-		));
-		$this->assignRef('bbcode', $parser);
-
-		$this->_setToolbar();
+		$this->setToolbar();
 		parent::display($tpl);
 	}
 
 	/**
 	 * Setup the Toolbar.
 	 */
-	protected function _setToolbar()
+	protected function setToolbar()
 	{
+		JRequest::setVar('hidemainmenu', true);
+
 		if ($this->getLayout() == 'edit') {
 			JRequest::setVar('hidemainmenu', true);
 			JToolBarHelper::title('Comments: '.JText::_('COMMENTS_EDIT_COMMENT'), 'logo');

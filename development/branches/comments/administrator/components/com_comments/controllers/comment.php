@@ -32,11 +32,11 @@ class CommentsControllerComment extends JControllerForm
 		JRequest::checkToken();
 
 		// get posted form variables.
-		$values = JRequest::getVar('jxform', array(), 'post', 'array');
+		$values = JRequest::getVar('jform', array(), 'post', 'array');
 		$post = JRequest::get('post', JREQUEST_ALLOWHTML);
 
 		// handle the post body
-		$body = $post['jxform']['body'];
+		$body = $post['jform']['body'];
 
 		// make sure that html special characters are encoded in code tags
 		function codeEscape($matches)
@@ -46,7 +46,7 @@ class CommentsControllerComment extends JControllerForm
 		$body = preg_replace_callback('/\[code=(.+?)\](.+?)\[\/code\]/is', 'codeEscape', $body);
 
 		// if html is not enabled, then lets filter it out
-		$config = &JComponentHelper::getParams('com_comments');
+		$config = JComponentHelper::getParams('com_comments');
 		if (!$config->get('enable_html', 0)) {
 			$body = strip_tags($body);
 		}

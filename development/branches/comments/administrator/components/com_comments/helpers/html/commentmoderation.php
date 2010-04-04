@@ -24,8 +24,7 @@ class JHtmlCommentModeration
 		$html[] = '<ul class="published_selector">';
 
 		// Defer is only an option if a state has not yet been set.
-		if ($item->published == 0)
-		{
+		if ($item->published == 0) {
 			$html[] = '<li class="defer"><input type="radio" id="moderate_defer_'.$item->id.'" name="moderate['.$item->id.']" value="0" checked="checked" />';
 			$html[] = '	<label for="moderate_defer_'.$item->id.'">'.JText::_('COMMENTS_DEFER').'</label></li>';
 		}
@@ -35,11 +34,11 @@ class JHtmlCommentModeration
 		$html[] = '	<label for="moderate_publish_'.$item->id.'">'.JText::_('COMMENTS_PUBLISH').'</label></li>';
 
 		// Add the spam state.
-		$html[] = '<li class="spam"><input type="radio" id="moderate_spam_'.$item->id.'" name="moderate['.$item->id.']" value="2"'.(($item->published == 2) ? ' checked="checked"' : null).' />';
+		$html[] = '<li class="spam"><input type="radio" id="moderate_spam_'.$item->id.'" name="moderate['.$item->id.']" value="-1"'.(($item->published == -1) ? ' checked="checked"' : null).' />';
 		$html[] = '	<label for="moderate_spam_'.$item->id.'">'.JText::_('COMMENTS_SPAM').'</label></li>';
 
 		// Add the delete state.
-		$html[] = '<li class="delete"><input type="radio" id="moderate_delete_'.$item->id.'" name="moderate['.$item->id.']" value="-1"'.(($item->published == -1) ? ' checked="checked"' : null).' />';
+		$html[] = '<li class="delete"><input type="radio" id="moderate_delete_'.$item->id.'" name="moderate['.$item->id.']" value="-2"'.(($item->published == -2) ? ' checked="checked"' : null).' />';
 		$html[] = '	<label for="moderate_delete_'.$item->id.'">'.JText::_('COMMENTS_DELETE').'</label></li>';
 
 		$html[] = '</ul>';
