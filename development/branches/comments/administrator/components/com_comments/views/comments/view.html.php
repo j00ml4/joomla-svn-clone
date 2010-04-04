@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class CommentsViewComments extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,12 +38,8 @@ class CommentsViewComments extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
 		parent::display($tpl);
-		$this->_setToolbar();
+		$this->setToolbar();
 	}
 
 	function getContentRoute($url)
@@ -58,13 +54,13 @@ class CommentsViewComments extends JView
 			require_once(JPATH_SITE.DS.'includes'.DS.'application.php');
 
 			// Get the site router.
-			$config	= &JFactory::getConfig();
+			$config	= JFactory::getConfig();
 			$router = JRouter::getInstance('site');
 			$router->setMode($config->get('sef', 1));
 		}
 
 		// Build the route.
-		$uri	= &$router->build($url);
+		$uri	= $router->build($url);
 		$route	= $uri->toString(array('path', 'query', 'fragment'));
 
 		// Strip out the base portion of the route.
@@ -76,7 +72,7 @@ class CommentsViewComments extends JView
 	/**
 	 * Setup the Toolbar.
 	 */
-	protected function _setToolbar()
+	protected function setToolbar()
 	{
 		$state	= $this->get('State');
 		$canDo	= CommentsHelper::getActions($state->get('filter.category_id'));

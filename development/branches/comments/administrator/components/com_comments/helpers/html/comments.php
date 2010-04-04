@@ -30,23 +30,19 @@ class JHtmlComments
 		$options[]	= JHTML::_('select.option', '', JText::_('COMMENTS_ALL'));
 		$options[]	= JHTML::_('select.option', '0', JText::_('COMMENTS_PENDING'));
 		$options[]	= JHTML::_('select.option', '1', JText::_('JPUBLISHED'));
-		$options[]	= JHTML::_('select.option', '2', JText::_('COMMENTS_SPAM'));
+		$options[]	= JHTML::_('select.option', '-1', JText::_('COMMENTS_SPAM'));
 
 		return JHtml::_('select.options', $options, 'value', 'text', $selected, false);
 	}
 
 	public function commentContextOptions($selected = null)
 	{
-		$model		= &JModel::getInstance('Comments', 'CommentsModel', array('ignore_request' => true));
-		$options	= array();
-		$options[]	= JHTML::_('select.option', '*', JText::_('COMMENTS_ALL_CONTEXTS'));
-		if ($contexts = $model->getContexts())
-		{
-			foreach ($contexts as $i => $context)
-			{
-				$contexts[$i]->text = JText::sprintf('COMMENTS_IN_CONTEXT', $context->value);
+		$model		= JModel::getInstance('Comments', 'CommentsModel', array('ignore_request' => true));
+
+		if ($options = $model->getContexts()) {
+			foreach ($options as $i => $context) {
+				$context->text = JText::sprintf('COMMENTS_IN_CONTEXT', $context->value);
 			}
-			$options = array_merge($options, $contexts);
 		}
 		return JHtml::_('select.options', $options, 'value', 'text', $selected, false);
 	}

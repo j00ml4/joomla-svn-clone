@@ -44,10 +44,10 @@
 			rows="10"
 		/>
 
-		<field name="created_date" type="text"
+		<field name="created_time" type="text"
 			class="readonly"
-			description="Comments_Field_Created_Date_Desc"
-			label="Comments_Field_Created_Date_Label"
+			description="Comments_Field_Created_Time_Desc"
+			label="Comments_Field_Created_Time_Label"
 			readonly="true"
 			size="16"
 		/>

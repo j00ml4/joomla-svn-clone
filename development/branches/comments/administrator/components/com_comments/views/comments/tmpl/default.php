@@ -29,6 +29,7 @@ JHtml::_('behavior.tooltip');
 			</select>
 
 			<select name="filter_context" id="context" class="inputbox" onchange="this.form.submit()">
+				<option value=""><?php echo JText::_('COMMENTS_ALL_CONTEXTS'); ?></option>
 				<?php echo JHtml::_('comments.commentContextOptions', $this->state->get('filter.context')); ?>
 			</select>
 		</div>
@@ -39,7 +40,7 @@ JHtml::_('behavior.tooltip');
 		<thead>
 			<tr>
 				<th width="15%">
-					<?php echo JHtml::_('grid.sort', 'COMMENTS_DATE', 'a.created_date', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COMMENTS_DATE', 'a.created_time', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					,
 					<?php echo JHtml::_('grid.sort', 'COMMENTS_AUTHOR', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
@@ -59,7 +60,7 @@ JHtml::_('behavior.tooltip');
 					<?php echo JText::_('COMMENTS_ACTION'); ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -71,11 +72,11 @@ JHtml::_('behavior.tooltip');
 			</tr>
 		</tfoot>
 		<tbody>
-		<?php foreach ($this->items as $i => &$item) : ?>
+		<?php foreach ($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td align="center">
 					<a href="<?php echo JRoute::_('index.php?option=com_comments&view=comment&id='.$item->id); ?>">
-						<?php echo JText::sprintf('COMMENTS_SUBMITTED_AUTHOR_DATE', $item->name, JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2'))); ?></a>
+						<?php echo JText::sprintf('COMMENTS_SUBMITTED_AUTHOR_DATE', $item->name, JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2'))); ?></a>
 				</td>
 				<td valign="top">
 					<ul class="comment-author-data">
@@ -84,7 +85,7 @@ JHtml::_('behavior.tooltip');
 						<li class="url" title="<?php echo JText::_('COMMENTS_WEBSITE_URL'); ?>">
 							<?php echo ($item->url) ? $item->url : JText::_('COMMENTS_NOT_AVAILABLE'); ?></li>
 						<li class="ip" title="<?php echo JText::_('COMMENTS_IP_ADDRESS'); ?>">
-							<?php echo ($item->address) ? $item->address : JText::_('COMMENTS_NOT_AVAILABLE'); ?> <a href="index.php?option=com_comments&amp;task=config.block&amp;block=address&amp;cid[]=<?php echo $item->id;?>">[ <?php echo JText::_('COMMENTS_BLOCK');?> ]</a></li>
+							<?php echo ($item->address) ? long2ip($item->address) : JText::_('COMMENTS_NOT_AVAILABLE'); ?> <a href="index.php?option=com_comments&amp;task=config.block&amp;block=address&amp;cid[]=<?php echo $item->id;?>">[ <?php echo JText::_('COMMENTS_BLOCK');?> ]</a></li>
 					</ul>
 				</td>
 				<td valign="top">
@@ -98,7 +99,7 @@ JHtml::_('behavior.tooltip');
 								?></a>
 						</li>
 						<li class="body">
-							<?php echo JHtml::_('string.truncate', JHtml::_('bbcode.render', $item->body), 430); ?>
+							<?php echo $this->escape(JHtml::_('string.truncate', $item->body, 430)); ?>
 						</li>
 					</ul>
 				</td>

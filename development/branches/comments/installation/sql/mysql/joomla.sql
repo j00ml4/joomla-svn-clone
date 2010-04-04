@@ -856,7 +856,7 @@ CREATE TABLE IF NOT EXISTS `#__social_comments` (
   `notify` tinyint(1) UNSIGNED NOT NULL default '0' COMMENT 'Notify the user on further comments',
   `referer` varchar(255) NOT NULL COMMENT 'The referring URL',
   `created_time` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT 'When the comment was created',
-  `published` int(10) unsigned NOT NULL default '0' COMMENT 'Published state, allows for moderation',
+  `published` int(10) NOT NULL default '0' COMMENT 'Published state, allows for moderation',
   `address` int(11) unsigned NOT NULL COMMENT 'Address of the commentor (IP, Mac, etc)',
   `link` varchar(255) NOT NULL COMMENT 'The link to the page the comment was made on',
   `language` char(7) NOT NULL DEFAULT '' COMMENT 'The language of the comment',

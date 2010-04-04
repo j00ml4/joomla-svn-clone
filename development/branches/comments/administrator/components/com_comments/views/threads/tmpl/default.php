@@ -49,16 +49,16 @@ $lOrdering	= $this->state->get('list.ordering');
 					<?php echo JHTML::_('grid.sort', 'Comments_Page_Title_Heading', 'a.name', $lDirection, $lOrdering); ?>
 				</th>
 				<th>
-					<?php echo JHTML::_('grid.sort', 'Comments_Thread_Date_Heading', 'a.created_date', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'Comments_Thread_Date_Heading', 'a.created_time', $lDirection, $lOrdering); ?>
 				</th>
-				<th width="5%">
+				<th width="10%">
 					<?php echo JHTML::_('grid.sort', 'Comments_Comment_Count_Heading', 'comment_count', $lDirection, $lOrdering); ?>
 				</th>
-				<th width="5%">
+				<th width="10%">
 					<?php echo JHTML::_('grid.sort', 'Comments_Rating_Count_Heading', 'pscore_count', $lDirection, $lOrdering); ?>
 				</th>
 				<th width="1%">
-					<?php echo JHTML::_('grid.sort', 'Comments_ID_Heading', 'a.id', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $lDirection, $lOrdering); ?>
 				</th>
 			</tr>
 		</thead>
@@ -82,7 +82,7 @@ $lOrdering	= $this->state->get('list.ordering');
 					<?php echo $this->escape($item->page_title); ?>
 				</td>
 				<td align="center">
-					<?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC3')); ?>
+					<?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC3')); ?>
 				</td>
 				<td align="center">
 					<?php if ($item->comment_count) : ?>

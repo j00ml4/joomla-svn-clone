@@ -876,15 +876,22 @@ VALUES
 --
 
 #INSERT INTO `#__social_comments` VALUES
-# (1,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www.theartofjoomla','andrew.eddie@joomla.org','I Like Joomla','I really like this Joomla! thing.','0000-00-00 00:00:00',0,'127.0.0.1',''),
-# (2,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www','andrew.eddie@joomla.org','I like chips','I like salty chips.','0000-00-00 00:00:00',0,'127.0.0.1','');
+(1,1,0,'content',1,0,'','Andrew Eddie','andrew.example.com','andrew@example.com','Go Bronco\'s','The cockroaches have no chance against the cane toads in the State of Origin.',0,0,0,0,'','2010-04-05 10:45:08',0,2130706433,'',''),
+(2,1,0,'content',1,0,'','Louis Landry','louis.example.com','louis@example.com','Go Saints','It was a huge party in New Orleans',0,0,0,0,'','2010-04-05 10:51:58',0,2130706433,'','');
 
 --
--- Dumping data for table `#__social_comments`
+-- Dumping data for table `#__social_ratings`
+--
+
+INSERT INTO `#__social_ratings` VALUES
+(1,'content',1,'','',1,1,1,0,0,0,NULL,'2010-04-05 10:52:38');
+
+--
+-- Dumping data for table `#__social_threads`
 --
 
 INSERT INTO `#__social_threads` VALUES
- (1,'content',1,'','','','0000-00-00 00:00:00',0,'');
+ (1,'content',1,'','','Foobar','0000-00-00 00:00:00',0,'');
 
 --
 -- Dumping data for table `#__template_styles`
