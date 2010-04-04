@@ -109,8 +109,8 @@ class JCacheHandlerCallback extends JCacheHandler
 		
 		if ($data !== false) {
 			
-			$cached = $wrkarounds==false ? unserialize($data) : JCache::getWorkarounds(unserialize($data));
-			$output = $cached['output'];
+			$cached = unserialize($data);
+			$output = $wrkarounds==false ? $cached['output'] : JCache::getWorkarounds($cached['output']);
 			$result = $cached['result'];
 			if ($locktest->locked == true) $this->cache->unlock($id);
 			
