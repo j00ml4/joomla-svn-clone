@@ -262,7 +262,7 @@ abstract class JFactory
 	{
 		jimport('simplepie.simplepie');
 		
-		$cache = JFactory::getCache('feed_parser','callback');
+		$cache = self::getCache('feed_parser','callback');
 
 		if ($cache_time > 0) $cache->setLifeTime($cache_time);
 					

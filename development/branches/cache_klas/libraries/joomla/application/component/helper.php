@@ -4,6 +4,7 @@
  * @package		Joomla.Framework
  * @subpackage	Application
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -154,7 +155,8 @@ class JComponentHelper
 	 * @return	boolean
 	 */
 	protected static function _load($option)
-	{
+	{	
+		
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 		$query->select('extension_id AS "id", element AS "option", params, enabled');
@@ -162,9 +164,11 @@ class JComponentHelper
 		$query->where('`type` = "component"');
 		$query->where('`element` = "'.$option.'"');
 		$db->setQuery($query);
-
-		self::$_components[$option] = $db->loadObject();
-
+		
+		$cache = JFactory::getCache('_system','callback');		
+				
+		self::$_components[$option] =  $cache->get(array($db, 'loadObject'), null, $option, false);
+		
 		if ($error = $db->getErrorMsg() || empty(self::$_components[$option])) {
 			// Fatal error.
 			JError::raiseWarning(500, 'Error loading component: "'.$option.'" '.$error);

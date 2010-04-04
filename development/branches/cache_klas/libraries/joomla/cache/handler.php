@@ -20,7 +20,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.6
  */
-class JCacheHandler extends JObject
+class JCacheHandler
 
 {	
 	public $cache;
@@ -48,8 +48,8 @@ class JCacheHandler extends JObject
 	
 	function __call ($name, $arguments) {
 
-		$this->$name = call_user_func_array (array ($this->cache,$name),$arguments);
-		return $this->$name;
+		$nazaj = call_user_func_array (array ($this->cache,$name),$arguments);
+		return $nazaj;
 	}
 	
 	/**
@@ -142,7 +142,22 @@ class JCacheHandler extends JObject
 	 * @param	string	$group	The cache data group
 	 * @param	mixed	$data	The data to store
 	 * @return	boolean	True if cache stored
-	 * @since	1.5
+	 * @since	1.6
+	 */
+	function get($id, $group=null)
+	{
+		return $this->cache->get($id, $group=null);
+	}
+	
+	/**
+	 * Store the cached data by id and group
+	 *
+	 * @access	public
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	mixed	$data	The data to store
+	 * @return	boolean	True if cache stored
+	 * @since	1.6
 	 */
 	function store($data, $id, $group=null)
 	{

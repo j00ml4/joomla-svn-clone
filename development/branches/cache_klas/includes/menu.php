@@ -25,7 +25,6 @@ class JMenuSite extends JMenu
 	public function load()
 	{
 		$cache = &JFactory::getCache('_system', 'output');
-
 		if (!$data = $cache->get('menu_items')) {
 			// Initialise variables.
 			$db		= JFactory::getDbo();
