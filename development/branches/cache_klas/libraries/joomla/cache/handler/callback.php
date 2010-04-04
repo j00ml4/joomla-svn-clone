@@ -60,6 +60,8 @@ class JCacheHandlerCallback extends JCacheHandler
 	 * @access	public
 	 * @param	mixed	Callback or string shorthand for a callback
 	 * @param	array	Callback arguments
+	 * @param	string	Cache id
+	 * @param	boolean	Perform workarounds on data?
 	 * @return	mixed	Result of the callback
 	 * @since	1.5
 	 */
