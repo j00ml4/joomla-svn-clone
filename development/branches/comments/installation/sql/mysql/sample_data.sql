@@ -875,9 +875,9 @@ VALUES
 -- Dumping data for table `#__social_comments`
 --
 
-INSERT INTO `#__social_comments` VALUES
- (1,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www.theartofjoomla','andrew.eddie@joomla.org','I Like Joomla','I really like this Joomla! thing.','0000-00-00 00:00:00',0,'127.0.0.1',''),
- (2,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www','andrew.eddie@joomla.org','I like chips','I like salty chips.','0000-00-00 00:00:00',0,'127.0.0.1','');
+#INSERT INTO `#__social_comments` VALUES
+# (1,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www.theartofjoomla','andrew.eddie@joomla.org','I Like Joomla','I really like this Joomla! thing.','0000-00-00 00:00:00',0,'127.0.0.1',''),
+# (2,1,0,'content',1,0,0,0,'','foobar','Andrew Eddie','http://www','andrew.eddie@joomla.org','I like chips','I like salty chips.','0000-00-00 00:00:00',0,'127.0.0.1','');
 
 --
 -- Dumping data for table `#__social_comments`
