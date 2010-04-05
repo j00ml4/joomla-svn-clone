@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_highest_rated
+ * @subpackage	mod_social_highest_rated
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -32,4 +32,4 @@ $document = &JFactory::getDocument();
 $list = modCommentsHighestRatedHelper::getList($params);
 
 // render the module
-require(JModuleHelper::getLayoutPath('mod_comments_highest_rated', $params->get('layout', 'default')));
+require(JModuleHelper::getLayoutPath('mod_social_highest_rated', $params->get('layout', 'default')));

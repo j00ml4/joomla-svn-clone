@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_comment
+ * @subpackage	mod_social_comment
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -55,7 +55,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 				foreach ($comments as $item) :
 			?>
 			<li class="comment <?php echo $k ? 'odd' : 'even';?>" id="comment-<?php echo $item->id;?>">
-				<?php require(JModuleHelper::getLayoutPath('mod_comments_comment', $item->trackback ? 'default_trackback' : 'default_comment')); ?>
+				<?php require(JModuleHelper::getLayoutPath('mod_social_comment', $item->trackback ? 'default_trackback' : 'default_comment')); ?>
 			</li>
 			<?php
 				$k = 1 - $k;
@@ -81,7 +81,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 		<?php echo JText::_('Comments_Add_Comment');?>
 	</h3>
 	<div id="respond-container">
-		<?php require(JModuleHelper::getLayoutPath('mod_comments_comment', 'form')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_social_comment', 'form')); ?>
 	</div>
 <?php else : ?>
 	<h3 id="leave-response">

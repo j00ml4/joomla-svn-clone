@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="module" version="1.5.0">
-	<name>Comments - Most Commented Items</name>
+	<name>Comments - Latest Comments</name>
 	<version>1.2.1 Beta 1</version>
 	<creationDate>9 May 2009</creationDate>
 	<author>JXtended</author>
@@ -8,9 +8,9 @@
 	<authorUrl>http://jxtended.com</authorUrl>
 	<copyright>Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.</copyright>
 	<license>GNU General Public License</license>
-	<description>COMMENTS_MOD_MOST_COMMENTED_DESC</description>
+	<description>COMMENTS_MOD_LATEST_DESC</description>
 	<files>
-		<filename module="mod_comments_most_commented">mod_comments_most_commented.php</filename>
+		<filename module="mod_social_latest">mod_social_latest.php</filename>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<folder>tmpl</folder>
@@ -18,7 +18,16 @@
 	<params addpath="/administrator/components/com_comments/elements">
 		<param name="context" type="context" default="" label="COMMENTS_CONTEXT" description="COMMENTS_CONTEXT_DESC" />
 		<param name="limit" type="text" default="5" label="COMMENTS_LIMIT" description="COMMENTS_LIMIT_DESC" size="3" />
-		<param name="show_comment_number" type="radio" default="1" label="COMMENTS_MOST_SHOW_NUMBER" description="COMMENTS_MOST_SHOW_NUMBER_DESC">
+		<param name="show_comment_excerpt" type="radio" default="1" label="COMMENTS_LATEST_SHOW_EXCERPT" description="COMMENTS_LATEST_SHOW_EXCERPT_DESC">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="hide_trackbacks" type="radio" default="1" label="COMMENTS_LATEST_HIDE_TRACKBACKS" description="COMMENTS_LATEST_HIDE_TRACKBACKS_DESC">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="max_excerpt_length" type="text" default="50" label="COMMENTS_MAX_EXCERPT_LENGTH" description="COMMENTS_MAX_EXCERPT_LENGTH_DESC" size="3" />
+		<param name="show_feed_link" type="radio" default="1" label="COMMENTS_LATEST_SHOW_FEED_LINK" description="COMMENTS_LATEST_SHOW_FEED_LINK_DESC">
 			<option value="0">No</option>
 			<option value="1">Yes</option>
 		</param>
