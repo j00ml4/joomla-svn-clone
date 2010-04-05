@@ -875,7 +875,7 @@ VALUES
 -- Dumping data for table `#__social_comments`
 --
 
-#INSERT INTO `#__social_comments` VALUES
+INSERT INTO `#__social_comments` VALUES
 (1,1,0,'content',1,0,'','Andrew Eddie','andrew.example.com','andrew@example.com','Go Bronco\'s','The cockroaches have no chance against the cane toads in the State of Origin.',0,0,0,0,'','2010-04-05 10:45:08',0,2130706433,'',''),
 (2,1,0,'content',1,0,'','Louis Landry','louis.example.com','louis@example.com','Go Saints','It was a huge party in New Orleans',0,0,0,0,'','2010-04-05 10:51:58',0,2130706433,'','');
 
