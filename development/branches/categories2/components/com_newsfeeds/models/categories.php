@@ -8,7 +8,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modellist');
+jimport('joomla.application.component.model');
 
 /**
  * This models supports retrieving lists of newsfeed categories.
@@ -76,6 +76,7 @@ class NewsfeedsModelCategories extends JModel
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.access');
+		$id	.= ':'.$this->getState('filter.parentId');
 
 		return parent::_getStoreId($id);
 	}
@@ -120,5 +121,4 @@ class NewsfeedsModelCategories extends JModel
 		}
 		return $this->_parent;
 	}
-	
 }

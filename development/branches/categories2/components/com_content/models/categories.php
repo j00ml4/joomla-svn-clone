@@ -75,10 +75,7 @@ class ContentModelCategories extends JModel
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.parent_id');
-		$id	.= ':'.$this->getState('filter.get_children');
-		$id	.= ':'.$this->getState('filter.get_parents');
-		$id	.= ':'.$this->getState('filter.category_id');
+		$id	.= ':'.$this->getState('filter.parentId');
 
 		return parent::_getStoreId($id);
 	}
@@ -96,7 +93,10 @@ class ContentModelCategories extends JModel
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
-			$params->loadJSON($active->params);
+			if($active)
+			{
+				$params->loadJSON($active->params);
+			}
 			$options = array();
 			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_content', $options);
@@ -108,6 +108,7 @@ class ContentModelCategories extends JModel
 				$this->_items = false;
 			}
 		}
+		
 		return $this->_items;
 	}
 	
@@ -116,7 +117,6 @@ class ContentModelCategories extends JModel
 		if(!is_object($this->_parent))
 		{
 			$this->getItems();
-
 		}
 		return $this->_parent;
 	}

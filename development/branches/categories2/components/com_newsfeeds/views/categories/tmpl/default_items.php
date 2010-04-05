@@ -11,18 +11,12 @@
 // no direct access
 defined('_JEXEC') or die;
 $class = ' class="first"';
-if (count($this->items[$this->parent->id]) > 0)
-	:
+if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
 ?>
 <ul>
 <?php foreach($this->items[$this->parent->id] as $id => $item) : ?>
 	<?php
 	if($this->params->get('show_empty_categories') || $item->numitems || count($item->getChildren())) :
-	$maxlevel = $this->params->get('max_levels',0);
-	if ($maxlevel > 0 && $item->level > $maxlevel)
-	{
-		continue;		
-	} 
 	if(!isset($this->items[$this->parent->id][$id + 1]))
 	{
 		$class = ' class="last"';
@@ -45,11 +39,13 @@ if (count($this->items[$this->parent->id]) > 0)
 			</dl>
 		<?php endif; ?>
 		
-		<?php if(count($item->getChildren()) > 0 && $this->params->get('show_children', 0)) :
+		<?php if(count($item->getChildren()) > 0) :
 			$this->items[$item->id] = $item->getChildren();
 			$this->parent = $item;
+			$this->maxLevel--;
 			echo $this->loadTemplate('items');
 			$this->parent = $item->getParent();
+			$this->maxLevel++;
 		endif; ?>
 
 	</li>

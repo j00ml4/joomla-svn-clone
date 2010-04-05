@@ -32,10 +32,10 @@ class ContactModelCategories extends JModel
 	 * @var		string
 	 */
 	protected $_extension = 'com_contact';
-
-	private $_items = null;
 	
 	private $_parent = null;
+	
+	private $_items = null;
 	
 	/**
 	 * Method to auto-populate the model state.
@@ -75,10 +75,16 @@ class ContactModelCategories extends JModel
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.access');
+		$id	.= ':'.$this->getState('filter.parentId');
 
 		return parent::_getStoreId($id);
 	}
 
+	/**
+	 * redefine the function an add some properties to make the styling more easy
+	 *
+	 * @return mixed An array of data items on success, false on failure.
+	 */
 	public function getItems()
 	{
 		if(!count($this->_items))
@@ -87,9 +93,12 @@ class ContactModelCategories extends JModel
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
-			$params->loadJSON($active->params);
+			if($active)
+			{
+				$params->loadJSON($active->params);
+			}
 			$options = array();
-			$options['countItems'] = $params->get('show_articles', 0);
+			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('com_contact', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))
