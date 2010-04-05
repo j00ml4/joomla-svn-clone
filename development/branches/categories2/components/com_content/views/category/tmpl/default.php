@@ -26,18 +26,17 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_subheading')); ?>
 </h2>
 <?php endif; ?>
-	<?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
-		<div class="category-desc">
-			<!-- @TODO Verify image path defaults/overrides/positions -->
-			<?php if ($this->params->get('show_description_image') && $this->item->getParams()->get('image')) : ?>
-				<img src="<?php echo $this->item->getParams()->get('image'); ?>" />
-			<?php endif; ?>
-			<?php if ($this->params->get('show_description') && $this->item->description) : ?>
-				<?php echo $this->item->description; ?>
-			<?php endif; ?>
-			<div class="clr"></div>
-		</div>
+<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
+	<div class="category_desc">
+	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
+		<img src="images/<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
+	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
+		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
+	<?php endif; ?>
+	<div class="clr"></div>
+	</div>
+<?php endif; ?>
 
 	<?php if (is_array($this->children) && count($this->children) > 0) : ?>
 		<div class="jcat-children">

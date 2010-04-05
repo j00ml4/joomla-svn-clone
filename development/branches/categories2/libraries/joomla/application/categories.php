@@ -129,7 +129,7 @@ class JCategories
 	 * @param an optional id integer or equal to 'root'
 	 * @return JCategoryNode|null
 	 */
-	public function get($id = 'root')
+	public function get($id = 'root', $forceload = false)
 	{
 		if ($id !== 'root')
 		{
@@ -139,7 +139,7 @@ class JCategories
 				$id = 'root';
 			}
 		}
-		if (!isset($this->_nodes[$id]))
+		if (!isset($this->_nodes[$id]) || $forceload)
 		{
 			$this->_load($id);
 		}
@@ -347,15 +347,24 @@ class JCategoryNode extends JObject
 	protected $_allChildrenloaded = false;
 
 	/**
+	 * @var Constructor of this tree
+	 */
+	protected $_constructor = null;
+	
+	/**
 	 * Class constructor
 	 * @param $category
 	 * @return unknown_type
 	 */
-	public function __construct($category = null)
+	public function __construct($category = null, &$constructor = null)
 	{
 		if ($category)
 		{
 			$this->setProperties($category);
+			if($constructor)
+			{
+				$this->_constructor = $constructor;
+			}
 			return true;
 		}
 		return false;
@@ -432,8 +441,7 @@ class JCategoryNode extends JObject
 	{
 		if(!$this->_allChildrenloaded)
 		{
-			$categories = JCategories::getInstance($this->extension);
-			$categories->load($this->id, true);
+			$this->_constructor->get($this->id, true);
 		}
 		if($recursive)
 		{
@@ -506,8 +514,7 @@ class JCategoryNode extends JObject
 	{
 		if(!$this->_allChildrenloaded)
 		{
-			$categories = JCategories::getInstance($this->extension);
-			$categories->load($this->_parent->id, true);
+			$this->_constructor->get($this->id, true);
 		}
 		if($right)
 		{

@@ -5,7 +5,6 @@
  * @subpackage	Newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
- *
  */
 
 // Check to ensure this file is included in Joomla!
@@ -25,7 +24,7 @@ class NewsfeedsViewCategory extends JView
 	protected $state;
 	protected $items;
 	protected $category;
-	protected $categories;
+	protected $children;
 	protected $pagination;
 
 	function display($tpl = null)
@@ -65,19 +64,15 @@ class NewsfeedsViewCategory extends JView
 		}
 
 		// Prepare the data.
-
-		// Compute the active category slug.
-		$category->slug = $category->alias ? ($category->id.':'.$category->alias) : $category->id;
-
-		// Prepare category description (runs content plugins)
-		// TODO: only use if the description is displayed
-		$category->description = JHtml::_('content.prepare', $category->description);
-
 		// Compute the newsfeed slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
+			$temp		= new JRegistry();
+			$temp->loadJSON($item->params);
+			$item->params = clone($params);
+			$item->params->merge($temp);
 		}
 		
 		if($params->get('max_levels', 0) > 0)

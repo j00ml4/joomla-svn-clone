@@ -14,8 +14,11 @@ jimport('joomla.application.component.view');
 jimport('joomla.mail.helper');
 
 /**
+ * HTML View class for the Contacts component
+ *
  * @package		Joomla.Site
- * @subpackage	Contacts
+ * @subpackage	com_contacts
+ * @since		1.5
  */
 class ContactViewCategory extends JView
 {
@@ -54,7 +57,6 @@ class ContactViewCategory extends JView
 			//TODO Raise error for missing parent category here
 		}
 
-
 		// Check whether category access level allows access.
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
@@ -63,43 +65,29 @@ class ContactViewCategory extends JView
 		}
 
 		// Prepare the data.
-
-		// Compute the active category slug.
-		$category->slug = $category->alias ? ($category->id.':'.$category->alias) : $category->id;
-
-		// Prepare category description (runs content plugins)
-		// TODO: only use if the description is displayed
-		$category->description = JHtml::_('content.prepare', $category->description);
-
-		// Compute the newsfeed slug.
+		// Compute the contact slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
 			$item		= &$items[$i];
 			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
+			$temp		= new JRegistry();
+			$temp->loadJSON($item->params);
+			$item->params = clone($params);
+			$item->params->merge($temp);
+			if ($item->params->get('show_email', 0) == 1) {
+				$item->email_to = trim($item->email_to);
+				if (!empty($item->email_to) && JMailHelper::isEmailAddress($item->email_to)) {
+					$item->email_to = JHtml::_('email.cloak', $item->email_to);
+				} else {
+					$item->email_to = '';
+				}
+			}
 		}
 
 		if($params->get('max_levels', 0) > 0)
 		{
 			$params->set('max_levels', $params->get('max_levels') + $category->level);
 		}
-
-		foreach($items as &$contact)
-		{
-			$contact->slug = $contact->alias ? ($contact->id.':'.$contact->alias) : $contact->id;
-
-			$contact->link = JRoute::_(ContactHelperRoute::getContactRoute($contact->slug, $contact->catid));
-			if ($params->get('show_email', 0) == 1) {
-				$contact->email_to = trim($contact->email_to);
-				if (!empty($contact->email_to) && JMailHelper::isEmailAddress($contact->email_to)) {
-					$contact->email_to = JHtml::_('email.cloak', $contact->email_to);
-				} else {
-					$contact->email_to = '';
-				}
-			}
-		}
-
-		// Prepare category description
-		$category->description = JHtml::_('content.prepare', $category->description);
 
 		$children = array($category->id => $children);
 

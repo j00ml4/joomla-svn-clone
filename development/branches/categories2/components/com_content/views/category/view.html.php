@@ -1,11 +1,13 @@
 <?php
 /**
- * @version		$Id$
+ * version $Id$
+ * @package		Joomla
+ * @subpackage	Content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access
+// Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
@@ -19,92 +21,104 @@ jimport('joomla.application.component.view');
  */
 class ContentViewCategory extends JView
 {
-	protected $state = null;
-	protected $item = null;
-	protected $articles = null;
-	protected $pagination = null;
+	protected $state;
+	protected $items;
+	protected $category;
+	protected $children;
+	protected $pagination;
 
 	protected $lead_items = array();
 	protected $intro_items = array();
 	protected $link_items = array();
 	protected $columns = 1;
 
-	/**
-	 * Display the view
-	 *
-	 * @return	mixed	False on error, null otherwise.
-	 */
 	function display($tpl = null)
 	{
-		// Initialise variables.
+		$app		= &JFactory::getApplication();
+		$params		= &$app->getParams();
 		$user =& JFactory::getUser();
-		$app =& JFactory::getApplication();
-		$uri =& JFactory::getURI();
 
-		$state 		= $this->get('State');
-		$params 	=& $state->params;
-		$item 		= $this->get('Item');
-		$articles 	= $this->get('Articles');
-		$pagination	= $this->get('Pagination');
+		// Get some data from the models
+		$state		= &$this->get('State');
+		$items		= &$this->get('Items');
+		$category	= &$this->get('Category');
+		$children	= &$this->get('Children');
+		$parent 	= &$this->get('Parent');
+		$pagination	= &$this->get('Pagination');
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			JError::raiseWarning(500, implode("\n", $errors));
+			// Check for errors.
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
-		// PREPARE THE DATA
+		if($category == false)
+		{
+			return JError::raiseWarning(404, JText::_('COM_NEWSFEEDS_ERRORS_CATEGORY_NOT_FOUND'));
+		}
 
+		if($parent == false)
+		{
+			//TODO Raise error for missing parent category here
+		}
+
+		// Check whether category access level allows access.
+		$user	= &JFactory::getUser();
+		$groups	= $user->authorisedLevels();
+		if (!in_array($category->access, $groups)) {
+			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
+		}
+		
+		// PREPARE THE DATA
 		// Get the metrics for the structural page layout.
 		$numLeading = $params->def('num_leading_articles', 1);
 		$numIntro = $params->def('num_intro_articles', 4);
 		$numLinks = $params->def('num_links', 4);
 
-		// Compute the category slug and prepare description (runs content plugins).
-		$item->description = JHtml::_('content.prepare', $item->description);
-
 		// Compute the article slugs and prepare introtext (runs content plugins).
-		foreach ($articles as $i => & $article)
+		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
-			$article->slug = $article->alias ? ($article->id . ':' . $article->alias) : $article->id;
-			$article->catslug = $article->category_alias ? ($article->catid . ':' . $article->category_alias) : $article->catid;
-			$article->parent_slug = $article->parent_alias ? ($article->parent_id . ':' . $article->parent_alias) : $article->parent_id;
-			
+			$item		= &$items[$i];
+			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
+			$temp		= new JRegistry();
+			$temp->loadJSON($item->params);
+			$item->params = clone($params);
+			$item->params->merge($temp);
+
 			// No link for ROOT category
-			if ($article->parent_alias == 'root') {
-				$article->parent_slug = null;
+			if ($item->parent_alias == 'root') {
+				$item->parent_slug = null;
 			}
 
-			$article->event = new stdClass();
+			$item->event = new stdClass();
 
 			$dispatcher =& JDispatcher::getInstance();
 
 			// Ignore content plugins on links.
 			if ($i < $numLeading + $numIntro)
 			{
-				$article->introtext = JHtml::_('content.prepare', $article->introtext);
+				$item->introtext = JHtml::_('content.prepare', $item->introtext);
 
-				$results = $dispatcher->trigger('onAfterDisplayTitle', array(&$article, &$article->params, 0));
-				$article->event->afterDisplayTitle = trim(implode("\n", $results));
+				$results = $dispatcher->trigger('onAfterDisplayTitle', array(&$item, &$item->params, 0));
+				$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-				$results = $dispatcher->trigger('onBeforeDisplayContent', array(&$article, &$article->params, 0));
-				$article->event->beforeDisplayContent = trim(implode("\n", $results));
+				$results = $dispatcher->trigger('onBeforeDisplayContent', array(&$item, &$item->params, 0));
+				$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-				$results = $dispatcher->trigger('onAfterDisplayContent', array(&$article, &$article->params, 0));
-				$article->event->afterDisplayContent = trim(implode("\n", $results));
+				$results = $dispatcher->trigger('onAfterDisplayContent', array(&$item, &$item->params, 0));
+				$item->event->afterDisplayContent = trim(implode("\n", $results));
 			}
 		}
 
 		// Preprocess the breakdown of leading, intro and linked articles.
 		// This makes it much easier for the designer to just interogate the arrays.
-		$max = count($articles);
+		$max = count($items);
 
 		// The first group is the leading articles.
 		$limit = $numLeading;
 		for ($i = 0; $i < $limit && $i < $max; $i++)
 		{
-			$this->lead_items[$i] =& $articles[$i];
+			$this->lead_items[$i] =& $items[$i];
 		}
 
 		// The second group is the intro articles.
@@ -112,7 +126,7 @@ class ContentViewCategory extends JView
 		// Order articles across, then down (or single column mode)
 		for ($i = $numLeading; $i < $limit && $i < $max; $i++)
 		{
-			$this->intro_items[$i] =& $articles[$i];
+			$this->intro_items[$i] =& $items[$i];
 		}
 
 		$this->columns = max(1, $params->def('num_columns', 1));
@@ -127,20 +141,17 @@ class ContentViewCategory extends JView
 		// The remainder are the links.
 		for ($i = $numLeading + $numIntro; $i < $max; $i++)
 		{
-			$this->link_items[$i] =& $articles[$i];
+			$this->link_items[$i] =& $items[$i];
 		}
 
-		$this->assign('action', str_replace('&', '&amp;', $uri));
-
-		$this->assignRef('params', $params);
-		$this->assignRef('item', $item);
-		$this->assignRef('articles', $articles);
-		$this->assignRef('siblings', $siblings);
-		$this->assignRef('children', $children);
-		$this->assignRef('parents', $parents);
-		$this->assignRef('pagination', $pagination);
+		$this->assignRef('state',		$state);
+		$this->assignRef('items',		$items);
+		$this->assignRef('category',	$category);
+		$this->assignRef('children',	$children);
+		$this->assignRef('params',		$params);
+		$this->assignRef('parent',		$parent);
+		$this->assignRef('pagination',	$pagination);
 		$this->assignRef('user', $user);
-		$this->assignRef('state', $state);
 
 		$this->_prepareDocument();
 
