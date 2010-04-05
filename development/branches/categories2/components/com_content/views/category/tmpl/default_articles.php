@@ -14,11 +14,11 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::core();
 
-$n = count($this->articles);
+$n = count($this->items);
 
 ?>
 
-<?php if (empty($this->articles)) : ?>
+<?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('JContent_No_Articles'); ?></p>
 <?php else : ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
@@ -37,8 +37,8 @@ $n = count($this->articles);
 			<?php echo JText::_('COM_CONTENT_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
-	<?php endif; ?>
-	</fieldset>	<?php if ($this->params->get('filter_field') != 'hide') :?>
+	<?php endif; ?>	
+	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	</fieldset>
 	<?php endif; ?>
 
@@ -68,7 +68,7 @@ $n = count($this->articles);
 	</tr></thead>
 	<?php endif; ?>
 	<tbody>
-		<?php foreach ($this->articles as $i => &$article) : ?>
+		<?php foreach ($this->items as $i => &$article) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
 				<td class="list-title">

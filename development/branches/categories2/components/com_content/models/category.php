@@ -126,7 +126,7 @@ class ContentModelCategory extends JModelItem
 	 *
 	 * @return	mixed	An array of articles or false if an error occurs.
 	 */
-	function getArticles()
+	function getItems()
 	{
 		$params = $this->getState()->get('params');
 		// set limit for query. If list, use parameter. If blog, add blog parameters for limit.
@@ -138,7 +138,7 @@ class ContentModelCategory extends JModelItem
 		{
 			$limit = $this->getState('list.limit');
 		}
-		if ($this->_articles === null && $category =& $this->getItem())
+		if ($this->_articles === null && $category =& $this->getCategory())
 		{
 			$model =& JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 			$model->setState('params', JFactory::getApplication()->getParams());
@@ -217,7 +217,7 @@ class ContentModelCategory extends JModelItem
 	 * @return	object
 	 * @since	1.5
 	 */
-	public function getItem()
+	public function getCategory()
 	{
 		if(!is_object($this->_item))
 		{
