@@ -145,7 +145,7 @@ class JCacheHandler
 	 * @since	1.6
 	 */
 	function get($id, $group=null)
-	{	$data = $this->cache->get($id, $group=null);
+	{	$data = unserialize($this->cache->get($id, $group=null));
 		return $data;
 	}
 	
@@ -161,7 +161,7 @@ class JCacheHandler
 	 */
 	function store($data, $id, $group=null)
 	{
-		return $this->cache->store($data, $id, $group=null);
+		return $this->cache->store(serialize($data), $id, $group=null);
 	}
 
 }
