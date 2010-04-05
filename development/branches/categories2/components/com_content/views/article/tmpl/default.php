@@ -76,7 +76,7 @@ $params = $this->item->params;
  <dl class="article-info">
  <dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
 <?php endif; ?>
-<?php if ($params->get('show_parent_category')) : ?>
+<?php if ($params->get('show_parent_category') && $this->item->parent_slug != '1:root') : ?>
 		<dd class="parent-category-name">
 			<?php $title = $this->escape($this->item->parent_title);
 				$title = ($title) ? $title : JText::_('Uncategorised');
