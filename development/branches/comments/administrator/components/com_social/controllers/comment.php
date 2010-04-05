@@ -11,32 +11,31 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controllerform');
 
 /**
- * Comments controller class.
+ * Social controller class.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsControllerComment extends JControllerForm
+class SocialControllerComment extends JControllerForm
 {
 	/**
 	 * Set the moderation state of a set of comments.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function moderate()
+	public function moderate()
 	{
 		// Initialise variables.
 		$c_id	= JRequest::getVar('moderate', array(), '', 'array');
 		$delete	= false;
 
 		if (!is_array($c_id) or (count($c_id) < 1)) {
-			$this->setMessage(JText::_('COMMENTS_SELECT_COMMENT_TO_MODERATE'), 'warning');
+			$this->setMessage(JText::_('SOCIAL_SELECT_COMMENT_TO_MODERATE'), 'warning');
 		} else {
 			// Get the model.
-			$model = $this->getModel('Comment', 'CommentsModel', array('ignore_request' => true));
+			$model = $this->getModel('Comment', 'SocialModel', array('ignore_request' => true));
 
 			/*
 			 * We have to split the array because we need to sanitize the array keys.
@@ -64,21 +63,21 @@ class CommentsControllerComment extends JControllerForm
 
 			// Publish the items.
 			if(!$model->moderate($c_id)) {
-				$this->setMessage( JText::_('COMMENTS_UNABLE_TO_MODERATE_COMMENTS'), 'notice');
+				$this->setMessage( JText::_('SOCIAL_UNABLE_TO_MODERATE_COMMENTS'), 'notice');
 			} else {
 				$messages = array();
 
 				if ($defer) {
-					$messages[] = JText::sprintf('COMMENTS_MODERATE_NUM_DEFERRED', $defer);
+					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_DEFERRED', $defer);
 				}
 				if ($publish) {
-					$messages[] = JText::sprintf('COMMENTS_MODERATE_NUM_PUBLISHED', $publish);
+					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_PUBLISHED', $publish);
 				}
 				if ($delete) {
-					$messages[] = JText::sprintf('COMMENTS_MODERATE_NUM_DELETED', $delete);
+					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_DELETED', $delete);
 				}
 				if ($spam) {
-					$messages[] = JText::sprintf('COMMENTS_MODERATE_NUM_SPAMMED', $spam);
+					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_SPAMMED', $spam);
 				}
 
 				$this->setMessage(implode(' ', $messages));
@@ -94,7 +93,7 @@ class CommentsControllerComment extends JControllerForm
 			// Check for the chance of being on the comment page and deleting the comment.
 			$this->setRedirect(base64_decode($return));
 		} else {
-			$this->setRedirect('index.php?option=com_comments&view=comments');
+			$this->setRedirect('index.php?option=com_social&view=comments');
 		}
 	}
 }

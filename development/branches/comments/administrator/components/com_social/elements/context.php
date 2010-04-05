@@ -9,10 +9,10 @@
 defined('_JEXEC') or die;
 
 /**
- * JParameter element for selecting JXtended Comments contexts.
+ * JParameter element for selecting JXtended Social contexts.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.0
  */
 class JElementContext extends JElement

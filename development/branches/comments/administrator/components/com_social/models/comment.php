@@ -14,10 +14,10 @@ jimport('joomla.application.component.modelform');
  * Comment model.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsModelComment extends JModelForm
+class SocialModelComment extends JModelForm
 {
 	/**
 	 * Filter the body text according to configuration options.
@@ -29,7 +29,7 @@ class CommentsModelComment extends JModelForm
 	public static function filterBody($value)
 	{
 		// If html is not enabled, then lets filter it out
-		$config = JComponentHelper::getParams('com_comments');
+		$config = JComponentHelper::getParams('com_social');
 		if ($config->get('enable_html')) {
 			$return = JFilterInput::getInstance(null, null, 1, 1)->clean($value, 'string');
 		} else {
@@ -48,13 +48,13 @@ class CommentsModelComment extends JModelForm
 		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_comments.edit.comment.id'))) {
+		if (!($pk = (int) $app->getUserState('com_social.edit.comment.id'))) {
 			$pk = (int) JRequest::getInt('id');
 		}
 		$this->setState('comment.id', $pk);
 
 		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_comments');
+		$params	= JComponentHelper::getParams('com_social');
 		$this->setState('params', $params);
 	}
 
@@ -86,7 +86,7 @@ class CommentsModelComment extends JModelForm
 		foreach ($pks as $i => $pk) {
 			if ($table->load($pk)) {
 				// Access checks.
-				$allow = $user->authorise('core.delete', 'com_comments');
+				$allow = $user->authorise('core.delete', 'com_social');
 
 				if ($allow) {
 					if (!$table->delete($pk)) {
@@ -119,14 +119,14 @@ class CommentsModelComment extends JModelForm
 
 		// Get the form.
 		try {
-			$form = parent::getForm('com_comments.comment', 'comment', array('control' => 'jform'));
+			$form = parent::getForm('com_social.comment', 'comment', array('control' => 'jform'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_comments.edit.comment.data', array());
+		$data = $app->getUserState('com_social.edit.comment.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -279,9 +279,9 @@ class CommentsModelComment extends JModelForm
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Comment', $prefix = 'CommentsTable', $config = array())
+	public function getTable($type = 'Comment', $prefix = 'SocialTable', $config = array())
 	{
-		JTable::addIncludePath(JPATH_SITE.'/components/com_comments/tables');
+		JTable::addIncludePath(JPATH_SITE.'/components/com_social/tables');
 
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -326,7 +326,7 @@ class CommentsModelComment extends JModelForm
 	{
 		// Initialise variables.
 		$db		= $this->getDBO();
-		$config	= JComponentHelper::getParams('com_comments');
+		$config	= JComponentHelper::getParams('com_social');
 
 		$useAkismet= false;
 		if ($config->get('enable_akismet')) {
@@ -337,7 +337,7 @@ class CommentsModelComment extends JModelForm
 			if ($valid and !JError::isError($valid)) {
 				$useAkismet = true;
 			} else {
-				JError::raiseNotice(500, JText::_('COMMENTS_INVALID_AKISMET_KEY'));
+				JError::raiseNotice(500, JText::_('SOCIAL_INVALID_AKISMET_KEY'));
 			}
 		}
 

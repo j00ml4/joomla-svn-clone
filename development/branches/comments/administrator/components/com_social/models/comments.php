@@ -14,17 +14,17 @@ jimport('joomla.application.component.modellist');
  * Methods supporting a list of comment records.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsModelComments extends JModelList
+class SocialModelComments extends JModelList
 {
 	/**
 	 * Model context string.
 	 *
 	 * @var	string
 	 */
-	protected $_context = 'com_comments.comments';
+	protected $_context = 'com_social.comments';
 
 	/**
 	 * Build an SQL query to load the list data.
@@ -133,7 +133,7 @@ class CommentsModelComments extends JModelList
 		$this->setState('filter.thread_id', $value);
 
 		// Load the parameters.
-		$value = JComponentHelper::getParams('com_comments');
+		$value = JComponentHelper::getParams('com_social');
 		$this->setState('params', $value);
 
 		// List state information.

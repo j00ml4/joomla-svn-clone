@@ -11,13 +11,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Comments model for the Comments package.
+ * Social model for the Social package.
  *
- * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @package		Joomla.Administrator
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsModelThreads extends JModelList
+class SocialModelThreads extends JModelList
 {
 	/**
 	 * Method to build an SQL query to load the list data.
@@ -93,7 +93,7 @@ class CommentsModelThreads extends JModelList
 	protected function _populateState()
 	{
 		$app		= JFactory::getApplication('administrator');
-		$context	= 'com_comments.threads';
+		$context	= 'com_social.threads';
 
 		// Load the filter state.
 		$search = $app->getUserStateFromRequest($context.'.filter.search', 'filter_search');
@@ -103,7 +103,7 @@ class CommentsModelThreads extends JModelList
 		$this->setState('filter.context', $context);
 
 		// Load the parameters.
-		$params = JComponentHelper::getParams('com_comments');
+		$params = JComponentHelper::getParams('com_social');
 		$this->setState('params', $params);
 
 		// List state information.

@@ -11,20 +11,20 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controller');
 
 /**
- * Comments master display controller.
+ * Social master display controller.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsController extends JController
+class SocialController extends JController
 {
 	/**
 	 * Method to display a view.
 	 */
 	public function display()
 	{
-		require_once JPATH_COMPONENT.'/helpers/comments.php';
+		require_once JPATH_COMPONENT.'/helpers/social.php';
 
 		// Get the document object.
 		$document = JFactory::getDocument();
@@ -50,7 +50,7 @@ class CommentsController extends JController
 			$view->display();
 
 			// Load the submenu.
-			CommentsHelper::addSubmenu($vName);
+			SocialHelper::addSubmenu($vName);
 		}
 	}
 }
