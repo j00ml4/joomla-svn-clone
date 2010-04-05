@@ -27,6 +27,13 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+29-Mar-2010 Jean-Marie Simonet
+$ Refactored com_search back-end front end ini/keys +some
+$ Added a string for com_module to customize "item"
+
+28-Mar-2010 Jean-Marie Simonet
+$ Correcting some language strings
+
 27-Mar-2010 Hannes Papenberg
 # Fixed com_mailto, com_search, com_users, com_weblinks in frontend and com_plugins in backend to properly use JController::getInstance() and not hard-include a controller
 # Fixed URL routing in categories view
