@@ -351,7 +351,7 @@ class ContentModelArticles extends JModelList
 		}
 
 		// Add the list ordering clause.
-		if($this->getState('list.ordering') == 'fp.ordering')
+		if(strpos($this->getState('list.ordering'), 'fp.ordering') !== false)
 		{
 			$query->join('LEFT', '#__content_frontpage AS fp ON fp.content_id = a.id');	
 		}
