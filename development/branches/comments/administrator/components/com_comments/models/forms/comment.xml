@@ -39,6 +39,7 @@
 		<field name="body" type="textarea"
 			cols="80"
 			description="Comments_Field_Body_Desc"
+			filter="CommentsModelComment::filterBody"
 			label="Comments_Field_Body_Label"
 			required="true"
 			rows="10"

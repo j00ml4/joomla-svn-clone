@@ -27,7 +27,7 @@ JHtml::_('behavior.keepalive');
 // -->
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_newsfeeds'); ?>" method="post" name="adminForm" id="newsfeed-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_comments'); ?>" method="post" name="adminForm" id="comment-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend>

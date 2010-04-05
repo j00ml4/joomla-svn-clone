@@ -22,27 +22,28 @@ $pane = JPane::getInstance('sliders');
 		<fieldset>
 			<ul class="published_selector">
 				<?php if ($this->item->published == 0) : ?>
-				<li class="defer" style="float:left;">
-					<input id="moderate_defer" type="radio" name="moderate[<?php echo $this->item->id; ?>]" value="0" <?php echo ($this->item->published == 0) ? 'checked="checked"' : null; ?> /><label for="moderate_defer"><?php echo JText::_('COMMENTS_DEFER'); ?></label>
+				<li class="defer">
+					<input id="moderate_defer" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="0" <?php echo ($this->item->published == 0) ? 'checked="checked"' : null; ?> /><label for="moderate_defer"><?php echo JText::_('COMMENTS_DEFER'); ?></label>
 				</li>
 				<?php endif; ?>
-				<li class="publish" style="float:left;">
-					<input id="moderate_publish" type="radio" name="moderate[<?php echo $this->item->id; ?>]" value="1"<?php echo ($this->item->published == 1) ? 'checked="checked"' : null; ?> /><label for="moderate_publish"><?php echo JText::_('JPUBLISHED'); ?></label>
+				<li class="publish">
+					<input id="moderate_publish" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="1"<?php echo ($this->item->published == 1) ? 'checked="checked"' : null; ?> /><label for="moderate_publish"><?php echo JText::_('JPUBLISHED'); ?></label>
 				</li>
 
-				<li class="spam" style="float:left;">
-					<input id="moderate_spam" type="radio" name="moderate[<?php echo $this->item->id; ?>]" value="2"<?php echo ($this->item->published == 2) ? 'checked="checked"' : null; ?> /><label for="moderate_spam"><?php echo JText::_('COMMENTS_SPAM'); ?></label>
+				<li class="spam">
+					<input id="moderate_spam" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="-1"<?php echo ($this->item->published == -1) ? 'checked="checked"' : null; ?> /><label for="moderate_spam"><?php echo JText::_('COMMENTS_SPAM'); ?></label>
 				</li>
 
-				<li class="delete" style="float:left;">
-					<input id="moderate_delete" type="radio" name="moderate[<?php echo $this->item->id; ?>]" value="-1" /><label for="moderate_delete"><?php echo JText::_('COMMENTS_DELETE'); ?></label>
+				<li class="delete">
+					<input id="moderate_delete" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="-2" /><label for="moderate_delete"><?php echo JText::_('COMMENTS_DELETE'); ?></label>
 				</li>
 
 				<li class="moderate" style="float:right;">
-					<input type="submit" name="task[comment.moderate]" value="<?php echo $this->escape(JText::_('COMMENTS_MODERATE')); ?>" />
+					<input type="button" onclick="submitbutton('comment.moderate')" value="<?php echo $this->escape(JText::_('COMMENTS_MODERATE')); ?>" />
 				</li>
 			</ul>
-			<input type="hidden" name="id" value="<?php echo $this->item->id; ?>" />
+			<input type="hidden" name="id" value="<?php echo (int) $this->item->id; ?>"
+			<input type="hidden" name="return" value="<?php echo base64_encode('index.php?option=com_comments&view=comment&id='.(int) $this->item->id);?>" />
 			<input type="hidden" name="task" />
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>

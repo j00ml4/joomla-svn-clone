@@ -14,17 +14,17 @@ jimport('joomla.application.component.view');
  * Hybrid view to display or edit a newsfeed.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_newsfeeds
+ * @subpackage	com_comments
  * @since		1.6
  */
 class CommentsViewComment extends JView
 {
-	protected $state;
+	protected $addressList;
 	protected $item;
 	protected $form;
-	protected $threadList;
 	protected $nameList;
-	protected $addressList;
+	protected $state;
+	protected $threadList;
 
 	/**
 	 * Display the view
@@ -32,17 +32,16 @@ class CommentsViewComment extends JView
 	public function display($tpl = null)
 	{
 		// Initialise variables.
-		$editMode		= ($this->getLayout() == 'edit');
-		$state			= $this->get('State');
-		$item			= $this->get('Item');
-		$thread			= $this->get('Thread');
+		$this->state	= $this->get('State');
+		$this->item		= $this->get('Item');
+		$this->thread	= $this->get('Thread');
 
-		if ($editMode) {
-			$form = $this->get('Form');
+		if ($this->getLayout() == 'edit') {
+			$this->form = $this->get('Form');
 		} else {
-			$threadList		= $this->get('ListByThread');
-			$nameList		= $this->get('ListByName');
-			$addressList	= $this->get('ListByIP');
+			$this->addressList	= $this->get('ListByIP');
+			$this->nameList		= $this->get('ListByName');
+			$this->threadList	= $this->get('ListByThread');
 		}
 
 		// Check for errors.
@@ -51,19 +50,10 @@ class CommentsViewComment extends JView
 			return false;
 		}
 
-		if ($editMode) {
+		if ($this->form) {
 			// Bind the record to the form.
-			$form->bind($item);
-			$this->assignRef('form', $form);
-		} else {
-			$this->assignRef('threadList',	$threadList);
-			$this->assignRef('nameList',	$nameList);
-			$this->assignRef('addressList',	$addressList);
+			$this->form->bind($this->item);
 		}
-
-		$this->assignRef('state',		$state);
-		$this->assignRef('item',		$item);
-		$this->assignRef('thread',		$thread);
 
 		$this->setToolbar();
 		parent::display($tpl);
@@ -78,11 +68,12 @@ class CommentsViewComment extends JView
 
 		if ($this->getLayout() == 'edit') {
 			JRequest::setVar('hidemainmenu', true);
-			JToolBarHelper::title('Comments: '.JText::_('COMMENTS_EDIT_COMMENT'), 'logo');
-			JToolBarHelper::save('comment.save');
+			JToolBarHelper::title(JText::_('COMMENTS_EDIT_COMMENT'));
+			JToolBarHelper::apply('comment.apply', 'JToolbar_Apply');
+			JToolBarHelper::save('comment.save', 'JToolbar_Save');
 			JToolBarHelper::cancel('comment.cancel');
 		} else {
-			JToolBarHelper::title('Comments: '.JText::_('COMMENTS_MODERATE_COMMENT'), 'logo');
+			JToolBarHelper::title(JText::_('COMMENTS_MODERATE_COMMENT'));
 			JToolBarHelper::custom('comment.edit', 'edit.png', 'edit_f2.png', 'JToolbar_Edit', false);
 			JToolBarHelper::cancel('comment.cancel');
 		}
