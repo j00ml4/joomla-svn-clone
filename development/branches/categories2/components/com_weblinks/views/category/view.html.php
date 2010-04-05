@@ -1,6 +1,8 @@
 <?php
 /**
- * @version		$Id$
+ * version $Id$
+ * @package		Joomla
+ * @subpackage	Weblinks
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -22,22 +24,21 @@ class WeblinksViewCategory extends JView
 	protected $state;
 	protected $items;
 	protected $category;
-	protected $categories;
+	protected $children;
 	protected $pagination;
 
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
+		$params		= &$app->getParams();
 
 		// Get some data from the models
 		$state		= &$this->get('State');
-
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
 		$children	= &$this->get('Children');
 		$parent 	= &$this->get('Parent');
 		$pagination	= &$this->get('Pagination');
-		$params = &$state->params;
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -63,14 +64,6 @@ class WeblinksViewCategory extends JView
 		}
 
 		// Prepare the data.
-
-		// Compute the active category slug.
-		$category->slug = $category->alias ? ($category->id.':'.$category->alias) : $category->id;
-
-		// Prepare category description (runs content plugins)
-		// TODO: only use if the description is displayed
-		$category->description = JHtml::_('content.prepare', $category->description);
-
 		// Compute the weblink slug & link url.
 		for ($i = 0, $n = count($items); $i < $n; $i++)
 		{
@@ -81,6 +74,15 @@ class WeblinksViewCategory extends JView
 			} else {
 				$item->link = $item->url;
 			}
+			$temp		= new JRegistry();
+			$temp->loadJSON($item->params);
+			$item->params = clone($params);
+			$item->params->merge($temp);
+		}
+			
+		if($params->get('max_levels', 0) > 0)
+		{
+			$params->set('max_levels', $params->get('max_levels') + $category->level);
 		}
 		
 		$children = array($category->id => $children);
