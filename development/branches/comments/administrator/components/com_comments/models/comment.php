@@ -20,6 +20,25 @@ jimport('joomla.application.component.modelform');
 class CommentsModelComment extends JModelForm
 {
 	/**
+	 * Filter the body text according to configuration options.
+	 *
+	 * @param	string	The body text
+	 * @return	string
+	 * @since	1.6
+	 */
+	public static function filterBody($value)
+	{
+		// If html is not enabled, then lets filter it out
+		$config = JComponentHelper::getParams('com_comments');
+		if ($config->get('enable_html')) {
+			$return = JFilterInput::getInstance(null, null, 1, 1)->clean($value, 'string');
+		} else {
+			$return = JFilterInput::getInstance()->clean($value);
+		}
+		return $return;
+	}
+
+	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * @since	1.6

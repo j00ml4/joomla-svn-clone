@@ -15,58 +15,18 @@ defined('_JEXEC') or die('Invalid Request.');
  *
  * @package		JXtended.Comments
  * @subpackage	com_comments
- * @version		1.0
+ * @version		1.6
  */
 class CommentsTableComment extends JTable
 {
-	/** @var int */
-	var $id = null;
-	/** @var int unsigned */
-	var $user_id = null;
-	/** @var int */
-	var $thread_id = null;
-	/** @var varchar */
-	var $context = null;
-	/** @var int */
-	var $context_id = null;
-	/** @var int */
-	var $trackback = null;
-	/** @var int */
-	var $notify = null;
-	/** @var int */
-	var $score = null;
-	/** @var varchar */
-	var $referer = null;
-	/** @var varchar */
-	var $page = null;
-	/** @var varchar */
-	var $name = null;
-	/** @var varchar */
-	var $url = null;
-	/** @var varchar */
-	var $email = null;
-	/** @var varchar */
-	var $subject = null;
-	/** @var text */
-	var $body = null;
-	/** @var datetime */
-	var $created_date = null;
-	/** @var int unsigned */
-	var $published = null;
-	/** @var varchar */
-	var $address = null;
-	/** @var varchar */
-	var $link = null;
-
 	/**
 	 * Constructor
 	 *
-	 * @access	public
 	 * @param	object	Database object
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function __construct(&$db)
+	public function __construct(&$db)
 	{
 		parent::__construct('#__social_comments', 'id', $db);
 	}
@@ -74,11 +34,10 @@ class CommentsTableComment extends JTable
 	/**
 	 * Method to check the current record to save
 	 *
-	 * @access	public
 	 * @return	boolean	True on success
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function check()
+	public function check()
 	{
 		// Get the JXtended Comments configuration object.
 		$config = &JComponentHelper::getParams('com_comments');
