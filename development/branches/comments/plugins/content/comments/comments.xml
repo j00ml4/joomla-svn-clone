@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install
-	version="1.5"
-	type="plugin"
-	group="content">
+<install version="1.5" type="plugin" group="content">
 	<name>Content - Comments</name>
 	<group>content</group>
 	<version>1.2.1 Beta 1</version>
@@ -10,145 +7,90 @@
 	<author>JXtended</author>
 	<authorEmail>info@jxtended.com</authorEmail>
 	<authorUrl>http://jxtended.com</authorUrl>
-	<copyright>2008 JXtended LLC. All rights reserved.</copyright>
+	<copyright>2008 JXtended LLC. All rights reserved.
+	</copyright>
 	<description>COMMENTS_CONTENT_PLUGIN_DESC</description>
 	<files>
-		<filename
-			plugin="comments">comments.php</filename>
+		<filename plugin="comments">comments.php</filename>
 	</files>
-	<params
-		addpath="/administrator/components/com_comments/elements">
-		<param
-			name="show_uncat"
-			type="radio"
-			default="0"
-			label="SHOW_UNCATEGORIZED"
-			description="SHOW_UNCATEGORIZED_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-		<param
-			name="categories"
-			type="category"
-			multiple="true"
-			size="10"
-			default=""
-			label="ENABLED_CATEGORIES"
-			description="ENABLED_CATEGORIES_DESC" />
+	<config>
+		<fields name="params"
+			addpath="/administrator/components/com_comments/models/fields"
+		>
+			<fieldset name="basic">
+				<field name="show_uncat" type="radio" default="0"
+					label="SHOW_UNCATEGORIZED" description="SHOW_UNCATEGORIZED_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+				<field name="categories" type="category" multiple="true"
+					size="10" default="" label="ENABLED_CATEGORIES"
+					description="ENABLED_CATEGORIES_DESC" />
 
-		<param
-			name="@spacer"
-			type="spacer" />
-		<param
-			name="show_on_frontpage"
-			type="radio"
-			default="1"
-			label="SHOW_FRONTPAGE"
-			description="SHOW_FRONTPAGE_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-		<param
-			name="show_on_sections"
-			type="radio"
-			default="1"
-			label="SHOW_SECTIONS"
-			description="SHOW_SECTIONS_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-		<param
-			name="show_on_categories"
-			type="radio"
-			default="1"
-			label="SHOW_CATEGORIES"
-			description="SHOW_CATEGORIES_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
+				<field name="@spacer" type="spacer" />
+				<field name="show_on_frontpage" type="radio"
+					default="1" label="SHOW_FRONTPAGE" description="SHOW_FRONTPAGE_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+				<field name="show_on_sections" type="radio"
+					default="1" label="SHOW_SECTIONS" description="SHOW_SECTIONS_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+				<field name="show_on_categories" type="radio"
+					default="1" label="SHOW_CATEGORIES" description="SHOW_CATEGORIES_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
 
-		<param
-			name="@spacer"
-			type="spacer" />
-		<param
-			name="show_share"
-			type="radio"
-			default="1"
-			label="SHOW_SHARING"
-			description="SHOW_SHARING_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-		<param
-			name="show_ratings"
-			type="radio"
-			default="1"
-			label="SHOW_RATINGS"
-			description="SHOW_RATINGS_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-		<param
-			name="show_comments"
-			type="radio"
-			default="1"
-			label="SHOW_COMMENTS"
-			description="SHOW_COMMENTS_DESC">
-			<option
-				value="0">NO</option>
-			<option
-				value="1">YES</option>
-		</param>
-	</params>
-	<params
-		group="advanced">
-		<param
-			name="share_placement"
-			type="list"
-			default="2"
-			label="SHARING_PLACEMENT"
-			description="SHARING_PLACEMENT_DESC">
-			<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
-			<option
-				value="1">COMMENTS_BEFORE_BODY</option>
-			<option
-				value="2">COMMENTS_AFTER_BODY</option>
-		</param>
-		<param
-			name="ratings_placement"
-			type="list"
-			default="2"
-			label="RATINGS_PLACEMENT"
-			description="RATINGS_PLACEMENT_DESC">
-			<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
-			<option
-				value="1">COMMENTS_BEFORE_BODY</option>
-			<option
-				value="2">COMMENTS_AFTER_BODY</option>
-		</param>
-		<param
-			name="comments_placement"
-			type="list"
-			default="2"
-			label="COMMENTS_PLACEMENT"
-			description="COMMENTS_PLACEMENT_DESC">
-			<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
-			<option
-				value="1">COMMENTS_BEFORE_BODY</option>
-			<option
-				value="2">COMMENTS_AFTER_BODY</option>
-		</param>
-	</params>
+				<field name="@spacer" type="spacer" />
+				<field name="show_share" type="radio" default="1"
+					label="SHOW_SHARING" description="SHOW_SHARING_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+				<field name="show_ratings" type="radio" default="1"
+					label="SHOW_RATINGS" description="SHOW_RATINGS_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+				<field name="show_comments" type="radio" default="1"
+					label="SHOW_COMMENTS" description="SHOW_COMMENTS_DESC"
+				>
+					<option value="0">NO</option>
+					<option value="1">YES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="share_placement" type="list" default="2"
+					label="SHARING_PLACEMENT" description="SHARING_PLACEMENT_DESC"
+				>
+					<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
+					<option value="1">COMMENTS_BEFORE_BODY</option>
+					<option value="2">COMMENTS_AFTER_BODY</option>
+				</field>
+				<field name="ratings_placement" type="list"
+					default="2" label="RATINGS_PLACEMENT" description="RATINGS_PLACEMENT_DESC"
+				>
+					<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
+					<option value="1">COMMENTS_BEFORE_BODY</option>
+					<option value="2">COMMENTS_AFTER_BODY</option>
+				</field>
+				<field name="comments_placement" type="list"
+					default="2" label="COMMENTS_PLACEMENT" description="COMMENTS_PLACEMENT_DESC"
+				>
+					<!-- <option value="0">COMMENTS_AFTER_TITLE</option>  -->
+					<option value="1">COMMENTS_BEFORE_BODY</option>
+					<option value="2">COMMENTS_AFTER_BODY</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
 </install>

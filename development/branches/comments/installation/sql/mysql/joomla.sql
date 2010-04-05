@@ -482,7 +482,7 @@ INSERT INTO `#__extensions` VALUES
 (109, 'mod_comments_most_commented', 'module', 'mod_comments_most_commented', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (110, 'mod_comments_rating', 'module', 'mod_comments_rating', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (111, 'mod_comments_share', 'module', 'mod_comments_share', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(112, 'plg_comments_comments', 'plugin', 'content', 'comments', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(112, 'plg_comments_comments', 'plugin', 'comments', 'content', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
