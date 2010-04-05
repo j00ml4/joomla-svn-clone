@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_summary
+ * @subpackage	mod_social_summary
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -18,7 +18,7 @@ jx('jx.html.bbcode');
  *
  * @static
  * @package		JXtended.Comments
- * @subpackage	mod_comments_summary
+ * @subpackage	mod_social_summary
  * @version		1.2
  */
 class modCommentsSummaryHelper

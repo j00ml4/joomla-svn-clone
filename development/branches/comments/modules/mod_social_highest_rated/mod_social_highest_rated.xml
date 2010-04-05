@@ -10,7 +10,7 @@
 	<license>GNU General Public License</license>
 	<description>COMMENTS_MOD_HIGHEST_RATED_DESC</description>
 	<files>
-		<filename module="mod_comments_highest_rated">mod_comments_highest_rated.php</filename>
+		<filename module="mod_social_highest_rated">mod_social_highest_rated.php</filename>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<folder>tmpl</folder>

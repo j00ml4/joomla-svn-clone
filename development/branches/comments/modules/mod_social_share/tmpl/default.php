@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_rating
+ * @subpackage	mod_social_rating
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -24,7 +24,7 @@ $heading	= $params->get('heading', 0);
 <?php if ($heading > 0) : ?>
 	<div class="sharethis">
 <?php if ($heading == 1 or $heading == 2) : ?>
-		<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/share-icon-16x16.gif" alt="<?php echo JText::_('Comments_Share_This');?>" />
+		<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/share-icon-16x16.gif" alt="<?php echo JText::_('Comments_Share_This');?>" />
 <?php endif; ?>
 		<?php if ($heading == 2 or $heading == 3) : ?>
 		<span><?php echo JText::_('Comments_Share_This');?></span>
@@ -37,7 +37,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('delicious', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('DELICIOUS'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/delicious.gif" alt="<?php echo JText::_('DELICIOUS');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/delicious.gif" alt="<?php echo JText::_('DELICIOUS');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('DELICIOUS'); ?></span>
@@ -49,7 +49,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('furl', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('FURL'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/furl.gif" alt="<?php echo JText::_('FURL');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/furl.gif" alt="<?php echo JText::_('FURL');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('FURL'); ?></span>
@@ -61,7 +61,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('yahoo_myweb', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('YAHOO_MYWEB'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/yahoo_myweb.gif" alt="<?php echo JText::_('YAHOO_MYWEB');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/yahoo_myweb.gif" alt="<?php echo JText::_('YAHOO_MYWEB');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('YAHOO_MYWEB'); ?></span>
@@ -73,7 +73,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('google_bmarks', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('GOOGLE_BMARKS'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/google_bmarks.gif" alt="<?php echo JText::_('GOOGLE_BMARKS');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/google_bmarks.gif" alt="<?php echo JText::_('GOOGLE_BMARKS');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('GOOGLE_BMARKS'); ?></span>
@@ -85,7 +85,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('blinklist', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('BLINKLIST'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/blinklist.gif" alt="<?php echo JText::_('BLINKLIST');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/blinklist.gif" alt="<?php echo JText::_('BLINKLIST');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('BLINKLIST'); ?></span>
@@ -97,7 +97,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('magnolia', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('MAGNOLIA'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/magnolia.gif" alt="<?php echo JText::_('MAGNOLIA');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/magnolia.gif" alt="<?php echo JText::_('MAGNOLIA');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('MAGNOLIA'); ?></span>
@@ -109,7 +109,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('facebook', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('FACEBOOK'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/facebook.gif" alt="<?php echo JText::_('FACEBOOK');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/facebook.gif" alt="<?php echo JText::_('FACEBOOK');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('FACEBOOK'); ?></span>
@@ -121,7 +121,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('digg', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('DIGG'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/digg.gif" alt="<?php echo JText::_('DIGG');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/digg.gif" alt="<?php echo JText::_('DIGG');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('digg'); ?></span>
@@ -133,7 +133,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('stumbleupon', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('STUMBLEUPON'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/stumbleupon.gif" alt="<?php echo JText::_('STUMBLEUPON');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/stumbleupon.gif" alt="<?php echo JText::_('STUMBLEUPON');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('STUMBLEUPON'); ?></span>
@@ -145,7 +145,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('technorati', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('TECHNORATI'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/technorati.gif" alt="<?php echo JText::_('TECHNORATI');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/technorati.gif" alt="<?php echo JText::_('TECHNORATI');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('TECHNORATI'); ?></span>
@@ -157,7 +157,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('newsvine', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('NEWSVINE'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/newsvine.gif" alt="<?php echo JText::_('NEWSVINE');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/newsvine.gif" alt="<?php echo JText::_('NEWSVINE');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('NEWSVINE'); ?></span>
@@ -169,7 +169,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('reddit', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('REDDIT'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/reddit.gif" alt="<?php echo JText::_('REDDIT');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/reddit.gif" alt="<?php echo JText::_('REDDIT');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('REDDIT'); ?></span>
@@ -181,7 +181,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('tailrank', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('TAILRANK'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/tailrank.gif" alt="<?php echo JText::_('TAILRANK');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/tailrank.gif" alt="<?php echo JText::_('TAILRANK');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('TAILRANK'); ?></span>
@@ -193,7 +193,7 @@ $heading	= $params->get('heading', 0);
 		<li>
 			<a href="<?php echo modCommentsShareHelper::getBookmark('twitter', $params); ?>" target="_blank" title="<?php echo JText::sprintf('Comments_Share_This_With', JText::_('TWITTER'));?>">
 <?php if ($style == 0 or $style == 1) : ?>
-				<img src="<?php echo $baseurl; ?>modules/mod_comments_share/images/twitter.gif" alt="<?php echo JText::_('TWITTER');?>" />
+				<img src="<?php echo $baseurl; ?>modules/mod_social_share/images/twitter.gif" alt="<?php echo JText::_('TWITTER');?>" />
 <?php endif; ?>
 <?php if ($style == 2 or $style == 1) : ?>
 				<span><?php echo JText::_('TWITTER'); ?></span>

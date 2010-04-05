@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_most_commented
+ * @subpackage	mod_social_most_commented
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -32,4 +32,4 @@ $document = &JFactory::getDocument();
 $list = modCommentsMostCommentedHelper::getList($params);
 
 // render the module
-require(JModuleHelper::getLayoutPath('mod_comments_most_commented', $params->get('layout', 'default')));
+require(JModuleHelper::getLayoutPath('mod_social_most_commented', $params->get('layout', 'default')));

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0" client="administrator">
+	<name>JXtended - Comments Summary</name>
+	<version>1.2.1 Beta 1</version>
+	<creationDate>9 May 2009</creationDate>
+	<author>JXtended</author>
+	<authorEmail>info@jxtended.com</authorEmail>
+	<authorUrl>http://jxtended.com</authorUrl>
+	<copyright>Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.</copyright>
+	<license>GNU General Public License</license>
+	<description>COMMENTS_MOD_SUMMARY_DESC</description>
+	<files>
+		<filename module="mod_social_summary">mod_social_summary.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<params addpath="/administrator/components/com_comments/models/elements">
+	</params>
+	<params group="advanced">
+		<param name="cache" type="list" default="0" label="COMMENTS_CACHING" description="COMMENTS_CACHING_DESC">
+			<option value="1">COMMENTS_USE_GLOBAL</option>
+			<option value="0">COMMENTS_NO_CACHING</option>
+		</param>
+		<param name="cache_time" type="text" default="900" label="COMMENTS_CACHE_TIME" description="COMMENTS_CACHE_TIME_DESC" />
+	</params>
+</install>

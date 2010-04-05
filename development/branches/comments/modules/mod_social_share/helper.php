@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_rating
+ * @subpackage	mod_social_rating
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -15,14 +15,13 @@ class modCommentsShareHelper
 	/**
 	 * Method to return a formatted URL string for a social bookmarking site
 	 *
-	 * @access	public
 	 * @param	string	$site	The social bookmarking site
 	 * @param	string	$url	URL to the page to bookmark
 	 * @param	string	$title	The title of the page to bookmark
 	 * @return	mixed	The social bookmarking URL for the page or boolean false if the site doesn't exist
 	 * @since	1.0
 	 */
-	function getBookmark($site, $params)
+	public function getBookmark($site, $params)
 	{
 		$result	= false;
 

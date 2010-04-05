@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	mod_comments_summary
+ * @subpackage	mod_social_latest
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -15,7 +15,7 @@ $params->merge(JComponentHelper::getParams('com_comments'));
 
 // if the JXtended Libraries are not present exit gracefully
 if (!defined('JXVERSION')) {
-	JError::raiseNotice(500, JText::_('JX_LIBRARIES_MISSING'));
+	JError::raiseNotice(500, JText::_('JX_Libraries_Missing'));
 	return false;
 }
 
@@ -28,11 +28,8 @@ $user = &JFactory::getUser();
 // get the document object
 $document = &JFactory::getDocument();
 
-// get the base url
-$baseurl = JURI::base();
-
 // get the item list
-$list = modCommentsSummaryHelper::getList($params);
+$list = modCommentsLatestHelper::getList($params);
 
 // render the module
-require(JModuleHelper::getLayoutPath('mod_comments_summary', $params->get('layout', 'default')));
+require(JModuleHelper::getLayoutPath('mod_social_latest', $params->get('layout', 'default')));
