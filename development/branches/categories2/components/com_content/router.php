@@ -52,14 +52,16 @@ function ContentBuildRoute(&$query)
 		return $segments;
 	}
 
-	if (isset($view) and ($view == 'category' or $view == 'article')) {
+	if(isset($view) && $view == 'article' && isset($query['catid']))
+	{
+		$catid = $query['catid'];
+	} elseif(isset($view) && $view != 'article' && isset($query['id'])) {
+		$catid = $query['id'];
+	} else {
+		$catid = false;
+	}
+	if (isset($view) and ($view == 'category' or $view == 'article') and $catid) {
 		if ($mId != intval($query['id']) || $mView != $view) {
-			if($view == 'article' && isset($query['catid']))
-			{
-				$catid = $query['catid'];
-			} elseif(isset($query['id'])) {
-				$catid = $query['id'];
-			}
 			$menuCatid = $mId;
 			$categories = JCategories::getInstance('com_content');
 			$category = $categories->get($catid);
