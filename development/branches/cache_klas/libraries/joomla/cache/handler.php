@@ -145,8 +145,8 @@ class JCacheHandler
 	 * @since	1.6
 	 */
 	function get($id, $group=null)
-	{
-		return $this->cache->get($id, $group=null);
+	{	$data = $this->cache->get($id, $group=null);
+		return $data;
 	}
 	
 	/**

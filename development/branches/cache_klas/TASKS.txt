@@ -27,5 +27,5 @@ COMPLEX TASKS
 - IN PROGRESS: Implement changed caching in core components and modules: DONE: com_content, mod_relateditems,
 				com_weblinks, com_contact, com_newsfeeds, com_wrapper
 - IN PROGRESS: Test and cleanup changed files
-- Implement changed caching on framework level
+- IN PROGRESS: Implement changed caching on framework level: DONE: JComponentHelper::_load(), JModuleHelper::_load()
 - Additional caching and speed optimizations of core components/modules

@@ -266,14 +266,22 @@ abstract class JModuleHelper
 		$nullDate = $db->getNullDate();
 		$query->where('(m.publish_up = '.$db->Quote($nullDate).' OR m.publish_up <= '.$db->Quote($now).')');
 		$query->where('(m.publish_down = '.$db->Quote($nullDate).' OR m.publish_down >= '.$db->Quote($now).')');
-
+		
+		$clientid = (int) $app->getClientId();
+		
 		$query->where('m.access IN ('.$groups.')');
-		$query->where('m.client_id = '. (int) $app->getClientId());
+		$query->where('m.client_id = '. $clientid);
 		if (isset($Itemid)) {
 			$query->where('(mm.menuid = '. (int) $Itemid .' OR mm.menuid <= 0)');
 		}
 		$query->order('position, ordering');
+		
+		$cacheid = serialize(array($Itemid,$groups,$clientid));
+		
 		$db->setQuery($query);
+		
+		$cache = JFactory::getCache ('_system', 'callback' );
+		$modules = $cache->get(array($db,'loadObjectList'),null,$cacheid,false);
 
 /*		$where	= isset($Itemid) ? ' AND (mm.menuid = '. (int) $Itemid .' OR mm.menuid <= 0)' : '';
 		$db->setQuery(
@@ -287,7 +295,7 @@ abstract class JModuleHelper
 			. ' ORDER BY position, ordering'
 		);*/
 
-		if (null === ($modules = $db->loadObjectList()))
+		if (null === ($modules))
 		{
 			JError::raiseWarning('SOME_ERROR_CODE', JText::_('ERROR_LOADING_MODULES') . $db->getErrorMsg());
 			return false;
