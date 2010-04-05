@@ -1,47 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset
-		name="blocking"
-		label="Comments_Config_Blocking_Label"
-		description="Comments_Config_Blocking_Label"
-		>
-		<field
-			name="blockusers"
-			type="textarea"
-			default=""
-			cols="30"
-			rows="4"
-			label="COMMENTS_BLOCKING_USERS"
-			description="COMMENTS_BLOCKING_USERS_DESC" />
-		<field
-			name="blockips"
-			type="textarea"
-			default=""
-			cols="30"
-			rows="4"
-			label="COMMENTS_BLOCKING_IPS"
-			description="COMMENTS_BLOCKING_IPS_DESC" />
-		<field
-			name="blockhosts"
-			type="textarea"
-			default=""
-			cols="30"
-			rows="4"
-			label="COMMENTS_BLOCKING_HOSTS"
-			description="COMMENTS_BLOCKING_HOSTS_DESC" />
-	</fieldset>
-
-	<fieldset
 		name="bookmarking"
-		label="Comments_Config_Bookmarking_Label"
-		description="Comments_Config_Bookmarking_Label"
+		label="SOCIAL_Config_Bookmarking_Label"
+		description="SOCIAL_Config_Bookmarking_Label"
 		>
 		<field
 			name="sharing_style"
 			type="list"
 			default="0"
-			label="COMMENTS_ICON_STYLE"
-			description="COMMENTS_ICON_STYLE_DESC">
+			label="SOCIAL_ICON_STYLE"
+			description="SOCIAL_ICON_STYLE_DESC">
 			<option
 				value="0">COMMENTS_ICONS_ONLY</option>
 			<option
@@ -54,8 +23,8 @@
 			name="sharing_heading"
 			type="list"
 			default="0"
-			label="COMMENTS_SHARE_HEADING"
-			description="COMMENTS_SHARE_HEADING_DESC">
+			label="SOCIAL_SHARE_HEADING"
+			description="SOCIAL_SHARE_HEADING_DESC">
 			<option
 				value="0">COMMENTS_DO_NOT_SHOW</option>
 			<option
@@ -70,8 +39,8 @@
 			name="sharing_email"
 			type="radio"
 			default="1"
-			label="COMMENTS_SHARE_EMAIL"
-			description="COMMENTS_SHARE_EMAIL_DESC">
+			label="SOCIAL_SHARE_EMAIL"
+			description="SOCIAL_SHARE_EMAIL_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -82,8 +51,8 @@
 			name="sharing_blinklist"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_BLINKLIST"
-			description="COMMENTS_BOOKMARKS_BLINKLIST_DESC">
+			label="SOCIAL_BOOKMARKS_BLINKLIST"
+			description="SOCIAL_BOOKMARKS_BLINKLIST_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -94,8 +63,8 @@
 			name="sharing_bloglines"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_BLOGLINES"
-			description="COMMENTS_BOOKMARKS_bloglines_DESC">
+			label="SOCIAL_BOOKMARKS_BLOGLINES"
+			description="SOCIAL_BOOKMARKS_bloglines_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -106,8 +75,8 @@
 			name="sharing_blogmarks"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_blogmarks"
-			description="COMMENTS_BOOKMARKS_blogmarks_DESC">
+			label="SOCIAL_BOOKMARKS_blogmarks"
+			description="SOCIAL_BOOKMARKS_blogmarks_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -118,8 +87,8 @@
 			name="sharing_buzz"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_buzz"
-			description="COMMENTS_BOOKMARKS_buzz_DESC">
+			label="SOCIAL_BOOKMARKS_buzz"
+			description="SOCIAL_BOOKMARKS_buzz_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -130,8 +99,8 @@
 			name="sharing_connotea"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_connotea"
-			description="COMMENTS_BOOKMARKS_connotea_DESC">
+			label="SOCIAL_BOOKMARKS_connotea"
+			description="SOCIAL_BOOKMARKS_connotea_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -142,8 +111,8 @@
 			name="sharing_delicious"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_DELICIOUS"
-			description="COMMENTS_BOOKMARKS_DELICIOUS_DESC">
+			label="SOCIAL_BOOKMARKS_DELICIOUS"
+			description="SOCIAL_BOOKMARKS_DELICIOUS_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -154,8 +123,8 @@
 			name="sharing_design_float"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_design_float"
-			description="COMMENTS_BOOKMARKS_design_float_DESC">
+			label="SOCIAL_BOOKMARKS_design_float"
+			description="SOCIAL_BOOKMARKS_design_float_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -166,8 +135,8 @@
 			name="sharing_digg"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_DIGG"
-			description="COMMENTS_BOOKMARKS_DIGG_DESC">
+			label="SOCIAL_BOOKMARKS_DIGG"
+			description="SOCIAL_BOOKMARKS_DIGG_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -178,8 +147,8 @@
 			name="sharing_diigo"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_diigo"
-			description="COMMENTS_BOOKMARKS_diigo_DESC">
+			label="SOCIAL_BOOKMARKS_diigo"
+			description="SOCIAL_BOOKMARKS_diigo_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -190,8 +159,8 @@
 			name="sharing_dotnetkicks"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_dotnetkicks"
-			description="COMMENTS_BOOKMARKS_dotnetkicks_DESC">
+			label="SOCIAL_BOOKMARKS_dotnetkicks"
+			description="SOCIAL_BOOKMARKS_dotnetkicks_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -202,8 +171,8 @@
 			name="sharing_dzone"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_dzone"
-			description="COMMENTS_BOOKMARKS_dzone_DESC">
+			label="SOCIAL_BOOKMARKS_dzone"
+			description="SOCIAL_BOOKMARKS_dzone_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -214,8 +183,8 @@
 			name="sharing_facebook"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_FACEBOOK"
-			description="COMMENTS_BOOKMARKS_FACEBOOK_DESC">
+			label="SOCIAL_BOOKMARKS_FACEBOOK"
+			description="SOCIAL_BOOKMARKS_FACEBOOK_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -226,8 +195,8 @@
 			name="sharing_fark"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_fark"
-			description="COMMENTS_BOOKMARKS_fark_DESC">
+			label="SOCIAL_BOOKMARKS_fark"
+			description="SOCIAL_BOOKMARKS_fark_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -238,8 +207,8 @@
 			name="sharing_faves"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_faves"
-			description="COMMENTS_BOOKMARKS_faves_DESC">
+			label="SOCIAL_BOOKMARKS_faves"
+			description="SOCIAL_BOOKMARKS_faves_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -250,8 +219,8 @@
 			name="sharing_fleck"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_fleck"
-			description="COMMENTS_BOOKMARKS_fleck_DESC">
+			label="SOCIAL_BOOKMARKS_fleck"
+			description="SOCIAL_BOOKMARKS_fleck_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -262,8 +231,8 @@
 			name="sharing_friendfeed"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_friendfeed"
-			description="COMMENTS_BOOKMARKS_friendfeed_DESC">
+			label="SOCIAL_BOOKMARKS_friendfeed"
+			description="SOCIAL_BOOKMARKS_friendfeed_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -274,8 +243,8 @@
 			name="sharing_friendsite"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_friendsite"
-			description="COMMENTS_BOOKMARKS_friendsite_DESC">
+			label="SOCIAL_BOOKMARKS_friendsite"
+			description="SOCIAL_BOOKMARKS_friendsite_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -286,8 +255,8 @@
 			name="sharing_furl"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_FURL"
-			description="COMMENTS_BOOKMARKS_FURL_DESC">
+			label="SOCIAL_BOOKMARKS_FURL"
+			description="SOCIAL_BOOKMARKS_FURL_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -298,8 +267,8 @@
 			name="sharing_google"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_GOOGLE"
-			description="COMMENTS_BOOKMARKS_GOOGLE_DESC">
+			label="SOCIAL_BOOKMARKS_GOOGLE"
+			description="SOCIAL_BOOKMARKS_GOOGLE_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -310,8 +279,8 @@
 			name="sharing_kaboodle"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_kaboodle"
-			description="COMMENTS_BOOKMARKS_kaboodle_DESC">
+			label="SOCIAL_BOOKMARKS_kaboodle"
+			description="SOCIAL_BOOKMARKS_kaboodle_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -322,8 +291,8 @@
 			name="sharing_kirtsy"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_kirtsy"
-			description="COMMENTS_BOOKMARKS_kirtsy_DESC">
+			label="SOCIAL_BOOKMARKS_kirtsy"
+			description="SOCIAL_BOOKMARKS_kirtsy_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -334,8 +303,8 @@
 			name="sharing_hacker_news"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_hacker_news"
-			description="COMMENTS_BOOKMARKS_hacker_news_DESC">
+			label="SOCIAL_BOOKMARKS_hacker_news"
+			description="SOCIAL_BOOKMARKS_hacker_news_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -346,8 +315,8 @@
 			name="sharing_hyves"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_hyves"
-			description="COMMENTS_BOOKMARKS_hyves_DESC">
+			label="SOCIAL_BOOKMARKS_hyves"
+			description="SOCIAL_BOOKMARKS_hyves_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -358,8 +327,8 @@
 			name="sharing_identica"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_identica"
-			description="COMMENTS_BOOKMARKS_identica_DESC">
+			label="SOCIAL_BOOKMARKS_identica"
+			description="SOCIAL_BOOKMARKS_identica_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -370,8 +339,8 @@
 			name="sharing_linkedin"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_linkedin"
-			description="COMMENTS_BOOKMARKS_linkedin_DESC">
+			label="SOCIAL_BOOKMARKS_linkedin"
+			description="SOCIAL_BOOKMARKS_linkedin_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -382,8 +351,8 @@
 			name="sharing_magnolia"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_MAGNOLIA"
-			description="COMMENTS_BOOKMARKS_MAGNOLIA_DESC">
+			label="SOCIAL_BOOKMARKS_MAGNOLIA"
+			description="SOCIAL_BOOKMARKS_MAGNOLIA_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -394,8 +363,8 @@
 			name="sharing_maple"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_maple"
-			description="COMMENTS_BOOKMARKS_maple_DESC">
+			label="SOCIAL_BOOKMARKS_maple"
+			description="SOCIAL_BOOKMARKS_maple_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -406,8 +375,8 @@
 			name="sharing_mister_wong"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_mister_wong"
-			description="COMMENTS_BOOKMARKS_mister_wong_DESC">
+			label="SOCIAL_BOOKMARKS_mister_wong"
+			description="SOCIAL_BOOKMARKS_mister_wong_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -418,8 +387,8 @@
 			name="sharing_mixx"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_mixx"
-			description="COMMENTS_BOOKMARKS_mixx_DESC">
+			label="SOCIAL_BOOKMARKS_mixx"
+			description="SOCIAL_BOOKMARKS_mixx_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -430,8 +399,8 @@
 			name="sharing_myspace"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_myspace"
-			description="COMMENTS_BOOKMARKS_myspace_DESC">
+			label="SOCIAL_BOOKMARKS_myspace"
+			description="SOCIAL_BOOKMARKS_myspace_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -442,8 +411,8 @@
 			name="sharing_netscape"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_netscape"
-			description="COMMENTS_BOOKMARKS_netscape_DESC">
+			label="SOCIAL_BOOKMARKS_netscape"
+			description="SOCIAL_BOOKMARKS_netscape_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -454,8 +423,8 @@
 			name="sharing_netvibes"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_netvibes"
-			description="COMMENTS_BOOKMARKS_netvibes_DESC">
+			label="SOCIAL_BOOKMARKS_netvibes"
+			description="SOCIAL_BOOKMARKS_netvibes_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -466,8 +435,8 @@
 			name="sharing_netvouz"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_netvouz"
-			description="COMMENTS_BOOKMARKS_netvouz_DESC">
+			label="SOCIAL_BOOKMARKS_netvouz"
+			description="SOCIAL_BOOKMARKS_netvouz_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -478,8 +447,8 @@
 			name="sharing_newsvine"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_NEWSVINE"
-			description="COMMENTS_BOOKMARKS_NEWSVINE_DESC">
+			label="SOCIAL_BOOKMARKS_NEWSVINE"
+			description="SOCIAL_BOOKMARKS_NEWSVINE_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -490,8 +459,8 @@
 			name="sharing_nujij"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_nujij"
-			description="COMMENTS_BOOKMARKS_nujij_DESC">
+			label="SOCIAL_BOOKMARKS_nujij"
+			description="SOCIAL_BOOKMARKS_nujij_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -502,8 +471,8 @@
 			name="sharing_ping"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_ping"
-			description="COMMENTS_BOOKMARKS_ping_DESC">
+			label="SOCIAL_BOOKMARKS_ping"
+			description="SOCIAL_BOOKMARKS_ping_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -514,8 +483,8 @@
 			name="sharing_plugim"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_plugim"
-			description="COMMENTS_BOOKMARKS_plugim_DESC">
+			label="SOCIAL_BOOKMARKS_plugim"
+			description="SOCIAL_BOOKMARKS_plugim_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -526,8 +495,8 @@
 			name="sharing_posterous"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_posterous"
-			description="COMMENTS_BOOKMARKS_posterous_DESC">
+			label="SOCIAL_BOOKMARKS_posterous"
+			description="SOCIAL_BOOKMARKS_posterous_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -538,8 +507,8 @@
 			name="sharing_propeller"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_propeller"
-			description="COMMENTS_BOOKMARKS_propeller_DESC">
+			label="SOCIAL_BOOKMARKS_propeller"
+			description="SOCIAL_BOOKMARKS_propeller_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -550,8 +519,8 @@
 			name="sharing_reddit"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_REDDIT"
-			description="COMMENTS_BOOKMARKS_REDDIT_DESC">
+			label="SOCIAL_BOOKMARKS_REDDIT"
+			description="SOCIAL_BOOKMARKS_REDDIT_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -562,8 +531,8 @@
 			name="sharing_shoutwire"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_shoutwire"
-			description="COMMENTS_BOOKMARKS_shoutwire_DESC">
+			label="SOCIAL_BOOKMARKS_shoutwire"
+			description="SOCIAL_BOOKMARKS_shoutwire_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -574,8 +543,8 @@
 			name="sharing_simpy"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_simpy"
-			description="COMMENTS_BOOKMARKS_simpy_DESC">
+			label="SOCIAL_BOOKMARKS_simpy"
+			description="SOCIAL_BOOKMARKS_simpy_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -586,8 +555,8 @@
 			name="sharing_slashdot"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_slashdot"
-			description="COMMENTS_BOOKMARKS_slashdot_DESC">
+			label="SOCIAL_BOOKMARKS_slashdot"
+			description="SOCIAL_BOOKMARKS_slashdot_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -598,8 +567,8 @@
 			name="sharing_sphere"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_sphere"
-			description="COMMENTS_BOOKMARKS_sphere_DESC">
+			label="SOCIAL_BOOKMARKS_sphere"
+			description="SOCIAL_BOOKMARKS_sphere_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -610,8 +579,8 @@
 			name="sharing_spurl"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_spurl"
-			description="COMMENTS_BOOKMARKS_spurl_DESC">
+			label="SOCIAL_BOOKMARKS_spurl"
+			description="SOCIAL_BOOKMARKS_spurl_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -622,8 +591,8 @@
 			name="sharing_squidoo"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_squidoo"
-			description="COMMENTS_BOOKMARKS_squidoo_DESC">
+			label="SOCIAL_BOOKMARKS_squidoo"
+			description="SOCIAL_BOOKMARKS_squidoo_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -634,8 +603,8 @@
 			name="sharing_sphinn"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_sphinn"
-			description="COMMENTS_BOOKMARKS_sphinn_DESC">
+			label="SOCIAL_BOOKMARKS_sphinn"
+			description="SOCIAL_BOOKMARKS_sphinn_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -646,8 +615,8 @@
 			name="sharing_stumbleupon"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_STUMBLEUPON"
-			description="COMMENTS_BOOKMARKS_STUMBLEUPON_DESC">
+			label="SOCIAL_BOOKMARKS_STUMBLEUPON"
+			description="SOCIAL_BOOKMARKS_STUMBLEUPON_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -658,8 +627,8 @@
 			name="sharing_tailrank"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_TAILRANK"
-			description="COMMENTS_BOOKMARKS_TAILRANK_DESC">
+			label="SOCIAL_BOOKMARKS_TAILRANK"
+			description="SOCIAL_BOOKMARKS_TAILRANK_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -670,8 +639,8 @@
 			name="sharing_technorati"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_TECHNORATI"
-			description="COMMENTS_BOOKMARKS_TECHNORATI_DESC">
+			label="SOCIAL_BOOKMARKS_TECHNORATI"
+			description="SOCIAL_BOOKMARKS_TECHNORATI_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -682,8 +651,8 @@
 			name="sharing_tipd"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_tipd"
-			description="COMMENTS_BOOKMARKS_tipd_DESC">
+			label="SOCIAL_BOOKMARKS_tipd"
+			description="SOCIAL_BOOKMARKS_tipd_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -694,8 +663,8 @@
 			name="sharing_thisnext"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_thisnext"
-			description="COMMENTS_BOOKMARKS_thisnext_DESC">
+			label="SOCIAL_BOOKMARKS_thisnext"
+			description="SOCIAL_BOOKMARKS_thisnext_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -706,8 +675,8 @@
 			name="sharing_twitter"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_TWITTER"
-			description="COMMENTS_BOOKMARKS_TWITTER_DESC">
+			label="SOCIAL_BOOKMARKS_TWITTER"
+			description="SOCIAL_BOOKMARKS_TWITTER_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -718,8 +687,8 @@
 			name="sharing_webride"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_webride"
-			description="COMMENTS_BOOKMARKS_webride_DESC">
+			label="SOCIAL_BOOKMARKS_webride"
+			description="SOCIAL_BOOKMARKS_webride_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -730,8 +699,8 @@
 			name="sharing_wists"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_wists"
-			description="COMMENTS_BOOKMARKS_wists_DESC">
+			label="SOCIAL_BOOKMARKS_wists"
+			description="SOCIAL_BOOKMARKS_wists_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -742,8 +711,8 @@
 			name="sharing_yahoo_bookmarks"
 			type="radio"
 			default="0"
-			label="COMMENTS_BOOKMARKS_yahoo_bookmarks"
-			description="COMMENTS_BOOKMARKS_yahoo_bookmarks_DESC">
+			label="SOCIAL_BOOKMARKS_yahoo_bookmarks"
+			description="SOCIAL_BOOKMARKS_yahoo_bookmarks_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -754,8 +723,8 @@
 			name="sharing_yahoo"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_YAHOO"
-			description="COMMENTS_BOOKMARKS_YAHOO_DESC">
+			label="SOCIAL_BOOKMARKS_YAHOO"
+			description="SOCIAL_BOOKMARKS_YAHOO_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -765,15 +734,15 @@
 
 	<fieldset
 		name="comments"
-		label="Comments_Config_Comments_Label"
-		description="Comments_Config_Comments_Label"
+		label="SOCIAL_Config_Comments_Label"
+		description="SOCIAL_Config_Comments_Label"
 		>
 		<field
 			name="enable_comments"
 			type="radio"
 			default="0"
-			label="COMMENTS_COMMENTS_ENABLED"
-			description="COMMENTS_COMMENTS_ENABLED_DESC">
+			label="SOCIAL_COMMENTS_ENABLED"
+			description="SOCIAL_COMMENTS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -784,8 +753,8 @@
 			name="enable_trackbacks"
 			type="radio"
 			default="0"
-			label="COMMENTS_TRACKBACKS_ENABLED"
-			description="COMMENTS_TRACKBACKS_ENABLED_DESC">
+			label="SOCIAL_TRACKBACKS_ENABLED"
+			description="SOCIAL_TRACKBACKS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -796,8 +765,8 @@
 			name="enable_pings"
 			type="radio"
 			default="0"
-			label="COMMENTS_PINGS_ENABLED"
-			description="COMMENTS_PINGS_ENABLED_DESC">
+			label="SOCIAL_PINGS_ENABLED"
+			description="SOCIAL_PINGS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -808,8 +777,8 @@
 			name="guestcomment"
 			type="radio"
 			default="1"
-			label="COMMENTS_GUEST_COMMENTS_ENABLED"
-			description="COMMENTS_GUEST_COMMENTS_ENABLED_DESC">
+			label="SOCIAL_GUEST_COMMENTS_ENABLED"
+			description="SOCIAL_GUEST_COMMENTS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -820,8 +789,8 @@
 			name="enable_comment_feeds"
 			type="radio"
 			default="1"
-			label="COMMENTS_COMMENT_FEEDS"
-			description="COMMENTS_COMMENT_FEEDS_DESC">
+			label="SOCIAL_COMMENT_FEEDS"
+			description="SOCIAL_COMMENT_FEEDS_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -832,8 +801,8 @@
 			name="enable_ratings"
 			type="radio"
 			default="1"
-			label="COMMENTS_COMMENT_RATING_ENABLED"
-			description="COMMENTS_COMMENT_RATING_ENABLED_DESC">
+			label="SOCIAL_COMMENT_RATING_ENABLED"
+			description="SOCIAL_COMMENT_RATING_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -844,8 +813,8 @@
 			name="enable_sharing"
 			type="radio"
 			default="1"
-			label="COMMENTS_BOOKMARKS_ENABLED"
-			description="COMMENTS_BOOKMARKS_ENABLED_DESC">
+			label="SOCIAL_BOOKMARKS_ENABLED"
+			description="SOCIAL_BOOKMARKS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -856,8 +825,8 @@
 			name="show_name_as"
 			type="radio"
 			default="1"
-			label="COMMENTS_SHOW_NAME_AS"
-			description="COMMENTS_SHOW_NAME_AS_DESC">
+			label="SOCIAL_SHOW_NAME_AS"
+			description="SOCIAL_SHOW_NAME_AS_DESC">
 			<option
 				value="0">COMMENTS_USER_NAME</option>
 			<option
@@ -868,8 +837,8 @@
 			name="show_form"
 			type="radio"
 			default="1"
-			label="COMMENTS_SHOW_FORM"
-			description="COMMENTS_SHOW_FORM_DESC">
+			label="SOCIAL_SHOW_FORM"
+			description="SOCIAL_SHOW_FORM_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -880,8 +849,8 @@
 			name="enable_subject"
 			type="radio"
 			default="1"
-			label="COMMENTS_ENABLE_SUBJECT"
-			description="COMMENTS_ENABLE_SUBJECT_DESC">
+			label="SOCIAL_ENABLE_SUBJECT"
+			description="SOCIAL_ENABLE_SUBJECT_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -892,8 +861,8 @@
 			name="enable_website"
 			type="radio"
 			default="1"
-			label="COMMENTS_ENABLE_WEBSITE"
-			description="COMMENTS_ENABLE_WEBSITE_DESC">
+			label="SOCIAL_ENABLE_WEBSITE"
+			description="SOCIAL_ENABLE_WEBSITE_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -904,8 +873,8 @@
 			name="star_file"
 			type="list"
 			default=""
-			label="COMMENTS_RATING_STAR_FILE"
-			description="COMMENTS_RATING_STAR_FILE_DESC">
+			label="SOCIAL_RATING_STAR_FILE"
+			description="SOCIAL_RATING_STAR_FILE_DESC">
 			<option
 				value="">COMMENTS_STAR_YELLOW</option>
 			<option
@@ -924,8 +893,8 @@
 			name="enable_html"
 			type="radio"
 			default="0"
-			label="COMMENTS_COMMENT_HTML_ENABLED"
-			description="COMMENTS_COMMENT_HTML_ENABLED_DESC">
+			label="SOCIAL_COMMENT_HTML_ENABLED"
+			description="SOCIAL_COMMENT_HTML_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -936,8 +905,8 @@
 			name="enable_bbcode"
 			type="radio"
 			default="1"
-			label="COMMENTS_COMMENT_BBCODE_ENABLED"
-			description="COMMENTS_COMMENT_BBCODE_ENABLED_DESC">
+			label="SOCIAL_COMMENT_BBCODE_ENABLED"
+			description="SOCIAL_COMMENT_BBCODE_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -948,8 +917,8 @@
 			name="enable_smiley_palette"
 			type="radio"
 			default="1"
-			label="COMMENTS_COMMENT_SMILEY_PALETTE_ENABLED"
-			description="COMMENTS_COMMENT_SMILEY_PALETTE_ENABLED_DESC">
+			label="SOCIAL_COMMENT_SMILEY_PALETTE_ENABLED"
+			description="SOCIAL_COMMENT_SMILEY_PALETTE_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -960,8 +929,8 @@
 			name="enable_gravatar"
 			type="radio"
 			default="0"
-			label="COMMENTS_GRAVATAR_ENABLED"
-			description="COMMENTS_GRAVATAR_ENABLED_DESC">
+			label="SOCIAL_GRAVATAR_ENABLED"
+			description="SOCIAL_GRAVATAR_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -972,8 +941,8 @@
 			name="list_order"
 			type="radio"
 			default="ASC"
-			label="COMMENTS_LIST_ORDER"
-			description="COMMENTS_LIST_ORDER_DESC">
+			label="SOCIAL_LIST_ORDER"
+			description="SOCIAL_LIST_ORDER_DESC">
 			<option
 				value="ASC">Oldest First</option>
 			<option
@@ -984,8 +953,8 @@
 			name="pagination"
 			type="list"
 			default="0"
-			label="COMMENTS_PAGINATION_ENABLED"
-			description="COMMENTS_PAGINATION_ENABLED_DESC">
+			label="SOCIAL_PAGINATION_ENABLED"
+			description="SOCIAL_PAGINATION_ENABLED_DESC">
 			<option
 				value="0">All</option>
 			<option
@@ -1002,8 +971,8 @@
 			name="date_format"
 			type="list"
 			default=""
-			label="COMMENTS_DATE_FORMAT"
-			description="COMMENTS_DATE_FORMAT_DESC">
+			label="SOCIAL_DATE_FORMAT"
+			description="SOCIAL_DATE_FORMAT_DESC">
 			<option
 				value="">COMMENTS_SYSTEM_DEFAULT</option>
 			<option
@@ -1027,8 +996,8 @@
 			name="notify_comments"
 			type="radio"
 			default="0"
-			label="COMMENTS_COMMENT_NOTIFY"
-			description="COMMENTS_COMMENT_NOTIFY_DESC">
+			label="SOCIAL_COMMENT_NOTIFY"
+			description="SOCIAL_COMMENT_NOTIFY_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -1041,8 +1010,8 @@
 			type="text"
 			size="40"
 			default=""
-			label="COMMENTS_COMMENT_NOTIFY_ADDRESS"
-			description="COMMENTS_COMMENT_NOTIFY_ADDRESS_DESC" />
+			label="SOCIAL_COMMENT_NOTIFY_ADDRESS"
+			description="SOCIAL_COMMENT_NOTIFY_ADDRESS_DESC" />
 
 		<field
 			name="spacer2"
@@ -1053,8 +1022,8 @@
 			name="moderate_comments"
 			type="radio"
 			default="1"
-			label="COMMENTS_COMMENTS_MODERATION"
-			description="COMMENTS_COMMENTS_MODERATION_DESC">
+			label="SOCIAL_COMMENTS_MODERATION"
+			description="SOCIAL_COMMENTS_MODERATION_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -1062,123 +1031,6 @@
 			<option
 				value="2">Anyone</option>
 		</field>
-	</fieldset>
-
-	<fieldset
-		name="spam"
-		label="Comments_Config_Spam_Label"
-		description="Comments_Config_Spam_Label"
-		>
-		<field
-			name="minlength"
-			type="text"
-			size="6"
-			default="6"
-			label="COMMENTS_COMMENT_MIN_LENGTH"
-			description="COMMENTS_COMMENT_MIN_LENGTH_DESC" />
-		<field
-			name="maxlength"
-			type="text"
-			size="6"
-			default="1024"
-			label="COMMENTS_COMMENT_MAX_LENGTH"
-			description="COMMENTS_COMMENT_MAX_LENGTH_DESC" />
-
-		<field
-			name="captcha"
-			type="radio"
-			default="0"
-			label="COMMENTS_SPAM_CAPTCHA"
-			description="COMMENTS_SPAM_CAPTCHA_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Only Guests</option>
-			<option
-				value="2">Anyone</option>
-		</field>
-
-		<field
-			name="spacer3"
-			type="spacer"
-			hr="true"
-			/>
-		<field
-			name="enable_recaptcha"
-			type="radio"
-			default="0"
-			label="COMMENTS_SPAM_RECAPTCHA"
-			description="COMMENTS_SPAM_RECAPTCHA_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="recaptcha_public"
-			type="text"
-			size="40"
-			label="COMMENTS_SPAM_RECAPTCHA_PUBLIC"
-			description="COMMENTS_SPAM_RECAPTCHA_PUBLIC_DESC" />
-		<field
-			name="recaptcha_private"
-			type="text"
-			size="40"
-			label="COMMENTS_SPAM_RECAPTCHA_PRIVATE"
-			description="COMMENTS_SPAM_RECAPTCHA_PRIVATE_DESC" />
-
-		<field
-			name="spacer4"
-			type="spacer"
-			hr="true"
-			/>
-		<field
-			name="enable_akismet"
-			type="radio"
-			default="0"
-			label="COMMENTS_SPAM_AKISMET"
-			description="COMMENTS_SPAM_AKISMET_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="akismet_key"
-			type="text"
-			size="20"
-			label="COMMENTS_SPAM_AKISMET_KEY"
-			description="COMMENTS_SPAM_AKISMET_KEY_DESC" />
-
-		<field
-			name="enable_moovur"
-			type="radio"
-			default="0"
-			label="COMMENTS_SPAM_MOOVUR"
-			description="COMMENTS_SPAM_MOOVUR_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="flooduser"
-			type="text"
-			size="5"
-			default="30"
-			label="COMMENTS_COMMENT_FLOOD_TIME_USER"
-			description="COMMENTS_COMMENT_FLOOD_TIME_USER_DESC" />
-
-		<field
-			name="floodany"
-			type="text"
-			size="5"
-			default="1"
-			label="COMMENTS_COMMENT_FLOOD_TIME_WORLD"
-			description="COMMENTS_COMMENT_FLOOD_TIME_WORLD_DESC" />
 	</fieldset>
 
 	<fieldset
@@ -1192,7 +1044,7 @@
 			type="rules"
 			label="JConfig_Permissions_Label"
 			filter="rules"
-			component="com_comments"
+			component="com_social"
 			section="component" />
 	</fieldset>
 </config>

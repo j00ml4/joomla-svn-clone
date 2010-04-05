@@ -9,23 +9,23 @@
 defined('_JEXEC') or die;
 
 /**
- * The JXtended Comments block controller
+ * The JXtended Social block controller
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
- * @since		2.0
+ * @subpackage	com_social
+ * @since		1.6
  */
-class CommentsControllerBlock extends JController
+class SocialControllerBlock extends JController
 {
 	/**
 	 * Dummy method to redirect the display method.
 	 *
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	public function display()
 	{
-		$this->setRedirect(JRoute::_('index.php?option=com_comments'));
+		$this->setRedirect(JRoute::_('index.php?option=com_social'));
 	}
 
 	/**
@@ -44,9 +44,9 @@ class CommentsControllerBlock extends JController
 		if (JError::isError($result)) {
 			$msg = $result->getMessage();
 		} else {
-			$msg = JText::sprintf('Comments_Items_Blocked', count($cid));
+			$msg = JText::sprintf('SOCIAL_Items_Blocked', count($cid));
 		}
-		$this->setRedirect('index.php?option=com_comments&view=comments', $msg);
+		$this->setRedirect('index.php?option=com_social&view=comments', $msg);
 	}
 
 	/**
@@ -65,8 +65,8 @@ class CommentsControllerBlock extends JController
 		if (JError::isError($result)) {
 			$msg = $result->getMessage();
 		} else {
-			$msg = JText::sprintf('Comments_Items_Blocked', count($cid));
+			$msg = JText::sprintf('SOCIAL_Items_Blocked', count($cid));
 		}
-		$this->setRedirect('index.php?option=com_comments&view=comments', $msg);
+		$this->setRedirect('index.php?option=com_social&view=comments', $msg);
 	}
 }

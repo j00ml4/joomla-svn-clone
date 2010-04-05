@@ -11,13 +11,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.model');
 
 /**
- * Comments model for the Comments package.
+ * Social model for the Social package.
  *
- * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @package		Joomla.Administrator
+ * @subpackage	com_social
  * @since		1.3
  */
-class CommentsModelThread extends JModel
+class SocialModelThread extends JModel
 {
 	/**
 	 * Method to delete rows.

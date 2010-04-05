@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 /**
- * HTML behavior class for JXtended Comments
+ * HTML behavior class for JXtended Social
  *
  * @package		Joomla.Administrator
  * @since		1.6
@@ -27,21 +27,21 @@ class JHtmlComments
 	{
 		// Published filter
 		$options	= array();
-		$options[]	= JHTML::_('select.option', '', JText::_('COMMENTS_ALL'));
-		$options[]	= JHTML::_('select.option', '0', JText::_('COMMENTS_PENDING'));
+		$options[]	= JHTML::_('select.option', '', JText::_('SOCIAL_ALL'));
+		$options[]	= JHTML::_('select.option', '0', JText::_('SOCIAL_PENDING'));
 		$options[]	= JHTML::_('select.option', '1', JText::_('JPUBLISHED'));
-		$options[]	= JHTML::_('select.option', '-1', JText::_('COMMENTS_SPAM'));
+		$options[]	= JHTML::_('select.option', '-1', JText::_('SOCIAL_SPAM'));
 
 		return JHtml::_('select.options', $options, 'value', 'text', $selected, false);
 	}
 
 	public function commentContextOptions($selected = null)
 	{
-		$model		= JModel::getInstance('Comments', 'CommentsModel', array('ignore_request' => true));
+		$model		= JModel::getInstance('Comments', 'SocialModel', array('ignore_request' => true));
 
 		if ($options = $model->getContexts()) {
 			foreach ($options as $i => $context) {
-				$context->text = JText::sprintf('COMMENTS_IN_CONTEXT', $context->value);
+				$context->text = JText::sprintf('SOCIAL_IN_CONTEXT', $context->value);
 			}
 		}
 		return JHtml::_('select.options', $options, 'value', 'text', $selected, false);
@@ -50,9 +50,9 @@ class JHtmlComments
 	public function statelist($active)
 	{
 		$options	= array();
-		$options[]	= JHTML::_('select.option', '0', JText::_('COMMENTS_INDEX_FILTER_BY_STATE'));
-		$options[]	= JHTML::_('select.option', '1', JText::_('COMMENTS_STATE_PUBLISHED'));
-		$options[]	= JHTML::_('select.option', '-1', JText::_('COMMENTS_STATE_UNPUBLISHED'));
+		$options[]	= JHTML::_('select.option', '0', JText::_('SOCIAL_INDEX_FILTER_BY_STATE'));
+		$options[]	= JHTML::_('select.option', '1', JText::_('SOCIAL_STATE_PUBLISHED'));
+		$options[]	= JHTML::_('select.option', '-1', JText::_('SOCIAL_STATE_UNPUBLISHED'));
 
 		$attributes = 'class="inputbox" size="1" onchange="document.adminForm.submit();"';
 

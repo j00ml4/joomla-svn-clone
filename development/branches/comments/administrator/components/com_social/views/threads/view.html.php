@@ -11,13 +11,13 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * Base controller class for JXtended Comments.
+ * Base controller class for JXtended Social.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.3
  */
-class CommentsViewThreads extends JView
+class SocialViewThreads extends JView
 {
 	protected $state;
 	protected $items;
@@ -53,12 +53,12 @@ class CommentsViewThreads extends JView
 	protected function _setToolbar()
 	{
 		$state	= $this->get('State');
-		$canDo	= CommentsHelper::getActions($state->get('filter.category_id'));
+		$canDo	= SocialHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('Comments_Manager_Threads'), 'plugin');
+		JToolBarHelper::title(JText::_('SOCIAL_Manager_Threads'), 'plugin');
 		JToolBarHelper::deleteList('', 'threads.delete');
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::preferences('com_comments');
+			JToolBarHelper::preferences('com_social');
 		}
 		JToolBarHelper::help('screen.comments');
 	}

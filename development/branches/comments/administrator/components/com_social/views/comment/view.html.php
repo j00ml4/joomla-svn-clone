@@ -14,10 +14,10 @@ jimport('joomla.application.component.view');
  * Hybrid view to display or edit a newsfeed.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsViewComment extends JView
+class SocialViewComment extends JView
 {
 	protected $addressList;
 	protected $item;
@@ -68,12 +68,12 @@ class CommentsViewComment extends JView
 
 		if ($this->getLayout() == 'edit') {
 			JRequest::setVar('hidemainmenu', true);
-			JToolBarHelper::title(JText::_('COMMENTS_EDIT_COMMENT'));
+			JToolBarHelper::title(JText::_('SOCIAL_EDIT_COMMENT'));
 			JToolBarHelper::apply('comment.apply', 'JToolbar_Apply');
 			JToolBarHelper::save('comment.save', 'JToolbar_Save');
 			JToolBarHelper::cancel('comment.cancel');
 		} else {
-			JToolBarHelper::title(JText::_('COMMENTS_MODERATE_COMMENT'));
+			JToolBarHelper::title(JText::_('SOCIAL_MODERATE_COMMENT'));
 			JToolBarHelper::custom('comment.edit', 'edit.png', 'edit_f2.png', 'JToolbar_Edit', false);
 			JToolBarHelper::cancel('comment.cancel');
 		}

@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -27,15 +27,15 @@ JHtml::_('behavior.keepalive');
 // -->
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_comments'); ?>" method="post" name="adminForm" id="comment-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_social'); ?>" method="post" name="adminForm" id="comment-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend>
-				<?php echo JText::_('COMMENTS_COMMENT'); ?>: <?php echo $this->item->id; ?>
+				<?php echo JText::_('SOCIAL_COMMENT'); ?>: <?php echo $this->item->id; ?>
 			</legend>
 
 			<div class="comment-referrer">
-				<span><?php echo JText::_('COMMENTS_PAGE'); ?>:</span>
+				<span><?php echo JText::_('SOCIAL_PAGE'); ?>:</span>
 				<a href="<?php echo $this->getContentRoute($this->thread->page_route); ?>" target="_blank">
 					<?php echo $this->escape($this->thread->page_title); ?></a>
 			</div>

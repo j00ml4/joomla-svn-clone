@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <install type="component" version="1.5.0" method="upgrade">
-	<name>com_comments</name>
+	<name>com_social</name>
 	<version>1.2.1 Beta 1</version>
 	<creationDate>9 May 2009</creationDate>
 	<author>JXtended</author>
@@ -24,7 +24,7 @@
 	</uninstall>
 
 	<languages folder="site/language">
-		<language tag="en-GB">en-GB/en-GB.com_comments.ini</language>
+		<language tag="en-GB">en-GB/en-GB.com_social.ini</language>
 	</languages>
 
 	<files folder="site">
@@ -47,10 +47,10 @@
 	</media>
 
 	<administration>
-		<menu img="components/com_comments/media/images/icon-16-jx.png" link="option=com_comments&amp;view=comments">Comments</menu>
+		<menu img="components/com_social/media/images/icon-16-jx.png" link="option=com_social&amp;view=comments">Social</menu>
 
 		<languages folder="admin/language">
-			<language tag="en-GB">en-GB/en-GB.com_comments.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_social.ini</language>
 		</languages>
 
 		<files folder="admin">

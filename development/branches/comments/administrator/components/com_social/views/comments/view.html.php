@@ -14,10 +14,10 @@ jimport('joomla.application.component.view');
  * View class for a list of comments.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.6
  */
-class CommentsViewComments extends JView
+class SocialViewComments extends JView
 {
 	protected $items;
 	protected $pagination;
@@ -75,15 +75,15 @@ class CommentsViewComments extends JView
 	protected function setToolbar()
 	{
 		$state	= $this->get('State');
-		$canDo	= CommentsHelper::getActions($state->get('filter.category_id'));
+		$canDo	= SocialHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title('Comments: '.JText::_('COMMENTS_MODERATE_COMMENTS_TITLE'), 'logo');
+		JToolBarHelper::title('Comments: '.JText::_('SOCIAL_MODERATE_COMMENTS_TITLE'), 'logo');
 
 		$toolbar = JToolBar::getInstance('toolbar');
-		$toolbar->appendButton('Standard', 'save', 'COMMENTS_MODERATE', 'comment.moderate', false, false);
+		$toolbar->appendButton('Standard', 'save', 'SOCIAL_MODERATE', 'comment.moderate', false, false);
 
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::preferences('com_comments');
+			JToolBarHelper::preferences('com_social');
 		}
 		JToolBarHelper::help('screen.comments','JTOOLBAR_HELP');
 	}

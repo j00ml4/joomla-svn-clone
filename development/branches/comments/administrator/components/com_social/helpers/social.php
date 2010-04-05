@@ -9,15 +9,15 @@
 defined('_JEXEC') or die;
 
 /**
- * Comments component helper.
+ * Social component helper.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.3
  */
-class CommentsHelper
+class SocialHelper
 {
-	public static $extention = 'com_comments';
+	public static $extention = 'com_social';
 
 	/**
 	 * Configure the Linkbar.
@@ -27,13 +27,13 @@ class CommentsHelper
 	public static function addSubmenu($vName)
 	{
 		JSubMenuHelper::addEntry(
-			JText::_('Comments_Submenu_Comments'),
-			'index.php?option=com_comments&view=comments',
+			JText::_('SOCIAL_Submenu_Comments'),
+			'index.php?option=com_social&view=comments',
 			$vName == 'comments'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('Comments_Submenu_Threads'),
-			'index.php?option=com_comments&view=threads',
+			JText::_('SOCIAL_Submenu_Threads'),
+			'index.php?option=com_social&view=threads',
 			$vName == 'threads'
 		);
 	}
@@ -50,7 +50,7 @@ class CommentsHelper
 		$user	= JFactory::getUser();
 		$result	= new JObject;
 
-		$assetName = 'com_comments';
+		$assetName = 'com_social';
 
 		$actions = array(
 			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.state', 'core.delete'

@@ -12,15 +12,15 @@ defined('_JEXEC') or die;
  * Thread list controller.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.3
  */
-class CommentsControllerThreads extends CommentsController
+class SocialControllerThreads extends SocialController
 {
 	/**
 	 * Proxy for getModel.
 	 */
-	public function &getModel($name = 'Thread', $prefix = 'CommentsModel')
+	public function &getModel($name = 'Thread', $prefix = 'SocialModel')
 	{
 		return parent::getModel($name, $prefix, array('ignore_request' => true));
 	}
@@ -43,10 +43,10 @@ class CommentsControllerThreads extends CommentsController
 		}
 		else
 		{
-			$this->setMessage(JText::sprintf('Comments_N_Records_Deleted', count($pks)));
+			$this->setMessage(JText::sprintf('SOCIAL_N_Records_Deleted', count($pks)));
 		}
 
-		$this->setRedirect('index.php?option=com_comments&view=threads');
+		$this->setRedirect('index.php?option=com_social&view=threads');
 	}
 
 	/**
@@ -67,10 +67,10 @@ class CommentsControllerThreads extends CommentsController
 		}
 		else
 		{
-			$this->setMessage(JText::_('Comments_Reset_Comments_Success'));
+			$this->setMessage(JText::_('SOCIAL_Reset_Comments_Success'));
 		}
 
-		$this->setRedirect('index.php?option=com_comments&view=threads');
+		$this->setRedirect('index.php?option=com_social&view=threads');
 	}
 
 	/**
@@ -91,10 +91,10 @@ class CommentsControllerThreads extends CommentsController
 		}
 		else
 		{
-			$this->setMessage(JText::_('Comments_Reset_Ratings_Success'));
+			$this->setMessage(JText::_('SOCIAL_Reset_Ratings_Success'));
 		}
 
-		$this->setRedirect('index.php?option=com_comments&view=threads');
+		$this->setRedirect('index.php?option=com_social&view=threads');
 	}
 
 }
