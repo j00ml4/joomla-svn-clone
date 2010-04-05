@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -13,19 +13,19 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.view');
 
 /**
- * Comments feed view class for the Comments package.
+ * Social feed view class for the Social package.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.0
  */
-class CommentsViewComments extends JView
+class SocialViewComments extends JView
 {
 	/**
 	 * Display the view
 	 *
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function display($tpl = null)
 	{
@@ -38,13 +38,13 @@ class CommentsViewComments extends JView
 		if ($state->get('filter.thread_id')) {
 			// setup some basic document information
 			$this->document->link = JRoute::_($comments[0]->page_route);
-			$this->document->setTitle( $comments[0]->page_title.' - '.JText::_('Comments_Comments'));
-			$this->document->setDescription(JText::sprintf('Comments_Thread_Desc', $comments[0]->page_title));
+			$this->document->setTitle( $comments[0]->page_title.' - '.JText::_('SOCIAL_Comments'));
+			$this->document->setDescription(JText::sprintf('SOCIAL_Thread_Desc', $comments[0]->page_title));
 		} else {
 			// setup some basic document information
 			$this->document->link = JURI::base(true);
-			$this->document->setTitle( $app->getCfg('sitename').' - '.JText::_('Comments_Comments'));
-			$this->document->setDescription(JText::sprintf('Comments_Thread_Desc', $app->getCfg('sitename')));
+			$this->document->setTitle( $app->getCfg('sitename').' - '.JText::_('SOCIAL_Comments'));
+			$this->document->setDescription(JText::sprintf('SOCIAL_Thread_Desc', $app->getCfg('sitename')));
 		}
 
 
@@ -58,7 +58,7 @@ class CommentsViewComments extends JView
 		));
 
 		// Setup the display name for the comment.
-		$params = & JComponentHelper::getParams('com_comments');
+		$params = & JComponentHelper::getParams('com_social');
 		$_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 
 		// iterate over the comments to add to the feed

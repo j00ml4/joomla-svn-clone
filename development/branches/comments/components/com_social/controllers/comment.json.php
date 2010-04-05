@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,20 +11,20 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Comment JSON controller class for Comments.
+ * Comment JSON controller class for Social.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsControllerComment extends JController
+class SocialControllerComment extends JController
 {
 	/**
 	 * The display method should never be requested from the extended
 	 * controller.  Throw an error page and exit gracefully.
 	 *
 	 * @return	void
-	 * @since	1.3
+	 * @since	1.6
 	 */
 	public function display()
 	{
@@ -35,14 +35,14 @@ class CommentsControllerComment extends JController
 	 * Method to add a comment via JSON.
 	 *
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	public function add()
 	{
 		// Check for a valid token. If invalid, send a 403 with the error message.
 		JRequest::checkToken('request') or $this->sendResponse(new JException(JText::_('JX_Invalid_Token'), 403));
 
-		$config	= &JComponentHelper::getParams('com_comments');
+		$config	= &JComponentHelper::getParams('com_social');
 		$user	= &JFactory::getUser();
 		$date	= &JFactory::getDate();
 		$uId	= (int)$user->get('id');
@@ -67,7 +67,7 @@ class CommentsControllerComment extends JController
 
 		// Check the thread data.
 		if ($thread === false) {
-			JError::raiseError(500, JText::_('Comments_Comment_Invalid_Thread'));
+			JError::raiseError(500, JText::_('SOCIAL_Comment_Invalid_Thread'));
 			return false;
 		}
 
@@ -103,7 +103,7 @@ class CommentsControllerComment extends JController
 		// Add the thread information to the comment for the e-mail template.
 		$comment->route = JRoute::_($thread->page_route, false, -1);
 
-		// Configure the Comments model so we can get the total number of comments.
+		// Configure the Social model so we can get the total number of comments.
 		$mModel = &$this->getModel('Comments', 'CommentsModel');
 		$mModel->getState();
 		$mModel->setState('filter.thread_id', $tId);
@@ -119,7 +119,7 @@ class CommentsControllerComment extends JController
 		if ($comment->published == 0)
 		{
 			// Comment flagged for moderation.
-			$response->body = JText::_('Comments_Display_Upon_Approval');
+			$response->body = JText::_('SOCIAL_Display_Upon_Approval');
 		}
 		elseif ($comment->published == 1)
 		{
@@ -137,7 +137,7 @@ class CommentsControllerComment extends JController
 		elseif ($comment->published == 2)
 		{
 			// Comment flagged as SPAM.
-			$response->body = JText::_('Comments_Flagged_As_Spam');
+			$response->body = JText::_('SOCIAL_Flagged_As_Spam');
 		}
 
 		// Notify of a new comment being posted if enabled
@@ -159,7 +159,7 @@ class CommentsControllerComment extends JController
 	 *
 	 * @param	object	JObject on success, JException on failure.
 	 * @return	void
-	 * @since	1.2
+	 * @since	1.6
 	 */
 	public function sendResponse($body)
 	{
@@ -173,7 +173,7 @@ class CommentsControllerComment extends JController
 		JResponse::sendHeaders();
 
 		// Send the JSON response.
-		echo json_encode(new CommentsCommentResponse($body));
+		echo json_encode(new SocialCommentResponse($body));
 
 		// Close the application.
 		JFactory::getApplication()->close();
@@ -181,13 +181,13 @@ class CommentsControllerComment extends JController
 }
 
 /**
- * Comments Comment JSON Response Class
+ * Social Comment JSON Response Class
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsCommentResponse
+class SocialCommentResponse
 {
 	public function __construct($state)
 	{
@@ -199,7 +199,7 @@ class CommentsCommentResponse
 		{
 			// Prepare the error response.
 			$this->error	= true;
-			$this->header	= JText::_('Comments_Comment_Header_Error');
+			$this->header	= JText::_('SOCIAL_Comment_Header_Error');
 			$this->message	= $state->getMessage();
 		}
 		else
@@ -210,7 +210,7 @@ class CommentsCommentResponse
 			$this->total	= (int) $state->total;
 			$this->body		= $state->body;
 			$this->position	= $state->position;
-			$this->num_text	= $this->total == 1 ? JText::sprintf('Comment_Num', $this->total) : JText::sprintf('Comments_Num', $this->total);
+			$this->num_text	= $this->total == 1 ? JText::sprintf('Comment_Num', $this->total) : JText::sprintf('SOCIAL_Num', $this->total);
 		}
 	}
 }

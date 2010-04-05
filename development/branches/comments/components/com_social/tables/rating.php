@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,46 +11,22 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Rating table object for JXtended Comments
+ * Rating table object for JXtended Social
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.0
  */
-class CommentsTableRating extends JTable
+class SocialTableRating extends JTable
 {
-	/** @var int */
-	var $thread_id = null;
-	/** @var varchar */
-	var $context = null;
-	/** @var int */
-	var $context_id = null;
-	/** @var double */
-	var $pscore_total = null;
-	/** @var int */
-	var $pscore_count = null;
-	/** @var double */
-	var $pscore = null;
-	/** @var double */
-	var $mscore_total = null;
-	/** @var int */
-	var $mscore_count = null;
-	/** @var double */
-	var $mscore = null;
-	/** @var longtext */
-	var $used_ips = null;
-	/** @var datetime */
-	var $updated_date = null;
-
 	/**
 	 * Constructor
 	 *
-	 * @access	public
 	 * @param	object	Database object
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function __construct(&$db)
+	public function __construct(&$db)
 	{
 		parent::__construct('#__social_ratings', 'thread_id', $db);
 	}
@@ -58,19 +34,18 @@ class CommentsTableRating extends JTable
 	/**
 	 * Method to check the current record to save
 	 *
-	 * @access	public
 	 * @return	boolean	True on success
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function check()
+	public function check()
 	{
-		// Get the JXtended Comments configuration object.
-		$config = &JComponentHelper::getParams('com_comments');
+		// Get the JXtended Social configuration object.
+		$config = &JComponentHelper::getParams('com_social');
 
 		// Validate the rating data.
 		$result	= false;
 		if (empty($this->thread_id)) {
-			$this->setError('Comments_Rating_Thread_Empty');
+			$this->setError('SOCIAL_Rating_Thread_Empty');
 		} else {
 			$result = true;
 		}
@@ -81,11 +56,10 @@ class CommentsTableRating extends JTable
 	/**
 	 * Method to store the current record
 	 *
-	 * @access	public
 	 * @return	boolean	True on success
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function store()
+	public function store()
 	{
 		// Get the database connection object.
 		$db = &$this->_db;

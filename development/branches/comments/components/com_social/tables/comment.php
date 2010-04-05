@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,13 +11,13 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Comment table object for JXtended Comments
+ * Comment table object for JXtended Social
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.6
  */
-class CommentsTableComment extends JTable
+class SocialTableComment extends JTable
 {
 	/**
 	 * Constructor
@@ -39,8 +39,8 @@ class CommentsTableComment extends JTable
 	 */
 	public function check()
 	{
-		// Get the JXtended Comments configuration object.
-		$config = &JComponentHelper::getParams('com_comments');
+		// Get the JXtended Social configuration object.
+		$config = &JComponentHelper::getParams('com_social');
 
 		// Import library dependencies.
 		jimport('joomla.mail.helper');
@@ -52,11 +52,11 @@ class CommentsTableComment extends JTable
 		if ($this->trackback)
 		{
 			if (empty($this->thread_id)) {
-				$this->setError('Comments_Trackback_Thread_Empty');
+				$this->setError('SOCIAL_Trackback_Thread_Empty');
 			} else if (empty($this->subject)) {
-				$this->setError('Comments_Trackback_Subject_Is_Empty');
+				$this->setError('SOCIAL_Trackback_Subject_Is_Empty');
 			} else if (empty($this->url) || JFilterInput::checkAttribute(array('href', $this->url))) {
-				$this->setError('Comments_Trackback_URL_Invalid');
+				$this->setError('SOCIAL_Trackback_URL_Invalid');
 			} else {
 				$result = true;
 			}
@@ -64,17 +64,17 @@ class CommentsTableComment extends JTable
 		else
 		{
 			if (empty($this->thread_id)) {
-				$this->setError('Comments_Comment_Thread_Empty');
+				$this->setError('SOCIAL_Comment_Thread_Empty');
 			} else if (empty($this->name)) {
-				$this->setError('Comments_Comment_Name_Is_Empty');
+				$this->setError('SOCIAL_Comment_Name_Is_Empty');
 			} else if (strlen($this->body) < $config->get('minlength')) {
-				$this->setError('Comments_Comment_Is_Too_Short');
+				$this->setError('SOCIAL_Comment_Is_Too_Short');
 			} else if (strlen($this->body) > $config->get('maxlength')) {
-				$this->setError('Comments_Comment_Is_Too_Long');
+				$this->setError('SOCIAL_Comment_Is_Too_Long');
 			} else if (!JMailHelper::isEmailAddress($this->email)) {
-				$this->setError('Comments_Comment_Email_Invalid');
+				$this->setError('SOCIAL_Comment_Email_Invalid');
 			} else if ($this->url && JFilterInput::checkAttribute(array('href', $this->url))) {
-				$this->setError('Comments_Comment_URL_Invalid');
+				$this->setError('SOCIAL_Comment_URL_Invalid');
 			} else {
 				$result = true;
 			}

@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,20 +11,20 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Comment AJAX controller class for Comments.
+ * Comment AJAX controller class for Social.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsControllerComment extends CommentsController
+class SocialControllerComment extends SocialController
 {
 	/**
 	 * The display method should never be requested from the extended
 	 * controller.  Throw an error page and exit gracefully.
 	 *
 	 * @return	void
-	 * @since	1.3
+	 * @since	1.6
 	 */
 	public function display()
 	{
@@ -34,11 +34,10 @@ class CommentsControllerComment extends CommentsController
 	/**
 	 * Method to add a comment via JSON.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function add()
+	public function add()
 	{
 		// Get the URL to redirect the request to.
 		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
@@ -51,7 +50,7 @@ class CommentsControllerComment extends CommentsController
 			return false;
 		}
 
-		$config	= &JComponentHelper::getParams('com_comments');
+		$config	= &JComponentHelper::getParams('com_social');
 		$user	= &JFactory::getUser();
 		$date	= &JFactory::getDate();
 		$uId	= (int)$user->get('id');
@@ -76,7 +75,7 @@ class CommentsControllerComment extends CommentsController
 
 		// Check the thread data.
 		if ($thread === false) {
-			$this->setRedirect($redirect, JText::_('Comments_Comment_Invalid_Thread'), 'error');
+			$this->setRedirect($redirect, JText::_('SOCIAL_Comment_Invalid_Thread'), 'error');
 			return false;
 		}
 
@@ -120,11 +119,11 @@ class CommentsControllerComment extends CommentsController
 		// Set the redirect message.
 		if ($item->published == 0) {
 			// Comment flagged for moderation.
-			$message = JText::_('Comments_Display_Upon_Approval');
+			$message = JText::_('SOCIAL_Display_Upon_Approval');
 		}
 		elseif ($item->published == 1) {
 			// Comment published.
-			$message = JText::_('Comments_Display_Approved');
+			$message = JText::_('SOCIAL_Display_Approved');
 
 			// Flush the cache for this context.
 			$cache = &JFactory::getCache('com_'.$thread->context);
@@ -132,7 +131,7 @@ class CommentsControllerComment extends CommentsController
 		}
 		elseif ($item->published == 2) {
 			// Comment flagged as SPAM.
-			$message = JText::_('Comments_Flagged_As_Spam');
+			$message = JText::_('SOCIAL_Flagged_As_Spam');
 		}
 
 		$this->setRedirect($redirect, $message);

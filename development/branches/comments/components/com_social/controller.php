@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -13,26 +13,25 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.controller');
 jimport('joomla.application.component.helper');
 
-// Add the JXtended Comments table path to the JTable include paths.
-JTable::addIncludePath(JPATH_SITE.'/components/com_comments/tables');
+// Add the JXtended Social table path to the JTable include paths.
+JTable::addIncludePath(JPATH_SITE.'/components/com_social/tables');
 
 /**
- * Base controller class for JXtended Comments.
+ * Base controller class for JXtended Social.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.0
  */
-class CommentsController extends JController
+class SocialController extends JController
 {
 	/**
 	 * Method to display a view.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function display()
+	public function display()
 	{
 		// Check for the JXtended Libraries.
 		if (!function_exists('jximport')) {
@@ -54,7 +53,7 @@ class CommentsController extends JController
 
 		// Check to make sure a valid request was made.
 		$app	= JFactory::getApplication('site');
-		$params	= $app->getParams('com_comments');
+		$params	= $app->getParams('com_social');
 		if ((($vFormat != 'feed') || ($vName != 'comments')) || !$params->get('enable_comment_feeds', 1)) {
 			JError::raiseError(404, 'Resource Not Found');
 			return false;

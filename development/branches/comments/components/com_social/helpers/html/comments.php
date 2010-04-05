@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * JHtml Helper class for JXtended Comments
+ * JHtml Helper class for JXtended Social
  *
  * @package		JXtended.Comments
  * @version	1.0
@@ -30,7 +30,7 @@ class JHtmlComments
 	 * @param	string	$excerpt	An excerpt of the item
 	 * @param	string	$author		The item author name
 	 * @return	string	A trackback RDF widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function trackbackRDF($context, $id, $url, $route, $title, $excerpt, $author)
 	{
@@ -39,7 +39,7 @@ class JHtmlComments
 
 		// Add the appropriate include paths for models.
 		jimport('joomla.application.component.model');
-		JModel::addIncludePath(JPATH_SITE.'/components/com_comments/models');
+		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 		// Get and configure the thread model.
 		$model = & JModel::getInstance('Thread', 'CommentsModel');
@@ -58,7 +58,7 @@ class JHtmlComments
 
 		// Get the trackback information for the item.
 		jx('jx.webservices.trackback');
-		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option=com_comments&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
+		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option=com_social&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
 
 		return $widget;
 	}
@@ -73,7 +73,7 @@ class JHtmlComments
 	 * @param	string	$route		The proper route to the them to summarize.
 	 * @param	array	$options	Options for the comments summary display
 	 * @return	string	A comments summary widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function summary($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
 	{
@@ -112,7 +112,7 @@ class JHtmlComments
 	 * @param	string	$route		The proper route to the them
 	 * @param	array	$options	Options for the comments widget display
 	 * @return	string	A comments widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function comments($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
 	{
@@ -144,7 +144,7 @@ class JHtmlComments
 	{
 		// Add the appropriate include paths for models.
 		jimport('joomla.application.component.model');
-		JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'models');
+		JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'models');
 
 		// Get and configure the thread model.
 		$model = & JModel::getInstance('Comments', 'CommentsModel');
@@ -168,7 +168,7 @@ class JHtmlComments
 	 * @param	string	$route		The proper route to the item
 	 * @param	array	$options	Options for the comments form display
 	 * @return	string	A comments form widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function form($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
 	{
@@ -205,7 +205,7 @@ class JHtmlComments
 	 * @param	string	$title		The title of the item to share
 	 * @param	array	$options	Options for the sharing widget display
 	 * @return	string	A sharing widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function share($route, $title, $options = array('style'=>'raw'))
 	{
@@ -243,7 +243,7 @@ class JHtmlComments
 	 * @param	int		$categoryId	A category Id for the ratings (that is, a rating category relative to the context - not a real category)
 	 * @param	array	$options	Options for the rating widget display
 	 * @return	string	A rating widget
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function rating($context, $id, $url, $route, $title, $categoryId = 0, $options = array('style'=>'raw'))
 	{
@@ -280,14 +280,14 @@ class JHtmlComments
 	 * @param	string	$route		The proper route to the item
 	 * @param	array	$attribs	Link attributes
 	 * @return	string	The mailto link
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function email($title, $route, $attribs = array())
 	{
 		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($route);
 		$status = 'width=400,height=300,menubar=yes,resizable=yes';
 
-		$attribs['title']	= JText::_('Comments_Email');
+		$attribs['title']	= JText::_('SOCIAL_Email');
 		$attribs['onclick'] = "window.open(this.href,'win2','".$status."'); return false;";
 		$attribs['rel']		= 'nofollow';
 

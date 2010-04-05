@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,22 +11,21 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * The JXtended Comments rating controller
+ * The JXtended Social rating controller
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsControllerRating extends CommentsController
+class SocialControllerRating extends SocialController
 {
 	/**
 	 * Method to add a rating.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function add()
+	public function add()
 	{
 		// Get the URL to redirect the request to.
 		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
@@ -40,7 +39,7 @@ class CommentsControllerRating extends CommentsController
 		}
 
 		$app	= &JFactory::getApplication();
-		$config	= &JComponentHelper::getParams('com_comments');
+		$config	= &JComponentHelper::getParams('com_social');
 		$user	= &JFactory::getUser();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
@@ -64,7 +63,7 @@ class CommentsControllerRating extends CommentsController
 
 		// Check the thread data.
 		if ($thread === false) {
-			$this->setRedirect($redirect, JText::_('Comments_Comment_Invalid_Thread'), 'error');
+			$this->setRedirect($redirect, JText::_('SOCIAL_Comment_Invalid_Thread'), 'error');
 			return false;
 		}
 
@@ -79,16 +78,16 @@ class CommentsControllerRating extends CommentsController
 
 		// Ensure the score is between 0 and 1.
 		if (($rating['score'] < 0.0) || ($rating['score'] > 1.0)) {
-			$this->setRedirect($redirect, JText::_('Comments_Rating_Invalid_Score'), 'error');
+			$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Invalid_Score'), 'error');
 			return false;
 		}
 
 		// Prepare the key to track the vote in the session.
-		$key = 'com_comments;rating;'.$tId;
+		$key = 'com_social;rating;'.$tId;
 
 		// Check if the user has already voted on this thread.
 		if ($app->getUserState($key)) {
-			$this->setRedirect($redirect, JText::_('Comments_Rating_Item_Already_Rated'), 'notice');
+			$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Item_Already_Rated'), 'notice');
 			return false;
 		}
 		else {
@@ -109,7 +108,7 @@ class CommentsControllerRating extends CommentsController
 		$cache = &JFactory::getCache('com_'.$thread->context);
 		$cache->clean();
 
-		$this->setRedirect($redirect, JText::_('Comments_Rating_Submitted'));
+		$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Submitted'));
 		return true;
 	}
 }

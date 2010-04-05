@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -13,63 +13,58 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.model');
 
 /**
- * The JXtended Comments comment model
+ * The JXtended Social comment model
  *
  * @package		JXtended.Comments
  * @version	1.0
  */
-class CommentsModelComment extends JModel
+class SocialModelComment extends JModel
 {
 	/**
 	 * Flag to indicate model state initialization.
 	 *
-	 * @access	protected
 	 * @var		boolean
 	 */
-	var $__state_set		= null;
+	protected $__state_set		= null;
 
 	/**
 	 * Container for comment data objects.
 	 *
-	 * @access	private
 	 * @var		array
 	 */
-	var $_items				= array();
-	var $_threads			= array();
+	protected $_items				= array();
+	protected $_threads			= array();
 
 	/**
 	 * Container for comment total data.
 	 *
-	 * @access	private
 	 * @var		integer
 	 */
-	var $_total				= null;
+	protected $_total				= null;
 
 	/**
 	 * Container for the items whereby clause.
 	 *
-	 * @access	private
 	 * @var		string
 	 */
-	var $_whereby			= null;
+	protected $_whereby			= null;
 
 	/**
 	 * Overridden getState method to allow autopopulating of model state by the request.
 	 *
-	 * @access	public
 	 * @param	mixed	$property	The name of the property to return from the state or NULL to return the state
 	 * @param	mixed	$default	The default value to return if the property is not set
 	 * @return	mixed	The value by name from the state or the state itself
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function getState($property=null, $default=null)
+	public function getState($property=null, $default=null)
 	{
 		if (!$this->__state_set) {
 			$application	= &JFactory::getApplication('site');
-			$context		= 'com_comments.comment.';
+			$context		= 'com_social.comment.';
 
 			// Load the component configuration parameters.
-			$this->setState('config', JComponentHelper::getParams('com_comments'));
+			$this->setState('config', JComponentHelper::getParams('com_social'));
 
 			// Compute the list start offset.
 			$page	= $application->getUserStateFromRequest($context.'list.page', 'comments_page', 0, 'int');
@@ -101,12 +96,11 @@ class CommentsModelComment extends JModel
 	/**
 	 * Method to return a comment object
 	 *
-	 * @access	public
 	 * @param	mixed	$id	NULL to use the $_SESSION or $_REQUEST values or integer to directly declare the comment id
 	 * @return	object	Comment object
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function &getItem($id=null)
+	public function &getItem($id=null)
 	{
 		// get the id of the item to return.
 		$id = (int) (is_null($id)) ? $this->getState('comment.id', 0) : $id;
@@ -168,12 +162,11 @@ class CommentsModelComment extends JModel
 	/**
 	 * Method to add a comment to the database
 	 *
-	 * @access	public
 	 * @param	array	$data	The comment row data to store in the database
 	 * @return	mixed	New comment record ID on success or JException object on failure
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function add($data = array())
+	public function add($data = array())
 	{
 		global $mainframe;
 
@@ -185,12 +178,12 @@ class CommentsModelComment extends JModel
 		// load a table object
 		$table = &$this->getTable('Comment', 'CommentsTable');
 		if (empty($table) or (JError::isError($table))) {
-			return new JException(JText::_('Comments_Unable_To_Load_Table'), 500);
+			return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
 		}
 
 		// bind the posted data to the table object
 		if (!$table->bind($data)) {
-			return new JException(JText::_('Comments_Unable_To_Bind_Comment_Data'), 500);
+			return new JException(JText::_('SOCIAL_Unable_To_Bind_Comment_Data'), 500);
 		}
 
 		// set the moderation/publishing state
@@ -217,7 +210,7 @@ class CommentsModelComment extends JModel
 				if ($table->user_id) {
 					$obj->author_id = $table->user_id;
 				}
-				Moovur::checkContent($obj, 'JXtended Comments', 'Post Comment');
+				Moovur::checkContent($obj, 'JXtended Social', 'Post Comment');
 			}
 		}
 
@@ -335,12 +328,11 @@ class CommentsModelComment extends JModel
 	/**
 	 * Method to add a trackback to the database
 	 *
-	 * @access	public
 	 * @param	array	$data	The trackback row data to store in the database
 	 * @return	mixed	New trackback record ID on success or JException object on failure
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function addTrackback($data = array())
+	public function addTrackback($data = array())
 	{
 		global $mainframe;
 
@@ -352,12 +344,12 @@ class CommentsModelComment extends JModel
 		// load a table object
 		$table = &$this->getTable('Comment', 'CommentsTable');
 		if (empty($table) or (JError::isError($table))) {
-			return new JException(JText::_('Comments_Unable_To_Load_Table'), 500);
+			return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
 		}
 
 		// bind the posted data to the table object
 		if (!$table->bind($data)) {
-			return new JException(JText::_('Comments_Unable_To_Bind_Comment_Data'), 500);
+			return new JException(JText::_('SOCIAL_Unable_To_Bind_Comment_Data'), 500);
 		}
 
 		// set the moderation/publishing state
@@ -388,16 +380,15 @@ class CommentsModelComment extends JModel
 	/**
 	 * Method to send a notification email about a comment being posted
 	 *
-	 * @access	public
 	 * @param	object	$item	The comment record notify about
 	 * @return	boolean	True on success
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function sendCommentNotification($item)
+	public function sendCommentNotification($item)
 	{
 		// get the application object and component configuration object
 		$application = &JFactory::getApplication();
-		$config = &JComponentHelper::getParams('com_comments');
+		$config = &JComponentHelper::getParams('com_social');
 
 		// wrap the comment record object in a JObject
 		$comment = new JObject();
@@ -439,12 +430,11 @@ EOC
 	/**
 	 * Method to get a comment rendered out as if in the module
 	 *
-	 * @access	public
 	 * @param	object	$item	The comment record to render
 	 * @return	string	Rendered output of a comment
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function getRenderedComment($item)
+	public function getRenderedComment($item)
 	{
 		// Get the active template.
 		$app	= &JFactory::getApplication();
@@ -492,106 +482,51 @@ EOC
 	 */
 	function canComment()
 	{
+		//
+		// TODO: JUST FIRE AN EVENT
+		//
+
 		$user	= &JFactory::getUser();
 		$uid	= (int)$user->get('id');
 		$config	= $this->getState('config');
 
 		// Check comments enabled
 		if ($config->get('enable_comments') == 0) {
-			$this->setError(JText::_('Comments_Disabled'));
+			$this->setError(JText::_('SOCIAL_Disabled'));
 			return false;
 		}
 
 		// Get the block helper.
-		require_once(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
 
 		// Check if the user Id is blocked.
 		if (CommentHelper::isBlockedUser($config)) {
-			$this->setError(JText::_('Comments_Comment_Not_Allowed'));
+			$this->setError(JText::_('SOCIAL_Comment_Not_Allowed'));
 			return false;
 		}
 		// Check if the IP address is blocked.
 		if (CommentHelper::isBlockedIP($config)) {
-			$this->setError(JText::_('Comments_Comment_Not_Allowed_IP'));
+			$this->setError(JText::_('SOCIAL_Comment_Not_Allowed_IP'));
 			return false;
 		}
 		// Check if the host is blocked.
 		if (CommentHelper::isBlockedHost($config)) {
-			$this->setError(JText::_('Comments_Comment_Not_Allowed_Host'));
+			$this->setError(JText::_('SOCIAL_Comment_Not_Allowed_Host'));
 			return false;
 		}
 
 		// Check guest commenting
 		if ($uid == 0 && $config->get('guestcomment') == 0) {
-			$this->setError(JText::_('Comments_Comment_Not_Signed_In'));
+			$this->setError(JText::_('SOCIAL_Comment_Not_Signed_In'));
 			return false;
 		}
 
 		// Check flood control.
 		if ($this->isCommentFlood()) {
-			$this->setError(JText::_('Comments_Comment_Not_Allowed_So_Soon'));
+			$this->setError(JText::_('SOCIAL_Comment_Not_Allowed_So_Soon'));
 			return false;
 		}
 
 		return true;
-	}
-
-
-	/**
-	 * Method to determine if the post is considered part of a post flood
-	 *
-	 * @access	public
-	 * @return	boolean	True if a flood
-	 * @since	1.0
-	 */
-	function isCommentFlood()
-	{
-		// get some needed objects and variables
-		$db		= &$this->getDBO();
-		$user	= &JFactory::getUser();
-		$userId	= $user->get('id');
-		$config = &JComponentHelper::getParams('com_comments');
-
-		// get the unix timestamp of the most recent comment with the poster's IP
-		$db->setQuery(
-			'SELECT UNIX_TIMESTAMP(`created_date`)' .
-			' FROM `#__social_comments`' .
-			' WHERE `address` = '.$db->Quote($_SERVER['REMOTE_ADDR']) .
-			' ORDER BY `created_date` DESC',
-			0, 1
-		);
-		//$lastAnonPost = $db->loadResult();
-
-		// get the unix timestamp of the most recent comment by the given user
-		$db->setQuery(
-			'SELECT UNIX_TIMESTAMP(`created_date`)' .
-			' FROM `#__social_comments`' .
-			' WHERE `user_id` = '.(int) $userId .
-			' ORDER BY `created_date` DESC',
-			0, 1
-		);
-		$lastUserPost = $db->loadResult();
-
-		// get the last post from the user id
-		if ($lastUserPost)
-		{
-			// get some date objects
-			$dateNow	= &JFactory::getDate();
-			$datePost	= &JFactory::getDate($lastUserPost);
-
-			// how long has it been between now and the last post?
-			$diff = $dateNow->toUnix() - $datePost->toUnix();
-			if ($userId)
-			{
-				if ($diff < ($s = $config->get('flooduser'))) {
-					return true;
-				}
-			}
-			else if ($diff < ($s = $config->get('floodany'))) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

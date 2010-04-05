@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * JHtml Helper class for JXtended Comments
+ * JHtml Helper class for JXtended Social
  *
  * @package		JXtended.Comments
  * @version	1.0
@@ -26,14 +26,14 @@ class JHtmlShare
 	 * @param	string	$link		The full link
 	 * @param	array	$attribs	Link attributes
 	 * @return	string	The mailto link
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	function email($title, $link, $attribs = array())
 	{
 		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($link);
 		$status = 'width=400,height=300,menubar=yes,resizable=yes';
 
-		$attribs['title']	= JText::_('Comments_Email');
+		$attribs['title']	= JText::_('SOCIAL_Email');
 		$attribs['onclick'] = "window.open(this.href,'win2','".$status."'); return false;";
 		$attribs['rel']		= 'nofollow';
 
