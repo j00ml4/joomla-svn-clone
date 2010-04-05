@@ -904,7 +904,7 @@ CREATE TABLE IF NOT EXISTS `#__social_threads` (
   `page_url` varchar(255) NOT NULL COMMENT 'The URL of the page for which the thread is attached',
   `page_route` varchar(255) NOT NULL COMMENT 'The route of the page for which the thread is attached',
   `page_title` varchar(255) NOT NULL COMMENT 'The title of the page for which the thread is attached',
-  `created_date` datetime NOT NULL COMMENT 'The created date for the comment thread',
+  `created_time` timestamp NOT NULL default CURRENT_TIMESTAMP COMMENT 'The created date for the comment thread',
   `status` int(10) unsigned NOT NULL default '0' COMMENT 'Thread status',
   `pings`  mediumtext NOT NULL,
   PRIMARY KEY  (`id`),
