@@ -59,6 +59,9 @@ class JCache extends JObject
 	function __construct($options)
 	{
 		$conf = &JFactory::getConfig();
+		
+		$caching = $conf->get('caching', 1);
+		
 		$this->_options = array(
 			'cachebase'		=> $conf->get('cache_path',JPATH_ROOT.DS.'cache'),
 			'lifetime'		=> $conf->get('cachetime') * 60,	// minutes to seconds
@@ -68,7 +71,7 @@ class JCache extends JObject
 			'locking'=>true,
 			'locktime'=>15,
 			'checkTime' => true,
-			'caching'=>true
+			'caching'	=> $caching == 1 ? true : false
 		);
 
 		// Overwrite default options with given options

@@ -71,7 +71,7 @@ class JDocumentRendererModule extends JDocumentRenderer
 		// Depreciated, included only for compatibility purposes! Use JModuleHelper::cache from within the module instead!
 		// @Todo remove this in 1.7.
 		
-		if ($mod_params->get('cache', 0) && $conf->get('caching'))
+		if ($mod_params->get('cache', 0)  && $conf->get('caching'))
 		{	
 			$user = &JFactory::getUser();
 			$cache = &JFactory::getCache($module->module,'callback');
