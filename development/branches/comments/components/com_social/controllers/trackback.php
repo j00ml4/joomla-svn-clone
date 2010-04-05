@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,19 +11,19 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Trackback controller class for Comments.
+ * Trackback controller class for Social.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @since		1.2
  */
-class CommentsControllerTrackback extends CommentsController
+class SocialControllerTrackback extends SocialController
 {
 	/**
 	 * Method to add a trackback to a thread.
 	 *
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	public function add()
 	{
@@ -42,7 +42,7 @@ class CommentsControllerTrackback extends CommentsController
 		JResponse::setHeader('Content-type', 'text/xml');
 
 		// Get some essential data.
-		$config	= JComponentHelper::getParams('com_comments');
+		$config	= JComponentHelper::getParams('com_social');
 		$date	= JFactory::getDate();
 		$tId	= JRequest::getInt('thread_id');
 
@@ -57,7 +57,7 @@ class CommentsControllerTrackback extends CommentsController
 		if ($thread === false)
 		{
 			// Set the error response.
-			JResponse::setBody($trackback->getResponseXml(false, JText::_('Comments_Invalid_Thread')));
+			JResponse::setBody($trackback->getResponseXml(false, JText::_('SOCIAL_Invalid_Thread')));
 
 			// Echo the response.
 			echo JResponse::toString();
@@ -73,7 +73,7 @@ class CommentsControllerTrackback extends CommentsController
 		if (!$data = $trackback->getVerifiedData($base->toString( array('scheme', 'host', 'port')).JRoute::_($thread->page_route)))
 		{
 			// Set the error response.
-			JResponse::setBody($trackback->getResponseXml(false, JText::_('Comments_Invalid_Trackback')));
+			JResponse::setBody($trackback->getResponseXml(false, JText::_('SOCIAL_Invalid_Trackback')));
 
 			// Echo the response.
 			echo JResponse::toString();

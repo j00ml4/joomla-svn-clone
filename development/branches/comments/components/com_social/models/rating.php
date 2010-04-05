@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -13,37 +13,35 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.model');
 
 /**
- * The JXtended Comments rating model
+ * The JXtended Social rating model
  *
  * @package		JXtended.Comments
  * @version	1.0
  */
-class CommentsModelRating extends JModel
+class SocialModelRating extends JModel
 {
 	/**
 	 * Flag to indicate model state initialization.
 	 *
-	 * @access	protected
 	 * @var		boolean
 	 */
-	var $__state_set		= null;
+	protected $__state_set		= null;
 
 	/**
 	 * Overridden getState method to allow autopopulating of model state by the request.
 	 *
-	 * @access	public
 	 * @param	mixed	$property	The name of the property to return from the state or NULL to return the state
 	 * @param	mixed	$default	The default value to return if the property is not set
 	 * @return	mixed	The value by name from the state or the state itself
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function getState($property=null, $default=null)
+	public function getState($property=null, $default=null)
 	{
 		// if the model state is uninitialized lets set some values we will need from the request.
 		if (!$this->__state_set) {
 
 			// load the component configuration parameters.
-			$this->setState('config', JComponentHelper::getParams('com_comments'));
+			$this->setState('config', JComponentHelper::getParams('com_social'));
 
 			$this->setState('thread.id', JRequest::getInt('thread_id'));
 
@@ -55,19 +53,18 @@ class CommentsModelRating extends JModel
 	/**
 	 * Method to return a rating object
 	 *
-	 * @access	public
 	 * @param	mixed	$context_id	NULL to use model state or integer
 	 * @param	mixed	$context	NULL to use model state or string
 	 * @return	object	rating object
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function &getItem($tId = null)
+	public function &getItem($tId = null)
 	{
 		$tId	= !empty($tId) ? $tId : $this->getState('thread.id');
 		$false	= false;
 
 		// Load the rating from the database.
-		JTable::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'tables');
+		JTable::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'tables');
 		$rating = JTable::getInstance('Rating', 'CommentsTable');
 		$return = $rating->load($tId);
 
@@ -88,12 +85,11 @@ class CommentsModelRating extends JModel
 	/**
 	 * Method to add a rating to the database
 	 *
-	 * @access	public
 	 * @param	array	$data	The rating row data to store in the database
 	 * @return	mixed	New rating record ID on success or JException object on failure
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function add($data = array())
+	public function add($data = array())
 	{
 		$result	= false;
 		$user	= &JFactory::getUser();
@@ -106,12 +102,12 @@ class CommentsModelRating extends JModel
 			// get a member/rating table object
 			$table = &$this->getTable('ratingmember', 'CommentsTable');
 			if (empty($table) or (JError::isError($table))) {
-				return new JException(JText::_('Comments_Unable_To_Load_Table'), 500);
+				return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
 			}
 
 			// load the row if it exists
 			if ($table->load($userId, $data['thread_id'], $data['category_id'])) {
-				return new JException(JText::_('Comments_Item_Already_Rated'), 403);
+				return new JException(JText::_('SOCIAL_Item_Already_Rated'), 403);
 			}
 
 			// set the row data fields
@@ -137,7 +133,7 @@ class CommentsModelRating extends JModel
 		// Get a Rating table object
 		$table = &$this->getTable('Rating', 'CommentsTable');
 		if (empty($table) or (JError::isError($table))) {
-			return new JException(JText::_('Comments_Unable_To_Load_Table'), 500);
+			return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
 		}
 
 		// load the row
@@ -174,32 +170,32 @@ class CommentsModelRating extends JModel
 
 		// Check if rating is enabled.
 		if ($config->get('enable_ratings') == 0) {
-			$this->setError(JText::_('Comments_Rating_Disabled'));
+			$this->setError(JText::_('SOCIAL_Rating_Disabled'));
 			return false;
 		}
 
 		// Get the block helper.
-		require_once(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
 
 		// Check if the user Id is blocked.
 		if (CommentHelper::isBlockedUser($config)) {
-			$this->setError(JText::_('Comments_Rating_Not_Allowed'));
+			$this->setError(JText::_('SOCIAL_Rating_Not_Allowed'));
 			return false;
 		}
 		// Check if the IP address is blocked.
 		if (CommentHelper::isBlockedIP($config)) {
-			$this->setError(JText::_('Comments_Rating_Not_Allowed_IP'));
+			$this->setError(JText::_('SOCIAL_Rating_Not_Allowed_IP'));
 			return false;
 		}
 		// Check if the host is blocked.
 		if (CommentHelper::isBlockedHost($config)) {
-			$this->setError(JText::_('Comments_Rating_Not_Allowed_Host'));
+			$this->setError(JText::_('SOCIAL_Rating_Not_Allowed_Host'));
 			return false;
 		}
 
 		// Check guest rating
 		if ($uid == 0 && $config->get('guestcomment') == 0) {
-			$this->setError(JText::_('Comments_Rating_Not_Signed_In'));
+			$this->setError(JText::_('SOCIAL_Rating_Not_Signed_In'));
 			return false;
 		}
 

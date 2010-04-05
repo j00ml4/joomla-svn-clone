@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -14,29 +14,29 @@ jx('jx.application.component.modellist');
 jx('jx.database.query');
 
 /**
- * Comments model for the Comments package.
+ * Social model for the Social package.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsModelComments extends JModelList
+class SocialModelComments extends JModelList
 {
 	/**
 	 * Context string for the model type.  This is used to handle uniqueness
 	 * when dealing with the _getStoreId() method and caching data structures.
 	 *
 	 * @var		string
-	 * @since	1.2
+	 * @since	1.6
 	 */
-	protected $_context = 'com_comments.comments';
+	protected $_context = 'com_social.comments';
 
 	/**
 	 * Method to get a JPagination object for the data set.
 	 *
 	 * @param	boolean	Force create a new object.
 	 * @return	object	A JPagination object for the data set.
-	 * @since	1.2
+	 * @since	1.6
 	 */
 	public function getPagination($new = false)
 	{
@@ -63,7 +63,7 @@ class CommentsModelComments extends JModelList
 	 * Method to get a JQuery object for retrieving the data set from a database.
 	 *
 	 * @return	object	A JQuery object to retrieve the data set.
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	protected function _getListQuery()
 	{
@@ -127,7 +127,7 @@ class CommentsModelComments extends JModelList
 	 *
 	 * @param	string	An identifier string to generate the store id.
 	 * @return	string	A store id.
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	protected function _getStoreId($id = '')
 	{
@@ -153,7 +153,7 @@ class CommentsModelComments extends JModelList
 	 * configuration flag to ignore the request is set.
 	 *
 	 * @return	void
-	 * @since	1.2
+	 * @since	1.6
 	 */
 	protected function _populateState()
 	{
@@ -161,8 +161,8 @@ class CommentsModelComments extends JModelList
 		$app		= &JFactory::getApplication();
 		$user		= &JFactory::getUser();
 		$config		= &JFactory::getConfig();
-		$params		= $app->getParams('com_comments');
-		$context	= 'com_comments.comments.';
+		$params		= $app->getParams('com_social');
+		$context	= 'com_social.comments.';
 
 		// Load the filter state.
 		$this->setState('filter.context', JRequest::getWord('context', $params->get('context', null)));

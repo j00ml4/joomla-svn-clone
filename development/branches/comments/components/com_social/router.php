@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,13 +11,13 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * Function to build a JXtended Comments URL route.
+ * Function to build a JXtended Social URL route.
  *
  * @param	array	The array of query string values for which to build a route.
  * @return	array	The URL route with segments represented as an array.
- * @since	1.2
+ * @since	1.6
  */
-function CommentsBuildRoute(&$query)
+function SocialBuildRoute(&$query)
 {
 	$segments = array();
 
@@ -27,7 +27,7 @@ function CommentsBuildRoute(&$query)
 	if (empty($item))
 	{
 		$menu	= &JSite::getMenu();
-		$items	= $menu->getItems('component', 'com_comments');
+		$items	= $menu->getItems('component', 'com_social');
 
 		if (!empty($items)) {
 			$item = $items[0];
@@ -36,7 +36,7 @@ function CommentsBuildRoute(&$query)
 		}
 	}
 
-	// Only allow Itemid if there is a com_comments item set in the menu.
+	// Only allow Itemid if there is a com_social item set in the menu.
 	if ($item) {
 		$query['Itemid'] = $item->id;
 	} else {
@@ -61,13 +61,13 @@ function CommentsBuildRoute(&$query)
 }
 
 /**
- * Function to parse a JXtended Comments URL route.
+ * Function to parse a JXtended Social URL route.
  *
  * @param	array	The URL route with segments represented as an array.
  * @return	array	The array of variables to set in the request.
- * @since	1.2
+ * @since	1.6
  */
-function CommentsParseRoute($segments)
+function SocialParseRoute($segments)
 {
 	$vars = array();
 

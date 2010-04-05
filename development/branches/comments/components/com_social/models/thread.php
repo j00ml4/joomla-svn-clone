@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -14,37 +14,35 @@ jimport('joomla.application.component.model');
 jx('jx.database.query');
 
 /**
- * Thread model for the Comments package.
+ * Thread model for the Social package.
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsModelThread extends JModel
+class SocialModelThread extends JModel
 {
 	/**
 	 * Flag to indicate model state initialization.
 	 *
-	 * @access	protected
 	 * @var		boolean
 	 */
-	var $__state_set		= null;
+	protected $__state_set		= null;
 
 	/**
 	 * Overridden getState method to allow autopopulating of model state by the request.
 	 *
-	 * @access	public
 	 * @param	mixed	$property	The name of the property to return from the state or NULL to return the state
 	 * @param	mixed	$default	The default value to return if the property is not set
 	 * @return	mixed	The value by name from the state or the state itself
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function getState($property=null, $default=null)
+	public function getState($property=null, $default=null)
 	{
 		if (!$this->__state_set) {
 			$app		= &JFactory::getApplication('site');
-			$params		= JComponentHelper::getParams('com_comments');
-			$context	= 'com_comments.thread.';
+			$params		= JComponentHelper::getParams('com_social');
+			$context	= 'com_social.thread.';
 
 			$this->setState('params', $params);
 
@@ -60,12 +58,11 @@ class CommentsModelThread extends JModel
 	 *
 	 * This method can get a thread by Id or by context and context Id.
 	 *
-	 * @access	public
 	 * @param	int		$threadId	An optional thread Id.
 	 * @return	mixed	Thread object on success, false on failure.
-	 * @since	1.2
+	 * @since	1.6
 	 */
-	function &getThread($threadId = null)
+	public function &getThread($threadId = null)
 	{
 		// Get the thread and/or context information.
 		$threadId	= (int) (is_null($threadId)) ? $this->getState('thread.id', 0) : $threadId;
@@ -119,11 +116,10 @@ class CommentsModelThread extends JModel
 	/**
 	 * Method to update a thread based on model state data.
 	 *
-	 * @access	private
 	 * @return	mixed	Thread object on success, false on failure.
-	 * @since	1.2
+	 * @since	1.6
 	 */
-	function _autoUpdateThread($thread)
+	protected function _autoUpdateThread($thread)
 	{
 		$update = false;
 
@@ -158,11 +154,10 @@ class CommentsModelThread extends JModel
 	/**
 	 * Method to add a thread based on model state data.
 	 *
-	 * @access	private
 	 * @return	mixed	Thread object on success, false on failure.
-	 * @since	1.2
+	 * @since	1.6
 	 */
-	function _autoCreateThread()
+	protected function _autoCreateThread()
 	{
 		$date	= JFactory::getDate();
 		$db		= $this->getDbo();

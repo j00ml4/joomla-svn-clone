@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
  * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
  * @link		http://jxtended.com
@@ -11,20 +11,20 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * The JXtended Comments rating JSON controller
+ * The JXtended Social rating JSON controller
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsControllerRating extends JController
+class SocialControllerRating extends JController
 {
 	/**
 	 * The display method should never be requested from the extended
 	 * controller.  Throw an error page and exit gracefully.
 	 *
 	 * @return	void
-	 * @since	1.3
+	 * @since	1.6
 	 */
 	public function display()
 	{
@@ -35,7 +35,7 @@ class CommentsControllerRating extends JController
 	 * Method to add a rating via JSON.
 	 *
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
 	public function add()
 	{
@@ -43,7 +43,7 @@ class CommentsControllerRating extends JController
 		JRequest::checkToken('request') or $this->sendResponse(new JException(JText::_('JX_Invalid_Token'), 403));
 
 		$app	= &JFactory::getApplication();
-		$config	= &JComponentHelper::getParams('com_comments');
+		$config	= &JComponentHelper::getParams('com_social');
 		$user	= &JFactory::getUser();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
@@ -67,7 +67,7 @@ class CommentsControllerRating extends JController
 
 		// Check the thread data.
 		if ($thread === false) {
-			JError::raiseError(500, JText::_('Comments_Comment_Invalid_Thread'));
+			JError::raiseError(500, JText::_('SOCIAL_Comment_Invalid_Thread'));
 			return false;
 		}
 
@@ -82,16 +82,16 @@ class CommentsControllerRating extends JController
 
 		// Ensure the score is between 0 and 1.
 		if (($rating['score'] < 0.0) || ($rating['score'] > 1.0)) {
-			JError::raiseError(500, JText::_('Comments_Rating_Invalid_Score'));
+			JError::raiseError(500, JText::_('SOCIAL_Rating_Invalid_Score'));
 			return false;
 		}
 
 		// Prepare the key to track the vote in the session.
-		$key = 'com_comments;rating;'.$tId;
+		$key = 'com_social;rating;'.$tId;
 
 		// Check if the user has already voted on this thread.
 		if ($app->getUserState($key)) {
-			JError::raiseError(403, JText::_('Comments_Rating_Item_Already_Rated'));
+			JError::raiseError(403, JText::_('SOCIAL_Rating_Item_Already_Rated'));
 			return false;
 		}
 		else {
@@ -126,7 +126,7 @@ class CommentsControllerRating extends JController
 	 *
 	 * @param	object	JObject on success, JException on failure.
 	 * @return	void
-	 * @since	1.2
+	 * @since	1.6
 	 */
 	public function sendResponse($body)
 	{
@@ -140,7 +140,7 @@ class CommentsControllerRating extends JController
 		JResponse::sendHeaders();
 
 		// Send the JSON response.
-		echo json_encode(new CommentsRatingResponse($body));
+		echo json_encode(new SocialRatingResponse($body));
 
 		// Close the application.
 		JFactory::getApplication()->close();
@@ -148,13 +148,13 @@ class CommentsControllerRating extends JController
 }
 
 /**
- * Comments Rating JSON Response Class
+ * Social Rating JSON Response Class
  *
  * @package		JXtended.Comments
- * @subpackage	com_comments
+ * @subpackage	com_social
  * @version		1.2
  */
-class CommentsRatingResponse
+class SocialRatingResponse
 {
 	public function __construct($state)
 	{
@@ -166,7 +166,7 @@ class CommentsRatingResponse
 		{
 			// Prepare the error response.
 			$this->error	= true;
-			$this->header	= JText::_('Comments_Rating_Header_Error');
+			$this->header	= JText::_('SOCIAL_Rating_Header_Error');
 			$this->message	= $state->getMessage();
 		}
 		else
@@ -175,7 +175,7 @@ class CommentsRatingResponse
 			$this->error		= false;
 			$this->pscore_count	= (int) $state->pscore_count;
 			$this->pscore		= (float) $state->pscore;
-			$this->counter_text	= $this->pscore_count == 1 ? JText::_('Comments_Vote') : JText::_('Comments_Votes');
+			$this->counter_text	= $this->pscore_count == 1 ? JText::_('SOCIAL_Vote') : JText::_('SOCIAL_Votes');
 		}
 	}
 }
