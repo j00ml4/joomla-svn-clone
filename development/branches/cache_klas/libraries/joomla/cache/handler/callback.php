@@ -130,7 +130,7 @@ class JCacheHandlerCallback extends JCacheHandler
 			$cached['output'] = $wrkarounds==false ? $output : JCache::setWorkarounds($output);
 			$cached['result'] = $result;
 			// Store the cache data
-			$this->store(serialize($cached), $id);
+			$this->cache->store(serialize($cached), $id);
 			if ($locktest->locked == true) $this->cache->unlock($id);
 		}
 

@@ -66,11 +66,11 @@ class JMenuSite extends JMenu
 				parse_str($url, $menu->query);
 			}
 
-			$cache->store(serialize($menus), 'menu_items');
+			$cache->store($menus, 'menu_items');
 
 			$this->_items = $menus;
 		} else {
-			$this->_items = unserialize($data);
+			$this->_items = $data;
 		}
 	}
 }
