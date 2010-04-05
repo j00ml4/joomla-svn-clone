@@ -15,7 +15,8 @@ defined('_JEXEC') or die;
 require_once dirname(__FILE__).DS.'helper.php';
 
 //$list = modRelatedItemsHelper::getList($params);
-$list = JModuleHelper::cache('mod_related_items','modRelatedItemsHelper',array('getList',$params),$params,'safeuri',array('id'=>'int','Itemid'=>'int'));
+$list = JModuleHelper::cache('modRelatedItemsHelper','getList',$params,$module,$params,
+							'safeuri',array('id'=>'int','Itemid'=>'int'));
 if (!count($list)) {
 	return;
 }

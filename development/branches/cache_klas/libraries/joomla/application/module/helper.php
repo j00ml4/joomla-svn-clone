@@ -359,16 +359,22 @@ abstract class JModuleHelper
 	* 
 	* @since	1.6
 	*/
-	public static function cache ($module,$mhelper,$method,$moduleparams,$mode='itemid',$params=null) {
+	public static function cache ($mhelper,$method,$methodparams,$module,$moduleparams,$mode='itemid',$params=null) {
 		
 		$user = &JFactory::getUser();
-		$cache = &JFactory::getCache($module,'module');
+		$cache = &JFactory::getCache($module->module,'module');
+		$conf = &JFactory::getConfig();
 		
+		if ($moduleparams->get('newcache', 0) && $conf->get('caching')) {
+			$cache->setCaching = true ;
+		} else {
+			$cache->setCaching = false ;
+		}
 		
 		switch ($mode) {
 			
 			case 'id':
-				$ret = $cache->get($mhelper, $method,$params,true);
+				$ret = $cache->get($mhelper, array($method,$methodparams),$params,true);
 				break;
 
 			case 'safeuri':
@@ -381,16 +387,16 @@ abstract class JModuleHelper
 					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
 				} }
 				$secureid = md5(serialize(array($safeuri, $method, $moduleparams)));
-				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0).$secureid,true);
+				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0).$secureid,true);
 				break;
 			
 			case 'static':
-				$ret = $cache->get($mhelper, $method,$module. $user->get('aid', 0),true);
+				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0),true);
 				break;
 			
 			case 'itemid':
 			default:
-				$ret = $cache->get($mhelper, $method,false,true);
+				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
 				break;
 		}
 	return $ret;
