@@ -143,6 +143,8 @@ class ContentViewCategory extends JView
 		{
 			$this->link_items[$i] =& $items[$i];
 		}
+		
+		$children = array($category->id => $children);
 
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
@@ -178,11 +180,11 @@ class ContentViewCategory extends JView
 			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE')); 
 		}
 		$id = @$menu->query['id'];
-		if($menu && $menu->query['view'] != 'article' && $id != $this->item->id)
+		if($menu && $menu->query['view'] != 'article' && $id != $this->category->id)
 		{
-			$this->params->set('page_subheading', $this->item->title);
-			$path = array($this->item->title => '');
-			$category = $this->item->getParent();
+			$this->params->set('page_subheading', $this->category->title);
+			$path = array($this->category->title => '');
+			$category = $this->category->getParent();
 			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);
@@ -202,24 +204,23 @@ class ContentViewCategory extends JView
 		}
 		$this->document->setTitle($title);
 		
-		if ($this->item->metadesc) {
+		if ($this->category->metadesc) {
 			$this->document->setDescription($this->item->metadesc);
 		}
 
-		if ($this->item->metakey) {
+		if ($this->category->metakey) {
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
 
 		if ($app->getCfg('MetaTitle') == '1') {
-			$this->document->setMetaData('title', $this->item->getMetadata()->get('page_title'));
+			$this->document->setMetaData('title', $this->category->getMetadata()->get('page_title'));
 		}
 
 		if ($app->getCfg('MetaAuthor') == '1') {
-			$this->document->setMetaData('author', $this->item->metadata->get('author'));
+			$this->document->setMetaData('author', $this->category->metadata->get('author'));
 		}
 		
-
-		$mdata = $this->item->metadata->toArray();
+		$mdata = $this->category->metadata->toArray();
 		foreach ($mdata as $k => $v)
 		{
 			if ($v) {

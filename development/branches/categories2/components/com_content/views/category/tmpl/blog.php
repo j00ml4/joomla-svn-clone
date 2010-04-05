@@ -10,6 +10,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
+
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <?php if ($this->params->def('show_page_heading', 1)) : ?>
@@ -36,7 +38,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 <?php endif; ?>
 
-	<?php if (is_array($this->children) && count($this->children) > 0) : ?>
+	<?php if (is_array($this->children[$this->category->id]) && count($this->children[$this->category->id]) > 0) : ?>
 		<div class="jcat-children">
 			<?php echo $this->loadTemplate('children'); ?>
 		</div>
