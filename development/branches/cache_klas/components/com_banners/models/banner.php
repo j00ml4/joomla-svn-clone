@@ -106,12 +106,12 @@ class BannersModelBanner extends JModel
 	{
 		if (!isset($this->_item))
 		{	
-			$cache = JFactory::getCache('_system','');		
+			$cache = JFactory::getCache('com_banners','');		
 			
 			
 			$id = $this->getState('banner.id');
 			
-			$this->_item =  $cache->get($id, '_system');
+			$this->_item =  $cache->get($id, 'com_banners');
 			
 			if ($this->_item === false) {
 			// redirect to banner url
