@@ -31,32 +31,15 @@ JLoader::register('JCacheHandler', dirname(__FILE__).DS.'handler.php');
 
 class JCache extends JObject
 {
-	/**
-	 * Storage Handler
-	 * @access	private
-	 * @var		object
-	 */
-	public $_handler;
-	
-	/**
-	 * Storage
-	 * @access	private
-	 * @var		object
-	 */
-	private static $_storage;
 
-	/**
-	 * Cache Options
-	 * @access	public
-	 * @var		array
-	 */
-	
+	public $_handler;
+	private static $_storage;
 	public $_options;
+	
 	
 	/**
 	 * Constructor
 	 *
-	 * @access	protected
 	 * @param	array	$options	options
 	 */
 	public function __construct($options)
@@ -94,7 +77,6 @@ class JCache extends JObject
 	/**
 	 * Returns a reference to a cache adapter object, always creating it
 	 *
-	 * @static
 	 * @param	string	$type	The cache object type to instantiate
 	 * @return	object	A JCache object
 	 * @since	1.5
@@ -107,7 +89,6 @@ class JCache extends JObject
 	/**
 	 * Get the storage handlers
 	 *
-	 * @access public
 	 * @return array An array of available storage handlers
 	 */
 	public static function getStores()
@@ -136,7 +117,6 @@ class JCache extends JObject
 	/**
 	 * Set caching enabled state
 	 *
-	 * @access	public
 	 * @param	boolean	$enabled	True to enable caching
 	 * @return	void
 	 * @since	1.5
@@ -162,8 +142,6 @@ class JCache extends JObject
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	mixed	Boolean false on failure or a cached data string
@@ -185,8 +163,6 @@ class JCache extends JObject
 	/**
 	 * Get a list of all cached data
 	 *
-	 * @abstract
-	 * @access	public
 	 * @return	mixed	Boolean false on failure or an object with a list of cache groups and data
 	 * @since	1.6
 	 */
@@ -203,7 +179,6 @@ class JCache extends JObject
 	/**
 	 * Store the cached data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	mixed	$data	The data to store
@@ -227,8 +202,6 @@ class JCache extends JObject
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -253,7 +226,6 @@ class JCache extends JObject
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -275,7 +247,6 @@ class JCache extends JObject
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 * @since	1.5
 	 */
@@ -293,9 +264,6 @@ class JCache extends JObject
 	/**
 	 * Set lock flag on cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @since	1.6
@@ -371,9 +339,6 @@ class JCache extends JObject
 	/**
 	 * Unset lock flag on cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @since	1.6
@@ -403,7 +368,6 @@ class JCache extends JObject
 	/**
 	 * Get the cache storage handler
 	 *
-	 * @access protected
 	 * @return object A JCacheStorage object
 	 * @since	1.5
 	 */
@@ -425,6 +389,7 @@ class JCache extends JObject
 
 	/**
 	 * Perform workarounds on retrieved cached data
+	 * 
 	 * @param	string	$data		Cached data
 	 * @return	string	$body		Body of cached data
 	 * @since	1.6
@@ -473,6 +438,7 @@ class JCache extends JObject
 	
 	/**
 	 * Create workarounded data to be cached
+	 * 
 	 * @param	string	$data		Cached data
 	 * @return	string	$cached		Data to be cached
 	 * @since	1.6
@@ -519,6 +485,7 @@ class JCache extends JObject
 	
 	/**
 	 * Create safe id for cached data from url parameters set by plugins and framework
+	 * 
 	 * @return	string	md5 encoded cacheid
 	 * @since	1.6
 	 */

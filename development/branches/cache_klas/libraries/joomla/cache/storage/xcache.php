@@ -23,7 +23,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -34,7 +33,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
@@ -59,7 +57,6 @@ class JCacheStorageXcache extends JCacheStorage
 	 *
 	 *  requires the php.ini setting xcache.admin.enable_auth = Off
 	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -100,7 +97,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	 * Store the data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -117,7 +113,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -142,7 +137,6 @@ class JCacheStorageXcache extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -165,7 +159,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
@@ -199,8 +192,6 @@ class JCacheStorageXcache extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()

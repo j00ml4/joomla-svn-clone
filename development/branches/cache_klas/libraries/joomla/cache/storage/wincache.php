@@ -24,7 +24,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Constructor
 	 *
-	 * @access protected
 	 * @param array $options optional parameters
 	 */
 	public function __construct( $options = array() )
@@ -35,7 +34,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Get cached data from WINCACHE by id and group
 	 *
-	 * @access    public
 	 * @param    string    $id        The cache data id
 	 * @param    string    $group        The cache data group
 	 * @param    boolean    $checkTime    True to verify cache time expiration threshold
@@ -52,8 +50,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Get all cached data
 	 *
-	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -93,7 +89,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Store the data to WINCACHE by id and group
 	 *
-	 * @access    public
 	 * @param    string    $id    The cache data id
 	 * @param    string    $group    The cache data group
 	 * @param    string    $data    The data to store in cache
@@ -109,7 +104,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @access    public
 	 * @param    string    $id        The cache data id
 	 * @param    string    $group    The cache data group
 	 * @return    boolean    True on success, false otherwise
@@ -127,7 +121,6 @@ class JCacheStorageWincache extends JCacheStorage
 	 * group mode        : cleans all cache in the group
 	 * notgroup mode    : cleans all cache not in the group
 	 *
-	 * @access    public
 	 * @param    string    $group    The cache data group
 	 * @param    string    $mode    The mode for cleaning cache [group|notgroup]
 	 * @return    boolean    True on success, false otherwise
@@ -152,7 +145,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Force garbage collect expired cache data as items are removed only on get/add/delete/info etc
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
@@ -174,8 +166,6 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()
