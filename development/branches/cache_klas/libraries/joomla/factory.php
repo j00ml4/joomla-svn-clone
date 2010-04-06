@@ -267,12 +267,16 @@ abstract class JFactory
 		if ($cache_time > 0) $cache->setLifeTime($cache_time);
 					
 					
-		$simplepie = new SimplePie($url, JPATH_CACHE, 0);
+		$simplepie = new SimplePie(null, null, 0);
 		
-		$contents =  $cache->get(array($simplepie, 'force_feed'), true, false, false);
+		$simplepie->enable_cache(false);
+		$simplepie->set_feed_url($url);
+		$simplepie->force_feed(true);
+		
+		$contents =  $cache->get(array($simplepie, 'init'), null, false, false);
 		
 
-		if ($simplepie->init()) {
+		if ($contents) {
 			return $simplepie;
 		} else {
 			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_LOADING_FEED_DATA'));
