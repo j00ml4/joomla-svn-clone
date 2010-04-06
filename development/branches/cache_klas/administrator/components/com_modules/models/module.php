@@ -191,7 +191,10 @@ class ModulesModelModule extends JModelForm
 				return JError::raiseWarning(500, $row->getError());
 			}
 		}
-
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
 		return true;
 	}
 
