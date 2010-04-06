@@ -116,6 +116,10 @@ class ModulesModelModule extends JModelForm
 				throw new Exception($table->getError());
 			}
 		}
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
 
 		return true;
 	}
@@ -454,6 +458,10 @@ class ModulesModelModule extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
 
 		return true;
 	}
@@ -495,7 +503,11 @@ class ModulesModelModule extends JModelForm
 				$result = false;
 			}
 		}
-
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		
 		return $result;
 	}
 

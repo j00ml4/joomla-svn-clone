@@ -280,7 +280,7 @@ abstract class JModuleHelper
 		
 		$db->setQuery($query);
 		
-		$cache = JFactory::getCache ('_system', 'callback' );
+		$cache = JFactory::getCache ('com_modules', 'callback' );
 		$modules = $cache->get(array($db,'loadObjectList'),null,$cacheid,false);
 
 /*		$where	= isset($Itemid) ? ' AND (mm.menuid = '. (int) $Itemid .' OR mm.menuid <= 0)' : '';
