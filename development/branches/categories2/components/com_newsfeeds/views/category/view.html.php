@@ -74,14 +74,10 @@ class NewsfeedsViewCategory extends JView
 			$item->params = clone($params);
 			$item->params->merge($temp);
 		}
-		
-		if($params->get('max_levels', 0) > 0)
-		{
-			$params->set('max_levels', $params->get('max_levels') + $category->level);
-		}
 
 		$children = array($category->id => $children);
 
+		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);

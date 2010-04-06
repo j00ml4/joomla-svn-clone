@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version		$Id: default_items.php 15048 2010-02-25 17:24:37Z hackwar $
  * @package		Joomla.Site
