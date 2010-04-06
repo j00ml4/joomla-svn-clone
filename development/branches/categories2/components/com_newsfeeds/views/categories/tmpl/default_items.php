@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version		$Id: default_items.php 15048 2010-02-25 17:24:37Z hackwar $
  * @package		Joomla.Site
@@ -11,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 $class = ' class="first"';
-if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
+if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) : 
 ?>
 <ul>
 <?php foreach($this->items[$this->parent->id] as $id => $item) : ?>

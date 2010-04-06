@@ -12,9 +12,9 @@
 
 			<field name="id" type="category"
 				default="0"
-				description="COM_NEWSFEEDS_FIELD_SELECT_CATEGORY_DESC"
+				description="COM_WEBLINKS_FIELD_SELECT_CATEGORY_DESC"
 				extension="com_weblinks"
-				label="COM_NEWSFEEDS_FIELD_SELECT_CATEGORY_LABEL"
+				label="COM_WEBLINKS_FIELD_SELECT_CATEGORY_LABEL"
 				required="true"
 			/>
 		</fieldset>
@@ -44,10 +44,10 @@
 				<option value="1">JSHOW</option>
 			</field>
 
-			<field name="max_levels" type="text"
+			<field name="maxLevel" type="text"
 				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
 				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
-				default="0" size="3"
+				default="-1" size="3"
 			>
 			</field>
 			<field name="empty_categories" type="list"

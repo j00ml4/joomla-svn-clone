@@ -146,6 +146,7 @@ class ContentViewCategory extends JView
 		
 		$children = array($category->id => $children);
 
+		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('category',	$category);

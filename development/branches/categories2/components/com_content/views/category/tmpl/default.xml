@@ -113,16 +113,11 @@
 				<option value="all_articles">JGLOBAL_ALL_ARTICLE</option>
 			</field>
 
-			<field name="max_levels" type="list"
+			<field name="maxLevel" type="text"
 				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
 				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+				default="-1" size="3"
 			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="1">J1</option>
-				<option value="2">J2</option>
-				<option value="3">J3</option>
-				<option value="4">J4</option>
-				<option value="5">J5</option>
 			</field>
 
 			<field name="empty_categories" type="list"

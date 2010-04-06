@@ -83,6 +83,12 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+			<field name="maxLevel" type="text"
+				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
+				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+				default="-1" size="3"
+			>
+			</field>
 		</fieldset>
 	</fields>
 </metadata>
