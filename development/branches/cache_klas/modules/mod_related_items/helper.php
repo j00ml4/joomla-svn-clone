@@ -13,8 +13,9 @@ defined('_JEXEC') or die;
 
 require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
 
-class modRelatedItemsHelper
+class modRelatedItemsHelper 
 {
+	
 	function getList($params)
 	{
 		$db			= &JFactory::getDbo();
@@ -107,7 +108,6 @@ class modRelatedItemsHelper
 				}
 			}
 		}
-
+		
 		return $related;
 	}
-}
