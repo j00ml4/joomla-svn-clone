@@ -10,7 +10,6 @@
 	<fields name="request">
 		<fieldset name="request"
 		>
-
 			<field name="id" type="category"
 				description="CHOOSE_CATEGORY_DESC"
 				extension="com_newsfeeds"
