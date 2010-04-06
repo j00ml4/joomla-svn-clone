@@ -22,13 +22,6 @@ class JCacheHandlerOutput extends JCacheHandler
 {	
 	private $_id;
 	private $_group;
-	
-	/**
-	 * Cache lock test
-	 *
-	 * @var		object
-	 * @since	1.6
-	 */
 	private $_locktest = null;
 	
 	/**
@@ -37,7 +30,7 @@ class JCacheHandlerOutput extends JCacheHandler
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -51,7 +44,7 @@ class JCacheHandlerOutput extends JCacheHandler
 	 * @return	boolean	True if the cache is hit (false else)
 	 * @since	1.5
 	 */
-	function start($id, $group=null)
+	public function start($id, $group=null)
 	{
 		// If we have data in cache use that...
 		$data = $this->cache->get($id, $group);
@@ -90,7 +83,7 @@ class JCacheHandlerOutput extends JCacheHandler
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
-	function end()
+	public function end()
 	{
 		// Get data from output buffer and echo it
 		$data = ob_get_contents();

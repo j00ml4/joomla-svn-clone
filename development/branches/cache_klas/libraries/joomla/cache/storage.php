@@ -22,7 +22,7 @@ defined('JPATH_BASE') or die;
  */
 class JCacheStorage extends JObject
 {
-	public $rawname;
+	protected $rawname;
 	public $_now;
 	public $_lifetime;
 	public $_locking;

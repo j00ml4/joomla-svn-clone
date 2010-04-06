@@ -25,7 +25,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @var		integer
 	 * @since	1.6
 	 */
-	protected $id;
+	private $id;
 
 	/**
 	 * Cache group
@@ -33,7 +33,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $group;
+	private $group;
 	
 	/**
 	 * Cache lock test
@@ -49,7 +49,7 @@ class JCacheHandlerPage extends JCacheHandler
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -62,7 +62,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @return	boolean	True if the cache is hit (false else)
 	 * @since	1.5
 	 */
-	function get($id=false, $group='page', $wrkarounds=true)
+	public function get($id=false, $group='page', $wrkarounds=true)
 	{	
 		
 		// Initialise variables.
@@ -123,7 +123,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
-	function store($wrkarounds=true)
+	public function store($wrkarounds=true)
 	{	
 		
 		// Get page data from JResponse body
@@ -154,7 +154,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @return	string	MD5 Hash : page cache id
 	 * @since	1.5
 	 */
-	function _makeId()
+	private function _makeId()
 	{	
 		//return md5(JRequest::getURI());
 		return JCache::makeId();
@@ -167,7 +167,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @return	void
 	 * @since	1.5
 	 */
-	function _noChange()
+	private function _noChange()
 	{
 		$app = &JFactory::getApplication();
 
@@ -183,7 +183,7 @@ class JCacheHandlerPage extends JCacheHandler
 	 * @return	void
 	 * @since	1.5
 	 */
-	function _setEtag($etag)
+	private function _setEtag($etag)
 	{
 		JResponse::setHeader('ETag', $etag, true);
 	}

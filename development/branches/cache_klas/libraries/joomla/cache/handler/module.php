@@ -25,7 +25,7 @@ class JCacheHandlerModule extends JCacheHandler
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -39,7 +39,7 @@ class JCacheHandlerModule extends JCacheHandler
 	 * @return	mixed	Result of the function call (either from cache or function)
 	 * @since	1.5
 	 */
-	function get($modulehelper, $methodarr, $id=false, $wrkarounds=false)
+	public function get($modulehelper, $methodarr, $id=false, $wrkarounds=false)
 	{
 		// Initialise variables.
 		$data = false;
@@ -113,7 +113,7 @@ class JCacheHandlerModule extends JCacheHandler
 	 * @return	string	MD5 Hash : view cache id
 	 * @since	1.5
 	 */
-	function _makeId(&$modulehelper, $method)
+	private function _makeId(&$modulehelper, $method)
 	{
 		return md5(serialize( array( JRequest::getVar('Itemid',null,'default','INT'), $modulehelper, $methodarr)));
 	}

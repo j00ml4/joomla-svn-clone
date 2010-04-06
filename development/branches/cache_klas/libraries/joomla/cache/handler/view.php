@@ -23,10 +23,10 @@ class JCacheHandlerView extends JCacheHandler
 	/**
 	* Constructor
 	*
-	* @access protected
+	* @access public
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -44,7 +44,7 @@ class JCacheHandlerView extends JCacheHandler
 	 */
 
 	
-	function get(&$view, $method, $id=false, $wrkarounds=true)
+	public function get(&$view, $method, $id=false, $wrkarounds=true)
 	{
 		$data = false;
 
@@ -128,7 +128,7 @@ class JCacheHandlerView extends JCacheHandler
 	 * @return	string	MD5 Hash : view cache id
 	 * @since	1.5
 	 */
-	function _makeId(&$view, $method)
+	private function _makeId(&$view, $method)
 	{
 		return md5(serialize(array(JCache::makeId(), get_class($view), $method)));
 	}
