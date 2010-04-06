@@ -28,7 +28,7 @@ class JCacheStorageFile extends JCacheStorage
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 		$this->_root	= $options['cachebase'];
@@ -45,7 +45,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime=true)
+	public function get($id, $group, $checkTime=true)
 	{	
 		// @Todo: make reads use joomla.filesystem.file
 		$data = false;
@@ -79,7 +79,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.6
 	 */
 	
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		
@@ -112,7 +112,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{   
 		// @Todo: make writes use joomla.filesystem.file ...will have to fix that too for locking
 		$written	= false;
@@ -153,7 +153,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{	
 		jimport('joomla.filesystem.file');
 		$path = $this->_getFilePath($id, $group);
@@ -175,7 +175,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		jimport('joomla.filesystem.folder');
 
@@ -213,7 +213,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function gc()
+	public function gc()
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -236,7 +236,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		$conf	= &JFactory::getConfig();
 		return is_writable($conf->get('cache_path',JPATH_ROOT.DS.'cache'));
@@ -276,7 +276,7 @@ class JCacheStorageFile extends JCacheStorage
 	 * @return	string	The cache file path
 	 * @since	1.5
 	 */
-	function _getFilePath($id, $group)
+	private function _getFilePath($id, $group)
 	{	
 		$name	= $this->_getCacheId($id, $group);
 		$dir	= $this->_root.DS.$group;

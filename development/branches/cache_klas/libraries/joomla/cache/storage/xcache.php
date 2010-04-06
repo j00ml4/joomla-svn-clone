@@ -26,7 +26,7 @@ class JCacheStorageXcache extends JCacheStorage
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -41,7 +41,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		$cache_content = xcache_get($cache_id);
@@ -63,7 +63,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return	array data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		
@@ -107,7 +107,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		$store = xcache_set($cache_id, $data, $this->_lifetime);
@@ -123,7 +123,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 
@@ -148,7 +148,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		$allinfo = xcache_list(XC_TYPE_VAR, 0);
 		$keys = $allinfo['cache_list'];
@@ -169,7 +169,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
-	function gc()
+	public function gc()
 	{
 		// dummy, xcache has builtin garbage collector, turn it on in php.ini by changing default xcache.gc_interval setting from 0 to 3600 (=1 hour)
 		
@@ -203,7 +203,7 @@ class JCacheStorageXcache extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		return (extension_loaded('xcache'));
 	}

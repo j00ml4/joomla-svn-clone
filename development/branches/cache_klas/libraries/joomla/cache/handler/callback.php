@@ -26,7 +26,7 @@ class JCacheHandlerCallback extends JCacheHandler
 	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -45,7 +45,7 @@ class JCacheHandlerCallback extends JCacheHandler
 	 * @return	mixed	Result of the callback
 	 * @since	1.5
 	 */
-	function call()
+	public function call()
 	{
 		// Get callback and arguments
 		$args		= func_get_args();
@@ -65,7 +65,7 @@ class JCacheHandlerCallback extends JCacheHandler
 	 * @return	mixed	Result of the callback
 	 * @since	1.5
 	 */
-	function get($callback, $args, $id=false, $wrkarounds=false)
+	public function get($callback, $args, $id=false, $wrkarounds=false)
 	{	
 		
 		// Normalize callback
@@ -147,7 +147,7 @@ class JCacheHandlerCallback extends JCacheHandler
 	 * @return	string	MD5 Hash : function cache id
 	 * @since	1.5
 	 */
-	function _makeId($callback, $args)
+	private function _makeId($callback, $args)
 	{
 		if (is_array($callback) && is_object($callback[0])) {
 			$vars = get_object_vars($callback[0]);

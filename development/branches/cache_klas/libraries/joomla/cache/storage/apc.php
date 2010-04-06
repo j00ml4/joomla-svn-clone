@@ -26,7 +26,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @access protected
 	 * @param array $options optional parameters
 	 */
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -41,7 +41,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return apc_fetch($cache_id);
@@ -55,7 +55,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return	array data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 
@@ -104,7 +104,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return apc_store($cache_id, $data, $this->_lifetime);
@@ -119,7 +119,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return apc_delete($cache_id);
@@ -137,7 +137,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		$allinfo = apc_cache_info('user');
 		$keys = $allinfo['cache_list'];
@@ -158,7 +158,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
-	function gc()
+	public function gc()
 	{
 		$lifetime = $this->_lifetime;
 		$allinfo = apc_cache_info('user');
@@ -179,7 +179,7 @@ class JCacheStorageApc extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		return extension_loaded('apc');
 	}

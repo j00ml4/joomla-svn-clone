@@ -30,9 +30,9 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * Use persistent connections
 	 * @var boolean
 	 */
-	var $_persistent = false;
+	private $_persistent = false;
 	
-	var $_compress = 0;
+	private $_compress = 0;
 	
 	/**
 	 * Constructor
@@ -40,7 +40,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @access protected
 	 * @param array $options optional parameters
 	 */
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 
 		parent::__construct($options);
@@ -55,7 +55,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @access private
 	 * @return object memcache connection object
 	 */
-	function getConnection() {
+	private function getConnection() {
 		
 			$config = &JFactory::getConfig();
 			$this->_persistent	= $config->get('memcache_persist', true);
@@ -102,7 +102,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		$back = self::$_db->get($cache_id);
@@ -117,7 +117,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return	array data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		
@@ -163,7 +163,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{   
 		$cache_id = $this->_getCacheId($id, $group);
 		
@@ -195,7 +195,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		
@@ -226,7 +226,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{	
 		if(!$this->lockindex()) return false;
 		
@@ -254,7 +254,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		return (extension_loaded('memcache') && class_exists('Memcache'));
 	}

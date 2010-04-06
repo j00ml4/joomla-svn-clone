@@ -13,7 +13,7 @@ defined('JPATH_BASE') or die;
 
 
 /**
- * Abstract cache handler
+ * Public cache handler
  *
  * @abstract
  * @package		Joomla.Framework
@@ -23,7 +23,7 @@ defined('JPATH_BASE') or die;
 class JCacheHandler
 
 {	
-	public $cache;
+	protected $cache;
 	public $options;
 	
 	/**
@@ -33,7 +33,7 @@ class JCacheHandler
 	 * @param	array	$options	options
 	*/
 	
-	function __construct($options) {
+	public function __construct($options) {
 		
 		$this->cache = new JCache($options);
 		$this->options = $this->cache->_options;
@@ -46,7 +46,7 @@ class JCacheHandler
 		}
 	}
 	
-	function __call ($name, $arguments) {
+	protected function __call ($name, $arguments) {
 
 		$nazaj = call_user_func_array (array ($this->cache,$name),$arguments);
 		return $nazaj;
@@ -60,7 +60,7 @@ class JCacheHandler
 	 * @return	object	A JCache object
 	 * @since	1.5
 	 */
-	function getInstance($type = 'output', $options = array())
+	public function getInstance($type = 'output', $options = array())
 	{	
 		JCacheHandler::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'handler');
 		
@@ -93,7 +93,7 @@ class JCacheHandler
 	 * @return	void
 	 * @since	1.5
 	 */
-	function setCaching($enabled)
+	public function setCaching($enabled)
 	{
 		$this->cache->setCaching($enabled);
 	}
@@ -106,7 +106,7 @@ class JCacheHandler
 	 * @return	void
 	 * @since	1.5
 	 */
-	function setLifeTime($lt)
+	public function setLifeTime($lt)
 	{
 		$this->cache->setLifeTime($lt);
 	}
@@ -144,7 +144,7 @@ class JCacheHandler
 	 * @return	boolean	True if cache stored
 	 * @since	1.6
 	 */
-	function get($id, $group=null)
+	public function get($id, $group=null)
 	{	$data = unserialize($this->cache->get($id, $group=null));
 		return $data;
 	}
@@ -159,7 +159,7 @@ class JCacheHandler
 	 * @return	boolean	True if cache stored
 	 * @since	1.6
 	 */
-	function store($data, $id, $group=null)
+	public function store($data, $id, $group=null)
 	{
 		return $this->cache->store(serialize($data), $id, $group=null);
 	}

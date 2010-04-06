@@ -27,7 +27,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @access protected
 	 * @param array $options optional parameters
 	 */
-	function __construct( $options = array() )
+	public function __construct( $options = array() )
 	{
 		parent::__construct($options);
 	}
@@ -42,7 +42,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return    mixed    Boolean false on failure or a cached data string
 	 * @since    1.6
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		$cache_content = wincache_ucache_get($cache_id);
@@ -57,7 +57,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return	array data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		$allinfo = wincache_ucache_info();
@@ -100,7 +100,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return    boolean    True on success, false otherwise
 	 * @since    1.6
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return wincache_ucache_set($cache_id, $data, $this->_lifetime);
@@ -115,7 +115,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return    boolean    True on success, false otherwise
 	 * @since    1.6
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return wincache_ucache_delete($cache_id);
@@ -133,7 +133,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return    boolean    True on success, false otherwise
 	 * @since    1.6
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		$allinfo = wincache_ucache_info();
 
@@ -156,7 +156,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
-	function gc()
+	public function gc()
 	{
 		$lifetime    = $this->_lifetime;
 		$allinfo = wincache_ucache_info();
@@ -178,7 +178,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		$test = extension_loaded('wincache') && function_exists('wincache_ucache_get') && !strcmp(ini_get('wincache.ucenabled'), "1");
 		return $test;

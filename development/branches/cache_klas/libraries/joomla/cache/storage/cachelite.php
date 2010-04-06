@@ -31,7 +31,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @access protected
 	 * @param array $options optional parameters
 	 */
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 		
@@ -75,7 +75,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$data = false;
 		self::$CacheLiteInstance->setOption('cacheDir', $this->_root.DS.$group.DS);
@@ -94,7 +94,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @since	1.6
 	 */
 
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		
@@ -127,7 +127,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.6
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		$dir	= $this->_root.DS.$group;
 
@@ -159,7 +159,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.6
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		self::$CacheLiteInstance->setOption('cacheDir', $this->_root.DS.$group.DS);
 		$this->_getCacheId($id, $group);
@@ -179,7 +179,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.6
 	 */
-	function clean($group, $mode=null)
+	public function clean($group, $mode=null)
 	{
 		jimport('joomla.filesystem.folder');
 
@@ -218,7 +218,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function gc()
+	public function gc()
 	{	$result = true;
 		self::$CacheLiteInstance->setOption('automaticCleaningFactor', 1);
 		self::$CacheLiteInstance->setOption('hashedDirectoryLevel', 1);
@@ -247,7 +247,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{	include_once('Cache/Lite.php');
 	if (class_exists('Cache_Lite')) return true; else return false;
 	}

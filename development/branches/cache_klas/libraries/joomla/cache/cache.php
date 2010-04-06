@@ -17,7 +17,6 @@ JLoader::register('JCacheStorage', dirname(__FILE__).DS.'storage.php');
 //Register the handler class with the loader
 JLoader::register('JCacheHandler', dirname(__FILE__).DS.'handler.php');
 
-// JCache::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'handler');
 
 /**
  * Joomla! Cache base object
@@ -27,6 +26,9 @@ JLoader::register('JCacheHandler', dirname(__FILE__).DS.'handler.php');
  * @subpackage	Cache
  * @since		1.5
  */
+
+// ALMOST EVERYTHING MUST BE PUBLIC HERE TO ALLOW OVERLOADING!
+
 class JCache extends JObject
 {
 	/**
@@ -41,13 +43,14 @@ class JCache extends JObject
 	 * @access	private
 	 * @var		object
 	 */
-	private static $storage;
+	private static $_storage;
 
 	/**
 	 * Cache Options
-	 * @access	private
+	 * @access	public
 	 * @var		array
 	 */
+	
 	public $_options;
 	
 	/**
@@ -56,7 +59,7 @@ class JCache extends JObject
 	 * @access	protected
 	 * @param	array	$options	options
 	 */
-	function __construct($options)
+	public function __construct($options)
 	{
 		$conf = &JFactory::getConfig();
 		
@@ -107,7 +110,7 @@ class JCache extends JObject
 	 * @access public
 	 * @return array An array of available storage handlers
 	 */
-	function getStores()
+	public static function getStores()
 	{
 		jimport('joomla.filesystem.folder');
 		$handlers = JFolder::files(dirname(__FILE__).DS.'storage', '.php');
@@ -138,7 +141,7 @@ class JCache extends JObject
 	 * @return	void
 	 * @since	1.5
 	 */
-	function setCaching($enabled)
+	public function setCaching($enabled)
 	{
 		$this->_options['caching'] = $enabled;
 	}
@@ -151,7 +154,7 @@ class JCache extends JObject
 	 * @return	void
 	 * @since	1.5
 	 */
-	function setLifeTime($lt)
+	public function setLifeTime($lt)
 	{
 		$this->_options['lifetime'] = $lt;
 	}
@@ -166,7 +169,7 @@ class JCache extends JObject
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group=null)
+	public function get($id, $group=null)
 	{
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
@@ -187,7 +190,7 @@ class JCache extends JObject
 	 * @return	mixed	Boolean false on failure or an object with a list of cache groups and data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{
 		// Get the storage
 		$handler = &$this->_getStorage();
@@ -207,7 +210,7 @@ class JCache extends JObject
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
-	function store($data, $id, $group=null)
+	public function store($data, $id, $group=null)
 	{
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
@@ -231,7 +234,7 @@ class JCache extends JObject
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group=null)
+	public function remove($id, $group=null)
 	{
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
@@ -256,7 +259,7 @@ class JCache extends JObject
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group=null, $mode='group')
+	public function clean($group=null, $mode='group')
 	{
 		// Get the default group
 		$group = ($group) ? $group : $this->_options['defaultgroup'];
@@ -276,7 +279,7 @@ class JCache extends JObject
 	 * @return boolean  True on success, false otherwise.
 	 * @since	1.5
 	 */
-	function gc()
+	public function gc()
 	{
 		// Get the storage handler
 		$handler = &$this->_getStorage();
@@ -404,11 +407,11 @@ class JCache extends JObject
 	 * @return object A JCacheStorage object
 	 * @since	1.5
 	 */
-	function _getStorage()
+	private function _getStorage()
 	{	
 		// this is often used so cache this during execution in static variable
-		if (self::$storage) {
-			return self::$storage;
+		if (self::$_storage) {
+			return self::$_storage;
 		}
 		
 		if (is_a($this->_handler, 'JCacheStorage')) {
@@ -416,7 +419,7 @@ class JCache extends JObject
 		}
 
 		$this->_handler = &JCacheStorage::getInstance($this->_options['storage'], $this->_options);
-		self::$storage = $this->_handler;
+		self::$_storage = $this->_handler;
 		return $this->_handler;
 	}
 
@@ -426,7 +429,7 @@ class JCache extends JObject
 	 * @return	string	$body		Body of cached data
 	 * @since	1.6
 	 */
-	static function getWorkarounds($data) {
+	public static function getWorkarounds($data) {
 			
 		// Initialise variables.
 		$app 		= &JFactory::getApplication();
@@ -475,7 +478,7 @@ class JCache extends JObject
 	 * @since	1.6
 	 */
 	
-	static function setWorkarounds($data) {
+	public static function setWorkarounds($data) {
 			
 		// Initialise variables.
 		$app = &JFactory::getApplication();
@@ -520,7 +523,7 @@ class JCache extends JObject
 	 * @since	1.6
 	 */
 
-	static function makeId() {
+	public static function makeId() {
 		
 		$app = & JFactory::getApplication();
 		// get url parameters set by plugins
@@ -547,7 +550,7 @@ class JCache extends JObject
 		return md5(serialize($safeuriaddon));
 	}
 	
-		/**
+	/**
 	 * Add a directory where JCache should search for handlers. You may
 	 * either pass a string or an array of directories.
 	 *

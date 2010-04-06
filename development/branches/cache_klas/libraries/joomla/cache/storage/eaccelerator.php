@@ -27,7 +27,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @access protected
 	 * @param array $options optional parameters
 	 */
-	function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct($options);
 	}
@@ -42,7 +42,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @return	mixed	Boolean false on failure or a cached data string
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		$cache_content = eaccelerator_get($cache_id);
@@ -61,7 +61,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @return	array data
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 		parent::getAll();
 		
@@ -107,7 +107,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		$cache_id = $this->_getCacheId($id, $group);
 		return eaccelerator_put($cache_id, $data, $this->_lifetime);
@@ -140,7 +140,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		$keys = eaccelerator_list_keys();
 
@@ -161,7 +161,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function gc()
+	public function gc()
 	{
 		return eaccelerator_gc();
 	}
@@ -173,7 +173,7 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		return (extension_loaded('eaccelerator') && function_exists('eaccelerator_get'));
 	}
