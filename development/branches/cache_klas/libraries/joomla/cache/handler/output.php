@@ -12,7 +12,7 @@
 defined('JPATH_BASE') or die;
 
 /**
- * Joomla! Cache output type object
+ * Joomla Cache output type object
  *
  * @package		Joomla.Framework
  * @subpackage	Cache
@@ -38,9 +38,8 @@ class JCacheHandlerOutput extends JCacheHandler
 	/**
 	 * Start the cache
 	 *
-	 * @access	public
-	 * @param	string	$id		The cache data id
-	 * @param	string	$group	The cache data group
+	 * @param	string	The cache data id
+	 * @param	string	The cache data group
 	 * @return	boolean	True if the cache is hit (false else)
 	 * @since	1.5
 	 */
@@ -79,7 +78,6 @@ class JCacheHandlerOutput extends JCacheHandler
 	/**
 	 * Stop the cache buffer and store the cached data
 	 *
-	 * @access	public
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
