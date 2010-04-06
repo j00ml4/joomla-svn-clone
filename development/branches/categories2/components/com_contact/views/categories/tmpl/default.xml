@@ -10,11 +10,11 @@
 	<fields name="request">
 		<fieldset name="request"
 		>
-
-			<field name="category" type="category"
-				description="COM_CONTACT_FIELD_CATEGORIES_DESC"
+			<field name="id" type="category"
+				description="CHOOSE_CATEGORY_DESC"
 				extension="com_contact"
-				label="COM_CONTACT_FIELD_CATEGORIES_LABEL"
+				label="CHOOSE_CATEGORY_LABEL"
+				show_root="true"
 				required="true"
 			/>
 		</fieldset>
