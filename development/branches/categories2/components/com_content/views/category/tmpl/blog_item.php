@@ -63,7 +63,7 @@ $params =& $this->item->params;
 <?php if ($params->get('show_parent_category')) : ?>
 		<dd class="parent-category-name">
 			<?php $title = $this->escape($this->item->parent_title);
-				$url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_slug)) . '">' . $title . '</a>'; ?>
+				$url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->parent_id)) . '">' . $title . '</a>'; ?>
 			<?php if ($params->get('link_parent_category')) : ?>
 				<?php echo JText::sprintf('CONTENT_PARENT', $url); ?>
 				<?php else : ?>

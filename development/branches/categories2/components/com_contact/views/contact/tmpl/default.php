@@ -30,7 +30,7 @@ $cparams = JComponentHelper::getParams ('com_media');
 		</h3>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_contact_category') == 'show_with_link') : ?>
-		<?php $contactLink = ContactHelperRoute::getCategoryRoute($this->contact->catslug);?>
+		<?php $contactLink = ContactHelperRoute::getCategoryRoute($this->contact->catid);?>
 		<h3>
 			<span class="contact-category"><a href="<?php echo $contactLink; ?>">
 				<?php echo $this->escape($this->contact->category_name); ?></a>
