@@ -20,12 +20,12 @@ defined('JPATH_BASE') or die;
  */
 class JCacheStorageFile extends JCacheStorage
 {
+	
 	private $_root;
 	
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -38,7 +38,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Get cached data from a file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
@@ -73,8 +72,6 @@ class JCacheStorageFile extends JCacheStorage
 	 /**
 	 * Get all cached data
 	 *
-	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -105,7 +102,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Store the data to a file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -147,7 +143,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Remove a cached data file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -169,7 +164,6 @@ class JCacheStorageFile extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -210,7 +204,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function gc()
@@ -232,8 +225,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()
@@ -244,8 +235,6 @@ class JCacheStorageFile extends JCacheStorage
 
 	/**
 	 * Check to make sure cache is still valid, if not, delete it.
-	 *
-	 * @access private
 	 *
 	 * @param string  $id		Cache key to expire.
 	 * @param string  $group	The cache data group.
@@ -270,7 +259,6 @@ class JCacheStorageFile extends JCacheStorage
 	/**
 	 * Get a cache file path from an id/group pair
 	 *
-	 * @access	private
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	string	The cache file path

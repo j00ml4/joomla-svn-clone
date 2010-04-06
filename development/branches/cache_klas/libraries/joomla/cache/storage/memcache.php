@@ -20,24 +20,14 @@ defined('JPATH_BASE') or die;
  */
 class JCacheStorageMemcache extends JCacheStorage
 {
-	/**
-	 * Resource for the current memcached connection.
-	 * @var resource
-	 */
-	 private static $_db = null;
 
-	/**
-	 * Use persistent connections
-	 * @var boolean
-	 */
-	private $_persistent = false;
-	
+	private static $_db = null;
+	private $_persistent = false;	
 	private $_compress = 0;
 	
 	/**
 	 * Constructor
 	 *
-	 * @access protected
 	 * @param array $options optional parameters
 	 */
 	public function __construct($options = array())
@@ -51,8 +41,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * return memcache connection object
 	 *
-	 * @static
-	 * @access private
 	 * @return object memcache connection object
 	 */
 	private function getConnection() {
@@ -95,7 +83,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Get cached data from memcache by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
@@ -113,7 +100,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * Get all cached data
 	 *
 	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -156,7 +142,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Store the data to memcache by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -189,7 +174,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -220,7 +204,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -250,8 +233,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()
@@ -263,9 +244,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Lock cached item - override parent as this is more efficient
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	integer	$locktime Cached item max lock time
@@ -324,9 +302,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Lock cache index
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @since	1.6
 	 * @return boolean  True on success, false otherwise.
 	 */
@@ -361,9 +336,6 @@ class JCacheStorageMemcache extends JCacheStorage
 	/**
 	 * Unlock cache index
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @since	1.6
 	 * @return boolean  True on success, false otherwise.
 	 */

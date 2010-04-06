@@ -28,8 +28,8 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Constructor
 	 *
-	 * @access protected
 	 * @param array $options optional parameters
+	 * @since	1.6
 	 */
 	public function __construct($options = array())
 	{
@@ -68,12 +68,11 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Get cached data from a file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
 	 * @return	mixed	Boolean false on failure or a cached data string
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	public function get($id, $group, $checkTime)
 	{
@@ -88,8 +87,6 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Get all cached data
 	 *
-	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -120,7 +117,6 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Store the data to a file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -153,7 +149,6 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Remove a cached data file by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -173,7 +168,6 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -215,8 +209,8 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
+	 * @since	1.6
 	 */
 	public function gc()
 	{	$result = true;
@@ -243,9 +237,8 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
+	 * @since	1.6
 	 */
 	public static function test()
 	{	include_once('Cache/Lite.php');

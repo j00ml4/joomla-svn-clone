@@ -27,7 +27,6 @@ class JCacheHandlerOutput extends JCacheHandler
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())

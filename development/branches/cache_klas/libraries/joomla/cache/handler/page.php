@@ -46,7 +46,6 @@ class JCacheHandlerPage extends JCacheHandler
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -56,7 +55,6 @@ class JCacheHandlerPage extends JCacheHandler
 	/**
 	 * Get the cached page data
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True if the cache is hit (false else)
@@ -119,7 +117,6 @@ class JCacheHandlerPage extends JCacheHandler
 	/**
 	 * Stop the cache buffer and store the cached data
 	 *
-	 * @access	public
 	 * @return	boolean	True if cache stored
 	 * @since	1.5
 	 */
@@ -150,7 +147,6 @@ class JCacheHandlerPage extends JCacheHandler
 	 * Generate a page cache id
 	 * @todo	Discuss whether this should be coupled to a data hash or a request hash ... perhaps hashed with a serialized request
 	 *
-	 * @access	private
 	 * @return	string	MD5 Hash : page cache id
 	 * @since	1.5
 	 */
@@ -163,7 +159,6 @@ class JCacheHandlerPage extends JCacheHandler
 	/**
 	 * There is no change in page data so send a not modified header and die gracefully
 	 *
-	 * @access	private
 	 * @return	void
 	 * @since	1.5
 	 */
@@ -179,7 +174,6 @@ class JCacheHandlerPage extends JCacheHandler
 	/**
 	 * Set the ETag header in the response
 	 *
-	 * @access	private
 	 * @return	void
 	 * @since	1.5
 	 */

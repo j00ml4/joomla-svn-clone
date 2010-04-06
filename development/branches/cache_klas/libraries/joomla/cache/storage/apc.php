@@ -23,7 +23,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Constructor
 	 *
-	 * @access protected
 	 * @param array $options optional parameters
 	 */
 	public function __construct($options = array())
@@ -34,7 +33,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Get cached data from APC by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
@@ -50,8 +48,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Get all cached data
 	 *
-	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -97,7 +93,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Store the data to APC by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -113,7 +108,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -131,7 +125,6 @@ class JCacheStorageApc extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -154,7 +147,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Force garbage collect expired cache data as items are removed only on fetch!
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 * * @since	1.6
 	 */
@@ -175,8 +167,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()
@@ -187,9 +177,6 @@ class JCacheStorageApc extends JCacheStorage
 	/**
 	 * Lock cached item - override parent as this is more efficient
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	integer	$locktime Cached item max lock time

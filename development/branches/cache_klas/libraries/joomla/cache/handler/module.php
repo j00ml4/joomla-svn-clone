@@ -11,18 +11,17 @@
 defined('JPATH_BASE') or die;
 
 /**
- * Joomla! Cache view type object
+ * Joomla! Cache module handler
  *
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @since		1.5
+ * @since		1.6
  */
 class JCacheHandlerModule extends JCacheHandler
 {
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -32,12 +31,11 @@ class JCacheHandlerModule extends JCacheHandler
 	/**
 	 * Get the cached module data
 	 *
-	 * @access	public
 	 * @param	string	$modulehelper	The modulehelper class to cache output for
 	 * @param	string	$methodarr	The method name of the modulehelper class to cache output for
 	 * @param	string	$id		The cache data id
 	 * @return	mixed	Result of the function call (either from cache or function)
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	public function get($modulehelper, $methodarr, $id=false, $wrkarounds=false)
 	{
@@ -105,13 +103,12 @@ class JCacheHandlerModule extends JCacheHandler
 	}
 
 	/**
-	 * Generate a view cache id
+	 * Generate a module cache id
 	 *
-	 * @access	private
 	 * @param	object	$modulehelper	The view object to cache output for
 	 * @param	string	$method	The method name to cache for the view object
-	 * @return	string	MD5 Hash : view cache id
-	 * @since	1.5
+	 * @return	string	MD5 Hash : module cache id
+	 * @since	1.6
 	 */
 	private function _makeId(&$modulehelper, $method)
 	{

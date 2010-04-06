@@ -23,7 +23,6 @@ class JCacheHandlerCallback extends JCacheHandler
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -41,7 +40,6 @@ class JCacheHandlerCallback extends JCacheHandler
 	 *	- Function name as a string eg. 'foo' for function foo()
 	 *	- Static method name as a string eg. 'MyClass::myMethod' for method myMethod() of class MyClass
 	 *
-	 * @access	public
 	 * @return	mixed	Result of the callback
 	 * @since	1.5
 	 */
@@ -57,7 +55,6 @@ class JCacheHandlerCallback extends JCacheHandler
 	/**
 	 * Executes a cacheable callback if not found in cache else returns cached output and result
 	 *
-	 * @access	public
 	 * @param	mixed	Callback or string shorthand for a callback
 	 * @param	array	Callback arguments
 	 * @param	string	Cache id
@@ -141,7 +138,6 @@ class JCacheHandlerCallback extends JCacheHandler
 	/**
 	 * Generate a callback cache id
 	 *
-	 * @access	private
 	 * @param	callback	$callback	Callback to cache
 	 * @param	array		$args	Arguments to the callback method to cache
 	 * @return	string	MD5 Hash : function cache id

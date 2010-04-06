@@ -29,7 +29,6 @@ class JCacheHandler
 	/**
 	 * Constructor
 	 *
-	 * @access	protected
 	 * @param	array	$options	options
 	*/
 	
@@ -55,12 +54,11 @@ class JCacheHandler
 	/**
 	 * Returns a reference to a cache adapter object, always creating it
 	 *
-	 * @static
 	 * @param	string	$type	The cache object type to instantiate
 	 * @return	object	A JCache object
-	 * @since	1.5
+	 * @since	1.6
 	 */
-	public function getInstance($type = 'output', $options = array())
+	public static function getInstance($type = 'output', $options = array())
 	{	
 		JCacheHandler::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'handler');
 		
@@ -88,10 +86,9 @@ class JCacheHandler
 	/**
 	 * Set caching enabled state
 	 *
-	 * @access	public
 	 * @param	boolean	$enabled	True to enable caching
 	 * @return	void
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	public function setCaching($enabled)
 	{
@@ -101,17 +98,16 @@ class JCacheHandler
 	/**
 	 * Set cache lifetime
 	 *
-	 * @access	public
 	 * @param	int	$lt	Cache lifetime
 	 * @return	void
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	public function setLifeTime($lt)
 	{
 		$this->cache->setLifeTime($lt);
 	}
 	
-		/**
+	/**
 	 * Add a directory where JCache should search for handlers. You may
 	 * either pass a string or an array of directories.
 	 *
@@ -137,7 +133,6 @@ class JCacheHandler
 	/**
 	 * Store the cached data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	mixed	$data	The data to store
@@ -152,7 +147,6 @@ class JCacheHandler
 	/**
 	 * Store the cached data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	mixed	$data	The data to store

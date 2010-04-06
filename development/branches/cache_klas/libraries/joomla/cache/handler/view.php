@@ -23,7 +23,6 @@ class JCacheHandlerView extends JCacheHandler
 	/**
 	* Constructor
 	*
-	* @access public
 	* @param array $options optional parameters
 	*/
 	public function __construct($options = array())
@@ -34,7 +33,6 @@ class JCacheHandlerView extends JCacheHandler
 	/**
 	 * Get the cached view data
 	 *
-	 * @access	public
 	 * @param	object	$view	The view object to cache output for
 	 * @param	string	$method	The method name of the view method to cache output for
 	 * @param	string	$group	The cache data group
@@ -122,7 +120,6 @@ class JCacheHandlerView extends JCacheHandler
 	/**
 	 * Generate a view cache id
 	 *
-	 * @access	private
 	 * @param	object	$view	The view object to cache output for
 	 * @param	string	$method	The method name to cache for the view object
 	 * @return	string	MD5 Hash : view cache id

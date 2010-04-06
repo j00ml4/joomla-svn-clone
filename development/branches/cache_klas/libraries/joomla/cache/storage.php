@@ -34,10 +34,9 @@ class JCacheStorage extends JObject
 	/**
 	* Constructor
 	*
-	* @access protected
 	* @param array $options optional parameters
 	*/
-	function __construct($options = array())
+	public function __construct($options = array())
 	{	$config			= &JFactory::getConfig();
 		$this->_hash	= md5($config->get('secret'));
 		$this->_application	= (isset($options['application'])) ? $options['application'] : null;
@@ -66,7 +65,7 @@ class JCacheStorage extends JObject
 	 * @return	object	A JCacheStorageHandler object
 	 * @since	1.5
 	 */
-	function getInstance($handler, $options = array())
+	public static function getInstance($handler, $options = array())
 	{	
 		JCacheStorage::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'storage');
 		
@@ -103,15 +102,13 @@ class JCacheStorage extends JObject
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
 	 * @return	mixed	Boolean false on failure or a cached data object
 	 * @since	1.5
 	 */
-	function get($id, $group, $checkTime)
+	public function get($id, $group, $checkTime)
 	{	
 		return false;
 	}
@@ -119,12 +116,10 @@ class JCacheStorage extends JObject
 	/**
 	 * Get all cached data
 	 *
-	 * @abstract
-	 * @access	public
 	 * @return	mixed	Boolean false on failure or a cached data object
 	 * @since	1.6
 	 */
-	function getAll()
+	public function getAll()
 	{	
 			if (!class_exists('JCacheStorageHelper', false)) {
 			require_once JPATH_ROOT.DS.'libraries'.DS.'joomla'.DS.'cache'.DS.'storage'.DS.'helpers'.DS.'helper.php';
@@ -135,15 +130,13 @@ class JCacheStorage extends JObject
 	/**
 	 * Store the data to cache by id and group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function store($id, $group, $data)
+	public function store($id, $group, $data)
 	{
 		return true;
 	}
@@ -151,14 +144,12 @@ class JCacheStorage extends JObject
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function remove($id, $group)
+	public function remove($id, $group)
 	{
 		return true;
 	}
@@ -169,14 +160,12 @@ class JCacheStorage extends JObject
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @abstract
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
 	 * @since	1.5
 	 */
-	function clean($group, $mode)
+	public function clean($group, $mode)
 	{
 		return true;
 	}
@@ -184,11 +173,9 @@ class JCacheStorage extends JObject
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @abstract
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	function gc()
+	public function gc()
 	{
 		return true;
 	}
@@ -196,12 +183,10 @@ class JCacheStorage extends JObject
 	/**
 	 * Test to see if the storage handler is available.
 	 *
-	 * @abstract
-	 * @static
 	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	static function test()
+	public static function test()
 	{
 		return true;
 	}
@@ -209,9 +194,6 @@ class JCacheStorage extends JObject
 	/**
 	 * Lock cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	integer	$locktime Cached item max lock time
@@ -226,9 +208,6 @@ class JCacheStorage extends JObject
 	/**
 	 * Unlock cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @since	1.6
@@ -242,13 +221,12 @@ class JCacheStorage extends JObject
 	/**
 	 * Get a cache_id string from an id/group pair
 	 *
-	 * @access	private
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	string	The cache_id string
 	 * @since	1.6
 	 */
-	function _getCacheId($id, $group)
+	protected function _getCacheId($id, $group)
 	{	
 		$name	= md5($this->_application.'-'.$id.'-'.$this->_language);
 		$this->rawname = $this->_hash.'-'.$name;

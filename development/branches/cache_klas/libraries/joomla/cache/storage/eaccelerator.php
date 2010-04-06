@@ -24,7 +24,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Constructor
 	 *
-	 * @access protected
 	 * @param array $options optional parameters
 	 */
 	public function __construct($options = array())
@@ -35,7 +34,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id			The cache data id
 	 * @param	string	$group		The cache data group
 	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
@@ -56,8 +54,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 /**
 	 * Get all cached data
 	 *
-	 *
-	 * @access	public
 	 * @return	array data
 	 * @since	1.6
 	 */
@@ -100,7 +96,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Store the data to by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	string	$data	The data to store in cache
@@ -116,7 +111,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @access	public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @return	boolean	True on success, false otherwise
@@ -134,7 +128,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	 * group mode		: cleans all cache in the group
 	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @access	public
 	 * @param	string	$group	The cache data group
 	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
 	 * @return	boolean	True on success, false otherwise
@@ -158,8 +151,8 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
+	 * @since	1.6
 	 */
 	public function gc()
 	{
@@ -169,8 +162,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Test to see if the cache storage is available.
 	 *
-	 * @static
-	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public static function test()
@@ -182,9 +173,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Lock cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	integer	$locktime Cached item max lock time
@@ -229,9 +217,6 @@ class JCacheStorageEaccelerator extends JCacheStorage
 	/**
 	 * Unlock cached item
 	 *
-	 * @abstract
-	 * @static
-	 * @access public
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @since	1.6
