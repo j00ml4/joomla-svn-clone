@@ -4,6 +4,7 @@
  * @package		Joomla.Site
  * @subpackage	com_banners
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2010 Klas Berlič
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -44,7 +45,9 @@ class BannersModelBanner extends JModel
 		}
 
 		// track clicks
-		$item = &$this->getItem();
+				
+		$item =  $this->getItem();
+		
 		$trackClicks = $item->track_clicks;
 
 		if ($trackClicks < 0 && $item->cid) {
@@ -102,8 +105,15 @@ class BannersModelBanner extends JModel
 	function &getItem()
 	{
 		if (!isset($this->_item))
-		{
+		{	
+			$cache = JFactory::getCache('_system','');		
+			
+			
 			$id = $this->getState('banner.id');
+			
+			$this->_item =  $cache->get($id, '_system');
+			
+			if ($this->_item === false) {
 			// redirect to banner url
 			$db		= $this->getDbo();
 			$query	= $db->getQuery(true);
@@ -124,6 +134,8 @@ class BannersModelBanner extends JModel
 			}
 
 			$this->_item = $db->loadObject();
+			$cache->store($this->_item,$id, '_system');
+			}
 		}
 		return $this->_item;
 	}

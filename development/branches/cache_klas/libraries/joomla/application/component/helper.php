@@ -167,7 +167,7 @@ class JComponentHelper
 		
 		$cache = JFactory::getCache('_system','callback');		
 				
-		$test = self::$_components[$option] =  $cache->get(array($db, 'loadObject'), null, $option, false);
+		self::$_components[$option] =  $cache->get(array($db, 'loadObject'), null, $option, false);
 		
 		if ($error = $db->getErrorMsg() || empty(self::$_components[$option])) {
 			// Fatal error.
