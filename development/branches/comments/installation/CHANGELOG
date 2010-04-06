@@ -27,7 +27,19 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-03-Apr-2010 Jean-Marie Simonet
+06-Apr-2010 Jean-Marie Simonet
+$ Adding missing value to key.
+#$ Fixing some com_categories strings + bug (thanks Dennis)
+# Bugs in com_redirect
+
+05-Apr-2010 Jean-Marie Simonet
+$^+ Consolidating some keys with same value to a unique key in main inis. WIP
+# Fixed [19972]
+
+05-Apr-2010 Andrew Eddie
+ # Fix bug in JCache constructor.
+
+04-Apr-2010 Jean-Marie Simonet
 $^+ Consolidating some keys with same value to a unique key in main inis. WIP
 #$ Missing string + bug [20098]. Thank you Klas.
 
