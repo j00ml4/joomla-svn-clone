@@ -106,7 +106,7 @@ class ContentModelFeatured extends ContentModelArticles
 		$secondary = ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
 		$primary = ContentHelperQuery::orderbyPrimary($categoryOrderby);
 
-		$orderby = $primary . ' ' . $secondary . ' a.created DESC ';
+		$orderby = $primary . ' ' . $secondary;
 		$this->setState('list.ordering', $orderby);
 		$this->setState('list.direction', '');
 		// Create a new query object.
