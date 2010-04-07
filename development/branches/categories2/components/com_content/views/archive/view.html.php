@@ -43,6 +43,11 @@ class ContentViewArchive extends JView
 		{
 			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
+			$article_params = new JRegistry;
+			$article_params->loadJSON($item->attribs);
+			$temp = clone($params);
+			$temp->merge($article_params);
+			$item->params = $temp;
 		}
 
 		$form = new stdClass();
