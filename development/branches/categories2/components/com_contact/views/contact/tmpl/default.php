@@ -11,14 +11,12 @@ defined('_JEXEC') or die;
 
 $cparams = JComponentHelper::getParams ('com_media');
 ?>
+<div class="contact<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-
-<div class="contact<?php echo $this->params->get('pageclass_sfx')?>">
-
 	<?php if ($this->contact->name && $this->params->get('show_name')) : ?>
 		<h2>
 			<span class="contact-name"><?php echo $this->contact->name; ?></span>

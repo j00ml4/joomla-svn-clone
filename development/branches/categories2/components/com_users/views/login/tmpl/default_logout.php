@@ -10,6 +10,11 @@
 defined('_JEXEC') or die;
 ?>
 <div class="logout<?php echo $this->params->get('pageclass_sfx')?>">
+<?php if ($this->params->get('show_page_heading')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 <?php if ($this->params->get('logoutdescription_show')==1 || $this->params->get('logout_image')!='') : ?>
 <div class="logout-description">
 <?php endif ; ?>
