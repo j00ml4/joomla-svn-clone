@@ -11,6 +11,11 @@
 defined('_JEXEC') or die;
 ?>
 <div class="login<?php echo $this->params->get('pageclass_sfx')?>">
+<?php if ($this->params->get('show_page_heading')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 <?php if ($this->params->get('logindescription_show')==1 || $this->params->get('login_image')!='') : ?>
 <div class="login-description">
 <?php endif ; ?>

@@ -141,7 +141,6 @@ class ContactViewContact extends JView
 		JHtml::_('behavior.formvalidation');
 
 		$this->assignRef('contact',		$contact);
-		$this->assignRef('contacts',	$contacts);
 		$this->assignRef('params',		$pparams);
 		$this->assignRef('return',		$return);
 

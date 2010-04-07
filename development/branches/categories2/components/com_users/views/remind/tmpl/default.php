@@ -13,6 +13,7 @@ JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
+<div class="remind<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -41,3 +42,4 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="member.remind" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
+</div>

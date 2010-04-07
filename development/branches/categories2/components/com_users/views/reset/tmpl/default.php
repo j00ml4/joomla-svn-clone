@@ -12,8 +12,8 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-
 ?>
+<div class="reset<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -41,3 +41,4 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="reset.request" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
+</div>

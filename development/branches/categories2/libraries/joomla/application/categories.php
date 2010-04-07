@@ -29,7 +29,7 @@ class JCategories
 	 *
 	 * @var mixed
 	 */
-	protected $_nodes = null;
+	protected $_nodes;
 
 	/**
 	 * Name of the extension the categories belong to
@@ -221,7 +221,7 @@ class JCategories
 				if (!isset($this->_nodes[$result->id]))
 				{
 					// Create the JCategoryNode
-					$this->_nodes[$result->id] = new JCategoryNode($result);
+					$this->_nodes[$result->id] = new JCategoryNode($result, &$this);
 					if($result->id != 'root' && (isset($this->_nodes[$result->parent_id]) || $result->parent_id == 0))
 					{
 						// Compute relationship between node and its parent
@@ -238,10 +238,9 @@ class JCategories
 						$this->_nodes[$result->id]->setAllLoaded();
 						$childrenLoaded = true;
 					}
-				} elseif($result->id == $id) {
-					$temp = $this->_nodes[$result->id]->getChildren();
+				} elseif($result->id == $id || $childrenLoaded) {
 					// Create the JCategoryNode
-					$this->_nodes[$result->id] = new JCategoryNode($result);
+					$this->_nodes[$result->id] = new JCategoryNode($result, &$this);
 					if($result->id != 'root' && (isset($this->_nodes[$result->parent_id]) || $result->parent_id))
 					{
 						// Compute relationship between node and its parent
@@ -251,10 +250,6 @@ class JCategories
 					{
 						unset($this->_nodes[$result->id]);
 						break;
-					}
-					foreach($temp as $child)
-					{
-						$this->_nodes[$result->id]->setParent($child);
 					}
 					if($result->id == $id || $childrenLoaded)
 					{
@@ -313,6 +308,7 @@ class JCategoryNode extends JObject
 	public $hits				= null;
 	public $language			= null;
 	public $numitems			= null;
+	public $childrennumitems	= null;
 	public $slug				= null;
 	public $assets				= null;
 	
@@ -363,7 +359,7 @@ class JCategoryNode extends JObject
 			$this->setProperties($category);
 			if($constructor)
 			{
-				$this->_constructor = $constructor;
+				$this->_constructor = &$constructor;
 			}
 			return true;
 		}
@@ -441,7 +437,11 @@ class JCategoryNode extends JObject
 	{
 		if(!$this->_allChildrenloaded)
 		{
-			$this->_constructor->get($this->id, true);
+			$temp = $this->_constructor->get($this->id, true);
+			$this->_children = $temp->getChildren();
+			$this->_leftSibling = $temp->getSibling(false);
+			$this->_rightSibling = $temp->getSibling(true);
+			$this->setAllLoaded();
 		}
 		if($recursive)
 		{
@@ -514,7 +514,11 @@ class JCategoryNode extends JObject
 	{
 		if(!$this->_allChildrenloaded)
 		{
-			$this->_constructor->get($this->id, true);
+			$temp = $this->_constructor->get($this->id, true);
+			$this->_children = $temp->getChildren();
+			$this->_leftSibling = $temp->getSibling(false);
+			$this->_rightSibling = $temp->getSibling(true);
+			$this->setAllLoaded();
 		}
 		if($right)
 		{
@@ -583,5 +587,23 @@ class JCategoryNode extends JObject
 	function setAllLoaded()
 	{
 		$this->_allChildrenloaded = true;
+		foreach($this->_children as $child)
+		{
+			$child->setAllLoaded();
+		}
+	}
+	
+	function getNumItems($recursive = false)
+	{
+		if($recursive)
+		{
+			$count = $this->numitems;
+			foreach($this->getChildren() as $child)
+			{
+				$count = $count + $child->getNumItems(true);
+			}
+			return $count;
+		}
+		return $this->numitems;
 	}
 }

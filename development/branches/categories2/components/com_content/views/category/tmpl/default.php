@@ -14,9 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-
-
-<div class="category-list <?php echo $pageClass;?>">
+<div class="article-category-list <?php echo $pageClass;?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
