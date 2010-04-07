@@ -68,23 +68,25 @@ class JDocumentRendererModule extends JDocumentRenderer
 
 		$contents = '';
 		
-		// Depreciated, included only for compatibility purposes! Use JModuleHelper::cache from within the module instead!
-		// @Todo remove this in 1.7.
 		
-		if ($mod_params->get('cache', 0)  && $conf->get('caching'))
+		
+	
+		if ($mod_params->get('cache', 0) == 1  && $conf->get('caching'))
 		{	
-			$user = &JFactory::getUser();
-			$cache = &JFactory::getCache($module->module,'callback');
-
-			$cache->setLifeTime($mod_params->get('cache_time', $conf->get('cachetime') * 60));
-			
-			// default to itemid creating mehod and workarounds on
-			$contents =  $cache->get(array('JModuleHelper', 'renderModule'), array($module, $params), $module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
 		
-		}
-		else {
+			// default to itemid creating mehod and workarounds on
+			$cacheparams = new stdClass;
+			$cacheparams->cachemode = $mod_params->get('cachemode','itemid');  // default for compatibility purposes. Set cachemode parameter or use JModuleHelper::moduleCache from within the module instead
+			$cacheparams->class = 'JModuleHelper';	
+			$cacheparams->method = 'renderModule';
+			$cacheparams->methodparams = array($module, $params);	
+					
+			$contents = JModuleHelper::ModuleCache($module, $mod_params,$cacheparams);
+			
+		} 
+		else { 
 			$contents = JModuleHelper::renderModule($module, $params);
-		}
+		} 
 
 		return $contents;
 	}
