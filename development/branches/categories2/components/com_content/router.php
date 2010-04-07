@@ -63,7 +63,7 @@ function ContentBuildRoute(&$query)
 	if (isset($view) and ($view == 'category' or $view == 'article') and $catid) {
 		if ($mId != intval($query['id']) || $mView != $view) {
 			$menuCatid = $mId;
-			$categories = JCategories::getInstance('com_content');
+			$categories = JCategories::getInstance('Content');
 			$category = $categories->get($catid);
 			if(!$category)
 			{
@@ -173,7 +173,7 @@ function ContentParseRoute($segments)
 		case 'featured':
 			// From the categories view, we can only jump to a category.
 			$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-			$category = JCategories::getInstance('com_content')->get($id);
+			$category = JCategories::getInstance('Content')->get($id);
 			if(!$category)
 			{
 				die('The category is not published or does not exist');

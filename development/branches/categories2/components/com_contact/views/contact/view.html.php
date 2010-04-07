@@ -172,7 +172,7 @@ class ContactViewContact extends JView
 		{
 			$id = (int) @$menu->query['id'];
 			$path = array($this->contact->name => '');
-			$category = JCategories::getInstance('com_contact')->get($this->contact->catid);
+			$category = JCategories::getInstance('Contact')->get($this->contact->catid);
 			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = ContactHelperRoute::getCategoryRoute($this->contact->catid);

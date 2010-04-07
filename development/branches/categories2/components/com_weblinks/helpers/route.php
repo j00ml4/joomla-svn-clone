@@ -37,7 +37,7 @@ abstract class WeblinksHelperRoute
 		$link = 'index.php?option=com_weblinks&view=weblink&id='. $id;
 		if ($catid > 1)
 		{
-			$categories = JCategories::getInstance('com_weblinks');
+			$categories = JCategories::getInstance('Weblinks');
 			$category = $categories->get($catid);
 			$needles['category'] = array_reverse($category->getPath());
 			$needles['categories'] = $needles['category'];
@@ -53,7 +53,7 @@ abstract class WeblinksHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		$categories = JCategories::getInstance('com_weblinks');
+		$categories = JCategories::getInstance('Weblinks');
 		$category = $categories->get((int)$catid);
 		$catids = array_reverse($category->getPath());
 		$needles = array(

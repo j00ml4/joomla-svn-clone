@@ -173,8 +173,8 @@ class ContactModelCategory extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_articles', 0);
-			$categories = JCategories::getInstance('com_contact', $options);
+			$options['countItems'] = $params->get('show_contacts', 0);
+			$categories = JCategories::getInstance('Contact', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))
 			{

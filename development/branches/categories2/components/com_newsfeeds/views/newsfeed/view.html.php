@@ -114,7 +114,7 @@ class NewsfeedsViewNewsfeed extends JView
 		{
 			$id = (int) @$menu->query['id'];
 			$path = array($this->newsfeed->name => '');
-			$category = JCategories::getInstance('com_newsfeeds')->get($this->newsfeed->catid);
+			$category = JCategories::getInstance('Newsfeeds')->get($this->newsfeed->catid);
 			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);

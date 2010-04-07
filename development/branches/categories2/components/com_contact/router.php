@@ -60,7 +60,7 @@ function ContactBuildRoute(&$query){
 				$catid = $query['id'];
 			}
 			$menuCatid = $mId;
-			$categories = JCategories::getInstance('com_contact');
+			$categories = JCategories::getInstance('Contact');
 			$category = $categories->get($catid);
 			if(!$category)
 			{
@@ -147,7 +147,7 @@ function ContactParseRoute($segments)
 
 	// From the categories view, we can only jump to a category.
 	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-	$categories = JCategories::getInstance('com_contact')->get($id)->getChildren();
+	$categories = JCategories::getInstance('Contact')->get($id)->getChildren();
 	$vars['catid'] = $id;
 	$vars['id'] = $id;		
 	$found = 0;
