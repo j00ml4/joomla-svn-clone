@@ -308,7 +308,7 @@ abstract class JTable extends JObject
 	 * @return	object	The internal database connector object.
 	 * @link	http://docs.joomla.org/JTable/getDBO
 	 */
-	public function getDbo()
+	public function getDBO()
 	{
 		return $this->_db;
 	}
@@ -874,6 +874,64 @@ abstract class JTable extends JObject
 
 		// Set table values in the object.
 		$this->hits++;
+
+		return true;
+	}
+
+	/**
+	 * Method to determine if the current user can edit a row based on if the row is checked out
+	 * or not.  Also taken into account is whether or not the row is checked out by another person
+	 * and if their session is still active -- meaning it is still being worked on.
+	 *
+	 * @param	mixed	The primary key of the row for which to check edit rights.
+	 *
+	 * @return	boolean	True if the current user can edit the row.
+	 *
+	 * @since	1.6
+	 */
+	public function canEdit($pk = null)
+	{
+		// If there is no checked_out_session field, just return true.
+		if (!property_exists($this, 'checked_out_session')) {
+			return true;
+		}
+
+		// Initialise variables.
+		$k = $this->_tbl_key;
+		$pk = (is_null($pk)) ? $this->$k : $pk;
+
+		// If no primary key is given, return false.
+		if ($pk === null) {
+			return false;
+		}
+
+		// Get the user and session objects.
+		$user = JFactory::getUser();
+		$session = JFactory::getSession();
+
+		// Check to see if the row is checked out by someone else.
+		$this->_db->setQuery(
+			'SELECT a.'.$this->_db->nameQuote($this->_tbl_key) .
+			' FROM '.$this->_db->nameQuote($this->_tbl).' AS a' .
+			' INNER JOIN #__session AS s ON a.checked_out_session = s.session_id' .
+			' WHERE a.'.$this->_db->nameQuote($this->_tbl_key).' = '.(int) ($this->$k) .
+			' AND a.checked_out <> '.(int) $user->id
+		);
+		$checkedOut = (int) $this->_db->loadResult();
+
+		// Check for a database error.
+		if ($this->_db->getErrorNum()) {
+			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_EDIT_CHECK_FAILED', get_class($this), $this->_db->getErrorMsg()));
+			$this->setError($e);
+			return false;
+		}
+
+		// Set an error and return false if the row is checked out by someone else.
+		if ($checkedOut) {
+			$e = new JException(JText::_('JLIB_DATABASE_ERROR_ALREADY_CHECKED_OUT'));
+			$this->setError($e);
+			return false;
+		}
 
 		return true;
 	}
