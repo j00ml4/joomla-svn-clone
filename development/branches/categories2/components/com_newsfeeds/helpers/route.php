@@ -37,7 +37,7 @@ abstract class NewsfeedsHelperRoute
 		$link = 'index.php?option=com_newsfeeds&view=newsfeed&id='. $id;
 		if ($catid > 1)
 		{
-			$categories = JCategories::getInstance('com_newsfeeds');
+			$categories = JCategories::getInstance('Newsfeeds');
 			$category = $categories->get($catid);
 			if(!$category)
 			{
@@ -58,7 +58,7 @@ abstract class NewsfeedsHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		$categories = JCategories::getInstance('com_newsfeeds');
+		$categories = JCategories::getInstance('Newsfeeds');
 		$category = $categories->get((int)$catid);
 		$catids = array_reverse($category->getPath());
 		$needles = array(

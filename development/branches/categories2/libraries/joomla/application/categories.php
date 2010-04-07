@@ -105,7 +105,7 @@ class JCategories
 			return self::$instances[$hash];
 		}
 		$parts = explode('.',$extension);
-		$component = $parts[0];
+		$component = 'com_'.strtolower($parts[0]);
 		$section = count($parts) > 1 ? $parts[1] : '';
 		$classname = ucfirst(substr($component,4)).ucfirst($section).'Categories';
 		if (!class_exists($classname))

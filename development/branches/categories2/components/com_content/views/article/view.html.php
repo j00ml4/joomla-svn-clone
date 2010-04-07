@@ -168,7 +168,7 @@ class ContentViewArticle extends JView
 		{
 			$id = (int) @$menu->query['id'];
 			$path = array($this->item->title => '');
-			$category = JCategories::getInstance('com_content')->get($this->item->catid);
+			$category = JCategories::getInstance('Content')->get($this->item->catid);
 			while($id != $category->id && $category->id > 1)
 			{
 				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);

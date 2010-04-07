@@ -99,7 +99,7 @@ class WeblinksModelCategories extends JModel
 			}
 			$options = array();
 			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('com_weblinks', $options);
+			$categories = JCategories::getInstance('Weblinks', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))
 			{

@@ -69,7 +69,7 @@ function WeblinksBuildRoute(&$query)
 				$catid = $query['id'];
 			}
 			$menuCatid = $mId;
-			$categories = JCategories::getInstance('com_weblinks');
+			$categories = JCategories::getInstance('Weblinks');
 			$category = $categories->get($catid);
 			$path = $category->getPath();
 			$path = array_reverse($path);
@@ -148,7 +148,7 @@ function WeblinksParseRoute($segments)
 
 	// From the categories view, we can only jump to a category.
 	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-	$category = JCategories::getInstance('com_weblinks')->get($id);
+	$category = JCategories::getInstance('Weblinks')->get($id);
 			
 	$categories = $category->getChildren();
 	$found = 0;

@@ -69,7 +69,7 @@ function NewsfeedsBuildRoute(&$query)
 				$catid = $query['id'];
 			}
 			$menuCatid = $mId;
-			$categories = JCategories::getInstance('com_newsfeeds');
+			$categories = JCategories::getInstance('Newsfeeds');
 			$category = $categories->get($catid);
 			$path = $category->getPath();
 			$path = array_reverse($path);
@@ -152,7 +152,7 @@ function NewsfeedsParseRoute($segments)
 
 	// From the categories view, we can only jump to a category.
 	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-	$categories = array(JCategories::getInstance('com_newsfeeds')->get($id));
+	$categories = array(JCategories::getInstance('Newsfeeds')->get($id));
 	$vars['catid'] = $id;
 	$vars['id'] = $id;		
 	$found = 0;

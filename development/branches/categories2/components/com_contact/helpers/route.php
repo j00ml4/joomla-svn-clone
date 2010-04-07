@@ -37,7 +37,7 @@ abstract class ContactHelperRoute
 		$link = 'index.php?option=com_contact&view=contact&id='. $id;
 		if ($catid > 1)
 		{
-			$categories = JCategories::getInstance('com_contact');
+			$categories = JCategories::getInstance('Contact');
 			$category = $categories->get($catid);
 			$needles['category'] = array_reverse($category->getPath());
 			$needles['categories'] = $needles['category'];
@@ -53,7 +53,7 @@ abstract class ContactHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		$categories = JCategories::getInstance('com_contact');
+		$categories = JCategories::getInstance('Contact');
 		$category = $categories->get((int)$catid);
 		$catids = array_reverse($category->getPath());
 		$needles = array(

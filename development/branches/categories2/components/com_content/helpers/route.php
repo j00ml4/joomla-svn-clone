@@ -36,7 +36,7 @@ abstract class ContentHelperRoute
 		$link = 'index.php?option=com_content&view=article&id='. $id;
 		if ($catid > 1)
 		{
-			$categories = JCategories::getInstance('com_content');
+			$categories = JCategories::getInstance('Content');
 			$category = $categories->get((int)$catid);
 			if(!$category)
 			{
@@ -66,7 +66,7 @@ abstract class ContentHelperRoute
 			$catids = array_reverse($catid->getPath());
 			$id = $catid->id;
 		} else {
-			$categories = JCategories::getInstance('com_content');
+			$categories = JCategories::getInstance('Content');
 			$category = $categories->get((int)$catid);
 			if(!$category)
 			{
