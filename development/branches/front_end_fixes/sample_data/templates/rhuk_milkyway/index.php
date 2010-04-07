@@ -98,7 +98,7 @@ defined('_JEXEC') or die;
 						<div id="maincolumn">
 						<?php else: ?>
 						<div id="maincolumn_full">
-						<?php endif; ?><?php (var_dump($this->countModules('user1 or user2'))); ?>
+						<?php endif; ?>
 							<?php if ($this->countModules('user1')  or  $this->countModules('user2') 
 							or ($this->countModules('position-9')  or  $this->countModules('position-10') ) ) : ?>hello
 								<table class="nopad user1user2">
