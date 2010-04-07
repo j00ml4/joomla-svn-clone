@@ -39,28 +39,8 @@ class ContentViewArticle extends JView
 
 		// Check for errors.
 		// @TODO Maybe this could go into JComponentHelper::raiseErrors($this->get('Errors'))
-		if (count($errors = $this->get('Errors')))
-		{
-			foreach ($errors as & $error)
-			{
-				if ($error instanceof Exception)
-				{
-					if ($error->getCode() == 404)
-					{
-						// If there is a 404, throw a hard error.
-						JError::raiseError(404, $error->getMessage());
-						return false;
-					}
-					else
-					{
-						JError::raiseError(500, $error->getMessage());
-					}
-				}
-				else
-				{
-					JError::raiseWarning(500, $error);
-				}
-			}
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseWarning(500, implode("\n", $errors));
 			return false;
 		}
 
@@ -73,7 +53,12 @@ class ContentViewArticle extends JView
 		$item->readmore_link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 
 		// Create a shortcut to the paramemters.
-		$params =& $state->params;
+		$params =& $state->get('params');
+		$article_params = new JRegistry;
+		$article_params->loadJSON($item->attribs);
+		$temp = clone($params);
+		$temp->merge($article_params);
+		$item->params = $temp;
 		$offset = $state->get('page.offset');
 
 		// Check the access to the article
@@ -113,7 +98,6 @@ class ContentViewArticle extends JView
 		$results = $dispatcher->trigger('onAfterDisplayContent', array(&$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
-		$params = $state->get('params');
 		$this->assignRef('state', $state);
 		$this->assignRef('params', $params);
 		$this->assignRef('item', $item);

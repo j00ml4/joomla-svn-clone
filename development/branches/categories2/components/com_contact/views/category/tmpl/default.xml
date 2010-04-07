@@ -13,7 +13,7 @@
 			addfieldpath="/administrator/components/com_contact/models/fields"
 		>
 
-			<field name="catid" type="category"
+			<field name="id" type="category"
 				description="COM_CONTACT_FIELD_CATEGORY_DESC"
 				extension="com_contact"
 				label="COM_CONTACT_FIELD_CATEGORY_LABEL"
