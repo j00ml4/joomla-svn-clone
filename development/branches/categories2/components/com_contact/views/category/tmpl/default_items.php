@@ -35,11 +35,11 @@ JHtml::core();
 				<?php echo JText::_('Num'); ?>
 			</th>
 			<th class="item-title">
-				<?php echo JHtml::_('grid.sort',  'Name', 'cd.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				<?php echo JHtml::_('grid.sort',  'Name', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 			</th>
 			<?php if ($this->params->get('show_position')) : ?>
 			<th class="item-position">
-				<?php echo JHtml::_('grid.sort',  'Position', 'cd.con_position', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				<?php echo JHtml::_('grid.sort',  'Position', 'a.con_position', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 			</th>
 			<?php endif; ?>
 			<?php if ($this->params->get('show_email')) : ?>
