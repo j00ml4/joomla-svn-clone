@@ -823,9 +823,11 @@ class MenusModelItem extends JModelForm
 
 			if (JFile::exists($path)) {
 				// Add the component params last of all to the existing form.
+				/**
+				 * TODO re-implement this file
 				if (!$form->loadFile($path, true, '/config')) {
 					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
-				}
+				}*/
 			}
 		}
 
