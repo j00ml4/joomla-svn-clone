@@ -159,7 +159,7 @@ class JController extends JObject
 			$task	= $command;
 
 			// Define the controller filename and path.
-			$file	= self::_createFileName('controller', array('name' => 'controller', 'format' => $format));
+			$file	= self::_createFileName('controller', array('name' => 'controller'));
 			$path	= $basePath.DS.$file;
 		}
 
@@ -746,7 +746,13 @@ class JController extends JObject
 		{
 			case 'controller':
 				if (!empty($parts['format'])) {
-					$parts['format'] = '.'.$parts['format'];
+					if ($parts['format'] == 'html') {
+						$parts['format'] = '';
+					} else {
+						$parts['format'] = '.'.$parts['format'];
+					}
+				} else {
+					$parts['format'] = '';
 				}
 
 				$filename = strtolower($parts['name']).$parts['format'].'.php';
