@@ -729,7 +729,13 @@ abstract class JTable extends JObject
 	 * than the one who checked the row out should be held until the row is checked
 	 * in again.
 	 *
-	 * @param	integer	The Id of the user checking out the row.
+	 * Since 1.6 a new behavior is present when a 'checked_out_session' field is
+	 * available for the table object.  The row will be marked with the current user
+	 * and their current session id so that the checked out state will only last for
+	 * the length of the current session.
+	 *
+	 * @param	integer	The Id of the user checking out the row.  If not set the Id
+	 * 					for the current user is used.
 	 * @param	mixed	An optional primary key value to check out.  If not set
 	 *					the instance property value is used.
 	 * @return	boolean	True on success.
@@ -738,8 +744,9 @@ abstract class JTable extends JObject
 	 */
 	public function checkOut($userId, $pk = null)
 	{
-		// If there is no checked_out or checked_out_time field, just return true.
-		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time')) {
+		// If the necessary fields are not present just return true.
+		if (!property_exists($this, 'checked_out')
+			|| (!property_exists($this, 'checked_out_time') && !property_exists($this, 'checked_out_session'))) {
 			return true;
 		}
 
@@ -747,53 +754,119 @@ abstract class JTable extends JObject
 		$k = $this->_tbl_key;
 		$pk = (is_null($pk)) ? $this->$k : $pk;
 
-		// If no primary key is given, return false.
-		if ($pk === null)
-		{
+		// Cannot check in a row that doesn't exist.
+		if ($pk == null) {
 			$e = new JException(JText::_('JLIB_DATABASE_ERROR_NULL_PRIMARY_KEY'));
 			$this->setError($e);
 			return false;
 		}
 
-		// Get the current time in MySQL format.
-		$time = JFactory::getDate()->toMysql();
+		// Setup the user id to check out.
+		if ($userId === null) {
+			$user = JFactory::getUser();
+			$userId = $user->id;
+		}
 
-		// Check the row out by primary key.
-		$query = $this->_db->getQuery(true);
-		$query->update($this->_tbl);
-		$query->set($this->_db->nameQuote('checked_out').' = '.(int) $userId);
-		$query->set($this->_db->nameQuote('checked_out_time').' = '.$this->_db->quote($time));
-		$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
-		$this->_db->setQuery($query);
-
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKOUT_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
+		// Check to see if the row is checked out by someone else.
+		if (!$this->canEdit($pk)) {
 			return false;
 		}
 
-		// Set table values in the object.
-		$this->checked_out = (int) $userId;
-		$this->checked_out_time = $time;
+		// If the checked_out_session field is not present assume legacy behavior.
+		if (!property_exists($this, 'checked_out_session')) {
 
-		return true;
+			// Get the current time in MySQL format.
+			$time = JFactory::getDate()->toMysql();
+
+			// Check the row out by primary key.
+			$query = $this->_db->getQuery(true);
+			$query->update($this->_tbl);
+			$query->set($this->_db->nameQuote('checked_out').' = '.(int) $userId);
+			$query->set($this->_db->nameQuote('checked_out_time').' = '.$this->_db->quote($time));
+			$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
+			$this->_db->setQuery($query);
+
+			// Check for a database error.
+			if (!$this->_db->query()) {
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKOUT_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
+
+			// Set table values in the object.
+			$this->checked_out = (int) $userId;
+			$this->checked_out_time = $time;
+
+			return true;
+		}
+		// The checked_out_session field exists, use the new session based checkout behavior.
+		else {
+
+			// Get the session object.
+			$session = JFactory::getSession();
+
+			// Check the row out by primary key.
+			$query = $this->_db->getQuery(true);
+			$query->update($this->_tbl);
+			$query->set($this->_db->nameQuote('checked_out').' = '.(int) $userId);
+			$query->set($this->_db->nameQuote('checked_out_session').' = '.$this->_db->quote($session->getId()));
+			$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
+			$query->where('(checked_out = '.(int) $userId.' OR checked_out = 0)');
+			$this->_db->setQuery($query);
+
+			// Check for a database error.
+			if (!$this->_db->query()) {
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKOUT_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
+
+			// Prepare the query to verify the item was checked-out.
+			$query = $this->_db->getQuery(true);
+			$query->select($this->_db->nameQuote($this->_tbl_key));
+			$query->from($this->_tbl);
+			$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
+			$query->where('checked_out = '.(int) $userId);
+			$this->_db->setQuery($query);
+			$return = (int) $this->_db->loadResult();
+
+			// Check for a database error.
+			if ($this->_db->getErrorNum()) {
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKOUT_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
+
+			// Set the checked out fields in the object.
+			$this->checked_out = (int) $userId;
+			$this->checked_out_session = $session->getId();
+
+			// Verify the checked out status.
+			if ($return === $pk) {
+				return true;
+			} else {
+				return null;
+			}
+		}
 	}
 
 	/**
-	 * Method to check a row in if the necessary properties/fields exist.  Checking
-	 * a row in will allow other users the ability to edit the row.
+	 * Method to check a row in for editing so that other users can have an opportunity
+	 * to make changes.  While checked out no other users are allowed to make changes to
+	 * the row except the user who has checked it out.  Checking the row in signifies that
+	 * the current user has finished editing the row.
 	 *
 	 * @param	mixed	An optional primary key value to check out.  If not set
-	 *					the instance property value is used.
+	 * 					the instance property value is used.
 	 * @return	boolean	True on success.
 	 * @since	1.0
 	 * @link	http://docs.joomla.org/JTable/checkIn
 	 */
 	public function checkIn($pk = null)
 	{
-		// If there is no checked_out or checked_out_time field, just return true.
-		if (!property_exists($this, 'checked_out') || !property_exists($this, 'checked_out_time')) {
+		// If the necessary fields are not present just return true.
+		if (!property_exists($this, 'checked_out')
+			|| (!property_exists($this, 'checked_out_time') && !property_exists($this, 'checked_out_session'))) {
 			return true;
 		}
 
@@ -801,35 +874,65 @@ abstract class JTable extends JObject
 		$k = $this->_tbl_key;
 		$pk = (is_null($pk)) ? $this->$k : $pk;
 
-		// If no primary key is given, return false.
-		if ($pk === null)
-		{
+		// Cannot check in a row that doesn't exist.
+		if ($pk == null) {
 			$e = new JException(JText::_('JLIB_DATABASE_ERROR_NULL_PRIMARY_KEY'));
 			$this->setError($e);
 			return false;
 		}
 
-		// Check the row in by primary key.
-		$query = $this->_db->getQuery(true);
-		$query->update($this->_tbl);
-		$query->set($this->_db->nameQuote('checked_out').' = 0');
-		$query->set($this->_db->nameQuote('checked_out_time').' = '.$this->_db->quote($this->_db->getNullDate()));
-		$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
-		$this->_db->setQuery($query);
+		// Get the user object.
+		$user = JFactory::getUser();
 
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKIN_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			return false;
+		// If the checked_out_session field is not present assume legacy behavior.
+		if (!property_exists($this, 'checked_out_session')) {
+
+			// Check the row in by primary key.
+			$query = $this->_db->getQuery(true);
+			$query->update($this->_tbl);
+			$query->set($this->_db->nameQuote('checked_out').' = 0');
+			$query->set($this->_db->nameQuote('checked_out_time').' = '.$this->_db->quote($this->_db->getNullDate()));
+			$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
+			$this->_db->setQuery($query);
+
+			// Check for a database error.
+			if (!$this->_db->query()) {
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKIN_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
+
+			// Set table values in the object.
+			$this->checked_out = 0;
+			$this->checked_out_time = '';
+
+			return true;
 		}
+		// The checked_out_session field exists, use the new session based checkout behavior.
+		else {
 
-		// Set table values in the object.
-		$this->checked_out = 0;
-		$this->checked_out_time = '';
+			// Check the row in by primary key.
+			$query = $this->_db->getQuery(true);
+			$query->update($this->_tbl);
+			$query->set($this->_db->nameQuote('checked_out').' = 0');
+			$query->set($this->_db->nameQuote('checked_out_session').' = ""');
+			$query->where($this->_tbl_key.' = '.$this->_db->quote($pk));
+			$query->where('(checked_out = '.(int) $user->id.' OR checked_out = 0)');
+			$this->_db->setQuery($query);
 
-		return true;
+			// Check for a database error.
+			if (!$this->_db->query()) {
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECKIN_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
+
+			// Set table values in the object.
+			$this->checked_out = 0;
+			$this->checked_out_session = '';
+
+			return true;
+		}
 	}
 
 	/**
@@ -910,13 +1013,14 @@ abstract class JTable extends JObject
 		$session = JFactory::getSession();
 
 		// Check to see if the row is checked out by someone else.
-		$this->_db->setQuery(
-			'SELECT a.'.$this->_db->nameQuote($this->_tbl_key) .
-			' FROM '.$this->_db->nameQuote($this->_tbl).' AS a' .
-			' INNER JOIN #__session AS s ON a.checked_out_session = s.session_id' .
-			' WHERE a.'.$this->_db->nameQuote($this->_tbl_key).' = '.(int) ($this->$k) .
-			' AND a.checked_out <> '.(int) $user->id
-		);
+		$query	= $this->_db->getQuery(true);
+		$query->select('a.'.$this->_db->nameQuote($this->_tbl_key));
+		$query->from($this->_tbl.' AS a');
+		$query->innerJoin($this->_db->nameQuote('#__session').' AS s ON a.checked_out_session = s.session_id');
+		$query->where('a.'.$this->_db->nameQuote($this->_tbl_key).' = '.(int) $pk);
+		$query->where('a.checked_out <> '.(int) $user->id);
+
+		$this->_db->setQuery($query);
 		$checkedOut = (int) $this->_db->loadResult();
 
 		// Check for a database error.
