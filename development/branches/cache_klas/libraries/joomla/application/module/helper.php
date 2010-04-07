@@ -22,7 +22,8 @@ jimport('joomla.application.component.helper');
  */
 abstract class JModuleHelper
 {
-
+	
+	
 	/**
 	 * Get module by name (real, eg 'Breadcrumbs' or folder, eg 'mod_breadcrumbs')
 	 *
@@ -128,7 +129,7 @@ abstract class JModuleHelper
 	public static function renderModule($module, $attribs = array())
 	{
 		static $chrome;
-
+		
 		$option = JRequest::getCmd('option');
 		$app	= &JFactory::getApplication();
 
@@ -157,11 +158,14 @@ abstract class JModuleHelper
 			||	$lang->load($module->module, JPATH_BASE, $lang->getDefault(), false, false)
 			||	$lang->load($module->module, dirname($path), $lang->getDefault(), false, false);
 
+		
+			
 			$content = '';
 			ob_start();
 			require $path;
 			$module->content = ob_get_contents().$content;
 			ob_end_clean();
+
 		}
 
 		// Load the module chrome functions
@@ -346,57 +350,65 @@ abstract class JModuleHelper
 		return $clean;
 	}
 	
+	
 	/**
 	* Module cache helper
+	* 
+	* Caching modes:
+	* to be set in XML: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 
+	* to be called from module itself: 'safeuri' - id created from $cacheparams array, 'id' - module sets own id's
 	*
 	* @static
-	* @param	string	$module	The name of the module
-	* @param	string	$mhelper name of module helper
-	* @param	string	$method method in helper beeing called
+	* @param	object	$module	Module object
 	* @param	object	$moduleparams module parameters
-	* @param	string	$mode cache creation mode: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 'safeurl' - id created from $urlparameters array, 'id' - module sets own id's
+	* @param	object	$cacheparams module cache parameters - id or url parameters, depending on the module cache mode
 	* @param	array	$params - parameters for given mode - calculated id or an array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
 	* 
 	* @since	1.6
 	*/
-	public static function cache ($mhelper,$method,$methodparams,$module,$moduleparams,$mode='itemid',$params=null) {
+	public static function ModuleCache ($module, $moduleparams, $cacheparams) {
+		
+		if(!isset ($cacheparams->modeparams))$cacheparams->modeparams=null;	
+		if(!isset ($cacheparams->cachegroup)) $cacheparams->cachegroup = $module->module;
+		
+		if (!is_array($cacheparams->methodparams)) $cacheparams->methodparams = array($cacheparams->methodparams);
 		
 		$user = &JFactory::getUser();
-		$cache = &JFactory::getCache($module->module,'module');
+		$cache = &JFactory::getCache($cacheparams->cachegroup,'callback');
 		$conf = &JFactory::getConfig();
 		
-		if ($moduleparams->get('newcache', 0) && $conf->get('caching')) {
-			$cache->setCaching = true ;
-		} else {
-			$cache->setCaching = false ;
-		}
+		// turn cache off for internal callers if parameters are set to off
+		if($moduleparams->get('owncache', null) == 0  || $conf->get('caching') == 0) $cache->setCaching = false ;
 		
-		switch ($mode) {
+		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60)); 
+		
+		switch ($cacheparams->cachemode) {
 			
 			case 'id':
-				$ret = $cache->get($mhelper, array($method,$methodparams),$params,true);
+				$ret = $cache->get(array($cacheparams->class, $cacheparams->method),$cacheparams->methodparams,$cacheparams->modeparams,true);
 				break;
 
 			case 'safeuri':
 				$secureid=null;
-				if (is_array($params)) {
+				if (is_array($cacheparams->modeparams)) {
 				$uri = & JRequest::get();
 				$safeuri=new stdClass();
-				foreach ($params AS $key => $value) {
+				foreach ($cacheparams->modeparams AS $key => $value) {
 					// use int filter for id/catid to clean out spamy slugs
 					if (isset($uri[$key])) $safeuri->$key = JRequest::_cleanVar($uri[$key], 0,$value);
 				} }
-				$secureid = md5(serialize(array($safeuri, $method, $moduleparams)));
-				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0).$secureid,true);
+				$secureid = md5(serialize(array($safeuri, $cacheparams->method, $moduleparams)));
+				$ret = $cache->get(array($cacheparams->class,$cacheparams->method),$cacheparams->methodparams,$module->id. $user->get('aid', 0).$secureid,true);
 				break;
 			
 			case 'static':
-				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0),true);
+				$ret = $cache->get(array($cacheparams->class, $cacheparams->method), $cacheparams->methodparams, $module->id. $user->get('aid', 0),true);
 				break;
 			
 			case 'itemid':
 			default:
-				$ret = $cache->get($mhelper, array($method,$methodparams),$module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
+				//$ret = $cache->get($cacheparams->class, array($cacheparams->method,$cacheparams->methodparams),$module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
+				$ret = $cache->get(array($cacheparams->class,$cacheparams->method), $cacheparams->methodparams , $module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'), true);
 				break;
 		}
 	return $ret;

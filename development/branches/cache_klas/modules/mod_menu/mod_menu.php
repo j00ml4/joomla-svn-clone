@@ -20,8 +20,17 @@ $active_id = isset($active) ? $active->id : $menu->getDefault()->id;
 $path	= isset($active) ? $active->tree : array();
 $showAll	= $params->get('showAllChildren');
 
-$cacheid = md5(serialize(array ($menu,$active_id,$path,$showAll,$params, $module->id)));
+$cacheid = md5(serialize(array ($active_id,$path,$showAll,$params,$module->id)));
 
-$list = JModuleHelper::cache('modMenuHelper','getList',$params,$module,$params,'id',$cacheid);
+$cacheparams = new stdClass;
+$cacheparams->cachemode = 'id';
+$cacheparams->class = 'modMenuHelper';	
+$cacheparams->method = 'getList';
+$cacheparams->methodparams = $params;
+$cacheparams->modeparams = $cacheid;
+$cacheparams->cachegroup = 'com_modules';
+
+
+$list = JModuleHelper::ModuleCache ($module, $params, $cacheparams);
 
 require JModuleHelper::getLayoutPath('mod_menu', $params->get('layout', 'default'));

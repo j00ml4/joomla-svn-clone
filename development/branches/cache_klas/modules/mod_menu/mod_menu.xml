@@ -108,7 +108,7 @@
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 		
 				<field
-					name="newcache"
+					name="owncache"
 					type="list"
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
