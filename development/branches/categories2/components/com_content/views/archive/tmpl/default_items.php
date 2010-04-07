@@ -78,7 +78,7 @@ $params =& $this->params;
 
 <?php  if($params->get('show_intro')) :?>
 		<div class="intro">
-			<?php echo substr($item->introtext, 0, 255); echo JText::_('  ...') ?>
+			<?php echo JHTML::_('string.truncate', $item->introtext, 255); ?>
 		</div>
 <?php if ($params->get('show_readmore') && $item->readmore) :
 	if ($item->params->get('access-view')) :
