@@ -20,9 +20,10 @@ SMALLER TASKS
 COMPLEX TASKS
 - DONE: Implement advanced features: locking, corruption prevention NOT in the group mode to drivers
 - DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435) 
-- DONE: Re-conceptualize view cache (and review/change other handlers if needed)
-- DONE: Re-conceptualize module cache (move cache call to within the module, add module handler)
-- DONE: make cache handlers independent of JCache, add JCacheHandler as parent class
+- DONE: Re-conceptualize view cache (and review/change other controllers if needed)
+- DONE: Re-conceptualize module cache - add cacheid creation models, add options to create cacheid from within module
+- DONE: make cache controllers independent of JCache, add JCacheCOntroller as parent class
+
 
 - DONE: Implement changed caching in core components DONE: com_content, com_weblinks, com_contact, com_newsfeeds, com_wrapper, com_banners
 				and modules: DONE: mod_relateditems, mod_menu, mod_banners (via component query), mod_article_archive, mod_articles_latest, mod_articles_news, 
