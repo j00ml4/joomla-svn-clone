@@ -14,8 +14,8 @@ defined('JPATH_BASE') or die;
 //Register the storage class with the loader
 JLoader::register('JCacheStorage', dirname(__FILE__).DS.'storage.php');
 
-//Register the handler class with the loader
-JLoader::register('JCacheHandler', dirname(__FILE__).DS.'handler.php');
+//Register the controller class with the loader
+JLoader::register('JCacheController', dirname(__FILE__).DS.'controller.php');
 
 
 /**
@@ -83,7 +83,7 @@ class JCache extends JObject
 	 */
 	public static function getInstance($type = 'output', $options = array())
 	{
-		return JCacheHandler::getInstance($type, $options);
+		return JCacheController::getInstance($type, $options);
 	}
 
 	/**

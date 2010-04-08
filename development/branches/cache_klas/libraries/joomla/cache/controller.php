@@ -20,7 +20,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.6
  */
-class JCacheHandler
+class JCacheController
 
 {	
 	protected $cache;
@@ -60,23 +60,20 @@ class JCacheHandler
 	 */
 	public static function getInstance($type = 'output', $options = array())
 	{	
-		JCacheHandler::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'handler');
+		JCacheController::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'cache'.DS.'controller');
 		
 		$type = strtolower(preg_replace('/[^A-Z0-9_\.-]/i', '', $type));
 
-		$class = 'JCacheHandler'.ucfirst($type);
+		$class = 'JCacheController'.ucfirst($type);
 
 		if (!class_exists($class))
 		{	
 			// Search for the class file in the JCache include paths.
 			jimport('joomla.filesystem.path');
-			if ($path = JPath::find(JCacheHandler::addIncludePath(), strtolower($type).'.php')) {
-			//$path = dirname(__FILE__).DS.'handler'.DS.$type.'.php';
-
-			//if (file_exists($path)) {
+			if ($path = JPath::find(JCacheController::addIncludePath(), strtolower($type).'.php')) {
 				require_once $path;
 			} else {
-				JError::raiseError(500, 'Unable to load Cache Handler: '.$type);
+				JError::raiseError(500, 'Unable to load Cache Controller: '.$type);
 			}
 		}
 
@@ -108,7 +105,7 @@ class JCacheHandler
 	}
 	
 	/**
-	 * Add a directory where JCache should search for handlers. You may
+	 * Add a directory where JCache should search for controllers. You may
 	 * either pass a string or an array of directories.
 	 *
 	 * @param	string	A path to search.

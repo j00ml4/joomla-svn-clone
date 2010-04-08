@@ -17,7 +17,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheHandlerPage extends JCacheHandler 
+class JCacheControllerPage extends JCacheController 
 {
 	/**
 	 * ID property for the cache page object.
