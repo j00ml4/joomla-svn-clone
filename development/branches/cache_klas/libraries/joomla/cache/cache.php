@@ -279,7 +279,8 @@ class JCache extends JObject
 		// Get the default locktime
 		$locktime = ($locktime) ? $locktime : $this->_options['locktime'];
 		
-		//allow storage handlers to perform locking on their own
+		//allow storage handlers to perform locking on their own 
+		// NOTE drivers with lock need also unlock or unlocking will fail because of false $id
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['locking'] == true && $this->_options['caching'] == true) {
 			$locked = $handler->lock($id,$group,$locktime);

@@ -44,13 +44,14 @@ class JCacheHandlerView extends JCacheHandler
 	
 	public function get(&$view, $method, $id=false, $wrkarounds=true)
 	{
-		$data = false;
+		
 
 		// If an id is not given generate it from the request
 		if ($id == false) {
 			$id = $this->_makeId($view, $method);
 		}
-
+		
+		$data = false;		
 		$data = $this->cache->get($id);
 		
 		$locktest = new stdClass;
