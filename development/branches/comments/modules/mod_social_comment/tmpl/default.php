@@ -14,17 +14,17 @@ JHtml::addIncludePath(JPATH_ROOT.'/plugins/system/jxtended/html/html');
 
 
 // attach the comments stylesheet to the document head
-JHtml::stylesheet('comments.css', 'components/com_comments/media/css/');
+JHtml::stylesheet('social/comments.css', array(), true);
 
 // load the comments form behavior
 JHtml::_('behavior.formvalidation');
-JHtml::script('comments.js', 'components/com_comments/media/js/');
+JHtml::script('social/comments.js', false, true);
 
 // load the appropriate comment editor behavior
 if ($params->get('enable_bbcode')) {
 	modCommentsCommentHelper::loadBBCodeEditor();
 } else {
-	JHtml::script('posteditor.js', 'components/com_comments/media/js/');
+	JHtml::script('social/posteditor.js', false, true);
 }
 
 // load the highlighter behavior

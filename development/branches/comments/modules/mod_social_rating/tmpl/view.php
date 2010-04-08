@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // attach the comments stylesheet to the document head
-JHtml::stylesheet('comments.css', 'components/com_comments/media/css/');
+JHtml::stylesheet('social/comments.css', array(), true);
 
 // Handle custom star files.
 if ($params->get('star_file')) {

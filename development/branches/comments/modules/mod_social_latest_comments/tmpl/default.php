@@ -19,7 +19,7 @@ if (empty($list)) {
 $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 
 // Attach the comments stylesheet to the document head.
-JHtml::stylesheet('comments.css', 'components/com_comments/media/css/');
+JHtml::stylesheet('social/comments.css', array(), true);
 ?>
 
 <ol class="comments-list latest">

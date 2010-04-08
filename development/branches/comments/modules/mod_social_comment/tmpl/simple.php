@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // attach the comments stylesheet to the document head
-JHtml::stylesheet('comments.css', 'components/com_comments/media/css/');
+JHtml::stylesheet('social/comments.css', array(), true);
 
 // Get the route and add the fragment to direct the page to the comments.
 $route = &JURI::getInstance($params->get('route'));
