@@ -22,7 +22,7 @@ COMPLEX TASKS
 - DONE: Consolidate workarounds in new JCache methods, make them optional  (#18020, #19435) 
 - DONE: Re-conceptualize view cache (and review/change other controllers if needed)
 - DONE: Re-conceptualize module cache - add cacheid creation models, add options to create cacheid from within module
-- DONE: make cache controllers independent of JCache, add JCacheCOntroller as parent class
+- DONE: make cache handlerss independent of JCache and rename them to controllers, add JCacheCOntroller as their parent class
 
 
 - DONE: Implement changed caching in core components DONE: com_content, com_weblinks, com_contact, com_newsfeeds, com_wrapper, com_banners
