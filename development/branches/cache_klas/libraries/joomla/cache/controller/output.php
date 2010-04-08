@@ -18,7 +18,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheHandlerOutput extends JCacheHandler
+class JCacheControllerOutput extends JCacheController
 {	
 	private $_id;
 	private $_group;

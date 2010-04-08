@@ -18,7 +18,7 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.5
  */
-class JCacheHandlerCallback extends JCacheHandler
+class JCacheControllerCallback extends JCacheController
 {
 	/**
 	* Constructor
