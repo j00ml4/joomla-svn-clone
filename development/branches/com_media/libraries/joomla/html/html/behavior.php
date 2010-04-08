@@ -271,7 +271,22 @@ abstract class JHtmlBehavior
 			return;
 		}
 
+		$onFileSuccess = '\\function(file, response) {
+			var json = new Hash(JSON.decode(response, true) || {});
+ 
+			if (json.get(\'status\') == \'1\') {
+				file.element.addClass(\'file-success\');
+				file.info.set(\'html\', \'<strong>Image was successfully uploaded.</strong>\');
+			} else {
+				file.element.addClass(\'file-failed\');
+				file.info.set(\'html\', \'<strong>An error occured:</strong> \' + (json.get(\'error\')));
+			}
+		}';
+
+
+
 		// Setup options object
+		$opt['verbose']				= true;
 		$opt['url']					= (isset($params['targetURL'])) ? $params['targetURL'] : null ;
 		$opt['path']				= (isset($params['swf'])) ? $params['swf'] : JURI::root(true).'/media/system/swf/uploader.swf';
 		$opt['height']				= (isset($params['height'])) && $params['height'] ? (int)$params['height'] : null;
@@ -302,7 +317,7 @@ abstract class JHtmlBehavior
 		$opt['onBeforeStart'] 		= (isset($params['onBeforeStart'])) ? '\\'.$params['onBeforeStart'] : null;
 		$opt['onStart'] 			= (isset($params['onStart'])) ? '\\'.$params['onStart'] : null;
 		$opt['onComplete'] 			= (isset($params['onComplete'])) ? '\\'.$params['onComplete'] : null;
-		$opt['onFileSuccess'] 		= (isset($params['onFileSuccess'])) ? '\\'.$params['onFileSuccess'] : null;
+		$opt['onFileSuccess'] 		= (isset($params['onFileSuccess'])) ? '\\'.$params['onFileSuccess'] : $onFileSuccess;
 
 		if(!isset($params['startButton'])) $params['startButton'] = 'upload-start';
 		if(!isset($params['clearButton'])) $params['clearButton'] = 'upload-clear';
