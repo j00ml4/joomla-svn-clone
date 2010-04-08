@@ -414,6 +414,10 @@ class MenusModelItem extends JModelForm
 				return false;
 			}
 		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -444,6 +448,10 @@ class MenusModelItem extends JModelForm
 				return false;
 			}
 		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -469,6 +477,10 @@ class MenusModelItem extends JModelForm
 				return false;
 			}
 		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -724,6 +736,10 @@ class MenusModelItem extends JModelForm
 				return false;
 			}
 		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -854,6 +870,10 @@ class MenusModelItem extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -959,6 +979,11 @@ class MenusModelItem extends JModelForm
 		}
 
 		$this->setState('item.id', $table->id);
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
