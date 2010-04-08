@@ -120,7 +120,7 @@ class ModulesModelModule extends JModelForm
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
-
+		$cache->clean('mod_menu');
 		return true;
 	}
 
@@ -195,6 +195,7 @@ class ModulesModelModule extends JModelForm
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
+		$cache->clean('mod_menu');
 		return true;
 	}
 
@@ -465,6 +466,7 @@ class ModulesModelModule extends JModelForm
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -510,6 +512,7 @@ class ModulesModelModule extends JModelForm
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
+		$cache->clean('mod_menu');
 		
 		return $result;
 	}
@@ -637,6 +640,7 @@ class ModulesModelModule extends JModelForm
 		// Clean the cache.
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
+		$cache->clean('mod_menu');
 
 		// Trigger the onAfterContentSave event.
 		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
@@ -704,6 +708,7 @@ class ModulesModelModule extends JModelForm
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
