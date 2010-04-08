@@ -85,8 +85,15 @@ class ContentViewArticle extends JView
 		//
 		JPluginHelper::importPlugin('content');
 		//$results = $dispatcher->trigger('onPrepareContent', array (& $article, & $params, $limitstart));
-
-		$item->text = JHtml::_('content.prepare', $item->introtext . $item->fulltext);
+		if ($item->params->get('show_intro', 1) == 1) 
+		{
+			$item->text = $item->introtext.' '.$item->fulltext;
+		} 
+		else 
+		{
+			$item->text = $item->fulltext;
+		}
+		$item->text = JHtml::_('content.prepare', $item->text);
 
 		$item->event = new stdClass();
 		$results = $dispatcher->trigger('onAfterDisplayTitle', array(&$item, &$params, $offset));
@@ -118,6 +125,7 @@ class ContentViewArticle extends JView
 		}
 
 		$this->_prepareDocument();
+
 		parent::display($tpl);
 	}
 
@@ -163,16 +171,6 @@ class ContentViewArticle extends JView
 			{
 				$pathway->addItem($title, $link);
 			}
-		}
-
-	// Unify the introtext and fulltext fields and separated the fields by the {readmore} tag
-		if ($this->item->params->get('show_intro') == 1) 
-		{
-			$this->item->text = $this->item->introtext." ".$this->item->fulltext;
-		} 
-		else 
-		{
-			$this->item->text = $this->item->fulltext;
 		}
 
 		if (empty($title))
