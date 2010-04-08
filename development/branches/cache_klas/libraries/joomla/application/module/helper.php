@@ -355,7 +355,7 @@ abstract class JModuleHelper
 	* Module cache helper
 	* 
 	* Caching modes:
-	* to be set in XML: 'static' - one cache file for all pages, 'itemid' - changes on itemid change, 
+	* to be set in XML: 'static' - one cache file for all pages with the same module parameters, 'oldstatic' - 1.5. definition of module caching, one cache file for all pages with the same module id and user aid,'itemid' - changes on itemid change, 
 	* to be called from module itself: 'safeuri' - id created from $cacheparams array, 'id' - module sets own id's
 	*
 	* @static
@@ -377,8 +377,8 @@ abstract class JModuleHelper
 		$cache = &JFactory::getCache($cacheparams->cachegroup,'callback');
 		$conf = &JFactory::getConfig();
 		
-		// turn cache off for internal callers if parameters are set to off
-		if($moduleparams->get('owncache', null) == 0  || $conf->get('caching') == 0) $cache->setCaching = false ;
+		// turn cache off for internal callers if parameters are set to off and for all loged in users
+		if($moduleparams->get('owncache', null) == 0  || $conf->get('caching') == 0 || $user->get('id')) $cache->setCaching = false ;
 		
 		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60)); 
 		
@@ -402,12 +402,15 @@ abstract class JModuleHelper
 				break;
 			
 			case 'static':
+				$ret = $cache->get(array($cacheparams->class, $cacheparams->method), $cacheparams->methodparams, $module->module.md5(serialize($cacheparams->methodparams)) ,true);
+				break;
+				
+			case 'oldstatic':  // provided for backward compatibility, not really usefull
 				$ret = $cache->get(array($cacheparams->class, $cacheparams->method), $cacheparams->methodparams, $module->id. $user->get('aid', 0),true);
 				break;
 			
 			case 'itemid':
 			default:
-				//$ret = $cache->get($cacheparams->class, array($cacheparams->method,$cacheparams->methodparams),$module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'),true);
 				$ret = $cache->get(array($cacheparams->class,$cacheparams->method), $cacheparams->methodparams , $module->id. $user->get('aid', 0).JRequest::getVar('Itemid',null,'default','INT'), true);
 				break;
 		}
