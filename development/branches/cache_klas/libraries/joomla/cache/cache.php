@@ -498,7 +498,12 @@ class JCache extends JObject
 		$registeredurlparams = $app->get('registeredurlparams');
 
 		if (empty($registeredurlparams)) {
-			$registeredurlparams=new stdClass();
+			/*$registeredurlparams=new stdClass();
+			$registeredurlparams->Itemid='INT';
+			$registeredurlparams->catid='INT';
+			$registeredurlparams->id='INT';**/
+			
+			return md5(serialize(JRequest::getURI()));   // provided for backwards compatibility - THIS IS NOT SAFE!!!!
 		}
 		// framework defaults
 		$registeredurlparams->protocol='WORD';
