@@ -20,7 +20,7 @@ $active_id = isset($active) ? $active->id : $menu->getDefault()->id;
 $path	= isset($active) ? $active->tree : array();
 $showAll	= $params->get('showAllChildren');
 
-$cacheid = md5(serialize(array ($active_id,$path,$showAll,$params,$module->id)));
+$cacheid = md5(serialize(array ($active_id,$path,$params,$module->id)));
 
 $cacheparams = new stdClass;
 $cacheparams->cachemode = 'id';
