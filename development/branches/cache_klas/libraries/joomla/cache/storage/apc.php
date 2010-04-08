@@ -190,9 +190,9 @@ class JCacheStorageApc extends JCacheStorage
 				
 		$looptime = $locktime * 10;
 		
-		$cache_id = $this->_getCacheId($id, $group);
+		$cache_id = $this->_getCacheId($id, $group).'_lock';
 			
-		$data_lock = apc_add( $cache_id.'_lock', 1, $locktime );
+		$data_lock = apc_add( $cache_id, 1, $locktime );
 				
 		if ( $data_lock === FALSE ) {
 
@@ -208,7 +208,7 @@ class JCacheStorageApc extends JCacheStorage
 				}
 
 				usleep(100);
-				$data_lock = apc_add( $cache_id.'_lock', 1, $locktime );
+				$data_lock = apc_add( $cache_id, 1, $locktime );
 				$lock_counter++;
 			}
 			
@@ -216,6 +216,25 @@ class JCacheStorageApc extends JCacheStorage
 			$returning->locked = $data_lock;
 		return $returning;	
 		
+	}
+	
+	/**
+	 * Unlock cached item - override parent for cacheid compatibility with lock
+	 *
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function unlock($id,$group=null)
+	{	
+		$unlock = false;
+		
+		$cache_id = $this->_getCacheId($id, $group).'_lock';
+		
+		$unlock = apc_delete($cache_id);
+		return $unlock;
 	}
 
 }

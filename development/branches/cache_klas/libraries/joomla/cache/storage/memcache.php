@@ -298,6 +298,36 @@ class JCacheStorageMemcache extends JCacheStorage
 		
 	}
 	
+	/**
+	 * Unlock cached item - override parent for cacheid compatibility with lock
+	 *
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @since	1.6
+	 * @return boolean  True on success, false otherwise.
+	 */
+	public function unlock($id,$group=null)
+	{	
+		$unlock = false;
+		
+		$cache_id = $this->_getCacheId($id, $group).'_lock';
+		
+		if(!$this->lockindex()) return false;
+
+		$index = self::$_db->get($this->_hash.'-index');
+		if ($index === false) {$index = array();}
+		
+		foreach ($index as $key=>$value){
+		if ($value->name == $cache_id) unset ($index[$key]);
+		break;
+		}
+		self::$_db->replace($this->_hash.'-index', $index, 0, 0);
+		$this->unlockindex();
+		
+		return self::$_db->delete($cache_id);
+	}
+	
 	
 	/**
 	 * Lock cache index

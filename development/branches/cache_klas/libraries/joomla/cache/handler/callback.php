@@ -91,8 +91,8 @@ class JCacheHandlerCallback extends JCacheHandler
 			// Generate an ID
 			$id = $this->_makeId($callback, $args);
 		}
-
-		// Get the storage handler and get callback cache data by id and group
+		
+		$data = false;
 		$data = $this->cache->get($id);
 		
 		$locktest = new stdClass;
