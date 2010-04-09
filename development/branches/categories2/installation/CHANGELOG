@@ -27,8 +27,58 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-1-April-2010 Jean-Marie Simonet
+08-Apr-2010 Mark Dexter
+# Revert rev 15911 in file installation/controller.php (prevents sample data install)
+# Fix bug in user profile layout, custom layout (Elin Waring)
+^ Add new positions to Milky Way Template (Elin Waring)
+^ Sample data changes (Elin Waring)
+
+08-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries J/application/component/
+$ Refactoring ini/keys in libraries J/application/module
+
+08-Apr-2010 Hannes Papenberg
+# Fixing static/non-static issue in JApplication::getRouter()
+
+07-Apr-2010 Jean-Marie Simonet
+#$ Fixing fancy uploader hardcoded strings and more, WIP (thanks Dennis)
+
+07-Apr-2010 Louis Landry
+^ Change the new protocol request var for various controller types to format ... for consistency.
+
+06-Apr-2010 Jean-Marie Simonet
+$ Adding missing value to key.
+#$ Fixing some com_categories strings + bug (thanks Dennis)
+# Bugs in com_redirect
+
+05-Apr-2010 Jean-Marie Simonet
+$^+ Consolidating some keys with same value to a unique key in main inis. WIP
+# Fixed [19972]
+
+05-Apr-2010 Andrew Eddie
+ # Fix bug in JCache constructor.
+
+04-Apr-2010 Jean-Marie Simonet
+$^+ Consolidating some keys with same value to a unique key in main inis. WIP
+#$ Missing string + bug [20098]. Thank you Klas.
+
+02-Apr-2010 Louis Landry
+^ [#19982] JTable Improvements thanks to Jonnathan S. Lima!
+
+02-Apr-2010 Jean-Marie Simonet
+$ Refactoring com_redirect ini/keys
+
+01-Apr-2010 Mark Dexter
+# Fix bug processing content plugin in single-article
+
+01-Apr-2010 Christophe Demko
+# Fix bug #19744 of the tracker
+# Fix bug #20072 of the tracker
+# Correctly loading the language file on plugin uninstalling
+
+01-Apr-2010 Jean-Marie Simonet
 ^$ Creating JSITE and JADMINISTRATOR keys in main ini file. Globally consolidated all keys with same value to these new keys.
+- Removed xmlrpc library + some 
 
 31-Mar-2010 Mark Dexter
 ^ Implement parameters in Archived Articles menu item
