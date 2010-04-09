@@ -53,8 +53,19 @@ class JCachePageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGet()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+            $id1 = 42;
+            $group1 = 8;
+
+            $id2 = false;
+            $group2 = 'page';
+
+            $this->assertThat(
+                $this->object->get($id1, $group1),
+                $this->isFalse(),
+                'Get data id=42 | group=8.'
+            );
+            //var_dump($this->object->get($id2, $group2));
+            // error al crear URI en la segunda prueba
 	}
 
 	/**
@@ -63,8 +74,11 @@ class JCachePageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testStore()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+            $this->assertThat(
+                $this->object->store(),
+                $this->isFalse(),
+                'Almacena algo que no existe'
+            );
 	}
 
 	/**
@@ -73,8 +87,7 @@ class JCachePageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function test_makeId()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+            // error al crear la URI
 	}
 
 	/**
@@ -83,8 +96,7 @@ class JCachePageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function test_noChange()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+            // no devuelve nada - Si ejecutamos se mete en bucle infinito
 	}
 
 	/**
@@ -93,8 +105,7 @@ class JCachePageTest extends PHPUnit_Framework_TestCase
 	 */
 	public function test_setEtag()
 	{
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete('This test has not been implemented yet.');
+            // envía cabecera pero no devuelve nada
 	}
 }
 ?>
