@@ -140,7 +140,7 @@ class JController extends JObject
 
 		// Get the environment configuration.
 		$basePath	= array_key_exists('base_path', $config) ? $config['base_path'] : JPATH_COMPONENT;
-		$protocol	= JRequest::getWord('protocol');
+		$format		= JRequest::getWord('format');
 		$command	= JRequest::getCmd('task', 'display');
 
 		// Check for a controller.task command.
@@ -149,7 +149,7 @@ class JController extends JObject
 			list($type, $task) = explode('.', $command);
 
 			// Define the controller filename and path.
-			$file	= self::_createFileName('controller', array('name' => $type, 'protocol' => $protocol));
+			$file	= self::_createFileName('controller', array('name' => $type, 'format' => $format));
 			$path	= $basePath.DS.'controllers'.DS.$file;
 
 			// Reset the task without the contoller context.
@@ -160,7 +160,7 @@ class JController extends JObject
 			$task	= $command;
 
 			// Define the controller filename and path.
-			$file	= self::_createFileName('controller', array('name' => 'controller', 'protocol' => $protocol));
+			$file	= self::_createFileName('controller', array('name' => 'controller'));
 			$path	= $basePath.DS.$file;
 		}
 
@@ -173,7 +173,7 @@ class JController extends JObject
 			if (file_exists($path)) {
 				require_once $path;
 			} else {
-				throw new JException(JText::sprintf('INVALID CONTROLLER', $type), 1056, E_ERROR, $type, true);
+				throw new JException(JText::sprintf('JERROR_APPLICATION_INVALID_CONTROLLER', $type), 1056, E_ERROR, $type, true);
 			}
 		}
 
@@ -181,7 +181,7 @@ class JController extends JObject
 		if (class_exists($class)) {
 			$instance = new $class($config);
 		} else {
-			throw new JException(JText::sprintf('INVALID CONTROLLER CLASS', $class), 1057, E_ERROR, $class, true);
+			throw new JException(JText::sprintf('JERROR_APPLICATION_INVALID_CONTROLLER_CLASS', $class), 1057, E_ERROR, $class, true);
 		}
 
 		return $instance;
@@ -284,7 +284,7 @@ class JController extends JObject
 		} elseif (isset($this->_taskMap['__default'])) {
 			$doTask = $this->_taskMap['__default'];
 		} else {
-			return JError::raiseError(404, JText::_('Task ['.$task.'] not found'));
+			return JError::raiseError(404, JText::sprintf('JERROR_APPLICATION_TASK_NOT_FOUND', $task));
 		}
 
 		// Record the actual task being fired
@@ -295,7 +295,7 @@ class JController extends JObject
 			$retval = $this->$doTask();
 			return $retval;
 		} else {
-			return JError::raiseError(403, JText::_('ACCESS_FORBIDDEN'));
+			return JError::raiseError(403, JText::_('JERROR_APPLICATION_ACCESS_FORBIDDEN'));
 		}
 
 	}
@@ -494,7 +494,7 @@ class JController extends JObject
 		if (empty($name)) {
 			$r = null;
 			if (!preg_match('/(.*)Controller/i', get_class($this), $r)) {
-				JError::raiseError(500, "JController::getName() : Cannot get or parse class name.");
+				JError::raiseError(500, "JERROR_APPLICATION_CONTROLLER_GET_NAME");
 			}
 			$name = strtolower($r[1]);
 		}
@@ -532,9 +532,7 @@ class JController extends JObject
 				$views[$name] = & $view;
 			} else {
 				$result = JError::raiseError(
-				500, JText::_('View not found [name, type, prefix]:')
-				. ' ' . $name . ',' . $type . ',' . $prefix
-				);
+					500, JText::_('JERROR_APPLICATION_VIEW_NOT_FOUND', $name, $type, $prefix));
 				return $result;
 			}
 		}
@@ -686,16 +684,15 @@ class JController extends JObject
 		if (!class_exists($viewClass)) {
 			jimport('joomla.filesystem.path');
 			$path = JPath::find(
-			$this->_path['view'],
-			$this->_createFileName('view', array('name' => $viewName, 'type' => $viewType))
+				$this->_path['view'],
+				$this->_createFileName('view', array('name' => $viewName, 'type' => $viewType))
 			);
 			if ($path) {
 				require_once $path;
 
 				if (!class_exists($viewClass)) {
 					$result = JError::raiseError(
-					500, JText::_('View class not found [class, file]:')
-					. ' ' . $viewClass . ', ' . $path);
+						500, JText::sprintf('JERROR_APPLICATION_VIEW_CLASS_NOT_FOUND', $viewClass, $path));
 					return null;
 				}
 			} else {
@@ -767,11 +764,17 @@ class JController extends JObject
 		switch ($type)
 		{
 			case 'controller':
-				if (!empty($parts['protocol'])) {
-					$parts['protocol'] = '.'.$parts['protocol'];
+				if (!empty($parts['format'])) {
+					if ($parts['format'] == 'html') {
+						$parts['format'] = '';
+					} else {
+						$parts['format'] = '.'.$parts['format'];
+					}
+				} else {
+					$parts['format'] = '';
 				}
 
-				$filename = strtolower($parts['name']).$parts['protocol'].'.php';
+				$filename = strtolower($parts['name']).$parts['format'].'.php';
 				break;
 
 			case 'view':
@@ -780,7 +783,7 @@ class JController extends JObject
 				}
 
 				$filename = strtolower($parts['name']).DS.'view'.$parts['type'].'.php';
-				break;
+			break;
 		}
 		return $filename;
 	}
