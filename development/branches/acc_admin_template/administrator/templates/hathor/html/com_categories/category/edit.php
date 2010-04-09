@@ -76,49 +76,24 @@ JHtml::_('behavior.formvalidation');
 
 	<div class="col options-section">
 
-		<?php echo JHTML::_('sliders.start'); ?>
-		
-	<?php if(in_array('params', $this->form->getGroups())) : ?>
-		
-			<?php $groups = $this->form->getGroups('params');
-			$fieldsets = $this->form->getFieldsets();
-			array_unshift($groups, 'params'); ?>
-			
-			<?php foreach($groups as $group) : ?>
-			
-				<?php echo JHTML::_('sliders.panel', JText::_($fieldsets[$group]['label']), $group); ?>
-				
-				<fieldset class="panelform">
-				
-				<?php foreach($this->form->getFields($group) as $field) : 
-					if ($field->hidden) : 
-						echo $field->input; 
-					else : 
-						echo $field->label; 
-						echo $field->input; 
-					endif; 
-				endforeach; ?>
-				
-				</fieldset>
-				
-			<?php endforeach; ?>
-			
-		<?php endif; ?>
-		
-		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'access-rules'); ?>
-		<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
-			<?php // echo $this->form->getLabel('rules'); ?>
-			<?php echo $this->form->getInput('rules'); ?>
-		</fieldset>
-		
-		<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
-		<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
-			<?php echo $this->loadTemplate('metadata'); ?>
-		</fieldset>
-		
-		<?php echo JHtml::_('sliders.end'); ?>	
+		<?php echo JHtml::_('sliders.start','plugin-sliders-'.$this->item->id); ?>
+			<?php echo $this->loadTemplate('options'); ?>
+			<div class="clr"></div>
+
+			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'meta-rules'); ?>
+			<fieldset>
+				<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
+					<?php echo $this->form->getLabel('rules'); ?>
+					<?php echo $this->form->getInput('rules'); ?>
+			</fieldset>
+
+			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
+			<fieldset class="panelform">
+				<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
+				<?php echo $this->loadTemplate('metadata'); ?>
+			</fieldset>
+
+		<?php echo JHtml::_('sliders.end'); ?>
 	</div>
 
 	<input type="hidden" name="task" value="" />
@@ -126,3 +101,4 @@ JHtml::_('behavior.formvalidation');
 </form>
 <div class="clr"></div>
 </div>
+<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
