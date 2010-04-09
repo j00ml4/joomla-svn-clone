@@ -26,7 +26,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter-search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('CONTENT_FILTER_SEARCH_DESC'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
@@ -79,7 +79,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
-					<?php echo JHtml::_('grid.sort',  'CONTENT_HEADING_DATE', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTENT_HEADING_DATE', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>

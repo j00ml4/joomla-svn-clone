@@ -71,7 +71,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'fp.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
-					<?php echo JHtml::_('grid.order',  $this->items); ?>
+					<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'featured.saveorder'); ?>
 				</th>
 				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -94,7 +94,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
 			$item->max_ordering = 0; //??
-			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
+			$ordering	= ($this->state->get('list.ordering') == 'fp.ordering');
 			$assetId	= 'com_content.article.'.$item->id;
 			$canCreate	= $user->authorise('core.create',		'com_content.category.'.$item->catid);
 			$canEdit	= $user->authorise('core.edit',			'com_content.article.'.$item->id);
@@ -125,8 +125,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo $this->pagination->orderUpIcon($i, true, 'items.orderup', 'JGrid_Move_Up', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'items.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderUpIcon($i, true, 'featured.orderup', 'JGrid_Move_Up', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'featured.orderdown', 'JGrid_Move_Down', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text_area" title="<?php echo $item->title; ?> order" />
 					<?php else : ?>
