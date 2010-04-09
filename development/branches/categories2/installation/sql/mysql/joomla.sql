@@ -637,7 +637,7 @@ CREATE TABLE `#__modules` (
 
 
 INSERT INTO `#__modules` VALUES
-(1, 'Main Menu', '','', 1, 'left', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, 'menutype=mainmenu\nmoduleclass_sfx=_menu\n', 0, ''),
+(1, 'Main Menu', '','', 1, 'position->7', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, 'menutype=mainmenu\nmoduleclass_sfx=_menu\n', 0, ''),
 (2, 'Login', '','', 1, 'login', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, '', 1, ''),
 (3, 'Popular Articles','','',3,'cpanel',0,'0000-00-00 00:00:00','0000-00-00 00:00:00', '0000-00-00 00:00:00', 1,'mod_popular',3,1,'{"count":"5","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}',1, ''),
 (4, 'Recently Added Articles','','',4,'cpanel',0,'0000-00-00 00:00:00','0000-00-00 00:00:00', '0000-00-00 00:00:00', 1,'mod_latest',3,1,'ordering=c_dsc\nuser_id=0\ncache=0\n\n',1, ''),
@@ -652,8 +652,8 @@ INSERT INTO `#__modules` VALUES
 (15, 'Title','','', 1,'title', 0,'0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1,'mod_title', 3, 1, '', 1, ''),
 (16, 'User Menu', '','', 4, 'left', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 2, 1, 'menutype=usermenu\nmoduleclass_sfx=_menu\ncache=1', 0, ''),
 (17, 'Login Form', '','', 8, 'left', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_login', 1, 1, 'greeting=1\nname=0', 0, ''),
-(18, 'Breadcrumbs', '','', 1, 'breadcrumb', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, 'moduleclass_sfx=\ncache=0\nshowHome=1\nhomeText=Home\nshowComponent=1\nseparator=\n\n', 0, ''),
-(19, 'Banners','', '', 1, 'bottom', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":"27","tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"0"}', 0, '');
+(18, 'Breadcrumbs', '','', 1, 'position-2', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_breadcrumbs', 1, 1, 'moduleclass_sfx=\ncache=0\nshowHome=1\nhomeText=Home\nshowComponent=1\nseparator=\n\n', 0, ''),
+(19, 'Banners','', '', 1, 'position-5', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":"27","tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"0"}', 0, '');
 
 # -------------------------------------------------------
 

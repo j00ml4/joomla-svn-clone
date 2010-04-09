@@ -356,7 +356,7 @@
 				<option value="hide">JHIDE</option>
 				<option value="created">Created</option>
 				<option value="modified">Modified</option>
-				<option value="published">Published</option>
+				<option value="published">JPUBLISHED</option>
 		</field>
 
 		<field name="date_format"
@@ -374,7 +374,7 @@
 			description="JGLOBAL_FILTER_FIELD_DESC">
 				<option value="hide">JHIDE</option>
 				<option value="title">Title</option>
-				<option value="author">Author</option>
+				<option value="author">JAUTHOR</option>
 				<option value="hits">Hits</option>
 		</field>
 

@@ -18,17 +18,17 @@
 		<field
 			name="enabled"
 			type="list"
-			label="COM_PLUGINS_FIELD_ENABLED_LABEL"
+			label="JENABLED"
 			description="COM_PLUGINS_FIELD_ENABLED_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option
 				value="1">
-				JOPTION_ENABLED</option>
+				JENABLED</option>
 			<option
 				value="0">
-				JOPTION_DISABLED</option>
+				JDISABLED</option>
 		</field>
 
 		<field

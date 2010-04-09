@@ -96,16 +96,16 @@
 		description="JFIELD_PUBLISHED_DESC">
 		<option
 			value="1">
-			JOPTION_PUBLISHED</option>
+			JPUBLISHED</option>
 		<option
 			value="0">
-			JOPTION_UNPUBLISHED</option>
+			JUNPUBLISHED</option>
 		<option
 			value="-1">
-			JOPTION_ARCHIVED</option>
+			JARCHIVED</option>
 		<option
 			value="-2">
-			JOPTION_TRASHED</option>
+			JTRASHED</option>
 	</field>
 
 	<field
@@ -224,7 +224,7 @@
 		<field
 			name="author"
 			type="text"
-			label="JFIELD_METADATA_AUTHOR_LABEL"
+			label="JAUTHOR"
 			description="JFIELD_METADATA_AUTHOR_DESC"
 			size="30"
 			default=""/>

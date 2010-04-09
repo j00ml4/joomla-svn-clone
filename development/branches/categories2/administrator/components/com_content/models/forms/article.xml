@@ -26,13 +26,13 @@
 			filter="intval" size="1" default="1"
 		>
 			<option value="1">
-				JOption_Published</option>
+				JPUBLISHED</option>
 			<option value="0">
-				JOption_UnPublished</option>
+				JUNPUBLISHED</option>
 			<option value="-1">
-				JOption_Archived</option>
+				JARCHIVED</option>
 			<option value="-2">
-				JOption_Trashed</option>
+				JTRASHED</option>
 		</field>
 
 		<field name="catid" type="category" extension="com_content"
@@ -289,7 +289,7 @@
 		</field>
 
 		<field name="author" type="text"
-			label="JField_Metadata_Author_Label" description="JField_Metadata_Author_Desc"
+			label="JAUTHOR" description="JField_Metadata_Author_Desc"
 			size="20" />
 
 		<field name="rights" type="textarea" label="JFIELD_META_RIGHTS_LABEL"

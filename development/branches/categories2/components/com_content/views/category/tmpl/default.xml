@@ -104,7 +104,7 @@
 				<option value="hide">JHIDE</option>
 				<option value="created">Created</option>
 				<option value="modified">Modified</option>
-				<option value="published">Published</option>
+				<option value="published">JPUBLISHED</option>
 			</field>
 
 			<field name="date_format" type="text"
@@ -120,7 +120,7 @@
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="hide">JHIDE</option>
 				<option value="title">Title</option>
-				<option value="author">Author</option>
+				<option value="author">JAUTHOR</option>
 				<option value="hits">Hits</option>
 			</field>
 
@@ -159,7 +159,7 @@
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="created">JGLOBAL_Created</option>
 				<option value="modified">JGLOBAL_Modified</option>
-				<option value="published">JGLOBAL_Published</option>
+				<option value="published">JPUBLISHED</option>
 			</field>
 
 			<field name="show_pagination" type="list"
@@ -177,8 +177,8 @@
 				label="JGLOBAL_Show_Unauth_Links_Label"
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
-				<option value="0">JNo</option>
-				<option value="1">JYes</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
 </fieldset>
 
@@ -218,8 +218,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="link_category" type="list"
@@ -228,8 +228,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">JNo</option>
-				<option value="1">JYes</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
 
 			<field name="show_parent_category" type="list"
@@ -248,8 +248,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">JNo</option>
-				<option value="1">JYes</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
 			</field>
 
 			<field name="show_author" type="list"
@@ -268,8 +268,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_create_date" type="list"
@@ -278,8 +278,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_modify_date" type="list"
@@ -288,8 +288,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_publish_date" type="list"
@@ -298,8 +298,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_item_navigation" type="list"
@@ -307,8 +307,8 @@
 				label="JGLOBAL_Show_Navigation_Label"
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_readmore" type="list"
@@ -327,8 +327,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_print_icon" type="list"
@@ -337,8 +337,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_email_icon" type="list"
@@ -347,8 +347,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_hits" type="list"
@@ -357,8 +357,8 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 </fieldset>
 		<fieldset name="integration"

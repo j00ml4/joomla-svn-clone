@@ -125,15 +125,15 @@
 			>
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="front">COM_CONTENT_FEATURED_ORDER</option>
-				<option value="rdate">JGLOBAL_Most_recent_first</option>
-				<option value="date">JGLOBAL_Oldest_first</option>
-				<option value="alpha">JGLOBAL_Title_Alphabetical</option>
-				<option value="ralpha">JGLOBAL_Title_Reverse_Alphabetical</option>
-				<option value="author">JGLOBAL_Author_Alphabetical</option>
-				<option value="rauthor">JGLOBAL_Author_Reverse_Alphabetical</option>
-				<option value="hits">JGLOBAL_Most_Hits</option>
-				<option value="rhits">JGLOBAL_Least_Hits</option>
-				<option value="order">JGLOBAL_Ordering</option>
+				<option value="rdate">JGLOBAL_MOST_RECENT_FIRST</option>
+				<option value="date">JGLOBAL_OLDEST_FIRST</option>
+				<option value="alpha">JGLOBAL_TITLE_ALPHABETICAL</option>
+				<option value="ralpha">JGLOBAL_TITLE_REVERSE_ALPHABETICAL</option>
+				<option value="author">JGLOBAL_AUTHOR_ALPHABETICAL</option>
+				<option value="rauthor">JGLOBAL_AUTHOR_REVERSE_ALPHABETICAL</option>
+				<option value="hits">JGLOBAL_MOST_HITS</option>
+				<option value="rhits">JGLOBAL_LEAST_HITS</option>
+				<option value="order">JGLOBAL_ORDERING</option>
 			</field>
 
 			<field name="order_date" type="list"
@@ -143,7 +143,7 @@
 				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="created">JGLOBAL_Created</option>
 				<option value="modified">JGLOBAL_Modified</option>
-				<option value="published">JGLOBAL_Published</option>
+				<option value="published">JPUBLISHED</option>
 			</field>
 
 			<field name="show_pagination" type="list"
