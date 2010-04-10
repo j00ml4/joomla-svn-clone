@@ -16,7 +16,7 @@ require_once 'PHPUnit/Extensions/OutputTestCase.php';
  * A unit test class for SubjectClass
  * The two annotations below are required because we use mocks.  This avoids bringing bogus classes into the main process.
  */
-class JCacheCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
+class JCacheControllerCallbackTest_Callback extends PHPUnit_Extensions_OutputTestCase
 {
 
 	public function setUp() {

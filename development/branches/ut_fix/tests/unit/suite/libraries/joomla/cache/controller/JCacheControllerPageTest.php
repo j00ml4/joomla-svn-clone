@@ -13,7 +13,7 @@
  * @subpackage Cache
  *
  */
-class JCachePageTest extends PHPUnit_Framework_TestCase
+class JCacheControllerPageTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var	JCachePage

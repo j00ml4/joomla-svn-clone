@@ -13,7 +13,7 @@
  * @subpackage Cache
  *
  */
-class JCacheOutputTest extends PHPUnit_Framework_TestCase
+class JCacheControllerOutputTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var	JCacheOutput
