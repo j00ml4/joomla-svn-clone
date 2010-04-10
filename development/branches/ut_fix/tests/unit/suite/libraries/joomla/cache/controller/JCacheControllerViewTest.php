@@ -13,7 +13,7 @@
  * @subpackage Cache
  *
  */
-class JCacheViewTest extends PHPUnit_Framework_TestCase {
+class JCacheControllerViewTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var	JCacheView
 	 * @access protected

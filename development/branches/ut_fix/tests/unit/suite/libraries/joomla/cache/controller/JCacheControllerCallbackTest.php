@@ -13,7 +13,7 @@
  * @subpackage Cache
  *
  */
-class JCacheCallbackTest extends PHPUnit_Framework_TestCase
+class JCacheControllerCallbackTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var	JCacheCallback
