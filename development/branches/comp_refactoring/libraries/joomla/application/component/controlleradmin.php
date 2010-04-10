@@ -135,7 +135,7 @@ class JControllerAdmin extends JController
 					$text = $this->_msgprefix.'_ITEM_TRASHED';
 					$ntext = $this->_msgprefix.'_N_ITEMS_TRASHED';
 				}
-				$this->setMessage(JText::sprintf((count($ids) == 1) ? $text : $ntext, count($ids)));
+				$this->setMessage(JText::sprintf((count($cid) == 1) ? $text : $ntext, count($ids)));
 			}
 		}
 
