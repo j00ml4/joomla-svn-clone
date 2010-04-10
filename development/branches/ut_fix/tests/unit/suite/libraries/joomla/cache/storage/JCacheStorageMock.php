@@ -98,10 +98,15 @@ class JCacheStorageMock extends JCacheStorage
 	 *
 	 * @return boolean  True on success, false otherwise.
 	 */
+
+	/*
+	 * Commenting out because for some reason phpunit picks it up as a test and chokes becausse
+	 * it is called as an instantiated object rather than statically
 	public static function test()
 	{
 		return true;
 	}
+	*/
 
 	/**
 	 * Get a cache_id string from an id/group pair
