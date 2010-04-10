@@ -25,7 +25,7 @@ class JCacheControllerCallbackTest_Callback extends PHPUnit_Extensions_OutputTes
 
 		require_once(dirname(dirname(__FILE__)).DS.'storage'.DS.'JCacheStorageMock.php');
 
-		require_once(dirname(__FILE__).DS.'JCacheCallback.helper.php');
+		require_once(dirname(__FILE__).DS.'JCacheControllerCallback.helper.php');
 
 	}
 
@@ -64,7 +64,7 @@ $cache =& JCache::getInstance('callback', array('storage'=>'mock'));
 		$arg2 = 'e2';
 		$this->expectOutputString('e1e1e1e1e1');
 		for($i = 0; $i < 5; $i++) {
-			$instance = new testCallbackHandler();
+			$instance = new testCallbackController();
 			$result = $cache->get(array($instance, 'instanceCallback'), array($arg1, $arg2));
 			$this->assertTrue($arg2 === $result,
 				'Expected: '.$arg2.' Actual: '.$result
