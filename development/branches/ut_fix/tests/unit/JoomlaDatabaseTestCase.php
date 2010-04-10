@@ -57,7 +57,7 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 		jimport('joomla.database.table');
 
 		// Load the config if available.
-		require_once JPATH_TESTS.'/config.php';
+		include JPATH_TESTS.'/config.php';
 		if (class_exists('JTestConfig')) {
 			$config = new JTestConfig;
 		}
