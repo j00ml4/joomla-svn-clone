@@ -52,11 +52,26 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	}
 
 	public static function setUpBeforeClass() {
+
 		jimport('joomla.database.database');
 		jimport('joomla.database.table');
 
+		// Load the config if available.
+		require_once JPATH_TESTS.'/config.php';
+		if (class_exists('JTestConfig')) {
+			$config = new JTestConfig;
+		}
+
+
 		if(!is_object(self::$dbo)) {
-			$options	= array ('driver' => 'mysql', 'host' => '127.0.0.1', 'user' => 'utuser', 'password' => 'ut1234', 'database' => 'joomla_ut', 'prefix' => 'jos_');
+			$options = array(
+				'driver' => isset($config) ? $config->dbtype : 'mysql',
+				'host' => isset($config) ? $config->host : '127.0.0.1',
+				'user' => isset($config) ? $config->user : 'utuser',
+				'password' => isset($config) ? $config->password : 'ut1234',
+				'database' => isset($config) ? $config->db : 'joomla_ut',
+				'prefix' => isset($config) ? $config->dbprefix : 'jos_'
+			);
 
 			self::$dbo = &JDatabase::getInstance($options);
 
