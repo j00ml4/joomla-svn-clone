@@ -223,6 +223,17 @@ abstract class JHtmlBehavior
 
 		if (!isset($uploaders)) {
 			$uploaders = array();
+			JText::script('JUPLOADER_FILENAME');
+			JText::script('JUPLOADER_UPLOAD_COMPLETED');
+			JText::script('JUPLOADER_ERROR_OCCURRED');
+			JText::script('JUPLOADER_ALL_FILES');
+			JText::script('JUPLOADER_PROGRESS_OVERALL');
+			JText::script('JUPLOADER_CURRENT_TITLE');
+			JText::script('JUPLOADER_REMOVE');
+			JText::script('JUPLOADER_REMOVE_TITLE');
+			JText::script('JUPLOADER_CURRENT_FILE');
+			JText::script('JUPLOADER_CURRENT_PROGRESS');
+			JText::script('JUPLOADER_FILE_ERROR');
 
 			// load language
 			$lang =& JFactory::getLanguage();
@@ -267,6 +278,7 @@ abstract class JHtmlBehavior
 			$document->addScriptDeclaration($js);
 		}
 
+
 		if (isset($uploaders[$id]) && ($uploaders[$id])) {
 			return;
 		}
@@ -276,10 +288,10 @@ abstract class JHtmlBehavior
  
 			if (json.get(\'status\') == \'1\') {
 				file.element.addClass(\'file-success\');
-				file.info.set(\'html\', \'<strong>Image was successfully uploaded.</strong>\');
+				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JUPLOADER_FILE_SUCCESSFULLY_UPLOADED\') + \'</strong>\');
 			} else {
 				file.element.addClass(\'file-failed\');
-				file.info.set(\'html\', \'<strong>An error occured:</strong> \' + (json.get(\'error\')));
+				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JUPLOADER_ERROR_OCCURRED\', json.get(\'error\')) + \'</strong>\');
 			}
 		}';
 
@@ -307,7 +319,7 @@ abstract class JHtmlBehavior
 		$opt['fileListMax']			= (isset($params['fileListMax']) && ($params['fileListMax'])) ? (int)$params['fileListMax'] : $opt['fileListMax'];
 		$opt['fileListSizeMax']		= (isset($params['fileListSizeMax']) && ($params['fileListSizeMax'])) ? (int)$params['fileListSizeMax'] : null;
 		// types is the old parameter name.  Remove in 1.7
-		$opt['typeFilter']			= (isset($params['types'])) ? '\\'.$params['types'] : '\\{\'All Files (*.*)\': \'*.*\'}';
+		$opt['typeFilter']			= (isset($params['types'])) ? '\\'.$params['types'] : '\\{Joomla.JText._(\'JPLOADER_ALL_FILES\'): \'*.*\'}';
 		$opt['typeFilter']			= (isset($params['typeFilter'])) ? '\\'.$params['typeFilter'] : $opt['typeFilter'];
 
 
