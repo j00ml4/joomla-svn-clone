@@ -87,7 +87,7 @@ class JComponentHelper
 
 		if (empty($option)) {
 			// Throw 404 if no component
-			JError::raiseError(404, JText::_('JERROR_APPLICATION_COMPONENT_NOT_FOUND'));
+			JError::raiseError(404, JText::_('JLIB_APPLICATION_ERROR_COMPONENT_NOT_FOUND'));
 			return;
 		}
 
@@ -112,7 +112,7 @@ class JComponentHelper
 
 		// If component disabled throw error
 		if (!self::isEnabled($option) || !file_exists($path)) {
-			JError::raiseError(404, JText::_('JERROR_APPLICATION_COMPONENT_NOT_FOUND'));
+			JError::raiseError(404, JText::_('JLIB_APPLICATION_ERROR_COMPONENT_NOT_FOUND'));
 		}
 
 		$task = JRequest::getString('task');
@@ -154,7 +154,8 @@ class JComponentHelper
 	 * @return	boolean
 	 */
 	protected static function _load($option)
-	{
+	{	
+		
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 		$query->select('extension_id AS "id", element AS "option", params, enabled');
@@ -162,12 +163,14 @@ class JComponentHelper
 		$query->where('`type` = "component"');
 		$query->where('`element` = "'.$option.'"');
 		$db->setQuery($query);
-
-		self::$_components[$option] = $db->loadObject();
-
+		
+		$cache = JFactory::getCache('_system','callback');		
+				
+		self::$_components[$option] =  $cache->get(array($db, 'loadObject'), null, $option, false);
+		
 		if ($error = $db->getErrorMsg() || empty(self::$_components[$option])) {
 			// Fatal error.
-			JError::raiseWarning(500, JText::sprintf('JERROR_APPLICATION_COMPONENT_NOT_LOADING', $option, $error));
+			JError::raiseWarning(500, JText::sprintf('JLIB_APPLICATION_ERROR_COMPONENT_NOT_LOADING', $option, $error));
 			return false;
 		}
 
