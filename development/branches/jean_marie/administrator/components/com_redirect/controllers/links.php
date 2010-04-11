@@ -31,7 +31,6 @@ class RedirectControllerLinks extends JController
 		parent::__construct($config);
 
 		$this->registerTask('unpublish',	'publish');
-		$this->registerTask('archive',		'publish');
 		$this->registerTask('trash',		'publish');
 	}
 
@@ -91,7 +90,7 @@ class RedirectControllerLinks extends JController
 
 		// Initialise variables.
 		$ids	= JRequest::getVar('cid', array(), '', 'array');
-		$values	= array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2);
+		$values	= array('publish' => 1, 'unpublish' => 0, 'trash' => -2);
 		$task	= $this->getTask();
 		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
 
@@ -116,10 +115,6 @@ class RedirectControllerLinks extends JController
 				else if ($value == 0) {
 					$text = 'COM_REDIRECT_LINK_UNPUBLISHED';
 					$ntext = 'COM_REDIRECT_N_LINKS_UNPUBLISHED';
-				}
-				else if ($value == 2) {
-					$text = 'COM_REDIRECT_LINK_ARCHIVED';
-					$ntext = 'COM_REDIRECT_N_LINKS_ARCHIVED';
 				}
 				else {
 					$text = 'COM_REDIRECT_LINK_TRASHED';

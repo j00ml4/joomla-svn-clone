@@ -63,10 +63,11 @@ class ContactViewContacts extends JView
 		JToolBarHelper::addNew('contact.edit', 'JTOOLBAR_NEW');
 		JToolBarHelper::editList('contact.edit','JTOOLBAR_EDIT');
 		JToolBarHelper::divider();
+		if ($canDo->get('core.edit.state')) {
 		JToolBarHelper::publish('contacts.publish','JTOOLBAR_PUBLISH');
 		JToolBarHelper::unpublish('contacts.unpublish','JTOOLBAR_UNPUBLISH');
 		JToolBarHelper::divider();
-		JToolBarHelper::archiveList('contacts.archive','JTOOLBAR_ARCHIVE');
+		}
 		if ($state->get('filter.published') == -2) {
 			JToolBarHelper::deleteList('', 'contacts.delete','JTOOLBAR_EMPTY_TRASH');
 		}
