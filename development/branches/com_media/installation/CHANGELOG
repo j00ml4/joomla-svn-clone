@@ -27,6 +27,73 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+11-Apr-2010 Hannes Papenberg
+# Fixing admin template parameters - Thanks Jonnathan S. Lima
+# Moved stick() function from BannersModelBanners to BannersModelBanner
+# Removed obsolete functions from BannersModelBanners
+# Improved routing code of ContentHelperRoute
+
+11-Apr-2010 Jean-Marie Simonet
+# Fixed a typo in en-GB.ini in backend.
+#$ Refactoring ini/keys in libraries J/database
+$ Correcting —again— non standards keys
+# Fixing bug in controlleradmin.php
+$ Corrected —again- keys changed by #15980
+$ Corrected com_banners clients keys
+$ Corrected more ini strings
+
+10-Apr-2010 Hannes Papenberg
+^ Created JCategories to handle all presentation-logic for categories
+# Rewrite of com_content
+# Rewrite of com_contact
+# Rewrite of com_newsfeeds
+# Rewrite of com_weblinks
+^ Changing all core files to use semantic output
++ Added mod_articles_categories
+^ Changed com_content frontpage view to featured view
+^ Changed the routing of all core components
+# Fixed search plugins to use the new routing system
+# Fixed mod_menu
+# Fixed bug in JFormField
+# Fixed categories FormField
+# Fixed componentlayout FormField
++ Added stripImages function to JFilterOutput
+^ Changed JHTMLString::truncate to close all open HTML tags of a truncated string
++ Introduced JControllerAdmin
++ Introdcued JModelAdmin
+# Fixed ordering, delete, publish, checkin, checkout in com_banners, com_contact, com_content, com_languages, com_newsfeeds, com_messages, com_modules, com_plugins, com_weblinks
+# Partially fixed ordering, delete, publish, checkin, checkout in com_categories, com_menus
+^+# Implemented a new caching and implemented it in all frontendcomponents and modules. Thank you Klas Berlic, this was great work. :-)
+# Fixed a typo in en-GB.ini in backend.
++ Added rebuild function to com_menus
+# Fixed JControllerAdmin and JModelAdmin delete() and move()
+# Fixed move() in JTableNested
+
+09-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries J/application/cache and J/application/client
+
+09-Apr-2010 Hannes Papenberg
+# Fixed editing viewlevels
+# Fixed user-editing
+# Fixed user massmail
+# Fixed styling in image manager
+# Fixed adding readmore only when necessary
+# Fixed pagebreak
+# Fixed user edit screen to use the correct fieldtype
+
+08-Apr-2010 Mark Dexter
+# Revert rev 15911 in file installation/controller.php (prevents sample data install)
+# Fix bug in user profile layout, custom layout (Elin Waring)
+^ Add new positions to Milky Way Template (Elin Waring)
+^ Sample data changes (Elin Waring)
+
+08-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries J/application/component/
+$ Refactoring ini/keys in libraries J/application/module
+
+08-Apr-2010 Hannes Papenberg
+# Fixing static/non-static issue in JApplication::getRouter()
+
 07-Apr-2010 Jean-Marie Simonet
 #$ Fixing fancy uploader hardcoded strings and more, WIP (thanks Dennis)
 
