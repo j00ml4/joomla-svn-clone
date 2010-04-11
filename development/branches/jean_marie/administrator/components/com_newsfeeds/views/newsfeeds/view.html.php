@@ -66,9 +66,6 @@ class NewsfeedsViewNewsfeeds extends JView
 			JToolBarHelper::custom('newsfeeds.publish', 'publish.png', 'publish_f2.png', 'JToolbar_Publish', true);
 			JToolBarHelper::custom('newsfeeds.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JToolbar_Unpublish', true);
 			JToolBarHelper::divider();
-			if ($state->get('filter.published') != -1) {
-				JToolBarHelper::archiveList('newsfeeds.archive','JTOOLBAR_ARCHIVE');
-			}
 		}
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'newsfeeds.delete','JTOOLBAR_EMPTY_TRASH');

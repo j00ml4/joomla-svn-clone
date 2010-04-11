@@ -68,9 +68,6 @@ class RedirectViewLinks extends JView
 			JToolBarHelper::custom('links.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
 			JToolBarHelper::custom('links.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
 			JToolBarHelper::divider();
-			if ($state->get('filter.published') != -1) {
-				JToolBarHelper::archiveList('links.archive','JTOOLBAR_ARCHIVE');
-			}
 		}
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'links.delete','JTOOLBAR_EMPTY_TRASH');

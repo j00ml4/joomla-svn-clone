@@ -110,7 +110,7 @@ class BannersTableBanner extends JTable
 
 		// Set ordering
 		if($this->state<0) {
-			// Set ordering to 0 if state is archived or trashed
+			// Set ordering to 0 if state is trashed
 			$this->ordering = 0;
 		}
 		elseif(empty($this->ordering)) {
@@ -257,7 +257,7 @@ class BannersTableBanner extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
+				$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}
@@ -322,7 +322,7 @@ class BannersTableBanner extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
+				$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

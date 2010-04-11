@@ -41,9 +41,7 @@ class CategoriesViewCategories extends JView
 		// Preprocess the list of items to find ordering divisions.
 		foreach ($items as $i => &$item)
 		{
-			// TODO: Complete the ordering stuff with nested sets
-			$item->order_up = true;
-			$item->order_dn = true;
+			$this->ordering[$item->parent_id][] = $item->id;
 		}
 
 		$this->assignRef('state',		$state);
@@ -80,11 +78,10 @@ class CategoriesViewCategories extends JView
 		JToolBarHelper::custom('category.edit', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
 		JToolBarHelper::custom('category.edit', 'edit.png', 'edit_f2.png', 'JTOOLBAR_EDIT', true);
 		JToolBarHelper::divider();
-		JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
-		JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-		if ($state->get('filter.published') != -1) {
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			JToolBarHelper::archiveList('categories.archive','JTOOLBAR_ARCHIVE');
 		}
 		if ($state->get('filter.published') == -2) {
 			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
@@ -93,7 +90,7 @@ class CategoriesViewCategories extends JView
 			JToolBarHelper::trash('categories.trash','JTOOLBAR_TRASH');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
+		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.categories','JTOOLBAR_HELP');
 

@@ -139,7 +139,7 @@ class JController extends JObject
 
 		// Get the environment configuration.
 		$basePath	= array_key_exists('base_path', $config) ? $config['base_path'] : JPATH_COMPONENT;
-		$protocol	= JRequest::getWord('protocol');
+		$format		= JRequest::getWord('format');
 		$command	= JRequest::getCmd('task', 'display');
 
 		// Check for a controller.task command.
@@ -148,7 +148,7 @@ class JController extends JObject
 			list($type, $task) = explode('.', $command);
 
 			// Define the controller filename and path.
-			$file	= self::_createFileName('controller', array('name' => $type, 'protocol' => $protocol));
+			$file	= self::_createFileName('controller', array('name' => $type, 'format' => $format));
 			$path	= $basePath.DS.'controllers'.DS.$file;
 
 			// Reset the task without the contoller context.
@@ -159,7 +159,7 @@ class JController extends JObject
 			$task	= $command;
 
 			// Define the controller filename and path.
-			$file	= self::_createFileName('controller', array('name' => 'controller', 'protocol' => $protocol));
+			$file	= self::_createFileName('controller', array('name' => 'controller'));
 			$path	= $basePath.DS.$file;
 		}
 
@@ -172,7 +172,7 @@ class JController extends JObject
 			if (file_exists($path)) {
 				require_once $path;
 			} else {
-				throw new JException(JText::sprintf('INVALID CONTROLLER', $type), 1056, E_ERROR, $type, true);
+				throw new JException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type), 1056, E_ERROR, $type, true);
 			}
 		}
 
@@ -180,7 +180,7 @@ class JController extends JObject
 		if (class_exists($class)) {
 			$instance = new $class($config);
 		} else {
-			throw new JException(JText::sprintf('INVALID CONTROLLER CLASS', $class), 1057, E_ERROR, $class, true);
+			throw new JException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER_CLASS', $class), 1057, E_ERROR, $class, true);
 		}
 
 		return $instance;
@@ -283,7 +283,7 @@ class JController extends JObject
 		} elseif (isset($this->_taskMap['__default'])) {
 			$doTask = $this->_taskMap['__default'];
 		} else {
-			return JError::raiseError(404, JText::_('Task ['.$task.'] not found'));
+			return JError::raiseError(404, JText::sprintf('JLIB_APPLICATION_ERROR_TASK_NOT_FOUND', $task));
 		}
 
 		// Record the actual task being fired
@@ -294,7 +294,7 @@ class JController extends JObject
 			$retval = $this->$doTask();
 			return $retval;
 		} else {
-			return JError::raiseError(403, JText::_('ACCESS_FORBIDDEN'));
+			return JError::raiseError(403, JText::_('JLIB_APPLICATION_ERROR_ACCESS_FORBIDDEN'));
 		}
 
 	}
@@ -331,10 +331,11 @@ class JController extends JObject
 	 * This function is provide as a default implementation, in most cases
 	 * you will need to override it in your own controllers.
 	 *
-	 * @param	string	$cachable	If true, the view output will be cached
+	 * @param	boolean	$cachable	If true, the view output will be cached
+	 * @param	array	$urlparams	An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
 	 * @since	1.5
 	 */
-	public function display($cachable = false)
+	public function display($cachable=false,$urlparams=false)
 	{
 		$document = &JFactory::getDocument();
 
@@ -353,11 +354,31 @@ class JController extends JObject
 		// Set the layout
 		$view->setLayout($viewLayout);
 
+		$view->assignRef('document', $document);
+
 		// Display the view
 		if ($cachable && $viewType != 'feed') {
-			global $option;
+			$option = JRequest::getCmd('option');
 			$cache = &JFactory::getCache($option, 'view');
+				
+			if (is_array($urlparams)) {
+				$app = & JFactory::getApplication();
+				
+				$registeredurlparams = $app->get('registeredurlparams');
+
+				if (empty($registeredurlparams)) {
+					$registeredurlparams = new stdClass();
+				}
+				
+				foreach ($urlparams AS $key => $value) {
+				// add your safe url parameters with variable type as value {@see JFilterInput::clean()}.
+				$registeredurlparams->$key = $value;
+				$app->set('registeredurlparams', $registeredurlparams);
+				}
+			}
+				
 			$cache->get($view, 'display');
+				
 		} else {
 			$view->display();
 		}
@@ -472,7 +493,7 @@ class JController extends JObject
 		if (empty($name)) {
 			$r = null;
 			if (!preg_match('/(.*)Controller/i', get_class($this), $r)) {
-				JError::raiseError(500, "JController::getName() : Cannot get or parse class name.");
+				JError::raiseError(500, "JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME");
 			}
 			$name = strtolower($r[1]);
 		}
@@ -510,9 +531,7 @@ class JController extends JObject
 				$views[$name] = & $view;
 			} else {
 				$result = JError::raiseError(
-					500, JText::_('View not found [name, type, prefix]:')
-						. ' ' . $name . ',' . $type . ',' . $prefix
-				);
+					500, JText::_('JLIB_APPLICATION_ERROR_VIEW_NOT_FOUND', $name, $type, $prefix));
 				return $result;
 			}
 		}
@@ -672,8 +691,7 @@ class JController extends JObject
 
 				if (!class_exists($viewClass)) {
 					$result = JError::raiseError(
-						500, JText::_('View class not found [class, file]:')
-						. ' ' . $viewClass . ', ' . $path);
+						500, JText::sprintf('JLIB_APPLICATION_ERROR_VIEW_CLASS_NOT_FOUND', $viewClass, $path));
 					return null;
 				}
 			} else {
@@ -685,13 +703,13 @@ class JController extends JObject
 	}
 
 	/**
-	* Sets an entire array of search paths for resources.
-	*
-	* @access	protected
-	* @param	string	The type of path to set, typically 'view' or 'model'.
-	* @param	string|array	The new set of search paths. If null or false,
-	* resets to the current directory only.
-	*/
+	 * Sets an entire array of search paths for resources.
+	 *
+	 * @access	protected
+	 * @param	string	The type of path to set, typically 'view' or 'model'.
+	 * @param	string|array	The new set of search paths. If null or false,
+	 * resets to the current directory only.
+	 */
 	function _setPath($type, $path)
 	{
 		// clear out the prior search dirs
@@ -702,13 +720,13 @@ class JController extends JObject
 	}
 
 	/**
-	* Adds to the search path for templates and resources.
-	*
-	* @access	protected
-	* @param	string The path type (e.g. 'model', 'view'.
-	* @param	string|array The directory or stream to search.
-	* @return	void
-	*/
+	 * Adds to the search path for templates and resources.
+	 *
+	 * @access	protected
+	 * @param	string The path type (e.g. 'model', 'view'.
+	 * @param	string|array The directory or stream to search.
+	 * @return	void
+	 */
 	function _addPath($type, $path)
 	{
 		// just force path to array
@@ -745,11 +763,17 @@ class JController extends JObject
 		switch ($type)
 		{
 			case 'controller':
-				if (!empty($parts['protocol'])) {
-					$parts['protocol'] = '.'.$parts['protocol'];
+				if (!empty($parts['format'])) {
+					if ($parts['format'] == 'html') {
+						$parts['format'] = '';
+					} else {
+						$parts['format'] = '.'.$parts['format'];
+					}
+				} else {
+					$parts['format'] = '';
 				}
 
-				$filename = strtolower($parts['name']).$parts['protocol'].'.php';
+				$filename = strtolower($parts['name']).$parts['format'].'.php';
 				break;
 
 			case 'view':
