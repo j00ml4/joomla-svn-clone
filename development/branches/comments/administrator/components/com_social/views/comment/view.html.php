@@ -35,9 +35,10 @@ class SocialViewComment extends JView
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->thread	= $this->get('Thread');
+		$this->form = $this->get('Form');
 
 		if ($this->getLayout() == 'edit') {
-			$this->form = $this->get('Form');
+			
 		} else {
 			$this->addressList	= $this->get('ListByIP');
 			$this->nameList		= $this->get('ListByName');

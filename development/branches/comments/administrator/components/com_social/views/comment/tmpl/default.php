@@ -20,29 +20,11 @@ $pane = JPane::getInstance('sliders');
 
 	<form name="adminForm" method="post" action="<?php echo JRoute::_('index.php?option=com_social'); ?>">
 		<fieldset>
-			<ul class="published_selector">
-				<?php if ($this->item->published == 0) : ?>
-				<li class="defer">
-					<input id="moderate_defer" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="0" <?php echo ($this->item->published == 0) ? 'checked="checked"' : null; ?> /><label for="moderate_defer"><?php echo JText::_('SOCIAL_DEFER'); ?></label>
-				</li>
-				<?php endif; ?>
-				<li class="publish">
-					<input id="moderate_publish" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="1"<?php echo ($this->item->published == 1) ? 'checked="checked"' : null; ?> /><label for="moderate_publish"><?php echo JText::_('JPUBLISHED'); ?></label>
-				</li>
-
-				<li class="spam">
-					<input id="moderate_spam" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="-1"<?php echo ($this->item->published == -1) ? 'checked="checked"' : null; ?> /><label for="moderate_spam"><?php echo JText::_('SOCIAL_SPAM'); ?></label>
-				</li>
-
-				<li class="delete">
-					<input id="moderate_delete" type="radio" name="moderate[<?php echo (int) $this->item->id; ?>]" value="-2" /><label for="moderate_delete"><?php echo JText::_('SOCIAL_DELETE'); ?></label>
-				</li>
-
-				<li class="moderate" style="float:right;">
-					<input type="button" onclick="submitbutton('comment.moderate')" value="<?php echo $this->escape(JText::_('SOCIAL_MODERATE')); ?>" />
-				</li>
-			</ul>
-			<input type="hidden" name="id" value="<?php echo (int) $this->item->id; ?>"
+			<?php echo $this->form->getLabel('published'); ?>
+			<?php echo $this->form->getInput('published'); ?>
+			
+			<input type="button" onclick="submitbutton('comment.moderate')" value="<?php echo $this->escape(JText::_('SOCIAL_MODERATE')); ?>" />
+			<input type="hidden" name="id" value="<?php echo (int) $this->item->id; ?>" />
 			<input type="hidden" name="return" value="<?php echo base64_encode('index.php?option=com_social&view=comment&id='.(int) $this->item->id);?>" />
 			<input type="hidden" name="task" />
 			<?php echo JHtml::_('form.token'); ?>
@@ -72,7 +54,7 @@ $pane = JPane::getInstance('sliders');
 			</dd>
 
 			<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-			<dd class="date"><?php echo JHTML::_('date',$this->item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
+			<dd class="date"><?php echo JHTML::_('date',$this->item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 			<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 			<dd class="subject"><?php echo ($this->item->subject) ? $this->item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -99,7 +81,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -127,7 +109,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -155,7 +137,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>

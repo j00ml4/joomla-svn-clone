@@ -67,18 +67,8 @@ class plgContentComments extends JPlugin
 			// Get enabled settings for trackbacks.
 			$enableTrackbacks = $cconfig->get('enable_trackbacks', 0);
 
-			// Get the category slug if available.
-			if ($article->catid) {
-				$db = & JFactory::getDBO();
-				$db->setQuery('SELECT `alias` FROM `#__categories` WHERE `id` = '.(int) $article->catid);
-				$catslug = $article->catid.':'.$db->loadResult();
-			}
-			else {
-				$catslug = $article->catid;
-			}
-
 			// Get the full article route.
-			$route = ContentHelperRoute::getArticleRoute($article->id.':'.$article->alias, $catslug, $article->sectionid);
+			$route = ContentHelperRoute::getArticleRoute($article->id.':'.$article->alias, $article->catid);
 
 			// Add the appropriate include paths for models.
 			jimport('joomla.application.component.model');
@@ -89,7 +79,7 @@ class plgContentComments extends JPlugin
 			$model->getState();
 			$model->setState('thread.context', 'content');
 			$model->setState('thread.context_id', (int)$article->id);
-			$model->setState('thread.url', 'index.php?option=com_content&view=article&id='.$article->id);
+			$model->setState('thread.url', 'index.php?option=com_content&view=article'.$article->catid.'&id='.$article->id);
 			$model->setState('thread.route', $route);
 			$model->setState('thread.title', $article->title);
 
@@ -105,7 +95,7 @@ class plgContentComments extends JPlugin
 			if ($enableTrackbacks)
 			{
 				// Get a JXTrackback object.
-				jx('jx.webservices.trackback');
+				jimport('joomla.webservices.trackback');
 				$trackback = JTrackback::getInstance();
 				$config = JFactory::getConfig();
 
@@ -133,7 +123,7 @@ class plgContentComments extends JPlugin
 			if ($cconfig->get('enable_pings', 0) && !in_array('Ping:Google', $pings))
 			{
 				// Get a JXPing object.
-				jx('jx.webservices.ping');
+				jimport('joomla.webservices.ping');
 				$config = JFactory::getConfig();
 				$ping = new JXPing();
 
@@ -180,8 +170,8 @@ class plgContentComments extends JPlugin
 			$application = JFactory::getApplication('site');
 
 			// Set the context information to the application object.
-			$application->set('jx.context', 'content');
-			$application->set('jx.context_id', $article->id);
+			$application->set('joomla.context', 'content');
+			$application->set('joomla.context_id', $article->id);
 		}
 	}
 
@@ -291,7 +281,6 @@ class plgContentComments extends JPlugin
 		// If the plugin is not set to show for the current view, display nothing.
 		$view = JRequest::getCmd('view');
 		$showFrontpage	= $this->params->get('show_on_frontpage', 1);
-		$showSection	= $this->params->get('show_on_sections', 1);
 		$showCategory	= $this->params->get('show_on_categories', 1);
 		if ((($view == 'frontpage') and !$showFrontpage) or (($view == 'section') and !$showSection) or (($view == 'category') and !$showCategory)) {
 			return false;
@@ -327,7 +316,7 @@ class plgContentComments extends JPlugin
 
 		// Get the article url and route.
 		$url	= 'index.php?option=com_content&view=article&id='.$article->id;
-		$route	= ContentHelperRoute::getArticleRoute($article->slug, $article->catslug, $article->sectionid);
+		$route	= ContentHelperRoute::getArticleRoute($article->slug, $article->catid);
 
 		// Initialize variables.
 		$result		= '';
@@ -346,7 +335,8 @@ class plgContentComments extends JPlugin
 					' WHERE `id` = '.(int)$article->catid
 				);
 				$catParams = $db->loadResult();
-				$this->_catParams[$article->catid] = new JParameter($catParams);
+				$this->_catParams[$article->catid] = new JRegistry();
+				$this->_catParams[$article->catid]->loadJSON($catParams);
 			}
 
 			// If the feed flare path is set for the article category, set it in the sharing module options.

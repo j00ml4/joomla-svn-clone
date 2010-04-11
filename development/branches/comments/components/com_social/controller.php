@@ -33,16 +33,6 @@ class SocialController extends JController
 	 */
 	public function display()
 	{
-		// Check for the JXtended Libraries.
-		if (!function_exists('jximport')) {
-			JError::raiseWarning(500, JText::_('JX_Libraries_Missing'));
-			return;
-		}
-		elseif (version_compare(JXVERSION,'1.1.0', '<')) {
-			JError::raiseWarning(500, JText::sprintf('JX_Libraries_Outdated', '1.1.0'));
-			return;
-		}
-
 		// Get the document object.
 		$document = &JFactory::getDocument();
 
@@ -86,8 +76,8 @@ class SocialController extends JController
 		$app = JFactory::getApplication();
 
 		// Build and set the built-in CAPTCHA test
-		jx('jx.captcha.captcha');
-		$captcha = JXCaptcha::getInstance('image', array('direct' => true));
+		jimport('joomla.captcha.captcha');
+		$captcha = JCaptcha::getInstance('image', array('direct' => true));
 
 		$id = JRequest::getCmd('x');
 		if (empty($id)) {

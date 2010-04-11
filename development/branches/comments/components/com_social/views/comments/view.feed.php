@@ -49,12 +49,13 @@ class SocialViewComments extends JView
 
 
 		// import library dependencies
-		jx('jx.html.bbcode');
+		//TODO: Do we really want to add bbcode here?
+		jimport('joomla.html.bbcode');
 
 		// instantiate bbcode parser object
 		$parser = &JBBCode::getInstance(array(
-			'smiley_path' => JPATH_ROOT.'/media/jxtended/img/smilies/default',
-			'smiley_url' => JURI::base().'media/jxtended/img/smilies/default'
+			'smiley_path' => JPATH_ROOT.'/media/social/images/smilies/default',
+			'smiley_url' => JURI::base().'media/social/images/smilies/default'
 		));
 
 		// Setup the display name for the comment.

@@ -10,9 +10,9 @@
 
 defined('_JEXEC') or die('Invalid Request.');
 
-jx('jx.application.component.controller');
+jimport('joomla.application.component.controller');
 
 // Execute the task.
-$controller	= JXController::getInstance('Comments');
+$controller	= JController::getInstance('Comments');
 $controller->execute(JRequest::getVar('task'));
 $controller->redirect();
