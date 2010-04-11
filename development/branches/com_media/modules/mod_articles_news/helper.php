@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: helper.php 14276 2010-01-18 14:20:28Z louis $
+ * @version		$Id: helper.php 15664 2010-03-28 18:29:08Z klascommit $
  * @package		Joomla.Site
  * @subpackage	mod_articles_latest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -74,7 +74,7 @@ abstract class modArticlesNewsHelper
 			if ($access || in_array($item->access, $authorised))
 			{
 				// We know that user has the privilege to view the article
-				$item->link = JRoute::_(ContentRoute::article($item->slug, $item->catslug));
+				$item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid));
 				$item->linkText = JText::_('MOD_ARTICLES_NEWS_READMORE');
 			}
 			else {
