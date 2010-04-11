@@ -119,7 +119,7 @@ FancyUpload2.File = new Class({
 	render: function() {
 		if (this.invalid) {
 			if (this.validationError) {
-				var msg = MooTools.lang.get('FancyUpload', 'validationErrors')[this.validationError] || this.validationError;
+				var msg = Joomla.JText._('JUPLOADER_VALIDATION_ERROR_'+this.validationError, this.validationError);
 				this.validationErrorMessage = msg.substitute({
 					name: this.name,
 					size: Swiff.Uploader.formatUnit(this.size, 'b'),

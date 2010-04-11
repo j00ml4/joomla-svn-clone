@@ -234,48 +234,15 @@ abstract class JHtmlBehavior
 			JText::script('JUPLOADER_CURRENT_FILE');
 			JText::script('JUPLOADER_CURRENT_PROGRESS');
 			JText::script('JUPLOADER_FILE_ERROR');
-
-			// load language
-			$lang =& JFactory::getLanguage();
-			$lang->load('com_media', JPATH_ADMINISTRATOR);
-			
-			$js = "
-				(function() {
-					var phrases = {
-						'uploadCompleted': '".JText::_('COM_MEDIA_UPLOADER_UPLOAD_COMPLETED', true)."',
-						'progressOverall': '".JText::_('COM_MEDIA_UPLOADER_OVERALL_PROGRESS_TOTAL', true)."',
-						'currentTitle': '".JText::_('COM_MEDIA_UPLOADER_FILE_PROGRESS', true)."',
-						'currentFile': '".JText::_('COM_MEDIA_UPLOADER_UPLOADING', true)."',
-						'currentProgress': '".JText::_('COM_MEDIA_UPLOADER_CURRENT_PROGRESS', true)."',
-						'fileName': '".JText::_('COM_MEDIA_UPLOADER_FILENAME', true)."',
-						'remove': '".JText::_('COM_MEDIA_UPLOADER_REMOVE', true)."',
-						'removeTitle': '".JText::_('COM_MEDIA_UPLOADER_REMOVE_TITLE', true)."',
-						'fileError': '".JText::_('COM_MEDIA_UPLOADER_FILE_ERROR', true)."',
-						'validationErrors': {
-							'duplicate': '".JText::_('COM_MEDIA_UPLOADER_ERROR_DUPLICATE', true)."',
-							'sizeLimitMin': '".JText::_('COM_MEDIA_UPLOADER_ERROR_SIZE_LIMIT_MIN', true)."',
-							'sizeLimitMax': '".JText::_('COM_MEDIA_UPLOADER_ERROR_SIZE_LIMIT_MAX', true)."',
-							'fileListMax': '".JText::_('COM_MEDIA_UPLOADER_ERROR_FILELIST_MAX', true)."',
-							'fileListSizeMax': '".JText::_('COM_MEDIA_UPLOADER_ERROR_FILELIST_SIZE_MAX', true)."'
-						},
-						'errors': {
-							'httpStatus': '".JText::_('COM_MEDIA_UPLOADER_ERROR_HTTP_STATUS', true)."',
-							'securityError': '".JText::_('COM_MEDIA_UPLOADER_ERROR_SECURITY', true)."',
-							'ioError': '".JText::_('COM_MEDIA_UPLOADER_ERROR_IO', true)."'
-						}
-					};
-					if (MooTools.lang) {
-						MooTools.lang.set('".$lang->getTag()."', 'FancyUpload', phrases);
-						MooTools.lang.setLanguage('".$lang->getTag()."');
-					} else {
-						MooTools.lang = {
-							get: function(from, key) {
-								return phrases[key];
-							}
-						};
-					}
-				})();";
-			$document->addScriptDeclaration($js);
+			JText::script('JUPLOADER_FILE_SUCCESSFULLY_UPLOADED');
+			JText::script('JUPLOADER_VALIDATION_ERROR_DUPLICATE');
+			JText::script('JUPLOADER_VALIDATION_ERROR_SIZELIMITMIN');
+			JText::script('JUPLOADER_VALIDATION_ERROR_SIZELIMITMAX');
+			JText::script('JUPLOADER_VALIDATION_ERROR_FILELISTMAX');
+			JText::script('JUPLOADER_VALIDATION_ERROR_FILELISTSIZEMAX');
+			JText::script('JUPLOADER_ERROR_HTTPSTATUS');
+			JText::script('JUPLOADER_ERROR_SECURITYERROR');
+			JText::script('JUPLOADER_ERROR_IOERRIR');
 		}
 
 
@@ -291,7 +258,8 @@ abstract class JHtmlBehavior
 				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JUPLOADER_FILE_SUCCESSFULLY_UPLOADED\') + \'</strong>\');
 			} else {
 				file.element.addClass(\'file-failed\');
-				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JUPLOADER_ERROR_OCCURRED\', json.get(\'error\')) + \'</strong>\');
+				file.info.set(\'html\', \'<strong>\' + 
+					Joomla.JText._(\'JUPLOADER_ERROR_OCCURRED\', \'An Error Occurred\').substitute({ error: json.get(\'error\') }) + \'</strong>\');
 			}
 		}';
 
