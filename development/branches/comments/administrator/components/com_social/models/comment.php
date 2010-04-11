@@ -197,7 +197,7 @@ class SocialModelComment extends JModelForm
 				' FROM `#__social_comments`' .
 				' WHERE `address` = '.$db->Quote($item->address) .
 				' AND `id` != '.(int)$item->id .
-				' ORDER BY `created_time` DESC',
+				' ORDER BY `created_date` DESC',
 				0, 5
 			);
 			$this->_listByIP = $db->loadObjectList();
@@ -227,7 +227,7 @@ class SocialModelComment extends JModelForm
 				' FROM `#__social_comments`' .
 				' WHERE `name` = '.$db->Quote($item->name) .
 				' AND `id` != '.(int)$item->id .
-				' ORDER BY `created_time` DESC',
+				' ORDER BY `created_date` DESC',
 				0, 5
 			);
 			$this->_listByName = $db->loadObjectList();
@@ -256,9 +256,9 @@ class SocialModelComment extends JModelForm
 				'SELECT a.*' .
 				' FROM `#__social_comments` AS a' .
 				' WHERE a.`thread_id` = '.(int)$item->thread_id .
-				' AND a.`created_time` < '.$db->Quote($item->created_time) .
+				' AND a.`created_date` < '.$db->Quote($item->created_date) .
 				' AND a.`id` != '.(int)$item->id .
-				' ORDER BY a.`created_time` DESC',
+				' ORDER BY a.`created_date` DESC',
 				0, 5
 			);
 			$this->_listByContext = $db->loadObjectList();
