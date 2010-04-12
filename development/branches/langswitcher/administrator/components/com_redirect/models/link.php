@@ -124,14 +124,13 @@ class RedirectModelLink extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('link', 'com_redirect.link', array('array' => 'jform', 'event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		try {
+			$form = parent::getForm('com_redirect.link', 'link', array('control' => 'jform'));
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -167,7 +166,7 @@ class RedirectModelLink extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
+			$this->setError($table->getError());
 			return false;
 		}
 
@@ -304,13 +303,13 @@ class RedirectModelLink extends JModelForm
 		JArrayHelper::toInteger($pks);
 
 		// Populate default comment if necessary.
-		$comment = (!empty($comment)) ? $comment : JText::sprintf('COM_REDIR_REDIRECTED_ON', JHTML::_('date',time()));
+		$comment = (!empty($comment)) ? $comment : JText::sprintf('COM_REDIRECT_REDIRECTED_ON', JHTML::_('date',time()));
 
 		// Access checks.
 		if (!$user->authorise('core.edit', 'com_redirect'))
 		{
 			$pks = array();
-			$this->setError(JText::_('JERROR_CORE_EDIT_NOT_PERMITTED'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			return false;
 		}
 

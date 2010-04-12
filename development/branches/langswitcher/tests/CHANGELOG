@@ -27,6 +27,28 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Apr-2010 Mark Dexter
+^ Change control_panel0004 test to test category reorder after category move
+
+08-Apr-2010 Mark Dexter
+^ Change doInstall.php to detect failure to install sample data
+
+05-Apr-2010 Mark Dexter
++ Add phpunit.php files to system and unit folders to enable test debugging
+
+04-Apr-2010 Mark Dexter
+^ Finish JString unit tests
+^ Fix up code coverage for JString unit tests
+
+31-Mar-2010 Mark Dexter
+# Minor fixes to control panel tests for changed wording on menus
+
+27-Mar-2010 Mark Dexter
+# Fix bug in doInstall.php 
+
+26-Mar-2010 Mark Dexter
+# Change menu0001Test.php to reflect new id in Module Edit
+
 16-Mar-2010 Mark Dexter
 # Adjusted tests for changes in core
 + Added new method to count verification errors
@@ -60,6 +82,10 @@ $ -> Language fix or change
 
 10-Feb-2010 Hannes Papenberg
 # Fixed sampledata in JFilterInputTests
+
+08-Feb-2010 Andrew Eddie
+ ! Completed tests for JRegistry.
+ + Added to tests for JParameter.
 
 08-Feb-2010 Hannes Papenberg
 # Fixed JSimpleXML tests

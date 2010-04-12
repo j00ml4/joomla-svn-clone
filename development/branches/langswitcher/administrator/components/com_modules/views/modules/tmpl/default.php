@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
-
+$client = $this->state->get('filter.client_id') ? 'administrator' : 'site';
 $user = JFactory::getUser();
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_modules'); ?>" method="post" name="adminForm" id="adminForm">
@@ -60,32 +60,32 @@ $user = JFactory::getUser();
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_TITLE', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_TITLE', 'title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="20%">
-					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_POSITION', 'a.position', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_POSITION', 'position', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				</th>
+				<th width="10%">
+					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_PAGES', 'pages', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				</th>
+				<th width="10%">
+					<?php echo JHtml::_('grid.sort', 'COM_MODULES_HEADING_MODULE', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_PAGES', 'a.pages', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
-				</th>
-				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'COM_MODULES_HEADING_MODULE', 'a.module', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
-				</th>
-				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'COM_MODULES_HEADING_PUBLISHED', 'a.enabled', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%" nowrap="nowrap">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order', $this->items, 'filesave.png', 'modules.saveorder'); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'a.access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -98,7 +98,7 @@ $user = JFactory::getUser();
 		</tfoot>
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
-			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
+			$ordering	= ($this->state->get('list.ordering') == 'ordering');
 			$canCreate	= $user->authorise('core.create',		'com_modules');
 			$canEdit	= $user->authorise('core.edit',			'com_modules');
 			$canChange	= $user->authorise('core.edit.state',	'com_modules');
@@ -129,23 +129,25 @@ $user = JFactory::getUser();
 					<?php
 						if (is_null($item->pages)) {
 							echo JText::_('COM_MODULES_ASSIGNED_NONE');
-						} else if ($item->pages != 0) {
-							echo JText::_('COM_MODULES_ASSIGNED_VARIES');
+						} else if ($item->pages < 0) {
+							echo JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
+						} else if ($item->pages > 0) {
+							echo JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
 						} else {
 							echo JText::_('COM_MODULES_ASSIGNED_ALL');
 						}
 					?>
 				</td>
 				<td class="left">
-					<?php echo $item->module; ?>
+					<?php echo $item->name;?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'modules.', $canChange);?>
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo $this->pagination->orderUpIcon($i, true, 'modules.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'modules.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->position == $item->position), 'modules.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->position == $item->position), 'modules.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 					<?php else : ?>
