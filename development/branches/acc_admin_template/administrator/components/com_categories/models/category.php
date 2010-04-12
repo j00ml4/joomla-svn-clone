@@ -262,8 +262,10 @@ class CategoriesModelCategory extends JModelForm
 			$cName	= ucfirst($eName).ucfirst($section).'HelperCategory';
 
 			if (class_exists($cName) && is_callable(array($cName, 'onPrepareForm'))) {
-				$lang->load($component, JPATH_BASE, null, false, false);
-				$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
+					$lang->load($component, JPATH_BASE, null, false, false)
+				||	$lang->load($component, JPATH_BASE . '/components/' . $component, null, false, false)
+				||	$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false)
+				||	$lang->load($component, JPATH_BASE . '/components/' . $component, $lang->getDefault(), false, false);
 				call_user_func_array(array($cName, 'onPrepareForm'), array(&$form));
 
 				// Check for an error.
@@ -310,7 +312,7 @@ class CategoriesModelCategory extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
+			$this->setError($table->getError());
 			return false;
 		}
 

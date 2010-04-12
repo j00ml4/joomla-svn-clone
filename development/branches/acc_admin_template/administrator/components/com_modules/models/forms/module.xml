@@ -23,7 +23,7 @@
 			size="35"
 		/>
 
-		<field name="module" type="text"
+		<field name="module" type="hidden"
 			description="COM_MODULES_FIELD_MODULE_DESC"
 			label="COM_MODULES_FIELD_MODULE_LABEL"
 			readonly="readonly"
@@ -43,11 +43,11 @@
 		<field name="published" type="list"
 			default="1"
 			description="COM_MODULES_FIELD_PUBLISHED_DESC"
-			label="COM_MODULES_FIELD_PUBLISHED_LABEL"
+			label="JPUBLISHED"
 			size="1"
 		>
-			<option value="1">COM_MODULES_FIELD_VALUE_PUBLISHED</option>
-			<option value="0">COM_MODULES_FIELD_VALUE_UNPUBLISHED</option>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
 		</field>
 
 		<field name="publish_up" type="calendar"
@@ -73,8 +73,8 @@
 			readonly="true"
 			size="1"
 		>
-			<option value="0">COM_MODULES_OPTION_SITE</option>
-			<option value="1">COM_MODULES_OPTION_ADMINISTRATOR</option>
+			<option value="0">JSITE</option>
+			<option value="1">JADMINISTRATOR</option>
 		</field>
 
 		<field name="position" type="moduleposition"
