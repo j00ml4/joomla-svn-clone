@@ -10,13 +10,23 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
+
+
+<div class="items-more">
+
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
-<ol>
-<?php foreach ($this->link_items as &$item) : ?>
+<ol class="jlinks">
+<?php
+	foreach ($this->link_items as &$item) :
+
+
+
+?>
 	<li>
-		<a href="<?php echo JRoute::_(ContentRoute::article($item->slug, $item->catslug)); ?>">
+		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid)); ?>">
 			<?php echo $item->title; ?></a>
 	</li>
 <?php endforeach; ?>
 </ol>
+</div>

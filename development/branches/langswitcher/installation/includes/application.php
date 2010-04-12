@@ -150,8 +150,8 @@ class JInstallation extends JApplication
 
 		// Set the language in the class
 		$conf = &JFactory::getConfig();
-		$conf->setValue('config.language', $options['language']);
-		$conf->setValue('config.debug_lang', $forced['debug']);
+		$conf->set('language', $options['language']);
+		$conf->set('debug_lang', $forced['debug']);
 	}
 
 	/**
@@ -187,7 +187,7 @@ class JInstallation extends JApplication
 		{
 			$template = new stdClass();
 			$template->template = 'template';
-			$template->params = new JParameter();
+			$template->params = new JRegistry;
 			return $template;
 		}
 		return 'template';

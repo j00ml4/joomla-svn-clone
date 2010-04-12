@@ -41,9 +41,7 @@ class CategoriesViewCategories extends JView
 		// Preprocess the list of items to find ordering divisions.
 		foreach ($items as $i => &$item)
 		{
-			// TODO: Complete the ordering stuff with nested sets
-			$item->order_up = true;
-			$item->order_dn = true;
+			$this->ordering[$item->parent_id][] = $item->id;
 		}
 
 		$this->assignRef('state',		$state);
@@ -65,10 +63,10 @@ class CategoriesViewCategories extends JView
 
 		// Need to load the menu language file as mod_menu hasn't been loaded yet.
 		$lang = &JFactory::getLanguage();
-			$lang->load($component.'.menu', JPATH_BASE, null, false, false)
-		||	$lang->load($component.'.menu', JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
-		||	$lang->load($component.'.menu', JPATH_BASE, $lang->getDefault(), false, false)
-		||	$lang->load($component.'.menu', JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
+			$lang->load($component.'.sys', JPATH_BASE, null, false, false)
+		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
+		||	$lang->load($component.'.sys', JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
 
 		JToolBarHelper::title(
 			JText::sprintf(

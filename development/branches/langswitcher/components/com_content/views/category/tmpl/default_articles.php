@@ -14,15 +14,14 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::core();
 
-$n = count($this->articles);
+$n = count($this->items);
 
 ?>
 
-<?php if (empty($this->articles)) : ?>
+<?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('JContent_No_Articles'); ?></p>
 <?php else : ?>
-	<form action="<?php echo $this->action; ?>" method="post" name="adminForm">
-
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	<fieldset class="filters">
 	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
@@ -32,12 +31,13 @@ $n = count($this->articles);
 		</div>
 	<?php endif; ?>
 
+
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('Display_Num'); ?>&nbsp;
+			<?php echo JText::_('COM_CONTENT_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
-	<?php endif; ?>
+	<?php endif; ?>	
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	</fieldset>
 	<?php endif; ?>
@@ -57,7 +57,7 @@ $n = count($this->articles);
 		<?php endif; ?>
 		<?php if ($this->params->get('list_author')) : ?>
 			<th class="list-author" id="tableOrdering3">
-				<?php echo JHTML::_('grid.sort', 'Content_Author', 'author_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				<?php echo JHTML::_('grid.sort', 'JAUTHOR', 'author_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 			</th>
 		<?php endif; ?>
 		<?php if ($this->params->get('list_hits')) : ?>
@@ -68,11 +68,11 @@ $n = count($this->articles);
 	</tr></thead>
 	<?php endif; ?>
 	<tbody>
-		<?php foreach ($this->articles as $i => &$article) : ?>
+		<?php foreach ($this->items as $i => &$article) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
 				<td class="list-title">
-					<a href="<?php echo JRoute::_(ContentRoute::article($article->slug, $article->catslug)); ?>">
+					<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
 					<?php echo $this->escape($article->title); ?></a>
 				</td>
 				<?php if ($this->params->get('show_date') != 'hide') : ?>
@@ -98,8 +98,8 @@ $n = count($this->articles);
 						$menu		= JSite::getMenu();
 						$active		= $menu->getActive();
 						$itemId		= $active->id;
-						$link = JRoute::_('index.php?option=com_users&view=login&&Itemid='.$itemId);
-						$returnURL = JRoute::_(ContentRoute::article($article->slug));
+						$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
+						$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
 						$fullURL = new JURI($link);
 						$fullURL->setVar('return', base64_encode($returnURL));
 					?>
@@ -112,16 +112,18 @@ $n = count($this->articles);
 	</tbody>
 	</table>
 
-	<?php if ($this->params->get('show_pagination')) : ?>
+<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">
-	<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-						<p class="counter">
-								<?php echo $this->pagination->getPagesCounter(); ?>
-						</p>
-	<?php endif; ?>
-			<?php echo $this->pagination->getPagesLinks(); ?>
-		</div>
-	<?php endif; ?>
+
+
+		<?php if ($this->params->def('show_pagination_results', 1)) : ?>
+         	<p class="counter">
+                <?php echo $this->pagination->getPagesCounter(); ?>
+        	</p>
+        <?php  endif; ?>
+				<?php echo $this->pagination->getPagesLinks(); ?>
+	</div>
+<?php endif; ?>
 
 	<!-- @TODO add hidden inputs -->
 	<input type="hidden" name="filter_order" value="" />

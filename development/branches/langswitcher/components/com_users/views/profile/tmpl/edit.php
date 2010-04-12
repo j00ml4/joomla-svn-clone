@@ -13,6 +13,12 @@ JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
+<div class="profile-edit<?php echo $this->params->get('pageclass_sfx')?>">
+<?php if ($this->params->get('show_page_heading')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
 <form id="member-profile" action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="form-validate">
 	<?php
@@ -22,16 +28,16 @@ JHtml::_('behavior.formvalidation');
 	<fieldset>
 		<?php
 		// If the fieldset has a label set, display it as the legend.
-		if (isset($fieldset['label'])):
+		if (isset($fieldset->label)):
 		?>
-		<legend><?php echo JText::_($fieldset['label']); ?></legend>
+		<legend><?php echo JText::_($fieldset->label); ?></legend>
 
 		<dl>
 		<?php
 		endif;
 
 		// Iterate through the fields in the set and display them.
-		foreach($this->form->getFields($group) as $field):
+		foreach ($this->form->getFieldset($group) as $field):
 			// If the field is hidden, just display the input.
 			if ($field->hidden):
 				echo $field->input;
@@ -62,3 +68,4 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="profile.save" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
+</div>
