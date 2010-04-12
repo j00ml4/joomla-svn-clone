@@ -67,7 +67,7 @@ this.Tips = new Class({
 	toElement: function(){
 		if (this.tip) return this.tip;
 		
-		this.container = new Element('div', {'class': 'tip'});
+		this.container = new Element('div', {'class': 'tool-tip'});
 		return this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
@@ -127,7 +127,7 @@ this.Tips = new Class({
 		
 		['title', 'text'].each(function(value){
 			var content = element.retrieve('tip:' + value);
-			if (content) this.fill(new Element('div', {'class': 'tip-' + value}).inject(this.container), content);
+			if (content) this.fill(new Element('div', {'class': 'tool-' + value}).inject(this.container), content);
 		}, this);
 		
 		$clear(this.timer);
