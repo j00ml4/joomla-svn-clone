@@ -57,7 +57,7 @@ class JHtmlComments
 		$date = JFactory::getDate($thread->created_date);
 
 		// Get the trackback information for the item.
-		jx('jx.webservices.trackback');
+		jimport('joomla.webservices.trackback');
 		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option=com_comments&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
 
 		return $widget;
@@ -85,16 +85,16 @@ class JHtmlComments
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-		$config[] = 'layout=simple';
+		$config['url'] = $url;
+		$config['route'] = $route;
+		$config['title'] = $title;
+		$config['context'] = $context;
+		$config['context_id'] = $id;
+		$config['layout'] = 'simple';
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_comments_comment');
-		$module->params	= implode("\n", $config);
+		$module->params	= json_encode($config);
 
 		// render the module
 		$widget	= $renderer->render($module, $options);
@@ -124,15 +124,15 @@ class JHtmlComments
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
+		$config['url'] = $url;
+		$config['route'] = $route;
+		$config['title'] = $title;
+		$config['context'] = $context;
+		$config['context_id'] = $id;
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_comments_comment');
-		$module->params	= implode("\n", $config);
+		$module->params	= json_encode($config);
 
 		// render the module
 		$widget	= $renderer->render($module, $options);
@@ -180,16 +180,16 @@ class JHtmlComments
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-		$config[] = 'layout=form';
+		$config['url'] = $url;
+		$config['route'] = $route;
+		$config['title'] = $title;
+		$config['context'] = $context;
+		$config['context_id'] = $id;
+		$config['layout'] = 'form';
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_comments_comment');
-		$module->params	= implode("\n", $config);
+		$module->params	= json_encode($config);
 
 		// render the module
 		$widget	= $renderer->render($module, $options);
@@ -217,16 +217,16 @@ class JHtmlComments
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
+		$config['route'] = $route;
+		$config['title'] = $title;
 		if (!empty($options['feedflarepath'])) {
-			$config[] = 'layout=feedflare';
-			$config[] = 'feedflarepath='.$options['feedflarepath'];
+			$config['layout'] = 'feedflare';
+			$config['feedflarepath'] = $options['feedflarepath'];
 		}
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_comments_share');
-		$module->params	= implode("\n", $config);
+		$module->params	= json_encode($config);
 
 		// render the module
 		$widget	= $renderer->render($module, $options);
@@ -255,16 +255,16 @@ class JHtmlComments
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-		$config[] = 'category_id='.$categoryId;
+		$config['url'] = $url;
+		$config['route'] = $route;
+		$config['title'] = $title;
+		$config['context'] = $context;
+		$config['context_id'] = $id;
+		$config['category_id'] = $categoryId;
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_comments_rating');
-		$module->params	= implode("\n", $config);
+		$module->params	= json_encode($config);
 
 		// render the module
 		$widget	= $renderer->render($module, $options);

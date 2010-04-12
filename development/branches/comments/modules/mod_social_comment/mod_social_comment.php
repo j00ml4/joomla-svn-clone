@@ -18,12 +18,6 @@ if ($params->get('enable_comments') == 0) {
 	return false;
 }
 
-// if the JXtended Libraries are not present, exit gracefully.
-if (!defined('JXVERSION')) {
-	JError::raiseNotice(500, JText::_('JX_Libraries_Missing'));
-	return false;
-}
-
 // get the user object
 $user = &JFactory::getUser();
 
