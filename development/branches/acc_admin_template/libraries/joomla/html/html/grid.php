@@ -65,7 +65,7 @@ abstract class JHtmlGrid
 		$index		= intval($direction == 'desc');
 		$direction	= ($direction == 'desc') ? 'asc' : 'desc';
 
-		$html = '<a href="javascript:tableOrdering(\''.$order.'\',\''.$direction.'\',\''.$task.'\');" title="'.JText::_('JCOMMON_CLICK_TO_SORT_THIS_COLUMN').'">';
+		$html = '<a href="javascript:tableOrdering(\''.$order.'\',\''.$direction.'\',\''.$task.'\');" title="'.JText::_('JGLOBAL_CLICK_TO_SORT_THIS_COLUMN').'">';
 		$html .= JText::_($title);
 		if ($order == $selected) {
 			$html .= JHTML::_('image','system/'.$images[$index], '', NULL, true);
@@ -162,7 +162,7 @@ abstract class JHtmlGrid
 		}
 		$img	= $value ? $img1 : $img0;
 		$task	= $value ? 'unpublish' : 'publish';
-		$alt	= $value ? JText::_('Published') : JText::_('Unpublished');
+		$alt	= $value ? JText::_('JPUBLISHED') : JText::_('JUNPUBLISHED');
 		$action = $value ? JText::_('UNPUBLISH_ITEM') : JText::_('PUBLISH_ITEM');
 
 		$href = '
