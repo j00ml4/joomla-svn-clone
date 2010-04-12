@@ -33,7 +33,7 @@ JHTML::_('behavior.modal');
 
 <div class="width-60 fltlft">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_MENUS_REQUIRED');?></legend>
+		<legend><?php echo JText::_('COM_MENUS_ITEM_REQUIRED');?></legend>
 
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
