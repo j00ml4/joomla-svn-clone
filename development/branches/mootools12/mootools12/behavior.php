@@ -120,8 +120,8 @@ class JHTMLBehavior
 	function combobox() {
 		// pass false to script so that we don't load the compatibility layer if we don't need it
 		//JHTMLBehavior::framework();
-		//JHTML::script('combobox.js', 'plugins/system/mootools12/', false);
-		JHTML::script('combobox.js', 'media/system/js/');
+		JHTML::script('combobox.js', 'plugins/system/mootools12/', false);
+		//JHTML::script('combobox.js', 'media/system/js/');
 	}
 
 	function tooltip($selector='.hasTip', $params = array())
