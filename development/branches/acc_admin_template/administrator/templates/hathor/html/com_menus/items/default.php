@@ -81,7 +81,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_TITLE', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap state-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_PUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JText::_('JGRID_HEADING_ORDERING'); ?>
@@ -102,8 +102,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 		<tbody>
 		<?php
 		foreach ($this->items as $i => $item) :
-			$lang = &JFactory::getLanguage();
-			$lang->load($item->componentname, JPATH_ADMINISTRATOR);
+			// $lang = &JFactory::getLanguage();
+			// $lang->load($item->componentname, JPATH_ADMINISTRATOR);
 			$ordering = ($this->state->get('list.ordering') == 'a.lft');
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
@@ -137,14 +137,9 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<td class="center">
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
-				<td class="center">
-						<?php if ($item->component_id=='0'){
-							echo $this->escape($item->type);
-							}
-							else {
-								echo $this->escape(JText::_($item->componentname).'» ');
-							}
-						;?>
+				<td class="center nowrap">
+					<span title="<?php echo isset($item->item_type_desc) ? htmlspecialchars($this->escape($item->item_type_desc), ENT_COMPAT, 'UTF-8') : ''; ?>">
+						<?php echo $this->escape($item->item_type); ?></span>
 				</td>
 				<td class="center">
 					<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">

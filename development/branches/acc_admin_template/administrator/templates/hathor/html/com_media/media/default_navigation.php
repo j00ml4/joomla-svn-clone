@@ -14,8 +14,8 @@ defined('_JEXEC') or die;
 	<div class="submenu-box">
 		<div class="submenu-pad">
 			<ul id="submenu" class="media">
-				<li><a href="#" id="thumbs" onclick="MediaManager.setViewType('thumbs')"><?php echo JText::_('Thumbnail View'); ?></a></li>
-				<li><a href="#" id="details" onclick="MediaManager.setViewType('details')"><?php echo JText::_('Detail View'); ?></a></li>
+				<li><a href="#" id="thumbs" onclick="MediaManager.setViewType('thumbs')"><?php echo JText::_('COM_MEDIA_THUMBNAIL_VIEW'); ?></a></li>
+				<li><a href="#" id="details" onclick="MediaManager.setViewType('details')"><?php echo JText::_('COM_MEDIA_DETAIL_VIEW'); ?></a></li>
 			</ul>
 			<div class="clr"></div>
 		</div>

@@ -70,7 +70,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_TITLE', 'a.title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap state-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_PUBLISHED', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap featured-col">
 					<?php echo JHtml::_('grid.sort', 'CONTENT_HEADING_FEATURED', 'a.featured', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -89,7 +89,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CREATED_BY', 'a.created_by', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="title date-col">
-					<?php echo JHtml::_('grid.sort', 'CONTENT_HEADING_DATE', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JDATE', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="hits-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_HITS', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
