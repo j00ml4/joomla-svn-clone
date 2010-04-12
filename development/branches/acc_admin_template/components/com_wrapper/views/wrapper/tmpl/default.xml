@@ -6,9 +6,10 @@
 		</message>
 	</layout>
 
-	<!-- Add fields to the request variables for the layout. -->
-	<fields name="request">
-		<fieldset name="request" label="MENUS_LAYOUT_BASIC_OPTIONS_LABEL" description="">
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<!-- Basic options. -->
+		<fieldset name="request" label="COM_MENUS_BASIC_FIELDSET_LABEL" description="">
 
 			<field name="url" type="text"
 				description="COM_WRAPPER_FIELD_URL_DESC"
@@ -17,12 +18,8 @@
 				required="true"
 			/>
 		</fieldset>
-	</fields>
 
-	<!-- Add fields to the parameters object for the layout. -->
-	<fields name="params">
-
-		<!-- Basic options. -->
+		<!-- Scroll. -->
 		<fieldset name="basic" label="COM_WRAPPER_FIELD_LABEL_SCROLLBARSPARAMS" description="">
 
 			<field name="scrolling" type="radio"
@@ -51,7 +48,7 @@
 		</fieldset>
 
 		<!-- Advanced options. -->
-		<fieldset name="advanced" label="MENUS_LAYOUT_ADVANCED_OPTIONS_LABEL" description="">
+		<fieldset name="advanced" label="COM_MENUS_LAYOUT_ADVANCED_OPTIONS_LABEL" description="">
 
 			<field name="height_auto" type="radio"
 				default="0"

@@ -27,6 +27,125 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+09-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries J/application/cache and J/application/client
+
+09-Apr-2010 Hannes Papenberg
+# Fixed editing viewlevels
+# Fixed user-editing
+# Fixed user massmail
+# Fixed styling in image manager
+# Fixed adding readmore only when necessary
+# Fixed pagebreak
+# Fixed user edit screen to use the correct fieldtype
+
+08-Apr-2010 Mark Dexter
+# Revert rev 15911 in file installation/controller.php (prevents sample data install)
+# Fix bug in user profile layout, custom layout (Elin Waring)
+^ Add new positions to Milky Way Template (Elin Waring)
+^ Sample data changes (Elin Waring)
+
+08-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries J/application/component/
+$ Refactoring ini/keys in libraries J/application/module
+
+08-Apr-2010 Hannes Papenberg
+# Fixing static/non-static issue in JApplication::getRouter()
+
+07-Apr-2010 Jean-Marie Simonet
+#$ Fixing fancy uploader hardcoded strings and more, WIP (thanks Dennis)
+
+07-Apr-2010 Louis Landry
+^ Change the new protocol request var for various controller types to format ... for consistency.
+
+06-Apr-2010 Jean-Marie Simonet
+$ Adding missing value to key.
+#$ Fixing some com_categories strings + bug (thanks Dennis)
+# Bugs in com_redirect
+
+05-Apr-2010 Jean-Marie Simonet
+$^+ Consolidating some keys with same value to a unique key in main inis. WIP
+# Fixed [19972]
+
+05-Apr-2010 Andrew Eddie
+ # Fix bug in JCache constructor.
+
+04-Apr-2010 Jean-Marie Simonet
+$^+ Consolidating some keys with same value to a unique key in main inis. WIP
+#$ Missing string + bug [20098]. Thank you Klas.
+
+02-Apr-2010 Louis Landry
+^ [#19982] JTable Improvements thanks to Jonnathan S. Lima!
+
+02-Apr-2010 Jean-Marie Simonet
+$ Refactoring com_redirect ini/keys
+
+01-Apr-2010 Mark Dexter
+# Fix bug processing content plugin in single-article
+
+01-Apr-2010 Christophe Demko
+# Fix bug #19744 of the tracker
+# Fix bug #20072 of the tracker
+# Correctly loading the language file on plugin uninstalling
+
+01-Apr-2010 Jean-Marie Simonet
+^$ Creating JSITE and JADMINISTRATOR keys in main ini file. Globally consolidated all keys with same value to these new keys.
+- Removed xmlrpc library + some 
+
+31-Mar-2010 Mark Dexter
+^ Implement parameters in Archived Articles menu item
+# Minor language file fixes
+# Bug fixes in content layout files (Angie Radtke)
+^ Add CSS classes to pagination (Angie Radtke)
+# Misc. module layout fixes (Angie Radtke)
+
+31-Mar-2010 Jean-Marie Simonet
+$ Refactored com_installer ini/keys
+
+30-Mar-2010 Mark Dexter
+# Fix PHP undefined var notice in New Menu Item 
+
+30-Mar-2010 Sam Moffat
+ + Added wincache session handler for IIS, thanks to Ruslan from Microsoft
+
+30-Mar-2010 Jean-Marie Simonet
+$ Refactored com_media back-end ini/keys
+
+30-Mar-2010 Christophe Demko
+^ Merging the admintranslate branch back to the trunk
+
+29-Mar-2010 Jean-Marie Simonet
+$ Refactored com_search back-end front end ini/keys +some
+$ Added a string for com_module to customize "item"
+$ Mass changed key prefix JCOMMON to JGLOBAL.
+
+28-Mar-2010 Jean-Marie Simonet
+$ Correcting some language strings
+
+27-Mar-2010 Hannes Papenberg
+# Fixed com_mailto, com_search, com_users, com_weblinks in frontend and com_plugins in backend to properly use JController::getInstance() and not hard-include a controller
+# Fixed URL routing in categories view
+
+17-Mar-2010 Mark Dexter
+^ Sample data fixes (Elin Waring)
+^ User profile fixes (Elin Waring)
+^ Fix default style for loadposition (Elin Waring)
+
+27-Mar-2010 Christophe Demko and Jean-Marie Simonet
+#$^ Enabling parsing language files errors in debug lang mode only (new param in plugin) + corrected one string in main ini
+
+26-Mar-2010 Mark Dexter
+^ Update doc blocks from JQuery to JDatabaseQuery, thanks Jason Pettett. #19898
+# Fix confusing string (#19888)
+# Delete empty folder
+# Fix strings generating errors and a missing string for com_users
+# Delete unneccesary variable in mod_menu/helper.php. #19997 Thanks Jason Pettett.
+# Fix misc. bugs in modules (Elin Waring)
+# Fix acl in joomla.sql table (Elin Waring)
+^ Implement parameters in Single Article Menu Item
+^ Implement global category blog vs. list param in content
+^ Modify example user profile plugin (Elin Waring)
+
 25-Mar-2010 Jean-Marie Simonet
 $ Deleting unused ini files
 
@@ -106,7 +225,7 @@ $^ Customized ini/keys item(s) com_newfeeds, com_templates, com_weblinks
 10-Mar-2010 Jean-Marie Simonet
 $ Refactored com_banners inis/keys customizing item(s)
 $ Refactored mod_menu (site) ini/keys
-$ Mass change key USE_GLOBAL to JCOMMON_USE_GLOBAL
+$ Mass change key USE_GLOBAL to JGLOBAL_USE_GLOBAL
 
 10-Mar-2010 Christophe Demko
 # Correction of a bug in JLanguage for php > 5.3.1
