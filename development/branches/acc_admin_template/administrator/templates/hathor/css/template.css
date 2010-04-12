@@ -582,7 +582,7 @@ p.tab-description {
 /** 
  * Login Settings
  */
-#login-page form  {
+#login-page form .inputbox {
 	width: 120px;
 	margin-left: 5px;
 	margin-bottom: 15px;
