@@ -50,13 +50,13 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo JText::_('COM_LANGS_HEADING_DEFAULT'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('COM_LANGS_HEADING_VERSION'); ?>
+					<?php echo JText::_('JVERSION'); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JText::_('COM_LANGS_HEADING_DATE'); ?>
+					<?php echo JText::_('JDATE'); ?>
 				</th>
 				<th class="width-20">
-					<?php echo JText::_('COM_LANGS_HEADING_AUTHOR'); ?>
+					<?php echo JText::_('JAUTHOR'); ?>
 				</th>
 				<th class="width-25">
 					<?php echo JText::_('COM_LANGS_HEADING_AUTHOR_EMAIL'); ?>

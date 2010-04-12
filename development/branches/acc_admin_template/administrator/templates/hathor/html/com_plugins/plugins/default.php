@@ -64,26 +64,26 @@ $user = JFactory::getUser();
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_NAME_HEADING', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_NAME_HEADING', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Enabled', 'a.enabled', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JENABLED', 'enabled', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap ordering-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Ordering', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Ordering', 'ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order', $this->items, 'filesave.png', 'plugins.saveorder'); ?>
 				</th>
 				<th class="title access-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Access', 'a.access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Access', 'access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_FOLDER_HEADING', 'a.folder', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_FOLDER_HEADING', 'folder', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_ELEMENT_HEADING', 'a.element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_PLUGINS_ELEMENT_HEADING', 'element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap id-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'extension.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -93,9 +93,9 @@ $user = JFactory::getUser();
 			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
-			$lang = &JFactory::getLanguage();
-			$lang->load($item->name, JPATH_ADMINISTRATOR)
-			|| $lang->load ($item->name, JPATH_PLUGINS.DS.$item->folder.DS.$item->element);
+			// $lang = &JFactory::getLanguage();
+			// $lang->load($item->name, JPATH_ADMINISTRATOR)
+			// || $lang->load ($item->name, JPATH_PLUGINS.DS.$item->folder.DS.$item->element);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -107,9 +107,9 @@ $user = JFactory::getUser();
 					<?php endif; ?>
 					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_plugins&task=plugin.edit&id='.(int) $item->extension_id); ?>">
-							<?php echo $this->escape($item->name); ?></a>
+							<?php echo $item->name; ?></a>
 					<?php else : ?>
-							<?php echo $this->escape($item->name); ?>
+							<?php echo $item->name; ?>
 					<?php endif; ?>
 				</td>
 				<td class="center">

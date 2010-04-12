@@ -552,15 +552,14 @@ div.current fieldset.radio label {
 	margin: 3px 0 0 5px;
 }
 
-div.current input.text_area,
-div.current .inputbox,
-div.current textarea.text_area,
-div.current select.inputbox {
+div.current input,
+div.current textarea,
+div.current select {
 	clear:none;
 	float:left;
 	margin: 3px 0 0 2px;
 }
-div.current select.inputbox { margin-bottom: 15px;}
+div.current select { margin-bottom: 15px;}
 
 div.current table#acl-config th.acl-groups {
 	text-align: left;
@@ -583,12 +582,12 @@ p.tab-description {
 /** 
  * Login Settings
  */
-#login-page form .inputbox {
+#login-page form  {
 	width: 120px;
 	margin-left: 5px;
 	margin-bottom: 15px;
 }
-#login-page input.inputbox, #login-page select.inputbox {
+#login-page input, #login-page select {
 	float: right;
 	clear: none;
 }
