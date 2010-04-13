@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+<!-- $Id$ -->
 <form>
-	<fieldset name="default" label="Users_Reset_Complete_Label">
-
-		<field name="password1" type="password"
-			autocomplete="off"
-			class="validate-password"
-			description="Users_Reset_Password1_Desc"
-			field="password2"
-			filter="raw"
+	<fields label="Users_Reset_Complete_Label">
+		<field
+			name="password1"
+			type="password"
 			label="Users_Reset_Password1_Label"
+			description="Users_Reset_Password1_Desc"
 			message="Users_Reset_Password1_Message"
-			required="true"
+			class="inputbox validate-password"
 			size="30"
-			validate="equals"
-		/>
-		<field name="password2" type="password"
+			default=""
+			required="true"
 			autocomplete="off"
-			class="validate-password"
-			description="Users_Reset_Password2_Desc"
 			filter="raw"
-			label="Users_Reset_Password2_Label"
-			message="Users_Reset_Password2_Message"
-			required="true"
-			size="30"
+			validate="equals"
+			field="password2"
 		/>
-	</fieldset>
+		<field
+			name="password2"
+			type="password"
+			label="Users_Reset_Password2_Label"
+			description="Users_Reset_Password2_Desc"
+			message="Users_Reset_Password2_Message"
+			class="inputbox validate-password"
+			size="30"
+			default=""
+			required="true"
+			autocomplete="off"
+			filter="raw"
+		/>
+	</fields>
 </form>

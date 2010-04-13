@@ -2,7 +2,7 @@
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE.'/libraries/joomla/html/toolbar/button.php';
-require_once JPATH_BASE.'/libraries/joomla/html/toolbar/button/help.php';
+require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'html' . DS . 'toolbar' . DS . 'button' . DS . 'help.php';
 
 /**
  * Test class for JButtonHelp.
@@ -54,3 +54,4 @@ class JButtonHelpTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
+?>

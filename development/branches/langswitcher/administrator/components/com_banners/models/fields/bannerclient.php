@@ -5,11 +5,10 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('JPATH_BASE') or die;
+defined('_JEXEC') or die;
 
-jimport('joomla.html.html');
-jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+require_once JPATH_ROOT . '/libraries/joomla/form/formfield.php';
+require_once JPATH_ROOT . '/libraries/joomla/form/fields/list.php';
 
 /**
  * Bannerclient Field class for the Joomla Framework.
@@ -21,46 +20,32 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
 class JFormFieldBannerClient extends JFormFieldList
 {
 	/**
-	 * The form field type.
+	 * The field type.
 	 *
 	 * @var		string
-	 * @since	1.6
 	 */
 	protected $type = 'BannerClient';
 
-	/**
-	 * Method to get the field options.
-	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
-	 */
-	public function getOptions()
+	protected function _getOptions()
 	{
-		// Initialize variables.
-		$options = array();
+		$db = &JFactory::getDbo();
+		$options	= array();
 
-		$db		= JFactory::getDbo();
-		$query	= $db->getQuery(true);
-
-		$query->select('id As value, name As text');
-		$query->from('#__banner_clients AS a');
-		$query->order('a.name');
-
-		// Get the options.
+		// This might get a conflict with the dynamic translation - TODO: search for better solution
+		$query = 'SELECT id, name' .
+				' FROM #__banner_clients' .
+				' ORDER BY name';
 		$db->setQuery($query);
-
-		$options = $db->loadObjectList();
-
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
+		foreach ($db->loadObjectList() as $option) {
+			$options[] = JHtml::_('select.option', $option->id, $option->name);
 		}
-
-		// Merge any additional options in the XML definition.
-		//$options = array_merge(parent::getOptions(), $options);
 
 		array_unshift($options, JHtml::_('select.option', '0', JText::_('COM_BANNERS_NO_CLIENT')));
 
 		return $options;
+	}
+	public function getOptions()
+	{
+		return self::_getOptions();
 	}
 }

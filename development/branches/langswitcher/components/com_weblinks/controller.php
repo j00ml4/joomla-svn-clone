@@ -28,21 +28,29 @@ class WeblinksController extends JController
 	 * @since	1.5
 	 */
 	function display()
-	{	
-		$cachable = true;
+	{
 		// Get the document object.
 		$document = &JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'categories');
-		JRequest::setVar('view', $vName);
-				
-		$user = &JFactory::getUser();
-		if ($user->get('id') ||($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
-			$cachable = false;
+		$vFormat	= $document->getType();
+		$lName		= JRequest::getWord('layout', 'default');
+
+		// Get and render the view.
+		if ($view = &$this->getView($vName, $vFormat))
+		{
+			$model = &$this->getModel($vName);
+
+
+			// Push the model into the view (as default).
+			$view->setModel($model, true);
+			$view->setLayout($lName);
+
+			// Push document object into the view.
+			$view->assignRef('document', $document);
+
+			$view->display();
 		}
-		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD');
-		
-		parent::display($cachable,$safeurlparams);
 	}
 }

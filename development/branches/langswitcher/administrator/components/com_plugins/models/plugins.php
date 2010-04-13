@@ -52,7 +52,7 @@ class PluginsModelPlugins extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('folder', 'asc');
+		parent::_populateState('a.folder', 'asc');
 	}
 
 	/**
@@ -78,35 +78,9 @@ class PluginsModelPlugins extends JModelList
 	}
 
 	/**
-	 * Returns an object list
-	 *
-	 * @param	string The query
-	 * @param	int Offset
-	 * @param	int The number of records
-	 * @return	array
-	 */
-	protected function _getList($query, $limitstart=0, $limit=0)
-	{
-		$this->_db->setQuery($query);
-		$result = $this->_db->loadObjectList();
-		$lang = JFactory::getLanguage();
-		foreach($result as $i=>$item) {
-			$source = JPATH_PLUGINS . '/' . $item->folder . '/' . $item->element;
-			$extension = 'plg_' . $item->folder . '_' . $item->element;
-				$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, false)
-			||	$lang->load($extension . '.sys', $source, null, false, false)
-			||	$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-			||	$lang->load($extension . '.sys', $source, $lang->getDefault(), false, false);
-			$result[$i]->name = JText::_($item->name);
-		}
-		//JArrayHelper::sortObjects($result,$this->getState('list.ordering', 'ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);
-
-		return array_slice($result, $limitstart, $limit ? $limit : null);
-	}
-	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return	JDatabaseQuery
+	 * @return	JQuery
 	 */
 	protected function _getListQuery()
 	{
@@ -118,7 +92,7 @@ class PluginsModelPlugins extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.extension_id , a.name, a.element, a.folder, a.checked_out, a.checked_out_time,' .
+				'a.extension_id, a.name, a.element, a.folder, a.checked_out, a.checked_out_time,' .
 				' a.enabled, a.access, a.ordering'
 			)
 		);
@@ -163,14 +137,10 @@ class PluginsModelPlugins extends JModelList
 			}
 		}
 
-		if($this->getState('list.ordering', 'ordering') == 'ordering')
-		{
-			$query->order('a.folder, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).', ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		}
-		
+		// Add the list ordering clause.
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+
+		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
 }

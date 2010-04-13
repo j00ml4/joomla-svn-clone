@@ -25,51 +25,29 @@ class InstallerHelper
 	public static function addSubmenu($vName)
 	{
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_INSTALL'),
+			JText::_('Installer_Submenu_Install'),
 			'index.php?option=com_installer',
 			$vName == 'install'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_UPDATE'),
+			JText::_('Installer_Submenu_Update'),
 			'index.php?option=com_installer&view=update',
 			$vName == 'update'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_MANAGE'),
+			JText::_('Installer_Submenu_Manage'),
 			'index.php?option=com_installer&view=manage',
 			$vName == 'manage'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_DISCOVER'),
+			JText::_('Installer_Submenu_Discover'),
 			'index.php?option=com_installer&view=discover',
 			$vName == 'discover'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('COM_INSTALLER_SUBMENU_WARNINGS'),
+			JText::_('Installer_Submenu_Warnings'),
 			'index.php?option=com_installer&view=warnings',
 			$vName == 'warnings'
 		);
-	}
-	/**
-	 * Gets a list of the actions that can be performed.
-	 *
-	 * @return	JObject
-	 */
-	public static function getActions()
-	{
-		$user	= JFactory::getUser();
-		$result	= new JObject;
-
-		$assetName = 'com_installer';
-
-		$actions = array(
-			'core.admin', 'core.manage', 'core.create', 'core.edit.state', 'core.delete'
-		);
-
-		foreach ($actions as $action) {
-			$result->set($action,	$user->authorise($action, $assetName));
-		}
-
-		return $result;
 	}
 }

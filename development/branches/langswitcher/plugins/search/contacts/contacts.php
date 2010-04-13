@@ -47,12 +47,16 @@ class plgSearchContacts extends JPlugin
 		$groups	= implode(',', $user->authorisedLevels());
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
+			if (!array_intersect($areas, array_keys(plgSearchContactAreas()))) {
 				return array();
 			}
 		}
 
-		$limit = $this->params->def('search_limit', 50);
+		// load plugin params info
+		$plugin = &JPluginHelper::getPlugin('search', 'contacts');
+		$pluginParams = new JParameter($plugin->params);
+
+		$limit = $pluginParams->def('search_limit', 50);
 
 		$text = trim($text);
 		if ($text == '') {

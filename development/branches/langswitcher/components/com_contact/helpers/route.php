@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: route.php 15102 2010-02-27 14:50:19Z hackwar $
+ * @version		$Id$
  * @package		Joomla
- * @subpackage	Contact
+ * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -12,101 +12,67 @@ defined('_JEXEC') or die;
 
 // Component Helper
 jimport('joomla.application.component.helper');
-jimport('joomla.application.categories');
+jimport('joomla.application.categorytree');
 
 /**
  * Contact Component Route Helper
  *
  * @static
  * @package		Joomla
- * @subpackage	Contact
- * @since 1.5
+ * @subpackage	com_contact
+ * @since 1.6
  */
-abstract class ContactHelperRoute
-{ 
-	protected static $lookup;
-	/**
-	 * @param	int	The route of the newsfeed
-	 */
-	public static function getContactRoute($id, $catid)
-	{
-		$needles = array(
-			'contact'  => array((int) $id)
-		);
-		//Create the link
-		$link = 'index.php?option=com_contact&view=contact&id='. $id;
-		if ($catid > 1)
-		{
-			$categories = JCategories::getInstance('Contact');
-			$category = $categories->get($catid);
-			$needles['category'] = array_reverse($category->getPath());
-			$needles['categories'] = $needles['category'];
-			$link .= '&catid='.$catid;
-		}
 
-		if ($item = ContactHelperRoute::_findItem($needles)) {
-			$link .= '&Itemid='.$item;
-		};
+class ContactHelperRoute
+{
+	function getContactRoute($id, $catid) {
+		$needles = array(
+			'category' => (int) $catid,
+			'categories' => null
+		);
+
+		//Find the itemid
+		$itemid = ContactHelperRoute::_findItem($needles);
+		$itemid = $itemid ? '&Itemid='.$itemid : '';
+
+		//Create the link
+		$link = 'index.php?option=com_contact&view=contact&id='. $id . '&catid='.$catid . $itemid;
 
 		return $link;
 	}
 
-	public static function getCategoryRoute($catid)
+	function _findItem($needles)
 	{
-		$categories = JCategories::getInstance('Contact');
-		$category = $categories->get((int)$catid);
-		$catids = array_reverse($category->getPath());
-		$needles = array(
-			'category' => $catids,
-			'categories' => $catids
-		);
-		//Create the link
-		$link = 'index.php?option=com_contact&view=category&id='.(int)$catid;
+		static $items;
 
-		if ($item = ContactHelperRoute::_findItem($needles)) {
-			$link .= '&Itemid='.$item;
-		};
-
-		return $link;
-	}
-
-	protected static function _findItem($needles)
-	{
-		// Prepare the reverse lookup array.
-		if (self::$lookup === null)
+		if (!$items)
 		{
-			self::$lookup = array();
+			$component = &JComponentHelper::getComponent('com_contact');
+			$menu = &JSite::getMenu();
+			$items = $menu->getItems('component_id', $component->id);
+		}
 
-			$component	= &JComponentHelper::getComponent('com_contact');
-			$menus		= &JApplication::getMenu('site');
-			$items		= $menus->getItems('component_id', $component->id);
-			foreach ($items as $item)
+		if (!is_array($items)) {
+			return null;
+		}
+
+		$match = null;
+		foreach($needles as $needle => $id)
+		{
+			foreach($items as $item)
 			{
-				if (isset($item->query) && isset($item->query['view']))
-				{
-					$view = $item->query['view'];
-					if (!isset(self::$lookup[$view])) {
-						self::$lookup[$view] = array();
-					}
-					if (isset($item->query['id'])) {
-						self::$lookup[$view][$item->query['id']] = $item->id;
-					}
+				if ((@$item->query['view'] == $needle) && (@$item->query['id'] == $id)) {
+					$match = $item->id;
+					break;
 				}
 			}
-		}
-		foreach ($needles as $view => $ids)
-		{
-			if (isset(self::$lookup[$view]))
-			{
-				foreach($ids as $id)
-				{
-					if (isset(self::$lookup[$view][(int)$id])) {
-						return self::$lookup[$view][(int)$id];
-					}
-				}
+
+			if (isset($match)) {
+				break;
 			}
 		}
 
-		return null;
+		return $match;
 	}
 }
+?>

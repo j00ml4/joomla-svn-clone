@@ -7,11 +7,9 @@
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/Extensions/Database/TestCase.php';
 require_once 'PHPUnit/Extensions/Database/DataSet/XmlDataSet.php';
-
 /**
  * Test case class for Joomla Unit Testing
  *
@@ -28,7 +26,7 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	/**
 	 * @var factoryState
 	 */
-	protected $factoryState = array ();
+	protected $factoryState = array();
 
 	/**
 	 * @var errorState
@@ -47,51 +45,37 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 */
 	protected function saveErrorHandlers()
 	{
-		$this->savedErrorState = array ();
-		$this->savedErrorState[E_NOTICE] = JError :: getErrorHandling(E_NOTICE);
-		$this->savedErrorState[E_WARNING] = JError :: getErrorHandling(E_WARNING);
-		$this->savedErrorState[E_ERROR] = JError :: getErrorHandling(E_ERROR);
+		$this->savedErrorState = array();
+		$this->savedErrorState[E_NOTICE] = JError::getErrorHandling(E_NOTICE);
+		$this->savedErrorState[E_WARNING] = JError::getErrorHandling(E_WARNING);
+		$this->savedErrorState[E_ERROR] = JError::getErrorHandling(E_ERROR);
 	}
 
-	public static function setUpBeforeClass()
-	{
+	public static function setUpBeforeClass() {
 		jimport('joomla.database.database');
 		jimport('joomla.database.table');
 
-		// Load the config if available.
-		@ include_once JPATH_TESTS . '/config.php';
-		if (class_exists('JTestConfig')) {
-			$config = new JTestConfig;
-		}
+		if(!is_object(self::$dbo)) {
+			$options	= array ('driver' => 'mysql', 'host' => '127.0.0.1', 'user' => 'utuser', 'password' => 'ut1234', 'database' => 'joomla_ut', 'prefix' => 'jos_');
 
-		if (!is_object(self :: $dbo)) {
-			$options = array (
-				'driver' => isset ($config) ? $config->dbtype : 'mysql',
-				'host' => isset ($config) ? $config->host : '127.0.0.1',
-				'user' => isset ($config) ? $config->user : 'utuser',
-				'password' => isset ($config) ? $config->password : 'ut1234',
-				'database' => isset ($config) ? $config->db : 'joomla_ut',
-				'prefix' => isset ($config) ? $config->dbprefix : 'jos_'
-			);
+			self::$dbo = &JDatabase::getInstance($options);
 
-			self :: $dbo = & JDatabase :: getInstance($options);
-
-			if (JError :: isError(self :: $dbo)) {
+			if (JError::isError(self::$dbo)) {
 				//ignore errors
 			}
 
-			if (self :: $dbo->getErrorNum() > 0) {
+			if (self::$dbo->getErrorNum() > 0) {
 				//ignore errors
 			}
 		}
-		self :: $database = JFactory :: $database;
-		JFactory :: $database = self :: $dbo;
+		self::$database = JFactory::$database;
+		JFactory::$database = self::$dbo;
 	}
 
-	public static function tearDownAfterClass()
-	{
+	public static function tearDownAfterClass() {
 		//JFactory::$database = self::$database;
 	}
+
 
 	/**
 	 * Sets the JError error handlers.
@@ -100,17 +84,21 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 *
 	 * @return	void
 	 */
-	protected function setErrorHandlers($errorHandlers)
+	protected function setErrorHandlers( $errorHandlers )
 	{
 		$mode = null;
 		$options = null;
 
-		foreach ($errorHandlers as $type => $params) {
+		foreach ($errorHandlers as $type => $params)
+		{
 			$mode = $params['mode'];
-			if (isset ($params['options'])) {
-				JError :: setErrorHandling($type, $mode, $params['options']);
-			} else {
-				JError :: setErrorHandling($type, $mode);
+			if (isset($params['options']))
+			{
+				JError::setErrorHandling($type, $mode, $params['options']);
+			}
+			else
+			{
+				JError::setErrorHandling($type, $mode);
 			}
 		}
 	}
@@ -121,32 +109,22 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 *
 	 * @return	void
 	 */
-	protected function setErrorCallback($testName)
+	protected function setErrorCallback( $testName )
 	{
-		$callbackHandlers = array (
-			E_NOTICE => array (
+		$callbackHandlers = array(
+			E_NOTICE => array(
 				'mode' => 'callback',
-				'options' => array (
-					$testName,
-					'errorCallback'
-				)
-			),
-			E_WARNING => array (
+				'options' => array($testName, 'errorCallback')
+				),
+			E_WARNING => array(
 				'mode' => 'callback',
-				'options' => array (
-					$testName,
-					'errorCallback'
-				)
-			),
-			E_ERROR => array (
+				'options' => array($testName, 'errorCallback')
+				),
+			E_ERROR => array(
 				'mode' => 'callback',
-				'options' => array (
-					$testName,
-					'errorCallback'
-				)
-			),
-
-		);
+				'options' => array($testName, 'errorCallback')
+				),
+			);
 		$this->setErrorHandlers($callbackHandlers);
 	}
 
@@ -157,7 +135,7 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 *
 	 * @return	bool	To not continue with JError processing
 	 */
-	static function errorCallback($error)
+	static function errorCallback( $error )
 	{
 		return false;
 	}
@@ -169,14 +147,14 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 */
 	protected function saveFactoryState()
 	{
-		$this->savedFactoryState['application'] = JFactory :: $application;
-		$this->savedFactoryState['config'] = JFactory :: $config;
-		$this->savedFactoryState['session'] = JFactory :: $session;
-		$this->savedFactoryState['language'] = JFactory :: $language;
-		$this->savedFactoryState['document'] = JFactory :: $document;
-		$this->savedFactoryState['acl'] = JFactory :: $acl;
+		$this->savedFactoryState['application'] = JFactory::$application;
+		$this->savedFactoryState['config'] = JFactory::$config;
+		$this->savedFactoryState['session'] = JFactory::$session;
+		$this->savedFactoryState['language'] = JFactory::$language;
+		$this->savedFactoryState['document'] = JFactory::$document;
+		$this->savedFactoryState['acl'] = JFactory::$acl;
 		//$this->savedFactoryState['database'] = JFactory::$database;
-		$this->savedFactoryState['mailer'] = JFactory :: $mailer;
+		$this->savedFactoryState['mailer'] = JFactory::$mailer;
 	}
 
 	/**
@@ -186,16 +164,15 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 */
 	protected function restoreFactoryState()
 	{
-		JFactory :: $application = $this->savedFactoryState['application'];
-		JFactory :: $config = $this->savedFactoryState['config'];
-		JFactory :: $session = $this->savedFactoryState['session'];
-		JFactory :: $language = $this->savedFactoryState['language'];
-		JFactory :: $document = $this->savedFactoryState['document'];
-		JFactory :: $acl = $this->savedFactoryState['acl'];
+		JFactory::$application = $this->savedFactoryState['application'];
+		JFactory::$config = $this->savedFactoryState['config'];
+		JFactory::$session = $this->savedFactoryState['session'];
+		JFactory::$language = $this->savedFactoryState['language'];
+		JFactory::$document = $this->savedFactoryState['document'];
+		JFactory::$acl = $this->savedFactoryState['acl'];
 		//JFactory::$database = $this->savedFactoryState['database'];
-		JFactory :: $mailer = $this->savedFactoryState['mailer'];
+		JFactory::$mailer = $this->savedFactoryState['mailer'];
 	}
-
 	/**
 	 * Sets the connection to the database
 	 *
@@ -203,23 +180,8 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	 */
 	protected function getConnection()
 	{
-		// Load the config if available.
-		@ include_once JPATH_TESTS . '/config.php';
-		if (class_exists('JTestConfig')) {
-			$config = new JTestConfig;
-		}
-
-		$options = array (
-			'driver' => isset ($config) ? $config->dbtype : 'mysql',
-			'host' => isset ($config) ? $config->host : '127.0.0.1',
-			'user' => isset ($config) ? $config->user : 'utuser',
-			'password' => isset ($config) ? $config->password : 'ut1234',
-			'database' => isset ($config) ? $config->db : 'joomla_ut',
-			'prefix' => isset ($config) ? $config->dbprefix : 'jos_'
-		);
-
-		$pdo = new PDO($options['driver'].':host='.$options['host'].';dbname='.$options['database'], $options['user'], $options['password']);
-		return $this->createDefaultDBConnection($pdo, $options['database']);
+		$pdo = new PDO('mysql:host=127.0.0.1;dbname=joomla_ut', 'utuser', 'ut1234');
+		return $this->createDefaultDBConnection($pdo, 'joomla_ut');
 	}
 	/**
 	 * Gets the data set to be loaded into the database during setup
@@ -230,4 +192,6 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 	{
 		return $this->createXMLDataSet(JPATH_BASE . '/tests/unit/stubs/test.xml');
 	}
+
 }
+?>

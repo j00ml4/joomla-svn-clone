@@ -13,31 +13,25 @@ JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
-<div class="registration<?php echo $this->params->get('pageclass_sfx')?>">
-<?php if ($this->params->get('show_page_heading')) : ?>
-<h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-</h1>
-<?php endif; ?>
 
 <form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate">
 	<?php
 	// Iterate through the form fieldsets and display each one.
-	foreach ($this->form->getFieldsets() as $fieldset):
+	foreach ($this->form->getFieldsets() as $group => $fieldset):
 	?>
 	<fieldset>
 		<?php
 		// If the fieldset has a label set, display it as the legend.
-		if (isset($fieldset->label)):
+		if (isset($fieldset['label'])):
 		?>
-		<legend><?php echo JText::_($fieldset->label); ?></legend>
+		<legend><?php echo JText::_($fieldset['label']); ?></legend>
 
 		<dl>
 		<?php
 		endif;
 
 		// Iterate through the fields in the set and display them.
-		foreach($this->form->getFieldset($fieldset->name) as $field):
+		foreach($this->form->getFields($group) as $field):
 			// If the field is hidden, just display the input.
 			if ($field->hidden):
 				echo $field->input;
@@ -70,4 +64,3 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="registration.register" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
-</div>

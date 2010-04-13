@@ -60,14 +60,14 @@ class JAdministrator extends JApplication
 			{
 				$params = JComponentHelper::getParams('com_languages');
 				$client	= &JApplicationHelper::getClientInfo($this->getClientId());
-				$options['language'] = $params->get($client->name, $config->get('language','en-GB'));
+				$options['language'] = $params->get($client->name, $config->getValue('config.language','en-GB'));
 			}
 		}
 
 		// One last check to make sure we have something
 		if (! JLanguage::exists($options['language']))
 		{
-			$lang = $config->get('language','en-GB');
+			$lang = $config->getValue('config.language','en-GB');
 			if (JLanguage::exists($lang)) {
 				$options['language'] = $lang;
 			}
@@ -224,22 +224,23 @@ class JAdministrator extends JApplication
 		if (!isset($template))
 		{
 			// Load the template name from the database
-			$db = JFactory::getDbo();
-			$query = $db->getQuery(true);
-			$query->select('template, params');
-			$query->from('#__template_styles');
-			$query->where('client_id = 1');
-			$query->where('home = 1');
+			$db = &JFactory::getDbo();
+			$query = 'SELECT template, params'
+				. ' FROM #__template_styles'
+				. ' WHERE client_id = 1'
+				. ' AND home = 1'
+				;
 			$db->setQuery($query);
 			$template = $db->loadObject();
 
 			$template->template = JFilterInput::getInstance()->clean($template->template, 'cmd');
-			$template->params = new JRegistry($template->params);
 
 			if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php'))
 			{
-				$template->params = new JRegistry();
 				$template->template = 'bluestork';
+				$template->params = new JParameter();
+			} else {
+				$template->params = new JParameter($template->params);
 			}
 		}
 		if ($params) {

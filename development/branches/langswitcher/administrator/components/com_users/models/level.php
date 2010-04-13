@@ -106,13 +106,14 @@ class UsersModelLevel extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_users.level', 'level', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('level', 'com_users.level', array('array' => 'jform', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
 			return false;
 		}
 
@@ -148,7 +149,7 @@ class UsersModelLevel extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -183,7 +184,6 @@ class UsersModelLevel extends JModelForm
 	{
 		// Typecast variable.
 		$pks = (array) $pks;
-		$user = JFactory::getUser();
 
 		// Get a row instance.
 		$table = &$this->getTable();
@@ -216,6 +216,118 @@ class UsersModelLevel extends JModelForm
 				$this->setError($table->getError());
 				return false;
 			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to adjust the ordering of a row.
+	 *
+	 * @param	int		The ID of the primary key to move.
+	 * @param	integer	Increment, usually +1 or -1
+	 * @return	boolean	False on failure or error, true otherwise.
+	 */
+	public function reorder($pk, $direction = 0)
+	{
+		// Sanitize the id and adjustment.
+		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('level.id');
+
+		// Get an instance of the record's table.
+		$table = $this->getTable();
+
+		// Attempt to check-out and move the row.
+		if (!$this->checkout($pk)) {
+			return false;
+		}
+
+		// Load the row.
+		if (!$table->load($pk)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Access checks.
+		$allow = $user->authorise('core.edit.state', 'com_users');
+
+		if (!$allow)
+		{
+			$this->setError(JText::_('JError_Core_Edit_State_not_permitted'));
+			return false;
+		}
+
+		// Move the row.
+		// TODO: Where clause to restrict category.
+		$table->move($pk);
+
+		// Check-in the row.
+		if (!$this->checkin($pk)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves the manually set order of records.
+	 *
+	 * @param	array	An array of primary key ids.
+	 * @param	int		+/-1
+	 */
+	function saveorder($pks, $order)
+	{
+		// Initialise variables.
+		$table		= $this->getTable();
+		$conditions	= array();
+
+		if (empty($pks)) {
+			return JError::raiseWarning(500, JText::_('JError_No_items_selected'));
+		}
+
+		// update ordering values
+		foreach ($pks as $i => $pk)
+		{
+			$table->load((int) $pk);
+
+			// Access checks.
+			$allow = $user->authorise('core.edit.state', 'com_users');
+
+			if (!$allow)
+			{
+				// Prune items that you can't change.
+				unset($pks[$i]);
+				JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
+			}
+			else if ($table->ordering != $order[$i])
+			{
+				$table->ordering = $order[$i];
+				if (!$table->store())
+				{
+					$this->setError($table->getError());
+					return false;
+				}
+				// remember to reorder this category
+				$condition = 'catid = '.(int) $table->catid;
+				$found = false;
+				foreach ($conditions as $cond)
+				{
+					if ($cond[1] == $condition)
+					{
+						$found = true;
+						break;
+					}
+				}
+				if (!$found) {
+					$conditions[] = array ($table->id, $condition);
+				}
+			}
+		}
+
+		// Execute reorder for each category.
+		foreach ($conditions as $cond)
+		{
+			$table->load($cond[0]);
+			$table->reorder($cond[1]);
 		}
 
 		return true;

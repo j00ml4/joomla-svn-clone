@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: helper.php 15680 2010-03-29 12:30:23Z klascommit $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_articles_category
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -165,7 +165,7 @@ abstract class modArticlesCategoryHelper
 			if ($access || in_array($item->access, $authorised))
 			{
 				// We know that user has the privilege to view the article
-				$item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
+				$item->link = JRoute::_(ContentRoute::article($item->slug, $item->catslug));
 			}
 			else {
 				$item->link = JRoute::_('index.php?option=com_user&view=login');
@@ -181,13 +181,13 @@ abstract class modArticlesCategoryHelper
 			}
 
 			if ($item->catid) {
-				$item->displayCategoryLink = JRoute::_(ContentHelperRoute::getCategoryRoute($item->catid));
-				$item->displayCategoryTitle = $show_category ? '<a href="'.$item->displayCategoryLink.'">'.$item->category_title.'</a>' : '';
+				$item->displayCategoryLink = JRoute::_(ContentRoute::category($item->catid));
+				$item->displayCategoryTitle = $show_category ? '('.'<a href="'.$item->displayCategoryLink.'">'.$item->category_title.'</a>'.')' : '';
 			} else {
-				$item->displayCategoryTitle = $show_category ? $item->category_title : '';
+				$item->displayCategoryTitle = $show_category ? '('.$item->category_title.')' : '';
 			}
 
-			$item->displayHits = $show_hits ? $item->hits : '';
+			$item->displayHits = $show_hits ? '('.$item->hits.')' : '';
 			$item->displayAuthorName = $show_author ? $item->author_name : '';
 			$item->displayIntrotext = $show_introtext ? JHtml::_('string.truncate', strip_tags(JHtml::_('content.prepare', $item->introtext), '<p><a>'), $introtext_limit) : '';
 

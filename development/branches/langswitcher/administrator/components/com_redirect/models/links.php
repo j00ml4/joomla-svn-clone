@@ -40,7 +40,7 @@ class RedirectModelLinks extends JModelList
 		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
+		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_published', '', 'string');
 		$this->setState('filter.state', $state);
 
 		// Load the parameters.
@@ -74,7 +74,7 @@ class RedirectModelLinks extends JModelList
 	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return	JDatabaseQuery
+	 * @return	JQuery
 	 */
 	protected function _getListQuery()
 	{

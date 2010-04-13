@@ -53,11 +53,10 @@ class ContentModelArticles extends JModelList
 		$this->setState('list.direction', $orderDirn);
 
 		$params = $app->getParams();
-		$menuParams = new JRegistry();
+		$menuParams = new JParameter();
 		if (JSite::getMenu()->getActive())
 		{
-			$menuParams = new JRegistry();
-			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
+			$menuParams = new JParameter(JSite::getMenu()->getActive()->params);
 		}
 		$mergedParams = clone $menuParams;
 		$mergedParams->merge($params);
@@ -361,7 +360,8 @@ class ContentModelArticles extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')), $this->getState('list.direction', 'ASC'));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')) . ' ' .
+			$this->getState('list.direction', 'ASC'));
 
 		return $query;
 	}
@@ -384,16 +384,11 @@ class ContentModelArticles extends JModelList
 		// Convert the parameter fields into objects.
 		foreach ($items as & $item)
 		{
-			$articleParams = new JRegistry;
+			$articleParams = new JParameter;
 			/*
 			 *  TODO: investigate if it is better to sync the namespace usage in JRegistry and JParameter, if we let it unsync the we need to know what namespace are the Objects are using before we merge
 			 */
 			$articleParams->loadJSON($item->attribs);
-			
-			// Unpack readmore and layout params
-			$item->alternative_readmore = $articleParams->get('alternative_readmore');
-			$item->layout = $articleParams->get('layout');
-			
 			$item->params = clone $this->getState('params');
 
 			// For blogs, article params override menu item params only if menu param = 'use_article'
@@ -424,7 +419,7 @@ class ContentModelArticles extends JModelList
 				// merge the selected article params
 				if (count($articleArray > 0))
 				{
-					$articleParams = new JRegistry;
+					$articleParams = new JParameter;
 					$articleParams->loadArray($articleArray);
 					$item->params->merge($articleParams);
 				}

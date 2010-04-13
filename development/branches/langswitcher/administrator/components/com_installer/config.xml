@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset
-		name="permissions"
-		label="JCONFIG_PERMISSIONS_LABEL"
-		description="JCONFIG_PERMISSIONS_DESC"
-		>
+	<fields
+		group="permissions"
+		label="JConfig_Permissions_Label"
+		description="JConfig_Permissions_Desc"
+		hidden="true">
 
 		<field
 			name="rules"
 			type="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
+			label="JConfig_Permissions_Label"
 			filter="rules"
 			component="com_installer"
 			section="component">
 			<!-- Using simplified actions definition -->
 			<action
 				name="core.admin"
-				title="JACTION_ADMIN"
-				description="JACTION_MANAGE_COMPONENT_DESC" />
+				title="JAction_Admin"
+				description="JAction_Manage_Component_Desc" />
 			<action
 				name="core.manage"
-				title="JACTION_MANAGE"
-				description="JACTION_MANAGE_COMPONENT_DESC" />
+				title="JAction_Manage"
+				description="JAction_Manage_Component_Desc" />
 			<action
 				name="core.create"
-				title="JACTION_CREATE"
-				description="JACTION_CREATE_COMPONENT_DESC" />
+				title="JAction_Create"
+				description="JAction_Create_Component_Desc" />
 			<action
 				name="core.delete"
-				title="JACTION_DELETE"
-				description="JACTION_DELETE_COMPONENT_DESC" />
+				title="JAction_Delete"
+				description="JAction_Delete_Component_Desc" />
 			<action
 				name="core.edit.state"
-				title="JACTION_EDIT_STATE"
-				description="JACTION_EDIT_STATE_COMPONENT_DESC" />
+				title="JAction_Edit_State"
+				description="JAction_Edit_State_Component_Desc" />
 		</field>
-	</fieldset>
+	</fields>
 </config>

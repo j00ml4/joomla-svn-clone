@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 
-<fieldset
-		name="newsfeed"
+<fields
+		group="newsfeed"
 		label="COM_NEWSFEEDS_FIELD_CONFIG_NEWSFEED_SETTINGS_LABEL"
 		description="COM_NEWSFEEDS_FIELD_CONFIG_NEWSFEED_SETTINGS_DESC">
 
@@ -14,9 +14,9 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 		
 
@@ -28,9 +28,9 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 		
 
@@ -42,9 +42,9 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -56,10 +56,10 @@
 			default="0"
 			label="COM_NEWSFEEDS_FIELD_WORD_COUNT_LABEL"
 			description="COM_NEWSFEEDS_FIELD_WORD_COUNT_DESC" />
-	</fieldset>
+	</fields>
 	
-	<fieldset
-		name="category"
+	<fields
+		group="category"
 		label="COM_NEWSFEEDS_FIELD_CONFIG_CATEGORY_SETTINGS_LABEL"
 		description="COM_NEWSFEEDS_FIELD_CONFIG_CATEGORY_SETTINGS_DESC">
 
@@ -71,9 +71,9 @@
 			label="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_TABLE_HEADINGS_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -84,9 +84,9 @@
 			label="COM_NEWSFEEDS_FIELD_NAME_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NAME_COLUMN_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -97,9 +97,9 @@
 			label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -110,9 +110,9 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
 		<field
@@ -129,9 +129,9 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_DESC_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 		
 			<field 
@@ -140,8 +140,8 @@
 			default="1" 
 			label="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_IMAGE_LABEL" 
 			description="COM_NEWSFEEDS_FIELD_SHOW_CATEGORY_IMAGE_DESC">
-	 			<option value="0">JHIDE</option>
-	 			<option value="1">JSHOW</option>
+	 			<option value="0">JCOMMON_HIDE</option>
+	 			<option value="1">JCOMMON_SHOW</option>
 	 	</field>
 	 	
 	 		<field
@@ -150,7 +150,7 @@
 			default=""
 			label="COM_NEWSFEEDS_FIELD_NUMBER_ITEMS_LIST_LABEL"
 			description="COM_NEWSFEEDS_FIELD_NUMBER_ITEMS_LIST_DESC">
-				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="">JCOMMON_USE_GLOBAL</option>
 				<option value="5">J5</option>
 				<option value="10">J10</option>
 				<option value="15">J15</option>
@@ -168,8 +168,8 @@
 			default="1" 
 			label="COM_NEWSFEEDS_FIELD_DISPLAY_SELECT_LABEL" 
 			description="COM_NEWSFEEDS_FIELD_DISPLAY_SELECT_DESC">
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
+				<option value="0">JCOMMON_HIDE</option>
+				<option value="1">JCOMMON_SHOW</option>
 		</field>
 		
 		<field 
@@ -178,8 +178,8 @@
 			default="1" 
 			label="COM_NEWSFEEDS_FIELD_PAGINATION_LABEL" 
 			description="COM_NEWSFEEDS_FIELD_PAGINATION_DESC">
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
+				<option value="0">JCommon_Hide</option>
+				<option value="1">JCommon_Show</option>
 		</field>
 		
 			<field
@@ -202,18 +202,18 @@
 			label="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_DESC">
 			<option
-				value="0">JHIDE</option>
+				value="0">JCOMMON_HIDE</option>
 			<option
-				value="1">JSHOW</option>
+				value="1">JCOMMON_SHOW</option>
 		</field>
 
-	</fieldset>
+	</fields>
 
-	<fieldset
-		name="permissions"
+	<fields
+		group="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
-		>
+		hidden="true">
 
 		<field
 			name="rules"
@@ -222,5 +222,5 @@
 			filter="rules"
 			component="com_newsfeeds"
 			section="component" />
-	</fieldset>
+	</fields>
 </config>

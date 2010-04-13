@@ -84,12 +84,15 @@ class CategoriesControllerCategory extends JController
 		$model	= &$this->getModel('Category');
 
 		// Check that this is not a new category.
-		if ($id > 0) {
+		if ($id > 0)
+		{
 			$item = $model->getItem($id);
 
 			// If not already checked out, do so.
-			if ($item->checked_out == 0) {
-				if (!$model->checkout($id)) {
+			if ($item->checked_out == 0)
+			{
+				if (!$model->checkout($id))
+				{
 					// Check-out failed, go back to the list and display a notice.
 					$message = JText::sprintf('JError_Checkout_failed', $model->getError());
 					$this->setRedirect('index.php?option=com_categories&view=category&item_id='.$id, $message, 'error');
@@ -130,10 +133,13 @@ class CategoriesControllerCategory extends JController
 		$previousId	= (int) $app->getUserState('com_categories.edit.category.id');
 
 		// If rows ids do not match, checkin previous row.
-		if ($model->checkin($previousId)) {
+		if ($model->checkin($previousId))
+		{
 			// Redirect to the list screen.
 			$this->setRedirect(JRoute::_('index.php?option=com_categories&view=categories', false));
-		} else {
+		}
+		else
+		{
 			// Check-in failed
 			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
 			$this->setRedirect('index.php?option=com_categories&view=categories', $message, 'error');
@@ -157,8 +163,8 @@ class CategoriesControllerCategory extends JController
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		// Initialise variables.
-		$app	= JFactory::getApplication();
-		$model	= $this->getModel('Category');
+		$app	= &JFactory::getApplication();
+		$model	= &$this->getModel('Category');
 		$task	= $this->getTask();
 
 		// Get the posted values from the request.
@@ -168,9 +174,11 @@ class CategoriesControllerCategory extends JController
 		$data['id'] = (int) $app->getUserState('com_categories.edit.category.id');
 
 		// The save2copy task needs to be handled slightly differently.
-		if ($task == 'save2copy') {
+		if ($task == 'save2copy')
+		{
 			// Check-in the original row.
-			if (!$model->checkin()) {
+			if (!$model->checkin())
+			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JError_Checkin_saved', $model->getError());
 				$this->setRedirect('index.php?option=com_categories&view=category&layout=edit', $message, 'error');
@@ -183,20 +191,22 @@ class CategoriesControllerCategory extends JController
 		}
 
 		// Validate the posted data.
-		$form = $model->getForm();
+		$form	= &$model->getForm();
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
-		$data = $model->validate($form, $data);
+		$data	= $model->validate($form, $data);
 
 		// Check for validation errors.
-		if ($data === false) {
+		if ($data === false)
+		{
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+			{
 				if (JError::isError($errors[$i])) {
 					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
 				}
@@ -214,7 +224,8 @@ class CategoriesControllerCategory extends JController
 		}
 
 		// Attempt to save the data.
-		if (!$model->save($data)) {
+		if (!$model->save($data))
+		{
 			// Save the data in the session.
 			$app->setUserState('com_categories.edit.category.data', $data);
 
@@ -225,7 +236,8 @@ class CategoriesControllerCategory extends JController
 		}
 
 		// Save succeeded, check-in the row.
-		if (!$model->checkin()) {
+		if (!$model->checkin())
+		{
 			// Check-in failed, go back to the row and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
 			$this->setRedirect('index.php?option=com_categories&view=category&layout=edit', $message, 'error');
@@ -235,7 +247,8 @@ class CategoriesControllerCategory extends JController
 		$this->setMessage(JText::_('COM_CATEGORIES_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
-		switch ($task) {
+		switch ($task)
+		{
 			case 'apply':
 				// Set the row data in the session.
 				$app->setUserState('com_categories.edit.category.id',	$model->getState('category.id'));
@@ -291,10 +304,13 @@ class CategoriesControllerCategory extends JController
 		$this->setRedirect('index.php?option=com_categories&view=categories');
 
 		// Attempt to run the batch operation.
-		if ($model->batch($vars, $cid)) {
+		if ($model->batch($vars, $cid))
+		{
 			$this->setMessage(JText::_('Categories_Batch_success'));
 			return true;
-		} else {
+		}
+		else
+		{
 			$this->setMessage(JText::_(JText::sprintf('Categories_Error_Batch_failed', $model->getError())));
 			return false;
 		}

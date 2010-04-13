@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modeladmin');
+jimport('joomla.application.component.modelform');
 
 /**
  * Weblinks model.
@@ -17,18 +17,8 @@ jimport('joomla.application.component.modeladmin');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class WeblinksModelWeblink extends JModelAdmin
+class WeblinksModelWeblink extends JModelForm
 {
-	protected $_context = 'com_weblinks';
-	
-	function __construct($config = array())
-	{
-		parent::__construct($config);
-		
-		$this->_item = 'weblink';
-		$this->_option = 'com_weblinks';
-	}
-	
 	/**
 	 * Method to auto-populate the model state.
 	 */
@@ -58,6 +48,35 @@ class WeblinksModelWeblink extends JModelAdmin
 	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to override check-out a row for editing.
+	 *
+	 * @param	int		The ID of the primary key.
+	 * @return	boolean
+	 */
+	public function checkout($pk = null)
+	{
+		// Initialise variables.
+		$pk = (!empty($pk)) ? $pk : (int) $this->getState('weblink.id');
+
+		return parent::checkout($pk);
+	}
+
+	/**
+	 * Method to checkin a row.
+	 *
+	 * @param	integer	The ID of the primary key.
+	 *
+	 * @return	boolean
+	 */
+	public function checkin($pk = null)
+	{
+		// Initialise variables.
+		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('weblink.id');
+
+		return parent::checkin($pk);
 	}
 
 	/**
@@ -114,18 +133,22 @@ class WeblinksModelWeblink extends JModelAdmin
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_weblinks.weblink', 'weblink', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('weblink', 'com_weblinks.weblink', array('array' => 'jform', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('weblink.id')) {
+		if ($this->getState('weblink.id'))
+		{
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		} else {
+		}
+		else
+		{
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
@@ -167,7 +190,7 @@ class WeblinksModelWeblink extends JModelAdmin
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -240,11 +263,229 @@ class WeblinksModelWeblink extends JModelAdmin
 			//$table->modified_by	= $user->get('id');
 		}
 	}
-	
-	function _orderConditions($table = null)
+
+	/**
+	 * Method to delete rows.
+	 *
+	 * @param	array	An array of item ids.
+	 *
+	 * @return	boolean	Returns true on success, false on failure.
+	 */
+	public function delete(&$pks)
 	{
-		$condition = array();
-		$condition[] = 'catid = '.(int) $table->catid;
-		return $condition;
+		// Typecast variable.
+		$pks = (array) $pks;
+
+		// Get a row instance.
+		$table = &$this->getTable();
+
+		// Iterate the items to delete each one.
+		foreach ($pks as $i => $pk)
+		{
+			if ($table->load($pk))
+			{
+				// Access checks.
+				if ($table->catid) {
+					$allow = $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $table->catid);
+				}
+				else {
+					$allow = $user->authorise('core.edit.state', 'com_weblinks');
+				}
+
+				if ($allow)
+				{
+					if (!$table->delete($pk))
+					{
+						$this->setError($table->getError());
+						return false;
+					}
+				}
+				else
+				{
+					// Prune items that you can't change.
+					unset($pks[$i]);
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				}
+			}
+			else
+			{
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to publish records.
+	 *
+	 * @param	array	The ids of the items to publish.
+	 * @param	int		The value of the published state
+	 *
+	 * @return	boolean	True on success.
+	 */
+	function publish(&$pks, $value = 1)
+	{
+		// Initialise variables.
+		$user	= JFactory::getUser();
+		$table	= $this->getTable();
+		$pks	= (array) $pks;
+
+		// Access checks.
+		foreach ($pks as $i => $pk)
+		{
+			if ($table->load($pk))
+			{
+				if ($table->catid) {
+					$allow = $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $table->catid);
+				}
+				else {
+					$allow = $user->authorise('core.edit.state', 'com_weblinks');
+				}
+
+				if (!$allow)
+				{
+					// Prune items that you can't change.
+					unset($pks[$i]);
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				}
+			}
+		}
+
+		// Attempt to change the state of the records.
+		if (!$table->publish($pks, $value, $user->get('id'))) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to adjust the ordering of a row.
+	 *
+	 * @param	int		The ID of the primary key to move.
+	 * @param	integer	Increment, usually +1 or -1
+	 * @return	boolean	False on failure or error, true otherwise.
+	 */
+	public function reorder($pk, $direction = 0)
+	{
+		$user = JFactory::getUser();
+		// Sanitize the id and adjustment.
+		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('weblink.id');
+
+		// Get an instance of the record's table.
+		$table = $this->getTable();
+
+		// Attempt to check-out and move the row.
+		if (!$this->checkout($pk)) {
+			return false;
+		}
+
+		// Load the row.
+		if (!$table->load($pk)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Access checks.
+		if ($table->catid) {
+			$allow = $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $table->catid);
+		}
+		else {
+			$allow = $user->authorise('core.edit.state', 'com_weblinks');
+		}
+
+		if (!$allow)
+		{
+			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+			return false;
+		}
+
+		// Move the row.
+		$table->move($direction, 'catid = '.$table->catid);
+
+		// Check-in the row.
+		if (!$this->checkin($pk)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Saves the manually set order of records.
+	 *
+	 * @param	array	An array of primary key ids.
+	 * @param	int		+/-1
+	 */
+	function saveorder(&$pks, $order)
+	{
+		$user = JFactory::getUser();
+		// Initialise variables.
+		$table		= $this->getTable();
+		$conditions	= array();
+
+		if (empty($pks)) {
+			return JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+		}
+
+		// update ordering values
+		foreach ($pks as $i => $pk)
+		{
+			$table->load((int) $pk);
+
+			// Access checks.
+			if ($table->catid) {
+				$allow = $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $table->catid);
+			}
+			else {
+				$allow = $user->authorise('core.edit.state', 'com_weblinks');
+			}
+
+			if (!$allow)
+			{
+				// Prune items that you can't change.
+				unset($pks[$i]);
+				JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+			}
+			else if ($table->ordering != $order[$i])
+			{
+				$table->ordering = $order[$i];
+				if (!$table->store())
+				{
+					$this->setError($table->getError());
+					return false;
+				}
+				// remember to reorder this category
+				$condition = 'catid = '.(int) $table->catid;
+				$found = false;
+				foreach ($conditions as $cond)
+				{
+					if ($cond[1] == $condition)
+					{
+						$found = true;
+						break;
+					}
+				}
+				if (!$found) {
+					$conditions[] = array ($table->id, $condition);
+				}
+			}
+		}
+
+		// Execute reorder for each category.
+		foreach ($conditions as $cond)
+		{
+			$table->load($cond[0]);
+			$table->reorder($cond[1]);
+		}
+
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_weblinks');
+		$cache->clean();
+
+		return true;
 	}
 }

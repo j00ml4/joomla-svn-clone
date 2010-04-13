@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modeladmin');
+jimport('joomla.application.component.modelform');
 
 /**
  * Banner model.
@@ -17,24 +17,8 @@ jimport('joomla.application.component.modeladmin');
  * @subpackage	com_banners
  * @since		1.5
  */
-class BannersModelBanner extends JModelAdmin
+class BannersModelBanner extends JModelForm
 {
-	protected $_context = 'com_banners.banner';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'banner';
-		$this->_option = 'com_banners';
-	}
-	
 	/**
 	 * Method to auto-populate the model state.
 	 */
@@ -64,6 +48,35 @@ class BannersModelBanner extends JModelAdmin
 	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to override check-out a row for editing.
+	 *
+	 * @param	int		The ID of the primary key.
+	 * @return	boolean
+	 */
+	public function checkout($pk = null)
+	{
+		// Initialise variables.
+		$pk = (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
+
+		return parent::checkout($pk);
+	}
+
+	/**
+	 * Method to checkin a row.
+	 *
+	 * @param	integer	The ID of the primary key.
+	 *
+	 * @return	boolean
+	 */
+	public function checkin($pk = null)
+	{
+		// Initialise variables.
+		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
+
+		return parent::checkin($pk);
 	}
 
 	/**
@@ -111,18 +124,22 @@ class BannersModelBanner extends JModelAdmin
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('banner', 'com_banners.banner', array('array' => 'jform', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('banner.id')) {
+		if ($this->getState('banner.id'))
+		{
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		} else {
+		}
+		else
+		{
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
@@ -164,7 +181,7 @@ class BannersModelBanner extends JModelAdmin
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -198,53 +215,62 @@ class BannersModelBanner extends JModelAdmin
 
 		return true;
 	}
-	
+
 	/**
-	 * Method to stick records.
+	 * Method to adjust the ordering of a row.
 	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
+	 * @param	int		The ID of the primary key to move.
+	 * @param	integer	Increment, usually +1 or -1
+	 * @return	boolean	False on failure or error, true otherwise.
 	 */
-	function stick(&$pks, $value = 1)
+	public function reorder($pk, $direction = 0)
 	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
+		// Get the user
+		$user = JFactory::getUser();
 
-		// Access checks.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
-				} else {
-					$allow = $user->authorise('core.edit.state', 'com_banners');
-				}
+		// Sanitize the id and adjustment.
+		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
 
-				if (!$allow) {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
+		// Get an instance of the record's table.
+		$table = $this->getTable();
+
+		// Attempt to check-out and move the row.
+		if (!$this->checkout($pk)) {
+			return false;
 		}
 
-		// Attempt to change the state of the records.
-		if (!$table->stick($pks, $value, $user->get('id'))) {
+		// Load the row.
+		if (!$table->load($pk)) {
 			$this->setError($table->getError());
 			return false;
 		}
 
+		// State is not archived or trashed, attempt to move the banner
+		if ($table->state>=0)
+		{
+			// Access checks.
+			if ($table->catid) {
+				$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
+			}
+			else {
+				$allow = $user->authorise('core.edit.state', 'com_banners');
+			}
+
+			if (!$allow)
+			{
+				$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				return false;
+			}
+
+			// Move the row.
+			$table->move($direction,"catid='".$table->catid."' AND state>=0");
+		}
+
+		// Check-in the row.
+		if (!$this->checkin($pk)) {
+			return false;
+		}
+
 		return true;
-	}
-	
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'catid = '. (int) $table->catid;
-		$condition[] = 'state >= 0';
-		return $condition;
 	}
 }

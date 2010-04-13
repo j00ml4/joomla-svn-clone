@@ -9,61 +9,40 @@
 defined('_JEXEC') or die;
 
 class InstallerControllerManage extends JController {
+
 	/**
-	 * Constructor.
+	 * Enable an extension (If supported)
 	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
+	 * @return	void
+	 * @since	1.5
 	 */
-	public function __construct($config = array())
+	public function enable()
 	{
-		parent::__construct($config);
+		// Check for request forgeries
+		JRequest::checkToken('request') or jexit(JText::_('JInvalid_Token'));
+		$model	= &$this->getModel('manage');
 
-		$this->registerTask('unpublish',		'publish');
-		$this->registerTask('publish',			'publish');
+		$eid = JRequest::getVar('eid', array(), '', 'array');
+		JArrayHelper::toInteger($eid, array());
+		$model->enable($eid);
+		$this->setRedirect('index.php?option=com_installer&view=manage');
 	}
+
 	/**
-	 * Enable/Disable an extension (If supported)
+	 * Disable an extension (If supported)
+	 *
+	 * @return	void
+	 * @since	1.5
 	 */
-	public function publish()
+	public function disable()
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$ids	= JRequest::getVar('cid', array(), '', 'array');
-		$values	= array('publish' => 1, 'unpublish' => 0);
-		$task	= $this->getTask();
-		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
-
-		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_('COM_INSTALLER_ERROR_NO_EXTENSIONS_SELECTED'));
-		}
-		else
-		{
-			// Get the model.
-			$model	= $this->getModel('manage');
-
-			// Change the state of the records.
-			if (!$model->publish($ids, $value)) {
-				JError::raiseWarning(500, implode('<br />', $model->getErrors()));
-			}
-			else
-			{
-				if ($value == 1) {
-					$text = 'COM_INSTALLER_EXTENSION_PUBLISHED';
-					$ntext = 'COM_INSTALLER_N_EXTENSIONS_PUBLISHED';
-				}
-				else if ($value == 0) {
-					$text = 'COM_INSTALLER_EXTENSION_UNPUBLISHED';
-					$ntext = 'COM_INSTALLER_N_EXTENSIONS_UNPUBLISHED';
-				}
-				$this->setMessage(JText::sprintf((count($ids) == 1) ? $text : $ntext, count($ids)));
-			}
-		}
-
-		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=manage',false));
+		// Check for request forgeries
+		JRequest::checkToken('request') or jexit(JText::_('JInvalid_Token'));
+		$model	= &$this->getModel('manage');
+		$eid = JRequest::getVar('eid', array(), '', 'array');
+		JArrayHelper::toInteger($eid, array());
+		$model->disable($eid);
+		$this->setRedirect('index.php?option=com_installer&view=manage');
 	}
 
 	/**
@@ -75,14 +54,15 @@ class InstallerControllerManage extends JController {
 	public function remove()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		$model	= &$this->getModel('manage');
-		$eid = JRequest::getVar('cid', array(), '', 'array');
+		$eid = JRequest::getVar('eid', array(), '', 'array');
 
 		JArrayHelper::toInteger($eid, array());
 		$result = $model->remove($eid);
-		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=manage',false));
+		$model->saveState(); // Save the state because this is where our messages are stored
+		$this->setRedirect('index.php?option=com_installer&view=manage');
 	}
 
 	/**
@@ -92,12 +72,12 @@ class InstallerControllerManage extends JController {
 	function refresh()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		$model	= &$this->getModel('manage');
-		$uid = JRequest::getVar('cid', array(), '', 'array');
+		$uid = JRequest::getVar('eid', array(), '', 'array');
 		JArrayHelper::toInteger($uid, array());
 		$result = $model->refresh($uid);
-		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=manage',false));
+		$this->setRedirect('index.php?option=com_installer&view=manage');
 	}
 }

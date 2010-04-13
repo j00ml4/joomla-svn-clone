@@ -72,14 +72,9 @@ class WeblinksModelForm extends JModelForm
 	 */
 	public function &getForm($xml = 'weblink', $name = 'com_weblinks.weblink', $options = array(), $clear = false)
 	{
-		$options += array('control' => 'jform');
+		$options += array('array' => 'jform', 'event' => 'onPrepareForm');
 
-		try {
-			$form = parent::getForm($name, $xml, $options);
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
-			return false;
-		}
+		$form = parent::getForm($xml, $name, $options);
 
 		return $form;
 	}
@@ -172,7 +167,7 @@ class WeblinksModelForm extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

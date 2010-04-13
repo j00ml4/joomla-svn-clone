@@ -10,12 +10,11 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controller');
 jimport('joomla.application.component.helper');
 
 require_once JPATH_COMPONENT.DS.'controller.php';
 
-$controller = JController::getInstance('Mailto');
+$controller	= new MailtoController();
 $controller->registerDefaultTask('mailto');
 $controller->execute(JRequest::getCmd('task'));
 

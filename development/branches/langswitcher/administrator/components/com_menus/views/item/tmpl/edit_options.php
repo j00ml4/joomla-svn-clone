@@ -10,39 +10,27 @@
 defined('_JEXEC') or die;
 ?>
 <?php
-	$fieldSets = $this->form->getFieldsets('request');
-
-	if (!empty($fieldSets)) {
-		$fieldSet = array_shift($fieldSets);
-		$label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_MENUS_'.$fieldSet->name.'_FIELDSET_LABEL';
-		echo JHtml::_('sliders.panel',JText::_($label), 'request-options');
-		if (isset($fieldSet->description) && trim($fieldSet->description)) :
-			echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
-		endif;
-		?>
-		<fieldset class="panelform">
-			<?php foreach ($this->form->getFieldset('request') as $field) : ?>
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</fieldset>
-<?php
-	}
-
-
-	$fieldSets = $this->form->getFieldsets('params');
-
+	$fieldSets = $this->paramsform->getFieldsets();
 	foreach ($fieldSets as $name => $fieldSet) :
-		$label = !empty($fieldSet->label) ? $fieldSet->label : 'COM_MENUS_'.$name.'_FIELDSET_LABEL';
+		if (isset($fieldSet['hidden']) && $fieldSet['hidden'] == true) :
+			continue;
+		endif;
+		$label = isset($fieldSet['label']) ? $fieldSet['label'] : 'Config_'.$name;
 		echo JHtml::_('sliders.panel',JText::_($label), $name.'-options');
-			if (isset($fieldSet->description) && trim($fieldSet->description)) :
-				echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
+			if (isset($fieldSet['description'])) :
+				echo '<p class="tip">'.JText::_($fieldSet['description']).'</p>';
 			endif;
 			?>
 		<fieldset class="panelform">
-			<?php foreach ($this->form->getFieldset($name) as $field) : ?>
+			<?php
+				foreach ($this->paramsform->getFields($name) as $field) :
+			?>
+
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
-			<?php endforeach; ?>
+
+			<?php
+				endforeach;
+			?>
 		</fieldset>
 <?php endforeach;?>

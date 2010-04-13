@@ -12,23 +12,18 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+
 ?>
-<div class="reset<?php echo $this->params->get('pageclass_sfx')?>">
-<?php if ($this->params->get('show_page_heading')) : ?>
-<h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-</h1>
-<?php endif; ?>
 
 <form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.reset_request'); ?>" method="post" class="form-validate">
 
 	<?php
 	// Iterate through the form fieldsets and display each one.
-	foreach ($this->form->getFieldsets() as $fieldset):
+	foreach ($this->form->getFieldsets() as $group => $fieldset):
 	?>
 	<fieldset>
 		<dl>
-		<?php foreach ($this->form->getFieldset($fieldset->name) as $name => $field): ?>
+		<?php foreach ($this->form->getFields($group, $group) as $name => $field): ?>
 			<dt><?php echo $field->label; ?></dt>
 			<dd><?php echo $field->input; ?></dd>
 		<?php endforeach; ?>
@@ -41,4 +36,3 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="reset.request" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
-</div>

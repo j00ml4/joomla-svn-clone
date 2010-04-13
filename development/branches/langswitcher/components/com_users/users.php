@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controller');
+require_once JPATH_COMPONENT.'/controller.php';
 require_once JPATH_COMPONENT.'/helpers/route.php';
 
 // Launch the controller.

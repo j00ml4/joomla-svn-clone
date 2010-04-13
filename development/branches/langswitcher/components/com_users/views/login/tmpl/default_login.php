@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version		$Id$
  * @package		Joomla.Site
@@ -10,42 +9,25 @@
 
 defined('_JEXEC') or die;
 ?>
-<div class="login<?php echo $this->params->get('pageclass_sfx')?>">
-<?php if ($this->params->get('show_page_heading')) : ?>
-<h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-</h1>
-<?php endif; ?>
-<?php if ($this->params->get('logindescription_show')==1 || $this->params->get('login_image')!='') : ?>
-<div class="login-description">
-<?php endif ; ?>
 
-<?php if($this->params->get('logindescription_show')==1) : ?>
-<?php echo $this->params->get('login_description'); ?>
-<?php endif; ?>
-<?php if (($this->params->get('login_image')!='')) :?>
-<img src="<?php echo $this->params->get('login_image'); ?>" class="login-image" alt="<?php echo JTEXT::_('COM_USER_LOGIN_IMAGE_ALT')?>"/>
-<?php endif; ?>
-
-<?php if ($this->params->get('logindescription_show')==1 || $this->params->get('login_image')!='') : ?>
-</div>
-<?php endif ; ?>
 <form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post">
 
+	<?php foreach ($this->form->getGroups() as $group): ?>
 	<fieldset>
-		<?php foreach ($this->form->getFieldset('credentials') as $field): ?>
+		<dl>
+		<?php foreach ($this->form->getFields($group, $group) as $name => $field): ?>
 			<?php if (!$field->hidden): ?>
-				<div class="login-fields"><?php echo $field->label; ?>
-				<?php echo $field->input; ?></div>
+				<dt><?php echo $field->label; ?></dt>
+				<dd><?php echo $field->input; ?></dd>
 			<?php endif; ?>
 		<?php endforeach; ?>
+		</dl>
 	</fieldset>
+	<?php endforeach; ?>
 
-	<button type="submit" class="button">Submit</button>
+	<button type="submit">Submit</button>
 
 	<input type="hidden" name="option" value="com_users" />
 	<input type="hidden" name="task" value="user.login" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
-
-</div>

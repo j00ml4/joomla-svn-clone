@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset>
+	<fields>
 		<field
 			name="id"
 			type="hidden"
@@ -55,7 +55,6 @@
 			default=""
 			required="true"
 			size="1" />
-
 		<field
 			name="type"
 			type="menutype"
@@ -78,14 +77,14 @@
 			filter="integer">
 			<option
 				value="1">
-				JPUBLISHED</option>
+				JOPTION_PUBLISHED</option>
 			<option
 				value="0">
-				JUNPUBLISHED</option>
+				JOPTION_UNPUBLISHED</option>
 
 			<option
 				value="-2">
-				JTRASHED</option>
+				JOPTION_TRASHED</option>
 		</field>
 
 		<field
@@ -148,6 +147,16 @@
 		</field>
 
 		<field
+			name="params"
+			type="textarea"
+			label="JCOMMON_PARAMS_LABEL"
+			description="COM_MENUS_ITEM_FIELD_PARAMS_DESC"
+			default=""
+			rows="3"
+			cols="60"
+			class="inputbox"/>
+
+		<field
 			name="home"
 			type="radio"
 			label="COM_MENUS_ITEM_FIELD_HOME_LABEL"
@@ -200,8 +209,5 @@
 			name="rgt"
 			type="hidden"
 			filter="unset"/>
-	</fieldset>
-	
-	<fields name="params">
 	</fields>
 </form>

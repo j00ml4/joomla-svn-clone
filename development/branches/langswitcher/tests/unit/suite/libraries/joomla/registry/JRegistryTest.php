@@ -2,7 +2,6 @@
 require_once 'PHPUnit/Framework.php';
 
 require_once JPATH_BASE.'/libraries/joomla/registry/registry.php';
-require_once JPATH_BASE.'/libraries/joomla/registry/format.php';
 
 /**
  * Test class for JRegistry.
@@ -11,154 +10,50 @@ require_once JPATH_BASE.'/libraries/joomla/registry/format.php';
 class JRegistryTest extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * Setup for testing.
-	 *
-	 * @return void
-	 */
-	public function setUp()
-	{
-		include_once 'inspectors.php';
-	}
-
-	/**
-	 * Test the JRegistry::__clone method.
+	 * @todo Implement test__clone().
 	 */
 	public function test__clone()
 	{
-		$a = new JRegistry;
-		$a->set('foo', 'bar');
-		$b = clone $a;
-
-		$this->assertThat(
-			serialize($a),
-			$this->equalTo(serialize($b))
-		);
-
-		$this->assertThat(
-			$a,
-			$this->logicalNot($this->identicalTo($b)),
-			'Line: '.__LINE__.'.'
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
 		);
 	}
 
 	/**
-	 * Test the JRegistry::__toString method.
+	 * @todo Implement test__toString().
 	 */
 	public function test__toString()
 	{
-		$a = new JRegistry;
-		$a->set('foo', 'bar');
-
-		// __toString only allows for a JSON value.
-		$this->assertThat(
-			(string) $a,
-			$this->equalTo('{"foo":"bar"}'),
-			'Line: '.__LINE__.'.'
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
 		);
 	}
 
 	/**
 	 * @todo Implement testDef().
 	 */
-	/*public function testDef()
+	public function testDef()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}*/
+	}
 
 	/**
 	 * @todo Implement testGet().
 	 */
-	/*public function testGet()
+	public function testGet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}*/
-
-	/**
-	 * Tet the JRegistry::bindData method.
-	 */
-	public function testBindData()
-	{
-		$a		= new JRegistryInspector;
-		$parent	= new stdClass;
-
-		$a->bindData($parent, 'foo');
-		$this->assertThat(
-			$parent->{0},
-			$this->equalTo('foo'),
-			'Line: '.__LINE__.' The input value should exist in the parent object.'
-		);
-
-		$a->bindData($parent, array('foo' => 'bar'));
-		$this->assertThat(
-			$parent->{'foo'},
-			$this->equalTo('bar'),
-			'Line: '.__LINE__.' The input value should exist in the parent object.'
-		);
-
-		$a->bindData($parent, array('level1' => array('level2' => 'value2')));
-		$this->assertThat(
-			$parent->{'level1'}->{'level2'},
-			$this->equalTo('value2'),
-			'Line: '.__LINE__.' The input value should exist in the parent object.'
-		);
-
-		$a->bindData($parent, array('intarray' => array(0, 1, 2)));
-		$this->assertThat(
-			$parent->{'intarray'},
-			$this->equalTo(array(0, 1, 2)),
-			'Line: '.__LINE__.' The un-associative array should bind natively.'
-		);
 	}
 
 	/**
-	 * Test the JReigstry::exists method.
-	 */
-	public function testExists()
-	{
-		$a = new JRegistry;
-		$a->set('foo', 'bar1');
-		$a->set('config.foo', 'bar2');
-		$a->set('deep.level.foo', 'bar3');
-
-		$this->assertThat(
-			$a->exists('foo'),
-			$this->isTrue(),
-			'Line: '.__LINE__.' The path should exist, returning true.'
-		);
-
-		$this->assertThat(
-			$a->exists('config.foo'),
-			$this->isTrue(),
-			'Line: '.__LINE__.' The path should exist, returning true.'
-		);
-
-		$this->assertThat(
-			$a->exists('deep.level.foo'),
-			$this->isTrue(),
-			'Line: '.__LINE__.' The path should exist, returning true.'
-		);
-
-		$this->assertThat(
-			$a->exists('deep.level.bar'),
-			$this->isFalse(),
-			'Line: '.__LINE__.' The path should not exist, returning false.'
-		);
-
-		$this->assertThat(
-			$a->exists('bar.foo'),
-			$this->isFalse(),
-			'Line: '.__LINE__.' The path should not exist, returning false.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::getInstance method.
 	 */
 	public function testGetInstance()
 	{
@@ -170,113 +65,46 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 		// Check the object type.
 		$this->assertThat(
 			$a instanceof JRegistry,
-			$this->isTrue(),
-			'Line: '.__LINE__.'.'
+			$this->isTrue()
 		);
 
 		// Check cache handling for same registry id.
 		$this->assertThat(
 			$a,
-			$this->identicalTo($b),
-			'Line: '.__LINE__.'.'
+			$this->identicalTo($b)
 		);
 
 		// Check cache handling for different registry id.
 		$this->assertThat(
 			$a,
-			$this->logicalNot($this->identicalTo($c)),
-			'Line: '.__LINE__.'.'
+			$this->logicalNot($this->identicalTo($c))
 		);
 	}
 
 	/**
-	 * Test the JRegistry::getNamespaces method.
-	 */
-	public function testGetNameSpaces()
-	{
-		$a = new JRegistry;
-		$a->set('foo', 'bar1');
-		$a->set('config.foo', 'bar2');
-
-		$this->assertThat(
-			$a->getNameSpaces(),
-			//$this->identicalTo(array('_default', 'config'))
-			$this->identicalTo(array()),
-			'Line: '.__LINE__.'.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::getValue method.
-	 * @deprecated	1.6
-	 */
-	public function testGetValue()
-	{
-		$a = new JRegistry;
-		$a->set('foo', 'bar1');
-		$a->set('config.foo', 'bar2');
-		$a->set('deep.level.foo', 'bar3');
-
-		$this->assertThat(
-			$a->get('foo'),
-			$this->equalTo('bar1'),
-			'Line: '.__LINE__.'.'
-		);
-
-		$this->assertThat(
-			$a->get('config.foo'),
-			$this->equalTo('bar2'),
-			'Line: '.__LINE__.'.'
-		);
-
-		$this->assertThat(
-			$a->get('deep.level.foo'),
-			$this->equalTo('bar3'),
-			'Line: '.__LINE__.'.'
-		);
-
-		$a->set('null', null);
-		$this->assertThat(
-			$a->get('null', 'null'),
-			$this->equalTo('null'),
-			'Line: '.__LINE__.' Where a value is null, the default should be returned.'
-		);
-
-		$a->set('empty', '');
-		$this->assertThat(
-			$a->get('empty', 'empty'),
-			$this->equalTo('empty'),
-			'Line: '.__LINE__.' Where a value is an empty string, the default should be used.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::loadArray method.
 	 */
 	public function testLoadArray()
 	{
 		$array = array(
 			'foo' => 'bar'
 		);
-		$registry = new JRegistry;
+		$registry = JRegistry::getInstance('test');
 		$result = $registry->loadArray($array);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('bar'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * Test the JRegistry::loadFile method.
 	 */
 	public function testLoadFile()
 	{
-		$registry = new JRegistry;
+		$registry = JRegistry::getInstance('test');
 
 		// Result is always true, no error checking in method.
 
@@ -285,9 +113,8 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('bar'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 
 		// INI.
@@ -295,118 +122,82 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('bar'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 
 		// XML and PHP versions do not support stringToObject.
+
+		$this->markTestIncomplete(
+			'Need to test for a file that does not exist.'
+		);
 	}
 
 	/**
-	 * Test the JRegistry::loadIni method.
 	 */
 	public function testLoadINI()
 	{
-		//$string = "[section]\nfoo=\"testloadini\"";
+		$string = "[section]\nfoo=\"bar\"";
 
-		$registry = new JRegistry;
-		$result = $registry->loadIni("foo=\"testloadini1\"");
+		$registry = JRegistry::getInstance('test');
+		$result = $registry->loadIni($string);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('testloadini1'),
-			'Line: '.__LINE__.'.'
-		);
-
-		$result = $registry->loadIni("[section]\nfoo=\"testloadini2\"");
-		// Test getting a known value.
-		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('testloadini2'),
-			'Line: '.__LINE__.'.'
-		);
-
-		$result = $registry->loadIni("[section]\nfoo=\"testloadini3\"", null, true);
-		// Test getting a known value after processing sections.
-		$this->assertThat(
-			$registry->get('section.foo'),
-			$this->equalTo('testloadini3'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * Test the JRegistry::loadJson method.
 	 */
 	public function testLoadJSON()
 	{
-		$string = '{"foo":"testloadjson"}';
+		$string = '{"foo":"bar"}';
 
-		$registry = new JRegistry;
+		$registry = JRegistry::getInstance('test');
 		$result = $registry->loadJson($string);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('testloadjson'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * Test the JRegistry::loadObject method.
 	 */
 	public function testLoadObject()
 	{
 		$object = new stdClass;
-		$object->foo = 'testloadobject';
+		$object->foo = 'bar';
 
-		$registry = new JRegistry;
+		$registry = JRegistry::getInstance('test');
 		$result = $registry->loadObject($object);
 
 		// Result is always true, no error checking in method.
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry->get('foo'),
-			$this->equalTo('testloadobject'),
-			'Line: '.__LINE__.'.'
+			$registry->getValue('foo'),
+			$this->equalTo('bar')
 		);
 	}
 
 	/**
-	 * Test the JRegistry::loadXML method.
+	 * @todo Implement testLoadXML().
 	 */
 	public function testLoadXML()
 	{
-		// Cannot test since stringToObject is not implemented yet.
+		// Mega file since stringToObject is not implemented yet.
 	}
 
 	/**
-	 * Test the JRegistry::makeNamespace method.
-	 */
-	public function testMakeNameSpace()
-	{
-		$a = new JRegistry;
-		$a->makeNameSpace('foo');
-
-		$this->assertThat(
-			//in_array('foo', $a->getNameSpaces()),
-			//$this->isTrue()
-			$a->getNameSpaces(),
-			$this->equalTo(array()),
-			'Line: '.__LINE__.'.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::merge method.
+	 * @todo Implement testMerge().
 	 */
 	public function testMerge()
 	{
@@ -422,125 +213,118 @@ class JRegistryTest extends PHPUnit_Framework_TestCase
 			'foo' => 'soap',
 			'dum' => 'huh'
 		);
-		$registry1 = new JRegistry;
+		$registry1 = JRegistry::getInstance('test1');
 		$registry1->loadArray($array1);
 
-		$registry2 = new JRegistry;
+		$registry2 = JRegistry::getInstance('test2');
 		$registry2->loadArray($array2);
 
 		$registry1->merge($registry2);
 
 		// Test getting a known value.
 		$this->assertThat(
-			$registry1->get('foo'),
-			$this->equalTo('soap'),
-			'Line: '.__LINE__.'.'
+			$registry1->getValue('foo'),
+			$this->equalTo('soap')
 		);
 
 		$this->assertThat(
-			$registry1->get('dum'),
-			$this->equalTo('huh'),
-			'Line: '.__LINE__.'.'
+			$registry1->getValue('dum'),
+			$this->equalTo('huh')
 		);
 	}
 
 	/**
-	 * Test the JRegistry::set method.
+	 * @todo Implement testSet().
 	 */
-	/*public function testSet()
+	public function testSet()
 	{
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 		'This test has not been implemented yet.'
 		);
-	}*/
-
-	/**
-	 * Test the JRegistry::set method.
-	 * @deprecated	1.6
-	 */
-	public function testSet()
-	{
-		$a = new JRegistry;
-		$a->set('foo', 'testsetvalue1');
-
-		$this->assertThat(
-			$a->set('foo', 'testsetvalue2'),
-			$this->equalTo('testsetvalue2'),
-			'Line: '.__LINE__.'.'
-		);
 	}
 
 	/**
-	 * Test the JRegistry::toArray method.
-	 */
-	public function testToArray()
-	{
-		$a = new JRegistry;
-		$a->set('foo1', 'testtoarray1');
-		$a->set('foo2', 'testtoarray2');
-		$a->set('config.foo3', 'testtoarray3');
-
-		$expected = array(
-			'foo1' => 'testtoarray1',
-			'foo2' => 'testtoarray2',
-			'config' => array('foo3' => 'testtoarray3')
-		);
-
-		$this->assertThat(
-			$a->toArray(),
-			$this->equalTo($expected),
-			'Line: '.__LINE__.'.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::toObject method.
-	 */
-	public function testToObject()
-	{
-		$a = new JRegistry;
-		$a->set('foo1', 'testtoobject1');
-		$a->set('foo2', 'testtoobject2');
-		$a->set('config.foo3', 'testtoobject3');
-
-		$expected = new stdClass;
-		$expected->foo1 = 'testtoobject1';
-		$expected->foo2 = 'testtoobject2';
-		$expected->config = new StdClass;
-		$expected->config->foo3 = 'testtoobject3';
-
-		$this->assertThat(
-			$a->toObject(),
-			$this->equalTo($expected),
-			'Line: '.__LINE__.'.'
-		);
-	}
-
-	/**
-	 * Test the JRegistry::toString method.
+	 * @todo Implement testToString().
 	 */
 	public function testToString()
 	{
-		$a = new JRegistry;
-		$a->set('foo1', 'testtostring1');
-		$a->set('foo2', 'testtostring2');
-		$a->set('config.foo3', 'testtostring3');
-
-		$this->assertThat(
-			trim($a->toString('JSON')),
-			$this->equalTo(
-				'{"foo1":"testtostring1","foo2":"testtostring2","config":{"foo3":"testtostring3"}}'
-			),
-			'Line: '.__LINE__.'.'
-		);
-
-		$this->assertThat(
-			trim($a->toString('INI')),
-			$this->equalTo(
-				"foo1=\"testtostring1\"\nfoo2=\"testtostring2\"\n\n[config]\nfoo3=\"testtostring3\""
-			),
-			'Line: '.__LINE__.'.'
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
 		);
 	}
+
+	/**
+	 * @todo Implement testToArray().
+	 */
+	public function testToArray()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testToObject().
+	 */
+	public function testToObject()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	//
+	// The following methods are deprecated in 1.6
+	//
+
+	/**
+	 * @todo Implement testGetNameSpaces().
+	 */
+	public function testGetNameSpaces()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testGetValue().
+	 */
+	public function testGetValue()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testMakeNameSpace().
+	 */
+	public function testMakeNameSpace()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+	/**
+	 * @todo Implement testSetValue().
+	 */
+	public function testSetValue()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
+
+
+
 }

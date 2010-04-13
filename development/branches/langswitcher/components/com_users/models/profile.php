@@ -53,16 +53,18 @@ class UsersModelProfile extends JModelForm
 	 * The base form is loaded from XML and then an event is fired
 	 * for users plugins to extend the form with extra fields.
 	 *
+	 * @access	public
 	 * @return	mixed		JForm object on success, false on failure.
 	 * @since	1.0
 	 */
-	public function getForm()
+	function getForm()
 	{
 		// Get the form.
-		try {
-			$form = parent::getForm('com_users.profile', 'profile', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('profile', 'com_users.profile', array('array' => 'jform', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
 			return false;
 		}
 

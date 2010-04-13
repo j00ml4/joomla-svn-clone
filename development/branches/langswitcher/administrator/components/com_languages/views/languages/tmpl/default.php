@@ -55,7 +55,7 @@ $n = count($this->items);
 					<?php echo JHtml::_('grid.sort',  'COM_LANGS_HEADING_LANG_CODE', 'a.lang_code', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%" nowrap="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_LANGS_HEADING_PUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -81,7 +81,7 @@ $n = count($this->items);
 					<?php echo JHtml::_('grid.id', $i, $item->lang_id); ?>
 				</td>
 				<td>
-					<span class="editlinktip hasTip" title="<?php echo JText::_('JGLOBAL_EDIT_ITEM');?>::<?php echo $item->title; ?>">
+					<span class="editlinktip hasTip" title="<?php echo JText::_('JCommon_Edit_item');?>::<?php echo $item->title; ?>">
 						<a href="<?php echo JRoute::_('index.php?option=com_languages&task=language.edit&id='.(int) $item->lang_id); ?>">
 							<?php echo $item->title; ?></a></span>
 				</td>

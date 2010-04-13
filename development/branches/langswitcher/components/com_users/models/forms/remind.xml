@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+<!-- $Id$ -->
 <form>
-	<fieldset name="default">
-		<field name="email" type="text"
-			class="validate-email"
-			description="Users_Remind_Email_Desc"
+	<fields>
+		<field
+			name="email"
+			type="text"
 			label="Users_Remind_Email_Label"
-			required="true"
+			description="Users_Remind_Email_Desc"
+			class="inputbox validate-email"
 			size="30"
+			default=""
+			required="true"
 			validate="email"
 		/>
-	</fieldset>
+	</fields>
 </form>
