@@ -908,6 +908,10 @@ fieldset ul.checklist label {
 	float: none;
 }
 
+fieldset ul.checklist input:focus {
+	outline: thin dotted #333333;
+}
+
 
 /* end new form fields */
 

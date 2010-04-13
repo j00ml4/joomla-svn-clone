@@ -84,7 +84,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap ordering-col">
-					<?php echo JText::_('JGRID_HEADING_ORDERING'); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order',  $this->items); ?>
 				</th>
 				<th class="title access-col">
@@ -94,7 +94,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JText::_('JGRID_HEADING_MENU_ITEM_TYPE'); ?>
 				</th>
 				<th class="nowrap id-col">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.lft', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -105,6 +105,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			// $lang = &JFactory::getLanguage();
 			// $lang->load($item->componentname, JPATH_ADMINISTRATOR);
 			$ordering = ($this->state->get('list.ordering') == 'a.lft');
+			$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -129,10 +130,10 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'items.');?>
 				</td>
 				<td class="order">
-					<span><?php echo $this->pagination->orderUpIcon($i, $item->order_up, 'items.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
-					<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $item->order_dn, 'items.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'items.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, isset($this->ordering[$item->parent_id][$orderkey + 1]), 'items.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 					<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
-					<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
+					<input type="text" name="order[]" value="<?php echo $orderkey + 1;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->access_level); ?>

@@ -474,7 +474,7 @@ INSERT INTO `#__extensions` VALUES
 (102, 'plg_user_profile', 'plugin', 'profile', 'user', 0, 1, 1, 0, '', '{"register-require_address1":"0","register-require_address2":"0","register-require_city":"0","register-require_region":"0","register-require_country":"0","register-require_postal_code":"0","register-require_phone":"0","register-require_website":"0","profile-require_address1":"1","profile-require_address2":"1","profile-require_city":"1","profile-require_region":"1","profile-require_country":"1","profile-require_postal_code":"1","profile-require_phone":"1","profile-require_website":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (103, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'mod_articles_category', 'module', 'mod_articles_category', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(105, 'tpl_hathor', 'template', 'hathor', '', 1, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, -1);
+(105, 'mod_articles_categories', 'module', 'mod_articles_categories', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
@@ -557,7 +557,7 @@ INSERT INTO `#__menu` VALUES
 	(19,'_adminmenu','com_weblinks_links','Links','','Weblinks/Links','index.php?option=com_weblinks','component',0,18,2,21,0,0,'0000-00-00 00:00:00',0,0,'class:weblinks',0,'',32,33,0),
 	(20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categories','index.php?option=com_categories&extension=com_weblinks','component',0,18,2,6,0,0,'0000-00-00 00:00:00',0,0,'class:weblinks-cat',0,'',34,35,0),
 # (21, '_adminmenu', 'com_comments', 'Comments','', '', 'index.php?option=com_comments', 'component', 0, 1, 0, 0, 27, 0, '0000-00-00 00:00:00', 0, 0, 'class:comments', 0, '', 1, 10, 0),
-	(101, 'mainmenu', 'Home', 'home', '', '', 'index.php?option=com_content&view=frontpage', 'component', 1, 1, 1, 99, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_title":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 189, 190, 1);
+	(101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 99, 0, 0, '0000-00-00 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_title":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 189, 190, 1);
 
 # -------------------------------------------------------
 
@@ -944,11 +944,9 @@ CREATE TABLE IF NOT EXISTS `#__template_styles` (
   KEY `idx_home` (`home`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `#__template_styles` (`id`, `template`, `client_id`, `home`, `title`, `params`) VALUES
-(1, 'rhuk_milkyway', 0, 1, 'Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}'),
-(2, 'bluestork', 1, 1, 'Default', '{"useRoundedCorners":"1","showSiteName":"0"}'),
-(3, 'atomic', 0, 0, 'Default', '{}'),
-(4, 'hathor', 1, 0, 'Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
+INSERT INTO `#__template_styles` VALUES (1, 'rhuk_milkyway', '0', '1', 'Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
+INSERT INTO `#__template_styles` VALUES (2, 'bluestork', '1', '1', 'Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
+INSERT INTO `#__template_styles` VALUES (3, 'atomic', '0', '0', 'Default', '{}');
 
 # -------------------------------------------------------
 #

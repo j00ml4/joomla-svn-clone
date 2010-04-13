@@ -92,7 +92,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo JHtml::_('grid.sort', 'JDATE', 'a.created', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="hits-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_HITS', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -139,7 +139,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 						<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), 'articles.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
 						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), 'articles.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
-						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text_area" title="<?php echo $item->title; ?> order" />
+						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
 					<?php else : ?>
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>
