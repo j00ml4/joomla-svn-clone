@@ -178,7 +178,8 @@ CREATE TABLE `#__categories` (
   KEY `idx_checkout` (`checked_out`),
   KEY `idx_path` (`path`),
   KEY `idx_left_right` (`lft`,`rgt`),
-  KEY `idx_alias` (`alias`)
+  KEY `idx_alias` (`alias`),
+  INDEX `idx_language` (`language`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `#__categories` VALUES
@@ -222,7 +223,8 @@ CREATE TABLE `#__contact_details` (
   `sortname3` varchar(255) NOT NULL,
   `language` varchar(10) NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `catid` (`catid`)
+  KEY `catid` (`catid`),
+  INDEX `idx_language` (`language`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 # -------------------------------------------------------
@@ -533,7 +535,8 @@ CREATE TABLE `#__menu` (
   KEY `idx_menutype` (`menutype`),
   KEY `idx_left_right` (`lft`,`rgt`),
   KEY `idx_alias` (`alias`),
-  KEY `idx_path` (`path`(333))
+  KEY `idx_path` (`path`(333)),
+  INDEX `idx_language` (`language`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 

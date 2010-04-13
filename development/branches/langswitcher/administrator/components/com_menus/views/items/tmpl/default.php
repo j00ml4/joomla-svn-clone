@@ -104,7 +104,7 @@ $userId	= $user->get('id');
 						<?php echo $this->escape($item->title); ?></a>
 
 					<?php if ($item->home == 1) : ?>
-						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'title' => JText::_('JDEFAULT')), true); ?></span>
+						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'class'=>'hasTip', 'title' => JText::_('JDEFAULT').'::'.$item->language_title), true); ?></span>
 					<?php endif; ?>
 
 					<p class="smallsub" title="<?php echo $this->escape($item->path);?>">

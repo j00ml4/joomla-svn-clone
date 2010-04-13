@@ -97,6 +97,10 @@ class MenusModelItems extends JModelList
 		$query->select($this->getState('list.select', 'a.*'));
 		$query->from('`#__menu` AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		
 		// Join over the users.
 		$query->select('u.name AS editor');
 		$query->join('LEFT', '`#__users` AS u ON u.id = a.checked_out');
