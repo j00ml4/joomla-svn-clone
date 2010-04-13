@@ -90,7 +90,7 @@ $user = JFactory::getUser();
 		
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
-			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
+			$ordering	= ($this->state->get('list.ordering') == 'ordering');
 			$canEdit	= $user->authorise('core.edit',			'com_plugins');
 			$canChange	= $user->authorise('core.edit.state',	'com_plugins');
 			// $lang = &JFactory::getLanguage();
@@ -117,10 +117,10 @@ $user = JFactory::getUser();
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo JHtml::_('jgrid.orderup', $i, 'plugins.orderup', $ordering); ?></span>
-						<span><?php echo JHtml::_('jgrid.orderdown', $i, 'plugins.orderdown', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->folder == $item->folder), 'plugins.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->folder == $item->folder), 'plugins.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
-						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->name; ?> order" />
+						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->name; ?> order" />
 					<?php else : ?>
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>

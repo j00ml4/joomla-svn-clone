@@ -86,7 +86,7 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_Access', 'a.access', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="hits-col">
-					<?php echo JHtml::_('grid.sort',  'COM_WEBLINKS_HITS_HEADING', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGLOBAL_HITS', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="width-5">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Language', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
