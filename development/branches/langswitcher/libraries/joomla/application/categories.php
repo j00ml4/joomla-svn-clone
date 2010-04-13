@@ -172,6 +172,10 @@ class JCategories
 		{
 			$query->where('c.published = 1');
 		}
+		if(array_key_exists('language',$this->_options) && $this->_options['language'] != '')
+		{
+			$query->where("(c.language = '' OR c.language=" . $db->Quote($this->_options['language']) . ")");
+		}
 		$query->order('c.lft');
 
 
@@ -230,7 +234,7 @@ class JCategories
 					if(!(isset($this->_nodes[$result->parent_id]) || $result->parent_id == 0))
 					{
 						unset($this->_nodes[$result->id]);
-						break;
+						continue;
 					}
 
 					if($result->id == $id || $childrenLoaded)
@@ -249,7 +253,7 @@ class JCategories
 					if(!isset($this->_nodes[$result->parent_id]))
 					{
 						unset($this->_nodes[$result->id]);
-						break;
+						continue;
 					}
 					if($result->id == $id || $childrenLoaded)
 					{

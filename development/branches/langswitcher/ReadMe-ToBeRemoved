@@ -32,3 +32,22 @@ Test language preference for a user
 3. Connect on the public site with the new user. It will change the language in the switcher
 4. Change the language in the switcher. It will change the user preference (verify in the admin)
 
+Test language for categories
+
+1. Change the language of some categories to be "xx (Test)" or "English (UK)"
+2. Go to the menu "Parks in category". Verify that only categories of the selected language or those without language are shown
+
+TODO
+-Apply language selection to banners
+-Apply language selection to contact details
+-Apply language selection to menu
+-Apply language selection to modules
+-Apply language selection to newsfeeds
+-Apply language selection to weblinks
+-Set the router
+
+
+
+
+
+
