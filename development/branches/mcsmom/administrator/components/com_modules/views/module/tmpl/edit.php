@@ -39,49 +39,9 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 <form action="<?php JRoute::_('index.php?option=com_modules'); ?>" method="post" name="adminForm" id="module-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<?php if ($this->item->id) : ?>
-			<legend><?php echo JText::sprintf('JRECORD_NUMBER', $this->item->id); ?></legend>
-			<?php endif; ?>
-
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
-
-			<?php echo $this->form->getLabel('note'); ?>
-			<?php echo $this->form->getInput('note'); ?>
-
-			<?php echo $this->form->getLabel('module'); ?>
-			<?php echo $this->form->getInput('module'); ?>
-			<input type="text" size="35" value="<?php if ($this->item->xml) echo ($text = (string) $this->item->xml->name) ? JText::_($text) : $this->item->module;else echo JText::_(MODULES_ERR_XML);?>" class="readonly" readonly="readonly" />
-
-			<?php echo $this->form->getLabel('showtitle'); ?>
-			<?php echo $this->form->getInput('showtitle'); ?>
-
-			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
-			<?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?>
-			<?php echo $this->form->getLabel('publish_up'); ?>
-			<?php echo $this->form->getInput('publish_up'); ?>
-			<?php echo $this->form->getLabel('publish_down'); ?>
-			<?php echo $this->form->getInput('publish_down'); ?>
-			<?php endif; ?>
-
-			<?php echo $this->form->getLabel('position'); ?>
-			<?php echo $this->form->getInput('position'); ?>
-
-			<?php echo $this->form->getLabel('ordering'); ?>
-			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
-
-			<?php echo $this->form->getLabel('access'); ?><br />
-			<?php echo $this->form->getInput('access'); ?>
-
-			<?php echo $this->form->getLabel('client_id'); ?>
-			<?php echo $this->form->getInput('client_id'); ?>
-
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
-
-			<br class="clr" />
-			<!-- Module metadata -->
+			<legend><?php echo JText::_('JOPTION_REQUIRED');?>	</legend>
+		
+	<!-- Module metadata -->
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
 					<label>
@@ -92,6 +52,53 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php else : ?>
 				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
 			<?php endif; ?>
+			<?php echo $this->form->getLabel('title'); ?>
+			<?php echo $this->form->getInput('title'); ?>
+
+			<?php echo $this->form->getLabel('position'); ?>
+			<?php echo $this->form->getInput('position'); ?>
+
+			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
+			<?php echo $this->form->getLabel('published'); ?>
+			<?php echo $this->form->getInput('published'); ?>
+			<?php endif; ?>
+
+			<?php echo $this->form->getLabel('access'); ?>
+			<?php echo $this->form->getInput('access'); ?>
+
+
+			<?php echo $this->form->getLabel('showtitle'); ?>
+			<?php echo $this->form->getInput('showtitle'); ?>
+		</fieldset>
+		<fieldset class="adminform">
+			<legend><?php echo JText::_('COM_MODULES_DETAILS'); ?></legend>
+			<?php echo $this->form->getLabel('ordering'); ?>
+			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
+
+			<?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?>
+
+			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
+			<?php echo $this->form->getLabel('publish_up'); ?>
+			<?php echo $this->form->getInput('publish_up'); ?>
+			<?php echo $this->form->getLabel('publish_down'); ?>
+			<?php echo $this->form->getInput('publish_down'); ?>
+			<?php endif; ?>
+
+
+			<?php echo $this->form->getLabel('note'); ?>
+			<?php echo $this->form->getInput('note'); ?>
+			
+			<?php echo $this->form->getLabel('client_id'); ?>
+			<?php echo $this->form->getInput('client_id'); ?>
+
+			<br class="clr" />
+			<?php echo JText::sprintf('JRECORD_NUMBER');  ?>
+			<?php echo JText::sprintf($this->item->id);  ?>
+
+
+			<br class="clr" />
+		
 		</fieldset>
 	</div>
 
