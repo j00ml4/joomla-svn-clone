@@ -30,8 +30,7 @@ class JHtmlTemplates
 
 		if (file_exists($thumb))
 		{
-			$clientPath = ($clientId == 0) ? '' : 'administrator/';
-			$thumb	= $clientPath.'templates/'.$template.'/template_thumbnail.png';
+			$thumb	= 'templates/'.$template.'/template_thumbnail.png';
 			$html	= JHTML::_('image',$thumb,JText::_('COM_TEMPLATES_PREVIEW'));
 			if (file_exists($preview))
 			{

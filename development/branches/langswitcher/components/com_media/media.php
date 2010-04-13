@@ -13,13 +13,10 @@ defined('_JEXEC') or die;
 $params = &JComponentHelper::getParams('com_media');
 $ranks = array('publisher', 'editor', 'author', 'registered');
 $acl = & JFactory::getACL();
-
-// TODO: Fix this ACL call
-		//for($i = 0; $i < $params->get('allowed_media_usergroup', 3); $i++)
-		//{
-		//	$acl->addACL('com_media', 'popup', 'users', $ranks[$i]);
-		//}
-		
+for($i = 0; $i < $params->get('allowed_media_usergroup', 3); $i++)
+{
+	$acl->addACL('com_media', 'popup', 'users', $ranks[$i]);
+}
 // Make sure the user is authorized to view this page
 $user = & JFactory::getUser();
 $app	= &JFactory::getApplication();
@@ -51,7 +48,7 @@ if (strpos($cmd, '.') != false)
 	if (file_exists($controllerPath)) {
 		require_once $controllerPath;
 	} else {
-		JError::raiseError(500, 'JERROR_INVALID_CONTROLLER');
+		JError::raiseError(500, 'Invalid Controller');
 	}
 }
 else
@@ -65,7 +62,7 @@ $controllerClass = 'MediaController'.ucfirst($controllerName);
 if (class_exists($controllerClass)) {
 	$controller = new $controllerClass();
 } else {
-	JError::raiseError(500, 'JERROR_INVALID_CONTROLLER_CLASS');
+	JError::raiseError(500, 'Invalid Controller Class');
 }
 
 // Set the model and view paths to the administrator folders

@@ -29,6 +29,7 @@ class modMenuHelper
 		$active = ($menu->getActive()) ? $menu->getActive() : $menu->getDefault();
 
 		$path		= $active->tree;
+		$rlu		= array();
 		$start		= (int) $params->get('startLevel');
 		$end		= (int) $params->get('endLevel');
 		$showAll	= $params->get('showAllChildren');
@@ -38,6 +39,7 @@ class modMenuHelper
 		$lastitem	= 0;
 		foreach($items as $i => $item)
 		{
+			$rlu[$item->id]		= $i;
 			if(($start && $start > $item->level) 
 			|| ($end && $item->level > $end) 
 			|| (!$showAll && $item->level > 1 && !in_array($item->parent_id, $path))
@@ -59,7 +61,6 @@ class modMenuHelper
 			$item->active		= false;
 			$item->params		= new JObject(json_decode($item->params));
 			$lastitem			= $i;
-			$item->flink = $item->link;
 			switch ($item->type)
 			{
 				case 'separator':
@@ -69,25 +70,25 @@ class modMenuHelper
 				case 'url':
 					if ((strpos($item->link, 'index.php?') === 0) && (strpos($item->link, 'Itemid=') === false)) {
 						// If this is an internal Joomla link, ensure the Itemid is set.
-						$item->flink = $tmp->link.'&Itemid='.$item->id;
+						$item->link = $tmp->link.'&amp;Itemid='.$item->id;
 					}
 					break;
 
 				case 'alias':
 					// If this is an alias use the item id stored in the parameters to make the link.
-					$item->flink = 'index.php?Itemid='.$item->params->get('aliasoptions');
+					$item->link = 'index.php?Itemid='.$item->params->get('aliasoptions');
 					break;
 
 				default:
 					$router = JSite::getRouter();
 					if ($router->getMode() == JROUTER_MODE_SEF) {
-						$item->flink = 'index.php?Itemid='.$item->id;
+						$item->link = 'index.php?Itemid='.$item->id;
 					} else {
-						$item->flink .= '&Itemid='.$item->id;
+						$item->link .= '&Itemid='.$item->id;
 					}
 					break;
 			}
-			$item->flink = JRoute::_($item->flink);
+			$item->link = JRoute::_($item->link);
 			
 		}
 

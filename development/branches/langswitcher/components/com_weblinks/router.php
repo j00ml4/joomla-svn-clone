@@ -15,7 +15,108 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.application.categories');
+class WeblinksRoute
+{
+	/**
+	 * @var	array	A cache of the menu items pertaining to com_weblinks
+	 */
+	protected static $lookup = null;
+
+	/**
+	 * @param	int $id			The id of the weblink.
+	 * @param	int	$categoryId	An optional category id.
+	 *
+	 * @return	string	The routed link.
+	 */
+	public static function weblink($id, $categoryId = null)
+	{
+		$needles = array(
+			'weblink'	=> (int) $id,
+			'category' => (int) $categoryId
+		);
+
+		//Create the link
+		$link = 'index.php?option=com_weblinks&view=weblink&id='. $id;
+
+		if ($categoryId) {
+			$link .= '&catid='.$categoryId;
+		}
+
+		if ($itemId = self::_findItemId($needles)) {
+			$link .= '&Itemid='.$itemId;
+		};
+
+		return $link;
+	}
+
+	/**
+	 * @param	int $id			The id of the weblink.
+	 * @param	int	$categoryId	An optional category id.
+	 *
+	 * @return	string	The routed link.
+	 */
+	public static function category($catid, $parentId = null)
+	{
+		$needles = array(
+
+			'category' => (int) $catid
+		);
+
+		//Create the link
+		$link = 'index.php?option=com_weblinks&view=category&id='.$catid;
+
+		if ($itemId = self::_findItemId($needles)) {
+			// TODO: The following should work automatically??
+			//if (isset($item->query['layout'])) {
+			//	$link .= '&layout='.$item->query['layout'];
+			//}
+			$link .= '&Itemid='.$itemId;
+		};
+
+		return $link;
+	}
+
+	protected static function _findItemId($needles)
+	{
+		// Prepare the reverse lookup array.
+		if (self::$lookup === null)
+		{
+			self::$lookup = array();
+
+			$component	= &JComponentHelper::getComponent('com_weblinks');
+			$menus		= &JApplication::getMenu('site', array());
+			$items		= $menus->getItems('component_id', $component->id);
+
+			foreach ($items as &$item)
+			{
+				if (isset($item->query) && isset($item->query['view']))
+				{
+					$view = $item->query['view'];
+					if (!isset(self::$lookup[$view])) {
+						self::$lookup[$view] = array();
+					}
+					if (isset($item->query['id'])) {
+						self::$lookup[$view][$item->query['id']] = $item->id;
+					}
+				}
+			}
+		}
+
+		$match = null;
+
+		foreach ($needles as $view => $id)
+		{
+			if (isset(self::$lookup[$view]))
+			{
+				if (isset(self::$lookup[$view][$id])) {
+					return self::$lookup[$view][$id];
+				}
+			}
+		}
+
+		return null;
+	}
+}
 
 /**
  * Build the route for the com_weblinks component
@@ -30,9 +131,7 @@ function WeblinksBuildRoute(&$query)
 
 	// get a menu item based on Itemid or currently active
 	$menu = &JSite::getMenu();
-	$params = JComponentHelper::getParams('com_weblinks');
-	$advanced = $params->get('sef_advanced_link', 0);
-	
+
 	if (empty($query['Itemid'])) {
 		$menuItem = &$menu->getActive();
 	}
@@ -50,66 +149,77 @@ function WeblinksBuildRoute(&$query)
 			$segments[] = $query['view'];
 		}
 		unset($query['view']);
-	}
+	};
 
 	// are we dealing with an weblink that is attached to a menu item?
-	if (isset($query['view']) && ($mView == $query['view']) and (isset($query['id'])) and ($mId == intval($query['id']))) {	
+	if (($mView == 'weblink') and (isset($query['id'])) and ($mId == intval($query['id']))) {
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
-		return $segments;
 	}
 
-	if (isset($view) and ($view == 'category' or $view == 'weblink')) {
+	if (isset($view) and $view == 'category') {
 		if ($mId != intval($query['id']) || $mView != $view) {
-			if($view == 'weblink' && isset($query['catid']))
+			$segments[] = $query['id'];
+		}
+		unset($query['id']);
+	}
+
+	if (isset($query['catid'])) {
+		// if we are routing a weblink or category where the category id matches the menu catid, don't include the category segment
+		if ((($view == 'weblink') and ($mView != 'category') and ($mView != 'weblink') and ($mCatid != intval($query['catid'])))) {
+			$segments[] = $query['catid'];
+		}
+		unset($query['catid']);
+	};
+
+	if (isset($query['id']))
+	{
+		if (empty($query['Itemid'])) {
+			$segments[] = $query['id'];
+		}
+		else
+		{
+			if (isset($menuItem->query['id']))
 			{
-				$catid = $query['catid'];
-			} elseif(isset($query['id'])) {
-				$catid = $query['id'];
+				if ($query['id'] != $mId) {
+					$segments[] = $query['id'];
+				}
 			}
-			$menuCatid = $mId;
-			$categories = JCategories::getInstance('Weblinks');
-			$category = $categories->get($catid);
-			$path = $category->getPath();
-			$path = array_reverse($path);
-		
-			$array = array();
-			foreach($path as $id)
-			{
-				if((int) $id == (int)$menuCatid)
-				{
-					break;
-				}
-				if($advanced)
-				{
-					list($tmp, $id) = explode(':', $id, 2);
-				}
-				$array[] = $id;
-			}
-			$segments = array_merge($segments, array_reverse($array));
-			if($view == 'weblink')
-			{
-				if($advanced)
-				{
-					list($tmp, $id) = explode(':', $query['id'], 2);
-				} else {
-					$id = $query['id'];
-				}
-				$segments[] = $id;
+			else {
+				$segments[] = $query['id'];
 			}
 		}
 		unset($query['id']);
-		unset($query['catid']);
-	}
+	};
+
+	if (isset($query['year']))
+	{
+		if (!empty($query['Itemid'])) {
+			$segments[] = $query['year'];
+			unset($query['year']);
+		}
+	};
+
+	if (isset($query['month']))
+	{
+		if (!empty($query['Itemid'])) {
+			$segments[] = $query['month'];
+			unset($query['month']);
+		}
+	};
+
 	if (isset($query['layout']))
 	{
 		if (!empty($query['Itemid']) && isset($menuItem->query['layout']))
 		{
 			if ($query['layout'] == $menuItem->query['layout']) {
+
 				unset($query['layout']);
 			}
-		} else {
+		}
+		else
+		{
 			if ($query['layout'] == 'default') {
 				unset($query['layout']);
 			}
@@ -132,8 +242,6 @@ function WeblinksParseRoute($segments)
 	//Get the active menu item.
 	$menu = &JSite::getMenu();
 	$item = &$menu->getActive();
-	$params = JComponentHelper::getParams('com_weblinks');
-	$advanced = $params->get('sef_advanced_link', 0);
 
 	// Count route segments
 	$count = count($segments);
@@ -146,42 +254,45 @@ function WeblinksParseRoute($segments)
 		return $vars;
 	}
 
-	// From the categories view, we can only jump to a category.
-	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
-	$category = JCategories::getInstance('Weblinks')->get($id);
-			
-	$categories = $category->getChildren();
-	$found = 0;
-	foreach($segments as $segment)
+	// Handle View and Identifier.
+	switch ($item->query['view'])
 	{
-		foreach($categories as $category)
-		{
-			if (($category->slug == $segment) || ($advanced && $category->alias == str_replace(':', '-',$segment)))
-			{
-				$vars['id'] = $category->id;
-				$vars['view'] = 'category';
-				$categories = $category->getChildren();
-				$found = 1;
-				break;
-			}
-		}
-		if ($found == 0)
-		{
-			if($advanced)
-			{
-				$db = JFactory::getDBO();
-				$query = 'SELECT id FROM #__weblinks WHERE catid = '.$vars['id'].' AND alias = '.$db->Quote(str_replace(':', '-',$segment));
-				$db->setQuery($query);
-				$id = $db->loadResult();
-			} else {
-				$id = $segment;
-			}
-			$vars['id'] = $id;
-			$vars['view'] = 'weblink';
-			break;
-		}
-		$found = 0;
-	}
+		case 'categories':
+			// From the categories view, we can only jump to a category.
 
-	return $vars;
+			if ($count > 1)
+			{
+				if (intval($segments[0]) && intval($segments[$count-1]))
+				{
+					// 123-path/to/category/456-article
+					$vars['id']		= $segments[$count-1];
+					$vars['view']	= 'weblink';
+				}
+				else
+				{
+					// 123-path/to/category
+					$vars['id']		= $segments[0];
+					$vars['view']	= 'category';
+				}
+			}
+			else
+			{
+				// 123-category
+				$vars['id']		= $segments[0];
+				$vars['view']	= 'category';
+			}
+			break;
+
+		case 'category':
+			$vars['id']		= $segments[$count-1];
+			$vars['view']	= 'weblink';
+			break;
+		case 'weblink':
+			$vars['id']		= $segments[$count-1];
+			$vars['view']	= 'weblink';
+			break;
+
+	}
+		return $vars;
+
 }

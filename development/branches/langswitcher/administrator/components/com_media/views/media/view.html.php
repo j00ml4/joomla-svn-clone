@@ -62,11 +62,9 @@ class MediaViewMedia extends JView
 
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(
-					'onBeforeStart' => 'function(){ Uploader.setOptions({url: $(\'uploadForm\').action + \'&folder=\' + $(\'mediamanager-form\').folder.value}); }',
-					'onComplete' 	=> 'function(){ MediaManager.refreshFrame(); }',
-					'targetURL' 	=> '\\$(\'uploadForm\').action',
-					'typeFilter' 	=> $typeString,
-					'fileSizeMax'	=> $config->get('upload_maxsize')
+					'onComplete' => 'function(){ MediaManager.refreshFrame(); }',
+					'targetURL' => '\\$(\'uploadForm\').action',
+					'typeFilter' => $typeString
 				)
 			);
 		}
@@ -111,7 +109,7 @@ class MediaViewMedia extends JView
 		$bar = &JToolBar::getInstance('toolbar');
 
 		// Set the titlebar text
-		JToolBarHelper::title(JText::_('COM_MEDIA'), 'mediamanager.png');
+		JToolBarHelper::title(JText::_('MEDIA_MANAGER'), 'mediamanager.png');
 
 		// Add a delete button
 		$title = JText::_('Delete');

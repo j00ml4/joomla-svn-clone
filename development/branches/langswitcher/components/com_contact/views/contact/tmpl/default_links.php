@@ -9,10 +9,9 @@
 
 defined('_JEXEC') or die;
 ?>
-huhu
 
 	<?php echo JHtml::_('sliders.panel', JText::_('Contact_Links'), 'display-links'); ?>
-<div class="contact-links">
+<div class="jcontact-links">
 
 	<ul>
 		<?php if ($this->contact->params->get('linka')) : ?>

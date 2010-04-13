@@ -10,8 +10,9 @@
 // no direct access
 defined('_JEXEC') or die;
 
+// Component Helper
 jimport('joomla.application.component.helper');
-jimport('joomla.application.categories');
+jimport('joomla.application.categorytree');
 
 /**
  * Content Component Route Helper
@@ -22,32 +23,42 @@ jimport('joomla.application.categories');
  * @since 1.5
  */
 abstract class ContentHelperRoute
-{ 
-	protected static $lookup;
+{
 	/**
 	 * @param	int	The route of the content item
 	 */
-	public static function getArticleRoute($id, $catid = 0)
+	public static function getArticleRoute($id, $catid)
 	{
+		if ($catid)
+		{
+			jimport('joomla.application.categories');
+			$categoryTree = JCategories::getInstance('com_content');
+			$category = $categoryTree->get($catid);
+			$catids = array();
+			$catids[] = $category->id;
+			while($category->getParent() instanceof JCategoryNode)
+			{
+				$category = $category->getParent();
+				$catids[] = $category->id;
+			}
+			$catids = array_reverse($catids);
+		} else {
+			$catids = array();
+		}
 		$needles = array(
-			'article'  => array((int) $id)
+			'article'  => (int) $id,
+			'category' => $catids
 		);
+
 		//Create the link
 		$link = 'index.php?option=com_content&view=article&id='. $id;
-		if ($catid > 1)
-		{
-			$categories = JCategories::getInstance('Content');
-			$category = $categories->get((int)$catid);
-			if($category)
-			{
-				$needles['category'] = array_reverse($category->getPath());
-				$needles['categories'] = $needles['category'];
-				$link .= '&catid='.$catid;
-			}
+
+		if (is_array($catids)) {
+			$link .= '&catid='.array_pop($catids);
 		}
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
-			$link .= '&Itemid='.$item;
+			$link .= '&Itemid='.$item->id;
 		};
 
 		return $link;
@@ -55,35 +66,29 @@ abstract class ContentHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		if((int) $catid < 1)
+		jimport('joomla.application.categories');
+		$categoryTree = JCategories::getInstance('com_content');
+		$category = $categoryTree->get($catid);
+		$catids = array();
+		$catids[] = $category->id;
+		while($category->getParent() instanceof JCategoryNode)
 		{
-			return;
+			$category = $category->getParent();
+			$catids[] = $category->id;
 		}
-		
-		if($catid instanceof JCategoryNode)
-		{
-			$catids = array_reverse($catid->getPath());
-			$id = $catid->id;
-			//Create the link
-			$link = 'index.php?option=com_content&view=category&id='.$id;
-		} else {
-			$id = (int)$catid;
-			//Create the link
-			$link = 'index.php?option=com_content&view=category&id='.$id;
-			$categories = JCategories::getInstance('Content');
-			$category = $categories->get((int)$catid);
-			if(!$category)
-			{
-				return $link;	
-			}
-			$catids = array_reverse($category->getPath());
-		}
+		$catids = array_reverse($catids);
 		$needles = array(
 			'category' => $catids
 		);
+		$category = $categoryTree->get($catid);
+		//Create the link
+		$link = 'index.php?option=com_content&view=category&id='.$category->slug;
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
-			$link .= '&Itemid='.$item;
+			if (isset($item->query['layout'])) {
+				$link .= '&layout='.$item->query['layout'];
+			}
+			$link .= '&Itemid='.$item->id;
 		};
 
 		return $link;
@@ -91,41 +96,44 @@ abstract class ContentHelperRoute
 
 	protected static function _findItem($needles)
 	{
-		// Prepare the reverse lookup array.
-		if (self::$lookup === null)
-		{
-			self::$lookup = array();
+		$component = &JComponentHelper::getComponent('com_content');
+		$app = JFactory::getApplication();
+		$menus	= & $app->getMenu();
+		$items	= $menus->getItems('component_id', $component->id);
 
-			$component	= &JComponentHelper::getComponent('com_content');
-			$menus		= &JApplication::getMenu('site');
-			$items		= $menus->getItems('component_id', $component->id);
-			foreach ($items as $item)
+		$match = null;
+
+		foreach($needles as $needle => $id)
+		{
+			if (is_array($id))
 			{
-				if (isset($item->query) && isset($item->query['view']))
+				foreach($id as $tempid)
 				{
-					$view = $item->query['view'];
-					if (!isset(self::$lookup[$view])) {
-						self::$lookup[$view] = array();
+					foreach($items as $item)
+					{
+						if ((@$item->query['view'] == $needle) && (@$item->query['id'] == $tempid)) {
+							$match = $item;
+							break;
+						}
 					}
-					if (isset($item->query['id'])) {
-						self::$lookup[$view][$item->query['id']] = $item->id;
+
+				}
+			} else {
+				foreach($items as $item)
+				{
+					if ((@$item->query['view'] == $needle) && (@$item->query['id'] == $id)) {
+						$match = $item;
+						break;
 					}
 				}
 			}
-		}
-		foreach ($needles as $view => $ids)
-		{
-			if (isset(self::$lookup[$view]))
-			{
-				foreach($ids as $id)
-				{
-					if (isset(self::$lookup[$view][(int)$id])) {
-						return self::$lookup[$view][(int)$id];
-					}
-				}
+
+			if (isset($match)) {
+				break;
 			}
 		}
 
-		return null;
+		return $match;
 	}
 }
+?>

@@ -8,8 +8,7 @@
  */
 
 defined('_JEXEC') or die;
-?>
-<?php
+
 if ($this->user->get('guest')):
 	echo $this->loadTemplate('login');
 else:

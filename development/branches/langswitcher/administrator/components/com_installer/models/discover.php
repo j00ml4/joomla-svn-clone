@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 // Import library dependencies
-jimport('joomla.application.component.modellist');
+require_once dirname(__FILE__).DS.'extension.php';
 jimport('joomla.installer.installer');
 
 /**
@@ -19,132 +19,61 @@ jimport('joomla.installer.installer');
  * @subpackage	com_installer
  * @since		1.5
  */
-class InstallerModelDiscover extends JModelList
+class InstallerModelDiscover extends InstallerModel
 {
-	protected $_context = 'com_installer.discover';
+	/**
+	 * Extension Type
+	 * @var	string
+	 */
+	var $_type = 'discover';
+
+	var $_message = '';
 
 	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Current discovered extension list
 	 */
-	protected function _populateState() {
-		$app = JFactory::getApplication();
-		$this->setState('message',$app->getUserState('com_installer.message'));
-		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
-		$app->setUserState('com_installer.message','');
-		$app->setUserState('com_installer.extension_message','');
-		parent::_populateState('name','asc');
-	}
+	function _loadItems()
+	{
+		jimport('joomla.filesystem.folder');
 
-	/**
-	 * Returns an object list
-	 *
-	 * @param	string The query
-	 * @param	int Offset
-	 * @param	int The number of records
-	 * @return	array
-	 */
-	protected function _getList($query, $limitstart = 0, $limit = 0) {
-		$this->_db->setQuery($query);
-		$result = $this->_db->loadObjectList();
-		$lang = JFactory::getLanguage();
-		foreach($result as $i => $row) {
+		/* Get a database connector */
+		$db =& JFactory::getDBO();
+
+		$query = 'SELECT *' .
+				' FROM #__extensions' .
+				' WHERE state = -1' .
+				' ORDER BY type, client_id, folder, name';
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+
+		$apps =& JApplicationHelper::getClientInfo();
+
+		$numRows = count($rows);
+		for($i=0;$i < $numRows; $i++)
+		{
+			$row =& $rows[$i];
 			if (strlen($row->manifest_cache)) {
 				$data = unserialize($row->manifest_cache);
 				if ($data) {
 					foreach($data as $key => $value) {
-						if ($key == 'type') {
-							// ignore the type field
-							continue;
-						}
 						$row->$key = $value;
 					}
 				}
 			}
-			$path = $row->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE;
-			switch ($row->type) {
-				case 'component':
-					$extension = $row->element;
-					$source = JPATH_ADMINISTRATOR . '/components/' . $row->name;
-						$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false)
-					||	$lang->load("$extension.sys", $source, null, false, false)
-					||	$lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
-				break;
-				case 'library':
-					$extension = 'lib_' . $row->element;
-						$lang->load("$extension.sys", JPATH_SITE, null, false, false)
-					||	$lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false);
-				break;
-				case 'module':
-					$extension = $row->element;
-					$source = $path . '/modules/' . $row->name;
-						$lang->load("$extension.sys", $path, null, false, false)
-					||	$lang->load("$extension.sys", $source, null, false, false)
-					||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
-					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
-				break;
-				case 'package':
-					$extension = 'pkg_' . $row->element;
-						$lang->load("$extension.sys", JPATH_SITE, null, false, false)
-					||	$lang->load("$extension.sys", JPATH_SITE, $lang->getDefault(), false, false);
-				break;
-				case 'plugin':
-					$extension = 'plg_' . $row->folder . '_' . $row->element;
-					$source = JPATH_PLUGINS . '/' . $row->folder . '/' . $row->element;
-						$lang->load("$extension.sys", JPATH_ADMINISTRATOR, null, false, false)
-					||	$lang->load("$extension.sys", $source, null, false, false)
-					||	$lang->load("$extension.sys", JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
-				break;
-				case 'template':
-					$extension = 'tpl_' . $row->name;
-					$source = $path . '/templates/' . $row->name;
-						$lang->load("$extension.sys", $path, null, false, false)
-					||	$lang->load("$extension.sys", $source, null, false, false)
-					||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
-					||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
-				break;
+			$row->jname = JString::strtolower(str_replace(" ", "_", $row->name));
+			if (isset($apps[$row->client_id])) {
+				$row->client = ucfirst($apps[$row->client_id]->name);
+			} else {
+				$row->client = $row->client_id;
 			}
-			$row->name = JText::_($row->name);
-			$row->description = JText::_($row->description);
-			$row->author_info = @$row->authorEmail .'<br />'. @$row->authorUrl;
-			$row->client = $row->client_id ? JText::_('JADMINISTRATOR') : JText::_('JSITE');
 		}
-		JArrayHelper::sortObjects($result, $this->getState('list.ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);
-		$total = count($result);
-		$store = $this->_getStoreId('getTotal');
-		$this->_cache[$store] = $total;
-		if ($total < $limitstart) {
-			$limitstart = 0;
-			$this->setState('list.start', 0);
+		$this->setState('pagination.total', $numRows);
+		if ($this->_state->get('pagination.limit') > 0) {
+			$this->_items = array_slice($rows, $this->_state->get('pagination.offset'), $this->_state->get('pagination.limit'));
+		} else {
+			$this->_items = $rows;
 		}
-		if ($limit > 0) {
-			$result = array_slice($result, $limitstart, $limit);
-		}
-		return $result;
 	}
-	/**
-	 * Method to get the database query
-	 *
-	 * @return JDatabaseQuery the database query
-	 */
-	protected function _getListQuery() {
-		$query = new JDatabaseQuery;
-		$query->select('*');
-		$query->from('#__extensions');
-		$query->where('state=-1');
-		$query->order('protected');
-		$query->order('type');
-		$query->order('client_id');
-		$query->order('folder');
-		$query->order('name');
-		return $query;
-	}
-
 
 	/**
 	 * Discover extensions
@@ -179,9 +108,8 @@ class InstallerModelDiscover extends JModelList
 	 * Installs a discovered extension
 	 */
 	function discover_install() {
-		$app = JFactory::getApplication();
 		$installer =& JInstaller::getInstance();
-		$eid = JRequest::getVar('cid',0);
+		$eid = JRequest::getVar('eid',0);
 		if (is_array($eid) || $eid) {
 			if (!is_array($eid)) {
 				$eid = Array($eid);
@@ -193,16 +121,17 @@ class InstallerModelDiscover extends JModelList
 				$result = $installer->discover_install($id);
 				if (!$result) {
 					$failed = true;
-					$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_DISCOVER_INSTALLFAILED').': '. $id);
+					$app->enqueueMessage(JText::_('DISCOVER_INSTALL_FAILED').': '. $id);
 				}
 			}
 			$this->setState('action', 'remove');
 			$this->setState('name', $installer->get('name'));
-			$app->setUserState('com_installer.message', $installer->message);
-			$app->setUserState('com_installer.extension_message', $installer->get('extension_message'));
-			if (!$failed) $app->enqueueMessage(JText::_('COM_INSTALLER_MSG_DISCOVER_INSTALLSUCCESSFUL'));
+			$this->setState('message', $installer->message);
+			$this->setState('extension_message', $installer->get('extension_message'));
+			if (!$failed) $app->enqueueMessage(JText::_('DISCOVER_INSTALL_SUCCESSFUL'));
 		} else {
-			$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_DISCOVER_NOEXTENSIONSELECTED'));
+			$app =& JFactory::getApplication();
+			$app->enqueueMessage(JText::_('No_extension_selected'));
 		}
 	}
 
@@ -211,16 +140,12 @@ class InstallerModelDiscover extends JModelList
 	 */
 	function purge() {
 		$db =& JFactory::getDBO();
-		$query = new JDatabaseQuery;
-		$query->delete();
-		$query->from('#__extensions');
-		$query->where('state = -1');
-		$db->setQuery((string)$query);
+		$db->setQuery('DELETE FROM #__extensions WHERE state = -1');
 		if ($db->Query()) {
-			$this->_message = JText::_('COM_INSTALLER_MSG_DISCOVER_PURGEDDISCOVEREDEXTENSIONS');
+			$this->_message = JText::_('PURGED_DISCOVERED_EXTENSIONS');
 			return true;
 		} else {
-			$this->_message = JText::_('COM_INSTALLER_MSG_DISCOVER_FAILEDTOPURGEEXTENSIONS');
+			$this->_message = JText::_('FAILED_TO_PURGE_EXTENSIONS');
 			return false;
 		}
 	}

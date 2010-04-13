@@ -99,7 +99,7 @@ class LanguagesModelLanguage extends JModelForm
 		$app	= &JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('com_languages.language', 'language', array('control' => 'jform'));
+		$form = parent::getForm('language', 'com_languages.language', array('array' => 'jform', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -136,7 +136,7 @@ class LanguagesModelLanguage extends JModelForm
 
 		// Bind the data
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 

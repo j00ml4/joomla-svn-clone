@@ -8,13 +8,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controlleradmin');
+jimport('joomla.application.component.controller');
 
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_contact
  */
-class ContactControllerContact extends JControllerAdmin
+class ContactControllerContact extends JController
 {
 	/**
 	 * Constructor
@@ -31,8 +31,6 @@ class ContactControllerContact extends JControllerAdmin
 		$this->registerTask('archive',		'publish');
 		$this->registerTask('trash',		'publish');
 		$this->registerTask('report',		'publish');
-		$this->_url = 'index.php?option=com_contact&view=contacts';
-		$this->_option = 'com_contact';
 	}
 
 	/**
@@ -273,5 +271,88 @@ class ContactControllerContact extends JControllerAdmin
 				$this->setRedirect(JRoute::_('index.php?option=com_contact&view=contacts', false));
 				break;
 		}
+	}
+
+	/**
+	 * Removes an item
+	 */
+	function delete()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+
+		// Get items to remove from the request.
+		$cid	= JRequest::getVar('cid', array(), '', 'array');
+
+		if (!is_array($cid) || count($cid) < 1) {
+			JError::raiseWarning(500, JText::_('COM_CONTACT_NO_CONTACT_SELECTED'));
+		}
+		else {
+			// Get the model.
+			$model = $this->getModel();
+
+			// Make sure the item ids are integers
+			jimport('joomla.utilities.arrayhelper');
+			JArrayHelper::toInteger($cid);
+
+			// Remove the items.
+			if (!$model->delete($cid)) {
+				JError::raiseWarning(500, $model->getError());
+			}
+		}
+
+		$this->setRedirect('index.php?option=com_contact&view=contacts');
+	}
+
+	/**
+	 * Method to publish a list of taxa
+	 *
+	 * @since	1.0
+	 */
+	function publish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+
+		// Get items to publish from the request.
+		$cid	= JRequest::getVar('cid', array(), '', 'array');
+		$data	= array('publish' => 1, 'unpublish' => 0, 'archive'=>-1, 'trash' => -2, 'report'=>-3);
+		$task	= $this->getTask();
+		$value	= JArrayHelper::getValue($data, $task, 0, 'int');
+
+		if (!is_array($cid) || count($cid) < 1) {
+			JError::raiseWarning(500, JText::_('COM_CONTACT_NO_CONTACT_SELECTED'));
+		}
+		else {
+			// Get the model.
+			$model	= $this->getModel();
+
+			// Make sure the item ids are integers
+			JArrayHelper::toInteger($cid);
+
+			// Publish the items.
+			if (!$model->publish($cid, $value)) {
+				JError::raiseWarning(500, $model->getError());
+			}
+		}
+
+		$this->setRedirect('index.php?option=com_contact&view=contacts');
+	}
+
+	/**
+	 * Changes the order of an item
+	 */
+	function ordering()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die('JINVALID_TOKEN');
+
+		$cid	= JRequest::getVar('cid', null, 'post', 'array');
+		$inc	= $this->getTask() == 'orderup' ? -1 : +1;
+
+		$model = & $this->getModel();
+		$model->ordering($cid, $inc);
+
+		$this->setRedirect('index.php?option=com_contact&view=contacts');
 	}
 }

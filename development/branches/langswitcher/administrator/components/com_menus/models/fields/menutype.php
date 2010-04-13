@@ -8,8 +8,6 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
-jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -21,12 +19,11 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
 class JFormFieldMenuType extends JFormFieldList
 {
 	/**
-	 * The form field type.
+	 * The field type.
 	 *
 	 * @var		string
-	 * @since	1.6
 	 */
-	protected $type = 'MenuType';
+	public $type = 'MenuType';
 
 	/**
 	 * A reverse lookup of the base link URL to Title
@@ -36,19 +33,18 @@ class JFormFieldMenuType extends JFormFieldList
 	protected $_rlu = array();
 
 	/**
-	 * Method to get the field input markup.
+	 * Method to get the field input.
 	 *
-	 * @return	string	The field input markup.
-	 * @since	1.6
+	 * @return	string		The field input.
 	 */
-	protected function getInput()
+	protected function _getInput()
 	{
 		// Initialise variables.
 		$html = array();
 		$types = $this->_getTypeList();
 
-		$size	= ($v = $this->element['size']) ? ' size="'.$v.'"' : '';
-		$class	= ($v = $this->element['class']) ? 'class="'.$v.'"' : 'class="text_area"';
+		$size	= ($v = $this->_element->attributes('size')) ? ' size="'.$v.'"' : '';
+		$class	= ($v = $this->_element->attributes('class')) ? 'class="'.$v.'"' : 'class="text_area"';
 
 		switch ($this->value)
 		{
@@ -65,7 +61,7 @@ class JFormFieldMenuType extends JFormFieldList
 				break;
 
 			default:
-				$link	= $this->form->getValue('link');
+				$link	= $this->_form->getValue('link');
 				// Clean the link back to the option, view and layout
 				$value	= JText::_(JArrayHelper::getValue($this->_rlu, MenusHelper::getLinkKey($link)));
 				break;
@@ -89,7 +85,7 @@ class JFormFieldMenuType extends JFormFieldList
 
 		$html[] = '<input type="text" readonly="readonly" disabled="disabled" value="'.$value.'"'.$size.$class.'>';
 		$html[] = '<input type="button" class="modal" value="'.JText::_('COM_MENUS_CHANGE_LINKTYPE').'" rel="{handler:\'clone\', target:\'menu-types\'}">';
-		$html[] = '<input type="hidden" name="'.$this->name.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'">';
+		$html[] = '<input type="hidden" name="'.$this->inputName.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'">';
 
 		$html[] = '<div id="menu-types">';
 		$html[] = $types;
@@ -191,10 +187,10 @@ class JFormFieldMenuType extends JFormFieldList
 						$this->_rlu[MenusHelper::getLinkKey($option->request)] = $option->get('title');
 
 						if (isset($option->request['option'])) {
-								$lang->load($option->request['option'].'.sys', JPATH_ADMINISTRATOR, null, false, false)
-							||	$lang->load($option->request['option'].'.sys', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], null, false, false)
-							||	$lang->load($option->request['option'].'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
-							||	$lang->load($option->request['option'].'.sys', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], $lang->getDefault(), false, false);
+								$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR, null, false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], null, false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
+							||	$lang->load($option->request['option'].'.menu', JPATH_ADMINISTRATOR.'/components/'.$option->request['option'], $lang->getDefault(), false, false);
 						}
 					}
 				}

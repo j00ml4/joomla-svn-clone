@@ -7,7 +7,7 @@
 
 defined('_JEXEC') or die;
 
-jimport( 'joomla.application.component.controlleradmin' );
+jimport( 'joomla.application.component.controller' );
 
 /**
  * The Menu Item Controller
@@ -16,10 +16,8 @@ jimport( 'joomla.application.component.controlleradmin' );
  * @subpackage	com_menus
  * @since		1.6
  */
-class MenusControllerItems extends JControllerAdmin
+class MenusControllerItems extends JController
 {
-	protected $_context = 'com_menus';
-	
 	/**
 	 * Constructor.
 	 *
@@ -33,9 +31,15 @@ class MenusControllerItems extends JControllerAdmin
 		// Register proxy tasks.
 		$this->registerTask('unpublish',	'publish');
 		$this->registerTask('trash',		'publish');
-		$this->registerTask('orderup',		'reorder');
-		$this->registerTask('orderdown',	'reorder');
-		$this->setURL('index.php?option=com_menus&view=items');
+		$this->registerTask('orderup',		'ordering');
+		$this->registerTask('orderdown',	'ordering');
+	}
+
+	/**
+	 * Display the view
+	 */
+	public function display()
+	{
 	}
 
 	/**
@@ -46,31 +50,117 @@ class MenusControllerItems extends JControllerAdmin
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;
 	}
+
+	/**
+	 * Removes an item
+	 */
+	public function delete()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get items to remove from the request.
+		$pks	= JRequest::getVar('cid', array(), 'post', 'array');
+		$n		= count($pks);
+
+		if (empty($pks)) {
+			JError::raiseWarning(500, JText::_('COM_MENUS_NO_MENUITEMS_SELECTED'));
+		}
+		else
+		{
+			// Get the model.
+			$model = $this->getModel();
+
+			// Remove the items.
+			if ($model->delete($pks)) {
+				$this->setMessage(JText::sprintf((count($pks) == 1) ? 'COM_MENUS_MENU_DELETED' : 'COM_MENUS_N_MENUS_DELETED', count($pks)));
+			}
+			else {
+				$this->setMessage($model->getError());
+			}
+		}
+
+		$this->setRedirect('index.php?option=com_menus&view=items');
+	}
+
+	/**
+	 * Method to change the published state of selected rows.
+	 *
+	 * @return	void
+	 */
+	public function publish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get items to publish from the request.
+		$pks	= JRequest::getVar('cid', array(), '', 'array');
+		$values	= array('publish' => 1, 'unpublish' => 0, 'trash' => -2);
+		$task	= $this->getTask();
+		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
+
+		if (empty($pks)) {
+			JError::raiseWarning(500, JText::_('COM_MENUS_NO_MENUITEMS_SELECTED'));
+		}
+		else
+		{
+			// Get the model.
+			$model	= $this->getModel();
+
+					// Change the state of the records.
+			if (!$model->publish($pks, $value)) {
+				JError::raiseWarning(500, $model->getError());
+			}
+
+			else
+			{
+				if ($value == 1) {
+					$text = 'COM_MENUS_MENU_PUBLISHED';
+					$ntext = 'COM_MENUS_N_MENUS_PUBLISHED';
+				}
+				else if ($value == 0) {
+					$text = 'COM_MENUS_MENU_UNPUBLISHED';
+					$ntext = 'COM_MENUS_N_MENUS_UNPUBLISHED';
+				}
+				else {
+					$text = 'COM_MENUS_MENU_TRASHED';
+					$ntext = 'COM_MENUS_N_MENUS_TRASHED';
+				}
+				$this->setMessage(JText::sprintf((count($pks) == 1) ? $text : $ntext, count($pks)));
+			}
+		}
+
+		$this->setRedirect('index.php?option=com_menus&view=items');
+	
+	}
 	
 	/**
-	 * Rebuild the nested set tree.
+	 * Method to reorder selected rows.
 	 *
 	 * @return	bool	False on failure or error, true on success.
 	 */
-	public function rebuild()
+	public function ordering()
 	{
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$this->setRedirect('index.php?option=com_menus&view=items');
-
 		// Initialise variables.
-		$model = &$this->getModel();
+		$pks	= JRequest::getVar('cid', null, 'post', 'array');
+		$model	= &$this->getModel();
 
-		if ($model->rebuild())
-		{
-			// Reorder succeeded.
-			$this->setMessage(JText::_('MENUS_REBUILD_SUCCESS'));
-			return true;
+		// Attempt to move the row.
+		$return = $model->ordering(array_pop($pks), $this->getTask() == 'orderup' ? -1 : 1);
+
+		if ($return === false) {
+			// Reorder failed.
+			$message = JText::sprintf('JERROR_REORDER_FAILED', $model->getError());
+			$this->setRedirect('index.php?option=com_menus&view=items', $message, 'error');
+			return false;
 		}
 		else {
-			// Rebuild failed.
-			$this->setMessage(JText::sprintf('MENUS_REBUILD_FAILED'));
-			return false;
+			// Reorder succeeded.
+			$message = JText::_('COM_MENUS_SUCCESS_REORDERED');
+			$this->setRedirect('index.php?option=com_menus&view=items', $message);
+			return true;
 		}
 	}
 }

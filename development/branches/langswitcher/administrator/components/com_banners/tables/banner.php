@@ -130,12 +130,31 @@ class BannersTableBanner extends JTable
 	 */
 	public function bind($array, $ignore = array())
 	{
-		if (isset($array['params']) && is_array($array['params'])) {
-			$registry = new JRegistry();
-			$registry->loadArray($array['params']);
-			$array['params'] = (string) $registry;
+		if (!isset($array['params']))
+		{
+			$parameter = new JParameter;
+			$params=array();
+			// custom group
+			if (isset($array['custom']) && is_array($array['custom']))
+			{
+				$params['custom']=$array['custom'];
+			}
+			if (isset($array['alt']) && is_array($array['alt']))
+			{
+				$params['alt']=$array['alt'];
+			}
+			if (isset($array['flash']) && is_array($array['flash']))
+			{
+				$params['flash']=$array['flash'];
+			}
+			if (isset($array['image']) && is_array($array['image']))
+			{
+				$params['image']=$array['image'];
+			}
+			// encode params to JSON
+			$parameter->loadArray($params);
+			$array['params'] = (string)$parameter;
 		}
-
 		return parent::bind($array, $ignore);
 	}
 	/**
@@ -219,7 +238,7 @@ class BannersTableBanner extends JTable
 			$registry->loadJSON($this->params);
 			$this->params = $registry;
 			// Set customcode
-			$this->params->set('custom.bannercode', JFilterOutput::objectHTMLSafe( $this->params->get('custom.bannercode',''), ENT_QUOTES));
+			$this->params->setValue('custom.bannercode', JFilterOutput::objectHTMLSafe( $this->params->getValue('custom.bannercode',''), ENT_QUOTES));
 			return true;
 		}
 		else
@@ -257,7 +276,7 @@ class BannersTableBanner extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}
@@ -322,7 +341,7 @@ class BannersTableBanner extends JTable
 			}
 			// Nothing to set publishing state on, return false.
 			else {
-				$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
+				$this->setError(JText::_('JERROR_NO_ROWS_SELECTED'));
 				return false;
 			}
 		}

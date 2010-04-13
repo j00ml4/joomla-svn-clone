@@ -11,9 +11,8 @@
  * @subpackage	Media
  * @since		1.5
  */
-
 (function($) {
-var ImageManager = this.ImageManager = {
+var ImageManager = this.MediaManager = {
 	initialize: function()
 	{
 		o = this._getUriObject(window.self.location.href);
@@ -86,11 +85,11 @@ var ImageManager = this.ImageManager = {
 	{
 		extra = '';
 		// Get the image tag field information
-		var url		= this.fields.url.get('value');
-		var alt		= this.fields.alt.get('value');
-		var align	= this.fields.align.get('value');
-		var title	= this.fields.title.get('value');
-		var caption	= this.fields.caption.get('value');
+		var url		= this.fields.url.getValue();
+		var alt		= this.fields.alt.getValue();
+		var align	= this.fields.align.getValue();
+		var title	= this.fields.title.getValue();
+		var caption	= this.fields.caption.getValue();
 
 		if (url != '') {
 			// Set alt attribute
@@ -134,13 +133,12 @@ var ImageManager = this.ImageManager = {
 	},
 
 	getFolder: function() {
-		return this.folderlist.get('value');
+		return this.folderlist.getValue();
 	},
 
 	upFolder: function()
 	{
 		var currentFolder = this.getFolder();
-
 		if(currentFolder.length < 2) {
 			return false;
 		}

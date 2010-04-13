@@ -24,7 +24,7 @@ class JHTMLIcon
 	{
 		$uri = &JFactory::getURI();
 
-		$url = 'index.php?option=com_content&task=article.add&return='.base64_encode($uri).'&id=0&sectionid='.$article->sectionid;
+		$url = 'index.php?option=com_contenttask=article.add&return='.base64_encode($uri).'&id=0&sectionid='.$article->sectionid;
 
 		if ($params->get('show_icons')) {
 			$text = JHTML::_('image','system/new.png', JText::_('New'), NULL, true);
@@ -40,7 +40,7 @@ class JHTMLIcon
 	{
 		$uri	= &JURI::getInstance();
 		$base	= $uri->toString(array('scheme', 'host', 'port'));
-		$link	= $base.JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid) , false);
+		$link	= $base.JRoute::_(ContentRoute::article($article->slug, $article->catslug) , false);
 		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($link);
 
 		$status = 'width=400,height=350,menubar=yes,resizable=yes';
@@ -82,9 +82,9 @@ class JHTMLIcon
 		$text = JHTML::_('image','system/'.$icon, JText::_('Edit'), NULL, true);
 
 		if ($article->state == 0) {
-			$overlib = JText::_('JUNPUBLISHED');
+			$overlib = JText::_('Unpublished');
 		} else {
-			$overlib = JText::_('JPUBLISHED');
+			$overlib = JText::_('Published');
 		}
 		$date = JHTML::_('date',$article->created);
 		$author = $article->created_by_alias ? $article->created_by_alias : $article->created_by;
@@ -103,8 +103,9 @@ class JHTMLIcon
 
 	static function print_popup($article, $params, $attribs = array())
 	{
-		$url  = ContentHelperRoute::getArticleRoute($article->slug, $article->catid);
-		$url .= '&tmpl=component&print=1&layout=default&page='.@ $request->limitstart;
+		$url  = 'index.php?view=article';
+		$url .=  @$article->catslug ? '&catid='.$article->catslug : '';
+		$url .= '&id='.$article->slug.'&tmpl=component&print=1&layout=default&page='.@ $request->limitstart;
 
 		$status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no';
 

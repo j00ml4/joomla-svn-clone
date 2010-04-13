@@ -52,13 +52,13 @@ class MediaHelper
 
 		if (!in_array($format, $allowable))
 		{
-			$err = JText('COM_MEDIA_ERROR_WARNFILETYPE');
+			$err = 'This file type is not supported';
 			return false;
 		}
 		$maxSize = (int) $params->get('upload_maxsize', 0);
 		if ($maxSize > 0 && (int) $file['size'] > $maxSize)
 		{
-			$err = JText('COM_MEDIA_ERROR_WARNFILETOOLARGE');
+			$err = 'This file is too large to upload';
 			return false;
 		}
 		return true;

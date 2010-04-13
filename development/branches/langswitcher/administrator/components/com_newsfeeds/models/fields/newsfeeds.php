@@ -8,8 +8,7 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
-jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+require_once JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'fields'.DS.'list.php';
 
 /**
  * Form Field class for the Joomla Framework.
@@ -21,24 +20,19 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
  class JFormFieldNewsfeeds extends JFormFieldList
 {
 	/**
-	 * The form field type.
+	 * The field type.
 	 *
 	 * @var		string
-	 * @since	1.6
 	 */
-	protected $type = 'Newsfeeds';
+	public $type = 'newsfeeds';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get a list of options for a list input.
 	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
+	 * @return	array		An array of JHtml options.
 	 */
-	protected function getOptions()
+	protected function _getOptions()
 	{
-		// Initialize variables.
-		$options = array();
-
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 
@@ -56,9 +50,10 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 
-		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), $options);
-
+		$options = array_merge(
+			parent::_getOptions(),
+			$options
+		);
 		return $options;
 	}
 }

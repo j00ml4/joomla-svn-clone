@@ -5,11 +5,10 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('JPATH_BASE') or die;
+// No direct access.
+defined('_JEXEC') or die;
 
-jimport('joomla.html.html');
-jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+require_once JPATH_LIBRARIES.'/joomla/form/fields/list.php';
 
 /**
  * Form field to list the available positions for a module.
@@ -23,27 +22,22 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
 class JFormFieldModulePosition extends JFormFieldList
 {
 	/**
-	 * The form field type.
+	 * The field type.
 	 *
 	 * @var		string
-	 * @since	1.6
 	 */
-	protected $type = 'ModulePosition';
+	public $type = 'ModulePosition';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get a list of options for a list input.
 	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
+	 * @return	array		An array of JHtml options.
 	 */
-	protected function getOptions()
+	protected function _getOptions()
 	{
-		// Initialize variables.
-		$options = array();
-
 		$db			= JFactory::getDbo();
 		$query		= $db->getQuery(true);
-		$clientId	= (int) $this->form->getValue('client_id');
+		$clientId	= (int) $this->_form->getValue('client_id');
 		$client		= JApplicationHelper::getClientInfo($clientId);
 
 		jimport('joomla.filesystem.folder');
@@ -88,12 +82,13 @@ class JFormFieldModulePosition extends JFormFieldList
 		$positions = array_unique($positions);
 		sort($positions);
 
+		$options = array();
 		foreach ($positions as $position) {
 			$options[]	= JHtml::_('select.option', $position, $position);
 		}
 
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), $options);
+		$options = array_merge(parent::_getOptions(), $options);
 
 		return $options;
 	}

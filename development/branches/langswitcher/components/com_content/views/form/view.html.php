@@ -74,22 +74,26 @@ class ContentViewForm extends JView
 	protected function _prepareDocument()
 	{
 		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
 		$pathway	= &$app->getPathway();
-		$title 		= null;
+		$menus		= &JSite::getMenu();
+		$title		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		$menu = $menus->getActive();
-		if($menu)
+		if ($menu = $menus->getActive())
 		{
-			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		} else {
-			$this->params->def('page_heading', JText::_('Content_Form_Edit_Article')); 
+			if (isset($menu->query['view']) && $menu->query['view'] == 'form')
+			{
+				$menuParams = new JParameter($menu->params);
+				$title = $menuParams->get('page_title');
+			}
 		}
-		
-		$title = $this->params->def('page_title', JText::_('Content_Form_Edit_Article'));
+
+		if (empty($title)) {
+			$title	= JText::_('Content_Form_Edit_Article');
+		}
 		$this->document->setTitle($title);
+		$this->params->set('page_title', $title);
 
 		$pathway =& $app->getPathWay();
 		$pathway->addItem($title, '');

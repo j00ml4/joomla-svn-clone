@@ -99,10 +99,11 @@ class MenusModelMenu extends JModelForm
 		$app = &JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_menus.menu', 'menu', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('menu', 'com_menus.menu', array('array' => 'jform', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
 			return false;
 		}
 
@@ -139,7 +140,7 @@ class MenusModelMenu extends JModelForm
 
 		// Bind the data.
 		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			$this->setError(JText::sprintf('JERROR_TABLE_BIND_FAILED', $table->getError()));
 			return false;
 		}
 
@@ -156,12 +157,7 @@ class MenusModelMenu extends JModelForm
 		}
 
 		$this->setState('menu.id', $table->id);
-		
-		// Clear the component's cache
-		$cache = JFactory::getCache('com_modules');
-		$cache->clean();
-		$cache->clean('mod_menu');
-		
+
 		return true;
 	}
 
@@ -190,11 +186,6 @@ class MenusModelMenu extends JModelForm
 				return false;
 			}
 		}
-		
-		// Clear the component's cache
-		$cache = JFactory::getCache('com_modules');
-		$cache->clean();
-		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -218,8 +209,11 @@ class MenusModelMenu extends JModelForm
 		$result = array();
 
 		foreach ($modules as &$module) {
-			$params = new JRegistry;
-			$params->loadJSON($module->params);
+			if ($module->params[0] == '{') {
+				$params = JArrayHelper::toObject(json_decode($module->params, true), 'JObject');
+			} else {
+				$params = new JParameter($module->params);
+			}
 
 			$menuType = $params->get('menutype');
 			if (!isset($result[$menuType])) {

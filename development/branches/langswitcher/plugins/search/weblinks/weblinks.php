@@ -11,8 +11,6 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
-require_once JPATH_SITE.'/components/com_weblinks/helpers/route.php';
-
 /**
  * Weblinks Search plugin
  *
@@ -50,13 +48,19 @@ class plgSearchWeblinks extends JPlugin
 
 		$searchText = $text;
 
+		require_once JPATH_SITE.'/components/com_weblinks/router.php';
+
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
+			if (!array_intersect($areas, array_keys(plgSearchWeblinksAreas()))) {
 				return array();
 			}
 		}
 
-		$limit = $this->params->def('search_limit', 50);
+		// load plugin params info
+		$plugin = &JPluginHelper::getPlugin('search', 'weblinks');
+		$pluginParams = new JParameter($plugin->params);
+
+		$limit = $pluginParams->def('search_limit', 50);
 
 		$text = trim($text);
 		if ($text == '') {
@@ -131,7 +135,7 @@ class plgSearchWeblinks extends JPlugin
 		$rows = $db->loadObjectList();
 
 		foreach($rows as $key => $row) {
-			$rows[$key]->href = WeblinksHelperRoute::getWeblinkRoute($row->slug, $row->catslug);
+			$rows[$key]->href = WeblinksRoute::weblink($row->slug, $row->catslug);
 		}
 
 		$return = array();

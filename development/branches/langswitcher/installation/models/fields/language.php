@@ -9,9 +9,6 @@
 defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
-jimport('joomla.language.helper');
-jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
 
 /**
  * Language Form Field class.
@@ -23,25 +20,24 @@ JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.ph
 class JFormFieldLanguage extends JFormFieldList
 {
 	/**
-	 * The form field type.
+	 * The field type.
 	 *
 	 * @var		string
-	 * @since	1.6
 	 */
-	protected $type = 'Language';
+	public $type = 'Language';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get a list of options for a list input.
 	 *
-	 * @return	array	The field option objects.
-	 * @since	1.6
+	 * @return	array		An array of JHtml options.
 	 */
-	protected function getOptions()
+	protected function _getOptions()
 	{
 		// Initialise variables.
 		$app = & JFactory::getApplication();
 
 		// Detect the native language.
+		jimport('joomla.language.helper');
 		$native = JLanguageHelper::detectLanguage();
 		if(empty($native)) {
 			$native = 'en-GB';
@@ -49,7 +45,8 @@ class JFormFieldLanguage extends JFormFieldList
 
 		// Get a forced language if it exists.
 		$forced = $app->getLocalise();
-		if (!empty($forced['lang'])) {
+		if (!empty($forced['lang']))
+		{
 			$native = $forced['lang'];
 		}
 
@@ -62,8 +59,8 @@ class JFormFieldLanguage extends JFormFieldList
 		// Set the default value from the native language.
 		$this->value = $native;
 
-		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), $options);
+		// Merge in any explicitly listed options from the XML definition.
+		$options = array_merge(parent::_getOptions(), $options);
 
 		return $options;
 	}

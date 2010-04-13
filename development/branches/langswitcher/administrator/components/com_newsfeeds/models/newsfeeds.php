@@ -80,7 +80,7 @@ class NewsfeedsModelNewsfeeds extends JModelList
 	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return	JDatabaseQuery
+	 * @return	JQuery
 	 */
 	protected function _getListQuery()
 	{
@@ -145,13 +145,8 @@ class NewsfeedsModelNewsfeeds extends JModelList
 			}
 		}
 
-		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering')
-		{
-			$query->order('category_title, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).', a.ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		}
+		// Add the list ordering clause.
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

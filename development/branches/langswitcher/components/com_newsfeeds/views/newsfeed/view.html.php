@@ -45,10 +45,6 @@ class NewsfeedsViewNewsfeed extends JView
 
 		//get the newsfeed
 		$newsfeed = &$this->get('data');
-		
-		$temp = new JRegistry();
-		$temp->loadJSON($newsfeed->params);
-		$params->merge($temp);
 
 		//  get RSS parsed object
 		$options = array();
@@ -59,7 +55,7 @@ class NewsfeedsViewNewsfeed extends JView
 
 		if ($rssDoc == false) {
 			$msg = JText::_('COM_NEWSFEEDS_ERRORS_FEED_NOT_RETRIEVED');
-			$app->redirect(NewsFeedsHelperRoute::getCategoryRoute($newsfeed->catslug), $msg);
+			$app->redirect('index.php?option=com_newsfeeds&view=category&id='. $newsfeed->catslug, $msg);
 			return;
 		}
 		$lists = array();
@@ -83,55 +79,51 @@ class NewsfeedsViewNewsfeed extends JView
 		// feed elements
 		$newsfeed->items = array_slice($newsfeed->items, 0, $newsfeed->numarticles);
 
+		// Set page title
+		// because the application sets a default page title, we need to get it
+		// right from the menu item itself
+		if (is_object($menu)) {
+			$menu_params = new JParameter($menu->params);
+			if (!$menu_params->get('page_title')) {
+				$params->set('page_title',	$newsfeed->name);
+			}
+		} else {
+			$params->set('page_title',	$newsfeed->name);
+		}
+		$document->setTitle($params->get('page_title'));
+
+		//set breadcrumbs
+		$viewname	= JRequest::getString('view');
+		if ($viewname == 'categories') {
+			$pathway->addItem($newsfeed->category, 'index.php?view=category&id='.$newsfeed->catslug);
+		}
+		$pathway->addItem($newsfeed->name, '');
+
 		$this->assignRef('params'  , $params  );
 		$this->assignRef('newsfeed', $newsfeed);
-		
-		$this->_prepareDocument();
 
 		parent::display($tpl);
 	}
 
-	/**
-	 * Prepares the document
-	 */
-	protected function _prepareDocument()
+	function limitText($text, $wordcount)
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
-		$pathway	= &$app->getPathway();
-		$title 		= null;
+		if (!$wordcount) {
+			return $text;
+		}
 
-		// Because the application sets a default page title,
-		// we need to get it from the menu item itself
-		$menu = $menus->getActive();
-		if($menu)
+		$texts = explode(' ', $text);
+		$count = count($texts);
+
+		if ($count > $wordcount)
 		{
-			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		} else {
-			$this->params->def('page_heading', JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE')); 
-		}
-		if($menu && $menu->query['view'] != 'newsfeed')
-		{
-			$id = (int) @$menu->query['id'];
-			$path = array($this->newsfeed->name => '');
-			$category = JCategories::getInstance('Newsfeeds')->get($this->newsfeed->catid);
-			while($id != $category->id && $category->id > 1)
-			{
-				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);
-				$category = $category->getParent();
+			$text = '';
+			for ($i=0; $i < $wordcount; $i++) {
+				$text .= ' '. $texts[$i];
 			}
-			$path = array_reverse($path);
-			foreach($path as $title => $link)
-			{
-				$pathway->addItem($title, $link);
-			}
+			$text .= '...';
 		}
-		
-		$title = $this->params->get('page_title', '');
-		if (empty($title))
-		{
-			$title = htmlspecialchars_decode($app->getCfg('sitename'));
-		}
-		$this->document->setTitle($title);
+
+		return $text;
 	}
 }
+?>

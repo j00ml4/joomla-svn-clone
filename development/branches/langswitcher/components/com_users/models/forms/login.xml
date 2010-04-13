@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id$ -->
+<!-- $Id$ -->
 <form>
-	<fieldset name="credentials"
-		label="Users_Login_Default_Label"
-	>
-
-		<field name="username" type="text"
-			class="validate-username"
-			field="id"
-			filter="username"
+	<fields label="Users_Login_Default_Label">
+		<field
+			name="username"
+			type="text"
+			id="username"
 			label="Users_Login_Username_Label"
-			required="true"
+			class="inputbox validate-username"
 			size="25"
-			validate="username"
-		/>
-
-		<field name="password" type="password"
-			class="validate-password"
-			filter="raw"
-			label="Users_Login_Password_Label"
+			default=""
 			required="required"
-			size="25"
+			filter="username"
+			validate="username"
+			field="id"
 		/>
-	</fieldset>
+		<field
+			name="password"
+			type="password"
+			id="password"
+			label="Users_Login_Password_Label"
+			class="inputbox validate-password"
+			size="25"
+			required="required"
+			default=""
+			filter="raw"
+		/>
+	</fields>
 </form>

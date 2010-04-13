@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id: newsfeed.xml 13196 2009-10-14 07:47:07Z eddieajau $ -->
 <form>
-	<fieldset>
+	<fields>
 		<field
 			name="extension_id"
 			type="hidden"
@@ -11,24 +11,27 @@
 
 		<field
 			name="name"
-			type="hidden"
+			type="text"
 			label="COM_PLUGINS_FIELD_NAME_LABEL"
-			description="COM_PLUGINS_FIELD_NAME_DESC" />
+			description="COM_PLUGINS_FIELD_NAME_DESC"
+			class="inputbox"
+			size="30"
+			required="true" />
 
 		<field
 			name="enabled"
 			type="list"
-			label="JENABLED"
+			label="COM_PLUGINS_FIELD_ENABLED_LABEL"
 			description="COM_PLUGINS_FIELD_ENABLED_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option
 				value="1">
-				JENABLED</option>
+				JOPTION_ENABLED</option>
 			<option
 				value="0">
-				JDISABLED</option>
+				JOPTION_DISABLED</option>
 		</field>
 
 		<field
@@ -70,5 +73,5 @@
 			name="params"
 			type="hidden" />
 
-	</fieldset>
+	</fields>
 </form>

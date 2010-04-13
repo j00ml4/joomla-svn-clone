@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 <form action="index.php" method="post">
 	<div class="search<?php echo $params->get('moduleclass_sfx') ?>">
 		<?php
-			$output = '<label for="mod_search_searchword">'.JText::_('MOD_SEARCH_FIELD_TEXT_LABEL').'</label><input name="searchword" id="mod_search_searchword" maxlength="'.$maxlength.'"  class="inputbox'.$moduleclass_sfx.'" type="text" size="'.$width.'" value="'.$text.'"  onblur="if (this.value==\'\') this.value=\''.$text.'\';" onfocus="if (this.value==\''.$text.'\') this.value=\'\';" />';
+			$output = '<input name="searchword" id="mod_search_searchword" maxlength="'.$maxlength.'" alt="'.$button_text.'" class="inputbox'.$moduleclass_sfx.'" type="text" size="'.$width.'" value="'.$text.'"  onblur="if (this.value==\'\') this.value=\''.$text.'\';" onfocus="if (this.value==\''.$text.'\') this.value=\'\';" />';
 
 			if ($button) :
 				if ($imagebutton) :
@@ -49,5 +49,4 @@ defined('_JEXEC') or die;
 	</div>
 	<input type="hidden" name="task" value="search" />
 	<input type="hidden" name="option" value="com_search" />
-	<input type="hidden" name="Itemid" value="<?php echo $mitemid; ?>" />
 </form>

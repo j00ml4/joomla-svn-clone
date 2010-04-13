@@ -688,15 +688,15 @@ div.current fieldset.radio label {
 	margin: 3px 0 0 5px;
 }
 
-div.current input,
-div.current textarea,
-div.current select {
+div.current input.text_area,
+div.current textarea.text_area,
+div.current select.inputbox {
 	clear: none;
 	float: left;
 	margin: 3px 0 0 2px;
 }
 
-div.current select {
+div.current select.inputbox {
 	margin-bottom: 15px;
 }
 
@@ -864,10 +864,6 @@ fieldset#template-manager-css ul {
 	margin-left: 30px;
 }
 
-fieldset#filter-bar label {
-	clear: none;
-}
-
 fieldset label {
 	float: left;
 	clear: left;
@@ -894,7 +890,7 @@ form label {
 }
 
 fieldset input,fieldset textarea,
-fieldset select,fieldset img, fieldset button {
+fieldset select,fieldset img {
 	float: left;
 	width: auto;
 	margin: 5px 5px 10px 0px;
@@ -913,7 +909,7 @@ label#jform_fulltext-lbl {
 }
 
 fieldset.adminform select,
-select#jform_catid {
+select#jform_catid.inputbox {
 	margin-right: 20px;
 }
 
@@ -940,9 +936,9 @@ label.required:after {
 	vertical-align: middle;
 }
 
-input#jform_title,
-input#jform_leveltitle,
-input#jform_grouptitle
+input#jform_title.inputbox,
+input#jform_leveltitle.inputbox,
+input#jform_grouptitle.inputbox
 	{
 	font-size: 1.364em;
 }
@@ -1180,7 +1176,7 @@ fieldset.filter .right {
 	float: right;
 }
 
-fieldset.filter .right select {
+fieldset.filter .right select.inputbox {
 	margin-left: 10px;
 }
 
@@ -1203,8 +1199,7 @@ label.filter-hide-lbl {
 	clear: none;
 }
 
-div.filter-select input,
-div.filter-select select {
+div.filter-select .inputbox {
 	margin-left: 5px;
 	margin-right: 5px;
 }
@@ -1468,7 +1463,7 @@ table.adminlist tr td.btns a {
 	margin: 0 10px;
 }
 
-.pagination div.limit select#limit {
+.pagination div.limit select#limit.inputbox {
 	width: 50px;
 }
 
@@ -1966,7 +1961,7 @@ p#login-error-message {
 	float: left;
 }
 
-select#lang {
+select#lang.inputbox {
 	width: 106px;
 }
 
@@ -3076,7 +3071,7 @@ table.aclmodify-table caption {
 	display: none;
 }
 
-table.aclmodify-table select {
+table.aclmodify-table select.inputbox {
 	margin-bottom: 3px;
 }
 

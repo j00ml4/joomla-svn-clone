@@ -76,7 +76,7 @@ class TemplatesModelStyles extends JModelList
 	/**
 	 * Build an SQL query to load the list data.
 	 *
-	 * @return	JDatabaseQuery
+	 * @return	JQuery
 	 */
 	protected function _getListQuery()
 	{

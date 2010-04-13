@@ -27,34 +27,33 @@ class ContactController extends JController
 	 */
 	function display()
 	{
-		
-		$cachable = true;
-		
+		$document = &JFactory::getDocument();
+
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'categories');
-			
+		$vFormat	= $document->getType();
+		$lName		= JRequest::getWord('layout', 'default');
+
+			// Get and render the view.
+		if ($view = &$this->getView($vName, $vFormat))
+		{
+			// Get the model for the view.
+			$model	= &$this->getModel($vName);
+
+			// Push the model into the view (as default).
+			$view->setModel($model, true);
+			$view->setLayout($lName);
+
+			// Push document object into the view.
+			$view->assignRef('document', $document);
 		// Workaround for the item view
-		if ($vName == 'contact')		
-		{	
-			$document = &JFactory::getDocument();
-			$vFormat	= $document->getType();
-			$view 		= $this->getView($vName, $vFormat);
-			$modelCat	= $this->getModel('category');
+		if ($vName == 'contact')
+		{
+			$modelCat	= &$this->getModel('category');
 			$view->setModel($modelCat);
 		}
-		
-		$user = &JFactory::getUser();
-		
-		if ($user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST' && 
-			($vName = 'category' || ($vName = 'contact' && JRequest::getVar('task') == 'submit' )))) {
-			$cachable = false;
+			$view->display();
 		}
-		
-		$safeurlparams = array('id'=>'INT','catid'=>'INT','limit'=>'INT','limitstart'=>'INT',
-			'filter_order'=>'CMD','filter_order_Dir'=>'CMD');
-			
-			parent::display($cachable,$safeurlparams);
-		
 	}
 
 	/**
@@ -153,8 +152,7 @@ class ContactController extends JController
 			 * If we are supposed to copy the admin, do so.
 			 */
 			// parameter check
-			$params = new JRegistry;
-			$params->loadJSON($contact->params);
+			$params = new JParameter($contact->params);
 			$emailcopyCheck = $params->get('show_email_copy', 0);
 
 			// check whether email copy function activated
@@ -212,8 +210,7 @@ class ContactController extends JController
 		$user = &JFactory::getUser();
 
 		// Get the contact detail parameters
-		$params = new JRegistry;
-		$params->loadJSON($contact->params);
+		$params = new JParameter($contact->params);
 
 		// Show the Vcard if contact parameter indicates (prevents direct access)
 		$groups = $user->authorisedLevels();
@@ -304,8 +301,7 @@ class ContactController extends JController
 		$session = &JFactory::getSession();
 
 		// Get params and component configurations
-		$params = new JRegistry;
-		$params->loadJSON($contact->params);
+		$params		= new JParameter($contact->params);
 		$pparams	= &$app->getParams('com_contact');
 
 		// check for session cookie

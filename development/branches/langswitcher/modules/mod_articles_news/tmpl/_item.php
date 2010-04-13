@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: _item.php 15564 2010-03-25 06:01:53Z klascommit $
+ * @version		$Id: default.php 14276 2010-01-18 14:20:28Z louis $
  * @package		Joomla.Site
  * @subpackage	mod_articles_news
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -12,14 +12,14 @@ defined('_JEXEC') or die;
 ?>
 <?php if ($params->get('item_title')) : ?>
 
-	<<?php echo $params->get('item_heading'); ?> class="newsflash-title<?php echo $params->get('moduleclass_sfx'); ?>">
+	<h4 class="newsflash-title<?php echo $params->get('moduleclass_sfx'); ?>">
 	<?php if ($params->get('link_titles') && $item->link != '') : ?>
 		<a href="<?php echo $item->link;?>">
 			<?php echo $item->title;?></a>
 	<?php else : ?>
 		<?php echo $item->title; ?>
 	<?php endif; ?>
-	</<?php echo $params->get('item_heading'); ?>>
+	</h4>
 
 <?php endif; ?>
 
@@ -31,6 +31,7 @@ endif; ?>
 
 <?php echo $item->introtext; ?>
 
-<?php if (isset($item->link) && $item->readmore && $params->get('readmore')) :
-	echo '<a class="readmore" href="'.$item->link.'">'.$item->linkText.'</a>';
-endif; ?>
+
+	<?php if (isset($item->link) && $item->readmore && $params->get('readmore')) :
+		echo '<a class="readmore" href="'.$item->link.'">'.$item->linkText.'</a>';
+		endif; ?>

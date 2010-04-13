@@ -46,7 +46,22 @@ class ContentHelperQuery
 
 	function orderbySecondary($orderby, $orderDate = 'created')
 	{
-		$queryDate = self::getQueryDate($orderDate);
+		switch ($orderDate)
+		{
+			case 'modified' :
+				$queryDate = ' CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END';
+				break;
+
+			// use created if publish_up is not set
+			case 'published' :
+				$queryDate = ' CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END ';
+				break;
+
+			case 'created' :
+			default :
+				$queryDate = ' a.created ';
+				break;
+		}
 
 		switch ($orderby)
 		{
@@ -96,27 +111,6 @@ class ContentHelperQuery
 		}
 
 		return $orderby;
-	}
-	
-	function getQueryDate($orderDate) {
-	
-		switch ($orderDate)
-		{
-			case 'modified' :
-				$queryDate = ' CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END';
-				break;
-
-			// use created if publish_up is not set
-			case 'published' :
-				$queryDate = ' CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END ';
-				break;
-
-			case 'created' :
-			default :
-				$queryDate = ' a.created ';
-				break;
-		}
-		return $queryDate;
 	}
 
 	function buildVotingQuery($params=null)

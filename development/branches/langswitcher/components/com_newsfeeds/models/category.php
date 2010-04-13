@@ -32,7 +32,7 @@ class NewsfeedsModelCategory extends JModelList
 
 	protected $_children = null;
 
-	protected $_parent = null;
+	protected $_parents = null;
 
 	/**
 	 * Model context string.
@@ -41,6 +41,11 @@ class NewsfeedsModelCategory extends JModelList
 	 */
 	protected $_context = 'com_newfeeds.category';
 
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * @return	void
+	 */
 	/**
 	 * The category that applies.
 	 *
@@ -58,7 +63,6 @@ class NewsfeedsModelCategory extends JModelList
 	protected $_categories = null;
 
 
-
 	/**
 	 * Method to get a list of items.
 	 *
@@ -73,9 +77,8 @@ class NewsfeedsModelCategory extends JModelList
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
 			if (!isset($this->_params)) {
-				$params = new JRegistry();
-				$params->loadJSON($item->params);
-				$item->params = $params;
+			//	$item->_params	= $item->params;
+			//	$item->params	= new JParameter($item->_params);
 			}
 		}
 
@@ -166,55 +169,29 @@ class NewsfeedsModelCategory extends JModelList
 	 * @return	object
 	 * @since	1.5
 	 */
-	public function getCategory()
+	function &getCategory($id = 0)
 	{
-		if(!is_object($this->_item))
-		{
-			$app = JFactory::getApplication();
-			$menu = $app->getMenu();
-			$active = $menu->getActive();
-			$params = new JRegistry();
-			if ($active)
-			{
-				$params->loadJSON($active->params);
-			}
-			$options = array();
-			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('Newsfeeds', $options);
-			$this->_item = $categories->get($this->getState('category.id', 'root'));
-			if(is_object($this->_item))
-			{
-				$this->_children = $this->_item->getChildren();
-				$this->_parent = false;
-				if($this->_item->getParent())
-				{
-					$this->_parent = $this->_item->getParent();
-				}
-				$this->_rightsibling = $this->_item->getSibling();
-				$this->_leftsibling = $this->_item->getSibling(false);
-			} else {
-				$this->_children = false;
-				$this->_parent = false;
+		if (empty($id)) {
+			$id = $this->getState('category.id');
+		}
+
+		if (empty($this->_category)) {
+			$db = $this->getDbo();
+			$db->setQuery(
+				'SELECT a.*' .
+				' FROM #__categories AS a' .
+				' WHERE id = '.(int) $id .
+				'  AND a.published = '.$this->getState('filter.published').
+				'  AND a.extension = '.$db->quote('com_newsfeeds')
+			);
+			$this->_category = $db->loadObject();
+
+			if ($db->getErrorNum()) {
+				$this->setError($db->getErrorMsg());
 			}
 		}
-		
-		return $this->_item;
-	}
-	
-	/**
-	 * Get the parent categorie.
-	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	public function getParent()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_parent;
+
+		return $this->_category;
 	}
 
 	/**
@@ -222,22 +199,24 @@ class NewsfeedsModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getLeftSibling()
+	function &getSiblings()
 	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
+		if ($this->_siblings === null && $category = &$this->getItem()) {
+			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
+			$model->setState('params',				JFactory::getApplication()->getParams());
+			$model->setState('filter.parent_id',	$category->parent_id);
+			$model->setState('filter.published',	$this->getState('filter.published'));
+			$model->setState('filter.access',		$this->getState('filter.access'));
+			// TODO: Set limits
+
+			$this->_siblings  = $model->getItems();
+
+			if ($this->_siblings === false) {
+				$this->setError($model->getError());
+			}
 		}
-		return $this->_leftsibling;
-	}
-	
-	function &getRightSibling()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_rightsibling;
+
+		return $this->_siblings;
 	}
 
 	/**
@@ -247,12 +226,59 @@ class NewsfeedsModelCategory extends JModelList
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
-	function &getChildren()
+	function &getChildren($categoryId = 0)
 	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
+		// Initialise variables.
+		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
+
+		if ($this->_children === null) {
+			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
+			$model->setState('params',				JFactory::getApplication()->getParams());
+			$model->setState('filter.parent_id',	$categoryId);
+			$model->setState('filter.get_children',	true);
+			$model->setState('filter.published',	$this->getState('filter.published'));
+			$model->setState('filter.access',		$this->getState('filter.access'));
+			// TODO: Set limits
+
+			$this->_children  = $model->getItems();
+
+			if ($this->_children === false) {
+				$this->setError($model->getError());
+			}
 		}
+
 		return $this->_children;
+	}
+
+	/**
+	 * Get the child categories.
+	 *
+	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
+	 *
+	 * @return	mixed	An array of categories or false if an error occurs.
+	 */
+	function &getParents($categoryId = 0)
+	{
+		// Initialise variables.
+		$categoryId = (!empty($categoryId)) ? $categoryId : $this->getState('category.id');
+
+		if ($this->_parents === null) {
+			$model = &JModel::getInstance('Categories', 'NewsfeedsModel', array('ignore_request' => true));
+			$model->setState('params',				JFactory::getApplication()->getParams());
+			$model->setState('list.select',			'a.id, a.title, a.level, a.path AS route');
+			$model->setState('filter.parent_id',	$categoryId);
+			$model->setState('filter.get_parents',	true);
+			$model->setState('filter.published',	$this->getState('filter.published'));
+			$model->setState('filter.access',		$this->getState('filter.access'));
+			// TODO: Set limits
+
+			$this->_parents  = $model->getItems();
+
+			if ($this->_parents === false) {
+				$this->setError($model->getError());
+			}
+		}
+
+		return $this->_parents;
 	}
 }

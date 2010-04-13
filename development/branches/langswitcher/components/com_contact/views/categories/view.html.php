@@ -31,10 +31,13 @@ class ContactViewCategories extends JView
 	 */
 	function display($tpl = null)
 	{
-		// Initialise variables
+		// Initialise variables.
+		$user		= &JFactory::getUser();
+		$app		= &JFactory::getApplication();
+
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
-		$parent		= $this->get('Parent');
+		$pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -42,24 +45,21 @@ class ContactViewCategories extends JView
 			return false;
 		}
 
-		if($items === false)
-		{
-			//TODO Raise error for missing category here
-		}
-
-		if($parent == false)
-		{
-			//TODO Raise error for missing parent category here
-		}
-
 		$params = &$state->params;
 
-		$items = array($parent->id => $items);
+		// PREPARE THE DATA
 
-		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
+		// Compute the contact slug and prepare description (runs content plugins).
+		foreach ($items as $i => &$item)
+		{
+			$item->slug			= $item->route ? ($item->id.':'.$item->route) : $item->id;
+			$item->description	= JHtml::_('content.prepare', $item->description);
+		}
+
 		$this->assignRef('params',		$params);
-		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);
+		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('user',		$user);
 
 		$this->_prepareDocument();
 
@@ -77,17 +77,26 @@ class ContactViewCategories extends JView
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
-		$menu = $menus->getActive();
-		if($menu)
+		if ($menu = $menus->getActive())
 		{
-			$this->params->def('page_heading', $this->params->def('page_title', $menu->title));
-		} else {
-			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
-		} 
-		$title = $this->params->get('page_title');
+			$menuParams = new JParameter($menu->params);
+			$title = $menuParams->get('page_title');
+		}
 		if (empty($title)) {
 			$title	= htmlspecialchars_decode($app->getCfg('sitename'));
 		}
 		$this->document->setTitle($title);
+
+		// Add feed links
+		if ($this->params->get('show_feed_link', 1))
+		{
+			$link = '&format=feed&limitstart=';
+
+			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
+			$this->document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
+
+			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
+			$this->document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
+		}
 	}
 }

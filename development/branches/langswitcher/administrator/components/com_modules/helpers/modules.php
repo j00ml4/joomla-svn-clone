@@ -57,9 +57,9 @@ class ModulesHelper
 	{
 		// Build the filter options.
 		$options	= array();
-		$options[]	= JHtml::_('select.option',	'1',	JText::_('JENABLED'));
-		$options[]	= JHtml::_('select.option',	'0',	JText::_('JDISABLED'));
-		$options[]	= JHtml::_('select.option',	'-2',	JText::_('JTRASH'));
+		$options[]	= JHtml::_('select.option',	'1',	JText::_('JOPTION_ENABLED'));
+		$options[]	= JHtml::_('select.option',	'0',	JText::_('JOPTION_DISABLED'));
+		$options[]	= JHtml::_('select.option',	'-2',	JText::_('JOPTION_TRASH'));
 		return $options;
 	}
 
@@ -72,8 +72,8 @@ class ModulesHelper
 	{
 		// Build the filter options.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '0', JText::_('JSITE'));
-		$options[]	= JHtml::_('select.option', '1', JText::_('JADMINISTRATOR'));
+		$options[]	= JHtml::_('select.option', '0', JText::_('COM_MODULES_OPTION_SITE'));
+		$options[]	= JHtml::_('select.option', '1', JText::_('COM_MODULES_OPTION_ADMINISTRATOR'));
 		return $options;
 	}
 
@@ -118,26 +118,14 @@ class ModulesHelper
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 
-		$query->select('DISTINCT(m.module) AS value, e.name AS text');
-		$query->from('#__modules AS m');
-		$query->join('LEFT', '#__extensions AS e ON e.element=m.module');
-		$query->where('m.`client_id` = '.(int)$clientId);
+		$query->select('DISTINCT(module) AS value, module AS text');
+		$query->from('#__modules');
+		$query->where('`client_id` = '.(int)$clientId);
+		$query->order('module');
 
 		$db->setQuery($query);
-		$modules = $db->loadObjectList();
-		foreach ($modules as $i=>$module) {
-			$extension = $module->value;
-			$path = $clientId ? JPATH_ADMINISTRATOR : JPATH_SITE;
-			$source = $path . "/modules/$extension";
-			$lang = JFactory::getLanguage();
-				$lang->load("$extension.sys", $path, null, false, false)
-			||	$lang->load("$extension.sys", $source, null, false, false)
-			||	$lang->load("$extension.sys", $path, $lang->getDefault(), false, false)
-			||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
-			$modules[$i]->text = JText::_($module->text);
-		}
-		JArrayHelper::sortObjects($modules,'text');
-		return $modules;
+
+		return $db->loadObjectList();
 	}
 
 	/**

@@ -24,7 +24,8 @@ class JMenuSite extends JMenu
 	 */
 	public function load()
 	{
-		$cache = &JFactory::getCache('mod_menu', '');  // has to be mod_menu or this cache won't get cleaned
+		$cache = &JFactory::getCache('_system', 'output');
+
 		if (!$data = $cache->get('menu_items')) {
 			// Initialise variables.
 			$db		= JFactory::getDbo();
@@ -78,11 +79,11 @@ class JMenuSite extends JMenu
 				parse_str($url, $menu->query);
 			}
 
-			$cache->store($menus, 'menu_items');
+			$cache->store(serialize($menus), 'menu_items');
 
 			$this->_items = $menus;
 		} else {
-			$this->_items = $data;
+			$this->_items = unserialize($data);
 		}
 	}
 }

@@ -40,4 +40,6 @@ class JPaginationTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected['pages.stop'], $pagination->get('pages.stop'), 'Wrong Stop Page');
 		unset($pagination);
 	}
+
+
 }

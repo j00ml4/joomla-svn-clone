@@ -135,14 +135,9 @@ class ContactModelContacts extends JModelList
 			}
 		}
 
-			if($this->getState('list.ordering', 'ordering') == 'a.ordering')
-		{
-			$query->order('a.catid, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).', ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		}
-		
+		// Add the list ordering clause.
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}

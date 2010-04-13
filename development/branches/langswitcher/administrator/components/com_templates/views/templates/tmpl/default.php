@@ -48,13 +48,13 @@ $user = & JFactory::getUser();
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TYPE', 'a.client_id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%" class="center">
-					<?php echo JText::_('JVERSION'); ?>
+					<?php echo JText::_('Version'); ?>
 				</th>
 				<th width="15%">
-					<?php echo JText::_('JDATE'); ?>
+					<?php echo JText::_('Date'); ?>
 				</th>
 				<th width="25%" >
-					<?php echo JText::_('JAUTHOR'); ?>
+					<?php echo JText::_('Author'); ?>
 				</th>
 			</tr>
 		</thead>
@@ -76,7 +76,7 @@ $user = & JFactory::getUser();
 						<?php echo $item->name;?></a>
 				</td>
 				<td class="center">
-					<?php echo $item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>
+					<?php echo $item->client_id == 0 ? JText::_('COM_TEMPLATES_OPTION_SITE') : JText::_('COM_TEMPLATES_OPTION_ADMINISTRATOR'); ?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->xmldata->get('version')); ?>

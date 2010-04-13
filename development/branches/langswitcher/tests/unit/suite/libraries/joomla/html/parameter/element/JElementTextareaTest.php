@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE.'/libraries/joomla/html/parameter/element/textarea.php';
+require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'html' . DS . 'parameter' . DS . 'element' . DS . 'textarea.php';
 
 /**
  * Test class for JElementTextarea.
@@ -42,3 +42,4 @@ class JElementTextareaTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
+?>

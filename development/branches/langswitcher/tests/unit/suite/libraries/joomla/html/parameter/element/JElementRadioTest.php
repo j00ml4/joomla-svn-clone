@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
-require_once JPATH_BASE.'/libraries/joomla/html/parameter/element/radio.php';
+require_once JPATH_BASE. DS . 'libraries' . DS . 'joomla' . DS . 'html' . DS . 'parameter' . DS . 'element' . DS . 'radio.php';
 
 /**
  * Test class for JElementRadio.
@@ -42,3 +42,4 @@ class JElementRadioTest extends PHPUnit_Framework_TestCase
 		);
 	}
 }
+?>
