@@ -26,7 +26,7 @@ class JTableCategory extends JTableNested
 	{
 		parent::__construct('#__categories', 'id', $db);
 
-		$this->access	= (int) JFactory::getConfig()->getValue('access');
+		$this->access	= (int) JFactory::getConfig()->get('access');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class JTableCategory extends JTableNested
 	{
 		// Check for a title.
 		if (trim($this->title) == '') {
-			$this->setError(JText::sprintf('MUST_CONTAIN_A_TITLE', JText::_('Category')));
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MUSTCONTAIN_A_TITLE_CATEGORY'));
 			return false;
 		}
 

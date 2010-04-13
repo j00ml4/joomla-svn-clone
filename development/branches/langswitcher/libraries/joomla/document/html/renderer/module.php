@@ -53,7 +53,7 @@ class JDocumentRendererModule extends JDocumentRenderer
 		}
 
 		// get the user and configuration object
-		$user = &JFactory::getUser();
+		//$user = &JFactory::getUser();
 		$conf = &JFactory::getConfig();
 
 		// set the module content
@@ -62,18 +62,30 @@ class JDocumentRendererModule extends JDocumentRenderer
 		}
 
 		//get module parameters
-		$mod_params = new JParameter($module->params);
+		$mod_params = new JRegistry;
+		$mod_params->loadJSON($module->params);
 
 		$contents = '';
-		if ($mod_params->get('cache', 0) && $conf->getValue('config.caching'))
-		{
-			$cache = &JFactory::getCache($module->module);
-			$cache->setLifeTime($mod_params->get('cache_time', $conf->getValue('config.cachetime') * 60));
-			$contents =  $cache->get(array('JModuleHelper', 'renderModule'), array($module, $params), $module->id. $user->get('aid', 0).md5(JRequest::getURI()));
-		}
-		else {
+		
+		
+		$cachemode = $mod_params->get('cachemode','oldstatic');  // default for compatibility purposes. Set cachemode parameter or use JModuleHelper::moduleCache from within the module instead
+	
+		if ($mod_params->get('cache', 0) == 1  && $conf->get('caching') && $cachemode != 'id' && $cachemode != 'safeuri')
+		{	
+		
+			// default to itemid creating mehod and workarounds on
+			$cacheparams = new stdClass;
+			$cacheparams->cachemode = $cachemode;  
+			$cacheparams->class = 'JModuleHelper';	
+			$cacheparams->method = 'renderModule';
+			$cacheparams->methodparams = array($module, $params);	
+					
+			$contents = JModuleHelper::ModuleCache($module, $mod_params,$cacheparams);
+			
+		} 
+		else { 
 			$contents = JModuleHelper::renderModule($module, $params);
-		}
+		} 
 
 		return $contents;
 	}

@@ -30,7 +30,7 @@ class JTableModule extends JTable
 	{
 		parent::__construct('#__modules', 'id', $db);
 
-		$this->access = (int) JFactory::getConfig()->getValue('access');
+		$this->access = (int) JFactory::getConfig()->get('access');
 	}
 
 	/**
@@ -43,7 +43,7 @@ class JTableModule extends JTable
 		// check for valid name
 		if (trim($this->title) == '')
 		{
-			$this->setError(JText::sprintf('MUST_CONTAIN_A_TITLE', JText::_('Module')));
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MUSTCONTAIN_A_TITLE_MODULE'));
 			return false;
 		}
 
