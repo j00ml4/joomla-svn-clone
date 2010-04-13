@@ -383,7 +383,7 @@ class JPagination extends JObject
 		}
 		$limits[] = JHtml::_('select.option', '50');
 		$limits[] = JHtml::_('select.option', '100');
-		$limits[] = JHtml::_('select.option', '0', JText::_('JOPTION_ALL'));
+		$limits[] = JHtml::_('select.option', '0', JText::_('JALL'));
 
 		$selected = $this->_viewall ? 0 : $this->limit;
 
@@ -474,17 +474,15 @@ class JPagination extends JObject
 	protected function _list_render($list)
 	{
 		// Reverse output rendering for right-to-left display.
-		$html = '&lt;&lt; ';
-		$html .= $list['start']['data'];
-		$html .= ' &lt; ';
-		$html .= $list['previous']['data'];
+		$html = '<ul>';
+		$html .= '<li class="pagination-start">'.$list['start']['data'].'</li>';
+		$html .= '<li class="pagination-prev">'.$list['previous']['data'].'</li>';
 		foreach($list['pages'] as $page) {
-			$html .= ' '.$page['data'];
+			$html .= '<li>'.$page['data'].'</li>';
 		}
-		$html .= ' '. $list['next']['data'];
-		$html .= ' &gt;';
-		$html .= ' '. $list['end']['data'];
-		$html .= ' &gt;&gt;';
+		$html .= '<li class="pagination-next">'. $list['next']['data'].'</li>';
+		$html .= '<li class="pagination-end">'. $list['end']['data'].'</li>';
+		$html .= '</ul>';
 
 		return $html;
 	}

@@ -145,7 +145,7 @@ class JApplication extends JObject
 			}
 			else
 			{
-				$error = JError::raiseError(500, 'Unable to load application: '.$client);
+				$error = JError::raiseError(500, JText::sprintf('JLIB_APPLICATION_ERROR_APPLICATION_LOAD', $client));
 				return $error;
 			}
 
@@ -169,14 +169,14 @@ class JApplication extends JObject
 
 		// Check that we were given a language in the array (since by default may be blank).
 		if (isset($options['language'])) {
-			$config->setValue('config.language', $options['language']);
+			$config->set('language', $options['language']);
 		}
 
 		// Set user specific editor.
 		$user	= &JFactory::getUser();
 		$editor	= $user->getParam('editor', $this->getCfg('editor'));
 		$editor	= JPluginHelper::isEnabled('editors', $editor) ? $editor : $this->getCfg('editor');
-		$config->setValue('config.editor', $editor);
+		$config->set('editor', $editor);
 
 		// Trigger the onAfterInitialise event.
 		JPluginHelper::importPlugin('system');
@@ -221,7 +221,7 @@ class JApplication extends JObject
 	{
 		$document = &JFactory::getDocument();
 
-		$document->setTitle($this->getCfg('sitename'). ' - ' .JText::_('Administration'));
+		$document->setTitle($this->getCfg('sitename'). ' - ' .JText::_('JADMINISTRATION'));
 		$document->setDescription($this->getCfg('MetaDesc'));
 
 		$contents = JComponentHelper::renderComponent($component);
@@ -399,7 +399,7 @@ class JApplication extends JObject
 	public function getCfg($varname, $default=null)
 	{
 		$config = &JFactory::getConfig();
-		return $config->getValue('config.' . $varname, $default);
+		return $config->get('' . $varname, $default);
 	}
 
 	/**
@@ -419,7 +419,7 @@ class JApplication extends JObject
 		{
 			$r = null;
 			if (!preg_match('/J(.*)/i', get_class($this), $r)) {
-				JError::raiseError(500, "JApplication::getName() : Can\'t get or parse class name.");
+				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_APPLICATION_GET_NAME'));
 			}
 			$name = strtolower($r[1]);
 		}
@@ -438,7 +438,7 @@ class JApplication extends JObject
 		$session	= &JFactory::getSession();
 		$registry	= $session->get('registry');
 		if (!is_null($registry)) {
-			return $registry->getValue($key);
+			return $registry->get($key);
 		}
 		return null;
 	}
@@ -455,7 +455,7 @@ class JApplication extends JObject
 		$session	= &JFactory::getSession();
 		$registry	= &$session->get('registry');
 		if (!is_null($registry)) {
-			return $registry->setValue($key, $value);
+			return $registry->set($key, $value);
 		}
 		return null;
 	}
@@ -590,7 +590,7 @@ class JApplication extends JObject
 		}
 
 		// Return the error.
-		return JError::raiseWarning('SOME_ERROR_CODE', JText::_('E_LOGIN_AUTHENTICATE'));
+		return JError::raiseWarning('SOME_ERROR_CODE', JText::_('JLIB_LOGIN_AUTHENTICATE'));
 	}
 
 	/**
@@ -652,12 +652,6 @@ class JApplication extends JObject
 	 */
 	public function getTemplate($params = false)
 	{
-		if($params)
-		{
-			$template = new stdClass();
-			$template->template = 'system';
-			$template->params = new JParameter();
-		}
 		return 'system';
 	}
 
@@ -671,7 +665,8 @@ class JApplication extends JObject
 	static public function getRouter($name = null, array $options = array())
 	{
 		if (!isset($name)) {
-			$name = $this->_name;
+			$app = JFactory::getApplication();
+			$name = $app->getName();
 		}
 
 		jimport('joomla.application.router');
@@ -754,7 +749,7 @@ class JApplication extends JObject
 	public static function getHash($seed)
 	{
 		$conf = &JFactory::getConfig();
-		return md5($conf->getValue('config.secret') .  $seed );
+		return md5($conf->get('secret') .  $seed );
 	}
 
 	/**

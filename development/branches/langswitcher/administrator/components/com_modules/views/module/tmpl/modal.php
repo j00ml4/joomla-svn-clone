@@ -85,7 +85,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<?php if ($this->item->id) : ?>
-			<legend><?php echo JText::sprintf('JRECORD_NUMBER', $this->item->id); ?></legend>
+			<legend><?php echo JText::sprintf('JGLOBAL_RECORD_NUMBER', $this->item->id); ?></legend>
 			<?php endif; ?>
 
 			<?php echo $this->form->getLabel('title'); ?>
@@ -118,7 +118,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<br class="clr" />
 			<!-- Module metadata -->
 			<?php if ($this->item->xml) : ?>
-				<?php if ($text = (string) $this->item->xml->description) : ?>
+				<?php if ($text = trim($this->item->xml->description)) : ?>
 					<label>
 						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
 					</label>

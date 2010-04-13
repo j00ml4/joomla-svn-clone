@@ -53,19 +53,15 @@ class plgSearchContent extends JPlugin
 
 		$searchText = $text;
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys(plgSearchContentAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
 				return array();
 			}
 		}
 
-		// load plugin params info
-		$plugin			= &JPluginHelper::getPlugin('search', 'content');
-		$pluginParams	= new JParameter($plugin->params);
-
-		$sContent		= $pluginParams->get('search_content',		1);
-		$sUncategorised = $pluginParams->get('search_uncategorised',	1);
-		$sArchived		= $pluginParams->get('search_archived',		1);
-		$limit			= $pluginParams->def('search_limit',		50);
+		$sContent		= $this->params->get('search_content',		1);
+		$sUncategorised = $this->params->get('search_uncategorised',	1);
+		$sArchived		= $this->params->get('search_archived',		1);
+		$limit			= $this->params->def('search_limit',		50);
 
 		$nullDate		= $db->getNullDate();
 		$date = &JFactory::getDate();
@@ -162,7 +158,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list as $key => $item)
 				{
-					$list[$key]->href = ContentRoute::article($item->slug, $item->catslug);
+					$list[$key]->href = ContentHelperRoute::getArticleRoute($item->slug, $item->catslug);
 				}
 			}
 			$rows[] = $list;
@@ -189,7 +185,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list2 as $key => $item)
 				{
-					$list2[$key]->href = ContentRoute::article($item->id);
+					$list2[$key]->href = ContentHelperRoute::getArticleRoute($item->id);
 				}
 			}
 
@@ -199,7 +195,7 @@ class plgSearchContent extends JPlugin
 		// search archived content
 		if ($sArchived && $limit > 0)
 		{
-			$searchArchived = JText::_('Archived');
+			$searchArchived = JText::_('JARCHIVED');
 
 			$query->clear();
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
@@ -223,7 +219,7 @@ class plgSearchContent extends JPlugin
 			{
 				foreach($list3 as $key => $item)
 				{
-					$list3[$key]->href = ContentRoute::article($item->slug, $item->catslug);
+					$list3[$key]->href = ContentHelperRoute::getArticleRoute($item->slug, $item->catslug);
 				}
 			}
 

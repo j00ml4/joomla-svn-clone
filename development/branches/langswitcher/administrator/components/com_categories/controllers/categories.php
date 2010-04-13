@@ -7,7 +7,7 @@
 
 defined('_JEXEC') or die;
 
-jimport( 'joomla.application.component.controller' );
+jimport( 'joomla.application.component.controlleradmin' );
 
 /**
  * The Menu Item Controller
@@ -16,8 +16,10 @@ jimport( 'joomla.application.component.controller' );
  * @subpackage	com_categories
  * @since		1.6
  */
-class CategoriesControllerCategories extends JController
+class CategoriesControllerCategories extends JControllerAdmin
 {
+	protected $_context = 'com_categories';
+	
 	/**
 	 * Constructor.
 	 *
@@ -31,15 +33,9 @@ class CategoriesControllerCategories extends JController
 		// Register proxy tasks.
 		$this->registerTask('unpublish',	'publish');
 		$this->registerTask('trash',		'publish');
-		$this->registerTask('orderup',		'ordering');
-		$this->registerTask('orderdown',	'ordering');
-	}
-
-	/**
-	 * Display the view
-	 */
-	public function display()
-	{
+		$this->registerTask('orderup',		'reorder');
+		$this->registerTask('orderdown',	'reorder');
+		$this->setURL('index.php?option=com_categories&view=categories');
 	}
 
 	/**
@@ -50,103 +46,7 @@ class CategoriesControllerCategories extends JController
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;
 	}
-
-	/**
-	 * Removes an item
-	 */
-	public function delete()
-	{
-		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		// Get items to remove from the request.
-		$pks	= JRequest::getVar('cid', array(), 'post', 'array');
-		$n		= count($pks);
-		if (empty($pks)) {
-			JError::raiseWarning(500, JText::_('JError_No_items_selected'));
-		}
-		else
-		{
-			// Get the model.
-			$model = $this->getModel('category');
-			// Remove the items.
-			if ($model->delete($pks)) {
-				$this->setMessage(JText::sprintf('JSuccess_N_items_deleted', $n));
-			}
-			else {
-				$this->setMessage($model->getError());
-			}
-		}
-
-		$this->setRedirect('index.php?option=com_categories&view=categories');
-	}
-
-	/**
-	 * Method to change the published state of selected rows.
-	 *
-	 * @return	void
-	 */
-	public function publish()
-	{
-		// Check for request forgeries
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		// Get items to publish from the request.
-		$pks	= JRequest::getVar('cid', array(), '', 'array');
-		$values	= array('publish' => 1, 'unpublish' => 0, 'trash' => -2);
-		$task	= $this->getTask();
-		$value	= JArrayHelper::getValue($values, $task, 0, 'int');
-
-		if (empty($pks)) {
-			JError::raiseWarning(500, JText::_('JError_No_items_selected'));
-		}
-		else
-		{
-			// Get the model.
-			$model	= $this->getModel();
-
-			// Publish the items.
-			if ($model->publish($pks, $value)) {
-				$this->setMessage($value ? JText::_('JSuccess_N_items_published') : JText::_('JSuccess_N_items_unpublished'));
-			}
-			else {
-				$this->setMessage($model->getError());
-			}
-		}
-
-		$this->setRedirect('index.php?option=com_categories&view=categories');
-	}
-
-	/**
-	 * Method to reorder selected rows.
-	 *
-	 * @return	bool	False on failure or error, true on success.
-	 */
-	public function ordering()
-	{
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		// Initialise variables.
-		$pks	= JRequest::getVar('cid', null, 'post', 'array');
-		$model	= &$this->getModel();
-
-		// Attempt to move the row.
-		$return = $model->ordering(array_pop($pks), $this->getTask() == 'orderup' ? -1 : 1);
-
-		if ($return === false) {
-			// Reorder failed.
-			$message = JText::sprintf('JError_Reorder_failed', $model->getError());
-			$this->setRedirect('index.php?option=com_categories&view=categories', $message, 'error');
-			return false;
-		}
-		else {
-			// Reorder succeeded.
-			$message = JText::_('JSuccess_Item_reordered');
-			$this->setRedirect('index.php?option=com_categories&view=categories', $message);
-			return true;
-		}
-	}
-
+	
 	/**
 	 * Rebuild the nested set tree.
 	 *
@@ -154,7 +54,7 @@ class CategoriesControllerCategories extends JController
 	 */
 	public function rebuild()
 	{
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		$this->setRedirect('index.php?option=com_categories&view=categories');
 
@@ -164,12 +64,12 @@ class CategoriesControllerCategories extends JController
 		if ($model->rebuild())
 		{
 			// Reorder succeeded.
-			$this->setMessage(JText::_('Categories_Rebuild_success'));
+			$this->setMessage(JText::_('CATEGORIES_REBUILD_SUCCESS'));
 			return true;
 		}
 		else {
 			// Rebuild failed.
-			$this->setMessage(JText::sprintf('Categories_Rebuild_failed'));
+			$this->setMessage(JText::sprintf('CATEGORIES_REBUILD_FAILED'));
 			return false;
 		}
 	}
