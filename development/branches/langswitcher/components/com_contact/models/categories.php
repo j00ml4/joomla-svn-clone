@@ -93,12 +93,14 @@ class ContactModelCategories extends JModel
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
+			$language = JSite::getLanguage();
 			if($active)
 			{
 				$params->loadJSON($active->params);
 			}
 			$options = array();
 			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
+			$options['language'] = $language;
 			$categories = JCategories::getInstance('Contact', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))

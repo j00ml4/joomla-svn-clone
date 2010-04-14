@@ -57,6 +57,12 @@ Test language for menu items
 1. Change the language of one menu item
 2. View the public site and switch between two languages. The menu item is only shown on its selected language
 
+Test language for banners
+
+1. Publish the module "Banner"
+2. Publish the OSM-1 banner
+2. View the public site and switch between two languages. The banner should only be shown on the "English (UK)" language.
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
@@ -70,7 +76,6 @@ Test the unicity of the home page for a language
 3. Save and Close. Verify that the previous home page for this language has changed
 
 TODO
--Apply language selection to banners
 -Apply language selection to newsfeeds
 -Apply language selection to weblinks
 -Add Language Filters in Admin
