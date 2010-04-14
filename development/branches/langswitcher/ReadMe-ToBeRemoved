@@ -52,6 +52,11 @@ Test inheritance by the category for contact details
 1. Change the language of the category "Fruit" to be "xx (Test)"
 2. View the index.php/contact-us.html switching between two languages. Contact in the Fruit category are only shown on the "xx (Test)" language
 
+Test language for menu items
+
+1. Change the language of one menu item
+2. View the public site and switch between two languages. The menu item is only shown on its selected language
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
@@ -66,7 +71,6 @@ Test the unicity of the home page for a language
 
 TODO
 -Apply language selection to banners
--Apply language selection to menu items
 -Apply language selection to newsfeeds
 -Apply language selection to weblinks
 -Add Language Filters in Admin
