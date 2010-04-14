@@ -22,7 +22,7 @@ $pane = JPane::getInstance('sliders');
 		<fieldset>
 			<?php echo $this->form->getLabel('published'); ?>
 			<?php echo $this->form->getInput('published'); ?>
-			
+
 			<input type="button" onclick="submitbutton('comment.moderate')" value="<?php echo $this->escape(JText::_('SOCIAL_MODERATE')); ?>" />
 			<input type="hidden" name="id" value="<?php echo (int) $this->item->id; ?>" />
 			<input type="hidden" name="return" value="<?php echo base64_encode('index.php?option=com_social&view=comment&id='.(int) $this->item->id);?>" />
@@ -54,7 +54,7 @@ $pane = JPane::getInstance('sliders');
 			</dd>
 
 			<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-			<dd class="date"><?php echo JHTML::_('date',$this->item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+			<dd class="date"><?php echo JHTML::_('date',$this->item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 			<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 			<dd class="subject"><?php echo ($this->item->subject) ? $this->item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -81,7 +81,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -109,7 +109,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>
@@ -137,7 +137,7 @@ $pane = JPane::getInstance('sliders');
 					<dd class="author"><?php echo $item->name; ?></dd>
 
 					<dt class="date"><?php echo JText::_('SOCIAL_DATE'); ?></dt>
-					<dd class="date"><?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2')); ?></dd>
+					<dd class="date"><?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2')); ?></dd>
 
 					<dt class="subject"><?php echo JText::_('SOCIAL_SUBJECT'); ?></dt>
 					<dd class="subject"><?php echo ($item->subject) ? $item->subject : JText::_('SOCIAL_NOT_AVAILABLE'); ?></dd>

@@ -80,7 +80,7 @@ $lOrdering	= $this->state->get('list.ordering');
 					<?php echo $this->escape($item->page_title); ?>
 				</td>
 				<td align="center">
-					<?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC3')); ?>
+					<?php echo JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC3')); ?>
 				</td>
 				<td align="center">
 					<?php if ($item->comment_count) : ?>

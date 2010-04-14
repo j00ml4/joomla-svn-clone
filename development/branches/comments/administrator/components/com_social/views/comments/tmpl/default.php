@@ -76,7 +76,7 @@ JHtml::_('behavior.tooltip');
 			<tr class="row<?php echo $i % 2; ?>">
 				<td align="center">
 					<a href="<?php echo JRoute::_('index.php?option=com_social&view=comment&id='.$item->id); ?>">
-						<?php echo JText::sprintf('SOCIAL_SUBMITTED_AUTHOR_DATE', $item->name, JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC2'))); ?></a>
+						<?php echo JText::sprintf('SOCIAL_SUBMITTED_AUTHOR_DATE', $item->name, JHTML::_('date',$item->created_time, JText::_('DATE_FORMAT_LC2'))); ?></a>
 				</td>
 				<td valign="top">
 					<ul class="comment-author-data">
