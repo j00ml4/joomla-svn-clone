@@ -207,7 +207,8 @@ class RedirectModelLink extends JModelForm
 	{
 		// Typecast variable.
 		$pks = (array) $pks;
-
+		$user	= JFactory::getUser();
+		
 		// Get a row instance.
 		$table = &$this->getTable();
 
@@ -309,7 +310,7 @@ class RedirectModelLink extends JModelForm
 		if (!$user->authorise('core.edit', 'com_redirect'))
 		{
 			$pks = array();
-			$this->setError(JText::_('JERROR_CORE_EDIT_NOT_PERMITTED'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			return false;
 		}
 
