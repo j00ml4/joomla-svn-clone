@@ -12,11 +12,11 @@
 			label="SOCIAL_ICON_STYLE"
 			description="SOCIAL_ICON_STYLE_DESC">
 			<option
-				value="0">COMMENTS_ICONS_ONLY</option>
+				value="0">SOCIAL_ICONS_ONLY</option>
 			<option
-				value="1">COMMENTS_ICONS_AND_TEXT</option>
+				value="1">SOCIAL_ICONS_AND_TEXT</option>
 			<option
-				value="2">COMMENTS_TEXT_ONLY</option>
+				value="2">SOCIAL_TEXT_ONLY</option>
 		</field>
 
 		<field
@@ -26,13 +26,13 @@
 			label="SOCIAL_SHARE_HEADING"
 			description="SOCIAL_SHARE_HEADING_DESC">
 			<option
-				value="0">COMMENTS_DO_NOT_SHOW</option>
+				value="0">SOCIAL_DO_NOT_SHOW</option>
 			<option
-				value="1">COMMENTS_ICON_ONLY</option>
+				value="1">SOCIAL_ICON_ONLY</option>
 			<option
-				value="2">COMMENTS_ICON_AND_TEXT</option>
+				value="2">SOCIAL_ICON_AND_TEXT</option>
 			<option
-				value="3">COMMENTS_TEXT_ONLY</option>
+				value="3">SOCIAL_TEXT_ONLY</option>
 		</field>
 
 		<field
@@ -42,9 +42,9 @@
 			label="SOCIAL_SHARE_EMAIL"
 			description="SOCIAL_SHARE_EMAIL_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -54,9 +54,9 @@
 			label="SOCIAL_BOOKMARKS_BLINKLIST"
 			description="SOCIAL_BOOKMARKS_BLINKLIST_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -66,9 +66,9 @@
 			label="SOCIAL_BOOKMARKS_BLOGLINES"
 			description="SOCIAL_BOOKMARKS_bloglines_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -78,9 +78,9 @@
 			label="SOCIAL_BOOKMARKS_blogmarks"
 			description="SOCIAL_BOOKMARKS_blogmarks_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -90,9 +90,9 @@
 			label="SOCIAL_BOOKMARKS_buzz"
 			description="SOCIAL_BOOKMARKS_buzz_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -102,9 +102,9 @@
 			label="SOCIAL_BOOKMARKS_connotea"
 			description="SOCIAL_BOOKMARKS_connotea_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -114,9 +114,9 @@
 			label="SOCIAL_BOOKMARKS_DELICIOUS"
 			description="SOCIAL_BOOKMARKS_DELICIOUS_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -126,9 +126,9 @@
 			label="SOCIAL_BOOKMARKS_design_float"
 			description="SOCIAL_BOOKMARKS_design_float_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -138,9 +138,9 @@
 			label="SOCIAL_BOOKMARKS_DIGG"
 			description="SOCIAL_BOOKMARKS_DIGG_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -150,9 +150,9 @@
 			label="SOCIAL_BOOKMARKS_diigo"
 			description="SOCIAL_BOOKMARKS_diigo_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -162,9 +162,9 @@
 			label="SOCIAL_BOOKMARKS_dotnetkicks"
 			description="SOCIAL_BOOKMARKS_dotnetkicks_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -174,9 +174,9 @@
 			label="SOCIAL_BOOKMARKS_dzone"
 			description="SOCIAL_BOOKMARKS_dzone_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -186,9 +186,9 @@
 			label="SOCIAL_BOOKMARKS_FACEBOOK"
 			description="SOCIAL_BOOKMARKS_FACEBOOK_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -198,9 +198,9 @@
 			label="SOCIAL_BOOKMARKS_fark"
 			description="SOCIAL_BOOKMARKS_fark_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -210,9 +210,9 @@
 			label="SOCIAL_BOOKMARKS_faves"
 			description="SOCIAL_BOOKMARKS_faves_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -222,9 +222,9 @@
 			label="SOCIAL_BOOKMARKS_fleck"
 			description="SOCIAL_BOOKMARKS_fleck_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -234,9 +234,9 @@
 			label="SOCIAL_BOOKMARKS_friendfeed"
 			description="SOCIAL_BOOKMARKS_friendfeed_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -246,9 +246,9 @@
 			label="SOCIAL_BOOKMARKS_friendsite"
 			description="SOCIAL_BOOKMARKS_friendsite_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -258,9 +258,9 @@
 			label="SOCIAL_BOOKMARKS_FURL"
 			description="SOCIAL_BOOKMARKS_FURL_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -270,9 +270,9 @@
 			label="SOCIAL_BOOKMARKS_GOOGLE"
 			description="SOCIAL_BOOKMARKS_GOOGLE_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -282,9 +282,9 @@
 			label="SOCIAL_BOOKMARKS_kaboodle"
 			description="SOCIAL_BOOKMARKS_kaboodle_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -294,9 +294,9 @@
 			label="SOCIAL_BOOKMARKS_kirtsy"
 			description="SOCIAL_BOOKMARKS_kirtsy_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -306,9 +306,9 @@
 			label="SOCIAL_BOOKMARKS_hacker_news"
 			description="SOCIAL_BOOKMARKS_hacker_news_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -318,9 +318,9 @@
 			label="SOCIAL_BOOKMARKS_hyves"
 			description="SOCIAL_BOOKMARKS_hyves_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -330,9 +330,9 @@
 			label="SOCIAL_BOOKMARKS_identica"
 			description="SOCIAL_BOOKMARKS_identica_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -342,9 +342,9 @@
 			label="SOCIAL_BOOKMARKS_linkedin"
 			description="SOCIAL_BOOKMARKS_linkedin_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -354,9 +354,9 @@
 			label="SOCIAL_BOOKMARKS_MAGNOLIA"
 			description="SOCIAL_BOOKMARKS_MAGNOLIA_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -366,9 +366,9 @@
 			label="SOCIAL_BOOKMARKS_maple"
 			description="SOCIAL_BOOKMARKS_maple_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -378,9 +378,9 @@
 			label="SOCIAL_BOOKMARKS_mister_wong"
 			description="SOCIAL_BOOKMARKS_mister_wong_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -390,9 +390,9 @@
 			label="SOCIAL_BOOKMARKS_mixx"
 			description="SOCIAL_BOOKMARKS_mixx_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -402,9 +402,9 @@
 			label="SOCIAL_BOOKMARKS_myspace"
 			description="SOCIAL_BOOKMARKS_myspace_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -414,9 +414,9 @@
 			label="SOCIAL_BOOKMARKS_netscape"
 			description="SOCIAL_BOOKMARKS_netscape_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -426,9 +426,9 @@
 			label="SOCIAL_BOOKMARKS_netvibes"
 			description="SOCIAL_BOOKMARKS_netvibes_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -438,9 +438,9 @@
 			label="SOCIAL_BOOKMARKS_netvouz"
 			description="SOCIAL_BOOKMARKS_netvouz_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -450,9 +450,9 @@
 			label="SOCIAL_BOOKMARKS_NEWSVINE"
 			description="SOCIAL_BOOKMARKS_NEWSVINE_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -462,9 +462,9 @@
 			label="SOCIAL_BOOKMARKS_nujij"
 			description="SOCIAL_BOOKMARKS_nujij_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -474,9 +474,9 @@
 			label="SOCIAL_BOOKMARKS_ping"
 			description="SOCIAL_BOOKMARKS_ping_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -486,9 +486,9 @@
 			label="SOCIAL_BOOKMARKS_plugim"
 			description="SOCIAL_BOOKMARKS_plugim_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -498,9 +498,9 @@
 			label="SOCIAL_BOOKMARKS_posterous"
 			description="SOCIAL_BOOKMARKS_posterous_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -510,9 +510,9 @@
 			label="SOCIAL_BOOKMARKS_propeller"
 			description="SOCIAL_BOOKMARKS_propeller_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -522,9 +522,9 @@
 			label="SOCIAL_BOOKMARKS_REDDIT"
 			description="SOCIAL_BOOKMARKS_REDDIT_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -534,9 +534,9 @@
 			label="SOCIAL_BOOKMARKS_shoutwire"
 			description="SOCIAL_BOOKMARKS_shoutwire_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -546,9 +546,9 @@
 			label="SOCIAL_BOOKMARKS_simpy"
 			description="SOCIAL_BOOKMARKS_simpy_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -558,9 +558,9 @@
 			label="SOCIAL_BOOKMARKS_slashdot"
 			description="SOCIAL_BOOKMARKS_slashdot_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -570,9 +570,9 @@
 			label="SOCIAL_BOOKMARKS_sphere"
 			description="SOCIAL_BOOKMARKS_sphere_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -582,9 +582,9 @@
 			label="SOCIAL_BOOKMARKS_spurl"
 			description="SOCIAL_BOOKMARKS_spurl_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -594,9 +594,9 @@
 			label="SOCIAL_BOOKMARKS_squidoo"
 			description="SOCIAL_BOOKMARKS_squidoo_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -606,9 +606,9 @@
 			label="SOCIAL_BOOKMARKS_sphinn"
 			description="SOCIAL_BOOKMARKS_sphinn_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -618,9 +618,9 @@
 			label="SOCIAL_BOOKMARKS_STUMBLEUPON"
 			description="SOCIAL_BOOKMARKS_STUMBLEUPON_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -630,9 +630,9 @@
 			label="SOCIAL_BOOKMARKS_TAILRANK"
 			description="SOCIAL_BOOKMARKS_TAILRANK_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -642,9 +642,9 @@
 			label="SOCIAL_BOOKMARKS_TECHNORATI"
 			description="SOCIAL_BOOKMARKS_TECHNORATI_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -654,9 +654,9 @@
 			label="SOCIAL_BOOKMARKS_tipd"
 			description="SOCIAL_BOOKMARKS_tipd_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -666,9 +666,9 @@
 			label="SOCIAL_BOOKMARKS_thisnext"
 			description="SOCIAL_BOOKMARKS_thisnext_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -678,9 +678,9 @@
 			label="SOCIAL_BOOKMARKS_TWITTER"
 			description="SOCIAL_BOOKMARKS_TWITTER_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -690,9 +690,9 @@
 			label="SOCIAL_BOOKMARKS_webride"
 			description="SOCIAL_BOOKMARKS_webride_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -702,9 +702,9 @@
 			label="SOCIAL_BOOKMARKS_wists"
 			description="SOCIAL_BOOKMARKS_wists_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -714,9 +714,9 @@
 			label="SOCIAL_BOOKMARKS_yahoo_bookmarks"
 			description="SOCIAL_BOOKMARKS_yahoo_bookmarks_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -726,9 +726,9 @@
 			label="SOCIAL_BOOKMARKS_YAHOO"
 			description="SOCIAL_BOOKMARKS_YAHOO_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 	</fieldset>
 
@@ -744,9 +744,9 @@
 			label="SOCIAL_TRACKBACKS_ENABLED"
 			description="SOCIAL_TRACKBACKS_ENABLED_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -756,9 +756,9 @@
 			label="SOCIAL_PINGS_ENABLED"
 			description="SOCIAL_PINGS_ENABLED_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -768,9 +768,9 @@
 			label="SOCIAL_GUEST_COMMENTS_ENABLED"
 			description="SOCIAL_GUEST_COMMENTS_ENABLED_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -780,9 +780,9 @@
 			label="SOCIAL_COMMENT_FEEDS"
 			description="SOCIAL_COMMENT_FEEDS_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -792,9 +792,9 @@
 			label="SOCIAL_SHOW_NAME_AS"
 			description="SOCIAL_SHOW_NAME_AS_DESC">
 			<option
-				value="0">COMMENTS_USER_NAME</option>
+				value="0">SOCIAL_USER_NAME</option>
 			<option
-				value="1">COMMENTS_USER_LOGIN_NAME</option>
+				value="1">SOCIAL_USER_LOGIN_NAME</option>
 		</field>
 
 		<field
@@ -804,9 +804,9 @@
 			label="SOCIAL_SHOW_FORM"
 			description="SOCIAL_SHOW_FORM_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -816,9 +816,9 @@
 			label="SOCIAL_ENABLE_SUBJECT"
 			description="SOCIAL_ENABLE_SUBJECT_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -828,9 +828,9 @@
 			label="SOCIAL_ENABLE_WEBSITE"
 			description="SOCIAL_ENABLE_WEBSITE_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -840,17 +840,17 @@
 			label="SOCIAL_RATING_STAR_FILE"
 			description="SOCIAL_RATING_STAR_FILE_DESC">
 			<option
-				value="">COMMENTS_STAR_YELLOW</option>
+				value="">SOCIAL_STAR_YELLOW</option>
 			<option
-				value="star_black">COMMENTS_STAR_BLACK</option>
+				value="star_black">SOCIAL_STAR_BLACK</option>
 			<option
-				value="star_blue">COMMENTS_STAR_BLUE</option>
+				value="star_blue">SOCIAL_STAR_BLUE</option>
 			<option
-				value="star_green">COMMENTS_STAR_GREEN</option>
+				value="star_green">SOCIAL_STAR_GREEN</option>
 			<option
-				value="star_orange">COMMENTS_STAR_ORANGE</option>
+				value="star_orange">SOCIAL_STAR_ORANGE</option>
 			<option
-				value="star_purple">COMMENTS_STAR_PURPLE</option>
+				value="star_purple">SOCIAL_STAR_PURPLE</option>
 		</field>
 
 		<field
@@ -860,9 +860,9 @@
 			label="SOCIAL_COMMENT_HTML_ENABLED"
 			description="SOCIAL_COMMENT_HTML_ENABLED_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -872,9 +872,9 @@
 			label="SOCIAL_GRAVATAR_ENABLED"
 			description="SOCIAL_GRAVATAR_ENABLED_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
-				value="1">Yes</option>
+				value="1">JYES</option>
 		</field>
 
 		<field
@@ -914,7 +914,7 @@
 			label="SOCIAL_DATE_FORMAT"
 			description="SOCIAL_DATE_FORMAT_DESC">
 			<option
-				value="">COMMENTS_SYSTEM_DEFAULT</option>
+				value="">SOCIAL_SYSTEM_DEFAULT</option>
 			<option
 				value="JDATE_DDD_DD_MMM_HH_MM_SS_YYYY">Wed 17 Jul 18:00:05 2008</option>
 			<option
@@ -948,7 +948,7 @@
 			label="SOCIAL_COMMENT_NOTIFY"
 			description="SOCIAL_COMMENT_NOTIFY_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
 				value="1">Only Guests</option>
 			<option
@@ -974,7 +974,7 @@
 			label="SOCIAL_COMMENTS_MODERATION"
 			description="SOCIAL_COMMENTS_MODERATION_DESC">
 			<option
-				value="0">No</option>
+				value="0">JNO</option>
 			<option
 				value="1">Only Guests</option>
 			<option
