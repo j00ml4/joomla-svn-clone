@@ -13,7 +13,7 @@ Test cookie
 1. Change the language of one article of the frontpage to be "English (UK)"
 2. View the public site and switch to the "xx (Test)" language (article has disappeared)
 
-Test inheritance by the category
+Test inheritance by the category for articles
 
 1. Change the language of the category "Joomla" to be "English (UK)"
 2. View the public site switching between two languages. In the "xx (Test)" language, there is only the article tagged "xx (Test)"
@@ -42,6 +42,16 @@ Test language for modules
 1. Change the language of one module
 2. View the public site and switch form one language to another. Menu whose language was changed is only visible for the selected language
 
+Test language for contact details
+
+1. Change the language of one contact
+2. View the index.php/contact-us.html and switch form one language to another. Tagged contact are only shown on their language.
+
+Test inheritance by the category for contact details
+
+1. Change the language of the category "Fruit" to be "xx (Test)"
+2. View the index.php/contact-us.html switching between two languages. Contact in the Fruit category are only shown on the "xx (Test)" language
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
@@ -56,7 +66,6 @@ Test the unicity of the home page for a language
 
 TODO
 -Apply language selection to banners
--Apply language selection to contact details
 -Apply language selection to menu items
 -Apply language selection to newsfeeds
 -Apply language selection to weblinks

@@ -89,6 +89,7 @@ class ContactModelCategory extends JModelList
 	{
 		$user	= &JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
+		$language = JSite::getLanguage();
 
 		// Create a new query object.
 		$db		= $this->getDbo();
@@ -99,11 +100,14 @@ class ContactModelCategory extends JModelList
 		$query->from('`#__contact_details` AS a');
 		$query->where('a.access IN ('.$groups.')');
 
+		// Filter by language
+		$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
+		
 		// Filter by category.
+		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		$query->where('c.access IN ('.$groups.')');
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-			$query->where('c.access IN ('.$groups.')');
 		}
 
 		// Filter by state
@@ -111,6 +115,12 @@ class ContactModelCategory extends JModelList
 		if (is_numeric($state)) {
 			$query->where('a.state = '.(int) $state);
 		}
+
+		// Filter by inherited language
+		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
+		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
+		$query->group('a.id');
+		$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,31)='.$db->Quote($language).')');
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));

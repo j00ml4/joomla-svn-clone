@@ -150,7 +150,7 @@ class ContentModelArticles extends JModelList
 		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
-		// Filter by language
+		// Filter by inherited language
 		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
 		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
 		$query->group('a.id');
