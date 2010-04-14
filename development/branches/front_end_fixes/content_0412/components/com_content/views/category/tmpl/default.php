@@ -20,9 +20,15 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-<?php if($this->params->get('show_category_title', 1) && $this->params->get('page_subheading')) : ?>
+<?php if($this->params->get('show_category_title', 1) OR $this->params->get('page_subheading')) : ?>
 <h2>
 	<?php echo $this->escape($this->params->get('page_subheading')); ?>
+	<?php if ($this->params->get('show_category_title'))
+	{
+
+		echo '<span class="subheading-category">'.$this->category->title.'</span>';
+	}
+	?>
 </h2>
 <?php endif; ?>
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
