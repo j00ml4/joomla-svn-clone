@@ -131,7 +131,7 @@ $userId	= $user->get('id');
 						<?php echo $this->escape($item->item_type); ?></span>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td class="center">
 					<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">

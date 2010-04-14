@@ -96,11 +96,15 @@ class CategoriesModelCategories extends JModelList
 				'list.select',
 				'a.id, a.title, a.alias, a.note, a.published, a.access' .
 				', a.checked_out, a.checked_out_time, a.created_user_id' .
-				', a.path, a.parent_id, a.level, a.language, a.lft, a.rgt'
+				', a.path, a.parent_id, a.level, a.lft, a.rgt'
 			)
 		);
 		$query->from('#__categories AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');

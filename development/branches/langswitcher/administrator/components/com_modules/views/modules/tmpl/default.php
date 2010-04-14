@@ -158,7 +158,7 @@ $user = JFactory::getUser();
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

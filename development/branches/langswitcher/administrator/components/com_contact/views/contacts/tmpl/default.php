@@ -67,6 +67,9 @@ $userId	= $user->get('id');
 				<th width="10%"  class="title">
 					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ACCESS_HEADING', 'access_level', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
+				<th width="5%">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+				</th>
 				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
@@ -120,6 +123,9 @@ $userId	= $user->get('id');
 				</td>
 				<td align="center">
 					<?php echo $item->access_level; ?>
+				</td>
+				<td class="center">
+					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td align="center">
 					<?php echo $item->id; ?>
