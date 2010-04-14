@@ -55,8 +55,8 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->form->getLabel('url'); ?>
 			<?php echo $this->form->getInput('url'); ?>
 
-			<?php echo $this->form->getLabel('created_date'); ?>
-			<?php echo $this->form->getInput('created_date'); ?>
+			<?php echo $this->form->getLabel('created_time'); ?>
+			<?php echo $this->form->getInput('created_time'); ?>
 
 			<?php echo $this->form->getLabel('subject'); ?>
 			<?php echo $this->form->getInput('subject'); ?>
