@@ -189,16 +189,34 @@ class JMenu extends JObject
 	 *
 	 * @return	array
 	 */
-	public function getItems($attribute, $value, $firstonly = false)
+	public function getItems($attributes, $values, $firstonly = false)
 	{
 		$items = null;
+		$attributes = (array) $attributes;
+		$values = (array) $values;
 
 		foreach ($this->_items as $item) {
 			if (!is_object($item)) {
 				continue;
 			}
 
-			if ($item->$attribute == $value) {
+			$test = true;
+			for ($i=0, $count = count($attributes); $i<$count; $i++) {
+				if (is_array($values[$i])) {
+					if (!in_array($item->$attributes[$i], $values[$i])) {
+						$test = false;
+						break;
+					}
+				}
+				else {
+					if ($item->$attributes[$i] != $values[$i]) {
+						$test = false;
+						break;
+					}
+				}
+			}
+
+			if ($test) {
 				if ($firstonly) {
 					return $item;
 				}
@@ -206,7 +224,6 @@ class JMenu extends JObject
 				$items[] = $item;
 			}
 		}
-
 		return $items;
 	}
 
