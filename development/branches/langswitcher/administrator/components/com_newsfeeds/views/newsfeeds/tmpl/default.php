@@ -139,7 +139,7 @@ $userId	= $user->get('id');
 					<?php echo (int) $item->cache_time; ?>
 				</td>
 				<td class="center">
-					<?php echo $this->escape($item->language); ?>
+					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

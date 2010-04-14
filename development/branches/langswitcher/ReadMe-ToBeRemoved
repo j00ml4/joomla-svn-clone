@@ -37,6 +37,18 @@ Test language for categories
 1. Change the language of some categories to be "xx (Test)" or "English (UK)"
 2. Go to the menu "Parks in category". Verify that only categories of the selected language or those without language are shown
 
+Test existence of the home page for the default language
+
+1. Edit the default home menu
+2. Change the home page to no or the language to be different of Default.
+3. Save. This must produce an error
+
+Test the unicity of home page for a language
+
+1. Edit a a menu item which is not a default menu item
+2. Change to be be a default home page for a particular language which has already a default home page
+3. Save and Close. Verify that the previous home page for this language has changed
+
 TODO
 -Apply language selection to banners
 -Apply language selection to contact details
@@ -44,6 +56,7 @@ TODO
 -Apply language selection to modules
 -Apply language selection to newsfeeds
 -Apply language selection to weblinks
+-Add Language Filters in Admin
 -Set the router
 
 

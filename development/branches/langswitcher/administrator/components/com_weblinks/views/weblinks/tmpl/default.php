@@ -70,7 +70,7 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('grid.sort',  'JGLOBAL_HITS', 'a.hits', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Language', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
@@ -132,7 +132,7 @@ $userId	= $user->get('id');
 					<?php echo $item->hits; ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>
