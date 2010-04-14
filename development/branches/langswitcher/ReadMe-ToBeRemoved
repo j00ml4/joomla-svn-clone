@@ -68,6 +68,11 @@ Test language for weblinks
 1. Set the language of a weblink to be "xx (Test)"
 2. View its category in the public site using "English (UK)". It is not shown.
 
+Test language for newsfeeds
+
+1. Set the language of a newsfeed to be "xx (Test)"
+2. View its category in the public site using "English (UK)". It is not shown.
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
@@ -81,7 +86,6 @@ Test the unicity of the home page for a language
 3. Save and Close. Verify that the previous home page for this language has changed
 
 TODO
--Apply language selection to newsfeeds
 -Apply language selection to all modules...
 -Add Language Filters in Admin
 -Set the router
