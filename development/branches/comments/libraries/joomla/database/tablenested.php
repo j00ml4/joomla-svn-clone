@@ -222,6 +222,45 @@ class JTableNested extends JTable
 	}
 
 	/**
+	 * Method to move a row in the ordering sequence of a group of rows defined by an SQL WHERE clause.
+	 * Negative numbers move the row up in the sequence and positive numbers move it down.
+	 *
+	 * @param	integer	The direction and magnitude to move the row in the ordering sequence.
+	 * @param	string	WHERE clause to use for limiting the selection of rows to compact the
+	 *					ordering values.
+	 * @return	mixed	Boolean true on success.
+	 * @since	1.0
+	 * @link	http://docs.joomla.org/JTable/move
+	 */
+	public function move($delta, $where)
+	{
+		// Initialise variables.
+		$k = $this->_tbl_key;
+		$pk = (is_null($pk)) ? $this->$k : $pk;
+
+		$query = $this->_db->getQuery(true);
+		$query->select($k);
+		$query->from($this->_tbl);
+		$query->where('parent_id = '.$this->parent_id);
+		$position = 'after';
+		if($delta > 0)
+		{
+			$query->where('rgt > '.$this->rgt);
+			$query->order('rgt ASC');
+			$position = 'after';
+		} else {
+			$query->where('lft < '.$this->lft);
+			$query->order('lft DESC');
+			$position = 'before';
+		}
+				
+		$this->_db->setQuery($query);
+		$referenceId = $this->_db->loadResult();
+		
+		return $this->moveByReference($referenceId, $position, $pk);
+	}
+	
+	/**
 	 * Method to move a node and its children to a new location in the tree.
 	 *
 	 * @param	integer	The primary key of the node to reference new location by.
@@ -229,9 +268,10 @@ class JTableNested extends JTable
 	 * @param	integer	The primary key of the node to move.
 	 * @return	boolean	True on success.
 	 * @since	1.6
-	 * @link	http://docs.joomla.org/JTableNested/move
+	 * @link	http://docs.joomla.org/JTableNested/moveByReference
 	 */
-	public function move($referenceId, $position = 'after', $pk = null)
+
+	public function moveByReference($referenceId, $position = 'after', $pk = null)
 	{
 		if ($this->_debug) {
 			echo "\nMoving ReferenceId:$referenceId, Position:$position, PK:$pk";
@@ -864,7 +904,7 @@ class JTableNested extends JTable
 			// If the location has been set, move the node to its new location.
 			if ($this->_location_id > 0)
 			{
-				if (!$this->move($this->_location_id, $this->_location, $this->$k)) {
+				if (!$this->moveByReference($this->_location_id, $this->_location, $this->$k)) {
 					// Error message set in move method.
 					return false;
 				}
@@ -1607,4 +1647,5 @@ class JTableNested extends JTable
 		}
 		echo $buffer;
 	}
+	
 }
