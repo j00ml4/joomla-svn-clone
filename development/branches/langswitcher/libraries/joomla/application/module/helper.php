@@ -264,6 +264,12 @@ abstract class JModuleHelper
 		$query->join('LEFT','#__modules_menu AS mm ON mm.moduleid = m.id');
 		$query->where('m.published = 1');
 
+		// Filter by the language
+		if ($app->getClientId()==0) {
+			$language = $app->getLanguage();
+			$query->where("(m.language='' OR m.language=".$db->Quote($language).")");
+		}
+
 		$date = JFactory::getDate();
 		$now = $date->toMySQL();
 		$nullDate = $db->getNullDate();
