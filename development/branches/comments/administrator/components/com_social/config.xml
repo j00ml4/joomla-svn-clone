@@ -738,18 +738,6 @@
 		description="SOCIAL_Config_Comments_Label"
 		>
 		<field
-			name="enable_comments"
-			type="radio"
-			default="0"
-			label="SOCIAL_COMMENTS_ENABLED"
-			description="SOCIAL_COMMENTS_ENABLED_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
 			name="enable_trackbacks"
 			type="radio"
 			default="0"
@@ -791,30 +779,6 @@
 			default="1"
 			label="SOCIAL_COMMENT_FEEDS"
 			description="SOCIAL_COMMENT_FEEDS_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="enable_ratings"
-			type="radio"
-			default="1"
-			label="SOCIAL_COMMENT_RATING_ENABLED"
-			description="SOCIAL_COMMENT_RATING_ENABLED_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="enable_sharing"
-			type="radio"
-			default="1"
-			label="SOCIAL_BOOKMARKS_ENABLED"
-			description="SOCIAL_BOOKMARKS_ENABLED_DESC">
 			<option
 				value="0">No</option>
 			<option
@@ -902,30 +866,6 @@
 		</field>
 
 		<field
-			name="enable_bbcode"
-			type="radio"
-			default="1"
-			label="SOCIAL_COMMENT_BBCODE_ENABLED"
-			description="SOCIAL_COMMENT_BBCODE_ENABLED_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
-			name="enable_smiley_palette"
-			type="radio"
-			default="1"
-			label="SOCIAL_COMMENT_SMILEY_PALETTE_ENABLED"
-			description="SOCIAL_COMMENT_SMILEY_PALETTE_ENABLED_DESC">
-			<option
-				value="0">No</option>
-			<option
-				value="1">Yes</option>
-		</field>
-
-		<field
 			name="enable_gravatar"
 			type="radio"
 			default="0"
@@ -976,15 +916,24 @@
 			<option
 				value="">COMMENTS_SYSTEM_DEFAULT</option>
 			<option
-				value="%c">Wed 17 Jul 18:00:05 2008</option>
+				value="JDATE_DDD_DD_MMM_HH_MM_SS_YYYY">Wed 17 Jul 18:00:05 2008</option>
 			<option
-				value="%Y-%m-%d %H:%M:%S">2007-06-17 18:00:05</option>
+				value="JDATE_YYYY_MM_DD_HH_MM_SS">2007-06-17 18:00:05</option>
 			<option
-				value="%d-%m-%Y">17-06-2007</option>
+				value="JDATE_DD_MM_YYYY">17-06-2007</option>
 			<option
-				value="%A %e %B, %Y">Tuesday 17 July, 2007</option>
+				value="JDATE_DDDD_DD_MMMM_YYYY">Tuesday 17 July, 2007</option>
 			<option
-				value="%e %B %Y">17 July 2007</option>
+				value="JDATE_DD_MMMM_YYYY">17 July 2007</option>
+<!-- 
+	%c = Wed 17 Jul 18:00:05 2008
+	%Y-%m-%d %H:%M:%S" = 2007-06-17 18:00:05
+	%d-%m-%Y = 17-06-2007
+	%A %e %B, %Y = Tuesday 17 July, 2007
+	%e %B %Y" = 17 July 2007
+ -->
+
+
 		</field>
 
 		<field
