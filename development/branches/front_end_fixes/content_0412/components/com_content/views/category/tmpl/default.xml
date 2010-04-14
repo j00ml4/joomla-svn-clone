@@ -36,6 +36,23 @@
 				<option value="5">J5</option>
 			</field>
 
+
+		   		<field name="show_category_title" type="radio"
+				label="JGLOBAL_SHOW_CATEGORY_TITLE"
+				description="JGLOBAL_SHOW_CATEGORY_TITLE_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="page_subheading" type="text"
+				default=""
+				description="JGLOBAL_SUBHEADING_DESC"
+				label="JGLOBAL_SUBHEADING_LABEL"
+				size="0"
+			/>
+
 			<field name="show_empty_categories" type="radio"
 				label="Show empty Categories"
 				description="Show/Hide empty(no items) categories"
@@ -44,6 +61,7 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+
 			<field name="show_description" type="list"
 				description="JGLOBAL_Show_Category_Description_Desc"
 				label="JGLOBAL_Show_Category_Description_Label"
@@ -95,18 +113,41 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
-
-			<field name="show_date" type="list"
+               <field name="list_show_title" type="list"
+				description="JGLOBAL_LIST_TITLe_DESC"
+				label="JGLOBAL_LIST_TITLE_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+			<field name="list_show_date" type="list"
 				description="JGLOBAL_Show_Date_Desc"
 				label="JGLOBAL_Show_Date_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="hide">JHIDE</option>
+				<option value="0">JHIDE</option>
 				<option value="created">Created</option>
 				<option value="modified">Modified</option>
 				<option value="published">JPUBLISHED</option>
 			</field>
+             <field name="list_show_hits" type="list"
+				description="JGLOBAL_LIST_HITS_DESC"
+				label="JGLOBAL_LIST_HITS_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 
+			<field name="list_show_author" type="list"
+				description="JGLOBAL_LIST_AUTHOR_DESC"
+				label="JGLOBAL_LIST_AUTHOR_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 			<field name="date_format" type="text"
 				description="JGLOBAL_Date_Format_Desc"
 				label="JGLOBAL_Date_Format_Label"
@@ -171,8 +212,15 @@
 				<option value="1">JSHOW</option>
 				<option value="2">JGLOBAL_AUTO</option>
 			</field>
-
-			<field name="show_noauth" type="list"
+			<field name="show_pagination_limit" type="list"
+				description="JGLOBAL_Display_Select_Desc"
+				label="JGLOBAL_Display_Select_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+         	<field name="show_noauth" type="list"
 				description="JGLOBAL_Show_Unauth_Links_Desc"
 				label="JGLOBAL_Show_Unauth_Links_Label"
 			>
