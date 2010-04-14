@@ -91,6 +91,7 @@ class WeblinksModelCategory extends JModelList
 	{
 		$user	= &JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
+		$language = JSite::getLanguage();
 
 		// Create a new query object.
 		$db		= $this->getDbo();
@@ -100,12 +101,13 @@ class WeblinksModelCategory extends JModelList
 		$query->select($this->getState('list.select', 'a.*'));
 		$query->from('`#__weblinks` AS a');
 		$query->where('a.access IN ('.$groups.')');
+		$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
 
 		// Filter by category.
+		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		$query->where('c.access IN ('.$groups.')');
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-			$query->where('c.access IN ('.$groups.')');
 
 			//Filter by published category
 			$cpublished = $this->getState('filter.c.published');
@@ -114,6 +116,12 @@ class WeblinksModelCategory extends JModelList
 			}
 		}
 
+		// Filter by inherited language
+		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
+		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
+		$query->group('a.id');
+		$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,31)='.$db->Quote($language).')');
+		
 		// Filter by state
 		$state = $this->getState('filter.state');
 		if (is_numeric($state)) {
@@ -179,9 +187,11 @@ class WeblinksModelCategory extends JModelList
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
+			$language = JSite::getLanguage();
 			$params->loadJSON($active->params);
 			$options = array();
 			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
+			$options['language'] = $language;
 			$categories = JCategories::getInstance('Weblinks', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))

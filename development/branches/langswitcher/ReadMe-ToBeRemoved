@@ -63,6 +63,11 @@ Test language for banners
 2. Publish the OSM-1 banner
 2. View the public site and switch between two languages. The banner should only be shown on the "English (UK)" language.
 
+Test language for weblinks
+
+1. Set the language of a weblink to be "xx (Test)"
+2. View its category in the public site using "English (UK)". It is not shown.
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
@@ -77,7 +82,7 @@ Test the unicity of the home page for a language
 
 TODO
 -Apply language selection to newsfeeds
--Apply language selection to weblinks
+-Apply language selection to all modules...
 -Add Language Filters in Admin
 -Set the router
 
