@@ -2,15 +2,15 @@
 <config>
 	<fieldset
 		name="bookmarking"
-		label="SOCIAL_Config_Bookmarking_Label"
-		description="SOCIAL_Config_Bookmarking_Label"
+		label="COM_SOCIAL_Config_Bookmarking_Label"
+		description="COM_SOCIAL_Config_Bookmarking_Label"
 		>
 		<field
 			name="sharing_style"
 			type="list"
 			default="0"
-			label="SOCIAL_ICON_STYLE"
-			description="SOCIAL_ICON_STYLE_DESC">
+			label="COM_SOCIAL_ICON_STYLE"
+			description="COM_SOCIAL_ICON_STYLE_DESC">
 			<option
 				value="0">SOCIAL_ICONS_ONLY</option>
 			<option
@@ -23,8 +23,8 @@
 			name="sharing_heading"
 			type="list"
 			default="0"
-			label="SOCIAL_SHARE_HEADING"
-			description="SOCIAL_SHARE_HEADING_DESC">
+			label="COM_SOCIAL_SHARE_HEADING"
+			description="COM_SOCIAL_SHARE_HEADING_DESC">
 			<option
 				value="0">SOCIAL_DO_NOT_SHOW</option>
 			<option
@@ -39,8 +39,8 @@
 			name="sharing_email"
 			type="radio"
 			default="1"
-			label="SOCIAL_SHARE_EMAIL"
-			description="SOCIAL_SHARE_EMAIL_DESC">
+			label="COM_SOCIAL_SHARE_EMAIL"
+			description="COM_SOCIAL_SHARE_EMAIL_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -51,8 +51,8 @@
 			name="sharing_blinklist"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_BLINKLIST"
-			description="SOCIAL_BOOKMARKS_BLINKLIST_DESC">
+			label="COM_SOCIAL_BOOKMARKS_BLINKLIST"
+			description="COM_SOCIAL_BOOKMARKS_BLINKLIST_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -63,8 +63,8 @@
 			name="sharing_bloglines"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_BLOGLINES"
-			description="SOCIAL_BOOKMARKS_bloglines_DESC">
+			label="COM_SOCIAL_BOOKMARKS_BLOGLINES"
+			description="COM_SOCIAL_BOOKMARKS_bloglines_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -75,8 +75,8 @@
 			name="sharing_blogmarks"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_blogmarks"
-			description="SOCIAL_BOOKMARKS_blogmarks_DESC">
+			label="COM_SOCIAL_BOOKMARKS_blogmarks"
+			description="COM_SOCIAL_BOOKMARKS_blogmarks_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -87,8 +87,8 @@
 			name="sharing_buzz"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_buzz"
-			description="SOCIAL_BOOKMARKS_buzz_DESC">
+			label="COM_SOCIAL_BOOKMARKS_buzz"
+			description="COM_SOCIAL_BOOKMARKS_buzz_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -99,8 +99,8 @@
 			name="sharing_connotea"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_connotea"
-			description="SOCIAL_BOOKMARKS_connotea_DESC">
+			label="COM_SOCIAL_BOOKMARKS_connotea"
+			description="COM_SOCIAL_BOOKMARKS_connotea_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -111,8 +111,8 @@
 			name="sharing_delicious"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_DELICIOUS"
-			description="SOCIAL_BOOKMARKS_DELICIOUS_DESC">
+			label="COM_SOCIAL_BOOKMARKS_DELICIOUS"
+			description="COM_SOCIAL_BOOKMARKS_DELICIOUS_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -123,8 +123,8 @@
 			name="sharing_design_float"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_design_float"
-			description="SOCIAL_BOOKMARKS_design_float_DESC">
+			label="COM_SOCIAL_BOOKMARKS_design_float"
+			description="COM_SOCIAL_BOOKMARKS_design_float_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -135,8 +135,8 @@
 			name="sharing_digg"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_DIGG"
-			description="SOCIAL_BOOKMARKS_DIGG_DESC">
+			label="COM_SOCIAL_BOOKMARKS_DIGG"
+			description="COM_SOCIAL_BOOKMARKS_DIGG_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -147,8 +147,8 @@
 			name="sharing_diigo"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_diigo"
-			description="SOCIAL_BOOKMARKS_diigo_DESC">
+			label="COM_SOCIAL_BOOKMARKS_diigo"
+			description="COM_SOCIAL_BOOKMARKS_diigo_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -159,8 +159,8 @@
 			name="sharing_dotnetkicks"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_dotnetkicks"
-			description="SOCIAL_BOOKMARKS_dotnetkicks_DESC">
+			label="COM_SOCIAL_BOOKMARKS_dotnetkicks"
+			description="COM_SOCIAL_BOOKMARKS_dotnetkicks_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -171,8 +171,8 @@
 			name="sharing_dzone"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_dzone"
-			description="SOCIAL_BOOKMARKS_dzone_DESC">
+			label="COM_SOCIAL_BOOKMARKS_dzone"
+			description="COM_SOCIAL_BOOKMARKS_dzone_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -183,8 +183,8 @@
 			name="sharing_facebook"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_FACEBOOK"
-			description="SOCIAL_BOOKMARKS_FACEBOOK_DESC">
+			label="COM_SOCIAL_BOOKMARKS_FACEBOOK"
+			description="COM_SOCIAL_BOOKMARKS_FACEBOOK_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -195,8 +195,8 @@
 			name="sharing_fark"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_fark"
-			description="SOCIAL_BOOKMARKS_fark_DESC">
+			label="COM_SOCIAL_BOOKMARKS_fark"
+			description="COM_SOCIAL_BOOKMARKS_fark_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -207,8 +207,8 @@
 			name="sharing_faves"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_faves"
-			description="SOCIAL_BOOKMARKS_faves_DESC">
+			label="COM_SOCIAL_BOOKMARKS_faves"
+			description="COM_SOCIAL_BOOKMARKS_faves_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -219,8 +219,8 @@
 			name="sharing_fleck"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_fleck"
-			description="SOCIAL_BOOKMARKS_fleck_DESC">
+			label="COM_SOCIAL_BOOKMARKS_fleck"
+			description="COM_SOCIAL_BOOKMARKS_fleck_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -231,8 +231,8 @@
 			name="sharing_friendfeed"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_friendfeed"
-			description="SOCIAL_BOOKMARKS_friendfeed_DESC">
+			label="COM_SOCIAL_BOOKMARKS_friendfeed"
+			description="COM_SOCIAL_BOOKMARKS_friendfeed_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -243,8 +243,8 @@
 			name="sharing_friendsite"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_friendsite"
-			description="SOCIAL_BOOKMARKS_friendsite_DESC">
+			label="COM_SOCIAL_BOOKMARKS_friendsite"
+			description="COM_SOCIAL_BOOKMARKS_friendsite_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -255,8 +255,8 @@
 			name="sharing_furl"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_FURL"
-			description="SOCIAL_BOOKMARKS_FURL_DESC">
+			label="COM_SOCIAL_BOOKMARKS_FURL"
+			description="COM_SOCIAL_BOOKMARKS_FURL_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -267,8 +267,8 @@
 			name="sharing_google"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_GOOGLE"
-			description="SOCIAL_BOOKMARKS_GOOGLE_DESC">
+			label="COM_SOCIAL_BOOKMARKS_GOOGLE"
+			description="COM_SOCIAL_BOOKMARKS_GOOGLE_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -279,8 +279,8 @@
 			name="sharing_kaboodle"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_kaboodle"
-			description="SOCIAL_BOOKMARKS_kaboodle_DESC">
+			label="COM_SOCIAL_BOOKMARKS_kaboodle"
+			description="COM_SOCIAL_BOOKMARKS_kaboodle_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -291,8 +291,8 @@
 			name="sharing_kirtsy"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_kirtsy"
-			description="SOCIAL_BOOKMARKS_kirtsy_DESC">
+			label="COM_SOCIAL_BOOKMARKS_kirtsy"
+			description="COM_SOCIAL_BOOKMARKS_kirtsy_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -303,8 +303,8 @@
 			name="sharing_hacker_news"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_hacker_news"
-			description="SOCIAL_BOOKMARKS_hacker_news_DESC">
+			label="COM_SOCIAL_BOOKMARKS_hacker_news"
+			description="COM_SOCIAL_BOOKMARKS_hacker_news_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -315,8 +315,8 @@
 			name="sharing_hyves"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_hyves"
-			description="SOCIAL_BOOKMARKS_hyves_DESC">
+			label="COM_SOCIAL_BOOKMARKS_hyves"
+			description="COM_SOCIAL_BOOKMARKS_hyves_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -327,8 +327,8 @@
 			name="sharing_identica"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_identica"
-			description="SOCIAL_BOOKMARKS_identica_DESC">
+			label="COM_SOCIAL_BOOKMARKS_identica"
+			description="COM_SOCIAL_BOOKMARKS_identica_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -339,8 +339,8 @@
 			name="sharing_linkedin"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_linkedin"
-			description="SOCIAL_BOOKMARKS_linkedin_DESC">
+			label="COM_SOCIAL_BOOKMARKS_linkedin"
+			description="COM_SOCIAL_BOOKMARKS_linkedin_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -351,8 +351,8 @@
 			name="sharing_magnolia"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_MAGNOLIA"
-			description="SOCIAL_BOOKMARKS_MAGNOLIA_DESC">
+			label="COM_SOCIAL_BOOKMARKS_MAGNOLIA"
+			description="COM_SOCIAL_BOOKMARKS_MAGNOLIA_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -363,8 +363,8 @@
 			name="sharing_maple"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_maple"
-			description="SOCIAL_BOOKMARKS_maple_DESC">
+			label="COM_SOCIAL_BOOKMARKS_maple"
+			description="COM_SOCIAL_BOOKMARKS_maple_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -375,8 +375,8 @@
 			name="sharing_mister_wong"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_mister_wong"
-			description="SOCIAL_BOOKMARKS_mister_wong_DESC">
+			label="COM_SOCIAL_BOOKMARKS_mister_wong"
+			description="COM_SOCIAL_BOOKMARKS_mister_wong_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -387,8 +387,8 @@
 			name="sharing_mixx"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_mixx"
-			description="SOCIAL_BOOKMARKS_mixx_DESC">
+			label="COM_SOCIAL_BOOKMARKS_mixx"
+			description="COM_SOCIAL_BOOKMARKS_mixx_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -399,8 +399,8 @@
 			name="sharing_myspace"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_myspace"
-			description="SOCIAL_BOOKMARKS_myspace_DESC">
+			label="COM_SOCIAL_BOOKMARKS_myspace"
+			description="COM_SOCIAL_BOOKMARKS_myspace_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -411,8 +411,8 @@
 			name="sharing_netscape"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_netscape"
-			description="SOCIAL_BOOKMARKS_netscape_DESC">
+			label="COM_SOCIAL_BOOKMARKS_netscape"
+			description="COM_SOCIAL_BOOKMARKS_netscape_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -423,8 +423,8 @@
 			name="sharing_netvibes"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_netvibes"
-			description="SOCIAL_BOOKMARKS_netvibes_DESC">
+			label="COM_SOCIAL_BOOKMARKS_netvibes"
+			description="COM_SOCIAL_BOOKMARKS_netvibes_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -435,8 +435,8 @@
 			name="sharing_netvouz"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_netvouz"
-			description="SOCIAL_BOOKMARKS_netvouz_DESC">
+			label="COM_SOCIAL_BOOKMARKS_netvouz"
+			description="COM_SOCIAL_BOOKMARKS_netvouz_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -447,8 +447,8 @@
 			name="sharing_newsvine"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_NEWSVINE"
-			description="SOCIAL_BOOKMARKS_NEWSVINE_DESC">
+			label="COM_SOCIAL_BOOKMARKS_NEWSVINE"
+			description="COM_SOCIAL_BOOKMARKS_NEWSVINE_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -459,8 +459,8 @@
 			name="sharing_nujij"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_nujij"
-			description="SOCIAL_BOOKMARKS_nujij_DESC">
+			label="COM_SOCIAL_BOOKMARKS_nujij"
+			description="COM_SOCIAL_BOOKMARKS_nujij_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -471,8 +471,8 @@
 			name="sharing_ping"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_ping"
-			description="SOCIAL_BOOKMARKS_ping_DESC">
+			label="COM_SOCIAL_BOOKMARKS_ping"
+			description="COM_SOCIAL_BOOKMARKS_ping_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -483,8 +483,8 @@
 			name="sharing_plugim"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_plugim"
-			description="SOCIAL_BOOKMARKS_plugim_DESC">
+			label="COM_SOCIAL_BOOKMARKS_plugim"
+			description="COM_SOCIAL_BOOKMARKS_plugim_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -495,8 +495,8 @@
 			name="sharing_posterous"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_posterous"
-			description="SOCIAL_BOOKMARKS_posterous_DESC">
+			label="COM_SOCIAL_BOOKMARKS_posterous"
+			description="COM_SOCIAL_BOOKMARKS_posterous_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -507,8 +507,8 @@
 			name="sharing_propeller"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_propeller"
-			description="SOCIAL_BOOKMARKS_propeller_DESC">
+			label="COM_SOCIAL_BOOKMARKS_propeller"
+			description="COM_SOCIAL_BOOKMARKS_propeller_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -519,8 +519,8 @@
 			name="sharing_reddit"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_REDDIT"
-			description="SOCIAL_BOOKMARKS_REDDIT_DESC">
+			label="COM_SOCIAL_BOOKMARKS_REDDIT"
+			description="COM_SOCIAL_BOOKMARKS_REDDIT_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -531,8 +531,8 @@
 			name="sharing_shoutwire"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_shoutwire"
-			description="SOCIAL_BOOKMARKS_shoutwire_DESC">
+			label="COM_SOCIAL_BOOKMARKS_shoutwire"
+			description="COM_SOCIAL_BOOKMARKS_shoutwire_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -543,8 +543,8 @@
 			name="sharing_simpy"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_simpy"
-			description="SOCIAL_BOOKMARKS_simpy_DESC">
+			label="COM_SOCIAL_BOOKMARKS_simpy"
+			description="COM_SOCIAL_BOOKMARKS_simpy_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -555,8 +555,8 @@
 			name="sharing_slashdot"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_slashdot"
-			description="SOCIAL_BOOKMARKS_slashdot_DESC">
+			label="COM_SOCIAL_BOOKMARKS_slashdot"
+			description="COM_SOCIAL_BOOKMARKS_slashdot_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -567,8 +567,8 @@
 			name="sharing_sphere"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_sphere"
-			description="SOCIAL_BOOKMARKS_sphere_DESC">
+			label="COM_SOCIAL_BOOKMARKS_sphere"
+			description="COM_SOCIAL_BOOKMARKS_sphere_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -579,8 +579,8 @@
 			name="sharing_spurl"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_spurl"
-			description="SOCIAL_BOOKMARKS_spurl_DESC">
+			label="COM_SOCIAL_BOOKMARKS_spurl"
+			description="COM_SOCIAL_BOOKMARKS_spurl_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -591,8 +591,8 @@
 			name="sharing_squidoo"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_squidoo"
-			description="SOCIAL_BOOKMARKS_squidoo_DESC">
+			label="COM_SOCIAL_BOOKMARKS_squidoo"
+			description="COM_SOCIAL_BOOKMARKS_squidoo_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -603,8 +603,8 @@
 			name="sharing_sphinn"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_sphinn"
-			description="SOCIAL_BOOKMARKS_sphinn_DESC">
+			label="COM_SOCIAL_BOOKMARKS_sphinn"
+			description="COM_SOCIAL_BOOKMARKS_sphinn_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -615,8 +615,8 @@
 			name="sharing_stumbleupon"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_STUMBLEUPON"
-			description="SOCIAL_BOOKMARKS_STUMBLEUPON_DESC">
+			label="COM_SOCIAL_BOOKMARKS_STUMBLEUPON"
+			description="COM_SOCIAL_BOOKMARKS_STUMBLEUPON_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -627,8 +627,8 @@
 			name="sharing_tailrank"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_TAILRANK"
-			description="SOCIAL_BOOKMARKS_TAILRANK_DESC">
+			label="COM_SOCIAL_BOOKMARKS_TAILRANK"
+			description="COM_SOCIAL_BOOKMARKS_TAILRANK_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -639,8 +639,8 @@
 			name="sharing_technorati"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_TECHNORATI"
-			description="SOCIAL_BOOKMARKS_TECHNORATI_DESC">
+			label="COM_SOCIAL_BOOKMARKS_TECHNORATI"
+			description="COM_SOCIAL_BOOKMARKS_TECHNORATI_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -651,8 +651,8 @@
 			name="sharing_tipd"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_tipd"
-			description="SOCIAL_BOOKMARKS_tipd_DESC">
+			label="COM_SOCIAL_BOOKMARKS_tipd"
+			description="COM_SOCIAL_BOOKMARKS_tipd_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -663,8 +663,8 @@
 			name="sharing_thisnext"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_thisnext"
-			description="SOCIAL_BOOKMARKS_thisnext_DESC">
+			label="COM_SOCIAL_BOOKMARKS_thisnext"
+			description="COM_SOCIAL_BOOKMARKS_thisnext_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -675,8 +675,8 @@
 			name="sharing_twitter"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_TWITTER"
-			description="SOCIAL_BOOKMARKS_TWITTER_DESC">
+			label="COM_SOCIAL_BOOKMARKS_TWITTER"
+			description="COM_SOCIAL_BOOKMARKS_TWITTER_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -687,8 +687,8 @@
 			name="sharing_webride"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_webride"
-			description="SOCIAL_BOOKMARKS_webride_DESC">
+			label="COM_SOCIAL_BOOKMARKS_webride"
+			description="COM_SOCIAL_BOOKMARKS_webride_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -699,8 +699,8 @@
 			name="sharing_wists"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_wists"
-			description="SOCIAL_BOOKMARKS_wists_DESC">
+			label="COM_SOCIAL_BOOKMARKS_wists"
+			description="COM_SOCIAL_BOOKMARKS_wists_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -711,8 +711,8 @@
 			name="sharing_yahoo_bookmarks"
 			type="radio"
 			default="0"
-			label="SOCIAL_BOOKMARKS_yahoo_bookmarks"
-			description="SOCIAL_BOOKMARKS_yahoo_bookmarks_DESC">
+			label="COM_SOCIAL_BOOKMARKS_yahoo_bookmarks"
+			description="COM_SOCIAL_BOOKMARKS_yahoo_bookmarks_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -723,8 +723,8 @@
 			name="sharing_yahoo"
 			type="radio"
 			default="1"
-			label="SOCIAL_BOOKMARKS_YAHOO"
-			description="SOCIAL_BOOKMARKS_YAHOO_DESC">
+			label="COM_SOCIAL_BOOKMARKS_YAHOO"
+			description="COM_SOCIAL_BOOKMARKS_YAHOO_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -734,15 +734,15 @@
 
 	<fieldset
 		name="comments"
-		label="SOCIAL_Config_Comments_Label"
-		description="SOCIAL_Config_Comments_Label"
+		label="COM_SOCIAL_Config_Comments_Label"
+		description="COM_SOCIAL_Config_Comments_Label"
 		>
 		<field
 			name="enable_trackbacks"
 			type="radio"
 			default="0"
-			label="SOCIAL_TRACKBACKS_ENABLED"
-			description="SOCIAL_TRACKBACKS_ENABLED_DESC">
+			label="COM_SOCIAL_TRACKBACKS_ENABLED"
+			description="COM_SOCIAL_TRACKBACKS_ENABLED_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -753,8 +753,8 @@
 			name="enable_pings"
 			type="radio"
 			default="0"
-			label="SOCIAL_PINGS_ENABLED"
-			description="SOCIAL_PINGS_ENABLED_DESC">
+			label="COM_SOCIAL_PINGS_ENABLED"
+			description="COM_SOCIAL_PINGS_ENABLED_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -765,8 +765,8 @@
 			name="guestcomment"
 			type="radio"
 			default="1"
-			label="SOCIAL_GUEST_COMMENTS_ENABLED"
-			description="SOCIAL_GUEST_COMMENTS_ENABLED_DESC">
+			label="COM_SOCIAL_GUEST_COMMENTS_ENABLED"
+			description="COM_SOCIAL_GUEST_COMMENTS_ENABLED_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -777,8 +777,8 @@
 			name="enable_comment_feeds"
 			type="radio"
 			default="1"
-			label="SOCIAL_COMMENT_FEEDS"
-			description="SOCIAL_COMMENT_FEEDS_DESC">
+			label="COM_SOCIAL_COMMENT_FEEDS"
+			description="COM_SOCIAL_COMMENT_FEEDS_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -789,8 +789,8 @@
 			name="show_name_as"
 			type="radio"
 			default="1"
-			label="SOCIAL_SHOW_NAME_AS"
-			description="SOCIAL_SHOW_NAME_AS_DESC">
+			label="COM_SOCIAL_SHOW_NAME_AS"
+			description="COM_SOCIAL_SHOW_NAME_AS_DESC">
 			<option
 				value="0">SOCIAL_USER_NAME</option>
 			<option
@@ -801,8 +801,8 @@
 			name="show_form"
 			type="radio"
 			default="1"
-			label="SOCIAL_SHOW_FORM"
-			description="SOCIAL_SHOW_FORM_DESC">
+			label="COM_SOCIAL_SHOW_FORM"
+			description="COM_SOCIAL_SHOW_FORM_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -813,8 +813,8 @@
 			name="enable_subject"
 			type="radio"
 			default="1"
-			label="SOCIAL_ENABLE_SUBJECT"
-			description="SOCIAL_ENABLE_SUBJECT_DESC">
+			label="COM_SOCIAL_ENABLE_SUBJECT"
+			description="COM_SOCIAL_ENABLE_SUBJECT_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -825,8 +825,8 @@
 			name="enable_website"
 			type="radio"
 			default="1"
-			label="SOCIAL_ENABLE_WEBSITE"
-			description="SOCIAL_ENABLE_WEBSITE_DESC">
+			label="COM_SOCIAL_ENABLE_WEBSITE"
+			description="COM_SOCIAL_ENABLE_WEBSITE_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -837,8 +837,8 @@
 			name="star_file"
 			type="list"
 			default=""
-			label="SOCIAL_RATING_STAR_FILE"
-			description="SOCIAL_RATING_STAR_FILE_DESC">
+			label="COM_SOCIAL_RATING_STAR_FILE"
+			description="COM_SOCIAL_RATING_STAR_FILE_DESC">
 			<option
 				value="">SOCIAL_STAR_YELLOW</option>
 			<option
@@ -857,8 +857,8 @@
 			name="enable_html"
 			type="radio"
 			default="0"
-			label="SOCIAL_COMMENT_HTML_ENABLED"
-			description="SOCIAL_COMMENT_HTML_ENABLED_DESC">
+			label="COM_SOCIAL_COMMENT_HTML_ENABLED"
+			description="COM_SOCIAL_COMMENT_HTML_ENABLED_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -869,8 +869,8 @@
 			name="enable_gravatar"
 			type="radio"
 			default="0"
-			label="SOCIAL_GRAVATAR_ENABLED"
-			description="SOCIAL_GRAVATAR_ENABLED_DESC">
+			label="COM_SOCIAL_GRAVATAR_ENABLED"
+			description="COM_SOCIAL_GRAVATAR_ENABLED_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -881,8 +881,8 @@
 			name="list_order"
 			type="radio"
 			default="ASC"
-			label="SOCIAL_LIST_ORDER"
-			description="SOCIAL_LIST_ORDER_DESC">
+			label="COM_SOCIAL_LIST_ORDER"
+			description="COM_SOCIAL_LIST_ORDER_DESC">
 			<option
 				value="ASC">Oldest First</option>
 			<option
@@ -893,8 +893,8 @@
 			name="pagination"
 			type="list"
 			default="0"
-			label="SOCIAL_PAGINATION_ENABLED"
-			description="SOCIAL_PAGINATION_ENABLED_DESC">
+			label="COM_SOCIAL_PAGINATION_ENABLED"
+			description="COM_SOCIAL_PAGINATION_ENABLED_DESC">
 			<option
 				value="0">All</option>
 			<option
@@ -911,8 +911,8 @@
 			name="date_format"
 			type="list"
 			default=""
-			label="SOCIAL_DATE_FORMAT"
-			description="SOCIAL_DATE_FORMAT_DESC">
+			label="COM_SOCIAL_DATE_FORMAT"
+			description="COM_SOCIAL_DATE_FORMAT_DESC">
 			<option
 				value="">SOCIAL_SYSTEM_DEFAULT</option>
 			<option
@@ -945,8 +945,8 @@
 			name="notify_comments"
 			type="radio"
 			default="0"
-			label="SOCIAL_COMMENT_NOTIFY"
-			description="SOCIAL_COMMENT_NOTIFY_DESC">
+			label="COM_SOCIAL_COMMENT_NOTIFY"
+			description="COM_SOCIAL_COMMENT_NOTIFY_DESC">
 			<option
 				value="0">JNO</option>
 			<option
@@ -959,8 +959,8 @@
 			type="text"
 			size="40"
 			default=""
-			label="SOCIAL_COMMENT_NOTIFY_ADDRESS"
-			description="SOCIAL_COMMENT_NOTIFY_ADDRESS_DESC" />
+			label="COM_SOCIAL_COMMENT_NOTIFY_ADDRESS"
+			description="COM_SOCIAL_COMMENT_NOTIFY_ADDRESS_DESC" />
 
 		<field
 			name="spacer2"
@@ -971,14 +971,14 @@
 			name="moderate_comments"
 			type="radio"
 			default="1"
-			label="SOCIAL_COMMENTS_MODERATION"
-			description="SOCIAL_COMMENTS_MODERATION_DESC">
+			label="COM_SOCIAL_COMMENTS_MODERATION"
+			description="COM_SOCIAL_COMMENTS_MODERATION_DESC">
 			<option
 				value="0">JNO</option>
 			<option
-				value="1">Only Guests</option>
+				value="1">COM_SOCIAL_OPTION_MODERATE_ONLY_GUESTS</option>
 			<option
-				value="2">Anyone</option>
+				value="2">COM_SOCIAL_OPTION_MODERATE_ANYONE</option>
 		</field>
 	</fieldset>
 
