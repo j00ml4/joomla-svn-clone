@@ -28,19 +28,15 @@ class WeblinksViewWeblinks extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
 
 		$this->_setToolbar();
 		parent::display($tpl);
@@ -68,11 +64,11 @@ class WeblinksViewWeblinks extends JView
 			JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
 			JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			if ($state->get('filter.published') != -1) {
+			if ($state->get('filter.published') != 2) {
 				JToolBarHelper::archiveList('weblinks.archive','JTOOLBAR_ARCHIVE');
 			}
 		}
-		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'weblinks.delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else if ($canDo->get('core.edit.state')) {
