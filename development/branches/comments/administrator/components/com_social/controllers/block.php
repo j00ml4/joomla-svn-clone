@@ -44,7 +44,7 @@ class SocialControllerBlock extends JController
 		if (JError::isError($result)) {
 			$msg = $result->getMessage();
 		} else {
-			$msg = JText::sprintf('SOCIAL_Items_Blocked', count($cid));
+			$msg = JText::sprintf('COM_SOCIAL_Items_Blocked', count($cid));
 		}
 		$this->setRedirect('index.php?option=com_social&view=comments', $msg);
 	}
@@ -65,7 +65,7 @@ class SocialControllerBlock extends JController
 		if (JError::isError($result)) {
 			$msg = $result->getMessage();
 		} else {
-			$msg = JText::sprintf('SOCIAL_Items_Blocked', count($cid));
+			$msg = JText::sprintf('COM_SOCIAL_Items_Blocked', count($cid));
 		}
 		$this->setRedirect('index.php?option=com_social&view=comments', $msg);
 	}

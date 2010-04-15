@@ -21,15 +21,15 @@ $lOrdering	= $this->state->get('list.ordering');
 <form action="<?php echo JRoute::_('index.php?option=com_social&view=threads');?>" method="post" name="adminForm">
 
 	<div class="form-filter" style="float: left;">
-		<label for="filter_search"><?php echo JText::_('SOCIAL_SEARCH_LABEL'); ?></label>
-		<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" class="text_area" onchange="document.adminForm.submit();" title="<?php echo JText::_('SOCIAL_SEARCH_TITLE');?>"/>
-		<button onclick="this.form.submit();"><?php echo JText::_('SOCIAL_SEARCH_GO'); ?></button>
-		<button onclick="document.getElementById('filter_search').value='';document.getElementById('published').value='0';this.form.submit();"><?php echo JText::_('SOCIAL_SEARCH_RESET'); ?></button>
+		<label for="filter_search"><?php echo JText::_('COM_SOCIAL_SEARCH_LABEL'); ?></label>
+		<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" class="text_area" onchange="document.adminForm.submit();" title="<?php echo JText::_('COM_SOCIAL_SEARCH_TITLE');?>"/>
+		<button onclick="this.form.submit();"><?php echo JText::_('COM_SOCIAL_SEARCH_GO'); ?></button>
+		<button onclick="document.getElementById('filter_search').value='';document.getElementById('published').value='0';this.form.submit();"><?php echo JText::_('COM_SOCIAL_SEARCH_RESET'); ?></button>
 	</div>
 
 	<div class="form-filter" style="float: right;">
 		<select name="filter_context" id="filter_context" class="inputbox" onchange="this.form.submit()">
-			<option value=""><?php echo JText::_('SOCIAL_All_Contexts');?></option>
+			<option value=""><?php echo JText::_('COM_SOCIAL_All_Contexts');?></option>
 			<?php echo JHtml::_('select.options', SocialHelper::getContextOptions(), 'value', 'text', $this->state->get('filter.context'));?>
 		</select>
 	</div>
@@ -41,19 +41,19 @@ $lOrdering	= $this->state->get('list.ordering');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this,'cid')" />
 				</th>
 				<th>
-					<?php echo JHTML::_('grid.sort', 'SOCIAL_Url_Heading', 'a.name', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_SOCIAL_Url_Heading', 'a.name', $lDirection, $lOrdering); ?>
 				</th>
 				<th>
-					<?php echo JHTML::_('grid.sort', 'SOCIAL_Page_Title_Heading', 'a.name', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_SOCIAL_Page_Title_Heading', 'a.name', $lDirection, $lOrdering); ?>
 				</th>
 				<th>
-					<?php echo JHTML::_('grid.sort', 'SOCIAL_Thread_Date_Heading', 'a.created_time', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_SOCIAL_Thread_Date_Heading', 'a.created_time', $lDirection, $lOrdering); ?>
 				</th>
 				<th width="10%">
-					<?php echo JHTML::_('grid.sort', 'SOCIAL_Comment_Count_Heading', 'comment_count', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_SOCIAL_Comment_Count_Heading', 'comment_count', $lDirection, $lOrdering); ?>
 				</th>
 				<th width="10%">
-					<?php echo JHTML::_('grid.sort', 'SOCIAL_Rating_Count_Heading', 'pscore_count', $lDirection, $lOrdering); ?>
+					<?php echo JHTML::_('grid.sort', 'COM_SOCIAL_Rating_Count_Heading', 'pscore_count', $lDirection, $lOrdering); ?>
 				</th>
 				<th width="1%">
 					<?php echo JHTML::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $lDirection, $lOrdering); ?>
@@ -87,7 +87,7 @@ $lOrdering	= $this->state->get('list.ordering');
 						<?php echo (int) $item->comment_count; ?>
 						<br />
 						<a href="<?php echo JRoute::_('index.php?option=com_social&task=threads.resetcomments&id='.(int) $item->id.'&'.JUtility::getToken().'=1');?>">
-							<?php echo JText::_('SOCIAL_Reset'); ?></a>
+							<?php echo JText::_('COM_SOCIAL_Reset'); ?></a>
 					<?php else : ?>
 					-
 					<?php endif; ?>
@@ -97,7 +97,7 @@ $lOrdering	= $this->state->get('list.ordering');
 						<?php echo (int) $item->pscore_count; ?>
 						<br />
 						<a href="<?php echo JRoute::_('index.php?option=com_social&task=threads.resetratings&id='.(int) $item->id.'&'.JUtility::getToken().'=1');?>">
-							<?php echo JText::_('SOCIAL_Reset'); ?></a>
+							<?php echo JText::_('COM_SOCIAL_Reset'); ?></a>
 					<?php else : ?>
 					-
 					<?php endif; ?>

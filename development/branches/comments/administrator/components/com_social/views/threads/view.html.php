@@ -55,7 +55,7 @@ class SocialViewThreads extends JView
 		$state	= $this->get('State');
 		$canDo	= SocialHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('SOCIAL_Manager_Threads'), 'plugin');
+		JToolBarHelper::title(JText::_('COM_SOCIAL_Manager_Threads'), 'plugin');
 		JToolBarHelper::deleteList('', 'threads.delete');
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_social');

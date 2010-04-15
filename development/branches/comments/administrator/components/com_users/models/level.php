@@ -45,7 +45,7 @@ class UsersModelLevel extends JModelForm
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */
-	protected function _prepareTable(&$table)
+	protected function prepareTable(&$table)
 	{
 	}
 
@@ -157,7 +157,7 @@ class UsersModelLevel extends JModelForm
 		}
 
 		// Prepare the row for saving
-		$this->_prepareTable($table);
+		$this->prepareTable($table);
 
 		// Check the data.
 		if (!$table->check()) {

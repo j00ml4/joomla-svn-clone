@@ -32,7 +32,7 @@ class SocialControllerComment extends JControllerForm
 		$delete	= false;
 
 		if (!is_array($c_id) or (count($c_id) < 1)) {
-			$this->setMessage(JText::_('SOCIAL_SELECT_COMMENT_TO_MODERATE'), 'warning');
+			$this->setMessage(JText::_('COM_SOCIAL_SELECT_COMMENT_TO_MODERATE'), 'warning');
 		} else {
 			// Get the model.
 			$model = $this->getModel('Comment', 'SocialModel', array('ignore_request' => true));
@@ -63,21 +63,21 @@ class SocialControllerComment extends JControllerForm
 
 			// Publish the items.
 			if(!$model->moderate($c_id)) {
-				$this->setMessage( JText::_('SOCIAL_UNABLE_TO_MODERATE_COMMENTS'), 'notice');
+				$this->setMessage( JText::_('COM_SOCIAL_UNABLE_TO_MODERATE_COMMENTS'), 'notice');
 			} else {
 				$messages = array();
 
 				if ($defer) {
-					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_DEFERRED', $defer);
+					$messages[] = JText::sprintf('COM_SOCIAL_MODERATE_NUM_DEFERRED', $defer);
 				}
 				if ($publish) {
-					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_PUBLISHED', $publish);
+					$messages[] = JText::sprintf('COM_SOCIAL_MODERATE_NUM_PUBLISHED', $publish);
 				}
 				if ($delete) {
-					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_DELETED', $delete);
+					$messages[] = JText::sprintf('COM_SOCIAL_MODERATE_NUM_DELETED', $delete);
 				}
 				if ($spam) {
-					$messages[] = JText::sprintf('SOCIAL_MODERATE_NUM_SPAMMED', $spam);
+					$messages[] = JText::sprintf('COM_SOCIAL_MODERATE_NUM_SPAMMED', $spam);
 				}
 
 				$this->setMessage(implode(' ', $messages));

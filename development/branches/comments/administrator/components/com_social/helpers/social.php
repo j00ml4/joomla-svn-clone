@@ -27,12 +27,12 @@ class SocialHelper
 	public static function addSubmenu($vName)
 	{
 		JSubMenuHelper::addEntry(
-			JText::_('SOCIAL_Submenu_Comments'),
+			JText::_('COM_SOCIAL_Submenu_Comments'),
 			'index.php?option=com_social&view=comments',
 			$vName == 'comments'
 		);
 		JSubMenuHelper::addEntry(
-			JText::_('SOCIAL_Submenu_Threads'),
+			JText::_('COM_SOCIAL_Submenu_Threads'),
 			'index.php?option=com_social&view=threads',
 			$vName == 'threads'
 		);

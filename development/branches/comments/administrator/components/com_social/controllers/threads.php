@@ -43,7 +43,7 @@ class SocialControllerThreads extends SocialController
 		}
 		else
 		{
-			$this->setMessage(JText::sprintf('SOCIAL_N_Records_Deleted', count($pks)));
+			$this->setMessage(JText::sprintf('COM_SOCIAL_N_Records_Deleted', count($pks)));
 		}
 
 		$this->setRedirect('index.php?option=com_social&view=threads');
@@ -67,7 +67,7 @@ class SocialControllerThreads extends SocialController
 		}
 		else
 		{
-			$this->setMessage(JText::_('SOCIAL_Reset_Comments_Success'));
+			$this->setMessage(JText::_('COM_SOCIAL_Reset_Comments_Success'));
 		}
 
 		$this->setRedirect('index.php?option=com_social&view=threads');
@@ -91,7 +91,7 @@ class SocialControllerThreads extends SocialController
 		}
 		else
 		{
-			$this->setMessage(JText::_('SOCIAL_Reset_Ratings_Success'));
+			$this->setMessage(JText::_('COM_SOCIAL_Reset_Ratings_Success'));
 		}
 
 		$this->setRedirect('index.php?option=com_social&view=threads');
