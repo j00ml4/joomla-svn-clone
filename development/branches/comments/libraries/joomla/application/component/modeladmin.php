@@ -120,16 +120,6 @@ abstract class JModelAdmin extends JModelForm
 		foreach ($pks as $i => $pk)
 		{
 			if ($table->load($pk)) {
-/**				// Access checks.
- * TODO repair this check
-
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', $this->_context.(int) $table->catid);
-				}
-				else {
-					$allow = $user->authorise('core.edit.state', $this->option);
-				}
-die;*/
 				if ($this->canDelete($table)) {
 					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
