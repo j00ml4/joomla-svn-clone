@@ -42,17 +42,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<legend><?php echo JText::_('JOPTION_REQUIRED');?>	</legend>
 		
 	<!-- Module metadata -->
-			<?php if ($this->item->xml) : ?>
-				<?php if ($text = trim($this->item->xml->description)) : ?>
-					<label>
-						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
-					</label>
-					<?php echo JText::_($text); ?>
-				<?php endif; ?>
-			<?php else : ?>
-				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
-			<?php endif; ?>
-			<br class="clr" />
+		
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 
@@ -79,9 +69,13 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 
+			<?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?>
+
 			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<?php echo $this->form->getLabel('publish_up'); ?>
 			<?php echo $this->form->getInput('publish_up'); ?>
+			
 			<?php echo $this->form->getLabel('publish_down'); ?>
 			<?php echo $this->form->getInput('publish_down'); ?>
 			<?php endif; ?>
@@ -98,7 +92,17 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php endif; ?>
 
 			<br class="clr" />
-		
+	<?php if ($this->item->xml) : ?>
+				<?php if ($text = trim($this->item->xml->description)) : ?>
+					<label>
+						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
+					</label>
+					<?php echo JText::_($text); ?>
+				<?php endif; ?>
+			<?php else : ?>
+				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
+			<?php endif; ?>
+			<br class="clr" />		
 		</fieldset>
 	</div>
 
