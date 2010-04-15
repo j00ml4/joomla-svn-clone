@@ -27,6 +27,12 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Apr-2010 Jean-Marie Simonet
+$ Standardized some obsolete KEYS
+$ Consolidated/Standardized/created some keys/inis
++$ Adding missing .sys.ini file
+# Fixing Articles Categories module. +$ Adding its language files + Adding it in sql
+
 11-Apr-2010 Hannes Papenberg
 # Fixing admin template parameters - Thanks Jonnathan S. Lima
 # Moved stick() function from BannersModelBanners to BannersModelBanner
@@ -40,6 +46,7 @@ $ Correcting —again— non standards keys
 # Fixing bug in controlleradmin.php
 $ Corrected —again- keys changed by #15980
 $ Corrected com_banners clients keys
+$ Corrected more ini strings
 
 10-Apr-2010 Hannes Papenberg
 ^ Created JCategories to handle all presentation-logic for categories
