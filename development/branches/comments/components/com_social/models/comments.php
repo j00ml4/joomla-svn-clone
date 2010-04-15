@@ -24,7 +24,7 @@ class SocialModelComments extends JModelList
 {
 	/**
 	 * Context string for the model type.  This is used to handle uniqueness
-	 * when dealing with the _getStoreId() method and caching data structures.
+	 * when dealing with the getStoreId() method and caching data structures.
 	 *
 	 * @var		string
 	 * @since	1.6
@@ -41,7 +41,7 @@ class SocialModelComments extends JModelList
 	public function getPagination($new = false)
 	{
 		// Get a storage key.
-		$store = $this->_getStoreId('getPagination');
+		$store = $this->getStoreId('getPagination');
 
 		// Try to load the data from internal storage.
 		if (!empty($this->_cache[$store]) && !$new) {
@@ -65,7 +65,7 @@ class SocialModelComments extends JModelList
 	 * @return	object	A JQuery object to retrieve the data set.
 	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db		= $this->getDbo();
@@ -129,7 +129,7 @@ class SocialModelComments extends JModelList
 	 * @return	string	A store id.
 	 * @since	1.6
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Add the filter state.
 		$id	.= ':'.$this->getState('filter.state');
@@ -142,7 +142,7 @@ class SocialModelComments extends JModelList
 		$id	.= ':'.$this->getState('check.trackback');
 
 		// The parent class adds the list state.
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -155,7 +155,7 @@ class SocialModelComments extends JModelList
 	 * @return	void
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialize variables.
 		$app		= &JFactory::getApplication();

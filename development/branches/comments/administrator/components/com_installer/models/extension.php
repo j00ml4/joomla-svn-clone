@@ -38,7 +38,7 @@ class InstallerModel extends JModel
 
 
 		// Force populate state
-		$this->_populateState();
+		$this->populateState();
 
 		// Set state variables from the request
 		$this->setState('pagination.limit',	$app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'), 'int'));
@@ -144,9 +144,9 @@ class InstallerModel extends JModel
 
 	/**
 	 * Restore state from the session if relevant
-	 * @see libraries/joomla/application/component/JModel#_populateState()
+	 * @see libraries/joomla/application/component/JModel#populateState()
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$session = JFactory::getSession();
 		$installer_state = $session->get('installer_state',null);

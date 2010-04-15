@@ -30,13 +30,13 @@ class InstallerModelDiscover extends JModelList
 	 * to be called on the first call to the getState() method unless the model
 	 * configuration flag to ignore the request is set.
 	 */
-	protected function _populateState() {
+	protected function populateState() {
 		$app = JFactory::getApplication();
 		$this->setState('message',$app->getUserState('com_installer.message'));
 		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
 		$app->setUserState('com_installer.message','');
 		$app->setUserState('com_installer.extension_message','');
-		parent::_populateState('name','asc');
+		parent::populateState('name','asc');
 	}
 
 	/**
@@ -116,7 +116,7 @@ class InstallerModelDiscover extends JModelList
 		}
 		JArrayHelper::sortObjects($result, $this->getState('list.ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);
 		$total = count($result);
-		$store = $this->_getStoreId('getTotal');
+		$store = $this->getStoreId('getTotal');
 		$this->_cache[$store] = $total;
 		if ($total < $limitstart) {
 			$limitstart = 0;
@@ -132,7 +132,7 @@ class InstallerModelDiscover extends JModelList
 	 *
 	 * @return JDatabaseQuery the database query
 	 */
-	protected function _getListQuery() {
+	protected function getListQuery() {
 		$query = new JDatabaseQuery;
 		$query->select('*');
 		$query->from('#__extensions');

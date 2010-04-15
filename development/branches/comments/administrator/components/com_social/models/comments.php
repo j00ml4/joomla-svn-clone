@@ -31,7 +31,7 @@ class SocialModelComments extends JModelList
 	 *
 	 * @return	JDatabaseQuery
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db = $this->getDbo();
@@ -100,7 +100,7 @@ class SocialModelComments extends JModelList
 	 *
 	 * @return	string	A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
@@ -108,13 +108,13 @@ class SocialModelComments extends JModelList
 		$id	.= ':'.$this->getState('filter.context');
 		$id	.= ':'.$this->getState('filter.thread_id');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
 	 * Method to auto-populate the model state.
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
@@ -137,7 +137,7 @@ class SocialModelComments extends JModelList
 		$this->setState('params', $value);
 
 		// List state information.
-		parent::_populateState('a.name', 'asc');
+		parent::populateState('a.name', 'asc');
 	}
 
 	/**

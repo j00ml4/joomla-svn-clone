@@ -33,11 +33,11 @@ class ContentModelArticle extends JModelAdmin
 		$this->_item = 'article';
 		$this->_option = 'com_content';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -50,6 +50,30 @@ class ContentModelArticle extends JModelAdmin
 		// Load the parameters.
 		$params	= JComponentHelper::getParams('com_content');
 		$this->setState('params', $params);
+	}
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canDelete($record)
+	{
+		return $user->authorise('core.delete', 'com_content.article.'.(int) $record->id);
+	}
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		return $user->authorise('core.edit.state', 'com_content.article.'.(int) $record->id);
 	}
 
 	/**
