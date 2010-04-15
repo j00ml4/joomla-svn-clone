@@ -28,6 +28,10 @@ class PluginsModelPlugins extends JModelList
 
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -169,7 +173,7 @@ class PluginsModelPlugins extends JModelList
 			}
 		}
 
-		
+
 		return $query;
 	}
 }

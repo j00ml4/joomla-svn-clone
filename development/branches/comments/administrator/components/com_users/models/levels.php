@@ -27,6 +27,10 @@ class UsersModelLevels extends JModelList
 
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -106,7 +110,7 @@ class UsersModelLevels extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
-	
+
 	/**
 	 * Method to adjust the ordering of a row.
 	 *
@@ -119,7 +123,7 @@ class UsersModelLevels extends JModelList
 		// Sanitize the id and adjustment.
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('level.id');
 		$user = JFactory::getUser();
-		
+
 		// Get an instance of the record's table.
 		$table = JTable::getInstance('viewlevel');
 

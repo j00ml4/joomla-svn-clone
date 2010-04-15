@@ -15,21 +15,41 @@ jimport('joomla.application.component.modellist');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialModelComments extends JModelList
 {
 	/**
-	 * Model context string.
+	 * Get a list of all the thread contexts.
 	 *
-	 * @var	string
+	 * @return	mixed	An array if successful, false otherwise and the internal error is set.
+	 * @since	1.6
 	 */
-	protected $_context = 'com_social.comments';
+	function getContexts()
+	{
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+
+		$query->select('DISTINCT(context) AS value');
+		$query->from('#__social_threads');
+		$query->order('context');
+
+		$db->setQuery($query);
+		$result = $db->loadObjectList();
+
+		if ($error = $db->getErrorMsg()) {
+			$this->setError($error);
+			return false;
+		}
+
+		return $result;
+	}
 
 	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
 	protected function getListQuery()
 	{
@@ -97,8 +117,8 @@ class SocialModelComments extends JModelList
 	 * ordering requirements.
 	 *
 	 * @param	string	A prefix for the store id.
-	 *
 	 * @return	string	A store id.
+	 * @since	1.6
 	 */
 	protected function getStoreId($id = '')
 	{
@@ -112,7 +132,9 @@ class SocialModelComments extends JModelList
 	}
 
 	/**
-	 * Method to auto-populate the model state.
+	 * Method override to auto-populate the model state.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -120,16 +142,16 @@ class SocialModelComments extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$value = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$value = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $value);
 
-		$value = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '*', 'string');
+		$value = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '*', 'string');
 		$this->setState('filter.state', $value);
 
-		$value = $app->getUserStateFromRequest($this->_context.'filter.branch', 'filter_context', '', 'word');
+		$value = $app->getUserStateFromRequest($this->context.'filter.branch', 'filter_context', '', 'word');
 		$this->setState('filter.context', $value);
 
-		$value = $app->getUserStateFromRequest($this->_context.'filter.thread_id', 'filter_thread', null, 'int');
+		$value = $app->getUserStateFromRequest($this->context.'filter.thread_id', 'filter_thread', null, 'int');
 		$this->setState('filter.thread_id', $value);
 
 		// Load the parameters.
@@ -138,30 +160,5 @@ class SocialModelComments extends JModelList
 
 		// List state information.
 		parent::populateState('a.name', 'asc');
-	}
-
-	/**
-	 * Get a list of all the thread contexts.
-	 *
-	 * @return	mixed	An array if successful, false otherwise and the internal error is set.
-	 */
-	function getContexts()
-	{
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-
-		$query->select('DISTINCT(context) AS value');
-		$query->from('#__social_threads');
-		$query->order('context');
-
-		$db->setQuery($query);
-		$result = $db->loadObjectList();
-
-		if ($error = $db->getErrorMsg()) {
-			$this->setError($error);
-			return false;
-		}
-
-		return $result;
 	}
 }
