@@ -34,9 +34,13 @@ class BannersModelClient extends JModelAdmin
 		$this->_item = 'client';
 		$this->_option = 'com_banners';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -206,7 +210,7 @@ class BannersModelClient extends JModelAdmin
 
 		$table->name		= htmlspecialchars_decode($table->name, ENT_QUOTES);
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

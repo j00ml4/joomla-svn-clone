@@ -23,7 +23,7 @@ class PluginsModelPlugin extends JModelAdmin
 	 * Item cache.
 	 */
 	private $_cache = array();
-	
+
 	protected $_context = 'com_plugins';
 
 	/**
@@ -39,9 +39,13 @@ class PluginsModelPlugin extends JModelAdmin
 		$this->_item = 'plugin';
 		$this->_option = 'com_plugins';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -265,7 +269,7 @@ class PluginsModelPlugin extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

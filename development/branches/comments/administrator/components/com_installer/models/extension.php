@@ -144,7 +144,10 @@ class InstallerModel extends JModel
 
 	/**
 	 * Restore state from the session if relevant
-	 * @see libraries/joomla/application/component/JModel#populateState()
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{

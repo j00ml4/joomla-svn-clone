@@ -20,6 +20,56 @@ jimport('joomla.application.component.modellist');
 class SocialModelThreads extends JModelList
 {
 	/**
+	 * Get a list of comments.
+	 *
+	 * @return	mixed	An array of data items on success, false on failure.
+	 */
+	public function getItems()
+	{
+		// Get the list of comments.
+		$items = parent::getItems();
+
+		// Check for an error.
+		if ($items === false) {
+			return false;
+		}
+
+		// Check for empty array.
+		if (empty($items)) {
+			return true;
+		}
+
+		// Add count information only to the list items returned to save on performance.
+		$ids	= JArrayHelper::getColumn($items, 'id');
+		JArrayHelper::toInteger($ids);
+		$ids	= '('.implode(',', $ids).')';
+		$db		= $this->getDbo();
+
+		// Join on the comments table.
+		$query	= $db->getQuery(true);
+		$query->select('thread_id, COUNT(id) AS comment_count');
+		$query->from('#__social_comments');
+		$query->where('thread_id IN '.$ids);
+		$query->group('thread_id');
+		$db->setQuery($query);
+		$comments = $db->loadAssocList('thread_id', 'comment_count');
+
+		// Join on the ratings table.
+		$query->clear('select')->select('thread_id, pscore_count');
+		$query->clear('from')->from('#__social_ratings');
+		$db->setQuery($query);
+		$ratings = $db->loadAssocList('thread_id', 'pscore_count');
+
+		// Graft the data back into the list.
+		foreach ($items as $item) {
+			$item->comment_count	= isset($comments[$item->id]) ? $comments[$item->id] : 0;
+			$item->pscore_count		= isset($ratings[$item->id]) ? $ratings[$item->id] : 0;
+		}
+
+		return $items;
+	}
+
+	/**
 	 * Method to build an SQL query to load the list data.
 	 *
 	 * @return	string		An SQL query
@@ -86,78 +136,27 @@ class SocialModelThreads extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
-		$app		= JFactory::getApplication('administrator');
-		$context	= 'com_social.threads';
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$value = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $value);
 
-		$context = $app->getUserStateFromRequest($context.'.filter.context', 'filter_context', '', 'word');
-		$this->setState('filter.context', $context);
+		$value = $app->getUserStateFromRequest($this->context.'.filter.context', 'filter_context', '', 'word');
+		$this->setState('filter.context', $value);
 
 		// Load the parameters.
-		$params = JComponentHelper::getParams('com_social');
-		$this->setState('params', $params);
+		$value = JComponentHelper::getParams('com_social');
+		$this->setState('params', $value);
 
 		// List state information.
 		parent::populateState('a.id', 'asc');
-	}
-
-
-	/**
-	 * Get a list of comments.
-	 *
-	 * @return	mixed	An array of data items on success, false on failure.
-	 */
-	public function getItems()
-	{
-		// Get the list of comments.
-		$items = parent::getItems();
-
-		// Check for an error.
-		if ($items === false) {
-			return false;
-		}
-
-		// Check for empty array.
-		if (empty($items)) {
-			return true;
-		}
-
-		// Add count information only to the list items returned to save on performance.
-		$ids	= JArrayHelper::getColumn($items, 'id');
-		JArrayHelper::toInteger($ids);
-		$ids	= '('.implode(',', $ids).')';
-		$db		= $this->getDbo();
-
-		// Join on the comments table.
-		$query	= $db->getQuery(true);
-		$query->select('thread_id, COUNT(id) AS comment_count');
-		$query->from('#__social_comments');
-		$query->where('thread_id IN '.$ids);
-		$query->group('thread_id');
-		$db->setQuery($query);
-		$comments = $db->loadAssocList('thread_id', 'comment_count');
-
-		// Join on the ratings table.
-		$query->clear('select')->select('thread_id, pscore_count');
-		$query->clear('from')->from('#__social_ratings');
-		$db->setQuery($query);
-		$ratings = $db->loadAssocList('thread_id', 'pscore_count');
-
-		// Graft the data back into the list.
-		foreach ($items as $item) {
-			$item->comment_count	= isset($comments[$item->id]) ? $comments[$item->id] : 0;
-			$item->pscore_count		= isset($ratings[$item->id]) ? $ratings[$item->id] : 0;
-		}
-
-		return $items;
 	}
 }
