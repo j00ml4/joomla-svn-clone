@@ -1,0 +1,18 @@
+ Volume in drive C has no label.
+ Volume Serial Number is F89F-8041
+
+ Directory of C:\xampp\htdocs\joomla_development\fef_content_0412\tests\system
+
+04/15/2010  01:34 PM    <DIR>          .
+04/15/2010  01:34 PM    <DIR>          ..
+04/15/2010  10:29 AM    <DIR>          PEAR
+04/15/2010  10:29 AM             2,146 phpunit.php
+04/15/2010  10:29 AM               239 phpunit.xml
+04/15/2010  10:29 AM           152,319 resetdb.sql
+04/15/2010  10:29 AM               345 runtests.sh
+04/15/2010  01:24 PM             6,901 SeleniumJoomlaTestCase.php
+04/15/2010  10:42 AM    <DIR>          servers
+04/15/2010  10:29 AM    <DIR>          suite
+04/15/2010  01:34 PM                 0 test.txt
+               6 File(s)        161,950 bytes
+               5 Dir(s)  770,114,748,416 bytes free
