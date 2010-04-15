@@ -155,8 +155,8 @@ class JDate extends DateTime
 	 * Magic method to access properties of the date given by class to the format method.
 	 *
 	 * @param	string	The name of the property.
-	 *
-	 * @param	mixed	A value if the property name is valid, null otherwise.
+	 * @return	mixed	A value if the property name is valid, null otherwise.
+	 * @since	1.6
 	 */
 	public function __get($name)
 	{
