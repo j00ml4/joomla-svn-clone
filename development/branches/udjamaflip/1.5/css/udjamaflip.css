@@ -13,10 +13,13 @@ body
 	background-color:#FFFFFF;
 }
 
+legend { font-size:1.2em; padding:2px; }
+
 a
 {
 	color:#484848;
 	text-decoration:none;
+	cursor:pointer;
 }
 
 	a:hover
@@ -73,7 +76,13 @@ div.m table
 		margin-top:5px;
 		width:auto;
 	}
-
+    
+    div.m table tr td select.inputbox
+    {
+        margin:3px;
+        padding:1px;
+    }
+    
 table.adminlist
 {
 	margin-top:10px;
@@ -224,6 +233,36 @@ td#mm_pane			{ width: 90%; }
 input#mm_subject    { width: 200px; }
 textarea#mm_message { width: 100%; }
 
+/* EDITOR */
+
+table.mceLayout tbody tr.mceFirst td.mceToolbar table { text-align:left; width:auto; }
+
+div.button2-left a
+{
+    border:1px solid #999999;
+    color:#999999;
+    padding:7px;
+    height:auto;
+    display:inline-block;
+    padding-left:7px;
+    padding-right:7px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color:#323232;
+}
+
+/* upload media manager */
+
+form#folderForm fieldset
+{
+    width:95%;
+}
+
+form#uploadForm fieldset
+{
+    width:95%;
+}
+
 /* pane-sliders  */
 .pane-sliders .title {
 	margin: 0;
@@ -232,19 +271,19 @@ textarea#mm_message { width: 100%; }
 	cursor: pointer;
 }
 
-.pane-sliders .panel   { border: 1px solid #ccc; margin-bottom: 3px;}
+.pane-sliders .panel   { border: 1px solid #333; margin-bottom: 3px;}
 
-.pane-sliders .panel h3 { background: #f6f6f6; color: #666}
+.pane-sliders .panel h3 { background: #353535; color: #e8e8e8}
 
-.pane-sliders .content { background: #f6f6f6; }
+.pane-sliders .content { background: #e8e8e8; }
 
 .pane-sliders .adminlist     { border: 0 none; }
 .pane-sliders .adminlist td  { border: 0 none; }
 
-.jpane-toggler  span     { background: transparent url(../images/j_arrow.png) 5px 50% no-repeat; padding-left: 20px;}
-.jpane-toggler-down span { background: transparent url(../images/j_arrow_down.png) 5px 50% no-repeat; padding-left: 20px;}
+.jpane-toggler  span     { background: transparent url(../images/arrow.png) 5px 50% no-repeat; padding-left: 20px;}
+.jpane-toggler-down span { background: transparent url(../images/arrowDown.png) 5px 50% no-repeat; padding-left: 20px;}
 
-.jpane-toggler-down {  border-bottom: 1px solid #ccc; }
+.jpane-toggler-down {  border-bottom: 1px solid #333; }
 
 /* tabs */
 

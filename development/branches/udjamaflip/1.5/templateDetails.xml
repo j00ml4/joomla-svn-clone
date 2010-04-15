@@ -16,73 +16,52 @@
         <filename>includes/tmpl.footer.php</filename>
         <filename>index.html</filename>
         <filename>template_thumbnail.png</filename>
-        <filename>images/toolbar/icon-32-trash.png</filename>
+        <filename>images/toolbar/tb_32_menu.png</filename>
+        <filename>images/toolbar/tb_32_parameters.png</filename>
         <filename>images/toolbar/index.html</filename>
-        <filename>images/toolbar/icon-32-config.png</filename>
-        <filename>images/toolbar/icon-32-new.png</filename>
+        <filename>images/toolbar/tb_32_css.png</filename>
         <filename>images/toolbar/icon-32-export.png</filename>
-        <filename>images/toolbar/icon-32-help.png</filename>
-        <filename>images/toolbar/icon-32-search.png</filename>
-        <filename>images/toolbar/icon-32-publish.png</filename>
+        <filename>images/toolbar/icon-32-new-style.png</filename>
+        <filename>images/toolbar/tb_32_forward.png</filename>
+        <filename>images/toolbar/tb_32_refresh.png</filename>
+        <filename>images/toolbar/tb_32_upload.png</filename>
         <filename>images/toolbar/icon-32-download.png</filename>
-        <filename>images/toolbar/icon-32-refresh.png</filename>
+        <filename>images/toolbar/tb_32_cancel.png</filename>
+        <filename>images/toolbar/icon-32-delete-style.png</filename>
         <filename>images/toolbar/icon-32-edit.png</filename>
         <filename>images/toolbar/icon-32-lock.png</filename>
-        <filename>images/toolbar/icon-32-move.png</filename>
-        <filename>images/toolbar/icon-32-copy.png</filename>
-        <filename>images/toolbar/icon-32-apply.png</filename>
+        <filename>images/toolbar/tb_32_archive.png</filename>
+        <filename>images/toolbar/tb_32_html.png</filename>
+        <filename>images/toolbar/tb_32_archive_out.png</filename>
+        <filename>images/toolbar/tb_32_unpublish.png</filename>
+        <filename>images/toolbar/tb_32_save.png</filename>
+        <filename>images/toolbar/tb_32_sendmail.png</filename>
+        <filename>images/toolbar/tb_32_publish.png</filename>
+        <filename>images/toolbar/tb_32_help.png</filename>
         <filename>images/toolbar/icon-32-print.png</filename>
-        <filename>images/toolbar/icon-32-menu.png</filename>
+        <filename>images/toolbar/tb_32_copy.png</filename>
         <filename>images/toolbar/icon-32-xml.png</filename>
-        <filename>images/toolbar/icon-32-html.png</filename>
         <filename>images/toolbar/icon-32-default.png</filename>
+        <filename>images/toolbar/tb_32_move.png</filename>
         <filename>images/toolbar/icon-32-forward.png</filename>
+        <filename>images/toolbar/tb_32_trash.png</filename>
         <filename>images/toolbar/icon-32-adduser.png</filename>
-        <filename>images/toolbar/icon-32-delete.png</filename>
+        <filename>images/toolbar/tb_32_preview.png</filename>
         <filename>images/toolbar/icon-32-back.png</filename>
-        <filename>images/toolbar/icon-32-upload.png</filename>
-        <filename>images/toolbar/icon-32-preview.png</filename>
-        <filename>images/toolbar/icon-32-send.png</filename>
-        <filename>images/toolbar/icon-32-revert.png</filename>
-        <filename>images/toolbar/icon-32-unpublish.png</filename>
+        <filename>images/toolbar/tb_32_back.png</filename>
+        <filename>images/toolbar/icon-32-purge.png</filename>
+        <filename>images/toolbar/tb_32_restore.png</filename>
+        <filename>images/toolbar/tb_32_edit.png</filename>
         <filename>images/toolbar/icon-32-css.png</filename>
-        <filename>images/toolbar/icon-32-save.png</filename>
-        <filename>images/toolbar/icon-32-archive.png</filename>
-        <filename>images/toolbar/icon-32-cancel.png</filename>
-        <filename>images/toolbar/icon-32-unarchive.png</filename>
+        <filename>images/toolbar/tb_32_default.png</filename>
+        <filename>images/toolbar/tb_32_apply.png</filename>
+        <filename>images/toolbar/icon-32-error.png</filename>
+        <filename>images/toolbar/tb_32_delete.png</filename>
+        <filename>images/toolbar/tb_32_add.png</filename>
+        <filename>images/toolbar/toolbarBg.jpg</filename>
         <filename>images/dock-bg.gif</filename>
         <filename>images/loginBg.png</filename>
         <filename>images/taskbarBG.png</filename>
-        <filename>images/menu/index.html</filename>
-        <filename>images/menu/icon-16-category.png</filename>
-        <filename>images/menu/icon-16-menu.png</filename>
-        <filename>images/menu/icon-16-checkin.png</filename>
-        <filename>images/menu/icon-16-stats.png</filename>
-        <filename>images/menu/icon-16-trash.png</filename>
-        <filename>images/menu/icon-16-media.png</filename>
-        <filename>images/menu/icon-16-cpanel.png</filename>
-        <filename>images/menu/icon-16-component.png</filename>
-        <filename>images/menu/icon-16-user.png</filename>
-        <filename>images/menu/icon-16-themes.png</filename>
-        <filename>images/menu/icon-16-print.png</filename>
-        <filename>images/menu/icon-16-logout.png</filename>
-        <filename>images/menu/icon-16-massmail.png</filename>
-        <filename>images/menu/icon-16-language.png</filename>
-        <filename>images/menu/icon-16-install.png</filename>
-        <filename>images/menu/icon-16-messages.png</filename>
-        <filename>images/menu/icon-16-static.png</filename>
-        <filename>images/menu/icon-16-info.png</filename>
-        <filename>images/menu/icon-16-article.png</filename>
-        <filename>images/menu/icon-16-archive.png</filename>
-        <filename>images/menu/icon-16-content.png</filename>
-        <filename>images/menu/icon-16-menumgr.png</filename>
-        <filename>images/menu/icon-16-help.png</filename>
-        <filename>images/menu/icon-16-frontpage.png</filename>
-        <filename>images/menu/icon-16-plugin.png</filename>
-        <filename>images/menu/icon-16-module.png</filename>
-        <filename>images/menu/icon-16-config.png</filename>
-        <filename>images/menu/icon-16-default.png</filename>
-        <filename>images/menu/icon-16-section.png</filename>
         <filename>images/refresh.png</filename>
         <filename>images/legacy.png</filename>
         <filename>images/borderLeft.png</filename>
@@ -90,280 +69,50 @@
         <filename>images/minimise.png</filename>
         <filename>images/favicon.ico</filename>
         <filename>images/bodyBG.png</filename>
-        <filename>images/icons/ToDoList.png</filename>
-        <filename>images/icons/DropCopy.png</filename>
-        <filename>images/icons/TextTwist3.png</filename>
-        <filename>images/icons/main-bg.gif</filename>
-        <filename>images/icons/Twinkle1.png</filename>
-        <filename>images/icons/Kate1.png</filename>
-        <filename>images/icons/iBlackjack.png</filename>
-        <filename>images/icons/SMSD.png</filename>
-        <filename>images/icons/Installer.png</filename>
-        <filename>images/icons/Calculator.png</filename>
-        <filename>images/icons/weDict2.png</filename>
-        <filename>images/icons/Services1.png</filename>
         <filename>images/icons/Clock.png</filename>
-        <filename>images/icons/Mail1.png</filename>
-        <filename>images/icons/MxTube1.png</filename>
         <filename>images/icons/Money.png</filename>
-        <filename>images/icons/Clock1.png</filename>
-        <filename>images/icons/Converter.png</filename>
         <filename>images/icons/Light3.png</filename>
-        <filename>images/icons/TextTwist2.png</filename>
-        <filename>images/icons/Band2.png</filename>
-        <filename>images/icons/Categories1.png</filename>
-        <filename>images/icons/iCave.png</filename>
-        <filename>images/icons/TuneWiki.png</filename>
-        <filename>images/icons/iFob.png</filename>
-        <filename>images/icons/TextTwist5.png</filename>
         <filename>images/icons/TextEdit.png</filename>
-        <filename>images/icons/Clock2.png</filename>
-        <filename>images/icons/snes4iphone.png</filename>
         <filename>images/icons/ShopList2.png</filename>
-        <filename>images/icons/Weather3.png</filename>
-        <filename>images/icons/iTVGuide.png</filename>
-        <filename>images/icons/Services2.png</filename>
         <filename>images/icons/Google.png</filename>
-        <filename>images/icons/genesis3.png</filename>
-        <filename>images/icons/Photos1.png</filename>
-        <filename>images/icons/BlockPuzzle1.png</filename>
-        <filename>images/icons/MusicQuiz2.png</filename>
-        <filename>images/icons/PDFViewer.png</filename>
-        <filename>images/icons/Light4.png</filename>
-        <filename>images/icons/weTool.png</filename>
-        <filename>images/icons/AddressBook1.png</filename>
-        <filename>images/icons/RSS.png</filename>
-        <filename>images/icons/TextEdit2.png</filename>
-        <filename>images/icons/iStumbler.png</filename>
-        <filename>images/icons/MusicQuiz.png</filename>
-        <filename>images/icons/TTR.png</filename>
         <filename>images/icons/AddressBook.png</filename>
-        <filename>images/icons/Installer5.png</filename>
         <filename>images/icons/weDict0.png</filename>
-        <filename>images/icons/Pool1.png</filename>
-        <filename>images/icons/Mines.png</filename>
-        <filename>images/icons/Lexitron.png</filename>
-        <filename>images/icons/iScores.png</filename>
-        <filename>images/icons/iPod8.png</filename>
-        <filename>images/icons/iPod9.png</filename>
-        <filename>images/icons/VideoRecorder.png</filename>
         <filename>images/icons/iDigger.png</filename>
-        <filename>images/icons/rRootage.png</filename>
-        <filename>images/icons/SMBPrefs1.png</filename>
-        <filename>images/icons/iPod1.png</filename>
-        <filename>images/icons/Calendar.png</filename>
-        <filename>images/icons/Notes1.png</filename>
-        <filename>images/icons/Dominoes2.png</filename>
         <filename>images/icons/StatusStyle.png</filename>
-        <filename>images/icons/TuneWiki1.png</filename>
-        <filename>images/icons/Text0.png</filename>
-        <filename>images/icons/Phone.png</filename>
-        <filename>images/icons/.DS_Store</filename>
-        <filename>images/icons/Velib.png</filename>
-        <filename>images/icons/iStumbler2.png</filename>
-        <filename>images/icons/BossTool.png</filename>
-        <filename>images/icons/Insomnia.png</filename>
-        <filename>images/icons/20.png</filename>
-        <filename>images/icons/fring.png</filename>
-        <filename>images/icons/psx4all.png</filename>
-        <filename>images/icons/PocketTouch1.png</filename>
-        <filename>images/icons/MirrorScope.png</filename>
         <filename>images/icons/Bluetooth1.png</filename>
-        <filename>images/icons/SendFile2.png</filename>
-        <filename>images/icons/iPhysics1.png</filename>
-        <filename>images/icons/Guitarist4.png</filename>
-        <filename>images/icons/iStart.png</filename>
-        <filename>images/icons/BallFight.png</filename>
         <filename>images/icons/Notes.png</filename>
-        <filename>images/icons/Chuzzle.png</filename>
         <filename>images/icons/GMail.png</filename>
-        <filename>images/icons/iPianist.png</filename>
-        <filename>images/icons/Camera1.png</filename>
-        <filename>images/icons/Radio2.png</filename>
         <filename>images/icons/Mail.png</filename>
         <filename>images/icons/SMBPrefs2.png</filename>
-        <filename>images/icons/psx4all-rough.png</filename>
-        <filename>images/icons/SendSong.png</filename>
-        <filename>images/icons/Light5.png</filename>
-        <filename>images/icons/iQuickBlock.png</filename>
-        <filename>images/icons/VNotes.png</filename>
-        <filename>images/icons/ContactFlow2.png</filename>
-        <filename>images/icons/iPhysics3.png</filename>
         <filename>images/icons/Padlock1.png</filename>
-        <filename>images/icons/MxTube.png</filename>
-        <filename>images/icons/Poof.png</filename>
-        <filename>images/icons/Guitarist1.png</filename>
-        <filename>images/icons/LedBanner.png</filename>
-        <filename>images/icons/Facebook.png</filename>
-        <filename>images/icons/PenguinPanic.png</filename>
         <filename>images/icons/Weather.png</filename>
-        <filename>images/icons/Chess.png</filename>
-        <filename>images/icons/Towers.png</filename>
-        <filename>images/icons/Snapture.png</filename>
-        <filename>images/icons/SMSD2.png</filename>
-        <filename>images/icons/Guitarist2.png</filename>
-        <filename>images/icons/Pool3.png</filename>
-        <filename>images/icons/Videos.png</filename>
         <filename>images/icons/Maps1.png</filename>
-        <filename>images/icons/iZoo0.png</filename>
-        <filename>images/icons/iPod6.png</filename>
-        <filename>images/icons/SMBPrefs.png</filename>
-        <filename>images/icons/Info.txt</filename>
-        <filename>images/icons/Pool2.png</filename>
-        <filename>images/icons/iDrummer.png</filename>
-        <filename>images/icons/Notes2.png</filename>
-        <filename>images/icons/Music.png</filename>
-        <filename>images/icons/Calendar2.png</filename>
-        <filename>images/icons/SendFile.png</filename>
-        <filename>images/icons/iZoo.png</filename>
-        <filename>images/icons/Band.png</filename>
-        <filename>images/icons/Chuzzle1.png</filename>
-        <filename>images/icons/Notes0.png</filename>
-        <filename>images/icons/iPod10.png</filename>
-        <filename>images/icons/MSN.png</filename>
-        <filename>images/icons/iSlots.png</filename>
-        <filename>images/icons/weDict.png</filename>
-        <filename>images/icons/MxTube2.png</filename>
         <filename>images/icons/Finder.png</filename>
-        <filename>images/icons/Maps.png</filename>
-        <filename>images/icons/NES.png</filename>
-        <filename>images/icons/HuaRongDao.png</filename>
         <filename>images/icons/Calendar1.png</filename>
-        <filename>images/icons/Games1.png</filename>
-        <filename>images/icons/Calendar3.png</filename>
-        <filename>images/icons/SysInfo.png</filename>
-        <filename>images/icons/Millionaire.png</filename>
-        <filename>images/icons/BlockPuzzle.png</filename>
-        <filename>images/icons/iPianist2.png</filename>
-        <filename>images/icons/Garf.png</filename>
-        <filename>images/icons/iDope.png</filename>
-        <filename>images/icons/Maps4.png</filename>
-        <filename>images/icons/YM1.png</filename>
-        <filename>images/icons/Services.png</filename>
-        <filename>images/icons/Guitarist3.png</filename>
-        <filename>images/icons/Padlock2.png</filename>
         <filename>images/icons/Camera2.png</filename>
-        <filename>images/icons/TextTwist1.png</filename>
-        <filename>images/icons/YouTube.png</filename>
-        <filename>images/icons/Clock0.png</filename>
-        <filename>images/icons/Maps5.png</filename>
-        <filename>images/icons/iPod7.png</filename>
-        <filename>images/icons/iWoman.png</filename>
         <filename>images/icons/TouchPad.png</filename>
-        <filename>images/icons/PocketTouch.png</filename>
-        <filename>images/icons/Radio.png</filename>
-        <filename>images/icons/Sudoku.png</filename>
-        <filename>images/icons/MobileChat.png</filename>
-        <filename>images/icons/Lights Off.png</filename>
-        <filename>images/icons/iPod2.png</filename>
         <filename>images/icons/Contacts.png</filename>
-        <filename>images/icons/Twinkle2.png</filename>
-        <filename>images/icons/genesis2.png</filename>
-        <filename>images/icons/iSolitaire.png</filename>
-        <filename>images/icons/Mail3.png</filename>
-        <filename>images/icons/MusicQuiz1.png</filename>
-        <filename>images/icons/iSMS.png</filename>
-        <filename>images/icons/iPod4.png</filename>
-        <filename>images/icons/tuxpuck.png</filename>
-        <filename>images/icons/Shaver2.png</filename>
         <filename>images/icons/ContactFlow.png</filename>
-        <filename>images/icons/TextTwist4.png</filename>
-        <filename>images/icons/Sketches0.png</filename>
-        <filename>images/icons/Calendar5.png</filename>
-        <filename>images/icons/Music1.png</filename>
-        <filename>images/icons/MMS.png</filename>
-        <filename>images/icons/4Balls.png</filename>
-        <filename>images/icons/iCopter.png</filename>
         <filename>images/icons/Search.png</filename>
-        <filename>images/icons/Calendar4.png</filename>
         <filename>images/icons/Customize1.png</filename>
-        <filename>images/icons/iPod3.png</filename>
-        <filename>images/icons/iSnake.png</filename>
-        <filename>images/icons/YouTube2.png</filename>
         <filename>images/icons/Safari.png</filename>
         <filename>images/icons/Padlock3.png</filename>
-        <filename>images/icons/Mahjong.png</filename>
-        <filename>images/icons/TimeCapsule.png</filename>
         <filename>images/icons/Books.png</filename>
         <filename>images/icons/Respring.png</filename>
         <filename>images/icons/flickr.png</filename>
-        <filename>images/icons/T4Two.png</filename>
-        <filename>images/icons/TwistedFingers.png</filename>
         <filename>images/icons/Battery.png</filename>
         <filename>images/icons/Stocks.png</filename>
-        <filename>images/icons/Pacman.png</filename>
         <filename>images/icons/ShopList.png</filename>
-        <filename>images/icons/Dominoes.png</filename>
-        <filename>images/icons/Tris.png</filename>
-        <filename>images/icons/iBlackjack1.png</filename>
         <filename>images/icons/Camera.png</filename>
-        <filename>images/icons/Scrabble.png</filename>
-        <filename>images/icons/PuzzleManiak.png</filename>
-        <filename>images/icons/fring2.png</filename>
-        <filename>images/icons/Weather1.png</filename>
         <filename>images/icons/Categories.png</filename>
-        <filename>images/icons/Loo.png</filename>
-        <filename>images/icons/MIM.png</filename>
-        <filename>images/icons/TrismDEMO.png</filename>
-        <filename>images/icons/Games2.png</filename>
-        <filename>images/icons/Padlock4.png</filename>
-        <filename>images/icons/TextTwist.png</filename>
-        <filename>images/icons/Shaver.png</filename>
-        <filename>images/icons/Music3.png</filename>
-        <filename>images/icons/VNotes0.png</filename>
-        <filename>images/icons/EvolutionRGB.png</filename>
-        <filename>images/icons/PeriodicTable.png</filename>
-        <filename>images/icons/Customize.png</filename>
-        <filename>images/icons/iZoo1.png</filename>
-        <filename>images/icons/genesis1.png</filename>
-        <filename>images/icons/SendPhotos.png</filename>
-        <filename>images/icons/Bluetooth.png</filename>
-        <filename>images/icons/iTunes.png</filename>
-        <filename>images/icons/TTR2.png</filename>
-        <filename>images/icons/Kate.png</filename>
-        <filename>images/icons/Photos3.png</filename>
-        <filename>images/icons/Installer3.png</filename>
-        <filename>images/icons/Sketches.png</filename>
-        <filename>images/icons/vWallpaper.png</filename>
-        <filename>images/icons/gpSPhone2.png</filename>
-        <filename>images/icons/Photos2.png</filename>
-        <filename>images/icons/Chuzzle2.png</filename>
-        <filename>images/icons/Light2.png</filename>
-        <filename>images/icons/Installer4.png</filename>
-        <filename>images/icons/ContactFlow1.png</filename>
-        <filename>images/icons/Photos.png</filename>
-        <filename>images/icons/ContraSense.png</filename>
-        <filename>images/icons/MobileScrobbler.png</filename>
-        <filename>images/icons/ParkingLot.png</filename>
         <filename>images/icons/iPod5.png</filename>
-        <filename>images/icons/Text.png</filename>
-        <filename>images/icons/Installer2.png</filename>
-        <filename>images/icons/Mail2.png</filename>
-        <filename>images/icons/Orblive.png</filename>
-        <filename>images/icons/ixboxlive.png</filename>
-        <filename>images/icons/fring1.png</filename>
         <filename>images/icons/Maps2.png</filename>
         <filename>images/icons/Facebook2.png</filename>
-        <filename>images/icons/Marble.png</filename>
-        <filename>images/icons/Lights-Off.png</filename>
-        <filename>images/icons/Weather2.png</filename>
         <filename>images/icons/Sketches1.png</filename>
-        <filename>images/icons/iPod.png</filename>
         <filename>images/icons/Calculator0.png</filename>
-        <filename>images/icons/SuperPong.png</filename>
         <filename>images/icons/WifiSwitch.png</filename>
-        <filename>images/icons/iPhysics.png</filename>
-        <filename>images/icons/YM.png</filename>
-        <filename>images/icons/Dactyl.png</filename>
         <filename>images/icons/Settings.png</filename>
-        <filename>images/icons/Millionaire1.png</filename>
-        <filename>images/icons/Google1.png</filename>
         <filename>images/icons/Terminal.png</filename>
-        <filename>images/icons/Labyrinth.png</filename>
-        <filename>images/icons/Games.png</filename>
-        <filename>images/icons/Light1.png</filename>
-        <filename>images/icons/ContraSense1.png</filename>
-        <filename>images/icons/gpSPhone.png</filename>
         <filename>images/startButton.png</filename>
         <filename>images/close.png</filename>
         <filename>images/menuBG.png</filename>
@@ -392,30 +141,20 @@
         <filename>component.php</filename>
         <filename>credits.txt</filename>
         <filename>index.php</filename>
-        <filename>html/mod_menu/index.html</filename>
-        <filename>html/mod_menu/menu.php</filename>
-        <filename>html/mod_menu/helper.php</filename>
-        <filename>html/mod_menu/mod_menu.php</filename>
-        <filename>html/mod_menu/mod_menu.xml</filename>
         <filename>params.ini</filename>
         <filename>login.php</filename>
         <filename>templateDetails.xml</filename>
         <filename>js/jquery.js</filename>
         <filename>js/jquery-inc.js</filename>
         <filename>js/functions.js</filename>
-        <filename>js/_notes/dwsync.xml</filename>
         <filename>js/init.js</filename>
         <filename>js/interface.js</filename>
         <filename>js/jquery-ui.js</filename>
         <filename>js/jclock.js</filename>
-        <filename>css/khepri-icon.css</filename>
-        <filename>css/khepri.css</filename>
-        <filename>css/khepri-component.css</filename>
-        <filename>css/khepri-general.css</filename>
         <filename>css/windows.css</filename>
-        <filename>css/_notes/dwsync.xml</filename>
+        <filename>css/toolbar.css</filename>
+        <filename>css/udjamaflip.css</filename>
         <filename>css/menu.css</filename>
-        <filename>css/khepri-menu.css</filename>
         <filename>css/dock.css</filename>
         <filename>css/template.css</filename>
     </files>
