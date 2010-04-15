@@ -4,6 +4,7 @@
 	<fieldset>
 		<field
 			name="id"
+			label="JGLOBAL_RECORD_NUMBER"			
 			type="hidden"
 			default="0"
 			required="true"

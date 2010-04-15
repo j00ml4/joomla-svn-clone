@@ -52,6 +52,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php else : ?>
 				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
 			<?php endif; ?>
+			<br class="clr" />
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 
@@ -71,7 +72,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php echo $this->form->getInput('showtitle'); ?>
 		</fieldset>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('COM_MODULES_DETAILS'); ?></legend>
+			<legend><?php echo JText::_('JDETAILS'); ?></legend>
 			<?php echo $this->form->getLabel('ordering'); ?>
 			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
 
@@ -90,12 +91,11 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php echo $this->form->getInput('note'); ?>
 			
 			<?php echo $this->form->getLabel('client_id'); ?>
-			<?php echo $this->form->getInput('client_id'); ?>
-
-			<br class="clr" />
-			<?php echo JText::sprintf('JRECORD_NUMBER');  ?>
-			<?php echo JText::sprintf($this->item->id);  ?>
-
+			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />		
+			<?php if ($this->item->id) : ?>
+				<?php echo $this->form->getLabel('id'); ?>	
+				<input type="text" size="35" value="<?php  echo ($text = (string) JText::_($this->item->id)); ?>" class="readonly" readonly="readonly" />			
+			<?php endif; ?>
 
 			<br class="clr" />
 		
