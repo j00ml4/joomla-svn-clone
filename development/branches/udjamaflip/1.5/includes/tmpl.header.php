@@ -67,8 +67,11 @@
 				
                 <a href="#" onclick="return false;"><img src="templates/<?php echo  $this->template ?>/images/startButton.png" alt="Start" /></a>
                 <ul class="subnav">
-                    <li><a href="http://www.udjamaflip.com/forum.html" title="Support details" target="_blank">Support</a></li>
-                    <li><a href="http://www.udjamaflip.com/" title="Download Page" target="_blank">Download</a></li>
+                    <li><a href="http://www.udjamaflip.com/forum.html" title="Support details" target="_blank">Template Support</a></li>
+                    <li><a href="http://www.udjamaflip.com/" title="Download Page" target="_blank">Template Download</a></li>
+                    <li><a href="http://extensions.joomla.org/" title="Joomla! Extensions" target="_blank">Joomla! Extensions</a></li>
+                    <li><a href="http://forum.joomla.org/" title="Joomla! Forum" target="_blank">Joomla! Forum</a></li>
+                    <li><a href="http://www.google.com/analytics/" title="Google Analytics" target="_blank">Google Analytics</a></li>
                 </ul>
             </li>
 		</ul>

@@ -30,7 +30,15 @@ jQuery(document).ready(function ($) {
     var containerHeight = $(document).height();
     containerHeight = (containerHeight - 55);
     $('#window-container').height(containerHeight);
-
+    
+    /* little bit to add effect to "start button" */
+    
+    $('li#start').hover(function() {
+        $(this).children('img').attr('src','templates/udjamaflip/images/startButton-on.png');
+    },function () {
+        $(this).children('img').attr('src','templates/udjamaflip/images/startButton.png');
+    });
+    
     /* deals with window behaviours */
 
     $(".window").live("click", function () {
