@@ -5,10 +5,11 @@
 		<field
 			id="id"
 			name="id"
-			type="hidden"
+			type="text"
 			default="0"
 			required="true"
-			readonly="true" />
+			readonly="true"
+			class="readonly" />
 
 		<field
 			name="old_url"
