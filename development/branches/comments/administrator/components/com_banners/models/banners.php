@@ -58,12 +58,9 @@ class BannersModelBanners extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		// Get the application object
-		$app = &JFactory::getApplication();
-
-		// Create a new query object.
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		// Initialise variables.
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -142,9 +139,8 @@ class BannersModelBanners extends JModelList
 	 * different modules that might need different sets of data or different
 	 * ordering requirements.
 	 *
-	 * @param	string		$id	A prefix for the store id.
-	 *
-	 * @return	string		A store id.
+	 * @param	string	A prefix for the store id.
+	 * @return	string	A store id.
 	 */
 	protected function getStoreId($id = '')
 	{

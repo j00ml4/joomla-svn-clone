@@ -32,6 +32,7 @@ abstract class JModelAdmin extends JModelForm
 	 *
 	 * @param	array An optional associative array of configuration settings.
 	 * @see		JController
+	 * @since	1.6
 	 */
 	public function __construct($config = array())
 	{
@@ -52,6 +53,7 @@ abstract class JModelAdmin extends JModelForm
 	 */
 	protected function canDelete($record)
 	{
+		$user = JFactory::getUser();
 		return $user->authorise('core.delete', $this->option);
 	}
 
@@ -64,6 +66,7 @@ abstract class JModelAdmin extends JModelForm
 	 */
 	protected function canEditState($record)
 	{
+		$user = JFactory::getUser();
 		return $user->authorise('core.edit.state', $this->option);
 	}
 
@@ -72,6 +75,7 @@ abstract class JModelAdmin extends JModelForm
 	 *
 	 * @param	integer	The ID of the primary key.
 	 * @return	boolean
+	 * @since	1.6
 	 */
 	public function checkin($pk = null)
 	{
@@ -86,6 +90,7 @@ abstract class JModelAdmin extends JModelForm
 	 *
 	 * @param	int		The ID of the primary key.
 	 * @return	boolean	True if successful, false if an error occurs.
+	 * @since	1.6
 	 */
 	public function checkout($pk = null)
 	{
@@ -99,8 +104,8 @@ abstract class JModelAdmin extends JModelForm
 	 * Method to delete one or more records.
 	 *
 	 * @param	array	An array of record primary keys.
-	 *
 	 * @return	boolean	True if successful, false if an error occurs.
+	 * @since	1.6
 	 */
 	public function delete(&$pks)
 	{
@@ -145,6 +150,35 @@ die;*/
 	}
 
 	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
+	 */
+	public function getItem($pk = null)
+	{
+		// Initialise variables.
+		$pk		= (!empty($pk)) ? $pk : (int) $this->getState($this->getName().'.id');
+		$table	= $this->getTable();
+
+		if ($pk > 0) {
+			// Attempt to load the row.
+			$return = $table->load($pk);
+
+			// Check for a table object error.
+			if ($return === false && $table->getError()) {
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+
+		// Convert to the JObject before adding other data.
+		$item = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+		return $item;
+	}
+
+	/**
 	 * A protected method to get a set of ordering conditions.
 	 *
 	 * @param	object	A record object.
@@ -157,12 +191,32 @@ die;*/
 	}
 
 	/**
+	 * Stock method to auto-populate the model state.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		$app = JFactory::getApplication('administrator');
+
+		// Load the User state.
+		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
+			$pk = (int) JRequest::getInt('id');
+		}
+		$this->setState($this->getName().'.id', $pk);
+
+		// Load the parameters.
+		$params	= JComponentHelper::getParams($this->option);
+		$this->setState('params', $params);
+	}
+
+	/**
 	 * Method to change the published state of one or more records.
 	 *
 	 * @param	array	A list of the primary keys to change.
 	 * @param	int		The value of the published state.
-	 *
 	 * @return	boolean	True on success.
+	 * @since	1.6
 	 */
 	function publish(&$pks, $value = 1)
 	{
@@ -197,6 +251,7 @@ die;*/
 	 * @param	int		The ID of the primary key to move.
 	 * @param	integer	Increment, usually +1 or -1
 	 * @return	boolean	False on failure or error, true otherwise.
+	 * @since	1.6
 	 */
 	public function reorder($pks, $delta = 0)
 	{
@@ -235,10 +290,72 @@ die;*/
 	}
 
 	/**
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function save($data)
+	{
+		// Initialise variables;
+		$dispatcher = JDispatcher::getInstance();
+		$table		= $this->getTable();
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
+		$isNew		= true;
+
+		// Include the content plugins for the onSave events.
+		JPluginHelper::importPlugin('content');
+
+		// Load the row if saving an existing record.
+		if ($pk > 0) {
+			$table->load($pk);
+			$isNew = false;
+		}
+
+		// Bind the data.
+		if (!$table->bind($data)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Check the data.
+		if (!$table->check()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Trigger the onBeforeSaveContent event.
+		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		if (in_array(false, $result, true)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Store the data.
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Clean the cache.
+		$cache = JFactory::getCache($this->option);
+		$cache->clean();
+
+		// Trigger the onAfterContentSave event.
+		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+
+		$this->setState($this->getName().'.id', $table->id);
+
+		return true;
+	}
+
+	/**
 	 * Saves the manually set order of records.
 	 *
 	 * @param	array	An array of primary key ids.
 	 * @param	int		+/-1
+	 * @since	1.6
 	 */
 	function saveorder($pks, $order)
 	{
