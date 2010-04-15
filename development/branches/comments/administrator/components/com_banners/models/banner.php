@@ -19,26 +19,10 @@ jimport('joomla.application.component.modeladmin');
  */
 class BannersModelBanner extends JModelAdmin
 {
-	protected $_context = 'com_banners.banner';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'banner';
-		$this->_option = 'com_banners';
-	}
-	
 	/**
 	 * Method to auto-populate the model state.
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -198,7 +182,7 @@ class BannersModelBanner extends JModelAdmin
 
 		return true;
 	}
-	
+
 	/**
 	 * Method to stick records.
 	 *
@@ -239,7 +223,7 @@ class BannersModelBanner extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

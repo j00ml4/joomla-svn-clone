@@ -25,7 +25,7 @@ class SocialModelThreads extends JModelList
 	 * @return	string		An SQL query
 	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
@@ -72,7 +72,7 @@ class SocialModelThreads extends JModelList
 	 * @return	string		A store id.
 	 * @since	1.6
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
@@ -80,7 +80,7 @@ class SocialModelThreads extends JModelList
 		$id	.= ':'.$this->getState('filter.context');
 		$id	.= ':'.$this->getState('filter.thread_id');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -90,7 +90,7 @@ class SocialModelThreads extends JModelList
 	 * to be called on the first call to the getState() method unless the model
 	 * configuration flag to ignore the request is set.
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app		= JFactory::getApplication('administrator');
 		$context	= 'com_social.threads';
@@ -107,7 +107,7 @@ class SocialModelThreads extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('a.id', 'asc');
+		parent::populateState('a.id', 'asc');
 	}
 
 

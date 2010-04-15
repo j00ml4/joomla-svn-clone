@@ -19,20 +19,20 @@ jimport('joomla.application.component.view');
  */
 class BannersViewBanners extends JView
 {
-	protected $state;
+	protected $categories;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
-		$categories	= $this->get('Categories');
-		$params		= JComponentHelper::getParams('com_banners');
+		$this->categories	= $this->get('CategoryOrders');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -40,14 +40,8 @@ class BannersViewBanners extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-		$this->assignRef('categories',	$categories);
-		$this->assignRef('params',		$params);
-
 		$this->_setToolbar();
-		require_once JPATH_COMPONENT .'/models/fields/bannerclient.php';
+		require_once JPATH_COMPONENT.'/models/fields/bannerclient.php';
 		parent::display($tpl);
 	}
 
@@ -56,7 +50,7 @@ class BannersViewBanners extends JView
 	 */
 	protected function _setToolbar()
 	{
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'banners.php';
+		require_once JPATH_COMPONENT.'/helpers/banners.php';
 
 		$state	= $this->get('State');
 		$canDo	= BannersHelper::getActions($state->get('filter.category_id'));
@@ -79,8 +73,7 @@ class BannersViewBanners extends JView
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'banners.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else if ($canDo->get('core.edit.state')) {
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('banners.trash','JTOOLBAR_TRASH');
 		}
 		if ($canDo->get('core.admin')) {

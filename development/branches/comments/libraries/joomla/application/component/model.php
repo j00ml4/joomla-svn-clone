@@ -24,33 +24,42 @@ defined('JPATH_BASE') or die;
 abstract class JModel extends JObject
 {
 	/**
-	 * The model (base) name
+	 * Indicates if the internal state has been set
 	 *
-	 * @var string
+	 * @var		boolean
+	 * @since	1.6
 	 */
-	protected $_name;
+	protected $__state_set	= null;
 
 	/**
 	 * Database Connector
 	 *
-	 * @var object
+	 * @var		object
+	 * @since	1.5
 	 */
 	protected $_db;
+
+	/**
+	 * The model (base) name
+	 *
+	 * @var		string
+	 * @since	1.6 (replaces _name variable in 1.5)
+	 */
+	protected $name;
 
 	/**
 	 * An state object
 	 *
 	 * @var string
+	 * @since	1.6 (replaces _state variable in 1.5)
 	 */
-	protected $_state;
+	protected $state;
 
 	/**
-	 * Indicates if the internal state has been set
-	 *
-	 * @var bool
+	 * @var		string	The URL option for the component.
 	 * @since	1.6
 	 */
-	protected $__state_set	= null;
+	protected $option = null;
 
 	/**
 	 * Constructor
@@ -59,21 +68,29 @@ abstract class JModel extends JObject
 	 */
 	function __construct($config = array())
 	{
+		// Guess the option from the class name (Option)Model(View).
+		if (empty($this->option)) {
+			$r = null;
+			if (!preg_match('/(.*)Model/i', get_class($this), $r)) {
+				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'));
+			}
+			$this->option = 'com_'.strtolower($r[1]);
+		}
+
 		//set the view name
-		if (empty($this->_name))
-		{
+		if (empty($this->name)) {
 			if (array_key_exists('name', $config))  {
-				$this->_name = $config['name'];
+				$this->name = $config['name'];
 			} else {
-				$this->_name = $this->getName();
+				$this->name = $this->getName();
 			}
 		}
 
 		//set the model state
 		if (array_key_exists('state', $config))  {
-			$this->_state = $config['state'];
+			$this->state = $config['state'];
 		} else {
-			$this->_state = new JObject();
+			$this->state = new JObject();
 		}
 
 		//set the model dbo
@@ -109,19 +126,17 @@ abstract class JModel extends JObject
 		$type		= preg_replace('/[^A-Z0-9_\.-]/i', '', $type);
 		$modelClass	= $prefix.ucfirst($type);
 
-		if (!class_exists($modelClass))
-		{
+		if (!class_exists($modelClass)) {
 			jimport('joomla.filesystem.path');
 			$path = JPath::find(
 				JModel::addIncludePath(),
 				JModel::_createFileName('model', array('name' => $type))
 			);
-			if ($path)
-			{
+
+			if ($path) {
 				require_once $path;
 
-				if (!class_exists($modelClass))
-				{
+				if (!class_exists($modelClass)) {
 					JError::raiseWarning(0, JText::sprintf('JLIB_APPLICATION_ERROR_MODELCLASS_NOT_FOUND', $modelClass ));
 					return false;
 				}
@@ -141,7 +156,7 @@ abstract class JModel extends JObject
 	 */
 	public function setState($property, $value=null)
 	{
-		return $this->_state->set($property, $value);
+		return $this->state->set($property, $value);
 	}
 
 	/**
@@ -156,13 +171,13 @@ abstract class JModel extends JObject
 		if (!$this->__state_set)
 		{
 			// Private method to auto-populate the model state.
-			$this->_populateState();
+			$this->populateState();
 
 			// Set the model state set flat to true.
 			$this->__state_set = true;
 		}
 
-		return $property === null ? $this->_state : $this->_state->get($property, $default);
+		return $property === null ? $this->state : $this->state->get($property, $default);
 	}
 
 	/**
@@ -175,7 +190,7 @@ abstract class JModel extends JObject
 	 * @return	void
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 	}
 
@@ -210,10 +225,9 @@ abstract class JModel extends JObject
 	 */
 	public function getName()
 	{
-		$name = $this->_name;
+		$name = $this->name;
 
-		if (empty($name))
-		{
+		if (empty($name)) {
 			$r = null;
 			if (!preg_match('/Model(.*)/i', get_class($this), $r)) {
 				JError::raiseError (500, 'JLIB_APPLICATION_ERROR_MODEL_GET_NAME');
@@ -343,8 +357,7 @@ abstract class JModel extends JObject
 	{
 		$filename = '';
 
-		switch($type)
-		{
+		switch($type) {
 			case 'model':
 				$filename = strtolower($parts['name']).'.php';
 				break;

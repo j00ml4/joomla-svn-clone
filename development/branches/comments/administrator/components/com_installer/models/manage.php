@@ -29,7 +29,7 @@ class InstallerModelManage extends JModelList {
 	 * to be called on the first call to the getState() method unless the model
 	 * configuration flag to ignore the request is set.
 	 */
-	protected function _populateState() {
+	protected function populateState() {
 		$app = JFactory::getApplication('administrator');
 		$this->setState('message',$app->getUserState('com_installer.message'));
 		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
@@ -47,7 +47,7 @@ class InstallerModelManage extends JModelList {
 		$this->setState('filter.type', isset($data['select']['type']) ? $data['select']['type'] : '');
 		$this->setState('filter.group', isset($data['select']['group']) ? $data['select']['group'] : '');
 		$this->setState('filter.client', isset($data['select']['client']) ? $data['select']['client'] : '');
-		parent::_populateState('name', 'asc');
+		parent::populateState('name', 'asc');
 	}
 
 	/**
@@ -278,7 +278,7 @@ class InstallerModelManage extends JModelList {
 		}
 		JArrayHelper::sortObjects($result, $this->getState('list.ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);
 		$total = count($result);
-		$store = $this->_getStoreId('getTotal');
+		$store = $this->getStoreId('getTotal');
 		$this->_cache[$store] = $total;
 		if ($total < $limitstart) {
 			$limitstart = 0;
@@ -295,7 +295,7 @@ class InstallerModelManage extends JModelList {
 	 *
 	 * @return JDatabaseQuery the database query
 	 */
-	protected function _getListQuery() {
+	protected function getListQuery() {
 		$type = $this->getState('filter.type');
 		$client = $this->getState('filter.client');
 		$group = $this->getState('filter.group');

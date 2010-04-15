@@ -43,7 +43,7 @@ class SocialModelComment extends JModelForm
 	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
