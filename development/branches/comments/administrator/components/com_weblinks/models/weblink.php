@@ -176,7 +176,7 @@ class WeblinksModelWeblink extends JModelAdmin
 		}
 
 		// Prepare the row for saving
-		$this->_prepareTable($table);
+		$this->prepareTable($table);
 
 		// Check the data.
 		if (!$table->check()) {
@@ -212,7 +212,7 @@ class WeblinksModelWeblink extends JModelAdmin
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */
-	protected function _prepareTable(&$table)
+	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
 		$date = JFactory::getDate();

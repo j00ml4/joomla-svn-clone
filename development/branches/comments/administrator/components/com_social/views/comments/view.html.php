@@ -77,10 +77,10 @@ class SocialViewComments extends JView
 		$state	= $this->get('State');
 		$canDo	= SocialHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title('Comments: '.JText::_('SOCIAL_MODERATE_COMMENTS_TITLE'), 'logo');
+		JToolBarHelper::title('Comments: '.JText::_('COM_SOCIAL_MODERATE_COMMENTS_TITLE'), 'logo');
 
 		$toolbar = JToolBar::getInstance('toolbar');
-		$toolbar->appendButton('Standard', 'save', 'SOCIAL_MODERATE', 'comment.moderate', false, false);
+		$toolbar->appendButton('Standard', 'save', 'COM_SOCIAL_MODERATE', 'comment.moderate', false, false);
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_social');

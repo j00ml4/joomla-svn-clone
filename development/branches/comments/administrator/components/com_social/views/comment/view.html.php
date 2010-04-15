@@ -69,12 +69,12 @@ class SocialViewComment extends JView
 
 		if ($this->getLayout() == 'edit') {
 			JRequest::setVar('hidemainmenu', true);
-			JToolBarHelper::title(JText::_('SOCIAL_EDIT_COMMENT'));
+			JToolBarHelper::title(JText::_('COM_SOCIAL_EDIT_COMMENT'));
 			JToolBarHelper::apply('comment.apply', 'JToolbar_Apply');
 			JToolBarHelper::save('comment.save', 'JToolbar_Save');
 			JToolBarHelper::cancel('comment.cancel');
 		} else {
-			JToolBarHelper::title(JText::_('SOCIAL_MODERATE_COMMENT'));
+			JToolBarHelper::title(JText::_('COM_SOCIAL_MODERATE_COMMENT'));
 			JToolBarHelper::custom('comment.edit', 'edit.png', 'edit_f2.png', 'JToolbar_Edit', false);
 			JToolBarHelper::cancel('comment.cancel');
 		}

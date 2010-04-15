@@ -196,8 +196,19 @@ abstract class JModelAdmin extends JModelForm
 		$this->setState($this->getName().'.id', $pk);
 
 		// Load the parameters.
-		$params	= JComponentHelper::getParams($this->option);
-		$this->setState('params', $params);
+		$value	= JComponentHelper::getParams($this->option);
+		$this->setState('params', $value);
+	}
+
+	/**
+	 * Prepare and sanitise the table data prior to saving.
+	 *
+	 * @param	JTable	A JTable object.
+	 * @since	1.6
+	 */
+	protected function prepareTable($table)
+	{
+		// Derived class will provide its own implentation if required.
 	}
 
 	/**
@@ -308,6 +319,9 @@ abstract class JModelAdmin extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+
+		// Prepare the row for saving
+		$this->prepareTable($table);
 
 		// Check the data.
 		if (!$table->check()) {

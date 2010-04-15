@@ -59,9 +59,9 @@
 			label="JField_Published_Label"
 			size="1"
 		>
-			<option value="0">COMMENTS_DEFER</option>
+			<option value="0">COM_SOCIAL_DEFER</option>
 			<option value="1">JPUBLISHED</option>
-			<option value="-1">COMMENTS_SPAM</option>
+			<option value="-1">COM_SOCIAL_SPAM</option>
 			<option value="-2">JTRASHED</option>
 		</field>
 

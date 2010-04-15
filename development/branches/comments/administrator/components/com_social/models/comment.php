@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Comment model.
@@ -17,7 +17,7 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_social
  * @since		1.6
  */
-class SocialModelComment extends JModelForm
+class SocialModelComment extends JModelAdmin
 {
 	/**
 	 * Filter the body text according to configuration options.
@@ -36,77 +36,6 @@ class SocialModelComment extends JModelForm
 			$return = JFilterInput::getInstance()->clean($value);
 		}
 		return $return;
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @since	1.6
-	 */
-	protected function populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_social.edit.comment.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('comment.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_social');
-		$this->setState('params', $params);
-	}
-
-	/**
-	 * Prepare and sanitise the table prior to saving.
-	 *
-	 * @since	1.6
-	 */
-	protected function _prepareTable($table)
-	{
-	}
-
-	/**
-	 * Method to delete rows.
-	 *
-	 * @param	array	An array of item ids.
-	 * @return	boolean	Returns true on success, false on failure.
-	 * @since	1.6
-	 */
-	public function delete($pks)
-	{
-		// Typecast variable.
-		$pks = (array) $pks;
-
-		// Get a row instance.
-		$table = $this->getTable();
-
-		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				// Access checks.
-				$allow = $user->authorise('core.delete', 'com_social');
-
-				if ($allow) {
-					if (!$table->delete($pk)) {
-						$this->setError($table->getError());
-						return false;
-					}
-				} else {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JError_Core_Edit_State_not_permitted'));
-				}
-			} else {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -136,49 +65,6 @@ class SocialModelComment extends JModelForm
 		}
 
 		return $form;
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function getItem($pk = null)
-	{
-		static $cache = null;
-
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('comment.id');
-		$false	= false;
-
-		if (empty($cache)) {
-			$cache = array();
-		}
-
-		if (empty($cache[$pk])) {
-			// Get a row instance.
-			$table = $this->getTable();
-
-			// Attempt to load the row.
-			$return = $table->load($pk);
-
-			// Check for a table object error.
-			if ($return === false && $table->getError()) {
-				$this->setError($table->getError());
-				return $false;
-			}
-
-			// Prime required properties.
-			if (empty($table->id)) {
-				// Prepare data for a new record.
-			}
-
-			// Convert to the JObject before adding other data.
-			$cache[$pk] = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-		}
-
-		return $cache[$pk];
 	}
 
 	/**
@@ -258,7 +144,7 @@ class SocialModelComment extends JModelForm
 				'SELECT a.*' .
 				' FROM `#__social_comments` AS a' .
 				' WHERE a.`thread_id` = '.(int)$item->thread_id .
-				' AND a.`created_time` < '.$db->Quote($item->created_date) .
+				' AND a.`created_time` < '.$db->Quote($item->created_time) .
 				' AND a.`id` != '.(int)$item->id .
 				' ORDER BY a.`created_time` DESC',
 				0, 5
@@ -320,7 +206,7 @@ class SocialModelComment extends JModelForm
 	/**
 	 * Method to set the moderation state on a list of comments
 	 *
-	 * @param	array	$ids	The list of {COMMENT_ID}=>{STATE} values to set
+	 * @param	array	The list of {COMMENT_ID}=>{STATE} values to set
 	 * @return	boolean	True on success
 	 * @since	1.6
 	 */
@@ -339,7 +225,7 @@ class SocialModelComment extends JModelForm
 			if ($valid and !JError::isError($valid)) {
 				$useAkismet = true;
 			} else {
-				JError::raiseNotice(500, JText::_('SOCIAL_INVALID_AKISMET_KEY'));
+				JError::raiseNotice(500, JText::_('COM_SOCIAL_INVALID_AKISMET_KEY'));
 			}
 		}
 
@@ -404,70 +290,6 @@ class SocialModelComment extends JModelForm
 				return false;
 			}
 		}
-
-		return true;
-	}
-
-	/**
-	 * Method to save the form data.
-	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
-	 * @since	1.6
-	 */
-	public function save($data = array())
-	{
-		// Initialise variables.
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('comment.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->_prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_comment');
-		$cache->clean();
-
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
-
-		$this->setState('comment.id', $table->id);
 
 		return true;
 	}

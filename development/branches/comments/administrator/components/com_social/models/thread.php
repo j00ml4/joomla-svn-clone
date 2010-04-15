@@ -33,17 +33,14 @@ class SocialModelThread extends JModel
 		$pks	= (array) $pks;
 
 		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk)
-		{
+		foreach ($pks as $i => $pk) {
 			// Delete the comments.
-			if (!$this->resetComments($pks))
-			{
+			if (!$this->resetComments($pks)) {
 				return false;
 			}
 
 			// Delete the ratings.
-			if (!$this->resetRatings($pks))
-			{
+			if (!$this->resetRatings($pks)) {
 				return false;
 			}
 
@@ -52,8 +49,8 @@ class SocialModelThread extends JModel
 				'DELETE FROM #__jxcomments_threads' .
 				' WHERE id IN ('.implode(',', $pks).')'
 			);
-			if (!$db->query())
-			{
+
+			if (!$db->query()) {
 				$this->setError($db->getErrorMsg());
 				return false;
 			}
@@ -75,8 +72,7 @@ class SocialModelThread extends JModel
 		$db		= JFactory::getDbo();
 		$pks	= (array) $pks;
 
-		if (empty($pks))
-		{
+		if (empty($pks)) {
 			$this->setError(JText::_('JError_No_items_selected'));
 			return false;
 		}
@@ -87,8 +83,8 @@ class SocialModelThread extends JModel
 			'DELETE FROM #__jxcomments_comments' .
 			' WHERE thread_id IN ('.implode(',', $pks).')'
 		);
-		if (!$db->query())
-		{
+
+		if (!$db->query()) {
 			$this->setError($db->getErrorMsg());
 			return false;
 		}
@@ -109,8 +105,7 @@ class SocialModelThread extends JModel
 		$db		= JFactory::getDbo();
 		$pks	= (array) $pks;
 
-		if (empty($pks))
-		{
+		if (empty($pks)) {
 			$this->setError(JText::_('JError_No_items_selected'));
 			return false;
 		}
@@ -121,8 +116,8 @@ class SocialModelThread extends JModel
 			'DELETE FROM #__jxcomments_ratings' .
 			' WHERE thread_id IN ('.implode(',', $pks).')'
 		);
-		if (!$db->query())
-		{
+
+		if (!$db->query()) {
 			$this->setError($db->getErrorMsg());
 			return false;
 		}
