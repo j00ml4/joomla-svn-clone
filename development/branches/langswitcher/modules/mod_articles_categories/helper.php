@@ -17,7 +17,10 @@ abstract class modArticlesCategoriesHelper
 {
 	public static function getList(&$params)
 	{
-		$categories = JCategories::getInstance('Content');
+		$language = JSite::getLanguage();
+		$options = array();
+		$options['language'] = $language;
+		$categories = JCategories::getInstance('Content', $options);
 		$category = $categories->get($params->get('parent', 'root'));
 		$items = $category->getChildren();
 		if($params->get('count', 0) > 0 && count($items) > $params->get('count', 0))
