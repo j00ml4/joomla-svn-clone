@@ -2,8 +2,9 @@
 	<!-- $Id$ -->
 <form>
 	<fieldset>
-		<field name="id" type="hidden"
-			label="JGLOBAL_RECORD_NUMBER"
+		<field name="id" type="text"
+			label="JGLOBAL_FIELD_ID_LABEL" 
+			description="JGLOBAL_FIELD_ID_DESC"
 			default="0"
 			readonly="true"
 			required="true"

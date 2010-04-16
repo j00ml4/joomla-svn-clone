@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fieldset>
-		<field name="id" typ="test" 
-			label="CONTACT_ID_LABEL" size="10" default="0" required="true"
+		<field name="id" type="text" 
+			label="JGLOBAL_FIELD_ID_LABEL" description ="JGLOBAL_FIELD_ID_DESC"
+			size="10" default="0" required="true"
 			readonly="true" class="readonly" />
 
 		<field name="name" type="text"
