@@ -469,6 +469,9 @@ textarea#mm_message {
 	border-bottom: 1px solid #c7c8b2;
 }
 
+/* for hiding the unseen panel (problems in ie including 8) */
+/* .jpane-toggler + div {display: none;} */
+
 input#jformparams_link_titles1,
 input#jformparams_show_title1,
 input#jformparams_link_category1 {
@@ -565,11 +568,28 @@ div.current table#acl-config th.acl-groups {
 	text-align: left;
 }
 
-div#menu-assignment .menu-link label {
+div#menu-assignment {
+	height: 300px; 
+	overflow: auto;
+	clear:left;
+}
+
+div#menu-assignment h3 {
+	padding-top: 15px;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border-bottom: 1px solid #CCCCCC;
+	width: 90%;
+}
+
+div#menu-assignment ul.menu-links li.menu-link label {
 	clear:none;
-	min-width: 45px;
-	float:left;
+	float: left;
 	margin: 3px 0 0 5px;
+}
+div#menu-assignment ul.menu-links li.menu-link input {
+	clear: left;
+	float: left;
 }
 
 p.tab-description {
