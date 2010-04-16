@@ -139,7 +139,7 @@ p.error 	{ color: #a20000; font-weight: bold; }
 /**
  * Overall Styles
  */
-#minwidth {
+#minwidth, #minwidth-body {
 	min-width: 960px;
 } 
  
@@ -1456,9 +1456,8 @@ table.adminlist tr td.btns a:hover, table.adminlist tr td.btns a:active, table.a
  */
 ul#new-modules-list {
 	margin-left: 50px;
-	list-style-type: bullet;
 	font-size: 1.4em;
-	line-height: 1.8em;
+	line-height: 1.5em;
 }
 
 /**
