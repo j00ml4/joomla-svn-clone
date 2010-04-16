@@ -69,11 +69,11 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<th class="nowrap state-col">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
-				<th class="title ordering-col">
+				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Ordering', 'a.lft', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 					<?php echo JHtml::_('grid.order',  $this->items); ?>
 				</th>
-				<th class="title access-col">
+				<th class="access-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap id-col">

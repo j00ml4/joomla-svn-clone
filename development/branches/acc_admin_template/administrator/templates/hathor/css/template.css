@@ -1264,7 +1264,11 @@ th.ordering-col {
 }
 
 .categories th.ordering-col {
-	width: 5%;
+	width: 10%;
+}
+
+.categories th.ordering-col input, .categories td.order input {
+	font-size: 1em;
 }
 
 th.category-col {
