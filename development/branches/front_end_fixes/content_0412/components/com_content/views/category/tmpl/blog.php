@@ -16,10 +16,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
 <div class="blog<?php echo $pageClass;?>">
-<?php if ($this->params->get('show_page_title')!=0 or $this->params->get('show_category_title')): ?>
+<?php if ($this->params->get('show_page_heading')!=0 or $this->params->get('show_category_title')): ?>
 <h1>
 
-<?php if ( $this->params->get('show_page_title')!=0) : ?>
+<?php if ( $this->params->get('show_page_heading')!=0) : ?>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 <?php endif; ?>
 	<?php if ($this->params->get('show_category_title')) :?>
