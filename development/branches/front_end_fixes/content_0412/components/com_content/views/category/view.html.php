@@ -35,11 +35,11 @@ class ContentViewCategory extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
-		$user =& JFactory::getUser();
+		$user 		=& JFactory::getUser();
 
 		// Get some data from the models
 		$state		= &$this->get('State');
+		$params 	= &$state->params;
 		$items		= &$this->get('Items');
 		$category	= &$this->get('Category');
 		$children	= &$this->get('Children');
