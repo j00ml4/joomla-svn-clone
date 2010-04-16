@@ -72,6 +72,10 @@ JHtml::_('behavior.formvalidation');
 				<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTACT_CONTACT_DETAILS'), 'basic-options'); ?>
 					<fieldset class="panelform">
 					<p><?php echo empty($this->item->id) ? JText::_('COM_CONTACT_DETAILS') : JText::sprintf('COM_CONTACT_EDIT_DETAILS', $this->item->id); ?></p>
+						<?php echo $this->form->getLabel('image'); ?>
+						<?php echo $this->form->getInput('image'); ?>
+
+
 						<?php echo $this->form->getLabel('con_position'); ?>
 						<?php echo $this->form->getInput('con_position'); ?>
 
