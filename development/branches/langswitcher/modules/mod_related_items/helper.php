@@ -62,12 +62,16 @@ class modRelatedItemsHelper
 
 				if (count($likes))
 				{
+					// get language
+					$language = JSite::getLanguage();
+
 					// select other items based on the metakey field 'like' the keys found
 					$query->clear();
 					$query->select('a.id');
 					$query->select('a.title');
 					$query->select('DATE_FORMAT(a.created, "%Y-%m-%d") as created');
 					$query->select('a.catid');
+					$query->select('a.language');
 					$query->select('cc.access AS cat_access');
 					$query->select('cc.published AS cat_state');
 					$query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
@@ -81,7 +85,13 @@ class modRelatedItemsHelper
 					$query->where('(CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%'.implode('%" OR CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
 					$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
 					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
+					$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
 
+					// Filter by inherited language
+					$query->join('LEFT','#__categories as p on p.lft <= cc.lft AND p.rgt >=cc.rgt AND p.language!=\'\'');
+					$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
+					$query->group('a.id');
+					$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,31)='.$db->Quote($language).')');
 					$db->setQuery($query);
 					$temp = $db->loadObjectList();
 
