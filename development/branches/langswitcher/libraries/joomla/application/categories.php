@@ -555,10 +555,11 @@ class JCategoryNode extends JObject
 	 */
 	function getMetadata()
 	{
-		if(!($this->metadata instanceof JParameter))
+		if(!($this->metadata instanceof JRegistry))
 		{
-			$this->metadata = new JParameter($this->metadata);
-			//$this->metadata->loadJSON($this->metadata);
+			$temp = new JRegistry();
+			$temp->loadJSON($this->metadata);
+			$this->metadata = $temp;
 		}
 		return $this->metadata;
 	}
