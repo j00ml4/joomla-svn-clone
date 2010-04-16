@@ -26,10 +26,30 @@ $ -> Language fix or change
 ^ -> Change
 - -> Removed
 ! -> Note
+
+15-Apr-2010 Andrew Eddie
+ ^ Decoupled the core.admin check from JAccess and moved to JUser::authorise.
+ ^ Reinstated the lost root_user failsafe in the configuration file.
+
+14-Apr-2010 Chrisotphe Demko
+# Changed en_GB to en-GB in sample_data.sql
+
+13-Apr-2010 Ron Severdia
+# Fixed many UI issues introduced by JForm and other updates
+$ Corrected and synchronized language terms
+
+13-Arp-2010 Mark Dexter
+# Fixed category edit so that change parent category works again
+# Fixed category manager so that Empty Trash toolbar button shows
+# Refactored JTableNested move method to eliminate duplicate code
+
 13-Apr-2010 Jean-Marie Simonet
 # Fixed some Archive, Trash, Empty trash bugs + Strings.
+$ Updated xx-XX test language to current en-GB strings.
 
 13-Apr-2010 Christophe Demko
+# Re-enabling sorting in plugins and modules view (bug in commit #15980)
++ Enabling the ability to sort an array of objects using multiple keys
 # Consolidating the consistency of menu items
 
 12-Apr-2010 Jean-Marie Simonet
