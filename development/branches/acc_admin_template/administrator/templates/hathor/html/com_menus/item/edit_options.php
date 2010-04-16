@@ -21,7 +21,7 @@ defined('_JEXEC') or die;
 		endif;
 		?>
 		<fieldset class="panelform">
-			<legend class="invisible"><?php echo JText::_($label) ?>
+			<legend class="element-invisible"><?php echo JText::_($label) ?></legend>
 			<?php foreach ($this->form->getFieldset('request') as $field) : ?>
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
@@ -41,7 +41,7 @@ defined('_JEXEC') or die;
 			endif;
 			?>
 		<fieldset class="panelform">
-			<legend class="invisible"><?php echo JText::_($label) ?></legend>
+			<legend class="element-invisible"><?php echo JText::_($label) ?></legend>
 			<?php foreach ($this->form->getFieldset($name) as $field) : ?>
 				<?php echo $field->label; ?>
 				<?php echo $field->input; ?>
