@@ -69,8 +69,10 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 
-			<?php echo $this->form->getLabel('id'); ?>
-			<?php echo $this->form->getInput('id'); ?>
+			<?php if ($this->item->id) : ?>
+				<?php echo $this->form->getLabel('id'); ?>	
+				<?php echo $this->form->getInput('id'); ?>
+			<?php endif; ?>
 
 			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<?php echo $this->form->getLabel('publish_up'); ?>
@@ -86,10 +88,6 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			
 			<?php echo $this->form->getLabel('client_id'); ?>
 			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />		
-			<?php if ($this->item->id) : ?>
-				<?php echo $this->form->getLabel('id'); ?>	
-				<input type="text" size="35" value="<?php  echo ($text = (string) JText::_($this->item->id)); ?>" class="readonly" readonly="readonly" />			
-			<?php endif; ?>
 
 			<br class="clr" />
 	<?php if ($this->item->xml) : ?>
