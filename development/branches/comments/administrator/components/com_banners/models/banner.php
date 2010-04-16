@@ -31,7 +31,7 @@ class BannersModelBanner extends JModelAdmin
 		$user = JFactory::getUser();
 
 		if ($record->catid) {
-			return $user->authorise('core.delete', 'com_banners.category.'.(int) $table->catid);
+			return $user->authorise('core.delete', 'com_banners.category.'.(int) $record->catid);
 		} else {
 			return $user->authorise('core.delete', 'com_banners');
 		}
@@ -49,7 +49,7 @@ class BannersModelBanner extends JModelAdmin
 		$user = JFactory::getUser();
 
 		if ($record->catid) {
-			return $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
+			return $user->authorise('core.edit.state', 'com_banners.category.'.(int) $record->catid);
 		} else {
 			return $user->authorise('core.edit.state', 'com_banners');
 		}
