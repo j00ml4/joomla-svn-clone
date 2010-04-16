@@ -84,7 +84,7 @@ $user = JFactory::getUser();
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
-					<input type="radio" id="cb<?php echo $i;?>" name="cid[]" value="<?php echo (int) $item->id; ?>" onclick="isChecked(this.checked);" />
+					<input type="radio" id="cb<?php echo $i;?>" name="cid[]" value="<?php echo (int) $item->id; ?>" onclick="isChecked(this.checked);" title="<?php $i+1;?>"/>
 				</td>
 				<td>
 					<?php if ($canCreate || $canEdit) : ?>
