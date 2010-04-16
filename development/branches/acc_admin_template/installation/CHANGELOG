@@ -27,6 +27,38 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+16-Apr-2010 Jean-Marie Simonet
+# Fixing mod_random_image (Thanks Dennis)
+# Fix translation of "ROOT" in parent field for categories (Thanks Dennis)
+
+15-Apr-2010 Hannes Papenberg
+ # Fixed Metadata retrieval in JCategories
+
+15-Apr-2010 Mark Dexter
+ # Fix bug in JCategories causing failed system test
+ # Fix minor language issue for consistency
+ # Misc. fixes to system tests
+
+15-Apr-2010 Ian MacLennan
+ # Minor docblock fix
+
+15-Apr-2010 Jean-Marie Simonet
+ #$ Refactoring ini/keys in libraries documents, error, event, filesystem
+ ^$ Changed some keys in com_plugins to fit new pluralisation JText
+ # Fixed [20092], ( Thanks Ole)
+ # Fixed com_banners cache (Thanks Dennis)
+ $ Added missing strings
+
+15-Apr-2010 Andrew Eddie
+ ^ Decoupled the core.admin check from JAccess and moved to JUser::authorise.
+ ^ Reinstated the lost root_user failsafe in the configuration file.
+ - Deprecated JController _acoSection and _acoSectionValue properties, authorize and setAccessControl methods.
+ + Add second argument to JController::setMessage to set the message type.
+ + Added JText::__ to support pluralisation.
+ ^ Refactor JControllerAdmin; update pluralisation in backend components.
+
+14-Apr-2010 Chrisotphe Demko
+# Changed en_GB to en-GB in sample_data.sql
 
 13-Apr-2010 Ron Severdia
 # Fixed many UI issues introduced by JForm and other updates

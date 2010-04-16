@@ -101,7 +101,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
 			$checkedOut	= JTable::isCheckedOut($userId, $item->checked_out);
 
-			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&cid[]='. $item->catid);
+			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&='. $item->catid);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<th>
@@ -114,10 +114,10 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php if (JTable::isCheckedOut($userId, $item->checked_out)) : ?>
 						<?php echo $item->name; ?>
 					<?php else : ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&cid[]='.(int) $item->id); ?>">
+						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name) ?></a>
 					<?php endif; ?>
-					<p class="smallsub">(<span><?php echo JText::_('CONTACT_CONTACT_VIEW_ALIAS') ?>:</span>
+					<p class="smallsub">(<span><?php echo JText::_('COM_CONTACT_CONTACT_VIEW_ALIAS') ?>:</span>
 					<?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td align="center">
