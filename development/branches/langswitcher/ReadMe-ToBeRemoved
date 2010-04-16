@@ -78,6 +78,11 @@ Test language for mod_articles_archived
 1. View the public site with an archived module published
 2. Change the language of an archived article. It will be shown only using its language
 
+Test language for mod_articles_categories
+
+1. View the public site with an articles categories module published
+2. Change the language of a category. It will be shown only using its language
+
 Test existence of the home page for the default language
 
 1. Edit the default home menu
