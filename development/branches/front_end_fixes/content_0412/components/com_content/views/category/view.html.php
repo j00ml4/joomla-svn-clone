@@ -77,10 +77,6 @@ class ContentViewCategory extends JView
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item =& $items[$i];
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
-			$temp = new JRegistry();
-			$temp->loadJSON($item->params);
-			$item->params = clone ($params);
-			$item->params->merge($temp);
 
 			// No link for ROOT category
 			if ($item->parent_alias == 'root') {
