@@ -55,6 +55,7 @@ JHtml::_('behavior.formvalidation');
 			<?php endif; ?>
 
 			<br class="clr" />
+
 			<!-- Plugin metadata -->
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
@@ -66,7 +67,6 @@ JHtml::_('behavior.formvalidation');
 			<?php else : ?>
 				<?php echo JText::_('COM_PLUGINS_XML_ERR'); ?>
 			<?php endif; ?>
-			<br class="clr" />
 
 		</fieldset>
 	</div>

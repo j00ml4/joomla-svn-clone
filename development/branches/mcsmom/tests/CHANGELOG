@@ -27,6 +27,17 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+16-Apr-2010 Mark Dexter
++ New test for JParameter merge to test merge bug with integer 0
+
+15-Apr-2010 Mark Dexter
+# Fix up some changed language strings
+# Fix doFrontendLogin to use config 
++ Add test for edit icons in front page and article layouts
+
+12-Apr-2010 Mark Dexter
+^ Change control_panel0004 test to test category reorder after category move
+
 08-Apr-2010 Mark Dexter
 ^ Change doInstall.php to detect failure to install sample data
 

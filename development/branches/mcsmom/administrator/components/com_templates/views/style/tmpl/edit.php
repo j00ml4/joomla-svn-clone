@@ -47,7 +47,7 @@ JHtml::_('behavior.formvalidation');
 			<?php if ($this->item->id) : ?>
 				<?php echo $this->form->getLabel('id'); ?>	
 				<input type="text" size="35" value="<?php  echo ($text = (string) JText::_($this->item->id)); ?>" class="readonly" readonly="readonly" />			
-			
+
 			<?php endif; ?>
 		</fieldset>
 	</div>

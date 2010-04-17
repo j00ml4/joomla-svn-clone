@@ -27,8 +27,78 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-Apr-2010 Mark Dexter
+# Change condition in JRegistry merge method to be consistent with get method 
+
+17-Apr-2010 Jean-Marie Simonet
+# Fixed [20169]. (Thanks Andrea]
+^ Added Title for accessibility [20171]. (Thanks Andrea]
+
+16-Apr-2010 Mark Dexter
+# Fix JParameter merge bug with integer zero param value (plus unit test for same)
+
+16-Apr-2010 Jean-Marie Simonet
+# Fixing mod_random_image (Thanks Dennis)
+# Fix translation of "ROOT" in parent field for categories (Thanks Dennis)
+
+15-Apr-2010 Hannes Papenberg
+ # Fixed Metadata retrieval in JCategories
+
+15-Apr-2010 Mark Dexter
+ # Fix bug in JCategories causing failed system test
+ # Fix minor language issue for consistency
+ # Misc. fixes to system tests
+
+15-Apr-2010 Ian MacLennan
+ # Minor docblock fix
+
+15-Apr-2010 Jean-Marie Simonet
+ #$ Refactoring ini/keys in libraries documents, error, event, filesystem
+ ^$ Changed some keys in com_plugins to fit new pluralisation JText
+ # Fixed [20092], ( Thanks Ole)
+ # Fixed com_banners cache (Thanks Dennis)
+ $ Added missing strings
+
+15-Apr-2010 Andrew Eddie
+ ^ Decoupled the core.admin check from JAccess and moved to JUser::authorise.
+ ^ Reinstated the lost root_user failsafe in the configuration file.
+ - Deprecated JController _acoSection and _acoSectionValue properties, authorize and setAccessControl methods.
+ + Add second argument to JController::setMessage to set the message type.
+ + Added JText::__ to support pluralisation.
+ ^ Refactor JControllerAdmin; update pluralisation in backend components.
+
+14-Apr-2010 Chrisotphe Demko
+# Changed en_GB to en-GB in sample_data.sql
+
+13-Apr-2010 Ron Severdia
+# Fixed many UI issues introduced by JForm and other updates
+$ Corrected and synchronized language terms
+
+13-Arp-2010 Mark Dexter
+# Fixed category edit so that change parent category works again
+# Fixed category manager so that Empty Trash toolbar button shows
+# Refactored JTableNested move method to eliminate duplicate code
+
+13-Apr-2010 Jean-Marie Simonet
+# Fixed some Archive, Trash, Empty trash bugs + Strings.
+$ Updated xx-XX test language to current en-GB strings.
+
+13-Apr-2010 Christophe Demko
+# Re-enabling sorting in plugins and modules view (bug in commit #15980)
++ Enabling the ability to sort an array of objects using multiple keys
+# Consolidating the consistency of menu items
+
+12-Apr-2010 Jean-Marie Simonet
+$ Standardized some obsolete KEYS
+$ Consolidated/Standardized/created some keys/inis
++$ Adding missing .sys.ini file
+# Fixing Articles Categories module. +$ Adding its language files + Adding it in sql
+
 11-Apr-2010 Hannes Papenberg
 # Fixing admin template parameters - Thanks Jonnathan S. Lima
+# Moved stick() function from BannersModelBanners to BannersModelBanner
+# Removed obsolete functions from BannersModelBanners
+# Improved routing code of ContentHelperRoute
 
 11-Apr-2010 Jean-Marie Simonet
 # Fixed a typo in en-GB.ini in backend.
@@ -36,6 +106,8 @@ $ -> Language fix or change
 $ Correcting —again— non standards keys
 # Fixing bug in controlleradmin.php
 $ Corrected —again- keys changed by #15980
+$ Corrected com_banners clients keys
+$ Corrected more ini strings
 
 10-Apr-2010 Hannes Papenberg
 ^ Created JCategories to handle all presentation-logic for categories
