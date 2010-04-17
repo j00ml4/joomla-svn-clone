@@ -390,7 +390,7 @@ class ContentModelArticles extends JModelList
 			// For blogs, article params override menu item params only if menu param = 'use_article'
 			// Otherwise, menu item params control the layout
 			// If menu item is 'use_article' and there is no article param, use global
-			if (JRequest::getString('layout') == 'blog' || JRequest::getString('view') == 'frontpage')
+			if (JRequest::getString('layout') == 'blog' || JRequest::getString('view') == 'featured')
 			{
 				// create an array of just the params set to 'use_article'
 				$menuParamsArray = $this->getState('params')->toArray();
@@ -413,7 +413,7 @@ class ContentModelArticles extends JModelList
 					}
 				}
 				// merge the selected article params
-				if (count($articleArray > 0))
+				if (count($articleArray) > 0)
 				{
 					$articleParams = new JRegistry;
 					$articleParams->loadArray($articleArray);
