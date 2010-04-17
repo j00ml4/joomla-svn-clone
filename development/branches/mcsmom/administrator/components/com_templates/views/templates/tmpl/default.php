@@ -41,9 +41,6 @@ $user = & JFactory::getUser();
 				<th class="col1template">
 					&nbsp;
 				</th>
-				<th class="col1template">
-					&nbsp;
-				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
@@ -71,10 +68,6 @@ $user = & JFactory::getUser();
 		<tbody>
 		<?php foreach ($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
-				<td class="center">
-					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
-				</td>
-							
 				<td class="center">
 					<?php echo JHtml::_('templates.thumb', $item->element, $item->client_id); ?>
 				</td>
