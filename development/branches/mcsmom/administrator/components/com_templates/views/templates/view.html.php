@@ -54,11 +54,7 @@ class TemplatesViewTemplates extends JView
 	{
 		$state	= $this->get('State');
 		$canDo	= TemplatesHelper::getActions();
-		if ($canDo->get('core.edit')) {
-			JToolBarHelper::editList('style.edit','JTOOLBAR_EDIT');
-		}
-		
-		
+
 		JToolBarHelper::title(JText::_('COM_TEMPLATES_MANAGER_TEMPLATES'), 'thememanager');
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_templates');
