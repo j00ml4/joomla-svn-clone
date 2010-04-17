@@ -69,6 +69,10 @@ $user = & JFactory::getUser();
 		<?php foreach ($this->items as $i => $item) : ?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
+					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+				</td>
+							
+				<td class="center">
 					<?php echo JHtml::_('templates.thumb', $item->element, $item->client_id); ?>
 				</td>
 				<td class="template-name">
