@@ -41,6 +41,9 @@ $user = & JFactory::getUser();
 				<th class="col1template">
 					&nbsp;
 				</th>
+				<th class="col1template">
+					&nbsp;
+				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
