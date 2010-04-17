@@ -376,9 +376,6 @@ class ContentModelArticles extends JModelList
 		foreach ($items as & $item)
 		{
 			$articleParams = new JRegistry;
-			/*
-			 *  TODO: investigate if it is better to sync the namespace usage in JRegistry and JParameter, if we let it unsync the we need to know what namespace are the Objects are using before we merge
-			 */
 			$articleParams->loadJSON($item->attribs);
 			
 			// Unpack readmore and layout params
