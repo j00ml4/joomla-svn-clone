@@ -68,11 +68,11 @@ class SocialModelComment extends JModel
 
 			// Compute the list start offset.
 			$page	= $application->getUserStateFromRequest($context.'list.page', 'comments_page', 0, 'int');
-			$start	= intval(($page) ? (($page - 1) * $this->_state->config->get('pagination', 0)) : 0);
+			$start	= intval(($page) ? (($page - 1) * $this->state->config->get('pagination', 0)) : 0);
 
 			// Load the pagination information.
-			$this->setState('list.direction',	$this->_state->config->get('list_order', 'ASC'));
-			$this->setState('list.limit',		$this->_state->config->get('pagination', 0));
+			$this->setState('list.direction',	$this->state->config->get('list_order', 'ASC'));
+			$this->setState('list.limit',		$this->state->config->get('pagination', 0));
 			$this->setState('list.start',		$start);
 
 			// get the comment id(s) from the request
