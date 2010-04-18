@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 /**
- * JParameter element for selecting JXtended Social contexts.
+ * JParameter element for selecting Social contexts.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_social

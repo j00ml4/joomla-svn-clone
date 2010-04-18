@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * Base controller class for JXtended Social.
+ * Base controller class for Social.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_social

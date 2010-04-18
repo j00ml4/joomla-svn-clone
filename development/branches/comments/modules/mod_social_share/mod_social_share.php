@@ -1,11 +1,10 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	mod_social_rating
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
@@ -13,14 +12,8 @@ defined('_JEXEC') or die('Invalid Request.');
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_comments'));
 
-// if JXtended Comments are disabled, do nothing and return
+// if Comments are disabled, do nothing and return
 if ($params->get('enable_sharing') == 0) {
-	return false;
-}
-
-// if the JXtended Libraries are not present exit gracefully
-if (!defined('JXVERSION')) {
-	JError::raiseNotice(500, JText::_('JX_Libraries_Missing'));
 	return false;
 }
 

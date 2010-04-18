@@ -1,22 +1,18 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	com_social
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
 
-jx('jx.application.component.modellist');
-jx('jx.database.query');
-
 /**
  * Threads model for the Social package.
  *
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	com_social
  * @since		1.2
  */

@@ -1,19 +1,18 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	com_social
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
 
 /**
- * JHtml Helper class for JXtended Social
+ * JHtml Helper class for Social
  *
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @version	1.0
  */
 class JHtmlComments
