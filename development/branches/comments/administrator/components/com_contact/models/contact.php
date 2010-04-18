@@ -20,110 +20,41 @@ jimport('joomla.application.component.modeladmin');
 class ContactModelContact extends JModelAdmin
 {
 	/**
-	 * Model context string.
+	 * Method to test whether a record can be deleted.
 	 *
-	 * @var		string
-	 */
-	protected $_context		= 'com_contact.item';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'item';
-		$this->_option = 'com_contact';
-	}
-
-	/**
-	 * Returns a Table object, always creating it
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	 */
-	public function getTable($type = 'Contact', $prefix = 'ContactTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
-	protected function populateState()
+	protected function canDelete($record)
 	{
-		$app	= &JFactory::getApplication('administrator');
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_contact.edit.contact.id'))) {
-			$pk = (int) JRequest::getInt('item_id');
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.delete', 'com_contact.category.'.(int) $record->catid);
+		} else {
+			return $user->authorise('core.delete', 'com_contact');
 		}
-		$this->setState('contact.id',			$pk);
-
-		// Load the parameters.
-		$params	= &JComponentHelper::getParams('com_contact');
-		// Load the parameters.
-		$this->setState('params', $params);
-			}
-
-
-	/**
-	 * Method to get an item.
-	 *
-	 * @param	integer	The id of the  item to get.
-	 *
-	 * @return	mixed	Item data object on success, false on failure.
-	 */
-	public function &getItem($itemId = null)
-	{
-		// Initialise variables.
-		$itemId = (!empty($itemId)) ? $itemId : (int)$this->getState('contact.id');
-		$false	= false;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-		// Attempt to load the row.
-		$return = $table->load($itemId);
-
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
-		}
-
-		// Prime required properties.
-		if (empty($table->id))
-		{
-			$table->parent_id	= $this->getState('item.parent_id');
-			//$table->menutype	= $this->getState('item.menutype');
-			//$table->type		= $this->getState('item.type');
-		}
-
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($table->params);
-		$table->params = $registry->toArray();
-
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		//$registry->loadJSON($table->metadata);
-		$table->metadata = $registry->toArray();
-
-
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		return $value;
 	}
 
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.edit.state', 'com_contact.category.'.(int) $record->catid);
+		} else {
+			return $user->authorise('core.edit.state', 'com_contact');
+		}
+	}
+	
 	/**
 	 * Method to get the row form.
 	 *
@@ -155,68 +86,33 @@ class ContactModelContact extends JModelAdmin
 
 		return $form;
 	}
-
+	
 	/**
-	 * Method to save the form data.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
 	 * @since	1.6
 	 */
-	public function save($data)
+	protected function getReorderConditions($record = null)
 	{
-		// Initialise variables;
-		$dispatcher = & JDispatcher::getInstance();
-		$table		= &$this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('contact.id');
-		$isNew		= true;
-
-		// Include the contact plugins for the onSave events.
-		JPluginHelper::importPlugin('contact');
-
-		// Load the row if saving an existing item.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		// Load email_form params into params array
-		foreach ($data['email_form'] as $key => $value) {
-			$data['params'][$key] = $value;
-		}
-		$data['email_form'] = array();
-
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-			}
-		$result = $dispatcher->trigger('onBeforeContactSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			JError::raiseError(500, $row->getError());
-			return false;
-			}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = &JFactory::getCache('com_contact');
-		$cache->clean();
-
-		$dispatcher->trigger('onAfterContactSave', array(&$table, $isNew));
-
-		$this->setState('contact.id', $table->id);
-		return true;
+		$condition = array(
+			'catid = '. (int) $record->catid
+		);
+		return $condition;
+	}
+	
+	/**
+	 * Returns a Table object, always creating it
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 */
+	public function getTable($type = 'Contact', $prefix = 'ContactTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -299,12 +195,5 @@ class ContactModelContact extends JModelAdmin
 		}
 
 		return true;
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'catid = '.(int) $table->catid;
-		return $condition;
 	}
 }

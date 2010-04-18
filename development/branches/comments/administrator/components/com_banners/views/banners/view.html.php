@@ -29,7 +29,6 @@ class BannersViewBanners extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$this->categories	= $this->get('CategoryOrders');
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');

@@ -14,6 +14,9 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+
+// Get the form fieldsets.
+$fieldsets = $this->form->getFieldsets();
 ?>
 <script type="text/javascript">
 <!--
@@ -69,91 +72,30 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $this->form->getLabel('misc'); ?>
 				<div class="clr"> </div>
 				<?php echo $this->form->getInput('misc'); ?>
-			</fieldset>
-		</div>
+		</fieldset>
+	</div>
 
-
-		<div class="width-50 fltrt">
-			<?php echo  JHtml::_('sliders.start', 'contact-slider'); ?>
-				<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTACT_CONTACT_DETAILS'), 'basic-options'); ?>
-					<fieldset class="panelform">
-					<p><?php echo empty($this->item->id) ? JText::_('COM_CONTACT_DETAILS') : JText::sprintf('COM_CONTACT_EDIT_DETAILS', $this->item->id); ?></p>
-						<?php echo $this->form->getLabel('con_position'); ?>
-						<?php echo $this->form->getInput('con_position'); ?>
-
-						<?php echo $this->form->getLabel('email_to'); ?>
-						<?php echo $this->form->getInput('email_to'); ?>
-
-						<?php echo $this->form->getLabel('address'); ?>
-						<?php echo $this->form->getInput('address'); ?>
-
-						<?php echo $this->form->getLabel('suburb'); ?>
-						<?php echo $this->form->getInput('suburb'); ?>
-
-						<?php echo $this->form->getLabel('state'); ?>
-						<?php echo $this->form->getInput('state'); ?>
-
-						<?php echo $this->form->getLabel('postcode'); ?>
-						<?php echo $this->form->getInput('postcode'); ?>
-
-						<?php echo $this->form->getLabel('country'); ?>
-						<?php echo $this->form->getInput('country'); ?>
-
-						<?php echo $this->form->getLabel('telephone'); ?>
-						<?php echo $this->form->getInput('telephone'); ?>
-
-						<?php echo $this->form->getLabel('mobile'); ?>
-						<?php echo $this->form->getInput('mobile'); ?>
-
-						<?php echo $this->form->getLabel('webpage'); ?>
-						<?php echo $this->form->getInput('webpage'); ?>
-			</fieldset>
-
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_CONTACT_FIELDSET_OPTIONS'), 'display-options'); ?>
-			<fieldset class="panelform">
-				<p><?php echo empty($this->item->id) ? JText::_('COM_CONTACT_CONTACT_DISPLAY_DETAILS') : JText::sprintf('COM_CONTACT_CONTACT_DISPLAY_DETAILS', $this->item->id); ?></p>
-					<?php foreach($this->form->getGroup('params') as $field): ?>
-						<?php if ($field->hidden): ?>
-							<?php echo $field->input; ?>
-						<?php else: ?>
-							<?php echo $field->label; ?>
-							<?php echo $field->input; ?>
-						<?php endif; ?>
-					<?php endforeach; ?>
-			</fieldset>
-
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTACT_FIELDSET_CONTACT_FORM'), 'email-options'); ?>
-				<fieldset class="panelform">
-				<p><?php echo JText::_('COM_CONTACT_EMAIL_FORM_DETAILS'); ?></p>
-					<?php foreach($this->form->getGroup('email_form') as $field): ?>
-						<?php if ($field->hidden): ?>
-							<?php echo $field->input; ?>
-						<?php else: ?>
-							<?php echo $field->label; ?>
-							<?php echo $field->input; ?>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</fieldset>
-
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTACT_FIELDSET_METADATA'), 'meta-options'); ?>
-				<fieldset class="panelform">
-
-					<?php echo $this->form->getLabel('metadesc'); ?>
-					<?php echo $this->form->getInput('metadesc'); ?>
-
-					<?php echo $this->form->getLabel('metakey'); ?>
-					<?php echo $this->form->getInput('metakey'); ?>
-
-					<?php foreach($this->form->getGroup('metadata') as $field): ?>
-						<?php echo $field->label; ?>
-						<?php echo $field->input; ?>
-					<?php endforeach; ?>
-
-					<?php echo $this->form->getLabel('xreference'); ?>
-					<?php echo $this->form->getInput('xreference'); ?>
-				</fieldset>
+	<div class="width-50 fltrt">
+		<?php echo  JHtml::_('sliders.start', 'contact-slider'); ?>
+		<?php foreach ($fieldsets as $fieldset) :
+			if ($fieldset->name == '') :
+				continue;
+			endif;
+			echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
+		?>
+		<fieldset class="panelform">
+		<?php foreach($this->form->getFieldset($fieldset->name) as $field): ?>
+			<?php if ($field->hidden): ?>
+				<?php echo $field->input; ?>
+			<?php else: ?>
+				<?php echo $field->label; ?>
+				<?php echo $field->input; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		</fieldset>
+		<?php endforeach; ?>
 	<?php echo JHtml::_('sliders.end'); ?>
-</div>
+	</div>
 
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
