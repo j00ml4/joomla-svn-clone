@@ -69,7 +69,7 @@ class ContentModelCategory extends JModelItem
 		// Load state from the request.
 		$pk = JRequest::getInt('id');
 		$this->setState('category.id', $pk);
-				
+
 		$params = $app->getParams();
 		$this->setState('params', $params);
 
@@ -102,23 +102,23 @@ class ContentModelCategory extends JModelItem
 		if (JRequest::getString('layout') == 'blog')
 		{
 			$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
-			$this->setState('list.links', $params->get('num_links'));	
+			$this->setState('list.links', $params->get('num_links'));
 		}
 		else
 		{
 			$limit = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.limit', 'limit', $params->get('display_num'));
 		}
 		$this->setState('list.limit', $limit);
-		
+
 		// set the depth of the category query based on parameter
-		$showSubcategories = $params->get('show_subcategory_content', '0'); 
+		$showSubcategories = $params->get('show_subcategory_content', '0');
 		if ($showSubcategories) {
 			$this->setState('filter.max_category_levels', $params->get('max_levels', '1'));
 		}
 		if ($showSubcategories == 'all_articles') {
 			$this->setState('filter.subcategories', true);
 		}
-		
+
 	}
 
 	/**
@@ -154,7 +154,7 @@ class ContentModelCategory extends JModelItem
 			$model->setState('filter.subcategories', $this->getState('filter.subcategories'));
 			$model->setState('filter.max_category_levels', $this->setState('filter.max_category_levels'));
 			$model->setState('list.links', $this->getState('list.links'));
-			
+
 			if($limit > 0)
 			{
 				$this->_articles = $model->getItems();
@@ -168,11 +168,11 @@ class ContentModelCategory extends JModelItem
 			{
 				$this->_articles=array();
 			}
-			
+
 			$this->_pagination = $model->getPagination();
 		}
 		return $this->_articles;
-		
+
 	}
 
 	/**
@@ -183,7 +183,7 @@ class ContentModelCategory extends JModelItem
 	protected function _buildContentOrderBy()
 	{
 		$app =& JFactory::getApplication('site');
-		$params = $this->_state->params;
+		$params = $this->state->params;
 		$itemid = JRequest::getInt('id', 0) . ':' . JRequest::getInt('Itemid', 0);
 		$filter_order = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order', 'filter_order', '', 'string');
 		$filter_order_Dir = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
@@ -207,7 +207,7 @@ class ContentModelCategory extends JModelItem
 	public function getPagination()
 	{
 		return $this->_pagination;
-	}		
+	}
 
 	/**
 	 * Method to get category data for the current category
@@ -248,10 +248,10 @@ class ContentModelCategory extends JModelItem
 				$this->_parent = false;
 			}
 		}
-		
+
 		return $this->_item;
 	}
-	
+
 	/**
 	 * Get the parent categorie.
 	 *
@@ -283,7 +283,7 @@ class ContentModelCategory extends JModelItem
 		}
 		return $this->_leftsibling;
 	}
-	
+
 	function &getRightSibling()
 	{
 		if(!is_object($this->_item))

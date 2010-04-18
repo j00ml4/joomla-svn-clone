@@ -38,18 +38,18 @@ class ContentModelFeatured extends ContentModelArticles
 		parent::populateState();
 
 		// Add blog properties
-		$params = $this->_state->params;
+		$params = $this->state->params;
 
 		// List state information
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 		$this->setState('list.start', $limitstart);
-		
+
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		$this->setState('list.limit', $limit);
 		$this->setState('list.links', $params->get('num_links'));
-		
+
 		$this->setState('filter.frontpage', true);
-		
+
 		// check for category selection
 		if (is_array($featuredCategories = $params->get('featured_categories'))) {
 			$this->setState('filter.frontpage.categories', $featuredCategories);
@@ -63,7 +63,7 @@ class ContentModelFeatured extends ContentModelArticles
 	 */
 	public function getItems()
 	{
-		$params = $this->_state->params;
+		$params = $this->state->params;
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		if ($limit > 0)
 		{
@@ -71,9 +71,9 @@ class ContentModelFeatured extends ContentModelArticles
 			return parent::getItems();
 		}
 		return array();
-		 
+
 	}
-	
+
 	/**
 	 * Method to get a store id based on model configuration state.
 	 *
@@ -99,7 +99,7 @@ class ContentModelFeatured extends ContentModelArticles
 	function getListQuery()
 	{
 		// Set the blog ordering
-		$params = $this->_state->params;
+		$params = $this->state->params;
 		$articleOrderby = $params->get('orderby_sec', 'rdate');
 		$articleOrderDate = $params->get('order_date');
 		$categoryOrderby = $params->def('orderby_pri', '');
@@ -117,7 +117,7 @@ class ContentModelFeatured extends ContentModelArticles
 		{
 			$query->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
 		}
-		
+
 		// Filter by categories
 		if (is_array($featuredCategories = $this->getState('filter.frontpage.categories'))) {
 			$query->where('a.catid IN (' . implode(',',$featuredCategories) . ')');
