@@ -20,7 +20,7 @@ JHtml::script('social/comments.js', false, true);
 JHtml::script('social/posteditor.js', false, true);
 
 // get the captcha data object
-$captcha = modCommentsCommentHelper::getCaptcha($params);
+$captcha = modSocialCommentHelper::getCaptcha($params);
 ?>
 
 	<div id="comments">
@@ -34,7 +34,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 ?>
 		</h3>
 <?php if ($pagination->total && ($params->get('enable_comment_feeds', 1))) : ?>
-		<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_comments&view=comments&thread_id='.$thread->id.'&format=feed') ?>"><?php echo JText::_('Comments_Feed'); ?></a>
+		<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_social&view=comments&thread_id='.$thread->id.'&format=feed') ?>"><?php echo JText::_('Comments_Feed'); ?></a>
 <?php endif; ?>
 		<ol id="commentlist">
 			<?php
@@ -58,7 +58,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 	}
 ?>
 
-<?php if (modCommentsCommentHelper::isBlocked($params)) : ?>
+<?php if (modSocialCommentHelper::isBlocked($params)) : ?>
 	<p>
 		<?php echo JText::_('Comments_Blocked'); ?>
 	</p>
@@ -73,7 +73,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 	</div>
 <?php else : ?>
 	<h3 id="leave-response">
-		<a href="<?php echo JRoute::_(modCommentsCommentHelper::getForceFormURL($params)); ?>" rel="nofollow {'base':'<?php echo JURI::base(); ?>','thread_id':'<?php echo $thread->id; ?>'}"><?php echo JText::_('Comments_Add_Comment');?></a>
+		<a href="<?php echo JRoute::_(modSocialCommentHelper::getForceFormURL($params)); ?>" rel="nofollow {'base':'<?php echo JURI::base(); ?>','thread_id':'<?php echo $thread->id; ?>'}"><?php echo JText::_('Comments_Add_Comment');?></a>
 	</h3>
 	<div id="respond-container"></div>
 <?php endif;

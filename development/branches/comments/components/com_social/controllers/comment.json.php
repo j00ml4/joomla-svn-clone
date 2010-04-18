@@ -49,7 +49,7 @@ class SocialControllerComment extends JController
 
 		// Load the language file for the comment module.
 		$lang = JFactory::getLanguage();
-		$lang->load('mod_comments_comment');
+		$lang->load('mod_social_comment');
 
 		// Get the thread and comment models.
 		$tModel	= $this->getModel('Thread', 'CommentsModel');

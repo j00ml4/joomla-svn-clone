@@ -15,7 +15,7 @@
 		<filename>view.php</filename>
 		<folder>tmpl</folder>
 	</files>
-	<params addpath="/administrator/components/com_comments/models/elements">
+	<params addpath="/administrator/components/com_social/models/elements">
 		<param name="limit" type="text" default="5" label="COMMENTS_LIMIT" description="COMMENTS_LIMIT_DESC" />
 		<param name="order" type="list" default="0" label="COMMENTS_ORDERING" description="COMMENTS_ORDERING_DESC">
 			<option value="">COMMENTS_NONE</option>

@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // merge the component configuration into the module parameters
-$params->merge(JComponentHelper::getParams('com_comments'));
+$params->merge(JComponentHelper::getParams('com_social'));
 
 // if Comments are disabled, do nothing and return
 if ($params->get('enable_comments') == 0) {
@@ -58,13 +58,13 @@ if (($context == 'error') and ($contextId == 0)) {
 require_once(dirname(__FILE__).DS.'helper.php');
 
 // Get the thread.
-$thread = modCommentsCommentHelper::getThread($params);
+$thread = modSocialCommentHelper::getThread($params);
 
 // Get the comments.
-$comments = &modCommentsCommentHelper::getComments($params);
+$comments = &modSocialCommentHelper::getComments($params);
 
 // get the comment thread pagination object
-$pagination = &modCommentsCommentHelper::getPagination($params);
+$pagination = &modSocialCommentHelper::getPagination($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_comment', $params->get('layout', 'default')));

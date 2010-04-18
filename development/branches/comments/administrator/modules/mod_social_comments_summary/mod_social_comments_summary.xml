@@ -15,7 +15,7 @@
 		<filename>helper.php</filename>
 		<folder>tmpl</folder>
 	</files>
-	<params addpath="/administrator/components/com_comments/models/elements">
+	<params addpath="/administrator/components/com_social/models/elements">
 	</params>
 	<params group="advanced">
 		<param name="cache" type="list" default="0" label="COMMENTS_CACHING" description="COMMENTS_CACHING_DESC">

@@ -21,8 +21,8 @@
 		<filename>xx-XX.com_categories.sys.ini</filename>
 		<filename>xx-XX.com_checkin.ini</filename>
 		<filename>xx-XX.com_checkin.sys.ini</filename>
-		<filename>xx-XX.com_comments.ini</filename>
-		<filename>xx-XX.com_comments.sys.ini</filename>
+		<filename>xx-XX.com_social.ini</filename>
+		<filename>xx-XX.com_social.sys.ini</filename>
 		<filename>xx-XX.com_config.ini</filename>
 		<filename>xx-XX.com_config.sys.ini</filename>
 		<filename>xx-XX.com_contact.ini</filename>
@@ -64,8 +64,8 @@
 		<filename>xx-XX.com_wrapper.ini</filename>
 		<filename>xx-XX.com_wrapper.sys.ini</filename>
 		<filename>xx-XX.ini</filename>
-		<filename>xx-XX.mod_comments_summary.ini</filename>
-		<filename>xx-XX.mod_comments_summary.sys.ini</filename>
+		<filename>xx-XX.mod_social_summary.ini</filename>
+		<filename>xx-XX.mod_social_summary.sys.ini</filename>
 		<filename>xx-XX.mod_custom.ini</filename>
 		<filename>xx-XX.mod_custom.sys.ini</filename>
 		<filename>xx-XX.mod_feed.ini</filename>

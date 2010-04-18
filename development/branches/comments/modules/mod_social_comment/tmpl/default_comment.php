@@ -33,7 +33,7 @@ $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 	<div class="comment">
 <?php
 	if ($params->get('enable_bbcode')) {
-		echo modCommentsCommentHelper::renderBBCode($item->body);
+		echo modSocialCommentHelper::renderBBCode($item->body);
 	} else {
 		echo $item->body;
 	}

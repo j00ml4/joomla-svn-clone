@@ -45,7 +45,7 @@ class plgSystemComments extends JPlugin
 		require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
 
 		// Add the Comments component JHtml helpers.
-		JHtml::addIncludePath(JPATH_SITE.'/components/com_comments/helpers/html');
+		JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
 	}
 
 	/**
@@ -61,7 +61,7 @@ class plgSystemComments extends JPlugin
 		// Make sure we are dealing with a joomla article and it is world readable.
 		if (($article instanceof JTableContent) && ($article->state == 1) && ($article->access == 0))
 		{
-			$cconfig = JComponentHelper::getParams('com_comments');
+			$cconfig = JComponentHelper::getParams('com_social');
 
 			// Get enabled settings for trackbacks.
 			$enableTrackbacks = $cconfig->get('enable_trackbacks', 0);
@@ -81,7 +81,7 @@ class plgSystemComments extends JPlugin
 
 			// Add the appropriate include paths for models.
 			jimport('joomla.application.component.model');
-			JModel::addIncludePath(JPATH_SITE.'/components/com_comments/models');
+			JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 			// Get and configure the thread model.
 			$model = JModel::getInstance('Thread', 'CommentsModel');
@@ -362,7 +362,7 @@ class plgSystemComments extends JPlugin
 		if ($commentsHere and $showComments)
 		{
 			// Get enabled settings for trackbacks.
-			$cconfig = JComponentHelper::getParams('com_comments');
+			$cconfig = JComponentHelper::getParams('com_social');
 			if ($cconfig->get('enable_trackbacks', 0)) {
 				// Show the trackback RDF widget if enabled.
 				$result .= JHtml::_('comments.trackbackRDF', 'content', $article->id, $url, $route, $article->title, $article->introtext, $article->author);

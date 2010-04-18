@@ -15,7 +15,7 @@
 		<filename>index.html</filename>
 		<folder>tmpl</folder>
 	</files>
-	<params addpath="/administrator/components/com_comments/elements">
+	<params addpath="/administrator/components/com_social/elements">
 		<param name="context" type="context" default="" label="COMMENTS_CONTEXT" description="COMMENTS_CONTEXT_DESC" />
 		<param name="limit" type="text" default="5" label="COMMENTS_LIMIT" description="COMMENTS_LIMIT_DESC" size="3" />
 		<param name="show_comment_number" type="radio" default="1" label="COMMENTS_MOST_SHOW_NUMBER" description="COMMENTS_MOST_SHOW_NUMBER_DESC">

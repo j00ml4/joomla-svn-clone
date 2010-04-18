@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @subpackage	mod_comments_summary
+ * @subpackage	mod_social_summary
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -33,21 +33,21 @@ defined('_JEXEC') or die('Invalid Request.');
 			foreach($list as $item):
 				$itemTitle = JText::sprintf('COMMENTS_RE', !empty($item->subject) ? $item->subject : $item->page_title);
 				$itemTitle = htmlspecialchars($itemTitle, ENT_QUOTES, 'UTF-8');
-				$itemRoute = JRoute::_('index.php?option=com_comments&view=comment&c_id='.$item->id);
+				$itemRoute = JRoute::_('index.php?option=com_social&view=comment&c_id='.$item->id);
 
 				switch ($item->published)
 				{
 					case 0:
 						$stateTitle = JText::_('COMMENTS_STATE_QUEUED');
-						$stateRoute = JRoute::_('index.php?option=com_comments&view=comments&filter_state=0');
+						$stateRoute = JRoute::_('index.php?option=com_social&view=comments&filter_state=0');
 						break;
 					case 1:
 						$stateTitle = JText::_('COMMENTS_STATE_PUBLISHED');
-						$stateRoute = JRoute::_('index.php?option=com_comments&view=comments&filter_state=1');
+						$stateRoute = JRoute::_('index.php?option=com_social&view=comments&filter_state=1');
 						break;
 					case 2:
 						$stateTitle = JText::_('COMMENTS_STATE_SPAM');
-						$stateRoute = JRoute::_('index.php?option=com_comments&view=comments&filter_state=2');
+						$stateRoute = JRoute::_('index.php?option=com_social&view=comments&filter_state=2');
 						break;
 				}
 				?>

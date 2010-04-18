@@ -15,7 +15,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 // Handle custom star files.
 if ($params->get('star_file')) {
 	$document->addStyleDeclaration(
-		'	ul.rating-stars,ul.rating-stars a:hover,ul.rating-stars .current-rating{background-image: url('.JURI::base().'components/com_comments/media/images/'.$params->get('star_file', 'star').'.png)}'
+		'	ul.rating-stars,ul.rating-stars a:hover,ul.rating-stars .current-rating{background-image: url('.JURI::base().'components/com_social/media/images/'.$params->get('star_file', 'star').'.png)}'
 	);
 }
 ?>

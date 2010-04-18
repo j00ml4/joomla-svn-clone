@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die('Invalid Request.');
 
-class modCommentsShareHelper
+class modSocialShareHelper
 {
 	/**
 	 * Method to return a formatted URL string for a social bookmarking site
@@ -26,10 +26,10 @@ class modCommentsShareHelper
 
 		$document	= &JFactory::getDocument();
 		$uri		= &JURI::getInstance();
-		$bookmarks	= modCommentsShareHelper::addBookmarkArray();
+		$bookmarks	= modSocialShareHelper::addBookmarkArray();
 
 		$base	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
-		$url	= $params->get('route', modCommentsShareHelper::getCurrentPageURL());
+		$url	= $params->get('route', modSocialShareHelper::getCurrentPageURL());
 		$title	= $params->get('title', $document->getTitle());
 
 		// Get the route if not an absolute path.
@@ -89,7 +89,7 @@ class modCommentsShareHelper
 	function isBlocked($params)
 	{
 		// import library dependencies
-		require_once(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
 
 		// run some tests to see if the comment submission should be blocked
 		$blocked = (CommentHelper::isBlockedUser($params) or CommentHelper::isBlockedIP($params));
