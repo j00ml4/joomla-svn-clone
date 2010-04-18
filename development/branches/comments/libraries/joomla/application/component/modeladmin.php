@@ -164,7 +164,7 @@ abstract class JModelAdmin extends JModelForm
 		}
 		
 		if(property_exists($table, 'params')) {
-			$table->params = json_decode($table->params);
+			$table->params = json_decode($table->params, true);
 		}
 
 		// Convert to the JObject before adding other data.
@@ -392,7 +392,7 @@ abstract class JModelAdmin extends JModelForm
 					return false;
 				}
 				// remember to reorder within position and client_id
-				$condition = $this->orderConditions($table);
+				$condition = $this->getReorderConditions($table);
 				$found = false;
 				foreach ($conditions as $cond) {
 					if ($cond[1] == $condition) {

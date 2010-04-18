@@ -13,8 +13,12 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
-$user	= &JFactory::getUser();
-$userId	= $user->get('id');
+$user		= JFactory::getUser();
+$userId		= $user->get('id');
+$orderCol	= $this->state->get('list.ordering');
+$orderDirn	= $this->state->get('list.direction');
+$orderDirUp = $orderDirn == 'asc' ? 'contacts.orderup' : 'contacts.orderdown';
+$orderDirDown = $orderDirn == 'asc' ? 'contacts.orderdown' : 'contacts.orderup';
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_contact'); ?>" method="post" name="adminForm" id="adminForm">
@@ -109,8 +113,8 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'contacts.');?>
 				</td>
 				<td class="order">
-					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contacts.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
-					<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contacts.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), $orderDirUp, 'JGRID_MOVE_UP', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), $orderDirDown, 'JGRID_MOVE_DOWN', $ordering); ?></span>
 					<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 					<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 				</td>
