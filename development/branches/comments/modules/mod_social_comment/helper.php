@@ -11,9 +11,9 @@ defined('_JEXEC') or die('Invalid Request.');
 
 // Add the appropriate include paths for models.
 jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.'/components/com_comments/models');
+JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
-class modCommentsCommentHelper
+class modSocialCommentHelper
 {
 	function getThread(&$params)
 	{
@@ -201,7 +201,7 @@ class modCommentsCommentHelper
 	function isBlocked($params)
 	{
 		// import library dependencies
-		require_once(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
 
 		// run some tests to see if the comment submission should be blocked
 		$blocked = (CommentHelper::isBlockedUser($params) or CommentHelper::isBlockedIP($params));

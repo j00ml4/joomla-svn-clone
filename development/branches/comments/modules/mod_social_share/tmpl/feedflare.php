@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Invalid Request.');
 // Build a URL for the item.
 $uri	= &JURI::getInstance();
 $base	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
-$url	= urlencode($params->get('link', modCommentsShareHelper::getCurrentPageURL()));
+$url	= urlencode($params->get('link', modSocialShareHelper::getCurrentPageURL()));
 if (strpos('://', $url) === false) {
 	$url = $base.$url;
 }

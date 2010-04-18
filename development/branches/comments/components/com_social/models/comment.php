@@ -329,13 +329,13 @@ EOC
 
 		// Get the module layout.
 		jimport('joomla.application.module.helper');
-		$helper	= JPATH_SITE.DS.'modules'.DS.'mod_comments_comment'.DS.'helper.php';
-		$override = JPATH_SITE.DS.'templates'.DS.$tmpl.DS.'html'.DS.'mod_comments_comment'.DS.'default_comment.php';
+		$helper	= JPATH_SITE.DS.'modules'.DS.'mod_social_comment'.DS.'helper.php';
+		$override = JPATH_SITE.DS.'templates'.DS.$tmpl.DS.'html'.DS.'mod_social_comment'.DS.'default_comment.php';
 
 		if (file_exists($override)) {
 			$layout = $override;
 		} else {
-			$layout = JModuleHelper::getLayoutPath('mod_comments_comment', 'default_comment');
+			$layout = JModuleHelper::getLayoutPath('mod_social_comment', 'default_comment');
 		}
 
 		if (file_exists($helper) && file_exists($layout))
@@ -345,7 +345,7 @@ EOC
 
 			// Load the language file.
 			$lang = &JFactory::getLanguage();
-			$lang->load('mod_comments_comment');
+			$lang->load('mod_social_comment');
 
 			// Include the module helper.
 			require_once($helper);

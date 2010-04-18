@@ -21,8 +21,8 @@
 		<filename>en-GB.com_categories.sys.ini</filename>
 		<filename>en-GB.com_checkin.ini</filename>
 		<filename>en-GB.com_checkin.sys.ini</filename>
-		<filename>en-GB.com_comments.ini</filename>
-		<filename>en-GB.com_comments.sys.ini</filename>
+		<filename>en-GB.com_social.ini</filename>
+		<filename>en-GB.com_social.sys.ini</filename>
 		<filename>en-GB.com_config.ini</filename>
 		<filename>en-GB.com_config.sys.ini</filename>
 		<filename>en-GB.com_contact.ini</filename>
@@ -64,8 +64,8 @@
 		<filename>en-GB.com_wrapper.ini</filename>
 		<filename>en-GB.com_wrapper.sys.ini</filename>
 		<filename>en-GB.ini</filename>
-		<filename>en-GB.mod_comments_summary.ini</filename>
-		<filename>en-GB.mod_comments_summary.sys.ini</filename>
+		<filename>en-GB.mod_social_summary.ini</filename>
+		<filename>en-GB.mod_social_summary.sys.ini</filename>
 		<filename>en-GB.mod_custom.ini</filename>
 		<filename>en-GB.mod_custom.sys.ini</filename>
 		<filename>en-GB.mod_feed.ini</filename>

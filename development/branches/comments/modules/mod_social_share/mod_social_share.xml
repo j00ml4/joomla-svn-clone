@@ -17,7 +17,7 @@
 		<folder>images</folder>
 		<folder>tmpl</folder>
 	</files>
-	<params addpath="/administrator/components/com_comments/models/elements">
+	<params addpath="/administrator/components/com_social/models/elements">
 		<param name="style" type="list" default="0" label="COMMENTS_ICON_STYLE" description="COMMENTS_ICON_STYLE_DESC">
 			<option value="0">COMMENTS_ICONS_ONLY</option>
 			<option value="1">COMMENTS_ICONS_AND_TEXT</option>

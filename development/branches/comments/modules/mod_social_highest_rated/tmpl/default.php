@@ -20,7 +20,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 // Handle custom star files.
 if ($params->get('star_file')) {
 	$document->addStyleDeclaration(
-		'	ol.highest-rated div.item-rating,ol.highest-rated div.item-rating span.current-rating{background-image: url('.JURI::base().'components/com_comments/media/images/'.$params->get('star_file', 'star').'-small.png)}'
+		'	ol.highest-rated div.item-rating,ol.highest-rated div.item-rating span.current-rating{background-image: url('.JURI::base().'components/com_social/media/images/'.$params->get('star_file', 'star').'-small.png)}'
 	);
 }
 ?>

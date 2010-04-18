@@ -10,10 +10,10 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // get the captcha data object
-$captcha = modCommentsCommentHelper::getCaptcha($params);
+$captcha = modSocialCommentHelper::getCaptcha($params);
 ?>
 
-<form id="respond-form" method="post" action="<?php echo JRoute::_('index.php?option=com_comments&task=comment.add'); ?>" class="form-validate">
+<form id="respond-form" method="post" action="<?php echo JRoute::_('index.php?option=com_social&task=comment.add'); ?>" class="form-validate">
 	<fieldset>
 		<dl>
 <?php if (!$user->get('id')) : ?>
@@ -44,7 +44,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 					<span class="help"></span>
 					<br class="clear" />
 					<textarea id="comment_body" name="body" class="editor inputbox required" tabindex="5" rows="8" cols="60" style="font-size:12px;"></textarea>
-<?php if ($params->get('enable_smiley_palette', 1) && count($emoticons = modCommentsCommentHelper::getEmoticonList($params))) : ?>
+<?php if ($params->get('enable_smiley_palette', 1) && count($emoticons = modSocialCommentHelper::getEmoticonList($params))) : ?>
 					<ul class="emoticon-palette">
 <?php foreach ($emoticons as $emoticon) : ?>
 						<li>
@@ -66,7 +66,7 @@ $captcha = modCommentsCommentHelper::getCaptcha($params);
 <?php if ($captcha->recaptcha) : ?>
 			<div id="recaptchaContainer">&nbsp;</div>
 <?php else : ?>
-			<img class="captcha-image" src="<?php echo JRoute::_('index.php?option=com_comments&task=getCaptcha&x='.$captcha->c_id); ?>" alt="" />
+			<img class="captcha-image" src="<?php echo JRoute::_('index.php?option=com_social&task=getCaptcha&x='.$captcha->c_id); ?>" alt="" />
 
 			<label for="comment_captcha"><?php echo JText::_('Comments_Captcha');?></label><br />
 			<input id="comment_captcha" name="<?php echo $captcha->c_id; ?>" class="inputbox required" tabindex="6" />

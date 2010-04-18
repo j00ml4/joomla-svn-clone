@@ -11,17 +11,17 @@ defined('_JEXEC') or die('Invalid Request.');
 
 // Add the appropriate include paths for models.
 jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_comments'.DS.'models');
+JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'models');
 
 jx('jx.html.html.jxstring');
 jx('jx.html.bbcode');
 
-class modCommentsLatestHelper
+class modSocialLatestHelper
 {
 	function getList($params)
 	{
 		// get the comments rating model
-		$model = &modCommentsLatestHelper::getModel($params);
+		$model = &modSocialLatestHelper::getModel($params);
 
 		// verify its a model
 

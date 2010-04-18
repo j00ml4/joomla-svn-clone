@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // merge the component configuration into the module parameters
-$params->merge(JComponentHelper::getParams('com_comments'));
+$params->merge(JComponentHelper::getParams('com_social'));
 
 // if Comments are disabled, do nothing and return
 if ($params->get('enable_ratings') == 0) {
@@ -59,10 +59,10 @@ $uri = &JURI::getInstance();
 $document = &JFactory::getDocument();
 
 // Get the thread.
-$thread = modCommentsRatingHelper::getThread($params);
+$thread = modSocialRatingHelper::getThread($params);
 
 // get the item rating
-$rating = modCommentsRatingHelper::getRating($params);
+$rating = modSocialRatingHelper::getRating($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_rating', $params->get('layout', 'default')));

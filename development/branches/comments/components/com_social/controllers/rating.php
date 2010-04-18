@@ -45,7 +45,7 @@ class SocialControllerRating extends SocialController
 
 		// Load the language file for the comment module.
 		$lang = &JFactory::getLanguage();
-		$lang->load('mod_comments_rating');
+		$lang->load('mod_social_rating');
 
 		// Get the thread and rating models.
 		$tModel	= &$this->getModel('Thread', 'CommentsModel');

@@ -37,12 +37,12 @@ JHtml::stylesheet('social/comments.css', array(), true);
 		</small>
 <?php if ($params->get('show_comment_excerpt', 1)) : ?>
 		<p class="excerpt">
-			<?php echo htmlspecialchars(modCommentsLatestHelper::truncateBody($item->body, $params->get('max_excerpt_length', 50)), ENT_QUOTES, 'UTF-8'); ?>
+			<?php echo htmlspecialchars(modSocialLatestHelper::truncateBody($item->body, $params->get('max_excerpt_length', 50)), ENT_QUOTES, 'UTF-8'); ?>
 		</p>
 <?php endif; ?>
 	</li>
 <?php endforeach; ?>
 </ol>
 <?php if ($params->get('enable_comment_feeds', 1) && $params->get('show_feed_link', 1)) : ?>
-<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_comments&view=comments&format=feed'); ?>"><?php echo JText::_('Comments_Feed'); ?></a>
+<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_social&view=comments&format=feed'); ?>"><?php echo JText::_('Comments_Feed'); ?></a>
 <?php endif; ?>

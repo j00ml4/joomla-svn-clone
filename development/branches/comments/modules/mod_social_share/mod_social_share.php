@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Invalid Request.');
 
 // merge the component configuration into the module parameters
-$params->merge(JComponentHelper::getParams('com_comments'));
+$params->merge(JComponentHelper::getParams('com_social'));
 
 // if Comments are disabled, do nothing and return
 if ($params->get('enable_sharing') == 0) {

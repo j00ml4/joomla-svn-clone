@@ -15,7 +15,7 @@
 	</files>
 	<config>
 		<fields name="params"
-			addpath="/administrator/components/com_comments/models/fields"
+			addpath="/administrator/components/com_social/models/fields"
 		>
 			<fieldset name="basic">
 				<field name="show_uncat" type="radio" default="0"

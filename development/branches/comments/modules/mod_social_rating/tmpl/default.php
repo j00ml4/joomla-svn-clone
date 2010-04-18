@@ -18,18 +18,18 @@ JHtml::script('social/ratings.js', false, true);
 // Handle custom star files.
 if ($params->get('star_file')) {
 	$document->addStyleDeclaration(
-		'	ul.rating-stars,ul.rating-stars a:hover,ul.rating-stars .current-rating{background-image: url('.JURI::base().'components/com_comments/media/images/'.$params->get('star_file', 'star').'.png)}'
+		'	ul.rating-stars,ul.rating-stars a:hover,ul.rating-stars .current-rating{background-image: url('.JURI::base().'components/com_social/media/images/'.$params->get('star_file', 'star').'.png)}'
 	);
 }
 ?>
 
 <?php
 $redirect = base64_encode($uri->toString(array('path', 'query', 'fragment')));
-$degraded = 'index.php?option=com_comments&task=rating.add&thread_id='.$thread->id.'&category_id='.(int) $params->get('category_id').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
+$degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id.'&category_id='.(int) $params->get('category_id').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
 ?>
 
 <div class="rating-container">
-	<form id="rate-<?php echo $thread->id; ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option=com_comments&task=rating.add');?>">
+	<form id="rate-<?php echo $thread->id; ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option=com_social&task=rating.add');?>">
 		<ul class="rating-stars">
 			<li id="current-<?php echo $thread->id; ?>" class="current-rating" style="width:<?php echo (int) ($rating->pscore*100); ?>%;"></li>
 			<li><a title="1" rel="0.2" class="one-star rate" href="<?php echo JRoute::_($degraded.'0.2'); ?>" rel="nofollow">1</a></li>

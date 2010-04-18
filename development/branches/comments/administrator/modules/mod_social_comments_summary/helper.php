@@ -20,12 +20,12 @@ jx('jx.html.bbcode');
  * @subpackage	mod_social_summary
  * @version		1.2
  */
-class modCommentsSummaryHelper
+class modSocialSummaryHelper
 {
 	function getList($params)
 	{
 		// Get the list data.
-		$model	= &modCommentsSummaryHelper::getModel($params);
+		$model	= &modSocialSummaryHelper::getModel($params);
 		$list	= &$model->getItems();
 		return $list;
 	}
@@ -44,7 +44,7 @@ class modCommentsSummaryHelper
 		{
 			// get a comments comments model instance
 			jimport('joomla.application.component.model');
-			JModel::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_comments'.DS.'models');
+			JModel::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_social'.DS.'models');
 			$model = &JModel::getInstance('Comments', 'CommentsModel');
 			$model->getState();
 

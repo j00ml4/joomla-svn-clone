@@ -15,7 +15,7 @@
 		<filename>view.php</filename>
 		<folder>tmpl</folder>
 	</files>
-	<params addpath="/administrator/components/com_comments/models/elements">
+	<params addpath="/administrator/components/com_social/models/elements">
 		<param name="autodetect" type="radio" default="0" label="COMMENTS_AUTODETECT_THREAD" description="COMMENTS_AUTODETECT_THREAD_DESC">
 			<option value="0">No</option>
 			<option value="1">Yes</option>

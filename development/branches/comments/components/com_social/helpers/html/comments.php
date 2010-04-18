@@ -92,7 +92,7 @@ class JHtmlComments
 		$config[] = 'layout=simple';
 
 		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_comments_comment');
+		$module	= JModuleHelper::getModule('mod_social_comment');
 		$module->params	= implode("\n", $config);
 
 		// render the module
@@ -130,7 +130,7 @@ class JHtmlComments
 		$config[] = 'context_id='.$id;
 
 		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_comments_comment');
+		$module	= JModuleHelper::getModule('mod_social_comment');
 		$module->params	= implode("\n", $config);
 
 		// render the module
@@ -187,7 +187,7 @@ class JHtmlComments
 		$config[] = 'layout=form';
 
 		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_comments_comment');
+		$module	= JModuleHelper::getModule('mod_social_comment');
 		$module->params	= implode("\n", $config);
 
 		// render the module
@@ -224,7 +224,7 @@ class JHtmlComments
 		}
 
 		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_comments_share');
+		$module	= JModuleHelper::getModule('mod_social_share');
 		$module->params	= implode("\n", $config);
 
 		// render the module
@@ -262,7 +262,7 @@ class JHtmlComments
 		$config[] = 'category_id='.$categoryId;
 
 		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_comments_rating');
+		$module	= JModuleHelper::getModule('mod_social_rating');
 		$module->params	= implode("\n", $config);
 
 		// render the module
