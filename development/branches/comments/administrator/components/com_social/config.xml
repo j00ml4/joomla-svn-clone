@@ -12,11 +12,11 @@
 			label="COM_SOCIAL_ICON_STYLE"
 			description="COM_SOCIAL_ICON_STYLE_DESC">
 			<option
-				value="0">SOCIAL_ICONS_ONLY</option>
+				value="0">COM_SOCIAL_ICONS_ONLY</option>
 			<option
-				value="1">SOCIAL_ICONS_AND_TEXT</option>
+				value="1">COM_SOCIAL_ICONS_AND_TEXT</option>
 			<option
-				value="2">SOCIAL_TEXT_ONLY</option>
+				value="2">COM_SOCIAL_TEXT_ONLY</option>
 		</field>
 
 		<field
@@ -26,13 +26,13 @@
 			label="COM_SOCIAL_SHARE_HEADING"
 			description="COM_SOCIAL_SHARE_HEADING_DESC">
 			<option
-				value="0">SOCIAL_DO_NOT_SHOW</option>
+				value="0">COM_SOCIAL_DO_NOT_SHOW</option>
 			<option
-				value="1">SOCIAL_ICON_ONLY</option>
+				value="1">COM_SOCIAL_ICON_ONLY</option>
 			<option
-				value="2">SOCIAL_ICON_AND_TEXT</option>
+				value="2">COM_SOCIAL_ICON_AND_TEXT</option>
 			<option
-				value="3">SOCIAL_TEXT_ONLY</option>
+				value="3">COM_SOCIAL_TEXT_ONLY</option>
 		</field>
 
 		<field
@@ -792,9 +792,9 @@
 			label="COM_SOCIAL_SHOW_NAME_AS"
 			description="COM_SOCIAL_SHOW_NAME_AS_DESC">
 			<option
-				value="0">SOCIAL_USER_NAME</option>
+				value="0">COM_SOCIAL_USER_NAME</option>
 			<option
-				value="1">SOCIAL_USER_LOGIN_NAME</option>
+				value="1">COM_SOCIAL_USER_LOGIN_NAME</option>
 		</field>
 
 		<field
@@ -840,17 +840,17 @@
 			label="COM_SOCIAL_RATING_STAR_FILE"
 			description="COM_SOCIAL_RATING_STAR_FILE_DESC">
 			<option
-				value="">SOCIAL_STAR_YELLOW</option>
+				value="">COM_SOCIAL_STAR_YELLOW</option>
 			<option
-				value="star_black">SOCIAL_STAR_BLACK</option>
+				value="star_black">COM_SOCIAL_STAR_BLACK</option>
 			<option
-				value="star_blue">SOCIAL_STAR_BLUE</option>
+				value="star_blue">COM_SOCIAL_STAR_BLUE</option>
 			<option
-				value="star_green">SOCIAL_STAR_GREEN</option>
+				value="star_green">COM_SOCIAL_STAR_GREEN</option>
 			<option
-				value="star_orange">SOCIAL_STAR_ORANGE</option>
+				value="star_orange">COM_SOCIAL_STAR_ORANGE</option>
 			<option
-				value="star_purple">SOCIAL_STAR_PURPLE</option>
+				value="star_purple">COM_SOCIAL_STAR_PURPLE</option>
 		</field>
 
 		<field
@@ -884,9 +884,9 @@
 			label="COM_SOCIAL_LIST_ORDER"
 			description="COM_SOCIAL_LIST_ORDER_DESC">
 			<option
-				value="ASC">Oldest First</option>
+				value="ASC">COM_SOCIAL_ORDER_OLDEST_FIRST</option>
 			<option
-				value="DESC">Newest First</option>
+				value="DESC">COM_SOCIAL_ORDER_NEWEST_FIRST</option>
 		</field>
 
 		<field
@@ -896,7 +896,7 @@
 			label="COM_SOCIAL_PAGINATION_ENABLED"
 			description="COM_SOCIAL_PAGINATION_ENABLED_DESC">
 			<option
-				value="0">All</option>
+				value="0">JAll</option>
 			<option
 				value="5">5</option>
 			<option
@@ -914,7 +914,7 @@
 			label="COM_SOCIAL_DATE_FORMAT"
 			description="COM_SOCIAL_DATE_FORMAT_DESC">
 			<option
-				value="">SOCIAL_SYSTEM_DEFAULT</option>
+				value="">COM_SOCIAL_SYSTEM_DEFAULT</option>
 			<option
 				value="JDATE_DDD_DD_MMM_HH_MM_SS_YYYY">Wed 17 Jul 18:00:05 2008</option>
 			<option
@@ -950,9 +950,9 @@
 			<option
 				value="0">JNO</option>
 			<option
-				value="1">Only Guests</option>
+				value="1">COM_SOCIAL_OPTION_ONLY_GUESTS</option>
 			<option
-				value="2">Anyone</option>
+				value="2">COM_SOCIAL_OPTION_ANYONE</option>
 		</field>
 		<field
 			name="emailto"
@@ -976,9 +976,9 @@
 			<option
 				value="0">JNO</option>
 			<option
-				value="1">COM_SOCIAL_OPTION_MODERATE_ONLY_GUESTS</option>
+				value="1">COM_SOCIAL_OPTION_ONLY_GUESTS</option>
 			<option
-				value="2">COM_SOCIAL_OPTION_MODERATE_ANYONE</option>
+				value="2">COM_SOCIAL_OPTION_ANYONE</option>
 		</field>
 	</fieldset>
 

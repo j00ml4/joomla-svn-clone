@@ -47,8 +47,7 @@ class SocialViewComments extends JView
 		static $router;
 
 		// Only get the router once.
-		if (!is_object($router))
-		{
+		if (!is_object($router)) {
 			// Import dependencies.
 			jimport('joomla.application.router');
 			require_once(JPATH_SITE.DS.'includes'.DS.'application.php');
@@ -77,7 +76,7 @@ class SocialViewComments extends JView
 		$state	= $this->get('State');
 		$canDo	= SocialHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title('Comments: '.JText::_('COM_SOCIAL_MODERATE_COMMENTS_TITLE'), 'logo');
+		JToolBarHelper::title(JText::_('COM_SOCIAL_VIEW_COMMENTS_TITLE'), 'logo');
 
 		$toolbar = JToolBar::getInstance('toolbar');
 		$toolbar->appendButton('Standard', 'save', 'COM_SOCIAL_MODERATE', 'comment.moderate', false, false);
