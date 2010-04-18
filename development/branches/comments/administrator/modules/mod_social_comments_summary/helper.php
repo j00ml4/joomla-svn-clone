@@ -1,11 +1,10 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Administrator
  * @subpackage	mod_social_summary
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
@@ -14,10 +13,10 @@ jx('jx.html.html.jxstring');
 jx('jx.html.bbcode');
 
 /**
- * Helper class for the JXtended Comments Summary Module.
+ * Helper class for the Comments Summary Module.
  *
  * @static
- * @package		JXtended.Comments
+ * @package		Joomla.Administrator
  * @subpackage	mod_social_summary
  * @version		1.2
  */
@@ -33,20 +32,7 @@ class modCommentsSummaryHelper
 
 	function truncateBody($text)
 	{
-		static $parser;
-
-		if (empty($parser)) {
-			// import library dependencies
-			jx('jx.html.bbcode');
-
-			// instantiate bbcode parser object
-			$parser = &JBBCode::getInstance(array(
-				'smiley_path' => JPATH_ROOT.'/media/jxtended/img/smilies/default',
-				'smiley_url' => JURI::base().'/media/jxtended/img/smilies/default'
-			));
-		}
-
-		$text = strip_tags($parser->parse($text));
+		$text = strip_tags($text);
 		return JXHTMLString::truncate($text, 50);
 	}
 

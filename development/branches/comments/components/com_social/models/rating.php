@@ -1,11 +1,10 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	com_social
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
@@ -13,9 +12,9 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.model');
 
 /**
- * The JXtended Social rating model
+ * The Social rating model
  *
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @version	1.0
  */
 class SocialModelRating extends JModel

@@ -1,17 +1,13 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	mod_social_comment
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
-
-JHtml::addIncludePath(JPATH_ROOT.'/plugins/system/jxtended/html/html');
-
 
 // attach the comments stylesheet to the document head
 JHtml::stylesheet('social/comments.css', array(), true);
@@ -21,15 +17,7 @@ JHtml::_('behavior.formvalidation');
 JHtml::script('social/comments.js', false, true);
 
 // load the appropriate comment editor behavior
-if ($params->get('enable_bbcode')) {
-	modCommentsCommentHelper::loadBBCodeEditor();
-} else {
-	JHtml::script('social/posteditor.js', false, true);
-}
-
-// load the highlighter behavior
-JHtml::script('highlighter.js', 'media/jxtended/js/');
-JHtml::stylesheet('highlighter.css', 'media/jxtended/css/');
+JHtml::script('social/posteditor.js', false, true);
 
 // get the captcha data object
 $captcha = modCommentsCommentHelper::getCaptcha($params);

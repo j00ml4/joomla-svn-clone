@@ -1,11 +1,10 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	com_social
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
@@ -13,9 +12,9 @@ defined('_JEXEC') or die('Invalid Request.');
 jimport('joomla.application.component.model');
 
 /**
- * The JXtended Social comment model
+ * The Social comment model
  *
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @version	1.0
  */
 class SocialModelComment extends JModel
@@ -194,126 +193,14 @@ class SocialModelComment extends JModel
 			$table->published = 1;
 		}
 
-		/*
-		 * MOOVUR/MOLLOM SECTION
-		 */
-
-		if (($table->published == 0) and ($config->get('enable_moovur')))
-		{
-			if(class_exists('Moovur'))
-			{
-				$obj = new stdclass();
-				$obj->text = $table->body;
-				$obj->author_name = $table->name;
-				$obj->author_url = $table->url;
-				$obj->author_email = $table->email;
-				if ($table->user_id) {
-					$obj->author_id = $table->user_id;
-				}
-				Moovur::checkContent($obj, 'JXtended Social', 'Post Comment');
-			}
-		}
-
-		/*
-		 * END OF MOOVUR/MOLLOM SECTION
-		 */
-
-		/*
-		 * AKISMET SECTION
-		 */
-
-		// if the post is not set to be already published and AKISMET is enabled, lets check it
-		if (($table->published == 0) and ($config->get('enable_akismet'))) {
-			// get an AKISMET object
-			jx('jx.webservices.akismet');
-			$akismet = new JXAkismet(JURI::base(), $config->get('akismet_key'));
-
-			// don't do anything if the API key isn't valid
-			$valid = $akismet->validateAPIKey();
-			if ($valid and !JError::isError($valid)) {
-
-				// create and populate the comment object
-				$comment = new JObject();
-				$comment->set('author', $table->name);
-				$comment->set('email', $table->email);
-				$comment->set('website', $table->url);
-				$comment->set('body', $table->body);
-				$comment->set('permalink', $table->referer);
-
-				// set the comment to the AKISMET handler
-				$akismet->setComment($comment);
-
-				// if AKISMET reports the post as spam, set it as such
-				if ($akismet->isSpam()) {
-					$table->published = 2;
-				}
-			}
-		}
-
-		/*
-		 * END OF AKISMET SECTION
-		 */
+		// TODO: Moovur and Akismet was here.
 
 		// make sure all the comment record data is valid
 		if (!$table->check()) {
 			return new JException($table->getError(), 500);
 		}
 
-		/*
-		 * CAPTCHA SECTION
-		 */
-
-		// do the CAPTCHA validation after the check so the user has a chance to resubmit if an error is caught
-		$configCaptcha	= $config->get('captcha');
-		if ($configCaptcha == 2 or ($configCaptcha == 1 and $userId == 0))
-		{
-			// should we be using reCAPTCHA?
-			if ($config->get('enable_recaptcha')) {
-				// get a reCAPTCHA object
-				jx('jx.webservices.recaptcha');
-				$recaptcha = JXRecaptcha::getInstance();
-
-				// set the API keys for reCAPTCHA
-				$recaptcha->setKeyPair($config->get('recaptcha_public'), $config->get('recaptcha_private'));
-
-				// validate the captcha
-				if (!$recaptcha->checkCaptcha()) {
-					return new JException(JText::_('reCAPTCHA_Validation_Failed'), 403);
-				}
-			} else {
-				// get a CAPTCHA object
-				jx('jx.captcha.captcha');
-				// TODO: use a better folder
-				$options = array('filePath' => JPATH_SITE.DS.'tmp');
-				$captcha = &JXCaptcha::getInstance('image', $options);
-
-				// get the list of CAPTCHA tests from the session and verify that they do exist
-				$captchas = $mainframe->getUserState('jxcaptcha.captcha');
-				if (empty($captchas)) {
-					return new JException(JText::_('Captcha_Image_Has_Expired'), 500);
-				}
-
-				// get the post fields from the request
-				$post = JRequest::get('post');
-
-				// iterate over the CAPTCHA tests from the session to validate them
-				foreach ($captchas as $item)
-				{
-					// make sure that something was posted for this CAPTCHA test
-					if (isset($post[$item['id']])) {
-						// make sure that the posted value passes CAPTCHA validation for the test
-						if (!$captcha->validate($item['id'], $post[$item['id']], false)) {
-							return new JException(JText::_('Captcha_Validation_Failed'), 403);
-						}
-					}
-				}
-				$captcha->clean();
-			}
-		}
-
-		/*
-		 * END OF CAPTCHA SECTION
-		 */
+		// TODO: Captcha was here.
 
 		// save the data
 		if (!$table->save($data)) {

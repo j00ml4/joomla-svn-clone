@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 /**
- * HTML behavior class for JXtended Social
+ * HTML behavior class for Social
  *
  * @package		Joomla.Administrator
  * @subpackage	com_social

@@ -3,9 +3,8 @@
  * @version		$Id$
  * @package		JXtended.Comments
  * @subpackage	plgSystemComments
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
@@ -13,7 +12,7 @@ defined('_JEXEC') or die;
 jimport('joomla.event.plugin');
 
 /**
- * The JXtended Comments System Plugin.
+ * The Comments System Plugin.
  *
  * @package		JXtended.Comments
  * @subpackage	plgSystemComments
@@ -45,7 +44,7 @@ class plgSystemComments extends JPlugin
 		// Import the route helper.
 		require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
 
-		// Add the JXtended Comments component JHtml helpers.
+		// Add the Comments component JHtml helpers.
 		JHtml::addIncludePath(JPATH_SITE.'/components/com_comments/helpers/html');
 	}
 
@@ -267,11 +266,6 @@ class plgSystemComments extends JPlugin
 	 */
 	protected function _getShowState(& $article, $location)
 	{
-		// If we are dealing with a JXtended Magazine Article, display nothing.
-		if (isset($article->context) && $article->context == 'zine/article') {
-			return false;
-		}
-
 		// If sharing, ratings and comments are all not set to show, display nothing.
 		$shareHere		= ($this->params->get('share_placement', 2) == $location);
 		$ratingsHere	= ($this->params->get('ratings_placement', 2) == $location);

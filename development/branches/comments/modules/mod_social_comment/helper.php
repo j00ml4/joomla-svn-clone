@@ -1,11 +1,10 @@
 <?php
 /**
  * @version		$Id$
- * @package		JXtended.Comments
+ * @package		Joomla.Site
  * @subpackage	mod_social_comment
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die('Invalid Request.');
@@ -237,10 +236,6 @@ class modCommentsCommentHelper
 		// merge our list of language strings into any existing ones and set them in the application object
 		$lang = array_merge($app->get('jx.js', array()), $lang);
 		$app->set('jx.js', $lang);
-
-		// load the bbcode editor behavior and CSS files into the document head
-		JHtml::script('bbcode.js', 'media/jxtended/js/');
-		JHtml::stylesheet('bbcode.css', 'media/jxtended/css/');
 	}
 
 	function getForceFormURL($params)

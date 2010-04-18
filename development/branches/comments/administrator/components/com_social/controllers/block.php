@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 /**
- * The JXtended Social block controller
+ * The Social block controller
  *
  * @package		Joomla.Administrator
  * @subpackage	com_social

@@ -1,10 +1,7 @@
 /**
  * @version		$Id$
- * @package		JXtended.Comments
- * @subpackage	com_comments
- * @copyright	Copyright (C) 2008 - 2009 JXtended, LLC. All rights reserved.
- * @license		GNU General Public License <http://www.gnu.org/copyleft/gpl.html>
- * @link		http://jxtended.com
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 var postEditor={};postEditor.create=new Class({tab:"    ",setOptions:function(options){this.options=Object.extend({snippets:{},smartTypingPairs:{},selections:{}},options||{});},initialize:function(el,next,options){if(window.ActiveXObject)return;this.element=$(el);this.next=$(next);this.setOptions(options);this.styles={line_height:this.element.getStyle('line-height').toInt()||14,font_size:this.element.getStyle('font-size').toInt()||11,height:this.element.getStyle('height').toInt()};this.autoTab=null;this.ssKey=0;this.seKey=0;this.completion=null;this.tabl=this.tab.length;this.element.onkeypress=this.onKeyPress.bind(this);},changeSnippets:function(snippets){this.options.snippets=snippets||{};},changeSmartTypingPairs:function(smartTypingPairs){this.options.smartTypingPairs=smartTypingPairs||{};},changeSelections:function(selections){this.options.selections=selections||{};},ss:function(){return this.element.selectionStart;},se:function(){return this.element.selectionEnd;},slice:function(start,end){return this.element.value.slice(start,end);},value:function(value){this.element.value=value.join("");},getStart:function(rest){var rest=rest?rest.length:0;return this.slice(0,this.ss()-rest);},getEnd:function(rest){var rest=rest?rest.length:0;return this.element.value.slice(this.se()-rest);},selectRange:function(start,end){this.element.selectionStart=start;this.element.selectionEnd=start+end;},focus:function(focus,type){if(type){this.scrollTop=this.element.scrollTop;this.scrollLeft=this.element.scrollLeft;}else{this.element.scrollTop=this.scrollTop;this.element.scrollLeft=this.scrollLeft;}
