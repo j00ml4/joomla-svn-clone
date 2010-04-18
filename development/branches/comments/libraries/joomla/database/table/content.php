@@ -132,6 +132,13 @@ class JTableContent extends JTable
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string)$registry;
 		}
+		
+		// Bind the rules.
+		if (isset($array['rules']))
+		{
+			$rules = new JRules($array['rules']);
+			$this->setRules($rules);
+		}
 
 		return parent::bind($array, $ignore);
 	}
