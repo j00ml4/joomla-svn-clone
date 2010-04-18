@@ -35,11 +35,9 @@ class SocialViewComment extends JView
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->thread	= $this->get('Thread');
-		$this->form = $this->get('Form');
+		$this->form		= $this->get('Form');
 
-		if ($this->getLayout() == 'edit') {
-			
-		} else {
+		if ($this->getLayout() != 'edit') {
 			$this->addressList	= $this->get('ListByIP');
 			$this->nameList		= $this->get('ListByName');
 			$this->threadList	= $this->get('ListByThread');
@@ -69,12 +67,12 @@ class SocialViewComment extends JView
 
 		if ($this->getLayout() == 'edit') {
 			JRequest::setVar('hidemainmenu', true);
-			JToolBarHelper::title(JText::_('COM_SOCIAL_EDIT_COMMENT'));
+			JToolBarHelper::title(JText::_('COM_SOCIAL_VIEW_COMMENT_EDIT_TITLE'));
 			JToolBarHelper::apply('comment.apply', 'JToolbar_Apply');
 			JToolBarHelper::save('comment.save', 'JToolbar_Save');
 			JToolBarHelper::cancel('comment.cancel');
 		} else {
-			JToolBarHelper::title(JText::_('COM_SOCIAL_MODERATE_COMMENT'));
+			JToolBarHelper::title(JText::_('COM_SOCIAL_VIEW_COMMENT_TITLE'));
 			JToolBarHelper::custom('comment.edit', 'edit.png', 'edit_f2.png', 'JToolbar_Edit', false);
 			JToolBarHelper::cancel('comment.cancel');
 		}
