@@ -162,6 +162,10 @@ abstract class JModelAdmin extends JModelForm
 				return false;
 			}
 		}
+		
+		if(property_exists($table, 'params')) {
+			$table->params = json_decode($table->params);
+		}
 
 		// Convert to the JObject before adding other data.
 		$item = JArrayHelper::toObject($table->getProperties(1), 'JObject');

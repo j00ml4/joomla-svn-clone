@@ -20,6 +20,12 @@ jimport('joomla.application.component.modeladmin');
 class BannersModelBanner extends JModelAdmin
 {
 	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_BANNERS_BANNER';
+	
+	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
@@ -104,8 +110,7 @@ class BannersModelBanner extends JModelAdmin
 	protected function getReorderConditions($record = null)
 	{
 		$condition = array(
-			'catid = '. (int) $record->catid,
-			'state >= 0'
+			'catid = '. (int) $record->catid
 		);
 		return $condition;
 	}
@@ -142,7 +147,7 @@ class BannersModelBanner extends JModelAdmin
 		// Access checks.
 		foreach ($pks as $i => $pk) {
 			if ($table->load($pk)) {
-				if (!$this->getEditState($table)) {
+				if (!$this->canEditState($table)) {
 					// Prune items that you can't change.
 					unset($pks[$i]);
 					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
