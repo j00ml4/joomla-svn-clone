@@ -67,10 +67,10 @@ class SocialTableComment extends JTable
 				$this->setError('SOCIAL_Comment_Thread_Empty');
 			} else if (empty($this->name)) {
 				$this->setError('SOCIAL_Comment_Name_Is_Empty');
-			} else if (strlen($this->body) < $config->get('minlength')) {
-				$this->setError('SOCIAL_Comment_Is_Too_Short');
-			} else if (strlen($this->body) > $config->get('maxlength')) {
-				$this->setError('SOCIAL_Comment_Is_Too_Long');
+			//} else if (strlen($this->body) < $config->get('minlength')) {
+			//	$this->setError('SOCIAL_Comment_Is_Too_Short');
+			//} else if (strlen($this->body) > $config->get('maxlength')) {
+			//	$this->setError('SOCIAL_Comment_Is_Too_Long');
 			} else if (!JMailHelper::isEmailAddress($this->email)) {
 				$this->setError('SOCIAL_Comment_Email_Invalid');
 			} else if ($this->url && JFilterInput::checkAttribute(array('href', $this->url))) {
