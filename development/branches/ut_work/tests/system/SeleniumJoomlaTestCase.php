@@ -66,9 +66,19 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function doFrontEndLogin()
 	{
+		$cfg = new SeleniumConfig();
+		// check to see if we are already logged in
+		if ($this->getValue("Submit") == "Log out")
+		{
+			echo "Logging out before loggin in. \n";
+			$this->click("Submit");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Home");
+			$this->waitForPageToLoad("30000");
+		}
 		echo "Logging in to front end.\n";
-		$this->type("modlgn_username", "admin");
-		$this->type("modlgn_passwd", "password");
+		$this->type("modlgn_username", $cfg->username);
+		$this->type("modlgn_passwd", $cfg->password);
 		$this->click("Submit");
 		$this->waitForPageToLoad("30000");
 	}
@@ -164,10 +174,11 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		try
 		{
-			$this->assertTrue($this->isTextPresent("item(s) successfully deleted."));
+			$this->assertTrue($this->isTextPresent("COM_USERS_N_USERS_DELETED"));
 		}
 		catch (PHPUnit_Framework_AssertionFailedError $e)
 		{
+			echo "** ERROR in deleteTestUsers, SeleniumJoomlaTestCase, line 167 **\n";
 			array_push($this->verificationErrors, $e->toString());
 		}
 	}
@@ -245,18 +256,30 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		echo "Delete all users in view.\n";
 		$this->click("toggle");
 		echo("Delete new user.\n");
-		//	    $this->click("//li[@id='toolbar-delete']/a");
-		$this->click("link=Trash");
+		$this->jClick('Delete');
+	}
+
+	function createLevel($levelName, $userGroup)
+	{
+		$this->jClick('Access Levels');
+		$this->jClick('New');
+		echo "Create new access level named " . $levelName . "\n";
+		$this->type("jform_title", $levelName);
+		$this->jInput($userGroup);
+		echo "Selecting User Groups having access to " . $levelName . "\n";
+		$this->jClick('Save & Close');
+	}
+
+	function deleteLevel($partialName = 'test')
+	{
+		$this->jClick('Access Levels');
+		echo "Filter on " . $partialName . ".\n";
+		$this->type("filter_search", $partialName);
+		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
-		try
-		{
-			$this->assertTrue($this->isTextPresent("item(s) successfully deleted."));
-			echo "Deletion of group(s) containing " . $partialName . " succeeded.\n";
-		}
-		catch (PHPUnit_Framework_AssertionFailedError $e)
-		{
-			array_push($this->verificationErrors, $e->toString());
-		}
+		echo "Delete all levels in view.\n";
+		$this->click("toggle");
+		$this->jClick('Delete');
 	}
 
 	/**
@@ -275,8 +298,67 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	public function countErrors()
 	{
-		if ($count = count($this->verificationErrors)) {
+		if ($count = count($this->verificationErrors))
+		{
 			echo "\n***Warning*** " . $count . " verification error(s) encountered.\n";
+		}
+	}
+
+	/*
+	 * Allow selection of an input based on the text contained in its correspondig label
+	 */
+	function jInput($labelText)
+	{
+		$this->click("//label[contains(.,'$labelText')]/preceding-sibling::input");
+	}
+
+	/*
+	 * Unifies button and menu item selection based on corresponding IDs and Classes
+	 */
+	function jClick($item)
+	{
+		switch ($item)
+		{
+		case 'Save & Close':
+			$this->click("//li[@id='toolbar-save']/a");
+			$this->waitForPageToLoad("30000");
+			try
+			{
+				$this->assertTrue($this->isTextPresent("Item successfully saved."), "Save success text not present, SeleniumTestCase line 327");
+				$this->assertFalse($this->isTextPresent("ERROR"), "Error message present, SeleniumTestCase line 328");
+				echo "Item successfully saved.\n";
+			}
+			catch (PHPUnit_Framework_AssertionFailedError $e)
+			{
+				array_push($this->verificationErrors, $e->getTraceAsString());
+			}
+			break;
+		case 'New':
+			$this->click("//li[@id='toolbar-new']/a");
+			$this->waitForPageToLoad("30000");
+			break;
+		case 'Delete':
+			$this->click("//li[@id='toolbar-delete']/a");
+			$this->waitForPageToLoad("30000");
+			try
+			{
+				$this->assertTrue($this->isTextPresent("_DELETED"), 'Delete confirm text wrong, SeleniumJoomlaTestCase line 345');
+				$this->assertFalse($this->isTextPresent("ERROR"), "Error message present, SeleniumTestCase line 346");
+				echo "Deletion of item(s) succeeded.\n";
+			}
+			catch (PHPUnit_Framework_AssertionFailedError $e)
+			{
+				array_push($this->verificationErrors, $e->toString());
+			}
+			break;
+		case 'Access Levels':
+			$this->click("//a[contains(@class,'icon-16-levels')]");
+			$this->waitForPageToLoad("30000");
+			break;
+		default:
+			$this->click("//li[@id='toolbar-new']/a");
+			$this->waitForPageToLoad("30000");
+			break;
 		}
 	}
 
