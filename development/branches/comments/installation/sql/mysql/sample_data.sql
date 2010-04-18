@@ -876,12 +876,12 @@ VALUES
 --
 
 INSERT INTO `#__social_comments` VALUES
-(1, 1, 0, 'content', 1, 0, '', 'Andrew Eddie', 'andrew.example.com', 'andrew@example.com', 'Go Bronco''s', 'The cockroaches have no chance against the cane toads in the State of Origin.', 0, 0, 0, 0, '', '2010-04-05 10:45:08', 0, 2130706433, '', ''),
+(1, 1, 0, 'content', 1, 0, '', 'Andrew Eddie', 'andrew.example.com', 'andrew@example.com', 'Go Bronco\'s', 'The cockroaches have no chance against the cane toads in the State of Origin.', 0, 0, 0, 0, '', '2010-04-05 10:45:08', 0, 2130706433, '', ''),
 (2, 1, 0, 'content', 1, 0, '', 'Louis Landry', 'louis.example.com', 'louis@example.com', 'Go Saints', 'It was a huge party in New Orleans', 0, 0, 0, 0, '', '2010-04-05 10:51:58', 0, 2130706433, '', ''),
 (3, 2, 0, 'content', 64, 5, '', 'Example', '', 'example@example.com', 'Great post!', 'This is the best post about parks ever!', 0, 0, 0, 0, '', '2010-04-05 19:11:57', 0, 2130706433, '', ''),
-(4, 2, 0, 'content', 64, 8, '', 'Example', '', '', 'Silly', 'Why do people always use the same filler text? It''s silly. No one speaks Latin anymore.', 0, 0, 0, 1, '', '2010-04-05 19:11:57', 0, 2130706433, '', ''),
+(4, 2, 0, 'content', 64, 8, '', 'Example', '', '', 'Silly', 'Why do people always use the same filler text? It\'s silly. No one speaks Latin anymore.', 0, 0, 0, 1, '', '2010-04-05 19:11:57', 0, 2130706433, '', ''),
 (5, 3, 0, 'content', 65, 1, 'Second Park Blog ', 'Not me', '', 'motme@example.com', 'Kangaroos', 'I really like the kangaroos at that park.  I never saw so many in one place.', 0, 2, 10, 0, '', '2010-04-05 19:32:05', 0, 2130706432, '', ''),
-(6, 3, 0, 'content', 65, 0, '', 'Park Friend', '', '', 'Confused', 'I really don''t get the point of this post.', 0, 0, 0, 0, '', '2010-04-05 19:32:05', 0, 2130706433, '', '');
+(6, 3, 0, 'content', 65, 0, '', 'Park Friend', '', '', 'Confused', 'I really don\'t get the point of this post.', 0, 0, 0, 0, '', '2010-04-05 19:32:05', 0, 2130706433, '', '');
 
 --
 -- Dumping data for table `#__social_ratings`
