@@ -19,44 +19,6 @@ jimport('joomla.application.component.modeladmin');
  */
 class NewsfeedsModelNewsfeed extends JModelAdmin
 {
-	protected $_context = 'com_newsfeeds';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'newsfeed';
-		$this->_option = 'com_newsfeeds';
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @since	1.6
-	 */
-	protected function populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_newsfeeds.edit.newsfeed.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('newsfeed.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_newsfeeds');
-		$this->setState('params', $params);
-	}
-
 	/**
 	 * Returns a Table object, always creating it.
 	 *
@@ -68,48 +30,6 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	public function getTable($type = 'Newsfeed', $prefix = 'NewsfeedsTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
-		$false	= false;
-
-		// Get a row instance.
-		$table = $this->getTable();
-
-		// Attempt to load the row.
-		$return = $table->load($pk);
-
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
-		}
-
-		// Prime required properties.
-		if (empty($table->id))
-		{
-			// Prepare data for a new record.
-		}
-
-		// Convert to the JObject before adding other data.
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($table->params);
-		$value->params = $registry->toArray();
-
-		return $value;
 	}
 
 	/**
@@ -151,69 +71,20 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	}
 
 	/**
-	 * Method to save the form data.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	array	The form data.
-	 *
-	 * @return	boolean	True on success.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
 	 */
-	public function save($data)
+	protected function getReorderConditions($record = null)
 	{
-		// Initialise variables.
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('newsfeed.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_newsfeeds');
-		$cache->clean();
-
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
-
-		$this->setState('newsfeed.id', $table->id);
-
-		return true;
+		$condition = array(
+			'catid = '. (int) $record->catid
+		);
+		return $condition;
 	}
-
+	
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */
@@ -248,12 +119,5 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 			//$table->modified	= $date->toMySQL();
 			//$table->modified_by	= $user->get('id');
 		}
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'catid = '.(int) $table->catid;
-		return $condition;
 	}
 }
