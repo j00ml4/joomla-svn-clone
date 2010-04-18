@@ -9,46 +9,46 @@
 		/>
 
 		<field name="name" type="text"
-			description="SOCIAL_Field_Name_Desc"
-			label="SOCIAL_Field_Name_Label"
+			description="COM_SOCIAL_Field_Name_Desc"
+			label="COM_SOCIAL_Field_Name_Label"
 			required="true"
 			size="30"
 		/>
 
 		<field name="url" type="text"
-			description="SOCIAL_Field_URL_Desc"
-			label="SOCIAL_Field_URL_Label"
+			description="COM_SOCIAL_Field_URL_Desc"
+			label="COM_SOCIAL_Field_URL_Label"
 			size="30"
 			filter="uri"
 		/>
 
 		<field name="email" type="text"
-			description="SOCIAL_Field_Email_Desc"
-			label="SOCIAL_Field_Email_Label"
+			description="COM_SOCIAL_Field_Email_Desc"
+			label="COM_SOCIAL_Field_Email_Label"
 			readonly="true"
 			size="30"
 		/>
 
 		<field name="subject" type="text"
-			description="SOCIAL_Field_Subject_Desc"
-			label="SOCIAL_Field_Subject_Label"
+			description="COM_SOCIAL_Field_Subject_Desc"
+			label="COM_SOCIAL_Field_Subject_Label"
 			required="true"
 			size="30"
 		/>
 
 		<field name="body" type="textarea"
 			cols="80"
-			description="SOCIAL_Field_Body_Desc"
+			description="COM_SOCIAL_Field_Body_Desc"
 			filter="SocialModelComment::filterBody"
-			label="SOCIAL_Field_Body_Label"
+			label="COM_SOCIAL_Field_Body_Label"
 			required="true"
 			rows="10"
 		/>
 
 		<field name="created_date" type="text"
 			class="readonly"
-			description="SOCIAL_Field_Created_DATE_Desc"
-			label="SOCIAL_Field_Created_DATE_Label"
+			description="COM_SOCIAL_Field_Created_DATE_Desc"
+			label="COM_SOCIAL_Field_Created_DATE_Label"
 			readonly="true"
 			size="16"
 		/>
@@ -66,8 +66,8 @@
 		</field>
 
 		<field name="address" type="text"
-			description="SOCIAL_Field_Address_Desc"
-			label="SOCIAL_Field_Address_Label"
+			description="COM_SOCIAL_Field_Address_Desc"
+			label="COM_SOCIAL_Field_Address_Label"
 			readonly="true"
 			size="30"
 		/>
