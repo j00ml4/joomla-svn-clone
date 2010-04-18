@@ -16,6 +16,10 @@ JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
 $client = $this->state->get('filter.client_id') ? 'administrator' : 'site';
 $user = JFactory::getUser();
+$orderCol	= $this->state->get('list.ordering');
+$orderDirn	= $this->state->get('list.direction');
+$orderDirUp = $orderDirn == 'asc' ? 'modules.orderup' : 'modules.orderdown';
+$orderDirDown = $orderDirn == 'asc' ? 'modules.orderdown' : 'modules.orderup';
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_modules'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
@@ -146,8 +150,8 @@ $user = JFactory::getUser();
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->position == $item->position), 'modules.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->position == $item->position), 'modules.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), $orderDirUp, 'JGRID_MOVE_UP', $ordering); ?></span>
+						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), $orderDirDown, 'JGRID_MOVE_DOWN', $ordering); ?></span>
 						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 					<?php else : ?>

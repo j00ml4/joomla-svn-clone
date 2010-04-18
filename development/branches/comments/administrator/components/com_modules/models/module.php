@@ -26,48 +26,6 @@ class ModulesModelModule extends JModelAdmin
 	 */
 	private $_cache = array();
 
-	protected $_context = 'com_modules';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'module';
-		$this->_option = 'com_modules';
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @since	1.6
-	 */
-	protected function populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_modules.edit.module.id'))) {
-			if ($extensionId = (int) $app->getUserState('com_modules.add.module.extension_id')) {
-				$this->setState('extension.id', $extensionId);
-			} else {
-				$pk = (int) JRequest::getInt('id');
-			}
-		}
-		$this->setState('module.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_modules');
-		$this->setState('params', $params);
-	}
-
 	/**
 	 * Method to delete rows.
 	 *
@@ -352,6 +310,23 @@ class ModulesModelModule extends JModelAdmin
 	}
 
 	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($record = null)
+	{
+		$condition = array(
+			'client_id = '. (int) $record->client_id,
+			'position = '. $this->_db->Quote($table->position)
+		);
+		
+		return $condition;
+	}
+	
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -551,13 +526,5 @@ class ModulesModelModule extends JModelAdmin
 		$this->setState('module.id', $table->id);
 
 		return true;
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'client_id = '.(int) $table->client_id;
-		$condition[] = 'position = '. $this->_db->Quote($table->position);
-		return $condition;
 	}
 }

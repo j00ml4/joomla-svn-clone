@@ -96,13 +96,12 @@ class ModulesModelModules extends JModelList
 	 * @param	int The number of records
 	 * @return	array
 	 */
-	protected function _getList($query, $limitstart=0, $limit=0)
+	public function getItems()
 	{
-		$this->_db->setQuery($query);
-		$result = $this->_db->loadObjectList();
+		$items = parent::getItems();
 		$client = $this->getState('filter.client_id') ? 'administrator' : 'site';
 		$lang = JFactory::getLanguage();
-		foreach($result as $i=>$item) {
+		foreach($items as $i=>$item) {
 			$extension = $item->module;
 			$source = constant('JPATH_' . strtoupper($client)) . "/modules/$extension";
 				$lang->load("$extension.sys", constant('JPATH_' . strtoupper($client)), null, false, false)
@@ -112,14 +111,7 @@ class ModulesModelModules extends JModelList
 			$result[$i]->name = JText::_($item->name);
 		}
 
-		if($this->getState('list.ordering', 'ordering') == 'ordering') {
-			JArrayHelper::sortObjects($result,array('position','ordering'), array(1, $this->getState('list.direction') == 'desc' ? -1 : 1));
-		}
-		else {
-			JArrayHelper::sortObjects($result,$this->getState('list.ordering', 'ordering'), $this->getState('list.direction') == 'desc' ? -1 : 1);
-		}
-
-		return array_slice($result, $limitstart, $limit ? $limit : null);
+		return $items;
 	}
 
 	/**
@@ -207,7 +199,14 @@ class ModulesModelModules extends JModelList
 			}
 		}
 
-		//echo nl2br(str_replace('#__','jos_',$query));
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
+		if ($orderCol == 'ordering' || $orderCol == 'a.position') {
+			$orderCol = 'a.position '.$orderDirn.', a.ordering';
+		}
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
+		
 		return $query;
 	}
 }
