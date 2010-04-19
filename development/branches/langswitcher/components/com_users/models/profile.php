@@ -265,7 +265,8 @@ class UsersModelProfile extends JModelForm
 	{
 		$user = JFactory::getUser();
 		$tag = $this->getState('language');
-		if($user->id)
+		$params = JComponentHelper::getParams('com_users');
+		if($user->id && $params->get('autosave_language')==1)
 		{
 			$user->setParam('language', $tag);
 			// Save the user to the database.
