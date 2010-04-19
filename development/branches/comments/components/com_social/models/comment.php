@@ -329,8 +329,8 @@ EOC
 
 		// Get the module layout.
 		jimport('joomla.application.module.helper');
-		$helper	= JPATH_SITE.DS.'modules'.DS.'mod_social_comment'.DS.'helper.php';
-		$override = JPATH_SITE.DS.'templates'.DS.$tmpl.DS.'html'.DS.'mod_social_comment'.DS.'default_comment.php';
+		$helper	= JPATH_SITE.'/modules/mod_social_comment/helper.php';
+		$override = JPATH_SITE.'/templates/'.$tmpl.'/html/mod_social_comment/default_comment.php';
 
 		if (file_exists($override)) {
 			$layout = $override;
@@ -384,7 +384,7 @@ EOC
 		}
 
 		// Get the block helper.
-		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.'/components/com_social/helpers/blocked.php');
 
 		// Check if the user Id is blocked.
 		if (CommentHelper::isBlockedUser($config)) {

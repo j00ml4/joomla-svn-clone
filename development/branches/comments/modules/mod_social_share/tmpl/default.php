@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 JHtml::stylesheet('social/comments.css', array(), true);
 
 // add the appropriate include paths for helpers
-JHtml::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
 
 $style		= $params->get('style', 0);
 $heading	= $params->get('heading', 0);

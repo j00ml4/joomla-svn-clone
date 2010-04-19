@@ -46,8 +46,8 @@ class SocialControllerTrackback extends SocialController
 		$tId	= JRequest::getInt('thread_id');
 
 		// Get the thread and comment models.
-		$tModel	= $this->getModel('Thread', 'CommentsModel');
-		$cModel	= $this->getModel('Comment', 'CommentsModel');
+		$tModel	= $this->getModel('Thread', 'SocialModel');
+		$cModel	= $this->getModel('Comment', 'SocialModel');
 
 		// Load the thread data.
 		$thread	= $tModel->getThread($tId);

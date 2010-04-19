@@ -63,7 +63,7 @@ class SocialModelRating extends JModel
 		$false	= false;
 
 		// Load the rating from the database.
-		JTable::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'tables');
+		JTable::addIncludePath(JPATH_SITE.'/components/com_social/tables');
 		$rating = JTable::getInstance('Rating', 'CommentsTable');
 		$return = $rating->load($tId);
 
@@ -174,7 +174,7 @@ class SocialModelRating extends JModel
 		}
 
 		// Get the block helper.
-		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.'/components/com_social/helpers/blocked.php');
 
 		// Check if the user Id is blocked.
 		if (CommentHelper::isBlockedUser($config)) {

@@ -17,13 +17,7 @@ if ($params->get('enable_ratings') == 0) {
 	return false;
 }
 
-// if the JXtended Libraries are not present exit gracefully
-if (!defined('JXVERSION')) {
-	JError::raiseNotice(500, JText::_('JX_Libraries_Missing'));
-	return false;
-}
-
-// initialize context variables
+// Initialise variables.
 $context	= 'error';
 $contextId	= 0;
 
@@ -47,7 +41,7 @@ if (($context == 'error') and ($contextId == 0)) {
 }
 
 // import library dependencies
-require_once(dirname(__FILE__).DS.'helper.php');
+require_once(dirname(__FILE__).'/helper.php');
 
 // get the user object
 $user = &JFactory::getUser();
