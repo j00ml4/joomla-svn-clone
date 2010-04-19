@@ -110,7 +110,7 @@ class JObservable extends JObject
 				}
 			}
 			$this->_observers[] = &$observer;
-			$methods = get_class_methods($observer);
+			$methods = array_diff(get_class_methods($observer), get_class_methods('JPlugin'));
 		}
 		$key = key($this->_observers);
 		foreach($methods AS $method) {
