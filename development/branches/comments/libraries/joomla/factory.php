@@ -65,7 +65,7 @@ abstract class JFactory
 	 */
 	public static function getConfig($file = null, $type = 'PHP')
 	{
-		if (!is_object(JFactory::$config))
+		if (!JFactory::$config)
 		{
 			if ($file === null) {
 				$file = dirname(__FILE__).DS.'config.php';

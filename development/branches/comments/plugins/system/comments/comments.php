@@ -310,7 +310,9 @@ class plgSystemComments extends JPlugin
 	protected function _getRenderedData(& $article, $location)
 	{
 		if (empty($article->parameters)) {
-			$article->parameters = new JParameter($article->attribs);
+			$temp = new JRegistry();
+			$temp->loadJSON($article->attribs);
+			$article->parameters = $temp;
 		}
 
 		// Get global display settings for sharing, ratings and comments.
@@ -325,7 +327,7 @@ class plgSystemComments extends JPlugin
 
 		// Get the article url and route.
 		$url	= 'index.php?option=com_content&view=article&id='.$article->id;
-		$route	= ContentHelperRoute::getArticleRoute($article->slug, $article->catslug, $article->sectionid);
+		$route	= ContentHelperRoute::getArticleRoute($article->slug, $article->catslug);
 
 		// Initialize variables.
 		$result		= '';
