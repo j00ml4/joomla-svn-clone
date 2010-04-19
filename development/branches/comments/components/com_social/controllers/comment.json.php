@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialControllerComment extends JController
 {
@@ -41,9 +41,9 @@ class SocialControllerComment extends JController
 		// Check for a valid token. If invalid, send a 403 with the error message.
 		JRequest::checkToken('request') or $this->sendResponse(new JException(JText::_('JX_Invalid_Token'), 403));
 
-		$config	= &JComponentHelper::getParams('com_social');
-		$user	= &JFactory::getUser();
-		$date	= &JFactory::getDate();
+		$config	= JComponentHelper::getParams('com_social');
+		$user	= JFactory::getUser();
+		$date	= JFactory::getDate();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
 
@@ -103,7 +103,7 @@ class SocialControllerComment extends JController
 		$comment->route = JRoute::_($thread->page_route, false, -1);
 
 		// Configure the Social model so we can get the total number of comments.
-		$mModel = &$this->getModel('Comments', 'SocialModel');
+		$mModel = $this->getModel('Comments', 'SocialModel');
 		$mModel->getState();
 		$mModel->setState('filter.thread_id', $tId);
 		$mModel->setState('filter.state', 1);
@@ -130,7 +130,7 @@ class SocialControllerComment extends JController
 			$response->body = $cModel->getRenderedComment($comment);
 
 			// Flush the cache for this context.
-			$cache = &JFactory::getCache('com_'.$thread->context);
+			$cache = JFactory::getCache('com_'.$thread->context);
 			$cache->clean();
 		}
 		elseif ($comment->published == 2)
@@ -184,7 +184,7 @@ class SocialControllerComment extends JController
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialCommentResponse
 {

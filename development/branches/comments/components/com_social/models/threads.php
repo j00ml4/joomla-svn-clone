@@ -14,19 +14,10 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @since		1.2
+ * @since		1.6
  */
 class SocialModelThreads extends JModelList
 {
-	/**
-	 * Context string for the model type.  This is used to handle uniqueness
-	 * when dealing with the getStoreId() method and caching data structures.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $_context = 'com_social.threads';
-
 	/**
 	 * Method to get a JQuery object for retrieving the data set from a database.
 	 *
@@ -96,19 +87,16 @@ class SocialModelThreads extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
 	{
 		// Initialize variables.
-		$app		= &JFactory::getApplication();
-		$user		= &JFactory::getUser();
-		$config		= &JFactory::getConfig();
+		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$config		= JFactory::getConfig();
 		$params		= $app->getParams('com_social');
 		$context	= 'com_social.threads.';
 

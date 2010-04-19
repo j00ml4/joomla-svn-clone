@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialControllerComment extends SocialController
 {
@@ -49,19 +49,19 @@ class SocialControllerComment extends SocialController
 			return false;
 		}
 
-		$config	= &JComponentHelper::getParams('com_social');
-		$user	= &JFactory::getUser();
-		$date	= &JFactory::getDate();
+		$config	= JComponentHelper::getParams('com_social');
+		$user	= JFactory::getUser();
+		$date	= JFactory::getDate();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
 
 		// Load the language file for the comment module.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$lang->load('mod_social_comment');
 
 		// Get the thread and comment models.
-		$tModel	= &$this->getModel('Thread', 'SocialModel');
-		$cModel	= &$this->getModel('Comment', 'SocialModel');
+		$tModel	= $this->getModel('Thread', 'SocialModel');
+		$cModel	= $this->getModel('Comment', 'SocialModel');
 
 		// Check if the user is authorized to add a comment.
 		if (!$cModel->canComment()) {
@@ -70,7 +70,7 @@ class SocialControllerComment extends SocialController
 		}
 
 		// Load the thread data.
-		$thread	= &$tModel->getThread($tId);
+		$thread	= $tModel->getThread($tId);
 
 		// Check the thread data.
 		if ($thread === false) {
@@ -105,7 +105,7 @@ class SocialControllerComment extends SocialController
 		}
 
 		// Load the comment from the database.
-		$comment = &$cModel->getItem($return);
+		$comment = $cModel->getItem($return);
 
 		// Notify of a new comment being posted if enabled
 		$notification = $config->get('notify_comments');
@@ -125,7 +125,7 @@ class SocialControllerComment extends SocialController
 			$message = JText::_('SOCIAL_Display_Approved');
 
 			// Flush the cache for this context.
-			$cache = &JFactory::getCache('com_'.$thread->context);
+			$cache = JFactory::getCache('com_'.$thread->context);
 			$cache->clean();
 		}
 		elseif ($item->published == 2) {

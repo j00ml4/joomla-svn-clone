@@ -28,20 +28,7 @@ class modSocialLatestHelper
 
 	function truncateBody($text, $length=50)
 	{
-		static $parser;
-
-		if (empty($parser)) {
-			// import library dependencies
-			jx('jx.html.bbcode');
-
-			// instantiate bbcode parser object
-			$parser = &JBBCode::getInstance(array(
-				'smiley_path' => JPATH_ROOT.'/media/jxtended/img/smilies/default',
-				'smiley_url' => JURI::base().'/media/jxtended/img/smilies/default'
-			));
-		}
-
-		$text = strip_tags($parser->parse($text));
+		$text = strip_tags($text);
 		return JXHTMLString::truncate($text, $length);
 	}
 

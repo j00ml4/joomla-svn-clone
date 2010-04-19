@@ -25,8 +25,8 @@ if ($params->get('autodetect')) {
 	$application = &JFactory::getApplication('site');
 
 	// assumption is that if a global context is set, it is atomic
-	$context	= (string) $application->get('jx.context', $context);
-	$contextId	= (string) $application->get('jx.context_id', $contextId);
+	$context	= (string) $application->get('thread.context', $context);
+	$contextId	= (string) $application->get('thread.context_id', $contextId);
 
 	// We need to get some values if they are not present.
 	$params->def('url', 'index.php?option='.JRequest::getCmd('option').'&view='.JRequest::getCmd('view').'&id='.JRequest::getInt('id'));
@@ -44,7 +44,7 @@ if (($context == 'error') and ($contextId == 0)) {
 }
 
 // import library dependencies
-require_once(dirname(__FILE__).'/helper.php');
+require_once dirname(__FILE__).'/helper.php';
 
 // Get the thread.
 $thread = modSocialCommentHelper::getThread($params);

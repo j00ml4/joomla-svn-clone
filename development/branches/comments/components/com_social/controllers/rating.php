@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialControllerRating extends SocialController
 {
@@ -37,19 +37,19 @@ class SocialControllerRating extends SocialController
 			return false;
 		}
 
-		$app	= &JFactory::getApplication();
-		$config	= &JComponentHelper::getParams('com_social');
-		$user	= &JFactory::getUser();
+		$app	= JFactory::getApplication();
+		$config	= JComponentHelper::getParams('com_social');
+		$user	= JFactory::getUser();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
 
 		// Load the language file for the comment module.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$lang->load('mod_social_rating');
 
 		// Get the thread and rating models.
-		$tModel	= &$this->getModel('Thread', 'SocialModel');
-		$rModel	= &$this->getModel('Rating', 'SocialModel');
+		$tModel	= $this->getModel('Thread', 'SocialModel');
+		$rModel	= $this->getModel('Rating', 'SocialModel');
 
 		// Check if the user is authorized to add a rating.
 		if (!$rModel->canRate()) {
@@ -58,7 +58,7 @@ class SocialControllerRating extends SocialController
 		}
 
 		// Load the thread data.
-		$thread	= &$tModel->getThread($tId);
+		$thread	= $tModel->getThread($tId);
 
 		// Check the thread data.
 		if ($thread === false) {
@@ -71,7 +71,6 @@ class SocialControllerRating extends SocialController
 		$rating['thread_id']	= $tId;
 		$rating['user_id']		= $uId;
 		$rating['score']		= JRequest::getFloat('score', 0, 'request');
-		$rating['category_id']	= JRequest::getInt('category_id', 0, 'request');
 		$rating['context']		= $thread->context;
 		$rating['context_id']	= $thread->context_id;
 
@@ -104,7 +103,7 @@ class SocialControllerRating extends SocialController
 		}
 
 		// Flush the cache for this context.
-		$cache = &JFactory::getCache('com_'.$thread->context);
+		$cache = JFactory::getCache('com_'.$thread->context);
 		$cache->clean();
 
 		$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Submitted'));

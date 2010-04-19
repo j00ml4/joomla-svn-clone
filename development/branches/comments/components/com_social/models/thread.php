@@ -17,7 +17,7 @@ jimport('joomla.database.databasequery');
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialModelThread extends JModel
 {
@@ -29,27 +29,75 @@ class SocialModelThread extends JModel
 	protected $__state_set		= null;
 
 	/**
-	 * Overridden getState method to allow autopopulating of model state by the request.
+	 * Method to add a thread based on model state data.
 	 *
-	 * @param	mixed	$property	The name of the property to return from the state or NULL to return the state
-	 * @param	mixed	$default	The default value to return if the property is not set
-	 * @return	mixed	The value by name from the state or the state itself
+	 * @return	mixed	Thread object on success, false on failure.
 	 * @since	1.6
 	 */
-	public function getState($property=null, $default=null)
+	protected function autoCreateThread()
 	{
-		if (!$this->__state_set) {
-			$app		= &JFactory::getApplication('site');
-			$params		= JComponentHelper::getParams('com_social');
-			$context	= 'com_social.thread.';
+		$date	= JFactory::getDate();
+		$db		= $this->getDbo();
 
-			$this->setState('params', $params);
+		// Populate the thread data.
+		$thread					= new JObject();
+		$thread->id				= null;
+		$thread->context		= $this->getState('thread.context');
+		$thread->context_id		= (int)$this->getState('thread.context_id');
+		$thread->page_url		= $this->getState('thread.url');
+		$thread->page_route		= $this->getState('thread.route');
+		$thread->page_title		= $this->getState('thread.title');
+		$thread->status			= 1;
+		$thread->pings			= '';
 
-			$this->setState('thread.id', JRequest::getInt('thread_id'));
+		// Insert the thread object.
+		$db->insertObject('#__social_threads', $thread, 'id');
 
-			$this->__state_set = true;
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			$this->setError($db->getErrorMsg());
+			return false;
 		}
-		return parent::getState($property,$default);
+
+		return $thread;
+	}
+
+	/**
+	 * Method to update a thread based on model state data.
+	 *
+	 * @return	mixed	Thread object on success, false on failure.
+	 * @since	1.6
+	 */
+	protected function autoUpdateThread($thread)
+	{
+		$update = false;
+
+		// Check the route.
+		if (($this->getState('thread.route')) && $thread->page_route != $this->getState('thread.route')) {
+			$thread->page_route = $this->getState('thread.route');
+			$update = true;
+		}
+
+		// Check the title.
+		if (($this->getState('thread.title')) && $thread->page_title != $this->getState('thread.title')) {
+			$thread->page_title = $this->getState('thread.title');
+			$update = true;
+		}
+
+		// If the thread should be updated, run the update query.
+		if ($update)
+		{
+			// Update the thread row.
+			$db->updateObject('#__social_threads', $thread, 'id');
+
+			// Check for a database error.
+			if ($db->getErrorNum()) {
+				$this->setError($db->getErrorMsg());
+				return false;
+			}
+		}
+
+		return $thread;
 	}
 
 	/**
@@ -97,7 +145,7 @@ class SocialModelThread extends JModel
 		// If no thread was found, create one.
 		if (!$thread) {
 			// Create the thread using the state data.
-			$thread = $this->_autoCreateThread();
+			$thread = $this->autoCreateThread();
 
 			// Check the auto create return.
 			if ($thread === false) {
@@ -106,81 +154,26 @@ class SocialModelThread extends JModel
 		}
 		// Else, check to see if it needs to be updated.
 		else {
-			$thread = $this->_autoUpdateThread($thread);
+			$thread = $this->autoUpdateThread($thread);
 		}
 
 		return $thread;
 	}
 
 	/**
-	 * Method to update a thread based on model state data.
+	 * Method to auto-populate the model state.
 	 *
-	 * @return	mixed	Thread object on success, false on failure.
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-	protected function _autoUpdateThread($thread)
+	protected function populateState()
 	{
-		$update = false;
+		$app		= JFactory::getApplication('site');
 
-		// Check the route.
-		if (($this->getState('thread.route')) && $thread->page_route != $this->getState('thread.route')) {
-			$thread->page_route = $this->getState('thread.route');
-			$update = true;
-		}
+		$params		= JComponentHelper::getParams('com_social');
+		$this->setState('params', $params);
 
-		// Check the title.
-		if (($this->getState('thread.title')) && $thread->page_title != $this->getState('thread.title')) {
-			$thread->page_title = $this->getState('thread.title');
-			$update = true;
-		}
-
-		// If the thread should be updated, run the update query.
-		if ($update)
-		{
-			// Update the thread row.
-			$db->updateObject('#__social_threads', $thread, 'id');
-
-			// Check for a database error.
-			if ($db->getErrorNum()) {
-				$this->setError($db->getErrorMsg());
-				return false;
-			}
-		}
-
-		return $thread;
-	}
-
-	/**
-	 * Method to add a thread based on model state data.
-	 *
-	 * @return	mixed	Thread object on success, false on failure.
-	 * @since	1.6
-	 */
-	protected function _autoCreateThread()
-	{
-		$date	= JFactory::getDate();
-		$db		= $this->getDbo();
-
-		// Populate the thread data.
-		$thread					= new JObject();
-		$thread->id				= null;
-		$thread->context		= $this->getState('thread.context');
-		$thread->context_id		= (int)$this->getState('thread.context_id');
-		$thread->page_url		= $this->getState('thread.url');
-		$thread->page_route		= $this->getState('thread.route');
-		$thread->page_title		= $this->getState('thread.title');
-		$thread->status			= 1;
-		$thread->pings			= '';
-
-		// Insert the thread object.
-		$db->insertObject('#__social_threads', $thread, 'id');
-
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
-
-		return $thread;
+		$this->setState('thread.id', JRequest::getInt('thread_id'));
 	}
 }

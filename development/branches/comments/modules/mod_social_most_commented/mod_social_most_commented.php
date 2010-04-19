@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 $params->merge(JComponentHelper::getParams('com_social'));
 
 // import library dependencies
-require_once(dirname(__FILE__).'/helper.php');
+require_once dirname(__FILE__).'/helper.php';
 
 // Initialise variables.
 $user		= JFactory::getUser();

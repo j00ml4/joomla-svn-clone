@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_social'));
 
-// if Comments are disabled, do nothing and return
-if ($params->get('enable_ratings') == 0) {
-	return false;
-}
-
 // Initialise variables.
 $context	= 'error';
 $contextId	= 0;
@@ -24,11 +19,11 @@ $contextId	= 0;
 // if the autodetect context parameter is set, let's use it
 if ($params->get('autodetect')) {
 	// get the application object to retrieve the context
-	$application = &JFactory::getApplication('site');
+	$application = JFactory::getApplication('site');
 
 	// assumption is that if a global context is set, it is atomic
-	$context	= (string) $application->get('jx.context', $context);
-	$contextId	= (string) $application->get('jx.context_id', $contextId);
+	$context	= (string) $application->get('thread.context', $context);
+	$contextId	= (string) $application->get('thread.context_id', $contextId);
 }
 
 // if module parameters set the context, they always win
@@ -41,22 +36,13 @@ if (($context == 'error') and ($contextId == 0)) {
 }
 
 // import library dependencies
-require_once(dirname(__FILE__).'/helper.php');
+require_once dirname(__FILE__).'/helper.php';
 
-// get the user object
-$user = &JFactory::getUser();
-
-// get the uri object
-$uri = &JURI::getInstance();
-
-// get the document object
-$document = &JFactory::getDocument();
-
-// Get the thread.
-$thread = modSocialRatingHelper::getThread($params);
-
-// get the item rating
-$rating = modSocialRatingHelper::getRating($params);
+$user		= JFactory::getUser();
+$uri		= JURI::getInstance();
+$document	= &JFactory::getDocument();
+$thread		= modSocialRatingHelper::getThread($params);
+$rating		= modSocialRatingHelper::getRating($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_rating', $params->get('layout', 'default')));

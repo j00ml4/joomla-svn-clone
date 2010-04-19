@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialControllerRating extends JController
 {
@@ -41,19 +41,19 @@ class SocialControllerRating extends JController
 		// Check for a valid token. If invalid, send a 403 with the error message.
 		JRequest::checkToken('request') or $this->sendResponse(new JException(JText::_('JX_Invalid_Token'), 403));
 
-		$app	= &JFactory::getApplication();
-		$config	= &JComponentHelper::getParams('com_social');
-		$user	= &JFactory::getUser();
+		$app	= JFactory::getApplication();
+		$config	= JComponentHelper::getParams('com_social');
+		$user	= JFactory::getUser();
 		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
 
 		// Load the language file for the comment module.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$lang->load('mod_social_rating');
 
 		// Get the thread and rating models.
-		$tModel	= &$this->getModel('Thread', 'SocialModel');
-		$rModel	= &$this->getModel('Rating', 'SocialModel');
+		$tModel	= $this->getModel('Thread', 'SocialModel');
+		$rModel	= $this->getModel('Rating', 'SocialModel');
 
 		// Check if the user is authorized to add a rating.
 		if (!$rModel->canRate()) {
@@ -62,7 +62,7 @@ class SocialControllerRating extends JController
 		}
 
 		// Load the thread data.
-		$thread	= &$tModel->getThread($tId);
+		$thread	= $tModel->getThread($tId);
 
 		// Check the thread data.
 		if ($thread === false) {
@@ -75,7 +75,6 @@ class SocialControllerRating extends JController
 		$rating['thread_id']	= $tId;
 		$rating['user_id']		= $uId;
 		$rating['score']		= JRequest::getFloat('score', 0, 'post');
-		$rating['category_id']	= JRequest::getInt('category_id', 0);
 		$rating['context']		= $thread->context;
 		$rating['context_id']	= $thread->context_id;
 
@@ -108,10 +107,10 @@ class SocialControllerRating extends JController
 		}
 
 		// Load the rating from the database.
-		$response = &$rModel->getItem($tId);
+		$response = $rModel->getItem($tId);
 
 		// Flush the cache for this context.
-		$cache = &JFactory::getCache('com_'.$thread->context);
+		$cache = JFactory::getCache('com_'.$thread->context);
 		$cache->clean();
 
 		// Send the response.
@@ -151,7 +150,7 @@ class SocialControllerRating extends JController
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialRatingResponse
 {

@@ -31,11 +31,5 @@ $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 		</p>
 	</div>
 	<div class="comment">
-<?php
-	if ($params->get('enable_bbcode')) {
-		echo modSocialCommentHelper::renderBBCode($item->body);
-	} else {
-		echo $item->body;
-	}
-?>
+		<?php echo $item->body; ?>
 	</div>
