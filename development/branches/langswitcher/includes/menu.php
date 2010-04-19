@@ -52,10 +52,14 @@ class JMenuSite extends JMenu
 				return false;
 			}
 
-			foreach ($menus as &$menu) {
+			foreach ($menus as $i=>&$menu) {
 				// Set the language
 				if ($menu->inherited_language) {
 					$menu->language = substr($menu->inherited_language, 30);
+				}
+				if (!$menu->language && !JFactory::getApplication()->getCfg('show_untagged_content') && !$menu->home) {
+					unset($menus[$i]);
+					continue;
 				}
 
 				// Get parent information.

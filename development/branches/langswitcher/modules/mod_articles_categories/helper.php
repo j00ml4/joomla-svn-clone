@@ -20,6 +20,7 @@ abstract class modArticlesCategoriesHelper
 		$language = JSite::getLanguage();
 		$options = array();
 		$options['language'] = $language;
+		$options['show_untagged_content'] = JFactory::getApplication()->getCfg('show_untagged_content');
 		$categories = JCategories::getInstance('Content', $options);
 		$category = $categories->get($params->get('parent', 'root'));
 		$items = $category->getChildren();

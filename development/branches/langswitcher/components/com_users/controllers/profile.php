@@ -181,7 +181,7 @@ class UsersControllerProfile extends UsersController
 		$tag = JRequest::getCmd('language','default');
 		$redirect = JRequest::getVar('redirect');
 		$model = &$this->getModel('Profile','UsersModel',array('ignore_request'=>true));
-		$model->setState('language',$tag);
+		$model->setState('language',$tag=='default' ? '' : $tag);
 		$model->language();
 		$this->setRedirect(JRoute::_(base64_decode($redirect[$tag]),false));
 	}
