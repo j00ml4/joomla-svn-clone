@@ -52,8 +52,8 @@ class SocialControllerRating extends JController
 		$lang->load('mod_social_rating');
 
 		// Get the thread and rating models.
-		$tModel	= &$this->getModel('Thread', 'CommentsModel');
-		$rModel	= &$this->getModel('Rating', 'CommentsModel');
+		$tModel	= &$this->getModel('Thread', 'SocialModel');
+		$rModel	= &$this->getModel('Rating', 'SocialModel');
 
 		// Check if the user is authorized to add a rating.
 		if (!$rModel->canRate()) {

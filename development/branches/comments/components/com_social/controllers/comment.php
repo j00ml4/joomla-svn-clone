@@ -60,8 +60,8 @@ class SocialControllerComment extends SocialController
 		$lang->load('mod_social_comment');
 
 		// Get the thread and comment models.
-		$tModel	= &$this->getModel('Thread', 'CommentsModel');
-		$cModel	= &$this->getModel('Comment', 'CommentsModel');
+		$tModel	= &$this->getModel('Thread', 'SocialModel');
+		$cModel	= &$this->getModel('Comment', 'SocialModel');
 
 		// Check if the user is authorized to add a comment.
 		if (!$cModel->canComment()) {

@@ -41,7 +41,7 @@ class JHtmlComments
 		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 		// Get and configure the thread model.
-		$model = & JModel::getInstance('Thread', 'CommentsModel');
+		$model = & JModel::getInstance('Thread', 'SocialModel');
 		$model->getState();
 		$model->setState('thread.context', $context);
 		$model->setState('thread.context_id', (int) $id);
@@ -143,10 +143,10 @@ class JHtmlComments
 	{
 		// Add the appropriate include paths for models.
 		jimport('joomla.application.component.model');
-		JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'models');
+		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 		// Get and configure the thread model.
-		$model = & JModel::getInstance('Comments', 'CommentsModel');
+		$model = & JModel::getInstance('Comments', 'SocialModel');
 		$model->getState();
 		$model->setState('filter.context', $context);
 		$model->setState('filter.context_id', (int) $id);

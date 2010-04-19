@@ -52,8 +52,8 @@ class SocialControllerComment extends JController
 		$lang->load('mod_social_comment');
 
 		// Get the thread and comment models.
-		$tModel	= $this->getModel('Thread', 'CommentsModel');
-		$cModel	= $this->getModel('Comment', 'CommentsModel');
+		$tModel	= $this->getModel('Thread', 'SocialModel');
+		$cModel	= $this->getModel('Comment', 'SocialModel');
 
 		// Check if the user is authorized to add a comment.
 		if (!$cModel->canComment()) {
@@ -103,7 +103,7 @@ class SocialControllerComment extends JController
 		$comment->route = JRoute::_($thread->page_route, false, -1);
 
 		// Configure the Social model so we can get the total number of comments.
-		$mModel = &$this->getModel('Comments', 'CommentsModel');
+		$mModel = &$this->getModel('Comments', 'SocialModel');
 		$mModel->getState();
 		$mModel->setState('filter.thread_id', $tId);
 		$mModel->setState('filter.state', 1);

@@ -13,16 +13,12 @@ defined('_JEXEC') or die;
 $params->merge(JComponentHelper::getParams('com_social'));
 
 // import library dependencies
-require_once(dirname(__FILE__).DS.'helper.php');
+require_once(dirname(__FILE__).'/helper.php');
 
-// get the user object
-$user = &JFactory::getUser();
-
-// get the document object
-$document = &JFactory::getDocument();
-
-// get the item list
-$list = modSocialMostCommentedHelper::getList($params);
+// Initialise variables.
+$user		= JFactory::getUser();
+$document	= JFactory::getDocument();
+$list		= modSocialMostCommentedHelper::getList($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_most_commented', $params->get('layout', 'default')));

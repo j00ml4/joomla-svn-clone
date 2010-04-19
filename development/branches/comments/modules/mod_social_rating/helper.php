@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 // Add the appropriate include paths for models.
 jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'models');
+JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 class modSocialRatingHelper
 {
@@ -50,7 +50,7 @@ class modSocialRatingHelper
 	function isBlocked($params)
 	{
 		// import library dependencies
-		require_once(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'helpers'.DS.'blocked.php');
+		require_once(JPATH_SITE.'/components/com_social/helpers/blocked.php');
 
 		// run some tests to see if the comment submission should be blocked
 		$blocked = (CommentHelper::isBlockedUser($params) or CommentHelper::isBlockedIP($params));

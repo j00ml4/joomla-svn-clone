@@ -39,7 +39,7 @@ class SocialControllerComment extends JController
 	public function getComments()
 	{
 		// Get the thread information.
-		$model	= $this->getModel('Thread', 'CommentsModel');
+		$model	= $this->getModel('Thread', 'SocialModel');
 		$tId	= JRequest::getInt('thread_id');
 		$thread	= $model->getThread($tId);
 
@@ -70,7 +70,7 @@ class SocialControllerComment extends JController
 	public function getForm()
 	{
 		// Get the thread information.
-		$model	= $this->getModel('Thread', 'CommentsModel');
+		$model	= $this->getModel('Thread', 'SocialModel');
 		$tId	= JRequest::getInt('thread_id');
 		$thread	= $model->getThread($tId);
 

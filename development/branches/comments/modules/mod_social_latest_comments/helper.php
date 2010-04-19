@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 // Add the appropriate include paths for models.
 jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_social'.DS.'models');
+JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 jx('jx.html.html.jxstring');
 jx('jx.html.bbcode');

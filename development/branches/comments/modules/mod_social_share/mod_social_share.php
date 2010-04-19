@@ -18,16 +18,12 @@ if ($params->get('enable_sharing') == 0) {
 }
 
 // import library dependencies
-require_once(dirname(__FILE__).DS.'helper.php');
+require_once(dirname(__FILE__).'/helper.php');
 
-// get the user object
-$user = &JFactory::getUser();
-
-// get the document object
-$document = &JFactory::getDocument();
-
-// get the base url
-$baseurl = JURI::base();
+// Initialise variables.
+$user		= JFactory::getUser();
+$document	= JFactory::getDocument();
+$baseurl	= JURI::base();
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_share', $params->get('layout', 'default')));
