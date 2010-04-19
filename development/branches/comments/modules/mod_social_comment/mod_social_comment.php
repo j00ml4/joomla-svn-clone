@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_social'));
 
-// if Comments are disabled, do nothing and return
-if ($params->get('enable_comments') == 0) {
-	return false;
-}
-
 // Initialiase variables.
 $user		= JFactory::getUser();
 $uri		= JURI::getInstance();

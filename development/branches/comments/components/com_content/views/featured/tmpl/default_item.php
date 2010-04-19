@@ -10,8 +10,9 @@
 // no direct access
 defined('_JEXEC') or die;
 
-// Create a shortcut for params.
-$params = &$this->item->params;
+// Create shorcuts.
+$params = $this->item->params;
+$route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid);
 ?>
 
 <?php if ($this->item->state == 0) : ?>
@@ -20,7 +21,7 @@ $params = &$this->item->params;
 <?php if ($params->get('show_title')) : ?>
 	<h2>
 		<?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
-			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>">
+			<a href="<?php echo JRoute::_($route); ?>">
 			<?php echo $this->escape($this->item->title); ?></a>
 		<?php else : ?>
 			<?php echo $this->escape($this->item->title); ?>
@@ -146,6 +147,20 @@ $params = &$this->item->params;
 <?php if ($this->item->state == 0) : ?>
 </div>
 <?php endif; ?>
+
+<?php
+	if ($this->item->params->get('article-allow_comments')) :
+		JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
+		echo JHtml::_(
+			'comments.summary',
+			'com_content',
+			$this->item->id,
+			'index.php?option=com_content&view=article&id='.$this->item->id,
+			$route,
+			$this->item->title
+		);
+	endif;
+?>
 
 <div class="item-separator"></div>
 <?php echo $this->item->event->afterDisplayContent; ?>

@@ -286,7 +286,7 @@ class SocialModelComment extends JModel
 		$template = new JXTemplate();
 		$template->setBody(
 <<<EOC
-Date:		{CREATED_DATE}
+Date:		{CREATED_TIME}
 Page:		{ROUTE}
 
 From:		{NAME}

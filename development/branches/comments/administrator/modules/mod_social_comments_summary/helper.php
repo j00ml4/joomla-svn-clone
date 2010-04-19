@@ -9,9 +9,6 @@
 
 defined('_JEXEC') or die;
 
-jx('jx.html.html.jxstring');
-jx('jx.html.bbcode');
-
 /**
  * Helper class for the Comments Summary Module.
  *

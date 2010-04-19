@@ -9,8 +9,7 @@
 
 defined('_JEXEC') or die;
 
-jx('jx.application.component.modellist');
-jx('jx.database.query');
+jimport('joomla.application.component.modellist');
 
 /**
  * Social model for the Social package.
@@ -21,15 +20,6 @@ jx('jx.database.query');
  */
 class SocialModelComments extends JModelList
 {
-	/**
-	 * Context string for the model type.  This is used to handle uniqueness
-	 * when dealing with the getStoreId() method and caching data structures.
-	 *
-	 * @var		string
-	 * @since	1.6
-	 */
-	protected $_context = 'com_social.comments';
-
 	/**
 	 * Method to get a JPagination object for the data set.
 	 *
@@ -48,9 +38,9 @@ class SocialModelComments extends JModelList
 		}
 
 		// Create the pagination object.
-		jx('jx.html.pagination');
-		$page = new JXPagination($this->getTotal(), $this->getState('list.start'), $this->getState('list.limit'));
-		$page->setRequestVariable('comments_page', 1);
+		jimport('joomla.html.pagination');
+		$page = new JPagination($this->getTotal(), $this->getState('list.start'), $this->getState('list.limit'));
+		//$page->setRequestVariable('comments_page', 1);
 
 		// Add the object to the internal cache.
 		$this->_cache[$store] = $page;
@@ -113,7 +103,7 @@ class SocialModelComments extends JModelList
 		$query->select('c.name AS user_name, c.username AS user_login_name');
 		$query->join('LEFT', '`#__users` AS c ON c.id=a.user_id');
 
-		//echo nl2br(str_replace('#__','jos_',$query->toString())).'<hr/>';
+		//echo nl2br(str_replace('#__','jos_',$query)).'<hr/>';
 		return $query;
 	}
 
@@ -185,16 +175,16 @@ class SocialModelComments extends JModelList
 		// Load the list ordering.
 		switch (strtolower($params->get('list_order'))) {
 			case 'asc':
-				$this->setState('list.ordering', 'a.created_date ASC');
+				$this->setState('list.ordering', 'a.created_time ASC');
 				break;
 			case 'desc':
-				$this->setState('list.ordering', 'a.created_date DESC');
+				$this->setState('list.ordering', 'a.created_time DESC');
 				break;
 			case 'random':
 				$this->setState('list.ordering', 'RAND()');
 				break;
 			default:
-				$this->setState('list.ordering', 'a.created_date DESC');
+				$this->setState('list.ordering', 'a.created_time DESC');
 				break;
 		}
 

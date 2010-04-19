@@ -65,7 +65,7 @@ class SocialModelThreads extends JModelList
 		$query->select('c.pscore AS rating_pscore, c.pscore_count AS rating_pscore_count, c.mscore AS rating_mscore');
 		$query->join('LEFT', '`#__social_ratings` AS c ON c.thread_id=a.id');
 
-		//echo nl2br(str_replace('#__','jos_',$query->toString())).'<hr/>';
+		//echo nl2br(str_replace('#__','jos_',$query)).'<hr/>';
 		return $query;
 	}
 
@@ -133,10 +133,10 @@ class SocialModelThreads extends JModelList
 				$this->setState('list.ordering', 'comment_count DESC');
 				break;
 			case 'created_asc':
-				$this->setState('list.ordering', 'a.created_date ASC');
+				$this->setState('list.ordering', 'a.created_time ASC');
 				break;
 			case 'created_dsc':
-				$this->setState('list.ordering', 'a.created_date DESC');
+				$this->setState('list.ordering', 'a.created_time DESC');
 				break;
 			case 'rating_asc':
 				$this->setState('list.ordering', 'rating_pscore ASC');

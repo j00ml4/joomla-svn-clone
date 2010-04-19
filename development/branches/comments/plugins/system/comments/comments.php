@@ -104,7 +104,7 @@ class plgSystemComments extends JPlugin
 			if ($enableTrackbacks)
 			{
 				// Get a JXTrackback object.
-				jx('jx.webservices.trackback');
+				jimport('joomla.webservices.trackback');
 				$trackback = JTrackback::getInstance();
 				$config = JFactory::getConfig();
 
@@ -132,7 +132,7 @@ class plgSystemComments extends JPlugin
 			if ($cconfig->get('enable_pings', 0) && !in_array('Ping:Google', $pings))
 			{
 				// Get a JXPing object.
-				jx('jx.webservices.ping');
+				jimport('joomla.webservices.ping');
 				$config = JFactory::getConfig();
 				$ping = new JXPing();
 

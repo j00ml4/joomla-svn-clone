@@ -29,8 +29,8 @@ class SocialControllerTrackback extends SocialController
 		// Get the current application object.
 		$application = JFactory::getApplication();
 
-		// Get a JXTrackback object.
-		jx('jx.webservices.trackback');
+		// Get a Trackback object.
+		jimport('joomla.webservices.trackback');
 		$trackback = JTrackback::getInstance();
 
 		$config = JFactory::getConfig();
