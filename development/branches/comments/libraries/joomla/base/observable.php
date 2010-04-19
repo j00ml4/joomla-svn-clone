@@ -90,8 +90,15 @@ class JObservable extends JObject
 	public function attach(&$observer)
 	{
 		// Make sure we haven't already attached this object as an observer
-		if (is_object($observer))
+		if (is_array($observer))
 		{
+			if (!isset($observer['handler']) || !isset($observer['event']) || !is_callable($observer['handler'])) {
+				return;
+			}
+			$this->_observers[] = &$observer;
+			$methods = array($observer['event']);
+			
+		} else {
 			if (!$observer instanceof JObserver) {
 				return;
 			}
@@ -104,14 +111,7 @@ class JObservable extends JObject
 			}
 			$this->_observers[] = &$observer;
 			$methods = get_class_methods($observer);
-		} else {
-			if (!isset($observer['handler']) || !isset($observer['event']) || !is_callable($observer['handler'])) {
-				return;
-			}
-			$this->_observers[] = &$observer;
-			$methods = array($observer['event']);
 		}
-		end($this->_observers);
 		$key = key($this->_observers);
 		foreach($methods AS $method) {
 			$method = strtolower($method);

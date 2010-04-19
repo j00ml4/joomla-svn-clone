@@ -33,22 +33,22 @@ abstract class JPluginHelper
 		$result		= array();
 		$plugins	= self::_load();
 
-		// Find the correct plugin(s) to return.
-		for ($i = 0, $t = count($plugins); $i < $t; $i++)
+		// Find the correct plugin(s) to return.		
+		if(!$plugin)
 		{
-			// Are we loading a single plugin or a group?
-			if (is_null($plugin))
+			foreach($plugins as $p)
 			{
 				// Is this the right plugin?
-				if ($plugins[$i]->type == $type) {
-					$result[] = $plugins[$i];
+				if ($p->type == $type) {
+					$result[] = $p;
 				}
 			}
-			else
+		} else {
+			foreach($plugins as $p)
 			{
 				// Is this plugin in the right group?
-				if ($plugins[$i]->type == $type && $plugins[$i]->name == $plugin) {
-					$result = $plugins[$i];
+				if ($p->type == $type && $p->name == $plugin) {
+					$result = $p;
 					break;
 				}
 			}
