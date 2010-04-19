@@ -8,7 +8,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 require_once JPATH_ROOT . '/components/com_banners/helpers/banner.php';
 $baseurl = JURI::base();

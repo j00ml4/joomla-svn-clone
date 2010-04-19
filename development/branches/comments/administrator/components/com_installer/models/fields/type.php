@@ -1,4 +1,4 @@
-<?php defined('_JEXEC') or die('Restricted access');
+<?php defined('_JEXEC') or die;
 
 /**
  * @version		$Id: manage.php 14276 2010-01-18 14:20:28Z louis $

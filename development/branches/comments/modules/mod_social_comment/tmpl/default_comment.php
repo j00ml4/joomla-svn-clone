@@ -7,7 +7,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die('Invalid Request.');
+defined('_JEXEC') or die;
 
 // Setup the display name for the comment.
 $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
