@@ -53,10 +53,10 @@ class JHtmlComments
 		$thread = $model->getThread();
 
 		// Get JDate object
-		$date = JFactory::getDate($thread->created_date);
+		$date = JFactory::getDate($thread->created_time);
 
 		// Get the trackback information for the item.
-		jx('jx.webservices.trackback');
+		jimport('joomla.webservices.trackback');
 		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option=com_social&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
 
 		return $widget;
@@ -146,7 +146,7 @@ class JHtmlComments
 		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 		// Get and configure the thread model.
-		$model = & JModel::getInstance('Comments', 'SocialModel');
+		$model = JModel::getInstance('Comments', 'SocialModel');
 		$model->getState();
 		$model->setState('filter.context', $context);
 		$model->setState('filter.context_id', (int) $id);

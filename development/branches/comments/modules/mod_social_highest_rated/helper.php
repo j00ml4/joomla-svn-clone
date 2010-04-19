@@ -31,7 +31,7 @@ class modSocialHighestRatedHelper
 		if (empty($model))
 		{
 			// get a comments comment model instance and set the context in the state
-			$model = &JModel::getInstance('Threads', 'CommentsModel');
+			$model = &JModel::getInstance('Threads', 'SocialModel');
 			$model->getState();
 
 			// prime the list parameters.

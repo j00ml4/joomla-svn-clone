@@ -18,7 +18,7 @@ class modSocialRatingHelper
 	function getThread(&$params)
 	{
 		// Get and configure the thread model.
-		$model = &JModel::getInstance('Thread', 'CommentsModel');
+		$model = &JModel::getInstance('Thread', 'SocialModel');
 		$model->getState();
 		$model->setState('thread.context',		$params->get('context'));
 		$model->setState('thread.context_id',	(int) $params->get('context_id'));
@@ -38,7 +38,7 @@ class modSocialRatingHelper
 
 	function getRating($params)
 	{
-		$model = &JModel::getInstance('Rating', 'CommentsModel');
+		$model = &JModel::getInstance('Rating', 'SocialModel');
 		$model->getState();
 		$model->setState('thread.id', $params->get('thread.id'));
 

@@ -18,7 +18,7 @@ class modSocialCommentHelper
 	function getThread(&$params)
 	{
 		// Get and configure the thread model.
-		$model = &JModel::getInstance('Thread', 'CommentsModel');
+		$model = &JModel::getInstance('Thread', 'SocialModel');
 		$model->getState();
 		$model->setState('thread.context', $params->get('context'));
 		$model->setState('thread.context_id', (int)$params->get('context_id'));
@@ -38,14 +38,14 @@ class modSocialCommentHelper
 
 	function &getComments(&$params)
 	{
-		$model = &JModel::getInstance('Comments', 'CommentsModel');
+		$model = &JModel::getInstance('Comments', 'SocialModel');
 		$model->getState();
 		$model->setState('filter.thread_id', $params->get('thread.id'));
 		$model->setState('filter.state', 1);
 		if (strtolower($params->get('list_order')) == 'asc') {
-			$model->setState('list.ordering', 'a.created_date ASC');
+			$model->setState('list.ordering', 'a.created_time ASC');
 		} else {
-			$model->setState('list.ordering', 'a.created_date DESC');
+			$model->setState('list.ordering', 'a.created_time DESC');
 		}
 		$model->setState('list.limit', $params->get('pagination', 10));
 
@@ -56,14 +56,14 @@ class modSocialCommentHelper
 
 	function &getPagination(&$params)
 	{
-		$model = &JModel::getInstance('Comments', 'CommentsModel');
+		$model = &JModel::getInstance('Comments', 'SocialModel');
 		$model->getState();
 		$model->setState('filter.thread_id', $params->get('thread.id'));
 		$model->setState('filter.state', 1);
 		if (strtolower($params->get('list_order')) == 'asc') {
-			$model->setState('list.ordering', 'a.created_date ASC');
+			$model->setState('list.ordering', 'a.created_time ASC');
 		} else {
-			$model->setState('list.ordering', 'a.created_date DESC');
+			$model->setState('list.ordering', 'a.created_time DESC');
 		}
 		$model->setState('list.limit', $params->get('pagination', 10));
 

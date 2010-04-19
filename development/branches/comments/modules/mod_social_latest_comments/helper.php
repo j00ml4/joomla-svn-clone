@@ -13,9 +13,6 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.model');
 JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
-jx('jx.html.html.jxstring');
-jx('jx.html.bbcode');
-
 class modSocialLatestHelper
 {
 	function getList($params)
@@ -55,12 +52,12 @@ class modSocialLatestHelper
 		if (empty($model))
 		{
 			// get a comments comments model instance
-			$model = &JModel::getInstance('Comments', 'CommentsModel');
+			$model = &JModel::getInstance('Comments', 'SocialModel');
 			$model->getState();
 
 			// prime the list parameters.
 			$model->setState('filter.context', $params->get('context'));
-			$model->setState('list.ordering', 'a.created_date DESC');
+			$model->setState('list.ordering', 'a.created_time DESC');
 			$model->setState('list.limit', $params->get('limit', 5));
 			$model->setState('check.trackback', $params->get('hide_trackbacks', 1));
 		}

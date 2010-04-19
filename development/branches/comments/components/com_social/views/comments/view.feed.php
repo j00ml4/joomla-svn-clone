@@ -68,7 +68,7 @@ class SocialViewComments extends JView
 			$item->title		= strip_tags((!empty($comment->$_name)) ? $comment->$_name : $comment->name);
 			$item->link			= JRoute::_($comment->page_route).'#comment-'.$comment->id;
 			$item->description	= $parser->parse($comment->body);
-			$item->date			= $comment->created_date;
+			$item->date			= $comment->created_time;
 
 			// loads item info into rss array
 			$this->document->addItem($item);

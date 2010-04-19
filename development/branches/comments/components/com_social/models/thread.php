@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
-jx('jx.database.query');
+jimport('joomla.database.databasequery');
 
 /**
  * Thread model for the Social package.
@@ -85,7 +85,7 @@ class SocialModelThread extends JModel
 		}
 
 		// Load the thread.
-		$db->setQuery($query->toString());
+		$db->setQuery($query);
 		$thread = $db->loadObject();
 
 		// Check for a database error.
@@ -169,7 +169,6 @@ class SocialModelThread extends JModel
 		$thread->page_url		= $this->getState('thread.url');
 		$thread->page_route		= $this->getState('thread.route');
 		$thread->page_title		= $this->getState('thread.title');
-		$thread->created_date	= $date->toMySQL();
 		$thread->status			= 1;
 		$thread->pings			= '';
 

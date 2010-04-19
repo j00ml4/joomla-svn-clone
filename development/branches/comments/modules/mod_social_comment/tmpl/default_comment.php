@@ -27,7 +27,7 @@ $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 		<?php echo JText::sprintf('Comments_Makes_This_Comment', JRoute::_('#comment-'.$item->id)); ?>
 		</p>
 		<p class="date">
-			<?php echo JHtml::_('date', $item->created_date, $params->get('date_format')); ?>
+			<?php echo JHtml::_('date', $item->created_time, $params->get('date_format')); ?>
 		</p>
 	</div>
 	<div class="comment">

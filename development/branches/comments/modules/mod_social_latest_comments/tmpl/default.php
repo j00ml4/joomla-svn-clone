@@ -33,7 +33,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 				<?php echo $itemTitle; ?></a>
 		</h4>
 		<small>
-			<?php echo JText::sprintf('Comments_Comment_Posted_On', JHtml::date($item->created_date, $params->get('date_format')), htmlspecialchars((!empty($item->$_name)) ? $item->$_name : $item->name, ENT_QUOTES, 'UTF-8')); ?>
+			<?php echo JText::sprintf('Comments_Comment_Posted_On', JHtml::date($item->created_time, $params->get('date_format')), htmlspecialchars((!empty($item->$_name)) ? $item->$_name : $item->name, ENT_QUOTES, 'UTF-8')); ?>
 		</small>
 <?php if ($params->get('show_comment_excerpt', 1)) : ?>
 		<p class="excerpt">
