@@ -4,7 +4,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-var JXRatings=new Class({decorate:function(forms)
+var JRatings=new Class({decorate:function(forms)
 {forms.each(function(form)
 {var links=form.getElements('ul.rating-stars a');links.each(function(link)
 {link.setProperty('form',form.getProperty('id'));link.setStyle('cursor','pointer');link.addEvent('click',function(e)
@@ -13,4 +13,4 @@ var JXRatings=new Class({decorate:function(forms)
 else
 {var counter=$('rating-count-'+context).getElement('span.count');var string=$('rating-count-'+context).getElement('span.string');counter.setText(response.pscore_count);string.setText(response.counter_text);stars=form.getElement('.current-rating');stars.setStyle('width',Math.floor(response.pscore*100)+'%');}},onFailure:function(response)
 {response=Json.evaluate(response.responseText);JX.replaceTokens(response.token);alert(response.message);}});});});});}});window.addEvent('domready',function()
-{JX.Ratings=new JXRatings();JX.Ratings.decorate($$('form.addrating'));});
+{J.Ratings=new JRatings();JX.Ratings.decorate($$('form.addrating'));});

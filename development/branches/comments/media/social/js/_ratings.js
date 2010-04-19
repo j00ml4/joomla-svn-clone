@@ -6,15 +6,15 @@
 
 /**
  * Ratings behavior class for Comments.
- * @version		1.1
+ * @since	1.6
  */
-var JXRatings = new Class({
+var JRatings = new Class({
 
 	/**
 	 * Method to decorate the rating forms with the ratings behavior.
 	 *
 	 * @return	void
-	 * @since	1.1
+	 * @since	1.6
 	 */
 	decorate: function(forms)
 	{
@@ -99,6 +99,6 @@ var JXRatings = new Class({
 
 window.addEvent('domready', function()
 {
-	JX.Ratings = new JXRatings();
-	JX.Ratings.decorate($$('form.addrating'));
+	J.Ratings = new JRatings();
+	J.Ratings.decorate($$('form.addrating'));
 });
