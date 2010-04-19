@@ -334,6 +334,15 @@
 		<fieldset name="integration"
 		>
 
+			<field name="article-allow_comments" type="list"
+				description="JGLOBAL_Allow_Comments_Desc"
+				label="JGLOBAL_Allow_Comments_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNo</option>
+				<option value="1">JYes</option>
+			</field>
+
 			<field name="article-allow_ratings" type="list"
 				description="JGLOBAL_Allow_Ratings_Desc"
 				label="JGLOBAL_Allow_Ratings_Label"
@@ -343,9 +352,9 @@
 				<option value="1">JYes</option>
 			</field>
 
-			<field name="article-allow_comments" type="list"
-				description="JGLOBAL_Allow_Comments_Desc"
-				label="JGLOBAL_Allow_Comments_Label"
+			<field name="article-allow_sharing" type="list"
+				description="JGLOBAL_Allow_Sharing_Desc"
+				label="JGLOBAL_Allow_Sharing_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="0">JNo</option>
