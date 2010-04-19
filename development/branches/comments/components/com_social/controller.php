@@ -20,7 +20,7 @@ JTable::addIncludePath(JPATH_SITE.'/components/com_social/tables');
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @since		1.0
+ * @since		1.6
  */
 class SocialController extends JController
 {
@@ -33,7 +33,7 @@ class SocialController extends JController
 	public function display()
 	{
 		// Get the document object.
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'comments');

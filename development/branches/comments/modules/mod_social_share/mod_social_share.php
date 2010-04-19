@@ -12,13 +12,8 @@ defined('_JEXEC') or die;
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_social'));
 
-// if Comments are disabled, do nothing and return
-if ($params->get('enable_sharing') == 0) {
-	return false;
-}
-
 // import library dependencies
-require_once(dirname(__FILE__).'/helper.php');
+require_once dirname(__FILE__).'/helper.php';
 
 // Initialise variables.
 $user		= JFactory::getUser();

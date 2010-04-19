@@ -25,7 +25,7 @@ if ($params->get('star_file')) {
 
 <?php
 $redirect = base64_encode($uri->toString(array('path', 'query', 'fragment')));
-$degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id.'&category_id='.(int) $params->get('category_id').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
+$degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id.'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
 ?>
 
 <div class="rating-container">
@@ -41,13 +41,11 @@ $degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id
 
 		<input type="hidden" name="score" value="" />
 		<input type="hidden" name="thread_id" value="<?php echo $thread->id; ?>" />
-		<input type="hidden" name="category_id" value="<?php echo (int) $params->get('category_id'); ?>" />
 		<input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</form>
 
 	<div id="rating-count-<?php echo $thread->id; ?>" class="rating-count">
-		<small><span class="count"><?php echo (int) $rating->pscore_count;?></span>
-			<span class="string"><?php echo ($rating->pscore_count == 1 ? JText::_('Comments_Vote') : JText::_('Comments_Votes'));?></span></small>
+		<small><?php echo JText::__('COM_SOCIAL_RATING_N_VOTES', $rating->pscore_count);?></small>
 	</div>
 </div>

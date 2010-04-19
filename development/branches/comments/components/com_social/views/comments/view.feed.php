@@ -16,7 +16,7 @@ jimport('joomla.application.component.view');
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.0
+ * @since		1.6
  */
 class SocialViewComments extends JView
 {
@@ -28,11 +28,11 @@ class SocialViewComments extends JView
 	 */
 	function display($tpl = null)
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// get some variables from the model
 		$state		= $this->get('State');
-		$comments	= &$this->get('Items');
+		$comments	= $this->get('Items');
 
 		if ($state->get('filter.thread_id')) {
 			// setup some basic document information
@@ -52,13 +52,13 @@ class SocialViewComments extends JView
 		jimport('joomla.html.bbcode');
 
 		// instantiate bbcode parser object
-		$parser = &JBBCode::getInstance(array(
+		$parser = JBBCode::getInstance(array(
 			'smiley_path' => JPATH_ROOT.'/media/social/images/smilies/default',
 			'smiley_url' => JURI::base().'media/social/images/smilies/default'
 		));
 
 		// Setup the display name for the comment.
-		$params = & JComponentHelper::getParams('com_social');
+		$params = JComponentHelper::getParams('com_social');
 		$_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 
 		// iterate over the comments to add to the feed

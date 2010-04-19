@@ -15,72 +15,10 @@ jimport('joomla.application.component.model');
  * The Social rating model
  *
  * @package		Joomla.Site
- * @version	1.0
+ * @since		1.6
  */
 class SocialModelRating extends JModel
 {
-	/**
-	 * Flag to indicate model state initialization.
-	 *
-	 * @var		boolean
-	 */
-	protected $__state_set		= null;
-
-	/**
-	 * Overridden getState method to allow autopopulating of model state by the request.
-	 *
-	 * @param	mixed	$property	The name of the property to return from the state or NULL to return the state
-	 * @param	mixed	$default	The default value to return if the property is not set
-	 * @return	mixed	The value by name from the state or the state itself
-	 * @since	1.6
-	 */
-	public function getState($property=null, $default=null)
-	{
-		// if the model state is uninitialized lets set some values we will need from the request.
-		if (!$this->__state_set) {
-
-			// load the component configuration parameters.
-			$this->setState('config', JComponentHelper::getParams('com_social'));
-
-			$this->setState('thread.id', JRequest::getInt('thread_id'));
-
-			$this->__state_set = true;
-		}
-		return parent::getState($property,$default);
-	}
-
-	/**
-	 * Method to return a rating object
-	 *
-	 * @param	mixed	$context_id	NULL to use model state or integer
-	 * @param	mixed	$context	NULL to use model state or string
-	 * @return	object	rating object
-	 * @since	1.6
-	 */
-	public function &getItem($tId = null)
-	{
-		$tId	= !empty($tId) ? $tId : $this->getState('thread.id');
-		$false	= false;
-
-		// Load the rating from the database.
-		JTable::addIncludePath(JPATH_SITE.'/components/com_social/tables');
-		$rating = JTable::getInstance('Rating', 'CommentsTable');
-		$return = $rating->load($tId);
-
-		// Check for errors.
-		if (!$return && $rating->getError()) {
-			$this->setError($rating->getError());
-			return $false;
-		}
-
-		// If no thread was found, just populate the thread id.
-		if (!$rating->thread_id) {
-			$rating->thread_id = $tId;
-		}
-
-		return $rating;
-	}
-
 	/**
 	 * Method to add a rating to the database
 	 *
@@ -91,46 +29,12 @@ class SocialModelRating extends JModel
 	public function add($data = array())
 	{
 		$result	= false;
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$userId	= $user->get('id');
 		$config = $this->getState('config');
 
-		// is this a member comment?
-		if ($userId > 0)
-		{
-			// get a member/rating table object
-			$table = &$this->getTable('ratingmember', 'CommentsTable');
-			if (empty($table) or (JError::isError($table))) {
-				return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
-			}
-
-			// load the row if it exists
-			if ($table->load($userId, $data['thread_id'], $data['category_id'])) {
-				return new JException(JText::_('SOCIAL_Item_Already_Rated'), 403);
-			}
-
-			// set the row data fields
-			$table->thread_id		= $data['thread_id'];
-			$table->context			= $data['context'];
-			$table->context_id		= $data['context_id'];
-			$table->user_id			= $userId;
-			$table->category_id		= $data['category_id'];
-			$table->score			= $data['score'];
-			$table->address			= $_SERVER['REMOTE_ADDR'];
-
-			// verify the table object data is valid
-			if (!$table->check($config)) {
-				return new JException($table->getError(), 500);
-			}
-
-			// store the table object
-			if (!$table->store()) {
-				return new JException($table->getError(), 500);
-			}
-		}
-
 		// Get a Rating table object
-		$table = &$this->getTable('Rating', 'CommentsTable');
+		$table = $this->getTable('Rating', 'SocialTable');
 		if (empty($table) or (JError::isError($table))) {
 			return new JException(JText::_('SOCIAL_Unable_To_Load_Table'), 500);
 		}
@@ -163,7 +67,7 @@ class SocialModelRating extends JModel
 	 */
 	function canRate()
 	{
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$uid	= (int)$user->get('id');
 		$config	= $this->getState('config');
 
@@ -174,7 +78,7 @@ class SocialModelRating extends JModel
 		}
 
 		// Get the block helper.
-		require_once(JPATH_SITE.'/components/com_social/helpers/blocked.php');
+		require_once JPATH_SITE.'/components/com_social/helpers/blocked.php';
 
 		// Check if the user Id is blocked.
 		if (CommentHelper::isBlockedUser($config)) {
@@ -199,5 +103,58 @@ class SocialModelRating extends JModel
 		}
 
 		return true;
+	}
+
+	/**
+	 * Method to return a rating object
+	 *
+	 * @param	mixed	$context_id	NULL to use model state or integer
+	 * @param	mixed	$context	NULL to use model state or string
+	 * @return	object	rating object
+	 * @since	1.6
+	 */
+	public function &getItem($tId = null)
+	{
+		$tId	= !empty($tId) ? $tId : $this->getState('thread.id');
+		$false	= false;
+
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$query->select('pscore, pscore_count, pscore_total, thread_id');
+		$query->from('#__social_ratings');
+		$query->where('thread_id = '.(int) $tId);
+
+		$rating = $db->setQuery($query)->loadObject();
+
+		// Check for errors.
+		if ($error = $db->getErrorMsg()) {
+			$this->setError($error);
+			return $false;
+		}
+
+		if (empty($rating)) {
+			$rating = new stdClass;
+			$rating->pscore_count = 0;
+			$rating->pscore = 0;
+			$rating->pscore_total = 0;
+			$rating->thread_id = $tId;
+		}
+
+		return $rating;
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		// load the component configuration parameters.
+		$this->setState('config', JComponentHelper::getParams('com_social'));
+
+		$this->setState('thread.id', JRequest::getInt('thread_id'));
 	}
 }

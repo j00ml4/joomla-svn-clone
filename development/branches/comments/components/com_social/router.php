@@ -23,9 +23,8 @@ function SocialBuildRoute(&$query)
 	static $item;
 
 	// Get the relevant menu items if not loaded.
-	if (empty($item))
-	{
-		$menu	= &JSite::getMenu();
+	if (empty($item)) {
+		$menu	= JSite::getMenu();
 		$items	= $menu->getItems('component', 'com_social');
 
 		if (!empty($items)) {
@@ -46,8 +45,7 @@ function SocialBuildRoute(&$query)
 	unset($query['view']);
 
 	// Handle an unmatched item.
-	if (isset($query['thread_id']))
-	{
+	if (isset($query['thread_id'])) {
 		// Add the view to the segments.
 		if (isset($query['thread_id'])) {
 			$segments[] = $query['thread_id'];
@@ -77,7 +75,6 @@ function SocialParseRoute($segments)
 		if (!empty($segments[-1])) {
 			$vars['thread_id'] = $segments[-1];
 		}
-
 	} else {
 		if (!empty($segments[0])) {
 			$vars['thread_id'] = $segments[0];

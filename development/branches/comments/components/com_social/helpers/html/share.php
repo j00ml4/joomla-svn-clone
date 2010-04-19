@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
  * JHtml Helper class for Social
  *
  * @package		Joomla.Site
- * @version	1.0
+ * @since		1.6
  */
 class JHtmlShare
 {

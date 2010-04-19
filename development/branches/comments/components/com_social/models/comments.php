@@ -16,38 +16,10 @@ jimport('joomla.application.component.modellist');
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.2
+ * @since		1.6
  */
 class SocialModelComments extends JModelList
 {
-	/**
-	 * Method to get a JPagination object for the data set.
-	 *
-	 * @param	boolean	Force create a new object.
-	 * @return	object	A JPagination object for the data set.
-	 * @since	1.6
-	 */
-	public function getPagination($new = false)
-	{
-		// Get a storage key.
-		$store = $this->getStoreId('getPagination');
-
-		// Try to load the data from internal storage.
-		if (!empty($this->_cache[$store]) && !$new) {
-			return $this->_cache[$store];
-		}
-
-		// Create the pagination object.
-		jimport('joomla.html.pagination');
-		$page = new JPagination($this->getTotal(), $this->getState('list.start'), $this->getState('list.limit'));
-		//$page->setRequestVariable('comments_page', 1);
-
-		// Add the object to the internal cache.
-		$this->_cache[$store] = $page;
-
-		return $this->_cache[$store];
-	}
-
 	/**
 	 * Method to get a JQuery object for retrieving the data set from a database.
 	 *
@@ -108,6 +80,34 @@ class SocialModelComments extends JModelList
 	}
 
 	/**
+	 * Method to get a JPagination object for the data set.
+	 *
+	 * @param	boolean	Force create a new object.
+	 * @return	object	A JPagination object for the data set.
+	 * @since	1.6
+	 */
+	public function getPagination($new = false)
+	{
+		// Get a storage key.
+		$store = $this->getStoreId('getPagination');
+
+		// Try to load the data from internal storage.
+		if (!empty($this->_cache[$store]) && !$new) {
+			return $this->_cache[$store];
+		}
+
+		// Create the pagination object.
+		jimport('joomla.html.pagination');
+		$page = new JPagination($this->getTotal(), $this->getState('list.start'), $this->getState('list.limit'));
+		//$page->setRequestVariable('comments_page', 1);
+
+		// Add the object to the internal cache.
+		$this->_cache[$store] = $page;
+
+		return $this->_cache[$store];
+	}
+
+	/**
 	 * Method to get a store id based on model the configuration state.
 	 *
 	 * This is necessary because the model is used by the component and
@@ -137,21 +137,17 @@ class SocialModelComments extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
 	{
 		// Initialize variables.
-		$app		= &JFactory::getApplication();
-		$user		= &JFactory::getUser();
-		$config		= &JFactory::getConfig();
+		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$config		= JFactory::getConfig();
 		$params		= $app->getParams('com_social');
-		$context	= 'com_social.comments.';
 
 		// Load the filter state.
 		$this->setState('filter.context', JRequest::getWord('context', $params->get('context', null)));
@@ -165,7 +161,7 @@ class SocialModelComments extends JModelList
 		$limit	= ($limit === -1) ? $app->getCfg('list_limit', 20) : $limit;
 
 		// Compute the list start offset.
-		$page	= $app->getUserStateFromRequest($context.'list.page', 'comments_page', 0, 'int');
+		$page	= $app->getUserStateFromRequest($this->context.'list.page', 'comments_page', 0, 'int');
 		$start	= intval(($page) ? (($page - 1) * $params->get('pagination', 0)) : 0);
 
 		// Load the list state.

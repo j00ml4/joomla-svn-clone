@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
  * JHtml Helper class for Social
  *
  * @package		Joomla.Site
- * @version	1.0
+ * @since		1.6
  */
 class JHtmlComments
 {
@@ -41,7 +41,7 @@ class JHtmlComments
 		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
 		// Get and configure the thread model.
-		$model = & JModel::getInstance('Thread', 'SocialModel');
+		$model = JModel::getInstance('Thread', 'SocialModel');
 		$model->getState();
 		$model->setState('thread.context', $context);
 		$model->setState('thread.context_id', (int) $id);
@@ -80,7 +80,7 @@ class JHtmlComments
 		$widget = null;
 
 		// get the module renderer
-		$document	= &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
@@ -119,7 +119,7 @@ class JHtmlComments
 		$widget = null;
 
 		// get the module renderer
-		$document	= &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
@@ -175,7 +175,7 @@ class JHtmlComments
 		$widget = null;
 
 		// get the module renderer
-		$document	= &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
@@ -212,7 +212,7 @@ class JHtmlComments
 		$widget = null;
 
 		// get the module renderer
-		$document	= &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
@@ -244,13 +244,13 @@ class JHtmlComments
 	 * @return	string	A rating widget
 	 * @since	1.6
 	 */
-	function rating($context, $id, $url, $route, $title, $categoryId = 0, $options = array('style'=>'raw'))
+	function rating($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
 	{
 		// initialize variables
 		$widget = null;
 
 		// get the module renderer
-		$document	= &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 
 		// build module configuration
@@ -259,7 +259,6 @@ class JHtmlComments
 		$config[] = 'title='.$title;
 		$config[] = 'context='.$context;
 		$config[] = 'context_id='.$id;
-		$config[] = 'category_id='.$categoryId;
 
 		// get the module object for the comments module
 		$module	= JModuleHelper::getModule('mod_social_rating');

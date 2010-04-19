@@ -160,6 +160,18 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 			$this->item->title
 		);
 	endif;
+
+	if ($this->item->params->get('article-allow_ratings')) :
+		JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
+		echo JHtml::_(
+			'comments.rating',
+			'com_content',
+			$this->item->id,
+			'index.php?option=com_content&view=article&id='.$this->item->id,
+			$route,
+			$this->item->title
+		);
+	endif;
 ?>
 
 <div class="item-separator"></div>

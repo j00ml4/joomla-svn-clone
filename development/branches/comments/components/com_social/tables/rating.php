@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.0
+ * @since		1.6
  */
 class SocialTableRating extends JTable
 {
@@ -39,7 +39,7 @@ class SocialTableRating extends JTable
 	public function check()
 	{
 		// Get the Social configuration object.
-		$config = &JComponentHelper::getParams('com_social');
+		$config = JComponentHelper::getParams('com_social');
 
 		// Validate the rating data.
 		$result	= false;
@@ -61,7 +61,7 @@ class SocialTableRating extends JTable
 	public function store()
 	{
 		// Get the database connection object.
-		$db = &$this->_db;
+		$db = $this->_db;
 
 		// Create the query string for formatting.
 		$query = 'REPLACE INTO '.$db->NameQuote($this->_tbl) .

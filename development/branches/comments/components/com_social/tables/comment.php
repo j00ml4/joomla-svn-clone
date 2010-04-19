@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @version		1.6
+ * @since		1.6
  */
 class SocialTableComment extends JTable
 {
@@ -39,7 +39,7 @@ class SocialTableComment extends JTable
 	public function check()
 	{
 		// Get the Social configuration object.
-		$config = &JComponentHelper::getParams('com_social');
+		$config = JComponentHelper::getParams('com_social');
 
 		// Import library dependencies.
 		jimport('joomla.mail.helper');

@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package		Joomla.Site
  * @subpackage	com_social
- * @since		1.2
+ * @since		1.6
  */
 class SocialControllerTrackback extends SocialController
 {
