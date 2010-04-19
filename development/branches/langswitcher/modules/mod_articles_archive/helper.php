@@ -35,7 +35,7 @@ class modArchiveHelper
 		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
 		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
 		$query->group('a.id');
-		$query->having('(a.language='.$db->Quote($language).' OR inherited_language IS NULL OR substr(inherited_language,31)='.$db->Quote($language).')');
+		$query->having('(a.language='.$db->Quote($language) . (JFactory::getApplication()->getCfg('show_untagged_content') ? ' OR inherited_language IS NULL':'') . ' OR substr(inherited_language,31)='.$db->Quote($language).')');
 
 		$db->setQuery($query, 0, intval($params->get('count')));
 		$rows = $db->loadObjectList();

@@ -174,7 +174,8 @@ class JCategories
 		}
 		if(array_key_exists('language',$this->_options) && $this->_options['language'] != '')
 		{
-			$query->where("(c.language = '' OR c.language=" . $db->Quote($this->_options['language']) . ")");
+		
+			$query->where("(c.language=" . $db->Quote($this->_options['language']) . ($this->_options['show_untagged_content'] ? " OR c.language = ''" : '' ) . ")");
 		}
 		$query->order('c.lft');
 

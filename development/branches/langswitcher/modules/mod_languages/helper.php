@@ -17,7 +17,6 @@ abstract class modLanguagesHelper
 	public static function getList(&$params)
 	{
 		$useDefault = $params->get('default');
-		$selected = JSite::getLanguage(!$useDefault);
 		$db = JFactory::getDBO();
 		$query = new JDatabaseQuery;
 		$query->select($db->nameQuote('lang_code').' as '.$db->nameQuote('value'));
@@ -62,8 +61,10 @@ abstract class modLanguagesHelper
 		if ($useDefault && count($result)) {
 			$option = array();
 			$option['text'] = JText::_('JOPTION_USE_DEFAULT');
-			$option['value'] = '';
-			$option['redirect']=$result[JSite::getLanguage()]['redirect'];
+			$option['value'] = 'default';
+			$config =& JFactory::getConfig();
+			$paramsLanguagues =  JComponentHelper::getParams('com_languages');
+			$option['redirect']=$result[$paramsLanguagues->get('site', $config->get('language','en-GB'))]['redirect'];
 			array_unshift($result, $option);
 		}
 		return $result;

@@ -267,7 +267,7 @@ abstract class JModuleHelper
 		// Filter by the language
 		if ($app->getClientId()==0) {
 			$language = $app->getLanguage();
-			$query->where("(m.language='' OR m.language=".$db->Quote($language).")");
+			$query->where("(m.language=".$db->Quote($language).($app->getCfg('show_untagged_content') ? " OR m.language=''" : '').")");
 		}
 
 		$date = JFactory::getDate();

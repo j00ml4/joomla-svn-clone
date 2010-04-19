@@ -112,13 +112,8 @@ final class JSite extends JApplication
 		if(empty($tag) && $user->id) {
 			$tag = $user->getParam('language');
 		}
-		if (is_null($tag) || $tag=='default') {
-			if($default) {
-				$tag = JFactory::getLanguage()->getTag();
-			}
-			else {
-				$tag ='';
-			}
+		if ((empty($tag) || $tag=='default') && $default) {
+			$tag = JFactory::getLanguage()->getTag();
 		}
 		return $tag;
 	}
