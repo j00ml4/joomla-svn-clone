@@ -27,14 +27,24 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+19-Apr-2010 Mark Dexter
+# Fix diff_15_to_16.sql for database changes
+# Fix index in contact_details table
+
+19-Apr-2010 Christophe Demko
+# Reenabling filters in plugins and manage view
+^ Speeding up manage and discover view in com_installer
+^ Speeding up modules and plugins view
+
 19-Apr-2010 Jean-Marie Simonet
 ^ Changing JText::__ to JText::plural
 $ Toolbar change to Publish/Unpublish in com_modules
+^ Fixed readonly list [20179]. (Thanks Artyom)
+$ Refactoring ini/keys in libraries/J/html. Consolidated some strings.
 
 18-Apr-2010 Ron Severdia
 # Clean up CSS for BlueStork
 # Clean up UI for Permissions Editor in Global Config.
-
 
 18-Apr-2010 Mark Dexter
 # Fix parse error in libraries/joomla/form/form.php
