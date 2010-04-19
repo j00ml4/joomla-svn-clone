@@ -108,11 +108,9 @@ final class JSite extends JApplication
 	public static function getLanguage($default = true)
 	{
 		$user = JFactory::getUser();
-		if($user->id) {
+		$tag = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
+		if(empty($tag) && $user->id) {
 			$tag = $user->getParam('language');
-		}
-		else {
-			$tag = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
 		}
 		if (is_null($tag) || $tag=='default') {
 			if($default) {

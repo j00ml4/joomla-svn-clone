@@ -59,13 +59,13 @@ abstract class modLanguagesHelper
 				$result[$i]['redirect']=$item->link;
 			}
 		}
-/*		if ($useDefault) {
+		if ($useDefault && count($result)) {
 			$option = array();
 			$option['text'] = JText::_('JOPTION_USE_DEFAULT');
-			$option['value'] = 'default';
-			$option['redirect']=$result[JSite::getLanguage()];
+			$option['value'] = '';
+			$option['redirect']=$result[JSite::getLanguage()]['redirect'];
 			array_unshift($result, $option);
-		}*/
+		}
 		return $result;
 	}
 }
