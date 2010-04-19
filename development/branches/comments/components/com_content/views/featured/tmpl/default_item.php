@@ -149,8 +149,8 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 <?php endif; ?>
 
 <?php
+	JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
 	if ($this->item->params->get('article-allow_comments')) :
-		JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
 		echo JHtml::_(
 			'comments.summary',
 			'com_content',
@@ -162,12 +162,19 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 	endif;
 
 	if ($this->item->params->get('article-allow_ratings')) :
-		JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
 		echo JHtml::_(
 			'comments.rating',
 			'com_content',
 			$this->item->id,
 			'index.php?option=com_content&view=article&id='.$this->item->id,
+			$route,
+			$this->item->title
+		);
+	endif;
+
+	if ($this->item->params->get('article-allow_sharing')) :
+		echo JHtml::_(
+			'comments.share',
 			$route,
 			$this->item->title
 		);
