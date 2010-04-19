@@ -7,7 +7,8 @@
  * @package Contact_Creator
  */
 
-defined('_JEXEC') or die('');
+// No direct access.
+defined('_JEXEC') or die;
 
 jimport('joomla.plugins.plugin');
 

@@ -7,7 +7,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die('Invalid Request.');
+defined('_JEXEC') or die;
 
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_social'));
@@ -17,16 +17,10 @@ if ($params->get('enable_comments') == 0) {
 	return false;
 }
 
-// get the user object
-$user = &JFactory::getUser();
-
-// get the uri object
-$uri = &JURI::getInstance();
-
-// get the document object
-$document = &JFactory::getDocument();
-
-// initialize context variables
+// Initialiase variables.
+$user		= JFactory::getUser();
+$uri		= JURI::getInstance();
+$document	= JFactory::getDocument();
 $context	= 'error';
 $contextId	= 0;
 
@@ -55,7 +49,7 @@ if (($context == 'error') and ($contextId == 0)) {
 }
 
 // import library dependencies
-require_once(dirname(__FILE__).DS.'helper.php');
+require_once(dirname(__FILE__).'/helper.php');
 
 // Get the thread.
 $thread = modSocialCommentHelper::getThread($params);
