@@ -82,20 +82,26 @@ abstract class JPluginHelper
 	 */
 	public static function importPlugin($type, $plugin = null, $autocreate = true, $dispatcher = null)
 	{
-		$results = null;
+		static $loaded = Array();
 
-		// Load the plugins from the database.
-		$plugins = self::_load();
-
-		// Get the specified plugin(s).
-		for ($i = 0, $t = count($plugins); $i < $t; $i++) {
-			if ($plugins[$i]->type == $type && ($plugins[$i]->name == $plugin ||  $plugin === null)) {
-				self::_import($plugins[$i], $autocreate, $dispatcher);
-				$results = true;
-			}
+		if(!isset($loaded[$type])) {
+			$results = null;
+	
+			// Load the plugins from the database.
+			$plugins = self::_load();
+	
+			// Get the specified plugin(s).
+			for ($i = 0, $t = count($plugins); $i < $t; $i++) {
+				if ($plugins[$i]->type == $type && ($plugins[$i]->name == $plugin ||  $plugin === null)) {
+					self::_import($plugins[$i], $autocreate, $dispatcher);
+					$results = true;
+				}
+ 			}
+		
+			$loaded[$type] = $results; 
 		}
 
-		return $results;
+		return $loaded[$type];
 	}
 
 	/**

@@ -73,7 +73,7 @@ class plgSystemSef extends JPlugin
 	 * @param array An array of matches (see preg_match_all)
 	 * @return string
 	 */
-	function route(&$matches)
+	protected function route(&$matches)
 	{
 		$original	= $matches[0];
 		$url		= $matches[1];
