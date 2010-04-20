@@ -60,7 +60,7 @@ abstract class modLanguagesHelper
 		}
 		if ($useDefault && count($result)) {
 			$option = array();
-			$option['text'] = JText::_('JOPTION_USE_DEFAULT');
+			$option['text'] = JText::_('JDEFAULT');
 			$option['value'] = 'default';
 			$config =& JFactory::getConfig();
 			$paramsLanguagues =  JComponentHelper::getParams('com_languages');
