@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: banner.php 13359 2009-10-28 04:23:55Z louis $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_banners
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -36,7 +36,7 @@ class BannersModelBanners extends JModelList
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
@@ -45,14 +45,14 @@ class BannersModelBanners extends JModelList
 		$id	.= ':'.$this->getState('filter.category_id');
 		$id	.= ':'.$this->getState('filter.keywords');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
 	 * Gets a list of banners
 	 * @return array An array of banner objects
 	 */
-	function _getListQuery()
+	function getListQuery()
 	{
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
