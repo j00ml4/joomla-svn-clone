@@ -27,6 +27,18 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Apr-2010 Andrew Eddie
+ ^ Rename JModel _populateState to populateState, _getStoreId to getStoreId, _getListQuery to getListQuery.
+ 
+20-Apr-2010 Christophe Demko
+^+ Enhancing pluralisation of strings
+
+20-Apr-2010 Sam Moffatt
+ ! EOL and Keywords bulk set
+
+19-Apr-2010 Jean-Marie Simonet
+#$ Refactoring mod_logged. TODO: correct forcelogout.
+
 19-Apr-2010 Mark Dexter
 # Fix diff_15_to_16.sql for database changes
 # Fix index in contact_details table

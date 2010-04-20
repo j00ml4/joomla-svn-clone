@@ -19,13 +19,6 @@ jimport('joomla.application.component.model');
 class JModelList extends JModel
 {
 	/**
-	 * An array of totals for the lists.
-	 *
-	 * @var		array
-	 */
-	protected $_totals = array();
-
-	/**
 	 * Internal memory based cache array of data.
 	 *
 	 * @var		array
@@ -34,11 +27,18 @@ class JModelList extends JModel
 
 	/**
 	 * Context string for the model type.  This is used to handle uniqueness
-	 * when dealing with the _getStoreId() method and caching data structures.
+	 * when dealing with the getStoreId() method and caching data structures.
 	 *
 	 * @var		string
 	 */
 	protected $_context = null;
+
+	/**
+	 * An array of totals for the lists.
+	 *
+	 * @var		array
+	 */
+	protected $_totals = array();
 
 	/**
 	 * Method to get an array of data items.
@@ -48,7 +48,7 @@ class JModelList extends JModel
 	public function getItems()
 	{
 		// Get a storage key.
-		$store = $this->_getStoreId();
+		$store = $this->getStoreId();
 
 		// Try to load the data from internal storage.
 		if (!empty($this->_cache[$store])) {
@@ -56,7 +56,7 @@ class JModelList extends JModel
 		}
 
 		// Load the list items.
-		$query	= $this->_getListQuery();
+		$query	= $this->getListQuery();
 		$items	= $this->_getList($query, $this->getState('list.start'), $this->getState('list.limit'));
 
 		// Check for a database error.
@@ -72,6 +72,20 @@ class JModelList extends JModel
 	}
 
 	/**
+	 * Method to get a JDatabaseQuery object for retrieving the data set from a database.
+	 *
+	 * @return	object	A JDatabaseQuery object to retrieve the data set.
+	 */
+	protected function getListQuery()
+	{
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+
+		return $query;
+	}
+
+
+	/**
 	 * Method to get a JPagination object for the data set.
 	 *
 	 * @return	object	A JPagination object for the data set.
@@ -79,7 +93,7 @@ class JModelList extends JModel
 	public function getPagination()
 	{
 		// Get a storage key.
-		$store = $this->_getStoreId('getPagination');
+		$store = $this->getStoreId('getPagination');
 
 		// Try to load the data from internal storage.
 		if (!empty($this->_cache[$store])) {
@@ -98,6 +112,27 @@ class JModelList extends JModel
 	}
 
 	/**
+	 * Method to get a store id based on the model configuration state.
+	 *
+	 * This is necessary because the model is used by the component and
+	 * different modules that might need different sets of data or different
+	 * ordering requirements.
+	 *
+	 * @param	string	An identifier string to generate the store id.
+	 * @return	string	A store id.
+	 */
+	protected function getStoreId($id = '')
+	{
+		// Add the list state to the store id.
+		$id	.= ':'.$this->getState('list.start');
+		$id	.= ':'.$this->getState('list.limit');
+		$id	.= ':'.$this->getState('list.ordering');
+		$id	.= ':'.$this->getState('list.direction');
+
+		return md5($this->_context.':'.$id);
+	}
+
+	/**
 	 * Method to get the total number of items for the data set.
 	 *
 	 * @return	integer	The total number of items available in the data set.
@@ -105,7 +140,7 @@ class JModelList extends JModel
 	public function getTotal()
 	{
 		// Get a storage key.
-		$store = $this->_getStoreId('getTotal');
+		$store = $this->getStoreId('getTotal');
 
 		// Try to load the data from internal storage.
 		if (!empty($this->_cache[$store])) {
@@ -113,7 +148,7 @@ class JModelList extends JModel
 		}
 
 		// Load the total.
-		$query = $this->_getListQuery();
+		$query = $this->getListQuery();
 		$total = (int) $this->_getListCount((string) $query);
 
 		// Check for a database error.
@@ -129,40 +164,6 @@ class JModelList extends JModel
 	}
 
 	/**
-	 * Method to get a JDatabaseQuery object for retrieving the data set from a database.
-	 *
-	 * @return	object	A JDatabaseQuery object to retrieve the data set.
-	 */
-	protected function _getListQuery()
-	{
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-
-		return $query;
-	}
-
-	/**
-	 * Method to get a store id based on the model configuration state.
-	 *
-	 * This is necessary because the model is used by the component and
-	 * different modules that might need different sets of data or different
-	 * ordering requirements.
-	 *
-	 * @param	string	An identifier string to generate the store id.
-	 * @return	string	A store id.
-	 */
-	protected function _getStoreId($id = '')
-	{
-		// Add the list state to the store id.
-		$id	.= ':'.$this->getState('list.start');
-		$id	.= ':'.$this->getState('list.limit');
-		$id	.= ':'.$this->getState('list.ordering');
-		$id	.= ':'.$this->getState('list.direction');
-
-		return md5($this->_context.':'.$id);
-	}
-
-	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * This method should only be called once per instantiation and is designed
@@ -172,7 +173,7 @@ class JModelList extends JModel
 	 * @param	string	An optional ordering field.
 	 * @param	string	An optional direction (asc|desc).
 	 */
-	protected function _populateState($ordering = null, $direction)
+	protected function populateState($ordering = null, $direction)
 	{
 		// If the context is set, assume that stateful lists are used.
 		if ($this->_context) {
