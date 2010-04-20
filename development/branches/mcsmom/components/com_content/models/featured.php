@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: featured.php 15932 2010-04-08 01:53:33Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -33,9 +33,9 @@ class ContentModelFeatured extends ContentModelArticles
 	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
-		parent::_populateState();
+		parent::populateState();
 
 		// Add blog properties
 		$params = $this->_state->params;
@@ -85,18 +85,18 @@ class ContentModelFeatured extends ContentModelArticles
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id .= $this->getState('filter.frontpage');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
 	 * @return	JDatabaseQuery
 	 */
-	function _getListQuery()
+	function getListQuery()
 	{
 		// Set the blog ordering
 		$params = $this->_state->params;
@@ -110,7 +110,7 @@ class ContentModelFeatured extends ContentModelArticles
 		$this->setState('list.ordering', $orderby);
 		$this->setState('list.direction', '');
 		// Create a new query object.
-		$query = parent::_getListQuery();
+		$query = parent::getListQuery();
 
 		// Filter by frontpage.
 		if ($this->getState('filter.frontpage'))
