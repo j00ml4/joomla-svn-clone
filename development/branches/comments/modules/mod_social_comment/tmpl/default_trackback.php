@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 	<div class="metadata">
 		<p class="author">
 			<a href="<?php echo $item->url;?>" target="_blank" rel="nofollow"><?php echo $item->subject; ?></a>
-			<?php echo JText::sprintf('Comments_Makes_This_Comment', JRoute::_('#comment-'.$item->id)); ?>
+			<?php echo JText::sprintf('MOD_SOCIAL_COMMENTS_MAKES_THIS_COMMENT', JRoute::_('#comment-'.$item->id)); ?>
 		</p>
 		<p class="date">
 			<?php echo JHtml::_('date', $item->created_time, $params->get('date_format')); ?>

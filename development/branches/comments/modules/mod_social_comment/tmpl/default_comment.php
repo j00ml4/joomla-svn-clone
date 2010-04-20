@@ -24,7 +24,7 @@ $_name = $params->get('show_name_as', 0) ? 'user_login_name' : 'user_name';
 <?php else : ?>
 			<?php echo (!empty($item->$_name)) ? $item->$_name : $item->name; ?>
 <?php endif;?>
-		<?php echo JText::sprintf('Comments_Makes_This_Comment', JRoute::_('#comment-'.$item->id)); ?>
+		<?php echo JText::sprintf('MOD_SOCIAL_COMMENTS_MAKES_THIS_COMMENT', JRoute::_('#comment-'.$item->id)); ?>
 		</p>
 		<p class="date">
 			<?php echo JHtml::_('date', $item->created_time, $params->get('date_format')); ?>

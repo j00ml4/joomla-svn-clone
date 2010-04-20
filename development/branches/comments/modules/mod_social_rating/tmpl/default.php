@@ -46,6 +46,6 @@ $degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id
 	</form>
 
 	<div id="rating-count-<?php echo $thread->id; ?>" class="rating-count">
-		<small><?php echo JText::__('COM_SOCIAL_RATING_N_VOTES', $rating->pscore_count);?></small>
+		<small><?php echo JText::__('MOD_SOCIAL_RATING_RATING_N_VOTES', $rating->pscore_count);?></small>
 	</div>
 </div>

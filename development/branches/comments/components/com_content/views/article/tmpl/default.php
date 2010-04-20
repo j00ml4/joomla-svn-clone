@@ -12,8 +12,10 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
-// Create shortcut to parameters.
+// Create shorcuts.
 $params = $this->item->params;
+$route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid);
+
 ?>
 <div class="item-page<?php echo $params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
@@ -134,6 +136,39 @@ $params = $this->item->params;
 	<?php endif; ?>
 
 	<?php echo $this->item->text; ?>
+
+<?php
+	JHtml::addIncludePath(JPATH_SITE.'/components/com_social/helpers/html');
+	if ($this->item->params->get('article-allow_comments')) :
+		echo JHtml::_(
+			'comments.comments',
+			'com_content',
+			$this->item->id,
+			'index.php?option=com_content&view=article&id='.$this->item->id,
+			$route,
+			$this->item->title
+		);
+	endif;
+
+	if ($this->item->params->get('article-allow_ratings')) :
+		echo JHtml::_(
+			'comments.rating',
+			'com_content',
+			$this->item->id,
+			'index.php?option=com_content&view=article&id='.$this->item->id,
+			$route,
+			$this->item->title
+		);
+	endif;
+
+	if ($this->item->params->get('article-allow_sharing')) :
+		echo JHtml::_(
+			'comments.share',
+			$route,
+			$this->item->title
+		);
+	endif;
+?>
 
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
