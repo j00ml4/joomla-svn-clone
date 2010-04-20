@@ -84,7 +84,13 @@ abstract class JPluginHelper
 	{
 		static $loaded = Array();
 
-		if(!isset($loaded[$type])) {
+		// check for the default args, if so we can optimise cheaply
+		$defaults = false;
+		if(is_null($plugin) && $autocreate == true && is_null($dispatcher)) {
+			$defaults = true;
+		}
+		
+		if(!isset($loaded[$type]) || !$defaults) {
 			$results = null;
 	
 			// Load the plugins from the database.
@@ -98,6 +104,10 @@ abstract class JPluginHelper
 				}
  			}
 		
+			// bail out early if we're not using default args
+			if(!$defaults) {
+				return $results;	
+			}
 			$loaded[$type] = $results; 
 		}
 
