@@ -20,27 +20,6 @@ jimport('joomla.application.component.modeladmin');
 class CategoriesModelCategory extends JModelAdmin
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context		= 'com_categories.item';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'category';
-		$this->_option = 'com_categories';
-	}
-
-	/**
 	 * Returns a Table object, always creating it
 	 *
 	 * @param	type	The table type to instantiate
@@ -414,11 +393,5 @@ class CategoriesModelCategory extends JModelAdmin
 	 */
 	protected function _batchCopy($value, $pks)
 	{
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		return $condition;
 	}
 }

@@ -24,44 +24,6 @@ class PluginsModelPlugin extends JModelAdmin
 	 */
 	private $_cache = array();
 
-	protected $_context = 'com_plugins';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'plugin';
-		$this->_option = 'com_plugins';
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @since	1.6
-	 */
-	protected function populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_plugins.edit.plugin.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('plugin.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_plugins');
-		$this->setState('params', $params);
-	}
-
 	/**
 	 * Method to get the record form.
 	 *
@@ -157,6 +119,22 @@ class PluginsModelPlugin extends JModelAdmin
 	}
 
 	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($record = null)
+	{
+		$condition = array(
+			'type = '. $this->_db->Quote($record->type),
+			'folder = '. $this->_db->Quote($record->folder)
+		);
+		return $condition;
+	}
+	
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -220,61 +198,5 @@ class PluginsModelPlugin extends JModelAdmin
 
 		// Trigger the default form events.
 		parent::preprocessForm($form);
-	}
-
-	/**
-	 * Method to save the form data.
-	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
-	 */
-	public function save($data)
-	{
-		// Initialise variables.
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('plugin.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		$this->setState('plugin.id', $table->extension_id);
-
-		return true;
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'type = '. $this->_db->Quote($table->type);
-		$condition[] = 'folder = '. $this->_db->Quote($table->folder);
-		return $condition;
 	}
 }

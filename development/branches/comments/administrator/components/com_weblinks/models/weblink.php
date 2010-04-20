@@ -19,91 +19,40 @@ jimport('joomla.application.component.modeladmin');
  */
 class WeblinksModelWeblink extends JModelAdmin
 {
-	protected $_context = 'com_weblinks';
-
-	function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'weblink';
-		$this->_option = 'com_weblinks';
-	}
-
 	/**
-	 * Method to auto-populate the model state.
+	 * Method to test whether a record can be deleted.
 	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
-	protected function populateState()
+	protected function canDelete($record)
 	{
-		$app = JFactory::getApplication('administrator');
+		$user = JFactory::getUser();
 
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_weblinks.edit.weblink.id'))) {
-			$pk = (int) JRequest::getInt('id');
+		if ($record->catid) {
+			return $user->authorise('core.delete', 'com_weblinks.category.'.(int) $record->catid);
+		} else {
+			return $user->authorise('core.delete', 'com_weblinks');
 		}
-		$this->setState('weblink.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_weblinks');
-		$this->setState('params', $params);
 	}
 
 	/**
-	 * Returns a reference to the a Table object, always creating it.
+	 * Method to test whether a record can be deleted.
 	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	*/
-	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
 	 */
-	public function &getItem($pk = null)
+	protected function canEditState($record)
 	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int)$this->getState('weblink.id');
-		$false	= false;
+		$user = JFactory::getUser();
 
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Attempt to load the row.
-		$return = $table->load($pk);
-
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
+		if ($record->catid) {
+			return $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $record->catid);
+		} else {
+			return $user->authorise('core.edit.state', 'com_weblinks');
 		}
-
-		// Prime required properties.
-		if (empty($table->id))
-		{
-			// Prepare data for a new record.
-		}
-
-		// Convert to the JObject before adding other data.
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($table->params);
-		$value->params = $registry->toArray();
-
-		return $value;
 	}
 
 	/**
@@ -146,69 +95,33 @@ class WeblinksModelWeblink extends JModelAdmin
 	}
 
 	/**
-	 * Method to save the form data.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
 	 * @since	1.6
 	 */
-	public function save($data)
+	protected function getReorderConditions($record = null)
 	{
-		// Initialise variables;
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('weblink.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_weblinks');
-		$cache->clean();
-
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
-
-		$this->setState('weblink.id', $table->id);
-
-		return true;
+		$condition = array(
+			'catid = '. (int) $record->catid
+		);
+		return $condition;
 	}
-
+	
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	*/
+	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+	
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */
@@ -243,12 +156,5 @@ class WeblinksModelWeblink extends JModelAdmin
 			//$table->modified	= $date->toMySQL();
 			//$table->modified_by	= $user->get('id');
 		}
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		$condition[] = 'catid = '.(int) $table->catid;
-		return $condition;
 	}
 }
