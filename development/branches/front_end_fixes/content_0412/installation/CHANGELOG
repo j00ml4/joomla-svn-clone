@@ -27,6 +27,61 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Apr-2010 Andrew Eddie
+ ^ Rename JModel _populateState to populateState, _getStoreId to getStoreId, _getListQuery to getListQuery.
+ 
+20-Apr-2010 Christophe Demko
+^+ Enhancing pluralisation of strings
+
+20-Apr-2010 Sam Moffatt
+ ! EOL and Keywords bulk set
+
+19-Apr-2010 Jean-Marie Simonet
+#$ Refactoring mod_logged. TODO: correct forcelogout.
+
+19-Apr-2010 Mark Dexter
+# Fix diff_15_to_16.sql for database changes
+# Fix index in contact_details table
+
+19-Apr-2010 Christophe Demko
+# Reenabling filters in plugins and manage view
+^ Speeding up manage and discover view in com_installer
+^ Speeding up modules and plugins view
+
+19-Apr-2010 Jean-Marie Simonet
+^ Changing JText::__ to JText::plural
+$ Toolbar change to Publish/Unpublish in com_modules
+^ Fixed readonly list [20179]. (Thanks Artyom)
+$ Refactoring ini/keys in libraries/J/html. Consolidated some strings.
+
+18-Apr-2010 Ron Severdia
+# Clean up CSS for BlueStork
+# Clean up UI for Permissions Editor in Global Config.
+
+18-Apr-2010 Mark Dexter
+# Fix parse error in libraries/joomla/form/form.php
+# Display of record number in edit forms (Elin Waring)
+# UI work on module manager and menu manager forms (Elin Waring)
+# Restore missing image parameter in contact (Elin Waring)
+# Fix up labels in com_contact (Elin Waring)
+# Add images for sample site (Elin Waring)
+# Fix bug in user profile (Elin Waring)
+# Fix recursion problem with loadposition (Klas Berlic)
+# Fix bug in counting modules (Elin Waring)
++ Add fields to contact_details, newsfeeds, and weblinks tables in db (Elin Waring)
+
+18-Apr-2010 Jean-Marie Simonet
+$ Added JText__ for item deletion. Correcting, adding some keys/inis
+$ Refactoring ini/keys in libraries/J/form
+$ Refactoring ini/keys in libraries/J/html + some, WIP
+
+17-Apr-2010 Mark Dexter
+# Change condition in JRegistry merge method to be consistent with get method 
+
+17-Apr-2010 Jean-Marie Simonet
+# Fixed [20169]. (Thanks Andrea]
+^ Added Title for accessibility [20171]. (Thanks Andrea]
+
 16-Apr-2010 Mark Dexter
 # Fix JParameter merge bug with integer zero param value (plus unit test for same)
 
