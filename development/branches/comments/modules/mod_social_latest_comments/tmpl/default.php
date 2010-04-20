@@ -24,7 +24,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 <ol class="comments-list latest">
 <?php
 	foreach($list as $item) :
-		$itemTitle = JText::sprintf('Comments_Re', !empty($item->subject) ? $item->subject : $item->page_title);
+		$itemTitle = JText::sprintf('MOD_SOCIAL_LCOMMENTS_Re', !empty($item->subject) ? $item->subject : $item->page_title);
 		$itemTitle = htmlspecialchars($itemTitle, ENT_QUOTES, 'UTF-8');
 	?>
 	<li>
@@ -33,7 +33,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 				<?php echo $itemTitle; ?></a>
 		</h4>
 		<small>
-			<?php echo JText::sprintf('Comments_Comment_Posted_On', JHtml::date($item->created_time, $params->get('date_format')), htmlspecialchars((!empty($item->$_name)) ? $item->$_name : $item->name, ENT_QUOTES, 'UTF-8')); ?>
+			<?php echo JText::sprintf('MOD_SOCIAL_LCOMMENTS_Comment_Posted_On', JHtml::date($item->created_time, $params->get('date_format')), htmlspecialchars((!empty($item->$_name)) ? $item->$_name : $item->name, ENT_QUOTES, 'UTF-8')); ?>
 		</small>
 <?php if ($params->get('show_comment_excerpt', 1)) : ?>
 		<p class="excerpt">
@@ -44,5 +44,5 @@ JHtml::stylesheet('social/comments.css', array(), true);
 <?php endforeach; ?>
 </ol>
 <?php if ($params->get('enable_comment_feeds', 1) && $params->get('show_feed_link', 1)) : ?>
-<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_social&view=comments&format=feed'); ?>"><?php echo JText::_('Comments_Feed'); ?></a>
+<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_social&view=comments&format=feed'); ?>"><?php echo JText::_('MOD_SOCIAL_LCOMMENTS_Feed'); ?></a>
 <?php endif; ?>

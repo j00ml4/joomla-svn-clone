@@ -26,15 +26,7 @@ JHtml::stylesheet('social/comments.css', array(), true);
 				<?php echo htmlspecialchars($item->page_title, ENT_QUOTES, 'UTF-8'); ?></a>
 		</h4>
 <?php if ($params->get('show_comment_number', 1)) : ?>
-		<small>
-<?php
-	if ($item->comment_count == 1) {
-		echo JText::sprintf('Comment_Num', (int)$item->comment_count);
-	} else {
-		echo JText::sprintf('Comments_Num', (int)$item->comment_count);
-	}
-?>
-		</small>
+		<small><?php echo JText::__('MOD_SOCIAL_MCOMMENTS_Num', $item->comment_count); ?></small>
 <?php endif; ?>
 	</li>
 <?php endforeach; ?>
