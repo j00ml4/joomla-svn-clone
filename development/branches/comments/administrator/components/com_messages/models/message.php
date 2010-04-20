@@ -19,22 +19,6 @@ jimport('joomla.application.component.modeladmin');
  */
 class MessagesModelMessage extends JModelAdmin
 {
-	protected $_context = 'com_messages';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'message';
-		$this->_option = 'com_messages';
-	}
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -44,18 +28,12 @@ class MessagesModelMessage extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$user = JFactory::getUser();
-		$this->setState('user.id', $user->get('id'));
-
+		parent::populateState();
 		$messageId = (int) JRequest::getInt('message_id');
 		$this->setState('message.id', $messageId);
 
 		$replyId = (int) JRequest::getInt('reply_id');
 		$this->setState('reply.id', $replyId);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_messages');
-		$this->setState('params', $params);
 	}
 
 	/**
@@ -228,11 +206,5 @@ class MessagesModelMessage extends JModelAdmin
 		}
 
 		return true;
-	}
-
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		return $condition;
 	}
 }

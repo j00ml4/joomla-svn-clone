@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Template style model.
@@ -17,67 +17,18 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_templates
  * @since		1.6
  */
-class TemplatesModelStyle extends JModelForm
+class TemplatesModelStyle extends JModelAdmin
 {
 	/**
 	 * Item cache.
 	 */
 	private $_cache = array();
-
+	
 	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
+	 * @var		string	The prefix to use with controller messages.
 	 * @since	1.6
 	 */
-	protected function populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_templates.edit.style.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('style.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_templates');
-		$this->setState('params', $params);
-	}
-
-	/**
-	 * Method to delete rows.
-	 *
-	 * @param	array	An array of item ids.
-	 *
-	 * @return	boolean	Returns true on success, false on failure.
-	 */
-	public function delete(&$pks)
-	{
-		// Initialise variables.
-		$pks	= (array) $pks;
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-
-		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				// Access checks.
-				if (!$user->authorise('core.delete', 'com_templates')) {
-					throw new Exception(JText::_('JERROR_CORE_DELETE_NOT_PERMITTED'));
-				}
-
-				if (!$table->delete($pk)) {
-					throw new Exception($table->getError());
-				}
-			} else {
-				throw new Exception($table->getError());
-			}
-		}
-
-		return true;
-	}
+	protected $text_prefix = 'COM_TEMPLATES_STYLES';
 
 	/**
 	 * Method to duplicate styles.
@@ -174,45 +125,6 @@ class TemplatesModelStyle extends JModelForm
 	}
 
 	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('style.id');
-
-		if (!isset($this->_cache[$pk])) {
-			$false	= false;
-
-			// Get a row instance.
-			$table = &$this->getTable();
-
-			// Attempt to load the row.
-			$return = $table->load($pk);
-
-			// Check for a table object error.
-			if ($return === false && $table->getError()) {
-				$this->setError($table->getError());
-				return $false;
-			}
-
-			// Convert to the JObject before adding other data.
-			$this->_cache[$pk] = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-			// Convert the params field to an array.
-			$registry = new JRegistry;
-			$registry->loadJSON($table->params);
-			$this->_cache[$pk]->params = $registry->toArray();
-		}
-
-		return $this->_cache[$pk];
-	}
-
-	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -223,13 +135,6 @@ class TemplatesModelStyle extends JModelForm
 	public function getTable($type = 'Style', $prefix = 'TemplatesTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Prepare and sanitise the table prior to saving.
-	 */
-	protected function prepareTable(&$table)
-	{
 	}
 
 	/**
@@ -265,59 +170,6 @@ class TemplatesModelStyle extends JModelForm
 
 		// Trigger the default form events.
 		parent::preprocessForm($form);
-	}
-
-	/**
-	 * Method to save the form data.
-	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
-	 */
-	public function save($data)
-	{
-		// Initialise variables;
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('style.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_templates');
-		$cache->clean();
-
-		$this->setState('style.id', $table->id);
-
-		return true;
 	}
 
 	/**
