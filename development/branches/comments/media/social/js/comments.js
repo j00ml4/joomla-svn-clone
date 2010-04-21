@@ -12,9 +12,9 @@ var JXComments=new Class({initialize:function()
 else{if($chk($('respond-form'))){this.decorateform();}}},getform:function(data)
 {if($chk(this.formSlide))
 {this.formSlide.toggle();return;}
-var request=new Ajax(data.base+'index.php?option=com_comments&task=comment.getForm&protocol=ajax&thread_id='+data.thread_id,{method:'get',update:$('respond-container'),onComplete:function(r)
+var request=new Ajax(data.base+'index.php?option=com_comments&task=comment.getForm&format=ajax&thread_id='+data.thread_id,{method:'get',update:$('respond-container'),onComplete:function(r)
 {if($chk($('respond-form'))){this.decorateform();}}.bind(this)}).request();},decorateform:function()
-{this.formContainer=$('respond-container');this.formSlide=new Fx.Slide(this.formContainer);this.form=$('respond-form');var query='protocol=json&tmpl=component&format=raw';var action=this.form.getProperty('action');this.form.setProperty('action',action.contains('?')?action+'&'+query:action+'?'+query);refresher=$E('a.captcha-image-refresh',this.form);if($chk(refresher))
+{this.formContainer=$('respond-container');this.formSlide=new Fx.Slide(this.formContainer);this.form=$('respond-form');var query='format=json&tmpl=component&format=raw';var action=this.form.getProperty('action');this.form.setProperty('action',action.contains('?')?action+'&'+query:action+'?'+query);refresher=$E('a.captcha-image-refresh',this.form);if($chk(refresher))
 {refresher.addEvent('click',function(e)
 {new Event(e).stop();JX.Comments.refreshcaptcha();});}
 if((window.Recaptcha!=undefined)){Recaptcha.create(JX.Options.Comments.reCaptchaPubKey,'recaptchaContainer',{theme:'clean'});}
