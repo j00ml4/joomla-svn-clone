@@ -56,7 +56,7 @@ class JFormFieldGroupedList extends JFormField
 					// Create a new option object based on the <option /> element.
 					$tmp = JHtml::_('select.option',
 						($element['value']) ? (string) $element['value'] : trim((string) $element),
-						trim((string) $element), 'value', 'text',
+						JText::_(trim((string) $element)), 'value', 'text',
 						((string) $element['disabled']=='true'));
 
 					// Set some option attributes.
@@ -113,7 +113,7 @@ class JFormFieldGroupedList extends JFormField
 
 				// Unknown element type.
 				default:
-					JError::raiseError(500, JText::sprintf('JFramework_Form_Fields_GroupedList_Error_Element_Name', $element->getName()));
+					JError::raiseError(500, JText::sprintf('JLIB_FORM_ERROR_FIELDS_GROUPEDLIST_ELEMENT_NAME', $element->getName()));
 					break;
 			}
 		}

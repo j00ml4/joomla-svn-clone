@@ -24,10 +24,10 @@ abstract class JHtmlJGrid
 	{
 		// Array of image, task, title, action
 		$states	= array(
-			1	=> array('tick.png',		$taskPrefix.'unpublish',	'JPUBLISHED',		'JState_UnPublish_Item'),
-			0	=> array('publish_x.png',	$taskPrefix.'publish',		'JUNPUBLISHED',	'JState_Publish_Item'),
-			-1	=> array('disabled.png',	$taskPrefix.'unpublish',	'JARCHIVED',		'JState_UnPublish_Item'),
-			-2	=> array('trash.png',		$taskPrefix.'publish',		'JTRASHED',		'JState_Publish_Item'),
+			1	=> array('tick.png',		$taskPrefix.'unpublish',	'JPUBLISHED',		'JLIB_HTML_UNPUBLISH_ITEM'),
+			0	=> array('publish_x.png',	$taskPrefix.'publish',		'JUNPUBLISHED',	'JLIB_HTML_PUBLISH_ITEM'),
+			2	=> array('disabled.png',	$taskPrefix.'unpublish',	'JARCHIVED',		'JLIB_HTML_UNPUBLISH_ITEM'),
+			-2	=> array('trash.png',		$taskPrefix.'publish',		'JTRASHED',		'JLIB_HTML_PUBLISH_ITEM'),
 		);
 		$state	= JArrayHelper::getValue($states, (int) $value, $states[0]);
 		$html	= JHTML::_('image','admin/'.$state[0], JText::_($state[2]), NULL, true);
@@ -51,6 +51,7 @@ abstract class JHtmlJGrid
 		$options	= array();
 		$options[]	= JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[]	= JHtml::_('select.option', '0', 'JUNPUBLISHED');
+		$options[]	= JHtml::_('select.option', '2', 'JARCHIVED');
 		$options[]	= JHtml::_('select.option', '-2', 'JTRASH');
 		$options[]	= JHtml::_('select.option', '*', 'JALL');
 
@@ -71,8 +72,8 @@ abstract class JHtmlJGrid
 		$date	= JHTML::_('date',$time, '%A, %d %B %Y');
 		$time	= JHTML::_('date',$time, '%H:%M');
 
-		$hover = '<span class="editlinktip hasTip" title="'. JText::_('CHECKED_OUT') .'::'. $text .'<br />'. $date .'<br />'. $time .'">';
-		$checked = $hover .JHTML::_('image','admin/checked_out.png', JText::_('CHECKED_OUT'), NULL, true).'</span>';
+		$hover = '<span class="editlinktip hasTip" title="'. JText::_('JLIB_HTML_CHECKED_OUT') .'::'. $text .'<br />'. $date .'<br />'. $time .'">';
+		$checked = $hover .JHTML::_('image','admin/checked_out.png', JText::_('JLIB_HTML_CHECKED_OUTs'), NULL, true).'</span>';
 
 		return $checked;
 	}
@@ -88,7 +89,7 @@ abstract class JHtmlJGrid
 	 * @return	string	The HTML for the IMG tag.
 	 * @since	1.6
 	 */
-	public static function orderUp($i, $task, $enabled = true, $alt = 'JGrid_Move_Up')
+	public static function orderUp($i, $task, $enabled = true, $alt = 'JLIB_HTML_MOVE_UP')
 	{
 		$alt = JText::_($alt);
 
@@ -116,7 +117,7 @@ abstract class JHtmlJGrid
 	 * @return	string	The HTML for the IMG tag.
 	 * @since	1.6
 	 */
-	public static function orderDown($i, $task, $enabled = true, $alt = 'JGrid_Move_Up')
+	public static function orderDown($i, $task, $enabled = true, $alt = 'JLIB_HTML_MOVE_DOWN')
 	{
 		$alt = JText::_($alt);
 

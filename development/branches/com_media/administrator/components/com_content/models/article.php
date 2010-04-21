@@ -37,7 +37,7 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to auto-populate the model state.
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -218,9 +218,9 @@ class ContentModelArticle extends JModelAdmin
 			$this->setError($table->getError());
 			return false;
 		}
-
+		if ($isNew){
 		$this->featured($table->id, $data['featured']);
-
+		}
 		// Clean the cache.
 		$cache = JFactory::getCache('com_content');
 		$cache->clean();

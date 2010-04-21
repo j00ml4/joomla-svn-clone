@@ -28,7 +28,7 @@ class User0002Test extends SeleniumJoomlaTestCase
     try {
         $this->assertTrue($this->isTextPresent("Item successfully saved."));
     } catch (PHPUnit_Framework_AssertionFailedError $e) {
-        array_push($this->verificationErrors, $e->getTraceAsString());
+        array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
     $this->type("filter_search", "TestUser");
     $this->click("//button[@type='submit']");
@@ -36,7 +36,7 @@ class User0002Test extends SeleniumJoomlaTestCase
     try {
         $this->assertTrue($this->isTextPresent("TestUser"));
     } catch (PHPUnit_Framework_AssertionFailedError $e) {
-        array_push($this->verificationErrors, $e->getTraceAsString());
+        array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
     $this->click("link=Log out");
     $this->waitForPageToLoad("30000");
@@ -52,7 +52,7 @@ class User0002Test extends SeleniumJoomlaTestCase
     try {
         $this->assertTrue($this->isTextPresent($userName));
     } catch (PHPUnit_Framework_AssertionFailedError $e) {
-        array_push($this->verificationErrors, $e->getTraceAsString());
+        array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
     $this->click("link=Logout");
     $this->waitForPageToLoad("30000");
@@ -74,9 +74,9 @@ class User0002Test extends SeleniumJoomlaTestCase
     $this->click("//li[@id='toolbar-delete']/a/span");
     $this->waitForPageToLoad("30000");
     try {
-    	$this->assertTrue($this->isTextPresent("1 item(s) successfully deleted."));
+    	$this->assertTrue($this->isTextPresent("COM_USERS_N_USERS_DELETED"));
     } catch (PHPUnit_Framework_AssertionFailedError $e) {
-    	array_push($this->verificationErrors, $e->getTraceAsString());
+    	array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
     $this->click("link=Log out");
     $this->waitForPageToLoad("30000");

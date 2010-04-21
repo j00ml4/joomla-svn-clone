@@ -7,7 +7,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $cparams =& JComponentHelper::getParams('com_media');
 ?>
 
-<?php if ( $this->params->get( 'show_page_title', 1 ) ) : ?>
+<?php if ( $this->params->get( 'show_page_heading', 1 ) ) : ?>
 <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 <?php echo $this->escape($this->params->get('page_title')); ?>
 </div>
@@ -38,7 +38,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 		<tr>
 			<td align="right" colspan="6">
 			<?php if ($this->params->get('show_limit')) :
-				echo JText::_('DISPLAY_NUM') .'&nbsp;';
+				echo JText::_('JLIB_HTML_DISPLAY_NUM') .'&nbsp;';
 				echo $this->pagination->getLimitBox();
 			endif; ?>
 			</td>
