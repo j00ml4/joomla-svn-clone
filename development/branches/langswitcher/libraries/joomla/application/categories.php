@@ -172,11 +172,6 @@ class JCategories
 		{
 			$query->where('c.published = 1');
 		}
-		if(array_key_exists('language',$this->_options) && $this->_options['language'] != '')
-		{
-		
-			$query->where("(c.language=" . $db->Quote($this->_options['language']) . ($this->_options['show_untagged_content'] ? " OR c.language = ''" : '' ) . ")");
-		}
 		$query->order('c.lft');
 
 
@@ -202,6 +197,11 @@ class JCategories
 
 		// Group by
 		$query->group('c.id');
+
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('categories', &$query));
 
 		// Get the results
 		$db->setQuery($query);

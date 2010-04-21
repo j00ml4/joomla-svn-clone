@@ -16,26 +16,17 @@ class modArchiveHelper
 	{
 		//get database
 		$db		= JFactory::getDbo();
-		
-		// get language
-		$language = JSite::getLanguage();
 		$query	= $db->getQuery(true);
-		$query->select('MONTH(a.created) AS created_month, a.created, a.id, a.title, YEAR(a.created) AS created_year, a.language');
-		$query->from('#__content as a');
-		$query->where('a.state = -1 AND a.checked_out = 0');
+		$query->select('MONTH(created) AS created_month, created, id, title, YEAR(created) AS created_year');
+		$query->from('#__content');
+		$query->where('state = -1 AND checked_out = 0');
 		$query->group('created_year DESC, created_month DESC');
-
-		// Filter by language
-		$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
-
-		// Join over the categories.
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
-		// Filter by inherited language
-		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
-		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
-		$query->group('a.id');
-		$query->having('(a.language='.$db->Quote($language) . (JFactory::getApplication()->getCfg('show_untagged_content') ? ' OR inherited_language IS NULL':'') . ' OR substr(inherited_language,31)='.$db->Quote($language).')');
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('mod_articles_archive', &query));
 
 		$db->setQuery($query, 0, intval($params->get('count')));
 		$rows = $db->loadObjectList();
