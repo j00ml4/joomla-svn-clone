@@ -43,7 +43,7 @@ var JRatings = new Class({
 					var	context	= form.getProperty('id').replace('rate-', '');
 
 					// Convert the action to a JSON request.
-					var query	= 'protocol=json&tmpl=component&format=raw';
+					var query	= 'format=json&tmpl=component&format=raw';
 					var action	= form.getProperty('action');
 					form.setProperty('action', action.contains('?') ? action+'&'+query : action+'?'+query);
 
