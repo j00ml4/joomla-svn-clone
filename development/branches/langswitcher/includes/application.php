@@ -97,26 +97,6 @@ final class JSite extends JApplication
 		}
 		parent::initialise($options);
 	}
-	/**
-	 * Get the language from
-	 * - the user preference or
-	 * - the cookie session if the user is not logged in or
-	 * - the default language if the parameter $default is set to true
-	 *
-	 * @param	boolean	$default flag to indicate if the default language should be returned
-	 */
-	public static function getLanguage($default = true)
-	{
-		$user = JFactory::getUser();
-		$tag = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
-		if(empty($tag) && $user->id) {
-			$tag = $user->getParam('language');
-		}
-		if ((empty($tag) || $tag=='default') && $default) {
-			$tag = JFactory::getLanguage()->getTag();
-		}
-		return $tag;
-	}
 
 	/**
 	 * Route the application.

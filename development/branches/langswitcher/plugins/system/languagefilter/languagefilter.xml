@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install version="1.6" type="plugin" group="content">
-	<name>plg_content_languagefilter</name>
+<install version="1.6" type="plugin" group="system">
+	<name>plg_system_languagefilter</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -8,14 +8,14 @@
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.0</version>
-	<description>PLG_CONTENT_LANGUAGEFILTER_XML_DESCRIPTION</description>
+	<description>PLG_SYSTEM_LANGUAGEFILTER_XML_DESCRIPTION</description>
 
 	<files>
 		<filename plugin="languagefilter">languagefilter.php</filename>
 	</files>
 	<languages>
-		<language tag="en-GB">en-GB.plg_content_languagefilter.sys.ini</language>
-		<language tag="en-GB">en-GB.plg_content_languagefilter.ini</language>
+		<language tag="en-GB">en-GB.plg_system_languagefilter.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_system_languagefilter.ini</language>
 	</languages>
 
 	<config>
@@ -23,16 +23,16 @@
 			<fieldset name="basic">
 				<field name="use_inherited_language" type="radio"
 					default="0"
-					description="PLG_CONTENT_LANGUAGEFILTER_USE_INHERITED_LANGUAGE_DESC"
-					label="PLG_CONTENT_LANGUAGEFILTER_USE_INHERITED_LANGUAGE_LABEL"
+					description="PLG_SYSTEM_LANGUAGEFILTER_USE_INHERITED_LANGUAGE_DESC"
+					label="PLG_SYSTEM_LANGUAGEFILTER_USE_INHERITED_LANGUAGE_LABEL"
 				>
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 				<field name="show_untagged_content" type="radio"
 					default="1"
-					description="PLG_CONTENT_LANGUAGEFILTER_SHOW_UNTAGGED_CONTENT_DESC"
-					label="PLG_CONTENT_LANGUAGEFILTER_SHOW_UNTAGGED_CONTENT_LABEL"
+					description="PLG_SYSTEM_LANGUAGEFILTER_SHOW_UNTAGGED_CONTENT_DESC"
+					label="PLG_SYSTEM_LANGUAGEFILTER_SHOW_UNTAGGED_CONTENT_LABEL"
 				>
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>

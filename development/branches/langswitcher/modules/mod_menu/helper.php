@@ -33,7 +33,7 @@ class modMenuHelper
 		$end		= (int) $params->get('endLevel');
 		$showAll	= $params->get('showAllChildren');
 		$maxdepth	= $params->get('maxdepth');
-		$items 		= $menu->getItems(array('menutype','language'), array($params->get('menutype'),array('',JSite::getLanguage())));
+		$items 		= $menu->getItems('menutype',$params->get('menutype'));
 
 		$lastitem	= 0;
 		if ($items) {
