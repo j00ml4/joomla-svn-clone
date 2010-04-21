@@ -136,7 +136,7 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 			)
 		);
 		/*
-		Need to mock JRoute!!!
+		Need to mock JRoute!
 		$object->display();
 		if ($structure = $this->getStructure($object))
 		{

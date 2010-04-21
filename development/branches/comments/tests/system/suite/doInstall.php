@@ -53,7 +53,7 @@ class DoInstall extends SeleniumJoomlaTestCase
         } catch (Exception $e) {}
         sleep(1);
     }
-    
+
     echo "Finish installation\n";
     $this->click("link=Next");
     $this->waitForPageToLoad("30000");
@@ -64,7 +64,7 @@ class DoInstall extends SeleniumJoomlaTestCase
 	echo "Check for site menu\n";
 	$this->assertEquals("Site", $this->getText("link=Site"));
 	$this->doAdminLogout();
-	
+
   }
 }
 ?>
