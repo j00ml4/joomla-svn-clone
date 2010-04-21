@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_social
  * @since		1.6
  */
-class SocialControllerTrackback extends SocialController
+class SocialControllerTrackback extends JController
 {
 	/**
 	 * Method to add a trackback to a thread.

@@ -16,13 +16,12 @@ defined('_JEXEC') or die;
  * @subpackage	com_social
  * @since		1.6
  */
-class SocialControllerComment extends SocialController
+class SocialControllerComment extends JController
 {
 	/**
 	 * The display method should never be requested from the extended
 	 * controller.  Throw an error page and exit gracefully.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
 	public function display()
@@ -33,7 +32,6 @@ class SocialControllerComment extends SocialController
 	/**
 	 * Method to add a comment via JSON.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
 	public function add()
@@ -44,8 +42,8 @@ class SocialControllerComment extends SocialController
 		// Check for a valid token.
 		// We must do this by hand as the framework with throw a session expired message.
 		$token	= JUtility::getToken();
-		if (!!JRequest::getVar($token, '', 'request', 'alnum')) {
-			$this->setRedirect($redirect, JText::_('JX_Invalid_Token'), 'error');
+		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
+			$this->setRedirect($redirect, JText::_('JInvalid_Token'), 'error');
 			return false;
 		}
 
