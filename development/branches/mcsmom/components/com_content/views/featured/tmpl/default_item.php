@@ -119,21 +119,21 @@ $params = &$this->item->params;
 <?php echo $this->item->introtext; ?>
 
 <?php if ($params->get('show_readmore') && $this->item->readmore) :
-	if (!$params->get('access-view')) :
+	if ($this->item->access==1) :
 		$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
 	else :
 		$menu = JSite::getMenu();
 		$active = $menu->getActive();
 		$itemId = $active->id;
-		$link1 = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
+		$link = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
 		$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
-		$link = new JURI($link1);
+		$link = new JURI($link);
 		$link->setVar('return', base64_encode($returnURL));
 	endif;
 ?>
 		<p class="readmore">
 				<a href="<?php echo $link; ?>">
-						<?php if ($params->get('access-view')) :
+						<?php if ($this->item->access !='1' and $this->user->guest==1) :
 								echo JText::_('REGISTER_TO_READ_MORE');
 						elseif ($readmore = $params->get('alternative_readmore')) :
 								echo $readmore;
