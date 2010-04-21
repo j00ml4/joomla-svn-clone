@@ -12,13 +12,13 @@ defined('_JEXEC') or die;
 
 // import JPlugin class
 jimport('joomla.plugin.plugin');
-class plgSystemLanguageFilter extends JPlugin {
+class plgcontentLanguageFilter extends JPlugin {
 	public function onPrepareQuery($name, &$query) {
 		$app = JFactory::getApplication();
 		if ($app->isSite()) {
 			$db = JFactory::getDBO();
 			$language = JFactory::getLanguage()->getTag();
-			if (in_array($name, array('com_content.articles', 'com_content.archive', 'com_content.frontpage', 'com_banners.category', 'com_contact.category', 'com_newsfeeds.category', 'com_weblinks.category', 'mod_related_items', 'mod_articles_archive', 'plg_search_contacts'))) {
+			if (in_array($name, array('com_content.articles', 'com_content.archive', 'com_content.frontpage', 'com_banners.category', 'com_contact.category', 'com_newsfeeds.category', 'com_weblinks.category', 'mod_related_items', 'mod_articles_archive', 'plg_search_contacts', 'plg_search_content', 'plg_search_newsfeeds', 'plg_search_weblinks'))) {
 				if ($this->params->get('use_inherited_language', 0) || $this->params->get('show_untagged_content', 1)) {
 					$query->where('(a.language=' . $db->Quote($language) . ' OR a.language=' . $db->Quote('') . ')');
 				}
@@ -41,13 +41,13 @@ class plgSystemLanguageFilter extends JPlugin {
 				}
 			}
 			elseif ($name == 'categories') {
-				if ($this->params->get('show_untagged_content', 1)) {
+/*				if ($this->params->get('show_untagged_content', 1)) {
 					$query->where('(c.language=' . $db->Quote($language) . ' OR c.language = ' . $db->Quote('') . ' )');
 				}
 				else {
 					$query->where('c.language=' . $db->Quote($language));
 				}
-			}
+*/			}
 			elseif ($name == 'menus') {
 				if ($this->params->get('use_inherited_language', 0) || $this->params->get('show_untagged_content', 1)) {
 					$query->where('(m.language=' . $db->Quote($language) . ' OR m.language=' . $db->Quote('') . ')');
@@ -78,8 +78,6 @@ class plgSystemLanguageFilter extends JPlugin {
 					$query->where('m.language=' . $db->Quote($language));
 				}
 			}
-	//		echo(string)$query;
 		}
 	}
 }
-

@@ -93,7 +93,7 @@ class plgSearchNewsfeeds extends JPlugin
 				break;
 
 			case 'category':
-				$order = 'b.title ASC, a.name ASC';
+				$order = 'c.title ASC, a.name ASC';
 				break;
 
 			case 'oldest':
@@ -108,13 +108,18 @@ class plgSearchNewsfeeds extends JPlugin
 		$query	= $db->getQuery(true);
 		$query->select('a.name AS title, "" AS created, a.link AS text, '
 					.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-					.'CASE WHEN CHAR_LENGTH(b.alias) THEN CONCAT_WS(\':\', b.id, b.alias) ELSE b.id END as catslug, '
-					.'CONCAT_WS(" / ", '. $db->Quote($searchNewsfeeds) .', b.title) AS section,'
+					.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END as catslug, '
+					.'CONCAT_WS(" / ", '. $db->Quote($searchNewsfeeds) .', c.title) AS section,'
 					.'"1" AS browsernav');
 		$query->from('#__newsfeeds AS a');
-		$query->innerJoin('#__categories AS b ON b.id = a.catid');
-		$query->where('('. $where .')' . 'AND a.published = 1 AND b.published = 1 AND b.access IN ('. $groups .')');
+		$query->innerJoin('#__categories as c ON c.id = a.catid');
+		$query->where('('. $where .')' . 'AND a.published = 1 AND c.published = 1 AND c.access IN ('. $groups .')');
 		$query->order($order);
+
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('plg_search_newsfeeds', &$query));
 
 		$db->setQuery($query, 0, $limit);
 		$rows = $db->loadObjectList();
