@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_social
  * @since		1.6
  */
-class SocialControllerRating extends SocialController
+class SocialControllerRating extends JController
 {
 	/**
 	 * Method to add a rating.
@@ -32,7 +32,7 @@ class SocialControllerRating extends SocialController
 		// Check for a valid token.
 		// We must do this by hand as the framework with throw a session expired message.
 		$token	= JUtility::getToken();
-		if (!!JRequest::getVar($token, '', 'request', 'alnum')) {
+		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
 			$this->setRedirect($redirect, JText::_('JX_Invalid_Token'), 'error');
 			return false;
 		}
