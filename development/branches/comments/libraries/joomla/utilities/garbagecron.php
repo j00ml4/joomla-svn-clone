@@ -3,7 +3,7 @@
  * @license		GNU/GPL
  */
 
-// BEFORE USING RENAME THIS FILE TO SOMETHING UNIQUE !!!
+// BEFORE USING RENAME THIS FILE TO SOMETHING UNIQUE !
 
 /* Initialize Joomla framework */
 define( '_JEXEC', 1 );

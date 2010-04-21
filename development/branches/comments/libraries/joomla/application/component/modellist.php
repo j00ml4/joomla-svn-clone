@@ -208,7 +208,7 @@ class JModelList extends JModel
 			$this->setState('list.direction', $orderDirn);
 		} else {
 			$this->setState('list.start', 0);
-			$this->_state->set('list.limit', 0);
+			$this->state->set('list.limit', 0);
 		}
 	}
 }

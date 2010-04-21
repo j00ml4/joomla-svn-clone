@@ -295,8 +295,7 @@ abstract class JModel extends JObject
 	 */
 	public function getState($property = null, $default = null)
 	{
-		if (!$this->__state_set)
-		{
+		if (!$this->__state_set) {
 			// Private method to auto-populate the model state.
 			$this->populateState();
 
@@ -347,7 +346,7 @@ abstract class JModel extends JObject
 	/**
 	 * Method to set the database connector object
 	 *
-	 * @param	object	$db	A JDatabase based object
+	 * @param	object	A JDatabase based object
 	 * @return	void
 	 */
 	public function setDbo(&$db)

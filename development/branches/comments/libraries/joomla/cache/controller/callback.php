@@ -63,8 +63,8 @@ class JCacheControllerCallback extends JCacheController
 	 * @since	1.5
 	 */
 	public function get($callback, $args, $id=false, $wrkarounds=false)
-	{	
-		
+	{
+
 		// Normalize callback
 		if (is_array($callback)) {
 			// We have a standard php callback array -- do nothing
@@ -75,7 +75,7 @@ class JCacheControllerCallback extends JCacheController
 		} elseif (strstr($callback, '->')) {
 			/*
 			 * This is a really not so smart way of doing this... we provide this for backward compatability but this
-			 * WILL!!! disappear in a future version.  If you are using this syntax change your code to use the standard
+			 * WILL! disappear in a future version.  If you are using this syntax change your code to use the standard
 			 * PHP callback array syntax: <http://php.net/callback>
 			 *
 			 * We have to use some silly global notation to pull it off and this is very unreliable
@@ -91,28 +91,28 @@ class JCacheControllerCallback extends JCacheController
 			// Generate an ID
 			$id = $this->_makeId($callback, $args);
 		}
-		
+
 		$data = false;
 		$data = $this->cache->get($id);
-		
+
 		$locktest = new stdClass;
 		$locktest->locked = null;
 		$locktest->locklooped = null;
-		
-		if ($data === false) 
+
+		if ($data === false)
 		{
 			$locktest = $this->cache->lock($id,null);
 			if ($locktest->locked == true && $locktest->locklooped == true) $data = $this->cache->get($id);
-		
+
 		}
-		
+
 		if ($data !== false) {
-			
+
 			$cached = unserialize($data);
 			$output = $wrkarounds==false ? $cached['output'] : JCache::getWorkarounds($cached['output']);
 			$result = $cached['result'];
 			if ($locktest->locked == true) $this->cache->unlock($id);
-			
+
 		} else {
 			if(!is_array($args))
 			{
