@@ -53,7 +53,6 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('editor', 'tinymce');
 		$registry->set('list_limit', 20);
 		$registry->set('access', 1);
-		$registry->set('show_untagged_content', 1);
 
 		/* Debug Settings */
 		$registry->set('debug', 0);

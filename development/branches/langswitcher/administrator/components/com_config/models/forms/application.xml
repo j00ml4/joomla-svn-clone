@@ -699,17 +699,6 @@
 			<option
 				value="site">COM_CONFIG_FIELD_VALUE_SITE_EMAIL</option>
 		</field>
-		<field
-			name="show_untagged_content"
-			type="radio"
-			default="1"
-			label="COM_CONFIG_FIELD_SHOW_UNTAGGED_CONTENT_LABEL"
-			description="COM_CONFIG_FIELD_SHOW_UNTAGGED_CONTENT_DESC">
-			<option
-				value="0">JNo</option>
-			<option
-				value="1">JYes</option>
-		</field>
 	</fieldset>
 
 	<fieldset
