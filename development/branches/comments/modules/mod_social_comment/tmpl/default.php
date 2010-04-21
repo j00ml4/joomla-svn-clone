@@ -22,7 +22,7 @@ JHtml::script('social/posteditor.js', false, true);
 
 	<div id="comments">
 		<h3 id="comments-num">
-<?php echo JText::__('MOD_SOCIAL_COMMENT_N_COMMENTS', (int)$pagination->total); ?>
+<?php echo JText::plural('MOD_SOCIAL_COMMENT_N_COMMENTS', (int)$pagination->total); ?>
 		</h3>
 <?php if ($pagination->total && ($params->get('enable_comment_feeds', 1))) : ?>
 		<a class="comments-feed" href="<?php echo JRoute::_('index.php?option=com_social&view=comments&thread_id='.$thread->id.'&format=feed') ?>"><?php echo JText::_('MOD_SOCIAL_COMMENT_Feed'); ?></a>

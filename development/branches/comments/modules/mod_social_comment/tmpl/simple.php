@@ -19,4 +19,4 @@ $route = $route->toString(array('path', 'query', 'fragment'));
 ?>
 
 <h4 class="comments"><a href="<?php echo JRoute::_($route); ?>" title="<?php echo JText::_('Comments_View_Full_Page'); ?>">
-<?php echo JText::__('MOD_SOCIAL_COMMENT_N_COMMENTS', (int)$pagination->total);?></a></h4>
+<?php echo JText::plural('MOD_SOCIAL_COMMENT_N_COMMENTS', (int)$pagination->total);?></a></h4>

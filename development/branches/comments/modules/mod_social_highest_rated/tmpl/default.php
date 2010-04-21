@@ -36,14 +36,14 @@ if ($params->get('star_file')) {
 		<div class="item-rating">
 			<span class="current-rating" style="width:<?php echo (int) ($item->rating_pscore*100); ?>%;">
 <?php if (!$params->get('show_rating_text', 1)) : ?>
-				<?php echo JText::__('MOD_SOCIAL_HRATED_Rating_Text', $item->rating_pscore_count, round($item->rating_pscore*5, 1), 5, $item->rating_pscore_count); ?>
+				<?php echo JText::plural('MOD_SOCIAL_HRATED_Rating_Text', $item->rating_pscore_count, round($item->rating_pscore*5, 1), 5, $item->rating_pscore_count); ?>
 <?php endif; ?>
 			</span>
 		</div>
 <?php endif; ?>
 <?php if ($params->get('show_rating_text', 1)) : ?>
 		<span class="current-rating">
-			<?php echo JText::__('MOD_SOCIAL_HRATED_Rating_Text', $item->rating_pscore_count, round($item->rating_pscore*5, 1), 5, $item->rating_pscore_count); ?>
+			<?php echo JText::plural('MOD_SOCIAL_HRATED_Rating_Text', $item->rating_pscore_count, round($item->rating_pscore*5, 1), 5, $item->rating_pscore_count); ?>
 		</span>
 <?php endif; ?>
 	</li>
