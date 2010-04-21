@@ -84,10 +84,18 @@ class LoginController extends JController
 	{
 		$app = &JFactory::getApplication();
 
-		$result = $app->logout();
-
+		$userid = JRequest::getInt('uid', null);
+		
+		$options = array(
+			'clientid' => ($userid) ? 0 : 1 
+		);
+		
+		$result = $app->logout($userid, $options);
+		
 		if (!JError::isError($result)) {
-			$app->redirect('index.php?option=com_login');
+			$model 	= &$this->getModel('login');
+			$return = $model->getState('return');
+			$app->redirect($return);
 		}
 
 		parent::display();

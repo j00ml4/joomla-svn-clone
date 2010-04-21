@@ -63,15 +63,23 @@ class ContentModelCategory extends JModelItem
 	 *
 	 * @return	void
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app =& JFactory::getApplication('site');
 		// Load state from the request.
 		$pk = JRequest::getInt('id');
 		$this->setState('category.id', $pk);
 				
+		// Load the parameters. Merge Global and Menu Item params into new object
 		$params = $app->getParams();
-		$this->setState('params', $params);
+		$menuParams = new JRegistry;
+		if (JSite::getMenu()->getActive())
+		{
+			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
+		}
+		$mergedParams = clone $menuParams;
+		$mergedParams->merge($params);
+		$this->setState('params', $mergedParams);
 
 		// limit to published
 		$this->setState('filter.published', 1);

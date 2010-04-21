@@ -4,9 +4,9 @@
 	-->
 <form>
 	<fieldset>
-		<field name="id" type="hidden" class="inputbox"
-			label="Content_Id_Label" size="10" default="0" required="true"
-			readonly="true" />
+		<field name="id"  type="text" class="readonly"
+			label="CONTENT_ID_LABEL" size="10" default="0" 
+			readonly="true"  />
 
 		<field name="asset_id" type="hidden" filter="unset" />
 
@@ -92,7 +92,7 @@
 		<field name="access" type="accesslevel" label="JField_Access_Label"
 			description="JField_Access_Desc" class="inputbox" size="1" />
 
-		<field name="hits" type="text" label="Content_Hits_Label"
+		<field name="hits" type="text" label="JGLOBAL_HITS"
 			description="Content_Hits_Desc" class="readonly" size="6"
 			readonly="true" filter="unset" />
 

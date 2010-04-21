@@ -103,7 +103,7 @@ class JStream extends JObject
 		$filename = $this->_getFilename($filename, $mode, $use_prefix, $relative);
 		if(!$filename)
 		{
-			$this->setError(JText::_('No filename set'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILENAME'));
 			return false;
 		}
 
@@ -188,7 +188,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return true;
 		}
 		$retval = false;
@@ -236,7 +236,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 
@@ -274,7 +274,7 @@ class JStream extends JObject
 	{
 		if(!$this->filename)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 
@@ -299,7 +299,7 @@ class JStream extends JObject
 				if($tmp_error) { // use the php_errormsg from before
 					$this->setError($tmp_error);
 				} else { // error but nothing from php? how strange! create our own
-					$this->setError(JText::_('Failed to get file size. This may not work for all streams!'));
+					$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_SIZE'));
 				}
 			}
 			else
@@ -323,7 +323,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 
@@ -374,7 +374,7 @@ class JStream extends JObject
 		}
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 		$retval = false;
@@ -438,7 +438,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 		$retval = false;
@@ -474,7 +474,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 		$res = false;
@@ -522,7 +522,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 		// if the length isn't set, set it to the length of the string
@@ -549,7 +549,7 @@ class JStream extends JObject
 			else if($res === 0)
 			{ // wrote nothing?
 				$remaining = 0;
-				$this->setError('Warning: No data written');
+				$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_NO_DATA_WRITTEN'));
 			} else
 			{ // wrote something
 				$remaining -= $res;
@@ -571,7 +571,7 @@ class JStream extends JObject
 		if(!$filename)
 		{
 			if(!isset($this->filename) || !$this->filename) {
-				$this->setError(JText::_('Filename not set'));
+				$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILENAME'));
 				return false;
 			}
 			$filename = $this->filename;
@@ -619,7 +619,7 @@ class JStream extends JObject
 	{
 		if(!$this->_fh)
 		{
-			$this->setError(JText::_('File not open'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_FILE_NOT_OPEN'));
 			return false;
 		}
 		return stream_get_meta_data($this->_fh);
@@ -844,13 +844,13 @@ class JStream extends JObject
 				else
 				{
 					@fclose($reader); // close the reader off
-					$php_errormsg = JText::_('Failed to open writer') .': '. $this->getError();
+					$php_errormsg = JText::sprintf('JLIB_FILESYSTEM_ERROR_STREAMS_FAILED_TO_OPEN_WRITER', $this->getError());
 				}
 			}
 			else
 			{
 				if(!$php_errormsg) {
-					$php_errormsg = JText::_('Failed to open reader') .': '. $this->getError();
+					$php_errormsg = JText::sprintf('JLIB_FILESYSTEM_ERROR_STREAMS_FAILED_TO_OPEN_READER', $this->getError());
 				}
 			}
 		}
@@ -945,7 +945,7 @@ class JStream extends JObject
 		if(is_uploaded_file($src)) { // make sure its an uploaded file
 			return $this->copy($src, $dest, $context, $use_prefix, $relative);
 		} else {
-			$this->setError(JText::_('Not an uploaded file!'));
+			$this->setError(JText::_('JLIB_FILESYSTEM_ERROR_STREAMS_NOT_UPLOADED_FILE'));
 			return false;
 		}
 	}
