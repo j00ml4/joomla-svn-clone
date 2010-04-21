@@ -322,10 +322,10 @@ class ModulesModelModule extends JModelAdmin
 			'client_id = '. (int) $record->client_id,
 			'position = '. $this->_db->Quote($table->position)
 		);
-		
+
 		return $condition;
 	}
-	
+
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *

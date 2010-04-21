@@ -130,11 +130,11 @@ class JRegistry
 
 		if(!strpos($path, '.'))
 		{
-			return (isset($this->data->$path) && $this->data->$path !== null && $this->data->$path !== '') ? $this->data->$path : $default;  
+			return (isset($this->data->$path) && $this->data->$path !== null && $this->data->$path !== '') ? $this->data->$path : $default;
 		}
 		// Explode the registry path into an array
 		$nodes = explode('.', $path);
-		
+
 		// Initialize the current node to be the registry root.
 		$node = $this->data;
 		$found = false;

@@ -33,7 +33,7 @@ abstract class JPluginHelper
 		$result		= array();
 		$plugins	= self::_load();
 
-		// Find the correct plugin(s) to return.		
+		// Find the correct plugin(s) to return.
 		if(!$plugin)
 		{
 			foreach($plugins as $p)
@@ -89,13 +89,13 @@ abstract class JPluginHelper
 		if(is_null($plugin) && $autocreate == true && is_null($dispatcher)) {
 			$defaults = true;
 		}
-		
+
 		if(!isset($loaded[$type]) || !$defaults) {
 			$results = null;
-	
+
 			// Load the plugins from the database.
 			$plugins = self::_load();
-	
+
 			// Get the specified plugin(s).
 			for ($i = 0, $t = count($plugins); $i < $t; $i++) {
 				if ($plugins[$i]->type == $type && ($plugins[$i]->name == $plugin ||  $plugin === null)) {
@@ -103,12 +103,12 @@ abstract class JPluginHelper
 					$results = true;
 				}
  			}
-		
+
 			// bail out early if we're not using default args
 			if(!$defaults) {
-				return $results;	
+				return $results;
 			}
-			$loaded[$type] = $results; 
+			$loaded[$type] = $results;
 		}
 
 		return $loaded[$type];

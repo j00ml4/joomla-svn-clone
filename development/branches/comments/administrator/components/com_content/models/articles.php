@@ -156,7 +156,7 @@ class ContentModelArticles extends JModelList
 			$orderCol = 'category_title '.$orderDirn.', a.ordering';
 		}
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
-		
+
 		return $query;
 	}
 }

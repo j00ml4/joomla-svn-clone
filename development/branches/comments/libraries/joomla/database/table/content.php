@@ -132,7 +132,7 @@ class JTableContent extends JTable
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string)$registry;
 		}
-		
+
 		// Bind the rules.
 		if (isset($array['rules']))
 		{

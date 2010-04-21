@@ -24,7 +24,7 @@ class UsersControllerGroups extends JControllerAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_USERS_GROUPS';
-	
+
 	/**
 	 * Proxy for getModel.
 	 */

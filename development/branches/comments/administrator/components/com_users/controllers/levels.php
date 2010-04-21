@@ -24,7 +24,7 @@ class UsersControllerLevels extends JControllerAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_USERS_LEVELS';
-	
+
 	/**
 	 * Proxy for getModel.
 	 */
