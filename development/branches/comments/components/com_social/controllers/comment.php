@@ -134,4 +134,6 @@ class SocialControllerComment extends JController
 		$this->setRedirect($redirect, $message);
 		return true;
 	}
+
+
 }
