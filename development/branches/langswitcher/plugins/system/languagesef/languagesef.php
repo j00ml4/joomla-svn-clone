@@ -38,12 +38,14 @@ class plgSystemLanguageSEF extends JPlugin
 		$query = $db->getQuery(true);
 		$query->from('#__languages');
 		$query->select('sef');
+		$query->select('lang_code');
 		$query->where('lang_code='.$db->Quote(JFactory::getLanguage()->getTag()));
 		$db->setQuery($query);
-		$sef = $db->loadResult();
-		if ($sef) {
+		$result = $db->loadObject();
+		$component = JComponentHelper::getParams('com_languages');
+		if ($result->sef /*&& $result->lang_code != $component->get('site')*/) {
 			$path = $uri->getPath();
-			$uri->setPath($path.'/'.$sef);
+			$uri->setPath($path.'/'.$result->sef);
 		}
 	}	
 	public function parseRule(&$router, &$uri)
@@ -52,10 +54,12 @@ class plgSystemLanguageSEF extends JPlugin
 		$query = $db->getQuery(true);
 		$query->from('#__languages');
 		$query->select('sef');
+		$query->select('lang_code');
 		$query->where('lang_code='.$db->Quote(JFactory::getLanguage()->getTag()));
 		$db->setQuery($query);
-		$sef = $db->loadResult();
-		if ($sef) {
+		$result = $db->loadObject();
+		$component = JComponentHelper::getParams('com_languages');
+		if ($result->sef /*&& $result->lang_code != $component->get('site')*/) {
 			$path = $uri->getPath();
 			$parts = explode('/',$path);
 			array_shift($parts);
