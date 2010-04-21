@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_item.php 15845 2010-04-05 12:35:44Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -58,7 +58,7 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 
 <?php // to do not that elegant would be nice to group the params ?>
 
-<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))) : ?>
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_parent_category')) or ($params->get('show_hits'))) : ?>
  <dl class="article-info">
  <dt class="article-info-term"><?php  echo JText::_('CONTENT_ARTICLE_INFO'); ?></dt>
 <?php endif; ?>
@@ -113,7 +113,7 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 		<?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $this->item->hits); ?>
 		</dd>
 <?php endif; ?>
-	<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))) : ?>
+<?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date')) or ($params->get('show_parent_category')) or ($params->get('show_hits'))) : ?>
  </dl>
 <?php endif; ?>
 

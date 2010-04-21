@@ -13,11 +13,8 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
-$user		= JFactory::getUser();
-$orderCol	= $this->state->get('list.ordering');
-$orderDirn	= $this->state->get('list.direction');
-$orderDirUp = $orderDirn == 'asc' ? 'banners.orderup' : 'banners.orderdown';
-$orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
+$user	= JFactory::getUser();
+$userId	= $user->get('id');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=banners'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
@@ -55,31 +52,31 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'COM_BANNERS_HEADING_NAME', 'name', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_BANNERS_HEADING_NAME', 'name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'state', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="20%">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="10%" nowrap="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'ordering', $orderDirn, $orderCol); ?>
-					<?php if ($orderCol=='ordering'): ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php if ($this->state->get('list.ordering')=='ordering'): ?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'banners.saveorder'); ?>
 					<?php endif;?>
 				</th>
 				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_STICKY', 'sticky', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_STICKY', 'sticky', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_IMPRESSIONS', 'impmade', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_IMPRESSIONS', 'impmade', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="80">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLICKS', 'clicks', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLICKS', 'clicks', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="5%" class="nowrap">
 					<?php echo JText::_('COM_BANNERS_HEADING_METAKEYWORDS'); ?>
@@ -88,7 +85,7 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 					<?php echo JText::_('COM_BANNERS_HEADING_PURCHASETYPE'); ?>
 				</th>
 				<th width="1%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $orderDirn, $orderCol); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>
@@ -101,7 +98,7 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 		</tfoot>
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
-			$ordering	= ($orderCol == 'ordering');
+			$ordering	= ($this->state->get('list.ordering') == 'ordering');
 			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_banners&task=edit&type=other&cid[]='. $item->catid);
 			$canCreate	= $user->authorise('core.create',		'com_banners.category.'.$item->catid);
 			$canEdit	= $user->authorise('core.edit',			'com_banners.category.'.$item->catid);
@@ -135,9 +132,9 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 				</td>
 				<td class="order">
 					<?php if ($item->state >=0):?>
-						<?php if ($canChange && $orderCol=='ordering') : ?>
-							<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), $orderDirUp, 'JGRID_MOVE_UP', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), $orderDirDown, 'JGRID_MOVE_DOWN', $ordering); ?></span>
+						<?php if ($canChange && $this->state->get('list.ordering')=='ordering') : ?>
+							<span><?php echo $this->pagination->orderUpIcon($i, $this->state->get('list.direction')=='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderup' : 'banners.orderdown', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $this->state->get('list.direction')!='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid]->max, $this->state->get('list.direction')=='asc' ? 'banners.orderdown' : 'banners.orderup', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
 							<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 							<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 						<?php else : ?>
@@ -160,7 +157,7 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 				</td>
 				<td class="center">
 					<?php if ($item->purchase_type<0):?>
-						<?php echo JText::sprintf('COM_BANNERS_DEFAULT',($item->client_purchase_type>0) ? JText::_('COM_BANNERS_FIELD_VALUE_'.$item->client_purchase_type) : JText::_('COM_BANNERS_FIELD_VALUE_'.$this->state->params->get('purchase_type')));?>
+						<?php echo JText::sprintf('COM_BANNERS_DEFAULT',($item->client_purchase_type>0) ? JText::_('COM_BANNERS_FIELD_VALUE_'.$item->client_purchase_type) : JText::_('COM_BANNERS_FIELD_VALUE_'.$this->params->get('purchase_type')));?>
 					<?php else:?>
 						<?php echo JText::_('COM_BANNERS_FIELD_VALUE_'.$item->purchase_type);?>
 					<?php endif;?>
@@ -175,7 +172,7 @@ $orderDirDown = $orderDirn == 'asc' ? 'banners.orderdown' : 'banners.orderup';
 
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $orderCol; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $orderDirn; ?>" />
+	<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

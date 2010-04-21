@@ -23,14 +23,12 @@ jimport('joomla.updater.update');
  */
 class InstallerModelUpdate extends JModelList
 {
-	protected $_context = 'com_installer.update';
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @since	1.6
+	 * This method should only be called once per instantiation and is designed
+	 * to be called on the first call to the getState() method unless the model
+	 * configuration flag to ignore the request is set.
 	 */
 	protected function populateState()
 	{
@@ -47,7 +45,8 @@ class InstallerModelUpdate extends JModelList
 	 *
 	 * @return JDatabaseQuery the database query
 	 */
-	protected function getListQuery() {
+	protected function getListQuery()
+	{
 		$query = new JDatabaseQuery;
 		$query->select('*');
 		$query->from('#__updates');
@@ -73,17 +72,14 @@ class InstallerModelUpdate extends JModelList
 	 */
 	public function purge()
 	{
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		// Note: TRUNCATE is a DDL operation
 		// This may or may not mean depending on your database
 		$db->setQuery('TRUNCATE TABLE #__updates');
-		if ($db->Query())
-		{
+		if ($db->Query()) {
 			$this->_message = JText::_('COM_INSTALLER_PURGED_UPDATES');
 			return true;
-		}
-		else
-		{
+		} else {
 			$this->_message = JText::_('COM_INSTALLER_FAILED_TO_PURGE_UPDATES');
 			return false;
 		}
@@ -97,14 +93,13 @@ class InstallerModelUpdate extends JModelList
 	public function update($uids)
 	{
 		$result = true;
-		foreach($uids as $uid)
-		{
+		foreach($uids as $uid) {
 			$update = new JUpdate();
-			$instance =& JTable::getInstance('update');
+			$instance = JTable::getInstance('update');
 			$instance->load($uid);
 			$update->loadFromXML($instance->detailsurl);
 			// install sets state and enqueues messages
-			$res = $this->_install($update);
+			$res = $this->install($update);
 			$result = $res & $result;
 		}
 
@@ -117,13 +112,12 @@ class InstallerModelUpdate extends JModelList
 	 * @param JUpdate an update definition
 	 * @return boolean Result of install
 	 */
-	private function _install($update)
+	private function install($update)
 	{
-		$app = &JFactory::getApplication();
-		if(isset($update->get('downloadurl')->_data)) {
+		$app = JFactory::getApplication();
+		if (isset($update->get('downloadurl')->_data)) {
 			$url = $update->downloadurl->_data;
-		} else
-		{
+		} else {
 			JError::raiseWarning('', JText::_('COM_INSTALLER_INVALID_EXTENSION_UPDATE'));
 			return false;
 		}
@@ -132,31 +126,27 @@ class InstallerModelUpdate extends JModelList
 		$p_file = JInstallerHelper::downloadPackage($url);
 
 		// Was the package downloaded?
-		if (!$p_file)
-		{
+		if (!$p_file) {
 			JError::raiseWarning('', JText::sprintf('COM_INSTALLER_PACKAGE_DOWNLOAD_FAILED', $url));
 			return false;
 		}
 
-		$config =& JFactory::getConfig();
+		$config		= JFactory::getConfig();
 		$tmp_dest	= $config->get('tmp_path');
 
 		// Unpack the downloaded package file
-		$package = JInstallerHelper::unpack($tmp_dest.DS.$p_file);
+		$package	= JInstallerHelper::unpack($tmp_dest.DS.$p_file);
 
 		// Get an installer instance
-		$installer =& JInstaller::getInstance();
+		$installer	= JInstaller::getInstance();
 		$update->set('type', $package['type']);
 
 		// Install the package
-		if (!$installer->install($package['dir']))
-		{
+		if (!$installer->install($package['dir'])) {
 			// There was an error installing the package
 			$msg = JText::sprintf('COM_INSTALLER_MSG_UPDATE_ERROR', $package['type']);
 			$result = false;
-		}
-		else
-		{
+		} else {
 			// Package installed sucessfully
 			$msg = JText::sprintf('COM_INSTALLER_MSG_UPDATE_SUCCESS', $package['type']);
 			$result = true;
@@ -175,8 +165,7 @@ class InstallerModelUpdate extends JModelList
 		$app->setUserState('com_installer.extension_message', $installer->get('extension_message'));
 
 		// Cleanup the install files
-		if (!is_file($package['packagefile']))
-		{
+		if (!is_file($package['packagefile'])) {
 			$config =& JFactory::getConfig();
 			$package['packagefile'] = $config->get('tmp_path').DS.$package['packagefile'];
 		}

@@ -502,7 +502,7 @@ class JCache extends JObject
 			$registeredurlparams->catid='INT';
 			$registeredurlparams->id='INT';**/
 
-			return md5(serialize(JRequest::getURI()));   // provided for backwards compatibility - THIS IS NOT SAFE!
+			return md5(serialize(JRequest::getURI()));   // provided for backwards compatibility - THIS IS NOT SAFE!!!!
 		}
 		// framework defaults
 		$registeredurlparams->protocol='WORD';
