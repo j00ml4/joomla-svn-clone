@@ -14,48 +14,74 @@ jimport('joomla.language.helper');
 jimport('joomla.utilities.utility');
 abstract class modLanguagesHelper
 {
+	/**
+	 * Get the language from
+	 * - the cookie session if the user is not logged in or
+	 * - the user preference
+	 */
+	public static function getTag(&$params)
+	{
+		$user = JFactory::getUser();
+		$tag = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
+		if(empty($tag) && $user->id) {
+			$tag = $user->getParam('language');
+		}
+		return $tag;
+	}
 	public static function getList(&$params)
 	{
 		$useDefault = $params->get('default');
 		$db = JFactory::getDBO();
-		$query = new JDatabaseQuery;
-		$query->select($db->nameQuote('lang_code').' as '.$db->nameQuote('value'));
-		$query->select($db->nameQuote('title').' as '.$db->nameQuote('text'));
+		$query = $db->getQuery(true);;
 		$query->from($db->nameQuote('#__languages'));
+		$query->select($db->nameQuote('lang_code').' AS '.$db->nameQuote('value'));
+		$query->select($db->nameQuote('title').' AS '.$db->nameQuote('text'));
 		$query->where($db->nameQuote('published').'=1');
-		$query->order($db->nameQuote('text'));
 		$db->setQuery($query);
 		$result = $db->loadAssocList('value');
-		$menus= JFactory::getApplication()->getMenu();
-		foreach($result as $i=>$language) {
+		$query->clear();
+		$query->from($db->nameQuote('#__menu'));
+		$query->select('link');
+		$query->select('type');
+		$query->select('id');
+		$query->select('params');
+		$query->select('language');
+		$query->where('home=1');
+		$db->setQuery($query);
+		$home = $db->loadAssocList('language');
+		foreach($result as $i=>&$language) {
 			if (!JLanguage::exists($language['value'])) {
 				unset($result[$i]);
 			}
 			else {
-				$item = $menus->getDefault($language['value']);
-				switch ($item->type) {
+				$menu = array_key_exists($language['value'], $home) ? $home[$language['value']] : $home[''];
+				switch ($menu['type']) {
 				case 'url':
-					if ((strpos($item->link, 'index.php?') === 0) && (strpos($item->link, 'Itemid=') === false)) {
+					if ((strpos($menu['link'], 'index.php?') === 0) && (strpos($menu['link'], 'Itemid=') === false)) {
 						// If this is an internal Joomla link, ensure the Itemid is set.
-						$item->link = $tmp->link.'&amp;Itemid='.$item->id;
+						$language['redirect'] = $menu['link'] . '&amp;Itemid='.$menu['id'];
+					}
+					else {
+						$language['redirect'] = $menu['link'];
 					}
 					break;
 
 				case 'alias':
 					// If this is an alias use the item id stored in the parameters to make the link.
-					$item->link = 'index.php?Itemid='.$item->params->get('aliasoptions');
+					$registry = new JRegistry;
+					$registry->loadJSON($menu['params']);
+					$language['redirect'] = 'index.php?Itemid='.$registry->get('aliasoptions');
 					break;
 
 				default:
 					$router = JSite::getRouter();
 					if ($router->getMode() == JROUTER_MODE_SEF) {
-						$item->link = 'index.php?Itemid='.$item->id;
+						$language['redirect'] = 'index.php?Itemid='.$menu['id'];
 					} else {
-						$item->link .= '&Itemid='.$item->id;
+						$language['redirect'] .= '&Itemid='.$menu['id'];
 					}
 					break;
 				}
-				$result[$i]['redirect']=$item->link;
 			}
 		}
 		if ($useDefault && count($result)) {
