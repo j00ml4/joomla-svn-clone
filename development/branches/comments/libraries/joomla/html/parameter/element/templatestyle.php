@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: templates.php matrikular$
+ * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Parameter
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

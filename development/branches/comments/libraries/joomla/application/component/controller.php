@@ -731,6 +731,21 @@ class JController extends JObject
 	}
 
 	/**
+	 * Sets an entire array of search paths for resources.
+	 *
+	 * @param	string			The type of path to set, typically 'view' or 'model'.
+	 * @param	string|array	The new set of search paths. If null or false, resets to the current directory only.
+	 */
+	protected function _setPath($type, $path)
+	{
+		// clear out the prior search dirs
+		$this->_path[$type] = array();
+
+		// actually add the user-specified directories
+		$this->_addPath($type, $path);
+	}
+
+	/**
 	 * Set a URL for browser redirection.
 	 *
 	 * @param	string URL to redirect to.
@@ -750,21 +765,4 @@ class JController extends JObject
 		// Ensure the type is not overwritten by a previous call to setMessage.
 		$this->_messageType	= ($type === null || empty($this->_messageType)) ? 'message' : $type;
 	}
-
-	/**
-	 * Sets an entire array of search paths for resources.
-	 *
-	 * @param	string			The type of path to set, typically 'view' or 'model'.
-	 * @param	string|array	The new set of search paths. If null or false, resets to the current directory only.
-	 */
-	protected function _setPath($type, $path)
-	{
-		// clear out the prior search dirs
-		$this->_path[$type] = array();
-
-		// actually add the user-specified directories
-		$this->_addPath($type, $path);
-	}
-
-
 }

@@ -84,7 +84,7 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 		);
 		return $condition;
 	}
-	
+
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */

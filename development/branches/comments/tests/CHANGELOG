@@ -27,9 +27,28 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Apr-2010 Mark Dexter
+^ Add __call method in SeleniumJoomlaTestCase to check for PHP notices
+^ Add getTraceFiles method in SeleniumJoomlaTestCase to clean up error reporting
+^ Modify tests to use getTraceFiles
+
+19-Apr-2010 Mark Dexter
+^ Add checkNotices() method in SeleniumJoomlaTestCase
+^ Implement checkNotices method in com_users tests
+
+18-Apr-2010 Mark Dexter
++ New acltest (thank you Matt Thomas)
+^ New methods in SeleniumJoomlaTestCase (thank you Matt Thomas)
+
+17-Apr-2010 Mark Dexter
+# Minor fix on ControlPanel0004 for language change
+
+16-Apr-2010 Mark Dexter
++ New test for JParameter merge to test merge bug with integer 0
+
 15-Apr-2010 Mark Dexter
 # Fix up some changed language strings
-# Fix doFrontendLogin to use config 
+# Fix doFrontendLogin to use config
 + Add test for edit icons in front page and article layouts
 
 12-Apr-2010 Mark Dexter
@@ -49,7 +68,7 @@ $ -> Language fix or change
 # Minor fixes to control panel tests for changed wording on menus
 
 27-Mar-2010 Mark Dexter
-# Fix bug in doInstall.php 
+# Fix bug in doInstall.php
 
 26-Mar-2010 Mark Dexter
 # Change menu0001Test.php to reflect new id in Module Edit
@@ -170,6 +189,6 @@ $ -> Language fix or change
 
 24-Sep-2009 Andrew Eddie
  + Added 1.6 unittest scaffolding.
- 
+
 24-Sep-2009 Mark Dexter
  ^ Added basic functional tests to test admin menu choices

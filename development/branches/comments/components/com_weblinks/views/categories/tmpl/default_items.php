@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version		$Id: default_items.php 15048 2010-02-25 17:24:37Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -38,7 +38,7 @@ if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
 				<dd><?php echo $item->numitems; ?></dd>
 			</dl>
 		<?php endif; ?>
-		
+
 		<?php if(count($item->getChildren()) > 0) :
 			$this->items[$item->id] = $item->getChildren();
 			$this->parent = $item;

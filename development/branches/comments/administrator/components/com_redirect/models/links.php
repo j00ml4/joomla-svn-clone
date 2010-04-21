@@ -22,13 +22,6 @@ jimport('joomla.application.component.modellist');
 class RedirectModelLinks extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var	string
-	 */
-	protected $_context = 'com_redirect.links';
-
-	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
@@ -41,10 +34,10 @@ class RedirectModelLinks extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
 		// Load the parameters.

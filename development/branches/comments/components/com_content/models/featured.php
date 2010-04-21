@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: featured.php 15932 2010-04-08 01:53:33Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -37,13 +37,11 @@ class ContentModelFeatured extends ContentModelArticles
 	{
 		parent::populateState();
 
-		// Add blog properties
-		$params = $this->state->params;
-
 		// List state information
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 		$this->setState('list.start', $limitstart);
 
+		$params = $this->state->params;
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		$this->setState('list.limit', $limit);
 		$this->setState('list.links', $params->get('num_links'));
