@@ -78,7 +78,7 @@ abstract class modLanguagesHelper
 					if ($router->getMode() == JROUTER_MODE_SEF) {
 						$language['redirect'] = 'index.php?Itemid='.$menu['id'];
 					} else {
-						$language['redirect'] .= '&Itemid='.$menu['id'];
+						$language['redirect'] = $menu['link'] . '&Itemid='.$menu['id'];
 					}
 					break;
 				}

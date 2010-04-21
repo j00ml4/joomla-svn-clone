@@ -109,7 +109,7 @@ class plgSearchWeblinks extends JPlugin
 				break;
 
 			case 'category':
-				$order = 'b.title ASC, a.title ASC';
+				$order = 'c.title ASC, a.title ASC';
 				break;
 
 			case 'newest':
@@ -120,12 +120,17 @@ class plgSearchWeblinks extends JPlugin
 		$query	= $db->getQuery(true);
 		$query->select('a.title AS title, a.description AS text, a.date AS created, a.url, '
 					.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-					.'CASE WHEN CHAR_LENGTH(b.alias) THEN CONCAT_WS(\':\', b.id, b.alias) ELSE b.id END as catslug, '
-					.'CONCAT_WS(" / ", '.$db->Quote($section).', b.title) AS section, "1" AS browsernav');
+					.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END as catslug, '
+					.'CONCAT_WS(" / ", '.$db->Quote($section).', c.title) AS section, "1" AS browsernav');
 		$query->from('#__weblinks AS a');
-		$query->innerJoin('#__categories AS b ON b.id = a.catid');
-		$query->where('('.$where.')' . ' AND a.state=1 AND  b.published=1 AND  b.access IN ('.$groups.')');
+		$query->innerJoin('#__categories AS c ON c.id = a.catid');
+		$query->where('('.$where.')' . ' AND a.state=1 AND  c.published=1 AND  c.access IN ('.$groups.')');
 		$query->order($order);
+
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('plg_search_weblinks', &$query));
 
 		$db->setQuery($query, 0, $limit);
 		$rows = $db->loadObjectList();

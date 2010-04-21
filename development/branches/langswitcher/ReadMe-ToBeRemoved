@@ -104,7 +104,6 @@ Test the unicity of the home page for a language
 3. Save and Close. Verify that the previous home page for this language has changed
 
 TODO
--Apply language selection to all search plugins...
 -Add Language Filters in Admin
 -Set the router
 
