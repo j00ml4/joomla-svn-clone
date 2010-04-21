@@ -108,7 +108,7 @@ class WeblinksModelWeblink extends JModelAdmin
 		);
 		return $condition;
 	}
-	
+
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
@@ -121,7 +121,7 @@ class WeblinksModelWeblink extends JModelAdmin
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
-	
+
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */

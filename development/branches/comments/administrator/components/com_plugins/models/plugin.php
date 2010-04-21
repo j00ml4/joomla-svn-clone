@@ -133,7 +133,7 @@ class PluginsModelPlugin extends JModelAdmin
 		);
 		return $condition;
 	}
-	
+
 	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *

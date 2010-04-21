@@ -162,7 +162,7 @@ abstract class JModelAdmin extends JModelForm
 				return false;
 			}
 		}
-		
+
 		if(property_exists($table, 'params')) {
 			$table->params = json_decode($table->params, true);
 		}

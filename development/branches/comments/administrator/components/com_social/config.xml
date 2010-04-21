@@ -925,7 +925,7 @@
 				value="JDATE_DDDD_DD_MMMM_YYYY">Tuesday 17 July, 2007</option>
 			<option
 				value="JDATE_DD_MMMM_YYYY">17 July 2007</option>
-<!-- 
+<!--
 	%c = Wed 17 Jul 18:00:05 2008
 	%Y-%m-%d %H:%M:%S" = 2007-06-17 18:00:05
 	%d-%m-%Y = 17-06-2007

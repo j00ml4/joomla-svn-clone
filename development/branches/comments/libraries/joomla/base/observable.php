@@ -97,7 +97,7 @@ class JObservable extends JObject
 			}
 			$this->_observers[] = &$observer;
 			$methods = array($observer['event']);
-			
+
 		} else {
 			if (!$observer instanceof JObserver) {
 				return;

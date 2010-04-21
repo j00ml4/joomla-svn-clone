@@ -54,7 +54,7 @@ class ContactModelContact extends JModelAdmin
 			return $user->authorise('core.edit.state', 'com_contact');
 		}
 	}
-	
+
 	/**
 	 * Method to get the row form.
 	 *
@@ -86,7 +86,7 @@ class ContactModelContact extends JModelAdmin
 
 		return $form;
 	}
-	
+
 	/**
 	 * A protected method to get a set of ordering conditions.
 	 *
@@ -101,7 +101,7 @@ class ContactModelContact extends JModelAdmin
 		);
 		return $condition;
 	}
-	
+
 	/**
 	 * Returns a Table object, always creating it
 	 *
