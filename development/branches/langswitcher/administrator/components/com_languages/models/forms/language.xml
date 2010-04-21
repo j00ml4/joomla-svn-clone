@@ -34,6 +34,14 @@
 			size="40"
 		/>
 
+		<field name="sef" type="text"
+			class="inputbox"
+			description="COM_LANGS_FIELD_SEF_DESC"
+			label="COM_LANGS_FIELD_SEF_LABEL"
+			maxlength="50"
+			size="40"
+		/>
+
 		<field name="alias" type="text"
 			class="inputbox"
 			description="COM_LANGS_FIELD_ALIAS_DESC"
