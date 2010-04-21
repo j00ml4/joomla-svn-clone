@@ -41,10 +41,15 @@ class JMenuSite extends JMenu
 			$query->order('m.lft');
 
 			// Compute the menu language
-			$query->join('LEFT','#__menu as p on p.lft <= m.lft AND p.rgt >=m.rgt AND p.language!=\'\'');
+/*			$query->join('LEFT','#__menu as p on p.lft <= m.lft AND p.rgt >=m.rgt AND p.language!=\'\'');
 			$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
 			$query->group('m.id');
-			
+	*/		
+			// Fire the onPrepareQuery plugins
+			$dispatcher = JDispatcher::getInstance();
+			JPluginHelper::importPlugin('content');
+			$dispatcher->trigger('onPrepareQuery', array('menus', &$query));
+
 			// Set the query
 			$db->setQuery($query);
 			if (!($menus = $db->loadObjectList('id'))) {
@@ -54,14 +59,14 @@ class JMenuSite extends JMenu
 
 			foreach ($menus as $i=>&$menu) {
 				// Set the language
-				if ($menu->inherited_language) {
+/*				if ($menu->inherited_language) {
 					$menu->language = substr($menu->inherited_language, 30);
 				}
 				if (!$menu->language && !JFactory::getApplication()->getCfg('show_untagged_content') && !$menu->home) {
 					unset($menus[$i]);
 					continue;
 				}
-
+*/
 				// Get parent information.
 				$parent_tree = array();
 				if (($parent = $menu->parent_id) && (isset($menus[$parent])) &&

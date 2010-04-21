@@ -23,6 +23,8 @@ JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_banners/table
  */
 class BannersModelBanners extends JModelList
 {
+	protected $_context = 'com_banners.category';
+
 	protected $_items;
 
 	/**
@@ -62,7 +64,6 @@ class BannersModelBanners extends JModelList
 		$catid		= $this->getState('filter.category_id');
 		$keywords	= $this->getState('filter.keywords');
 		$randomise	= ($ordering == 'random');
-		$language	= JSite::getLanguage();
 
 		$query->select(
 			'a.id as id,'.
@@ -71,15 +72,13 @@ class BannersModelBanners extends JModelList
 			'a.clickurl as clickurl,'.
 			'a.cid as cid,'.
 			'a.params as params,'.
-			'a.track_impressions as track_impressions,'.
-			'a.language'			
+			'a.track_impressions as track_impressions'
 		);
 		$query->from('#__banners as a');
 		$query->where('a.state=1');
 		$query->where("(NOW() >= a.publish_up OR a.publish_up='0000-00-00 00:00:00')");
 		$query->where("(NOW() <= a.publish_down OR a.publish_down='0000-00-00 00:00:00')");
 		$query->where('(a.imptotal = 0 OR a.impmade = a.imptotal)');
-		$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
 
 		if ($cid) {
 			$query->where('a.cid = ' . (int) $cid);
@@ -94,12 +93,6 @@ class BannersModelBanners extends JModelList
 			$query->where('c.published = 1');
 		}
 
-		// Filter by inherited language
-		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
-		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
-		$query->group('a.id');
-		$query->having('(a.language='.$db->Quote($language) . (JFactory::getApplication()->getCfg('show_untagged_content') ? ' OR inherited_language IS NULL':'') . ' OR substr(inherited_language,31)='.$db->Quote($language).')');
-	
 		if ($tagSearch) {
 			if (count($keywords) == 0) {
 				$query->where('0');
@@ -125,6 +118,7 @@ class BannersModelBanners extends JModelList
 			}
 		}
 		$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
+		
 		return $query;
 	}
 

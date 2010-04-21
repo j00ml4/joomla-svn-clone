@@ -120,12 +120,10 @@ class ContentModelArticles extends JModelList
 		// Create a new query object.
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
-		$language = JSite::getLanguage();
 
 		// Select the required fields from the table.
 		$query->select($this->getState('list.select',
 			'a.id, a.title, a.alias, a.title_alias, a.introtext, a.state, a.catid, a.created, a.created_by, a.created_by_alias,' .
-			' a.language, ' .
 			// use created if modified is 0
 			'CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END as modified,' . 
 			'a.modified_by, uam.name as modified_by_name,' .
@@ -134,7 +132,6 @@ class ContentModelArticles extends JModelList
 			'a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access,'. 
 			'a.hits, a.featured,' . ' LENGTH(a.fulltext) AS readmore'));
 		$query->from('#__content AS a');
-		$query->where('(a.language='.$db->Quote($language).' OR a.language='.$db->Quote('').')');
 
 		// Join over the categories.
 		$query->select('c.title AS category_title, c.path AS category_route, c.access AS category_access, c.alias AS category_alias');
@@ -149,12 +146,6 @@ class ContentModelArticles extends JModelList
 		// Join over the categories to get parent category titles
 		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
-
-		// Filter by inherited language
-		$query->join('LEFT','#__categories as p on p.lft <= c.lft AND p.rgt >=c.rgt AND p.language!=\'\'');
-		$query->select('MIN(CONCAT(LPAD(p.rgt,30," "),p.language)) as inherited_language');
-		$query->group('a.id');
-		$query->having('(a.language='.$db->Quote($language) . (JFactory::getApplication()->getCfg('show_untagged_content') ? ' OR inherited_language IS NULL':'') . ' OR substr(inherited_language,31)='.$db->Quote($language).')');
 		
 		// Filter by access level.
 		if ($access = $this->getState('filter.access'))
@@ -362,7 +353,7 @@ class ContentModelArticles extends JModelList
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')), $this->getState('list.direction', 'ASC'));
-
+		
 		return $query;
 	}
 

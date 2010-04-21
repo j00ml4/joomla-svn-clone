@@ -264,12 +264,6 @@ abstract class JModuleHelper
 		$query->join('LEFT','#__modules_menu AS mm ON mm.moduleid = m.id');
 		$query->where('m.published = 1');
 
-		// Filter by the language
-		if ($app->getClientId()==0) {
-			$language = $app->getLanguage();
-			$query->where("(m.language=".$db->Quote($language).($app->getCfg('show_untagged_content') ? " OR m.language=''" : '').")");
-		}
-
 		$date = JFactory::getDate();
 		$now = $date->toMySQL();
 		$nullDate = $db->getNullDate();
@@ -287,6 +281,12 @@ abstract class JModuleHelper
 		
 		$cacheid = serialize(array($Itemid,$groups,$clientid));
 		
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('modules', &$query));
+
+		// Set the query
 		$db->setQuery($query);
 		
 		$cache = JFactory::getCache ('com_modules', 'callback' );

@@ -41,6 +41,13 @@ class JModelList extends JModel
 	protected $_totals = array();
 
 	/**
+	 * The database query.
+	 *
+	 * @var		JDatabaseQuery
+	 */
+	protected $query = null;
+
+	/**
 	 * Method to get an array of data items.
 	 *
 	 * @return	mixed	An array of data items on success, false on failure.
@@ -56,7 +63,7 @@ class JModelList extends JModel
 		}
 
 		// Load the list items.
-		$query	= $this->getListQuery();
+		$query	= $this->_getListQuery();
 		$items	= $this->_getList($query, $this->getState('list.start'), $this->getState('list.limit'));
 
 		// Check for a database error.
@@ -84,6 +91,21 @@ class JModelList extends JModel
 		return $query;
 	}
 
+	/**
+	 * Method to construct the JDatabaseQuery object only once
+	 */
+	private function _getListQuery()
+	{
+		if (is_null($this->query)) {
+			$this->query = $this->getListQuery();
+
+			// Fire the onPrepareQuery plugins
+			$dispatcher = JDispatcher::getInstance();
+			JPluginHelper::importPlugin('content');
+			$dispatcher->trigger('onPrepareQuery', array($this->_context, &$this->query));
+		}
+		return $this->query;
+	}
 
 	/**
 	 * Method to get a JPagination object for the data set.
@@ -148,7 +170,7 @@ class JModelList extends JModel
 		}
 
 		// Load the total.
-		$query = $this->getListQuery();
+		$query = $this->_getListQuery();
 		$total = (int) $this->_getListCount((string) $query);
 
 		// Check for a database error.

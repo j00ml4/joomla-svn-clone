@@ -27,10 +27,11 @@ Test 'home' page different for a specific language
 
 Test language preference for a user
 
-1. Create a user and set its preferred language to be "xx (Test)"
-2. View the public site and select the "English (UK)" language
-3. Connect on the public site with the new user. It will change the language in the switcher
-4. Change the language in the switcher. It will change the user preference (verify in the admin)
+1. Change the option in com_users autosave language to true
+2. Create a user and set its preferred language to be "xx (Test)"
+3. View the public site and select the "English (UK)" language
+4. Connect on the public site with the new user. It will change the language in the switcher
+5. Change the language in the switcher. It will change the user preference (verify in the admin)
 
 Test language for categories
 
