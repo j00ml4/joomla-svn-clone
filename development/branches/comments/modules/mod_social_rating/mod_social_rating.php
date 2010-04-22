@@ -41,7 +41,6 @@ require_once dirname(__FILE__).'/helper.php';
 $user		= JFactory::getUser();
 $uri		= JURI::getInstance();
 $document	= &JFactory::getDocument();
-$thread		= modSocialRatingHelper::getThread($params);
 $rating		= modSocialRatingHelper::getRating($params);
 
 // render the module

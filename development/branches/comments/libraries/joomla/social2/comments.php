@@ -41,7 +41,7 @@ class JComments
 		$query = $db->getQuery(true);
 
 		// Setup the base query parameters to select comments by context.
-		$query->select('a.*');
+		$query->select('a.id');
 		$query->from('#__social_comments AS a');
 		$query->where('a.context = '.$db->quote($context));
 
@@ -54,7 +54,7 @@ class JComments
 		$query->join('LEFT', '#__users AS c ON c.id = a.user_id');
 
 		// Set the ordering clause.
-		$query->order('a.created_date '.$old2new ? 'ASC' : 'DESC');
+		$query->order('a.created_date '.($old2new ? 'ASC' : 'DESC'));
 
 		// If set to filter on state add the filter clause to the query.
 		if ($state !== null) {
@@ -89,7 +89,7 @@ class JComments
 		$query = $db->getQuery(true);
 
 		// Setup the base query parameters to select comments by context.
-		$query->select('COUNT(a.*)');
+		$query->select('COUNT(a.id)');
 		$query->from('#__social_comments AS a');
 		$query->where('a.context = '.$db->quote($context));
 
