@@ -169,7 +169,7 @@
 			class="inputbox"
 			default="">
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
-			<option value="*">JOPTION_ALL_LANGUAGE</option>
+			<option value="*">JOPTION_ALL_LANGUAGES</option>
 		</field>
 
 		<field

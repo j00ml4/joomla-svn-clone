@@ -19,13 +19,6 @@ require_once dirname(__FILE__).DS.'articles.php';
 class ContentModelFeatured extends ContentModelArticles
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	public $_context = 'com_content.featured';
-
-	/**
 	 * @param	boolean	True to join selected foreign information
 	 *
 	 * @return	string
@@ -95,8 +88,8 @@ class ContentModelFeatured extends ContentModelArticles
 		}
 
 		// Filter on the language.
-		if (($language = $this->getState('filter.language'))!='-') {
-			$query->where('a.language = '.$db->quote($language));
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
 		}
 
 		// Add the list ordering clause.
@@ -119,7 +112,7 @@ class ContentModelFeatured extends ContentModelArticles
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance('com_content.featured', 'featured', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'featured', array('control' => 'filters', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -128,7 +121,7 @@ class ContentModelFeatured extends ContentModelArticles
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_content.articles.data', array());
+		$data = $app->getUserState($this->context.'.data', array());
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);

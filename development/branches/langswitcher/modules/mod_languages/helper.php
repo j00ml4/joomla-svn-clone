@@ -54,7 +54,7 @@ abstract class modLanguagesHelper
 				unset($result[$i]);
 			}
 			else {
-				$menu = array_key_exists($language['value'], $home) ? $home[$language['value']] : $home[''];
+				$menu = array_key_exists($language['value'], $home) ? $home[$language['value']] : $home['*'];
 				switch ($menu['type']) {
 				case 'url':
 					if ((strpos($menu['link'], 'index.php?') === 0) && (strpos($menu['link'], 'Itemid=') === false)) {
@@ -86,7 +86,7 @@ abstract class modLanguagesHelper
 		}
 		if ($useDefault && count($result)) {
 			$option = array();
-			$option['text'] = JText::_('JDEFAULT');
+			$option['text'] = JText::_('MOD_LANGUAGES_OPTION_DEFAULT_LANGUAGE');
 			$option['value'] = 'default';
 			$config =& JFactory::getConfig();
 			$paramsLanguagues =  JComponentHelper::getParams('com_languages');

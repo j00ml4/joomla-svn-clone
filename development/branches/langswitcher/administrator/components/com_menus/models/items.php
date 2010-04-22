@@ -30,10 +30,10 @@ class MenusModelItems extends JModelList
 		$app = JFactory::getApplication('administrator');
 		$data = JRequest::getVar('filters');
 		if (empty($data)) {
-			$data = $app->getUserState('com_menus.items.data');
+			$data = $app->getUserState($this->context.'.data');
 		}
 		else {
-			$app->setUserState('com_menus.items.data', $data);
+			$app->setUserState($this->context.'.data', $data);
 		}
 
 		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
@@ -158,8 +158,8 @@ class MenusModelItems extends JModelList
 		}
 
 		// Filter on the language.
-		if (($language = $this->getState('filter.language'))!='-') {
-			$query->where('a.language = '.$db->quote($language));
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
 		}
 
 		// Add the list ordering clause.
@@ -183,7 +183,7 @@ class MenusModelItems extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance('com_menus.items', 'items', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'items', array('control' => 'filters', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -192,7 +192,7 @@ class MenusModelItems extends JModelList
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_menus.items.data', array());
+		$data = $app->getUserState($this->context.'.data', array());
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
