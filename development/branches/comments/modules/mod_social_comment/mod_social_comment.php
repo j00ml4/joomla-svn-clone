@@ -55,7 +55,8 @@ $comments = modSocialCommentHelper::getComments($params);
 // get the comment thread pagination object
 $pagination = modSocialCommentHelper::getPagination($params);
 
-$form = modSocialCommentHelper::getForm($params);
+jimport('joomla.social2.helper');
+$form = JSocial2Helper::getForm($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_comment', $params->get('layout', 'default')));
