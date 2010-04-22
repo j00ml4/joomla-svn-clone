@@ -43,7 +43,7 @@ if ($context == 'error') {
 require_once dirname(__FILE__).'/helper.php';
 
 // Get the thread.
-$thread = modSocialCommentHelper::getThread($params);
+//$thread = modSocialCommentHelper::getThread($params);
 
 // Get the comments.
 $comments = &modSocialCommentHelper::getComments($params);

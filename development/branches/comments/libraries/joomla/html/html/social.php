@@ -64,14 +64,13 @@ class JHtmlSocial
 	public static function commentCount($context)
 	{
 		// Add the appropriate include paths for models.
-		jimport('joomla.social.comments');
+		jimport('joomla.social2.comments');
 
 		// Get and configure the thread model.
 		$model = new JComments;
-		$model->setState('filter.context', $context);
 
 		// Get the thread data.
-		$total = (int) $model->getTotal();
+		$total = (int) $model->getTotalByContext($context);
 
 		if ($error = $model->getError()) {
 			JError::raiseWarning(500, $error);
