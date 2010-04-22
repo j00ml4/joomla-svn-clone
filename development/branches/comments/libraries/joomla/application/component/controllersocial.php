@@ -61,24 +61,35 @@ class JControllerSocial extends JController
 			return false;
 		}
 
+		// Include dependancies.
 		jimport('joomla.social.comments');
 
+		// Initialise variables.
 		$user	= JFactory::getUser();
 		$form	= JComments::getForm();
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
-		$control	= $form->getFormControl();
 
-		// Get the raw data as the form provides for its own filtering.
+		// Get the form control, if used, and then the raw data.
+		$control = $form->getFormControl();
+
 		if ($control) {
 			$data = JRequest::getVar($control, array(), 'post', 'array', JREQUEST_ALLOWRAW);
 		} else {
+			// A form control wasn't used, so just get the data from the method.
 			$data = JRequest::get('method', JREQUEST_ALLOWRAW);
 		}
 
+		// Validate the data.
 		$data = JComments::validate($form, $data);
+
+		// Access check.
+		if (!$this->canComment($data['context'])) {
+			die('cannot comment');
+			// TODO: handle error
+		}
 
 		JComments::save($data);
 
@@ -377,6 +388,30 @@ die;
 		// Close the application.
 		$application->close();
 		return true;
+	}
+
+	/**
+	 * Method to determine if the user can comment on the selected content.
+	 *
+	 * @param	string	The context for the content.
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	protected function canComment($context)
+	{
+		return false;
+	}
+
+	/**
+	 * Method to determine if the user can rate the selected content.
+	 *
+	 * @param	string	The context for the content.
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	protected function canRate($context)
+	{
+		return false;
 	}
 
 	/**
