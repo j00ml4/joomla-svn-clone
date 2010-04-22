@@ -23,7 +23,7 @@ class modSocialCommentHelper
 	public static function getComments($params)
 	{
 		// Add the appropriate include paths for models.
-		jimport('joomla.social2.comments');
+		jimport('joomla.social.comments');
 
 		// Get and configure the thread model.
 		$model = new JComments;
@@ -52,7 +52,7 @@ class modSocialCommentHelper
 	 */
 	public static function getPagination($params)
 	{
-		jimport('joomla.social2.comments');
+		jimport('joomla.social.comments');
 
 		// Get and configure the thread model.
 		$model = new JComments;
