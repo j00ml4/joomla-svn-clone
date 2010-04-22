@@ -26,6 +26,10 @@ class ContentControllerSocial extends JControllerSocial
 	 */
 	protected function canComment($context)
 	{
+		//tmp
+		return true;
+		///tmp
+
 		// The context should be in the form com_content.article.N
 		// where N is the article id.
 		$parts = explode('.', $context);
