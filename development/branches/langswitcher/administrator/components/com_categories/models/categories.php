@@ -40,14 +40,15 @@ class CategoriesModelCategories extends JModelList
 
 		if (!empty($extension)) {
 			$context .= '.'.$extension;
+			$this->context = $context;
 		}
 
 		$data = JRequest::getVar('filters');
 		if (empty($data)) {
-			$data = $app->getUserState('com_categories.categories.data');
+			$data = $app->getUserState($context.'.data');
 		}
 		else {
-			$app->setUserState('com_categories.categories.data', $data);
+			$app->setUserState($context.'.data', $data);
 		}
 
 		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
@@ -77,6 +78,7 @@ class CategoriesModelCategories extends JModelList
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -177,7 +179,7 @@ class CategoriesModelCategories extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance('com_categories.categories', 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context.'.'.$this->getState('extension').'.'.$this->getState('section'), 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -186,7 +188,7 @@ class CategoriesModelCategories extends JModelList
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_categories.categories.data', array());
+		$data = $app->getUserState($this->context.'.data', array());
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
