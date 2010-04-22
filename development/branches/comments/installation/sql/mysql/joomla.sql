@@ -873,31 +873,58 @@ CREATE TABLE  `#__update_categories` (
 
 CREATE TABLE IF NOT EXISTS `#__social_comments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `thread_id` int(11) unsigned NOT NULL COMMENT 'The comments thread id - Foreign Key',
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Map to the user id',
-  `context` varchar(50) NOT NULL COMMENT 'The context of the comment',
-  `context_id` int(11) NOT NULL DEFAULT '0' COMMENT 'The id of the item in context',
-  `trackback` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Is the comment a trackback',
-  `page` varchar(255) NOT NULL COMMENT 'Custom page field',
-  `name` varchar(255) NOT NULL COMMENT 'Name of the commentor',
-  `url` varchar(255) NOT NULL COMMENT 'Website for the commentor',
-  `email` varchar(255) NOT NULL COMMENT 'Email address for the commentor',
-  `subject` varchar(255) NOT NULL COMMENT 'The subject of the comment',
-  `body` varchar(5120) NOT NULL COMMENT 'Body of the comment',
-  `score` double NOT NULL DEFAULT '0' COMMENT 'The rating score of the commentor',
-  `score_like` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who like this comment',
-  `score_dislike` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who dislike this comment',
-  `notify` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Notify the user on further comments',
-  `referer` varchar(255) NOT NULL COMMENT 'The referring URL',
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When the comment was created',
-  `published` int(10) NOT NULL DEFAULT '0' COMMENT 'Published state, allows for moderation',
-  `address` int(11) unsigned NOT NULL COMMENT 'Address of the commentor (IP, Mac, etc)',
-  `link` varchar(255) NOT NULL COMMENT 'The link to the page the comment was made on',
-  `language` char(7) NOT NULL DEFAULT '' COMMENT 'The language of the comment',
+  `content_id` int(10) unsigned NOT NULL COMMENT 'Foreign key to #__social_content for the comment.',
+  `component` varchar(50) NOT NULL COMMENT 'The name of the component associated with the comment.',
+  `context` varchar(255) NOT NULL COMMENT 'The context of the comment.',
+  `created_date` datetime NOT NULL COMMENT 'The created date for the comment.',
+  `modified_date` datetime NOT NULL COMMENT 'The modified date for the comment.',
+  `state` int(11) NOT NULL default '0' COMMENT 'The state of the comment.',
+  `language` char(7) NOT NULL DEFAULT '' COMMENT 'The language of the comment.',
+  `trackback` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Is the comment a trackback?',
+  
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign key to #__users for the comment submitter.',
+  `user_ip` int(20) NOT NULL COMMENT 'IP address of the comment submitter.',
+  `user_name` varchar(255) NOT NULL COMMENT 'Name of the comment submitter.',
+  `user_link` varchar(255) NOT NULL COMMENT 'Website for the comment submitter.',
+  `user_email` varchar(255) NOT NULL COMMENT 'Email address for the comment submitter.',
+  `user_notify` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Notify the user on replies.',
+
+  `subject` varchar(255) NOT NULL COMMENT 'The subject of the comment.',
+  `body` varchar(5120) NOT NULL COMMENT 'Body of the comment.',
+
+  `score` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the comment submitter.',
+  `score_like` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who like this comment.',
+  `score_dislike` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who dislike this comment.',
+  
   PRIMARY KEY (`id`),
-  KEY `idx_context` (`context`,`context_id`,`published`),
+  KEY `idx_context` (`context`,`state`),
   KEY `idx_user_id` (`user_id`),
   KEY `idx_language` (`language`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `#__social_content`
+--
+
+CREATE TABLE IF NOT EXISTS `#__social_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `component` varchar(50) NOT NULL COMMENT 'The name of the component associated with the content item.',
+  `context` varchar(255) NOT NULL COMMENT 'The context of the content item.',
+  `page_route` varchar(255) NOT NULL COMMENT 'The route of the page for which the content item is attached.',
+  `page_title` varchar(255) NOT NULL COMMENT 'The title of the page for which the content item is attached.',
+  `created_date` datetime NOT NULL COMMENT 'The created date for the content item.',
+  `state` int(11) NOT NULL default '0' COMMENT 'The state of the content item.',
+
+  `rating_score` double NOT NULL default '0' COMMENT 'The rating score for the content item.',
+  `rating_total` double NOT NULL default '0' COMMENT 'The sum of all accumulated ratings for the content item.',
+  `rating_count` int(10) unsigned NOT NULL default '0' COMMENT 'Total number of ratings for the content item.',
+  `comment_count` int(10) unsigned NOT NULL default '0' COMMENT 'Total number of comments for the content item.',
+
+  `pings`  mediumtext NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `idx_context` (`context`,`state`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -907,42 +934,21 @@ CREATE TABLE IF NOT EXISTS `#__social_comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `#__social_ratings` (
-  `thread_id` int(11) unsigned NOT NULL,
-  `context` varchar(50) NOT NULL COMMENT 'The context of the rating',
-  `context_id` int(11) NOT NULL default '0' COMMENT 'The id of the item in context',
-  `referer` varchar(255) NOT NULL default '' COMMENT 'The referring URL',
-  `page` varchar(255) NOT NULL COMMENT 'Custom page field',
-  `pscore_total` double NOT NULL default '0' COMMENT 'Cummulative public score',
-  `pscore_count` int(10) NOT NULL default '0' COMMENT 'Total number of public ratings',
-  `pscore` double NOT NULL default '0' COMMENT 'Actual public score',
-  `mscore_total` double NOT NULL default '0' COMMENT 'Cummulative member score',
-  `mscore_count` int(10) NOT NULL default '0' COMMENT 'Total number of member ratings',
-  `mscore` double NOT NULL default '0' COMMENT 'Actual score',
-  `used_ips` longtext COMMENT 'The ips used to vote',
-  `updated_date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`thread_id`),
-  KEY `idx_updated` (`updated_date`,`pscore`),
-  KEY `idx_pscore` (`pscore`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Aggregate scores for public and member ratings';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `#__social_threads`
---
-
-CREATE TABLE IF NOT EXISTS `#__social_threads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `context` varchar(50) NOT NULL COMMENT 'The context of the comment thread',
-  `context_id` int(11) NOT NULL default '0' COMMENT 'The id of the item in context',
-  `page_url` varchar(255) NOT NULL COMMENT 'The URL of the page for which the thread is attached',
-  `page_route` varchar(255) NOT NULL COMMENT 'The route of the page for which the thread is attached',
-  `page_title` varchar(255) NOT NULL COMMENT 'The title of the page for which the thread is attached',
-  `created_date` datetime NOT NULL COMMENT 'The created date for the comment thread',
-  `status` int(10) unsigned NOT NULL default '0' COMMENT 'Thread status',
-  `pings`  mediumtext NOT NULL,
+  `content_id` int(10) unsigned NOT NULL COMMENT 'Foreign key to #__social_content for the rating.',
+  `component` varchar(50) NOT NULL COMMENT 'The name of the component associated with the rating.',
+  `context` varchar(255) NOT NULL COMMENT 'The context of the rating.',
+  `created_date` datetime NOT NULL COMMENT 'The created date for the comment.',
+  `modified_date` datetime NOT NULL COMMENT 'The modified date for the comment.',
+  `state` int(11) NOT NULL default '0' COMMENT 'The state of the comment.',
+
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign key to #__users for the rating submitter.',
+  `user_ip` int(20) NOT NULL COMMENT 'IP address of the rating submitter.',
+
+  `score` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the rating submitter.',
   PRIMARY KEY  (`id`),
-  KEY `idx_context` (`context`,`context_id`,`status`)
+  KEY `idx_updated` (`modified_date`,`score`),
+  KEY `idx_score` (`score`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
