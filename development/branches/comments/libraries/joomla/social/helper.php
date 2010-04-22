@@ -17,7 +17,7 @@ defined('JPATH_BASE') or die();
  * @subpackage	Social
  * @since		1.6
  */
-class JSocial2Helper
+class JSocialHelper
 {
 	public function getForm($params = null)
 	{
