@@ -22,23 +22,34 @@ class JModelList extends JModel
 	 * Internal memory based cache array of data.
 	 *
 	 * @var		array
+	 * @since	1.6
 	 */
-	protected $_cache = array();
+	protected $cache = array();
 
 	/**
 	 * Context string for the model type.  This is used to handle uniqueness
 	 * when dealing with the getStoreId() method and caching data structures.
 	 *
 	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_context = null;
+	protected $context = null;
 
 	/**
-	 * An array of totals for the lists.
+	 * Constructor.
 	 *
-	 * @var		array
+	 * @param	array	An optional associative array of configuration settings.
+	 * @see		JController
 	 */
-	protected $_totals = array();
+	public function __construct($config = array())
+	{
+		parent::__construct($config);
+
+		// Guess the context as Option.ModelName.
+		if (empty($this->context)) {
+			$this->context = strtolower($this->option.'.'.$this->getName());
+		}
+	}
 
 	/**
 	 * The database query.
@@ -51,6 +62,7 @@ class JModelList extends JModel
 	 * Method to get an array of data items.
 	 *
 	 * @return	mixed	An array of data items on success, false on failure.
+	 * @since	1.6
 	 */
 	public function getItems()
 	{
@@ -58,8 +70,8 @@ class JModelList extends JModel
 		$store = $this->getStoreId();
 
 		// Try to load the data from internal storage.
-		if (!empty($this->_cache[$store])) {
-			return $this->_cache[$store];
+		if (!empty($this->cache[$store])) {
+			return $this->cache[$store];
 		}
 
 		// Load the list items.
@@ -73,15 +85,16 @@ class JModelList extends JModel
 		}
 
 		// Add the items to the internal cache.
-		$this->_cache[$store] = $items;
+		$this->cache[$store] = $items;
 
-		return $this->_cache[$store];
+		return $this->cache[$store];
 	}
 
 	/**
 	 * Method to get a JDatabaseQuery object for retrieving the data set from a database.
 	 *
 	 * @return	object	A JDatabaseQuery object to retrieve the data set.
+	 * @since	1.6
 	 */
 	protected function getListQuery()
 	{
@@ -102,7 +115,7 @@ class JModelList extends JModel
 			// Fire the onPrepareQuery plugins
 			$dispatcher = JDispatcher::getInstance();
 			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array($this->_context, &$this->query));
+			$dispatcher->trigger('onPrepareQuery', array($this->context, &$this->query));
 		}
 		return $this->query;
 	}
@@ -111,6 +124,7 @@ class JModelList extends JModel
 	 * Method to get a JPagination object for the data set.
 	 *
 	 * @return	object	A JPagination object for the data set.
+	 * @since	1.6
 	 */
 	public function getPagination()
 	{
@@ -118,8 +132,8 @@ class JModelList extends JModel
 		$store = $this->getStoreId('getPagination');
 
 		// Try to load the data from internal storage.
-		if (!empty($this->_cache[$store])) {
-			return $this->_cache[$store];
+		if (!empty($this->cache[$store])) {
+			return $this->cache[$store];
 		}
 
 		// Create the pagination object.
@@ -128,9 +142,9 @@ class JModelList extends JModel
 		$page = new JPagination($this->getTotal(), (int) $this->getState('list.start'), $limit);
 
 		// Add the object to the internal cache.
-		$this->_cache[$store] = $page;
+		$this->cache[$store] = $page;
 
-		return $this->_cache[$store];
+		return $this->cache[$store];
 	}
 
 	/**
@@ -142,6 +156,7 @@ class JModelList extends JModel
 	 *
 	 * @param	string	An identifier string to generate the store id.
 	 * @return	string	A store id.
+	 * @since	1.6
 	 */
 	protected function getStoreId($id = '')
 	{
@@ -151,13 +166,14 @@ class JModelList extends JModel
 		$id	.= ':'.$this->getState('list.ordering');
 		$id	.= ':'.$this->getState('list.direction');
 
-		return md5($this->_context.':'.$id);
+		return md5($this->context.':'.$id);
 	}
 
 	/**
 	 * Method to get the total number of items for the data set.
 	 *
 	 * @return	integer	The total number of items available in the data set.
+	 * @since	1.6
 	 */
 	public function getTotal()
 	{
@@ -165,8 +181,8 @@ class JModelList extends JModel
 		$store = $this->getStoreId('getTotal');
 
 		// Try to load the data from internal storage.
-		if (!empty($this->_cache[$store])) {
-			return $this->_cache[$store];
+		if (!empty($this->cache[$store])) {
+			return $this->cache[$store];
 		}
 
 		// Load the total.
@@ -180,9 +196,9 @@ class JModelList extends JModel
 		}
 
 		// Add the total to the internal cache.
-		$this->_cache[$store] = $total;
+		$this->cache[$store] = $total;
 
-		return $this->_cache[$store];
+		return $this->cache[$store];
 	}
 
 	/**
@@ -194,27 +210,28 @@ class JModelList extends JModel
 	 *
 	 * @param	string	An optional ordering field.
 	 * @param	string	An optional direction (asc|desc).
+	 * @since	1.6
 	 */
 	protected function populateState($ordering = null, $direction)
 	{
 		// If the context is set, assume that stateful lists are used.
-		if ($this->_context) {
+		if ($this->context) {
 			$app = JFactory::getApplication();
 
 			$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
 			$this->setState('list.limit', $limit);
 
-			$limitstart = $app->getUserStateFromRequest($this->_context.'.limitstart', 'limitstart', 0);
+			$limitstart = $app->getUserStateFromRequest($this->context.'.limitstart', 'limitstart', 0);
 			$this->setState('list.start', $limitstart);
 
-			$orderCol = $app->getUserStateFromRequest($this->_context.'.ordercol', 'filter_order', $ordering);
+			$orderCol = $app->getUserStateFromRequest($this->context.'.ordercol', 'filter_order', $ordering);
 			$this->setState('list.ordering', $orderCol);
 
-			$orderDirn = $app->getUserStateFromRequest($this->_context.'.orderdirn', 'filter_order_Dir', $direction);
+			$orderDirn = $app->getUserStateFromRequest($this->context.'.orderdirn', 'filter_order_Dir', $direction);
 			$this->setState('list.direction', $orderDirn);
 		} else {
 			$this->setState('list.start', 0);
-			$this->_state->set('list.limit', 0);
+			$this->state->set('list.limit', 0);
 		}
 	}
 }

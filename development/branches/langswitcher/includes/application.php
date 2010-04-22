@@ -277,7 +277,7 @@ final class JSite extends JApplication
 			if (!$option) {
 				$option = JRequest::getCmd('option');
 			}
-			// Get new instance of component global parameters 
+			// Get new instance of component global parameters
 			$params[$hash] = clone JComponentHelper::getParams($option);
 
 			// Get menu parameters
@@ -297,7 +297,7 @@ final class JSite extends JApplication
 
 			$params[$hash]->def('page_title', $title);
 			$params[$hash]->def('page_description', $description);
-			$params[$hash]->def('page_rights', $rights);			
+			$params[$hash]->def('page_rights', $rights);
 		}
 
 		return $params[$hash];
