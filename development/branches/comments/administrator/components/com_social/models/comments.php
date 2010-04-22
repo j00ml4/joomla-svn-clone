@@ -30,9 +30,9 @@ class SocialModelComments extends JModelList
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 
-		$query->select('DISTINCT(context) AS value');
-		$query->from('#__social_threads');
-		$query->order('context');
+		$query->select('DISTINCT(component) AS value');
+		$query->from('#__social_comments');
+		$query->order('component');
 
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -67,22 +67,22 @@ class SocialModelComments extends JModelList
 		$query->from('`#__social_comments` AS a');
 
 		// Resolve foriegn keys.
-		$query->select('b.page_route, b.page_url, b.page_title');
-		$query->join('LEFT', '`#__social_threads` AS b ON b.id=a.thread_id');
+		$query->select('b.page_route, b.page_title');
+		$query->join('LEFT', '`#__social_content` AS b ON b.id=a.content_id');
 
 		// Filter by published state.
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
-			$query->where('a.published = '.(int) $published);
+			$query->where('a.state = '.(int) $published);
 		}
 		else if ($published === '') {
-			$query->where('(a.published IN (0, 1))');
+			$query->where('(a.state IN (0, 1))');
 		}
 
 		// Filter the items over the thread id if set.
 		$thread_id = $this->getState('filter.thread_id');
 		if ($thread_id !== null && $thread_id > 0) {
-			$query->where('a.thread_id = '.(int)$thread_id);
+			$query->where('a.content_id = '.(int)$thread_id);
 		}
 
 		// Filter the items over the context if set.
@@ -98,7 +98,7 @@ class SocialModelComments extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('a.name LIKE '.$search);
+				$query->where('a.user_name LIKE '.$search);
 			}
 		}
 
@@ -159,6 +159,6 @@ class SocialModelComments extends JModelList
 		$this->setState('params', $value);
 
 		// List state information.
-		parent::populateState('a.name', 'asc');
+		parent::populateState('a.user_name', 'asc');
 	}
 }
