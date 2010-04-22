@@ -871,35 +871,6 @@ VALUES
 (28, 3, 'Joomla! Security News', 'joomla-security-news', 'http://feeds.joomla.org/JoomlaSecurityNews', NULL, 1, 5, 3600, 0, '0000-00-00 00:00:00', 1,0,1,'en-GB','{"show_headings":"","show_name":"","show_articles":"","show_link":"","show_cat_description":"","show_cat_items":"","show_feed_image":"","show_feed_description":"","show_item_description":"","feed_word_count":"0"}', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (28, 4, 'Joomla! Connect', 'joomla-connect', 'http://feeds.joomla.org/JoomlaConnect', NULL, 1, 5, 3600, 0, '0000-00-00 00:00:00', 1,0,1,'en-GB','{"show_headings":"","show_name":"","show_articles":"","show_link":"","show_cat_description":"","show_cat_items":"","show_feed_image":"","show_feed_description":"","show_item_description":"","feed_word_count":"0"}', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0, '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
---
--- Dumping data for table `#__social_comments`
---
-
-INSERT INTO `#__social_comments` VALUES
-(1, 1, 0, 'content', 1, 0, '', 'Andrew Eddie', 'andrew.example.com', 'andrew@example.com', 'Go Bronco\'s', 'The cockroaches have no chance against the cane toads in the State of Origin.', 0, 0, 0, 0, '', '2010-04-05 10:45:08', 0, 2130706433, '', ''),
-(2, 1, 0, 'content', 1, 0, '', 'Louis Landry', 'louis.example.com', 'louis@example.com', 'Go Saints', 'It was a huge party in New Orleans', 0, 0, 0, 0, '', '2010-04-05 10:51:58', 0, 2130706433, '', ''),
-(3, 2, 0, 'content', 64, 5, '', 'Example', '', 'example@example.com', 'Great post!', 'This is the best post about parks ever!', 0, 0, 0, 0, '', '2010-04-05 19:11:57', 0, 2130706433, '', ''),
-(4, 2, 0, 'content', 64, 8, '', 'Example', '', '', 'Silly', 'Why do people always use the same filler text? It\'s silly. No one speaks Latin anymore.', 0, 0, 0, 1, '', '2010-04-05 19:11:57', 0, 2130706433, '', ''),
-(5, 3, 0, 'content', 65, 1, 'Second Park Blog ', 'Not me', '', 'motme@example.com', 'Kangaroos', 'I really like the kangaroos at that park.  I never saw so many in one place.', 0, 2, 10, 0, '', '2010-04-05 19:32:05', 0, 2130706432, '', ''),
-(6, 3, 0, 'content', 65, 0, '', 'Park Friend', '', '', 'Confused', 'I really don\'t get the point of this post.', 0, 0, 0, 0, '', '2010-04-05 19:32:05', 0, 2130706433, '', '');
-
---
--- Dumping data for table `#__social_ratings`
---
-
-INSERT INTO `#__social_ratings` VALUES
-(1, 'content', 1, '', '', 1, 1, 1, 0, 0, 0, NULL, '2010-04-05 10:52:38'),
-(2, 'content', 63, '', 'First Park Blog', 1, 1, 1, 0, 0, 0, NULL, '2010-04-05 19:36:47'),
-(3, 'content', 64, '', 'Second Park Blog', 0, 0, 0, 0, 0, 0, NULL, '2010-04-05 19:35:48');
-
---
--- Dumping data for table `#__social_threads`
---
-
-INSERT INTO `#__social_threads` VALUES
-(1, 'content', 1, '', '', 'Foobar', '0000-00-00 00:00:00', 0, ''),
-(2, 'content', 64, '', '', 'First Blog Post', '2010-04-05 19:05:13', 0, ''),
-(3, 'content', 65, '', '', 'Second Blog Post', '2010-04-05 19:05:13', 0, '');
 
 --
 -- Dumping data for table `#__template_styles`
