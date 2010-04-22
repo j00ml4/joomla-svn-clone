@@ -37,31 +37,6 @@ class modSocialRatingHelper
 	 * @param	JRegistry
 	 * @since	1.6
 	 */
-	public static function getThread(&$params)
-	{
-		jimport('joomla.social.thread');
-
-		$model = new JThread;
-		$model->setState('thread.context',		$params->get('context'));
-		$model->setState('thread.context_id',	(int) $params->get('context_id'));
-		$model->setState('thread.url',			$params->get('url'));
-		$model->setState('thread.route',		$params->get('route'));
-		$model->setState('thread.title',		$params->get('title'));
-
-		// Get the thread data.
-		$thread = &$model->getThread();
-
-		if ($thread) {
-			$params->set('thread.id', (int)$thread->id);
-		}
-
-		return $thread;
-	}
-
-	/**
-	 * @param	JRegistry
-	 * @since	1.6
-	 */
 	public static function isBlocked($params)
 	{
 		// import library dependencies
