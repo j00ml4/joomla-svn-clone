@@ -48,6 +48,9 @@ class JComment extends JModel
 	 */
 	protected $_whereby			= null;
 
+	protected $option = '-';
+	protected $name = '-';
+
 	/**
 	 * Method to add a comment to the database
 	 *

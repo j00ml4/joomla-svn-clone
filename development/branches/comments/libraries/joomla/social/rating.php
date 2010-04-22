@@ -19,6 +19,9 @@ jimport('joomla.application.component.model');
  */
 class JRating extends JModel
 {
+	protected $option = '-';
+	protected $name = '-';
+
 	/**
 	 * Method to add a rating to the database
 	 *

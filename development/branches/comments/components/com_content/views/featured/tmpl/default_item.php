@@ -153,9 +153,7 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 	if ($this->item->params->get('article-allow_comments')) :
 		echo JHtml::_(
 			'social.summary',
-			'com_content',
-			$this->item->id,
-			'index.php?option=com_content&view=article&id='.$this->item->id,
+			'com_content.article.'.$this->item->id,
 			$route,
 			$this->item->title
 		);
@@ -164,9 +162,7 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 	if ($this->item->params->get('article-allow_ratings')) :
 		echo JHtml::_(
 			'social.rating',
-			'com_content',
-			$this->item->id,
-			'index.php?option=com_content&view=article&id='.$this->item->id,
+			'com_content.article.'.$this->item->id,
 			$route,
 			$this->item->title
 		);
@@ -175,6 +171,7 @@ $route	= ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->cat
 	if ($this->item->params->get('article-allow_sharing')) :
 		echo JHtml::_(
 			'social.share',
+			'com_content.article.'.$this->item->id,
 			$route,
 			$this->item->title
 		);

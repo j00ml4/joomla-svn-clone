@@ -17,7 +17,6 @@ $user		= JFactory::getUser();
 $uri		= JURI::getInstance();
 $document	= JFactory::getDocument();
 $context	= 'error';
-$contextId	= 0;
 
 // if the autodetect context parameter is set, let's use it
 if ($params->get('autodetect')) {
@@ -26,20 +25,17 @@ if ($params->get('autodetect')) {
 
 	// assumption is that if a global context is set, it is atomic
 	$context	= (string) $application->get('thread.context', $context);
-	$contextId	= (string) $application->get('thread.context_id', $contextId);
 
 	// We need to get some values if they are not present.
-	$params->def('url', 'index.php?option='.JRequest::getCmd('option').'&view='.JRequest::getCmd('view').'&id='.JRequest::getInt('id'));
 	$params->def('route', $uri->toString(array('scheme', 'user', 'pass', 'host', 'port', 'path', 'query')));
 	$params->def('title', $document->getTitle());
 }
 
 // if module parameters set the context, they always win
-$context	= $params->def('context',	$context);
-$contextId	= $params->def('context_id', $contextId);
+$context = $params->def('context',	$context);
 
 // if we do not have a context set, then lets exit gracefully
-if (($context == 'error') and ($contextId == 0)) {
+if ($context == 'error') {
 	return false;
 }
 
