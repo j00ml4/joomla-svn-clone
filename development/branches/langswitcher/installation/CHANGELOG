@@ -27,8 +27,22 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+22-Apr-2010 Hannes Papenberg
+# Fixed JDispatcherTest
+# Fixed JCacheConstructTest
+# Fixed Parameters in ContentModelAtricles
+# Fixed some bugs in com_installer
+
+22-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries/J/Installer/pack and plugin + some
+# Bug fix in login.php
+$ Standardize Show, Hide, Hits
+# Bug fix in feed.php (Thanks Dennis)
+# More Bug fixes concerning feeds in com_contents
+$ Refactoring ini/keys in libraries/J/Installer/template + helper
+
 22-Apr-2010 Andrew Eddie
- ^ Reactoring of internal property names in the MVC classes.
+ ^ Refactoring of internal property names in the MVC classes.
 
 21-Apr-2010 Christophe Demko
 $# Changing en_GB to en-GB in sample_data.sql
