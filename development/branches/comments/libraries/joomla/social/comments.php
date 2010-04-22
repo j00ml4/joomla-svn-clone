@@ -71,6 +71,58 @@ class JComments
 	}
 
 	/**
+	 * @param	JRegistry
+	 */
+	public function getForm($params = null)
+	{
+		jimport('joomla.form.form');
+
+		// Add the local form path.
+		JForm::addFormPath(dirname(__FILE__).'/forms');
+
+		// Get the form.
+		try {
+			$form = JForm::getInstance('social.comment', 'comment', array('control' => 'jform'), false);
+
+			// Allow for additional modification of the form, and events to be triggered.
+
+			// Get the dispatcher.
+			$dispatcher	= JDispatcher::getInstance();
+
+			// Trigger the form preparation event.
+			$results = $dispatcher->trigger('onPrepareForm', array($form->getName(), $form));
+
+			// Check for errors encountered while preparing the form.
+			if (count($results) && in_array(false, $results, true)) {
+				// Get the last error.
+				$error = $dispatcher->getError();
+
+				// Convert to a JException if necessary.
+				if (!JError::isError($error)) {
+					throw new Exception($error);
+				}
+			}
+
+			if ($params instanceof JRegistry) {
+				$uri = JFactory::getUri();
+				$data = array(
+					'context'	=> $params->get('context'),
+					'redirect'	=> base64_encode($uri->toString(array('path', 'query', 'fragment'))),
+					'subject'	=> $params->get('title')
+				);
+				$form->bind($data);
+			}
+
+			return $form;
+
+		} catch (Exception $e) {
+			JError::raiseWarning(500, $e->getMessage());
+			return false;
+		}
+
+	}
+
+	/**
 	 * Method to get the total number of comments by context.
 	 *
 	 * @param   string  $context    The content item context for which to get the number of comments.
