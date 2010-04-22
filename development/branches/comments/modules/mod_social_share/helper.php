@@ -9,54 +9,17 @@
 
 defined('_JEXEC') or die;
 
+/**
+ * @package		Joomla.Site
+ * @subpackage	mod_social_rating
+ */
 class modSocialShareHelper
 {
 	/**
-	 * Method to return a formatted URL string for a social bookmarking site
-	 *
-	 * @param	string	$site	The social bookmarking site
-	 * @param	string	$url	URL to the page to bookmark
-	 * @param	string	$title	The title of the page to bookmark
-	 * @return	mixed	The social bookmarking URL for the page or boolean false if the site doesn't exist
-	 * @since	1.0
+	 * @param	array
+	 * @since	1.6
 	 */
-	public function getBookmark($site, $params)
-	{
-		$result	= false;
-
-		$document	= &JFactory::getDocument();
-		$uri		= &JURI::getInstance();
-		$bookmarks	= modSocialShareHelper::addBookmarkArray();
-
-		$base	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
-		$url	= $params->get('route', modSocialShareHelper::getCurrentPageURL());
-		$title	= $params->get('title', $document->getTitle());
-
-		// Get the route if not an absolute path.
-		if (strpos($url, '://') === false) {
-			$url = $base.JRoute::_($url);
-		}
-
-		// URL encode the properties.
-		$url	= urlencode($url);
-		$title	= urlencode($title);
-
-		if (!empty($bookmarks[$site])) {
-			$result	= str_replace(array('{URI}', '{TITLE}'), array($url, $title), $bookmarks[$site]);
-		}
-
-		return JFilterOutput::ampReplace($result);
-	}
-
-	function getCurrentPageURL()
-	{
-		// get a URI object and URI string of the current page
-		$uri	= &JFactory::getURI();
-		$url	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port', 'path', 'query'));
-		return $url;
-	}
-
-	function addBookmarkArray($array=null)
+	public static function addBookmarkArray($array=null)
 	{
 		static $bookmarks;
 
@@ -86,7 +49,59 @@ class modSocialShareHelper
 		return $bookmarks;
 	}
 
-	function isBlocked($params)
+	/**
+	 * Method to return a formatted URL string for a social bookmarking site
+	 *
+	 * @param	string	The social bookmarking site
+	 * @param	string	URL to the page to bookmark
+	 * @param	string	The title of the page to bookmark
+	 * @return	mixed	The social bookmarking URL for the page or boolean false if the site doesn't exist
+	 * @since	1.6
+	 */
+	public static function getBookmark($site, $params)
+	{
+		$result	= false;
+
+		$document	= &JFactory::getDocument();
+		$uri		= &JURI::getInstance();
+		$bookmarks	= modSocialShareHelper::addBookmarkArray();
+
+		$base	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
+		$url	= $params->get('route', modSocialShareHelper::getCurrentPageURL());
+		$title	= $params->get('title', $document->getTitle());
+
+		// Get the route if not an absolute path.
+		if (strpos($url, '://') === false) {
+			$url = $base.JRoute::_($url);
+		}
+
+		// URL encode the properties.
+		$url	= urlencode($url);
+		$title	= urlencode($title);
+
+		if (!empty($bookmarks[$site])) {
+			$result	= str_replace(array('{URI}', '{TITLE}'), array($url, $title), $bookmarks[$site]);
+		}
+
+		return JFilterOutput::ampReplace($result);
+	}
+
+	/**
+	 * @since	1.6
+	 */
+	public static function getCurrentPageURL()
+	{
+		// get a URI object and URI string of the current page
+		$uri	= &JFactory::getURI();
+		$url	= $uri->toString(array('scheme', 'user', 'pass', 'host', 'port', 'path', 'query'));
+		return $url;
+	}
+
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function isBlocked($params)
 	{
 		// import library dependencies
 		require_once JPATH_SITE.'/components/com_social/helpers/blocked.php';
