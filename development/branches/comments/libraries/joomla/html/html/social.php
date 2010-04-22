@@ -19,34 +19,268 @@ defined('_JEXEC') or die;
 class JHtmlSocial
 {
 	/**
-	 * Generate a trackback RDF widget
+	 * Generate a list of comments for an item of content.
 	 *
-	 * @static
-	 * @param	string	The item context
-	 * @param	int		The item id
-	 * @param	string	The standardized, simple url of the item
-	 * @param	string	The proper route to the item
-	 * @param	string	The title of the item
-	 * @param	string	An excerpt of the item
-	 * @param	string	The item author name
-	 * @return	string	A trackback RDF widget
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Options for the comments widget display
+	 * @return	string	A rendered comments list.
 	 * @since	1.6
 	 */
-	function trackbackRDF($context, $id, $url, $route, $title, $excerpt, $author)
+	public static function comments($context, $route, $title, $options = array('style'=>'raw'))
 	{
-		// Initialize variables
-		$widget = null;
+		// Initialise variables
+		$document	= JFactory::getDocument();
+		$renderer	= $document->loadRenderer('module');
+		$parts		= explode('.', $context);
+		$option		= $parts[0];
 
+		// Build module configuration.
+		$config = array(
+			'context'	=> $context,
+			'option'	=> $option,
+			'route'		=> $route,
+			'title'		=> $title
+		);
+
+		// get the module object for the comments module
+		$module	= JModuleHelper::getModule('mod_social_comment');
+		$module->params	= json_encode($config);
+
+		// render the module
+		$widget	= $renderer->render($module, $options);
+
+		return $widget;
+	}
+
+	/**
+	 * Computes the number of comments made against an item of content.
+	 *
+	 * @param	string	The context of the content.
+	 * @return	int		The number of comments made against the content.
+	 * @since	1.6
+	 */
+	public static function commentCount($context)
+	{
 		// Add the appropriate include paths for models.
-		jimport('joomla.application.component.model');
-		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
+		jimport('joomla.social.comments');
 
 		// Get and configure the thread model.
-		$model = JModel::getInstance('Thread', 'SocialModel');
-		$model->getState();
+		$model = new JComments;
+		$model->setState('filter.context', $context);
+
+		// Get the thread data.
+		$total = (int) $model->getTotal();
+
+		if ($error = $model->getError()) {
+			JError::raiseWarning(500, $error);
+		}
+
+		return $total;
+	}
+
+	/**
+	 * Generates an email link to the MailTo component.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Link attributes.
+	 * @return	string	The mailto link.
+	 * @since	1.6
+	 */
+	public static function email($context, $route, $title, $attribs = array())
+	{
+		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($route);
+		$status = 'width=400,height=300,menubar=yes,resizable=yes';
+
+		$attribs = array(
+			'title'		=> JText::_('SOCIAL_Email'),
+			'onclick'	=> "window.open(this.href,'win2','$status'); return false;",
+			'rel'		=> 'nofollow'
+		);
+
+		$result	= JHtml::_('link', JRoute::_($url), $title, $attribs);
+		return $result;
+	}
+
+	/**
+	 * Generates a comment submission form.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Options for the comments form display.
+	 * @return	string	A rendered comment submission form.
+	 * @since	1.6
+	 */
+	public static function form($context, $route, $title, $options = array('style'=>'raw'))
+	{
+		// Initialise variables
+		$document	= JFactory::getDocument();
+		$renderer	= $document->loadRenderer('module');
+		$parts		= explode('.', $context);
+		$option		= $parts[0];
+
+		// Build module configuration
+		$config = array(
+			'context'	=> $context,
+			'option'	=> $option,
+			'layout'	=> 'form',
+			'route'		=> $route,
+			'title'		=> $title
+		);
+
+		// get the module object for the comments module
+		$module	= JModuleHelper::getModule('mod_social_comment');
+		$module->params	= json_encode($config);
+
+		// render the module
+		$widget	= $renderer->render($module, $options);
+
+		return $widget;
+	}
+
+	/**
+	 * Generate a list of ratings stars.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Options for the rating widget display.
+	 * @return	string	A rendered list of rating stars.
+	 * @since	1.6
+	 */
+	public static function rating($context, $route, $title, $options = array('style'=>'raw'))
+	{
+		// Initialise variables
+		$document	= JFactory::getDocument();
+		$renderer	= $document->loadRenderer('module');
+		$parts		= explode('.', $context);
+		$option		= $parts[0];
+
+		// Build module configuration.
+		$config = array(
+			'context'	=> $context,
+			'option'	=> $option,
+			'route'		=> $route,
+			'title'		=> $title
+		);
+
+		// get the module object for the comments module
+		$module	= JModuleHelper::getModule('mod_social_rating');
+		$module->params	= json_encode($config);
+
+		// render the module
+		$widget	= $renderer->render($module, $options);
+
+		return $widget;
+	}
+
+	/**
+	 * Generate a list of sharing links.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Options for the sharing widget display
+	 * @return	string	A sharing widget
+	 * @since	1.6
+	 */
+	public static function share($context, $route, $title, $options = array('style'=>'raw'))
+	{
+		// Initialise variables
+		$document	= JFactory::getDocument();
+		$renderer	= $document->loadRenderer('module');
+		$parts		= explode('.', $context);
+		$option		= $parts[0];
+
+		// Build module configuration.
+		$config = array(
+			'option'	=> $option,
+			'route'		=> $route,
+			'title'		=> $title
+		);
+		if (!empty($options['feedflarepath'])) {
+			$config['layout']			= 'feedflare';
+			$config['feedflarepath']	= $options['feedflarepath'];
+		}
+
+		// get the module object for the comments module
+		$module	= JModuleHelper::getModule('mod_social_share');
+		$module->params	= json_encode($config);
+
+		// render the module
+		$widget	= $renderer->render($module, $options);
+
+		return $widget;
+	}
+
+	/**
+	 * Generate a summary of the comments made against an item of content.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	array	Options for the comments summary display.
+	 * @return	string	A comments summary widget.
+	 * @since	1.6
+	 */
+	public static function summary($context, $route, $title, $options = array('style'=>'raw'))
+	{
+		// Initialise variables.
+		$document	= JFactory::getDocument();
+		$renderer	= $document->loadRenderer('module');
+		$parts		= explode('.', $context);
+		$option		= $parts[0];
+
+		// Build module configuration.
+		$config = array(
+			'context'	=> $context,
+			'option'	=> $option,
+			'layout'	=> 'simple',
+			'route'		=> $route,
+			'title'		=> $title
+		);
+
+		// build module configuration
+		$config[] = 'route='.$route;
+		$config[] = 'title='.$title;
+		$config[] = 'context='.$context;
+		$config[] = 'layout=simple';
+
+		// get the module object for the comments module
+		$module	= JModuleHelper::getModule('mod_social_comment');
+		$module->params	= json_encode($config);
+
+		// render the module
+		$widget	= $renderer->render($module, $options);
+
+		return $widget;
+	}
+
+	/**
+	 * Generates a trackback RDF widget for an item of content.
+	 *
+	 * @param	string	The context of the content.
+	 * @param	string	The proper route to the content.
+	 * @param	string	The title of the content.
+	 * @param	string	An excerpt of the item.
+	 * @param	string	The item author name.
+	 * @return	string	A trackback RDF widget.
+	 * @since	1.6
+	 */
+	public static function trackbackRDF($context, $route, $title, $excerpt, $author)
+	{
+		jimport('joomla.social.trackback');
+
+		// Initialize variables
+		$model	= new JTrackback;
+		$parts	= explode('.', $context);
+		$option	= $parts[0];
+
 		$model->setState('thread.context', $context);
-		$model->setState('thread.context_id', (int) $id);
-		$model->setState('thread.url', $url);
 		$model->setState('thread.route', $route);
 		$model->setState('thread.title', $title);
 
@@ -58,239 +292,8 @@ class JHtmlSocial
 
 		// Get the trackback information for the item.
 		jimport('joomla.webservices.trackback');
-		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option=com_social&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
+		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option='.$option.'&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
 
 		return $widget;
-	}
-
-	/**
-	 * Generate a comments summary widget
-	 *
-	 * @static
-	 * @param	string	The item context to summarize
-	 * @param	int		The item id to summarize
-	 * @param	string	The standardized, simple url of the item to summarize
-	 * @param	string	The proper route to the them to summarize.
-	 * @param	array	Options for the comments summary display
-	 * @return	string	A comments summary widget
-	 * @since	1.6
-	 */
-	function summary($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
-	{
-		// initialize variables
-		$widget = null;
-
-		// get the module renderer
-		$document	= JFactory::getDocument();
-		$renderer	= $document->loadRenderer('module');
-
-		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-		$config[] = 'layout=simple';
-
-		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_social_comment');
-		$module->params	= implode("\n", $config);
-
-		// render the module
-		$widget	= $renderer->render($module, $options);
-
-		return $widget;
-	}
-
-	/**
-	 * Generate a comments list widget
-	 *
-	 * @static
-	 * @param	string	The item context to comment on
-	 * @param	int		The item id
-	 * @param	string	The standardized, simple url
-	 * @param	string	The proper route to the them
-	 * @param	array	Options for the comments widget display
-	 * @return	string	A comments widget
-	 * @since	1.6
-	 */
-	function comments($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
-	{
-		// initialize variables
-		$widget = null;
-
-		// get the module renderer
-		$document	= JFactory::getDocument();
-		$renderer	= $document->loadRenderer('module');
-
-		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-
-		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_social_comment');
-		$module->params	= implode("\n", $config);
-
-		// render the module
-		$widget	= $renderer->render($module, $options);
-
-		return $widget;
-	}
-
-	function count($context, $id)
-	{
-		// Add the appropriate include paths for models.
-		jimport('joomla.application.component.model');
-		JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
-
-		// Get and configure the thread model.
-		$model = JModel::getInstance('Comments', 'SocialModel');
-		$model->getState();
-		$model->setState('filter.context', $context);
-		$model->setState('filter.context_id', (int) $id);
-
-		// Get the thread data.
-		$total = (int)$model->getTotal();
-
-		return $total;
-	}
-
-	/**
-	 * Generate a comments form widget
-	 *
-	 * @static
-	 * @param	string	The item context to post a comment for
-	 * @param	int		The item id to post a comment form
-	 * @param	string	The url of the item to post a comment form for
-	 * @param	string	The proper route to the item
-	 * @param	array	Options for the comments form display
-	 * @return	string	A comments form widget
-	 * @since	1.6
-	 */
-	function form($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
-	{
-		// initialize variables
-		$widget = null;
-
-		// get the module renderer
-		$document	= JFactory::getDocument();
-		$renderer	= $document->loadRenderer('module');
-
-		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-		$config[] = 'layout=form';
-
-		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_social_comment');
-		$module->params	= implode("\n", $config);
-
-		// render the module
-		$widget	= $renderer->render($module, $options);
-
-		return $widget;
-	}
-
-	/**
-	 * Generate a sharing widget
-	 *
-	 * @static
-	 * @param	string	The proper route to the item.
-	 * @param	string	The title of the item to share
-	 * @param	array	Options for the sharing widget display
-	 * @return	string	A sharing widget
-	 * @since	1.6
-	 */
-	function share($route, $title, $options = array('style'=>'raw'))
-	{
-		// initialize variables
-		$widget = null;
-
-		// get the module renderer
-		$document	= JFactory::getDocument();
-		$renderer	= $document->loadRenderer('module');
-
-		// build module configuration
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		if (!empty($options['feedflarepath'])) {
-			$config[] = 'layout=feedflare';
-			$config[] = 'feedflarepath='.$options['feedflarepath'];
-		}
-
-		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_social_share');
-		$module->params	= implode("\n", $config);
-
-		// render the module
-		$widget	= $renderer->render($module, $options);
-
-		return $widget;
-	}
-
-	/**
-	 * Generate a rating widget
-	 *
-	 * @static
-	 * @param	string	The item context to rate
-	 * @param	string	The item id to rate
-	 * @param	int		A category Id for the ratings (that is, a rating category relative to the context - not a real category)
-	 * @param	array	Options for the rating widget display
-	 * @return	string	A rating widget
-	 * @since	1.6
-	 */
-	function rating($context, $id, $url, $route, $title, $options = array('style'=>'raw'))
-	{
-		// initialize variables
-		$widget = null;
-
-		// get the module renderer
-		$document	= JFactory::getDocument();
-		$renderer	= $document->loadRenderer('module');
-
-		// build module configuration
-		$config[] = 'url='.$url;
-		$config[] = 'route='.$route;
-		$config[] = 'title='.$title;
-		$config[] = 'context='.$context;
-		$config[] = 'context_id='.$id;
-
-		// get the module object for the comments module
-		$module	= JModuleHelper::getModule('mod_social_rating');
-		$module->params	= implode("\n", $config);
-
-		// render the module
-		$widget	= $renderer->render($module, $options);
-
-		return $widget;
-	}
-
-	/**
-	 * Generate a link to a mailto popup for
-	 *
-	 * @static
-	 * @param	string	Title for the link
-	 * @param	string	The proper route to the item
-	 * @param	array	Link attributes
-	 * @return	string	The mailto link
-	 * @since	1.6
-	 */
-	function email($title, $route, $attribs = array())
-	{
-		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($route);
-		$status = 'width=400,height=300,menubar=yes,resizable=yes';
-
-		$attribs['title']	= JText::_('SOCIAL_Email');
-		$attribs['onclick'] = "window.open(this.href,'win2','".$status."'); return false;";
-		$attribs['rel']		= 'nofollow';
-
-		$result	= JHtml::_('link', JRoute::_($url), $title, $attribs);
-		return $result;
 	}
 }

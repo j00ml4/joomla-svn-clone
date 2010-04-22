@@ -20,6 +20,9 @@ jimport('joomla.application.component.modellist');
  */
 class JComments extends JModelList
 {
+	protected $option = '-';
+	protected $name = '-';
+
 	/**
 	 * Method to get a JQuery object for retrieving the data set from a database.
 	 *

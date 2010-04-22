@@ -21,6 +21,9 @@ jimport('joomla.database.databasequery');
  */
 class JThread extends JModel
 {
+	protected $option = '-';
+	protected $name = '-';
+
 	/**
 	 * Flag to indicate model state initialization.
 	 *

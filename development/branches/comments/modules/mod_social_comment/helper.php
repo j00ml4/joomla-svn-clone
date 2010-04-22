@@ -9,25 +9,20 @@
 
 defined('_JEXEC') or die;
 
-// Add the appropriate include paths for models.
-jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
-
 class modSocialCommentHelper
 {
 	function getThread(&$params)
 	{
+		jimport('joomla.social.thread');
+
 		// Get and configure the thread model.
-		$model = &JModel::getInstance('Thread', 'SocialModel');
-		$model->getState();
-		$model->setState('thread.context', $params->get('context'));
-		$model->setState('thread.context_id', (int)$params->get('context_id'));
-		$model->setState('thread.url', $params->get('url'));
-		$model->setState('thread.route', $params->get('route'));
-		$model->setState('thread.title', $params->get('title'));
+		$model = new JThread;
+		$model->setState('thread.context',	$params->get('context'));
+		$model->setState('thread.route',	$params->get('route'));
+		$model->setState('thread.title',	$params->get('title'));
 
 		// Get the thread data.
-		$thread = &$model->getThread();
+		$thread = $model->getThread();
 
 		if ($thread) {
 			$params->set('thread.id', (int)$thread->id);
@@ -38,8 +33,9 @@ class modSocialCommentHelper
 
 	function &getComments(&$params)
 	{
-		$model = &JModel::getInstance('Comments', 'SocialModel');
-		$model->getState();
+		jimport('joomla.social.comments');
+
+		$model = new JComments;
 		$model->setState('filter.thread_id', $params->get('thread.id'));
 		$model->setState('filter.state', 1);
 		if (strtolower($params->get('list_order')) == 'asc') {
@@ -49,15 +45,16 @@ class modSocialCommentHelper
 		}
 		$model->setState('list.limit', $params->get('pagination', 10));
 
-		$comments = &$model->getItems();
+		$comments = $model->getItems();
 
 		return $comments;
 	}
 
-	function &getPagination(&$params)
+	function getPagination(&$params)
 	{
-		$model = &JModel::getInstance('Comments', 'SocialModel');
-		$model->getState();
+		jimport('joomla.social.comments');
+
+		$model = new JComments;
 		$model->setState('filter.thread_id', $params->get('thread.id'));
 		$model->setState('filter.state', 1);
 		if (strtolower($params->get('list_order')) == 'asc') {
@@ -67,7 +64,7 @@ class modSocialCommentHelper
 		}
 		$model->setState('list.limit', $params->get('pagination', 10));
 
-		$pagination = &$model->getPagination();
+		$pagination = $model->getPagination();
 
 		return $pagination;
 	}
