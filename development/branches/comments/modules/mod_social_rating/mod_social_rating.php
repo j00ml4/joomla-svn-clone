@@ -14,7 +14,7 @@ $params->merge(JComponentHelper::getParams('com_social'));
 
 // Initialise variables.
 $context	= 'error';
-$contextId	= 0;
+$extension	= 'error';
 
 // if the autodetect context parameter is set, let's use it
 if ($params->get('autodetect')) {
@@ -23,15 +23,16 @@ if ($params->get('autodetect')) {
 
 	// assumption is that if a global context is set, it is atomic
 	$context	= (string) $application->get('thread.context', $context);
-	$contextId	= (string) $application->get('thread.context_id', $contextId);
+	$parts		= explode('.', $context);
+	$extension	= $parts[0];
 }
 
 // if module parameters set the context, they always win
 $context	= $params->def('context',	$context);
-$contextId	= $params->def('context_id', $contextId);
+$extension	= $params->def('extension',	$extension);
 
 // if we do not have a context set, then lets exit gracefully
-if (($context == 'error') and ($contextId == 0)) {
+if ($context == 'error' || $extension == 'error') {
 	return false;
 }
 

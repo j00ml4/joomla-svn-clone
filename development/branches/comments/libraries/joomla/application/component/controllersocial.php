@@ -201,58 +201,29 @@ die;
 //			return false;
 		}
 
+		// Initialise variables.
+		$context	= JRequest::getCmd('context');
+		$redirect	= base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
+		$score		= JRequest::getFloat('score', 0.0);
+		$user		= JFactory::getUser();
+		$userId		= (int) $user->get('id');
+
 		// Include dependancies.
 		jimport('joomla.social.ratings');
 
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$form	= JComments::getForm();
-		if (!$form) {
-			JError::raiseError(500, $model->getError());
-			return false;
-		}
-
-		// Get the form control, if used, and then the raw data.
-		$control = $form->getFormControl();
-
-		if ($control) {
-			$data = JRequest::getVar($control, array(), 'post', 'array', JREQUEST_ALLOWRAW);
-		} else {
-			// A form control wasn't used, so just get the data from the method.
-			$data = JRequest::get('method', JREQUEST_ALLOWRAW);
-		}
-
-		// Validate the data.
-		$data = JComments::validate($form, $data);
-
 		// Access check.
-		if (!$this->canComment($data['context'])) {
-			die('cannot comment');
+		if (!$this->canRate($context)) {
+			die('cannot rate');
 			// TODO: handle error
 		}
 
-		JComments::save($data);
+		JRatings::save($userId, $context, $score);
 
-		// Get the URL to redirect the request to.
-		$redirect = base64_decode($data['redirect']);
 die;
 
 
-		// Get the URL to redirect the request to.
-		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
-
-		// Check for a valid token.
-		// We must do this by hand as the framework with throw a session expired message.
-		$token	= JUtility::getToken();
-		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
-			$this->setRedirect($redirect, JText::_('JX_Invalid_Token'), 'error');
-			return false;
-		}
-
 		$app	= JFactory::getApplication();
 		$config	= JComponentHelper::getParams('com_social');
-		$user	= JFactory::getUser();
-		$uId	= (int)$user->get('id');
 		$tId	= JRequest::getInt('thread_id');
 
 		// Load the language file for the comment module.
