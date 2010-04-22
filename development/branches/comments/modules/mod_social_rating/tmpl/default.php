@@ -25,13 +25,13 @@ if ($params->get('star_file')) {
 
 <?php
 $redirect = base64_encode($uri->toString(array('path', 'query', 'fragment')));
-$degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id.'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
+$degraded = 'index.php?option=com_social&task=rating.add&context='.$params->get('context').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
 ?>
 
 <div class="rating-container">
-	<form id="rate-<?php echo $thread->id; ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option=com_social&task=rating.add');?>">
+	<form id="rate-<?php echo $params->get('context'); ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option=com_social&task=rating.add');?>">
 		<ul class="rating-stars">
-			<li id="current-<?php echo $thread->id; ?>" class="current-rating" style="width:<?php echo (int) ($rating->pscore*100); ?>%;"></li>
+			<li id="current-<?php echo $params->get('context'); ?>" class="current-rating" style="width:<?php echo (int) ($rating->score*100); ?>%;"></li>
 			<li><a title="1" rel="0.2" class="one-star rate" href="<?php echo JRoute::_($degraded.'0.2'); ?>" rel="nofollow">1</a></li>
 			<li><a title="2" rel="0.4" class="two-stars rate" href="<?php echo JRoute::_($degraded.'0.4'); ?>" rel="nofollow">2</a></li>
 			<li><a title="3" rel="0.6" class="three-stars rate" href="<?php echo JRoute::_($degraded.'0.6'); ?>" rel="nofollow">3</a></li>
@@ -40,12 +40,12 @@ $degraded = 'index.php?option=com_social&task=rating.add&thread_id='.$thread->id
 		</ul>
 
 		<input type="hidden" name="score" value="" />
-		<input type="hidden" name="thread_id" value="<?php echo $thread->id; ?>" />
+		<input type="hidden" name="context" value="<?php echo $params->get('context'); ?>" />
 		<input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</form>
 
-	<div id="rating-count-<?php echo $thread->id; ?>" class="rating-count">
-		<small><?php echo JText::plural('MOD_SOCIAL_RATING_RATING_N_VOTES', $rating->pscore_count);?></small>
+	<div id="rating-count-<?php echo $params->get('context'); ?>" class="rating-count">
+		<small><?php echo JText::plural('MOD_SOCIAL_RATING_RATING_N_VOTES', $rating->count);?></small>
 	</div>
 </div>

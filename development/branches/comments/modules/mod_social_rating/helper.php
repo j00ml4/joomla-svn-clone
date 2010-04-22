@@ -22,12 +22,13 @@ class modSocialRatingHelper
 	 */
 	public static function getRating($params)
 	{
-		jimport('joomla.social.rating');
+		jimport('joomla.social2.ratings');
 
-		$model = new JRating;
-		$model->setState('thread.id', $params->get('thread.id'));
+		// Get and configure the thread model.
+		$model = new JRatings;
 
-		$rating = $model->getItem();
+		// Get the thread data.
+		$rating = $model->getRatingsByContext($params->get('context'));
 
 		return $rating;
 	}

@@ -22,19 +22,14 @@ class modSocialCommentHelper
 	 */
 	public static function getComments($params)
 	{
-		jimport('joomla.social.comments');
+		// Add the appropriate include paths for models.
+		jimport('joomla.social2.comments');
 
+		// Get and configure the thread model.
 		$model = new JComments;
-		$model->setState('filter.thread_id', $params->get('thread.id'));
-		$model->setState('filter.state', 1);
-		if (strtolower($params->get('list_order')) == 'asc') {
-			$model->setState('list.ordering', 'a.created_time ASC');
-		} else {
-			$model->setState('list.ordering', 'a.created_time DESC');
-		}
-		$model->setState('list.limit', $params->get('pagination', 10));
 
-		$comments = $model->getItems();
+		// Get the thread data.
+		$comments = $model->getCommentsByContext($params->get('context'), 1, (strtolower($params->get('list_order')) == 'asc'));
 
 		return $comments;
 	}
@@ -57,19 +52,17 @@ class modSocialCommentHelper
 	 */
 	public static function getPagination($params)
 	{
-		jimport('joomla.social.comments');
+		jimport('joomla.social2.comments');
 
+		// Get and configure the thread model.
 		$model = new JComments;
-		$model->setState('filter.thread_id', $params->get('thread.id'));
-		$model->setState('filter.state', 1);
-		if (strtolower($params->get('list_order')) == 'asc') {
-			$model->setState('list.ordering', 'a.created_time ASC');
-		} else {
-			$model->setState('list.ordering', 'a.created_time DESC');
-		}
-		$model->setState('list.limit', $params->get('pagination', 10));
 
-		$pagination = $model->getPagination();
+		// Get the thread data.
+		$total = (int) $model->getTotalByContext($params->get('context'), 1);
+
+		jimport('joomla.html.pagination');
+
+		$pagination = new JPagination($total, JRequest::getInt('limitstart'), $params->get('pagination', 10));
 
 		return $pagination;
 	}
