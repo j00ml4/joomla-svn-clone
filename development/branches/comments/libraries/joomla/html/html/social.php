@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die;
 
+jimport('joomla.social.helper');
+
 /**
  * JHtml Helper class for Social
  *
@@ -35,6 +37,8 @@ class JHtmlSocial
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
 		$extension	= $parts[0];
+
+		JSocialHelper::getContentId($context, $route, $title);
 
 		// Build module configuration.
 		$config = array(
@@ -64,7 +68,7 @@ class JHtmlSocial
 	public static function commentCount($context)
 	{
 		// Add the appropriate include paths for models.
-		jimport('joomla.social2.comments');
+		jimport('joomla.social.comments');
 
 		// Get and configure the thread model.
 		$model = new JComments;
@@ -159,6 +163,8 @@ class JHtmlSocial
 		$parts		= explode('.', $context);
 		$extension	= $parts[0];
 
+		JSocialHelper::getContentId($context, $route, $title);
+
 		// Build module configuration.
 		$config = array(
 			'context'	=> $context,
@@ -233,6 +239,8 @@ class JHtmlSocial
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
 		$extension	= $parts[0];
+
+		JSocialHelper::getContentId($context, $route, $title);
 
 		// Build module configuration.
 		$config = array(
