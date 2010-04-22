@@ -190,8 +190,54 @@ die;
 	 * @return	void
 	 * @since	1.6
 	 */
-	public function addRating()
+	public function rate()
 	{
+		// Check for a valid token.
+		// We must do this by hand as the framework will throw a session expired message.
+		// This is important if robots accidentally index a URL an AJAX url to make a comment.
+		$token	= JUtility::getToken();
+		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
+			JError::raiseError(500, JText::_('JInvalid_Token'));
+//			return false;
+		}
+
+		// Include dependancies.
+		jimport('joomla.social.ratings');
+
+		// Initialise variables.
+		$user	= JFactory::getUser();
+		$form	= JComments::getForm();
+		if (!$form) {
+			JError::raiseError(500, $model->getError());
+			return false;
+		}
+
+		// Get the form control, if used, and then the raw data.
+		$control = $form->getFormControl();
+
+		if ($control) {
+			$data = JRequest::getVar($control, array(), 'post', 'array', JREQUEST_ALLOWRAW);
+		} else {
+			// A form control wasn't used, so just get the data from the method.
+			$data = JRequest::get('method', JREQUEST_ALLOWRAW);
+		}
+
+		// Validate the data.
+		$data = JComments::validate($form, $data);
+
+		// Access check.
+		if (!$this->canComment($data['context'])) {
+			die('cannot comment');
+			// TODO: handle error
+		}
+
+		JComments::save($data);
+
+		// Get the URL to redirect the request to.
+		$redirect = base64_decode($data['redirect']);
+die;
+
+
 		// Get the URL to redirect the request to.
 		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
 

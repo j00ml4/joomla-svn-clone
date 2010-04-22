@@ -19,6 +19,45 @@ defined('JPATH_BASE') or die;
 class JComments
 {
 	/**
+	 * Method to get a comment object by id.
+	 *
+	 * @param   int     $id     The publishing state to filter comment data over.
+	 *
+	 * @return  array   A list of coment objects.
+	 *
+	 * @since   1.6
+	 */
+	public function getCommentById($id)
+	{
+		// Get the database connection object.
+		$db = JFactory::getDBO();
+
+		// Get a new query object.
+		$query = $db->getQuery(true);
+
+		// Setup the base query parameters to select comment by id.
+		$query->select('a.*');
+		$query->from('#__social_comments AS a');
+		$query->where('a.id = '.(int) $id);
+
+		// Get content item information.
+		$query->select('b.page_route, b.page_title');
+		$query->join('LEFT', '#__social_content AS b ON b.id = a.content_id');
+
+		// Get registered user name information if it exists.
+		$query->select('c.name AS user_full_name, c.username AS user_login_name');
+		$query->join('LEFT', '#__users AS c ON c.id = a.user_id');
+
+		//echo nl2br(str_replace('#__','jos_',$query)).'<hr/>';
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$comment = $db->loadObject();
+
+		return $comment;
+	}
+
+	/**
 	 * Method to get a list of comment objects by context.
 	 *
 	 * @param   string  $context    The content item context for which to get comment data.
@@ -161,9 +200,17 @@ class JComments
 
 	public function save($data)
 	{
-		var_dump($data);
+		// Initialize variables.
+		$isNew = true;
 
-		// Check to see if we are inserting a new row.
+		// Check to see if we are submitting a new comment or editing an old one.
+		if (!empty($data['id'])) {
+
+		}
+
+
+
+		var_dump($data);
 
 		// If new, fire onContentSubmit event for external validation/verification/modification.
 
