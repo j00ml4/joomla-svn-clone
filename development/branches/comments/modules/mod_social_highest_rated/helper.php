@@ -13,26 +13,39 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.model');
 JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
 
+/**
+ * @package		Joomla.Site
+ * @subpackage	mod_social_highest_rated
+ * @since		1.6
+ */
 class modSocialHighestRatedHelper
 {
-	function getList($params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getList($params)
 	{
 		// get the comments rating model
-		$model = &modSocialHighestRatedHelper::getModel($params);
+		$model = self::getModel($params);
 
 		$list = &$model->getItems();
 		return $list;
 	}
 
-	function &getModel($params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	protected static function getModel($params)
 	{
 		static $model;
 
-		if (empty($model))
-		{
+		if (empty($model)) {
 			// get a comments comment model instance and set the context in the state
-			$model = &JModel::getInstance('Threads', 'SocialModel');
-			$model->getState();
+			jimport('joomla.social.thread');
+
+			$model = new JThreads;
 
 			// prime the list parameters.
 			$model->setState('filter.context', $params->get('context'));

@@ -9,17 +9,38 @@
 
 defined('_JEXEC') or die;
 
-// Add the appropriate include paths for models.
-jimport('joomla.application.component.model');
-JModel::addIncludePath(JPATH_SITE.'/components/com_social/models');
-
+/**
+ * @package		Joomla.Site
+ * @subpackage	mod_social_rating
+ * @since		1.6
+ */
 class modSocialRatingHelper
 {
-	function getThread(&$params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getRating($params)
 	{
-		// Get and configure the thread model.
-		$model = &JModel::getInstance('Thread', 'SocialModel');
-		$model->getState();
+		jimport('joomla.social.rating');
+
+		$model = new JRating;
+		$model->setState('thread.id', $params->get('thread.id'));
+
+		$rating = $model->getItem();
+
+		return $rating;
+	}
+
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getThread(&$params)
+	{
+		jimport('joomla.social.thread');
+
+		$model = new JThread;
 		$model->setState('thread.context',		$params->get('context'));
 		$model->setState('thread.context_id',	(int) $params->get('context_id'));
 		$model->setState('thread.url',			$params->get('url'));
@@ -36,18 +57,11 @@ class modSocialRatingHelper
 		return $thread;
 	}
 
-	function getRating($params)
-	{
-		$model = JModel::getInstance('Rating', 'SocialModel');
-		$model->getState();
-		$model->setState('thread.id', $params->get('thread.id'));
-
-		$rating = $model->getItem();
-
-		return $rating;
-	}
-
-	function isBlocked($params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function isBlocked($params)
 	{
 		// import library dependencies
 		require_once JPATH_SITE.'/components/com_social/helpers/blocked.php';

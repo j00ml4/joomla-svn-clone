@@ -9,29 +9,18 @@
 
 defined('_JEXEC') or die;
 
+/**
+ * @package		Joomla.Site
+ * @subpackage	mod_social_comment
+ * @since		1.6
+ */
 class modSocialCommentHelper
 {
-	function getThread(&$params)
-	{
-		jimport('joomla.social.thread');
-
-		// Get and configure the thread model.
-		$model = new JThread;
-		$model->setState('thread.context',	$params->get('context'));
-		$model->setState('thread.route',	$params->get('route'));
-		$model->setState('thread.title',	$params->get('title'));
-
-		// Get the thread data.
-		$thread = $model->getThread();
-
-		if ($thread) {
-			$params->set('thread.id', (int)$thread->id);
-		}
-
-		return $thread;
-	}
-
-	function &getComments(&$params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getComments($params)
 	{
 		jimport('joomla.social.comments');
 
@@ -50,7 +39,23 @@ class modSocialCommentHelper
 		return $comments;
 	}
 
-	function getPagination(&$params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getForceFormURL($params)
+	{
+		$pageURI = JURI::getInstance($params->get('route'));
+		$pageURI->setVar('scf',1);
+
+		return $pageURI->toString(array('path', 'query'));
+	}
+
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getPagination($params)
 	{
 		jimport('joomla.social.comments');
 
@@ -69,11 +74,27 @@ class modSocialCommentHelper
 		return $pagination;
 	}
 
-	function getForceFormURL($params)
+	/**
+	 * @param	JRegistry
+	 * @since	1.6
+	 */
+	public static function getThread($params)
 	{
-		$pageURI = JURI::getInstance($params->get('route'));
-		$pageURI->setVar('scf',1);
+		jimport('joomla.social.thread');
 
-		return $pageURI->toString(array('path', 'query'));
+		// Get and configure the thread model.
+		$model = new JThread;
+		$model->setState('thread.context',	$params->get('context'));
+		$model->setState('thread.route',	$params->get('route'));
+		$model->setState('thread.title',	$params->get('title'));
+
+		// Get the thread data.
+		$thread = $model->getThread();
+
+		if ($thread) {
+			$params->set('thread.id', (int)$thread->id);
+		}
+
+		return $thread;
 	}
 }
