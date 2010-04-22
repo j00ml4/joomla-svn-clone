@@ -51,11 +51,13 @@ class JControllerSocial extends JController
 	 */
 	public function addComment()
 	{
+		die;
 		// Get the URL to redirect the request to.
 		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
 
 		// Check for a valid token.
-		// We must do this by hand as the framework with throw a session expired message.
+		// We must do this by hand as the framework will throw a session expired message.
+		// This is important if robots accidentally index a URL an AJAX url to make a comment.
 		$token	= JUtility::getToken();
 		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
 			$this->setRedirect($redirect, JText::_('JInvalid_Token'), 'error');
@@ -363,4 +365,5 @@ class JControllerSocial extends JController
 	{
 		JError::raiseWarning('JLIB_CONTROLLER_DOES_NOT_SUPPORT_DISPLAY');
 	}
+
 }
