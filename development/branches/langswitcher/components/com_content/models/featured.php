@@ -31,6 +31,8 @@ class ContentModelFeatured extends ContentModelArticles
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -61,7 +63,7 @@ class ContentModelFeatured extends ContentModelArticles
 	 */
 	public function getItems()
 	{
-		$params = $this->state->params;
+		$params = clone $this->getState('params');
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		if ($limit > 0)
 		{
