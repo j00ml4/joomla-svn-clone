@@ -61,35 +61,34 @@ class JControllerSocial extends JController
 			return false;
 		}
 
-
 		jimport('joomla.social.comments');
 
-		$form = JComments::getForm();
+		$user	= JFactory::getUser();
+		$form	= JComments::getForm();
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
 		$control	= $form->getFormControl();
 
+		// Get the raw data as the form provides for its own filtering.
 		if ($control) {
-			$data = JRequest::getVar($control, array(), 'post', 'array');
+			$data = JRequest::getVar($control, array(), 'post', 'array', JREQUEST_ALLOWRAW);
 		} else {
-			// $data = the raw post??
+			$data = JRequest::get('method', JREQUEST_ALLOWRAW);
 		}
 
-print_r($data);
-
-		die(__FILE__);
 		$data = JComments::validate($form, $data);
 
+		JComments::save($data);
 
 		// Get the URL to redirect the request to.
-		$redirect = base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
+		$redirect = base64_decode($data['redirect']);
+die;
 
 		$config	= JComponentHelper::getParams('com_social');
-		$user	= JFactory::getUser();
 		$date	= JFactory::getDate();
-		$uId	= (int)$user->get('id');
+		$uId	=
 		$tId	= JRequest::getInt('thread_id');
 
 		// Load the language file for the comment module.
