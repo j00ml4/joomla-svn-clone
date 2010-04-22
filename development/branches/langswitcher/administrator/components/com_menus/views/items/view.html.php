@@ -23,7 +23,6 @@ class MenusViewItems extends JView
 	protected $state;
 	protected $items;
 	protected $pagination;
-	protected $f_levels;
 
 	/**
 	 * Display the view
@@ -113,14 +112,6 @@ class MenusViewItems extends JView
 			}
 			$items[$i]->item_type = $value;
 		}
-
-		// Levels filter.
-		$options	= array();
-		$options[]	= JHtml::_('select.option', '1');
-		$options[]	= JHtml::_('select.option', '2');
-		$options[]	= JHtml::_('select.option', '3');
-		$options[]	= JHtml::_('select.option', '4');
-		$this->assign('f_levels', $options);
 
 		parent::display($tpl);
 		$this->_setToolbar();

@@ -10,8 +10,8 @@ jimport('joomla.form.formfield');
 /**
  * Form Field Search class.
  *
- * @package		Joomla.Administrator
- * @subpackage	com_installer
+ * @package		Joomla.Framework
+ * @subpackage	Form
  * @since		1.6
  */
 class JFormFieldSearch extends JFormField

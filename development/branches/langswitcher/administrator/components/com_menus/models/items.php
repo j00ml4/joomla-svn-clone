@@ -36,21 +36,14 @@ class MenusModelItems extends JModelList
 
 		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
-		$this->setState('filter.published', $published);
-
-		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
-		$this->setState('filter.access', $access);
+		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
 		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
+		$this->setState('filter.menutype', isset($data['select']['menutype']) ? $data['select']['menutype'] : 'mainmenu');
+		$this->setState('filter.level', isset($data['select']['level']) ? $data['select']['level'] : '');
+		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
 
-		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
-		$this->setState('filter.parent_id',	$parentId);
-
-		$level = $app->getUserStateFromRequest($this->context.'.filter.level', 'filter_level', 0, 'int');
-		$this->setState('filter.level', $level);
-
-		$menuType = $app->getUserStateFromRequest($this->context.'.filter.menutype', 'menutype', 'mainmenu');
-		$this->setState('filter.menutype', $menuType);
+//		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
+//		$this->setState('filter.parent_id',	$parentId);
 
 		// Component parameters.
 		$params	= JComponentHelper::getParams('com_menus');
@@ -75,6 +68,7 @@ class MenusModelItems extends JModelList
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.published');
+		$id	.= ':'.$this->getState('filter.language');
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.parent_id');
 		$id	.= ':'.$this->getState('filter.menu_id');
@@ -165,6 +159,11 @@ class MenusModelItems extends JModelList
 		// Filter on the level.
 		if ($level = $this->getState('filter.level')) {
 			$query->where('a.level <= '.(int) $level);
+		}
+
+		// Filter on the language.
+		if (($language = $this->getState('filter.language'))!='-') {
+			$query->where('a.language = '.$db->quote($language));
 		}
 
 		// Add the list ordering clause.

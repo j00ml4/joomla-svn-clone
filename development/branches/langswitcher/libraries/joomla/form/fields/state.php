@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id$
+ * @version		$Id: accesslevel.php 16047 2010-04-13 02:59:12Z chdemko $
  * @package		Joomla.Framework
  * @subpackage	Form
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -13,17 +13,14 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
-// Import the com_menus helper.
-require_once realpath(JPATH_ADMINISTRATOR.'/components/com_menus/helpers/menus.php');
-
 /**
- * Supports an HTML select list of menu
+ * Form Field class for the Joomla Framework.
  *
  * @package		Joomla.Framework
  * @subpackage	Form
  * @since		1.6
  */
-class JFormFieldMenu extends JFormFieldList
+class JFormFieldState extends JFormFieldList
 {
 	/**
 	 * The form field type.
@@ -31,18 +28,21 @@ class JFormFieldMenu extends JFormFieldList
 	 * @var		string
 	 * @since	1.6
 	 */
-	public $type = 'Menu';
+	public $type = 'State';
 
 	/**
-	 * Method to get the field options.
+	 * Method to get the field input markup.
 	 *
-	 * @return	array	The field option objects.
+	 * @return	string	The field input markup.
 	 * @since	1.6
 	 */
 	protected function getOptions()
 	{
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), JHtml::_('menu.menus'));
+		$options = array_merge(
+			parent::getOptions(),
+			JHtml::_('jgrid.publishedOptions')
+		);
 
 		return $options;
 	}
