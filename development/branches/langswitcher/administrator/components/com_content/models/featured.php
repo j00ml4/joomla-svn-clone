@@ -40,7 +40,8 @@ class ContentModelFeatured extends ContentModelArticles
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid, a.state, a.access, a.created, a.hits'
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid, a.state, a.access, a.created, a.hits,' .
+				'a.language'
 			)
 		);
 		$query->from('#__content AS a');
@@ -93,10 +94,45 @@ class ContentModelFeatured extends ContentModelArticles
 			}
 		}
 
+		// Filter on the language.
+		if (($language = $this->getState('filter.language'))!='-') {
+			$query->where('a.language = '.$db->quote($language));
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',(string)$query));
 		return $query;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance('com_content.featured', 'featured', array('control' => 'filters', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState('com_content.articles.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

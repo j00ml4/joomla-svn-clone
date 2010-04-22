@@ -71,7 +71,7 @@ class MenusModelItems extends JModelList
 		$id	.= ':'.$this->getState('filter.language');
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.parent_id');
-		$id	.= ':'.$this->getState('filter.menu_id');
+		$id	.= ':'.$this->getState('filter.menutype');
 
 		return parent::getStoreId($id);
 	}
@@ -137,12 +137,6 @@ class MenusModelItems extends JModelList
 		$parentId = $this->getState('filter.parent_id');
 		if (!empty($parentId)) {
 			$query->where('p.id = '.(int)$parentId);
-		}
-
-		// Filter the items over the menu id if set.
-		$menuId = $this->getState('filter.menu_id');
-		if (!empty($menuId)) {
-			$query->where('a.menu_id = '.(int) $menuId);
 		}
 
 		// Filter the items over the menu id if set.

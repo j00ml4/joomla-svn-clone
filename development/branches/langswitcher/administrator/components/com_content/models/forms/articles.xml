@@ -26,20 +26,13 @@
 			>
 				<option value="">JOPTION_SELECT_PUBLISHED</option>
 			</field>
-			<field type="menu"
-				name="menutype"
+			<field type="category"
+				name="category"
+				extension="com_content"
 				hidden="true"
-				onchange="this.form.submit();"
-			/>
-			<field type="integer"
-				name="level"
-				hidden="true"
-				first="1"
-				step="1"
-				last="4"
 				onchange="this.form.submit();"
 			>
-				<option value="">COM_MENUS_OPTION_SELECT_LEVEL</option>
+				<option value="">JOPTION_SELECT_CATEGORY</option>
 			</field>
 			<field type="contentlanguage"
 				name="language"
