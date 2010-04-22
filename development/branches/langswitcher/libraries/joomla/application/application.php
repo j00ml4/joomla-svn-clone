@@ -615,8 +615,8 @@ class JApplication extends JObject
 		$parameters['id']		= $user->get('id');
 
 		// Set clientid in the options array if it hasn't been set already.
-		if (empty($options['clientid'])) {
-			$options['clientid'][] = $this->getClientId();
+		if (!isset($options['clientid'])) {
+			$options['clientid']= $this->getClientId();
 		}
 
 		// Import the user plugin group.

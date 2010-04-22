@@ -50,7 +50,7 @@ class modMenuHelper
 				$item->deeper = false;
 				$item->shallower = false;
 				$item->level_diff = 0;
-			
+
 				if(isset($items[$lastitem]) && count($items[$lastitem]))
 				{
 					$items[$lastitem]->deeper		= ($item->level > $items[$lastitem]->level);
