@@ -22,7 +22,7 @@ class modSocialRatingHelper
 	 */
 	public static function getRating($params)
 	{
-		jimport('joomla.social2.ratings');
+		jimport('joomla.social.ratings');
 
 		// Get and configure the thread model.
 		$model = new JRatings;
