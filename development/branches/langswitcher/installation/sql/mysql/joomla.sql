@@ -519,7 +519,7 @@ CREATE TABLE `#__languages` (
 INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`description`,`published`)
 VALUES
 	(1,'en-GB','English (UK)','English (UK)','english','',1),
-	(2,'en-US','English (US)','English (US)','united-stated','',1),
+	(2,'en-US','English (US)','English (US)','english-usa','',1),
 	(3,'xx-XX','xx (Test)','xx (Test)','xxxx', '',1);
 
 #
