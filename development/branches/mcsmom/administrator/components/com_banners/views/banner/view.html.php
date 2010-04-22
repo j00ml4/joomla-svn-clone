@@ -19,18 +19,19 @@ jimport('joomla.application.component.view');
  */
 class BannersViewBanner extends JView
 {
-	protected $state;
-	protected $item;
 	protected $form;
+	protected $item;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state	= $this->get('State');
-		$item	= $this->get('Item');
-		$form	= $this->get('Form');
+		// Initialiase variables.
+		$this->form		= $this->get('Form');
+		$this->item		= $this->get('Item');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -39,23 +40,19 @@ class BannersViewBanner extends JView
 		}
 
 		// Bind the record to the form.
-		$form->bind($item);
-		$form->bind($item->params);
+		$this->form->bind($this->item);
+		$this->form->bind($this->item->params);
 
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', true);
 
@@ -67,8 +64,7 @@ class BannersViewBanner extends JView
 		JToolBarHelper::title($isNew ? JText::_('COM_BANNERS_MANAGER_BANNER_NEW') : JText::_('COM_BANNERS_MANAGER_BANNER_EDIT'));
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit'))
-		{
+		if (!$checkedOut && $canDo->get('core.edit')) {
 			JToolBarHelper::apply('banner.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('banner.save', 'JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('banner.save2new', 'JTOOLBAR_SAVE_AND_NEW');
@@ -79,8 +75,7 @@ class BannersViewBanner extends JView
 		}
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('banner.cancel','JTOOLBAR_CANCEL');
-		}
-		else {
+		} else {
 			JToolBarHelper::cancel('banner.cancel', 'JTOOLBAR_CLOSE');
 		}
 

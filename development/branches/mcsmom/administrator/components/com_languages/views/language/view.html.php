@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class LanguagesViewLanguage extends JView
 {
-	public $state;
 	public $item;
 	public $form;
+	public $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$item		= $this->get('Item');
-		$form		= $this->get('Form');
+		$this->item		= $this->get('Item');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -39,22 +39,18 @@ class LanguagesViewLanguage extends JView
 		}
 
 		// Bind the label to the form.
-		$form->bind($item);
-
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
+		$this->form->bind($this->item);
 
 		parent::display($tpl);
-		$this->_setToolbar();
+		$this->addToolbar();
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', 1);
 		$isNew = empty($this->item->lang_id);

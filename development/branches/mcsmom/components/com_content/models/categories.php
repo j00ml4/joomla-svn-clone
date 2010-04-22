@@ -32,13 +32,15 @@ class ContentModelCategories extends JModel
 	 * @var		string
 	 */
 	protected $_extension = 'com_content';
-	
+
 	private $_parent = null;
-	
+
 	private $_items = null;
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
 	 *
 	 * @since	1.6
 	 */
@@ -108,10 +110,10 @@ class ContentModelCategories extends JModel
 				$this->_items = false;
 			}
 		}
-		
+
 		return $this->_items;
 	}
-	
+
 	public function getParent()
 	{
 		if(!is_object($this->_parent))

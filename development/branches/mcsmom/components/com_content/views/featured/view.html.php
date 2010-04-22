@@ -65,16 +65,11 @@ class ContentViewFeatured extends JView
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-			$article_params = new JRegistry;
-			$article_params->loadJSON($item->attribs);
-			$temp = clone($params);
-			$temp->merge($article_params);
-			$item->params = $temp;
 			// No link for ROOT category
 			if ($item->parent_alias == 'root') {
 				$item->parent_slug = null;
 			}
-			
+
 			$item->event = new stdClass();
 
 			$dispatcher =& JDispatcher::getInstance();
@@ -155,9 +150,9 @@ class ContentViewFeatured extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE')); 
+			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
 		}
-		
+
 		$title = $this->params->get('page_title', '');
 		if (empty($title))
 		{

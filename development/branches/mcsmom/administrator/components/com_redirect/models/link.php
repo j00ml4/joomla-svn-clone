@@ -21,6 +21,10 @@ class RedirectModelLink extends JModelForm
 {
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -208,7 +212,7 @@ class RedirectModelLink extends JModelForm
 		// Typecast variable.
 		$pks = (array) $pks;
 		$user	= JFactory::getUser();
-		
+
 		// Get a row instance.
 		$table = &$this->getTable();
 

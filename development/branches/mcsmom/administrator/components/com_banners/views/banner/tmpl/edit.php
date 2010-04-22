@@ -85,7 +85,7 @@ JHtml::_('behavior.formvalidation');
 				<div class="clr"> </div>
 		</fieldset>
 		<fieldset class="adminform">
-		<legend><?php echo JText::_('Banners_Banner_Details') ?></legend>
+		<legend><?php echo JText::_('COM_BANNERS_BANNER_DETAILS') ?></legend>
 		<div id="image">
 			<?php foreach($this->form->getFieldset('image') as $field): ?>
 				<?php if (!$field->hidden): ?>
@@ -97,7 +97,7 @@ JHtml::_('behavior.formvalidation');
 
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
-				
+
 				<?php echo $this->form->getLabel('cid'); ?>
 				<?php echo $this->form->getInput('cid'); ?>
 
@@ -112,7 +112,7 @@ JHtml::_('behavior.formvalidation');
 
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
-		
+
 				<?php echo $this->form->getLabel('id'); ?>
 				<?php echo $this->form->getInput('id'); ?>
 				<div class="clr"> </div>

@@ -32,17 +32,18 @@ class NewsfeedsModelCategories extends JModel
 	 * @var		string
 	 */
 	protected $_extension = 'com_newsfeeds';
-	
+
 	private $_parent = null;
-	
+
 	private $_items = null;
 
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-
 	protected function populateState()
 	{
 		$app = &JFactory::getApplication();
@@ -80,7 +81,7 @@ class NewsfeedsModelCategories extends JModel
 
 		return parent::getStoreId($id);
 	}
-	
+
 	/**
 	 * redefine the function an add some properties to make the styling more easy
 	 *
@@ -109,10 +110,10 @@ class NewsfeedsModelCategories extends JModel
 				$this->_items = false;
 			}
 		}
-		
+
 		return $this->_items;
 	}
-	
+
 	public function getParent()
 	{
 		if(!is_object($this->_parent))

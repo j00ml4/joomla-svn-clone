@@ -22,31 +22,28 @@ jimport('joomla.application.component.view');
  */
 class CacheViewCache extends JView
 {
-	public $data;
-
-	public $state;
-
-	public $client;
-
-	public $pagination;
+	protected $client;
+	protected $data;
+	protected $pagination;
+	protected $state;
 
 	public function display($tpl = null)
 	{
-		$data		= $this->get('Data');
-		$client		= $this->get('Client');
-		$pagination = $this->get('Pagination');
-		$state		= $this->get('State');
+		$this->data			= $this->get('Data');
+		$this->client		= $this->get('Client');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
-		$this->assignRef('data',		$data);
-		$this->assignRef('client',		$client);
-		$this->assignRef('state',		$state);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
-	protected function _setToolbar()
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
+	 */
+	protected function addToolbar()
 	{
 		$user = JFactory::getUser();
 		$condition = ($this->client->name == 'site');

@@ -19,14 +19,11 @@ jimport('joomla.application.component.modellist');
 class UsersModelLevels extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_users.levels';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -34,7 +31,7 @@ class UsersModelLevels extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
 		// Load the parameters.
@@ -106,7 +103,7 @@ class UsersModelLevels extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
-	
+
 	/**
 	 * Method to adjust the ordering of a row.
 	 *
@@ -119,7 +116,7 @@ class UsersModelLevels extends JModelList
 		// Sanitize the id and adjustment.
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('level.id');
 		$user = JFactory::getUser();
-		
+
 		// Get an instance of the record's table.
 		$table = JTable::getInstance('viewlevel');
 
