@@ -83,6 +83,7 @@
 			description="JFIELD_NEWSFEED_LANGUAGE_DESC" class="inputbox"
 		>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="*">JOPTION_ALL_LANGUAGE</option>
 		</field>
 
 	</fieldset>

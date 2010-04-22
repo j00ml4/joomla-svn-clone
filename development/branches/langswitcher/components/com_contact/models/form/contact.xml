@@ -177,7 +177,8 @@
 			description="JField_Contact_Language_Desc"
 			label="JField_Language_Label"
 		>
-			<option value="">JOption_Default_Language</option>
+			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="*">JOPTION_ALL_LANGUAGE</option>
 		</field>
 
 

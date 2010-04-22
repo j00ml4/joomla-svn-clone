@@ -83,7 +83,7 @@ class ContentModelArticles extends JModelList
 			$this->getState(
 				'list.select',
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
-				' a.state, a.access, a.created, a.hits, a.ordering, a.featured')
+				'a.state, a.access, a.created, a.hits, a.ordering, a.featured, a.language')
 		);
 		$query->from('#__content AS a');
 

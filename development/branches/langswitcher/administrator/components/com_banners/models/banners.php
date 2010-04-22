@@ -112,7 +112,8 @@ class BannersModelBanners extends JModelList
 				'a.clicks AS clicks, a.metakey AS metakey, a.sticky AS sticky,'.
 				'a.impmade AS impmade, a.imptotal AS imptotal,' .
 				'a.state AS state, a.ordering AS ordering,'.
-				'a.purchase_type as purchase_type'
+				'a.purchase_type as purchase_type,'.
+				'a.language'
 			)
 		);
 		$query->from('`#__banners` AS a');

@@ -78,7 +78,7 @@ class ContactModelContacts extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.name, a.alias, a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.catid')
+				'a.id, a.name, a.alias, a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.catid, a.language')
 		);
 		$query->from('#__contact_details AS a');
 

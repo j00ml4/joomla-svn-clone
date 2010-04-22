@@ -21,21 +21,14 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="use_inherited_language" type="radio"
+				<field name="manage_language" type="radio"
 					default="0"
-					description="PLG_CONTENT_LANGUAGEFILTER_FIELD_USE_INHERITED_LANGUAGE_DESC"
-					label="PLG_CONTENT_LANGUAGEFILTER_FIELD_USE_INHERITED_LANGUAGE_LABEL"
+					description="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_DESC"
+					label="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_LABEL"
 				>
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
-				</field>
-				<field name="show_untagged_content" type="radio"
-					default="1"
-					description="PLG_CONTENT_LANGUAGEFILTER_FIELD_SHOW_UNTAGGED_CONTENT_DESC"
-					label="PLG_CONTENT_LANGUAGEFILTER_FIELD_SHOW_UNTAGGED_CONTENT_LABEL"
-				>
-					<option value="0">JNO</option>
-					<option value="1">JYES</option>
+					<option value="no">PLG_CONTENT_LANGUAGEFILTER_NO</option>
+					<option value="inherited">PLG_CONTENT_LANGUAGEFILTER_INHERITED</option>
+					<option value="always">PLG_CONTENT_LANGUAGEFILTER_ALWAYS</option>
 				</field>
 			</fieldset>
 		</fields>

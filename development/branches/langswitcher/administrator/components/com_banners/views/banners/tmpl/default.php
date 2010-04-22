@@ -166,7 +166,13 @@ $userId	= $user->get('id');
 					<?php endif;?>
 				</td>
 				<td class="center">
-					<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JDEFAULT'); ?>
+					<?php if ($item->language==''):?>
+						<?php echo JText::_('JDEFAULT'); ?>
+					<?php elseif ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo $item->id; ?>

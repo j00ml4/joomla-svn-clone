@@ -8,8 +8,11 @@
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
 	<version>1.6</version>
-	<description>PLG_SEF_LANGUAGEXML_DESCRIPTION</description>
+	<description>PLG_SYSTEM_LANGUAGESEF_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="languagesef">languagesef.php</filename>
 	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_languagesef.sys.ini</language>
+	</languages>
 </extension>
