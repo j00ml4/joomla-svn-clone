@@ -86,7 +86,8 @@ class WeblinksModelWeblinks extends JModelList
 				'list.select',
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
 				'a.hits,' .
-				' a.state, a.access, a.ordering'
+				'a.state, a.access, a.ordering,'
+				'a.language'
 			)
 		);
 		$query->from('`#__weblinks` AS a');

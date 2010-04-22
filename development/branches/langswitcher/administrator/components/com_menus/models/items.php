@@ -26,15 +26,22 @@ class MenusModelItems extends JModelList
 	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
+		$data = JRequest::getVar('filters');
+		if (empty($data)) {
+			$data = $app->getUserState('com_menus.items.data');
+		}
+		else {
+			$app->setUserState('com_menus.items.data', $data);
+		}
 
-		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
 		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
 		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
 		$this->setState('filter.access', $access);
+		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
 
 		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
 		$this->setState('filter.parent_id',	$parentId);
@@ -165,5 +172,36 @@ class MenusModelItems extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',(string)$query)).'<hr/>';
 		return $query;
+	}
+
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance('com_menus.items', 'items', array('control' => 'filters', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState('com_menus.items.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

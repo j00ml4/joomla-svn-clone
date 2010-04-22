@@ -34,6 +34,7 @@ class MenusViewItems extends JView
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$pagination	= $this->get('Pagination');
+		$form		= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -44,6 +45,7 @@ class MenusViewItems extends JView
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('form',		$form);
 
 		$this->ordering = array();
 		// Preprocess the list of items to find ordering divisions.

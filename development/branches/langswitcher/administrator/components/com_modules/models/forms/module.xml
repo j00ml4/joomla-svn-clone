@@ -113,6 +113,7 @@
 			label="JFIELD_LANGUAGE_LABEL"
 		>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="*">JOPTION_ALL_LANGUAGE</option>
 		</field>
 
 		<field name="params" type="hidden" />

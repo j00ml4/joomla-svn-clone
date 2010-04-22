@@ -140,8 +140,8 @@ class JMenu extends JObject
 		if (array_key_exists($language, $this->_default)) {
 			return $this->_items[$this->_default[$language]];
 		}
-		elseif (array_key_exists('', $this->_default)) {
-			return $this->_items[$this->_default['']];
+		elseif (array_key_exists('*', $this->_default)) {
+			return $this->_items[$this->_default['*']];
 		}
 		else {
 			return 0;
