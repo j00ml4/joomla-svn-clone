@@ -88,7 +88,7 @@ class modSocialCommentHelper
 			$data = array(
 				'context'	=> $params->get('context'),
 				'redirect'	=> base64_encode($uri->toString(array('path', 'query', 'fragment'))),
-				'title'		=> $params->get('title')
+				'subject'	=> $params->get('title')
 			);
 			$form->bind($data);
 
