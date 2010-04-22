@@ -19,6 +19,7 @@ class ContentViewFeatured extends JView
 	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $form;
 
 	/**
 	 * Display the view
@@ -28,6 +29,7 @@ class ContentViewFeatured extends JView
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$pagination	= $this->get('Pagination');
+		$form		= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,6 +40,7 @@ class ContentViewFeatured extends JView
 		$this->assignRef('state',		$state);
 		$this->assignRef('items',		$items);
 		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('form',		$form);
 
 		$this->_setToolbar();
 		parent::display($tpl);

@@ -27,18 +27,20 @@ class ContentModelArticles extends JModelList
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
+		$data = JRequest::getVar('filters');
+		if (empty($data)) {
+			$data = $app->getUserState('com_content.articles.data');
+		}
+		else {
+			$app->setUserState('com_content.articles.data', $data);
+		}
 
-		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
-		$this->setState('filter.access', $access);
-
-		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '');
-		$this->setState('filter.published', $published);
-
-		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
-		$this->setState('filter.category_id', $categoryId);
+		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
+		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
+		$this->setState('filter.category_id', isset($data['select']['category']) ? $data['select']['category'] : '');
+		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '-');
 
 		// List state information.
 		parent::populateState('a.title', 'asc');
@@ -63,6 +65,7 @@ class ContentModelArticles extends JModelList
 		$id .= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.state');
 		$id	.= ':'.$this->getState('filter.category_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -151,6 +154,11 @@ class ContentModelArticles extends JModelList
 			}
 		}
 
+		// Filter on the language.
+		if (($language = $this->getState('filter.language'))!='-') {
+			$query->where('a.language = '.$db->quote($language));
+		}
+
 		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering')
 		{
 			$query->order('category_title, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
@@ -161,5 +169,35 @@ class ContentModelArticles extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance('com_content.articles', 'articles', array('control' => 'filters', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState('com_content.articles.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

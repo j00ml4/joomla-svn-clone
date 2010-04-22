@@ -23,6 +23,7 @@ class MenusViewItems extends JView
 	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $form;
 
 	/**
 	 * Display the view

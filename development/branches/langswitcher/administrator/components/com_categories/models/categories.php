@@ -42,14 +42,19 @@ class CategoriesModelCategories extends JModelList
 			$context .= '.'.$extension;
 		}
 
-		$search = $app->getUserStateFromRequest($context.'.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$data = JRequest::getVar('filters');
+		if (empty($data)) {
+			$data = $app->getUserState('com_categories.categories.data');
+		}
+		else {
+			$app->setUserState('com_categories.categories.data', $data);
+		}
 
-		$access = $app->getUserStateFromRequest($context.'.filter.access', 'filter_access', 0, 'int');
-		$this->setState('filter.access', $access);
+		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$published = $app->getUserStateFromRequest($context.'.published', 'filter_published', '');
-		$this->setState('filter.published', $published);
+		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
+		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
+		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '-');
 
 		// List state information.
 		parent::populateState('a.lft', 'asc');
@@ -147,10 +152,45 @@ class CategoriesModelCategories extends JModelList
 			}
 		}
 
+		// Filter on the language.
+		if (($language = $this->getState('filter.language'))!='-') {
+			$query->where('a.language = '.$db->quote($language));
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance('com_categories.categories', 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState('com_categories.categories.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }
