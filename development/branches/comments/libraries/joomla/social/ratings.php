@@ -55,7 +55,14 @@ class JRatings
 
 	}
 
-	public function save()
+	/**
+	 * Method to save a rating against content.
+	 *
+	 * @param	int		The ID of the user making the rating.
+	 * @param	string	The context of the content being rated.
+	 * @param	double	The rating score, a double between 0 and 1.
+	 */
+	public function save($userId, $context, $score)
 	{
 		// Filter/Validate input data.
 

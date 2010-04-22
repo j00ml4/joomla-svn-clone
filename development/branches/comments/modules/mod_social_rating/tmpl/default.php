@@ -25,11 +25,11 @@ if ($params->get('star_file')) {
 
 <?php
 $redirect = base64_encode($uri->toString(array('path', 'query', 'fragment')));
-$degraded = 'index.php?option=com_social&task=rating.add&context='.$params->get('context').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
+$degraded = 'index.php?option='.$extension.'&task=social.rate&context='.$params->get('context').'&'.JUtility::getToken().'=1&redirect='.$redirect.'&score=';
 ?>
 
 <div class="rating-container">
-	<form id="rate-<?php echo $params->get('context'); ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option=com_social&task=rating.add');?>">
+	<form id="rate-<?php echo $params->get('context'); ?>" class="addrating" method="post" action="<?php echo JRoute::_('index.php?option='.$extension.'&task=social.rateûû');?>">
 		<ul class="rating-stars">
 			<li id="current-<?php echo $params->get('context'); ?>" class="current-rating" style="width:<?php echo (int) ($rating->score*100); ?>%;"></li>
 			<li><a title="1" rel="0.2" class="one-star rate" href="<?php echo JRoute::_($degraded.'0.2'); ?>" rel="nofollow">1</a></li>
