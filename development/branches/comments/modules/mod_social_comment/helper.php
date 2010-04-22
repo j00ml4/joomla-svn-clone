@@ -47,6 +47,60 @@ class modSocialCommentHelper
 	}
 
 	/**
+	 * Method to get the record form.
+	 *
+	 * @param	JRegistry	The module parameters.
+	 * @return	mixed		JForm object on success, false on failure.
+	 * @since	1.6
+	 */
+	public static function getForm($params)
+	{
+		jimport('joomla.form.form');
+
+		// Add the local form path.
+		JForm::addFormPath(dirname(__FILE__).'/forms');
+		//JForm::addFieldPath(dirname(__FILE__).'/fields');
+
+		// Get the form.
+		try {
+			$form = JForm::getInstance('mod_social_comment.comment', 'comment', array('control' => 'jform'), false);
+
+			// Allow for additional modification of the form, and events to be triggered.
+
+			// Get the dispatcher.
+			$dispatcher	= JDispatcher::getInstance();
+
+			// Trigger the form preparation event.
+			$results = $dispatcher->trigger('onPrepareForm', array($form->getName(), $form));
+
+			// Check for errors encountered while preparing the form.
+			if (count($results) && in_array(false, $results, true)) {
+				// Get the last error.
+				$error = $dispatcher->getError();
+
+				// Convert to a JException if necessary.
+				if (!JError::isError($error)) {
+					throw new Exception($error);
+				}
+			}
+
+			$uri = JFactory::getUri();
+			$data = array(
+				'context'	=> $params->get('context'),
+				'redirect'	=> base64_encode($uri->toString(array('path', 'query', 'fragment'))),
+				'title'		=> $params->get('title')
+			);
+			$form->bind($data);
+
+			return $form;
+
+		} catch (Exception $e) {
+			JError::raiseWarning(500, $e->getMessage());
+			return false;
+		}
+	}
+
+	/**
 	 * @param	JRegistry
 	 * @since	1.6
 	 */

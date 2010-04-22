@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		$Id$
+	-->
+<form>
+	<fieldset>
+		<field name="name" type="text" class="inputbox"
+			label="MOD_SOCIAL_COMMENT_FIELD_NAME_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_NAME_DESC" />
+
+		<field name="email" type="text" class="inputbox"
+			label="MOD_SOCIAL_COMMENT_FIELD_EMAIL_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_EMAIL_DESC" />
+
+		<field name="url" type="text" class="inputbox"
+			label="MOD_SOCIAL_COMMENT_FIELD_URL_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_URL_DESC" />
+
+		<field name="subject" type="text" class="inputbox"
+			label="MOD_SOCIAL_COMMENT_FIELD_SUBJECT_LABEL"
+			description="MOD_SOCIAL_COMMENT_FIELD_SUBJECT_DESC" />
+
+		<field name="body" type="textarea" class="textarea"
+			rows="3" cols="30" label="MOD_SOCIAL_COMMENT_FIELD_BODY_LABEL"
+			description="MOD_SOCIAL_COMMENT_FIELD_BODY_DESC" />
+
+		<field name="context" type="hidden" filter="cmd" />
+		<field name="redirect" type="hidden" filter="base64" />
+	</fieldset>
+</form>

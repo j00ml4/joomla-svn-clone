@@ -17,6 +17,7 @@ $user		= JFactory::getUser();
 $uri		= JURI::getInstance();
 $document	= JFactory::getDocument();
 $context	= 'error';
+$extension	= 'error';
 
 // if the autodetect context parameter is set, let's use it
 if ($params->get('autodetect')) {
@@ -25,17 +26,20 @@ if ($params->get('autodetect')) {
 
 	// assumption is that if a global context is set, it is atomic
 	$context	= (string) $application->get('thread.context', $context);
+	$parts		= explode('.', $context);
+	$extension	= $parts[0];
 
 	// We need to get some values if they are not present.
 	$params->def('route', $uri->toString(array('scheme', 'user', 'pass', 'host', 'port', 'path', 'query')));
 	$params->def('title', $document->getTitle());
 }
 
-// if module parameters set the context, they always win
-$context = $params->def('context',	$context);
+// If module parameters set the context, they always win
+$context	= $params->def('context',	$context);
+$extension	= $params->def('extension',	$extension);
 
 // if we do not have a context set, then lets exit gracefully
-if ($context == 'error') {
+if ($context == 'error' || $extension == 'error') {
 	return false;
 }
 
@@ -46,10 +50,12 @@ require_once dirname(__FILE__).'/helper.php';
 //$thread = modSocialCommentHelper::getThread($params);
 
 // Get the comments.
-$comments = &modSocialCommentHelper::getComments($params);
+$comments = modSocialCommentHelper::getComments($params);
 
 // get the comment thread pagination object
-$pagination = &modSocialCommentHelper::getPagination($params);
+$pagination = modSocialCommentHelper::getPagination($params);
+
+$form = modSocialCommentHelper::getForm($params);
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_comment', $params->get('layout', 'default')));

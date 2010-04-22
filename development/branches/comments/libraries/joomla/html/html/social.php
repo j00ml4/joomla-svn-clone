@@ -34,12 +34,12 @@ class JHtmlSocial
 		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
-		$option		= $parts[0];
+		$extension	= $parts[0];
 
 		// Build module configuration.
 		$config = array(
 			'context'	=> $context,
-			'option'	=> $option,
+			'extension'	=> $extension,
 			'route'		=> $route,
 			'title'		=> $title
 		);
@@ -120,12 +120,12 @@ class JHtmlSocial
 		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
-		$option		= $parts[0];
+		$extension	= $parts[0];
 
 		// Build module configuration
 		$config = array(
 			'context'	=> $context,
-			'option'	=> $option,
+			'extension'	=> $extension,
 			'layout'	=> 'form',
 			'route'		=> $route,
 			'title'		=> $title
@@ -157,12 +157,12 @@ class JHtmlSocial
 		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
-		$option		= $parts[0];
+		$extension	= $parts[0];
 
 		// Build module configuration.
 		$config = array(
 			'context'	=> $context,
-			'option'	=> $option,
+			'extension'	=> $extension,
 			'route'		=> $route,
 			'title'		=> $title
 		);
@@ -193,11 +193,11 @@ class JHtmlSocial
 		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
-		$option		= $parts[0];
+		$extension	= $parts[0];
 
 		// Build module configuration.
 		$config = array(
-			'option'	=> $option,
+			'extension'	=> $extension,
 			'route'		=> $route,
 			'title'		=> $title
 		);
@@ -232,12 +232,12 @@ class JHtmlSocial
 		$document	= JFactory::getDocument();
 		$renderer	= $document->loadRenderer('module');
 		$parts		= explode('.', $context);
-		$option		= $parts[0];
+		$extension	= $parts[0];
 
 		// Build module configuration.
 		$config = array(
 			'context'	=> $context,
-			'option'	=> $option,
+			'extension'	=> $extension,
 			'layout'	=> 'simple',
 			'route'		=> $route,
 			'title'		=> $title
@@ -275,9 +275,9 @@ class JHtmlSocial
 		jimport('joomla.social.trackback');
 
 		// Initialize variables
-		$model	= new JTrackback;
-		$parts	= explode('.', $context);
-		$option	= $parts[0];
+		$model		= new JTrackback;
+		$parts		= explode('.', $context);
+		$extension	= $parts[0];
 
 		$model->setState('thread.context', $context);
 		$model->setState('thread.route', $route);
@@ -291,7 +291,7 @@ class JHtmlSocial
 
 		// Get the trackback information for the item.
 		jimport('joomla.webservices.trackback');
-		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option='.$option.'&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
+		$widget = JTrackback::getDiscoveryRdf(JRoute::_($thread->page_route, false, -1), JRoute::_('index.php?option='.$extension.'&task=trackback.add&thread_id='.$thread->id, false, -1), $thread->page_title, $date->toRFC822(), $author);
 
 		return $widget;
 	}
