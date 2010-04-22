@@ -58,7 +58,7 @@ class JControllerSocial extends JController
 		$token	= JUtility::getToken();
 		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
 			JError::raiseError(500, JText::_('JInvalid_Token'));
-			return false;
+//			return false;
 		}
 
 		// Include dependancies.

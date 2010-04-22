@@ -159,9 +159,9 @@ class JComments
 		return $total;
 	}
 
-	public function save()
+	public function save($data)
 	{
-		// Filter/Validate input data.
+		var_dump($data);
 
 		// Check to see if we are inserting a new row.
 
