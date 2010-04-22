@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 
 <h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
 
-<ol class="jlinks">
+<ol>
 <?php
 	foreach ($this->link_items as &$item) :
 

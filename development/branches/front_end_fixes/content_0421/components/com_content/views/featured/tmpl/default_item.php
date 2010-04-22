@@ -119,7 +119,7 @@ $params = &$this->item->params;
 <?php echo $this->item->introtext; ?>
 
 <?php if ($params->get('show_readmore') && $this->item->readmore) :
-	if (!$params->get('access-view')) :
+	if ($params->get('access-view')) :
 		$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
 	else :
 		$menu = JSite::getMenu();
@@ -132,8 +132,9 @@ $params = &$this->item->params;
 	endif;
 ?>
 		<p class="readmore">
+
 				<a href="<?php echo $link; ?>">
-						<?php if ($params->get('access-view')) :
+						<?php if (!$params->get('access-view')) :
 								echo JText::_('REGISTER_TO_READ_MORE');
 						elseif ($readmore = $params->get('alternative_readmore')) :
 								echo $readmore;
