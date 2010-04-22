@@ -116,8 +116,8 @@
                 <filename>component.php</filename>
         </files>
         <administration>
-                <languages folder="admin">
-                        <language tag="en-GB">en-GB.tpl_beez.ini</language>
+                <languages folder="language/en-GB">
+                        <language tag="en-GB">en-GB.tpl_beez_20.ini</language>
                 </languages>
         </administration>
         <positions>
