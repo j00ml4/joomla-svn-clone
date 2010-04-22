@@ -57,16 +57,18 @@ class JRatings
 
 	public function save()
 	{
+		// Filter/Validate input data.
 
+		// Attempt to save rating -- updating the social_content table as well.
 	}
 
 	public function delete()
 	{
-
+		// Attempt to delete comment -- updating the social_content table as well.
 	}
 
 	public function setState()
 	{
-
+		// Attempt to save comment state -- updating the social_content table as well.
 	}
 }
