@@ -37,8 +37,9 @@ $templateparams =$app->getTemplate(true)->params;
 
 <?php
 // // load language file
- $lang =& JFactory::getLanguage();
+$lang =& JFactory::getLanguage();
 $lang->load('tpl_beez', JPATH_SITE); ?>
+
 <?php if(!$templateparams->get('html5', 0)): ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php else: ?>
@@ -225,7 +226,6 @@ $lang->load('tpl_beez', JPATH_SITE); ?>
                                                 <nav class="left <?php if ($showRightColumn==NULL){ echo 'leftbigger';} ?>" id="nav">
                                         <?php endif; ?>
                                          <jdoc:include type="modules" name="position-7"  style="beezDivision" headerLevel="3" />
-
                                          <jdoc:include type="modules" name="position-4" style="beezHide" headerLevel="3" state="0 " />
                                          <jdoc:include type="modules" name="position-5" style="beezTabs" headerLevel="2"  id="3" />
 
