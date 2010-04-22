@@ -19,14 +19,11 @@ jimport('joomla.application.component.modellist');
 class UsersModelUsers extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_users.users';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -34,16 +31,16 @@ class UsersModelUsers extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$active = $app->getUserStateFromRequest($this->_context.'.filter.active', 'filter_active');
+		$active = $app->getUserStateFromRequest($this->context.'.filter.active', 'filter_active');
 		$this->setState('filter.active', $active);
 
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state');
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state');
 		$this->setState('filter.state', $state);
 
-		$groupId = $app->getUserStateFromRequest($this->_context.'.filter.group', 'filter_group_id', null, 'int');
+		$groupId = $app->getUserStateFromRequest($this->context.'.filter.group', 'filter_group_id', null, 'int');
 		$this->setState('filter.group_id', $groupId);
 
 		// Load the parameters.

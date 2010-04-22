@@ -19,20 +19,20 @@ jimport('joomla.application.component.view');
  */
 class BannersViewBanners extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
-		$categories	= $this->get('Categories');
-		$params		= JComponentHelper::getParams('com_banners');
+		// Initialise variables.
+		$this->categories	= $this->get('Categories');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -40,26 +40,21 @@ class BannersViewBanners extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-		$this->assignRef('categories',	$categories);
-		$this->assignRef('params',		$params);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		require_once JPATH_COMPONENT .'/models/fields/bannerclient.php';
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar.
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'banners.php';
+		require_once JPATH_COMPONENT.'/helpers/banners.php';
 
-		$state	= $this->get('State');
-		$canDo	= BannersHelper::getActions($state->get('filter.category_id'));
+		$canDo	= BannersHelper::getActions($this->state->get('filter.category_id'));
 
 		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_BANNERS'), 'generic.png');
 		if ($canDo->get('core.create')) {
@@ -73,14 +68,13 @@ class BannersViewBanners extends JView
 			JToolBarHelper::custom('banners.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
 			JToolBarHelper::custom('banners.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
-			if ($state->get('filter.published') != 2) {
+			if ($this->state->get('filter.published') != 2) {
 				JToolBarHelper::archiveList('banners.archive','JTOOLBAR_ARCHIVE');
 			}
 		}
-		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
+		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'banners.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else if ($canDo->get('core.edit.state')) {
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('banners.trash','JTOOLBAR_TRASH');
 		}
 		if ($canDo->get('core.admin')) {

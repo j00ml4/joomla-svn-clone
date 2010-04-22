@@ -33,9 +33,13 @@ class ContentModelArticle extends JModelAdmin
 		$this->_item = 'article';
 		$this->_option = 'com_content';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -218,9 +222,9 @@ class ContentModelArticle extends JModelAdmin
 			$this->setError($table->getError());
 			return false;
 		}
-
+		if ($isNew){
 		$this->featured($table->id, $data['featured']);
-
+		}
 		// Clean the cache.
 		$cache = JFactory::getCache('com_content');
 		$cache->clean();
@@ -317,7 +321,7 @@ class ContentModelArticle extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

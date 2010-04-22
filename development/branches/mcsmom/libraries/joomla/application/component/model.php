@@ -24,33 +24,42 @@ defined('JPATH_BASE') or die;
 abstract class JModel extends JObject
 {
 	/**
-	 * Database Connector
-	 *
-	 * @var object
-	 */
-	protected $_db;
-
-	/**
-	 * The model (base) name
-	 *
-	 * @var string
-	 */
-	protected $_name;
-
-	/**
-	 * An state object
-	 *
-	 * @var string
-	 */
-	protected $_state;
-
-	/**
 	 * Indicates if the internal state has been set
 	 *
 	 * @var		boolean
 	 * @since	1.6
 	 */
 	protected $__state_set	= null;
+
+	/**
+	 * Database Connector
+	 *
+	 * @var		object
+	 * @since	1.5
+	 */
+	protected $_db;
+
+	/**
+	 * The model (base) name
+	 *
+	 * @var		string
+	 * @since	1.6 (replaces _name variable in 1.5)
+	 */
+	protected $name;
+
+	/**
+	 * @var		string	The URL option for the component.
+	 * @since	1.6
+	 */
+	protected $option = null;
+
+	/**
+	 * An state object
+	 *
+	 * @var string
+	 * @since	1.6 (replaces _state variable in 1.5)
+	 */
+	protected $state;
 
 	/**
 	 * Add a directory where JModel should search for models. You may
@@ -146,20 +155,29 @@ abstract class JModel extends JObject
 	 */
 	public function __construct($config = array())
 	{
+		// Guess the option from the class name (Option)Model(View).
+		if (empty($this->option)) {
+			$r = null;
+			if (!preg_match('/(.*)Model/i', get_class($this), $r)) {
+				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_MODEL_GET_NAME'));
+			}
+			$this->option = 'com_'.strtolower($r[1]);
+		}
+
 		//set the view name
-		if (empty($this->_name)) {
+		if (empty($this->name)) {
 			if (array_key_exists('name', $config))  {
-				$this->_name = $config['name'];
+				$this->name = $config['name'];
 			} else {
-				$this->_name = $this->getName();
+				$this->name = $this->getName();
 			}
 		}
 
 		//set the model state
 		if (array_key_exists('state', $config))  {
-			$this->_state = $config['state'];
+			$this->state = $config['state'];
 		} else {
-			$this->_state = new JObject();
+			$this->state = new JObject();
 		}
 
 		//set the model dbo
@@ -185,10 +203,11 @@ abstract class JModel extends JObject
 	/**
 	 * Returns an object list
 	 *
-	 * @param	string The query
-	 * @param	int Offset
-	 * @param	int The number of records
+	 * @param	string	The query
+	 * @param	int		Offset
+	 * @param	int		The number of records
 	 * @return	array
+	 * @since	1.5
 	 */
 	protected function _getList($query, $limitstart=0, $limit=0)
 	{
@@ -203,6 +222,7 @@ abstract class JModel extends JObject
 	 *
 	 * @param	string The query
 	 * @return	int
+	 * @since	1.5
 	 */
 	protected function _getListCount($query)
 	{
@@ -253,7 +273,7 @@ abstract class JModel extends JObject
 	 */
 	public function getName()
 	{
-		$name = $this->_name;
+		$name = $this->name;
 
 		if (empty($name)) {
 			$r = null;
@@ -283,7 +303,7 @@ abstract class JModel extends JObject
 			$this->__state_set = true;
 		}
 
-		return $property === null ? $this->_state : $this->_state->get($property, $default);
+		return $property === null ? $this->state : $this->state->get($property, $default);
 	}
 
 	/**
@@ -316,6 +336,8 @@ abstract class JModel extends JObject
 	 * to be called on the first call to the getState() method unless the model
 	 * configuration flag to ignore the request is set.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @return	void
 	 * @since	1.6
 	 */
@@ -343,6 +365,6 @@ abstract class JModel extends JObject
 	 */
 	public function setState($property, $value=null)
 	{
-		return $this->_state->set($property, $value);
+		return $this->state->set($property, $value);
 	}
 }
