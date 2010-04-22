@@ -105,7 +105,7 @@
 			description="JField_Language_Desc" class="inputbox"
 		>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
-			<option value="*">JOPTION_ALL_LANGUAGE</option>
+			<option value="*">JOPTION_ALL_LANGUAGES</option>
 		</field>
 
 		<field name="featured" type="radio"

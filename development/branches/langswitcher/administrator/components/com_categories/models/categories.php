@@ -52,12 +52,11 @@ class CategoriesModelCategories extends JModelList
 		else {
 			$app->setUserState($context.'.data', $data);
 		}
-
 		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
 		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
 		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
-		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '-');
+		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
 
 		// List state information.
 		parent::populateState('a.lft', 'asc');
@@ -157,8 +156,8 @@ class CategoriesModelCategories extends JModelList
 		}
 
 		// Filter on the language.
-		if (($language = $this->getState('filter.language'))!='-') {
-			$query->where('a.language = '.$db->quote($language));
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
 		}
 
 		// Add the list ordering clause.
@@ -181,7 +180,7 @@ class CategoriesModelCategories extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context.'.'.$this->getState('extension').'.'.$this->getState('section'), 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

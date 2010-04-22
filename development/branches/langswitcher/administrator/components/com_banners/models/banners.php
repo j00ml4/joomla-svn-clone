@@ -37,17 +37,20 @@ class BannersModelBanners extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$data = JRequest::getVar('filters');
+		if (empty($data)) {
+			$data = $app->getUserState($this->context.'.data');
+		}
+		else {
+			$app->setUserState($this->context.'.data', $data);
+		}
+		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $state);
-
-		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
-		$this->setState('filter.category_id', $categoryId);
-
-		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', '');
-		$this->setState('filter.client_id', $clientId);
+		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
+		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
+		$this->setState('filter.client_id', isset($data['select']['client']) ? $data['select']['client'] : '');
+		$this->setState('filter.category_id', isset($data['select']['category']) ? $data['select']['category'] : '');
+		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_banners');
@@ -86,8 +89,9 @@ class BannersModelBanners extends JModelList
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.category_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -139,7 +143,7 @@ class BannersModelBanners extends JModelList
 		$query->join('LEFT', '#__banner_clients AS cl ON cl.id = a.cid');
 
 		// Filter by published state
-		$published = $this->getState('filter.state');
+		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.state = '.(int) $published);
 		}
@@ -172,6 +176,11 @@ class BannersModelBanners extends JModelList
 			}
 		}
 
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
+		}
+
 		// Add the list ordering clause.
 		$orderCol = $this->getState('list.ordering', 'ordering');
 		$app->setUserState($this->context . '.'.$orderCol.'.orderdirn',$this->getState('list.direction', 'ASC'));
@@ -182,7 +191,7 @@ class BannersModelBanners extends JModelList
 		if ($orderCol=='category_title') {
 			$query->order($db->getEscaped('ordering').' '.$db->getEscaped($app->getUserState($this->context . '.ordering.orderdirn','ASC')));
 		}
-		$query->order($db->getEscaped('state').' '.$db->getEscaped($app->getUserState($this->context . '.state.orderdirn','ASC')));
+		$query->order($db->getEscaped('state').' '.$db->getEscaped($app->getUserState($this->context . '.published.orderdirn','ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
@@ -205,5 +214,35 @@ class BannersModelBanners extends JModelList
 			$this->categories = $db->loadObjectList('catid');
 		}
 		return $this->categories;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'banners', array('control' => 'filters', 'event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context.'.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

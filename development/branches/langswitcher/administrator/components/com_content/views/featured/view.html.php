@@ -18,8 +18,8 @@ class ContentViewFeatured extends JView
 {
 	protected $items;
 	protected $pagination;
-	protected $form;
 	protected $state;
+	protected $form;
 
 	/**
 	 * Display the view
