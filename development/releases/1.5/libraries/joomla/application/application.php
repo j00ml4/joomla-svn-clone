@@ -527,6 +527,11 @@ class JApplication extends JObject
 
 		if ($response->status === JAUTHENTICATE_STATUS_SUCCESS)
 		{
+			$session = &JFactory::getSession();
+
+			// we fork the session to prevent session fixation issues
+			$session->fork();
+
 			// Import the user plugin group
 			JPluginHelper::importPlugin('user');
 

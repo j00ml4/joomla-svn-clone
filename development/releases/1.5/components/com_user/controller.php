@@ -403,18 +403,18 @@ class UserController extends JController
 
 		// Get the input
 		$token = JRequest::getVar('token', null, 'post', 'alnum');
+		$username = JRequest::getVar('username', null, 'post');
 
 		// Get the model
 		$model = &$this->getModel('Reset');
 
 		// Verify the token
-		if ($model->confirmReset($token) === false)
+		if ($model->confirmReset($token, $username) !== true)
 		{
 			$message = JText::sprintf('PASSWORD_RESET_CONFIRMATION_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_user&view=reset&layout=confirm', $message);
 			return false;
 		}
-
 		$this->setRedirect('index.php?option=com_user&view=reset&layout=complete');
 	}
 

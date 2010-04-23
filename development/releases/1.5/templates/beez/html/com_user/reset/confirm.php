@@ -15,6 +15,14 @@ defined('_JEXEC') or die('Restricted access');
 		</tr>
 		<tr>
 			<td height="40">
+				<label for="username" class="hasTip" title="<?php echo JText::_('RESET_PASSWORD_USERNAME_TIP_TITLE'); ?>::<?php echo JText::_('RESET_PASSWORD_USERNAME_TIP_TEXT'); ?>"><?php echo JText::_('User Name'); ?>:</label>
+			</td>
+			<td>
+				<input id="username" name="username" type="text" class="required" size="36" />
+			</td>
+		</tr>
+		<tr>
+			<td height="40">
 				<label for="token" class="hasTip" title="<?php echo JText::_('RESET_PASSWORD_TOKEN_TIP_TITLE'); ?>::<?php echo JText::_('RESET_PASSWORD_TOKEN_TIP_TEXT'); ?>"><?php echo JText::_('Token'); ?>:</label>
 			</td>
 			<td>

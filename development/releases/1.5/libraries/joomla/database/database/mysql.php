@@ -212,7 +212,7 @@ class JDatabaseMySQL extends JDatabase
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->_sql;
 		if ($this->_limit > 0 || $this->_offset > 0) {
-			$sql .= ' LIMIT '.$this->_offset.', '.$this->_limit;
+			$sql .= ' LIMIT ' . max($this->_offset, 0) . ', ' . max($this->_limit, 0);
 		}
 		if ($this->_debug) {
 			$this->_ticker++;
