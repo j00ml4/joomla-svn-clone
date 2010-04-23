@@ -39,7 +39,7 @@ class CategoriesModelCategory extends JModelAdmin
 		$this->_item = 'category';
 		$this->_option = 'com_categories';
 	}
-	
+
 	/**
 	 * Returns a Table object, always creating it
 	 *
@@ -56,9 +56,11 @@ class CategoriesModelCategory extends JModelAdmin
 	/**
 	 * Auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = &JFactory::getApplication('administrator');
 
@@ -413,7 +415,7 @@ class CategoriesModelCategory extends JModelAdmin
 	protected function _batchCopy($value, $pks)
 	{
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

@@ -1107,7 +1107,23 @@ div.message {
 tr.row1 {
 	background-color: #1c4181;
 }
+/* ACL Config --------- */
+table#acl-config {
+	border: 1px solid #10254a;
+}
 
+table#acl-config th,
+table#acl-config td {
+	background: #1c4181;
+	border-bottom: 1px solid #10254a;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+table#acl-config th.acl-groups {
+	border-right: 1px solid #10254a;
+}
 /* Summary Tab */
 
 table.aclsummary-table td.col2,
@@ -1122,3 +1138,4 @@ table.aclmodify-table td.col2,
 table.aclmodify-table th.col2 {
 	border-left: 1px solid #cbcbcb;
 }
+

@@ -20,18 +20,11 @@ jimport('joomla.application.component.modellist');
 class MenusModelMenus extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_menus.menus';
-
-	/**
 	 * Method to build an SQL query to load the list data.
 	 *
 	 * @return	string	An SQL query
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db = $this->getDbo();
@@ -65,15 +58,17 @@ class MenusModelMenus extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
 		// List state information.
-		parent::_populateState('a.id', 'asc');
+		parent::populateState('a.id', 'asc');
 	}
 
 	/**

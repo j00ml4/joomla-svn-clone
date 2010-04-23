@@ -21,9 +21,11 @@ class ConfigModelComponent extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Set the component (option) we are dealing with.
 		$component = JRequest::getCmd('component');

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 15936 2010-04-08 06:32:41Z infograf768 $
+ * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Application
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -32,16 +32,16 @@ class JControllerAdmin extends JController
 	protected $_option;
 
 	/**
-	 * @var		string	The URL view list variable.
-	 * @since	1.6
-	 */
-	protected $_view_list;
-
-	/**
 	 * @var		string	The prefix to use with controller messages.
 	 * @since	1.6
 	 */
 	protected $_msgprefix;
+
+	/**
+	 * @var		string	The URL view list variable.
+	 * @since	1.6
+	 */
+	protected $_view_list;
 
 	/**
 	 * Constructor.
@@ -107,7 +107,7 @@ class JControllerAdmin extends JController
 
 			// Remove the items.
 			if ($model->delete($cid)) {
-				$this->setMessage(JText::sprintf((count($cid) == 1) ? $this->_msgprefix.'_ITEM_DELETED' : $this->_msgprefix.'_N_ITEMS_DELETED', count($cid)));
+				$this->setMessage(JText::plural($this->_msgprefix.'_N_ITEMS_DELETED', count($cid)));
 			} else {
 				$this->setMessage($model->getError());
 			}
@@ -163,7 +163,7 @@ class JControllerAdmin extends JController
 				} else {
 					$ntext = $this->_msgprefix.'_N_ITEMS_TRASHED';
 				}
-				$this->setMessage(JText::__($ntext, count($cid)));
+				$this->setMessage(JText::plural($ntext, count($cid)));
 			}
 		}
 

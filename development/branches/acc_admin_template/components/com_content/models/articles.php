@@ -20,53 +20,40 @@ jimport('joomla.application.component.modellist');
 class ContentModelArticles extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	public $_context = 'com_content.articles';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
 	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
-		$app =& JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// List state information
-		//$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$limit = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
-		$this->setState('list.limit', $limit);
+		//$value = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
+		$value = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
+		$this->setState('list.limit', $value);
 
-		//$limitstart = $app->getUserStateFromRequest($this->_context.'.limitstart', 'limitstart', 0);
-		$limitstart = JRequest::getInt('limitstart', 0);
-		$this->setState('list.start', $limitstart);
+		//$value = $app->getUserStateFromRequest($this->context.'.limitstart', 'limitstart', 0);
+		$value = JRequest::getInt('limitstart', 0);
+		$this->setState('list.start', $value);
 
-		//$orderCol = $app->getUserStateFromRequest($this->_context.'.ordercol', 'filter_order', 'a.lft');
-		$orderCol = JRequest::getCmd('filter_order', 'a.ordering');
-		$this->setState('list.ordering', $orderCol);
+		//$value = $app->getUserStateFromRequest($this->context.'.ordercol', 'filter_order', 'a.lft');
+		$value = JRequest::getCmd('filter_order', 'a.ordering');
+		$this->setState('list.ordering', $value);
 
-		//$orderDirn = $app->getUserStateFromRequest($this->_context.'.orderdirn', 'filter_order_Dir', 'asc');
-		$orderDirn = JRequest::getWord('filter_order_Dir', 'asc');
-		$this->setState('list.direction', $orderDirn);
+		//$value = $app->getUserStateFromRequest($this->context.'.orderdirn', 'filter_order_Dir', 'asc');
+		$value = JRequest::getWord('filter_order_Dir', 'asc');
+		$this->setState('list.direction', $value);
 
 		$params = $app->getParams();
-		$menuParams = new JRegistry();
-		if (JSite::getMenu()->getActive())
-		{
-			$menuParams = new JRegistry();
-			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
-		}
-		$mergedParams = clone $menuParams;
-		$mergedParams->merge($params);
-		$this->setState('params', $mergedParams);
+		$this->setState('params', $params);
 
 		$this->setState('filter.published', 1);
 
 		// process show_noauth parameter
-		if (!$mergedParams->get('show_noauth'))
+		if (!$params->get('show_noauth'))
 		{
 			$this->setState('filter.access', true);
 		}
@@ -87,7 +74,7 @@ class ContentModelArticles extends JModelList
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id .= ':' . $this->getState('filter.published');
@@ -107,7 +94,7 @@ class ContentModelArticles extends JModelList
 		$id .= ':' . $this->getState('filter.end_date_range');
 		$id .= ':' . $this->getState('filter.relative_date');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -115,7 +102,7 @@ class ContentModelArticles extends JModelList
 	 *
 	 * @return	string
 	 */
-	function _getListQuery()
+	function getListQuery()
 	{
 		// Create a new query object.
 		$db = $this->getDbo();
@@ -125,11 +112,11 @@ class ContentModelArticles extends JModelList
 		$query->select($this->getState('list.select',
 			'a.id, a.title, a.alias, a.title_alias, a.introtext, a.state, a.catid, a.created, a.created_by, a.created_by_alias,' .
 			// use created if modified is 0
-			'CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END as modified,' . 
+			'CASE WHEN a.modified = 0 THEN a.created ELSE a.modified END as modified,' .
 			'a.modified_by, uam.name as modified_by_name,' .
 			// use created if publish_up is 0
 		'CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END as publish_up,' .
-			'a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access,'. 
+			'a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access,'.
 			'a.hits, a.featured,' . ' LENGTH(a.fulltext) AS readmore'));
 		$query->from('#__content AS a');
 
@@ -376,21 +363,18 @@ class ContentModelArticles extends JModelList
 		foreach ($items as & $item)
 		{
 			$articleParams = new JRegistry;
-			/*
-			 *  TODO: investigate if it is better to sync the namespace usage in JRegistry and JParameter, if we let it unsync the we need to know what namespace are the Objects are using before we merge
-			 */
 			$articleParams->loadJSON($item->attribs);
-			
+
 			// Unpack readmore and layout params
 			$item->alternative_readmore = $articleParams->get('alternative_readmore');
 			$item->layout = $articleParams->get('layout');
-			
+
 			$item->params = clone $this->getState('params');
 
 			// For blogs, article params override menu item params only if menu param = 'use_article'
 			// Otherwise, menu item params control the layout
 			// If menu item is 'use_article' and there is no article param, use global
-			if (JRequest::getString('layout') == 'blog' || JRequest::getString('view') == 'frontpage')
+			if (JRequest::getString('layout') == 'blog' || JRequest::getString('view') == 'featured')
 			{
 				// create an array of just the params set to 'use_article'
 				$menuParamsArray = $this->getState('params')->toArray();
@@ -413,7 +397,7 @@ class ContentModelArticles extends JModelList
 					}
 				}
 				// merge the selected article params
-				if (count($articleArray > 0))
+				if (count($articleArray) > 0)
 				{
 					$articleParams = new JRegistry;
 					$articleParams->loadArray($articleArray);

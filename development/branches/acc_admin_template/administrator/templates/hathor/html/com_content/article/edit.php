@@ -27,7 +27,7 @@ JHtml::_('behavior.formvalidation');
 			submitform(task);
 		}
 		else {
-			alert('<?php echo $this->escape(JText::_('JValidation_Form_failed'));?>');
+			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 // -->
@@ -115,6 +115,11 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $this->form->getLabel('hits'); ?>
 				<?php echo $this->form->getInput('hits'); ?>
 			</div>
+			<div>
+				<?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?>
+			</div>
+			
 		</fieldset>
 
 		<?php

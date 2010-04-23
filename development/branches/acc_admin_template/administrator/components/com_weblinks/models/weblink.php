@@ -20,19 +20,23 @@ jimport('joomla.application.component.modeladmin');
 class WeblinksModelWeblink extends JModelAdmin
 {
 	protected $_context = 'com_weblinks';
-	
+
 	function __construct($config = array())
 	{
 		parent::__construct($config);
-		
+
 		$this->_item = 'weblink';
 		$this->_option = 'com_weblinks';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -240,7 +244,7 @@ class WeblinksModelWeblink extends JModelAdmin
 			//$table->modified_by	= $user->get('id');
 		}
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

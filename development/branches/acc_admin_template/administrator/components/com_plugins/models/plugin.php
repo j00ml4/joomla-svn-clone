@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 12685 2009-09-10 14:14:04Z pentacle $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -23,7 +23,7 @@ class PluginsModelPlugin extends JModelAdmin
 	 * Item cache.
 	 */
 	private $_cache = array();
-	
+
 	protected $_context = 'com_plugins';
 
 	/**
@@ -39,11 +39,15 @@ class PluginsModelPlugin extends JModelAdmin
 		$this->_item = 'plugin';
 		$this->_option = 'com_plugins';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -265,7 +269,7 @@ class PluginsModelPlugin extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

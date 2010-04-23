@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_items.php 15048 2010-02-25 17:24:37Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 $class = ' class="first"';
-if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) : 
+if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
 ?>
 <ul>
 <?php foreach($this->items[$this->parent->id] as $id => $item) : ?>
@@ -37,7 +37,7 @@ if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
 				<dd><?php echo $item->numitems; ?></dd>
 			</dl>
 		<?php endif; ?>
-		
+
 		<?php if(count($item->getChildren()) > 0) :
 			$this->items[$item->id] = $item->getChildren();
 			$this->parent = $item;

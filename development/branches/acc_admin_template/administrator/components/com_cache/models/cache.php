@@ -43,14 +43,11 @@ class CacheModelCache extends JModel
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = &JFactory::getApplication();
 
@@ -71,7 +68,7 @@ class CacheModelCache extends JModel
 		$this->setState('list.limit', $limit);
 	}
 
-	
+
 	/**
 	 * Method to get cache data
 	 *
@@ -86,7 +83,7 @@ class CacheModelCache extends JModel
 			$data = $cache->getAll();
 			if ($data != false) {$this->_data = $data;} else {$this->_data = array();}
 		}
-		
+
 		return $this->_data;
 	}
 

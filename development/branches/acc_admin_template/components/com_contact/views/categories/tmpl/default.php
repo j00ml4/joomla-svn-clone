@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default.php 12812 2009-09-22 03:58:25Z dextercowley $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -25,6 +25,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo JHtml::_('content.prepare', $this->params->get('categories_desc')); ?>
 <?php endif; ?>
 <?php
-echo $this->loadTemplate('items'); 
+echo $this->loadTemplate('items');
 ?>
 </div>

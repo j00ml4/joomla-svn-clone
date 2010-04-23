@@ -1,7 +1,7 @@
 
 <?php
 /**
- * @version		$Id: default.php 15906 2010-04-07 02:30:46Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -17,10 +17,19 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // It will be a separate class if the user starts it with a space
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="article-blog-featured<?php echo $pageClass;?>">
-<?php if ($this->params->get('show_page_heading', 1)) : ?>
+<div class="blog-featured<?php echo $pageClass;?>">
+<?php if ($this->params->get('show_page_heading')!=0 or $this->params->get('show_category_title')): ?>
 <h1>
+
+<?php if ( $this->params->get('show_page_heading')!=0) : ?>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
+<?php endif; ?>
+	<?php if ($this->params->get('show_category_title')) :?>
+
+
+	<?php	echo '<span class="subheading-category">'.$this->category->title.'</span>'; ?>
+	<?php endif; ?>
+
 </h1>
 <?php endif; ?>
 <?php $leadingcount=0 ; ?>

@@ -34,11 +34,15 @@ class MessagesModelMessage extends JModelAdmin
 		$this->_item = 'message';
 		$this->_option = 'com_messages';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$user = JFactory::getUser();
 		$this->setState('user.id', $user->get('id'));
@@ -225,10 +229,10 @@ class MessagesModelMessage extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();
-		return $condition;	
+		return $condition;
 	}
 }

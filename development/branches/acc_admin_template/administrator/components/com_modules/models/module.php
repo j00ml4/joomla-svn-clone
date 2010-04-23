@@ -41,11 +41,15 @@ class ModulesModelModule extends JModelAdmin
 		$this->_item = 'module';
 		$this->_option = 'com_modules';
 	}
-	
+
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -103,7 +107,7 @@ class ModulesModelModule extends JModelAdmin
 				throw new Exception($table->getError());
 			}
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -178,7 +182,7 @@ class ModulesModelModule extends JModelAdmin
 				return JError::raiseWarning(500, $row->getError());
 			}
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -548,7 +552,7 @@ class ModulesModelModule extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

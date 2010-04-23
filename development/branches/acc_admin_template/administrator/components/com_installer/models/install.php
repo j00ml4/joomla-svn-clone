@@ -43,13 +43,11 @@ class InstallerModelInstall extends JModel
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = &JFactory::getApplication('administrator');
@@ -62,7 +60,7 @@ class InstallerModelInstall extends JModel
 		// Remember the 'Install from Directory' path.
 		$path = $app->getUserStateFromRequest($this->_context.'.install_directory', 'install_directory', $app->getCfg('config.tmp_path'));
 		$this->setState('install.directory', $path);
-		parent::_populateState();
+		parent::populateState();
 	}
 
 	/**

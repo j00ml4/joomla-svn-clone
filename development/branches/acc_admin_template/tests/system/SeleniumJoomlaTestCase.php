@@ -18,7 +18,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->cfg = $cfg; // save current configuration
 		$this->setBrowser($cfg->browser);
 		$this->setBrowserUrl($cfg->host . $cfg->path);
-		if (isset($cfg->selhost)) {
+		if (isset($cfg->selhost))
+		{
 			$this->setHost($cfg->selhost);
 		}
 		echo ".\n" . 'Starting ' . get_class($this) . ".\n";
@@ -28,7 +29,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	{
 		echo "Logging in to back end.\n";
 		$cfg = new SeleniumConfig();
-		if (!$this->isElementPresent("mod-login-username")) {
+		if (!$this->isElementPresent("mod-login-username"))
+		{
 			$this->gotoAdmin();
 			$this->click("link=Log out");
 			$this->waitForPageToLoad("30000");
@@ -56,7 +58,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function gotoSite()
 	{
-		echo "Browsing to font end.\n";
+		echo "Browsing to front end.\n";
 		$cfg = new SeleniumConfig();
 		$this->open($cfg->path);
 		$this->waitForPageToLoad("30000");
@@ -109,7 +111,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->type("jform_email", $email);
 
 		// Set group
-		switch ($group) {
+		switch ($group)
+		{
 		case 'Manager':
 			$this->click("1group_6");
 			break;
@@ -188,7 +191,8 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->click("link=New");
 		$this->waitForPageToLoad("30000");
 		$this->type("jform_title", $groupName);
-		switch ($groupParent) {
+		switch ($groupParent)
+		{
 		case 'Public':
 			$this->select("jformparent_id", "value=1");
 			break;
@@ -252,18 +256,30 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		echo "Delete all users in view.\n";
 		$this->click("toggle");
 		echo("Delete new user.\n");
-		//	    $this->click("//li[@id='toolbar-delete']/a");
-		$this->click("link=Trash");
+		$this->jClick('Delete');
+	}
+
+	function createLevel($levelName, $userGroup)
+	{
+		$this->jClick('Access Levels');
+		$this->jClick('New');
+		echo "Create new access level named " . $levelName . "\n";
+		$this->type("jform_title", $levelName);
+		$this->jInput($userGroup);
+		echo "Selecting User Groups having access to " . $levelName . "\n";
+		$this->jClick('Save & Close');
+	}
+
+	function deleteLevel($partialName = 'test')
+	{
+		$this->jClick('Access Levels');
+		echo "Filter on " . $partialName . ".\n";
+		$this->type("filter_search", $partialName);
+		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
-		try
-		{
-			$this->assertTrue($this->isTextPresent("item(s) successfully deleted."));
-			echo "Deletion of group(s) containing " . $partialName . " succeeded.\n";
-		}
-		catch (PHPUnit_Framework_AssertionFailedError $e)
-		{
-			array_push($this->verificationErrors, $e->toString());
-		}
+		echo "Delete all levels in view.\n";
+		$this->click("toggle");
+		$this->jClick('Delete');
 	}
 
 	/**
@@ -274,16 +290,137 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	 */
 	function clickGo()
 	{
-		if ($this->isElementPresent("filter-go")) {
+		if ($this->isElementPresent("filter-go"))
+		{
 			$this->click("filter-go");
 		}
 	}
 
 	public function countErrors()
 	{
-		if ($count = count($this->verificationErrors)) {
+		if ($count = count($this->verificationErrors))
+		{
 			echo "\n***Warning*** " . $count . " verification error(s) encountered.\n";
 		}
+	}
+
+	/*
+	 * Allow selection of an input based on the text contained in its correspondig label
+	 */
+	function jInput($labelText)
+	{
+		$this->click("//label[contains(.,'$labelText')]/preceding-sibling::input");
+	}
+
+	/*
+	 * Unifies button and menu item selection based on corresponding IDs and Classes
+	 */
+	function jClick($item)
+	{
+		switch ($item)
+		{
+		case 'Save & Close':
+			$this->click("//li[@id='toolbar-save']/a");
+			$this->waitForPageToLoad("30000");
+			try
+			{
+				$this->assertTrue($this->isTextPresent("Item successfully saved."), "Save success text not present, SeleniumTestCase line 327");
+				$this->assertFalse($this->isTextPresent("ERROR"), "Error message present, SeleniumTestCase line 328");
+				echo "Item successfully saved.\n";
+			}
+			catch (PHPUnit_Framework_AssertionFailedError $e)
+			{
+				array_push($this->verificationErrors, $e->getTraceAsString());
+			}
+			break;
+		case 'New':
+			$this->click("//li[@id='toolbar-new']/a");
+			$this->waitForPageToLoad("30000");
+			break;
+		case 'Delete':
+			$this->click("//li[@id='toolbar-delete']/a");
+			$this->waitForPageToLoad("30000");
+			try
+			{
+				$this->assertTrue($this->isTextPresent("_DELETED"), 'Delete confirm text wrong, SeleniumJoomlaTestCase line 345');
+				$this->assertFalse($this->isTextPresent("ERROR"), "Error message present, SeleniumTestCase line 346");
+				echo "Deletion of item(s) succeeded.\n";
+			}
+			catch (PHPUnit_Framework_AssertionFailedError $e)
+			{
+				array_push($this->verificationErrors, $e->toString());
+			}
+			break;
+		case 'Access Levels':
+			$this->click("//a[contains(@class,'icon-16-levels')]");
+			$this->waitForPageToLoad("30000");
+			break;
+		default:
+			$this->click("//li[@id='toolbar-new']/a");
+			$this->waitForPageToLoad("30000");
+			break;
+		}
+	}
+
+	function checkNotices()
+	{
+		try
+		{
+			$this->assertFalse($this->isTextPresent("( ! ) Notice"), "**Warning: PHP Notice found on page!");
+		}
+		catch (PHPUnit_Framework_AssertionFailedError $e)
+		{
+			echo "**Warning: PHP Notice found on page\n";
+			array_push($this->verificationErrors, $this->getTraceFiles($e));
+		}
+	}
+
+	/**
+	 * Magic method to check for PHP Notice whenever the waitForPageToLoad command is invoked
+	 * To suppress the check, use waitForPageToLoad('3000', false);
+	 *
+	 * @param string $command
+	 * @param array $arguments
+	 * @return results of waitForPageToLoad method
+	 */
+	public function __call($command, $arguments)
+	{
+		$return = parent::__call($command, $arguments);
+		if ($command == 'waitForPageToLoad' && isset($arguments[1]) && $arguments[1] !== false)
+		{
+			try
+			{
+				$this->assertFalse($this->isTextPresent("( ! ) Notice"), "**Warning: PHP Notice found on page!");
+			}
+			catch (PHPUnit_Framework_AssertionFailedError $e)
+			{
+				echo "**Warning: PHP Notice found on page\n";
+				array_push($this->verificationErrors, $this->getTraceFiles($e));
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * Function to extract our test file information from the $e stack trace.
+	 * Makes the error reporting more readable, since it filters out all of the PHPUnit files.
+	 *
+	 * @param PHPUnit_Framework_AssertionFailedError $e
+	 * @return string with selected files based on path
+	 */
+	public function getTraceFiles($e) {
+		$trace = $e->getTrace();
+		$path = $this->cfg->folder . $this->cfg->path;
+		$path = str_replace('\\', '/', $path);
+		$message = '';
+		foreach ($trace as $traceLine) {
+			$file = str_replace('\\', '/', $traceLine['file']);
+			if (stripos($file, $path) !== false) {
+				$message .= "\n" . $traceLine['file'] . '(' . $traceLine['line'] . '): ' .
+					$traceLine['class'] . $traceLine['type'] . $traceLine['function'] ;
+			}
+		}
+		return $e->toString() . $message;
 	}
 
 }

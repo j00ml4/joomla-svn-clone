@@ -32,17 +32,19 @@ class ContentModelCategories extends JModel
 	 * @var		string
 	 */
 	protected $_extension = 'com_content';
-	
+
 	private $_parent = null;
-	
+
 	private $_items = null;
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = &JFactory::getApplication();
 		$this->setState('filter.extension', $this->_extension);
@@ -69,7 +71,7 @@ class ContentModelCategories extends JModel
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.extension');
@@ -77,7 +79,7 @@ class ContentModelCategories extends JModel
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.parentId');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -108,10 +110,10 @@ class ContentModelCategories extends JModel
 				$this->_items = false;
 			}
 		}
-		
+
 		return $this->_items;
 	}
-	
+
 	public function getParent()
 	{
 		if(!is_object($this->_parent))

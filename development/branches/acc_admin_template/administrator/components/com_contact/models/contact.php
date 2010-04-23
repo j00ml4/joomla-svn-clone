@@ -56,9 +56,11 @@ class ContactModelContact extends JModelAdmin
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app	= &JFactory::getApplication('administrator');
 		// Load the User state.
