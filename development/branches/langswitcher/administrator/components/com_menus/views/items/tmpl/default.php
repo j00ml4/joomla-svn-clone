@@ -98,7 +98,7 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->title); ?></a>
 
 					<?php if ($item->home == 1) : ?>
-						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'class'=>'hasTip', 'title' => JText::_('JDEFAULT').'::'.$item->language_title), true); ?></span>
+						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'class'=>'hasTip', 'title' => JText::_('JDEFAULT').'::'.($item->language_title ? $this->escape($item->language_title):JText::_('JOPTION_ALL_LANGUAGES'))), true); ?></span>
 					<?php endif; ?>
 
 					<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
@@ -123,9 +123,9 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td class="center">
 					<?php if ($item->language==''):?>
-						<?php echo JText::_('JDEFAULT'); ?>
+						<?php echo JText::_('JOPTION_DEFAULT_LANGUAGE'); ?>
 					<?php elseif ($item->language=='*'):?>
-						<?php echo JText::_('JALL'); ?>
+						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
 					<?php else:?>
 						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
