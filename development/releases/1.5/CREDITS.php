@@ -67,7 +67,7 @@ Andy Wallace
 Translation contributors:
 -------------------------
 Albanian (sp-AL) - Blendi Kraja
-Arabic Algeria (ar-DZ) - Saber Bousba
+Arabic Unitag (ar-AA) - Arabic Unitag Translation Team - Mahmood Alhaj Kassem
 Azeri (az-AZ) - Azeri Translation Team - Mahmud and Yusif
 Basque (eu-ES) - Basque Translation Team (Basque Language School of Santurtzi) - Abel Camacho, Pedro Lonbide
 Belarusian (be-BY) - Dennis Hermacki
@@ -90,7 +90,7 @@ German (de-DE)/(de-CH)/(de-AT) - J!German - Jan Erik Zassenhaus, Karin Nikolaj, 
 Greek (el-GR) - Greek Joomla Community - Aris Ntatsis
 Gujarati (gu-IN) - Gujarati Translation Team
 Hebrew (he-IL) - Joomla!Hebrew - Mati (MtK) Kochen
-Hindi-Devanagari (hi-IN) - IndicJoomla! Team - Vishal Pahuja
+Hindi (India) (hi-IN) - Hindi (India) Translation Team - Sanjeev Naroliya, Ronak Bhagdev, Aminuddin Sheikh
 Hungarian (hu-HU) - Magyar Joomla! Felhasznalok Nemzetkozi Egyesulete - Jozsef Tamas Herczeg, Annamaria Ban
 Icelandic (is-IS) - Joomlis! Icelandic Joomla Community [joomlis.net] - Magnús Guðlaugsson
 Indonesian (id-ID) - Indonesian (Bahasa Indonesia) Translation Community - Andy Sikumbang
@@ -111,6 +111,7 @@ Portuguese (pt-PT) - Joomla! Portugal - Paulo Izidoro
 Romanian (ro-RO) - Romanian Joomla! Community - Cosmin Lebu
 Russian (ru-RU) - Russian Translation Team - Serge Litvinov
 Serbian (sr-RS) - Joomla! Serbia team - Marko Milenovic
+Serbian (sr-YU) - Joomla! Serbia team - Svetlana Zec, Marko Milenovic
 Sindhi (sd-PK) - Raheel H. Kaghzi, Shafiq-ur-rehman Khatri
 Sinhala (si-LK) - Rashan Anushka
 Slovak (sk-SK) - Slovak Translation Team - Karol Cejka, Viliam Kmec, Alexander Horvath, Marek Sabo
