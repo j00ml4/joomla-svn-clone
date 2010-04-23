@@ -45,6 +45,7 @@ $ -> Language fix or change
  $ [#20024] More updates on installation ini files
  $ [#19966] New hi-IN installation language
  $ [#19871] Missing string in a few installation ini files
+ # [#19859] Graceful handling of failing Apache plugins
 
 07-Mar-2010 Ian MacLennan
  # [#16930] Reverting patch from #16930 because it breaks the installer
