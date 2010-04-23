@@ -80,7 +80,7 @@ class JComments
 		$query = $db->getQuery(true);
 
 		// Setup the base query parameters to select comments by context.
-		$query->select('a.id');
+		$query->select('a.*');
 		$query->from('#__social_comments AS a');
 		$query->where('a.context = '.$db->quote($context));
 
@@ -200,25 +200,103 @@ class JComments
 
 	public function save($data)
 	{
-		// Initialize variables.
-		$isNew = true;
+		// Get the database connection object.
+		$db = JFactory::getDBO();
+
+		// Build a query to get data from the content item row.
+		$query = $db->getQuery(true);
+		$query->select('a.id, a.component');
+		$query->from('#__social_content AS a');
+		$query->where('a.context = '.$db->quote($data['context']));
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$content = $db->loadObject();
+
+		// Make sure a content item exists to rate.
+		if (!$content) {
+			// Throw error
+			return false;
+		}
+
+		// Get the user's IP address... first checking for proxy information.
+		$userIp = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 
 		// Check to see if we are submitting a new comment or editing an old one.
 		if (!empty($data['id'])) {
 
+			// Build a query to determine if the comment exists.
+			$query = $db->getQuery(true);
+			$query->select('id');
+			$query->from('#__social_comments');
+			$query->where('(id = '.(int) $data['id']);
+
+			// Execute the query and load the value from the database.
+			$db->setQuery($query);
+			$commentId = (int) $db->loadResult();
+
+			// Make sure the comment to edit actually exists.
+			if (!$commentId) {
+				// Throw error.
+				return false;
+			}
+
+			// For now don't allow frontend comment editing until we figure out permissions rules.
+			return false;
+		}
+		// New comment.
+		else {
+
+			// Fire onContentSubmit event for external validation/verification/modification.
+
+			$query = $db->getQuery(true);
+			$query->insert('#__social_comments');
+			$query->set('context = '.$db->quote($data['context']));
+			$query->set('component = '.$db->quote($content->component));
+			$query->set('content_id = '.(int) $content->id);
+			$query->set('created_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+			$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+			$query->set('user_id = '.(int) JFactory::getUser()->id);
+			$query->set('user_ip = '.(int) ip2long($userIp));
+
+			$query->set('state = 1');
+			$query->set('trackback = 0');
+
+			$query->set('user_name = '.$db->quote($data['name']));
+			$query->set('user_link = '.$db->quote($data['url']));
+			$query->set('user_email = '.$db->quote($data['email']));
+			$query->set('user_notify = 0');
+
+			$query->set('subject = '.$db->quote($data['subject']));
+			$query->set('body = '.$db->quote($data['body']));
+
+//			$query->set('score = 0');
+//			$query->set('score_like = 0');
+//			$query->set('score_dislike = 0');
+
+			$db->setQuery($query);
+			$db->query();
+
+			if ($db->getErrorNum()) {
+				// Throw error.
+				return false;
+			}
+
+			$commentId = (int) $db->insertid();
+
+
+			// Send out moderation queue email as necessary.
 		}
 
-
-
-		var_dump($data);
-
-		// If new, fire onContentSubmit event for external validation/verification/modification.
-
-		// Attempt to save comment -- updating the social_content table as well.
-
-		// Send out moderation queue email as necessary.
-
 		// Send out notification emails as necessary.
+
+		// Update the cumulative comment data for the content item.
+		if (!self::updateCumulativeByContext($data['context'])) {
+			// Throw error.
+			return false;
+		}
+
+		return $commentId;
 	}
 
 	public function delete()
@@ -268,5 +346,47 @@ class JComments
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Method to update the cumulative aggregate comment data for the content item based on context.
+	 *
+	 * @param   string  $context    The context of the content item for which to update.
+	 *
+	 * @return  boolean True on success.
+	 *
+	 * @since   1.6
+	 */
+	protected function updateCumulativeByContext($context)
+	{
+		// Get the database connection object.
+		$db = JFactory::getDBO();
+
+		// Build a query to get the cumulative data for the content item comments.
+		$query = $db->getQuery(true);
+		$query->select('COUNT(a.id) AS count');
+		$query->from('#__social_comments AS a');
+		$query->where('a.context = '.$db->quote($context));
+		$query->where('a.state = 1');
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$cumulative = (int) $db->loadResult();
+
+		// Update the cumulative comment data in the content row.
+		$query = $db->getQuery(true);
+		$query->update('#__social_content');
+		$query->set('comment_count = '.(int) $cumulative);
+		$query->where('context = '.$db->quote($context));
+
+		$db->setQuery($query);
+		$db->query();
+
+		if ($db->getErrorNum()) {
+			// Throw error.
+			return false;
+		}
+
+		return true;
 	}
 }

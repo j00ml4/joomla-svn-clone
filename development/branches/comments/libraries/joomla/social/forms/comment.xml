@@ -4,22 +4,35 @@
 	-->
 <form>
 	<fieldset>
-		<field name="name" type="text" class="inputbox"
-			label="MOD_SOCIAL_COMMENT_FIELD_NAME_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_NAME_DESC" />
+		<field name="name" type="text"
+			description="MOD_SOCIAL_COMMENT_FIELD_NAME_DESC"
+			label="MOD_SOCIAL_COMMENT_FIELD_NAME_LABEL"
+		/>
 
-		<field name="email" type="text" class="inputbox"
-			label="MOD_SOCIAL_COMMENT_FIELD_EMAIL_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_EMAIL_DESC" />
+		<field name="email" type="text"
+			description="MOD_SOCIAL_COMMENT_FIELD_EMAIL_DESC"
+			label="MOD_SOCIAL_COMMENT_FIELD_EMAIL_LABEL"
+			validate="email"
+		/>
 
-		<field name="url" type="text" class="inputbox"
-			label="MOD_SOCIAL_COMMENT_FIELD_URL_LABEL" description="MOD_SOCIAL_COMMENT_FIELD_URL_DESC" />
+		<field name="url" type="text"
+			description="MOD_SOCIAL_COMMENT_FIELD_URL_DESC"
+			label="MOD_SOCIAL_COMMENT_FIELD_URL_LABEL"
+		/>
 
-		<field name="subject" type="text" class="inputbox"
+		<field name="subject" type="text"
+			description="MOD_SOCIAL_COMMENT_FIELD_SUBJECT_DESC"
 			label="MOD_SOCIAL_COMMENT_FIELD_SUBJECT_LABEL"
-			description="MOD_SOCIAL_COMMENT_FIELD_SUBJECT_DESC" />
+			filter="string"
+		/>
 
-		<field name="body" type="textarea" class="textarea"
-			rows="3" cols="30" label="MOD_SOCIAL_COMMENT_FIELD_BODY_LABEL"
-			description="MOD_SOCIAL_COMMENT_FIELD_BODY_DESC" />
+		<field name="body" type="textarea"
+			cols="50"
+			description="MOD_SOCIAL_COMMENT_FIELD_BODY_DESC"
+			label="MOD_SOCIAL_COMMENT_FIELD_BODY_LABEL"
+			rows="5"
+			required="true"
+		/>
 
 		<field name="context" type="hidden" filter="cmd" />
 		<field name="redirect" type="hidden" filter="base64" />

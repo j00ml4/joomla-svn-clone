@@ -19,6 +19,59 @@ defined('JPATH_BASE') or die;
 class JRatings
 {
 	/**
+	 * Method to delete a rating.
+	 *
+	 * @param   int     $ratingId   The id of the rating to delete.
+	 *
+	 * @return  boolean True on success.
+	 *
+	 * @since   1.6
+	 */
+	public function delete($ratingId)
+	{
+		// Get the database connection object.
+		$db = JFactory::getDBO();
+
+		// Build a query to make sure the rating exists.
+		$query = $db->getQuery(true);
+		$query->select('context');
+		$query->from('#__social_ratings');
+		$query->where('id = '.(int) $ratingId);
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$context = $db->loadResult();
+
+		// If the rating doesn't exist the delete operation technically was a success I suppose.
+		if (!$context) {
+			return true;
+		}
+
+		// Build a query to delete the rating.
+		$query = $db->getQuery(true);
+		$query->delete('#__social_ratings');
+		$query->where('id = '.(int) $ratingId);
+
+		// Execute the query.
+		$db->setQuery($query);
+		$db->query();
+
+		// Check for an error.
+		if ($db->getErrorNum()) {
+			// Throw error.
+			return false;
+		}
+
+		// Update the cumulative rating data for the content item.
+		if (!self::updateCumulativeByContext($context)) {
+			// Throw error.
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Method to get the cumulative rating data for a content item by context.
 	 *
 	 * @param   string  $context    The content item context for which to get the rating data.
@@ -61,6 +114,10 @@ class JRatings
 	 * @param	int		The ID of the user making the rating.
 	 * @param	string	The context of the content being rated.
 	 * @param	double	The rating score, a double between 0 and 1.
+	 *
+	 * @return  mixed   A boolean false on error or the integer ID of the rating record on success.
+	 *
+	 * @since   1.6
 	 */
 	public function save($userId, $context, $score)
 	{
@@ -83,6 +140,7 @@ class JRatings
 			return false;
 		}
 
+		// Get the user's IP address... first checking for proxy information.
 		$userIp = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 
 		// Build a query to determine if the user has already rated the item.
@@ -101,15 +159,19 @@ class JRatings
 
 			$query = $db->getQuery(true);
 			$query->update('#__social_ratings');
-			$query->set('context = '.$db->quote($context));
 			$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
 			$query->set('score = '.(float) $score);
 			$query->set('user_id = '.(int) $userId);
 			$query->set('user_ip = '.(int) ip2long($userIp));
+			$query->where('id = '.(int) $ratingId);
 
 			$db->setQuery($query);
 			$db->query();
 
+			if ($db->getErrorNum()) {
+				// Throw error.
+				return false;
+			}
 		}
 		// Insert the new rating.
 		else {
@@ -129,18 +191,113 @@ class JRatings
 			$db->setQuery($query);
 			$db->query();
 
+			if ($db->getErrorNum()) {
+				// Throw error.
+				return false;
+			}
+
 			$ratingId = (int) $db->insertid();
 		}
+
+		// Update the cumulative rating data for the content item.
+		if (!self::updateCumulativeByContext($context)) {
+			// Throw error.
+			return false;
+		}
+
+		return $ratingId;
+	}
+
+	/**
+	 * Method to set the state for a rating.
+	 *
+	 * @param   int     $ratingId   The id of the rating on which to set the state.
+	 * @param   int     $state      The state value to set for the rating.
+	 *
+	 * @return  boolean True on success.
+	 *
+	 * @since   1.6
+	 */
+	public function setState($ratingId, $state)
+	{
+		// Get the database connection object.
+		$db = JFactory::getDBO();
+
+		// Build a query to make sure the rating exists.
+		$query = $db->getQuery(true);
+		$query->select('context, state');
+		$query->from('#__social_ratings');
+		$query->where('id = '.(int) $ratingId);
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$rating = $db->loadObject();
+
+		if (!$rating) {
+			// Throw error.
+			return false;
+		}
+
+		// If the rating exists and its state matches what we are setting just return true.
+		if (!empty($rating->state) && $rating->state == $state) {
+			return true;
+		}
+
+		// Build a query to modify the rating state.
+		$query = $db->getQuery(true);
+		$query->update('#__social_ratings');
+		$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+		$query->set('state = '.(int) $state);
+		$query->where('id = '.(int) $ratingId);
+
+		// Execute the query.
+		$db->setQuery($query);
+		$db->query();
+
+		// Check for an error.
+		if ($db->getErrorNum()) {
+			// Throw error.
+			return false;
+		}
+
+		// Update the cumulative rating data for the content item.
+		if (!self::updateCumulativeByContext($rating->context)) {
+			// Throw error.
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to update the cumulative aggregate rating data for the content item based on context.
+	 *
+	 * @param   string  $context    The context of the content item for which to update.
+	 *
+	 * @return  boolean True on success.
+	 *
+	 * @since   1.6
+	 */
+	protected function updateCumulativeByContext($context)
+	{
+		// Get the database connection object.
+		$db = JFactory::getDBO();
 
 		// Build a query to get the cumulative data for the content item ratings.
 		$query = $db->getQuery(true);
 		$query->select('SUM(a.score) AS total, COUNT(a.id) AS count');
 		$query->from('#__social_ratings AS a');
 		$query->where('a.context = '.$db->quote($context));
+		$query->where('a.state = 1');
 
 		// Execute the query and load the object from the database.
 		$db->setQuery($query);
 		$cumulative = $db->loadObject();
+
+		// Check for missing data.
+		if (!$cumulative) {
+			$cumulative = (object) array('total' => 0, 'count' => 0);
+		}
 
 		// Update the cumulative rating data in the content row.
 		$query = $db->getQuery(true);
@@ -153,16 +310,11 @@ class JRatings
 		$db->setQuery($query);
 		$db->query();
 
+		if ($db->getErrorNum()) {
+			// Throw error.
+			return false;
+		}
+
 		return true;
-	}
-
-	public function delete()
-	{
-		// Attempt to delete comment -- updating the social_content table as well.
-	}
-
-	public function setState()
-	{
-		// Attempt to save comment state -- updating the social_content table as well.
 	}
 }
