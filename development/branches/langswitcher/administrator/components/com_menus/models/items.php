@@ -33,16 +33,16 @@ class MenusModelItems extends JModelList
 			$data = $app->getUserState($this->context.'.data');
 		}
 		else {
-			$app->setUserState($this->context.'.data', $data);
+			$app->setUserState($this->context.'.data', array('filters'=>$data));
 		}
 
-		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
+		$this->setState('filter.search', isset($data['search']) ? $data['search'] : '');
 
-		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
-		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
-		$this->setState('filter.menutype', isset($data['select']['menutype']) ? $data['select']['menutype'] : 'mainmenu');
-		$this->setState('filter.level', isset($data['select']['level']) ? $data['select']['level'] : '');
-		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
+		$this->setState('filter.published', isset($data['state']) ? $data['state'] : '');
+		$this->setState('filter.access', isset($data['access']) ? $data['access'] : '');
+		$this->setState('filter.menutype', isset($data['menutype']) ? $data['menutype'] : 'mainmenu');
+		$this->setState('filter.level', isset($data['level']) ? $data['level'] : '');
+		$this->setState('filter.language', isset($data['language']) ? $data['language'] : '');
 
 //		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
 //		$this->setState('filter.parent_id',	$parentId);
@@ -183,7 +183,7 @@ class MenusModelItems extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'items', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'items', array('event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -193,6 +193,7 @@ class MenusModelItems extends JModelList
 
 		// Check the session for previously entered form data.
 		$data = $app->getUserState($this->context.'.data', array());
+
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);

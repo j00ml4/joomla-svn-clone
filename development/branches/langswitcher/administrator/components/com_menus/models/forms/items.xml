@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id: manage.xml 16241 2010-04-20 10:51:25Z chdemko $ -->
 <form>
-	<fields name="search">
+	<fields name="filters">
 		<fieldset name="search">
 			<field type="search"
-				name="expr"
+				name="filter_search"
 				label="JSEARCH_FILTER_LABEL"
 				description="JSEARCH_FILTER"
 			/>
 		</fieldset>
-	</fields>
-	<fields name="select">
 		<fieldset name="select">
 			<field type="accesslevel"
 				name="access"
@@ -20,7 +18,7 @@
 				<option value="">JOPTION_SELECT_ACCESS</option>
 			</field>
 			<field type="state"
-				name="state"
+				name="published"
 				hidden="true"
 				onchange="this.form.submit();"
 			>
