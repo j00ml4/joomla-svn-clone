@@ -8,6 +8,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
+jimport('joomla.social.comments');
+jimport('joomla.social.ratings');
 
 // @TODO Add ability to set redirect manually to better cope with frontend usage.
 
@@ -50,19 +52,16 @@ class JControllerSocial extends JController
 	 * @return	boolean	True on success, false on error.
 	 * @since	1.6
 	 */
-	public function addComment()
+	public function comment()
 	{
 		// Check for a valid token.
 		// We must do this by hand as the framework will throw a session expired message.
 		// This is important if robots accidentally index a URL an AJAX url to make a comment.
 		$token	= JUtility::getToken();
 		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
-			JError::raiseError(500, JText::_('JInvalid_Token'));
+//			JError::raiseError(500, JText::_('JInvalid_Token'));
 //			return false;
 		}
-
-		// Include dependancies.
-		jimport('joomla.social.comments');
 
 		// Initialise variables.
 		$user	= JFactory::getUser();
@@ -198,7 +197,7 @@ die;
 		$token	= JUtility::getToken();
 		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
 			JError::raiseError(500, JText::_('JInvalid_Token'));
-//			return false;
+			return false;
 		}
 
 		// Initialise variables.
@@ -208,86 +207,19 @@ die;
 		$user		= JFactory::getUser();
 		$userId		= (int) $user->get('id');
 
-		// Include dependancies.
-		jimport('joomla.social.ratings');
-
 		// Access check.
 		if (!$this->canRate($context)) {
 			die('cannot rate');
 			// TODO: handle error
 		}
 
-		JRatings::save($userId, $context, $score);
-
-die;
-
-
-		$app	= JFactory::getApplication();
-		$config	= JComponentHelper::getParams('com_social');
-		$tId	= JRequest::getInt('thread_id');
-
-		// Load the language file for the comment module.
-		$lang = JFactory::getLanguage();
-		$lang->load('mod_social_rating');
-
-		// Get the thread and rating models.
-		$tModel	= $this->getModel('Thread', 'SocialModel');
-		$rModel	= $this->getModel('Rating', 'SocialModel');
-
-		// Check if the user is authorized to add a rating.
-		if (!$rModel->canRate()) {
-			$this->setRedirect($redirect, $cModel->getError(), 'error');
+		try {
+			JRatings::save($userId, $context, $score);
+		}
+		catch (JException $e) {
+			JError::raiseError(500, $e->getMessage());
 			return false;
 		}
-
-		// Load the thread data.
-		$thread	= $tModel->getThread($tId);
-
-		// Check the thread data.
-		if ($thread === false) {
-			$this->setRedirect($redirect, JText::_('SOCIAL_Comment_Invalid_Thread'), 'error');
-			return false;
-		}
-
-		// Prepare the rating data.
-		$rating					= array();
-		$rating['thread_id']	= $tId;
-		$rating['user_id']		= $uId;
-		$rating['score']		= JRequest::getFloat('score', 0, 'request');
-		$rating['context']		= $thread->context;
-		$rating['context_id']	= $thread->context_id;
-
-		// Ensure the score is between 0 and 1.
-		if (($rating['score'] < 0.0) || ($rating['score'] > 1.0)) {
-			$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Invalid_Score'), 'error');
-			return false;
-		}
-
-		// Prepare the key to track the vote in the session.
-		$key = 'com_social;rating;'.$tId;
-
-		// Check if the user has already voted on this thread.
-		if ($app->getUserState($key)) {
-			$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Item_Already_Rated'), 'notice');
-			return false;
-		}
-		else {
-			// Record the vote for this thread in the session.
-			$app->setUserState($key, true);
-		}
-
-		// Attempt to add the rating.
-		$return = $rModel->add($rating);
-
-		// Check if the comment was added successfully.
-		if (JError::isError($return)) {
-			JError::raiseError(500, $return->getMessage());
-			return false;
-		}
-
-		// Flush the cache for this context.
-		$cache = JFactory::getCache('com_'.$thread->context);
-		$cache->clean();
 
 		$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Submitted'));
 		return true;

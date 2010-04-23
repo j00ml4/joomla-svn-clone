@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 ?>
 
-<form id="respond-form" method="post" action="<?php echo JRoute::_('index.php?option='.$extension.'&task=social.addcomment'); ?>" class="form-validate">
+<form id="respond-form" method="post" action="<?php echo JRoute::_('index.php?option='.$extension.'&task=social.comment'); ?>" class="form-validate">
 	<fieldset>
 		<dl>
 <?php if (!$user->get('id')) : ?>
