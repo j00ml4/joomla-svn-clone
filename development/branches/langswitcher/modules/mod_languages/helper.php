@@ -36,6 +36,7 @@ abstract class modLanguagesHelper
 		$query->from($db->nameQuote('#__languages'));
 		$query->select($db->nameQuote('lang_code').' AS '.$db->nameQuote('value'));
 		$query->select($db->nameQuote('title').' AS '.$db->nameQuote('text'));
+		$query->select($db->nameQuote('image'));
 		$query->where($db->nameQuote('published').'=1');
 		$db->setQuery($query);
 		$result = $db->loadAssocList('value');
