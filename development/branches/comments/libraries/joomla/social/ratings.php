@@ -64,9 +64,96 @@ class JRatings
 	 */
 	public function save($userId, $context, $score)
 	{
-		// Filter/Validate input data.
+		// Get the database connection object.
+		$db = JFactory::getDBO();
 
-		// Attempt to save rating -- updating the social_content table as well.
+		// Build a query to get data from the content item row.
+		$query = $db->getQuery(true);
+		$query->select('a.id, a.component');
+		$query->from('#__social_content AS a');
+		$query->where('a.context = '.$db->quote($context));
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$content = $db->loadObject();
+
+		// Make sure a content item exists to rate.
+		if (!$content) {
+			// Throw error
+			return false;
+		}
+
+		$userIp = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+
+		// Build a query to determine if the user has already rated the item.
+		$query = $db->getQuery(true);
+		$query->select('a.id');
+		$query->from('#__social_ratings AS a');
+		$query->where('a.context = '.$db->quote($context));
+		$query->where('(a.user_id = '.(int) $userId.' OR a.user_ip = '.(int) ip2long($userIp).')');
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$ratingId = (int) $db->loadResult();
+
+		// If a rating already exists, edit the existing rating.
+		if ($ratingId) {
+
+			$query = $db->getQuery(true);
+			$query->update('#__social_ratings');
+			$query->set('context = '.$db->quote($context));
+			$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+			$query->set('score = '.(float) $score);
+			$query->set('user_id = '.(int) $userId);
+			$query->set('user_ip = '.(int) ip2long($userIp));
+
+			$db->setQuery($query);
+			$db->query();
+
+		}
+		// Insert the new rating.
+		else {
+
+			$query = $db->getQuery(true);
+			$query->insert('#__social_ratings');
+			$query->set('context = '.$db->quote($context));
+			$query->set('component = '.$db->quote($content->component));
+			$query->set('content_id = '.(int) $content->id);
+			$query->set('created_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+			$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
+			$query->set('state = 1');
+			$query->set('score = '.(float) $score);
+			$query->set('user_id = '.(int) $userId);
+			$query->set('user_ip = '.(int) ip2long($userIp));
+
+			$db->setQuery($query);
+			$db->query();
+
+			$ratingId = (int) $db->insertid();
+		}
+
+		// Build a query to get the cumulative data for the content item ratings.
+		$query = $db->getQuery(true);
+		$query->select('SUM(a.score) AS total, COUNT(a.id) AS count');
+		$query->from('#__social_ratings AS a');
+		$query->where('a.context = '.$db->quote($context));
+
+		// Execute the query and load the object from the database.
+		$db->setQuery($query);
+		$cumulative = $db->loadObject();
+
+		// Update the cumulative rating data in the content row.
+		$query = $db->getQuery(true);
+		$query->update('#__social_content');
+		$query->set('rating_score = '.(float) ($cumulative->total / $cumulative->count));
+		$query->set('rating_total = '.(int) $cumulative->total);
+		$query->set('rating_count = '.(int) $cumulative->count);
+		$query->where('context = '.$db->quote($context));
+
+		$db->setQuery($query);
+		$db->query();
+
+		return true;
 	}
 
 	public function delete()

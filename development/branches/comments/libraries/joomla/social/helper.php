@@ -38,7 +38,6 @@ class JSocialHelper
 		$query->from('#__social_content AS a');
 		$query->where('a.context = '.$db->quote($context));
 
-
 		// Execute the query and load the object from the database.
 		$db->setQuery($query);
 		$content = $db->loadObject();
