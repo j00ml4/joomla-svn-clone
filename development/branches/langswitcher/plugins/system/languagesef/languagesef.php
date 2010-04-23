@@ -46,7 +46,7 @@ class plgSystemLanguageSEF extends JPlugin
 			$component = JComponentHelper::getParams('com_languages');
 			if ($result->sef /*&& $result->lang_code != $component->get('site')*/) {
 				$path = $uri->getPath();
-				$uri->setPath($path.'/'.$result->sef);
+				$uri->setPath($path.'/'.$result->sef.'/');
 			}
 		}
 	}
