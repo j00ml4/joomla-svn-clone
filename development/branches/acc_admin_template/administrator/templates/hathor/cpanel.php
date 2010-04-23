@@ -77,7 +77,7 @@ $app	= &JFactory::getApplication();
 <body id="minwidth">
 <div id="containerwrap">
 
-	<!-- Header Logo & Status -->
+	<!-- Header Logo -->
 	<div id="header">
 		
 		<!-- Site Title and Skip to Content -->
@@ -85,11 +85,6 @@ $app	= &JFactory::getApplication();
 			<h1 class="title"><?php echo $this->params->get('showSiteName') ? $app->getCfg('sitename') . " " . JText::_('ADMINISTRATION') : JText::_('ADMINISTRATION'); ?></h1>
 			<div id="skiplinkholder"><p><a id="skiplink" href="#skiptarget"><?php echo JText::_('TPL_HATHOR_SKIP_TO_MAIN_CONTENT'); ?></a></p></div>
       	</div>
-      	
-      	<!-- Status Module -->	
-		<div id="module-status">
-			<jdoc:include type="modules" name="status"  />
-		</div>
 		
 	</div><!-- end header -->
 	
@@ -101,6 +96,11 @@ $app	= &JFactory::getApplication();
 		</div>
 		<div class="clr"></div>
 	</div><!-- end nav -->
+	
+	<!-- Status Module -->	
+	<div id="module-status">
+		<jdoc:include type="modules" name="status"  />
+	</div>
 	
 	<!-- Content Area -->
 	<div id="content">
