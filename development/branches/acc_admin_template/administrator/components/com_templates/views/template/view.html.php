@@ -19,37 +19,35 @@ jimport('joomla.application.component.view');
  */
 class TemplatesViewTemplate extends JView
 {
-	protected $state;
 	protected $files;
+	protected $state;
+	protected $template;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$template	= $this->get('Template');
-		$files		= $this->get('Files');
+		$this->files	= $this->get('Files');
+		$this->state	= $this->get('State');
+		$this->template	= $this->get('Template');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('template',	$template);
-		$this->assignRef('files',		$files);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$user		= JFactory::getUser();
 		$canDo		= TemplatesHelper::getActions();

@@ -64,6 +64,11 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 		</div>
+		<div>
+			<?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?>
+		</div>
+		
 		<div>			
 			<?php echo $this->form->getLabel('description'); ?>
 			<div class="clr"></div>

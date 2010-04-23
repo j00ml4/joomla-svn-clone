@@ -35,15 +35,11 @@ JHTML::_('behavior.modal');
 
 <div class="col main-section">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>
+		<legend><?php echo JText::_('COM_MENUS_ITEM_REQUIRED');?></legend>
 
 		<div>
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
-		</div>
-		<div>
-			<?php echo $this->form->getLabel('alias'); ?>
-			<?php echo $this->form->getInput('alias'); ?>
 		</div>
 		<div>
 			<?php echo $this->form->getLabel('type'); ?>
@@ -56,6 +52,18 @@ JHTML::_('behavior.modal');
 				<?php echo $this->form->getInput('link'); ?>
 			</div>
 		<?php endif; ?>
+	</fieldset>	
+	<fieldset class="adminform">
+		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>	
+		
+		<div>
+			<?php echo $this->form->getLabel('alias'); ?>
+			<?php echo $this->form->getInput('alias'); ?>
+		</div>
+		<div>
+			<?php echo $this->form->getLabel('note'); ?>
+			<?php echo $this->form->getInput('note'); ?>
+		</div>
 
 		<?php if ($this->item->type !=='url') : ?>
 			<div>

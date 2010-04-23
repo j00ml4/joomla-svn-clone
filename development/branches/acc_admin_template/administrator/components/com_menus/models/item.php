@@ -41,13 +41,15 @@ class MenusModelItem extends JModelAdmin
 		$this->_item = 'item';
 		$this->_option = 'com_menus';
 	}
-	
+
 	/**
 	 * Auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -288,7 +290,7 @@ class MenusModelItem extends JModelAdmin
 			$this->setError($table->getError());
 			return false;
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -395,7 +397,7 @@ class MenusModelItem extends JModelAdmin
 				return false;
 			}
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -826,7 +828,7 @@ class MenusModelItem extends JModelAdmin
 		}
 
 		$this->setState('item.id', $table->id);
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -834,7 +836,7 @@ class MenusModelItem extends JModelAdmin
 
 		return true;
 	}
-	
+
 	function _orderConditions($table = null)
 	{
 		$condition = array();

@@ -88,13 +88,13 @@ abstract class JHtml
 
 				if (!class_exists($className))
 				{
-					JError::raiseError(500, $className.'::' .$func. ' not found in file.');
+					JError::raiseError(500, JText::sprintf('JLIB_HTML_ERROR_NOTFOUNDINFILE', $className, $func));
 					return false;
 				}
 			}
 			else
 			{
-				JError::raiseError(500, $prefix.$file . ' not supported. File not found.');
+				JError::raiseError(500, JText::sprintf('JLIB_HTML_ERROR_NOTSUPPORTED_NOFILE', $prefix, $file));
 				return false;
 			}
 		}
@@ -110,7 +110,7 @@ abstract class JHtml
 		}
 		else
 		{
-			JError::raiseError(500, $className.'::'.$func.' not supported.');
+			JError::raiseError(500, JText::sprintf('JLIB_HTML_ERROR_NOTSUPPORTED', $className, $func));
 			return false;
 		}
 	}
@@ -174,7 +174,7 @@ abstract class JHtml
 			return call_user_func_array($function, $temp);
 		}
 		else {
-			JError::raiseError(500, 'Function not supported.');
+			JError::raiseError(500, JText::_('JLIB_HTML_ERROR_FUNCTION_NOT_SUPPORTED'));
 			return false;
 		}
 	}
@@ -542,7 +542,7 @@ abstract class JHtml
 		}
 
 		return '<input type="text" name="'.$name.'" id="'.$id.'" value="'.htmlspecialchars($value, ENT_COMPAT, 'UTF-8').'" '.$attribs.' />'.
-				JHTML::_('image','system/calendar.png', JText::_('calendar'), array( 'class' => 'calendar', 'id' => $id.'_img'), true);
+				JHTML::_('image','system/calendar.png', JText::_('JLIB_HTML_CALENDAR'), array( 'class' => 'calendar', 'id' => $id.'_img'), true);
 	}
 
 	/**

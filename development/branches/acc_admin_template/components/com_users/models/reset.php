@@ -21,7 +21,14 @@ jimport('joomla.event.dispatcher');
 
 class UsersModelReset extends JModelForm
 {
-	protected function _populateState()
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
 	{
 		// Get the application object.
 		$app	= &JFactory::getApplication();
