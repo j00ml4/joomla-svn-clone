@@ -15,17 +15,15 @@ JHtml::_('stylesheet','mod_languages/template.css', array(), true);
 <?php if ($headerText) : ?>
 	<div class="header"><?php echo $headerText; ?></div>
 <?php endif; ?>
-	<ul>
+		<ul>
 <?php foreach($list as $tag=>$language):?>
-	<?php if ($tag!='default'):?>
-		<li>
-			<a href="<?php echo JRoute::_('index.php?option=com_users&task=profile.language&redirect='.base64_encode($language['redirect']).'&language='.$tag.'&'.JUtility::getToken().'=1');?>">
-				<span title="<?php echo $language['text'];?>" class="icon <?php echo $tag;?> <?php echo substr($tag,0,strpos($tag,'-'));?>" />
-			</a>
-		</li>
-		<?php endif;?>
-	<?php endforeach;?>
-	</ul>
+			<li>
+				<a href="<?php echo JRoute::_('index.php?option=com_users&task=profile.language&redirect='.base64_encode($language['redirect']).'&language='.$tag);?>">
+	<?php echo JHtml::_('image','mod_languages/'.$language['image'].'.gif',$language['text'],array('title'=>$language['text']),true);?>
+				</a>
+			</li>
+<?php endforeach;?>
+		</ul>
 <?php if ($footerText) : ?>
 	<div class="footer"><?php echo $footerText; ?></div>
 <?php endif; ?>

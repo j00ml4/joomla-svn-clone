@@ -510,16 +510,17 @@ CREATE TABLE `#__languages` (
   `title` varchar(50) NOT NULL,
   `title_native` varchar(50) NOT NULL,
   `sef` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
   `description` varchar(512) NOT NULL,
   `published` int(11) NOT NULL default '0',
   PRIMARY KEY  (`lang_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`description`,`published`)
+INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`image`,`description`,`published`)
 VALUES
-	(1,'en-GB','English (UK)','English (UK)','en','',1),
-	(2,'en-US','English (US)','English (US)','en','',0),
-	(3,'xx-XX','xx (Test)','xx (Test)','xx', '',1);
+	(1,'en-GB','English (UK)','English (UK)','en','en','',1),
+	(2,'en-US','English (US)','English (US)','en','en','',0),
+	(3,'xx-XX','xx (Test)','xx (Test)','xx','br','',1);
 
 #
 # Table structure for table `#__menu`

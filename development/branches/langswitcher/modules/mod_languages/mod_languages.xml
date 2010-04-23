@@ -53,7 +53,7 @@
 					label="MOD_LANGUAGES_FIELD_FOOTER_LABEL"
 					description="MOD_LANGUAGES_FIELD_FOOTER_DESC" />
 			
-				<field
+<!--				<field
 					name="default"
 					type="radio"
 					default="0"
@@ -61,7 +61,7 @@
 					description="MOD_LANGUAGES_FIELD_DEFAULT_DESC" >
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-				</field>
+				</field>-->
 			</fieldset>
 			<fieldset name="advanced">
 				<field
