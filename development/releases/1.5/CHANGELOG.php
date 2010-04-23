@@ -37,6 +37,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.5.16 Stable Release [23-April-2010] ------------------
+
 23-Apr-2010 Ian MacLennan
  $ [#20195] Language credit update
  $ [#20055] Language bug in "Menus"
@@ -47,6 +49,7 @@ $ -> Language fix or change
  $ [#19871] Missing string in a few installation ini files
  # [#19859] Graceful handling of failing Apache plugins
  # [#18046] $theURI not correctly set on IIS7 in environment\uri.php
+ # [#20184] Removal of searchwords from SEF urls to ensure cross platform compatibility
 
 07-Mar-2010 Ian MacLennan
  # [#16930] Reverting patch from #16930 because it breaks the installer

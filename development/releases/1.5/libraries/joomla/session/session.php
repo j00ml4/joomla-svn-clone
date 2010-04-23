@@ -521,6 +521,9 @@ class JSession extends JObject
 		// create new session id
 		$id	=	$this->_createId( strlen( $this->getId() ) );
 
+		// first we grab the session data
+		$data = $this->_store->read($this->getId());
+
 		// kill session
 		session_destroy();
 
@@ -534,7 +537,10 @@ class JSession extends JObject
 		// restart session with new id
 		session_id( $id );
 		session_start();
+		$_SESSION = $values;
 
+		//now we put the session data back
+		$this->_store->write($id, $data);
 		return true;
 	}
 
