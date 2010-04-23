@@ -84,10 +84,7 @@ $app	= &JFactory::getApplication();
 			<div id="skiplinkholder"><p><a id="skiplink" href="#skiptarget"><?php echo JText::_('TPL_HATHOR_SKIP_TO_MAIN_CONTENT'); ?></a></p></div>
 		</div>
 		
-		<!-- Status Module -->	
-		<div id="module-status">
-			<jdoc:include type="modules" name="status"  />
-		</div>
+		
 
 	</div><!-- end header -->
 		
@@ -99,6 +96,11 @@ $app	= &JFactory::getApplication();
 		</div>
 		<div class="clr"></div>
 	</div><!-- end nav -->
+	
+	<!-- Status Module -->	
+	<div id="module-status">
+		<jdoc:include type="modules" name="status"  />
+	</div>
 	
 	<!-- Content Area -->
 	<div id="content">

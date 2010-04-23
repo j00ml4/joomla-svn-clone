@@ -2758,5 +2758,5 @@ table#acl-config td select {
 }
 
 /* Disabled until verified */
-label#jform_rules-lbl {display:none;}
+label#jform_rules-lbl {display:none;} 
 	
