@@ -15,17 +15,16 @@ defined('_JEXEC') or die('Restricted access');
 <form action="<?php echo JRoute::_('index.php?option=com_users'); ?>" method="post" id="mod_languages-form">
 	<div class="mod_languages<?php echo $params->get('moduleclass_sfx') ?>">
 	<?php if ($headerText) : ?>
-		<div class="mod_languages_header"><?php echo $headerText; ?></div>
+		<div class="header"><?php echo $headerText; ?></div>
 	<?php endif; ?>
 	<?php echo JHtml::_('select.genericlist', $list, 'language', ' onchange="this.form.submit();"','value','text',$tag);?>
 	<?php if ($footerText) : ?>
-		<div class="mod_languages_footer"><?php echo $footerText; ?></div>
+		<div class="footer"><?php echo $footerText; ?></div>
 	<?php endif; ?>
 	</div>
 	<?php foreach($list as $language):?>
-	<input type="hidden" name="redirect[<?php echo $language['value'];?>]" value="<?php echo base64_encode($language['redirect']);?>" />
+	<input type="hidden" name="redirect" value="<?php echo base64_encode($language['redirect']);?>" />
 	<?php endforeach;?>
 	<input type="hidden" name="task" value="profile.language" />
-	<?php echo JHtml::_('form.token'); ?>	
 </form>
 

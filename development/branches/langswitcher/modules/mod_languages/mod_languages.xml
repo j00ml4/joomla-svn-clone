@@ -25,6 +25,14 @@
 		<language tag="en-GB">en-GB.mod_languages.ini</language>
 	</languages>
 	<config>
+		<fieldset>
+			<field name="language" type="list"
+				description="JFIELD_MODULE_LANGUAGE_DESC"
+				label="JFIELD_LANGUAGE_LABEL"
+			>
+				<option value="*">JOPTION_ALL_LANGUAGES</option>
+			</field>
+		</fieldset>
 		<fields name="params">
 			<fieldset name="basic">
 				<field

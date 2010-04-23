@@ -1,0 +1,69 @@
+div.mod_languages span.af {background-image: url(../images/af.gif);}
+div.mod_languages span.ar {background-image: url(../images/ar.gif);}
+div.mod_languages span.az {background-image: url(../images/az.gif);}
+div.mod_languages span.bg {background-image: url(../images/bg.gif);}
+div.mod_languages span.bn {background-image: url(../images/bn.gif);}
+div.mod_languages span.br {background-image: url(../images/br.gif);}
+div.mod_languages span.bs {background-image: url(../images/bs.gif);}
+div.mod_languages span.ca {background-image: url(../images/ca.gif);}
+div.mod_languages span.cy {background-image: url(../images/cy.gif);}
+div.mod_languages span.cz {background-image: url(../images/cz.gif);}
+div.mod_languages span.de {background-image: url(../images/de.gif);}
+div.mod_languages span.dk {background-image: url(../images/dk.gif);}
+div.mod_languages span.el {background-image: url(../images/el.gif);}
+div.mod_languages span.en {background-image: url(../images/en.gif);}
+div.mod_languages span.eo {background-image: url(../images/eo.gif);}
+div.mod_languages span.es {background-image: url(../images/es.gif);}
+div.mod_languages span.et {background-image: url(../images/et.gif);}
+div.mod_languages span.fa {background-image: url(../images/fa.gif);}
+div.mod_languages span.fi {background-image: url(../images/fi.gif);}
+div.mod_languages span.fr {background-image: url(../images/fr.gif);}
+div.mod_languages span.hi {background-image: url(../images/hi.gif);}
+div.mod_languages span.hr {background-image: url(../images/hr.gif);}
+div.mod_languages span.hu {background-image: url(../images/hu.gif);}
+div.mod_languages span.hy {background-image: url(../images/hy.gif);}
+div.mod_languages span.is {background-image: url(../images/is.gif);}
+div.mod_languages span.it {background-image: url(../images/it.gif);}
+div.mod_languages span.ja {background-image: url(../images/ja.gif);}
+div.mod_languages span.ka {background-image: url(../images/ka.gif);}
+div.mod_languages span.ko {background-image: url(../images/ko.gif);}
+div.mod_languages span.ku {background-image: url(../images/ku.gif);}
+div.mod_languages span.lt {background-image: url(../images/lt.gif);}
+div.mod_languages span.lv {background-image: url(../images/lv.gif);}
+div.mod_languages span.mn {background-image: url(../images/mn.gif);}
+div.mod_languages span.nl {background-image: url(../images/nl.gif);}
+div.mod_languages span.no {background-image: url(../images/no.gif);}
+div.mod_languages span.pl {background-image: url(../images/pl.gif);}
+div.mod_languages span.ps {background-image: url(../images/ps.gif);}
+div.mod_languages span.pt {background-image: url(../images/pt.gif);}
+div.mod_languages span.ro {background-image: url(../images/ro.gif);}
+div.mod_languages span.ru {background-image: url(../images/ru.gif);}
+div.mod_languages span.sk {background-image: url(../images/sk.gif);}
+div.mod_languages span.sl {background-image: url(../images/sl.gif);}
+div.mod_languages span.sr {background-image: url(../images/sr.gif);}
+div.mod_languages span.sv {background-image: url(../images/sv.gif);}
+div.mod_languages span.ta {background-image: url(../images/ta.gif);}
+div.mod_languages span.th {background-image: url(../images/th.gif);}
+div.mod_languages span.tr {background-image: url(../images/tr.gif);}
+div.mod_languages span.uk {background-image: url(../images/uk.gif);}
+div.mod_languages span.ur {background-image: url(../images/ur.gif);}
+div.mod_languages span.uz {background-image: url(../images/uz.gif);}
+div.mod_languages span.vi {background-image: url(../images/vi.gif);}
+div.mod_languages span.zh {background-image: url(../images/zh.gif);}
+
+div.mod_languages span.icon {
+	background-repeat: no-repeat;
+	padding-left:18px;
+}
+
+div.mod_languages ul {
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+div.mod_languages li {
+	margin-left: 5px;
+	margin-right: 5px;
+	display:inline;
+}
+
