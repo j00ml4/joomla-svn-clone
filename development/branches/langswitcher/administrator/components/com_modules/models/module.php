@@ -411,7 +411,7 @@ class ModulesModelModule extends JModelAdmin
 
 		if (file_exists($formFile)) {
 			// Get the module form.
-			if (!$form->loadFile($formFile, false, '//config')) {
+			if (!$form->loadFile($formFile, true, '//config')) {
 				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
 			}
 		}

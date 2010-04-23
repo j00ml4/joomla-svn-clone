@@ -28,21 +28,23 @@ class MenusModelItems extends JModelList
 	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
-		$data = JRequest::getVar('filters');
-		if (empty($data)) {
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
 			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
+			if ($menutype = JRequest::getVar('menutype')) {
+				$filters['menutype']=$menutype;
+			}
 		}
-		else {
-			$app->setUserState($this->context.'.data', array('filters'=>$data));
-		}
+		$app->setUserState($this->context.'.data', array('filters'=>$filters));
+		
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
 
-		$this->setState('filter.search', isset($data['search']) ? $data['search'] : '');
-
-		$this->setState('filter.published', isset($data['state']) ? $data['state'] : '');
-		$this->setState('filter.access', isset($data['access']) ? $data['access'] : '');
-		$this->setState('filter.menutype', isset($data['menutype']) ? $data['menutype'] : 'mainmenu');
-		$this->setState('filter.level', isset($data['level']) ? $data['level'] : '');
-		$this->setState('filter.language', isset($data['language']) ? $data['language'] : '');
+		$this->setState('filter.published', isset($filters['published']) ? $filters['published'] : '');
+		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
+		$this->setState('filter.menutype', isset($filters['menutype']) ? $filters['menutype'] : 'mainmenu');
+		$this->setState('filter.level', isset($filters['level']) ? $filters['level'] : '');
+		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
 
 //		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
 //		$this->setState('filter.parent_id',	$parentId);

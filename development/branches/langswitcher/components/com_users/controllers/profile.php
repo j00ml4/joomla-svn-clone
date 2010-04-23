@@ -175,14 +175,11 @@ class UsersControllerProfile extends UsersController
 	 */
 	function language()
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-		
 		$tag = JRequest::getCmd('language','default');
 		$redirect = JRequest::getVar('redirect');
 		$model = &$this->getModel('Profile','UsersModel',array('ignore_request'=>true));
 		$model->setState('language',$tag=='default' ? '' : $tag);
 		$model->language();
-		$this->setRedirect(JRoute::_(base64_decode($redirect[$tag]),false));
+		$this->setRedirect(JRoute::_(base64_decode($redirect),false));
 	}
 }
