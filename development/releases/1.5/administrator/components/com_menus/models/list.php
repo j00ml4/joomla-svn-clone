@@ -172,7 +172,7 @@ class MenusModelList extends JModel
 						}
 						parse_str($query['query'], $view);
 					}
-					$list[$i]->view		= $list[$i]->com_name;
+					$list[$i]->view		= JText::_($list[$i]->com_name);
 					if (isset($view['view']))
 					{
 						$list[$i]->view	.= ' &raquo; '.JText::_(ucfirst($view['view']));

@@ -37,6 +37,15 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+23-Apr-2010 Ian MacLennan
+ $ [#20195] Language credit update
+ $ [#20055] Language bug in "Menus"
+ # [#20043] JApplication::redirect() using a 301 error code incorrect.
+ # [#20025] Adding Reykjavik in timezone
+ $ [#20024] More updates on installation ini files
+ $ [#19966] New hi-IN installation language
+ $ [#19871] Missing string in a few installation ini files
+
 07-Mar-2010 Ian MacLennan
  # [#16930] Reverting patch from #16930 because it breaks the installer
 
