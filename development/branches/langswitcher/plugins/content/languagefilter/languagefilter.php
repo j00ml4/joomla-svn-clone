@@ -35,7 +35,6 @@ class plgcontentLanguageFilter extends JPlugin {
 						$query->where('a.language in (' . $db->Quote($language) . ',' . $db->Quote('*') . ',' . $db->Quote('') . ')');
 					break;
 				}
-				echo (string) $query;
 			}
 			elseif ($name == 'categories') {
 				switch ($this->params->get('manage_language')) {
