@@ -157,12 +157,17 @@ class JURI extends JObject
 				 * running on IIS and will therefore need to work some magic with the SCRIPT_NAME and
 				 * QUERY_STRING environment variables.
 				 */
+				
+				 	if (strlen($_SERVER['QUERY_STRING']) && strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) === false) {
+						$theURI .= '?'.$_SERVER['QUERY_STRING'];
+					}
+
 				}
 				 else
 				 {
 					// IIS uses the SCRIPT_NAME variable instead of a REQUEST_URI variable... thanks, MS
 					$theURI = 'http' . $https . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
-
+		
 					// If the query string exists append it to the URI string
 					if (isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
 						$theURI .= '?' . $_SERVER['QUERY_STRING'];
