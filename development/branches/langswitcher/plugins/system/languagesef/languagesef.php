@@ -35,40 +35,73 @@ class plgSystemLanguageSEF extends JPlugin
 	public function buildRule(&$router, &$uri)
 	{
 		if ($router->getMode()==JROUTER_MODE_SEF) {
-			$db = JFactory::getDBO();
-			$query = $db->getQuery(true);
+			$language	= $uri->getVar('language');
+			$Itemid		= $uri->getVar('Itemid');
+			$db			= JFactory::getDBO();
+			$query		= $db->getQuery(true);
 			$query->from('#__languages');
 			$query->select('sef');
 			$query->select('lang_code');
-			$query->where('lang_code='.$db->Quote(JFactory::getLanguage()->getTag()));
+			$query->where('lang_code='.$db->quote($language ? $language : JFactory::getLanguage()->getTag()));
+			$query->join('LEFT','#__menu as m on m.id='.$db->quote($Itemid));
+			$query->select('m.home');
 			$db->setQuery($query);
 			$result = $db->loadObject();
-			$component = JComponentHelper::getParams('com_languages');
-			if ($result->sef /*&& $result->lang_code != $component->get('site')*/) {
+			if ($result && $result->sef) {
+				$uri->delVar('language');
 				$path = $uri->getPath();
-				$uri->setPath($path.'/'.$result->sef.'/');
+				if ($result->home && $language) {
+					$uri->delVar('option');
+					$uri->delVar('Itemid');
+				}
+				$component = JComponentHelper::getParams('com_languages');
+				if ($result->lang_code != $component->get('site')) {
+					$uri->setPath($path.'/'.$result->sef.'/');
+				}
 			}
 		}
 	}
 	public function parseRule(&$router, &$uri)
 	{
+		$array = array();
 		if ($router->getMode()==JROUTER_MODE_SEF) {
+			$path = $uri->getPath();
+			$parts = explode('/',$path);
 			$db = JFactory::getDBO();
 			$query = $db->getQuery(true);
-			$query->from('#__languages');
+			
+			// Try to find the language according to the sef prefix
+			$query->from($db->nameQuote('#__languages'));
 			$query->select('sef');
 			$query->select('lang_code');
-			$query->where('lang_code='.$db->Quote(JFactory::getLanguage()->getTag()));
+			$query->where('sef='.$db->quote($parts[0]));
+			$query->where('published=1');
 			$db->setQuery($query);
 			$result = $db->loadObject();
-			$component = JComponentHelper::getParams('com_languages');
-			if ($result->sef /*&& $result->lang_code != $component->get('site')*/) {
-				$path = $uri->getPath();
-				$parts = explode('/',$path);
+			if (!$result ||  !JLanguage::exists($result->lang_code)) {
+
+				// Use the default language
+				$component = JComponentHelper::getParams('com_languages');
+				$query = $db->getQuery(true);
+				$query->from($db->nameQuote('#__languages'));
+				$query->select('sef');
+				$query->select('lang_code');
+				$query->where('lang_code='.$db->quote($component->get('site')));
+				$db->setQuery($query);
+				$result = $db->loadObject();
+			}
+			else {
 				array_shift($parts);
 				$uri->setPath(implode('/',$parts));
 			}
+			$array = array('language'=>$result->lang_code);
+			$lang = JFactory::getLanguage();
+			$lang->setLanguage($result->lang_code);
+			$config = JFactory::getConfig();
+			$cookie_domain = $config->get('config.cookie_domain', '');
+			$cookie_path = $config->get('config.cookie_path', '/');
+			setcookie(JUtility::getHash('language'), $result->lang_code, time() + 365 * 86400, $cookie_path, $cookie_domain);
 		}
-		return array();
-	}	
+		return $array;
+	}
 }

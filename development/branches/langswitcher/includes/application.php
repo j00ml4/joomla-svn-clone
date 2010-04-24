@@ -50,12 +50,13 @@ final class JSite extends JApplication
 		// otherwise use user or default language settings
 		if (empty($options['language']))
 		{
-			// Detect user language
-			$user = & JFactory::getUser();
-			$lang	= $user->getParam('language');
-
+			$lang = JRequest::getString('language',null);
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
+				$config = JFactory::getConfig();
+				$cookie_domain = $config->get('config.cookie_domain', '');
+				$cookie_path = $config->get('config.cookie_path', '/');
+				setcookie(JUtility::getHash('language'), $lang, time() + 365 * 86400, $cookie_path, $cookie_domain);
 				$options['language'] = $lang;
 			}
 		}
@@ -64,6 +65,17 @@ final class JSite extends JApplication
 			// Detect cookie language
 			jimport('joomla.utilities.utility');
 			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
+
+			// Make sure that the user's language exists
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
+			}
+		}
+		if (empty($options['language']))
+		{
+			// Detect user language
+			$user = & JFactory::getUser();
+			$lang	= $user->getParam('language');
 
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
