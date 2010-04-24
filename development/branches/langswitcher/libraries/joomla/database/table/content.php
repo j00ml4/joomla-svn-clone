@@ -133,6 +133,12 @@ class JTableContent extends JTable
 			$array['metadata'] = (string)$registry;
 		}
 
+		// Bind the rules.
+		if (isset($array['rules']) && is_array($array['rules'])) {
+			$rules = new JRules($array['rules']);
+			$this->setRules($rules);
+		}
+
 		return parent::bind($array, $ignore);
 	}
 
@@ -145,8 +151,8 @@ class JTableContent extends JTable
 	 */
 	public function check()
 	{
-		if (empty($this->title)) {
-			$this->setError(JText::_('Article must have a title'));
+		if (empty($this->title) OR (trim($this->title) == '')) {
+			$this->setError(JText::_('COM_CONTENT_WARNING_PROVIDE_VALID_NAME'));
 			return false;
 		}
 
@@ -184,12 +190,6 @@ class JTableContent extends JTable
 			$this->metakey = implode(", ", $clean_keys); // put array back together delimited by ", "
 		}
 
-		// clean up description -- eliminate quotes and <> brackets
-		if (!empty($this->metadesc)) {
-			// only process if not empty
-			$bad_characters = array("\"", "<", ">");
-			$this->metadesc = JString::str_ireplace($bad_characters, "", $this->metadesc);
-		}
 
 		return true;
 	}
