@@ -61,8 +61,8 @@
 					description="MOD_LANGUAGES_FIELD_DEFAULT_DESC" >
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
-				</field>-->
-			</fieldset>
+				</field>
+-->			</fieldset>
 			<fieldset name="advanced">
 				<field
 					name="layout"

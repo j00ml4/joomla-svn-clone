@@ -9,22 +9,23 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-
-//$uri = JFactory::getURI();
+JHtml::_('stylesheet','mod_languages/template.css', array(), true);
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_users'); ?>" method="post" id="mod_languages-form">
-	<div class="mod_languages<?php echo $params->get('moduleclass_sfx') ?>">
-	<?php if ($headerText) : ?>
-		<div class="header"><?php echo $headerText; ?></div>
-	<?php endif; ?>
-	<?php echo JHtml::_('select.genericlist', $list, 'language', ' onchange="this.form.submit();"','value','text',$tag);?>
-	<?php if ($footerText) : ?>
-		<div class="footer"><?php echo $footerText; ?></div>
-	<?php endif; ?>
-	</div>
-	<?php foreach($list as $language):?>
-	<input type="hidden" name="redirect" value="<?php echo base64_encode($language['redirect']);?>" />
-	<?php endforeach;?>
-	<input type="hidden" name="task" value="profile.language" />
-</form>
+<div class="mod_languages<?php echo $params->get('moduleclass_sfx') ?>">
+<?php if ($headerText) : ?>
+	<div class="header"><?php echo $headerText; ?></div>
+<?php endif; ?>
+		<ul>
+<?php foreach($list as $language):?>
+			<li>
+				<a href="<?php echo JRoute::_('index.php?' . 'Itemid=' . $language->id . '&language=' . $language->lang_code);?>">
+	<?php echo JHtml::_('image','mod_languages/'.$language->image.'.gif',$language->title,array('title'=>$language->title),true);?>
+				</a>
+			</li>
+<?php endforeach;?>
+		</ul>
+<?php if ($footerText) : ?>
+	<div class="footer"><?php echo $footerText; ?></div>
+<?php endif; ?>
+</div>
 

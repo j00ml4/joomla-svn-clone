@@ -43,6 +43,9 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('sef'); ?>
 			<?php echo $this->form->getInput('sef'); ?>
 
+			<?php echo $this->form->getLabel('image'); ?>
+			<?php echo $this->form->getInput('image'); ?>
+
 			<?php echo $this->form->getLabel('lang_code'); ?>
 			<?php echo $this->form->getInput('lang_code'); ?>
 
