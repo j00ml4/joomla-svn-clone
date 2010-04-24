@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+24-Apr-2010 Mark Dexter
+ # Reverted [#[#16506] JFolder::makeSafe removes dot
+
 -------------------- 1.5.16 Stable Release [23-April-2010] ------------------
 
 23-Apr-2010 Ian MacLennan
