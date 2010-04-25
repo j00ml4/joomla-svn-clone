@@ -45,18 +45,19 @@ class CategoriesModelCategories extends JModelList
 			$this->context = $context;
 		}
 
-		$data = JRequest::getVar('filters');
-		if (empty($data)) {
-			$data = $app->getUserState($context.'.data');
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
 		}
 		else {
-			$app->setUserState($context.'.data', $data);
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
-		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
-		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
-		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
+		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
+		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
 
 		// List state information.
 		parent::populateState('a.lft', 'asc');
@@ -78,7 +79,7 @@ class CategoriesModelCategories extends JModelList
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.extension');
-		$id	.= ':'.$this->getState('filter.published');
+		$id	.= ':'.$this->getState('filter.state');
 		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
@@ -134,7 +135,7 @@ class CategoriesModelCategories extends JModelList
 		}
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.published = ' . (int) $published);
 		} else if ($published === '') {
@@ -180,7 +181,7 @@ class CategoriesModelCategories extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'categories', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'categories', array('event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

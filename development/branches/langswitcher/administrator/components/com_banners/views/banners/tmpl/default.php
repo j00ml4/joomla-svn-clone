@@ -19,26 +19,7 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=banners'); ?>" method="post" name="adminForm" id="adminForm">
-	<fieldset id="filter-bar">
-		<div class="filter-search fltlft">
-			<?php foreach($this->form->getFieldSet('search') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-		<div class="filter-select fltrt">
-			<?php foreach($this->form->getFieldSet('select') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-	</fieldset>
-	<div class="clr"> </div>
-
+	<?php echo $this->loadTemplate('filters');?>
 	<table class="adminlist">
 		<thead>
 			<tr>
