@@ -26,10 +26,10 @@
 	</languages>
 	<config>
 		<fieldset>
-			<field name="language" type="list"
+			<field name="language"
+				type="list"
 				description="JFIELD_MODULE_LANGUAGE_DESC"
-				label="JFIELD_LANGUAGE_LABEL"
-			>
+				label="JFIELD_LANGUAGE_LABEL">
 				<option value="*">JOPTION_ALL_LANGUAGES</option>
 			</field>
 		</fieldset>
@@ -68,7 +68,7 @@
 					name="layout"
 					type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL"
-					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+					description="MOD_LANGUAGES_FIELD_MODULE_LAYOUT_DESC" />
 
 				<field
 					name="moduleclass_sfx"
