@@ -76,6 +76,14 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid'); ?>
 
+				<?php echo $this->form->getLabel('ordering'); ?>
+				<?php echo $this->form->getInput('ordering'); ?>
+
+				<?php echo $this->form->getLabel('language'); ?>
+				<?php echo $this->form->getInput('language'); ?>
+	
+				<?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?>
 				<div class="clr"> </div>
 		</fieldset>
 		<fieldset class="adminform">
