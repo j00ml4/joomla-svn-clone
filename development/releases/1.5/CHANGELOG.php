@@ -37,10 +37,10 @@ $ -> Language fix or change
 ! -> Note
 
 25-Apr-2010 Ian MacLennan
-# [#20221] Can't Login When Session Handler is None
+ # [#20221] Can't Login When Session Handler is None
 
 24-Apr-2010 Mark Dexter
- # Reverted [#[#16506] JFolder::makeSafe removes dot
+ # Reverted [#16506] JFolder::makeSafe removes dot
 
 -------------------- 1.5.16 Stable Release [23-April-2010] ------------------
 
