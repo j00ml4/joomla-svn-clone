@@ -531,7 +531,8 @@ class JApplication extends JObject
 
 			// we fork the session to prevent session fixation issues
 			$session->fork();
-
+			$this->_createSession($session->getId());
+			
 			// Import the user plugin group
 			JPluginHelper::importPlugin('user');
 
