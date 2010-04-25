@@ -24,6 +24,15 @@
 			>
 				<option value="">JOPTION_SELECT_PUBLISHED</option>
 			</field>
+			<field type="category"
+				name="category"
+				extension="com_weblinks"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">JOPTION_SELECT_CATEGORY</option>
+				<option value="0">JOPTION_NO_CATEGORY</option>
+			</field>
 			<field type="contentlanguage"
 				name="language"
 				default="-"

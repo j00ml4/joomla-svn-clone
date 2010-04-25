@@ -69,7 +69,7 @@ class BannersModelBanners extends JModelList {
 		$query->join('LEFT', '#__banner_clients AS cl ON cl.id = a.cid');
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = ' . (int)$published);
 		}
@@ -134,7 +134,7 @@ class BannersModelBanners extends JModelList {
 		// Compile the store id.
 		$id.= ':' . $this->getState('filter.search');
 		$id.= ':' . $this->getState('filter.access');
-		$id.= ':' . $this->getState('filter.published');
+		$id.= ':' . $this->getState('filter.state');
 		$id.= ':' . $this->getState('filter.category_id');
 		$id.= ':' . $this->getState('filter.language');
 		return parent::getStoreId($id);
@@ -154,7 +154,7 @@ class BannersModelBanners extends JModelList {
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'banners', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'banners', array('event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
@@ -198,19 +198,21 @@ class BannersModelBanners extends JModelList {
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$data = JRequest::getVar('filters');
-		if (empty($data)) {
-			$data = $app->getUserState($this->context . '.data');
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
 		}
 		else {
-			$app->setUserState($this->context . '.data', $data);
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
-		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
-		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
-		$this->setState('filter.access', isset($data['select']['access']) ? $data['select']['access'] : '');
-		$this->setState('filter.client_id', isset($data['select']['client']) ? $data['select']['client'] : '');
-		$this->setState('filter.category_id', isset($data['select']['category']) ? $data['select']['category'] : '');
-		$this->setState('filter.language', isset($data['select']['language']) ? $data['select']['language'] : '');
+
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
+		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
+		$this->setState('filter.client_id', isset($filters['client']) ? $filters['client'] : '');
+		$this->setState('filter.category_id', isset($filters['category']) ? $filters['category'] : '');
+		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_banners');

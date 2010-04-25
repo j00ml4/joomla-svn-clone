@@ -27,19 +27,28 @@ class ContactModelContacts extends JModelList
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication();
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
 
-		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		// Load the filter state.
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
+		}
+		else {
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
+		}
 
-		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
-		$this->setState('filter.access', $access);
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
+		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
+		$this->setState('filter.category_id', isset($filters['category']) ? $filters['category'] : '');
+		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
 
-		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
-		$this->setState('filter.published', $published);
-
-		$categoryId = $app->getUserStateFromRequest($this->context.'.category_id', 'filter_category_id');
-		$this->setState('filter.category_id', $categoryId);
+		// Load the parameters.
+		$params = JComponentHelper::getParams('com_contact');
+		$this->setState('params', $params);
 
 		// List state information.
 		parent::populateState('a.name', 'asc');
@@ -59,8 +68,11 @@ class ContactModelContacts extends JModelList
 	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
-		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.published');
+		$id.= ':' . $this->getState('filter.search');
+		$id.= ':' . $this->getState('filter.access');
+		$id.= ':' . $this->getState('filter.state');
+		$id.= ':' . $this->getState('filter.category_id');
+		$id.= ':' . $this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -107,7 +119,7 @@ class ContactModelContacts extends JModelList
 		}
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.published = ' . (int) $published);
 		} else if ($published === '') {
@@ -134,6 +146,11 @@ class ContactModelContacts extends JModelList
 			}
 		}
 
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language == '?' ? '' : $language));
+		}
+
 			if($this->getState('list.ordering', 'ordering') == 'a.ordering')
 		{
 			$query->order('a.catid, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
@@ -144,5 +161,36 @@ class ContactModelContacts extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'contacts', array('event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context . '.data', array());
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

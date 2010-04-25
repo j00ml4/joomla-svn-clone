@@ -112,7 +112,7 @@ class ContentModelFeatured extends ContentModelArticles
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'featured', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'featured', array('event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {
