@@ -75,7 +75,7 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td class="template-name">
 					<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&id='.(int) $item->extension_id); ?>">
-						<?php echo $item->name;?></a>
+						<?php echo  $item->name . ' Details' ;?></a>
 				</td>
 				<td class="center">
 					<?php echo $item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>
