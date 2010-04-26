@@ -27,8 +27,26 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+26-Nov-2010 Hannes Papenberg
+# Performance Improvements in JMenuSite, JObservable, JURI, JError, JDispatcher, JFilterinput, JPluginHelper, JPlugin, JRegistry
+# Fixed errors in JControllerTest, JControllerFormTest, JCacheStorageTest, JCacheTest, JTableContentTest, JUserTest, JDateTest
+
+26-Apr-2010 Jean-Marie Simonet
+$ Started refactoring com_users back-end in/keys
+^ Moved Beez language file to core folder
+
 26-Apr-2010 Andrew Eddie
  # Fixed error when saving an editor-xtd plugin.
+ # Fixed [#20210] Change User modal doesn't work.
+ # Fixed [#18567] When trying to create an account from the front end.
+ # Fixed [#19778] processResetRequest and other related email and process problems in frontend com_users.
+ ^ Added chaining support to several JController methods.
+ + Added Beez2
+ # Fixed [#19440] User Manager > Users: Last Visit Date shows no time.
+ # Fixed [#18260] Finish Publishing Date - No validation - com_content. Also fixed in banner, contact, module, newsfeed, and weblink table classes.
+ # Fixed [#20235] Publish up and publish down dates cannot be reset once defined (tests added).
+ # Fixed [#18265] minor validation error in com_content
+ # Fixed [#19704] User details cleared when adding new user fails (also fixed in all other affected components).
 
 25-Apr-2010 Jean-Marie Simonet
 $ Added some strings in frontend main ini
