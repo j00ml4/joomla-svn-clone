@@ -121,7 +121,17 @@ class JPluginHelper
 		// Install shutdown handler if not installed yet
 		if(!$shutdown_handler_installed)
 		{
-			register_shutdown_function(array('JPluginHelper', 'shutdown'));
+			// only register the shutdown function if we are capable of checking the errors (reqs PHP 5.2+)
+			if (version_compare("5.2", phpversion(), "<="))
+			{
+				// you can only register a static method if it is declared static
+				// we can't declare static b/c it breaks on PHP4
+				// therefore we instantiate the helper for this one purpose
+				$pluginHelper = new JPluginHelper;
+				register_shutdown_function(array($pluginHelper, 'shutdown'));
+			}
+			// we may not have installed the handler, but setting this to true
+			// will prevent us from continually running the version compare
 			$shutdown_handler_installed = true;
 		}
 
@@ -212,10 +222,11 @@ class JPluginHelper
 
 	/**
 	 * Shutdown handler called by PHP when executing plugin produces a fatal error
+	 * Only runs in PHP 5.2+, don't call it without checking version first
 	 *
 	 * @access public
 	 */
-	static function shutdown()
+	function shutdown()
 	{
 		global $mainframe;
 		$currentPlugin = $mainframe->get('currentPlugin', NULL);
