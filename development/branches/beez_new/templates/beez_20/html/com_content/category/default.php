@@ -59,8 +59,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php endif; ?>
 
 
-	<?php if (is_array($this->children) && count($this->children) > 0) : ?>
+	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
 		<div class="jcat-children">
+		<h3>
+<?php echo JTEXT::_('COM_CONTENT_CHILDREN'); ?>
+</h3>
 			<?php echo $this->loadTemplate('children'); ?>
 		</div>
 	<?php endif; ?>
