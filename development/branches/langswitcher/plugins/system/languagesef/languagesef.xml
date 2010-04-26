@@ -19,7 +19,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="default_suffix" type="radio"
+				<field name="default_prefix" type="radio"
 					default="1"
 					description="PLG_SYSTEM_LANGUAGESEF_FIELD_DEFAULT_SUFFIX_DESC"
 					label="PLG_SYSTEM_LANGUAGESEF_FIELD_DEFAULT_SUFFIX_LABEL"

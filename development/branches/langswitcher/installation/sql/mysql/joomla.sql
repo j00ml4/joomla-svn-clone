@@ -497,7 +497,7 @@ INSERT INTO `#__extensions` VALUES
 (106, 'beez_20', 'template', 'beez_20', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (107, 'mod_languages', 'module', 'mod_languages', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (108, 'plg_content_languagefilter', 'plugin', 'languagefilter', 'content', 0, 0, 1, 0, '', '{"manage_language":"always"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(109, 'plg_system_languagesef', 'plugin', 'languagesef', 'system', 0, 0, 1, 0, '', '{"default_suffix":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(109, 'plg_system_languagesef', 'plugin', 'languagesef', 'system', 0, 0, 1, 0, '', '{"default_prefix":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
