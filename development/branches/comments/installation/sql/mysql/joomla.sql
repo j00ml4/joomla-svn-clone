@@ -945,7 +945,7 @@ CREATE TABLE IF NOT EXISTS `#__social_ratings` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Foreign key to #__users for the rating submitter.',
   `user_ip` int(20) NOT NULL COMMENT 'IP address of the rating submitter.',
 
-  `score` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the rating submitter.',
+  `score` double NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the rating submitter.',
   PRIMARY KEY  (`id`),
   KEY `idx_updated` (`modified_date`,`score`),
   KEY `idx_score` (`score`)
