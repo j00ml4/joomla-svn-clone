@@ -57,6 +57,6 @@ class CacheViewCache extends JView
 			JToolBarHelper::preferences('com_cache');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.cache','JTOOLBAR_HELP');
+		JToolBarHelper::help('Site_Maintenance_Clear_Cache');
 	}
 }
