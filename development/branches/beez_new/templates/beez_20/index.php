@@ -98,15 +98,15 @@ $templateparams	= $app->getTemplate(true)->params;
 					   <?php endif; ?>
 					</ul>
 
-					<h2 class="unseen">
-						<?php echo JText::_('TPL_BEEZ2_NAV_VIEW_SEARCH'); ?>
-					</h2>
+
 
 					<h3 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAVIGATION'); ?></h3>
 
 					<jdoc:include type="modules" name="position-1" />
 
 					<div id="line">
+
+					</h2>
 						<div id="fontsize">
 							<script type="text/javascript">
 							//<![CDATA[
@@ -119,10 +119,8 @@ $templateparams	= $app->getTemplate(true)->params;
 						</div>
 
 						<h3 class="unseen"><?php echo JText::_('TPL_BEEZ2_SEARCH'); ?></h3>
-
-						<jdoc:include type="modules" name="searchload" />
-
-					</div>
+						<jdoc:include type="modules" name="position-0" />
+					  </div>
 
 			<?php if (!$templateparams->get('html5', 0)): ?>
 				</div><!-- end header -->
