@@ -90,7 +90,13 @@ class JControllerSocial extends JController
 			// TODO: handle error
 		}
 
-		JComments::save($data);
+		try {
+			JComments::save($data);
+		}
+		catch (JException $e) {
+			JError::raiseError(500, $e->getMessage());
+			return false;
+		}
 
 		// Get the URL to redirect the request to.
 		$redirect = base64_decode($data['redirect']);
