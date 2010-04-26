@@ -27,8 +27,80 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+26-Nov-2010 Hannes Papenberg
+# Performance Improvements in JMenuSite, JObservable, JURI, JError, JDispatcher, JFilterinput, JPluginHelper, JPlugin, JRegistry
+# Fixed errors in JControllerTest, JControllerFormTest, JCacheStorageTest, JCacheTest, JTableContentTest, JUserTest, JDateTest
+
+26-Apr-2010 Jean-Marie Simonet
+$ Started refactoring com_users back-end in/keys
+^ Moved Beez language file to core folder
+
+26-Apr-2010 Andrew Eddie
+ # Fixed error when saving an editor-xtd plugin.
+ # Fixed [#20210] Change User modal doesn't work.
+ # Fixed [#18567] When trying to create an account from the front end.
+ # Fixed [#19778] processResetRequest and other related email and process problems in frontend com_users.
+ ^ Added chaining support to several JController methods.
+ + Added Beez2
+ # Fixed [#19440] User Manager > Users: Last Visit Date shows no time.
+ # Fixed [#18260] Finish Publishing Date - No validation - com_content. Also fixed in banner, contact, module, newsfeed, and weblink table classes.
+ # Fixed [#20235] Publish up and publish down dates cannot be reset once defined (tests added).
+ # Fixed [#18265] minor validation error in com_content
+ # Fixed [#19704] User details cleared when adding new user fails (also fixed in all other affected components).
+
+25-Apr-2010 Jean-Marie Simonet
+$ Added some strings in frontend main ini
+$ Refactored error.php strings
+$ Completed libraries/J ini/keys refactoring
+
+24-Apr-2010 Jean-Marie Simonet
+$ Simplified a string/code to avoid some language issues
+# Implementing Unarchive and Empty Trash buttons. Some standardization.
+
+24-Apr-2010 Andrew Eddie
+ # Refactor param and metadata handling in weblink and newsfeed edit forms.
+ # Fix bug saving options in a newsfeed.
+ ^ Hide admin menu when in com_templates template view.
+ ^ Add ability to set default view in JController.
+ ^ Refactor backend master controllers to use parent display method where possible.
+ ^ Refactor and expand implementation of JModelAdmin.
+ ^ Added 2nd director separator arguement to JPath::check (to pass to JPath::clean).
+ # Fixed return value of JPath::check (was not returning the cleaned path).
+ ^ Refactored JController protected property and method names into PEAR standard (removed leading underscore).
+ + Added tests for JController.
+ ^ Changed computation of methods in JController constructor to use PHP's ReflectionClass.
+
+23-Apr-2010 Mark Dexter
+^ Added UI for new fields in contacts, newsfeeds, weblinks (Elin Waring)
+^ Added publish_up and publish_down checks to models (Elin Waring) 
+
+23-Apr-2010 Jean-Marie Simonet
+# Bug fix + new string
+$ Refactoring ini/keys in libraries/J/Installer/
+# Bug fix in com_languages (Thank you Dennis)
+$ Refactored com_languages keys + added strings
+$ Refactoring ini/keys in libraries/J/mail, plugin, registry, session + some
+$ Refactoring ini/keys in libraries/J/updater, user
+
+23-Apr-2010 Christophe Demko
+^ renaming some functions in JLanguage and JText relative to 'plural' and 'ignored search words' function
+
+22-Apr-2010 Hannes Papenberg
+# Fixed JDispatcherTest
+# Fixed JCacheConstructTest
+# Fixed Parameters in ContentModelAtricles
+# Fixed some bugs in com_installer
+
+22-Apr-2010 Jean-Marie Simonet
+$ Refactoring ini/keys in libraries/J/Installer/pack and plugin + some
+# Bug fix in login.php
+$ Standardize Show, Hide, Hits
+# Bug fix in feed.php (Thanks Dennis)
+# More Bug fixes concerning feeds in com_contents
+$ Refactoring ini/keys in libraries/J/Installer/template + helper
+
 22-Apr-2010 Andrew Eddie
- ^ Reactoring of internal property names in the MVC classes.
+ ^ Refactoring of internal property names in the MVC classes.
 
 21-Apr-2010 Christophe Demko
 $# Changing en_GB to en-GB in sample_data.sql

@@ -15,7 +15,7 @@ jimport('joomla.application.component.modeladmin');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_banners
- * @since		1.5
+ * @since		1.6
  */
 class BannersModelBanner extends JModelAdmin
 {
@@ -39,7 +39,7 @@ class BannersModelBanner extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.delete', 'com_banners.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.delete', 'com_banners');
+			return parent::canDelete($record);
 		}
 	}
 
@@ -57,10 +57,23 @@ class BannersModelBanner extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.edit.state', 'com_banners.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.edit.state', 'com_banners');
+			return parent::canEditState($record);
 		}
 	}
 
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
 	/**
 	 * Method to get the record form.
 	 *
@@ -70,13 +83,11 @@ class BannersModelBanner extends JModelAdmin
 	public function getForm()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
+		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -95,47 +106,20 @@ class BannersModelBanner extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
-	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
-	 * @since	1.6
-	 */
-	protected function getReorderConditions($record = null)
-	{
-		$condition = array(
-			'catid = '. (int) $record->catid
-		);
-		return $condition;
-	}
-
-	/**
-	 * Returns a reference to the a Table object, always creating it.
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	 * @since	1.6
-	 */
-	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
 	 * Method to stick records.
 	 *
 	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state.
+	 * @param	int		The value of the published state
+	 *
 	 * @return	boolean	True on success.
-	 * @since	1.6
 	 */
 	function stick(&$pks, $value = 1)
 	{
@@ -162,5 +146,20 @@ class BannersModelBanner extends JModelAdmin
 		}
 
 		return true;
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '. (int) $table->catid;
+		$condition[] = 'state >= 0';
+		return $condition;
 	}
 }

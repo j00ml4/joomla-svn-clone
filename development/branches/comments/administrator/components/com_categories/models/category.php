@@ -15,10 +15,38 @@ jimport('joomla.application.component.modeladmin');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_categories
- * @since 1.5
+ * @since		1.6
  */
 class CategoriesModelCategory extends JModelAdmin
 {
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canDelete($record)
+	{
+		$user = JFactory::getUser();
+
+		return $user->authorise('core.delete', $record->extension.'.category.'.(int) $record->id);
+	}
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->id);
+	}
+
 	/**
 	 * Returns a Table object, always creating it
 	 *
@@ -26,6 +54,7 @@ class CategoriesModelCategory extends JModelAdmin
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
+	 * @since	1.6
 	*/
 	public function getTable($type = 'Category', $prefix = 'JTable', $config = array())
 	{
@@ -41,7 +70,7 @@ class CategoriesModelCategory extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$app = &JFactory::getApplication('administrator');
+		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
 		if (!($pk = (int) $app->getUserState('com_categories.edit.category.id'))) {
@@ -65,7 +94,7 @@ class CategoriesModelCategory extends JModelAdmin
 		$this->setState('category.section', (count($parts)>1)?$parts[1]:null);
 
 		// Load the parameters.
-		$params	= &JComponentHelper::getParams('com_categories');
+		$params	= JComponentHelper::getParams('com_categories');
 		$this->setState('params', $params);
 	}
 
@@ -73,46 +102,23 @@ class CategoriesModelCategory extends JModelAdmin
 	 * Method to get a category.
 	 *
 	 * @param	integer	An optional id of the object to get, otherwise the id from the model state is used.
-	 *
 	 * @return	mixed	Category data object on success, false on failure.
+	 * @since	1.6
 	 */
-	public function &getItem($pk = null)
+	public function getItem($pk = null)
 	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int)$this->getState('category.id');
+		if ($result = parent::getItem($pk)) {
+			// Prime required properties.
+			if (empty($result->id)) {
+				$result->parent_id	= $this->getState('category.parent_id');
+				$result->extension	= $this->getState('category.extension');
+			}
 
-		// Get a level row instance.
-		$table = &$this->getTable();
-
-		// Attempt to load the row.
-		$table->load($pk);
-
-		// Check for a table object error.
-		if ($error = $table->getError())
-		{
-			$this->setError($error);
-			$false = false;
-			return $false;
+			// Convert the metadata field to an array.
+			$registry = new JRegistry();
+			$registry->loadJSON($result->metadata);
+			$result->metadata = $registry->toArray();
 		}
-
-		// Prime required properties.
-		if (empty($table->id)) {
-			$table->parent_id	= $this->getState('category.parent_id');
-			$table->extension	= $this->getState('category.extension');
-		}
-
-		// Convert the params field to an array.
-		$registry = new JRegistry();
-		$registry->loadJSON($table->params);
-		$table->params = $registry->toArray();
-
-		// Convert the metadata field to an array.
-		$registry = new JRegistry();
-		$registry->loadJSON($table->metadata);
-		$table->metadata = $registry->toArray();
-
-		// Convert the result to a JObject
-		$result = JArrayHelper::toObject($table->getProperties(1), 'JObject');
 
 		return $result;
 	}
@@ -130,10 +136,8 @@ class CategoriesModelCategory extends JModelAdmin
 		$extension	= $this->getState('category.extension');
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_categories.category'.$extension, 'category', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_categories.category'.$extension, 'category', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -143,6 +147,8 @@ class CategoriesModelCategory extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -274,14 +280,14 @@ class CategoriesModelCategory extends JModelAdmin
 	 * Method rebuild the entire nested set tree.
 	 *
 	 * @return	boolean	False on failure or error, true otherwise.
+	 * @since	1.6
 	 */
 	public function rebuild()
 	{
 		// Get an instance of the table obejct.
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
-		if (!$table->rebuild())
-		{
+		if (!$table->rebuild()) {
 			$this->setError($table->getError());
 			return false;
 		}
@@ -294,8 +300,8 @@ class CategoriesModelCategory extends JModelAdmin
 	 *
 	 * @param	array	An array of commands to perform.
 	 * @param	array	An array of category ids.
-	 *
 	 * @return	boolean	Returns true on success, false on failure.
+	 * @since	1.6
 	 */
 	function batch($commands, $pks)
 	{
@@ -315,29 +321,25 @@ class CategoriesModelCategory extends JModelAdmin
 
 		$done = false;
 
-		if (!empty($commands['assetgroup_id']))
-		{
-			if (!$this->_batchAccess($commands['assetgroup_id'], $pks)) {
+		if (!empty($commands['assetgroup_id'])) {
+			if (!$this->batchAccess($commands['assetgroup_id'], $pks)) {
 				return false;
 			}
 			$done = true;
 		}
 
-		if (!empty($commands['category_id']))
-		{
+		if (!empty($commands['category_id'])) {
 			$cmd = JArrayHelper::getValue($commands, 'move_copy', 'c');
 
-			if ($cmd == 'c' && !$this->_batchCopy($commands['category_id'], $pks)) {
+			if ($cmd == 'c' && !$this->batchCopy($commands['category_id'], $pks)) {
 				return false;
-			}
-			else if ($cmd == 'm' && !$this->_batchMove($commands['category_id'], $pks)) {
+			} else if ($cmd == 'm' && !$this->batchMove($commands['category_id'], $pks)) {
 				return false;
 			}
 			$done = true;
 		}
 
-		if (!$done)
-		{
+		if (!$done) {
 			$this->setError('Categories_Error_Insufficient_batch_information');
 			return false;
 		}
@@ -350,19 +352,17 @@ class CategoriesModelCategory extends JModelAdmin
 	 *
 	 * @param	int		The new value matching an Asset Group ID.
 	 * @param	array	An array of row IDs.
-	 *
 	 * @return	booelan	True if successful, false otherwise and internal error is set.
+	 * @since	1.6
 	 */
-	protected function _batchAccess($value, $pks)
+	protected function batchAccess($value, $pks)
 	{
-		$table = &$this->getTable();
-		foreach ($pks as $pk)
-		{
+		$table = $this->getTable();
+		foreach ($pks as $pk) {
 			$table->reset();
 			$table->load($pk);
 			$table->access = (int) $value;
-			if (!$table->store())
-			{
+			if (!$table->store()) {
 				$this->setError($table->getError());
 				return false;
 			}
@@ -376,10 +376,10 @@ class CategoriesModelCategory extends JModelAdmin
 	 *
 	 * @param	int		The new category or sub-category.
 	 * @param	array	An array of row IDs.
-	 *
 	 * @return	booelan	True if successful, false otherwise and internal error is set.
+	 * @since	1.6
 	 */
-	protected function _batchMove($value, $pks)
+	protected function batchMove($value, $pks)
 	{
 	}
 
@@ -388,10 +388,10 @@ class CategoriesModelCategory extends JModelAdmin
 	 *
 	 * @param	int		The new category or sub-category.
 	 * @param	array	An array of row IDs.
-	 *
 	 * @return	booelan	True if successful, false otherwise and internal error is set.
+	 * @since	1.6
 	 */
-	protected function _batchCopy($value, $pks)
+	protected function batchCopy($value, $pks)
 	{
 	}
 }

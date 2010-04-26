@@ -27,6 +27,8 @@ class UsersControllerLevels extends JControllerAdmin
 
 	/**
 	 * Proxy for getModel.
+	 *
+	 * @since	1.6
 	 */
 	public function &getModel($name = 'Levels', $prefix = 'UsersModel')
 	{

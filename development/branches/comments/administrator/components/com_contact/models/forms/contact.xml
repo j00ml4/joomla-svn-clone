@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fieldset>
-		<field name="id" type="text"
-			label="JGLOBAL_FIELD_ID_LABEL" description ="JGLOBAL_FIELD_ID_DESC"
-			size="10" default="0" required="true"
-			readonly="true" class="readonly" />
+		<field name="id" type="text" label="JGLOBAL_FIELD_ID_LABEL"
+			description="JGLOBAL_FIELD_ID_DESC" size="10" default="0"
+			required="true" readonly="true" class="readonly" />
 
 		<field name="name" type="text"
 			label="COM_CONTACT_FIELD_NAME_LABEL" description="COM_CONTACT_FIELD_NAME_DESC"
@@ -53,73 +52,6 @@
 			label="COM_CONTACT_FIELD_SORTNAME3_LABEL" description="COM_CONTACT_FIELD_SORTNAME3_DESC"
 			class="inputbox" size="30" />
 
-		<field name="misc" type="editor"
-			label="COM_CONTACT_FIELD_INFORMATION_MISC_LABEL"
-			description="COM_CONTACT_FIELD_INFORMATION_MISC_DESC"
-			class="inputbox" filter="safehtml" buttons="pagebreak,readmore"
-			size="30" />
-		<field name="image" type="imagelist" directory="/images"
-			label="COM_CONTACT_FIELD_PARAMS_IMAGE_LABEL" description="COM_CONTACT_FIELD_PARAMS_IMAGE_DESC" >
-		</field>
-		<field name="checked_out" type="hidden" filter="unset" />
-
-		<field name="checked_out_time" type="hidden" filter="unset" />
-
-		<field name="ordering" type="ordering" class="inputbox"
-
-			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
-
-		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
-			description="COM_CONTACT_FIELD_LANGUAGE_DESC" class="inputbox"
-		>
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
-		</field>
-
-
-		<field name="contact_icons" type="list" default="0"
-			label="COM_CONTACT_FIELD_ICONS_SETTINGS" description="COM_CONTACT_FIELD_ICONS_SETTINGS_DESC"
-		>
-			<option value="0">COM_CONTACT_FIELD_VALUE_NONE
-			</option>
-			<option value="1">COM_CONTACT_FIELD_VALUE_TEXT
-			</option>
-			<option value="2">COM_CONTACT_FIELD_VALUE_ICONS
-			</option>
-		</field>
-
-		<field name="icon_address" type="imagelist"
-			directory="/images" hide_none="1"
-
-			label="COM_CONTACT_FIELD_ICONS_ADDRESS_LABEL"
-			description="COM_CONTACT_FIELD_ICONS_ADDRESS_DESC" />
-
-		<field name="icon_email" type="imagelist" directory="/images"
-			hide_none="1" label="COM_CONTACT_FIELD_ICONS_EMAIL_LABEL"
-			description="COM_CONTACT_FIELD_ICONS_EMAIL_DESC" />
-
-		<field name="icon_telephone" type="imagelist"
-			directory="/images" hide_none="1"
-
-			abel="COM_CONTACT_FIELD_ICONS_TELEPHONE_LABEL"
-			description="COM_CONTACT_FIELD_ICONS_TELEPHONE_DESC" />
-
-		<field name="icon_mobile" type="imagelist"
-			directory="/images" hide_none="1"
-
-			label="COM_CONTACT_FIELD_ICONS_MOBILE_LABEL" description="COM_CONTACT_FIELD_ICONS_MOBILE_DESC" />
-
-		<field name="icon_fax" type="imagelist" directory="/images"
-			hide_none="1" label="COM_CONTACT_FIELD_ICONS_FAX_LABEL"
-			description="COM_CONTACT_FIELD_ICONS_FAX_DESC" />
-
-		<field name="icon_misc" type="imagelist" directory="/images"
-			hide_none="1" label="COM_CONTACT_FIELD_ICONS_MISC_LABEL"
-			description="COM_CONTACT_FIELD_ICONS_MISC_DESC" />
-
-
-	</fieldset>
-
-	<fieldset name="contact_details" label="COM_CONTACT_CONTACT_DETAILS">
 		<field name="con_position" type="text"
 			label="COM_CONTACT_FIELD_INFORMATION_POSITION_LABEL"
 			description="COM_CONTACT_FIELD_INFORMATION_POSITION_DESC"
@@ -169,11 +101,86 @@
 			label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL"
 			description="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_DESC"
 			class="inputbox" size="30" />
+		<field name="misc" type="editor"
+			label="COM_CONTACT_FIELD_INFORMATION_MISC_LABEL"
+			description="COM_CONTACT_FIELD_INFORMATION_MISC_DESC"
+			class="inputbox" filter="safehtml" buttons="pagebreak,readmore"
+			size="30" />
+		<field name="image" type="imagelist" directory="/images"
+			label="COM_CONTACT_FIELD_PARAMS_IMAGE_LABEL" description="COM_CONTACT_FIELD_PARAMS_IMAGE_DESC"
+		>
+		</field>
+		<field name="checked_out" type="hidden" filter="unset" />
 
+		<field name="checked_out_time" type="hidden" filter="unset" />
+
+		<field name="ordering" type="ordering" class="inputbox"
+
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
+
+		<field name="metakey" type="textarea"
+			label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"
+			class="inputbox" rows="3" cols="30" />
+
+		<field name="metadesc" type="textarea"
+			label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"
+			class="inputbox" rows="3" cols="30" />
+
+		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+			description="COM_CONTACT_FIELD_LANGUAGE_DESC" class="inputbox"
+		>
+			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		</field>
+
+
+		<field name="contact_icons" type="list" default="0"
+			label="COM_CONTACT_FIELD_ICONS_SETTINGS" description="COM_CONTACT_FIELD_ICONS_SETTINGS_DESC"
+		>
+			<option value="0">COM_CONTACT_FIELD_VALUE_NONE
+			</option>
+			<option value="1">COM_CONTACT_FIELD_VALUE_TEXT
+			</option>
+			<option value="2">COM_CONTACT_FIELD_VALUE_ICONS
+			</option>
+		</field>
+
+		<field name="icon_address" type="imagelist"
+			directory="/images" hide_none="1"
+
+			label="COM_CONTACT_FIELD_ICONS_ADDRESS_LABEL"
+			description="COM_CONTACT_FIELD_ICONS_ADDRESS_DESC" />
+
+		<field name="icon_email" type="imagelist" directory="/images"
+			hide_none="1" label="COM_CONTACT_FIELD_ICONS_EMAIL_LABEL"
+			description="COM_CONTACT_FIELD_ICONS_EMAIL_DESC" />
+
+		<field name="icon_telephone" type="imagelist"
+			directory="/images" hide_none="1"
+
+			abel="COM_CONTACT_FIELD_ICONS_TELEPHONE_LABEL"
+			description="COM_CONTACT_FIELD_ICONS_TELEPHONE_DESC" />
+
+		<field name="icon_mobile" type="imagelist"
+			directory="/images" hide_none="1"
+
+			label="COM_CONTACT_FIELD_ICONS_MOBILE_LABEL" description="COM_CONTACT_FIELD_ICONS_MOBILE_DESC" />
+
+		<field name="icon_fax" type="imagelist" directory="/images"
+			hide_none="1" label="COM_CONTACT_FIELD_ICONS_FAX_LABEL"
+			description="COM_CONTACT_FIELD_ICONS_FAX_DESC" />
+
+		<field name="icon_misc" type="imagelist" directory="/images"
+			hide_none="1" label="COM_CONTACT_FIELD_ICONS_MISC_LABEL"
+			description="COM_CONTACT_FIELD_ICONS_MISC_DESC" />
+
+		<field id="metadata" name="metadata" type="textarea"
+			label="Contact_Metadata_Label" description="Contact_Metadata_Desc"
+			class="inputbox" rows="3" cols="30" />
 	</fieldset>
 
+
 	<fields name="params">
-		<fieldset name="basic" label="COM_CONTACT_FIELDSET_OPTIONS">
+		<fieldset name="jbasic" label="JGLOBAL_FIELDSET_OPTIONS">
 			<field name="show_contact_category" type="list"
 
 				label="COM_CONTACT_FIELD_SHOW_CATEGORY_LABEL"
@@ -401,28 +408,9 @@
 				class="inputbox" size="30" />
 		</fieldset>
 
-		<fieldset name="metadata" label="COM_CONTACT_FIELDSET_METADATA">
-			<field name="metakey" type="textarea"
-				label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"
-				class="inputbox" rows="3" cols="30" />
-
-			<field name="metadesc" type="textarea"
-				label="JFIELD_META_DESCRIPTION_LABEL" description="JFIELD_META_DESCRIPTION_DESC"
-				class="inputbox" rows="3" cols="30" />
-
-			<field name="metadata" type="textarea" label="Contact_Metadata_Label"
-				description="Contact_Metadata_Desc" class="inputbox"
-				rows="3" cols="30" />
-
-			<field name="robots" type="text"
-				label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC"
-				size="20" />
-
-			<field name="rights" type="text"
-				label="JFIELD_METADATA_RIGHTS_LABEL" description="JFIELD_METADATA_RIGHTS_DESC"
-				size="20" />
-		</fieldset>
-		<fieldset name="email_form" label="COM_CONTACT_FIELDSET_CONTACT_FORM">
+		<fieldset name="email"
+			label="COM_CONTACT_FIELDSET_CONTACT_FORM" description="COM_CONTACT_EMAIL_FORM_DETAILS"
+		>
 
 			<field name="show_email_form" type="list"
 
@@ -461,6 +449,7 @@
 				cols="30" description="COM_CONTACT_FIELD_EMAIL_BANNED_TEXT_DESC" />
 
 			<field name="validate_session" type="list"
+
 				label="COM_CONTACT_FIELD_CONFIG_SESSION_CHECK_LABEL"
 				description="COM_CONTACT_FIELD_CONFIG_SESSION_CHECK_DESC"
 			>
@@ -483,6 +472,21 @@
 				label="COM_CONTACT_FIELD_EMAIL_REDIRECT_LABEL"
 				description="COM_CONTACT_FIELD_EMAIL_REDIRECT_DESC" />
 		</fieldset>
+	</fields>
+	<fields name="metadata">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA">
+
+			<field name="robots" type="text"
+				label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC"
+				size="20" />
+
+
+			<field name="rights" type="text"
+				label="JFIELD_METADATA_RIGHTS_LABEL" description="JFIELD_METADATA_RIGHTS_DESC"
+				size="20" />
+		</fieldset>
+
+
 	</fields>
 
 </form>

@@ -19,16 +19,15 @@ jimport('joomla.application.component.view');
  */
 class WeblinksViewWeblink extends JView
 {
-	protected $form;
-	protected $item;
 	protected $state;
+	protected $item;
+	protected $form;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		// Initialise variables.
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
@@ -39,19 +38,16 @@ class WeblinksViewWeblink extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', true);
 
@@ -62,8 +58,11 @@ class WeblinksViewWeblink extends JView
 
 		JToolBarHelper::title(JText::_('COM_WEBLINKS_MANAGER_WEBLINK'));
 
+
+
 		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit')) {
+		if (!$checkedOut && $canDo->get('core.edit'))
+		{
 
 			JToolBarHelper::apply('weblink.apply', 'JToolbar_Apply');
 			JToolBarHelper::save('weblink.save', 'JToolbar_Save');

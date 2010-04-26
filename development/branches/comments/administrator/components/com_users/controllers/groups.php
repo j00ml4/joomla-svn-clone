@@ -27,6 +27,8 @@ class UsersControllerGroups extends JControllerAdmin
 
 	/**
 	 * Proxy for getModel.
+	 *
+	 * @since	1.6
 	 */
 	public function &getModel($name = 'Group', $prefix = 'UsersModel')
 	{

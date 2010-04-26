@@ -33,7 +33,7 @@ class WeblinksModelWeblink extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.delete', 'com_weblinks.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.delete', 'com_weblinks');
+			return parent::canDelete($record);
 		}
 	}
 
@@ -51,8 +51,21 @@ class WeblinksModelWeblink extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.edit.state', 'com_weblinks');
+			return parent::canEditState($record);
 		}
+	}
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -67,10 +80,8 @@ class WeblinksModelWeblink extends JModelAdmin
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_weblinks.weblink', 'weblink', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_weblinks.weblink', 'weblink', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -89,41 +100,37 @@ class WeblinksModelWeblink extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
+	 * Method to get a single record.
 	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
 	 * @since	1.6
 	 */
-	protected function getReorderConditions($record = null)
+	public function getItem($pk = null)
 	{
-		$condition = array(
-			'catid = '. (int) $record->catid
-		);
-		return $condition;
-	}
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->metadata);
+			$item->metadata = $registry->toArray();
+		}
 
-	/**
-	 * Returns a reference to the a Table object, always creating it.
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	*/
-	public function getTable($type = 'Weblink', $prefix = 'WeblinksTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
+		return $item;
 	}
 
 	/**
 	 * Prepare and sanitise the table prior to saving.
+	 *
+	 * @since	1.6
 	 */
 	protected function prepareTable(&$table)
 	{
@@ -156,5 +163,19 @@ class WeblinksModelWeblink extends JModelAdmin
 			//$table->modified	= $date->toMySQL();
 			//$table->modified_by	= $user->get('id');
 		}
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }

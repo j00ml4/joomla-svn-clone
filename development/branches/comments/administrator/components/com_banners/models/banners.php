@@ -19,9 +19,30 @@ jimport('joomla.application.component.modellist');
 class BannersModelBanners extends JModelList
 {
 	/**
+	 * Method to get the maximum ordering value for each category.
+	 *
+	 * @since	1.6
+	 */
+	function &getCategoryOrders()
+	{
+		if (!isset($this->cache['categoryorders'])) {
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
+			$query->select('MAX(ordering) as `max`, catid');
+			$query->select('catid');
+			$query->from('#__banners');
+			$query->group('catid');
+			$db->setQuery($query);
+			$this->cache['categoryorders'] = $db->loadAssocList('catid', 0);
+		}
+		return $this->cache['categoryorders'];
+	}
+
+	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
 	protected function getListQuery()
 	{
@@ -106,8 +127,9 @@ class BannersModelBanners extends JModelList
 	 * different modules that might need different sets of data or different
 	 * ordering requirements.
 	 *
-	 * @param	string	A prefix for the store id.
-	 * @return	string	A store id.
+	 * @param	string		$id	A prefix for the store id.
+	 * @return	string		A store id.
+	 * @since	1.6
 	 */
 	protected function getStoreId($id = '')
 	{
@@ -118,6 +140,20 @@ class BannersModelBanners extends JModelList
 		$id	.= ':'.$this->getState('filter.category_id');
 
 		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**

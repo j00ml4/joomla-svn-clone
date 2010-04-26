@@ -22,6 +22,8 @@ class ContentModelArticles extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -29,37 +31,29 @@ class ContentModelArticles extends JModelList
 		$app = JFactory::getApplication();
 
 		// List state information
-		//$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$limit = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
-		$this->setState('list.limit', $limit);
+		//$value = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
+		$value = JRequest::getInt('limit', $app->getCfg('list_limit', 0));
+		$this->setState('list.limit', $value);
 
-		//$limitstart = $app->getUserStateFromRequest($this->context.'.limitstart', 'limitstart', 0);
-		$limitstart = JRequest::getInt('limitstart', 0);
-		$this->setState('list.start', $limitstart);
+		//$value = $app->getUserStateFromRequest($this->context.'.limitstart', 'limitstart', 0);
+		$value = JRequest::getInt('limitstart', 0);
+		$this->setState('list.start', $value);
 
-		//$orderCol = $app->getUserStateFromRequest($this->context.'.ordercol', 'filter_order', 'a.lft');
-		$orderCol = JRequest::getCmd('filter_order', 'a.ordering');
-		$this->setState('list.ordering', $orderCol);
+		//$value = $app->getUserStateFromRequest($this->context.'.ordercol', 'filter_order', 'a.lft');
+		$value = JRequest::getCmd('filter_order', 'a.ordering');
+		$this->setState('list.ordering', $value);
 
-		//$orderDirn = $app->getUserStateFromRequest($this->context.'.orderdirn', 'filter_order_Dir', 'asc');
-		$orderDirn = JRequest::getWord('filter_order_Dir', 'asc');
-		$this->setState('list.direction', $orderDirn);
+		//$value = $app->getUserStateFromRequest($this->context.'.orderdirn', 'filter_order_Dir', 'asc');
+		$value = JRequest::getWord('filter_order_Dir', 'asc');
+		$this->setState('list.direction', $value);
 
 		$params = $app->getParams();
-		$menuParams = new JRegistry();
-		if (JSite::getMenu()->getActive())
-		{
-			$menuParams = new JRegistry();
-			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
-		}
-		$mergedParams = clone $menuParams;
-		$mergedParams->merge($params);
-		$this->setState('params', $mergedParams);
+		$this->setState('params', $params);
 
 		$this->setState('filter.published', 1);
 
 		// process show_noauth parameter
-		if (!$mergedParams->get('show_noauth'))
+		if (!$params->get('show_noauth'))
 		{
 			$this->setState('filter.access', true);
 		}

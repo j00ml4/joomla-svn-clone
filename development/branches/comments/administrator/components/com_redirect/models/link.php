@@ -26,6 +26,7 @@ class RedirectModelLink extends JModelAdmin
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
+	 * @since	1.6
 	*/
 	public function getTable($type = 'Link', $prefix = 'RedirectTable', $config = array())
 	{
@@ -36,6 +37,7 @@ class RedirectModelLink extends JModelAdmin
 	 * Method to get the record form.
 	 *
 	 * @return	mixed	JForm object on success, false on failure.
+	 * @since	1.6
 	 */
 	public function getForm()
 	{
@@ -43,10 +45,8 @@ class RedirectModelLink extends JModelAdmin
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_redirect.link', 'link', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_redirect.link', 'link', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -56,6 +56,8 @@ class RedirectModelLink extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -68,6 +70,7 @@ class RedirectModelLink extends JModelAdmin
 	 * @param	string	The new URL to set for the redirect.
 	 * @param	string	A comment for the redirect links.
 	 * @return	boolean	Returns true on success, false on failure.
+	 * @since	1.6
 	 */
 	public function activate(&$pks, $url, $comment = null)
 	{
@@ -83,15 +86,13 @@ class RedirectModelLink extends JModelAdmin
 		$comment = (!empty($comment)) ? $comment : JText::sprintf('COM_REDIRECT_REDIRECTED_ON', JHTML::_('date',time()));
 
 		// Access checks.
-		if (!$user->authorise('core.edit', 'com_redirect'))
-		{
+		if (!$user->authorise('core.edit', 'com_redirect')) {
 			$pks = array();
 			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			return false;
 		}
 
-		if (!empty($pks))
-		{
+		if (!empty($pks)) {
 			// Update the link rows.
 			$db->setQuery(
 				'UPDATE `#__redirect_links`' .

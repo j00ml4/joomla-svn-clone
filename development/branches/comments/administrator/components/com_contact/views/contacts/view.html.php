@@ -19,9 +19,9 @@ jimport('joomla.application.component.view');
  */
 class ContactViewContacts extends JView
 {
-	public $state;
 	public $items;
 	public $pagination;
+	public $state;
 
 	/**
 	 * Display the view
@@ -30,52 +30,70 @@ class ContactViewContacts extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('state');
-		$items		= $this->get('items');
-		$pagination	= $this->get('pagination');
+		$this->items		= $this->get('items');
+		$this->pagination	= $this->get('pagination');
+		$this->state		= $this->get('state');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
+
 		// Preprocess the list of items to find ordering divisions.
 		// TODO: Complete the ordering stuff with nested sets
-		foreach ($items as $i => &$item)
-		{
+		foreach ($this->items as &$item) {
 			$item->order_up = true;
 			$item->order_dn = true;
 		}
-		$this->assignRef('state',			$state);
-		$this->assignRef('items',			$items);
-		$this->assignRef('pagination',		$pagination);
-		$this->_setToolbar();
+
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
-		$state = $this->get('state');
+		require_once JPATH_COMPONENT.'/helpers/contact.php';
+		$canDo	= ContactHelper::getActions($this->state->get('filter.category_id'));
+
 		JToolBarHelper::title(JText::_('COM_CONTACT_MANAGER_CONTACTS'), 'generic.png');
-		JToolBarHelper::addNew('contact.edit', 'JTOOLBAR_NEW');
-		JToolBarHelper::editList('contact.edit','JTOOLBAR_EDIT');
-		JToolBarHelper::divider();
-		JToolBarHelper::publish('contacts.publish','JTOOLBAR_PUBLISH');
-		JToolBarHelper::unpublish('contacts.unpublish','JTOOLBAR_UNPUBLISH');
-		JToolBarHelper::divider();
-		JToolBarHelper::archiveList('contacts.archive','JTOOLBAR_ARCHIVE');
-		if ($state->get('filter.published') == -2) {
-			JToolBarHelper::deleteList('', 'contacts.delete','JTOOLBAR_EMPTY_TRASH');
+		
+		if ($canDo->get('core.create')) {
+			JToolBarHelper::addNew('contact.add','JTOOLBAR_NEW');
 		}
-		else {
+		if ($canDo->get('core.edit')) {
+			JToolBarHelper::editList('contact.edit','JTOOLBAR_EDIT');
+		}
+		if ($canDo->get('core.edit.state')) {
+			if ($this->state->get('filter.published') != 2){
+				JToolBarHelper::divider();
+				JToolBarHelper::custom('contacts.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+				JToolBarHelper::custom('contacts.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			}
+			if ($this->state->get('filter.published') != -1 ) {
+				JToolBarHelper::divider();
+				if ($this->state->get('filter.published') != 2) {
+					JToolBarHelper::archiveList('contacts.archive','JTOOLBAR_ARCHIVE');
+				}
+				else if ($this->state->get('filter.published') == 2) {
+					JToolBarHelper::unarchiveList('contacts.publish', 'JTOOLBAR_UNARCHIVE');
+				}
+			}	
+		}
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'contacts.delete','JTOOLBAR_EMPTY_TRASH');
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('contacts.trash','JTOOLBAR_TRASH');
 		}
-		JToolBarHelper::divider();
-
-		JToolBarHelper::preferences('com_contact');
+		if ($canDo->get('core.admin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::preferences('com_contact');
+		}
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.contact','JTOOLBAR_HELP');
 	}

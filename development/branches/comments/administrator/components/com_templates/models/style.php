@@ -26,6 +26,10 @@ class TemplatesModelStyle extends JModelForm
 
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -151,10 +155,8 @@ class TemplatesModelStyle extends JModelForm
 		$this->setState('item.template',	$template);
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_templates.style', 'style', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_templates.style', 'style', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -164,6 +166,8 @@ class TemplatesModelStyle extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;

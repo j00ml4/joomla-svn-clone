@@ -20,6 +20,42 @@ jimport('joomla.application.component.modeladmin');
 class NewsfeedsModelNewsfeed extends JModelAdmin
 {
 	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canDelete($record)
+	{
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.delete', 'com_newsfeed.category.'.(int) $record->catid);
+		} else {
+			return parent::canDelete($record);
+		}
+	}
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.edit.state', 'com_newsfeed.category.'.(int) $record->catid);
+		} else {
+			return parent::canEditState($record);
+		}
+	}
+
+	/**
 	 * Returns a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -40,13 +76,11 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -65,24 +99,31 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
+	 * Method to get a single record.
 	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
 	 * @since	1.6
 	 */
-	protected function getReorderConditions($record = null)
+	public function getItem($pk = null)
 	{
-		$condition = array(
-			'catid = '. (int) $record->catid
-		);
-		return $condition;
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->metadata);
+			$item->metadata = $registry->toArray();
+		}
+
+		return $item;
 	}
 
 	/**
@@ -119,5 +160,19 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 			//$table->modified	= $date->toMySQL();
 			//$table->modified_by	= $user->get('id');
 		}
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }

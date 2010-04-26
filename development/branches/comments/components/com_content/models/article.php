@@ -31,7 +31,9 @@ class ContentModelArticle extends JModelItem
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -92,6 +94,12 @@ class ContentModelArticle extends JModelItem
 
 				$query->where('a.id = ' . (int) $pk);
 
+				// Filter by start and end dates.
+				$nullDate = $db->Quote($db->getNullDate());
+				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+				
+				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 				// Filter by published state.
 				$published = $this->getState('filter.published');
 				$archived = $this->getState('filter.archived');

@@ -20,7 +20,8 @@ jimport('joomla.database.tableasset');
 class JTableContent extends JTable
 {
 	/**
-	 * @param database A database connector object
+	 * @param	database	A database connector object
+	 * @since	1.0
 	 */
 	function __construct(&$db)
 	{
@@ -33,6 +34,7 @@ class JTableContent extends JTable
 	 * where id is the value of the primary key of the table.
 	 *
 	 * @return	string
+	 * @since	1.6
 	 */
 	protected function _getAssetName()
 	{
@@ -55,12 +57,13 @@ class JTableContent extends JTable
 	 * Get the parent asset id for the record
 	 *
 	 * @return	int
+	 * @since	1.6
 	 */
 	protected function _getAssetParentId()
 	{
 		// Initialise variables.
 		$assetId = null;
-		$db		= $this->getDbo();
+		$db = $this->getDbo();
 
 		// This is a article under a category.
 		if ($this->catid) {
@@ -104,8 +107,8 @@ class JTableContent extends JTable
 	 *
 	 * @param	array		$hash named array
 	 * @return	null|string	null is operation was satisfactory, otherwise returns an error
-	 * @see JTable:bind
-	 * @since 1.5
+	 * @see		JTable:bind
+	 * @since	1.5
 	 */
 	public function bind($array, $ignore = '')
 	{
@@ -134,8 +137,7 @@ class JTableContent extends JTable
 		}
 
 		// Bind the rules.
-		if (isset($array['rules']))
-		{
+		if (isset($array['rules']) && is_array($array['rules'])) {
 			$rules = new JRules($array['rules']);
 			$this->setRules($rules);
 		}
@@ -152,8 +154,8 @@ class JTableContent extends JTable
 	 */
 	public function check()
 	{
-		if (empty($this->title)) {
-			$this->setError(JText::_('Article must have a title'));
+		if (empty($this->title) OR (trim($this->title) == '')) {
+			$this->setError(JText::_('COM_CONTENT_WARNING_PROVIDE_VALID_NAME'));
 			return false;
 		}
 
@@ -175,6 +177,14 @@ class JTableContent extends JTable
 			return false;
 		}
 
+		// Check the publish down date is not earlier than publish up.
+		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+			// Swap the dates.
+			$temp = $this->publish_up;
+			$this->publish_up = $this->publish_down;
+			$this->publish_down = $temp;
+		}
+
 		// clean up keywords -- eliminate extra spaces between phrases
 		// and cr (\r) and lf (\n) characters from string
 		if (!empty($this->metakey)) {
@@ -191,12 +201,6 @@ class JTableContent extends JTable
 			$this->metakey = implode(", ", $clean_keys); // put array back together delimited by ", "
 		}
 
-		// clean up description -- eliminate quotes and <> brackets
-		if (!empty($this->metadesc)) {
-			// only process if not empty
-			$bad_characters = array("\"", "<", ">");
-			$this->metadesc = JString::str_ireplace($bad_characters, "", $this->metadesc);
-		}
 
 		return true;
 	}
@@ -310,6 +314,7 @@ class JTableContent extends JTable
 	 * Converts record to XML
 	 *
 	 * @param	boolean	Map foreign keys to text values
+	 * @since	1.5
 	 */
 	function toXML($mapKeysToText=false)
 	{

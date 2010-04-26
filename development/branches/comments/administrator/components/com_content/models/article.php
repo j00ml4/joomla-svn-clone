@@ -47,6 +47,18 @@ class ContentModelArticle extends JModelAdmin
 	}
 
 	/**
+	 * Prepare and sanitise the table data prior to saving.
+	 *
+	 * @param	JTable	A JTable object.
+	 * @since	1.6
+	 */
+	protected function prepareTable($table)
+	{
+		// Increment the content version number.
+		$table->version++;
+	}
+
+	/**
 	 * Returns a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -66,23 +78,23 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return	mixed	Object on success, false on failure.
 	 */
-	public function &getItem($pk = null)
+	public function getItem($pk = null)
 	{
-		$value = parent::getItem($pk);
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->attribs);
+			$item->attribs = $registry->toArray();
 
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($value->attribs);
-		$value->attribs = $registry->toArray();
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->metadata);
+			$item->metadata = $registry->toArray();
 
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($value->metadata);
-		$value->metadata = $registry->toArray();
+			$item->articletext = trim($item->fulltext) ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
+		}
 
-		$value->articletext = trim($value->fulltext) ? $value->introtext . "<hr id=\"system-readmore\" />" . $value->fulltext : $value->introtext;
-
-		return $value;
+		return $item;
 	}
 
 	/**
@@ -98,21 +110,15 @@ class ContentModelArticle extends JModelAdmin
 
 		// Get the form.
 		$form = parent::getForm('com_content.article', 'article', array('control' => 'jform'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		if (empty($form)) {
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('article.id'))
-		{
+		if ($this->getState('article.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		}
-		else
-		{
+		} else {
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
@@ -123,24 +129,30 @@ class ContentModelArticle extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
+	 * Method to save the form data.
 	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
-	protected function getReorderConditions($record = null)
+	public function save($data)
 	{
-		$condition = array(
-			'catid = '. (int) $record->catid
-		);
-		return $condition;
+		if (parent::save($data)) {
+			if (isset($data['featured'])) {
+				$this->featured($this->getState('article.id'), $data['featured']);
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -164,8 +176,7 @@ class ContentModelArticle extends JModelAdmin
 
 		$table = $this->getTable('Featured', 'ContentTable');
 
-		try
-		{
+		try {
 			$this->_db->setQuery(
 				'UPDATE #__content AS a' .
 				' SET a.featured = '.(int) $value.
@@ -176,8 +187,7 @@ class ContentModelArticle extends JModelAdmin
 			}
 
 			// Adjust the mapping table.
-			if ($value == 0)
-			{
+			if ($value == 0) {
 				// Unfeaturing.
 				$this->_db->setQuery(
 					'DELETE FROM #__content_frontpage' .
@@ -186,27 +196,24 @@ class ContentModelArticle extends JModelAdmin
 				if (!$this->_db->query()) {
 					throw new Exception($this->_db->getErrorMsg());
 				}
-			}
-			else
-			{
+			} else {
 				// Featuring.
 				$tuples = array();
 				foreach ($pks as $i => $pk) {
 					$tuples[] = '('.$pk.', '.(int)($i + 1).')';
 				}
-
-				$this->_db->setQuery(
-					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
-					' VALUES '.implode(',', $tuples)
+				if ($isNew){
+					$this->_db->setQuery(
+						'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+						' VALUES '.implode(',', $tuples)
 				);
+				}
 				if (!$this->_db->query()) {
 					$this->setError($this->_db->getErrorMsg());
 					return false;
 				}
 			}
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
 		}
@@ -217,5 +224,19 @@ class ContentModelArticle extends JModelAdmin
 		$cache->clean();
 
 		return true;
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }

@@ -19,10 +19,7 @@ jimport('joomla.application.component.modeladmin');
  */
 class PluginsModelPlugin extends JModelAdmin
 {
-	/**
-	 * Item cache.
-	 */
-	private $_cache = array();
+	protected $_cache;
 
 	/**
 	 * Method to get the record form.
@@ -51,10 +48,8 @@ class PluginsModelPlugin extends JModelAdmin
 		$this->setState('item.element',	$element);
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -64,6 +59,8 @@ class PluginsModelPlugin extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -85,7 +82,7 @@ class PluginsModelPlugin extends JModelAdmin
 			$false	= false;
 
 			// Get a row instance.
-			$table = &$this->getTable();
+			$table = $this->getTable();
 
 			// Attempt to load the row.
 			$return = $table->load($pk);
@@ -119,22 +116,6 @@ class PluginsModelPlugin extends JModelAdmin
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
-	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
-	 * @since	1.6
-	 */
-	protected function getReorderConditions($record = null)
-	{
-		$condition = array(
-			'type = '. $this->_db->Quote($record->type),
-			'folder = '. $this->_db->Quote($record->folder)
-		);
-		return $condition;
-	}
-
-	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -145,13 +126,6 @@ class PluginsModelPlugin extends JModelAdmin
 	public function getTable($type = 'Extension', $prefix = 'JTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Prepare and sanitise the table prior to saving.
-	 */
-	protected function prepareTable(&$table)
-	{
 	}
 
 	/**
@@ -198,5 +172,20 @@ class PluginsModelPlugin extends JModelAdmin
 
 		// Trigger the default form events.
 		parent::preprocessForm($form);
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'type = '. $this->_db->Quote($table->type);
+		$condition[] = 'folder = '. $this->_db->Quote($table->folder);
+		return $condition;
 	}
 }

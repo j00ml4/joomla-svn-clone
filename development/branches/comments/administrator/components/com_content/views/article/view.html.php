@@ -16,53 +16,47 @@ jimport('joomla.application.component.view');
  */
 class ContentViewArticle extends JView
 {
-	protected $state;
 	protected $item;
 	protected $form;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$app	= JFactory::getApplication();
-
-		if($this->_layout == 'pagebreak')
-		{
-			$eName	= JRequest::getVar('e_name');
-			$eName	= preg_replace( '#[^A-Z0-9\-\_\[\]]#i', '', $eName );
-			$document =& JFactory::getDocument();
+		if ($this->_layout == 'pagebreak') {
+			$eName		= JRequest::getVar('e_name');
+			$eName		= preg_replace( '#[^A-Z0-9\-\_\[\]]#i', '', $eName );
+			$document	= JFactory::getDocument();
 			$document->setTitle(JText::_('PGB ARTICLE PAGEBRK'));
 			$this->assignRef('eName', $eName);
 			parent::display($tpl);
 			return;
 		}
 
-		$state	= $this->get('State');
-		$item	= $this->get('Item');
-		$form	= $this->get('Form');
+		$this->item		= $this->get('Item');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
-		$form->bind($item);
+		//$this->form->bind($this->item);
 
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Display the toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', true);
 
@@ -73,11 +67,8 @@ class ContentViewArticle extends JView
 
 		JToolBarHelper::title(JText::_('Content_Page_'.($checkedOut ? 'View_Article' : ($isNew ? 'Add_Article' : 'Edit_Article'))), 'article-add.png');
 
-
-
 		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit'))
-		{
+		if (!$checkedOut && $canDo->get('core.edit')) {
 			JToolBarHelper::apply('article.apply', 'JToolbar_Apply');
 			JToolBarHelper::save('article.save', 'JToolbar_Save');
 			JToolBarHelper::custom('article.save2new', 'save-new.png', 'save-new_f2.png', 'JToolbar_Save_and_new', false);
@@ -89,8 +80,7 @@ class ContentViewArticle extends JView
 		}
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('article.cancel', 'JToolbar_Cancel');
-		}
-		else {
+		} else {
 			JToolBarHelper::cancel('article.cancel', 'JToolbar_Close');
 		}
 
