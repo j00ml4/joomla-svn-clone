@@ -892,7 +892,7 @@ CREATE TABLE IF NOT EXISTS `#__social_comments` (
   `subject` varchar(255) NOT NULL COMMENT 'The subject of the comment.',
   `body` varchar(5120) NOT NULL COMMENT 'Body of the comment.',
 
-  `score` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the comment submitter.',
+  `score` double NOT NULL DEFAULT '0' COMMENT 'The rating score chosen by the comment submitter.',
   `score_like` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who like this comment.',
   `score_dislike` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The number of people who dislike this comment.',
   
