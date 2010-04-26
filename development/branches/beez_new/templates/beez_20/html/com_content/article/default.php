@@ -9,11 +9,22 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+$app = JFactory::getApplication();
+$templateparams =$app->getTemplate(true)->params;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 // Create shortcut to parameters.
 $params = $this->item->params;
+
+
+
+if($templateparams->get('html5')!=1)
+{
+	require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
+	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
+} else {
+JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+
 ?>
 <article class="item-page<?php echo $params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
@@ -140,3 +151,5 @@ $params = $this->item->params;
 
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </article>
+
+<?php } ?>
