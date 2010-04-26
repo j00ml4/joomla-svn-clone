@@ -55,16 +55,12 @@ class JHelp
 		if ($userHelpUrl)
 		{
 			// Online help site as defined in GC
-			$version = new JVersion();
-			$ref .= $version->getHelpVersion();
-			$url = $userHelpUrl . '/index2.php?option=com_content&amp;task=findkey&amp;tmpl=component&amp;keyref=' . urlencode($ref);
+			$url = $userHelpUrl;
 		}
 		else if ($globalHelpUrl)
 		{
 			// Online help site as defined in GC
-			$version = new JVersion();
-			$ref .= $version->getHelpVersion();
-			$url = $globalHelpUrl . '/index2.php?option=com_content&amp;task=findkey&amp;tmpl=component;1&amp;keyref=' . urlencode($ref);
+			$url = $globalHelpUrl;
 		}
 		else
 		{
@@ -83,8 +79,28 @@ class JHelp
 					$helpURL = 'help/en-GB/';
 				}
 			}
-			$url = $helpURL . $ref;
+			return $helpURL . $ref;
 		}
+
+		// Get Joomla version.
+		$version = new JVersion();
+		$jver = explode( '.', $version->getShortVersion() );
+
+		// Get parts of language code.
+		$jlang = explode( '-', $lang->getTag() );
+
+		// Check for old style help URL and convert on-the-fly.
+		if (strpos( $url, '{' ) === false) {
+			if (substr( $url, -1 ) != '/') {
+				$url .= '/';
+			}
+			$url .= 'index2.php?option=com_content&amp;task=findkey&amp;tmpl=component&amp;keyref={keyref}.{major}{minor}';
+		}
+
+		// Replace substitution codes in help URL.
+		$search = array( '{keyref}', '{language}', '{langcode}', '{langregion}', '{major}', '{minor}', '{maintenance}' );
+		$replace = array( $ref, $lang->getTag(), $jlang[0], $jlang[1], $jver[0], $jver[1], $jver[2] );
+		$url = str_replace( $search, $replace, $url );
 
 		return $url;
 	}
