@@ -9,6 +9,8 @@
 
 defined('_JEXEC') or die;
 
+jimport('joomla.social.ratings');
+
 // merge the component configuration into the module parameters
 $params->merge(JComponentHelper::getParams('com_social'));
 
@@ -22,7 +24,7 @@ if ($params->get('autodetect')) {
 	$application = JFactory::getApplication('site');
 
 	// assumption is that if a global context is set, it is atomic
-	$context	= (string) $application->get('thread.context', $context);
+	$context	= (string) $application->get('content.context', $context);
 	$parts		= explode('.', $context);
 	$extension	= $parts[0];
 }
@@ -36,13 +38,12 @@ if ($context == 'error' || $extension == 'error') {
 	return false;
 }
 
-// import library dependencies
-require_once dirname(__FILE__).'/helper.php';
-
 $user		= JFactory::getUser();
 $uri		= JURI::getInstance();
 $document	= &JFactory::getDocument();
-$rating		= modSocialRatingHelper::getRating($params);
+
+// Get the thread data.
+$rating = JRatings::getRatingsByContext($params->get('context'));
 
 // render the module
 require(JModuleHelper::getLayoutPath('mod_social_rating', $params->get('layout', 'default')));
