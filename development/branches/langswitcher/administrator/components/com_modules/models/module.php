@@ -211,7 +211,8 @@ class ModulesModelModule extends JModelAdmin
 		if (empty($form)) {
 			return false;
 		}
-
+		$form->setFieldAttribute('position', 'client', $this->getState('item.client_id')==0 ? 'site' : 'administrator');
+		
 		// Check the session for previously entered form data.
 		$data = $app->getUserState('com_modules.edit.module.data', array());
 

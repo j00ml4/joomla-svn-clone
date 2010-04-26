@@ -9,7 +9,7 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
 /**
  * Form field to list the available positions for a module.
@@ -39,7 +39,7 @@ class JFormFieldModulePosition extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
-		$client	= (string) $this->element['client'];
+		$client	= ((string) $this->element['client']) ? ((string) $this->element['client']) : 'site';
 		$clientId = $client == 'administrator' ? 1 : 0;
 		$options = array();
 

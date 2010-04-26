@@ -28,19 +28,19 @@ class BannersModelClients extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
-
-		// Load the filter state.
-		$data = JRequest::getVar('filters');
-		if (empty($data)) {
+		$app = JFactory::getApplication();
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
 			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
 		}
 		else {
-			$app->setUserState($this->context.'.data', $data);
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
-		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
 
-		$this->setState('filter.published', isset($data['select']['state']) ? $data['select']['state'] : '');
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+
+		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_banners');
@@ -66,7 +66,7 @@ class BannersModelClients extends JModelList
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.published');
+		$id	.= ':'.$this->getState('filter.state');
 
 		return parent::getStoreId($id);
 	}
@@ -108,7 +108,7 @@ class BannersModelClients extends JModelList
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = '.(int) $published);
 		} else if ($published === '') {
@@ -148,7 +148,7 @@ class BannersModelClients extends JModelList
 		jimport('joomla.form.form');
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'clients', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = & JForm::getInstance($this->context, 'clients', array('event' => 'onPrepareForm'));
 
 		// Check for an error.
 		if (JError::isError($form)) {

@@ -38,10 +38,31 @@ class JFormFieldState extends JFormFieldList
 	 */
 	protected function getOptions()
 	{
+		$published		= (string) $this->element['published'];
+		$unpublished	= (string) $this->element['unpublished'];
+		$archived		= (string) $this->element['archived'];
+		$trash			= (string) $this->element['trash'];
+		$all			= (string) $this->element['all'];
+		$config = array();
+		if ($published=='no') {
+			$config['published'] = false;
+		}
+		if ($unpublished=='no') {
+			$config['unpublished'] = false;
+		}
+		if ($archived=='no') {
+			$config['archived'] = false;
+		}
+		if ($trash=='no') {
+			$config['trash'] = false;
+		}
+		if ($all=='no') {
+			$config['all'] = false;
+		}
 		// Merge any additional options in the XML definition.
 		$options = array_merge(
 			parent::getOptions(),
-			JHtml::_('jgrid.publishedOptions')
+			JHtml::_('jgrid.publishedOptions', $config)
 		);
 
 		return $options;

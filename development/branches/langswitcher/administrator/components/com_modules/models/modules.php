@@ -76,6 +76,7 @@ class ModulesModelModules extends JModelList
 		$id	.= ':'.$this->getState('filter.position');
 		$id	.= ':'.$this->getState('filter.module');
 		$id	.= ':'.$this->getState('filter.client_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -230,6 +231,7 @@ class ModulesModelModules extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
+
 	/**
 	 * Method to get the row form.
 	 *

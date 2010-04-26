@@ -4,7 +4,7 @@
 	<fields name="filters">
 		<fieldset name="search">
 			<field type="search"
-				name="expr"
+				name="search"
 				label="JSEARCH_FILTER_LABEL"
 				description="JSEARCH_FILTER"
 			/>

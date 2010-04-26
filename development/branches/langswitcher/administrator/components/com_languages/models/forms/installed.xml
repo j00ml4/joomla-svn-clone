@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: manage.xml 16241 2010-04-20 10:51:25Z chdemko $ -->
+<form>
+	<fields name="filters">
+		<fieldset name="select">
+			<field type="list"
+				name="client_id"
+				label="COM_LANGUAGES_FILTER_CLIENT_LABEL"
+				default="0"
+				onchange="this.form.submit();"
+			>
+				<option value="0">JSITE</option>
+				<option value="1">JADMINISTRATOR</option>
+			</field>				
+		</fieldset>
+	</fields>
+</form>
