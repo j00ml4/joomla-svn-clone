@@ -79,7 +79,7 @@ class LanguagesModelInstalled extends JModelList
 			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
 
-		$this->setState('filter.client_id', isset($filters['client_id']) ? $filters['client_id'] : '');
+		$this->setState('filter.client_id', isset($filters['client_id']) ? $filters['client_id'] : '0');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_languages');
