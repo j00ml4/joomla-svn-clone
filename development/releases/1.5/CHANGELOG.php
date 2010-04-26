@@ -36,6 +36,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.5.17 Stable Release [27-April-2010] ------------------
+
 26-Apr-2010 Mark Dexter
  # [#20219] Upgrade to 1.5.16 breaks PHP 4 compatibility
  # [#20239] Update ru-RU installation language
