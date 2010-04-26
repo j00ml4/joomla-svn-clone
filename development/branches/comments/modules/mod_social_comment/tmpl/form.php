@@ -8,6 +8,8 @@
  */
 
 defined('_JEXEC') or die;
+
+$redirect = base64_encode($uri->toString(array('path', 'query', 'fragment')));
 ?>
 
 <form id="respond-form" method="post" action="<?php echo JRoute::_('index.php?option='.$extension.'&task=social.comment'); ?>" class="form-validate">
@@ -40,7 +42,7 @@ defined('_JEXEC') or die;
 		<input type="submit" name="button" value="<?php echo JText::_('MOD_SOCIAL_COMMENT_SUBMIT');?>" id="submitter" tabindex="7" />
 
 		<?php echo $form->getInput('context'); ?>
-		<?php echo $form->getInput('redirect'); ?>
+		<input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</fieldset>
 </form>
