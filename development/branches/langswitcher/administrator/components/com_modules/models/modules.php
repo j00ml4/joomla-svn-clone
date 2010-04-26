@@ -232,4 +232,35 @@ class ModulesModelModules extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'modules', array('event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context.'.data', array());
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
+	}
 }

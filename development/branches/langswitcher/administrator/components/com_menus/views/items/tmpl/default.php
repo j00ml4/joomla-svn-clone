@@ -21,25 +21,7 @@ $listDirn	= $this->state->get('list.direction');
 ?>
 <?php //Set up the filter bar. ?>
 <form action="<?php echo JRoute::_('index.php?option=com_menus&view=items');?>" method="post" name="adminForm">
-	<fieldset id="filter-bar">
-		<div class="filter-search fltlft">
-			<?php foreach($this->form->getFieldSet('search') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-		<div class="filter-select fltrt">
-			<?php foreach($this->form->getFieldSet('select') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-	</fieldset>
-	<div class="clr"> </div>
+	<?php echo $this->loadTemplate('filters');?>
 <?php //Set up the grid heading. ?>
 	<table class="adminlist">
 		<thead>
@@ -139,36 +121,7 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 <?php //Load the batch processing form. ?>
-<?php $options = array(
-	JHtml::_('select.option', 'c', JText::_('COM_MENUS_BATCH_COPY')),
-	JHtml::_('select.option', 'm', JText::_('COM_MENUS_BATCH_MOVE'))
-);
-$published = (int) $this->state->get('filter.published');
-?>
-	<fieldset class="batch">
-		<legend><?php echo JText::_('COM_MENUS_BATCH_OPTIONS');?></legend>
-		<label id="batch-access-lbl" for="batch-access">
-			<?php echo JText::_('COM_MENUS_BATCH_ACCESS_LABEL'); ?>
-		</label>
-		<?php echo JHtml::_('access.assetgrouplist', 'batch[assetgroup_id]', '', 'class="inputbox"', array('title' => '', 'id' => 'batch-access'));?>
-
-		<?php if ($published >= 0) : ?>
-			<label id="batch-choose-action-lbl" for="batch-choose-action">
-				<?php echo JText::_('COM_MENUS_BATCH_MENU_LABEL'); ?>
-			</label>
-			<fieldset id="batch-choose-action" class="combo">
-				<select name="batch[menu_id]" class="inputbox" id="batch-menu-id">
-					<option></option>
-					<?php echo JHtml::_('select.options', JHtml::_('menu.menuitems', array('published' => $published)));?>
-				</select>
-				<?php echo JHTML::_( 'select.radiolist', $options, 'batch[move_copy]', '', 'value', 'text', 'm'); ?>
-			</fieldset>
-		<?php endif; ?>
-		<button type="submit" onclick="submitbutton('item.batch');">
-			<?php echo JText::_('COM_MENUS_BATCH_PROCESS'); ?>
-		</button>
-	</fieldset>
-
+	<?php echo $this->loadTemplate('batch');?>
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
