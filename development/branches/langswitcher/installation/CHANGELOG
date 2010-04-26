@@ -27,9 +27,17 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+26-Apr-2010 Andrew Eddie
+ # Fixed error when saving an editor-xtd plugin.
+ # Fixed [#20210] Change User modal doesn't work.
+ # Fixed [#18567] When trying to create an account from the front end.
+ # Fixed [#19778] processResetRequest and other related email and process problems in frontend com_users.
+ ^ Added chaining support to several JController methods.
+ 
 25-Apr-2010 Jean-Marie Simonet
 $ Added some strings in frontend main ini
 $ Refactored error.php strings
+$ Completed libraries/J ini/keys refactoring
 
 24-Apr-2010 Jean-Marie Simonet
 $ Simplified a string/code to avoid some language issues
