@@ -11,39 +11,38 @@ defined('_JEXEC') or die;
 
 jimport('joomla.social.ratings');
 
-// merge the component configuration into the module parameters
+// Merge the component configuration into the module parameters.
 $params->merge(JComponentHelper::getParams('com_social'));
 
-// Initialise variables.
+// Initialize variables.
+$document	= JFactory::getDocument();
 $context	= 'error';
 $extension	= 'error';
+$uri		= JURI::getInstance();
+$user		= JFactory::getUser();
 
-// if the autodetect context parameter is set, let's use it
+// If the autodetect context parameter is set, let's use it.
 if ($params->get('autodetect')) {
-	// get the application object to retrieve the context
+
+	// Get the application object to retrieve the context
 	$application = JFactory::getApplication('site');
 
-	// assumption is that if a global context is set, it is atomic
+	// Assumption is that if a global content context is set, it is atomic.
 	$context	= (string) $application->get('content.context', $context);
-	$parts		= explode('.', $context);
-	$extension	= $parts[0];
+	$extension	= substr($context, 0, strcspn($context, '.'));
 }
 
-// if module parameters set the context, they always win
+// If module parameters set the context, they always win.
 $context	= $params->def('context',	$context);
 $extension	= $params->def('extension',	$extension);
 
-// if we do not have a context set, then lets exit gracefully
+// If we do not have a context set, then lets exit gracefully.
 if ($context == 'error' || $extension == 'error') {
 	return false;
 }
 
-$user		= JFactory::getUser();
-$uri		= JURI::getInstance();
-$document	= &JFactory::getDocument();
-
-// Get the thread data.
+// Get the rating data for the content item.
 $rating = JRatings::getRatingsByContext($params->get('context'));
 
-// render the module
+// Render the module using the specified layout.
 require(JModuleHelper::getLayoutPath('mod_social_rating', $params->get('layout', 'default')));

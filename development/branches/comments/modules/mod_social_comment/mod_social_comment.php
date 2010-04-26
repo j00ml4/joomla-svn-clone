@@ -9,54 +9,54 @@
 
 defined('_JEXEC') or die;
 
-// merge the component configuration into the module parameters
+jimport('joomla.html.pagination');
+jimport('joomla.social.comments');
+
+// Merge the component configuration into the module parameters.
 $params->merge(JComponentHelper::getParams('com_social'));
 
-// Initialiase variables.
-$user		= JFactory::getUser();
-$uri		= JURI::getInstance();
+// Initialize variables.
 $document	= JFactory::getDocument();
 $context	= 'error';
 $extension	= 'error';
+$uri		= JURI::getInstance();
+$user		= JFactory::getUser();
 
-// if the autodetect context parameter is set, let's use it
+// If the autodetect context parameter is set, let's use it.
 if ($params->get('autodetect')) {
-	// get the application object to retrieve the context
-	$application = &JFactory::getApplication('site');
 
-	// assumption is that if a global context is set, it is atomic
-	$context	= (string) $application->get('thread.context', $context);
-	$parts		= explode('.', $context);
-	$extension	= $parts[0];
+	// Get the application object to retrieve the context
+	$application = JFactory::getApplication('site');
+
+	// Assumption is that if a global content context is set, it is atomic.
+	$context	= (string) $application->get('content.context', $context);
+	$extension	= substr($context, 0, strcspn($context, '.'));
 
 	// We need to get some values if they are not present.
 	$params->def('route', $uri->toString(array('scheme', 'user', 'pass', 'host', 'port', 'path', 'query')));
 	$params->def('title', $document->getTitle());
 }
 
-// If module parameters set the context, they always win
+// If module parameters set the context, they always win.
 $context	= $params->def('context',	$context);
 $extension	= $params->def('extension',	$extension);
 
-// if we do not have a context set, then lets exit gracefully
+// If we do not have a context set, then lets exit gracefully.
 if ($context == 'error' || $extension == 'error') {
 	return false;
 }
 
-// import library dependencies
-require_once dirname(__FILE__).'/helper.php';
+// Get the list of published comments for the given content context and list ordering.
+$comments = JComments::getCommentsByContext($params->get('context'), 1, (strtolower($params->get('list_order')) == 'asc'));
 
-// Get the thread.
-//$thread = modSocialCommentHelper::getThread($params);
+// Get the total number of published comments for the given content context.
+$total = (int) JComments::getTotalByContext($params->get('context'), 1);
 
-// Get the comments.
-$comments = modSocialCommentHelper::getComments($params);
+// Get a pagination object for the comments thread.
+$pagination = new JPagination($total, JRequest::getInt('limitstart'), $params->get('pagination', 10));
 
-// get the comment thread pagination object
-$pagination = modSocialCommentHelper::getPagination($params);
-
-jimport('joomla.social.comments');
+// Get a form object for the comment submission form.
 $form = JComments::getForm($params);
 
-// render the module
+// Render the module using the specified layout.
 require(JModuleHelper::getLayoutPath('mod_social_comment', $params->get('layout', 'default')));
