@@ -95,11 +95,3 @@ Test the unicity of the home page for a language
 2. Change to be be a default home page for a particular language which has already a default home page
 3. Save and Close. Verify that the previous home page for this language has changed
 
-TODO
--Add Language Filters in Admin
--Consolidate the default behavior
-
-
-
-
-

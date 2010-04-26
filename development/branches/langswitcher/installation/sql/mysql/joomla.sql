@@ -494,9 +494,10 @@ INSERT INTO `#__extensions` VALUES
 (103, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'mod_articles_category', 'module', 'mod_articles_category', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'mod_articles_categories', 'module', 'mod_articles_categories', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(106, 'mod_languages', 'module', 'mod_languages', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(107, 'plg_content_languagefilter', 'plugin', 'languagefilter', 'content', 0, 0, 1, 0, '', '{"manage_language":"always"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(108, 'plg_system_languagesef', 'plugin', 'languagesef', 'system', 0, 0, 1, 0, '', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(106, 'beez_20', 'template', 'beez_20', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(107, 'mod_languages', 'module', 'mod_languages', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(108, 'plg_content_languagefilter', 'plugin', 'languagefilter', 'content', 0, 0, 1, 0, '', '{"manage_language":"always"}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(109, 'plg_system_languagesef', 'plugin', 'languagesef', 'system', 0, 0, 1, 0, '', '{"default_suffix":"1"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
@@ -989,6 +990,7 @@ CREATE TABLE IF NOT EXISTS `#__template_styles` (
 INSERT INTO `#__template_styles` VALUES (1, 'rhuk_milkyway', '0', '1', 'Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
 INSERT INTO `#__template_styles` VALUES (2, 'bluestork', '1', '1', 'Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
 INSERT INTO `#__template_styles` VALUES (3, 'atomic', '0', '0', 'Default', '{}');
+INSERT INTO `#__template_styles` VALUES (4, 'beez_20', '0', '0', 'Default', '{"wrapperSmall":"55","wrapperLarge":"76","logo":"-1","navposition":"left","templatecolor":"personal","html5":"0"}');
 
 # -------------------------------------------------------
 #
