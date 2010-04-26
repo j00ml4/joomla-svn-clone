@@ -41,6 +41,7 @@ $ -> Language fix or change
  # [#20239] Update ru-RU installation language
  # [#20238] Updating help sites list
  # [#20220] en-AU installation ini folder
+ + [#20241] Fixed up system tests
 
 25-Apr-2010 Ian MacLennan
  # [#20221] Can't Login When Session Handler is None
