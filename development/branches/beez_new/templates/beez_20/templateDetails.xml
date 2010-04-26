@@ -61,7 +61,7 @@
 					hide_default="1" default=""
 					label="TPL_BEEZ2_FIELD_LOGO_LABEL" description="TPL_BEEZ2_FIELD_LOGO_DESC" />
 
-				<field name="navposition" type="list" default="left"
+				<field name="navposition" type="list" default="center"
 					label="TPL_BEEZ2_FIELD_NAVPOSITION_LABEL"
 					description="TPL_BEEZ2_FIELD_NAVPOSITION_DESC"
 				>
@@ -69,7 +69,7 @@
 					<option value="left">TPL_BEEZ2_OPTION_BEFORE_CONTENT</option>
 				</field>
 
-				<field name="templatecolor" type="list" default="personal"
+				<field name="templatecolor" type="list" default="nature"
 					label="TPL_BEEZ2_FIELD_TEMPLATECOLOR_LABEL"
 					description="TPL_BEEZ2_FIELD_TEMPLATECOLOR_DESC"
 				>
