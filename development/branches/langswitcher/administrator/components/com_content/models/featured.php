@@ -69,7 +69,7 @@ class ContentModelFeatured extends ContentModelArticles
 		}
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = ' . (int) $published);
 		} else if ($published === '') {

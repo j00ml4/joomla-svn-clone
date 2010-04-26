@@ -29,6 +29,7 @@
 				name="state"
 				hidden="true"
 				onchange="this.form.submit();"
+				archived="no"
 			>
 				<option value="">JOPTION_SELECT_PUBLISHED</option>
 			</field>

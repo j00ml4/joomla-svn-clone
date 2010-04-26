@@ -19,26 +19,7 @@ $listDirn	= $this->state->get('list.direction');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_languages&view=languages'); ?>" method="post" name="adminForm" id="adminForm">
-	<fieldset class="filter">
-		<div class="left">
-			<label for="filter_search">
-				<?php echo JText::_('JSearch_Filter'); ?>
-			</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" size="60" title="<?php echo JText::_('COM_LANGUAGES_SEARCH_IN_TITLE'); ?>" />
-
-			<button type="submit">
-				<?php echo JText::_('JSearch_Filter_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();">
-				<?php echo JText::_('JSearch_Filter_Clear'); ?></button>
-		</div>
-		<div class="right">
-			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('languages.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
-			</select>
-		</div>
-	</fieldset>
-
+	<?php echo $this->loadTemplate('filters'); ?>
 	<table class="adminlist">
 		<thead>
 			<tr>

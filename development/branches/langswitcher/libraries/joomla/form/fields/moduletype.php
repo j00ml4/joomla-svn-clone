@@ -9,7 +9,7 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
 
 /**
  * Form field to list the available type for a module.
