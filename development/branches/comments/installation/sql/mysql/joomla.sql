@@ -398,7 +398,6 @@ INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`
 INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (25, 'Joomla! Web Application Framework', 'library', 'joomla', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (26, 'PHPMailer', 'library', 'phpmailer', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(27, 'XML RPC for PHP', 'library', 'phpxmlrpc', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (28, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # Modules
@@ -494,13 +493,14 @@ INSERT INTO `#__extensions` VALUES
 (103, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (104, 'mod_articles_category', 'module', 'mod_articles_category', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (105, 'mod_articles_categories', 'module', 'mod_articles_categories', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(106, 'mod_social_comments_summary', 'module', 'mod_social_comments_summary', '', 1, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(107, 'mod_social_comment', 'module', 'mod_social_comment', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(108, 'mod_social_highest_rated', 'module', 'mod_social_highest_rated', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(109, 'mod_social_latest_comments', 'module', 'mod_social_latest_comments', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(110, 'mod_social_most_commented', 'module', 'mod_social_most_commented', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(111, 'mod_social_rating', 'module', 'mod_social_rating', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(112, 'mod_social_share', 'module', 'mod_social_share', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(106, 'beez_20', 'template', 'beez_20', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(107, 'mod_social_comments_summary', 'module', 'mod_social_comments_summary', '', 1, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(108, 'mod_social_comment', 'module', 'mod_social_comment', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(109, 'mod_social_highest_rated', 'module', 'mod_social_highest_rated', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(110, 'mod_social_latest_comments', 'module', 'mod_social_latest_comments', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(111, 'mod_social_most_commented', 'module', 'mod_social_most_commented', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(112, 'mod_social_rating', 'module', 'mod_social_rating', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(113, 'mod_social_share', 'module', 'mod_social_share', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
@@ -999,6 +999,7 @@ CREATE TABLE IF NOT EXISTS `#__template_styles` (
 INSERT INTO `#__template_styles` VALUES (1, 'rhuk_milkyway', '0', '1', 'Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
 INSERT INTO `#__template_styles` VALUES (2, 'bluestork', '1', '1', 'Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
 INSERT INTO `#__template_styles` VALUES (3, 'atomic', '0', '0', 'Default', '{}');
+INSERT INTO `#__template_styles` VALUES (4, 'beez_20', '0', '0', 'Default', '{"wrapperSmall":"55","wrapperLarge":"76","logo":"-1","navposition":"left","templatecolor":"personal","html5":"0"}');
 
 # -------------------------------------------------------
 #

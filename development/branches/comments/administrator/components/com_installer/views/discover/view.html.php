@@ -1,12 +1,16 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
+
+include_once dirname(__FILE__).'/../default/view.php';
 
 /**
  * Extension Manager Manage View
@@ -15,30 +19,27 @@ defined('_JEXEC') or die;
  * @subpackage	com_installer
  * @since		1.6
  */
-
-include_once dirname(__FILE__).DS.'..'.DS.'default'.DS.'view.php';
-
 class InstallerViewDiscover extends InstallerViewDefault
 {
+	/**
+	 * @since	1.6
+	 */
 	function display($tpl=null)
 	{
-
 		// Get data from the model
-		$state		= &$this->get('State');
-		$items		= &$this->get('Items');
-		$pagination	= &$this->get('Pagination');
-
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
 
 		parent::display($tpl);
 	}
+
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$canDo	= InstallerHelper::getActions();
 		/*
@@ -48,6 +49,6 @@ class InstallerViewDiscover extends InstallerViewDefault
 		JToolBarHelper::custom('discover.refresh', 'refresh', 'refresh','COM_INSTALLER_TOOLBAR_DISCOVER',false,false);
 		JToolBarHelper::custom('discover.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false,false);
 		JToolBarHelper::divider();
-		parent::_setToolbar();
+		parent::addToolbar();
 	}
 }

@@ -15,7 +15,7 @@ jimport('joomla.application.component.modeladmin');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_banners
- * @since		1.5
+ * @since		1.6
  */
 class BannersModelClient extends JModelAdmin
 {
@@ -62,6 +62,20 @@ class BannersModelClient extends JModelAdmin
 	}
 
 	/**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Client', $prefix = 'BannersTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
 	 * Method to get the record form.
 	 *
 	 * @return	mixed	JForm object on success, false on failure.
@@ -73,10 +87,8 @@ class BannersModelClient extends JModelAdmin
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_banners.client', 'client', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_banners.client', 'client', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -86,29 +98,21 @@ class BannersModelClient extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * Returns a reference to the a Table object, always creating it.
+	 * Prepare and sanitise the table data prior to saving.
 	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	*/
-	public function getTable($type = 'Client', $prefix = 'BannersTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Prepare and sanitise the table prior to saving.
+	 * @param	JTable	A JTable object.
+	 * @since	1.6
 	 */
 	protected function prepareTable(&$table)
 	{
-		$table->name		= htmlspecialchars_decode($table->name, ENT_QUOTES);
+		$table->name = htmlspecialchars_decode($table->name, ENT_QUOTES);
 	}
 }

@@ -28,6 +28,18 @@ abstract class JModelAdmin extends JModelForm
 	protected $text_prefix = null;
 
 	/**
+	 * @var		string	The event to trigger after saving the data.
+	 * @since	1.6
+	 */
+	protected $event_after_save = null;
+
+	/**
+	 * @var		string	The event to trigger after before the data.
+	 * @since	1.6
+	 */
+	protected $event_before_save = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -38,8 +50,22 @@ abstract class JModelAdmin extends JModelForm
 	{
 		parent::__construct($config);
 
+		if (isset($config['event_after_save'])) {
+			$this->eventAfterSave = $config['event_after_save'];
+		} else  if (empty($this->event_after_save)) {
+			$this->event_after_save = 'onAfterContentSave';
+		}
+
+		if (isset($config['event_before_save'])) {
+			$this->eventAfterSave = $config['event_before_save'];
+		} else  if (empty($this->event_before_save)) {
+			$this->event_before_save = 'onBeforeContentSave';
+		}
+
 		// Guess the JText message prefix. Defaults to the option.
-		if (empty($this->text_prefix)) {
+		if (isset($config['text_prefix'])) {
+			$this->text_prefix = strtoupper($config['text_prefix']);
+		} else  if (empty($this->text_prefix)) {
 			$this->text_prefix = strtoupper($this->option);
 		}
 	}
@@ -117,8 +143,7 @@ abstract class JModelAdmin extends JModelForm
 		$table = $this->getTable();
 
 		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk)
-		{
+		foreach ($pks as $i => $pk) {
 			if ($table->load($pk)) {
 				if ($this->canDelete($table)) {
 					if (!$table->delete($pk)) {
@@ -128,7 +153,7 @@ abstract class JModelAdmin extends JModelForm
 				} else {
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
 				}
 			} else {
 				$this->setError($table->getError());
@@ -163,12 +188,15 @@ abstract class JModelAdmin extends JModelForm
 			}
 		}
 
-		if(property_exists($table, 'params')) {
-			$table->params = json_decode($table->params, true);
-		}
-
 		// Convert to the JObject before adding other data.
 		$item = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+
+		if (property_exists($item, 'params')) {
+			$registry = new JRegistry;
+			$registry->loadJSON($item->params);
+			$item->params = $registry->toArray();
+		}
+
 		return $item;
 	}
 
@@ -236,7 +264,7 @@ abstract class JModelAdmin extends JModelForm
 				if (!$this->canEditState($table)) {
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
 				}
 			}
 		}
@@ -334,7 +362,7 @@ abstract class JModelAdmin extends JModelForm
 		}
 
 		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		$result = $dispatcher->trigger($this->event_before_save, array(&$table, $isNew));
 		if (in_array(false, $result, true)) {
 			$this->setError($table->getError());
 			return false;
@@ -351,9 +379,13 @@ abstract class JModelAdmin extends JModelForm
 		$cache->clean();
 
 		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		$dispatcher->trigger($this->event_after_save, array(&$table, $isNew));
 
-		$this->setState($this->getName().'.id', $table->id);
+		$pkName = $table->getKeyName();
+		if (isset($table->$pkName)) {
+			$this->setState($this->getName().'.id', $table->$pkName);
+		}
+		$this->setState($this->getName().'.new', $isNew);
 
 		return true;
 	}
@@ -384,7 +416,7 @@ abstract class JModelAdmin extends JModelForm
 			if (!$this->canEditState($table)) {
 				// Prune items that you can't change.
 				unset($pks[$i]);
-				JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
 			} else if ($table->ordering != $order[$i]) {
 				$table->ordering = $order[$i];
 				if (!$table->store()) {

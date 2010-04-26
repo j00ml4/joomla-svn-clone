@@ -13,10 +13,7 @@ define('JPATH_ISWIN', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'));
 define('JPATH_ISMAC', (strtoupper(substr(PHP_OS, 0, 3)) === 'MAC'));
 
 if (!defined('DS')) {
-	/**
-	 * string Shortcut for the DIRECTORY_SEPARATOR define
-	 * @deprecated 2010-04-05
-	 */
+	/** string Shortcut for the DIRECTORY_SEPARATOR define */
 	define('DS', DIRECTORY_SEPARATOR);
 }
 
@@ -41,7 +38,7 @@ class JPath
 	 * @return	boolean	True if path can have mode changed
 	 * @since	1.5
 	 */
-	function canChmod($path)
+	public static function canChmod($path)
 	{
 		$perms = fileperms($path);
 		if ($perms !== false) {
@@ -62,7 +59,7 @@ class JPath
 	 * @return	boolean	True if successful [one fail means the whole operation failed]
 	 * @since	1.5
 	 */
-	function setPermissions($path, $filemode = '0644', $foldermode = '0755')
+	public static function setPermissions($path, $filemode = '0644', $foldermode = '0755')
 	{
 		// Initialise return value
 		$ret = true;
@@ -107,7 +104,7 @@ class JPath
 	 * @return	string	Filesystem permissions
 	 * @since	1.5
 	 */
-	public function getPermissions($path)
+	public static function getPermissions($path)
 	{
 		$path = JPath::clean($path);
 		$mode = @ decoct(@ fileperms($path) & 0777);
@@ -132,10 +129,11 @@ class JPath
 	 * Checks for snooping outside of the file system root
 	 *
 	 * @param	string	A file system path to check
+	 * @param	string	Directory separator (optional)
 	 * @return	string	A cleaned version of the path
 	 * @since	1.5
 	 */
-	public static function check($path)
+	public static function check($path, $ds = DIRECTORY_SEPARATOR)
 	{
 		if (strpos($path, '..') !== false) {
 			JError::raiseError(20, 'JPath::check Use of relative paths not permitted'); // don't translate
@@ -159,7 +157,7 @@ class JPath
 	 * @return	string	The cleaned path
 	 * @since	1.5
 	 */
-	public static function clean($path, $ds = '/')
+	public static function clean($path, $ds = DIRECTORY_SEPARATOR)
 	{
 		$path = trim($path);
 
@@ -187,7 +185,7 @@ class JPath
 
 		$tmp = md5(JUserHelper::genRandomPassword(16));
 		$ssp = ini_get('session.save_path');
-		$jtp = JPATH_SITE.'/tmp';
+		$jtp = JPATH_SITE.DS.'tmp';
 
 		// Try to find a writable directory
 		$dir = is_writable('/tmp') ? '/tmp' : false;
@@ -195,7 +193,7 @@ class JPath
 		$dir = (!$dir && is_writable($jtp)) ? $jtp : false;
 
 		if ($dir) {
-			$test = $dir.'/'.$tmp;
+			$test = $dir.DS.$tmp;
 
 			// Create the test file
 			$blank = '';

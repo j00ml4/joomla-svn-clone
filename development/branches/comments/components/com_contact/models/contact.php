@@ -28,7 +28,9 @@ class ContactModelContact extends JModelItem
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -68,7 +70,14 @@ class ContactModelContact extends JModelItem
 
 				$query->select($this->getState('item.select', 'a.*'));
 				$query->from('#__contact_details AS a');
-
+				
+				// Filter by start and end dates.
+				$nullDate = $db->Quote($db->getNullDate());
+				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+				
+				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+				
 				// Join on category table.
 				$query->select('c.title AS category_title, c.alias AS category_alias, c.access AS category_access');
 				$query->join('LEFT', '#__categories AS c on c.id = a.catid');

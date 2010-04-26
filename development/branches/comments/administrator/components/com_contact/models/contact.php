@@ -20,6 +20,18 @@ jimport('joomla.application.component.modeladmin');
 class ContactModelContact extends JModelAdmin
 {
 	/**
+	 * @var		string	The event to trigger after saving the data.
+	 * @since	1.6
+	 */
+	protected $event_after_save = 'onAfterContactSave';
+
+	/**
+	 * @var		string	The event to trigger after before the data.
+	 * @since	1.6
+	 */
+	protected $event_before_save = 'onBeforeContactSave';
+
+	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
@@ -33,7 +45,7 @@ class ContactModelContact extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.delete', 'com_contact.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.delete', 'com_contact');
+			return parent::canDelete($record);
 		}
 	}
 
@@ -51,8 +63,22 @@ class ContactModelContact extends JModelAdmin
 		if ($record->catid) {
 			return $user->authorise('core.edit.state', 'com_contact.category.'.(int) $record->catid);
 		} else {
-			return $user->authorise('core.edit.state', 'com_contact');
+			return parent::canEditState($record);
 		}
+	}
+
+	/**
+	 * Returns a Table object, always creating it
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
+	 */
+	public function getTable($type = 'Contact', $prefix = 'ContactTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -69,10 +95,8 @@ class ContactModelContact extends JModelAdmin
 		JForm::addFieldPath('JPATH_ADMINISTRATOR/components/com_users/models/fields');
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_contact.contact', 'contact', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_contact.contact', 'contact', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -82,37 +106,30 @@ class ContactModelContact extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
+	 * Method to get a single record.
 	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
-	 * @since	1.6
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
 	 */
-	protected function getReorderConditions($record = null)
+	public function getItem($pk = null)
 	{
-		$condition = array(
-			'catid = '. (int) $record->catid
-		);
-		return $condition;
-	}
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->metadata);
+			$item->metadata = $registry->toArray();
+		}
 
-	/**
-	 * Returns a Table object, always creating it
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	 */
-	public function getTable($type = 'Contact', $prefix = 'ContactTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
+		return $item;
 	}
 
 	/**
@@ -141,16 +158,14 @@ class ContactModelContact extends JModelAdmin
 
 		$done = false;
 
-		if (!empty($commands['assetgroup_id']))
-		{
+		if (!empty($commands['assetgroup_id'])) {
 			if (!$this->_batchAccess($commands['assetgroup_id'], $pks)) {
 				return false;
 			}
 			$done = true;
 		}
 
-		if (!empty($commands['menu_id']))
-		{
+		if (!empty($commands['menu_id'])) {
 			$cmd = JArrayHelper::getValue($commands, 'move_copy', 'c');
 
 			if ($cmd == 'c' && !$this->_batchCopy($commands['menu_id'], $pks)) {
@@ -162,8 +177,7 @@ class ContactModelContact extends JModelAdmin
 			$done = true;
 		}
 
-		if (!$done)
-		{
+		if (!$done) {
 			$this->setError('COM_MENUS_ERROR_INSUFFICIENT_BATCH_INFORMATION');
 			return false;
 		}
@@ -181,19 +195,31 @@ class ContactModelContact extends JModelAdmin
 	 */
 	protected function _batchAccess($value, $pks)
 	{
-		$table = &$this->getTable();
-		foreach ($pks as $pk)
-		{
+		$table = $this->getTable();
+		foreach ($pks as $pk) {
 			$table->reset();
 			$table->load($pk);
 			$table->access = (int) $value;
-			if (!$table->store())
-			{
+			if (!$table->store()) {
 				$this->setError($table->getError());
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }

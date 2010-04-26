@@ -31,7 +31,9 @@ class ContentModelForm extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -74,10 +76,8 @@ class ContentModelForm extends JModelForm
 	{
 		$options += array('control' => 'jform');
 
-		try {
-			$form = parent::getForm($name, $xml, $options);
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm($name, $xml, $options);
+		if (empty($form)) {
 			return false;
 		}
 
