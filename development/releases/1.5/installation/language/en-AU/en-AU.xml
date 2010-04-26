@@ -1,7 +1,6 @@
-  <?xml version="1.0" encoding="utf-8" ?> 
-- <!--  $Id: en-AU.xml 10511 2008-07-06 19:21:55Z willebil $ 
-  --> 
-- <metafile version="1.5" client="installation">
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--  $Id: en-AU.xml 10511 2008-07-06 19:21:55Z willebil $   --> 
+ <metafile version="1.5" client="installation">
   <name>English(Australia)</name> 
   <version>1.5.9</version> 
   <creationDate>April 2010</creationDate> 
@@ -11,7 +10,7 @@
   <copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright> 
   <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license> 
   <description>English language file for web installer</description> 
-- <metadata>
+  <metadata>
   <name>English (Australia)</name> 
   <tag>en-AU</tag> 
   <rtl>0</rtl> 
