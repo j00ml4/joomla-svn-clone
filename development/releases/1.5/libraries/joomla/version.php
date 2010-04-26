@@ -26,13 +26,13 @@ class JVersion
 	/** @var string Development Status */
 	var $DEV_STATUS = 'Stable';
 	/** @var int Sub Release Level */
-	var $DEV_LEVEL 	= '16';
+	var $DEV_LEVEL 	= '17';
 	/** @var int build Number */
 	var $BUILD	= '';
 	/** @var string Codename */
-	var $CODENAME 	= 'Wojmamni Ama Busani';
+	var $CODENAME 	= 'Wojmamni ama woobusani';
 	/** @var string Date */
-	var $RELDATE 	= '24-April-2010';
+	var $RELDATE 	= '27-April-2010';
 	/** @var string Time */
 	var $RELTIME 	= '04:00';
 	/** @var string Timezone */
