@@ -23,7 +23,7 @@ jimport('joomla.social.ratings');
 class JControllerSocial extends JController
 {
 	/**
-	 * @var	string	The URL option for the component.
+	 * @var		string	The URL option for the component.
 	 * @since	1.6
 	 */
 	protected $option;
@@ -59,13 +59,14 @@ class JControllerSocial extends JController
 		// This is important if robots accidentally index a URL an AJAX url to make a comment.
 		$token	= JUtility::getToken();
 		if (!JRequest::getVar($token, '', 'request', 'alnum')) {
-//			JError::raiseError(500, JText::_('JInvalid_Token'));
-//			return false;
+			JError::raiseError(500, JText::_('JInvalid_Token'));
+			return false;
 		}
 
 		// Initialise variables.
-		$user	= JFactory::getUser();
-		$form	= JComments::getForm();
+		$redirect	= base64_decode(JRequest::getVar('redirect', '', 'request', 'base64'));
+		$user		= JFactory::getUser();
+		$form		= JComments::getForm();
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
@@ -85,107 +86,43 @@ class JControllerSocial extends JController
 		$data = JComments::validate($form, $data);
 
 		// Access check.
-		if (!$this->canComment($data['context'])) {
-			die('cannot comment');
-			// TODO: handle error
+		if ($this->canComment($data['context'])) {
+			try {
+				$id = JComments::save($data);
+
+				if ($comment = JComments::getCommentById($id)) {
+
+					// Set the redirect message.
+					if ($comment->state == 0) {
+						// Comment flagged for moderation.
+						$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_COMMENT_MODERATED'));
+
+					} else if ($comment->state == 1) {
+						$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_COMMENT_APPROVED'));
+
+						// Flush the cache for this context.
+						$cache = JFactory::getCache('com_'.$thread->context);
+						$cache->clean();
+
+					} else if ($comment->state == 2) {
+						// Comment flagged as SPAM.
+						$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_COMMENT_SPAM'), 'warning');
+					}
+				} else {
+					$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_COMMENT_LOST'), 'warning');
+				}
+
+			} catch (JException $e) {
+				JError::raiseError(500, $e->getMessage());
+				return false;
+			}
 		}
 
-		try {
-			JComments::save($data);
+		if ($redirect) {
+			$this->setRedirect($redirect);
+		} else {
+			$this->setRedirect(JRoute::_('index.php', true));
 		}
-		catch (JException $e) {
-			JError::raiseError(500, $e->getMessage());
-			return false;
-		}
-
-		// Get the URL to redirect the request to.
-		$redirect = base64_decode($data['redirect']);
-die;
-
-		$config	= JComponentHelper::getParams('com_social');
-		$date	= JFactory::getDate();
-		$uId	=
-		$tId	= JRequest::getInt('thread_id');
-
-		// Load the language file for the comment module.
-		$lang = JFactory::getLanguage();
-		$lang->load('mod_social_comment');
-
-		// Get the thread and comment models.
-		$tModel	= $this->getModel('Thread', 'SocialModel');
-		$cModel	= $this->getModel('Comment', 'SocialModel');
-
-		// Check if the user is authorized to add a comment.
-		if (!$cModel->canComment()) {
-			$this->setRedirect($redirect, $cModel->getError(), 'error');
-			return false;
-		}
-
-		// Load the thread data.
-		$thread	= $tModel->getThread($tId);
-
-		// Check the thread data.
-		if ($thread === false) {
-			$this->setRedirect($redirect, JText::_('SOCIAL_Comment_Invalid_Thread'), 'error');
-			return false;
-		}
-
-		// Prepare the comment data.
-		$comment					= array();
-		$comment['thread_id']		= $tId;
-		$comment['user_id']			= $uId;
-		$comment['name']			= $uId ? $user->get('name') : JRequest::getString('name', '', 'post');
-		$comment['url']				= JRequest::getString('url', '', 'post');
-		$comment['subject']			= JRequest::getString('subject', '', 'post');
-		$comment['email']			= $uId ? $user->get('email') : JRequest::getString('email', '', 'post');
-		$comment['body']			= JRequest::getVar('body', '', 'post', 'string', JREQUEST_ALLOWHTML);
-		$comment['created_date']	= $date->toMySQL();
-		$comment['address']			= $_SERVER['REMOTE_ADDR'];
-
-		// If html support is not enabled, disable all tags.
-		if (!$config->get('enable_html', 0)) {
-			$comment['body'] = htmlspecialchars($comment['body']);
-		}
-
-		// Attempt to add the comment.
-		$return = $cModel->add($comment);
-
-		// Check if the comment was added successfully.
-		if (JError::isError($return)) {
-			JError::raiseError(500, $return->getMessage());
-			return false;
-		}
-
-		// Load the comment from the database.
-		$comment = $cModel->getItem($return);
-
-		// Notify of a new comment being posted if enabled
-		$notification = $config->get('notify_comments');
-
-		if (($notification == 1 and $uId == 0) or $notification == 2) {
-			// send the comment notification
-			$cModel->sendCommentNotification($comment);
-		}
-
-		// Set the redirect message.
-		if ($item->published == 0) {
-			// Comment flagged for moderation.
-			$message = JText::_('SOCIAL_Display_Upon_Approval');
-		}
-		elseif ($item->published == 1) {
-			// Comment published.
-			$message = JText::_('SOCIAL_Display_Approved');
-
-			// Flush the cache for this context.
-			$cache = JFactory::getCache('com_'.$thread->context);
-			$cache->clean();
-		}
-		elseif ($item->published == 2) {
-			// Comment flagged as SPAM.
-			$message = JText::_('SOCIAL_Flagged_As_Spam');
-		}
-
-		$this->setRedirect($redirect, $message);
 		return true;
 	}
 
@@ -214,20 +151,24 @@ die;
 		$userId		= (int) $user->get('id');
 
 		// Access check.
-		if (!$this->canRate($context)) {
-			die('cannot rate');
-			// TODO: handle error
+		if ($this->canRate($context)) {
+			try {
+				JRatings::save($userId, $context, $score);
+				$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_RATING_SUBMITTED'));
+			}
+			catch (JException $e) {
+				JError::raiseError(500, $e->getMessage());
+				return false;
+			}
+		} else {
+			$this->setMessage(JText::_('JLIB_APPLICATION_SOCIAL_RATING_DISALLOWED'), 'warning');
 		}
 
-		try {
-			JRatings::save($userId, $context, $score);
+		if ($redirect) {
+			$this->setRedirect($redirect);
+		} else {
+			$this->setRedirect(JRoute::_('index.php', true));
 		}
-		catch (JException $e) {
-			JError::raiseError(500, $e->getMessage());
-			return false;
-		}
-
-		$this->setRedirect($redirect, JText::_('SOCIAL_Rating_Submitted'));
 		return true;
 	}
 
