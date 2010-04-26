@@ -26,7 +26,7 @@
 					description="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_DESC"
 					label="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_LABEL"
 				>
-					<option value="no">PLG_CONTENT_LANGUAGEFILTER_NO</option>
+<!--					<option value="no">PLG_CONTENT_LANGUAGEFILTER_NO</option>-->
 					<option value="inherited">PLG_CONTENT_LANGUAGEFILTER_INHERITED</option>
 					<option value="always">PLG_CONTENT_LANGUAGEFILTER_ALWAYS</option>
 				</field>
