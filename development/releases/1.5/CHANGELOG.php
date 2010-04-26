@@ -42,6 +42,7 @@ $ -> Language fix or change
  # [#20238] Updating help sites list
  # [#20220] en-AU installation ini folder
  + [#20241] Fixed up system tests
+ # [#20242] Language fix for 20219 PHP 4 issue
 
 25-Apr-2010 Ian MacLennan
  # [#20221] Can't Login When Session Handler is None

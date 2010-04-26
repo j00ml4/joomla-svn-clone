@@ -273,9 +273,11 @@ class JPluginHelper
 						}
 
 						$uri = JURI::getInstance();
-						$mail->setSubject(JText::sprintf('Problem with Joomla site at %s'), $uri->getHost());
+						$mail->setSubject(JText::sprintf('MAIL_MSG_ADMIN_ERROR_SUBJECT'), $uri->getHost());
 
-						$body = JText::sprintf('When trying to access %s, and error was detected with %s plugin %s and it has been disabled. Technical error description follows:', JURI::current(), $currentPlugin->type, $currentPlugin->name);
+						$body = JText::sprintf(
+							'MAIL_MSG_ADMIN_ERROR', 
+							JURI::current(), $currentPlugin->type, $currentPlugin->name);
 						$body .= "\n";
 						$body .= "\n" . $error['message'];
 						$body .= "\n" . $error['file'] . ' : ' . $error['line'];
