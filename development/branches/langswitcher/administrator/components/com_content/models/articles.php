@@ -177,6 +177,7 @@ class ContentModelArticles extends JModelList
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
+
 	/**
 	 * Method to get the row form.
 	 *

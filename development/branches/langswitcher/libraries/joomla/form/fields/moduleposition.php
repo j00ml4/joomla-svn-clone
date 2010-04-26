@@ -39,12 +39,12 @@ class JFormFieldModulePosition extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
+		$client	= (string) $this->element['client'];
+		$clientId = $client == 'administrator' ? 1 : 0;
 		$options = array();
 
 		$db			= JFactory::getDbo();
 		$query		= $db->getQuery(true);
-		$clientId	= (int) $this->form->getValue('client_id');
-		$client		= JApplicationHelper::getClientInfo($clientId);
 
 		jimport('joomla.filesystem.folder');
 
@@ -74,7 +74,7 @@ class JFormFieldModulePosition extends JFormFieldList
 
 		// Load the positions from the installed templates.
 		foreach ($templates as $template) {
-			$path = JPath::clean($client->path.'/templates/'.$template.'/templateDetails.xml');
+			$path = JPath::clean(constant('JPATH_'.strtoupper($client)).'/templates/'.$template.'/templateDetails.xml');
 
 			if (file_exists($path)) {
 				$xml = simplexml_load_file($path);
@@ -87,8 +87,6 @@ class JFormFieldModulePosition extends JFormFieldList
 		}
 		$positions = array_unique($positions);
 		sort($positions);
-
-		$options[] = JHtml::_('select.option', '', JText::_('COM_MODULES_OPTION_SELECT_POSITION'));
 
 		foreach ($positions as $position) {
 			$options[]	= JHtml::_('select.option', $position, $position);
