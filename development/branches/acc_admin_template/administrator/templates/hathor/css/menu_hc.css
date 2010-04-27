@@ -15,7 +15,7 @@
  *
  * Standard Link
  * #1b3f7c  Link Background
- * #fcff20	Text
+ * #ffffff	Text
  * #10254a	Border
  *
  * Pressed Link
@@ -47,12 +47,12 @@
  * Menu Styling
  */	
 #menu { /* this is on the main ul */
-	color: #fcff20;
+	color: #ffffff;
 }
 
 #menu ul { /* all lists */
 	background-color: #163365;
-	color: #fcff20;
+	color: #ffffff;
 }
 
 #menu ul li.node {
@@ -60,7 +60,7 @@
 }
 
 #menu a {
-	color: #fcff20;
+	color: #ffffff;
 	background-color: #1b3f7c;
 }
 
@@ -128,14 +128,14 @@
 	border-right: 1px solid #1b3f7c;
 	border-bottom: 1px solid #1b3f7c;
 	border-left: 1px solid #000000;
-	color: #ffffff;
+	color: #fcff20;
 }
 
 	/* 2 level - normal */
 #menu li.sfhover li a { /* background-color: #f0f0f0; */
 	background-color: #1b3f7c;
 	border: 1px solid #10254a;
-	color: #fcff20;
+	color: #ffffff;
 }
 
 	/* 2 level - hover */
@@ -145,14 +145,14 @@
 	border-right: 1px solid #1b3f7c;
 	border-bottom: 1px solid #1b3f7c;
 	border-left: 1px solid #000000;
-	color: #ffffff;
+	color: #fcff20;
 }
 
 	/* 3 level - normal */
 #menu li.sfhover li.sfhover li a { /* background-color: #f0f0f0; */
 	background-color: #1b3f7c;
 	border: 1px solid #10254a;
-	color: #fcff20;
+	color: #ffffff;
 }
 
 	/* 3 level - hover */
@@ -162,7 +162,7 @@
 	border-right: 1px solid #1b3f7c;
 	border-bottom: 1px solid #1b3f7c;
 	border-left: 1px solid #000000;
-	color: #ffffff;
+	color: #fcff20;
 }
 
 
