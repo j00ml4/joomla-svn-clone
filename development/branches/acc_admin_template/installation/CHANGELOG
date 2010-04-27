@@ -27,12 +27,86 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-Apr-2010 Mark Dexter
+# Make sure archive is consisently value = 2 (Elin Waring)
+# Update search plugins (Elin Waring)
+# Sample data fixes (Elin Waring)
+# String for templates view (Elin Waring)
+# ACL for editing template files; mark the link to the template view (Elin Waring)
+# Fix order in components (Elin Waring)
+
+27-Apr-2010 Jean-Marie Simonet
+$ Refactoring com_users back-end in/keys
+
+27-Apr-2010 Christophe Demko
+# Fixed [#20116] Administrator com_banners cannot select banner image
+# Fixed [#18510] Category Manager / New + Edit Category: Image Attribute has no Browse button
+# Fixed [#20236] Editing of template fiies is not working
+# Fixed [#18561] Ftp find path and verify setting in installation
+
+27-Apr-2010 Andrew Eddie
+ # Fixed [#20223] Custom Code in Banner system is not saved / not used.
+
+27-Apr-2010 Hannes Papenberg
+# Performance improvement to JFactory
+# Small performance improvements ot JRegistry, JFactory::getCache()
+# Codecleanup of JURI
+# Fixed Unittests of JCache, JCacheStorage, JAccess, JTableContent
+
+26-Apr-2010 Hannes Papenberg
+# Performance Improvements in JMenuSite, JObservable, JURI, JError, JDispatcher, JFilterinput, JPluginHelper, JPlugin, JRegistry
+# Fixed errors in JControllerTest, JControllerFormTest, JCacheStorageTest, JCacheTest, JTableContentTest, JUserTest, JDateTest
+
+26-Apr-2010 Jean-Marie Simonet
+$ Started refactoring com_users back-end in/keys
+^ Moved Beez language file to core folder
+
+26-Apr-2010 Andrew Eddie
+ # Fixed error when saving an editor-xtd plugin.
+ # Fixed [#20210] Change User modal doesn't work.
+ # Fixed [#18567] When trying to create an account from the front end.
+ # Fixed [#19778] processResetRequest and other related email and process problems in frontend com_users.
+ ^ Added chaining support to several JController methods.
+ + Added Beez2
+ # Fixed [#19440] User Manager > Users: Last Visit Date shows no time.
+ # Fixed [#18260] Finish Publishing Date - No validation - com_content. Also fixed in banner, contact, module, newsfeed, and weblink table classes.
+ # Fixed [#20235] Publish up and publish down dates cannot be reset once defined (tests added).
+ # Fixed [#18265] minor validation error in com_content
+ # Fixed [#19704] User details cleared when adding new user fails (also fixed in all other affected components).
+
+25-Apr-2010 Jean-Marie Simonet
+$ Added some strings in frontend main ini
+$ Refactored error.php strings
+$ Completed libraries/J ini/keys refactoring
+
+24-Apr-2010 Jean-Marie Simonet
+$ Simplified a string/code to avoid some language issues
+# Implementing Unarchive and Empty Trash buttons. Some standardization.
+
+24-Apr-2010 Andrew Eddie
+ # Refactor param and metadata handling in weblink and newsfeed edit forms.
+ # Fix bug saving options in a newsfeed.
+ ^ Hide admin menu when in com_templates template view.
+ ^ Add ability to set default view in JController.
+ ^ Refactor backend master controllers to use parent display method where possible.
+ ^ Refactor and expand implementation of JModelAdmin.
+ ^ Added 2nd director separator arguement to JPath::check (to pass to JPath::clean).
+ # Fixed return value of JPath::check (was not returning the cleaned path).
+ ^ Refactored JController protected property and method names into PEAR standard (removed leading underscore).
+ + Added tests for JController.
+ ^ Changed computation of methods in JController constructor to use PHP's ReflectionClass.
+
+23-Apr-2010 Mark Dexter
+^ Added UI for new fields in contacts, newsfeeds, weblinks (Elin Waring)
+^ Added publish_up and publish_down checks to models (Elin Waring) 
+
 23-Apr-2010 Jean-Marie Simonet
 # Bug fix + new string
 $ Refactoring ini/keys in libraries/J/Installer/
 # Bug fix in com_languages (Thank you Dennis)
 $ Refactored com_languages keys + added strings
 $ Refactoring ini/keys in libraries/J/mail, plugin, registry, session + some
+$ Refactoring ini/keys in libraries/J/updater, user
 
 23-Apr-2010 Christophe Demko
 ^ renaming some functions in JLanguage and JText relative to 'plural' and 'ignored search words' function

@@ -50,10 +50,9 @@ class JAccessTest extends JoomlaDatabaseTestCase {
             $access2 = new JAccess();
            /* $GroupUser42 = array(
 			0	=> 1,
-			1	=> 2,
-			2	=> 6,
-			3	=> 7,
-                        4	=> 8
+			1	=> 6,
+			2	=> 7,
+            3	=> 8
 		);*/
             //"core.login.site":{"6":1,"2":1}
             //"core.login.admin":{"6":1}
@@ -65,17 +64,17 @@ class JAccessTest extends JoomlaDatabaseTestCase {
             //"core.edit.state":{"6":1}}';
             //$this->assertTrue($access2->check('78',4,234));
             $this->assertThat(
-			Null,
-			$this->equalTo($access->check('58','core.login.site',3))
-		);
+				Null,
+				$this->equalTo($access->check('58','core.login.site',3))
+				);
             $this->assertThat(
-			Null,
-			$this->equalTo($access->check('42','complusoft',3))
-		);
+				Null,
+				$this->equalTo($access->check('42','complusoft',3))
+				);
             $this->assertThat(
-			Null,
-			$this->equalTo($access->check('42','core.login.site',345))
-		);
+				true,
+				$this->equalTo($access->check('42','core.login.site',345))
+			);
             $this->assertTrue($access->check('42','core.login.site',3));
             $this->assertTrue($access->check('42','core.login.admin',3));
             $this->assertTrue($access->check('42','core.admin',3));
@@ -144,10 +143,9 @@ class JAccessTest extends JoomlaDatabaseTestCase {
                 $access = new JAccess();
 		$array1 = array(
 			0	=> 1,
-			1	=> 2,
-			2	=> 6,
-			3	=> 7,
-                        4	=> 8
+			1	=> 6,
+			2	=> 7,
+            3	=> 8
 		);
                 $this->assertThat(
 			$array1,
@@ -170,8 +168,7 @@ class JAccessTest extends JoomlaDatabaseTestCase {
 		$access = new JAccess();
 		$array1 = array(
 			0	=> 1,
-                        1       => 2,
-                        2       => 3
+            1   => 3
 		);
 
 
@@ -199,33 +196,33 @@ class JAccessTest extends JoomlaDatabaseTestCase {
 		$access = new JAccess();
                 $array1 = array(
 			'name'	      => "core.admin",
-                        'title'       => "JAction_Admin",
-                        'description' => "JAction_Admin_Component_Desc"
+                        'title'       => "JACTION_ADMIN",
+                        'description' => "JACTION_ADMIN_COMPONENT_DESC"
 		);
                 $array2 = array(
 			'name'	      => "core.manage",
-                        'title'       => "JAction_Manage",
-                        'description' => "JAction_Manage_Component_Desc"
+                        'title'       => "JACTION_MANAGE",
+                        'description' => "JACTION_MANAGE_COMPONENT_DESC"
 		);
                 $array3 = array(
 			'name'	      => "core.create",
-                        'title'       => "JAction_Create",
-                        'description' => "JAction_Create_Component_Desc"
+                        'title'       => "JACTION_CREATE",
+                        'description' => "JACTION_CREATE_COMPONENT_DESC"
 		);
                 $array4 = array(
 			'name'	      => "core.delete",
-                        'title'       => "JAction_Delete",
-                        'description' => "JAction_Delete_Component_Desc"
+                        'title'       => "JACTION_DELETE",
+                        'description' => "JACTION_DELETE_COMPONENT_DESC"
 		);
                 $array5 = array(
 			'name'	      => "core.edit",
-                        'title'       => "JAction_Edit",
-                        'description' => "JAction_Edit_Component_Desc"
+                        'title'       => "JACTION_EDIT",
+                        'description' => "JACTION_EDIT_COMPONENT_DESC"
 		);
                  $array6 = array(
 			'name'	      => "core.edit.state",
-                        'title'       => "JAction_Edit_State",
-                        'description' => "JAction_Edit_State_Component_Desc"
+                        'title'       => "JACTION_EDIT_STATE",
+                        'description' => "JACTION_EDIT_STATE_COMPONENT_DESC"
 		);
 
 

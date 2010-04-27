@@ -155,10 +155,8 @@ class TemplatesModelStyle extends JModelForm
 		$this->setState('item.template',	$template);
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_templates.style', 'style', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_templates.style', 'style', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -168,6 +166,8 @@ class TemplatesModelStyle extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;

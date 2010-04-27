@@ -5,6 +5,7 @@
  * @subpackage	com_users
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.5
  */
 
 defined('_JEXEC') or die;
@@ -39,7 +40,6 @@ JHtml::_('behavior.formvalidation');
 	<button type="submit"><?php echo JText::_('BUTTON_SUBMIT'); ?></button>
 
 	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="member.remind" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
 </div>
