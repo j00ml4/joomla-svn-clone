@@ -27,7 +27,33 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-26-Nov-2010 Hannes Papenberg
+27-Apr-2010 Mark Dexter
+# Make sure archive is consisently value = 2 (Elin Waring)
+# Update search plugins (Elin Waring)
+# Sample data fixes (Elin Waring)
+# String for templates view (Elin Waring)
+# ACL for editing template files; mark the link to the template view (Elin Waring)
+# Fix order in components (Elin Waring)
+
+27-Apr-2010 Jean-Marie Simonet
+$ Refactoring com_users back-end in/keys
+
+27-Apr-2010 Christophe Demko
+# Fixed [#20116] Administrator com_banners cannot select banner image
+# Fixed [#18510] Category Manager / New + Edit Category: Image Attribute has no Browse button
+# Fixed [#20236] Editing of template fiies is not working
+# Fixed [#18561] Ftp find path and verify setting in installation
+
+27-Apr-2010 Andrew Eddie
+ # Fixed [#20223] Custom Code in Banner system is not saved / not used.
+
+27-Apr-2010 Hannes Papenberg
+# Performance improvement to JFactory
+# Small performance improvements ot JRegistry, JFactory::getCache()
+# Codecleanup of JURI
+# Fixed Unittests of JCache, JCacheStorage, JAccess, JTableContent
+
+26-Apr-2010 Hannes Papenberg
 # Performance Improvements in JMenuSite, JObservable, JURI, JError, JDispatcher, JFilterinput, JPluginHelper, JPlugin, JRegistry
 # Fixed errors in JControllerTest, JControllerFormTest, JCacheStorageTest, JCacheTest, JTableContentTest, JUserTest, JDateTest
 

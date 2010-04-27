@@ -19,6 +19,7 @@ defined('JPATH_BASE') or die;
 abstract class JFactory
 {
 	public static $application = null;
+	public static $cache = null;
 	public static $config = null;
 	public static $session = null;
 	public static $language = null;
@@ -39,7 +40,7 @@ abstract class JFactory
 	 */
 	public static function getApplication($id = null, $config = array(), $prefix='J')
 	{
-		if (!is_object(JFactory::$application))
+		if (!JFactory::$application)
 		{
 			jimport('joomla.application.application');
 
@@ -88,7 +89,7 @@ abstract class JFactory
 	 */
 	public static function getSession($options = array())
 	{
-		if (!is_object(JFactory::$session)) {
+		if (!JFactory::$session) {
 			JFactory::$session = JFactory::_createSession($options);
 		}
 
@@ -105,7 +106,7 @@ abstract class JFactory
 	 */
 	public static function getLanguage()
 	{
-		if (!is_object(JFactory::$language))
+		if (!JFactory::$language)
 		{
 			JFactory::$language = JFactory::_createLanguage();
 		}
@@ -123,7 +124,7 @@ abstract class JFactory
 	 */
 	public static function getDocument()
 	{
-		if (!is_object(JFactory::$document)) {
+		if (!JFactory::$document) {
 			JFactory::$document = JFactory::_createDocument();
 		}
 
@@ -171,10 +172,14 @@ abstract class JFactory
 	 */
 	public static function getCache($group = '', $handler = 'callback', $storage = null)
 	{
+		$hash = md5($group.$handler.$storage);
+		if(isset(JFactory::$cache[$hash]))
+		{
+			return JFactory::$cache[$hash];
+		}
 		$handler = ($handler == 'function') ? 'callback' : $handler;
 
 		$conf = &JFactory::getConfig();
-
 
 		$options = array('defaultgroup'	=> $group );
 
@@ -186,7 +191,9 @@ abstract class JFactory
 
 		$cache = &JCache::getInstance($handler, $options);
 		$cache->setCaching($conf->get('caching'));
-		return $cache;
+		
+		JFactory::$cache[$hash] = $cache;
+		return JFactory::$cache[$hash];
 	}
 
 	/**
@@ -199,7 +206,7 @@ abstract class JFactory
 	 */
 	public static function getACL()
 	{
-		if (!is_object(JFactory::$acl)) {
+		if (!JFactory::$acl) {
 			jimport('joomla.access.access');
 
 			JFactory::$acl = new JAccess();
@@ -219,7 +226,7 @@ abstract class JFactory
 	public static function getDbo()
 	{
 
-		if (!is_object(self::$database))
+		if (!self::$database)
 		{
 			//get the debug configuration setting
 			$conf = &self::getConfig();
@@ -241,7 +248,7 @@ abstract class JFactory
 	 */
 	public static function getMailer()
 	{
-		if (! is_object(JFactory::$mailer)) {
+		if (!JFactory::$mailer) {
 			JFactory::$mailer = JFactory::_createMailer();
 		}
 		$copy	= clone JFactory::$mailer;
@@ -465,7 +472,7 @@ abstract class JFactory
 		require_once $file;
 
 		// Create the registry with a default namespace of config
-		$registry = new JRegistry('config');
+		$registry = new JRegistry();
 
 		// Create the JConfig object
 		$config = new JFrameworkConfig();
