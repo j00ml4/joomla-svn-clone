@@ -39,7 +39,7 @@ abstract class JFactory
 	 */
 	public static function getApplication($id = null, $config = array(), $prefix='J')
 	{
-		if (!is_object(JFactory::$application))
+		if (!JFactory::$application)
 		{
 			jimport('joomla.application.application');
 
@@ -65,7 +65,7 @@ abstract class JFactory
 	 */
 	public static function getConfig($file = null, $type = 'PHP')
 	{
-		if (!is_object(JFactory::$config))
+		if (!JFactory::$config)
 		{
 			if ($file === null) {
 				$file = dirname(__FILE__).DS.'config.php';
@@ -88,7 +88,7 @@ abstract class JFactory
 	 */
 	public static function getSession($options = array())
 	{
-		if (!is_object(JFactory::$session)) {
+		if (!JFactory::$session) {
 			JFactory::$session = JFactory::_createSession($options);
 		}
 
@@ -105,7 +105,7 @@ abstract class JFactory
 	 */
 	public static function getLanguage()
 	{
-		if (!is_object(JFactory::$language))
+		if (!JFactory::$language)
 		{
 			JFactory::$language = JFactory::_createLanguage();
 		}
@@ -123,7 +123,7 @@ abstract class JFactory
 	 */
 	public static function getDocument()
 	{
-		if (!is_object(JFactory::$document)) {
+		if (!JFactory::$document) {
 			JFactory::$document = JFactory::_createDocument();
 		}
 
@@ -174,14 +174,14 @@ abstract class JFactory
 		$handler = ($handler == 'function') ? 'callback' : $handler;
 
 		$conf = &JFactory::getConfig();
-		
-		
+
+
 		$options = array('defaultgroup'	=> $group );
-		
+
 		if (isset($storage)) {
 			$options[] = array('storage' => $storage);
 		}
-		
+
 		jimport('joomla.cache.cache');
 
 		$cache = &JCache::getInstance($handler, $options);
@@ -199,7 +199,7 @@ abstract class JFactory
 	 */
 	public static function getACL()
 	{
-		if (!is_object(JFactory::$acl)) {
+		if (!JFactory::$acl) {
 			jimport('joomla.access.access');
 
 			JFactory::$acl = new JAccess();
@@ -219,7 +219,7 @@ abstract class JFactory
 	public static function getDbo()
 	{
 
-		if (!is_object(self::$database))
+		if (!self::$database)
 		{
 			//get the debug configuration setting
 			$conf = &self::getConfig();
@@ -241,7 +241,7 @@ abstract class JFactory
 	 */
 	public static function getMailer()
 	{
-		if (! is_object(JFactory::$mailer)) {
+		if (!JFactory::$mailer) {
 			JFactory::$mailer = JFactory::_createMailer();
 		}
 		$copy	= clone JFactory::$mailer;
@@ -260,25 +260,25 @@ abstract class JFactory
 	public static function getFeedParser($url, $cache_time = 0)
 	{
 		jimport('simplepie.simplepie');
-		
+
 		$cache = self::getCache('feed_parser','callback');
 
 		if ($cache_time > 0) $cache->setLifeTime($cache_time);
-					
-					
+
+
 		$simplepie = new SimplePie(null, null, 0);
-		
+
 		$simplepie->enable_cache(false);
 		$simplepie->set_feed_url($url);
 		$simplepie->force_feed(true);
-		
+
 		$contents =  $cache->get(array($simplepie, 'init'), null, false, false);
-		
+
 
 		if ($contents) {
 			return $simplepie;
 		} else {
-			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_LOADING_FEED_DATA'));
+			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JLIB_UTIL_ERROR_LOADING_FEED_DATA'));
 		}
 
 		return false;
@@ -312,7 +312,7 @@ abstract class JFactory
 				break;
 
 			case 'dom':
-				JError::raiseWarning('SOME_ERROR_CODE', 'DommitDocument is deprecated.  Use DomDocument instead');
+				JError::raiseWarning('SOME_ERROR_CODE', JText::_('JLIB_UTIL_ERROR_DOMIT'));
 				$doc = null;
 				break;
 
@@ -350,7 +350,7 @@ abstract class JFactory
 
 		if (empty($xml)) {
 			// There was an error
-			JError::raiseWarning(100, JText::_('Failed loading XML file'));
+			JError::raiseWarning(100, JText::_('JLIB_UTIL_ERROR_XML_LOAD'));
 
 			if ($isFile) {
 				JError::raiseWarning(100, $data);
@@ -532,7 +532,7 @@ abstract class JFactory
 		}
 
 		if ($db->getErrorNum() > 0) {
-			JError::raiseError(500 , 'JDatabase::getInstance: Could not connect to database <br />' . 'joomla.library:'.$db->getErrorNum().' - '.$db->getErrorMsg());
+			JError::raiseError(500 , JText::sprintf('JLIB_UTIL_ERROR_CONNECT_DATABASE', $db->getErrorNum(), $db->getErrorMsg()));
 		}
 
 		$db->debug($debug);

@@ -22,25 +22,22 @@ jimport('joomla.application.component.modellist');
 class SearchModelSearches extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_searches.searches';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$showResults = $app->getUserStateFromRequest($this->_context.'.filter.results', 'filter_results', null, 'int');
+		$showResults = $app->getUserStateFromRequest($this->context.'.filter.results', 'filter_results', null, 'int');
 		$this->setState('filter.results', $showResults);
 
 		// Load the parameters.
@@ -48,7 +45,7 @@ class SearchModelSearches extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('a.hits', 'asc');
+		parent::populateState('a.hits', 'asc');
 	}
 
 	/**
@@ -62,13 +59,13 @@ class SearchModelSearches extends JModelList
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.results');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -76,7 +73,7 @@ class SearchModelSearches extends JModelList
 	 *
 	 * @return	JDatabaseQuery
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db		= $this->getDbo();

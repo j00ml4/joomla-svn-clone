@@ -24,9 +24,7 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		preg_match('#(.*)__set_state\((.*)\)$#s', var_export($object, true), $m);
 		if (empty($m[2])) {
 			return false;
-		}
-		else
-		{
+		} else {
 			$structure = null;
 			eval('$structure = '.$m[2].';');
 			return $structure;
@@ -42,49 +40,39 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		$object = new MincesControllerMince(
 			array(
 				// Neutralise a JPATH_COMPONENT not defined error.
-				'base_path'	=> 'null'
+				'base_path'	=> JPATH_BASE.'/component/com_foobar'
 			)
 		);
-		if ($structure = $this->getStructure($object))
-		{
-			// Check the _option variable was created properly.
-			$this->assertThat(
-				$structure['_option'],
-				$this->equalTo('com_minces')
-			);
 
-			// Check the _context variable was created properly.
-			$this->assertThat(
-				$structure['_context'],
-				$this->equalTo('mince')
-			);
+		$this->assertThat(
+			$structure = $this->getStructure($object),
+			$this->logicalNot($this->isFalse()),
+			'Line: '.__LINE__.' must be able to parse the '.get_class($object).' class'
+		);
 
-			// Check the _view_item variable was created properly.
-			$this->assertThat(
-				$structure['_view_item'],
-				$this->equalTo('mince')
-			);
+		// Check the _option variable was created properly.
+		$this->assertThat(
+			$structure['option'],
+			$this->equalTo('com_minces')
+		);
 
-			// Check the _view_list variable was created properly.
-			$this->assertThat(
-				$structure['_view_list'],
-				$this->equalTo('minces')
-			);
+		// Check the _context variable was created properly.
+		$this->assertThat(
+			$structure['context'],
+			$this->equalTo('mince')
+		);
 
-			// Check the _view_list variable was created properly.
-			$this->assertThat(
-				$structure,
-				$this->arrayHasKey('_asset_name'),
-				'_asset_name has not been defined for structure'
-			);
-			$this->assertThat(
-				$structure['_asset_name'],
-				$this->equalTo('com_minces.mince.%d')
-			);
-		}
-		else {
-			$this->fail('Could not parse '.get_class($object));
-		}
+		// Check the _view_item variable was created properly.
+		$this->assertThat(
+			$structure['view_item'],
+			$this->equalTo('mince')
+		);
+
+		// Check the _view_list variable was created properly.
+		$this->assertThat(
+			$structure['view_list'],
+			$this->equalTo('minces')
+		);
 
 		//
 		// Test for correct pluralisation.
@@ -93,38 +81,40 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		$object = new MiniesControllerMiny(
 			array(
 				// Neutralise a JPATH_COMPONENT not defined error.
-				'base_path'	=> 'null'
+				'base_path'	=> JPATH_BASE.'/component/com_foobar'
 			)
 		);
-		if ($structure = $this->getStructure($object))
-		{
-			// Check the _view_list variable was created properly.
-			$this->assertThat(
-				$structure['_view_list'],
-				$this->equalTo('minies')
-			);
-		}
-		else {
-			$this->fail('Could not parse '.get_class($object));
-		}
+
+		$this->assertThat(
+			$structure = $this->getStructure($object),
+			$this->logicalNot($this->isFalse()),
+			'Line: '.__LINE__.' must be able to parse the '.get_class($object).' class'
+		);
+
+		// Check the _view_list variable was created properly.
+		$this->assertThat(
+			$structure['view_list'],
+			$this->equalTo('minies')
+		);
 
 		$object = new MintsControllerMint(
 			array(
 				// Neutralise a JPATH_COMPONENT not defined error.
-				'base_path'	=> 'null'
+				'base_path'	=> JPATH_BASE.'/component/com_foobar'
 			)
 		);
-		if ($structure = $this->getStructure($object))
-		{
-			// Check the _view_list variable was created properly.
-			$this->assertThat(
-				$structure['_view_list'],
-				$this->equalTo('mints')
-			);
-		}
-		else {
-			$this->fail('Could not parse '.get_class($object));
-		}
+
+		$this->assertThat(
+			$structure = $this->getStructure($object),
+			$this->logicalNot($this->isFalse()),
+			'Line: '.__LINE__.' must be able to parse the '.get_class($object).' class'
+		);
+
+		// Check the _view_list variable was created properly.
+		$this->assertThat(
+			$structure['view_list'],
+			$this->equalTo('mints')
+		);
 	}
 
 	public function testDisplay()
@@ -132,7 +122,7 @@ class JControllerFormTest extends PHPUnit_Framework_TestCase
 		$object = new MintsControllerMint(
 			array(
 				// Neutralise a JPATH_COMPONENT not defined error.
-				'base_path'	=> 'null'
+				'base_path'	=> JPATH_BASE.'/component/com_foobar'
 			)
 		);
 		/*

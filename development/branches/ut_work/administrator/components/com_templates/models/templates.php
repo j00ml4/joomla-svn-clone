@@ -19,61 +19,28 @@ jimport('joomla.application.component.modellist');
 class TemplatesModelTemplates extends JModelList
 {
 	/**
-	 * Model context string.
+	 * Override parent getItems to add extra XML metadata.
 	 *
-	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_context = 'com_templates.templates';
-
-	/**
-	 * Method to auto-populate the model state.
-	 */
-	protected function _populateState()
+	public function getItems()
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
+		$items = parent::getItems();
 
-		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
-
-		$clientId = $app->getUserStateFromRequest($this->_context.'.filter.client_id', 'filter_client_id', null);
-		$this->setState('filter.client_id', $clientId);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_templates');
-		$this->setState('params', $params);
-
-		// List state information.
-		parent::_populateState('a.element', 'asc');
-	}
-
-	/**
-	 * Method to get a store id based on model configuration state.
-	 *
-	 * This is necessary because the model is used by the component and
-	 * different modules that might need different sets of data or different
-	 * ordering requirements.
-	 *
-	 * @param	string		$id	A prefix for the store id.
-	 *
-	 * @return	string		A store id.
-	 */
-	protected function _getStoreId($id = '')
-	{
-		// Compile the store id.
-		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.client_id');
-
-		return parent::_getStoreId($id);
+		foreach ($items as &$item) {
+			$client = JApplicationHelper::getClientInfo($item->client_id);
+			$item->xmldata = TemplatesHelper::parseXMLTemplateFile($client->path, $item->element);
+		}
+		return $items;
 	}
 
 	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db		= $this->getDbo();
@@ -116,16 +83,49 @@ class TemplatesModelTemplates extends JModelList
 	}
 
 	/**
-	 * Override parent getItems to add extra XML metadata.
+	 * Method to get a store id based on model configuration state.
+	 *
+	 * This is necessary because the model is used by the component and
+	 * different modules that might need different sets of data or different
+	 * ordering requirements.
+	 *
+	 * @param	string		$id	A prefix for the store id.
+	 * @return	string		A store id.
+	 * @since	1.6
 	 */
-	public function &getItems()
+	protected function getStoreId($id = '')
 	{
-		$items = parent::getItems();
+		// Compile the store id.
+		$id	.= ':'.$this->getState('filter.search');
+		$id	.= ':'.$this->getState('filter.client_id');
 
-		foreach ($items as &$item) {
-			$client = JApplicationHelper::getClientInfo($item->client_id);
-			$item->xmldata = TemplatesHelper::parseXMLTemplateFile($client->path, $item->element);
-		}
-		return $items;
+		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		// Initialise variables.
+		$app = JFactory::getApplication('administrator');
+
+		// Load the filter state.
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
+
+		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', null);
+		$this->setState('filter.client_id', $clientId);
+
+		// Load the parameters.
+		$params = JComponentHelper::getParams('com_templates');
+		$this->setState('params', $params);
+
+		// List state information.
+		parent::populateState('a.element', 'asc');
 	}
 }

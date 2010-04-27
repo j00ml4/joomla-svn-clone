@@ -19,38 +19,35 @@ jimport('joomla.application.component.view');
  */
 class ModulesViewModules extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar.
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$state	= $this->get('State');
 		$canDo	= ModulesHelper::getActions();
@@ -68,13 +65,12 @@ class ModulesViewModules extends JView
 			JToolBarHelper::custom('modules.duplicate', 'copy.png', 'copy_f2.png','JTOOLBAR_DUPLICATE', true);
 		}
 		if ($canDo->get('core.edit')) {
-			JToolBarHelper::custom('modules.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
-			JToolBarHelper::custom('modules.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
+			JToolBarHelper::custom('modules.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('modules.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'modules.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else if ($canDo->get('core.edit.state')) {
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('modules.trash','JTOOLBAR_TRASH');
 		}
 

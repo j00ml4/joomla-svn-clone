@@ -16,18 +16,18 @@ jimport('joomla.application.component.view');
  */
 class ContentViewFeatured extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -35,18 +35,16 @@ class ContentViewFeatured extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Display the toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$canDo	= ContentHelper::getActions($this->state->get('filter.category_id'));
 

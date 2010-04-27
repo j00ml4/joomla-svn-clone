@@ -20,28 +20,25 @@ jimport('joomla.application.component.modellist');
 class TemplatesModelStyles extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_templates.styles';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$template = $app->getUserStateFromRequest($this->_context.'.filter.template', 'filter_template', '0', 'word');
+		$template = $app->getUserStateFromRequest($this->context.'.filter.template', 'filter_template', '0', 'word');
 		$this->setState('filter.template', $template);
 
-		$clientId = $app->getUserStateFromRequest($this->_context.'.filter.client_id', 'filter_client_id', null);
+		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', null);
 		$this->setState('filter.client_id', $clientId);
 
 		// Load the parameters.
@@ -49,7 +46,7 @@ class TemplatesModelStyles extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('a.template', 'asc');
+		parent::populateState('a.template', 'asc');
 	}
 
 	/**
@@ -63,14 +60,14 @@ class TemplatesModelStyles extends JModelList
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.template');
 		$id	.= ':'.$this->getState('filter.client_id');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -78,7 +75,7 @@ class TemplatesModelStyles extends JModelList
 	 *
 	 * @return	JDatabaseQuery
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db		= $this->getDbo();

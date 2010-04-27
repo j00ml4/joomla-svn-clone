@@ -35,13 +35,6 @@ class NewsfeedsModelCategory extends JModelList
 	protected $_parent = null;
 
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_newfeeds.category';
-
-	/**
 	 * The category that applies.
 	 *
 	 * @access	protected
@@ -88,7 +81,7 @@ class NewsfeedsModelCategory extends JModelList
 	 * @return	string	An SQL query
 	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		$user	= &JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
@@ -114,7 +107,14 @@ class NewsfeedsModelCategory extends JModelList
 		if (is_numeric($state)) {
 			$query->where('a.state = '.(int) $state);
 		}
-
+				// Filter by start and end dates.
+		$nullDate = $db->Quote($db->getNullDate());
+		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+				
+		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+		
+		
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
@@ -124,17 +124,14 @@ class NewsfeedsModelCategory extends JModelList
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
 		$params	= JComponentHelper::getParams('com_newsfeeds');
 
 		// List state information
@@ -147,8 +144,8 @@ class NewsfeedsModelCategory extends JModelList
 		$orderCol	= JRequest::getCmd('filter_order', 'ordering');
 		$this->setState('list.ordering', $orderCol);
 
-		$orderDirn	=  JRequest::getCmd('filter_order_Dir', 'ASC');
-		$this->setState('list.direction', $orderDirn);
+		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
+		$this->setState('list.direction', $listOrder);
 
 		$id = JRequest::getVar('id', 0, '', 'int');
 		$this->setState('category.id', $id);
@@ -197,10 +194,10 @@ class NewsfeedsModelCategory extends JModelList
 				$this->_parent = false;
 			}
 		}
-		
+
 		return $this->_item;
 	}
-	
+
 	/**
 	 * Get the parent categorie.
 	 *
@@ -230,7 +227,7 @@ class NewsfeedsModelCategory extends JModelList
 		}
 		return $this->_leftsibling;
 	}
-	
+
 	function &getRightSibling()
 	{
 		if(!is_object($this->_item))
