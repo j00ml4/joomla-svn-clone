@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -19,16 +21,22 @@ jimport('joomla.application.component.view');
  */
 class InstallerViewDefault extends JView
 {
+	/**
+	 * @since	1.5
+	 */
 	function __construct($config = null)
 	{
 		parent::__construct($config);
 		$this->_addPath('template', $this->_basePath.DS.'views'.DS.'default'.DS.'tmpl');
 	}
 
+	/**
+	 * @since	1.5
+	 */
 	function display($tpl=null)
 	{
 		// Get data from the model
-		$state		= &$this->get('State');
+		$state	= $this->get('State');
 
 		// Are there messages to display ?
 		$showMessage	= false;
@@ -60,9 +68,9 @@ class InstallerViewDefault extends JView
 			JToolBarHelper::preferences('com_installer');
 			JToolBarHelper::divider();
 		}
-		JToolBarHelper::help('screen.installer','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Extension_Manager');
 		// Document
-		$document = & JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->setTitle(JText::_('COM_INSTALLER_TITLE_' . $this->getName()));
 	}
 }

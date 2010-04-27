@@ -71,6 +71,6 @@ class TemplatesViewStyles extends JView
 			JToolBarHelper::preferences('com_templates');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.templates','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Template_Manager_Styles');
 	}
 }

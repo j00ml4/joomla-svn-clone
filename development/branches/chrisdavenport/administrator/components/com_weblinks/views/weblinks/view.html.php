@@ -62,11 +62,11 @@ class WeblinksViewWeblinks extends JView
 			JToolBarHelper::editList('weblink.edit','JTOOLBAR_EDIT');
 		}
 		if ($canDo->get('core.edit.state')) {
-			if ($state->get('filter.state') != 2){
+
 				JToolBarHelper::divider();
 				JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
 				JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-			}
+			
 			if ($state->get('filter.state') != -1 ) {
 				JToolBarHelper::divider();
 				if ($state->get('filter.state') != 2) {
@@ -75,7 +75,7 @@ class WeblinksViewWeblinks extends JView
 				else if ($state->get('filter.state') == 2) {
 					JToolBarHelper::unarchiveList('weblinks.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'weblinks.delete','JTOOLBAR_EMPTY_TRASH');
@@ -87,6 +87,6 @@ class WeblinksViewWeblinks extends JView
 			JToolBarHelper::preferences('com_weblinks');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.weblink','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Weblinks');
 	}
 }

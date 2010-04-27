@@ -38,8 +38,6 @@ class ContactViewContact extends JView
 			return false;
 		}
 
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -73,6 +71,6 @@ class ContactViewContact extends JView
 			JToolBarHelper::cancel('contact.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.contact.edit'.'JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Contacts_Contacts_Edit');
 	}
 }

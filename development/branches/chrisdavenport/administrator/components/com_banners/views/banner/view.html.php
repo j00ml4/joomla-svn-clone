@@ -39,10 +39,6 @@ class BannersViewBanner extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-		$this->form->bind($this->item->params);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -80,6 +76,6 @@ class BannersViewBanner extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.banners.banner');
+		JToolBarHelper::help('Components_Banners_Banners_Edit');
 	}
 }

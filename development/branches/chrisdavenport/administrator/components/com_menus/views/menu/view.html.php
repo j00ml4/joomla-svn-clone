@@ -37,8 +37,6 @@ class MenusViewMenu extends JView
 			return false;
 		}
 
-		$this->form->bind($this->item);
-
 		parent::display($tpl);
 		$this->addToolbar();
 	}
@@ -69,6 +67,6 @@ class MenusViewMenu extends JView
 			JToolBarHelper::cancel('menu.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Menus_Menu_Manager_New_Edit');
+		JToolBarHelper::help('Menus_Menu_Manager_Edit');
 	}
 }

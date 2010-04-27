@@ -73,7 +73,7 @@ class NewsfeedsViewNewsfeeds extends JView
 				else if ($state->get('filter.state') == 2) {
 					JToolBarHelper::unarchiveList('newsfeeds.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'newsfeeds.delete','JTOOLBAR_EMPTY_TRASH');
@@ -85,6 +85,6 @@ class NewsfeedsViewNewsfeeds extends JView
 			JToolBarHelper::preferences('com_newsfeeds');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.newsfeed','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Newsfeeds_Feeds');
 	}
 }

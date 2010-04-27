@@ -38,9 +38,6 @@ class LanguagesViewLanguage extends JView
 			return false;
 		}
 
-		// Bind the label to the form.
-		$this->form->bind($this->item);
-
 		parent::display($tpl);
 		$this->addToolbar();
 	}
@@ -66,6 +63,6 @@ class LanguagesViewLanguage extends JView
 			JToolBarHelper::cancel('language.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.language.edit','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Language_Manager_Edit');
 	}
 }

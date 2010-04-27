@@ -38,9 +38,6 @@ class PluginsViewPlugin extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -66,6 +63,6 @@ class PluginsViewPlugin extends JView
 		}
 		JToolBarHelper::cancel('plugin.cancel', 'JTOOLBAR_CLOSE');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.plugins.edit','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Plugin_Manager_Edit');
 	}
 }

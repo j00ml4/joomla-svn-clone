@@ -35,9 +35,6 @@ class MessagesViewMessage extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		parent::display($tpl);
 		$this->addToolbar();
 	}
@@ -58,7 +55,7 @@ class MessagesViewMessage extends JView
 			JToolBarHelper::title(JText::_('COM_MESSAGES_VIEW_PRIVATE_MESSAGE'), 'inbox.png');
 			JToolBarHelper::custom('message.reply', 'restore.png', 'restore_f2.png', 'COM_MESSAGES_TOOLBAR_REPLY', false);
 			JToolBarHelper::cancel('message.cancel');
-			JToolBarHelper::help('screen.messages.read');
+			JToolBarHelper::help('Components_Messaging_Read');
 		}
 	}
 }

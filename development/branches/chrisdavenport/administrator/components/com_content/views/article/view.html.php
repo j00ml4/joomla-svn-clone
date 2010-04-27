@@ -45,7 +45,7 @@ class ContentViewArticle extends JView
 			return false;
 		}
 
-		$this->form->bind($this->item);
+		//$this->form->bind($this->item);
 
 		$this->addToolbar();
 		parent::display($tpl);
@@ -85,6 +85,6 @@ class ContentViewArticle extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.content.article','JTOOLBAR_HELP');
+		JToolBarHelper::help('Content_Article_Manager_Edit');
 	}
 }

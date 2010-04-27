@@ -40,9 +40,6 @@ class RedirectViewLink extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -79,6 +76,6 @@ class RedirectViewLink extends JView
 		} else {
 			JToolBarHelper::cancel('link.cancel', 'JTOOLBAR_CLOSE');
 		}
-		JToolBarHelper::help('screen.redirect.link','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Redirect_Manager_Edit');
 	}
 }

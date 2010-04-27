@@ -58,6 +58,6 @@ class TemplatesViewTemplates extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.templates','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Template_Manager_Templates');
 	}
 }

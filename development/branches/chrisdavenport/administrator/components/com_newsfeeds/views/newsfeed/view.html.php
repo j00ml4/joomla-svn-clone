@@ -38,9 +38,6 @@ class NewsfeedsViewNewsfeed extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -79,6 +76,6 @@ class NewsfeedsViewNewsfeed extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.newsfeed.edit','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Newsfeeds_Feeds_Edit');
 	}
 }

@@ -77,7 +77,22 @@ class WeblinksTableWeblink extends JTable
 				$this->created_by = $user->get('id');
 			}
 		}
-
+			$date	= JFactory::getDate();
+			$user	= JFactory::getUser();
+			if ($this->id) {
+				// Existing item
+				$this->modified		= $date->toMySQL();
+				$this->modified_by	= $user->get('id');
+				} else {
+				// New weblink. A weblink created and created_by field can be set by the user,
+				// so we don't touch either of these if they are set.
+				if (!intval($this->created)) {
+					$this->created = $date->toMySQL();
+				}
+				if (empty($this->created_by)) {
+					$this->created_by = $user->get('id');
+				}
+				}	
 		// Attempt to store the user data.
 		return parent::store($updateNulls);
 	}
@@ -108,7 +123,7 @@ class WeblinksTableWeblink extends JTable
 			$this->url = 'http://'.$this->url;
 		}
 
-		/** check for existing name */
+		// check for existing name
 		$query = 'SELECT id FROM #__weblinks WHERE title = '.$this->_db->Quote($this->title).' AND catid = '.(int) $this->catid;
 		$this->_db->setQuery($query);
 
@@ -125,6 +140,15 @@ class WeblinksTableWeblink extends JTable
 		if (trim(str_replace('-','',$this->alias)) == '') {
 			$this->alias = JFactory::getDate()->toFormat("%Y-%m-%d-%H-%M-%S");
 		}
+
+		// Check the publish down date is not earlier than publish up.
+		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+			// Swap the dates.
+			$temp = $this->publish_up;
+			$this->publish_up = $this->publish_down;
+			$this->publish_down = $temp;
+		}
+
 		// clean up keywords -- eliminate extra spaces between phrases
 		// and cr (\r) and lf (\n) characters from string
 		if (!empty($this->metakey)) {
@@ -140,6 +164,7 @@ class WeblinksTableWeblink extends JTable
 			}
 			$this->metakey = implode(", ", $clean_keys); // put array back together delimited by ", "
 		}
+
 		return true;
 	}
 

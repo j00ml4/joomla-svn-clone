@@ -73,6 +73,8 @@ class TemplatesModelSource extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getSource());
 		}
 
 		return $form;
@@ -87,7 +89,9 @@ class TemplatesModelSource extends JModelForm
 	public function &getSource()
 	{
 		$item = new stdClass;
-
+		if (!$this->_template) {
+			$this->getTemplate();
+		}
 		if ($this->_template)
 		{
 			$fileName	= $this->getState('filename');

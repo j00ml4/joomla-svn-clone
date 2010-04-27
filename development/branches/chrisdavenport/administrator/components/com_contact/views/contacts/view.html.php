@@ -62,7 +62,7 @@ class ContactViewContacts extends JView
 		$canDo	= ContactHelper::getActions($this->state->get('filter.category_id'));
 
 		JToolBarHelper::title(JText::_('COM_CONTACT_MANAGER_CONTACTS'), 'generic.png');
-		
+
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('contact.add','JTOOLBAR_NEW');
 		}
@@ -83,7 +83,7 @@ class ContactViewContacts extends JView
 				else if ($this->state->get('filter.published') == 2) {
 					JToolBarHelper::unarchiveList('contacts.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
 		}
 		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'contacts.delete','JTOOLBAR_EMPTY_TRASH');
@@ -95,6 +95,6 @@ class ContactViewContacts extends JView
 			JToolBarHelper::preferences('com_contact');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.contact','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_Contacts_Contacts');
 	}
 }

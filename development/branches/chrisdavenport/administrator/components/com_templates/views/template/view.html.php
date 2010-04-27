@@ -57,6 +57,6 @@ class TemplatesViewTemplate extends JView
 
 		JToolBarHelper::cancel('template.cancel', 'JTOOLBAR_CLOSE');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.template.view','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Template_Manager_Templates_Edit');
 	}
 }

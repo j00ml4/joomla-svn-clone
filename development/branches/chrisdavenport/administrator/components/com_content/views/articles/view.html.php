@@ -70,7 +70,7 @@ class ContentViewArticles extends JView
 				else if ($state->get('filter.published') == 2) {
 					JToolBarHelper::unarchiveList('articles.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
 		}
 		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'articles.delete','JTOOLBAR_EMPTY_TRASH');
@@ -82,6 +82,6 @@ class ContentViewArticles extends JView
 			JToolBarHelper::preferences('com_content');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.content.articles','JTOOLBAR_HELP');
+		JToolBarHelper::help('Content_Article_Manager');
 	}
 }
