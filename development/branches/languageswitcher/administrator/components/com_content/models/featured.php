@@ -19,13 +19,6 @@ require_once dirname(__FILE__).DS.'articles.php';
 class ContentModelFeatured extends ContentModelArticles
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	public $_context = 'com_content.featured';
-
-	/**
 	 * @param	boolean	True to join selected foreign information
 	 *
 	 * @return	string
@@ -40,11 +33,16 @@ class ContentModelFeatured extends ContentModelArticles
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid, a.state, a.access, a.created, a.hits'
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid, a.state, a.access, a.created, a.hits,' .
+				'a.language'
 			)
 		);
 		$query->from('#__content AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		
 		// Join over the content table.
 		$query->select('fp.ordering');
 		$query->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
@@ -71,7 +69,7 @@ class ContentModelFeatured extends ContentModelArticles
 		}
 
 		// Filter by published state
-		$published = $this->getState('filter.published');
+		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = ' . (int) $published);
 		} else if ($published === '') {
@@ -89,10 +87,45 @@ class ContentModelFeatured extends ContentModelArticles
 			}
 		}
 
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',(string)$query));
 		return $query;
+	}
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'featured', array('event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context.'.data', array());
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

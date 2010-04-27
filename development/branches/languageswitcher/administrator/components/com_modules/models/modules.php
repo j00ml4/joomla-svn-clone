@@ -29,26 +29,24 @@ class ModulesModelModules extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
+		$app = JFactory::getApplication();
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
+		}
+		else {
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
+		}
 
-		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
 
-		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
-		$this->setState('filter.access', $accessId);
-
-		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $state);
-
-		$position = $app->getUserStateFromRequest($this->context.'.filter.position', 'filter_position', '', 'string');
-		$this->setState('filter.position', $position);
-
-		$module = $app->getUserStateFromRequest($this->context.'.filter.module', 'filter_module', '', 'string');
-		$this->setState('filter.module', $module);
-
-		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0, 'int');
-		$this->setState('filter.client_id', $clientId);
+		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
+		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
+		$this->setState('filter.position', isset($filters['position']) ? $filters['position'] : '');
+		$this->setState('filter.module', isset($filters['module']) ? $filters['module'] : '');
+		$this->setState('filter.client_id', isset($filters['client_id']) ? $filters['client_id'] : '');
+		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_modules');
@@ -78,6 +76,7 @@ class ModulesModelModules extends JModelList
 		$id	.= ':'.$this->getState('filter.position');
 		$id	.= ':'.$this->getState('filter.module');
 		$id	.= ':'.$this->getState('filter.client_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -155,12 +154,16 @@ class ModulesModelModules extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.note, a.position, a.module, ' .
-				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.language'
+				'a.id, a.title, a.note, a.position, a.module, a.language,' .
+				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering'
 			)
 		);
 		$query->from('`#__modules` AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -227,5 +230,39 @@ class ModulesModelModules extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'modules', array('event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+		$form->setFieldAttribute('module', 'client', $this->getState('filter.client_id')==0 ? 'site' : 'administrator', 'filters');
+		$form->setFieldAttribute('position', 'client', $this->getState('filter.client_id')==0 ? 'site' : 'administrator', 'filters');
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context.'.data', array());
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

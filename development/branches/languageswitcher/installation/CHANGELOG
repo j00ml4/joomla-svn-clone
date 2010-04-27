@@ -39,8 +39,6 @@ $ -> Language fix or change
 $ Refactoring com_users back-end in/keys
 
 27-Apr-2010 Christophe Demko
-# Fixed [#18510] Category Manager / New + Edit Category: Image Attribute has no Browse button
-# Fixed [#20236] Editing of template fiies is not working
 # Fixed [#18561] Ftp find path and verify setting in installation
 
 27-Apr-2010 Andrew Eddie
@@ -755,6 +753,9 @@ $ Translating Menu Item Type in Menu Manager: Menu items.
 10-Feb-2010 Christophe Demko
 + Adding publish_up and publish_down for modules
 
+10-Feb-2010 Christophe Demko
++ Detecting browser language in frontend
+
 10-Feb-2010 Hannes Papenberg
 # Fixed bug in JFilterInput
 
@@ -779,6 +780,7 @@ $ Translating Menu Item Type in Menu Manager: Menu items.
 - Deleted admin mod_stats and mod_footer in files
 
 09-Feb-2010 Christophe Demko
++ Adding a frontend language switcher module
 # Loading the user parameters when he changes them (llow the admin to change its own language for example)
 # Removing unused keys in tpl_bluestork.ini which contains the NO keyword
 # Adding the manifest files directory

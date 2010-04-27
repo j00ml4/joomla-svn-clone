@@ -82,6 +82,11 @@ class modRelatedItemsHelper
 					$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
 					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
 
+					// Fire the onPrepareQuery plugins
+					$dispatcher = JDispatcher::getInstance();
+					JPluginHelper::importPlugin('content');
+					$dispatcher->trigger('onPrepareQuery', array('mod_related_items', &$query));
+
 					$db->setQuery($query);
 					$temp = $db->loadObjectList();
 

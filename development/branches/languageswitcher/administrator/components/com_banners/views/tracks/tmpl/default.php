@@ -19,37 +19,7 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=tracks'); ?>" method="post" name="adminForm" id="adminForm">
-	<fieldset id="filter-bar">
-		<div class="filter-search fltlft">
-
-			<label class="filter-hide-lbl"><?php echo JText::_('COM_BANNERS_BEGIN_LABEL'); ?></label>
-			<?php echo JHTML::_('calendar',$this->state->get('filter.begin'), 'filter_begin','filter_begin','%Y-%m-%d' , array('size'=>10,'onchange'=>'this.form.submit()'));?>
-
-			<label class="filter-hide-lbl"><?php echo JText::_('COM_BANNERS_END_LABEL'); ?></label>
-			<?php echo JHTML::_('calendar',$this->state->get('filter.end'), 'filter_end', 'filter_end','%Y-%m-%d' ,array('size'=>10,'onchange'=>'this.form.submit()'));?>
-
-		</div>
-		<div class="filter-select fltrt">
-
-			<select name="filter_type" class="inputbox" onchange="this.form.submit()">
-				<?php echo JHtml::_('select.options', array(JHtml::_('select.option', '0', JText::_('COM_BANNERS_SELECT_TYPE')), JHtml::_('select.option', 1, JText::_('COM_BANNERS_IMPRESSION')), JHtml::_('select.option', 2, JText::_('COM_BANNERS_CLICK'))), 'value', 'text', $this->state->get('filter.type'));?>
-			</select>
-
-			<?php $category = $this->state->get('filter.category_id');?>
-			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
-				<option value="0"<?php if($category==='0') echo ' selected="selected"';?>><?php echo JText::_('JOPTION_NO_CATEGORY');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_banners'), 'value', 'text', $category);?>
-			</select>
-
-			<select name="filter_client_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
-				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
-			</select>
-		</div>
-	</fieldset>
-	<div class="clr"> </div>
-
+	<?php echo $this->loadTemplate('filters');?>
 	<table class="adminlist">
 		<thead>
 			<tr>

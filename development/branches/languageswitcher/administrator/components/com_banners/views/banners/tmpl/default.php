@@ -19,34 +19,7 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_banners&view=banners'); ?>" method="post" name="adminForm" id="adminForm">
-	<fieldset id="filter-bar">
-		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_BANNERS_SEARCH_IN_TITLE'); ?>" />
-			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-		</div>
-		<div class="filter-select fltrt">
-
-			<select name="filter_state" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true);?>
-			</select>
-
-			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
-				<option value="0"><?php echo JText::_('JOPTION_NO_CATEGORY');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_banners'), 'value', 'text', $this->state->get('filter.category_id'));?>
-			</select>
-
-			<select name="filter_client_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
-				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
-			</select>
-		</div>
-	</fieldset>
-	<div class="clr"> </div>
-
+	<?php echo $this->loadTemplate('filters');?>
 	<table class="adminlist">
 		<thead>
 			<tr>
@@ -85,6 +58,9 @@ $listDirn	= $this->state->get('list.direction');
 				</th>
 				<th width="10%">
 					<?php echo JText::_('COM_BANNERS_HEADING_PURCHASETYPE'); ?>
+				</th>
+				<th width="5%">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
@@ -160,6 +136,15 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo JText::sprintf('COM_BANNERS_DEFAULT',($item->client_purchase_type > 0) ? JText::_('COM_BANNERS_FIELD_VALUE_'.$item->client_purchase_type) : JText::_('COM_BANNERS_FIELD_VALUE_'.$this->state->params->get('purchase_type')));?>
 					<?php else:?>
 						<?php echo JText::_('COM_BANNERS_FIELD_VALUE_'.$item->purchase_type);?>
+					<?php endif;?>
+				</td>
+				<td class="center">
+					<?php if ($item->language==''):?>
+						<?php echo JText::_('JDEFAULT'); ?>
+					<?php elseif ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
 				</td>
 				<td class="center">

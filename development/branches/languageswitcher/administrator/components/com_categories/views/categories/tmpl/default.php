@@ -24,21 +24,20 @@ $listDirn	= $this->state->get('list.direction');
 
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('CATEGORIES_ITEMS_SEARCH_FILTER'); ?>" />
-			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
+			<?php foreach($this->form->getFieldSet('search') as $field): ?>
+				<?php if (!$field->hidden): ?>
+					<?php echo $field->label; ?>
+				<?php endif; ?>
+				<?php echo $field->input; ?>
+			<?php endforeach; ?>
 		</div>
 		<div class="filter-select fltrt">
-			<select name="filter_access" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
-			</select>
-
-			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
-			</select>
+			<?php foreach($this->form->getFieldSet('select') as $field): ?>
+				<?php if (!$field->hidden): ?>
+					<?php echo $field->label; ?>
+				<?php endif; ?>
+				<?php echo $field->input; ?>
+			<?php endforeach; ?>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -61,6 +60,9 @@ $listDirn	= $this->state->get('list.direction');
 				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
+				</th>
+				<th width="5%">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -109,6 +111,15 @@ $listDirn	= $this->state->get('list.direction');
 					</td>
 					<td class="center">
 						<?php echo $this->escape($item->access_level); ?>
+					</td>
+					<td class="center">
+						<?php if ($item->language==''):?>
+							<?php echo JText::_('JDEFAULT'); ?>
+						<?php elseif ($item->language=='*'):?>
+							<?php echo JText::_('JALL'); ?>
+						<?php else:?>
+							<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
+						<?php endif;?>
 					</td>
 					<td class="center">
 						<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">

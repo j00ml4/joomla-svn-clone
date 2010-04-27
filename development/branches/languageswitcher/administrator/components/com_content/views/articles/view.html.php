@@ -19,6 +19,7 @@ class ContentViewArticles extends JView
 	protected $items;
 	protected $pagination;
 	protected $state;
+	protected $form;
 
 	/**
 	 * Display the view
@@ -28,6 +29,7 @@ class ContentViewArticles extends JView
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
+		$this->form			= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

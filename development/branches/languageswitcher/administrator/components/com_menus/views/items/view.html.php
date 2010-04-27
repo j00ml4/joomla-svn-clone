@@ -24,6 +24,7 @@ class MenusViewItems extends JView
 	protected $items;
 	protected $pagination;
 	protected $state;
+	protected $form;
 
 	/**
 	 * Display the view
@@ -34,6 +35,7 @@ class MenusViewItems extends JView
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
+		$this->form			= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -108,14 +110,6 @@ class MenusViewItems extends JView
 			}
 			$item->item_type = $value;
 		}
-
-		// Levels filter.
-		$options	= array();
-		$options[]	= JHtml::_('select.option', '1');
-		$options[]	= JHtml::_('select.option', '2');
-		$options[]	= JHtml::_('select.option', '3');
-		$options[]	= JHtml::_('select.option', '4');
-		$this->assign('f_levels', $options);
 
 		parent::display($tpl);
 		$this->addToolbar();

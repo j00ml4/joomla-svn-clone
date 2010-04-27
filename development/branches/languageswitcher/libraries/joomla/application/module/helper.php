@@ -281,6 +281,12 @@ abstract class JModuleHelper
 
 		$cacheid = serialize(array($Itemid,$groups,$clientid));
 
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('modules', &$query));
+
+		// Set the query
 		$db->setQuery($query);
 
 		$cache = JFactory::getCache ('com_modules', 'callback' );

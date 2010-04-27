@@ -198,6 +198,11 @@ class JCategories
 		// Group by
 		$query->group('c.id');
 
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('categories', &$query));
+
 		// Get the results
 		$db->setQuery($query);
 		$results = $db->loadObjectList('id');
@@ -230,7 +235,7 @@ class JCategories
 					if(!(isset($this->_nodes[$result->parent_id]) || $result->parent_id == 0))
 					{
 						unset($this->_nodes[$result->id]);
-						break;
+						continue;
 					}
 
 					if($result->id == $id || $childrenLoaded)
@@ -249,7 +254,7 @@ class JCategories
 					if(!isset($this->_nodes[$result->parent_id]))
 					{
 						unset($this->_nodes[$result->id]);
-						break;
+						continue;
 					}
 					if($result->id == $id || $childrenLoaded)
 					{
