@@ -16,24 +16,22 @@ require_once(JPATH_COMPONENT.'/controller.php');
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.0
+ * @since		1.6
  */
 class UsersControllerProfile extends UsersController
 {
 	/**
-	 * Method to check out a member for editing and redirect to the edit form.
+	 * Method to check out a user for editing and redirect to the edit form.
 	 *
-	 * @access	public
-	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function edit()
+	public function edit()
 	{
-		$app	= &JFactory::getApplication();
-		$user	= &JFactory::getUser();
+		$app	= JFactory::getApplication();
+		$user	= JFactory::getUser();
 		$userId	= (int) $user->get('id');
 
-		// Get the previous member id (if any) and the current member id.
+		// Get the previous user id (if any) and the current user id.
 		$previousId = (int) $app->getUserState('com_users.edit.profile.id');
 		$memberId	= (int) JRequest::getInt('member_id', null, '', 'array');
 
@@ -66,11 +64,10 @@ class UsersControllerProfile extends UsersController
 	/**
 	 * Method to save a member's profile data.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function save()
+	public function save()
 	{
 		// Check for request forgeries.
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
@@ -136,7 +133,7 @@ class UsersControllerProfile extends UsersController
 		}
 
 		// Redirect the user and adjust session state based on the chosen task.
-		switch ($this->_task) {
+		switch ($this->getTask()) {
 			case 'apply':
 				// Check out the profile.
 				$app->setUserState('com_users.edit.profile.id', $return);

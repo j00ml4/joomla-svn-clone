@@ -23,37 +23,37 @@ $listDirn	= $this->state->get('list.direction');
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('Filters'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('COM_USERS_SEARCH_USERS'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::sprintf('JSearch_Filter_Label', 'Users'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::sprintf('JSearch_Title', 'Users'); ?>" />
-			<button type="submit"><?php echo JText::_('JSearch_Submit'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSearch_Reset'); ?></button>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>:</label>
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>" />
+			<button type="submit"><?php echo JText::_('JSEARCH_SUBMIT'); ?></button>
+			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_RESET'); ?></button>
 		</div>
 		<div class="filter-select">
-			<span class="faux-label")><?php echo JText::sprintf('Users_Filter_Label', 'Users'); ?></span>
+			<span class="faux-label")><?php echo JText::_('COM_USERS_FILTER_LABEL'); ?></span>
 				
 			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('Users_Filter_State'); ?>
+				<?php echo JText::_('COM_USERS_FILTER_LABEL'); ?>
 			</label> 
 			<select name="filter_state" id="filter_state" class="inputbox">
-				<option value="*"><?php echo JText::_('Users_Filter_State');?></option>
+				<option value="*"><?php echo JText::_('COM_USERS_FILTER_STATE');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getStateOptions(), 'value', 'text', $this->state->get('filter.state'));?>
 			</select>
 			
 			<label class="selectlabel" for="filter_active">
-				<?php echo JText::_('Users_Filter_Active'); ?>
+				<?php echo JText::_('COM_USERS_FILTER_ACTIVE'); ?>
 			</label> 
 			<select name="filter_active" id="filter_active" class="inputbox">
-				<option value="*"><?php echo JText::_('Users_Filter_Active');?></option>
+				<option value="*"><?php echo JText::_('COM_USERS_FILTER_ACTIVE');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getActiveOptions(), 'value', 'text', $this->state->get('filter.active'));?>
 			</select>
 			
 			<label class="selectlabel" for="filter_group_id">
-				<?php echo JText::_('Users_Filter_Active'); ?>
+				<?php echo JText::_('COM_USERS_FILTER_USERGROUP'); ?>
 			</label>
 			<select name="filter_group_id" id="filter_group_id" class="inputbox">
-				<option value=""><?php echo JText::_('Users_Filter_Usergroup');?></option>
+				<option value=""><?php echo JText::_('COM_USERS_FILTER_USERGROUP');?></option>
 				<?php echo JHtml::_('select.options', UsersHelper::getGroups(), 'value', 'text', $this->state->get('filter.group_id'));?>
 			</select>
 			
@@ -71,31 +71,31 @@ $listDirn	= $this->state->get('list.direction');
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items);?>)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Name', 'a.name', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Username', 'a.username', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_USERNAME', 'a.username', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-5">
 					<?php echo JHtml::_('grid.sort', 'JENABLED', 'a.block', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Activated', 'a.activation', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_ACTIVATED', 'a.activation', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-10">
-					<?php echo JText::_('Users_Heading_Groups'); ?>
+					<?php echo JText::_('COM_USERS_HEADING_GROUPSs'); ?>
 				</th>
 				<th class="nowrap width-15">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Email', 'a.email', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_EMAIL', 'a.email', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-15">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Last_Visit_Date', 'a.lastvisitDate', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_LAST_VISIT_DATE', 'a.lastvisitDate', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-15">
-					<?php echo JHtml::_('grid.sort', 'Users_Heading_Registration_Date', 'a.registerDate', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_REGISTRATION_DATE', 'a.registerDate', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap id-col">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_ID', 'a.id', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
@@ -108,7 +108,7 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td>
 					<?php if ($canDo->get('core.edit')) : ?>
-					<a href="<?php echo JRoute::_('index.php?option=com_users&task=user.edit&id='.$item->id); ?>" title="<?php echo JText::sprintf('Users_Edit_User', $item->name); ?>">
+					<a href="<?php echo JRoute::_('index.php?option=com_users&task=user.edit&id='.$item->id); ?>" title="<?php echo JText::sprintf('COM_USERS_EDIT_USER', $item->name); ?>">
 						<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->name); ?>
@@ -130,10 +130,10 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->email); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->lastvisitDate); ?>
+					<?php echo JHTML::_('date',$item->lastvisitDate, '%Y-%m-%d %H:%M:%S'); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->registerDate); ?>
+					<?php echo JHTML::_('date',$item->registerDate, '%Y-%m-%d %H:%M:%S'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

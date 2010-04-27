@@ -374,7 +374,8 @@ class JControllerForm extends JController
 		}
 
 		// Validate the posted data.
-		$form = $model->getForm();
+		// Sometimes the form needs some posted data, such as for plugins and modules.
+		$form = $model->getForm($data);
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
@@ -416,6 +417,9 @@ class JControllerForm extends JController
 
 		// Save succeeded, check-in the record.
 		if ($checkin && !$model->checkin($data[$key])) {
+			// Save the data in the session.
+			$app->setUserState($context.'.data', $data);
+
 			// Check-in failed, go back to the record and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
 			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$append, $message, 'error');

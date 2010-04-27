@@ -25,11 +25,13 @@ class RedirectViewLink extends JView
 
 	/**
 	 * Display the view
+	 *
+	 * @since	1.6
 	 */
 	public function display($tpl = null)
 	{
-		$this->form	= $this->get('Form');
-		$this->item	= $this->get('Item');
+		$this->form		= $this->get('Form');
+		$this->item		= $this->get('Item');
 		$this->state	= $this->get('State');
 
 		// Check for errors.
@@ -37,9 +39,6 @@ class RedirectViewLink extends JView
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-
-		// Bind the record to the form.
-		$this->form->bind($this->item);
 
 		$this->addToolbar();
 		parent::display($tpl);

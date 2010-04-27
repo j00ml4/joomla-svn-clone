@@ -78,28 +78,42 @@ JHtml::_('behavior.formvalidation');
 </div>
 
 <div class="col options-section">
-	<?php echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+	<?php echo JHtml::_('sliders.start','weblink-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+		<fieldset class="panelform">
+		<legend class="element-invisible"><?php echo JText::_('JGLOBAL_FIELDSET_PUBLISHING'); ?></legend>
+		
+			<?php echo $this->form->getLabel('created_by'); ?>
+			<?php echo $this->form->getInput('created_by'); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_WEBLINKS_OPTIONS'), 'basic-options'); ?>
-	<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('COM_WEBLINKS_OPTIONS'); ?></legend>
+			<?php echo $this->form->getLabel('created_by_alias'); ?>
+			<?php echo $this->form->getInput('created_by_alias'); ?>
 
-		<?php foreach($this->form->getGroup('params') as $field): ?>
-			<?php if ($field->hidden): ?>
-				<?php echo $field->input; ?>
-			<?php else: ?>
-			<div>	
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
-			</div>	
-			<?php endif; ?>
-		<?php endforeach; ?>
+			<?php echo $this->form->getLabel('created'); ?>
+			<?php echo $this->form->getInput('created'); ?>
 
-	</fieldset>
-	<?php echo JHtml::_('sliders.end'); ?>	
-</div>
+			<?php echo $this->form->getLabel('publish_up'); ?>
+			<?php echo $this->form->getInput('publish_up'); ?>
 
+			<?php echo $this->form->getLabel('publish_down'); ?>
+			<?php echo $this->form->getInput('publish_down'); ?>
+
+			<?php echo $this->form->getLabel('modified'); ?>
+			<?php echo $this->form->getInput('modified'); ?>
+
+			<?php echo $this->form->getLabel('version'); ?>
+			<?php echo $this->form->getInput('version'); ?>
+
+		</fieldset>
+
+		<?php echo $this->loadTemplate('params'); ?>
+
+		<?php echo $this->loadTemplate('metadata'); ?>
+
+	</div>
+	<div class="clr"></div>
+	
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
-<div class="clr"></div>
+

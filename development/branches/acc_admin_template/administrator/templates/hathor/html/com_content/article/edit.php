@@ -131,6 +131,7 @@ JHtml::_('behavior.formvalidation');
 				endif;
 				?>
 			<fieldset class="panelform">
+			<legend class="element-invisible"><?php echo JText::_($fieldSet->label); ?></legend>
 				<?php foreach ($this->form->getFieldset($name) as $field) : ?>
 				<div>
 					<?php echo $field->label; ?>
@@ -142,12 +143,14 @@ JHtml::_('behavior.formvalidation');
 	
 		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Access'), 'access-rules'); ?>
 		<fieldset class="panelform">
+		<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Access'); ?></legend>
 			<?php // echo $this->form->getLabel('rules'); ?>
 			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 		
 		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Metadata'), 'meta-options'); ?>
 		<fieldset class="panelform">
+		<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Metadata'); ?></legend>
 		<div>
 			<?php echo $this->form->getLabel('metadesc'); ?>
 			<?php echo $this->form->getInput('metadesc'); ?>
@@ -167,6 +170,7 @@ JHtml::_('behavior.formvalidation');
 					endif;
 					?>
 				<fieldset class="panelform">
+				<legend class="element-invisible"><?php echo JText::_($label); ?></legend>
 					<?php foreach ($this->form->getFieldset($name) as $field) : ?>
 					<div>
 						<?php echo $field->label; ?>
