@@ -578,8 +578,9 @@ div#menu-assignment h3 {
 	padding-top: 15px;
 	padding-bottom: 0;
 	margin-bottom: 0;
-	border-bottom: 1px solid #CCCCCC;
+	border-bottom: 1px solid #c7c8b2;
 	width: 90%;
+	clear:left;
 }
 
 div#menu-assignment ul.menu-links li.menu-link label {
@@ -2458,7 +2459,9 @@ dl.menu_type dd ul li {
 body.contentpane #filter-bar {
 	font-size: 80%;
 }
-
+body.contentpane input, body.contentpane select {
+	font-size: 120%;
+}
 
 /**
  * User Accessibility
@@ -2536,7 +2539,7 @@ fieldset.panelform {
 fieldset.adminform label, fieldset.panelform label {
 	line-height: 2em;
 	clear:left;
-	min-width: 10em;
+	min-width: 12em;
 	float:left;
 	margin-left: 10px;
 }

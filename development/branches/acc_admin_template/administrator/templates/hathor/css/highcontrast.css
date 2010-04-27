@@ -47,6 +47,7 @@ a:visited {
 
 a:hover,a:focus {
 	text-decoration: underline;
+	color: #fcff20;
 }
 
 .enabled 	{ color: #00f800; font-weight: bold; }
@@ -237,6 +238,10 @@ div.current {
 div.current dd {
 	padding: 0;
 	margin: 0;
+}
+
+div#menu-assignment h3 {
+	border-bottom: 1px solid #fcff20;
 }
 
 /** 
@@ -1110,6 +1115,7 @@ tr.row1 {
 /* ACL Config --------- */
 table#acl-config {
 	border: 1px solid #10254a;
+	background: #1c4181;
 }
 
 table#acl-config th,
