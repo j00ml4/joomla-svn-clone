@@ -110,6 +110,40 @@ class JComments
 	}
 
 	/**
+	 * Get a list of the users that require notification for comments.
+	 *
+	 * @return	array
+	 */
+	protected static function getUsersByContext($context)
+	{
+		// Initialise variables.
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+
+		$query->select('a.user_name, a.user_email');
+		$query->from('#__social_comments AS a');
+		$query->where('a.context = '.$db->quote($context));
+		$query->where('a.notify = 1');
+
+		// Get registered user name information if it exists.
+		$query->select('c.name AS j_name');
+		$query->join('LEFT', '#__users AS c ON c.id = a.user_id');
+
+		//echo nl2br(str_replace('#__','jos_',$query)).'<hr/>';
+
+		// Execute the query and load the list of objects from the database.
+		$db->setQuery($query);
+		$list = $db->loadObjectList();
+
+		if ($error = $db->getErrorMsg()) {
+			JError::raiseError(500, $error);
+			return false;
+		}
+
+		return $list;
+	}
+
+	/**
 	 * @param	JRegistry
 	 */
 	public function getForm($params = null)
@@ -200,12 +234,14 @@ class JComments
 
 	public function save($data)
 	{
-		// Get the database connection object.
+		// Initialise variables.
 		$db = JFactory::getDBO();
+		$user = JFactory::getUser();
+		$sConfig = JComponentHelper::getParams('com_social');
 
 		// Build a query to get data from the content item row.
 		$query = $db->getQuery(true);
-		$query->select('a.id, a.component');
+		$query->select('a.id, a.component, a.title, a.route');
 		$query->from('#__social_content AS a');
 		$query->where('a.context = '.$db->quote($data['context']));
 
@@ -213,7 +249,7 @@ class JComments
 		$db->setQuery($query);
 		$content = $db->loadObject();
 
-		// Make sure a content item exists to rate.
+		// Make sure a content item exists for comments.
 		if (!$content) {
 			// Throw error
 			return false;
@@ -247,6 +283,14 @@ class JComments
 		// New comment.
 		else {
 
+			// Determine if the comment needs to be moderated.
+			$moderate = $sConfig->get('moderate_comments');
+			if ($moderate == 2 || ($moderate == 1 && empty($user->id))) {
+				$state = 0;
+			} else {
+				$state = 1;
+			}
+
 			// Fire onContentSubmit event for external validation/verification/modification.
 
 			$query = $db->getQuery(true);
@@ -256,10 +300,10 @@ class JComments
 			$query->set('content_id = '.(int) $content->id);
 			$query->set('created_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
 			$query->set('modified_date = '.$db->quote(JFactory::getDate()->toMySQL(), false));
-			$query->set('user_id = '.(int) JFactory::getUser()->id);
+			$query->set('user_id = '.(int) $user->id);
 			$query->set('user_ip = '.(int) ip2long($userIp));
 
-			$query->set('state = 1');
+			$query->set('state = '.$state);
 			$query->set('trackback = 0');
 
 			$query->set('user_name = '.$db->quote($data['name']));
@@ -286,9 +330,71 @@ class JComments
 
 
 			// Send out moderation queue email as necessary.
+
+			if ($notify = $sConfig->get('notify_comments')) {
+
+				// 2: notify all; 1: notify for guests only
+				if ($notify == 2 || empty($user->id)) {
+
+					if ($recipient = $sConfig->get('emailto')) {
+						$jConfig = JFactory::getConfig();
+
+						// Get a JMail instance
+						$mail = JFactory::getMailer();
+						$result = $mail->setSender(array($config->get('mailfrom'), $config->get('mailfrom')))
+							->addRecipient($recipient)
+							->setSubject(JText::sprintf('JLIB_SOCIAL_NEW_COMMENT_MOD_SUBJECT', $content->title))
+							->setBody(
+								JText::sprintf(
+									'JLIB_SOCIAL_NEW_COMMENT_MOD_BODY',
+									$content->title, $content->route, $data['name'], $data['body']
+								)
+							)
+							->Send();
+
+						if ($result == false) {
+							JError::raiseWarning(500, $mail->ErrorInfo);
+						}
+					}
+				}
+			}
+
 		}
 
-		// Send out notification emails as necessary.
+		// Send out notification emails to users watching this content as necessary.
+		if ($users = self::getUsersByContext($users)) {
+
+			// TODO: need to work out who the recipient will be
+			$recipient = 'noreply@example.com';
+
+			// Prepare the email
+			$mail = JFactory::getMailer();
+			$result = $mail->setSender(array($config->get('mailfrom'), $config->get('mailfrom')))
+				->addRecipient($recipient)
+				->setSubject(JText::sprintf('JLIB_SOCIAL_NEW_COMMENT_USER_SUBJECT', $content->title))
+				->setBody(
+					JText::sprintf(
+						'JLIB_SOCIAL_NEW_COMMENT_USER_BODY',
+						$content->title, $content->route, $data['name'], $data['body']
+					)
+				);
+
+			// Add the users wanting to be notified as BCC's.
+			foreach ($users as $u) {
+				if ($u->j_email) {
+					$mail->addBCC($u->j_email);
+				} else {
+					$mail->addBCC($user->user_email);
+				}
+			}
+
+			// Send the notification emails and check for errors.
+			$result = $mail->Send();
+
+			if ($result == false) {
+				JError::raiseWarning(500, $mail->ErrorInfo);
+			}
+		}
 
 		// Update the cumulative comment data for the content item.
 		if (!self::updateCumulativeByContext($data['context'])) {
