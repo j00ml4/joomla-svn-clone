@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<form>
+	<fields name="filters">
+		<fieldset name="search">
+			<field type="search"
+				name="search"
+				label="JSEARCH_FILTER_LABEL"
+				description="JSEARCH_FILTER"
+			/>
+		</fieldset>
+		<fieldset name="select">
+			<field type="state"
+				name="state"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">JOPTION_SELECT_PUBLISHED</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

@@ -40,7 +40,7 @@ class NewsfeedsController extends JController
 			$cachable = false;
 		}
 
-		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD');
+		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','language'=>'CMD');
 
 			parent::display($cachable,$safeurlparams);
 

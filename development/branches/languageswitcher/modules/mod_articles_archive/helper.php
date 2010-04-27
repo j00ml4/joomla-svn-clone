@@ -21,6 +21,12 @@ class modArchiveHelper
 		$query->from('#__content');
 		$query->where('state = -1 AND checked_out = 0');
 		$query->group('created_year DESC, created_month DESC');
+		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+
+		// Fire the onPrepareQuery plugins
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('content');
+		$dispatcher->trigger('onPrepareQuery', array('mod_articles_archive', &query));
 
 		$db->setQuery($query, 0, intval($params->get('count')));
 		$rows = $db->loadObjectList();

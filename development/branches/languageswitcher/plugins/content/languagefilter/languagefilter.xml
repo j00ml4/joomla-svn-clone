@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content">
+	<name>plg_content_languagefilter</name>
+	<author>Joomla! Project</author>
+	<creationDate>July 2010</creationDate>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>1.0</version>
+	<description>PLG_CONTENT_LANGUAGEFILTER_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="languagefilter">languagefilter.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_languagefilter.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_content_languagefilter.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="manage_language" type="radio"
+					default="0"
+					description="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_DESC"
+					label="PLG_CONTENT_LANGUAGEFILTER_FIELD_MANAGE_LANGUAGE_LABEL"
+				>
+<!--					<option value="no">PLG_CONTENT_LANGUAGEFILTER_NO</option>-->
+					<option value="inherited">PLG_CONTENT_LANGUAGEFILTER_INHERITED</option>
+					<option value="always">PLG_CONTENT_LANGUAGEFILTER_ALWAYS</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

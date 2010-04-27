@@ -119,7 +119,7 @@ class plgSearchContent extends JPlugin
 				break;
 
 			case 'category':
-				$order = 'b.title ASC, a.title ASC';
+				$order = 'c.title ASC, a.title ASC';
 				$morder = 'a.title ASC';
 				break;
 
@@ -137,18 +137,23 @@ class plgSearchContent extends JPlugin
 		{
 			$query->clear();
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
-						.'CONCAT(a.introtext, a.fulltext) AS text, b.title AS section, '
+						.'CONCAT(a.introtext, a.fulltext) AS text, c.title AS section, '
 						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug, '
-						.'CASE WHEN CHAR_LENGTH(b.alias) THEN CONCAT_WS(":", b.id, b.alias) ELSE b.id END as catslug, '
+						.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug, '
 						.'"2" AS browsernav');
 			$query->from('#__content AS a');
-			$query->innerJoin('#__categories AS b ON b.id=a.catid');
-			$query->where('('. $where .')' . 'AND a.state=1 AND b.published = 1 AND a.access IN ('.$groups.') '
-						.'AND b.access IN ('.$groups.') '
+			$query->innerJoin('#__categories AS c ON c.id=a.catid');
+			$query->where('('. $where .')' . 'AND a.state=1 AND c.published = 1 AND a.access IN ('.$groups.') '
+						.'AND c.access IN ('.$groups.') '
 						.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
 						.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
 			$query->group('a.id');
 			$query->order($order);
+
+			// Fire the onPrepareQuery plugins
+			$dispatcher = JDispatcher::getInstance();
+			JPluginHelper::importPlugin('content');
+			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
 
 			$db->setQuery($query, 0, $limit);
 			$list = $db->loadObjectList();
@@ -168,14 +173,20 @@ class plgSearchContent extends JPlugin
 		if ($sUncategorised && $limit > 0)
 		{
 			$query->clear();
-			$query->select('id, a.title AS title, a.created AS created, a.metadesc, a.metakey, '
+			$query->select('a.id as id, a.title AS title, a.created AS created, a.metadesc, a.metakey, '
 						.'CONCAT(a.introtext, a.fulltext) AS text, '
 						.'"2" as browsernav, "'. $db->Quote(JText::_('Uncategorised Content')) .'" AS section');
 			$query->from('#__content AS a');
+			$query->innerJoin('#__categories AS c ON c.id=a.catid');
 			$query->where('('. $where .') AND a.state = 1 AND a.access IN ('. $groups. ') AND a.catid=0 '
 						.'AND (a.publish_up = '. $db->Quote($nullDate) .' OR a.publish_up <= '. $db->Quote($now) .') '
 						.'AND (a.publish_down = '. $db->Quote($nullDate) .' OR a.publish_down >= '. $db->Quote($now) .')');
 			$query->order(($morder ? $morder : $order));
+
+			// Fire the onPrepareQuery plugins
+			$dispatcher = JDispatcher::getInstance();
+			JPluginHelper::importPlugin('content');
+			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
 
 			$db->setQuery($query, 0, $limit);
 			$list2 = $db->loadObjectList();
@@ -201,16 +212,21 @@ class plgSearchContent extends JPlugin
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
 						.'CONCAT(a.introtext, a.fulltext) AS text, '
 						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug, '
-						.'CASE WHEN CHAR_LENGTH(b.alias) THEN CONCAT_WS(":", b.id, b.alias) ELSE b.id END as catslug, '
-						.'CONCAT_WS("/", b.title) AS section, "2" AS browsernav' );
+						.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug, '
+						.'CONCAT_WS("/", c.title) AS section, "2" AS browsernav' );
 			$query->from('#__content AS a');
-			$query->innerJoin('#__categories AS b ON b.id=a.catid AND b.access IN ('. $groups .')');
-			$query->where('('. $where .') AND a.state = -1 AND b.published = 1 AND a.access IN ('. $groups
-				.') AND b.access IN ('. $groups .') '
+			$query->innerJoin('#__categories AS c ON c.id=a.catid AND c.access IN ('. $groups .')');
+			$query->where('('. $where .') AND a.state = -1 AND c.published = 1 AND a.access IN ('. $groups
+				.') AND c.access IN ('. $groups .') '
 				.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
 				.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
 			$query->order($order);
 
+
+			// Fire the onPrepareQuery plugins
+			$dispatcher = JDispatcher::getInstance();
+			JPluginHelper::importPlugin('content');
+			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
 
 			$db->setQuery($query, 0, $limit);
 			$list3 = $db->loadObjectList();

@@ -44,7 +44,19 @@
 			<option
 				value="1">JSHOW</option>
 		</field>
-	</fieldset>
+
+<!--		<field
+			name="autosave_language"
+			type="radio"
+			default="0"
+			label="COM_USERS_FIELD_CONFIG_AUTOSAVE_LANGUAGE_LABEL"
+			description="COM_USERS_FIELD_CONFIG_AUTOSAVE_LANGUAGE_DESC">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+-->	</fieldset>
 
  	<fieldset
 		name="massmail"

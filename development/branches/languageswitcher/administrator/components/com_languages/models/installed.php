@@ -69,11 +69,17 @@ class LanguagesModelInstalled extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
+		$app = JFactory::getApplication();
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
+		}
+		else {
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
+		}
 
-		// Load the filter state.
-		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0);
-		$this->setState('filter.client_id', $clientId);
+		$this->setState('filter.client_id', isset($filters['client_id']) ? $filters['client_id'] : '0');
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_languages');
@@ -311,5 +317,37 @@ class LanguagesModelInstalled extends JModelList
 	protected function compareLanguages($lang1,$lang2)
 	{
 		return strcmp($lang1->name,$lang2->name);
+	}
+
+	/**
+	 * Method to get the row form.
+	 *
+	 * @return	mixed	JForm object on success, false on failure.
+	 */
+	public function getForm() {
+
+		// Initialise variables.
+		$app = & JFactory::getApplication();
+
+		// Get the form.
+		jimport('joomla.form.form');
+		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
+		$form = & JForm::getInstance($this->context, 'installed', array('event' => 'onPrepareForm'));
+
+		// Check for an error.
+		if (JError::isError($form)) {
+			$this->setError($form->getMessage());
+			return false;
+		}
+
+		// Check the session for previously entered form data.
+		$data = $app->getUserState($this->context.'.data', array());
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		}
+		return $form;
 	}
 }

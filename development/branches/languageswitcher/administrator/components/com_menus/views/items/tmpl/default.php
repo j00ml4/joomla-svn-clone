@@ -21,36 +21,7 @@ $listDirn	= $this->state->get('list.direction');
 ?>
 <?php //Set up the filter bar. ?>
 <form action="<?php echo JRoute::_('index.php?option=com_menus&view=items');?>" method="post" name="adminForm">
-	<fieldset id="filter-bar">
-		<div class="filter-search fltlft">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_MENUS_ITEMS_SEARCH_FILTER'); ?>" />
-			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
-		</div>
-		<div class="filter-select fltrt">
-			<select name="filter_access" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
-			</select>
-
-			<select name="filter_published" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.all'), true);?>
-			</select>
-
-			<select name="menutype" class="inputbox" onchange="this.form.submit()">
-				<?php echo JHtml::_('select.options', JHtml::_('menu.menus'), 'value', 'text', $this->state->get('filter.menutype'));?>
-			</select>
-
-			<select name="filter_level" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('COM_MENUS_OPTION_SELECT_LEVEL');?></option>
-				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
-			</select>
-
-		</div>
-	</fieldset>
-	<div class="clr"> </div>
+	<?php echo $this->loadTemplate('filters');?>
 <?php //Set up the grid heading. ?>
 	<table class="adminlist">
 		<thead>
@@ -73,6 +44,9 @@ $listDirn	= $this->state->get('list.direction');
 				</th>
 				<th width="10%">
 					<?php echo JText::_('JGRID_HEADING_MENU_ITEM_TYPE'); ?>
+				</th>
+				<th width="5%">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -106,7 +80,7 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->title); ?></a>
 
 					<?php if ($item->home == 1) : ?>
-						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'title' => JText::_('JDEFAULT')), true); ?></span>
+						<span><?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('JDEFAULT'), array( 'class'=>'hasTip', 'title' => JText::_('JDEFAULT').'::'.($item->language_title ? $this->escape($item->language_title):JText::_('JOPTION_ALL_LANGUAGES'))), true); ?></span>
 					<?php endif; ?>
 
 					<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
@@ -130,6 +104,15 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->item_type); ?></span>
 				</td>
 				<td class="center">
+					<?php if ($item->language==''):?>
+						<?php echo JText::_('JOPTION_DEFAULT_LANGUAGE'); ?>
+					<?php elseif ($item->language=='*'):?>
+						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
+					<?php endif;?>
+				</td>
+				<td class="center">
 					<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">
 						<?php echo (int) $item->id; ?></span>
 				</td>
@@ -138,8 +121,7 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 <?php //Load the batch processing form. ?>
-	<?php echo $this->loadTemplate('batch'); ?>
-
+	<?php echo $this->loadTemplate('batch');?>
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />

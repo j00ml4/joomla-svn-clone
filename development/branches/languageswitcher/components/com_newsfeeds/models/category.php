@@ -96,9 +96,9 @@ class NewsfeedsModelCategory extends JModelList
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
+		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
 		}
 

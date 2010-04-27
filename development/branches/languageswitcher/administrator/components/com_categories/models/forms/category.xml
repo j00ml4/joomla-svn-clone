@@ -87,7 +87,7 @@
 		label="CATEGORIES_DESCRIPTION_LABEL"
 		description="CATEGORIES_DESCRIPTION_DESC"
 		class="inputbox"
-		buttons="image,readmore,pagebreak"/>
+		buttons="readmore,pagebreak"/>
 
 	<field
 		name="published"
@@ -179,6 +179,7 @@
 		class="inputbox"
 		default="">
 		<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		<option value="*">JOPTION_ALL_LANGUAGES</option>
 	</field>
 
 	<field

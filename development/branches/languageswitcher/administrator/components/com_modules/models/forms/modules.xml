@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<form>
+	<fields name="filters">
+		<fieldset name="search">
+			<field type="search"
+				name="search"
+				label="JSEARCH_FILTER_LABEL"
+				description="JSEARCH_FILTER"
+			/>
+		</fieldset>
+		<fieldset name="select">
+			<field type="list"
+				name="client_id"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="0">JSITE</option>
+				<option value="1">JADMINISTRATOR</option>
+			</field>				
+			<field type="accesslevel"
+				name="access"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">JOPTION_SELECT_ACCESS</option>
+			</field>
+			<field type="state"
+				name="state"
+				hidden="true"
+				onchange="this.form.submit();"
+				archived="no"
+			>
+				<option value="">JOPTION_SELECT_PUBLISHED</option>
+			</field>
+			<field type="moduleposition"
+				name="position"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">COM_MODULES_OPTION_SELECT_POSITION</option>
+			</field>
+			<field type="moduletype"
+				name="module"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">COM_MODULES_OPTION_SELECT_MODULE</option>
+			</field>
+			<field type="contentlanguage"
+				name="language"
+				default="-"
+				hidden="true"
+				onchange="this.form.submit();"
+			>
+				<option value="">JOPTION_SELECT_LANGUAGE</option>
+				<option value="*">JOPTION_ALL_LANGUAGES</option>
+				<option value="?">JOPTION_DEFAULT_LANGUAGE</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

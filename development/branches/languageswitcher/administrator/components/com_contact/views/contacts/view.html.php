@@ -19,9 +19,10 @@ jimport('joomla.application.component.view');
  */
 class ContactViewContacts extends JView
 {
-	public $items;
-	public $pagination;
-	public $state;
+	protected $items;
+	protected $pagination;
+	protected $state;
+	protected $form;
 
 	/**
 	 * Display the view
@@ -33,6 +34,7 @@ class ContactViewContacts extends JView
 		$this->items		= $this->get('items');
 		$this->pagination	= $this->get('pagination');
 		$this->state		= $this->get('state');
+		$this->form			= $this->get('form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
