@@ -25,7 +25,7 @@ class JMenuSite extends JMenu
 	public function load()
 	{
 		$cache = &JFactory::getCache('mod_menu', '');  // has to be mod_menu or this cache won't get cleaned
-		if (!$data = $cache->get('menu_items')) {
+		if (!$data = $cache->get('menu_items'.JFactory::getLanguage()->getTag())) {
 			// Initialise variables.
 			$db		= JFactory::getDbo();
 			$query	= $db->getQuery(true);
@@ -70,7 +70,7 @@ class JMenuSite extends JMenu
 				parse_str($url, $menu->query);
 			}
 
-			$cache->store($menus, 'menu_items');
+			$cache->store($menus, 'menu_items'.JFactory::getLanguage()->getTag());
 
 			$this->_items = $menus;
 		} else {
