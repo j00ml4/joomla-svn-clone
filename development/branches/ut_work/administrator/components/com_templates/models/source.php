@@ -29,9 +29,11 @@ class TemplatesModelSource extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -60,10 +62,8 @@ class TemplatesModelSource extends JModelForm
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_templates.source', 'source', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_templates.source', 'source', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -73,6 +73,8 @@ class TemplatesModelSource extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getSource());
 		}
 
 		return $form;

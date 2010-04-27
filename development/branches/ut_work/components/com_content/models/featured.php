@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: featured.php 15932 2010-04-08 01:53:33Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -31,25 +31,25 @@ class ContentModelFeatured extends ContentModelArticles
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
-		parent::_populateState();
-
-		// Add blog properties
-		$params = $this->_state->params;
+		parent::populateState();
 
 		// List state information
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 		$this->setState('list.start', $limitstart);
-		
+
+		$params = $this->state->params;
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		$this->setState('list.limit', $limit);
 		$this->setState('list.links', $params->get('num_links'));
-		
+
 		$this->setState('filter.frontpage', true);
-		
+
 		// check for category selection
 		if (is_array($featuredCategories = $params->get('featured_categories'))) {
 			$this->setState('filter.frontpage.categories', $featuredCategories);
@@ -63,7 +63,7 @@ class ContentModelFeatured extends ContentModelArticles
 	 */
 	public function getItems()
 	{
-		$params = $this->_state->params;
+		$params = clone $this->getState('params');
 		$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
 		if ($limit > 0)
 		{
@@ -71,9 +71,9 @@ class ContentModelFeatured extends ContentModelArticles
 			return parent::getItems();
 		}
 		return array();
-		 
+
 	}
-	
+
 	/**
 	 * Method to get a store id based on model configuration state.
 	 *
@@ -85,21 +85,21 @@ class ContentModelFeatured extends ContentModelArticles
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id .= $this->getState('filter.frontpage');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
 	 * @return	JDatabaseQuery
 	 */
-	function _getListQuery()
+	function getListQuery()
 	{
 		// Set the blog ordering
-		$params = $this->_state->params;
+		$params = $this->state->params;
 		$articleOrderby = $params->get('orderby_sec', 'rdate');
 		$articleOrderDate = $params->get('order_date');
 		$categoryOrderby = $params->def('orderby_pri', '');
@@ -110,14 +110,14 @@ class ContentModelFeatured extends ContentModelArticles
 		$this->setState('list.ordering', $orderby);
 		$this->setState('list.direction', '');
 		// Create a new query object.
-		$query = parent::_getListQuery();
+		$query = parent::getListQuery();
 
 		// Filter by frontpage.
 		if ($this->getState('filter.frontpage'))
 		{
 			$query->join('INNER', '#__content_frontpage AS fp ON fp.content_id = a.id');
 		}
-		
+
 		// Filter by categories
 		if (is_array($featuredCategories = $this->getState('filter.frontpage.categories'))) {
 			$query->where('a.catid IN (' . implode(',',$featuredCategories) . ')');

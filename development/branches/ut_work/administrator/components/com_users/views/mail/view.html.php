@@ -23,7 +23,7 @@ class UsersViewMail extends JView
 	/**
 	 * @var object form object
 	 */
-	public $form = null;
+	protected $form;
 
 	/**
 	 * Display the view
@@ -31,24 +31,18 @@ class UsersViewMail extends JView
 	function display($tpl = null)
 	{
 		// Get data from the model
-		$form = &$this->get('Form');
+		$this->form = $this->get('Form');
 
-		// Assign data to the view
-		$this->assignRef('form', $form);
-
-		// Set the toolbar
-		$this->_setToolBar();
-
-		// Display the view
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolBar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', 1);
 

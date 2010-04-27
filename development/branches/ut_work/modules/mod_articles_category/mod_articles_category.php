@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: mod_articles_category.php 15946 2010-04-08 16:20:11Z klascommit $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	mod_articles_category
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -30,10 +30,10 @@ require_once dirname(__FILE__).DS.'helper.php';
 						case 'article':
 							if ($params->get('show_on_article_page', 1)) {
 								$idbase = JRequest::getInt('catid');
-							} 
+							}
 							break;
 					}
-				} 
+				}
 				break;
 			case 'normal':
 			default:
@@ -47,7 +47,7 @@ $cacheid = md5(serialize(array ($idbase,$module->module)));
 
 $cacheparams = new stdClass;
 $cacheparams->cachemode = 'id';
-$cacheparams->class = 'modArticlesCategoryHelper';	
+$cacheparams->class = 'modArticlesCategoryHelper';
 $cacheparams->method = 'getList';
 $cacheparams->methodparams = $params;
 $cacheparams->modeparams = $cacheid;

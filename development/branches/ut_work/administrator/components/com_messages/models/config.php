@@ -21,8 +21,12 @@ class MessagesModelConfig extends JModelForm
 {
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app	= JFactory::getApplication('administrator');
 		$user	= JFactory::getUser();
@@ -78,10 +82,8 @@ class MessagesModelConfig extends JModelForm
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_messages.config', 'config', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_messages.config', 'config', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 

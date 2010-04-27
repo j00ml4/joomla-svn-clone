@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * User group model.
@@ -17,32 +17,19 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_users
  * @since		1.6
  */
-class UsersModelGroup extends JModelForm
+class UsersModelGroup extends JModelAdmin
 {
 	/**
-	 * Method to auto-populate the model state.
+	 * @var		string	The event to trigger after saving the data.
+	 * @since	1.6
 	 */
-	protected function _populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_users.edit.group.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('group.id', $pk);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_users');
-		$this->setState('params', $params);
-	}
+	protected $event_after_save = 'onAfterStoreUsergroup';
 
 	/**
-	 * Prepare and sanitise the table prior to saving.
+	 * @var		string	The event to trigger after before the data.
+	 * @since	1.6
 	 */
-	protected function _prepareTable(&$table)
-	{
-	}
+	protected $event_before_save = 'onBeforeStoreUsergroup';
 
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -51,6 +38,7 @@ class UsersModelGroup extends JModelForm
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
+	 * @since	1.6
 	*/
 	public function getTable($type = 'Usergroup', $prefix = 'JTable', $config = array())
 	{
@@ -59,45 +47,10 @@ class UsersModelGroup extends JModelForm
 	}
 
 	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int)$this->getState('group.id');
-		$false	= false;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Attempt to load the row.
-		$return = $table->load($pk);
-
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
-		}
-
-		// Prime required properties.
-		if (empty($table->id))
-		{
-			// Prepare data for a new record.
-		}
-
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		return $value;
-	}
-
-	/**
 	 * Method to get the record form.
 	 *
 	 * @return	mixed	JForm object on success, false on failure.
+	 * @since	1.6
 	 */
 	public function getForm()
 	{
@@ -105,10 +58,8 @@ class UsersModelGroup extends JModelForm
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_users.group', 'group', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_users.group', 'group', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -118,6 +69,8 @@ class UsersModelGroup extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -128,70 +81,22 @@ class UsersModelGroup extends JModelForm
 	 *
 	 * @param	array	The form data.
 	 * @return	boolean	True on success.
+	 * @since	1.6
 	 */
 	public function save($data)
 	{
-		// Initialise variables;
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('group.id');
-		$isNew		= true;
-
 		// Include the content plugins for events.
 		JPluginHelper::importPlugin('user');
 
-		// Load the row if saving an existing record.
-		if ($pk > 0)
-		{
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data))
-		{
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving.
-		$this->_prepareTable($table);
-
-		// Check the data.
-		if (!$table->check())
-		{
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeStoreUsergroup', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store())
-		{
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onAftereStoreUser event
-		$dispatcher->trigger('onAfterStoreUsergroup', array($table->getProperties(), $isNew, true, null));
-
-		$this->setState('group.id', $table->id);
-
-		return true;
+		return parent::save($data);
 	}
 
 	/**
 	 * Method to delete rows.
 	 *
 	 * @param	array	An array of item ids.
-	 *
 	 * @return	boolean	Returns true on success, false on failure.
+	 * @since	1.6
 	 */
 	public function delete(&$pks)
 	{
@@ -200,45 +105,35 @@ class UsersModelGroup extends JModelForm
 		$user	= JFactory::getUser();
 
 		// Get a row instance.
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
 		// Trigger the onBeforeStoreUser event.
 		JPluginHelper::importPlugin('user');
-		$dispatcher = &JDispatcher::getInstance();
+		$dispatcher = JDispatcher::getInstance();
 
 		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk)
-		{
-			if ($table->load($pk))
-			{
+		foreach ($pks as $i => $pk) {
+			if ($table->load($pk)) {
 				// Access checks.
 				$allow = $user->authorise('core.edit.state', 'com_users');
 
-				if ($allow)
-				{
+				if ($allow) {
 					// Fire the onBeforeDeleteUser event.
 					$dispatcher->trigger('onBeforeDeleteUser', array($table->getProperties()));
 
-					if (!$table->delete($pk))
-					{
+					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
 						return false;
-					}
-					else
-					{
+					} else {
 						// Trigger the onAfterDeleteUsergroup event.
 						$dispatcher->trigger('onAfterDeleteUsergroup', array($user->getProperties(), true, $this->getError()));
 					}
-				}
-				else
-				{
+				} else {
 					// Prune items that you can't change.
 					unset($pks[$i]);
 					JError::raiseWarning(403, JText::_('JError_Core_Delete_not_permitted'));
 				}
-			}
-			else
-			{
+			} else {
 				$this->setError($table->getError());
 				return false;
 			}
