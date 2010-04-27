@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!-- $Id$ -->
 <form>
-	<fieldset
+	<fields
 		label="COM_MENUS_LINKTYPE_OPTIONS_LABEL"
 		description="">
 
@@ -9,8 +9,8 @@
 			id="menu-anchor_title"
 			name="menu-anchor_title"
 			type="text"
-			label=COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_LABEL
-			description=COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_DESC
+			label="COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_LABEL"
+			description="COM_MENUS_ITEM_FIELD_ANCHOR_TITLE_DESC"
 			default=""/>
 
 		<field
@@ -21,7 +21,7 @@
 			description="COM_MENUS_ITEM_FIELD_ANCHOR_CSS_DESC"
 			default=""/>
 
-	</fieldset>
+	</fields>
 
 </form>
 
