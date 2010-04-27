@@ -218,6 +218,8 @@ class ModulesModelModule extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -230,7 +232,7 @@ class ModulesModelModule extends JModelAdmin
 	 *
 	 * @return	mixed	Object on success, false on failure.
 	 */
-	public function &getItem($pk = null)
+	public function getItem($pk = null)
 	{
 		// Initialise variables.
 		$pk	= (!empty($pk)) ? (int) $pk : (int) $this->getState('module.id');

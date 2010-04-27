@@ -1,11 +1,13 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
-// No direct access
+// No direct access.
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
@@ -21,6 +23,8 @@ class InstallerController extends JController
 {
 /**
 	 * Method to display a view.
+	 *
+	 * @since	1.5
 	 */
 	function display()
 	{
@@ -35,13 +39,12 @@ class InstallerController extends JController
 		$lName		= JRequest::getWord('layout', 'default');
 
 		// Get and render the view.
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			$ftp	= &JClientHelper::setCredentialsFromRequest('ftp');
+		if ($view = $this->getView($vName, $vFormat)) {
+			$ftp	= JClientHelper::setCredentialsFromRequest('ftp');
 			$view->assignRef('ftp', $ftp);
 
 			// Get the model for the view.
-			$model = &$this->getModel($vName);
+			$model = $this->getModel($vName);
 
 			// Push the model into the view (as default).
 			$view->setModel($model, true);

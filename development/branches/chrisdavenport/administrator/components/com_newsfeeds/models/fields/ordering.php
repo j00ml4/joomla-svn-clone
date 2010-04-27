@@ -13,7 +13,7 @@ jimport('joomla.html.html');
 jimport('joomla.form.formfield');
 
 /**
- * Supports an HTML select list of categories
+ * Supports an HTML select list of newsfeeds
  *
  * @package		Joomla.Administrator
  * @subpackage	com_newsfeeds
@@ -54,7 +54,7 @@ class JFormFieldOrdering extends JFormField
 		$categoryId	= (int) $this->form->getValue('catid');
 
 		// Build the query for the ordering list.
-		$query = 'SELECT ordering AS value, name AS text' .
+		$query = 'SELECT ordering AS ordering, name AS text' .
 				' FROM #__newsfeeds' .
 				' WHERE catid = ' . (int) $categoryId .
 				' ORDER BY ordering';
@@ -62,7 +62,7 @@ class JFormFieldOrdering extends JFormField
 		// Create a read-only list (no name) with a hidden input to store the value.
 		if ((string) $this->element['readonly'] == 'true') {
 			$html[] = JHtml::_('list.ordering', '', $query, trim($attr), $this->value, $newsfeedId ? 0 : 1);
-			$html[] = '<input type="hidden" name="'.$this->name.'" value="'.$this->value.'"/>';
+			$html[] = '<input type="hidden" name="'.$this->name.'" ordering="'.$this->ordering.'"/>';
 		}
 		// Create a regular list.
 		else {

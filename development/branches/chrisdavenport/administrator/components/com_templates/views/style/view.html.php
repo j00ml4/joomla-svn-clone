@@ -38,9 +38,6 @@ class TemplatesViewStyle extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -81,6 +78,6 @@ class TemplatesViewStyle extends JView
 			JToolBarHelper::cancel('style.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.style.edit','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Template_Manager_Styles_Edit');
 	}
 }

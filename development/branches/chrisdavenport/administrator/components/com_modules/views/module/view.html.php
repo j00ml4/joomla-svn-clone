@@ -41,9 +41,6 @@ class ModulesViewModule extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->item);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -82,6 +79,6 @@ class ModulesViewModule extends JView
 			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::help('screen.module.edit','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Module_Manager_Edit');
 	}
 }

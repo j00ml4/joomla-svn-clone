@@ -66,6 +66,6 @@ class PluginsViewPlugins extends JView
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_plugins');
 		}
-		JToolBarHelper::help('screen.plugins','JTOOLBAR_HELP');
+		JToolBarHelper::help('Extensions_Plugin_Manager');
 	}
 }

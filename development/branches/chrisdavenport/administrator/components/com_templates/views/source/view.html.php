@@ -45,9 +45,6 @@ class TemplatesViewSource extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$this->form->bind($this->source);
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -74,6 +71,6 @@ class TemplatesViewSource extends JView
 
 		JToolBarHelper::cancel('source.cancel');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.source.edit');
+		JToolBarHelper::help('Extensions_Template_Manager_Templates_Edit_Source');
 	}
 }

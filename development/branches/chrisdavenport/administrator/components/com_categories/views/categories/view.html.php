@@ -95,6 +95,6 @@ class CategoriesViewCategories extends JView
 		JToolBarHelper::divider();
 		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.categories','JTOOLBAR_HELP');
+		JToolBarHelper::help('Components_'.$section.'_Categories');
 	}
 }
