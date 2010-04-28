@@ -53,7 +53,7 @@ class CategoriesViewCategory extends JView
 		$user		= &JFactory::getUser();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$section	= $this->state->get('filter.section');
+		$component	= JRequest::getCmd('extension');
 
 		JToolBarHelper::title(JText::_($isNew ? 'Categories_Category_Add_Title' : 'Categories_Category_Edit_Title'), 'category-add');
 
@@ -75,6 +75,6 @@ class CategoriesViewCategory extends JView
 			JToolBarHelper::cancel('category.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Components_'.$section.'_Categories_Edit');
+		JToolBarHelper::help('Components_'.ucfirst(substr($component,4)).'_Categories_Edit');
 	}
 }
