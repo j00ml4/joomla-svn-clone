@@ -58,13 +58,13 @@ class JRatings
 
 		// Check for an error.
 		if ($db->getErrorNum()) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
 		// Update the cumulative rating data for the content item.
 		if (!self::updateCumulativeByContext($context)) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
@@ -201,7 +201,7 @@ class JRatings
 
 		// Update the cumulative rating data for the content item.
 		if (!self::updateCumulativeByContext($context)) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
@@ -234,7 +234,7 @@ class JRatings
 		$rating = $db->loadObject();
 
 		if (!$rating) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
@@ -256,13 +256,13 @@ class JRatings
 
 		// Check for an error.
 		if ($db->getErrorNum()) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
 		// Update the cumulative rating data for the content item.
 		if (!self::updateCumulativeByContext($rating->context)) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
@@ -311,7 +311,7 @@ class JRatings
 		$db->query();
 
 		if ($db->getErrorNum()) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
