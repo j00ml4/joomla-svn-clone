@@ -251,7 +251,7 @@ class JComments
 
 		// Make sure a content item exists for comments.
 		if (!$content) {
-			// Throw error
+			// TODO: Throw error
 			return false;
 		}
 
@@ -273,11 +273,12 @@ class JComments
 
 			// Make sure the comment to edit actually exists.
 			if (!$commentId) {
-				// Throw error.
+				// TODO: Throw error.
 				return false;
 			}
 
-			// For now don't allow frontend comment editing until we figure out permissions rules.
+			// TODO: For now don't allow frontend comment editing until we figure out permissions rules.
+
 			return false;
 		}
 		// New comment.
@@ -291,7 +292,7 @@ class JComments
 				$state = 1;
 			}
 
-			// Fire onContentSubmit event for external validation/verification/modification.
+			// TODO: Fire onContentSubmit event for external validation/verification/modification.
 
 			$query = $db->getQuery(true);
 			$query->insert('#__social_comments');
@@ -322,12 +323,11 @@ class JComments
 			$db->query();
 
 			if ($db->getErrorNum()) {
-				// Throw error.
+				// TODO: Throw error.
 				return false;
 			}
 
 			$commentId = (int) $db->insertid();
-
 
 			// Send out moderation queue email as necessary.
 
@@ -358,7 +358,6 @@ class JComments
 					}
 				}
 			}
-
 		}
 
 		// Send out notification emails to users watching this content as necessary.
@@ -398,7 +397,7 @@ class JComments
 
 		// Update the cumulative comment data for the content item.
 		if (!self::updateCumulativeByContext($data['context'])) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
@@ -407,18 +406,18 @@ class JComments
 
 	public function delete()
 	{
-		// Attempt to delete comment -- updating the social_content table as well.
+		// TODO: Attempt to delete comment -- updating the social_content table as well.
 	}
 
 	public function setState()
 	{
-		// Check to see if we are performing moderation (coming from defer state).
+		// TODO: Check to see if we are performing moderation (coming from defer state).
 
-		// If moderating, fire onContentModerate event for external notification/verification.
+		// TODO: If moderating, fire onContentModerate event for external notification/verification.
 
-		// Attempt to save comment state -- updating the social_content table as well.
+		// TODO: Attempt to save comment state -- updating the social_content table as well.
 
-		// Send out notification emails as necessary.
+		// TODO: Send out notification emails as necessary.
 	}
 
 	/**
@@ -489,7 +488,7 @@ class JComments
 		$db->query();
 
 		if ($db->getErrorNum()) {
-			// Throw error.
+			// TODO: Throw error.
 			return false;
 		}
 
