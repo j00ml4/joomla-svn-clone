@@ -23,12 +23,11 @@ require_once JPATH_COMPONENT.DS.'helpers'.DS.'media.php';
 // Set the path definitions
 $popup_upload = JRequest::getCmd('pop_up',null);
 $path = "file_path";
+
 if (substr(strtolower($view),0,6) == "images" || $popup_upload == 1) $path = "image_path";
+
 define('COM_MEDIA_BASE',	JPATH_ROOT.DS.$params->get($path, 'images'));
 define('COM_MEDIA_BASEURL', JURI::root().$params->get($path, 'images'));
-
-
-// TODO: Refactor to support the latest MVC pattern.
 
 // Include dependancies
 jimport('joomla.application.component.controller');

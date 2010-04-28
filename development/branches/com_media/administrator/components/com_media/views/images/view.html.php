@@ -51,7 +51,7 @@ class MediaViewImages extends JView
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(
 					'onBeforeStart' => 'function(){ Uploader.setOptions({url: $(\'uploadForm\').action + \'&folder=\' + $(\'imageForm\').folderlist.value}); }',
-					'onComplete' 	=> 'function(){ $(\'imageframe\').location.href = $(\'imageframe\').location.href; }',
+					//'onComplete' 	=> 'function(){ $(\'imageframe\').location.href = $(\'imageframe\').location.href; }',
 					'targetURL' 	=> '\\$(\'uploadForm\').action',
 					'typeFilter' 	=> $typeString,
 					'fileSizeMax'	=> $config->get('upload_maxsize'),

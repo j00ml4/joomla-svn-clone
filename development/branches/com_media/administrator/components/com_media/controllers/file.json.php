@@ -29,7 +29,7 @@ class MediaControllerFile extends JController
 	function upload()
 	{
 
-		// Check for request forgeries
+		// Check for request forgeries		
 		if(!JRequest::checkToken('request')) {
 			$response = array(
 				'status' => '0',
