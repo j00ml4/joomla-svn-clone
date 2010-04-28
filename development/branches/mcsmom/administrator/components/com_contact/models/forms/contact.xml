@@ -106,7 +106,7 @@
 			description="COM_CONTACT_FIELD_INFORMATION_MISC_DESC"
 			class="inputbox" filter="safehtml" buttons="pagebreak,readmore"
 			size="30" />
-		<field name="image" type="imagelist" directory="/images"
+		<field name="image" type="media" directory="/images"
 			label="COM_CONTACT_FIELD_PARAMS_IMAGE_LABEL" description="COM_CONTACT_FIELD_PARAMS_IMAGE_DESC"
 		>
 		</field>
