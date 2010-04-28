@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 // Include dependancies.
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 require_once JPATH_COMPONENT.'/helpers/menus.php';
 
 /**
@@ -19,21 +19,16 @@ require_once JPATH_COMPONENT.'/helpers/menus.php';
  * @subpackage	com_menus
  * @version		1.6
  */
-class MenusModelItem extends JModelForm
+class MenusModelItem extends JModelAdmin
 {
-	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context		= 'com_menus.item';
-
 	/**
 	 * Auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -63,7 +58,7 @@ class MenusModelItem extends JModelForm
 		}
 
 		// Load the parameters.
-		$params	= &JComponentHelper::getParams('com_menus');
+		$params	= JComponentHelper::getParams('com_menus');
 		$this->setState('params', $params);
 	}
 
@@ -275,6 +270,11 @@ class MenusModelItem extends JModelForm
 			return false;
 		}
 
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
+
 		return true;
 	}
 
@@ -377,98 +377,10 @@ class MenusModelItem extends JModelForm
 			}
 		}
 
-		return true;
-	}
-
-	/**
-	 * Method to checkin a row.
-	 *
-	 * @param	integer	$pk The numeric id of a row
-	 * @return	boolean	False on failure or error, true otherwise.
-	 */
-	public function checkin($pk = null)
-	{
-		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('item.id');
-
-		// Only attempt to check the row in if it exists.
-		if ($pk) {
-			$user	= &JFactory::getUser();
-
-			// Get an instance of the row to checkin.
-			$table = &$this->getTable();
-			if (!$table->load($pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Check if this is the user having previously checked out the row.
-			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JERROR_CHECKIN_USER_MISMATCH'));
-				return false;
-			}
-
-			// Attempt to check the row in.
-			if (!$table->checkin($pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to check-out a row for editing.
-	 *
-	 * @param	int		$pk	The numeric id of the row to check-out.
-	 *
-	 * @return	boolean	False on failure or error, true otherwise.
-	 */
-	public function checkout($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('item.id');
-
-		// Only attempt to check the row in if it exists.
-		if ($pk) {
-			// Get a row instance.
-			$table = &$this->getTable();
-
-			// Get the current user object.
-			$user = &JFactory::getUser();
-
-			// Attempt to check the row out.
-			if (!$table->checkout($user->get('id'), $pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to delete rows.
-	 *
-	 * @param	array	An array of item ids.
-	 *
-	 * @return	boolean	Returns true on success, false on failure.
-	 */
-	public function delete($pks)
-	{
-		$pks = (array) $pks;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Iterate the items to delete each one.
-		foreach ($pks as $pk) {
-			if (!$table->delete((int) $pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}
@@ -496,10 +408,8 @@ class MenusModelItem extends JModelForm
 		}
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_menus.item', 'item', array('control' => 'jform'), true);
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_menus.item', 'item', array('control' => 'jform'), true);
+		if (empty($form)) {
 			return false;
 		}
 
@@ -509,6 +419,8 @@ class MenusModelItem extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -692,43 +604,6 @@ class MenusModelItem extends JModelForm
 	}
 
 	/**
-	 * Method to adjust the ordering of a row.
-	 *
-	 * @param	int		The numeric id of the row to move.
-	 * @param	integer	Increment, usually +1 or -1
-	 * @return	boolean	False on failure or error, true otherwise.
-	 */
-	public function ordering($pk, $direction = 0)
-	{
-		// Sanitize the id and adjustment.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('item.id');
-
-		// If the ordering direction is 0 then we aren't moving anything.
-		if ($direction == 0) {
-			return true;
-		}
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Move the row down in the ordering.
-		if ($direction > 0) {
-			if (!$table->orderDown($pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-		} else {
-			// Move the row up in the ordering.
-			if (!$table->orderUp($pk)) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * @param	object	A form object.
 	 *
 	 * @throws	Exception if there is an error in the form event.
@@ -800,8 +675,6 @@ class MenusModelItem extends JModelForm
 				// If an XML file was found in the component, load it first.
 				// We need to qualify the full path to avoid collisions with component file names.
 
-				//$form = parent::getForm($formFile, $formName, $formOptions, true);
-
 				if ($form->loadFile($formFile, false, '/metadata') == false) {
 					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
 				}
@@ -829,33 +702,6 @@ class MenusModelItem extends JModelForm
 
 		// Trigger the default form events.
 		parent::preprocessForm($form);
-	}
-
-	/**
-	 * Method to publish
-	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
-	 */
-	function publish($pks, $value = 1)
-	{
-		$pks = (array) $pks;
-
-		// Get the current user object.
-		$user = &JFactory::getUser();
-
-		// Get an instance of the table row.
-		$table = &$this->getTable();
-
-		// Attempt to publish the items.
-		if (!$table->publish($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
@@ -959,6 +805,26 @@ class MenusModelItem extends JModelForm
 		}
 
 		$this->setState('item.id', $table->id);
+
+		// Check if this is the home item.
+		if ($table->home) {
+			// Reset the any current home menu link.
+			$query = $db->getQuery(true);
+			$query->update('#__menu');
+			$query->set('home = 0');
+			$query->where('home = 1');
+			$query->where('id <> '.(int) $pk);
+
+			if (!$db->setQuery($query)->query()) {
+				$this->setError($e->getMessage());
+				return false;
+			}
+		}
+
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}

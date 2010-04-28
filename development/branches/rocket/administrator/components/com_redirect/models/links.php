@@ -22,25 +22,22 @@ jimport('joomla.application.component.modellist');
 class RedirectModelLinks extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var	string
-	 */
-	protected $_context = 'com_redirect.links';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
 		// Load the parameters.
@@ -48,7 +45,7 @@ class RedirectModelLinks extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('a.old_url', 'asc');
+		parent::populateState('a.old_url', 'asc');
 	}
 
 	/**
@@ -61,22 +58,24 @@ class RedirectModelLinks extends JModelList
 	 * @param	string	A prefix for the store id.
 	 *
 	 * @return	string	A store id.
+	 * @since	1.6
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.state');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db		= $this->getDbo();

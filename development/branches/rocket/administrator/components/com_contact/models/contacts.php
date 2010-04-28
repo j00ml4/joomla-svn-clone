@@ -19,35 +19,30 @@ jimport('joomla.application.component.modellist');
 class ContactModelContacts extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	public $_context = 'com_contact.contacts';
-
-	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
 	 *
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication();
 
-		$search = $app->getUserStateFromRequest($this->_context.'.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$access = $app->getUserStateFromRequest($this->_context.'.filter.access', 'filter_access', 0, 'int');
+		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
 		$this->setState('filter.access', $access);
 
-		$published = $app->getUserStateFromRequest($this->_context.'.published', 'filter_published', '');
+		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
-		$categoryId = $app->getUserStateFromRequest($this->_context.'.category_id', 'filter_category_id');
+		$categoryId = $app->getUserStateFromRequest($this->context.'.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
 
 		// List state information.
-		parent::_populateState('a.name', 'asc');
+		parent::populateState('a.name', 'asc');
 	}
 
 	/**
@@ -61,13 +56,13 @@ class ContactModelContacts extends JModelList
 	 *
 	 * @return	string		A store id.
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.published');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -75,7 +70,7 @@ class ContactModelContacts extends JModelList
 	 *
 	 * @return	string
 	 */
-	function _getListQuery($resolveFKs = true)
+	function getListQuery($resolveFKs = true)
 	{
 		// Create a new query object.
 		$db = $this->getDbo();
@@ -135,8 +130,13 @@ class ContactModelContacts extends JModelList
 			}
 		}
 
-		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+			if($this->getState('list.ordering', 'ordering') == 'a.ordering')
+		{
+			$query->order('a.catid, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		} else {
+			// Add the list ordering clause.
+			$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).', ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		}
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

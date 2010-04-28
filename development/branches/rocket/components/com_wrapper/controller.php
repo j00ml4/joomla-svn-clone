@@ -26,30 +26,13 @@ class WrapperController extends JController
 	 */
 	function display()
 	{
-		// Initialise variables.
-		$document	= &JFactory::getDocument();
+		$cachable = true;
 
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'wrapper');
-		$vFormat	= $document->getType();
-		$lName		= JRequest::getWord('layout', 'default');
+		JRequest::setVar('view', $vName);
 
-		// Get and render the view.
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			// Get the model for the view.
-			$model	= &$this->getModel($vName);
+		parent::display($cachable,array('Itemid'=>'INT'));
 
-			// Push the model into the view (as default).
-			if (!empty($model)) {
-				$view->setModel($model, true);
-			}
-			$view->setLayout($lName);
-
-			// Push document object into the view.
-			$view->assignRef('document', $document);
-
-			$view->display();
-		}
 	}
 }

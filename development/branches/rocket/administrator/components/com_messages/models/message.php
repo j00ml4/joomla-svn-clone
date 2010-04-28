@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Private Message model.
@@ -17,12 +17,16 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_messages
  * @since		1.6
  */
-class MessagesModelMessage extends JModelForm
+class MessagesModelMessage extends JModelAdmin
 {
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$user = JFactory::getUser();
 		$this->setState('user.id', $user->get('id'));
@@ -45,6 +49,7 @@ class MessagesModelMessage extends JModelForm
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
+	 * @since	1.6
 	*/
 	public function getTable($type = 'Message', $prefix = 'MessagesTable', $config = array())
 	{
@@ -55,62 +60,45 @@ class MessagesModelMessage extends JModelForm
 	 * Method to get a single record.
 	 *
 	 * @param	integer	The id of the primary key.
-	 *
 	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
 	 */
-	public function &getItem($pk = null)
+	public function getItem($pk = null)
 	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('message.id');
-		$false	= false;
+		if ($item = parent::getItem($pk)) {
+			// Prime required properties.
+			if (empty($item->id)) {
+				// Prepare data for a new record.
+				if ($replyId = $this->getState('reply.id')) {
+					// If replying to a message, preload some data.
+					$db		= $this->getDbo();
+					$query	= $db->getQuery(true);
 
-		// Get a row instance.
-		$table = $this->getTable();
+					$query->select('subject, user_id_from');
+					$query->from('#__messages');
+					$query->where('message_id = '.(int) $replyId);
+					$message = $db->setQuery($query)->loadObject();
 
-		// Attempt to load the row.
-		$return = $table->load($pk);
+					if ($error = $db->getErrorMsg()) {
+						$this->setError($error);
+						return false;
+					}
 
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
-		}
-
-		// Convert to the JObject before adding other data.
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		// Prime required properties.
-		if (empty($table->id)) {
-			// Prepare data for a new record.
-			if ($replyId = $this->getState('reply.id')) {
-				// If replying to a message, preload some data.
-				$db		= $this->getDbo();
-				$query	= $db->getQuery(true);
-
-				$query->select('subject, user_id_from');
-				$query->from('#__messages');
-				$query->where('message_id = '.(int) $replyId);
-				$message = $db->setQuery($query)->loadObject();
-
-				if ($error = $db->getErrorMsg()) {
-					$this->setError($error);
-					return false;
+					$item->set('user_id_to', $message->user_id_from);
+					$re = JText::_('COM_MESSAGES_RE');
+					if (stripos($message->subject, $re) !== 0) {
+						$item->set('subject', $re.$message->subject);
+					}
 				}
-
-				$value->set('user_id_to', $message->user_id_from);
-				$re = JText::_('COM_MESSAGES_RE');
-				if (stripos($message->subject, $re) !== 0) {
-					$value->set('subject', $re.$message->subject);
+			} else {
+				// Get the user name for an existing messasge.
+				if ($item->user_id_from && $fromUser = new JUser($item->user_id_from)) {
+					$item->set('from_user_name', $fromUser->name);
 				}
-			}
-		} else {
-			// Get the user name for an existing messasge.
-			if ($table->user_id_from && $fromUser = new JUser($table->user_id_from)) {
-				$value->set('from_user_name', $fromUser->name);
 			}
 		}
 
-		return $value;
+		return $item;
 	}
 
 	/**
@@ -124,10 +112,8 @@ class MessagesModelMessage extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_messages.message', 'message', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_messages.message', 'message', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -137,6 +123,8 @@ class MessagesModelMessage extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -205,77 +193,6 @@ class MessagesModelMessage extends JModelForm
 			$msg		= sprintf (JText::_('COM_MESSAGES_PLEASE_LOGIN'), $siteURL);
 
 			JUtility::sendMail($fromUser->email, $fromUser->name, $toUser->email, $subject, $msg);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to delete messages from the database
-	 *
-	 * @param	integer	An array of numeric ids for the rows
-	 * @return	boolean	True on success / false on failure
-	 */
-	public function delete($cid)
-	{
-		// Get a message row instance
-		$table = $this->getTable();
-
-		for ($i = 0, $c = count($cid); $i < $c; $i++) {
-			// Load the row.
-			$return = $table->load($cid[$i]);
-
-			// Check for an error.
-			if ($return === false) {
-				$this->setError($table->getError());
-				return false;
-			}
-
-			// Delete the row.
-			$return = $table->delete();
-
-			// Check for an error.
-			if ($return === false) {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to publish records.
-	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
-	 */
-	function publish(&$pks, $value = 1)
-	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
-
-		// Access checks.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				$allow = $user->authorise('core.edit.state', 'com_messages');
-
-				if (!$allow) {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
-		}
-
-		// Attempt to change the state of the records.
-		if (!$table->publish($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
 		}
 
 		return true;

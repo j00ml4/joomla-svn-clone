@@ -87,7 +87,7 @@ class JFilterOutput
 
 		// convert certain symbols to letter representation
 		$str = str_replace(array('&', '"', '<', '>'), array('a', 'q', 'l', 'g'), $str);
-		
+
 		// remove any duplicate whitespace, and ensure all characters are alphanumeric
 		$str = preg_replace(array('/\s+/','/[^A-Za-z0-9\-]/'), array('-',''), $str);
 
@@ -178,5 +178,13 @@ class JFilterOutput
 		$text = strip_tags($text);
 		$text = htmlspecialchars($text, ENT_COMPAT, 'UTF-8');
 		return $text;
+	}
+
+	/**
+	 * Strip img-tags from string
+	 */
+	function stripImages($string)
+	{
+		return  preg_replace('#(<[/]?img.*>)#U', '', $string);
 	}
 }

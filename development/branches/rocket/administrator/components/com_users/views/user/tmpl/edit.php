@@ -18,6 +18,10 @@ JHtml::_('behavior.formvalidation');
 
 // Get the form fieldsets.
 $fieldsets = $this->form->getFieldsets();
+
+//load user_profile plugin language
+$lang = &JFactory::getLanguage();
+$lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 ?>
 
 <script type="text/javascript">
@@ -34,22 +38,11 @@ $fieldsets = $this->form->getFieldsets();
 <form action="<?php JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('Users_User_Account_Details'); ?></legend>
-			<?php echo $this->form->getLabel('name'); ?>
-			<?php echo $this->form->getInput('name'); ?>
-
-			<?php echo $this->form->getLabel('username'); ?>
-			<?php echo $this->form->getInput('username'); ?>
-
-			<?php echo $this->form->getLabel('password'); ?>
-			<?php echo $this->form->getInput('password'); ?>
-
-			<?php echo $this->form->getLabel('password2'); ?>
-			<?php echo $this->form->getInput('password2'); ?>
-
-			<?php echo $this->form->getLabel('email'); ?>
-			<?php echo $this->form->getInput('email'); ?>
-
+			<legend><?php echo JText::_('COM_USERS_USER_ACCOUNT_DETAILS'); ?></legend>
+			<?php foreach($this->form->getFieldset('user_details') as $field) :?>
+				<?php echo $field->label; ?>
+				<?php echo $field->input; ?>
+			<?php endforeach; ?>
 		</fieldset>
 
 	</div>
@@ -58,6 +51,9 @@ $fieldsets = $this->form->getFieldsets();
 		<?php
 		echo JHTML::_('sliders.start');
 		foreach ($fieldsets as $fieldset) :
+			if ($fieldset->name == 'user_details') :
+				continue;
+			endif;
 			echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
 		?>
 		<fieldset class="panelform">
@@ -74,7 +70,7 @@ $fieldsets = $this->form->getFieldsets();
 		<?php echo JHTML::_('sliders.end'); ?>
 
 		<fieldset id="user-groups">
-			<legend><?php echo JText::_('Users_Assigned_Groups'); ?></legend>
+			<legend><?php echo JText::_('COM_USERS_ASSIGNED_GROUPS'); ?></legend>
 				<?php if ($this->grouplist) :
 					echo $this->loadTemplate('groups');
 				endif; ?>

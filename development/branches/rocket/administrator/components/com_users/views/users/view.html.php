@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class UsersViewUsers extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,47 +38,40 @@ class UsersViewUsers extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar.
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$canDo	= UsersHelper::getActions();
 
-		JToolBarHelper::title(JText::_('Users_View_Users_Title'), 'user');
+		JToolBarHelper::title(JText::_('COM_USERS_VIEW_USERS_TITLE'), 'user');
 
-		if ($canDo->get('core.edit.state'))
-		{
-			JToolBarHelper::custom('users.activate', 'publish.png', 'publish_f2.png', 'USERS_TOOLBAR_ACTIVATE', true);
-			JToolBarHelper::custom('users.block', 'unpublish.png', 'unpublish_f2.png', 'USERS_TOOLBAR_BLOCK', true);
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::custom('users.activate', 'publish.png', 'publish_f2.png', 'COM_USERS_TOOLBAR_ACTIVATE', true);
+			JToolBarHelper::custom('users.block', 'unpublish.png', 'unpublish_f2.png', 'COM_USERS_TOOLBAR_BLOCK', true);
 			JToolBarHelper::divider();
 		}
 
-		if ($canDo->get('core.create'))
-		{
+		if ($canDo->get('core.create')) {
 			JToolBarHelper::custom('user.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
 		}
-		if ($canDo->get('core.edit'))
-		{
+		if ($canDo->get('core.edit')) {
 			JToolBarHelper::custom('user.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 		}
-		if ($canDo->get('core.delete'))
-		{
+		if ($canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'users.delete','JTOOLBAR_TRASH');
 		}
 
 		JToolBarHelper::divider();
 
-		if ($canDo->get('core.admin'))
-		{
+		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();

@@ -8,33 +8,57 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Banner model.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_banners
- * @since		1.5
+ * @since		1.6
  */
-class BannersModelBanner extends JModelForm
+class BannersModelBanner extends JModelAdmin
 {
 	/**
-	 * Method to auto-populate the model state.
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected $text_prefix = 'COM_BANNERS_BANNER';
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canDelete($record)
 	{
-		$app = JFactory::getApplication('administrator');
+		$user = JFactory::getUser();
 
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_banners.edit.banner.id'))) {
-			$pk = (int) JRequest::getInt('id');
+		if ($record->catid) {
+			return $user->authorise('core.delete', 'com_banners.category.'.(int) $record->catid);
+		} else {
+			return parent::canDelete($record);
 		}
-		$this->setState('banner.id', $pk);
+	}
 
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_banners');
-		$this->setState('params', $params);
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.edit.state', 'com_banners.category.'.(int) $record->catid);
+		} else {
+			return parent::canEditState($record);
+		}
 	}
 
 	/**
@@ -44,74 +68,12 @@ class BannersModelBanner extends JModelForm
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
 	 * @return	JTable	A database object
-	*/
+	 * @since	1.6
+	 */
 	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
-
-	/**
-	 * Method to override check-out a row for editing.
-	 *
-	 * @param	int		The ID of the primary key.
-	 * @return	boolean
-	 */
-	public function checkout($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
-
-		return parent::checkout($pk);
-	}
-
-	/**
-	 * Method to checkin a row.
-	 *
-	 * @param	integer	The ID of the primary key.
-	 *
-	 * @return	boolean
-	 */
-	public function checkin($pk = null)
-	{
-		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
-
-		return parent::checkin($pk);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int)$this->getState('banner.id');
-		$false	= false;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		if($pk>0)
-		{
-			// Attempt to load the row.
-			$return = $table->load($pk);
-
-			// Check for a table object error.
-			if ($return === false && $table->getError()) {
-				$this->setError($table->getError());
-				return $false;
-			}
-		}
-
-		// Convert to the JObject before adding other data.
-		$item = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-		return $item;
-	}
-
 	/**
 	 * Method to get the record form.
 	 *
@@ -124,10 +86,8 @@ class BannersModelBanner extends JModelForm
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_banners.banner', 'banner', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -146,127 +106,60 @@ class BannersModelBanner extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * Method to save the form data.
+	 * Method to stick records.
 	 *
-	 * @param	array	The form data.
+	 * @param	array	The ids of the items to publish.
+	 * @param	int		The value of the published state
+	 *
 	 * @return	boolean	True on success.
-	 * @since	1.6
 	 */
-	public function save($data)
+	function stick(&$pks, $value = 1)
 	{
-		// Initialise variables;
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('banner.id');
-		$isNew		= true;
+		// Initialise variables.
+		$user	= JFactory::getUser();
+		$table	= $this->getTable();
+		$pks	= (array) $pks;
 
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
+		// Access checks.
+		foreach ($pks as $i => $pk) {
+			if ($table->load($pk)) {
+				if (!$this->canEditState($table)) {
+					// Prune items that you can't change.
+					unset($pks[$i]);
+					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+				}
+			}
 		}
 
-		// Bind the data.
-		if (!$table->bind($data)) {
+		// Attempt to change the state of the records.
+		if (!$table->stick($pks, $value, $user->get('id'))) {
 			$this->setError($table->getError());
 			return false;
 		}
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_banners');
-		$cache->clean();
-
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
-
-		$this->setState('banner.id', $table->id);
 
 		return true;
 	}
 
 	/**
-	 * Method to adjust the ordering of a row.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	int		The ID of the primary key to move.
-	 * @param	integer	Increment, usually +1 or -1
-	 * @return	boolean	False on failure or error, true otherwise.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
 	 */
-	public function reorder($pk, $direction = 0)
+	protected function getReorderConditions($table = null)
 	{
-		// Get the user
-		$user = JFactory::getUser();
-
-		// Sanitize the id and adjustment.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('banner.id');
-
-		// Get an instance of the record's table.
-		$table = $this->getTable();
-
-		// Attempt to check-out and move the row.
-		if (!$this->checkout($pk)) {
-			return false;
-		}
-
-		// Load the row.
-		if (!$table->load($pk)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// State is not archived or trashed, attempt to move the banner
-		if ($table->state>=0)
-		{
-			// Access checks.
-			if ($table->catid) {
-				$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
-			}
-			else {
-				$allow = $user->authorise('core.edit.state', 'com_banners');
-			}
-
-			if (!$allow)
-			{
-				$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				return false;
-			}
-
-			// Move the row.
-			$table->move($direction,"catid='".$table->catid."' AND state>=0");
-		}
-
-		// Check-in the row.
-		if (!$this->checkin($pk)) {
-			return false;
-		}
-
-		return true;
+		$condition = array();
+		$condition[] = 'catid = '. (int) $table->catid;
+		$condition[] = 'state >= 0';
+		return $condition;
 	}
 }

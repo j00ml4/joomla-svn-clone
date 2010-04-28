@@ -69,7 +69,7 @@ class JDispatcher extends JObservable
 		}
 		else
 		{
-			JError::raiseWarning('SOME_ERROR_CODE', 'JDispatcher::register: Event handler not recognized.', 'Handler: '.$handler);
+			JError::raiseWarning('SOME_ERROR_CODE', JText::sprintf('JLIB_EVENT_ERROR_DISPATCHER', $handler));
 		}
 	}
 
@@ -92,9 +92,7 @@ class JDispatcher extends JObservable
 		 * If no arguments were passed, we still need to pass an empty array to
 		 * the call_user_func_array function.
 		 */
-		if (!is_array($args)) {
-			$args = (array)$args;
-		}
+		$args = (array)$args;
 
 		$event = strtolower($event);
 
@@ -103,7 +101,6 @@ class JDispatcher extends JObservable
 			// No Plugins Associated To Event!
 			return $result;
 		}
-
 		// Loop through all plugins having a method matching our event
 		foreach ($this->_methods[$event] AS $key)
 		{

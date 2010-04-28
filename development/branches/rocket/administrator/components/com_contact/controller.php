@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 12268 2009-06-22 00:05:11Z eddieajau $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -19,36 +19,21 @@ jimport('joomla.application.component.controller');
 class ContactController extends JController
 {
 	/**
+	 * @var		string	The default view.
+	 * @since	1.6
+	 */
+	protected $default_view = 'contacts';
+
+	/**
 	 * Display the view
 	 */
 	function display()
 	{
-		// Get the document object.
-		$document	= &JFactory::getDocument();
+		require_once JPATH_COMPONENT.'/helpers/contact.php';
 
-		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'contacts');
-		$vFormat	= $document->getType();
-		$lName		= JRequest::getWord('layout', 'default');
+		parent::display();
 
-		// Get and render the view.
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			// Get the model for the view.
-			$model = &$this->getModel($vName);
-
-			// Push the model into the view (as default).
-			$view->setModel($model, true);
-			$view->setLayout($lName);
-
-			// Push document object into the view.
-			$view->assignRef('document', $document);
-
-			$view->display();
-
-			// Load the submenu.
-			require_once JPATH_COMPONENT.DS.'helpers'.DS.'contact.php';
-			ContactHelper::addSubmenu($vName);
-		}
+		// Load the submenu.
+		ContactHelper::addSubmenu(JRequest::getWord('view', 'contacts'));
 	}
 }

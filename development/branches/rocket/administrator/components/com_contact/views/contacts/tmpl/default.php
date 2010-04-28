@@ -15,6 +15,8 @@ JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
 $user	= &JFactory::getUser();
 $userId	= $user->get('id');
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_contact'); ?>" method="post" name="adminForm" id="adminForm">
@@ -52,23 +54,23 @@ $userId	= $user->get('id');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_TITLE_HEADING', 'a.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_TITLE_HEADING', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_STATE_HEADING', 'a.state', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_STATE_HEADING', 'a.state', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ORDER_HEADING', 'a.ordering', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
-					<?php echo JHtml::_('grid.order',  $this->items); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ORDER_HEADING', 'a.ordering', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.order', $this->items, 'filesave.png', 'contacts.saveorder'); ?>
 				</th>
 				<th width="10%"  class="title">
-					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_CATEGORY_HEADING', 'category', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_CATEGORY_HEADING', 'category_title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%"  class="title">
-					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ACCESS_HEADING', 'access_level', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_CONTACT_ACCESS_HEADING', 'access_level', $listDirn, $listOrder); ?>
 				</th>
 				<th width="1%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
@@ -83,10 +85,10 @@ $userId	= $user->get('id');
 		<?php
 		$n = count($this->items);
 		foreach ($this->items as $i => $item) :
-			$ordering	= ($this->state->get('list.ordering') == 'a.ordering');
+			$ordering	= ($listOrder == 'a.ordering');
 			$checkedOut	= JTable::isCheckedOut($userId, $item->checked_out);
 
-			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&cid[]='. $item->catid);
+			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&id='. $item->catid);
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
@@ -99,7 +101,7 @@ $userId	= $user->get('id');
 					<?php if (JTable::isCheckedOut($userId, $item->checked_out)) : ?>
 						<?php echo $item->name; ?>
 					<?php else : ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&cid[]='.(int) $item->id); ?>">
+						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name) ?></a>
 					<?php endif; ?>
 					<p class="smallsub">(<span><?php echo JText::_('COM_CONTACT_CONTACT_VIEW_ALIAS') ?>:</span>
@@ -109,8 +111,8 @@ $userId	= $user->get('id');
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'contacts.');?>
 				</td>
 				<td class="order">
-					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contact.orderup', 'JGRID_MOVE_UP', $ordering); ?></span>
-					<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contact.orderdown', 'JGRID_MOVE_DOWN', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contacts.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+					<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contacts.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
 					<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
 					<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
 				</td>
@@ -131,7 +133,7 @@ $userId	= $user->get('id');
 
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $this->state->get('list.ordering'); ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->state->get('list.direction'); ?>" />
+	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

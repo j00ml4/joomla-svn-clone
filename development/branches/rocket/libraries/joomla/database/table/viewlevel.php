@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: viewlevels.php 12186 2009-06-20 00:23:39Z eddieajau $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -60,7 +60,7 @@ class JTableViewlevel extends JTable
 	{
 		// Validate the title.
 		if ((trim($this->title)) == '') {
-			$this->setError(JText::_('Viewlevel must have a title'));
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_VIEWLEVEL'));
 			return false;
 		}
 

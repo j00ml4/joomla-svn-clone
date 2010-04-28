@@ -20,32 +20,22 @@ jimport('joomla.application.component.modellist');
 class LanguagesModelLanguages extends JModelList
 {
 	/**
-	 * Model context string.
-	 *
-	 * @var		string
-	 */
-	protected $_context = 'com_languages.languages';
-
-	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.search', 'filter_search');
+		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$published = $app->getUserStateFromRequest($this->_context.'.published', 'filter_published', '');
+		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
 		// Load the parameters.
@@ -53,7 +43,7 @@ class LanguagesModelLanguages extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::_populateState('a.title', 'asc');
+		parent::populateState('a.title', 'asc');
 	}
 
 	/**
@@ -67,13 +57,13 @@ class LanguagesModelLanguages extends JModelList
 	 * @return	string		A store id.
 	 * @since	1.6
 	 */
-	protected function _getStoreId($id = '')
+	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.published');
 
-		return parent::_getStoreId($id);
+		return parent::getStoreId($id);
 	}
 
 	/**
@@ -82,7 +72,7 @@ class LanguagesModelLanguages extends JModelList
 	 * @return	string	An SQL query
 	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
 		// Create a new query object.
 		$db = $this->getDbo();

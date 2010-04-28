@@ -1,8 +1,8 @@
 <?php
 /**
  * @version		$Id$
- * @package		Joomla
- * @subpackage	com_users
+ * @package		Joomla.Framework
+ * @subpackage	Application
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -48,7 +48,7 @@ class JModelForm extends JModel
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JError_Checkin_user_mismatch'));
+				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
 
@@ -84,7 +84,7 @@ class JModelForm extends JModel
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JError_Checkout_user_mismatch'));
+				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKOUT_USER_MISMATCH'));
 				return false;
 			}
 
@@ -132,7 +132,7 @@ class JModelForm extends JModel
 			$this->preprocessForm($form);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
-			$false = false;
+			return false;
 		}
 
 		// Store the form for later.

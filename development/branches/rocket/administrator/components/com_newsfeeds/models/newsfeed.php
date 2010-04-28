@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Newsfeed model.
@@ -17,24 +17,42 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_newsfeeds
  * @since		1.6
  */
-class NewsfeedsModelNewsfeed extends JModelForm
+class NewsfeedsModelNewsfeed extends JModelAdmin
 {
 	/**
-	 * Method to auto-populate the model state.
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function canDelete($record)
 	{
-		$app = JFactory::getApplication('administrator');
+		$user = JFactory::getUser();
 
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_newsfeeds.edit.newsfeed.id'))) {
-			$pk = (int) JRequest::getInt('id');
+		if ($record->catid) {
+			return $user->authorise('core.delete', 'com_newsfeed.category.'.(int) $record->catid);
+		} else {
+			return parent::canDelete($record);
 		}
-		$this->setState('newsfeed.id', $pk);
+	}
 
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_newsfeeds');
-		$this->setState('params', $params);
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		if ($record->catid) {
+			return $user->authorise('core.edit.state', 'com_newsfeed.category.'.(int) $record->catid);
+		} else {
+			return parent::canEditState($record);
+		}
 	}
 
 	/**
@@ -51,77 +69,6 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	}
 
 	/**
-	 * Method to override check-out a row for editing.
-	 *
-	 * @param	int		The ID of the primary key.
-	 * @return	boolean
-	 */
-	public function checkout($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
-
-		return parent::checkout($pk);
-	}
-
-	/**
-	 * Method to checkin a row.
-	 *
-	 * @param	integer	The ID of the primary key.
-	 *
-	 * @return	boolean
-	 */
-	public function checkin($pk = null)
-	{
-		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
-
-		return parent::checkin($pk);
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 */
-	public function &getItem($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
-		$false	= false;
-
-		// Get a row instance.
-		$table = $this->getTable();
-
-		// Attempt to load the row.
-		$return = $table->load($pk);
-
-		// Check for a table object error.
-		if ($return === false && $table->getError()) {
-			$this->setError($table->getError());
-			return $false;
-		}
-
-		// Prime required properties.
-		if (empty($table->id))
-		{
-			// Prepare data for a new record.
-		}
-
-		// Convert to the JObject before adding other data.
-		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
-
-		// Convert the params field to an array.
-		$registry = new JRegistry;
-		$registry->loadJSON($table->params);
-		$value->params = $registry->toArray();
-
-		return $value;
-	}
-
-	/**
 	 * Method to get the record form.
 	 *
 	 * @return	mixed	JForm object on success, false on failure.
@@ -129,13 +76,11 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_newsfeeds.newsfeed', 'newsfeed', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -154,79 +99,37 @@ class NewsfeedsModelNewsfeed extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
 	/**
-	 * Method to save the form data.
+	 * Method to get a single record.
 	 *
-	 * @param	array	The form data.
+	 * @param	integer	The id of the primary key.
 	 *
-	 * @return	boolean	True on success.
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
 	 */
-	public function save($data)
+	public function getItem($pk = null)
 	{
-		// Initialise variables.
-		$dispatcher = JDispatcher::getInstance();
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('newsfeed.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->metadata);
+			$item->metadata = $registry->toArray();
 		}
 
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->_prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache('com_newsfeeds');
-		$cache->clean();
-
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
-
-		$this->setState('newsfeed.id', $table->id);
-
-		return true;
+		return $item;
 	}
 
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 */
-	protected function _prepareTable(&$table)
+	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
 		$date = JFactory::getDate();
@@ -260,227 +163,16 @@ class NewsfeedsModelNewsfeed extends JModelForm
 	}
 
 	/**
-	 * Method to delete rows.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	array	An array of item ids.
-	 *
-	 * @return	boolean	Returns true on success, false on failure.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
 	 */
-	public function delete(&$pks)
+	protected function getReorderConditions($table = null)
 	{
-		// Typecast variable.
-		$pks = (array) $pks;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk)
-		{
-			if ($table->load($pk))
-			{
-				// Access checks.
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_newsfeeds.category.'.(int) $table->catid);
-				}
-				else {
-					$allow = $user->authorise('core.edit.state', 'com_newsfeeds');
-				}
-
-				if ($allow)
-				{
-					if (!$table->delete($pk))
-					{
-						$this->setError($table->getError());
-						return false;
-					}
-				}
-				else
-				{
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
-			else
-			{
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to publish records.
-	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
-	 */
-	function publish(&$pks, $value = 1)
-	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
-
-		// Access checks.
-		foreach ($pks as $i => $pk)
-		{
-			if ($table->load($pk))
-			{
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_newsfeeds.category.'.(int) $table->catid);
-				}
-				else {
-					$allow = $user->authorise('core.edit.state', 'com_newsfeeds');
-				}
-
-				if (!$allow)
-				{
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
-		}
-
-		// Attempt to change the state of the records.
-		if (!$table->publish($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to adjust the ordering of a row.
-	 *
-	 * @param	int		The ID of the primary key to move.
-	 * @param	integer	Increment, usually +1 or -1
-	 * @return	boolean	False on failure or error, true otherwise.
-	 */
-	public function reorder($pk, $direction = 0)
-	{
-		$user = JFactory::getUser();
-		// Sanitize the id and adjustment.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('newsfeed.id');
-
-		// Get an instance of the record's table.
-		$table = $this->getTable();
-
-		// Attempt to check-out and move the row.
-		if (!$this->checkout($pk)) {
-			return false;
-		}
-
-		// Load the row.
-		if (!$table->load($pk)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Access checks.
-		if ($table->catid) {
-			$allow = $user->authorise('core.edit.state', 'com_newsfeeds.category.'.(int) $table->catid);
-		}
-		else {
-			$allow = $user->authorise('core.edit.state', 'com_newsfeeds');
-		}
-
-		if (!$allow)
-		{
-			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-			return false;
-		}
-
-		// Move the row.
-		$table->move($direction, 'catid = '.$table->catid);
-
-		// Check-in the row.
-		if (!$this->checkin($pk)) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Saves the manually set order of records.
-	 *
-	 * @param	array	An array of primary key ids.
-	 * @param	int		+/-1
-	 */
-	function saveorder($pks, $order)
-	{
-		$user = JFactory::getUser();
-		// Initialise variables.
-		$table		= $this->getTable();
-		$conditions	= array();
-
-		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
-		}
-
-		// update ordering values
-		foreach ($pks as $i => $pk)
-		{
-			$table->load((int) $pk);
-
-			// Access checks.
-			if ($table->catid) {
-				$allow = $user->authorise('core.edit.state', 'com_newsfeeds.category.'.(int) $table->catid);
-			}
-			else {
-				$allow = $user->authorise('core.edit.state', 'com_newsfeeds');
-			}
-
-			if (!$allow)
-			{
-				// Prune items that you can't change.
-				unset($pks[$i]);
-				JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-			}
-			else if ($table->ordering != $order[$i])
-			{
-				$table->ordering = $order[$i];
-				if (!$table->store())
-				{
-					$this->setError($table->getError());
-					return false;
-				}
-				// remember to reorder this category
-				$condition = 'catid = '.(int) $table->catid;
-				$found = false;
-				foreach ($conditions as $cond)
-				{
-					if ($cond[1] == $condition)
-					{
-						$found = true;
-						break;
-					}
-				}
-				if (!$found) {
-					$conditions[] = array ($table->id, $condition);
-				}
-			}
-		}
-
-		// Execute reorder for each category.
-		foreach ($conditions as $cond)
-		{
-			$table->load($cond[0]);
-			$table->reorder($cond[1]);
-		}
-
-		// Clear the component's cache
-		$cache = JFactory::getCache('com_newsfeeds');
-		$cache->clean();
-
-		return true;
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }

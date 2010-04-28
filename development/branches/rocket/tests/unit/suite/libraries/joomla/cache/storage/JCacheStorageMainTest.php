@@ -22,7 +22,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 {
 
 	public function setUp() {
-		require_once(dirname(dirname(__FILE__)) . DS . 'handler' .  DS . 'JCacheRaw.php');
+		require_once(dirname(dirname(__FILE__)) . DS . 'controller' .  DS . 'JCacheControllerRaw.php');
 	}
 
 	public static function provider() {
@@ -44,9 +44,11 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$new = $cache->get($id, $group);
 		$this->assertSame($new, $data, 'Expected: '.$data.' Actual: '.$new);
 		unset($cache);
@@ -60,6 +62,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$new = $cache->get($id, $group);
 		$this->assertFalse($new, 'Expected: false Actual: '.$new);
 		unset($cache);
@@ -77,6 +80,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$cache->setLifeTime(2);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
@@ -96,12 +100,15 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->remove($id, $group), 'Removal Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$new = $cache->get($id, $group);
 		$this->assertFalse($new, 'Expected: false Actual: '.((string) $new));
 		unset($cache);
@@ -118,12 +125,15 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->clean($group), 'Clean Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$new = $cache->get($id, $group);
 		$this->assertFalse($new, 'Expected: false Actual: '.((string) $new));
 		unset($cache);
@@ -141,12 +151,15 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		$group = 'testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue($cache->store($data, $id, $group), 'Initial Store Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$this->assertTrue((bool)$cache->clean($group, 'notgroup'), 'Clean Failed');
 		unset($cache);
 		$cache =& JCache::getInstance('raw', array('storage'=>$store));
+		$cache->setCaching(true);
 		$new = $cache->get($id, $group);
 		$this->assertSame($new, $data, 'Expected: '.$data.' Actual: '.((string) $new));
 		unset($cache);

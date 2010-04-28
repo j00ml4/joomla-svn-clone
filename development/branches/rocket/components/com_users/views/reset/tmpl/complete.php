@@ -5,6 +5,7 @@
  * @subpackage	com_users
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.5
  */
 
 defined('_JEXEC') or die;
@@ -12,6 +13,12 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.mootools');
 JHtml::_('behavior.formvalidation');
 ?>
+<div class="reset-complete<?php echo $this->params->get('pageclass_sfx')?>">
+<?php if ($this->params->get('show_page_heading')) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&task=reset.complete'); ?>" method="post" class="form-validate">
 
@@ -33,3 +40,4 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="reset.complete" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
+</div>

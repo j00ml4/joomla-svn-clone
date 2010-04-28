@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 12685 2009-09-10 14:14:04Z pentacle $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Plugin model.
@@ -17,59 +17,9 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_plugins
  * @since		1.6
  */
-class PluginsModelPlugin extends JModelForm
+class PluginsModelPlugin extends JModelAdmin
 {
-	/**
-	 * Item cache.
-	 */
-	private $_cache = array();
-
-	/**
-	 * Method to auto-populate the model state.
-	 */
-	protected function _populateState()
-	{
-		$app = JFactory::getApplication('administrator');
-
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_plugins.edit.plugin.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-		$this->setState('plugin.id', $pk);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_plugins');
-		$this->setState('params', $params);
-	}
-
-	/**
-	 * Method to override check-out a row for editing.
-	 *
-	 * @param	int		The ID of the primary key.
-	 * @return	boolean
-	 */
-	public function checkout($pk = null)
-	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('plugin.id');
-
-		return parent::checkout($pk);
-	}
-
-	/**
-	 * Method to checkin a row.
-	 *
-	 * @param	integer	The ID of the primary key.
-	 *
-	 * @return	boolean
-	 */
-	public function checkin($pk = null)
-	{
-		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('plugin.id');
-
-		return parent::checkin($pk);
-	}
+	protected $_cache;
 
 	/**
 	 * Method to get the record form.
@@ -89,8 +39,8 @@ class PluginsModelPlugin extends JModelForm
 			$folder		= $item->folder;
 			$element	= $item->element;
 		} else {
-			$folder		= JArrayHelper::getValue($data, 'folder');
-			$element	= JArrayHelper::getValue($data, 'element');
+			$folder		= JArrayHelper::getValue($data, 'folder', '', 'word');
+			$element	= JArrayHelper::getValue($data, 'element', '', 'word');
 		}
 
 		// These variables are used to add data from the plugin XML files.
@@ -98,10 +48,8 @@ class PluginsModelPlugin extends JModelForm
 		$this->setState('item.element',	$element);
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -111,6 +59,8 @@ class PluginsModelPlugin extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -132,7 +82,7 @@ class PluginsModelPlugin extends JModelForm
 			$false	= false;
 
 			// Get a row instance.
-			$table = &$this->getTable();
+			$table = $this->getTable();
 
 			// Attempt to load the row.
 			$return = $table->load($pk);
@@ -176,13 +126,6 @@ class PluginsModelPlugin extends JModelForm
 	public function getTable($type = 'Extension', $prefix = 'JTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Prepare and sanitise the table prior to saving.
-	 */
-	protected function prepareTable(&$table)
-	{
 	}
 
 	/**
@@ -232,160 +175,17 @@ class PluginsModelPlugin extends JModelForm
 	}
 
 	/**
-	 * Method to publish records.
+	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
 	 */
-	function publish(&$pks, $value = 1)
+	protected function getReorderConditions($table = null)
 	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
-
-		if (!$user->authorise('core.edit.state', 'com_plugins')) {
-			$pks = array();
-			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-			return false;
-		}
-
-		// Attempt to change the state of the records.
-		if (!$table->publish($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Method to adjust the ordering of a row.
-	 *
-	 * @param	int		The ID of the primary key to move.
-	 * @param	integer	Increment, usually +1 or -1
-	 * @return	boolean	False on failure or error, true otherwise.
-	 */
-	public function reorder($pks, $delta = 0)
-	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
-		$result	= true;
-
-		// Access checks.
-		$allow = $user->authorise('core.edit.state', 'com_plugins');
-		if (!$allow) {
-			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-			return false;
-		}
-
-		foreach ($pks as $i => $pk) {
-			$table->reset();
-			if ($table->load($pk) && $this->checkout($pk)) {
-				$table->ordering += $delta;
-				if (!$table->store()) {
-					$this->setError($table->getError());
-					unset($pks[$i]);
-					$result = false;
-				}
-			} else {
-				$this->setError($table->getError());
-				unset($pks[$i]);
-				$result = false;
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Method to save the form data.
-	 *
-	 * @param	array	The form data.
-	 * @return	boolean	True on success.
-	 */
-	public function save($data)
-	{
-		// Initialise variables.
-		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('plugin.id');
-		$isNew		= true;
-
-		// Include the content plugins for the onSave events.
-		JPluginHelper::importPlugin('content');
-
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
-
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		$this->setState('plugin.id', $table->extension_id);
-
-		return true;
-	}
-
-	/**
-	 * Saves the manually set order of records.
-	 *
-	 * @param	array	An array of primary key ids.
-	 * @param	int		+/-1
-	 */
-	function saveorder($pks, $order)
-	{
-		// Initialise variables.
-		$user		= JFactory::getUser();
-		$table		= $this->getTable();
-		$conditions	= array();
-
-		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('COM_PLUGINS_NO_PLUGINS_SELECTED'));
-		}
-
-		if (!$user->authorise('core.edit.state', 'com_plugins')) {
-			$pks = array();
-			$this->setError(JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-			return false;
-		}
-
-		// update ordering values
-		foreach ($pks as $i => $pk) {
-			$table->load((int) $pk);
-
-			if ($table->ordering != $order[$i]) {
-				$table->ordering = $order[$i];
-				if (!$table->store()) {
-					$this->setError($table->getError());
-					return false;
-				}
-			}
-		}
-
-		return true;
+		$condition = array();
+		$condition[] = 'type = '. $this->_db->Quote($table->type);
+		$condition[] = 'folder = '. $this->_db->Quote($table->folder);
+		return $condition;
 	}
 }

@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class CategoriesViewCategories extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -39,29 +39,23 @@ class CategoriesViewCategories extends JView
 		}
 
 		// Preprocess the list of items to find ordering divisions.
-		foreach ($items as $i => &$item)
-		{
-			// TODO: Complete the ordering stuff with nested sets
-			$item->order_up = true;
-			$item->order_dn = true;
+		foreach ($this->items as &$item) {
+			$this->ordering[$item->parent_id][] = $item->id;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Display the toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
-		$state = $this->get('State');
-		$component	= $state->get('filter.component');
-		$section	= $state->get('filter.section');
+		$component	= $this->state->get('filter.component');
+		$section	= $this->state->get('filter.section');
 
 		// Need to load the menu language file as mod_menu hasn't been loaded yet.
 		$lang = &JFactory::getLanguage();
@@ -79,23 +73,28 @@ class CategoriesViewCategories extends JView
 		);
 		JToolBarHelper::custom('category.edit', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
 		JToolBarHelper::custom('category.edit', 'edit.png', 'edit_f2.png', 'JTOOLBAR_EDIT', true);
-		JToolBarHelper::divider();
-		JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
-		JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-		if ($state->get('filter.published') != -1) {
+		if ($this->state->get('filter.published') != 2){
 			JToolBarHelper::divider();
-			JToolBarHelper::archiveList('categories.archive','JTOOLBAR_ARCHIVE');
+			JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 		}
-		if ($state->get('filter.published') == -2) {
+		if ($this->state->get('filter.published') != -1 ) {
+				JToolBarHelper::divider();
+				if ($this->state->get('filter.published') != 2) {
+					JToolBarHelper::archiveList('categories.archive','JTOOLBAR_ARCHIVE');
+				}
+				else if ($this->state->get('filter.published') == 2) {
+					JToolBarHelper::unarchiveList('categories.publish', 'JTOOLBAR_UNARCHIVE');
+				}
+		}
+		if ($this->state->get('filter.published') == -2 && JFactory::getUser()->authorise('core.delete', 'com_content')) {
 			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else {
+		} else {
 			JToolBarHelper::trash('categories.trash','JTOOLBAR_TRASH');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
+		JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
 		JToolBarHelper::divider();
 		JToolBarHelper::help('screen.categories','JTOOLBAR_HELP');
-
 	}
 }

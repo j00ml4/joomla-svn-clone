@@ -28,9 +28,9 @@ class WeblinksViewWeblink extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$state	= $this->get('State');
-		$item	= $this->get('Item');
-		$form	= $this->get('Form');
+		$this->state	= $this->get('State');
+		$this->item		= $this->get('Item');
+		$this->form		= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,23 +38,16 @@ class WeblinksViewWeblink extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$form->bind($item);
-
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', true);
 
