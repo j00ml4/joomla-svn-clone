@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: JDispatcherTest.php 14544 2010-02-04 04:56:26Z eddieajau $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -14,7 +14,7 @@ class JDispatcherStub extends JDispatcher
 	 */
 	public function __construct()
 	{
-	
+
 	}
 
 	/**
@@ -29,7 +29,7 @@ class JDispatcherStub extends JDispatcher
 	/**
 	 * Set the observers listening to us
 	 * @param The value to set _observers to
-	 */	
+	 */
 	public function setObservers($observers)
 	{
 		$this->_observers = $observers;

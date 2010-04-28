@@ -26,7 +26,7 @@ abstract class JHtmlLanguages {
 	public static function published($published)
 	{
 		if ($published) {
-			return JHTML::_('image','menu/icon-16-default.png', JText::_('COM_LANGS_HEADING_DEFAULT'), NULL, true);
+			return JHTML::_('image','menu/icon-16-default.png', JText::_('COM_LANGUAGES_HEADING_DEFAULT'), NULL, true);
 		}
 		else {
 			return '&nbsp;';
@@ -43,7 +43,7 @@ abstract class JHtmlLanguages {
 	 */
 	public static function id($rowNum,$language)
 	{
-		return '<input type="radio" id="cb'.$rowNum.'" name="cid" value="'.$language.'" onclick="isChecked(this.checked);" />';
+		return '<input type="radio" id="cb'.$rowNum.'" name="cid" value="'.$language.'" onclick="isChecked(this.checked);" title="'.($rowNum+1).'"/>';
 	}
 
 	public static function clients()

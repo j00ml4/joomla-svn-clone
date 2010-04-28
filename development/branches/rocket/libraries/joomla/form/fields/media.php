@@ -44,6 +44,7 @@ class JFormFieldMedia extends JFormField
 	 */
 	protected function getInput()
 	{
+		$link = (string) $this->element['link'];
 		if (!self::$initialised) {
 
 			// Load the modal behavior script.
@@ -85,10 +86,10 @@ class JFormFieldMedia extends JFormField
 		// The button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '	<div class="blank">';
-		$html[] = '		<a class="modal" title="'.JText::_('SELECT').'"' .
-					' href="'.($this->element['readonly'] ? '' : (string) $this->element['link'].$this->id).'"' .
+		$html[] = '		<a class="modal" title="'.JText::_('JGLOBAL_SELECT').'"' .
+					' href="'.($this->element['readonly'] ? '' : ($link ? $link : 'index.php?option=com_media&view=images&tmpl=component') . '&fieldid='.$this->id.'&folder='.(string)$this->element['directory']).'"' .
 					' rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
-		$html[] = '			'.JText::_('SELECT').'</a>';
+		$html[] = '			'.JText::_('JGLOBAL_SELECT').'</a>';
 		$html[] = '	</div>';
 		$html[] = '</div>';
 

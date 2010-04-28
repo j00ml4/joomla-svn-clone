@@ -21,11 +21,29 @@
 	</fields>
 
 	<!-- Add fields to the parameters object for the layout. -->
-	<fields name="params">
+<fields name="params">
+<fieldset name="basic">
+			<field name="maxLevel" type="list"
+				description="JGLOBAL_MAXLEVEL_DESC"
+				label="JGLOBAL_MAXLEVEL_LABEL"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNONE</option>
+				<option value="1">J1</option>
+				<option value="2">J2</option>
+				<option value="3">J3</option>
+				<option value="4">J4</option>
+				<option value="5">J5</option>
+			</field>
 
-		<!-- Basic options. -->
-		<fieldset name="basic"
-		>
+			<field name="show_empty_categories" type="list"
+				label="JGLOBAL_SHOW_EMPTY_CATEGORIES_LABEL"
+				description="JGLOBAL_SHOW_EMPTY_CATEGORIES_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 
 			<field name="show_description" type="list"
 				description="JGLOBAL_Show_Category_Description_Desc"
@@ -44,11 +62,25 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+			<field name="show_category_title" type="list"
+				label="JGLOBAL_SHOW_CATEGORY_TITLE"
+				description="JGLOBAL_SHOW_CATEGORY_TITLE_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 
-			<field name="spacer1" type="spacer"
-				hr="true"
-			/>
-
+			<field name="show_cat_num_articles" type="list"
+				label="JGLOBAL_NUMBER_CATEGORY_ITEMS_LABEL"
+				description="JGLOBAL_NUMBER_CATEGORY_ITEMS_DESC"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+</fieldset>
+<fieldset name="advanced">
 			<field name="num_leading_articles" type="text"
 				default="1"
 				description="JGLOBAL_Num_Leading_Articles_Desc"
@@ -76,41 +108,14 @@
 				label="JGLOBAL_NUM_LINKS_LABEL"
 				size="3"
 			/>
-		</fieldset>
 
-		<!-- Advanced options. -->
-		<fieldset name="advanced"
-		>
-		
-			<field name="show_subcategory_content" type="list"
-				description="JGLOBAL_Show_Subcategory_Content_Desc"
-				label="JGLOBAL_Show_Subcategory_Content_Label"
+			<field name="multi_column_order" type="list"
+				description="JGLOBAL_MULTI_COLUMN_ORDER_DESC"
+				label="JGLOBAL_MULTI_COLUMN_ORDER_LABEL"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JNo</option>
-				<option value="all_list">JGLOBAL_ALL_LIST</option>
-				<option value="all_articles">JGLOBAL_ALL_ARTICLE</option>
-			</field>
-
-			<field name="max_levels" type="list"
-				description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
-				label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="1">J1</option>
-				<option value="2">J2</option>
-				<option value="3">J3</option>
-				<option value="4">J4</option>
-				<option value="5">J5</option>
-			</field>
-
-			<field name="empty_categories" type="list"
-				description="JGLOBAL_Empty_Categories_Desc"
-				label="JGLOBAL_Empty_Categories_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
+				<option value="0">JGLOBAL_Down</option>
+				<option value="1">JGLOBAL_Across</option>
 			</field>
 
 			<field name="orderby_pri" type="list"
@@ -129,6 +134,7 @@
 				label="JGLOBAL_Article_Order_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="front">COM_CONTENT_FEATURED_ORDER</option>
 				<option value="rdate">JGLOBAL_MOST_RECENT_FIRST</option>
 				<option value="date">JGLOBAL_OLDEST_FIRST</option>
 				<option value="alpha">JGLOBAL_TITLE_ALPHABETICAL</option>
@@ -150,15 +156,6 @@
 				<option value="published">JPUBLISHED</option>
 			</field>
 
-			<field name="multi_column_order" type="list"
-				description="JGLOBAL_MULTI_COLUMN_ORDER_DESC"
-				label="JGLOBAL_MULTI_COLUMN_ORDER_LABEL"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JGLOBAL_DOWN</option>
-				<option value="1">JGLOBAL_ACROSS</option>
-			</field>
-
 			<field name="show_pagination" type="list"
 				description="JGLOBAL_Pagination_Desc"
 				label="JGLOBAL_Pagination_Label"
@@ -169,15 +166,6 @@
 				<option value="2">JGLOBAL_AUTO</option>
 			</field>
 
-			<field name="show_pagination_results" type="list"
-				description="JGLOBAL_Pagination_Results_Desc"
-				label="JGLOBAL_Pagination_Results_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
-			</field>
-
 			<field name="show_noauth" type="list"
 				description="JGLOBAL_Show_Unauth_Links_Desc"
 				label="JGLOBAL_Show_Unauth_Links_Label"
@@ -186,54 +174,9 @@
 				<option value="0">JNo</option>
 				<option value="1">JYes</option>
 			</field>
-		</fieldset>
+</fieldset>
 
-		<!-- Integration options. -->
-		<fieldset name="integration"
-		>
-
-			<field name="article-allow_ratings" type="list"
-				description="JGLOBAL_Allow_Ratings_Desc"
-				label="JGLOBAL_Allow_Ratings_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JNo</option>
-				<option value="1">JYes</option>
-			</field>
-
-			<field name="article-allow_comments" type="list"
-				description="JGLOBAL_Allow_Comments_Desc"
-				label="JGLOBAL_Allow_Comments_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JNo</option>
-				<option value="1">JYes</option>
-			</field>
-
-			<field name="show_feed_link" type="list"
-				label="JGLOBAL_Show_Feed_Link_Label"
-				description="JGLOBAL_Show_Feed_Link_Desc"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
-			</field>
-
-			<field name="feed_summary" type="list"
-				description="JGLOBAL_Feed_Summary_Desc"
-				label="JGLOBAL_Feed_Summary_Label"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JGLOBAL_INTRO_TEXT</option>
-				<option value="1">JGLOBAL_FULL_TEXT</option>
-			</field>
-		</fieldset>
-
-		<!-- Articles options. -->
-		<fieldset name="articles"
-			label="Content_Attribs_Article_Settings_Label"
-		>
-
+<fieldset name="article">
 			<field name="show_title" type="list"
 				description="JGLOBAL_Show_Title_Desc"
 				label="JGLOBAL_Show_Title_Label"
@@ -259,8 +202,8 @@
 				label="JGLOBAL_Show_Intro_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_category" type="list"
@@ -269,8 +212,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="link_category" type="list"
@@ -289,8 +232,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="link_parent_category" type="list"
@@ -309,8 +252,18 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="link_author" type="list"
+				description="JGLOBAL_Link_Author_Desc"
+				label="JGLOBAL_Link_Author_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_create_date" type="list"
@@ -319,8 +272,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_modify_date" type="list"
@@ -329,8 +282,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_publish_date" type="list"
@@ -339,8 +292,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_item_navigation" type="list"
@@ -348,8 +301,8 @@
 				label="JGLOBAL_Show_Navigation_Label"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_readmore" type="list"
@@ -368,8 +321,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_print_icon" type="list"
@@ -378,8 +331,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_email_icon" type="list"
@@ -388,8 +341,8 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 			</field>
 
 			<field name="show_hits" type="list"
@@ -398,9 +351,48 @@
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="use_article">CONTENT_BLOG_USE_ARTICLE</option>
-				<option value="0">Hide</option>
-				<option value="1">Show</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+</fieldset>
+		<fieldset name="integration"
+		>
+
+			<field name="article-allow_ratings" type="list"
+				description="JGLOBAL_Allow_Ratings_Desc"
+				label="JGLOBAL_Allow_Ratings_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNo</option>
+				<option value="1">JYes</option>
+			</field>
+
+			<field name="article-allow_comments" type="list"
+				description="JGLOBAL_Allow_Comments_Desc"
+				label="JGLOBAL_Allow_Comments_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNo</option>
+				<option value="1">JYes</option>
+			</field>
+
+			<field name="show_feed_link" type="list"
+				description="JGLOBAL_Show_Feed_Link_Desc"
+				label="JGLOBAL_Show_Feed_Link_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="feed_summary" type="list"
+				description="JGLOBAL_Feed_Summary_Desc"
+				label="JGLOBAL_Feed_Summary_Label"
+			>
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JGLOBAL_INTRO_TEXT</option>
+				<option value="1">JGLOBAL_FULL_TEXT</option>
 			</field>
 		</fieldset>
-	</fields>
+</fields>
 </metadata>

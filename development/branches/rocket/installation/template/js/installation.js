@@ -53,7 +53,7 @@ Install.detectFtpRoot = function(el) {
 			{
 				Joomla.replaceTokens(r.token)
 				if (r.error == false) {
-					document.id('ftproot').set('value', r.data.root);
+					document.id('jform_ftp_root').set('value', r.data.root);
 				}
 			}
 			el.set('disabled', '');

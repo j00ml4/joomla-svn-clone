@@ -112,7 +112,7 @@ class JTableCategory extends JTableNested
 	{
 		// Check for a title.
 		if (trim($this->title) == '') {
-			$this->setError(JText::sprintf('MUST_CONTAIN_A_TITLE', JText::_('Category')));
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MUSTCONTAIN_A_TITLE_CATEGORY'));
 			return false;
 		}
 
@@ -147,6 +147,12 @@ class JTableCategory extends JTableNested
 			$registry = new JRegistry();
 			$registry->loadArray($array['metadata']);
 			$array['metadata'] = (string)$registry;
+		}
+
+		// Bind the rules.
+		if (isset($array['rules']) && is_array($array['rules'])) {
+			$rules = new JRules($array['rules']);
+			$this->setRules($rules);
 		}
 
 		return parent::bind($array, $ignore);

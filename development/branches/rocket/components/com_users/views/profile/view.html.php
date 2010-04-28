@@ -16,18 +16,17 @@ jimport('joomla.application.component.view');
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.0
+ * @since		1.6
  */
 class UsersViewProfile extends JView
 {
 	/**
 	 * Method to display the view.
 	 *
-	 * @access	public
 	 * @param	string	$tpl	The template file to include
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Get the view data.
 		$form		= &$this->get('Form');
@@ -44,7 +43,7 @@ class UsersViewProfile extends JView
 
 		// Check if a member was found.
 		if (!$data->id) {
-			JError::raiseError(404, 'USERS_PROFILE_NOT_FOUND');
+			JError::raiseError(404, 'COM_USERS_PROFILE_NOT_FOUND');
 			return false;
 		}
 
@@ -53,46 +52,45 @@ class UsersViewProfile extends JView
 			$form->bind($data);
 		}
 
-		// Configure the pathway and page title.
-		$app		= &JFactory::getApplication();
-		$config		= &JFactory::getConfig();
-		$user		= &JFactory::getUser();
-		$pathway	= &$app->getPathway();
-		$menus		= &$app->getMenu();
-		$menu		= &$menus->getActive();
-
-		// Append the current member to the breadcrumb if we came from a users view menu item.
-		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'users')
-		{
-			// Add the member name to the pathway.
-			$pathway->addItem($this->escape($data->name));
-		}
-
-		// Set the page title if it has not been set already.
-		if (is_object($menu) && isset($menu->query['view']) && $menu->query['view'] == 'profile' && isset($menu->query['profile']) && $menu->query['profile'] == $data->id)
-		{
-			$mparams = new JRegistry;
-			$mparams->loadJSON($menu->params);
-
-			// If a page title has not been set, set one.
-			if (!$mparams->get('page_title')) {
-				$params->set('page_title', $data->name);
-			}
-		}
-		else
-		{
-			$params->set('page_title', $data->name);
-		}
-
-		// Set the document title.
-		$this->document->setTitle($params->get('page_title'));
-
 		// Push the data into the view.
 		$this->assignRef('form',	$form);
 		$this->assignRef('data',	$data);
 		$this->assignRef('profile',	$profile);
 		$this->assignRef('params',	$params);
 
+		$this->_prepareDocument();
+
 		parent::display($tpl);
+	}
+
+	/**
+	 * Prepares the document
+	 *
+	 * @since	1.6
+	 */
+	protected function _prepareDocument()
+	{
+		$app		= &JFactory::getApplication();
+		$menus		= &JSite::getMenu();
+		$user		= &JFactory::getUser();
+		$login		= $user->get('guest') ? true : false;
+		$title 		= null;
+
+		// Because the application sets a default page title,
+		// we need to get it from the menu item itself
+		$menu = $menus->getActive();
+		if($menu)
+		{
+			$this->params->def('page_heading', $this->params->get('page_title', $user->name));
+		} else {
+			$this->params->def('page_heading', JText::_('COM_USERS_Profile'));
+		}
+
+		$title = $this->params->get('page_title', $this->params->get('page_heading'));
+		if (empty($title))
+		{
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		$this->document->setTitle($title);
 	}
 }

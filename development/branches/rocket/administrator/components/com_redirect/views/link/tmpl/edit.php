@@ -41,6 +41,10 @@ JHtml::_('behavior.keepalive');
 
 			<?php echo $this->form->getLabel('comment'); ?>
 			<?php echo $this->form->getInput('comment'); ?>
+
+			<?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?>
+
 		</fieldset>
 	</div>
 
@@ -52,7 +56,7 @@ JHtml::_('behavior.keepalive');
 				<?php echo $this->form->getInput('published'); ?>
 		</fieldset>
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('COM_REDIRECT_DETAILS'); ?></legend>		
+			<legend><?php echo JText::_('COM_REDIRECT_DETAILS'); ?></legend>
 				<?php echo $this->form->getLabel('created_date'); ?>
 				<?php echo $this->form->getInput('created_date'); ?>
 

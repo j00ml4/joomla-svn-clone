@@ -60,6 +60,9 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 
+			<?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?>
+
 			<div class="clr"></div>
 			<?php echo $this->form->getLabel('description'); ?>
 			<div class="clr"></div>
@@ -75,8 +78,8 @@ JHtml::_('behavior.formvalidation');
 
 			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'meta-rules'); ?>
 			<fieldset>
-					<?php echo $this->form->getLabel('rules'); ?>
-					<?php echo $this->form->getInput('rules'); ?>
+				<?php echo $this->form->getLabel('rules'); ?>
+				<?php echo $this->form->getInput('rules'); ?>
 			</fieldset>
 
 			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>

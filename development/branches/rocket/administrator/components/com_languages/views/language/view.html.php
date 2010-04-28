@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class LanguagesViewLanguage extends JView
 {
-	public $state;
 	public $item;
 	public $form;
+	public $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$item		= $this->get('Item');
-		$form		= $this->get('Form');
+		$this->item		= $this->get('Item');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,28 +38,21 @@ class LanguagesViewLanguage extends JView
 			return false;
 		}
 
-		// Bind the label to the form.
-		$form->bind($item);
-
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-
 		parent::display($tpl);
-		$this->_setToolbar();
+		$this->addToolbar();
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', 1);
 		$isNew = empty($this->item->lang_id);
 
-		JToolBarHelper::title(JText::_($isNew ? 'COM_LANGS_VIEW_LANGUAGE_EDIT_NEW_TITLE' : 'COM_LANGS_VIEW_LANGUAGE_EDIT_EDIT_TITLE'));
+		JToolBarHelper::title(JText::_($isNew ? 'COM_LANGUAGES_VIEW_LANGUAGE_EDIT_NEW_TITLE' : 'COM_LANGUAGES_VIEW_LANGUAGE_EDIT_EDIT_TITLE'));
 		JToolBarHelper::save('language.save','JTOOLBAR_SAVE');
 		JToolBarHelper::apply('language.apply','JTOOLBAR_APPLY');
 		JToolBarHelper::addNew('language.save2new', 'JToolbar_Save_and_new');

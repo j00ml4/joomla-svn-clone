@@ -59,9 +59,6 @@ w
 	 */
 	public static function isError(& $object)
 	{
-		if (!is_object($object)) {
-			return false;
-		}
 		// supports PHP 5 exception handling
 		return $object INSTANCEOF Exception;
 	}
@@ -143,7 +140,7 @@ w
 		if ($thrown)
 		{
 			//echo debug_print_backtrace();
-			jexit('Infinite loop detected in JError');
+			jexit(JText::_('JLIB_ERROR_INFINITE_LOOP'));
 		}
 
 		$thrown = true;

@@ -19,94 +19,36 @@ jimport('joomla.application.component.modellist');
 class BannersModelBanners extends JModelList
 {
 	/**
-	 * Model context string.
+	 * Method to get the maximum ordering value for each category.
 	 *
-	 * @var		string
+	 * @since	1.6
 	 */
-	protected $_context = 'com_banners.banners';
-	/**
-	 * Categories data
-	 * @var		array
-	 */
-	protected $_categories;
-
-	/**
-	 * Method to auto-populate the model state.
-	 */
-	protected function _populateState()
+	function &getCategoryOrders()
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
-
-		// Load the filter state.
-		$search = $app->getUserStateFromRequest($this->_context.'.filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
-
-		$state = $app->getUserStateFromRequest($this->_context.'.filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $state);
-
-		$categoryId = $app->getUserStateFromRequest($this->_context.'.filter.category_id', 'filter_category_id', '');
-		$this->setState('filter.category_id', $categoryId);
-
-		$clientId = $app->getUserStateFromRequest($this->_context.'.filter.client_id', 'filter_client_id', '');
-		$this->setState('filter.client_id', $clientId);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_banners');
-		$this->setState('params', $params);
-
-		// List state information.
-		parent::_populateState('name', 'asc');
-	}
-
-	/**
-	 * Returns a reference to the a Table object, always creating it.
-	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	*/
-	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
-	/**
-	 * Method to get a store id based on model configuration state.
-	 *
-	 * This is necessary because the model is used by the component and
-	 * different modules that might need different sets of data or different
-	 * ordering requirements.
-	 *
-	 * @param	string		$id	A prefix for the store id.
-	 *
-	 * @return	string		A store id.
-	 */
-	protected function _getStoreId($id = '')
-	{
-		// Compile the store id.
-		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.state');
-		$id	.= ':'.$this->getState('filter.category_id');
-
-		return parent::_getStoreId($id);
+		if (!isset($this->cache['categoryorders'])) {
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
+			$query->select('MAX(ordering) as `max`, catid');
+			$query->select('catid');
+			$query->from('#__banners');
+			$query->group('catid');
+			$db->setQuery($query);
+			$this->cache['categoryorders'] = $db->loadAssocList('catid', 0);
+		}
+		return $this->cache['categoryorders'];
 	}
 
 	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
-	protected function _getListQuery()
+	protected function getListQuery()
 	{
-		// Get the application object
-		$app = &JFactory::getApplication();
-
-		// Create a new query object.
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		// Initialise variables.
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
@@ -139,8 +81,7 @@ class BannersModelBanners extends JModelList
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
 			$query->where('a.state = '.(int) $published);
-		}
-		else if ($published === '') {
+		} else if ($published === '') {
 			$query->where('(a.state IN (0, 1))');
 		}
 
@@ -161,257 +102,90 @@ class BannersModelBanners extends JModelList
 		if (!empty($search)) {
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
-			}
-			else
-			{
+			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('(a.name LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
 
 		// Add the list ordering clause.
-		$orderCol = $this->getState('list.ordering', 'ordering');
-		$app->setUserState($this->_context . '.'.$orderCol.'.orderdirn',$this->getState('list.direction', 'ASC'));
-		if ($orderCol=='ordering') {
-			$query->order($db->getEscaped('category_title').' '.$db->getEscaped($app->getUserState($this->_context . '.category_title.orderdirn','ASC')));
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
+		if ($orderCol == 'ordering' || $orderCol == 'category_title') {
+			$orderCol = 'category_title '.$orderDirn.', ordering';
 		}
-		$query->order($db->getEscaped($orderCol).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		if ($orderCol=='category_title') {
-			$query->order($db->getEscaped('ordering').' '.$db->getEscaped($app->getUserState($this->_context . '.ordering.orderdirn','ASC')));
-		}
-		$query->order($db->getEscaped('state').' '.$db->getEscaped($app->getUserState($this->_context . '.state.orderdirn','ASC')));
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
+
 	/**
-	 * method to give information about categories
-	 */
-	function &getCategories()
-	{
-		if (!isset($this->_categories))
-		{
-			$db = $this->getDbo();
-			$query = $db->getQuery(true);
-			$query->select('MAX(ordering) as `max`');
-			$query->select('catid');
-			$query->from('#__banners');
-			$query->where('state>=0');
-			$query->group('catid');
-			$db->setQuery((string)$query);
-			$this->_categories = $db->loadObjectList('catid');
-		}
-		return $this->_categories;
-	}
-	/**
-	 * Method to delete rows.
+	 * Method to get a store id based on model configuration state.
 	 *
-	 * @param	array	An array of item ids.
+	 * This is necessary because the model is used by the component and
+	 * different modules that might need different sets of data or different
+	 * ordering requirements.
 	 *
-	 * @return	boolean	Returns true on success, false on failure.
+	 * @param	string		$id	A prefix for the store id.
+	 * @return	string		A store id.
+	 * @since	1.6
 	 */
-	public function delete(&$pks)
+	protected function getStoreId($id = '')
 	{
-		// Initialise variables
-		$user	= JFactory::getUser();
+		// Compile the store id.
+		$id	.= ':'.$this->getState('filter.search');
+		$id	.= ':'.$this->getState('filter.access');
+		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.category_id');
 
-		// Typecast variable.
-		$pks = (array) $pks;
-
-		// Get a row instance.
-		$table = &$this->getTable();
-
-		// Iterate the items to delete each one.
-		foreach ($pks as $i => $pk)
-		{
-			if ($table->load($pk)) {
-				// Access checks.
-				if ($table->catid) {
-					$allow = $user->authorise('core.delete', 'com_banners.category.'.(int) $table->catid);
-				} else {
-					$allow = $user->authorise('core.delete', 'com_banners');
-				}
-
-				if ($allow) {
-					if (!$table->delete($pk)) {
-						$this->setError($table->getError());
-						return false;
-					}
-
-					// Delete tracks from this banner
-					$db = $this->getDbo();
-					$query = $db->getQuery(true);
-					$query->delete();
-					$query->from('#__banner_tracks');
-					$query->where('banner_id='.(int)$pk);
-					$db->setQuery((string)$query);
-					$db->query();
-
-					// Check for a database error.
-					if ($db->getErrorNum()) {
-						$this->setError($db->getErrorMsg());
-						return false;
-					}
-				} else {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_DELETE_NOT_PERMITTED'));
-				}
-			} else {
-				$this->setError($table->getError());
-				return false;
-			}
-		}
-
-		return true;
+		return parent::getStoreId($id);
 	}
 
 	/**
-	 * Method to publish records.
+	 * Returns a reference to the a Table object, always creating it.
 	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
 	 */
-	function publish(&$pks, $value = 1)
+	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
 	{
 		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
+		$app = JFactory::getApplication('administrator');
 
-		// Access checks.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
-				} else {
-					$allow = $user->authorise('core.edit.state', 'com_banners');
-				}
+		// Load the filter state.
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-				if (!$allow) {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
-		}
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
+		$this->setState('filter.state', $state);
 
-		// Attempt to change the state of the records.
-		if (!$table->publish($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
-		}
+		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
+		$this->setState('filter.category_id', $categoryId);
 
-		return true;
-	}
-	/**
-	 * Method to stick records.
-	 *
-	 * @param	array	The ids of the items to publish.
-	 * @param	int		The value of the published state
-	 *
-	 * @return	boolean	True on success.
-	 */
-	function stick(&$pks, $value = 1)
-	{
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
+		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', '');
+		$this->setState('filter.client_id', $clientId);
 
-		// Access checks.
-		foreach ($pks as $i => $pk) {
-			if ($table->load($pk)) {
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
-				} else {
-					$allow = $user->authorise('core.edit.state', 'com_banners');
-				}
+		// Load the parameters.
+		$params = JComponentHelper::getParams('com_banners');
+		$this->setState('params', $params);
 
-				if (!$allow) {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				}
-			}
-		}
-
-		// Attempt to change the state of the records.
-		if (!$table->stick($pks, $value, $user->get('id'))) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		return true;
-	}
-	/**
-	 * Saves the manually set order of records.
-	 *
-	 * @param	array	An array of primary key ids.
-	 * @param	int		+/-1
-	 */
-	function saveorder(&$pks, $order)
-	{
-		// Get the user
-		$user = JFactory::getUser();
-
-		// Initialise variables.
-		$table		= $this->getTable();
-		$conditions	= array();
-
-		if (empty($pks)) {
-			return JError::raiseWarning(500, JText::_('COM_BANNERS_NO_BANNERS_SELECTED'));
-		}
-
-		// update ordering values
-		foreach ($pks as $i => $pk) {
-			$table->load((int) $pk);
-
-			if ($table->state>=0) {
-				// Access checks.
-				if ($table->catid) {
-					$allow = $user->authorise('core.edit.state', 'com_banners.category.'.(int) $table->catid);
-				} else {
-					$allow = $user->authorise('core.edit.state', 'com_banners');
-				}
-
-				if (!$allow) {
-					// Prune items that you can't change.
-					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
-				} else if ($table->ordering != $order[$i]) {
-					$table->ordering = $order[$i];
-					if (!$table->store()) {
-						$this->setError($table->getError());
-						return false;
-					}
-					// remember to reorder this category
-					$condition = 'catid = '.(int) $table->catid.' AND state>=0';
-					$found = false;
-					foreach ($conditions as $cond) {
-						if ($cond[1] == $condition) {
-							$found = true;
-							break;
-						}
-					}
-					if (!$found) {
-						$conditions[] = array ($table->id, $condition);
-					}
-				}
-			}
-		}
-
-		// Execute reorder for each category.
-		foreach ($conditions as $cond) {
-			$table->reorder($cond[1]);
-		}
-
-		// Clear the component's cache
-		$cache = JFactory::getCache('com_banners');
-		$cache->clean();
-
-		return true;
+		// List state information.
+		parent::populateState('name', 'asc');
 	}
 }

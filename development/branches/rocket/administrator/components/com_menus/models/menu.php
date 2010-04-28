@@ -42,9 +42,11 @@ class MenusModelMenu extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function _populateState()
+	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
 
@@ -99,10 +101,8 @@ class MenusModelMenu extends JModelForm
 		$app = &JFactory::getApplication();
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_menus.menu', 'menu', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_menus.menu', 'menu', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -112,6 +112,8 @@ class MenusModelMenu extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -157,6 +159,11 @@ class MenusModelMenu extends JModelForm
 
 		$this->setState('menu.id', $table->id);
 
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
+
 		return true;
 	}
 
@@ -185,6 +192,11 @@ class MenusModelMenu extends JModelForm
 				return false;
 			}
 		}
+
+		// Clear the component's cache
+		$cache = JFactory::getCache('com_modules');
+		$cache->clean();
+		$cache->clean('mod_menu');
 
 		return true;
 	}

@@ -62,9 +62,11 @@ class MediaViewMedia extends JView
 
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(
-					'onComplete' => 'function(){ MediaManager.refreshFrame(); }',
-					'targetURL' => '\\$(\'uploadForm\').action',
-					'typeFilter' => $typeString
+					'onBeforeStart' => 'function(){ Uploader.setOptions({url: $(\'uploadForm\').action + \'&folder=\' + $(\'mediamanager-form\').folder.value}); }',
+					'onComplete' 	=> 'function(){ MediaManager.refreshFrame(); }',
+					'targetURL' 	=> '\\$(\'uploadForm\').action',
+					'typeFilter' 	=> $typeString,
+					'fileSizeMax'	=> $config->get('upload_maxsize')
 				)
 			);
 		}
@@ -97,13 +99,18 @@ class MediaViewMedia extends JView
 		$this->assign('folders', $this->get('folderTree'));
 
 		// Set the toolbar
-		$this->_setToolBar();
+		$this->addToolbar();
 
 		parent::display($tpl);
 		echo JHtml::_('behavior.keepalive');
 	}
 
-	function _setToolBar()
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
+	 */
+	protected function addToolbar()
 	{
 		// Get the toolbar object instance
 		$bar = &JToolBar::getInstance('toolbar');

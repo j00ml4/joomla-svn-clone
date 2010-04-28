@@ -28,9 +28,9 @@ class WeblinksViewWeblinks extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,18 +38,16 @@ class WeblinksViewWeblinks extends JView
 			return false;
 		}
 
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'weblinks.php';
 
@@ -63,19 +61,25 @@ class WeblinksViewWeblinks extends JView
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::editList('weblink.edit','JTOOLBAR_EDIT');
 		}
-		JToolBarHelper::divider();
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
-			JToolBarHelper::divider();
-			if ($state->get('filter.published') != -1) {
-				JToolBarHelper::archiveList('weblinks.archive','JTOOLBAR_ARCHIVE');
-			}
+
+				JToolBarHelper::divider();
+				JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+				JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			
+			if ($state->get('filter.state') != -1 ) {
+				JToolBarHelper::divider();
+				if ($state->get('filter.state') != 2) {
+					JToolBarHelper::archiveList('weblinks.archive','JTOOLBAR_ARCHIVE');
+				}
+				else if ($state->get('filter.state') == 2) {
+					JToolBarHelper::unarchiveList('weblinks.publish', 'JTOOLBAR_UNARCHIVE');
+				}
+			}	
 		}
-		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'weblinks.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else if ($canDo->get('core.edit.state')) {
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('weblinks.trash','JTOOLBAR_TRASH');
 		}
 		if ($canDo->get('core.admin')) {

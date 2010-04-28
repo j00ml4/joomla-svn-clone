@@ -13,6 +13,9 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+
+// Create shortcut to parameters.
+$params = $this->state->get('params');
 ?>
 
 <script language="javascript" type="text/javascript">
@@ -23,16 +26,11 @@ function submitbutton(task) {
 }
 </script>
 <div class="<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-<?php if ($this->params->get('show_page_title', 1)) : ?>
-<h2>
-	<?php if ($this->escape($this->params->get('page_heading'))) :?>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	<?php else : ?>
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	<?php endif; ?>
-</h2>
+<?php if ($this->params->def('show_page_heading', 1)) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
 <?php endif; ?>
-
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
 		<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
@@ -48,7 +46,7 @@ function submitbutton(task) {
 			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink.'.$this->item->id)): ?>
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
-				<br />				
+				<br />
 			<?php endif; ?>
 
 			<?php echo $this->form->getLabel('description'); ?>

@@ -1,19 +1,27 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
 
-// No direct access
+// No direct access.
 defined('_JEXEC') or die;
 
-class InstallerControllerManage extends JController {
+/**
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
+ */
+class InstallerControllerManage extends JController
+{
 	/**
 	 * Constructor.
 	 *
 	 * @param	array An optional associative array of configuration settings.
 	 * @see		JController
+	 * @since	1.6
 	 */
 	public function __construct($config = array())
 	{
@@ -22,8 +30,11 @@ class InstallerControllerManage extends JController {
 		$this->registerTask('unpublish',		'publish');
 		$this->registerTask('publish',			'publish');
 	}
+
 	/**
-	 * Enable/Disable an extension (If supported)
+	 * Enable/Disable an extension (if supported).
+	 *
+	 * @since	1.6
 	 */
 	public function publish()
 	{
@@ -39,27 +50,20 @@ class InstallerControllerManage extends JController {
 
 		if (empty($ids)) {
 			JError::raiseWarning(500, JText::_('COM_INSTALLER_ERROR_NO_EXTENSIONS_SELECTED'));
-		}
-		else
-		{
+		} else {
 			// Get the model.
 			$model	= $this->getModel('manage');
 
 			// Change the state of the records.
 			if (!$model->publish($ids, $value)) {
 				JError::raiseWarning(500, implode('<br />', $model->getErrors()));
-			}
-			else
-			{
+			} else {
 				if ($value == 1) {
-					$text = 'COM_INSTALLER_EXTENSION_PUBLISHED';
 					$ntext = 'COM_INSTALLER_N_EXTENSIONS_PUBLISHED';
-				}
-				else if ($value == 0) {
-					$text = 'COM_INSTALLER_EXTENSION_UNPUBLISHED';
+				} else if ($value == 0) {
 					$ntext = 'COM_INSTALLER_N_EXTENSIONS_UNPUBLISHED';
 				}
-				$this->setMessage(JText::sprintf((count($ids) == 1) ? $text : $ntext, count($ids)));
+				$this->setMessage(JText::plural($ntext, count($ids)));
 			}
 		}
 
@@ -67,7 +71,7 @@ class InstallerControllerManage extends JController {
 	}
 
 	/**
-	 * Remove an extension (Uninstall)
+	 * Remove an extension (Uninstall).
 	 *
 	 * @return	void
 	 * @since	1.5
@@ -77,8 +81,8 @@ class InstallerControllerManage extends JController {
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$model	= &$this->getModel('manage');
-		$eid = JRequest::getVar('cid', array(), '', 'array');
+		$eid	= JRequest::getVar('cid', array(), '', 'array');
+		$model	= $this->getModel('manage');
 
 		JArrayHelper::toInteger($eid, array());
 		$result = $model->remove($eid);
@@ -86,16 +90,20 @@ class InstallerControllerManage extends JController {
 	}
 
 	/**
-	 * Refreshes the cached metadata about an extension
-	 * Useful for debugging and testing purposes when the XML file might change
+	 * Refreshes the cached metadata about an extension.
+	 *
+	 * Useful for debugging and testing purposes when the XML file might change.
+	 *
+	 * @since	1.6
 	 */
 	function refresh()
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$model	= &$this->getModel('manage');
-		$uid = JRequest::getVar('cid', array(), '', 'array');
+		$uid	= JRequest::getVar('cid', array(), '', 'array');
+		$model	= $this->getModel('manage');
+
 		JArrayHelper::toInteger($uid, array());
 		$result = $model->refresh($uid);
 		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=manage',false));

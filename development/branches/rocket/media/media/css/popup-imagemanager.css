@@ -1,5 +1,5 @@
 /**
- * @version		$Id: popup-imagemanager.css 11952 2009-06-01 03:21:19Z robs $
+ * @version		$Id$
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -7,7 +7,7 @@
 html, body {
 	background-color: #F0F0F0;
 	color: ButtonText;
-	font: 11px Tahoma, Verdana, sans-serif;
+	font: 11px Tahoma, Verdana, sans-serif !important;
 	margin: 0px !important; padding: 0px !important;
 }
 
