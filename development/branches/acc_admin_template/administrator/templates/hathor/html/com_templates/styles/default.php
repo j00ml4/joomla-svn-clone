@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default.php 14353 2010-01-22 17:50:50Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_templates
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

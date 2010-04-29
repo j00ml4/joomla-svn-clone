@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_navigation.php 13137 2009-10-10 21:16:32Z pentacle $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_media
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.

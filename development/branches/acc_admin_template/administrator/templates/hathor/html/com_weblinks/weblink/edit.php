@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 12295 2009-06-22 11:10:18Z eddieajau $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_filter.php 16391 2010-04-23 21:51:43Z andrea.tarr $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

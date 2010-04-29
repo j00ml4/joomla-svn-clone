@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: pagination.php 11952 2009-06-01 03:21:19Z robs $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

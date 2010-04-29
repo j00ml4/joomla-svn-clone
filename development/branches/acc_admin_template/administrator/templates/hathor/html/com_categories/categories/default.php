@@ -1,6 +1,6 @@
 <?php
 /**
- * @version	 $Id: default.php 13471 2009-11-12 00:38:49Z eddieajau $
+ * @version	 $Id$
  * @package		Joomla.Administrator
  * @subpackage	com_categories
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: login.php 12471 2009-07-06 00:41:03Z eddieajau $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

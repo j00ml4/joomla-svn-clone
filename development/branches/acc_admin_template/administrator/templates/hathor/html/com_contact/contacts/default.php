@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default.php 16156 2010-04-16 22:43:22Z andrea.tarr $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_contact
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
