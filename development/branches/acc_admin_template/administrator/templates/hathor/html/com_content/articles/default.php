@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default.php 12551 2009-07-26 14:23:41Z erdsiger $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

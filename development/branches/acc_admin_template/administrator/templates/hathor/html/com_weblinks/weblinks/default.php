@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default.php 12290 2009-06-22 10:13:13Z pentacle $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

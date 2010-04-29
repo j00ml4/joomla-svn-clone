@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit_params.php 16403 2010-04-24 00:35:09Z eddieajau $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_weblinks
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

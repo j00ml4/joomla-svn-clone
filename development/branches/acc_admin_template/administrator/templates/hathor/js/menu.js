@@ -1,5 +1,5 @@
 /**
- * @version		$Id: menu.js 12253 2009-06-21 21:22:04Z pentacle $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_batch.php 14276 2010-01-18 14:20:28Z louis $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_menus
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

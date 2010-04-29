@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit_metadata.php 13126 2009-10-10 17:33:51Z severdia $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_menus
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.

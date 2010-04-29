@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: modal.php 12504 2009-07-07 06:39:05Z eddieajau $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04

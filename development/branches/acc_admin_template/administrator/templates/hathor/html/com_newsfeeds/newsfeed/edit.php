@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 14542 2010-02-04 03:54:41Z eddieajau $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

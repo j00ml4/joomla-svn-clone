@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: modal.php 16391 2010-04-23 21:51:43Z andrea.tarr $
+ * @version		$Id$
  * @package		Joomla.Administrator
  * @subpackage	Modules
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

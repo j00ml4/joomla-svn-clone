@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_navigation.php 12447 2009-07-05 03:43:03Z eddieajau $
+ * @version		$Id$
  * @package		Hathor Accessible Administrator Template
  * @since		1.6
  * @version  	1.04
