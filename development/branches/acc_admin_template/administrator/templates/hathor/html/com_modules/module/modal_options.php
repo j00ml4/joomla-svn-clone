@@ -26,6 +26,7 @@ $pane = &JPane::getInstance('sliders');
 			endif;
 			?>
 		<fieldset class="panelform">
+		<legend class="element-invisible"><?php echo JText::_($label) ?></legend>
 			<?php foreach ($this->form->getFieldset($fieldSet->name) as $field) : ?>
 				<div>
 					<?php echo $field->label; ?>

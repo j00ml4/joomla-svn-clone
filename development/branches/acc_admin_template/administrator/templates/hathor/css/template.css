@@ -526,7 +526,7 @@ dl#content-pane.tabs {
 	margin: 1px 0 0 0;
 }
 
-div.current label {
+div.current label, div.current span.faux-label {
 	display: block;
 	min-width: 150px;
 	float:left;
@@ -557,6 +557,7 @@ div.current fieldset.radio label {
 }
 
 div.current input,
+div.current span.faux-input,
 div.current textarea,
 div.current select {
 	clear:none;
@@ -881,7 +882,9 @@ fieldset.adminform-legacy fieldset.radio  {
 	clear:right;
 }
 fieldset.adminform fieldset.radio label,
-fieldset.panelform fieldset.radio label {
+fieldset.panelform fieldset.radio label,
+fieldset.adminform fieldset.radio span.faux-label,
+fieldset.panelform fieldset.radio span.faux-label {
 	min-width: 40px;
 	float:left;
 	clear:none;
@@ -889,7 +892,9 @@ fieldset.panelform fieldset.radio label {
 
 
 fieldset.panelform-legacy label,
-fieldset.adminform-legacy label {
+fieldset.adminform-legacy label,
+fieldset.panelform-legacy span.faux-label,
+fieldset.adminform-legacy span.faux-label {
 	min-width: 150px;
 	float:left;
 
@@ -993,7 +998,7 @@ input.invalid {
 }
 
 	/* augmented by aria in template javascript */
-input.readonly {
+input.readonly, span.faux-input {
 	border: 0;
 }
 
@@ -1011,7 +1016,7 @@ input.disabled {
 	background-color: #eeeeee;
 }
 
-input,select {
+input,select, span.faux-input {
 	font-size: 1.4em;
 	background-color: #ffffff;
 	border: 1px solid #c7c8b2;
@@ -1080,7 +1085,6 @@ label.selectlabel {
 	overflow: hidden;
 } */
 
-/* from alpha2, do I need it */
 .paramrules {
 	padding: 10px;
 	background: #f9fade;
@@ -1122,7 +1126,7 @@ table.admintable td.paramlist_value label {
 	font-size: 1em;
 }
 
-table.admintable input, table.admintable select {
+table.admintable input, table.admintable span.faux-input, table.admintable select {
 	font-size: 1em;
 }
 
@@ -2537,7 +2541,10 @@ fieldset.panelform {
 	border: none 0;
 }
 
-fieldset.adminform label, fieldset.panelform label {
+fieldset.adminform label, 
+fieldset.panelform label,
+fieldset.adminform span.faux-label, 
+fieldset.panelform span.faux-label {
 	line-height: 2em;
 	clear:left;
 	min-width: 12em;
@@ -2546,8 +2553,8 @@ fieldset.adminform label, fieldset.panelform label {
 }
 
 
-fieldset.adminform input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img, 
-fieldset.panelform input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img {
+fieldset.adminform input, fieldset.adminform span.faux-input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img, 
+fieldset.panelform input, fieldset.panelform span.faux-input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img {
 	float:left;
 	margin:5px 5px 5px 0;
 	width:auto;
