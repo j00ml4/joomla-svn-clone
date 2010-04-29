@@ -8,7 +8,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-include_once dirname(__FILE__).DS.'..'.DS.'default'.DS.'view.php';
+include_once dirname(__FILE__).'/../default/view.php';
 
 /**
  * Extension Manager Update View
@@ -19,38 +19,37 @@ include_once dirname(__FILE__).DS.'..'.DS.'default'.DS.'view.php';
  */
 class InstallerViewUpdate extends InstallerViewDefault
 {
+	/**
+	 * @since	1.6
+	 */
 	function display($tpl=null)
 	{
 		// Get data from the model
-		$state		= &$this->get('State');
-		$items		= &$this->get('Items');
-		$pagination	= &$this->get('Pagination');
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
 
 		$paths = new stdClass();
 		$paths->first = '';
 
 		$this->assignRef('paths', $paths);
-		$this->assignRef('state', $this->get('state'));
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
 
 		parent::display($tpl);
 	}
+
 	/**
-	 * Setup the Toolbar
+	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$canDo	= InstallerHelper::getActions();
-		/*
-		 * Set toolbar items for the page
-		 */
+
 		JToolBarHelper::custom('update.update', 'config', 'config', 'COM_INSTALLER_TOOLBAR_UPDATE', true, false);
 		JToolBarHelper::custom('update.find', 'refresh', 'refresh','COM_INSTALLER_TOOLBAR_FIND_UPDATES',false,false);
 		JToolBarHelper::custom('update.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false,false);
 		JToolBarHelper::divider();
-		parent::_setToolbar();
+		parent::addToolbar();
 	}
 }

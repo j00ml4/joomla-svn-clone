@@ -20,37 +20,6 @@ jimport( 'joomla.application.component.controller' );
 class LoginController extends JController
 {
 	/**
-	 * Method to display a view.
-	 *
-	 * @return	void
-	 */
-	public function display($cachable = false)
-	{
-		// Get the document object.
-		$document = &JFactory::getDocument();
-
-		// Set the default view name and format from the Request.
-		$vName		= 'login';
-		$vFormat	= $document->getType();
-
-		// Get and render the view.
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			// Get the model for the view.
-			$model = &$this->getModel($vName);
-
-			// Push the model into the view (as default).
-			$view->setModel($model, true);
-			$view->setLayout('default');
-
-			// Push document object into the view.
-			$view->assignRef('document', $document);
-
-			$view->display();
-		}
-	}
-
-	/**
 	 * Method to log in a user.
 	 *
 	 * @return	void
@@ -84,10 +53,18 @@ class LoginController extends JController
 	{
 		$app = &JFactory::getApplication();
 
-		$result = $app->logout();
+		$userid = JRequest::getInt('uid', null);
+
+		$options = array(
+			'clientid' => ($userid) ? 0 : 1
+		);
+
+		$result = $app->logout($userid, $options);
 
 		if (!JError::isError($result)) {
-			$app->redirect('index.php?option=com_login');
+			$model 	= &$this->getModel('login');
+			$return = $model->getState('return');
+			$app->redirect($return);
 		}
 
 		parent::display();
