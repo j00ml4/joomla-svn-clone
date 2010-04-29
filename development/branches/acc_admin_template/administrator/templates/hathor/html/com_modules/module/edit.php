@@ -102,18 +102,18 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<div>
 			<?php echo $this->form->getLabel('module'); ?>
 			<?php echo $this->form->getInput('module'); ?>
-			<input type="text" size="35" value="<?php if ($this->item->xml) echo ($text = (string) $this->item->xml->name) ? JText::_($text) : $this->item->module;else echo JText::_(MODULES_ERR_XML);?>" class="readonly" readonly="readonly" />
+			<span class="faux-input"><?php if ($this->item->xml) echo ($text = (string) $this->item->xml->name) ? JText::_($text) : $this->item->module;else echo JText::_(MODULES_ERR_XML);?></span>
 			</div>
 			<div>
 			<?php echo $this->form->getLabel('client_id'); ?>
-			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />
+			<input type="text" size="35" id="jform_client_id" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />
 			</div>
 			<div class="clr"></div>
 	<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
-					<label>
+					<span class="faux-label">
 						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
-					</label>
+					</span>
 					<?php echo JText::_($text); ?>
 				<?php endif; ?>
 			<?php else : ?>

@@ -331,7 +331,7 @@ legend {
 	color: #fcff20;
 }
 
-input,select,option {
+input,span.faux-input, select,option {
 	color: #fcff20;
 	background-color: #163365;
 	border: 1px solid #1b3f7c;

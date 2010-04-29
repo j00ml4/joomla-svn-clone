@@ -17,16 +17,13 @@ $menuTypes = MenusHelper::getMenuLinks();
 ?>
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_MODULES_MENU_ASSIGNMENT'); ?></legend>
+				
 				<label id="jform_menus-lbl" class="hasTip" for="jform_menus"><?php echo JText::_('COM_MODULES_MODULE_ASSIGN'); ?>:</label>
+				<select id="jform_menus" name="jform[assignment]">
+					<?php echo JHtml::_('select.options', ModulesHelper::getAssignmentOptions($this->item->client_id), 'value', 'text', $this->item->assignment, true);?>
+				</select>
 
-				<fieldset id="jform_menus" class="radio">
-					<select name="jform[assignment]">
-						<?php echo JHtml::_('select.options', ModulesHelper::getAssignmentOptions($this->item->client_id), 'value', 'text', $this->item->assignment, true);?>
-					</select>
-
-				</fieldset>
-
-				<label id="jform_menuselect-lbl" class="hasTip" for="jform_menuselect"><?php echo JText::_('COM_MODULES_MENU_SELECTION'); ?>:</label>
+				<span id="jform_menuselect-lbl" class="hasTip faux-label"><?php echo JText::_('COM_MODULES_MENU_SELECTION'); ?>:</span>
 
 				<div class="clr"></div>
 
