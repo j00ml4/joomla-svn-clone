@@ -20,12 +20,6 @@ jimport('joomla.application.component.modeladmin');
 class BannersModelBanner extends JModelAdmin
 {
 	/**
-	 * @var		string	The prefix to use with controller messages.
-	 * @since	1.6
-	 */
-	protected $text_prefix = 'COM_BANNERS_BANNER';
-
-	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
@@ -107,9 +101,14 @@ class BannersModelBanner extends JModelAdmin
 		if (!empty($data)) {
 			$form->bind($data);
 		} else {
-			$form->bind($this->getItem());
+			$data = $this->getItem();
+			$data->image = $data->params['image'];
+			$data->alt = $data->params['alt'];
+			$data->flash = $data->params['flash'];
+			$data->custom = $data->params['custom'];
+			
+			$form->bind($data);
 		}
-
 		return $form;
 	}
 

@@ -141,9 +141,9 @@ JHtml::_('behavior.formvalidation');
 			</fieldset>
 		<?php endforeach; ?>
 	
-		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Access'), 'access-rules'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('CONTENT_FIELDSET_RULES'), 'access-rules'); ?>
 		<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Access'); ?></legend>
+		<legend class="element-invisible"><?php echo JText::_('CONTENT_FIELDSET_RULES'); ?></legend>
 			<?php // echo $this->form->getLabel('rules'); ?>
 			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
