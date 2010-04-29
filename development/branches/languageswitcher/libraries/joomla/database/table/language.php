@@ -6,7 +6,9 @@
  */
 
 // No direct access
-defined('_JEXEC') or die;
+defined('JPATH_BASE') or die;
+
+jimport('joomla.database.table');
 
 /**
  * Languages table.
@@ -30,7 +32,7 @@ class JTableLanguage extends JTable
 	 * @var	char
 	 */
 	public $lang_code;
-	
+
 	/**
 	 * The SEF prefix.
 	 *
@@ -60,11 +62,25 @@ class JTableLanguage extends JTable
 	public $title_native;
 
 	/**
-	 * A description for the langauge.
+	 * A description for the language.
 	 *
 	 * @var	varchar
 	 */
 	public $description;
+
+	/**
+	 * A Meta Description for the language.
+	 *
+	 * @var	varchar
+	 */
+	public $metadesc;
+
+	/**
+	 * The Meta keywords for the language.
+	 *
+	 * @var	varchar
+	 */
+	public $metakey;
 
 	/**
 	 * The published state of the language.
@@ -91,7 +107,7 @@ class JTableLanguage extends JTable
 	public function check()
 	{
 		if (trim($this->title) == '') {
-			$this->setError(JText::_('COM_LANGUAGES_ERROR_NO_TITLE'));
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_LANGUAGE_NO_TITLE'));
 			return false;
 		}
 
