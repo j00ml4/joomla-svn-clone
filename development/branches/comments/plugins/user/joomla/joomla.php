@@ -30,7 +30,7 @@ class plgUserJoomla extends JPlugin
 	 * @param	boolean		True if user was succesfully stored in the database
 	 * @param	string		Message
 	 */
-	public function onAfterDeleteUser($user, $succes, $msg)
+	public function onUserAfterDelete($user, $succes, $msg)
 	{
 		if (!$succes) {
 			return false;
@@ -55,7 +55,7 @@ class plgUserJoomla extends JPlugin
 	 * @return	boolean	True on success
 	 * @since	1.5
 	 */
-	function onLoginUser($user, $options = array())
+	function onUserLogin($user, $options = array())
 	{
 		jimport('joomla.user.helper');
 
@@ -115,7 +115,7 @@ class plgUserJoomla extends JPlugin
 	 * @return object	True on success
 	 * @since 1.5
 	 */
-	function onLogoutUser($user, $options = array())
+	function onUserLogout($user, $options = array())
 	{
 		$my 		= &JFactory::getUser();
 		$session 	= &JFactory::getSession();

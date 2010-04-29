@@ -21,7 +21,7 @@ JHtml::_('behavior.formvalidation');
 </h1>
 <?php endif; ?>
 
-<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.reset_request'); ?>" method="post" class="form-validate">
+<form id="user-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.reset_request'); ?>" method="post" class="form-validate">
 
 	<?php
 	// Iterate through the form fieldsets and display each one.

@@ -21,7 +21,7 @@ JHtml::_('behavior.formvalidation');
 </h1>
 <?php endif; ?>
 
-<form id="member-profile" action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="form-validate">
+<form id="user-profile" action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="form-validate">
 	<?php
 	// Iterate through the form fieldsets and display each one.
 	foreach ($this->form->getFieldsets() as $group => $fieldset):

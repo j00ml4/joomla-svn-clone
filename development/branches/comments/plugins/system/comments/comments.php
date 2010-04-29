@@ -533,7 +533,7 @@ class plgSystemComments extends JPlugin
 	 * @return	void
 	 * @since	2.0
 	 */
-	public function onAfterStoreUser($user, $isnew, $success, $msg)
+	public function onUserAfterSave($user, $isnew, $success, $msg)
 	{
 		if ($user['block'] == 1) {
 			$this->_deleteReferences($user['id']);
@@ -548,7 +548,7 @@ class plgSystemComments extends JPlugin
 	 * @return	boolean	True on success.
 	 * @since	2.0
 	 */
-	public function onBeforeDeleteUser($user)
+	public function onUserBeforeDelete($user)
 	{
 		return $this->_deleteReferences($user['id']);
 	}

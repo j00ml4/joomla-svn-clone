@@ -50,7 +50,7 @@ class UsersModelUser extends JModelAdmin
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the data preparation event.
-		$results = $dispatcher->trigger('onPrepareUserProfileData', array($result->id, &$result));
+		$results = $dispatcher->trigger('onContentPrepareData', array('com_users.user', $result->id, &$result));
 
 		return $result;
 	}
@@ -77,7 +77,7 @@ class UsersModelUser extends JModelAdmin
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUserProfileForm', array($this->getState('user.id'), &$form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form->getName(), $this->getState('user.id'), &$form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
@@ -155,8 +155,8 @@ class UsersModelUser extends JModelAdmin
 		// Merge the table back into the raw data for plugin processing.
 		$data = array_merge($data, $table->getProperties(true));
 
-		// Trigger the onBeforeStoreUser event.
-		$result = $dispatcher->trigger('onBeforeStoreUser', array($old->getProperties(true), $isNew, $data));
+		// Trigger the onUserBeforeSave event.
+		$result = $dispatcher->trigger('onUserBeforeSave', array($old->getProperties(true), $isNew, $data));
 		if (in_array(false, $result, true)) {
 			$this->setError($table->getError());
 			return false;
@@ -175,7 +175,7 @@ class UsersModelUser extends JModelAdmin
 			$user->setParameters($registry);
 		}
 		// Trigger the onAftereStoreUser event
-		$dispatcher->trigger('onAfterStoreUser', array($data, $isNew, true, null));
+		$dispatcher->trigger('onUserAfterSave', array($data, $isNew, true, null));
 
 		$this->setState('user.id', $table->id);
 
@@ -196,7 +196,7 @@ class UsersModelUser extends JModelAdmin
 		$table	= $this->getTable();
 		$pks	= (array) $pks;
 
-		// Trigger the onBeforeStoreUser event.
+		// Trigger the onUserBeforeSave event.
 		JPluginHelper::importPlugin('user');
 		$dispatcher = &JDispatcher::getInstance();
 
@@ -215,15 +215,15 @@ class UsersModelUser extends JModelAdmin
 					// Get user data for the user to delete.
 					$user = & JFactory::getUser($pk);
 
-					// Fire the onBeforeDeleteUser event.
-					$dispatcher->trigger('onBeforeDeleteUser', array($table->getProperties()));
+					// Fire the onUserBeforeDelete event.
+					$dispatcher->trigger('onUserBeforeDelete', array($table->getProperties()));
 
 					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
 						return false;
 					} else {
-						// Trigger the onAfterDeleteUser event.
-						$dispatcher->trigger('onAfterDeleteUser', array($user->getProperties(), true, $this->getError()));
+						// Trigger the onUserAfterDelete event.
+						$dispatcher->trigger('onUserAfterDelete', array($user->getProperties(), true, $this->getError()));
 					}
 				} else {
 					// Prune items that you can't change.
@@ -283,8 +283,8 @@ class UsersModelUser extends JModelAdmin
 						return false;
 					}
 
-					// Trigger the onBeforeStoreUser event.
-					$dispatcher->trigger('onBeforeStoreUser', array($old, false));
+					// Trigger the onUserBeforeSave event.
+					$dispatcher->trigger('onUserBeforeSave', array($old, false));
 
 					// Store the table.
 					if (!$table->store()) {
@@ -293,7 +293,7 @@ class UsersModelUser extends JModelAdmin
 					}
 
 					// Trigger the onAftereStoreUser event
-					$dispatcher->trigger('onAfterStoreUser', array($table->getProperties(), false, true, null));
+					$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
 
 					// Log the user out.
 					if ($value) {
@@ -344,8 +344,8 @@ class UsersModelUser extends JModelAdmin
 						return false;
 					}
 
-					// Trigger the onBeforeStoreUser event.
-					$dispatcher->trigger('onBeforeStoreUser', array($old, false));
+					// Trigger the onUserBeforeSave event.
+					$dispatcher->trigger('onUserBeforeSave', array($old, false));
 
 					// Store the table.
 					if (!$table->store()) {
@@ -354,7 +354,7 @@ class UsersModelUser extends JModelAdmin
 					}
 
 					// Fire the onAftereStoreUser event
-					$dispatcher->trigger('onAfterStoreUser', array($table->getProperties(), false, true, null));
+					$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
 				} else {
 					// Prune items that you can't change.
 					unset($pks[$i]);

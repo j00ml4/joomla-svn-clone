@@ -46,7 +46,7 @@ class UsersModelLogin extends JModelForm
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUsersLoginForm', array($this->getState('member.id'), &$form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form->getName(), $this->getState('user.id'), &$form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {

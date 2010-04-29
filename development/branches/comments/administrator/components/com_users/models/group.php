@@ -23,13 +23,13 @@ class UsersModelGroup extends JModelAdmin
 	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
-	protected $event_after_save = 'onAfterStoreUsergroup';
+	protected $event_after_save = 'onUserAfterSaveGroup';
 
 	/**
 	 * @var		string	The event to trigger after before the data.
 	 * @since	1.6
 	 */
-	protected $event_before_save = 'onBeforeStoreUsergroup';
+	protected $event_before_save = 'onUserBeforeSaveGroup';
 
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -107,7 +107,7 @@ class UsersModelGroup extends JModelAdmin
 		// Get a row instance.
 		$table = $this->getTable();
 
-		// Trigger the onBeforeStoreUser event.
+		// Trigger the onUserBeforeSave event.
 		JPluginHelper::importPlugin('user');
 		$dispatcher = JDispatcher::getInstance();
 
@@ -118,15 +118,15 @@ class UsersModelGroup extends JModelAdmin
 				$allow = $user->authorise('core.edit.state', 'com_users');
 
 				if ($allow) {
-					// Fire the onBeforeDeleteUser event.
-					$dispatcher->trigger('onBeforeDeleteUser', array($table->getProperties()));
+					// Fire the onUserBeforeDeleteGroup event.
+					$dispatcher->trigger('onUserBeforeDeleteGroup', array($table->getProperties()));
 
 					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
 						return false;
 					} else {
-						// Trigger the onAfterDeleteUsergroup event.
-						$dispatcher->trigger('onAfterDeleteUsergroup', array($user->getProperties(), true, $this->getError()));
+						// Trigger the onUserAfterDeleteGroup event.
+						$dispatcher->trigger('onUserAfterDeleteGroup', array($user->getProperties(), true, $this->getError()));
 					}
 				} else {
 					// Prune items that you can't change.

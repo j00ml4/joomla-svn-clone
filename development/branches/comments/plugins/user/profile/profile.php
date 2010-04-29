@@ -18,13 +18,19 @@ defined('JPATH_BASE') or die;
 class plgUserProfile extends JPlugin
 {
 	/**
-	 * @param	int $userId		The user id
-	 * @param	JForm $form
-	 *
+	 * @param	string	The name of the form passed to the plugin.
+	 * @param	int		The user id
+	 * @param	JForm
 	 * @return	boolean
 	 */
-	function onPrepareUserProfileForm($userId, &$form)
+	function onContentPrepareForm($formName, $userId, &$form)
 	{
+		// TODO: The userId field needs to be changed to an objects array or registry
+
+		if ($formName != 'com_users.profile') {
+			return true;
+		}
+
 		// Add the profile fields to the form.
 		JForm::addFormPath(dirname(__FILE__).DS.'profiles');
 		$form->loadFile('profile', false);
@@ -103,13 +109,20 @@ class plgUserProfile extends JPlugin
 	}
 
 	/**
-	 * @param	int $userId		The user id
-	 * @param	object $data
-	 *
+	 * @param	string	The context for the data
+	 * @param	int		The user id
+	 * @param	object
 	 * @return	boolean
+	 * @since	1.6
 	 */
-	function onPrepareUserProfileData($userId, &$data)
+	function onContentPrepareData($context, $userId, &$data)
 	{
+		// TODO: The userId field needs to be changed to an objects array or registry
+
+		if ($context != 'com_users.profile') {
+			return true;
+		}
+
 		// Load the profile data from the database.
 		$db = &JFactory::getDbo();
 		$db->setQuery(
@@ -142,6 +155,8 @@ class plgUserProfile extends JPlugin
 	 */
 	function onPrepareUserProfile($userId, &$data)
 	{
+		// TODO: This is really a duplicate of onContentPrepareData!
+
 		// Load the profile data from the database.
 		$db = &JFactory::getDbo();
 		$db->setQuery(
@@ -165,7 +180,7 @@ class plgUserProfile extends JPlugin
 		return true;
 	}
 
-	function onAfterStoreUser($data, $isNew, $result, $error)
+	function onUserAfterSave($data, $isNew, $result, $error)
 	{
 		$userId	= JArrayHelper::getValue($data, 'id', 0, 'int');
 
