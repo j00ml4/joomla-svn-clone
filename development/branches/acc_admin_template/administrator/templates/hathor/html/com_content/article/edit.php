@@ -82,7 +82,7 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Publishing'), 'publishing-details'); ?>
 			<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('Options'); ?></legend>
+			<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Publishing'); ?></legend>
 			<div>
 				<?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?>
