@@ -27,8 +27,36 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+29-Apr-2010 Jean-Marie Simonet & Christophe Demko
+$ Customizing Save success all over the UI
+
+29-Apr-2010 Hannes Papenberg
+# Fixed parameters in install SQL and sampledata from INI to JSON
+
+29-Apr-2010 Christophe Demko
+# Saving and loading image banner (thanks Jonathan cheung)
++ Add metadesc and metakey fields to the #__language table (http://groups.google.com/group/joomla-dev-cms/browse_thread/thread/828869eb50004b97)
+# Fixed warning deprecated function ereg in php 5.3 libraries/joomla/client/ftp.php
+# Fixed warning date(): It is not safe to rely on the system's timezone settings (php 5.3). libraries/joomla/utilities/date.php
+
+29-Apr-2010 Andrew Eddie
+ # Fixed [#20102] Powered By 1.5 image
+ ^ Improve permission (allow/deny) select list titles for better accessibility.
+
+28-Apr-2010 Hannes Papenberg
+# Fixed some bugs in beez 2.0 and added font - Thanks Angie Radtke!
+
+28-Apr-2010 Jean-Marie Simonet
+# Loading plg_user_profile ini in User edit.
+$ Sorting com_users back-end in/keys
+
+28-Apr-2010 Andrew Eddie
+ + Accepted patch [#19659] JApplication::_create session() expires sessions on each page load and creates additional load (Dennis Hermacki)
+ + Accepted patch [#19660] Database session handler optimization (Dennis Hermacki)
+ # Fixed [#20231] You can save two default menu items
+
 27-Apr-2010 Mark Dexter
-# Make sure archive is consisently value = 2 (Elin Waring)
+# Make sure archive is consistently value = 2 (Elin Waring)
 # Update search plugins (Elin Waring)
 # Sample data fixes (Elin Waring)
 # String for templates view (Elin Waring)
