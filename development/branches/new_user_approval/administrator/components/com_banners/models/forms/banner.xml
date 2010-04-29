@@ -4,8 +4,9 @@
 	<fieldset name="details"
 		addfieldpath="/administrator/components/com_banners/models/fields"
 	>
-		<field name="id" type="hidden" default="0" required="true"
-			readonly="true" />
+		<field name="id" type="text" default="0" required="true"
+			readonly="true" class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL" 	description ="JGLOBAL_FIELD_ID_DESC" />
 
 		<field name="name" type="text" class="inputbox"
 			size="40" label="COM_BANNERS_FIELD_NAME_LABEL"
@@ -17,7 +18,7 @@
 
 		<field name="catid" type="category" extension="com_banners"
 			label="COM_BANNERS_FIELD_CATEGORY_LABEL" description="COM_BANNERS_FIELD_CATEGORY_DESC"
-			class="inputbox"
+			class="inputbox" required="true"
 		>
 			<option>JOPTION_NO_CATEGORY</option>
 		</field>
@@ -28,9 +29,12 @@
 		>
 			<option value="1">JPUBLISHED</option>
 			<option value="0">JUNPUBLISHED</option>
-			<option value="-1">JARCHIVED</option>
+			<option value="2">JARCHIVED</option>
 			<option value="-2">JTRASH</option>
 		</field>
+		<field name="ordering" type="ordering" class="inputbox"
+
+			label="JFIELD_ORDERING_LABEL" description="JFIELD_ORDERING_DESC" />
 
 		<field name="cid" type="bannerclient"
 			label="COM_BANNERS_FIELD_CLIENT_LABEL" description="COM_BANNERS_FIELD_CLIENT_DESC" />
@@ -58,6 +62,10 @@
 			<option value="1">COM_BANNERS_FIELD_VALUE_CUSTOM
 			</option>
 		</field>
+
+		<field name="custombannercode" type="textarea" class="inputbox"
+			rows="3" cols="30" filter="raw"
+			label="COM_BANNERS_FIELD_CUSTOMCODE_LABEL" description="COM_BANNERS_FIELD_CUSTOMCODE_DESC" />
 
 	</fieldset>
 
@@ -152,37 +160,27 @@
 
 	<fieldset name="image">
 
-		<field name="url" type="media" directory="/images/banners"
+		<field name="url" type="media" directory="banners"
 			hide_none="1" label="COM_BANNERS_FIELD_IMAGE_LABEL"
 			description="COM_BANNERS_FIELD_IMAGE_DESC" />
 
 	</fieldset>
 
-	<fieldset name="flash">
-
-		<field name="width" type="text" default="0"
-			class="inputbox validate-numeric" label="COM_BANNERS_FIELD_WIDTH_LABEL"
-			description="COM_BANNERS_FIELD_WIDTH_DESC" />
-
-		<field name="height" type="text" default="0"
-			class="inputbox validate-numeric" label="COM_BANNERS_FIELD_HEIGHT_LABEL"
-			description="COM_BANNERS_FIELD_HEIGHT_DESC" />
-
-	</fieldset>
-
-	<fieldset name="alt">
-
-		<field name="alt" type="text" class="inputbox"
-			label="COM_BANNERS_FIELD_ALT_LABEL" description="COM_BANNERS_FIELD_ALT_DESC" />
-
-	</fieldset>
-
-	<fieldset name="custom">
-
-		<field name="bannercode" type="textarea" class="inputbox"
-			rows="3" cols="30" filter="raw"
-			label="COM_BANNERS_FIELD_CUSTOMCODE_LABEL" description="COM_BANNERS_FIELD_CUSTOMCODE_DESC" />
-
-	</fieldset>
+	<fields name="params">
+		<fieldset name="jbasic" label="JGLOBAL_FIELDSET_OPTIONS">
+	
+			<field name="width" type="text"
+				class="inputbox validate-numeric" label="COM_BANNERS_FIELD_WIDTH_LABEL"
+				description="COM_BANNERS_FIELD_WIDTH_DESC" />
+	
+			<field name="height" type="text"
+				class="inputbox validate-numeric" label="COM_BANNERS_FIELD_HEIGHT_LABEL"
+				description="COM_BANNERS_FIELD_HEIGHT_DESC" />
+	
+			<field name="alt" type="text" class="inputbox"
+				label="COM_BANNERS_FIELD_ALT_LABEL" description="COM_BANNERS_FIELD_ALT_DESC" />
+	
+		</fieldset>
+	</fields>
 
 </form>

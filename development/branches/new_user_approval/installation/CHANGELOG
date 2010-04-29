@@ -27,6 +27,22 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+18-Apr-2010 Mark Dexter
+# Fix parse error in libraries/joomla/form/form.php
+# Display of record number in edit forms (Elin Waring)
+# UI work on module manager and menu manager forms (Elin Waring)
+# Restore missing image parameter in contact (Elin Waring)
+# Fix up labels in com_contact (Elin Waring)
+# Add images for sample site (Elin Waring)
+# Fix bug in user profile (Elin Waring)
+# Fix recursion problem with loadposition (Klas Berlic)
+# Fix bug in counting modules (Elin Waring)
+
+18-Apr-2010 Jean-Marie Simonet
+$ Added JText__ for item deletion. Correcting, adding some keys/inis
+$ Refactoring ini/keys in libraries/J/form
+$ Refactoring ini/keys in libraries/J/html + some, WIP
+
 17-Apr-2010 Mark Dexter
 # Change condition in JRegistry merge method to be consistent with get method 
 

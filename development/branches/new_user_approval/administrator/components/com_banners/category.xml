@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- $Id: category.xml 14137 2010-01-12 19:32:01Z chdemko $ -->
+	<!-- $Id$ -->
 	<!-- This is a demo. Delete for beta -->
 <form>
 	<fields
 		name="params">
 		<fieldset
 			name="basic">
-		
+
 			<field
 				name="foobar"
 				type="text"

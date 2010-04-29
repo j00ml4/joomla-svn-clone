@@ -19,18 +19,22 @@ jimport('joomla.application.component.view');
  */
 class RedirectViewLinks extends JView
 {
-	protected $state;
+	protected $enabled;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
+	 *
+	 * @since	1.6
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$pagination	= $this->get('Pagination');
+		$this->enabled		= RedirectHelper::isEnabled();
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->state		= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,20 +42,16 @@ class RedirectViewLinks extends JView
 			return false;
 		}
 
-		// Assign data to the view.
-		$this->assignRef('state', $state);
-		$this->assignRef('items', $items);
-		$this->assignRef('pagination', $pagination);
-		$this->assign('enabled', RedirectHelper::isEnabled());
-
 		parent::display($tpl);
-		$this->_setToolbar();
+		$this->addToolbar();
 	}
 
 	/**
-	 * Setup the Toolbar.
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		$state	= $this->get('State');
 		$canDo	= RedirectHelper::getActions();
@@ -63,19 +63,25 @@ class RedirectViewLinks extends JView
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::editList('link.edit','JTOOLBAR_EDIT');
 		}
-
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('links.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
-			JToolBarHelper::custom('links.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
-			JToolBarHelper::divider();
-			if ($state->get('filter.published') != 2) {
-				JToolBarHelper::archiveList('links.archive','JTOOLBAR_ARCHIVE');
+			if ($state->get('filter.state') != 2){
+				JToolBarHelper::divider();
+				JToolBarHelper::custom('links.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_ENABLE', true);
+				JToolBarHelper::custom('links.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
 			}
+			if ($state->get('filter.state') != -1 ) {
+				JToolBarHelper::divider();
+				if ($state->get('filter.state') != 2) {
+					JToolBarHelper::archiveList('links.archive','JTOOLBAR_ARCHIVE');
+				}
+				else if ($state->get('filter.state') == 2) {
+					JToolBarHelper::unarchiveList('links.publish', 'JTOOLBAR_UNARCHIVE');
+				}
+			}	
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'links.delete','JTOOLBAR_EMPTY_TRASH');
-		}
-		else if ($canDo->get('core.edit.state')) {
+		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('links.trash','JTOOLBAR_TRASH');
 		}
 		if ($canDo->get('core.admin')) {
