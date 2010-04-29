@@ -41,7 +41,7 @@ class UsersViewProfile extends JView
 			return false;
 		}
 
-		// Check if a member was found.
+		// Check if a user was found.
 		if (!$data->id) {
 			JError::raiseError(404, 'COM_USERS_PROFILE_NOT_FOUND');
 			return false;

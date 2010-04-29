@@ -20,18 +20,6 @@ jimport('joomla.application.component.modeladmin');
 class ContactModelContact extends JModelAdmin
 {
 	/**
-	 * @var		string	The event to trigger after saving the data.
-	 * @since	1.6
-	 */
-	protected $event_after_save = 'onAfterContactSave';
-
-	/**
-	 * @var		string	The event to trigger after before the data.
-	 * @since	1.6
-	 */
-	protected $event_before_save = 'onBeforeContactSave';
-
-	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.

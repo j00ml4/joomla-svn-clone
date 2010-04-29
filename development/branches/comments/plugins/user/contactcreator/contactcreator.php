@@ -21,7 +21,7 @@ jimport('joomla.plugins.plugin');
 class plgUserContactCreator extends JPlugin
 {
 
-	function onAfterStoreUser($user, $isnew, $success, $msg)
+	function onUserAfterSave($user, $isnew, $success, $msg)
 	{
 		if(!$success) {
 			return false; // if the user wasn't stored we don't resync
