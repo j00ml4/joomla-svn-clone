@@ -2,9 +2,10 @@
 /**
  * @version		$Id$
  * @package		Joomla.Administrator
- * @subpackage	mod_popular
+ * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.6
  */
 
 // no direct access
