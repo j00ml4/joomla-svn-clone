@@ -1,14 +1,11 @@
 <?php
 /**
  * @version		$Id$
- * @package		Hathor Accessible Administrator Template
- * @since		1.6
- * @version  	1.04
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @package		Joomla.Administrator
+ * @subpackage	templates.hathor
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
- * 
- * Login screen for the backend Administrator
- */
+ * @since		1.6
 
 // no direct access
 defined('_JEXEC') or die;

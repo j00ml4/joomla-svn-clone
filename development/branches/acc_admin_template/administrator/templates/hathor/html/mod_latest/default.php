@@ -2,9 +2,10 @@
 /**
  * @version		$Id: default.php 15377 2010-03-15 21:27:38Z andrea.tarr $
  * @package		Joomla.Administrator
- * @subpackage	mod_latest
+ * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.6
  */
 
 // no direct access

@@ -1,13 +1,11 @@
 <?php
 /**
  * @version		$Id: index.php 12471 2009-07-06 00:41:03Z eddieajau $
- * @package		Hathor Accessible Administrator Template
- * @since		1.6
- * @version  	1.04
- * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @package		Joomla.Administrator
+ * @subpackage	templates.hathor
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
- * 
- * Main Template file
+ * @since		1.6
  */
 
 
