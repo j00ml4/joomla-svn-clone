@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -17,44 +19,25 @@ jimport('joomla.filesystem.folder');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @since		1.5
+ * @since		1.6
  */
 class InstallerModelWarnings extends JModelList
 {
 	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
-	 *
-	 * @since	1.6
-	 */
-	protected function populateState()
-	{
-	}
-	/**
 	 * Extension Type
 	 * @var	string
 	 */
-	var $_type = 'warnings';
+	var $type = 'warnings';
 
 	/**
-	 * Overridden constructor
-	 */
-	function __construct()
-	{
-		// Call the parent constructor
-		parent::__construct();
-	}
-
-	/**
-	 * Return the byte value of a particular string
-	 * @param string String optionally with G, M or K suffix
-	 * @return int size in bytes
+	 * Return the byte value of a particular string.
+	 *
+	 * @param	string	String optionally with G, M or K suffix
+	 * @return	int		size in bytes
 	 * @since 1.6
 	 */
-	function return_bytes($val) {
+	function return_bytes($val)
+	{
 		$val = trim($val);
 		$last = strtolower($val{strlen($val)-1});
 		switch($last) {
@@ -71,7 +54,9 @@ class InstallerModelWarnings extends JModelList
 	}
 
 	/**
-	 * Load the data
+	 * Load the data.
+	 *
+	 * @since	1.6
 	 */
 	function getItems()
 	{

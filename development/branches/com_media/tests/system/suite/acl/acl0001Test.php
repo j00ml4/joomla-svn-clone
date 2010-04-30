@@ -64,7 +64,7 @@ class Acl0001Test extends SeleniumJoomlaTestCase
 		$this->select("//table[@id='acl-config']/tbody/tr[6]/td[6]/select", "label=Allow");
 		echo "Saving Article Administrator article permissions\n";
 		$this->click("xpath=/html/body/form/fieldset/div/button[contains(text(),'Save')]");
-		//	
+		//
 		//	---- No confirmation message exists ----
 		//
 		echo "Allow Article Administrator" . $saltGroup . " back end access, deny admin access\n";
@@ -178,7 +178,7 @@ class Acl0001Test extends SeleniumJoomlaTestCase
 		$this->click("//li[@id='toolbar-delete']/a/span");
 		$this->waitForPageToLoad("30000");
 		echo "Check that group deleted correctly.\n";
-		$this->assertTrue($this->isTextPresent("COM_USERS_N_GROUPS_DELETED"));
+		$this->assertTrue($this->isTextPresent("success"));
 		echo "Log out of back end.\n";
 		$this->doAdminLogout();
 		$this->countErrors();

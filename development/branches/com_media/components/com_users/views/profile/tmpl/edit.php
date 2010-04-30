@@ -5,6 +5,7 @@
  * @subpackage	com_users
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.6
  */
 
 defined('_JEXEC') or die;
@@ -12,6 +13,9 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.mootools');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+//load user_profile plugin language
+$lang = &JFactory::getLanguage();
+$lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 ?>
 <div class="profile-edit<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
@@ -46,7 +50,7 @@ JHtml::_('behavior.formvalidation');
 				<dt>
 					<?php echo $field->label; ?>
 					<?php if (!$field->required): ?>
-					<span class="optional"><?php echo JText::_('USERS OPTIONAL'); ?></span>
+					<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL'); ?></span>
 					<?php endif; ?>
 				</dt>
 				<dd>

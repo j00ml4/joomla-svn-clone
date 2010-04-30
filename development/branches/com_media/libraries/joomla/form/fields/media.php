@@ -44,6 +44,7 @@ class JFormFieldMedia extends JFormField
 	 */
 	protected function getInput()
 	{
+		$link = (string) $this->element['link'];
 		if (!self::$initialised) {
 
 			// Load the modal behavior script.
@@ -79,14 +80,27 @@ class JFormFieldMedia extends JFormField
 		$html[] = '<div style="float:left;">';
 		$html[] = '	<input type="text" name="'.$this->name.'" id="'.$this->id.'"' .
 					' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' .
-					' disabled="disabled"'.$attr.' />';
+					' readonly="readonly"'.$attr.' />';
 		$html[] = '</div>';
 
+		$directory = (string)$this->element['directory'];
+		if ($this->value && file_exists(JPATH_ROOT . '/' . $this->value)) {
+			$folder = explode ('/',$this->value);
+			array_shift($folder);
+			array_pop($folder);
+			$folder = implode('/',$folder);			
+		}
+		elseif (file_exists(JPATH_ROOT . '/images/' . $directory)) {
+			$folder = $directory;
+		}
+		else {
+			$folder='';
+		}
 		// The button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '	<div class="blank">';
 		$html[] = '		<a class="modal" title="'.JText::_('JGLOBAL_SELECT').'"' .
-					' href="'.($this->element['readonly'] ? '' : (string) $this->element['link'].$this->id).'"' .
+					' href="'.($this->element['readonly'] ? '' : ($link ? $link : 'index.php?option=com_media&view=images&tmpl=component') . '&fieldid='.$this->id.'&folder='.$folder).'"' .
 					' rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
 		$html[] = '			'.JText::_('JGLOBAL_SELECT').'</a>';
 		$html[] = '	</div>';

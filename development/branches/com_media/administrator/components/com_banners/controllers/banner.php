@@ -20,13 +20,19 @@ jimport('joomla.application.component.controllerform');
 class BannersControllerBanner extends JControllerForm
 {
 	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_BANNERS_BANNER';
+
+	/**
 	 * Method override to check if you can add a new record.
 	 *
 	 * @param	array	An array of input data.
 	 *
 	 * @return	boolean
 	 */
-	protected function _allowAdd($data = array())
+	protected function allowAdd($data = array())
 	{
 		// Initialise variables.
 		$user		= JFactory::getUser();
@@ -41,7 +47,7 @@ class BannersControllerBanner extends JControllerForm
 		if ($allow === null)
 		{
 			// In the absense of better information, revert to the component permissions.
-			return parent::_allowAdd($data);
+			return parent::allowAdd($data);
 		}
 		else {
 			return $allow;
@@ -56,7 +62,7 @@ class BannersControllerBanner extends JControllerForm
 	 *
 	 * @return	boolean
 	 */
-	protected function _allowEdit($data = array(), $key = 'id')
+	protected function allowEdit($data = array(), $key = 'id')
 	{
 		// Initialise variables.
 		$categoryId	= (int) isset($data['catid']) ? $data['catid'] : 0;
@@ -69,7 +75,7 @@ class BannersControllerBanner extends JControllerForm
 		else
 		{
 			// Since there is no asset tracking, revert to the component permissions.
-			return parent::_allowEdit($data, $key);
+			return parent::allowEdit($data, $key);
 		}
 	}
 }

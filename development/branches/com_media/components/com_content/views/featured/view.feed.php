@@ -32,15 +32,19 @@ class ContentViewFeatured extends JView
 
 		// Get some data from the model
 		JRequest::setVar('limit', $app->getCfg('feed_limit'));
-		$rows		= & $this->get('Data');
+		$rows		= & $this->get('Items');
 		foreach ($rows as $row)
 		{
 			// strip html from feed item title
 			$title = $this->escape($row->title);
 			$title = html_entity_decode($title, ENT_COMPAT, 'UTF-8');
 
+			// Compute the article slug
+			$row->slug = $row->alias ? ($row->id . ':' . $row->alias) : $row->id;
+			
 			// url link to article
-			$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catslug, $row->sectionid));
+			$link = JRoute::_(ContentHelperRoute::getArticleRoute($row->slug, $row->catid), false);
+			
 
 			// strip html from feed item description text
 			// TODO: Only pull fulltext if necessary (actually, just get the necessary fields).

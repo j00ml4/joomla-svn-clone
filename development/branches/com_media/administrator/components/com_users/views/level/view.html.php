@@ -19,18 +19,18 @@ jimport('joomla.application.component.view');
  */
 class UsersViewLevel extends JView
 {
-	protected $state;
-	protected $item;
 	protected $form;
+	protected $item;
+	protected $state;
 
 	/**
 	 * Display the view
 	 */
 	public function display($tpl = null)
 	{
-		$state	= $this->get('State');
-		$item	= $this->get('Item');
-		$form	= $this->get('Form');
+		$this->form		= $this->get('Form');
+		$this->item		= $this->get('Item');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -38,23 +38,17 @@ class UsersViewLevel extends JView
 			return false;
 		}
 
-		// Bind the record to the form.
-		$form->bind($item);
 
-		$this->assignRef('state',	$state);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-
-		$this->_setToolbar();
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 
 	/**
-	 * Build the default toolbar.
+	 * Add the page title and toolbar.
 	 *
-	 * @return	void
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', 1);
 
@@ -62,23 +56,21 @@ class UsersViewLevel extends JView
 		$isNew	= ($this->item->id == 0);
 		$canDo		= UsersHelper::getActions();
 
-		JToolBarHelper::title(JText::_($isNew ? 'Users_View_New_Level_Title' : 'Users_View_Edit_Level_Title'), 'levels-add');
+		JToolBarHelper::title(JText::_($isNew ? 'COM_USERS_VIEW_NEW_LEVEL_TITLE' : 'COM_USERS_VIEW_EDIT_LEVEL_TITLE'), 'levels-add');
 
-		if ($canDo->get('core.edit'))
-		{
+		if ($canDo->get('core.edit')) {
 			JToolBarHelper::apply('level.apply','JTOOLBAR_APPLY');
 			JToolBarHelper::save('level.save','JTOOLBAR_SAVE');
-			JToolBarHelper::addNew('level.save2new', 'JToolbar_Save_and_new');
+			JToolBarHelper::addNew('level.save2new', 'JTOOLBAR_SAVE_AND_NEW');
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('level.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JToolbar_Save_as_Copy', false);
+			JToolBarHelper::custom('level.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('level.cancel','JTOOLBAR_CANCEL');
-		}
-		else {
+		} else {
 			JToolBarHelper::cancel('level.cancel', 'JToolbar_Close');
 		}
 

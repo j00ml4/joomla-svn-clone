@@ -323,11 +323,27 @@ class JFilterInput extends JObject
 			while ($currentSpace !== false) {
 				$attr			= '';
 				$fromSpace		= substr($tagLeft, ($currentSpace +1));
+				$nextEqual		= strpos($fromSpace, '=');
 				$nextSpace		= strpos($fromSpace, ' ');
 				$openQuotes		= strpos($fromSpace, '"');
 				$closeQuotes	= strpos(substr($fromSpace, ($openQuotes +1)), '"') + $openQuotes +1;
 
 				// Do we have an attribute to process? [check for equal sign]
+				if ($fromSpace != '/' && (($nextEqual && $nextSpace && $nextSpace < $nextEqual ) || !$nextEqual))
+				{
+					if(!$nextEqual)
+					{
+						$attribEnd = strpos($fromSpace, '/') - 1;
+					} else {
+						$attribEnd = $nextSpace - 1;
+					}
+					if((int) $fromSpace > 0)
+					{
+						$fromSpace = substr($fromSpace, $attribEnd + 1);
+					} else {
+						$fromSpace = substr($fromSpace, 0, $attribEnd).'="'.substr($fromSpace, 0, $attribEnd).'"'.substr($fromSpace, $attribEnd);
+					}
+				}
 				if (strpos($fromSpace, '=') !== false) {
 					/*
 					 * If the attribute value is wrapped in quotes we need to
@@ -486,10 +502,15 @@ class JFilterInput extends JObject
 	 */
 	protected function _decode($source)
 	{
-		// entity decode
-		$trans_tbl = get_html_translation_table(HTML_ENTITIES);
-		foreach($trans_tbl as $k => $v) {
-			$ttr[$v] = utf8_encode($k);
+		static $ttr;
+		
+		if(!is_array($ttr))
+		{
+			// entity decode
+			$trans_tbl = get_html_translation_table(HTML_ENTITIES);
+			foreach($trans_tbl as $k => $v) {
+				$ttr[$v] = utf8_encode($k);
+			}
 		}
 		$source = strtr($source, $ttr);
 		// convert decimal

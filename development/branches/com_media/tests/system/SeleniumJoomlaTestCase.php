@@ -174,11 +174,11 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		try
 		{
-			$this->assertTrue($this->isTextPresent("COM_USERS_N_USERS_DELETED"));
+			$this->assertTrue($this->isTextPresent("success"));
 		}
 		catch (PHPUnit_Framework_AssertionFailedError $e)
 		{
-			echo "** ERROR in deleteTestUsers, SeleniumJoomlaTestCase, line 167 **\n";
+			echo "** ERROR in deleteTestUsers, SeleniumJoomlaTestCase, line 181 **\n";
 			array_push($this->verificationErrors, $e->toString());
 		}
 	}
@@ -342,7 +342,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			try
 			{
-				$this->assertTrue($this->isTextPresent("_DELETED"), 'Delete confirm text wrong, SeleniumJoomlaTestCase line 345');
+				$this->assertTrue(($this->isTextPresent("DELETED") OR $this->isTextPresent("removed")), 'Delete confirm text wrong, SeleniumJoomlaTestCase line 345');
 				$this->assertFalse($this->isTextPresent("ERROR"), "Error message present, SeleniumTestCase line 346");
 				echo "Deletion of item(s) succeeded.\n";
 			}
@@ -378,7 +378,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	/**
 	 * Magic method to check for PHP Notice whenever the waitForPageToLoad command is invoked
 	 * To suppress the check, use waitForPageToLoad('3000', false);
-	 * 
+	 *
 	 * @param string $command
 	 * @param array $arguments
 	 * @return results of waitForPageToLoad method
@@ -386,7 +386,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	public function __call($command, $arguments)
 	{
 		$return = parent::__call($command, $arguments);
-		if ($command == 'waitForPageToLoad' && $arguments[1] !== false)
+		if ($command == 'waitForPageToLoad' && isset($arguments[1]) && $arguments[1] !== false)
 		{
 			try
 			{
@@ -400,11 +400,11 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		return $return;
 	}
-	
+
 	/**
-	 * Function to extract our test file information from the $e stack trace. 
+	 * Function to extract our test file information from the $e stack trace.
 	 * Makes the error reporting more readable, since it filters out all of the PHPUnit files.
-	 * 
+	 *
 	 * @param PHPUnit_Framework_AssertionFailedError $e
 	 * @return string with selected files based on path
 	 */
@@ -416,7 +416,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		foreach ($trace as $traceLine) {
 			$file = str_replace('\\', '/', $traceLine['file']);
 			if (stripos($file, $path) !== false) {
-				$message .= "\n" . $traceLine['file'] . '(' . $traceLine['line'] . '): ' . 
+				$message .= "\n" . $traceLine['file'] . '(' . $traceLine['line'] . '): ' .
 					$traceLine['class'] . $traceLine['type'] . $traceLine['function'] ;
 			}
 		}

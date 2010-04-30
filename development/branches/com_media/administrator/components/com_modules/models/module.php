@@ -22,28 +22,17 @@ jimport('joomla.application.component.modeladmin');
 class ModulesModelModule extends JModelAdmin
 {
 	/**
-	 * Item cache.
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
 	 */
-	private $_cache = array();
-
-	protected $_context = 'com_modules';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-
-		$this->_item = 'module';
-		$this->_option = 'com_modules';
-	}
+	protected $text_prefix = 'COM_MODULES';
 	
 	/**
 	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -68,8 +57,8 @@ class ModulesModelModule extends JModelAdmin
 	 * Method to delete rows.
 	 *
 	 * @param	array	An array of item ids.
-	 *
 	 * @return	boolean	Returns true on success, false on failure.
+	 * @since	1.6
 	 */
 	public function delete(&$pks)
 	{
@@ -103,7 +92,7 @@ class ModulesModelModule extends JModelAdmin
 				throw new Exception($table->getError());
 			}
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -118,6 +107,7 @@ class ModulesModelModule extends JModelAdmin
 	 *
 	 * @return	boolean	True if successful.
 	 * @throws	Exception
+	 * @since	1.6
 	 */
 	public function duplicate(&$pks)
 	{
@@ -178,7 +168,7 @@ class ModulesModelModule extends JModelAdmin
 				return JError::raiseWarning(500, $row->getError());
 			}
 		}
-		
+
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
@@ -223,10 +213,8 @@ class ModulesModelModule extends JModelAdmin
 		$this->setState('item.module',		$module);
 
 		// Get the form.
-		try {
-			$form = parent::getForm('com_modules.module', 'module', array('control' => 'jform'));
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		$form = parent::getForm('com_modules.module', 'module', array('control' => 'jform'));
+		if (empty($form)) {
 			return false;
 		}
 
@@ -236,6 +224,8 @@ class ModulesModelModule extends JModelAdmin
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -248,7 +238,7 @@ class ModulesModelModule extends JModelAdmin
 	 *
 	 * @return	mixed	Object on success, false on failure.
 	 */
-	public function &getItem($pk = null)
+	public function getItem($pk = null)
 	{
 		// Initialise variables.
 		$pk	= (!empty($pk)) ? (int) $pk : (int) $this->getState('module.id');
@@ -408,7 +398,7 @@ class ModulesModelModule extends JModelAdmin
 		if (file_exists($formFile)) {
 			// Get the module form.
 			if (!$form->loadFile($formFile, false, '//config')) {
-				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 
@@ -548,8 +538,15 @@ class ModulesModelModule extends JModelAdmin
 
 		return true;
 	}
-	
-	function _orderConditions($table = null)
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
 	{
 		$condition = array();
 		$condition[] = 'client_id = '.(int) $table->client_id;

@@ -86,7 +86,7 @@ class JDate extends DateTime
 		'5.5' => 'Asia/Calcutta',
 		'5.75' => 'Asia/Katmandu',
 		'6' => 'Asia/Dhaka',
-		'6.30' => 'Indian/Cocos',
+		'6.5' => 'Indian/Cocos',
 		'7' => 'Asia/Bangkok',
 		'8' => 'Australia/Perth',
 		'8.75' => 'Australia/West',
@@ -95,7 +95,7 @@ class JDate extends DateTime
 		'10' => 'Australia/Brisbane',
 		'10.5' => 'Australia/Lord_Howe',
 		'11' => 'Pacific/Kosrae',
-		'11.30' => 'Pacific/Norfolk',
+		'11.5' => 'Pacific/Norfolk',
 		'12' => 'Pacific/Auckland',
 		'12.75' => 'Pacific/Chatham',
 		'13' => 'Pacific/Tongatapu',
@@ -142,7 +142,7 @@ class JDate extends DateTime
 		}
 
 		// If the date is numeric assume a unix timestamp and convert it.
-		$date = is_numeric($date) ? date('c', $date) : $date;
+		$date = is_numeric($date) ? @date('c', $date) : $date;
 
 		// Call the DateTime constructor.
 		parent::__construct($date, $tz);

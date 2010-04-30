@@ -30,6 +30,9 @@ ALTER TABLE `jos_banner`
 
 ALTER TABLE `jos_banners`
  CHANGE COLUMN `bid` `id` INTEGER NOT NULL auto_increment;
+ 
+ALTER TABLE `jos_banner`
+ CHANGE `custombannercode` `custombannercode` varchar(2048) NOT NULL;
 
 ALTER TABLE `jos_banners`
  MODIFY COLUMN `type` INTEGER NOT NULL DEFAULT '0';
@@ -293,13 +296,13 @@ UPDATE `jos_components` AS a
   CHANGE `published` `published` tinyint(1) NOT NULL DEFAULT '0',
   DROP INDEX `catid`,
   ADD  KEY `idx_access` (`access`),
-  ADD  KEY `idx_checkout` (`checked_out`), 
+  ADD  KEY `idx_checkout` (`checked_out`),
   ADD  KEY `idx_published` (`published`),
   ADD  KEY `idx_catid` (`catid`),
   ADD  KEY `idx_createdby` (`created_by`),
   ADD  KEY `idx_featured_catid` (`featured`,`catid`),
   ADD  KEY `idx_language` (`language`),
-  ADD  KEY `idx_xreference` (`xreference`);  
+  ADD  KEY `idx_xreference` (`xreference`);
 -- ----------------------------------------------------------------
 -- jos_content
 -- ----------------------------------------------------------------
@@ -614,7 +617,7 @@ ALTER TABLE `jos_newsfeeds`
 
 ALTER TABLE `jos_newsfeeds`
  ADD `language` char(7) NOT NULL DEFAULT '';
- 
+
 ALTER TABLE `jos_newsfeeds`
 ADD `params` TEXT NOT NULL;
 
@@ -858,7 +861,7 @@ CREATE TABLE  `#__update_categories` (
 -- ----------------------------------------------------------------
 -- jos_weblinks
 -- ----------------------------------------------------------------
-ALTER TABLE `jos_weblinks` 
+ALTER TABLE `jos_weblinks`
  CHANGE COLUMN `published` `state` tinyint (1) NOT NULL DEFAULT '0';
 
 ALTER TABLE `jos_weblinks`

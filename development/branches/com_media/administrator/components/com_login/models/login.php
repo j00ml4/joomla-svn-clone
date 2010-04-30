@@ -22,11 +22,9 @@ class LoginModelLogin extends JModel
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -39,7 +37,7 @@ class LoginModelLogin extends JModel
 		// check for return URL from the request first
 		if ($return = JRequest::getVar('return', '', 'method', 'base64')) {
 			$return = base64_decode($return);
-			if (!JURI::isInternal($data['return'])) {
+			if (!JURI::isInternal($return)) {
 				$return = '';
 			}
 		}
@@ -48,7 +46,7 @@ class LoginModelLogin extends JModel
 		if (empty($return)) {
 			$return = 'index.php';
 		}
-		
+
 		$this->setState('return', $return);
 	}
 }

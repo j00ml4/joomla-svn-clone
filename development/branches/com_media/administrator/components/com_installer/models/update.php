@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -16,23 +18,20 @@ jimport('joomla.updater.update');
 
 /**
  * @package		Joomla.Administrator
- *
- * @package		Joomla
  * @subpackage	com_installer
- * @since		1.5
+ * @since		1.6
  */
 class InstallerModelUpdate extends JModelList
 {
-	protected $_context = 'com_installer.update';
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
-	protected function populateState() {
+	protected function populateState()
+	{
 		$app = JFactory::getApplication('administrator');
 		$this->setState('message',$app->getUserState('com_installer.message'));
 		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
@@ -44,66 +43,73 @@ class InstallerModelUpdate extends JModelList
 	/**
 	 * Method to get the database query
 	 *
-	 * @return JDatabaseQuery the database query
+	 * @return	JDatabaseQuery	The database query
+	 * @since	1.6
 	 */
-	protected function getListQuery() {
-		$query = new JDatabaseQuery;
+	protected function getListQuery()
+	{
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 		$query->select('*');
 		$query->from('#__updates');
 		$query->order($this->getState('list.ordering').' '.$this->getState('list.direction'));
+
 		return $query;
 	}
 
 	/**
-	 * Finds updates for an extension
-	 * @param int Extension identifier to look for
-	 * @return boolean Result
+	 * Finds updates for an extension.
+	 *
+	 * @param	int		Extension identifier to look for
+	 * @return	boolean Result
+	 * @since	1.6
 	 */
 	public function findUpdates($eid=0)
 	{
-		$updater =& JUpdater::getInstance();
+		$updater = JUpdater::getInstance();
 		$results = $updater->findUpdates($eid);
 		return true;
 	}
 
 	/**
-	 * Removes all of the updates from the table
-	 * @return boolean result of operation
+	 * Removes all of the updates from the table.
+	 *
+	 * @return	boolean result of operation
+	 * @since	1.6
 	 */
 	public function purge()
 	{
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		// Note: TRUNCATE is a DDL operation
 		// This may or may not mean depending on your database
 		$db->setQuery('TRUNCATE TABLE #__updates');
-		if ($db->Query())
-		{
+		if ($db->Query()) {
 			$this->_message = JText::_('COM_INSTALLER_PURGED_UPDATES');
 			return true;
-		}
-		else
-		{
+		} else {
 			$this->_message = JText::_('COM_INSTALLER_FAILED_TO_PURGE_UPDATES');
 			return false;
 		}
 	}
 
 	/**
-	 * Update function
-	 * Sets the "result" state with the result of the operation
-	 * @param Array[int] List of updates to apply
+	 * Update function.
+	 *
+	 * Sets the "result" state with the result of the operation.
+	 *
+	 * @param	Array[int] List of updates to apply
+	 * @since	1.6
 	 */
 	public function update($uids)
 	{
 		$result = true;
-		foreach($uids as $uid)
-		{
+		foreach($uids as $uid) {
 			$update = new JUpdate();
-			$instance =& JTable::getInstance('update');
+			$instance = JTable::getInstance('update');
 			$instance->load($uid);
 			$update->loadFromXML($instance->detailsurl);
 			// install sets state and enqueues messages
-			$res = $this->_install($update);
+			$res = $this->install($update);
 			$result = $res & $result;
 		}
 
@@ -112,17 +118,18 @@ class InstallerModelUpdate extends JModelList
 	}
 
 	/**
-	 * Handles the actual update installation
-	 * @param JUpdate an update definition
-	 * @return boolean Result of install
+	 * Handles the actual update installation.
+	 *
+	 * @param	JUpdate	An update definition
+	 * @return	boolean	Result of install
+	 * @since	1.6
 	 */
-	private function _install($update)
+	private function install($update)
 	{
-		$app = &JFactory::getApplication();
-		if(isset($update->get('downloadurl')->_data)) {
+		$app = JFactory::getApplication();
+		if (isset($update->get('downloadurl')->_data)) {
 			$url = $update->downloadurl->_data;
-		} else
-		{
+		} else {
 			JError::raiseWarning('', JText::_('COM_INSTALLER_INVALID_EXTENSION_UPDATE'));
 			return false;
 		}
@@ -131,31 +138,27 @@ class InstallerModelUpdate extends JModelList
 		$p_file = JInstallerHelper::downloadPackage($url);
 
 		// Was the package downloaded?
-		if (!$p_file)
-		{
+		if (!$p_file) {
 			JError::raiseWarning('', JText::sprintf('COM_INSTALLER_PACKAGE_DOWNLOAD_FAILED', $url));
 			return false;
 		}
 
-		$config =& JFactory::getConfig();
+		$config		= JFactory::getConfig();
 		$tmp_dest	= $config->get('tmp_path');
 
 		// Unpack the downloaded package file
-		$package = JInstallerHelper::unpack($tmp_dest.DS.$p_file);
+		$package	= JInstallerHelper::unpack($tmp_dest.DS.$p_file);
 
 		// Get an installer instance
-		$installer =& JInstaller::getInstance();
+		$installer	= JInstaller::getInstance();
 		$update->set('type', $package['type']);
 
 		// Install the package
-		if (!$installer->install($package['dir']))
-		{
+		if (!$installer->install($package['dir'])) {
 			// There was an error installing the package
 			$msg = JText::sprintf('COM_INSTALLER_MSG_UPDATE_ERROR', $package['type']);
 			$result = false;
-		}
-		else
-		{
+		} else {
 			// Package installed sucessfully
 			$msg = JText::sprintf('COM_INSTALLER_MSG_UPDATE_SUCCESS', $package['type']);
 			$result = true;
@@ -174,9 +177,8 @@ class InstallerModelUpdate extends JModelList
 		$app->setUserState('com_installer.extension_message', $installer->get('extension_message'));
 
 		// Cleanup the install files
-		if (!is_file($package['packagefile']))
-		{
-			$config =& JFactory::getConfig();
+		if (!is_file($package['packagefile'])) {
+			$config = JFactory::getConfig();
 			$package['packagefile'] = $config->get('tmp_path').DS.$package['packagefile'];
 		}
 
