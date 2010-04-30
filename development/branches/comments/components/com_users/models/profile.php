@@ -23,6 +23,12 @@ jimport('joomla.plugin.helper');
 class UsersModelProfile extends JModelForm
 {
 	/**
+	 * @var		object	The user profile data.
+	 * @since	1.6
+	 */
+	protected $data;
+
+	/**
 	 * Method to check in a user.
 	 *
 	 * @param	integer		The id of the row to check out.
@@ -91,41 +97,44 @@ class UsersModelProfile extends JModelForm
 	 */
 	public function getData()
 	{
-		$app	= JFactory::getApplication();
-		$false	= false;
+		if ($this->data === null) {
 
-		// Initialise the table with JUser.
-		$table	= JUser::getTable('User', 'JTable');
-		$data	= new JUser($this->getState('user.id'));
+			$app	= JFactory::getApplication();
+			$userId = $this->getState('user.id');
 
-		// Set the base user data.
-		$data->email1 = $data->get('email');
-		$data->email2 = $data->get('email');
+			// Initialise the table with JUser.
+			$table	= JUser::getTable('User', 'JTable');
+			$this->data	= new JUser($userId);
 
-		// Override the base user data with any data in the session.
-		$temp = (array)$app->getUserState('com_users.edit.profile.data', array());
-		foreach ($temp as $k => $v) {
-			$data->$k = $v;
+			// Set the base user data.
+			$this->data->email1 = $this->data->get('email');
+			$this->data->email2 = $this->data->get('email');
+
+			// Override the base user data with any data in the session.
+			$temp = (array)$app->getUserState('com_users.edit.profile.data', array());
+			foreach ($temp as $k => $v) {
+				$this->data->$k = $v;
+			}
+
+			// Unset the passwords.
+			unset($this->data->password1);
+			unset($this->data->password2);
+
+			// Get the dispatcher and load the users plugins.
+			$dispatcher	= JDispatcher::getInstance();
+			JPluginHelper::importPlugin('user');
+
+			// Trigger the data preparation event.
+			$results = $dispatcher->trigger('onContentPrepareData', array('com_users.profile', $this->data));
+
+			// Check for errors encountered while preparing the data.
+			if (count($results) && in_array(false, $results, true)) {
+				$this->setError($dispatcher->getError());
+				$this->data = false;
+			}
 		}
 
-		// Unset the passwords.
-		unset($data->password1);
-		unset($data->password2);
-
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the data preparation event.
-		$results = $dispatcher->trigger('onContentPrepareData', array('com_users.profile', $this->getState('user.id'), &$data));
-
-		// Check for errors encountered while preparing the data.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return $false;
-		}
-
-		return $data;
+		return $this->data;
 	}
 
 	/**
@@ -146,11 +155,11 @@ class UsersModelProfile extends JModelForm
 		}
 
 		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
+		$dispatcher	= JDispatcher::getInstance();
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form->getName(), $this->getState('user.id'), &$form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
@@ -158,31 +167,9 @@ class UsersModelProfile extends JModelForm
 			return false;
 		}
 
+		$form->bind($this->getData());
+
 		return $form;
-	}
-
-	/**
-	 * @since	1.6
-	 */
-	function getProfile()
-	{
-		$false	= false;
-		$data	= array();
-
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the profile preparation event.
-		$results = $dispatcher->trigger('onContentPrepareData', array('com_users.profile', $this->getState('user.id'), &$data));
-
-		// Check for errors encountered while preparing the profile.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return $false;
-		}
-
-		return $data;
 	}
 
 	/**

@@ -40,7 +40,7 @@ class UsersModelRemind extends JModelForm
 		JPluginHelper::importPlugin('users');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array(&$form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {

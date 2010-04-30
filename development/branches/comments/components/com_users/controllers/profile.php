@@ -73,9 +73,9 @@ class UsersControllerProfile extends UsersController
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		// Initialise variables.
-		$app	= &JFactory::getApplication();
-		$model	= &$this->getModel('Profile', 'UsersModel');
-		$user	= &JFactory::getUser();
+		$app	= JFactory::getApplication();
+		$model	= $this->getModel('Profile', 'UsersModel');
+		$user	= JFactory::getUser();
 		$userId	= (int) $user->get('id');
 
 		// Get the user data.
@@ -112,7 +112,7 @@ class UsersControllerProfile extends UsersController
 			$app->setUserState('com_users.edit.profile.data', $data);
 
 			// Redirect back to the edit screen.
-			$userId = (int)$app->getUserState('com_users.edit.profile.id');
+			$userId = (int) $app->getUserState('com_users.edit.profile.id');
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile&layout=edit&user_id='.$userId, false));
 			return false;
 		}

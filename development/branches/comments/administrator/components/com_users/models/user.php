@@ -50,7 +50,7 @@ class UsersModelUser extends JModelAdmin
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the data preparation event.
-		$results = $dispatcher->trigger('onContentPrepareData', array('com_users.user', $result->id, &$result));
+		$results = $dispatcher->trigger('onContentPrepareData', array('com_users.user', $result));
 
 		return $result;
 	}
@@ -76,15 +76,6 @@ class UsersModelUser extends JModelAdmin
 		$dispatcher	= &JDispatcher::getInstance();
 		JPluginHelper::importPlugin('user');
 
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form->getName(), $this->getState('user.id'), &$form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return false;
-		}
-
 		// Check the session for previously entered form data.
 		$data = $app->getUserState('com_users.edit.user.data', array());
 
@@ -93,6 +84,15 @@ class UsersModelUser extends JModelAdmin
 			$form->bind($data);
 		} else {
 			$form->bind($this->getItem());
+		}
+
+		// Trigger the form preparation event.
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
+
+		// Check for errors encountered while preparing the form.
+		if (count($results) && in_array(false, $results, true)) {
+			$this->setError($dispatcher->getError());
+			return false;
 		}
 
 		return $form;

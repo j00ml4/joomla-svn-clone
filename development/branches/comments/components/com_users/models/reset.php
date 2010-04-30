@@ -23,13 +23,16 @@ class UsersModelReset extends JModelForm
 	/**
 	 * Method to get the password reset request form.
 	 *
+	 * @param	string	The name of the form.
+	 * @param	string	The name of the form XML to load (excluding suffix).
+	 * @param	array	An array of options for the form.
 	 * @return	object	JForm object on success, JException on failure.
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($formName = 'com_users.reset_request', $formXml = 'reset_request', $options = array('control' => 'jform'))
 	{
 		// Get the form.
-		$form = parent::getForm('com_users.reset_request', 'reset_request', array('control' => 'jform'));
+		$form = parent::getForm($formName, $formXml, $options);
 		if (empty($form)) {
 			return false;
 		}
@@ -39,7 +42,7 @@ class UsersModelReset extends JModelForm
 		JPluginHelper::importPlugin('users');
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array(&$form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
@@ -58,17 +61,8 @@ class UsersModelReset extends JModelForm
 	 */
 	public function getResetCompleteForm()
 	{
-		// Set the form loading options.
-		$options = array(
-			'array' => true,
-			'event' => 'onContentPrepareForm',
-			'group' => 'users'
-		);
-
-		// TODO: This just will not work!
-
 		// Get the form.
-		return $this->getForm('reset_complete', 'com_users.reset_complete', $options);
+		return $this->getForm('com_users.reset_complete', 'reset_complete');
 	}
 
 	/**
@@ -79,17 +73,8 @@ class UsersModelReset extends JModelForm
 	 */
 	public function getResetConfirmForm()
 	{
-		// Set the form loading options.
-		$options = array(
-			'array' => true,
-			'event' => 'onContentPrepareForm',
-			'group' => 'users'
-		);
-
-		// TODO: This just will not work!
-
 		// Get the form.
-		return $this->getForm('reset_confirm', 'com_users.reset_confirm', $options);
+		return $this->getForm('com_users.reset_confirm', 'reset_confirm');
 	}
 
 	/**
