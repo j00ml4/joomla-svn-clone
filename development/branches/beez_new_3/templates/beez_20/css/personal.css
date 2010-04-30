@@ -590,12 +590,14 @@ ul#archive-items li
 
 .image-left
 {
-        border:solid 0 #ccc;
+         border:solid 1px #ddd;
+		padding:2px
 }
 
 .image-right
 {
-        border:solid 1px #ccc;
+        border:solid 1px #ddd;
+		padding:2px
 }
 
 /* ++++++++++++++  leading  ++++++++++++++ */
