@@ -155,6 +155,7 @@
 		<field name="metakey_prefix" type="text"
 			label="COM_BANNERS_FIELD_METAKEYWORDPREFIX_LABEL"
 			description="COM_BANNERS_FIELD_METAKEYWORDPREFIX_DESC" />
+			
 
 	</fieldset>
 
