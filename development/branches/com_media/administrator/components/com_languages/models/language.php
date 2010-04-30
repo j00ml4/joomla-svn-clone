@@ -8,7 +8,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Languages Component Language Model
@@ -17,8 +17,14 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_languages
  * @since		1.5
  */
-class LanguagesModelLanguage extends JModelForm
+class LanguagesModelLanguage extends JModelAdmin
 {
+	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_LANGUAGES';
+	
 	/**
 	 * Override to get the table
 	 */
@@ -30,11 +36,8 @@ class LanguagesModelLanguage extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * This method should only be called once per instantiation and is designed
-	 * to be called on the first call to the getState() method unless the model
-	 * configuration flag to ignore the request is set.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -96,14 +99,11 @@ class LanguagesModelLanguage extends JModelForm
 	public function getForm()
 	{
 		// Initialise variables.
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
 
 		// Get the form.
 		$form = parent::getForm('com_languages.language', 'language', array('control' => 'jform'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
+		if (empty($form)) {
 			return false;
 		}
 
@@ -113,6 +113,8 @@ class LanguagesModelLanguage extends JModelForm
 		// Bind the form data if present.
 		if (!empty($data)) {
 			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
 		}
 
 		return $form;
@@ -200,5 +202,11 @@ class LanguagesModelLanguage extends JModelForm
 		}
 
 		return true;
+	}
+
+	function _orderConditions($table = null)
+	{
+		$condition = array();
+		return $condition;
 	}
 }

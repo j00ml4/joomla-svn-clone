@@ -1,10 +1,15 @@
-<?php defined('_JEXEC') or die('Restricted access');
-
+<?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_installer
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License, see LICENSE.php
  */
+
+// No direct access.
+defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.form.formfield');
 
 /**
@@ -16,7 +21,6 @@ jimport('joomla.form.formfield');
  */
 class JFormFieldSearch extends JFormField
 {
-
 	/**
 	 * The field type.
 	 *
@@ -28,8 +32,9 @@ class JFormFieldSearch extends JFormField
 	 * Method to get the field input.
 	 *
 	 * @return	string		The field input.
+	 * @since	1.6
 	 */
-	protected function getInput() 
+	protected function getInput()
 	{
 		$html = '';
 		$html.= '<input type="text" name="' . $this->name . '" id="' . $this->id . '" value="' . $this->value . '" title="' . JText::_('JSEARCH_FILTER') . '" onchange="this.form.submit();" />';

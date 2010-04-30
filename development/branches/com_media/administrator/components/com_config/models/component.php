@@ -21,6 +21,8 @@ class ConfigModelComponent extends JModelForm
 	/**
 	 * Method to auto-populate the model state.
 	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -56,16 +58,14 @@ class ConfigModelComponent extends JModelForm
 		}
 
 		// Get the form.
-		try {
-			$form = parent::getForm(
+		$form = parent::getForm(
 				'com_config.component',
 				'config',
 				array('control' => 'jform'),
 				false,
 				'/config'
 			);
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
+		if (empty($form)) {
 			return false;
 		}
 

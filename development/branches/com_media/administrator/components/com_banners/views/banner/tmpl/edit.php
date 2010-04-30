@@ -28,122 +28,75 @@ JHtml::_('behavior.formvalidation');
 		document.id('jform_type0').addEvent('click', function(e){
 			document.id('image').setStyle('display', 'block');
 			document.id('custom').setStyle('display', 'none');
-			document.id('jform_image_url').fireEvent('change');
 		});
 		document.id('jform_type1').addEvent('click', function(e){
 			document.id('image').setStyle('display', 'none');
-			document.id('flash').setStyle('display', 'none');
-			document.id('alt').setStyle('display', 'none');
 			document.id('custom').setStyle('display', 'block');
 		});
-		document.id('jform_image_url').addEvent('change',function(e){
-			regex=/\.swf$/;
-			if(regex.test(document.id('jform_image_url').value))
-			{
-				document.id('flash').setStyle('display', 'block');
-				document.id('alt').setStyle('display', 'none');
-			}
-			else
-			{
-				document.id('flash').setStyle('display', 'none');
-				document.id('alt').setStyle('display', 'block');
-			}
-		});
-		if(document.id('jform_type0').checked==true)
-		{
+		if(document.id('jform_type0').checked==true) {
 			document.id('jform_type0').fireEvent('click');
-		}
-		else
-		{
+		} else {
 			document.id('jform_type1').fireEvent('click');
 		}
-		document.id('jform_image_url').fireEvent('change');
 	});
-
-
 // -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_banners'); ?>" method="post" name="adminForm" id="banner-form" class="form-validate">
-<div class="width-60 fltlft">
-	<fieldset class="adminform">
-		<legend><?php echo empty($this->item->id) ? JText::_('COM_BANNERS_NEW_BANNER') : JText::sprintf('COM_BANNERS_EDIT_BANNER', $this->item->id); ?></legend>
-
-				<?php echo $this->form->getLabel('name'); ?>
-				<?php echo $this->form->getInput('name'); ?>
-
-				<?php echo $this->form->getLabel('alias'); ?>
-				<?php echo $this->form->getInput('alias'); ?>
-
-				<?php echo $this->form->getLabel('access'); ?>
-				<?php echo $this->form->getInput('access'); ?>
-
-				<?php echo $this->form->getLabel('catid'); ?>
-				<?php echo $this->form->getInput('catid'); ?>
-
-
-				<div class="clr"> </div>
-		</fieldset>
+	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-		<legend><?php echo JText::_('Banners_Banner_Details') ?></legend>
-		<div id="image">
-			<?php foreach($this->form->getFieldset('image') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
+			<legend><?php echo empty($this->item->id) ? JText::_('COM_BANNERS_NEW_BANNER') : JText::sprintf('COM_BANNERS_EDIT_BANNER', $this->item->id); ?></legend>
 
-				<?php echo $this->form->getLabel('state'); ?>
-				<?php echo $this->form->getInput('state'); ?>
-				
-				<?php echo $this->form->getLabel('cid'); ?>
-				<?php echo $this->form->getInput('cid'); ?>
+			<?php echo $this->form->getLabel('name'); ?>
+			<?php echo $this->form->getInput('name'); ?>
 
-				<?php echo $this->form->getLabel('description'); ?>
-				<?php echo $this->form->getInput('description'); ?>
+			<?php echo $this->form->getLabel('alias'); ?>
+			<?php echo $this->form->getInput('alias'); ?>
 
-				<?php echo $this->form->getLabel('clickurl'); ?>
-				<?php echo $this->form->getInput('clickurl'); ?>
+			<?php echo $this->form->getLabel('access'); ?>
+			<?php echo $this->form->getInput('access'); ?>
 
-				<?php echo $this->form->getLabel('type'); ?>
-				<?php echo $this->form->getInput('type'); ?>
+			<?php echo $this->form->getLabel('catid'); ?>
+			<?php echo $this->form->getInput('catid'); ?>
 
-				<?php echo $this->form->getLabel('language'); ?>
-				<?php echo $this->form->getInput('language'); ?>
-		
-				<?php echo $this->form->getLabel('id'); ?>
-				<?php echo $this->form->getInput('id'); ?>
-				<div class="clr"> </div>
+			<div class="clr"> </div>
+		</fieldset>
 
-		<div id="flash">
-			<?php foreach($this->form->getFieldset('flash') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-		<div id="alt">
-			<?php foreach($this->form->getFieldset('alt') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
-		<div id="custom">
-			<?php foreach($this->form->getFieldset('custom') as $field): ?>
-				<?php if (!$field->hidden): ?>
-					<?php echo $field->label; ?>
-				<?php endif; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
-		</div>
+		<fieldset class="adminform">
+			<?php echo $this->form->getLabel('type'); ?>
+			<?php echo $this->form->getInput('type'); ?>
 
-	</fieldset>
-</div>
+			<legend><?php echo JText::_('COM_BANNERS_BANNER_DETAILS') ?></legend>
+			<div id="image">
+				<?php foreach($this->form->getFieldset('image') as $field): ?>
+					<?php if (!$field->hidden): ?>
+						<?php echo $field->label; ?>
+					<?php endif; ?>
+					<?php echo $field->input; ?>
+				<?php endforeach; ?>
+			</div>
+
+			<div id="custom">
+				<?php echo $this->form->getLabel('custombannercode'); ?>
+				<?php echo $this->form->getInput('custombannercode'); ?>
+			</div>
+
+			<?php echo $this->form->getLabel('description'); ?>
+			<?php echo $this->form->getInput('description'); ?>
+
+			<?php echo $this->form->getLabel('clickurl'); ?>
+			<?php echo $this->form->getInput('clickurl'); ?>
+
+			<?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?>
+
+			<?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?>
+			<div class="clr"> </div>
+
+		</fieldset>
+	</div>
+
 <div class="width-40 fltrt">
 	<?php echo JHtml::_('sliders.start','banner-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 

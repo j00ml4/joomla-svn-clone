@@ -218,11 +218,12 @@ abstract class JHtmlBehavior
 		JHTML::_('script','system/uploader.js', false, true);
 
 		$document = &JFactory::getDocument();
-		
+
 		static $uploaders;
 
 		if (!isset($uploaders)) {
 			$uploaders = array();
+
 			JText::script('JUPLOADER_FILENAME');
 			JText::script('JUPLOADER_UPLOAD_COMPLETED');
 			JText::script('JUPLOADER_ERROR_OCCURRED');
@@ -242,7 +243,7 @@ abstract class JHtmlBehavior
 			JText::script('JUPLOADER_VALIDATION_ERROR_FILELISTSIZEMAX');
 			JText::script('JUPLOADER_ERROR_HTTPSTATUS');
 			JText::script('JUPLOADER_ERROR_SECURITYERROR');
-			JText::script('JUPLOADER_ERROR_IOERRIR');
+			JText::script('JUPLOADER_ERROR_IOERROR');
 		}
 
 

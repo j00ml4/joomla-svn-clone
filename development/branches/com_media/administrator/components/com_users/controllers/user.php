@@ -19,6 +19,13 @@ jimport('joomla.application.component.controllerform');
  */
 class UsersControllerUser extends JControllerForm
 {
+	
+	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_USERS_USER';
+	
 	/**
 	 * Overrides parent save method to check the submitted passwords match.
 	 */
@@ -32,7 +39,7 @@ class UsersControllerUser extends JControllerForm
 			// Check the passwords match.
 			if ($data['password'] != $data['password2'])
 			{
-				$this->setError('Users_Error_Password_mismatch');
+				$this->setError('JLIB_USER_ERROR_PASSWORD_NOT_MATCH');
 				return false;
 			}
 			unset($data['password2']);
@@ -50,7 +57,7 @@ class UsersControllerUser extends JControllerForm
 	public function ___save()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
@@ -114,13 +121,13 @@ class UsersControllerUser extends JControllerForm
 			$app->setUserState('com_users.edit.user.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('USERS_USER_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('COM_USERS_USER_SAVE_FAILED', $model->getError()), 'notice');
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=user&layout=edit', false));
 			return false;
 		}
 
 		// Redirect the user and adjust session state based on the chosen task.
-		switch ($this->_task)
+		switch ($this->getTask())
 		{
 			case 'apply':
 				// Set the row data in the session.
@@ -128,7 +135,7 @@ class UsersControllerUser extends JControllerForm
 				$app->setUserState('com_users.edit.user.data',	null);
 
 				// Redirect back to the edit screen.
-				$this->setMessage(JText::_('USERS_USER_SAVE_SUCCESS'));
+				$this->setMessage(JText::_('COM_USERS_USER_SAVE_SUCCESS'));
 				$this->setRedirect(JRoute::_('index.php?option=com_users&view=user&layout=edit', false));
 				break;
 
@@ -138,7 +145,7 @@ class UsersControllerUser extends JControllerForm
 				$app->setUserState('com_users.edit.user.data', null);
 
 				// Redirect back to the edit screen.
-				$this->setMessage(JText::_('USERS_USER_SAVE_SUCCESS'));
+				$this->setMessage(JText::_('COM_USERS_USER_SAVE_SUCCESS'));
 				$this->setRedirect(JRoute::_('index.php?option=com_users&view=user&layout=edit', false));
 				break;
 
@@ -148,7 +155,7 @@ class UsersControllerUser extends JControllerForm
 				$app->setUserState('com_users.edit.user.data', null);
 
 				// Redirect to the list screen.
-				$this->setMessage(JText::_('USERS_USER_SAVE_SUCCESS'));
+				$this->setMessage(JText::_('COM_USERS_USER_SAVE_SUCCESS'));
 				$this->setRedirect(JRoute::_('index.php?option=com_users&view=users', false));
 				break;
 		}

@@ -16,18 +16,17 @@ jimport('joomla.application.component.view');
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.0
+ * @since		1.6
  */
 class UsersViewProfile extends JView
 {
 	/**
 	 * Method to display the view.
 	 *
-	 * @access	public
 	 * @param	string	$tpl	The template file to include
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Get the view data.
 		$form		= &$this->get('Form');
@@ -44,7 +43,7 @@ class UsersViewProfile extends JView
 
 		// Check if a member was found.
 		if (!$data->id) {
-			JError::raiseError(404, 'USERS_PROFILE_NOT_FOUND');
+			JError::raiseError(404, 'COM_USERS_PROFILE_NOT_FOUND');
 			return false;
 		}
 
@@ -58,14 +57,16 @@ class UsersViewProfile extends JView
 		$this->assignRef('data',	$data);
 		$this->assignRef('profile',	$profile);
 		$this->assignRef('params',	$params);
-		
+
 		$this->_prepareDocument();
 
 		parent::display($tpl);
 	}
-	
+
 	/**
 	 * Prepares the document
+	 *
+	 * @since	1.6
 	 */
 	protected function _prepareDocument()
 	{
@@ -82,9 +83,9 @@ class UsersViewProfile extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $user->name));
 		} else {
-			$this->params->def('page_heading', JText::_('Users_Profile')); 
+			$this->params->def('page_heading', JText::_('COM_USERS_Profile'));
 		}
-		
+
 		$title = $this->params->get('page_title', $this->params->get('page_heading'));
 		if (empty($title))
 		{

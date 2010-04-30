@@ -24,11 +24,13 @@ class ContactModelContact extends JModelItem
 	 * @var		string
 	 */
 	protected $_context = 'com_contact.contact';
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
-	 * @return	void
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
 	 */
 	protected function populateState()
 	{
@@ -68,12 +70,19 @@ class ContactModelContact extends JModelItem
 
 				$query->select($this->getState('item.select', 'a.*'));
 				$query->from('#__contact_details AS a');
-
+				
+				// Filter by start and end dates.
+				$nullDate = $db->Quote($db->getNullDate());
+				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+				
+				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+				
 				// Join on category table.
 				$query->select('c.title AS category_title, c.alias AS category_alias, c.access AS category_access');
 				$query->join('LEFT', '#__categories AS c on c.id = a.catid');
 
-				
+
 				// Join over the categories to get parent category titles
 				$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 				$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
@@ -138,7 +147,7 @@ class ContactModelContact extends JModelItem
 }
 
 /**
- * 
+ *
 	function _getContactQuery($pk = null)
 	{
 		// TODO: Cache on the fingerprint of the arguments
@@ -163,8 +172,8 @@ class ContactModelContact extends JModelItem
 			$query->where('a.access IN ('.implode(',', $user->authorisedLevels()).')');
 		}
 		return $query;
-	}		
-		
+	}
+
 		$db		= $this->getDbo();
 		$query	= $this->_getContactQuery($pk);
 		try {

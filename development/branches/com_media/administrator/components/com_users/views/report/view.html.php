@@ -18,6 +18,9 @@ jimport('joomla.application.component.view');
  */
 class UsersViewReport extends JView
 {
+	protected $data;
+	protected $state;
+
 	/**
 	 * Display the view
 	 *
@@ -25,33 +28,29 @@ class UsersViewReport extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$state		= $this->get('State');
-		$data		= $this->get('Data');
+		$this->data		= $this->get('Data');
+		$this->state	= $this->get('State');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
 
 		$this->setLayout($state->get('report.type'));
 
-		$this->assignRef('state',	$state);
-		$this->assignRef('data',	$data);
-
 		parent::display($tpl);
-		$this->_setToolbar();
+		$this->addToolbar();
 	}
 
 	/**
-	 * Build the default toolbar.
+	 * Add the page title and toolbar.
 	 *
-	 * @return	void
+	 * @since	1.6
 	 */
-	protected function _setToolbar()
+	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('Users_View_Report_Title'), 'user');
+		JToolBarHelper::title(JText::_('COM_USERS_VIEW_REPORT_TITLE'), 'user');
 		JToolBarHelper::help('screen.users.report','JTOOLBAR_HELP');
 	}
 }

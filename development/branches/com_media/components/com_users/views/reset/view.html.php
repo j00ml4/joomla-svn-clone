@@ -16,22 +16,21 @@ jimport('joomla.application.component.view');
  *
  * @package		Joomla.Site
  * @subpackage	com_users
- * @version		1.0
+ * @since		1.5
  */
 class UsersViewReset extends JView
 {
 	/**
 	 * Method to display the view.
 	 *
-	 * @access	public
-	 * @param	string	$tpl	The template file to include
-	 * @since	1.0
+	 * @param	string	The template file to include
+	 * @since	1.5
 	 */
 	function display($tpl = null)
 	{
 		// Get the view data.
-		$form	= &$this->get('Form');
-		$data	= &$this->get('Data');
+		$form	= $this->get('Form');
+		$data	= $this->get('Data');
 		$state	= $this->get('State');
 
 		// Check for errors.
@@ -46,21 +45,23 @@ class UsersViewReset extends JView
 		}
 
 		$params = &$state->params;
-		
+
 		// Push the data into the view.
 		$this->assignRef('form',	$form);
 		$this->assignRef('data',	$data);
 		$this->assignRef('params',	$params);
-		
-		$this->_prepareDocument();
+
+		$this->prepareDocument();
 
 		parent::display($tpl);
 	}
-	
+
 	/**
-	 * Prepares the document
+	 * Prepares the document.
+	 *
+	 * @since	1.6
 	 */
-	protected function _prepareDocument()
+	protected function prepareDocument()
 	{
 		$app		= &JFactory::getApplication();
 		$menus		= &JSite::getMenu();
@@ -73,9 +74,9 @@ class UsersViewReset extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('Users_Reset')); 
+			$this->params->def('page_heading', JText::_('COM_USERS_Reset'));
 		}
-		
+
 		$title = $this->params->get('page_title', $this->params->get('page_heading'));
 		if (empty($title))
 		{

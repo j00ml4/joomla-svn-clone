@@ -36,7 +36,7 @@ class ModulesControllerModule extends JControllerForm
 		// Look for the Extension ID.
 		$extensionId = JRequest::getInt('eid');
 		if (empty($extensionId)) {
-			$this->setRedirect(JRoute::_('index.php?option='.$this->_option.'&view='.$this->_view_item.'&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.'&layout=edit', false));
 			return JError::raiseWarning(500, 'COM_MODULES_ERROR_INVALID_EXTENSION');
 		}
 
@@ -57,7 +57,22 @@ class ModulesControllerModule extends JControllerForm
 	}
 
 	/**
-	 * Override parent cancel method to reset the add module state.
+	 * Override parent _allowSave method.
+	 */
+	protected function _allowSave(&$data, $key = 'id')
+	{
+		// use custom position if selected
+		if (empty($data['position'])) {
+			$data['position'] = $data['custom_position'];
+		}
+
+		unset($data['custom_position']);
+
+		return parent::_allowSave($data, $key);
+	}
+
+	/**
+	 * Override parent save method.
 	 */
 	public function save()
 	{

@@ -1,6 +1,8 @@
 <?php
 /**
- * @version		
+ * @version		$Id$
+ * @package		Joomla.Framework
+ * @subpackage	Form
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -25,10 +27,10 @@ class JFormFieldMediamanager extends JFormField
 	 */
 
 	protected function _getInput()
-	{	
+	{
 		$type = 'Mediamanager';
 		static $init = false;
-		$html = '';		
+		$html = '';
 
 		// Initialise variables.
 		$onchange	= (string)$this->_element->attributes()->onchange ? $this->_replacePrefix((string)$this->_element->attributes()->onchange) : '';
@@ -48,7 +50,7 @@ class JFormFieldMediamanager extends JFormField
 			}
 			SqueezeBox.close();
 		}"
-		);	
+		);
 
 		// Setup variables for display.
 		$html = array();
@@ -57,7 +59,7 @@ class JFormFieldMediamanager extends JFormField
 		$html[] = '<div style="float: left;">';
 		$html[] = '<input type="text" name="'.$this->inputName.'" id="'.$this->inputId.'" value="'.htmlspecialchars($this->value).'" />';
 		$html[] = '</div>';
-		
+
 		// The image select button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '  <div class="blank">';
@@ -69,6 +71,6 @@ class JFormFieldMediamanager extends JFormField
 		$html[] = '<input type="hidden" id="'.$this->inputId.'_id" name="'.$this->inputName.'" value="'.(int)$this->value.'" />';
 
 		return implode("\n", $html);
-	
-	}	
+
+	}
 }
