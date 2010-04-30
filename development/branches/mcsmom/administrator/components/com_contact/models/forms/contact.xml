@@ -477,10 +477,16 @@
 	<fields name="metadata">
 		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA">
 
-			<field name="robots" type="text"
-				label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC"
-				size="20" />
-
+		<field name="robots" type="list"
+			label="JField_Metadata_Robots_Label" description="JField_Metadata_Robots_Desc"
+		>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
+			<option value="0">JGLOBAL_INDEX_FOLLOW</option>
+			<option value="1">JGLOBAL_NOINDEX_FOLLOW</option>
+			<option value="2">JGLOBAL_INDEX_NOFOLLOW</option>
+			<option value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			<option value="4">JGLOBAL_NO_ROBOTS_TAG</option>
+		</field>
 
 			<field name="rights" type="text"
 				label="JFIELD_METADATA_RIGHTS_LABEL" description="JFIELD_METADATA_RIGHTS_DESC"
