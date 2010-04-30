@@ -39,8 +39,13 @@ class ContactModelContacts extends JModelList
 		else {
 			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
+		// Adjust the context to support modal layouts.
+		if ($layout = JRequest::getVar('layout', 'default')) {
+			$this->context .= '.'.$layout;
+		}
 
 		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+
 		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
 		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
 		$this->setState('filter.category_id', isset($filters['category']) ? $filters['category'] : '');

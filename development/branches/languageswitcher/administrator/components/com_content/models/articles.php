@@ -38,6 +38,11 @@ class ContentModelArticles extends JModelList
 			$app->setUserState($this->context.'.data', array('filters'=>$filters));
 		}
 
+		// Adjust the context to support modal layouts.
+		if ($layout = JRequest::getVar('layout', 'default')) {
+			$this->context .= '.'.$layout;
+		}
+
 		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
 
 		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
