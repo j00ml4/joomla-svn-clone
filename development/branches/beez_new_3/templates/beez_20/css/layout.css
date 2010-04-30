@@ -538,7 +538,9 @@ ul.menu li.active ul li.active ul li a:link,
 .image-left
 {
         float:left;
-        margin:0 15px 5px 0
+        margin:0 15px 5px 0;
+
+
 }
 
 .image-right
@@ -1074,11 +1076,6 @@ address span
         float:none !important
 }
 
-.jcontact-contactinfo p
-{
-	margin:0;
-	line-height:1.25em
-}
 
 
 /* ##########################  user profile  ########################### */
@@ -1118,9 +1115,8 @@ table
 }
 
 table.weblinks,
-table.category,
-table.jlist,
-table.jlist-table
+table.category
+
 {
         font-size:1em;
         margin:10px 10px 20px 0px;
@@ -1133,15 +1129,15 @@ table.weblinks td
 }
 
 table.weblinks td,
-table.category td,
-table.jlist-table td
+table.category td
+
 {
         padding:7px;
 }
 
 table.weblinks th,
-table.category th,
-table.jlist-table th
+table.category th
+
 {
         padding:7px;
         text-align:left
@@ -1647,22 +1643,22 @@ ul.tabs li
     padding:0;
     display:block;
     margin:0;
-    font-size:1.0em;
+    font-size:1em;
 }
 
 ul.tabs li a:link,
 ul.tabs li a:visited
 {
     text-decoration:none;
-    padding:5px 7px;
+    padding:7px 5px;
     margin:0px ;
     display:block;
     font-size:0.9em;
-    font-weight:bold;
+    font-weight:normal;
 }
 
-ul.tabs li a.linkactive:link,
-ul.tabs li a.linkactive:visited
+ul.tabs li a.linkopen:link,
+ul.tabs li a.linkopen:visited
 {
     font-weight:bold;
 }
