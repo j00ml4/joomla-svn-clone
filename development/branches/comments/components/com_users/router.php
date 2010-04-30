@@ -172,6 +172,7 @@ function UsersParseRoute($segments)
 		$vars['view'] = 'profile';
 		return $vars;
 	}
+
 	if (is_numeric($userId)) {
 		// Get the package id from the packages table by alias.
 		$db = & JFactory::getDbo();

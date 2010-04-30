@@ -21,7 +21,7 @@ defined('_JEXEC') or die;
 	?>
 		<dt><?php echo $field->label; ?></dt>
 		<dd>
-			<?php echo !empty($this->profile[$field->fieldname]) ? $this->profile[$field->fieldname] : JText::_('COM_USERS_Profile_Value_Not_Found'); ?>
+			<?php echo !empty($this->data->profile[$field->fieldname]) ? $this->data->profile[$field->fieldname] : JText::_('COM_USERS_Profile_Value_Not_Found'); ?>
 		</dd>
 	<?php
 		endif;
