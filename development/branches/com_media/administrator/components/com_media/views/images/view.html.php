@@ -27,7 +27,7 @@ class MediaViewImages extends JView
 		$append = '';
 		// if ($app->getClientId() == 1) $append = 'administrator/';
 
-		JHTML::_('script','media/popup-imagemanager.js', array(), true);
+		JHTML::_('script','media/popup-imagemanager.js', true, true);
 		JHTML::_('stylesheet','media/popup-imagemanager.css', array(), true);
 
 		if ($config->get('enable_flash', 1)) {
@@ -51,7 +51,7 @@ class MediaViewImages extends JView
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(
 					'onBeforeStart' => 'function(){ Uploader.setOptions({url: $(\'uploadForm\').action + \'&folder=\' + $(\'imageForm\').folderlist.value}); }',
-					//'onComplete' 	=> 'function(){ $(\'imageframe\').location.href = $(\'imageframe\').location.href; }',
+					'onComplete' 	=> 'function(){ window.frames[\'imageframe\'].location.href = window.frames[\'imageframe\'].location.href; }',
 					'targetURL' 	=> '\\$(\'uploadForm\').action',
 					'typeFilter' 	=> $typeString,
 					'fileSizeMax'	=> $config->get('upload_maxsize'),
