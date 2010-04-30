@@ -87,7 +87,8 @@
 		label="CATEGORIES_DESCRIPTION_LABEL"
 		description="CATEGORIES_DESCRIPTION_DESC"
 		class="inputbox"
-		buttons="image,readmore,pagebreak"/>
+		filter="safehtml"
+		buttons="image,article"/>
 
 	<field
 		name="published"
