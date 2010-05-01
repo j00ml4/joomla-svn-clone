@@ -27,6 +27,14 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+1-May-2010 Jean-Marie Simonet
+$ Refactoring com_contents back-end ini/keys
+$ Refactoring com_contents front-end ini/keys (WIP)
+
+
+30-Apr-2010 Christophe Demko & Jean-Marie Simonet
+# Fixed problems in com_banners
+
 30-Apr-2010 Andrew Eddie
  # Fixed [#20230] Filter in session impacts modals elsewhere.
  # Fixed [#20283] State Filter field in newsfeeds admin view is misbehaving.
@@ -35,6 +43,7 @@ $ -> Language fix or change
 30-Apr-2010 Jean-Marie Simonet
 $ Refactored com_categories ini/keys
 $ Refactored com_users frontend ini/keys + loading plg_profile ini in front end
+$ Refactoring com_content back-end ini/keys (WIP)
 
 29-Apr-2010 Jean-Marie Simonet & Christophe Demko
 $ Customizing Save success all over the UI
