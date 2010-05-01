@@ -77,6 +77,6 @@ class LanguagesViewInstalled extends JView
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_languages');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Extensions_Extension_Manager_Languages');
+		JToolBarHelper::help('JHELP_EXTENSIONS_LANGUAGE_MANAGER_INSTALLED');
 	}
 }

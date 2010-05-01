@@ -75,6 +75,6 @@ class CategoriesViewCategory extends JView
 			JToolBarHelper::cancel('category.cancel', 'JToolbar_Close');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Components_'.ucfirst(substr($component,4)).'_Categories_Edit');
+		JToolBarHelper::help('JHELP_COMPONENTS_'.strtoupper(substr($component,4)).'_CATEGORIES_EDIT');
 	}
 }

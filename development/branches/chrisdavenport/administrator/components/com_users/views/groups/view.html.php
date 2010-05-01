@@ -69,6 +69,6 @@ class UsersViewGroups extends JView
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Users_Groups');
+		JToolBarHelper::help('JHELP_USERS_GROUPS');
 	}
 }

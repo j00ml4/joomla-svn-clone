@@ -71,6 +71,6 @@ class ContentViewFeatured extends JView
 			JToolBarHelper::preferences('com_content');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Content_Featured_Articles');
+		JToolBarHelper::help('JHELP_CONTENT_FEATURED_ARTICLES');
 	}
 }

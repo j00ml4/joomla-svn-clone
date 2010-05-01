@@ -61,6 +61,6 @@ class SearchViewSearches extends JView
 			JToolBarHelper::preferences('com_search');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Components_Search');
+		JToolBarHelper::help('JHELP_COMPONENTS_SEARCH');
 	}
 }

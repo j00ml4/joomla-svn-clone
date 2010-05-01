@@ -79,6 +79,6 @@ class ModulesViewModule extends JView
 			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::help('Extensions_Module_Manager_Edit');
+		JToolBarHelper::help('JHELP_EXTENSIONS_MODULE_MANAGER_EDIT');
 	}
 }

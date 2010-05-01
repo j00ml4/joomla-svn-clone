@@ -74,6 +74,6 @@ class MessagesViewMessages extends JView
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_messages');
 		}
-		JToolBarHelper::help('Components_Messaging_Inbox');
+		JToolBarHelper::help('JHELP_COMPONENTS_MESSAGING_INBOX');
 	}
 }

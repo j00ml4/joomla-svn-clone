@@ -24,10 +24,10 @@ jimport('joomla.language.help');
 </div>
 <div class="width-50 fltrt helplinks">
 	<ul class="helpmenu">
-		<li><?php echo JHTML::_('link',JHelp::createUrl('Glossary', false, $remote), JText::_('COM_ADMIN_GLOSSARY'), array('target' => 'helpFrame')) ?></li>
+		<li><?php echo JHTML::_('link',JHelp::createUrl('JHELP_GLOSSARY', false, $remote), JText::_('COM_ADMIN_GLOSSARY'), array('target' => 'helpFrame')) ?></li>
 		<li><?php echo JHTML::_('link','http://www.gnu.org/licenses/gpl-2.0.html', JText::_('COM_ADMIN_LICENSE'), array('target' => 'helpFrame')) ?></li>
 		<li><?php echo JHTML::_('link',$this->latest_version_check, JText::_('COM_ADMIN_LATEST_VERSION_CHECK'), array('target' => 'helpFrame')) ?></li>
-		<li><?php echo JHTML::_('link',JHelp::createUrl('Start_here'), JText::_('COM_ADMIN_START_HERE'), array('target' => 'helpFrame')) ?></li>
+		<li><?php echo JHTML::_('link',JHelp::createUrl('JHELP_START_HERE'), JText::_('COM_ADMIN_START_HERE'), array('target' => 'helpFrame')) ?></li>
 	</ul>
 </div>
 <div class="clr"> </div>

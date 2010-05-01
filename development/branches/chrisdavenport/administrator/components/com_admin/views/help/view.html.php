@@ -18,14 +18,6 @@ jimport('joomla.application.component.view');
 class AdminViewHelp extends JView
 {
 	/**
-	 * @var string the help url
-	 */
-	protected $help_url=null;
-	/**
-	 * @var string the full help url
-	 */
-	protected $full_help_url=null;
-	/**
 	 * @var string the search string
 	 */
 	protected $help_search=null;
@@ -56,8 +48,6 @@ class AdminViewHelp extends JView
 	function display($tpl = null)
 	{
 		// Initialise variables.
-		$this->help_url				= $this->get('HelpURL');
-//		$this->full_help_url		= $this->get('FullHelpURL');
 		$this->help_search			= $this->get('HelpSearch');
 		$this->page					= $this->get('Page');
 		$this->toc					= $this->get('Toc');

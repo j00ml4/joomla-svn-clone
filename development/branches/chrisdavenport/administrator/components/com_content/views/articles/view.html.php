@@ -82,6 +82,6 @@ class ContentViewArticles extends JView
 			JToolBarHelper::preferences('com_content');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Content_Article_Manager');
+		JToolBarHelper::help('JHELP_CONTENT_ARTICLE_MANAGER');
 	}
 }
