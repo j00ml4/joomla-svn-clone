@@ -64,7 +64,7 @@ class AdminModelHelp extends JModel
 	{
 		if (is_null($this->page))
 		{
-			$page = & JRequest::getCmd('page', 'Start_Here');
+			$page = & JRequest::getCmd('page', 'JHELP_START_HERE');
 			$this->page = JHelp::createUrl($page);
 		}
 		return $this->page;
@@ -97,7 +97,6 @@ class AdminModelHelp extends JModel
 		{
 			// Get vars
 			$lang_tag = &$this->getLangTag();
-			$help_url = &$this->getHelpURL();
 			$help_search = &$this->getHelpSearch();
 
 			// Get Help files
@@ -110,10 +109,8 @@ class AdminModelHelp extends JModel
 				{
 					$title = trim($m[1]);
 					if ($title) {
-						if ($help_url) {
-							// strip the extension
-							$file = preg_replace('#\.xml$|\.html$#', '', $file);
-						}
+						// strip the extension
+						$file = preg_replace('#\.xml$|\.html$#', '', $file);
 						if ($help_search)
 						{
 							if (JString::strpos(JString::strtolower(strip_tags($buffer)), JString::strtolower($help_search)) !== false) {
