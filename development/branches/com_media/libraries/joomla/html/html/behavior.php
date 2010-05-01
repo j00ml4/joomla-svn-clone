@@ -56,7 +56,7 @@ abstract class JHtmlBehavior
 			self::framework(false);
 		}
 
-		JHTML::_('script','system/mootools-'.$type.$uncompressed.'.js', false, true);
+		JHtml::_('script','system/mootools-'.$type.$uncompressed.'.js', false, true);
 		$loaded[$type] = true;
 		return;
 	}
@@ -76,18 +76,18 @@ abstract class JHtmlBehavior
 
 	public static function caption()
 	{
-		JHTML::_('script','system/caption.js', false, true);
+		JHtml::_('script','system/caption.js', false, true);
 	}
 
 	public static function formvalidation()
 	{
-		JHTML::_('script','system/validate.js', false, true);
+		JHtml::_('script','system/validate.js', false, true);
 	}
 
 	public static function switcher()
 	{
 		JHtml::_('behavior.framework');
-		JHTML::_('script','system/switcher.js', false, true);
+		JHtml::_('script','system/switcher.js', false, true);
 
 		$script = "
 			document.switcher = null;
@@ -104,7 +104,7 @@ abstract class JHtmlBehavior
 
 	public static function combobox()
 	{
-		JHTML::_('script','system/combobox.js', false, true);
+		JHtml::_('script','system/combobox.js', false, true);
 	}
 
 	public static function tooltip($selector='.hasTip', $params = array())
@@ -134,7 +134,7 @@ abstract class JHtmlBehavior
 		$opt['onShow']			= (isset($params['onShow'])) ? '\\'.$params['onShow'] : null;
 		$opt['onHide']			= (isset($params['onHide'])) ? '\\'.$params['onHide'] : null;
 
-		$options = JHTMLBehavior::_getJSObject($opt);
+		$options = JHtmlBehavior::_getJSObject($opt);
 
 		// Attach tooltips to document
 		$document = &JFactory::getDocument();
@@ -167,8 +167,8 @@ abstract class JHtmlBehavior
 		if (!isset($included)) {
 			// Load the javascript and css
 			JHtml::_('behavior.framework');
-			JHTML::_('script','system/modal.js', false, true);
-			JHTML::_('stylesheet','system/modal.css', array(), true);
+			JHtml::_('script','system/modal.js', false, true);
+			JHtml::_('stylesheet','system/modal.css', array(), true);
 
 			$included = true;
 		}
@@ -213,9 +213,9 @@ abstract class JHtmlBehavior
 
 	public static function uploader($id='file-upload', $params = array(), $upload_queue='upload-queue')
 	{
-		JHTML::_('script','system/swf.js', false, true);
-		JHTML::_('script','system/progressbar.js', false, true);
-		JHTML::_('script','system/uploader.js', false, true);
+		JHtml::_('script','system/swf.js', false, true);
+		JHtml::_('script','system/progressbar.js', false, true);
+		JHtml::_('script','system/uploader.js', false, true);
 
 		$document = &JFactory::getDocument();
 
@@ -362,8 +362,8 @@ abstract class JHtmlBehavior
 
 		// Include mootools framework
 		JHtml::_('behavior.framework');
-		JHTML::_('script','system/mootree.js', false, true);
-		JHTML::_('stylesheet','system/mootree.css', array(), true);
+		JHtml::_('script','system/mootree.js', false, true);
+		JHtml::_('stylesheet','system/mootree.css', array(), true);
 
 		if (isset($trees[$id]) && ($trees[$id])) {
 			return;
@@ -373,7 +373,7 @@ abstract class JHtmlBehavior
 		$opt['div']		= (array_key_exists('div', $params)) ? $params['div'] : $id.'_tree';
 		$opt['mode']	= (array_key_exists('mode', $params)) ? $params['mode'] : 'folders';
 		$opt['grid']	= (array_key_exists('grid', $params)) ? '\\'.$params['grid'] : '\\true';
-		$opt['theme']	= (array_key_exists('theme', $params)) ? $params['theme'] : JHTML::_('image','system/mootree.gif', '', array(), true, true);
+		$opt['theme']	= (array_key_exists('theme', $params)) ? $params['theme'] : JHtml::_('image','system/mootree.gif', '', array(), true, true);
 
 		// Event handlers
 		$opt['onExpand']	= (array_key_exists('onExpand', $params)) ? '\\'.$params['onExpand'] : null;
@@ -409,9 +409,9 @@ abstract class JHtmlBehavior
 	public static function calendar()
 	{
 		$document = &JFactory::getDocument();
-		JHTML::_('stylesheet','system/calendar-jos.css', array(' title' => JText::_('JLIB_HTML_BEHAVIOR_GREEN') ,' media' => 'all'), true);
-		JHTML::_('script','system/calendar.js', false, true);
-		JHTML::_('script','system/calendar-setup.js', false, true);
+		JHtml::_('stylesheet','system/calendar-jos.css', array(' title' => JText::_('JLIB_HTML_BEHAVIOR_GREEN') ,' media' => 'all'), true);
+		JHtml::_('script','system/calendar.js', false, true);
+		JHtml::_('script','system/calendar-setup.js', false, true);
 
 		$translation = JHtmlBehavior::_calendartranslation();
 		if ($translation) {
