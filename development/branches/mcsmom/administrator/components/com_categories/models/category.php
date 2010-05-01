@@ -20,6 +20,12 @@ jimport('joomla.application.component.modeladmin');
 class CategoriesModelCategory extends JModelAdmin
 {
 	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_CATEGORIES';
+	
+	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
@@ -180,7 +186,7 @@ class CategoriesModelCategory extends JModelAdmin
 			$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
 
 			if (!$form->loadFile($path, false)) {
-				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 
@@ -315,7 +321,7 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JError_No_items_selected'));
+			$this->setError(JText::_('COM_CATEGORIES_NO_CATEGORIES_SELECTED'));
 			return false;
 		}
 
@@ -340,7 +346,7 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		if (!$done) {
-			$this->setError('Categories_Error_Insufficient_batch_information');
+			$this->setError('COM_CATEGORIES_ERROR_INSUFFICIENT_BATCH_INFORMATION');
 			return false;
 		}
 

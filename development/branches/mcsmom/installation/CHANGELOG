@@ -27,8 +27,39 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+1-May-2010 Jean-Marie Simonet
+$ Refactoring com_contents back-end ini/keys
+
+30-Apr-2010 Christophe Demko & Jean-Marie Simonet
+# Fixed problems in com_banners
+
+30-Apr-2010 Andrew Eddie
+ # Fixed [#20230] Filter in session impacts modals elsewhere.
+ # Fixed [#20283] State Filter field in newsfeeds admin view is misbehaving.
+ # Fixed [#17020] Refactoring com_login component: error on at the end of inactivity period.
+
+30-Apr-2010 Jean-Marie Simonet
+$ Refactored com_categories ini/keys
+$ Refactored com_users frontend ini/keys + loading plg_profile ini in front end
+$ Refactoring com_content back-end ini/keys (WIP)
+
+29-Apr-2010 Jean-Marie Simonet & Christophe Demko
+$ Customizing Save success all over the UI
+
+29-Apr-2010 Hannes Papenberg
+# Fixed parameters in install SQL and sampledata from INI to JSON
+# Fixed errors in JFilterInput
+
+29-Apr-2010 Christophe Demko
+# Fixed [#20232] Discovery method of installing templates doesn't insert a style (thanks Omar Ramos)
+# Saving and loading image banner (thanks Jonathan cheung)
++ Add metadesc and metakey fields to the #__language table (http://groups.google.com/group/joomla-dev-cms/browse_thread/thread/828869eb50004b97)
+# Fixed warning deprecated function ereg in php 5.3 libraries/joomla/client/ftp.php
+# Fixed warning date(): It is not safe to rely on the system's timezone settings (php 5.3). libraries/joomla/utilities/date.php
+
 29-Apr-2010 Andrew Eddie
  # Fixed [#20102] Powered By 1.5 image
+ ^ Improve permission (allow/deny) select list titles for better accessibility.
 
 28-Apr-2010 Hannes Papenberg
 # Fixed some bugs in beez 2.0 and added font - Thanks Angie Radtke!
