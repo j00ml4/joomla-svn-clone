@@ -76,6 +76,6 @@ class BannersViewBanner extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Components_Banners_Banners_Edit');
+		JToolBarHelper::help('JHELP_COMPONENTS_BANNERS_BANNERS_EDIT');
 	}
 }

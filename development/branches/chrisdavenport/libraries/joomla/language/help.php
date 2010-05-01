@@ -99,7 +99,7 @@ class JHelp
 		$replace = array(
 			$app->getName(),	// {app}
 			$component,			// {component}
-			$ref,				// {keyref}
+			JText::_($ref),		// {keyref}
 			$lang->getTag(),	// {language}
 			$jlang[0],			// {langcode}
 			$jlang[1],			// {langregion}

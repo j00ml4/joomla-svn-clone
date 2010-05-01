@@ -63,6 +63,6 @@ class LanguagesViewLanguages extends JView
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_languages');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Extensions_Language_Manager');
+		JToolBarHelper::help('JHELP_EXTENSIONS_LANGUAGE_MANAGER_CONTENT');
 	}
 }

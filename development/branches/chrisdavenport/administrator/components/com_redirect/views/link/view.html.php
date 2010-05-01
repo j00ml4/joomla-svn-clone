@@ -76,6 +76,6 @@ class RedirectViewLink extends JView
 		} else {
 			JToolBarHelper::cancel('link.cancel', 'JTOOLBAR_CLOSE');
 		}
-		JToolBarHelper::help('Components_Redirect_Manager_Edit');
+		JToolBarHelper::help('JHELP_COMPONENTS_REDIRECT_MANAGER_EDIT');
 	}
 }

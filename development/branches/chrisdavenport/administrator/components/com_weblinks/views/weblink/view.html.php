@@ -80,6 +80,6 @@ class WeblinksViewWeblink extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Components_Weblinks_Links_Edit');
+		JToolBarHelper::help('JHELP_COMPONENTS_WEBLINKS_LINKS_EDIT');
 	}
 }

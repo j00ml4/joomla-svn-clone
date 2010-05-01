@@ -65,6 +65,6 @@ class UsersViewUser extends JView
 			JToolBarHelper::cancel('user.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Users_User_Manager_Edit');
+		JToolBarHelper::help('JHELP_USERS_USER_MANAGER_EDIT');
 	}
 }

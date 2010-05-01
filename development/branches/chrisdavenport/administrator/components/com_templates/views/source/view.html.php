@@ -71,6 +71,6 @@ class TemplatesViewSource extends JView
 
 		JToolBarHelper::cancel('source.cancel');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Extensions_Template_Manager_Templates_Edit_Source');
+		JToolBarHelper::help('JHELP_EXTENSIONS_TEMPLATE_MANAGER_TEMPLATES_EDIT_SOURCE');
 	}
 }

@@ -75,6 +75,6 @@ class UsersViewUsers extends JView
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('Users_User_Manager');
+		JToolBarHelper::help('JHELP_USERS_USER_MANAGER');
 	}
 }
