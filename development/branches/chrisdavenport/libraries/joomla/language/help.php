@@ -113,7 +113,7 @@ class JHelp
 		if ($local) {
 			$try = str_replace($search, $replace, $url);
 			jimport('joomla.filesystem.file');
-			if (!JFile::exists($try)) {
+			if (!JFile::exists(JPATH_BASE.'/'.$try)) {
 				$replace[3] = 'en-GB';
 				$replace[4] = 'en';
 				$replace[5] = 'GB';
