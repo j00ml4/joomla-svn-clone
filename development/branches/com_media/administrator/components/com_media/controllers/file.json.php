@@ -79,7 +79,7 @@ class MediaControllerFile extends JController
 
 				$response = array(
 					'status' => '0',
-					'error' => JText::_('COM_MEDIA_FILE_ALREADY_EXISTS')
+					'error' => JText::_('COM_MEDIA_ERROR_FILE_EXISTS')
 				);
 
 				echo json_encode($response);
@@ -93,7 +93,7 @@ class MediaControllerFile extends JController
 
 				$response = array(
 					'status' => '0',
-					'error' => JText::_('COM_MEDIA_UPLOAD_FAILED_BAD_REQUEST')
+					'error' => JText::_('COM_MEDIA_ERROR_BAD_REQUEST')
 				);
 
 				echo json_encode($response);
@@ -114,7 +114,7 @@ class MediaControllerFile extends JController
 
 			$response = array(
 				'status' => '0',
-				'error' => JText::_('COM_MEDIA_UPLOAD_FAILED_BAD_REQUEST')
+				'error' => JText::_('COM_MEDIA_ERROR_BAD_REQUEST')
 			);
 
 			echo json_encode($response);
