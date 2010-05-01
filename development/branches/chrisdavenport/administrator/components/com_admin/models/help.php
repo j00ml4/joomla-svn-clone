@@ -9,6 +9,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
+jimport('joomla.language.help');
 
 /**
  * Admin Component Help Model
@@ -52,7 +53,7 @@ class AdminModelHelp extends JModel
 	/**
 	 * @var string url for the latest version check
 	 */
-	protected $latest_version_check= 'http://www.joomla.org/content/blogcategory/57/111/';
+	protected $latest_version_check = null;
 
 	/**
 	 * Method to get the Help URL
@@ -64,7 +65,7 @@ class AdminModelHelp extends JModel
 		{
 			$app = & JFactory::getApplication();
 			$this->help_url = $app->getCfg('helpurl');
-			$this->help_url = 'http://help.joomla.org';
+//			$this->help_url = 'http://help.joomla.org';
 		}
 		return $this->help_url;
 	}
@@ -98,10 +99,8 @@ class AdminModelHelp extends JModel
 	{
 		if (is_null($this->page))
 		{
-			$this->page = & JRequest::getCmd('page', 'joomla.whatsnew.html');
-			if (!eregi('\.html$', $this->page)) {
-				$this->page.= '.xml';
-			}
+			$page = & JRequest::getCmd('page', 'Start_Here');
+			$this->page = JHelp::createUrl($page);
 		}
 		return $this->page;
 	}
@@ -170,12 +169,19 @@ class AdminModelHelp extends JModel
 		}
 		return $this->toc;
 	}
+
 	/**
 	 * Method to get the latest version check;
 	 * @return string Latest Version Check URL
 	 */
 	function &getLatestVersionCheck()
 	{
+		if (!$this->latest_version_check) {
+			$keyref = 'Joomla_Version_';
+			$override = 'http://help.joomla.org/proxy/index.php?option=com_help&amp;keyref=Help{major}{minor}:{keyref}{major}_{minor}_{maintenance}';
+			$this->latest_version_check = JHelp::createUrl($keyref, false, $override);
+		}
 		return $this->latest_version_check;
 	}
+
 }
