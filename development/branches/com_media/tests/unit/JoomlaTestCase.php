@@ -140,4 +140,4 @@ abstract class JoomlaTestCase extends PHPUnit_Framework_TestCase
 		JFactory::$mailer = $this->savedFactoryState['mailer'];
 	}
 }
-?>
+

@@ -1,6 +1,8 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 
+include_once JPATH_BASE.'/libraries/joomla/filesystem/path.php';
+include_once JPATH_BASE.'/libraries/joomla/environment/uri.php';
 include_once JPATH_BASE.'/libraries/joomla/html/html.php';
 require_once JPATH_BASE.'/libraries/joomla/html/html/behavior.php';
 
@@ -156,25 +158,44 @@ class JHtmlBehaviorTest extends JoomlaTestCase
 	}
 
 
+	public function uploaderData()
+	{
+		return array(
+			array('file-upload', array(), 'upload-queue',
+				array(
+					'var Uploader',
+					'object creation missing'
+				)
+			)
+		);
+
+	}
+
+
 	/**
 	 * Tests various thing about uploader
-	 * 
+	 * @dataProvider uploaderData
 	 */
-	public function testUploader()
+	public function testUploader($id, $params, $upload_queue, $expected_regexes = array())
 	{
 		// we register our mock for the script method
 		JHtml::register('script', array($this, 'uploaderScriptMock'));
 
+		// registers the document mock
 		JFactory::$document = $this;
 
-		JHtml::_('behavior.uploader', 'uploader_id', array());
+		JHtml::_('behavior.uploader', $id, $params, $upload_queue);
 
 		$addedScript = $this->addScriptDeclaration();
-		
-		$this->assertThat(
-			preg_match('var Uploader = new FancyUpload2', $addedScript),
-			$this->equalTo(1)
-		);
+		echo $addedScript;
+		foreach($expected_regexes AS $regex)
+		{
+			$this->assertThat(
+				preg_match($regex[0], $addedScript),
+				$this->greaterThanOrEqual(1),
+				$regex[1]
+			);
+		}
 
 	}
 
