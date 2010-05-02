@@ -4,7 +4,9 @@
 	<fields name="filters">
 		<fieldset name="search">
 			<field type="search"
-				name="expr"
+				name="search"
+				submit="yes"
+				onchange="this.form.submit();"
 				label="JSEARCH_FILTER_LABEL"
 				description="JSEARCH_FILTER"
 			/>

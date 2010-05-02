@@ -7,6 +7,8 @@
 		>
 			<field type="search"
 				name="search"
+				submit="yes"
+				onchange="this.form.submit();"
 				label="JSEARCH_FILTER_LABEL"
 				description="JSEARCH_FILTER"
 			/>
