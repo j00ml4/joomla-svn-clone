@@ -595,6 +595,7 @@ CREATE TABLE `#__menu_types` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
 INSERT INTO `#__menu_types` VALUES (1, 'mainmenu', 'Main Menu', 'The main menu for the site');
 
 # -------------------------------------------------------
