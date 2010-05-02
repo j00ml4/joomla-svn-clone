@@ -5,8 +5,8 @@
 
 		<field name="username" type="text"
 			class="required"
-			description="Users_Resend_Username_Desc"
-			label="Users_Form_Username_Label"
+			description="Com_Users_Resend_Username_Desc"
+			label="Com_Users_Form_Username_Label"
 			required="true"
 			size="30"
 		/>
