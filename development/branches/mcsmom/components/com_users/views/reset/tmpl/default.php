@@ -37,7 +37,7 @@ JHtml::_('behavior.formvalidation');
 	</fieldset>
 <?php endforeach; ?>
 
-	<button type="submit"><?php echo JText::_('BUTTON_SUBMIT'); ?></button>
+	<button type="submit"><?php echo JText::_('JSUBMIT'); ?></button>
 	<input type="hidden" name="option" value="com_users" />
 	<input type="hidden" name="task" value="reset.request" />
 	<?php echo JHtml::_('form.token'); ?>
