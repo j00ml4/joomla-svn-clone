@@ -43,7 +43,24 @@ defined('_JEXEC') or die;
 	</fieldset>
 
 	<button type="submit" class="button">Submit</button>
-
+	<ul>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
+			<?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></a>
+		</li>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
+			<?php echo JText::_('COM_USERS_LOGIN_REMIND'); ?></a>
+		</li>
+		<?php
+		$usersConfig = &JComponentHelper::getParams('com_users');
+		if ($usersConfig->get('allowUserRegistration')) : ?>
+		<li>
+			<a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
+				<?php echo JText::_('COM_USERS_LOGIN_REGISTER'); ?></a>
+		</li>
+		<?php endif; ?>
+	</ul>
 	<input type="hidden" name="option" value="com_users" />
 	<input type="hidden" name="task" value="user.login" />
 	<?php echo JHtml::_('form.token'); ?>
