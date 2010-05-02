@@ -1696,6 +1696,36 @@ class JForm
 	}
 
 	/**
+	 * Method to add a path to the list of include paths for one of the form's entities.
+	 * Currently supported entities: field, rule and form. You are free to support your own in a subclass.
+	 *
+	 * @param	string	Form's entity name for which paths will be added.
+	 * @param	mixed	A path or array of paths to add.
+	 *
+	 * @return	array	The list of paths that have been added.
+	 * @since	1.6
+	 */
+	protected static function addPath($entity, $new = null)
+	{
+		// Add the default entity's search path if not set.
+		if (empty(self::$paths[$entity])) {
+			self::$paths[$entity][] = dirname(__FILE__). DS . $entity;
+		}
+
+		// Force the new path(s) to an array.
+		settype($new, 'array');
+
+		// Add the new paths to the stack if not already there.
+		foreach ($new as $path) {
+			if (!in_array($path, self::$paths[$entity])) {
+				array_unshift(self::$paths[$entity], trim($path));
+			}
+		}
+
+		return self::$paths[$entity];
+	}
+
+	/**
 	 * Method to add a path to the list of field include paths.
 	 *
 	 * @param	mixed	$new	A path or array of paths to add.
@@ -1705,22 +1735,7 @@ class JForm
 	 */
 	public static function addFieldPath($new = null)
 	{
-		// Add the default form search path if not set.
-		if (empty(self::$paths['fields'])) {
-			self::$paths['fields'][] = dirname(__FILE__).'/fields';
-		}
-
-		// Force the new path(s) to an array.
-		settype($new, 'array');
-
-		// Add the new paths to the stack if not already there.
-		foreach ($new as $path) {
-			if (!in_array($path, self::$paths['fields'])) {
-				array_unshift(self::$paths['fields'], trim($path));
-			}
-		}
-
-		return self::$paths['fields'];
+		return self::addPath('fields', $new);
 	}
 
 	/**
@@ -1733,22 +1748,7 @@ class JForm
 	 */
 	public static function addFormPath($new = null)
 	{
-		// Add the default form search path if not set.
-		if (empty(self::$paths['forms'])) {
-			self::$paths['forms'][] = dirname(__FILE__).'/forms';
-		}
-
-		// Force the new path(s) to an array.
-		settype($new, 'array');
-
-		// Add the new paths to the stack if not already there.
-		foreach ($new as $path) {
-			if (!in_array($path, self::$paths['forms'])) {
-				array_unshift(self::$paths['forms'], trim($path));
-			}
-		}
-
-		return self::$paths['forms'];
+		return self::addPath('forms', $new);
 	}
 
 	/**
@@ -1761,22 +1761,7 @@ class JForm
 	 */
 	public static function addRulePath($new = null)
 	{
-		// Add the default form search path if not set.
-		if (empty(self::$paths['rules'])) {
-			self::$paths['rules'][] = dirname(__FILE__).'/rules';
-		}
-
-		// Force the new path(s) to an array.
-		settype($new, 'array');
-
-		// Add the new paths to the stack if not already there.
-		foreach ($new as $path) {
-			if (!in_array($path, self::$paths['rules'])) {
-				array_unshift(self::$paths['rules'], trim($path));
-			}
-		}
-
-		return self::$paths['rules'];
+		return self::addPath('rules', $new);
 	}
 
 	/**
