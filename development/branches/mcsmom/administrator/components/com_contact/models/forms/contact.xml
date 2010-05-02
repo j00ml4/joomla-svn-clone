@@ -133,7 +133,14 @@
 		>
 			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 		</field>
-
+		<field name="featured" type="radio"
+			label="COM_CONTACT_FIELD_FEATURED_LABEL" 
+			description="COM_CONTACT_FIELD_FEATURED_DESC"
+			default="0"
+		>
+			<option value="0">JOFF</option>
+			<option value="1">JON</option>
+		</field>
 
 		<field name="contact_icons" type="list" default="0"
 			label="COM_CONTACT_FIELD_ICONS_SETTINGS" description="COM_CONTACT_FIELD_ICONS_SETTINGS_DESC"
