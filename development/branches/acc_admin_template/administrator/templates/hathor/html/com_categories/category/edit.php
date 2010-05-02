@@ -37,7 +37,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="col main-section">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('CATEGORIES_FIELDSET_DETAILS');?></legend>
+			<legend><?php echo JText::_('COM_CATEGORIES_FIELDSET_DETAILS');?></legend>
 				<div>
 					<?php echo $this->form->getLabel('title'); ?>
 					<?php echo $this->form->getInput('title'); ?>
@@ -85,16 +85,16 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->loadTemplate('options'); ?>
 			<div class="clr"></div>
 
-			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_RULES'), 'meta-rules'); ?>
+			<?php echo JHtml::_('sliders.panel',JText::_('COM_CATEGORIES_FIELDSET_RULES'), 'meta-rules'); ?>
 			<fieldset>
-				<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_RULES'); ?></legend>
+				<legend class="element-invisible"><?php echo JText::_('COM_CATEGORIES_FIELDSET_RULES'); ?></legend>
 					<?php echo $this->form->getLabel('rules'); ?>
 					<?php echo $this->form->getInput('rules'); ?>
 			</fieldset>
 
-			<?php echo JHtml::_('sliders.panel',JText::_('CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
+			<?php echo JHtml::_('sliders.panel',JText::_('COM_CATEGORIES_FIELDSET_METADATA'), 'meta-options'); ?>
 			<fieldset class="panelform">
-				<legend class="element-invisible"><?php echo JText::_('CATEGORIES_FIELDSET_METADATA'); ?></legend>
+				<legend class="element-invisible"><?php echo JText::_('COM_CATEGORIES_FIELDSET_METADATA'); ?></legend>
 				<?php echo $this->loadTemplate('metadata'); ?>
 			</fieldset>
 

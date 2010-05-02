@@ -38,7 +38,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="col main-section">
 	<fieldset class="adminform">
-	<legend><?php echo JText::_('ARTICLE_DETAILS'); ?></legend>
+	<legend><?php echo JText::_('COM_ARTICLE_DETAILS'); ?></legend>
 	
 	<div>
 		<?php echo $this->form->getLabel('title'); ?>
@@ -80,9 +80,9 @@ JHtml::_('behavior.formvalidation');
 		
 		<?php echo JHtml::_('sliders.start','content-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Publishing'), 'publishing-details'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 			<fieldset class="panelform">
-			<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Publishing'); ?></legend>
+			<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_PUBLISHING'); ?></legend>
 			<div>
 				<?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?>
@@ -141,16 +141,16 @@ JHtml::_('behavior.formvalidation');
 			</fieldset>
 		<?php endforeach; ?>
 	
-		<?php echo JHtml::_('sliders.panel',JText::_('CONTENT_FIELDSET_RULES'), 'access-rules'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_RULES'), 'access-rules'); ?>
 		<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('CONTENT_FIELDSET_RULES'); ?></legend>
+		<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_RULES'); ?></legend>
 			<?php // echo $this->form->getLabel('rules'); ?>
 			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 		
-		<?php echo JHtml::_('sliders.panel',JText::_('Content_Fieldset_Metadata'), 'meta-options'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_METADATA'), 'meta-options'); ?>
 		<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('Content_Fieldset_Metadata'); ?></legend>
+		<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_METADATA'); ?></legend>
 		<div>
 			<?php echo $this->form->getLabel('metadesc'); ?>
 			<?php echo $this->form->getInput('metadesc'); ?>
