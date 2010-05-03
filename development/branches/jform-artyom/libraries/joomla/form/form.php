@@ -68,9 +68,9 @@ class JForm
 
 	/**
 	 * Static array of JForm's entity objects for re-use.
-	 * All form's, field's and rule's objects are here.
+	 * All form's instances, field's and rule's prototypes are here.
 	 *
-	 * Array's structure (YAML):
+	 * Array's structure:
 	 * <code>
 	 * entities:
 	 * 	{ENTITY_NAME}:
@@ -1572,7 +1572,7 @@ class JForm
 	/**
 	 * Method to synchronize any field, form or rule paths contained in the XML document.
 	 *
-	 * @TODO:	Maybe we should receive all addXXXpaths attributes at once?
+	 * TODO:	Maybe we should receive all addXXXpaths attributes at once?
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
