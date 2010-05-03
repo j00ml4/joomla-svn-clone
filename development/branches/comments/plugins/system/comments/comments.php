@@ -160,21 +160,17 @@ class plgSystemComments extends JPlugin
 	 * This method sets up the context and context_id in the application object for auto-detecting
 	 * by the comments and ratings modules.
 	 *
+	 * @param	string	The context of the content being passed to the plugin.
 	 * @param	object	The article object.  Note $article->text is also available
 	 * @param	object	The article params
 	 * @param	integer	The 'page' number
 	 * @return	void
 	 * @since	1.2
 	 */
-	public function onPrepareContent(& $article, & $params, $page)
+	public function onContentPrepare($context, & $article, & $params, $page)
 	{
-		// Get the option and view from the request.
-		$option	= JRequest::getCmd('option');
-		$view	= JRequest::getCmd('view');
-
 		// Only set the context if we are looking at an article view of com_content.
-		if ($option == 'com_content' && $view == 'article')
-		{
+		if ($context == 'com_content.article') {
 			// Get the application object to set the context information.
 			$application = JFactory::getApplication('site');
 
