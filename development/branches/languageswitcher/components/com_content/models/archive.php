@@ -96,6 +96,11 @@ class ContentModelArchive extends ContentModelArticles
 			$query->where('YEAR('. $queryDate . ') = ' . $year);
 		}
 
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
+
 		return $query;
 	}
 

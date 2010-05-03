@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="system">
+	<name>plg_system_languagefilter</name>
+	<author>Joomla! Project</author>
+	<creationDate>July 2010</creationDate>
+	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>1.6</version>
+	<description>PLG_SYSTEM_LANGUAGEFILTER_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="languagefilter">languagefilter.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_languagefilter.ini</language>
+		<language tag="en-GB">en-GB.plg_content_languagefilter.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="default_prefix" type="radio"
+					default="1"
+					description="PLG_SYSTEM_LANGUAGEFILTER_FIELD_DEFAULT_SUFFIX_DESC"
+					label="PLG_SYSTEM_LANGUAGEFILTER_FIELD_DEFAULT_SUFFIX_LABEL"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

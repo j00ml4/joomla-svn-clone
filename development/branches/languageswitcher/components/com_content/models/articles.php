@@ -338,6 +338,11 @@ class ContentModelArticles extends JModelList
 			}
 		}
 
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')), $this->getState('list.direction', 'ASC'));
 		
