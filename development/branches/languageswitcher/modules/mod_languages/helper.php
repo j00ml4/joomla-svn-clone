@@ -37,6 +37,7 @@ abstract class modLanguagesHelper
 		$query->select($db->nameQuote('lang_code'));
 		$query->select($db->nameQuote('title'));
 		$query->select($db->nameQuote('image'));
+		$query->select($db->nameQuote('sef'));
 		$query->where($db->nameQuote('published').'=1');
 		$db->setQuery($query);
 		$result = $db->loadObjectList('lang_code');

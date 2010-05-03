@@ -135,7 +135,7 @@ class JMenu extends JObject
 	 *
 	 * @return object The item object
 	 */
-	function getDefault($language='')
+	function getDefault($language='*')
 	{
 		if (array_key_exists($language, $this->_default)) {
 			return $this->_items[$this->_default[$language]];

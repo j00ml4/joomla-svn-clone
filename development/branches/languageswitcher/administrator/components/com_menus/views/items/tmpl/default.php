@@ -104,12 +104,10 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->item_type); ?></span>
 				</td>
 				<td class="center">
-					<?php if ($item->language==''):?>
-						<?php echo JText::_('JOPTION_DEFAULT_LANGUAGE'); ?>
-					<?php elseif ($item->language=='*'):?>
+					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
 					<?php else:?>
-						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
 					<?php endif;?>
 				</td>
 				<td class="center">

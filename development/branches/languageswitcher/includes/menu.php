@@ -40,10 +40,10 @@ class JMenuSite extends JMenu
 			$query->where('m.parent_id > 0');
 			$query->order('m.lft');
 
-			// Fire the onPrepareQuery plugins
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array('menus', &$query));
+			// Filter by language
+			if (JPluginHelper::isEnabled('system','languagefilter')) {
+				$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
 
 			// Set the query
 			$db->setQuery($query);

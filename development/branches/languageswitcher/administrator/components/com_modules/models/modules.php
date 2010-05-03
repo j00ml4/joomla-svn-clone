@@ -228,6 +228,11 @@ class ModulesModelModules extends JModelList
 			}
 		}
 
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language));
+		}
+
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}

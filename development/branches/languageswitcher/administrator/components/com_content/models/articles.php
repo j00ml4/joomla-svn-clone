@@ -29,6 +29,13 @@ class ContentModelArticles extends JModelList
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
+
+		// Adjust the context to support modal layouts.
+		if ($layout = JRequest::getVar('layout', 'default')) {
+			$this->context .= '.'.$layout;
+		}
+
+		// Load the filter state.
 		$filters = JRequest::getVar('filters');
 		if (empty($filters)) {
 			$data = $app->getUserState($this->context.'.data');
@@ -36,11 +43,6 @@ class ContentModelArticles extends JModelList
 		}
 		else {
 			$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		}
-
-		// Adjust the context to support modal layouts.
-		if ($layout = JRequest::getVar('layout', 'default')) {
-			$this->context .= '.'.$layout;
 		}
 
 		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
@@ -168,7 +170,7 @@ class ContentModelArticles extends JModelList
 
 		// Filter on the language.
 		if ($language = $this->getState('filter.language')) {
-			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
+			$query->where('a.language = '.$db->quote($language));
 		}
 
 		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering')

@@ -50,8 +50,11 @@ final class JSite extends JApplication
 		// otherwise use user or default language settings
 		if (empty($options['language']))
 		{
-			$lang = JRequest::getString('language',null);
-			// Make sure that the user's language exists
+			$sef = JRequest::getString('lang',null);
+			$table = JTable::getInstance('Language');
+			$table->load(array('sef'=>$sef));
+			$lang = $table->lang_code;
+			// Make sure that the sef's language exists
 			if ($lang && JLanguage::exists($lang)) {
 				$config = JFactory::getConfig();
 				$cookie_domain = $config->get('config.cookie_domain', '');

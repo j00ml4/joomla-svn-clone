@@ -150,10 +150,10 @@ class plgSearchContent extends JPlugin
 			$query->group('a.id');
 			$query->order($order);
 
-			// Fire the onPrepareQuery plugins
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
+			// Filter by language
+			if (JPluginHelper::isEnabled('system','languagefilter')) {
+				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
 
 			$db->setQuery($query, 0, $limit);
 			$list = $db->loadObjectList();
@@ -183,10 +183,10 @@ class plgSearchContent extends JPlugin
 						.'AND (a.publish_down = '. $db->Quote($nullDate) .' OR a.publish_down >= '. $db->Quote($now) .')');
 			$query->order(($morder ? $morder : $order));
 
-			// Fire the onPrepareQuery plugins
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
+			// Filter by language
+			if (JPluginHelper::isEnabled('system','languagefilter')) {
+				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
 
 			$db->setQuery($query, 0, $limit);
 			$list2 = $db->loadObjectList();
@@ -223,10 +223,10 @@ class plgSearchContent extends JPlugin
 			$query->order($order);
 
 
-			// Fire the onPrepareQuery plugins
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array('plg_search_content', &$query));
+			// Filter by language
+			if (JPluginHelper::isEnabled('system','languagefilter')) {
+				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
 
 			$db->setQuery($query, 0, $limit);
 			$list3 = $db->loadObjectList();

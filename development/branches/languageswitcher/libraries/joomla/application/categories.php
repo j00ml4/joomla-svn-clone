@@ -198,10 +198,10 @@ class JCategories
 		// Group by
 		$query->group('c.id');
 
-		// Fire the onPrepareQuery plugins
-		$dispatcher = JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
-		$dispatcher->trigger('onPrepareQuery', array('categories', &$query));
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('c.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
 
 		// Get the results
 		$db->setQuery($query);

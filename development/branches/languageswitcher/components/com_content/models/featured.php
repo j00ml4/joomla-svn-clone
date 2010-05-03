@@ -123,11 +123,6 @@ class ContentModelFeatured extends ContentModelArticles
 			$query->where('a.catid IN (' . implode(',',$featuredCategories) . ')');
 		}
 
-		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
-			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
-		}
-
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
