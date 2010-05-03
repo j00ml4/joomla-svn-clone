@@ -45,11 +45,11 @@ final class JSite extends JApplication
 	 */
 	public function initialise($options = array())
 	{
-		$config =& JFactory::getConfig();
+		$config = JFactory::getConfig();
+
 		// if a language was specified it has priority
 		// otherwise use user or default language settings
-		if (empty($options['language']))
-		{
+		if (empty($options['language'])) {
 			$sef = JRequest::getString('lang',null);
 			$table = JTable::getInstance('Language');
 			$table->load(array('sef'=>$sef));
@@ -63,8 +63,8 @@ final class JSite extends JApplication
 				$options['language'] = $lang;
 			}
 		}
-		if (empty($options['language']))
-		{
+
+		if (empty($options['language'])) {
 			// Detect cookie language
 			jimport('joomla.utilities.utility');
 			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
@@ -74,8 +74,8 @@ final class JSite extends JApplication
 				$options['language'] = $lang;
 			}
 		}
-		if (empty($options['language']))
-		{
+
+		if (empty($options['language'])) {
 			// Detect user language
 			$user = & JFactory::getUser();
 			$lang	= $user->getParam('language');
@@ -85,14 +85,14 @@ final class JSite extends JApplication
 				$options['language'] = $lang;
 			}
 		}
-		if (empty($options['language']))
-		{
+
+		if (empty($options['language'])) {
 			// Detect browser language
 			jimport('joomla.language.helper');
 			$options['language'] = JLanguageHelper::detectLanguage();
 		}
-		if (empty($options['language']))
-		{
+
+		if (empty($options['language'])) {
 			// Detect default language
 			$params =  JComponentHelper::getParams('com_languages');
 			$client	= &JApplicationHelper::getClientInfo($this->getClientId());
@@ -100,8 +100,7 @@ final class JSite extends JApplication
 		}
 
 		// One last check to make sure we have something
-		if (!JLanguage::exists($options['language']))
-		{
+		if (!JLanguage::exists($options['language'])) {
 			$lang = $config->get('language','en-GB');
 			if (JLanguage::exists($lang)) {
 				$options['language'] = $lang;
@@ -110,6 +109,7 @@ final class JSite extends JApplication
 				$options['language'] = 'en-GB'; // as a last ditch fail to english
 			}
 		}
+
 		parent::initialise($options);
 	}
 

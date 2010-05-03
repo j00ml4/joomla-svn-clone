@@ -135,7 +135,7 @@ class SearchModelSearch extends JModel
 			$areas['active']));
 
 			$rows = array();
-			foreach($results as $result) {
+			foreach ($results as $result) {
 				$rows = array_merge((array) $rows, (array) $result);
 			}
 

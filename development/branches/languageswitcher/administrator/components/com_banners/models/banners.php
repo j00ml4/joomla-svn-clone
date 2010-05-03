@@ -5,7 +5,9 @@
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 defined('_JEXEC') or die;
+
 jimport('joomla.application.component.modellist');
 
 /**
@@ -15,17 +17,18 @@ jimport('joomla.application.component.modellist');
  * @subpackage	com_banners
  * @since		1.6
  */
-class BannersModelBanners extends JModelList {
-
+class BannersModelBanners extends JModelList
+{
 	/**
 	 * Method to get the maximum ordering value for each category.
 	 *
 	 * @since	1.6
 	 */
-	function &getCategoryOrders() {
+	function &getCategoryOrders()
+	{
 		if (!isset($this->cache['categoryorders'])) {
-			$db = $this->getDbo();
-			$query = $db->getQuery(true);
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
 			$query->select('MAX(ordering) as `max`, catid');
 			$query->select('catid');
 			$query->from('#__banners');
@@ -42,14 +45,26 @@ class BannersModelBanners extends JModelList {
 	 * @return	JDatabaseQuery
 	 * @since	1.6
 	 */
-	protected function getListQuery() {
-
+	protected function getListQuery()
+	{
 		// Initialise variables.
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
-		$query->select($this->getState('list.select', 'a.id AS id, a.name AS name, a.alias AS alias,' . 'a.checked_out AS checked_out,' . 'a.checked_out_time AS checked_out_time, a.catid AS catid,' . 'a.clicks AS clicks, a.metakey AS metakey, a.sticky AS sticky,' . 'a.impmade AS impmade, a.imptotal AS imptotal,' . 'a.state AS state, a.ordering AS ordering,' . 'a.purchase_type as purchase_type,' . 'a.language'));
+		$query->select(
+			$this->getState(
+				'list.select',
+				'a.id AS id, a.name AS name, a.alias AS alias,'.
+				'a.checked_out AS checked_out,'.
+				'a.checked_out_time AS checked_out_time, a.catid AS catid,' .
+				'a.clicks AS clicks, a.metakey AS metakey, a.sticky AS sticky,'.
+				'a.impmade AS impmade, a.imptotal AS imptotal,' .
+				'a.state AS state, a.ordering AS ordering,'.
+				'a.purchase_type as purchase_type,'.
+				'a.language'
+			)
+		);
 		$query->from('`#__banners` AS a');
 
 		// Join over the language
@@ -71,33 +86,31 @@ class BannersModelBanners extends JModelList {
 		// Filter by published state
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
-			$query->where('a.state = ' . (int)$published);
-		}
-		else if ($published === '') {
+			$query->where('a.state = '.(int) $published);
+		} else if ($published === '') {
 			$query->where('(a.state IN (0, 1))');
 		}
 
 		// Filter by category.
 		$categoryId = $this->getState('filter.category_id');
 		if (is_numeric($categoryId)) {
-			$query->where('a.catid = ' . (int)$categoryId);
+			$query->where('a.catid = '.(int) $categoryId);
 		}
 
 		// Filter by client.
 		$clientId = $this->getState('filter.client_id');
 		if (is_numeric($clientId)) {
-			$query->where('a.cid = ' . (int)$clientId);
+			$query->where('a.cid = '.(int) $clientId);
 		}
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
 			if (stripos($search, 'id:') === 0) {
-				$query->where('a.id = ' . (int)substr($search, 3));
-			}
-			else {
-				$search = $db->Quote('%' . $db->getEscaped($search, true) . '%');
-				$query->where('(a.name LIKE ' . $search . ' OR a.alias LIKE ' . $search . ')');
+				$query->where('a.id = '.(int) substr($search, 3));
+			} else {
+				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$query->where('(a.name LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
 
@@ -107,12 +120,12 @@ class BannersModelBanners extends JModelList {
 		}
 
 		// Add the list ordering clause.
-		$orderCol = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
 		if ($orderCol == 'ordering' || $orderCol == 'category_title') {
-			$orderCol = 'category_title ' . $orderDirn . ', ordering';
+			$orderCol = 'category_title '.$orderDirn.', ordering';
 		}
-		$query->order($db->getEscaped($orderCol . ' ' . $orderDirn));
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
@@ -129,14 +142,15 @@ class BannersModelBanners extends JModelList {
 	 * @return	string		A store id.
 	 * @since	1.6
 	 */
-	protected function getStoreId($id = '') {
-
+	protected function getStoreId($id = '')
+	{
 		// Compile the store id.
-		$id.= ':' . $this->getState('filter.search');
-		$id.= ':' . $this->getState('filter.access');
-		$id.= ':' . $this->getState('filter.state');
-		$id.= ':' . $this->getState('filter.category_id');
-		$id.= ':' . $this->getState('filter.language');
+		$id	.= ':'.$this->getState('filter.search');
+		$id	.= ':'.$this->getState('filter.access');
+		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.category_id');
+		$id .= ':'.$this->getState('filter.language');
+
 		return parent::getStoreId($id);
 	}
 
@@ -145,8 +159,8 @@ class BannersModelBanners extends JModelList {
 	 *
 	 * @return	mixed	JForm object on success, false on failure.
 	 */
-	public function getForm() {
-
+	public function getForm() 
+	{
 		// Initialise variables.
 		$app = & JFactory::getApplication();
 
@@ -181,7 +195,8 @@ class BannersModelBanners extends JModelList {
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array()) {
+	public function getTable($type = 'Banner', $prefix = 'BannersTable', $config = array())
+	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
@@ -192,8 +207,8 @@ class BannersModelBanners extends JModelList {
 	 *
 	 * @since	1.6
 	 */
-	protected function populateState() {
-
+	protected function populateState()
+	{
 		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
 
@@ -222,4 +237,3 @@ class BannersModelBanners extends JModelList {
 		parent::populateState('name', 'asc');
 	}
 }
-

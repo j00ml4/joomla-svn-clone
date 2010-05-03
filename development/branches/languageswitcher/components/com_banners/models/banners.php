@@ -123,7 +123,7 @@ class BannersModelBanners extends JModelList
 		}
 
 		$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
-		
+
 		return $query;
 	}
 
@@ -131,6 +131,7 @@ class BannersModelBanners extends JModelList
 	{
 		if (!isset($this->cache['items'])) {
 			$this->cache['items'] = parent::getItems();
+
 			foreach ($this->cache['items'] as &$item) {
 				$parameters = new JRegistry;
 				$parameters->loadJSON($item->params);
