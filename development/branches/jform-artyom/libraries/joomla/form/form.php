@@ -83,12 +83,12 @@ class JForm
 	protected static $forms = array();
 
 	/**
-	 * Search arrays of paths for loading JForm, JFormField, and JFormRule class files.
+	 * Search arrays of paths for loading class files for entities with which JForm works (form, rule, field, etc.).
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
-	protected static $paths = array('fields' => array(), 'forms' => array(), 'rules' => array());
+	protected static $paths = array();
 
 	/**
 	 * Static array of JFormRule objects for re-use.
@@ -1459,56 +1459,36 @@ class JForm
 	protected function & loadFieldType($type, $new = true)
 	{
 		// Initialize variables.
-		$false	= false;
 		$key	= md5($type);
-		$class	= 'JFormField'.ucfirst($type);
+		$false	= false;
+		$class	= '';
 
 		// Return the JFormField object if it already exists and we don't need a new one.
 		if (isset(self::$fields[$key]) && $new === false) {
 			return self::$fields[$key];
 		}
 
-		// Attempt to import the JFormField class file if it isn't already imported.
-		if (!class_exists($class)) {
-
-			// Get the field search path array.
-			$paths = self::addFieldPath();
-
-			// If the type is complex, add the base type to the paths.
-			if ($pos = strpos($type, '_')) {
-
-				// Add the complex type prefix to the paths.
-				for ($i = 0, $n = count($paths); $i < $n; $i++) {
-					// Derive the new path.
-					$path = $paths[$i].'/'.strtolower(substr($type, 0, $pos));
-
-					// If the path does not exist, add it.
-					if (!in_array($path, $paths)) {
-						array_unshift($paths, $path);
-					}
-				}
-
-				// Break off the end of the complex type.
-				$type = substr($type, $pos+1);
-			}
-
-			// Try to find the field file.
-			if ($file = JPath::find($paths, strtolower($type).'.php')) {
-				require_once $file;
-			} else {
-				return $false;
-			}
-
-			// Check once and for all if the class exists.
-			if (!class_exists($class)) {
-				return $false;
-			}
+		if ( ($class = self::loadFieldClass($type)) !== false) {
+			// Instantiate a new field object.
+			self::$fields[$key] = new $class();
+			return self::$fields[$key];
 		}
+		else {
+			return $false;
+		}
+	}
 
-		// Instantiate a new field object.
-		self::$fields[$key] = new $class();
-
-		return self::$fields[$key];
+	/**
+	 * Attempt to import the JFormField class file if it isn't already imported.
+	 * You can use this method outside of JForm for loading a field for inheritance or composition.
+	 *
+	 * @param	string	Type of a field whose class should be loaded.
+	 * @return	mixed	Class name on success or false otherwise.
+	 * @since	1.6
+	 */
+	static public function loadFieldClass($type)
+	{
+		return self::loadClass('field', $type);
 	}
 
 	/**
@@ -1523,62 +1503,91 @@ class JForm
 	protected function & loadRuleType($type, $new = true)
 	{
 		// Initialize variables.
-		$false	= false;
 		$key	= md5($type);
-		$class	= 'JFormRule'.ucfirst($type);
+		$false	= false;
+		$class	= '';
 
-
-		// Return the JFormRule object if it already exists and we don't need a new one.
+		// Return the JFormField object if it already exists and we don't need a new one.
 		if (isset(self::$rules[$key]) && $new === false) {
 			return self::$rules[$key];
 		}
 
-		// Attempt to import the JFormRule class file if it isn't already imported.
-		if (!class_exists($class)) {
+		if ( ($class = self::loadRuleClass($type)) !== false) {
+			// Instantiate a new tule object.
+			self::$rules[$key] = new $class();
+			return self::$rules[$key];
+		}
+		else {
+			return $false;
+		}
+	}
 
-			// Get the field search path array.
-			$paths = self::addRulePath();
+	/**
+	 * Attempt to import the JFormRule class file if it isn't already imported.
+	 * You can use this method outside of JForm for loading a rule for inheritance or composition.
+	 *
+	 * @param	string	Type of a rule whose class should be loaded.
+	 * @return	mixed	Class name on success or false otherwise.
+	 * @since	1.6
+	 */
+	static public function loadRuleClass($type)
+	{
+		return self::loadClass('rule', $type);
+	}
 
-			// If the type is complex, add the base type to the paths.
-			if ($pos = strpos($type, '_')) {
+	/**
+	 * Load a class for one of the form's entities of a particular type.
+	 * Currently, it makes sence to use this method for the "field" and "rule" entities 
+	 * (but you can support more entities in your subclass).
+	 *
+	 * @param	string	One of the form entities (field or rule).
+	 * @param	string	Type of an entity.
+	 *
+	 * @return	mixed	Class name on success or false otherwise.
+	 */
+	protected static function loadClass($entity, $type)
+	{
+		$class = 'JForm'.ucfirst($entity).ucfirst($type);
+		if (class_exists($class)) return $class;
 
-				// Add the complex type prefix to the paths.
-				for ($i = 0, $n = count($paths); $i < $n; $i++) {
-					// Derive the new path.
-					$path = $paths[$i].'/'.strtolower(substr($type, 0, $pos));
+		// Get the field search path array.
+		$paths = self::addPath($entity);
 
-					// If the path does not exist, add it.
-					if (!in_array($path, $paths)) {
-						array_unshift($paths, $path);
-					}
+		// If the type is complex, add the base type to the paths.
+		if ($pos = strpos($type, '_')) {
+
+			// Add the complex type prefix to the paths.
+			for ($i = 0, $n = count($paths); $i < $n; $i++) {
+				// Derive the new path.
+				$path = $paths[$i].'/'.strtolower(substr($type, 0, $pos));
+
+				// If the path does not exist, add it.
+				if (!in_array($path, $paths)) {
+					array_unshift($paths, $path);
 				}
-
-				// Break off the end of the complex type.
-				$type = substr($type, $pos+1);
 			}
-
-			// Try to find the field file.
-			if ($file = JPath::find($paths, strtolower($type).'.php')) {
-				require_once $file;
-			} else {
-				return $false;
-			}
-
-			// Check once and for all if the class exists.
-			if (!class_exists($class)) {
-				return $false;
-			}
+			// Break off the end of the complex type.
+			$type = substr($type, $pos+1);
 		}
 
-		// Instantiate a new field object.
-		self::$rules[$key] = new $class();
+		// Try to find the class file.
+		if ($file = JPath::find($paths, strtolower($type).'.php')) {
+			require_once $file;
+		}
 
-		return self::$rules[$key];
+		// Check for all if the class exists.
+		if (class_exists($class)) {
+			return $class;
+		}
+		else {
+			 return false;
+		}
 	}
 
 	/**
 	 * Method to synchronize any field, form or rule paths contained in the XML document.
 	 *
+	 * @TODO:	Maybe we should receive all addXXXpaths attributes at once?
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
@@ -1709,7 +1718,13 @@ class JForm
 	{
 		// Add the default entity's search path if not set.
 		if (empty(self::$paths[$entity])) {
-			self::$paths[$entity][] = dirname(__FILE__). DS . $entity;
+			// Until we support limited number of entities (form, field and rule)
+			// we can do this dumb pluralisation:
+			$entity_plural = $entity . 's';
+			// But when someday we would want to support more entities, then we should consider adding
+			// an inflector class to "libraries/joomla/utilities" and use it here (or somebody can use a real inflector in his subclass).
+			// see also: pluralization snippet by Paul Osman in JControllerForm's constructor.
+			self::$paths[$entity][] = dirname(__FILE__). DS . $entity_plural;
 		}
 
 		// Force the new path(s) to an array.
@@ -1735,7 +1750,7 @@ class JForm
 	 */
 	public static function addFieldPath($new = null)
 	{
-		return self::addPath('fields', $new);
+		return self::addPath('field', $new);
 	}
 
 	/**
@@ -1748,7 +1763,7 @@ class JForm
 	 */
 	public static function addFormPath($new = null)
 	{
-		return self::addPath('forms', $new);
+		return self::addPath('form', $new);
 	}
 
 	/**
@@ -1761,7 +1776,7 @@ class JForm
 	 */
 	public static function addRulePath($new = null)
 	{
-		return self::addPath('rules', $new);
+		return self::addPath('rule', $new);
 	}
 
 	/**
