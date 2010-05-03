@@ -312,20 +312,6 @@ CREATE TABLE `#__content_frontpage` (
 # -------------------------------------------------------
 
 #
-# Table structure for table `#__content_rating`
-#
-
-CREATE TABLE `#__content_rating` (
-  `content_id` integer NOT NULL default '0',
-  `rating_sum` integer unsigned NOT NULL default '0',
-  `rating_count` integer unsigned NOT NULL default '0',
-  `lastip` varchar(50) NOT NULL default '',
-  PRIMARY KEY  (`content_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-# -------------------------------------------------------
-
-#
 # Table structure for table `#__core_log_searches`
 #
 
