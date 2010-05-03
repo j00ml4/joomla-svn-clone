@@ -1,51 +1,47 @@
 <?php
 /**
- * @version		$Id: default.php 16021 2010-04-12 02:17:03Z infograf768 $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
+
 $app = JFactory::getApplication();
-$templateparams =$app->getTemplate(true)->params;
+$templateparams = $app->getTemplate(true)->params;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 // Create shortcut to parameters.
 $params = $this->item->params;
 
-
-
-if($templateparams->get('html5')!=1)
-{
+if ($templateparams->get('html5') != 1) :
 	require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
 	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
-} else {
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
+else :
+	JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 ?>
 <article class="item-page<?php echo $params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 
 <?php if ($this->params->get('show_page_heading', 1) And $params->get('show_title')) :?>
 <hgroup>
-<? endif; ?>
+<?php endif; ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>
 		<h2>
-
-						<?php echo $this->escape($this->item->title); ?>
-
+			<?php echo $this->escape($this->item->title); ?>
 		</h2>
 <?php endif; ?>
 <?php if ($this->params->get('show_page_heading', 1) And $params->get('show_title')) :?>
 </hgroup>
-<? endif; ?>
+<?php endif; ?>
 
 <?php if ($params->get('access-edit') ||  $params->get('show_print_icon') || $params->get('show_email_icon')) : ?>
 		<ul class="actions">
@@ -152,4 +148,4 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </article>
 
-<?php } ?>
+<?php endif; ?>
