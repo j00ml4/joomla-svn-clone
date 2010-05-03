@@ -27,6 +27,32 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+3-May-2010 Jean-Marie Simonet
+# Fixed [20314] (Thanks Phil Snell). Added/consolidated some strings in com_messages
+
+03-May-2010 Christophe Demko
+ ^ Add an xml attribute to editor field: 'hide' to specify which buttons to hide
+
+03-May-2010 Andrew Eddie
+ ^ Merge fixes to media fields (Elin Waring)
+ + Merge addition of featured contacts view (Elin Waring)
+ + Merge extra fields for user profile plugin (Elin Waring)
+ ^ Merge various fixes to HTML filtering of and buttons of rich textareas (Elin Waring)
+ ^ Merge changes/fixes to sample data: fruit shop style fix; articles category module (Elin Waring)
+ ^ Accepted patch [#20161] Caching of plugins query + JPluginHelper refactoring to JDatabaseQuery (Dennis Hermacki)
+
+2-May-2010 Christophe Demko
+# Correcting a bug I have introduced on commit #16536
+
+2-May-2010 Jean-Marie Simonet
+$ Consolidating some categories, contact, newsfeeds, weblinks,content strings
+$ Refactoring com_contacts frontend ini/keys
+$ Added calendar image in front-end (Thanks Bill)
+$ Moving icons for com_contact to new folder in media/contacts/images/
+$ Correcting/consolidating strings
+^ Adding fax in contact edit
+# Correcting mod_banners [20301](thanks Phil Snell)
+
 01-May-2010 Hannes Papenberg
 # Fixing base-tag for SEF mode without mod_rewrite
 
