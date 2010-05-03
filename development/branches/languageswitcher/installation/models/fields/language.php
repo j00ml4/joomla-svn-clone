@@ -43,7 +43,7 @@ class JFormFieldLanguage extends JFormFieldList
 
 		// Detect the native language.
 		$native = JLanguageHelper::detectLanguage();
-		if(empty($native)) {
+		if (empty($native)) {
 			$native = 'en-GB';
 		}
 
