@@ -67,36 +67,24 @@ class JForm
 	protected $xml;
 
 	/**
-	 * Static array of JFormField objects for re-use.
+	 * Static array of JForm's entity objects for re-use.
+	 * All form's, field's and rule's objects are here.
+	 *
+	 * Array's structure (YAML):
+	 * <code>
+	 * entities:
+	 * 	{ENTITY_NAME}:
+	 *		instances:
+	 *			{KEY}: {OBJECT}
+	 *		paths:
+	 *			- /path/1
+	 *			- /path/2
+	 * </code>
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
-	protected static $fields = array();
-
-	/**
-	 * Static array of JForm objects for re-use.
-	 *
-	 * @var		array
-	 * @since	1.6
-	 */
-	protected static $forms = array();
-
-	/**
-	 * Search arrays of paths for loading class files for entities with which JForm works (form, rule, field, etc.).
-	 *
-	 * @var		array
-	 * @since	1.6
-	 */
-	protected static $paths = array();
-
-	/**
-	 * Static array of JFormRule objects for re-use.
-	 *
-	 * @var		array
-	 * @since	1.6
-	 */
-	protected static $rules = array();
+	protected static $entities = array();
 
 	/**
 	 * Method to instantiate the form object.
@@ -1458,24 +1446,21 @@ class JForm
 	 */
 	protected function & loadFieldType($type, $new = true)
 	{
-		// Initialize variables.
-		$key	= md5($type);
-		$false	= false;
-		$class	= '';
+		return self::loadType('field', $type, $new);
+	}
 
-		// Return the JFormField object if it already exists and we don't need a new one.
-		if (isset(self::$fields[$key]) && $new === false) {
-			return self::$fields[$key];
-		}
-
-		if ( ($class = self::loadFieldClass($type)) !== false) {
-			// Instantiate a new field object.
-			self::$fields[$key] = new $class();
-			return self::$fields[$key];
-		}
-		else {
-			return $false;
-		}
+	/**
+	 * Method to load a form rule object given a type.
+	 *
+	 * @param	string	$type	The rule type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	JFormRule object on success, false otherwise.
+	 * @since	1.6
+	 */
+	protected function & loadRuleType($type, $new = true)
+	{
+		return self::loadType('rule', $type, $new);
 	}
 
 	/**
@@ -1492,37 +1477,6 @@ class JForm
 	}
 
 	/**
-	 * Method to load a form rule object given a type.
-	 *
-	 * @param	string	$type	The rule type.
-	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
-	 *
-	 * @return	mixed	JFormRule object on success, false otherwise.
-	 * @since	1.6
-	 */
-	protected function & loadRuleType($type, $new = true)
-	{
-		// Initialize variables.
-		$key	= md5($type);
-		$false	= false;
-		$class	= '';
-
-		// Return the JFormField object if it already exists and we don't need a new one.
-		if (isset(self::$rules[$key]) && $new === false) {
-			return self::$rules[$key];
-		}
-
-		if ( ($class = self::loadRuleClass($type)) !== false) {
-			// Instantiate a new tule object.
-			self::$rules[$key] = new $class();
-			return self::$rules[$key];
-		}
-		else {
-			return $false;
-		}
-	}
-
-	/**
 	 * Attempt to import the JFormRule class file if it isn't already imported.
 	 * You can use this method outside of JForm for loading a rule for inheritance or composition.
 	 *
@@ -1533,6 +1487,42 @@ class JForm
 	static public function loadRuleClass($type)
 	{
 		return self::loadClass('rule', $type);
+	}
+
+	/**
+	 * Method to load a form entity object given a type.
+	 * Each type is loaded only once and then used as a prototype for other objects of same type.
+	 * Please, use this method only with those entities which support types (forms aren't support them).
+	 *
+	 * @param	string	$type	The entity type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	Entity object on success, false otherwise.
+	 * @since	1.6
+	 */
+	protected function & loadType($entity, $type, $new = true)
+	{
+		// Reference to an array with current entity's type instances
+		$types =& self::$entities[$entity]['instances'];
+
+		// Initialize variables.
+		$key	= md5($type);
+		$false	= false;
+		$class	= '';
+
+		// Return an entity object if it already exists and we don't need a new one.
+		if (isset($types[$key]) && $new === false) {
+			return $types[$key];
+		}
+
+		if ( ($class = self::loadClass($entity, $type)) !== false) {
+			// Instantiate a new type object.
+			$types[$key] = new $class();
+			return $types[$key];
+		}
+		else {
+			return $false;
+		}
 	}
 
 	/**
@@ -1576,12 +1566,7 @@ class JForm
 		}
 
 		// Check for all if the class exists.
-		if (class_exists($class)) {
-			return $class;
-		}
-		else {
-			 return false;
-		}
+		return class_exists($class) ? $class : false;
 	}
 
 	/**
@@ -1605,7 +1590,7 @@ class JForm
 		// Add the field paths.
 		foreach ($paths as $path) {
 			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
-			JForm::addFieldPath($path);
+			self::addFieldPath($path);
 		}
 
 		// Get any addformpath attributes from the form definition.
@@ -1615,7 +1600,7 @@ class JForm
 		// Add the form paths.
 		foreach ($paths as $path) {
 			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
-			JForm::addFormPath($path);
+			self::addFormPath($path);
 		}
 
 		// Get any addrulepath attributes from the form definition.
@@ -1625,7 +1610,7 @@ class JForm
 		// Add the rule paths.
 		foreach ($paths as $path) {
 			$path = JPATH_ROOT.'/'.ltrim($path, '/\\');
-			JForm::addRulePath($path);
+			self::addRulePath($path);
 		}
 
 		return true;
@@ -1716,15 +1701,18 @@ class JForm
 	 */
 	protected static function addPath($entity, $new = null)
 	{
+		// Reference to an array with paths for current entity
+		$paths =& self::$entities[$entity]['paths'];
+
 		// Add the default entity's search path if not set.
-		if (empty(self::$paths[$entity])) {
+		if (empty($paths)) {
 			// Until we support limited number of entities (form, field and rule)
 			// we can do this dumb pluralisation:
 			$entity_plural = $entity . 's';
 			// But when someday we would want to support more entities, then we should consider adding
 			// an inflector class to "libraries/joomla/utilities" and use it here (or somebody can use a real inflector in his subclass).
 			// see also: pluralization snippet by Paul Osman in JControllerForm's constructor.
-			self::$paths[$entity][] = dirname(__FILE__). DS . $entity_plural;
+			$paths[] = dirname(__FILE__). DS . $entity_plural;
 		}
 
 		// Force the new path(s) to an array.
@@ -1732,12 +1720,12 @@ class JForm
 
 		// Add the new paths to the stack if not already there.
 		foreach ($new as $path) {
-			if (!in_array($path, self::$paths[$entity])) {
-				array_unshift(self::$paths[$entity], trim($path));
+			if (!in_array($path, $paths)) {
+				array_unshift($paths, trim($path));
 			}
 		}
 
-		return self::$paths[$entity];
+		return $paths;
 	}
 
 	/**
@@ -1795,8 +1783,11 @@ class JForm
 	 */
 	public static function getInstance($name, $data = null, $options = array(), $replace = true, $xpath = false)
 	{
+		// Reference to array with form instances
+		$forms =& self::$entities['form']['instances'];
+
 		// Only instantiate the form if it does not already exist.
-		if (!isset(self::$forms[$name])) {
+		if (!isset($forms[$name])) {
 
 			$data = trim($data);
 
@@ -1805,23 +1796,23 @@ class JForm
 			}
 
 			// Instantiate the form.
-			self::$forms[$name] = new JForm($name, $options);
+			$forms[$name] = new JForm($name, $options);
 
 			// Load the data.
 			if (substr(trim($data), 0, 1) == '<') {
-				if (self::$forms[$name]->load($data, $replace, $xpath) == false) {
+				if ($forms[$name]->load($data, $replace, $xpath) == false) {
 					throw new Excpetion('JLIB_FORM_ERROR_XML_FILE_DID_NOT_LOAD');
 					return false;
 				}
 			} else {
-				if (self::$forms[$name]->loadFile($data, $replace, $xpath) == false) {
+				if ($forms[$name]->loadFile($data, $replace, $xpath) == false) {
 					throw new Exception('JLIB_FORM_ERROR_XML_FILE_DID_NOT_LOAD');
 					return false;
 				}
 			}
 		}
 
-		return self::$forms[$name];
+		return $forms[$name];
 	}
 
 	/**
