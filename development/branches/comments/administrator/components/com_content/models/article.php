@@ -105,9 +105,6 @@ class ContentModelArticle extends JModelAdmin
 	 */
 	public function getForm()
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
 		$form = parent::getForm('com_content.article', 'article', array('control' => 'jform'));
 		if (empty($form)) {
@@ -123,8 +120,20 @@ class ContentModelArticle extends JModelAdmin
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
+		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_content.edit.article.data', array());
+		$data = JFactory::getApplication()->getUserState('com_content.edit.article.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -132,8 +141,6 @@ class ContentModelArticle extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
-
-		return $form;
 	}
 
 	/**

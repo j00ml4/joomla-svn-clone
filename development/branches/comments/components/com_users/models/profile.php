@@ -154,22 +154,31 @@ class UsersModelProfile extends JModelForm
 			return false;
 		}
 
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= JDispatcher::getInstance();
-		JPluginHelper::importPlugin('user');
-
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return false;
-		}
-
-		$form->bind($this->getData());
-
 		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm &$form)
+	{
+		$form->bind($this->getData());
+	}
+
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form)
+	{
+		parent::preprocessForm($form, 'user');
 	}
 
 	/**

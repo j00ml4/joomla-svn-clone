@@ -37,19 +37,6 @@ class UsersModelReset extends JModelForm
 			return false;
 		}
 
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return false;
-		}
-
 		return $form;
 	}
 
@@ -75,6 +62,18 @@ class UsersModelReset extends JModelForm
 	{
 		// Get the form.
 		return $this->getForm('com_users.reset_confirm', 'reset_confirm');
+	}
+
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form)
+	{
+		parent::preprocessForm($form, 'user');
 	}
 
 	/**

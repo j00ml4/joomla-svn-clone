@@ -130,6 +130,10 @@ class JModelForm extends JModel
 
 			// Allow for additional modification of the form, and events to be triggered.
 			$this->preprocessForm($form);
+
+			// Load the data into the form.
+			$this->loadFormData($form);
+
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
@@ -142,20 +146,33 @@ class JModelForm extends JModel
 	}
 
 	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 */
+	protected function loadFormData(JForm $form)
+	{
+	}
+
+	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
 	 * @param	object	A form object.
-	 *
+	 * @param	string	The name of the plugin group to import (defaults to "content").
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm(JForm $form, $group = 'content')
 	{
+		// Import the approriate plugin group.
+		JPluginHelper::importPlugin($group);
+
 		// Get the dispatcher.
 		$dispatcher	= JDispatcher::getInstance();
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareForm', array($form->getName(), $form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {

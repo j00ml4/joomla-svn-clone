@@ -94,8 +94,20 @@ class WeblinksModelWeblink extends JModelAdmin
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
+		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_weblinks.edit.weblink.data', array());
+		$data = JFactory::getApplication()->getUserState('com_weblinks.edit.weblink.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -103,8 +115,6 @@ class WeblinksModelWeblink extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
-
-		return $form;
 	}
 
 	/**
