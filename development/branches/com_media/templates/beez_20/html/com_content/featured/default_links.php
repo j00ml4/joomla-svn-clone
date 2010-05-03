@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_links.php 15673 2010-03-29 03:21:04Z hackwar $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -19,7 +19,7 @@ if($templateparams->get('html5')!=1)
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 ?>
 
-<h3><?php echo JText::_('MORE_ARTICLES'); ?></h3>
+<h3><?php echo JText::_('COM_CONTENT_MORE_ARTICLES'); ?></h3>
 
 <ol>
 <?php foreach ($this->link_items as &$item) : ?>
