@@ -116,6 +116,12 @@ class BannersModelBanners extends JModelList
 				$query->where('(' . implode(' OR ', $temp). ')');
 			}
 		}
+		
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
+
 		$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
 		
 		return $query;

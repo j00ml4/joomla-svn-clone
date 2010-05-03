@@ -12,12 +12,12 @@ defined('_JEXEC') or die;
 jimport('joomla.plugin.plugin');
 
 /**
-* Joomla! Language SEF Plugin
+* Joomla! Language Filter Plugin
 *
  * @package		Joomla
  * @subpackage	System
  */
-class plgSystemLanguageSEF extends JPlugin
+class plgSystemLanguageFilter extends JPlugin
 {
 	public static $languages, $default_language;
 	
@@ -46,7 +46,7 @@ class plgSystemLanguageSEF extends JPlugin
 	
 	public function buildRule(&$router, &$uri)
 	{
-		if ($router->getMode() == JROUTER_MODE_SEF && $this->params->get('sef')!='no') {
+		if ($router->getMode() == JROUTER_MODE_SEF) {
 			$language	= $uri->getVar('language');
 			$language   = $language ? $language : JFactory::getLanguage()->getTag();
 			$Itemid		= $uri->getVar('Itemid');
@@ -61,17 +61,14 @@ class plgSystemLanguageSEF extends JPlugin
 						$uri->delVar('Itemid');
 					}
 				}
-				if ($this->languages[$language]->lang_code != $this->default_language || $this->params->get('sef')='all') {
-					$uri->setPath($uri->getPath().'/'.$this->languages[$language]->sef.'/');
-				}
-			}
+				$uri->setPath($uri->getPath().'/'.$this->languages[$language]->sef.'/');			}
 		}
 	}
 	
 	public function parseRule(&$router, &$uri)
 	{
 		$array = array();
-		if ($router->getMode() == JROUTER_MODE_SEF && $this->params->get('sef')!='no') {
+		if ($router->getMode() == JROUTER_MODE_SEF) {
 			$path = $uri->getPath();
 			$parts = explode('/', $path);
 

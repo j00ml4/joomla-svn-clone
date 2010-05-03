@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Site
+ * @subpackage	Contact
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,13 +13,10 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Weblinks Component Weblink Model
- *
  * @package		Joomla.Site
- * @subpackage	com_weblinks
- * @since		1.5
+ * @subpackage	Contact
  */
-class WeblinksModelCategory extends JModelList
+class ContactModelFeatured extends JModelList
 {
 	/**
 	 * Category items data
@@ -43,7 +42,7 @@ class WeblinksModelCategory extends JModelList
 	protected $_category = null;
 
 	/**
-	 * The list of other weblink categories.
+	 * The list of other newfeed categories.
 	 *
 	 * @access	protected
 	 * @var		array
@@ -90,20 +89,14 @@ class WeblinksModelCategory extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__weblinks` AS a');
+		$query->from('`#__contact_details` AS a');
 		$query->where('a.access IN ('.$groups.')');
-
+		$query->where('a.featured=1');
 		// Filter by category.
-		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
+			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
-
-			//Filter by published category
-			$cpublished = $this->getState('filter.c.published');
-			if (is_numeric($cpublished)) {
-				$query->where('c.published = '.(int) $cpublished);
-			}
 		}
 
 		// Filter by state
@@ -111,23 +104,19 @@ class WeblinksModelCategory extends JModelList
 		if (is_numeric($state)) {
 			$query->where('a.state = '.(int) $state);
 		}
-				// Filter by start and end dates.
-				$nullDate = $db->Quote($db->getNullDate());
-				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+		// Filter by start and end dates.
+		$nullDate = $db->Quote($db->getNullDate());
+		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
 				
-				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
-				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 		
-		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
-			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
-		}
-
+		
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+
 		return $query;
 	}
-
 
 	/**
 	 * Method to auto-populate the model state.
@@ -139,8 +128,8 @@ class WeblinksModelCategory extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app	= JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_weblinks');
+		$app	= &JFactory::getApplication();
+		$params	= JComponentHelper::getParams('com_contact');
 
 		// List state information
 		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
@@ -159,8 +148,6 @@ class WeblinksModelCategory extends JModelList
 		$this->setState('category.id', $id);
 
 		$this->setState('filter.published',	1);
-		
-		
 		// Load the parameters.
 		$this->setState('params', $params);
 	}
@@ -183,8 +170,8 @@ class WeblinksModelCategory extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('Weblinks', $options);
+			$options['countItems'] = $params->get('show_contacts', 0);
+			$categories = JCategories::getInstance('Contact', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))
 			{
