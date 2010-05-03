@@ -20,7 +20,7 @@ if (file_exists('config.php')) {
 
 define('DS',			DIRECTORY_SEPARATOR);
 define('_JEXEC',		1);
-define('JPATH_BASE', '/home/estaffor/src/php/Workspace/trunk');
+define('JPATH_BASE', 'C:\xampp\htdocs\cache_klas2');
 
 if (!defined('JPATH_BASE'))
 {
