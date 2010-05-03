@@ -947,4 +947,5 @@ INSERT INTO #__schema VALUES(LAST_INSERT_ID()), '20090622');
 DROP TABLE `#__core_log_items`;
 DROP TABLE `#__stats_agents`;
 
-
+-- Removing #__content_rating table
+DROP TABLE `#__content_rating`;
