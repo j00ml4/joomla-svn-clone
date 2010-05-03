@@ -1304,7 +1304,46 @@ class JFormTest extends JoomlaTestCase
 	}
 
 	/**
-	 * Test the JForm::getField method.
+	 * Test the JForm::loadFieldClass method.
+	 */
+	public function testLoadFieldClass()
+	{
+		$this->assertThat(
+			JFormInspector::loadFieldClass('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' loadFieldClass should return false if class not found.'
+		);
+
+		$this->assertEquals(
+			JFormInspector::loadFieldClass('list'),
+			'JFormFieldList',
+			'Line:'.__LINE__.' loadFieldClass should return the correct class name.'
+		);
+
+		$this->assertThat(
+			class_exists('JFormFieldList'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' JFormFieldList class should be loaded.'
+		);
+
+		// Add custom path.
+		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
+
+		$this->assertEquals(
+			JFormInspector::loadFieldClass('test'),
+			'JFormFieldTest',
+			'Line:'.__LINE__.' loadFieldClass should return the correct custom class name.'
+		);
+
+		$this->assertThat(
+			class_exists('JFormFieldTest'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' JFormFieldTest class should be loaded.'
+		);
+	}
+
+	/**
+	 * Test the JForm::loadFieldType method.
 	 */
 	public function testLoadFieldType()
 	{
@@ -1383,6 +1422,46 @@ class JFormTest extends JoomlaTestCase
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML string should parse successfully.'
 		);
+	}
+
+	/**
+	 * Test the JForm::loadRuleClass method.
+	 */
+	public function testLoadRuleClass()
+	{
+		$this->assertThat(
+			JFormInspector::loadRuleClass('bogus'),
+			$this->isFalse(),
+			'Line:'.__LINE__.' loadRuleClass should return false if class not found.'
+		);
+
+		$this->assertEquals(
+			JFormInspector::loadRuleClass('boolean'),
+			'JFormRuleBoolean',
+			'Line:'.__LINE__.' loadRuleClass should return the correct class name.'
+		);
+
+		$this->assertThat(
+			class_exists('JFormRuleBoolean'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' JFormRuleBoolean class should be loaded.'
+		);
+
+		// Add custom path.
+		JForm::addRulePath(dirname(__FILE__).'/_testrules');
+
+		$this->assertEquals(
+			JFormInspector::loadRuleClass('custom'),
+			'JFormRuleCustom',
+			'Line:'.__LINE__.' loadRuleClass should return the correct custom class name.'
+		);
+
+		$this->assertThat(
+			class_exists('JFormRuleCustom'),
+			$this->isTrue(),
+			'Line:'.__LINE__.' JFormRuleCustom class should be loaded.'
+		);
+
 	}
 
 	/**
