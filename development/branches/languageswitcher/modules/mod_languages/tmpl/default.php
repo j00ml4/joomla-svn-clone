@@ -18,8 +18,12 @@ JHtml::_('stylesheet','mod_languages/template.css', array(), true);
 		<ul>
 <?php foreach($list as $language):?>
 			<li>
-				<a href="<?php echo JRoute::_('index.php?' . 'Itemid=' . $language->id . '&language=' . $language->lang_code);?>">
-	<?php echo JHtml::_('image','mod_languages/'.$language->image.'.gif',$language->title,array('title'=>$language->title),true);?>
+				<a href="<?php echo JRoute::_('index.php?Itemid='.$language->id.'&lang=' . $language->sef);?>">
+	<?php if ($params->get('image',1)):?>
+		<?php echo JHtml::_('image','mod_languages/'.$language->image.'.gif',$language->title,array('title'=>$language->title),true);?>
+	<?php else:?>
+		<?php echo $language->title;?>
+	<?php endif;?>
 				</a>
 			</li>
 <?php endforeach;?>

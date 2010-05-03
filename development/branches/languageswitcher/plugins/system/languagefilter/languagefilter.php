@@ -19,7 +19,7 @@ jimport('joomla.plugin.plugin');
  */
 class plgSystemLanguageFilter extends JPlugin
 {
-	public static $languages, $default_language;
+	public static $languages, $sefs, $site_sef;
 	
 	public function onAfterInitialise()
 	{
@@ -38,30 +38,35 @@ class plgSystemLanguageFilter extends JPlugin
 			$query	= $db->getQuery(true);
 			$query->select('*')->from('#__languages')->where('published=1');
 			$db->setQuery($query);
-			$this->languages = $db->loadObjectList('lang_code');
-			
-			$this->default_language = JComponentHelper::getParams('com_languages')->get('site');
+			self::$sefs = $db->loadObjectList('sef');
+			self::$languages = $db->loadObjectList('lang_code');
+			self::$site_sef = self::$languages[JComponentHelper::getParams('com_languages')->get('site','en-GB')]->sef;
 		}
 	}
 	
 	public function buildRule(&$router, &$uri)
 	{
+		$sef = $uri->getVar('lang');
+		if (empty($sef)) {
+			$sef= self::$languages[JFactory::getLanguage()->getTag()]->sef;
+		}
+		elseif (!array_key_exists($sef, self::$sefs)) {
+			$sef = self::$site_sef;
+		}
+		$Itemid = $uri->getVar('Itemid');
+		if ($Itemid) {
+			$menu =& JSite::getMenu()->getItem($Itemid);
+			// if no menu - that means that we are routing home menu item of none-current language
+			if (!$menu || $menu->home) {
+				$uri->delVar('option');
+				$uri->delVar('Itemid');
+			}
+		}
 		if ($router->getMode() == JROUTER_MODE_SEF) {
-			$language	= $uri->getVar('language');
-			$language   = $language ? $language : JFactory::getLanguage()->getTag();
-			$Itemid		= $uri->getVar('Itemid');
-
-			if (isset($this->languages[$language]) && $this->languages[$language]->sef) {
-				$uri->delVar('language');
-				if ($Itemid) {
-					$menu =& JSite::getMenu()->getItem($Itemid);
-					// if no menu - that means that we are routing home menu item of none-current language
-					if (!$menu || $menu->home) {
-						$uri->delVar('option');
-						$uri->delVar('Itemid');
-					}
-				}
-				$uri->setPath($uri->getPath().'/'.$this->languages[$language]->sef.'/');			}
+			$uri->delVar('lang');
+			$uri->setPath($uri->getPath().'/'.$sef.'/');		}
+		else {
+			$uri->setVar('lang',$sef);
 		}
 	}
 	
@@ -71,25 +76,24 @@ class plgSystemLanguageFilter extends JPlugin
 		if ($router->getMode() == JROUTER_MODE_SEF) {
 			$path = $uri->getPath();
 			$parts = explode('/', $path);
+			
+			$sef = $parts[0];
 
-			$lang_code = null;
-			foreach($this->languages as $language) {
-				if ($language->sef == $parts[0]) {
-					$lang_code = $language->lang_code;
-					break; 
-				}
+			if (!array_key_exists($sef,self::$sefs)) {
+				$sef = self::$site_sef;
 			}
+			$lang_code=self::$sefs[$sef]->lang_code;
 			
 			if (!$lang_code ||  !JLanguage::exists($lang_code)) {
 				// Use the default language
-				$lang_code = $this->default_language;
+				$lang_code = self::$default_language;
 			}
 			else {
 				array_shift($parts);
 				$uri->setPath(implode('/', $parts));
 			}
 
-			$array = array('language' => $lang_code);
+			$array = array('lang' => $sef);
 			JFactory::getLanguage()->setLanguage($lang_code);
 			$config = JFactory::getConfig();
 			$cookie_domain 	= $config->get('config.cookie_domain', '');

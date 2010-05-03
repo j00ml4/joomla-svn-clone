@@ -74,7 +74,6 @@
 			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC"
 			class="inputbox"
 			default="">
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 			<option value="*">JOPTION_ALL_LANGUAGES</option>
 		</field>
 

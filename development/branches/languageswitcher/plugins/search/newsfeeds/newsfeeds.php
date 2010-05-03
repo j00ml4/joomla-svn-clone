@@ -116,10 +116,10 @@ class plgSearchNewsfeeds extends JPlugin
 		$query->where('('. $where .')' . 'AND a.published = 1 AND c.published = 1 AND c.access IN ('. $groups .')');
 		$query->order($order);
 
-		// Fire the onPrepareQuery plugins
-		$dispatcher = JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
-		$dispatcher->trigger('onPrepareQuery', array('plg_search_newsfeeds', &$query));
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
 
 		$db->setQuery($query, 0, $limit);
 		$rows = $db->loadObjectList();

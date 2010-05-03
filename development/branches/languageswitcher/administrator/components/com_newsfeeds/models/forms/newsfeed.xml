@@ -111,7 +111,6 @@
 		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
 			description="COM_NEWSFEEDS_FIELD_LANGUAGE_DESC" class="inputbox"
 		>
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
 			<option value="*">JOPTION_ALL_LANGUAGES</option>
 		</field>
 		<field name="metakey" type="textarea"

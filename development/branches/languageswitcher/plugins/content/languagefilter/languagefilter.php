@@ -18,7 +18,7 @@ class plgcontentLanguageFilter extends JPlugin {
 		if ($app->isSite()) {
 			$db = JFactory::getDBO();
 			$language = JFactory::getLanguage()->getTag();
-			if (in_array($name, array('mod_related_items', 'mod_articles_archive', 'plg_search_contacts', 'plg_search_content', 'plg_search_newsfeeds', 'plg_search_weblinks'))) {
+			if (in_array($name, array())) {
 				switch ($this->params->get('manage_language')) {
 					case 'no':
 						$query->where('a.language in (' . $db->Quote($language) . ',' . $db->Quote('*') . ')');

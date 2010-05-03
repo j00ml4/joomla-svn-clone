@@ -149,7 +149,7 @@ class WeblinksModelWeblinks extends JModelList
 
 		// Filter on the language.
 		if ($language = $this->getState('filter.language')) {
-			$query->where('a.language = ' . $db->quote($language == '?' ? '' : $language));
+			$query->where('a.language = ' . $db->quote($language));
 		}
 
 		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering') {

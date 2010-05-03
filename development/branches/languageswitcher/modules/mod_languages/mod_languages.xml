@@ -53,6 +53,15 @@
 					label="MOD_LANGUAGES_FIELD_FOOTER_LABEL"
 					description="MOD_LANGUAGES_FIELD_FOOTER_DESC" />
 			
+				<field
+					name="image"
+					type="radio"
+					default="1"
+					label="MOD_LANGUAGES_FIELD_USEIMAGE_LABEL"
+					description="MOD_LANGUAGES_FIELD_USEIMAGE_DESC" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 <!--				<field
 					name="default"
 					type="radio"

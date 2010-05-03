@@ -281,10 +281,10 @@ abstract class JModuleHelper
 
 		$cacheid = serialize(array($Itemid,$groups,$clientid));
 
-		// Fire the onPrepareQuery plugins
-		$dispatcher = JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
-		$dispatcher->trigger('onPrepareQuery', array('modules', &$query));
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
 
 		// Set the query
 		$db->setQuery($query);

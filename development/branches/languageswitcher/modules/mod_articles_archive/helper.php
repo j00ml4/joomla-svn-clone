@@ -23,10 +23,10 @@ class modArchiveHelper
 		$query->group('created_year DESC, created_month DESC');
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
-		// Fire the onPrepareQuery plugins
-		$dispatcher = JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
-		$dispatcher->trigger('onPrepareQuery', array('mod_articles_archive', &query));
+		// Filter by language
+		if (JPluginHelper::isEnabled('system','languagefilter')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
 
 		$db->setQuery($query, 0, intval($params->get('count')));
 		$rows = $db->loadObjectList();

@@ -93,13 +93,11 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->access_level); ?>
 					</td>
 					<td class="center">
-						<?php if ($item->language==''):?>
-							<?php echo JText::_('JDEFAULT'); ?>
-						<?php elseif ($item->language=='*'):?>
-							<?php echo JText::_('JALL'); ?>
-						<?php else:?>
-							<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
-						<?php endif;?>
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 					</td>
 					<td class="center">
 						<span title="<?php echo sprintf('%d-%d', $item->lft, $item->rgt);?>">

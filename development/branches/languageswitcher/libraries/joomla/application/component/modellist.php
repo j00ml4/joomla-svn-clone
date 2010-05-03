@@ -111,11 +111,6 @@ class JModelList extends JModel
 	{
 		if (is_null($this->query)) {
 			$this->query = $this->getListQuery();
-
-			// Fire the onPrepareQuery plugins
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin('content');
-			$dispatcher->trigger('onPrepareQuery', array($this->context, &$this->query));
 		}
 		return $this->query;
 	}

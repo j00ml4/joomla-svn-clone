@@ -118,7 +118,6 @@ class JRouter extends JObject
 		if ($this->_mode == JROUTER_MODE_SEF) {
 			$vars += $vars + $this->_parseSefRoute($uri);
 		}
-
 		return  array_merge($this->getVars(), $vars);
 	}
 

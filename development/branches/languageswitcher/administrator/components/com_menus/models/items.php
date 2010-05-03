@@ -161,7 +161,7 @@ class MenusModelItems extends JModelList
 
 		// Filter on the language.
 		if ($language = $this->getState('filter.language')) {
-			$query->where('a.language = '.$db->quote($language == '?' ? '' : $language));
+			$query->where('a.language = '.$db->quote($language));
 		}
 
 		// Add the list ordering clause.

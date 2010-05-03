@@ -351,7 +351,7 @@ class JRouterSite extends JRouter
 			$itemid = $uri->getVar('Itemid');
 			$item = $menu->getItem($itemid);
 
-			$uri->setQuery($item->query);
+			if ($item) $uri->setQuery($item->query);
 			$uri->setVar('Itemid', $itemid);
 		}
 
