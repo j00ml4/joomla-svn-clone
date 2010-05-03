@@ -72,12 +72,20 @@ class UsersModelUser extends JModelAdmin
 			return false;
 		}
 
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('user');
+		return $form;
+	}
 
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_users.edit.user.data', array());
+		$data = JFactory::getApplication()->getUserState('com_users.edit.user.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -85,17 +93,18 @@ class UsersModelUser extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
+	}
 
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return false;
-		}
-
-		return $form;
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form)
+	{
+		parent::preprocessForm($form, 'user');
 	}
 
 	/**

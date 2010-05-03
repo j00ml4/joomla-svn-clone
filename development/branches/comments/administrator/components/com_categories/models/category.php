@@ -132,7 +132,6 @@ class CategoriesModelCategory extends JModelAdmin
 	public function getForm()
 	{
 		// Initialise variables.
-		$app		= JFactory::getApplication();
 		$extension	= $this->getState('category.extension');
 
 		// Get the form.
@@ -141,8 +140,20 @@ class CategoriesModelCategory extends JModelAdmin
 			return false;
 		}
 
+		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_categories.edit.category.data', array());
+		$data = JFactory::getApplication()->getUserState('com_categories.edit.category.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -150,8 +161,6 @@ class CategoriesModelCategory extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
-
-		return $form;
 	}
 
 	/**

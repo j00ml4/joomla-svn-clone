@@ -69,8 +69,20 @@ class UsersModelLevel extends JModelAdmin
 			return false;
 		}
 
+		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_users.edit.level.data', array());
+		$data = JFactory::getApplication()->getUserState('com_users.edit.level.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -78,7 +90,17 @@ class UsersModelLevel extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
+	}
 
-		return $form;
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form)
+	{
+		parent::preprocessForm($form, 'user');
 	}
 }

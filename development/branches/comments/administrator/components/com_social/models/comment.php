@@ -45,9 +45,6 @@ class SocialModelComment extends JModelAdmin
 	 */
 	public function getForm()
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// Get the form.
 		try {
 			$form = parent::getForm('com_social.comment', 'comment', array('control' => 'jform'));
@@ -57,7 +54,6 @@ class SocialModelComment extends JModelAdmin
 		}
 
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_social.edit.comment.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -65,6 +61,26 @@ class SocialModelComment extends JModelAdmin
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_social.edit.comment.data', array());
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
+		} else {
+			$form->bind($this->getItem());
+		}
 	}
 
 	/**

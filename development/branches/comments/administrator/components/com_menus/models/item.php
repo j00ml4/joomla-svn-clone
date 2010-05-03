@@ -394,9 +394,6 @@ class MenusModelItem extends JModelAdmin
 	 */
 	public function getForm($data = null)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// The folder and element vars are passed when saving the form.
 		if (empty($data)) {
 			$item		= $this->getItem();
@@ -413,8 +410,20 @@ class MenusModelItem extends JModelAdmin
 			return false;
 		}
 
+		return $form;
+	}
+
+	/**
+	 * Method to load the form data.
+	 *
+	 * @param	JForm	The form object.
+	 * @throws	Exception if there is an error in the data load.
+	 * @since	1.6
+	 */
+	protected function loadFormData(JForm $form)
+	{
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_menus.edit.item.data', array());
+		$data = JFactory::getApplication()->getUserState('com_menus.edit.item.data', array());
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -422,8 +431,6 @@ class MenusModelItem extends JModelAdmin
 		} else {
 			$form->bind($this->getItem());
 		}
-
-		return $form;
 	}
 
 	/**
