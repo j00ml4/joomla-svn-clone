@@ -163,8 +163,9 @@ class JHtmlBehaviorTest extends JoomlaTestCase
 		return array(
 			array('file-upload', array(), 'upload-queue',
 				array(
-					'var Uploader',
-					'object creation missing'
+					array('/var/', 'object creation missing'),
+					array('/verbose: \'1\'/', 'Verbose set to false'),
+					array('#window\.addEvent\(\'domready\', function\(\)\{\'#', 'Not added to verbose')
 				)
 			)
 		);
@@ -178,6 +179,11 @@ class JHtmlBehaviorTest extends JoomlaTestCase
 	 */
 	public function testUploader($id, $params, $upload_queue, $expected_regexes = array())
 	{
+		$_SERVER['HTTP_HOST'] = '127.0.0.1';
+		$_SERVER['REQUEST_URI'] = '/index.php';
+		$_SERVER['PHP_SELF'] = '/index.php';
+		$_SERVER['SCRIPT_NAME'] = '/index.php';
+
 		// we register our mock for the script method
 		JHtml::register('script', array($this, 'uploaderScriptMock'));
 
