@@ -25,6 +25,7 @@ class plgSystemLanguageFilter extends JPlugin
 	{
 		$app = JFactory::getApplication();
 		if ($app->isSite()) {
+			$app->setLanguageFilter(true);
 			$router =& $app->getRouter();
 
 			// attach build rules for language SEF

@@ -118,7 +118,7 @@ class BannersModelBanners extends JModelList
 		}
 		
 		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
+		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 

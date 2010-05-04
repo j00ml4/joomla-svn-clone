@@ -27,6 +27,10 @@ final class JSite extends JApplication
 	private $template = null;
 
 	/**
+	 * Option to filter by language
+	 */
+	private $_language_filter=false;
+	/**
 	 * Class constructor
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -453,5 +457,27 @@ final class JSite extends JApplication
 		$options['mode'] = $config->get('sef');
 		$router = &parent::getRouter('site', $options);
 		return $router;
+	}
+
+	/**
+	 * Return the current state of the language filter
+	 * @return boolean
+	 * @since 1.6
+	 */
+	public function getLanguageFilter()
+	{
+		return $this->_language_filter;
+	}
+
+	/**
+	 * Set the current state of the language filter
+	 * @return boolean	The old state
+	 * @since 1.6
+	 */
+	public function setLanguageFilter($state=false)
+	{
+		$old = $this->_language_filter;
+		$this->_language_filter=$state;
+		return $old;
 	}
 }
