@@ -16,6 +16,7 @@ class modArchiveHelper
 	{
 		//get database
 		$db		= JFactory::getDbo();
+		$app		= &JFactory::getApplication();
 		$query	= $db->getQuery(true);
 		$query->select('MONTH(created) AS created_month, created, id, title, YEAR(created) AS created_year');
 		$query->from('#__content');
@@ -24,7 +25,7 @@ class modArchiveHelper
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
 		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
+		if ($app->getLanguageFilter()) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 

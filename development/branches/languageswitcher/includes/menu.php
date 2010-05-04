@@ -28,6 +28,7 @@ class JMenuSite extends JMenu
 		if (!$data = $cache->get('menu_items'.JFactory::getLanguage()->getTag())) {
 			// Initialise variables.
 			$db		= JFactory::getDbo();
+			$app	= JFactory::getApplication();
 			$query	= $db->getQuery(true);
 
 			$query->select('m.id, m.menutype, m.title, m.alias, m.path AS route, m.link, m.type, m.level');
@@ -41,7 +42,7 @@ class JMenuSite extends JMenu
 			$query->order('m.lft');
 
 			// Filter by language
-			if (JPluginHelper::isEnabled('system','languagefilter')) {
+			if ($app->getLanguageFilter()) {
 				$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 			}
 

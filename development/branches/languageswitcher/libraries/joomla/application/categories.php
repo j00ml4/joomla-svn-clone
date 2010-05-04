@@ -154,6 +154,7 @@ class JCategories
 	protected function _load($id)
 	{
 		$db	= JFactory::getDbo();
+		$app = JFactory::getApplication();
 		$user = JFactory::getUser();
 		$extension = $this->_extension;
 
@@ -199,7 +200,7 @@ class JCategories
 		$query->group('c.id');
 
 		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
+		if ($app->isSite() && $app->getLanguageFilter()) {
 			$query->where('c.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 

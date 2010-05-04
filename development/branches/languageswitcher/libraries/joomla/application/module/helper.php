@@ -282,7 +282,7 @@ abstract class JModuleHelper
 		$cacheid = serialize(array($Itemid,$groups,$clientid));
 
 		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
+		if ($app->isSite() && $app->getLanguageFilter()) {
 			$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 

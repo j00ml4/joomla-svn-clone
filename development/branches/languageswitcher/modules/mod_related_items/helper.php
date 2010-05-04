@@ -17,6 +17,7 @@ class modRelatedItemsHelper
 	function getList($params)
 	{
 		$db			= &JFactory::getDbo();
+		$app		= &JFactory::getApplication();
 		$user		= &JFactory::getUser();
 		$userId		= (int) $user->get('id');
 		$count		= intval($params->get('count', 5));
@@ -83,7 +84,7 @@ class modRelatedItemsHelper
 					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
 
 					// Filter by language
-					if (JPluginHelper::isEnabled('system','languagefilter')) {
+					if ($app->getLanguageFilter()) {
 						$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 					}
 

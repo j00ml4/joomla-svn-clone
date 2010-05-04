@@ -45,6 +45,7 @@ class plgSearchContent extends JPlugin
 	function onSearch($text, $phrase='', $ordering='', $areas=null)
 	{
 		$db		= &JFactory::getDbo();
+		$app	= &JFactory::getApplication();
 		$user	= &JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
@@ -151,7 +152,7 @@ class plgSearchContent extends JPlugin
 			$query->order($order);
 
 			// Filter by language
-			if (JPluginHelper::isEnabled('system','languagefilter')) {
+			if ($app->getLanguageFilter()) {
 				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 			}
 

@@ -52,6 +52,8 @@ class ContentModelArticles extends JModelList
 
 		$this->setState('filter.published', 1);
 
+		$this->setState('filter.language',$app->getLanguageFilter());
+
 		// process show_noauth parameter
 		if (!$params->get('show_noauth'))
 		{
@@ -339,7 +341,7 @@ class ContentModelArticles extends JModelList
 		}
 
 		// Filter by language
-		if (JPluginHelper::isEnabled('system','languagefilter')) {
+		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 
