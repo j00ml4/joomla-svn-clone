@@ -10,7 +10,9 @@
  *
  */
 
-global $mainframe, $gantry;
+global $gantry;
+
+$mainframe = JFactory::getApplication();
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted index access' );
@@ -23,14 +25,25 @@ if(!isset($request) || strtolower($request) != 'xmlhttprequest') die("Direct acc
 $template = &JFactory::getApplication()->getTemplate();
 
 // load and inititialize gantry class
-require_once(JPATH_THEMES."/$template/lib/gantry/gantry.php");
-$gantry->init();
+$gantry_path_j15 = JPATH_SITE . '/components/com_gantry/gantry.php';
+$gantry_path_j16 = JPATH_SITE . '/libraries/gantry/gantry.php';
+if (version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.6', '<')) {
+    $gantry_path = $gantry_path_j15;
+}
+else if (version_compare(JVERSION, '1.6', '>=')) {
+    $gantry_path = $gantry_path_j16;
+}
 
-$modelsPath = $gantry->gantryPath . '/ajax-models/';
-$model = $modelsPath . JRequest::getString('model') . '.php';
+if (file_exists($gantry_path)) {
+    require_once($gantry_path);
+}
+else {
+    echo "error " . JText::_('Unable to find Gantry library.  Please make sure you have it installed.');
+    die;
+}
 
-if (!file_exists($model)) die();
-
+$model = $gantry->getAjaxModel(JRequest::getString('model'));
+if ($model === false) die();
 include_once($model);
 
 
