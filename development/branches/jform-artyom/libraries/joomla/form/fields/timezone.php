@@ -11,7 +11,8 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JForm::loadFieldClass('groupedlist');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('groupedlist');
 
 /**
  * Form Field class for the Joomla Framework.

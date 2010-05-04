@@ -12,7 +12,8 @@ defined('JPATH_BASE') or die;
 jimport('joomla.cache.cache');
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JForm::loadFieldClass('list');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
