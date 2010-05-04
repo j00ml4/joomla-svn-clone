@@ -24,7 +24,7 @@ class LanguagesModelLanguage extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_LANGUAGES';
-	
+
 	/**
 	 * Override to get the table
 	 */
@@ -98,26 +98,31 @@ class LanguagesModelLanguage extends JModelAdmin
 	 */
 	public function getForm()
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
 		$form = parent::getForm('com_languages.language', 'language', array('control' => 'jform'));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_languages.edit.language.data', array());
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function getFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_languages.edit.language.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
 	}
 
 	public function save($data)
@@ -149,7 +154,7 @@ class LanguagesModelLanguage extends JModelAdmin
 		}
 
 		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		$result = $dispatcher->trigger('onContentBeforeSave', array('com_langauges.language', &$table, $isNew));
 
 		// Check the event responses.
 		if (in_array(false, $result, true)) {
@@ -163,8 +168,8 @@ class LanguagesModelLanguage extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		// Trigger the onContentAfterSave event.
+		$dispatcher->trigger('onContentAfterSave', array('com_langauges.language', &$table, $isNew));
 
 		$this->setState('language.id', $table->lang_id);
 
