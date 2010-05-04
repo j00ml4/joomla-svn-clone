@@ -9,7 +9,8 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JForm::loadFieldClass('list');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form field to list the available positions for a module.
