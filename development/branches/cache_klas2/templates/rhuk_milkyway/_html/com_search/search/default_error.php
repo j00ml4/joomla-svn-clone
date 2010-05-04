@@ -1,4 +1,4 @@
-<?php defined('_JEXEC') or die; ?>
+<?php defined('_JEXEC') or die('Restricted access'); ?>
 
 <table class="searchintro<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 	<tr>

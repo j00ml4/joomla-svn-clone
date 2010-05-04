@@ -1,4 +1,4 @@
-<?php defined('_JEXEC') or die; ?>
+<?php defined('_JEXEC') or die('Restricted access'); ?>
 <div>
 	<strong><?php echo JText::_( 'MORE_ARTICLES' ); ?></strong>
 </div>

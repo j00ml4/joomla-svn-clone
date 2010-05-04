@@ -7,41 +7,45 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access
+// no direct access
 defined('_JEXEC') or die;
-
 $app = JFactory::getApplication();
-$templateparams = $app->getTemplate(true)->params;
+$templateparams =$app->getTemplate(true)->params;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 // Create shortcut to parameters.
 $params = $this->item->params;
 
-if ($templateparams->get('html5') != 1) :
+
+
+if($templateparams->get('html5')!=1)
+{
 	require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
 	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
+} else {
+JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
-else :
-	JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 ?>
 <article class="item-page<?php echo $params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 
 <?php if ($this->params->get('show_page_heading', 1) And $params->get('show_title')) :?>
 <hgroup>
-<?php endif; ?>
+<? endif; ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>
 		<h2>
-			<?php echo $this->escape($this->item->title); ?>
+
+						<?php echo $this->escape($this->item->title); ?>
+
 		</h2>
 <?php endif; ?>
 <?php if ($this->params->get('show_page_heading', 1) And $params->get('show_title')) :?>
 </hgroup>
-<?php endif; ?>
+<? endif; ?>
 
 <?php if ($params->get('access-edit') ||  $params->get('show_print_icon') || $params->get('show_email_icon')) : ?>
 		<ul class="actions">
@@ -148,4 +152,4 @@ else :
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </article>
 
-<?php endif; ?>
+<?php } ?>
