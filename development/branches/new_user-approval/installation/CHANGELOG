@@ -27,6 +27,12 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+04-May-2010 Andrew Eddie
+ ^ Merge patched to cache the query building in JModelList (Christophe Demko).
+ + Merge Hathor administrator template by Andrea Tarr.
+ # Fixed [#20319] beez2 overides
+ ^ Merge patch [#20330] mod_status show / hide params (Phil Snell).
+
 3-May-2010 Jean-Marie Simonet
 # Fixed [20314] (Thanks Phil Snell). Added/consolidated some strings in com_messages
 
@@ -39,6 +45,7 @@ $ -> Language fix or change
  + Merge extra fields for user profile plugin (Elin Waring)
  ^ Merge various fixes to HTML filtering of and buttons of rich textareas (Elin Waring)
  ^ Merge changes/fixes to sample data: fruit shop style fix; articles category module (Elin Waring)
+ ^ Accepted patch [#20161] Caching of plugins query + JPluginHelper refactoring to JDatabaseQuery (Dennis Hermacki)
 
 2-May-2010 Christophe Demko
 # Correcting a bug I have introduced on commit #16536
