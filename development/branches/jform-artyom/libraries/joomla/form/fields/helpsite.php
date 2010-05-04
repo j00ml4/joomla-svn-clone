@@ -12,7 +12,7 @@ defined('JPATH_BASE') or die;
 jimport('joomla.html.html');
 jimport('joomla.language.help');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+JForm::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
