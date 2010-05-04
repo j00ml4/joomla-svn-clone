@@ -17,12 +17,17 @@ defined('JPATH_BASE') or die;
 class plgUserProfile extends JPlugin
 {
 	/**
-	 * @param	JForm
+	 * @param	JForm	The form to be altered.
+	 * @param	array	The associated data for the form.
 	 * @return	boolean
 	 * @since	1.6
 	 */
-	function onContentPrepareForm($form)
+	function onContentPrepareForm($form, $data)
 	{
+		// Load user_profile plugin language
+		$lang = JFactory::getLanguage();
+		$lang->load('plg_user_profile', JPATH_ADMINISTRATOR);
+
 		if (!($form instanceof JForm)) {
 			$this->_subject->setError('JERROR_NOT_A_FORM');
 			return false;
@@ -111,7 +116,7 @@ class plgUserProfile extends JPlugin
 			$form->setFieldAttribute('tos', 'required', $this->params->get('profile-require_tos') == 2, 'profile');
 		} else {
 			$form->removeField('tos', 'profile');
-		}		
+		}
 		// Toggle whether the dob field is required.
 		if ($this->params->get('profile-require_dob', 1) > 0) {
 			$form->setFieldAttribute('dob', 'required', $this->params->get('profile-require_dob') == 2, 'profile');

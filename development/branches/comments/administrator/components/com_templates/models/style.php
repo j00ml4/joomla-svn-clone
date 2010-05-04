@@ -164,23 +164,21 @@ class TemplatesModelStyle extends JModelForm
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function loadFormData(JForm $form)
+	protected function getFormData()
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_templates.edit.style.data', array());
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
+
+		return $data;
 	}
 
 	/**
@@ -244,11 +242,11 @@ class TemplatesModelStyle extends JModelForm
 
 	/**
 	 * @param	object	A form object.
-	 *
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm($form, $data)
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -274,7 +272,7 @@ class TemplatesModelStyle extends JModelForm
 		}
 
 		// Trigger the default form events.
-		parent::preprocessForm($form);
+		parent::preprocessForm($form, $data);
 	}
 
 	/**

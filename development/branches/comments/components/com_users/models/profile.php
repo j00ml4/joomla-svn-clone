@@ -158,27 +158,27 @@ class UsersModelProfile extends JModelForm
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function loadFormData(JForm &$form)
+	protected function getFormData()
 	{
-		$form->bind($this->getData());
+		return $this->getData();
 	}
 
 	/**
 	 * Override preprocessForm to load the user plugin group instead of content.
 	 *
 	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm(JForm $form)
+	protected function preprocessForm(JForm $form, $data)
 	{
-		parent::preprocessForm($form, 'user');
+		parent::preprocessForm($form, $data, 'user');
 	}
 
 	/**

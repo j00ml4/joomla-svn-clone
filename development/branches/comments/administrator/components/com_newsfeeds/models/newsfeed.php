@@ -24,7 +24,7 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_NEWSFEEDS';
-	
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -100,23 +100,21 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function loadFormData(JForm $form)
+	protected function getFormData()
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_newsfeeds.edit.newsfeed.data', array());
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
+
+		return $data;
 	}
 
 	/**

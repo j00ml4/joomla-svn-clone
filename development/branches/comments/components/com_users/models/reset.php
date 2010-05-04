@@ -68,12 +68,13 @@ class UsersModelReset extends JModelForm
 	 * Override preprocessForm to load the user plugin group instead of content.
 	 *
 	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm(JForm $form)
+	protected function preprocessForm(JForm $form, $data)
 	{
-		parent::preprocessForm($form, 'user');
+		parent::preprocessForm($form, $data, 'user');
 	}
 
 	/**

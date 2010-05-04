@@ -63,18 +63,18 @@ class UsersModelLogin extends JModelForm
 		}
 		$app->setUserState('users.login.form.data', $data);
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form, $data));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {
 			$this->setError($dispatcher->getError());
 			return false;
+		}
+
+		// Bind the form data if present.
+		if (!empty($data)) {
+			$form->bind($data);
 		}
 
 		return $form;
