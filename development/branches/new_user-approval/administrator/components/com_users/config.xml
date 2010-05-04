@@ -23,26 +23,16 @@
 
 		<field
 			name="useractivation"
-			type="radio"
+			type="list"
 			default="1"
 			label="COM_USERS_CONFIG_FIELD_USERACTIVATION_LABEL"
 			description="COM_USERS_CONFIG_FIELD_USERACTIVATION_DESC">
 			<option
-				value="0">JNO</option>
+				value="0">COM_USERS_CONFIG_FIELD_USERACTIVATION_OPTION_AUTOACTIVATION</option>
 			<option
-				value="1">JYES</option>
-		</field>
-
-		<field
-			name="useradminactivation"
-			type="radio"
-			default="0"
-			label="COM_USERS_CONFIG_FIELD_ADMINACTIVATION_LABEL"
-			description="COM_USERS_CONFIG_FIELD_ADMINACTIVATION_DESC">
+				value="1">COM_USERS_CONFIG_FIELD_USERACTIVATION_OPTION_SELFACTIVATION</option>
 			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
+				value="2">COM_USERS_CONFIG_FIELD_USERACTIVATION_OPTION_ADMINACTIVATION</option>
 		</field>
 
 		<field

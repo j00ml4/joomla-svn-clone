@@ -64,7 +64,15 @@ class UsersControllerRegistration extends UsersController
 		}
 
 		// Redirect to the login screen.
-		$this->setMessage(JText::_('COM_USERS_REGISTRATION_SAVE_SUCCESS'));
+		$useractivation = $uParams->get('useractivation', 1);
+		
+		if ($useractivation == 0)
+			$this->setMessage(JText::_('COM_USERS_REGISTRATION_SAVE_SUCCESS'));
+		else if ($useractivation == 1)
+			$this->setMessage(JText::_('COM_USERS_REGISTRATION_ACTIVATE_SUCCESS'));
+		else
+			$this->setMessage(JText::_('COM_USERS_REGISTRATION_VERIFY_SUCCESS'));
+			
 		$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
 		return true;
 	}
