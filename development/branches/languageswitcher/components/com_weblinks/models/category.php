@@ -114,10 +114,10 @@ class WeblinksModelCategory extends JModelList
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
 				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-				
+
 				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-		
+
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
