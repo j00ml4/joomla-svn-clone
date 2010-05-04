@@ -90,7 +90,7 @@ class BannersTableBanner extends JTable
 		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
-			$array['params'] = (string) $registry;
+			$array['params'] = (string)$registry;
 		}
 
 		return parent::bind($array, $ignore);
@@ -159,31 +159,7 @@ class BannersTableBanner extends JTable
 		}
 		return count($this->getErrors())==0;
 	}
-	/**
-	 * Overloaded load function
-	 *
-	 * @param	int $pk primary key
-	 * @param	boolean $reset reset data
-	 * @return	boolean
-	 * @see JTable:load
-	 */
-	public function load($pk = null, $reset = true)
-	{
-		if (parent::load($pk, $reset))
-		{
-			// Convert the params field to a parameter.
-			$registry = new JRegistry;
-			$registry->loadJSON($this->params);
-			$this->params = $registry;
-			// Set customcode
-			$this->params->set('custom.bannercode', JFilterOutput::objectHTMLSafe( $this->params->get('custom.bannercode',''), ENT_QUOTES));
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+
 	/**
 	 * Method to set the publishing state for a row or list of rows in the database
 	 * table.  The method respects checked out rows by other users and will attempt

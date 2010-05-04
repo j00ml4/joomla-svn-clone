@@ -22,6 +22,12 @@ jimport('joomla.application.component.modeladmin');
 class ModulesModelModule extends JModelAdmin
 {
 	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_MODULES';
+	
+	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
@@ -399,7 +405,7 @@ class ModulesModelModule extends JModelAdmin
 		if (file_exists($formFile)) {
 			// Get the module form.
 			if (!$form->loadFile($formFile, false, '//config')) {
-				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 

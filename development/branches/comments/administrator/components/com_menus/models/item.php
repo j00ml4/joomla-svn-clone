@@ -22,6 +22,12 @@ require_once JPATH_COMPONENT.'/helpers/menus.php';
 class MenusModelItem extends JModelAdmin
 {
 	/**
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
+	 */
+	protected $text_prefix = 'COM_MENUS_ITEM';
+	
+	/**
 	 * Auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
@@ -683,7 +689,7 @@ class MenusModelItem extends JModelAdmin
 				// We need to qualify the full path to avoid collisions with component file names.
 
 				if ($form->loadFile($formFile, false, '/metadata') == false) {
-					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+					throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 				}
 			}
 
@@ -697,14 +703,14 @@ class MenusModelItem extends JModelAdmin
 			if (JFile::exists($path)) {
 				// Add the component params last of all to the existing form.
 				if (!$form->load($path, true, '/config')) {
-					throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+					throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 				}
 			}
 		}
 
 		// Load the specific type file
 		if (!$form->loadFile('item_'.$type, false, false)) {
-			throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+			throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 		}
 
 		// Trigger the default form events.
@@ -812,6 +818,21 @@ class MenusModelItem extends JModelAdmin
 		}
 
 		$this->setState('item.id', $table->id);
+
+		// Check if this is the home item.
+		if ($table->home) {
+			// Reset the any current home menu link.
+			$query = $db->getQuery(true);
+			$query->update('#__menu');
+			$query->set('home = 0');
+			$query->where('home = 1');
+			$query->where('id <> '.(int) $pk);
+
+			if (!$db->setQuery($query)->query()) {
+				$this->setError($e->getMessage());
+				return false;
+			}
+		}
 
 		// Clear the component's cache
 		$cache = JFactory::getCache('com_modules');

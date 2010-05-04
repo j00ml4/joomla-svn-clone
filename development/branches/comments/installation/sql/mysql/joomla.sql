@@ -487,7 +487,8 @@ INSERT INTO `#__extensions` VALUES
 (110, 'mod_social_latest_comments', 'module', 'mod_social_latest_comments', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (111, 'mod_social_most_commented', 'module', 'mod_social_most_commented', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (112, 'mod_social_rating', 'module', 'mod_social_rating', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(113, 'mod_social_share', 'module', 'mod_social_share', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(113, 'mod_social_share', 'module', 'mod_social_share', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
+(114, 'hathor', 'template', 'hathor', '', 1, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 # -------------------------------------------------------
 
