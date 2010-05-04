@@ -111,9 +111,10 @@
 		</languages>
 	</administration>
 	<config>
-		<fields name="params" addpath="/components/com_gantry/admin/elements">
-			<fieldset name="basic">
-				<field name="" type="gantry" default="coresettings, presets, layouts"/>
+		<fields name="params" >
+			<fieldset name="basic" addfieldpath="libraries/gantry/admin/fields">
+				<field name="gantry" type="gantry" label="" default="coresettings, presets, layouts"/>
+                
 				<field name="diagnostic" type="diagnostic"/>
 				<field name="grid_system" type="hidden" default="12"/>
 				<field name="template_prefix" type="hidden" default="gantry-"/>
