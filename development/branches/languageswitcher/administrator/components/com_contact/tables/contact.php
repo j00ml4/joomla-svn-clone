@@ -59,7 +59,8 @@ class ContactTableContact extends JTable
 	 * @return	boolean	True on success, false on failure.
 	 * @since	1.6
 	 */
-	public function store($updateNulls = false){
+	public function store($updateNulls = false)
+	{
 
 		// Transform the params field
 		if (is_array($this->params)) {

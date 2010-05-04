@@ -13,10 +13,22 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_languages&view=installed'); ?>" method="post" name="adminForm">
+
 	<?php if ($this->ftp): ?>
 		<?php echo $this->loadTemplate('ftp');?>
 	<?php endif; ?>
-	<?php echo $this->loadTemplate('filters'); ?>
+
+	<fieldset class="filter clearfix">
+		<div class="right">
+			<label for="filter_client_id">
+				<?php echo JText::_('COM_LANGUAGES_FILTER_CLIENT_LABEL'); ?>
+			</label>
+			<select id="filter_client_id" name="filter_client_id" class="inputbox" onchange="this.form.submit()">
+				<?php echo JHtml::_('select.options', JHtml::_('languages.clients'), 'value', 'text', $this->state->get('filter.client_id'));?>
+			</select>
+		</div>
+	</fieldset>
+
 	<table class="adminlist">
 		<thead>
 			<tr>

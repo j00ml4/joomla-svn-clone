@@ -32,20 +32,20 @@ class NewsfeedsModelNewsfeeds extends JModelList
 		$app = JFactory::getApplication('administrator');
 
 		// Load the filter state.
-		$filters = JRequest::getVar('filters');
-		if (empty($filters)) {
-			$data = $app->getUserState($this->context.'.data');
-			$filters = $data['filters'];
-		}
-		else {
-			$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		}
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
-		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
-		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
-		$this->setState('filter.category_id', isset($filters['category']) ? $filters['category'] : '');
-		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
+		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
+		$this->setState('filter.access', $accessId);
+
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
+		$this->setState('filter.state', $state);
+
+		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', null);
+		$this->setState('filter.category_id', $categoryId);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_newsfeeds');
@@ -166,36 +166,5 @@ class NewsfeedsModelNewsfeeds extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
-	}
-	/**
-	 * Method to get the row form.
-	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 */
-	public function getForm() {
-
-		// Initialise variables.
-		$app = & JFactory::getApplication();
-
-		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'newsfeeds', array('event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
-			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState($this->context . '.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-		return $form;
 	}
 }

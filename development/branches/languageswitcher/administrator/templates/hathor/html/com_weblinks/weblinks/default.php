@@ -43,7 +43,7 @@ $listDirn	= $this->state->get('list.direction');
 			</label>
 			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Published');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
+				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true);?>
 			</select>
 
 			<label class="selectlabel" for="filter_category_id">
@@ -52,6 +52,12 @@ $listDirn	= $this->state->get('list.direction');
 			<select name="filter_category_id" id="filter_category_id" class="inputbox">
 				<option value=""><?php echo JText::_('JOption_Select_Category');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_weblinks'), 'value', 'text', $this->state->get('filter.category_id'));?>
+			</select>
+
+			<label class="selectlabel" for="filter_language"><?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?></label>
+			<select name="filter_language" class="inputbox" id="filter_language">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.published', true, true), 'value', 'text', $this->state->get('filter.language'));?>
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
@@ -89,8 +95,8 @@ $listDirn	= $this->state->get('list.direction');
 				<th class="hits-col">
 					<?php echo JHtml::_('grid.sort',  'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
 				</th>
-				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Language', 'a.language', $listDirn, $listOrder); ?>
+				<th class="language-col">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort',  'JGrid_Heading_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -151,7 +157,11 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $item->hits; ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo $item->id; ?>
