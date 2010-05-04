@@ -11,7 +11,7 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+JForm::loadFieldClass('list');
 
 /**
  * Supports an HTML select list of categories
